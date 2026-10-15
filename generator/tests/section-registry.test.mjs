@@ -89,12 +89,14 @@ import {
 } from '../../scripts/lib/engine-corpus-view.mjs';
 import { floorViolations, unpublishedFamilySectionsOf } from '../../scripts/ci/verify-api-floors.mjs';
 import {
+  CANTON_HUBS_API,
   declaredFiles,
   main as edgeMain,
   planRelease,
   publishRelease,
   purgeChunks,
   readPreviousRelease,
+  releaseSnapshotCommit,
   registryState,
   requiredPageKeys,
   sitemapPaths,
@@ -674,6 +676,13 @@ function fakeDist(registry, { index = undefined, salt = '', extraArticles = [] }
   writeFileSync(path.join(dir, EDGE_SECTION_REGISTRY_FILE), JSON.stringify(registry));
   for (const id of live) writeFileSync(path.join(dir, `sitemap-articles-${id}.xml`), sitemapOf(id, salt, extraArticles));
   if (index ?? live.length > 0) writeFileSync(path.join(dir, 'sitemap-cantons.xml'), `<sitemapindex><!-- ${live.join(',')} --></sitemapindex>`);
+  if (live.length > 0) {
+    writeFileSync(path.join(dir, CANTON_HUBS_API), JSON.stringify({
+      schema: 1,
+      commit: registry.commit,
+      sections: Object.fromEntries(live.map((id) => [id, {}])),
+    }));
+  }
   return dir;
 }
 
@@ -799,6 +808,7 @@ test('edge: il puntatore porta la release (base versionata, sha256 e bytes dei f
     `edge/sections/_releases/${COMMIT}/sitemap-articles-canton-gr.xml`,
     `edge/sections/_releases/${COMMIT}/sitemap-articles-canton-ti.xml`,
     `edge/sections/_releases/${COMMIT}/sitemap-cantons.xml`,
+    `edge/sections/_releases/${COMMIT}/${CANTON_HUBS_API}`,
   ]);
   const { release: rel, ...state } = release.pointer;
   assert.deepEqual(state, release.registry, 'i campi di stato che il Worker legge non cambiano');
@@ -833,6 +843,12 @@ test('edge: il puntatore porta la release (base versionata, sha256 e bytes dei f
   const noSitemap = fakeDist(withLive(['canton-ti']));
   rmSync(path.join(noSitemap, 'sitemap-articles-canton-ti.xml'));
   assert.throws(() => planRelease(noSitemap), /sitemap-articles-canton-ti\.xml: manca/);
+  const noHubs = fakeDist(withLive(['canton-ti']));
+  rmSync(path.join(noHubs, CANTON_HUBS_API));
+  assert.throws(() => planRelease(noHubs), /canton-hubs\.json: manca/);
+  const wrongHubs = fakeDist(withLive(['canton-ti']));
+  writeFileSync(path.join(wrongHubs, CANTON_HUBS_API), JSON.stringify({ schema: 1, commit: OLD, sections: { 'canton-ti': {} } }));
+  assert.throws(() => planRelease(wrongHubs), /canton-hubs\.json: commit\/sezioni non corrispondono/);
 });
 
 test('edge: ordine — file sotto la base della release, riletti, poi UN solo PUT; nessun path fisso', async () => {
@@ -842,6 +858,7 @@ test('edge: ordine — file sotto la base della release, riletti, poi UN solo PU
   assert.deepEqual(io.ops, [
     `put ${base}sitemap-articles-canton-ti.xml`,
     `put ${base}sitemap-cantons.xml`,
+    `put ${base}${CANTON_HUBS_API}`,
     'put edge/sections/registry.json',
     'purge 3',
   ]);
@@ -850,6 +867,7 @@ test('edge: ordine — file sotto la base della release, riletti, poi UN solo PU
   assert.ok(written.every((key) => key === 'edge/sections/registry.json' || key.startsWith('edge/sections/_releases/')), written.join(', '));
   assert.equal(io.store.get('cc:edge/sections/registry.json'), 'public,max-age=60');
   assert.equal(io.store.get(`cc:${base}sitemap-cantons.xml`), 'public,max-age=31536000,immutable');
+  assert.equal(io.store.get(`cc:${base}${CANTON_HUBS_API}`), 'public,max-age=31536000,immutable');
   assert.deepEqual([...io.purged].sort(), [
     'https://cdn.frontaliereticino.ch/edge/sections/registry.json',
     'https://frontaliereticino.ch/sitemap-articles-canton-ti.xml',
@@ -886,6 +904,74 @@ test('edge: push obbligatorio a ogni differenza — accensione, spegnimento, rit
   assert.deepEqual(declaredFiles(DRAFT_ALL()), {});
   assert.equal(declaredFiles({ ...live.pointer, release: { ...live.pointer.release, base: 'edge/sitemap/' } }), null);
   assert.equal(declaredFiles({ ...live.pointer, release: { ...live.pointer.release, files: { '../x': { sha256: 'f'.repeat(64) } } } }), null);
+});
+
+test('edge: un kill-switch diverso sullo stesso commit crea una base immutable distinta', async () => {
+  // Un kill-switch diverso sullo stesso HEAD cambia registry, sitemap e hub:
+  // la base del primo snapshot resta intatta e il nuovo set sale sotto una
+  // chiave derivata dallo snapshot effettivo prima del flip.
+  const changed = await publish(withLive(['canton-gr']), { history: [withLive(['canton-ti'])] });
+  assert.deepEqual(changed.result, { code: 0, phase: 'done', flipped: true });
+  assert.notEqual(pointerOf(changed.io).release.base, `edge/sections/_releases/${COMMIT}/`);
+  assert.match(pointerOf(changed.io).release.base, /^edge\/sections\/_releases\/[0-9a-f]{40}\/$/);
+  assert.ok(changed.io.store.has(`${pointerOf(changed.io).release.base}${CANTON_HUBS_API}`));
+  assert.ok(changed.io.store.has(`edge/sections/_releases/${COMMIT}/${CANTON_HUBS_API}`), 'la release precedente resta immutable');
+  assert.notEqual(served(changed.io), changed.before, 'il puntatore passa al nuovo snapshot');
+  assert.match(changed.logs.join('\n'), /snapshot immutable [0-9a-f]{40}/);
+
+  const planned = planRelease(fakeDist(withLive(['canton-ti'])));
+  const plannedAgain = planRelease(fakeDist(withLive(['canton-ti'])));
+  const plannedDifferent = planRelease(fakeDist(withLive(['canton-gr'])));
+  assert.equal(releaseSnapshotCommit(planned), releaseSnapshotCommit(plannedAgain));
+  assert.notEqual(releaseSnapshotCommit(planned), releaseSnapshotCommit(plannedDifferent));
+
+  // Lo stesso snapshot gia\' verificato e\' un no-op: non si esegue un PUT
+  // sulla chiave immutable, ma si ritenta il purge idempotente.
+  const same = await publish(withLive(['canton-ti']), { history: [withLive(['canton-ti'])] });
+  assert.deepEqual(same.result, { code: 0, phase: 'noop', flipped: false });
+  assert.deepEqual(same.io.ops, ['purge 3']);
+
+  // Anche il retry di uno snapshot gia\' derivato resta sotto la sua base:
+  // `mandatory=false` non puo\' riportarlo alla chiave nominale del commit.
+  changed.io.ops.length = 0;
+  changed.io.purged.length = 0;
+  const snapshotRetry = await publishRelease(planRelease(fakeDist(withLive(['canton-gr']))), {
+    io: changed.io,
+    env: CREDS,
+    log: () => {},
+    bootstrapWaitMs: 0,
+  });
+  assert.deepEqual(snapshotRetry, { code: 0, phase: 'noop', flipped: false });
+  assert.deepEqual(changed.io.ops, ['purge 4']);
+  const retainedBase = pointerOf(changed.io).release.base;
+  assert.match(retainedBase, /^edge\/sections\/_releases\/[0-9a-f]{40}\/$/);
+  assert.ok(changed.io.store.has(`${retainedBase}${CANTON_HUBS_API}`));
+});
+
+test('edge: dopo una collisione sullo stesso commit non torna alla base nominale', async () => {
+  // La prima release usa la forma breve <commit>; la seconda, con un
+  // kill-switch diverso, usa una base derivata. Un ritorno al primo snapshot
+  // deve usare una terza base, mai riscrivere quella nominale.
+  const reverted = await publish(withLive(['canton-ti']), {
+    history: [withLive(['canton-ti']), withLive(['canton-gr'])],
+  });
+  assert.deepEqual(reverted.result, { code: 0, phase: 'done', flipped: true });
+  assert.match(pointerOf(reverted.io).release.base, /^edge\/sections\/_releases\/[0-9a-f]{40}\/$/);
+  assert.notEqual(pointerOf(reverted.io).release.base, `edge/sections/_releases/${COMMIT}/`);
+  assert.ok(!reverted.io.ops.some((op) => op.startsWith(`put edge/sections/_releases/${COMMIT}/`)));
+});
+
+test('edge: il replay di un commit vecchio non riusa la base conservata in previous', async () => {
+  // Il puntatore corrente e\' B, ma conserva A come release precedente. Un
+  // retry di A non puo\' ristagiare la base nominale di A mentre una richiesta
+  // in volo puo\' ancora leggerla.
+  const replay = await publish(withLive(['canton-ti'], OLD), {
+    history: [withLive(['canton-ti'], OLD), withLive(['canton-gr'])],
+  });
+  assert.deepEqual(replay.result, { code: 0, phase: 'done', flipped: true });
+  assert.match(pointerOf(replay.io).release.base, /^edge\/sections\/_releases\/[0-9a-f]{40}\/$/);
+  assert.notEqual(pointerOf(replay.io).release.base, `edge/sections/_releases/${OLD}/`);
+  assert.ok(!replay.io.ops.some((op) => op.startsWith(`put edge/sections/_releases/${OLD}/`)));
 });
 
 test('edge: la release servita e\' NOTA solo se ogni file dichiarato c\'e\' con il suo sha256', async () => {
@@ -1049,6 +1135,76 @@ test('edge: dopo il PUT la release nuova e\' servita intera; un purge fallito es
   ].sort());
 });
 
+test('edge: un purge fallito viene ritentato prima del noop', async () => {
+  const io = fakeIo();
+  seedPages(io, ['canton-ti']);
+  const firstRelease = planRelease(fakeDist(withLive(['canton-ti'])));
+  io.fail = (op) => op === 'purge';
+  const first = await publishRelease(firstRelease, { io, env: CREDS, log: () => {}, bootstrapWaitMs: 0 });
+  assert.deepEqual([first.code, first.phase, first.flipped], [1, 'purge', true]);
+
+  io.ops.length = 0;
+  io.purged.length = 0;
+  const failedRetry = await publishRelease(planRelease(fakeDist(withLive(['canton-ti']))), { io, env: CREDS, log: () => {}, bootstrapWaitMs: 0 });
+  assert.deepEqual([failedRetry.code, failedRetry.phase, failedRetry.flipped], [1, 'purge', true]);
+  assert.deepEqual(io.ops, ['purge 3']);
+
+  io.fail = () => false;
+  io.ops.length = 0;
+  io.purged.length = 0;
+  const healedRetry = await publishRelease(planRelease(fakeDist(withLive(['canton-ti']))), { io, env: CREDS, log: () => {}, bootstrapWaitMs: 0 });
+  assert.deepEqual(healedRetry, { code: 0, phase: 'noop', flipped: false });
+  assert.deepEqual(io.ops, ['purge 3']);
+});
+
+test('edge: il retry del purge senza credenziali resta fail-closed', async () => {
+  const io = fakeIo();
+  seedPages(io, ['canton-ti']);
+  const first = await publishRelease(planRelease(fakeDist(withLive(['canton-ti']))), { io, env: CREDS, log: () => {}, bootstrapWaitMs: 0 });
+  assert.deepEqual(first, { code: 0, phase: 'done', flipped: true });
+  io.ops.length = 0;
+
+  const retry = await publishRelease(planRelease(fakeDist(withLive(['canton-ti']))), { io, env: {}, log: () => {}, bootstrapWaitMs: 0 });
+  assert.deepEqual(retry, { code: 1, phase: 'credenziali', flipped: false });
+  assert.deepEqual(io.ops, []);
+
+  // Anche una base derivata con il commit del puntatore cambiato, ma con lo
+  // stesso stato e gli stessi byte, e' una release gia' nota: non puo' dare
+  // code 0 prima del purge solo perche' non coincide col digest ricalcolato.
+  const replay = await publish(withLive(['canton-ti'], OLD), {
+    history: [withLive(['canton-ti'], OLD), withLive(['canton-gr'])],
+  });
+  const altered = pointerOf(replay.io);
+  altered.commit = COMMIT;
+  replay.io.store.set(EDGE_SECTION_REGISTRY_FILE, Buffer.from(JSON.stringify(altered)));
+  replay.io.ops.length = 0;
+  const derivedRetry = await publishRelease(planRelease(fakeDist(withLive(['canton-ti'], OLD))), {
+    io: replay.io,
+    env: {},
+    log: () => {},
+    bootstrapWaitMs: 0,
+  });
+  assert.deepEqual(derivedRetry, { code: 1, phase: 'credenziali', flipped: false });
+  assert.deepEqual(replay.io.ops, []);
+});
+
+test('edge: stato unknown con base gia\' usata forza una nuova base di staging', async () => {
+  const io = fakeIo();
+  seedPages(io, ['canton-ti']);
+  const firstRelease = planRelease(fakeDist(withLive(['canton-ti'])));
+  const first = await publishRelease(firstRelease, { io, env: CREDS, log: () => {}, bootstrapWaitMs: 0 });
+  assert.deepEqual(first, { code: 0, phase: 'done', flipped: true });
+  const servedBase = pointerOf(io).release.base;
+  io.store.delete(`${servedBase}${CANTON_HUBS_API}`);
+  io.ops.length = 0;
+  io.fail = (op) => op === 'upload';
+
+  const repair = await publishRelease(planRelease(fakeDist(withLive(['canton-ti']))), { io, env: CREDS, log: () => {}, bootstrapWaitMs: 0 });
+  assert.deepEqual([repair.code, repair.phase, repair.flipped], [1, 'staging', false]);
+  assert.match(io.ops[0], /^put edge\/sections\/_releases\/[0-9a-f]{40}\//);
+  assert.doesNotMatch(io.ops[0], new RegExp(`^put edge/sections/_releases/${COMMIT}/`));
+});
+
 test('edge: pulizia best-effort — mai la release puntata, mai la precedente', async () => {
   const { io, result } = await publish(withLive(['canton-ti']), { history: [withLive(['canton-ti'], OLDER), withLive(['canton-gr'], OLD)] });
   assert.equal(result.code, 0);
@@ -1059,8 +1215,9 @@ test('edge: pulizia best-effort — mai la release puntata, mai la precedente', 
   assert.deepEqual(io.ops.filter((op) => op.startsWith('del ')), [
     `del edge/sections/_releases/${OLDER}/sitemap-articles-canton-ti.xml`,
     `del edge/sections/_releases/${OLDER}/sitemap-cantons.xml`,
+    `del edge/sections/_releases/${OLDER}/canton-hubs.json`,
   ]);
-  assert.deepEqual(pointerOf(io).release.previous, { base: `edge/sections/_releases/${OLD}/`, files: ['sitemap-articles-canton-gr.xml', 'sitemap-cantons.xml'] });
+  assert.deepEqual(pointerOf(io).release.previous, { base: `edge/sections/_releases/${OLD}/`, files: ['sitemap-articles-canton-gr.xml', 'sitemap-cantons.xml', 'canton-hubs.json'] });
   // Una pulizia fallita non e' un fallimento della pubblicazione.
   const stuck = await publish(withLive(['canton-ti']), { history: [withLive(['canton-ti'], OLDER), withLive(['canton-gr'], OLD)], fail: (op) => op === 'remove' });
   assert.equal(stuck.result.code, 0);
@@ -1080,7 +1237,9 @@ test('edge: se niente di servito cambia un problema di R2 non ferma gli articoli
   const same = await publish(DRAFT_ALL(), { history: [DRAFT_ALL(OLD)], fail: (op) => op === 'upload' });
   assert.equal(same.result.code, 0);
   assert.match(same.logs.join('\n'), /release su R2 ok; push facoltativo/);
-  assert.match(same.logs.join('\n'), /::warning::\[section-edge\].*il publish prosegue/);
+  assert.deepEqual(same.result, { code: 0, phase: 'noop', flipped: false });
+  assert.deepEqual(same.io.ops, ['purge 2']);
+  assert.match(same.logs.join('\n'), /gia' servita sotto .*purge confermato, nessun PUT/);
   // Mai pubblicato, tutto draft (oggi), senza credenziali: warning, niente caricato.
   const noCredsSame = await publish(DRAFT_ALL(), {}, {});
   assert.deepEqual([noCredsSame.result.code, noCredsSame.io.ops], [0, []]);
