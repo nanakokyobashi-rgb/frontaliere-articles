@@ -463,7 +463,6 @@ export async function publishRelease(release, { io, env = process.env, log = con
   };
 
   const missingCreds = ['R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'R2_S3_ENDPOINT', 'R2_BUCKET', 'CF_API_TOKEN'].filter((name) => !env[name]);
-  if (missingCreds.length) return stop('credenziali', `assenti (${missingCreds.join(', ')}): niente caricato`, false);
 
   // Una base gia' usata e' immutable anche quando cambia il kill-switch a
   // parita' di HEAD. Se il puntatore corrente serve gia' un altro snapshot
@@ -481,6 +480,7 @@ export async function publishRelease(release, { io, env = process.env, log = con
   const snapshotCommit = releaseSnapshotCommit(release);
   const snapshotBase = releaseBase(snapshotCommit);
   const sameKnownRelease = previous.state === 'ok' && !mandatory && (previousBase === release.base || (sameRegistryCommit && previousBase === snapshotBase));
+  if (missingCreds.length) return stop('credenziali', `assenti (${missingCreds.join(', ')}): niente caricato`, false, sameKnownRelease);
   if (!sameKnownRelease && (previous.state === 'unknown' || occupiedBases.includes(release.base) || sameRegistryCommit)) {
     let immutableCommit = snapshotCommit;
     // Collisione crittografica praticamente impossibile, ma la proprieta'

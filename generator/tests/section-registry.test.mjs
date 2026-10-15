@@ -1157,6 +1157,18 @@ test('edge: un purge fallito viene ritentato prima del noop', async () => {
   assert.deepEqual(io.ops, ['purge 3']);
 });
 
+test('edge: il retry del purge senza credenziali resta fail-closed', async () => {
+  const io = fakeIo();
+  seedPages(io, ['canton-ti']);
+  const first = await publishRelease(planRelease(fakeDist(withLive(['canton-ti']))), { io, env: CREDS, log: () => {}, bootstrapWaitMs: 0 });
+  assert.deepEqual(first, { code: 0, phase: 'done', flipped: true });
+  io.ops.length = 0;
+
+  const retry = await publishRelease(planRelease(fakeDist(withLive(['canton-ti']))), { io, env: {}, log: () => {}, bootstrapWaitMs: 0 });
+  assert.deepEqual(retry, { code: 1, phase: 'credenziali', flipped: false });
+  assert.deepEqual(io.ops, []);
+});
+
 test('edge: stato unknown con base gia\' usata forza una nuova base di staging', async () => {
   const io = fakeIo();
   seedPages(io, ['canton-ti']);
