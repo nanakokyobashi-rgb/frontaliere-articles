@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-segreteria-economia-nazionale.webp",
-      "sha256": "4c055543143cf19a57cfb982ba83be9c464ca1f073fdffb09580bbc70fe77850"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-segreteria-economia-nazionale-480w.webp",
-      "sha256": "791e78b1b4c01339f440d348b71e9ff4ccf9ad30faa650e8081a74908d99ff5e"
-    }
-  ]
+  "items": []
 }
