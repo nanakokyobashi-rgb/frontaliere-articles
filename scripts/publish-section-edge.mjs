@@ -16,15 +16,15 @@
  * (invariati, quelli che il Worker gia' legge) porta
  *
  *   release: {
- *     commit: "<sha>",
- *     base: "edge/sections/_releases/<sha>/",
+ *     commit: "<snapshot sha>",
+ *     base: "edge/sections/_releases/<snapshot sha>/",
  *     files: { "sitemap-cantons.xml": { sha256, bytes },
  *              "sitemap-articles-<id>.xml": { sha256, bytes }, … },
  *     previous: { base, files: [nomi] } | null      // la release che sostituisce
  *   }
  *
  * Il payload hub, le sitemap e l'indice stanno SOLO sotto `release.base`,
- * immutabili per commit: non esistono path fissi da sovrascrivere. Il Worker risolve
+ * immutabili per snapshot effettivo: non esistono path fissi da sovrascrivere. Il Worker risolve
  * `/sitemap-cantons.xml` e `/sitemap-articles-<id>.xml` come `<base><nome>`
  * (404 se il nome non e' in `files`), quindi registro, sitemap e indice
  * cambiano TUTTI INSIEME con il puntatore, e non c'e' niente da ripristinare.
@@ -139,6 +139,23 @@ export function registryState(doc) {
 
 /** Il prefisso (con `/` finale) dei file di una release. */
 export const releaseBase = (commit) => `${RELEASES_PREFIX}/${commit}/`;
+
+/**
+ * Identita' della release effettiva quando lo stesso HEAD viene rigenerato con
+ * un kill-switch diverso o con byte diversi. La prima pubblicazione conserva
+ * la chiave `<registry.commit>` per compatibilita'; `publishRelease` usa questa
+ * chiave solo quando rileva una collisione con la base gia' puntata.
+ */
+export function releaseSnapshotCommit(release) {
+  const material = JSON.stringify({
+    commit: release.commit,
+    state: registryState(release.registry),
+    files: release.files
+      .map(({ name, sha256: hash, bytes }) => ({ name, sha256: hash, bytes }))
+      .sort((a, b) => a.name.localeCompare(b.name)),
+  });
+  return sha256(material).slice(0, 40);
+}
 
 const RELEASE_FILE_RE = /^(sitemap-articles-canton-[a-z]+\.xml|sitemap-cantons\.xml|canton-hubs\.json)$/;
 const RELEASE_PURGE_FILE_RE = /^(sitemap-articles-canton-[a-z]+\.xml|sitemap-cantons\.xml)$/;
@@ -436,18 +453,38 @@ export async function publishRelease(release, { io, env = process.env, log = con
   const missingCreds = ['R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'R2_S3_ENDPOINT', 'R2_BUCKET', 'CF_API_TOKEN'].filter((name) => !env[name]);
   if (missingCreds.length) return stop('credenziali', `assenti (${missingCreds.join(', ')}): niente caricato`, false);
 
-  // Una base gia' puntata e' immutable anche quando cambia il kill-switch a
-  // parita' di HEAD: il commit identifica il contenuto generato, non una
-  // chiave da sovrascrivere. Se lo snapshot effettivo e' diverso, fermarsi
-  // prima di qualsiasi PUT mantiene coerenti puntatore e payload; per
-  // ripubblicarlo serve un commit/snapshot nuovo.
+  // Una base gia' usata e' immutable anche quando cambia il kill-switch a
+  // parita' di HEAD. Se il puntatore corrente serve gia' un altro snapshot
+  // dello stesso commit, la base nominale del commit e' una collisione anche
+  // quando non e' piu' la base corrente: ritornare li' riscriverebbe un
+  // oggetto che puo' ancora essere conservato o servito da una richiesta in
+  // volo. In entrambi i casi si crea una chiave unica per lo snapshot
+  // effettivo prima dello staging.
   const previousBase = previous.doc?.release?.base;
-  if (previousBase === release.base && mandatory) {
-    return stop(
-      'immutability',
-      `base ${release.base} gia' puntata: rifiuto la riscrittura della release immutable; lo snapshot effettivo richiede un commit nuovo`,
-      false,
-    );
+  const sameRegistryCommit = previous.doc?.commit === release.commit;
+  if (mandatory && (previousBase === release.base || sameRegistryCommit)) {
+    let snapshotCommit = releaseSnapshotCommit(release);
+    // Collisione crittografica praticamente impossibile, ma la proprieta'
+    // d'immutabilita' non deve dipendere da una probabilita': evita comunque
+    // di riusare la chiave del registry commit.
+    if (snapshotCommit === release.commit) snapshotCommit = sha256(`snapshot:${snapshotCommit}`).slice(0, 40);
+    const base = releaseBase(snapshotCommit);
+    const files = release.files.map((file) => ({ ...file, key: `${base}${file.name}` }));
+    release = {
+      ...release,
+      base,
+      files,
+      pointer: {
+        ...release.pointer,
+        release: {
+          ...release.pointer.release,
+          commit: snapshotCommit,
+          base,
+          files: Object.fromEntries(files.map((file) => [file.name, { sha256: file.sha256, bytes: file.bytes }])),
+        },
+      },
+    };
+    log(`[section-edge] release ${release.commit.slice(0, 8)}: base gia' puntata, snapshot immutable ${snapshotCommit}`);
   }
   // La stessa release gia' verificata non richiede ne' un nuovo PUT ne' un
   // nuovo flip: anche un upload byte-identico sarebbe una riscrittura di una

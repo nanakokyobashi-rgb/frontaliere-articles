@@ -96,6 +96,7 @@ import {
   publishRelease,
   purgeChunks,
   readPreviousRelease,
+  releaseSnapshotCommit,
   registryState,
   requiredPageKeys,
   sitemapPaths,
@@ -905,20 +906,43 @@ test('edge: push obbligatorio a ogni differenza — accensione, spegnimento, rit
   assert.equal(declaredFiles({ ...live.pointer, release: { ...live.pointer.release, files: { '../x': { sha256: 'f'.repeat(64) } } } }), null);
 });
 
-test('edge: una base gia\' puntata non viene riscritta se cambia lo snapshot effettivo a parita\' di commit', async () => {
+test('edge: un kill-switch diverso sullo stesso commit crea una base immutable distinta', async () => {
   // Un kill-switch diverso sullo stesso HEAD cambia registry, sitemap e hub:
-  // la base resta la stessa, ma nessun oggetto immutable deve essere sovrascritto.
+  // la base del primo snapshot resta intatta e il nuovo set sale sotto una
+  // chiave derivata dallo snapshot effettivo prima del flip.
   const changed = await publish(withLive(['canton-gr']), { history: [withLive(['canton-ti'])] });
-  assert.deepEqual(changed.result, { code: 1, phase: 'immutability', flipped: false });
-  assert.deepEqual(changed.io.ops, []);
-  assert.equal(served(changed.io), changed.before, 'puntatore e byte serviti restano quelli precedenti');
-  assert.match(changed.logs.join('\n'), /rifiuto la riscrittura della release immutable/);
+  assert.deepEqual(changed.result, { code: 0, phase: 'done', flipped: true });
+  assert.notEqual(pointerOf(changed.io).release.base, `edge/sections/_releases/${COMMIT}/`);
+  assert.match(pointerOf(changed.io).release.base, /^edge\/sections\/_releases\/[0-9a-f]{40}\/$/);
+  assert.ok(changed.io.store.has(`${pointerOf(changed.io).release.base}${CANTON_HUBS_API}`));
+  assert.ok(changed.io.store.has(`edge/sections/_releases/${COMMIT}/${CANTON_HUBS_API}`), 'la release precedente resta immutable');
+  assert.notEqual(served(changed.io), changed.before, 'il puntatore passa al nuovo snapshot');
+  assert.match(changed.logs.join('\n'), /snapshot immutable [0-9a-f]{40}/);
+
+  const planned = planRelease(fakeDist(withLive(['canton-ti'])));
+  const plannedAgain = planRelease(fakeDist(withLive(['canton-ti'])));
+  const plannedDifferent = planRelease(fakeDist(withLive(['canton-gr'])));
+  assert.equal(releaseSnapshotCommit(planned), releaseSnapshotCommit(plannedAgain));
+  assert.notEqual(releaseSnapshotCommit(planned), releaseSnapshotCommit(plannedDifferent));
 
   // Lo stesso snapshot gia\' verificato e\' un no-op: nemmeno in questo caso
   // si esegue un PUT sulla chiave immutable.
   const same = await publish(withLive(['canton-ti']), { history: [withLive(['canton-ti'])] });
   assert.deepEqual(same.result, { code: 0, phase: 'noop', flipped: false });
   assert.deepEqual(same.io.ops, []);
+});
+
+test('edge: dopo una collisione sullo stesso commit non torna alla base nominale', async () => {
+  // La prima release usa la forma breve <commit>; la seconda, con un
+  // kill-switch diverso, usa una base derivata. Un ritorno al primo snapshot
+  // deve usare una terza base, mai riscrivere quella nominale.
+  const reverted = await publish(withLive(['canton-ti']), {
+    history: [withLive(['canton-ti']), withLive(['canton-gr'])],
+  });
+  assert.deepEqual(reverted.result, { code: 0, phase: 'done', flipped: true });
+  assert.match(pointerOf(reverted.io).release.base, /^edge\/sections\/_releases\/[0-9a-f]{40}\/$/);
+  assert.notEqual(pointerOf(reverted.io).release.base, `edge/sections/_releases/${COMMIT}/`);
+  assert.ok(!reverted.io.ops.some((op) => op.startsWith(`put edge/sections/_releases/${COMMIT}/`)));
 });
 
 test('edge: la release servita e\' NOTA solo se ogni file dichiarato c\'e\' con il suo sha256', async () => {
