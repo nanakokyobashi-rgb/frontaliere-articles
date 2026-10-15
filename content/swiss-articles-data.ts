@@ -27901,6 +27901,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'prezzi-produzione-importazione-settembre',
+    category: 'novita',
+    date: '2026-10-15T10:59:13.835Z',
+    image: '/images/blog/article-prezzi-produzione-importazione-settembre.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
