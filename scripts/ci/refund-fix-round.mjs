@@ -68,7 +68,8 @@
  */
 
 import { execFileSync } from 'node:child_process';
-import fs from 'node:fs';
+import fs, { realpathSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
 
 import { detectClaudeRateLimit, shouldRefundRateLimitedRound } from './claude-rate-limit.mjs';
 
@@ -278,4 +279,10 @@ function main() {
   }
 }
 
-main();
+if ((() => {
+  try {
+    return import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href;
+  } catch {
+    return false;
+  }
+})()) main();
