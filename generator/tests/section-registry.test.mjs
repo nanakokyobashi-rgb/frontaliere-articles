@@ -1237,7 +1237,9 @@ test('edge: se niente di servito cambia un problema di R2 non ferma gli articoli
   const same = await publish(DRAFT_ALL(), { history: [DRAFT_ALL(OLD)], fail: (op) => op === 'upload' });
   assert.equal(same.result.code, 0);
   assert.match(same.logs.join('\n'), /release su R2 ok; push facoltativo/);
-  assert.match(same.logs.join('\n'), /::warning::\[section-edge\].*il publish prosegue/);
+  assert.deepEqual(same.result, { code: 0, phase: 'noop', flipped: false });
+  assert.deepEqual(same.io.ops, ['purge 2']);
+  assert.match(same.logs.join('\n'), /gia' servita sotto .*purge confermato, nessun PUT/);
   // Mai pubblicato, tutto draft (oggi), senza credenziali: warning, niente caricato.
   const noCredsSame = await publish(DRAFT_ALL(), {}, {});
   assert.deepEqual([noCredsSame.result.code, noCredsSame.io.ops], [0, []]);
