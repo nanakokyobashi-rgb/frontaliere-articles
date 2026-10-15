@@ -33,6 +33,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.commissione-scuola-ticino.title': 'Collège, audition au Tessin sur les cours d\'aptitude',
     'blog.article.commissione-scuola-ticino.excerpt': 'Audition à Bellinzone sur les cours d\'aptitude et de base DECS et SIT parmi les représentants entendus Rapport signé sur l\'initiative IP158 Prochaine réunion : 19',
     'blog.article.commissione-scuola-ticino.imageAlt': 'Bellinzone : réunion sur les cours et initiatives de l\'école moyenne',
+    'blog.article.gottardo-quadri-cupra-berna.title': 'Gothard : quadri interroge Berne sur la CUPRA',
+    'blog.article.gottardo-quadri-cupra-berna.excerpt': 'Les bouchons du Saint-Gothard se répercutent sur la Haute-Léventine Quadri interroge le Conseil fédéral sur la voie CUPRA La CUPRA est définitive dès 2026 et a une gestion',
+    'blog.article.gottardo-quadri-cupra-berna.imageAlt': 'Bouchon sur l\'A2 du San Gothard avec trafic bloqué dans la vallée',
 };
 
 export default blogMetaCantonTiFr;

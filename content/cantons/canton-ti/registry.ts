@@ -116,4 +116,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'gottardo-quadri-cupra-berna',
+ category: 'pratico',
+ date: '2026-10-15T01:57:32.602Z',
+ image: '/images/blog/article-gottardo-quadri-cupra-berna.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T20:08:23.890Z",
-  "contentHash": "72c3fcaef50bb409f259a54210806a608cacc2c81705eec378e1e33fbca89d61",
+  "updatedAt": "2026-10-15T03:00:36.036Z",
+  "contentHash": "2c4ef901d6b09c30fc0490a760aefadbdc323309cb7e81ccea6569551e546183",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-14T12:29:53.970Z",
+      "updatedAt": "2026-10-14T17:41:52.781Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T10:37:16.619Z",
+      "updatedAt": "2026-10-14T16:01:15.871Z",
       "keyFacts": 0
     }
   ],
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "24",
+          "value": "22",
           "note": "segnalazioni aggiornate: 14 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "24",
+          "value": "25",
           "note": "segnalazioni aggiornate: 14 ottobre 2026"
         }
       ],
@@ -123,12 +123,6 @@
               "date": "2026-09-17T18:00:00.000Z"
             },
             {
-              "label": "Leuk <-> Jeizinen tra Luogo Leuk E Luogo Erschmatt Situazione: chiusa Causa: lavori di manutenzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 16 ottobre 2026",
-              "date": "2026-09-24T13:42:00.000Z"
-            },
-            {
               "label": "Epinassey, Saint-Maurice in tutte le direzioni Situazione: chiusa Causa: lavori di costruzione",
               "value": "Chiusura",
               "detail": "fine prevista: 18 dicembre 2026",
@@ -139,16 +133,37 @@
               "value": "Chiusura",
               "detail": "fine prevista: 28 ottobre 2026",
               "date": "2026-10-01T13:12:00.000Z"
+            },
+            {
+              "label": "A9 Vevey -> Martigny tra Svincolo autostradale St-Maurice E Svincolo autostradale Martigny-Fully Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 16 ottobre 2026",
+              "date": "2026-10-05T15:09:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-14T12:29:53.970Z"
+          "updatedAt": "2026-10-14T17:41:52.781Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Regione Nosere, la nuova rotatoria sarà completata entro fine ottobre",
+              "date": "2026-10-14T15:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/regione-nosere-la-nuova-rotatoria-sara-completata-entro-fine-ottobre.html"
+            },
+            {
+              "label": "Domodossola, in funzione il nuovo impianto semaforico di via Trabucchi",
+              "date": "2026-10-14T12:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-in-funzione-il-nuovo-impianto-semaforico-di-via-trabucchi.html"
+            },
+            {
+              "label": "Valle Vigezzo, senso unico alternato sulla statale 337 fino al 17 ottobre",
+              "date": "2026-10-14T11:37:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valle-vigezzo-senso-unico-alternato-sulla-statale-337-fino-al-17-ottobre.html"
+            },
             {
               "label": "Galleria Montecrevola, prima i lavori al tornante sulla provinciale 166",
               "date": "2026-10-13T10:10:00.000Z",
@@ -163,24 +178,9 @@
               "label": "Viabilità in Ossola a rischio paralisi, Ferroni chiede un coordinamento urgente",
               "date": "2026-10-12T16:50:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
-            },
-            {
-              "label": "Autostrada A26, i cantieri attivi questa settimana",
-              "date": "2026-10-12T13:35:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-b7c64ee126.html"
-            },
-            {
-              "label": "Canton Ticino, controlli della velocità dal 12 al 18 ottobre: ecco dove saranno gli autovelox",
-              "date": "2026-10-12T06:20:18.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/canton-ticino-controlli-della-velocita-dal-12-al-18-ottobre-ecco-dove-saranno-gli-autovelox.html"
-            },
-            {
-              "label": "Al via i lavori nel tunnel di Montecrevola: rischio intasamento sulla provinciale verso il confine",
-              "date": "2026-10-11T17:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/11/leggi-notizia/argomenti/ossola/articolo/al-via-i-lavori-anas-nel-tunnel-di-montecrevola-ce-il-rischio-intasamento-sulla-provinciale-vers.html"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -243,7 +243,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T03:00:36.036Z"
     },
     "en": {
       "canton": "VS",
@@ -258,12 +258,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "24",
+          "value": "22",
           "note": "reports as of 14 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "24",
+          "value": "25",
           "note": "reports as of 14 October 2026"
         }
       ],
@@ -344,12 +344,6 @@
               "date": "2026-09-17T18:00:00.000Z"
             },
             {
-              "label": "Leuk <-> Jeizinen tra Luogo Leuk E Luogo Erschmatt Situazione: chiusa Causa: lavori di manutenzione",
-              "value": "Closure",
-              "detail": "until 16 October 2026",
-              "date": "2026-09-24T13:42:00.000Z"
-            },
-            {
               "label": "Epinassey, Saint-Maurice in tutte le direzioni Situazione: chiusa Causa: lavori di costruzione",
               "value": "Closure",
               "detail": "until 18 December 2026",
@@ -360,16 +354,37 @@
               "value": "Closure",
               "detail": "until 28 October 2026",
               "date": "2026-10-01T13:12:00.000Z"
+            },
+            {
+              "label": "A9 Vevey -> Martigny tra Svincolo autostradale St-Maurice E Svincolo autostradale Martigny-Fully Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 16 October 2026",
+              "date": "2026-10-05T15:09:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-14T12:29:53.970Z"
+          "updatedAt": "2026-10-14T17:41:52.781Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Regione Nosere, la nuova rotatoria sarà completata entro fine ottobre",
+              "date": "2026-10-14T15:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/regione-nosere-la-nuova-rotatoria-sara-completata-entro-fine-ottobre.html"
+            },
+            {
+              "label": "Domodossola, in funzione il nuovo impianto semaforico di via Trabucchi",
+              "date": "2026-10-14T12:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-in-funzione-il-nuovo-impianto-semaforico-di-via-trabucchi.html"
+            },
+            {
+              "label": "Valle Vigezzo, senso unico alternato sulla statale 337 fino al 17 ottobre",
+              "date": "2026-10-14T11:37:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valle-vigezzo-senso-unico-alternato-sulla-statale-337-fino-al-17-ottobre.html"
+            },
             {
               "label": "Galleria Montecrevola, prima i lavori al tornante sulla provinciale 166",
               "date": "2026-10-13T10:10:00.000Z",
@@ -384,24 +399,9 @@
               "label": "Viabilità in Ossola a rischio paralisi, Ferroni chiede un coordinamento urgente",
               "date": "2026-10-12T16:50:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
-            },
-            {
-              "label": "Autostrada A26, i cantieri attivi questa settimana",
-              "date": "2026-10-12T13:35:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-b7c64ee126.html"
-            },
-            {
-              "label": "Canton Ticino, controlli della velocità dal 12 al 18 ottobre: ecco dove saranno gli autovelox",
-              "date": "2026-10-12T06:20:18.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/canton-ticino-controlli-della-velocita-dal-12-al-18-ottobre-ecco-dove-saranno-gli-autovelox.html"
-            },
-            {
-              "label": "Al via i lavori nel tunnel di Montecrevola: rischio intasamento sulla provinciale verso il confine",
-              "date": "2026-10-11T17:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/11/leggi-notizia/argomenti/ossola/articolo/al-via-i-lavori-anas-nel-tunnel-di-montecrevola-ce-il-rischio-intasamento-sulla-provinciale-vers.html"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -464,7 +464,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T03:00:36.036Z"
     },
     "de": {
       "canton": "VS",
@@ -479,12 +479,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "24",
+          "value": "22",
           "note": "Meldungen vom 14. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "24",
+          "value": "25",
           "note": "Meldungen vom 14. Oktober 2026"
         }
       ],
@@ -565,12 +565,6 @@
               "date": "2026-09-17T18:00:00.000Z"
             },
             {
-              "label": "Leuk <-> Jeizinen zwischen Ortschaft Leuk und Ortschaft Erschmatt Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 16. Oktober 2026",
-              "date": "2026-09-24T13:42:00.000Z"
-            },
-            {
               "label": "Epinassey, Saint-Maurice in beide Richtungen Sachlage: Strecke gesperrt Ursache: Bauarbeiten",
               "value": "Sperrung",
               "detail": "bis 18. Dezember 2026",
@@ -581,16 +575,37 @@
               "value": "Sperrung",
               "detail": "bis 28. Oktober 2026",
               "date": "2026-10-01T13:12:00.000Z"
+            },
+            {
+              "label": "A9 Vevey -> Martigny zwischen Anschluss St-Maurice und Anschluss Martigny-Fully Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 16. Oktober 2026",
+              "date": "2026-10-05T15:09:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-14T12:29:53.970Z"
+          "updatedAt": "2026-10-14T17:41:52.781Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Regione Nosere, la nuova rotatoria sarà completata entro fine ottobre",
+              "date": "2026-10-14T15:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/regione-nosere-la-nuova-rotatoria-sara-completata-entro-fine-ottobre.html"
+            },
+            {
+              "label": "Domodossola, in funzione il nuovo impianto semaforico di via Trabucchi",
+              "date": "2026-10-14T12:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-in-funzione-il-nuovo-impianto-semaforico-di-via-trabucchi.html"
+            },
+            {
+              "label": "Valle Vigezzo, senso unico alternato sulla statale 337 fino al 17 ottobre",
+              "date": "2026-10-14T11:37:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valle-vigezzo-senso-unico-alternato-sulla-statale-337-fino-al-17-ottobre.html"
+            },
             {
               "label": "Galleria Montecrevola, prima i lavori al tornante sulla provinciale 166",
               "date": "2026-10-13T10:10:00.000Z",
@@ -605,24 +620,9 @@
               "label": "Viabilità in Ossola a rischio paralisi, Ferroni chiede un coordinamento urgente",
               "date": "2026-10-12T16:50:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
-            },
-            {
-              "label": "Autostrada A26, i cantieri attivi questa settimana",
-              "date": "2026-10-12T13:35:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-b7c64ee126.html"
-            },
-            {
-              "label": "Canton Ticino, controlli della velocità dal 12 al 18 ottobre: ecco dove saranno gli autovelox",
-              "date": "2026-10-12T06:20:18.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/canton-ticino-controlli-della-velocita-dal-12-al-18-ottobre-ecco-dove-saranno-gli-autovelox.html"
-            },
-            {
-              "label": "Al via i lavori nel tunnel di Montecrevola: rischio intasamento sulla provinciale verso il confine",
-              "date": "2026-10-11T17:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/11/leggi-notizia/argomenti/ossola/articolo/al-via-i-lavori-anas-nel-tunnel-di-montecrevola-ce-il-rischio-intasamento-sulla-provinciale-vers.html"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -685,7 +685,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T03:00:36.036Z"
     },
     "fr": {
       "canton": "VS",
@@ -700,12 +700,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "24",
+          "value": "22",
           "note": "signalements au 14 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "24",
+          "value": "25",
           "note": "signalements au 14 octobre 2026"
         }
       ],
@@ -786,12 +786,6 @@
               "date": "2026-09-17T18:00:00.000Z"
             },
             {
-              "label": "Loèche <-> Jeizinen entre Localité Loèche et Localité Erschmatt Situation: fermé Raison: travaux de maintenance",
-              "value": "Fermeture",
-              "detail": "jusqu’au 16 octobre 2026",
-              "date": "2026-09-24T13:42:00.000Z"
-            },
-            {
               "label": "Epinassey, Saint-Maurice dans les deux sens Situation: fermé Raison: travaux de construction",
               "value": "Fermeture",
               "detail": "jusqu’au 18 décembre 2026",
@@ -802,16 +796,37 @@
               "value": "Fermeture",
               "detail": "jusqu’au 28 octobre 2026",
               "date": "2026-10-01T13:12:00.000Z"
+            },
+            {
+              "label": "A9 Vevey -> Martigny entre Jonction autoroutière St-Maurice et Jonction autoroutière Martigny-Fully Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 16 octobre 2026",
+              "date": "2026-10-05T15:09:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-14T12:29:53.970Z"
+          "updatedAt": "2026-10-14T17:41:52.781Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Regione Nosere, la nuova rotatoria sarà completata entro fine ottobre",
+              "date": "2026-10-14T15:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/regione-nosere-la-nuova-rotatoria-sara-completata-entro-fine-ottobre.html"
+            },
+            {
+              "label": "Domodossola, in funzione il nuovo impianto semaforico di via Trabucchi",
+              "date": "2026-10-14T12:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-in-funzione-il-nuovo-impianto-semaforico-di-via-trabucchi.html"
+            },
+            {
+              "label": "Valle Vigezzo, senso unico alternato sulla statale 337 fino al 17 ottobre",
+              "date": "2026-10-14T11:37:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valle-vigezzo-senso-unico-alternato-sulla-statale-337-fino-al-17-ottobre.html"
+            },
             {
               "label": "Galleria Montecrevola, prima i lavori al tornante sulla provinciale 166",
               "date": "2026-10-13T10:10:00.000Z",
@@ -826,24 +841,9 @@
               "label": "Viabilità in Ossola a rischio paralisi, Ferroni chiede un coordinamento urgente",
               "date": "2026-10-12T16:50:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
-            },
-            {
-              "label": "Autostrada A26, i cantieri attivi questa settimana",
-              "date": "2026-10-12T13:35:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-b7c64ee126.html"
-            },
-            {
-              "label": "Canton Ticino, controlli della velocità dal 12 al 18 ottobre: ecco dove saranno gli autovelox",
-              "date": "2026-10-12T06:20:18.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/canton-ticino-controlli-della-velocita-dal-12-al-18-ottobre-ecco-dove-saranno-gli-autovelox.html"
-            },
-            {
-              "label": "Al via i lavori nel tunnel di Montecrevola: rischio intasamento sulla provinciale verso il confine",
-              "date": "2026-10-11T17:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/11/leggi-notizia/argomenti/ossola/articolo/al-via-i-lavori-anas-nel-tunnel-di-montecrevola-ce-il-rischio-intasamento-sulla-provinciale-vers.html"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -906,7 +906,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T03:00:36.036Z"
     }
   }
 }

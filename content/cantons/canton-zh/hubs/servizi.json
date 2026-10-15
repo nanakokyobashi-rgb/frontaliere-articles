@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T22:03:43.389Z",
-  "contentHash": "ce765f9610a0a9d294edd5acb99b1baa4c75728751c0d9c3e1b45a53f040eedc",
+  "updatedAt": "2026-10-15T01:53:38.743Z",
+  "contentHash": "dda3f9d718ed579197bacb4733392e615def04092172de27b2e0a49e935dbd60",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -18,13 +18,8 @@
       "keyFacts": 0
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-14T13:49:58.818Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T10:37:16.619Z",
+      "updatedAt": "2026-10-14T16:01:15.871Z",
       "keyFacts": 0
     }
   ],
@@ -109,24 +104,15 @@
           "updatedAt": "2026-10-14T14:50:03.549Z"
         },
         {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "20 °C",
-              "detail": "oggi da 12 a 20 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-14T13:49:58.818Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
+              "date": "2026-10-14T13:11:34.000Z",
+              "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
+            },
             {
               "label": "Lieblingsmusik am Patienten: USZ-Studie zeigt Potenzial zur Schmerzreduktion bei medizinischen Eingriffen",
               "date": "2026-10-14T05:28:41.000Z",
@@ -151,14 +137,9 @@
               "label": "Aussergewöhnliche Pflege am USZ",
               "date": "2026-10-06T19:43:03.000Z",
               "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
-            },
-            {
-              "label": "Arbeitslosenquote bleibt im September stabil",
-              "date": "2026-10-06",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/arbeitslosenquote-bleibt-im-september-stabil.html"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -237,7 +218,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T22:03:43.389Z"
+      "updatedAt": "2026-10-15T01:53:38.743Z"
     },
     "en": {
       "canton": "ZH",
@@ -319,24 +300,15 @@
           "updatedAt": "2026-10-14T14:50:03.549Z"
         },
         {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "20 °C",
-              "detail": "today from 12 to 20 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-14T13:49:58.818Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
+              "date": "2026-10-14T13:11:34.000Z",
+              "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
+            },
             {
               "label": "Lieblingsmusik am Patienten: USZ-Studie zeigt Potenzial zur Schmerzreduktion bei medizinischen Eingriffen",
               "date": "2026-10-14T05:28:41.000Z",
@@ -361,14 +333,9 @@
               "label": "Aussergewöhnliche Pflege am USZ",
               "date": "2026-10-06T19:43:03.000Z",
               "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
-            },
-            {
-              "label": "Arbeitslosenquote bleibt im September stabil",
-              "date": "2026-10-06",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/arbeitslosenquote-bleibt-im-september-stabil.html"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -443,7 +410,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T22:03:43.389Z"
+      "updatedAt": "2026-10-15T01:53:38.743Z"
     },
     "de": {
       "canton": "ZH",
@@ -525,24 +492,15 @@
           "updatedAt": "2026-10-14T14:50:03.549Z"
         },
         {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "20 °C",
-              "detail": "heute 12 bis 20 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-14T13:49:58.818Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
+              "date": "2026-10-14T13:11:34.000Z",
+              "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
+            },
             {
               "label": "Lieblingsmusik am Patienten: USZ-Studie zeigt Potenzial zur Schmerzreduktion bei medizinischen Eingriffen",
               "date": "2026-10-14T05:28:41.000Z",
@@ -567,14 +525,9 @@
               "label": "Aussergewöhnliche Pflege am USZ",
               "date": "2026-10-06T19:43:03.000Z",
               "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
-            },
-            {
-              "label": "Arbeitslosenquote bleibt im September stabil",
-              "date": "2026-10-06",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/arbeitslosenquote-bleibt-im-september-stabil.html"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -649,7 +602,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T22:03:43.389Z"
+      "updatedAt": "2026-10-15T01:53:38.743Z"
     },
     "fr": {
       "canton": "ZH",
@@ -731,24 +684,15 @@
           "updatedAt": "2026-10-14T14:50:03.549Z"
         },
         {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "20 °C",
-              "detail": "aujourd’hui de 12 à 20 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-14T13:49:58.818Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
+              "date": "2026-10-14T13:11:34.000Z",
+              "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
+            },
             {
               "label": "Lieblingsmusik am Patienten: USZ-Studie zeigt Potenzial zur Schmerzreduktion bei medizinischen Eingriffen",
               "date": "2026-10-14T05:28:41.000Z",
@@ -773,14 +717,9 @@
               "label": "Aussergewöhnliche Pflege am USZ",
               "date": "2026-10-06T19:43:03.000Z",
               "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
-            },
-            {
-              "label": "Arbeitslosenquote bleibt im September stabil",
-              "date": "2026-10-06",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/arbeitslosenquote-bleibt-im-september-stabil.html"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -851,7 +790,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T22:03:43.389Z"
+      "updatedAt": "2026-10-15T01:53:38.743Z"
     }
   }
 }

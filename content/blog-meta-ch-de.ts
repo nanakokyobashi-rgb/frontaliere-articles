@@ -8305,7 +8305,19 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ordinanza-dispositivi-vitali.imageAlt': 'Bern und lebenswichtige Medizinprodukte zur DEFR-Konsultation',
     'blog.article.tasse-universitarie-berna-guida.title': 'Studiengebühren Bern: Einschreibungsleitfaden',
     'blog.article.tasse-universitarie-berna-guida.excerpt': 'Wie man Anforderungen, Fristen und Beträge für Studiengebühren im Kanton Bern überprüft: praktischer Leitfaden nach Kategorien und Institutionen.',
-    'blog.article.tasse-universitarie-berna-guida.imageAlt': 'Student prüft die Voraussetzungen für Studiengebühren im Kanton Bern',
+    'blog.article.tasse-universitarie-berna-guida.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.opportunita-impiego-federale.title': 'Arbeiten für die Bundesverwaltung: 50 Berufsausbildungen',
+    'blog.article.opportunita-impiego-federale.excerpt': 'Die Bundesverwaltung bietet frisch diplomierten Hochschulabsolventinnen und -absolventen Praktika an Es stehen 50 Berufsausbildungen zur Verfügung Die Ausbildungen umfassen 7 Wochen',
+    'blog.article.opportunita-impiego-federale.imageAlt': 'Stellenangebote in der Schweizer Bundesverwaltung',
+    'blog.article.segreteria-economia-nazionale.title': 'SECO: Die Quelle nennt das Staatssekretariat für Wirtschaft',
+    'blog.article.segreteria-economia-nazionale.excerpt': 'Das verfügbare Material nennt die Bezeichnung Staatssekretariat für Wirtschaft und das Akronym SECO, enthält jedoch keine Maßnahmen, Daten oder Zahlen.',
+    'blog.article.segreteria-economia-nazionale.imageAlt': 'Dokument mit der Abkürzung SECO auf einem Schreibtisch in einem Schweizer Wirtschaftsbüro.',
+    'blog.article.permesso-pesca-canton-berna-guida.title': 'Fischereibewilligung im Kanton Bern: Voraussetzungen und Saisons',
+    'blog.article.permesso-pesca-canton-berna-guida.excerpt': 'Erfahren Sie, wie Sie das Verfahren für die Fischereibewilligung im Kanton Bern abwickeln: Bewilligungen, Kurse, zugelassene Gewässer und zuständige Behörden.',
+    'blog.article.permesso-pesca-canton-berna-guida.imageAlt': 'See im Kanton Bern zum Angeln geeignet',
+    'blog.article.berna-veicoli-procedura-guida.title': 'Kontrollschilder und Zulassung im Kanton Bern: Leitfaden zu den Verfahren',
+    'blog.article.berna-veicoli-procedura-guida.excerpt': 'So regeln Sie im Kanton Bern Kontrollschilder, Zulassung, Fahrzeugprüfung und Halterwechsel: Prüfen Sie die offiziellen Anforderungen, Fristen und Beträge.',
+    'blog.article.berna-veicoli-procedura-guida.imageAlt': 'Strassenverkehrsamt im Kanton Bern',
 };
 
 export default blogMetaChDe;

@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T10:32:27.019Z",
-  "contentHash": "44aecac8567fe28a8fc73431bc77a9ad7fa219d71d542392ba3687825df8eeb9",
+  "updatedAt": "2026-10-15T02:03:15.322Z",
+  "contentHash": "0ebca17682921d3bb7d8f493ddafd6f0a4e798895bc3b5b1c6bc3f1b6f0751b7",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-14T05:32:06.894Z",
+      "updatedAt": "2026-10-14T17:41:52.781Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T16:01:15.871Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "20",
+          "value": "19",
           "note": "segnalazioni aggiornate: 14 ottobre 2026"
         },
         {
@@ -160,7 +160,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T17:41:52.781Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -198,7 +198,7 @@
               "url": "https://www.ge.ch/node/41839"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -257,7 +257,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-15T02:03:15.322Z"
     },
     "en": {
       "canton": "GE",
@@ -272,7 +272,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "20",
+          "value": "19",
           "note": "reports as of 14 October 2026"
         },
         {
@@ -395,7 +395,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T17:41:52.781Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -433,7 +433,7 @@
               "url": "https://www.ge.ch/node/41839"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -492,7 +492,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-15T02:03:15.322Z"
     },
     "de": {
       "canton": "GE",
@@ -507,7 +507,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "20",
+          "value": "19",
           "note": "Meldungen vom 14. Oktober 2026"
         },
         {
@@ -630,7 +630,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T17:41:52.781Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -668,7 +668,7 @@
               "url": "https://www.ge.ch/node/41839"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -727,7 +727,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-15T02:03:15.322Z"
     },
     "fr": {
       "canton": "GE",
@@ -742,7 +742,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "20",
+          "value": "19",
           "note": "signalements au 14 octobre 2026"
         },
         {
@@ -865,7 +865,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T17:41:52.781Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -903,7 +903,7 @@
               "url": "https://www.ge.ch/node/41839"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -962,7 +962,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-15T02:03:15.322Z"
     }
   }
 }

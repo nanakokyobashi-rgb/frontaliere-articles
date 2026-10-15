@@ -13,6 +13,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'uscita-svizzera-schengen-controlli': { it: 'uscita-svizzera-schengen-controlli', en: 'switzerland-exit-schengen-border-controls', de: 'schweiz-schengen-austritt-grenzkontrollen', fr: 'suisse-sortie-schengen-controles-frontaliers' },
  'sala-risveglio-bellinzona': { it: 'sala-risveglio-bellinzona', en: 'bellinzona-recovery-room', de: 'aufwachraum-bellinzona', fr: 'salle-reveil-bellinzona' },
  'commissione-scuola-ticino': { it: 'commissione-scuola-ticino', en: 'ticino-school-commission-hearing', de: 'tessin-schulkommission-anhoerung', fr: 'commission-ecole-tessin-audition' },
+ 'gottardo-quadri-cupra-berna': { it: 'gottardo-quadri-cupra-berna', en: 'gottardo-quadri-questions-bern-about-cupra', de: 'gotthard-quadri-befragt-bern-zur-cupra', fr: 'gothard-quadri-interroge-berne-sur-la-cupra' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

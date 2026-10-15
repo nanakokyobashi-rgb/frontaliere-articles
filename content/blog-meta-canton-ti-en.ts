@@ -33,6 +33,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.commissione-scuola-ticino.title': 'Middle school, audition in Ticino on aptitude courses',
     'blog.article.commissione-scuola-ticino.excerpt': 'Hearing in Bellinzona on the DECs and sit aptitude and base courses among the representatives heard Report signed on the IP158 initiative Next meeting: 19',
     'blog.article.commissione-scuola-ticino.imageAlt': 'Bellinzona meeting on lower secondary school courses and initiatives',
+    'blog.article.gottardo-quadri-cupra-berna.title': 'Gottardo: Quadri questions Bern about CUPRA',
+    'blog.article.gottardo-quadri-cupra-berna.excerpt': 'The queues at the Gotthard are affecting Upper Leventina Quadri questions the Federal Council about the CUPRA lane CUPRA is permanent from 2026 and has management',
+    'blog.article.gottardo-quadri-cupra-berna.imageAlt': 'Traffic jam on the San Gottardo highway with cars stuck in the valley',
 };
 
 export default blogMetaCantonTiEn;
