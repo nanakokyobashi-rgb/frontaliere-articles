@@ -8309,6 +8309,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.opportunita-impiego-federale.title': 'Working for the Federal Administration: 50 training programs',
     'blog.article.opportunita-impiego-federale.excerpt': 'The Federal Administration offers internships to newly graduated students 50 vocational training programs are available The training programs last 7 weeks',
     'blog.article.opportunita-impiego-federale.imageAlt': 'Job opportunities in the Swiss Federal Administration',
+    'blog.article.segreteria-economia-nazionale.title': 'SECO: the source indicates the State Secretariat for Economic Affairs',
+    'blog.article.segreteria-economia-nazionale.excerpt': 'The available material states the name State Secretariat for Economic Affairs and the acronym SECO, but contains no measures, dates, or figures.',
+    'blog.article.segreteria-economia-nazionale.imageAlt': 'Document marked SECO on a desk in a Swiss economic office.',
 };
 
 export default blogMetaChEn;

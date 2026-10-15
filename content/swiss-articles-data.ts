@@ -27742,6 +27742,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'segreteria-economia-nazionale',
+    category: 'pratico',
+    date: '2026-10-15T02:06:39.251Z',
+    image: '/images/blog/article-segreteria-economia-nazionale.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

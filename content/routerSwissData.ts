@@ -2792,6 +2792,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'ordinanza-dispositivi-vitali': { it: 'ordinanza-dispositivi-vitali', en: 'vital-medical-device-ordinance', de: 'verordnung-lebenswichtige-medizinprodukte', fr: 'ordonnance-dispositifs-medicaux-vitaux' },
  'tasse-universitarie-berna-guida': { it: 'tasse-universitarie-berna-guida', en: 'university-fees-bern-guide', de: 'studiengebuehren-bern-guide', fr: 'frais-scolarite-berne-guide' },
  'opportunita-impiego-federale': { it: 'opportunita-impiego-federale', en: 'federal-administration-jobs', de: 'arbeiten-bundesverwaltung', fr: 'emploi-administration-federale' },
+ 'segreteria-economia-nazionale': { it: 'segreteria-economia-nazionale', en: 'national-economic-secretariat', de: 'nationales-wirtschaftssekretariat', fr: 'secretariat-economie-national' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

@@ -104895,6 +104895,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-segreteria-economia-nazionale': {
+    title: 'SECO: la fonte indica la Segreteria di Stato dell\'economia',
+    description: 'Il materiale disponibile identifica la Segreteria di Stato dell\'economia come SECO, ma non riporta misure, cifre, date, norme o procedure economiche concrete.',
+    keywords: 'frontalieri, ticino, svizzera, italia, seco, fonte, indica, segreteria',
+    ogTitle: 'SECO: il nome e i dati presenti nella fonte',
+    ogDescription: 'Il link alla fonte presenta la Segreteria di Stato dell\'economia e la sigla SECO. Il materiale disponibile non contiene però una decisione, una statistica, un importo o una scadenza: l\'analisi resta limitata agli elementi verificabili.',
+    canonicalPath: '/articoli-svizzera/segreteria-economia-nazionale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "SECO: la fonte indica la Segreteria di Stato dell'economia",
+      "description": "Il materiale disponibile identifica la Segreteria di Stato dell'economia come SECO, ma non riporta misure, cifre, date, norme o procedure economiche concrete.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-segreteria-economia-nazionale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documento con la sigla SECO su una scrivania in un ufficio economico svizzero."
+      },
+      "datePublished": "2026-10-15T02:06:39+00:00",
+      "dateModified": "2026-10-15T02:06:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/segreteria-economia-nazionale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
