@@ -160,6 +160,18 @@ export function releaseSnapshotCommit(release) {
 const RELEASE_FILE_RE = /^(sitemap-articles-canton-[a-z]+\.xml|sitemap-cantons\.xml|canton-hubs\.json)$/;
 const RELEASE_PURGE_FILE_RE = /^(sitemap-articles-canton-[a-z]+\.xml|sitemap-cantons\.xml)$/;
 
+/** Purge idempotente delle superfici apex che una release puo' aver annunciato. */
+function purgeApexUrls(io, ...fileSets) {
+  const names = new Set([SECTION_SITEMAP_INDEX_FILE]);
+  for (const files of fileSets) {
+    for (const file of files ?? []) {
+      const name = typeof file === 'string' ? file : file?.name;
+      if (RELEASE_PURGE_FILE_RE.test(name ?? '')) names.add(name);
+    }
+  }
+  return io.purge([`${CDN}/${EDGE_SECTION_REGISTRY_FILE}`, ...[...names].map((name) => `${APEX}/${name}`)]);
+}
+
 /**
  * I file che un puntatore dichiara, come `{ nome: sha256 }`, o `null` se la
  * dichiarazione non e' leggibile (manca `release` mentre una sezione e' live,
@@ -443,11 +455,11 @@ export async function publishRelease(release, { io, env = process.env, log = con
         ? 'OBBLIGATORIO (stato o file serviti cambiano, o la release servita non e\' dimostrabile)'
         : 'facoltativo (stesso stato, stessi file)'),
   );
-  const stop = (phase, what, flipped) => {
+  const stop = (phase, what, flipped, forceFailure = false) => {
     const where = flipped ? 'il Worker serve la release nuova, intera' : 'il Worker serve la release di prima, intera';
-    if (mandatory) log(`::error::[section-edge] ${phase}: ${what} — ${where}; il publish si ferma`);
+    if (mandatory || forceFailure) log(`::error::[section-edge] ${phase}: ${what} — ${where}; il publish si ferma`);
     else log(`::warning::[section-edge] ${phase}: ${what} — ${where}; niente di servito cambiava, il publish prosegue`);
-    return { code: mandatory ? 1 : 0, phase, flipped };
+    return { code: mandatory || forceFailure ? 1 : 0, phase, flipped };
   };
 
   const missingCreds = ['R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'R2_S3_ENDPOINT', 'R2_BUCKET', 'CF_API_TOKEN'].filter((name) => !env[name]);
@@ -459,16 +471,24 @@ export async function publishRelease(release, { io, env = process.env, log = con
   // quando non e' piu' la base corrente: ritornare li' riscriverebbe un
   // oggetto che puo' ancora essere conservato o servito da una richiesta in
   // volo. In entrambi i casi si crea una chiave unica per lo snapshot
-  // effettivo prima dello staging.
+  // effettivo prima dello staging. Il confronto con lo snapshot gia' noto
+  // avviene anche quando `mandatory` e' falso: altrimenti un retry identico
+  // tornerebbe alla base nominale e potrebbe sovrascrivere una chiave immutable.
   const previousBase = previous.doc?.release?.base;
   const sameRegistryCommit = previous.doc?.commit === release.commit;
-  if (mandatory && (previousBase === release.base || sameRegistryCommit)) {
-    let snapshotCommit = releaseSnapshotCommit(release);
+  const snapshotCommit = releaseSnapshotCommit(release);
+  const snapshotBase = releaseBase(snapshotCommit);
+  const sameKnownRelease = previous.state === 'ok' && !mandatory && (previousBase === release.base || (sameRegistryCommit && previousBase === snapshotBase));
+  if (!sameKnownRelease && (previous.state === 'unknown' || previousBase === release.base || sameRegistryCommit)) {
+    let immutableCommit = snapshotCommit;
     // Collisione crittografica praticamente impossibile, ma la proprieta'
-    // d'immutabilita' non deve dipendere da una probabilita': evita comunque
-    // di riusare la chiave del registry commit.
-    if (snapshotCommit === release.commit) snapshotCommit = sha256(`snapshot:${snapshotCommit}`).slice(0, 40);
-    const base = releaseBase(snapshotCommit);
+    // d'immutabilita' non deve dipendere da una probabilita': se lo stato
+    // precedente e' unknown non si puo' ristagiare la stessa base, nemmeno
+    // quando il digest dello snapshot coincide con quella occupata.
+    while (immutableCommit === release.commit || releaseBase(immutableCommit) === previousBase) {
+      immutableCommit = sha256(`snapshot:${immutableCommit}:${previousBase ?? ''}`).slice(0, 40);
+    }
+    const base = releaseBase(immutableCommit);
     const files = release.files.map((file) => ({ ...file, key: `${base}${file.name}` }));
     release = {
       ...release,
@@ -478,19 +498,26 @@ export async function publishRelease(release, { io, env = process.env, log = con
         ...release.pointer,
         release: {
           ...release.pointer.release,
-          commit: snapshotCommit,
+          commit: immutableCommit,
           base,
           files: Object.fromEntries(files.map((file) => [file.name, { sha256: file.sha256, bytes: file.bytes }])),
         },
       },
     };
-    log(`[section-edge] release ${release.commit.slice(0, 8)}: base gia' puntata, snapshot immutable ${snapshotCommit}`);
+    log(`[section-edge] release ${release.commit.slice(0, 8)}: base gia' puntata, snapshot immutable ${immutableCommit}`);
   }
-  // La stessa release gia' verificata non richiede ne' un nuovo PUT ne' un
-  // nuovo flip: anche un upload byte-identico sarebbe una riscrittura di una
-  // chiave dichiarata immutable.
-  if (previousBase === release.base) {
-    log(`[section-edge] release ${release.commit.slice(0, 8)} gia' servita sotto ${release.base}; nessun PUT`);
+
+  // La stessa release gia' verificata non richiede un nuovo PUT o flip, ma il
+  // purge va sempre ritentato: il precedente tentativo puo' aver flippato il
+  // puntatore e fallito soltanto dopo. Un noop non conferma quindi il lavoro
+  // finche' il purge idempotente non e' riuscito.
+  if (sameKnownRelease) {
+    const servedFiles = declaredFiles(previous.doc);
+    const staleFiles = previous.doc?.release?.previous?.files ?? [];
+    if (!purgeApexUrls(io, release.files, Object.keys(servedFiles ?? {}), staleFiles)) {
+      return stop('purge', 'non confermato (il Worker rilegge il puntatore entro 60 s)', true, true);
+    }
+    log(`[section-edge] release ${release.commit.slice(0, 8)} gia' servita sotto ${previousBase}; purge confermato, nessun PUT`);
     return { code: 0, phase: 'noop', flipped: false };
   }
 
@@ -544,12 +571,7 @@ export async function publishRelease(release, { io, env = process.env, log = con
   if (!flipped) return stopBeforeFlip('flip', `puntatore non caricato: ${EDGE_SECTION_REGISTRY_FILE}`);
 
   // 3. Purge: il puntatore e le URL apex delle sitemap delle due release.
-  const names = new Set([
-    ...release.files.map((f) => f.name).filter((name) => RELEASE_PURGE_FILE_RE.test(name)),
-    ...Object.keys(prevFiles ?? {}).filter((name) => RELEASE_PURGE_FILE_RE.test(name)),
-    SECTION_SITEMAP_INDEX_FILE,
-  ]);
-  const purged = io.purge([`${CDN}/${EDGE_SECTION_REGISTRY_FILE}`, ...[...names].map((name) => `${APEX}/${name}`)]);
+  const purged = purgeApexUrls(io, release.files, Object.keys(prevFiles ?? {}), prevRelease?.previous?.files ?? []);
 
   // 4. Pulizia (best-effort): la release che la precedente aveva sostituito.
   //    Mai la release puntata, mai la precedente.

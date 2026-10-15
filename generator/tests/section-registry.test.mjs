@@ -925,11 +925,27 @@ test('edge: un kill-switch diverso sullo stesso commit crea una base immutable d
   assert.equal(releaseSnapshotCommit(planned), releaseSnapshotCommit(plannedAgain));
   assert.notEqual(releaseSnapshotCommit(planned), releaseSnapshotCommit(plannedDifferent));
 
-  // Lo stesso snapshot gia\' verificato e\' un no-op: nemmeno in questo caso
-  // si esegue un PUT sulla chiave immutable.
+  // Lo stesso snapshot gia\' verificato e\' un no-op: non si esegue un PUT
+  // sulla chiave immutable, ma si ritenta il purge idempotente.
   const same = await publish(withLive(['canton-ti']), { history: [withLive(['canton-ti'])] });
   assert.deepEqual(same.result, { code: 0, phase: 'noop', flipped: false });
-  assert.deepEqual(same.io.ops, []);
+  assert.deepEqual(same.io.ops, ['purge 3']);
+
+  // Anche il retry di uno snapshot gia\' derivato resta sotto la sua base:
+  // `mandatory=false` non puo\' riportarlo alla chiave nominale del commit.
+  changed.io.ops.length = 0;
+  changed.io.purged.length = 0;
+  const snapshotRetry = await publishRelease(planRelease(fakeDist(withLive(['canton-gr']))), {
+    io: changed.io,
+    env: CREDS,
+    log: () => {},
+    bootstrapWaitMs: 0,
+  });
+  assert.deepEqual(snapshotRetry, { code: 0, phase: 'noop', flipped: false });
+  assert.deepEqual(changed.io.ops, ['purge 4']);
+  const retainedBase = pointerOf(changed.io).release.base;
+  assert.match(retainedBase, /^edge\/sections\/_releases\/[0-9a-f]{40}\/$/);
+  assert.ok(changed.io.store.has(`${retainedBase}${CANTON_HUBS_API}`));
 });
 
 test('edge: dopo una collisione sullo stesso commit non torna alla base nominale', async () => {
@@ -1104,6 +1120,45 @@ test('edge: dopo il PUT la release nuova e\' servita intera; un purge fallito es
     'https://frontaliereticino.ch/sitemap-articles-canton-ti.xml',
     'https://frontaliereticino.ch/sitemap-cantons.xml',
   ].sort());
+});
+
+test('edge: un purge fallito viene ritentato prima del noop', async () => {
+  const io = fakeIo();
+  seedPages(io, ['canton-ti']);
+  const firstRelease = planRelease(fakeDist(withLive(['canton-ti'])));
+  io.fail = (op) => op === 'purge';
+  const first = await publishRelease(firstRelease, { io, env: CREDS, log: () => {}, bootstrapWaitMs: 0 });
+  assert.deepEqual([first.code, first.phase, first.flipped], [1, 'purge', true]);
+
+  io.ops.length = 0;
+  io.purged.length = 0;
+  const failedRetry = await publishRelease(planRelease(fakeDist(withLive(['canton-ti']))), { io, env: CREDS, log: () => {}, bootstrapWaitMs: 0 });
+  assert.deepEqual([failedRetry.code, failedRetry.phase, failedRetry.flipped], [1, 'purge', true]);
+  assert.deepEqual(io.ops, ['purge 3']);
+
+  io.fail = () => false;
+  io.ops.length = 0;
+  io.purged.length = 0;
+  const healedRetry = await publishRelease(planRelease(fakeDist(withLive(['canton-ti']))), { io, env: CREDS, log: () => {}, bootstrapWaitMs: 0 });
+  assert.deepEqual(healedRetry, { code: 0, phase: 'noop', flipped: false });
+  assert.deepEqual(io.ops, ['purge 3']);
+});
+
+test('edge: stato unknown con base gia\' usata forza una nuova base di staging', async () => {
+  const io = fakeIo();
+  seedPages(io, ['canton-ti']);
+  const firstRelease = planRelease(fakeDist(withLive(['canton-ti'])));
+  const first = await publishRelease(firstRelease, { io, env: CREDS, log: () => {}, bootstrapWaitMs: 0 });
+  assert.deepEqual(first, { code: 0, phase: 'done', flipped: true });
+  const servedBase = pointerOf(io).release.base;
+  io.store.delete(`${servedBase}${CANTON_HUBS_API}`);
+  io.ops.length = 0;
+  io.fail = (op) => op === 'upload';
+
+  const repair = await publishRelease(planRelease(fakeDist(withLive(['canton-ti']))), { io, env: CREDS, log: () => {}, bootstrapWaitMs: 0 });
+  assert.deepEqual([repair.code, repair.phase, repair.flipped], [1, 'staging', false]);
+  assert.match(io.ops[0], /^put edge\/sections\/_releases\/[0-9a-f]{40}\//);
+  assert.doesNotMatch(io.ops[0], new RegExp(`^put edge/sections/_releases/${COMMIT}/`));
 });
 
 test('edge: pulizia best-effort — mai la release puntata, mai la precedente', async () => {
