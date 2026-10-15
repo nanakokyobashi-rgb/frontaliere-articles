@@ -40,6 +40,16 @@
       "failureCount": 2,
       "requestedAt": "2026-10-15T11:39:57.424Z",
       "lastFailureAt": "2026-10-15T21:08:28.839Z"
+    },
+    {
+      "articleId": "inchiesta-medico-locarnese",
+      "title": "Reati sessuali su pazienti, un medico in carcere",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T21:15:44.304Z",
+      "lastFailureAt": "2026-10-15T21:15:44.304Z"
     }
   ]
 }

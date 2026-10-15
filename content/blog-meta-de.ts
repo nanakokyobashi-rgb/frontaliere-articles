@@ -13254,6 +13254,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.terzetto-sospetto-melano-chiasso.title': 'Schockanrufe bei Senioren, drei Festnahmen im Mendrisiotto',
     'blog.article.terzetto-sospetto-melano-chiasso.excerpt': 'Drei Festnahmen im Mendrisiotto Verdächtige wegen Betrugsfällen mit Schockanrufen Fahrzeug mit tschechischen Kennzeichen in Chiasso gefunden Ein zweiter Betrugsfall am Nachmittag wurde vereitelt',
     'blog.article.terzetto-sospetto-melano-chiasso.imageAlt': 'Chiasso: Kontrollen eines Autos mit tschechischen Kennzeichen nach drei Festnahmen wegen Schockanrufen',
+    'blog.article.inchiesta-medico-locarnese.title': 'Sexualdelikte an Patienten, ein Arzt in Haft',
+    'blog.article.inchiesta-medico-locarnese.excerpt': 'Gegen einen Arzt aus dem Locarnese wird ermittelt Ermittlungen Anfang Juli eingeleitet Mann weiterhin in Untersuchungshaft Weitere mutmassliche Opfer identifiziert Vorspann',
+    'blog.article.inchiesta-medico-locarnese.imageAlt': 'Strasse im Locarnese mit einem öffentlichen Gebäude in sachlicher Szene',
 };
 
 export default blogMetaDe;

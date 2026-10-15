@@ -13256,6 +13256,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.terzetto-sospetto-melano-chiasso.title': 'Chiamate shock agli anziani, tre arresti nel Mendrisiotto',
     'blog.article.terzetto-sospetto-melano-chiasso.excerpt': 'Tre arresti nel Mendrisiotto Sospetti per truffe con chiamate shock Veicolo con targhe ceche trovato a Chiasso Una seconda truffa pomeridiana è stata sventata',
     'blog.article.terzetto-sospetto-melano-chiasso.imageAlt': 'Chiasso: controlli su un veicolo con targhe ceche dopo tre arresti per sospette chiamate shock',
+    'blog.article.inchiesta-medico-locarnese.title': 'Reati sessuali su pazienti, un medico in carcere',
+    'blog.article.inchiesta-medico-locarnese.excerpt': 'Medico del Locarnese sotto inchiesta Accertamenti avviati a inizio luglio Uomo ancora in carcerazione preventiva Identificate altre presunte vittime Capo',
+    'blog.article.inchiesta-medico-locarnese.imageAlt': 'Strada del Locarnese con un edificio pubblico in una scena sobria',
 };
 
 export default blogMetaIt;

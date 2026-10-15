@@ -108960,6 +108960,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-inchiesta-medico-locarnese': {
+    title: 'Reati sessuali su pazienti, un medico in carcere',
+    description: 'Medico del Locarnese sotto inchiesta Accertamenti avviati a inizio luglio Uomo ancora in carcerazione preventiva Identificate altre presunte vittime Capo',
+    keywords: 'frontalieri, ticino, svizzera, italia, reati, sessuali, pazienti, medico',
+    ogTitle: 'Medico del Locarnese in carcerazione preventiva',
+    ogDescription: 'Medico del Locarnese sotto inchiesta Accertamenti avviati a inizio luglio Uomo ancora in carcerazione preventiva Identificate altre presunte vittime Capo',
+    canonicalPath: '/articoli-frontaliere/inchiesta-medico-locarnese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Reati sessuali su pazienti, un medico in carcere",
+      "description": "Medico del Locarnese sotto inchiesta Accertamenti avviati a inizio luglio Uomo ancora in carcerazione preventiva Identificate altre presunte vittime Capo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada del Locarnese con un edificio pubblico in una scena sobria"
+      },
+      "datePublished": "2026-10-15T21:15:43+00:00",
+      "dateModified": "2026-10-15T21:15:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/inchiesta-medico-locarnese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

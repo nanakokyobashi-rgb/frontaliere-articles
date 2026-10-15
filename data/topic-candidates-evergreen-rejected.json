@@ -8299,14 +8299,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/ticino/attualita/1956405/lunedi-riparalo-iniziativa-losone-elettrodomestici": {
-      "section": "svizzera",
-      "ts": 1791924353497
-    },
-    "svizzera::https://www.admin.ch/it/newnsb/lnqig4lveyhy": {
-      "section": "svizzera",
-      "ts": 1791924904458
-    },
     "svizzera::https://www.tio.ch/ticino/attualita/1956527/comitato-pompieri-caserma-nocasa-minuti-essere-bellinzona-tempi-volontari-sant": {
       "section": "svizzera",
       "ts": 1791934688818
@@ -8530,6 +8522,10 @@
     "frontaliere::https://www.tio.ch/ticino/attualita/1956947/supsi-master-bitetti-formazione-business-base-direttore-leandro-nuovo": {
       "section": "frontaliere",
       "ts": 1792091638601
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/15/leggi-notizia/argomenti/territorio/articolo/lavori-sulla-statale-e-battelli-speciali-tra-cannero-e-cannobio-dal-21-ottobre-tagliata-una-quindic.html": {
+      "section": "frontaliere",
+      "ts": 1792098411077
     }
   }
 }

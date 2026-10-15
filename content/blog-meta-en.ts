@@ -13255,6 +13255,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.terzetto-sospetto-melano-chiasso.title': 'Shocking calls to elderly people, three arrests in Mendrisiotto',
     'blog.article.terzetto-sospetto-melano-chiasso.excerpt': 'Three arrests in Mendrisiotto Suspects in scams involving shock calls Vehicle with Czech license plates found in Chiasso A second afternoon scam was foiled',
     'blog.article.terzetto-sospetto-melano-chiasso.imageAlt': 'Chiasso: checks on a car with Czech plates after three arrests over suspected shock calls',
+    'blog.article.inchiesta-medico-locarnese.title': 'Sexual offenses against patients, a doctor in prison',
+    'blog.article.inchiesta-medico-locarnese.excerpt': 'Doctor from the Locarno region under investigation Investigations launched in early July Man still in pretrial detention Other alleged victims identified Chief',
+    'blog.article.inchiesta-medico-locarnese.imageAlt': 'A Locarnese street with a public building in a restrained scene',
 };
 
 export default blogMetaEn;
