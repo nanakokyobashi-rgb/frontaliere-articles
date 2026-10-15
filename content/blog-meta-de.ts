@@ -13248,6 +13248,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.saronno-piccole-stelle-softball.title': 'Saronno, Piccole Stelle ist zurück: Softballturnier der Altersklasse Under 14',
     'blog.article.saronno-piccole-stelle-softball.excerpt': 'Am 17. und 18. Oktober kehrt das Turnier Piccole Stelle zurück Die sechste Ausgabe ist der Kategorie Under 14 vorbehalten Das Turnier erinnert an Enrico Obletter Saronno spielt zu Hause',
     'blog.article.saronno-piccole-stelle-softball.imageAlt': 'Jugend-Softballturnier in Saronno bei der sechsten Ausgabe von Piccole Stelle',
+    'blog.article.lugano-preventivo-2027-moltiplicatori.title': 'Budget 2027 im Minus, aber Steuermultiplikatoren unverändert',
+    'blog.article.lugano-preventivo-2027-moltiplicatori.excerpt': 'Defizit 2027: 14,7 Millionen Franken Geplante Nettoinvestitionen: 97 Millionen Bestätigte Steuermultiplikatoren: 80% und 85% Akteur → Città di Lugano Entscheidung →',
+    'blog.article.lugano-preventivo-2027-moltiplicatori.imageAlt': 'Panoramablick auf das Stadtzentrum von Lugano mit dem See im Hintergrund bei Tageslicht.',
 };
 
 export default blogMetaDe;

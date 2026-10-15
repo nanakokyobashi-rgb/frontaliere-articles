@@ -13250,6 +13250,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.saronno-piccole-stelle-softball.title': 'Saronno, torna Piccole Stelle: torneo di softball Under 14',
     'blog.article.saronno-piccole-stelle-softball.excerpt': 'Il 17 e 18 ottobre torna il torneo Piccole Stelle La sesta edizione è riservata alla categoria Under 14 Il torneo ricorda Enrico Obletter Saronno gioca in casa',
     'blog.article.saronno-piccole-stelle-softball.imageAlt': 'Torneo di softball giovanile sul campo di Saronno per la sesta edizione di Piccole Stelle',
+    'blog.article.lugano-preventivo-2027-moltiplicatori.title': 'Preventivo 2027 in rosso ma moltiplicatori invariati',
+    'blog.article.lugano-preventivo-2027-moltiplicatori.excerpt': 'Disavanzo 2027: 14,7 milioni di franchi Investimenti netti previsti: 97 milioni Moltiplicatori confermati: 80% e 85% Soggetto → Città di Lugano Decisione →',
+    'blog.article.lugano-preventivo-2027-moltiplicatori.imageAlt': 'Vista panoramica del centro di Lugano con il lago sullo sfondo, in luce diurna.',
 };
 
 export default blogMetaIt;

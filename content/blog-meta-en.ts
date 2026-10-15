@@ -13249,6 +13249,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.saronno-piccole-stelle-softball.title': 'Saronno, Piccole Stelle returns: Under 14 softball tournament',
     'blog.article.saronno-piccole-stelle-softball.excerpt': 'On October 17 and 18, the Piccole Stelle tournament returns The sixth edition is reserved for the Under 14 category The tournament commemorates Enrico Obletter Saronno plays at home',
     'blog.article.saronno-piccole-stelle-softball.imageAlt': 'Youth softball tournament in Saronno for the sixth edition of Piccole Stelle',
+    'blog.article.lugano-preventivo-2027-moltiplicatori.title': '2027 budget in the red but multipliers unchanged',
+    'blog.article.lugano-preventivo-2027-moltiplicatori.excerpt': '2027 deficit: 14,7 million francs Net planned investments: 97 million Confirmed multipliers: 80% and 85% Subject → City of Lugano Decision →',
+    'blog.article.lugano-preventivo-2027-moltiplicatori.imageAlt': 'Panoramic view of Lugano city centre with the lake in the background, daylight.',
 };
 
 export default blogMetaEn;

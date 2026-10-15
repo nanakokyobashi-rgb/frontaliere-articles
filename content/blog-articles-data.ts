@@ -44666,6 +44666,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lugano-preventivo-2027-moltiplicatori',
+ category: 'fiscale',
+ date: '2026-10-15T18:19:31.326Z',
+ image: '/images/blog/article-lugano-preventivo-2027-moltiplicatori.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

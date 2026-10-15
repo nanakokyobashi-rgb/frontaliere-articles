@@ -1,9 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/sciopero-in-italia-i-treni-tilo-si-fermano-al-confine-441974": {
-    "articleId": "sciopero-treni-tilo-settembre-2026",
-    "ts": "2026-09-04T13:29:16.254Z",
-    "keyForm": 2
-  },
   "https://comozero.it/economia/export-in-lombardia-i-dati-delle-province-como-soffre-e-la-svizzera-si-conferma-una-salvezza": {
     "articleId": "como-export-svizzera-2026",
     "ts": "2026-09-04T13:53:14.558Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/piccole-stelle-a-saronno-la-sesta-edizione-del-torneo-di-softball-giovanile-dedicato-a-enrico-obletter/2709025": {
     "articleId": "saronno-piccole-stelle-softball",
     "ts": "2026-10-15T17:55:49.716Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/cronaca/1956967/preventivo-2027-in-rosso-ma-moltiplicatori-invariati": {
+    "articleId": "lugano-preventivo-2027-moltiplicatori",
+    "ts": "2026-10-15T18:19:31.795Z",
     "keyForm": 2
   }
 }
