@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 527,
+  "assetCount": 528,
   "assets": [
     {
       "schema": 1,
@@ -20846,6 +20846,49 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Original generic synthetic editorial illustration of a Swiss administrative building with documents and a pen; no readable text, logos, people, or event-specific cues."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-rotte-greggio-kurdistan-lugano",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "79ddcf28728ce1ce8d099a634977ae59d55385eb11a37d40f94a4da951b27434",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "f511a44f835cc6588d2eef14eaff0f4e698508973a3d0926abb8c9ba758e3796",
+      "bytes": 87614,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-15T05:08:29.421Z",
+      "verifiedAt": "2026-10-15T05:08:36.175Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-rotte-greggio-kurdistan-lugano.webp",
+      "area": "Svizzera",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Original generic synthetic editorial illustration matching the petrol route/Lugano subject; no readable text, logos, or identifiable people."
       }
     }
   ]
