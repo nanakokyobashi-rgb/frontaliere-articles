@@ -27881,6 +27881,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'tassi-conti-3a-ottobre-2024',
+    category: 'pensione',
+    date: '2026-10-15T08:51:22.134Z',
+    image: '/images/blog/article-tassi-conti-3a-ottobre-2024.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
