@@ -27962,6 +27962,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'niederscherli-posti-letto',
+    category: 'novita',
+    date: '2026-10-15T16:30:26.690Z',
+    image: '/images/blog/article-niederscherli-posti-letto.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

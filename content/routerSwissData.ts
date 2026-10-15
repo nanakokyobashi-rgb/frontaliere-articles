@@ -2813,6 +2813,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'costi-cambiamento-climatico-svizzera-2060': { it: 'costi-cambiamento-climatico-svizzera-2060', en: 'climate-change-costs-switzerland-2060', de: 'klimawandel-kosten-schweiz-2060', fr: 'couts-changement-climatique-suisse-2060' },
  'referendum-aels-malaysia': { it: 'referendum-aels-malaysia', en: 'aels-malaysia-referendum', de: 'aels-malaysia-referendum', fr: 'referendum-aels-malaisie' },
  'physioswiss-tariffe-fisioterapia-ticino': { it: 'physioswiss-tariffe-fisioterapia-ticino', en: 'physioswiss-physiotherapy-tariffs-ticino', de: 'physioswiss-physiotherapie-tarife-tessin', fr: 'physioswiss-tarifs-physiotherapie-tessin' },
+ 'niederscherli-posti-letto': { it: 'niederscherli-posti-letto', en: 'niederscherli-asylum-beds', de: 'niederscherli-asyl-betten', fr: 'niederscherli-lits-asile' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

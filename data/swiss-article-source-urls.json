@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1949233/aaaa-giovani-ticino-giudici-dati": {
-    "articleId": "giovani-ticino-demografia-ustat",
-    "ts": "2026-09-12T04:19:56.914Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1949745/banda-berna-iniziativa-legge-storni": {
     "articleId": "banda-larga-regioni-periferiche-berna",
     "ts": "2026-09-13T00:07:17.658Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/cronaca/1957007/physioswiss-fisioterapia-ticino-associazione-tariffe": {
     "articleId": "physioswiss-tariffe-fisioterapia-ticino",
     "ts": "2026-10-15T15:29:03.092Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/y-pc31bf0r-j": {
+    "articleId": "niederscherli-posti-letto",
+    "ts": "2026-10-15T16:30:27.082Z",
     "keyForm": 2
   }
 }

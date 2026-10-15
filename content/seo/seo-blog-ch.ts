@@ -105716,6 +105716,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-niederscherli-posti-letto': {
+    title: 'SEM riapre la struttura di Niederscherli: 120 posti letto',
+    description: 'La SEM riapre Niederscherli (BE) a metà novembre. La struttura dispone di 120 posti letto. Le nuove domande crescono leggermente per motivi stagionali',
+    keywords: 'frontalieri, ticino, svizzera, italia, riapre, struttura, niederscherli, posti',
+    ogTitle: 'Niederscherli riapre: 120 posti letto per l\'asilo',
+    ogDescription: 'La SEM riapre Niederscherli (BE) a metà novembre.',
+    canonicalPath: '/articoli-svizzera/niederscherli-posti-letto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "SEM riapre la struttura di Niederscherli: 120 posti letto",
+      "description": "La SEM riapre Niederscherli (BE) a metà novembre. La struttura dispone di 120 posti letto. Le nuove domande crescono leggermente per motivi stagionali",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-niederscherli-posti-letto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Struttura svizzera di protezione civile in un'area verde"
+      },
+      "datePublished": "2026-10-15T16:30:26+00:00",
+      "dateModified": "2026-10-15T16:30:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/niederscherli-posti-letto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

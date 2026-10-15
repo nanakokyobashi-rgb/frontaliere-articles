@@ -8372,6 +8372,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.physioswiss-tariffe-fisioterapia-ticino.title': 'Physioswiss fordert eine Erhöhung der Physiotherapietarife um 30%',
     'blog.article.physioswiss-tariffe-fisioterapia-ticino.excerpt': 'Physioswiss übergibt 4\'000 Unterschriften im Tessin Forderung: mindestens 30% mehr bei den Taxpunktwerten Die Mobilisierung umfasst alle 26 Kantone Übergabe',
     'blog.article.physioswiss-tariffe-fisioterapia-ticino.imageAlt': 'Staatskanzlei in Bellinzona, Ort der Übergabe der Physioswiss-Petition',
+    'blog.article.niederscherli-posti-letto.title': 'SEM nimmt die Unterkunft in Niederscherli wieder in Betrieb: 120 Betten',
+    'blog.article.niederscherli-posti-letto.excerpt': 'Die SEM nimmt Niederscherli (BE) Mitte November wieder in Betrieb.',
+    'blog.article.niederscherli-posti-letto.imageAlt': 'Schweizer Zivilschutzanlage in einer grünen Vorstadtlandschaft',
 };
 
 export default blogMetaChDe;
