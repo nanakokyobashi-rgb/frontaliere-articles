@@ -54,13 +54,12 @@ test('lo stesso URL scartato in due sezioni resta ricordato per entrambe', () =>
 
 test('le funzioni del tracker evergreen non perdono topicGateUrls', () => {
   const t = recordTopicGateAbortedUrl({ keywords: ['kw'], strikes: { kw2: 1 } }, URL_KEY, 'frontaliere', NOW);
-  assert.deepEqual(t.keywords, ['kw']);
-  assert.deepEqual(t.strikes, { kw2: 1 });
+  assert.deepEqual(t.legacy.map((entry) => entry.keyword), ['kw', 'kw2']);
   const appended = appendEvergreenRejected(t, 'kw3');
   const struck = strikeEvergreenKeyword(appended, 'kw4');
   assert.equal(isTopicGateAbortedUrl(struck, URL_KEY, 'frontaliere', NOW), true);
-  assert.deepEqual(struck.keywords, ['kw', 'kw3']);
-  assert.equal(struck.strikes.kw4, 1);
+  assert.deepEqual(struck.legacy.filter((entry) => entry.kind === 'ban').map((entry) => entry.keyword), ['kw', 'kw3']);
+  assert.equal(struck.legacy.find((entry) => entry.kind === 'strike' && entry.keyword === 'kw4').count, 1);
 });
 
 test('persist e load conservano topicGateUrls, e un file senza il campo si carica ancora', () => {
@@ -72,9 +71,28 @@ test('persist e load conservano topicGateUrls, e un file senza il campo si caric
     const loaded = loadEvergreenRejectedTracker({ path: file });
     assert.equal(isTopicGateAbortedUrl(loaded, URL_KEY, 'svizzera', NOW + 1), true);
     fs.writeFileSync(file, JSON.stringify({ keywords: ['a'], strikes: { b: 2 } }));
-    assert.deepEqual(loadEvergreenRejectedTracker({ path: file }), { keywords: ['a'], strikes: { b: 2 }, topicGateUrls: {} });
+    const migrated = loadEvergreenRejectedTracker({ path: file });
+    assert.equal(migrated.schemaVersion, 2);
+    assert.deepEqual(migrated.legacy.map((entry) => entry.keyword), ['a', 'b']);
     fs.writeFileSync(file, JSON.stringify({ keywords: [], topicGateUrls: { x: { section: 'frontaliere' }, y: 'rotto' } }));
     assert.deepEqual(loadEvergreenRejectedTracker({ path: file }).topicGateUrls, {}, 'voci malformate ignorate');
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('un ledger corrotto resta fail-closed anche quando si registra un topic-gate', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'topic-gate-invalid-'));
+  try {
+    const file = path.join(dir, 'tracker.json');
+    const original = '{"schemaVersion":2,"bans":[null]}\n';
+    fs.writeFileSync(file, original);
+    const loaded = loadEvergreenRejectedTracker({ path: file });
+    assert.equal(loaded.invalid, true);
+    const updated = recordTopicGateAbortedUrl(loaded, URL_KEY, 'frontaliere', NOW);
+    assert.equal(updated.invalid, true);
+    assert.equal(persistEvergreenRejectedTracker(updated, { path: file }), false);
+    assert.equal(fs.readFileSync(file, 'utf8'), original, 'il memo non deve sovrascrivere il ledger corrotto');
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }
@@ -124,6 +142,7 @@ test('create-article controlla i duplicati prima del fact-check, oltre che dopo'
 test('reset-evergreen-strikes non cancella topicGateUrls', () => {
   const t = recordTopicGateAbortedUrl({ keywords: ['kw'], strikes: { 'kw-pool': 3 } }, URL_KEY, 'svizzera', NOW);
   const { ledger } = clearStrikesForPool(t, ['kw-pool']);
-  assert.deepEqual(ledger.strikes, {});
+  assert.deepEqual(ledger.strikes, []);
+  assert.deepEqual(ledger.legacy.map((entry) => entry.keyword), ['kw']);
   assert.equal(isTopicGateAbortedUrl(ledger, URL_KEY, 'svizzera', NOW + 1), true);
 });
