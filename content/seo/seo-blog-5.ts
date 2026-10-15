@@ -107960,15 +107960,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Gli ASVZ Blackbirds trionfano al Champions Bowl 2026, conquistando il primo storico titolo europeo nel flag football per una squadra svizzera.",
       "image": {
         "@type": "ImageObject",
-        "acquireLicensePage": "https://drive.google.com/drive/folders/1nR9HcOlLeFGJ0_KfNVwsFfuARTujcNup?usp=sharing",
-        "copyrightNotice": "© Football Flag / Swiss American Football Verband (SAFV)",
-        "license": "Uso editoriale con attribuzione a Noa Monn",
-        "creator": { "@type": "Person", "name": "Noa Monn" },
-        "creditText": "Noa Monn",
-        "url": `${BASE_URL}/images/blog/asvz-blackbirds-champions-bowl-2026.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Immagine editoriale relativa a: Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T13:35:22+00:00",
       "dateModified": "2026-10-14T13:35:22+00:00",

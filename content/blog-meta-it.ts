@@ -13178,7 +13178,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.ispezione-edile-lurate.imageAlt': 'Cantiere edile a Lurate Caccivio sottoposto a controlli e sospeso.',
     'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.title': 'Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football',
     'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.excerpt': 'Gli ASVZ Blackbirds trionfano al Champions Bowl 2026, conquistando il primo storico titolo europeo nel flag football per una squadra svizzera.',
-    'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.imageAlt': 'Immagine editoriale relativa a: Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football',
+    'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.fibra-ottica-145-comuni-como.title': 'Finitura lavori fibra ottica in 145 comuni di Como, 27,9 mln €',
     'blog.article.fibra-ottica-145-comuni-como.excerpt': 'Rete in ultimazione in 145 comuni comaschi Oltre 27,9 milioni di fondi pubblici a Como Adesione alla banda ultra-larga: 23% contro 17% Piano Italia 1 Giga',
     'blog.article.fibra-ottica-145-comuni-como.imageAlt': 'Installazione di cavo in fibra ottica in un comune della provincia di Como, vista ravvicinata e dettagliata.',

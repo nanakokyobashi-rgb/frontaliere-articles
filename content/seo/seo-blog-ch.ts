@@ -104992,10 +104992,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-zurigo-targhe-immatricolazione-guida.webp`,
+        "url": `${BASE_URL}/images/blog/article-berna-veicoli-procedura-guida.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Ufficio della circolazione nel Cantone di Berna"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-15T02:50:14+00:00",
       "dateModified": "2026-10-15T02:50:14+00:00",
@@ -105031,10 +105031,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-festivi-berna-calendario-guida.webp`,
+        "url": `${BASE_URL}/images/blog/article-lucerna-festivi-calendario-verifica.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Paese di Lucerna con edifici amministrativi e persone che consultano orari e calendari festivi"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-15T03:21:39+00:00",
       "dateModified": "2026-10-15T03:21:39+00:00",
@@ -105143,15 +105143,17 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Scopri come verificare livello competente, requisiti, scadenze e importi per corsi di lingua e contributi alla formazione continua nel Cantone di Berna",
       "image": {
         "@type": "ImageObject",
-        "acquireLicensePage": "",
-        "copyrightNotice": "Generated media; provider terms apply.",
-        "license": "",
-        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
-        "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-contributi-formazione-berna-requisiti.webp`,
+        "acquireLicensePage": "https://www.pexels.com/photo/scenic-view-of-bern-s-historical-cityscape-36550236/",
+        "copyrightNotice": "© Beat Bieri",
+        "license": "https://www.pexels.com/license/",
+        "creator": {"@type":"Person","@id":"https://www.pexels.com/@beat-bieri-2159265755","name":"Beat Bieri","url":"https://www.pexels.com/@beat-bieri-2159265755"},
+        "creditText": "Beat Bieri / Pexels",
+        "isBasedOn": "https://www.pexels.com/photo/scenic-view-of-bern-s-historical-cityscape-36550236/",
+        "description": "Resized derivative of the licensed source.",
+        "url": `${BASE_URL}/images/blog/article-integrazione-lingua-berna-contributi.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Studente adulto in corso di lingua a Berna con libri e bandiera svizzera"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-15T04:28:18+00:00",
       "dateModified": "2026-10-15T04:28:18+00:00",
@@ -105187,10 +105189,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-negozi-berna-orari-festivi-regole.webp`,
+        "url": `${BASE_URL}/images/blog/article-regole-orari-negozi-lucerna.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Negozi in una via di Lucerna durante il giorno"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-15T04:50:01+00:00",
       "dateModified": "2026-10-15T04:50:01+00:00",

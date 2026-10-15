@@ -13177,7 +13177,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.ispezione-edile-lurate.imageAlt': 'Building site in Lurate Caccivio inspected and suspended after safety violations.',
     'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.title': 'ASVZ Blackbirds win Champions Bowl: first Swiss European title in flag football',
     'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.excerpt': 'The ASVZ Blackbirds triumph at the 2026 Champions Bowl, winning the first historic European flag football title for a Swiss team.',
-    'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.imageAlt': 'Editorial image related to: Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football',
+    'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.imageAlt': 'Illustration generated for this article',
     'blog.article.fibra-ottica-145-comuni-como.title': 'Completion of fiber-optic work in 145 municipalities in Como, 27,9 mln €',
     'blog.article.fibra-ottica-145-comuni-como.excerpt': 'Network nearing completion in 145 municipalities in the Como area More than 27,9 million in public funds for Como Adoption of ultra-broadband: 23% versus 17% Piano Italia 1 Giga',
     'blog.article.fibra-ottica-145-comuni-como.imageAlt': 'Fiber optic cable installation in a Como province town, close-up and detailed view.',

@@ -13176,7 +13176,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.ispezione-edile-lurate.imageAlt': 'Baustelle in Lurate Caccivio nach Sicherheitskontrollen stillgelegt.',
     'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.title': 'ASVZ Blackbirds gewinnen den Champions Bowl',
     'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.excerpt': 'Die ASVZ Blackbirds triumphieren beim Champions Bowl 2026 und erobern den ersten historischen europäischen Flaggenfußball-Titel für ein Schweizer Team.',
-    'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.imageAlt': 'Redaktionelles Bild zu: Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football',
+    'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.fibra-ottica-145-comuni-como.title': 'Glasfaserarbeiten: 145 Gemeinden Como fertig, 27,9 Mio €',
     'blog.article.fibra-ottica-145-comuni-como.excerpt': 'Netz in 145 Gemeinden der Provinz Como kurz vor der Fertigstellung Über 27,9 Millionen an öffentlichen Mitteln für Como Anschlussquote beim Ultrabreitband: 23% gegenüber 17% Piano Italia 1 Giga',
     'blog.article.fibra-ottica-145-comuni-como.imageAlt': 'Glasfaserkabelinstallation in einer Gemeinde der Provinz Como, Nahaufnahme mit vielen Details.',

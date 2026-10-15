@@ -44423,7 +44423,7 @@ const RAW_ARTICLES = [
  id: 'gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel',
  category: 'novita',
  date: '2026-10-14T13:35:22.725Z',
- image: '/images/blog/asvz-blackbirds-champions-bowl-2026.webp',
+ image: '/images/blog/article-gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.webp',
  hasCalculator: false,
  articleType: 'news',
  authorSlug: 'redazione',

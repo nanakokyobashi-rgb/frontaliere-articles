@@ -13179,7 +13179,7 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.ispezione-edile-lurate.imageAlt': 'Chantier à Lurate Caccivio contrôlé puis suspendu pour des irrégularités.',
     'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.title': 'ASVZ Blackbirds: 1er titre européen en flag football',
     'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.excerpt': 'Les ASVZ Blackbirds triomphent au Champions Bowl 2026, remportant le premier titre européen historique dans le football flag pour une équipe suisse.',
-    'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.imageAlt': 'Image éditoriale relative à: Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football',
+    'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.imageAlt': 'Illustration générée pour cet article',
     'blog.article.fibra-ottica-145-comuni-como.title': 'Fibre optique : fin travaux 145 communes du Como, 27,9 M€',
     'blog.article.fibra-ottica-145-comuni-como.excerpt': 'Réseau en cours d\'achèvement dans 145 municipalités de Comas Plus de 27,9 millions de fonds publics à Como Adhésion à la bande ultra-large : 23% contre 17% Plan Italie 1 Giga',
     'blog.article.fibra-ottica-145-comuni-como.imageAlt': 'Installation de câble fibre optique dans une commune de la province de Côme, vue détaillée. (Como)',
