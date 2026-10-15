@@ -1,29 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-migros-nuovo-contratto-lavoro-2027.webp",
-      "sha256": "ebf8f7fb0af29c0394bdf521ebcc85d3f8583f2ea475d3b9a055f2bb88d81456"
-    },
-    {
-      "path": "public/images/blog/article-operatori-emergenze-valli.webp",
-      "sha256": "bb9b1ea64b21942418854352fb73710702aa6e913151594a4e8c3b0419f477c3"
-    },
-    {
-      "path": "public/images/blog/article-orari-apertura-lucerna-festivi.webp",
-      "sha256": "a1dda1546b2b7b717b17e62516d028f8ec7bb135a1f4a1b677394304dd4c601a"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-migros-nuovo-contratto-lavoro-2027-480w.webp",
-      "sha256": "1c37fb9e8a9296d0983659479d9fb978b6774b89b4b326bacea32fcdc0bc8db1"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-operatori-emergenze-valli-480w.webp",
-      "sha256": "9dbaeec69763d377dca1467190c0b8a64064d9b79b6519c1770e1a0d42cbe952"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-orari-apertura-lucerna-festivi-480w.webp",
-      "sha256": "0e17aa00f779819e6e145b9bb0eb69b0ece4fa167bde0e0c9a5a52ec54bd1625"
-    }
-  ]
+  "items": []
 }
