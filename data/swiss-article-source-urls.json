@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/svizzeri-spendono-di-pi%c3%b9%2c-ma-la-crescita-rallenta/92044743": {
-    "articleId": "svizzeri-spesa-crescita-rallenta",
-    "ts": "2026-09-12T02:13:17.714Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1949372/svizzera-siccita-acqua-esperti-acque": {
     "articleId": "svizzera-siccita-faldeg-acque",
     "ts": "2026-09-12T02:50:23.430Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/kjl3fzqwxixv": {
     "articleId": "scambio-informazioni-conti-finanziari-2026",
     "ts": "2026-10-15T12:42:46.793Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4165225": {
+    "articleId": "costi-cambiamento-climatico-svizzera-2060",
+    "ts": "2026-10-15T13:53:49.781Z",
     "keyForm": 2
   }
 }

@@ -27932,6 +27932,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'costi-cambiamento-climatico-svizzera-2060',
+    category: 'novita',
+    date: '2026-10-15T13:53:49.445Z',
+    image: '/images/blog/article-costi-cambiamento-climatico-svizzera-2060.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
