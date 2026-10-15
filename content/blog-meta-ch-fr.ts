@@ -8345,6 +8345,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.premio-economia-stabilizzazione.title': 'Nobel d’économie 2026 : Hall et Woodford récompensés',
     'blog.article.premio-economia-stabilizzazione.excerpt': 'Robert E. Hall et Michael Woodford remportent le Nobel 2026 Les deux enseignent à Stanford et à la Columbia University Les études portent sur la stabilisation',
     'blog.article.premio-economia-stabilizzazione.imageAlt': 'Prix Nobel d’économie 2026 pour la stabilisation macroéconomique',
+    'blog.article.migros-nuovo-contratto-lavoro-2027.title': 'Migros : nouveau contrat avec 41 heures et des réductions de 10 %',
+    'blog.article.migros-nuovo-contratto-lavoro-2027.excerpt': 'Nouveau L-GAV Migros pour la période 2027-2031 De 43 à 41 heures avec salaire inchangé pour de nombreux employés 10 % de réduction sur les achats à partir du 1er janvier 2027 Autres',
+    'blog.article.migros-nuovo-contratto-lavoro-2027.imageAlt': 'Entrée d\'un supermarché Migros en Suisse',
 };
 
 export default blogMetaChFr;

@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-premio-economia-stabilizzazione.webp",
-      "sha256": "82daa254c43747a659656a7a73ee8d0a668cac060714b9f546db2fb1f00e7e2c"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-premio-economia-stabilizzazione-480w.webp",
-      "sha256": "2f6eae9b7960ce38450bdfd625432a390ad7fe378236ed02d2b036336c0343d8"
-    }
-  ]
+  "items": []
 }

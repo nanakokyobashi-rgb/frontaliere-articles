@@ -182,7 +182,7 @@
     {
       "path": "scripts/ci/auto-merge-eval.mjs",
       "mode": "adapted",
-      "reason": "Divergenza a DUE direzioni, nessuna delle quali e' copiabile — per questo non e' piu' `identical` (riconciliazione di nanako#318 punto 2). QUI in piu': il gate 4 `generator-ci` (#242/#252), che esige il check-run del generatore sulle PR che toccano generator/engine/host — sul sito quel workflow non esiste, portarcelo bloccherebbe ogni PR in attesa di un check che nessuno emette. SUL SITO in piu': l'osservazione #5552 (`lib/checkRunObservation.mjs` + `lib/prComments.mjs`, che qui non esistono), che elenca i check-run completati sulla HEAD senza bloccare. Copiare in una delle due direzioni romperebbe l'altro lato, quindi restano diversi apposta; la sorveglianza sulla baseline resta accesa e intercetta comunque una modifica futura su uno dei due lati.",
+      "reason": "Adattamento riconfermato il 2026-10-15 (nanako#2162; sito #8862, #8884, #8912, #8913, #8919, #9030, #9339, #9406). Nel corpus gli export sono consumati da `review-gate.mjs`, `generator-ci-gate.mjs` e `pr-contribution-fingerprint.mjs`; il ruleset richiede `tests (node --test)` e il gate `generator-ci` path-scoped (#242/#252). La review è legata allo snapshot HEAD+body e il carry-forward resta ammesso solo a fingerprint del contributo invariato; la selezione generation-aware è nel `lib/vitestCheck.mjs` del corpus. Sul sito l'evaluator usa review exact-HEAD, rilettura finale di metadata/file, `automation-risk-policy` e osservazione non bloccante dei check (`lib/checkRunObservation.mjs`). Sono consumer e dipendenze diversi: copiare le modifiche del sito rimuoverebbe la policy di carry-forward del corpus o introdurrebbe helper/policy site-only, mentre il gate `generator-ci` non esiste sul sito. Le decisioni restano specifiche di questo path; nessun altro path del manifest è riallineato da questa voce.",
       "baseline": {
         "site": "840c008714ef481c",
         "corpus": "208d0da51eb787c5",
@@ -314,12 +314,11 @@
       "path": "scripts/ci/check-blog-body-syntax.mjs",
       "sitePath": "tests/blog-body-typescript-syntax.test.ts",
       "mode": "adapted",
-      "reason": "Preflight di sintassi TypeScript sui corpi. Gemello di tests/blog-body-typescript-syntax.test.ts del sito: stessa validazione (esbuild transform, loader ts, solo sintassi), adattata al percorso di PUBBLICAZIONE invece che alle PR — la' e' un test su pull_request, qui gli articoli atterrano per push diretto su main, quindi un gate sulle PR non ne vedrebbe mai uno. Registrato 'adapted' e non 'corpus-only': il file sul sito ESISTE, e dichiararlo assente renderebbe loop-drift-check cieco proprio alla divergenza fra i due — il caso peggiore descritto in CLAUDE.md.",
+      "reason": "Preflight syntax-only dei body via esbuild. Gemello di tests/blog-body-typescript-syntax.test.ts del sito: usa lo stesso esbuild.transform, ma le responsabilita' operative divergono. Qui il controllo e' preflight della pubblicazione da push diretto a main, dopo host/cantonSectionsBootstrap.mjs; in scan changed riceve i path via PREFLIGHT_CHANGED_FILES_FILE per non superare ARG_MAX con migliaia di path. Il gemello del sito e' un test Vitest su pull_request che scandisce il set completo e non consuma una lista di changed-path. `adapted` e' intenzionale: il sito ha il gemello, ma non questo trasporto publisher-specifico.",
       "baseline": {
         "site": "d1fc5b37f2f0c55d",
-        "corpus": "fc74a2c3e737fe83",
-        "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T22:32:17.150Z"
+        "corpus": "e5f830779f7e41ba",
+        "alignedAt": "2026-10-15"
       }
     },
     {
@@ -595,7 +594,7 @@
     {
       "path": "scripts/ci/content-gates-main.mjs",
       "mode": "corpus-only",
-      "reason": "Fa girare su `main` il sottoinsieme MISURATO dei gate che leggono `content/**`, e su offender apre UNA issue deduplicata sul titolo invece di rendere rossa una run. Non ha gemello sul sito e non puo' averlo: il difetto che chiude e' la scrittura diretta su `main` dei produttori di QUESTO repo (`generate-article.yml` e i suoi fratelli fanno `git push HEAD:main` — 88 articoli nelle ultime 24h), mentre sul sito il contenuto non e' versionato e nessun bot scrive su `main`. Anche la lista `CONTENT_GATES` e' topologia locale: sono file sotto `generator/tests/`, cartella che sul sito non esiste. Non e' `corpus-only-pending` — non c'e' niente da portare di la'.",
+      "reason": "Fa girare su `main` il sottoinsieme MISURATO dei gate che leggono `content/**`, e su offender apre UNA issue deduplicata sul titolo invece di rendere rossa una run. Non ha gemello sul sito e non puo' averlo: il difetto che chiude e' la scrittura diretta su `main` dei produttori di QUESTO repo (`generate-article.yml` e i suoi fratelli fanno `git push HEAD:main` — 88 articoli nelle ultime 24h), mentre sul sito il contenuto non e' versionato e nessun bot scrive su `main`. Anche la lista `CONTENT_GATES` e' topologia locale: sono file sotto `generator/tests/`, cartella che sul sito non esiste. La guardia ESM/main confronta il realpath per mantenere attiva la CLI anche via symlink; `generator/tests/content-gates-main-entrypoint.test.mjs` ne verifica offline l'import inerte e l'avvio. Non e' `corpus-only-pending` — non c'e' niente da portare di la'.",
       "baseline": {
         "site": null,
         "corpus": "23f73267fded62af",

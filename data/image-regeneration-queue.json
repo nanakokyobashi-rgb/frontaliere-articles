@@ -110,6 +110,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-15T05:37:41.003Z",
       "lastFailureAt": "2026-10-15T05:37:41.003Z"
+    },
+    {
+      "articleId": "migros-nuovo-contratto-lavoro-2027",
+      "title": "Migros: nuovo contratto con 41 ore e sconti del 10%",
+      "fallbackImage": "/images/blog/article-salario-minimo-ginevra-2027.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T06:55:41.776Z",
+      "lastFailureAt": "2026-10-15T06:55:41.776Z"
     }
   ]
 }

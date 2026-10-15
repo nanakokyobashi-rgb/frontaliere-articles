@@ -105363,6 +105363,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-migros-nuovo-contratto-lavoro-2027': {
+    title: 'Migros: nuovo contratto con 41 ore e sconti del 10%',
+    description: 'Nuovo L-GAV Migros per il periodo 2027-2031 Da 43 a 41 ore con salario invariato per molti dipendenti 10% di sconto sugli acquisti dal 1 gennaio 2027 Altri',
+    keywords: 'frontalieri, ticino, svizzera, italia, migros, nuovo, contratto, sconti',
+    ogTitle: 'Migros: 41 ore settimanali e sconti 10% dal 2027',
+    ogDescription: 'Nuovo L-GAV Migros per il periodo 2027-2031 Da 43 a 41 ore con salario invariato per molti dipendenti 10% di sconto sugli acquisti dal 1 gennaio 2027 Altri',
+    canonicalPath: '/articoli-svizzera/migros-nuovo-contratto-lavoro-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Migros: nuovo contratto con 41 ore e sconti del 10%",
+      "description": "Nuovo L-GAV Migros per il periodo 2027-2031 Da 43 a 41 ore con salario invariato per molti dipendenti 10% di sconto sugli acquisti dal 1 gennaio 2027 Altri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-salario-minimo-ginevra-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ingresso di un supermercato Migros in Svizzera"
+      },
+      "datePublished": "2026-10-15T06:55:41+00:00",
+      "dateModified": "2026-10-15T06:55:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/migros-nuovo-contratto-lavoro-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
