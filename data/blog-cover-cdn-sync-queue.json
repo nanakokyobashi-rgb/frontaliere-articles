@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-l-gav-2027-orario-salario.webp",
+      "sha256": "f6de608dbb0fd97371dec5d0a6e3022715d20474b387327de69dd49ff8b61973"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-l-gav-2027-orario-salario-480w.webp",
+      "sha256": "e076276bbb31810cd10bab923a095a1278224e7e3b19459a207957bdde26fc37"
+    }
+  ]
 }
