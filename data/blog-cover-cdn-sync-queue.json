@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-ata-critica-progetto-a2-mendrisio.webp",
-      "sha256": "5f4d3d41782283c4b4f4f3a21aacffe9d06d2fd630d94214749d317f4cca57d3"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-ata-critica-progetto-a2-mendrisio-480w.webp",
-      "sha256": "e20733049ada7b06349d10075c3cd62b761c35f00ccce87602c76b72bacb404b"
-    }
-  ]
+  "items": []
 }
