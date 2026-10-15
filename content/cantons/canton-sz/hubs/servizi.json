@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T20:08:23.890Z",
-  "contentHash": "91566f890d42cf853814bc33cf18fe9996de7571f3e7bd2e5dcad8f37f4a55c2",
+  "updatedAt": "2026-10-15T01:53:38.743Z",
+  "contentHash": "eaa4c1dc9d4d4bc222bcb82afc7a4d06964253639c160fc321b83410822a841a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-14T11:56:34.678Z",
+      "updatedAt": "2026-10-14T17:14:18.595Z",
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-14T13:49:58.818Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T10:37:16.619Z",
+      "updatedAt": "2026-10-14T16:01:15.871Z",
       "keyFacts": 0
     }
   ],
@@ -92,21 +87,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-14T11:56:34.678Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Schwyz",
-              "value": "19 °C",
-              "detail": "oggi da 11 a 19 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-14T13:49:58.818Z"
+          "updatedAt": "2026-10-14T17:14:18.595Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -144,7 +125,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -223,7 +204,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:53:38.743Z"
     },
     "en": {
       "canton": "SZ",
@@ -288,21 +269,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-14T11:56:34.678Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Schwyz",
-              "value": "19 °C",
-              "detail": "today from 11 to 19 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-14T13:49:58.818Z"
+          "updatedAt": "2026-10-14T17:14:18.595Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -340,7 +307,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -415,7 +382,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:53:38.743Z"
     },
     "de": {
       "canton": "SZ",
@@ -480,21 +447,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-14T11:56:34.678Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Schwyz",
-              "value": "19 °C",
-              "detail": "heute 11 bis 19 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-14T13:49:58.818Z"
+          "updatedAt": "2026-10-14T17:14:18.595Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -532,7 +485,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -607,7 +560,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:53:38.743Z"
     },
     "fr": {
       "canton": "SZ",
@@ -672,21 +625,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-14T11:56:34.678Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Schwyz",
-              "value": "19 °C",
-              "detail": "aujourd’hui de 11 à 19 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-14T13:49:58.818Z"
+          "updatedAt": "2026-10-14T17:14:18.595Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -724,7 +663,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -795,7 +734,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:53:38.743Z"
     }
   }
 }

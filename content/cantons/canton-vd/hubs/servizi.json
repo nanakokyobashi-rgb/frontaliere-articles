@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T20:08:23.890Z",
-  "contentHash": "dc70c9380b176faf1a1439faea0003bd470ed59883cd7ae161cbc874a7e1f472",
+  "updatedAt": "2026-10-15T01:53:38.743Z",
+  "contentHash": "cc73e8e55fb5267e82f9a6244252a8cf61790a49a7a9489106c6e309b50447a6",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-14T11:56:34.678Z",
+      "updatedAt": "2026-10-14T17:14:18.595Z",
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-14T13:49:58.818Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T10:37:16.619Z",
+      "updatedAt": "2026-10-14T16:01:15.871Z",
       "keyFacts": 0
     }
   ],
@@ -97,21 +92,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-14T11:56:34.678Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Lausanne",
-              "value": "20 °C",
-              "detail": "oggi da 15 a 21 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-14T13:49:58.818Z"
+          "updatedAt": "2026-10-14T17:14:18.595Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -149,7 +130,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -228,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:53:38.743Z"
     },
     "en": {
       "canton": "VD",
@@ -298,21 +279,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-14T11:56:34.678Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Lausanne",
-              "value": "20 °C",
-              "detail": "today from 15 to 21 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-14T13:49:58.818Z"
+          "updatedAt": "2026-10-14T17:14:18.595Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -350,7 +317,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -425,7 +392,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:53:38.743Z"
     },
     "de": {
       "canton": "VD",
@@ -495,21 +462,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-14T11:56:34.678Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Lausanne",
-              "value": "20 °C",
-              "detail": "heute 15 bis 21 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-14T13:49:58.818Z"
+          "updatedAt": "2026-10-14T17:14:18.595Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -547,7 +500,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -622,7 +575,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:53:38.743Z"
     },
     "fr": {
       "canton": "VD",
@@ -692,21 +645,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-14T11:56:34.678Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Lausanne",
-              "value": "20 °C",
-              "detail": "aujourd’hui de 15 à 21 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-14T13:49:58.818Z"
+          "updatedAt": "2026-10-14T17:14:18.595Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -744,7 +683,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -815,7 +754,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:53:38.743Z"
     }
   }
 }

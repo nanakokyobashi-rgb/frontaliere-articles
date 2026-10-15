@@ -60,6 +60,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-15T00:26:23.110Z",
       "lastFailureAt": "2026-10-15T00:26:23.110Z"
+    },
+    {
+      "articleId": "opportunita-impiego-federale",
+      "title": "Lavorare per l'Amministrazione federale: 50 formazioni",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T01:49:05.613Z",
+      "lastFailureAt": "2026-10-15T01:49:05.613Z"
     }
   ]
 }

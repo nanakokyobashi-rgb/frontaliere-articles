@@ -540,7 +540,7 @@
         "alignedAt": "2026-10-06",
         "forcedAt": "2026-10-06T23:44:22.620Z"
       },
-      "reason": "Dipendenza adapted di scripts/ci/scan-job-timeouts.mjs, importata dal sito in #7462 (05/09) come './report-validate-dist-failure.mjs': dal trasporto #1971 e' presente e raggiungibile anche qui dallo scanner riconciliato. Diverge dal sito per un bug trovato dalla review Codex sulla PR #1894: `reportDist` troncava a MAX_PER_GATE_ISSUES la lista dei JOB falliti PRIMA di estrarne i gate, invece di troncare solo i gate/payload dopo la deduplicazione — con piu' di tre job validate-dist falliti (la matrice tipica e' a 4 locale), il quarto job perdeva per sempre il proprio gate. Fix applicata SOLO qui perche' il sito non andava toccato da quel ciclo; e' un candidato di backport per il sito, non ancora fatto."
+      "reason": "Dipendenza adapted di scripts/ci/scan-job-timeouts.mjs, importata dal sito in #7462 (05/09) come './report-validate-dist-failure.mjs': dal trasporto #1971 e' presente e raggiungibile anche qui dallo scanner riconciliato. Diverge dal sito per un bug trovato dalla review Codex sulla PR #1894: `reportDist` troncava a MAX_PER_GATE_ISSUES la lista dei JOB falliti PRIMA di estrarne i gate, invece di troncare solo i gate/payload dopo la deduplicazione — con piu' di tre job validate-dist falliti (la matrice tipica e' a 4 locale), il quarto job perdeva per sempre il proprio gate. Fix applicata SOLO qui perche' il sito non andava toccato da quel ciclo; e' un candidato di backport per il sito, non ancora fatto. Il main-guard resta invece allineato alla correzione generica del sito #12043: canonicalizza process.argv[1] con realpathSync + pathToFileURL, verificato anche attraverso symlink da generator/tests/report-validate-dist-main-guard.test.mjs."
     },
     {
       "path": "scripts/ci/lib/pr-review-admission.mjs",
@@ -1183,7 +1183,7 @@
     {
       "path": "scripts/ci/mark-claude-terminal-outcome.mjs",
       "mode": "adapted",
-      "reason": "Dedup CAP_HIT_AFTER_DELIVERY e lettura del verdetto vigente importano `lastLabelEventAt` e `latestFixOutcomeEntryFromComments` da `followup-drainer.mjs`, che qui è `adapted` (#925/#1011, follow-up #1084). Il gemello sito (baseline e605a5b7b6996af5, 11025 byte) non ha quel ramo: restare `identical` lo farebbe sovrascrivere al primo `site-ahead`. Non è un mirror byte-identico.",
+      "reason": "Dedup CAP_HIT_AFTER_DELIVERY e lettura del verdetto vigente importano `lastLabelEventAt` e `latestFixOutcomeEntryFromComments` da `followup-drainer.mjs`, che qui è `adapted` (#925/#1011, follow-up #1084). Il gemello sito non ha quel ramo: restare `identical` lo farebbe sovrascrivere al primo `site-ahead`. Non è un mirror byte-identico. Il main guard canonico della PR sito #12043 è invece condiviso: portato nel corpus da #2732 e coperto da invocazione reale via symlink, senza cambiare il comportamento adapted.",
       "baseline": {
         "site": "d8b6d197bf4cd659",
         "corpus": "1cd57d5c632b3fcb",
@@ -2585,11 +2585,11 @@
       "path": "generator/scripts/lib/atomic-write-json.mjs",
       "sitePath": "scripts/lib/atomic-write-json.mjs",
       "mode": "adapted",
-      "reason": "Scrittura JSON atomica. La divergenza e' nata in modo PASSIVO — il blob qui e' identico a `be6b31d5` e il sito ha aggiunto dopo il passaggio per `preserveSlugHistory` (`./slug-preservation-guard.mjs`, valerielinc-ops#5157) — ma la decisione di restare diversi e' presa ora ed e' deliberata: quel guard serve al crawler dei job, protegge gli slug sotto `data/jobs/by-crawler/*.json`, e ne' il modulo ne' quei dati esistono in questo repo. Copiarlo qui darebbe un import irrisolto. Ogni ALTRA modifica del sito a questo file va invece riapplicata.",
+      "reason": "Scrittura JSON atomica, riconciliata come ADATTATA nella issue sito #13307. Il corpus forza `fsync` del file temporaneo prima del rename e tenta il `fsync` della directory dopo il commit come durability best-effort; `generator/tests/register-lock-write-atomic.test.mjs` ne osserva ordine e comportamento sugli errori della directory. Il sito applica invece `preserveSlugHistory`, `assertCrawlerSliceWriteSafe` e lo streaming dei grandi array ai dataset crawler: quei moduli e `data/jobs/by-crawler/*.json` non esistono qui, mentre i consumer corpus (`register-lock.mjs` e `retire-article.mjs`) scrivono marker e ledger piccoli. Copiare il gemello sito introdurrebbe import irrisolti e toglierebbe la garanzia durability del corpus; copiare il gemello corpus sul sito rimuoverebbe le guardie dei crawler. I due lati restano quindi diversi per scelta, con baseline attestata il 2026-10-15.",
       "baseline": {
-        "site": "03d4a457b7d356ae",
-        "corpus": "ad38e70657bc1995",
-        "alignedAt": "2026-08-09"
+        "site": "ae929828a0fc0dfe",
+        "corpus": "08abbfa9c7063b60",
+        "alignedAt": "2026-10-15"
       }
     },
     {

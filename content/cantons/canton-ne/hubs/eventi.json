@@ -4,17 +4,17 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T00:06:40.869Z",
-  "contentHash": "9fe3fbd12e3d4fd3728d365be1b21d125357963af04916da62328e06f0064088",
+  "updatedAt": "2026-10-15T01:40:56.447Z",
+  "contentHash": "84ee87c1969eb598187144b1d34192c61ae48872d5c037fd5ea14f6a6cdd97c1",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-14T13:57:52.093Z",
+      "updatedAt": "2026-10-14T17:55:23.988Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T10:37:16.619Z",
+      "updatedAt": "2026-10-14T16:01:15.871Z",
       "keyFacts": 0
     }
   ],
@@ -100,13 +100,18 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/neuchatel/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-14T17:55:23.988Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Festival Tous aux cinés !",
+              "date": "2026-10-14T12:16:42.000Z",
+              "url": "https://www.morteau.org/festival-tous-aux-cines/"
+            },
             {
               "label": "« La porte des possibles », une exposition collective qui place la jeunesse au cœur de la ville",
               "date": "2026-09-30",
@@ -123,7 +128,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [],
@@ -137,7 +142,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     },
     "en": {
       "canton": "NE",
@@ -220,13 +225,18 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/neuchatel/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-14T17:55:23.988Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Festival Tous aux cinés !",
+              "date": "2026-10-14T12:16:42.000Z",
+              "url": "https://www.morteau.org/festival-tous-aux-cines/"
+            },
             {
               "label": "« La porte des possibles », une exposition collective qui place la jeunesse au cœur de la ville",
               "date": "2026-09-30",
@@ -243,7 +253,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [],
@@ -257,7 +267,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     },
     "de": {
       "canton": "NE",
@@ -340,13 +350,18 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/neuenburg/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-14T17:55:23.988Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Festival Tous aux cinés !",
+              "date": "2026-10-14T12:16:42.000Z",
+              "url": "https://www.morteau.org/festival-tous-aux-cines/"
+            },
             {
               "label": "« La porte des possibles », une exposition collective qui place la jeunesse au cœur de la ville",
               "date": "2026-09-30",
@@ -363,7 +378,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [],
@@ -377,7 +392,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     },
     "fr": {
       "canton": "NE",
@@ -460,13 +475,18 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/neuchatel/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-14T17:55:23.988Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Festival Tous aux cinés !",
+              "date": "2026-10-14T12:16:42.000Z",
+              "url": "https://www.morteau.org/festival-tous-aux-cines/"
+            },
             {
               "label": "« La porte des possibles », une exposition collective qui place la jeunesse au cœur de la ville",
               "date": "2026-09-30",
@@ -483,7 +503,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [],
@@ -497,7 +517,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     }
   }
 }
