@@ -114,6 +114,9 @@ test('il backstop FIX_OUTCOME non sovrascrive il marker granulare dell\'agente',
       'completarlo.',
   );
   assert.match(s, /continue-on-error: true/, 'la telemetria non deve mai far fallire il job');
+  assert.match(s, /DAILY_ITEM_ID: \$\{\{ steps\.tier\.outputs\.selected_item_id \}\}/);
+  assert.match(s, /FOLLOWUP_ITEM: %s/);
+  assert.match(s, /item_marker/);
 });
 
 test('il backstop considera solo marker creati dal run corrente', () => {
@@ -169,4 +172,72 @@ test('un errore nel lookup delle PR resta distinto dalla non-consegna della CLI'
   assert.match(evaluate, /status":"unavailable"/, 'un errore API deve produrre uno stato unavailable');
   assert.match(evaluate, /delivery-evaluation-failed/, 'il motivo dell\'errore di lookup deve restare osservabile');
   assert.match(s, /--evidence/, 'il classificatore deve ricevere lo stato unavailable senza trasformarlo in una lista vuota');
+});
+
+test('il preflight del daily usa il mutex FU selezionato e attribuisce il verdetto al singolo item', () => {
+  assert.match(SRC, /Mutex PR per grana:[\s\S]*?daily bucket[\s\S]*?Follow-up item:[\s\S]*?selected_item_id/);
+  assert.match(SRC, /gh pr list --state open --json number,title,labels,body/);
+  assert.match(SRC, /PR legacy senza marker FU, quindi ambigua/);
+  assert.match(SRC, /FOLLOWUP_ITEM: \$\{\{ steps\.tier\.outputs\.selected_item_id \}\}/);
+  assert.match(SRC, /il drainer applica l'esito solo a quell'item/);
+});
+
+test('il gate stale congela lo scope FU ma mantiene il mutex sul branch daily condiviso', () => {
+  const scope = step('Pre-flight — freeze daily item scope (zero-Claude)');
+  const stale = step('Pre-flight — stale-dispatch gate (zero-Claude)');
+  assert.ok(scope, 'manca lo snapshot per-item prima del gate stale-dispatch');
+  assert.ok(stale, 'manca il gate stale-dispatch');
+  assert.ok(
+    SRC.indexOf('- name: Pre-flight — freeze daily item scope (zero-Claude)')
+      < SRC.indexOf('- name: Pre-flight — stale-dispatch gate (zero-Claude)'),
+    'il gate non deve valutare il branch aggregato prima di conoscere il FU selezionato',
+  );
+  assert.match(scope, /mutex-bin\/gh/);
+  assert.match(scope, /Tutti i FU daily usano ancora `fix\/issue-N`/);
+  assert.match(scope, /query\[jsonIndex \+ 1\] = 'number,headRefName,body,headRepository'/);
+  assert.match(scope, /const sameRepositoryPrs = prs\.filter\(/);
+  assert.match(scope, /process\.stdout\.write\(JSON\.stringify\(sameRepositoryPrs\)\)/);
+  assert.doesNotMatch(scope, /followupItemMarkers/);
+  assert.doesNotMatch(scope, /throw new Error\('daily bucket senza un FU open/);
+  assert.match(scope, /daily_terminal=\$\{dailyTerminal \? 'true' : 'false'\}/);
+  assert.match(scope, /FOLLOWUP_ITEM: \$\{dailyItemId\}/);
+  assert.match(stale, /DAILY_BUCKET: \$\{\{ steps\.scope_input\.outputs\.is_daily_bucket \}\}/);
+  assert.match(stale, /DAILY_ITEM_ID: \$\{\{ steps\.scope_input\.outputs\.selected_item_id \}\}/);
+  assert.match(stale, /DAILY_TERMINAL: \$\{\{ steps\.scope_input\.outputs\.daily_terminal \}\}/);
+  assert.match(stale, /remove-label agent:fix --remove-label agent:fix-queued/);
+  assert.match(stale, /MUTEX_BASE_PATH: \$\{\{ steps\.scope_input\.outputs\.mutex_base_path \}\}/);
+  assert.match(stale, /node scripts\/ci\/check-stale-issue-dispatch\.mjs/);
+});
+
+test('il capability guard workflows legge solo il FU daily scelto e annota il verdetto nello stesso commento', () => {
+  const input = step('Pre-flight — freeze daily item scope (zero-Claude)');
+  const guard = step('Pre-flight — workflows-scope capability guard (zero-Claude)');
+  assert.ok(input, 'manca lo snapshot per-item prima del capability guard');
+  assert.ok(guard, 'manca il capability guard workflows');
+  assert.match(input, /dailyBucketScopeDecision\(issue\.title \|\| '', issue\.body \|\| ''\)/);
+  assert.match(input, /const item = dailyScope\.item/);
+  assert.match(input, /info && dailyScope\.valid && dailyScope\.terminal/);
+  assert.match(input, /daily_scope_valid=/);
+  assert.match(input, /body: info && item \? item\.raw : issue\.body/);
+  assert.match(guard, /ISSUE_FIX_SNAPSHOT_FILE: \$\{\{ steps\.scope_input\.outputs\.scope_snapshot_file \}\}/);
+  assert.match(guard, /DAILY_ITEM_ID: \$\{\{ steps\.scope_input\.outputs\.selected_item_id \}\}/);
+  assert.match(guard, /FIX_OUTCOME: blocked-workflows-scope[\s\S]*FOLLOWUP_ITEM/);
+  assert.match(guard, /gh issue comment "\$ISSUE_NUMBER" --repo "\$GH_REPO" --body-file/);
+  assert.ok(
+    SRC.indexOf('- name: Pre-flight — freeze daily item scope (zero-Claude)')
+      < SRC.indexOf('- name: Pre-flight — workflows-scope capability guard (zero-Claude)'),
+    'lo snapshot per-item deve precedere il guard che può parcheggiare la issue',
+  );
+});
+
+test('il guard daily ritenta il marker e ripristina la coda se il commento non passa', () => {
+  const guard = step('Pre-flight — workflows-scope capability guard (zero-Claude)');
+  assert.ok(guard, 'manca il capability guard workflows');
+  assert.match(guard, /for attempt in 1 2 3/);
+  assert.match(guard, /marker_posted=false/);
+  assert.match(guard, /gh issue comment "\$ISSUE_NUMBER" --repo "\$GH_REPO" --body-file/);
+  assert.match(guard, /gh issue edit "\$ISSUE_NUMBER" --repo "\$GH_REPO" \\\s+--remove-label fu-parked --remove-label automation-deferred \\\s+--add-label agent:fix-queued/);
+  assert.match(guard, /fu-parked senza FOLLOWUP_ITEM/);
+  assert.match(guard, /automation-deferred/);
+  assert.match(guard, /recovery label daily workflows-scope fallita/);
 });

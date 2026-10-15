@@ -115,7 +115,8 @@ describe('wiring nel drainer del corpus', () => {
   const source = readFileSync(new URL('../../scripts/ci/followup-drainer.mjs', import.meta.url), 'utf8');
 
   it('il rescue ri-accoda un overlap-skip su PR attiva senza fu-attempt, prima dei rami che lo consumano', () => {
-    const branch = source.indexOf("if (outcome === 'overlap-skip') {");
+    const blockerCall = source.indexOf('const blocker = overlapSkipBlocker(issueComments(iss.number) || []);');
+    const branch = source.lastIndexOf("if (outcome === 'overlap-skip') {", blockerCall);
     const nonRetryable = source.indexOf('if (outcome && NON_RETRYABLE.has(outcome)) {', branch);
     const ageAttempts = source.indexOf('// rescue/park per età-tentativi', branch);
     expect(branch).toBeGreaterThan(-1);

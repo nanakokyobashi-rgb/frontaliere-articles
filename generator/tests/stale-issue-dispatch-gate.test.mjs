@@ -222,7 +222,9 @@ for (const wf of ['issue-fix.yml', 'issue-decompose.yml']) {
 
     const gate = all.find((s) => /id: stale\b/.test(s));
     assert.ok(gate, `${wf}: nessuno step con \`id: stale\` — il pre-flight non esiste.`);
-    assert.match(gate, /run: node scripts\/ci\/check-stale-issue-dispatch\.mjs/);
+    assert.match(gate, /run:/);
+    assert.match(gate, /node scripts\/ci\/check-stale-issue-dispatch\.mjs/,
+      `${wf}: lo step stale non invoca check-stale-issue-dispatch.mjs.`);
     assert.match(gate, /DISPATCH_LABEL: \$\{\{ github\.event\.label\.name \}\}/,
       `${wf}: il gate non riceve la label dell'evento, cioe' proprio il pezzo di payload che puo' essere stantio.`);
     assert.doesNotMatch(gate, /continue-on-error: true/,

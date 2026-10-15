@@ -329,12 +329,18 @@ function fixOutcomeEntry(comment, { ignoreBackstop = false } = {}) {
 
 /** Return the latest authentic FIX_OUTCOME marker with its timestamp. */
 export function latestFixOutcomeEntryFromComments(comments) {
+  const { outcome, at } = latestFixOutcomeCommentFromComments(comments);
+  return { outcome, at };
+}
+
+/** Return the latest authentic outcome together with its source comment. */
+export function latestFixOutcomeCommentFromComments(comments) {
   let latest = null;
   for (const comment of comments || []) {
     const entry = fixOutcomeEntry(comment, { ignoreBackstop: true });
-    if (entry && (!latest || entry.at >= latest.at)) latest = entry;
+    if (entry && (!latest || entry.at >= latest.at)) latest = { ...entry, comment };
   }
-  return latest || { outcome: null, at: null };
+  return latest || { outcome: null, at: null, comment: null };
 }
 
 /**

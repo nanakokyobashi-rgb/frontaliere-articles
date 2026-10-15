@@ -39,11 +39,10 @@
  * marcata `automation-deferred`. Ora hanno un rescue proprio, gemello di quello
  * queue-managed: vedi `crawlerFixDecision`.
  */
-import { realpathSync } from 'node:fs';
+import { appendFileSync, readFileSync, realpathSync, rmSync, writeFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
-import { appendFileSync, readFileSync } from 'node:fs';
-import { createHash } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 import { classifyIssue } from '../lib/classify-issue.mjs';
 import {
   CODE_PATH_RE,
@@ -61,6 +60,7 @@ import {
 import {
   isBackoffActive,
   latestFixOutcomeEntryFromComments,
+  latestFixOutcomeCommentFromComments,
   latestFixRunOutcomeEntryFromComments,
   latestFixOutcomeFromComments,
   maxQuotaResetsAt,
@@ -79,18 +79,17 @@ import {
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 import { pinnedBy } from './manifest-pinned-issues.mjs';
 import { conflictHandoffOriginPr } from './check-issue-already-resolved.mjs';
+import { isRepositoryOwnedPrHead, prHeadIdentity } from './lib/pr-head-identity.mjs';
 import {
   bucketState,
-  dailyKeyFromBucketBody,
   dailyBucketInfo,
-  hasDailyBucketRepositoryConsistency,
-  hasStableItemIds,
-  hasStableItemIdsForDailyKey,
-  hasUnterminatedMarkdownFence,
+  dailyBucketScopeDecision,
   isDailyBucketTitle,
   followupItemMarkers,
   parseFollowupItems,
   selectFirstOpenItem,
+  updateFollowupItemState,
+  FOLLOWUP_ITEM_ID_SINGLE_RE,
   AGGREGATE_ITEM_COUNT_RE as AGGREGATE_ITEMS_RE,
 } from './followup-resolution-match.mjs';
 
@@ -379,47 +378,50 @@ export function isDailyBucketCollecting(issue) {
  * while the fixer receives exactly one stable item at a time through the workflow.
  */
 export function dailyBucketQueueDecision(issue) {
-  const info = dailyBucketInfo(issue?.title || '');
-  if (!info) return { eligible: true, reason: null, item: null };
-  if (hasUnterminatedMarkdownFence(issue?.body || '')) {
-    return { eligible: false, reason: 'unterminated-markdown-fence', item: null };
-  }
-  if (bucketState(issue?.body || '') !== 'sealed') return { eligible: false, reason: 'bucket-collecting', item: null };
-  if (dailyKeyFromBucketBody(issue?.body || '') !== info.dailyKey) {
-    return { eligible: false, reason: 'mismatched-daily-key', item: null };
-  }
-  if (!hasDailyBucketRepositoryConsistency(issue?.body || '', info.targetRepository)) {
-    return { eligible: false, reason: 'mismatched-target-repository', item: null };
-  }
-  const items = parseFollowupItems(issue?.body || '');
-  if (info.itemCount !== items.length) {
-    return { eligible: false, reason: 'mismatched-item-count', item: null };
-  }
-  if (!hasStableItemIds(issue?.body || '')) return { eligible: false, reason: 'missing-stable-item-id', item: null };
-  if (!hasStableItemIdsForDailyKey(issue?.body || '', info.dailyKey)) {
-    return { eligible: false, reason: 'mismatched-stable-item-id', item: null };
-  }
-  const item = selectFirstOpenItem(issue?.body || '');
-  return item
-    ? { eligible: true, reason: null, item }
+  const scope = dailyBucketScopeDecision(issue?.title || '', issue?.body || '');
+  if (!scope.isDaily) return { eligible: true, reason: null, item: null };
+  if (!scope.valid) return { eligible: false, reason: scope.reason, item: null };
+  return scope.item
+    ? { eligible: true, reason: null, item: scope.item }
     : { eligible: false, reason: 'no-open-item', item: null };
 }
 
 /**
- * Return the open PR that explicitly claims a daily-bucket item, if any.
- * A PR for another item in the same bucket must not hold this item back; the
- * marker is the item-level mutex required by the daily contract.
+ * Return the open PR that claims a daily-bucket item, if any. The deterministic
+ * fixer branch is shared by every FU in the bucket, so a PR marked for another
+ * item still holds this one back while that branch is open. A legacy PR with no
+ * item marker that cites this bucket remains an ambiguous, fail-closed mutex.
  *
  * @param {string} itemId
- * @param {Array<{number?: number, title?: string, body?: string}>} openPrs
- * @returns {{number?: number, title?: string, body?: string}|null}
+ * @param {Array<{number?: number, title?: string, body?: string, head?: {ref?: string}, headRefName?: string}>} openPrs
+ * @param {number|null} issueNumber
+ * @param {string} repository
+ * @returns {{number?: number, title?: string, body?: string, head?: {ref?: string}, headRefName?: string}|null}
  */
-export function openPrForDailyItem(itemId, openPrs) {
+export function openPrForDailyItem(itemId, openPrs, issueNumber = null, repository = REPO) {
   const wanted = String(itemId || '').toUpperCase();
   if (!/^FU-\d{4}-\d{2}-\d{2}-\d{3}$/.test(wanted)) return null;
-  return (Array.isArray(openPrs) ? openPrs : []).find((pr) =>
-    followupItemMarkers(`${pr?.title || ''}\n${pr?.body || ''}`).includes(wanted),
-  ) || null;
+  const issueRef = Number(issueNumber);
+  const legacyBranch = Number.isInteger(issueRef) && issueRef > 0
+    ? `fix/issue-${issueRef}`
+    : null;
+  return (Array.isArray(openPrs) ? openPrs : []).find((pr) => {
+    const text = `${pr?.title || ''}\n${pr?.body || ''}`;
+    const markers = followupItemMarkers(text);
+    // An explicit FU marker still claims the item from any repository. The
+    // legacy branch heuristic is narrower: a fork can reuse that ref, so only
+    // a head owned by this repo (or with unknown ownership) holds the mutex.
+    if (markers.includes(wanted)) return true;
+    const headRefs = [pr?.head?.ref, pr?.headRefName];
+    const legacyBranchMatches = legacyBranch !== null
+      && headRefs.some((ref) => ref === legacyBranch)
+      && isRepositoryOwnedPrHead(pr, repository) !== false;
+    // Marker diversi separano l'evidence, non il branch condiviso.
+    if (legacyBranchMatches) return true;
+    if (!Number.isInteger(issueRef) || issueRef <= 0 || markers.length) return false;
+    const legacyTextMatches = new RegExp(`(^|[^\\d])#${issueRef}(?!\\d)`).test(text);
+    return legacyTextMatches;
+  }) || null;
 }
 
 /**
@@ -445,11 +447,7 @@ export function flattenPaginatedOpenPrs(raw) {
  * @returns {{ref: string, repository: string}|null}
  */
 export function openPrHeadIdentity(pr) {
-  const ref = pr?.head?.ref;
-  const repository = pr?.head?.repo?.full_name;
-  if (typeof ref !== 'string' || !ref.trim()) return null;
-  if (typeof repository !== 'string' || !repository.trim()) return null;
-  return { ref, repository };
+  return prHeadIdentity(pr);
 }
 
 /**
@@ -465,11 +463,11 @@ export function parseOpenGroupPrs(raw) {
 }
 
 /** Fail-closed decision for the daily item-level PR mutex. */
-export function dailyMutexDecision(itemId, scan) {
+export function dailyMutexDecision(itemId, scan, issueNumber = null, repository = REPO) {
   if (!scan || scan.ok !== true || !Array.isArray(scan.prs)) {
     return { eligible: false, reason: 'open-pr-scan-unavailable', pr: null };
   }
-  const pr = openPrForDailyItem(itemId, scan.prs);
+  const pr = openPrForDailyItem(itemId, scan.prs, issueNumber, repository);
   return pr
     ? { eligible: false, reason: 'item-pr-open', pr }
     : { eligible: true, reason: null, pr: null };
@@ -1052,6 +1050,131 @@ export function verdictExitDecision(outcome, { hasPR = false, noAutoclose = fals
       : { action: 'close', reason: 'already-fixed: difetto verificato assente' };
   }
   return { action: 'escalate', reason: `capacità/causa fuori dalla portata della CI: ${outcome}` };
+}
+
+/**
+ * Daily outcomes belong to one stable FU item, never to the aggregate issue.
+ * New comments should carry FOLLOWUP_ITEM explicitly; the first-paragraph
+ * fallback reads historical comments such as the triad that exposed this bug.
+ * More than one candidate is ambiguous and therefore cannot mutate the bucket.
+ */
+export function dailyOutcomeItemId(commentBody) {
+  const source = String(commentBody || '');
+  const itemIdRe = /\bFU-\d{4}-\d{2}-\d{2}-\d{3}\b/gi;
+  const explicit = [...source.matchAll(/<!--\s*FOLLOWUP_ITEM:\s*(FU-\d{4}-\d{2}-\d{2}-\d{3})\s*-->/gi)]
+    .map((match) => match[1].toUpperCase());
+  const explicitIds = [...new Set(explicit)];
+  if (explicitIds.length) return explicitIds.length === 1 ? explicitIds[0] : null;
+
+  const firstParagraph = source.trim().split(/\n\s*\n/, 1)[0] || '';
+  const ids = [...new Set([...firstParagraph.matchAll(itemIdRe)].map((match) => match[0].toUpperCase()))];
+  return ids.length === 1 && FOLLOWUP_ITEM_ID_SINGLE_RE.test(ids[0]) ? ids[0] : null;
+}
+
+const DAILY_TRANSIENT_OUTCOMES = new Set(['overlap-skip', 'pr-already-open']);
+
+function dailyBucketRouting(body) {
+  const items = parseFollowupItems(body || '');
+  const nextItem = selectFirstOpenItem(body || '');
+  if (nextItem) return { action: 'requeue', nextItem };
+  if (items.length && items.every((entry) => entry.state === 'done')) {
+    return { action: 'settled', nextItem: null };
+  }
+  return { action: 'blocked', nextItem: null };
+}
+
+/**
+ * Convert one terminal fixer verdict into a daily-item transition. Returning
+ * `handled: true` with a non-mutating action is deliberate: an unattributed or
+ * malformed verdict must not fall through to issue-wide close/flag behavior.
+ */
+export function dailyBucketOutcomeTransition(issue, outcome, outcomeCommentBody, { verifiedMergedItemId = null } = {}) {
+  if (!dailyBucketInfo(issue?.title || '')
+      || (!NON_RETRYABLE.has(outcome) && !DAILY_TRANSIENT_OUTCOMES.has(outcome) && outcome !== 'pr-created')) {
+    return { handled: false, action: 'not-applicable' };
+  }
+  const validation = dailyBucketQueueDecision(issue);
+  if (!validation.eligible && validation.reason !== 'no-open-item') {
+    return { handled: true, action: 'invalid-bucket', reason: validation.reason };
+  }
+
+  const itemId = dailyOutcomeItemId(outcomeCommentBody);
+  if (!itemId) return { handled: true, action: 'unattributed', reason: 'outcome senza un solo FU stabile' };
+  const items = parseFollowupItems(issue?.body || '');
+  const item = items.find((candidate) => candidate.id?.toUpperCase() === itemId);
+  if (!item || !item.state) {
+    return { handled: true, action: 'item-missing', itemId, reason: 'FU assente o privo di State nel bucket' };
+  }
+  if (outcome === 'pr-created'
+      && String(verifiedMergedItemId || '').toUpperCase() !== itemId) {
+    return {
+      handled: true,
+      action: 'awaiting-merged-pr',
+      itemId,
+      reason: 'nessuna PR mergiata con marker Follow-up item coincidente dopo il FIX_OUTCOME',
+    };
+  }
+  if (DAILY_TRANSIENT_OUTCOMES.has(outcome)) {
+    // Il retry agisce sulla label aggregata, che seleziona sempre il primo FU
+    // aperto. Non riaccodare quindi un marker vecchio (anche se punta a un FU
+    // ormai terminale) né un esito attribuito a un item diverso.
+    if (!validation.item || validation.item.id?.toUpperCase() !== itemId) {
+      return { handled: true, action: 'stale-attribution', itemId, reason: 'FOLLOWUP_ITEM non coincide con il primo FU aperto' };
+    }
+    return {
+      handled: true,
+      action: 'retry',
+      itemId,
+      state: item.state,
+      body: String(issue.body || ''),
+      nextItem: item,
+      changed: false,
+    };
+  }
+
+  // FIX_OUTCOME resta l'ultimo marker anche quando il bucket passa al FU
+  // successivo. Un item terminale dimostra quindi che questo marker è già
+  // stato consumato: non si deve riusare per riaccodare un altro item. La
+  // label phase può però essere fallita dopo la scrittura del body; in quel
+  // caso il body terminale conserva l'azione che va riconciliata al tick dopo.
+  if (item.state !== 'open' && item.state !== 'in-progress') {
+    const routing = dailyBucketRouting(issue?.body || '');
+    return {
+      handled: true,
+      action: 'outcome-consumed',
+      itemId,
+      state: item.state,
+      nextItem: routing.nextItem,
+      reconcileAction: routing.action,
+      reason: 'l’item ha già uno stato terminale; il FIX_OUTCOME non va riapplicato',
+    };
+  }
+
+  if (outcome !== 'pr-created'
+      && validation.item
+      && validation.item.id?.toUpperCase() !== itemId) {
+    return {
+      handled: true,
+      action: 'stale-attribution',
+      itemId,
+      reason: 'FOLLOWUP_ITEM non coincide con il primo FU aperto',
+    };
+  }
+
+  const state = outcome === 'already-fixed' || outcome === 'pr-created' ? 'done' : 'blocked';
+  const body = updateFollowupItemState(issue.body, itemId, state);
+  if (body === null) {
+    return { handled: true, action: 'item-uneditable', itemId, reason: 'State FU non aggiornabile in modo sicuro' };
+  }
+  return {
+    handled: true,
+    ...dailyBucketRouting(body),
+    itemId,
+    state,
+    body,
+    changed: body !== String(issue.body || ''),
+    consumed: false,
+  };
 }
 
 // Esiti ZERO-WORK: la run è morta PRIMA che l'agent leggesse la issue, quindi
@@ -2121,6 +2244,24 @@ export function overlapBlockerActive(pr) {
 }
 
 /**
+ * A daily overlap retry waits while its declared PR is active. Missing comment
+ * or PR state is not proof that the blocker ended, so those reads fail closed.
+ */
+export function dailyOverlapRetryHold(comments, readBlocker) {
+  if (!Array.isArray(comments)) return { hold: true, blocker: null, reason: 'comments-unreadable' };
+  const blocker = overlapSkipBlocker(comments);
+  if (blocker === null) return { hold: false, blocker: null, reason: 'no-declared-blocker' };
+  let pr = null;
+  try {
+    if (typeof readBlocker === 'function') pr = readBlocker(blocker);
+  } catch {}
+  if (!pr) return { hold: true, blocker, reason: 'blocker-unverifiable' };
+  return overlapBlockerActive(pr)
+    ? { hold: true, blocker, reason: 'blocker-active' }
+    : { hold: false, blocker, reason: 'blocker-inactive' };
+}
+
+/**
  * Un'issue è "queue-managed" (passata dalla coda `agent:fix-queued` drenata da
  * questo file)? Prima del 2026-07-05 SOLO i `follow-up` la attraversavano;
  * l'auto-fix è stato esteso a TUTTE le categorie (owner decision) — usa
@@ -2585,7 +2726,8 @@ function loadOpenPrsForDailyMutex() {
     ]);
     const prs = flattenPaginatedOpenPrs(raw);
     if (!prs || !prs.every((pr) => Number.isInteger(Number(pr.number)) && Number(pr.number) > 0
-      && typeof pr.title === 'string' && (typeof pr.body === 'string' || pr.body === null))) {
+      && typeof pr.title === 'string' && (typeof pr.body === 'string' || pr.body === null)
+      && openPrHeadIdentity(pr) !== null)) {
       return { ok: false, prs: [] };
     }
     return { ok: true, prs };
@@ -2905,15 +3047,28 @@ export function isReparkableCandidate(iss) {
  * attiva: il DRAIN la esclude e quindi il VERDICT-EXIT deve poter consumare i
  * verdetti non ri-tentabili che il PARKED-RETRY non ri-accoda. Una issue già
  * `maybe-resolved` rientra solo quando conserva anche la label queued, così il
- * pass può togliere quella label stantia senza riaprire il caso umano.
+ * pass può togliere quella label stantia senza riaprire il caso umano. Un daily
+ * può invece conservare `automation-deferred` dopo un preflight per-item: il
+ * verdetto va riconciliato sul FU prima di rimettere in coda il successivo.
  * @param {{title?: string, labels?: Array<string|{name:string}>}} iss
  */
 export function isVerdictExitCandidate(iss) {
-  if (!has(iss, LBL_PARKED) || !isQueueManaged(iss)) return false;
+  if (!has(iss, LBL_PARKED)) return false;
+  const dailyBucket = dailyBucketInfo(iss?.title || '');
+  const labels = names(iss);
+  const hasHumanDecision = labels.includes('needs-human');
+  const hasTechnicalDefer = labels.includes(LBL_AUTOMATION_DEFERRED);
+  const dailyDeferredQueueManaged = dailyBucket && hasTechnicalDefer && !hasHumanDecision
+    && classifyIssue(iss?.title, labels.filter((label) => label !== LBL_AUTOMATION_DEFERRED)).route === 'queue';
+  if (!isQueueManaged(iss) && !dailyDeferredQueueManaged) return false;
   if (hasActiveAgentClaim(iss) || has(iss, LBL_FIX)) return false;
-  if (has(iss, 'needs-human') || has(iss, LBL_AUTOMATION_DEFERRED)) return false;
+  if (hasHumanDecision) return false;
+  // `automation-deferred` on a daily bucket can describe only the current FU:
+  // let VERDICT-EXIT apply that item's outcome before its requeue clears the
+  // aggregate routing label. Non-daily issues keep the technical veto.
+  if (hasTechnicalDefer && !dailyBucket) return false;
   if (has(iss, LBL_DECOMP_QUEUED) || has(iss, LBL_DECOMP) || has(iss, LBL_DECOMPOSED)) return false;
-  if (has(iss, LBL_MAYBE_RESOLVED) && !has(iss, LBL_QUEUED)) return false;
+  if (has(iss, LBL_MAYBE_RESOLVED) && !has(iss, LBL_QUEUED) && !dailyBucket) return false;
   return !isPermanentTracker(iss);
 }
 /**
@@ -3263,6 +3418,75 @@ function editChecked(num, { add = [], remove = [] }) {
 }
 
 /**
+ * Recompose one item transition from a fresh body when a producer has changed
+ * the bucket. GitHub's issue endpoint does not support conditional PATCH, so
+ * the re-read/abort/recompose guard is paired with the shared repo-scoped `followup-daily-` Actions mutex
+ * used by every automated body writer. A bounded retry never writes a
+ * stale full-body snapshot over a newly appended FU.
+ */
+function updateDailyIssueBody(issue, composeTransition, expectedTransition) {
+  const number = Number(issue?.number);
+  const sameDecision = (left, right) => left?.action === right?.action
+    && left?.itemId === right?.itemId
+    && left?.state === right?.state;
+  const readLatest = () => {
+    try {
+      return gh(['issue', 'view', String(number), '--repo', REPO, '--json', 'title,body']);
+    } catch {
+      return null;
+    }
+  };
+  if (DRY) {
+    const transition = composeTransition(issue);
+    console.log(`[dry] update daily bucket body #${number} (item State only)`);
+    return { ok: true, transition };
+  }
+
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const latest = readLatest();
+    if (!latest || typeof latest.body !== 'string') {
+      console.log(`DAILY-OUTCOME-SKIP #${number}: titolo/body live non leggibile.`);
+      return { ok: false, transition: null };
+    }
+    const transition = composeTransition(latest);
+    if (!transition?.handled || !sameDecision(transition, expectedTransition)) {
+      console.log(`DAILY-OUTCOME-SKIP #${number}: scope/esito cambiato durante il re-read; nuova composizione al prossimo tick.`);
+      return { ok: false, transition };
+    }
+    const expectedBody = String(latest.body || '');
+    const nextBody = transition.body;
+    if (typeof nextBody !== 'string' || nextBody === expectedBody) return { ok: true, transition };
+
+    // Re-read immediately before the full-body write. If a producer appended
+    // or changed an item, retry from that newer snapshot instead of replacing it.
+    const beforeWrite = readLatest();
+    if (!beforeWrite || typeof beforeWrite.body !== 'string') {
+      console.log(`DAILY-OUTCOME-SKIP #${number}: body non verificabile prima della scrittura.`);
+      return { ok: false, transition: null };
+    }
+    if (String(beforeWrite.title || '') !== String(latest.title || '')
+        || String(beforeWrite.body || '') !== expectedBody) continue;
+
+    const file = `/tmp/frontaliere-daily-outcome-${process.pid}-${randomUUID()}.md`;
+    try {
+      writeFileSync(file, nextBody, { mode: 0o600 });
+      gh(['issue', 'edit', String(number), '--repo', REPO, '--body-file', file], {
+        json: false,
+        stage: 'daily item outcome body',
+      });
+      return { ok: true, transition };
+    } catch (error) {
+      console.log(`::warning::DAILY-OUTCOME #${number}: aggiornamento body fallito: ${String(error).slice(0, 160)}`);
+      return { ok: false, transition };
+    } finally {
+      try { rmSync(file, { force: true }); } catch {}
+    }
+  }
+  console.log(`DAILY-OUTCOME-SKIP #${number}: body cambiato durante tre re-read; nessuna sovrascrittura.`);
+  return { ok: false, transition: null };
+}
+
+/**
  * Rilettura live subito prima della promozione (follow-up sito #8334,
  * FU-2026-09-12-016). `pool` e' una snapshot presa all'inizio del DRAIN: fra
  * quella lettura e la mutazione una run concorrente puo' aver aggiunto
@@ -3485,11 +3709,11 @@ export function issueGroupInstanceLabels(issue) {
  * @param {{repository?: string}} [opts]
  */
 export function activeGroupDigests(issues, openPrs = [], { repository = REPO } = {}) {
-  const currentRepository = String(repository).trim().toLocaleLowerCase('en-US');
   const openBranches = new Set(
     (Array.isArray(openPrs) ? openPrs : [])
+      .filter((pr) => isRepositoryOwnedPrHead(pr, repository) === true)
       .map(openPrHeadIdentity)
-      .filter((head) => head && head.repository.toLocaleLowerCase('en-US') === currentRepository)
+      .filter(Boolean)
       .map((head) => head.ref),
   );
   const digests = new Set();
@@ -3772,6 +3996,26 @@ export function selectLatestMergedFixPr(prs) {
   return best;
 }
 
+/** Select only a newly merged PR whose explicit daily item marker matches the
+ * outcome being reconciled. A merge for a sibling FU is not delivery evidence. */
+export function selectMergedDailyItemPr(prs, itemId, outcomeAt) {
+  const wanted = String(itemId || '').toUpperCase();
+  const cutoff = Number(outcomeAt);
+  if (!FOLLOWUP_ITEM_ID_SINGLE_RE.test(wanted) || !Number.isFinite(cutoff)) return null;
+  let best = null;
+  for (const pr of Array.isArray(prs) ? prs : []) {
+    const mergedAt = Date.parse(String(pr?.mergedAt || ''));
+    const markers = followupItemMarkers(pr?.body || '');
+    if (!Number.isFinite(mergedAt) || mergedAt <= cutoff
+        || markers.length !== 1 || markers[0] !== wanted) continue;
+    if (best && mergedAt <= best.mergedAt) continue;
+    const number = Number(pr?.number);
+    if (!Number.isInteger(number) || number <= 0) continue;
+    best = { number, mergedAt, itemId: wanted };
+  }
+  return best;
+}
+
 /** Ultima PR fix MERGIATA di questa issue: `{mergedAt, mergeSha, files,
  * filesKnown}` (epoch ms, SHA del commit di merge, path modificati), o null se
  * non ne esiste nessuna / errore gh. La timeline REST segue i cross-reference
@@ -3829,6 +4073,41 @@ function mergedFixPr(num) {
     ...linked,
     ...(Array.isArray(branchFallback) ? branchFallback : []),
   ]);
+}
+
+/** A daily `pr-created` outcome advances only after its own marked PR merges. */
+function mergedDailyItemPr(num, itemId, outcomeAt) {
+  const linked = [];
+  try {
+    const raw = gh([
+      'api',
+      `repos/${REPO}/issues/${num}/timeline?per_page=100`,
+      '--paginate',
+      '--slurp',
+    ]);
+    for (const prNumber of linkedPullRequestNumbers(raw)) {
+      try {
+        linked.push(gh([
+          'pr', 'view', String(prNumber), '--repo', REPO,
+          '--json', 'number,mergedAt,body',
+        ]));
+      } catch {
+        // One inaccessible historical PR cannot hide a matching delivery.
+      }
+    }
+  } catch {
+    // The deterministic branch query below is a fallback, never a false proof.
+  }
+  try {
+    const branchFallback = gh([
+      'pr', 'list', '--repo', REPO, '--head', `fix/issue-${num}`,
+      '--state', 'merged', '--json', 'number,mergedAt,body', '--limit', '20',
+    ]);
+    if (Array.isArray(branchFallback)) linked.push(...branchFallback);
+  } catch {
+    // Timeline candidates remain usable if the legacy branch lookup fails.
+  }
+  return selectMergedDailyItemPr(linked, itemId, outcomeAt);
 }
 
 function labelAddedAt(num, label) {
@@ -4764,6 +5043,7 @@ export function runDrain() {
     let attempted = 0;
     let succeeded = 0;
     let scanned = 0;
+    let dailyOutcomePrScan = null;
     for (const iss of rotated) {
       if (attempted >= VERDICT_EXIT_MAX_PER_RUN) {
         console.log(`verdict-exit: cap ${VERDICT_EXIT_MAX_PER_RUN}/run raggiunto, ${parked.length - scanned} candidate rinviate al prossimo tick (no silent cap).`);
@@ -4781,7 +5061,8 @@ export function runDrain() {
       // entrambe in `null` (`issueComments(...) || []`).
       const comments = issueComments(iss.number);
       if (comments === null) continue; // glitch gh → nessuna decisione, si rivaluta al tick dopo
-      const outcome = latestFixOutcomeFromComments(comments);
+      const outcomeEntry = latestFixOutcomeCommentFromComments(comments);
+      const outcome = outcomeEntry.outcome;
 
       // UNPARK-NO-VERDICT: una parked che non ha MAI avuto un verdetto non ha
       // mai avuto un tentativo.
@@ -4847,9 +5128,14 @@ export function runDrain() {
       // dev'essere `detectAlreadyResolved()` al giro dopo, sul corpo, non questo
       // ramo sulla provenienza. `mergedFixPrAt()` costa una chiamata `gh`, per
       // questo sta DOPO il test su `outcome`, che è già in memoria.
-      const deliveredParked = outcome === 'pr-created' && mergedFixPrAt(iss.number) !== null;
+      const dailyIssue = dailyBucketInfo(iss.title || '') !== null;
+      const canUnparkWithoutVerdict = outcome === null
+        && (!dailyIssue || dailyBucketQueueDecision(iss).eligible);
+      const deliveredParked = !dailyIssue
+        && outcome === 'pr-created'
+        && mergedFixPrAt(iss.number) !== null;
 
-      if ((outcome === null || deliveredParked) && !isUnparkedOnce(iss)) {
+      if ((canUnparkWithoutVerdict || deliveredParked) && !isUnparkedOnce(iss)) {
         attempted++;
         if (DRY) {
           succeeded++;
@@ -4878,6 +5164,136 @@ export function runDrain() {
         // su un pool misto attribuirebbe la causa sbagliata a ogni unpark
         // `pr-created`. Stessa ternaria del ramo DRY, di proposito.
         console.log(`UNPARK #${iss.number} (${deliveredParked ? 'aveva consegnato' : 'parked senza verdetto'}) → ${LBL_QUEUED} — "${iss.title?.slice(0, 50)}"`);
+        continue;
+      }
+
+      // A daily issue is only a container. Apply an attributable terminal
+      // outcome to its FU item, then let the next open item re-enter the queue;
+      // never close/flag/defer the whole bucket from one item's verdict.
+      if (dailyIssue
+          && (NON_RETRYABLE.has(outcome) || DAILY_TRANSIENT_OUTCOMES.has(outcome) || outcome === 'pr-created')) {
+        let liveIssue = null;
+        try {
+          liveIssue = gh(['issue', 'view', String(iss.number), '--repo', REPO, '--json', 'title,body']);
+        } catch {}
+        if (!liveIssue || typeof liveIssue.body !== 'string') {
+          console.log(`DAILY-OUTCOME-SKIP #${iss.number}: body live non leggibile, nessuna uscita issue-wide.`);
+          continue;
+        }
+        const outcomeBody = outcomeEntry.comment?.body;
+        const mergedItemPr = outcome === 'pr-created'
+          ? mergedDailyItemPr(iss.number, dailyOutcomeItemId(outcomeBody), outcomeEntry.at)
+          : null;
+        const composeTransition = (snapshot) => dailyBucketOutcomeTransition(
+          snapshot,
+          outcome,
+          outcomeBody,
+          { verifiedMergedItemId: mergedItemPr?.itemId || null },
+        );
+        let transition = composeTransition(liveIssue);
+        if (!transition.handled) continue;
+        if (outcome === 'overlap-skip' && transition.action === 'retry') {
+          const comments = issueComments(iss.number);
+          const hold = dailyOverlapRetryHold(comments, readOverlapBlocker);
+          if (hold.hold) {
+            console.log(`DAILY-OUTCOME-HOLD #${iss.number}: ${hold.reason}${hold.blocker ? ` PR #${hold.blocker}` : ''} → item non riaccodato.`);
+            continue;
+          }
+        }
+        attempted++;
+        let outcomeConsumed = transition.action === 'outcome-consumed';
+        let action = outcomeConsumed ? transition.reconcileAction : transition.action;
+        if (!['retry', 'requeue', 'settled', 'blocked'].includes(action)) {
+          console.log(`DAILY-OUTCOME-SKIP #${iss.number} (${transition.action}${transition.reason ? `: ${transition.reason}` : ''}) → nessuna transizione issue-wide.`);
+          continue;
+        }
+
+        if (transition.itemId) {
+          if (dailyOutcomePrScan === null) dailyOutcomePrScan = loadOpenPrsForDailyMutex();
+          const mutex = dailyMutexDecision(transition.itemId, dailyOutcomePrScan, iss.number);
+          if (!mutex.eligible) {
+            console.log(`DAILY-OUTCOME-SKIP #${iss.number} (${transition.itemId}: ${mutex.reason}) → item ancora in volo o scansione PR non verificabile.`);
+            continue;
+          }
+        }
+
+        if (DRY) {
+          succeeded++;
+          console.log(`[dry] daily outcome #${iss.number}: ${transition.itemId} → ${transition.state}; ${action}${transition.nextItem ? `, prossimo ${transition.nextItem.id}` : ''}`);
+          continue;
+        }
+        // `outcome-consumed` means the body already contains the item State.
+        // The previous tick may still have failed at the label edit, so keep
+        // reconciling labels from that durable body state without rewriting it.
+        if (!outcomeConsumed) {
+          const write = updateDailyIssueBody(
+            { ...iss, title: liveIssue.title, body: liveIssue.body },
+            composeTransition,
+            transition,
+          );
+          if (!write.ok) continue;
+          transition = write.transition;
+          outcomeConsumed = transition.action === 'outcome-consumed';
+          action = outcomeConsumed ? transition.reconcileAction : transition.action;
+          if (!['retry', 'requeue', 'settled', 'blocked'].includes(action)) {
+            console.log(`DAILY-OUTCOME-SKIP #${iss.number} (ricomposizione ${transition.action}${transition.reason ? `: ${transition.reason}` : ''}) → nessuna transizione issue-wide.`);
+            continue;
+          }
+        }
+
+        const attemptLabels = names(iss).filter((name) => /^fu-(?:attempt|reparked):\d+$/.test(name));
+        // A blocked item with no next open FU is a technical terminal state for
+        // the whole bucket. Remove it from the parked VERDICT-EXIT pool after
+        // adding the durable defer marker; otherwise the same consumed outcome
+        // remains eligible on every tick and burns one scan slot forever.
+        if (action === 'blocked') {
+          if (DRY) {
+            succeeded++;
+            console.log(`[dry] daily outcome #${iss.number}: ${transition.itemId} → ${transition.state}; blocked → ${LBL_AUTOMATION_DEFERRED}`);
+            continue;
+          }
+          if (!deferAutomationIssue(iss.number, {
+            remove: [LBL_PARKED, LBL_MAYBE_RESOLVED, LBL_QUEUED, LBL_FIX, ...attemptLabels],
+            reason: 'daily-bucket-blocked',
+          })) continue;
+          succeeded++;
+          if (outcomeConsumed) {
+            console.log(`DAILY-OUTCOME-DEFERRED #${iss.number}: body già terminale e bucket bloccato (${transition.itemId})`);
+            continue;
+          }
+          const note = `⏸️ **Daily item bloccato dal verdetto del fixer:** ${transition.itemId} → blocked (FIX_OUTCOME ${outcome}). Il bucket non ha altri FU open: viene differito tecnicamente; nessun item viene dichiarato risolto.\n\n<!-- DAILY_ITEM_OUTCOME: ${transition.itemId} -->`;
+          commentIssue(iss.number, note, 'daily item blocked outcome comment');
+          console.log(`DAILY-OUTCOME #${iss.number}: ${transition.itemId} → ${transition.state}; blocked → ${LBL_AUTOMATION_DEFERRED}`);
+          continue;
+        }
+        const add = action === 'requeue' || action === 'retry' ? [LBL_QUEUED] : [];
+        const remove = action === 'requeue' || action === 'retry'
+          ? [LBL_PARKED, LBL_MAYBE_RESOLVED, LBL_AUTOMATION_DEFERRED, ...attemptLabels]
+          : action === 'settled'
+            ? [LBL_PARKED, LBL_MAYBE_RESOLVED, LBL_QUEUED, LBL_AUTOMATION_DEFERRED, ...attemptLabels]
+            : [LBL_MAYBE_RESOLVED, LBL_QUEUED, ...attemptLabels];
+        const currentLabels = new Set(names(iss));
+        const labelsNeedRepair = add.some((label) => !currentLabels.has(label))
+          || remove.some((label) => currentLabels.has(label));
+        if (outcomeConsumed && !labelsNeedRepair) {
+          console.log(`DAILY-OUTCOME-OK #${iss.number}: body già terminale e label già riconciliate (${action})`);
+          continue;
+        }
+        if (!edit(iss.number, { add, remove })) continue;
+        succeeded++;
+        if (outcomeConsumed) {
+          console.log(`DAILY-OUTCOME-RECOVER #${iss.number}: label riconciliate dal body terminale (${transition.itemId} → ${action})`);
+          continue;
+        }
+        const note = action === 'retry'
+          ? `♻️ **Daily item ri-accodato dopo un blocco transitorio:** ${transition.itemId} resta ${transition.state}; l’esito ${outcome} non conclude un item. Nessuna PR aperta reclama questo item, quindi il bucket può proseguire senza attendere PR relative ad altri FU.\n\n<!-- DAILY_ITEM_OUTCOME: ${transition.itemId} -->`
+          : action === 'requeue'
+          ? `♻️ **Esito daily item applicato dal followup-drainer:** ${transition.itemId} → ${transition.state} in base all’ultimo FIX_OUTCOME ${outcome}. Il bucket resta aperto e il prossimo item ${transition.nextItem.id} torna in coda; nessun verdetto del singolo item viene applicato all’intero issue.\n\n<!-- DAILY_ITEM_OUTCOME: ${transition.itemId} -->`
+          : action === 'settled'
+            ? `✅ **Daily bucket riconciliato item per item:** ${transition.itemId} → ${transition.state} dall’ultimo FIX_OUTCOME ${outcome}; tutti gli item sono ora done. La chiusura resta al reconciler del corpus.\n\n<!-- DAILY_ITEM_OUTCOME: ${transition.itemId} -->`
+            : `⏸️ **Daily item bloccato dal verdetto del fixer:** ${transition.itemId} → blocked (FIX_OUTCOME ${outcome}). Il bucket resta aperto/parcheggiato; gli altri item non vengono dichiarati risolti.\n\n<!-- DAILY_ITEM_OUTCOME: ${transition.itemId} -->`;
+        if (!outcomeConsumed) commentIssue(iss.number, note, 'daily item outcome comment');
+        console.log(`DAILY-OUTCOME #${iss.number}: ${transition.itemId} → ${transition.state}; ${action}${transition.nextItem ? `, prossimo ${transition.nextItem.id}` : ''}`);
         continue;
       }
 
@@ -6119,7 +6535,7 @@ export function runDrain() {
     }
     if (dailyQueue.item) {
       if (dailyOpenPrScan === null) dailyOpenPrScan = loadOpenPrsForDailyMutex();
-      const mutex = dailyMutexDecision(dailyQueue.item.id, dailyOpenPrScan);
+      const mutex = dailyMutexDecision(dailyQueue.item.id, dailyOpenPrScan, cand.number);
       if (!mutex.eligible) {
         if (mutex.reason === 'item-pr-open') {
           console.log(`SKIP #${cand.number} (${dailyQueue.item.id} già dichiarato nella PR #${mutex.pr?.number}) → item in volo, resta in coda`);
@@ -6285,16 +6701,32 @@ export function runDrain() {
     // NB: una riga sola, per contratto — `tests/issue-fix-app-token-wiring.test.ts` asserisce
     // la forma testuale di questa condizione (`!issueFixCanPushWorkflows && body && detectWorkflowScoped`)
     // e che la capacità arrivi da `canPushWorkflows()`, non da una singola env.
-    if (!issueFixCanPushWorkflows && body && detectWorkflowScoped(`${cand.title}\n${body}`, { title: cand.title, labels: cand.labels })) {
+    // A daily bucket is a container: inspect only the FU selected above. A
+    // workflow path belonging to a later item must not park this bucket before
+    // issue-fix reaches that item.
+    const workflowScopeItem = dailyQueue.item;
+    const workflowScopeText = workflowScopeItem
+      ? workflowScopeItem.raw
+      : `${cand.title}\n${body}`;
+    const workflowScopeMeta = workflowScopeItem
+      ? { title: '', labels: [] }
+      : { title: cand.title, labels: cand.labels };
+    if (!issueFixCanPushWorkflows && body && detectWorkflowScoped(workflowScopeText, workflowScopeMeta)) {
       // Title INCLUDED (#5595): a monitor auto-file ("Workflow Failure: <name>") names its
       // workflow subject only there, so a body-only scan renders an empty `(...)` list.
-      const wfRefs = extractWorkflowRefs(`${cand.title}\n${body}`).slice(0, 5).join(', ');
+      // Daily items deliberately suppress that title/label shortcut: the
+      // aggregate title is not evidence about the selected FU.
+      const wfRefs = extractWorkflowRefs(workflowScopeText).slice(0, 5).join(', ');
       const subject = wfRefs || 'workflow indicato dal monitor che ha aperto la issue';
       console.log(`PARK #${cand.number} (workflow-scoped: ${subject}) → no promozione, evito run bloccato`);
       const note = `⏭️ **Pre-flight drainer (zero-Claude, #1724/#5595)**: il fix di questa follow-up tocca **esclusivamente** file \`.github/workflows/**\` (${subject}), che l'identità con cui \`issue-fix\` pusha su questo repo non può modificare (capacità letta da \`canPushWorkflows()\`: né la GitHub App ha \`workflows: write\`, né il PAT di push espone lo scope \`workflow\`). Promuoverla a \`agent:fix\` brucerebbe ~1M token in un run che finirebbe comunque \`blocked-workflows-scope\`. **Non promuovo**: serve un PAT abilitato o mano umana. Rimuovo \`agent:fix-queued\` e parko (riapribile: togli \`fu-parked\` se il contesto cambia).\n\n<!-- FIX_OUTCOME: blocked-workflows-scope -->`;
+      const itemMarker = workflowScopeItem
+        ? `\n<!-- FOLLOWUP_ITEM: ${workflowScopeItem.id} -->`
+        : '';
+      const outcomeNote = `${note}${itemMarker}`;
       if (DRY) { console.log(`[dry] park #${cand.number} (workflow-scoped)`); continue; }
-      commentIssue(cand.number, note, 'workflow-scoped park comment');
-      edit(cand.number, { add: [LBL_PARKED], remove: [LBL_QUEUED, LBL_FIX] });
+      if (!commentIssue(cand.number, outcomeNote, 'workflow-scoped park comment')) continue;
+      if (!edit(cand.number, { add: [LBL_PARKED], remove: [LBL_QUEUED, LBL_FIX] })) continue;
       continue; // prova il prossimo in coda
     }
 

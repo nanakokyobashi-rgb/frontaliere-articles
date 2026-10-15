@@ -303,6 +303,169 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: node scripts/ci/check-issue-already-resolved.mjs
 
+      # Lo scope viene congelato PRIMA del gate stale-dispatch. Il branch
+      # `fix/issue-N` è condiviso da tutti i FU del bucket: il marker identifica
+      # l'evidence, ma non può separare il mutex finché una PR su quel branch è
+      # aperta. Le PR legacy senza marker `Follow-up item` restano ambigue e
+      # bloccanti, come ogni altra PR sul branch condiviso. Un bucket senza FU
+      # open è invece già terminale: si conserva lo snapshot aggregato e il
+      # gate successivo consuma l'evento senza avviare un fixer senza item.
+      - name: Pre-flight — freeze daily item scope (zero-Claude)
+        id: scope_input
+        if: steps.preflight.outputs.already_resolved != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          CTX_DIR: ${{ runner.temp }}/issue-fix-ctx
+          TRUSTED_GH: ${{ steps.trusted_gh.outputs.path }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$CTX_DIR/mutex-bin"
+          gh issue view "$ISSUE_NUMBER" --repo "$GH_REPO" --json number,title,body,labels,state > "$CTX_DIR/issue.json"
+          node --input-type=module - "$CTX_DIR/issue.json" "$CTX_DIR/scope-issue.json" "$ISSUE_NUMBER" "$GH_REPO" >> "$GITHUB_OUTPUT" <<'NODE'
+          import fs from 'node:fs';
+          import { dailyBucketInfo, dailyBucketScopeDecision } from './scripts/ci/followup-resolution-match.mjs';
+
+          const [issuePath, scopePath, issueNumber, repository] = process.argv.slice(2);
+          const issue = JSON.parse(fs.readFileSync(issuePath, 'utf8'));
+          const info = dailyBucketInfo(issue.title || '');
+          const dailyScope = dailyBucketScopeDecision(issue.title || '', issue.body || '');
+          const item = dailyScope.item;
+          const dailyTerminal = Boolean(info && dailyScope.valid && dailyScope.terminal);
+
+          const scoped = {
+            target: { issue: Number(issueNumber), repo: repository },
+            state: String(issue.state || 'OPEN').toUpperCase(),
+            // Un titolo item-scoped evita che il recurrence mode del guard
+            // erediti la diagnosi di un altro item dello stesso contenitore.
+            title: info && item ? `${issue.title} — ${item.id}` : issue.title,
+            body: info && item ? item.raw : issue.body,
+            labels: issue.labels,
+          };
+          fs.writeFileSync(scopePath, `${JSON.stringify(scoped)}\n`);
+          console.log(`is_daily_bucket=${info ? 'true' : 'false'}`);
+          console.log(`selected_item_id=${item?.id || ''}`);
+          console.log(`daily_terminal=${dailyTerminal ? 'true' : 'false'}`);
+          console.log(`daily_scope_valid=${dailyScope.valid ? 'true' : 'false'}`);
+          if (info && !dailyScope.valid) console.log(`::warning::daily bucket non terminale perché scope malformato: ${dailyScope.reason}`);
+          console.log(`scope_snapshot_file=${scopePath}`);
+          NODE
+
+          cat > "$CTX_DIR/mutex-bin/gh" <<'NODE'
+          #!/usr/bin/env node
+          import path from 'node:path';
+          import { spawnSync } from 'node:child_process';
+          import { pathToFileURL } from 'node:url';
+
+          const args = process.argv.slice(2);
+          const realGh = process.env.MUTEX_REAL_GH || '';
+          const forwardEnv = {
+            ...process.env,
+            PATH: process.env.MUTEX_BASE_PATH || process.env.PATH || '',
+          };
+
+          // Il gate stale emette il FIX_OUTCOME, ma per un daily il drainer
+          // deve poterlo attribuire allo stesso FU congelato prima del gate.
+          // Questo wrapper è nel PATH solo dello step stale, quindi il marker
+          // finisce nella stessa chiamata `gh issue comment`, non in un
+          // commento successivo che potrebbe essere scambiato per un nuovo esito.
+          const dailyItemId = process.env.DAILY_ITEM_ID || '';
+          const bodyIndex = args.indexOf('--body');
+          const isDailyOutcomeComment = process.env.DAILY_BUCKET === 'true'
+            && dailyItemId
+            && args[0] === 'issue'
+            && args[1] === 'comment'
+            && bodyIndex >= 0
+            && bodyIndex + 1 < args.length;
+          if (isDailyOutcomeComment && !String(args[bodyIndex + 1]).includes('FOLLOWUP_ITEM:')) {
+            args[bodyIndex + 1] = `${args[bodyIndex + 1]}\n\n<!-- FOLLOWUP_ITEM: ${dailyItemId} -->`;
+          }
+
+          function forward(argv) {
+            if (!realGh) {
+              process.stdout.write('null\n');
+              return 0;
+            }
+            const result = spawnSync(realGh, argv, {
+              encoding: 'utf8',
+              env: forwardEnv,
+              maxBuffer: 32 * 1024 * 1024,
+            });
+            if (result.stdout) process.stdout.write(result.stdout);
+            if (result.stderr) process.stderr.write(result.stderr);
+            return result.status === null ? 1 : result.status;
+          }
+
+          const headIndex = args.indexOf('--head');
+          const targetBranch = `fix/issue-${process.env.ISSUE_NUMBER || ''}`;
+          const isDailyMutexQuery = process.env.DAILY_BUCKET === 'true'
+            && headIndex >= 0
+            && args[headIndex + 1] === targetBranch
+            && args[0] === 'pr'
+            && args[1] === 'list';
+          if (!isDailyMutexQuery) process.exit(forward(args));
+
+          const jsonIndex = args.indexOf('--json');
+          if (jsonIndex < 0 || !args[jsonIndex + 1]) process.exit(forward(args));
+          const query = [...args];
+          query[jsonIndex + 1] = 'number,headRefName,body,headRepository';
+          const result = realGh
+            ? spawnSync(realGh, query, {
+              encoding: 'utf8',
+              env: forwardEnv,
+              maxBuffer: 32 * 1024 * 1024,
+            })
+            : null;
+          if (!result || result.status !== 0) {
+            // The underlying gate is fail-open on unreadable state; never
+            // expose an unfiltered aggregate-branch list in that case.
+            process.stdout.write('null\n');
+            process.exit(0);
+          }
+
+          let prs;
+          try {
+            prs = JSON.parse(result.stdout || 'null');
+          } catch {
+            process.stdout.write('null\n');
+            process.exit(0);
+          }
+          if (!Array.isArray(prs)) {
+            process.stdout.write('null\n');
+            process.exit(0);
+          }
+
+          let isRepositoryOwnedPrHead;
+          try {
+            const helperPath = path.join(
+              process.env.MUTEX_REPO_ROOT || '',
+              'scripts/ci/lib/pr-head-identity.mjs',
+            );
+            ({ isRepositoryOwnedPrHead } = await import(pathToFileURL(helperPath).href));
+          } catch {
+            process.stdout.write('null\n');
+            process.exit(0);
+          }
+
+          // Una PR da fork può riusare fix/issue-N: il mutex considera solo
+          // head del repo base. Le identità non leggibili restano nel set e
+          // continuano a bloccare, così il preflight resta fail-closed.
+          const repository = process.env.GH_REPO || '';
+          const sameRepositoryPrs = prs.filter((pr) =>
+            isRepositoryOwnedPrHead(pr, repository) !== false);
+
+          // Tutti i FU daily usano ancora `fix/issue-N`: il body marker è
+          // evidence per-item, non una partizione del branch. Restituire una
+          // PR marcata per un FU diverso farebbe correre due run sullo stesso
+          // branch/PR e mescolerebbe codice, review e outcome.
+          process.stdout.write(JSON.stringify(sameRepositoryPrs));
+          NODE
+          chmod +x "$CTX_DIR/mutex-bin/gh"
+          printf 'mutex_bin=%s\n' "$CTX_DIR/mutex-bin" >> "$GITHUB_OUTPUT"
+          printf 'mutex_base_path=%s\n' "$PATH" >> "$GITHUB_OUTPUT"
+          printf 'mutex_real_gh=%s\n' "$TRUSTED_GH" >> "$GITHUB_OUTPUT"
+
       # ── Pre-flight 2b: dispatch stantio ───────────────────────────────────
       # Il pre-flight 2 risponde a «e' gia' risolta?», e su una PR aperta fa
       # PROCEED di proposito (PR aperta = lavoro in corso, non fatto). Qui la
@@ -310,10 +473,8 @@ jobs:
       # issue?». Da #908 la chiave di concorrenza e' per-issue, quindi un secondo
       # `labeled` sulla stessa issue non muore piu' sfrattato: aspetta il primo e
       # poi esegue, con il payload catturato prima — anche se la prima run ha nel
-      # frattempo aperto la PR o si e' presa la label. Difesa unica rimasta era
-      # l'istruzione di prompt «PR gia' in volo: skip», cioe' una run Codex
-      # intera sulla quota condivisa per scoprire una cosa che si legge con due
-      # chiamate `gh`. Bias a PROCEDERE su qualunque dubbio (#918).
+      # frattempo aperto la PR o si e' presa la label. Per i daily, il branch
+      # condiviso resta un mutex unico finché la PR non è più aperta.
       - name: Pre-flight — stale-dispatch gate (zero-Claude)
         id: stale
         if: steps.preflight.outputs.already_resolved != 'true'
@@ -323,7 +484,26 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           DISPATCH_LABEL: ${{ github.event.label.name }}
           STAGE: fix
-        run: node scripts/ci/check-stale-issue-dispatch.mjs
+          DAILY_BUCKET: ${{ steps.scope_input.outputs.is_daily_bucket }}
+          DAILY_ITEM_ID: ${{ steps.scope_input.outputs.selected_item_id }}
+          DAILY_TERMINAL: ${{ steps.scope_input.outputs.daily_terminal }}
+          MUTEX_REAL_GH: ${{ steps.scope_input.outputs.mutex_real_gh }}
+          MUTEX_BASE_PATH: ${{ steps.scope_input.outputs.mutex_base_path }}
+          MUTEX_REPO_ROOT: ${{ github.workspace }}
+          PATH: ${{ steps.scope_input.outputs.mutex_bin }}:${{ steps.scope_input.outputs.mutex_base_path }}
+        run: |
+          set -euo pipefail
+          if [ "${DAILY_TERMINAL:-false}" = 'true' ]; then
+            echo "Daily bucket senza FU open: evento agent:fix già terminale, nessun fixer avviato."
+            gh issue edit "$ISSUE_NUMBER" --repo "$GH_REPO" \
+              --remove-label agent:fix --remove-label agent:fix-queued
+            echo 'stale_dispatch=true' >> "$GITHUB_OUTPUT"
+            if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
+              printf '%s\n' "## Pre-flight stale-dispatch: daily bucket già terminale" >> "$GITHUB_STEP_SUMMARY"
+            fi
+            exit 0
+          fi
+          node scripts/ci/check-stale-issue-dispatch.mjs
 
       # ── Pre-flight 2d: diagnosi gia' consegnata al sito ───────────────────
       # Il POST-step qui sotto («Consegna al sito…») consegna e, se la consegna
@@ -352,7 +532,11 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_FIX_SNAPSHOT_FILE: ${{ steps.scope_input.outputs.scope_snapshot_file }}
+          DAILY_BUCKET: ${{ steps.scope_input.outputs.is_daily_bucket }}
+          DAILY_ITEM_ID: ${{ steps.scope_input.outputs.selected_item_id }}
         run: |
+          set -uo pipefail
           echo "has_workflows_token=false" >> "$GITHUB_OUTPUT"
           if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
             echo "GITHUB_PAT_NANAKO runtime presente → capability workflows lasciata al token del fixer."
@@ -361,6 +545,48 @@ jobs:
             exit 0
           fi
           node scripts/ci/check-workflows-scope.mjs
+          blocked=$(awk -F= '$1 == "workflows_blocked" { value = $2 } END { print value }' "$GITHUB_OUTPUT")
+          if [ "${DAILY_BUCKET:-false}" = 'true' ] && [ "${blocked:-false}" = 'true' ]; then
+            marker_file="$RUNNER_TEMP/daily-workflows-scope-${ISSUE_NUMBER}.md"
+            {
+              cat <<'EOF'
+          ⏭️ **Pre-flight (auto, zero-Claude) — blocco scope `workflows` per item daily**
+
+          Il guard ha esaminato esclusivamente l'item daily selezionato. Il fixer non viene avviato perché il token non può modificare il workflow citato; il bucket resta aperto e gli altri FU non vengono dichiarati risolti.
+
+          EOF
+              printf 'Item attribuito: `%s`\n\n' "$DAILY_ITEM_ID"
+              cat <<'EOF'
+          <!-- FIX_OUTCOME: blocked-workflows-scope -->
+          EOF
+              printf '<!-- FOLLOWUP_ITEM: %s -->\n' "$DAILY_ITEM_ID"
+            } > "$marker_file"
+            marker_posted=false
+            for attempt in 1 2 3; do
+              if gh issue comment "$ISSUE_NUMBER" --repo "$GH_REPO" --body-file "$marker_file"; then
+                marker_posted=true
+                break
+              fi
+              echo "::warning::marker daily workflows-scope non postato (tentativo $attempt/3)"
+            done
+            if [ "$marker_posted" != 'true' ]; then
+              echo "::error::marker daily workflows-scope non postato: ripristino la issue in coda per non lasciare fu-parked senza FOLLOWUP_ITEM"
+              recovered=false
+              for attempt in 1 2 3; do
+                if gh issue edit "$ISSUE_NUMBER" --repo "$GH_REPO" \
+                    --remove-label fu-parked --remove-label automation-deferred \
+                    --add-label agent:fix-queued; then
+                  recovered=true
+                  break
+                fi
+                echo "::warning::recovery label daily workflows-scope fallita (tentativo $attempt/3)"
+              done
+              if [ "$recovered" != 'true' ]; then
+                echo "::error::recovery daily workflows-scope non riuscita: verificare manualmente label, automation-deferred e attribuzione dell'item"
+              fi
+              exit 1
+            fi
+          fi
 
       # ── Pre-flight 4: contesto di gruppo prima del claim ──────────────────
       - name: Load issue group context (B19, zero-Claude)
@@ -585,16 +811,17 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
           CTX_DIR: ${{ runner.temp }}/issue-fix-ctx
+          DAILY_SCOPE_ITEM_ID: ${{ steps.scope_input.outputs.selected_item_id }}
         # I cap turni sono anti-runaway sopra il p99 dei run sani, non budget di
         # lavoro: un run che muore al cap brucia la quota intera e non consegna
         # niente, che è peggio di qualche turno in più.
         run: |
           set -euo pipefail
           mkdir -p "$CTX_DIR"
-          # Daily selection and tiering use one immutable issue snapshot.
-          gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json title,body > "$CTX_DIR/issue.json"
-          labels_json=$(gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json labels --jq '[.labels[].name]')
-          decision=$(node scripts/lib/classify-issue.mjs "$ISSUE_TITLE" "$labels_json")
+          # Daily selection, scope guard and tiering use one immutable issue snapshot.
+          issue_title=$(jq -r '.title // ""' "$CTX_DIR/issue.json")
+          labels_json=$(jq -c '[.labels[]?.name]' "$CTX_DIR/issue.json")
+          decision=$(node scripts/lib/classify-issue.mjs "$issue_title" "$labels_json")
           cat=$(node -e "process.stdout.write(JSON.parse(process.argv[1]).category)" "$decision")
           echo "category=$cat"
 
@@ -624,7 +851,13 @@ jobs:
           const issue = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
           const info = dailyBucketInfo(issue.title || '');
           const items = parseFollowupItems(issue.body || '');
-          const open = items.find((item) => item.id && item.state === 'open');
+          const selected = process.env.DAILY_SCOPE_ITEM_ID || '';
+          const open = selected
+            ? items.find((item) => item.id === selected && item.state === 'open')
+            : items.find((item) => item.id && item.state === 'open');
+          if (selected && !open) {
+            throw new Error(`daily item snapshot stale or no longer open: ${selected}`);
+          }
           console.log('is_daily_bucket=true');
           console.log(`daily_key=${info?.dailyKey || ''}`);
           console.log(`selected_item_id=${open?.id || ''}`);
@@ -873,8 +1106,8 @@ jobs:
             **Contratto del body PR (gate deterministico, non una scelta stilistica):** `## Implementato` deve descrivere solo comportamento, file e conteggi dimostrabili nella diff di questa PR; non rivendicare batch, file o item ereditati dalla base. `## Non implementato (ancora)` deve contenere `- Nessuno` quando non resta lavoro dovuto. Per ogni residuo reale usa una voce tracciabile con `in questa PR`, `PR concatenata #N` oppure `blocked: <causa esterna reale>`. `PR concatenata` senza `#N` non è tracciabile; `blocked:` non può descrivere la semplice coda interna del daily bucket, degli item restanti o della prossima PR: in quei casi indica la PR numerata o il blocker esterno reale.
 
             **Pre-condizioni (termina se falliscono):**
-            - Esiste già una PR aperta che cita "#$ISSUE_NUMBER" → commenta "PR già in volo: #<n>, skip." e TERMINA.
-            - **Overlap sui file:** estrai i path target dal body. Per ogni PR aperta (`gh pr list --state open --json number,title,labels`) confronta i file (`gh pr diff <n> --name-only`): se una modifica già un target → commenta "File `<path>` già in volo nella PR #<n> (<title>) — skip." e TERMINA, per non creare un conflitto o un doppione. Il drainer legge quel «PR #<n>» per rimettere la issue in coda senza consumare un tentativo finché la PR resta attiva. Nel dubbio (issue non file-specifica) procedi. Non sono overlap: in una issue «riapplicare la PR #N su main» la PR #N (la sostituisci); le PR ferme `has-conflicts`/`stale-review`/`needs-human` (`STALLED_PR_LABELS` del drainer), che non mergeranno da sole: aspettarle chiude un cerchio.
+            - **Mutex PR per grana:** per una issue non daily, una PR aperta che cita `#$ISSUE_NUMBER` resta un blocco issue-wide: commenta `PR già in volo: #<n>, skip.` e TERMINA. Per un daily bucket, il blocco è item-scoped: se la PR dichiara `Follow-up item: <FU>` e tutti gli ID sono diversi da `${{ steps.tier.outputs.selected_item_id }}`, non saltare questo item; continua con il controllo di overlap sui file. Una PR che dichiara l'item selezionato (o una PR legacy senza marker FU, quindi ambigua) resta bloccante. Non inferire l'item dal solo riferimento `Addresses #N`.
+            - **Overlap sui file:** estrai i path target dal body. Per ogni PR aperta (`gh pr list --state open --json number,title,labels,body`) confronta i file (`gh pr diff <n> --name-only`): se una modifica già un target → commenta "File `<path>` già in volo nella PR #<n> (<title>) — skip." e TERMINA, per non creare un conflitto o un doppione. Il drainer legge quel «PR #<n>» per rimettere la issue in coda senza consumare un tentativo finché la PR resta attiva. Nel dubbio (issue non file-specifica) procedi. Non sono overlap: in una issue «riapplicare la PR #N su main» la PR #N (la sostituisci); le PR ferme `has-conflicts`/`stale-review`/`needs-human` (`STALLED_PR_LABELS` del drainer), che non mergeranno da sole: aspettarle chiude un cerchio.
             - **Capability guard — valutalo SUBITO, prima di implementare.** Il risultato runtime è `${{ steps.scope_guard.outputs.has_workflows_token }}`. Se è `true`, il PAT è passato sia al remote git sia al lane Codex (`github_token`) e modificare `.github/workflows/**` è una capacità piena: fallo senza esitare. Se è `false`, la corsia Codex non riceve credenziali e non devi implementare modifiche ai workflow: posta il diff proposto, spiega che il PAT non è stato caricato da Remote Config e termina con `blocked-workflows-scope`. Se un push viene rifiutato, usa `blocked-workflows-scope` solo quando il messaggio dice letteralmente "without `workflows` permission"; verifica `git remote -v` e che `git config --get-all http."https://github.com/".extraheader` sia vuoto, poi ritenta una volta e documenta integralmente il rifiuto se persiste. Qualunque altro errore di push va gestito come tale. In ogni caso, impostazioni del repo, branch protection e secret non presenti in CI vanno documentati e terminati senza implementare.
             - **Issue aggregata — is_aggregate=${{ steps.tier.outputs.is_aggregate }}.** Se `true`, tentare tutti gli item in un run sfora il budget turni e consegna ZERO PR. **Regola ferrea:** fixa ESATTAMENTE UN item, poi fermati. (a) applica il capability guard per-item, saltando quelli fuori capacità senza abortire l'intera issue; (b) scegli il primo item in-capacità a maggior valore; (c) implementa solo quello; (d) appena la PR è aperta STOP IMMEDIATO, anche con turni residui; (e) elenca gli altri in `## Non implementato`, che li ri-accoda. Ogni ciclo chiude almeno un item, quindi converge.
 
@@ -912,7 +1145,7 @@ jobs:
             - **CODE vs DATA:** `content/` (14.888 file), `dist/`, `data/`, `public/` NON sono codice da leggere riga per riga. Se la root cause è un drift dell'output, fixa il CODICE che lo genera. Campione → `Read` mirato. `rg` scopato al codice: `rg <pattern> generator engine host scripts -g '!content/**' -g '!dist/**'`.
             - NON modificare né committare path `mode: identical`: il file si corregge nel sito e il rilievo viene instradato; il pre-commit hook trusted rifiuta comunque il commit.
             - Se la root cause non è determinabile con confidenza → NON forzare un fix: commenta "Root cause non determinata: <cosa hai trovato>." con `<!-- FIX_OUTCOME: no-root-cause -->` e `<!-- AUTOMATION_DEFERRED: technical -->`, applica `automation-deferred`, rimuovi il routing `agent:fix*` se ancora presente e TERMINA senza PR. Non chiedere una risposta al proprietario: lo sweep automatico deve prima cambiare input, scheda o osservabilità.
-            - **Telemetria (OBBLIGATORIO):** l'ULTIMO commento che posti sulla issue DEVE contenere un marker su riga propria — in testa o in coda, indifferentemente: `<!-- FIX_OUTCOME: <code> -->`, con `<code>` fra `pr-created`, `blocked-workflows-scope`, `blocked-secrets`, `blocked-admin-settings`, `no-root-cause`, `overlap-skip`, `pr-already-open`, `already-fixed`. Se apri una PR e non posti altro, posta comunque un commento col solo marker. Senza marker, il drainer non sa distinguere un verdetto da una run morta e ri-accoda a vuoto. Commenti sempre con `--body-file` da heredoc `<<'EOF'`: in `--body "..."` la shell esegue i backtick e il commento perde nomi di file e codice.
+            - **Telemetria (OBBLIGATORIO):** l'ULTIMO commento che posti sulla issue DEVE contenere un marker su riga propria — in testa o in coda, indifferentemente: `<!-- FIX_OUTCOME: <code> -->`, con `<code>` fra `pr-created`, `blocked-workflows-scope`, `blocked-secrets`, `blocked-admin-settings`, `no-root-cause`, `overlap-skip`, `pr-already-open`, `already-fixed`. In un daily bucket aggiungi nello STESSO commento `<!-- FOLLOWUP_ITEM: ${{ steps.tier.outputs.selected_item_id }} -->`, così il drainer applica l'esito solo a quell'item. Se apri una PR e non posti altro, posta comunque il commento con entrambi i marker. Senza marker, il drainer non sa distinguere un verdetto da una run morta e ri-accoda a vuoto. Commenti sempre con `--body-file` da heredoc `<<'EOF'`: in `--body "..."` la shell esegue i backtick e il commento perde nomi di file e codice.
 
       - name: Ripristina gemelli identical prima del checkpoint WIP (deterministico)
         id: identical_restore_wip
@@ -1394,6 +1627,7 @@ jobs:
           REPO: ${{ github.repository }}
           ISSUE: ${{ github.event.issue.number }}
           ACTION_OUTCOME: ${{ steps.codex_fix.outcome }}
+          DAILY_ITEM_ID: ${{ steps.tier.outputs.selected_item_id }}
         run: |
           set -uo pipefail
           action_outcome="${ACTION_OUTCOME:-}"
@@ -1435,7 +1669,11 @@ jobs:
               ;;
           esac
           echo "FIX_OUTCOME issue=$ISSUE outcome=$OUT (backstop deterministico)"
-          if ! gh issue comment "$ISSUE" --repo "$REPO" --body "$(printf '<!-- FIX_OUTCOME: %s -->\n_Outcome rilevato dal post-step deterministico (telemetria lessons-harvester)._' "$OUT")"; then
+          item_marker=''
+          if [[ "${DAILY_ITEM_ID:-}" =~ ^FU-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{3}$ ]]; then
+            item_marker="$(printf '\n<!-- FOLLOWUP_ITEM: %s -->' "$DAILY_ITEM_ID")"
+          fi
+          if ! gh issue comment "$ISSUE" --repo "$REPO" --body "$(printf '<!-- FIX_OUTCOME: %s -->\n_Outcome rilevato dal post-step deterministico (telemetria lessons-harvester)._%s' "$OUT" "$item_marker")"; then
             echo "::warning::marker FIX_OUTCOME non postato; nessuna garanzia di telemetria."
           fi
 
