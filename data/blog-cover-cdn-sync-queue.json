@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-niederscherli-posti-letto.webp",
-      "sha256": "3be147899cbcae4954a1fd7a8e1c42f147f3f3c74144f53d27da7ccada709fe5"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-niederscherli-posti-letto-480w.webp",
-      "sha256": "faf9c8cdc5a37f29ee9e5b837ca0de4ddfb0dd848832f68ee9864d964e2a0abf"
-    }
-  ]
+  "items": []
 }
