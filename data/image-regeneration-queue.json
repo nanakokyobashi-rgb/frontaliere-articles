@@ -5,11 +5,11 @@
       "articleId": "offerte-formazione-federale",
       "title": "Amministrazione federale: lavoro, praticantati e formazione",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Generic synthetic office illustration relevant to work in Switzerland; no text, logos, or recognizable face, but a clearly depicte",
+      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Original generic synthetic office illustration relevant to work, but it contains a recognizable foreground person viewed from behi",
       "status": "failed",
-      "failureCount": 5,
+      "failureCount": 6,
       "requestedAt": "2026-10-13T23:44:58.192Z",
-      "lastFailureAt": "2026-10-15T12:50:17.770Z"
+      "lastFailureAt": "2026-10-15T21:05:23.446Z"
     },
     {
       "articleId": "liberta-fondo-pene-sostitutive",
@@ -25,61 +25,21 @@
       "articleId": "opportunita-impiego-federale",
       "title": "Lavorare per l'Amministrazione federale: 50 formazioni",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-opportunita-impiego-federale: openai-codex (vision gate rejected image: Generic synthetic office scene in a Swiss-looking setting, but it includes a recognizable foreground person viewed from behind.);",
+      "reason": "All image providers failed for article-opportunita-impiego-federale: openai-codex (vision gate rejected image: Generic synthetic office illustration relevant to work in Switzerland, with no visible logo or readable text. It fails the gate b",
       "status": "failed",
-      "failureCount": 2,
+      "failureCount": 3,
       "requestedAt": "2026-10-15T01:49:05.613Z",
-      "lastFailureAt": "2026-10-15T12:51:42.239Z"
+      "lastFailureAt": "2026-10-15T21:06:40.176Z"
     },
     {
       "articleId": "dimissioni-rapporto-ticino",
       "title": "Dimissioni da frontaliere: termini e passi in Ticino",
       "fallbackImage": "/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp",
-      "reason": "All image providers failed for article-dimissioni-rapporto-ticino: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Ticino cross-border commuting, but it includes a prominent foreground person viewed f",
+      "reason": "All image providers failed for article-dimissioni-rapporto-ticino: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to resignation and cross-border commuting in Ticino, but it visibly includes a foregroun",
       "status": "failed",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-15T11:39:57.424Z",
-      "lastFailureAt": "2026-10-15T12:56:12.993Z"
-    },
-    {
-      "articleId": "saronno-piccole-stelle-softball",
-      "title": "Saronno, torna Piccole Stelle: torneo di softball Under 14",
-      "fallbackImage": "/images/blog/article-saronno-manifestazione-palestina-ottobre-2026.webp",
-      "reason": "All image providers failed for article-saronno-piccole-stelle-softball: openai-codex (vision gate rejected image: Generic synthetic softball scene relevant to the topic, but it inc",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-15T17:55:49.707Z",
-      "lastFailureAt": "2026-10-15T17:55:49.707Z"
-    },
-    {
-      "articleId": "agevolazioni-doganali-impiego",
-      "title": "Agevolazioni doganali: novità dal 1° novembre 2026",
-      "fallbackImage": "/images/blog/voto-iva-avs-novembre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-15T18:35:17.196Z",
-      "lastFailureAt": "2026-10-15T18:35:17.196Z"
-    },
-    {
-      "articleId": "svizzera-thailandia-aelss-visita-2026",
-      "title": "Svizzera e Thailandia evidenziano opportunità libero scambio",
-      "fallbackImage": "/images/blog/article-svizzera-partecipa-fmi-bangkok-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-15T18:53:35.513Z",
-      "lastFailureAt": "2026-10-15T18:53:35.513Z"
-    },
-    {
-      "articleId": "referendum-armi-sicurezza-svizzera",
-      "title": "Export armi e sicurezza Svizzera: referendum 29 novembre",
-      "fallbackImage": "/images/blog/accordi-svizzera-ue-consiglio-federale.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-15T19:42:09.356Z",
-      "lastFailureAt": "2026-10-15T19:42:09.356Z"
+      "lastFailureAt": "2026-10-15T21:08:28.839Z"
     }
   ]
 }

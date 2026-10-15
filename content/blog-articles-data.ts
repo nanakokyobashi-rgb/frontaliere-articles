@@ -44660,7 +44660,7 @@ const RAW_ARTICLES = [
  id: 'saronno-piccole-stelle-softball',
  category: 'novita',
  date: '2026-10-15T17:55:48.993Z',
- image: '/images/blog/article-saronno-manifestazione-palestina-ottobre-2026.webp',
+ image: '/images/blog/article-saronno-piccole-stelle-softball.webp',
  hasCalculator: false,
  articleType: 'news',
  authorSlug: 'redazione',
