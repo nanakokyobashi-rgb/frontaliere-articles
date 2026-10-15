@@ -70,6 +70,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-15T03:21:39.715Z",
       "lastFailureAt": "2026-10-15T03:21:39.715Z"
+    },
+    {
+      "articleId": "collaudo-veicoli-berna-procedura",
+      "title": "Collaudo veicoli a Berna: convocazione e requisiti",
+      "fallbackImage": "/images/blog/article-collaudo-veicoli-canton-zurigo.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T03:43:23.697Z",
+      "lastFailureAt": "2026-10-15T03:43:23.697Z"
     }
   ]
 }
