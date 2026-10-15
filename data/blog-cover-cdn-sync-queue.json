@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-preventivo-lugano-disavanzo-2027.webp",
+      "sha256": "806a41a1479f811488bb8a4d24c4df66fc9173f1101644df39def7ed8e2d6632"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-preventivo-lugano-disavanzo-2027-480w.webp",
+      "sha256": "5eeca42850cb6e013c7ffe01779d2ae777c7be5a0e81ebcdad57b00e87526f40"
+    }
+  ]
 }
