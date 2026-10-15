@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-luci-masnago-terza-puntata.webp",
+      "sha256": "38b9e700d62354af31a9cff62743f96aee3ef9f4887766abb5876353381b2f33"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-luci-masnago-terza-puntata-480w.webp",
+      "sha256": "9895ef2dfcd077f42196207959148021236bf2d6888d218ec3e00e896751cbb7"
+    }
+  ]
 }
