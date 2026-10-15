@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T09:55:02.142Z",
-  "contentHash": "ca5ee2cc0ae6fa7d0de5e9d282b9b13390ffa75b91fdd164251ae20d791e9bd4",
+  "updatedAt": "2026-10-15T15:11:04.417Z",
+  "contentHash": "981549413838f9dc1a4491021d5fa4d2cbdc5b9178a84f310caba7e4e2376f3c",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "5",
+          "value": "4",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
@@ -109,12 +109,6 @@
               "value": "Cantiere",
               "detail": "fine prevista: 6 novembre 2026",
               "date": "2026-09-25T13:42:00.000Z"
-            },
-            {
-              "label": "A7 Winterthur <-> Kreuzlingen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Kreuzlingen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 0.7 Limitazione del…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 15 ottobre 2026",
-              "date": "2026-10-05T06:48:00.000Z"
             },
             {
               "label": "A23 Diramazione Grüneck <-> Eschikofen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Eschikofen Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del…",
@@ -209,7 +203,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T15:11:04.417Z"
     },
     "en": {
       "canton": "TG",
@@ -229,7 +223,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "5",
+          "value": "4",
           "note": "reports as of 15 October 2026"
         }
       ],
@@ -296,12 +290,6 @@
               "value": "Roadworks",
               "detail": "until 6 November 2026",
               "date": "2026-09-25T13:42:00.000Z"
-            },
-            {
-              "label": "A7 Winterthur <-> Kreuzlingen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Kreuzlingen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 0.7 Limitazione del…",
-              "value": "Roadworks",
-              "detail": "until 15 October 2026",
-              "date": "2026-10-05T06:48:00.000Z"
             },
             {
               "label": "A23 Diramazione Grüneck <-> Eschikofen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Eschikofen Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del…",
@@ -396,7 +384,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T15:11:04.417Z"
     },
     "de": {
       "canton": "TG",
@@ -416,7 +404,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "5",
+          "value": "4",
           "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
@@ -483,12 +471,6 @@
               "value": "Baustelle",
               "detail": "bis 6. November 2026",
               "date": "2026-09-25T13:42:00.000Z"
-            },
-            {
-              "label": "A7 Winterthur <-> Kreuzlingen zwischen Autobahndreieck Verzweigung Grüneck und Anschluss Kreuzlingen-Süd Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.7 Verkehrsführung: Fahrbahnverengung…",
-              "value": "Baustelle",
-              "detail": "bis 15. Oktober 2026",
-              "date": "2026-10-05T06:48:00.000Z"
             },
             {
               "label": "A23 Verzweigung Grüneck <-> Eschikofen zwischen Autobahndreieck Verzweigung Grüneck und Anschluss Eschikofen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.15 Verkehrsführung…",
@@ -583,7 +565,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T15:11:04.417Z"
     },
     "fr": {
       "canton": "TG",
@@ -603,7 +585,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "5",
+          "value": "4",
           "note": "signalements au 15 octobre 2026"
         }
       ],
@@ -670,12 +652,6 @@
               "value": "Chantier",
               "detail": "jusqu’au 6 novembre 2026",
               "date": "2026-09-25T13:42:00.000Z"
-            },
-            {
-              "label": "A7 Winterthur <-> Kreuzlingen entre Echangeur Echangeur de Grüneck et Jonction autoroutière Kreuzlingen-Sud Situation: trafic perturbé travaux, longueur [km] 0.7 Gestion du trafic: rétrécissement…",
-              "value": "Chantier",
-              "detail": "jusqu’au 15 octobre 2026",
-              "date": "2026-10-05T06:48:00.000Z"
             },
             {
               "label": "A23 Echangeur de Grüneck <-> Eschikofen entre Echangeur Echangeur de Grüneck et Jonction autoroutière Eschikofen Situation: trafic perturbé travaux, longueur [km] 0.15 Gestion du trafic…",
@@ -770,7 +746,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T15:11:04.417Z"
     }
   }
 }
