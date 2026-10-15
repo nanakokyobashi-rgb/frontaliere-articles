@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-soccorsi-coda-autostrada-lombarda.webp",
-      "sha256": "7ee1135ef184ca41ca066786312666bc3b5e9e79f5e1232c6c4aaf841a085d7f"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-soccorsi-coda-autostrada-lombarda-480w.webp",
-      "sha256": "35be7ad6271e5b9f8e6e56f3e110ae347655acf0fb9c987d687961a96694d0ca"
-    }
-  ]
+  "items": []
 }
