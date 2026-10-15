@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-ubs-scenari-trasferimento-sede.webp",
+      "sha256": "1a57d1c55b6d9368a0f26d9717371995c366179da0529892924cd91579248d06"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-ubs-scenari-trasferimento-sede-480w.webp",
+      "sha256": "207b0e12c09e1ef6c6ab9e6635eea47b75a6423173621a2201e2ca404acd71b0"
+    }
+  ]
 }
