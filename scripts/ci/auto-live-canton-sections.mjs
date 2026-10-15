@@ -9,9 +9,9 @@
  * credenziali e non pusha mai: le mutazioni GitHub restano nella workflow.
  */
 import '../../host/cantonSectionsBootstrap.mjs';
-import fs from 'node:fs';
+import fs, { realpathSync } from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { ARTICLES_PAGE_SIZE } from '../../engine/shared/articleArchiveConfig.mjs';
@@ -516,7 +516,10 @@ async function main(argv = process.argv.slice(2)) {
   console.log(options.json ? JSON.stringify(result) : JSON.stringify(result, null, 2));
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && (() => {
+  try { return import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href; }
+  catch { return false; }
+})()) {
   main().catch((error) => {
     console.error(`::error::auto-live-canton-sections: ${error.message}`);
     process.exitCode = 1;
