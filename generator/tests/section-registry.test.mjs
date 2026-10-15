@@ -1167,6 +1167,25 @@ test('edge: il retry del purge senza credenziali resta fail-closed', async () =>
   const retry = await publishRelease(planRelease(fakeDist(withLive(['canton-ti']))), { io, env: {}, log: () => {}, bootstrapWaitMs: 0 });
   assert.deepEqual(retry, { code: 1, phase: 'credenziali', flipped: false });
   assert.deepEqual(io.ops, []);
+
+  // Anche una base derivata con il commit del puntatore cambiato, ma con lo
+  // stesso stato e gli stessi byte, e' una release gia' nota: non puo' dare
+  // code 0 prima del purge solo perche' non coincide col digest ricalcolato.
+  const replay = await publish(withLive(['canton-ti'], OLD), {
+    history: [withLive(['canton-ti'], OLD), withLive(['canton-gr'])],
+  });
+  const altered = pointerOf(replay.io);
+  altered.commit = COMMIT;
+  replay.io.store.set(EDGE_SECTION_REGISTRY_FILE, Buffer.from(JSON.stringify(altered)));
+  replay.io.ops.length = 0;
+  const derivedRetry = await publishRelease(planRelease(fakeDist(withLive(['canton-ti'], OLD))), {
+    io: replay.io,
+    env: {},
+    log: () => {},
+    bootstrapWaitMs: 0,
+  });
+  assert.deepEqual(derivedRetry, { code: 1, phase: 'credenziali', flipped: false });
+  assert.deepEqual(replay.io.ops, []);
 });
 
 test('edge: stato unknown con base gia\' usata forza una nuova base di staging', async () => {

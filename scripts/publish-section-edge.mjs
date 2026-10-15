@@ -478,8 +478,10 @@ export async function publishRelease(release, { io, env = process.env, log = con
   const occupiedBases = [...new Set([previousBase, previousPreviousBase].filter((base) => typeof base === 'string'))];
   const sameRegistryCommit = previous.doc?.commit === release.commit;
   const snapshotCommit = releaseSnapshotCommit(release);
-  const snapshotBase = releaseBase(snapshotCommit);
-  const sameKnownRelease = previous.state === 'ok' && !mandatory && (previousBase === release.base || (sameRegistryCommit && previousBase === snapshotBase));
+  // Se stato e byte sono gia' dimostrati uguali, la release effettiva e' nota
+  // anche quando la sua base e' un digest derivato o il commit del puntatore
+  // e' cambiato: il commit non fa parte dello stato servito da Worker.
+  const sameKnownRelease = previous.state === 'ok' && !mandatory;
   if (missingCreds.length) return stop('credenziali', `assenti (${missingCreds.join(', ')}): niente caricato`, false, sameKnownRelease);
   if (!sameKnownRelease && (previous.state === 'unknown' || occupiedBases.includes(release.base) || sameRegistryCommit)) {
     let immutableCommit = snapshotCommit;
