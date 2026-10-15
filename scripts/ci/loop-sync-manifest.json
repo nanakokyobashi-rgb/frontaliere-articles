@@ -1900,7 +1900,7 @@
       "reason": "Migrazione fail-closed del ledger evergreen: converte il formato globale storico in schema v2, conserva i ban e gli strike senza provenienza come `legacy` con regola `preflight-required`, e scrive solo con `--apply` dopo un dry-run senza record persi. E' uno strumento del corpus che governa il file sotto `data/`; il sito consuma il risultato via JSON HTTP e non esegue questo writer.",
       "baseline": {
         "site": null,
-        "corpus": "c8c1cdbcf8ff3717",
+        "corpus": "a80c315fdaa432f8",
         "alignedAt": "2026-10-15"
       }
     },
