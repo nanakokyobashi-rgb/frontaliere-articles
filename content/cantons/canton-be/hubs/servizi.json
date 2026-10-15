@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-10-15T02:32:01.880Z",
-  "contentHash": "d4be1577840ec38bff524435f53b729b7f41e2c60da17e939263af1c8c71101c",
+  "updatedAt": "2026-10-15T02:55:16.757Z",
+  "contentHash": "78be88ca6d5490348faeb09754d7c311f7615ce145496fd60f20177a764ec571",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -80,6 +80,12 @@
           "date": "2026-10-15T02:27:21.587Z"
         },
         {
+          "title": "Targhe e immatricolazione Cantone Berna: guida alle procedure",
+          "url": "/articoli-svizzera/berna-veicoli-procedura-guida/",
+          "excerpt": "Come gestire targhe, immatricolazione, collaudo e cambio di proprietario nel Cantone di Berna: verifica requisiti, scadenze e importi ufficiali.",
+          "date": "2026-10-15T02:50:14.192Z"
+        },
+        {
           "title": "Licenza di caccia canton Berna requisiti e domanda",
           "url": "/articoli-svizzera/licenza-caccia-berna-requisiti/",
           "excerpt": "Scopri come richiedere la licenza di caccia nel Cantone di Berna: verifica competenza, requisiti, esami, specie cacciabili, documenti, scadenze e importi.",
@@ -114,12 +120,6 @@
           "url": "/articoli-svizzera/premi-cassa-malati-cantone-bern-riduzione/",
           "excerpt": "Ecco i fatti chiave per i premi dell'assicurazione malattia obbligatoria nel Cantone di Berna.",
           "date": "2026-08-12T09:20:30.193Z"
-        },
-        {
-          "title": "Patente di guida a Berna: conversione e requisiti",
-          "url": "/articoli-svizzera/patent-canton-bern-conversion-exams/",
-          "excerpt": "La conversione della patente di guida estera nel Canton di Berna richiede l'esame teorico e pratico, nonché la frequentazione di corsi obbligatori. L'ufficio della circolazione competente è responsabile…",
-          "date": "2026-08-13T17:49:01.339Z"
         }
       ],
       "links": [
@@ -148,7 +148,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-15T02:32:01.880Z"
+      "updatedAt": "2026-10-15T02:55:16.757Z"
     },
     "en": {
       "canton": "BE",
@@ -211,6 +211,12 @@
           "date": "2026-10-15T02:27:21.587Z"
         },
         {
+          "title": "Vehicle Registration in Bern: A Step-by-Step Guide",
+          "url": "/en/swiss-articles/bern-vehicle-registration-guide/",
+          "excerpt": "How to handle license plates, registration, vehicle inspection and change of ownership in the Canton of Bern: check requirements, deadlines and official fees.",
+          "date": "2026-10-15T02:50:14.192Z"
+        },
+        {
           "title": "Hunting license in the canton of Bern: requirements and application",
           "url": "/en/swiss-articles/hunting-license-bern-requirements/",
           "excerpt": "Discover how to apply for a hunting license in the Canton of Bern: verify competence, requirements, exams, huntable species, documents, deadlines, and amounts.",
@@ -245,12 +251,6 @@
           "url": "/en/swiss-articles/health-insurance-premiums-cantonal-bern-reduction/",
           "excerpt": "Here are the key facts for compulsory health insurance premiums in the Canton of Bern.",
           "date": "2026-08-12T09:20:30.193Z"
-        },
-        {
-          "title": "Driving licence in Bern: conversion and requirements",
-          "url": "/en/swiss-articles/canton-of-bern-driving-license-conversion-and-exams/",
-          "excerpt": "The conversion of the foreign driver's license in the Canton of Bern requires the theoretical and practical examination, as well as the attendance of compulsory courses. The relevant circulation office is responsible…",
-          "date": "2026-08-13T17:49:01.339Z"
         }
       ],
       "links": [
@@ -275,7 +275,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-15T02:32:01.880Z"
+      "updatedAt": "2026-10-15T02:55:16.757Z"
     },
     "de": {
       "canton": "BE",
@@ -338,6 +338,12 @@
           "date": "2026-10-15T02:27:21.587Z"
         },
         {
+          "title": "Kontrollschilder und Zulassung im Kanton Bern: Leitfaden zu den Verfahren",
+          "url": "/de/schweiz-artikel/bern-fahrzeug-zulassung-leitfaden/",
+          "excerpt": "So regeln Sie im Kanton Bern Kontrollschilder, Zulassung, Fahrzeugprüfung und Halterwechsel: Prüfen Sie die offiziellen Anforderungen, Fristen und Beträge.",
+          "date": "2026-10-15T02:50:14.192Z"
+        },
+        {
           "title": "Jagdlizenz im Kanton Bern: Voraussetzungen und Antrag",
           "url": "/de/schweiz-artikel/jagdkarte-bern-voraussetzungen/",
           "excerpt": "Erfahren Sie, wie Sie die Jagdlizenz im Kanton Bern beantragen: Prüfen Sie Zuständigkeit, Voraussetzungen, Prüfungen, jagdbare Arten, Dokumente, Fristen und Beträge.",
@@ -372,12 +378,6 @@
           "url": "/de/schweiz-artikel/kostenvoranschlag-kv-bern-kanton/",
           "excerpt": "Hier finden Sie die wichtigsten Fakten zu den Prämien der obligatorischen Krankenversicherung im Kanton Bern.",
           "date": "2026-08-12T09:20:30.193Z"
-        },
-        {
-          "title": "Führerschein in Bern: Umstellung und Voraussetzungen",
-          "url": "/de/schweiz-artikel/fuehrerschein-kanton-bern-umstellung-und-pruefung/",
-          "excerpt": "Die Umschulung des ausländischen Führerscheins im Kanton Bern erfordert die theoretische und praktische Prüfung sowie die Teilnahme an Pflichtkursen. Für die Bearbeitung des Umwandlungsantrags ist das zuständige…",
-          "date": "2026-08-13T17:49:01.339Z"
         }
       ],
       "links": [
@@ -402,7 +402,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-15T02:32:01.880Z"
+      "updatedAt": "2026-10-15T02:55:16.757Z"
     },
     "fr": {
       "canton": "BE",
@@ -465,6 +465,12 @@
           "date": "2026-10-15T02:27:21.587Z"
         },
         {
+          "title": "Plaques et immatriculation dans le canton de Berne : guide des procédures",
+          "url": "/fr/articles-suisse/berne-vehicule-immatriculation-guide/",
+          "excerpt": "Comment gérer les plaques, l’immatriculation, le contrôle technique et le changement de propriétaire dans le canton de Berne : vérifiez les exigences, les échéances et les montants officiels.",
+          "date": "2026-10-15T02:50:14.192Z"
+        },
+        {
           "title": "Permis de chasse dans le canton de Berne : conditions et demande",
           "url": "/fr/articles-suisse/permis-chasse-berne-conditions/",
           "excerpt": "Découvrez comment demander le permis de chasse dans le canton de Berne : vérifiez la compétence, les conditions, les examens, les espèces chassables, les documents, les délais et les montants.",
@@ -499,12 +505,6 @@
           "url": "/fr/articles-suisse/primes-assurance-maladie-canton-de-bourbourg/",
           "excerpt": "Voici les faits clés pour les primes de l'assurance maladie obligatoire dans le canton de Berne.",
           "date": "2026-08-12T09:20:30.193Z"
-        },
-        {
-          "title": "Permis de conduire à Berne : conversion et exigences",
-          "url": "/fr/articles-suisse/permis-de-conduire-canton-de-bourguignon-conversion-et-examen/",
-          "excerpt": "La conversion du permis de conduire étranger dans le canton de Berne nécessite l'examen théorique et pratique ainsi que la fréquentation de cours obligatoires. L'office de la circulation compétent est responsable du…",
-          "date": "2026-08-13T17:49:01.339Z"
         }
       ],
       "links": [
@@ -525,7 +525,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-15T02:32:01.880Z"
+      "updatedAt": "2026-10-15T02:55:16.757Z"
     }
   }
 }
