@@ -36,6 +36,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.gottardo-quadri-cupra-berna.title': 'Gottardo: Quadri questions Bern about CUPRA',
     'blog.article.gottardo-quadri-cupra-berna.excerpt': 'The queues at the Gotthard are affecting Upper Leventina Quadri questions the Federal Council about the CUPRA lane CUPRA is permanent from 2026 and has management',
     'blog.article.gottardo-quadri-cupra-berna.imageAlt': 'Traffic jam on the San Gottardo highway with cars stuck in the valley',
+    'blog.article.sovranita-fiscale-accordo-ue.title': 'EU agreement: risk of loss of tax sovereignty for Switzerland',
+    'blog.article.sovranita-fiscale-accordo-ue.excerpt': 'On October 6, NZZ raises the tax alarm State aid can include tax breaks Confederation, cantons and municipalities involved Planned',
+    'blog.article.sovranita-fiscale-accordo-ue.imageAlt': 'Federal Palace in Bellinzona, symbol of Swiss institutions',
 };
 
 export default blogMetaCantonTiEn;

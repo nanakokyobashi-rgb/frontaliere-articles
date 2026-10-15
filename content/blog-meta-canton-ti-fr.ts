@@ -36,6 +36,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.gottardo-quadri-cupra-berna.title': 'Gothard : quadri interroge Berne sur la CUPRA',
     'blog.article.gottardo-quadri-cupra-berna.excerpt': 'Les bouchons du Saint-Gothard se répercutent sur la Haute-Léventine Quadri interroge le Conseil fédéral sur la voie CUPRA La CUPRA est définitive dès 2026 et a une gestion',
     'blog.article.gottardo-quadri-cupra-berna.imageAlt': 'Bouchon sur l\'A2 du San Gothard avec trafic bloqué dans la vallée',
+    'blog.article.sovranita-fiscale-accordo-ue.title': 'Accord UE : risque de perte de souveraineté fiscale pour la Suisse',
+    'blog.article.sovranita-fiscale-accordo-ue.excerpt': 'Le 6 octobre, la NZZ tire la sonnette d’alarme fiscale Les aides d’État peuvent inclure des allègements fiscaux La Confédération, les cantons et les communes sont concernés Prévue',
+    'blog.article.sovranita-fiscale-accordo-ue.imageAlt': 'Palais fédéral à Bellinzone, symbole des institutions suisses',
 };
 
 export default blogMetaCantonTiFr;

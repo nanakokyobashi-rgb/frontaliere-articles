@@ -127,4 +127,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sovranita-fiscale-accordo-ue',
+ category: 'fiscale',
+ date: '2026-10-15T10:45:34.670Z',
+ image: '/images/blog/article-sovranita-fiscale-accordo-ue.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
