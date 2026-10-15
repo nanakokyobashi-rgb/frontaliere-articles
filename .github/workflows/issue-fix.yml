@@ -354,7 +354,9 @@ jobs:
 
           cat > "$CTX_DIR/mutex-bin/gh" <<'NODE'
           #!/usr/bin/env node
+          import path from 'node:path';
           import { spawnSync } from 'node:child_process';
+          import { pathToFileURL } from 'node:url';
 
           const args = process.argv.slice(2);
           const realGh = process.env.MUTEX_REAL_GH || '';
@@ -407,7 +409,7 @@ jobs:
           const jsonIndex = args.indexOf('--json');
           if (jsonIndex < 0 || !args[jsonIndex + 1]) process.exit(forward(args));
           const query = [...args];
-          query[jsonIndex + 1] = 'number,headRefName,body';
+          query[jsonIndex + 1] = 'number,headRefName,body,headRepository';
           const result = realGh
             ? spawnSync(realGh, query, {
               encoding: 'utf8',
@@ -434,11 +436,30 @@ jobs:
             process.exit(0);
           }
 
+          let isRepositoryOwnedPrHead;
+          try {
+            const helperPath = path.join(
+              process.env.MUTEX_REPO_ROOT || '',
+              'scripts/ci/lib/pr-head-identity.mjs',
+            );
+            ({ isRepositoryOwnedPrHead } = await import(pathToFileURL(helperPath).href));
+          } catch {
+            process.stdout.write('null\n');
+            process.exit(0);
+          }
+
+          // Una PR da fork può riusare fix/issue-N: il mutex considera solo
+          // head del repo base. Le identità non leggibili restano nel set e
+          // continuano a bloccare, così il preflight resta fail-closed.
+          const repository = process.env.GH_REPO || '';
+          const sameRepositoryPrs = prs.filter((pr) =>
+            isRepositoryOwnedPrHead(pr, repository) !== false);
+
           // Tutti i FU daily usano ancora `fix/issue-N`: il body marker è
           // evidence per-item, non una partizione del branch. Restituire una
           // PR marcata per un FU diverso farebbe correre due run sullo stesso
           // branch/PR e mescolerebbe codice, review e outcome.
-          process.stdout.write(JSON.stringify(prs));
+          process.stdout.write(JSON.stringify(sameRepositoryPrs));
           NODE
           chmod +x "$CTX_DIR/mutex-bin/gh"
           printf 'mutex_bin=%s\n' "$CTX_DIR/mutex-bin" >> "$GITHUB_OUTPUT"

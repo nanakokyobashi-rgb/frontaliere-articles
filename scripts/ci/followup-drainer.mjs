@@ -79,6 +79,7 @@ import {
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 import { pinnedBy } from './manifest-pinned-issues.mjs';
 import { conflictHandoffOriginPr } from './check-issue-already-resolved.mjs';
+import { isRepositoryOwnedPrHead, prHeadIdentity } from './lib/pr-head-identity.mjs';
 import {
   bucketState,
   dailyBucketInfo,
@@ -394,9 +395,10 @@ export function dailyBucketQueueDecision(issue) {
  * @param {string} itemId
  * @param {Array<{number?: number, title?: string, body?: string, head?: {ref?: string}, headRefName?: string}>} openPrs
  * @param {number|null} issueNumber
+ * @param {string} repository
  * @returns {{number?: number, title?: string, body?: string, head?: {ref?: string}, headRefName?: string}|null}
  */
-export function openPrForDailyItem(itemId, openPrs, issueNumber = null) {
+export function openPrForDailyItem(itemId, openPrs, issueNumber = null, repository = REPO) {
   const wanted = String(itemId || '').toUpperCase();
   if (!/^FU-\d{4}-\d{2}-\d{2}-\d{3}$/.test(wanted)) return null;
   const issueRef = Number(issueNumber);
@@ -406,9 +408,14 @@ export function openPrForDailyItem(itemId, openPrs, issueNumber = null) {
   return (Array.isArray(openPrs) ? openPrs : []).find((pr) => {
     const text = `${pr?.title || ''}\n${pr?.body || ''}`;
     const markers = followupItemMarkers(text);
+    // An explicit FU marker still claims the item from any repository. The
+    // legacy branch heuristic is narrower: a fork can reuse that ref, so only
+    // a head owned by this repo (or with unknown ownership) holds the mutex.
     if (markers.includes(wanted)) return true;
     const headRefs = [pr?.head?.ref, pr?.headRefName];
-    const legacyBranchMatches = legacyBranch !== null && headRefs.some((ref) => ref === legacyBranch);
+    const legacyBranchMatches = legacyBranch !== null
+      && headRefs.some((ref) => ref === legacyBranch)
+      && isRepositoryOwnedPrHead(pr, repository) !== false;
     // Marker diversi separano l'evidence, non il branch condiviso.
     if (legacyBranchMatches) return true;
     if (!Number.isInteger(issueRef) || issueRef <= 0 || markers.length) return false;
@@ -440,11 +447,7 @@ export function flattenPaginatedOpenPrs(raw) {
  * @returns {{ref: string, repository: string}|null}
  */
 export function openPrHeadIdentity(pr) {
-  const ref = pr?.head?.ref;
-  const repository = pr?.head?.repo?.full_name;
-  if (typeof ref !== 'string' || !ref.trim()) return null;
-  if (typeof repository !== 'string' || !repository.trim()) return null;
-  return { ref, repository };
+  return prHeadIdentity(pr);
 }
 
 /**
@@ -460,11 +463,11 @@ export function parseOpenGroupPrs(raw) {
 }
 
 /** Fail-closed decision for the daily item-level PR mutex. */
-export function dailyMutexDecision(itemId, scan, issueNumber = null) {
+export function dailyMutexDecision(itemId, scan, issueNumber = null, repository = REPO) {
   if (!scan || scan.ok !== true || !Array.isArray(scan.prs)) {
     return { eligible: false, reason: 'open-pr-scan-unavailable', pr: null };
   }
-  const pr = openPrForDailyItem(itemId, scan.prs, issueNumber);
+  const pr = openPrForDailyItem(itemId, scan.prs, issueNumber, repository);
   return pr
     ? { eligible: false, reason: 'item-pr-open', pr }
     : { eligible: true, reason: null, pr: null };
@@ -2724,7 +2727,7 @@ function loadOpenPrsForDailyMutex() {
     const prs = flattenPaginatedOpenPrs(raw);
     if (!prs || !prs.every((pr) => Number.isInteger(Number(pr.number)) && Number(pr.number) > 0
       && typeof pr.title === 'string' && (typeof pr.body === 'string' || pr.body === null)
-      && typeof pr.head?.ref === 'string' && pr.head.ref.trim())) {
+      && openPrHeadIdentity(pr) !== null)) {
       return { ok: false, prs: [] };
     }
     return { ok: true, prs };
@@ -3706,11 +3709,11 @@ export function issueGroupInstanceLabels(issue) {
  * @param {{repository?: string}} [opts]
  */
 export function activeGroupDigests(issues, openPrs = [], { repository = REPO } = {}) {
-  const currentRepository = String(repository).trim().toLocaleLowerCase('en-US');
   const openBranches = new Set(
     (Array.isArray(openPrs) ? openPrs : [])
+      .filter((pr) => isRepositoryOwnedPrHead(pr, repository) === true)
       .map(openPrHeadIdentity)
-      .filter((head) => head && head.repository.toLocaleLowerCase('en-US') === currentRepository)
+      .filter(Boolean)
       .map((head) => head.ref),
   );
   const digests = new Set();

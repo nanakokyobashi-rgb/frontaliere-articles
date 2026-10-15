@@ -18,6 +18,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { isRepositoryOwnedPrHead } from '../../scripts/ci/lib/pr-head-identity.mjs';
 import {
   PARENT_DEQUEUED_MARKER,
   applyParentDequeue,
@@ -33,6 +34,7 @@ import { dailyBucketScopeDecision, isDailyBucketTitle } from '../../scripts/ci/f
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const DRAINER = readFileSync(path.join(ROOT, 'scripts/ci/followup-drainer.mjs'), 'utf8');
+const ISSUE_FIX_WORKFLOW = readFileSync(path.join(ROOT, '.github/workflows/issue-fix.yml'), 'utf8');
 
 const BODY = 'padre decomposto fuori dalla coda del fixer';
 
@@ -356,6 +358,41 @@ test('il mutex daily tratta come legacy anche una PR markerless sul branch issue
     head: { ref: 'fix/issue-9999' },
   };
   assert.equal(dailyMutexDecision(wanted, { ok: true, prs: [differentIssueBranch] }, 2151).eligible, true);
+});
+
+test('il mutex daily ignora una fork che riusa il branch del fixer e riconosce entrambi i formati head', () => {
+  const repository = 'nanakokyobashi-rgb/frontaliere-articles';
+  const forkPr = {
+    number: 2577,
+    title: 'PR aperta da una fork',
+    body: 'Branch riutilizzato senza riferimenti all’issue',
+    head: { ref: 'fix/issue-2151', repo: { full_name: 'contributor/frontaliere-articles' } },
+  };
+  const ownPr = {
+    number: 2578,
+    title: 'fix daily item',
+    body: 'Addresses #2151',
+    headRefName: 'fix/issue-2151',
+    headRepository: { nameWithOwner: repository },
+  };
+
+  assert.equal(isRepositoryOwnedPrHead(forkPr, repository), false);
+  assert.equal(isRepositoryOwnedPrHead(ownPr, repository), true);
+  assert.equal(isRepositoryOwnedPrHead({ headRefName: 'fix/issue-2151' }, repository), null);
+  assert.equal(dailyMutexDecision('FU-2026-10-02-001', { ok: true, prs: [forkPr] }, 2151, repository).eligible, true);
+  assert.equal(dailyMutexDecision('FU-2026-10-02-001', {
+    ok: true,
+    prs: [{ ...forkPr, body: 'Follow-up item: FU-2026-10-02-001' }],
+  }, 2151, repository).eligible, false);
+  assert.deepEqual(dailyMutexDecision('FU-2026-10-02-001', { ok: true, prs: [ownPr] }, 2151, repository), {
+    eligible: false,
+    reason: 'item-pr-open',
+    pr: ownPr,
+  });
+
+  assert.match(ISSUE_FIX_WORKFLOW, /number,headRefName,body,headRepository/);
+  assert.match(ISSUE_FIX_WORKFLOW, /scripts\/ci\/lib\/pr-head-identity\.mjs/);
+  assert.match(ISSUE_FIX_WORKFLOW, /isRepositoryOwnedPrHead\(pr, repository\) !== false/);
 });
 
 test('un pr-already-open attribuito riaccoda solo il FU attualmente selezionato', () => {
