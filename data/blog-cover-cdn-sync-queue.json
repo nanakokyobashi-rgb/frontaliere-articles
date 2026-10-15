@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-ordinanza-dispositivi-vitali.webp",
-      "sha256": "633076bdd44ea43128465b2a6c2d19f3338be25be9cab12f126b201abaa55c6e"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-ordinanza-dispositivi-vitali-480w.webp",
-      "sha256": "0b1d38e78a8e5d83edb6710b153ab4c69398c854a1b5952f51eb5e8e80007674"
-    }
-  ]
+  "items": []
 }
