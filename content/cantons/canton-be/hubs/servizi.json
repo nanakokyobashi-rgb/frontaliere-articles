@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-10-15T01:53:38.743Z",
-  "contentHash": "c56e3fc8a480f3402925d11aa17176e76613a884e21490c60ec25b1bb2151d94",
+  "updatedAt": "2026-10-15T02:32:01.880Z",
+  "contentHash": "d4be1577840ec38bff524435f53b729b7f41e2c60da17e939263af1c8c71101c",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -74,6 +74,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Permesso di pesca nel Cantone di Berna: requisiti e stagioni",
+          "url": "/articoli-svizzera/permesso-pesca-canton-berna-guida/",
+          "excerpt": "Scopri come gestire la pratica per il permesso di pesca nel Cantone di Berna: licenze, corsi, acque autorizzate e autorità competenti.",
+          "date": "2026-10-15T02:27:21.587Z"
+        },
+        {
           "title": "Licenza di caccia canton Berna requisiti e domanda",
           "url": "/articoli-svizzera/licenza-caccia-berna-requisiti/",
           "excerpt": "Scopri come richiedere la licenza di caccia nel Cantone di Berna: verifica competenza, requisiti, esami, specie cacciabili, documenti, scadenze e importi.",
@@ -114,12 +120,6 @@
           "url": "/articoli-svizzera/patent-canton-bern-conversion-exams/",
           "excerpt": "La conversione della patente di guida estera nel Canton di Berna richiede l'esame teorico e pratico, nonché la frequentazione di corsi obbligatori. L'ufficio della circolazione competente è responsabile…",
           "date": "2026-08-13T17:49:01.339Z"
-        },
-        {
-          "title": "Permesso di domicilio C nel Canton Berna: requisiti e domanda",
-          "url": "/articoli-svizzera/permesso-di-domicilio-c-canton-berna-requisiti-e-domanda/",
-          "excerpt": "Il permesso di domicilio C nel Canton Berna: requisiti, domanda e procedura di applicazione",
-          "date": "2026-08-12T20:41:31.313Z"
         }
       ],
       "links": [
@@ -148,7 +148,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-15T01:53:38.743Z"
+      "updatedAt": "2026-10-15T02:32:01.880Z"
     },
     "en": {
       "canton": "BE",
@@ -205,6 +205,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Fishing permit in the Canton of Bern: requirements and seasons",
+          "url": "/en/swiss-articles/fishing-permit-canton-bern-guide/",
+          "excerpt": "Find out how to apply for a fishing permit in the Canton of Bern: licenses, courses, authorized waters, and competent authorities.",
+          "date": "2026-10-15T02:27:21.587Z"
+        },
+        {
           "title": "Hunting license in the canton of Bern: requirements and application",
           "url": "/en/swiss-articles/hunting-license-bern-requirements/",
           "excerpt": "Discover how to apply for a hunting license in the Canton of Bern: verify competence, requirements, exams, huntable species, documents, deadlines, and amounts.",
@@ -245,12 +251,6 @@
           "url": "/en/swiss-articles/canton-of-bern-driving-license-conversion-and-exams/",
           "excerpt": "The conversion of the foreign driver's license in the Canton of Bern requires the theoretical and practical examination, as well as the attendance of compulsory courses. The relevant circulation office is responsible…",
           "date": "2026-08-13T17:49:01.339Z"
-        },
-        {
-          "title": "Residence permit C in Canton Bern: requirements and application",
-          "url": "/en/swiss-articles/c-permit-bern-switzerland-requisites-and-application/",
-          "excerpt": "Residence permit C in the Canton of Bern: requirements, application and application procedure",
-          "date": "2026-08-12T20:41:31.313Z"
         }
       ],
       "links": [
@@ -275,7 +275,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-15T01:53:38.743Z"
+      "updatedAt": "2026-10-15T02:32:01.880Z"
     },
     "de": {
       "canton": "BE",
@@ -332,6 +332,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Fischereibewilligung im Kanton Bern: Voraussetzungen und Saisons",
+          "url": "/de/schweiz-artikel/angelpatent-kanton-bern-anleitung/",
+          "excerpt": "Erfahren Sie, wie Sie das Verfahren für die Fischereibewilligung im Kanton Bern abwickeln: Bewilligungen, Kurse, zugelassene Gewässer und zuständige Behörden.",
+          "date": "2026-10-15T02:27:21.587Z"
+        },
+        {
           "title": "Jagdlizenz im Kanton Bern: Voraussetzungen und Antrag",
           "url": "/de/schweiz-artikel/jagdkarte-bern-voraussetzungen/",
           "excerpt": "Erfahren Sie, wie Sie die Jagdlizenz im Kanton Bern beantragen: Prüfen Sie Zuständigkeit, Voraussetzungen, Prüfungen, jagdbare Arten, Dokumente, Fristen und Beträge.",
@@ -372,12 +378,6 @@
           "url": "/de/schweiz-artikel/fuehrerschein-kanton-bern-umstellung-und-pruefung/",
           "excerpt": "Die Umschulung des ausländischen Führerscheins im Kanton Bern erfordert die theoretische und praktische Prüfung sowie die Teilnahme an Pflichtkursen. Für die Bearbeitung des Umwandlungsantrags ist das zuständige…",
           "date": "2026-08-13T17:49:01.339Z"
-        },
-        {
-          "title": "Niederlassungsbewilligung C im Kanton Bern: Voraussetzungen und Antrag",
-          "url": "/de/schweiz-artikel/c-bescheinigung-bern-schweiz-anforderungen-und-antragstellung/",
-          "excerpt": "Die Niederlassungsbewilligung C im Kanton Bern: Voraussetzungen, Antrag und Antragsverfahren",
-          "date": "2026-08-12T20:41:31.313Z"
         }
       ],
       "links": [
@@ -402,7 +402,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-15T01:53:38.743Z"
+      "updatedAt": "2026-10-15T02:32:01.880Z"
     },
     "fr": {
       "canton": "BE",
@@ -459,6 +459,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Permis de pêche dans le canton de Berne : exigences et saisons",
+          "url": "/fr/articles-suisse/permis-peche-canton-berne-guide/",
+          "excerpt": "Découvrez comment gérer votre dossier de permis de pêche dans le canton de Berne : licences, cours, eaux autorisées et autorités compétentes.",
+          "date": "2026-10-15T02:27:21.587Z"
+        },
+        {
           "title": "Permis de chasse dans le canton de Berne : conditions et demande",
           "url": "/fr/articles-suisse/permis-chasse-berne-conditions/",
           "excerpt": "Découvrez comment demander le permis de chasse dans le canton de Berne : vérifiez la compétence, les conditions, les examens, les espèces chassables, les documents, les délais et les montants.",
@@ -499,12 +505,6 @@
           "url": "/fr/articles-suisse/permis-de-conduire-canton-de-bourguignon-conversion-et-examen/",
           "excerpt": "La conversion du permis de conduire étranger dans le canton de Berne nécessite l'examen théorique et pratique ainsi que la fréquentation de cours obligatoires. L'office de la circulation compétent est responsable du…",
           "date": "2026-08-13T17:49:01.339Z"
-        },
-        {
-          "title": "Permis de séjour C dans le canton de Berne : exigences et demande",
-          "url": "/fr/articles-suisse/permis-de-sejour-c-bourg-de-berne-requisits-et-demande/",
-          "excerpt": "Le permis de séjour C dans le canton de Berne : exigences, demande et procédure d'application",
-          "date": "2026-08-12T20:41:31.313Z"
         }
       ],
       "links": [
@@ -525,7 +525,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-15T01:53:38.743Z"
+      "updatedAt": "2026-10-15T02:32:01.880Z"
     }
   }
 }
