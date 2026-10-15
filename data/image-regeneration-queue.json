@@ -5,11 +5,11 @@
       "articleId": "offerte-formazione-federale",
       "title": "Amministrazione federale: lavoro, praticantati e formazione",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Generic synthetic office illustration relevant to work and training; a recognizable foreground person is visible from behind.); ge",
+      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Generic synthetic office illustration relevant to work in Switzerland; no text, logos, or recognizable face, but a clearly depicte",
       "status": "failed",
-      "failureCount": 4,
+      "failureCount": 5,
       "requestedAt": "2026-10-13T23:44:58.192Z",
-      "lastFailureAt": "2026-10-15T02:54:20.143Z"
+      "lastFailureAt": "2026-10-15T12:50:17.770Z"
     },
     {
       "articleId": "soccorsi-coda-autostrada-lombarda",
@@ -35,11 +35,11 @@
       "articleId": "opportunita-impiego-federale",
       "title": "Lavorare per l'Amministrazione federale: 50 formazioni",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-opportunita-impiego-federale: openai-codex (vision gate rejected image: Generic synthetic Swiss career/education scene with no readable text or logos, but it prominently depicts a recognizable foregrou",
+      "reason": "All image providers failed for article-opportunita-impiego-federale: openai-codex (vision gate rejected image: Generic synthetic office scene in a Swiss-looking setting, but it includes a recognizable foreground person viewed from behind.);",
       "status": "failed",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-15T01:49:05.613Z",
-      "lastFailureAt": "2026-10-15T02:58:27.259Z"
+      "lastFailureAt": "2026-10-15T12:51:42.239Z"
     },
     {
       "articleId": "collaudo-veicoli-berna-procedura",
@@ -52,34 +52,14 @@
       "lastFailureAt": "2026-10-15T07:11:24.043Z"
     },
     {
-      "articleId": "sconto-dipendenti-migros-ccl",
-      "title": "Migros: nuovo CCL dal 2027, sconto del 10%",
-      "fallbackImage": "/images/blog/article-migros-nuovo-contratto-lavoro-2027.webp",
-      "reason": "All image providers failed for article-sconto-dipendenti-migros-ccl: openai-codex (vision gate rejected image: Generic supermarket entrance relevant to the topic, with no visible t",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-15T08:28:42.968Z",
-      "lastFailureAt": "2026-10-15T08:28:42.968Z"
-    },
-    {
-      "articleId": "fiera-lavoro-besano-valceresio",
-      "title": "Fiera del Lavoro a Besano: prima del Valceresio",
-      "fallbackImage": "/images/blog/article-varese-adhd-days-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-15T10:34:30.474Z",
-      "lastFailureAt": "2026-10-15T10:34:30.474Z"
-    },
-    {
       "articleId": "dimissioni-rapporto-ticino",
       "title": "Dimissioni da frontaliere: termini e passi in Ticino",
       "fallbackImage": "/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp",
-      "reason": "All image providers failed for article-dimissioni-rapporto-ticino: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Ticino cross-border commu",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-dimissioni-rapporto-ticino: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Ticino cross-border commuting, but it includes a prominent foreground person viewed f",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-15T11:39:57.424Z",
-      "lastFailureAt": "2026-10-15T11:39:57.424Z"
+      "lastFailureAt": "2026-10-15T12:56:12.993Z"
     }
   ]
 }
