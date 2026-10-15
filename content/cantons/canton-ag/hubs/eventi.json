@@ -4,17 +4,17 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "e37c16ab64f44faacd872eb3173ac603e6e512d89fef9f310cc05c404be4913f",
+  "updatedAt": "2026-10-15T00:06:40.869Z",
+  "contentHash": "6061831f7366c25050d50ca553d2adedeae6fb839ce843b80265fc0fd7570c95",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T21:57:18.142Z",
+      "updatedAt": "2026-10-14T13:57:52.093Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "86",
+          "value": "91",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,18 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
-              "detail": "Wettingen — in corso, ultimo giorno: 19 ottobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
-            },
-            {
-              "label": "Feldschlösschen Oktoberfest",
-              "detail": "Feldschlösschen Brauwelt, Rheinfelden — in corso, ultimo giorno: 17 ottobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/feldschloesschen-oktoberfest/"
-            },
             {
               "label": "Afterwork Live Musik - The Cordon Blues Band",
               "detail": "Henry's Live Music & Sport Bar, Baden",
@@ -78,6 +66,18 @@
               "detail": "AHA Aeschbachhalle Aarau, Aarau",
               "date": "2026-10-15",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/polarbaeren-x-la-nefera_AGbac1H"
+            },
+            {
+              "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
+              "detail": "Wettingen — in corso, ultimo giorno: 19 ottobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
+            },
+            {
+              "label": "Feldschlösschen Oktoberfest",
+              "detail": "Feldschlösschen Brauwelt, Rheinfelden — in corso, ultimo giorno: 17 ottobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/feldschloesschen-oktoberfest/"
             },
             {
               "label": "Oktoberfest Baden 2026",
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -127,7 +127,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "en": {
       "canton": "AG",
@@ -137,7 +137,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "86",
+          "value": "91",
           "note": "from the site’s events calendar"
         }
       ],
@@ -147,18 +147,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
-              "detail": "Wettingen — ongoing, last day: 19 October 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
-            },
-            {
-              "label": "Feldschlösschen Oktoberfest",
-              "detail": "Feldschlösschen Brauwelt, Rheinfelden — ongoing, last day: 17 October 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/feldschloesschen-oktoberfest/"
-            },
             {
               "label": "Afterwork Live Musik - The Cordon Blues Band",
               "detail": "Henry's Live Music & Sport Bar, Baden",
@@ -188,6 +176,18 @@
               "detail": "AHA Aeschbachhalle Aarau, Aarau",
               "date": "2026-10-15",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/polarbaeren-x-la-nefera_AGbac1H"
+            },
+            {
+              "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
+              "detail": "Wettingen — ongoing, last day: 19 October 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
+            },
+            {
+              "label": "Feldschlösschen Oktoberfest",
+              "detail": "Feldschlösschen Brauwelt, Rheinfelden — ongoing, last day: 17 October 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/feldschloesschen-oktoberfest/"
             },
             {
               "label": "Oktoberfest Baden 2026",
@@ -210,7 +210,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -223,7 +223,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -237,7 +237,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "de": {
       "canton": "AG",
@@ -247,7 +247,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "86",
+          "value": "91",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -257,18 +257,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
-              "detail": "Wettingen — läuft, letzter Tag: 19. Oktober 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
-            },
-            {
-              "label": "Feldschlösschen Oktoberfest",
-              "detail": "Feldschlösschen Brauwelt, Rheinfelden — läuft, letzter Tag: 17. Oktober 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/feldschloesschen-oktoberfest/"
-            },
             {
               "label": "Afterwork Live Musik - The Cordon Blues Band",
               "detail": "Henry's Live Music & Sport Bar, Baden",
@@ -298,6 +286,18 @@
               "detail": "AHA Aeschbachhalle Aarau, Aarau",
               "date": "2026-10-15",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/polarbaeren-x-la-nefera_AGbac1H"
+            },
+            {
+              "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
+              "detail": "Wettingen — läuft, letzter Tag: 19. Oktober 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
+            },
+            {
+              "label": "Feldschlösschen Oktoberfest",
+              "detail": "Feldschlösschen Brauwelt, Rheinfelden — läuft, letzter Tag: 17. Oktober 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/feldschloesschen-oktoberfest/"
             },
             {
               "label": "Oktoberfest Baden 2026",
@@ -320,7 +320,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -333,7 +333,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -347,7 +347,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "fr": {
       "canton": "AG",
@@ -357,7 +357,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "86",
+          "value": "91",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -367,18 +367,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
-              "detail": "Wettingen — en cours, dernier jour : 19 octobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
-            },
-            {
-              "label": "Feldschlösschen Oktoberfest",
-              "detail": "Feldschlösschen Brauwelt, Rheinfelden — en cours, dernier jour : 17 octobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/feldschloesschen-oktoberfest/"
-            },
             {
               "label": "Afterwork Live Musik - The Cordon Blues Band",
               "detail": "Henry's Live Music & Sport Bar, Baden",
@@ -410,6 +398,18 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/polarbaeren-x-la-nefera_AGbac1H"
             },
             {
+              "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
+              "detail": "Wettingen — en cours, dernier jour : 19 octobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
+            },
+            {
+              "label": "Feldschlösschen Oktoberfest",
+              "detail": "Feldschlösschen Brauwelt, Rheinfelden — en cours, dernier jour : 17 octobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/feldschloesschen-oktoberfest/"
+            },
+            {
               "label": "Oktoberfest Baden 2026",
               "detail": "Brown Boveri Platz, Baden",
               "date": "2026-10-16",
@@ -430,7 +430,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -443,7 +443,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -457,7 +457,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     }
   }
 }

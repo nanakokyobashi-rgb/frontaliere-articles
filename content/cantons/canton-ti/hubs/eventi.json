@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T20:08:23.890Z",
-  "contentHash": "b973ff3209a1b52468523f76126bfe8cb81971c00c47675818f657cdaf81675c",
+  "updatedAt": "2026-10-15T00:06:40.869Z",
+  "contentHash": "7b2888788e9c1254e55b57fd8c40530be5feb0da323b3a2a117d042495600511",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "254",
+          "value": "244",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Carlo Agostino Meletta - pittore",
-              "detail": "Museo Onsernonese, Locarno",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/63364"
+              "label": "Gyotaku - Tracce di pesci",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/61721"
             },
             {
-              "label": "Corpi in prestito",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/58243"
+              "label": "Domani, il viaggio di Maysoon Majidi",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/63920"
             },
             {
-              "label": "Film festival diritti umani",
-              "detail": "Cinema Corso e Iride, Lugano",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/64146"
+              "label": "Park Eun Sun - Mario Botta",
+              "detail": "Fondazione Gabriele e Anna Braglia, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/63350"
             },
             {
-              "label": "Fra Roberto tra le mura",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/61525"
+              "label": "Il carico della grà",
+              "detail": "6677 Moghegno",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/beladen-der-gra/"
             },
             {
-              "label": "Fuori di Zucca, il villaggio delle zucche",
-              "detail": "Fuori di Zucca, Savosa",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/64302"
+              "label": "Imagine peace",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/63921"
             },
             {
-              "label": "Impressioni - Mostra di pittura di Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/64414"
+              "label": "Marie",
+              "detail": "Teatro del Gatto, Ascona",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64492"
             },
             {
-              "label": "In orbita - mostra di ceramiche",
-              "detail": "Galleria Job, Bellinzona",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/63668"
+              "label": "Carichiamo la graa, portate le vostre castagne!",
+              "detail": "Graa (margine sud del nucleo), Mendrisio",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64361"
             },
             {
-              "label": "Ivo Soldini - Progetto Castel Grande",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/62822"
+              "label": "FTL: inaugurazione AA 2026/2027",
+              "detail": "Aula magna, Campus Ovest USI, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64337"
             },
             {
-              "label": "Jannis Kounellis: Io sono un pittore",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/63037"
+              "label": "Apero in rosa",
+              "detail": "Piazza Dante Alighieri, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64365"
             },
             {
-              "label": "Mona Caron - La resilienza della vita",
-              "detail": "Museo Centovalli e Pedemonte, Centovalli",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/63363"
+              "label": "Tavola rotonda: politica migratoria svizzera",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64200"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -162,7 +162,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "en": {
       "canton": "TI",
@@ -172,7 +172,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "254",
+          "value": "244",
           "note": "from the site’s events calendar"
         }
       ],
@@ -183,64 +183,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Carlo Agostino Meletta - painter",
-              "detail": "Museo Onsernonese, Locarno",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/63364"
+              "label": "Gyotaku - Fish Trails",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/61721"
             },
             {
-              "label": "Borrowed bodies",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/58243"
+              "label": "Tomorrow, Maysoon Majidi's journey",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/63920"
             },
             {
-              "label": "Human Rights Film Festival",
-              "detail": "Cinema Corso e Iride, Lugano",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/64146"
+              "label": "Park Eun Sun-Mario Botta",
+              "detail": "Fondazione Gabriele e Anna Braglia, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/63350"
             },
             {
-              "label": "Fra Roberto fra le mura",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/61525"
+              "label": "The loading of the grà",
+              "detail": "6677 Moghegno",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/beladen-der-gra/"
             },
             {
-              "label": "Outside of Zucca, the village of pumpkins",
-              "detail": "Fuori di Zucca, Savosa",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/64302"
+              "label": "Imagine peace",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/63921"
             },
             {
-              "label": "Impressions - Painting exhibition by Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/64414"
+              "label": "Marie,",
+              "detail": "Teatro del Gatto, Ascona",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64492"
             },
             {
-              "label": "In orbit - ceramics exhibition",
-              "detail": "Galleria Job, Bellinzona",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/63668"
+              "label": "Let's load the grains, bring your chestnuts!",
+              "detail": "Graa (margine sud del nucleo), Mendrisio",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64361"
             },
             {
-              "label": "Ivo Soldini - Castel Grande Project",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/62822"
+              "label": "FTL: inauguration AA 2026/2027",
+              "detail": "Aula magna, Campus Ovest USI, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64337"
             },
             {
-              "label": "Jannis Kounellis: I am a painter",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/63037"
+              "label": "Apero in pink",
+              "detail": "Piazza Dante Alighieri, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64365"
             },
             {
-              "label": "Mona Caron - The Resilience of Life",
-              "detail": "Museo Centovalli e Pedemonte, Centovalli",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/63363"
+              "label": "Round table: Swiss migration policy",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64200"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -312,7 +312,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "de": {
       "canton": "TI",
@@ -322,7 +322,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "254",
+          "value": "244",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -333,64 +333,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Carlo Agostino Meletta - Maler",
-              "detail": "Museo Onsernonese, Locarno",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/63364"
+              "label": "Gyotaku - Spuren von Fischen",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/61721"
             },
             {
-              "label": "Leihkörper",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/58243"
+              "label": "Morgen die Reise von Maysoon Majidi",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/63920"
             },
             {
-              "label": "Filmfestival Menschenrechte",
-              "detail": "Cinema Corso e Iride, Lugano",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/64146"
+              "label": "Park Eun Sun – Mario Botta",
+              "detail": "Fondazione Gabriele e Anna Braglia, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/63350"
             },
             {
-              "label": "Fra Roberto zwischen den Mauern",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/61525"
+              "label": "Beladen der Grà",
+              "detail": "6677 Moghegno",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/beladen-der-gra/"
             },
             {
-              "label": "Außerhalb von Zucca, dem Dorf der Kürbisse",
-              "detail": "Fuori di Zucca, Savosa",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/64302"
+              "label": "Imagine peace",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/63921"
             },
             {
-              "label": "Impressionen - Gemäldeausstellung von Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/64414"
+              "label": "Marie.",
+              "detail": "Teatro del Gatto, Ascona",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64492"
             },
             {
-              "label": "Im Orbit – Keramikausstellung",
-              "detail": "Galleria Job, Bellinzona",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/63668"
+              "label": "Lasst uns das Gitter laden, bringt eure Kastanien mit!",
+              "detail": "Graa (margine sud del nucleo), Mendrisio",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64361"
             },
             {
-              "label": "Ivo Soldini - Projekt Castel Grande",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/62822"
+              "label": "FTL: Einweihung AA 2026/2027",
+              "detail": "Aula magna, Campus Ovest USI, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64337"
             },
             {
-              "label": "Jannis Kounellis: Ich bin Maler",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/63037"
+              "label": "Apero in Pink",
+              "detail": "Piazza Dante Alighieri, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64365"
             },
             {
-              "label": "Mona Caron - Die Belastbarkeit des Lebens",
-              "detail": "Museo Centovalli e Pedemonte, Centovalli",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/63363"
+              "label": "Runder Tisch: Schweizer Migrationspolitik",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64200"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -462,7 +462,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "fr": {
       "canton": "TI",
@@ -472,7 +472,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "254",
+          "value": "244",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -483,64 +483,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Carlo Agostino Meletta - peintre",
-              "detail": "Museo Onsernonese, Locarno",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/63364"
+              "label": "Gyotaku - Traces de poissons",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/61721"
             },
             {
-              "label": "Corps prêtés",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/58243"
+              "label": "Demain, le voyage de Maysoon Majidi",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/63920"
             },
             {
-              "label": "Festival DU film droits DE L'HOMME",
-              "detail": "Cinema Corso e Iride, Lugano",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/64146"
+              "label": "Park Eun Sun-Mario Botta",
+              "detail": "Fondazione Gabriele e Anna Braglia, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/63350"
             },
             {
-              "label": "Frère Roberto entre les murs",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/61525"
+              "label": "Chargement de la Grà",
+              "detail": "6677 Moghegno",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/beladen-der-gra/"
             },
             {
-              "label": "En dehors de Zucca, le village des citrouilles",
-              "detail": "Fuori di Zucca, Savosa",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/64302"
+              "label": "Imagine peace",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/63921"
             },
             {
-              "label": "Impressions - Exposition de peinture de Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/64414"
+              "label": "Marie",
+              "detail": "Teatro del Gatto, Ascona",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64492"
             },
             {
-              "label": "In orbit - exposition de céramique",
-              "detail": "Galleria Job, Bellinzona",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/63668"
+              "label": "Chargeons la grille, apportez vos châtaignes !",
+              "detail": "Graa (margine sud del nucleo), Mendrisio",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64361"
             },
             {
-              "label": "Ivo Soldini - Projet Castel Grande",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/62822"
+              "label": "FTL : inauguration AA 2026/2027",
+              "detail": "Aula magna, Campus Ovest USI, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64337"
             },
             {
-              "label": "Jannis Kounellis : Je suis un peintre",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/63037"
+              "label": "Outil en rose",
+              "detail": "Piazza Dante Alighieri, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64365"
             },
             {
-              "label": "Mona Caron - La résilience de la vie",
-              "detail": "Museo Centovalli e Pedemonte, Centovalli",
-              "date": "2026-10-14",
-              "url": "https://www.tio.ch/agenda/day/20261014/63363"
+              "label": "Table ronde : politique migratoire suisse",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-15",
+              "url": "https://www.tio.ch/agenda/day/20261015/64200"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -612,7 +612,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     }
   }
 }

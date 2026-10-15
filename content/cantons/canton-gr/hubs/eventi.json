@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T20:08:23.890Z",
-  "contentHash": "bfc688de013cba8f29c824882ef075740f62d81f1b42ee165a9a0612378e67c7",
+  "updatedAt": "2026-10-15T00:06:40.869Z",
+  "contentHash": "72dcad537e0dfbec919ae8a313d89e52779b517b744384d3d81fd638ed234b96",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "103",
+          "value": "97",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Caffè Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "mira!cultura Ortsführung: Meistermaler im Mittelalter in Waltensburg",
-              "detail": "Brigels / Breil, Breil/Brigels",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/miracultura-ortsfuehrung-meistermaler-im-mittelalter-in-waltensburg/"
-            },
-            {
-              "label": "Un vivace mercato in piazza",
-              "detail": "Piazza, Poschiavo",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bunter-dorfmarkt-1/"
-            },
-            {
-              "label": "Golf-Schnupperkurs für Feriengäste",
-              "detail": "Alvaneu Bad, Albula/Alvra",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/golf-schnupperkurs-fuer-feriengaeste/"
-            },
-            {
-              "label": "Gir d’Air",
-              "detail": "Fundaziun Nairs, Scuol",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/gir-dair-10/"
-            },
-            {
-              "label": "Organ concert at the Reformed Church S-chanf",
-              "detail": "S-chanf",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/organ-concert-at-the-reformed-church-s-chanf/"
-            },
-            {
-              "label": "Kino Tschlin, «Syngué Sabour/Stein der Geduld»",
-              "detail": "Tschlin",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kino-tschlin-syngue-sabourstein-der-geduld/"
-            },
-            {
-              "label": "NGG: Was steckt hinter ChatGPT und Co? Von der KI-Idee zum Sprachmodell",
+              "label": "Wanderung für Seniorinnen und Senioren",
               "detail": "Chur",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ngg-was-steckt-hinter-chatgpt-und-co-von-der-ki-idee-zum-sprachmodell/"
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wanderung-fuer-seniorinnen-und-senioren-9/"
             },
             {
-              "label": "NATURAMA-Vortrag: Der Steinadler",
-              "detail": "Schloss Planta-Wildenberg, Zernez",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zernez/naturama-vortrag-der-steinadler-buchpraesentation_AkLKGQ7"
+              "label": "mira!cultura Exkursion: Kunst unter freiem Himmel in Trun",
+              "detail": "Ilanz, Trun",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/miracultura-exkursion-kunst-unter-freiem-himmel-in-trun/"
+            },
+            {
+              "label": "Lesekreis im Pfarrhaus Fläsch",
+              "detail": "Fläsch",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesekreis-im-pfarrhaus-flaesch-1/"
+            },
+            {
+              "label": "Caffè Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — in corso, ultimo giorno: 11 novembre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
               "label": "Kinder- und Jugendzirkuswoche Savognin",
               "detail": "Val Surses: Savognin, Surses — in corso, ultimo giorno: 16 ottobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kinder-und-jugendzirkuswoche-savognin/"
+            },
+            {
+              "label": "Polysport-Camp Chur",
+              "detail": "Chur — in corso, ultimo giorno: 16 ottobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysport-camp-chur-1/"
+            },
+            {
+              "label": "Oktober-Brunch im Bergrestaurant Triel in Vella",
+              "detail": "Bergrestaurant Triel, Lumnezia — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktober-brunch-im-bergrestaurant-triel-in-vella/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
+              "label": "ORIGEN | GIULIO CESARE",
+              "detail": "Clavadeira Riom, Surses — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/origen-giulio-cesare/"
+            },
+            {
+              "label": "Dorfführung in Valendas",
+              "detail": "Valendas, Safiental — in corso, ultimo giorno: 15 ottobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dorffuehrung-in-valendas/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -146,7 +146,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "en": {
       "canton": "GR",
@@ -156,7 +156,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "103",
+          "value": "97",
           "note": "from the site’s events calendar"
         }
       ],
@@ -167,64 +167,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Café Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "mira!cultura Ortsführung: Meistermaler im Mittelalter in Waltensburg",
-              "detail": "Brigels / Breil, Breil/Brigels",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/miracultura-ortsfuehrung-meistermaler-im-mittelalter-in-waltensburg/"
-            },
-            {
-              "label": "A lively market in the square",
-              "detail": "Piazza, Poschiavo",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bunter-dorfmarkt-1/"
-            },
-            {
-              "label": "Golf-Schnupperkurs für Feriengäste",
-              "detail": "Alvaneu Bad, Albula/Alvra",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/golf-schnupperkurs-fuer-feriengaeste/"
-            },
-            {
-              "label": "Gir d’Air",
-              "detail": "Fundaziun Nairs, Scuol",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/gir-dair-10/"
-            },
-            {
-              "label": "Organ concert at the Reformed Church S-chanf",
-              "detail": "S-chanf",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/organ-concert-at-the-reformed-church-s-chanf/"
-            },
-            {
-              "label": "Kino Tschlin, «Syngué Sabour/Stein der Geduld»",
-              "detail": "Tschlin",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kino-tschlin-syngue-sabourstein-der-geduld/"
-            },
-            {
-              "label": "NGG: Was steckt hinter ChatGPT und Co? Von der KI-Idee zum Sprachmodell",
+              "label": "Wanderung für Seniorinnen und Senioren",
               "detail": "Chur",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ngg-was-steckt-hinter-chatgpt-und-co-von-der-ki-idee-zum-sprachmodell/"
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wanderung-fuer-seniorinnen-und-senioren-9/"
             },
             {
-              "label": "NATURAMA-Vortrag: Der Steinadler",
-              "detail": "Schloss Planta-Wildenberg, Zernez",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zernez/naturama-vortrag-der-steinadler-buchpraesentation_AkLKGQ7"
+              "label": "mira!cultura Exkursion: Kunst unter freiem Himmel in Trun",
+              "detail": "Ilanz, Trun",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/miracultura-exkursion-kunst-unter-freiem-himmel-in-trun/"
+            },
+            {
+              "label": "Lesekreis im Pfarrhaus Fläsch",
+              "detail": "Fläsch",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesekreis-im-pfarrhaus-flaesch-1/"
+            },
+            {
+              "label": "Café Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — ongoing, last day: 11 November 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
               "label": "Kinder- und Jugendzirkuswoche Savognin",
               "detail": "Val Surses: Savognin, Surses — ongoing, last day: 16 October 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kinder-und-jugendzirkuswoche-savognin/"
+            },
+            {
+              "label": "Polysport-Camp Chur",
+              "detail": "Chur — ongoing, last day: 16 October 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysport-camp-chur-1/"
+            },
+            {
+              "label": "Oktober-Brunch im Bergrestaurant Triel in Vella",
+              "detail": "Bergrestaurant Triel, Lumnezia — ongoing, last day: 18 October 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktober-brunch-im-bergrestaurant-triel-in-vella/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — ongoing, last day: 7 November 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
+              "label": "ORIGEN | GIULIO CESARE",
+              "detail": "Clavadeira Riom, Surses — ongoing, last day: 18 October 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/origen-giulio-cesare/"
+            },
+            {
+              "label": "Dorfführung in Valendas",
+              "detail": "Valendas, Safiental — ongoing, last day: 15 October 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dorffuehrung-in-valendas/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -280,7 +280,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "de": {
       "canton": "GR",
@@ -290,7 +290,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "103",
+          "value": "97",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -301,64 +301,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Cafè Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "mira!cultura Ortsführung: Meistermaler im Mittelalter in Waltensburg",
-              "detail": "Brigels / Breil, Breil/Brigels",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/miracultura-ortsfuehrung-meistermaler-im-mittelalter-in-waltensburg/"
-            },
-            {
-              "label": "Bunter Dorfmarkt",
-              "detail": "Piazza, Poschiavo",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bunter-dorfmarkt-1/"
-            },
-            {
-              "label": "Golf-Schnupperkurs für Feriengäste",
-              "detail": "Alvaneu Bad, Albula/Alvra",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/golf-schnupperkurs-fuer-feriengaeste/"
-            },
-            {
-              "label": "Kommen, gehen, bleiben - für die Kunst",
-              "detail": "Fundaziun Nairs, Scuol",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/gir-dair-10/"
-            },
-            {
-              "label": "Konzert für Orgel in der reformierten Kirche S-chanf",
-              "detail": "S-chanf",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/organ-concert-at-the-reformed-church-s-chanf/"
-            },
-            {
-              "label": "Kino Tschlin, «Syngué Sabour/Stein der Geduld»",
-              "detail": "Tschlin",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kino-tschlin-syngue-sabourstein-der-geduld/"
-            },
-            {
-              "label": "NGG: Was steckt hinter ChatGPT und Co? Von der KI-Idee zum Sprachmodell",
+              "label": "Wanderung für Seniorinnen und Senioren",
               "detail": "Chur",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ngg-was-steckt-hinter-chatgpt-und-co-von-der-ki-idee-zum-sprachmodell/"
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wanderung-fuer-seniorinnen-und-senioren-9/"
             },
             {
-              "label": "NATURAMA-Vortrag: Der Steinadler",
-              "detail": "Schloss Planta-Wildenberg, Zernez",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zernez/naturama-vortrag-der-steinadler-buchpraesentation_AkLKGQ7"
+              "label": "mira!cultura Exkursion: Kunst unter freiem Himmel in Trun",
+              "detail": "Ilanz, Trun",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/miracultura-exkursion-kunst-unter-freiem-himmel-in-trun/"
+            },
+            {
+              "label": "Lesekreis im Pfarrhaus Fläsch",
+              "detail": "Fläsch",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesekreis-im-pfarrhaus-flaesch-1/"
+            },
+            {
+              "label": "Cafè Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — läuft, letzter Tag: 11. November 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
               "label": "Kinder- und Jugendzirkuswoche Savognin",
               "detail": "Val Surses: Savognin, Surses — läuft, letzter Tag: 16. Oktober 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kinder-und-jugendzirkuswoche-savognin/"
+            },
+            {
+              "label": "Polysport-Camp Chur",
+              "detail": "Chur — läuft, letzter Tag: 16. Oktober 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysport-camp-chur-1/"
+            },
+            {
+              "label": "Oktober-Brunch im Bergrestaurant Triel in Vella",
+              "detail": "Bergrestaurant Triel, Lumnezia — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktober-brunch-im-bergrestaurant-triel-in-vella/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
+              "label": "ORIGEN | GIULIO CESARE",
+              "detail": "Clavadeira Riom, Surses — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/origen-giulio-cesare/"
+            },
+            {
+              "label": "Dorfführung in Valendas",
+              "detail": "Valendas, Safiental — läuft, letzter Tag: 15. Oktober 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dorffuehrung-in-valendas/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -414,7 +414,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "fr": {
       "canton": "GR",
@@ -424,7 +424,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "103",
+          "value": "97",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -435,64 +435,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Café Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "mira!cultura Ortsführung: Meistermaler im Mittelalter in Waltensburg",
-              "detail": "Brigels / Breil, Breil/Brigels",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/miracultura-ortsfuehrung-meistermaler-im-mittelalter-in-waltensburg/"
-            },
-            {
-              "label": "Un marché animé sur la Piazza",
-              "detail": "Piazza, Poschiavo",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bunter-dorfmarkt-1/"
-            },
-            {
-              "label": "Golf-Schnupperkurs für Feriengäste",
-              "detail": "Alvaneu Bad, Albula/Alvra",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/golf-schnupperkurs-fuer-feriengaeste/"
-            },
-            {
-              "label": "Gir d’Air",
-              "detail": "Fundaziun Nairs, Scuol",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/gir-dair-10/"
-            },
-            {
-              "label": "Organ concert at the Reformed Church S-chanf",
-              "detail": "S-chanf",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/organ-concert-at-the-reformed-church-s-chanf/"
-            },
-            {
-              "label": "Kino Tschlin, «Syngué Sabour/Stein der Geduld»",
-              "detail": "Tschlin",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kino-tschlin-syngue-sabourstein-der-geduld/"
-            },
-            {
-              "label": "NGG: Was steckt hinter ChatGPT und Co? Von der KI-Idee zum Sprachmodell",
+              "label": "Wanderung für Seniorinnen und Senioren",
               "detail": "Chur",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ngg-was-steckt-hinter-chatgpt-und-co-von-der-ki-idee-zum-sprachmodell/"
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wanderung-fuer-seniorinnen-und-senioren-9/"
             },
             {
-              "label": "NATURAMA-Vortrag : Der Steinadler",
-              "detail": "Schloss Planta-Wildenberg, Zernez",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zernez/naturama-vortrag-der-steinadler-buchpraesentation_AkLKGQ7"
+              "label": "mira!cultura Exkursion: Kunst unter freiem Himmel in Trun",
+              "detail": "Ilanz, Trun",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/miracultura-exkursion-kunst-unter-freiem-himmel-in-trun/"
+            },
+            {
+              "label": "Lesekreis im Pfarrhaus Fläsch",
+              "detail": "Fläsch",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesekreis-im-pfarrhaus-flaesch-1/"
+            },
+            {
+              "label": "Café Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — en cours, dernier jour : 11 novembre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
               "label": "Kinder- und Jugendzirkuswoche Savognin",
               "detail": "Val Surses: Savognin, Surses — en cours, dernier jour : 16 octobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kinder-und-jugendzirkuswoche-savognin/"
+            },
+            {
+              "label": "Polysport-Camp Chur",
+              "detail": "Chur — en cours, dernier jour : 16 octobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysport-camp-chur-1/"
+            },
+            {
+              "label": "Oktober-Brunch im Bergrestaurant Triel in Vella",
+              "detail": "Bergrestaurant Triel, Lumnezia — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktober-brunch-im-bergrestaurant-triel-in-vella/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
+              "label": "ORIGEN | GIULIO CESARE",
+              "detail": "Clavadeira Riom, Surses — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/origen-giulio-cesare/"
+            },
+            {
+              "label": "Dorfführung in Valendas",
+              "detail": "Valendas, Safiental — en cours, dernier jour : 15 octobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dorffuehrung-in-valendas/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -548,7 +548,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     }
   }
 }

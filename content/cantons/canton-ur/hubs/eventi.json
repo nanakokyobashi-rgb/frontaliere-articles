@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "d3448ac07daed438d30a1f55f3fb68a5603c1514b2b132872df521268f012189",
+  "updatedAt": "2026-10-15T00:06:40.869Z",
+  "contentHash": "e67b3d97c6ab67cbce45921a03368da7db148d21ae9f98e138c7b72c3071e9af",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T21:57:18.142Z",
+      "updatedAt": "2026-10-14T13:57:52.093Z",
       "keyFacts": 1
     }
   ],
@@ -33,12 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Gaming am Mittwoch",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gaming-am-mittwoch-1/"
-            },
-            {
               "label": "Keramik Workshop",
               "detail": "Andermatt",
               "date": "2026-10-16",
@@ -91,11 +85,17 @@
               "detail": "Unterlehn",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/warenmarkt-2/"
+            },
+            {
+              "label": "BLUE BOX: Kind of a Mate & Namay Kush",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-kind-of-a-mate-namay-kush/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "en": {
       "canton": "UR",
@@ -130,12 +130,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Gaming am Mittwoch",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gaming-am-mittwoch-1/"
-            },
-            {
               "label": "Keramik Workshop",
               "detail": "Andermatt",
               "date": "2026-10-16",
@@ -188,11 +182,17 @@
               "detail": "Unterlehn",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/warenmarkt-2/"
+            },
+            {
+              "label": "BLUE BOX: Kind of a Mate & Namay Kush",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-kind-of-a-mate-namay-kush/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "de": {
       "canton": "UR",
@@ -227,12 +227,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Gaming am Mittwoch",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gaming-am-mittwoch-1/"
-            },
-            {
               "label": "Keramik Workshop",
               "detail": "Andermatt",
               "date": "2026-10-16",
@@ -285,11 +279,17 @@
               "detail": "Unterlehn",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/warenmarkt-2/"
+            },
+            {
+              "label": "BLUE BOX: Kind of a Mate & Namay Kush",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-kind-of-a-mate-namay-kush/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "fr": {
       "canton": "UR",
@@ -323,12 +323,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Gaming am Mittwoch",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gaming-am-mittwoch-1/"
-            },
             {
               "label": "Keramik Workshop",
               "detail": "Andermatt",
@@ -382,11 +376,17 @@
               "detail": "Unterlehn",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/warenmarkt-2/"
+            },
+            {
+              "label": "BLUE BOX: Kind of a Mate & Namay Kush",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-kind-of-a-mate-namay-kush/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     }
   }
 }

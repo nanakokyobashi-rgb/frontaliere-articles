@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "pensioni",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "a1c8a449b6837de9a41689b13ede950dc73185a919ce5cb325458a86c9ffe0cd",
+  "updatedAt": "2026-10-15T00:06:40.869Z",
+  "contentHash": "86a83986a7bfb2bacd3b45ad90377e61ccc87708c4bb5f8d98478360cd98193e",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -161,14 +161,9 @@
               "label": "Aspekte Ausgabe Juli 2026",
               "date": "2026-07-30",
               "url": "https://www.pkbs.ch/de/news/news-detail/aspekte-ausgabe-juli-2026/"
-            },
-            {
-              "label": "Die blpk investiert nicht in verbotene Waffen",
-              "date": "2026-06-17",
-              "url": "https://www.blpk.ch/infocenter/news/investitonen-in-ruestung.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -227,7 +222,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -361,14 +356,9 @@
               "label": "Aspekte Ausgabe Juli 2026",
               "date": "2026-07-30",
               "url": "https://www.pkbs.ch/de/news/news-detail/aspekte-ausgabe-juli-2026/"
-            },
-            {
-              "label": "Die blpk investiert nicht in verbotene Waffen",
-              "date": "2026-06-17",
-              "url": "https://www.blpk.ch/infocenter/news/investitonen-in-ruestung.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -427,7 +417,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -561,14 +551,9 @@
               "label": "Aspekte Ausgabe Juli 2026",
               "date": "2026-07-30",
               "url": "https://www.pkbs.ch/de/news/news-detail/aspekte-ausgabe-juli-2026/"
-            },
-            {
-              "label": "Die blpk investiert nicht in verbotene Waffen",
-              "date": "2026-06-17",
-              "url": "https://www.blpk.ch/infocenter/news/investitonen-in-ruestung.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -627,7 +612,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -761,14 +746,9 @@
               "label": "Aspekte Ausgabe Juli 2026",
               "date": "2026-07-30",
               "url": "https://www.pkbs.ch/de/news/news-detail/aspekte-ausgabe-juli-2026/"
-            },
-            {
-              "label": "Die blpk investiert nicht in verbotene Waffen",
-              "date": "2026-06-17",
-              "url": "https://www.blpk.ch/infocenter/news/investitonen-in-ruestung.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -827,7 +807,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     }
   }
 }

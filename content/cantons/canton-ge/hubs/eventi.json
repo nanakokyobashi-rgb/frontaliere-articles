@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T20:08:23.890Z",
-  "contentHash": "9cce1ca3e80da366607fe588c54a4003028d0c23de850898516ac201fb49e26a",
+  "updatedAt": "2026-10-15T00:06:40.869Z",
+  "contentHash": "62d62cd48cedcd2c5fdc7c413bb278ced17e075003360106262eb848b492f796",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "305",
+          "value": "293",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "\"Café avec la police municipale\" Eaux-Vives : échanger autour d’un café, au cœur des quartiers",
+              "label": "32e Mondial de l'Impro - Qualifications",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-eaux-vives-echanger-autour-cafe-coeur-quartiers"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/mondial-impro-qualifications"
             },
             {
-              "label": "\"Café avec la police municipale\" Pâquis : échanger autour d’un café, au cœur des quartiers",
+              "label": "Adelphité : archiver l'intimité et les luttes lesbiennes",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-paquis-echanger-autour-cafe-coeur-quartiers"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/adelphite-archiver-intimite-luttes-lesbiennes"
             },
             {
-              "label": "« La Femme Nue » d’Henry Février – l'Orchestre de Chambre de Genève",
+              "label": "Autour du deuil périnatal - Regards croisés",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/femme-henry-fevrier-orchestre-chambre-geneve-0"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/autour-deuil-perinatal-regards-croises"
             },
             {
-              "label": "« Yoshi la samouraï qui n'a peur de rien ” et autres contes japonais",
+              "label": "Blue Boy Trial",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/yoshi-samourai-peur-rien-autres-contes-japonais"
-            },
-            {
-              "label": "Animations et conseils autour de la borne de réparation vélo du carrefour Aïre-Furet (1203)",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/animations-conseils-autour-borne-reparation-velo-carrefour-aire-furet-1203"
-            },
-            {
-              "label": "Armures et paillettes",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/armures-paillettes-0"
-            },
-            {
-              "label": "Atelier chocolat pour les enfants - Chocolate monster",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster"
-            },
-            {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
-            },
-            {
-              "label": "Belles et Rebelles",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/belles-rebelles"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/blue-trial"
             },
             {
               "label": "Cité Seniors fête ses 20 ans | 47 ans d'histoire des squats à Genève - Conférence, causerie et balades",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades-0"
+            },
+            {
+              "label": "Composer et peindre au féminin, mêmes combats?",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/composer-peindre-feminin-memes-combats"
+            },
+            {
+              "label": "Conférence \"On ne naît pas citoyen·ne, on le devient\" : pistes pour une émancipation citoyenne par l’éveil culturel",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/conference-nait-citoyenne-devient-pistes-emancipation-citoyenne-eveil-culturel"
+            },
+            {
+              "label": "Cours de Tango Argentin - Niveau débutant",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-4"
+            },
+            {
+              "label": "Cultures populaires : une expérience guyanaise de la transmission par la danse",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/cultures-populaires-experience-guyanaise-transmission-danse"
+            },
+            {
+              "label": "Diggin' [Indie soul | VD]",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/diggi-indie-soul"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -116,7 +116,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "en": {
       "canton": "GE",
@@ -126,7 +126,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "305",
+          "value": "293",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,64 +137,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "\"Café avec la police municipale\" Eaux-Vives : échanger autour d’un café, au cœur des quartiers",
+              "label": "32e Mondial de l'Impro - Qualifications",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-eaux-vives-echanger-autour-cafe-coeur-quartiers"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/mondial-impro-qualifications"
             },
             {
-              "label": "\"Café avec la police municipale\" Pâquis : échanger autour d’un café, au cœur des quartiers",
+              "label": "Adelphité : archiver l'intimité et les luttes lesbiennes",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-paquis-echanger-autour-cafe-coeur-quartiers"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/adelphite-archiver-intimite-luttes-lesbiennes"
             },
             {
-              "label": "« La Femme Nue » d’Henry Février – l'Orchestre de Chambre de Genève",
+              "label": "Autour du deuil périnatal - Regards croisés",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/femme-henry-fevrier-orchestre-chambre-geneve-0"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/autour-deuil-perinatal-regards-croises"
             },
             {
-              "label": "« Yoshi la samouraï qui n'a peur de rien ” et autres contes japonais",
+              "label": "Blue Boy Trial",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/yoshi-samourai-peur-rien-autres-contes-japonais"
-            },
-            {
-              "label": "Animations et conseils autour de la borne de réparation vélo du carrefour Aïre-Furet (1203)",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/animations-conseils-autour-borne-reparation-velo-carrefour-aire-furet-1203"
-            },
-            {
-              "label": "Armures et paillettes",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/armures-paillettes-0"
-            },
-            {
-              "label": "Atelier chocolat pour les enfants - Chocolate monster",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster"
-            },
-            {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
-            },
-            {
-              "label": "Belles et Rebelles",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/belles-rebelles"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/blue-trial"
             },
             {
               "label": "Cité Seniors fête ses 20 ans | 47 ans d'histoire des squats à Genève - Conférence, causerie et balades",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades-0"
+            },
+            {
+              "label": "Composer et peindre au féminin, mêmes combats?",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/composer-peindre-feminin-memes-combats"
+            },
+            {
+              "label": "Conférence \"On ne naît pas citoyen·ne, on le devient\" : pistes pour une émancipation citoyenne par l’éveil culturel",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/conference-nait-citoyenne-devient-pistes-emancipation-citoyenne-eveil-culturel"
+            },
+            {
+              "label": "Cours de Tango Argentin - Niveau débutant",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-4"
+            },
+            {
+              "label": "Cultures populaires : une expérience guyanaise de la transmission par la danse",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/cultures-populaires-experience-guyanaise-transmission-danse"
+            },
+            {
+              "label": "Diggin' [Indie soul | VD]",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/diggi-indie-soul"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -220,7 +220,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "de": {
       "canton": "GE",
@@ -230,7 +230,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "305",
+          "value": "293",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -241,64 +241,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "\"Café avec la police municipale\" Eaux-Vives : échanger autour d’un café, au cœur des quartiers",
+              "label": "32e Mondial de l'Impro - Qualifications",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-eaux-vives-echanger-autour-cafe-coeur-quartiers"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/mondial-impro-qualifications"
             },
             {
-              "label": "\"Café avec la police municipale\" Pâquis : échanger autour d’un café, au cœur des quartiers",
+              "label": "Adelphité : archiver l'intimité et les luttes lesbiennes",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-paquis-echanger-autour-cafe-coeur-quartiers"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/adelphite-archiver-intimite-luttes-lesbiennes"
             },
             {
-              "label": "« La Femme Nue » d’Henry Février – l'Orchestre de Chambre de Genève",
+              "label": "Autour du deuil périnatal - Regards croisés",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/femme-henry-fevrier-orchestre-chambre-geneve-0"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/autour-deuil-perinatal-regards-croises"
             },
             {
-              "label": "« Yoshi la samouraï qui n'a peur de rien ” et autres contes japonais",
+              "label": "Blue Boy Trial",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/yoshi-samourai-peur-rien-autres-contes-japonais"
-            },
-            {
-              "label": "Animations et conseils autour de la borne de réparation vélo du carrefour Aïre-Furet (1203)",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/animations-conseils-autour-borne-reparation-velo-carrefour-aire-furet-1203"
-            },
-            {
-              "label": "Armures et paillettes",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/armures-paillettes-0"
-            },
-            {
-              "label": "Atelier chocolat pour les enfants - Chocolate monster",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster"
-            },
-            {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
-            },
-            {
-              "label": "Belles et Rebelles",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/belles-rebelles"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/blue-trial"
             },
             {
               "label": "Cité Seniors fête ses 20 ans | 47 ans d'histoire des squats à Genève - Conférence, causerie et balades",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades-0"
+            },
+            {
+              "label": "Composer et peindre au féminin, mêmes combats?",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/composer-peindre-feminin-memes-combats"
+            },
+            {
+              "label": "Conférence \"On ne naît pas citoyen·ne, on le devient\" : pistes pour une émancipation citoyenne par l’éveil culturel",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/conference-nait-citoyenne-devient-pistes-emancipation-citoyenne-eveil-culturel"
+            },
+            {
+              "label": "Cours de Tango Argentin - Niveau débutant",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-4"
+            },
+            {
+              "label": "Cultures populaires : une expérience guyanaise de la transmission par la danse",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/cultures-populaires-experience-guyanaise-transmission-danse"
+            },
+            {
+              "label": "Diggin' [Indie soul | VD]",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/diggi-indie-soul"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -324,7 +324,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "fr": {
       "canton": "GE",
@@ -334,7 +334,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "305",
+          "value": "293",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -345,64 +345,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "\"Café avec la police municipale\" Eaux-Vives : échanger autour d’un café, au cœur des quartiers",
+              "label": "32e Mondial de l'Impro - Qualifications",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-eaux-vives-echanger-autour-cafe-coeur-quartiers"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/mondial-impro-qualifications"
             },
             {
-              "label": "\"Café avec la police municipale\" Pâquis : échanger autour d’un café, au cœur des quartiers",
+              "label": "Adelphité : archiver l'intimité et les luttes lesbiennes",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-paquis-echanger-autour-cafe-coeur-quartiers"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/adelphite-archiver-intimite-luttes-lesbiennes"
             },
             {
-              "label": "« La Femme Nue » d’Henry Février – l'Orchestre de Chambre de Genève",
+              "label": "Autour du deuil périnatal - Regards croisés",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/femme-henry-fevrier-orchestre-chambre-geneve-0"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/autour-deuil-perinatal-regards-croises"
             },
             {
-              "label": "« Yoshi la samouraï qui n'a peur de rien ” et autres contes japonais",
+              "label": "Blue Boy Trial",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/yoshi-samourai-peur-rien-autres-contes-japonais"
-            },
-            {
-              "label": "Animations et conseils autour de la borne de réparation vélo du carrefour Aïre-Furet (1203)",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/animations-conseils-autour-borne-reparation-velo-carrefour-aire-furet-1203"
-            },
-            {
-              "label": "Armures et paillettes",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/armures-paillettes-0"
-            },
-            {
-              "label": "Atelier chocolat pour les enfants - Chocolate monster",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster"
-            },
-            {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
-            },
-            {
-              "label": "Belles et Rebelles",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/belles-rebelles"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/blue-trial"
             },
             {
               "label": "Cité Seniors fête ses 20 ans | 47 ans d'histoire des squats à Genève - Conférence, causerie et balades",
               "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades"
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades-0"
+            },
+            {
+              "label": "Composer et peindre au féminin, mêmes combats?",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/composer-peindre-feminin-memes-combats"
+            },
+            {
+              "label": "Conférence \"On ne naît pas citoyen·ne, on le devient\" : pistes pour une émancipation citoyenne par l’éveil culturel",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/conference-nait-citoyenne-devient-pistes-emancipation-citoyenne-eveil-culturel"
+            },
+            {
+              "label": "Cours de Tango Argentin - Niveau débutant",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-4"
+            },
+            {
+              "label": "Cultures populaires : une expérience guyanaise de la transmission par la danse",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/cultures-populaires-experience-guyanaise-transmission-danse"
+            },
+            {
+              "label": "Diggin' [Indie soul | VD]",
+              "detail": "Genève",
+              "date": "2026-10-15",
+              "url": "https://www.geneve.ch/agenda/diggi-indie-soul"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -428,7 +428,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     }
   }
 }

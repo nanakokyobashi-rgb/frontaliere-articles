@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "13f9c0e6c6cccb8bd5829e558e05a5cc429218388788395f6f774505b810e04f",
+  "updatedAt": "2026-10-15T00:06:40.869Z",
+  "contentHash": "c53e8aa20466734df28634b9bb248bde9c05e0d2f6c30da588d496fa2da5c97e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T21:57:18.142Z",
+      "updatedAt": "2026-10-14T13:57:52.093Z",
       "keyFacts": 1
     }
   ],
@@ -33,54 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Ice Skating Lessons at the Margarethen Artificial Ice Rink",
-              "detail": "Kunsteisbahn Margarethen, Basel",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cours-de-patinage-a-la-patinoire-artificielle-de-margarethen/"
-            },
-            {
-              "label": "Art Snack",
-              "detail": "Kunst Raum Riehen, Riehen",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/art-snack/"
-            },
-            {
-              "label": "Kreatives Töpfern für Kinder",
-              "detail": "Riehen",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kreatives-toepfern-fuer-kinder-1/"
-            },
-            {
-              "label": "Basement Saints",
-              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/basement-saints_ADHqaFW"
-            },
-            {
-              "label": "Dominic Deville - OFF!",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/dominic-deville-off-1/"
-            },
-            {
-              "label": "TRIGGERFINGER",
-              "detail": "Werkraum Warteck pp",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/triggerfinger_AJUGyFT"
-            },
-            {
-              "label": "Nicole Johänntgen «Henry»",
-              "detail": "the bird's eye jazz club — in corso, ultimo giorno: 14 ottobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/nicole-johaenntgen-henry_A6csqXE"
-            },
-            {
-              "label": "Römer-Weekends",
-              "detail": "Augusta Raurica, Augst — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
-            },
-            {
               "label": "8 octopi",
               "detail": "the bird's eye jazz club",
               "date": "2026-10-15",
@@ -91,11 +43,59 @@
               "detail": "Kulturscheune, Liestal",
               "date": "2026-10-15",
               "url": "https://www.guidle.com/it/eventi/musica/liestal/circolo-dei-cantautori-di-liestal_A1P1YCv"
+            },
+            {
+              "label": "Frank Richter - #Lovemyjob",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frank-richter-lovemyjob/"
+            },
+            {
+              "label": "Lesung: Ruth Wittig - Danke, wir können nicht klagen",
+              "detail": "Haus der Vereine, Riehen",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesung-ruth-wittig-danke-wir-koennen-nicht-klagen/"
+            },
+            {
+              "label": "Stéphanie Berger - Shine - fertig mit chli",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/stephanie-berger-shine-fertig-mit-chli/"
+            },
+            {
+              "label": "Römer-Weekends",
+              "detail": "Augusta Raurica, Augst — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
+            },
+            {
+              "label": "ADHD",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/adhd_AHAthh1"
+            },
+            {
+              "label": "Let's have a WINE DATE 2026 - Basel",
+              "detail": "Basel",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lets-have-a-wine-date-2026-basel/"
+            },
+            {
+              "label": "KULINARIK & STIMMEN",
+              "detail": "Restaurant Ambiente, Allschwil",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/kulinarik-und-stimmen_AWrVH4H"
+            },
+            {
+              "label": "Von BTS bis Anime",
+              "detail": "Sissach",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/von-bts-bis-anime/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [
@@ -116,7 +116,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -137,54 +137,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Ice Skating Lessons at the Margarethen Artificial Ice Rink",
-              "detail": "Kunsteisbahn Margarethen, Basel",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cours-de-patinage-a-la-patinoire-artificielle-de-margarethen/"
-            },
-            {
-              "label": "Art Snack",
-              "detail": "Kunst Raum Riehen, Riehen",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/art-snack/"
-            },
-            {
-              "label": "Kreatives Töpfern für Kinder",
-              "detail": "Riehen",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kreatives-toepfern-fuer-kinder-1/"
-            },
-            {
-              "label": "Basement Saints",
-              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/basement-saints_ADHqaFW"
-            },
-            {
-              "label": "Dominic Deville - OFF!",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/dominic-deville-off-1/"
-            },
-            {
-              "label": "TRIGGERFINGER",
-              "detail": "Werkraum Warteck pp",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/triggerfinger_AJUGyFT"
-            },
-            {
-              "label": "Nicole Johänntgen «Henry»",
-              "detail": "the bird's eye jazz club — ongoing, last day: 14 October 2026",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/nicole-johaenntgen-henry_A6csqXE"
-            },
-            {
-              "label": "Römer-Weekends",
-              "detail": "Augusta Raurica, Augst — ongoing, last day: 18 October 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
-            },
-            {
               "label": "8 octopi",
               "detail": "the bird's eye jazz club",
               "date": "2026-10-15",
@@ -195,11 +147,59 @@
               "detail": "Kulturscheune, Liestal",
               "date": "2026-10-15",
               "url": "https://www.guidle.com/it/eventi/musica/liestal/circolo-dei-cantautori-di-liestal_A1P1YCv"
+            },
+            {
+              "label": "Frank Richter - #Lovemyjob",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frank-richter-lovemyjob/"
+            },
+            {
+              "label": "Lesung: Ruth Wittig - Danke, wir können nicht klagen",
+              "detail": "Haus der Vereine, Riehen",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesung-ruth-wittig-danke-wir-koennen-nicht-klagen/"
+            },
+            {
+              "label": "Stéphanie Berger - Shine - fertig mit chli",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/stephanie-berger-shine-fertig-mit-chli/"
+            },
+            {
+              "label": "Römer-Weekends",
+              "detail": "Augusta Raurica, Augst — ongoing, last day: 18 October 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
+            },
+            {
+              "label": "ADHD",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/adhd_AHAthh1"
+            },
+            {
+              "label": "Let's have a WINE DATE 2026 - Basel",
+              "detail": "Basel",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lets-have-a-wine-date-2026-basel/"
+            },
+            {
+              "label": "KULINARIK & STIMMEN",
+              "detail": "Restaurant Ambiente, Allschwil",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/kulinarik-und-stimmen_AWrVH4H"
+            },
+            {
+              "label": "Von BTS bis Anime",
+              "detail": "Sissach",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/von-bts-bis-anime/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [
@@ -220,7 +220,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -241,54 +241,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Eislaufkurs Kunsteisbahn Margarethen",
-              "detail": "Kunsteisbahn Margarethen, Basel",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cours-de-patinage-a-la-patinoire-artificielle-de-margarethen/"
-            },
-            {
-              "label": "Kunstsnack",
-              "detail": "Kunst Raum Riehen, Riehen",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/art-snack/"
-            },
-            {
-              "label": "Kreatives Töpfern für Kinder",
-              "detail": "Riehen",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kreatives-toepfern-fuer-kinder-1/"
-            },
-            {
-              "label": "Basement Saints",
-              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/basement-saints_ADHqaFW"
-            },
-            {
-              "label": "Dominic Deville - OFF!",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/dominic-deville-off-1/"
-            },
-            {
-              "label": "TRIGGERFINGER",
-              "detail": "Werkraum Warteck pp",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/triggerfinger_AJUGyFT"
-            },
-            {
-              "label": "Nicole Johänntgen «Henry»",
-              "detail": "the bird's eye jazz club — läuft, letzter Tag: 14. Oktober 2026",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/nicole-johaenntgen-henry_A6csqXE"
-            },
-            {
-              "label": "Römer-Weekends",
-              "detail": "Augusta Raurica, Augst — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
-            },
-            {
               "label": "8 octopi",
               "detail": "the bird's eye jazz club",
               "date": "2026-10-15",
@@ -299,11 +251,59 @@
               "detail": "Kulturscheune, Liestal",
               "date": "2026-10-15",
               "url": "https://www.guidle.com/it/eventi/musica/liestal/circolo-dei-cantautori-di-liestal_A1P1YCv"
+            },
+            {
+              "label": "Frank Richter - #Lovemyjob",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frank-richter-lovemyjob/"
+            },
+            {
+              "label": "Lesung: Ruth Wittig - Danke, wir können nicht klagen",
+              "detail": "Haus der Vereine, Riehen",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesung-ruth-wittig-danke-wir-koennen-nicht-klagen/"
+            },
+            {
+              "label": "Stéphanie Berger - Shine - fertig mit chli",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/stephanie-berger-shine-fertig-mit-chli/"
+            },
+            {
+              "label": "Römer-Weekends",
+              "detail": "Augusta Raurica, Augst — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
+            },
+            {
+              "label": "ADHD",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/adhd_AHAthh1"
+            },
+            {
+              "label": "Let's have a WINE DATE 2026 - Basel",
+              "detail": "Basel",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lets-have-a-wine-date-2026-basel/"
+            },
+            {
+              "label": "KULINARIK & STIMMEN",
+              "detail": "Restaurant Ambiente, Allschwil",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/kulinarik-und-stimmen_AWrVH4H"
+            },
+            {
+              "label": "Von BTS bis Anime",
+              "detail": "Sissach",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/von-bts-bis-anime/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [
@@ -324,7 +324,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -345,54 +345,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Cours de patinage à la patinoire artificielle de Margarethen",
-              "detail": "Kunsteisbahn Margarethen, Basel",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cours-de-patinage-a-la-patinoire-artificielle-de-margarethen/"
-            },
-            {
-              "label": "Art Snack",
-              "detail": "Kunst Raum Riehen, Riehen",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/art-snack/"
-            },
-            {
-              "label": "Kreatives Töpfern für Kinder",
-              "detail": "Riehen",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kreatives-toepfern-fuer-kinder-1/"
-            },
-            {
-              "label": "Basement Saints",
-              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/basement-saints_ADHqaFW"
-            },
-            {
-              "label": "Dominic Deville - OFF!",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/dominic-deville-off-1/"
-            },
-            {
-              "label": "TRIGGERFINGER",
-              "detail": "Werkraum Warteck pp",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/triggerfinger_AJUGyFT"
-            },
-            {
-              "label": "Nicole Johänntgen «Henry»",
-              "detail": "the bird's eye jazz club — en cours, dernier jour : 14 octobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/nicole-johaenntgen-henry_A6csqXE"
-            },
-            {
-              "label": "Römer-Weekends",
-              "detail": "Augusta Raurica, Augst — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
-            },
-            {
               "label": "8 octopi",
               "detail": "the bird's eye jazz club",
               "date": "2026-10-15",
@@ -403,11 +355,59 @@
               "detail": "Kulturscheune, Liestal",
               "date": "2026-10-15",
               "url": "https://www.guidle.com/it/eventi/musica/liestal/circolo-dei-cantautori-di-liestal_A1P1YCv"
+            },
+            {
+              "label": "Frank Richter - #Lovemyjob",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frank-richter-lovemyjob/"
+            },
+            {
+              "label": "Lesung: Ruth Wittig - Danke, wir können nicht klagen",
+              "detail": "Haus der Vereine, Riehen",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesung-ruth-wittig-danke-wir-koennen-nicht-klagen/"
+            },
+            {
+              "label": "Stéphanie Berger - Shine - fertig mit chli",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/stephanie-berger-shine-fertig-mit-chli/"
+            },
+            {
+              "label": "Römer-Weekends",
+              "detail": "Augusta Raurica, Augst — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
+            },
+            {
+              "label": "ADHD",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/adhd_AHAthh1"
+            },
+            {
+              "label": "Let's have a WINE DATE 2026 - Basel",
+              "detail": "Basel",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lets-have-a-wine-date-2026-basel/"
+            },
+            {
+              "label": "KULINARIK & STIMMEN",
+              "detail": "Restaurant Ambiente, Allschwil",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/kulinarik-und-stimmen_AWrVH4H"
+            },
+            {
+              "label": "Von BTS bis Anime",
+              "detail": "Sissach",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/von-bts-bis-anime/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [
@@ -428,7 +428,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     }
   }
 }
