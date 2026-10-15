@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T06:37:00.336Z",
-  "contentHash": "ab46460c0c767dfee7c223df919cda09dee2d591d8cd22ac6e822007544eb995",
+  "updatedAt": "2026-10-15T00:31:36.423Z",
+  "contentHash": "6880e813b26aedc17fd0c7439f32b8d542272f5b1f452dbeb34041faa215ec03",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -132,6 +132,12 @@
           "date": "2026-10-05T04:37:57.318Z"
         },
         {
+          "title": "Tasse universitarie Berna: guida iscrizione",
+          "url": "/articoli-svizzera/tasse-universitarie-berna-guida/",
+          "excerpt": "Come verificare requisiti, scadenze e importi per le tasse universitarie nel Cantone di Berna: guida pratica per categorie e istituzioni.",
+          "date": "2026-10-15T00:26:22.514Z"
+        },
+        {
           "title": "Imposta successione e donazione Cantone Berna: aliquote",
           "url": "/articoli-svizzera/imposta-successione-donazione-berna/",
           "excerpt": "Guida alle aliquote per grado di parentela, esenzioni per coniugi e discendenti e termini di dichiarazione nel Cantone di Berna.",
@@ -142,12 +148,6 @@
           "url": "/articoli-svizzera/imposte-cantonal-berna-aliquote-deduzioni/",
           "excerpt": "Le imposte cantonali nel Cantone di Berna sono gestite dall'amministrazione cantonale e hanno aliquote diverse in base allo scaglione di reddito.",
           "date": "2026-08-12T06:10:54.824Z"
-        },
-        {
-          "title": "Imposte di successione nel Canton Berna",
-          "url": "/articoli-svizzera/imposta-di-succesione-e-donazione-canton-berna-aliquote/",
-          "excerpt": "Conoscere le aliquote per grado di parentela e le esenzioni per coniuge e discendenti",
-          "date": "2026-08-14T01:09:05.964Z"
         }
       ],
       "links": [
@@ -172,7 +172,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T06:37:00.336Z"
+      "updatedAt": "2026-10-15T00:31:36.423Z"
     },
     "en": {
       "canton": "BE",
@@ -287,6 +287,12 @@
           "date": "2026-10-05T04:37:57.318Z"
         },
         {
+          "title": "Tuition fees Bern: enrolment guide",
+          "url": "/en/swiss-articles/university-fees-bern-guide/",
+          "excerpt": "How to check requirements, deadlines and amounts for tuition fees in the Canton of Bern: practical guide by categories and institutions.",
+          "date": "2026-10-15T00:26:22.514Z"
+        },
+        {
           "title": "Inheritance and donation tax Canton Bern: rates",
           "url": "/en/swiss-articles/inheritance-gift-tax-bern-rates/",
           "excerpt": "Guide to rates for degree of kinship, exemptions for spouses and descendants and terms of declaration in the Canton of Bern.",
@@ -297,12 +303,6 @@
           "url": "/en/swiss-articles/imposte-cantonal-bern-aliquote-deduzioni/",
           "excerpt": "Cantonal taxes in the Canton of Bern are managed by the cantonal administration and have different rates based on the income bracket.",
           "date": "2026-08-12T06:10:54.824Z"
-        },
-        {
-          "title": "Inheritance taxes in the Canton of Bern",
-          "url": "/en/swiss-articles/inheritance-and-donation-tax-canton-bern-rates/",
-          "excerpt": "Know the kinship rates and exemptions for spouses and descendants",
-          "date": "2026-08-14T01:09:05.964Z"
         }
       ],
       "links": [
@@ -327,7 +327,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T06:37:00.336Z"
+      "updatedAt": "2026-10-15T00:31:36.423Z"
     },
     "de": {
       "canton": "BE",
@@ -442,6 +442,12 @@
           "date": "2026-10-05T04:37:57.318Z"
         },
         {
+          "title": "Studiengebühren Bern: Einschreibungsleitfaden",
+          "url": "/de/schweiz-artikel/studiengebuehren-bern-guide/",
+          "excerpt": "Wie man Anforderungen, Fristen und Beträge für Studiengebühren im Kanton Bern überprüft: praktischer Leitfaden nach Kategorien und Institutionen.",
+          "date": "2026-10-15T00:26:22.514Z"
+        },
+        {
           "title": "Erbschafts- und Schenkungssteuer Kanton Bern: Steuersätze",
           "url": "/de/schweiz-artikel/erbschafts-schenkungssteuer-bern-steuersatz/",
           "excerpt": "Leitfaden zu den Sätzen nach Verwandtschaftsgrad, Befreiungen für Ehegatten und Nachkommen und Erklärungsfristen im Kanton Bern.",
@@ -452,12 +458,6 @@
           "url": "/de/schweiz-artikel/imposten-cantonal-berner-ertragssteuern-satz-berechnung/",
           "excerpt": "Die kantonalen Steuern im Kanton Bern werden von der kantonalen Verwaltung verwaltet und haben je nach Einkommensstufe unterschiedliche Sätze.",
           "date": "2026-08-12T06:10:54.824Z"
-        },
-        {
-          "title": "Erbschaftssteuern im Kanton Bern",
-          "url": "/de/schweiz-artikel/erbschafts-und-schenkungssteuer-kanton-bern-zahlungen/",
-          "excerpt": "Kennen Sie die Sätze nach Verwandtschaftsgrad und die Befreiungen für Ehepartner und Nachkommen",
-          "date": "2026-08-14T01:09:05.964Z"
         }
       ],
       "links": [
@@ -482,7 +482,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T06:37:00.336Z"
+      "updatedAt": "2026-10-15T00:31:36.423Z"
     },
     "fr": {
       "canton": "BE",
@@ -597,6 +597,12 @@
           "date": "2026-10-05T04:37:57.318Z"
         },
         {
+          "title": "Frais de scolarité à Berne : guide d'inscription",
+          "url": "/fr/articles-suisse/frais-scolarite-berne-guide/",
+          "excerpt": "Comment vérifier les exigences, les délais et les montants des frais de scolarité dans le canton de Berne : guide pratique par catégories et institutions.",
+          "date": "2026-10-15T00:26:22.514Z"
+        },
+        {
           "title": "Impôt succession et donation Canton de Berne : taux",
           "url": "/fr/articles-suisse/impot-succession-donation-berne-taux/",
           "excerpt": "Guide des taux par degré de parenté, exemptions pour conjoints et descendants et délais de déclaration dans le canton de Berne.",
@@ -607,12 +613,6 @@
           "url": "/fr/articles-suisse/impots-cantonaux-bernais-impots-surtaxes-berechnung/",
           "excerpt": "Les impôts cantonaux dans le canton de Berne sont gérés par l'administration cantonale et ont des taux différents en fonction de la tranche de revenu.",
           "date": "2026-08-12T06:10:54.824Z"
-        },
-        {
-          "title": "Impôts sur les successions dans le canton de Berne",
-          "url": "/fr/articles-suisse/taxe-sur-la-succesions-et-la-donation-canton-de-berne/",
-          "excerpt": "Connaître les taux par degré de parenté et les exemptions pour conjoint et descendants",
-          "date": "2026-08-14T01:09:05.964Z"
         }
       ],
       "links": [
@@ -637,7 +637,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T06:37:00.336Z"
+      "updatedAt": "2026-10-15T00:31:36.423Z"
     }
   }
 }
