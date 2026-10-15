@@ -60,6 +60,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-15T02:50:14.610Z",
       "lastFailureAt": "2026-10-15T02:50:14.610Z"
+    },
+    {
+      "articleId": "lucerna-festivi-calendario-verifica",
+      "title": "Giorni festivi a Lucerna: guida al calendario e verifica",
+      "fallbackImage": "/images/blog/article-festivi-berna-calendario-guida.webp",
+      "reason": "All image providers failed for article-lucerna-festivi-calendario-verifica: openai-codex (vision gate rejected image: Generic synthetic town-square illustration with a prominent fo",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T03:21:39.715Z",
+      "lastFailureAt": "2026-10-15T03:21:39.715Z"
     }
   ]
 }
