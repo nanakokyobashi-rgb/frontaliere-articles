@@ -878,19 +878,6 @@ test('edge: ordine — file sotto la base della release, riletti, poi UN solo PU
   assert.equal(validateEdgeSectionRegistry(pointer), true);
 });
 
-test('edge: una base gia\' puntata non viene sovrascritta se lo snapshot cambia sullo stesso commit', async () => {
-  const { io, before, result } = await publish(withLive(['canton-ti', 'canton-gr']), { history: [withLive(['canton-ti'])] });
-  assert.deepEqual(result, { code: 1, phase: 'collisione', flipped: false });
-  assert.equal(served(io), before, 'il puntatore e i byte serviti restano quelli precedenti');
-  assert.deepEqual(io.ops, [], 'la collisione viene rifiutata prima di qualunque PUT o purge');
-});
-
-test('edge: il rerun identico riusa la base immutable senza riscrivere file', async () => {
-  const { io, result } = await publish(withLive(['canton-ti']), { history: [withLive(['canton-ti'])], fail: (op) => op === 'upload' });
-  assert.deepEqual(result, { code: 0, phase: 'done', flipped: false });
-  assert.deepEqual(io.ops, [], 'una release gia\' servita non richiede upload o purge');
-});
-
 test('edge: push obbligatorio a ogni differenza — accensione, spegnimento, ritiro, byte di un file', async () => {
   const live = planRelease(fakeDist(withLive(['canton-ti'])));
   const draft = planRelease(fakeDist(DRAFT_ALL()));
@@ -916,6 +903,22 @@ test('edge: push obbligatorio a ogni differenza — accensione, spegnimento, rit
   assert.deepEqual(declaredFiles(DRAFT_ALL()), {});
   assert.equal(declaredFiles({ ...live.pointer, release: { ...live.pointer.release, base: 'edge/sitemap/' } }), null);
   assert.equal(declaredFiles({ ...live.pointer, release: { ...live.pointer.release, files: { '../x': { sha256: 'f'.repeat(64) } } } }), null);
+});
+
+test('edge: una base gia\' puntata non viene riscritta se cambia lo snapshot effettivo a parita\' di commit', async () => {
+  // Un kill-switch diverso sullo stesso HEAD cambia registry, sitemap e hub:
+  // la base resta la stessa, ma nessun oggetto immutable deve essere sovrascritto.
+  const changed = await publish(withLive(['canton-gr']), { history: [withLive(['canton-ti'])] });
+  assert.deepEqual(changed.result, { code: 1, phase: 'immutability', flipped: false });
+  assert.deepEqual(changed.io.ops, []);
+  assert.equal(served(changed.io), changed.before, 'puntatore e byte serviti restano quelli precedenti');
+  assert.match(changed.logs.join('\n'), /rifiuto la riscrittura della release immutable/);
+
+  // Lo stesso snapshot gia\' verificato e\' un no-op: nemmeno in questo caso
+  // si esegue un PUT sulla chiave immutable.
+  const same = await publish(withLive(['canton-ti']), { history: [withLive(['canton-ti'])] });
+  assert.deepEqual(same.result, { code: 0, phase: 'noop', flipped: false });
+  assert.deepEqual(same.io.ops, []);
 });
 
 test('edge: la release servita e\' NOTA solo se ogni file dichiarato c\'e\' con il suo sha256', async () => {
