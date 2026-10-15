@@ -306,7 +306,7 @@
       "reason": "Normalizza l’identità del branch head delle PR REST e GitHub CLI per i mutex delle follow-up daily e dei gruppi del corpus. Il sito non usa il followup-drainer né il workflow issue-fix di questo repository, quindi non ha un consumer per questo helper.",
       "baseline": {
         "site": null,
-        "corpus": "09a627d090531f35",
+        "corpus": "8c4b7964cad9d46d",
         "alignedAt": "2026-10-16"
       }
     },
