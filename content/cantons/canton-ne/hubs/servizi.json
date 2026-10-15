@@ -4,18 +4,13 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "servizi",
-  "updatedAt": "2026-10-15T09:55:02.142Z",
-  "contentHash": "ee7dc8f6a7c53b59b99a89b9dfe37c92e33ce2708e00d8bb8c0eb2fcb7ae9f6a",
+  "updatedAt": "2026-10-15T17:28:12.535Z",
+  "contentHash": "b2bff6116a13afe454940c508ff7e943571ca4390cf35ad48cc4f3c840c57c34",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-15T04:50:46.927Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -52,20 +47,6 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Neuchâtel",
-              "value": "13 °C",
-              "detail": "oggi da 12 a 19 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +114,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T17:28:12.535Z"
     },
     "en": {
       "canton": "NE",
@@ -163,20 +144,6 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Neuchâtel",
-              "value": "13 °C",
-              "detail": "today from 12 to 19 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -240,7 +207,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T17:28:12.535Z"
     },
     "de": {
       "canton": "NE",
@@ -270,20 +237,6 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Neuchâtel",
-              "value": "13 °C",
-              "detail": "heute 12 bis 19 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -347,7 +300,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T17:28:12.535Z"
     },
     "fr": {
       "canton": "NE",
@@ -377,20 +330,6 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Neuchâtel",
-              "value": "13 °C",
-              "detail": "aujourd’hui de 12 à 19 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -450,7 +389,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T17:28:12.535Z"
     }
   }
 }
