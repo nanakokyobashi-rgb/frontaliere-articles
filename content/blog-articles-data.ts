@@ -44552,6 +44552,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'fiera-lavoro-besano-valceresio',
+ category: 'novita',
+ date: '2026-10-15T10:34:30.091Z',
+ image: '/images/blog/article-varese-adhd-days-ottobre-2026.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

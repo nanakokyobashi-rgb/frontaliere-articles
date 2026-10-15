@@ -1,9 +1,4 @@
 {
-  "https://comozero.it/attualita/trenord-rubati-cavi-di-rame-sulla-tratta-como-milano-circolazione-treni-sospesa-caos-disagi-e-alternative": {
-    "articleId": "trenord-furto-di-cavi-sospesa-como-milano",
-    "ts": "2026-09-03T05:21:22.012Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/inflazione-accelera-nettamente-in-svizzera%2c-sale-a-0%2c8%25-in-agosto/91997269": {
     "articleId": "inflazione-svizzera-agosto-2026",
     "ts": "2026-09-03T07:55:28.957Z",
@@ -2497,6 +2492,11 @@
   "https://www.laregione.ch/cantone/ticino/1956748/tasso-di-disoccupazione-in-crescita-nei-prossimi-mesi": {
     "articleId": "tasso-disoccupazione-ticino-trimestri",
     "ts": "2026-10-15T09:49:56.441Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/a-besano-la-prima-fiera-del-lavoro-della-valceresio-per-mettere-in-contatto-aziende-e-candidati/2708875": {
+    "articleId": "fiera-lavoro-besano-valceresio",
+    "ts": "2026-10-15T10:34:30.475Z",
     "keyForm": 2
   }
 }

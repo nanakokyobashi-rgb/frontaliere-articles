@@ -60,6 +60,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-15T08:28:42.968Z",
       "lastFailureAt": "2026-10-15T08:28:42.968Z"
+    },
+    {
+      "articleId": "fiera-lavoro-besano-valceresio",
+      "title": "Fiera del Lavoro a Besano: prima del Valceresio",
+      "fallbackImage": "/images/blog/article-varese-adhd-days-ottobre-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T10:34:30.474Z",
+      "lastFailureAt": "2026-10-15T10:34:30.474Z"
     }
   ]
 }
