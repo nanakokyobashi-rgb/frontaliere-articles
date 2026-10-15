@@ -13198,6 +13198,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.due-arresti-malpra-varese.title': 'Varese, deux arrestations pour maltraitances familiales impliquant cinq mineurs',
     'blog.article.due-arresti-malpra-varese.excerpt': 'Deux arrestations à Varese pour maltraitances familiales Le premier épisode s’est produit samedi après-midi Cinq enfants mineurs étaient présents, entre 5 et 8 ans',
     'blog.article.due-arresti-malpra-varese.imageAlt': 'Voiture de police arrêtée devant un bâtiment du centre de Varese au coucher du soleil.',
+    'blog.article.bellinzona-voto-caserma-pompieri.title': 'Bellinzona : vote sur le crédit pour la nouvelle caserne',
+    'blog.article.bellinzona-voto-caserma-pompieri.excerpt': 'Lundi, on vote sur le premier crédit de 14 millions.',
+    'blog.article.bellinzona-voto-caserma-pompieri.imageAlt': 'Salle du conseil municipal de Bellinzone',
 };
 
 export default blogMetaFr;

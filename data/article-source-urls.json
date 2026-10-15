@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4052919": {
-    "articleId": "eoc-ospedali-comunicazione-pazienti",
-    "ts": "2026-09-01T20:22:04.534Z",
-    "keyForm": 2
-  },
   "https://www.varesenoi.it/2026/09/01/leggi-notizia/argomenti/territorio/articolo/bennet-selezione-personale-per-lipermercato-bennet-di-lavena-ponte-tresa.html": {
     "articleId": "bennet-cerca-personale-varese",
     "ts": "2026-09-02T00:16:49.054Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/a-varese-due-arresti-per-maltrattamenti-in-famiglia-coinvolti-anche-cinque-minori/2707666": {
     "articleId": "due-arresti-malpra-varese",
     "ts": "2026-10-14T21:01:45.742Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/sede-dei-pompieri-si-arriva-al-voto-tra-rapporti-lettere-anonime-e-lo-spettro-del-referendum-444606": {
+    "articleId": "bellinzona-voto-caserma-pompieri",
+    "ts": "2026-10-15T07:09:17.172Z",
     "keyForm": 2
   }
 }

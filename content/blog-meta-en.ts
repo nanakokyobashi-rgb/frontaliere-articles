@@ -13196,6 +13196,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.due-arresti-malpra-varese.title': 'Varese, two arrests for domestic abuse involving five minors',
     'blog.article.due-arresti-malpra-varese.excerpt': 'Two arrests in Varese for domestic abuse The first incident occurred on Saturday afternoon Five minor children were present, between 5 and 8 years old',
     'blog.article.due-arresti-malpra-varese.imageAlt': 'Police car stopped in front of a downtown Varese building at sunset.',
+    'blog.article.bellinzona-voto-caserma-pompieri.title': 'Bellinzona: vote on funding for the new barracks',
+    'blog.article.bellinzona-voto-caserma-pompieri.excerpt': 'On Monday, the first credit of 14 million will be put to a vote.',
+    'blog.article.bellinzona-voto-caserma-pompieri.imageAlt': 'Bellinzona city council hall',
 };
 
 export default blogMetaEn;

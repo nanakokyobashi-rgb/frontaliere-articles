@@ -13197,6 +13197,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.due-arresti-malpra-varese.title': 'Varese, due arresti per maltrattamenti familiari con cinque minori',
     'blog.article.due-arresti-malpra-varese.excerpt': 'Due arresti a Varese per maltrattamenti familiari Il primo episodio si è verificato sabato pomeriggio Cinque figli minori erano presenti, tra 5 e 8 anni',
     'blog.article.due-arresti-malpra-varese.imageAlt': 'Auto dei carabinieri fermata davanti a un edificio del centro di Varese al tramonto.',
+    'blog.article.bellinzona-voto-caserma-pompieri.title': 'Bellinzona: voto sul credito per la nuova caserma',
+    'blog.article.bellinzona-voto-caserma-pompieri.excerpt': 'Lunedì si vota il primo credito da 14 milioni.',
+    'blog.article.bellinzona-voto-caserma-pompieri.imageAlt': 'Sala del Consiglio comunale di Bellinzona',
 };
 
 export default blogMetaIt;
