@@ -105070,10 +105070,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-collaudo-veicoli-canton-zurigo.webp`,
+        "url": `${BASE_URL}/images/blog/article-collaudo-veicoli-berna-procedura.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Stazione di collaudo veicoli nel Cantone di Berna con documenti ufficiali"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-15T03:43:23+00:00",
       "dateModified": "2026-10-15T03:43:23+00:00",

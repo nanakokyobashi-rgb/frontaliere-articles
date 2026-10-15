@@ -15,11 +15,11 @@
       "articleId": "liberta-fondo-pene-sostitutive",
       "title": "Multe non pagate? Ecco chi può salvarvi dal carcere",
       "fallbackImage": "/images/blog/lavori-pubblica-utilita-multe-pene.webp",
-      "reason": "image generation deadline exceeded",
+      "reason": "All image providers failed for article-liberta-fondo-pene-sostitutive: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration with no readable text, logos, or identifiable face, but a recognizable foregrou",
       "status": "failed",
-      "failureCount": 2,
+      "failureCount": 3,
       "requestedAt": "2026-10-14T21:58:03.380Z",
-      "lastFailureAt": "2026-10-15T07:06:31.033Z"
+      "lastFailureAt": "2026-10-15T17:29:00.338Z"
     },
     {
       "articleId": "opportunita-impiego-federale",
@@ -32,16 +32,6 @@
       "lastFailureAt": "2026-10-15T12:51:42.239Z"
     },
     {
-      "articleId": "collaudo-veicoli-berna-procedura",
-      "title": "Collaudo veicoli a Berna: convocazione e requisiti",
-      "fallbackImage": "/images/blog/article-collaudo-veicoli-canton-zurigo.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "failed",
-      "failureCount": 1,
-      "requestedAt": "2026-10-15T03:43:23.697Z",
-      "lastFailureAt": "2026-10-15T07:11:24.043Z"
-    },
-    {
       "articleId": "dimissioni-rapporto-ticino",
       "title": "Dimissioni da frontaliere: termini e passi in Ticino",
       "fallbackImage": "/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp",
@@ -50,26 +40,6 @@
       "failureCount": 1,
       "requestedAt": "2026-10-15T11:39:57.424Z",
       "lastFailureAt": "2026-10-15T12:56:12.993Z"
-    },
-    {
-      "articleId": "divieti-viabilita-stadio-como",
-      "title": "Como: divieti in via Vittorio Veneto dal 19 al 24 ottobre",
-      "fallbackImage": "/images/blog/investimenti-viabilita-lariana-como.webp",
-      "reason": "All image providers failed for article-divieti-viabilita-stadio-como: openai-codex (vision gate rejected image: Generic synthetic photorealistic street illustration relevant to roa",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-15T14:49:43.456Z",
-      "lastFailureAt": "2026-10-15T14:49:43.456Z"
-    },
-    {
-      "articleId": "inaugurazione-sala-comacina-polizia",
-      "title": "Polizia Stradale: il taglio del nastro a Sala Comacina",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-inaugurazione-sala-comacina-polizia: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration with no visibl",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-15T16:45:03.524Z",
-      "lastFailureAt": "2026-10-15T16:45:03.524Z"
     }
   ]
 }

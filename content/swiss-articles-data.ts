@@ -27789,7 +27789,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'collaudo-veicoli-berna-procedura',
     category: 'pratico',
     date: '2026-10-15T03:43:23.067Z',
-    image: '/images/blog/article-collaudo-veicoli-canton-zurigo.webp',
+    image: '/images/blog/article-collaudo-veicoli-berna-procedura.webp',
     hasCalculator: true,
     articleType: 'evergreen',
     canton: ['BE'],

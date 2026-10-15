@@ -8323,7 +8323,7 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.lucerna-festivi-calendario-verifica.imageAlt': 'Illustration générée pour cet article',
     'blog.article.collaudo-veicoli-berna-procedura.title': 'Contrôle technique des véhicules à Berne : convocation et exigences',
     'blog.article.collaudo-veicoli-berna-procedura.excerpt': 'Guide de la procédure de contrôle technique dans le canton de Berne : comment vérifier les exigences, les délais et les montants auprès de la source officielle compétente.',
-    'blog.article.collaudo-veicoli-berna-procedura.imageAlt': 'Station de contrôle des véhicules dans le canton de Berne',
+    'blog.article.collaudo-veicoli-berna-procedura.imageAlt': 'Illustration générée pour cet article',
     'blog.article.licenza-pubblico-berna-requisiti.title': 'Licence d\'exploitation d\'un établissement public à Berne : exigences et demande',
     'blog.article.licenza-pubblico-berna-requisiti.excerpt': 'Dans le canton de Berne, la licence concerne les restaurants et les établissements.',
     'blog.article.licenza-pubblico-berna-requisiti.imageAlt': 'Documents officiels et un stylo sur une table devant un bâtiment administratif suisse',

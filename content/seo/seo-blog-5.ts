@@ -108662,10 +108662,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Divieti attivi dal 19 ottobre alle 6.30 al 24 ottobre a mezzanotte Como-Manchester United mercoledì 21 alle 18.45 Como-Sassuolo sabato 24 alle 15 Transito",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/investimenti-viabilita-lariana-como.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-divieti-viabilita-stadio-como.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Segnaletica stradale temporanea in zona urbana"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-15T14:49:43+00:00",
       "dateModified": "2026-10-15T14:49:43+00:00",
@@ -108818,10 +108823,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-inaugurazione-sala-comacina-polizia.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Cerimonia per il distaccamento della Polizia Stradale a Sala Comacina sul lago di Como."
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-15T16:45:03+00:00",
       "dateModified": "2026-10-15T16:45:03+00:00",

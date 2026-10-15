@@ -13233,7 +13233,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.l-gav-2027-orario-salario.imageAlt': 'Photo of a corporate building in Lugano with employees on break',
     'blog.article.divieti-viabilita-stadio-como.title': 'Como: prohibitions in Via Vittorio Veneto from 19 to 24 October',
     'blog.article.divieti-viabilita-stadio-como.excerpt': 'Prohibitions active from 19 October at 6.30 to 24 October at midnight Como-Manchester United Wednesday 21 at 18.45 Como-Sassuolo Saturday 24 at 15 Transit',
-    'blog.article.divieti-viabilita-stadio-como.imageAlt': 'Temporary road signs in an urban area',
+    'blog.article.divieti-viabilita-stadio-como.imageAlt': 'Illustration generated for this article',
     'blog.article.arresto-lite-domestica-luganese.title': 'Luganese, 28-year-old arrested on suspicion of attempted murder',
     'blog.article.arresto-lite-domestica-luganese.excerpt': 'A 28-year-old was arrested in the Lugano area on October 9.',
     'blog.article.arresto-lite-domestica-luganese.imageAlt': 'View of the Lugano area in Ticino at sunset',
@@ -13245,7 +13245,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.luci-masnago-terza-puntata.imageAlt': 'Radio studio overlooking Lake Lugano, microphones and equipment in afternoon light.',
     'blog.article.inaugurazione-sala-comacina-polizia.title': 'Highway Police: the ribbon-cutting in Sala Comacina',
     'blog.article.inaugurazione-sala-comacina-polizia.excerpt': 'Ceremony on Friday, October 16 at 11 at the Highway Police detachment in Sala Comacina Salvini, Piantedosi, Molteni and Pisani expected Mayor in attendance',
-    'blog.article.inaugurazione-sala-comacina-polizia.imageAlt': 'Ceremony for the Polizia Stradale station in Sala Comacina on Lake Como.',
+    'blog.article.inaugurazione-sala-comacina-polizia.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaEn;

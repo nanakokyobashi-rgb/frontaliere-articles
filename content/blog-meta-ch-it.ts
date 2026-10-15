@@ -8323,7 +8323,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.lucerna-festivi-calendario-verifica.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.collaudo-veicoli-berna-procedura.title': 'Collaudo veicoli a Berna: convocazione e requisiti',
     'blog.article.collaudo-veicoli-berna-procedura.excerpt': 'Guida alla procedura di collaudo nel Cantone di Berna: come verificare requisiti, scadenze e importi sulla fonte ufficiale competente.',
-    'blog.article.collaudo-veicoli-berna-procedura.imageAlt': 'Stazione di collaudo veicoli nel Cantone di Berna con documenti ufficiali',
+    'blog.article.collaudo-veicoli-berna-procedura.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.licenza-pubblico-berna-requisiti.title': 'Licenza esercizio pubblico Berna: requisiti e domanda',
     'blog.article.licenza-pubblico-berna-requisiti.excerpt': 'Nel Cantone di Berna la licenza riguarda ristoranti e locali.',
     'blog.article.licenza-pubblico-berna-requisiti.imageAlt': 'Documenti ufficiali e penna su un tavolo davanti a un edificio amministrativo svizzero',
