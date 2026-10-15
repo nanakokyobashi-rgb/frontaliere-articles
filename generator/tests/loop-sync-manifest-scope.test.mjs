@@ -230,6 +230,21 @@ test('gate-minted-followups: il mint corpus rispetta il cooldown fu-parked', () 
   assert.match(entry.reason, /cooldown/);
 });
 
+test('atomic-write-json: durability corpus e guardie crawler sito restano adattate (#13307)', () => {
+  const entry = byPath.get('generator/scripts/lib/atomic-write-json.mjs');
+  assert.ok(entry, 'atomic-write-json.mjs deve restare censito');
+  assert.equal(entry.sitePath, 'scripts/lib/atomic-write-json.mjs');
+  assert.equal(entry.mode, 'adapted');
+  assert.notEqual(entry.baseline?.site, entry.baseline?.corpus,
+    'i gemelli hanno contratti diversi: una baseline identica dichiarerebbe una convergenza falsa');
+  assert.match(entry.reason, /#13307/);
+  assert.match(entry.reason, /fsync.*temporaneo.*fsync.*directory/);
+  assert.match(entry.reason, /preserveSlugHistory/);
+  assert.match(entry.reason, /assertCrawlerSliceWriteSafe/);
+  assert.match(entry.reason, /streaming dei grandi array/);
+  assert.match(entry.reason, /import irrisolti/);
+});
+
 test('files: sitePath e baseline coerenti col mode', () => {
   for (const f of manifest.files) {
     const checks = manifestEntryRuleChecks(f);
