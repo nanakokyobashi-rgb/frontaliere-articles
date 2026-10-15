@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-veicolo-fiamme-a2-rivera.webp",
+      "sha256": "a361499a9f7da4ebc789dfb6e61371d75e65e17a4ff785ec0d208f9bdb9dc608"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-veicolo-fiamme-a2-rivera-480w.webp",
+      "sha256": "738a61e371e8bf45596d112d26a92a363c05937f76cfa59f38d80ce99295fa8a"
+    }
+  ]
 }
