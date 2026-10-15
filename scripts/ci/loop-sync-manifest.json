@@ -1183,7 +1183,7 @@
     {
       "path": "scripts/ci/mark-claude-terminal-outcome.mjs",
       "mode": "adapted",
-      "reason": "Dedup CAP_HIT_AFTER_DELIVERY e lettura del verdetto vigente importano `lastLabelEventAt` e `latestFixOutcomeEntryFromComments` da `followup-drainer.mjs`, che qui è `adapted` (#925/#1011, follow-up #1084). Il gemello sito (baseline e605a5b7b6996af5, 11025 byte) non ha quel ramo: restare `identical` lo farebbe sovrascrivere al primo `site-ahead`. Non è un mirror byte-identico.",
+      "reason": "Dedup CAP_HIT_AFTER_DELIVERY e lettura del verdetto vigente importano `lastLabelEventAt` e `latestFixOutcomeEntryFromComments` da `followup-drainer.mjs`, che qui è `adapted` (#925/#1011, follow-up #1084). Il gemello sito non ha quel ramo: restare `identical` lo farebbe sovrascrivere al primo `site-ahead`. Non è un mirror byte-identico. Il main guard canonico della PR sito #12043 è invece condiviso: portato nel corpus da #2732 e coperto da invocazione reale via symlink, senza cambiare il comportamento adapted.",
       "baseline": {
         "site": "d8b6d197bf4cd659",
         "corpus": "1cd57d5c632b3fcb",
