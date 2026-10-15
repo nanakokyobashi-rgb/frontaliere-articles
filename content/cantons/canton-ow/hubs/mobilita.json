@@ -4,8 +4,8 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T09:55:02.142Z",
-  "contentHash": "577359597225807cefb514020852198159e80fa2e300b7ba6f7f693980e2ffc4",
+  "updatedAt": "2026-10-15T14:18:44.271Z",
+  "contentHash": "703e2282aad2551897b00d7e9eab864311d2bc8216b24b42fb884f92aba65a4a",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "4",
+          "value": "3",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         },
         {
@@ -47,12 +47,6 @@
               "value": "Chiusura",
               "detail": "fine prevista: 28 ottobre 2026",
               "date": "2026-09-21T06:33:00.000Z"
-            },
-            {
-              "label": "A8 Sarnen -> Hergiswil tra Svincolo autostradale Alpnach Süd E Svincolo autostradale Alpnach Nord Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsia…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 15 ottobre 2026",
-              "date": "2026-09-22T06:00:00.000Z"
             },
             {
               "label": "A8 Sarnen -> Stans Nord tra Galleria Galleria Lopper E Galleria Gallerie Kirchenwald Situazione: chiusa cantiere, lunghezza [km] 0.3",
@@ -130,7 +124,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T14:18:44.271Z"
     },
     "en": {
       "canton": "OW",
@@ -140,7 +134,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "4",
+          "value": "3",
           "note": "reports as of 15 October 2026"
         },
         {
@@ -160,12 +154,6 @@
               "value": "Closure",
               "detail": "until 28 October 2026",
               "date": "2026-09-21T06:33:00.000Z"
-            },
-            {
-              "label": "A8 Sarnen -> Hergiswil tra Svincolo autostradale Alpnach Süd E Svincolo autostradale Alpnach Nord Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsia…",
-              "value": "Closure",
-              "detail": "until 15 October 2026",
-              "date": "2026-09-22T06:00:00.000Z"
             },
             {
               "label": "A8 Sarnen -> Stans Nord tra Galleria Galleria Lopper E Galleria Gallerie Kirchenwald Situazione: chiusa cantiere, lunghezza [km] 0.3",
@@ -243,7 +231,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T14:18:44.271Z"
     },
     "de": {
       "canton": "OW",
@@ -253,7 +241,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "4",
+          "value": "3",
           "note": "Meldungen vom 15. Oktober 2026"
         },
         {
@@ -273,12 +261,6 @@
               "value": "Sperrung",
               "detail": "bis 28. Oktober 2026",
               "date": "2026-09-21T06:33:00.000Z"
-            },
-            {
-              "label": "A8 Sarnen -> Hergiswil zwischen Anschluss Alpnach-Süd und Anschluss Alpnach-Nord Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.4 Verkehrsführung: Pannenstreifen gesperrt Zusatz 1…",
-              "value": "Sperrung",
-              "detail": "bis 15. Oktober 2026",
-              "date": "2026-09-22T06:00:00.000Z"
             },
             {
               "label": "A8 Sarnen -> Stans Nord zwischen Tunnel Lopper-Tunnel und Tunnel Kirchenwald-Tunnel Sachlage: Strecke gesperrt Baustelle, Länge [km] 0.3",
@@ -356,7 +338,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T14:18:44.271Z"
     },
     "fr": {
       "canton": "OW",
@@ -366,7 +348,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "4",
+          "value": "3",
           "note": "signalements au 15 octobre 2026"
         },
         {
@@ -386,12 +368,6 @@
               "value": "Fermeture",
               "detail": "jusqu’au 28 octobre 2026",
               "date": "2026-09-21T06:33:00.000Z"
-            },
-            {
-              "label": "A8 Sarnen -> Hergiswil entre Jonction autoroutière Alpnach-Sud et Jonction autoroutière Alpnach-Nord Situation: trafic perturbé travaux, longueur [km] 0.4 Gestion du trafic: bande d'arrêt d'urgence…",
-              "value": "Fermeture",
-              "detail": "jusqu’au 15 octobre 2026",
-              "date": "2026-09-22T06:00:00.000Z"
             },
             {
               "label": "A8 Sarnen -> Stans Nord entre Tunnel Tunnel du Lopper et Tunnel Tunnel de Kirchenwald Situation: fermé travaux, longueur [km] 0.3",
@@ -469,7 +445,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T14:18:44.271Z"
     }
   }
 }

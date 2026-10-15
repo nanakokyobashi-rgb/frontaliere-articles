@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T09:55:02.142Z",
-  "contentHash": "30ea534e04b8c150f8752a68a9108611cba93fe156d9018f35b640c83c1f0efd",
+  "updatedAt": "2026-10-15T14:18:44.271Z",
+  "contentHash": "640daa028b27fa232d8b90fe0d66d3c3c3ec53c0827d695e6de1e9a58217fc11",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "6",
+          "value": "5",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
@@ -157,7 +157,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T14:18:44.271Z"
     },
     "en": {
       "canton": "NW",
@@ -172,7 +172,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "6",
+          "value": "5",
           "note": "reports as of 15 October 2026"
         }
       ],
@@ -297,7 +297,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T14:18:44.271Z"
     },
     "de": {
       "canton": "NW",
@@ -312,7 +312,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "6",
+          "value": "5",
           "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
@@ -437,7 +437,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T14:18:44.271Z"
     },
     "fr": {
       "canton": "NW",
@@ -452,7 +452,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "6",
+          "value": "5",
           "note": "signalements au 15 octobre 2026"
         }
       ],
@@ -577,7 +577,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T14:18:44.271Z"
     }
   }
 }
