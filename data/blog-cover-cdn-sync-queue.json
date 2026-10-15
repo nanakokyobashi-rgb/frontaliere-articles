@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-prezzi-produzione-importazione-settembre.webp",
-      "sha256": "85511d4d43f6c35193045efb68fdff719dbd8a831a4087d6f6f65b656ea457d1"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-prezzi-produzione-importazione-settembre-480w.webp",
-      "sha256": "2758b64813a4b6bf61773188339e0ee0a219f509e0334ae598c469b7f9ab1df5"
-    }
-  ]
+  "items": []
 }
