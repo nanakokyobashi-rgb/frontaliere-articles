@@ -267,6 +267,8 @@ is_registry() {
   isLiteralRegistryPath "$candidate" && return 0
   [ "${#REGISTRY_PATTERNS[@]}" -gt 0 ] || return 1
   for pattern in "${REGISTRY_PATTERNS[@]}"; do
+    # Only --merge-registry-pattern reaches this case; its RHS is intentionally a glob.
+    # shellcheck disable=SC2254
     case "$candidate" in
       $pattern) return 0 ;;
     esac

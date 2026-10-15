@@ -1744,6 +1744,11 @@ test('generate-article.yml dichiara come registro OGNI target di scrittura del g
 });
 
 test('generate-daily-brief.yml classifica i registri e gli asset del bollettino per il rebase (#1696)', () => {
+  assert.match(
+    readFileSync(DAILY_BRIEF_WORKFLOW, 'utf8'),
+    /--merge-registry-pattern "content\/seo\/seo-blog-\*\.ts"/,
+    'il wildcard SEO deve essere dichiarato esplicitamente come pattern',
+  );
   const { bookkeeping, registries, takeTheirs } = parseHelperArgs(readFileSync(DAILY_BRIEF_WORKFLOW, 'utf8'));
   const expectedRegistries = [
     'content/blog-articles-data.ts',
