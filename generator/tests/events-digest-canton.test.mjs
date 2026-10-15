@@ -94,6 +94,24 @@ describe('digest per cantone sulla fixture events-dataset', () => {
     assert.match(article.content.it.body2, /<!-- digest-event:venue%2D%2Dseries -->/);
     assert.equal(decodeURIComponent('venue%2D%2Dseries'), 'venue--series');
   });
+
+  it('ignora il marker per un ID con lone surrogate senza abortire il digest', () => {
+    const article = buildWeekendDigestArticle({
+      events: [{
+        id: 'venue-\uD800',
+        title: 'Serie non identificabile',
+        comune: 'Lugano',
+        startDate: '2026-08-15',
+        canton: 'TI',
+      }],
+      todayIso: TODAY,
+    });
+
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      assert.match(article.content[locale].body2, /Serie non identificabile/);
+      assert.doesNotMatch(article.content[locale].body2, /<!-- digest-event:/);
+    }
+  });
 });
 
 describe('metadati evergreen per cantone', () => {

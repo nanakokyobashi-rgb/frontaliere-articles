@@ -170,8 +170,17 @@ function cantonLabelForLocale(canton, locale) {
  */
 function digestEventMarker(event) {
   const id = String(event?.id ?? '').trim();
-  const payload = encodeURIComponent(id).replaceAll('-', '%2D');
-  return id ? ` <!-- digest-event:${payload} -->` : '';
+  if (!id) return '';
+  try {
+    const payload = encodeURIComponent(id).replaceAll('-', '%2D');
+    return ` <!-- digest-event:${payload} -->`;
+  } catch (error) {
+    // A malformed source ID must not abort the full digest build. Without a
+    // marker this record falls back to the schedule key, and duplicate keys
+    // remain fail-closed in localized-toponym repair.
+    if (error instanceof URIError) return '';
+    throw error;
+  }
 }
 
 const T = {
