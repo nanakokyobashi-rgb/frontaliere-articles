@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * publish-section-edge.mjs — porta su R2 la RELEASE delle sezioni cantonali
- * (registro, sitemap delle sezioni live, indice) scritta da build-api.mjs in
+ * (registro, payload hub, sitemap delle sezioni live, indice) scritta da build-api.mjs in
  * dist/api/, con un flip realmente versionato: UN solo PUT cambia cio' che il
  * Worker serve.
  *
@@ -23,8 +23,8 @@
  *     previous: { base, files: [nomi] } | null      // la release che sostituisce
  *   }
  *
- * Le sitemap e l'indice stanno SOLO sotto `release.base`, immutabili per
- * commit: non esistono path fissi da sovrascrivere. Il Worker risolve
+ * Il payload hub, le sitemap e l'indice stanno SOLO sotto `release.base`,
+ * immutabili per commit: non esistono path fissi da sovrascrivere. Il Worker risolve
  * `/sitemap-cantons.xml` e `/sitemap-articles-<id>.xml` come `<base><nome>`
  * (404 se il nome non e' in `files`), quindi registro, sitemap e indice
  * cambiano TUTTI INSIEME con il puntatore, e non c'e' niente da ripristinare.
@@ -110,6 +110,8 @@ export const APEX = 'https://frontaliereticino.ch';
 export const CDN = 'https://cdn.frontaliereticino.ch';
 export const PURGE_CHUNK = 30;
 export const RELEASES_PREFIX = 'edge/sections/_releases';
+/** Payload runtime degli hub, servito dalla stessa release immutabile del registry. */
+export const CANTON_HUBS_API = 'canton-hubs.json';
 /** Il Worker rilegge il registro ogni 60 s: un max-age piu' lungo al cdn ritarderebbe il flip. */
 export const REGISTRY_CACHE_CONTROL = 'public,max-age=60';
 /** Una chiave di release non cambia mai contenuto. */
@@ -138,7 +140,8 @@ export function registryState(doc) {
 /** Il prefisso (con `/` finale) dei file di una release. */
 export const releaseBase = (commit) => `${RELEASES_PREFIX}/${commit}/`;
 
-const RELEASE_FILE_RE = /^(sitemap-articles-canton-[a-z]+\.xml|sitemap-cantons\.xml)$/;
+const RELEASE_FILE_RE = /^(sitemap-articles-canton-[a-z]+\.xml|sitemap-cantons\.xml|canton-hubs\.json)$/;
+const RELEASE_PURGE_FILE_RE = /^(sitemap-articles-canton-[a-z]+\.xml|sitemap-cantons\.xml)$/;
 
 /**
  * I file che un puntatore dichiara, come `{ nome: sha256 }`, o `null` se la
@@ -185,6 +188,23 @@ export function planRelease(distDir) {
     throw new Error(`${SECTION_SITEMAP_INDEX_FILE} ${hasIndex ? 'presente' : 'assente'} con ${live.length} sezioni live: release incoerente`);
   }
   if (hasIndex) names.push(SECTION_SITEMAP_INDEX_FILE);
+  if (live.length > 0) {
+    const hubFile = at(CANTON_HUBS_API);
+    if (!fs.existsSync(hubFile)) throw new Error(`${CANTON_HUBS_API}: manca in ${distDir} (sezione live senza payload runtime?)`);
+    let hubs;
+    try {
+      hubs = JSON.parse(fs.readFileSync(hubFile, 'utf8'));
+    } catch (error) {
+      throw new Error(`${CANTON_HUBS_API}: JSON illeggibile (${error.message})`, { cause: error });
+    }
+    const hubSections = isPlainObject(hubs?.sections) ? Object.keys(hubs.sections).sort() : [];
+    if (hubs?.schema !== 1 || hubs.commit !== registry.commit || hubSections.join(',') !== live.slice().sort().join(',')) {
+      throw new Error(`${CANTON_HUBS_API}: commit/sezioni non corrispondono al registry della release`);
+    }
+    // Il file sale sotto la base immutabile prima del flip del registry. Il
+    // sito lo legge da qui, non dal JSON mutable di GitHub Pages/Fastly.
+    names.push(CANTON_HUBS_API);
+  }
   const files = names.map((name) => {
     if (!fs.existsSync(at(name))) throw new Error(`${name}: manca in ${distDir} (sezione live senza sitemap?)`);
     const body = fs.readFileSync(at(name));
@@ -469,7 +489,11 @@ export async function publishRelease(release, { io, env = process.env, log = con
   if (!flipped) return stopBeforeFlip('flip', `puntatore non caricato: ${EDGE_SECTION_REGISTRY_FILE}`);
 
   // 3. Purge: il puntatore e le URL apex delle sitemap delle due release.
-  const names = new Set([...release.files.map((f) => f.name), ...Object.keys(prevFiles ?? {}), SECTION_SITEMAP_INDEX_FILE]);
+  const names = new Set([
+    ...release.files.map((f) => f.name).filter((name) => RELEASE_PURGE_FILE_RE.test(name)),
+    ...Object.keys(prevFiles ?? {}).filter((name) => RELEASE_PURGE_FILE_RE.test(name)),
+    SECTION_SITEMAP_INDEX_FILE,
+  ]);
   const purged = io.purge([`${CDN}/${EDGE_SECTION_REGISTRY_FILE}`, ...[...names].map((name) => `${APEX}/${name}`)]);
 
   // 4. Pulizia (best-effort): la release che la precedente aveva sostituito.

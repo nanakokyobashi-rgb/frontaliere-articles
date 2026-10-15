@@ -89,6 +89,7 @@ import {
 } from '../../scripts/lib/engine-corpus-view.mjs';
 import { floorViolations, unpublishedFamilySectionsOf } from '../../scripts/ci/verify-api-floors.mjs';
 import {
+  CANTON_HUBS_API,
   declaredFiles,
   main as edgeMain,
   planRelease,
@@ -674,6 +675,13 @@ function fakeDist(registry, { index = undefined, salt = '', extraArticles = [] }
   writeFileSync(path.join(dir, EDGE_SECTION_REGISTRY_FILE), JSON.stringify(registry));
   for (const id of live) writeFileSync(path.join(dir, `sitemap-articles-${id}.xml`), sitemapOf(id, salt, extraArticles));
   if (index ?? live.length > 0) writeFileSync(path.join(dir, 'sitemap-cantons.xml'), `<sitemapindex><!-- ${live.join(',')} --></sitemapindex>`);
+  if (live.length > 0) {
+    writeFileSync(path.join(dir, CANTON_HUBS_API), JSON.stringify({
+      schema: 1,
+      commit: registry.commit,
+      sections: Object.fromEntries(live.map((id) => [id, {}])),
+    }));
+  }
   return dir;
 }
 
@@ -799,6 +807,7 @@ test('edge: il puntatore porta la release (base versionata, sha256 e bytes dei f
     `edge/sections/_releases/${COMMIT}/sitemap-articles-canton-gr.xml`,
     `edge/sections/_releases/${COMMIT}/sitemap-articles-canton-ti.xml`,
     `edge/sections/_releases/${COMMIT}/sitemap-cantons.xml`,
+    `edge/sections/_releases/${COMMIT}/${CANTON_HUBS_API}`,
   ]);
   const { release: rel, ...state } = release.pointer;
   assert.deepEqual(state, release.registry, 'i campi di stato che il Worker legge non cambiano');
@@ -833,6 +842,12 @@ test('edge: il puntatore porta la release (base versionata, sha256 e bytes dei f
   const noSitemap = fakeDist(withLive(['canton-ti']));
   rmSync(path.join(noSitemap, 'sitemap-articles-canton-ti.xml'));
   assert.throws(() => planRelease(noSitemap), /sitemap-articles-canton-ti\.xml: manca/);
+  const noHubs = fakeDist(withLive(['canton-ti']));
+  rmSync(path.join(noHubs, CANTON_HUBS_API));
+  assert.throws(() => planRelease(noHubs), /canton-hubs\.json: manca/);
+  const wrongHubs = fakeDist(withLive(['canton-ti']));
+  writeFileSync(path.join(wrongHubs, CANTON_HUBS_API), JSON.stringify({ schema: 1, commit: OLD, sections: { 'canton-ti': {} } }));
+  assert.throws(() => planRelease(wrongHubs), /canton-hubs\.json: commit\/sezioni non corrispondono/);
 });
 
 test('edge: ordine — file sotto la base della release, riletti, poi UN solo PUT; nessun path fisso', async () => {
@@ -842,6 +857,7 @@ test('edge: ordine — file sotto la base della release, riletti, poi UN solo PU
   assert.deepEqual(io.ops, [
     `put ${base}sitemap-articles-canton-ti.xml`,
     `put ${base}sitemap-cantons.xml`,
+    `put ${base}${CANTON_HUBS_API}`,
     'put edge/sections/registry.json',
     'purge 3',
   ]);
@@ -850,6 +866,7 @@ test('edge: ordine — file sotto la base della release, riletti, poi UN solo PU
   assert.ok(written.every((key) => key === 'edge/sections/registry.json' || key.startsWith('edge/sections/_releases/')), written.join(', '));
   assert.equal(io.store.get('cc:edge/sections/registry.json'), 'public,max-age=60');
   assert.equal(io.store.get(`cc:${base}sitemap-cantons.xml`), 'public,max-age=31536000,immutable');
+  assert.equal(io.store.get(`cc:${base}${CANTON_HUBS_API}`), 'public,max-age=31536000,immutable');
   assert.deepEqual([...io.purged].sort(), [
     'https://cdn.frontaliereticino.ch/edge/sections/registry.json',
     'https://frontaliereticino.ch/sitemap-articles-canton-ti.xml',
@@ -1059,8 +1076,9 @@ test('edge: pulizia best-effort — mai la release puntata, mai la precedente', 
   assert.deepEqual(io.ops.filter((op) => op.startsWith('del ')), [
     `del edge/sections/_releases/${OLDER}/sitemap-articles-canton-ti.xml`,
     `del edge/sections/_releases/${OLDER}/sitemap-cantons.xml`,
+    `del edge/sections/_releases/${OLDER}/canton-hubs.json`,
   ]);
-  assert.deepEqual(pointerOf(io).release.previous, { base: `edge/sections/_releases/${OLD}/`, files: ['sitemap-articles-canton-gr.xml', 'sitemap-cantons.xml'] });
+  assert.deepEqual(pointerOf(io).release.previous, { base: `edge/sections/_releases/${OLD}/`, files: ['sitemap-articles-canton-gr.xml', 'sitemap-cantons.xml', 'canton-hubs.json'] });
   // Una pulizia fallita non e' un fallimento della pubblicazione.
   const stuck = await publish(withLive(['canton-ti']), { history: [withLive(['canton-ti'], OLDER), withLive(['canton-gr'], OLD)], fail: (op) => op === 'remove' });
   assert.equal(stuck.result.code, 0);
