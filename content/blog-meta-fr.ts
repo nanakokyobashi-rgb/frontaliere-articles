@@ -13210,6 +13210,11 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.sconto-dipendenti-migros-ccl.title': 'Migros : nouveau CCL dès 2027, remise de 10 %',
     'blog.article.sconto-dipendenti-migros-ccl.excerpt': 'Le CCL national de Migros sera en vigueur de 2027 à 2031 : conditions uniformes, semaine de 41 heures pour beaucoup et remise de 10 % avec des bons d’achat.',
     'blog.article.sconto-dipendenti-migros-ccl.imageAlt': 'Supermarché Migros au Tessin sur la nouvelle convention collective nationale.',
+    'blog.article.bollettino-frontaliere-2026-10-15.title': 'Frontaliers : 2\'046 nouvelles offres en Suisse hier — 15 octobre 2026',
+    'blog.article.bollettino-frontaliere-2026-10-15.excerpt': 'Les chiffres du jour, 15 octobre 2026, pour les frontaliers : les dernières attentes relevées à chaque douane, les communes où l\'essence coûte le moins cher, le dernier taux franc-euro relevé et les offres d\'emploi parues en Suisse. Des données de notre suivi, relevées chaque jour.',
+    'blog.article.bollettino-frontaliere-2026-10-15.imageAlt': 'Les chiffres du jour pour les frontaliers – 15 octobre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
+    'blog.article.bollettino-frontaliere-2026-10-15.seoDescription': 'Bulletin du frontalier du 15 octobre 2026 : les files relevées aux douanes, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
+    'blog.article.bollettino-frontaliere-2026-10-15.ogDescription': 'Les chiffres du 15 octobre 2026 pour les frontaliers : combien de temps on attend à chaque douane, où l\'essence coûte le moins cher, quel est le dernier taux franc-euro relevé et combien d\'offres d\'emploi sont parues en Suisse.',
 };
 
 export default blogMetaFr;

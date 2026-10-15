@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 542,
+  "assetCount": 543,
   "assets": [
     {
       "schema": 1,
@@ -21500,6 +21500,24 @@
         "is_topic_relevant": true,
         "notes": "Generic synthetic editorial illustration; no readable text, logos, or identifiable people."
       }
+    },
+    {
+      "schema": 1,
+      "assetId": "bollettino-frontaliere-2026-10-15",
+      "source": "deterministic-card",
+      "provider": "site-owned",
+      "note": "Deterministic SVG card rendered by the repository; no external image provider is used.",
+      "credit": "frontaliereticino.ch",
+      "producer": "generator/scripts/lib/daily-brief-image.mjs",
+      "templateVersion": "frontaliereticino.daily-brief-card.v1",
+      "license": "private-grant",
+      "sha256": "d613e2e63c93d78db93296a7be3ee28959afbf9a07a6fbd7f3e5af2371f33b0d",
+      "bytes": 27588,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/bollettino-frontaliere-2026-10-15.webp"
     }
   ]
 }
