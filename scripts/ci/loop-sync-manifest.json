@@ -314,12 +314,11 @@
       "path": "scripts/ci/check-blog-body-syntax.mjs",
       "sitePath": "tests/blog-body-typescript-syntax.test.ts",
       "mode": "adapted",
-      "reason": "Preflight di sintassi TypeScript sui corpi. Gemello di tests/blog-body-typescript-syntax.test.ts del sito: stessa validazione (esbuild transform, loader ts, solo sintassi), adattata al percorso di PUBBLICAZIONE invece che alle PR — la' e' un test su pull_request, qui gli articoli atterrano per push diretto su main, quindi un gate sulle PR non ne vedrebbe mai uno. Registrato 'adapted' e non 'corpus-only': il file sul sito ESISTE, e dichiararlo assente renderebbe loop-drift-check cieco proprio alla divergenza fra i due — il caso peggiore descritto in CLAUDE.md.",
+      "reason": "Preflight syntax-only dei body via esbuild. Gemello di tests/blog-body-typescript-syntax.test.ts del sito: usa lo stesso esbuild.transform, ma le responsabilita' operative divergono. Qui il controllo e' preflight della pubblicazione da push diretto a main, dopo host/cantonSectionsBootstrap.mjs; in scan changed riceve i path via PREFLIGHT_CHANGED_FILES_FILE per non superare ARG_MAX con migliaia di path. Il gemello del sito e' un test Vitest su pull_request che scandisce il set completo e non consuma una lista di changed-path. `adapted` e' intenzionale: il sito ha il gemello, ma non questo trasporto publisher-specifico.",
       "baseline": {
         "site": "d1fc5b37f2f0c55d",
-        "corpus": "fc74a2c3e737fe83",
-        "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T22:32:17.150Z"
+        "corpus": "e5f830779f7e41ba",
+        "alignedAt": "2026-10-15"
       }
     },
     {
