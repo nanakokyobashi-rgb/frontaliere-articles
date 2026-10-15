@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-amaudruz-candidatura-federale.webp",
-      "sha256": "e7589d86a3cb0a405086ab188076e32db922083891c9f5a023e3bbce223224aa"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-amaudruz-candidatura-federale-480w.webp",
-      "sha256": "5deedefeecf244917779221b800b0e6ac1d63be6d15577bad2122fd5fb708f54"
-    }
-  ]
+  "items": []
 }
