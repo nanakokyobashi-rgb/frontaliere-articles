@@ -108921,6 +108921,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-terzetto-sospetto-melano-chiasso': {
+    title: 'Chiamate shock agli anziani, tre arresti nel Mendrisiotto',
+    description: 'Tre arresti nel Mendrisiotto Sospetti per truffe con chiamate shock Veicolo con targhe ceche trovato a Chiasso Una seconda truffa pomeridiana è stata sventata',
+    keywords: 'frontalieri, ticino, svizzera, italia, chiamate, shock, agli, anziani',
+    ogTitle: 'Mendrisiotto, tre arresti per chiamate shock',
+    ogDescription: 'Tre arresti nel Mendrisiotto Sospetti per truffe con chiamate shock Veicolo con targhe ceche trovato a Chiasso Una seconda truffa pomeridiana è stata sventata',
+    canonicalPath: '/articoli-frontaliere/terzetto-sospetto-melano-chiasso/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Chiamate shock agli anziani, tre arresti nel Mendrisiotto",
+      "description": "Tre arresti nel Mendrisiotto Sospetti per truffe con chiamate shock Veicolo con targhe ceche trovato a Chiasso Una seconda truffa pomeridiana è stata sventata",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-terzetto-sospetto-melano-chiasso.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Chiasso: controlli su un veicolo con targhe ceche dopo tre arresti per sospette chiamate shock"
+      },
+      "datePublished": "2026-10-15T19:19:17+00:00",
+      "dateModified": "2026-10-15T19:19:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/terzetto-sospetto-melano-chiasso/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

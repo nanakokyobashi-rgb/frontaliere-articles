@@ -13253,6 +13253,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.lugano-preventivo-2027-moltiplicatori.title': 'Preventivo 2027 in rosso ma moltiplicatori invariati',
     'blog.article.lugano-preventivo-2027-moltiplicatori.excerpt': 'Disavanzo 2027: 14,7 milioni di franchi Investimenti netti previsti: 97 milioni Moltiplicatori confermati: 80% e 85% Soggetto → Città di Lugano Decisione →',
     'blog.article.lugano-preventivo-2027-moltiplicatori.imageAlt': 'Vista panoramica del centro di Lugano con il lago sullo sfondo, in luce diurna.',
+    'blog.article.terzetto-sospetto-melano-chiasso.title': 'Chiamate shock agli anziani, tre arresti nel Mendrisiotto',
+    'blog.article.terzetto-sospetto-melano-chiasso.excerpt': 'Tre arresti nel Mendrisiotto Sospetti per truffe con chiamate shock Veicolo con targhe ceche trovato a Chiasso Una seconda truffa pomeridiana è stata sventata',
+    'blog.article.terzetto-sospetto-melano-chiasso.imageAlt': 'Chiasso: controlli su un veicolo con targhe ceche dopo tre arresti per sospette chiamate shock',
 };
 
 export default blogMetaIt;

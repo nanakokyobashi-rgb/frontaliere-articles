@@ -1,9 +1,4 @@
 {
-  "https://comozero.it/economia/export-in-lombardia-i-dati-delle-province-como-soffre-e-la-svizzera-si-conferma-una-salvezza": {
-    "articleId": "como-export-svizzera-2026",
-    "ts": "2026-09-04T13:53:14.558Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/lavori-alla-stazione-di-gallarate-modifiche-alla-linea-s5-alcuni-treni-serali-cancellati-bus-sostitutivi-tra-settembre-e-ottobre/2670477": {
     "articleId": "lavori-stazione-gallarate-2026",
     "ts": "2026-09-04T16:09:59.816Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/cronaca/1956967/preventivo-2027-in-rosso-ma-moltiplicatori-invariati": {
     "articleId": "lugano-preventivo-2027-moltiplicatori",
     "ts": "2026-10-15T18:19:31.795Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4160197": {
+    "articleId": "terzetto-sospetto-melano-chiasso",
+    "ts": "2026-10-15T19:19:17.816Z",
     "keyForm": 2
   }
 }

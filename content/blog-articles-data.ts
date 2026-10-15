@@ -44676,6 +44676,17 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'terzetto-sospetto-melano-chiasso',
+ category: 'novita',
+ date: '2026-10-15T19:19:17.123Z',
+ image: '/images/blog/article-terzetto-sospetto-melano-chiasso.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

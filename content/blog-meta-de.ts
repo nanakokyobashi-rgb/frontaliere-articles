@@ -13251,6 +13251,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.lugano-preventivo-2027-moltiplicatori.title': 'Budget 2027 im Minus, aber Steuermultiplikatoren unverändert',
     'blog.article.lugano-preventivo-2027-moltiplicatori.excerpt': 'Defizit 2027: 14,7 Millionen Franken Geplante Nettoinvestitionen: 97 Millionen Bestätigte Steuermultiplikatoren: 80% und 85% Akteur → Città di Lugano Entscheidung →',
     'blog.article.lugano-preventivo-2027-moltiplicatori.imageAlt': 'Panoramablick auf das Stadtzentrum von Lugano mit dem See im Hintergrund bei Tageslicht.',
+    'blog.article.terzetto-sospetto-melano-chiasso.title': 'Schockanrufe bei Senioren, drei Festnahmen im Mendrisiotto',
+    'blog.article.terzetto-sospetto-melano-chiasso.excerpt': 'Drei Festnahmen im Mendrisiotto Verdächtige wegen Betrugsfällen mit Schockanrufen Fahrzeug mit tschechischen Kennzeichen in Chiasso gefunden Ein zweiter Betrugsfall am Nachmittag wurde vereitelt',
+    'blog.article.terzetto-sospetto-melano-chiasso.imageAlt': 'Chiasso: Kontrollen eines Autos mit tschechischen Kennzeichen nach drei Festnahmen wegen Schockanrufen',
 };
 
 export default blogMetaDe;

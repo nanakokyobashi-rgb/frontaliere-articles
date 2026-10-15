@@ -13252,6 +13252,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.lugano-preventivo-2027-moltiplicatori.title': '2027 budget in the red but multipliers unchanged',
     'blog.article.lugano-preventivo-2027-moltiplicatori.excerpt': '2027 deficit: 14,7 million francs Net planned investments: 97 million Confirmed multipliers: 80% and 85% Subject → City of Lugano Decision →',
     'blog.article.lugano-preventivo-2027-moltiplicatori.imageAlt': 'Panoramic view of Lugano city centre with the lake in the background, daylight.',
+    'blog.article.terzetto-sospetto-melano-chiasso.title': 'Shocking calls to elderly people, three arrests in Mendrisiotto',
+    'blog.article.terzetto-sospetto-melano-chiasso.excerpt': 'Three arrests in Mendrisiotto Suspects in scams involving shock calls Vehicle with Czech license plates found in Chiasso A second afternoon scam was foiled',
+    'blog.article.terzetto-sospetto-melano-chiasso.imageAlt': 'Chiasso: checks on a car with Czech plates after three arrests over suspected shock calls',
 };
 
 export default blogMetaEn;
