@@ -347,6 +347,10 @@ export const NON_SONO_CONTENT_GATES = Object.freeze({
     'prova il publisher con registri, slug, hub e pagine costruiti in directory '
     + 'temporanee; sulle superfici reali verifica solo symlink/layout e presenza, '
     + 'non legge ne\' valuta articoli sotto content/.',
+  'generator/tests/content-gates-main-entrypoint.test.mjs':
+    'usa il path content/ reale solo come target del preloader, che intercetta '
+    + 'readdirSync e restituisce [] prima di leggere il filesystem; il test '
+    + 'verifica il dispatch CLI via symlink, non i contenuti pubblicati.',
   'generator/tests/section-registry.test.mjs':
     'valida sections/registry.json e il publisher con documenti e superfici '
     + 'sintetiche in directory temporanee; non legge gli articoli reali sotto '
