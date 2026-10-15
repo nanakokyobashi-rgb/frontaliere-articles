@@ -307,12 +307,12 @@ const DECLARED_ABSENT = {
       'cross-repo pinnato a uno SHA completo, quindi la sua assenza locale e intenzionale e non un ' +
       'referente runtime mancante nel publisher.',
   },
-  '.github/workflows/jobs-pipeline-queue-monitor.yml :: scripts/monitor-jobs-pipeline-queue.mjs': {
+  '.github/workflows/jobs-pipeline-queue-monitor.yml :: scripts/ci/monitor-jobs-pipeline-queue.mjs': {
     kind: 'site-only',
     reason:
-      'Lo scanner della coda e mantenuto nel repository del sito e viene controllato nel ' +
-      'workflow dopo uno sparse checkout esplicito dal repo site; il corpus fornisce solo ' +
-      'l inventario locale dei workflow e non una seconda copia dello script.',
+      'Lo scanner della coda e mantenuto in `scripts/ci` del repository del sito e viene ' +
+      'controllato nel workflow dopo uno sparse checkout esplicito dal repo site; il corpus ' +
+      'fornisce solo l inventario locale dei workflow e non una seconda copia dello script.',
   },
   'scripts/ci/prefetch-review-diff.mjs :: scripts/lib/nord-anglia-job-parser.mjs': {
     kind: 'site-only',
