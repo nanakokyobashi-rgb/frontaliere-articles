@@ -436,15 +436,33 @@ export async function publishRelease(release, { io, env = process.env, log = con
   const missingCreds = ['R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'R2_S3_ENDPOINT', 'R2_BUCKET', 'CF_API_TOKEN'].filter((name) => !env[name]);
   if (missingCreds.length) return stop('credenziali', `assenti (${missingCreds.join(', ')}): niente caricato`, false);
 
+  // Una base gia' puntata e' immutable anche quando cambia il kill-switch a
+  // parita' di HEAD: il commit identifica il contenuto generato, non una
+  // chiave da sovrascrivere. Se lo snapshot effettivo e' diverso, fermarsi
+  // prima di qualsiasi PUT mantiene coerenti puntatore e payload; per
+  // ripubblicarlo serve un commit/snapshot nuovo.
+  const previousBase = previous.doc?.release?.base;
+  if (previousBase === release.base && mandatory) {
+    return stop(
+      'immutability',
+      `base ${release.base} gia' puntata: rifiuto la riscrittura della release immutable; lo snapshot effettivo richiede un commit nuovo`,
+      false,
+    );
+  }
+  // La stessa release gia' verificata non richiede ne' un nuovo PUT ne' un
+  // nuovo flip: anche un upload byte-identico sarebbe una riscrittura di una
+  // chiave dichiarata immutable.
+  if (previousBase === release.base) {
+    log(`[section-edge] release ${release.commit.slice(0, 8)} gia' servita sotto ${release.base}; nessun PUT`);
+    return { code: 0, phase: 'noop', flipped: false };
+  }
+
   // Se ci si ferma prima del flip, i file gia' caricati sotto la base di QUESTA
-  // release non sono puntati da niente: si tolgono (best-effort), a meno che la
-  // base sia quella gia' servita (stesso commit ripubblicato).
+  // release non sono puntati da niente: si tolgono best-effort.
   const staged = [];
   const stopBeforeFlip = (phase, what) => {
-    if (previous.doc?.release?.base !== release.base) {
-      for (const key of staged) {
-        if (!io.remove(key)) log(`::notice::[section-edge] file di staging non ripulito: ${key}`);
-      }
+    for (const key of staged) {
+      if (!io.remove(key)) log(`::notice::[section-edge] file di staging non ripulito: ${key}`);
     }
     return stop(phase, what, false);
   };
