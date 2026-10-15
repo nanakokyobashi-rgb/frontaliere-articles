@@ -878,6 +878,19 @@ test('edge: ordine — file sotto la base della release, riletti, poi UN solo PU
   assert.equal(validateEdgeSectionRegistry(pointer), true);
 });
 
+test('edge: una base gia\' puntata non viene sovrascritta se lo snapshot cambia sullo stesso commit', async () => {
+  const { io, before, result } = await publish(withLive(['canton-ti', 'canton-gr']), { history: [withLive(['canton-ti'])] });
+  assert.deepEqual(result, { code: 1, phase: 'collisione', flipped: false });
+  assert.equal(served(io), before, 'il puntatore e i byte serviti restano quelli precedenti');
+  assert.deepEqual(io.ops, [], 'la collisione viene rifiutata prima di qualunque PUT o purge');
+});
+
+test('edge: il rerun identico riusa la base immutable senza riscrivere file', async () => {
+  const { io, result } = await publish(withLive(['canton-ti']), { history: [withLive(['canton-ti'])], fail: (op) => op === 'upload' });
+  assert.deepEqual(result, { code: 0, phase: 'done', flipped: false });
+  assert.deepEqual(io.ops, [], 'una release gia\' servita non richiede upload o purge');
+});
+
 test('edge: push obbligatorio a ogni differenza — accensione, spegnimento, ritiro, byte di un file', async () => {
   const live = planRelease(fakeDist(withLive(['canton-ti'])));
   const draft = planRelease(fakeDist(DRAFT_ALL()));

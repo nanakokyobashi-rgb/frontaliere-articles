@@ -242,6 +242,24 @@ export function releaseDiffers(release, previous) {
   return sorted(next) !== sorted(prev);
 }
 
+/**
+ * Confronta la dichiarazione completa dei file, inclusa la lunghezza: se la
+ * base e' gia' puntata, ogni byte deve restare quello verificato dal CDN.
+ */
+function sameReleaseFiles(next, previous) {
+  const normalize = (files) => {
+    if (!isPlainObject(files)) return null;
+    return JSON.stringify(
+      Object.entries(files)
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([name, meta]) => [name, { sha256: meta?.sha256, bytes: meta?.bytes }]),
+    );
+  };
+  const nextFiles = normalize(next?.release?.files);
+  const previousFiles = normalize(previous?.release?.files);
+  return nextFiles !== null && nextFiles === previousFiles;
+}
+
 /** Le URL da purgare, a blocchi da `size`, senza duplicati. */
 export function purgeChunks(urls, size = PURGE_CHUNK) {
   if (!Number.isInteger(size) || size <= 0) throw new Error(`purgeChunks: size non valido (${size})`);
@@ -433,6 +451,28 @@ export async function publishRelease(release, { io, env = process.env, log = con
     return { code: mandatory ? 1 : 0, phase, flipped };
   };
 
+  // Una base gia' puntata e' immutabile anche quando il commit e' lo stesso:
+  // un nuovo kill-switch puo' cambiare il payload generato sullo stesso HEAD.
+  // Rifiutiamo la collisione prima del primo PUT; se i byte sono gli stessi,
+  // invece, li riusiamo senza riscriverli (la cache immutable resta valida).
+  const previousRelease = previous.doc?.release;
+  const sameBase = typeof previousRelease?.base === 'string' && previousRelease.base === release.base;
+  const canReuseBase = previous.state === 'ok' && sameBase && sameReleaseFiles(release.pointer, previous.doc);
+  if (sameBase && !canReuseBase) {
+    const reason = previous.state === 'ok'
+      ? 'i file o gli hash della release differiscono'
+      : 'lo stato della release servita non e\' dimostrabile';
+    return stop(
+      'collisione',
+      `la base immutabile ${release.base} e\' gia' puntata ma ${reason}: nessun overwrite consentito`,
+      false,
+    );
+  }
+  if (canReuseBase && !mandatory) {
+    log(`[section-edge] release ${release.commit.slice(0, 8)} gia' servita con gli stessi byte: nessun PUT necessario`);
+    return { code: 0, phase: 'done', flipped: false };
+  }
+
   const missingCreds = ['R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'R2_S3_ENDPOINT', 'R2_BUCKET', 'CF_API_TOKEN'].filter((name) => !env[name]);
   if (missingCreds.length) return stop('credenziali', `assenti (${missingCreds.join(', ')}): niente caricato`, false);
 
@@ -450,11 +490,11 @@ export async function publishRelease(release, { io, env = process.env, log = con
   };
 
   // 1. Staging sotto la base della release, con rilettura di sha256 e lunghezza.
-  for (const file of release.files) {
+  for (const file of canReuseBase ? [] : release.files) {
     staged.push(file.key);
     if (!io.upload(file.local, file.key, RELEASE_CACHE_CONTROL)) return stopBeforeFlip('staging', `upload non confermato: ${file.key}`);
   }
-  for (const file of release.files) {
+  for (const file of canReuseBase ? [] : release.files) {
     const served = await io.fetchBytes(`${CDN}/${file.key}`);
     if (served.status !== 200 || served.body.length !== file.bytes || sha256(served.body) !== file.sha256) {
       return stopBeforeFlip('staging', `${file.key} sul CDN non corrisponde ai byte locali (HTTP ${served.status || 'nessuna risposta'})`);
