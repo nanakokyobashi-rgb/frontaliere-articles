@@ -44595,6 +44595,16 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'l-gav-2027-orario-salario',
+ category: 'novita',
+ date: '2026-10-15T13:36:22.057Z',
+ image: '/images/blog/article-l-gav-2027-orario-salario.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
