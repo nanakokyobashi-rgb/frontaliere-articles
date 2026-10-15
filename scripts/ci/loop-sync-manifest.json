@@ -301,6 +301,16 @@
       }
     },
     {
+      "path": "scripts/ci/lib/pr-head-identity.mjs",
+      "mode": "corpus-only",
+      "reason": "Normalizza l’identità del branch head delle PR REST e GitHub CLI per i mutex delle follow-up daily e dei gruppi del corpus. Il sito non usa il followup-drainer né il workflow issue-fix di questo repository, quindi non ha un consumer per questo helper.",
+      "baseline": {
+        "site": null,
+        "corpus": "09a627d090531f35",
+        "alignedAt": "2026-10-16"
+      }
+    },
+    {
       "path": "scripts/ci/review-scope.mjs",
       "mode": "corpus-only",
       "reason": "Classificatore del verdetto `🔴 Important` rispetto al diff corrente della PR. E' usato dal review-gate e dal fixer del corpus per declassare in modo conservativo i finding fuori diff e coniare una sola issue follow-up; il sito ha un gate e un ciclo di review diversi e non possiede questo consumer del corpus, quindi non esiste un gemello da portare.",

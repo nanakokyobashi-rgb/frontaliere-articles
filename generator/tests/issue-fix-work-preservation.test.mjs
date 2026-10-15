@@ -194,7 +194,9 @@ test('il gate stale congela lo scope FU ma mantiene il mutex sul branch daily co
   );
   assert.match(scope, /mutex-bin\/gh/);
   assert.match(scope, /Tutti i FU daily usano ancora `fix\/issue-N`/);
-  assert.match(scope, /process\.stdout\.write\(JSON\.stringify\(prs\)\)/);
+  assert.match(scope, /query\[jsonIndex \+ 1\] = 'number,headRefName,body,headRepository'/);
+  assert.match(scope, /const sameRepositoryPrs = prs\.filter\(/);
+  assert.match(scope, /process\.stdout\.write\(JSON\.stringify\(sameRepositoryPrs\)\)/);
   assert.doesNotMatch(scope, /followupItemMarkers/);
   assert.doesNotMatch(scope, /throw new Error\('daily bucket senza un FU open/);
   assert.match(scope, /daily_terminal=\$\{dailyTerminal \? 'true' : 'false'\}/);
