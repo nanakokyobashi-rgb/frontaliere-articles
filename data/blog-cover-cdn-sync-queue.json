@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-rotte-greggio-kurdistan-lugano.webp",
-      "sha256": "f511a44f835cc6588d2eef14eaff0f4e698508973a3d0926abb8c9ba758e3796"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-rotte-greggio-kurdistan-lugano-480w.webp",
-      "sha256": "f25cec72db0f5987236f3cdb7c235821092c87b36ec6c6b5a972cc2d30919ad2"
-    }
-  ]
+  "items": []
 }
