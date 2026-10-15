@@ -16,6 +16,7 @@ const ENTRYPOINTS = [
   'generator/scripts/regenerate-queued-covers.mjs',
   'generator/scripts/retranslate-blocking-bodies.mjs',
   'generator/scripts/reset-evergreen-strikes.mjs',
+  'generator/scripts/migrate-evergreen-rejected-ledger.mjs',
   'generator/scripts/scan-vacuous-key-facts.mjs',
   'scripts/ci/check-node-test-stdout.mjs',
   'scripts/ci/claude-codex-fallback.mjs',

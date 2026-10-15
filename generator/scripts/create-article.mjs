@@ -2131,8 +2131,8 @@ const RUN_REPORT = {
     checked: 0,
     // Motivi di scarto, mutuamente esclusivi e nell'ordine in cui il
     // pre-flight li applica.
-    skippedBanned: 0, // ledger keywords[] — duplicato confermato o topic-gate abort
-    skippedStruck: 0, // ledger strikes{} ≥ EVERGREEN_STRIKE_LIMIT
+    skippedBanned: 0, // ledger bans[] — duplicato confermato o topic-gate abort
+    skippedStruck: 0, // ledger strikes[] ≥ EVERGREEN_STRIKE_LIMIT nel contesto corrente
     skippedTopicCoverage: 0, // topic-coverage-guard: stesso mestiere entro la finestra
     skippedTitleJaccard: 0, // Jaccard sul titolo di un articolo esistente
     skippedFamily: 0, // evergreenTopicFamily: stessa famiglia (spesso satura)
@@ -4271,7 +4271,7 @@ function buildDynamicEvergreenTopicsSvizzera() {
 //    ri-derivato per via combinatoria invece che a mano.
 //
 // ROTAZIONE 2026-10-04 (#2085). Il watchdog ha misurato 610/610 keyword
-// rifiutate: 300 dal ledger permanente, 12 da strike, 44 da copertura recente,
+// rifiutate: 300 dal ledger evergreen, 12 da strike, 44 da copertura recente,
 // 228 dal title-Jaccard e 26 da famiglia satura. Allargare la soglia o svuotare
 // le bans avrebbe rimesso nel ciclo duplicati già confermati. La rotazione ha
 // mantenuto bounded a 610 il denominatore di quella versione, ma dieci pilastri
@@ -6151,7 +6151,7 @@ const EVERGREEN_FACTS_BRIEF = `FATTI VERIFICATI (ground truth — il fact-checke
 // 27 anchor, TUTTI dal brief frontaliero (misurato a parte con
 // extractSourceAnchors — stesso numero, due lenti indipendenti).
 // Sei tentativi, poi uno strike; tre strike e la keyword muore. Al 2026-08-09
-// 94 delle 110 keyword del pool svizzero erano gia' morte (42 ban permanenti,
+// 94 delle 110 keyword del pool svizzero erano gia' morte (42 ban del ledger,
 // 52 per strike) e il run finiva con «Tutte le keyword evergreen risultano
 // gia' coperte dal pre-flight».
 //
@@ -17348,7 +17348,7 @@ async function main() {
             // once, it is unlikely to succeed on the next cron run either.
             // Persisting avoids wasting ~60-90s per doomed attempt.
             // Quality-rejects (too-short/thin) intentionally excluded: LLM
-            // variance makes them transient; blocking permanently is too aggressive.
+            // variance makes them transient; blocking beyond the strike TTL is too aggressive.
             rememberConfirmedEvergreenDuplicate(
               selectedTopic.keyword,
               isTopicGateAbort ? 'topic-gate' : 'duplicate',

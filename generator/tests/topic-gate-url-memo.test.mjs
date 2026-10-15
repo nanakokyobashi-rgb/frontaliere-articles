@@ -81,6 +81,23 @@ test('persist e load conservano topicGateUrls, e un file senza il campo si caric
   }
 });
 
+test('un ledger corrotto resta fail-closed anche quando si registra un topic-gate', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'topic-gate-invalid-'));
+  try {
+    const file = path.join(dir, 'tracker.json');
+    const original = '{"schemaVersion":2,"bans":[null]}\n';
+    fs.writeFileSync(file, original);
+    const loaded = loadEvergreenRejectedTracker({ path: file });
+    assert.equal(loaded.invalid, true);
+    const updated = recordTopicGateAbortedUrl(loaded, URL_KEY, 'frontaliere', NOW);
+    assert.equal(updated.invalid, true);
+    assert.equal(persistEvergreenRejectedTracker(updated, { path: file }), false);
+    assert.equal(fs.readFileSync(file, 'utf8'), original, 'il memo non deve sovrascrivere il ledger corrotto');
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test('create-article registra l\'abort nel catch del ciclo notizie e lo filtra prima della selezione', () => {
   const src = fs.readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf8');
   const prefilter = src.indexOf('Pre-filter: fonti gia\' rifiutate dal topic-gate');

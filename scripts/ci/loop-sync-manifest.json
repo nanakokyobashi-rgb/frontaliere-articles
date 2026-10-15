@@ -1896,6 +1896,16 @@
       }
     },
     {
+      "path": "generator/scripts/migrate-evergreen-rejected-ledger.mjs",
+      "mode": "corpus-only",
+      "reason": "Migrazione fail-closed del ledger evergreen: converte il formato globale storico in schema v2, conserva i ban e gli strike senza provenienza come `legacy` con regola `preflight-required`, e scrive solo con `--apply` dopo un dry-run senza record persi. E' uno strumento del corpus che governa il file sotto `data/`; il sito consuma il risultato via JSON HTTP e non esegue questo writer.",
+      "baseline": {
+        "site": null,
+        "corpus": "c8c1cdbcf8ff3717",
+        "alignedAt": "2026-10-15"
+      }
+    },
+    {
       "path": "generator/scripts/scan-vacuous-key-facts.mjs",
       "mode": "corpus-only",
       "reason": "Scanner read-only della baseline dei fatti chiave vacui (#1054): stampa file-locale, articoli distinti e locale senza modificare `content/**` e senza avere un gemello operativo sul sito.",
@@ -2563,7 +2573,7 @@
       "path": "generator/scripts/lib/article-topic-selector.mjs",
       "sitePath": "scripts/lib/article-topic-selector.mjs",
       "mode": "adapted",
-      "reason": "Selettore dei topic. Divergente anche da `be6b31d5`: due righe di trasporto (`corpusPath` e il default di `loadExistingItTitles`) e, qui soltanto, il cap del ledger evergreen portato a 2048. Le sezioni frontaliere e svizzera condividono lo stesso file di stato e i pool correnti hanno circa 537 e 610 topic: il vecchio cap 500 espelleva rifiuti ancora validi dalla FIFO, permettendo alle run successive di riprovarli. La generazione live usa `generator/` nel corpus, che i workflow mirror non trasportano; il sito resta la sorgente per le altre modifiche al selettore.",
+      "reason": "Selettore dei topic. Divergente anche da `be6b31d5`: due righe di trasporto (`corpusPath` e il default di `loadExistingItTitles`) e, qui soltanto, il ledger evergreen schema v2 con provenance per sezione/pool/pool-epoch, TTL di 30 giorni per gli strike, revalidazione preflight delle decisioni legacy e cap indipendente a 2048 record. La migrazione corpus-only conserva i 517 ban e 284 strike storici senza attribuire loro una provenienza inventata; un pool epoch cambiato riapre il preflight e una conferma scrive il contesto corrente. La generazione live usa `generator/` nel corpus, che i workflow mirror non trasportano; il sito resta la sorgente per le altre modifiche al selettore.",
       "baseline": {
         "site": "f2dee9a957a468d3",
         "corpus": "720ed7bd9d3a345c",

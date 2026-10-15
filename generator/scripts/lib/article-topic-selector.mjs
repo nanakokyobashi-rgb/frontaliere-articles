@@ -1098,7 +1098,8 @@ function normalizeV2(raw) {
 
   const tracker = emptyEvergreenRejectedTracker();
   for (const [index, entry] of raw.bans.entries()) {
-    if (!isRecord(entry) || typeof entry.keyword !== 'string' || !entry.keyword || !completeProvenance(entry)) {
+    if (!isRecord(entry) || typeof entry.keyword !== 'string' || !entry.keyword || !completeProvenance(entry)
+      || entry.status !== 'active' || entry.validityRule !== 'confirmed-duplicate') {
       throw new Error(`ban[${index}] has no complete provenance`);
     }
     tracker.bans.push({
@@ -1106,7 +1107,7 @@ function normalizeV2(raw) {
       section: entry.section,
       pool: entry.pool,
       poolEpoch: entry.poolEpoch,
-      status: entry.status === 'active' ? 'active' : 'active',
+      status: 'active',
       validityRule: entry.validityRule || 'confirmed-duplicate',
       reason: typeof entry.reason === 'string' ? entry.reason : 'duplicate',
       firstSeenAt: typeof entry.firstSeenAt === 'string' ? entry.firstSeenAt : isoNow(),
@@ -1116,7 +1117,8 @@ function normalizeV2(raw) {
   }
   for (const [index, entry] of raw.strikes.entries()) {
     const expires = epochMs(entry?.expiresAt);
-    if (!isRecord(entry) || typeof entry.keyword !== 'string' || !entry.keyword || !completeProvenance(entry)
+    if (!isRecord(entry) || entry.status !== 'active' || entry.validityRule !== 'quality-strike-ttl'
+      || typeof entry.keyword !== 'string' || !entry.keyword || !completeProvenance(entry)
       || !Number.isInteger(entry.count) || entry.count < 1 || !Number.isFinite(expires)) {
       throw new Error(`strike[${index}] has invalid count, expiry or provenance`);
     }
@@ -1125,7 +1127,7 @@ function normalizeV2(raw) {
       section: entry.section,
       pool: entry.pool,
       poolEpoch: entry.poolEpoch,
-      status: entry.status === 'active' ? 'active' : 'active',
+      status: 'active',
       validityRule: entry.validityRule || 'quality-strike-ttl',
       count: entry.count,
       firstStrikeAt: typeof entry.firstStrikeAt === 'string' ? entry.firstStrikeAt : isoNow(),
@@ -1256,6 +1258,7 @@ export function migrateEvergreenRejectedTracker(raw, opts = {}) {
 }
 
 function coerceTracker(tracker) {
+  if (tracker?.invalid) return { ...emptyEvergreenRejectedTracker(), invalid: true };
   if (tracker?.schemaVersion === EVERGREEN_REJECTED_SCHEMA_VERSION) {
     try { return normalizeV2(tracker); } catch { return { ...emptyEvergreenRejectedTracker(), invalid: true }; }
   }

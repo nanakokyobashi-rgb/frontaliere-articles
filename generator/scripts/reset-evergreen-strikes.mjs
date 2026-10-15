@@ -140,7 +140,7 @@ function main(argv) {
   console.log(`pool evergreen svizzera ricostruito : ${pool.length} keyword`);
   console.log(`strikes nel ledger                  : ${before}`);
   console.log(`  azzerati (nel pool svizzero)      : ${cleared.length}, di cui gia' ritirati (>=3): ${retired.length}`);
-  console.log(`  lasciati intatti (fuori dal pool) : ${Object.keys(next.strikes).length}`);
+  console.log(`  lasciati intatti (fuori dal pool) : ${next.strikes.length}`);
   console.log(`ban permanenti nel pool, NON toccati: ${keptBanned.length}`);
   console.log('');
   for (const c of retired) console.log(`  ↺ ${c.strikes}  ${c.keyword}`);
