@@ -60,6 +60,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-15T21:41:27.541Z",
       "lastFailureAt": "2026-10-15T21:41:27.541Z"
+    },
+    {
+      "articleId": "arresto-cittadino-russo-como",
+      "title": "Como, arrestato cittadino russo per ingresso abusivo",
+      "fallbackImage": "/images/blog/devastazione-vagone-como-fermo.webp",
+      "reason": "All image providers failed for article-arresto-cittadino-russo-como: openai-codex (vision gate rejected image: Generic Como street scene, but visible traffic signage and a recogniz",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T22:59:15.513Z",
+      "lastFailureAt": "2026-10-15T22:59:15.513Z"
     }
   ]
 }
