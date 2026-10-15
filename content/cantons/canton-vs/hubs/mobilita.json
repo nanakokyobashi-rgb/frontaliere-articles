@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T09:55:02.142Z",
-  "contentHash": "84d63555117b9f14bb34b794f4a023c9f1e4b1b7112abf6fa185458e22485847",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "628b6836e692727ad89461330eb6653f0fbde3f15958dc7388edbd318eff7467",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T05:23:55.314Z",
+      "updatedAt": "2026-10-15T12:13:19.434Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T20:59:19.985Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "25",
+          "value": "26",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
@@ -135,14 +135,14 @@
               "date": "2026-10-01T13:12:00.000Z"
             },
             {
-              "label": "A9 Vevey -> Martigny tra Svincolo autostradale St-Maurice E Svincolo autostradale Martigny-Fully Situazione: chiusa cantiere",
+              "label": "A9 Sion -> Brig tra Svincolo autostradale Sion-Est E Svincolo autostradale Sierre-Est Situazione: chiusa cantiere",
               "value": "Chiusura",
-              "detail": "fine prevista: 16 ottobre 2026",
-              "date": "2026-10-05T15:09:00.000Z"
+              "detail": "fine prevista: 23 ottobre 2026",
+              "date": "2026-10-05T15:25:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -180,7 +180,7 @@
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -243,7 +243,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "VS",
@@ -263,7 +263,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "25",
+          "value": "26",
           "note": "reports as of 15 October 2026"
         }
       ],
@@ -356,14 +356,14 @@
               "date": "2026-10-01T13:12:00.000Z"
             },
             {
-              "label": "A9 Vevey -> Martigny tra Svincolo autostradale St-Maurice E Svincolo autostradale Martigny-Fully Situazione: chiusa cantiere",
+              "label": "A9 Sion -> Brig tra Svincolo autostradale Sion-Est E Svincolo autostradale Sierre-Est Situazione: chiusa cantiere",
               "value": "Closure",
-              "detail": "until 16 October 2026",
-              "date": "2026-10-05T15:09:00.000Z"
+              "detail": "until 23 October 2026",
+              "date": "2026-10-05T15:25:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -401,7 +401,7 @@
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -464,7 +464,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "VS",
@@ -484,7 +484,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "25",
+          "value": "26",
           "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
@@ -577,14 +577,14 @@
               "date": "2026-10-01T13:12:00.000Z"
             },
             {
-              "label": "A9 Vevey -> Martigny zwischen Anschluss St-Maurice und Anschluss Martigny-Fully Sachlage: Strecke gesperrt Baustelle",
+              "label": "A9 Sion -> Brig zwischen Anschluss Sion-Ost und Anschluss Sierre-Ost Sachlage: Strecke gesperrt Baustelle",
               "value": "Sperrung",
-              "detail": "bis 16. Oktober 2026",
-              "date": "2026-10-05T15:09:00.000Z"
+              "detail": "bis 23. Oktober 2026",
+              "date": "2026-10-05T15:25:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -622,7 +622,7 @@
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -685,7 +685,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "VS",
@@ -705,7 +705,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "25",
+          "value": "26",
           "note": "signalements au 15 octobre 2026"
         }
       ],
@@ -798,14 +798,14 @@
               "date": "2026-10-01T13:12:00.000Z"
             },
             {
-              "label": "A9 Vevey -> Martigny entre Jonction autoroutière St-Maurice et Jonction autoroutière Martigny-Fully Situation: fermé travaux",
+              "label": "A9 Sion -> Brigue entre Jonction autoroutière Sion-Est et Jonction autoroutière Sierre-Est Situation: fermé travaux",
               "value": "Fermeture",
-              "detail": "jusqu’au 16 octobre 2026",
-              "date": "2026-10-05T15:09:00.000Z"
+              "detail": "jusqu’au 23 octobre 2026",
+              "date": "2026-10-05T15:25:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -843,7 +843,7 @@
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -906,7 +906,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

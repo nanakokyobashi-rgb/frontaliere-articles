@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T09:59:11.306Z",
-  "contentHash": "cae26fab527296036e123d4691eef5f0b915e7f9e07c3689c82c458ff032e7b0",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "fe8c63420e5018f90b093ab1d953ee766466572a5b643e2263879a7f3681b990",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -20,6 +20,11 @@
     {
       "id": "imposta-capitale",
       "updatedAt": "2026-10-05T09:44:09.891Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -124,6 +129,19 @@
           ],
           "sourceName": "Amministrazione federale delle contribuzioni (AFC)",
           "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Fonds pour la famille et allocations familiales - Un soutien renforcé au pouvoir d’achat des familles",
+              "date": "2026-10-15",
+              "url": "https://www.vs.ch/web/communication/w/fonds-pour-la-famille-et-allocations-familiales"
+            }
+          ],
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -152,7 +170,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "VS",
@@ -254,6 +272,19 @@
           ],
           "sourceName": "Federal Tax Administration (FTA)",
           "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Fonds pour la famille et allocations familiales - Un soutien renforcé au pouvoir d’achat des familles",
+              "date": "2026-10-15",
+              "url": "https://www.vs.ch/web/communication/w/fonds-pour-la-famille-et-allocations-familiales"
+            }
+          ],
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -282,7 +313,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "VS",
@@ -384,6 +415,19 @@
           ],
           "sourceName": "Eidgenössische Steuerverwaltung (ESTV)",
           "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Fonds pour la famille et allocations familiales - Un soutien renforcé au pouvoir d’achat des familles",
+              "date": "2026-10-15",
+              "url": "https://www.vs.ch/web/communication/w/fonds-pour-la-famille-et-allocations-familiales"
+            }
+          ],
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -412,7 +456,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "VS",
@@ -514,6 +558,19 @@
           ],
           "sourceName": "Administration fédérale des contributions (AFC)",
           "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Fonds pour la famille et allocations familiales - Un soutien renforcé au pouvoir d’achat des familles",
+              "date": "2026-10-15",
+              "url": "https://www.vs.ch/web/communication/w/fonds-pour-la-famille-et-allocations-familiales"
+            }
+          ],
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -542,7 +599,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

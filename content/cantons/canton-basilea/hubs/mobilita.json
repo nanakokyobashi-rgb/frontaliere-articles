@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T09:55:02.142Z",
-  "contentHash": "d00926ffe107adc20db835a30b489bf92a464d473c11b848274a4a81c3f3f85e",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "9a21d8ebf7a451eb3e7955b83563419b096116234916123713d934a94fac4a91",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T05:23:55.314Z",
+      "updatedAt": "2026-10-15T12:13:19.434Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T20:59:19.985Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "22",
+          "value": "21",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "37",
+          "value": "36",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
@@ -154,13 +154,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Ab Samstag halten die Trams wieder am Marktplatz",
+              "date": "2026-10-15T03:00:35.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/15/ab-samstag-halten-die-trams-wieder-am-marktplatz/"
+            },
             {
               "label": "Mit dem Mäss-Drämmli an die Herbstmesse 🎡",
               "date": "2026-10-14T10:30:27.000Z",
@@ -185,14 +190,9 @@
               "label": "Haltestelle Dreispitz in Richtung St. Jakob verschoben",
               "date": "2026-10-08T03:00:30.000Z",
               "url": "https://www.bvb.ch/de/2026/10/08/haltestelle-dreispitz-in-richtung-st-jakob-verschoben/"
-            },
-            {
-              "label": "Auf der Suche nach einem originellen Geschenk?",
-              "date": "2026-09-21T14:13:47.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/21/auf-der-suche-nach-einem-originellen-geschenk/"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -275,7 +275,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -290,12 +290,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "22",
+          "value": "21",
           "note": "reports as of 15 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "37",
+          "value": "36",
           "note": "reports as of 15 October 2026"
         }
       ],
@@ -407,13 +407,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Ab Samstag halten die Trams wieder am Marktplatz",
+              "date": "2026-10-15T03:00:35.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/15/ab-samstag-halten-die-trams-wieder-am-marktplatz/"
+            },
             {
               "label": "Mit dem Mäss-Drämmli an die Herbstmesse 🎡",
               "date": "2026-10-14T10:30:27.000Z",
@@ -438,14 +443,9 @@
               "label": "Haltestelle Dreispitz in Richtung St. Jakob verschoben",
               "date": "2026-10-08T03:00:30.000Z",
               "url": "https://www.bvb.ch/de/2026/10/08/haltestelle-dreispitz-in-richtung-st-jakob-verschoben/"
-            },
-            {
-              "label": "Auf der Suche nach einem originellen Geschenk?",
-              "date": "2026-09-21T14:13:47.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/21/auf-der-suche-nach-einem-originellen-geschenk/"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -528,7 +528,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -543,12 +543,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "22",
+          "value": "21",
           "note": "Meldungen vom 15. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "37",
+          "value": "36",
           "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
@@ -660,13 +660,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Ab Samstag halten die Trams wieder am Marktplatz",
+              "date": "2026-10-15T03:00:35.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/15/ab-samstag-halten-die-trams-wieder-am-marktplatz/"
+            },
             {
               "label": "Mit dem Mäss-Drämmli an die Herbstmesse 🎡",
               "date": "2026-10-14T10:30:27.000Z",
@@ -691,14 +696,9 @@
               "label": "Haltestelle Dreispitz in Richtung St. Jakob verschoben",
               "date": "2026-10-08T03:00:30.000Z",
               "url": "https://www.bvb.ch/de/2026/10/08/haltestelle-dreispitz-in-richtung-st-jakob-verschoben/"
-            },
-            {
-              "label": "Auf der Suche nach einem originellen Geschenk?",
-              "date": "2026-09-21T14:13:47.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/21/auf-der-suche-nach-einem-originellen-geschenk/"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -781,7 +781,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -796,12 +796,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "22",
+          "value": "21",
           "note": "signalements au 15 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "37",
+          "value": "36",
           "note": "signalements au 15 octobre 2026"
         }
       ],
@@ -913,13 +913,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Ab Samstag halten die Trams wieder am Marktplatz",
+              "date": "2026-10-15T03:00:35.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/15/ab-samstag-halten-die-trams-wieder-am-marktplatz/"
+            },
             {
               "label": "Mit dem Mäss-Drämmli an die Herbstmesse 🎡",
               "date": "2026-10-14T10:30:27.000Z",
@@ -944,14 +949,9 @@
               "label": "Haltestelle Dreispitz in Richtung St. Jakob verschoben",
               "date": "2026-10-08T03:00:30.000Z",
               "url": "https://www.bvb.ch/de/2026/10/08/haltestelle-dreispitz-in-richtung-st-jakob-verschoben/"
-            },
-            {
-              "label": "Auf der Suche nach einem originellen Geschenk?",
-              "date": "2026-09-21T14:13:47.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/21/auf-der-suche-nach-einem-originellen-geschenk/"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -1034,7 +1034,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

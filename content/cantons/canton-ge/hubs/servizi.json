@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-10-15T17:28:12.535Z",
-  "contentHash": "0420e736d2cce067d1287085147f84348c90c1e67cff6e3fac4b2d683d3c5672",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "e4e06d2fc7e132a122e8e483ed45c4f3ef3f5f69e14dad082930d5bfb347570d",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-15T09:54:51.073Z",
+      "updatedAt": "2026-10-15T14:35:27.546Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-15T13:31:14.704Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T20:59:19.985Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -91,13 +96,42 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-15T09:54:51.073Z"
+          "updatedAt": "2026-10-15T14:35:27.546Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "20 °C",
+              "detail": "oggi da 10 a 20 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Formation 2026 \"Maintien au travail des salariés seniors : enjeux de santé au travail\"",
+              "date": "2026-10-15",
+              "url": "https://www.ge.ch/node/42070"
+            },
+            {
+              "label": "OCIRT-Formation 190-26 - Organisation des premiers secours en entreprise : exigences et recommandations",
+              "date": "2026-10-15",
+              "url": "https://www.ge.ch/node/40381"
+            },
+            {
+              "label": "Ouverture des inscriptions à l’examen pratique LTVTC – XVIIIe session",
+              "date": "2026-10-13",
+              "url": "https://www.ge.ch/node/43758"
+            },
             {
               "label": "Indexation du salaire minimum pour 2027",
               "date": "2026-10-07",
@@ -112,24 +146,9 @@
               "label": "Le chômage dans le canton de Genève en septembre 2026",
               "date": "2026-10-06T07:15:00.000Z",
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10877&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6051"
-            },
-            {
-              "label": "OCIRT-Formation 162-26 - Durée du travail et enregistrement du temps de travail : obligations et possibilité de renonciation ou de simplification",
-              "date": "2026-10-06",
-              "url": "https://www.ge.ch/node/45119"
-            },
-            {
-              "label": "Affiche avec slogan \"Vaccinons-nous contre la grippe\"",
-              "date": "2026-10-05",
-              "url": "https://www.ge.ch/node/45116"
-            },
-            {
-              "label": "Santé mentale : un programme 2026 dédié aux arts",
-              "date": "2026-10-05",
-              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/sante-mentale-un-programme-2026-dedie-aux-arts"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -208,7 +227,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-15T17:28:12.535Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "GE",
@@ -277,13 +296,42 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-15T09:54:51.073Z"
+          "updatedAt": "2026-10-15T14:35:27.546Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "20 °C",
+              "detail": "today from 10 to 20 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Formation 2026 \"Maintien au travail des salariés seniors : enjeux de santé au travail\"",
+              "date": "2026-10-15",
+              "url": "https://www.ge.ch/node/42070"
+            },
+            {
+              "label": "OCIRT-Formation 190-26 - Organisation des premiers secours en entreprise : exigences et recommandations",
+              "date": "2026-10-15",
+              "url": "https://www.ge.ch/node/40381"
+            },
+            {
+              "label": "Ouverture des inscriptions à l’examen pratique LTVTC – XVIIIe session",
+              "date": "2026-10-13",
+              "url": "https://www.ge.ch/node/43758"
+            },
             {
               "label": "Indexation du salaire minimum pour 2027",
               "date": "2026-10-07",
@@ -298,24 +346,9 @@
               "label": "Le chômage dans le canton de Genève en septembre 2026",
               "date": "2026-10-06T07:15:00.000Z",
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10877&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6051"
-            },
-            {
-              "label": "OCIRT-Formation 162-26 - Durée du travail et enregistrement du temps de travail : obligations et possibilité de renonciation ou de simplification",
-              "date": "2026-10-06",
-              "url": "https://www.ge.ch/node/45119"
-            },
-            {
-              "label": "Affiche avec slogan \"Vaccinons-nous contre la grippe\"",
-              "date": "2026-10-05",
-              "url": "https://www.ge.ch/node/45116"
-            },
-            {
-              "label": "Santé mentale : un programme 2026 dédié aux arts",
-              "date": "2026-10-05",
-              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/sante-mentale-un-programme-2026-dedie-aux-arts"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -389,7 +422,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-15T17:28:12.535Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "GE",
@@ -458,13 +491,42 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-15T09:54:51.073Z"
+          "updatedAt": "2026-10-15T14:35:27.546Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "20 °C",
+              "detail": "heute 10 bis 20 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Formation 2026 \"Maintien au travail des salariés seniors : enjeux de santé au travail\"",
+              "date": "2026-10-15",
+              "url": "https://www.ge.ch/node/42070"
+            },
+            {
+              "label": "OCIRT-Formation 190-26 - Organisation des premiers secours en entreprise : exigences et recommandations",
+              "date": "2026-10-15",
+              "url": "https://www.ge.ch/node/40381"
+            },
+            {
+              "label": "Ouverture des inscriptions à l’examen pratique LTVTC – XVIIIe session",
+              "date": "2026-10-13",
+              "url": "https://www.ge.ch/node/43758"
+            },
             {
               "label": "Indexation du salaire minimum pour 2027",
               "date": "2026-10-07",
@@ -479,24 +541,9 @@
               "label": "Le chômage dans le canton de Genève en septembre 2026",
               "date": "2026-10-06T07:15:00.000Z",
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10877&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6051"
-            },
-            {
-              "label": "OCIRT-Formation 162-26 - Durée du travail et enregistrement du temps de travail : obligations et possibilité de renonciation ou de simplification",
-              "date": "2026-10-06",
-              "url": "https://www.ge.ch/node/45119"
-            },
-            {
-              "label": "Affiche avec slogan \"Vaccinons-nous contre la grippe\"",
-              "date": "2026-10-05",
-              "url": "https://www.ge.ch/node/45116"
-            },
-            {
-              "label": "Santé mentale : un programme 2026 dédié aux arts",
-              "date": "2026-10-05",
-              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/sante-mentale-un-programme-2026-dedie-aux-arts"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -570,7 +617,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-15T17:28:12.535Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "GE",
@@ -639,13 +686,42 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-15T09:54:51.073Z"
+          "updatedAt": "2026-10-15T14:35:27.546Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "20 °C",
+              "detail": "aujourd’hui de 10 à 20 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Formation 2026 \"Maintien au travail des salariés seniors : enjeux de santé au travail\"",
+              "date": "2026-10-15",
+              "url": "https://www.ge.ch/node/42070"
+            },
+            {
+              "label": "OCIRT-Formation 190-26 - Organisation des premiers secours en entreprise : exigences et recommandations",
+              "date": "2026-10-15",
+              "url": "https://www.ge.ch/node/40381"
+            },
+            {
+              "label": "Ouverture des inscriptions à l’examen pratique LTVTC – XVIIIe session",
+              "date": "2026-10-13",
+              "url": "https://www.ge.ch/node/43758"
+            },
             {
               "label": "Indexation du salaire minimum pour 2027",
               "date": "2026-10-07",
@@ -660,24 +736,9 @@
               "label": "Le chômage dans le canton de Genève en septembre 2026",
               "date": "2026-10-06T07:15:00.000Z",
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10877&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6051"
-            },
-            {
-              "label": "OCIRT-Formation 162-26 - Durée du travail et enregistrement du temps de travail : obligations et possibilité de renonciation ou de simplification",
-              "date": "2026-10-06",
-              "url": "https://www.ge.ch/node/45119"
-            },
-            {
-              "label": "Affiche avec slogan \"Vaccinons-nous contre la grippe\"",
-              "date": "2026-10-05",
-              "url": "https://www.ge.ch/node/45116"
-            },
-            {
-              "label": "Santé mentale : un programme 2026 dédié aux arts",
-              "date": "2026-10-05",
-              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/sante-mentale-un-programme-2026-dedie-aux-arts"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -748,7 +809,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-15T17:28:12.535Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

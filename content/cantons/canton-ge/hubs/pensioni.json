@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-14T20:08:23.890Z",
-  "contentHash": "5dcad148cd7039cce17912ab6133c36d0cd7a48c6b2454990f85cf691880c907",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "80e3292a52f21e713dc8c0bf2dfd76c0f14b2af781be5d63b1fa9116e32b74d1",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T10:37:16.619Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Quelle revalorisation pour les retraites complémentaires du privé ?",
+              "date": "2026-10-15",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17790"
+            },
+            {
               "label": "Cour de Vessy inaugurée en fête",
               "date": "2026-10-09",
               "url": "https://www.cpeg.ch/immobilier/cour-de-vessy-inauguree-en-fete/"
@@ -161,7 +166,7 @@
               "url": "https://www.cpeg.ch/information-generale/le-cpeg-info-n25-edition-juin-2026-est-en-ligne/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -202,7 +207,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "GE",
@@ -311,6 +316,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Quelle revalorisation pour les retraites complémentaires du privé ?",
+              "date": "2026-10-15",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17790"
+            },
+            {
               "label": "Cour de Vessy inaugurée en fête",
               "date": "2026-10-09",
               "url": "https://www.cpeg.ch/immobilier/cour-de-vessy-inauguree-en-fete/"
@@ -336,7 +346,7 @@
               "url": "https://www.cpeg.ch/information-generale/le-cpeg-info-n25-edition-juin-2026-est-en-ligne/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -377,7 +387,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "GE",
@@ -486,6 +496,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Quelle revalorisation pour les retraites complémentaires du privé ?",
+              "date": "2026-10-15",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17790"
+            },
+            {
               "label": "Cour de Vessy inaugurée en fête",
               "date": "2026-10-09",
               "url": "https://www.cpeg.ch/immobilier/cour-de-vessy-inauguree-en-fete/"
@@ -511,7 +526,7 @@
               "url": "https://www.cpeg.ch/information-generale/le-cpeg-info-n25-edition-juin-2026-est-en-ligne/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -552,7 +567,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "GE",
@@ -661,6 +676,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Quelle revalorisation pour les retraites complémentaires du privé ?",
+              "date": "2026-10-15",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17790"
+            },
+            {
               "label": "Cour de Vessy inaugurée en fête",
               "date": "2026-10-09",
               "url": "https://www.cpeg.ch/immobilier/cour-de-vessy-inauguree-en-fete/"
@@ -686,7 +706,7 @@
               "url": "https://www.cpeg.ch/information-generale/le-cpeg-info-n25-edition-juin-2026-est-en-ligne/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -727,7 +747,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

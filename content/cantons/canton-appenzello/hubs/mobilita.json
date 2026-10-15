@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T09:55:02.142Z",
-  "contentHash": "8dc8bdf405065e5be624df6feb62e6e976d05805aa42a8538cc997cf2bca0336",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "c4e6f3411f4065f439532ab1c74114f6fd7ff0c17649d6d96a4f1ecc24354747",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T05:23:55.314Z",
+      "updatedAt": "2026-10-15T12:13:19.434Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T20:59:19.985Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -40,20 +40,14 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffico",
-              "date": "2026-10-15T05:23:55.314Z",
+              "date": "2026-10-15T12:13:19.434Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffico",
-              "date": "2026-10-15T05:23:55.314Z",
+              "date": "2026-10-15T12:13:19.434Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
-            },
-            {
-              "label": "Oberegg - Viehschau",
-              "value": "Traffico",
-              "date": "2026-10-15T05:23:55.314Z",
-              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/viehschau-verkehrsbehinderungen"
             },
             {
               "label": "459 Waldstatt <-> Appenzell tra Luogo Waldstatt E Luogo Hundwil Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1…",
@@ -69,7 +63,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -107,7 +101,7 @@
               "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -134,7 +128,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -157,20 +151,14 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffic",
-              "date": "2026-10-15T05:23:55.314Z",
+              "date": "2026-10-15T12:13:19.434Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffic",
-              "date": "2026-10-15T05:23:55.314Z",
+              "date": "2026-10-15T12:13:19.434Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
-            },
-            {
-              "label": "Oberegg - Viehschau",
-              "value": "Traffic",
-              "date": "2026-10-15T05:23:55.314Z",
-              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/viehschau-verkehrsbehinderungen"
             },
             {
               "label": "459 Waldstatt <-> Appenzell tra Luogo Waldstatt E Luogo Hundwil Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1…",
@@ -186,7 +174,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -224,7 +212,7 @@
               "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -251,7 +239,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -274,20 +262,14 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Verkehr",
-              "date": "2026-10-15T05:23:55.314Z",
+              "date": "2026-10-15T12:13:19.434Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Verkehr",
-              "date": "2026-10-15T05:23:55.314Z",
+              "date": "2026-10-15T12:13:19.434Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
-            },
-            {
-              "label": "Oberegg - Viehschau",
-              "value": "Verkehr",
-              "date": "2026-10-15T05:23:55.314Z",
-              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/viehschau-verkehrsbehinderungen"
             },
             {
               "label": "459 Waldstatt <-> Appenzell zwischen Ortschaft Waldstatt und Ortschaft Hundwil Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1…",
@@ -303,7 +285,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -341,7 +323,7 @@
               "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -368,7 +350,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -391,20 +373,14 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Trafic",
-              "date": "2026-10-15T05:23:55.314Z",
+              "date": "2026-10-15T12:13:19.434Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Trafic",
-              "date": "2026-10-15T05:23:55.314Z",
+              "date": "2026-10-15T12:13:19.434Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
-            },
-            {
-              "label": "Oberegg - Viehschau",
-              "value": "Trafic",
-              "date": "2026-10-15T05:23:55.314Z",
-              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/viehschau-verkehrsbehinderungen"
             },
             {
               "label": "459 Waldstatt <-> Appenzell entre Localité Waldstatt et Localité Hundwil Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: circulation alternée à une voie Complément 1…",
@@ -420,7 +396,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -458,7 +434,7 @@
               "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -485,7 +461,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

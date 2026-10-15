@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T10:38:33.714Z",
-  "contentHash": "86871e5382f3bbab653d73696855010a263c5a84827ee854efdc0fdd5285c61c",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "9d8b1d36c705ab5fe84b657f414f34248e2550b119d132a45f7317b63de6744d",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T05:23:55.314Z",
+      "updatedAt": "2026-10-15T12:13:19.434Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T20:59:19.985Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "28",
+          "value": "30",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
@@ -61,14 +61,9 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "Revocato: A2 Basel -> Luzern tra Svincolo autostradale Emmen Nord E Raccordo autostradale Diramazione Rotsee Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "Revocato: A2 Basel -> Luzern tra Parcheggio Inseli, Eich E Galleria Galleria Eich Situazione: pericolo Causa: oggetto sulla strada",
               "value": "Traffico",
-              "date": "2026-10-15T04:36:00.000Z"
-            },
-            {
-              "label": "Revocato: A14 Luzern -> Zug tra Raccordo autostradale Diramazione Rotsee E Galleria Galleria Rathausen Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-15T04:37:00.000Z"
+              "date": "2026-10-15T11:08:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -87,10 +82,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 30 giugno 2027",
               "date": "2025-04-23T22:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna <-> Basilea tra Area di servizio Weil am Rhein E Raccordo autostradale Raccordo di Hagnau Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: nuova…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 11 dicembre 2026",
+              "date": "2025-12-04T19:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -108,7 +109,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -153,7 +154,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-15T10:38:33.714Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "LU",
@@ -168,7 +169,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "28",
+          "value": "30",
           "note": "reports as of 15 October 2026"
         }
       ],
@@ -197,14 +198,9 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "Revocato: A2 Basel -> Luzern tra Svincolo autostradale Emmen Nord E Raccordo autostradale Diramazione Rotsee Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "Revocato: A2 Basel -> Luzern tra Parcheggio Inseli, Eich E Galleria Galleria Eich Situazione: pericolo Causa: oggetto sulla strada",
               "value": "Traffic",
-              "date": "2026-10-15T04:36:00.000Z"
-            },
-            {
-              "label": "Revocato: A14 Luzern -> Zug tra Raccordo autostradale Diramazione Rotsee E Galleria Galleria Rathausen Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-15T04:37:00.000Z"
+              "date": "2026-10-15T11:08:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -223,10 +219,16 @@
               "value": "Roadworks",
               "detail": "until 30 June 2027",
               "date": "2025-04-23T22:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna <-> Basilea tra Area di servizio Weil am Rhein E Raccordo autostradale Raccordo di Hagnau Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: nuova…",
+              "value": "Roadworks",
+              "detail": "until 11 December 2026",
+              "date": "2025-12-04T19:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -244,7 +246,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -287,7 +289,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-15T10:38:33.714Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "LU",
@@ -302,7 +304,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "28",
+          "value": "30",
           "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
@@ -331,14 +333,9 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "Aufgehoben: A2 Basel -> Luzern zwischen Anschluss Emmen-Nord und Autobahndreieck Verzweigung Rotsee Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "label": "Aufgehoben: A2 Basel -> Luzern zwischen Parkplatz Inseli, Eich und Tunnel Eich-Tunnel Sachlage: Gefahr Ursache: Gegenstände auf der Fahrbahn",
               "value": "Verkehr",
-              "date": "2026-10-15T04:36:00.000Z"
-            },
-            {
-              "label": "Aufgehoben: A14 Luzern -> Zug zwischen Autobahndreieck Verzweigung Rotsee und Tunnel Rathausen-Tunnel Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-15T04:37:00.000Z"
+              "date": "2026-10-15T11:08:00.000Z"
             },
             {
               "label": "H10 Bern <-> Luzern zwischen Ortschaft Wiggen und Ortschaft Kröschenbrunnen Sachlage: Verkehrsbehinderung Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
@@ -357,10 +354,16 @@
               "value": "Baustelle",
               "detail": "bis 30. Juni 2027",
               "date": "2025-04-23T22:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern <-> Basel zwischen Raststätte Weil am Rhein und Autobahndreieck Verzweigung Hagnau Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: veränderte Verkehrsführung…",
+              "value": "Baustelle",
+              "detail": "bis 11. Dezember 2026",
+              "date": "2025-12-04T19:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -378,7 +381,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -421,7 +424,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-15T10:38:33.714Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "LU",
@@ -436,7 +439,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "28",
+          "value": "30",
           "note": "signalements au 15 octobre 2026"
         }
       ],
@@ -465,14 +468,9 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "Révoqué: A2 Bâle -> Lucerne entre Jonction autoroutière Emmen-Nord et Echangeur Echangeur du Rotsee Situation: trafic en accordéon Raison: surcharge de trafic",
+              "label": "Révoqué: A2 Bâle -> Lucerne entre Parking Inseli, Eich et Tunnel Tunnel Eich Situation: danger Raison: objets sur la chaussée",
               "value": "Trafic",
-              "date": "2026-10-15T04:36:00.000Z"
-            },
-            {
-              "label": "Révoqué: A14 Lucerne -> Zoug entre Echangeur Echangeur du Rotsee et Tunnel Tunnel de Rathausen Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-15T04:37:00.000Z"
+              "date": "2026-10-15T11:08:00.000Z"
             },
             {
               "label": "H10 Berne <-> Lucerne entre Localité Wiggen et Localité Kröschenbrunnen Situation: trafic perturbé Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
@@ -491,10 +489,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 30 juin 2027",
               "date": "2025-04-23T22:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne <-> Bâle entre Aire de service Weil am Rhein et Echangeur Echangeur de Hagnau Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: nouveau plan de circulation…",
+              "value": "Chantier",
+              "detail": "jusqu’au 11 décembre 2026",
+              "date": "2025-12-04T19:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -512,7 +516,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -557,7 +561,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-15T10:38:33.714Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

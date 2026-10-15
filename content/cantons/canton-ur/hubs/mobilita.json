@@ -4,17 +4,17 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T15:11:04.417Z",
-  "contentHash": "cf23201821e8bf674809d731be110621ff6dd49e2fdfa29ac3beaa7c66ea9fa9",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "b878cc07fb1dfffe2172c1fa7fcfd9638f296177bdebef9ea00cdab5a508fc6b",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T05:23:55.314Z",
+      "updatedAt": "2026-10-15T12:13:19.434Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T20:59:19.985Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "6",
+          "value": "9",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -174,7 +174,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-15T15:11:04.417Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "UR",
@@ -189,7 +189,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "6",
+          "value": "9",
           "note": "reports as of 15 October 2026"
         }
       ],
@@ -248,7 +248,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -286,7 +286,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -331,7 +331,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-15T15:11:04.417Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "UR",
@@ -346,7 +346,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "6",
+          "value": "9",
           "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
@@ -405,7 +405,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -443,7 +443,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -488,7 +488,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-15T15:11:04.417Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "UR",
@@ -503,7 +503,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "6",
+          "value": "9",
           "note": "signalements au 15 octobre 2026"
         }
       ],
@@ -562,7 +562,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -600,7 +600,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -645,7 +645,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-15T15:11:04.417Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

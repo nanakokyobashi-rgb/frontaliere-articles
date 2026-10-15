@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-10-15T17:28:12.535Z",
-  "contentHash": "cc73e8e55fb5267e82f9a6244252a8cf61790a49a7a9489106c6e309b50447a6",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "83c7fe376a73ce790474cd1606de75729c5451b0bda6058508390e56e282b880",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-15T04:43:28.541Z",
+      "updatedAt": "2026-10-15T11:34:01.149Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-15T13:31:14.704Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T20:59:19.985Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -70,7 +75,7 @@
           "items": [
             {
               "label": "VD5055",
-              "value": "2800 CHF",
+              "value": "2900 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-18T20:00:00.000Z",
               "url": "https://www.encheres-vd.ch/de/auction/120501"
@@ -92,7 +97,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-15T04:43:28.541Z"
+          "updatedAt": "2026-10-15T11:34:01.149Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "19 °C",
+              "detail": "oggi da 14 a 19 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +149,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-15T17:28:12.535Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "VD",
@@ -257,7 +276,7 @@
           "items": [
             {
               "label": "VD5055",
-              "value": "2,800 CHF",
+              "value": "2,900 CHF",
               "detail": "current bid",
               "date": "2026-10-18T20:00:00.000Z",
               "url": "https://www.encheres-vd.ch/de/auction/120501"
@@ -279,7 +298,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-15T04:43:28.541Z"
+          "updatedAt": "2026-10-15T11:34:01.149Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "19 °C",
+              "detail": "today from 14 to 19 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -317,7 +350,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -392,7 +425,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-15T17:28:12.535Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "VD",
@@ -440,7 +473,7 @@
           "items": [
             {
               "label": "VD5055",
-              "value": "2’800 CHF",
+              "value": "2’900 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-18T20:00:00.000Z",
               "url": "https://www.encheres-vd.ch/de/auction/120501"
@@ -462,7 +495,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-15T04:43:28.541Z"
+          "updatedAt": "2026-10-15T11:34:01.149Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "19 °C",
+              "detail": "heute 14 bis 19 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -500,7 +547,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -575,7 +622,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-15T17:28:12.535Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "VD",
@@ -623,7 +670,7 @@
           "items": [
             {
               "label": "VD5055",
-              "value": "2 800 CHF",
+              "value": "2 900 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-18T20:00:00.000Z",
               "url": "https://www.encheres-vd.ch/de/auction/120501"
@@ -645,7 +692,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-15T04:43:28.541Z"
+          "updatedAt": "2026-10-15T11:34:01.149Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "19 °C",
+              "detail": "aujourd’hui de 14 à 19 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -683,7 +744,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -754,7 +815,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-15T17:28:12.535Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

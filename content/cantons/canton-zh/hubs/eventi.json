@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T00:06:40.869Z",
-  "contentHash": "8d71db5df673861e5a95dadd413bf24185e08875bee23854d057899fd7b2e400",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "40895bfe32abe3691e7023ee9ad1a5ab14246f328db20d1edf72ed518f352118",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-14T13:57:52.093Z",
+      "updatedAt": "2026-10-15T13:57:57.453Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "332",
+          "value": "334",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,6 +37,12 @@
               "detail": "Uitikon-Waldegg, Uitikon",
               "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausflug/"
+            },
+            {
+              "label": "Semplicemente Zurigo",
+              "detail": "Zurigo, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/semplicemente-zurigo-2/"
             },
             {
               "label": "Zurich Wine Festival 2026",
@@ -85,17 +91,11 @@
               "detail": "Chesselhuus, Pfäffikon",
               "date": "2026-10-15",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/pfaeffikon-zh/line-dance-night_A8FCB8R"
-            },
-            {
-              "label": "Marek Janowski mit Schubert und Beethoven",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marek-janowski-mit-schubert-und-beethoven/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -128,7 +128,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "ZH",
@@ -138,7 +138,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "332",
+          "value": "334",
           "note": "from the site’s events calendar"
         }
       ],
@@ -153,6 +153,12 @@
               "detail": "Uitikon-Waldegg, Uitikon",
               "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausflug/"
+            },
+            {
+              "label": "Simply Zurich",
+              "detail": "Zurigo, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/semplicemente-zurigo-2/"
             },
             {
               "label": "Zurich Wine Festival 2026",
@@ -201,17 +207,11 @@
               "detail": "Chesselhuus, Pfäffikon",
               "date": "2026-10-15",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/pfaeffikon-zh/line-dance-night_A8FCB8R"
-            },
-            {
-              "label": "Marek Janowski mit Schubert und Beethoven",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marek-janowski-mit-schubert-und-beethoven/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -244,7 +244,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "ZH",
@@ -254,7 +254,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "332",
+          "value": "334",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -269,6 +269,12 @@
               "detail": "Uitikon-Waldegg, Uitikon",
               "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausflug/"
+            },
+            {
+              "label": "Einfach Zürich",
+              "detail": "Zurigo, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/semplicemente-zurigo-2/"
             },
             {
               "label": "Zurich Wine Festival 2026",
@@ -317,17 +323,11 @@
               "detail": "Chesselhuus, Pfäffikon",
               "date": "2026-10-15",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/pfaeffikon-zh/line-dance-night_A8FCB8R"
-            },
-            {
-              "label": "Marek Janowski mit Schubert und Beethoven",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marek-janowski-mit-schubert-und-beethoven/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -360,7 +360,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "ZH",
@@ -370,7 +370,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "332",
+          "value": "334",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -385,6 +385,12 @@
               "detail": "Uitikon-Waldegg, Uitikon",
               "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausflug/"
+            },
+            {
+              "label": "Simplement Zurich",
+              "detail": "Zurigo, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/semplicemente-zurigo-2/"
             },
             {
               "label": "Zurich Wine Festival 2026",
@@ -433,17 +439,11 @@
               "detail": "Chesselhuus, Pfäffikon",
               "date": "2026-10-15",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/pfaeffikon-zh/line-dance-night_A8FCB8R"
-            },
-            {
-              "label": "Marek Janowski mit Schubert und Beethoven",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marek-janowski-mit-schubert-und-beethoven/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -476,7 +476,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

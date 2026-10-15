@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-15T17:28:12.535Z",
-  "contentHash": "601a117161a9d89024eb4c559738ea0c84a7c62dd360b1efc5eae96fe32e1299",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "402d5db3fe3ddf31b2e086ba3f9184a7491bc97186b67fae6ae5707fd5b05620",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,22 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-15T09:54:03.202Z",
+      "updatedAt": "2026-10-15T14:34:40.531Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-15T04:43:28.541Z",
+      "updatedAt": "2026-10-15T11:34:01.149Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-15T13:31:14.704Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T20:59:19.985Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +49,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "2",
-          "note": "offerta mediana 7950 CHF"
+          "note": "offerta mediana 8000 CHF"
         }
       ],
       "dataBlocks": [
@@ -106,7 +111,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-15T09:54:03.202Z"
+          "updatedAt": "2026-10-15T14:34:40.531Z"
         },
         {
           "id": "aste-targhe",
@@ -122,7 +127,7 @@
             },
             {
               "label": "TI44550",
-              "value": "800 CHF",
+              "value": "900 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1539"
@@ -130,7 +135,41 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-15T04:43:28.541Z"
+          "updatedAt": "2026-10-15T11:34:01.149Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "21 °C",
+              "detail": "oggi da 12 a 22 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "20 °C",
+              "detail": "oggi da 10 a 20 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "20 °C",
+              "detail": "oggi da 14 a 21 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "21 °C",
+              "detail": "oggi da 12 a 21 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "20 °C",
+              "detail": "oggi da 10 a 20 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -168,7 +207,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -255,7 +294,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-15T17:28:12.535Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "TI",
@@ -272,7 +311,7 @@
         {
           "label": "Plate auctions running",
           "value": "2",
-          "note": "typical bid 7,950 CHF"
+          "note": "typical bid 8,000 CHF"
         }
       ],
       "dataBlocks": [
@@ -334,7 +373,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-15T09:54:03.202Z"
+          "updatedAt": "2026-10-15T14:34:40.531Z"
         },
         {
           "id": "aste-targhe",
@@ -350,7 +389,7 @@
             },
             {
               "label": "TI44550",
-              "value": "800 CHF",
+              "value": "900 CHF",
               "detail": "current bid",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1539"
@@ -358,7 +397,41 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-15T04:43:28.541Z"
+          "updatedAt": "2026-10-15T11:34:01.149Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "21 °C",
+              "detail": "today from 12 to 22 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "20 °C",
+              "detail": "today from 10 to 20 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "20 °C",
+              "detail": "today from 14 to 21 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "21 °C",
+              "detail": "today from 12 to 21 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "20 °C",
+              "detail": "today from 10 to 20 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -396,7 +469,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -478,7 +551,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-15T17:28:12.535Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "TI",
@@ -495,7 +568,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "2",
-          "note": "mittleres Gebot 7’950 CHF"
+          "note": "mittleres Gebot 8’000 CHF"
         }
       ],
       "dataBlocks": [
@@ -557,7 +630,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-15T09:54:03.202Z"
+          "updatedAt": "2026-10-15T14:34:40.531Z"
         },
         {
           "id": "aste-targhe",
@@ -573,7 +646,7 @@
             },
             {
               "label": "TI44550",
-              "value": "800 CHF",
+              "value": "900 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1539"
@@ -581,7 +654,41 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-15T04:43:28.541Z"
+          "updatedAt": "2026-10-15T11:34:01.149Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "21 °C",
+              "detail": "heute 12 bis 22 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "20 °C",
+              "detail": "heute 10 bis 20 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "20 °C",
+              "detail": "heute 14 bis 21 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "21 °C",
+              "detail": "heute 12 bis 21 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "20 °C",
+              "detail": "heute 10 bis 20 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -619,7 +726,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -701,7 +808,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-15T17:28:12.535Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "TI",
@@ -718,7 +825,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "2",
-          "note": "offre centrale 7 950 CHF"
+          "note": "offre centrale 8 000 CHF"
         }
       ],
       "dataBlocks": [
@@ -780,7 +887,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-15T09:54:03.202Z"
+          "updatedAt": "2026-10-15T14:34:40.531Z"
         },
         {
           "id": "aste-targhe",
@@ -796,7 +903,7 @@
             },
             {
               "label": "TI44550",
-              "value": "800 CHF",
+              "value": "900 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1539"
@@ -804,7 +911,41 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-15T04:43:28.541Z"
+          "updatedAt": "2026-10-15T11:34:01.149Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "21 °C",
+              "detail": "aujourd’hui de 12 à 22 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "20 °C",
+              "detail": "aujourd’hui de 10 à 20 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "20 °C",
+              "detail": "aujourd’hui de 14 à 21 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "21 °C",
+              "detail": "aujourd’hui de 12 à 21 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "20 °C",
+              "detail": "aujourd’hui de 10 à 20 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -842,7 +983,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -921,7 +1062,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-15T17:28:12.535Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

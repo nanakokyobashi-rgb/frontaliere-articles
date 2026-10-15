@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T05:42:21.084Z",
-  "contentHash": "33b446b069744833e13b1387c8b8b02d1884e18a1478054f19cbf1c37e254d2a",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "619b075b061de38d6ce9e735d0db8c19bc6f962502f82aff8479329d0e3fe46d",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-14T23:55:37.279Z",
+      "updatedAt": "2026-10-15T13:57:57.453Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T20:59:19.985Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "86",
+          "value": "87",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-10-14T23:55:37.279Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -138,7 +138,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -171,7 +171,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T05:42:21.084Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "LU",
@@ -181,7 +181,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "86",
+          "value": "87",
           "note": "from the site’s events calendar"
         }
       ],
@@ -254,7 +254,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-10-14T23:55:37.279Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -292,7 +292,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -325,7 +325,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T05:42:21.084Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "LU",
@@ -335,7 +335,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "86",
+          "value": "87",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -408,7 +408,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-10-14T23:55:37.279Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -446,7 +446,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -479,7 +479,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T05:42:21.084Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "LU",
@@ -489,7 +489,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "86",
+          "value": "87",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -562,7 +562,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-10-14T23:55:37.279Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -600,7 +600,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -633,7 +633,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T05:42:21.084Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

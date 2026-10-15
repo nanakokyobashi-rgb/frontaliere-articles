@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-10-15T17:28:12.535Z",
-  "contentHash": "b25d91cb3ffb329833f5b9318e53c94c77a54cec2f748c310215a304a21e7f95",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "2600152133b7b81baa1e39ca5512240ef212759077a27a1783d9b5a1c62224f3",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-15T13:31:14.704Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T20:59:19.985Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -54,6 +59,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "24 °C",
+              "detail": "oggi da 12 a 24 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -89,7 +108,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -168,7 +187,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-15T17:28:12.535Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "VS",
@@ -203,6 +222,20 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "24 °C",
+              "detail": "today from 12 to 24 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -240,7 +273,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -315,7 +348,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-15T17:28:12.535Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "VS",
@@ -350,6 +383,20 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "24 °C",
+              "detail": "heute 12 bis 24 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -387,7 +434,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -462,7 +509,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-15T17:28:12.535Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "VS",
@@ -497,6 +544,20 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "24 °C",
+              "detail": "aujourd’hui de 12 à 24 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -534,7 +595,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -605,7 +666,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-15T17:28:12.535Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

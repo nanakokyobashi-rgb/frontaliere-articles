@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T09:55:02.142Z",
-  "contentHash": "8e57fecfa492326f58712870063a2d51e94a4707053fbf693c0698450cedc9a0",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "ad7beeb24a60b3cf7c87a613bd019ff2ab4c5fd972df3255e1fef17df8497caf",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T05:23:55.314Z",
+      "updatedAt": "2026-10-15T12:13:19.434Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T20:59:19.985Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -160,13 +160,23 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 19 octobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.ge.ch/node/45210"
+            },
+            {
+              "label": "Le développement du quartier de Belle-Terre se poursuit",
+              "date": "2026-10-14",
+              "url": "https://www.ge.ch/node/45183"
+            },
             {
               "label": "Trafic interrompu entre Annemasse et Thonon-les-Bains",
               "date": "2026-10-13T13:46:35.000Z",
@@ -186,19 +196,9 @@
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 12 octobre 2026",
               "date": "2026-10-08",
               "url": "https://www.ge.ch/node/45130"
-            },
-            {
-              "label": "Partage d'expériences Eau en ville - Visite de terrain du 3 septembre 2026 - Bus à haut niveau de service Genève-Vernier-Zimeysaver (BHNS-GVZ)",
-              "date": "2026-10-08",
-              "url": "https://www.ge.ch/node/45161"
-            },
-            {
-              "label": "Info chantier Voie verte Genève-Satigny",
-              "date": "2026-10-02",
-              "url": "https://www.ge.ch/node/41839"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -257,7 +257,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "GE",
@@ -395,13 +395,23 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 19 octobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.ge.ch/node/45210"
+            },
+            {
+              "label": "Le développement du quartier de Belle-Terre se poursuit",
+              "date": "2026-10-14",
+              "url": "https://www.ge.ch/node/45183"
+            },
             {
               "label": "Trafic interrompu entre Annemasse et Thonon-les-Bains",
               "date": "2026-10-13T13:46:35.000Z",
@@ -421,19 +431,9 @@
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 12 octobre 2026",
               "date": "2026-10-08",
               "url": "https://www.ge.ch/node/45130"
-            },
-            {
-              "label": "Partage d'expériences Eau en ville - Visite de terrain du 3 septembre 2026 - Bus à haut niveau de service Genève-Vernier-Zimeysaver (BHNS-GVZ)",
-              "date": "2026-10-08",
-              "url": "https://www.ge.ch/node/45161"
-            },
-            {
-              "label": "Info chantier Voie verte Genève-Satigny",
-              "date": "2026-10-02",
-              "url": "https://www.ge.ch/node/41839"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -492,7 +492,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "GE",
@@ -630,13 +630,23 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 19 octobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.ge.ch/node/45210"
+            },
+            {
+              "label": "Le développement du quartier de Belle-Terre se poursuit",
+              "date": "2026-10-14",
+              "url": "https://www.ge.ch/node/45183"
+            },
             {
               "label": "Trafic interrompu entre Annemasse et Thonon-les-Bains",
               "date": "2026-10-13T13:46:35.000Z",
@@ -656,19 +666,9 @@
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 12 octobre 2026",
               "date": "2026-10-08",
               "url": "https://www.ge.ch/node/45130"
-            },
-            {
-              "label": "Partage d'expériences Eau en ville - Visite de terrain du 3 septembre 2026 - Bus à haut niveau de service Genève-Vernier-Zimeysaver (BHNS-GVZ)",
-              "date": "2026-10-08",
-              "url": "https://www.ge.ch/node/45161"
-            },
-            {
-              "label": "Info chantier Voie verte Genève-Satigny",
-              "date": "2026-10-02",
-              "url": "https://www.ge.ch/node/41839"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -727,7 +727,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "GE",
@@ -865,13 +865,23 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 19 octobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.ge.ch/node/45210"
+            },
+            {
+              "label": "Le développement du quartier de Belle-Terre se poursuit",
+              "date": "2026-10-14",
+              "url": "https://www.ge.ch/node/45183"
+            },
             {
               "label": "Trafic interrompu entre Annemasse et Thonon-les-Bains",
               "date": "2026-10-13T13:46:35.000Z",
@@ -891,19 +901,9 @@
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 12 octobre 2026",
               "date": "2026-10-08",
               "url": "https://www.ge.ch/node/45130"
-            },
-            {
-              "label": "Partage d'expériences Eau en ville - Visite de terrain du 3 septembre 2026 - Bus à haut niveau de service Genève-Vernier-Zimeysaver (BHNS-GVZ)",
-              "date": "2026-10-08",
-              "url": "https://www.ge.ch/node/45161"
-            },
-            {
-              "label": "Info chantier Voie verte Genève-Satigny",
-              "date": "2026-10-02",
-              "url": "https://www.ge.ch/node/41839"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -962,7 +962,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-15T09:55:02.142Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }
