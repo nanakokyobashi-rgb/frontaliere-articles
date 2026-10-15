@@ -50,6 +50,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-15T11:39:57.424Z",
       "lastFailureAt": "2026-10-15T12:56:12.993Z"
+    },
+    {
+      "articleId": "divieti-viabilita-stadio-como",
+      "title": "Como: divieti in via Vittorio Veneto dal 19 al 24 ottobre",
+      "fallbackImage": "/images/blog/investimenti-viabilita-lariana-como.webp",
+      "reason": "All image providers failed for article-divieti-viabilita-stadio-como: openai-codex (vision gate rejected image: Generic synthetic photorealistic street illustration relevant to roa",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T14:49:43.456Z",
+      "lastFailureAt": "2026-10-15T14:49:43.456Z"
     }
   ]
 }

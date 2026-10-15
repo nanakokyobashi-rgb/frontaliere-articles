@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/tutte-le-offerte-lavoro-tirocinio-dei-centri-limpiego-della-provincia-varese/1347077": {
-    "articleId": "offerte-lavoro-tirocinio-varese-2026",
-    "ts": "2026-09-03T12:54:26.174Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/oltre-20mila-cittadini-senza-medico-di-base-nel-varesotto-e-incombe-londata-dei-pensionamenti/2669674": {
     "articleId": "varese-medici-carenza-frontalieri-2026",
     "ts": "2026-09-03T19:19:48.117Z",
@@ -2497,6 +2492,11 @@
   "https://comozero.it/attualita/migros-rinnovo-contratto-l-gav-2027-2031-orario-stipendi": {
     "articleId": "l-gav-2027-orario-salario",
     "ts": "2026-10-15T13:36:22.668Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/como-tra-champions-e-campionato-sei-giorni-di-divieti-in-zona-stadio-la-mappa": {
+    "articleId": "divieti-viabilita-stadio-como",
+    "ts": "2026-10-15T14:49:43.457Z",
     "keyForm": 2
   }
 }
