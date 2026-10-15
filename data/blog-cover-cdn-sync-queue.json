@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-referendum-aels-malaysia.webp",
-      "sha256": "d6c64ea47b5c026a25c58ad284ee6ec2f9581cd6225a8bde0173b9061d28555b"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-referendum-aels-malaysia-480w.webp",
-      "sha256": "2082aa308de0b74d31613ebe7426ab9a13dc81378b48a2337a344cd3e7526d73"
-    }
-  ]
+  "items": []
 }
