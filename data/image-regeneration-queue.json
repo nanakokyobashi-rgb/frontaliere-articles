@@ -70,6 +70,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-15T10:34:30.474Z",
       "lastFailureAt": "2026-10-15T10:34:30.474Z"
+    },
+    {
+      "articleId": "dimissioni-rapporto-ticino",
+      "title": "Dimissioni da frontaliere: termini e passi in Ticino",
+      "fallbackImage": "/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp",
+      "reason": "All image providers failed for article-dimissioni-rapporto-ticino: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Ticino cross-border commu",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T11:39:57.424Z",
+      "lastFailureAt": "2026-10-15T11:39:57.424Z"
     }
   ]
 }
