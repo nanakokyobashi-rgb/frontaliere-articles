@@ -10,6 +10,7 @@ const WORKFLOW = fs.readFileSync(
   'utf8',
 );
 const OBSERVER_PATH = 'scripts/monitor-jobs-pipeline-queue.mjs';
+const OBSERVER_LIB_GLOB = 'scripts/lib/**';
 
 function sparseCheckoutEntries(workflow) {
   const block = workflow.match(
@@ -22,7 +23,8 @@ function sparseCheckoutEntries(workflow) {
 test('il queue monitor usa il path reale del sorgente site nello sparse checkout', () => {
   const entries = sparseCheckoutEntries(WORKFLOW);
   assert.ok(entries.includes(OBSERVER_PATH), `sparse-checkout senza ${OBSERVER_PATH}`);
-  assert.ok(entries.includes('scripts/lib'), 'sparse-checkout senza gli helper dell observer');
+  assert.ok(entries.includes(OBSERVER_LIB_GLOB), 'sparse-checkout senza gli helper dell observer');
+  assert.ok(!entries.includes('scripts/lib'), 'sparse-checkout usa una directory non ricorsiva per gli helper');
 
   const invocation = WORKFLOW.match(
     /^\s*run:\s+node\s+observer-source\/([^\s]+)\s*$/m,

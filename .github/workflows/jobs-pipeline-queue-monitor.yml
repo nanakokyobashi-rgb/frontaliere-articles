@@ -37,7 +37,7 @@ jobs:
           fetch-depth: 1
           sparse-checkout: |
             scripts/monitor-jobs-pipeline-queue.mjs
-            scripts/lib
+            scripts/lib/**
           sparse-checkout-cone-mode: false
 
       - name: Scan queue depth, wait, and utilization
