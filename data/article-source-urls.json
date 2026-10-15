@@ -1,9 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/competenze-di-base-al-via-la-campagna-cantonale-per-la-formazione-continua-441925": {
-    "articleId": "formazione-continua-ticino-campagna",
-    "ts": "2026-09-04T04:47:17.103Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/cantone/luganese/1947758/bally-annuncia-l-ennesimo-licenziamento-collettivo": {
     "articleId": "bally-caslano-79-licenziamenti",
     "ts": "2026-09-04T08:11:02.232Z",
@@ -2497,6 +2492,11 @@
   "https://www.ticinonews.ch/ticino/tentato-omicidio-nel-luganese-in-manette-un-28enne-444695": {
     "articleId": "arresto-lite-domestica-luganese",
     "ts": "2026-10-15T15:06:58.649Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/veicolo-in-fiamme-sulla2-a-rivera-traffico-perturbato-444702": {
+    "articleId": "veicolo-fiamme-a2-rivera",
+    "ts": "2026-10-15T15:41:14.887Z",
     "keyForm": 2
   }
 }
