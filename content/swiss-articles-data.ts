@@ -28044,6 +28044,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'mercatini-usato-svizzera',
+    category: 'pratico',
+    date: '2026-10-15T23:56:58.369Z',
+    image: '/images/blog/autonomi-frontalieri-svizzera-come-aprire.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

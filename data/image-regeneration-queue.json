@@ -80,6 +80,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-15T23:12:57.417Z",
       "lastFailureAt": "2026-10-15T23:12:57.417Z"
+    },
+    {
+      "articleId": "mercatini-usato-svizzera",
+      "title": "Mercatini usato: garanzia, marciapiede e falsi oltreconfine",
+      "fallbackImage": "/images/blog/autonomi-frontalieri-svizzera-come-aprire.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T23:56:58.687Z",
+      "lastFailureAt": "2026-10-15T23:56:58.687Z"
     }
   ]
 }
