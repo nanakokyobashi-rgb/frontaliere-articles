@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-terzetto-sospetto-melano-chiasso.webp",
+      "sha256": "53ea32af2f65b1aac159303719f4014dd4de248750a4e5b374d3b4ae5be8509b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-terzetto-sospetto-melano-chiasso-480w.webp",
+      "sha256": "77dbdb6386bacf6e41ec1ac028fbd7273fa8b43811151f096869b0a4f3550993"
+    }
+  ]
 }
