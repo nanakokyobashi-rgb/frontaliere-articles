@@ -140,7 +140,7 @@ COUNTER_RESOLVER="$SCRIPT_DIR/merge-counter-conflict.mjs"
 # only the registries would have left the helper aborting on the first body file,
 # so #281 would have stayed open with the fix in place.
 ALLOWED=" "
-REGISTRIES=" "
+REGISTRIES=()
 QUEUES=" "
 THEIRS_PREFIXES=""
 # COUNTERS tiene i path (per classificare), COUNTER_SPECS le coppie path:campo
@@ -184,7 +184,7 @@ EOF_SECTION_ARGS
       ;;
     --merge-registry)
       [ "$#" -ge 2 ] || { echo "::error::--merge-registry requires a path"; exit 2; }
-      REGISTRIES="$REGISTRIES$2 "
+      REGISTRIES+=("$2")
       shift 2
       ;;
     --merge-queue)
@@ -208,7 +208,7 @@ done
 # Guard against an empty argument list: with no paths declared in any category
 # nothing can ever be resolved, and silently degrading to "always abort" would
 # hide a caller bug behind behaviour that looks exactly like the old code.
-if [ "$ALLOWED" = " " ] && [ "$REGISTRIES" = " " ] && [ "$QUEUES" = " " ] && [ -z "$THEIRS_PREFIXES" ] && [ "$COUNTERS" = " " ]; then
+if [ "$ALLOWED" = " " ] && [ "${#REGISTRIES[@]}" -eq 0 ] && [ "$QUEUES" = " " ] && [ -z "$THEIRS_PREFIXES" ] && [ "$COUNTERS" = " " ]; then
   echo "::error::rebase-onto-remote.sh called with no bookkeeping allowlist, no --merge-registry, no --merge-queue, no --take-theirs and no --merge-counter paths"
   exit 2
 fi
@@ -244,10 +244,8 @@ EOF
 # concrete unmerged paths before passing only those paths to the resolver.
 is_registry() {
   local candidate="$1" pattern
-  case "$REGISTRIES" in *[![:space:]]*) ;; *) return 1 ;; esac
-  local -a registry_patterns=()
-  read -r -a registry_patterns <<< "$REGISTRIES"
-  for pattern in "${registry_patterns[@]}"; do
+  [ "${#REGISTRIES[@]}" -gt 0 ] || return 1
+  for pattern in "${REGISTRIES[@]}"; do
     case "$candidate" in
       $pattern) return 0 ;;
     esac
@@ -344,12 +342,12 @@ for _pass in $(seq 1 20); do
   else
     # Classify FIRST, resolve after. A conflicted set with one unlisted path in
     # it aborts whole, so no partial resolution is ever written.
-    registry_set=""
+    registry_set=()
     queue_set=""
     while IFS= read -r f; do
       [ -n "$f" ] || continue
       if is_registry "$f"; then
-        registry_set="$registry_set$f "
+        registry_set+=("$f")
         continue
       fi
       case "$QUEUES" in
@@ -376,11 +374,9 @@ EOF
     # Branch 2 — merge per record. The resolver writes a file only once that
     # file has passed its own backstop, so a refusal here leaves every registry
     # still conflicted and the tree exactly as we found it.
-    if [ -n "$registry_set" ]; then
-      # shellcheck disable=SC2086
-      if node "$MERGE_RESOLVER" $registry_set; then
-        # shellcheck disable=SC2086
-        git add -- $registry_set
+    if [ "${#registry_set[@]}" -gt 0 ]; then
+      if node "$MERGE_RESOLVER" "${registry_set[@]}"; then
+        git add -- "${registry_set[@]}"
       else
         echo "::warning::the content registries could not be merged per record — aborting rather than committing a fused registry"
         abort_and_fail || exit 1
