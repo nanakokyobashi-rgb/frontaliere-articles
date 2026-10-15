@@ -1,21 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-fiera-lavoro-besano-valceresio.webp",
-      "sha256": "85158e01e93ff1693c2d809bf1d6bfafeffced59901178bb1d9db91ca75e323d"
-    },
-    {
-      "path": "public/images/blog/article-sconto-dipendenti-migros-ccl.webp",
-      "sha256": "de87530b6d880780f024bc11c58ecd9896f35b602ac843d56a756e6a763cb8fa"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-fiera-lavoro-besano-valceresio-480w.webp",
-      "sha256": "ce5594f8e29102524f57206a4485a11fbd2129c4d6f235c725383efeb69b4d99"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-sconto-dipendenti-migros-ccl-480w.webp",
-      "sha256": "8f411b99fb9422b7a03efe32613b03b5497ec98689a75fd5effea75d8a2f396c"
-    }
-  ]
+  "items": []
 }
