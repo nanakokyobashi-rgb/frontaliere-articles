@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1949745/banda-berna-iniziativa-legge-storni": {
-    "articleId": "banda-larga-regioni-periferiche-berna",
-    "ts": "2026-09-13T00:07:17.658Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/economia/economia/1949608/crescono-in-svizzera-le-condanne-contro-le-banche": {
     "articleId": "condanne-banche-svizzera-corruzione",
     "ts": "2026-09-13T00:20:13.686Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/y-pc31bf0r-j": {
     "articleId": "niederscherli-posti-letto",
     "ts": "2026-10-15T16:30:27.082Z",
+    "keyForm": 2
+  },
+  "https://www.seco.admin.ch/it/newnsb/b7skpa2cafet": {
+    "articleId": "cormann-visita-berna",
+    "ts": "2026-10-15T17:22:41.136Z",
     "keyForm": 2
   }
 }

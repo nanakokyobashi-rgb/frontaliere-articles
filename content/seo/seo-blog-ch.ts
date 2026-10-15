@@ -105755,6 +105755,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cormann-visita-berna': {
+    title: 'Cormann presenta il rapporto OCSE 2026 sulla Svizzera',
+    description: 'Il 10 settembre 2026 la SECO annuncia la visita di Mathias Cormann. Il 15 settembre 2026 l\'OCSE presenta il rapporto a Berna. Il rapporto esamina sanità',
+    keywords: 'frontalieri, ticino, svizzera, italia, cormann, presenta, rapporto, ocse',
+    ogTitle: 'Cormann presenta il rapporto OCSE 2026 a Berna',
+    ogDescription: 'Il 10 settembre 2026 la SECO annuncia la visita di Mathias Cormann.',
+    canonicalPath: '/articoli-svizzera/cormann-visita-berna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cormann presenta il rapporto OCSE 2026 sulla Svizzera",
+      "description": "Il 10 settembre 2026 la SECO annuncia la visita di Mathias Cormann. Il 15 settembre 2026 l'OCSE presenta il rapporto a Berna. Il rapporto esamina sanità",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cormann-visita-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centro stampa di Palazzo federale a Berna per il rapporto OCSE sulla politica economica svizzera"
+      },
+      "datePublished": "2026-10-15T17:22:40+00:00",
+      "dateModified": "2026-10-15T17:22:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/cormann-visita-berna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -8299,10 +8299,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenoi.it/2026/10/13/leggi-notizia/argomenti/cronaca-20/articolo/allarme-bomba-in-una-banca-di-chiasso-zaino-sospetto-neutralizzato-dagli-artificieri.html": {
-      "section": "frontaliere",
-      "ts": 1791909887062
-    },
     "svizzera::https://www.tio.ch/ticino/attualita/1956405/lunedi-riparalo-iniziativa-losone-elettrodomestici": {
       "section": "svizzera",
       "ts": 1791924353497
@@ -8498,6 +8494,22 @@
     "frontaliere::https://www.varesenews.it/2026/10/il-cantiere-della-nuova-superstrada-pedemontana-malpensa-sono-ancora-fermi-sbloccati-i-pagamenti/2709238": {
       "section": "frontaliere",
       "ts": 1792078558980
+    },
+    "frontaliere::https://www.tio.ch/rubriche/ospite/1957045/energia-infrastrutture-data-center-puo-produzione-ated-ticino-sostenibilita-ticinesi": {
+      "section": "frontaliere",
+      "ts": 1792083114007
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/15/leggi-notizia/argomenti/politica-20/articolo/programma-regionale-della-mobilita-e-dei-trasporti-licata-forza-italia-piu-attenzione-al-ruo-1.html": {
+      "section": "frontaliere",
+      "ts": 1792083773137
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/il-movimento-5-stelle-presenta-uninterrogazione-urgente-in-regione-lombardia-sulla-vertenza-beko/2708794": {
+      "section": "frontaliere",
+      "ts": 1792083899266
+    },
+    "frontaliere::https://www.tio.ch/ticino/attualita/1956937/tra-lavoro-e-aiuti-sociali-perche-tante-famiglie-ticinesi-soffrono-la-poverta": {
+      "section": "frontaliere",
+      "ts": 1792084151806
     }
   }
 }

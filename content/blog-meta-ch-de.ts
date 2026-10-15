@@ -8375,6 +8375,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.niederscherli-posti-letto.title': 'SEM nimmt die Unterkunft in Niederscherli wieder in Betrieb: 120 Betten',
     'blog.article.niederscherli-posti-letto.excerpt': 'Die SEM nimmt Niederscherli (BE) Mitte November wieder in Betrieb.',
     'blog.article.niederscherli-posti-letto.imageAlt': 'Schweizer Zivilschutzanlage in einer grünen Vorstadtlandschaft',
+    'blog.article.cormann-visita-berna.title': 'Cormann präsentiert den OECD-Bericht 2026 über die Schweiz',
+    'blog.article.cormann-visita-berna.excerpt': 'Am 10. September 2026 kündigt das SECO den Besuch von Mathias Cormann an.',
+    'blog.article.cormann-visita-berna.imageAlt': 'Medienzentrum des Bundeshauses in Bern zur Präsentation des OECD-Berichts zur Schweizer Wirtschaftspolitik',
 };
 
 export default blogMetaChDe;

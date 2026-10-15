@@ -8375,6 +8375,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.niederscherli-posti-letto.title': 'SEM reopens the Niederscherli facility: 120 beds',
     'blog.article.niederscherli-posti-letto.excerpt': 'SEM reopens Niederscherli (BE) in mid-November.',
     'blog.article.niederscherli-posti-letto.imageAlt': 'Swiss civil-protection facility in a green suburban setting',
+    'blog.article.cormann-visita-berna.title': 'Cormann presents the OECD 2026 report on Switzerland',
+    'blog.article.cormann-visita-berna.excerpt': 'On September 10, 2026, SECO announces the visit of Mathias Cormann.',
+    'blog.article.cormann-visita-berna.imageAlt': 'Federal Palace press centre in Bern for the OECD report on Swiss economic policy',
 };
 
 export default blogMetaChEn;

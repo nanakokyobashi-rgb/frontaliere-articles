@@ -27972,6 +27972,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'cormann-visita-berna',
+    category: 'novita',
+    date: '2026-10-15T17:22:40.740Z',
+    image: '/images/blog/article-cormann-visita-berna.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
