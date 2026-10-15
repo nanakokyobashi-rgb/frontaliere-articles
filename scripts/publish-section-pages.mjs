@@ -140,6 +140,13 @@ export function missingRenderedArticleIds(requestedIds, entries) {
   return [...new Set((requestedIds || []).map(String))].filter((articleId) => !rendered.has(articleId));
 }
 
+/** Rimuove gli slash finali prima di aggiungere segmenti a un prefisso di route. */
+export function normalizeRoutePrefix(prefix) {
+  const normalized = prefix.replace(/\/+$/u, '');
+  if (!normalized) throw new Error('prefisso di route vuoto');
+  return normalized;
+}
+
 /** La sezione deve essere cantonale (R2) e ATTIVA nel core: l'engine rende solo le sezioni attive. */
 export function assertPublishableSection(section, { all = ARTICLE_SECTION_CORE_ALL, active = activeCorpusCoreMap() } = {}) {
   const core = Object.prototype.hasOwnProperty.call(all, section) ? all[section] : undefined;
@@ -279,8 +286,9 @@ export function migrationManifestPages(section, previousArticlePages, previousAr
     ...previousArticlePages.map((page) => manifestEntryFromReleasePage(section, page, 'article')),
     ...previousArchivePages.map((page) => manifestEntryFromReleasePage(section, page, 'archive')),
     ...routes.flatMap((route) => {
-      const landing = pageEntry(section, `${route.prefix.slice(1)}/index.html`, 'landing');
-      const hubs = topicHubs.map((slugs) => pageEntry(section, `${route.prefix.slice(1)}/${slugs[route.locale]}/index.html`, 'hub'));
+      const prefix = normalizeRoutePrefix(route.prefix);
+      const landing = pageEntry(section, `${prefix.slice(1)}/index.html`, 'landing');
+      const hubs = topicHubs.map((slugs) => pageEntry(section, `${prefix.slice(1)}/${slugs[route.locale]}/index.html`, 'hub'));
       return [landing, ...hubs];
     }),
   ];
@@ -446,7 +454,8 @@ export function archiveReleasePages(section, input) {
     return Array.from({ length: totalPages }, (_, index) => {
       const page = index + 1;
       const suffix = page === 1 ? `/${CANTON_ARCHIVE_ALL_SLUG[locale]}/` : `/${CANTON_ARCHIVE_ALL_SLUG[locale]}/page-${page}/`;
-      return pageEntry(section, `${route.prefix.slice(1)}${suffix}index.html`, 'archive');
+      const prefix = normalizeRoutePrefix(route.prefix);
+      return pageEntry(section, `${prefix.slice(1)}${suffix}index.html`, 'archive');
     });
   });
 }
