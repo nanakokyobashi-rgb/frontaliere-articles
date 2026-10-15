@@ -8381,6 +8381,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.fusione-palestre-puregym-nonstop.title': 'Puregym acquisisce Nonstop Gym: obiettivo 100 club entro 2026',
     'blog.article.fusione-palestre-puregym-nonstop.excerpt': 'Puregym acquisisce la catena svizzera Nonstop Gym Puregym gestisce 49 palestre in Svizzera Nonstop Gym ne conta 48 Oltre 100 strutture entro fine 2026',
     'blog.article.fusione-palestre-puregym-nonstop.imageAlt': 'Interno di una palestra moderna in Svizzera',
+    'blog.article.agevolazioni-doganali-impiego.title': 'Agevolazioni doganali: novità dal 1° novembre 2026',
+    'blog.article.agevolazioni-doganali-impiego.excerpt': 'Novità doganali in vigore dal 1° novembre 2026 Agevolazioni legate allo scopo d\'impiego delle merci Adeguate le osservazioni Tares e pubblicato R-17 Entrata',
+    'blog.article.agevolazioni-doganali-impiego.imageAlt': 'Documenti doganali svizzeri e calendario con il 1° novembre 2026',
 };
 
 export default blogMetaChIt;

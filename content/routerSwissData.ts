@@ -2816,6 +2816,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'niederscherli-posti-letto': { it: 'niederscherli-posti-letto', en: 'niederscherli-asylum-beds', de: 'niederscherli-asyl-betten', fr: 'niederscherli-lits-asile' },
  'cormann-visita-berna': { it: 'cormann-visita-berna', en: 'cormann-bern-visit', de: 'cormann-bern-besuch', fr: 'visite-cormann-berne' },
  'fusione-palestre-puregym-nonstop': { it: 'fusione-palestre-puregym-nonstop', en: 'puregym-nonstop-gym-merger-switzerland', de: 'fusion-fitnessstudios-puregym-nonstop', fr: 'fusion-salles-sport-puregym-nonstop' },
+ 'agevolazioni-doganali-impiego': { it: 'agevolazioni-doganali-impiego', en: 'customs-use-concessions', de: 'zollerleichterungen-verwendungszweck', fr: 'allegements-douaniers-usage' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

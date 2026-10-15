@@ -27992,6 +27992,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'agevolazioni-doganali-impiego',
+    category: 'novita',
+    date: '2026-10-15T18:35:16.823Z',
+    image: '/images/blog/voto-iva-avs-novembre-2026.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

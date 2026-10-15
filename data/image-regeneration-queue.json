@@ -50,6 +50,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-15T17:55:49.707Z",
       "lastFailureAt": "2026-10-15T17:55:49.707Z"
+    },
+    {
+      "articleId": "agevolazioni-doganali-impiego",
+      "title": "Agevolazioni doganali: novità dal 1° novembre 2026",
+      "fallbackImage": "/images/blog/voto-iva-avs-novembre-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T18:35:17.196Z",
+      "lastFailureAt": "2026-10-15T18:35:17.196Z"
     }
   ]
 }

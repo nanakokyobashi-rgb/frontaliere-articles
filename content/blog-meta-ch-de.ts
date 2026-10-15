@@ -8381,6 +8381,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.fusione-palestre-puregym-nonstop.title': 'Puregym übernimmt Nonstop Gym: Ziel 100 Clubs bis 2026',
     'blog.article.fusione-palestre-puregym-nonstop.excerpt': 'Puregym übernimmt die Schweizer Fitnesskette Nonstop Gym Puregym betreibt 49 Fitnessstudios in der Schweiz Nonstop Gym zählt 48 Über 100 Standorte bis Ende 2026',
     'blog.article.fusione-palestre-puregym-nonstop.imageAlt': 'Innenansicht eines modernen Fitnessstudios in der Schweiz',
+    'blog.article.agevolazioni-doganali-impiego.title': 'Zollvergünstigungen: Neuigkeiten ab dem 1. November 2026',
+    'blog.article.agevolazioni-doganali-impiego.excerpt': 'Ab dem 1. November 2026 geltende Zollneuerungen Vergünstigungen im Zusammenhang mit dem Verwendungszweck der Waren Tares-Anmerkungen angepasst und R-17 veröffentlicht Inkrafttreten',
+    'blog.article.agevolazioni-doganali-impiego.imageAlt': 'Schweizer Zolldokumente und ein Kalender mit dem 1. November 2026',
 };
 
 export default blogMetaChDe;

@@ -8381,6 +8381,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.fusione-palestre-puregym-nonstop.title': 'Puregym acquiert Nonstop Gym : objectif 100 clubs d\'ici 2026',
     'blog.article.fusione-palestre-puregym-nonstop.excerpt': 'Puregym acquiert la chaîne suisse Nonstop Gym Puregym gère 49 salles de sport en Suisse Nonstop Gym en compte 48 Plus de 100 établissements d\'ici fin 2026',
     'blog.article.fusione-palestre-puregym-nonstop.imageAlt': 'Intérieur d\'une salle de sport moderne en Suisse',
+    'blog.article.agevolazioni-doganali-impiego.title': 'Facilitations douanières : nouveautés à compter du 1er novembre 2026',
+    'blog.article.agevolazioni-doganali-impiego.excerpt': 'Nouveautés douanières en vigueur à compter du 1er novembre 2026 Facilitations liées à la destination des marchandises Observations Tares mises à jour et R-17 Entrata publié',
+    'blog.article.agevolazioni-doganali-impiego.imageAlt': 'Documents douaniers suisses et calendrier marqué du 1er novembre 2026',
 };
 
 export default blogMetaChFr;
