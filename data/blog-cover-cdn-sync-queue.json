@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-fusione-palestre-puregym-nonstop.webp",
-      "sha256": "149dcbab12bcd938dd39d0b61d943b8a5d8cce52546af372a562f4ee2e51877b"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-fusione-palestre-puregym-nonstop-480w.webp",
-      "sha256": "369ccdcefc3dc23bfdec6b6d2af53b4e57c2c5cec1e12b8f48254f9be8e05060"
-    }
-  ]
+  "items": []
 }
