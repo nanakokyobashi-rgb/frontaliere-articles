@@ -8306,6 +8306,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tasse-universitarie-berna-guida.title': 'Tasse universitarie Berna: guida iscrizione',
     'blog.article.tasse-universitarie-berna-guida.excerpt': 'Come verificare requisiti, scadenze e importi per le tasse universitarie nel Cantone di Berna: guida pratica per categorie e istituzioni.',
     'blog.article.tasse-universitarie-berna-guida.imageAlt': 'Studente che verifica i requisiti per le tasse universitarie nel Cantone di Berna',
+    'blog.article.opportunita-impiego-federale.title': 'Lavorare per l\'Amministrazione federale: 50 formazioni',
+    'blog.article.opportunita-impiego-federale.excerpt': 'L\'Amministrazione federale offre praticantati agli studenti neolaureati Sono disponibili 50 formazioni professionali Le formazioni prevedono 7 settimane',
+    'blog.article.opportunita-impiego-federale.imageAlt': 'Opportunità di lavoro nell\'Amministrazione federale in Svizzera',
 };
 
 export default blogMetaChIt;
