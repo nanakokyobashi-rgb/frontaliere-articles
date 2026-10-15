@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-physioswiss-tariffe-fisioterapia-ticino.webp",
-      "sha256": "b2f76bc654d95cf567c34985ee2028d534350a0fdfe735cb75a4acc60b386609"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-physioswiss-tariffe-fisioterapia-ticino-480w.webp",
-      "sha256": "14bf25346c637192ea6ed7fb17a5fad9278d1654e4a5e0a105948b8147e4767e"
-    }
-  ]
+  "items": []
 }
