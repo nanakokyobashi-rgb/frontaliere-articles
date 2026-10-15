@@ -27752,6 +27752,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'permesso-pesca-canton-berna-guida',
+    category: 'pratico',
+    date: '2026-10-15T02:27:21.587Z',
+    image: '/images/blog/article-permesso-pesca-canton-berna-guida.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['BE'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
