@@ -272,6 +272,7 @@ import {
   isEvergreenRejected as _isEvergreenRejected,
   evergreenRejectionKind as _evergreenRejectionKind,
   computeEvergreenPoolEpoch as _computeEvergreenPoolEpoch,
+  EVERGREEN_POOL_NAME as _EVERGREEN_POOL_NAME,
   appendEvergreenRejected as _appendEvergreenRejected,
   strikeEvergreenKeyword as _strikeEvergreenKeyword,
   EVERGREEN_STRIKE_LIMIT as _EVERGREEN_STRIKE_LIMIT,
@@ -17194,7 +17195,7 @@ async function main() {
       const totalTopics = topicPool.length;
       const evergreenLedgerContext = {
         section: SECTION_NAME,
-        pool: 'evergreen',
+        pool: _EVERGREEN_POOL_NAME,
         poolEpoch: _computeEvergreenPoolEpoch(topicPool, SECTION_NAME),
         now: Date.now(),
       };
