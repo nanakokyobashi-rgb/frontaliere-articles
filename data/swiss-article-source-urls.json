@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1949372/svizzera-siccita-acqua-esperti-acque": {
-    "articleId": "svizzera-siccita-faldeg-acque",
-    "ts": "2026-09-12T02:50:23.430Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/gnbeinp1qyul": {
     "articleId": "stagionali-turismo-spese-alloggio",
     "ts": "2026-09-12T03:37:29.116Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4165225": {
     "articleId": "costi-cambiamento-climatico-svizzera-2060",
     "ts": "2026-10-15T13:53:49.781Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/dtu2lzhuvz82": {
+    "articleId": "referendum-aels-malaysia",
+    "ts": "2026-10-15T14:12:52.633Z",
     "keyForm": 2
   }
 }
