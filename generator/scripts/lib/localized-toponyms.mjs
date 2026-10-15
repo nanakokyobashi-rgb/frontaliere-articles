@@ -420,6 +420,7 @@ const EVENT_RECORD_PATTERN = /^- \*\*([^*\r\n]+)\*\* — /u;
 const DIGEST_HEADING_PATTERN = /^(#{2,3})\s+\S/u;
 const DIGEST_LINK_HEADING_PATTERN = /^###\s+\[[^\]\r\n]+\]\([^)]+\)\s*$/u;
 const DIGEST_LINK_HEADING_CAPTURE_PATTERN = /^###\s+\[[^\]\r\n]+\]\(([^)\r\n]+)\)\s*$/u;
+const DIGEST_EVENT_MARKER_PATTERN = /<!--\s*digest-event:([^\s]+)\s*-->/u;
 
 const DIGEST_MONTH_NAME_TO_INDEX = new Map([
   ['gennaio', 1], ['febbraio', 2], ['marzo', 3], ['aprile', 4], ['maggio', 5], ['giugno', 6],
@@ -590,10 +591,16 @@ function digestScheduleStableKey(schedule) {
 function digestEventStableKey(parsed, event) {
   const heading = parsed?.headings?.[event?.headingIndex];
   const line = parsed?.lines?.[event?.lineIndices?.[0]];
+  const marker = DIGEST_EVENT_MARKER_PATTERN.exec(String(line ?? ''))?.[1];
+  if (marker) return `event:${marker}`;
   const record = eventRecordMatch(line);
   const headingKey = heading ? digestHeadingStableKey(parsed.lines[heading.lineIndex]) : null;
   const scheduleKey = record ? digestScheduleStableKey(record[1]) : null;
   return headingKey && scheduleKey ? `${headingKey}|${scheduleKey}` : null;
+}
+
+function withoutDigestEventMarker(value) {
+  return String(value ?? '').replace(DIGEST_EVENT_MARKER_PATTERN, '').replace(/[ \t]+$/u, '');
 }
 
 /**
@@ -797,17 +804,22 @@ function transformEventsDigestBody2({ sourceText = '', targetText = '', locale }
 
   for (const { sourceEvent, targetEvent } of eventPairs) {
     if (sourceEvent.lineIndices.length !== targetEvent.lineIndices.length) return null;
+    const targetMarker = DIGEST_EVENT_MARKER_PATTERN.exec(
+      target.lines[targetEvent.lineIndices[0]],
+    )?.[0] || '';
     const sourceTitle = [
-      source.lines[sourceEvent.lineIndices[0]].slice(sourceEvent.titleStart),
+      withoutDigestEventMarker(source.lines[sourceEvent.lineIndices[0]].slice(sourceEvent.titleStart)),
       ...sourceEvent.lineIndices.slice(1).map((lineIndex) => source.lines[lineIndex]),
     ].join('\n');
     const targetTitle = [
-      target.lines[targetEvent.lineIndices[0]].slice(targetEvent.titleStart),
+      withoutDigestEventMarker(target.lines[targetEvent.lineIndices[0]].slice(targetEvent.titleStart)),
       ...targetEvent.lineIndices.slice(1).map((lineIndex) => target.lines[lineIndex]),
     ].join('\n');
     const repairedTitle = applyPair(sourceTitle, targetTitle).split('\n');
     if (repairedTitle.length !== targetEvent.lineIndices.length) return null;
-    lines[targetEvent.lineIndices[0]] = target.lines[targetEvent.lineIndices[0]].slice(0, targetEvent.titleStart) + repairedTitle[0];
+    lines[targetEvent.lineIndices[0]] = target.lines[targetEvent.lineIndices[0]].slice(0, targetEvent.titleStart)
+      + repairedTitle[0]
+      + (targetMarker ? ` ${targetMarker}` : '');
     for (let lineIndex = 1; lineIndex < targetEvent.lineIndices.length; lineIndex += 1) {
       lines[targetEvent.lineIndices[lineIndex]] = repairedTitle[lineIndex];
     }
