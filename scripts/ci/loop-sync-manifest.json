@@ -4032,9 +4032,9 @@
       "sitePath": "tests/articles-shell-contract-functions.golden.json",
       "mode": "identical",
       "baseline": {
-        "site": "77084b29001782fc",
-        "corpus": "77084b29001782fc",
-        "alignedAt": "2026-10-06"
+        "site": "e6aebdbec94daf6a",
+        "corpus": "e6aebdbec94daf6a",
+        "alignedAt": "2026-10-15"
       },
       "couplingSnapshot": [
         {
