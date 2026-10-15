@@ -980,7 +980,7 @@
     {
       "path": "scripts/ci/loop-health-report.mjs",
       "mode": "adapted",
-      "reason": "Generatore del tracker «📊 Loop health report (tracker)» anche in questo repo (issue 1644): il corpo resta portabile (GH_REPO, revisore per repo, solo node:*), ma il corpus osserva anche i marker strutturati dei claim Codex locali per contare failed-terminal per giorno/causa e segnalare una head aperta bloccata oltre soglia. Il sito ha un ledger/review consumer diverso e non usa questo consumer corpus-specifico: la differenza resta dichiaratamente adapted e non c'e' un gemello site da portare.",
+      "reason": "Generatore del tracker «📊 Loop health report (tracker)» anche in questo repo (issue 1644): il corpo resta portabile (GH_REPO, revisore per repo, solo node:*), ma il corpus osserva anche i marker strutturati dei claim Codex locali per contare failed-terminal per giorno/causa e segnalare una head aperta bloccata oltre soglia. Il sito ha un ledger/review consumer diverso e non usa questo consumer corpus-specifico: la differenza resta dichiaratamente adapted e non c'e' un gemello site da portare. 2026-10-15: portato dalla PR sito #12043 soltanto il guard ESM canonico via realpath, sopra il report corpus-specifico; la regressione import/symlink vive in `generator/tests/loop-health-report-main-guard.test.mjs`.",
       "baseline": {
         "site": "5f12fc298ad39df9",
         "corpus": "b8d5c02a27ced312",
