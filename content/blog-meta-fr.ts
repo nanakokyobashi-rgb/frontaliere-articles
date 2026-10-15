@@ -13248,6 +13248,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.inaugurazione-sala-comacina-polizia.title': 'Police routière : l’inauguration à Sala Comacina',
     'blog.article.inaugurazione-sala-comacina-polizia.excerpt': 'Cérémonie vendredi 16 octobre à 11 heures Détachement de la Police routière à Sala Comacina Salvini, Piantedosi, Molteni et Pisani attendus Le maire présent',
     'blog.article.inaugurazione-sala-comacina-polizia.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.saronno-piccole-stelle-softball.title': 'Saronno, le tournoi Piccole Stelle revient : tournoi de softball Under 14',
+    'blog.article.saronno-piccole-stelle-softball.excerpt': 'Les 17 et 18 octobre, le tournoi Piccole Stelle revient La sixième édition est réservée à la catégorie Under 14 Le tournoi rend hommage à Enrico Obletter Saronno joue à domicile',
+    'blog.article.saronno-piccole-stelle-softball.imageAlt': 'Tournoi de softball jeunesse à Saronno pour la sixième édition de Piccole Stelle',
 };
 
 export default blogMetaFr;

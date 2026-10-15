@@ -13245,6 +13245,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.inaugurazione-sala-comacina-polizia.title': 'Verkehrspolizei: das Durchschneiden des Bandes in Sala Comacina',
     'blog.article.inaugurazione-sala-comacina-polizia.excerpt': 'Zeremonie am Freitag, 16. (Sala Comacina)',
     'blog.article.inaugurazione-sala-comacina-polizia.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.saronno-piccole-stelle-softball.title': 'Saronno, Piccole Stelle ist zurück: Softballturnier der Altersklasse Under 14',
+    'blog.article.saronno-piccole-stelle-softball.excerpt': 'Am 17. und 18. Oktober kehrt das Turnier Piccole Stelle zurück Die sechste Ausgabe ist der Kategorie Under 14 vorbehalten Das Turnier erinnert an Enrico Obletter Saronno spielt zu Hause',
+    'blog.article.saronno-piccole-stelle-softball.imageAlt': 'Jugend-Softballturnier in Saronno bei der sechsten Ausgabe von Piccole Stelle',
 };
 
 export default blogMetaDe;
