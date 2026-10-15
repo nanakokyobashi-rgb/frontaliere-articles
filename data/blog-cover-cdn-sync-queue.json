@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-costi-cambiamento-climatico-svizzera-2060.webp",
+      "sha256": "b1a2f5c6df9bfc5eafb07807fe4cdef07bb2b69eadf6b8dddb9bde7a5d983a96"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-costi-cambiamento-climatico-svizzera-2060-480w.webp",
+      "sha256": "641948ccc4cd6429c6ed78142aef3ffd3350de52a825d78ef4d04964a951b85b"
+    }
+  ]
 }
