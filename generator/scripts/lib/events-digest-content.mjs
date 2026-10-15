@@ -161,6 +161,40 @@ function cantonLabelForLocale(canton, locale) {
   return slugToLabel(slug);
 }
 
+/** Shared by the producer and the corpus-side localized-toponym parser. */
+export const DIGEST_EVENT_MARKER_PATTERN = /<!--\s*digest-event:([^\s]+)\s*-->/u;
+
+function toWellFormedString(value) {
+  if (typeof value.toWellFormed === 'function') return value.toWellFormed();
+
+  let result = '';
+  for (let index = 0; index < value.length; index += 1) {
+    const code = value.charCodeAt(index);
+    if (code >= 0xd800 && code <= 0xdbff) {
+      const next = value.charCodeAt(index + 1);
+      if (next >= 0xdc00 && next <= 0xdfff) {
+        result += value[index] + value[index + 1];
+        index += 1;
+      } else {
+        result += '\uFFFD';
+      }
+    } else if (code >= 0xdc00 && code <= 0xdfff) {
+      result += '\uFFFD';
+    } else {
+      result += value[index];
+    }
+  }
+  return result;
+}
+
+/** Encode an event id without allowing malformed UTF-16 to abort the producer. */
+export function encodeDigestEventId(value) {
+  const id = String(value ?? '').trim();
+  if (!id) return '';
+  const wellFormedId = toWellFormedString(id);
+  return encodeURIComponent(wellFormedId).replaceAll('-', '%2D');
+}
+
 /**
  * Keep duplicate same-time events pairable across locales. A municipality can
  * legitimately host two different events at the same date and time, so the
@@ -168,19 +202,10 @@ function cantonLabelForLocale(canton, locale) {
  * an HTML comment: it is invisible in the rendered article but survives in the
  * source payload used by the deterministic localized-toponym repair.
  */
-function digestEventMarker(event) {
+export function digestEventMarker(event) {
   const id = String(event?.id ?? '').trim();
-  if (!id) return '';
-  try {
-    const payload = encodeURIComponent(id).replaceAll('-', '%2D');
-    return ` <!-- digest-event:${payload} -->`;
-  } catch (error) {
-    // A malformed source ID must not abort the full digest build. Without a
-    // marker this record falls back to the schedule key, and duplicate keys
-    // remain fail-closed in localized-toponym repair.
-    if (error instanceof URIError) return '';
-    throw error;
-  }
+  const payload = encodeDigestEventId(id);
+  return payload ? ` <!-- digest-event:${payload} -->` : '';
 }
 
 const T = {

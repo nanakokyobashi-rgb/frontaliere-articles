@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { unescapeTsString } from './unescape-ts-string.mjs';
 import { decodeHtmlEntities } from './decode-html-entities.mjs';
+import { DIGEST_EVENT_MARKER_PATTERN } from './events-digest-content.mjs';
 
 const TABLE = JSON.parse(
   readFileSync(new URL('../../data/localized-toponyms.json', import.meta.url), 'utf8'),
@@ -420,8 +421,6 @@ const EVENT_RECORD_PATTERN = /^- \*\*([^*\r\n]+)\*\* — /u;
 const DIGEST_HEADING_PATTERN = /^(#{2,3})\s+\S/u;
 const DIGEST_LINK_HEADING_PATTERN = /^###\s+\[[^\]\r\n]+\]\([^)]+\)\s*$/u;
 const DIGEST_LINK_HEADING_CAPTURE_PATTERN = /^###\s+\[[^\]\r\n]+\]\(([^)\r\n]+)\)\s*$/u;
-const DIGEST_EVENT_MARKER_PATTERN = /<!--\s*digest-event:([^\s]+)\s*-->/u;
-
 const DIGEST_MONTH_NAME_TO_INDEX = new Map([
   ['gennaio', 1], ['febbraio', 2], ['marzo', 3], ['aprile', 4], ['maggio', 5], ['giugno', 6],
   ['luglio', 7], ['agosto', 8], ['settembre', 9], ['ottobre', 10], ['novembre', 11], ['dicembre', 12],
