@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-vaccino-hpv-ticino-2027.webp",
+      "sha256": "26200c220f945ef4fdca92ab30c17567c051d9ea5671dfc188e6d7e736a0c2f1"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-vaccino-hpv-ticino-2027-480w.webp",
+      "sha256": "e4f3df4acb351dff40cd3b8496655577a2e38e2ebf20598161ea6ec86b40d8cc"
+    }
+  ]
 }
