@@ -961,6 +961,19 @@ test('edge: dopo una collisione sullo stesso commit non torna alla base nominale
   assert.ok(!reverted.io.ops.some((op) => op.startsWith(`put edge/sections/_releases/${COMMIT}/`)));
 });
 
+test('edge: il replay di un commit vecchio non riusa la base conservata in previous', async () => {
+  // Il puntatore corrente e\' B, ma conserva A come release precedente. Un
+  // retry di A non puo\' ristagiare la base nominale di A mentre una richiesta
+  // in volo puo\' ancora leggerla.
+  const replay = await publish(withLive(['canton-ti'], OLD), {
+    history: [withLive(['canton-ti'], OLD), withLive(['canton-gr'])],
+  });
+  assert.deepEqual(replay.result, { code: 0, phase: 'done', flipped: true });
+  assert.match(pointerOf(replay.io).release.base, /^edge\/sections\/_releases\/[0-9a-f]{40}\/$/);
+  assert.notEqual(pointerOf(replay.io).release.base, `edge/sections/_releases/${OLD}/`);
+  assert.ok(!replay.io.ops.some((op) => op.startsWith(`put edge/sections/_releases/${OLD}/`)));
+});
+
 test('edge: la release servita e\' NOTA solo se ogni file dichiarato c\'e\' con il suo sha256', async () => {
   const seeded = async (seed) => {
     const io = fakeIo();

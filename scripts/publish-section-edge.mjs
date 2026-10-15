@@ -475,18 +475,20 @@ export async function publishRelease(release, { io, env = process.env, log = con
   // avviene anche quando `mandatory` e' falso: altrimenti un retry identico
   // tornerebbe alla base nominale e potrebbe sovrascrivere una chiave immutable.
   const previousBase = previous.doc?.release?.base;
+  const previousPreviousBase = previous.doc?.release?.previous?.base;
+  const occupiedBases = [...new Set([previousBase, previousPreviousBase].filter((base) => typeof base === 'string'))];
   const sameRegistryCommit = previous.doc?.commit === release.commit;
   const snapshotCommit = releaseSnapshotCommit(release);
   const snapshotBase = releaseBase(snapshotCommit);
   const sameKnownRelease = previous.state === 'ok' && !mandatory && (previousBase === release.base || (sameRegistryCommit && previousBase === snapshotBase));
-  if (!sameKnownRelease && (previous.state === 'unknown' || previousBase === release.base || sameRegistryCommit)) {
+  if (!sameKnownRelease && (previous.state === 'unknown' || occupiedBases.includes(release.base) || sameRegistryCommit)) {
     let immutableCommit = snapshotCommit;
     // Collisione crittografica praticamente impossibile, ma la proprieta'
     // d'immutabilita' non deve dipendere da una probabilita': se lo stato
     // precedente e' unknown non si puo' ristagiare la stessa base, nemmeno
     // quando il digest dello snapshot coincide con quella occupata.
-    while (immutableCommit === release.commit || releaseBase(immutableCommit) === previousBase) {
-      immutableCommit = sha256(`snapshot:${immutableCommit}:${previousBase ?? ''}`).slice(0, 40);
+    while (immutableCommit === release.commit || occupiedBases.includes(releaseBase(immutableCommit))) {
+      immutableCommit = sha256(`snapshot:${immutableCommit}:${occupiedBases.join('|')}`).slice(0, 40);
     }
     const base = releaseBase(immutableCommit);
     const files = release.files.map((file) => ({ ...file, key: `${base}${file.name}` }));
