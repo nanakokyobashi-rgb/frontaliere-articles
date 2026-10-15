@@ -1,29 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-collaudo-veicoli-berna-procedura.webp",
-      "sha256": "1e21ec179b3b060b1f71937c5602b66abd76925ba9c9db2cef83c25183157097"
-    },
-    {
-      "path": "public/images/blog/article-divieti-viabilita-stadio-como.webp",
-      "sha256": "77905208e5cec404e42ddac38f3df77ce3f4d0d23b36ddc7ae8a14aa147f6fa4"
-    },
-    {
-      "path": "public/images/blog/article-inaugurazione-sala-comacina-polizia.webp",
-      "sha256": "99569800dc2e206195061445f7fff308892e4c9ef63a63eec592f33f51d8178c"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-collaudo-veicoli-berna-procedura-480w.webp",
-      "sha256": "3fc3fcf7b8f325d508118b1ca04bb87b0cdd0a86dc7a16b027274c2f47787adc"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-divieti-viabilita-stadio-como-480w.webp",
-      "sha256": "db8b8d8fc4cddf3b1fc89713863a824a64d50bc77c906c281edc6709e1bfb01a"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-inaugurazione-sala-comacina-polizia-480w.webp",
-      "sha256": "61f47f6630ac4a86f73e2fea93fe57177686252029aee8ce56000ced9dd29223"
-    }
-  ]
+  "items": []
 }
