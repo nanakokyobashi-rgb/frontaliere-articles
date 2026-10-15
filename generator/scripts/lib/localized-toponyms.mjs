@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { unescapeTsString } from './unescape-ts-string.mjs';
 import { decodeHtmlEntities } from './decode-html-entities.mjs';
-import { DIGEST_EVENT_MARKER_PATTERN } from './events-digest-content.mjs';
+import { DIGEST_EVENT_MARKER_PATTERN } from './events-digest-marker.mjs';
 
 const TABLE = JSON.parse(
   readFileSync(new URL('../../data/localized-toponyms.json', import.meta.url), 'utf8'),
