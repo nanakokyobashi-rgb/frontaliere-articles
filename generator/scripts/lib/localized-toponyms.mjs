@@ -263,7 +263,7 @@ const PROTECTED_NAME_PATTERNS = Object.freeze([
   /\b(?:navigazione|navigation)\s+(?:ticino|tessin)\b/giu,
   /\b(?:cardiocentro|cardiocentre)\s+(?:ticino|tessin)\b/giu,
   /\bhotelleriesuisse\s+(?:ticino|tessin)\b/giu,
-  /\b(?:giornale\s+del|journal\s+du|gazzetta\s+del)\s+(?:ticino|tessin)\b/giu,
+  /\b(?:corriere\s+del|giornale\s+del|journal\s+du|gazzetta\s+del)\s+(?:ticino|tessin)\b/giu,
   /\b(?:associazione\s+per\s+la\s+promozione\s+del|banca\s+del|banca\s+dello\s+stato\s+del\s+cantone)\s+(?:ticino|tessin)\b/giu,
   /\b(?:bancastato|caritas|aoz|fly|physioswiss|spitex)\s+(?:ticino|tessin)\b/giu,
   /\b(?:ticino|tessin)\s+(?:spitex|2020)\b/giu,
