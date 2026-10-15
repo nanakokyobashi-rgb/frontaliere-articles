@@ -104549,6 +104549,274 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-liberta-fondo-pene-sostitutive': {
+    title: 'Multe non pagate? Ecco chi può salvarvi dal carcere',
+    description: 'Il Freiheitsfonds ha raccolto quasi 100\'000 franchi. 47 persone hanno evitato complessivamente 451 giorni di carcere. Nel 2024 ci sono stati 3\'935 ingressi',
+    keywords: 'frontalieri, ticino, svizzera, italia, multe, pagate, ecco, salvarvi',
+    ogTitle: 'Multe non pagate? Ecco chi può salvarvi dal carcere',
+    ogDescription: 'Il Freiheitsfonds ha raccolto quasi 100\'000 franchi.',
+    canonicalPath: '/articoli-svizzera/liberta-fondo-pene-sostitutive/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Multe non pagate? Ecco chi può salvarvi dal carcere",
+      "description": "Il Freiheitsfonds ha raccolto quasi 100'000 franchi. 47 persone hanno evitato complessivamente 451 giorni di carcere. Nel 2024 ci sono stati 3'935 ingressi",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/lavori-pubblica-utilita-multe-pene.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Persona con multa e simbolo del fondo libertà, Svizzera"
+      },
+      "datePublished": "2026-10-14T21:58:02+00:00",
+      "dateModified": "2026-10-14T21:58:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/liberta-fondo-pene-sostitutive/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ordinanza-animali-compagnia-ue': {
+    title: 'Animali da compagnia: modificata l\'ordinanza 2026',
+    description: 'Il Consiglio federale ha adottato la modifica il 14 ottobre 2026 La revisione riguarda importazione, transito ed esportazione Le disposizioni si adeguano',
+    keywords: 'frontalieri, ticino, svizzera, italia, animali, compagnia, modificata, ordinanza',
+    ogTitle: 'Animali da compagnia: modificata l\'ordinanza 2026',
+    ogDescription: 'Il Consiglio federale ha adottato la modifica il 14 ottobre 2026 La revisione riguarda importazione, transito ed esportazione Le disposizioni si adeguano',
+    canonicalPath: '/articoli-svizzera/ordinanza-animali-compagnia-ue/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Animali da compagnia: modificata l'ordinanza 2026",
+      "description": "Il Consiglio federale ha adottato la modifica il 14 ottobre 2026 La revisione riguarda importazione, transito ed esportazione Le disposizioni si adeguano",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ordinanza-animali-compagnia-ue.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cane accanto a un documento svizzero sull'ordinanza per gli animali da compagnia"
+      },
+      "datePublished": "2026-10-14T22:26:00+00:00",
+      "dateModified": "2026-10-14T22:26:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ordinanza-animali-compagnia-ue/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-grigioni-preventivo-contributi-terzi': {
+    title: 'GR: settori pesano sempre più sul preventivo | Frontaliere Ticino',
+    description: 'Disavanzo previsto: quasi 100 milioni di franchi Contributi a terzi: +24,8% in quattro anni Voce di bilancio: +34,5% tra 2023 e 2027 EFAS: quasi 20 milioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, settori, pesano, sempre, preventivo',
+    ogTitle: 'GR: settori pesano sempre più sul preventivo',
+    ogDescription: 'Disavanzo previsto: quasi 100 milioni di franchi Contributi a terzi: +24,8% in quattro anni Voce di bilancio: +34,5% tra 2023 e 2027 EFAS: quasi 20 milioni',
+    canonicalPath: '/articoli-svizzera/grigioni-preventivo-contributi-terzi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "GR: settori pesano sempre più sul preventivo",
+      "description": "Disavanzo previsto: quasi 100 milioni di franchi Contributi a terzi: +24,8% in quattro anni Voce di bilancio: +34,5% tra 2023 e 2027 EFAS: quasi 20 milioni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-grigioni-preventivo-contributi-terzi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del palazzo del Cantone dei Grigioni con grafici finanziari sullo sfondo"
+      },
+      "datePublished": "2026-10-14T22:47:30+00:00",
+      "dateModified": "2026-10-14T22:47:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/grigioni-preventivo-contributi-terzi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-consiglio-federale-knifefish-adesione': {
+    title: 'Consiglio federale approva adesione a Knifefish per attacco elettronico',
+    description: 'Il 14 ottobre 2026 il Consiglio federale approva Knifefish La Svizzera modernizza i mezzi per la guerra elettronica Knifefish favorisce acquisti e scambi',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, approva, adesione',
+    ogTitle: 'Consiglio federale approva adesione a Knifefish per attacco elettronico',
+    ogDescription: 'Il 14 ottobre 2026 il Consiglio federale approva Knifefish La Svizzera modernizza i mezzi per la guerra elettronica Knifefish favorisce acquisti e scambi',
+    canonicalPath: '/articoli-svizzera/consiglio-federale-knifefish-adesione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio federale approva adesione a Knifefish per attacco elettronico",
+      "description": "Il 14 ottobre 2026 il Consiglio federale approva Knifefish La Svizzera modernizza i mezzi per la guerra elettronica Knifefish favorisce acquisti e scambi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-consiglio-federale-knifefish-adesione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna con equipaggiamento militare moderno per guerra elettronica"
+      },
+      "datePublished": "2026-10-14T23:04:44+00:00",
+      "dateModified": "2026-10-14T23:04:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/consiglio-federale-knifefish-adesione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-hacker-frigoriferi-connessi': {
+    title: 'Hacker manipolano la refrigerazione: rischio per le case',
+    description: 'Attacco a centinaia di supermercati francesi Refrigerazione manipolata a distanza Danni per milioni di euro Coop e Migros: nessun attacco simile registrato',
+    keywords: 'frontalieri, ticino, svizzera, italia, hacker, manipolano, refrigerazione, rischio',
+    ogTitle: 'Hacker manipolano la refrigerazione: rischio per le case',
+    ogDescription: 'Attacco a centinaia di supermercati francesi Refrigerazione manipolata a distanza Danni per milioni di euro Coop e Migros: nessun attacco simile registrato',
+    canonicalPath: '/articoli-svizzera/hacker-frigoriferi-connessi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Hacker manipolano la refrigerazione: rischio per le case",
+      "description": "Attacco a centinaia di supermercati francesi Refrigerazione manipolata a distanza Danni per milioni di euro Coop e Migros: nessun attacco simile registrato",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-hacker-frigoriferi-connessi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sistemi di refrigerazione e dispositivi connessi al centro dell'allarme informatico"
+      },
+      "datePublished": "2026-10-14T23:24:39+00:00",
+      "dateModified": "2026-10-14T23:24:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/hacker-frigoriferi-connessi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-orologio-lingotto-trump-seco': {
+    title: 'Orologio e lingotto d’oro a Trump, Seco: «Erano per il popolo americano»',
+    description: 'I regali a Donald Trump valevano circa 100\'000 franchi La consegna risale al novembre 2025 I dazi Usa sono passati dal 39% al 15% Un rapporto sulle autorità',
+    keywords: 'frontalieri, ticino, svizzera, italia, orologio, lingotto, trump, seco',
+    ogTitle: 'Orologio e lingotto d’oro a Trump: Seco spiega il gesto',
+    ogDescription: 'I regali a Donald Trump valevano circa 100\'000 franchi La consegna risale al novembre 2025 I dazi Usa sono passati dal 39% al 15% Un rapporto sulle autorità',
+    canonicalPath: '/articoli-svizzera/orologio-lingotto-trump-seco/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Orologio e lingotto d’oro a Trump, Seco: «Erano per il popolo americano»",
+      "description": "I regali a Donald Trump valevano circa 100'000 franchi La consegna risale al novembre 2025 I dazi Usa sono passati dal 39% al 15% Un rapporto sulle autorità",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-orologio-lingotto-trump-seco.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Orologio Rolex e lingotto d'oro su tessuto svizzero rosso, simbolo del dono agli USA"
+      },
+      "datePublished": "2026-10-14T23:41:41+00:00",
+      "dateModified": "2026-10-14T23:41:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/orologio-lingotto-trump-seco/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ordinanza-dispositivi-vitali': {
+    title: 'Dispositivi medici vitali: il DEFR apre una consultazione',
+    description: 'Il DEFR apre una consultazione sui dispositivi medici vitali Il progetto punta a monitorare l\'approvvigionamento Inizio: 14 ottobre 2026 Termine: 28 gennaio',
+    keywords: 'frontalieri, ticino, svizzera, italia, dispositivi, medici, vitali, defr',
+    ogTitle: 'DEFR, consultazione sui dispositivi medici vitali',
+    ogDescription: 'Il DEFR apre una consultazione sui dispositivi medici vitali Il progetto punta a monitorare l\'approvvigionamento Inizio: 14 ottobre 2026 Termine: 28 gennaio',
+    canonicalPath: '/articoli-svizzera/ordinanza-dispositivi-vitali/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dispositivi medici vitali: il DEFR apre una consultazione",
+      "description": "Il DEFR apre una consultazione sui dispositivi medici vitali Il progetto punta a monitorare l'approvvigionamento Inizio: 14 ottobre 2026 Termine: 28 gennaio",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ordinanza-dispositivi-vitali.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Berna e dispositivi medici in un'illustrazione sulla consultazione del DEFR"
+      },
+      "datePublished": "2026-10-14T23:53:34+00:00",
+      "dateModified": "2026-10-14T23:53:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ordinanza-dispositivi-vitali/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

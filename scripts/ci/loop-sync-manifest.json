@@ -1657,7 +1657,7 @@
       "path": "generator/tests/article-factuality-gates.test.mjs",
       "sitePath": "tests/article-factuality-gates.test.ts",
       "mode": "adapted",
-      "reason": "Suite dei gate deterministici di fattualita' (incidente 2026-07-28). La libreria generator/scripts/lib/article-factuality-gates.mjs e' arrivata col trasporto del generatore ma la sua suite era rimasta solo sul sito — il punto cieco 'assenza di un test da un lato' del drift check. Adattamenti: node:test + expect-shim al posto di vitest, annotazioni TS rimosse, l'unico expect.arrayContaining riscritto come toContain per elemento. I fixture e le asserzioni sono quelli del sito.",
+      "reason": "Suite dei gate deterministici di fattualita' (incidente 2026-07-28). La libreria generator/scripts/lib/article-factuality-gates.mjs e' arrivata col trasporto del generatore ma la sua suite era rimasta solo sul sito — il punto cieco 'assenza di un test da un lato' del drift check. Adattamenti: node:test + expect-shim al posto di vitest, annotazioni TS rimosse, i casi it.each riscritti come cicli e l'unico expect.arrayContaining riscritto come toContain per elemento. I fixture e le asserzioni sono quelli del sito.",
       "baseline": {
         "site": "cccbd0305799caee",
         "corpus": "cf9615f8a607d4ce",

@@ -1,39 +1,4 @@
 {
-  "https://www.tio.ch/ticino/politica/1949079/cantone-e-comuni-si-confrontano-su-fisco-progetto-ticino-2020-e-riforma-arp": {
-    "articleId": "cantone-comuni-fisco-riforma-arp",
-    "ts": "2026-09-09T17:32:52.261Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/unia-su-tagli-a-winterthur%2c-%22lavoratori-non-paghino-per-azionisti%22/92031502": {
-    "articleId": "zimmer-biomet-svizzera-unia",
-    "ts": "2026-09-09T17:53:18.756Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/pkgtw7aoiyfn": {
-    "articleId": "banda-larga-consiglio-federale",
-    "ts": "2026-09-09T18:15:37.817Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/casse-pensioni%3a-in-agosto-rendimento-positivo/92032364": {
-    "articleId": "previdenza-agosto-rendimenti-positivi",
-    "ts": "2026-09-09T18:43:10.477Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/gkso6mcdgugd": {
-    "articleId": "divieto-oro-sudan-consiglio-federale",
-    "ts": "2026-09-09T19:24:59.361Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/aeroporto-zurigo%2c-bus-navetta-viaggiano-senza-autista/92032182": {
-    "articleId": "aeroporto-zurigo-shuttle-autonomi",
-    "ts": "2026-09-09T19:49:00.197Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/ubs-lancia-yumo%2c-piattaforma-spiega-ai-giovani-denaro-ed-economia/92031883": {
-    "articleId": "yumo-piattaforma-giovani-finanza",
-    "ts": "2026-09-09T20:44:51.116Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/b8vgbeq0hug8": {
     "articleId": "commissioni-extraparlamentari-riorganizzazione",
     "ts": "2026-09-09T23:11:29.217Z",
@@ -2497,6 +2462,41 @@
   "https://www.admin.ch/it/newnsb/j4ovbnyxb8fq": {
     "articleId": "consultazione-omc-commercio-digitale",
     "ts": "2026-10-14T21:29:46.303Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/cronaca/1956740/multe-non-pagate-ecco-chi-puo-salvarvi-dal-carcere": {
+    "articleId": "liberta-fondo-pene-sostitutive",
+    "ts": "2026-10-14T21:58:03.382Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/jssj2o8gzqlt": {
+    "articleId": "ordinanza-animali-compagnia-ue",
+    "ts": "2026-10-14T22:26:00.813Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/gr%3a-questi-settori-pesano-sempre-pi%c3%b9-sul-preventivo-cantonale/92216775": {
+    "articleId": "grigioni-preventivo-contributi-terzi",
+    "ts": "2026-10-14T22:47:30.803Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/ul1b8dikrufv": {
+    "articleId": "consiglio-federale-knifefish-adesione",
+    "ts": "2026-10-14T23:04:45.110Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4161292": {
+    "articleId": "hacker-frigoriferi-connessi",
+    "ts": "2026-10-14T23:24:39.477Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1956716/trump-dazi-seco-oro-popolo-orologio-lingotto": {
+    "articleId": "orologio-lingotto-trump-seco",
+    "ts": "2026-10-14T23:41:42.253Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/jjqfufo9sd05": {
+    "articleId": "ordinanza-dispositivi-vitali",
+    "ts": "2026-10-14T23:53:34.689Z",
     "keyForm": 2
   }
 }

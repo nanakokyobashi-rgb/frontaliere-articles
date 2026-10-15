@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T20:08:23.890Z",
-  "contentHash": "565dc5da0ea54cd37edceba8f0f2ec7e0cd4c7f400f5d0d4c504e70f4592ab62",
+  "updatedAt": "2026-10-14T23:09:20.535Z",
+  "contentHash": "798d46ebb1311fab250fb21415d4c01584ff09599adece3d46ec2d311365bef8",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -77,6 +77,16 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "14.10. - 15.10.2026, Strassensperrung Gemeinde Walzenhausen",
+              "date": "2026-10-15",
+              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1410-15102026-strassensperrung-gemeinde-walzenhausen/"
+            },
+            {
+              "label": "Strassensperrung Gemeinde Urnäsch",
+              "date": "2026-10-15",
+              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
+            },
+            {
               "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
               "date": "2026-09-29",
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
@@ -95,16 +105,6 @@
               "label": "Strassensperrung Gaiserstrasse Abschnitt Äbisegg",
               "date": "2026-09-16T08:40:00.000Z",
               "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
-            },
-            {
-              "label": "Sanierung Einlenker Haslerstegstrasse",
-              "date": "2026-09-14T09:57:00.000Z",
-              "url": "https://www.ai.ch/verwaltung/bau-und-umweltdepartement/oeffentliche-auflagen/im-anhang-sende-ich-dir-die-unterlagen-fuer-die-planauflage-sanierung-einlenker-haslerstegstrasse"
-            },
-            {
-              "label": "Instandsetzung der Oberen Bruderbachbrücke",
-              "date": "2026-09-14",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
           "updatedAt": "2026-10-14T10:37:16.619Z"
@@ -134,7 +134,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-14T23:09:20.535Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -194,6 +194,16 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "14.10. - 15.10.2026, Strassensperrung Gemeinde Walzenhausen",
+              "date": "2026-10-15",
+              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1410-15102026-strassensperrung-gemeinde-walzenhausen/"
+            },
+            {
+              "label": "Strassensperrung Gemeinde Urnäsch",
+              "date": "2026-10-15",
+              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
+            },
+            {
               "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
               "date": "2026-09-29",
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
@@ -212,16 +222,6 @@
               "label": "Strassensperrung Gaiserstrasse Abschnitt Äbisegg",
               "date": "2026-09-16T08:40:00.000Z",
               "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
-            },
-            {
-              "label": "Sanierung Einlenker Haslerstegstrasse",
-              "date": "2026-09-14T09:57:00.000Z",
-              "url": "https://www.ai.ch/verwaltung/bau-und-umweltdepartement/oeffentliche-auflagen/im-anhang-sende-ich-dir-die-unterlagen-fuer-die-planauflage-sanierung-einlenker-haslerstegstrasse"
-            },
-            {
-              "label": "Instandsetzung der Oberen Bruderbachbrücke",
-              "date": "2026-09-14",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
           "updatedAt": "2026-10-14T10:37:16.619Z"
@@ -251,7 +251,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-14T23:09:20.535Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -311,6 +311,16 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "14.10. - 15.10.2026, Strassensperrung Gemeinde Walzenhausen",
+              "date": "2026-10-15",
+              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1410-15102026-strassensperrung-gemeinde-walzenhausen/"
+            },
+            {
+              "label": "Strassensperrung Gemeinde Urnäsch",
+              "date": "2026-10-15",
+              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
+            },
+            {
               "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
               "date": "2026-09-29",
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
@@ -329,16 +339,6 @@
               "label": "Strassensperrung Gaiserstrasse Abschnitt Äbisegg",
               "date": "2026-09-16T08:40:00.000Z",
               "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
-            },
-            {
-              "label": "Sanierung Einlenker Haslerstegstrasse",
-              "date": "2026-09-14T09:57:00.000Z",
-              "url": "https://www.ai.ch/verwaltung/bau-und-umweltdepartement/oeffentliche-auflagen/im-anhang-sende-ich-dir-die-unterlagen-fuer-die-planauflage-sanierung-einlenker-haslerstegstrasse"
-            },
-            {
-              "label": "Instandsetzung der Oberen Bruderbachbrücke",
-              "date": "2026-09-14",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
           "updatedAt": "2026-10-14T10:37:16.619Z"
@@ -368,7 +368,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-14T23:09:20.535Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -428,6 +428,16 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "14.10. - 15.10.2026, Strassensperrung Gemeinde Walzenhausen",
+              "date": "2026-10-15",
+              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1410-15102026-strassensperrung-gemeinde-walzenhausen/"
+            },
+            {
+              "label": "Strassensperrung Gemeinde Urnäsch",
+              "date": "2026-10-15",
+              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
+            },
+            {
               "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
               "date": "2026-09-29",
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
@@ -446,16 +456,6 @@
               "label": "Strassensperrung Gaiserstrasse Abschnitt Äbisegg",
               "date": "2026-09-16T08:40:00.000Z",
               "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
-            },
-            {
-              "label": "Sanierung Einlenker Haslerstegstrasse",
-              "date": "2026-09-14T09:57:00.000Z",
-              "url": "https://www.ai.ch/verwaltung/bau-und-umweltdepartement/oeffentliche-auflagen/im-anhang-sende-ich-dir-die-unterlagen-fuer-die-planauflage-sanierung-einlenker-haslerstegstrasse"
-            },
-            {
-              "label": "Instandsetzung der Oberen Bruderbachbrücke",
-              "date": "2026-09-14",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
           "updatedAt": "2026-10-14T10:37:16.619Z"
@@ -485,7 +485,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-14T23:09:20.535Z"
     }
   }
 }
