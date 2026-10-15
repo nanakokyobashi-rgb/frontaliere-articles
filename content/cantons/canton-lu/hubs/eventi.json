@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "24383028f85c15508b1dfc4f31dc6bc5fc7371f86a9a47ab0b9acb138815e343",
+  "updatedAt": "2026-10-15T21:03:09.722Z",
+  "contentHash": "843f470c696780b36ba7ad217e8b91ae96f33662531fd8960b0fdb76ab69a727",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T21:57:18.142Z",
+      "updatedAt": "2026-10-15T13:57:57.453Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -38,75 +38,90 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Globine zu Gast im Buchhaus!",
-              "detail": "Lucerne",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/globine-zu-gast-im-buchhaus-1/"
+              "label": "SONNFELS Spaziergang – Zwangsstörungen verstehen",
+              "detail": "Verkehrshaus-Lido am Bootsanlegesteg, Luzern, Luzern",
+              "date": "2026-10-15",
+              "url": "https://www.ow.ch/_rte/anlass/94708"
             },
             {
-              "label": "«Zwitscherzeit!» Wie Bauernfamilien erfolgreich Vögel schützen",
-              "detail": "Besuchszentrum Schweizerische Vogelwarte, Sempach",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/evenements/savoir/sempach/-cest-lheure-de-gazouiller-_A89yAFN"
+              "label": "Pilz Tage Hasle - ein 4-Tages-Pilzkurs",
+              "detail": "Heiligkreuz",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pilz-tage-hasle-ein-4-tages-pilzkurs/"
             },
             {
-              "label": "Goldwaschen in der Schweiz",
-              "detail": "Stadtbibliothek Kriens, Kriens",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kriens/goldwaschen-in-der-schweiz_A74wH5d"
+              "label": "Tanznachmittag mit Live-Musik im Jlge-Saal",
+              "detail": "Landgasthaus Jlge, Ettiswil",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/tanznachmittag-mit-live-musik-im-jlge-saal_AEBdS5y"
             },
             {
-              "label": "HANNA & HARALD",
-              "detail": "Hotel Schweizerhof, Luzern",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/hanna-harald/"
+              "label": "Kurs Urban Sketching – Schüpfheim | 15.10.2026",
+              "detail": "Schüpfheim",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-urban-sketching-schuepfheim-15102026/"
+            },
+            {
+              "label": "Im Gespräch über Sicherheit und Sauberkeit",
+              "detail": "Luzern",
+              "date": "2026-10-15",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
+            },
+            {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+            },
+            {
+              "label": "Filmabend in Luthern",
+              "detail": "Luthern",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/filmabend-in-luthern/"
+            },
+            {
+              "label": "Nickless",
+              "detail": "Schüür",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/nickless_A1yPiQE"
             },
             {
               "label": "Pilzkontrolle",
               "detail": "Museum Luzern, Luzern — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
             },
             {
               "label": "Fiera d'autunno - Lozärner Määs",
               "detail": "Luzern Inseli, Luzern — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
-            },
-            {
-              "label": "Sunset cruises Brienzer Rothorn with 3-course menu",
-              "detail": "Gipfel-Restaurant Rothorn — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
-            },
-            {
-              "label": "Wine and Dine trip",
-              "detail": "Lucerne — in corso, ultimo giorno: 16 ottobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-and-dine-trip/"
-            },
-            {
-              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
-              "detail": "Museum Luzern, Luzern — in corso, ultimo giorno: 23 ottobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
-            },
-            {
-              "label": "Escursione meditativa",
-              "detail": "6356 Rigi Kaltbad — in corso, ultimo giorno: 17 ottobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/escursione-meditativa-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "date": "2026-10-15T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
+            },
+            {
+              "label": "Salonkonzert",
+              "date": "2026-10-15T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
+            },
+            {
+              "label": "Im Gespräch über Sicherheit und Sauberkeit",
+              "date": "2026-10-14T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
+            },
             {
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-10-11T22:00:00.000Z",
@@ -121,27 +136,24 @@
               "label": "Bewegung und Begegnung - Feldenkrais",
               "date": "2026-10-11T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7648402"
-            },
-            {
-              "label": "Wissen am Mittag",
-              "date": "2026-10-08T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7649719"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-10-08T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
-            },
-            {
-              "label": "Kunstausstellung Weltformat",
-              "date": "2026-10-02T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "orari apertura negozi Lucerna domeniche festivi",
+          "url": "/articoli-svizzera/orari-apertura-lucerna-festivi/",
+          "excerpt": "Nel Canton Lucerna gli orari di apertura dei negozi variano secondo il livello competente (cantonale, comunale o istituzionale); domeniche e festivi fanno parte degli orari commerciali, mentre le aperture in deroga…",
+          "date": "2026-10-15T05:37:40.396Z"
+        },
+        {
+          "title": "Giorni festivi a Lucerna: guida al calendario e verifica",
+          "url": "/articoli-svizzera/lucerna-festivi-calendario-verifica/",
+          "excerpt": "Distinzione tra calendario cantonale e regole comunali o istituzionali per uffici e negozi a Lucerna.",
+          "date": "2026-10-15T03:21:39.212Z"
+        },
         {
           "title": "Patente di guida a Lucerna: cosa fare e sapere",
           "url": "/articoli-svizzera/patente-guida-lucerna-conversione-ed-esami/",
@@ -159,7 +171,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T21:03:09.722Z"
     },
     "en": {
       "canton": "LU",
@@ -180,75 +192,90 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Globine zu Gast im Buchhaus!",
-              "detail": "Lucerne",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/globine-zu-gast-im-buchhaus-1/"
+              "label": "SONNFELS Spaziergang – Zwangsstörungen verstehen",
+              "detail": "Verkehrshaus-Lido am Bootsanlegesteg, Luzern, Luzern",
+              "date": "2026-10-15",
+              "url": "https://www.ow.ch/_rte/anlass/94708"
             },
             {
-              "label": "«Zwitscherzeit!» Wie Bauernfamilien erfolgreich Vögel schützen",
-              "detail": "Besuchszentrum Schweizerische Vogelwarte, Sempach",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/evenements/savoir/sempach/-cest-lheure-de-gazouiller-_A89yAFN"
+              "label": "Pilz Tage Hasle - ein 4-Tages-Pilzkurs",
+              "detail": "Heiligkreuz",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pilz-tage-hasle-ein-4-tages-pilzkurs/"
             },
             {
-              "label": "Goldwaschen in der Switzerland",
-              "detail": "Stadtbibliothek Kriens, Kriens",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kriens/goldwaschen-in-der-schweiz_A74wH5d"
+              "label": "Tanznachmittag mit Live-Musik im Jlge-Saal",
+              "detail": "Landgasthaus Jlge, Ettiswil",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/tanznachmittag-mit-live-musik-im-jlge-saal_AEBdS5y"
             },
             {
-              "label": "HANNA & HARALD",
-              "detail": "Hotel Schweizerhof, Luzern",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/hanna-harald/"
+              "label": "Kurs Urban Sketching – Schüpfheim | 15.10.2026",
+              "detail": "Schüpfheim",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-urban-sketching-schuepfheim-15102026/"
+            },
+            {
+              "label": "Im Gespräch über Sicherheit und Sauberkeit",
+              "detail": "Luzern",
+              "date": "2026-10-15",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
+            },
+            {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+            },
+            {
+              "label": "Filmabend in Luthern",
+              "detail": "Luthern",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/filmabend-in-luthern/"
+            },
+            {
+              "label": "Nickless",
+              "detail": "Schüür",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/nickless_A1yPiQE"
             },
             {
               "label": "Pilzkontrolle",
               "detail": "Museum Luzern, Luzern — ongoing, last day: 26 October 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
             },
             {
               "label": "Autumn Fair - Lozärner Määs",
               "detail": "Luzern Inseli, Luzern — ongoing, last day: 18 October 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
-            },
-            {
-              "label": "Sunset cruises Brienzer Rothorn with 3-course menu",
-              "detail": "Gipfel-Restaurant Rothorn — ongoing, last day: 25 October 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
-            },
-            {
-              "label": "Wine and Dine trip",
-              "detail": "Lucerne — ongoing, last day: 16 October 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-and-dine-trip/"
-            },
-            {
-              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
-              "detail": "Museum Luzern, Luzern — ongoing, last day: 23 October 2026",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
-            },
-            {
-              "label": "Meditative Hike",
-              "detail": "6356 Rigi Kaltbad — ongoing, last day: 17 October 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/escursione-meditativa-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "date": "2026-10-15T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
+            },
+            {
+              "label": "Salonkonzert",
+              "date": "2026-10-15T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
+            },
+            {
+              "label": "Im Gespräch über Sicherheit und Sauberkeit",
+              "date": "2026-10-14T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
+            },
             {
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-10-11T22:00:00.000Z",
@@ -263,27 +290,24 @@
               "label": "Bewegung und Begegnung - Feldenkrais",
               "date": "2026-10-11T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7648402"
-            },
-            {
-              "label": "Wissen am Mittag",
-              "date": "2026-10-08T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7649719"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-10-08T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
-            },
-            {
-              "label": "Kunstausstellung Weltformat",
-              "date": "2026-10-02T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Lucerne shop opening hours Sundays public holidays",
+          "url": "/en/swiss-articles/lucerne-shop-opening-hours-sundays-public-holidays/",
+          "excerpt": "In the Canton of Lucerne, shop opening hours vary according to the competent level (cantonal, municipal or institutional); Sundays and public holidays are part of commercial opening hours, while exceptional openings…",
+          "date": "2026-10-15T05:37:40.396Z"
+        },
+        {
+          "title": "Public holidays in Lucerne: calendar guide and verification",
+          "url": "/en/swiss-articles/lucerne-public-holidays-calendar-guide/",
+          "excerpt": "Distinction between cantonal calendar and municipal or institutional rules for offices and shops in Lucerne.",
+          "date": "2026-10-15T03:21:39.212Z"
+        },
         {
           "title": "Driver's license in Lucerne: what to do and know",
           "url": "/en/swiss-articles/driver-s-license-in-lucerne-what-to-do-and-know/",
@@ -301,7 +325,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T21:03:09.722Z"
     },
     "de": {
       "canton": "LU",
@@ -322,75 +346,90 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Globine zu Gast im Buchhaus!",
-              "detail": "Lucerne",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/globine-zu-gast-im-buchhaus-1/"
+              "label": "SONNFELS Spaziergang – Zwangsstörungen verstehen",
+              "detail": "Verkehrshaus-Lido am Bootsanlegesteg, Luzern, Luzern",
+              "date": "2026-10-15",
+              "url": "https://www.ow.ch/_rte/anlass/94708"
             },
             {
-              "label": "«Zwitscherzeit!» Wie Bauernfamilien erfolgreich Vögel schützen",
-              "detail": "Besuchszentrum Schweizerische Vogelwarte, Sempach",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/evenements/savoir/sempach/-cest-lheure-de-gazouiller-_A89yAFN"
+              "label": "Pilz Tage Hasle - ein 4-Tages-Pilzkurs",
+              "detail": "Heiligkreuz",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pilz-tage-hasle-ein-4-tages-pilzkurs/"
             },
             {
-              "label": "Gold ⑥taschen in der Sch",
-              "detail": "Stadtbibliothek Kriens, Kriens",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kriens/goldwaschen-in-der-schweiz_A74wH5d"
+              "label": "Tanznachmittag mit Live-Musik im Jlge-Saal",
+              "detail": "Landgasthaus Jlge, Ettiswil",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/tanznachmittag-mit-live-musik-im-jlge-saal_AEBdS5y"
             },
             {
-              "label": "HANNA & HARALD",
-              "detail": "Hotel Schweizerhof, Luzern",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/hanna-harald/"
+              "label": "Kurs Urban Sketching – Schüpfheim | 15.10.2026",
+              "detail": "Schüpfheim",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-urban-sketching-schuepfheim-15102026/"
+            },
+            {
+              "label": "Im Gespräch über Sicherheit und Sauberkeit",
+              "detail": "Luzern",
+              "date": "2026-10-15",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
+            },
+            {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+            },
+            {
+              "label": "Filmabend in Luthern",
+              "detail": "Luthern",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/filmabend-in-luthern/"
+            },
+            {
+              "label": "Nickless",
+              "detail": "Schüür",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/nickless_A1yPiQE"
             },
             {
               "label": "Pilzkontrolle",
               "detail": "Museum Luzern, Luzern — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
             },
             {
               "label": "Herbstmesse – Lozärner Määs",
               "detail": "Luzern Inseli, Luzern — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
-            },
-            {
-              "label": "Sonnenuntergangsfahrten Brienzer Rothorn mit 3-Gänge-Menü",
-              "detail": "Gipfel-Restaurant Rothorn — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
-            },
-            {
-              "label": "Wine und Dine Fahrt",
-              "detail": "Lucerne — läuft, letzter Tag: 16. Oktober 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-and-dine-trip/"
-            },
-            {
-              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
-              "detail": "Museum Luzern, Luzern — läuft, letzter Tag: 23. Oktober 2026",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
-            },
-            {
-              "label": "Meditative Wanderung",
-              "detail": "6356 Rigi Kaltbad — läuft, letzter Tag: 17. Oktober 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/escursione-meditativa-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "date": "2026-10-15T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
+            },
+            {
+              "label": "Salonkonzert",
+              "date": "2026-10-15T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
+            },
+            {
+              "label": "Im Gespräch über Sicherheit und Sauberkeit",
+              "date": "2026-10-14T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
+            },
             {
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-10-11T22:00:00.000Z",
@@ -405,27 +444,24 @@
               "label": "Bewegung und Begegnung - Feldenkrais",
               "date": "2026-10-11T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7648402"
-            },
-            {
-              "label": "Wissen am Mittag",
-              "date": "2026-10-08T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7649719"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-10-08T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
-            },
-            {
-              "label": "Kunstausstellung Weltformat",
-              "date": "2026-10-02T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Öffnungszeiten der Geschäfte in Luzern an Sonntagen und Feiertagen",
+          "url": "/de/schweiz-artikel/offnungszeiten-der-geschafte-in-luzern-an-sonntagen-und-feiertagen/",
+          "excerpt": "Im Kanton Luzern variieren die Öffnungszeiten der Geschäfte je nach zuständiger Ebene (kantonal, kommunal oder institutionell); Sonntage und Feiertage gehören zu den Ladenöffnungszeiten, während Sonderöffnungen…",
+          "date": "2026-10-15T05:37:40.396Z"
+        },
+        {
+          "title": "Feiertage in Luzern: Kalenderleitfaden und Überprüfung",
+          "url": "/de/schweiz-artikel/luzern-feiertage-kalender-anleitung/",
+          "excerpt": "Unterscheidung zwischen kantonalem Kalender und kommunalen oder institutionellen Regeln für Büros und Geschäfte in Luzern.",
+          "date": "2026-10-15T03:21:39.212Z"
+        },
         {
           "title": "Führerschein in Luzern: was zu tun und zu wissen ist",
           "url": "/de/schweiz-artikel/fuhrerschein-in-luzern-was-zu-tun-und-zu-wissen-ist/",
@@ -443,7 +479,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T21:03:09.722Z"
     },
     "fr": {
       "canton": "LU",
@@ -464,75 +500,90 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Globine zu Gast im Buchhaus!",
-              "detail": "Lucerne",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/globine-zu-gast-im-buchhaus-1/"
+              "label": "SONNFELS Spaziergang – Zwangsstörungen verstehen",
+              "detail": "Verkehrshaus-Lido am Bootsanlegesteg, Luzern, Luzern",
+              "date": "2026-10-15",
+              "url": "https://www.ow.ch/_rte/anlass/94708"
             },
             {
-              "label": "« C'est l'heure de gazouiller ! »",
-              "detail": "Besuchszentrum Schweizerische Vogelwarte, Sempach",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/evenements/savoir/sempach/-cest-lheure-de-gazouiller-_A89yAFN"
+              "label": "Pilz Tage Hasle - ein 4-Tages-Pilzkurs",
+              "detail": "Heiligkreuz",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pilz-tage-hasle-ein-4-tages-pilzkurs/"
             },
             {
-              "label": "Lavage d'or en Suisse",
-              "detail": "Stadtbibliothek Kriens, Kriens",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kriens/goldwaschen-in-der-schweiz_A74wH5d"
+              "label": "Tanznachmittag mit Live-Musik im Jlge-Saal",
+              "detail": "Landgasthaus Jlge, Ettiswil",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/tanznachmittag-mit-live-musik-im-jlge-saal_AEBdS5y"
             },
             {
-              "label": "HANNA & HARALD",
-              "detail": "Hotel Schweizerhof, Luzern",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/hanna-harald/"
+              "label": "Kurs Urban Sketching – Schüpfheim | 15.10.2026",
+              "detail": "Schüpfheim",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-urban-sketching-schuepfheim-15102026/"
+            },
+            {
+              "label": "Im Gespräch über Sicherheit und Sauberkeit",
+              "detail": "Luzern",
+              "date": "2026-10-15",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
+            },
+            {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+            },
+            {
+              "label": "Filmabend in Luthern",
+              "detail": "Luthern",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/filmabend-in-luthern/"
+            },
+            {
+              "label": "Nickless",
+              "detail": "Schüür",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/nickless_A1yPiQE"
             },
             {
               "label": "Pilzkontrolle",
               "detail": "Museum Luzern, Luzern — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
             },
             {
               "label": "Foire d'automne - Lozärner Määs",
               "detail": "Luzern Inseli, Luzern — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
-            },
-            {
-              "label": "Croisières au coucher du soleil au Rothorn de Brienz avec menu à 3 plats",
-              "detail": "Gipfel-Restaurant Rothorn — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
-            },
-            {
-              "label": "Voyage à la découverte du vin et de la gastronomie",
-              "detail": "Lucerne — en cours, dernier jour : 16 octobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-and-dine-trip/"
-            },
-            {
-              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
-              "detail": "Museum Luzern, Luzern — en cours, dernier jour : 23 octobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
-            },
-            {
-              "label": "Randonnée méditative",
-              "detail": "6356 Rigi Kaltbad — en cours, dernier jour : 17 octobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/escursione-meditativa-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "date": "2026-10-15T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
+            },
+            {
+              "label": "Salonkonzert",
+              "date": "2026-10-15T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
+            },
+            {
+              "label": "Im Gespräch über Sicherheit und Sauberkeit",
+              "date": "2026-10-14T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
+            },
             {
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-10-11T22:00:00.000Z",
@@ -547,27 +598,24 @@
               "label": "Bewegung und Begegnung - Feldenkrais",
               "date": "2026-10-11T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7648402"
-            },
-            {
-              "label": "Wissen am Mittag",
-              "date": "2026-10-08T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7649719"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-10-08T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
-            },
-            {
-              "label": "Kunstausstellung Weltformat",
-              "date": "2026-10-02T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "horaires d'ouverture des magasins à Lucerne, dimanches et jours fériés",
+          "url": "/fr/articles-suisse/horaires-d-ouverture-des-magasins-a-lucerne-dimanches-et-jours-feries/",
+          "excerpt": "Dans le canton de Lucerne, les horaires d'ouverture des magasins varient selon le niveau compétent (cantonal, communal ou institutionnel) ; les dimanches et les jours fériés font partie des horaires commerciaux, tandis…",
+          "date": "2026-10-15T05:37:40.396Z"
+        },
+        {
+          "title": "Jours fériés à Lucerne : guide du calendrier et vérification",
+          "url": "/fr/articles-suisse/lucerne-jours-feries-calendrier-guide/",
+          "excerpt": "Distinction entre le calendrier cantonal et les règles municipales ou institutionnelles pour les bureaux et commerces à Lucerne.",
+          "date": "2026-10-15T03:21:39.212Z"
+        },
         {
           "title": "Permis de conduire à Lucerne : que faire et que savoir",
           "url": "/fr/articles-suisse/permis-de-conduire-a-lucerne-que-faire-et-que-savoir/",
@@ -585,7 +633,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T21:03:09.722Z"
     }
   }
 }

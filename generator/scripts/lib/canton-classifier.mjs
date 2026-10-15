@@ -327,7 +327,11 @@ const FRAMING_PHRASES = [
 const caseInitial = (word) => `[${word[0].toUpperCase()}${word[0]}]${word.slice(1)}`;
 const AUDIENCE_HEADS = ['implicazion[ei]', 'impatt[oi]', 'effett[oi]', 'conseguenz[ae]', 'ricadut[ae]',
   'riflessi', 'influisc\\p{L}*', 'influenz\\p{L}*'];
-const AUDIENCE_LINK = `(?:${['per', 'sul', 'sulla', 'sui', 'sugli', 'sulle'].map(caseInitial).join('|')}|${caseInitial('sull')}['’]|${caseInitial('anche')}\\s+${caseInitial('per')})`;
+const AUDIENCE_HEAD_PREFIX = `\\b(?:${AUDIENCE_HEADS.map(caseInitial).join('|')})\\s+`;
+const AUDIENCE_HEAD_PREAMBLE = `(?:[\\p{L}']+\\s+){0,3}?`;
+const AUDIENCE_COSA_PREFIX = `\\b${caseInitial('cosa')}\\s+(?:${['cambia', 'significa', 'comporta'].map(caseInitial).join('|')})\\s+${caseInitial('per')}`;
+const AUDIENCE_APOSTROPHE_LINK = `(?:${['all', 'dall', 'dell', 'nell', 'sull'].map(caseInitial).join('|')})['’]`;
+const AUDIENCE_LINK = `(?:${['per', 'sul', 'sulla', 'sui', 'sugli', 'sulle'].map(caseInitial).join('|')}|${AUDIENCE_APOSTROPHE_LINK}|${caseInitial('anche')}\\s+${caseInitial('per')})`;
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
 }
@@ -345,6 +349,7 @@ const AUDIENCE_CANTON_NAME = [...new Set(Object.values(CANTON_NAMES).flatMap(({ 
   .join('|');
 const AUDIENCE_ARTICLE = `(?:${['il', 'i', 'gli', 'lo', 'la', 'le', 'un', 'uno', 'una'].map((word) => `${caseInitial(word)}\\s+`).join('|')}|${caseInitial('l')}['’]?\\s*)?`;
 const AUDIENCE_RECIPIENT_LINK = `(?:${['di', 'del', 'della', 'dei', 'degli', 'delle', 'in', 'nel', 'nella', 'nei', 'negli', 'nelle'].map(caseInitial).join('|')})`;
+const AUDIENCE_RECIPIENT_LINK_PREFIX = `(?:${AUDIENCE_RECIPIENT_LINK}\\s+|${AUDIENCE_APOSTROPHE_LINK})`;
 // Solo teste che nominano esplicitamente i destinatari: «gli abitanti del
 // Ticino», non «il mercato del Ticino» o «il lavoro in Ticino».
 const AUDIENCE_RECIPIENT_HEADS = [
@@ -354,18 +359,75 @@ const AUDIENCE_RECIPIENT_HEADS = [
   'elettor[ei]', 'consumator[ei]', 'contribuent[ei]', 'aziend[ae]', 'imprese',
 ];
 const AUDIENCE_RECIPIENT_HEAD = `(?:${AUDIENCE_RECIPIENT_HEADS.map(caseInitial).join('|')})`;
-const AUDIENCE_RECIPIENT = `(?:${AUDIENCE_RECIPIENT_HEAD}(?:\\s+[\\p{L}][\\p{L}'-]*){0,2}\\s+${AUDIENCE_RECIPIENT_LINK}\\s+)?`;
+// I qualificatori del destinatario sono intenzionalmente chiusi: una coda
+// libera puo' assorbire un fatto locativo, per esempio «famiglie colpite dal
+// terremoto in Ticino», come se «in Ticino» qualificasse le famiglie.
+const AUDIENCE_RECIPIENT_QUALIFIER_WORDS = [
+  'residenti', 'iscritti', 'frontalieri', 'italiano', 'italiana', 'italiani', 'italiane',
+];
+const AUDIENCE_RECIPIENT_QUALIFIER = `(?:${caseInitial('frontalieri')}\\s+${caseInitial('che')}\\s+${caseInitial('lavorano')}|${AUDIENCE_RECIPIENT_QUALIFIER_WORDS.map(caseInitial).join('|')}|${caseInitial('che')}\\s+${caseInitial('lavorano')})`;
+const AUDIENCE_RECIPIENT_QUALIFIERS = `${AUDIENCE_RECIPIENT_QUALIFIER}(?:\\s+(?:(?:${caseInitial('e')}|${caseInitial('ed')})\\s+)?${AUDIENCE_RECIPIENT_QUALIFIER}){0,2}`;
+const AUDIENCE_RECIPIENT_BODY = `(?:${AUDIENCE_RECIPIENT_HEAD}(?:\\s+${AUDIENCE_RECIPIENT_QUALIFIERS})?|${caseInitial('chi')}\\s+${caseInitial('lavora')})`;
+const AUDIENCE_RECIPIENT = `(?:${AUDIENCE_RECIPIENT_BODY}\\s+${AUDIENCE_RECIPIENT_LINK_PREFIX})?`;
 const AUDIENCE_CANTON_PREFIX = `(?:(?:${caseInitial('canton')}(?:e)?)(?:\\s+(?:${['di', 'del', 'della', 'dei', 'degli', 'delle'].map(caseInitial).join('|')}))?\\s+)?`;
 const AUDIENCE_TARGET_ITEM = `${AUDIENCE_ARTICLE}${AUDIENCE_RECIPIENT}${AUDIENCE_CANTON_PREFIX}(?:${AUDIENCE_CANTON_NAME})(?!\\p{L})`;
 const AUDIENCE_TARGET = `(?:\\s+|(?<=['’]))${AUDIENCE_TARGET_ITEM}(?:\\s*,\\s*${AUDIENCE_TARGET_ITEM})*(?:\\s+${caseInitial('e')}\\s+${AUDIENCE_TARGET_ITEM})?`;
+const AUDIENCE_LINK_PREFIX = `(?:${AUDIENCE_LINK}\\s+|${AUDIENCE_APOSTROPHE_LINK})`;
+const AUDIENCE_TARGET_LONG_ITEM = `(?:${AUDIENCE_LINK_PREFIX}|${AUDIENCE_RECIPIENT_LINK_PREFIX})?${AUDIENCE_TARGET_ITEM}`;
+const AUDIENCE_COORDINATOR = `(?:${caseInitial('ed')}|${caseInitial('e')})`;
+const AUDIENCE_TARGET_LONG = `(?:\\s+|(?<=['’]))${AUDIENCE_TARGET_LONG_ITEM}(?:(?:\\s*,\\s*(?:${AUDIENCE_COORDINATOR}\\s+)?|\\s+${AUDIENCE_COORDINATOR}\\s+)${AUDIENCE_TARGET_LONG_ITEM})*`;
+const AUDIENCE_ITALIAN_DESTINATION_LINK = `(?:${[
+  'a', 'ad', 'al', 'alla', 'ai', 'agli', 'alle', 'da', 'dal', 'dalla', 'dai', 'dagli', 'dalle',
+  'di', 'del', 'della', 'dei', 'degli', 'delle', 'in', 'nel', 'nella', 'nei', 'negli', 'nelle',
+  'presso', 'tra', 'fra', 'verso', 'su', 'sul', 'sulla', 'sui', 'sugli', 'sulle',
+].map(caseInitial).join('|')})`;
+/**
+ * Il caso «lavoratori di Milano e per il Ticino» coordina un destinatario
+ * italiano e uno cantonale. La testa e i qualificatori riusano la grammatica
+ * finita del destinatario; la destinazione italiana e' costruita dai
+ * toponimi italiani noti, cosi' non puo' saltare da un link non cantonale a un
+ * successivo `per`/`sul` in un'altra parte della frase.
+ */
+function caseInsensitiveLiteral(value) {
+  return [...value].map((char) => {
+    const lower = char.toLowerCase();
+    const upper = char.toUpperCase();
+    return lower === upper ? escapeRegExp(char) : `[${escapeRegExp(upper)}${escapeRegExp(lower)}]`;
+  }).join('');
+}
+
+function createAudienceRecipientCoordinated(italianPlaces) {
+  const italianDestinationNames = [...italianPlaces]
+    .sort((a, b) => b.length - a.length)
+    .map((name) => name.split(' ').map(caseInsensitiveLiteral).join(`(?:\\s+|['’\\-])`))
+    .join('|');
+  const italianDestination = italianDestinationNames
+    ? `(?:${AUDIENCE_ITALIAN_DESTINATION_LINK}\\s+|${AUDIENCE_APOSTROPHE_LINK})(?:${italianDestinationNames})`
+    : '(?!)';
+  return new RegExp(
+    `(?:${AUDIENCE_HEAD_PREFIX}${AUDIENCE_HEAD_PREAMBLE}${AUDIENCE_LINK_PREFIX}|${AUDIENCE_COSA_PREFIX}\\s+)${AUDIENCE_ARTICLE}${AUDIENCE_RECIPIENT_BODY}`
+      + `(?:\\s+${italianDestination})?\\s+${AUDIENCE_COORDINATOR}\\s+${AUDIENCE_LINK}${AUDIENCE_TARGET_LONG}`,
+    'gu',
+  );
+}
 const AUDIENCE_RES = [
   // «implicazioni per il Ticino», «l'impatto sul Ticino»: non «effetti del
   // maltempo in Ticino», che e' un fatto in Ticino.
-  new RegExp(`\\b(?:${AUDIENCE_HEADS.map(caseInitial).join('|')})\\s+(?:[\\p{L}']+\\s+){0,3}?${AUDIENCE_LINK}${AUDIENCE_TARGET}`, 'gu'),
+  new RegExp(`${AUDIENCE_HEAD_PREFIX}${AUDIENCE_HEAD_PREAMBLE}${AUDIENCE_LINK}${AUDIENCE_TARGET}`, 'gu'),
   // «cosa cambia per chi lavora in Ticino», «cosa significa per il Ticino»:
   // serve il «per» del destinatario, non «cosa cambia in Ticino dal 2026».
-  new RegExp(`\\b${caseInitial('cosa')}\\s+(?:${['cambia', 'significa', 'comporta'].map(caseInitial).join('|')})\\s+${caseInitial('per')}${AUDIENCE_TARGET}`, 'gu'),
+  new RegExp(`${AUDIENCE_COSA_PREFIX}${AUDIENCE_TARGET}`, 'gu'),
 ];
+// Questa locuzione editoriale e' l'unico preambolo multi-link attestato nei
+// titoli: mantenerlo esplicito evita che la scansione salti un primo link e
+// inglobi luoghi italiani prima di un successivo «per il Ticino».
+const AUDIENCE_POLICY_MEASURES = `${caseInitial('le')}\\s+${caseInitial('nuove')}\\s+${caseInitial('misure')}\\s+${caseInitial('fiscali')}\\s+${caseInitial('e')}\\s+${caseInitial('sociali')}`;
+const AUDIENCE_POLICY_PREFIX = `(?:${AUDIENCE_HEAD_PREFIX}${AUDIENCE_LINK_PREFIX}|${AUDIENCE_COSA_PREFIX}\\s+)`;
+const AUDIENCE_RES_LONG = new RegExp(
+  `(?:${AUDIENCE_HEAD_PREFIX}${AUDIENCE_HEAD_PREAMBLE}${AUDIENCE_LINK}|${AUDIENCE_COSA_PREFIX})${AUDIENCE_TARGET_LONG}`
+    + `|${AUDIENCE_POLICY_PREFIX}${AUDIENCE_POLICY_MEASURES}\\s+${AUDIENCE_LINK}${AUDIENCE_TARGET_LONG}`,
+  'gu',
+);
 
 /**
  * Articoli e preposizioni articolate davanti a una citta' fanno della citta'
@@ -670,6 +732,8 @@ export function createCantonClassifier({
     addMinor(n, 'TI');
   }
 
+  const audienceRecipientCoordinated = createAudienceRecipientCoordinated(italianPlaces);
+
   // Demonimi.
   const demonymRes = [];
   for (const group of groups) {
@@ -680,11 +744,36 @@ export function createCantonClassifier({
 
   const sourceDomains = cantonSections ? buildSourceDomainMap(cantonSections) : new Map();
 
+  function blankAudiencePreservingItalianPlaces(match) {
+    const masked = Array.from(' '.repeat(match.length));
+    const tokens = tokensOf(match);
+    for (let i = 0; i < tokens.length; i += 1) {
+      if (!tokens[i].upper) continue;
+      for (let n = Math.min(italianMaxTokens, tokens.length - i); n >= 1; n -= 1) {
+        const key = tokens.slice(i, i + n).map((token) => token.norm).join(' ');
+        if (!italianPlaces.has(key)) continue;
+        const start = tokens[i].start;
+        const end = tokens[i + n - 1].end;
+        for (let offset = start; offset < end; offset += 1) masked[offset] = match[offset];
+        i += n - 1;
+        break;
+      }
+    }
+    return masked.join('');
+  }
+
   function prepare(text, { framing = false } = {}) {
     let t = foldKeepCase(text)
       .replace(/\]\([^)]*\)/gu, '] ')
       .replace(/\b(?:https?:\/\/|www\.)\S+/giu, ' ');
     for (const re of EXCLUDED_PHRASES) t = t.replace(re, (m) => ' '.repeat(m.length));
+    audienceRecipientCoordinated.lastIndex = 0;
+    t = t.replace(audienceRecipientCoordinated, blankAudiencePreservingItalianPlaces);
+    AUDIENCE_RES_LONG.lastIndex = 0;
+    if (AUDIENCE_RES_LONG.test(t)) {
+      AUDIENCE_RES_LONG.lastIndex = 0;
+      t = t.replace(AUDIENCE_RES_LONG, (m) => ' '.repeat(m.length));
+    }
     for (const re of AUDIENCE_RES) t = t.replace(re, (m) => ' '.repeat(m.length));
     if (framing) for (const re of FRAMING_PHRASES) t = t.replace(re, (m) => ' '.repeat(m.length));
     if (WEF_RE.test(t)) t = t.replace(/\bDavos\b/gu, '     ');

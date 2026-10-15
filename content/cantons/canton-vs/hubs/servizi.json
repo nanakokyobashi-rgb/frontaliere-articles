@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T08:24:32.182Z",
-  "contentHash": "debcc9151ec3a7255b37341176332b55db957adeff525c0a938d261cacac6b13",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "2600152133b7b81baa1e39ca5512240ef212759077a27a1783d9b5a1c62224f3",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,13 +13,13 @@
       "keyFacts": 1
     },
     {
-      "id": "aste-targhe",
-      "updatedAt": "2026-10-13T22:49:00.460Z",
-      "keyFacts": 1
+      "id": "meteo",
+      "updatedAt": "2026-10-15T13:31:14.704Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -35,11 +35,6 @@
           "value": "582,80 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        },
-        {
-          "label": "Aste di targhe in corso",
-          "value": "5",
-          "note": "offerta mediana 400 CHF"
         }
       ],
       "dataBlocks": [
@@ -64,35 +59,18 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Aste delle targhe",
-          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
           "items": [
             {
-              "label": "VS111",
-              "value": "25.000 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-15T13:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=939"
-            },
-            {
-              "label": "VS52",
-              "value": "16.000 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-15T13:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=938"
-            },
-            {
-              "label": "VS406666",
-              "value": "400 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-15T13:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=940"
+              "label": "Sion",
+              "value": "24 °C",
+              "detail": "oggi da 12 a 24 °C"
             }
           ],
-          "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-13T22:49:00.460Z"
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +108,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +187,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T08:24:32.182Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "VS",
@@ -222,11 +200,6 @@
           "value": "582.80 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
-        },
-        {
-          "label": "Plate auctions running",
-          "value": "5",
-          "note": "typical bid 400 CHF"
         }
       ],
       "dataBlocks": [
@@ -251,35 +224,18 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Number plate auctions",
-          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
           "items": [
             {
-              "label": "VS111",
-              "value": "25,000 CHF",
-              "detail": "current bid",
-              "date": "2026-10-15T13:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=939"
-            },
-            {
-              "label": "VS52",
-              "value": "16,000 CHF",
-              "detail": "current bid",
-              "date": "2026-10-15T13:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=938"
-            },
-            {
-              "label": "VS406666",
-              "value": "400 CHF",
-              "detail": "current bid",
-              "date": "2026-10-15T13:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=940"
+              "label": "Sion",
+              "value": "24 °C",
+              "detail": "today from 12 to 24 °C"
             }
           ],
-          "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-13T22:49:00.460Z"
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -317,7 +273,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -392,7 +348,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T08:24:32.182Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "VS",
@@ -405,11 +361,6 @@
           "value": "582.80 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
-        },
-        {
-          "label": "Laufende Kontrollschild-Auktionen",
-          "value": "5",
-          "note": "mittleres Gebot 400 CHF"
         }
       ],
       "dataBlocks": [
@@ -434,35 +385,18 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Kontrollschild-Auktionen",
-          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
           "items": [
             {
-              "label": "VS111",
-              "value": "25’000 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-15T13:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=939"
-            },
-            {
-              "label": "VS52",
-              "value": "16’000 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-15T13:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=938"
-            },
-            {
-              "label": "VS406666",
-              "value": "400 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-15T13:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=940"
+              "label": "Sion",
+              "value": "24 °C",
+              "detail": "heute 12 bis 24 °C"
             }
           ],
-          "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-13T22:49:00.460Z"
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -500,7 +434,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -575,7 +509,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T08:24:32.182Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "VS",
@@ -588,11 +522,6 @@
           "value": "582,80 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
-        },
-        {
-          "label": "Enchères de plaques en cours",
-          "value": "5",
-          "note": "offre centrale 400 CHF"
         }
       ],
       "dataBlocks": [
@@ -617,35 +546,18 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Enchères de plaques",
-          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
           "items": [
             {
-              "label": "VS111",
-              "value": "25 000 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-15T13:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=939"
-            },
-            {
-              "label": "VS52",
-              "value": "16 000 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-15T13:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=938"
-            },
-            {
-              "label": "VS406666",
-              "value": "400 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-15T13:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=940"
+              "label": "Sion",
+              "value": "24 °C",
+              "detail": "aujourd’hui de 12 à 24 °C"
             }
           ],
-          "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-13T22:49:00.460Z"
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -683,7 +595,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -754,7 +666,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T08:24:32.182Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

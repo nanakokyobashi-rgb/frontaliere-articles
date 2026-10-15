@@ -4,12 +4,12 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "c0adb5781ca052ab0b075fb4ade83eef58726b1c58932cd068d5a63b3af32755",
+  "updatedAt": "2026-10-15T00:06:40.869Z",
+  "contentHash": "1918862eb06d1e6af5412c5eaf5c3bbe92ffd324f3b4089f1fa163828289d5a9",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T21:57:18.142Z",
+      "updatedAt": "2026-10-14T13:57:52.093Z",
       "keyFacts": 1
     }
   ],
@@ -33,24 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Lotto",
-              "detail": "Felsenheim, Sachseln, Sachseln",
-              "date": "2026-10-14",
-              "url": "https://www.ow.ch/_rte/anlass/90874"
-            },
-            {
-              "label": "Spiegelbilder - Filmvorführung und Podiumsdiskussion",
-              "detail": "Hirschen Sarnen, Sarnen, Sarnen",
-              "date": "2026-10-14",
-              "url": "https://www.ow.ch/_rte/anlass/94114"
-            },
-            {
-              "label": "Vietnamesisch Kochkurs",
-              "detail": "Schulküche Giswil, Giswil, Giswil",
-              "date": "2026-10-14",
-              "url": "https://www.ow.ch/_rte/anlass/92362"
-            },
-            {
               "label": "Krabbel- und Kindertreff",
               "detail": "Pfarreiheim, Sachseln, Sachseln",
               "date": "2026-10-15",
@@ -91,11 +73,29 @@
               "detail": "Feuerstelle Zubersrüti Chärwald, Kerns, Kerns",
               "date": "2026-10-17",
               "url": "https://www.ow.ch/_rte/anlass/88739"
+            },
+            {
+              "label": "Glas-Recycling",
+              "detail": "Boni, Giswil, Giswil",
+              "date": "2026-10-17",
+              "url": "https://www.ow.ch/_rte/anlass/92359"
+            },
+            {
+              "label": "Sternzauber Mala Halskette - kreativ - intuitiv - verbindend",
+              "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
+              "date": "2026-10-17",
+              "url": "https://www.ow.ch/_rte/anlass/94051"
+            },
+            {
+              "label": "Zwischentöne Concert 4: Matinee:\"...... to the crossroads of the wind\"",
+              "detail": "Benediktinerkloster Engelberg, Engelberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-concert-4-matinee-to-the-crossroads-of-the-wind/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/obvaldo/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/obvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "en": {
       "canton": "OW",
@@ -130,24 +130,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Lotto",
-              "detail": "Felsenheim, Sachseln, Sachseln",
-              "date": "2026-10-14",
-              "url": "https://www.ow.ch/_rte/anlass/90874"
-            },
-            {
-              "label": "Spiegelbilder - Filmvorführung und Podiumsdiskussion",
-              "detail": "Hirschen Sarnen, Sarnen, Sarnen",
-              "date": "2026-10-14",
-              "url": "https://www.ow.ch/_rte/anlass/94114"
-            },
-            {
-              "label": "Vietnamesisch Kochkurs",
-              "detail": "Schulküche Giswil, Giswil, Giswil",
-              "date": "2026-10-14",
-              "url": "https://www.ow.ch/_rte/anlass/92362"
-            },
-            {
               "label": "Krabbel- und Kindertreff",
               "detail": "Pfarreiheim, Sachseln, Sachseln",
               "date": "2026-10-15",
@@ -188,11 +170,29 @@
               "detail": "Feuerstelle Zubersrüti Chärwald, Kerns, Kerns",
               "date": "2026-10-17",
               "url": "https://www.ow.ch/_rte/anlass/88739"
+            },
+            {
+              "label": "Glas-Recycling",
+              "detail": "Boni, Giswil, Giswil",
+              "date": "2026-10-17",
+              "url": "https://www.ow.ch/_rte/anlass/92359"
+            },
+            {
+              "label": "Sternzauber Mala Halskette - kreativ - intuitiv - verbindend",
+              "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
+              "date": "2026-10-17",
+              "url": "https://www.ow.ch/_rte/anlass/94051"
+            },
+            {
+              "label": "Zwischentöne Concert 4: Matinee:\"...... to the crossroads of the wind\"",
+              "detail": "Benediktinerkloster Engelberg, Engelberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-concert-4-matinee-to-the-crossroads-of-the-wind/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/obwalden/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/obwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "de": {
       "canton": "OW",
@@ -226,24 +226,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Lotto",
-              "detail": "Felsenheim, Sachseln, Sachseln",
-              "date": "2026-10-14",
-              "url": "https://www.ow.ch/_rte/anlass/90874"
-            },
-            {
-              "label": "Spiegelbilder - Filmvorführung und Podiumsdiskussion",
-              "detail": "Hirschen Sarnen, Sarnen, Sarnen",
-              "date": "2026-10-14",
-              "url": "https://www.ow.ch/_rte/anlass/94114"
-            },
-            {
-              "label": "Vietnamesisch Kochkurs",
-              "detail": "Schulküche Giswil, Giswil, Giswil",
-              "date": "2026-10-14",
-              "url": "https://www.ow.ch/_rte/anlass/92362"
-            },
             {
               "label": "Krabbel- und Kindertreff",
               "detail": "Pfarreiheim, Sachseln, Sachseln",
@@ -285,11 +267,29 @@
               "detail": "Feuerstelle Zubersrüti Chärwald, Kerns, Kerns",
               "date": "2026-10-17",
               "url": "https://www.ow.ch/_rte/anlass/88739"
+            },
+            {
+              "label": "Glas-Recycling",
+              "detail": "Boni, Giswil, Giswil",
+              "date": "2026-10-17",
+              "url": "https://www.ow.ch/_rte/anlass/92359"
+            },
+            {
+              "label": "Sternzauber Mala Halskette - kreativ - intuitiv - verbindend",
+              "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
+              "date": "2026-10-17",
+              "url": "https://www.ow.ch/_rte/anlass/94051"
+            },
+            {
+              "label": "Zwischentöne Konzert 4: Matinee: «Dialoge»",
+              "detail": "Benediktinerkloster Engelberg, Engelberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-concert-4-matinee-to-the-crossroads-of-the-wind/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/obwalden/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/obwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "fr": {
       "canton": "OW",
@@ -323,24 +323,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Lotto",
-              "detail": "Felsenheim, Sachseln, Sachseln",
-              "date": "2026-10-14",
-              "url": "https://www.ow.ch/_rte/anlass/90874"
-            },
-            {
-              "label": "Spiegelbilder - Filmvorführung und Podiumsdiskussion",
-              "detail": "Hirschen Sarnen, Sarnen, Sarnen",
-              "date": "2026-10-14",
-              "url": "https://www.ow.ch/_rte/anlass/94114"
-            },
-            {
-              "label": "Vietnamesisch Kochkurs",
-              "detail": "Schulküche Giswil, Giswil, Giswil",
-              "date": "2026-10-14",
-              "url": "https://www.ow.ch/_rte/anlass/92362"
-            },
             {
               "label": "Krabbel- und Kindertreff",
               "detail": "Pfarreiheim, Sachseln, Sachseln",
@@ -382,11 +364,29 @@
               "detail": "Feuerstelle Zubersrüti Chärwald, Kerns, Kerns",
               "date": "2026-10-17",
               "url": "https://www.ow.ch/_rte/anlass/88739"
+            },
+            {
+              "label": "Glas-Recycling",
+              "detail": "Boni, Giswil, Giswil",
+              "date": "2026-10-17",
+              "url": "https://www.ow.ch/_rte/anlass/92359"
+            },
+            {
+              "label": "Sternzauber Mala Halskette - kreativ - intuitiv - verbindend",
+              "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
+              "date": "2026-10-17",
+              "url": "https://www.ow.ch/_rte/anlass/94051"
+            },
+            {
+              "label": "Zwischentöne Concert 4: Matinee:\"...... to the crossroads of the wind\"",
+              "detail": "Benediktinerkloster Engelberg, Engelberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-concert-4-matinee-to-the-crossroads-of-the-wind/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/obwald/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/obwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T08:24:32.182Z",
-  "contentHash": "816d3a600d31075d11624d672cd7dcbc2bbabf51c0dabd76675601a5d60b579b",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "e29d4f76a1bce3a1ae58d6f8d479e386e8d6cdfa7d447f47a809a793d11623aa",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,22 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-13T20:56:48.532Z",
+      "updatedAt": "2026-10-15T14:35:28.668Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-13T22:49:00.460Z",
+      "updatedAt": "2026-10-15T11:34:01.149Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-15T13:31:14.704Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +49,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "31",
-          "note": "offerta mediana 680 CHF"
+          "note": "offerta mediana 260 CHF"
         }
       ],
       "dataBlocks": [
@@ -81,11 +86,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-13T22:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-14T22:00:00.000Z"
             },
             {
@@ -107,11 +107,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-10-18T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-19T22:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-13T20:56:48.532Z"
+          "updatedAt": "2026-10-15T14:35:28.668Z"
         },
         {
           "id": "aste-targhe",
@@ -119,36 +124,60 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "ZH69",
-              "value": "56.000 CHF",
+              "label": "ZH772",
+              "value": "10.000 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-14T17:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43623"
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43624"
             },
             {
-              "label": "ZH7772",
-              "value": "9200 CHF",
+              "label": "ZH9381",
+              "value": "5200 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-14T17:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43589"
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43625"
             },
             {
-              "label": "ZH10211",
-              "value": "4000 CHF",
+              "label": "ZH66679",
+              "value": "720 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-14T17:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43590"
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43642"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-13T22:49:00.460Z"
+          "updatedAt": "2026-10-15T11:34:01.149Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "18 °C",
+              "detail": "oggi da 10 a 19 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
+              "date": "2026-10-14T13:11:34.000Z",
+              "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
+            },
+            {
+              "label": "Lieblingsmusik am Patienten: USZ-Studie zeigt Potenzial zur Schmerzreduktion bei medizinischen Eingriffen",
+              "date": "2026-10-14T05:28:41.000Z",
+              "url": "https://www.usz.ch/lieblingsmusik-am-patienten-usz-studie-zeigt-potenzial-zur-schmerzreduktion-bei-medizinischen-eingriffen/"
+            },
             {
               "label": "Auszeichnung für innovative FLASH-Strahlentherapie am USZ",
               "date": "2026-10-13T13:53:49.000Z",
@@ -168,19 +197,9 @@
               "label": "Aussergewöhnliche Pflege am USZ",
               "date": "2026-10-06T19:43:03.000Z",
               "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
-            },
-            {
-              "label": "Arbeitslosenquote bleibt im September stabil",
-              "date": "2026-10-06",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/arbeitslosenquote-bleibt-im-september-stabil.html"
-            },
-            {
-              "label": "Weltstar Anne-Sophie Mutter bringt Musik auf die Neonatologie des USZ",
-              "date": "2026-10-05T09:00:59.000Z",
-              "url": "https://www.usz.ch/weltstar-anne-sophie-mutter-bringt-musik-auf-die-neonatologie/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -259,7 +278,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T08:24:32.182Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "ZH",
@@ -276,7 +295,7 @@
         {
           "label": "Plate auctions running",
           "value": "31",
-          "note": "typical bid 680 CHF"
+          "note": "typical bid 260 CHF"
         }
       ],
       "dataBlocks": [
@@ -313,11 +332,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-13T22:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-14T22:00:00.000Z"
             },
             {
@@ -339,11 +353,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-10-18T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-19T22:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-13T20:56:48.532Z"
+          "updatedAt": "2026-10-15T14:35:28.668Z"
         },
         {
           "id": "aste-targhe",
@@ -351,36 +370,60 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "ZH69",
-              "value": "56,000 CHF",
+              "label": "ZH772",
+              "value": "10,000 CHF",
               "detail": "current bid",
-              "date": "2026-10-14T17:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43623"
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43624"
             },
             {
-              "label": "ZH7772",
-              "value": "9,200 CHF",
+              "label": "ZH9381",
+              "value": "5,200 CHF",
               "detail": "current bid",
-              "date": "2026-10-14T17:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43589"
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43625"
             },
             {
-              "label": "ZH10211",
-              "value": "4,000 CHF",
+              "label": "ZH66679",
+              "value": "720 CHF",
               "detail": "current bid",
-              "date": "2026-10-14T17:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43590"
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43642"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-13T22:49:00.460Z"
+          "updatedAt": "2026-10-15T11:34:01.149Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "18 °C",
+              "detail": "today from 10 to 19 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
+              "date": "2026-10-14T13:11:34.000Z",
+              "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
+            },
+            {
+              "label": "Lieblingsmusik am Patienten: USZ-Studie zeigt Potenzial zur Schmerzreduktion bei medizinischen Eingriffen",
+              "date": "2026-10-14T05:28:41.000Z",
+              "url": "https://www.usz.ch/lieblingsmusik-am-patienten-usz-studie-zeigt-potenzial-zur-schmerzreduktion-bei-medizinischen-eingriffen/"
+            },
             {
               "label": "Auszeichnung für innovative FLASH-Strahlentherapie am USZ",
               "date": "2026-10-13T13:53:49.000Z",
@@ -400,19 +443,9 @@
               "label": "Aussergewöhnliche Pflege am USZ",
               "date": "2026-10-06T19:43:03.000Z",
               "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
-            },
-            {
-              "label": "Arbeitslosenquote bleibt im September stabil",
-              "date": "2026-10-06",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/arbeitslosenquote-bleibt-im-september-stabil.html"
-            },
-            {
-              "label": "Weltstar Anne-Sophie Mutter bringt Musik auf die Neonatologie des USZ",
-              "date": "2026-10-05T09:00:59.000Z",
-              "url": "https://www.usz.ch/weltstar-anne-sophie-mutter-bringt-musik-auf-die-neonatologie/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -487,7 +520,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T08:24:32.182Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "ZH",
@@ -504,7 +537,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "31",
-          "note": "mittleres Gebot 680 CHF"
+          "note": "mittleres Gebot 260 CHF"
         }
       ],
       "dataBlocks": [
@@ -541,11 +574,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-13T22:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-14T22:00:00.000Z"
             },
             {
@@ -567,11 +595,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-10-18T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-19T22:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-13T20:56:48.532Z"
+          "updatedAt": "2026-10-15T14:35:28.668Z"
         },
         {
           "id": "aste-targhe",
@@ -579,36 +612,60 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "ZH69",
-              "value": "56’000 CHF",
+              "label": "ZH772",
+              "value": "10’000 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-14T17:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43623"
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43624"
             },
             {
-              "label": "ZH7772",
-              "value": "9’200 CHF",
+              "label": "ZH9381",
+              "value": "5’200 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-14T17:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43589"
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43625"
             },
             {
-              "label": "ZH10211",
-              "value": "4’000 CHF",
+              "label": "ZH66679",
+              "value": "720 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-14T17:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43590"
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43642"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-13T22:49:00.460Z"
+          "updatedAt": "2026-10-15T11:34:01.149Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "18 °C",
+              "detail": "heute 10 bis 19 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
+              "date": "2026-10-14T13:11:34.000Z",
+              "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
+            },
+            {
+              "label": "Lieblingsmusik am Patienten: USZ-Studie zeigt Potenzial zur Schmerzreduktion bei medizinischen Eingriffen",
+              "date": "2026-10-14T05:28:41.000Z",
+              "url": "https://www.usz.ch/lieblingsmusik-am-patienten-usz-studie-zeigt-potenzial-zur-schmerzreduktion-bei-medizinischen-eingriffen/"
+            },
             {
               "label": "Auszeichnung für innovative FLASH-Strahlentherapie am USZ",
               "date": "2026-10-13T13:53:49.000Z",
@@ -628,19 +685,9 @@
               "label": "Aussergewöhnliche Pflege am USZ",
               "date": "2026-10-06T19:43:03.000Z",
               "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
-            },
-            {
-              "label": "Arbeitslosenquote bleibt im September stabil",
-              "date": "2026-10-06",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/arbeitslosenquote-bleibt-im-september-stabil.html"
-            },
-            {
-              "label": "Weltstar Anne-Sophie Mutter bringt Musik auf die Neonatologie des USZ",
-              "date": "2026-10-05T09:00:59.000Z",
-              "url": "https://www.usz.ch/weltstar-anne-sophie-mutter-bringt-musik-auf-die-neonatologie/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -715,7 +762,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T08:24:32.182Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "ZH",
@@ -732,7 +779,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "31",
-          "note": "offre centrale 680 CHF"
+          "note": "offre centrale 260 CHF"
         }
       ],
       "dataBlocks": [
@@ -769,11 +816,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-13T22:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-14T22:00:00.000Z"
             },
             {
@@ -795,11 +837,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-10-18T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-19T22:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-13T20:56:48.532Z"
+          "updatedAt": "2026-10-15T14:35:28.668Z"
         },
         {
           "id": "aste-targhe",
@@ -807,36 +854,60 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "ZH69",
-              "value": "56 000 CHF",
+              "label": "ZH772",
+              "value": "10 000 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-14T17:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43623"
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43624"
             },
             {
-              "label": "ZH7772",
-              "value": "9 200 CHF",
+              "label": "ZH9381",
+              "value": "5 200 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-14T17:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43589"
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43625"
             },
             {
-              "label": "ZH10211",
-              "value": "4 000 CHF",
+              "label": "ZH66679",
+              "value": "720 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-14T17:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43590"
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43642"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-13T22:49:00.460Z"
+          "updatedAt": "2026-10-15T11:34:01.149Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "18 °C",
+              "detail": "aujourd’hui de 10 à 19 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
+              "date": "2026-10-14T13:11:34.000Z",
+              "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
+            },
+            {
+              "label": "Lieblingsmusik am Patienten: USZ-Studie zeigt Potenzial zur Schmerzreduktion bei medizinischen Eingriffen",
+              "date": "2026-10-14T05:28:41.000Z",
+              "url": "https://www.usz.ch/lieblingsmusik-am-patienten-usz-studie-zeigt-potenzial-zur-schmerzreduktion-bei-medizinischen-eingriffen/"
+            },
             {
               "label": "Auszeichnung für innovative FLASH-Strahlentherapie am USZ",
               "date": "2026-10-13T13:53:49.000Z",
@@ -856,19 +927,9 @@
               "label": "Aussergewöhnliche Pflege am USZ",
               "date": "2026-10-06T19:43:03.000Z",
               "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
-            },
-            {
-              "label": "Arbeitslosenquote bleibt im September stabil",
-              "date": "2026-10-06",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/arbeitslosenquote-bleibt-im-september-stabil.html"
-            },
-            {
-              "label": "Weltstar Anne-Sophie Mutter bringt Musik auf die Neonatologie des USZ",
-              "date": "2026-10-05T09:00:59.000Z",
-              "url": "https://www.usz.ch/weltstar-anne-sophie-mutter-bringt-musik-auf-die-neonatologie/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -939,7 +1000,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T08:24:32.182Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

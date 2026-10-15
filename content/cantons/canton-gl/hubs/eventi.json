@@ -4,17 +4,17 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "97d41607817c6682d16e967f0b96f3e338bdf20a11d5693af266e57a1b9630ae",
+  "updatedAt": "2026-10-15T00:06:40.869Z",
+  "contentHash": "e8354498fe18d20a1bd35096e878e9e0042cba5f1b85bf568ec4c8414e0f4822",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T21:57:18.142Z",
+      "updatedAt": "2026-10-14T13:57:52.093Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -38,22 +38,22 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Familienprogramm: Drachen basteln, 15. Oktober 2026",
+              "detail": "Bergrestaurant Ch�mistube",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familienprogramm-drachen-basteln-donnerstag-15-oktober-2026/"
+            },
+            {
               "label": "Kletterlager Mettmen",
               "detail": "Naturfründehuus Mettmen — in corso, ultimo giorno: 16 ottobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kletterlager-mettmen/"
             },
             {
               "label": "Trachtenausstellung im Dorfkern Elm",
               "detail": "Elm, Glarus Süd — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
-            {
-              "label": "Familienprogramm: Drachen basteln, 15. Oktober 2026",
-              "detail": "Bergrestaurant Ch�mistube",
               "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familienprogramm-drachen-basteln-donnerstag-15-oktober-2026/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
               "label": "Geführte Wildbeobachtung auf der Mettmen Alp",
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -127,7 +127,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "en": {
       "canton": "GL",
@@ -148,22 +148,22 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Familienprogramm: Drachen basteln, 15. Oktober 2026",
+              "detail": "Bergrestaurant Ch�mistube",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familienprogramm-drachen-basteln-donnerstag-15-oktober-2026/"
+            },
+            {
               "label": "Kletterlager Mettmen",
               "detail": "Naturfründehuus Mettmen — ongoing, last day: 16 October 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kletterlager-mettmen/"
             },
             {
               "label": "Trachtenausstellung im Dorfkern Elm",
               "detail": "Elm, Glarus Süd — ongoing, last day: 24 October 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
-            {
-              "label": "Familienprogramm: Drachen basteln, 15. Oktober 2026",
-              "detail": "Bergrestaurant Ch�mistube",
               "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familienprogramm-drachen-basteln-donnerstag-15-oktober-2026/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
               "label": "Geführte Wildbeobachtung auf der Mettmen Alp",
@@ -210,7 +210,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -223,7 +223,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -237,7 +237,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "de": {
       "canton": "GL",
@@ -258,22 +258,22 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Familienprogramm: Drachen basteln, 15. Oktober 2026",
+              "detail": "Bergrestaurant Ch�mistube",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familienprogramm-drachen-basteln-donnerstag-15-oktober-2026/"
+            },
+            {
               "label": "Kletterlager Mettmen",
               "detail": "Naturfründehuus Mettmen — läuft, letzter Tag: 16. Oktober 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kletterlager-mettmen/"
             },
             {
               "label": "Trachtenausstellung im Dorfkern Elm",
               "detail": "Elm, Glarus Süd — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
-            {
-              "label": "Familienprogramm: Drachen basteln, 15. Oktober 2026",
-              "detail": "Bergrestaurant Ch�mistube",
               "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familienprogramm-drachen-basteln-donnerstag-15-oktober-2026/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
               "label": "Geführte Wildbeobachtung auf der Mettmen Alp",
@@ -320,7 +320,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -333,7 +333,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -347,7 +347,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "fr": {
       "canton": "GL",
@@ -368,22 +368,22 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Familienprogramm: Drachen basteln, 15. Oktober 2026",
+              "detail": "Bergrestaurant Ch�mistube",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familienprogramm-drachen-basteln-donnerstag-15-oktober-2026/"
+            },
+            {
               "label": "Kletterlager Mettmen",
               "detail": "Naturfründehuus Mettmen — en cours, dernier jour : 16 octobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kletterlager-mettmen/"
             },
             {
               "label": "Trachtenausstellung im Dorfkern Elm",
               "detail": "Elm, Glarus Süd — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
-            {
-              "label": "Familienprogramm: Drachen basteln, 15. Oktober 2026",
-              "detail": "Bergrestaurant Ch�mistube",
               "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familienprogramm-drachen-basteln-donnerstag-15-oktober-2026/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
               "label": "Geführte Wildbeobachtung auf der Mettmen Alp",
@@ -430,7 +430,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -443,7 +443,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -457,7 +457,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     }
   }
 }

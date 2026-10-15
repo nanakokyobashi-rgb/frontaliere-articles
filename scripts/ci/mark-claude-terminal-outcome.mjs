@@ -47,9 +47,8 @@
  */
 
 import { execFileSync } from 'node:child_process';
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import fs, { realpathSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
 import {
   detectClaudeRateLimit,
   formatRateLimitComment,
@@ -452,7 +451,7 @@ function main() {
 }
 
 // Best-effort assoluto: la telemetria non deve mai far fallire il job.
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && (() => { try { return import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href; } catch { return false; } })()) {
   try {
     main();
   } catch (e) {

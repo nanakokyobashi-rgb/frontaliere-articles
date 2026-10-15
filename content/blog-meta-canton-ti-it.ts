@@ -33,6 +33,12 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.commissione-scuola-ticino.title': 'Scuola media, audizione in Ticino sui corsi attitudinali',
     'blog.article.commissione-scuola-ticino.excerpt': 'Audizione a Bellinzona sui corsi attitudinali e base DECS e SIT tra i rappresentanti ascoltati Rapporto firmato sull\'iniziativa IP158 Prossima riunione: 19',
     'blog.article.commissione-scuola-ticino.imageAlt': 'Bellinzona, riunione su corsi e iniziative della scuola media',
+    'blog.article.gottardo-quadri-cupra-berna.title': 'Gottardo: quadri interroga Berna sulla CUPRA',
+    'blog.article.gottardo-quadri-cupra-berna.excerpt': 'Le code del San Gottardo ricadono sull\'Alta Leventina Quadri interroga il Consiglio federale sulla corsia CUPRA La CUPRA è definitiva dal 2026 e ha gestione',
+    'blog.article.gottardo-quadri-cupra-berna.imageAlt': 'Code sulla A2 al San Gottardo con traffico bloccato nella valle',
+    'blog.article.sovranita-fiscale-accordo-ue.title': 'Accordo UE: rischio perdita sovranità fiscale per Svizzera',
+    'blog.article.sovranita-fiscale-accordo-ue.excerpt': 'Il 6 ottobre la NZZ lancia l\'allarme fiscale Gli aiuti di Stato possono includere agevolazioni fiscali Coinvolti Confederazione, Cantoni e Comuni Prevista',
+    'blog.article.sovranita-fiscale-accordo-ue.imageAlt': 'Palazzo federale a Bellinzona, simbolo delle istituzioni svizzere',
 };
 
 export default blogMetaCantonTiIt;

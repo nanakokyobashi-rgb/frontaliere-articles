@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "a90d4f84de78d8a1b7cc9e471420c309ebdad3cf9f4579995af50393b7934f85",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "8872269e50547b94e4759e273ef11379c620b1ebeac3610010a96c19dac54416",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-13T19:37:23.778Z",
+      "updatedAt": "2026-10-15T12:13:19.434Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "27",
-          "note": "segnalazioni aggiornate: 13 ottobre 2026"
+          "value": "32",
+          "note": "segnalazioni aggiornate: 15 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "92",
-          "note": "segnalazioni aggiornate: 13 ottobre 2026"
+          "value": "96",
+          "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -91,13 +91,23 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
+              "date": "2026-10-15T05:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/neue-veloverbindung-von-schauplatzgasse-auf-bubenberg-platz"
+            },
+            {
+              "label": "Mehrfamilienhäuser an der Zelgstrasse werden saniert",
+              "date": "2026-10-15T04:58:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/mehrfamilienhaeuser-an-der-zelgstrasse-werden-saniert"
+            },
             {
               "label": "Sanierungsarbeiten an der Brunnadernstrasse",
               "date": "2026-10-12T10:30:00.000Z",
@@ -117,19 +127,9 @@
               "label": "Bahnstrecke in Interlaken wegen Bauarbeiten acht Wochen gesperrt",
               "date": "2026-10-08",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
-            },
-            {
-              "label": "Plangenehmigung Tram Kleinwabern erteilt",
-              "date": "2026-10-06",
-              "url": "https://www.bernmobil.ch/de/plangenehmigung-tram-kleinwabern-erteilt"
-            },
-            {
-              "label": "Die Berner Kunsteisbahnen starten in die neue Saison",
-              "date": "2026-09-28T13:28:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/die-berner-kunsteisbahnen-starten-in-die-neue-saison"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -168,7 +168,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "BE",
@@ -178,13 +178,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "27",
-          "note": "reports as of 13 October 2026"
+          "value": "32",
+          "note": "reports as of 15 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "92",
-          "note": "reports as of 13 October 2026"
+          "value": "96",
+          "note": "reports as of 15 October 2026"
         }
       ],
       "dataBlocks": [
@@ -242,13 +242,23 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
+              "date": "2026-10-15T05:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/neue-veloverbindung-von-schauplatzgasse-auf-bubenberg-platz"
+            },
+            {
+              "label": "Mehrfamilienhäuser an der Zelgstrasse werden saniert",
+              "date": "2026-10-15T04:58:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/mehrfamilienhaeuser-an-der-zelgstrasse-werden-saniert"
+            },
             {
               "label": "Sanierungsarbeiten an der Brunnadernstrasse",
               "date": "2026-10-12T10:30:00.000Z",
@@ -268,19 +278,9 @@
               "label": "Bahnstrecke in Interlaken wegen Bauarbeiten acht Wochen gesperrt",
               "date": "2026-10-08",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
-            },
-            {
-              "label": "Plangenehmigung Tram Kleinwabern erteilt",
-              "date": "2026-10-06",
-              "url": "https://www.bernmobil.ch/de/plangenehmigung-tram-kleinwabern-erteilt"
-            },
-            {
-              "label": "Die Berner Kunsteisbahnen starten in die neue Saison",
-              "date": "2026-09-28T13:28:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/die-berner-kunsteisbahnen-starten-in-die-neue-saison"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -319,7 +319,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "BE",
@@ -329,13 +329,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "27",
-          "note": "Meldungen vom 13. Oktober 2026"
+          "value": "32",
+          "note": "Meldungen vom 15. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "92",
-          "note": "Meldungen vom 13. Oktober 2026"
+          "value": "96",
+          "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -393,13 +393,23 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
+              "date": "2026-10-15T05:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/neue-veloverbindung-von-schauplatzgasse-auf-bubenberg-platz"
+            },
+            {
+              "label": "Mehrfamilienhäuser an der Zelgstrasse werden saniert",
+              "date": "2026-10-15T04:58:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/mehrfamilienhaeuser-an-der-zelgstrasse-werden-saniert"
+            },
             {
               "label": "Sanierungsarbeiten an der Brunnadernstrasse",
               "date": "2026-10-12T10:30:00.000Z",
@@ -419,19 +429,9 @@
               "label": "Bahnstrecke in Interlaken wegen Bauarbeiten acht Wochen gesperrt",
               "date": "2026-10-08",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
-            },
-            {
-              "label": "Plangenehmigung Tram Kleinwabern erteilt",
-              "date": "2026-10-06",
-              "url": "https://www.bernmobil.ch/de/plangenehmigung-tram-kleinwabern-erteilt"
-            },
-            {
-              "label": "Die Berner Kunsteisbahnen starten in die neue Saison",
-              "date": "2026-09-28T13:28:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/die-berner-kunsteisbahnen-starten-in-die-neue-saison"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -470,7 +470,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "BE",
@@ -480,13 +480,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "27",
-          "note": "signalements au 13 octobre 2026"
+          "value": "32",
+          "note": "signalements au 15 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "92",
-          "note": "signalements au 13 octobre 2026"
+          "value": "96",
+          "note": "signalements au 15 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -544,13 +544,23 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
+              "date": "2026-10-15T05:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/neue-veloverbindung-von-schauplatzgasse-auf-bubenberg-platz"
+            },
+            {
+              "label": "Mehrfamilienhäuser an der Zelgstrasse werden saniert",
+              "date": "2026-10-15T04:58:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/mehrfamilienhaeuser-an-der-zelgstrasse-werden-saniert"
+            },
             {
               "label": "Sanierungsarbeiten an der Brunnadernstrasse",
               "date": "2026-10-12T10:30:00.000Z",
@@ -570,19 +580,9 @@
               "label": "Bahnstrecke in Interlaken wegen Bauarbeiten acht Wochen gesperrt",
               "date": "2026-10-08",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
-            },
-            {
-              "label": "Plangenehmigung Tram Kleinwabern erteilt",
-              "date": "2026-10-06",
-              "url": "https://www.bernmobil.ch/de/plangenehmigung-tram-kleinwabern-erteilt"
-            },
-            {
-              "label": "Die Berner Kunsteisbahnen starten in die neue Saison",
-              "date": "2026-09-28T13:28:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/die-berner-kunsteisbahnen-starten-in-die-neue-saison"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -621,7 +621,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

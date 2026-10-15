@@ -33,6 +33,12 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.commissione-scuola-ticino.title': 'Mittelschule, Anhörung im Tessin zu den Eignungskursen',
     'blog.article.commissione-scuola-ticino.excerpt': 'Anhörung in Bellinzona zu Eignungskursen und Basis DECS und Sit unter den angehörten Vertretern Unterzeichneter Bericht über die IP158-Initiative Nächstes Treffen: 19',
     'blog.article.commissione-scuola-ticino.imageAlt': 'Bellinzona: Sitzung zu Kursen und Initiativen der Sekundarschule',
+    'blog.article.gottardo-quadri-cupra-berna.title': 'Gotthard: Quadri befragt Bern zur CUPRA',
+    'blog.article.gottardo-quadri-cupra-berna.excerpt': 'Die Staus am Gotthard belasten die obere Leventina Quadri befragt den Bundesrat zur CUPRA-Spur Die CUPRA ist ab 2026 definitiv und verfügt über eine Steuerung',
+    'blog.article.gottardo-quadri-cupra-berna.imageAlt': 'Stau auf der A2 am Gotthard mit blockiertem Verkehr im Tal',
+    'blog.article.sovranita-fiscale-accordo-ue.title': 'EU-Abkommen: Risiko des Verlusts der Steuerhoheit für die Schweiz',
+    'blog.article.sovranita-fiscale-accordo-ue.excerpt': 'Am 6. Oktober schlägt die NZZ steuerlichen Alarm Staatliche Beihilfen können Steuervergünstigungen umfassen Bund, Kantone und Gemeinden betroffen Vorgesehen',
+    'blog.article.sovranita-fiscale-accordo-ue.imageAlt': 'Bundespalast in Bellinzona, Symbol der Schweizer Institutionen',
 };
 
 export default blogMetaCantonTiDe;

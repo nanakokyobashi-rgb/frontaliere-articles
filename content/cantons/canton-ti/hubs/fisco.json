@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "dd166889143e3e876febe4c3312b6e1aec54a99563df8ebdbfc0212ea8e64358",
+  "updatedAt": "2026-10-15T10:49:18.785Z",
+  "contentHash": "256d0378545d1bc8be89008bee4e3f6cf8ecdc4de01744fe0590b25fceb8c2bf",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Accordo UE: rischio perdita sovranità fiscale per Svizzera",
+          "url": "/articoli-ticino/sovranita-fiscale-accordo-ue/",
+          "excerpt": "Il 6 ottobre la NZZ lancia l'allarme fiscale Gli aiuti di Stato possono includere agevolazioni fiscali Coinvolti Confederazione, Cantoni e Comuni Prevista",
+          "date": "2026-10-15T10:45:34.670Z"
+        },
+        {
           "title": "Capitale LPP: Ticino nega rimborso imposta alla fonte",
           "url": "/articoli-ticino/capitale-lpp-rimborso-imposta-fonte/",
           "excerpt": "Dal 2024 il Ticino nega il rimborso dell'imposta alla fonte",
@@ -142,12 +148,6 @@
           "url": "/articoli-frontaliere/mornago-frontaliere/",
           "excerpt": "Dal 1° gennaio 2024 il Nuovo Accordo Frontalieri garantisce franchigia €10.000 ai nuovi frontalieri. Scopri tassazione, AVS, LPP e LAMal per chi vive a Mornago e lavora in Ticino.",
           "date": "2026-09-02T13:35:07.451Z"
-        },
-        {
-          "title": "Imposta alla fonte 2026: aliquote Ticino",
-          "url": "/articoli-frontaliere/aliquote-imposta-fonte-ticino-2026/",
-          "excerpt": "Come funziona la quellensteuer nel Cantone Ticino? Scopri le aliquote 2026, gli abbuoni, la franchigia del Nuovo Accordo e la soglia NOV di CHF 120'000.",
-          "date": "2026-08-22T09:44:56.523Z"
         }
       ],
       "links": [
@@ -176,7 +176,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T10:49:18.785Z"
     },
     "en": {
       "canton": "TI",
@@ -261,6 +261,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "EU agreement: risk of loss of tax sovereignty for Switzerland",
+          "url": "/en/ticino-articles/fiscal-sovereignty-eu-agreement/",
+          "excerpt": "On October 6, NZZ raises the tax alarm State aid can include tax breaks Confederation, cantons and municipalities involved Planned",
+          "date": "2026-10-15T10:45:34.670Z"
+        },
+        {
           "title": "LPP capital: Ticino denies withholding tax refund",
           "url": "/en/ticino-articles/lpp-capital-withholding-tax-refund/",
           "date": "2026-10-08T12:15:50.666Z"
@@ -299,12 +305,6 @@
           "url": "/en/cross-border-articles/live-mornago-work-ticino-cross-border/",
           "excerpt": "From 1 January 2024, the New Frontier Agreement guarantees a €10,000 exemption to new frontier workers. Discover taxation, AVS, LPP and LAMal for those who live in Mornago and work in Ticino.",
           "date": "2026-09-02T13:35:07.451Z"
-        },
-        {
-          "title": "Tax at source 2026: Ticino rates",
-          "url": "/en/cross-border-articles/withholding-tax-rates-ticino-2026/",
-          "excerpt": "How does the quellensteuer work in the Canton of Ticino? Discover the 2026 rates, the rebates, the New Deal deductible and the NOV threshold of CHF 120'000.",
-          "date": "2026-08-22T09:44:56.523Z"
         }
       ],
       "links": [
@@ -333,7 +333,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T10:49:18.785Z"
     },
     "de": {
       "canton": "TI",
@@ -418,6 +418,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "EU-Abkommen: Risiko des Verlusts der Steuerhoheit für die Schweiz",
+          "url": "/de/tessin-artikel/steuerhoheit-eu-abkommen/",
+          "excerpt": "Am 6. Oktober schlägt die NZZ steuerlichen Alarm Staatliche Beihilfen können Steuervergünstigungen umfassen Bund, Kantone und Gemeinden betroffen Vorgesehen",
+          "date": "2026-10-15T10:45:34.670Z"
+        },
+        {
           "title": "BVG-Kapital: Tessin verweigert Rückerstattung der Quellensteuer",
           "url": "/de/tessin-artikel/lpp-kapital-quellensteuer-rueckerstattung/",
           "date": "2026-10-08T12:15:50.666Z"
@@ -456,12 +462,6 @@
           "url": "/de/grenzgaenger-artikel/in-mornago-leben-im-tessin-arbeiten-grenzgaenger/",
           "excerpt": "Ab dem 1. Januar 2024 garantiert die Neue Grenzgängervereinbarung den neuen Grenzgängern eine Selbstbeteiligung von 10.000 €. Entdecken Sie Besteuerung, AHV, BVG und KVG für diejenigen, die in Mornago leben und im…",
           "date": "2026-09-02T13:35:07.451Z"
-        },
-        {
-          "title": "Quellensteuer 2026: Tessiner Steuersätze",
-          "url": "/de/grenzgaenger-artikel/quellensteuer-saetze-tessin-2026/",
-          "excerpt": "Wie funktioniert die quellensteuer im Kanton Tessin? Entdecken Sie die Sätze 2026, die Rabatte, die Franchise des Neuen Abkommens und den NOV-SCHWELLENWERT von CHF 120'000.",
-          "date": "2026-08-22T09:44:56.523Z"
         }
       ],
       "links": [
@@ -490,7 +490,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T10:49:18.785Z"
     },
     "fr": {
       "canton": "TI",
@@ -575,6 +575,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Accord UE : risque de perte de souveraineté fiscale pour la Suisse",
+          "url": "/fr/articles-tessin/souverainete-fiscale-accord-ue/",
+          "excerpt": "Le 6 octobre, la NZZ tire la sonnette d’alarme fiscale Les aides d’État peuvent inclure des allègements fiscaux La Confédération, les cantons et les communes sont concernés Prévue",
+          "date": "2026-10-15T10:45:34.670Z"
+        },
+        {
           "title": "Capital LPP : le Tessin refuse le remboursement de l'impôt à la source",
           "url": "/fr/articles-tessin/capital-lpp-remboursement-impot-source/",
           "excerpt": "Depuis 2024, le Tessin refuse le remboursement de l'impôt à la source",
@@ -615,12 +621,6 @@
           "url": "/fr/articles-frontalier/vivre-mornago-travailler-tessin-frontalier/",
           "excerpt": "À partir du 1er janvier 2024, le nouvel accord frontalier garantit une franchise de 10 000 € aux nouveaux frontaliers. Découvrez la fiscalité, l'AVS, la LPP et la LAMal pour ceux qui vivent à Mornago et travaillent au…",
           "date": "2026-09-02T13:35:07.451Z"
-        },
-        {
-          "title": "Impôt à la source 2026 : taux Tessin",
-          "url": "/fr/articles-frontalier/taux-prelevements-frontaliers-tessin-2026/",
-          "excerpt": "Comment fonctionne la quellensteuer dans le canton du Tessin ? Découvrez les taux 2026, les bonifications, la franchise du Nouvel Accord et le seuil NOV de CHF 120'000.",
-          "date": "2026-08-22T09:44:56.523Z"
         }
       ],
       "links": [
@@ -649,7 +649,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T10:49:18.785Z"
     }
   }
 }

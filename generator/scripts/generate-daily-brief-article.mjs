@@ -137,6 +137,7 @@ export function refreshMetaAndSeo(data, repoRoot = REPO_ROOT, { lockHeld = false
     const c = data.content?.[locale];
     if (!c) continue;
     localeTexts[locale] = {
+      title: c.title,
       excerpt: c.excerpt,
       seoDescription: c.seoDescription,
       ogDescription: c.ogDescription,
@@ -145,8 +146,9 @@ export function refreshMetaAndSeo(data, repoRoot = REPO_ROOT, { lockHeld = false
   return refreshDescriptiveTexts(
     data.id,
     localeTexts,
-    { description: data.seo?.description, ogDescription: data.seo?.ogDescription },
-    { repoRoot, lockHeld },
+    { description: data.seo?.description, ogDescription: data.seo?.ogDescription,
+      title: data.seo?.title, ogTitle: data.seo?.ogTitle, headline: data.seo?.headline },
+    { repoRoot, lockHeld, refreshTitles: true },
   );
 }
 

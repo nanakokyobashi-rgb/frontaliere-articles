@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "pensioni",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "452d06fcd38fe6c690fb0dfab0a23a504a30a0beb5c0f866fc43c1a6e5c81eb2",
+  "updatedAt": "2026-10-15T00:06:40.869Z",
+  "contentHash": "6474211a8680bfe5214b165cb2ebc6ee7e96768a986ffa8d825c574b62baaf99",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -144,14 +144,9 @@
               "label": "Primes et réduction de primes jurassiennes 2027 dans l’assurance-maladie",
               "date": "2026-08-18",
               "url": "https://www.ecasjura.ch/fr/Actualites/Primes-et-reduction-de-primes-jurassiennes-2027-dans-l-assurance-maladie.html"
-            },
-            {
-              "label": "Mois de la santé mentale : Conférence « L’AI à vos côtés pour préserver l’emploi » - 15.09.2026",
-              "date": "2026-06-17",
-              "url": "https://www.ecasjura.ch/fr/Actualites/Mois-de-la-sante-mentale-Conference-L-AI-a-vos-cotes-pour-preserver-l-emploi-15-09-2026.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -186,7 +181,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "en": {
       "canton": "JU",
@@ -303,14 +298,9 @@
               "label": "Primes et réduction de primes jurassiennes 2027 dans l’assurance-maladie",
               "date": "2026-08-18",
               "url": "https://www.ecasjura.ch/fr/Actualites/Primes-et-reduction-de-primes-jurassiennes-2027-dans-l-assurance-maladie.html"
-            },
-            {
-              "label": "Mois de la santé mentale : Conférence « L’AI à vos côtés pour préserver l’emploi » - 15.09.2026",
-              "date": "2026-06-17",
-              "url": "https://www.ecasjura.ch/fr/Actualites/Mois-de-la-sante-mentale-Conference-L-AI-a-vos-cotes-pour-preserver-l-emploi-15-09-2026.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +335,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "de": {
       "canton": "JU",
@@ -462,14 +452,9 @@
               "label": "Primes et réduction de primes jurassiennes 2027 dans l’assurance-maladie",
               "date": "2026-08-18",
               "url": "https://www.ecasjura.ch/fr/Actualites/Primes-et-reduction-de-primes-jurassiennes-2027-dans-l-assurance-maladie.html"
-            },
-            {
-              "label": "Mois de la santé mentale : Conférence « L’AI à vos côtés pour préserver l’emploi » - 15.09.2026",
-              "date": "2026-06-17",
-              "url": "https://www.ecasjura.ch/fr/Actualites/Mois-de-la-sante-mentale-Conference-L-AI-a-vos-cotes-pour-preserver-l-emploi-15-09-2026.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +489,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "fr": {
       "canton": "JU",
@@ -621,14 +606,9 @@
               "label": "Primes et réduction de primes jurassiennes 2027 dans l’assurance-maladie",
               "date": "2026-08-18",
               "url": "https://www.ecasjura.ch/fr/Actualites/Primes-et-reduction-de-primes-jurassiennes-2027-dans-l-assurance-maladie.html"
-            },
-            {
-              "label": "Mois de la santé mentale : Conférence « L’AI à vos côtés pour préserver l’emploi » - 15.09.2026",
-              "date": "2026-06-17",
-              "url": "https://www.ecasjura.ch/fr/Actualites/Mois-de-la-sante-mentale-Conference-L-AI-a-vos-cotes-pour-preserver-l-emploi-15-09-2026.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -663,7 +643,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     }
   }
 }

@@ -36,7 +36,7 @@ jobs:
           path: observer-source
           fetch-depth: 1
           sparse-checkout: |
-            scripts/monitor-jobs-pipeline-queue.mjs
+            scripts/ci/monitor-jobs-pipeline-queue.mjs
             scripts/lib
           sparse-checkout-cone-mode: false
 
@@ -45,7 +45,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           WORKFLOWS_DIR: .github/workflows
-        run: node observer-source/scripts/monitor-jobs-pipeline-queue.mjs
+        run: node observer-source/scripts/ci/monitor-jobs-pipeline-queue.mjs
 
       - name: Report unexpected scan failure to GitHub Issues
         if: failure()

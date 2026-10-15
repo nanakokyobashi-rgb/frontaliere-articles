@@ -9,7 +9,8 @@ import '../../host/cantonSectionsBootstrap.mjs';
  *
  * Auto-scan mode (default):
  *   1. Scans multiple Ticino + frontalieri news sources for recent headlines
- *   2. Uses Gemini to select the most relevant article for frontalieri
+ *   2. Uses the configured Decisions API gate first, then preserves the
+ *      existing LLM classifier pattern if that gate is unavailable
  *   3. Checks against existing articles to avoid duplicates
  *   4. Generates full article in 4 languages + image
  *
@@ -20,7 +21,7 @@ import '../../host/cantonSectionsBootstrap.mjs';
  *   1. Fetches the web page content at the given URL
  *   2. Calls the configured LLM provider chain to generate article data in 4 languages
  *   3. Generates a governed illustrative article image through the shared engine
- *   4. Validates CTA presence and enforces internal links to site tools
+ *   4. Links relevant concepts in localized prose to site tools
  *   5. Programmatically detects duplicates (Jaccard similarity on titles + ID/slug checks)
  *   6. Modifies 9 source files to register the new article
  *   5. Updates sitemap-blog.xml with the new article URL and hreflang alternates
@@ -69,6 +70,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readArticleRegistry } from '../../scripts/lib/registry-image-reader.mjs';
 import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, getProviderRosterStatus, providerRosterReady, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
+import { classifyWithDecisionsApi } from './lib/decisions-api.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
 import {
@@ -80,6 +82,14 @@ import {
 } from './lib/blog-image-policy.mjs';
 import { decodeSyntheticSourceToken, isZeroSourceForGenerationBudget, markSyntheticSourceValidation } from './lib/synthetic-source-contract.mjs';
 import { writeFileSnapshotAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
+import {
+  findHtmlRawTextClosingTag,
+  findHtmlTagEndOutsideQuotes,
+  nextHtmlElement,
+  nextHtmlElementWhere,
+  nextHtmlOpeningTag,
+  nextHtmlTag,
+} from './lib/html-tag-scanner.mjs';
 
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
 //
@@ -260,6 +270,9 @@ import {
   rankAndSelectHeadlines as _rankAndSelectHeadlines,
   loadEvergreenRejectedTracker as _loadEvergreenRejectedTrackerAt,
   isEvergreenRejected as _isEvergreenRejected,
+  evergreenRejectionKind as _evergreenRejectionKind,
+  computeEvergreenPoolEpoch as _computeEvergreenPoolEpoch,
+  EVERGREEN_POOL_NAME as _EVERGREEN_POOL_NAME,
   appendEvergreenRejected as _appendEvergreenRejected,
   strikeEvergreenKeyword as _strikeEvergreenKeyword,
   EVERGREEN_STRIKE_LIMIT as _EVERGREEN_STRIKE_LIMIT,
@@ -345,6 +358,8 @@ import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
 import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
 import { SEO_DESCRIPTION_MIN, assertSeoDescriptionMinimum } from './lib/seo-description-contract.mjs';
 import { repairSeoTitleFields } from './lib/seo-title-repair.mjs';
+import { editorialHeadlineGuidance } from './lib/editorial-headline-guidance.mjs';
+import { enrichArticleInternalLinks } from './lib/contextual-article-links.mjs';
 import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.mjs';
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
 import { activeCorpusCoreMap } from '../../scripts/lib/corpus-sections.mjs';
@@ -873,6 +888,8 @@ function countTopicalHits(text, national) {
 // interno fallisce fail-open e non rigetta, ma una cache avvelenata da un
 // throw inatteso sopravviverebbe all'intero run.
 const _preSpendGateCache = new Map();
+let _decisionApiMissingKeyLogged = false;
+let _decisionApiCircuitOpen = false;
 
 // La chiave della memo. Estratta perche' ora la calcola il wrapper di cache e
 // non piu' il corpo del classifier. Trimmata una volta sola cosi' che la
@@ -1012,6 +1029,15 @@ ${sourceHint ? `FONTE: ${sourceHint}\n` : ''}${summary ? `SOMMARIO: ${String(sum
 Rispondi ESATTAMENTE in questo formato (una riga):
 relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
 
+  // Decisions API e' solo il nuovo primo tentativo. Se manca la chiave o la
+  // chiamata fallisce, il wrapper restituisce null e si prosegue nel percorso
+  // LLM storico qui sotto: questa integrazione non sceglie un provider
+  // fallback separato.
+  if (process.env.DECISION_API_ENABLED === '1') {
+    const decision = await tryDecisionsApiClassifier(prompt, classifierCallTimeout, SECTION_NAME);
+    if (decision) return decision;
+  }
+
   let text = '';
   try {
     text = await _aiCallLLM(
@@ -1058,6 +1084,32 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
     parsed,
   };
   return result;
+}
+
+async function tryDecisionsApiClassifier(input, timeoutMs, sectionName) {
+  if (_decisionApiCircuitOpen) return null;
+  if (!String(process.env.DECISION_API_KEY || '').trim()) {
+    if (!_decisionApiMissingKeyLogged) {
+      console.error(`PRESPEND_DECISION_API_FALLBACK section=${sectionName || 'unknown'} code=DECISIONS_API_KEY_MISSING`);
+      _decisionApiMissingKeyLogged = true;
+    }
+    _decisionApiCircuitOpen = true;
+    return null;
+  }
+  try {
+    return await classifyWithDecisionsApi({
+      apiKey: process.env.DECISION_API_KEY,
+      input,
+      instructions: 'Use the editorial scope, inclusions and exclusions in the input. Evaluate its HEADLINE, FONTE and SOMMARIO, then choose relevant only when the described content satisfies that scope.',
+      timeoutMs,
+    });
+  } catch (err) {
+    // Restituisce null per riprendere il percorso LLM storico senza loggare
+    // testo sorgente, body della risposta o credenziali.
+    _decisionApiCircuitOpen = true;
+    console.error(`PRESPEND_DECISION_API_FALLBACK section=${sectionName || 'unknown'} code=${err?.code || 'DECISIONS_API_ERROR'}`);
+    return null;
+  }
 }
 
 // Tetto di chiamate al classifier per invocazione del gate.
@@ -2080,8 +2132,8 @@ const RUN_REPORT = {
     checked: 0,
     // Motivi di scarto, mutuamente esclusivi e nell'ordine in cui il
     // pre-flight li applica.
-    skippedBanned: 0, // ledger keywords[] — duplicato confermato o topic-gate abort
-    skippedStruck: 0, // ledger strikes{} ≥ EVERGREEN_STRIKE_LIMIT
+    skippedBanned: 0, // ledger bans[] — duplicato confermato o topic-gate abort
+    skippedStruck: 0, // ledger strikes[] ≥ EVERGREEN_STRIKE_LIMIT nel contesto corrente
     skippedTopicCoverage: 0, // topic-coverage-guard: stesso mestiere entro la finestra
     skippedTitleJaccard: 0, // Jaccard sul titolo di un articolo esistente
     skippedFamily: 0, // evergreenTopicFamily: stessa famiglia (spesso satura)
@@ -4220,7 +4272,7 @@ function buildDynamicEvergreenTopicsSvizzera() {
 //    ri-derivato per via combinatoria invece che a mano.
 //
 // ROTAZIONE 2026-10-04 (#2085). Il watchdog ha misurato 610/610 keyword
-// rifiutate: 300 dal ledger permanente, 12 da strike, 44 da copertura recente,
+// rifiutate: 300 dal ledger evergreen, 12 da strike, 44 da copertura recente,
 // 228 dal title-Jaccard e 26 da famiglia satura. Allargare la soglia o svuotare
 // le bans avrebbe rimesso nel ciclo duplicati già confermati. La rotazione ha
 // mantenuto bounded a 610 il denominatore di quella versione, ma dieci pilastri
@@ -6100,7 +6152,7 @@ const EVERGREEN_FACTS_BRIEF = `FATTI VERIFICATI (ground truth — il fact-checke
 // 27 anchor, TUTTI dal brief frontaliero (misurato a parte con
 // extractSourceAnchors — stesso numero, due lenti indipendenti).
 // Sei tentativi, poi uno strike; tre strike e la keyword muore. Al 2026-08-09
-// 94 delle 110 keyword del pool svizzero erano gia' morte (42 ban permanenti,
+// 94 delle 110 keyword del pool svizzero erano gia' morte (42 ban del ledger,
 // 52 per strike) e il run finiva con «Tutte le keyword evergreen risultano
 // gia' coperte dal pre-flight».
 //
@@ -8214,7 +8266,7 @@ export function parseHeadlineDate(text) {
     if (!Number.isNaN(d.getTime())) return { date: d, format: 'time-datetime' };
   }
 
-  const plain = text.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/gi, ' ').replace(/\s+/g, ' ');
+  const plain = stripHtmlTags(text).replace(/&nbsp;/gi, ' ').replace(/\s+/g, ' ');
 
   // ISO per primo: e' l'unica forma non ambigua, e `2026-08-12` non puo' essere
   // letta male da nessuna delle regole successive.
@@ -8322,6 +8374,23 @@ export function parseFeedDate(raw) {
   return Number.isNaN(d.getTime()) ? null : d;
 }
 
+/** Trova la fine di un tag senza confondere `>` dentro un attributo quotato. */
+function stripHtmlTags(markup) {
+  const source = String(markup || '');
+  let text = '';
+  let cursor = 0;
+  let tagStart = source.indexOf('<');
+  while (tagStart !== -1) {
+    const tagEnd = findHtmlTagEndOutsideQuotes(source, tagStart);
+    if (tagEnd < 0) break;
+    text += source.slice(cursor, tagStart);
+    text += ' ';
+    cursor = tagEnd + 1;
+    tagStart = source.indexOf('<', cursor);
+  }
+  return text + source.slice(cursor);
+}
+
 /** A quale lingua attribuire un nome di mese, per la sola etichetta di formato. */
 function monthFormatTag(name) {
   if (/^(gennaio|gen|febbraio|marzo|aprile|maggio|mag|giugno|giu|luglio|lug|agosto|ago|settembre|set|ottobre|ott|novembre|dicembre|dic)$/.test(name)) return 'it-textual';
@@ -8332,27 +8401,33 @@ function monthFormatTag(name) {
 
 /** URL → data delle card Neuhausen, con i confini delle section annidate rispettati. */
 function nestedNeuhausenCards(html, baseUrl) {
-  const sectionTagRe = /<!--[\s\S]*?-->|<script\b[^>]*>[\s\S]*?<\/script\s*>|<style\b[^>]*>[\s\S]*?<\/style\s*>|<\/?section\b[^>]*>/gi;
   const rootSections = [];
   const sectionStack = [];
+  let cursor = 0;
   let tag;
-  while ((tag = sectionTagRe.exec(html)) !== null) {
-    const markup = tag[0];
-    if (/^(?:<!--|<script\b|<style\b)/i.test(markup)) continue;
-    if (/^<\//u.test(markup)) {
+  while ((tag = nextHtmlTag(html, cursor, true)) !== null) {
+    cursor = tag.end;
+    if (!tag.closing && (tag.name === 'script' || tag.name === 'style')) {
+      const rawClose = findHtmlRawTextClosingTag(html, tag.end, tag.name);
+      if (!rawClose) break;
+      cursor = rawClose.end;
+      continue;
+    }
+    if (tag.name !== 'section') continue;
+    if (tag.closing) {
       const section = sectionStack.pop();
       if (!section) continue;
-      section.contentEnd = tag.index;
-      section.closeEnd = sectionTagRe.lastIndex;
+      section.contentEnd = tag.start;
+      section.closeEnd = tag.end;
       const parent = sectionStack[sectionStack.length - 1];
       (parent ? parent.children : rootSections).push(section);
-    } else if (!/\/\s*>$/u.test(markup)) {
+    } else if (!tag.selfClosing) {
       sectionStack.push({
-        contentStart: sectionTagRe.lastIndex,
+        contentStart: tag.end,
         contentEnd: null,
         closeEnd: null,
         children: [],
-        openStart: tag.index,
+        openStart: tag.start,
       });
     }
   }
@@ -8373,32 +8448,40 @@ function nestedNeuhausenCards(html, baseUrl) {
   };
   for (const section of rootSections) collectSections(section);
   for (const section of sections) {
-    const dateNode = ownSectionContent(section).match(/<h4\b[^>]*>([\s\S]*?)<\/h4>/i);
-    section.date = parseHeadlineDate(dateNode?.[1] || '')?.date || null;
+    const dateNode = nextHtmlElement(ownSectionContent(section), 'h4');
+    section.date = parseHeadlineDate(dateNode?.inner || '')?.date || null;
   }
 
   const datesByUrl = new Map();
-  const linkRe = /<a\s[^>]*href=["']([^"']+)["'][^>]*>/gi;
-  let link;
-  while ((link = linkRe.exec(html)) !== null) {
+  let link = nextHeadlineAnchor(html);
+  while (link) {
+    const nextLink = nextHeadlineAnchor(html, link.end);
+    const rawHref = headlineHrefValue(link.attrs);
+    if (!rawHref) {
+      link = nextLink;
+      continue;
+    }
     let dateSection = null;
     for (const section of sections) {
-      if (!section.date || link.index < section.contentStart || link.index >= section.contentEnd) continue;
+      if (!section.date || link.start < section.contentStart || link.start >= section.contentEnd) continue;
       if (!dateSection
         || section.contentEnd - section.contentStart < dateSection.contentEnd - dateSection.contentStart) {
         dateSection = section;
       }
     }
-    if (!dateSection) continue;
-    try {
-      const href = new URL(link[1], baseUrl).href;
-      if (!href.startsWith('http')) continue;
-      const specificity = dateSection.contentEnd - dateSection.contentStart;
-      const previous = datesByUrl.get(href);
-      if (!previous || specificity < previous.specificity) {
-        datesByUrl.set(href, { date: dateSection.date, specificity });
-      }
-    } catch { /* link non assoluto: l'estrattore principale lo scarterà */ }
+    if (dateSection) {
+      try {
+        const href = new URL(rawHref, baseUrl).href;
+        if (href.startsWith('http')) {
+          const specificity = dateSection.contentEnd - dateSection.contentStart;
+          const previous = datesByUrl.get(href);
+          if (!previous || specificity < previous.specificity) {
+            datesByUrl.set(href, { date: dateSection.date, specificity });
+          }
+        }
+      } catch { /* link non assoluto: l'estrattore principale lo scarterà */ }
+    }
+    link = nextLink;
   }
   return new Map([...datesByUrl].map(([href, entry]) => [href, entry.date]));
 }
@@ -8407,21 +8490,23 @@ function nestedNeuhausenCards(html, baseUrl) {
 function extractDatesFromHtml(html, baseUrl) {
   const quirks = arguments[2] || {};
   const dateMap = new Map();
-  // Match <time datetime="..."> anywhere in HTML — build global date context
-  const timeRe = /<time[^>]*datetime=["']([^"']+)["'][^>]*>/gi;
-  let tm;
-  while ((tm = timeRe.exec(html)) !== null) {
-    const dateStr = tm[1];
-    const pos = tm.index;
-    // Find the nearest <a href> within 500 chars before or after this <time>
-    const context = html.slice(Math.max(0, pos - 500), pos + 500);
-    const nearbyLink = context.match(/href=["'](https?:\/\/[^"']+)["']/);
-    if (nearbyLink) {
-      try {
-        const d = new Date(dateStr);
-        if (!isNaN(d.getTime())) dateMap.set(nearbyLink[1], d);
-      } catch { /* skip invalid dates */ }
+  // Legge gli elementi con il walker: `>` dentro un attributo non tronca il tag.
+  let time = nextHtmlTag(html);
+  while (time) {
+    if (!time.closing && time.name === 'time') {
+      const dateStr = headlineAttributeValue(time.attrs, 'datetime');
+      const pos = time.start;
+      // Find the nearest <a href> within 500 chars before or after this <time>
+      const context = html.slice(Math.max(0, pos - 500), pos + 500);
+      const nearbyLink = context.match(/href=["'](https?:\/\/[^"']+)["']/);
+      if (dateStr && nearbyLink) {
+        try {
+          const d = new Date(dateStr);
+          if (!isNaN(d.getTime())) dateMap.set(nearbyLink[1], d);
+        } catch { /* skip invalid dates */ }
+      }
     }
+    time = nextHtmlTag(html, time.end);
   }
 
   // Alcune liste istituzionali mettono il link al PDF in fondo alla card,
@@ -8451,17 +8536,35 @@ function extractDatesFromHtml(html, baseUrl) {
   // non solo per la prima che l'aveva imparata — stesso anti-pattern gia'
   // corretto in scripts/lib/postch-job-parser.mjs (parseDdMmYyyy) e
   // scripts/crawl-ge-agenda.mjs (parseGeneveDateFr / isValidCalendarDate).
-  const anchorRe = /<a\s[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
-  let am;
+  let anchor = nextHeadlineAnchor(html);
   let lastAnchorEnd = 0;
-  while ((am = anchorRe.exec(html)) !== null) {
-    const anchorStart = am.index;
-    const anchorEnd = anchorRe.lastIndex;
-    const inner = am[2];
+  while (anchor) {
+    const anchorStart = anchor.start;
+    const anchorEnd = anchor.end;
+    const inner = anchor.inner;
+    // Iteration keeps using complete anchors. The next opening tag is a
+    // separate date-window boundary so a malformed later anchor cannot donate
+    // its date to this link.
+    const nextAnchor = nextHeadlineAnchor(html, anchorEnd);
+    const nextAnchorOpening = nextHtmlOpeningTag(html, 'a', anchorEnd);
+    const rawHref = headlineHrefValue(anchor.attrs);
+    if (!rawHref) {
+      lastAnchorEnd = anchorEnd;
+      anchor = nextAnchor;
+      continue;
+    }
     // Resolve to the absolute URL so the key matches extractHeadlines' lookup.
     let href;
-    try { href = new URL(am[1], baseUrl).href; } catch { lastAnchorEnd = anchorEnd; continue; }
-    if (!href.startsWith('http') || dateMap.has(href)) { lastAnchorEnd = anchorEnd; continue; }
+    try { href = new URL(rawHref, baseUrl).href; } catch {
+      lastAnchorEnd = anchorEnd;
+      anchor = nextAnchor;
+      continue;
+    }
+    if (!href.startsWith('http') || dateMap.has(href)) {
+      lastAnchorEnd = anchorEnd;
+      anchor = nextAnchor;
+      continue;
+    }
 
     // 1) L'inner HTML dell'anchor. E' la sede esatta: il pairing link↔data non
     //    puo' sbagliare, ed e' la ragione per cui la finestra di prossimita' non
@@ -8476,13 +8579,13 @@ function extractDatesFromHtml(html, baseUrl) {
     //    non usano <time> scrivono la data: fuori dal link, dentro la card.
     if (!hit) {
       const before = html.slice(Math.max(lastAnchorEnd, anchorStart - 300), anchorStart);
-      const nextAnchor = html.indexOf('<a', anchorEnd);
-      const after = html.slice(anchorEnd, Math.min(nextAnchor === -1 ? html.length : nextAnchor, anchorEnd + 300));
+      const after = html.slice(anchorEnd, Math.min(nextAnchorOpening?.start ?? html.length, anchorEnd + 300));
       hit = parseHeadlineDate(before) || parseHeadlineDate(after);
     }
 
     lastAnchorEnd = anchorEnd;
     if (hit) dateMap.set(href, hit.date);
+    anchor = nextAnchor;
   }
 
   return dateMap;
@@ -8528,20 +8631,24 @@ function extractEmbeddedHeadlineDates(html, field) {
     }
     for (const child of Object.values(value)) visit(child);
   };
-  const scriptRe = /<script\b([^>]*)>([\s\S]*?)<\/script>/giu;
-  let match;
-  while ((match = scriptRe.exec(String(html || ''))) !== null) {
-    const attrs = match[1] || '';
+  const source = String(html || '');
+  let script = nextHtmlElement(source, 'script');
+  while (script) {
+    const nextScript = nextHtmlElement(source, 'script', script.end);
+    const attrs = script.attrs || '';
     const type = attrs.match(/\btype\s*=\s*["']([^"']+)["']/iu)?.[1] || '';
-    if (type && !/json/iu.test(type)) continue;
-    const body = match[2].trim();
-    if (!body || (!/^\s*[\[{]/u.test(body) && !/\bng-state\b/iu.test(attrs))) continue;
-    try {
-      visit(JSON.parse(body));
-    } catch {
-      // Inline JavaScript and truncated JSON are not page-state data. The
-      // opt-in quirk must fail closed instead of pairing unrelated strings.
+    const body = script.inner.trim();
+    if ((!type || /json/iu.test(type))
+      && body
+      && (/^\s*[\[{]/u.test(body) || /\bng-state\b/iu.test(attrs))) {
+      try {
+        visit(JSON.parse(body));
+      } catch {
+        // Inline JavaScript and truncated JSON are not page-state data. The
+        // opt-in quirk must fail closed instead of pairing unrelated strings.
+      }
     }
+    script = nextScript;
   }
   return out;
 }
@@ -8588,10 +8695,53 @@ function headlineAttributeValue(attrs, name) {
   return match ? (match[1] ?? match[2] ?? match[3] ?? '') : '';
 }
 
+function headlineHrefValue(attrs) {
+  const href = headlineAttributeValue(attrs, 'href').trim();
+  return href || null;
+}
+
+/**
+ * Walk opening anchors before balancing them, so a malformed or unlinked
+ * `<a>` cannot borrow the closing tag of the next real link.
+ */
+function scanHeadlineAnchor(html, from = 0, { requireHref = false } = {}) {
+  let opening = nextHtmlOpeningTag(html, 'a', from);
+  while (opening) {
+    if (opening.selfClosing || (requireHref && !headlineHrefValue(opening.attrs))) {
+      opening = nextHtmlOpeningTag(html, 'a', opening.end);
+      continue;
+    }
+
+    let tag = nextHtmlTag(html, opening.end);
+    while (tag && tag.name !== 'a') tag = nextHtmlTag(html, tag.end);
+    if (tag?.closing) {
+      return {
+        ...opening,
+        openEnd: opening.end,
+        closeStart: tag.start,
+        end: tag.end,
+        inner: html.slice(opening.end, tag.start),
+      };
+    }
+
+    // A new opening anchor before this one closes makes the first malformed;
+    // resume there rather than letting it consume a later link's `</a>`.
+    opening = nextHtmlOpeningTag(html, 'a', opening.end);
+  }
+  return null;
+}
+
+function nextHeadlineAnchor(html, from = 0) {
+  return scanHeadlineAnchor(html, from, { requireHref: true });
+}
+
+function nextBalancedHeadlineAnchor(html, from = 0) {
+  return scanHeadlineAnchor(html, from);
+}
+
 function headlineTextFromMarkup(markup) {
-  return decodeHtmlEntities(String(markup || '')
-    .replace(/<!--[\s\S]*?-->/g, ' ')
-    .replace(/<[^>]+>/g, ' ')
+  return decodeHtmlEntities(stripHtmlTags(String(markup || '')
+    .replace(/<!--[\s\S]*?-->/g, ' '))
     .replace(/\s+/g, ' ')
     .trim());
 }
@@ -8610,14 +8760,23 @@ function isGenericHeadlineLinkLabel(text) {
 }
 
 function headlineMarkupWithoutActionLinks(markup) {
-  return String(markup || '').replace(/<a\b[^>]*>([\s\S]*?)<\/a>/gi, (full, inner) => {
-    const openEnd = full.indexOf('>');
-    const openTag = openEnd === -1 ? full : full.slice(0, openEnd + 1);
+  const source = String(markup || '');
+  let output = '';
+  let cursor = 0;
+  let anchor = nextBalancedHeadlineAnchor(source);
+  while (anchor) {
+    output += source.slice(cursor, anchor.start);
+    const openTag = source.slice(anchor.start, anchor.openEnd);
     const accessibleLabel = headlineAttributeValue(openTag, 'aria-label')
       || headlineAttributeValue(openTag, 'title')
-      || inner;
-    return isGenericHeadlineLinkLabel(accessibleLabel) ? ' ' : full;
-  });
+      || anchor.inner;
+    if (!isGenericHeadlineLinkLabel(accessibleLabel)) {
+      output += source.slice(anchor.start, anchor.end);
+    }
+    cursor = anchor.end;
+    anchor = nextBalancedHeadlineAnchor(source, anchor.end);
+  }
+  return output + source.slice(cursor);
 }
 
 function headlineCandidateIsUsable(text) {
@@ -8639,12 +8798,11 @@ function configuredHeadlineFromAnchor(anchorTag, quirks) {
  * server-rendered delle liste comunali (e tollerante verso HTML incompleto). */
 function headlineAncestorStack(html, before) {
   const stack = [];
-  const tagRe = /<(\/)?([a-zA-Z][\w:-]*)([^>]*)>/g;
-  let match;
-  while ((match = tagRe.exec(html)) !== null && match.index < before) {
-    const closing = match[1] === '/';
-    const name = match[2].toLowerCase();
-    const attrs = match[3] || '';
+  let cursor = 0;
+  let tag;
+  while ((tag = nextHtmlTag(html, cursor)) !== null && tag.start < before) {
+    cursor = tag.end;
+    const { closing, name, attrs } = tag;
     if (closing) {
       for (let i = stack.length - 1; i >= 0; i -= 1) {
         if (stack[i].name !== name) continue;
@@ -8653,26 +8811,40 @@ function headlineAncestorStack(html, before) {
       }
       continue;
     }
-    if (HEADLINE_VOID_ELEMENTS.has(name) || /\/\s*$/.test(attrs)) continue;
-    stack.push({ name, attrs, openEnd: tagRe.lastIndex, start: match.index });
+    if (HEADLINE_VOID_ELEMENTS.has(name) || tag.selfClosing) continue;
+    stack.push({ name, attrs, openEnd: tag.end, start: tag.start });
   }
   return stack;
 }
 
 function headlineElementEnd(html, node) {
-  const closeRe = new RegExp('<(/?)' + node.name + '(?=[\\s/>])[^>]*>', 'gi');
-  closeRe.lastIndex = node.openEnd;
   let depth = 1;
-  let match;
-  while ((match = closeRe.exec(html)) !== null) {
-    if (match[1] === '/') {
+  let cursor = node.openEnd;
+  let tag;
+  while ((tag = nextHtmlTag(html, cursor)) !== null) {
+    cursor = tag.end;
+    if (tag.name !== node.name) continue;
+    if (tag.closing) {
       depth -= 1;
-      if (depth === 0) return { start: match.index, end: closeRe.lastIndex };
-    } else if (!/\/\s*>$/.test(match[0])) {
+      if (depth === 0) return { start: tag.start, end: tag.end };
+    } else if (!tag.selfClosing) {
       depth += 1;
     }
   }
   return { start: html.length, end: html.length };
+}
+
+/** Find balanced elements in opening-tag order without skipping descendants. */
+function nextHeadlineElementForOpening(html, predicate, from = 0) {
+  let opening = nextHtmlTag(html, from);
+  while (opening) {
+    if (!opening.closing && predicate(opening)) {
+      const element = nextHtmlElementWhere(html, (candidate) => candidate.start === opening.start, opening.start);
+      if (element) return element;
+    }
+    opening = nextHtmlTag(html, opening.end);
+  }
+  return null;
 }
 
 function headlineNodeHasHint(node) {
@@ -8689,11 +8861,12 @@ function isHeadlineCardNode(node) {
 
 function headlineStackHasPremiumMarker(stack, inlineMarkup = '') {
   const nodes = [...stack];
-  const tagRe = /<(\/)?([a-zA-Z][\w:-]*)([^>]*)>/g;
-  let match;
-  while ((match = tagRe.exec(inlineMarkup)) !== null) {
-    if (match[1]) continue;
-    nodes.push({ name: match[2].toLowerCase(), attrs: match[3] || '' });
+  let cursor = 0;
+  let tag;
+  while ((tag = nextHtmlTag(inlineMarkup, cursor)) !== null) {
+    cursor = tag.end;
+    if (tag.closing) continue;
+    nodes.push({ name: tag.name, attrs: tag.attrs });
   }
 
   return nodes.some((node) => {
@@ -8727,28 +8900,34 @@ function publicCardLead(html, linkStart, quirks) {
     const range = headlineElementEnd(html, card);
     const inner = html.slice(card.openEnd, range.start);
     if (mode === 'media-title') {
-      const imageRe = /<(?:img|source)\b[^>]*>/gi;
-      let image;
-      while ((image = imageRe.exec(inner)) !== null) {
-        const title = headlineTextFromMarkup(headlineAttributeValue(image[0], 'title'));
-        if (title && title.length <= 1200) return title;
+      let image = nextHtmlTag(inner);
+      while (image) {
+        if (!image.closing && (image.name === 'img' || image.name === 'source')) {
+          const title = headlineTextFromMarkup(headlineAttributeValue(image.attrs, 'title'));
+          if (title && title.length <= 1200) return title;
+        }
+        image = nextHtmlTag(inner, image.end);
       }
     }
     if (mode === 'text') {
-      const paragraphRe = /<p\b[^>]*>([\s\S]*?)<\/p>/gi;
-      let paragraph;
-      while ((paragraph = paragraphRe.exec(inner)) !== null) {
-        const text = headlineTextFromMarkup(paragraph[1]);
+      let paragraph = nextHeadlineElementForOpening(inner, (tag) => tag.name === 'p');
+      while (paragraph) {
+        const text = headlineTextFromMarkup(paragraph.inner);
         if (text.length >= 20) return text.slice(0, 600);
+        paragraph = nextHeadlineElementForOpening(inner, (tag) => tag.name === 'p', paragraph.openEnd);
       }
-      const hintedRe = /<([a-z][\w:-]*)\b([^>]*)>([\s\S]*?)<\/\1>/gi;
-      while ((paragraph = hintedRe.exec(inner)) !== null) {
-        const attrs = paragraph[2] || '';
+      let hinted = nextHeadlineElementForOpening(inner, () => true);
+      while (hinted) {
+        const attrs = hinted.attrs || '';
         if (!/(?:lead|teaser|description|summary|abstract)/i.test(
           headlineAttributeValue(attrs, 'class') + ' ' + headlineAttributeValue(attrs, 'id'),
-        )) continue;
-        const text = headlineTextFromMarkup(paragraph[3]);
+        )) {
+          hinted = nextHeadlineElementForOpening(inner, () => true, hinted.openEnd);
+          continue;
+        }
+        const text = headlineTextFromMarkup(hinted.inner);
         if (text.length >= 20) return text.slice(0, 600);
+        hinted = nextHeadlineElementForOpening(inner, () => true, hinted.openEnd);
       }
     }
   }
@@ -8815,17 +8994,20 @@ function structuralHeadlineForLink(html, linkStart, anchorTag) {
     ];
     for (const value of cardAttributes) addCandidate(value, 95);
 
-    const headingRe = /<h[1-6]\b[^>]*>([\s\S]*?)<\/h[1-6]>/gi;
-    let match;
-    while ((match = headingRe.exec(inner)) !== null) addCandidate(match[1], 80, match.index);
+    let heading = nextHeadlineElementForOpening(inner, (tag) => /^h[1-6]$/u.test(tag.name));
+    while (heading) {
+      addCandidate(heading.inner, 80, heading.start);
+      heading = nextHeadlineElementForOpening(inner, (tag) => /^h[1-6]$/u.test(tag.name), heading.openEnd);
+    }
 
-    const hintedRe = /<([a-z][\w:-]*)\b([^>]*)>([\s\S]*?)<\/\1>/gi;
-    while ((match = hintedRe.exec(inner)) !== null) {
-      const attrs = match[2] || '';
+    let hinted = nextHeadlineElementForOpening(inner, () => true);
+    while (hinted) {
+      const attrs = hinted.attrs || '';
       const hint = headlineAttributeValue(attrs, 'class') + ' ' + headlineAttributeValue(attrs, 'id');
       if (/(?:title|headline|subject|caption)/i.test(hint)) {
-        addCandidate(match[3], 75, match.index);
+        addCandidate(hinted.inner, 75, hinted.start);
       }
+      hinted = nextHeadlineElementForOpening(inner, () => true, hinted.openEnd);
     }
 
     candidates.sort((a, b) => b.score - a.score || a.distance - b.distance);
@@ -8841,17 +9023,26 @@ function extractHeadlines(html, baseUrl) {
   const results = [];
   const htmlDateMap = extractDatesFromHtml(html, baseUrl, source?.quirks);
   const embeddedDateMap = extractEmbeddedHeadlineDates(metadataHtml, source?.quirks?.embeddedDateField);
-  // Match <a href="...">text</a> — capture href and inner text
-  const linkRe = /<a\s[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
-  let m;
-  while ((m = linkRe.exec(html)) !== null) {
-    const ancestors = headlineAncestorStack(html, m.index);
-    const anchorTagEnd = m[0].indexOf('>');
-    const anchorTag = anchorTagEnd === -1 ? m[0] : m[0].slice(0, anchorTagEnd + 1);
+  // Match <a href="...">text</a> with the same quote-aware walker used by
+  // the ancestor/date scanners; an attribute value may contain `>`.
+  let anchor = nextHeadlineAnchor(html);
+  while (anchor) {
+    const nextAnchor = nextHeadlineAnchor(html, anchor.end);
+    const ancestors = headlineAncestorStack(html, anchor.start);
+    const anchorTag = html.slice(anchor.start, anchor.openEnd);
+    const markup = html.slice(anchor.start, anchor.end);
     if (source?.quirks?.excludePaywalledCards
-      && headlineStackHasPremiumMarker(ancestors, m[0])) continue;
-    let href = m[1];
-    let text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+      && headlineStackHasPremiumMarker(ancestors, markup)) {
+      anchor = nextAnchor;
+      continue;
+    }
+    const rawHref = headlineHrefValue(anchor.attrs);
+    if (!rawHref) {
+      anchor = nextAnchor;
+      continue;
+    }
+    let href = rawHref;
+    let text = headlineTextFromMarkup(anchor.inner).replace(/\s+/g, ' ').trim();
     const configuredHeadline = configuredHeadlineFromAnchor(anchorTag, source?.quirks);
     if (configuredHeadline) text = configuredHeadline;
     // Federal AEM sites (admin.ch, seco.admin.ch — same CMS) prepend every
@@ -8862,26 +9053,42 @@ function extractHeadlines(html, baseUrl) {
     // boilerplate that never carries a topic signal.
     text = text.replace(/^maggiori informazioni su[:\s]+/i, '').trim();
     if (isGenericHeadlineLinkLabel(text)) {
-      text = structuralHeadlineForLink(html, m.index, anchorTag);
-      if (!text) continue;
+      text = structuralHeadlineForLink(html, anchor.start, anchorTag);
+      if (!text) {
+        anchor = nextAnchor;
+        continue;
+      }
     }
     // Only keep links with meaningful text (likely headlines)
-    if (text.length < 15 || text.length > 300) continue;
+    if (text.length < 15 || text.length > 300) {
+      anchor = nextAnchor;
+      continue;
+    }
     // Resolve relative URLs
     try {
       href = new URL(href, baseUrl).href;
-    } catch { continue; }
+    } catch {
+      anchor = nextAnchor;
+      continue;
+    }
     // Skip anchor links, javascript, mailto, etc.
-    if (!href.startsWith('http')) continue;
+    if (!href.startsWith('http')) {
+      anchor = nextAnchor;
+      continue;
+    }
     // Skip non-article links (categories, tags, pagination, login, etc.)
-    if (/\/(tag|categor|page|login|registr|cookie|privacy|contatt|archiv|abonn)/i.test(href)) continue;
+    if (/\/(tag|categor|page|login|registr|cookie|privacy|contatt|archiv|abonn)/i.test(href)) {
+      anchor = nextAnchor;
+      continue;
+    }
     // Extract date from URL path or from nearby <time> elements
     const date = extractDateFromUrl(href)
       || htmlDateMap.get(href)
       || embeddedDateMap.get(embeddedHeadlineDateKey(text))
       || null;
-    const lead = publicCardLead(html, m.index, source?.quirks);
+    const lead = publicCardLead(html, anchor.start, source?.quirks);
     results.push({ url: href, headline: text, date, ...(lead ? { lead } : {}) });
+    anchor = nextAnchor;
   }
   // Deduplicate by URL
   const seen = new Set();
@@ -10279,15 +10486,15 @@ Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico d
   const ctaDefaultLine = localNewsSource
     ? `CTA: nessuna CTA obbligatoria. Chiudi body3 con un link nav: solo se un tool è davvero pertinente alla notizia (es. strade e valichi → border, traffic-history).`
     : IS_FRONTALIERE
-    ? `CTA: body3 DEVE terminare con CTA verso il tool più pertinente al tema (default: calcolatore stipendio). Oltre al catalogo nav: qui sotto, sono disponibili: casa→renovation, telefonia→mobile, vivere CH→living-ch, vivibilità→livability.`
-    : `CTA: body3 DEVE terminare con CTA verso il tool più pertinente al tema (default: calcolatore stipendio). Oltre al catalogo nav: qui sotto, sono disponibili: casa→renovation, telefonia→mobile, vivere CH→living-ch, vivibilità→livability.`;
+    ? `CTA: termina body3 con un link al tool pertinente; senza intento chiaro, ometti la CTA. Oltre al catalogo nav: qui sotto, sono disponibili: casa→renovation, telefonia→mobile, vivere CH→living-ch, vivibilità→livability.`
+    : `CTA: termina body3 con un link al tool pertinente; senza intento chiaro, ometti la CTA. Oltre al catalogo nav: qui sotto, sono disponibili: casa→renovation, telefonia→mobile, vivere CH→living-ch, vivibilità→livability.`;
 
   const internalLinksRuleLines = localNewsSource
     ? `LINK INTERNI — sintassi ESCLUSIVA \`[testo](nav:azione)\`, SOLO se pertinenti alla notizia: nessun minimo, e zero link è corretto per cronaca, sport e cultura.`
-    : `LINK INTERNI — sintassi ESCLUSIVA \`[testo](nav:azione)\`, MINIMO 3 per articolo (4 se supera 1200 parole):
-- 1 in body1 o body2 (contestuale al fatto)
-- 1 in body2 o body3 (contestuale all'analisi)
-- 1 nella CTA finale di body3 (calculator preferito)`;
+    : `LINK INTERNI — sintassi ESCLUSIVA \`[testo](nav:azione)\`, massimo 3 collegamenti pertinenti per articolo:
+- Se utile, in body1 o body2 (contestuale al fatto)
+- Se utile, in body2 o body3 (contestuale all'analisi)
+- CTA finale di body3 verso la destinazione pertinente; omettila se manca un intento chiaro`;
 
   // Una sola volta. La specifica di `imagePrompt` era dichiarata due volte —
   // qui dentro lo schema JSON e di nuovo in REGOLE FINALI
@@ -10516,7 +10723,7 @@ Genera JSON (no markdown, no code fences):
   "slugs": { "it": "<<SLUG:it = ID>>", "en": "<<SLUG:en>>", "de": "<<SLUG:de>>", "fr": "<<SLUG:fr>>" },`}
   "content": {
     "it": {${_isBody ? '' : `
-      "title": "Titolo giornalistico con keyword (OBBLIGATORIO ≤ 60 caratteri totali, target 50-55. Il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo nel title)",
+      "title": "${editorialHeadlineGuidance(primaryLocale)}",
       "excerpt": "Sottotitolo con dati concreti DALLA FONTE (max 160 chars)",`}${_isMeta ? '' : `
 ${localNewsSource ? `      "body1": "Cronaca locale — inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. Lunghezza secondo MINIMUM LENGTH (escluse TL;DR/Fatti chiave).",
       "body2": "Contesto: sviluppi, reazioni e dati della fonte. Contenuto DIVERSO da body1. Lunghezza secondo MINIMUM LENGTH.",
@@ -11874,7 +12081,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
             { role: 'system', content: `Sei un giornalista finanziario esperto. Rispondi SOLO con JSON valido senza markdown.\n\n${JSON_QUOTE_SAFETY_RULE_IT}` },
             {
               role: 'user',
-              content: `Riformula il seguente titolo in italiano per il sito Frontaliere Ticino.\n\nTITOLO ATTUALE (${firstCap.originalLength} caratteri, troppo lungo):\n${itContent.title}\n\nVINCOLI OBBLIGATORI:\n- MASSIMO 60 caratteri totali (target 50-55).\n- NON includere il suffisso " | Frontaliere Ticino" (verrà aggiunto automaticamente).\n- Mantieni la keyword principale e il significato.\n- Stile giornalistico, niente clickbait.\n\nRispondi con JSON: {"title": "..."}`,
+              content: `Riformula il seguente titolo in italiano per il sito Frontaliere Ticino.\n\nTITOLO ATTUALE (${firstCap.originalLength} caratteri, troppo lungo):\n${itContent.title}\n\nVINCOLI OBBLIGATORI:\n- MASSIMO 60 caratteri totali (target 50-55).\n- NON includere il suffisso " | Frontaliere Ticino" (verrà aggiunto automaticamente).\n- Mantieni la keyword principale e il significato.\n- Stile giornalistico, niente clickbait.\n\nRispondi con JSON: {"title": "..."}\n${editorialHeadlineGuidance('it')}`,
             },
           ],
           // Title reformulation is a short, low-stakes rewrite to ≤60 chars whose
@@ -12805,7 +13012,7 @@ ${localizedToponymInstruction(targetLang)}`;
       // Se la lingua target tende a espandersi (DE/FR), riformula in modo più conciso
       // mantenendo la keyword principale — non tradurre letteralmente parola per parola.
       callWithRetry(makePrompt(
-        `CONTENUTO ITALIANO DA TRADURRE:\n- title: ${sourceContent.title}\n- excerpt: ${sourceContent.excerpt}\n\nVINCOLI OBBLIGATORI per il title tradotto:\n- MASSIMO 60 caratteri totali (target 50-55).\n- NON includere "| Frontaliere Ticino" (aggiunto automaticamente).\n- Mantieni la keyword principale; abbrevia o riformula se necessario per restare entro 60 caratteri.`,
+        `CONTENUTO ITALIANO DA TRADURRE:\n- title: ${sourceContent.title}\n- excerpt: ${sourceContent.excerpt}\n\nVINCOLI OBBLIGATORI per il title tradotto:\n- MASSIMO 60 caratteri totali (target 50-55).\n- NON includere "| Frontaliere Ticino" (aggiunto automaticamente).\n- Mantieni la keyword principale; abbrevia o riformula se necessario per restare entro 60 caratteri.\n${editorialHeadlineGuidance(targetLang)}`,
         '{"title": "...", "excerpt": "..."}',
       ), 1000, `${targetLang}:meta`, { translation: true }).catch(onTranslateFail(`${targetLang}:meta`)),
       // Body fields with dynamic sizing + sub-chunking safety.
@@ -13295,7 +13502,7 @@ ${localizedToponymInstruction(targetLang)}`;
       console.warn(`  ⚠️ [title-cap] ${locale.toUpperCase()} title ${initialCap.originalLength} chars > ${BLOG_TITLE_RETRY_THRESHOLD} — retry traduzione titolo con vincolo di lunghezza...`);
       try {
         const retryResult = await callWithRetry(
-          `Riformula il seguente titolo in ${langName} per il sito Frontaliere Ticino.\n\nTITOLO ATTUALE (${initialCap.originalLength} caratteri, troppo lungo):\n${localeContent.title}\n\nTITOLO ITALIANO ORIGINALE (riferimento):\n${itContent.title}\n\nVINCOLI OBBLIGATORI:\n- MASSIMO 60 caratteri totali (target 50-55).\n- NON includere "| Frontaliere Ticino" (aggiunto automaticamente).\n- Mantieni la keyword principale; abbrevia o riformula in modo conciso.\n\nRispondi SOLO con JSON: {"title": "..."}`,
+          `Riformula il seguente titolo in ${langName} per il sito Frontaliere Ticino.\n\nTITOLO ATTUALE (${initialCap.originalLength} caratteri, troppo lungo):\n${localeContent.title}\n\nTITOLO ITALIANO ORIGINALE (riferimento):\n${itContent.title}\n\nVINCOLI OBBLIGATORI:\n- MASSIMO 60 caratteri totali (target 50-55).\n- NON includere "| Frontaliere Ticino" (aggiunto automaticamente).\n- Mantieni la keyword principale; abbrevia o riformula in modo conciso.\n\nRispondi SOLO con JSON: {"title": "..."}\n${editorialHeadlineGuidance(locale)}`,
           1000,
           `${locale}:title-length-retry`,
           { translation: true },
@@ -13499,10 +13706,10 @@ function validate(data, opts = {}) {
   // damage is confined to the URL, which is exactly the part that cannot be
   // fixed later without a redirect and a ranking reset.
   //
-  // Stripped rather than rejected: the leak is in the id only, and the title is
-  // right there to derive a clean one from. Failing the whole generation would
-  // throw away a good article over a prefix.
-  // ISSUE #138 PUNTO 3 — qui si RIFIUTA, non si indovina piu'.
+  // A useful residue can be stripped from the label. A pure instruction echo
+  // has no identity to recover and must be rejected; deriving an id from the
+  // title would hide the model failure and could bypass collision checks.
+  // ISSUE #138 PUNTO 3 — non si indovina piu' un valore mancante.
   //
   // Questo blocco ricostruiva l'id: toglieva il prefisso `kebab-case-` e
   // teneva il resto (`kebab-case-turismo-ticino` -> `turismo-ticino`), oppure
@@ -13520,10 +13727,8 @@ function validate(data, opts = {}) {
   // `EMPTY` e' l'unico rigetto che NON si propaga: un id assente non e'
   // ambiguo, e il blocco subito sotto lo sintetizza dal titolo italiano da
   // sempre — comportamento invariato.
-  const PROMPT_ID_LEAK_RX = /^kebab[-_]?case[-_]?/i;
   const idVerdict = parseArticleIdentityField(data.id, {
     field: 'id',
-    legacyLeaked: Boolean(data.id) && PROMPT_ID_LEAK_RX.test(String(data.id)),
   });
   if (!idVerdict.ok && idVerdict.rejection !== IDENTITY_REJECTION.EMPTY) {
     const err = new Error(
@@ -13544,6 +13749,29 @@ function validate(data, opts = {}) {
     }
     console.error(`⚠️  Campo "id" mancante — sintetizzato dal titolo IT: "${generatedId}"`);
     data.id = generatedId;
+  }
+
+  // A valid residue may be recovered (`kebab-case-turismo-ticino` →
+  // `turismo-ticino`), but a pure instruction echo has no identity to recover.
+  // The latter must trigger regeneration: inventing an id from the title here
+  // would hide the model failure and could publish a value never checked for
+  // collision by the caller.
+  const idLeak = findSlugPromptLeak(data.id);
+  if (idLeak) {
+    const recoveredId = stripSlugPromptLeak(data.id);
+    if (!recoveredId || findSlugPromptLeak(recoveredId)) {
+      const err = new Error(
+        `id RIGETTATO (${IDENTITY_REJECTION.AMBIGUOUS_LEGACY_SHAPE}): ` +
+          `il valore contiene un'istruzione del prompt (${idLeak.pattern}: "${idLeak.match}") ` +
+          `e non lascia uno slug valido: "${data.id}"\n` +
+          identityCorrectionNote(IDENTITY_REJECTION.AMBIGUOUS_LEGACY_SHAPE, { field: 'id' }),
+      );
+      err.qualityReject = true;
+      err.identityRejected = true;
+      throw err;
+    }
+    console.warn(`  ⚠️  [slug-placeholder] id ripulito: "${data.id}" → "${recoveredId}"`);
+    data.id = recoveredId;
   }
 
   // Default category to 'novita' (generic news) if missing — the mapping below
@@ -13765,7 +13993,7 @@ function validate(data, opts = {}) {
   }
   // Validate new image fields (non-blocking — provide defaults)
   if (!data.imagePrompt) {
-    data.imagePrompt = `Illustrative editorial scene about the article topic in Ticino, with symbolic objects and places, warm natural palette`;
+    data.imagePrompt = `Photorealistic synthetic editorial scene about: ${data.seo?.headline || data.seo?.title || data.content?.it?.title || data.id}. Use concrete topic-specific objects, realistic proportions and natural light; no cartoon or invented documentary event.`;
   }
   if (!data.imageAlt || typeof data.imageAlt !== 'object') {
     const itTitle = (data.content.it || data.content).title || data.id;
@@ -13807,40 +14035,22 @@ function validate(data, opts = {}) {
       // torna a essere la forma ambigua che questa fix toglie. Sanitizzare
       // prima di leggere significa buttare via la prova.
       const rawVerdict = parseArticleIdentityField(original, { field: 'slug', locale });
-      // Il taglio a 80 e' `truncateSlugAtWordBoundary` e non `.slice(0, 80)`
-      // per la ragione argomentata su `slugifySlugPart` (issue #191): a log si
-      // leggevano slug fr troncati a meta' parola, e un token spezzato e' un
-      // URL diverso, non un URL piu' corto.
-      data.slugs[locale] = truncateSlugAtWordBoundary(
-        String(data.slugs[locale])
-          .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-          .toLowerCase()
-          .replace(/[^a-z0-9-]/g, '-')
-          .replace(/-+/g, '-')
-          .replace(/^-|-$/g, ''),
-        SLUG_MAX_LENGTH,
-      );
-      // Same prompt-placeholder leak the id is guarded against above, and the
-      // reason this branch no longer strips `kebab-case-` by hand: the schema
-      // shown to the model spells the id as "kebab-case-3-5-words-max-40-chars"
-      // AND the slugs as "slug-en"/"slug-de"/"slug-fr", and only the first of
-      // the two families was ever covered here — the `slug-*` family reached
-      // production 24 times. `inspectSlugForPromptPlaceholder()` is the shared
-      // classifier, the SAME one `deriveAndSanitizeArticleSlugs()` enforces at
-      // the write path, so the two cannot drift into disagreeing about what a
-      // placeholder is. The IT slug is safe by construction (assigned from the
-      // already-cleaned id); these three are not.
-      const check = inspectSlugForPromptPlaceholder(data.slugs[locale]);
+      // Il classificatore lavora sul candidato completo. La funzione che
+      // ripulisce eventuali leak applica poi il limite di 80 ai residui validi.
+      const normalizedSlug = normalizeSlugCandidate(data.slugs[locale]);
+      // Ripulisci la forma gia' normalizzata con lo stesso classificatore del
+      // write path condiviso. Un residuo utile resta; un eco puro diventa vuoto
+      // e segue il fallback italiano provvisorio.
+      data.slugs[locale] = stripSlugPromptLeak(normalizedSlug);
       const verdict = rawVerdict.ok
-        ? parseArticleIdentityField(data.slugs[locale], { field: 'slug', locale, legacyLeaked: check.leaked })
+        ? parseArticleIdentityField(data.slugs[locale], { field: 'slug', locale })
         : rawVerdict;
       if (!verdict.ok) {
         console.warn(`  ❌ [slug-identity] Slug ${locale} RIGETTATO (${verdict.rejection}): ${verdict.detail}`);
       }
-      // ISSUE #138 PUNTO 3 — qui c'era `check.slug || data.slugs.it`, e
-      // `check.slug` era il resto del segnaposto: `slug-gaggiolo-traffic`
-      // diventava `gaggiolo-traffic`, cioe' si assumeva che il testo incollato
-      // fosse la scelta del modello. Indecidibile, quindi tolto.
+      // ISSUE #138 PUNTO 3 — il vecchio codice assumeva che il testo incollato
+      // fosse la scelta del modello. Ora `stripSlugPromptLeak()` decide in un
+      // solo punto: conserva solo un residuo che resta uno slug valido.
       //
       // Il ripiego resta lo slug ITALIANO, che non e' un indovinello ma una
       // costante: e' l'unica risposta deterministica su questa chiamata (siamo
@@ -13868,7 +14078,7 @@ function validate(data, opts = {}) {
     'calculator', 'exchange', 'health', 'cost-of-living', 'pension', 'pillar3',
     'payslip', 'tax-return', 'residency', 'ristorni', 'unemployment', 'jobs', 'companies', 'banks',
     'first-day', 'permits', 'border', 'calendar', 'whatif', 'shopping', 'transport',
-    'salary-compare', 'traffic-history',
+    'salary-compare', 'traffic-history', 'job-board', 'jobs-observatory', 'search-jobs',
     'border-map', 'municipalities', 'car-transfer', 'car-cost', 'permit-compare', 'renovation',
     'mobile', 'ral', 'parental-leave', 'nursery', 'living-ch', 'living-it', 'livability',
   ]);
@@ -14027,15 +14237,7 @@ function sanitizeBoldFormatting(data) {
 }
 
 // ── Step 3a.1: Validate CTA / internal links in body3 ──────
-const CTA_KEYWORDS_IT = [
-  'calcolatore', 'comparatore', 'simulatore', 'convertitore', 'pianificatore',
-  'frontaliereticino', 'confronto', 'calcola', 'strumenti', 'strumento',
-  'nostro sito', 'il nostro', 'piattaforma', 'scopri', 'prova',
-];
-const CTA_KEYWORDS_EN = ['calculator', 'comparator', 'simulator', 'converter', 'planner', 'our site', 'our platform', 'tool', 'try our', 'discover'];
-const CTA_KEYWORDS_DE = ['rechner', 'vergleich', 'simulator', 'umrechner', 'planer', 'unsere plattform', 'tool', 'werkzeug', 'entdecken'];
-const CTA_KEYWORDS_FR = ['calculateur', 'comparateur', 'simulateur', 'convertisseur', 'planificateur', 'notre site', 'notre plateforme', 'outil', 'découvrez'];
-
+// Historical CTA prose remains here solely for bodyTextForCantonPostcondition.
 const CTA_POOL = [
   {
     it: '\n\nPer un calcolo preciso del tuo stipendio netto come frontaliere, usa il nostro [comparatore fiscale](nav:calculator): confronta il netto in busta tra permesso G e permesso B con tutte le deduzioni aggiornate al 2026.',
@@ -14087,65 +14289,19 @@ const CTA_POOL = [
   },
 ];
 
-function pickDefaultCTA(articleCategory) {
-  const preferred = { fiscale: [0, 1, 6], pratico: [1, 7, 3], novita: [3, 0, 2], pensione: [4, 0, 5] };
-  const indices = preferred[articleCategory] || [0, 1, 2];
-  return CTA_POOL[indices[Math.floor(Math.random() * indices.length)]];
-}
-
-const DEFAULT_CTA = CTA_POOL[0];
-
 function validateAndEnforceCTA(data) {
   const contentIt = data?.content?.it || data?.content;
   if (contentIt && typeof data._cantonGuardBodyBeforeCta !== 'string') {
     data._cantonGuardBodyBeforeCta = bodyTextForQuality(contentIt);
   }
-  if (data?._localNewsSource === true) {
-    console.error('  ℹ️  CTA omessa: cronaca locale senza bisogno concreto documentato dalla fonte.');
-    return data;
-  }
-  const localeKeywords = { it: CTA_KEYWORDS_IT, en: CTA_KEYWORDS_EN, de: CTA_KEYWORDS_DE, fr: CTA_KEYWORDS_FR };
-  const cta = pickDefaultCTA(data.category);
-
-  for (const locale of ['it', 'en', 'de', 'fr']) {
-    if (!data.content[locale]) continue; // translations may not exist yet
-    // Un body3 lasciato NON tradotto (#1875) non va ricreato con la sola CTA:
-    // il moncone cancellerebbe il marker di attesa e, nella SPA, vincerebbe
-    // sul body3 italiano completo che il sito mostra al posto della chiave
-    // mancante (quella versione porta gia' la CTA italiana).
-    if (isBodyTranslationPending(data, locale, 'body3')) {
-      console.error(`  ⏳ CTA [${locale}] saltata: body3 non tradotto, resta in attesa (#1875)`);
-      continue;
-    }
-    const body3 = (data.content[locale].body3 || '').toLowerCase();
-    const keywords = localeKeywords[locale];
-    const hasCTA = keywords.some(kw => body3.includes(kw));
-
-    if (!hasCTA) {
-      console.error(`  ⚠️  CTA mancante in body3 [${locale}] — aggiungo CTA (${data.category})`);
-      data.content[locale].body3 = (data.content[locale].body3 || '') + cta[locale];
-    }
-  }
-
+  // Contextual links and the reader's CTA cards provide the relevant action.
+  // Do not append a category-random paragraph containing unrelated claims.
   return data;
 }
 
-// ── Step 3a.2: Enforce strong internal-link clusters ───────
-// Guarantees at least 2 internal nav links in article body for SEO distribution.
-// Cluster focus: taxes (entro/oltre 20km), pension, exchange CHF/EUR.
-const LINK_CLUSTER_PATTERNS = {
-  taxes20km: /(20\s?km|entro\s*i\s*20|oltre\s*i\s*20|imposta|irpef|credito\s*d[' ]?imposta|doppia\s+imposizione|accordo\s+fiscale|fascia)/i,
-  pension: /(pensione|avs|inps|lpp|secondo\s+pilastro|terzo\s+pilastro|pillar\s*3)/i,
-  exchange: /(cambio|chf|eur|franco|euro|tasso\s*di\s*cambio|valuta|bonifico|wise)/i,
-};
-
-const LINK_CLUSTER_ACTIONS = {
-  taxes20km: ['calculator', 'tax-return'],
-  pension: ['pension', 'pillar3'],
-  exchange: ['exchange', 'banks'],
-  generic: ['calculator', 'exchange'],
-};
-
+// ── Step 3a.2: Enrich existing prose with relevant multilingual links ───────
+// Historical generated appendages are still excluded by the canton checker
+// when an old article is refreshed. They are never appended to new articles.
 const INTERNAL_LINK_BLOCK = {
   it: {
     taxes20km: '\n\n## Tool utili per il tuo caso\nPer verificare in modo pratico il tuo scenario entro/oltre 20 km, usa il [calcolatore stipendio netto](nav:calculator) e la [guida dichiarazione redditi](nav:tax-return).',
@@ -14174,47 +14330,9 @@ const INTERNAL_LINK_BLOCK = {
 };
 
 function enforceStrongInternalLinks(data) {
-  if (data?._localNewsSource === true) {
-    console.error('  ℹ️  Link interni automatici omessi: cronaca locale senza destinazione nav documentata.');
-    return data;
-  }
-  for (const locale of ['it', 'en', 'de', 'fr']) {
-    if (!data.content[locale]) continue;
-
-    const bodySections = collectBodySections(data.content[locale]);
-    const body1 = String(bodySections.body1 || '');
-    const body2 = String(bodySections.body2 || '');
-    const body3 = String(bodySections.body3 || '');
-    const context = `${data.id} ${data.content[locale].title || ''} ${data.content[locale].excerpt || ''} ${Object.values(bodySections).join(' ')}`;
-
-    const cluster =
-      LINK_CLUSTER_PATTERNS.taxes20km.test(context) ? 'taxes20km'
-      : LINK_CLUSTER_PATTERNS.pension.test(context) ? 'pension'
-      : LINK_CLUSTER_PATTERNS.exchange.test(context) ? 'exchange'
-      : 'generic';
-
-    const actions = LINK_CLUSTER_ACTIONS[cluster];
-    const combined = Object.values(bodySections).join('\n');
-    const existingActions = new Set(
-      [...combined.matchAll(/\[[^\]]+\]\(nav:([a-z-]+)\)/g)].map((m) => m[1])
-    );
-    const hasAllClusterLinks = actions.every((action) => existingActions.has(action));
-    const totalLinks = [...combined.matchAll(/\[[^\]]+\]\(nav:[a-z-]+\)/g)].length;
-
-    if (!hasAllClusterLinks || totalLinks < 2) {
-      // Stessa ragione della CTA: un body2 non tradotto (#1875) non si ricrea
-      // con il solo blocco di link, che prenderebbe il posto del body2
-      // italiano mostrato dal sito al posto della chiave mancante.
-      if (isBodyTranslationPending(data, locale, 'body2')) {
-        console.error(`  ⏳ Link interni [${locale}] saltati: body2 non tradotto, resta in attesa (#1875)`);
-        continue;
-      }
-      data.content[locale].body2 = `${body2}${INTERNAL_LINK_BLOCK[locale][cluster]}`;
-      console.error(`  🔗 Link interni rinforzati in ${locale}.body2 (cluster: ${cluster})`);
-    }
-  }
-
-  return data;
+  return enrichArticleInternalLinks(data, {
+    isPending: isBodyTranslationPending, bodySections: collectBodySections,
+  });
 }
 
 /** Lazy-loaded set of normalized existing IT blog titles (lowercased, trimmed,
@@ -14984,6 +15102,14 @@ function getLastArticleId(src) {
 }
 
 function modifyRouterTs(data) {
+  // Both the primary AI flow and registerArticleFiles() converge here before
+  // touching the routing registry. Keep the final prompt-leak gate at this
+  // boundary so a producer that bypasses validate() cannot publish an echo.
+  assertNoSlugPromptLeak(data.slugs, {
+    id: data.id,
+    title: data.content?.it?.title,
+    source: 'modifyRouterTs',
+  });
   // The svizzera section does NOT maintain the BlogArticleId union in
   // router.ts (ids are loose strings, validated at runtime via REVERSE_SWISS).
   // Only the frontaliere section touches router.ts.
@@ -17067,6 +17193,12 @@ async function main() {
       const weekNum = Math.floor((Date.now() - new Date('2025-01-06').getTime()) / (7 * 24 * 60 * 60 * 1000));
       const baseIndex = weekNum % topicPool.length;
       const totalTopics = topicPool.length;
+      const evergreenLedgerContext = {
+        section: SECTION_NAME,
+        pool: _EVERGREEN_POOL_NAME,
+        poolEpoch: _computeEvergreenPoolEpoch(topicPool, SECTION_NAME),
+        now: Date.now(),
+      };
 
       // Cross-run duplicate memory (#3138, 2026-07-02): keywords already
       // confirmed duplicate post-generation in a PREVIOUS cron run. Without
@@ -17074,6 +17206,19 @@ async function main() {
       // doomed neighborhood re-attempted every 30-min run forever, since
       // each run otherwise starts with zero memory of prior failures.
       let evergreenRejectedTracker = _loadEvergreenRejectedTracker();
+
+      // Legacy decisions are allowed through this ledger pre-filter only when
+      // the duplicate preflight can revalidate them in the current context.
+      // A confirmed duplicate is immediately written back with fresh
+      // section/pool/epoch provenance; a changed topic can rotate again.
+      const rememberConfirmedEvergreenDuplicate = (keyword, reason = 'duplicate') => {
+        evergreenRejectedTracker = _appendEvergreenRejected(
+          evergreenRejectedTracker,
+          keyword,
+          { context: evergreenLedgerContext, now: Date.now(), reason },
+        );
+        try { _persistEvergreenRejectedTracker(evergreenRejectedTracker); } catch { /* best effort; next run remains fail-closed */ }
+      };
 
       RUN_REPORT.evergreenPool.ran = true;
       RUN_REPORT.evergreenPool.size = totalTopics;
@@ -17087,13 +17232,13 @@ async function main() {
         const idx = (baseIndex + offset) % totalTopics;
         const candidate = topicPool[idx];
         RUN_REPORT.evergreenPool.checked += 1;
-        if (_isEvergreenRejected(evergreenRejectedTracker, candidate.keyword)) {
+        if (_isEvergreenRejected(evergreenRejectedTracker, candidate.keyword, evergreenLedgerContext)) {
           // Ban e strike hanno cause diverse — un duplicato confermato non si
           // ripara mai, uno strike da quality-reject si — e un pool che muore
           // per l'uno o per l'altro chiede due interventi diversi
           // (allargarlo vs `reset-evergreen-strikes.mjs`). Contarli insieme
           // rendeva la diagnosi indistinguibile.
-          if ((evergreenRejectedTracker?.keywords || []).includes(candidate.keyword)) {
+          if (_evergreenRejectionKind(evergreenRejectedTracker, candidate.keyword, evergreenLedgerContext) === 'ban') {
             RUN_REPORT.evergreenPool.skippedBanned += 1;
           } else {
             RUN_REPORT.evergreenPool.skippedStruck += 1;
@@ -17103,6 +17248,7 @@ async function main() {
         }
         const check = preFlightEvergreenCheck(candidate);
         if (check.duplicate) {
+          rememberConfirmedEvergreenDuplicate(candidate.keyword);
           countEvergreenPreflightDrop(check.signal);
           console.error(`   ⏭️  [${idx}] "${candidate.keyword}" → simile a "${check.existingTitle}" [${check.existingId}] (${(check.sim * 100).toFixed(0)}%) — skip`);
         } else {
@@ -17203,9 +17349,11 @@ async function main() {
             // once, it is unlikely to succeed on the next cron run either.
             // Persisting avoids wasting ~60-90s per doomed attempt.
             // Quality-rejects (too-short/thin) intentionally excluded: LLM
-            // variance makes them transient; blocking permanently is too aggressive.
-            evergreenRejectedTracker = _appendEvergreenRejected(evergreenRejectedTracker, selectedTopic.keyword);
-            try { _persistEvergreenRejectedTracker(evergreenRejectedTracker); } catch { /* ignore */ }
+            // variance makes them transient; blocking beyond the strike TTL is too aggressive.
+            rememberConfirmedEvergreenDuplicate(
+              selectedTopic.keyword,
+              isTopicGateAbort ? 'topic-gate' : 'duplicate',
+            );
           } else if (isQualityReject && selectedTopic) {
             // A STRIKE, not a ban — the reasoning above is right that one bad
             // draft is variance, but "never record it" was the wrong conclusion:
@@ -17215,8 +17363,17 @@ async function main() {
             // 2026-08-03. Retired only at EVERGREEN_STRIKE_LIMIT.
             // Persisted immediately, same reason as the ban path: a later
             // wall-budget break or hard kill must not lose the count.
-            evergreenRejectedTracker = _strikeEvergreenKeyword(evergreenRejectedTracker, selectedTopic.keyword);
-            const n = evergreenRejectedTracker.strikes?.[selectedTopic.keyword] || 0;
+            evergreenRejectedTracker = _strikeEvergreenKeyword(
+              evergreenRejectedTracker,
+              selectedTopic.keyword,
+              { context: evergreenLedgerContext, now: Date.now() },
+            );
+            const strike = evergreenRejectedTracker.strikes
+              ?.find((entry) => entry.keyword === selectedTopic.keyword
+                && entry.section === evergreenLedgerContext.section
+                && entry.pool === evergreenLedgerContext.pool
+                && entry.poolEpoch === evergreenLedgerContext.poolEpoch);
+            const n = strike?.count || 0;
             console.error(`   ⚠️  "${selectedTopic.keyword}": strike ${n}/${_EVERGREEN_STRIKE_LIMIT} (quality reject)`);
             try { _persistEvergreenRejectedTracker(evergreenRejectedTracker); } catch { /* ignore */ }
           }
@@ -17237,8 +17394,8 @@ async function main() {
             const idx = (baseIndex + realOffset) % totalTopics;
             const candidate = topicPool[idx];
             RUN_REPORT.evergreenPool.checked += 1;
-            if (_isEvergreenRejected(evergreenRejectedTracker, candidate.keyword)) {
-              if ((evergreenRejectedTracker?.keywords || []).includes(candidate.keyword)) {
+            if (_isEvergreenRejected(evergreenRejectedTracker, candidate.keyword, evergreenLedgerContext)) {
+              if (_evergreenRejectionKind(evergreenRejectedTracker, candidate.keyword, evergreenLedgerContext) === 'ban') {
                 RUN_REPORT.evergreenPool.skippedBanned += 1;
               } else {
                 RUN_REPORT.evergreenPool.skippedStruck += 1;
@@ -17247,7 +17404,10 @@ async function main() {
               continue;
             }
             const check = preFlightEvergreenCheck(candidate);
-            if (check.duplicate) countEvergreenPreflightDrop(check.signal);
+            if (check.duplicate) {
+              rememberConfirmedEvergreenDuplicate(candidate.keyword);
+              countEvergreenPreflightDrop(check.signal);
+            }
             if (!check.duplicate) {
               selectedTopic = candidate;
               selectedOffset = realOffset;
@@ -18482,7 +18642,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
             'calculator', 'exchange', 'health', 'cost-of-living', 'pension', 'pillar3',
             'payslip', 'tax-return', 'residency', 'ristorni', 'unemployment', 'jobs', 'companies', 'banks',
             'first-day', 'permits', 'border', 'calendar', 'whatif', 'shopping', 'transport',
-            'salary-compare', 'traffic-history',
+            'salary-compare', 'traffic-history', 'job-board', 'jobs-observatory', 'search-jobs',
             'border-map', 'municipalities', 'car-transfer', 'car-cost', 'permit-compare', 'renovation',
             'mobile', 'ral', 'parental-leave', 'nursery', 'living-ch', 'living-it', 'livability',
           ]);
@@ -18514,10 +18674,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     throw e;
   }
 
-  // Run the canton guard after translation/sanitization but BEFORE CTA and
-  // internal-link injection. CTA_POOL contains generic Ticino copy; checking
-  // after that mutation would reject a valid Grigioni/Vallese guide because
-  // of the site's own navigation copy rather than the generated article.
+  // Check translated prose before contextual links are added. The historical
+  // CTA templates remain only for excluding legacy navigation copy when an
+  // existing article is refreshed. New enrichment does not append prose.
   assertGeneratedArticleQuality(data);
 
   // Step 3d: Enforce CTA / internal links (all 4 locales)
@@ -18847,15 +19006,17 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
  * cade dentro una parola, e accetta il taglio secco solo se arretrare
  * costerebbe piu' del 25% del cap. */
 const SLUG_MAX_LENGTH = 80;
-function slugifySlugPart(input) {
-  const normalized = String(input || '')
+function normalizeSlugCandidate(input) {
+  return String(input || '')
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
-  return truncateSlugAtWordBoundary(normalized, SLUG_MAX_LENGTH);
+}
+function slugifySlugPart(input) {
+  return truncateSlugAtWordBoundary(normalizeSlugCandidate(input), SLUG_MAX_LENGTH);
 }
 
 /**
@@ -18870,12 +19031,11 @@ function slugifySlugPart(input) {
  *
  * The template now says `<<ID>>` and `<<SLUG:xx>>` — outside the slug
  * alphabet, so an echo is decidable instead of merely suspicious — and the
- * parsing rejects rather than recovers (see `parseArticleIdentityField()` in
- * `lib/prompt-placeholder-guard.mjs`). THIS classifier stays exactly as it
- * was: it is the net for the values already in the registry and for the
- * secondary producers that never see the prompt, and its aggressiveness is
- * pinned to 28 hits over 15.172 published slugs. Widening or narrowing it
- * here would move that measurement, which is not what #138 item 3 asks for.
+ * parsing rejects rather than guessing (see `parseArticleIdentityField()` in
+ * `lib/prompt-placeholder-guard.mjs`). This classifier is also the net for
+ * secondary producers that never see the prompt: it recognizes legacy
+ * prefixes and instruction-shaped n-grams that a reworded prompt can leak.
+ * Its aggressiveness remains pinned by the published-registry sweep.
  *
  * A model that runs out of attention echoes them back instead of replacing
  * them — either verbatim (`slug-en`), or with the placeholder glued onto a
@@ -18883,7 +19043,7 @@ function slugifySlugPart(input) {
  * downstream noticed: `slugifySlugPart()` sees a perfectly well-formed
  * lowercase-ASCII-hyphen token and passes it through unchanged, and the
  * sanitizer in `validate()` only ever stripped the `kebab-case-` prefix — the
- * `slug-` family was never covered.
+ * `slug-` family and reworded instructions were never covered.
  *
  * MEASURED 2026-08-09 on the published `slugs.json`: 24 live slugs across 8
  * articles, all answering 200 and all listed in `sitemap-blog.xml` /
@@ -18920,6 +19080,43 @@ function slugifySlugPart(input) {
  * come through untouched.
  */
 const PROMPT_SLUG_PREFIX_RX = /^(?:slug|kebab[-_]?case)[-_]+/i;
+
+/** The schema labels that models can echo into a URL, in any locale. */
+const SLUG_PROMPT_LEAK_PATTERNS = Object.freeze([
+  { name: 'casing-convention', re: /(kebab|snake|camel|pascal|sentence)[-_]?case/gi },
+  { name: 'char-limit', re: /(?:max[-_]?\d+[-_]?(?:characters?|chars?|caratteri)|\d+[-_]?(?:characters?|chars?|caratteri)[-_]?max|max[-_]?(?:characters?|chars?|length|lunghezza)|char[-_]?limit)/gi },
+  { name: 'word-count', re: /(?:\d+[-_]\d+[-_]?(?:words?|parole)|(?:words?|parole)[-_]?max|max[-_]?\d+[-_]?(?:words?|parole)|\d+[-_]?(?:words?|parole)[-_]?max)/gi },
+  { name: 'case-instruction', re: /(?:lower|upper)[-_]?case/gi },
+  { name: 'slug-instruction', re: /(?:url[-_]?(?:safe|slug|friendly)|(?:article|your|the)[-_]slug|slug[-_](?:here|format|only|value)|formato[-_]slug)/gi },
+  { name: 'format-instruction', re: /(?:no[-_](?:accents?|diacritics?|spaces?)|senza[-_]accenti|hyphen[-_]?separated|separated[-_]by[-_]hyphens|trattini[-_]bassi)/gi },
+  { name: 'placeholder', re: /(?:placeholder|segnaposto|lorem[-_]ipsum|(?:title|titolo|text|testo|keyword|topic)[-_]here|your[-_](?:title|text|keyword|topic)|tuo[-_](?:titolo|testo))/gi },
+  { name: 'unfilled-marker', re: /(?:^|[-_])(?:xxx+|tbd|todo|fixme|placehold)(?=[-_]|$)/gi },
+]);
+
+const WHOLE_SLUG_LEAKS = new Set([
+  'slug', 'id', 'title', 'titolo', 'string', 'stringa',
+  'example', 'esempio', 'test', 'article', 'articolo',
+  'undefined', 'null', 'none', 'na', 'n-a', 'value', 'valore',
+]);
+
+// Tokens that describe the schema, not an article. A recovered value is useful
+// only when removing prompt instructions leaves at least one editorial token.
+const SCHEMA_ONLY_SLUG_TOKENS = new Set([
+  'id', 'ascii', 'slug', 'kebab', 'case', 'max',
+  'word', 'words', 'parole', 'parola', 'char', 'chars',
+  'character', 'characters', 'carattere', 'caratteri',
+  '3', '5', '40',
+]);
+
+function hasEditorialIdentityResidue(value) {
+  return String(value ?? '').split('-')
+    .some((token) => token && !SCHEMA_ONLY_SLUG_TOKENS.has(token));
+}
+
+const WHOLE_SLUG_LEAK_PATTERNS = [
+  { name: 'locale-slug-placeholder', re: /^slug[-_][a-z]{2,12}$/i },
+  { name: 'schema-hint-bare', re: /^\d+[-_](?:words?|chars?|characters?)$/i },
+];
 
 /**
  * What is left after the prefix is stripped, when the remainder is still part
@@ -18975,6 +19172,86 @@ const SCHEMA_HINT_SHAPE_RX = new RegExp(
   'i',
 );
 
+/** Remove every schema prefix (`slug-`, `kebab-case-`, including repeats). */
+function stripSchemaPlaceholderPrefix(input) {
+  let value = String(input ?? '').trim().toLowerCase();
+  if (!PROMPT_SLUG_PREFIX_RX.test(value)) return value;
+  for (let i = 0; i < 4 && PROMPT_SLUG_PREFIX_RX.test(value); i += 1) {
+    value = value.replace(PROMPT_SLUG_PREFIX_RX, '');
+  }
+  if (
+    value.length < 4
+    || NON_SLUG_REMAINDER_RX.test(value)
+    || SCHEMA_HINT_SHAPE_RX.test(value)
+  ) return '';
+  return value;
+}
+
+/** Return the first prompt instruction fragment found in a slug candidate. */
+export function findSlugPromptLeak(input) {
+  // Classify before the 80-character publication cap: truncation can split a
+  // complete prompt fragment (max-40-chars) into an unrecognized max-40.
+  const value = normalizeSlugCandidate(input);
+  if (!value) return null;
+  if (WHOLE_SLUG_LEAKS.has(value)) {
+    return { pattern: 'whole-slug-placeholder', match: value };
+  }
+  for (const { name, re } of WHOLE_SLUG_LEAK_PATTERNS) {
+    if (re.test(value)) return { pattern: name, match: value };
+  }
+  const prefix = value.match(PROMPT_SLUG_PREFIX_RX);
+  if (prefix) return { pattern: 'schema-placeholder-prefix', match: prefix[0] };
+  for (const { name, re } of SLUG_PROMPT_LEAK_PATTERNS) {
+    re.lastIndex = 0;
+    const match = re.exec(value);
+    if (match) return { pattern: name, match: match[0] };
+  }
+  return null;
+}
+
+/** Strip prompt labels and instructions, or return '' when no valid slug remains. */
+export function stripSlugPromptLeak(input) {
+  let value = normalizeSlugCandidate(input);
+  if (!value) return '';
+  if (WHOLE_SLUG_LEAKS.has(value)) return '';
+  if (WHOLE_SLUG_LEAK_PATTERNS.some(({ re }) => re.test(value))) return '';
+  if (!findSlugPromptLeak(value)) {
+    return truncateSlugAtWordBoundary(value, SLUG_MAX_LENGTH);
+  }
+  if (PROMPT_SLUG_PREFIX_RX.test(value)) {
+    value = stripSchemaPlaceholderPrefix(value);
+    if (!value) return '';
+  }
+  for (const { re } of SLUG_PROMPT_LEAK_PATTERNS) {
+    re.lastIndex = 0;
+    value = value.replace(re, '-');
+  }
+  value = value
+    .replace(/[^a-z0-9-]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+  // The id field label and ASCII qualifier are not editorial identity.
+  // Without this cleanup, id-kebab-case-ascii-... degrades to id-ascii.
+  value = value.replace(/^id(?:-ascii)?(?:-|$)/i, '').replace(/^ascii(?:-|$)/i, '');
+  if (!value || !hasEditorialIdentityResidue(value) || findSlugPromptLeak(value)) return '';
+  return truncateSlugAtWordBoundary(value, SLUG_MAX_LENGTH);
+}
+
+/** Hard gate immediately before a router write. */
+export function assertNoSlugPromptLeak(slugs, context = {}) {
+  const offenders = [];
+  for (const [locale, slug] of Object.entries(slugs || {})) {
+    const leak = findSlugPromptLeak(slug);
+    if (leak) offenders.push(`${locale}="${slug}" (${leak.pattern}: "${leak.match}")`);
+  }
+  if (offenders.length === 0) return;
+  const source = context.source ? ` [${context.source}]` : '';
+  const id = context.id ? ` id="${context.id}"` : '';
+  throw new Error(
+    `slug contaminato dal template del prompt${source}:${id}: ${offenders.join('; ')}`,
+  );
+}
+
 /**
  * Classify one slug candidate against the prompt schema.
  *
@@ -18985,28 +19262,18 @@ const SCHEMA_HINT_SHAPE_RX = new RegExp(
  *   `recovered`— `leaked` and a usable remainder was salvaged from it.
  */
 export function inspectSlugForPromptPlaceholder(input) {
-  const normalized = slugifySlugPart(input);
+  const normalized = normalizeSlugCandidate(input);
   if (!normalized) return { slug: '', leaked: false, recovered: false };
-
-  // A value that IS a placeholder, with no prefix to strip (`undefined`,
-  // `placeholder`, a bare `slug`, `3-5-words-max-40-chars`).
-  if (NON_SLUG_REMAINDER_RX.test(normalized) || SCHEMA_HINT_SHAPE_RX.test(normalized)) {
-    return { slug: '', leaked: true, recovered: false };
+  const leaked = findSlugPromptLeak(normalized);
+  if (!leaked) {
+    return {
+      slug: truncateSlugAtWordBoundary(normalized, SLUG_MAX_LENGTH),
+      leaked: false,
+      recovered: false,
+    };
   }
-  if (!PROMPT_SLUG_PREFIX_RX.test(normalized)) {
-    return { slug: normalized, leaked: false, recovered: false };
-  }
-
-  // Strip repeatedly: `slug-kebab-case-x` and `slug-slug-en` both occur.
-  let remainder = normalized;
-  for (let i = 0; i < 4 && PROMPT_SLUG_PREFIX_RX.test(remainder); i += 1) {
-    remainder = remainder.replace(PROMPT_SLUG_PREFIX_RX, '');
-  }
-  const usable =
-    remainder.length >= 4 &&
-    !NON_SLUG_REMAINDER_RX.test(remainder) &&
-    !SCHEMA_HINT_SHAPE_RX.test(remainder);
-  return { slug: usable ? remainder : '', leaked: true, recovered: usable };
+  const slug = stripSlugPromptLeak(normalized);
+  return { slug, leaked: true, recovered: Boolean(slug) };
 }
 
 // ── Rilocalizzazione degli slug dopo la traduzione (issue #191) ───────────
@@ -19332,9 +19599,8 @@ function sectionLocaleSlugTaken(locale, slug) {
  *    the body filename and the hreflang anchor, and `registerArticleFiles()`
  *    has ALREADY run `checkArticleIdExists(data.id)` by the time we get here.
  *    Rewriting it at this point would publish the article under an id nobody
- *    checked for collisions. There is a correct place to recover it — the
- *    `PROMPT_ID_LEAK_RX` branch in `validate()`, which rebuilds it from the
- *    Italian title and can retry the whole generation — so reaching this
+ *    checked for collisions. There is a correct place to recover a valid
+ *    residue — the prompt-leak branch in `validate()` — so reaching this
  *    function with a leaked id means a producer bypassed that path, which is a
  *    bug to surface, not to paper over.
  *
@@ -19382,21 +19648,22 @@ export function deriveAndSanitizeArticleSlugs(data) {
       continue;
     }
     const raw = String(data.slugs[locale]);
-    const check = inspectSlugForPromptPlaceholder(raw);
-    if (!check.leaked) {
-      data.slugs[locale] = check.slug || data.slugs.it;
+    const leak = findSlugPromptLeak(raw);
+    const cleaned = stripSlugPromptLeak(raw);
+    if (!leak) {
+      data.slugs[locale] = cleaned || data.slugs.it;
       continue;
     }
     // Quarta derivazione di uno slug da un titolo LOCALIZZATO, e per la stessa
     // ragione delle altre tre passa dal classificatore condiviso (#868 item 1):
     // con `data.slugs.de` segnaposto puro e `content.de.title === 'Null'`,
-    // `check.slug` e' vuoto e `slugifySlugPart()` nudo scriveva
+    // `cleaned` e' vuoto e `slugifySlugPart()` nudo scriveva
     // `data.slugs.de = 'null'` — che `relocalizeSlugsAfterTranslation()` non
     // ripara, perche' `needsWork` e' falso su uno slug diverso dall'italiano.
     const localizedTitle = String(data.content?.[locale]?.title || '').trim();
     const fromTitle = localizedTitleSlugCandidate(localizedTitle);
-    const replacement = check.slug || fromTitle || data.slugs.it;
-    const source = check.slug ? 'resto del segnaposto' : fromTitle ? `titolo ${locale}` : 'slug IT';
+    const replacement = cleaned || fromTitle || data.slugs.it;
+    const source = cleaned ? 'residuo ripulito' : fromTitle ? `titolo ${locale}` : 'slug IT';
     console.error(
       `❌ [slug-placeholder] lo slug ${locale} e' un segnaposto del prompt: "${raw}" → "${replacement}" (da: ${source}). ` +
         'Il modello ha ricopiato lo schema invece di compilarlo — se ricorre, e\' il prompt a dover cambiare, ' +

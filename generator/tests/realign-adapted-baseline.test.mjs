@@ -29,6 +29,8 @@ import {
   EXIT_PARTIAL,
   convergedModeDecision,
   convertConvergedEntry,
+  createIo,
+  fetchWithTransientRetry,
   baselineNewerThanDeclaration,
   collectDeclarations,
   declarationCandidateLines,
@@ -57,6 +59,86 @@ const entry = (over = {}) => ({
   mode: 'adapted',
   baseline: { site: 'site-base', corpus: 'corpus-base', alignedAt: '2026-09-01' },
   ...over,
+});
+
+const response = (status, body) => ({
+  status,
+  ok: status >= 200 && status < 300,
+  json: async () => body,
+});
+const noSleep = () => {};
+
+test('le letture API ritentano rete e 5xx, ma non trasformano un 4xx in un retry', async () => {
+  const calls = [];
+  const recovered = await fetchWithTransientRetry('https://api.example.test/flaky', {
+    attempts: 3,
+    sleep: noSleep,
+    api: async (url) => {
+      calls.push(url);
+      if (calls.length === 1) throw new Error('ECONNRESET');
+      if (calls.length === 2) return response(500, {});
+      return response(200, { ok: true });
+    },
+  });
+  assert.equal(recovered.status, 200);
+  assert.equal(calls.length, 3);
+
+  let notFoundCalls = 0;
+  const notFound = await fetchWithTransientRetry('https://api.example.test/missing', {
+    sleep: noSleep,
+    api: async () => {
+      notFoundCalls += 1;
+      return response(404, {});
+    },
+  });
+  assert.equal(notFound.status, 404);
+  assert.equal(notFoundCalls, 1);
+
+  let serverCalls = 0;
+  await assert.rejects(
+    fetchWithTransientRetry('https://api.example.test/still-broken', {
+      attempts: 2,
+      sleep: noSleep,
+      api: async () => {
+        serverCalls += 1;
+        return response(503, {});
+      },
+    }),
+    /HTTP 503/,
+  );
+  assert.equal(serverCalls, 2, 'un 5xx persistente resta un errore dopo il tetto');
+
+  let rateLimitCalls = 0;
+  const rateLimit = Object.assign(new Error('rate limit'), { status: 429 });
+  await assert.rejects(
+    fetchWithTransientRetry('https://api.example.test/rate-limited', {
+      sleep: noSleep,
+      api: async () => {
+        rateLimitCalls += 1;
+        throw rateLimit;
+      },
+    }),
+    /rate limit/,
+  );
+  assert.equal(rateLimitCalls, 1, 'un rate-limit non viene martellato dal retry dei 5xx');
+});
+
+test('il lookup delle PR del commit usa lo stesso retry transient', async () => {
+  let calls = 0;
+  const io = createIo({
+    siteRepo: 'owner/site',
+    sleep: noSleep,
+    api: async () => {
+      calls += 1;
+      if (calls === 1) return response(502, {});
+      return response(200, [
+        { number: 101, merged_at: '2026-10-01T00:00:00Z', base: { ref: 'main' } },
+        { number: 102, merged_at: null, base: { ref: 'main' } },
+      ]);
+    },
+  });
+  assert.deepEqual(await io.commitPrs('commit-sha'), [101]);
+  assert.equal(calls, 2);
 });
 
 /**

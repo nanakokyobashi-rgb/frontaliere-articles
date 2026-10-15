@@ -38,7 +38,6 @@
     "generator/scripts/publish-journalist-article.mjs",
     "generator/tests/article-duplicate-detection.test.mjs",
     "generator/tests/article-fabrication-guard.test.mjs",
-    "generator/tests/article-factuality-gates.test.mjs",
     "generator/tests/blog-headline-validation.test.mjs",
     "generator/tests/claude-rate-limit.test.mjs",
     "generator/tests/conflict-handoff-reconcile.test.mjs",

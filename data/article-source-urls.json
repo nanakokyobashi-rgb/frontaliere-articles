@@ -1,154 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/traffico-ferroviario-in-tilt-tra-arbedo-castione-e-biasca-441666": {
-    "articleId": "traffico-ferroviario-bloccato-ticino",
-    "ts": "2026-08-31T13:43:29.183Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/commissione-lpp%3a-aumentare-il-tasso-d%27interesse-minimo-di-0%2c5-punti/91982518": {
-    "articleId": "aumento-tasso-interesse-lpp",
-    "ts": "2026-08-31T16:56:09.911Z",
-    "keyForm": 2
-  },
-  "https://www.laregione.ch/estero/confine/1947152/trenord-da-domani-biglietti-piu-cari-rincaro-del-3-88": {
-    "articleId": "trenord-rincaro-388-linee-ticino",
-    "ts": "2026-08-31T20:12:12.975Z",
-    "keyForm": 2
-  },
-  "https://comozero.it/attualita/provincia-di-como-sempre-meno-case-per-lavoratori-giovani-e-famiglie-sono-1302-gli-alloggi-sfitti": {
-    "articleId": "como-crisi-abitativa-alloggi-sfitti",
-    "ts": "2026-08-31T21:24:57.974Z",
-    "keyForm": 2
-  },
-  "https://www.laregione.ch/cantone/mendrisiotto/1947144/municipio-di-chiasso-extra-muros-proiezioni-finanziarie-complicate": {
-    "articleId": "chiasso-potenziamento-a2-misure",
-    "ts": "2026-09-01T05:24:55.241Z",
-    "keyForm": 2
-  },
-  "https://www.ticinonews.ch/ticino/galleria-moscia-acapulco-il-progetto-entra-nel-vivo-un-investimento-da-180-milioni-441726": {
-    "articleId": "galleria-moscia-acapulco-180-milioni",
-    "ts": "2026-09-01T10:37:01.451Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/chiusure-notturne-tra-a8-e-diramazione-gallarate-gattico-il-4-settembre-percorsi-alternativi-e-orari/2667724": {
-    "articleId": "chiusure-notturne-a8-dir-gallarate-gattico",
-    "ts": "2026-09-01T12:13:48.256Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/con-il-primo-settembre-aumentano-biglietti-e-abbonamenti-trenord/2667790": {
-    "articleId": "mobilita-trenord-aumento-biglietti-2026",
-    "ts": "2026-09-01T12:31:53.105Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/dogane%3a-nuova-informatica-a-udsc%2c-costi-gi%c3%b9%2c-benefici-per-economia/91987363": {
-    "articleId": "dogane-udsc-nuova-informatica",
-    "ts": "2026-09-01T13:39:37.686Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/08/davide-bellotto-fillea-cgil-ancora-un-morto-sul-lavoro-non-possiamo-limitarci-a-contare-le-vittime/2666782": {
-    "articleId": "origgio-tragedia-cantiere-2026",
-    "ts": "2026-09-01T15:08:54.746Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/confapi-tensioni-geopolitiche-e-credito-difficile-frenano-investimenti-e-crescita-delle-pmi/2667685": {
-    "articleId": "confapi-pmi-varese-credito-2026",
-    "ts": "2026-09-01T15:51:24.576Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/info/ticino-grigioni-e-insubria/tariffe-ail-2027-nessun-aumento-per-l%e2%80%99energia--4052673.html": {
-    "articleId": "tariffe-ail-2027-stabili",
-    "ts": "2026-09-01T19:27:51.834Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/s/4052919": {
-    "articleId": "eoc-ospedali-comunicazione-pazienti",
-    "ts": "2026-09-01T20:22:04.534Z",
-    "keyForm": 2
-  },
-  "https://www.varesenoi.it/2026/09/01/leggi-notizia/argomenti/territorio/articolo/bennet-selezione-personale-per-lipermercato-bennet-di-lavena-ponte-tresa.html": {
-    "articleId": "bennet-cerca-personale-varese",
-    "ts": "2026-09-02T00:16:49.054Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/riverlhab-il-progetto-transfrontaliero-che-punta-a-rigenerare-il-torrente-lura-e-il-suo-territorio/2668582": {
-    "articleId": "riverlhab-progetto-transfrontaliero-ticino",
-    "ts": "2026-09-02T10:32:43.319Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/economia/1947545/svizzera-attrattiva-infrastrutture-sette-ceo": {
-    "articleId": "svizzera-perde-attrattiva-aziende",
-    "ts": "2026-09-02T12:54:54.281Z",
-    "keyForm": 2
-  },
-  "https://comozero.it/attualita/pessime-notizie-per-i-frontalieri-italiani-il-franco-svizzero-crolla-ai-minimi-dallestate-2025": {
-    "articleId": "franco-svizzero-crolla-minimi-2025",
-    "ts": "2026-09-02T22:51:03.863Z",
-    "keyForm": 2
-  },
-  "https://comozero.it/attualita/trenord-rubati-cavi-di-rame-sulla-tratta-como-milano-circolazione-treni-sospesa-caos-disagi-e-alternative": {
-    "articleId": "trenord-furto-di-cavi-sospesa-como-milano",
-    "ts": "2026-09-03T05:21:22.012Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/inflazione-accelera-nettamente-in-svizzera%2c-sale-a-0%2c8%25-in-agosto/91997269": {
-    "articleId": "inflazione-svizzera-agosto-2026",
-    "ts": "2026-09-03T07:55:28.957Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/sciopero-dei-treni-tra-il-7-e-l8-settembre-24-ore-di-stop-e-disagi-per-i-pendolari/2669332": {
-    "articleId": "sciopero-treni-settembre-2026",
-    "ts": "2026-09-03T08:27:48.497Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/treno-da-varese-bloccato-nel-passante-di-milano-evacuati-trecento-passeggeri-disagi-a-tutte-le-linee/2669455": {
-    "articleId": "passante-milano-treno-evacuati",
-    "ts": "2026-09-03T12:36:52.579Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/tutte-le-offerte-lavoro-tirocinio-dei-centri-limpiego-della-provincia-varese/1347077": {
-    "articleId": "offerte-lavoro-tirocinio-varese-2026",
-    "ts": "2026-09-03T12:54:26.174Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/oltre-20mila-cittadini-senza-medico-di-base-nel-varesotto-e-incombe-londata-dei-pensionamenti/2669674": {
-    "articleId": "varese-medici-carenza-frontalieri-2026",
-    "ts": "2026-09-03T19:19:48.117Z",
-    "keyForm": 2
-  },
-  "https://www.ticinonews.ch/ticino/competenze-di-base-al-via-la-campagna-cantonale-per-la-formazione-continua-441925": {
-    "articleId": "formazione-continua-ticino-campagna",
-    "ts": "2026-09-04T04:47:17.103Z",
-    "keyForm": 2
-  },
-  "https://www.laregione.ch/cantone/luganese/1947758/bally-annuncia-l-ennesimo-licenziamento-collettivo": {
-    "articleId": "bally-caslano-79-licenziamenti",
-    "ts": "2026-09-04T08:11:02.232Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/familiari-a-carico-detrazioni-irpef-e-welfare-senza-obbligo-di-convivenza/2670263": {
-    "articleId": "familiari-carico-detrazioni-irpef",
-    "ts": "2026-09-04T08:53:01.056Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/ticino/attualita/1948011/nuovo-sciopero-i-tilo-si-fermano-al-confine": {
-    "articleId": "sciopero-tilo-italia-2026",
-    "ts": "2026-09-04T09:42:02.016Z",
-    "keyForm": 2
-  },
-  "https://www.ticinonews.ch/ticino/sciopero-in-italia-i-treni-tilo-si-fermano-al-confine-441974": {
-    "articleId": "sciopero-treni-tilo-settembre-2026",
-    "ts": "2026-09-04T13:29:16.254Z",
-    "keyForm": 2
-  },
-  "https://comozero.it/economia/export-in-lombardia-i-dati-delle-province-como-soffre-e-la-svizzera-si-conferma-una-salvezza": {
-    "articleId": "como-export-svizzera-2026",
-    "ts": "2026-09-04T13:53:14.558Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/lavori-alla-stazione-di-gallarate-modifiche-alla-linea-s5-alcuni-treni-serali-cancellati-bus-sostitutivi-tra-settembre-e-ottobre/2670477": {
-    "articleId": "lavori-stazione-gallarate-2026",
-    "ts": "2026-09-04T16:09:59.816Z",
-    "keyForm": 2
-  },
   "https://www.varesenoi.it/2026/09/04/leggi-notizia/argomenti/economia-13/articolo/non-solo-caro-carburanti-anche-le-bollette-aumentano-rischio-stangata-in-autunno-e-inverno-in-prov.html": {
     "articleId": "aumento-bollette-varese-frontalieri",
     "ts": "2026-09-04T18:05:43.761Z",
@@ -2497,6 +2347,156 @@
   "https://www.varesenoi.it/2026/10/13/leggi-notizia/argomenti/cronaca-20/articolo/truffa-delle-chiamate-shock-tre-arresti-in-canton-ticino.html": {
     "articleId": "arresti-truffa-chiamate-ticino",
     "ts": "2026-10-14T08:56:53.878Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1956621/la-disoccupazione-in-ticino-continua-a-crescere": {
+    "articleId": "previsioni-disoccupazione-ticino-2027",
+    "ts": "2026-10-14T10:28:51.228Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/lex-regia-dogana-di-porto-ceresio-rinasce-e-diventa-il-nuovo-ufficio-turistico/2707654": {
+    "articleId": "porto-ceresio-dogana-ufficio-turistico",
+    "ts": "2026-10-14T10:42:39.457Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/infortuni-sul-lavoro-i-dati-peggiorano-in-tutta-la-lombardia-picchi-a-pavia-e-como-numeri-alti-a-milano-e-brescia": {
+    "articleId": "infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como",
+    "ts": "2026-10-14T11:18:47.543Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/dal-mondo/cronaca/1956683/21enne-19enne-due-auto-automobilista-minacce-como-ferito": {
+    "articleId": "arresti-auto-como-minacce",
+    "ts": "2026-10-14T12:24:36.678Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/conti-cantonali-disavanzo-fino-a-460-milioni-perche-il-governo-rinvia-le-scelte-444581": {
+    "articleId": "disavanzo-cantonale-2027-2030",
+    "ts": "2026-10-14T12:50:17.020Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/i-carabinieri-arrivano-sul-cantiere-in-provincia-di-como-tutto-sospeso-e-sanzioni-per-26mila-euro": {
+    "articleId": "ispezione-edile-lurate",
+    "ts": "2026-10-14T13:27:51.187Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/lavori-finiti-fibra-ottica-in-145-comuni-della-provincia-di-como-costo-totale-28-milioni-di-euro": {
+    "articleId": "fibra-ottica-145-comuni-como",
+    "ts": "2026-10-14T14:32:25.967Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/incidente-in-autostrada-a8-tra-castellanza-e-busto-soccorsi-e-lunga-coda/2708227": {
+    "articleId": "soccorsi-coda-autostrada-lombarda",
+    "ts": "2026-10-14T15:46:26.994Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4160155": {
+    "articleId": "arma-biasca-inchiesta",
+    "ts": "2026-10-14T18:54:17.457Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/sport/basket/1956524/la-logica-direbbe-massagno-ma-i-derby-non-sempre-la-rispettano": {
+    "articleId": "derby-basket-ticinese-massagno",
+    "ts": "2026-10-14T19:23:39.001Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/rafforzati-i-controlli-della-polizia-locale-di-cuvio-e-cuveglio-sette-patenti-ritirate-e-dieci-veicoli-sequestrati/2708299": {
+    "articleId": "controlli-polizia-cuvio-cuveglio",
+    "ts": "2026-10-14T19:44:45.989Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/a-varese-due-arresti-per-maltrattamenti-in-famiglia-coinvolti-anche-cinque-minori/2707666": {
+    "articleId": "due-arresti-malpra-varese",
+    "ts": "2026-10-14T21:01:45.742Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/sede-dei-pompieri-si-arriva-al-voto-tra-rapporti-lettere-anonime-e-lo-spettro-del-referendum-444606": {
+    "articleId": "bellinzona-voto-caserma-pompieri",
+    "ts": "2026-10-15T07:09:17.172Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/incendio-ordine-pubblico-e-maltempo-80-operatori-si-esercitano-nelle-tre-valli-444634": {
+    "articleId": "operatori-emergenze-valli",
+    "ts": "2026-10-15T07:26:11.488Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/tegola-pallacanestro-varese-ce-lesione-al-muscolo-per-della-valle/2708203": {
+    "articleId": "della-valle-lesione-varese",
+    "ts": "2026-10-15T08:11:51.250Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4164916": {
+    "articleId": "sconto-dipendenti-migros-ccl",
+    "ts": "2026-10-15T08:28:42.969Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/ticino/1956748/tasso-di-disoccupazione-in-crescita-nei-prossimi-mesi": {
+    "articleId": "tasso-disoccupazione-ticino-trimestri",
+    "ts": "2026-10-15T09:49:56.441Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/a-besano-la-prima-fiera-del-lavoro-della-valceresio-per-mettere-in-contatto-aziende-e-candidati/2708875": {
+    "articleId": "fiera-lavoro-besano-valceresio",
+    "ts": "2026-10-15T10:34:30.475Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/politica/1956918/associazione-ata-corsia-traffico-progetto-melano-ampliamento-aumento-mendrisio-a2": {
+    "articleId": "ata-critica-progetto-a2-mendrisio",
+    "ts": "2026-10-15T12:05:57.457Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/lugano-stima-un-disavanzo-di-147-milioni-meno-del-previsto-444691": {
+    "articleId": "preventivo-lugano-disavanzo-2027",
+    "ts": "2026-10-15T13:14:32.852Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/migros-rinnovo-contratto-l-gav-2027-2031-orario-stipendi": {
+    "articleId": "l-gav-2027-orario-salario",
+    "ts": "2026-10-15T13:36:22.668Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/como-tra-champions-e-campionato-sei-giorni-di-divieti-in-zona-stadio-la-mappa": {
+    "articleId": "divieti-viabilita-stadio-como",
+    "ts": "2026-10-15T14:49:43.457Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/tentato-omicidio-nel-luganese-in-manette-un-28enne-444695": {
+    "articleId": "arresto-lite-domestica-luganese",
+    "ts": "2026-10-15T15:06:58.649Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/veicolo-in-fiamme-sulla2-a-rivera-traffico-perturbato-444702": {
+    "articleId": "veicolo-fiamme-a2-rivera",
+    "ts": "2026-10-15T15:41:14.887Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/luci-a-masnago-tra-i-mille-problemi-openjobmetis-e-il-basket-di-marco-passera/2708038": {
+    "articleId": "luci-masnago-terza-puntata",
+    "ts": "2026-10-15T16:14:17.719Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/sul-lago-di-como-il-nuovo-distaccamento-della-polizia-stradale-arrivano-due-ministri-e-il-capo-della-polizia": {
+    "articleId": "inaugurazione-sala-comacina-polizia",
+    "ts": "2026-10-15T16:45:03.526Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/piccole-stelle-a-saronno-la-sesta-edizione-del-torneo-di-softball-giovanile-dedicato-a-enrico-obletter/2709025": {
+    "articleId": "saronno-piccole-stelle-softball",
+    "ts": "2026-10-15T17:55:49.716Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/cronaca/1956967/preventivo-2027-in-rosso-ma-moltiplicatori-invariati": {
+    "articleId": "lugano-preventivo-2027-moltiplicatori",
+    "ts": "2026-10-15T18:19:31.795Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4160197": {
+    "articleId": "terzetto-sospetto-melano-chiasso",
+    "ts": "2026-10-15T19:19:17.816Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4167160": {
+    "articleId": "inchiesta-medico-locarnese",
+    "ts": "2026-10-15T21:15:44.306Z",
     "keyForm": 2
   }
 }

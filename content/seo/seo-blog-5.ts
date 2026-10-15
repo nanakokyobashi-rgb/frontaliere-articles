@@ -106717,10 +106717,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-teatro-intred-varese-stagione-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-fabio-de-luigi-biol-varese.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Pubblico al Teatro di Varese durante lo spettacolo di Fabio De Luigi"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-13T00:24:02+00:00",
       "dateModified": "2026-10-13T00:24:02+00:00",
@@ -107570,10 +107570,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Easy Work chiuderà entro il 31 dicembre A rischio 264 posti di lavoro Sette amministrativi e 257 interinali coinvolti Consultazione avviata con l'OCST Decisione",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/swiss-life-taglio-posti-lavoro-2028.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-easy-work-chiusura-264.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Chiusura dell'ufficio Easy Work a Chiasso, corso San Gottardo 106, con cartello di chiusura"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T07:30:20+00:00",
       "dateModified": "2026-10-14T07:30:20+00:00",
@@ -107664,6 +107669,1332 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/arresti-truffa-chiamate-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bollettino-frontaliere-2026-10-14': {
+    title: 'Frontalieri: 921 nuovi annunci in Svizzera ieri — 14 ottobre 2026',
+    description: 'Bollettino frontalieri del 14 ottobre 2026: ultime code ai valichi, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
+    ogTitle: 'Frontalieri: 921 nuovi annunci in Svizzera ieri — 14 ottobre 2026',
+    ogDescription: 'I numeri del 14 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico, in quali comuni conviene fare il pieno, quanto vale il franco al cambio rilevato e quanti nuovi annunci di lavoro sono usciti in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-10-14/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri: 921 nuovi annunci in Svizzera ieri — 14 ottobre 2026",
+      "description": "Bollettino frontalieri del 14 ottobre 2026: ultime code ai valichi, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "Deterministic media produced by frontaliereticino.ch.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/bollettino-frontaliere-2026-10-14.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I numeri del giorno per i frontalieri – 14 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro"
+      },
+      "datePublished": "2026-10-14T10:02:59+00:00",
+      "dateModified": "2026-10-14T10:02:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bollettino-frontaliere-2026-10-14/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-previsioni-disoccupazione-ticino-2027': {
+    title: 'Disoccupazione in Ticino: previsto 3,45% a inizio 2027',
+    description: 'Disoccupazione in Ticino in crescita: previsto 3,45% a inizio 2027 Residenti stranieri e giovani i più colpiti dal fenomeno Tasso attuale al 2,87% nel terzo',
+    keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, previsto, inizio, crescita',
+    ogTitle: 'Disoccupazione in Ticino: previsto 3,45% a inizio 2027',
+    ogDescription: 'Disoccupazione in Ticino in crescita: previsto 3,45% a inizio 2027 Residenti stranieri e giovani i più colpiti dal fenomeno Tasso attuale al 2,87% nel terzo',
+    canonicalPath: '/articoli-frontaliere/previsioni-disoccupazione-ticino-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disoccupazione in Ticino: previsto 3,45% a inizio 2027",
+      "description": "Disoccupazione in Ticino in crescita: previsto 3,45% a inizio 2027 Residenti stranieri e giovani i più colpiti dal fenomeno Tasso attuale al 2,87% nel terzo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-previsioni-disoccupazione-ticino-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-14T10:28:51+00:00",
+      "dateModified": "2026-10-14T10:28:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/previsioni-disoccupazione-ticino-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-porto-ceresio-dogana-ufficio-turistico': {
+    title: 'Porto ceresio: ex dogana rinasce ufficio turistico',
+    description: 'Domenica 18 ottobre il taglio del nastro alle ore 11 L’ex Regia Dogana è in via Mazzini L’edificio diventa il nuovo Ufficio Turistico Recupero sostenuto',
+    keywords: 'frontalieri, ticino, svizzera, italia, porto, ceresio, dogana, rinasce',
+    ogTitle: 'Porto Ceresio: ex Dogana rinasce Ufficio Turistico il 18/10',
+    ogDescription: 'Domenica 18 ottobre il taglio del nastro alle ore 11 L’ex Regia Dogana è in via Mazzini L’edificio diventa il nuovo Ufficio Turistico Recupero sostenuto',
+    canonicalPath: '/articoli-frontaliere/porto-ceresio-dogana-ufficio-turistico/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Porto ceresio: ex dogana rinasce ufficio turistico",
+      "description": "Domenica 18 ottobre il taglio del nastro alle ore 11 L’ex Regia Dogana è in via Mazzini L’edificio diventa il nuovo Ufficio Turistico Recupero sostenuto",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-porto-ceresio-dogana-ufficio-turistico.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "L'ex Regia Dogana di Porto Ceresio, ora Ufficio Turistico, con il lago e le montagne sullo sfondo."
+      },
+      "datePublished": "2026-10-14T10:42:39+00:00",
+      "dateModified": "2026-10-14T10:42:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/porto-ceresio-dogana-ufficio-turistico/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como': {
+    title: 'Infortuni lavoro Lombardia: dati 2026 peggiorano, picchi Como',
+    description: 'Oltre 75.293 infortuni in Lombardia tra gennaio e agosto 2026 I decessi totali salgono a 101, contro 97 nel 2025 Como registra 3.795 denunce e un aumento',
+    keywords: 'frontalieri, ticino, svizzera, italia, infortuni, lavoro, lombardia, dati',
+    ogTitle: 'Infortuni lavoro Lombardia: dati 2026 peggiorano, picchi',
+    ogDescription: 'Oltre 75.293 infortuni in Lombardia tra gennaio e agosto 2026 I decessi totali salgono a 101, contro 97 nel 2025 Como registra 3.795 denunce e un aumento',
+    canonicalPath: '/articoli-frontaliere/infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Infortuni lavoro Lombardia: dati 2026 peggiorano, picchi Como",
+      "description": "Oltre 75.293 infortuni in Lombardia tra gennaio e agosto 2026 I decessi totali salgono a 101, contro 97 nel 2025 Como registra 3.795 denunce e un aumento",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Infortuni lavoro Lombardia: dati 2026 peggiorano, picchi Como"
+      },
+      "datePublished": "2026-10-14T11:18:47+00:00",
+      "dateModified": "2026-10-14T11:18:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-arresti-auto-como-minacce': {
+    title: 'Due arresti a Como: furti nelle auto e automobilista ferito',
+    description: 'Due arresti a Como dopo le segnalazioni dei residenti Un\'auto forzata e un secondo veicolo danneggiato Un automobilista riferisce una ferita a un braccio',
+    keywords: 'frontalieri, ticino, svizzera, italia, arresti, como, furti, nelle',
+    ogTitle: 'Due arresti a Como: furti nelle auto e automobilista ferito',
+    ogDescription: 'Due arresti a Como dopo le segnalazioni dei residenti Un\'auto forzata e un secondo veicolo danneggiato Un automobilista riferisce una ferita a un braccio',
+    canonicalPath: '/articoli-frontaliere/arresti-auto-como-minacce/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Due arresti a Como: furti nelle auto e automobilista ferito",
+      "description": "Due arresti a Como dopo le segnalazioni dei residenti Un'auto forzata e un secondo veicolo danneggiato Un automobilista riferisce una ferita a un braccio",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-arresti-auto-como-minacce.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-14T12:24:36+00:00",
+      "dateModified": "2026-10-14T12:24:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/arresti-auto-como-minacce/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-disavanzo-cantonale-2027-2030': {
+    title: 'Disavanzo cantonale ticinese previsto fino a 460 milioni',
+    description: 'Il Preventivo 2027 prevede un disavanzo di 98,5 milioni. Il deficit prospettato arriva a 460 milioni nel 2030. Dal 2028 l’autofinanziamento dovrebbe diventare',
+    keywords: 'frontalieri, ticino, svizzera, italia, disavanzo, cantonale, ticinese, previsto',
+    ogTitle: 'Disavanzo cantonale ticinese previsto fino a 460 milioni',
+    ogDescription: 'Il Preventivo 2027 prevede un disavanzo di 98,5 milioni.',
+    canonicalPath: '/articoli-frontaliere/disavanzo-cantonale-2027-2030/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disavanzo cantonale ticinese previsto fino a 460 milioni",
+      "description": "Il Preventivo 2027 prevede un disavanzo di 98,5 milioni. Il deficit prospettato arriva a 460 milioni nel 2030. Dal 2028 l’autofinanziamento dovrebbe diventare",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-disavanzo-cantonale-2027-2030.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-14T12:50:16+00:00",
+      "dateModified": "2026-10-14T12:50:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/disavanzo-cantonale-2027-2030/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ispezione-edile-lurate': {
+    title: 'Cantiere sospeso a Lurate Caccivio: denuncia | Frontaliere Ticino',
+    description: '12 ottobre 2026: controlli in un cantiere a Lurate Caccivio Ispezione dei Carabinieri di Como e dell\'Ispettorato del Lavoro Rilevate carenze su POS, scale',
+    keywords: 'frontalieri, ticino, svizzera, italia, cantiere, sospeso, lurate, caccivio',
+    ogTitle: 'Lurate Caccivio, cantiere sospeso dai controlli',
+    ogDescription: '12 ottobre 2026: controlli in un cantiere a Lurate Caccivio Ispezione dei Carabinieri di Como e dell\'Ispettorato del Lavoro Rilevate carenze su POS, scale',
+    canonicalPath: '/articoli-frontaliere/ispezione-edile-lurate/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cantiere sospeso a Lurate Caccivio: denuncia",
+      "description": "12 ottobre 2026: controlli in un cantiere a Lurate Caccivio Ispezione dei Carabinieri di Como e dell'Ispettorato del Lavoro Rilevate carenze su POS, scale",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ispezione-edile-lurate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cantiere edile a Lurate Caccivio sottoposto a controlli e sospeso."
+      },
+      "datePublished": "2026-10-14T13:27:50+00:00",
+      "dateModified": "2026-10-14T13:27:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ispezione-edile-lurate/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel': {
+    title: 'Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football',
+    description: 'Gli ASVZ Blackbirds trionfano al Champions Bowl 2026, conquistando il primo storico titolo europeo nel flag football per una squadra svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, asvz, blackbirds, vincono, champions',
+    ogTitle: 'Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football',
+    ogDescription: 'Gli ASVZ Blackbirds trionfano al Champions Bowl 2026, conquistando il primo storico titolo europeo nel flag football per una squadra svizzera.',
+    canonicalPath: '/articoli-frontaliere/gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football",
+      "description": "Gli ASVZ Blackbirds trionfano al Champions Bowl 2026, conquistando il primo storico titolo europeo nel flag football per una squadra svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-14T13:35:22+00:00",
+      "dateModified": "2026-10-14T13:35:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-fibra-ottica-145-comuni-como': {
+    title: 'Finitura lavori fibra ottica in 145 comuni di Como, 27,9 mln €',
+    description: 'Rete in ultimazione in 145 comuni comaschi Oltre 27,9 milioni di fondi pubblici a Como Adesione alla banda ultra-larga: 23% contro 17% Piano Italia 1 Giga',
+    keywords: 'frontalieri, ticino, svizzera, italia, finitura, lavori, fibra, ottica',
+    ogTitle: 'Finitura lavori fibra ottica in 145 comuni di Como, 27,9 mln €',
+    ogDescription: 'Rete in ultimazione in 145 comuni comaschi Oltre 27,9 milioni di fondi pubblici a Como Adesione alla banda ultra-larga: 23% contro 17% Piano Italia 1 Giga',
+    canonicalPath: '/articoli-frontaliere/fibra-ottica-145-comuni-como/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Finitura lavori fibra ottica in 145 comuni di Como, 27,9 mln €",
+      "description": "Rete in ultimazione in 145 comuni comaschi Oltre 27,9 milioni di fondi pubblici a Como Adesione alla banda ultra-larga: 23% contro 17% Piano Italia 1 Giga",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-fibra-ottica-145-comuni-como.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Installazione di cavo in fibra ottica in un comune della provincia di Como, vista ravvicinata e dettagliata."
+      },
+      "datePublished": "2026-10-14T14:32:25+00:00",
+      "dateModified": "2026-10-14T14:32:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/fibra-ottica-145-comuni-como/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-soccorsi-coda-autostrada-lombarda': {
+    title: 'Incidente sulla A8 tra Castellanza e Busto: lunga coda',
+    description: 'Incidente sulla A8 poco dopo le 16 Quattro persone coinvolte Due ambulanze e un\'automedica in codice rosso Lunga coda dal bivio A8/A9 Cosa: incidente stradale',
+    keywords: 'frontalieri, ticino, svizzera, italia, incidente, sulla, castellanza, busto',
+    ogTitle: 'Incidente A8: coda tra Castellanza e Busto Arsizio',
+    ogDescription: 'Incidente sulla A8 poco dopo le 16 Quattro persone coinvolte Due ambulanze e un\'automedica in codice rosso Lunga coda dal bivio A8/A9 Cosa: incidente stradale',
+    canonicalPath: '/articoli-frontaliere/soccorsi-coda-autostrada-lombarda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incidente sulla A8 tra Castellanza e Busto: lunga coda",
+      "description": "Incidente sulla A8 poco dopo le 16 Quattro persone coinvolte Due ambulanze e un'automedica in codice rosso Lunga coda dal bivio A8/A9 Cosa: incidente stradale",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-soccorsi-coda-autostrada-lombarda.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-14T15:46:26+00:00",
+      "dateModified": "2026-10-14T15:46:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/soccorsi-coda-autostrada-lombarda/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-arma-biasca-inchiesta': {
+    title: 'Biasca, confermato l\'arresto del 17enne | Frontaliere Ticino',
+    description: 'L\'accoltellamento è avvenuto il 5 ottobre a Biasca. La polizia ha trovato un coltello la sera successiva. Il 17enne siriano resta in carcerazione preventiva',
+    keywords: 'frontalieri, ticino, svizzera, italia, biasca, confermato, arresto, 17enne',
+    ogTitle: 'Biasca, confermato l\'arresto del 17enne',
+    ogDescription: 'L\'accoltellamento è avvenuto il 5 ottobre a Biasca.',
+    canonicalPath: '/articoli-frontaliere/arma-biasca-inchiesta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Biasca, confermato l'arresto del 17enne",
+      "description": "L'accoltellamento è avvenuto il 5 ottobre a Biasca. La polizia ha trovato un coltello la sera successiva. Il 17enne siriano resta in carcerazione preventiva",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-arma-biasca-inchiesta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-14T18:54:16+00:00",
+      "dateModified": "2026-10-14T18:54:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/arma-biasca-inchiesta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-derby-basket-ticinese-massagno': {
+    title: 'Derby ticinese di basket: Massagno è il favorito',
+    description: 'Sabato la prima sfida tutta ticinese sotto le plance: Massagno è il favorito, ma il derby può portare altri aspetti oltre la logica del pronostico iniziale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, derby, ticinese, basket, massagno',
+    ogTitle: 'Derby ticinese di basket: Massagno favorito',
+    ogDescription: 'La prima sfida tutta ticinese sotto le plance è fissata per sabato. Massagno viene indicato come chiaro favorito, ma il derby introduce una variabile precisa: gli altri aspetti della sfida possono allontanare il verdetto dalla logica del pronostico.',
+    canonicalPath: '/articoli-frontaliere/derby-basket-ticinese-massagno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Derby ticinese di basket: Massagno è il favorito",
+      "description": "Sabato la prima sfida tutta ticinese sotto le plance: Massagno è il favorito, ma il derby può portare altri aspetti oltre la logica del pronostico iniziale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-derby-basket-ticinese-massagno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-14T19:23:38+00:00",
+      "dateModified": "2026-10-14T19:23:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/derby-basket-ticinese-massagno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-controlli-polizia-cuvio-cuveglio': {
+    title: 'Controlli a Cuvio e Cuveglio: 7 patenti ritirate e 10 sequestri',
+    description: 'Sette patenti ritirate e dieci veicoli sequestrati Controlli anche con etilometro e tassi sopra 1,5 g/l Più agenti indicativamente tra le 17 e le 20 Il progetto',
+    keywords: 'frontalieri, ticino, svizzera, italia, controlli, cuvio, cuveglio, patenti',
+    ogTitle: 'Controlli a Cuvio e Cuveglio: 7 patenti ritirate e 10 sequestri',
+    ogDescription: 'Sette patenti ritirate e dieci veicoli sequestrati Controlli anche con etilometro e tassi sopra 1,5 g/l Più agenti indicativamente tra le 17 e le 20 Il progetto',
+    canonicalPath: '/articoli-frontaliere/controlli-polizia-cuvio-cuveglio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Controlli a Cuvio e Cuveglio: 7 patenti ritirate e 10 sequestri",
+      "description": "Sette patenti ritirate e dieci veicoli sequestrati Controlli anche con etilometro e tassi sopra 1,5 g/l Più agenti indicativamente tra le 17 e le 20 Il progetto",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-controlli-polizia-cuvio-cuveglio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-14T19:44:45+00:00",
+      "dateModified": "2026-10-14T19:44:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/controlli-polizia-cuvio-cuveglio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-due-arresti-malpra-varese': {
+    title: 'Varese, due arresti per maltrattamenti familiari con cinque minori',
+    description: 'Due arresti a Varese per maltrattamenti familiari Il primo episodio si è verificato sabato pomeriggio Cinque figli minori erano presenti, tra 5 e 8 anni',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, arresti, maltrattamenti, familiari',
+    ogTitle: 'Varese, due arresti per maltrattamenti familiari con minori',
+    ogDescription: 'Due arresti a Varese per maltrattamenti familiari Il primo episodio si è verificato sabato pomeriggio Cinque figli minori erano presenti, tra 5 e 8 anni',
+    canonicalPath: '/articoli-frontaliere/due-arresti-malpra-varese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese, due arresti per maltrattamenti familiari con cinque minori",
+      "description": "Due arresti a Varese per maltrattamenti familiari Il primo episodio si è verificato sabato pomeriggio Cinque figli minori erano presenti, tra 5 e 8 anni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-due-arresti-malpra-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Auto dei carabinieri fermata davanti a un edificio del centro di Varese al tramonto."
+      },
+      "datePublished": "2026-10-14T21:01:45+00:00",
+      "dateModified": "2026-10-14T21:01:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/due-arresti-malpra-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bellinzona-voto-caserma-pompieri': {
+    title: 'Bellinzona: voto sul credito per la nuova caserma',
+    description: 'Lunedì si vota il primo credito da 14 milioni. L\'operazione ex LATI è stimata in 34 milioni. La minoranza chiede di respingere l\'opzione ex LATI. Il referendum',
+    keywords: 'frontalieri, ticino, svizzera, italia, bellinzona, voto, credito, nuova',
+    ogTitle: 'Bellinzona: voto sul credito per la nuova caserma',
+    ogDescription: 'Lunedì si vota il primo credito da 14 milioni.',
+    canonicalPath: '/articoli-frontaliere/bellinzona-voto-caserma-pompieri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bellinzona: voto sul credito per la nuova caserma",
+      "description": "Lunedì si vota il primo credito da 14 milioni. L'operazione ex LATI è stimata in 34 milioni. La minoranza chiede di respingere l'opzione ex LATI. Il referendum",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-bellinzona-voto-caserma-pompieri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sala del Consiglio comunale di Bellinzona"
+      },
+      "datePublished": "2026-10-15T07:09:16+00:00",
+      "dateModified": "2026-10-15T07:09:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bellinzona-voto-caserma-pompieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-operatori-emergenze-valli': {
+    title: 'Tre Valli: 80 operatori in quattro esercitazioni',
+    description: 'Circa 80 operatori formati nel 2026 Quattro edizioni tra Biasca e Giornico Tre scenari: incendio, ordine pubblico e maltempo La formazione continuerà',
+    keywords: 'frontalieri, ticino, svizzera, italia, valli, operatori, quattro, esercitazioni',
+    ogTitle: 'Tre Valli: 80 operatori in quattro esercitazioni',
+    ogDescription: 'Circa 80 operatori formati nel 2026 Quattro edizioni tra Biasca e Giornico Tre scenari: incendio, ordine pubblico e maltempo La formazione continuerà',
+    canonicalPath: '/articoli-frontaliere/operatori-emergenze-valli/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tre Valli: 80 operatori in quattro esercitazioni",
+      "description": "Circa 80 operatori formati nel 2026 Quattro edizioni tra Biasca e Giornico Tre scenari: incendio, ordine pubblico e maltempo La formazione continuerà",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-operatori-emergenze-valli.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-15T07:26:11+00:00",
+      "dateModified": "2026-10-15T07:26:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/operatori-emergenze-valli/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-della-valle-lesione-varese': {
+    title: 'Pallacanestro Varese: Della Valle out per lesione al bicipite femorale',
+    description: 'Amedeo Della Valle ha una lesione al bicipite femorale destro Il trauma è di secondo grado L\'infortunio è arrivato contro Peristeri Betsson Il rientro sarà',
+    keywords: 'frontalieri, ticino, svizzera, italia, pallacanestro, varese, valle, lesione',
+    ogTitle: 'Pallacanestro Varese: Della Valle out per lesione al bicipite femorale',
+    ogDescription: 'Amedeo Della Valle ha una lesione al bicipite femorale destro Il trauma è di secondo grado L\'infortunio è arrivato contro Peristeri Betsson Il rientro sarà',
+    canonicalPath: '/articoli-frontaliere/della-valle-lesione-varese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Pallacanestro Varese: Della Valle out per lesione al bicipite femorale",
+      "description": "Amedeo Della Valle ha una lesione al bicipite femorale destro Il trauma è di secondo grado L'infortunio è arrivato contro Peristeri Betsson Il rientro sarà",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-della-valle-lesione-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Campo da basket in Ticino con staff medico che esamina la gamba di un giocatore"
+      },
+      "datePublished": "2026-10-15T08:11:50+00:00",
+      "dateModified": "2026-10-15T08:11:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/della-valle-lesione-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sconto-dipendenti-migros-ccl': {
+    title: 'Migros: nuovo CCL dal 2027, sconto del 10% | Frontaliere Ticino',
+    description: 'Il CCL nazionale Migros sarà in vigore dal 2027 al 2031: sconto del 10%, condizioni uniformi, 41 ore per molti e salario netto intero per 90 giorni di assenza.',
+    keywords: 'frontalieri, ticino, svizzera, italia, migros, nuovo, sconto, nazionale',
+    ogTitle: 'Migros, CCL 2027-2031: sconto e nuove condizioni',
+    ogDescription: 'Il nuovo CCL nazionale per Migros sarà in vigore dal 2027 al 2031. Per molti collaboratori la settimana passerà da 43 a 41 ore con lo stesso salario; previste condizioni uniformi in caso di malattia o infortunio.',
+    canonicalPath: '/articoli-frontaliere/sconto-dipendenti-migros-ccl/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Migros: nuovo CCL dal 2027, sconto del 10%",
+      "description": "Il CCL nazionale Migros sarà in vigore dal 2027 al 2031: sconto del 10%, condizioni uniformi, 41 ore per molti e salario netto intero per 90 giorni di assenza.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sconto-dipendenti-migros-ccl.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-15T08:28:42+00:00",
+      "dateModified": "2026-10-15T08:28:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sconto-dipendenti-migros-ccl/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bollettino-frontaliere-2026-10-15': {
+    title: 'Frontalieri: 2046 nuovi annunci in Svizzera ieri — 15 ottobre 2026',
+    description: 'Bollettino frontalieri del 15 ottobre 2026: ultime code ai valichi, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
+    ogTitle: 'Frontalieri: 2046 nuovi annunci in Svizzera ieri — 15 ottobre 2026',
+    ogDescription: 'I numeri del 15 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico, in quali comuni conviene fare il pieno, quanto vale il franco al cambio rilevato e quanti nuovi annunci di lavoro sono usciti in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-10-15/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri: 2046 nuovi annunci in Svizzera ieri — 15 ottobre 2026",
+      "description": "Bollettino frontalieri del 15 ottobre 2026: ultime code ai valichi, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "Deterministic media produced by frontaliereticino.ch.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/bollettino-frontaliere-2026-10-15.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I numeri del giorno per i frontalieri – 15 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro"
+      },
+      "datePublished": "2026-10-15T09:49:20+00:00",
+      "dateModified": "2026-10-15T09:49:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/samuele-valente/#person",
+        "name": "Samuele Valente",
+        "url": "https://frontaliereticino.ch/autori/samuele-valente/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bollettino-frontaliere-2026-10-15/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-tasso-disoccupazione-ticino-trimestri': {
+    title: 'Tasso di disoccupazione in crescita nei prossimi mesi',
+    description: '2,87% nel terzo trimestre in Ticino 3,31% previsto nel quarto trimestre 2026 3,45% stimato nel primo trimestre 2027 Tasso giovanile in aumento: 5,7% Tasso Seco',
+    keywords: 'frontalieri, ticino, svizzera, italia, tasso, disoccupazione, crescita, prossimi',
+    ogTitle: 'Tasso di disoccupazione Ticino: previsioni Q4 2026 e Q1 2027',
+    ogDescription: '2,87% nel terzo trimestre in Ticino 3,31% previsto nel quarto trimestre 2026 3,45% stimato nel primo trimestre 2027 Tasso giovanile in aumento: 5,7% Tasso Seco',
+    canonicalPath: '/articoli-frontaliere/tasso-disoccupazione-ticino-trimestri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tasso di disoccupazione in crescita nei prossimi mesi",
+      "description": "2,87% nel terzo trimestre in Ticino 3,31% previsto nel quarto trimestre 2026 3,45% stimato nel primo trimestre 2027 Tasso giovanile in aumento: 5,7% Tasso Seco",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tasso-disoccupazione-ticino-trimestri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del lago di Lugano con montagne sullo sfondo e persone che passeggiano lungo la riva"
+      },
+      "datePublished": "2026-10-15T09:49:56+00:00",
+      "dateModified": "2026-10-15T09:49:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tasso-disoccupazione-ticino-trimestri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-fiera-lavoro-besano-valceresio': {
+    title: 'Fiera del Lavoro a Besano: prima del Valceresio',
+    description: 'Venerdì 30 ottobre 2026 la Fiera del Lavoro a Besano Dalle 9 alle 14 nella palestra di via Franzosi Organizzano il Centro per l\'Impiego di Varese e il Comune',
+    keywords: 'frontalieri, ticino, svizzera, italia, fiera, lavoro, besano, prima',
+    ogTitle: 'Fiera del Lavoro a Besano: prima del Valceresio',
+    ogDescription: 'Venerdì 30 ottobre 2026 la Fiera del Lavoro a Besano Dalle 9 alle 14 nella palestra di via Franzosi Organizzano il Centro per l\'Impiego di Varese e il Comune',
+    canonicalPath: '/articoli-frontaliere/fiera-lavoro-besano-valceresio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fiera del Lavoro a Besano: prima del Valceresio",
+      "description": "Venerdì 30 ottobre 2026 la Fiera del Lavoro a Besano Dalle 9 alle 14 nella palestra di via Franzosi Organizzano il Centro per l'Impiego di Varese e il Comune",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-fiera-lavoro-besano-valceresio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-15T10:34:30+00:00",
+      "dateModified": "2026-10-15T10:34:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/fiera-lavoro-besano-valceresio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-dimissioni-rapporto-ticino': {
+    title: 'Dimissioni da frontaliere: termini e passi in Ticino',
+    description: 'Dimissioni da frontaliere in Ticino: termini, imposta alla fonte, permesso G, AVS, LPP, LAMal e differenze fiscali tra vecchi e nuovi frontalieri in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dimissioni, termini, passi, lavoro',
+    ogTitle: 'Frontaliere: dimissioni, termini e controlli pratici',
+    ogDescription: 'Dimissioni in Ticino: data di cessazione, regime fiscale, permesso G e previdenza. Per vecchi e nuovi frontalieri il Nuovo Accordo è in vigore dal 1° gennaio 2024; l\'imposta alla fonte è trattenuta in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/dimissioni-rapporto-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dimissioni da frontaliere: termini e passi in Ticino",
+      "description": "Dimissioni da frontaliere in Ticino: termini, imposta alla fonte, permesso G, AVS, LPP, LAMal e differenze fiscali tra vecchi e nuovi frontalieri in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Frontaliere con contratto di lavoro svizzero in un paesaggio del Ticino"
+      },
+      "datePublished": "2026-10-15T11:39:57+00:00",
+      "dateModified": "2026-10-15T11:39:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/dimissioni-rapporto-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ata-critica-progetto-a2-mendrisio': {
+    title: 'ATA si oppone all’ampliamento A2 Mendrisio‑Melano',
+    description: 'L\'ATA si oppone all\'ampliamento dell\'A2 tra Mendrisio e Melano Il progetto include il viadotto Lenaccio e pareti foniche PoLuMe prevede una terza corsia',
+    keywords: 'frontalieri, ticino, svizzera, italia, oppone, ampliamento, mendrisio, melano',
+    ogTitle: 'ATA oppone ampliamento A2 Mendrisio‑Melano',
+    ogDescription: 'L\'ATA si oppone all\'ampliamento dell\'A2 tra Mendrisio e Melano Il progetto include il viadotto Lenaccio e pareti foniche PoLuMe prevede una terza corsia',
+    canonicalPath: '/articoli-frontaliere/ata-critica-progetto-a2-mendrisio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "ATA si oppone all’ampliamento A2 Mendrisio‑Melano",
+      "description": "L'ATA si oppone all'ampliamento dell'A2 tra Mendrisio e Melano Il progetto include il viadotto Lenaccio e pareti foniche PoLuMe prevede una terza corsia",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ata-critica-progetto-a2-mendrisio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Viadotto Lenaccio dell'A2 vicino a Mendrisio con pareti foniche in costruzione"
+      },
+      "datePublished": "2026-10-15T12:05:57+00:00",
+      "dateModified": "2026-10-15T12:05:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ata-critica-progetto-a2-mendrisio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-preventivo-lugano-disavanzo-2027': {
+    title: 'Lugano: preventivo 2027 stima disavanzo di 14,7 milioni',
+    description: 'Lugano prevede un disavanzo di 14,7 milioni Il risultato migliora di 4,8 milioni sul piano 2026-2033 I moltiplicatori restano all\'80% e all\'85% Gli investimenti',
+    keywords: 'frontalieri, ticino, svizzera, italia, lugano, preventivo, stima, disavanzo',
+    ogTitle: 'Lugano: preventivo 2027 e moltiplicatori fiscali',
+    ogDescription: 'Lugano prevede un disavanzo di 14,7 milioni Il risultato migliora di 4,8 milioni sul piano 2026-2033 I moltiplicatori restano all\'80% e all\'85% Gli investimenti',
+    canonicalPath: '/articoli-frontaliere/preventivo-lugano-disavanzo-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lugano: preventivo 2027 stima disavanzo di 14,7 milioni",
+      "description": "Lugano prevede un disavanzo di 14,7 milioni Il risultato migliora di 4,8 milioni sul piano 2026-2033 I moltiplicatori restano all'80% e all'85% Gli investimenti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-preventivo-lugano-disavanzo-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica della città di Lugano e del lago"
+      },
+      "datePublished": "2026-10-15T13:14:32+00:00",
+      "dateModified": "2026-10-15T13:14:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/preventivo-lugano-disavanzo-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-l-gav-2027-orario-salario': {
+    title: 'L‑GAV 2027‑2031: ore 41, stipendio invariato, sconto Cumulus',
+    description: 'Nuovo L-GAV per il quinquennio 2027-2031 Orario da 43 a 41 ore a salario invariato Cumulus: sconto effettivo del 10% dal 1 gennaio 2027 100% netto per 90',
+    keywords: 'frontalieri, ticino, svizzera, italia, stipendio, invariato, sconto, cumulus',
+    ogTitle: 'L‑GAV 2027‑2031: ore 41, stipendio invariato, sconto Cumulus',
+    ogDescription: 'Nuovo L-GAV per il quinquennio 2027-2031 Orario da 43 a 41 ore a salario invariato Cumulus: sconto effettivo del 10% dal 1 gennaio 2027 100% netto per 90',
+    canonicalPath: '/articoli-frontaliere/l-gav-2027-orario-salario/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "L‑GAV 2027‑2031: ore 41, stipendio invariato, sconto Cumulus",
+      "description": "Nuovo L-GAV per il quinquennio 2027-2031 Orario da 43 a 41 ore a salario invariato Cumulus: sconto effettivo del 10% dal 1 gennaio 2027 100% netto per 90",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-l-gav-2027-orario-salario.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di un edificio aziendale a Lugano con dipendenti in pausa"
+      },
+      "datePublished": "2026-10-15T13:36:22+00:00",
+      "dateModified": "2026-10-15T13:36:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/l-gav-2027-orario-salario/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-divieti-viabilita-stadio-como': {
+    title: 'Como: divieti in via Vittorio Veneto dal 19 al 24 ottobre',
+    description: 'Divieti attivi dal 19 ottobre alle 6.30 al 24 ottobre a mezzanotte Como-Manchester United mercoledì 21 alle 18.45 Como-Sassuolo sabato 24 alle 15 Transito',
+    keywords: 'frontalieri, ticino, svizzera, italia, como, divieti, vittorio, veneto',
+    ogTitle: 'Como: divieti viabilità zona stadio 19-24 ottobre',
+    ogDescription: 'Divieti attivi dal 19 ottobre alle 6.30 al 24 ottobre a mezzanotte Como-Manchester United mercoledì 21 alle 18.45 Como-Sassuolo sabato 24 alle 15 Transito',
+    canonicalPath: '/articoli-frontaliere/divieti-viabilita-stadio-como/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Como: divieti in via Vittorio Veneto dal 19 al 24 ottobre",
+      "description": "Divieti attivi dal 19 ottobre alle 6.30 al 24 ottobre a mezzanotte Como-Manchester United mercoledì 21 alle 18.45 Como-Sassuolo sabato 24 alle 15 Transito",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-divieti-viabilita-stadio-como.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-15T14:49:43+00:00",
+      "dateModified": "2026-10-15T14:49:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/divieti-viabilita-stadio-como/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-arresto-lite-domestica-luganese': {
+    title: 'Luganese, arrestato un 28enne per ipotesi di tentato omicidio',
+    description: 'Arrestato il 9 ottobre un 28enne nel Luganese. La lite è avvenuta in ambito domestico. Una donna ferita è stata visitata in ospedale. Le ferite non hanno messo',
+    keywords: 'frontalieri, ticino, svizzera, italia, luganese, arrestato, 28enne, ipotesi',
+    ogTitle: 'Luganese: arrestato un 28enne dopo una lite domestica',
+    ogDescription: 'Arrestato il 9 ottobre un 28enne nel Luganese.',
+    canonicalPath: '/articoli-frontaliere/arresto-lite-domestica-luganese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Luganese, arrestato un 28enne per ipotesi di tentato omicidio",
+      "description": "Arrestato il 9 ottobre un 28enne nel Luganese. La lite è avvenuta in ambito domestico. Una donna ferita è stata visitata in ospedale. Le ferite non hanno messo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-arresto-lite-domestica-luganese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del Luganese in Ticino al tramonto"
+      },
+      "datePublished": "2026-10-15T15:06:58+00:00",
+      "dateModified": "2026-10-15T15:06:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/arresto-lite-domestica-luganese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-veicolo-fiamme-a2-rivera': {
+    title: 'Veicolo in fiamme sull\'A2 a Rivera: traffico perturbato',
+    description: 'Un furgone ha preso fuoco sull\'A2 verso Chiasso Il tratto è tra la galleria del Monte Ceneri e Rivera La corsia destra è chiusa per le operazioni necessarie',
+    keywords: 'frontalieri, ticino, svizzera, italia, veicolo, fiamme, sull, rivera',
+    ogTitle: 'Veicolo in fiamme sull\'A2 a Rivera: traffico perturbato',
+    ogDescription: 'Un furgone ha preso fuoco sull\'A2 verso Chiasso Il tratto è tra la galleria del Monte Ceneri e Rivera La corsia destra è chiusa per le operazioni necessarie',
+    canonicalPath: '/articoli-frontaliere/veicolo-fiamme-a2-rivera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Veicolo in fiamme sull'A2 a Rivera: traffico perturbato",
+      "description": "Un furgone ha preso fuoco sull'A2 verso Chiasso Il tratto è tra la galleria del Monte Ceneri e Rivera La corsia destra è chiusa per le operazioni necessarie",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-veicolo-fiamme-a2-rivera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veicolo in fiamme sull'A2 a Rivera, con traffico perturbato verso Chiasso"
+      },
+      "datePublished": "2026-10-15T15:41:14+00:00",
+      "dateModified": "2026-10-15T15:41:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/veicolo-fiamme-a2-rivera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-luci-masnago-terza-puntata': {
+    title: 'Basket: «Luci a Masnago» torna giovedì 15 ottobre con Marco Passera',
+    description: 'Giovedì 15 ottobre dalle 14,45 torna «Luci a Masnago». La puntata segue il momento difficile della Pallacanestro Varese. In studio ci sarà l\'ex playmaker Marco',
+    keywords: 'frontalieri, ticino, svizzera, italia, basket, luci, masnago, torna',
+    ogTitle: 'Luci a Masnago 15 ottobre: basket Varese e Marco Passera',
+    ogDescription: 'Giovedì 15 ottobre dalle 14,45 torna «Luci a Masnago».',
+    canonicalPath: '/articoli-frontaliere/luci-masnago-terza-puntata/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Basket: «Luci a Masnago» torna giovedì 15 ottobre con Marco Passera",
+      "description": "Giovedì 15 ottobre dalle 14,45 torna «Luci a Masnago». La puntata segue il momento difficile della Pallacanestro Varese. In studio ci sarà l'ex playmaker Marco",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-luci-masnago-terza-puntata.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Studio radio con vista sul Lago di Lugano, microfoni e attrezzature, luce pomeridiana."
+      },
+      "datePublished": "2026-10-15T16:14:17+00:00",
+      "dateModified": "2026-10-15T16:14:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/luci-masnago-terza-puntata/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-inaugurazione-sala-comacina-polizia': {
+    title: 'Polizia Stradale: il taglio del nastro a Sala Comacina',
+    description: 'Cerimonia venerdì 16 ottobre alle 11 Distaccamento della Polizia Stradale a Sala Comacina Attesi Salvini, Piantedosi, Molteni e Pisani Presente il sindaco',
+    keywords: 'frontalieri, ticino, svizzera, italia, polizia, stradale, taglio, nastro',
+    ogTitle: 'Polizia Stradale: il taglio del nastro a Sala Comacina',
+    ogDescription: 'Cerimonia venerdì 16 ottobre alle 11 Distaccamento della Polizia Stradale a Sala Comacina Attesi Salvini, Piantedosi, Molteni e Pisani Presente il sindaco',
+    canonicalPath: '/articoli-frontaliere/inaugurazione-sala-comacina-polizia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Polizia Stradale: il taglio del nastro a Sala Comacina",
+      "description": "Cerimonia venerdì 16 ottobre alle 11 Distaccamento della Polizia Stradale a Sala Comacina Attesi Salvini, Piantedosi, Molteni e Pisani Presente il sindaco",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-inaugurazione-sala-comacina-polizia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-15T16:45:03+00:00",
+      "dateModified": "2026-10-15T16:45:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/inaugurazione-sala-comacina-polizia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-saronno-piccole-stelle-softball': {
+    title: 'Saronno, torna Piccole Stelle: torneo di softball Under 14',
+    description: 'Il 17 e 18 ottobre torna il torneo Piccole Stelle La sesta edizione è riservata alla categoria Under 14 Il torneo ricorda Enrico Obletter Saronno gioca in casa',
+    keywords: 'frontalieri, ticino, svizzera, italia, saronno, torna, piccole, stelle',
+    ogTitle: 'Saronno, torna il torneo Piccole Stelle Under 14',
+    ogDescription: 'Il 17 e 18 ottobre torna il torneo Piccole Stelle La sesta edizione è riservata alla categoria Under 14 Il torneo ricorda Enrico Obletter Saronno gioca in casa',
+    canonicalPath: '/articoli-frontaliere/saronno-piccole-stelle-softball/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Saronno, torna Piccole Stelle: torneo di softball Under 14",
+      "description": "Il 17 e 18 ottobre torna il torneo Piccole Stelle La sesta edizione è riservata alla categoria Under 14 Il torneo ricorda Enrico Obletter Saronno gioca in casa",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-saronno-piccole-stelle-softball.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-15T17:55:49+00:00",
+      "dateModified": "2026-10-15T17:55:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/saronno-piccole-stelle-softball/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lugano-preventivo-2027-moltiplicatori': {
+    title: 'Preventivo 2027 in rosso ma moltiplicatori invariati',
+    description: 'Disavanzo 2027: 14,7 milioni di franchi Investimenti netti previsti: 97 milioni Moltiplicatori confermati: 80% e 85% Soggetto → Città di Lugano Decisione →',
+    keywords: 'frontalieri, ticino, svizzera, italia, preventivo, rosso, moltiplicatori, invariati',
+    ogTitle: 'Preventivo 2027 Lugano: disavanzo 14,7 mln, moltiplicatori invariati',
+    ogDescription: 'Disavanzo 2027: 14,7 milioni di franchi Investimenti netti previsti: 97 milioni Moltiplicatori confermati: 80% e 85% Soggetto → Città di Lugano Decisione →',
+    canonicalPath: '/articoli-frontaliere/lugano-preventivo-2027-moltiplicatori/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Preventivo 2027 in rosso ma moltiplicatori invariati",
+      "description": "Disavanzo 2027: 14,7 milioni di franchi Investimenti netti previsti: 97 milioni Moltiplicatori confermati: 80% e 85% Soggetto → Città di Lugano Decisione →",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lugano-preventivo-2027-moltiplicatori.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica del centro di Lugano con il lago sullo sfondo, in luce diurna."
+      },
+      "datePublished": "2026-10-15T18:19:31+00:00",
+      "dateModified": "2026-10-15T18:19:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lugano-preventivo-2027-moltiplicatori/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-terzetto-sospetto-melano-chiasso': {
+    title: 'Chiamate shock agli anziani, tre arresti nel Mendrisiotto',
+    description: 'Tre arresti nel Mendrisiotto Sospetti per truffe con chiamate shock Veicolo con targhe ceche trovato a Chiasso Una seconda truffa pomeridiana è stata sventata',
+    keywords: 'frontalieri, ticino, svizzera, italia, chiamate, shock, agli, anziani',
+    ogTitle: 'Mendrisiotto, tre arresti per chiamate shock',
+    ogDescription: 'Tre arresti nel Mendrisiotto Sospetti per truffe con chiamate shock Veicolo con targhe ceche trovato a Chiasso Una seconda truffa pomeridiana è stata sventata',
+    canonicalPath: '/articoli-frontaliere/terzetto-sospetto-melano-chiasso/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Chiamate shock agli anziani, tre arresti nel Mendrisiotto",
+      "description": "Tre arresti nel Mendrisiotto Sospetti per truffe con chiamate shock Veicolo con targhe ceche trovato a Chiasso Una seconda truffa pomeridiana è stata sventata",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-terzetto-sospetto-melano-chiasso.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Chiasso: controlli su un veicolo con targhe ceche dopo tre arresti per sospette chiamate shock"
+      },
+      "datePublished": "2026-10-15T19:19:17+00:00",
+      "dateModified": "2026-10-15T19:19:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/terzetto-sospetto-melano-chiasso/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-inchiesta-medico-locarnese': {
+    title: 'Reati sessuali su pazienti, un medico in carcere',
+    description: 'Medico del Locarnese sotto inchiesta Accertamenti avviati a inizio luglio Uomo ancora in carcerazione preventiva Identificate altre presunte vittime Capo',
+    keywords: 'frontalieri, ticino, svizzera, italia, reati, sessuali, pazienti, medico',
+    ogTitle: 'Medico del Locarnese in carcerazione preventiva',
+    ogDescription: 'Medico del Locarnese sotto inchiesta Accertamenti avviati a inizio luglio Uomo ancora in carcerazione preventiva Identificate altre presunte vittime Capo',
+    canonicalPath: '/articoli-frontaliere/inchiesta-medico-locarnese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Reati sessuali su pazienti, un medico in carcere",
+      "description": "Medico del Locarnese sotto inchiesta Accertamenti avviati a inizio luglio Uomo ancora in carcerazione preventiva Identificate altre presunte vittime Capo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada del Locarnese con un edificio pubblico in una scena sobria"
+      },
+      "datePublished": "2026-10-15T21:15:43+00:00",
+      "dateModified": "2026-10-15T21:15:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/inchiesta-medico-locarnese/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

@@ -37,6 +37,7 @@ import {
   charsetFromDocumentHead,
   createHostThrottle,
   decodeResponseBody,
+  cmsPayloadShape,
   extractJsonApiItems,
   extractJsonEntitiesItems,
   extractPublishedDateFromHtml,
@@ -52,10 +53,12 @@ import {
   sourceRequestBudget,
   stripSourceCitations,
   stripPageChrome,
+  findHtmlTagEndOutsideQuotes,
 } from '../scripts/lib/canton-news-sources.mjs';
 import { itemIdentityOf, newsUrlKey, stripItemIdentity } from '../scripts/lib/source-url-ledger.mjs';
 import { PARSERS } from '../../scripts/ci/validate-canton-sections.mjs';
 import { decodeHtmlEntities } from '../scripts/lib/decode-html-entities.mjs';
+import * as htmlTagScanner from '../scripts/lib/html-tag-scanner.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const FIX = path.join(HERE, 'fixtures', 'canton-sources');
@@ -71,8 +74,9 @@ const endAt = SRC.indexOf(END, startAt);
 assert.ok(startAt !== -1 && endAt !== -1, 'delimitatori degli estrattori non trovati in create-article.mjs — aggiornare questo test');
 const { extractRssItems, extractHeadlines } = new Function(
   'decodeHtmlEntities',
-  `${SRC.slice(startAt, endAt).replace(/^export /gm, '')}\nreturn { extractRssItems, extractHeadlines };`,
-)(decodeHtmlEntities);
+  'htmlTagScanner',
+  `const { findHtmlRawTextClosingTag, findHtmlTagEndOutsideQuotes, nextHtmlElement, nextHtmlElementWhere, nextHtmlOpeningTag, nextHtmlTag } = htmlTagScanner;\n${SRC.slice(startAt, endAt).replace(/^export /gm, '')}\nreturn { extractRssItems, extractHeadlines };`,
+)(decodeHtmlEntities, htmlTagScanner);
 
 const fixture = (name) => fs.readFileSync(path.join(FIX, name));
 const sourceOf = (code, url) => {
@@ -203,6 +207,22 @@ test('date dettaglio: JSON-LD, meta e time sono letti senza usare il corpo', () 
   assert.equal(extractPublishedDateFromHtml('<article><p>nessuna data</p></article>'), null);
 });
 
+test('date dettaglio: il walker quote-aware copre script, meta e time', () => {
+  assert.equal(
+    extractPublishedDateFromHtml('<meta property="article:published_time" content="2026-10-04T12:30:00Z">'
+      + '<script data-note="a > b" type="application/ld+json">{"datePublished":"2026-10-05T12:30:00Z"}</script>')?.toISOString(),
+    '2026-10-05T12:30:00.000Z',
+  );
+  assert.equal(
+    extractPublishedDateFromHtml('<meta data-label="x > y" property="article:published_time" content="2026-10-05T13:30:00+02:00">')?.toISOString(),
+    '2026-10-05T11:30:00.000Z',
+  );
+  assert.equal(
+    selectPublishedTime('<time data-label="x > y" itemprop="datePublished" datetime="2026-10-05T14:00:00Z">pubblicazione</time>')?.toISOString(),
+    '2026-10-05T14:00:00.000Z',
+  );
+});
+
 test('date dettaglio: selectPublishedTime ignora eventi generici e rifiuta due pubblicazioni discordanti', () => {
   const eventOnly = '<article><time datetime="2026-10-11T12:30:00Z">evento</time></article>';
   assert.equal(selectPublishedTime(eventOnly), null);
@@ -215,6 +235,21 @@ test('date dettaglio: selectPublishedTime ignora eventi generici e rifiuta due p
   const ambiguous = '<article><time itemprop="datePublished" datetime="2026-10-05T12:30:00Z">prima</time>'
     + '<time class="publication-date" datetime="2026-10-06T12:30:00Z">seconda</time></article>';
   assert.equal(selectPublishedTime(ambiguous), null);
+});
+
+test('date dettaglio: i tag con > negli attributi passano dallo scanner quote-aware', () => {
+  assert.equal(
+    selectPublishedTime('<time data-note="a > b" itemprop="datePublished" datetime="2026-10-05T14:00:00Z">pubblicazione</time>')?.toISOString(),
+    '2026-10-05T14:00:00.000Z',
+  );
+  assert.equal(
+    extractPublishedDateFromHtml('<script data-note="a > b" type="application/ld+json">{"datePublished":"2026-10-05T12:30:00Z"}</script>')?.toISOString(),
+    '2026-10-05T12:30:00.000Z',
+  );
+  assert.equal(
+    extractPublishedDateFromHtml('<meta data-note="a > b" property="article:published_time" content="2026-10-05T13:30:00+02:00">')?.toISOString(),
+    '2026-10-05T11:30:00.000Z',
+  );
 });
 
 test('json-api CMS SH: permalink, titolo kachellabel e publication_date dei portali ufficiali', () => {
@@ -246,6 +281,72 @@ test('json-api CMS SH: permalink, titolo kachellabel e publication_date dei port
   assert.match(items[1].headline, /Thayngen/);
   assert.equal(items[1].date.getHours(), 17);
   assert.match(items[1].sourceContent, /Bahnhof in Thayngen/);
+});
+
+test('CMS SH: payload misto usa un titolo successivo e lascia una nota esplicita', async () => {
+  const api = 'https://sh.ch/CMS/content/list?language=DE';
+  const row = {
+    kachellabel: '',
+    listlabel: 'breve',
+    articleHeadline: 'Titolo editoriale recuperato dal campo alternativo',
+    publication_date: '05.10.2026',
+    permalink: '/Webseite/Schaffhauser-Polizei-123-DE.html',
+  };
+  const shape = cmsPayloadShape(row);
+  assert.deepEqual(shape.fields, ['kachellabel', 'listlabel', 'articleHeadline']);
+  assert.equal(shape.titleField, 'articleHeadline');
+  assert.equal(shape.fallback, true);
+  assert.equal(shape.mixed, true);
+
+  const notes = [];
+  const items = extractJsonApiItems(JSON.stringify([row]), api, { notes });
+  assert.equal(items.length, 1);
+  assert.equal(items[0].headline, row.articleHeadline);
+  assert.match(notes.join(' '), /CMS payload misto/);
+  assert.match(notes.join(' '), /usato articleHeadline/);
+
+  const { impl } = fakeFetch({ [api]: { body: JSON.stringify([row]), contentType: 'application/json' } });
+  const scanned = await scanCantonSource({ url: api, parser: 'json-api' }, ctx(impl));
+  assert.equal(scanned.headlines[0].headline, row.articleHeadline);
+  assert.match(scanned.notes.join(' '), /CMS payload misto/);
+});
+
+test('CMS SH: gli alias non-stringa non diventano titoli tramite coercizione', () => {
+  const api = 'https://sh.ch/CMS/content/list?language=DE';
+  const row = {
+    kachellabel: { title: 'Titolo artificiale dal payload' },
+    articleHeadline: 'Titolo editoriale valido recuperato dal fallback',
+    publication_date: '05.10.2026',
+    permalink: '/Webseite/Schaffhauser-Polizei-124-DE.html',
+  };
+  const shape = cmsPayloadShape(row);
+  assert.deepEqual(shape.fields, ['kachellabel', 'articleHeadline']);
+  assert.equal(shape.titleField, 'articleHeadline');
+  assert.equal(shape.headline, row.articleHeadline);
+  assert.equal(shape.fallback, true);
+  assert.doesNotMatch(shape.headline, /\[object Object\]/u);
+
+  const items = extractJsonApiItems(JSON.stringify([row]), api);
+  assert.equal(items.length, 1);
+  assert.equal(items[0].headline, row.articleHeadline);
+  assert.ok(!items[0].headline.includes('[object Object]'));
+
+  const objectOnly = { ...row, articleHeadline: undefined };
+  assert.equal(extractJsonApiItems(JSON.stringify([objectOnly]), api).length, 0);
+});
+
+test('CMS SH: sourceContent elimina tag con > dentro attributi quotati', () => {
+  const api = 'https://sh.ch/CMS/content/list?language=DE';
+  const expected = Array.from({ length: 12 }, () => 'Testo pubblico del comunicato con informazioni verificabili.').join(' ');
+  const rows = [{
+    kachellabel: 'Comunicazione con corpo pubblico',
+    publication_date: '05.10.2026',
+    permalink: '/Webseite/Comunicazione-123-DE.html',
+    post_content: `<p data-note="a > b">${expected}</p>`,
+  }];
+  const [item] = extractJsonApiItems(JSON.stringify(rows), api);
+  assert.equal(item.sourceContent, expected);
+  assert.doesNotMatch(item.sourceContent, /b">/u);
 });
 
 test('timestamp CMS SH: secondi, SQL e ISO precedono il fallback day-only', () => {
@@ -1040,6 +1141,24 @@ test('aarau.ch: un role="navigation" che contiene <main> non e\' un menu', async
 });
 
 test('stripPageChrome: nav, ruoli ARIA, header/footer di pagina; il resto intatto', () => {
+  const quotedOpening = '<div role="navigation" data-note="a > b">';
+  assert.equal(findHtmlTagEndOutsideQuotes(quotedOpening, 0), quotedOpening.length - 1);
+  const quotedMarkup = quotedOpening
+    + '<a href="/menu">Voce del menu da togliere</a></div>'
+    + '<main data-note="c > d"><a href="/news/quoted">Titolo articolo con attributi quoted</a></main>';
+  const quotedResult = stripPageChrome(quotedMarkup);
+  assert.equal(quotedResult.removed, 1);
+  assert.ok(!quotedResult.html.includes('/menu'));
+  assert.ok(quotedResult.html.includes('<main data-note="c > d">'));
+  assert.ok(quotedResult.html.includes('/news/quoted'));
+
+  const unquotedSlash = '<nav data-url=/menu/><a href="/menu">Link di navigazione candidato</a></nav>'
+    + '<main><a href="/news/unquoted-slash">Notizia autentica con data</a></main>';
+  const unquotedSlashResult = stripPageChrome(unquotedSlash);
+  assert.equal(unquotedSlashResult.removed, 1);
+  assert.ok(!unquotedSlashResult.html.includes('Link di navigazione candidato'));
+  assert.ok(unquotedSlashResult.html.includes('/news/unquoted-slash'));
+
   const html = [
     '<body><header><a href="/chi">Chi siamo, la nostra storia</a></header>',
     '<div role="navigation"><a href="/menu">Una voce del menu laterale</a></div>',
@@ -1062,7 +1181,7 @@ test('stripPageChrome: nav, ruoli ARIA, header/footer di pagina; il resto intatt
   assert.equal(cleaned.removed, 0);
   assert.equal(cleaned.html.length, inactive.length, 'a pari lunghezza');
   assert.deepEqual(extractHeadlines(cleaned.html, 'https://x.ch/').map((h) => h.url), ['https://x.ch/news/9']);
-  assert.equal(extractHeadlines(inactive, 'https://x.ch/').length, 3, 'premessa: l\'estrattore storico li prende tutti');
+  assert.equal(extractHeadlines(inactive, 'https://x.ch/').length, 2, 'i tag commentati non sono link HTML attivi');
   const nestedTemplate = '<template><template></template><a href="/menu/nested">Voce del menu nel template esterno</a></template>'
     + '<p><a href="/news/nested">Titolo del comunicato ancora attivo</a></p>';
   const nestedCleaned = stripPageChrome(nestedTemplate);
@@ -1090,6 +1209,17 @@ test('stripPageChrome: nav, ruoli ARIA, header/footer di pagina; il resto intatt
   const open = '<nav><a href="/a">Voce di un menu non chiuso</a><main><a href="/news/3">Titolo del terzo comunicato</a></main>';
   assert.deepEqual(stripPageChrome(open), { html: open, removed: 0 });
   assert.deepEqual(stripPageChrome(''), { html: '', removed: 0 });
+});
+
+test('stripPageChrome: attributi quotati con `>` non nascondono i ruoli né rompono il bilanciamento', () => {
+  const html = '<div role="navigation"><span data-label="x > <div> y">'
+    + '<a href="/menu">Voce del menu laterale</a>'
+    + '</span></div><p>Contenuto editoriale conservato</p>';
+
+  assert.deepEqual(stripPageChrome(html), {
+    html: '<p>Contenuto editoriale conservato</p>',
+    removed: 1,
+  });
 });
 
 test('articlePathPattern: ogni dichiarazione del profilo e\' su una fonte html-links e compila', () => {

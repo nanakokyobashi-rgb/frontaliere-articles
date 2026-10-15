@@ -1172,7 +1172,8 @@ jobs:
       # La PR puo' avanzare dopo il marker, mentre un autore o il fixer gemello
       # sta lavorando. La verifica resta fail-closed e impedisce Codex; il
       # classificatore decide se il mismatch e' una race SUPERSEDED provata
-      # dall'avanzamento remoto o un errore locale da lasciare rosso.
+      # dal body corrente (refund + retry) o dall'avanzamento remoto, oppure
+      # un errore locale da lasciare rosso.
       - name: Revalidate PR HEAD + body immediately before Codex
         id: precodex
         if: steps.guard.outputs.proceed == 'true'
@@ -1468,6 +1469,35 @@ jobs:
           if ! confirm_remote_head "$REMOTE_SHA"; then
             fail_remote_head_unverified "prima della classificazione"
           fi
+          refund_superseded_round() {
+            local refund_reason="${1:-SUPERSEDED}"
+            local refund_marker="${FIX_ROUND_MARKER%_ROUND}_REFUNDED"
+            if [ -z "${PR_NUMBER:-}" ] || [ -z "${FIX_ROUND:-}" ] || [ -z "${FIX_ROUND_MARKER:-}" ] \
+              || [ -z "${MARKER_COMMENT_ID:-}" ] || [ -z "${MARKER_HEAD:-}" ] \
+              || [ -z "${MARKER_BODY_REVISION:-}" ] || [ ! -f "${TRUSTED_MARKER_HELPER:-}" ]; then
+              echo "::error::SUPERSEDED: prova trusted del marker ${FIX_ROUND_MARKER:-?}:${FIX_ROUND:-?} incompleta ($refund_reason) → rimborso non eseguibile, round ancora contato. Job ROSSO."
+              return 1
+            fi
+            if ! confirm_remote_head "$REMOTE_SHA"; then
+              fail_remote_head_unverified "prima del rimborso $refund_reason"
+            fi
+            if ! refund_result=$(GH_TOKEN="$MARKER_GH_TOKEN" node "$TRUSTED_MARKER_HELPER" --refund-superseded \
+              --repo "$REPO" --pr "$PR_NUMBER" --marker "$FIX_ROUND_MARKER" \
+              --round "$FIX_ROUND" --comment-id "$MARKER_COMMENT_ID" \
+              --expected-head "$MARKER_HEAD" --expected-body-revision "$MARKER_BODY_REVISION" \
+              --expected-author github-actions[bot]); then
+              echo "::error::SUPERSEDED: rimborso del marker $FIX_ROUND_MARKER:$FIX_ROUND non convergente ($refund_reason) → Job ROSSO; lo stato resta ritentabile."
+              return 1
+            fi
+            if ! printf '%s' "$refund_result" | jq -e \
+              --arg marker "$refund_marker" --arg round "$FIX_ROUND" --arg id "$MARKER_COMMENT_ID" \
+              '.refundMarker == $marker and (.round | tostring) == $round and (.commentId | tostring) == $id
+               and .markerPresent == false and (.handleId | type) == "number"' >/dev/null 2>&1; then
+              echo "::error::SUPERSEDED: refund senza prova strutturata ($refund_marker:$FIX_ROUND per ID $MARKER_COMMENT_ID, $refund_reason) → Job ROSSO."
+              return 1
+            fi
+            echo "round marker $FIX_ROUND_MARKER:$FIX_ROUND → $refund_marker rimborsato ($refund_reason; $refund_result)"
+          }
           if [ -n "$HEAD_NOW" ] && [ -n "$BASE_SHA" ] && [ "$HEAD_NOW" != "$BASE_SHA" ] && [ "$REMOTE_SHA" = "$HEAD_NOW" ]; then
             echo "Fix pushato questo round (HEAD avanzato e presente su origin/$HEAD_REF) → round SUCCESS. Job verde anche se la CLI e' uscita '$ACTION_OUTCOME'."
             exit 0
@@ -1479,46 +1509,71 @@ jobs:
             if [ -n "${GITHUB_ENV:-}" ]; then
               echo 'CLAIM_STATUS=released' >> "$GITHUB_ENV"
             fi
-            # Rimborso del marker di round come UNA macchina a stati ritentabile
-            # (fixer-round-marker.mjs --refund-superseded), non tre side effect
-            # indipendenti: tentativo vincolato all'ID del marker → DELETE
-            # verificata → handle `${FIX_ROUND_MARKER%_ROUND}_REFUNDED` vincolato.
-            # Una riesecuzione dopo un'interruzione riprende dal passo mancante,
-            # un handle gia' presente non viene duplicato e un finalizzatore
-            # concorrente converge sullo stesso stato. Ogni stato non
-            # dimostrabile e' ROSSO, mai declassato ad avviso.
-            refund_marker="${FIX_ROUND_MARKER%_ROUND}_REFUNDED"
-            if [ -z "${PR_NUMBER:-}" ] || [ -z "${FIX_ROUND:-}" ] || [ -z "${FIX_ROUND_MARKER:-}" ] \
-              || [ -z "${MARKER_COMMENT_ID:-}" ] || [ -z "${MARKER_HEAD:-}" ] \
-              || [ -z "${MARKER_BODY_REVISION:-}" ] || [ ! -f "${TRUSTED_MARKER_HELPER:-}" ]; then
-              echo "::error::SUPERSEDED: prova trusted del marker ${FIX_ROUND_MARKER:-?}:${FIX_ROUND:-?} incompleta (ID/HEAD/body/helper) → rimborso non eseguibile, round ancora contato. Job ROSSO."
+            # La stessa macchina a stati viene usata dalla race body-only:
+            # tentativo vincolato all'ID → DELETE trusted → handle vincolato.
+            if ! refund_superseded_round "race HEAD"; then
               exit 1
             fi
-            if ! confirm_remote_head "$REMOTE_SHA"; then
-              fail_remote_head_unverified "prima del rimborso"
-            fi
-            if ! refund_result=$(GH_TOKEN="$MARKER_GH_TOKEN" node "$TRUSTED_MARKER_HELPER" --refund-superseded \
-              --repo "$REPO" --pr "$PR_NUMBER" --marker "$FIX_ROUND_MARKER" \
-              --round "$FIX_ROUND" --comment-id "$MARKER_COMMENT_ID" \
-              --expected-head "$MARKER_HEAD" --expected-body-revision "$MARKER_BODY_REVISION" \
-              --expected-author github-actions[bot]); then
-              echo "::error::SUPERSEDED: rimborso del marker $FIX_ROUND_MARKER:$FIX_ROUND (ID $MARKER_COMMENT_ID) non convergente → Job ROSSO. Lo stato resta ritentabile: rieseguire riprende dal passo interrotto senza duplicare DELETE o handle."
-              exit 1
-            fi
-            if ! printf '%s' "$refund_result" | jq -e \
-              --arg marker "$refund_marker" --arg round "$FIX_ROUND" --arg id "$MARKER_COMMENT_ID" \
-              '.refundMarker == $marker and (.round | tostring) == $round and (.commentId | tostring) == $id
-               and .markerPresent == false and (.handleId | type) == "number"' >/dev/null 2>&1; then
-              echo "::error::SUPERSEDED: esito del rimborso senza prova strutturata ($refund_marker:$FIX_ROUND per ID $MARKER_COMMENT_ID) → Job ROSSO."
-              exit 1
-            fi
-            echo "round marker $FIX_ROUND_MARKER:$FIX_ROUND → $refund_marker rimborsato ($refund_result)"
             # Il claim NON si finalizza qui: CLAIM_STATUS=released e' in
             # GITHUB_ENV e lo step `Finalize` successivo (always()) lo rilascia
             # una sola volta, verificando claim_error e claim_state. Un secondo
             # finalize qui duplicava la scrittura e ne mascherava l'errore.
             echo "⚠️ Branch avanzato da un altro writer dopo l'avvio del round (start=$START_SHA local=$HEAD_NOW remote=$REMOTE_SHA) → run SUPERSEDED; claim rilasciato, nessun round consumato."
             exit 0
+          fi
+          # Se Codex e' skipped, il pre-Codex ha impedito di consumare il
+          # round. Un body-only edit e' una race legittima, non un fix fallito:
+          # si prova il nuovo body direttamente dall'API, si rimborsa il marker
+          # con la macchina a stati trusted e si ridispatcha una sola run sulla
+          # stessa head_ref. Un body illeggibile, un marker incoerente o un
+          # refund non dimostrabile restano ROSSI (fail-closed).
+          if [ "$ACTION_OUTCOME" = "skipped" ]; then
+            if ! printf '%s\n' "${MARKER_HEAD:-}" | grep -Eq '^[0-9a-f]{40}$' \
+              || [ "$REMOTE_SHA" != "${MARKER_HEAD:-}" ] \
+              || ! printf '%s\n' "${MARKER_BODY_REVISION:-}" | grep -Eq '^[0-9a-f]{64}$'; then
+              echo "::error::❌-check-fix: Codex skipped ma la head/body del marker non e' verificabile sulla head remota stabile → marker conservato e job ROSSO."
+              exit 1
+            fi
+            if ! precodex_body_file=$(mktemp "${RUNNER_TEMP:-/tmp}/redcheck-pre-codex-body.XXXXXX"); then
+              echo "::error::❌-check-fix: impossibile creare la prova del body dopo un precodex skipped → marker conservato e job ROSSO."
+              exit 1
+            fi
+            trap 'rm -f "$precodex_body_file"' EXIT
+            if ! gh api "repos/$REPO/pulls/$PR_NUMBER" \
+              --jq 'if type != "object" then error("PR response is not an object") elif (has("body") | not) then error("PR response has no body field") elif .body != null and (.body | type) != "string" then error("PR body is not a string or null") else (.body // "") end' \
+              > "$precodex_body_file"; then
+              echo "::error::❌-check-fix: impossibile leggere un body valido dopo un precodex skipped → marker conservato e job ROSSO."
+              exit 1
+            fi
+            if [ ! -s "$precodex_body_file" ]; then
+              echo "::error::❌-check-fix: la prova del body dopo un precodex skipped e' vuota → marker conservato e job ROSSO."
+              exit 1
+            fi
+            if ! precodex_body_sha=$(sha256sum "$precodex_body_file" | awk '{print $1}'); then
+              echo "::error::❌-check-fix: impossibile calcolare il digest del body dopo un precodex skipped → marker conservato e job ROSSO."
+              exit 1
+            fi
+            if ! printf '%s\n' "$precodex_body_sha" | grep -Eq '^[0-9a-f]{64}$'; then
+              echo "::error::❌-check-fix: digest del body dopo un precodex skipped non valido → marker conservato e job ROSSO."
+              exit 1
+            fi
+            if [ "$precodex_body_sha" != "$MARKER_BODY_REVISION" ]; then
+              CLAIM_STATUS=released
+              export CLAIM_STATUS
+              if [ -n "${GITHUB_ENV:-}" ]; then
+                echo 'CLAIM_STATUS=released' >> "$GITHUB_ENV"
+              fi
+              if ! refund_superseded_round "race body-only"; then
+                exit 1
+              fi
+              if ! gh workflow run pr-redcheck-fixer.yml --repo "$REPO" --ref "$HEAD_REF" \
+                --field "pr=$PR_NUMBER" --field "head_ref=$HEAD_REF"; then
+                echo "::error::SUPERSEDED: refund body-only riuscito ma il retry di pr-redcheck-fixer non e' stato dispatchato → Job ROSSO."
+                exit 1
+              fi
+              echo "⚠️ Body della PR avanzato dopo il marker (marker=$MARKER_BODY_REVISION current=$precodex_body_sha) → run SUPERSEDED; claim rilasciato, round rimborsato e retry dispatchato. Job verde."
+              exit 0
+            fi
           fi
           if [ "$ACTION_OUTCOME" != "success" ]; then
             echo "::error::❌-check-fix: nessun commit pushato e la run Claude non e' terminata con success ('$ACTION_OUTCOME') → non-progresso reale. Job ROSSO (segnale preservato; il round-cap porta a needs-human a N>=2)."

@@ -4,22 +4,22 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "1fedd439d3026f087247549dcbd24518a26b288b014e66bdca50db9c581c395a",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "35bae19b1b3ab07e08af5de16cbb0e9c8bdfbbd56c951f99e743b219977c07c3",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-12T23:59:59.000Z",
+      "updatedAt": "2026-10-14T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-13T19:37:23.778Z",
+      "updatedAt": "2026-10-15T12:13:19.434Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -33,65 +33,65 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Chavannes-de-Bogis-Divonne, settimana conclusa: 12 ottobre 2026"
+          "note": "Chavannes-de-Bogis-Divonne, settimana conclusa: 14 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "11",
-          "note": "segnalazioni aggiornate: 13 ottobre 2026"
+          "value": "16",
+          "note": "segnalazioni aggiornate: 15 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "25",
-          "note": "segnalazioni aggiornate: 13 ottobre 2026"
+          "value": "28",
+          "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 6 ottobre 2026 – 12 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 8 ottobre 2026 – 14 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Chavannes-de-Bogis-Divonne",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/chavannes-de-bogis-divonne/oggi/"
             },
             {
               "label": "Crassier-Divonne",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/crassier-divonne/oggi/"
             },
             {
               "label": "La Cure-Les Rousses",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/la-cure-les-rousses/oggi/"
-            },
-            {
-              "label": "Vallorbe-Jougne (La Ferrière)",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/vallorbe-jougne/oggi/"
             },
             {
               "label": "Le Brassus-Bois-d'Amont",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/le-brassus-bois-d-amont/oggi/"
             },
             {
+              "label": "Vallorbe-Jougne (La Ferrière)",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/vallorbe-jougne/oggi/"
+            },
+            {
               "label": "L'Auberson-Les Fourgs",
-              "value": "0,2 min",
-              "detail": "47 rilevazioni",
+              "value": "0,1 min",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/l-auberson-les-fourgs/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-14T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -148,13 +148,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Travaux sur le pont de la Vuachère - circulation modifiée",
+              "date": "2026-10-13T09:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90650"
+            },
             {
               "label": "Réfection de la chaussée de la route Aloys-Fauquez",
               "date": "2026-10-07T12:00:00.000Z",
@@ -176,7 +181,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -259,7 +264,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "VD",
@@ -270,65 +275,65 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Chavannes-de-Bogis-Divonne, week ending 12 October 2026"
+          "note": "Chavannes-de-Bogis-Divonne, week ending 14 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "11",
-          "note": "reports as of 13 October 2026"
+          "value": "16",
+          "note": "reports as of 15 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "25",
-          "note": "reports as of 13 October 2026"
+          "value": "28",
+          "note": "reports as of 15 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 6 October 2026 to 12 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 8 October 2026 to 14 October 2026, fastest first.",
           "items": [
             {
               "label": "Chavannes-de-Bogis-Divonne",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/chavannes-de-bogis-divonne/today/"
             },
             {
               "label": "Crassier-Divonne",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/crassier-divonne/today/"
             },
             {
               "label": "La Cure-Les Rousses",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/la-cure-les-rousses/today/"
-            },
-            {
-              "label": "Vallorbe-Jougne (La Ferrière)",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/vallorbe-jougne/today/"
             },
             {
               "label": "Le Brassus-Bois-d'Amont",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/le-brassus-bois-d-amont/today/"
             },
             {
+              "label": "Vallorbe-Jougne (La Ferrière)",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/vallorbe-jougne/today/"
+            },
+            {
               "label": "L'Auberson-Les Fourgs",
-              "value": "0.2 min",
-              "detail": "47 readings",
+              "value": "0.1 min",
+              "detail": "48 readings",
               "url": "/en/border-wait/l-auberson-les-fourgs/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-14T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -385,13 +390,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Travaux sur le pont de la Vuachère - circulation modifiée",
+              "date": "2026-10-13T09:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90650"
+            },
             {
               "label": "Réfection de la chaussée de la route Aloys-Fauquez",
               "date": "2026-10-07T12:00:00.000Z",
@@ -413,7 +423,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -495,7 +505,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "VD",
@@ -506,65 +516,65 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Chavannes-de-Bogis-Divonne, Woche bis 12. Oktober 2026"
+          "note": "Chavannes-de-Bogis-Divonne, Woche bis 14. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "11",
-          "note": "Meldungen vom 13. Oktober 2026"
+          "value": "16",
+          "note": "Meldungen vom 15. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "25",
-          "note": "Meldungen vom 13. Oktober 2026"
+          "value": "28",
+          "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 6. Oktober 2026 bis 12. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 8. Oktober 2026 bis 14. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Chavannes-de-Bogis-Divonne",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/chavannes-de-bogis-divonne/heute/"
             },
             {
               "label": "Crassier-Divonne",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/crassier-divonne/heute/"
             },
             {
               "label": "La Cure-Les Rousses",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/la-cure-les-rousses/heute/"
-            },
-            {
-              "label": "Vallorbe-Jougne (La Ferrière)",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/vallorbe-jougne/heute/"
             },
             {
               "label": "Le Brassus-Bois-d'Amont",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/le-brassus-bois-d-amont/heute/"
             },
             {
+              "label": "Vallorbe-Jougne (La Ferrière)",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/vallorbe-jougne/heute/"
+            },
+            {
               "label": "L'Auberson-Les Fourgs",
-              "value": "0.2 Min.",
-              "detail": "47 Messungen",
+              "value": "0.1 Min.",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/l-auberson-les-fourgs/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-14T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -621,13 +631,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Travaux sur le pont de la Vuachère - circulation modifiée",
+              "date": "2026-10-13T09:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90650"
+            },
             {
               "label": "Réfection de la chaussée de la route Aloys-Fauquez",
               "date": "2026-10-07T12:00:00.000Z",
@@ -649,7 +664,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -731,7 +746,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "VD",
@@ -742,65 +757,65 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Chavannes-de-Bogis-Divonne, semaine jusqu’au 12 octobre 2026"
+          "note": "Chavannes-de-Bogis-Divonne, semaine jusqu’au 14 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "11",
-          "note": "signalements au 13 octobre 2026"
+          "value": "16",
+          "note": "signalements au 15 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "25",
-          "note": "signalements au 13 octobre 2026"
+          "value": "28",
+          "note": "signalements au 15 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 6 octobre 2026 au 12 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 8 octobre 2026 au 14 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Chavannes-de-Bogis-Divonne",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/chavannes-de-bogis-divonne/aujourd-hui/"
             },
             {
               "label": "Crassier-Divonne",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/crassier-divonne/aujourd-hui/"
             },
             {
               "label": "La Cure-Les Rousses",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/la-cure-les-rousses/aujourd-hui/"
-            },
-            {
-              "label": "Vallorbe-Jougne (La Ferrière)",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/vallorbe-jougne/aujourd-hui/"
             },
             {
               "label": "Le Brassus-Bois-d'Amont",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/le-brassus-bois-d-amont/aujourd-hui/"
             },
             {
+              "label": "Vallorbe-Jougne (La Ferrière)",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/vallorbe-jougne/aujourd-hui/"
+            },
+            {
               "label": "L'Auberson-Les Fourgs",
-              "value": "0,2 min",
-              "detail": "47 relevés",
+              "value": "0,1 min",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/l-auberson-les-fourgs/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-14T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -857,13 +872,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Travaux sur le pont de la Vuachère - circulation modifiée",
+              "date": "2026-10-13T09:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90650"
+            },
             {
               "label": "Réfection de la chaussée de la route Aloys-Fauquez",
               "date": "2026-10-07T12:00:00.000Z",
@@ -885,7 +905,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -968,7 +988,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

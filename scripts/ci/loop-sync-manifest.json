@@ -182,7 +182,7 @@
     {
       "path": "scripts/ci/auto-merge-eval.mjs",
       "mode": "adapted",
-      "reason": "Divergenza a DUE direzioni, nessuna delle quali e' copiabile — per questo non e' piu' `identical` (riconciliazione di nanako#318 punto 2). QUI in piu': il gate 4 `generator-ci` (#242/#252), che esige il check-run del generatore sulle PR che toccano generator/engine/host — sul sito quel workflow non esiste, portarcelo bloccherebbe ogni PR in attesa di un check che nessuno emette. SUL SITO in piu': l'osservazione #5552 (`lib/checkRunObservation.mjs` + `lib/prComments.mjs`, che qui non esistono), che elenca i check-run completati sulla HEAD senza bloccare. Copiare in una delle due direzioni romperebbe l'altro lato, quindi restano diversi apposta; la sorveglianza sulla baseline resta accesa e intercetta comunque una modifica futura su uno dei due lati.",
+      "reason": "Adattamento riconfermato il 2026-10-15 (nanako#2162; sito #8862, #8884, #8912, #8913, #8919, #9030, #9339, #9406). Nel corpus gli export sono consumati da `review-gate.mjs`, `generator-ci-gate.mjs` e `pr-contribution-fingerprint.mjs`; il ruleset richiede `tests (node --test)` e il gate `generator-ci` path-scoped (#242/#252). La review è legata allo snapshot HEAD+body e il carry-forward resta ammesso solo a fingerprint del contributo invariato; la selezione generation-aware è nel `lib/vitestCheck.mjs` del corpus. Sul sito l'evaluator usa review exact-HEAD, rilettura finale di metadata/file, `automation-risk-policy` e osservazione non bloccante dei check (`lib/checkRunObservation.mjs`). Sono consumer e dipendenze diversi: copiare le modifiche del sito rimuoverebbe la policy di carry-forward del corpus o introdurrebbe helper/policy site-only, mentre il gate `generator-ci` non esiste sul sito. Le decisioni restano specifiche di questo path; nessun altro path del manifest è riallineato da questa voce.",
       "baseline": {
         "site": "840c008714ef481c",
         "corpus": "208d0da51eb787c5",
@@ -193,7 +193,7 @@
     {
       "path": "scripts/ci/auto-live-canton-sections.mjs",
       "mode": "corpus-only",
-      "reason": "Piano D22 per promuovere in modo idempotente una sezione cantonale da draft a live dopo articolo proprio, sei hub e bootstrap R2 verificati; il workflow apre una PR e non esiste un producer equivalente nel sito.",
+      "reason": "Piano D22 per promuovere in modo idempotente una sezione cantonale da draft a live dopo articolo proprio, sei hub e bootstrap R2 verificati; il workflow apre una PR e non esiste un producer equivalente nel sito. 2026-10-15: #2744 adotta il guard ESM canonico via realpath coerente con #2740/#2742/#2743 e aggiunge la regressione offline import/symlink in `generator/tests/auto-live-canton-sections-main-guard.test.mjs`.",
       "baseline": {
         "site": null,
         "corpus": "2964a09ec968c6c2",
@@ -314,12 +314,11 @@
       "path": "scripts/ci/check-blog-body-syntax.mjs",
       "sitePath": "tests/blog-body-typescript-syntax.test.ts",
       "mode": "adapted",
-      "reason": "Preflight di sintassi TypeScript sui corpi. Gemello di tests/blog-body-typescript-syntax.test.ts del sito: stessa validazione (esbuild transform, loader ts, solo sintassi), adattata al percorso di PUBBLICAZIONE invece che alle PR — la' e' un test su pull_request, qui gli articoli atterrano per push diretto su main, quindi un gate sulle PR non ne vedrebbe mai uno. Registrato 'adapted' e non 'corpus-only': il file sul sito ESISTE, e dichiararlo assente renderebbe loop-drift-check cieco proprio alla divergenza fra i due — il caso peggiore descritto in CLAUDE.md.",
+      "reason": "Preflight syntax-only dei body via esbuild. Gemello di tests/blog-body-typescript-syntax.test.ts del sito: usa lo stesso esbuild.transform, ma le responsabilita' operative divergono. Qui il controllo e' preflight della pubblicazione da push diretto a main, dopo host/cantonSectionsBootstrap.mjs; in scan changed riceve i path via PREFLIGHT_CHANGED_FILES_FILE per non superare ARG_MAX con migliaia di path. Il gemello del sito e' un test Vitest su pull_request che scandisce il set completo e non consuma una lista di changed-path. `adapted` e' intenzionale: il sito ha il gemello, ma non questo trasporto publisher-specifico.",
       "baseline": {
         "site": "d1fc5b37f2f0c55d",
-        "corpus": "fc74a2c3e737fe83",
-        "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T22:32:17.150Z"
+        "corpus": "e5f830779f7e41ba",
+        "alignedAt": "2026-10-15"
       }
     },
     {
@@ -350,7 +349,7 @@
         "alignedAt": "2026-09-25",
         "forcedAt": "2026-09-25T14:13:09.697Z"
       },
-      "reason": "Aggiunto QUOTA_BEACON_PEER_REPO: i workflow Claude di questo repo onorano ANCHE il beacon 429 del sito e cedono; il sito non legge mai il nostro. Il 429 e' per-account, quindi un limite visto la' predice il nostro. E' cio' che rende 'il corpus non affama il sito' una proprieta' strutturale invece di una speranza sulla cadenza dei cron. La variabile e' opzionale e non impostata sul sito, quindi lo stesso file resterebbe valido anche la': candidato a risalire (classe corpus-ahead). 2026-08-21: entrambi i lati estesi con QUOTA_LBL_ACTIVE/REQUEUE (stadio decompose) e beacon-scan su entrambe le famiglie di label; resta adapted per il peer-beacon che il sito non ha. 2026-09-01: riapplicato sopra l'estensione locale il tetto ISSUE_LIST_LIMIT del sito (commit 5e150325, #6309) — `--limit 100` su `gh issue list` tagliava le issue piu' vecchie in silenzio quando la coda supera 100 voci; ora e' 300, sovrascrivibile via FOLLOWUP_ISSUE_LIST_LIMIT, con un warning quando la vista resta parziale. 2026-09-19: il writer centrale dei marker di deferral conserva i marker v1 legacy e può emettere v2 solo con ruolo fixer, workflow/evento allowlisted e binding PR/HEAD verificabile; il gemello sito dovra' adottare la stessa forma quando cablera' i producer. 2026-09-25: tutte le chiamate GitHub del beacon e del lease passano da `scripts/ci/lib/gh-rate-limit.mjs`; un 403 primario attende il reset entro il tetto del helper e ritenta una volta, mentre un reset lontano o un secondo errore resta fail-closed senza ammettere un lease non verificato (issue #1881)."
+      "reason": "Aggiunto QUOTA_BEACON_PEER_REPO: i workflow Claude di questo repo onorano ANCHE il beacon 429 del sito e cedono; il sito non legge mai il nostro. Il 429 e' per-account, quindi un limite visto la' predice il nostro. E' cio' che rende 'il corpus non affama il sito' una proprieta' strutturale invece di una speranza sulla cadenza dei cron. La variabile e' opzionale e non impostata sul sito, quindi lo stesso file resterebbe valido anche la': candidato a risalire (classe corpus-ahead). 2026-08-21: entrambi i lati estesi con QUOTA_LBL_ACTIVE/REQUEUE (stadio decompose) e beacon-scan su entrambe le famiglie di label; resta adapted per il peer-beacon che il sito non ha. 2026-09-01: riapplicato sopra l'estensione locale il tetto ISSUE_LIST_LIMIT del sito (commit 5e150325, #6309) — `--limit 100` su `gh issue list` tagliava le issue piu' vecchie in silenzio quando la coda supera 100 voci; ora e' 300, sovrascrivibile via FOLLOWUP_ISSUE_LIST_LIMIT, con un warning quando la vista resta parziale. 2026-09-19: il writer centrale dei marker di deferral conserva i marker v1 legacy e può emettere v2 solo con ruolo fixer, workflow/evento allowlisted e binding PR/HEAD verificabile; il gemello sito dovra' adottare la stessa forma quando cablera' i producer. 2026-09-25: tutte le chiamate GitHub del beacon e del lease passano da `scripts/ci/lib/gh-rate-limit.mjs`; un 403 primario attende il reset entro il tetto del helper e ritenta una volta, mentre un reset lontano o un secondo errore resta fail-closed senza ammettere un lease non verificato (issue #1881). 2026-10-15: portato dalla PR sito #12043 soltanto il guard ESM canonico via realpath, sopra la macchina quota/lease adattata; #2739 aggiunge la regressione import/symlink in `generator/tests/check-quota-backoff-main-guard.test.mjs`."
     },
     {
       "path": "scripts/ci/check-stale-issue-dispatch.mjs",
@@ -535,12 +534,12 @@
       "path": "scripts/ci/report-validate-dist-failure.mjs",
       "mode": "adapted",
       "baseline": {
-        "site": "9d395b08c46db9b2",
-        "corpus": "f128bfdc2aa3243e",
-        "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T23:44:22.620Z"
+        "site": "306fbeddce0d0d15",
+        "corpus": "2743fee850264fbf",
+        "alignedAt": "2026-10-15",
+        "forcedAt": "2026-10-15T04:57:54.304Z"
       },
-      "reason": "Dipendenza adapted di scripts/ci/scan-job-timeouts.mjs, importata dal sito in #7462 (05/09) come './report-validate-dist-failure.mjs': dal trasporto #1971 e' presente e raggiungibile anche qui dallo scanner riconciliato. Diverge dal sito per un bug trovato dalla review Codex sulla PR #1894: `reportDist` troncava a MAX_PER_GATE_ISSUES la lista dei JOB falliti PRIMA di estrarne i gate, invece di troncare solo i gate/payload dopo la deduplicazione — con piu' di tre job validate-dist falliti (la matrice tipica e' a 4 locale), il quarto job perdeva per sempre il proprio gate. Fix applicata SOLO qui perche' il sito non andava toccato da quel ciclo; e' un candidato di backport per il sito, non ancora fatto."
+      "reason": "Dipendenza adapted di scripts/ci/scan-job-timeouts.mjs, importata dal sito in #7462 (05/09) come './report-validate-dist-failure.mjs': dal trasporto #1971 e' presente e raggiungibile anche qui dallo scanner riconciliato. Diverge dal sito per un bug trovato dalla review Codex sulla PR #1894: `reportDist` troncava a MAX_PER_GATE_ISSUES la lista dei JOB falliti PRIMA di estrarne i gate, invece di troncare solo i gate/payload dopo la deduplicazione — con piu' di tre job validate-dist falliti (la matrice tipica e' a 4 locale), il quarto job perdeva per sempre il proprio gate. Fix applicata SOLO qui perche' il sito non andava toccato da quel ciclo; e' un candidato di backport per il sito, non ancora fatto. Il main-guard resta invece allineato alla correzione generica del sito #12043: canonicalizza process.argv[1] con realpathSync + pathToFileURL, verificato anche attraverso symlink da generator/tests/report-validate-dist-main-guard.test.mjs."
     },
     {
       "path": "scripts/ci/lib/pr-review-admission.mjs",
@@ -595,7 +594,7 @@
     {
       "path": "scripts/ci/content-gates-main.mjs",
       "mode": "corpus-only",
-      "reason": "Fa girare su `main` il sottoinsieme MISURATO dei gate che leggono `content/**`, e su offender apre UNA issue deduplicata sul titolo invece di rendere rossa una run. Non ha gemello sul sito e non puo' averlo: il difetto che chiude e' la scrittura diretta su `main` dei produttori di QUESTO repo (`generate-article.yml` e i suoi fratelli fanno `git push HEAD:main` — 88 articoli nelle ultime 24h), mentre sul sito il contenuto non e' versionato e nessun bot scrive su `main`. Anche la lista `CONTENT_GATES` e' topologia locale: sono file sotto `generator/tests/`, cartella che sul sito non esiste. Non e' `corpus-only-pending` — non c'e' niente da portare di la'.",
+      "reason": "Fa girare su `main` il sottoinsieme MISURATO dei gate che leggono `content/**`, e su offender apre UNA issue deduplicata sul titolo invece di rendere rossa una run. Non ha gemello sul sito e non puo' averlo: il difetto che chiude e' la scrittura diretta su `main` dei produttori di QUESTO repo (`generate-article.yml` e i suoi fratelli fanno `git push HEAD:main` — 88 articoli nelle ultime 24h), mentre sul sito il contenuto non e' versionato e nessun bot scrive su `main`. Anche la lista `CONTENT_GATES` e' topologia locale: sono file sotto `generator/tests/`, cartella che sul sito non esiste. La guardia ESM/main confronta il realpath per mantenere attiva la CLI anche via symlink; `generator/tests/content-gates-main-entrypoint.test.mjs` ne verifica offline l'import inerte e l'avvio. Non e' `corpus-only-pending` — non c'e' niente da portare di la'.",
       "baseline": {
         "site": null,
         "corpus": "23f73267fded62af",
@@ -636,11 +635,12 @@
     {
       "path": "scripts/ci/followup-has-candidates.mjs",
       "mode": "adapted",
-      "reason": "Il sito conserva la logica generale di audit dei rinvii per decisione (decisionDeferralSpecificity): decisioni vaghe restano candidati finche' non hanno motivo e prossimo passo concreti. Il corpus mantiene isManagedReview perche' il suo scripts/ci/lib/constants.mjs e i workflow/test includono l'identita' e il fallback Codex marcato; il sito usa isReviewerBot per il proprio contratto di review. Questa differenza resta intenzionale.",
+      "reason": "Il sito conserva la logica generale di audit dei rinvii per decisione (decisionDeferralSpecificity): decisioni vaghe restano candidati finche' non hanno motivo e prossimo passo concreti. Il corpus mantiene isManagedReview perche' il suo scripts/ci/lib/constants.mjs e i workflow/test includono l'identita' e il fallback Codex marcato; il sito usa isReviewerBot per il proprio contratto di review. Questa differenza resta intenzionale. RIALLINEAMENTO 2026-10-15: portata dalla PR sito #12043 la sola guardia ESM canonica, che lascia l'import privo di side effect e riconosce l'esecuzione CLI tramite symlink; la logica adapted resta invariata ed e' osservata da generator/tests/followup-has-candidates-main-guard.test.mjs.",
       "baseline": {
-        "site": "88ce559e743b5143",
-        "corpus": "1dcb22df125cc3e0",
-        "alignedAt": "2026-10-06"
+        "site": "9aadada46fc46c6e",
+        "corpus": "d68daded19458e0f",
+        "alignedAt": "2026-10-15",
+        "forcedAt": "2026-10-15T11:50:13.516Z"
       }
     },
     {
@@ -650,7 +650,7 @@
       "baseline": {
         "site": "6734a795e12f49c9",
         "corpus": "6734a795e12f49c9",
-        "alignedAt": "2026-10-07"
+        "alignedAt": "2026-10-14"
       }
     },
     {
@@ -782,9 +782,9 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 come chiusura transitiva del trasporto di scripts/ci/scan-job-timeouts.mjs per #1110: lo scanner Site importa isFailureReportingDisabled, assente nella copia Corpus precedente. Copia byte-identica dal sito, senza adattamenti locali.",
       "baseline": {
-        "site": "fd74a582718ff11f",
-        "corpus": "fd74a582718ff11f",
-        "alignedAt": "2026-10-07"
+        "site": "9809517e88621e2c",
+        "corpus": "9809517e88621e2c",
+        "alignedAt": "2026-10-14"
       }
     },
     {
@@ -931,10 +931,10 @@
       "mode": "adapted",
       "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte. Dal 2026-09-25 il corpus legge il body in `Resolve review input revision` tramite `scripts/ci/lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso che nomina il rate limit e il reset), preso dalla directory trusted del bootstrap del review gate e mai dal checkout della PR: il bucket REST del `GITHUB_TOKEN` e' uno solo per tutti i workflow di questo repo e si e' esaurito il 2026-09-25 06:58-07:10 UTC. Adattamento corpus: la review Codex ora registra causa startup/telemetria sicura e concede una sola ripetizione al claim `failed-transient`; la baseline corpus riattesta questa modifica, quella site resta al riferimento gia' registrato cosi' il movimento del sito resta visibile. 2026-10-08: il gate generator-ci risolve lo scope dal diff locale `base...head` e passa alla REST dei file PR solo nelle invocazioni legacy senza `PR_BASE_SHA`, eliminando la lettura inutile su ogni PR non-generator.",
       "baseline": {
-        "site": "7b647c07268b94ce",
-        "corpus": "9c601148e973f83d",
-        "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T00:27:32.975Z"
+        "site": "a5bde04943e54f3c",
+        "corpus": "2d1545ebc9f7a413",
+        "alignedAt": "2026-10-14",
+        "forcedAt": "2026-10-14T18:25:10.701Z"
       }
     },
     {
@@ -980,7 +980,7 @@
     {
       "path": "scripts/ci/loop-health-report.mjs",
       "mode": "adapted",
-      "reason": "Generatore del tracker «📊 Loop health report (tracker)» anche in questo repo (issue 1644): il corpo resta portabile (GH_REPO, revisore per repo, solo node:*), ma il corpus osserva anche i marker strutturati dei claim Codex locali per contare failed-terminal per giorno/causa e segnalare una head aperta bloccata oltre soglia. Il sito ha un ledger/review consumer diverso e non usa questo consumer corpus-specifico: la differenza resta dichiaratamente adapted e non c'e' un gemello site da portare.",
+      "reason": "Generatore del tracker «📊 Loop health report (tracker)» anche in questo repo (issue 1644): il corpo resta portabile (GH_REPO, revisore per repo, solo node:*), ma il corpus osserva anche i marker strutturati dei claim Codex locali per contare failed-terminal per giorno/causa e segnalare una head aperta bloccata oltre soglia. Il sito ha un ledger/review consumer diverso e non usa questo consumer corpus-specifico: la differenza resta dichiaratamente adapted e non c'e' un gemello site da portare. 2026-10-15: portato dalla PR sito #12043 soltanto il guard ESM canonico via realpath, sopra il report corpus-specifico; la regressione import/symlink vive in `generator/tests/loop-health-report-main-guard.test.mjs`.",
       "baseline": {
         "site": "5f12fc298ad39df9",
         "corpus": "b8d5c02a27ced312",
@@ -1183,7 +1183,7 @@
     {
       "path": "scripts/ci/mark-claude-terminal-outcome.mjs",
       "mode": "adapted",
-      "reason": "Dedup CAP_HIT_AFTER_DELIVERY e lettura del verdetto vigente importano `lastLabelEventAt` e `latestFixOutcomeEntryFromComments` da `followup-drainer.mjs`, che qui è `adapted` (#925/#1011, follow-up #1084). Il gemello sito (baseline e605a5b7b6996af5, 11025 byte) non ha quel ramo: restare `identical` lo farebbe sovrascrivere al primo `site-ahead`. Non è un mirror byte-identico.",
+      "reason": "Dedup CAP_HIT_AFTER_DELIVERY e lettura del verdetto vigente importano `lastLabelEventAt` e `latestFixOutcomeEntryFromComments` da `followup-drainer.mjs`, che qui è `adapted` (#925/#1011, follow-up #1084). Il gemello sito non ha quel ramo: restare `identical` lo farebbe sovrascrivere al primo `site-ahead`. Non è un mirror byte-identico. Il main guard canonico della PR sito #12043 è invece condiviso: portato nel corpus da #2732 e coperto da invocazione reale via symlink, senza cambiare il comportamento adapted.",
       "baseline": {
         "site": "d8b6d197bf4cd659",
         "corpus": "1cd57d5c632b3fcb",
@@ -1539,9 +1539,9 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "0ed67b775327e23d",
-        "corpus": "0ed67b775327e23d",
-        "alignedAt": "2026-10-12"
+        "site": "cb98d57267b1062b",
+        "corpus": "cb98d57267b1062b",
+        "alignedAt": "2026-10-14"
       }
     },
     {
@@ -1657,12 +1657,12 @@
       "path": "generator/tests/article-factuality-gates.test.mjs",
       "sitePath": "tests/article-factuality-gates.test.ts",
       "mode": "adapted",
-      "reason": "Suite dei gate deterministici di fattualita' (incidente 2026-07-28). La libreria generator/scripts/lib/article-factuality-gates.mjs e' arrivata col trasporto del generatore ma la sua suite era rimasta solo sul sito — il punto cieco 'assenza di un test da un lato' del drift check. Adattamenti: node:test + expect-shim al posto di vitest, annotazioni TS rimosse, l'unico expect.arrayContaining riscritto come toContain per elemento. I fixture e le asserzioni sono quelli del sito.",
+      "reason": "Suite dei gate deterministici di fattualita' (incidente 2026-07-28). La libreria generator/scripts/lib/article-factuality-gates.mjs e' arrivata col trasporto del generatore ma la sua suite era rimasta solo sul sito — il punto cieco 'assenza di un test da un lato' del drift check. Adattamenti: node:test + expect-shim al posto di vitest, annotazioni TS rimosse, i casi it.each riscritti come cicli e l'unico expect.arrayContaining riscritto come toContain per elemento. I fixture e le asserzioni sono quelli del sito.",
       "baseline": {
-        "site": "cccbd0305799caee",
-        "corpus": "cf9615f8a607d4ce",
-        "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T02:04:36.000Z"
+        "site": "88f1025f56e0014b",
+        "corpus": "93ea2703c9599d94",
+        "alignedAt": "2026-10-15",
+        "forcedAt": "2026-10-15T04:57:56.162Z"
       }
     },
     {
@@ -1715,7 +1715,7 @@
       "path": "generator/tests/blog-headline-validation.test.mjs",
       "sitePath": "tests/blog-headline-validation.test.ts",
       "mode": "adapted",
-      "reason": "Conformita' A5 dei titoli (lunghezza, parole, clickbait): unit + drift guard su create-article.mjs + integrazione su TUTTI i titoli pubblicati. Piu' severo del sito, di proposito: la' l'asserzione stretta e' it.skip e copre solo blog-meta-it; qui e' ATTIVA e STRICT su entrambe le sezioni, SENZA baseline e SENZA ramo di tolleranza. RIALLINEATO 2026-08-09 (corpus-ahead): la versione precedente di questo campo descriveva «baseline esplicita e datata dei 9 offender storici», che non esiste piu' — i 9 titoli sono stati accorciati sotto i 110 char in content/blog-meta-it.ts e HEADLINE_BASELINE_2026_08_08 e' stata rimossa insieme al ramo di tolleranza (issue #58). Non e' un miglioramento del meccanismo da proporre al sito: e' pulizia di dati locali. Nota di metodo: il drift check confronta HASH, non prosa — un `reason` che invecchia resta falso con la CI verde, ed e' proprio cio' che era successo qui.",
+      "reason": "Conformita' A5 dei titoli (lunghezza, parole, clickbait): unit + drift guard su create-article.mjs + integrazione su TUTTI i titoli pubblicati. Adattamenti: node:test + expect-shim, path content/, copertura di blog-meta-it.ts e blog-meta-ch-it.ts, asserzione ATTIVA e STRICT senza baseline di tolleranza (issue #58). Il reader usa il decoder single-pass condiviso generator/scripts/lib/unescape-ts-string.mjs, portando il fix del sito #5797 senza ricreare la catena di replace. Non si porta invece #9335: il sito esclude i test live-data dal gate PR, mentre il corpus pubblicatore esegue questo controllo sul checkout completo e la sanity >3000 impedisce un verde vacuo negli sparse worktree. Nota di metodo: il drift check confronta HASH, quindi ogni decisione futura va riportata qui prima del riallineamento della baseline.",
       "baseline": {
         "site": "3e348f14062393f4",
         "corpus": "960eab60ce073d4c",
@@ -1889,9 +1889,20 @@
       "mode": "adapted",
       "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; resta sorvegliato, ma le decisioni di pubblicazione delle copertine vivono nel corpus: le nuove immagini passano dal motore mirrorato con scope `article-hero`, se il motore fallisce, il fallback usa un record reader-facing del catalogo o la cover statica governata e accoda la rigenerazione senza rigettare l'articolo; la generazione del testo applica la guardia anti-copia. Il gemello del sito e' il generatore legacy disabilitato (`confirm_corpus_write=yes`) e non va aggiornato per questa pipeline corpus-only; i registri pubblici vengono esposti via JSON HTTP.",
       "baseline": {
-        "site": "44b4dcb727b012ea",
-        "corpus": "e48b58a762604895",
-        "alignedAt": "2026-08-14"
+        "site": "dd9f281a289f5eca",
+        "corpus": "82e9f9c3b8abcd50",
+        "alignedAt": "2026-10-14",
+        "forcedAt": "2026-10-14T13:11:05Z"
+      }
+    },
+    {
+      "path": "generator/scripts/migrate-evergreen-rejected-ledger.mjs",
+      "mode": "corpus-only",
+      "reason": "Migrazione fail-closed del ledger evergreen: converte il formato globale storico in schema v2, conserva i ban e gli strike senza provenienza come `legacy` con regola `preflight-required`, e scrive solo con `--apply` dopo un dry-run senza record persi. E' uno strumento del corpus che governa il file sotto `data/`; il sito consuma il risultato via JSON HTTP e non esegue questo writer.",
+      "baseline": {
+        "site": null,
+        "corpus": "a80c315fdaa432f8",
+        "alignedAt": "2026-10-15"
       }
     },
     {
@@ -2300,9 +2311,9 @@
       "path": "scripts/lib/pipeline-phase-timing.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "c85bf41b32069f6c",
-        "corpus": "c85bf41b32069f6c",
-        "alignedAt": "2026-10-13"
+        "site": "db770569fe162eee",
+        "corpus": "db770569fe162eee",
+        "alignedAt": "2026-10-14"
       }
     },
     {
@@ -2521,9 +2532,9 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "3a0ba1d6b2f707d1",
-        "corpus": "3a0ba1d6b2f707d1",
-        "alignedAt": "2026-10-11"
+        "site": "3604c629453c9f0b",
+        "corpus": "3604c629453c9f0b",
+        "alignedAt": "2026-10-14"
       }
     },
     {
@@ -2562,7 +2573,7 @@
       "path": "generator/scripts/lib/article-topic-selector.mjs",
       "sitePath": "scripts/lib/article-topic-selector.mjs",
       "mode": "adapted",
-      "reason": "Selettore dei topic. Divergente anche da `be6b31d5`: due righe di trasporto (`corpusPath` e il default di `loadExistingItTitles`) e, qui soltanto, il cap del ledger evergreen portato a 2048. Le sezioni frontaliere e svizzera condividono lo stesso file di stato e i pool correnti hanno circa 537 e 610 topic: il vecchio cap 500 espelleva rifiuti ancora validi dalla FIFO, permettendo alle run successive di riprovarli. La generazione live usa `generator/` nel corpus, che i workflow mirror non trasportano; il sito resta la sorgente per le altre modifiche al selettore.",
+      "reason": "Selettore dei topic. Divergente anche da `be6b31d5`: due righe di trasporto (`corpusPath` e il default di `loadExistingItTitles`) e, qui soltanto, il ledger evergreen schema v2 con provenance per sezione/pool/pool-epoch, TTL di 30 giorni per gli strike, revalidazione preflight delle decisioni legacy e cap indipendente a 2048 record. La migrazione corpus-only conserva i 517 ban e 284 strike storici senza attribuire loro una provenienza inventata; un pool epoch cambiato riapre il preflight e una conferma scrive il contesto corrente. La generazione live usa `generator/` nel corpus, che i workflow mirror non trasportano; il sito resta la sorgente per le altre modifiche al selettore.",
       "baseline": {
         "site": "f2dee9a957a468d3",
         "corpus": "720ed7bd9d3a345c",
@@ -2584,11 +2595,11 @@
       "path": "generator/scripts/lib/atomic-write-json.mjs",
       "sitePath": "scripts/lib/atomic-write-json.mjs",
       "mode": "adapted",
-      "reason": "Scrittura JSON atomica. La divergenza e' nata in modo PASSIVO — il blob qui e' identico a `be6b31d5` e il sito ha aggiunto dopo il passaggio per `preserveSlugHistory` (`./slug-preservation-guard.mjs`, valerielinc-ops#5157) — ma la decisione di restare diversi e' presa ora ed e' deliberata: quel guard serve al crawler dei job, protegge gli slug sotto `data/jobs/by-crawler/*.json`, e ne' il modulo ne' quei dati esistono in questo repo. Copiarlo qui darebbe un import irrisolto. Ogni ALTRA modifica del sito a questo file va invece riapplicata.",
+      "reason": "Scrittura JSON atomica, riconciliata come ADATTATA nella issue sito #13307. Il corpus forza `fsync` del file temporaneo prima del rename e tenta il `fsync` della directory dopo il commit come durability best-effort; `generator/tests/register-lock-write-atomic.test.mjs` ne osserva ordine e comportamento sugli errori della directory. Il sito applica invece `preserveSlugHistory`, `assertCrawlerSliceWriteSafe` e lo streaming dei grandi array ai dataset crawler: quei moduli e `data/jobs/by-crawler/*.json` non esistono qui, mentre i consumer corpus (`register-lock.mjs` e `retire-article.mjs`) scrivono marker e ledger piccoli. Copiare il gemello sito introdurrebbe import irrisolti e toglierebbe la garanzia durability del corpus; copiare il gemello corpus sul sito rimuoverebbe le guardie dei crawler. I due lati restano quindi diversi per scelta, con baseline attestata il 2026-10-15.",
       "baseline": {
-        "site": "03d4a457b7d356ae",
-        "corpus": "ad38e70657bc1995",
-        "alignedAt": "2026-08-09"
+        "site": "ae929828a0fc0dfe",
+        "corpus": "08abbfa9c7063b60",
+        "alignedAt": "2026-10-15"
       }
     },
     {
@@ -2719,8 +2730,18 @@
       "reason": "Immagine di testata del Bollettino del Frontaliere. Nessun omonimo sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "0d418d160b45beb5",
-        "alignedAt": "2026-10-05"
+        "corpus": "e84dfbf56c66e216",
+        "alignedAt": "2026-10-14"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/decisions-api.mjs",
+      "mode": "corpus-only",
+      "reason": "Client server-side del pre-spend topic gate per OpenAI Decisions API. Il generatore e la sua chiave Remote Config vivono nel corpus; il sito consuma gli articoli pubblicati e non ha un gemello operativo di questo client.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-14"
       }
     },
     {
@@ -2841,6 +2862,16 @@
         "site": null,
         "corpus": "8c5ed8cc6cdb3a46",
         "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/html-tag-scanner.mjs",
+      "mode": "corpus-only",
+      "reason": "Scanner HTML quote-aware condiviso da create-article.mjs e canton-news-sources.mjs per il generatore e il crawler delle fonti, entrambi corpus-specifici. Il sito non ha un consumer da importare attraverso il confine HTTP; un eventuale porting richiede una valutazione e un adattamento separati.",
+      "baseline": {
+        "site": null,
+        "corpus": "44e8e866f127bf72",
+        "alignedAt": "2026-10-14"
       }
     },
     {
@@ -3734,9 +3765,9 @@
       "sitePath": "services/seo/imageObjectLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "baf2693412c35ed8",
-        "corpus": "baf2693412c35ed8",
-        "alignedAt": "2026-10-11"
+        "site": "72cd99f91baa80f0",
+        "corpus": "72cd99f91baa80f0",
+        "alignedAt": "2026-10-14"
       }
     },
     {
@@ -4002,9 +4033,9 @@
       "sitePath": "tests/articles-shell-contract-functions.golden.json",
       "mode": "identical",
       "baseline": {
-        "site": "77084b29001782fc",
-        "corpus": "77084b29001782fc",
-        "alignedAt": "2026-10-06"
+        "site": "e6aebdbec94daf6a",
+        "corpus": "e6aebdbec94daf6a",
+        "alignedAt": "2026-10-15"
       },
       "couplingSnapshot": [
         {
@@ -4376,9 +4407,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-10.yml",
       "mode": "identical",
       "baseline": {
-        "site": "04a4cfcf2b4ee84d",
-        "corpus": "04a4cfcf2b4ee84d",
-        "alignedAt": "2026-10-05"
+        "site": "db16a19918393adb",
+        "corpus": "db16a19918393adb",
+        "alignedAt": "2026-10-15"
       }
     },
     {
@@ -4426,9 +4457,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-15.yml",
       "mode": "identical",
       "baseline": {
-        "site": "fe9459c718420fbf",
-        "corpus": "fe9459c718420fbf",
-        "alignedAt": "2026-10-05"
+        "site": "d0a559790a4f7ad2",
+        "corpus": "d0a559790a4f7ad2",
+        "alignedAt": "2026-10-15"
       }
     },
     {
@@ -4436,9 +4467,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-16.yml",
       "mode": "identical",
       "baseline": {
-        "site": "2ba0036d6836d216",
-        "corpus": "2ba0036d6836d216",
-        "alignedAt": "2026-10-05"
+        "site": "a60f6ce7b3bf9737",
+        "corpus": "a60f6ce7b3bf9737",
+        "alignedAt": "2026-10-15"
       }
     },
     {
@@ -4446,9 +4477,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-17.yml",
       "mode": "identical",
       "baseline": {
-        "site": "2d0f930790999c5c",
-        "corpus": "2d0f930790999c5c",
-        "alignedAt": "2026-10-05"
+        "site": "3ea699757fc58aef",
+        "corpus": "3ea699757fc58aef",
+        "alignedAt": "2026-10-15"
       }
     },
     {
@@ -4456,9 +4487,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-18.yml",
       "mode": "identical",
       "baseline": {
-        "site": "8063411bb683263c",
-        "corpus": "8063411bb683263c",
-        "alignedAt": "2026-10-14"
+        "site": "6e44fb48d851c93d",
+        "corpus": "6e44fb48d851c93d",
+        "alignedAt": "2026-10-15"
       }
     },
     {
@@ -4466,9 +4497,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-19.yml",
       "mode": "identical",
       "baseline": {
-        "site": "c8c139d9f9a9aaf8",
-        "corpus": "c8c139d9f9a9aaf8",
-        "alignedAt": "2026-10-05"
+        "site": "a20f00fd60b040ce",
+        "corpus": "a20f00fd60b040ce",
+        "alignedAt": "2026-10-15"
       }
     },
     {
@@ -4476,9 +4507,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-20.yml",
       "mode": "identical",
       "baseline": {
-        "site": "74fff35831ce3741",
-        "corpus": "74fff35831ce3741",
-        "alignedAt": "2026-10-05"
+        "site": "e6ae182df9d84583",
+        "corpus": "e6ae182df9d84583",
+        "alignedAt": "2026-10-15"
       }
     },
     {
@@ -4486,9 +4517,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-21.yml",
       "mode": "identical",
       "baseline": {
-        "site": "e59c01c3f51251c7",
-        "corpus": "e59c01c3f51251c7",
-        "alignedAt": "2026-10-05"
+        "site": "f96a907f460a9de6",
+        "corpus": "f96a907f460a9de6",
+        "alignedAt": "2026-10-15"
       }
     },
     {
@@ -4496,9 +4527,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-22.yml",
       "mode": "identical",
       "baseline": {
-        "site": "642055e849c069c2",
-        "corpus": "642055e849c069c2",
-        "alignedAt": "2026-10-05"
+        "site": "5c128759149136a0",
+        "corpus": "5c128759149136a0",
+        "alignedAt": "2026-10-15"
       }
     },
     {
@@ -4525,11 +4556,11 @@
       "path": "generator/data/crawler-cross-repo-contract.json",
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
-      "reason": "Riallineato il 2026-10-12 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono byte-identici fra sito e corpus, con il roster corrente di 627 crawler e provenance ancorata al merge sito `97a954ad5b2f2e8ed8828ef265f1cc8bc145588b`.",
+      "reason": "La baseline dell'allineamento del 2026-10-15 registra lo stesso blob sui due lati (cbec97b9b6bc154b); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "4149c259fe4f5f9c",
-        "corpus": "4149c259fe4f5f9c",
-        "alignedAt": "2026-10-14"
+        "site": "e5fd11e8ec306b32",
+        "corpus": "e5fd11e8ec306b32",
+        "alignedAt": "2026-10-15"
       }
     },
     {
@@ -4792,12 +4823,12 @@
     {
       "path": "scripts/ci/refund-fix-round.mjs",
       "mode": "adapted",
-      "reason": "Rimborsa il round di `pr-redcheck-fixer.yml` / `pr-redflag-fixer.yml` quando la run Claude e' morta su 429: il marker di round si posta PRIMA di invocare Claude (giusto per un crash, sbagliato per un 429, dove l'agente non e' mai partito) e al cap la PR prende `needs-human`, che qui e' un filtro di ESCLUSIONE da ogni coda automatica. Gemello lato PR di cio' che `check-quota-backoff.mjs` + il marker `rate-limited` gia' fanno lato issue («la issue non consuma un tentativo»). Il porting lato sito e' atterrato in PR #8298; il corpus conserva la propria variante adattata e il confine resta HTTP, senza import diretti tra repo.",
+      "reason": "Rimborsa il round di `pr-redcheck-fixer.yml` / `pr-redflag-fixer.yml` quando la run Claude e' morta su 429: il marker di round si posta PRIMA di invocare Claude (giusto per un crash, sbagliato per un 429, dove l'agente non e' mai partito) e al cap la PR prende `needs-human`, che qui e' un filtro di ESCLUSIONE da ogni coda automatica. Gemello lato PR di cio' che `check-quota-backoff.mjs` + il marker `rate-limited` gia' fanno lato issue («la issue non consuma un tentativo»). Il porting lato sito e' atterrato in PR #8298; il corpus conserva la propria variante adattata e il confine resta HTTP, senza import diretti tra repo. RIALLINEAMENTO 2026-10-15: portata dalla PR sito #12043 la sola guardia ESM canonica, che rende l'import privo di side effect e conserva l'esecuzione CLI tramite symlink; la macchina di rimborso specifica del corpus resta invariata ed e' osservata da `generator/tests/refund-fix-round-main-guard.test.mjs`.",
       "baseline": {
-        "site": "3fd833f4a3b32f72",
-        "corpus": "89cf833c04a43ef6",
-        "alignedAt": "2026-09-11",
-        "forcedAt": "2026-09-11T10:33:31.749Z"
+        "site": "aca5ba21239eda7a",
+        "corpus": "0a055434d0afbd83",
+        "alignedAt": "2026-10-15",
+        "forcedAt": "2026-10-15T04:57:56.325Z"
       }
     },
     {
@@ -6008,6 +6039,46 @@
         "site": null,
         "corpus": null,
         "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/contextual-article-links.mjs",
+      "mode": "corpus-only",
+      "reason": "Adapter del generatore corpus: collega i body localizzati e rispetta le traduzioni pending attraverso il matcher mirrorato. Il sito usa direttamente il linker dell’engine; non necessita di questo adapter del writer.",
+      "baseline": {
+        "site": null,
+        "corpus": "c7f22a4b09ba57b1",
+        "alignedAt": "2026-10-14"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/daily-brief-demand.mjs",
+      "mode": "corpus-only",
+      "reason": "Collector opzionale del bollettino: legge Search Console e Firebase Analytics con il service account del producer e pubblica solo aggregati predefiniti. Il sito consuma la superficie JSON via HTTP, senza questo collector.",
+      "baseline": {
+        "site": null,
+        "corpus": "a9b22932398764fc",
+        "alignedAt": "2026-10-14"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/daily-brief-insights.mjs",
+      "mode": "corpus-only",
+      "reason": "Composizione pura delle osservazioni e delle etichette del bollettino datato: settimane complete, cambio, valichi e domanda aggregata. Bollettino e writer vivono nel corpus; il sito consuma il JSON pubblicato.",
+      "baseline": {
+        "site": null,
+        "corpus": "01aaf92a0eb715a2",
+        "alignedAt": "2026-10-14"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/editorial-headline-guidance.mjs",
+      "mode": "corpus-only",
+      "reason": "Istruzione condivisa dalla generazione e traduzione dei titoli nel writer corpus per frontalieri, Svizzera e cantoni. Il writer del sito è dormante e non appartiene alla pipeline di generazione attiva.",
+      "baseline": {
+        "site": null,
+        "corpus": "d93304353efdfdcb",
+        "alignedAt": "2026-10-14"
       }
     }
   ]

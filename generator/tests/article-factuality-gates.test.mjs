@@ -13,6 +13,8 @@
  *    dei test restano quasi byte-identici all'originale, apposta: un futuro
  *    riallineamento con la suite del sito è copia + questa intestazione.
  *  - Annotazioni TypeScript rimosse (`: any[]`, `as any`, `: string`).
+ *  - I casi `it.each` sono riscritti come cicli dentro un singolo `it`, perché
+ *    `node:test` non espone l'helper parametrico di Vitest.
  *  - L'unico `expect.arrayContaining` è riscritto come `toContain` per
  *    elemento (cercare ADATTAMENTO nel corpo).
  *  - Il percorso della libreria è INVARIATO: `../scripts/lib/…` risolve in
@@ -51,6 +53,7 @@ import {
   checkFabricatedInstitutionAcronyms,
   checkFabricatedNormAcronyms,
   FABRICATED_NORM_ACRONYMS,
+  benignNormEntityBoundary,
   checkContradictoryNormDates,
   checkSourceFreshness,
   extractSourceAnchors,
@@ -653,6 +656,46 @@ describe('checkFabricatedNormAcronyms', () => {
     expect(checkFabricatedNormAcronyms(
       'La app LPS aiuta i frontalieri a calcolare lo stipendio netto in Svizzera.',
     )).toEqual([]);
+  });
+
+  it('validates entity boundaries against the original text at truncated context edges', () => {
+    const texts = [
+      `xgroup «${' '.repeat(73)}LFW`,
+      `LFW${' '.repeat(30)}AGX`,
+    ];
+    expect(benignNormEntityBoundary(texts[0], 'LFW', texts[0].indexOf('LFW'), 3, 80)).toBe(false);
+    expect(benignNormEntityBoundary(texts[1], 'LFW', 0, 3, 80)).toBe(false);
+    expect(texts.map((text) => checkFabricatedNormAcronyms(text).length)).toEqual([1, 1]);
+  });
+
+  it('leaves multilingual company names using the sigla alone', () => {
+    for (const text of [
+      'La société LFW a ouvert un guichet pour les frontaliers près de la frontière.',
+      'La societe LCO recrute des frontaliers au Tessin.',
+      'Die Gesellschaft LPS hat eine neue Filiale für Grenzgänger eröffnet.',
+      'Die Firma LFW sucht Grenzgänger im Tessin.',
+      'The firm LCO hired cross-border commuters in Ticino.',
+    ]) {
+      expect(checkFabricatedNormAcronyms(text)).toEqual([]);
+    }
+  });
+
+  it('leaves real company names with quoted or corporate-suffix boundaries alone', () => {
+    for (const text of [
+      'Il gruppo «LFW», AG ha aperto una filiale per i frontalieri.',
+      'LPS GmbH sucht Grenzgängerinnen und Grenzgänger im Tessin.',
+      'LCO S.A. recrute des frontaliers près de la frontière.',
+      'LMA Sàrl conseille les travailleurs frontaliers.',
+      'LRF Ltd. provides payroll services to cross-border workers.',
+    ]) {
+      expect(checkFabricatedNormAcronyms(text)).toEqual([]);
+    }
+  });
+
+  it('does not treat legal punctuation as a corporate suffix', () => {
+    expect(codes(checkFabricatedNormAcronyms(
+      'Secondo la LFW, art. 2, il datore di lavoro deve registrare ogni ora supplementare.',
+    ))).toContain('fabricated-norm-acronym');
   });
 
   it('still flags LFW with the Italian citation cue actually used in the corpus', () => {

@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "15a6c56428e05c7b5a60c52e5015b2e94ff72c4cb19a4a8aefb4b143d1991652",
+  "updatedAt": "2026-10-15T00:06:40.869Z",
+  "contentHash": "236891bbbb2f205a6b18ec46072c6b419988077c78818102aa3149dabb2d924e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T21:57:18.142Z",
+      "updatedAt": "2026-10-14T13:57:52.093Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "69",
+          "value": "72",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "The Biblio in your neighborhood!",
+              "detail": "Foyer St-Martin EVAM, Vevey",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/la-biblio-dans-ton-quartier-4/"
+            },
+            {
+              "label": "Circus Knie",
+              "detail": "Vevey",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-15/"
+            },
+            {
+              "label": "Les 3 X 30",
+              "detail": "La Marive, Yverdon-les-Bains",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/les-3-x-30/"
+            },
+            {
               "label": "Cooking Together − Fall Delights",
-              "detail": "Alimentarium, Musée de l'alimentation, Vevey",
-              "date": "2026-10-14",
+              "detail": "Alimentarium, Musée de l'alimentation, Vevey — in corso, ultimo giorno: 21 ottobre 2026",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-en-cuisine-delices-dautomne/"
             },
             {
               "label": "Montreux Jazz Festival Residency",
-              "detail": "Petit Palais, Montreux",
-              "date": "2026-10-14",
+              "detail": "Petit Palais, Montreux — in corso, ultimo giorno: 17 ottobre 2026",
+              "date": "2026-10-15",
               "url": "https://www.guidle.com/it/events/music/montreux/montreux-jazz-festival-residency_ATc4uF2"
             },
             {
               "label": "Lausanne Underground Film & Music Festival - LUFF",
-              "detail": "Divers lieux, Lausanne",
-              "date": "2026-10-14",
+              "detail": "Divers lieux, Lausanne — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-underground-film-music-festival-luff/"
-            },
-            {
-              "label": "Lumières d'automne, un atelier \"esprit Halloween\"",
-              "detail": "Musée national suisse, Prangins",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lumieres-dautomne-un-atelier-esprit-halloween/"
-            },
-            {
-              "label": "Jam du Chic Astral: ouverture par le DKSJ All Star Project feat. Olivia Trummer",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/jam-du-chic-astral-ouverture-par-le-dksj-all-star-project-feat-olivia-trummer_Ax29ced"
             },
             {
               "label": "fit4future Camp Lausanne",
               "detail": "Salle Omnisports du Vieux-Moulin, Lausanne — in corso, ultimo giorno: 16 ottobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/fit4future-camp-lausanne/"
             },
             {
               "label": "Semaine Olympique",
               "detail": "Lausanne — in corso, ultimo giorno: 15 ottobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/semaine-olympique/"
             },
             {
               "label": "Der Himmel über Berlin",
               "detail": "Cinémathèque suisse, Lausanne — in corso, ultimo giorno: 17 ottobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/der-himmel-ueber-berlin/"
             },
             {
               "label": "Festival Le Bois qui Chante",
               "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — in corso, ultimo giorno: 19 ottobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
-            },
-            {
-              "label": "Bois qui Chante",
-              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — in corso, ultimo giorno: 19 ottobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bois-qui-chante/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -132,7 +132,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "en": {
       "canton": "VD",
@@ -142,7 +142,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "69",
+          "value": "72",
           "note": "from the site’s events calendar"
         }
       ],
@@ -153,69 +153,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "The Biblio in your neighborhood!",
+              "detail": "Foyer St-Martin EVAM, Vevey",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/la-biblio-dans-ton-quartier-4/"
+            },
+            {
+              "label": "Circus Knie",
+              "detail": "Vevey",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-15/"
+            },
+            {
+              "label": "Les 3 X 30",
+              "detail": "La Marive, Yverdon-les-Bains",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/les-3-x-30/"
+            },
+            {
               "label": "Cooking Together − Fall Delights",
-              "detail": "Alimentarium, Musée de l'alimentation, Vevey",
-              "date": "2026-10-14",
+              "detail": "Alimentarium, Musée de l'alimentation, Vevey — ongoing, last day: 21 October 2026",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-en-cuisine-delices-dautomne/"
             },
             {
               "label": "Montreux Jazz Festival Residency",
-              "detail": "Petit Palais, Montreux",
-              "date": "2026-10-14",
+              "detail": "Petit Palais, Montreux — ongoing, last day: 17 October 2026",
+              "date": "2026-10-15",
               "url": "https://www.guidle.com/it/events/music/montreux/montreux-jazz-festival-residency_ATc4uF2"
             },
             {
               "label": "Lausanne Underground Film & Music Festival - LUFF",
-              "detail": "Divers lieux, Lausanne",
-              "date": "2026-10-14",
+              "detail": "Divers lieux, Lausanne — ongoing, last day: 18 October 2026",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-underground-film-music-festival-luff/"
-            },
-            {
-              "label": "Lumières d'automne, un atelier \"esprit Halloween\"",
-              "detail": "Musée national suisse, Prangins",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lumieres-dautomne-un-atelier-esprit-halloween/"
-            },
-            {
-              "label": "Jam du Chic Astral: ouverture par le DKSJ All Star Project feat. Olivia Trummer",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/jam-du-chic-astral-ouverture-par-le-dksj-all-star-project-feat-olivia-trummer_Ax29ced"
             },
             {
               "label": "fit4future Camp Lausanne",
               "detail": "Salle Omnisports du Vieux-Moulin, Lausanne — ongoing, last day: 16 October 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/fit4future-camp-lausanne/"
             },
             {
               "label": "Semaine Olympique",
               "detail": "Lausanne — ongoing, last day: 15 October 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/semaine-olympique/"
             },
             {
               "label": "Der Himmel über Berlin",
               "detail": "Cinémathèque suisse, Lausanne — ongoing, last day: 17 October 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/der-himmel-ueber-berlin/"
             },
             {
               "label": "Bois qui Chante",
               "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — ongoing, last day: 19 October 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
-            },
-            {
-              "label": "Bois qui Chante",
-              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — ongoing, last day: 19 October 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bois-qui-chante/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -233,7 +233,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -247,7 +247,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "de": {
       "canton": "VD",
@@ -257,7 +257,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "69",
+          "value": "72",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -268,69 +268,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Die Biblio in deinem Viertel!",
+              "detail": "Foyer St-Martin EVAM, Vevey",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/la-biblio-dans-ton-quartier-4/"
+            },
+            {
+              "label": "Zirkus Knie",
+              "detail": "Vevey",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-15/"
+            },
+            {
+              "label": "Les 3 X 30",
+              "detail": "La Marive, Yverdon-les-Bains",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/les-3-x-30/"
+            },
+            {
               "label": "Gemeinsam in der Küche – Herbstliche Köstlichkeiten",
-              "detail": "Alimentarium, Musée de l'alimentation, Vevey",
-              "date": "2026-10-14",
+              "detail": "Alimentarium, Musée de l'alimentation, Vevey — läuft, letzter Tag: 21. Oktober 2026",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-en-cuisine-delices-dautomne/"
             },
             {
               "label": "Montreux Jazz Festival Residency",
-              "detail": "Petit Palais, Montreux",
-              "date": "2026-10-14",
+              "detail": "Petit Palais, Montreux — läuft, letzter Tag: 17. Oktober 2026",
+              "date": "2026-10-15",
               "url": "https://www.guidle.com/it/events/music/montreux/montreux-jazz-festival-residency_ATc4uF2"
             },
             {
               "label": "Lausanne Underground Film & Music Festival - LUFF",
-              "detail": "Divers lieux, Lausanne",
-              "date": "2026-10-14",
+              "detail": "Divers lieux, Lausanne — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-underground-film-music-festival-luff/"
-            },
-            {
-              "label": "Lumières d'automne, un atelier \"esprit Halloween\"",
-              "detail": "Musée national suisse, Prangins",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lumieres-dautomne-un-atelier-esprit-halloween/"
-            },
-            {
-              "label": "Jam du Chic Astral: ouverture par le DKSJ All Star Project feat. Olivia Trummer",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/jam-du-chic-astral-ouverture-par-le-dksj-all-star-project-feat-olivia-trummer_Ax29ced"
             },
             {
               "label": "fit4future Camp Lausanne",
               "detail": "Salle Omnisports du Vieux-Moulin, Lausanne — läuft, letzter Tag: 16. Oktober 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/fit4future-camp-lausanne/"
             },
             {
               "label": "Semaine Olympique",
               "detail": "Lausanne — läuft, letzter Tag: 15. Oktober 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/semaine-olympique/"
             },
             {
               "label": "Der Himmel über Berlin",
               "detail": "Cinémathèque suisse, Lausanne — läuft, letzter Tag: 17. Oktober 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/der-himmel-ueber-berlin/"
             },
             {
               "label": "Bois qui Gesang",
               "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — läuft, letzter Tag: 19. Oktober 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
-            },
-            {
-              "label": "Festival Le Bois qui Chante",
-              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — läuft, letzter Tag: 19. Oktober 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bois-qui-chante/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -348,7 +348,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -362,7 +362,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "fr": {
       "canton": "VD",
@@ -372,7 +372,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "69",
+          "value": "72",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -383,69 +383,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "La Biblio dans ton quartier !",
+              "detail": "Foyer St-Martin EVAM, Vevey",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/la-biblio-dans-ton-quartier-4/"
+            },
+            {
+              "label": "Cirque Knie",
+              "detail": "Vevey",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-15/"
+            },
+            {
+              "label": "Les 3 X 30",
+              "detail": "La Marive, Yverdon-les-Bains",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/les-3-x-30/"
+            },
+            {
               "label": "Ensemble en cuisine - Trésors de la Bénichon",
-              "detail": "Alimentarium, Musée de l'alimentation, Vevey",
-              "date": "2026-10-14",
+              "detail": "Alimentarium, Musée de l'alimentation, Vevey — en cours, dernier jour : 21 octobre 2026",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-en-cuisine-delices-dautomne/"
             },
             {
               "label": "Montreux Jazz Festival Residency",
-              "detail": "Petit Palais, Montreux",
-              "date": "2026-10-14",
+              "detail": "Petit Palais, Montreux — en cours, dernier jour : 17 octobre 2026",
+              "date": "2026-10-15",
               "url": "https://www.guidle.com/it/events/music/montreux/montreux-jazz-festival-residency_ATc4uF2"
             },
             {
               "label": "Lausanne Underground Film & Music Festival - LUFF",
-              "detail": "Divers lieux, Lausanne",
-              "date": "2026-10-14",
+              "detail": "Divers lieux, Lausanne — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-underground-film-music-festival-luff/"
-            },
-            {
-              "label": "Lumières d'automne, un atelier \"esprit Halloween\"",
-              "detail": "Musée national suisse, Prangins",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lumieres-dautomne-un-atelier-esprit-halloween/"
-            },
-            {
-              "label": "Jam du Chic Astral: ouverture par le DKSJ All Star Project feat. Olivia Trummer",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/jam-du-chic-astral-ouverture-par-le-dksj-all-star-project-feat-olivia-trummer_Ax29ced"
             },
             {
               "label": "fit4future Camp Lausanne",
               "detail": "Salle Omnisports du Vieux-Moulin, Lausanne — en cours, dernier jour : 16 octobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/fit4future-camp-lausanne/"
             },
             {
               "label": "Semaine Olympique",
               "detail": "Lausanne — en cours, dernier jour : 15 octobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/semaine-olympique/"
             },
             {
               "label": "Der Himmel über Berlin",
               "detail": "Cinémathèque suisse, Lausanne — en cours, dernier jour : 17 octobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/der-himmel-ueber-berlin/"
             },
             {
               "label": "Festival Le Bois qui Chante",
               "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — en cours, dernier jour : 19 octobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
-            },
-            {
-              "label": "Festival Le Bois qui Chante",
-              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — en cours, dernier jour : 19 octobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bois-qui-chante/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -463,7 +463,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -477,7 +477,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     }
   }
 }

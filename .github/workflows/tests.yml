@@ -186,23 +186,19 @@ jobs:
           # rifiutare un registro troncato; il checkout deve quindi esporre la
           # storia completa anche quando la PR non modifica `content/`.
           fetch-depth: 0
-          # Storia completa di commit e tree, ma blob scaricati solo per la
-          # HEAD: il clone pieno portava ~1 GB di pack, di cui i gate leggono
-          # una manciata di blob storici — i registri della revisione base
-          # (`scripts/lib/corpus-floors.mjs`), le superfici di
-          # `retired-articles-fully-removed`, le baseline cambiate del manifest
-          # (`loop-baseline-pr-gate.mjs`), il diff della review. Quei blob
-          # arrivano su richiesta con le credenziali che il checkout lascia
-          # configurate. Ogni consumer distingue il path ASSENTE (dal tree, che
-          # il partial clone ha sempre) dal blob ILLEGGIBILE (fetch fallito):
-          # il secondo e' un errore o una storia non verificabile, mai
-          # un'assenza. Step `Run actions/checkout@v7`: 63-64 s col clone
-          # pieno, 52 s cosi' (run 35460972059 e 35460929675 contro 35461528619,
-          # 2026-09-19).
+          # Scarichiamo anche i blob storici nel checkout iniziale. Il filtro
+          # `blob:none` riduceva il pack (circa 1 GB col clone pieno) e il
+          # checkout di ~11 s, ma due run (`37805632503`, `38600834948`,
+          # 2026-10-08 e 2026-10-14) hanno fallito durante il fetch on-demand
+          # di un oggetto promisor con `fatal: early EOF`; gli script dei gate
+          # risultavano poi assenti e il job diventava rosso. Il clone pieno
+          # misura 63-64 s contro 52 s col filtro (run 35460972059 e
+          # 35460929675 contro 35461528619, 2026-09-19). Per il check che
+          # governa tutte le PR privilegiamo un checkout completo e verificabile
+          # a quel risparmio di circa 11 s.
           # Niente sparse: i gate della PR leggono `content/`, `public/` e
           # `data/jobs/` (misurato: 41 test rossi senza quei path, 10 senza
           # solo `data/`).
-          filter: blob:none
 
       - uses: actions/setup-node@v7
         with:
@@ -1427,6 +1423,7 @@ jobs:
             echo "## Metadata"
             echo "- PR: #$PR_NUMBER"
             echo "- HEAD: $HEAD_SHA"
+            echo "- Review input revision: host-stamped (opaque to reviewer)"
             echo "- Tier: ${TIER:-unknown}"
             echo "- Incremental base: ${INCREMENTAL_BASE:-none}"
             echo "- Changed file entries: $(wc -l < "$CTX_DIR/files.txt")"
@@ -1538,6 +1535,7 @@ jobs:
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
           PR_TITLE: ${{ steps.resolve.outputs.title }}
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
+          REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           INCREMENTAL_BASE: ${{ steps.tier.outputs.incremental_base }}
         with:
@@ -1558,7 +1556,7 @@ jobs:
             Test files are excluded from review by owner policy: do not read, probe or raise findings on tests, including during cross-file analysis.
             Report the exact workflow tier `${{ steps.tier.outputs.tier }}` in Scope; this classifies review scope, not model reasoning effort.
             Reviewer automatico PR #${{ steps.resolve.outputs.pr_number }} (HEAD ${{ steps.resolve.outputs.head_sha }}). Tier: ${{ steps.tier.outputs.tier }}.
-            Questa review vale esclusivamente per la revisione input `${{ steps.review_input.outputs.review_revision }}`. La review che posti DEVE contenere, come riga propria e senza modificarlo, il marker esatto `<!-- REVIEW_INPUT_REVISION: ${{ steps.review_input.outputs.review_revision }} -->`; senza quel marker il gate non può accettare alcun verdetto.
+            Do not add or edit a `REVIEW_INPUT_REVISION` marker: the host-side gh bridge removes any model-supplied marker and stamps exactly one trusted marker on the published review body. The revision is intentionally opaque to the reviewer.
 
             Questo repo (`frontaliere-articles`) pubblica una superficie dati su HTTP che il sito consuma in produzione: `dist/api/` (manifest, articles.json, meta per locale, slugs, sitemap blog, dieci feed RSS, news-ticker). Un bug in cio' che la genera esce **live senza che il sito faccia un deploy** — non c'e' una build del sito a fare da rete.
 

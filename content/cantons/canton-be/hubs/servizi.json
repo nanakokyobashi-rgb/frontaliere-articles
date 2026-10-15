@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T08:24:32.182Z",
-  "contentHash": "54c6657b2160431855904f525161ea59783d7c521fbd05129954d91969b3673f",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "473421916cb2ab531d9a89d3f1bb641a0442e5c3b8e3f538bc15d145783f7967",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-13T22:49:00.460Z",
+      "updatedAt": "2026-10-15T11:34:01.149Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-15T13:31:14.704Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -74,30 +79,44 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "BE85958",
-              "value": "790 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-14T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231122"
-            },
-            {
-              "label": "BE58358",
+              "label": "BE74448",
               "value": "690 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-14T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231118"
+              "date": "2026-10-21T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231206"
             },
             {
-              "label": "BE384444",
+              "label": "BE94333",
+              "value": "690 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-21T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231207"
+            },
+            {
+              "label": "BE222002",
               "value": "490 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-14T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231111"
+              "date": "2026-10-21T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231210"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-13T22:49:00.460Z"
+          "updatedAt": "2026-10-15T11:34:01.149Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Bern",
+              "value": "19 °C",
+              "detail": "oggi da 10 a 19 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -110,10 +129,22 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Permesso di pesca nel Cantone di Berna: requisiti e stagioni",
+          "url": "/articoli-svizzera/permesso-pesca-canton-berna-guida/",
+          "excerpt": "Scopri come gestire la pratica per il permesso di pesca nel Cantone di Berna: licenze, corsi, acque autorizzate e autorità competenti.",
+          "date": "2026-10-15T02:27:21.587Z"
+        },
+        {
+          "title": "Targhe e immatricolazione Cantone Berna: guida alle procedure",
+          "url": "/articoli-svizzera/berna-veicoli-procedura-guida/",
+          "excerpt": "Come gestire targhe, immatricolazione, collaudo e cambio di proprietario nel Cantone di Berna: verifica requisiti, scadenze e importi ufficiali.",
+          "date": "2026-10-15T02:50:14.192Z"
+        },
         {
           "title": "Licenza di caccia canton Berna requisiti e domanda",
           "url": "/articoli-svizzera/licenza-caccia-berna-requisiti/",
@@ -149,18 +180,6 @@
           "url": "/articoli-svizzera/premi-cassa-malati-cantone-bern-riduzione/",
           "excerpt": "Ecco i fatti chiave per i premi dell'assicurazione malattia obbligatoria nel Cantone di Berna.",
           "date": "2026-08-12T09:20:30.193Z"
-        },
-        {
-          "title": "Patente di guida a Berna: conversione e requisiti",
-          "url": "/articoli-svizzera/patent-canton-bern-conversion-exams/",
-          "excerpt": "La conversione della patente di guida estera nel Canton di Berna richiede l'esame teorico e pratico, nonché la frequentazione di corsi obbligatori. L'ufficio della circolazione competente è responsabile…",
-          "date": "2026-08-13T17:49:01.339Z"
-        },
-        {
-          "title": "Permesso di domicilio C nel Canton Berna: requisiti e domanda",
-          "url": "/articoli-svizzera/permesso-di-domicilio-c-canton-berna-requisiti-e-domanda/",
-          "excerpt": "Il permesso di domicilio C nel Canton Berna: requisiti, domanda e procedura di applicazione",
-          "date": "2026-08-12T20:41:31.313Z"
         }
       ],
       "links": [
@@ -189,7 +208,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T08:24:32.182Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "BE",
@@ -241,30 +260,44 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "BE85958",
-              "value": "790 CHF",
-              "detail": "current bid",
-              "date": "2026-10-14T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231122"
-            },
-            {
-              "label": "BE58358",
+              "label": "BE74448",
               "value": "690 CHF",
               "detail": "current bid",
-              "date": "2026-10-14T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231118"
+              "date": "2026-10-21T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231206"
             },
             {
-              "label": "BE384444",
+              "label": "BE94333",
+              "value": "690 CHF",
+              "detail": "current bid",
+              "date": "2026-10-21T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231207"
+            },
+            {
+              "label": "BE222002",
               "value": "490 CHF",
               "detail": "current bid",
-              "date": "2026-10-14T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231111"
+              "date": "2026-10-21T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231210"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-13T22:49:00.460Z"
+          "updatedAt": "2026-10-15T11:34:01.149Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Bern",
+              "value": "19 °C",
+              "detail": "today from 10 to 19 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -277,10 +310,22 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Fishing permit in the Canton of Bern: requirements and seasons",
+          "url": "/en/swiss-articles/fishing-permit-canton-bern-guide/",
+          "excerpt": "Find out how to apply for a fishing permit in the Canton of Bern: licenses, courses, authorized waters, and competent authorities.",
+          "date": "2026-10-15T02:27:21.587Z"
+        },
+        {
+          "title": "Vehicle Registration in Bern: A Step-by-Step Guide",
+          "url": "/en/swiss-articles/bern-vehicle-registration-guide/",
+          "excerpt": "How to handle license plates, registration, vehicle inspection and change of ownership in the Canton of Bern: check requirements, deadlines and official fees.",
+          "date": "2026-10-15T02:50:14.192Z"
+        },
         {
           "title": "Hunting license in the canton of Bern: requirements and application",
           "url": "/en/swiss-articles/hunting-license-bern-requirements/",
@@ -316,18 +361,6 @@
           "url": "/en/swiss-articles/health-insurance-premiums-cantonal-bern-reduction/",
           "excerpt": "Here are the key facts for compulsory health insurance premiums in the Canton of Bern.",
           "date": "2026-08-12T09:20:30.193Z"
-        },
-        {
-          "title": "Driving licence in Bern: conversion and requirements",
-          "url": "/en/swiss-articles/canton-of-bern-driving-license-conversion-and-exams/",
-          "excerpt": "The conversion of the foreign driver's license in the Canton of Bern requires the theoretical and practical examination, as well as the attendance of compulsory courses. The relevant circulation office is responsible…",
-          "date": "2026-08-13T17:49:01.339Z"
-        },
-        {
-          "title": "Residence permit C in Canton Bern: requirements and application",
-          "url": "/en/swiss-articles/c-permit-bern-switzerland-requisites-and-application/",
-          "excerpt": "Residence permit C in the Canton of Bern: requirements, application and application procedure",
-          "date": "2026-08-12T20:41:31.313Z"
         }
       ],
       "links": [
@@ -352,7 +385,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T08:24:32.182Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "BE",
@@ -404,30 +437,44 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "BE85958",
-              "value": "790 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-14T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231122"
-            },
-            {
-              "label": "BE58358",
+              "label": "BE74448",
               "value": "690 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-14T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231118"
+              "date": "2026-10-21T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231206"
             },
             {
-              "label": "BE384444",
+              "label": "BE94333",
+              "value": "690 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-21T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231207"
+            },
+            {
+              "label": "BE222002",
               "value": "490 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-14T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231111"
+              "date": "2026-10-21T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231210"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-13T22:49:00.460Z"
+          "updatedAt": "2026-10-15T11:34:01.149Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Bern",
+              "value": "19 °C",
+              "detail": "heute 10 bis 19 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -440,10 +487,22 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Fischereibewilligung im Kanton Bern: Voraussetzungen und Saisons",
+          "url": "/de/schweiz-artikel/angelpatent-kanton-bern-anleitung/",
+          "excerpt": "Erfahren Sie, wie Sie das Verfahren für die Fischereibewilligung im Kanton Bern abwickeln: Bewilligungen, Kurse, zugelassene Gewässer und zuständige Behörden.",
+          "date": "2026-10-15T02:27:21.587Z"
+        },
+        {
+          "title": "Kontrollschilder und Zulassung im Kanton Bern: Leitfaden zu den Verfahren",
+          "url": "/de/schweiz-artikel/bern-fahrzeug-zulassung-leitfaden/",
+          "excerpt": "So regeln Sie im Kanton Bern Kontrollschilder, Zulassung, Fahrzeugprüfung und Halterwechsel: Prüfen Sie die offiziellen Anforderungen, Fristen und Beträge.",
+          "date": "2026-10-15T02:50:14.192Z"
+        },
         {
           "title": "Jagdlizenz im Kanton Bern: Voraussetzungen und Antrag",
           "url": "/de/schweiz-artikel/jagdkarte-bern-voraussetzungen/",
@@ -479,18 +538,6 @@
           "url": "/de/schweiz-artikel/kostenvoranschlag-kv-bern-kanton/",
           "excerpt": "Hier finden Sie die wichtigsten Fakten zu den Prämien der obligatorischen Krankenversicherung im Kanton Bern.",
           "date": "2026-08-12T09:20:30.193Z"
-        },
-        {
-          "title": "Führerschein in Bern: Umstellung und Voraussetzungen",
-          "url": "/de/schweiz-artikel/fuehrerschein-kanton-bern-umstellung-und-pruefung/",
-          "excerpt": "Die Umschulung des ausländischen Führerscheins im Kanton Bern erfordert die theoretische und praktische Prüfung sowie die Teilnahme an Pflichtkursen. Für die Bearbeitung des Umwandlungsantrags ist das zuständige…",
-          "date": "2026-08-13T17:49:01.339Z"
-        },
-        {
-          "title": "Niederlassungsbewilligung C im Kanton Bern: Voraussetzungen und Antrag",
-          "url": "/de/schweiz-artikel/c-bescheinigung-bern-schweiz-anforderungen-und-antragstellung/",
-          "excerpt": "Die Niederlassungsbewilligung C im Kanton Bern: Voraussetzungen, Antrag und Antragsverfahren",
-          "date": "2026-08-12T20:41:31.313Z"
         }
       ],
       "links": [
@@ -515,7 +562,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T08:24:32.182Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "BE",
@@ -567,30 +614,44 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "BE85958",
-              "value": "790 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-14T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231122"
-            },
-            {
-              "label": "BE58358",
+              "label": "BE74448",
               "value": "690 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-14T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231118"
+              "date": "2026-10-21T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231206"
             },
             {
-              "label": "BE384444",
+              "label": "BE94333",
+              "value": "690 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-21T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231207"
+            },
+            {
+              "label": "BE222002",
               "value": "490 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-14T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231111"
+              "date": "2026-10-21T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231210"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-13T22:49:00.460Z"
+          "updatedAt": "2026-10-15T11:34:01.149Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Bern",
+              "value": "19 °C",
+              "detail": "aujourd’hui de 10 à 19 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-15T13:31:14.704Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -603,10 +664,22 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Permis de pêche dans le canton de Berne : exigences et saisons",
+          "url": "/fr/articles-suisse/permis-peche-canton-berne-guide/",
+          "excerpt": "Découvrez comment gérer votre dossier de permis de pêche dans le canton de Berne : licences, cours, eaux autorisées et autorités compétentes.",
+          "date": "2026-10-15T02:27:21.587Z"
+        },
+        {
+          "title": "Plaques et immatriculation dans le canton de Berne : guide des procédures",
+          "url": "/fr/articles-suisse/berne-vehicule-immatriculation-guide/",
+          "excerpt": "Comment gérer les plaques, l’immatriculation, le contrôle technique et le changement de propriétaire dans le canton de Berne : vérifiez les exigences, les échéances et les montants officiels.",
+          "date": "2026-10-15T02:50:14.192Z"
+        },
         {
           "title": "Permis de chasse dans le canton de Berne : conditions et demande",
           "url": "/fr/articles-suisse/permis-chasse-berne-conditions/",
@@ -642,18 +715,6 @@
           "url": "/fr/articles-suisse/primes-assurance-maladie-canton-de-bourbourg/",
           "excerpt": "Voici les faits clés pour les primes de l'assurance maladie obligatoire dans le canton de Berne.",
           "date": "2026-08-12T09:20:30.193Z"
-        },
-        {
-          "title": "Permis de conduire à Berne : conversion et exigences",
-          "url": "/fr/articles-suisse/permis-de-conduire-canton-de-bourguignon-conversion-et-examen/",
-          "excerpt": "La conversion du permis de conduire étranger dans le canton de Berne nécessite l'examen théorique et pratique ainsi que la fréquentation de cours obligatoires. L'office de la circulation compétent est responsable du…",
-          "date": "2026-08-13T17:49:01.339Z"
-        },
-        {
-          "title": "Permis de séjour C dans le canton de Berne : exigences et demande",
-          "url": "/fr/articles-suisse/permis-de-sejour-c-bourg-de-berne-requisits-et-demande/",
-          "excerpt": "Le permis de séjour C dans le canton de Berne : exigences, demande et procédure d'application",
-          "date": "2026-08-12T20:41:31.313Z"
         }
       ],
       "links": [
@@ -674,7 +735,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T08:24:32.182Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

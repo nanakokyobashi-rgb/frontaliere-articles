@@ -4,22 +4,22 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "54b96c048250bb9595c274bff4157bbf7c37e04b7b6f33f8cfaa0d380fa9e0d1",
+  "updatedAt": "2026-10-15T20:50:11.240Z",
+  "contentHash": "628b6836e692727ad89461330eb6653f0fbde3f15958dc7388edbd318eff7467",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-12T23:59:59.000Z",
+      "updatedAt": "2026-10-14T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-13T19:37:23.778Z",
+      "updatedAt": "2026-10-15T12:13:19.434Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -32,60 +32,60 @@
       "keyFacts": [
         {
           "label": "Valico più scorrevole della settimana",
-          "value": "0,1 min",
-          "note": "Saint-Gingolph, settimana conclusa: 12 ottobre 2026"
+          "value": "0 min",
+          "note": "Saint-Gingolph, settimana conclusa: 14 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "23",
-          "note": "segnalazioni aggiornate: 13 ottobre 2026"
+          "value": "21",
+          "note": "segnalazioni aggiornate: 15 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "25",
-          "note": "segnalazioni aggiornate: 13 ottobre 2026"
+          "value": "26",
+          "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 6 ottobre 2026 – 12 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 8 ottobre 2026 – 14 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Saint-Gingolph",
-              "value": "0,1 min",
-              "detail": "47 rilevazioni",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/saint-gingolph/oggi/"
             },
             {
               "label": "Le Châtelard-Vallorcine",
-              "value": "0,2 min",
-              "detail": "47 rilevazioni",
+              "value": "0,1 min",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/le-chatelard-vallorcine/oggi/"
             },
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
-              "value": "0,3 min",
-              "detail": "47 rilevazioni",
+              "value": "0,1 min",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/morgins-chatel/oggi/"
             },
             {
               "label": "Traforo del Gran San Bernardo",
-              "value": "0,5 min",
-              "detail": "47 rilevazioni",
+              "value": "0,4 min",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/traforo-del-gran-san-bernardo/oggi/"
             },
             {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "2,4 min",
-              "detail": "47 rilevazioni",
+              "value": "2 min",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/sempione/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-14T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -123,12 +123,6 @@
               "date": "2026-09-17T18:00:00.000Z"
             },
             {
-              "label": "Leuk <-> Jeizinen tra Luogo Leuk E Luogo Erschmatt Situazione: chiusa Causa: lavori di manutenzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 16 ottobre 2026",
-              "date": "2026-09-24T13:42:00.000Z"
-            },
-            {
               "label": "Epinassey, Saint-Maurice in tutte le direzioni Situazione: chiusa Causa: lavori di costruzione",
               "value": "Chiusura",
               "detail": "fine prevista: 18 dicembre 2026",
@@ -139,16 +133,37 @@
               "value": "Chiusura",
               "detail": "fine prevista: 28 ottobre 2026",
               "date": "2026-10-01T13:12:00.000Z"
+            },
+            {
+              "label": "A9 Sion -> Brig tra Svincolo autostradale Sion-Est E Svincolo autostradale Sierre-Est Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 23 ottobre 2026",
+              "date": "2026-10-05T15:25:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Regione Nosere, la nuova rotatoria sarà completata entro fine ottobre",
+              "date": "2026-10-14T15:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/regione-nosere-la-nuova-rotatoria-sara-completata-entro-fine-ottobre.html"
+            },
+            {
+              "label": "Domodossola, in funzione il nuovo impianto semaforico di via Trabucchi",
+              "date": "2026-10-14T12:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-in-funzione-il-nuovo-impianto-semaforico-di-via-trabucchi.html"
+            },
+            {
+              "label": "Valle Vigezzo, senso unico alternato sulla statale 337 fino al 17 ottobre",
+              "date": "2026-10-14T11:37:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valle-vigezzo-senso-unico-alternato-sulla-statale-337-fino-al-17-ottobre.html"
+            },
             {
               "label": "Galleria Montecrevola, prima i lavori al tornante sulla provinciale 166",
               "date": "2026-10-13T10:10:00.000Z",
@@ -163,24 +178,9 @@
               "label": "Viabilità in Ossola a rischio paralisi, Ferroni chiede un coordinamento urgente",
               "date": "2026-10-12T16:50:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
-            },
-            {
-              "label": "Autostrada A26, i cantieri attivi questa settimana",
-              "date": "2026-10-12T13:35:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-b7c64ee126.html"
-            },
-            {
-              "label": "Canton Ticino, controlli della velocità dal 12 al 18 ottobre: ecco dove saranno gli autovelox",
-              "date": "2026-10-12T06:20:18.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/canton-ticino-controlli-della-velocita-dal-12-al-18-ottobre-ecco-dove-saranno-gli-autovelox.html"
-            },
-            {
-              "label": "Al via i lavori nel tunnel di Montecrevola: rischio intasamento sulla provinciale verso il confine",
-              "date": "2026-10-11T17:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/11/leggi-notizia/argomenti/ossola/articolo/al-via-i-lavori-anas-nel-tunnel-di-montecrevola-ce-il-rischio-intasamento-sulla-provinciale-vers.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -243,7 +243,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "en": {
       "canton": "VS",
@@ -253,60 +253,60 @@
       "keyFacts": [
         {
           "label": "Fastest crossing of the week",
-          "value": "0.1 min",
-          "note": "Saint-Gingolph, week ending 12 October 2026"
+          "value": "0 min",
+          "note": "Saint-Gingolph, week ending 14 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "23",
-          "note": "reports as of 13 October 2026"
+          "value": "21",
+          "note": "reports as of 15 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "25",
-          "note": "reports as of 13 October 2026"
+          "value": "26",
+          "note": "reports as of 15 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 6 October 2026 to 12 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 8 October 2026 to 14 October 2026, fastest first.",
           "items": [
             {
               "label": "Saint-Gingolph",
-              "value": "0.1 min",
-              "detail": "47 readings",
+              "value": "0 min",
+              "detail": "48 readings",
               "url": "/en/border-wait/saint-gingolph/today/"
             },
             {
               "label": "Le Châtelard-Vallorcine",
-              "value": "0.2 min",
-              "detail": "47 readings",
+              "value": "0.1 min",
+              "detail": "48 readings",
               "url": "/en/border-wait/le-chatelard-vallorcine/today/"
             },
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
-              "value": "0.3 min",
-              "detail": "47 readings",
+              "value": "0.1 min",
+              "detail": "48 readings",
               "url": "/en/border-wait/morgins-chatel/today/"
             },
             {
               "label": "Traforo del Gran San Bernardo",
-              "value": "0.5 min",
-              "detail": "47 readings",
+              "value": "0.4 min",
+              "detail": "48 readings",
               "url": "/en/border-wait/traforo-del-gran-san-bernardo/today/"
             },
             {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "2.4 min",
-              "detail": "47 readings",
+              "value": "2 min",
+              "detail": "48 readings",
               "url": "/en/border-wait/sempione/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-14T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -344,12 +344,6 @@
               "date": "2026-09-17T18:00:00.000Z"
             },
             {
-              "label": "Leuk <-> Jeizinen tra Luogo Leuk E Luogo Erschmatt Situazione: chiusa Causa: lavori di manutenzione",
-              "value": "Closure",
-              "detail": "until 16 October 2026",
-              "date": "2026-09-24T13:42:00.000Z"
-            },
-            {
               "label": "Epinassey, Saint-Maurice in tutte le direzioni Situazione: chiusa Causa: lavori di costruzione",
               "value": "Closure",
               "detail": "until 18 December 2026",
@@ -360,16 +354,37 @@
               "value": "Closure",
               "detail": "until 28 October 2026",
               "date": "2026-10-01T13:12:00.000Z"
+            },
+            {
+              "label": "A9 Sion -> Brig tra Svincolo autostradale Sion-Est E Svincolo autostradale Sierre-Est Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 23 October 2026",
+              "date": "2026-10-05T15:25:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Regione Nosere, la nuova rotatoria sarà completata entro fine ottobre",
+              "date": "2026-10-14T15:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/regione-nosere-la-nuova-rotatoria-sara-completata-entro-fine-ottobre.html"
+            },
+            {
+              "label": "Domodossola, in funzione il nuovo impianto semaforico di via Trabucchi",
+              "date": "2026-10-14T12:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-in-funzione-il-nuovo-impianto-semaforico-di-via-trabucchi.html"
+            },
+            {
+              "label": "Valle Vigezzo, senso unico alternato sulla statale 337 fino al 17 ottobre",
+              "date": "2026-10-14T11:37:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valle-vigezzo-senso-unico-alternato-sulla-statale-337-fino-al-17-ottobre.html"
+            },
             {
               "label": "Galleria Montecrevola, prima i lavori al tornante sulla provinciale 166",
               "date": "2026-10-13T10:10:00.000Z",
@@ -384,24 +399,9 @@
               "label": "Viabilità in Ossola a rischio paralisi, Ferroni chiede un coordinamento urgente",
               "date": "2026-10-12T16:50:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
-            },
-            {
-              "label": "Autostrada A26, i cantieri attivi questa settimana",
-              "date": "2026-10-12T13:35:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-b7c64ee126.html"
-            },
-            {
-              "label": "Canton Ticino, controlli della velocità dal 12 al 18 ottobre: ecco dove saranno gli autovelox",
-              "date": "2026-10-12T06:20:18.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/canton-ticino-controlli-della-velocita-dal-12-al-18-ottobre-ecco-dove-saranno-gli-autovelox.html"
-            },
-            {
-              "label": "Al via i lavori nel tunnel di Montecrevola: rischio intasamento sulla provinciale verso il confine",
-              "date": "2026-10-11T17:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/11/leggi-notizia/argomenti/ossola/articolo/al-via-i-lavori-anas-nel-tunnel-di-montecrevola-ce-il-rischio-intasamento-sulla-provinciale-vers.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -464,7 +464,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "de": {
       "canton": "VS",
@@ -474,60 +474,60 @@
       "keyFacts": [
         {
           "label": "Schnellster Grenzübergang der Woche",
-          "value": "0.1 Min.",
-          "note": "Saint-Gingolph, Woche bis 12. Oktober 2026"
+          "value": "0 Min.",
+          "note": "Saint-Gingolph, Woche bis 14. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "23",
-          "note": "Meldungen vom 13. Oktober 2026"
+          "value": "21",
+          "note": "Meldungen vom 15. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "25",
-          "note": "Meldungen vom 13. Oktober 2026"
+          "value": "26",
+          "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 6. Oktober 2026 bis 12. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 8. Oktober 2026 bis 14. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Saint-Gingolph",
-              "value": "0.1 Min.",
-              "detail": "47 Messungen",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/saint-gingolph/heute/"
             },
             {
               "label": "Le Châtelard-Vallorcine",
-              "value": "0.2 Min.",
-              "detail": "47 Messungen",
+              "value": "0.1 Min.",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/le-chatelard-vallorcine/heute/"
             },
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
-              "value": "0.3 Min.",
-              "detail": "47 Messungen",
+              "value": "0.1 Min.",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/morgins-chatel/heute/"
             },
             {
               "label": "Traforo del Gran San Bernardo",
-              "value": "0.5 Min.",
-              "detail": "47 Messungen",
+              "value": "0.4 Min.",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/traforo-del-gran-san-bernardo/heute/"
             },
             {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "2.4 Min.",
-              "detail": "47 Messungen",
+              "value": "2 Min.",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/sempione/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-14T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -565,12 +565,6 @@
               "date": "2026-09-17T18:00:00.000Z"
             },
             {
-              "label": "Leuk <-> Jeizinen zwischen Ortschaft Leuk und Ortschaft Erschmatt Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 16. Oktober 2026",
-              "date": "2026-09-24T13:42:00.000Z"
-            },
-            {
               "label": "Epinassey, Saint-Maurice in beide Richtungen Sachlage: Strecke gesperrt Ursache: Bauarbeiten",
               "value": "Sperrung",
               "detail": "bis 18. Dezember 2026",
@@ -581,16 +575,37 @@
               "value": "Sperrung",
               "detail": "bis 28. Oktober 2026",
               "date": "2026-10-01T13:12:00.000Z"
+            },
+            {
+              "label": "A9 Sion -> Brig zwischen Anschluss Sion-Ost und Anschluss Sierre-Ost Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 23. Oktober 2026",
+              "date": "2026-10-05T15:25:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Regione Nosere, la nuova rotatoria sarà completata entro fine ottobre",
+              "date": "2026-10-14T15:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/regione-nosere-la-nuova-rotatoria-sara-completata-entro-fine-ottobre.html"
+            },
+            {
+              "label": "Domodossola, in funzione il nuovo impianto semaforico di via Trabucchi",
+              "date": "2026-10-14T12:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-in-funzione-il-nuovo-impianto-semaforico-di-via-trabucchi.html"
+            },
+            {
+              "label": "Valle Vigezzo, senso unico alternato sulla statale 337 fino al 17 ottobre",
+              "date": "2026-10-14T11:37:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valle-vigezzo-senso-unico-alternato-sulla-statale-337-fino-al-17-ottobre.html"
+            },
             {
               "label": "Galleria Montecrevola, prima i lavori al tornante sulla provinciale 166",
               "date": "2026-10-13T10:10:00.000Z",
@@ -605,24 +620,9 @@
               "label": "Viabilità in Ossola a rischio paralisi, Ferroni chiede un coordinamento urgente",
               "date": "2026-10-12T16:50:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
-            },
-            {
-              "label": "Autostrada A26, i cantieri attivi questa settimana",
-              "date": "2026-10-12T13:35:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-b7c64ee126.html"
-            },
-            {
-              "label": "Canton Ticino, controlli della velocità dal 12 al 18 ottobre: ecco dove saranno gli autovelox",
-              "date": "2026-10-12T06:20:18.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/canton-ticino-controlli-della-velocita-dal-12-al-18-ottobre-ecco-dove-saranno-gli-autovelox.html"
-            },
-            {
-              "label": "Al via i lavori nel tunnel di Montecrevola: rischio intasamento sulla provinciale verso il confine",
-              "date": "2026-10-11T17:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/11/leggi-notizia/argomenti/ossola/articolo/al-via-i-lavori-anas-nel-tunnel-di-montecrevola-ce-il-rischio-intasamento-sulla-provinciale-vers.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -685,7 +685,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     },
     "fr": {
       "canton": "VS",
@@ -695,60 +695,60 @@
       "keyFacts": [
         {
           "label": "Poste-frontière le plus fluide de la semaine",
-          "value": "0,1 min",
-          "note": "Saint-Gingolph, semaine jusqu’au 12 octobre 2026"
+          "value": "0 min",
+          "note": "Saint-Gingolph, semaine jusqu’au 14 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "23",
-          "note": "signalements au 13 octobre 2026"
+          "value": "21",
+          "note": "signalements au 15 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "25",
-          "note": "signalements au 13 octobre 2026"
+          "value": "26",
+          "note": "signalements au 15 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 6 octobre 2026 au 12 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 8 octobre 2026 au 14 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Saint-Gingolph",
-              "value": "0,1 min",
-              "detail": "47 relevés",
+              "value": "0 min",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/saint-gingolph/aujourd-hui/"
             },
             {
               "label": "Le Châtelard-Vallorcine",
-              "value": "0,2 min",
-              "detail": "47 relevés",
+              "value": "0,1 min",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/le-chatelard-vallorcine/aujourd-hui/"
             },
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
-              "value": "0,3 min",
-              "detail": "47 relevés",
+              "value": "0,1 min",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/morgins-chatel/aujourd-hui/"
             },
             {
               "label": "Traforo del Gran San Bernardo",
-              "value": "0,5 min",
-              "detail": "47 relevés",
+              "value": "0,4 min",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/traforo-del-gran-san-bernardo/aujourd-hui/"
             },
             {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "2,4 min",
-              "detail": "47 relevés",
+              "value": "2 min",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/sempione/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-14T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -786,12 +786,6 @@
               "date": "2026-09-17T18:00:00.000Z"
             },
             {
-              "label": "Loèche <-> Jeizinen entre Localité Loèche et Localité Erschmatt Situation: fermé Raison: travaux de maintenance",
-              "value": "Fermeture",
-              "detail": "jusqu’au 16 octobre 2026",
-              "date": "2026-09-24T13:42:00.000Z"
-            },
-            {
               "label": "Epinassey, Saint-Maurice dans les deux sens Situation: fermé Raison: travaux de construction",
               "value": "Fermeture",
               "detail": "jusqu’au 18 décembre 2026",
@@ -802,16 +796,37 @@
               "value": "Fermeture",
               "detail": "jusqu’au 28 octobre 2026",
               "date": "2026-10-01T13:12:00.000Z"
+            },
+            {
+              "label": "A9 Sion -> Brigue entre Jonction autoroutière Sion-Est et Jonction autoroutière Sierre-Est Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 23 octobre 2026",
+              "date": "2026-10-05T15:25:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-15T12:13:19.434Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Regione Nosere, la nuova rotatoria sarà completata entro fine ottobre",
+              "date": "2026-10-14T15:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/regione-nosere-la-nuova-rotatoria-sara-completata-entro-fine-ottobre.html"
+            },
+            {
+              "label": "Domodossola, in funzione il nuovo impianto semaforico di via Trabucchi",
+              "date": "2026-10-14T12:40:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-in-funzione-il-nuovo-impianto-semaforico-di-via-trabucchi.html"
+            },
+            {
+              "label": "Valle Vigezzo, senso unico alternato sulla statale 337 fino al 17 ottobre",
+              "date": "2026-10-14T11:37:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/valle-vigezzo-senso-unico-alternato-sulla-statale-337-fino-al-17-ottobre.html"
+            },
             {
               "label": "Galleria Montecrevola, prima i lavori al tornante sulla provinciale 166",
               "date": "2026-10-13T10:10:00.000Z",
@@ -826,24 +841,9 @@
               "label": "Viabilità in Ossola a rischio paralisi, Ferroni chiede un coordinamento urgente",
               "date": "2026-10-12T16:50:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
-            },
-            {
-              "label": "Autostrada A26, i cantieri attivi questa settimana",
-              "date": "2026-10-12T13:35:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-b7c64ee126.html"
-            },
-            {
-              "label": "Canton Ticino, controlli della velocità dal 12 al 18 ottobre: ecco dove saranno gli autovelox",
-              "date": "2026-10-12T06:20:18.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/canton-ticino-controlli-della-velocita-dal-12-al-18-ottobre-ecco-dove-saranno-gli-autovelox.html"
-            },
-            {
-              "label": "Al via i lavori nel tunnel di Montecrevola: rischio intasamento sulla provinciale verso il confine",
-              "date": "2026-10-11T17:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/11/leggi-notizia/argomenti/ossola/articolo/al-via-i-lavori-anas-nel-tunnel-di-montecrevola-ce-il-rischio-intasamento-sulla-provinciale-vers.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
@@ -906,7 +906,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T20:50:11.240Z"
     }
   }
 }

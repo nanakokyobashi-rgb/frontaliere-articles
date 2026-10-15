@@ -29,14 +29,11 @@
  *      GITHUB_OUTPUT/GITHUB_STEP_SUMMARY (opz).
  */
 import { execFileSync } from 'node:child_process';
-import fs from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
-// Direzione dell'import voluta: questo file è site-only (non compare nel
-// manifest del ciclo), `pr-body-sections-check.mjs` è `mode: identical`. Un
-// file `identical` che importasse un file site-only arriverebbe sul corpus
-// senza la sua dipendenza (ERR_MODULE_NOT_FOUND con la CI verde); così invece
-// è il file che NON viaggia a dipendere da quello che viaggia.
+import fs, { realpathSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
+// Direzione dell'import voluta: questo gemello `adapted` conserva il parser
+// condiviso `pr-body-sections-check.mjs` come sorgente unica della tassonomia,
+// mentre adatta soltanto l'identità del reviewer al contratto del corpus.
 import {
   bulletState,
   decisionDeferralSpecificity,
@@ -280,7 +277,10 @@ export function main() {
 
 // CLI entrypoint only (importing for tests must not invoke gh). Proceed-safe: any
 // uncaught error → emit true (run triage), never strand a real follow-up.
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && (() => {
+  try { return import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href; }
+  catch { return false; }
+})()) {
   try {
     main();
   } catch (e) {

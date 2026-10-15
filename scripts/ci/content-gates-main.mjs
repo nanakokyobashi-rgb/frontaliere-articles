@@ -69,9 +69,9 @@
  */
 
 import { spawnSync } from 'node:child_process';
-import fs from 'node:fs';
+import fs, { realpathSync } from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import {
   BLOG_BODY_ROOTS,
   collectTypeScriptFiles,
@@ -347,6 +347,10 @@ export const NON_SONO_CONTENT_GATES = Object.freeze({
     'prova il publisher con registri, slug, hub e pagine costruiti in directory '
     + 'temporanee; sulle superfici reali verifica solo symlink/layout e presenza, '
     + 'non legge ne\' valuta articoli sotto content/.',
+  'generator/tests/content-gates-main-entrypoint.test.mjs':
+    'usa il path content/ reale solo come target del preloader, che intercetta '
+    + 'readdirSync e restituisce [] prima di leggere il filesystem; il test '
+    + 'verifica il dispatch CLI via symlink, non i contenuti pubblicati.',
   'generator/tests/section-registry.test.mjs':
     'valida sections/registry.json e il publisher con documenti e superfici '
     + 'sintetiche in directory temporanee; non legge gli articoli reali sotto '
@@ -695,6 +699,9 @@ export async function runCli(run = main) {
   }
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && (() => {
+  try { return import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href; }
+  catch { return false; }
+})()) {
   await runCli();
 }

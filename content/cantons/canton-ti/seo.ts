@@ -387,6 +387,84 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-gottardo-quadri-cupra-berna': {
+    title: 'Gottardo: quadri interroga Berna sulla CUPRA | Frontaliere Ticino',
+    description: 'Le code del San Gottardo ricadono sull\'Alta Leventina Quadri interroga il Consiglio federale sulla corsia CUPRA La CUPRA è definitiva dal 2026 e ha gestione',
+    keywords: 'frontalieri, ticino, svizzera, italia, gottardo, quadri, interroga, berna',
+    ogTitle: 'Gottardo: Quadri interroga Berna sulla CUPRA',
+    ogDescription: 'Le code del San Gottardo ricadono sull\'Alta Leventina Quadri interroga il Consiglio federale sulla corsia CUPRA La CUPRA è definitiva dal 2026 e ha gestione',
+    canonicalPath: '/articoli-ticino/gottardo-quadri-cupra-berna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gottardo: quadri interroga Berna sulla CUPRA",
+      "description": "Le code del San Gottardo ricadono sull'Alta Leventina Quadri interroga il Consiglio federale sulla corsia CUPRA La CUPRA è definitiva dal 2026 e ha gestione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-gottardo-quadri-cupra-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Code sulla A2 al San Gottardo con traffico bloccato nella valle"
+      },
+      "datePublished": "2026-10-15T01:57:32+00:00",
+      "dateModified": "2026-10-15T01:57:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/gottardo-quadri-cupra-berna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sovranita-fiscale-accordo-ue': {
+    title: 'Accordo UE: rischio perdita sovranità fiscale per Svizzera',
+    description: 'Il 6 ottobre la NZZ lancia l\'allarme fiscale Gli aiuti di Stato possono includere agevolazioni fiscali Coinvolti Confederazione, Cantoni e Comuni Prevista',
+    keywords: 'frontalieri, ticino, svizzera, italia, accordo, rischio, perdita, sovranità',
+    ogTitle: 'Accordo UE: rischio perdita sovranità fiscale per Svizzera',
+    ogDescription: 'Il 6 ottobre la NZZ lancia l\'allarme fiscale Gli aiuti di Stato possono includere agevolazioni fiscali Coinvolti Confederazione, Cantoni e Comuni Prevista',
+    canonicalPath: '/articoli-ticino/sovranita-fiscale-accordo-ue/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Accordo UE: rischio perdita sovranità fiscale per Svizzera",
+      "description": "Il 6 ottobre la NZZ lancia l'allarme fiscale Gli aiuti di Stato possono includere agevolazioni fiscali Coinvolti Confederazione, Cantoni e Comuni Prevista",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sovranita-fiscale-accordo-ue.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Bellinzona, simbolo delle istituzioni svizzere"
+      },
+      "datePublished": "2026-10-15T10:45:34+00:00",
+      "dateModified": "2026-10-15T10:45:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/sovranita-fiscale-accordo-ue/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
