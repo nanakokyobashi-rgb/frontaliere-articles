@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-lugano-preventivo-2027-moltiplicatori.webp",
-      "sha256": "bc3d1a83c0ba759428ed82d223ac262fed43a7999bd69cad7cbc1eef798bc35b"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-lugano-preventivo-2027-moltiplicatori-480w.webp",
-      "sha256": "4e92ef82a5cec04c2554878f7969ff1dbe5ad800c4ceaaa845614ce0130f0ced"
-    }
-  ]
+  "items": []
 }
