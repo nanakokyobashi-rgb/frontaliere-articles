@@ -30,6 +30,7 @@ import { expect } from './lib/expect-shim.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { unescapeTsString } from '../scripts/lib/unescape-ts-string.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -211,6 +212,14 @@ describe('validateHeadline — drift guard', () => {
     expect(src).toContain('Headline troppo lungo (max 110 char)');
     expect(src).toContain('Pattern clickbait rilevato');
   });
+
+  it('the published-title reader delegates TS escapes to the shared single-pass decoder', () => {
+    const src = fs.readFileSync(fileURLToPath(import.meta.url), 'utf-8');
+
+    expect(src).toContain("import { unescapeTsString } from '../scripts/lib/unescape-ts-string.mjs';");
+    expect(src).toContain('title: unescapeTsString(m[2],');
+    expect(src).not.toMatch(/m\[2\]\.replace\(\/\\\\'\/g/);
+  });
 });
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -224,7 +233,7 @@ function loadPublishedTitles(metaFile) {
   const out = [];
   let m;
   while ((m = re.exec(src)) !== null) {
-    out.push({ id: m[1], title: m[2].replace(/\\'/g, "'").replace(/\\\\/g, '\\') });
+    out.push({ id: m[1], title: unescapeTsString(m[2], { "'": "'", '\\': '\\' }) });
   }
   return out;
 }
