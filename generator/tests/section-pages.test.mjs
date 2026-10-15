@@ -164,6 +164,22 @@ test('publisher normalizza i prefissi prima di concatenare i path canonici', () 
   assert.equal(normalizeRoutePrefix('/articoli-ticino///'), '/articoli-ticino');
 });
 
+test('publisher usa il prefisso normalizzato anche per il match della pagina', () => {
+  const section = 'canton-route-prefix-fixture';
+  const all = {
+    [section]: {
+      ...TI,
+      section,
+      indexSlug: { ...TI.indexSlug, it: `${TI.indexSlug.it}///` },
+    },
+  };
+
+  assert.equal(
+    pageEntry(section, 'articoli-ticino/index.html', 'landing', all).canonicalPath,
+    '/articoli-ticino/',
+  );
+});
+
 test('publisher: il seed del manifest di migrazione conserva i percorsi canonici', () => {
   const manifest = pageManifestFromPages({
     section: 'canton-ti',
