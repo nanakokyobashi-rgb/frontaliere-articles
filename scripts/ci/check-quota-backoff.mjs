@@ -61,9 +61,8 @@
  */
 
 import { randomUUID } from 'node:crypto';
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import fs, { realpathSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
 import { isBackoffActive, maxQuotaResetsAt } from './claude-rate-limit.mjs';
 import { ghWithRateLimitRetry } from './lib/gh-rate-limit.mjs';
 import { quotaLeaseFailureMarker } from './requeue-quota-lease.mjs';
@@ -1225,7 +1224,7 @@ function main() {
 // TOTAL / PROCEED-SAFE: un throw non gestito non deve mai lasciare la issue
 // bloccata né congelare la coda → quota_blocked=false, exit 0 → il fixer gira
 // invariato (comportamento identico a prima che questo gate esistesse).
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && (() => { try { return import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href; } catch { return false; } })()) {
   try {
     const result = main();
     if (process.env.QUOTA_LEASE_STRICT_RELEASE === '1'
