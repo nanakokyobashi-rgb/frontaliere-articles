@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-scambio-informazioni-conti-finanziari-2026.webp",
-      "sha256": "3e638c3c71d0ec123062f7912bae96e6b12d76a0b6967a4536f1f7c61f605f8a"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-scambio-informazioni-conti-finanziari-2026-480w.webp",
-      "sha256": "41dd35e6c84b0f2d67ec9aa6d46f5f8bca14d053be3347d5eed16f9cbf401e74"
-    }
-  ]
+  "items": []
 }
