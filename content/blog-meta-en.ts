@@ -13246,6 +13246,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.inaugurazione-sala-comacina-polizia.title': 'Highway Police: the ribbon-cutting in Sala Comacina',
     'blog.article.inaugurazione-sala-comacina-polizia.excerpt': 'Ceremony on Friday, October 16 at 11 at the Highway Police detachment in Sala Comacina Salvini, Piantedosi, Molteni and Pisani expected Mayor in attendance',
     'blog.article.inaugurazione-sala-comacina-polizia.imageAlt': 'Illustration generated for this article',
+    'blog.article.saronno-piccole-stelle-softball.title': 'Saronno, Piccole Stelle returns: Under 14 softball tournament',
+    'blog.article.saronno-piccole-stelle-softball.excerpt': 'On October 17 and 18, the Piccole Stelle tournament returns The sixth edition is reserved for the Under 14 category The tournament commemorates Enrico Obletter Saronno plays at home',
+    'blog.article.saronno-piccole-stelle-softball.imageAlt': 'Youth softball tournament in Saronno for the sixth edition of Piccole Stelle',
 };
 
 export default blogMetaEn;

@@ -13247,6 +13247,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.inaugurazione-sala-comacina-polizia.title': 'Polizia Stradale: il taglio del nastro a Sala Comacina',
     'blog.article.inaugurazione-sala-comacina-polizia.excerpt': 'Cerimonia venerdì 16 ottobre alle 11 Distaccamento della Polizia Stradale a Sala Comacina Attesi Salvini, Piantedosi, Molteni e Pisani Presente il sindaco',
     'blog.article.inaugurazione-sala-comacina-polizia.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.saronno-piccole-stelle-softball.title': 'Saronno, torna Piccole Stelle: torneo di softball Under 14',
+    'blog.article.saronno-piccole-stelle-softball.excerpt': 'Il 17 e 18 ottobre torna il torneo Piccole Stelle La sesta edizione è riservata alla categoria Under 14 Il torneo ricorda Enrico Obletter Saronno gioca in casa',
+    'blog.article.saronno-piccole-stelle-softball.imageAlt': 'Torneo di softball giovanile sul campo di Saronno per la sesta edizione di Piccole Stelle',
 };
 
 export default blogMetaIt;

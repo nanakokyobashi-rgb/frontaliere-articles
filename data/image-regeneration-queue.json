@@ -40,6 +40,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-15T11:39:57.424Z",
       "lastFailureAt": "2026-10-15T12:56:12.993Z"
+    },
+    {
+      "articleId": "saronno-piccole-stelle-softball",
+      "title": "Saronno, torna Piccole Stelle: torneo di softball Under 14",
+      "fallbackImage": "/images/blog/article-saronno-manifestazione-palestina-ottobre-2026.webp",
+      "reason": "All image providers failed for article-saronno-piccole-stelle-softball: openai-codex (vision gate rejected image: Generic synthetic softball scene relevant to the topic, but it inc",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T17:55:49.707Z",
+      "lastFailureAt": "2026-10-15T17:55:49.707Z"
     }
   ]
 }
