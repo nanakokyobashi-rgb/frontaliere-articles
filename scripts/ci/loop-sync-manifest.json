@@ -535,10 +535,10 @@
       "path": "scripts/ci/report-validate-dist-failure.mjs",
       "mode": "adapted",
       "baseline": {
-        "site": "9d395b08c46db9b2",
-        "corpus": "f128bfdc2aa3243e",
-        "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T23:44:22.620Z"
+        "site": "306fbeddce0d0d15",
+        "corpus": "2743fee850264fbf",
+        "alignedAt": "2026-10-15",
+        "forcedAt": "2026-10-15T04:57:54.304Z"
       },
       "reason": "Dipendenza adapted di scripts/ci/scan-job-timeouts.mjs, importata dal sito in #7462 (05/09) come './report-validate-dist-failure.mjs': dal trasporto #1971 e' presente e raggiungibile anche qui dallo scanner riconciliato. Diverge dal sito per un bug trovato dalla review Codex sulla PR #1894: `reportDist` troncava a MAX_PER_GATE_ISSUES la lista dei JOB falliti PRIMA di estrarne i gate, invece di troncare solo i gate/payload dopo la deduplicazione — con piu' di tre job validate-dist falliti (la matrice tipica e' a 4 locale), il quarto job perdeva per sempre il proprio gate. Fix applicata SOLO qui perche' il sito non andava toccato da quel ciclo; e' un candidato di backport per il sito, non ancora fatto. Il main-guard resta invece allineato alla correzione generica del sito #12043: canonicalizza process.argv[1] con realpathSync + pathToFileURL, verificato anche attraverso symlink da generator/tests/report-validate-dist-main-guard.test.mjs."
     },
@@ -1659,10 +1659,10 @@
       "mode": "adapted",
       "reason": "Suite dei gate deterministici di fattualita' (incidente 2026-07-28). La libreria generator/scripts/lib/article-factuality-gates.mjs e' arrivata col trasporto del generatore ma la sua suite era rimasta solo sul sito — il punto cieco 'assenza di un test da un lato' del drift check. Adattamenti: node:test + expect-shim al posto di vitest, annotazioni TS rimosse, i casi it.each riscritti come cicli e l'unico expect.arrayContaining riscritto come toContain per elemento. I fixture e le asserzioni sono quelli del sito.",
       "baseline": {
-        "site": "cccbd0305799caee",
-        "corpus": "cf9615f8a607d4ce",
-        "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T02:04:36.000Z"
+        "site": "88f1025f56e0014b",
+        "corpus": "93ea2703c9599d94",
+        "alignedAt": "2026-10-15",
+        "forcedAt": "2026-10-15T04:57:56.162Z"
       }
     },
     {
@@ -4815,10 +4815,10 @@
       "mode": "adapted",
       "reason": "Rimborsa il round di `pr-redcheck-fixer.yml` / `pr-redflag-fixer.yml` quando la run Claude e' morta su 429: il marker di round si posta PRIMA di invocare Claude (giusto per un crash, sbagliato per un 429, dove l'agente non e' mai partito) e al cap la PR prende `needs-human`, che qui e' un filtro di ESCLUSIONE da ogni coda automatica. Gemello lato PR di cio' che `check-quota-backoff.mjs` + il marker `rate-limited` gia' fanno lato issue («la issue non consuma un tentativo»). Il porting lato sito e' atterrato in PR #8298; il corpus conserva la propria variante adattata e il confine resta HTTP, senza import diretti tra repo. RIALLINEAMENTO 2026-10-15: portata dalla PR sito #12043 la sola guardia ESM canonica, che rende l'import privo di side effect e conserva l'esecuzione CLI tramite symlink; la macchina di rimborso specifica del corpus resta invariata ed e' osservata da `generator/tests/refund-fix-round-main-guard.test.mjs`.",
       "baseline": {
-        "site": "3fd833f4a3b32f72",
-        "corpus": "89cf833c04a43ef6",
-        "alignedAt": "2026-09-11",
-        "forcedAt": "2026-09-11T10:33:31.749Z"
+        "site": "aca5ba21239eda7a",
+        "corpus": "0a055434d0afbd83",
+        "alignedAt": "2026-10-15",
+        "forcedAt": "2026-10-15T04:57:56.325Z"
       }
     },
     {
