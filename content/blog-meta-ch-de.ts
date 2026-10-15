@@ -8315,6 +8315,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.permesso-pesca-canton-berna-guida.title': 'Fischereibewilligung im Kanton Bern: Voraussetzungen und Saisons',
     'blog.article.permesso-pesca-canton-berna-guida.excerpt': 'Erfahren Sie, wie Sie das Verfahren für die Fischereibewilligung im Kanton Bern abwickeln: Bewilligungen, Kurse, zugelassene Gewässer und zuständige Behörden.',
     'blog.article.permesso-pesca-canton-berna-guida.imageAlt': 'See im Kanton Bern zum Angeln geeignet',
+    'blog.article.berna-veicoli-procedura-guida.title': 'Kontrollschilder und Zulassung im Kanton Bern: Leitfaden zu den Verfahren',
+    'blog.article.berna-veicoli-procedura-guida.excerpt': 'So regeln Sie im Kanton Bern Kontrollschilder, Zulassung, Fahrzeugprüfung und Halterwechsel: Prüfen Sie die offiziellen Anforderungen, Fristen und Beträge.',
+    'blog.article.berna-veicoli-procedura-guida.imageAlt': 'Strassenverkehrsamt im Kanton Bern',
 };
 
 export default blogMetaChDe;

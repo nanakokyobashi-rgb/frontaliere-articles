@@ -70,6 +70,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-15T01:49:05.613Z",
       "lastFailureAt": "2026-10-15T01:49:05.613Z"
+    },
+    {
+      "articleId": "berna-veicoli-procedura-guida",
+      "title": "Targhe e immatricolazione Cantone Berna: guida alle procedure",
+      "fallbackImage": "/images/blog/article-zurigo-targhe-immatricolazione-guida.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T02:50:14.610Z",
+      "lastFailureAt": "2026-10-15T02:50:14.610Z"
     }
   ]
 }
