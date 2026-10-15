@@ -8387,6 +8387,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.svizzera-thailandia-aelss-visita-2026.title': 'Svizzera e Thailandia evidenziano opportunità libero scambio',
     'blog.article.svizzera-thailandia-aelss-visita-2026.excerpt': 'Parmelin incontra Charnvirakul a Bangkok il 15 ottobre 2026 Svizzera e Thailandia puntano sull\'accordo di libero scambio AELS La visita in Vietnam prosegue',
     'blog.article.svizzera-thailandia-aelss-visita-2026.imageAlt': 'Incontro tra rappresentanti svizzeri e thailandesi a Bangkok per discutere dell\'accordo di libero scambio',
+    'blog.article.referendum-armi-sicurezza-svizzera.title': 'Export armi e sicurezza Svizzera: referendum 29 novembre',
+    'blog.article.referendum-armi-sicurezza-svizzera.excerpt': 'Il referendum sulla legge è previsto il 29 novembre 36 Paesi occidentali avrebbero più libertà d\'acquisto Il Consiglio federale manterrebbe un veto',
+    'blog.article.referendum-armi-sicurezza-svizzera.imageAlt': 'Lavoratori dell\'industria della difesa svizzera in una fabbrica con bandiera svizzera',
 };
 
 export default blogMetaChIt;

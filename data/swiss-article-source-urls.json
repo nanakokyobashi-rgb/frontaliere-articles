@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/be%3a-esercito-e-polizia-allenano-protezione-infrastrutture-critiche/92047577": {
-    "articleId": "esercito-polizia-berna-droni",
-    "ts": "2026-09-13T01:26:23.899Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/svizzera/svizzera/1949733/la-difesa-dai-droni-non-e-piu-una-questione-teorica-del-futuro": {
     "articleId": "difesa-droni-infrastrutture-berna",
     "ts": "2026-09-13T02:08:50.081Z",
@@ -2497,6 +2492,11 @@
   "https://www.seco.admin.ch/it/newnsb/rmrzjka-l3sj": {
     "articleId": "svizzera-thailandia-aelss-visita-2026",
     "ts": "2026-10-15T18:53:35.515Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/export-armi-importante-per-sicurezza-della-svizzera/92222311": {
+    "articleId": "referendum-armi-sicurezza-svizzera",
+    "ts": "2026-10-15T19:42:09.358Z",
     "keyForm": 2
   }
 }

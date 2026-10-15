@@ -70,6 +70,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-15T18:53:35.513Z",
       "lastFailureAt": "2026-10-15T18:53:35.513Z"
+    },
+    {
+      "articleId": "referendum-armi-sicurezza-svizzera",
+      "title": "Export armi e sicurezza Svizzera: referendum 29 novembre",
+      "fallbackImage": "/images/blog/accordi-svizzera-ue-consiglio-federale.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T19:42:09.356Z",
+      "lastFailureAt": "2026-10-15T19:42:09.356Z"
     }
   ]
 }

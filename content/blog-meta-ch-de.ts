@@ -8387,6 +8387,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.svizzera-thailandia-aelss-visita-2026.title': 'Schweiz und Thailand zeigen Chancen für den Freihandel auf',
     'blog.article.svizzera-thailandia-aelss-visita-2026.excerpt': 'Parmelin trifft Charnvirakul in Bangkok am 15.',
     'blog.article.svizzera-thailandia-aelss-visita-2026.imageAlt': 'Treffen zwischen schweizerischen und thailändischen Vertretern in Bangkok zur Diskussion des Freihandelsabkommens',
+    'blog.article.referendum-armi-sicurezza-svizzera.title': 'Waffenexporte und Sicherheit in der Schweiz: Referendum am 29. November',
+    'blog.article.referendum-armi-sicurezza-svizzera.excerpt': 'Das Referendum über das Gesetz ist für den 29.',
+    'blog.article.referendum-armi-sicurezza-svizzera.imageAlt': 'Arbeiter der Schweizer Verteidigungsindustrie in einer Fabrik mit Schweizer Flagge',
 };
 
 export default blogMetaChDe;

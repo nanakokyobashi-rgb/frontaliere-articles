@@ -8387,6 +8387,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.svizzera-thailandia-aelss-visita-2026.title': 'Switzerland and Thailand highlight free trade opportunities',
     'blog.article.svizzera-thailandia-aelss-visita-2026.excerpt': 'Parmelin meets Charnvirakul in Bangkok on October 15, 2026 Switzerland and Thailand are aiming for the EFTA free trade agreement The visit to Vietnam continues',
     'blog.article.svizzera-thailandia-aelss-visita-2026.imageAlt': 'Meeting between Swiss and Thai representatives in Bangkok to discuss the free trade agreement',
+    'blog.article.referendum-armi-sicurezza-svizzera.title': 'Arms exports and security in Switzerland: referendum on November 29',
+    'blog.article.referendum-armi-sicurezza-svizzera.excerpt': 'The referendum on the law is scheduled for November 29 36 Western countries would have greater purchasing freedom The Federal Council would retain a veto',
+    'blog.article.referendum-armi-sicurezza-svizzera.imageAlt': 'Swiss defence industry workers in a factory with the Swiss flag',
 };
 
 export default blogMetaChEn;
