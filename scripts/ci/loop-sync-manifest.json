@@ -4477,8 +4477,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-17.yml",
       "mode": "identical",
       "baseline": {
-        "site": "8be6bb59526c4768",
-        "corpus": "8be6bb59526c4768",
+        "site": "3ea699757fc58aef",
+        "corpus": "3ea699757fc58aef",
         "alignedAt": "2026-10-15"
       }
     },
@@ -4558,8 +4558,8 @@
       "mode": "identical",
       "reason": "La baseline dell'allineamento del 2026-10-15 registra lo stesso blob sui due lati (cbec97b9b6bc154b); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "210f79df807ccd32",
-        "corpus": "210f79df807ccd32",
+        "site": "d10ce49788362075",
+        "corpus": "d10ce49788362075",
         "alignedAt": "2026-10-15"
       }
     },
