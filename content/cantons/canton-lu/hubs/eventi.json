@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T03:26:26.914Z",
-  "contentHash": "9a070c39b48b06c307d1ced0eb6ed428b341ec3e1f6fc8fa6aa38800f456253e",
+  "updatedAt": "2026-10-15T05:42:21.084Z",
+  "contentHash": "33b446b069744833e13b1387c8b8b02d1884e18a1478054f19cbf1c37e254d2a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-14T17:55:23.988Z",
+      "updatedAt": "2026-10-14T23:55:37.279Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T16:01:15.871Z",
+      "updatedAt": "2026-10-14T20:59:19.985Z",
       "keyFacts": 0
     }
   ],
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-10-14T17:55:23.988Z"
+          "updatedAt": "2026-10-14T23:55:37.279Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -138,10 +138,16 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "orari apertura negozi Lucerna domeniche festivi",
+          "url": "/articoli-svizzera/orari-apertura-lucerna-festivi/",
+          "excerpt": "Nel Canton Lucerna gli orari di apertura dei negozi variano secondo il livello competente (cantonale, comunale o istituzionale); domeniche e festivi fanno parte degli orari commerciali, mentre le aperture in deroga…",
+          "date": "2026-10-15T05:37:40.396Z"
+        },
         {
           "title": "Giorni festivi a Lucerna: guida al calendario e verifica",
           "url": "/articoli-svizzera/lucerna-festivi-calendario-verifica/",
@@ -165,7 +171,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T03:26:26.914Z"
+      "updatedAt": "2026-10-15T05:42:21.084Z"
     },
     "en": {
       "canton": "LU",
@@ -248,7 +254,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-10-14T17:55:23.988Z"
+          "updatedAt": "2026-10-14T23:55:37.279Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -286,10 +292,16 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Lucerne shop opening hours Sundays public holidays",
+          "url": "/en/swiss-articles/lucerne-shop-opening-hours-sundays-public-holidays/",
+          "excerpt": "In the Canton of Lucerne, shop opening hours vary according to the competent level (cantonal, municipal or institutional); Sundays and public holidays are part of commercial opening hours, while exceptional openings…",
+          "date": "2026-10-15T05:37:40.396Z"
+        },
         {
           "title": "Public holidays in Lucerne: calendar guide and verification",
           "url": "/en/swiss-articles/lucerne-public-holidays-calendar-guide/",
@@ -313,7 +325,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T03:26:26.914Z"
+      "updatedAt": "2026-10-15T05:42:21.084Z"
     },
     "de": {
       "canton": "LU",
@@ -396,7 +408,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-10-14T17:55:23.988Z"
+          "updatedAt": "2026-10-14T23:55:37.279Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -434,10 +446,16 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Öffnungszeiten der Geschäfte in Luzern an Sonntagen und Feiertagen",
+          "url": "/de/schweiz-artikel/offnungszeiten-der-geschafte-in-luzern-an-sonntagen-und-feiertagen/",
+          "excerpt": "Im Kanton Luzern variieren die Öffnungszeiten der Geschäfte je nach zuständiger Ebene (kantonal, kommunal oder institutionell); Sonntage und Feiertage gehören zu den Ladenöffnungszeiten, während Sonderöffnungen…",
+          "date": "2026-10-15T05:37:40.396Z"
+        },
         {
           "title": "Feiertage in Luzern: Kalenderleitfaden und Überprüfung",
           "url": "/de/schweiz-artikel/luzern-feiertage-kalender-anleitung/",
@@ -461,7 +479,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T03:26:26.914Z"
+      "updatedAt": "2026-10-15T05:42:21.084Z"
     },
     "fr": {
       "canton": "LU",
@@ -544,7 +562,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-10-14T17:55:23.988Z"
+          "updatedAt": "2026-10-14T23:55:37.279Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -582,10 +600,16 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "horaires d'ouverture des magasins à Lucerne, dimanches et jours fériés",
+          "url": "/fr/articles-suisse/horaires-d-ouverture-des-magasins-a-lucerne-dimanches-et-jours-feries/",
+          "excerpt": "Dans le canton de Lucerne, les horaires d'ouverture des magasins varient selon le niveau compétent (cantonal, communal ou institutionnel) ; les dimanches et les jours fériés font partie des horaires commerciaux, tandis…",
+          "date": "2026-10-15T05:37:40.396Z"
+        },
         {
           "title": "Jours fériés à Lucerne : guide du calendrier et vérification",
           "url": "/fr/articles-suisse/lucerne-jours-feries-calendrier-guide/",
@@ -609,7 +633,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T03:26:26.914Z"
+      "updatedAt": "2026-10-15T05:42:21.084Z"
     }
   }
 }

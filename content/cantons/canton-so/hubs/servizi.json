@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-10-15T01:53:38.743Z",
-  "contentHash": "717544ccad4bbda0f7fa814f31a9ed072cace3497a2b12390736be835ff0f354",
+  "updatedAt": "2026-10-15T05:42:21.084Z",
+  "contentHash": "0bb5a529654f5afd0f4cfef8cc5b93df663ae93207c6f37654f345e9726d1fc8",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,13 +13,23 @@
       "keyFacts": 1
     },
     {
+      "id": "farmacie-di-turno",
+      "updatedAt": "2026-10-14T22:22:01.380Z",
+      "keyFacts": 0
+    },
+    {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-14T17:14:18.595Z",
+      "updatedAt": "2026-10-14T21:44:58.793Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-14T23:20:15.877Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T16:01:15.871Z",
+      "updatedAt": "2026-10-14T20:59:19.985Z",
       "keyFacts": 0
     }
   ],
@@ -39,7 +49,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "6",
-          "note": "offerta mediana 860 CHF"
+          "note": "offerta mediana 880 CHF"
         }
       ],
       "dataBlocks": [
@@ -57,6 +67,31 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Farmacie di turno",
+          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
+          "items": [
+            {
+              "label": "Saner Apotheke Dornach",
+              "detail": "Dornach, Dorneck-Thierstein",
+              "date": "2026-10-18T07:00:00.000Z"
+            },
+            {
+              "label": "Central-Apotheke Olten",
+              "detail": "Olten, Olten",
+              "date": "2026-10-18T08:00:00.000Z"
+            },
+            {
+              "label": "Medbase Apotheke - Zuchwil",
+              "detail": "Zuchwil, Solothurn",
+              "date": "2026-10-18T08:00:00.000Z"
+            }
+          ],
+          "sourceName": "Servizio ufficiale dei turni farmacia",
+          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
+          "updatedAt": "2026-10-14T22:22:01.380Z"
         },
         {
           "id": "aste-targhe",
@@ -87,7 +122,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction",
-          "updatedAt": "2026-10-14T17:14:18.595Z"
+          "updatedAt": "2026-10-14T21:44:58.793Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "10 °C",
+              "detail": "oggi da 11 a 11 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-14T23:20:15.877Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -115,7 +164,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
@@ -194,7 +243,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-15T01:53:38.743Z"
+      "updatedAt": "2026-10-15T05:42:21.084Z"
     },
     "en": {
       "canton": "SO",
@@ -211,7 +260,7 @@
         {
           "label": "Plate auctions running",
           "value": "6",
-          "note": "typical bid 860 CHF"
+          "note": "typical bid 880 CHF"
         }
       ],
       "dataBlocks": [
@@ -229,6 +278,31 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "On-duty pharmacies",
+          "description": "Upcoming duty shifts published by the canton’s official service.",
+          "items": [
+            {
+              "label": "Saner Apotheke Dornach",
+              "detail": "Dornach, Dorneck-Thierstein",
+              "date": "2026-10-18T07:00:00.000Z"
+            },
+            {
+              "label": "Central-Apotheke Olten",
+              "detail": "Olten, Olten",
+              "date": "2026-10-18T08:00:00.000Z"
+            },
+            {
+              "label": "Medbase Apotheke - Zuchwil",
+              "detail": "Zuchwil, Solothurn",
+              "date": "2026-10-18T08:00:00.000Z"
+            }
+          ],
+          "sourceName": "Official pharmacy duty service",
+          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
+          "updatedAt": "2026-10-14T22:22:01.380Z"
         },
         {
           "id": "aste-targhe",
@@ -259,7 +333,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction",
-          "updatedAt": "2026-10-14T17:14:18.595Z"
+          "updatedAt": "2026-10-14T21:44:58.793Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "10 °C",
+              "detail": "today from 11 to 11 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-14T23:20:15.877Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -287,7 +375,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
@@ -362,7 +450,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-15T01:53:38.743Z"
+      "updatedAt": "2026-10-15T05:42:21.084Z"
     },
     "de": {
       "canton": "SO",
@@ -379,7 +467,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "6",
-          "note": "mittleres Gebot 860 CHF"
+          "note": "mittleres Gebot 880 CHF"
         }
       ],
       "dataBlocks": [
@@ -397,6 +485,31 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Notfallapotheken",
+          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
+          "items": [
+            {
+              "label": "Saner Apotheke Dornach",
+              "detail": "Dornach, Dorneck-Thierstein",
+              "date": "2026-10-18T07:00:00.000Z"
+            },
+            {
+              "label": "Central-Apotheke Olten",
+              "detail": "Olten, Olten",
+              "date": "2026-10-18T08:00:00.000Z"
+            },
+            {
+              "label": "Medbase Apotheke - Zuchwil",
+              "detail": "Zuchwil, Solothurn",
+              "date": "2026-10-18T08:00:00.000Z"
+            }
+          ],
+          "sourceName": "Offizieller Apotheken-Notfalldienst",
+          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
+          "updatedAt": "2026-10-14T22:22:01.380Z"
         },
         {
           "id": "aste-targhe",
@@ -427,7 +540,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction",
-          "updatedAt": "2026-10-14T17:14:18.595Z"
+          "updatedAt": "2026-10-14T21:44:58.793Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "10 °C",
+              "detail": "heute 11 bis 11 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-14T23:20:15.877Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -455,7 +582,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
@@ -530,7 +657,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-15T01:53:38.743Z"
+      "updatedAt": "2026-10-15T05:42:21.084Z"
     },
     "fr": {
       "canton": "SO",
@@ -547,7 +674,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "6",
-          "note": "offre centrale 860 CHF"
+          "note": "offre centrale 880 CHF"
         }
       ],
       "dataBlocks": [
@@ -565,6 +692,31 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Pharmacies de garde",
+          "description": "Prochaines gardes publiées par le service officiel du canton.",
+          "items": [
+            {
+              "label": "Saner Apotheke Dornach",
+              "detail": "Dornach, Dorneck-Thierstein",
+              "date": "2026-10-18T07:00:00.000Z"
+            },
+            {
+              "label": "Central-Apotheke Olten",
+              "detail": "Olten, Olten",
+              "date": "2026-10-18T08:00:00.000Z"
+            },
+            {
+              "label": "Medbase Apotheke - Zuchwil",
+              "detail": "Zuchwil, Solothurn",
+              "date": "2026-10-18T08:00:00.000Z"
+            }
+          ],
+          "sourceName": "Service officiel des pharmacies de garde",
+          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
+          "updatedAt": "2026-10-14T22:22:01.380Z"
         },
         {
           "id": "aste-targhe",
@@ -595,7 +747,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction",
-          "updatedAt": "2026-10-14T17:14:18.595Z"
+          "updatedAt": "2026-10-14T21:44:58.793Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "10 °C",
+              "detail": "aujourd’hui de 11 à 11 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-14T23:20:15.877Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -623,7 +789,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
@@ -694,7 +860,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-15T01:53:38.743Z"
+      "updatedAt": "2026-10-15T05:42:21.084Z"
     }
   }
 }

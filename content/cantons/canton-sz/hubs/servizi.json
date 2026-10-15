@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-10-15T01:53:38.743Z",
-  "contentHash": "eaa4c1dc9d4d4bc222bcb82afc7a4d06964253639c160fc321b83410822a841a",
+  "updatedAt": "2026-10-15T05:42:21.084Z",
+  "contentHash": "ad7e6cd8eb8d9c5c1fd956e6ac268d3f8dd5a3e83693cb20519fcd9e8320eda1",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-14T17:14:18.595Z",
+      "updatedAt": "2026-10-14T21:44:58.793Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-14T23:20:15.877Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T16:01:15.871Z",
+      "updatedAt": "2026-10-14T20:59:19.985Z",
       "keyFacts": 0
     }
   ],
@@ -65,7 +70,7 @@
           "items": [
             {
               "label": "SZ9983",
-              "value": "1500 CHF",
+              "value": "1580 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-27T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1593"
@@ -79,7 +84,7 @@
             },
             {
               "label": "SZ29900",
-              "value": "350 CHF",
+              "value": "500 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-27T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1602"
@@ -87,7 +92,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-14T17:14:18.595Z"
+          "updatedAt": "2026-10-14T21:44:58.793Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "11 °C",
+              "detail": "oggi da 12 a 12 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-14T23:20:15.877Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -125,7 +144,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
@@ -204,7 +223,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-15T01:53:38.743Z"
+      "updatedAt": "2026-10-15T05:42:21.084Z"
     },
     "en": {
       "canton": "SZ",
@@ -247,7 +266,7 @@
           "items": [
             {
               "label": "SZ9983",
-              "value": "1,500 CHF",
+              "value": "1,580 CHF",
               "detail": "current bid",
               "date": "2026-10-27T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1593"
@@ -261,7 +280,7 @@
             },
             {
               "label": "SZ29900",
-              "value": "350 CHF",
+              "value": "500 CHF",
               "detail": "current bid",
               "date": "2026-10-27T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1602"
@@ -269,7 +288,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-14T17:14:18.595Z"
+          "updatedAt": "2026-10-14T21:44:58.793Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "11 °C",
+              "detail": "today from 12 to 12 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-14T23:20:15.877Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -307,7 +340,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
@@ -382,7 +415,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-15T01:53:38.743Z"
+      "updatedAt": "2026-10-15T05:42:21.084Z"
     },
     "de": {
       "canton": "SZ",
@@ -425,7 +458,7 @@
           "items": [
             {
               "label": "SZ9983",
-              "value": "1’500 CHF",
+              "value": "1’580 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-27T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1593"
@@ -439,7 +472,7 @@
             },
             {
               "label": "SZ29900",
-              "value": "350 CHF",
+              "value": "500 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-27T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1602"
@@ -447,7 +480,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-14T17:14:18.595Z"
+          "updatedAt": "2026-10-14T21:44:58.793Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "11 °C",
+              "detail": "heute 12 bis 12 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-14T23:20:15.877Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -485,7 +532,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
@@ -560,7 +607,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-15T01:53:38.743Z"
+      "updatedAt": "2026-10-15T05:42:21.084Z"
     },
     "fr": {
       "canton": "SZ",
@@ -603,7 +650,7 @@
           "items": [
             {
               "label": "SZ9983",
-              "value": "1 500 CHF",
+              "value": "1 580 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-27T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1593"
@@ -617,7 +664,7 @@
             },
             {
               "label": "SZ29900",
-              "value": "350 CHF",
+              "value": "500 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-27T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1602"
@@ -625,7 +672,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-14T17:14:18.595Z"
+          "updatedAt": "2026-10-14T21:44:58.793Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "11 °C",
+              "detail": "aujourd’hui de 12 à 12 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-14T23:20:15.877Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -663,7 +724,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
@@ -734,7 +795,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-15T01:53:38.743Z"
+      "updatedAt": "2026-10-15T05:42:21.084Z"
     }
   }
 }
