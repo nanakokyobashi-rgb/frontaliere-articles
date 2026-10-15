@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T00:06:40.869Z",
-  "contentHash": "395c780912479ac2acdca644b33f4557f1defb29922acfb277fd3f10a7d27e4d",
+  "updatedAt": "2026-10-15T03:26:26.914Z",
+  "contentHash": "9a070c39b48b06c307d1ced0eb6ed428b341ec3e1f6fc8fa6aa38800f456253e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-14T13:57:52.093Z",
+      "updatedAt": "2026-10-14T17:55:23.988Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T10:37:16.619Z",
+      "updatedAt": "2026-10-14T16:01:15.871Z",
       "keyFacts": 0
     }
   ],
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-14T17:55:23.988Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -138,10 +138,16 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Giorni festivi a Lucerna: guida al calendario e verifica",
+          "url": "/articoli-svizzera/lucerna-festivi-calendario-verifica/",
+          "excerpt": "Distinzione tra calendario cantonale e regole comunali o istituzionali per uffici e negozi a Lucerna.",
+          "date": "2026-10-15T03:21:39.212Z"
+        },
         {
           "title": "Patente di guida a Lucerna: cosa fare e sapere",
           "url": "/articoli-svizzera/patente-guida-lucerna-conversione-ed-esami/",
@@ -159,7 +165,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-15T03:26:26.914Z"
     },
     "en": {
       "canton": "LU",
@@ -242,7 +248,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-14T17:55:23.988Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -280,10 +286,16 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Public holidays in Lucerne: calendar guide and verification",
+          "url": "/en/swiss-articles/lucerne-public-holidays-calendar-guide/",
+          "excerpt": "Distinction between cantonal calendar and municipal or institutional rules for offices and shops in Lucerne.",
+          "date": "2026-10-15T03:21:39.212Z"
+        },
         {
           "title": "Driver's license in Lucerne: what to do and know",
           "url": "/en/swiss-articles/driver-s-license-in-lucerne-what-to-do-and-know/",
@@ -301,7 +313,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-15T03:26:26.914Z"
     },
     "de": {
       "canton": "LU",
@@ -384,7 +396,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-14T17:55:23.988Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -422,10 +434,16 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Feiertage in Luzern: Kalenderleitfaden und Überprüfung",
+          "url": "/de/schweiz-artikel/luzern-feiertage-kalender-anleitung/",
+          "excerpt": "Unterscheidung zwischen kantonalem Kalender und kommunalen oder institutionellen Regeln für Büros und Geschäfte in Luzern.",
+          "date": "2026-10-15T03:21:39.212Z"
+        },
         {
           "title": "Führerschein in Luzern: was zu tun und zu wissen ist",
           "url": "/de/schweiz-artikel/fuhrerschein-in-luzern-was-zu-tun-und-zu-wissen-ist/",
@@ -443,7 +461,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-15T03:26:26.914Z"
     },
     "fr": {
       "canton": "LU",
@@ -526,7 +544,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-14T17:55:23.988Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -564,10 +582,16 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Jours fériés à Lucerne : guide du calendrier et vérification",
+          "url": "/fr/articles-suisse/lucerne-jours-feries-calendrier-guide/",
+          "excerpt": "Distinction entre le calendrier cantonal et les règles municipales ou institutionnelles pour les bureaux et commerces à Lucerne.",
+          "date": "2026-10-15T03:21:39.212Z"
+        },
         {
           "title": "Permis de conduire à Lucerne : que faire et que savoir",
           "url": "/fr/articles-suisse/permis-de-conduire-a-lucerne-que-faire-et-que-savoir/",
@@ -585,7 +609,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-15T03:26:26.914Z"
     }
   }
 }
