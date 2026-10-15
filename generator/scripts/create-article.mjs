@@ -270,6 +270,8 @@ import {
   rankAndSelectHeadlines as _rankAndSelectHeadlines,
   loadEvergreenRejectedTracker as _loadEvergreenRejectedTrackerAt,
   isEvergreenRejected as _isEvergreenRejected,
+  evergreenRejectionKind as _evergreenRejectionKind,
+  computeEvergreenPoolEpoch as _computeEvergreenPoolEpoch,
   appendEvergreenRejected as _appendEvergreenRejected,
   strikeEvergreenKeyword as _strikeEvergreenKeyword,
   EVERGREEN_STRIKE_LIMIT as _EVERGREEN_STRIKE_LIMIT,
@@ -17190,6 +17192,12 @@ async function main() {
       const weekNum = Math.floor((Date.now() - new Date('2025-01-06').getTime()) / (7 * 24 * 60 * 60 * 1000));
       const baseIndex = weekNum % topicPool.length;
       const totalTopics = topicPool.length;
+      const evergreenLedgerContext = {
+        section: SECTION_NAME,
+        pool: 'evergreen',
+        poolEpoch: _computeEvergreenPoolEpoch(topicPool, SECTION_NAME),
+        now: Date.now(),
+      };
 
       // Cross-run duplicate memory (#3138, 2026-07-02): keywords already
       // confirmed duplicate post-generation in a PREVIOUS cron run. Without
@@ -17197,6 +17205,19 @@ async function main() {
       // doomed neighborhood re-attempted every 30-min run forever, since
       // each run otherwise starts with zero memory of prior failures.
       let evergreenRejectedTracker = _loadEvergreenRejectedTracker();
+
+      // Legacy decisions are allowed through this ledger pre-filter only when
+      // the duplicate preflight can revalidate them in the current context.
+      // A confirmed duplicate is immediately written back with fresh
+      // section/pool/epoch provenance; a changed topic can rotate again.
+      const rememberConfirmedEvergreenDuplicate = (keyword, reason = 'duplicate') => {
+        evergreenRejectedTracker = _appendEvergreenRejected(
+          evergreenRejectedTracker,
+          keyword,
+          { context: evergreenLedgerContext, now: Date.now(), reason },
+        );
+        try { _persistEvergreenRejectedTracker(evergreenRejectedTracker); } catch { /* best effort; next run remains fail-closed */ }
+      };
 
       RUN_REPORT.evergreenPool.ran = true;
       RUN_REPORT.evergreenPool.size = totalTopics;
@@ -17210,13 +17231,13 @@ async function main() {
         const idx = (baseIndex + offset) % totalTopics;
         const candidate = topicPool[idx];
         RUN_REPORT.evergreenPool.checked += 1;
-        if (_isEvergreenRejected(evergreenRejectedTracker, candidate.keyword)) {
+        if (_isEvergreenRejected(evergreenRejectedTracker, candidate.keyword, evergreenLedgerContext)) {
           // Ban e strike hanno cause diverse — un duplicato confermato non si
           // ripara mai, uno strike da quality-reject si — e un pool che muore
           // per l'uno o per l'altro chiede due interventi diversi
           // (allargarlo vs `reset-evergreen-strikes.mjs`). Contarli insieme
           // rendeva la diagnosi indistinguibile.
-          if ((evergreenRejectedTracker?.keywords || []).includes(candidate.keyword)) {
+          if (_evergreenRejectionKind(evergreenRejectedTracker, candidate.keyword, evergreenLedgerContext) === 'ban') {
             RUN_REPORT.evergreenPool.skippedBanned += 1;
           } else {
             RUN_REPORT.evergreenPool.skippedStruck += 1;
@@ -17226,6 +17247,7 @@ async function main() {
         }
         const check = preFlightEvergreenCheck(candidate);
         if (check.duplicate) {
+          rememberConfirmedEvergreenDuplicate(candidate.keyword);
           countEvergreenPreflightDrop(check.signal);
           console.error(`   ⏭️  [${idx}] "${candidate.keyword}" → simile a "${check.existingTitle}" [${check.existingId}] (${(check.sim * 100).toFixed(0)}%) — skip`);
         } else {
@@ -17327,8 +17349,10 @@ async function main() {
             // Persisting avoids wasting ~60-90s per doomed attempt.
             // Quality-rejects (too-short/thin) intentionally excluded: LLM
             // variance makes them transient; blocking permanently is too aggressive.
-            evergreenRejectedTracker = _appendEvergreenRejected(evergreenRejectedTracker, selectedTopic.keyword);
-            try { _persistEvergreenRejectedTracker(evergreenRejectedTracker); } catch { /* ignore */ }
+            rememberConfirmedEvergreenDuplicate(
+              selectedTopic.keyword,
+              isTopicGateAbort ? 'topic-gate' : 'duplicate',
+            );
           } else if (isQualityReject && selectedTopic) {
             // A STRIKE, not a ban — the reasoning above is right that one bad
             // draft is variance, but "never record it" was the wrong conclusion:
@@ -17338,8 +17362,17 @@ async function main() {
             // 2026-08-03. Retired only at EVERGREEN_STRIKE_LIMIT.
             // Persisted immediately, same reason as the ban path: a later
             // wall-budget break or hard kill must not lose the count.
-            evergreenRejectedTracker = _strikeEvergreenKeyword(evergreenRejectedTracker, selectedTopic.keyword);
-            const n = evergreenRejectedTracker.strikes?.[selectedTopic.keyword] || 0;
+            evergreenRejectedTracker = _strikeEvergreenKeyword(
+              evergreenRejectedTracker,
+              selectedTopic.keyword,
+              { context: evergreenLedgerContext, now: Date.now() },
+            );
+            const strike = evergreenRejectedTracker.strikes
+              ?.find((entry) => entry.keyword === selectedTopic.keyword
+                && entry.section === evergreenLedgerContext.section
+                && entry.pool === evergreenLedgerContext.pool
+                && entry.poolEpoch === evergreenLedgerContext.poolEpoch);
+            const n = strike?.count || 0;
             console.error(`   ⚠️  "${selectedTopic.keyword}": strike ${n}/${_EVERGREEN_STRIKE_LIMIT} (quality reject)`);
             try { _persistEvergreenRejectedTracker(evergreenRejectedTracker); } catch { /* ignore */ }
           }
@@ -17360,8 +17393,8 @@ async function main() {
             const idx = (baseIndex + realOffset) % totalTopics;
             const candidate = topicPool[idx];
             RUN_REPORT.evergreenPool.checked += 1;
-            if (_isEvergreenRejected(evergreenRejectedTracker, candidate.keyword)) {
-              if ((evergreenRejectedTracker?.keywords || []).includes(candidate.keyword)) {
+            if (_isEvergreenRejected(evergreenRejectedTracker, candidate.keyword, evergreenLedgerContext)) {
+              if (_evergreenRejectionKind(evergreenRejectedTracker, candidate.keyword, evergreenLedgerContext) === 'ban') {
                 RUN_REPORT.evergreenPool.skippedBanned += 1;
               } else {
                 RUN_REPORT.evergreenPool.skippedStruck += 1;
@@ -17370,7 +17403,10 @@ async function main() {
               continue;
             }
             const check = preFlightEvergreenCheck(candidate);
-            if (check.duplicate) countEvergreenPreflightDrop(check.signal);
+            if (check.duplicate) {
+              rememberConfirmedEvergreenDuplicate(candidate.keyword);
+              countEvergreenPreflightDrop(check.signal);
+            }
             if (!check.duplicate) {
               selectedTopic = candidate;
               selectedOffset = realOffset;

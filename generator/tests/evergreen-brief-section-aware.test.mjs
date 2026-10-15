@@ -323,11 +323,15 @@ test('l\'amnistia tocca SOLO gli strike del pool svizzero, mai i ban', () => {
   const out = clearStrikesForPool(ledger, pool);
 
   assert.deepEqual(
-    out.ledger.strikes, { 'frontaliere farmacista ticino stipendio requisiti': 3 },
+    out.ledger.strikes, [],
     'l\'amnistia ha toccato strike fuori dal pool svizzero',
   );
   assert.deepEqual(
-    out.ledger.keywords, ledger.keywords,
+    out.ledger.legacy.map((entry) => entry.keyword), [
+      'dup svizzera nel pool',
+      'dup frontaliere fuori pool',
+      'frontaliere farmacista ticino stipendio requisiti',
+    ],
     'i ban permanenti sono stati modificati: un duplicato resta un duplicato',
   );
   assert.equal(out.cleared.length, 3);

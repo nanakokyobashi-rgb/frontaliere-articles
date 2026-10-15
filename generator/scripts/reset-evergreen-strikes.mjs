@@ -5,12 +5,16 @@
  * IL PROBLEMA CHE RIPARA, e perche' serve uno script e non una modifica a mano.
  *
  * `data/topic-candidates-evergreen-rejected.json` ha due bucket con semantiche
- * diverse (vedi `article-topic-selector.mjs`):
+ * diverse (vedi `article-topic-selector.mjs`), oggi serializzate nello schema
+ * v2:
  *
- *   keywords[]  ban PERMANENTE — duplicato confermato o topic-gate abort.
+ *   bans[]      ban confermati con provenance section/pool/poolEpoch.
  *               Cause ancora valide: questo script NON le tocca mai.
- *   strikes{}   contatore di quality reject. A `EVERGREEN_STRIKE_LIMIT` (3) la
- *               keyword e' ritirata come se fosse bannata.
+ *   strikes[]   contatori quality reject con provenance e TTL. A
+ *               `EVERGREEN_STRIKE_LIMIT` (3) la keyword e' ritirata fino alla
+ *               scadenza, non per sempre.
+ *   legacy[]    residui pre-v2 conservati con regola `preflight-required`;
+ *               il preflight li deve rivalidare prima di renderli attivi.
  *
  * Fino alla fix di #96 un evergreen della sezione `svizzera` veniva graduato
  * dal gate `checkSourceFidelity` contro `EVERGREEN_FACTS_BRIEF`, che e'
@@ -44,6 +48,10 @@
 import fs, { realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  clearEvergreenStrikesForPool,
+  persistEvergreenRejectedTracker,
+} from './lib/article-topic-selector.mjs';
 
 // Due livelli: da generator/scripts/ alla radice del repo. Uno solo punterebbe
 // a generator/ — vedi import-closure.test.mjs, «entry points resolve the repo root».
@@ -103,25 +111,13 @@ export function svizzeraEvergreenPool(src) {
  * comportamento e' verificabile senza toccare il file di produzione.
  */
 export function clearStrikesForPool(ledger, pool) {
-  const poolSet = new Set(pool);
-  const keywords = Array.isArray(ledger?.keywords) ? ledger.keywords.slice() : [];
-  const oldStrikes = (ledger && typeof ledger.strikes === 'object' && ledger.strikes) || {};
-
-  const strikes = {};
-  const cleared = [];
-  for (const [kw, n] of Object.entries(oldStrikes)) {
-    if (poolSet.has(kw)) cleared.push({ keyword: kw, strikes: n, wasRetired: Number.isInteger(n) && n >= 3 });
-    else strikes[kw] = n;
-  }
+  const result = clearEvergreenStrikesForPool(ledger, pool);
   return {
-    // `topicGateUrls` (fonti di notizie rifiutate dal topic-gate, 48 h) non
-    // riguarda il pool evergreen: passa intatto, o un `--apply` riaprirebbe
-    // le fonti appena rifiutate.
-    ledger: { keywords, strikes, topicGateUrls: { ...((ledger && typeof ledger.topicGateUrls === 'object' && ledger.topicGateUrls) || {}) } },
-    cleared,
-    // I ban restano: dichiarati esplicitamente perche' e' la meta' che questo
-    // script sceglie di NON riparare, e la scelta va letta nel report.
-    keptBanned: keywords.filter((k) => poolSet.has(k)),
+    ledger: result.tracker,
+    cleared: result.cleared,
+    // I ban restano: dichiarati esplicitamente perche' questo script sceglie
+    // di NON riparare quella meta' del ledger, anche dopo la migrazione.
+    keptBanned: result.keptBanned,
   };
 }
 
@@ -137,7 +133,7 @@ function main(argv) {
   const pool = svizzeraEvergreenPool(src);
   const ledger = JSON.parse(fs.readFileSync(LEDGER, 'utf-8'));
 
-  const before = Object.keys(ledger.strikes || {}).length;
+  const before = Array.isArray(ledger.strikes) ? ledger.strikes.length : Object.keys(ledger.strikes || {}).length;
   const { ledger: next, cleared, keptBanned } = clearStrikesForPool(ledger, pool);
   const retired = cleared.filter((c) => c.wasRetired);
 
@@ -153,7 +149,10 @@ function main(argv) {
     console.log('\nDRY-RUN: nessuna scrittura. Rilancia con --apply per scrivere il ledger.');
     return 0;
   }
-  fs.writeFileSync(LEDGER, `${JSON.stringify(next, null, 2)}\n`, 'utf-8');
+  if (!persistEvergreenRejectedTracker(next, { path: LEDGER })) {
+    console.error('\n❌ scrittura del ledger fallita');
+    return 1;
+  }
   console.log(`\n✅ Scritto ${path.relative(PROJECT_ROOT, LEDGER)}`);
   return 0;
 }

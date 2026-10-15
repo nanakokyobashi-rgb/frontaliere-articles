@@ -24,7 +24,10 @@ import {
   appendEvergreenRejected,
   loadEvergreenRejectedTracker,
   EVERGREEN_STRIKE_LIMIT,
+  EVERGREEN_STRIKE_TTL_MS,
   EVERGREEN_REJECTED_MAX_IDS,
+  computeEvergreenPoolEpoch,
+  migrateEvergreenRejectedTracker,
 } from '../scripts/lib/article-topic-selector.mjs';
 
 // ── Defect 1: all-caps emphasis harvested as required "institutions" ──
@@ -124,24 +127,26 @@ test('the fidelity gate tells the writer how many more anchors it needs', () => 
 // gates never converge: it was re-picked on every cron slot and burned the run.
 
 test('a keyword is not retired before the strike limit', () => {
-  let t = { keywords: [], strikes: {} };
+  const context = { section: 'frontaliere', pool: 'evergreen', poolEpoch: 'epoch-a', now: Date.parse('2026-10-15T00:00:00Z') };
+  let t = { schemaVersion: 2, bans: [], strikes: [], legacy: [], topicGateUrls: {} };
   for (let i = 1; i < EVERGREEN_STRIKE_LIMIT; i++) {
-    t = strikeEvergreenKeyword(t, 'kw-flaky');
-    assert.equal(isEvergreenRejected(t, 'kw-flaky'), false, `retired too early at strike ${i}`);
+    t = strikeEvergreenKeyword(t, 'kw-flaky', { context, now: context.now + i });
+    assert.equal(isEvergreenRejected(t, 'kw-flaky', context), false, `retired too early at strike ${i}`);
   }
-  t = strikeEvergreenKeyword(t, 'kw-flaky');
-  assert.equal(isEvergreenRejected(t, 'kw-flaky'), true);
+  t = strikeEvergreenKeyword(t, 'kw-flaky', { context, now: context.now + EVERGREEN_STRIKE_LIMIT });
+  assert.equal(isEvergreenRejected(t, 'kw-flaky', context), true);
 });
 
 test('strikes are per-keyword and do not disturb the permanent ban list', () => {
-  let t = { keywords: [], strikes: {} };
-  for (let i = 0; i < EVERGREEN_STRIKE_LIMIT; i++) t = strikeEvergreenKeyword(t, 'kw-doomed');
-  t = strikeEvergreenKeyword(t, 'kw-unlucky');
-  t = appendEvergreenRejected(t, 'kw-dup');
-  assert.equal(isEvergreenRejected(t, 'kw-doomed'), true);
-  assert.equal(isEvergreenRejected(t, 'kw-unlucky'), false);
-  assert.deepEqual(t.keywords, ['kw-dup']);
-  assert.equal(t.strikes['kw-doomed'], EVERGREEN_STRIKE_LIMIT);
+  const context = { section: 'frontaliere', pool: 'evergreen', poolEpoch: 'epoch-a', now: Date.parse('2026-10-15T00:00:00Z') };
+  let t = { schemaVersion: 2, bans: [], strikes: [], legacy: [], topicGateUrls: {} };
+  for (let i = 0; i < EVERGREEN_STRIKE_LIMIT; i++) t = strikeEvergreenKeyword(t, 'kw-doomed', { context, now: context.now + i });
+  t = strikeEvergreenKeyword(t, 'kw-unlucky', { context, now: context.now });
+  t = appendEvergreenRejected(t, 'kw-dup', { context, now: context.now });
+  assert.equal(isEvergreenRejected(t, 'kw-doomed', context), true);
+  assert.equal(isEvergreenRejected(t, 'kw-unlucky', context), false);
+  assert.deepEqual(t.bans.map((entry) => entry.keyword), ['kw-dup']);
+  assert.equal(t.strikes.find((entry) => entry.keyword === 'kw-doomed').count, EVERGREEN_STRIKE_LIMIT);
 });
 
 test('the shared rejection ledger can retain both current evergreen pools', () => {
@@ -154,16 +159,53 @@ test('the shared rejection ledger can retain both current evergreen pools', () =
     `rejection cap ${EVERGREEN_REJECTED_MAX_IDS} is below current combined pool ${currentCombinedPoolSize}`,
   );
 
-  let tracker = { keywords: [], strikes: {}, topicGateUrls: {} };
+  const context = { section: 'frontaliere', pool: 'evergreen', poolEpoch: 'epoch-a', now: Date.parse('2026-10-15T00:00:00Z') };
+  let tracker = { schemaVersion: 2, bans: [], strikes: [], legacy: [], topicGateUrls: {} };
   for (let i = 0; i < currentCombinedPoolSize; i++) {
-    tracker = appendEvergreenRejected(tracker, `evergreen-topic-${i}`);
+    tracker = appendEvergreenRejected(tracker, `evergreen-topic-${i}`, { context });
   }
-  assert.equal(tracker.keywords.length, currentCombinedPoolSize);
-  assert.equal(tracker.keywords[0], 'evergreen-topic-0');
-  assert.equal(tracker.keywords.at(-1), `evergreen-topic-${currentCombinedPoolSize - 1}`);
+  assert.equal(tracker.bans.length, currentCombinedPoolSize);
+  assert.equal(tracker.bans[0].keyword, 'evergreen-topic-0');
+  assert.equal(tracker.bans.at(-1).keyword, `evergreen-topic-${currentCombinedPoolSize - 1}`);
 });
 
 test('a tracker file written before strikes existed still loads', () => {
   const legacy = loadEvergreenRejectedTracker({ path: 'generator/tests/fixtures/does-not-exist.json' });
-  assert.deepEqual(legacy, { keywords: [], strikes: {}, topicGateUrls: {} });
+  assert.deepEqual(legacy, { schemaVersion: 2, bans: [], strikes: [], legacy: [], topicGateUrls: {} });
+});
+
+test('una decisione ruota quando cambia sezione o pool epoch', () => {
+  const first = { section: 'frontaliere', pool: 'evergreen', poolEpoch: 'epoch-a', now: Date.parse('2026-10-15T00:00:00Z') };
+  const otherSection = { ...first, section: 'svizzera' };
+  const nextEpoch = { ...first, poolEpoch: 'epoch-b' };
+  let tracker = appendEvergreenRejected({ schemaVersion: 2, bans: [], strikes: [], legacy: [], topicGateUrls: {} }, 'kw', { context: first });
+  assert.equal(isEvergreenRejected(tracker, 'kw', first), true);
+  assert.equal(isEvergreenRejected(tracker, 'kw', otherSection), false, 'un ban non deve bloccare un\'altra sezione');
+  assert.equal(isEvergreenRejected(tracker, 'kw', nextEpoch), false, 'un cambio pool richiede il preflight');
+});
+
+test('gli strike scadono e il prossimo tentativo riparte da uno', () => {
+  const start = Date.parse('2026-10-15T00:00:00Z');
+  const context = { section: 'frontaliere', pool: 'evergreen', poolEpoch: 'epoch-a' };
+  let tracker = { schemaVersion: 2, bans: [], strikes: [], legacy: [], topicGateUrls: {} };
+  for (let i = 0; i < EVERGREEN_STRIKE_LIMIT; i++) {
+    tracker = strikeEvergreenKeyword(tracker, 'kw-expiring', { context, now: start + i });
+  }
+  assert.equal(isEvergreenRejected(tracker, 'kw-expiring', { ...context, now: start + 1 }), true);
+  const afterExpiry = start + EVERGREEN_STRIKE_TTL_MS + EVERGREEN_STRIKE_LIMIT;
+  assert.equal(isEvergreenRejected(tracker, 'kw-expiring', { ...context, now: afterExpiry }), false);
+  tracker = strikeEvergreenKeyword(tracker, 'kw-expiring', { context, now: afterExpiry + 1 });
+  assert.equal(tracker.strikes.find((entry) => entry.keyword === 'kw-expiring').count, 1);
+});
+
+test('la migrazione dry-run conserva i ban senza provenance e non scarta dati', () => {
+  const result = migrateEvergreenRejectedTracker({
+    keywords: ['confirmed-old-ban'],
+    strikes: { 'old-strike': EVERGREEN_STRIKE_LIMIT },
+    topicGateUrls: {},
+  }, { now: Date.parse('2026-10-15T00:00:00Z') });
+  assert.equal(result.ok, true);
+  assert.deepEqual(result.report, { bans: 0, strikes: 0, legacy: 2, dropped: [] });
+  assert.deepEqual(result.tracker.legacy.map((entry) => entry.keyword), ['confirmed-old-ban', 'old-strike']);
+  assert.equal(result.tracker.legacy.every((entry) => entry.validityRule === 'preflight-required'), true);
 });
