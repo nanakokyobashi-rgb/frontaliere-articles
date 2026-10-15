@@ -44506,7 +44506,7 @@ const RAW_ARTICLES = [
  id: 'operatori-emergenze-valli',
  category: 'novita',
  date: '2026-10-15T07:26:11.073Z',
- image: '/images/blog/article-camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.webp',
+ image: '/images/blog/article-operatori-emergenze-valli.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'redazione',

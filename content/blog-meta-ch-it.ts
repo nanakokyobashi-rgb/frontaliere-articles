@@ -8338,7 +8338,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.rotte-greggio-kurdistan-lugano.imageAlt': 'Lugano e via Nassa nel racconto delle rotte del commercio di greggio',
     'blog.article.orari-apertura-lucerna-festivi.title': 'orari apertura negozi Lucerna domeniche festivi',
     'blog.article.orari-apertura-lucerna-festivi.excerpt': 'Nel Canton Lucerna gli orari di apertura dei negozi variano secondo il livello competente (cantonale, comunale o istituzionale); domeniche e festivi fanno parte degli orari commerciali, mentre le aperture in deroga richiedono autorizzazioni speciali da verificare sulla fonte ufficiale.',
-    'blog.article.orari-apertura-lucerna-festivi.imageAlt': 'Via di Lucerna con negozi e cartelli degli orari di apertura, cielo limpido e torre dell\'orologio sullo sfondo',
+    'blog.article.orari-apertura-lucerna-festivi.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.ubs-scenari-trasferimento-sede.title': 'UBS valuta tre scenari per lo spostamento della sede',
     'blog.article.ubs-scenari-trasferimento-sede.excerpt': 'UBS valuta tre scenari per la sede fuori dalla Svizzera Il Consiglio degli Stati sostiene il 100% di capitale CET1 Il requisito attuale per le filiali estere è',
     'blog.article.ubs-scenari-trasferimento-sede.imageAlt': 'Sede bancaria in Svizzera',
@@ -8347,7 +8347,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.premio-economia-stabilizzazione.imageAlt': 'Nobel economia 2026, stabilizzazione macroeconomica e inflazione',
     'blog.article.migros-nuovo-contratto-lavoro-2027.title': 'Migros: nuovo contratto con 41 ore e sconti del 10%',
     'blog.article.migros-nuovo-contratto-lavoro-2027.excerpt': 'Nuovo L-GAV Migros per il periodo 2027-2031 Da 43 a 41 ore con salario invariato per molti dipendenti 10% di sconto sugli acquisti dal 1 gennaio 2027 Altri',
-    'blog.article.migros-nuovo-contratto-lavoro-2027.imageAlt': 'Ingresso di un supermercato Migros in Svizzera',
+    'blog.article.migros-nuovo-contratto-lavoro-2027.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaChIt;

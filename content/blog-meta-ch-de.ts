@@ -8338,7 +8338,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.rotte-greggio-kurdistan-lugano.imageAlt': 'Lugano und die Via Nassa im Bericht über Wege des Rohölhandels',
     'blog.article.orari-apertura-lucerna-festivi.title': 'Öffnungszeiten der Geschäfte in Luzern an Sonntagen und Feiertagen',
     'blog.article.orari-apertura-lucerna-festivi.excerpt': 'Im Kanton Luzern variieren die Öffnungszeiten der Geschäfte je nach zuständiger Ebene (kantonal, kommunal oder institutionell); Sonntage und Feiertage gehören zu den Ladenöffnungszeiten, während Sonderöffnungen besondere Genehmigungen erfordern, die anhand der offiziellen Quelle zu überprüfen sind.',
-    'blog.article.orari-apertura-lucerna-festivi.imageAlt': 'Lucerner Straße mit Geschäften und Öffnungszeitenschildern, klarem Himmel und Uhrturm im Hintergrund',
+    'blog.article.orari-apertura-lucerna-festivi.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.ubs-scenari-trasferimento-sede.title': 'UBS prüft drei Szenarien für die Verlegung des Sitzes',
     'blog.article.ubs-scenari-trasferimento-sede.excerpt': 'UBS prüft drei Szenarien für den Sitz außerhalb der Schweiz Der Ständerat befürwortet 100% CET1-Kapital Die aktuelle Anforderung für ausländische Niederlassungen ist',
     'blog.article.ubs-scenari-trasferimento-sede.imageAlt': 'Bankhauptsitz in der Schweiz',
@@ -8347,7 +8347,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.premio-economia-stabilizzazione.imageAlt': 'Wirtschaftsnobelpreis 2026 für makroökonomische Stabilisierung',
     'blog.article.migros-nuovo-contratto-lavoro-2027.title': 'Migros: neuer Vertrag mit 41 Stunden und 10% Rabatt',
     'blog.article.migros-nuovo-contratto-lavoro-2027.excerpt': 'Neuer L-GAV der Migros für den Zeitraum 2027-2031 Von 43 auf 41 Stunden bei unverändertem Lohn für viele Mitarbeitende 10% Rabatt auf Einkäufe ab 1.',
-    'blog.article.migros-nuovo-contratto-lavoro-2027.imageAlt': 'Eingang eines Migros-Supermarkts in der Schweiz',
+    'blog.article.migros-nuovo-contratto-lavoro-2027.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaChDe;

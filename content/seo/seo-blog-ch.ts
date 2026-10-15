@@ -105267,10 +105267,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-negozi-berna-orari-festivi-regole.webp`,
+        "url": `${BASE_URL}/images/blog/article-orari-apertura-lucerna-festivi.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Via di Lucerna con negozi e cartelli degli orari di apertura, cielo limpido e torre dell'orologio sullo sfondo"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-15T05:37:40+00:00",
       "dateModified": "2026-10-15T05:37:40+00:00",
@@ -105384,10 +105384,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-salario-minimo-ginevra-2027.webp`,
+        "url": `${BASE_URL}/images/blog/article-migros-nuovo-contratto-lavoro-2027.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Ingresso di un supermercato Migros in Svizzera"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-15T06:55:41+00:00",
       "dateModified": "2026-10-15T06:55:41+00:00",

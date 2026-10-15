@@ -13201,7 +13201,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bellinzona-voto-caserma-pompieri.imageAlt': 'Bellinzona city council hall',
     'blog.article.operatori-emergenze-valli.title': 'Tre Valli: 80 operators in four exercises',
     'blog.article.operatori-emergenze-valli.excerpt': 'Around 80 operators trained in 2026 Four editions between Biasca and Giornico Three scenarios: fire, public order and bad weather Training will continue',
-    'blog.article.operatori-emergenze-valli.imageAlt': 'Operators during an emergency-response exercise in a Ticino valley',
+    'blog.article.operatori-emergenze-valli.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaEn;

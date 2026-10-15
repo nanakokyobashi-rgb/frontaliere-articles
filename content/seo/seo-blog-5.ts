@@ -108277,10 +108277,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-operatori-emergenze-valli.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Operatori durante un'esercitazione di emergenza in una valle del Ticino"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-15T07:26:11+00:00",
       "dateModified": "2026-10-15T07:26:11+00:00",

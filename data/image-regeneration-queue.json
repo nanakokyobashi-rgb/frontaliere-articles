@@ -50,36 +50,6 @@
       "failureCount": 1,
       "requestedAt": "2026-10-15T03:43:23.697Z",
       "lastFailureAt": "2026-10-15T07:11:24.043Z"
-    },
-    {
-      "articleId": "orari-apertura-lucerna-festivi",
-      "title": "orari apertura negozi Lucerna domeniche festivi",
-      "fallbackImage": "/images/blog/article-negozi-berna-orari-festivi-regole.webp",
-      "reason": "All image providers failed for article-orari-apertura-lucerna-festivi: openai-codex (vision gate rejected image: Synthetic photorealistic illustration relevant to Lucerne shopping",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-15T05:37:41.003Z",
-      "lastFailureAt": "2026-10-15T05:37:41.003Z"
-    },
-    {
-      "articleId": "migros-nuovo-contratto-lavoro-2027",
-      "title": "Migros: nuovo contratto con 41 ore e sconti del 10%",
-      "fallbackImage": "/images/blog/article-salario-minimo-ginevra-2027.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-15T06:55:41.776Z",
-      "lastFailureAt": "2026-10-15T06:55:41.776Z"
-    },
-    {
-      "articleId": "operatori-emergenze-valli",
-      "title": "Tre Valli: 80 operatori in quattro esercitazioni",
-      "fallbackImage": "/images/blog/article-camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.webp",
-      "reason": "All image providers failed for article-operatori-emergenze-valli: openai-codex (vision gate rejected image: Generic synthetic scene, but visible foreground operators and background",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-15T07:26:11.486Z",
-      "lastFailureAt": "2026-10-15T07:26:11.486Z"
     }
   ]
 }

@@ -8338,7 +8338,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.rotte-greggio-kurdistan-lugano.imageAlt': 'Lugano and Via Nassa in a story about crude oil trade routes',
     'blog.article.orari-apertura-lucerna-festivi.title': 'Lucerne shop opening hours Sundays public holidays',
     'blog.article.orari-apertura-lucerna-festivi.excerpt': 'In the Canton of Lucerne, shop opening hours vary according to the competent level (cantonal, municipal or institutional); Sundays and public holidays are part of commercial opening hours, while exceptional openings require special permits to be verified against the official source.',
-    'blog.article.orari-apertura-lucerna-festivi.imageAlt': 'Lucerne street with shops and opening hours signs, clear sky and clock tower in the background',
+    'blog.article.orari-apertura-lucerna-festivi.imageAlt': 'Illustration generated for this article',
     'blog.article.ubs-scenari-trasferimento-sede.title': 'UBS considers three scenarios for relocating its headquarters',
     'blog.article.ubs-scenari-trasferimento-sede.excerpt': 'UBS assesses three scenarios for its head office outside Switzerland The Council of States supports 100% CET1 capital The current requirement for foreign branches is',
     'blog.article.ubs-scenari-trasferimento-sede.imageAlt': 'Bank headquarters in Switzerland',
@@ -8347,7 +8347,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.premio-economia-stabilizzazione.imageAlt': '2026 economics Nobel for macroeconomic stabilization studies',
     'blog.article.migros-nuovo-contratto-lavoro-2027.title': 'Migros: new contract with 41 hours and 10% discounts',
     'blog.article.migros-nuovo-contratto-lavoro-2027.excerpt': 'New Migros L-GAV for the 2027-2031 period From 43 to 41 hours with unchanged salary for many employees 10% discount on purchases from January 1, 2027 More',
-    'blog.article.migros-nuovo-contratto-lavoro-2027.imageAlt': 'Entrance of a Migros supermarket in Switzerland',
+    'blog.article.migros-nuovo-contratto-lavoro-2027.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaChEn;
