@@ -70,6 +70,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-15T06:55:41.776Z",
       "lastFailureAt": "2026-10-15T06:55:41.776Z"
+    },
+    {
+      "articleId": "operatori-emergenze-valli",
+      "title": "Tre Valli: 80 operatori in quattro esercitazioni",
+      "fallbackImage": "/images/blog/article-camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.webp",
+      "reason": "All image providers failed for article-operatori-emergenze-valli: openai-codex (vision gate rejected image: Generic synthetic scene, but visible foreground operators and background",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T07:26:11.486Z",
+      "lastFailureAt": "2026-10-15T07:26:11.486Z"
     }
   ]
 }

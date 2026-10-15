@@ -44502,6 +44502,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'operatori-emergenze-valli',
+ category: 'novita',
+ date: '2026-10-15T07:26:11.073Z',
+ image: '/images/blog/article-camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

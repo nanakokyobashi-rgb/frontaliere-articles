@@ -13200,6 +13200,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bellinzona-voto-caserma-pompieri.title': 'Bellinzona: voto sul credito per la nuova caserma',
     'blog.article.bellinzona-voto-caserma-pompieri.excerpt': 'Lunedì si vota il primo credito da 14 milioni.',
     'blog.article.bellinzona-voto-caserma-pompieri.imageAlt': 'Sala del Consiglio comunale di Bellinzona',
+    'blog.article.operatori-emergenze-valli.title': 'Tre Valli: 80 operatori in quattro esercitazioni',
+    'blog.article.operatori-emergenze-valli.excerpt': 'Circa 80 operatori formati nel 2026 Quattro edizioni tra Biasca e Giornico Tre scenari: incendio, ordine pubblico e maltempo La formazione continuerà',
+    'blog.article.operatori-emergenze-valli.imageAlt': 'Operatori durante un\'esercitazione di emergenza in una valle del Ticino',
 };
 
 export default blogMetaIt;

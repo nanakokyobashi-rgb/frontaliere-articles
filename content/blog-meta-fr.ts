@@ -13201,6 +13201,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bellinzona-voto-caserma-pompieri.title': 'Bellinzona : vote sur le crédit pour la nouvelle caserne',
     'blog.article.bellinzona-voto-caserma-pompieri.excerpt': 'Lundi, on vote sur le premier crédit de 14 millions.',
     'blog.article.bellinzona-voto-caserma-pompieri.imageAlt': 'Salle du conseil municipal de Bellinzone',
+    'blog.article.operatori-emergenze-valli.title': 'Tre Valli : 80 opérateurs dans quatre exercices',
+    'blog.article.operatori-emergenze-valli.excerpt': 'Environ 80 opérateurs formés en 2026 Quatre éditions entre Biasca et Giornico Trois scénarios : incendie, ordre public et intempéries La formation continuera',
+    'blog.article.operatori-emergenze-valli.imageAlt': 'Intervenants lors d\'un exercice d\'urgence dans une vallée tessinoise',
 };
 
 export default blogMetaFr;

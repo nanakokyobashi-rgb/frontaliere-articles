@@ -1,9 +1,4 @@
 {
-  "https://www.varesenoi.it/2026/09/01/leggi-notizia/argomenti/territorio/articolo/bennet-selezione-personale-per-lipermercato-bennet-di-lavena-ponte-tresa.html": {
-    "articleId": "bennet-cerca-personale-varese",
-    "ts": "2026-09-02T00:16:49.054Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/riverlhab-il-progetto-transfrontaliero-che-punta-a-rigenerare-il-torrente-lura-e-il-suo-territorio/2668582": {
     "articleId": "riverlhab-progetto-transfrontaliero-ticino",
     "ts": "2026-09-02T10:32:43.319Z",
@@ -2497,6 +2492,11 @@
   "https://www.ticinonews.ch/ticino/sede-dei-pompieri-si-arriva-al-voto-tra-rapporti-lettere-anonime-e-lo-spettro-del-referendum-444606": {
     "articleId": "bellinzona-voto-caserma-pompieri",
     "ts": "2026-10-15T07:09:17.172Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/incendio-ordine-pubblico-e-maltempo-80-operatori-si-esercitano-nelle-tre-valli-444634": {
+    "articleId": "operatori-emergenze-valli",
+    "ts": "2026-10-15T07:26:11.488Z",
     "keyForm": 2
   }
 }

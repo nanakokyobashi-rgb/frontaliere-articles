@@ -13199,6 +13199,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bellinzona-voto-caserma-pompieri.title': 'Bellinzona: vote on funding for the new barracks',
     'blog.article.bellinzona-voto-caserma-pompieri.excerpt': 'On Monday, the first credit of 14 million will be put to a vote.',
     'blog.article.bellinzona-voto-caserma-pompieri.imageAlt': 'Bellinzona city council hall',
+    'blog.article.operatori-emergenze-valli.title': 'Tre Valli: 80 operators in four exercises',
+    'blog.article.operatori-emergenze-valli.excerpt': 'Around 80 operators trained in 2026 Four editions between Biasca and Giornico Three scenarios: fire, public order and bad weather Training will continue',
+    'blog.article.operatori-emergenze-valli.imageAlt': 'Operators during an emergency-response exercise in a Ticino valley',
 };
 
 export default blogMetaEn;

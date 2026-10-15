@@ -13198,6 +13198,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bellinzona-voto-caserma-pompieri.title': 'Bellinzona: Abstimmung über den Kredit für die neue Feuerwehrkaserne',
     'blog.article.bellinzona-voto-caserma-pompieri.excerpt': 'Am Montag wird über den ersten Kredit von 14 Millionen abgestimmt.',
     'blog.article.bellinzona-voto-caserma-pompieri.imageAlt': 'Gemeinderatssaal in Bellinzona',
+    'blog.article.operatori-emergenze-valli.title': 'Tre Valli: 80 Einsatzkräfte bei vier Übungen',
+    'blog.article.operatori-emergenze-valli.excerpt': 'Rund 80 Einsatzkräfte im Jahr 2026 ausgebildet Vier Durchführungen zwischen Biasca und Giornico Drei Szenarien: Brand, öffentliche Ordnung und Unwetter Die Ausbildung wird fortgesetzt',
+    'blog.article.operatori-emergenze-valli.imageAlt': 'Einsatzkräfte bei einer Notfallübung in einem Tal im Tessin',
 };
 
 export default blogMetaDe;

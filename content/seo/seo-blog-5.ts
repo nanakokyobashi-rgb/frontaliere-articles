@@ -108258,6 +108258,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-operatori-emergenze-valli': {
+    title: 'Tre Valli: 80 operatori in quattro esercitazioni',
+    description: 'Circa 80 operatori formati nel 2026 Quattro edizioni tra Biasca e Giornico Tre scenari: incendio, ordine pubblico e maltempo La formazione continuerà',
+    keywords: 'frontalieri, ticino, svizzera, italia, valli, operatori, quattro, esercitazioni',
+    ogTitle: 'Tre Valli: 80 operatori in quattro esercitazioni',
+    ogDescription: 'Circa 80 operatori formati nel 2026 Quattro edizioni tra Biasca e Giornico Tre scenari: incendio, ordine pubblico e maltempo La formazione continuerà',
+    canonicalPath: '/articoli-frontaliere/operatori-emergenze-valli/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tre Valli: 80 operatori in quattro esercitazioni",
+      "description": "Circa 80 operatori formati nel 2026 Quattro edizioni tra Biasca e Giornico Tre scenari: incendio, ordine pubblico e maltempo La formazione continuerà",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Operatori durante un'esercitazione di emergenza in una valle del Ticino"
+      },
+      "datePublished": "2026-10-15T07:26:11+00:00",
+      "dateModified": "2026-10-15T07:26:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/operatori-emergenze-valli/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
