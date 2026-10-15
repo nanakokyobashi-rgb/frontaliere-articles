@@ -100,6 +100,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-15T04:50:02.400Z",
       "lastFailureAt": "2026-10-15T04:50:02.400Z"
+    },
+    {
+      "articleId": "orari-apertura-lucerna-festivi",
+      "title": "orari apertura negozi Lucerna domeniche festivi",
+      "fallbackImage": "/images/blog/article-negozi-berna-orari-festivi-regole.webp",
+      "reason": "All image providers failed for article-orari-apertura-lucerna-festivi: openai-codex (vision gate rejected image: Synthetic photorealistic illustration relevant to Lucerne shopping",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T05:37:41.003Z",
+      "lastFailureAt": "2026-10-15T05:37:41.003Z"
     }
   ]
 }
