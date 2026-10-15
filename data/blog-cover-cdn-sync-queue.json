@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-bellinzona-voto-caserma-pompieri.webp",
+      "sha256": "ea7992ec4bc06b4b204531ce5c9398cd5096aff8e1316769f7948b225d50d4b3"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-bellinzona-voto-caserma-pompieri-480w.webp",
+      "sha256": "ab50decfc1c7d7b117218d0927979d0792b3b02260ae6e46109c9f60534df2b2"
+    }
+  ]
 }
