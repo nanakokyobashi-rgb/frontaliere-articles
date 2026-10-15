@@ -88,6 +88,17 @@ const SITE_REPO = process.env.SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no'
 const SITE_REF = process.env.SITE_REF || 'main';
 const SOURCE_COMMIT_RE = /^[a-f0-9]{40}$/u;
 const SOURCE_REF_RE = /^(?![./-])(?!.*\/$)(?!.*(?:^|\/)\.{1,2}(?:\/|$))(?!.*\.\.)(?!.*\/{2})(?!.*[~^:?*\[\]\\@{}])[A-Za-z0-9._/-]{1,256}$/u;
+
+/** True when Node invoked this module directly, including through a symlink. */
+export function isMainModuleInvocation(moduleUrl, argvPath = process.argv[1]) {
+  if (!argvPath) return false;
+  try {
+    return fs.realpathSync(argvPath) === fs.realpathSync(fileURLToPath(moduleUrl));
+  } catch {
+    return false;
+  }
+}
+
 const SOURCE_PATH_RE = /^(?!\/)(?!.*(?:^|\/)\.\.(?:\/|$))(?!.*\/\/)[A-Za-z0-9._/-]{1,512}$/u;
 const DIGEST_RE = /^sha256:[a-f0-9]{64}$/u;
 
@@ -1216,7 +1227,7 @@ async function main() {
   if (verdict.red && args.has('--strict')) process.exitCode = 1;
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (isMainModuleInvocation(import.meta.url)) {
   main().catch((error) => {
     console.error(`verify-crawler-contract-provenance fallito: ${error && error.stack ? error.stack : error}`);
     // Un errore di rete non osservato non deve diventare un rosso del dispatch
