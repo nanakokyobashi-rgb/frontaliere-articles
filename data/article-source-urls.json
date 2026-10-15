@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/oltre-20mila-cittadini-senza-medico-di-base-nel-varesotto-e-incombe-londata-dei-pensionamenti/2669674": {
-    "articleId": "varese-medici-carenza-frontalieri-2026",
-    "ts": "2026-09-03T19:19:48.117Z",
-    "keyForm": 2
-  },
   "https://www.ticinonews.ch/ticino/competenze-di-base-al-via-la-campagna-cantonale-per-la-formazione-continua-441925": {
     "articleId": "formazione-continua-ticino-campagna",
     "ts": "2026-09-04T04:47:17.103Z",
@@ -2497,6 +2492,11 @@
   "https://comozero.it/attualita/como-tra-champions-e-campionato-sei-giorni-di-divieti-in-zona-stadio-la-mappa": {
     "articleId": "divieti-viabilita-stadio-como",
     "ts": "2026-10-15T14:49:43.457Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/tentato-omicidio-nel-luganese-in-manette-un-28enne-444695": {
+    "articleId": "arresto-lite-domestica-luganese",
+    "ts": "2026-10-15T15:06:58.649Z",
     "keyForm": 2
   }
 }

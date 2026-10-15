@@ -44615,6 +44615,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'arresto-lite-domestica-luganese',
+ category: 'novita',
+ date: '2026-10-15T15:06:58.250Z',
+ image: '/images/blog/article-arresto-lite-domestica-luganese.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
