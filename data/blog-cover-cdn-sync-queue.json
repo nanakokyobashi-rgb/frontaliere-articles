@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-licenza-pubblico-berna-requisiti.webp",
+      "sha256": "8ad5242093a6fb73ae8bd564c060928702354dac220dd3cc91364857d4051874"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-licenza-pubblico-berna-requisiti-480w.webp",
+      "sha256": "ad93b2bde0e14b4d6972374b4d0985d70e51317e7f90c0698db0a91cf48aca21"
+    }
+  ]
 }
