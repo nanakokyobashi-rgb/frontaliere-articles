@@ -1,4 +1,45 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-berna-veicoli-procedura-guida.webp",
+      "sha256": "9286540a61ae5dc2d9149255bf5b632e1cfc965a4dc389263733fb7c8e482ac5"
+    },
+    {
+      "path": "public/images/blog/article-gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.webp",
+      "sha256": "c3178c7fe28134ac1c542c22aac801bf7a9f318a1d0ade22cafe8496c725f42b"
+    },
+    {
+      "path": "public/images/blog/article-integrazione-lingua-berna-contributi.webp",
+      "sha256": "45384043a1ba154508fb4aa51b35b67f0fd93302c81d482e79dd2b9279884196"
+    },
+    {
+      "path": "public/images/blog/article-lucerna-festivi-calendario-verifica.webp",
+      "sha256": "0c909de4098e2e568b9ff3f436f7cf41b91fe94c1e20cd61601776a8ee1ad625"
+    },
+    {
+      "path": "public/images/blog/article-regole-orari-negozi-lucerna.webp",
+      "sha256": "95904b89c90bc50c3346802c9de459af1844cb0adbf5418eceeabef7f3c08154"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-berna-veicoli-procedura-guida-480w.webp",
+      "sha256": "f23d8c50754e607385452552d18339d6e8e2bd3b53cbf6c127591c991abf7e8a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel-480w.webp",
+      "sha256": "854f42b8b812ab617428f756b5b2128009ea7fb0494854adf2d090f2a4e3790b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-integrazione-lingua-berna-contributi-480w.webp",
+      "sha256": "769dfb60ba4ecab10565c1a67e7248411c43f558d4edad9c9d703d7a645b2362"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-lucerna-festivi-calendario-verifica-480w.webp",
+      "sha256": "877b5a0789e10373d42dcdd71564b2c54b9dfd34f03356056793184414fb2e65"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-regole-orari-negozi-lucerna-480w.webp",
+      "sha256": "7bcf75eaa218460837eef8df6de7d15948d0c29509114ebfc2e8399cd1434c94"
+    }
+  ]
 }
