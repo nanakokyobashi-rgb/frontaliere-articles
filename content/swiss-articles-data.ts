@@ -27725,7 +27725,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'tasse-universitarie-berna-guida',
     category: 'pratico',
     date: '2026-10-15T00:26:22.514Z',
-    image: '/images/blog/article-tasse-universitarie-zurigo-guida.webp',
+    image: '/images/blog/article-tasse-universitarie-berna-guida.webp',
     hasCalculator: true,
     articleType: 'evergreen',
     canton: ['BE'],

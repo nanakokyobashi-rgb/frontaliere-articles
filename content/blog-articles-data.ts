@@ -44453,7 +44453,7 @@ const RAW_ARTICLES = [
  id: 'arma-biasca-inchiesta',
  category: 'novita',
  date: '2026-10-14T18:54:16.755Z',
- image: '/images/blog/article-biasca-17enne-arrestato-accoltellamento.webp',
+ image: '/images/blog/article-arma-biasca-inchiesta.webp',
  hasCalculator: false,
  articleType: 'news',
  canton: ['TI'],

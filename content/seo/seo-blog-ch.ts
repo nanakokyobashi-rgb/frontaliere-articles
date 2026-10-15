@@ -104836,10 +104836,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-tasse-universitarie-zurigo-guida.webp`,
+        "url": `${BASE_URL}/images/blog/article-tasse-universitarie-berna-guida.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Studente che verifica i requisiti per le tasse universitarie nel Cantone di Berna"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-15T00:26:22+00:00",
       "dateModified": "2026-10-15T00:26:22+00:00",

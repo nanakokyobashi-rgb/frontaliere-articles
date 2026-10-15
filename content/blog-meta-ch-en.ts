@@ -8305,7 +8305,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ordinanza-dispositivi-vitali.imageAlt': 'Bern and vital medical devices in an editorial image about the DEFR consultation',
     'blog.article.tasse-universitarie-berna-guida.title': 'Tuition fees Bern: enrolment guide',
     'blog.article.tasse-universitarie-berna-guida.excerpt': 'How to check requirements, deadlines and amounts for tuition fees in the Canton of Bern: practical guide by categories and institutions.',
-    'blog.article.tasse-universitarie-berna-guida.imageAlt': 'Student verifying requirements for university fees in the Canton of Bern',
+    'blog.article.tasse-universitarie-berna-guida.imageAlt': 'Illustration generated for this article',
     'blog.article.opportunita-impiego-federale.title': 'Working for the Federal Administration: 50 training programs',
     'blog.article.opportunita-impiego-federale.excerpt': 'The Federal Administration offers internships to newly graduated students 50 vocational training programs are available The training programs last 7 weeks',
     'blog.article.opportunita-impiego-federale.imageAlt': 'Job opportunities in the Swiss Federal Administration',
