@@ -13182,7 +13182,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.fibra-ottica-145-comuni-como.imageAlt': 'Glasfaserkabelinstallation in einer Gemeinde der Provinz Como, Nahaufnahme mit vielen Details.',
     'blog.article.soccorsi-coda-autostrada-lombarda.title': 'Unfall auf der A8 zwischen Castellanza und Busto: langer Stau',
     'blog.article.soccorsi-coda-autostrada-lombarda.excerpt': 'Unfall auf der A8 kurz nach 16 Uhr Vier Personen beteiligt Zwei Rettungswagen und ein Notarzteinsatzfahrzeug mit höchster Dringlichkeitsstufe Langer Stau ab der Verzweigung A8/A9 Was: Verkehrsunfall',
-    'blog.article.soccorsi-coda-autostrada-lombarda.imageAlt': 'Stau auf der A8 zwischen Castellanza und Busto Arsizio nach einem Unfall',
+    'blog.article.soccorsi-coda-autostrada-lombarda.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.arma-biasca-inchiesta.title': 'Biasca, die Festnahme des 17-Jährigen bestätigt',
     'blog.article.arma-biasca-inchiesta.excerpt': 'Der Messerangriff ereignete sich am 5.',
     'blog.article.arma-biasca-inchiesta.imageAlt': 'Für diesen Artikel erstellte Illustration',

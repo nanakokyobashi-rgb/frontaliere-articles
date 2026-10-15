@@ -13185,7 +13185,7 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.fibra-ottica-145-comuni-como.imageAlt': 'Installation de câble fibre optique dans une commune de la province de Côme, vue détaillée. (Como)',
     'blog.article.soccorsi-coda-autostrada-lombarda.title': 'Accident sur l’A8 entre Castellanza et Busto : longue file',
     'blog.article.soccorsi-coda-autostrada-lombarda.excerpt': 'Accident sur l’A8 peu après 16 heures Quatre personnes impliquées Deux ambulances et un véhicule médicalisé en code rouge Longue file depuis la bifurcation A8/A9 Quoi : accident de la route',
-    'blog.article.soccorsi-coda-autostrada-lombarda.imageAlt': 'Bouchon sur l\'autoroute A8 entre Castellanza et Busto Arsizio après un accident',
+    'blog.article.soccorsi-coda-autostrada-lombarda.imageAlt': 'Illustration générée pour cet article',
     'blog.article.arma-biasca-inchiesta.title': 'Biasca, l\'arrestation du jeune de 17 ans confirmée',
     'blog.article.arma-biasca-inchiesta.excerpt': 'L\'attaque au couteau a eu lieu le 5 octobre à Biasca.',
     'blog.article.arma-biasca-inchiesta.imageAlt': 'Illustration générée pour cet article',

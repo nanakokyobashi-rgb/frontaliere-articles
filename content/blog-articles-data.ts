@@ -44443,7 +44443,7 @@ const RAW_ARTICLES = [
  id: 'soccorsi-coda-autostrada-lombarda',
  category: 'pratico',
  date: '2026-10-14T15:46:26.571Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-soccorsi-coda-autostrada-lombarda.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'redazione',

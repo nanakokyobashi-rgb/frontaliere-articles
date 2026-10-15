@@ -13184,7 +13184,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.fibra-ottica-145-comuni-como.imageAlt': 'Installazione di cavo in fibra ottica in un comune della provincia di Como, vista ravvicinata e dettagliata.',
     'blog.article.soccorsi-coda-autostrada-lombarda.title': 'Incidente sulla A8 tra Castellanza e Busto: lunga coda',
     'blog.article.soccorsi-coda-autostrada-lombarda.excerpt': 'Incidente sulla A8 poco dopo le 16 Quattro persone coinvolte Due ambulanze e un\'automedica in codice rosso Lunga coda dal bivio A8/A9 Cosa: incidente stradale',
-    'blog.article.soccorsi-coda-autostrada-lombarda.imageAlt': 'Coda sull\'autostrada A8 tra Castellanza e Busto Arsizio dopo un incidente',
+    'blog.article.soccorsi-coda-autostrada-lombarda.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.arma-biasca-inchiesta.title': 'Biasca, confermato l\'arresto del 17enne',
     'blog.article.arma-biasca-inchiesta.excerpt': 'L\'accoltellamento è avvenuto il 5 ottobre a Biasca.',
     'blog.article.arma-biasca-inchiesta.imageAlt': 'Illustrazione generata per questo articolo',

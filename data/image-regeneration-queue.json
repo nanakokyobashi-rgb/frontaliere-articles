@@ -12,16 +12,6 @@
       "lastFailureAt": "2026-10-15T12:50:17.770Z"
     },
     {
-      "articleId": "soccorsi-coda-autostrada-lombarda",
-      "title": "Incidente sulla A8 tra Castellanza e Busto: lunga coda",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "failed",
-      "failureCount": 3,
-      "requestedAt": "2026-10-14T15:46:26.992Z",
-      "lastFailureAt": "2026-10-15T07:04:30.796Z"
-    },
-    {
       "articleId": "liberta-fondo-pene-sostitutive",
       "title": "Multe non pagate? Ecco chi può salvarvi dal carcere",
       "fallbackImage": "/images/blog/lavori-pubblica-utilita-multe-pene.webp",
