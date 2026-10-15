@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-15T05:42:21.084Z",
-  "contentHash": "9d30dcdba79f4d6c764f1c4841e40f32e0ae1976c75b3dc1e903c678de1f3917",
+  "updatedAt": "2026-10-15T09:55:02.142Z",
+  "contentHash": "f347bdc64e309b7ca729e6397d67d1c86fc593b4992586fae77f7dbf6c299a13",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-14T22:22:01.380Z",
+      "updatedAt": "2026-10-15T05:13:51.905Z",
       "keyFacts": 0
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-14T23:20:15.877Z",
+      "updatedAt": "2026-10-15T04:50:46.927Z",
       "keyFacts": 0
     },
     {
@@ -106,7 +106,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-14T22:22:01.380Z"
+          "updatedAt": "2026-10-15T05:13:51.905Z"
         },
         {
           "id": "meteo",
@@ -115,12 +115,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "12 °C",
-              "detail": "oggi da 11 a 11 °C"
+              "value": "10 °C",
+              "detail": "oggi da 10 a 19 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-14T23:20:15.877Z"
+          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -237,7 +237,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-15T05:42:21.084Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "en": {
       "canton": "ZH",
@@ -316,7 +316,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-14T22:22:01.380Z"
+          "updatedAt": "2026-10-15T05:13:51.905Z"
         },
         {
           "id": "meteo",
@@ -325,12 +325,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "12 °C",
-              "detail": "today from 11 to 11 °C"
+              "value": "10 °C",
+              "detail": "today from 10 to 19 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-14T23:20:15.877Z"
+          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -443,7 +443,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-15T05:42:21.084Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "de": {
       "canton": "ZH",
@@ -522,7 +522,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-14T22:22:01.380Z"
+          "updatedAt": "2026-10-15T05:13:51.905Z"
         },
         {
           "id": "meteo",
@@ -531,12 +531,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "12 °C",
-              "detail": "heute 11 bis 11 °C"
+              "value": "10 °C",
+              "detail": "heute 10 bis 19 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-14T23:20:15.877Z"
+          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -649,7 +649,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-15T05:42:21.084Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "fr": {
       "canton": "ZH",
@@ -728,7 +728,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-14T22:22:01.380Z"
+          "updatedAt": "2026-10-15T05:13:51.905Z"
         },
         {
           "id": "meteo",
@@ -737,12 +737,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "12 °C",
-              "detail": "aujourd’hui de 11 à 11 °C"
+              "value": "10 °C",
+              "detail": "aujourd’hui de 10 à 19 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-14T23:20:15.877Z"
+          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -851,7 +851,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-15T05:42:21.084Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     }
   }
 }

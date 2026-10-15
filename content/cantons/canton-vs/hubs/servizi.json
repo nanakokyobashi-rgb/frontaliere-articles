@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-10-15T05:42:21.084Z",
-  "contentHash": "7d491c86f2da86f510e627d50fcaf1f9cb29e7f424378fd1bdba89851a1943be",
+  "updatedAt": "2026-10-15T09:55:02.142Z",
+  "contentHash": "7bea9c8230d414d407bfa149374f1de27abf66ae78c765bdccf81b76f7ef4628",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-14T21:44:58.793Z",
+      "updatedAt": "2026-10-15T04:43:28.541Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-14T23:20:15.877Z",
+      "updatedAt": "2026-10-15T04:50:46.927Z",
       "keyFacts": 0
     },
     {
@@ -97,7 +97,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-14T21:44:58.793Z"
+          "updatedAt": "2026-10-15T04:43:28.541Z"
         },
         {
           "id": "meteo",
@@ -106,12 +106,12 @@
           "items": [
             {
               "label": "Sion",
-              "value": "13 °C",
-              "detail": "oggi da 16 a 16 °C"
+              "value": "12 °C",
+              "detail": "oggi da 11 a 25 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-14T23:20:15.877Z"
+          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -228,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-15T05:42:21.084Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "en": {
       "canton": "VS",
@@ -298,7 +298,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-14T21:44:58.793Z"
+          "updatedAt": "2026-10-15T04:43:28.541Z"
         },
         {
           "id": "meteo",
@@ -307,12 +307,12 @@
           "items": [
             {
               "label": "Sion",
-              "value": "13 °C",
-              "detail": "today from 16 to 16 °C"
+              "value": "12 °C",
+              "detail": "today from 11 to 25 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-14T23:20:15.877Z"
+          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -425,7 +425,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-15T05:42:21.084Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "de": {
       "canton": "VS",
@@ -495,7 +495,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-14T21:44:58.793Z"
+          "updatedAt": "2026-10-15T04:43:28.541Z"
         },
         {
           "id": "meteo",
@@ -504,12 +504,12 @@
           "items": [
             {
               "label": "Sion",
-              "value": "13 °C",
-              "detail": "heute 16 bis 16 °C"
+              "value": "12 °C",
+              "detail": "heute 11 bis 25 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-14T23:20:15.877Z"
+          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -622,7 +622,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-15T05:42:21.084Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "fr": {
       "canton": "VS",
@@ -692,7 +692,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-14T21:44:58.793Z"
+          "updatedAt": "2026-10-15T04:43:28.541Z"
         },
         {
           "id": "meteo",
@@ -701,12 +701,12 @@
           "items": [
             {
               "label": "Sion",
-              "value": "13 °C",
-              "detail": "aujourd’hui de 16 à 16 °C"
+              "value": "12 °C",
+              "detail": "aujourd’hui de 11 à 25 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-14T23:20:15.877Z"
+          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -815,7 +815,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-15T05:42:21.084Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     }
   }
 }

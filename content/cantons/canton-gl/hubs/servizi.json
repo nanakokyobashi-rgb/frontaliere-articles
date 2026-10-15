@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "servizi",
-  "updatedAt": "2026-10-15T05:42:21.084Z",
-  "contentHash": "f31bec7cd187cc1d52a0192df901b3a1131bb422f1f5a243c85ef998275b9bd5",
+  "updatedAt": "2026-10-15T09:55:02.142Z",
+  "contentHash": "b23cb6c3c7923ce34926baa887b6cc8691c7501e4e04ac15848e55d5f06fbbe5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-14T23:20:15.877Z",
+      "updatedAt": "2026-10-15T04:50:46.927Z",
       "keyFacts": 0
     },
     {
@@ -60,12 +60,12 @@
           "items": [
             {
               "label": "Glarus",
-              "value": "12 °C",
-              "detail": "oggi da 12 a 12 °C"
+              "value": "13 °C",
+              "detail": "oggi da 11 a 21 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-14T23:20:15.877Z"
+          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -172,7 +172,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-15T05:42:21.084Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "en": {
       "canton": "GL",
@@ -210,12 +210,12 @@
           "items": [
             {
               "label": "Glarus",
-              "value": "12 °C",
-              "detail": "today from 12 to 12 °C"
+              "value": "13 °C",
+              "detail": "today from 11 to 21 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-14T23:20:15.877Z"
+          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -318,7 +318,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-15T05:42:21.084Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "de": {
       "canton": "GL",
@@ -356,12 +356,12 @@
           "items": [
             {
               "label": "Glarus",
-              "value": "12 °C",
-              "detail": "heute 12 bis 12 °C"
+              "value": "13 °C",
+              "detail": "heute 11 bis 21 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-14T23:20:15.877Z"
+          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -464,7 +464,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-15T05:42:21.084Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "fr": {
       "canton": "GL",
@@ -502,12 +502,12 @@
           "items": [
             {
               "label": "Glarus",
-              "value": "12 °C",
-              "detail": "aujourd’hui de 12 à 12 °C"
+              "value": "13 °C",
+              "detail": "aujourd’hui de 11 à 21 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-14T23:20:15.877Z"
+          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -606,7 +606,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-15T05:42:21.084Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     }
   }
 }

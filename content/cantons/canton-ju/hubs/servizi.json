@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-10-15T06:04:45.339Z",
-  "contentHash": "1413c17333e7fc2740f99b71bb4de3c61c5febda3e0064b0755487a4e501caa9",
+  "updatedAt": "2026-10-15T09:55:02.142Z",
+  "contentHash": "fbdcb75cfb7d95ccb338706b8607f003d6a27f1eae556e30b951faa147244dbd",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-14T22:22:01.380Z",
+      "updatedAt": "2026-10-15T05:13:51.905Z",
       "keyFacts": 0
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-14T23:20:15.877Z",
+      "updatedAt": "2026-10-15T04:50:46.927Z",
       "keyFacts": 0
     },
     {
@@ -96,7 +96,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-14T22:22:01.380Z"
+          "updatedAt": "2026-10-15T05:13:51.905Z"
         },
         {
           "id": "meteo",
@@ -105,12 +105,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "11 °C",
-              "detail": "oggi da 11 a 11 °C"
+              "value": "10 °C",
+              "detail": "oggi da 10 a 21 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-14T23:20:15.877Z"
+          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -177,7 +177,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-15T06:04:45.339Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "en": {
       "canton": "JU",
@@ -246,7 +246,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-14T22:22:01.380Z"
+          "updatedAt": "2026-10-15T05:13:51.905Z"
         },
         {
           "id": "meteo",
@@ -255,12 +255,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "11 °C",
-              "detail": "today from 11 to 11 °C"
+              "value": "10 °C",
+              "detail": "today from 10 to 21 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-14T23:20:15.877Z"
+          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -323,7 +323,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-15T06:04:45.339Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "de": {
       "canton": "JU",
@@ -392,7 +392,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-14T22:22:01.380Z"
+          "updatedAt": "2026-10-15T05:13:51.905Z"
         },
         {
           "id": "meteo",
@@ -401,12 +401,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "11 °C",
-              "detail": "heute 11 bis 11 °C"
+              "value": "10 °C",
+              "detail": "heute 10 bis 21 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-14T23:20:15.877Z"
+          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -469,7 +469,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-15T06:04:45.339Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "fr": {
       "canton": "JU",
@@ -538,7 +538,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-14T22:22:01.380Z"
+          "updatedAt": "2026-10-15T05:13:51.905Z"
         },
         {
           "id": "meteo",
@@ -547,12 +547,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "11 °C",
-              "detail": "aujourd’hui de 11 à 11 °C"
+              "value": "10 °C",
+              "detail": "aujourd’hui de 10 à 21 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-14T23:20:15.877Z"
+          "updatedAt": "2026-10-15T04:50:46.927Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -611,7 +611,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-15T06:04:45.339Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     }
   }
 }

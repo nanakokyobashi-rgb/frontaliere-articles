@@ -4,22 +4,22 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T03:26:26.914Z",
-  "contentHash": "1422f235b3674f8047546ca1974f7b4a85c7199f3a18bd51a31ce6c048a04a86",
+  "updatedAt": "2026-10-15T09:55:02.142Z",
+  "contentHash": "8e57fecfa492326f58712870063a2d51e94a4707053fbf693c0698450cedc9a0",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-13T23:59:59.000Z",
+      "updatedAt": "2026-10-14T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-14T17:41:52.781Z",
+      "updatedAt": "2026-10-15T05:23:55.314Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T16:01:15.871Z",
+      "updatedAt": "2026-10-14T20:59:19.985Z",
       "keyFacts": 0
     }
   ],
@@ -33,77 +33,77 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Sauverny, settimana conclusa: 13 ottobre 2026"
+          "note": "Sauverny, settimana conclusa: 14 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "18",
-          "note": "segnalazioni aggiornate: 14 ottobre 2026"
+          "note": "segnalazioni aggiornate: 15 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "6",
-          "note": "segnalazioni aggiornate: 14 ottobre 2026"
+          "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 7 ottobre 2026 – 13 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 8 ottobre 2026 – 14 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Sauverny",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/sauverny/oggi/"
             },
             {
               "label": "Hermance",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/hermance/oggi/"
             },
             {
               "label": "Anières",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/anieres/oggi/"
             },
             {
               "label": "Landecy",
-              "value": "0,7 min",
-              "detail": "47 rilevazioni",
+              "value": "0,6 min",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/landecy/oggi/"
             },
             {
               "label": "Moillesulaz",
-              "value": "1,4 min",
-              "detail": "47 rilevazioni",
+              "value": "1,1 min",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/moillesulaz/oggi/"
             },
             {
               "label": "Thônex-Vallard (Autoroute Blanche)",
-              "value": "1,8 min",
-              "detail": "47 rilevazioni",
+              "value": "1,4 min",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/thonex-vallard/oggi/"
             },
             {
               "label": "Meyrin / CERN",
-              "value": "1,9 min",
-              "detail": "47 rilevazioni",
+              "value": "1,7 min",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/meyrin-cern/oggi/"
             },
             {
               "label": "Perly (Perly-Certoux)",
               "value": "2,4 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/perly/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-13T23:59:59.000Z"
+          "updatedAt": "2026-10-14T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -121,12 +121,6 @@
               "value": "Chiusura",
               "detail": "fine prevista: 6 novembre 2026",
               "date": "2026-09-09T05:36:00.000Z"
-            },
-            {
-              "label": "A1 Lausanne -> Genève Svincolo autostradale Vernier Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 5.0",
-              "value": "Chiusura",
-              "detail": "fine prevista: 5 novembre 2026",
-              "date": "2026-09-09T05:37:00.000Z"
             },
             {
               "label": "A1 Genève -> Lausanne Svincolo autostradale Genève Aéroport Situazione: raccordo autostradale chiuso in entrata cantiere",
@@ -157,10 +151,16 @@
               "value": "Chiusura",
               "detail": "fine prevista: 27 ottobre 2026",
               "date": "2026-09-24T08:11:00.000Z"
+            },
+            {
+              "label": "A1 Genève -> Lausanne tra Svincolo autostradale Genève Aéroport E Svincolo autostradale Versoix Situazione: chiusa cantiere, lunghezza [km] 2.8",
+              "value": "Chiusura",
+              "detail": "fine prevista: 29 ottobre 2026",
+              "date": "2026-09-24T08:12:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-14T17:41:52.781Z"
+          "updatedAt": "2026-10-15T05:23:55.314Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -198,7 +198,7 @@
               "url": "https://www.ge.ch/node/41839"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
@@ -257,7 +257,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-15T03:26:26.914Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "en": {
       "canton": "GE",
@@ -268,77 +268,77 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Sauverny, week ending 13 October 2026"
+          "note": "Sauverny, week ending 14 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "18",
-          "note": "reports as of 14 October 2026"
+          "note": "reports as of 15 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "6",
-          "note": "reports as of 14 October 2026"
+          "note": "reports as of 15 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 7 October 2026 to 13 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 8 October 2026 to 14 October 2026, fastest first.",
           "items": [
             {
               "label": "Sauverny",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/sauverny/today/"
             },
             {
               "label": "Hermance",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/hermance/today/"
             },
             {
               "label": "Anières",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/anieres/today/"
             },
             {
               "label": "Landecy",
-              "value": "0.7 min",
-              "detail": "47 readings",
+              "value": "0.6 min",
+              "detail": "48 readings",
               "url": "/en/border-wait/landecy/today/"
             },
             {
               "label": "Moillesulaz",
-              "value": "1.4 min",
-              "detail": "47 readings",
+              "value": "1.1 min",
+              "detail": "48 readings",
               "url": "/en/border-wait/moillesulaz/today/"
             },
             {
               "label": "Thônex-Vallard (Autoroute Blanche)",
-              "value": "1.8 min",
-              "detail": "47 readings",
+              "value": "1.4 min",
+              "detail": "48 readings",
               "url": "/en/border-wait/thonex-vallard/today/"
             },
             {
               "label": "Meyrin / CERN",
-              "value": "1.9 min",
-              "detail": "47 readings",
+              "value": "1.7 min",
+              "detail": "48 readings",
               "url": "/en/border-wait/meyrin-cern/today/"
             },
             {
               "label": "Perly (Perly-Certoux)",
               "value": "2.4 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/perly/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-13T23:59:59.000Z"
+          "updatedAt": "2026-10-14T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -356,12 +356,6 @@
               "value": "Closure",
               "detail": "until 6 November 2026",
               "date": "2026-09-09T05:36:00.000Z"
-            },
-            {
-              "label": "A1 Lausanne -> Genève Svincolo autostradale Vernier Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 5.0",
-              "value": "Closure",
-              "detail": "until 5 November 2026",
-              "date": "2026-09-09T05:37:00.000Z"
             },
             {
               "label": "A1 Genève -> Lausanne Svincolo autostradale Genève Aéroport Situazione: raccordo autostradale chiuso in entrata cantiere",
@@ -392,10 +386,16 @@
               "value": "Closure",
               "detail": "until 27 October 2026",
               "date": "2026-09-24T08:11:00.000Z"
+            },
+            {
+              "label": "A1 Genève -> Lausanne tra Svincolo autostradale Genève Aéroport E Svincolo autostradale Versoix Situazione: chiusa cantiere, lunghezza [km] 2.8",
+              "value": "Closure",
+              "detail": "until 29 October 2026",
+              "date": "2026-09-24T08:12:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-14T17:41:52.781Z"
+          "updatedAt": "2026-10-15T05:23:55.314Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -433,7 +433,7 @@
               "url": "https://www.ge.ch/node/41839"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
@@ -492,7 +492,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-15T03:26:26.914Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "de": {
       "canton": "GE",
@@ -503,77 +503,77 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Sauverny, Woche bis 13. Oktober 2026"
+          "note": "Sauverny, Woche bis 14. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "18",
-          "note": "Meldungen vom 14. Oktober 2026"
+          "note": "Meldungen vom 15. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "6",
-          "note": "Meldungen vom 14. Oktober 2026"
+          "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 7. Oktober 2026 bis 13. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 8. Oktober 2026 bis 14. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Sauverny",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/sauverny/heute/"
             },
             {
               "label": "Hermance",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/hermance/heute/"
             },
             {
               "label": "Anières",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/anieres/heute/"
             },
             {
               "label": "Landecy",
-              "value": "0.7 Min.",
-              "detail": "47 Messungen",
+              "value": "0.6 Min.",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/landecy/heute/"
             },
             {
               "label": "Moillesulaz",
-              "value": "1.4 Min.",
-              "detail": "47 Messungen",
+              "value": "1.1 Min.",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/moillesulaz/heute/"
             },
             {
               "label": "Thônex-Vallard (Autoroute Blanche)",
-              "value": "1.8 Min.",
-              "detail": "47 Messungen",
+              "value": "1.4 Min.",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/thonex-vallard/heute/"
             },
             {
               "label": "Meyrin / CERN",
-              "value": "1.9 Min.",
-              "detail": "47 Messungen",
+              "value": "1.7 Min.",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/meyrin-cern/heute/"
             },
             {
               "label": "Perly (Perly-Certoux)",
               "value": "2.4 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/perly/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-13T23:59:59.000Z"
+          "updatedAt": "2026-10-14T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -591,12 +591,6 @@
               "value": "Sperrung",
               "detail": "bis 6. November 2026",
               "date": "2026-09-09T05:36:00.000Z"
-            },
-            {
-              "label": "A1 Lausanne -> Genf Anschluss Vernier Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 5.0",
-              "value": "Sperrung",
-              "detail": "bis 5. November 2026",
-              "date": "2026-09-09T05:37:00.000Z"
             },
             {
               "label": "A1 Genf -> Lausanne Anschluss Flughafen Genf Sachlage: Einfahrt gesperrt Baustelle",
@@ -627,10 +621,16 @@
               "value": "Sperrung",
               "detail": "bis 27. Oktober 2026",
               "date": "2026-09-24T08:11:00.000Z"
+            },
+            {
+              "label": "A1 Genf -> Lausanne zwischen Anschluss Flughafen Genf und Anschluss Versoix Sachlage: Strecke gesperrt Baustelle, Länge [km] 2.8",
+              "value": "Sperrung",
+              "detail": "bis 29. Oktober 2026",
+              "date": "2026-09-24T08:12:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-14T17:41:52.781Z"
+          "updatedAt": "2026-10-15T05:23:55.314Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -668,7 +668,7 @@
               "url": "https://www.ge.ch/node/41839"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
@@ -727,7 +727,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-15T03:26:26.914Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "fr": {
       "canton": "GE",
@@ -738,77 +738,77 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Sauverny, semaine jusqu’au 13 octobre 2026"
+          "note": "Sauverny, semaine jusqu’au 14 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "18",
-          "note": "signalements au 14 octobre 2026"
+          "note": "signalements au 15 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "6",
-          "note": "signalements au 14 octobre 2026"
+          "note": "signalements au 15 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 7 octobre 2026 au 13 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 8 octobre 2026 au 14 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Sauverny",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/sauverny/aujourd-hui/"
             },
             {
               "label": "Hermance",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/hermance/aujourd-hui/"
             },
             {
               "label": "Anières",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/anieres/aujourd-hui/"
             },
             {
               "label": "Landecy",
-              "value": "0,7 min",
-              "detail": "47 relevés",
+              "value": "0,6 min",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/landecy/aujourd-hui/"
             },
             {
               "label": "Moillesulaz",
-              "value": "1,4 min",
-              "detail": "47 relevés",
+              "value": "1,1 min",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/moillesulaz/aujourd-hui/"
             },
             {
               "label": "Thônex-Vallard (Autoroute Blanche)",
-              "value": "1,8 min",
-              "detail": "47 relevés",
+              "value": "1,4 min",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/thonex-vallard/aujourd-hui/"
             },
             {
               "label": "Meyrin / CERN",
-              "value": "1,9 min",
-              "detail": "47 relevés",
+              "value": "1,7 min",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/meyrin-cern/aujourd-hui/"
             },
             {
               "label": "Perly (Perly-Certoux)",
               "value": "2,4 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/perly/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-13T23:59:59.000Z"
+          "updatedAt": "2026-10-14T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -826,12 +826,6 @@
               "value": "Fermeture",
               "detail": "jusqu’au 6 novembre 2026",
               "date": "2026-09-09T05:36:00.000Z"
-            },
-            {
-              "label": "A1 Lausanne -> Genève Jonction autoroutière Vernier Situation: entrée fermée travaux, longueur [km] 5.0",
-              "value": "Fermeture",
-              "detail": "jusqu’au 5 novembre 2026",
-              "date": "2026-09-09T05:37:00.000Z"
             },
             {
               "label": "A1 Genève -> Lausanne Jonction autoroutière Aéroport de Genève Situation: entrée fermée travaux",
@@ -862,10 +856,16 @@
               "value": "Fermeture",
               "detail": "jusqu’au 27 octobre 2026",
               "date": "2026-09-24T08:11:00.000Z"
+            },
+            {
+              "label": "A1 Genève -> Lausanne entre Jonction autoroutière Aéroport de Genève et Jonction autoroutière Versoix Situation: fermé travaux, longueur [km] 2.8",
+              "value": "Fermeture",
+              "detail": "jusqu’au 29 octobre 2026",
+              "date": "2026-09-24T08:12:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-14T17:41:52.781Z"
+          "updatedAt": "2026-10-15T05:23:55.314Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -903,7 +903,7 @@
               "url": "https://www.ge.ch/node/41839"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
@@ -962,7 +962,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-15T03:26:26.914Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     }
   }
 }

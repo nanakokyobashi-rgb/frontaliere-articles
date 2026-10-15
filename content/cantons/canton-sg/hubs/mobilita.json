@@ -4,22 +4,22 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T13:00:39.075Z",
-  "contentHash": "9c91201c7ca8b576422bea1b09de0387b20c50cd9ce27328ac93ad52b71a2155",
+  "updatedAt": "2026-10-15T09:55:02.142Z",
+  "contentHash": "0d15952531f9ca27cac3fc689739d08dfb015b584e0739815d791afc1cf46473",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-13T23:59:59.000Z",
+      "updatedAt": "2026-10-14T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-14T05:32:06.894Z",
+      "updatedAt": "2026-10-15T05:23:55.314Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T20:59:19.985Z",
       "keyFacts": 0
     }
   ],
@@ -33,77 +33,77 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Montlingen-Koblach, settimana conclusa: 13 ottobre 2026"
+          "note": "Montlingen-Koblach, settimana conclusa: 14 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "11",
-          "note": "segnalazioni aggiornate: 14 ottobre 2026"
+          "note": "segnalazioni aggiornate: 15 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "15",
-          "note": "segnalazioni aggiornate: 14 ottobre 2026"
+          "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 7 ottobre 2026 – 13 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 8 ottobre 2026 – 14 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Montlingen-Koblach",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/montlingen-koblach/oggi/"
             },
             {
               "label": "Rheineck-Gaißau",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/rheineck-gai-au/oggi/"
-            },
-            {
-              "label": "Sevelen-Vaduz",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/sevelen-vaduz/oggi/"
-            },
-            {
-              "label": "Kriessern-Mäder",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/kriessern-mader/oggi/"
             },
             {
               "label": "Salez-Ruggell",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/salez-ruggell/oggi/"
             },
             {
-              "label": "Widnau-Lustenau (Wiesenrain)",
+              "label": "Sevelen-Vaduz",
               "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/widnau-lustenau/oggi/"
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/sevelen-vaduz/oggi/"
             },
             {
               "label": "Trübbach-Balzers",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/trubbach-balzers/oggi/"
             },
             {
-              "label": "Rüthi-Meiningen",
+              "label": "Widnau-Lustenau (Wiesenrain)",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/widnau-lustenau/oggi/"
+            },
+            {
+              "label": "Kriessern-Mäder",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/kriessern-mader/oggi/"
+            },
+            {
+              "label": "Buchs (SG)-Schaan",
               "value": "0,1 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/ruthi-meiningen/oggi/"
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/buchs-schaan/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-13T23:59:59.000Z"
+          "updatedAt": "2026-10-14T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -160,7 +160,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-15T05:23:55.314Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -198,7 +198,7 @@
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/09/st-galler-regierungsraetin-wird-praesidentin-der-bpuk.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
@@ -255,7 +255,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T13:00:39.075Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "en": {
       "canton": "SG",
@@ -266,77 +266,77 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Montlingen-Koblach, week ending 13 October 2026"
+          "note": "Montlingen-Koblach, week ending 14 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "11",
-          "note": "reports as of 14 October 2026"
+          "note": "reports as of 15 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "15",
-          "note": "reports as of 14 October 2026"
+          "note": "reports as of 15 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 7 October 2026 to 13 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 8 October 2026 to 14 October 2026, fastest first.",
           "items": [
             {
               "label": "Montlingen-Koblach",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/montlingen-koblach/today/"
             },
             {
               "label": "Rheineck-Gaißau",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/rheineck-gai-au/today/"
-            },
-            {
-              "label": "Sevelen-Vaduz",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/sevelen-vaduz/today/"
-            },
-            {
-              "label": "Kriessern-Mäder",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/kriessern-mader/today/"
             },
             {
               "label": "Salez-Ruggell",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/salez-ruggell/today/"
             },
             {
-              "label": "Widnau-Lustenau (Wiesenrain)",
+              "label": "Sevelen-Vaduz",
               "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/widnau-lustenau/today/"
+              "detail": "48 readings",
+              "url": "/en/border-wait/sevelen-vaduz/today/"
             },
             {
               "label": "Trübbach-Balzers",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/trubbach-balzers/today/"
             },
             {
-              "label": "Rüthi-Meiningen",
+              "label": "Widnau-Lustenau (Wiesenrain)",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/widnau-lustenau/today/"
+            },
+            {
+              "label": "Kriessern-Mäder",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/kriessern-mader/today/"
+            },
+            {
+              "label": "Buchs (SG)-Schaan",
               "value": "0.1 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/ruthi-meiningen/today/"
+              "detail": "48 readings",
+              "url": "/en/border-wait/buchs-schaan/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-13T23:59:59.000Z"
+          "updatedAt": "2026-10-14T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -393,7 +393,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-15T05:23:55.314Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -431,7 +431,7 @@
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/09/st-galler-regierungsraetin-wird-praesidentin-der-bpuk.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
@@ -487,7 +487,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T13:00:39.075Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "de": {
       "canton": "SG",
@@ -498,77 +498,77 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Montlingen-Koblach, Woche bis 13. Oktober 2026"
+          "note": "Montlingen-Koblach, Woche bis 14. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "11",
-          "note": "Meldungen vom 14. Oktober 2026"
+          "note": "Meldungen vom 15. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "15",
-          "note": "Meldungen vom 14. Oktober 2026"
+          "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 7. Oktober 2026 bis 13. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 8. Oktober 2026 bis 14. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Montlingen-Koblach",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/montlingen-koblach/heute/"
             },
             {
               "label": "Rheineck-Gaißau",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/rheineck-gai-au/heute/"
-            },
-            {
-              "label": "Sevelen-Vaduz",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/sevelen-vaduz/heute/"
-            },
-            {
-              "label": "Kriessern-Mäder",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/kriessern-mader/heute/"
             },
             {
               "label": "Salez-Ruggell",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/salez-ruggell/heute/"
             },
             {
-              "label": "Widnau-Lustenau (Wiesenrain)",
+              "label": "Sevelen-Vaduz",
               "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/widnau-lustenau/heute/"
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/sevelen-vaduz/heute/"
             },
             {
               "label": "Trübbach-Balzers",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/trubbach-balzers/heute/"
             },
             {
-              "label": "Rüthi-Meiningen",
+              "label": "Widnau-Lustenau (Wiesenrain)",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/widnau-lustenau/heute/"
+            },
+            {
+              "label": "Kriessern-Mäder",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/kriessern-mader/heute/"
+            },
+            {
+              "label": "Buchs (SG)-Schaan",
               "value": "0.1 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/ruthi-meiningen/heute/"
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/buchs-schaan/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-13T23:59:59.000Z"
+          "updatedAt": "2026-10-14T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -625,7 +625,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-15T05:23:55.314Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -663,7 +663,7 @@
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/09/st-galler-regierungsraetin-wird-praesidentin-der-bpuk.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
@@ -719,7 +719,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T13:00:39.075Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     },
     "fr": {
       "canton": "SG",
@@ -730,77 +730,77 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Montlingen-Koblach, semaine jusqu’au 13 octobre 2026"
+          "note": "Montlingen-Koblach, semaine jusqu’au 14 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "11",
-          "note": "signalements au 14 octobre 2026"
+          "note": "signalements au 15 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "15",
-          "note": "signalements au 14 octobre 2026"
+          "note": "signalements au 15 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 7 octobre 2026 au 13 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 8 octobre 2026 au 14 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Montlingen-Koblach",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/montlingen-koblach/aujourd-hui/"
             },
             {
               "label": "Rheineck-Gaißau",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/rheineck-gai-au/aujourd-hui/"
-            },
-            {
-              "label": "Sevelen-Vaduz",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/sevelen-vaduz/aujourd-hui/"
-            },
-            {
-              "label": "Kriessern-Mäder",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/kriessern-mader/aujourd-hui/"
             },
             {
               "label": "Salez-Ruggell",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/salez-ruggell/aujourd-hui/"
             },
             {
-              "label": "Widnau-Lustenau (Wiesenrain)",
+              "label": "Sevelen-Vaduz",
               "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/widnau-lustenau/aujourd-hui/"
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/sevelen-vaduz/aujourd-hui/"
             },
             {
               "label": "Trübbach-Balzers",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/trubbach-balzers/aujourd-hui/"
             },
             {
-              "label": "Rüthi-Meiningen",
+              "label": "Widnau-Lustenau (Wiesenrain)",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/widnau-lustenau/aujourd-hui/"
+            },
+            {
+              "label": "Kriessern-Mäder",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/kriessern-mader/aujourd-hui/"
+            },
+            {
+              "label": "Buchs (SG)-Schaan",
               "value": "0,1 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/ruthi-meiningen/aujourd-hui/"
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/buchs-schaan/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-13T23:59:59.000Z"
+          "updatedAt": "2026-10-14T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -857,7 +857,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-15T05:23:55.314Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -895,7 +895,7 @@
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/09/st-galler-regierungsraetin-wird-praesidentin-der-bpuk.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T20:59:19.985Z"
         }
       ],
       "curatedArticles": [
@@ -952,7 +952,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T13:00:39.075Z"
+      "updatedAt": "2026-10-15T09:55:02.142Z"
     }
   }
 }
