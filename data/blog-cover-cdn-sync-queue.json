@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-cormann-visita-berna.webp",
+      "sha256": "361a1216dd5d72ab5b9e727629b4ddc480cf1c6284f3467c61643f85a68cee72"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-cormann-visita-berna-480w.webp",
+      "sha256": "de5b70d72e3b6c69f50e36eef00ce673fecaf3b2dd6f1d48d7d52585310ea4e8"
+    }
+  ]
 }
