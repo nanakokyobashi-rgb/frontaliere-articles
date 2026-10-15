@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T22:03:43.389Z",
-  "contentHash": "ce765f9610a0a9d294edd5acb99b1baa4c75728751c0d9c3e1b45a53f040eedc",
+  "updatedAt": "2026-10-15T01:40:56.447Z",
+  "contentHash": "d87d2bb747a999b66d5b6076b18c04720e8cca5be337a4a73940f738296bb3b0",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T10:37:16.619Z",
+      "updatedAt": "2026-10-14T16:01:15.871Z",
       "keyFacts": 0
     }
   ],
@@ -128,6 +128,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
+              "date": "2026-10-14T13:11:34.000Z",
+              "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
+            },
+            {
               "label": "Lieblingsmusik am Patienten: USZ-Studie zeigt Potenzial zur Schmerzreduktion bei medizinischen Eingriffen",
               "date": "2026-10-14T05:28:41.000Z",
               "url": "https://www.usz.ch/lieblingsmusik-am-patienten-usz-studie-zeigt-potenzial-zur-schmerzreduktion-bei-medizinischen-eingriffen/"
@@ -151,14 +156,9 @@
               "label": "Aussergewöhnliche Pflege am USZ",
               "date": "2026-10-06T19:43:03.000Z",
               "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
-            },
-            {
-              "label": "Arbeitslosenquote bleibt im September stabil",
-              "date": "2026-10-06",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/arbeitslosenquote-bleibt-im-september-stabil.html"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -237,7 +237,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T22:03:43.389Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     },
     "en": {
       "canton": "ZH",
@@ -338,6 +338,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
+              "date": "2026-10-14T13:11:34.000Z",
+              "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
+            },
+            {
               "label": "Lieblingsmusik am Patienten: USZ-Studie zeigt Potenzial zur Schmerzreduktion bei medizinischen Eingriffen",
               "date": "2026-10-14T05:28:41.000Z",
               "url": "https://www.usz.ch/lieblingsmusik-am-patienten-usz-studie-zeigt-potenzial-zur-schmerzreduktion-bei-medizinischen-eingriffen/"
@@ -361,14 +366,9 @@
               "label": "Aussergewöhnliche Pflege am USZ",
               "date": "2026-10-06T19:43:03.000Z",
               "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
-            },
-            {
-              "label": "Arbeitslosenquote bleibt im September stabil",
-              "date": "2026-10-06",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/arbeitslosenquote-bleibt-im-september-stabil.html"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -443,7 +443,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T22:03:43.389Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     },
     "de": {
       "canton": "ZH",
@@ -544,6 +544,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
+              "date": "2026-10-14T13:11:34.000Z",
+              "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
+            },
+            {
               "label": "Lieblingsmusik am Patienten: USZ-Studie zeigt Potenzial zur Schmerzreduktion bei medizinischen Eingriffen",
               "date": "2026-10-14T05:28:41.000Z",
               "url": "https://www.usz.ch/lieblingsmusik-am-patienten-usz-studie-zeigt-potenzial-zur-schmerzreduktion-bei-medizinischen-eingriffen/"
@@ -567,14 +572,9 @@
               "label": "Aussergewöhnliche Pflege am USZ",
               "date": "2026-10-06T19:43:03.000Z",
               "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
-            },
-            {
-              "label": "Arbeitslosenquote bleibt im September stabil",
-              "date": "2026-10-06",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/arbeitslosenquote-bleibt-im-september-stabil.html"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -649,7 +649,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T22:03:43.389Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     },
     "fr": {
       "canton": "ZH",
@@ -750,6 +750,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
+              "date": "2026-10-14T13:11:34.000Z",
+              "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
+            },
+            {
               "label": "Lieblingsmusik am Patienten: USZ-Studie zeigt Potenzial zur Schmerzreduktion bei medizinischen Eingriffen",
               "date": "2026-10-14T05:28:41.000Z",
               "url": "https://www.usz.ch/lieblingsmusik-am-patienten-usz-studie-zeigt-potenzial-zur-schmerzreduktion-bei-medizinischen-eingriffen/"
@@ -773,14 +778,9 @@
               "label": "Aussergewöhnliche Pflege am USZ",
               "date": "2026-10-06T19:43:03.000Z",
               "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
-            },
-            {
-              "label": "Arbeitslosenquote bleibt im September stabil",
-              "date": "2026-10-06",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/arbeitslosenquote-bleibt-im-september-stabil.html"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -851,7 +851,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T22:03:43.389Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     }
   }
 }

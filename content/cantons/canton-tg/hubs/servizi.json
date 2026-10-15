@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T20:08:23.890Z",
-  "contentHash": "47f2dff0e8de314584608f19d764450983a8cdcd44226b9b51679e578028f19d",
+  "updatedAt": "2026-10-15T01:40:56.447Z",
+  "contentHash": "941d3484f72186d33a6a2a094abcdb71b2af805ae470b3c98bca844ff0875a40",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-14T11:56:34.678Z",
+      "updatedAt": "2026-10-14T17:14:18.595Z",
       "keyFacts": 1
     },
     {
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T10:37:16.619Z",
+      "updatedAt": "2026-10-14T16:01:15.871Z",
       "keyFacts": 0
     }
   ],
@@ -43,7 +43,7 @@
         },
         {
           "label": "Aste di targhe in corso",
-          "value": "39",
+          "value": "41",
           "note": "offerta mediana 600 CHF"
         }
       ],
@@ -83,16 +83,16 @@
               "url": "https://www.auktion.tg.ch/de/auction/109683"
             },
             {
-              "label": "TG322223",
-              "value": "700 CHF",
+              "label": "TG533335",
+              "value": "730 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-21T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109682"
+              "url": "https://www.auktion.tg.ch/de/auction/109685"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-14T11:56:34.678Z"
+          "updatedAt": "2026-10-14T17:14:18.595Z"
         },
         {
           "id": "meteo",
@@ -113,6 +113,11 @@
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "SchmerzDialogThurgau 2026: Neue Wege in der modernen Schmerzmedizin",
+              "date": "2026-10-14",
+              "url": "https://www.stgag.ch/news/detail/2026/10/14/schmerzdialogthurgau-2026-neue-wege-in-der-modernen-schmerzmedizin/"
+            },
             {
               "label": "Tag der offenen Tür Klinik St. Katharinental",
               "date": "2026-10-14",
@@ -137,14 +142,9 @@
               "label": "thurmed sichert sich Option auf Mehrheitsbeteiligung am GZO Spital Wetzikon",
               "date": "2026-09-02",
               "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
-            },
-            {
-              "label": "Reconstructive Robotic Urology – erfolgreiche Premiere der ersten Masterclass in der Urologie Spital...",
-              "date": "2026-08-27",
-              "url": "https://www.stgag.ch/news/detail/2026/08/27/reconstructive-robotic-urology-erfolgreiche-premiere-der-ersten-masterclass-in-der-urologie-spital-thurgau-ag/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -217,7 +217,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     },
     "en": {
       "canton": "TG",
@@ -233,7 +233,7 @@
         },
         {
           "label": "Plate auctions running",
-          "value": "39",
+          "value": "41",
           "note": "typical bid 600 CHF"
         }
       ],
@@ -273,16 +273,16 @@
               "url": "https://www.auktion.tg.ch/de/auction/109683"
             },
             {
-              "label": "TG322223",
-              "value": "700 CHF",
+              "label": "TG533335",
+              "value": "730 CHF",
               "detail": "current bid",
               "date": "2026-10-21T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109682"
+              "url": "https://www.auktion.tg.ch/de/auction/109685"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-14T11:56:34.678Z"
+          "updatedAt": "2026-10-14T17:14:18.595Z"
         },
         {
           "id": "meteo",
@@ -303,6 +303,11 @@
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "SchmerzDialogThurgau 2026: Neue Wege in der modernen Schmerzmedizin",
+              "date": "2026-10-14",
+              "url": "https://www.stgag.ch/news/detail/2026/10/14/schmerzdialogthurgau-2026-neue-wege-in-der-modernen-schmerzmedizin/"
+            },
             {
               "label": "Tag der offenen Tür Klinik St. Katharinental",
               "date": "2026-10-14",
@@ -327,14 +332,9 @@
               "label": "thurmed sichert sich Option auf Mehrheitsbeteiligung am GZO Spital Wetzikon",
               "date": "2026-09-02",
               "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
-            },
-            {
-              "label": "Reconstructive Robotic Urology – erfolgreiche Premiere der ersten Masterclass in der Urologie Spital...",
-              "date": "2026-08-27",
-              "url": "https://www.stgag.ch/news/detail/2026/08/27/reconstructive-robotic-urology-erfolgreiche-premiere-der-ersten-masterclass-in-der-urologie-spital-thurgau-ag/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -403,7 +403,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     },
     "de": {
       "canton": "TG",
@@ -419,7 +419,7 @@
         },
         {
           "label": "Laufende Kontrollschild-Auktionen",
-          "value": "39",
+          "value": "41",
           "note": "mittleres Gebot 600 CHF"
         }
       ],
@@ -459,16 +459,16 @@
               "url": "https://www.auktion.tg.ch/de/auction/109683"
             },
             {
-              "label": "TG322223",
-              "value": "700 CHF",
+              "label": "TG533335",
+              "value": "730 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-21T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109682"
+              "url": "https://www.auktion.tg.ch/de/auction/109685"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-14T11:56:34.678Z"
+          "updatedAt": "2026-10-14T17:14:18.595Z"
         },
         {
           "id": "meteo",
@@ -489,6 +489,11 @@
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "SchmerzDialogThurgau 2026: Neue Wege in der modernen Schmerzmedizin",
+              "date": "2026-10-14",
+              "url": "https://www.stgag.ch/news/detail/2026/10/14/schmerzdialogthurgau-2026-neue-wege-in-der-modernen-schmerzmedizin/"
+            },
             {
               "label": "Tag der offenen Tür Klinik St. Katharinental",
               "date": "2026-10-14",
@@ -513,14 +518,9 @@
               "label": "thurmed sichert sich Option auf Mehrheitsbeteiligung am GZO Spital Wetzikon",
               "date": "2026-09-02",
               "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
-            },
-            {
-              "label": "Reconstructive Robotic Urology – erfolgreiche Premiere der ersten Masterclass in der Urologie Spital...",
-              "date": "2026-08-27",
-              "url": "https://www.stgag.ch/news/detail/2026/08/27/reconstructive-robotic-urology-erfolgreiche-premiere-der-ersten-masterclass-in-der-urologie-spital-thurgau-ag/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -589,7 +589,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     },
     "fr": {
       "canton": "TG",
@@ -605,7 +605,7 @@
         },
         {
           "label": "Enchères de plaques en cours",
-          "value": "39",
+          "value": "41",
           "note": "offre centrale 600 CHF"
         }
       ],
@@ -645,16 +645,16 @@
               "url": "https://www.auktion.tg.ch/de/auction/109683"
             },
             {
-              "label": "TG322223",
-              "value": "700 CHF",
+              "label": "TG533335",
+              "value": "730 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-21T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109682"
+              "url": "https://www.auktion.tg.ch/de/auction/109685"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-14T11:56:34.678Z"
+          "updatedAt": "2026-10-14T17:14:18.595Z"
         },
         {
           "id": "meteo",
@@ -675,6 +675,11 @@
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "SchmerzDialogThurgau 2026: Neue Wege in der modernen Schmerzmedizin",
+              "date": "2026-10-14",
+              "url": "https://www.stgag.ch/news/detail/2026/10/14/schmerzdialogthurgau-2026-neue-wege-in-der-modernen-schmerzmedizin/"
+            },
             {
               "label": "Tag der offenen Tür Klinik St. Katharinental",
               "date": "2026-10-14",
@@ -699,14 +704,9 @@
               "label": "thurmed sichert sich Option auf Mehrheitsbeteiligung am GZO Spital Wetzikon",
               "date": "2026-09-02",
               "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
-            },
-            {
-              "label": "Reconstructive Robotic Urology – erfolgreiche Premiere der ersten Masterclass in der Urologie Spital...",
-              "date": "2026-08-27",
-              "url": "https://www.stgag.ch/news/detail/2026/08/27/reconstructive-robotic-urology-erfolgreiche-premiere-der-ersten-masterclass-in-der-urologie-spital-thurgau-ag/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -771,7 +771,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     }
   }
 }

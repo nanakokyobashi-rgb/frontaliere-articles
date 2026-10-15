@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T20:08:23.890Z",
-  "contentHash": "f24712a80aadd365a804ceecc8b7068837c79e9279316b967fa898a27b4fb696",
+  "updatedAt": "2026-10-15T01:40:56.447Z",
+  "contentHash": "72be6365f7a9ffef76b0fc732ddef852d1687cb42f7b935c9b6093b5c27ee158",
   "blocks": [
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T10:37:16.619Z",
+      "updatedAt": "2026-10-14T16:01:15.871Z",
       "keyFacts": 0
     }
   ],
@@ -37,6 +37,11 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16182/title/totalsperrung-der-alten-kerenzerstrasse-in-m%C3%BChlehorn-infolge-belagsarbeiten"
             },
             {
+              "label": "Verkehrseinschränkung Klöntalerstrasse, Abschnitt Staldengarten–Bützi",
+              "date": "2026-10-14",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16183/title/verkehrseinschr%C3%A4nkung-kl%C3%B6ntalerstrasse-abschnitt-staldengarten-b%C3%BCtzi"
+            },
+            {
               "label": "Wanderwegsperrung Äschen - Niederseewald Näfels",
               "date": "2026-10-02",
               "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30267"
@@ -50,14 +55,9 @@
               "label": "Grundstein für die Erweiterung der Berufsfachschule Ziegelbrücke gelegt",
               "date": "2026-10-02",
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
-            },
-            {
-              "label": "Filzbach: Baustart bei der Bushaltestelle Römerturm",
-              "date": "2026-10-01",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16100/title/filzbach-baustart-bei-der-bushaltestelle-r%C3%B6merturm"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -90,7 +90,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     },
     "en": {
       "canton": "GL",
@@ -115,6 +115,11 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16182/title/totalsperrung-der-alten-kerenzerstrasse-in-m%C3%BChlehorn-infolge-belagsarbeiten"
             },
             {
+              "label": "Verkehrseinschränkung Klöntalerstrasse, Abschnitt Staldengarten–Bützi",
+              "date": "2026-10-14",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16183/title/verkehrseinschr%C3%A4nkung-kl%C3%B6ntalerstrasse-abschnitt-staldengarten-b%C3%BCtzi"
+            },
+            {
               "label": "Wanderwegsperrung Äschen - Niederseewald Näfels",
               "date": "2026-10-02",
               "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30267"
@@ -128,14 +133,9 @@
               "label": "Grundstein für die Erweiterung der Berufsfachschule Ziegelbrücke gelegt",
               "date": "2026-10-02",
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
-            },
-            {
-              "label": "Filzbach: Baustart bei der Bushaltestelle Römerturm",
-              "date": "2026-10-01",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16100/title/filzbach-baustart-bei-der-bushaltestelle-r%C3%B6merturm"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -168,7 +168,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     },
     "de": {
       "canton": "GL",
@@ -193,6 +193,11 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16182/title/totalsperrung-der-alten-kerenzerstrasse-in-m%C3%BChlehorn-infolge-belagsarbeiten"
             },
             {
+              "label": "Verkehrseinschränkung Klöntalerstrasse, Abschnitt Staldengarten–Bützi",
+              "date": "2026-10-14",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16183/title/verkehrseinschr%C3%A4nkung-kl%C3%B6ntalerstrasse-abschnitt-staldengarten-b%C3%BCtzi"
+            },
+            {
               "label": "Wanderwegsperrung Äschen - Niederseewald Näfels",
               "date": "2026-10-02",
               "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30267"
@@ -206,14 +211,9 @@
               "label": "Grundstein für die Erweiterung der Berufsfachschule Ziegelbrücke gelegt",
               "date": "2026-10-02",
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
-            },
-            {
-              "label": "Filzbach: Baustart bei der Bushaltestelle Römerturm",
-              "date": "2026-10-01",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16100/title/filzbach-baustart-bei-der-bushaltestelle-r%C3%B6merturm"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -246,7 +246,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     },
     "fr": {
       "canton": "GL",
@@ -271,6 +271,11 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16182/title/totalsperrung-der-alten-kerenzerstrasse-in-m%C3%BChlehorn-infolge-belagsarbeiten"
             },
             {
+              "label": "Verkehrseinschränkung Klöntalerstrasse, Abschnitt Staldengarten–Bützi",
+              "date": "2026-10-14",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16183/title/verkehrseinschr%C3%A4nkung-kl%C3%B6ntalerstrasse-abschnitt-staldengarten-b%C3%BCtzi"
+            },
+            {
               "label": "Wanderwegsperrung Äschen - Niederseewald Näfels",
               "date": "2026-10-02",
               "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30267"
@@ -284,14 +289,9 @@
               "label": "Grundstein für die Erweiterung der Berufsfachschule Ziegelbrücke gelegt",
               "date": "2026-10-02",
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
-            },
-            {
-              "label": "Filzbach: Baustart bei der Bushaltestelle Römerturm",
-              "date": "2026-10-01",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16100/title/filzbach-baustart-bei-der-bushaltestelle-r%C3%B6merturm"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -324,7 +324,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     }
   }
 }

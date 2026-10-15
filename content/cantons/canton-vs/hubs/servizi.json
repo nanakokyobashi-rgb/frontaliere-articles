@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T20:08:23.890Z",
-  "contentHash": "d4d3c7661642af5fcc390520c4968e6e626114ad5999aa7e1aae5e87c1b8402f",
+  "updatedAt": "2026-10-15T01:40:56.447Z",
+  "contentHash": "71f04875165d005bdc6f09b0dd91022ffb128cf7e499805b0e6fc518526eabb1",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-14T11:56:34.678Z",
+      "updatedAt": "2026-10-14T17:14:18.595Z",
       "keyFacts": 1
     },
     {
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T10:37:16.619Z",
+      "updatedAt": "2026-10-14T16:01:15.871Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "5",
-          "note": "offerta mediana 500 CHF"
+          "note": "offerta mediana 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -75,21 +75,21 @@
           "items": [
             {
               "label": "VS111",
-              "value": "27.100 CHF",
+              "value": "30.000 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=939"
             },
             {
               "label": "VS52",
-              "value": "16.100 CHF",
+              "value": "16.200 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=938"
             },
             {
               "label": "VS559955",
-              "value": "500 CHF",
+              "value": "600 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=942"
@@ -97,7 +97,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-14T11:56:34.678Z"
+          "updatedAt": "2026-10-14T17:14:18.595Z"
         },
         {
           "id": "meteo",
@@ -149,7 +149,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -228,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     },
     "en": {
       "canton": "VS",
@@ -245,7 +245,7 @@
         {
           "label": "Plate auctions running",
           "value": "5",
-          "note": "typical bid 500 CHF"
+          "note": "typical bid 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -276,21 +276,21 @@
           "items": [
             {
               "label": "VS111",
-              "value": "27,100 CHF",
+              "value": "30,000 CHF",
               "detail": "current bid",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=939"
             },
             {
               "label": "VS52",
-              "value": "16,100 CHF",
+              "value": "16,200 CHF",
               "detail": "current bid",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=938"
             },
             {
               "label": "VS559955",
-              "value": "500 CHF",
+              "value": "600 CHF",
               "detail": "current bid",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=942"
@@ -298,7 +298,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-14T11:56:34.678Z"
+          "updatedAt": "2026-10-14T17:14:18.595Z"
         },
         {
           "id": "meteo",
@@ -350,7 +350,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -425,7 +425,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     },
     "de": {
       "canton": "VS",
@@ -442,7 +442,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "5",
-          "note": "mittleres Gebot 500 CHF"
+          "note": "mittleres Gebot 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -473,21 +473,21 @@
           "items": [
             {
               "label": "VS111",
-              "value": "27’100 CHF",
+              "value": "30’000 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=939"
             },
             {
               "label": "VS52",
-              "value": "16’100 CHF",
+              "value": "16’200 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=938"
             },
             {
               "label": "VS559955",
-              "value": "500 CHF",
+              "value": "600 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=942"
@@ -495,7 +495,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-14T11:56:34.678Z"
+          "updatedAt": "2026-10-14T17:14:18.595Z"
         },
         {
           "id": "meteo",
@@ -547,7 +547,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -622,7 +622,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     },
     "fr": {
       "canton": "VS",
@@ -639,7 +639,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "5",
-          "note": "offre centrale 500 CHF"
+          "note": "offre centrale 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -670,21 +670,21 @@
           "items": [
             {
               "label": "VS111",
-              "value": "27 100 CHF",
+              "value": "30 000 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=939"
             },
             {
               "label": "VS52",
-              "value": "16 100 CHF",
+              "value": "16 200 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=938"
             },
             {
               "label": "VS559955",
-              "value": "500 CHF",
+              "value": "600 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=942"
@@ -692,7 +692,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-14T11:56:34.678Z"
+          "updatedAt": "2026-10-14T17:14:18.595Z"
         },
         {
           "id": "meteo",
@@ -744,7 +744,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -815,7 +815,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T01:40:56.447Z"
     }
   }
 }
