@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-della-valle-lesione-varese.webp",
-      "sha256": "a3314f75a16d8007b7c5087663df1f2301fc6d1ff4cf28e094fe98a255b71b3b"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-della-valle-lesione-varese-480w.webp",
-      "sha256": "0c6ca8a10c9129224148b96aaf338e5fbadf0fcaf5216c692e180ea75249e723"
-    }
-  ]
+  "items": []
 }
