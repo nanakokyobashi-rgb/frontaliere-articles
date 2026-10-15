@@ -27871,6 +27871,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'migros-nuovo-contratto-lavoro-2027',
+    category: 'novita',
+    date: '2026-10-15T06:55:41.350Z',
+    image: '/images/blog/article-salario-minimo-ginevra-2027.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
