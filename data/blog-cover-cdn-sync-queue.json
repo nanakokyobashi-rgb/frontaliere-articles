@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-permesso-pesca-canton-berna-guida.webp",
-      "sha256": "7658cdf64b766019fb6f958759d37608e80bb767d266e4be302f83ddc7b1f167"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-permesso-pesca-canton-berna-guida-480w.webp",
-      "sha256": "841d32ee5dab4ec84435b0504f649e6230d33b57d21a6c5a3fad2ab64361e78c"
-    }
-  ]
+  "items": []
 }
