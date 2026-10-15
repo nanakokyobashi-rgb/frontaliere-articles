@@ -193,7 +193,7 @@
     {
       "path": "scripts/ci/auto-live-canton-sections.mjs",
       "mode": "corpus-only",
-      "reason": "Piano D22 per promuovere in modo idempotente una sezione cantonale da draft a live dopo articolo proprio, sei hub e bootstrap R2 verificati; il workflow apre una PR e non esiste un producer equivalente nel sito.",
+      "reason": "Piano D22 per promuovere in modo idempotente una sezione cantonale da draft a live dopo articolo proprio, sei hub e bootstrap R2 verificati; il workflow apre una PR e non esiste un producer equivalente nel sito. 2026-10-15: #2744 adotta il guard ESM canonico via realpath coerente con #2740/#2742/#2743 e aggiunge la regressione offline import/symlink in `generator/tests/auto-live-canton-sections-main-guard.test.mjs`.",
       "baseline": {
         "site": null,
         "corpus": "2964a09ec968c6c2",
