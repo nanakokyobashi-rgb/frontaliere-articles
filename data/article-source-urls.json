@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/riverlhab-il-progetto-transfrontaliero-che-punta-a-rigenerare-il-torrente-lura-e-il-suo-territorio/2668582": {
-    "articleId": "riverlhab-progetto-transfrontaliero-ticino",
-    "ts": "2026-09-02T10:32:43.319Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1947545/svizzera-attrattiva-infrastrutture-sette-ceo": {
     "articleId": "svizzera-perde-attrattiva-aziende",
     "ts": "2026-09-02T12:54:54.281Z",
@@ -2497,6 +2492,11 @@
   "https://www.ticinonews.ch/ticino/incendio-ordine-pubblico-e-maltempo-80-operatori-si-esercitano-nelle-tre-valli-444634": {
     "articleId": "operatori-emergenze-valli",
     "ts": "2026-10-15T07:26:11.488Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/tegola-pallacanestro-varese-ce-lesione-al-muscolo-per-della-valle/2708203": {
+    "articleId": "della-valle-lesione-varese",
+    "ts": "2026-10-15T08:11:51.250Z",
     "keyForm": 2
   }
 }

@@ -44512,6 +44512,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'della-valle-lesione-varese',
+ category: 'novita',
+ date: '2026-10-15T08:11:50.536Z',
+ image: '/images/blog/article-della-valle-lesione-varese.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
