@@ -8384,6 +8384,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.agevolazioni-doganali-impiego.title': 'Facilitations douanières : nouveautés à compter du 1er novembre 2026',
     'blog.article.agevolazioni-doganali-impiego.excerpt': 'Nouveautés douanières en vigueur à compter du 1er novembre 2026 Facilitations liées à la destination des marchandises Observations Tares mises à jour et R-17 Entrata publié',
     'blog.article.agevolazioni-doganali-impiego.imageAlt': 'Documents douaniers suisses et calendrier marqué du 1er novembre 2026',
+    'blog.article.svizzera-thailandia-aelss-visita-2026.title': 'La Suisse et la Thaïlande mettent en évidence des opportunités de libre-échange',
+    'blog.article.svizzera-thailandia-aelss-visita-2026.excerpt': 'Parmelin rencontre Charnvirakul à Bangkok le 15 octobre 2026 La Suisse et la Thaïlande misent sur l\'accord de libre-échange de l\'AELE La visite au Vietnam se poursuit',
+    'blog.article.svizzera-thailandia-aelss-visita-2026.imageAlt': 'Rencontre entre représentants suisses et thaïlandais à Bangkok pour discuter de l\'accord de libre échange',
 };
 
 export default blogMetaChFr;

@@ -2817,6 +2817,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'cormann-visita-berna': { it: 'cormann-visita-berna', en: 'cormann-bern-visit', de: 'cormann-bern-besuch', fr: 'visite-cormann-berne' },
  'fusione-palestre-puregym-nonstop': { it: 'fusione-palestre-puregym-nonstop', en: 'puregym-nonstop-gym-merger-switzerland', de: 'fusion-fitnessstudios-puregym-nonstop', fr: 'fusion-salles-sport-puregym-nonstop' },
  'agevolazioni-doganali-impiego': { it: 'agevolazioni-doganali-impiego', en: 'customs-use-concessions', de: 'zollerleichterungen-verwendungszweck', fr: 'allegements-douaniers-usage' },
+ 'svizzera-thailandia-aelss-visita-2026': { it: 'svizzera-thailandia-aelss-visita-2026', en: 'switzerland-and-thailand-highlight-free-trade-opportunities', de: 'schweiz-und-thailand-zeigen-chancen-fur-den-freihandel-auf', fr: 'la-suisse-et-la-thailande-mettent-en-evidence-des-opportunites-de-libre-echange' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

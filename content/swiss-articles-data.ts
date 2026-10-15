@@ -28002,6 +28002,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'svizzera-thailandia-aelss-visita-2026',
+    category: 'novita',
+    date: '2026-10-15T18:53:35.114Z',
+    image: '/images/blog/article-svizzera-partecipa-fmi-bangkok-2026.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

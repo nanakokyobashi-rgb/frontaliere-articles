@@ -8384,6 +8384,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.agevolazioni-doganali-impiego.title': 'Zollvergünstigungen: Neuigkeiten ab dem 1. November 2026',
     'blog.article.agevolazioni-doganali-impiego.excerpt': 'Ab dem 1. November 2026 geltende Zollneuerungen Vergünstigungen im Zusammenhang mit dem Verwendungszweck der Waren Tares-Anmerkungen angepasst und R-17 veröffentlicht Inkrafttreten',
     'blog.article.agevolazioni-doganali-impiego.imageAlt': 'Schweizer Zolldokumente und ein Kalender mit dem 1. November 2026',
+    'blog.article.svizzera-thailandia-aelss-visita-2026.title': 'Schweiz und Thailand zeigen Chancen für den Freihandel auf',
+    'blog.article.svizzera-thailandia-aelss-visita-2026.excerpt': 'Parmelin trifft Charnvirakul in Bangkok am 15.',
+    'blog.article.svizzera-thailandia-aelss-visita-2026.imageAlt': 'Treffen zwischen schweizerischen und thailändischen Vertretern in Bangkok zur Diskussion des Freihandelsabkommens',
 };
 
 export default blogMetaChDe;

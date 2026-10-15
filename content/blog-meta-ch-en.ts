@@ -8384,6 +8384,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.agevolazioni-doganali-impiego.title': 'Customs concessions: new developments from November 1, 2026',
     'blog.article.agevolazioni-doganali-impiego.excerpt': 'Customs updates effective from November 1, 2026 Benefits related to the intended use of goods Tares observations updated and R-17 Entry published',
     'blog.article.agevolazioni-doganali-impiego.imageAlt': 'Swiss customs documents and a calendar marked 1 November 2026',
+    'blog.article.svizzera-thailandia-aelss-visita-2026.title': 'Switzerland and Thailand highlight free trade opportunities',
+    'blog.article.svizzera-thailandia-aelss-visita-2026.excerpt': 'Parmelin meets Charnvirakul in Bangkok on October 15, 2026 Switzerland and Thailand are aiming for the EFTA free trade agreement The visit to Vietnam continues',
+    'blog.article.svizzera-thailandia-aelss-visita-2026.imageAlt': 'Meeting between Swiss and Thai representatives in Bangkok to discuss the free trade agreement',
 };
 
 export default blogMetaChEn;

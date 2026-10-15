@@ -1,9 +1,4 @@
 {
-  "https://www.seco.admin.ch/it/newnsb/nioazl9cj1f0d5qgjbkd6": {
-    "articleId": "mercato-lavoro-seco-luglio-2026",
-    "ts": "2026-09-13T01:15:50.958Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/be%3a-esercito-e-polizia-allenano-protezione-infrastrutture-critiche/92047577": {
     "articleId": "esercito-polizia-berna-droni",
     "ts": "2026-09-13T01:26:23.899Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/qfn3pdjbzeiu": {
     "articleId": "agevolazioni-doganali-impiego",
     "ts": "2026-10-15T18:35:17.198Z",
+    "keyForm": 2
+  },
+  "https://www.seco.admin.ch/it/newnsb/rmrzjka-l3sj": {
+    "articleId": "svizzera-thailandia-aelss-visita-2026",
+    "ts": "2026-10-15T18:53:35.515Z",
     "keyForm": 2
   }
 }
