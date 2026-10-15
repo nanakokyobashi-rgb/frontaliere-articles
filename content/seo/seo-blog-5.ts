@@ -108799,6 +108799,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-inaugurazione-sala-comacina-polizia': {
+    title: 'Polizia Stradale: il taglio del nastro a Sala Comacina',
+    description: 'Cerimonia venerdì 16 ottobre alle 11 Distaccamento della Polizia Stradale a Sala Comacina Attesi Salvini, Piantedosi, Molteni e Pisani Presente il sindaco',
+    keywords: 'frontalieri, ticino, svizzera, italia, polizia, stradale, taglio, nastro',
+    ogTitle: 'Polizia Stradale: il taglio del nastro a Sala Comacina',
+    ogDescription: 'Cerimonia venerdì 16 ottobre alle 11 Distaccamento della Polizia Stradale a Sala Comacina Attesi Salvini, Piantedosi, Molteni e Pisani Presente il sindaco',
+    canonicalPath: '/articoli-frontaliere/inaugurazione-sala-comacina-polizia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Polizia Stradale: il taglio del nastro a Sala Comacina",
+      "description": "Cerimonia venerdì 16 ottobre alle 11 Distaccamento della Polizia Stradale a Sala Comacina Attesi Salvini, Piantedosi, Molteni e Pisani Presente il sindaco",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cerimonia per il distaccamento della Polizia Stradale a Sala Comacina sul lago di Como."
+      },
+      "datePublished": "2026-10-15T16:45:03+00:00",
+      "dateModified": "2026-10-15T16:45:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/inaugurazione-sala-comacina-polizia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

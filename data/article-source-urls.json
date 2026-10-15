@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/familiari-a-carico-detrazioni-irpef-e-welfare-senza-obbligo-di-convivenza/2670263": {
-    "articleId": "familiari-carico-detrazioni-irpef",
-    "ts": "2026-09-04T08:53:01.056Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1948011/nuovo-sciopero-i-tilo-si-fermano-al-confine": {
     "articleId": "sciopero-tilo-italia-2026",
     "ts": "2026-09-04T09:42:02.016Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/luci-a-masnago-tra-i-mille-problemi-openjobmetis-e-il-basket-di-marco-passera/2708038": {
     "articleId": "luci-masnago-terza-puntata",
     "ts": "2026-10-15T16:14:17.719Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/sul-lago-di-como-il-nuovo-distaccamento-della-polizia-stradale-arrivano-due-ministri-e-il-capo-della-polizia": {
+    "articleId": "inaugurazione-sala-comacina-polizia",
+    "ts": "2026-10-15T16:45:03.526Z",
     "keyForm": 2
   }
 }

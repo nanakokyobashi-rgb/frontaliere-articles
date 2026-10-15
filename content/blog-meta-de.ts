@@ -13242,6 +13242,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.luci-masnago-terza-puntata.title': 'Basketball: «Luci a Masnago» 15. Okt. mit Marco Passera',
     'blog.article.luci-masnago-terza-puntata.excerpt': 'Am Donnerstag, dem 15.',
     'blog.article.luci-masnago-terza-puntata.imageAlt': 'Radiostudio mit Blick auf den Luganersee, Mikrofone und Technik im Nachmittagsschein.',
+    'blog.article.inaugurazione-sala-comacina-polizia.title': 'Verkehrspolizei: das Durchschneiden des Bandes in Sala Comacina',
+    'blog.article.inaugurazione-sala-comacina-polizia.excerpt': 'Zeremonie am Freitag, 16. (Sala Comacina)',
+    'blog.article.inaugurazione-sala-comacina-polizia.imageAlt': 'Zeremonie für den Polizeiposten in Sala Comacina am Comer See. (Como)',
 };
 
 export default blogMetaDe;

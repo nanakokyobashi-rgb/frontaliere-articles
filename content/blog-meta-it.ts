@@ -13244,6 +13244,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.luci-masnago-terza-puntata.title': 'Basket: «Luci a Masnago» torna giovedì 15 ottobre con Marco Passera',
     'blog.article.luci-masnago-terza-puntata.excerpt': 'Giovedì 15 ottobre dalle 14,45 torna «Luci a Masnago».',
     'blog.article.luci-masnago-terza-puntata.imageAlt': 'Studio radio con vista sul Lago di Lugano, microfoni e attrezzature, luce pomeridiana.',
+    'blog.article.inaugurazione-sala-comacina-polizia.title': 'Polizia Stradale: il taglio del nastro a Sala Comacina',
+    'blog.article.inaugurazione-sala-comacina-polizia.excerpt': 'Cerimonia venerdì 16 ottobre alle 11 Distaccamento della Polizia Stradale a Sala Comacina Attesi Salvini, Piantedosi, Molteni e Pisani Presente il sindaco',
+    'blog.article.inaugurazione-sala-comacina-polizia.imageAlt': 'Cerimonia per il distaccamento della Polizia Stradale a Sala Comacina sul lago di Como.',
 };
 
 export default blogMetaIt;

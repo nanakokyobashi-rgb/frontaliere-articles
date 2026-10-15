@@ -60,6 +60,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-15T14:49:43.456Z",
       "lastFailureAt": "2026-10-15T14:49:43.456Z"
+    },
+    {
+      "articleId": "inaugurazione-sala-comacina-polizia",
+      "title": "Polizia Stradale: il taglio del nastro a Sala Comacina",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-inaugurazione-sala-comacina-polizia: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration with no visibl",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T16:45:03.524Z",
+      "lastFailureAt": "2026-10-15T16:45:03.524Z"
     }
   ]
 }

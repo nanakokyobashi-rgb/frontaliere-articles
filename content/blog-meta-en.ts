@@ -13243,6 +13243,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.luci-masnago-terza-puntata.title': 'Basketball: «Luci a Masnago» returns Thursday, October 15 with Marco Passera',
     'blog.article.luci-masnago-terza-puntata.excerpt': 'Thursday, October 15, starting at 2:45 p.m., «Luci a Masnago» returns.',
     'blog.article.luci-masnago-terza-puntata.imageAlt': 'Radio studio overlooking Lake Lugano, microphones and equipment in afternoon light.',
+    'blog.article.inaugurazione-sala-comacina-polizia.title': 'Highway Police: the ribbon-cutting in Sala Comacina',
+    'blog.article.inaugurazione-sala-comacina-polizia.excerpt': 'Ceremony on Friday, October 16 at 11 at the Highway Police detachment in Sala Comacina Salvini, Piantedosi, Molteni and Pisani expected Mayor in attendance',
+    'blog.article.inaugurazione-sala-comacina-polizia.imageAlt': 'Ceremony for the Polizia Stradale station in Sala Comacina on Lake Como.',
 };
 
 export default blogMetaEn;
