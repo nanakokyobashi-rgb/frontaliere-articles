@@ -4516,9 +4516,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-21.yml",
       "mode": "identical",
       "baseline": {
-        "site": "e59c01c3f51251c7",
-        "corpus": "e59c01c3f51251c7",
-        "alignedAt": "2026-10-05"
+        "site": "f96a907f460a9de6",
+        "corpus": "f96a907f460a9de6",
+        "alignedAt": "2026-10-15"
       }
     },
     {
@@ -4557,8 +4557,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-12 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono byte-identici fra sito e corpus, con il roster corrente di 627 crawler e provenance ancorata al merge sito `97a954ad5b2f2e8ed8828ef265f1cc8bc145588b`.",
       "baseline": {
-        "site": "5fa54f4a81507fdf",
-        "corpus": "5fa54f4a81507fdf",
+        "site": "e8119f4d33f4bd85",
+        "corpus": "e8119f4d33f4bd85",
         "alignedAt": "2026-10-15"
       }
     },
