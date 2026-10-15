@@ -185,6 +185,12 @@ case "$1 $2" in
 esac
 `);
   chmodSync(git, 0o755);
+  // macOS non include il GNU `timeout`; il workflow runner Linux sì. Il test
+  // verifica il contratto di rimborso, quindi basta un wrapper che conservi
+  // gli argomenti e lasci eseguire il comando finto.
+  const timeout = path.join(bin, 'timeout');
+  writeFileSync(timeout, '#!/bin/sh\nshift\nexec "$@"\n');
+  chmodSync(timeout, 0o755);
   const statePath = path.join(temp, 'state.json');
   const ghLog = path.join(temp, 'gh.log');
   writeFileSync(ghLog, '');
@@ -528,8 +534,10 @@ test('un commento con l\'ID del marker ma snapshot diverso blocca il rimborso', 
 test('il classify non finalizza più il claim né degrada il rimborso a warning', () => {
   const classify = stepScript(CLASSIFY_NAME);
   const supersededEnd = classify.indexOf('run SUPERSEDED');
-  const supersededStart = classify.lastIndexOf('CLAIM_STATUS=released\n', supersededEnd);
-  const superseded = classify.slice(supersededStart, supersededEnd);
+  const refundStart = classify.indexOf('refund_superseded_round() {');
+  assert.ok(refundStart >= 0 && refundStart < supersededEnd,
+    'la macchina a stati trusted del refund deve essere definita prima del ramo SUPERSEDED');
+  const superseded = classify.slice(refundStart, supersededEnd);
   assert.match(superseded, /--refund-superseded/);
   assert.match(superseded, /refund_marker="\$\{FIX_ROUND_MARKER%_ROUND\}_REFUNDED"/);
   assert.doesNotMatch(superseded, /redcheck-review-prefilter\.mjs --claim/,

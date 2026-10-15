@@ -1,10 +1,10 @@
 /**
  * Contratto del verdetto body-only di `pr-redcheck-fixer.yml`.
  *
- * Il test esegue il vero script dello step finale con due risposte API
- * controllate: un body diverso deve essere progresso, lo stesso body deve
- * restare non-progresso. Il secondo caso impedisce che un `gh pr edit` no-op
- * trasformi un job rosso in un falso verde.
+ * Il test esegue il vero script dello step finale con risposte API controllate:
+ * un body diverso deve essere progresso, lo stesso body deve restare
+ * non-progresso e una race body-only prima di Codex deve rimborsare/redispatchare
+ * senza trasformare un errore API in un falso verde.
  * Copre anche il guard deterministico del cap round, distinguendo una
  * snapshot stantia da uno stato malformato.
  */
@@ -84,6 +84,8 @@ function runRoundGuard({ roundState, expectedHead = HEAD_SHA_40, expectedBodyRev
   fakeExecutable(bin, 'node', String.raw`
 printf '%s\n' "$FAKE_ROUND_STATE"
 `);
+  // macOS non include `sha256sum`; il runner Linux del workflow sì.
+  fakeExecutable(bin, 'sha256sum', String.raw`exec shasum -a 256 "$@"`);
   fakeExecutable(bin, 'gh', String.raw`
 case "$*" in
   *issues/*/comments*) printf '%s\n' '[[{"body":""}]]' ;;
@@ -214,6 +216,7 @@ function runClassifier({
   prState = 'open',
   commentPages = '0',
   commentsStatus = 0,
+  bodyApiStatus = 0,
 } = {}) {
   const temp = mkdtempSync(path.join(os.tmpdir(), 'pr-redcheck-outcome-'));
   const bin = path.join(temp, 'bin');
@@ -288,6 +291,9 @@ case "$1 $2" in
 esac
 `);
   fakeExecutable(bin, 'sleep', String.raw`echo "$1" >> "$SLEEP_LOG"`);
+  // macOS non include `sha256sum`; the workflow runner does. Keep the harness
+  // portable without changing the workflow's Linux command contract.
+  fakeExecutable(bin, 'sha256sum', String.raw`exec shasum -a 256 "$@"`);
   // timeout deterministico: registra il limite e il sottocomando, poi lo esegue.
   fakeExecutable(bin, 'timeout', String.raw`
 echo "$1 $2 $3" >> "$TIMEOUT_LOG"
@@ -298,6 +304,15 @@ fakeExecutable(bin, 'gh', String.raw`
 echo "$*" >> "$GH_LOG"
 if echo "$*" | grep -Eq -- '(-X|--method) DELETE'; then exit 0; fi
 if echo "$*" | grep -q 'api user'; then printf '{"login":"fixture-bot"}\n'; exit 0; fi
+if echo "$*" | grep -Eq 'api repos/.*/pulls/[0-9]+ .*--jq'; then
+  if [ "$FAKE_BODY_API_STATUS" != "0" ]; then exit "$FAKE_BODY_API_STATUS"; fi
+  if [ "$FAKE_BODY_API_NEWLINE" = "1" ]; then
+    printf '%s\n' "$FAKE_BODY"
+  else
+    printf '%s' "$FAKE_BODY"
+  fi
+  exit 0
+fi
 if echo "$*" | grep -Eq 'api repos/.*/pulls/[0-9]+$'; then
   printf '{"state":"%s"}\n' "$FAKE_PR_STATE"
   exit 0
@@ -364,6 +379,8 @@ printf '%s' "$FAKE_BODY"
         FAKE_COMMENTS_JSON: commentsJson,
         FAKE_COMMENT_PAGES: commentPages,
         FAKE_COMMENTS_STATUS: String(commentsStatus),
+        FAKE_BODY_API_STATUS: String(bodyApiStatus),
+        FAKE_BODY_API_NEWLINE: actionOutcome === 'skipped' ? '1' : '0',
         REFUND_COMMENT_STATUS: String(refundCommentStatus),
         RUNNER_TEMP: temp,
       },
@@ -468,6 +485,8 @@ case "$1 $2" in
   *) exit 64 ;;
 esac
 `);
+  // macOS non include `sha256sum`; il runner Linux del workflow sì.
+  fakeExecutable(bin, 'sha256sum', String.raw`exec shasum -a 256 "$@"`);
   fakeExecutable(bin, 'gh', String.raw`
 case "$*" in
   *issues/*/comments*)
@@ -636,6 +655,72 @@ test('body cambiato è progresso, body identico è non-progresso', () => {
     1,
     `body identico deve restare non-progresso:\nstdout=${identical.stdout}\nstderr=${identical.stderr}`,
   );
+});
+
+test('redcheck: una race body-only prima di Codex rimborsa e ridispatcha', () => {
+  const baseBody = '## Implementato\n\n- body iniziale';
+  const currentBody = `${baseBody}\n- aggiornamento concorrente`;
+  const result = runClassifier({
+    baseBody,
+    currentBody,
+    actionOutcome: 'skipped',
+    head: HEAD_SHA_40,
+    remote: HEAD_SHA_40,
+    startSha: HEAD_SHA_40,
+    baseSha: HEAD_SHA_40,
+    fixRound: '1',
+    fixRoundMarker: 'REDCHECK_FIX_ROUND',
+    markerCommentId: '42',
+    commentsJson: JSON.stringify([roundMarkerComment({
+      marker: 'REDCHECK_FIX_ROUND', round: 1, id: 42, body: baseBody,
+    })]),
+  });
+  assert.equal(result.status, 0,
+    `race body-only deve essere SUPERSEDED verde:\nstdout=${result.stdout}\nstderr=${result.stderr}`);
+  assert.match(result.stdout, /race body-only/);
+  assert.match(result.ghLog, /api --method DELETE .*issues\/comments\/42/);
+  assert.match(result.ghLog, /workflow run pr-redcheck-fixer\.yml/);
+  assert.match(result.ghLog, /head_ref=fix\/body-outcome/);
+  assert.equal(result.githubEnv, 'CLAIM_STATUS=released\n');
+
+  const unchanged = runClassifier({
+    baseBody,
+    currentBody: baseBody,
+    actionOutcome: 'skipped',
+    head: HEAD_SHA_40,
+    remote: HEAD_SHA_40,
+    startSha: HEAD_SHA_40,
+    baseSha: HEAD_SHA_40,
+    fixRound: '1',
+    fixRoundMarker: 'REDCHECK_FIX_ROUND',
+    markerCommentId: '42',
+    commentsJson: JSON.stringify([roundMarkerComment({
+      marker: 'REDCHECK_FIX_ROUND', round: 1, id: 42, body: baseBody,
+    })]),
+  });
+  assert.equal(unchanged.status, 1,
+    `skipped senza prova di race deve restare rosso:\nstdout=${unchanged.stdout}\nstderr=${unchanged.stderr}`);
+  assert.doesNotMatch(unchanged.ghLog, /issues\/comments\/42|workflow run/);
+
+  const unreadable = runClassifier({
+    baseBody,
+    currentBody,
+    actionOutcome: 'skipped',
+    head: HEAD_SHA_40,
+    remote: HEAD_SHA_40,
+    startSha: HEAD_SHA_40,
+    baseSha: HEAD_SHA_40,
+    bodyApiStatus: 1,
+    fixRound: '1',
+    fixRoundMarker: 'REDCHECK_FIX_ROUND',
+    markerCommentId: '42',
+    commentsJson: JSON.stringify([roundMarkerComment({
+      marker: 'REDCHECK_FIX_ROUND', round: 1, id: 42, body: baseBody,
+    })]),
+  });
+  assert.equal(unreadable.status, 1,
+    `body illeggibile non deve diventare verde:\nstdout=${unreadable.stdout}\nstderr=${unreadable.stderr}`);
+  assert.doesNotMatch(unreadable.ghLog, /issues\/comments\/42|workflow run/);
 });
 
 // Il SUPERSEDED di redcheck (claim released, DELETE del marker, handle
