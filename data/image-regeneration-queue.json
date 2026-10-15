@@ -50,6 +50,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-15T03:43:23.697Z",
       "lastFailureAt": "2026-10-15T07:11:24.043Z"
+    },
+    {
+      "articleId": "sconto-dipendenti-migros-ccl",
+      "title": "Migros: nuovo CCL dal 2027, sconto del 10%",
+      "fallbackImage": "/images/blog/article-migros-nuovo-contratto-lavoro-2027.webp",
+      "reason": "All image providers failed for article-sconto-dipendenti-migros-ccl: openai-codex (vision gate rejected image: Generic supermarket entrance relevant to the topic, with no visible t",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T08:28:42.968Z",
+      "lastFailureAt": "2026-10-15T08:28:42.968Z"
     }
   ]
 }
