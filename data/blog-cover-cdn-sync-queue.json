@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-attacco-software-pkzh.webp",
-      "sha256": "2533be7ba60087ca60347d65b8933f03fb49dbe944248723e962d74e5b134c0a"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-attacco-software-pkzh-480w.webp",
-      "sha256": "8a0dd65b58a46b286f65f080a5559de0145027df98ca5265156b8803edd13802"
-    }
-  ]
+  "items": []
 }
