@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "7bab09f44a93a3c0b29c934835daaa6506d63dd6f16343308307898cb93b52f4",
+  "updatedAt": "2026-10-15T00:06:40.869Z",
+  "contentHash": "e05da86bdfa16547e3e4e16d67f20da29c563b3cf312f5dc5ef6eddabb778e10",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -113,14 +113,9 @@
               "label": "Ja zur Revision des Gesetzes über die Staats- und Gemeindesteuern 2027",
               "date": "2026-09-25",
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/ja-zur-revision-des-gesetzes-ueber-die-staats-und-gemeindesteuern-2027/"
-            },
-            {
-              "label": "Neuorganisation Abteilung Natürliche Personen",
-              "date": "2026-06-17",
-              "url": "https://so.ch/verwaltung/finanzdepartement/steueramt/aktuell/aktuell/news/neuorganisation-abteilung-natuerliche-personen/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -165,7 +160,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "en": {
       "canton": "SO",
@@ -256,14 +251,9 @@
               "label": "Ja zur Revision des Gesetzes über die Staats- und Gemeindesteuern 2027",
               "date": "2026-09-25",
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/ja-zur-revision-des-gesetzes-ueber-die-staats-und-gemeindesteuern-2027/"
-            },
-            {
-              "label": "Neuorganisation Abteilung Natürliche Personen",
-              "date": "2026-06-17",
-              "url": "https://so.ch/verwaltung/finanzdepartement/steueramt/aktuell/aktuell/news/neuorganisation-abteilung-natuerliche-personen/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -308,7 +298,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "de": {
       "canton": "SO",
@@ -399,14 +389,9 @@
               "label": "Ja zur Revision des Gesetzes über die Staats- und Gemeindesteuern 2027",
               "date": "2026-09-25",
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/ja-zur-revision-des-gesetzes-ueber-die-staats-und-gemeindesteuern-2027/"
-            },
-            {
-              "label": "Neuorganisation Abteilung Natürliche Personen",
-              "date": "2026-06-17",
-              "url": "https://so.ch/verwaltung/finanzdepartement/steueramt/aktuell/aktuell/news/neuorganisation-abteilung-natuerliche-personen/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -451,7 +436,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "fr": {
       "canton": "SO",
@@ -542,14 +527,9 @@
               "label": "Ja zur Revision des Gesetzes über die Staats- und Gemeindesteuern 2027",
               "date": "2026-09-25",
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/ja-zur-revision-des-gesetzes-ueber-die-staats-und-gemeindesteuern-2027/"
-            },
-            {
-              "label": "Neuorganisation Abteilung Natürliche Personen",
-              "date": "2026-06-17",
-              "url": "https://so.ch/verwaltung/finanzdepartement/steueramt/aktuell/aktuell/news/neuorganisation-abteilung-natuerliche-personen/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -594,7 +574,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     }
   }
 }

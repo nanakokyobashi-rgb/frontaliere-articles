@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T20:08:23.890Z",
-  "contentHash": "d9b2660ee27b5ba2e261674f8a605cfb69777c82a31fefbf46324710f2aaf6bb",
+  "updatedAt": "2026-10-15T00:06:40.869Z",
+  "contentHash": "8d71db5df673861e5a95dadd413bf24185e08875bee23854d057899fd7b2e400",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "324",
+          "value": "332",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Mittagstisch/Organisiert vom Frauenverein",
-              "detail": "Urdorf",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittagstischorganisiert-vom-frauenverein-7/"
+              "label": "Herbstausflug",
+              "detail": "Uitikon-Waldegg, Uitikon",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausflug/"
             },
             {
-              "label": "Familienführung Opernhaus",
-              "detail": "Opernhaus Zürich, Zürich",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/familienfuehrung-opernhaus_AGyxWYB"
+              "label": "Zurich Wine Festival 2026",
+              "detail": "Papiersaal, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zurich-wine-festival-2026/"
             },
             {
-              "label": "Derniere-Circolino Pipistrello spielt \"Der Kroko-Deal\"",
-              "detail": "Sportzentrum Schachen, Bonstetten",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/derniere-circolino-pipistrello-spielt-der-kroko-deal/"
+              "label": "Einladung zum Raclette- Mittag",
+              "detail": "Schlieren",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-raclette-mittag/"
             },
             {
-              "label": "Hammershøi – Klang und Raum",
-              "detail": "Moser-Bau, Zürich",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hammershoi-klang-und-raum/"
+              "label": "Dinner-Erlebnis LoveBite",
+              "detail": "Kloten",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dinner-erlebnis-lovebite/"
             },
             {
-              "label": "«zäme stah»",
-              "detail": "Amthaus",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rueti-zh/zaeme-stah_AX5mbZP"
+              "label": "Gin & Jazz - With The Bluezone Band",
+              "detail": "Hotel Schweizerhof Zürich, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/events/music/zurich/gin-und-jazz-with-the-bluezone-band_AwE5w6g"
             },
             {
-              "label": "Myles Smith - My Mess, My Heart, My Life. Tour",
-              "detail": "THE HALL, Dübendorf",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/myles-smith-my-mess-my-heart-my-life-tour/"
+              "label": "Ländler Open im SEEDAMM PLAZA",
+              "detail": "Restaurant OLEA im Hotel Seedamm Plaza, Pfäffikon",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laendler-open-im-seedamm-plaza/"
             },
             {
-              "label": "ZSC Lions Frauen / Zug",
-              "detail": "Swiss Life Arena, Zürich",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zsc-lions-frauen-zug/"
+              "label": "Hod Carrier Stompers Jazzband",
+              "detail": "Evang.-ref. Kirche Effretikon",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hod-carrier-stompers-jazzband/"
             },
             {
-              "label": "JazzBaragge Wednesday Jam",
-              "detail": "Moods im Schiffbau",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/jazzbaragge-wednesday-jam_AcidTJb"
+              "label": "Laura Pausini",
+              "detail": "Hallenstadion Zürich, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/laura-pausini_AM8J65Z"
             },
             {
-              "label": "Herbstabenteuer im Chrüzi (Kursnr. 2.4e)",
-              "detail": "Dietikon — in corso, ultimo giorno: 15 ottobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstabenteuer-im-chruezi-kursnr-24e/"
+              "label": "Line Dance Night",
+              "detail": "Chesselhuus, Pfäffikon",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pfaeffikon-zh/line-dance-night_A8FCB8R"
             },
             {
-              "label": "Workshop-Woche in den Herbstferien «COOL-TUR»",
-              "detail": "Zurich, Zürich — in corso, ultimo giorno: 15 ottobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-woche-in-den-herbstferien-cool-tur/"
+              "label": "Marek Janowski mit Schubert und Beethoven",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marek-janowski-mit-schubert-und-beethoven/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -128,7 +128,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "en": {
       "canton": "ZH",
@@ -138,7 +138,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "324",
+          "value": "332",
           "note": "from the site’s events calendar"
         }
       ],
@@ -149,64 +149,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Mittagstisch/Organisiert vom Frauenverein",
-              "detail": "Urdorf",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittagstischorganisiert-vom-frauenverein-7/"
+              "label": "Herbstausflug",
+              "detail": "Uitikon-Waldegg, Uitikon",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausflug/"
             },
             {
-              "label": "Family Tour of the Opera House",
-              "detail": "Opernhaus Zürich, Zürich",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/familienfuehrung-opernhaus_AGyxWYB"
+              "label": "Zurich Wine Festival 2026",
+              "detail": "Papiersaal, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zurich-wine-festival-2026/"
             },
             {
-              "label": "Derniere-Circolino Pipistrello spielt \"Der Kroko-Deal\"",
-              "detail": "Sportzentrum Schachen, Bonstetten",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/derniere-circolino-pipistrello-spielt-der-kroko-deal/"
+              "label": "Einladung zum Raclette- Mittag",
+              "detail": "Schlieren",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-raclette-mittag/"
             },
             {
-              "label": "Hammershøi – Klang und Raum",
-              "detail": "Moser-Bau, Zürich",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hammershoi-klang-und-raum/"
+              "label": "Dinner-Erlebnis LoveBite",
+              "detail": "Kloten",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dinner-erlebnis-lovebite/"
             },
             {
-              "label": "\"zäme stah\"",
-              "detail": "Amthaus",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rueti-zh/zaeme-stah_AX5mbZP"
+              "label": "Gin & Jazz - With The Bluezone Band",
+              "detail": "Hotel Schweizerhof Zürich, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/events/music/zurich/gin-und-jazz-with-the-bluezone-band_AwE5w6g"
             },
             {
-              "label": "Myles Smith - My Mess, My Heart, My Life. Tour",
-              "detail": "THE HALL, Dübendorf",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/myles-smith-my-mess-my-heart-my-life-tour/"
+              "label": "Ländler Open im SEEDAMM PLAZA",
+              "detail": "Restaurant OLEA im Hotel Seedamm Plaza, Pfäffikon",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laendler-open-im-seedamm-plaza/"
             },
             {
-              "label": "ZSC Lions Frauen / Zug",
-              "detail": "Swiss Life Arena, Zürich",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zsc-lions-frauen-zug/"
+              "label": "Hod Carrier Stompers Jazzband",
+              "detail": "Evang.-ref. Kirche Effretikon",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hod-carrier-stompers-jazzband/"
             },
             {
-              "label": "JazzBaragge Wednesday Jam",
-              "detail": "Moods im Schiffbau",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/jazzbaragge-wednesday-jam_AcidTJb"
+              "label": "Laura Pausini",
+              "detail": "Hallenstadion Zürich, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/laura-pausini_AM8J65Z"
             },
             {
-              "label": "Herbstabenteuer im Chrüzi (Kursnr. 2.4e)",
-              "detail": "Dietikon — ongoing, last day: 15 October 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstabenteuer-im-chruezi-kursnr-24e/"
+              "label": "Line Dance Night",
+              "detail": "Chesselhuus, Pfäffikon",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pfaeffikon-zh/line-dance-night_A8FCB8R"
             },
             {
-              "label": "Workshop-Woche in den Herbstferien «COOL-TUR»",
-              "detail": "Zurich, Zürich — ongoing, last day: 15 October 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-woche-in-den-herbstferien-cool-tur/"
+              "label": "Marek Janowski mit Schubert und Beethoven",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marek-janowski-mit-schubert-und-beethoven/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -244,7 +244,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "de": {
       "canton": "ZH",
@@ -254,7 +254,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "324",
+          "value": "332",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -265,64 +265,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Mittagstisch/Organisiert vom Frauenverein",
-              "detail": "Urdorf",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittagstischorganisiert-vom-frauenverein-7/"
+              "label": "Herbstausflug",
+              "detail": "Uitikon-Waldegg, Uitikon",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausflug/"
             },
             {
-              "label": "Familienführung durch das Opernhaus",
-              "detail": "Opernhaus Zürich, Zürich",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/familienfuehrung-opernhaus_AGyxWYB"
+              "label": "Zurich Wine Festival 2026",
+              "detail": "Papiersaal, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zurich-wine-festival-2026/"
             },
             {
-              "label": "Derniere-Circolino Pipistrello spielt \"Der Kroko-Deal\"",
-              "detail": "Sportzentrum Schachen, Bonstetten",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/derniere-circolino-pipistrello-spielt-der-kroko-deal/"
+              "label": "Einladung zum Raclette- Mittag",
+              "detail": "Schlieren",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-raclette-mittag/"
             },
             {
-              "label": "Hammershøi – Klang und Raum",
-              "detail": "Moser-Bau, Zürich",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hammershoi-klang-und-raum/"
+              "label": "LoveBite Dinner-Erlebnis",
+              "detail": "Kloten",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dinner-erlebnis-lovebite/"
             },
             {
-              "label": "\"zäme stah\"",
-              "detail": "Amthaus",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rueti-zh/zaeme-stah_AX5mbZP"
+              "label": "Gin & Jazz - With The Bluezone Band",
+              "detail": "Hotel Schweizerhof Zürich, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/events/music/zurich/gin-und-jazz-with-the-bluezone-band_AwE5w6g"
             },
             {
-              "label": "Myles Smith - My Mess, My Heart, My Life. Tour",
-              "detail": "THE HALL, Dübendorf",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/myles-smith-my-mess-my-heart-my-life-tour/"
+              "label": "Ländler Open",
+              "detail": "Restaurant OLEA im Hotel Seedamm Plaza, Pfäffikon",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laendler-open-im-seedamm-plaza/"
             },
             {
-              "label": "ZSC Lions Frauen / Zug",
-              "detail": "Swiss Life Arena, Zürich",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zsc-lions-frauen-zug/"
+              "label": "Hod Carrier Stompers Jazzband",
+              "detail": "Evang.-ref. Kirche Effretikon",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hod-carrier-stompers-jazzband/"
             },
             {
-              "label": "JazzBaragge Wednesday Jam",
-              "detail": "Moods im Schiffbau",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/jazzbaragge-wednesday-jam_AcidTJb"
+              "label": "Laura Pausini",
+              "detail": "Hallenstadion Zürich, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/laura-pausini_AM8J65Z"
             },
             {
-              "label": "Herbstabenteuer im Chrüzi (Kursnr. 2.4e)",
-              "detail": "Dietikon — läuft, letzter Tag: 15. Oktober 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstabenteuer-im-chruezi-kursnr-24e/"
+              "label": "Line Dance Night",
+              "detail": "Chesselhuus, Pfäffikon",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pfaeffikon-zh/line-dance-night_A8FCB8R"
             },
             {
-              "label": "Workshop-Woche in den Herbstferien «COOL-TUR»",
-              "detail": "Zurich, Zürich — läuft, letzter Tag: 15. Oktober 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-woche-in-den-herbstferien-cool-tur/"
+              "label": "Marek Janowski mit Schubert und Beethoven",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marek-janowski-mit-schubert-und-beethoven/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -360,7 +360,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "fr": {
       "canton": "ZH",
@@ -370,7 +370,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "324",
+          "value": "332",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -381,64 +381,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Mittagstisch/Organisiert vom Frauenverein",
-              "detail": "Urdorf",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittagstischorganisiert-vom-frauenverein-7/"
+              "label": "Herbstausflug",
+              "detail": "Uitikon-Waldegg, Uitikon",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausflug/"
             },
             {
-              "label": "Visite guidée en famille de l'Opéra",
-              "detail": "Opernhaus Zürich, Zürich",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/familienfuehrung-opernhaus_AGyxWYB"
+              "label": "Zurich Wine Festival 2026",
+              "detail": "Papiersaal, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zurich-wine-festival-2026/"
             },
             {
-              "label": "Derniere-Circolino Pipistrello spielt \"Der Kroko-Deal\"",
-              "detail": "Sportzentrum Schachen, Bonstetten",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/derniere-circolino-pipistrello-spielt-der-kroko-deal/"
+              "label": "Einladung zum Raclette- Mittag",
+              "detail": "Schlieren",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-raclette-mittag/"
             },
             {
-              "label": "Hammershøi – Klang und Raum",
-              "detail": "Moser-Bau, Zürich",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hammershoi-klang-und-raum/"
+              "label": "Dîner - Erlebnis LoveBite",
+              "detail": "Kloten",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dinner-erlebnis-lovebite/"
             },
             {
-              "label": "« Zäme stah »",
-              "detail": "Amthaus",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rueti-zh/zaeme-stah_AX5mbZP"
+              "label": "Gin & Jazz - With The Bluezone Band",
+              "detail": "Hotel Schweizerhof Zürich, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/events/music/zurich/gin-und-jazz-with-the-bluezone-band_AwE5w6g"
             },
             {
-              "label": "Myles Smith - My Mess, My Heart, My Life. Tour",
-              "detail": "THE HALL, Dübendorf",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/myles-smith-my-mess-my-heart-my-life-tour/"
+              "label": "Ländler Open im SEEDAMM PLAZA",
+              "detail": "Restaurant OLEA im Hotel Seedamm Plaza, Pfäffikon",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laendler-open-im-seedamm-plaza/"
             },
             {
-              "label": "ZSC Lions Frauen / Zug",
-              "detail": "Swiss Life Arena, Zürich",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zsc-lions-frauen-zug/"
+              "label": "Hod Carrier Stompers Jazzband",
+              "detail": "Evang.-ref. Kirche Effretikon",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hod-carrier-stompers-jazzband/"
             },
             {
-              "label": "JazzBaragge Wednesday Jam",
-              "detail": "Moods im Schiffbau",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/jazzbaragge-wednesday-jam_AcidTJb"
+              "label": "Laura Pausini",
+              "detail": "Hallenstadion Zürich, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/laura-pausini_AM8J65Z"
             },
             {
-              "label": "Herbstabenteuer im Chrüzi (Kursnr. 2.4e)",
-              "detail": "Dietikon — en cours, dernier jour : 15 octobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstabenteuer-im-chruezi-kursnr-24e/"
+              "label": "Line Dance Night",
+              "detail": "Chesselhuus, Pfäffikon",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pfaeffikon-zh/line-dance-night_A8FCB8R"
             },
             {
-              "label": "Workshop-Woche in den Herbstferien «COOL-TUR»",
-              "detail": "Zurich, Zürich — en cours, dernier jour : 15 octobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-woche-in-den-herbstferien-cool-tur/"
+              "label": "Marek Janowski mit Schubert und Beethoven",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marek-janowski-mit-schubert-und-beethoven/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -476,7 +476,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T20:08:23.890Z",
-  "contentHash": "71522770b093696e39d177ff67bcba348e4b6af2b8e2bf408cbb3582f1415f76",
+  "updatedAt": "2026-10-15T00:06:40.869Z",
+  "contentHash": "4bab94749556a21587d4f6a104dcf58345288e89515c8808a47c34e72edd1c6a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -113,16 +113,16 @@
           "date": "2026-08-16T00:13:35.081Z"
         },
         {
-          "title": "Permesso C canton Uri: anni e procedura",
-          "url": "/articoli-svizzera/permesso-c-canton-uri-richiesta/",
-          "excerpt": "Requisiti federali e cantonali per ottenere il permesso di domicilio C nel Cantone Uri: 10 anni di residenza, integrazione e conoscenze linguistiche.",
-          "date": "2026-09-09T01:51:36.573Z"
-        },
-        {
           "title": "Premi cassa malati Cantone Uri e riduzione premi",
           "url": "/articoli-svizzera/premi-cassa-malati-cantone-uri/",
           "excerpt": "I premi cassa malati nel Cantone Uri e le condizioni per la riduzione dei premi.",
           "date": "2026-08-15T23:51:12.284Z"
+        },
+        {
+          "title": "Permesso C canton Uri: anni e procedura",
+          "url": "/articoli-svizzera/permesso-c-canton-uri-richiesta/",
+          "excerpt": "Requisiti federali e cantonali per ottenere il permesso di domicilio C nel Cantone Uri: 10 anni di residenza, integrazione e conoscenze linguistiche.",
+          "date": "2026-09-09T01:51:36.573Z"
         },
         {
           "title": "Uri: premi cassa malati specifici e sussidi",
@@ -157,7 +157,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "en": {
       "canton": "UR",
@@ -248,16 +248,16 @@
           "date": "2026-08-16T00:13:35.081Z"
         },
         {
-          "title": "Permit C canton Uri: years and procedure",
-          "url": "/en/swiss-articles/permit-c-canton-uri-request/",
-          "excerpt": "Federal and cantonal requirements to obtain residence permit C in Canton Uri: 10 years of residence, integration and language skills.",
-          "date": "2026-09-09T01:51:36.573Z"
-        },
-        {
           "title": "Health insurance premiums Canton Uri and premium reduction",
           "url": "/en/swiss-articles/health-insurance-premiums-canton-uri-and-premium-reduction/",
           "excerpt": "The sick cash premiums in Canton Uri and the conditions for the reduction of the premiums.",
           "date": "2026-08-15T23:51:12.284Z"
+        },
+        {
+          "title": "Permit C canton Uri: years and procedure",
+          "url": "/en/swiss-articles/permit-c-canton-uri-request/",
+          "excerpt": "Federal and cantonal requirements to obtain residence permit C in Canton Uri: 10 years of residence, integration and language skills.",
+          "date": "2026-09-09T01:51:36.573Z"
         },
         {
           "title": "Uri: specific sick pay premiums and subsidies",
@@ -288,7 +288,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "de": {
       "canton": "UR",
@@ -379,16 +379,16 @@
           "date": "2026-08-16T00:13:35.081Z"
         },
         {
-          "title": "Ausweis C Kanton Uri: Jahre und Verfahren",
-          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-c-kanton-uri-antrag/",
-          "excerpt": "Eidgenössische und kantonale Voraussetzungen für die Niederlassungsbewilligung C im Kanton Uri: 10 Jahre Aufenthalt, Integration und Sprachkenntnisse.",
-          "date": "2026-09-09T01:51:36.573Z"
-        },
-        {
           "title": "Krankenkassenprämien Kanton Uri und Prämienverbilligung",
           "url": "/de/schweiz-artikel/krankenkassenpramien-kanton-uri-und-pramienverbilligung/",
           "excerpt": "Die Krankenkassenprämien im Kanton Uri und die Bedingungen für die Prämienverbilligung.",
           "date": "2026-08-15T23:51:12.284Z"
+        },
+        {
+          "title": "Ausweis C Kanton Uri: Jahre und Verfahren",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-c-kanton-uri-antrag/",
+          "excerpt": "Eidgenössische und kantonale Voraussetzungen für die Niederlassungsbewilligung C im Kanton Uri: 10 Jahre Aufenthalt, Integration und Sprachkenntnisse.",
+          "date": "2026-09-09T01:51:36.573Z"
         },
         {
           "title": "URI: Spezifische Krankenkassenprämien und Zuschüsse",
@@ -419,7 +419,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "fr": {
       "canton": "UR",
@@ -510,16 +510,16 @@
           "date": "2026-08-16T00:13:35.081Z"
         },
         {
-          "title": "Permis C canton URI : années et procédure",
-          "url": "/fr/articles-suisse/permis-c-canton-uri-demande/",
-          "excerpt": "Conditions fédérales et cantonales pour obtenir le permis de séjour C dans le canton d'Uri : 10 ans de résidence, d'intégration et de connaissances linguistiques.",
-          "date": "2026-09-09T01:51:36.573Z"
-        },
-        {
           "title": "Primes caisse-maladie Canton URI et réduction des primes",
           "url": "/fr/articles-suisse/primes-caisse-maladie-canton-uri-et-reduction-des-primes/",
           "excerpt": "Les primes caisse-maladie dans le canton d'Uri et les conditions de réduction des primes.",
           "date": "2026-08-15T23:51:12.284Z"
+        },
+        {
+          "title": "Permis C canton URI : années et procédure",
+          "url": "/fr/articles-suisse/permis-c-canton-uri-demande/",
+          "excerpt": "Conditions fédérales et cantonales pour obtenir le permis de séjour C dans le canton d'Uri : 10 ans de résidence, d'intégration et de connaissances linguistiques.",
+          "date": "2026-09-09T01:51:36.573Z"
         },
         {
           "title": "URI : primes de caisse-maladie spécifiques et subventions",
@@ -546,7 +546,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     }
   }
 }

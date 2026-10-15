@@ -104817,6 +104817,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tasse-universitarie-berna-guida': {
+    title: 'Tasse universitarie Berna: guida iscrizione | Frontaliere Ticino',
+    description: 'Guida alle tasse universitarie nel Cantone di Berna: come verificare requisiti, scadenze e importi distinguendo tra enti, categorie e fonti ufficiali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tasse, universitarie, berna, iscrizione',
+    ogTitle: 'Tasse universitarie Berna: guida iscrizione',
+    ogDescription: 'Scopri come verificare correttamente le tasse universitarie nel Cantone di Berna. Guida pratica per identificare l\'ente competente, le categorie di studenti e le scadenze ufficiali per l\'iscrizione.',
+    canonicalPath: '/articoli-svizzera/tasse-universitarie-berna-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tasse universitarie Berna: guida iscrizione",
+      "description": "Guida alle tasse universitarie nel Cantone di Berna: come verificare requisiti, scadenze e importi distinguendo tra enti, categorie e fonti ufficiali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tasse-universitarie-zurigo-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Studente che verifica i requisiti per le tasse universitarie nel Cantone di Berna"
+      },
+      "datePublished": "2026-10-15T00:26:22+00:00",
+      "dateModified": "2026-10-15T00:26:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tasse-universitarie-berna-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

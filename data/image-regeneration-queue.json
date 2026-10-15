@@ -50,6 +50,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-14T21:58:03.380Z",
       "lastFailureAt": "2026-10-14T23:41:18.777Z"
+    },
+    {
+      "articleId": "tasse-universitarie-berna-guida",
+      "title": "Tasse universitarie Berna: guida iscrizione",
+      "fallbackImage": "/images/blog/article-tasse-universitarie-zurigo-guida.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T00:26:23.110Z",
+      "lastFailureAt": "2026-10-15T00:26:23.110Z"
     }
   ]
 }

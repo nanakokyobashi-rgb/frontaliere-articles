@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T20:08:23.890Z",
-  "contentHash": "12cce64fed36578c9167f5ac0d7100c96935a6c9b620bc3daef9d3932b31d899",
+  "updatedAt": "2026-10-15T00:06:40.869Z",
+  "contentHash": "52bfedb72032ee786ab7d23f9588f3e2598176edeaea2f76d623b3e345c24442",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "54",
+          "value": "53",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Lichterfahrt",
-              "detail": "Kulturhaus APOLLO, Kreuzlingen",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/lichterfahrt_AdvMsYK"
-            },
-            {
-              "label": "Shared Reading - Miteinander Lesen - Texte gemeinsam erleben",
-              "detail": "Weinfelden",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/shared-reading-miteinander-lesen-texte-gemeinsam-erleben-6/"
-            },
-            {
-              "label": "Milliarden Sonnen - Eine Reise durch die Galaxis",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/milliarden-sonnen-eine-reise-durch-die-galaxis_AHiBByQ"
-            },
-            {
-              "label": "Prickelnde Perlen | Die Welt der Schaumweine",
-              "detail": "KünstlerCantina by NALI, Müllheim",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/prickelnde-perlen-die-welt-der-schaumweine/"
-            },
-            {
-              "label": "Gruppen Kunstausstellung",
-              "detail": "Tierpark Lange Erlen, Erlen — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
-            {
-              "label": "Mission Erde",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
-            },
-            {
-              "label": "Limit - Expedition zum Rande der Welt",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/konstanz/kreuzlingen/limit-expedition-zum-rande-der-welt_Af6BCNs"
-            },
-            {
               "label": "Pub Quiz I love the 90thies",
               "detail": "Barfuss Brauerei, Bürglen (TG)",
               "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pub-quiz-i-love-the-90thies/"
             },
             {
+              "label": "Gruppen Kunstausstellung",
+              "detail": "Tierpark Lange Erlen, Erlen — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
+            },
+            {
+              "label": "Mission Erde",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
+            },
+            {
+              "label": "Limit - Expedition zum Rande der Welt",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/konstanz/kreuzlingen/limit-expedition-zum-rande-der-welt_Af6BCNs"
+            },
+            {
               "label": "DAS TRÖSCH reist um die Welt - Ägypten",
               "detail": "Kreuzlingen",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-troesch-reist-um-die-welt-aegypten/"
+            },
+            {
+              "label": "Jam's Musicbar",
+              "detail": "Kulturforum Amriswil, Amriswil",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/jams-musicbar_Au6eV46"
+            },
+            {
+              "label": "Wladimir Kaminer - Müttertage Heldinnen des Alltags",
+              "detail": "Kreuzlingen",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wladimir-kaminer-muettertage-heldinnen-des-alltags/"
+            },
+            {
+              "label": "Jazzkonzert - Stark Group",
+              "detail": "Goldener Dachs, Weinfelden",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/jazzkonzert-stark-group_AeqFH8P"
+            },
+            {
+              "label": "New Orleans in Weinfelden - CD Release Konzert Nicole Johänntgen Henry",
+              "detail": "Goldener Dachs, Weinfelden",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/new-orleans-in-weinfelden-cd-release-konzert-nicole-johaenntgen-henry_Aqj7nD1"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -132,7 +132,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "en": {
       "canton": "TG",
@@ -142,7 +142,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "54",
+          "value": "53",
           "note": "from the site’s events calendar"
         }
       ],
@@ -153,64 +153,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Light Tour",
-              "detail": "Kulturhaus APOLLO, Kreuzlingen",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/lichterfahrt_AdvMsYK"
-            },
-            {
-              "label": "Shared Reading - Miteinander Lesen - Texte gemeinsam erleben",
-              "detail": "Weinfelden",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/shared-reading-miteinander-lesen-texte-gemeinsam-erleben-6/"
-            },
-            {
-              "label": "Milliarden Sonnen - Eine Reise durch die Galaxis",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/milliarden-sonnen-eine-reise-durch-die-galaxis_AHiBByQ"
-            },
-            {
-              "label": "Prickelnde Perlen | Die Welt der Schaumweine",
-              "detail": "KünstlerCantina by NALI, Müllheim",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/prickelnde-perlen-die-welt-der-schaumweine/"
-            },
-            {
-              "label": "Gruppen Kunstausstellung",
-              "detail": "Tierpark Lange Erlen, Erlen — ongoing, last day: 25 October 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — ongoing, last day: 31 October 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
-            {
-              "label": "Mission Erde",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — ongoing, last day: 25 October 2026",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
-            },
-            {
-              "label": "Limit - Expedition zum Rande der Welt",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — ongoing, last day: 18 October 2026",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/konstanz/kreuzlingen/limit-expedition-zum-rande-der-welt_Af6BCNs"
-            },
-            {
               "label": "Pub Quiz I love the 90thies",
               "detail": "Barfuss Brauerei, Bürglen (TG)",
               "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pub-quiz-i-love-the-90thies/"
             },
             {
+              "label": "Gruppen Kunstausstellung",
+              "detail": "Tierpark Lange Erlen, Erlen — ongoing, last day: 25 October 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — ongoing, last day: 31 October 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
+            },
+            {
+              "label": "Mission Erde",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — ongoing, last day: 25 October 2026",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
+            },
+            {
+              "label": "Limit - Expedition zum Rande der Welt",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — ongoing, last day: 18 October 2026",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/konstanz/kreuzlingen/limit-expedition-zum-rande-der-welt_Af6BCNs"
+            },
+            {
               "label": "DAS TRÖSCH reist um die Welt - Ägypten",
               "detail": "Kreuzlingen",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-troesch-reist-um-die-welt-aegypten/"
+            },
+            {
+              "label": "Jam's Musicbar",
+              "detail": "Kulturforum Amriswil, Amriswil",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/jams-musicbar_Au6eV46"
+            },
+            {
+              "label": "Wladimir Kaminer - Müttertage Heldinnen des Alltags",
+              "detail": "Kreuzlingen",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wladimir-kaminer-muettertage-heldinnen-des-alltags/"
+            },
+            {
+              "label": "Jazzkonzert - Stark Group",
+              "detail": "Goldener Dachs, Weinfelden",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/jazzkonzert-stark-group_AeqFH8P"
+            },
+            {
+              "label": "New Orleans in Weinfelden — Nicole Johänntgen Henry CD Release Concert",
+              "detail": "Goldener Dachs, Weinfelden",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/new-orleans-in-weinfelden-cd-release-konzert-nicole-johaenntgen-henry_Aqj7nD1"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -247,7 +247,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "de": {
       "canton": "TG",
@@ -257,7 +257,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "54",
+          "value": "53",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -268,64 +268,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Leichte Fahrt",
-              "detail": "Kulturhaus APOLLO, Kreuzlingen",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/lichterfahrt_AdvMsYK"
-            },
-            {
-              "label": "Shared Reading - Miteinander Lesen - Texte gemeinsam erleben",
-              "detail": "Weinfelden",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/shared-reading-miteinander-lesen-texte-gemeinsam-erleben-6/"
-            },
-            {
-              "label": "Milliarden Sonnen - Eine Reise durch die Galaxis",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/milliarden-sonnen-eine-reise-durch-die-galaxis_AHiBByQ"
-            },
-            {
-              "label": "Prickelnde Perlen | Die Welt der Schaumweine",
-              "detail": "KünstlerCantina by NALI, Müllheim",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/prickelnde-perlen-die-welt-der-schaumweine/"
-            },
-            {
-              "label": "Gruppen Kunstausstellung",
-              "detail": "Tierpark Lange Erlen, Erlen — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
-            {
-              "label": "Mission Erde",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
-            },
-            {
-              "label": "Limit - Expedition zum Rande der Welt",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/konstanz/kreuzlingen/limit-expedition-zum-rande-der-welt_Af6BCNs"
-            },
-            {
               "label": "Pub Quiz I love the 90thies",
               "detail": "Barfuss Brauerei, Bürglen (TG)",
               "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pub-quiz-i-love-the-90thies/"
             },
             {
+              "label": "Gruppen Kunstausstellung",
+              "detail": "Tierpark Lange Erlen, Erlen — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
+            },
+            {
+              "label": "Mission Erde",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
+            },
+            {
+              "label": "Limit - Expedition zum Rande der Welt",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/konstanz/kreuzlingen/limit-expedition-zum-rande-der-welt_Af6BCNs"
+            },
+            {
               "label": "DAS TRÖSCH reist um die Welt - Ägypten",
               "detail": "Kreuzlingen",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-troesch-reist-um-die-welt-aegypten/"
+            },
+            {
+              "label": "Jam's Musicbar",
+              "detail": "Kulturforum Amriswil, Amriswil",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/jams-musicbar_Au6eV46"
+            },
+            {
+              "label": "Wladimir Kaminer - Müttertage Heldinnen des Alltags",
+              "detail": "Kreuzlingen",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wladimir-kaminer-muettertage-heldinnen-des-alltags/"
+            },
+            {
+              "label": "Jazzkonzert - Stark Group",
+              "detail": "Goldener Dachs, Weinfelden",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/jazzkonzert-stark-group_AeqFH8P"
+            },
+            {
+              "label": "New Orleans in Weinfelden – CD-Release-Konzert von Nicole Johänntgen Henry",
+              "detail": "Goldener Dachs, Weinfelden",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/new-orleans-in-weinfelden-cd-release-konzert-nicole-johaenntgen-henry_Aqj7nD1"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -362,7 +362,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "fr": {
       "canton": "TG",
@@ -372,7 +372,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "54",
+          "value": "53",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -383,64 +383,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Parcours lumineux",
-              "detail": "Kulturhaus APOLLO, Kreuzlingen",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/lichterfahrt_AdvMsYK"
-            },
-            {
-              "label": "Shared Reading - Miteinander Lesen - Texte gemeinsam erleben",
-              "detail": "Weinfelden",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/shared-reading-miteinander-lesen-texte-gemeinsam-erleben-6/"
-            },
-            {
-              "label": "Milliarden Sonnen - Eine Reise durch die Galaxis",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/milliarden-sonnen-eine-reise-durch-die-galaxis_AHiBByQ"
-            },
-            {
-              "label": "Prickelnde Perlen | Die Welt der Schaumweine",
-              "detail": "KünstlerCantina by NALI, Müllheim",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/prickelnde-perlen-die-welt-der-schaumweine/"
-            },
-            {
-              "label": "Gruppen Kunstausstellung",
-              "detail": "Tierpark Lange Erlen, Erlen — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
-            {
-              "label": "Mission Erde",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
-            },
-            {
-              "label": "Limit - Expedition zum Rande der Welt",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/konstanz/kreuzlingen/limit-expedition-zum-rande-der-welt_Af6BCNs"
-            },
-            {
               "label": "Pub Quiz I love the 90thies",
               "detail": "Barfuss Brauerei, Bürglen (TG)",
               "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pub-quiz-i-love-the-90thies/"
             },
             {
+              "label": "Gruppen Kunstausstellung",
+              "detail": "Tierpark Lange Erlen, Erlen — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
+            },
+            {
+              "label": "Mission Erde",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
+            },
+            {
+              "label": "Limit - Expedition zum Rande der Welt",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/konstanz/kreuzlingen/limit-expedition-zum-rande-der-welt_Af6BCNs"
+            },
+            {
               "label": "DAS TRÖSCH reist um die Welt - Ägypten",
               "detail": "Kreuzlingen",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-troesch-reist-um-die-welt-aegypten/"
+            },
+            {
+              "label": "Jam's Musicbar",
+              "detail": "Kulturforum Amriswil, Amriswil",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/jams-musicbar_Au6eV46"
+            },
+            {
+              "label": "Wladimir Kaminer - Müttertage Heldinnen des Alltags",
+              "detail": "Kreuzlingen",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wladimir-kaminer-muettertage-heldinnen-des-alltags/"
+            },
+            {
+              "label": "Jazzkonzert - Stark Group",
+              "detail": "Goldener Dachs, Weinfelden",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/jazzkonzert-stark-group_AeqFH8P"
+            },
+            {
+              "label": "La Nouvelle-Orléans à Weinfelden – Concert de lancement du CD de Nicole Johänntgen Henry",
+              "detail": "Goldener Dachs, Weinfelden",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/new-orleans-in-weinfelden-cd-release-konzert-nicole-johaenntgen-henry_Aqj7nD1"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -477,7 +477,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T20:08:23.890Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     }
   }
 }

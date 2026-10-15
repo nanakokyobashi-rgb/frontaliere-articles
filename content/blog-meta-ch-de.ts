@@ -8303,6 +8303,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ordinanza-dispositivi-vitali.title': 'Lebenswichtige Medizinprodukte: Das DEFR eröffnet eine Vernehmlassung',
     'blog.article.ordinanza-dispositivi-vitali.excerpt': 'Das DEFR eröffnet eine Vernehmlassung zu lebenswichtigen Medizinprodukten Das Projekt zielt darauf ab, die Versorgung zu überwachen Beginn: 14.',
     'blog.article.ordinanza-dispositivi-vitali.imageAlt': 'Bern und lebenswichtige Medizinprodukte zur DEFR-Konsultation',
+    'blog.article.tasse-universitarie-berna-guida.title': 'Studiengebühren Bern: Einschreibungsleitfaden',
+    'blog.article.tasse-universitarie-berna-guida.excerpt': 'Wie man Anforderungen, Fristen und Beträge für Studiengebühren im Kanton Bern überprüft: praktischer Leitfaden nach Kategorien und Institutionen.',
+    'blog.article.tasse-universitarie-berna-guida.imageAlt': 'Student prüft die Voraussetzungen für Studiengebühren im Kanton Bern',
 };
 
 export default blogMetaChDe;

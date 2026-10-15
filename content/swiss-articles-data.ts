@@ -27721,6 +27721,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'tasse-universitarie-berna-guida',
+    category: 'pratico',
+    date: '2026-10-15T00:26:22.514Z',
+    image: '/images/blog/article-tasse-universitarie-zurigo-guida.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['BE'],
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

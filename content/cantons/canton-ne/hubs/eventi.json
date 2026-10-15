@@ -4,17 +4,17 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "922c42872da1f61208cdcf4b9254e9304c77889334acf041236d26259ed0c91e",
+  "updatedAt": "2026-10-15T00:06:40.869Z",
+  "contentHash": "9fe3fbd12e3d4fd3728d365be1b21d125357963af04916da62328e06f0064088",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T21:57:18.142Z",
+      "updatedAt": "2026-10-14T13:57:52.093Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "33",
+          "value": "32",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,27 +38,15 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "À chaque tête son chapeau",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/a-chaque-tete-son-chapeau/"
-            },
-            {
-              "label": "Crée ton magazine de skate",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cree-ton-magazine-de-skate-2/"
-            },
-            {
               "label": "Atelier de gravure pour tous",
               "detail": "Musée d'art et d'histoire, Neuchâtel — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
             },
             {
               "label": "Démonstration de dentellières",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
             },
             {
@@ -96,11 +84,23 @@
               "detail": "La Chaux-de-Fonds",
               "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/serguei-rachmaninov-naimait-pas-que-le-piano/"
+            },
+            {
+              "label": "À la poursuite du temps : guided visit in English",
+              "detail": "Neuchâtel",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/a-la-poursuite-du-temps-guided-visit-in-english/"
+            },
+            {
+              "label": "Le temps qui reste",
+              "detail": "Neuchâtel",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-temps-qui-reste/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/neuchatel/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -137,7 +137,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "en": {
       "canton": "NE",
@@ -147,7 +147,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "33",
+          "value": "32",
           "note": "from the site’s events calendar"
         }
       ],
@@ -158,27 +158,15 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "À chaque tête son chapeau",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/a-chaque-tete-son-chapeau/"
-            },
-            {
-              "label": "Crée ton magazine de skate",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cree-ton-magazine-de-skate-2/"
-            },
-            {
               "label": "Atelier de gravure pour tous",
               "detail": "Musée d'art et d'histoire, Neuchâtel — ongoing, last day: 1 November 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
             },
             {
               "label": "Démonstration de dentellières",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — ongoing, last day: 25 October 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
             },
             {
@@ -216,11 +204,23 @@
               "detail": "La Chaux-de-Fonds",
               "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/serguei-rachmaninov-naimait-pas-que-le-piano/"
+            },
+            {
+              "label": "À la poursuite du temps : guided visit in English",
+              "detail": "Neuchâtel",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/a-la-poursuite-du-temps-guided-visit-in-english/"
+            },
+            {
+              "label": "Le temps qui reste",
+              "detail": "Neuchâtel",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-temps-qui-reste/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/neuchatel/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -243,7 +243,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -257,7 +257,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "de": {
       "canton": "NE",
@@ -267,7 +267,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "33",
+          "value": "32",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -278,27 +278,15 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "À chaque tête son chapeau",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/a-chaque-tete-son-chapeau/"
-            },
-            {
-              "label": "Crée ton magazine de skate",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cree-ton-magazine-de-skate-2/"
-            },
-            {
               "label": "Atelier de gravure pour tous",
               "detail": "Musée d'art et d'histoire, Neuchâtel — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
             },
             {
               "label": "Démonstration de dentellières",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
             },
             {
@@ -336,11 +324,23 @@
               "detail": "La Chaux-de-Fonds",
               "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/serguei-rachmaninov-naimait-pas-que-le-piano/"
+            },
+            {
+              "label": "À la poursuite du temps : guided visit in English",
+              "detail": "Neuchâtel",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/a-la-poursuite-du-temps-guided-visit-in-english/"
+            },
+            {
+              "label": "Le temps qui reste",
+              "detail": "Neuchâtel",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-temps-qui-reste/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/neuenburg/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -363,7 +363,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -377,7 +377,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     },
     "fr": {
       "canton": "NE",
@@ -387,7 +387,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "33",
+          "value": "32",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -398,27 +398,15 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "À chaque tête son chapeau",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/a-chaque-tete-son-chapeau/"
-            },
-            {
-              "label": "Crée ton magazine de skate",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cree-ton-magazine-de-skate-2/"
-            },
-            {
               "label": "Atelier de gravure pour tous",
               "detail": "Musée d'art et d'histoire, Neuchâtel — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
             },
             {
               "label": "Démonstration de dentellières",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-14",
+              "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
             },
             {
@@ -456,11 +444,23 @@
               "detail": "La Chaux-de-Fonds",
               "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/serguei-rachmaninov-naimait-pas-que-le-piano/"
+            },
+            {
+              "label": "À la poursuite du temps : guided visit in English",
+              "detail": "Neuchâtel",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/a-la-poursuite-du-temps-guided-visit-in-english/"
+            },
+            {
+              "label": "Le temps qui reste",
+              "detail": "Neuchâtel",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-temps-qui-reste/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/neuchatel/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -483,7 +483,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -497,7 +497,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T00:06:40.869Z"
     }
   }
 }
