@@ -44542,6 +44542,16 @@ const RAW_ARTICLES = [
  authorSlug: 'samuele-valente',
  authorName: 'Samuele Valente',
  },
+ {
+ id: 'tasso-disoccupazione-ticino-trimestri',
+ category: 'novita',
+ date: '2026-10-15T09:49:55.975Z',
+ image: '/images/blog/article-tasso-disoccupazione-ticino-trimestri.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

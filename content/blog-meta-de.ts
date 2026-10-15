@@ -13212,6 +13212,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-15.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 15. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
     'blog.article.bollettino-frontaliere-2026-10-15.seoDescription': 'Grenzgänger-Bulletin vom 15. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
     'blog.article.bollettino-frontaliere-2026-10-15.ogDescription': 'Die Zahlen vom 15. Oktober 2026 für Grenzgänger: wie lange man an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, wie der Franken zuletzt zum Euro stand und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.tasso-disoccupazione-ticino-trimestri.title': 'Steigende Arbeitslosenquote in den kommenden Monaten',
+    'blog.article.tasso-disoccupazione-ticino-trimestri.excerpt': '2,87% im dritten Quartal im Tessin 3,31% im vierten Quartal 2026 erwartet 3,45% im ersten Quartal 2027 geschätzt Jugendarbeitslosenquote steigt: 5,7% Seco-Arbeitslosenquote',
+    'blog.article.tasso-disoccupazione-ticino-trimestri.imageAlt': 'Blick auf den Luganer See mit den Bergen im Hintergrund und Personen, die entlang des Ufers spazieren gehen',
 };
 
 export default blogMetaDe;

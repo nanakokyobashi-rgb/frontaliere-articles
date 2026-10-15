@@ -8299,18 +8299,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.laregione.ch/cantone/locarnese/1956205/aggregazione-brissago-ronco-arriva-la-sospensione-provvisoria": {
-      "section": "frontaliere",
-      "ts": 1791877220078
-    },
-    "frontaliere::https://www.tio.ch/dal-mondo/cronaca/1956363/feriti-supermercato-accoltellamento-aggressione-corea": {
-      "section": "frontaliere",
-      "ts": 1791877238303
-    },
-    "frontaliere::https://www.tio.ch/svizzera/cronaca/1956383/francese-permesso-cittadino-documento-autorita-zurigo-passaporto-due-ginevra-svizzera": {
-      "section": "frontaliere",
-      "ts": 1791880524198
-    },
     "frontaliere::https://www.tvsvizzera.it/tvs/qui-svizzera/quando-le-mail-aziendale-mette-in-pericolo-limpresa/92208074": {
       "section": "frontaliere",
       "ts": 1791890235281
@@ -8506,6 +8494,10 @@
     "frontaliere::https://www.varesenews.it/2026/10/a-castiglione-olona-un-workshop-gratuito-di-difesa-personale-sabato-17-ottobre-con-gli-istruttori-stefano-gallucci-ed-enrico-roma/2707852": {
       "section": "frontaliere",
       "ts": 1792050012664
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/a13-chiusure-notturne-tra-mesocco-roveredo-e-lostallo-444654": {
+      "section": "frontaliere",
+      "ts": 1792057193930
     }
   }
 }

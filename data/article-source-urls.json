@@ -1,9 +1,4 @@
 {
-  "https://comozero.it/attualita/pessime-notizie-per-i-frontalieri-italiani-il-franco-svizzero-crolla-ai-minimi-dallestate-2025": {
-    "articleId": "franco-svizzero-crolla-minimi-2025",
-    "ts": "2026-09-02T22:51:03.863Z",
-    "keyForm": 2
-  },
   "https://comozero.it/attualita/trenord-rubati-cavi-di-rame-sulla-tratta-como-milano-circolazione-treni-sospesa-caos-disagi-e-alternative": {
     "articleId": "trenord-furto-di-cavi-sospesa-como-milano",
     "ts": "2026-09-03T05:21:22.012Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4164916": {
     "articleId": "sconto-dipendenti-migros-ccl",
     "ts": "2026-10-15T08:28:42.969Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/ticino/1956748/tasso-di-disoccupazione-in-crescita-nei-prossimi-mesi": {
+    "articleId": "tasso-disoccupazione-ticino-trimestri",
+    "ts": "2026-10-15T09:49:56.441Z",
     "keyForm": 2
   }
 }

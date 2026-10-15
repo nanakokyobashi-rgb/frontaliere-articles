@@ -13215,6 +13215,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-15.imageAlt': 'Les chiffres du jour pour les frontaliers – 15 octobre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
     'blog.article.bollettino-frontaliere-2026-10-15.seoDescription': 'Bulletin du frontalier du 15 octobre 2026 : les files relevées aux douanes, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
     'blog.article.bollettino-frontaliere-2026-10-15.ogDescription': 'Les chiffres du 15 octobre 2026 pour les frontaliers : combien de temps on attend à chaque douane, où l\'essence coûte le moins cher, quel est le dernier taux franc-euro relevé et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.tasso-disoccupazione-ticino-trimestri.title': 'Taux de chômage en hausse au cours des prochains mois',
+    'blog.article.tasso-disoccupazione-ticino-trimestri.excerpt': '2,87% au troisième trimestre au Tessin 3,31% prévu au quatrième trimestre 2026 3,45% estimé au premier trimestre 2027 Taux de chômage des jeunes en hausse : 5,7% Taux Seco',
+    'blog.article.tasso-disoccupazione-ticino-trimestri.imageAlt': 'Vue du lac de Lugano avec les montagnes en arrière-plan et des personnes marchant le long de la rive',
 };
 
 export default blogMetaFr;
