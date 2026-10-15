@@ -90,6 +90,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-15T04:28:18.437Z",
       "lastFailureAt": "2026-10-15T04:28:18.437Z"
+    },
+    {
+      "articleId": "regole-orari-negozi-lucerna",
+      "title": "Orari negozi Cantone Lucerna: guida a domeniche e festivi",
+      "fallbackImage": "/images/blog/article-negozi-berna-orari-festivi-regole.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T04:50:02.400Z",
+      "lastFailureAt": "2026-10-15T04:50:02.400Z"
     }
   ]
 }
