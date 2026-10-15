@@ -70,6 +70,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-15T22:59:15.513Z",
       "lastFailureAt": "2026-10-15T22:59:15.513Z"
+    },
+    {
+      "articleId": "estradizione-pakistan-como",
+      "title": "Accusato di omicidio, arrestato a Como per l’estradizione",
+      "fallbackImage": "/images/blog/estradizione-arresto-como.webp",
+      "reason": "All image providers failed for article-estradizione-pakistan-como: openai-codex (vision gate rejected image: Generic synthetic arrest illustration, but it includes recognizable for",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T23:12:57.417Z",
+      "lastFailureAt": "2026-10-15T23:12:57.417Z"
     }
   ]
 }

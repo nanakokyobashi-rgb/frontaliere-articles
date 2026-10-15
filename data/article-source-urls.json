@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/autonomia-differenziata-ok-della-commissione-congiunta-alla-risoluzione-su-salute-protezione-civile-professioni-e-previdenza/2669188": {
-    "articleId": "autonomia-differenziata-lombardia-2026",
-    "ts": "2026-09-05T09:33:22.733Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/mezzo-in-fiamme-sullautostrada-tra-vergiate-e-besnate-colonna-di-fumo-e-traffico-in-tilt/2669410": {
     "articleId": "mezzo-in-fiamme-vergiate-besnate",
     "ts": "2026-09-05T09:46:47.787Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/entra-abusivamente-nellautorimessa-del-comando-dei-vigili-del-fuoco-arrestato-a-como-dalla-polizia/2709043": {
     "articleId": "arresto-cittadino-russo-como",
     "ts": "2026-10-15T22:59:15.515Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/cronaca/accusato-di-omicidio-fugge-dal-pakistan-fermato-dalla-polizia-a-como-sara-estradato": {
+    "articleId": "estradizione-pakistan-como",
+    "ts": "2026-10-15T23:12:57.419Z",
     "keyForm": 2
   }
 }
