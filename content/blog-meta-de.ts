@@ -13224,6 +13224,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.ata-critica-progetto-a2-mendrisio.title': 'ATA wendet sich gegen den Ausbau der A2 Mendrisio‑Melano',
     'blog.article.ata-critica-progetto-a2-mendrisio.excerpt': 'Die ATA wendet sich gegen den Ausbau der A2 zwischen Mendrisio und Melano Das Projekt umfasst das Lenaccio-Viadukt und Lärmschutzwände PoLuMe sieht eine dritte Fahrspur vor',
     'blog.article.ata-critica-progetto-a2-mendrisio.imageAlt': 'Lenaccio-Brücke der A2 bei Mendrisio mit im Bau befindlichen Lärmschutzwänden',
+    'blog.article.preventivo-lugano-disavanzo-2027.title': 'Lugano: Der Voranschlag 2027 sieht ein Defizit von 14,7 Millionen vor',
+    'blog.article.preventivo-lugano-disavanzo-2027.excerpt': 'Lugano erwartet ein Defizit von 14,7 Millionen Das Ergebnis verbessert sich gegenüber dem Plan 2026-2033 um 4,8 Millionen Die Steuerfüsse bleiben bei 80% und 85% Die Investitionen',
+    'blog.article.preventivo-lugano-disavanzo-2027.imageAlt': 'Panoramablick auf die Stadt Lugano und den See',
 };
 
 export default blogMetaDe;

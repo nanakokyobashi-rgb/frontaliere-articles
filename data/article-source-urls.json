@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/sciopero-dei-treni-tra-il-7-e-l8-settembre-24-ore-di-stop-e-disagi-per-i-pendolari/2669332": {
-    "articleId": "sciopero-treni-settembre-2026",
-    "ts": "2026-09-03T08:27:48.497Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/treno-da-varese-bloccato-nel-passante-di-milano-evacuati-trecento-passeggeri-disagi-a-tutte-le-linee/2669455": {
     "articleId": "passante-milano-treno-evacuati",
     "ts": "2026-09-03T12:36:52.579Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/politica/1956918/associazione-ata-corsia-traffico-progetto-melano-ampliamento-aumento-mendrisio-a2": {
     "articleId": "ata-critica-progetto-a2-mendrisio",
     "ts": "2026-10-15T12:05:57.457Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/lugano-stima-un-disavanzo-di-147-milioni-meno-del-previsto-444691": {
+    "articleId": "preventivo-lugano-disavanzo-2027",
+    "ts": "2026-10-15T13:14:32.852Z",
     "keyForm": 2
   }
 }

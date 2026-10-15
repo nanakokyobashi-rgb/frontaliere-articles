@@ -44584,6 +44584,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'preventivo-lugano-disavanzo-2027',
+ category: 'fiscale',
+ date: '2026-10-15T13:14:32.255Z',
+ image: '/images/blog/article-preventivo-lugano-disavanzo-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

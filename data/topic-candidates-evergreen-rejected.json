@@ -8299,22 +8299,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.swissinfo.ch/ita/quando-l%27e-mail-aziendale-mette-in-pericolo-l%27impresa/92207900": {
-      "section": "frontaliere",
-      "ts": 1791891416936
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1956415/grandine-swiss-agosto-danni-re-svizzera-miliardi": {
-      "section": "frontaliere",
-      "ts": 1791891447360
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/presentati-a-milano-i-risultati-di-bridge-il-70-dei-giovani-migranti-formati-ha-gia-un-lavoro/2706442": {
-      "section": "frontaliere",
-      "ts": 1791891480384
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/cislago-ufficio-postale-chiuso-fino-al-25-novembre-per-i-lavori-del-progetto-polis/2706364": {
-      "section": "frontaliere",
-      "ts": 1791891501297
-    },
     "frontaliere::https://www.varesenoi.it/2026/10/13/leggi-notizia/argomenti/cronaca-20/articolo/allarme-bomba-in-una-banca-di-chiasso-zaino-sospetto-neutralizzato-dagli-artificieri.html": {
       "section": "frontaliere",
       "ts": 1791909887062
@@ -8506,6 +8490,10 @@
     "frontaliere::https://www.varesenews.it/2026/10/duplomatic-di-legnano-stipendio-a-meta-scatta-lo-sciopero-a-singhiozzo/2708569": {
       "section": "frontaliere",
       "ts": 1792063974978
+    },
+    "frontaliere::https://www.rsi.ch/info/svizzera/l%e2%80%99ia-aiuta-i-consumatori-svizzeri-a-fare-shopping--4164661.html": {
+      "section": "frontaliere",
+      "ts": 1792069217136
     }
   }
 }

@@ -13226,6 +13226,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.ata-critica-progetto-a2-mendrisio.title': 'ATA si oppone all’ampliamento A2 Mendrisio‑Melano',
     'blog.article.ata-critica-progetto-a2-mendrisio.excerpt': 'L\'ATA si oppone all\'ampliamento dell\'A2 tra Mendrisio e Melano Il progetto include il viadotto Lenaccio e pareti foniche PoLuMe prevede una terza corsia',
     'blog.article.ata-critica-progetto-a2-mendrisio.imageAlt': 'Viadotto Lenaccio dell\'A2 vicino a Mendrisio con pareti foniche in costruzione',
+    'blog.article.preventivo-lugano-disavanzo-2027.title': 'Lugano: preventivo 2027 stima disavanzo di 14,7 milioni',
+    'blog.article.preventivo-lugano-disavanzo-2027.excerpt': 'Lugano prevede un disavanzo di 14,7 milioni Il risultato migliora di 4,8 milioni sul piano 2026-2033 I moltiplicatori restano all\'80% e all\'85% Gli investimenti',
+    'blog.article.preventivo-lugano-disavanzo-2027.imageAlt': 'Vista panoramica della città di Lugano e del lago',
 };
 
 export default blogMetaIt;
