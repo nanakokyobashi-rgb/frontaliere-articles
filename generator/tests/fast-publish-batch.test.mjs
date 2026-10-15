@@ -38,13 +38,16 @@ test('il trigger push conserva tutti gli ID dei body cambiati', () => {
   assert.match(resolveStep, /echo "matrix=\$matrix_with_shards"/);
   assert.doesNotMatch(resolveStep, /body_section=svizzera/);
   assert.match(resolveStep, /sort -u/);
-  assert.match(resolveStep, /ids\+=\("\$body_id"\)/);
+  assert.match(resolveStep, /body_ids_json=.*\[\$id\]/);
+  assert.match(resolveStep, /groups=.*body_section.*body_ids_json/);
+  assert.doesNotMatch(resolveStep, /one commit changes both article sections/);
+  assert.match(resolveStep, /EVENT_NAME.*workflow_dispatch.*section.*body_section/);
   assert.match(resolveStep, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);
   assert.match(resolveStep, /if \[ "\$\{#ids\[@\]\}" -eq 0 \]; then[\s\S]*git diff --name-only "\$before" HEAD/);
   assert.doesNotMatch(resolveStep, /head\s+-1/);
 });
 
-test('un piano immagine multi-sezione diventa target matrix separati, senza allargare il guard dei body', () => {
+test('body e immagini multi-sezione diventano target matrix separati', () => {
   const resolveStep = stepText('Resolve mode, article ids and section');
   const imagePlan = resolveStep.slice(resolveStep.indexOf('image_plan='));
   assert.match(imagePlan, /image_section=/);

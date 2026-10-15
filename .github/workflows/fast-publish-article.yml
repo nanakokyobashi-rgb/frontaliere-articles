@@ -175,7 +175,6 @@ jobs:
           set -euo pipefail
           ids=()
           groups='{}'
-          body_section_seen=''
           write_output() { printf '%s\n' "$1" >> "$GITHUB_OUTPUT"; }
           if [ "$EVENT_NAME" = 'push' ]; then
             cover_drain_marker="$(node scripts/ci/cover-drain-commit.mjs is-cover-drain)"
@@ -235,7 +234,8 @@ jobs:
 
           # Keep the legacy empty-dispatch behavior: with no explicit id, use
           # the body files from the last corpus commit. Collect every match,
-          # not just the first one, so a batch commit is published whole.
+          # group it by its owning section and publish the whole batch, even
+          # when one commit legitimately updates more than one Pages section.
           # Which directories hold article bodies, and which section owns each,
           # comes from the section core (scripts/ci/fast-publish-section.mjs):
           # the old `case` sent every non-`blog-body-ch` body to frontaliere,
@@ -253,24 +253,18 @@ jobs:
               [ -f "$body" ] || continue
               body_id="$(basename "$body" .ts)"
               body_section="$(node scripts/ci/fast-publish-section.mjs section-of "$body")"
-              if [ -n "${section:-}" ] && [ "$section" != "$body_section" ]; then
-                echo "::error::one commit changes both article sections; publish them in separate commits"
+              if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -n "${section:-}" ] && [ "$section" != "$body_section" ]; then
+                echo "::error::derived body section '$body_section' does not match requested section '$section'"
                 exit 1
               fi
-              if [ -n "$body_section_seen" ] && [ "$body_section_seen" != "$body_section" ]; then
-                echo "::error::one commit changes both article sections; publish them in separate commits"
-                exit 1
-              fi
-              body_section_seen="$body_section"
-              section="$body_section"
-              ids+=("$body_id")
+              body_ids_json="$(jq -cn --arg id "$body_id" '[$id]')"
+              groups="$(jq -c --arg s "$body_section" --argjson ids "$body_ids_json" '.[$s] = ((.[$s] // []) + $ids | unique | sort)' <<<"$groups")"
             done
           fi
 
-          # Body batches keep the cross-section guard above. Image-only commits
-          # are different: the registry may legitimately map one image to
-          # articles in multiple Pages sections, so each ownership group gets
-          # its own matrix target instead of aborting at the second section.
+          # Explicit dispatch ids form one target; body and image changes are
+          # already grouped by ownership, so every section gets its own matrix
+          # target and same-shard targets remain serialized by job concurrency.
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${{ github.event_name }}" = "push" ]; then
             if [ "${#ids[@]}" -gt 0 ]; then
               section="${section:-frontaliere}"
