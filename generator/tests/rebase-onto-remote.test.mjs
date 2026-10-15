@@ -1112,6 +1112,9 @@ test('an empty allowlist is a caller bug, not a silent always-abort', () => {
 const REGISTRY = 'content/blog-articles-data.ts';
 const SWISS_REGISTRY = 'content/swiss-articles-data.ts';
 const SPACED_REGISTRY = 'content/registry with spaces.ts';
+const GLOB_LITERAL_REGISTRY = 'content/registry?.ts';
+const GLOB_DECOY_REGISTRY = 'content/registryA.ts';
+const EXPLICIT_REGISTRY_PATTERN = 'content/registry-*.ts';
 const RESOLVER = path.resolve(HERE, '../../scripts/lib/merge-content-registry-conflict.mjs');
 
 /** Il registro FRONTALIERE con gli id dati, nella forma reale (array di oggetti). */
@@ -1223,6 +1226,77 @@ test('un registry dichiarato con --merge-registry conserva gli spazi nel path', 
       assert.match(merged, new RegExp(id), `${id} deve restare nel registro con path spazioso`);
     }
     assert.doesNotMatch(merged, /<{7}|={7}|>{7}/, 'il registro fuso non deve contenere marker di conflitto');
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('un registry letterale con metacaratteri glob usa il confronto esatto', () => {
+  const w = makeWorld();
+  try {
+    landUpstream(w, [[
+      GLOB_LITERAL_REGISTRY,
+      articlesRegistry(['articolo-base', 'articolo-concorrente']),
+      'concurrent publisher updates literal glob-shaped registry',
+    ]]);
+
+    write(w.work, GLOB_LITERAL_REGISTRY, articlesRegistry(['articolo-base', 'articolo-locale']));
+    commitAll(w.work, 'publish local literal glob-shaped registry');
+
+    const { code, out } = runHelper(w.work, w.upstream, '--merge-registry', GLOB_LITERAL_REGISTRY);
+    assert.equal(code, 0, out);
+
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+    const merged = git(w.work, 'show', 'HEAD:' + GLOB_LITERAL_REGISTRY);
+    for (const id of ['articolo-base', 'articolo-concorrente', 'articolo-locale']) {
+      assert.match(merged, new RegExp(id), 'il record ' + id + ' deve restare nel registro glob-shaped');
+    }
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('un path letterale non classifica un altro file come registro wildcard', () => {
+  const w = makeWorld();
+  try {
+    landUpstream(w, [[
+      GLOB_DECOY_REGISTRY,
+      articlesRegistry(['articolo-base', 'articolo-concorrente']),
+      'concurrent publisher updates a different registry',
+    ]]);
+
+    write(w.work, GLOB_DECOY_REGISTRY, articlesRegistry(['articolo-base', 'articolo-locale']));
+    commitAll(w.work, 'publish a different registry');
+
+    const { code, out } = runHelper(w.work, w.upstream, '--merge-registry', GLOB_LITERAL_REGISTRY);
+    assert.equal(code, 1, 'un path non dichiarato non deve essere inviato al resolver dei registri');
+    assert.match(out, /not a whole-file bookkeeping cache/);
+    assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'il rebase deve essere abortito pulitamente');
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('un glob viene interpretato solo con --merge-registry-pattern', () => {
+  const w = makeWorld();
+  const matched = 'content/registry-primary.ts';
+  try {
+    landUpstream(w, [[
+      matched,
+      articlesRegistry(['articolo-base', 'articolo-concorrente']),
+      'concurrent publisher updates a patterned registry',
+    ]]);
+
+    write(w.work, matched, articlesRegistry(['articolo-base', 'articolo-locale']));
+    commitAll(w.work, 'publish patterned registry');
+
+    const { code, out } = runHelper(w.work, w.upstream, '--merge-registry-pattern', EXPLICIT_REGISTRY_PATTERN);
+    assert.equal(code, 0, out);
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+    const merged = git(w.work, 'show', 'HEAD:' + matched);
+    for (const id of ['articolo-base', 'articolo-concorrente', 'articolo-locale']) {
+      assert.match(merged, new RegExp(id));
+    }
   } finally {
     w.cleanup();
   }

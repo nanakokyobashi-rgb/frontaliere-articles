@@ -4,7 +4,8 @@
 #
 # Usage:
 #   bash scripts/lib/rebase-onto-remote.sh <remote-url> <target-branch> [bookkeeping-path...]
-#     [--merge-registry <path-or-pattern>] [--merge-queue <path>] [--take-theirs <prefix/>]
+#     [--merge-registry <path>] [--merge-registry-pattern <glob>]
+#     [--merge-queue <path>] [--take-theirs <prefix/>]
 #     [--merge-counter <path>:<field>]
 #     [--section-surfaces]   # i path di ogni sezione ATTIVA del core, derivati
 #                            # da scripts/ci/rebase-section-args.mjs
@@ -116,7 +117,9 @@ COUNTER_RESOLVER="$SCRIPT_DIR/merge-counter-conflict.mjs"
 # the file, and collapsing any two of them resolves a conflict the wrong way.
 #
 #   (bare path)        cache di bookkeeping   → prendi UPSTREAM
-#   --merge-registry   registro append-only (anche pattern) → unisci i RECORD
+#   --merge-registry   registro append-only con path letterale → unisci i RECORD
+#   --merge-registry-pattern
+#                      registro append-only con glob esplicito → unisci i RECORD
 #   --merge-queue      coda globale per articleId → unisci gli ITEM
 #   --take-theirs      file PER-ARTICOLO      → prendi il commit rigiocato
 #   --merge-counter    contatore (path:campo) → upstream + incremento rigiocato
@@ -141,6 +144,7 @@ COUNTER_RESOLVER="$SCRIPT_DIR/merge-counter-conflict.mjs"
 # so #281 would have stayed open with the fix in place.
 ALLOWED=" "
 REGISTRIES=()
+REGISTRY_PATTERNS=()
 QUEUES=" "
 THEIRS_PREFIXES=""
 # COUNTERS tiene i path (per classificare), COUNTER_SPECS le coppie path:campo
@@ -187,6 +191,11 @@ EOF_SECTION_ARGS
       REGISTRIES+=("$2")
       shift 2
       ;;
+    --merge-registry-pattern)
+      [ "$#" -ge 2 ] || { echo "::error::--merge-registry-pattern requires a glob"; exit 2; }
+      REGISTRY_PATTERNS+=("$2")
+      shift 2
+      ;;
     --merge-queue)
       [ "$#" -ge 2 ] || { echo "::error::--merge-queue requires a path"; exit 2; }
       QUEUES="$QUEUES$2 "
@@ -208,8 +217,8 @@ done
 # Guard against an empty argument list: with no paths declared in any category
 # nothing can ever be resolved, and silently degrading to "always abort" would
 # hide a caller bug behind behaviour that looks exactly like the old code.
-if [ "$ALLOWED" = " " ] && [ "${#REGISTRIES[@]}" -eq 0 ] && [ "$QUEUES" = " " ] && [ -z "$THEIRS_PREFIXES" ] && [ "$COUNTERS" = " " ]; then
-  echo "::error::rebase-onto-remote.sh called with no bookkeeping allowlist, no --merge-registry, no --merge-queue, no --take-theirs and no --merge-counter paths"
+if [ "$ALLOWED" = " " ] && [ "${#REGISTRIES[@]}" -eq 0 ] && [ "${#REGISTRY_PATTERNS[@]}" -eq 0 ] && [ "$QUEUES" = " " ] && [ -z "$THEIRS_PREFIXES" ] && [ "$COUNTERS" = " " ]; then
+  echo "::error::rebase-onto-remote.sh called with no bookkeeping allowlist, no --merge-registry, no --merge-registry-pattern, no --merge-queue, no --take-theirs and no --merge-counter paths"
   exit 2
 fi
 
@@ -239,13 +248,25 @@ EOF
   return 1
 }
 
-# `--merge-registry` accepts exact paths and shell-style path patterns. The
-# caller quotes patterns so they reach this helper intact; match them against
-# concrete unmerged paths before passing only those paths to the resolver.
+# `--merge-registry` is deliberately literal: a path containing `?`, `[` or
+# `*` is still one exact path. Shell-style matching is available only through
+# `--merge-registry-pattern`, so a wildcard is always an explicit caller
+# decision. Match both kinds against concrete unmerged paths before passing
+# only those paths to the resolver.
+isLiteralRegistryPath() {
+  local candidate="$1" literal
+  [ "${#REGISTRIES[@]}" -gt 0 ] || return 1
+  for literal in "${REGISTRIES[@]}"; do
+    [ "$candidate" = "$literal" ] && return 0
+  done
+  return 1
+}
+
 is_registry() {
   local candidate="$1" pattern
-  [ "${#REGISTRIES[@]}" -gt 0 ] || return 1
-  for pattern in "${REGISTRIES[@]}"; do
+  isLiteralRegistryPath "$candidate" && return 0
+  [ "${#REGISTRY_PATTERNS[@]}" -gt 0 ] || return 1
+  for pattern in "${REGISTRY_PATTERNS[@]}"; do
     case "$candidate" in
       $pattern) return 0 ;;
     esac
