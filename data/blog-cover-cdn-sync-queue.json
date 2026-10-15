@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-tassi-conti-3a-ottobre-2024.webp",
-      "sha256": "1c4554eb34d5ca63d6f75300abdfd634c649e6d25bb7e2c576d50fb17fdf29a2"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-tassi-conti-3a-ottobre-2024-480w.webp",
-      "sha256": "699640295d1a537f1002992c7e0d8e6206fca25824e8283f473a42525b3839a4"
-    }
-  ]
+  "items": []
 }
