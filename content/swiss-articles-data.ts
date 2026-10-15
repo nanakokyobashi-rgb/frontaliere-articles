@@ -27891,6 +27891,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'amaudruz-candidatura-federale',
+    category: 'novita',
+    date: '2026-10-15T09:20:43.055Z',
+    image: '/images/blog/article-amaudruz-candidatura-federale.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
