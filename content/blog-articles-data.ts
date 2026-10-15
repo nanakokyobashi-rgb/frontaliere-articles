@@ -44697,6 +44697,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'ssr-riduce-organico-risparmi',
+ category: 'novita',
+ date: '2026-10-15T21:41:26.844Z',
+ image: '/images/blog/swiss-life-taglio-posti-lavoro-2028.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

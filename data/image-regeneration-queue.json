@@ -50,6 +50,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-15T21:15:44.304Z",
       "lastFailureAt": "2026-10-15T21:15:44.304Z"
+    },
+    {
+      "articleId": "ssr-riduce-organico-risparmi",
+      "title": "La SSR taglia altri 202 posti di lavoro",
+      "fallbackImage": "/images/blog/swiss-life-taglio-posti-lavoro-2028.webp",
+      "reason": "All image providers failed for article-ssr-riduce-organico-risparmi: openai-codex (vision gate rejected image: Generic synthetic newsroom scene, but it includes a recognizable fore",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-15T21:41:27.541Z",
+      "lastFailureAt": "2026-10-15T21:41:27.541Z"
     }
   ]
 }

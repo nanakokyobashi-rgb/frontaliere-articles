@@ -1,9 +1,4 @@
 {
-  "https://www.varesenoi.it/2026/09/04/leggi-notizia/argomenti/economia-13/articolo/non-solo-caro-carburanti-anche-le-bollette-aumentano-rischio-stangata-in-autunno-e-inverno-in-prov.html": {
-    "articleId": "aumento-bollette-varese-frontalieri",
-    "ts": "2026-09-04T18:05:43.761Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/export-la-provincia-di-varese-prima-in-lombardia-con-232-a-trainare-e-laerospazio/2670369": {
     "articleId": "varese-export-q1-2026",
     "ts": "2026-09-04T18:33:32.040Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4167160": {
     "articleId": "inchiesta-medico-locarnese",
     "ts": "2026-10-15T21:15:44.306Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4166779": {
+    "articleId": "ssr-riduce-organico-risparmi",
+    "ts": "2026-10-15T21:41:27.543Z",
     "keyForm": 2
   }
 }
