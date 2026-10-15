@@ -27796,6 +27796,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'licenza-pubblico-berna-requisiti',
+    category: 'pratico',
+    date: '2026-10-15T04:03:35.085Z',
+    image: '/images/blog/article-licenza-pubblico-berna-requisiti.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['BE'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
