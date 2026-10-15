@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/sggekcibadfx": {
-    "articleId": "stefan-leist-vicedirettore-aff-2026",
-    "ts": "2026-09-10T05:17:54.983Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/nuovo-investimento-svizzero-in-usa%2c-lonza-costruir%c3%a0-nuova-fabbrica/92037653": {
     "articleId": "investimento-svizzero-usa-lonza",
     "ts": "2026-09-11T00:33:25.918Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1956852/svizzera-ubs-trasferimento-scenari-valuta-tavolo-tre": {
     "articleId": "ubs-scenari-trasferimento-sede",
     "ts": "2026-10-15T06:00:41.142Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4154382": {
+    "articleId": "premio-economia-stabilizzazione",
+    "ts": "2026-10-15T06:25:40.836Z",
     "keyForm": 2
   }
 }
