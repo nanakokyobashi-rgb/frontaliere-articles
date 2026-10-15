@@ -27982,6 +27982,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'fusione-palestre-puregym-nonstop',
+    category: 'novita',
+    date: '2026-10-15T17:37:40.402Z',
+    image: '/images/blog/article-fusione-palestre-puregym-nonstop.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -8378,6 +8378,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.cormann-visita-berna.title': 'Cormann presents the OECD 2026 report on Switzerland',
     'blog.article.cormann-visita-berna.excerpt': 'On September 10, 2026, SECO announces the visit of Mathias Cormann.',
     'blog.article.cormann-visita-berna.imageAlt': 'Federal Palace press centre in Bern for the OECD report on Swiss economic policy',
+    'blog.article.fusione-palestre-puregym-nonstop.title': 'Puregym acquires Nonstop Gym: goal of 100 clubs by 2026',
+    'blog.article.fusione-palestre-puregym-nonstop.excerpt': 'Puregym acquires the Swiss chain Nonstop Gym Puregym operates 49 gyms in Switzerland Nonstop Gym has 48 More than 100 facilities by the end of 2026',
+    'blog.article.fusione-palestre-puregym-nonstop.imageAlt': 'Interior of a modern gym in Switzerland',
 };
 
 export default blogMetaChEn;

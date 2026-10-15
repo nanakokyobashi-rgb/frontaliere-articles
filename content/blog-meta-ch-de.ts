@@ -8378,6 +8378,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.cormann-visita-berna.title': 'Cormann präsentiert den OECD-Bericht 2026 über die Schweiz',
     'blog.article.cormann-visita-berna.excerpt': 'Am 10. September 2026 kündigt das SECO den Besuch von Mathias Cormann an.',
     'blog.article.cormann-visita-berna.imageAlt': 'Medienzentrum des Bundeshauses in Bern zur Präsentation des OECD-Berichts zur Schweizer Wirtschaftspolitik',
+    'blog.article.fusione-palestre-puregym-nonstop.title': 'Puregym übernimmt Nonstop Gym: Ziel 100 Clubs bis 2026',
+    'blog.article.fusione-palestre-puregym-nonstop.excerpt': 'Puregym übernimmt die Schweizer Fitnesskette Nonstop Gym Puregym betreibt 49 Fitnessstudios in der Schweiz Nonstop Gym zählt 48 Über 100 Standorte bis Ende 2026',
+    'blog.article.fusione-palestre-puregym-nonstop.imageAlt': 'Innenansicht eines modernen Fitnessstudios in der Schweiz',
 };
 
 export default blogMetaChDe;

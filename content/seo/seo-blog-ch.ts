@@ -105794,6 +105794,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fusione-palestre-puregym-nonstop': {
+    title: 'Puregym acquisisce Nonstop Gym: obiettivo 100 club entro 2026',
+    description: 'Puregym acquisisce la catena svizzera Nonstop Gym Puregym gestisce 49 palestre in Svizzera Nonstop Gym ne conta 48 Oltre 100 strutture entro fine 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, puregym, acquisisce, nonstop, obiettivo',
+    ogTitle: 'Puregym acquisisce Nonstop Gym: l\'obiettivo è il primato in Svizzera',
+    ogDescription: 'Puregym acquisisce la catena svizzera Nonstop Gym Puregym gestisce 49 palestre in Svizzera Nonstop Gym ne conta 48 Oltre 100 strutture entro fine 2026',
+    canonicalPath: '/articoli-svizzera/fusione-palestre-puregym-nonstop/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Puregym acquisisce Nonstop Gym: obiettivo 100 club entro 2026",
+      "description": "Puregym acquisisce la catena svizzera Nonstop Gym Puregym gestisce 49 palestre in Svizzera Nonstop Gym ne conta 48 Oltre 100 strutture entro fine 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-fusione-palestre-puregym-nonstop.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Interno di una palestra moderna in Svizzera"
+      },
+      "datePublished": "2026-10-15T17:37:40+00:00",
+      "dateModified": "2026-10-15T17:37:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fusione-palestre-puregym-nonstop/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

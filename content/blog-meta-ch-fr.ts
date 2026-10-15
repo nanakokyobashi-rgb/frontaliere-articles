@@ -8378,6 +8378,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.cormann-visita-berna.title': 'Cormann présente le rapport de l’OCDE 2026 sur la Suisse',
     'blog.article.cormann-visita-berna.excerpt': 'Le 10 septembre 2026, le SECO annonce la visite de Mathias Cormann.',
     'blog.article.cormann-visita-berna.imageAlt': 'Centre de presse du Palais fédéral à Berne pour le rapport de l\'OCDE sur la politique économique suisse',
+    'blog.article.fusione-palestre-puregym-nonstop.title': 'Puregym acquiert Nonstop Gym : objectif 100 clubs d\'ici 2026',
+    'blog.article.fusione-palestre-puregym-nonstop.excerpt': 'Puregym acquiert la chaîne suisse Nonstop Gym Puregym gère 49 salles de sport en Suisse Nonstop Gym en compte 48 Plus de 100 établissements d\'ici fin 2026',
+    'blog.article.fusione-palestre-puregym-nonstop.imageAlt': 'Intérieur d\'une salle de sport moderne en Suisse',
 };
 
 export default blogMetaChFr;

@@ -1,9 +1,4 @@
 {
-  "https://www.laregione.ch/economia/economia/1949608/crescono-in-svizzera-le-condanne-contro-le-banche": {
-    "articleId": "condanne-banche-svizzera-corruzione",
-    "ts": "2026-09-13T00:20:13.686Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/viwq1myakv3b": {
     "articleId": "traffico-merci-alpi-semestre-2026",
     "ts": "2026-09-13T01:07:46.995Z",
@@ -2497,6 +2492,11 @@
   "https://www.seco.admin.ch/it/newnsb/b7skpa2cafet": {
     "articleId": "cormann-visita-berna",
     "ts": "2026-10-15T17:22:41.136Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1957022/svizzera-palestre-nonstop-gym-gruppo-puregym-fusione": {
+    "articleId": "fusione-palestre-puregym-nonstop",
+    "ts": "2026-10-15T17:37:41.023Z",
     "keyForm": 2
   }
 }
