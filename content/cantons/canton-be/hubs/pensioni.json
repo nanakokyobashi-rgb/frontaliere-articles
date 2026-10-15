@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "f0840b17d401089a9a5ed1082a93bec88f064cc904b2df1c9a990f8a54c2134d",
+  "updatedAt": "2026-10-15T04:33:54.268Z",
+  "contentHash": "aea2efed5060d34f6eb9c4fd54b0f4efba10e79210d3f2ea726d15ed3a3a8f8f",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T16:01:15.871Z",
       "keyFacts": 0
     }
   ],
@@ -146,7 +146,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -155,6 +155,12 @@
           "url": "/articoli-berna/cyberattacco-casse-pensione-berna/",
           "excerpt": "Una fornitrice software esterna di BPK e BLVK è stata colpita a fine settembre.",
           "date": "2026-10-09T23:26:36.398Z"
+        },
+        {
+          "title": "Corsi lingua Berna: integrazione, contributi e requisiti",
+          "url": "/articoli-svizzera/integrazione-lingua-berna-contributi/",
+          "excerpt": "Nel Cantone di Berna i programmi di integrazione e i contributi alla formazione continua dipendono dal livello cantonale, comunale o istituzionale; requisiti, scadenze e importi devono essere verificati sulla fonte…",
+          "date": "2026-10-15T04:28:17.925Z"
         },
         {
           "title": "AVS e prestazioni complementari nel Canton Berna",
@@ -211,7 +217,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T04:33:54.268Z"
     },
     "en": {
       "canton": "BE",
@@ -330,7 +336,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -339,6 +345,12 @@
           "url": "/en/bern-articles/cyberattack-bern-pension-funds/",
           "excerpt": "An external software provider for BPK and BLVK was affected at the end of September.",
           "date": "2026-10-09T23:26:36.398Z"
+        },
+        {
+          "title": "Language courses in Bern: integration, subsidies and requirements",
+          "url": "/en/swiss-articles/language-courses-in-bern-integration-subsidies-and-requirements/",
+          "excerpt": "In the Canton of Bern, integration programs and continuing education contributions depend on the cantonal, municipal or institutional level; requirements, deadlines and amounts must be verified using the official source.",
+          "date": "2026-10-15T04:28:17.925Z"
         },
         {
           "title": "AVS and complementary services in Canton Bern",
@@ -395,7 +407,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T04:33:54.268Z"
     },
     "de": {
       "canton": "BE",
@@ -514,7 +526,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -523,6 +535,12 @@
           "url": "/de/bern-artikel/cyberangriff-berner-pensionskassen/",
           "excerpt": "Eine externe Softwareanbieterin für BPK und BLVK wurde Ende September angegriffen.",
           "date": "2026-10-09T23:26:36.398Z"
+        },
+        {
+          "title": "Sprachkurse Bern: Integration, Beiträge und Voraussetzungen",
+          "url": "/de/schweiz-artikel/sprachkurse-bern-integration-beitrage-und-voraussetzungen/",
+          "excerpt": "Im Kanton Bern hängen Integrationsprogramme und Beiträge zur Weiterbildung von der kantonalen, kommunalen oder institutionellen Ebene ab; Voraussetzungen, Fristen und Beträge müssen anhand der offiziellen Quelle…",
+          "date": "2026-10-15T04:28:17.925Z"
         },
         {
           "title": "AHV und Ergänzungsleistungen im Kanton Bern",
@@ -579,7 +597,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T04:33:54.268Z"
     },
     "fr": {
       "canton": "BE",
@@ -698,7 +716,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T16:01:15.871Z"
         }
       ],
       "curatedArticles": [
@@ -707,6 +725,12 @@
           "url": "/fr/articles-berne/cyberattaque-caisses-pension-berne/",
           "excerpt": "Une fournisseuse externe de logiciels de BPK et de BLVK a été touchée fin septembre.",
           "date": "2026-10-09T23:26:36.398Z"
+        },
+        {
+          "title": "Cours de langue Berne : intégration, cotisations et exigences",
+          "url": "/fr/articles-suisse/cours-de-langue-berne-integration-cotisations-et-exigences/",
+          "excerpt": "Dans le canton de Berne, les programmes d'intégration et les contributions à la formation continue dépendent du niveau cantonal, communal ou institutionnel ; les exigences, les délais et les montants doivent être…",
+          "date": "2026-10-15T04:28:17.925Z"
         },
         {
           "title": "AVS et prestations complémentaires dans le canton de Berne",
@@ -763,7 +787,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T04:33:54.268Z"
     }
   }
 }
