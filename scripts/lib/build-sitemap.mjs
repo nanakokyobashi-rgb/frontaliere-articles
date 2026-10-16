@@ -22,7 +22,7 @@ import '../../host/cantonSectionsBootstrap.mjs';
  */
 
 import { isReservedPublishedSlug } from './published-slug-guard.mjs';
-import { assertHubLocaleSlug } from './assert-hub-locale-slug.mjs';
+import { assertHubLocaleSlug, assertHubTopicEntries } from './assert-hub-locale-slug.mjs';
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { activeCorpusCoreMap } from './corpus-sections.mjs';
 
@@ -233,7 +233,8 @@ export function familySectionPages(section, archiveTotal, pageSize, all = ARTICL
   const base = sectionPathsOf(section, all);
   const at = (suffix) => Object.fromEntries(SITEMAP_LOCALES.map((loc) => [loc, `${base[loc]}${suffix(loc)}`]));
   const pages = [{ key: 'landing', paths: base, priority: '0.8', alternates: true }];
-  for (const [topic, slugs] of Object.entries(core.topicHubs)) {
+  const topicHubs = assertHubTopicEntries(section, core.topicHubs);
+  for (const [topic, slugs] of topicHubs) {
     pages.push({
       key: `hub:${topic}`,
       paths: at((loc) => `${assertHubLocaleSlug(section, topic, loc, slugs)}/`),

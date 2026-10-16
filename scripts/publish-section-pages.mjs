@@ -73,7 +73,7 @@ import { createEngineCorpusView } from './lib/engine-corpus-view.mjs';
 import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
 import { activeCorpusCoreMap, sectionSourceSurfaces } from './lib/corpus-sections.mjs';
-import { assertHubLocaleSlug } from './lib/assert-hub-locale-slug.mjs';
+import { assertHubLocaleSlug, assertHubTopicEntries } from './lib/assert-hub-locale-slug.mjs';
 import { EDGE_SECTION_REGISTRY_FILE, SECTION_REGISTRY_FILE, sectionRoutes, validateEdgeSectionRegistry } from './lib/section-registry.mjs';
 import {
   PAGE_MANIFEST_KINDS,
@@ -289,7 +289,7 @@ export function articleManifestPages({ section, previousArticlePages = [], curre
  */
 export function migrationManifestPages(section, previousArticlePages, previousArchivePages, all = ARTICLE_SECTION_CORE_ALL) {
   const routes = normalizedSectionRoutes(section, all);
-  const topicHubs = Object.entries(all[section].topicHubs ?? {});
+  const topicHubs = assertHubTopicEntries(section, all[section].topicHubs);
   return [
     ...previousArticlePages.map((page) => manifestEntryFromReleasePage(section, page, 'article')),
     ...previousArchivePages.map((page) => manifestEntryFromReleasePage(section, page, 'archive')),

@@ -61,6 +61,7 @@ const SHARED_R2_REFRESH_PATHS = new Set([
   'scripts/lib/engine-corpus-view.mjs',
   'scripts/lib/sanitize-control-chars.mjs',
   'scripts/lib/section-registry.mjs',
+  'scripts/lib/assert-hub-locale-slug.mjs',
   'scripts/lib/upload-cdn-file.sh',
   'scripts/lib/npm-ci-retry.sh',
   'scripts/lib/parse-positive-num.mjs',

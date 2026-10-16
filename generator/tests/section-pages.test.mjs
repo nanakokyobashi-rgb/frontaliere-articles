@@ -17,6 +17,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL, ARTICLE_SECTION_CORE_LIST } from '../../engine/shared/articleSectionCore.mjs';
+import { cantonTopicHubPath } from '../../engine/shared/cantonSectionCopy.mjs';
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwner.mjs';
 import {
   UPLOAD_ORDER,
@@ -46,6 +47,8 @@ import {
   rendererPageEntry,
 } from '../../scripts/publish-section-pages.mjs';
 import { assertHubLocaleSlug } from '../../scripts/lib/assert-hub-locale-slug.mjs';
+import { assertHubTopicEntries } from '../../scripts/lib/assert-hub-locale-slug.mjs';
+import { familySectionPages } from '../../scripts/lib/build-sitemap.mjs';
 import {
   fetchPageManifest,
   mergePageManifests,
@@ -183,6 +186,21 @@ test('publisher migration manifest rifiuta uno slug hub mancante per la locale c
   );
 });
 
+test('sitemap e migration manifest rifiutano chiavi hub mancanti o extra', () => {
+  for (const topicHubs of [
+    Object.fromEntries(Object.entries(TI.topicHubs).filter(([topic]) => topic !== 'carburanti')),
+    { ...TI.topicHubs, nonDichiarato: { it: 'non-dichiarato' } },
+  ]) {
+    const all = {
+      ...ARTICLE_SECTION_CORE_ALL,
+      'canton-ti': { ...TI, topicHubs },
+    };
+    assert.throws(() => assertHubTopicEntries('canton-ti', topicHubs), /chiavi hub non valide/u);
+    assert.throws(() => familySectionPages('canton-ti', 0, 20, all), /chiavi hub non valide/u);
+    assert.throws(() => migrationManifestPages('canton-ti', [], [], all), /chiavi hub non valide/u);
+  }
+});
+
 test('guardia slug hub richiede una proprietà propria stringa non vuota', () => {
   assert.equal(assertHubLocaleSlug('canton-ti', 'carburanti', 'it', { it: 'carburanti' }), 'carburanti');
 
@@ -199,6 +217,39 @@ test('guardia slug hub richiede una proprietà propria stringa non vuota', () =>
     () => assertHubLocaleSlug('canton-ti', 'carburanti', 'it', { it: '   ' }),
     /slug hub mancante o vuoto.*\/it$/u,
   );
+});
+
+test('cantonTopicHubPath rifiuta slug hub ereditati o vuoti', () => {
+  const originalTopicHubs = TI.topicHubs;
+  try {
+    TI.topicHubs = Object.create({ carburanti: { it: 'ereditato' } });
+    assert.throws(
+      () => cantonTopicHubPath('canton-ti', 'carburanti', 'it'),
+      /tema sconosciuto/u,
+    );
+
+    TI.topicHubs = {
+      ...originalTopicHubs,
+      carburanti: Object.create({ it: 'ereditato' }),
+    };
+    assert.throws(
+      () => cantonTopicHubPath('canton-ti', 'carburanti', 'it'),
+      /slug hub mancante o vuoto/u,
+    );
+
+    TI.topicHubs = {
+      ...originalTopicHubs,
+      carburanti: { ...originalTopicHubs.carburanti, it: '' },
+    };
+    assert.throws(
+      () => cantonTopicHubPath('canton-ti', 'carburanti', 'it'),
+      /slug hub mancante o vuoto/u,
+    );
+  } finally {
+    TI.topicHubs = originalTopicHubs;
+  }
+
+  assert.equal(cantonTopicHubPath('canton-ti', 'carburanti', 'it').includes('//'), false);
 });
 
 test('publisher usa il prefisso normalizzato anche per il match della pagina', () => {
@@ -1104,6 +1155,7 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     'scripts/lib/section-registry.mjs',
     'scripts/lib/section-page-manifest.mjs',
     'scripts/publish-section-pages.mjs',
+    'scripts/lib/assert-hub-locale-slug.mjs',
     'scripts/publish-section-edge.mjs',
     'scripts/lib/engine-corpus-view.mjs',
     'scripts/lib/upload-cdn-file.sh',
@@ -1165,6 +1217,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'scripts/lib/parse-positive-num.mjs',
     'scripts/lib/sanitize-control-chars.mjs',
     'scripts/lib/section-registry.mjs',
+    'scripts/lib/assert-hub-locale-slug.mjs',
     'scripts/lib/section-page-manifest.mjs',
     'scripts/lib/upload-cdn-file.sh',
     'generator/scripts/load-rc-env.mjs',
