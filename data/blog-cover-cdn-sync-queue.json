@@ -1,4 +1,21 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-farmaci-generici-prezzi-svizzera.webp",
+      "sha256": "568b03d7ae493cf7b89433659a07455ddb23df824ff4a87a25e2703f003c0fea"
+    },
+    {
+      "path": "public/images/blog/article-olgiate-presidio-vivo-mercato.webp",
+      "sha256": "ad2e78dec39ab028faea149b8fc8cd370d40f8f9d75261ee2d02883502af637d"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-farmaci-generici-prezzi-svizzera-480w.webp",
+      "sha256": "25cf118ce77fd30b92a4e8006abdd21c43a51c18c44387da471d112dfff30545"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-olgiate-presidio-vivo-mercato-480w.webp",
+      "sha256": "5a42a3dc4b8f92e2b08d2cce1b21687ef2e8786cf503ec1c58a6807e4dd87221"
+    }
+  ]
 }
