@@ -401,6 +401,72 @@ test('recovery rifiuta un writer attivo e non modifica la coppia', () => {
   }
 });
 
+test('recovery non rimuove un journal committed senza lock mentre il writer è ancora vivo', () => {
+  const root = fixture();
+  try {
+    const first = path.join(root, 'first.txt');
+    const second = path.join(root, 'second.txt');
+    fs.writeFileSync(first, 'first-before');
+    fs.writeFileSync(second, 'second-before');
+    const writerLock = path.join(fs.realpathSync(root), '.registry-pair-write.lock');
+    let recoveryError;
+    const fsImpl = {
+      ...fs,
+      unlinkSync(file) {
+        fs.unlinkSync(file);
+        if (file === writerLock) {
+          try {
+            recoverInterruptedRegistryPair(root);
+          } catch (error) {
+            recoveryError = error;
+          }
+        }
+      },
+    };
+
+    assert.doesNotThrow(() => writeFilePairAtomically([
+      { file: first, before: 'first-before', after: 'first-after' },
+      { file: second, before: 'second-before', after: 'second-after' },
+    ], { fsImpl }));
+
+    assert.match(recoveryError?.message ?? '', /writer .*ancora attivo/u);
+    assert.equal(fs.readFileSync(first, 'utf8'), 'first-after');
+    assert.equal(fs.readFileSync(second, 'utf8'), 'second-after');
+    assert.equal(fs.existsSync(writerLock), false);
+    assert.equal(fs.existsSync(path.join(root, '.registry-pair-write.journal.json')), false);
+    assert.equal(fs.existsSync(path.join(root, '.registry-pair-recovery.lock')), false);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('recovery pulisce un journal committed senza lock dopo la terminazione del writer', () => {
+  const root = fixture();
+  try {
+    const first = path.join(root, 'first.txt');
+    const second = path.join(root, 'second.txt');
+    fs.writeFileSync(first, 'first-before');
+    fs.writeFileSync(second, 'second-before');
+    const child = interruptAfterTargetRenames(first, second, 2);
+    assert.equal(child.status, 73, child.stderr);
+
+    const journalFile = path.join(root, '.registry-pair-write.journal.json');
+    const journal = JSON.parse(fs.readFileSync(journalFile, 'utf8'));
+    journal.phase = 'committed';
+    fs.writeFileSync(journalFile, `${JSON.stringify(journal)}\n`);
+    fs.unlinkSync(path.join(root, '.registry-pair-write.lock'));
+
+    assert.deepEqual(recoverInterruptedRegistryPair(root), { recovered: true, state: 'kept-committed' });
+    assert.equal(fs.readFileSync(first, 'utf8'), 'first-after');
+    assert.equal(fs.readFileSync(second, 'utf8'), 'second-after');
+    assert.equal(fs.existsSync(path.join(root, '.registry-pair-write.lock')), false);
+    assert.equal(fs.existsSync(journalFile), false);
+    assert.equal(fs.existsSync(path.join(root, '.registry-pair-recovery.lock')), false);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('recovery rifiuta versioni e snapshot journal incoerenti senza toccare i registry', () => {
   const root = fixture();
   try {

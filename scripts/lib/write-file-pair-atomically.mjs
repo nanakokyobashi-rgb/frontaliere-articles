@@ -384,6 +384,13 @@ function recoverWhileLocked(fsImpl, directory) {
     }
   } else if (journal.phase === 'prepared') {
     throw new Error(`journal prepared senza lock in ${directory}; stato ambiguo, recovery rifiutata`);
+  } else if (journal.phase === 'committed') {
+    if (journal.host !== hostname()) {
+      throw new Error(`writer registrato su un altro host (${journal.host}); assenza verificabile solo sull'host locale`);
+    }
+    if (isProcessAlive(journal.pid)) {
+      throw new Error(`writer ${journal.pid} ancora attivo o non verificabile; recovery rifiutata`);
+    }
   }
 
   const snapshot = currentSnapshot(fsImpl, journal);
