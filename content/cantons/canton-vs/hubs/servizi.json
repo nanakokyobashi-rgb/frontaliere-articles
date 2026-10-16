@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "c673f20912673659520beecc75ad3ab9db835a08347ee66487417c0d905196ee",
+  "updatedAt": "2026-10-16T14:33:38.367Z",
+  "contentHash": "4ea1fd12ff688ee6a873346e7198f1f4d60f4ce3d784bbc73ba7f44bd27a928b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -18,8 +18,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-16T04:46:09.647Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T10:09:31.602Z",
       "keyFacts": 0
     }
   ],
@@ -95,10 +100,34 @@
           "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "11 °C",
+              "detail": "oggi da 10 a 22 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-16T04:46:09.647Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "La santé de la population en Valais 2026",
+              "date": "2026-10-16",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
+            },
+            {
+              "label": "La santé de la population en Valais 2026",
+              "date": "2026-10-16",
+              "url": "https://www.vs.ch/web/communication/w/la-sant%C3%A9-de-la-population-en-valais-2026"
+            },
             {
               "label": "Invitation à la journée des proches aidants le 30 octobre à Sion",
               "date": "2026-10-12",
@@ -118,19 +147,9 @@
               "label": "Semaine de la santé mentale - Le Canton du Valais s’associe à la démarche",
               "date": "2026-09-25",
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51109625"
-            },
-            {
-              "label": "Le concours de projets pour l'extension de l'hôpital psychiatrique de Malévoz est lancé",
-              "date": "2026-09-25",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/25/le-concours-de-projets-pour-lextension-de-lhopital-psychiatrique-de-malevoz-est-lance"
-            },
-            {
-              "label": "Semaine de la santé mentale : l’Hôpital du Valais se mobilise aux côtés du Canton",
-              "date": "2026-09-24",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -210,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "en": {
       "canton": "VS",
@@ -283,10 +302,34 @@
           "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "11 °C",
+              "detail": "today from 10 to 22 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-16T04:46:09.647Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "La santé de la population en Valais 2026",
+              "date": "2026-10-16",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
+            },
+            {
+              "label": "La santé de la population en Valais 2026",
+              "date": "2026-10-16",
+              "url": "https://www.vs.ch/web/communication/w/la-sant%C3%A9-de-la-population-en-valais-2026"
+            },
             {
               "label": "Invitation à la journée des proches aidants le 30 octobre à Sion",
               "date": "2026-10-12",
@@ -306,19 +349,9 @@
               "label": "Semaine de la santé mentale - Le Canton du Valais s’associe à la démarche",
               "date": "2026-09-25",
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51109625"
-            },
-            {
-              "label": "Le concours de projets pour l'extension de l'hôpital psychiatrique de Malévoz est lancé",
-              "date": "2026-09-25",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/25/le-concours-de-projets-pour-lextension-de-lhopital-psychiatrique-de-malevoz-est-lance"
-            },
-            {
-              "label": "Semaine de la santé mentale : l’Hôpital du Valais se mobilise aux côtés du Canton",
-              "date": "2026-09-24",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -394,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "de": {
       "canton": "VS",
@@ -467,10 +500,34 @@
           "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "11 °C",
+              "detail": "heute 10 bis 22 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-16T04:46:09.647Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "La santé de la population en Valais 2026",
+              "date": "2026-10-16",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
+            },
+            {
+              "label": "La santé de la population en Valais 2026",
+              "date": "2026-10-16",
+              "url": "https://www.vs.ch/web/communication/w/la-sant%C3%A9-de-la-population-en-valais-2026"
+            },
             {
               "label": "Invitation à la journée des proches aidants le 30 octobre à Sion",
               "date": "2026-10-12",
@@ -490,19 +547,9 @@
               "label": "Semaine de la santé mentale - Le Canton du Valais s’associe à la démarche",
               "date": "2026-09-25",
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51109625"
-            },
-            {
-              "label": "Le concours de projets pour l'extension de l'hôpital psychiatrique de Malévoz est lancé",
-              "date": "2026-09-25",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/25/le-concours-de-projets-pour-lextension-de-lhopital-psychiatrique-de-malevoz-est-lance"
-            },
-            {
-              "label": "Semaine de la santé mentale : l’Hôpital du Valais se mobilise aux côtés du Canton",
-              "date": "2026-09-24",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -578,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "fr": {
       "canton": "VS",
@@ -651,10 +698,34 @@
           "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "11 °C",
+              "detail": "aujourd’hui de 10 à 22 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-16T04:46:09.647Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "La santé de la population en Valais 2026",
+              "date": "2026-10-16",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
+            },
+            {
+              "label": "La santé de la population en Valais 2026",
+              "date": "2026-10-16",
+              "url": "https://www.vs.ch/web/communication/w/la-sant%C3%A9-de-la-population-en-valais-2026"
+            },
             {
               "label": "Invitation à la journée des proches aidants le 30 octobre à Sion",
               "date": "2026-10-12",
@@ -674,19 +745,9 @@
               "label": "Semaine de la santé mentale - Le Canton du Valais s’associe à la démarche",
               "date": "2026-09-25",
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51109625"
-            },
-            {
-              "label": "Le concours de projets pour l'extension de l'hôpital psychiatrique de Malévoz est lancé",
-              "date": "2026-09-25",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/25/le-concours-de-projets-pour-lextension-de-lhopital-psychiatrique-de-malevoz-est-lance"
-            },
-            {
-              "label": "Semaine de la santé mentale : l’Hôpital du Valais se mobilise aux côtés du Canton",
-              "date": "2026-09-24",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -758,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     }
   }
 }

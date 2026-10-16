@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "c3e027c3bf9f8c0336c6fe67a61dd6ab7b7b1ab8cf9887cf689ff76c489833ed",
+  "updatedAt": "2026-10-16T14:33:38.367Z",
+  "contentHash": "553767605f7f4713bf7f6c933cf7326d526a8c533500525e9a1038dbc202aa7b",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T10:09:31.602Z",
       "keyFacts": 0
     }
   ],
@@ -139,14 +139,9 @@
               "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
-            },
-            {
-              "label": "Informationsanlass für angehende Pensionierte",
-              "date": "2026-07-21",
-              "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -218,7 +213,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "en": {
       "canton": "BE",
@@ -330,14 +325,9 @@
               "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
-            },
-            {
-              "label": "Informationsanlass für angehende Pensionierte",
-              "date": "2026-07-21",
-              "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -409,7 +399,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "de": {
       "canton": "BE",
@@ -521,14 +511,9 @@
               "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
-            },
-            {
-              "label": "Informationsanlass für angehende Pensionierte",
-              "date": "2026-07-21",
-              "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -600,7 +585,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "fr": {
       "canton": "BE",
@@ -712,14 +697,9 @@
               "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
-            },
-            {
-              "label": "Informationsanlass für angehende Pensionierte",
-              "date": "2026-07-21",
-              "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -791,7 +771,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     }
   }
 }
