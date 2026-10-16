@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T01:56:54.479Z",
-  "contentHash": "5e2276cbe5e1493c8d84bb671274f6519a927ca9def3e0ea69aad7879c42cede",
+  "updatedAt": "2026-10-16T03:16:00.674Z",
+  "contentHash": "5ae262c5d6c30fb443bf9b27ecf7b18f53a2b1cef439d828813d726e33f0f7c0",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -173,6 +173,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Frontalieri: tassa salute e decreto omnibus al 100%",
+          "url": "/articoli-ticino/frontalieri-tassa-salute-omnibus-giugno-2026/",
+          "excerpt": "Nessun lavoratore è stato chiamato a pagare la tassa sulla salute Il contributo previsto va dal 3% al 6% del reddito netto Dal gennaio 2026 i lavoratori",
+          "date": "2026-10-16T03:10:47.550Z"
+        },
+        {
           "title": "Decreto tassa salute frontalieri pubblicato: via libera regioni",
           "url": "/articoli-ticino/decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni/",
           "excerpt": "Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività",
@@ -213,12 +219,6 @@
           "url": "/articoli-svizzera/ostinelli-cassa-malati-udienza-pretore/",
           "excerpt": "Roberto Ostinelli, medico di Mendrisio, non paga la cassa malati da giugno 2024 e deve comparire davanti al pretore il 6 ottobre; paga 140 euro al mese per un'assicurazione internazionale.",
           "date": "2026-10-06T07:13:37.693Z"
-        },
-        {
-          "title": "Premi cassa malati Ticino 2027: aumento del 3,7%",
-          "url": "/articoli-frontaliere/stangata-premi-cassa-malati-ticino/",
-          "excerpt": "Nel 2027 i premi di cassa malati in Ticino aumentano del 3,7%, portando il premio medio a 520 franchi al mese, il più alto della Svizzera.",
-          "date": "2026-09-29T12:24:49.493Z"
         }
       ],
       "links": [
@@ -255,7 +255,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T03:16:00.674Z"
     },
     "en": {
       "canton": "TI",
@@ -401,6 +401,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Cross-border workers: health tax and omnibus decree at 100%",
+          "url": "/en/ticino-articles/commuters-health-tax-omnibus-june-2026/",
+          "excerpt": "No worker has been asked to pay the health tax The expected contribution ranges from 3% to 6% of net income From January 2026, workers",
+          "date": "2026-10-16T03:10:47.550Z"
+        },
+        {
           "title": "Healthcare tax decree for cross-border workers approved",
           "url": "/en/ticino-articles/healthcare-tax-decree-for-cross-border-workers-approved/",
           "date": "2026-10-08T11:44:40.237Z"
@@ -440,12 +446,6 @@
           "url": "/en/swiss-articles/ostinelli-health-insurance-court-hearing/",
           "excerpt": "Roberto Ostinelli, a doctor from Mendrisio, has not paid his health insurance since June 2024 and must appear before the magistrate on October 6; he pays 140 euro per month for international insurance.",
           "date": "2026-10-06T07:13:37.693Z"
-        },
-        {
-          "title": "Ticino health insurance premiums 2027: 3,7% increase",
-          "url": "/en/cross-border-articles/health-insurance-premiums-ticino-2027/",
-          "excerpt": "In 2027, health insurance premiums in Ticino increase by 3,7%, bringing the average premium to 520 francs per month, the highest in Switzerland.",
-          "date": "2026-09-29T12:24:49.493Z"
         }
       ],
       "links": [
@@ -478,7 +478,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T03:16:00.674Z"
     },
     "de": {
       "canton": "TI",
@@ -624,6 +624,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Grenzgänger: Gesundheitssteuer und Omnibus-Dekret zu 100%",
+          "url": "/de/tessin-artikel/grenzganger-gesundheit-steuer-omnibus-juni-2026/",
+          "excerpt": "Kein Arbeitnehmer wurde zur Zahlung der Gesundheitssteuer aufgefordert Der vorgesehene Beitrag reicht von 3% bis 6% des Nettoeinkommens Ab Januar 2026 die Arbeitnehmer",
+          "date": "2026-10-16T03:10:47.550Z"
+        },
+        {
           "title": "Gesundheitsabgabe für Grenzgänger: Dekret publiziert",
           "url": "/de/tessin-artikel/gesundheitsabgabe-fur-grenzganger-dekret-publiziert/",
           "date": "2026-10-08T11:44:40.237Z"
@@ -663,12 +669,6 @@
           "url": "/de/schweiz-artikel/ostinelli-krankenkasse-gerichtstermin/",
           "excerpt": "Roberto Ostinelli, Arzt aus Mendrisio, zahlt seit Juni 2024 die Krankenkasse nicht mehr und muss am 6. Oktober vor dem Pretore erscheinen; er zahlt 140 Euro im Monat für eine internationale Versicherung.",
           "date": "2026-10-06T07:13:37.693Z"
-        },
-        {
-          "title": "Krankenkassenprämien im Tessin 2027: Anstieg um 3,7%",
-          "url": "/de/grenzgaenger-artikel/krankenkassenpraemien-tessin-2027/",
-          "excerpt": "Im Jahr 2027 steigen die Krankenkassenprämien im Tessin um 3,7%, wodurch die durchschnittliche Prämie auf 520 Franken pro Monat steigt, die höchste in der Schweiz.",
-          "date": "2026-09-29T12:24:49.493Z"
         }
       ],
       "links": [
@@ -701,7 +701,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T03:16:00.674Z"
     },
     "fr": {
       "canton": "TI",
@@ -847,6 +847,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Frontaliers : taxe santé et décret omnibus à 100%",
+          "url": "/fr/articles-tessin/frontaliers-taxe-sante-omnibus-juin-2026/",
+          "excerpt": "Aucun travailleur n’a été appelé à payer la taxe sur la santé La contribution prévue va de 3% à 6% du revenu net À partir de janvier 2026 les travailleurs",
+          "date": "2026-10-16T03:10:47.550Z"
+        },
+        {
           "title": "Décret sur la taxe santé des frontaliers publié : feu vert des régions",
           "url": "/fr/articles-tessin/decret-sur-la-taxe-sante-des-frontaliers-publie-feu-vert-des-regions/",
           "excerpt": "Décret publié au Journal officiel à l'approche des fêtes",
@@ -887,12 +893,6 @@
           "url": "/fr/articles-suisse/ostinelli-assurance-maladie-audience/",
           "excerpt": "Roberto Ostinelli, médecin de Mendrisio, ne paie pas sa caisse-maladie depuis juin 2024 et doit comparaître devant le juge le 6 octobre ; il paie 140 euros par mois pour une assurance internationale.",
           "date": "2026-10-06T07:13:37.693Z"
-        },
-        {
-          "title": "Primes d'assurance-maladie dans le canton du Tessin 2027 : hausse de 3,7%",
-          "url": "/fr/articles-frontalier/primes-assurance-maladie-ticin-2027/",
-          "excerpt": "En 2027, les primes d'assurance-maladie dans le canton du Tessin augmentent de 3,7%, portant la prime moyenne à 520 francs par mois, la plus élevée de Suisse.",
-          "date": "2026-09-29T12:24:49.493Z"
         }
       ],
       "links": [
@@ -921,7 +921,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T03:16:00.674Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "ad7beeb24a60b3cf7c87a613bd019ff2ab4c5fd972df3255e1fef17df8497caf",
+  "updatedAt": "2026-10-16T03:16:00.674Z",
+  "contentHash": "608b7f5d8857b4572541faf636db531b174b83a5d7accc792091a60176f56ac9",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "18",
+          "value": "17",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         },
         {
@@ -111,12 +111,6 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "A1 Lausanne -> Genève Svincolo autostradale Bernex Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 4.2",
-              "value": "Chiusura",
-              "detail": "fine prevista: 16 ottobre 2026",
-              "date": "2026-09-09T05:33:00.000Z"
-            },
-            {
               "label": "A1 Genève -> Lausanne tra Svincolo autostradale Bernex E Svincolo autostradale Vernier Situazione: chiusa cantiere, lunghezza [km] 4.2",
               "value": "Chiusura",
               "detail": "fine prevista: 6 novembre 2026",
@@ -157,6 +151,12 @@
               "value": "Chiusura",
               "detail": "fine prevista: 29 ottobre 2026",
               "date": "2026-09-24T08:12:00.000Z"
+            },
+            {
+              "label": "A1a Etoile -> Diramazione Perly tra Svincolo autostradale La Praille-Carouge E Raccordo autostradale Diramazione Perly Situazione: chiusa cantiere, lunghezza [km] 3.9",
+              "value": "Chiusura",
+              "detail": "fine prevista: 28 ottobre 2026",
+              "date": "2026-09-24T08:13:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -198,7 +198,7 @@
               "url": "https://www.ge.ch/node/45130"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -257,7 +257,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:16:00.674Z"
     },
     "en": {
       "canton": "GE",
@@ -272,7 +272,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "18",
+          "value": "17",
           "note": "reports as of 15 October 2026"
         },
         {
@@ -346,12 +346,6 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "A1 Lausanne -> Genève Svincolo autostradale Bernex Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 4.2",
-              "value": "Closure",
-              "detail": "until 16 October 2026",
-              "date": "2026-09-09T05:33:00.000Z"
-            },
-            {
               "label": "A1 Genève -> Lausanne tra Svincolo autostradale Bernex E Svincolo autostradale Vernier Situazione: chiusa cantiere, lunghezza [km] 4.2",
               "value": "Closure",
               "detail": "until 6 November 2026",
@@ -392,6 +386,12 @@
               "value": "Closure",
               "detail": "until 29 October 2026",
               "date": "2026-09-24T08:12:00.000Z"
+            },
+            {
+              "label": "A1a Etoile -> Diramazione Perly tra Svincolo autostradale La Praille-Carouge E Raccordo autostradale Diramazione Perly Situazione: chiusa cantiere, lunghezza [km] 3.9",
+              "value": "Closure",
+              "detail": "until 28 October 2026",
+              "date": "2026-09-24T08:13:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -433,7 +433,7 @@
               "url": "https://www.ge.ch/node/45130"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -492,7 +492,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:16:00.674Z"
     },
     "de": {
       "canton": "GE",
@@ -507,7 +507,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "18",
+          "value": "17",
           "note": "Meldungen vom 15. Oktober 2026"
         },
         {
@@ -581,12 +581,6 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "A1 Lausanne -> Genf Anschluss Bernex Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 4.2",
-              "value": "Sperrung",
-              "detail": "bis 16. Oktober 2026",
-              "date": "2026-09-09T05:33:00.000Z"
-            },
-            {
               "label": "A1 Genf -> Lausanne zwischen Anschluss Bernex und Anschluss Vernier Sachlage: Strecke gesperrt Baustelle, Länge [km] 4.2",
               "value": "Sperrung",
               "detail": "bis 6. November 2026",
@@ -627,6 +621,12 @@
               "value": "Sperrung",
               "detail": "bis 29. Oktober 2026",
               "date": "2026-09-24T08:12:00.000Z"
+            },
+            {
+              "label": "A1a Etoile -> Verzweigung Perly zwischen Anschluss La Praille-Carouge und Autobahndreieck Verzweigung Perly Sachlage: Strecke gesperrt Baustelle, Länge [km] 3.9",
+              "value": "Sperrung",
+              "detail": "bis 28. Oktober 2026",
+              "date": "2026-09-24T08:13:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -668,7 +668,7 @@
               "url": "https://www.ge.ch/node/45130"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -727,7 +727,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:16:00.674Z"
     },
     "fr": {
       "canton": "GE",
@@ -742,7 +742,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "18",
+          "value": "17",
           "note": "signalements au 15 octobre 2026"
         },
         {
@@ -816,12 +816,6 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "A1 Lausanne -> Genève Jonction autoroutière Bernex Situation: entrée fermée travaux, longueur [km] 4.2",
-              "value": "Fermeture",
-              "detail": "jusqu’au 16 octobre 2026",
-              "date": "2026-09-09T05:33:00.000Z"
-            },
-            {
               "label": "A1 Genève -> Lausanne entre Jonction autoroutière Bernex et Jonction autoroutière Vernier Situation: fermé travaux, longueur [km] 4.2",
               "value": "Fermeture",
               "detail": "jusqu’au 6 novembre 2026",
@@ -862,6 +856,12 @@
               "value": "Fermeture",
               "detail": "jusqu’au 29 octobre 2026",
               "date": "2026-09-24T08:12:00.000Z"
+            },
+            {
+              "label": "A1a Etoile -> Echangeur de Perly entre Jonction autoroutière La Praille-Carouge et Echangeur Echangeur de Perly Situation: fermé travaux, longueur [km] 3.9",
+              "value": "Fermeture",
+              "detail": "jusqu’au 28 octobre 2026",
+              "date": "2026-09-24T08:13:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -903,7 +903,7 @@
               "url": "https://www.ge.ch/node/45130"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -962,7 +962,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:16:00.674Z"
     }
   }
 }
