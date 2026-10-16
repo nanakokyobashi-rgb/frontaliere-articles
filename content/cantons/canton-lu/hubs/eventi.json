@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "0bc7f236cd50b39f5830179960fb6fea06e0fc6389392ff3cb6854464620ee0b",
+  "updatedAt": "2026-10-16T21:14:08.111Z",
+  "contentHash": "ca10289fdeee925e2cc0eefa1f0366454d4bb78d048d839f477d36f584c64db3",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -108,6 +108,16 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Ausstellung NachtLeben",
+              "date": "2026-10-16T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
+            },
+            {
+              "label": "Pilzexkursion",
+              "date": "2026-10-16T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626880"
+            },
+            {
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-10-15T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
@@ -126,16 +136,6 @@
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-10-11T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7629577"
-            },
-            {
-              "label": "Lebensreise - Lesung Emilia Roig",
-              "date": "2026-10-11T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7456402"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-11T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648402"
             }
           ],
           "updatedAt": "2026-10-16T10:09:31.602Z"
@@ -172,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-16T21:14:08.111Z"
     },
     "en": {
       "canton": "LU",
@@ -263,6 +263,16 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Ausstellung NachtLeben",
+              "date": "2026-10-16T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
+            },
+            {
+              "label": "Pilzexkursion",
+              "date": "2026-10-16T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626880"
+            },
+            {
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-10-15T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
@@ -281,16 +291,6 @@
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-10-11T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7629577"
-            },
-            {
-              "label": "Lebensreise - Lesung Emilia Roig",
-              "date": "2026-10-11T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7456402"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-11T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648402"
             }
           ],
           "updatedAt": "2026-10-16T10:09:31.602Z"
@@ -327,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-16T21:14:08.111Z"
     },
     "de": {
       "canton": "LU",
@@ -418,6 +418,16 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Ausstellung NachtLeben",
+              "date": "2026-10-16T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
+            },
+            {
+              "label": "Pilzexkursion",
+              "date": "2026-10-16T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626880"
+            },
+            {
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-10-15T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
@@ -436,16 +446,6 @@
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-10-11T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7629577"
-            },
-            {
-              "label": "Lebensreise - Lesung Emilia Roig",
-              "date": "2026-10-11T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7456402"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-11T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648402"
             }
           ],
           "updatedAt": "2026-10-16T10:09:31.602Z"
@@ -482,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-16T21:14:08.111Z"
     },
     "fr": {
       "canton": "LU",
@@ -573,6 +573,16 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Ausstellung NachtLeben",
+              "date": "2026-10-16T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
+            },
+            {
+              "label": "Pilzexkursion",
+              "date": "2026-10-16T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626880"
+            },
+            {
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-10-15T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
@@ -591,16 +601,6 @@
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-10-11T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7629577"
-            },
-            {
-              "label": "Lebensreise - Lesung Emilia Roig",
-              "date": "2026-10-11T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7456402"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-11T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648402"
             }
           ],
           "updatedAt": "2026-10-16T10:09:31.602Z"
@@ -637,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-16T21:14:08.111Z"
     }
   }
 }
