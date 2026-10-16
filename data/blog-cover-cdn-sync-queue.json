@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-azalee-calcio-campo-pradisera.webp",
+      "sha256": "8c91fd4ee9883c22f2816bf92b5f80d52bc4f9ee98b29e7c3e5d43456cb277e4"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-azalee-calcio-campo-pradisera-480w.webp",
+      "sha256": "ee957a7c740e4036d7285d5db796e1c5fb787a1c348b32d53e93e09ffac824d2"
+    }
+  ]
 }
