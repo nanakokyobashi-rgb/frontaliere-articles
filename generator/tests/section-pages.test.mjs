@@ -1287,6 +1287,33 @@ test('reconcile: pagine attese = tutti gli URL annunciati da loc e alternate del
   assert.throws(() => expectedSectionPages(CATALOG_TI, SLUGS_TI, incoherent), /non compare in slugs\.json\.cantons/);
 });
 
+test('reconcile: non interpola slug hub vuoti o ereditati', () => {
+  const originalTopicHubs = TI.topicHubs;
+  try {
+    const blankHubSitemap = SITEMAP_TI.replace('/articoli-ticino/carburanti/', '/articoli-ticino//');
+    TI.topicHubs = {
+      ...originalTopicHubs,
+      carburanti: { ...originalTopicHubs.carburanti, it: '' },
+    };
+    assert.throws(
+      () => expectedSectionPages(CATALOG_TI, SLUGS_TI, blankHubSitemap),
+      /slug hub mancante o vuoto.*\/it$/u,
+    );
+
+    const inherited = Object.create({ it: 'ereditato' });
+    Object.assign(inherited, originalTopicHubs.carburanti);
+    delete inherited.it;
+    TI.topicHubs = { ...originalTopicHubs, carburanti: inherited };
+    const inheritedHubSitemap = SITEMAP_TI.replace('/articoli-ticino/carburanti/', '/articoli-ticino/ereditato/');
+    assert.throws(
+      () => expectedSectionPages(CATALOG_TI, SLUGS_TI, inheritedHubSitemap),
+      /slug hub mancante o vuoto.*\/it$/u,
+    );
+  } finally {
+    TI.topicHubs = originalTopicHubs;
+  }
+});
+
 test('reconcile: HEAD 405/501 ricade su GET, mantenendo 404 = missing', async () => {
   const presentMethods = [];
   assert.equal(
