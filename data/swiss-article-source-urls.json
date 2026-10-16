@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/ftwbd2hbcded": {
-    "articleId": "record-imprese-culturali-svizzera",
-    "ts": "2026-09-13T08:54:06.457Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/6nj8aqn6rll8": {
     "articleId": "forum-economico-ambientale-osce-praga",
     "ts": "2026-09-13T09:23:48.577Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1957162/lupi-svizzera-caccia-federale-lupo-contadini": {
     "articleId": "svizzera-abbattimenti-lupi-2025",
     "ts": "2026-10-16T14:12:02.638Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/stadler-rail%3a-primo-treno-a-idrogeno-al-mondo-a-scartamento-ridotto/92229532": {
+    "articleId": "stadler-rail-treno-idrogeno-sardegna",
+    "ts": "2026-10-16T17:07:03.977Z",
     "keyForm": 2
   }
 }

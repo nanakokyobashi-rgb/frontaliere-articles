@@ -80,6 +80,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-16T16:42:43.589Z",
       "lastFailureAt": "2026-10-16T16:42:43.589Z"
+    },
+    {
+      "articleId": "stadler-rail-treno-idrogeno-sardegna",
+      "title": "Stadler Rail testa il primo treno a idrogeno a scartamento ridotto",
+      "fallbackImage": "/images/blog/svizzera-treno-oggetti-binari-2.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T17:07:03.976Z",
+      "lastFailureAt": "2026-10-16T17:07:03.976Z"
     }
   ]
 }
