@@ -20,13 +20,20 @@ import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL, ARTICLE_SECTION_CORE_LI
 import { cantonTopicHubPath } from '../../engine/shared/cantonSectionCopy.mjs';
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwner.mjs';
 import {
+  API_BASE,
+  APEX,
+  CANTON_RSS_PREFIX,
+  PAGE_CACHE_CONTROL,
   UPLOAD_ORDER,
+  addCantonRssFeedLink,
   aggregatePageDefects,
   articleManifestPages,
   archiveReleasePages,
   articleReleasePages,
   articleReleaseSnapshot,
   assertPublishableSection,
+  cantonRssFeedEntries,
+  cantonRssFeedUrlForLocale,
   createRenderRoot,
   ensureRouteOwnerMeta,
   hubMissingIsFatal,
@@ -42,6 +49,7 @@ import {
   obsoleteReleasePages,
   parseArgs,
   publish,
+  publishCantonRssFeeds,
   publishedReleaseReady,
   publishedStatus,
   rendererPageEntry,
@@ -932,6 +940,169 @@ test('publisher: una pagina con noindex, senza meta di proprieta\', con asset sa
   assert.match(pageDefects(page, good.replace('https://cdn.frontaliereticino.ch/assets/', '/assets/')).join('|'), /same-origin/);
   assert.match(pageDefects(page, good.replace(page.apexUrl, 'https://frontaliereticino.ch/articoli-svizzera/')).join('|'), /canonical/);
   assert.match(pageDefects(page, '').join('|'), /vuota/);
+});
+
+test('publisher: le landing live annunciano il feed edge della propria locale', () => {
+  const page = pageEntry('canton-ti', 'articoli-ticino/index.html', 'landing');
+  const feedUrl = cantonRssFeedUrlForLocale('canton-ti', 'it');
+  const html =
+    `<!doctype html><html lang="it"><head><meta charset="utf-8">${CORPUS_ROUTE_OWNER_META_TAG}` +
+    `<link rel="canonical" href="${page.apexUrl}"></head><body><main>${'contenuto '.repeat(30)}</main></body></html>`;
+  const linked = addCantonRssFeedLink(html, feedUrl);
+
+  assert.equal(new URL(feedUrl).pathname, `/${CANTON_RSS_PREFIX}/rss-canton-ti.xml`);
+  assert.equal(addCantonRssFeedLink(linked, feedUrl), linked, 'aggiunta idempotente');
+  assert.deepEqual(pageDefects(page, linked, { requiredRssUrl: feedUrl }), []);
+  assert.match(pageDefects(page, html, { requiredRssUrl: feedUrl }).join('|'), /link RSS/);
+  assert.match(cantonRssFeedUrlForLocale('canton-ti', 'en'), /rss-canton-ti-en\.xml$/);
+  assert.throws(() => addCantonRssFeedLink(html, 'https://example.test/feed.xml'), /fuori dalla superficie edge/);
+});
+
+test('publisher: copia e verifica via HTTP tutti i feed della release prima di caricare pagine', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-rss-publish-'));
+  const releaseCommit = 'a'.repeat(40);
+  const feeds = cantonRssFeedEntries('canton-ti');
+  let readinessAttempts = 0;
+  const sourceXml = Object.fromEntries(feeds.map(({ name }) => {
+    const selfName = name === 'rss-canton-ti-it.xml' ? 'rss-canton-ti.xml' : name;
+    return [name,
+      `<?xml version="1.0"?><rss version="2.0"><channel>` +
+      `<atom:link href="${APEX}/${selfName}" rel="self" type="application/rss+xml"/>` +
+      '<item><title>Fixture</title></item></channel></rss>\n'];
+  }));
+  const expectedXml = Object.fromEntries(feeds.map((feed) => {
+    const selfName = feed.name === 'rss-canton-ti-it.xml' ? 'rss-canton-ti.xml' : feed.name;
+    return [feed.name, sourceXml[feed.name].replace(`${APEX}/${selfName}`, feed.url)];
+  }));
+  const events = [];
+  try {
+    const result = await publishCantonRssFeeds({
+      section: 'canton-ti',
+      releaseCommit,
+      effectiveStatus: 'live',
+      distDir: fixtureRoot,
+      releaseReadyImpl: async (commit, { section }) => {
+        readinessAttempts++;
+        events.push(`release-ready-${readinessAttempts}`);
+        assert.equal(commit, releaseCommit);
+        assert.equal(section, 'canton-ti');
+        if (readinessAttempts === 1) return { ok: false, reason: 'manifest ancora in propagazione' };
+        return {
+          ok: true,
+          commit,
+          files: Object.fromEntries(feeds.map(({ name }) => [name, Buffer.byteLength(sourceXml[name], 'utf8')])),
+        };
+      },
+      fetchImpl: async (url) => {
+        const name = url.slice(`${API_BASE}/`.length);
+        events.push(`fetch:${name}`);
+        return { ok: true, status: 200, body: null, text: async () => sourceXml[name] };
+      },
+      runImpl: (_command, args) => {
+        if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+          const feed = feeds.find(({ key }) => key === args[2]);
+          events.push(`upload:${feed.name}`);
+          assert.equal(args[3], PAGE_CACHE_CONTROL);
+          assert.equal(readFileSync(args[1], 'utf8'), expectedXml[feed.name]);
+          return { code: 0, stdout: '✅ uploaded' };
+        }
+        if (args.includes('scripts/cf-purge-cache.mjs')) {
+          events.push('purge');
+          for (const feed of feeds) assert.ok(args.at(-1).includes(feed.url));
+          return { code: 0, stdout: '' };
+        }
+        throw new Error(`comando inatteso: ${args.join(' ')}`);
+      },
+      probeImpl: async (url, { want }) => {
+        const feed = feeds.find((candidate) => candidate.url === url);
+        events.push(`verify:${feed.name}`);
+        return { ok: want(expectedXml[feed.name]), status: 'HTTP 200' };
+      },
+      sleepImpl: async () => {},
+      releaseReadyMaxWaitMs: 100,
+      releaseReadyRetryDelayMs: 0,
+    });
+    assert.equal(readinessAttempts, 2);
+    assert.equal(result.failures, 0);
+    assert.equal(result.uploaded, 5);
+    assert.equal(result.verified, 5);
+    assert.equal(result.feeds.length, 5);
+    assert.ok(events.indexOf('release-ready-2') < events.findIndex((event) => event.startsWith('fetch:')));
+    assert.ok(Math.max(...events.map((event, index) => event.startsWith('fetch:') ? index : -1)) < events.findIndex((event) => event.startsWith('upload:')));
+    assert.ok(Math.max(...events.map((event, index) => event.startsWith('upload:') ? index : -1)) < events.indexOf('purge'));
+    assert.ok(events.indexOf('purge') < events.findIndex((event) => event.startsWith('verify:')));
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('publisher: il contratto RSS blocca o precede gli upload HTML', async () => {
+  const page = pageEntry('canton-ti', 'articoli-ticino/index.html', 'landing');
+  const feed = cantonRssFeedEntries('canton-ti')[0];
+  const makeRun = (events) => (_command, args) => {
+    if (args.some((arg) => arg.endsWith('upload-cdn-file.sh'))) events.push('page-upload');
+    if (args.some((arg) => args.includes('scripts/cf-purge-cache.mjs'))) events.push('purge');
+    return { code: 0, stdout: '✅ uploaded' };
+  };
+  const common = {
+    section: 'canton-ti',
+    pages: [page],
+    cdnUploads: [],
+    cantonRssFeeds: [feed],
+    obsoletePages: [],
+    distDir: tmpdir(),
+    releaseCommit: 'c'.repeat(40),
+    publishedStatusImpl: async () => 'live',
+    probeImpl: async () => ({ ok: true, status: 200, body: '<html></html>' }),
+    releaseReadyMaxWaitMs: 0,
+  };
+
+  const successEvents = [];
+  const success = await publish({
+    ...common,
+    runImpl: makeRun(successEvents),
+    publishCantonRssFeedsImpl: async (options) => {
+      successEvents.push('rss-verified');
+      assert.equal(options.releaseReadyMaxWaitMs, 0);
+      return { failures: 0, uploaded: 5, verified: 5 };
+    },
+  });
+  assert.equal(success.failures, 0);
+  assert.ok(successEvents.indexOf('rss-verified') < successEvents.indexOf('page-upload'));
+
+  const blockedEvents = [];
+  const blocked = await publish({
+    ...common,
+    runImpl: makeRun(blockedEvents),
+    publishCantonRssFeedsImpl: async () => {
+      blockedEvents.push('rss-failed');
+      return { failures: 1, uploaded: 0, verified: 0 };
+    },
+  });
+  assert.equal(blocked.failures, 1);
+  assert.deepEqual(blockedEvents, ['rss-failed']);
+});
+
+test('publisher: RSS non live o senza feed dichiarato fallisce prima di upload', async () => {
+  let fetches = 0;
+  let uploads = 0;
+  const common = {
+    section: 'canton-ti',
+    releaseCommit: 'b'.repeat(40),
+    distDir: tmpdir(),
+    fetchImpl: async () => { fetches++; throw new Error('fetch inatteso'); },
+    runImpl: () => { uploads++; throw new Error('upload inatteso'); },
+  };
+  const draft = await publishCantonRssFeeds({ ...common, effectiveStatus: 'draft' });
+  assert.equal(draft.failures, 1);
+  const missing = await publishCantonRssFeeds({
+    ...common,
+    effectiveStatus: 'live',
+    releaseReadyImpl: async (commit) => ({ ok: true, commit, files: {} }),
+  });
+  assert.equal(missing.failures, 1);
+  assert.equal(fetches, 0);
+  assert.equal(uploads, 0);
 });
 
 test('publisher: registry edge illeggibile o con stato sconosciuto non diventa draft', async () => {

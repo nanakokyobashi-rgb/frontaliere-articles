@@ -90,6 +90,7 @@ const LOG = 'publish-section-pages';
 export const APEX = 'https://frontaliereticino.ch';
 export const EDGE_PREFIX = 'edge/sections';
 export const API_BASE = 'https://nanakokyobashi-rgb.github.io/frontaliere-articles';
+export const CANTON_RSS_PREFIX = `${EDGE_PREFIX}/_feeds`;
 /** Le pagine si riscrivono a ogni publish e il Worker le tiene 5 min: stessa classe delle sitemap. */
 export const PAGE_CACHE_CONTROL = 'public,max-age=600';
 /** Dopo il deploy API la superficie pubblica puo' arrivare in ritardo: la delete attende, ma con un limite. */
@@ -202,6 +203,52 @@ export function rendererPageEntry(section, rendered, kind) {
     throw new Error(`renderer ${kind}: edgeKey ${rendered.edgeKey} diverso da ${entry.edgeKey} per ${rendered.relPath}`);
   }
   return { ...entry, edgeKey: rendered.edgeKey };
+}
+
+/** Nomi RSS emessi da build-api per una sezione cantonale, inclusi main e locali. */
+export function cantonRssFeedEntries(section) {
+  const core = ARTICLE_SECTION_CORE_ALL[section];
+  if (!core || core.kind !== 'canton') throw new Error(`sezione RSS cantonale sconosciuta: "${section}"`);
+  const names = [`rss-${section}.xml`, ...CANTON_HUB_LOCALES.map((locale) => `rss-${section}-${locale}.xml`)];
+  return names.map((name) => {
+    const key = `${CANTON_RSS_PREFIX}/${name}`;
+    return { name, key, url: `${CDN_BASE}/${key}` };
+  });
+}
+
+/** Il feed principale è l'alias canonico italiano; le altre landing usano il feed localizzato. */
+export function cantonRssFeedUrlForLocale(section, locale) {
+  if (!CANTON_HUB_LOCALES.includes(locale)) throw new Error(`locale RSS cantonale sconosciuta: "${locale}"`);
+  const name = locale === 'it' ? `rss-${section}.xml` : `rss-${section}-${locale}.xml`;
+  const feed = cantonRssFeedEntries(section).find((entry) => entry.name === name);
+  return feed.url;
+}
+
+function escapeHtmlAttribute(value) {
+  return String(value).replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
+}
+
+/** Aggiunge link autodiscovery e un link visibile alla landing; l'operazione è idempotente. */
+export function addCantonRssFeedLink(html, feedUrl) {
+  if (typeof html !== 'string' || !html) throw new Error('landing RSS senza HTML');
+  const url = new URL(feedUrl);
+  if (url.origin !== new URL(CDN_BASE).origin || !url.pathname.startsWith(`/${CANTON_RSS_PREFIX}/`)) {
+    throw new Error(`URL RSS cantonale fuori dalla superficie edge: ${feedUrl}`);
+  }
+  const href = escapeHtmlAttribute(url.href);
+  const headLink = `<link data-canton-rss-feed rel="alternate" type="application/rss+xml" title="RSS" href="${href}">`;
+  const bodyLink = `<a data-canton-rss-feed rel="alternate" type="application/rss+xml" href="${href}">RSS</a>`;
+  let output = html;
+  const replaceOrInsert = (source, marker, replacement, closingTag, label) => {
+    const existing = [...source.matchAll(marker)];
+    if (existing.length > 1) throw new Error(`landing con link RSS ${label} duplicato`);
+    if (existing.length === 1) return source.replace(existing[0][0], replacement);
+    if (!closingTag.test(source)) throw new Error(`landing senza chiusura ${label} per il link RSS`);
+    return source.replace(closingTag, `${replacement}\n$&`);
+  };
+  output = replaceOrInsert(output, /<link\b[^>]*data-canton-rss-feed[^>]*>/giu, headLink, /<\/head\s*>/iu, '</head>');
+  output = replaceOrInsert(output, /<a\b[^>]*data-canton-rss-feed[^>]*>[\s\S]*?<\/a\s*>/giu, bodyLink, /<\/body\s*>/iu, '</body>');
+  return output;
 }
 
 /** Trasforma le righe del manifest in page entry verificati dalla stessa allowlist del publisher. */
@@ -516,7 +563,7 @@ function previousArchiveReleasePages(rootDir, section, requestedRevision) {
  * Cio' che una pagina cantonale deve avere per essere pubblicata; ritorna la
  * lista dei difetti (vuota = ok).
  */
-export function pageDefects(page, html) {
+export function pageDefects(page, html, { requiredRssUrl = null } = {}) {
   const defects = [];
   if (!html || html.length < 200) defects.push('vuota o troncata');
   // Il router della SPA resta in staticOverlay solo su un documento che porta
@@ -528,6 +575,13 @@ export function pageDefects(page, html) {
   if (/(?:src|href)="\/assets\//.test(html)) defects.push('riferimenti /assets/ same-origin (404 in produzione, #5270)');
   const canonical = /<link[^>]+rel="canonical"[^>]+href="([^"]+)"/i.exec(html)?.[1];
   if (canonical !== page.apexUrl) defects.push(`canonical ${canonical ?? 'assente'} diverso da ${page.apexUrl}`);
+  if (page.kind === 'landing' && requiredRssUrl) {
+    const escapedUrl = escapeHtmlAttribute(requiredRssUrl);
+    const rssHead = /<link\b(?=[^>]*data-canton-rss-feed)(?=[^>]*rel="alternate")(?=[^>]*type="application\/rss\+xml")(?=[^>]*href="([^"]+)")[^>]*>/i.exec(html)?.[1];
+    const rssAnchor = /<a\b(?=[^>]*data-canton-rss-feed)(?=[^>]*rel="alternate")(?=[^>]*type="application\/rss\+xml")(?=[^>]*href="([^"]+)")[^>]*>RSS<\/a\s*>/i.exec(html)?.[1];
+    if (rssHead !== escapedUrl) defects.push(`link RSS autodiscovery ${rssHead ?? 'assente'} diverso da ${requiredRssUrl}`);
+    if (rssAnchor !== escapedUrl) defects.push(`link RSS visibile ${rssAnchor ?? 'assente'} diverso da ${requiredRssUrl}`);
+  }
   return defects;
 }
 
@@ -756,7 +810,137 @@ export async function publishedReleaseReady(expectedCommit, { fetchImpl = fetch 
   if (!edgeRegistry || edgeRegistry.commit !== expectedCommit || !validateEdgeSectionRegistry(edgeRegistry)) {
     return { ok: false, reason: `registro edge non ancora valido sul commit ${expectedCommit}` };
   }
-  return { ok: true, commit: expectedCommit };
+  return { ok: true, commit: expectedCommit, files: manifest.files ?? null };
+}
+
+function rewriteCantonRssSelfLink(xml, { section, name, url }) {
+  if (!/<rss\b[^>]*>[\s\S]*<\/rss\s*>/iu.test(xml) || !/<channel\b[^>]*>[\s\S]*<\/channel\s*>/iu.test(xml)) {
+    throw new Error(`${name}: documento RSS incompleto`);
+  }
+  if (!/<item(?:\s|>)/iu.test(xml)) throw new Error(`${name}: feed senza item`);
+  const selfLinks = [...xml.matchAll(/<atom:link\b[^>]*>/giu)].map(([tag]) => tag)
+    .filter((tag) => /\brel\s*=\s*(["'])self\1/iu.test(tag));
+  if (selfLinks.length !== 1) throw new Error(`${name}: atteso un solo atom:link rel="self"`);
+  const selfName = name === `rss-${section}-it.xml` ? `rss-${section}.xml` : name;
+  const expectedSource = `${APEX}/${selfName}`;
+  const href = /\bhref\s*=\s*(["'])(.*?)\1/iu.exec(selfLinks[0]);
+  if (!href || href[2] !== expectedSource) {
+    throw new Error(`${name}: self-link API inatteso (${href?.[2] ?? 'assente'})`);
+  }
+  return xml.replace(selfLinks[0], selfLinks[0].replace(href[0], `href="${url}"`));
+}
+
+/**
+ * Copia su R2 i feed cantonali pubblicati dall'API HTTP dello stesso commit,
+ * riscrive il solo self-link RSS verso la superficie CDN e verifica i byte
+ * serviti prima che publish() carichi pagine che li annunciano.
+ */
+export async function publishCantonRssFeeds({
+  section,
+  releaseCommit,
+  effectiveStatus,
+  distDir,
+  runImpl = run,
+  probeImpl = probe,
+  releaseReadyImpl = publishedReleaseReady,
+  fetchImpl = fetch,
+  sleepImpl = sleep,
+  releaseReadyMaxWaitMs = RELEASE_READY_MAX_WAIT_MS,
+  releaseReadyRetryDelayMs = RELEASE_READY_RETRY_DELAY_MS,
+}) {
+  if (effectiveStatus !== 'live') {
+    console.error(`::error::[${LOG}] feed RSS ${section}: la sezione non è live nel registro edge`);
+    return { failures: 1, uploaded: 0, verified: 0 };
+  }
+  const feeds = cantonRssFeedEntries(section);
+  const localFiles = [];
+  let uploaded = 0;
+  let verified = 0;
+  try {
+    const readiness = await waitForPublishedReleaseReady(releaseCommit, {
+      section,
+      fetchImpl,
+      releaseReadyImpl,
+      sleepImpl,
+      maxWaitMs: releaseReadyMaxWaitMs,
+      retryDelayMs: releaseReadyRetryDelayMs,
+    });
+    if (!(readiness === true || readiness?.ok)) {
+      console.error(`::error::[${LOG}] feed RSS ${section}: API/edge non pronti (${readiness?.reason ?? 'verifica fallita'})`);
+      return { failures: 1, uploaded: 0, verified: 0 };
+    }
+    if (readiness?.commit && readiness.commit !== releaseCommit) {
+      console.error(`::error::[${LOG}] feed RSS ${section}: la release verificata non corrisponde al commit ${releaseCommit}`);
+      return { failures: 1, uploaded: 0, verified: 0 };
+    }
+
+    const prepared = [];
+    for (const feed of feeds) {
+      const expectedBytes = readiness.files?.[feed.name];
+      if (!Number.isSafeInteger(expectedBytes) || expectedBytes <= 0) {
+        throw new Error(`${feed.name} non è dichiarato nel manifest API della release ${releaseCommit}`);
+      }
+      const response = await fetchWithRefTimeout(`${API_BASE}/${feed.name}`, {
+        redirect: 'manual',
+        headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
+      }, 20000, fetchImpl);
+      if (response.status !== 200 || !response.ok) {
+        releaseFetchWithRefTimeout(response);
+        throw new Error(`${feed.name}: API HTTP ${response.status}`);
+      }
+      const sourceXml = await response.text();
+      if (Buffer.byteLength(sourceXml, 'utf8') !== expectedBytes) {
+        throw new Error(`${feed.name}: byte count diverso dal manifest API (${Buffer.byteLength(sourceXml, 'utf8')} != ${expectedBytes})`);
+      }
+      const xml = rewriteCantonRssSelfLink(sourceXml, { section, name: feed.name, url: feed.url });
+      prepared.push({ ...feed, xml });
+    }
+
+    fs.mkdirSync(distDir, { recursive: true });
+    for (const feed of prepared) {
+      const local = path.join(distDir, `.canton-rss-${feed.name}`);
+      fs.writeFileSync(local, feed.xml, 'utf8');
+      localFiles.push(local);
+    }
+
+    for (let i = 0; i < prepared.length; i++) {
+      const feed = prepared[i];
+      const { stdout } = runImpl('bash', [
+        'scripts/lib/upload-cdn-file.sh',
+        localFiles[i],
+        feed.key,
+        PAGE_CACHE_CONTROL,
+      ]);
+      if (!stdout.includes('✅ uploaded')) {
+        console.error(`::error::[${LOG}] feed RSS non caricato: ${feed.key}`);
+        return { failures: 1, uploaded, verified: 0 };
+      }
+      uploaded++;
+    }
+
+    for (const chunk of purgeChunks(prepared.map((feed) => feed.url))) {
+      const { code } = runImpl('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]);
+      if (code !== 0) {
+        console.error(`::error::[${LOG}] purge CDN dei feed RSS ${section} fallito`);
+        return { failures: 1, uploaded, verified: 0 };
+      }
+    }
+
+    for (const feed of prepared) {
+      const result = await probeImpl(feed.url, { want: (body) => body === feed.xml });
+      if (!result.ok) {
+        console.error(`::error::[${LOG}] feed RSS non verificato sul CDN: ${feed.url} (${result.status})`);
+        return { failures: 1, uploaded, verified };
+      }
+      verified++;
+    }
+    return { failures: 0, uploaded, verified, feeds: prepared.map(({ name, key, url }) => ({ name, key, url })) };
+  } catch (error) {
+    console.error(`::error::[${LOG}] feed RSS ${section}: ${error?.message ?? String(error)}`);
+    return { failures: 1, uploaded, verified };
+  } finally {
+    for (const local of localFiles) fs.rmSync(local, { force: true });
+  }
 }
 
 /**
@@ -770,6 +954,7 @@ export async function waitForPublishedReleaseReady(
   expectedCommit,
   {
     section,
+    fetchImpl = fetch,
     releaseReadyImpl = publishedReleaseReady,
     sleepImpl = sleep,
     maxWaitMs = RELEASE_READY_MAX_WAIT_MS,
@@ -779,7 +964,7 @@ export async function waitForPublishedReleaseReady(
   const deadline = Date.now() + Math.max(0, maxWaitMs);
   let last = { ok: false, reason: 'verifica release non eseguita' };
   while (true) {
-    last = await releaseReadyImpl(expectedCommit, { section });
+    last = await releaseReadyImpl(expectedCommit, { section, fetchImpl });
     if (last === true || last?.ok) return last;
     const remaining = deadline - Date.now();
     if (remaining <= 0) return last;
@@ -799,6 +984,7 @@ export function hubMissingIsFatal({ declaredStatus, effectiveStatus, publishing 
 export async function publish({
   pages,
   cdnUploads,
+  cantonRssFeeds = [],
   obsoletePages,
   distDir,
   section,
@@ -807,6 +993,7 @@ export async function publish({
   publishedStatusImpl = publishedStatus,
   probeImpl = probe,
   releaseReadyImpl = publishedReleaseReady,
+  publishCantonRssFeedsImpl = publishCantonRssFeeds,
   releaseReadyMaxWaitMs = RELEASE_READY_MAX_WAIT_MS,
   releaseReadyRetryDelayMs = RELEASE_READY_RETRY_DELAY_MS,
   sleepImpl = sleep,
@@ -836,6 +1023,28 @@ export async function publish({
   if (failures) {
     console.error(`::error::[${LOG}] upload hero incompleto: nessuna pagina HTML viene caricata`);
     return { failures, uploaded: 0, deleted: 0, status: beforeStatus };
+  }
+  if (cantonRssFeeds.length > 0) {
+    if (beforeStatus !== 'live') {
+      console.error(`::error::[${LOG}] feed RSS ${section}: il registro edge non conferma lo stato live`);
+      return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
+    }
+    const rssResult = await publishCantonRssFeedsImpl({
+      section,
+      releaseCommit,
+      effectiveStatus: beforeStatus,
+      distDir,
+      runImpl,
+      probeImpl,
+      releaseReadyImpl,
+      sleepImpl,
+      releaseReadyMaxWaitMs,
+      releaseReadyRetryDelayMs,
+    });
+    if (rssResult.failures > 0) {
+      console.error(`::error::[${LOG}] feed RSS ${section} non verificati: nessuna pagina viene caricata`);
+      return { failures: rssResult.failures, uploaded: 0, deleted: 0, status: beforeStatus };
+    }
   }
   const uploaded = [];
   for (const page of inUploadOrder(pages)) {
@@ -943,6 +1152,7 @@ export async function main(
     renderSectionArticlePipelineImpl = defaultRenderSectionArticlePipeline,
     articleReleaseSnapshotImpl = articleReleaseSnapshot,
     publishImpl = publish,
+    publishCantonRssFeedsImpl = publishCantonRssFeeds,
     publishPageManifestImpl = publishPageManifest,
   } = {},
 ) {
@@ -953,6 +1163,9 @@ export async function main(
   fs.mkdirSync(distDir, { recursive: true });
   const ids = args.bootstrap ? sourceRegistryIds(ROOT_DIR, section) : args.ids;
   const publishing = args.publish && !args.dryRun;
+  const releaseCommit = publishing
+    ? execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()
+    : null;
   let publishedManifest = { state: 'absent' };
   let publishedManifestPages = null;
   if (publishing) {
@@ -982,6 +1195,7 @@ export async function main(
   // partial hub set is merely a draft refresh or a live-page defect. A draft
   // checkout must not override an edge registry that is still live.
   const effectiveStatus = publishing ? await publishedStatusImpl(section) : null;
+  const cantonRssFeeds = publishing && effectiveStatus === 'live' ? cantonRssFeedEntries(section) : [];
 
   let hubs = { rels: [], pages: [], missing: [] };
   let landingPages = [];
@@ -1012,7 +1226,12 @@ export async function main(
       const landings = await renderCantonSectionLandingPages({ rootDir: renderRoot, section });
       landingPages = landings.map((page) => ({
         ...page,
-        html: rewriteGenericImageRefs(page.html, releasedArticles),
+        html: cantonRssFeeds.length > 0
+          ? addCantonRssFeedLink(
+            rewriteGenericImageRefs(page.html, releasedArticles),
+            cantonRssFeedUrlForLocale(section, pageEntry(section, page.relPath, 'landing').locale),
+          )
+          : rewriteGenericImageRefs(page.html, releasedArticles),
       }));
       for (const page of landingPages) writePage(distDir, page.relPath, page.html);
       return [...hubs.rels, ...landingPages.map((page) => page.relPath)];
@@ -1060,7 +1279,10 @@ export async function main(
   for (const page of pages) {
     const abs = path.join(distDir, page.rel);
     const html = fs.existsSync(abs) ? fs.readFileSync(abs, 'utf-8') : '';
-    for (const defect of pageDefects(page, html)) defects.push(`${page.rel}: ${defect}`);
+    const requiredRssUrl = page.kind === 'landing' && cantonRssFeeds.length > 0
+      ? cantonRssFeedUrlForLocale(section, page.locale)
+      : null;
+    for (const defect of pageDefects(page, html, { requiredRssUrl })) defects.push(`${page.rel}: ${defect}`);
   }
   if (missingArticleIds.length) {
     defects.push(`articoli richiesti non resi dalla pipeline: ${missingArticleIds.join(', ')}`);
@@ -1108,6 +1330,7 @@ export async function main(
     aggregatePagesAllowed,
     publishedPageManifest: publishedManifest.state,
     effectiveStatus,
+    cantonRssFeeds: cantonRssFeeds.map(({ name, key, url }) => ({ name, key, url })),
     pages,
     cdnUploads,
     obsoletePages,
@@ -1136,7 +1359,6 @@ export async function main(
     console.log(`[${LOG}] dry-run: nessun upload. Summary: ${args.summary}`);
     return 0;
   }
-  const releaseCommit = execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
   const migrationManifest = !publishedManifestPages && publishedManifest.state === 'absent'
     ? pageManifestFromPages({
       section,
@@ -1154,7 +1376,16 @@ export async function main(
       return 1;
     }
   }
-  summary.published = await publishImpl({ pages, cdnUploads, obsoletePages, distDir, section, releaseCommit });
+  summary.published = await publishImpl({
+    pages,
+    cdnUploads,
+    cantonRssFeeds,
+    obsoletePages,
+    distDir,
+    section,
+    releaseCommit,
+    publishCantonRssFeedsImpl,
+  });
   if (summary.published.failures === 0) {
     const manifestPages = aggregatePagesAllowed
       ? [
