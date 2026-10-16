@@ -1290,12 +1290,13 @@ test('reconcile: pagine attese = tutti gli URL annunciati da loc e alternate del
 test('reconcile: non interpola slug hub vuoti o ereditati', () => {
   const originalTopicHubs = TI.topicHubs;
   try {
+    const blankHubSitemap = SITEMAP_TI.replace('/articoli-ticino/carburanti/', '/articoli-ticino//');
     TI.topicHubs = {
       ...originalTopicHubs,
       carburanti: { ...originalTopicHubs.carburanti, it: '' },
     };
     assert.throws(
-      () => expectedSectionPages(CATALOG_TI, SLUGS_TI, SITEMAP_TI),
+      () => expectedSectionPages(CATALOG_TI, SLUGS_TI, blankHubSitemap),
       /slug hub mancante o vuoto.*\/it$/u,
     );
 
@@ -1303,8 +1304,9 @@ test('reconcile: non interpola slug hub vuoti o ereditati', () => {
     Object.assign(inherited, originalTopicHubs.carburanti);
     delete inherited.it;
     TI.topicHubs = { ...originalTopicHubs, carburanti: inherited };
+    const inheritedHubSitemap = SITEMAP_TI.replace('/articoli-ticino/carburanti/', '/articoli-ticino/ereditato/');
     assert.throws(
-      () => expectedSectionPages(CATALOG_TI, SLUGS_TI, SITEMAP_TI),
+      () => expectedSectionPages(CATALOG_TI, SLUGS_TI, inheritedHubSitemap),
       /slug hub mancante o vuoto.*\/it$/u,
     );
   } finally {
