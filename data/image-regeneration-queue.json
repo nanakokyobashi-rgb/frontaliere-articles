@@ -60,6 +60,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-15T23:56:58.687Z",
       "lastFailureAt": "2026-10-16T00:09:02.475Z"
+    },
+    {
+      "articleId": "varese-piazzale-anastasi-intitolazione",
+      "title": "Varese: il piazzale dello stadio è intitolato a Anastasi",
+      "fallbackImage": "/images/blog/article-manutenzione-prato-franco-ossola-2026.webp",
+      "reason": "All image providers failed for article-varese-piazzale-anastasi-intitolazione: openai-codex (vision gate rejected image: The scene is relevant and contains no visible text, signage",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T01:20:06.531Z",
+      "lastFailureAt": "2026-10-16T01:20:06.531Z"
     }
   ]
 }
