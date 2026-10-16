@@ -28086,6 +28086,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'dati-assicurati-casse-zurigo-posta',
+    category: 'pensione',
+    date: '2026-10-16T04:32:58.586Z',
+    image: '/images/blog/article-dati-assicurati-casse-zurigo-posta.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    canton: ['ZH'],
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
