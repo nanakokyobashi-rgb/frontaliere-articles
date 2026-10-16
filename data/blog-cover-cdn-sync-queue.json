@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-kick-cocaine-gazzada-evento.webp",
-      "sha256": "da6640ff3aad59ee28cd224ebfa1084c74f5ca7d681d8110154efd032a3cf1e6"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-kick-cocaine-gazzada-evento-480w.webp",
-      "sha256": "f1fdecab480fa5801b59952ae0a013ac3da89b86f127f44cf8adb5b4ee281d2a"
-    }
-  ]
+  "items": []
 }
