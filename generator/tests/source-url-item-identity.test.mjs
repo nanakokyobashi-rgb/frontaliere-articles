@@ -237,6 +237,7 @@ test('shortHeadlineEvidence: richiede il titolo completo fra i titoli dichiarati
   // Esempi sintetici per il predicato puro; le prove di pagina sono testate
   // separatamente con i fixture RSS/HTML acquisiti dalla fonte.
   assert.equal(shortHeadlineEvidence('A 13: Stau', 'A 13: Stau'), true);
+  assert.equal(shortHeadlineEvidence('Titolo diverso\rA 13: Stau', 'A 13: Stau'), true);
   assert.equal(shortHeadlineEvidence('A 13: Stau | Südostschweiz', 'A 13: Stau'), false);
   assert.equal(shortHeadlineEvidence('A 13: Unfall', 'A 13: Stau'), false);
   assert.equal(shortHeadlineEvidence('Stau im Verkehr auf der A 13', 'A 13: Stau'), false);

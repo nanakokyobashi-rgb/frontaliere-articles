@@ -270,7 +270,7 @@ export function shortHeadlineEvidence(titleEvidence, headline) {
   );
   if (distinctiveWords.size >= 2) return false;
 
-  return String(titleEvidence ?? '').split(/\r?\n/)
+  return String(titleEvidence ?? '').split(/\r\n|[\r\n]/u)
     .some((line) => normalizeItemText(line) === normalizedHeadline);
 }
 

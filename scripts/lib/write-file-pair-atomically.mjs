@@ -3,8 +3,6 @@ import fs from 'node:fs';
 import { hostname } from 'node:os';
 import path from 'node:path';
 
-let temporarySequence = 0;
-
 const WRITER_LOCK_NAME = '.registry-pair-write.lock';
 const RECOVERY_LOCK_NAME = '.registry-pair-recovery.lock';
 const JOURNAL_NAME = '.registry-pair-write.journal.json';
@@ -27,8 +25,11 @@ function pathExists(fsImpl, file) {
 function removeTemporaryFile(fsImpl, file, errors) {
   try {
     fsImpl.unlinkSync(file);
+    return true;
   } catch (error) {
-    if (error?.code !== 'ENOENT') errors.push(error);
+    if (error?.code === 'ENOENT') return true;
+    errors.push(error);
+    return false;
   }
 }
 
@@ -37,15 +38,25 @@ function throwWithRelatedErrors(error, relatedErrors, message) {
   throw new AggregateError([error, ...relatedErrors], `${message} (${relatedErrors.length} errori aggiuntivi)`);
 }
 
-function writeJsonAtomically(fsImpl, file, value) {
-  const tmp = `${file}.${process.pid}.${temporarySequence++}.tmp`;
+function makeTransactionStagingFile(file, transactionId, kind) {
+  if (!validTransactionId(transactionId) || !/^[a-z-]+$/u.test(kind)) {
+    throw new TypeError('makeTransactionStagingFile: transactionId o kind non valido');
+  }
+  return `${file}.${transactionId}.${kind}.tmp`;
+}
+
+function writeJsonAtomically(fsImpl, file, value, transactionId) {
+  const tmp = makeTransactionStagingFile(file, transactionId, 'journal');
   let fd = null;
+  let created = false;
   try {
     fd = fsImpl.openSync(tmp, 'wx', 0o600);
+    created = true;
     fsImpl.writeFileSync(fd, `${JSON.stringify(value)}\n`, 'utf8');
     fsImpl.closeSync(fd);
     fd = null;
     fsImpl.renameSync(tmp, file);
+    created = false;
   } catch (error) {
     const cleanupErrors = [];
     if (fd !== null) {
@@ -55,7 +66,7 @@ function writeJsonAtomically(fsImpl, file, value) {
         cleanupErrors.push(closeError);
       }
     }
-    removeTemporaryFile(fsImpl, tmp, cleanupErrors);
+    if (created) removeTemporaryFile(fsImpl, tmp, cleanupErrors);
     throwWithRelatedErrors(error, cleanupErrors, `scrittura atomica di ${file} incompleta`);
   }
 }
@@ -113,10 +124,18 @@ function readWriterLock(fsImpl, lockFile) {
   return record;
 }
 
-function isJournalTemporaryName(name) {
+function isLegacyJournalTemporaryName(name) {
   const prefix = `${JOURNAL_NAME}.`;
   if (!name.startsWith(prefix) || !name.endsWith('.tmp')) return false;
   return /^\d+\.\d+\.tmp$/u.test(name.slice(prefix.length));
+}
+
+function isJournalTemporaryName(name) {
+  const prefix = `${JOURNAL_NAME}.`;
+  if (!name.startsWith(prefix) || !name.endsWith('.tmp')) return false;
+  const suffix = name.slice(prefix.length);
+  return isLegacyJournalTemporaryName(name)
+    || /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.journal\.tmp$/iu.test(suffix);
 }
 
 function journalTemporaryNames(fsImpl, directory) {
@@ -135,9 +154,10 @@ function assertNoPendingRecovery(fsImpl, directory) {
   }
 }
 
-function expectedStagingFile(file, pid, stagingFile, directory) {
+function expectedStagingFile(file, pid, transactionId, stagingFile, directory) {
   if (typeof stagingFile !== 'string' || path.dirname(stagingFile) !== directory) return false;
   const name = path.basename(stagingFile);
+  if (name === `${path.basename(file)}.${transactionId}.pair.tmp`) return true;
   const prefix = `${path.basename(file)}.${pid}.`;
   if (!name.startsWith(prefix) || !name.endsWith('.pair.tmp')) return false;
   return /^\d+$/u.test(name.slice(prefix.length, -'.pair.tmp'.length));
@@ -183,7 +203,7 @@ function validateJournal(fsImpl, directory, journal) {
       throw new Error(`staging inatteso per un target invariato (${entry.file}); recovery rifiutata`);
     }
     if (entry.beforeSha256 !== entry.afterSha256
-        && !expectedStagingFile(entry.file, journal.pid, entry.stagingFile, directory)) {
+        && !expectedStagingFile(entry.file, journal.pid, journal.transactionId, entry.stagingFile, directory)) {
       throw new Error(`path di staging non verificabile (${entry.file}); recovery rifiutata`);
     }
   }
@@ -233,46 +253,85 @@ function allAfter(snapshot) {
   return snapshot.every(({ entry, sha256 }) => sha256 === entry.afterSha256);
 }
 
-function restoreAtomically(fsImpl, file, content, suffix = 'pair-rollback.tmp') {
-  const tmp = `${file}.${process.pid}.${temporarySequence++}.${suffix}`;
+function restoreAtomically(fsImpl, file, content, kind, transactionId) {
+  const tmp = makeTransactionStagingFile(file, transactionId, kind);
+  let fd = null;
+  let created = false;
   try {
-    fsImpl.writeFileSync(tmp, content, { encoding: 'utf8', flag: 'wx' });
+    fd = fsImpl.openSync(tmp, 'wx', 0o600);
+    created = true;
+    fsImpl.writeFileSync(fd, content, 'utf8');
+    fsImpl.closeSync(fd);
+    fd = null;
     fsImpl.renameSync(tmp, file);
+    created = false;
   } catch (error) {
     const cleanupErrors = [];
-    removeTemporaryFile(fsImpl, tmp, cleanupErrors);
+    if (fd !== null) {
+      try {
+        fsImpl.closeSync(fd);
+      } catch (closeError) {
+        cleanupErrors.push(closeError);
+      }
+    }
+    if (created) removeTemporaryFile(fsImpl, tmp, cleanupErrors);
     throwWithRelatedErrors(error, cleanupErrors, `ripristino incompleto per ${file}`);
   }
 }
 
 function restoreBeforeSnapshot(fsImpl, journal, snapshot) {
   for (const { entry, content } of snapshot) {
-    if (content !== entry.before) restoreAtomically(fsImpl, entry.file, entry.before, 'pair-recovery.tmp');
+    if (content !== entry.before) {
+      restoreAtomically(fsImpl, entry.file, entry.before, 'pair-recovery', journal.transactionId);
+    }
   }
 }
 
 function recoveryTemporaryNames(fsImpl, directory, journal) {
-  const names = fsImpl.readdirSync(directory);
-  const targets = journal.entries.map((entry) => path.basename(entry.file));
-  return names.filter((name) => targets.some((target) => {
-    const prefix = `${target}.`;
-    if (!name.startsWith(prefix)) return false;
-    const remainder = name.slice(prefix.length);
-    return /^\d+\.\d+\.pair-recovery\.tmp$/u.test(remainder)
-      || /^\d+\.\d+\.pair-rollback\.tmp$/u.test(remainder);
-  }));
+  const expected = new Set(journal.entries.flatMap((entry) => [
+    path.basename(makeTransactionStagingFile(entry.file, journal.transactionId, 'pair-recovery')),
+    path.basename(makeTransactionStagingFile(entry.file, journal.transactionId, 'pair-rollback')),
+  ]));
+  return fsImpl.readdirSync(directory).filter((name) => expected.has(name));
 }
 
-function cleanupRecoveryArtifacts(fsImpl, directory, journal) {
+function cleanupRecoveryArtifacts(fsImpl, directory, journal, { ownedStagingFiles } = {}) {
   const errors = [];
+  // Legacy PID.sequence staging names are accepted for journal compatibility,
+  // but retained: without a transaction-specific path, recovery cannot rule
+  // out a stale or foreign artifact after PID/sequence reuse.
   for (const entry of journal.entries) {
-    if (entry.stagingFile) removeTemporaryFile(fsImpl, entry.stagingFile, errors);
+    const transactionStagingFile = makeTransactionStagingFile(entry.file, journal.transactionId, 'pair');
+    if (entry.stagingFile
+        && (ownedStagingFiles
+          ? ownedStagingFiles.has(entry.stagingFile)
+          : entry.stagingFile === transactionStagingFile)) {
+      removeTemporaryFile(fsImpl, entry.stagingFile, errors);
+    }
   }
   for (const name of recoveryTemporaryNames(fsImpl, directory, journal)) {
     removeTemporaryFile(fsImpl, path.join(directory, name), errors);
   }
-  for (const name of journalTemporaryNames(fsImpl, directory)) {
-    removeTemporaryFile(fsImpl, path.join(directory, name), errors);
+  const transactionJournalTemporary = makeTransactionStagingFile(
+    path.join(directory, JOURNAL_NAME),
+    journal.transactionId,
+    'journal',
+  );
+  removeTemporaryFile(fsImpl, transactionJournalTemporary, errors);
+  for (const name of journalTemporaryNames(fsImpl, directory).filter(isLegacyJournalTemporaryName)) {
+    const file = path.join(directory, name);
+    let candidate;
+    try {
+      candidate = JSON.parse(fsImpl.readFileSync(file, 'utf8'));
+    } catch (error) {
+      errors.push(new Error(`journal temporaneo legacy non verificabile (${file}); recovery rifiutata`, { cause: error }));
+      continue;
+    }
+    if (candidate?.transactionId !== journal.transactionId || candidate?.directory !== directory) {
+      errors.push(new Error(`journal temporaneo legacy di un'altra transazione (${file}); file mantenuto`));
+      continue;
+    }
+    removeTemporaryFile(fsImpl, file, errors);
   }
   if (errors.length > 0) {
     throw new AggregateError(errors, `cleanup recovery della coppia incompleto (${errors.length} errori)`);
@@ -320,15 +379,18 @@ function closeWriterLockKeepingPath(fsImpl, lock, errors) {
   }
 }
 
-function writeStagedFiles(fsImpl, staged) {
+function writeStagedFiles(fsImpl, staged, transactionId) {
   try {
     for (const item of staged) {
       fsImpl.writeFileSync(item.tmp, item.after, { encoding: 'utf8', flag: 'wx' });
+      item.ownsTmp = true;
     }
   } catch (error) {
     const cleanupErrors = [];
     for (const item of staged) {
-      if (item.tmp) removeTemporaryFile(fsImpl, item.tmp, cleanupErrors);
+      if (item.tmp && item.ownsTmp) {
+        if (removeTemporaryFile(fsImpl, item.tmp, cleanupErrors)) item.ownsTmp = false;
+      }
     }
     throwWithRelatedErrors(error, cleanupErrors, 'staging della coppia incompleto');
   }
@@ -338,16 +400,19 @@ function writeStagedFiles(fsImpl, staged) {
     for (const item of staged) {
       fsImpl.renameSync(item.tmp, item.file);
       item.tmp = null;
+      item.ownsTmp = false;
       committed.push(item);
     }
   } catch (error) {
     const rollbackErrors = [];
     for (const item of staged) {
-      if (item.tmp) removeTemporaryFile(fsImpl, item.tmp, rollbackErrors);
+      if (item.tmp && item.ownsTmp) {
+        if (removeTemporaryFile(fsImpl, item.tmp, rollbackErrors)) item.ownsTmp = false;
+      }
     }
     for (const item of committed.reverse()) {
       try {
-        restoreAtomically(fsImpl, item.file, item.before);
+        restoreAtomically(fsImpl, item.file, item.before, 'pair-rollback', transactionId);
       } catch (rollbackError) {
         rollbackErrors.push(rollbackError);
       }
@@ -399,7 +464,7 @@ function recoverWhileLocked(fsImpl, directory) {
     restoreBeforeSnapshot(fsImpl, journal, snapshot);
     assertAllBefore(fsImpl, journal);
     journal.phase = 'recovered';
-    writeJsonAtomically(fsImpl, journalFile, journal);
+    writeJsonAtomically(fsImpl, journalFile, journal, journal.transactionId);
     outcome = 'restored-before';
   } else if (journal.phase === 'recovered') {
     if (!allBefore(snapshot)) {
@@ -533,14 +598,14 @@ export function writeFilePairAtomically(changes, { fsImpl = fs } = {}) {
 
   const staged = canonical
     .filter((change) => change.before !== change.after)
-    .map((change) => ({ ...change, tmp: null }));
+    .map((change) => ({ ...change, tmp: null, ownsTmp: false }));
   if (staged.length === 0) return;
 
   const directory = directories.values().next().value;
   assertNoPendingRecovery(fsImpl, directory);
   const transactionId = randomUUID();
   for (const item of staged) {
-    item.tmp = `${item.file}.${process.pid}.${temporarySequence++}.pair.tmp`;
+    item.tmp = makeTransactionStagingFile(item.file, transactionId, 'pair');
   }
 
   const lock = { file: path.join(directory, WRITER_LOCK_NAME), fd: null };
@@ -572,14 +637,14 @@ export function writeFilePairAtomically(changes, { fsImpl = fs } = {}) {
       }
     }
     journalWriteAttempted = true;
-    writeJsonAtomically(fsImpl, journalFile, journal);
+    writeJsonAtomically(fsImpl, journalFile, journal, transactionId);
     journalPersisted = true;
-    writeStagedFiles(fsImpl, staged);
+    writeStagedFiles(fsImpl, staged, transactionId);
     if (!canonical.every((change) => fsImpl.readFileSync(change.file, 'utf8') === change.after)) {
       throw new Error('writeFilePairAtomically: verifica post-rename non coerente');
     }
     journal.phase = 'committed';
-    writeJsonAtomically(fsImpl, journalFile, journal);
+    writeJsonAtomically(fsImpl, journalFile, journal, transactionId);
   } catch (error) {
     transactionError = error;
   }
@@ -607,8 +672,12 @@ export function writeFilePairAtomically(changes, { fsImpl = fs } = {}) {
         restoreBeforeSnapshot(fsImpl, journal, snapshot);
         assertAllBefore(fsImpl, journal);
         journal.phase = 'recovered';
-        writeJsonAtomically(fsImpl, journalFile, journal);
-        cleanupRecoveryArtifacts(fsImpl, directory, journal);
+        writeJsonAtomically(fsImpl, journalFile, journal, transactionId);
+        cleanupRecoveryArtifacts(fsImpl, directory, journal, {
+          ownedStagingFiles: new Set(staged
+            .filter((item) => item.tmp && item.ownsTmp)
+            .map((item) => item.tmp)),
+        });
         safeToRelease = true;
       } catch (error) {
         relatedErrors.push(error);

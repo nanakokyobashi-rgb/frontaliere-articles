@@ -45,6 +45,70 @@ function hasErrorCode(error, code) {
     || (error instanceof AggregateError && error.errors.some((item) => hasErrorCode(item, code)));
 }
 
+test('una collisione del temporaneo journal conserva il file dell’altra operazione', () => {
+  const root = fixture();
+  try {
+    const first = path.join(root, 'first.txt');
+    fs.writeFileSync(first, 'before');
+    let foreignTemporary = null;
+    const fsImpl = {
+      ...fs,
+      openSync(file, ...args) {
+        const name = path.basename(file);
+        if (!foreignTemporary
+            && name.startsWith('.registry-pair-write.journal.json.')
+            && name.endsWith('.tmp')) {
+          foreignTemporary = file;
+          fs.writeFileSync(file, 'foreign journal temporary', { flag: 'wx' });
+        }
+        return fs.openSync(file, ...args);
+      },
+    };
+
+    assert.throws(() => writeFilePairAtomically([
+      { file: first, before: 'before', after: 'after' },
+    ], { fsImpl }), (error) => hasErrorCode(error, 'EEXIST'));
+
+    assert.ok(foreignTemporary);
+    assert.equal(fs.readFileSync(foreignTemporary, 'utf8'), 'foreign journal temporary');
+    assert.equal(fs.readFileSync(first, 'utf8'), 'before');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('una collisione dello staging conserva il file dell’altra operazione', () => {
+  const root = fixture();
+  try {
+    const first = path.join(root, 'first.txt');
+    fs.writeFileSync(first, 'before');
+    let foreignTemporary = null;
+    const fsImpl = {
+      ...fs,
+      writeFileSync(file, ...args) {
+        if (!foreignTemporary
+            && typeof file === 'string'
+            && path.basename(file).startsWith('first.txt.')
+            && file.endsWith('.pair.tmp')) {
+          foreignTemporary = file;
+          fs.writeFileSync(file, 'foreign staging temporary', { flag: 'wx' });
+        }
+        return fs.writeFileSync(file, ...args);
+      },
+    };
+
+    assert.throws(() => writeFilePairAtomically([
+      { file: first, before: 'before', after: 'after' },
+    ], { fsImpl }), (error) => hasErrorCode(error, 'EEXIST'));
+
+    assert.ok(foreignTemporary);
+    assert.equal(fs.readFileSync(foreignTemporary, 'utf8'), 'foreign staging temporary');
+    assert.equal(fs.readFileSync(first, 'utf8'), 'before');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('ripristina il primo file quando il rename del secondo fallisce', () => {
   const root = fixture();
   try {
@@ -416,6 +480,98 @@ test('recovery si può ripetere dopo un errore al secondo rename di ripristino',
     assert.equal(fs.readFileSync(second, 'utf8'), 'second-before');
     assert.equal(fs.existsSync(path.join(root, '.registry-pair-write.lock')), false);
     assert.equal(fs.existsSync(path.join(root, '.registry-pair-write.journal.json')), false);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('recovery ripetibile dopo una scrittura parziale del temporaneo di ripristino', () => {
+  const root = fixture();
+  try {
+    const first = path.join(root, 'first.txt');
+    const second = path.join(root, 'second.txt');
+    fs.writeFileSync(first, 'first-before');
+    fs.writeFileSync(second, 'second-before');
+    const child = interruptAfterTargetRenames(first, second, 1);
+    assert.equal(child.status, 73, child.stderr);
+
+    const openFiles = new Map();
+    let injected = false;
+    let partialWritten = false;
+    const fsImpl = {
+      ...fs,
+      openSync(file, ...args) {
+        const fd = fs.openSync(file, ...args);
+        if (typeof file === 'string' && file.endsWith('.pair-recovery.tmp')) {
+          openFiles.set(fd, file);
+        }
+        return fd;
+      },
+      writeFileSync(file, ...args) {
+        if (typeof file === 'number' && openFiles.has(file) && !injected) {
+          injected = true;
+          fs.writeFileSync(file, String(args[0]).slice(0, 4), args[1]);
+          partialWritten = true;
+          const error = new Error('injected ENOSPC after partial recovery write');
+          error.code = 'ENOSPC';
+          throw error;
+        }
+        return fs.writeFileSync(file, ...args);
+      },
+      closeSync(fd) {
+        openFiles.delete(fd);
+        return fs.closeSync(fd);
+      },
+    };
+
+    assert.throws(() => recoverInterruptedRegistryPair(root, { fsImpl }), (error) => {
+      assert.equal(injected, true);
+      assert.equal(partialWritten, true);
+      assert.equal(hasErrorCode(error, 'ENOSPC'), true);
+      return true;
+    });
+    assert.equal(fs.readFileSync(first, 'utf8'), 'first-after');
+    assert.equal(fs.readFileSync(second, 'utf8'), 'second-before');
+    assert.deepEqual(fs.readdirSync(root).filter((name) => name.endsWith('.pair-recovery.tmp')), []);
+    assert.equal(fs.existsSync(path.join(root, '.registry-pair-write.lock')), true);
+    assert.equal(fs.existsSync(path.join(root, '.registry-pair-write.journal.json')), true);
+    assert.equal(fs.existsSync(path.join(root, '.registry-pair-recovery.lock')), false);
+
+    assert.deepEqual(recoverInterruptedRegistryPair(root), { recovered: true, state: 'restored-before' });
+    assert.equal(fs.readFileSync(first, 'utf8'), 'first-before');
+    assert.equal(fs.readFileSync(second, 'utf8'), 'second-before');
+    assert.equal(fs.existsSync(path.join(root, '.registry-pair-write.lock')), false);
+    assert.equal(fs.existsSync(path.join(root, '.registry-pair-write.journal.json')), false);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('recovery conserva staging legacy PID.sequence senza identità di transazione', () => {
+  const root = fixture();
+  try {
+    const first = path.join(root, 'first.txt');
+    const second = path.join(root, 'second.txt');
+    fs.writeFileSync(first, 'first-before');
+    fs.writeFileSync(second, 'second-before');
+    const child = interruptAfterTargetRenames(first, second, 1);
+    assert.equal(child.status, 73, child.stderr);
+
+    const journalFile = path.join(root, '.registry-pair-write.journal.json');
+    const journal = JSON.parse(fs.readFileSync(journalFile, 'utf8'));
+    const secondEntry = journal.entries.find((entry) => entry.file === fs.realpathSync(second));
+    fs.unlinkSync(secondEntry.stagingFile);
+    const legacyStaging = `${secondEntry.file}.${journal.pid}.0.pair.tmp`;
+    secondEntry.stagingFile = legacyStaging;
+    fs.writeFileSync(journalFile, `${JSON.stringify(journal)}\n`);
+    fs.writeFileSync(legacyStaging, 'second-after', { flag: 'wx' });
+
+    assert.deepEqual(recoverInterruptedRegistryPair(root), { recovered: true, state: 'restored-before' });
+    assert.equal(fs.readFileSync(first, 'utf8'), 'first-before');
+    assert.equal(fs.readFileSync(second, 'utf8'), 'second-before');
+    assert.equal(fs.readFileSync(legacyStaging, 'utf8'), 'second-after');
+    assert.equal(fs.existsSync(path.join(root, '.registry-pair-write.lock')), false);
+    assert.equal(fs.existsSync(journalFile), false);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
