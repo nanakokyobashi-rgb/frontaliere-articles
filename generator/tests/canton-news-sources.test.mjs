@@ -44,6 +44,7 @@ import {
   selectPublishedTime,
   extractSitemapNewsItems,
   feedItemDocuments,
+  resolveAtomLink,
   filterArticleLinks,
   isoWeekOf,
   parseSourceCitations,
@@ -1213,9 +1214,9 @@ test('stripPageChrome: nav, ruoli ARIA, header/footer di pagina; il resto intatt
   const inValue = '<main data-note="foo role=navigation"><a href="/news/7">Titolo del settimo comunicato</a></main><div title=\'x role="banner"\'><a href="/news/8">Titolo dell ottavo comunicato</a></div>';
   assert.deepEqual(stripPageChrome(inValue), { html: inValue, removed: 0 });
   assert.equal(stripPageChrome('<div class=menu role=navigation><a href="/m3">Terza voce del menu laterale</a></div>ok').html, 'ok');
-  // Un'area senza chiusura non si taglia fino in fondo al documento.
+  // Un'area senza chiusura rende ambigua la separazione fra menu e notizie.
   const open = '<nav><a href="/a">Voce di un menu non chiuso</a><main><a href="/news/3">Titolo del terzo comunicato</a></main>';
-  assert.deepEqual(stripPageChrome(open), { html: open, removed: 0 });
+  assert.throws(() => stripPageChrome(open), /markup HTML non bilanciato/);
   assert.deepEqual(stripPageChrome(''), { html: '', removed: 0 });
 });
 
@@ -1226,6 +1227,32 @@ test('stripPageChrome: attributi quotati con `>` non nascondono i ruoli né romp
 
   assert.deepEqual(stripPageChrome(html), {
     html: '<p>Contenuto editoriale conservato</p>',
+    removed: 1,
+  });
+});
+
+test('FU-010: un wrapper di navigazione non bilanciato rifiuta la pagina intera', async () => {
+  const html = fixture('fu-010-unbalanced-navigation.html').toString('utf8');
+  assert.throws(() => stripPageChrome(html), /markup HTML non bilanciato/);
+
+  const url = 'https://sources.example/news';
+  const { impl } = fakeFetch({ [url]: { body: html, contentType: 'text/html' } });
+  await assert.rejects(
+    scanCantonSource({ url, parser: 'html-links' }, ctx(impl)),
+    /markup HTML non bilanciato/,
+  );
+});
+
+test('FU-010: `>` dentro attributi quotati non interrompe il tag di navigazione', () => {
+  const html = fixture('fu-010-quoted-greater-than.html').toString('utf8');
+  const start = html.indexOf('<nav');
+  const end = findHtmlTagEndOutsideQuotes(html, start);
+
+  assert.ok(start >= 0);
+  assert.equal(html[end], '>');
+  assert.ok(html.slice(start, end).includes('data-note="x > <div> y"'));
+  assert.deepEqual(stripPageChrome(html), {
+    html: '\n<main><a href="/story/quoted">Titolo della notizia con attributo quoted</a></main>\n',
     removed: 1,
   });
 });
@@ -1364,4 +1391,32 @@ test('feedItemDocuments: Atom e RSS, e un documento senza voci torna com\'e\'', 
   assert.equal(docs.length, 2);
   assert.deepEqual(docs.flatMap((d) => extractRssItems(d, 'https://x.ch/feed')).map((h) => h.headline), ['Primo titolo di prova', 'Secondo titolo di prova']);
   assert.deepEqual(feedItemDocuments('<rss><channel></channel></rss>'), ['<rss><channel></channel></rss>']);
+});
+
+test('FU-014: Atom prefissato risolve xml:base prima di assegnare identita\' a URL riusati', async () => {
+  const feedUrl = 'https://news.example/feeds/atom.xml';
+  const expectedUrl = 'https://news.example/issues/2026/today?item=1&lang=it';
+  const xml = fixture('fu-014-atom-prefixed-xml-base.xml').toString('utf8');
+  const docs = feedItemDocuments(xml, feedUrl);
+  assert.equal(docs.length, 2);
+
+  const extracted = docs.flatMap((doc) => extractRssItems(doc, feedUrl));
+  assert.deepEqual(extracted.map((item) => decodeHtmlEntities(item.url)), [expectedUrl, expectedUrl]);
+  assert.equal(resolveAtomLink('today?item=1&lang=it', 'https://news.example/issues/2026/'), expectedUrl);
+
+  const { impl } = fakeFetch({ [feedUrl]: { body: xml, contentType: 'application/atom+xml' } });
+  const out = await scanCantonSource({
+    url: feedUrl,
+    parser: 'atom',
+    quirks: { urlReusedForDifferentStories: true },
+  }, ctx(impl));
+
+  assert.equal(out.headlines.length, 2);
+  assert.deepEqual(out.headlines.map((item) => stripItemIdentity(item.url)), [expectedUrl, expectedUrl]);
+  assert.equal(new Set(out.headlines.map((item) => newsUrlKey(item.url))).size, 2);
+  assert.equal(new Set(out.headlines.map((item) => itemIdentityOf(item.url))).size, 2);
+  assert.deepEqual(out.headlines.map((item) => item.headline), [
+    'Primo titolo atom con link relativo',
+    'Secondo titolo atom con lo stesso link',
+  ]);
 });

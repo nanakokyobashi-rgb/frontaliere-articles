@@ -727,6 +727,75 @@ function roleTokens(attrs) {
 const SECTIONING_TAGS = new Set(['article', 'aside', 'main', 'section']);
 /** Gli stessi contenitori dichiarati con `role` su un elemento qualunque (`<div role="main">`). */
 const SECTIONING_ROLES = new Set(['article', 'complementary', 'main', 'region']);
+const SEMANTIC_HTML_TAGS = new Set([...SECTIONING_TAGS, 'nav', 'header', 'footer']);
+
+function unterminatedHtmlTagStart(masked) {
+  let cursor = 0;
+  while (true) {
+    const start = masked.indexOf('<', cursor);
+    if (start < 0) return -1;
+    if (/^<\/?[A-Za-z][\w:-]*(?=$|[\s/>])/u.test(masked.slice(start))) {
+      const end = findHtmlTagEndOutsideQuotes(masked, start);
+      if (end < 0) return start;
+      cursor = end + 1;
+    } else {
+      cursor = start + 1;
+    }
+  }
+}
+
+/**
+ * Verifica prima i tag che determinano se un'area è contenuto o cornice.
+ * Se il loro nesting non è verificabile, l'estrattore non deve vedere la
+ * pagina: altrimenti un menu può essere promosso a notizia.
+ */
+function semanticHtmlCloseEnds(masked) {
+  const malformedTag = unterminatedHtmlTagStart(masked);
+  if (malformedTag >= 0) {
+    throw new Error(`markup HTML non bilanciato: tag senza fine vicino all'indice ${malformedTag}`);
+  }
+
+  const ranges = [];
+  let tag = nextHtmlTag(masked);
+  while (tag) {
+    const roles = tag.closing ? [] : roleTokens(tag.attrs);
+    const semantic = SEMANTIC_HTML_TAGS.has(tag.name)
+      || roles.some((role) => CHROME_ROLES.has(role) || SECTIONING_ROLES.has(role));
+    if (!tag.closing && semantic) {
+      if (tag.selfClosing) {
+        throw new Error(`markup HTML non bilanciato: <${tag.name}/> non è un contenitore valido`);
+      }
+      const end = matchingCloseEnd(masked, tag.name, tag.end);
+      if (end < 0) {
+        throw new Error(`markup HTML non bilanciato: <${tag.name}> senza chiusura`);
+      }
+      ranges.push({ start: tag.start, end, name: tag.name });
+    }
+    tag = nextHtmlTag(masked, tag.end);
+  }
+
+  const closeKeys = new Set(ranges.map(({ end, name }) => `${end}\u0000${name}`));
+  tag = nextHtmlTag(masked);
+  while (tag) {
+    if (tag.closing && SEMANTIC_HTML_TAGS.has(tag.name) && !closeKeys.has(`${tag.end}\u0000${tag.name}`)) {
+      throw new Error(`markup HTML non bilanciato: chiusura </${tag.name}> senza apertura`);
+    }
+    tag = nextHtmlTag(masked, tag.end);
+  }
+
+  ranges.sort((a, b) => a.start - b.start || b.end - a.end);
+  const nesting = [];
+  for (const range of ranges) {
+    while (nesting.length > 0 && range.start >= nesting[nesting.length - 1].end) nesting.pop();
+    if (nesting.length > 0 && range.end > nesting[nesting.length - 1].end) {
+      throw new Error(`markup HTML non bilanciato: nesting incrociato su <${range.name}>`);
+    }
+    nesting.push(range);
+  }
+
+  return new Map(ranges.map(({ start, end }) => [start, end]));
+}
+
 /** Il contenuto principale della pagina (`<main>` o `role="main"`) sta in questo markup? */
 function containsMainContent(masked) {
   let tag = nextHtmlTag(masked);
@@ -753,8 +822,9 @@ function containsMainContent(masked) {
  *
  * Un `<header>` dentro `<article>` resta: e' la forma WordPress del titolo
  * dell'articolo (`<article><header><h2><a>`), cioe' proprio il link da tenere.
- * Un elemento senza chiusura bilanciata resta: tagliare fino alla fine del
- * documento costerebbe piu' di qualche link di menu.
+ * Se i tag che definiscono questi confini sono malformati o non bilanciati,
+ * la pagina viene rifiutata prima dell'estrazione: conservarla potrebbe
+ * promuovere una voce di menu a notizia.
  *
  * @param {string} html
  * @returns {{ html: string, removed: number }} la pagina senza le aree, e quante
@@ -765,6 +835,7 @@ export function stripPageChrome(html) {
   // non e' un link. Resi spazi a pari lunghezza (gli indici restano quelli del
   // documento), e cosi' restano anche in uscita: l'estrattore non li vede.
   const masked = maskLedgerInactiveMarkup(html);
+  const closeEnds = semanticHtmlCloseEnds(masked);
   const ranges = [];
   let sectioningDepth = 0;
   // Fine degli elementi `role="main|article|…"` aperti: finche' ce n'e' uno,
@@ -787,7 +858,7 @@ export function stripPageChrome(html) {
     }
     const roles = roleTokens(attrs);
     if (!SECTIONING_TAGS.has(name) && roles.some((r) => SECTIONING_ROLES.has(r))) {
-      const sectionEnd = matchingCloseEnd(masked, name, end);
+      const sectionEnd = closeEnds.get(start) ?? -1;
       if (sectionEnd !== -1) roleSectionEnds.push(sectionEnd);
     }
     const inSection = sectioningDepth > 0 || roleSectionEnds.length > 0;
@@ -798,7 +869,7 @@ export function stripPageChrome(html) {
       tag = nextHtmlTag(masked, end);
       continue;
     }
-    const sectionEnd = matchingCloseEnd(masked, name, end);
+    const sectionEnd = closeEnds.get(start) ?? -1;
     if (sectionEnd === -1) {
       tag = nextHtmlTag(masked, end);
       continue;
@@ -1186,10 +1257,286 @@ export function extractSitemapNewsItems(xml, sitemapUrl, { dedup = true } = {}) 
  * volta, l'estrattore resta quello vero e non ha niente da deduplicare.
  *
  * @param {string} xml
+ * @param {string|null} feedUrl
  * @returns {string[]} un documento per voce; `[xml]` se non si riconoscono voci
  */
-export function feedItemDocuments(xml) {
+const ATOM_NAMESPACE_URI = 'http://www.w3.org/2005/Atom';
+const XML_NAMESPACE_URI = 'http://www.w3.org/XML/1998/namespace';
+
+/** Risolve un `href` Atom assoluto o relativo, scartando schemi non web. */
+export function resolveAtomLink(href, baseUrl) {
+  const value = decodeHtmlEntities(String(href || '')).trim();
+  if (!value) return null;
+  try {
+    const url = baseUrl ? new URL(value, baseUrl) : new URL(value);
+    return /^https?:$/u.test(url.protocol) ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
+function parseXmlAttributes(source, absoluteStart) {
+  const attributes = [];
+  const seen = new Set();
+  let cursor = 0;
+  while (cursor < source.length) {
+    while (cursor < source.length && /\s/u.test(source[cursor])) cursor += 1;
+    if (cursor >= source.length) break;
+    const nameMatch = /^[A-Za-z_][\w.:-]*/u.exec(source.slice(cursor));
+    if (!nameMatch) return null;
+    const name = nameMatch[0];
+    if (seen.has(name)) return null;
+    seen.add(name);
+    cursor += name.length;
+    while (cursor < source.length && /\s/u.test(source[cursor])) cursor += 1;
+    if (source[cursor] !== '=') return null;
+    cursor += 1;
+    while (cursor < source.length && /\s/u.test(source[cursor])) cursor += 1;
+    const quote = source[cursor];
+    if (quote !== '"' && quote !== "'") return null;
+    cursor += 1;
+    const valueStart = cursor;
+    const valueEnd = source.indexOf(quote, cursor);
+    if (valueEnd < 0) return null;
+    attributes.push({
+      name,
+      value: decodeHtmlEntities(source.slice(valueStart, valueEnd)),
+      quote,
+      valueStart: absoluteStart + valueStart,
+      valueEnd: absoluteStart + valueEnd,
+    });
+    cursor = valueEnd + 1;
+  }
+  return attributes;
+}
+
+function readXmlTagAt(xml, start) {
+  const closeAt = findHtmlTagEndOutsideQuotes(xml, start);
+  if (closeAt < 0) return null;
+  const closing = xml[start + 1] === '/';
+  const nameStart = start + 1 + (closing ? 1 : 0);
+  const nameMatch = /^[A-Za-z_][\w.-]*(?::[A-Za-z_][\w.-]*)?/u.exec(xml.slice(nameStart, closeAt));
+  if (!nameMatch) return null;
+  const name = nameMatch[0];
+  const afterName = nameStart + name.length;
+  if (afterName < closeAt && !/\s|\//u.test(xml[afterName])) return null;
+  if (closing) {
+    if (xml.slice(afterName, closeAt).trim()) return null;
+    return { start, end: closeAt + 1, name, closing: true, selfClosing: false, attributes: [] };
+  }
+
+  let attributesEnd = closeAt;
+  let slash = closeAt - 1;
+  while (slash >= afterName && /\s/u.test(xml[slash])) slash -= 1;
+  const selfClosing = xml[slash] === '/';
+  if (selfClosing) attributesEnd = slash;
+  const attributes = parseXmlAttributes(xml.slice(afterName, attributesEnd), afterName);
+  if (!attributes) return null;
+  return { start, end: closeAt + 1, name, closing: false, selfClosing, attributes };
+}
+
+function skipXmlDeclarationMarkup(xml, start) {
+  if (xml.startsWith('<!--', start)) {
+    const end = xml.indexOf('-->', start + 4);
+    return end < 0 ? -1 : end + 3;
+  }
+  if (xml.startsWith('<![CDATA[', start)) {
+    const end = xml.indexOf(']]>', start + 9);
+    return end < 0 ? -1 : end + 3;
+  }
+  if (xml.startsWith('<?', start)) {
+    const end = xml.indexOf('?>', start + 2);
+    return end < 0 ? -1 : end + 2;
+  }
+  if (/^<!DOCTYPE\b/iu.test(xml.slice(start))) {
+    let quote = '';
+    let subsetDepth = 0;
+    for (let cursor = start + 9; cursor < xml.length; cursor += 1) {
+      const character = xml[cursor];
+      if (quote) {
+        if (character === quote) quote = '';
+      } else if (character === '"' || character === "'") {
+        quote = character;
+      } else if (character === '[') {
+        subsetDepth += 1;
+      } else if (character === ']') {
+        subsetDepth = Math.max(0, subsetDepth - 1);
+      } else if (character === '>' && subsetDepth === 0) {
+        return cursor + 1;
+      }
+    }
+    return -1;
+  }
+  return xml.startsWith('<!', start) ? -1 : null;
+}
+
+function xmlElementName(qualifiedName) {
+  const colon = qualifiedName.indexOf(':');
+  return colon < 0
+    ? { prefix: '', localName: qualifiedName }
+    : { prefix: qualifiedName.slice(0, colon), localName: qualifiedName.slice(colon + 1) };
+}
+
+function escapeXmlAttribute(value, quote = '"') {
+  let escaped = String(value).replace(/&/gu, '&amp;').replace(/</gu, '&lt;');
+  escaped = quote === '"' ? escaped.replace(/"/gu, '&quot;') : escaped.replace(/'/gu, '&apos;');
+  return escaped;
+}
+
+function atomFeedItemDocuments(xml, feedUrl) {
+  const stack = [];
+  const entries = [];
+  let cursor = 0;
+  let rootSeen = false;
+  let feedNode = null;
+
+  const invalid = (reason) => {
+    throw new Error(`Atom XML non valido: ${reason}`);
+  };
+
+  while (true) {
+    const start = xml.indexOf('<', cursor);
+    if (start < 0) break;
+    const specialEnd = skipXmlDeclarationMarkup(xml, start);
+    if (specialEnd !== null) {
+      if (specialEnd < 0) {
+        if (!feedNode) return null;
+        invalid('dichiarazione o sezione CDATA non terminata');
+      }
+      cursor = specialEnd;
+      continue;
+    }
+
+    const tag = readXmlTagAt(xml, start);
+    if (!tag) {
+      if (!feedNode) return null;
+      invalid(`tag malformato all'indice ${start}`);
+    }
+
+    if (tag.closing) {
+      const node = stack[stack.length - 1];
+      if (!node) {
+        if (!feedNode) return null;
+        invalid(`chiusura inattesa </${tag.name}>`);
+      }
+      if (node.name !== tag.name) invalid(`chiusura inattesa </${tag.name}>`);
+      const activeEntry = node.entryRecord
+        || [...stack].reverse().find((item) => item.entryRecord)?.entryRecord;
+      if (activeEntry && node.namespace === ATOM_NAMESPACE_URI) {
+        const colon = tag.name.indexOf(':');
+        if (colon >= 0) {
+          const nameStart = tag.start + 2;
+          activeEntry.edits.push([nameStart, nameStart + colon + 1, '']);
+        }
+      }
+      stack.pop();
+      if (node.entryRecord) node.entryRecord.end = tag.end;
+      cursor = tag.end;
+      continue;
+    }
+
+    const parent = stack[stack.length - 1] || null;
+    const namespaces = new Map(parent?.namespaces || [['xml', XML_NAMESPACE_URI]]);
+    for (const attribute of tag.attributes) {
+      if (attribute.name === 'xmlns') namespaces.set('', attribute.value);
+      else if (attribute.name.startsWith('xmlns:')) namespaces.set(attribute.name.slice(6), attribute.value);
+    }
+    const { prefix, localName } = xmlElementName(tag.name);
+    if (prefix && !namespaces.has(prefix)) {
+      if (feedNode) invalid(`namespace non dichiarato per <${tag.name}>`);
+      return null;
+    }
+    const namespace = namespaces.get(prefix) || '';
+    let base = parent?.base ?? (parent ? null : (feedUrl || null));
+    const baseAttribute = tag.attributes.find((attribute) => attribute.name === 'xml:base');
+    if (baseAttribute?.value) {
+      base = resolveAtomLink(baseAttribute.value, base);
+      if (!base) {
+        if (feedNode) invalid(`xml:base non risolvibile su <${tag.name}>`);
+        return null;
+      }
+    }
+
+    const node = {
+      name: tag.name,
+      namespace,
+      namespaces,
+      base,
+      attributes: tag.attributes,
+      entryRecord: null,
+    };
+    if (!parent) {
+      if (rootSeen) invalid('più elementi radice');
+      rootSeen = true;
+      if (localName !== 'feed') return null;
+      if (namespace !== ATOM_NAMESPACE_URI && !(prefix === '' && namespace === '')) return [];
+      feedNode = node;
+    } else if (!feedNode) {
+      return null;
+    }
+
+    let entryRecord = null;
+    if (feedNode && stack.length === 1 && parent === feedNode
+      && localName === 'entry' && namespace === feedNode.namespace) {
+      entryRecord = { start: tag.start, end: tag.end, edits: [] };
+      entries.push(entryRecord);
+    }
+    node.entryRecord = entryRecord;
+    const activeEntry = entryRecord
+      || [...stack].reverse().find((item) => item.entryRecord)?.entryRecord;
+    if (activeEntry && namespace === ATOM_NAMESPACE_URI && prefix) {
+      const nameStart = tag.start + 1;
+      activeEntry.edits.push([nameStart, nameStart + prefix.length + 1, '']);
+    }
+    if (activeEntry && localName === 'link' && namespace === feedNode?.namespace) {
+      const href = tag.attributes.find((attribute) => attribute.name === 'href');
+      if (href) {
+        const resolved = resolveAtomLink(href.value, base);
+        activeEntry.edits.push([
+          href.valueStart,
+          href.valueEnd,
+          resolved ? escapeXmlAttribute(resolved, href.quote) : '',
+        ]);
+      }
+    }
+
+    if (tag.selfClosing) {
+      if (entryRecord) entryRecord.end = tag.end;
+    } else {
+      stack.push(node);
+    }
+    cursor = tag.end;
+  }
+
+  if (!feedNode) return null;
+  if (stack.length > 0) invalid(`elemento <${stack[stack.length - 1].name}> senza chiusura`);
+  if (entries.length === 0) return [xml];
+
+  const namespaceAttributes = feedNode.attributes
+    .filter((attribute) => attribute.name.startsWith('xmlns:'))
+    .map((attribute) => ` ${attribute.name}="${escapeXmlAttribute(attribute.value)}"`)
+    .join('');
+  const feedBaseAttribute = feedNode.base
+    ? ` xml:base="${escapeXmlAttribute(feedNode.base)}"`
+    : '';
+  const wrapper = `<feed xmlns="${ATOM_NAMESPACE_URI}"${namespaceAttributes}${feedBaseAttribute}>`;
+
+  return entries.map((entry) => {
+    if (entry.end < entry.start) invalid('entry Atom senza fine');
+    let block = xml.slice(entry.start, entry.end);
+    for (const [editStart, editEnd, replacement] of entry.edits.sort((a, b) => b[0] - a[0])) {
+      const localStart = editStart - entry.start;
+      const localEnd = editEnd - entry.start;
+      block = block.slice(0, localStart) + replacement + block.slice(localEnd);
+    }
+    return `${wrapper}${block}</feed>`;
+  });
+}
+
+export function feedItemDocuments(xml, feedUrl = null) {
   const src = String(xml || '');
+  const atomDocuments = atomFeedItemDocuments(src, feedUrl);
+  if (atomDocuments) return atomDocuments;
   const blocks = [...src.matchAll(/<(item|entry)[\s>][\s\S]*?<\/\1>/gi)].map((m) => m[0]);
   if (blocks.length === 0) return [src];
   const isAtom = /<feed[\s>]/i.test(src.slice(0, 500));
@@ -1505,9 +1852,12 @@ export async function scanCantonSource(source, ctx) {
         // Fonte che riusa gli URL: una voce alla volta, cosi' ne' il dedup
         // dell'estrattore ne' la mappa dei lead (per URL) fondono due notizie
         // allo stesso indirizzo. Vedi feedItemDocuments.
-        const docs = quirks.urlReusedForDifferentStories ? feedItemDocuments(text) : [text];
+        const docs = quirks.urlReusedForDifferentStories ? feedItemDocuments(text, url) : [text];
         return docs.flatMap((doc) => {
-          const items = ctx.extractRssItems(doc, url);
+          const extracted = ctx.extractRssItems(doc, url);
+          const items = quirks.urlReusedForDifferentStories && source.parser === 'atom'
+            ? extracted.map((item) => ({ ...item, url: decodeHtmlEntities(item.url) }))
+            : extracted;
           if (!quirks.paywall) return items;
           const leads = rssItemLeads(doc, url);
           return items.map((h) => (leads.has(h.url) ? { ...h, lead: leads.get(h.url) } : h));
