@@ -181,6 +181,22 @@ test('publisher: un push solo publisher si lega alla release API gia\' disponibi
     }),
     publisherCommit,
   );
+  assert.equal(
+    await resolvePublishedReleaseCommit(publisherCommit, {
+      apiReleaseCommitImpl: async () => apiCommit,
+      apiReleaseCommitOverride: apiCommit,
+      apiInputsChangedImpl: () => { throw new Error('il bookkeeping non deve essere riclassificato'); },
+      isAncestorImpl: async () => true,
+    }),
+    apiCommit,
+  );
+  await assert.rejects(
+    resolvePublishedReleaseCommit(publisherCommit, {
+      apiReleaseCommitImpl: async () => 'c'.repeat(40),
+      apiReleaseCommitOverride: apiCommit,
+    }),
+    /diverso da quello propagato/,
+  );
   await assert.rejects(
     resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: async () => apiCommit,
@@ -525,6 +541,7 @@ test('publisher: argomenti', () => {
   assert.throws(() => parseArgs(['--section', 'canton-ti', '--ids', 'x', '--out', 'o', '--summary', 's']), /array JSON/);
   assert.throws(() => parseArgs(['--section', 'canton-ti', '--boh']), /argomento sconosciuto/);
   assert.equal(parseArgs(['--section', 'canton-ti', '--previous-revision', 'abc1234', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).previousRevision, 'abc1234');
+  assert.equal(parseArgs(['--section', 'canton-ti', '--remove-stale-canton-rss-feeds', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).removeStaleCantonRssFeeds, true);
   assert.throws(
     () => parseArgs(['--section', 'canton-ti', '--bootstrap', '--id', 'a', '--out', 'o', '--summary', 's']),
     /non si combina/,
@@ -1065,6 +1082,35 @@ test('publisher: le landing live annunciano il feed edge della propria locale', 
   assert.throws(() => addCantonRssFeedLink(html, 'https://example.test/feed.xml'), /fuori dalla superficie edge/);
 });
 
+test('publisher: la verifica CDN/apex richiede anche i link RSS della landing', async () => {
+  const page = pageEntry('canton-ti', 'articoli-ticino/index.html', 'landing');
+  const feed = cantonRssFeedEntries('canton-ti')[0];
+  const probes = [];
+  const result = await publish({
+    section: 'canton-ti',
+    pages: [page],
+    cdnUploads: [],
+    cantonRssFeeds: [feed],
+    obsoletePages: [],
+    distDir: tmpdir(),
+    releaseCommit: 'a'.repeat(40),
+    publishedStatusImpl: async () => 'live',
+    publishCantonRssFeedsImpl: async () => ({ failures: 0, uploaded: 1, verified: 1 }),
+    runImpl: (_command, args) => args.includes('scripts/cf-purge-cache.mjs')
+      ? { code: 0, stdout: '' }
+      : { code: 0, stdout: '✅ uploaded' },
+    probeImpl: async (url, { want }) => {
+      const body = `<!doctype html><html><head>${CORPUS_ROUTE_OWNER_META_TAG}</head><body></body></html>`;
+      const ok = want(body);
+      probes.push({ url, ok });
+      return { ok, status: 200, body };
+    },
+  });
+  assert.equal(result.failures, 1);
+  assert.equal(result.uploaded, 1);
+  assert.deepEqual(probes, [{ url: page.cdnUrl, ok: false }]);
+});
+
 test('publisher: una sezione live senza articoli non annuncia feed RSS', () => {
   const feeds = cantonRssFeedEntries('canton-ti');
   const emptyCounts = { bySection: { 'canton-ti': { articles: 0 } } };
@@ -1505,6 +1551,18 @@ test('publisher: RSS non live fallisce, e un manifest senza feed elimina la supe
     const rollback = await missing.rollback();
     assert.equal(rollback.failures, 0);
     assert.deepEqual(restored.sort(), feeds.map(({ key }) => key).sort());
+
+    deleted.length = 0;
+    verifiedMissing.length = 0;
+    restoring = false;
+    const retired = await publishCantonRssFeeds({
+      ...common,
+      effectiveStatus: 'retired',
+      removeStaleCantonRssFeeds: true,
+      publishedStatusImpl: async () => 'retired',
+    });
+    assert.equal(retired.failures, 0);
+    assert.equal(retired.deleted, feeds.length);
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }
@@ -1522,6 +1580,8 @@ test('publisher: registry edge illeggibile o con stato sconosciuto non diventa d
     assert.equal(await publishedStatus('canton-ti'), 'draft');
     globalThis.fetch = async () => ({ status: 200, text: async () => '{"schema":1,"commit":"abc1234","sections":{"canton-ti":{"status":"live"}}}' });
     assert.equal(await publishedStatus('canton-ti'), 'live');
+    globalThis.fetch = async () => ({ status: 200, text: async () => '{"schema":1,"commit":"abc1234","sections":{"canton-ti":{"status":"retired"}}}' });
+    assert.equal(await publishedStatus('canton-ti'), 'retired');
   } finally {
     globalThis.fetch = previousFetch;
   }
@@ -1742,6 +1802,29 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     [{ section: 'canton-ti', ids: [], bootstrap: true }],
     'una promozione draft -> live deve fare bootstrap degli articoli prima di annunciare landing, archivio, hub e RSS',
   );
+  const demotedSections = liveRegistryTransitionSections(
+    registryAfter,
+    registryBefore,
+    WITH_TI,
+  );
+  assert.deepEqual(demotedSections, ['canton-ti']);
+  assert.deepEqual(
+    r2PublishPlan(['M\tsections/registry.json'], WITH_TI, {
+      registryRefreshSections: demotedSections,
+      registryCleanupSections: demotedSections,
+    }),
+    [{ section: 'canton-ti', ids: [], bootstrap: true, removeStaleCantonRssFeeds: true }],
+    'una demozione live -> draft deve portare il cleanup dei feed nel piano',
+  );
+  assert.deepEqual(
+    liveR2ReconciliationPlan({
+      schema: 1,
+      commit: releaseCommit,
+      sections: { 'canton-ti': { status: 'draft' } },
+    }, WITH_TI, releaseCommit),
+    [{ section: 'canton-ti', ids: [], bootstrap: false, removeStaleCantonRssFeeds: true }],
+    'il reconcile schedule/manuale deve pulire i feed dopo un kill-switch o una demozione',
+  );
   assert.deepEqual(liveRegistryTransitionSections(registryAfter, registryAfter, WITH_TI), []);
   assert.throws(
     () => liveRegistryTransitionSections(
@@ -1814,8 +1897,13 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /if: steps\.replay_freshness\.outputs\.fresh == 'true'/);
   assert.match(wf, /Dispatch bounded replay on current main/);
   assert.match(wf, /gh workflow run fast-publish-section\.yml --repo "\$REPO" --ref main/);
-  assert.match(wf, /-f push_before="\$STALE_HEAD"/);
-  assert.match(wf, /-f push_after="\$CURRENT_MAIN"/);
+  assert.match(wf, /replay_before="\$\{ORIGINAL_PUSH_BEFORE:-\$STALE_HEAD\}"/);
+  assert.match(wf, /replay_after="\$\{ORIGINAL_PUSH_AFTER:-\$STALE_HEAD\}"/);
+  assert.match(wf, /-f push_before="\$replay_before"/);
+  assert.match(wf, /-f push_after="\$replay_after"/);
+  assert.match(wf, /-f api_release_commit="\$STALE_HEAD"/);
+  assert.match(wf, /remove_stale_canton_rss_feeds/);
+  assert.match(wf, /API_RELEASE_COMMIT: \$\{\{ inputs\.api_release_commit \}\}/);
   assert.match(wf, /GITHUB_PAT_NANAKO assente/);
   assert.match(wf, /replay workflow_run redispatchato prima degli upload/);
   assert.match(wf, /id: push_range[\s\S]*gh api --paginate --slurp "repos\/\$REPO\/commits\/\$WORKFLOW_RUN_HEAD_SHA\/events"/);

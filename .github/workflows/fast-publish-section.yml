@@ -120,6 +120,16 @@ on:
         required: false
         default: ''
         type: string
+      remove_stale_canton_rss_feeds:
+        description: 'Rimuovi i feed RSS rimasti da una sezione demossa'
+        required: false
+        default: false
+        type: boolean
+      api_release_commit:
+        description: 'Commit API pubblicato dalla run originaria (solo replay bounded)'
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: read
@@ -224,6 +234,7 @@ jobs:
           ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
           BOOTSTRAP_INPUT: ${{ inputs.bootstrap }}
           DRY_RUN_INPUT: ${{ inputs.dry_run }}
+          REMOVE_STALE_INPUT: ${{ inputs.remove_stale_canton_rss_feeds }}
           EVENT_NAME: ${{ github.event_name }}
           COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           PUSH_BEFORE: ${{ steps.push_range.outputs.before }}
@@ -264,12 +275,14 @@ jobs:
             fi
             bootstrap=false
             [ "$BOOTSTRAP_INPUT" = "true" ] && bootstrap=true
+            remove_stale=false
+            [ "$REMOVE_STALE_INPUT" = "true" ] && remove_stale=true
             if [ "$bootstrap" = "true" ] && [ "$ids_json" != "[]" ]; then
               echo "::error::bootstrap rende tutti gli articoli: non si combina con article_ids"
               exit 1
             fi
-            matrix="$(jq -cn --arg s "$SECTION_INPUT" --argjson ids "$ids_json" --argjson b "$bootstrap" \
-              '[{section: $s, ids: $ids, bootstrap: $b}]')"
+            matrix="$(jq -cn --arg s "$SECTION_INPUT" --argjson ids "$ids_json" --argjson b "$bootstrap" --argjson r "$remove_stale" \
+              '[{section: $s, ids: $ids, bootstrap: $b, removeStaleCantonRssFeeds: $r}]')"
           else
             dry=false
             # Stessi interruttori di fast-publish-article.yml: un file nel
@@ -365,11 +378,11 @@ jobs:
           fi
           echo 'fresh=true' >> "$GITHUB_OUTPUT"
 
-      # Il replay della run API osservata e' ormai stantio. Il token viene
-      # preparato anche per il recheck immediatamente prima degli upload;
-      # redispatchamo lo stesso target bounded sulla HEAD corrente, cosi' il
-      # render legge i byte nuovi anche quando il commit successivo non tocca
-      # i path del workflow.
+      # Il replay della run API osservata e' ormai stantio. Il redispatch usa la
+      # HEAD corrente per leggere eventuali byte nuovi, ma conserva il range
+      # della push originaria e il suo head come release API: un commit
+      # bookkeeping della coda cover generato durante la run non diventa cosi'
+      # una falsa provenienza che il publisher dovrebbe attendere.
       - name: Prepare Firebase credentials for stale replay recovery
         if: github.event_name == 'workflow_run'
         env:
@@ -394,8 +407,10 @@ jobs:
           SECTION: ${{ matrix.target.section }}
           ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
           BOOTSTRAP: ${{ matrix.target.bootstrap }}
+          REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
           STALE_HEAD: ${{ github.event.workflow_run.head_sha }}
-          CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
+          ORIGINAL_PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
+          ORIGINAL_PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
         run: |
           set -euo pipefail
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
@@ -404,13 +419,17 @@ jobs:
             exit 1
           fi
           export GH_TOKEN="$runtime_pat"
+          replay_before="${ORIGINAL_PUSH_BEFORE:-$STALE_HEAD}"
+          replay_after="${ORIGINAL_PUSH_AFTER:-$STALE_HEAD}"
           gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
             -f section="$SECTION" \
             -f article_ids="$ARTICLE_IDS_JSON" \
             -f bootstrap="$BOOTSTRAP" \
+            -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
+            -f api_release_commit="$STALE_HEAD" \
             -f dry_run=false \
-            -f push_before="$STALE_HEAD" \
-            -f push_after="$CURRENT_MAIN"
+            -f push_before="$replay_before" \
+            -f push_after="$replay_after"
 
       - name: Fetch fallback corpus revision for manifest migration
         if: steps.replay_freshness.outputs.fresh == 'true'
@@ -502,6 +521,8 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
           PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
+          REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
+          API_RELEASE_COMMIT: ${{ inputs.api_release_commit }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
@@ -520,13 +541,17 @@ jobs:
               fi
               export GH_TOKEN="$runtime_pat"
               echo "::notice::replay workflow_run redispatchato prima degli upload: main e' avanzato da $WORKFLOW_RUN_HEAD_SHA a $current_main"
+              replay_before="${PUSH_BEFORE:-$WORKFLOW_RUN_HEAD_SHA}"
+              replay_after="${PUSH_AFTER:-$WORKFLOW_RUN_HEAD_SHA}"
               gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
                 -f section="$SECTION" \
                 -f article_ids="$ARTICLE_IDS_JSON" \
                 -f bootstrap="$BOOTSTRAP" \
+                -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
+                -f api_release_commit="$WORKFLOW_RUN_HEAD_SHA" \
                 -f dry_run=false \
-                -f push_before="$WORKFLOW_RUN_HEAD_SHA" \
-                -f push_after="$current_main"
+                -f push_before="$replay_before" \
+                -f push_after="$replay_after"
               exit 0
             fi
           fi
@@ -545,6 +570,9 @@ jobs:
             args+=(--bootstrap)
           else
             args+=(--ids "$(printf '%s' "$ARTICLE_IDS_JSON" | jq -c .)")
+          fi
+          if [ "$REMOVE_STALE_CANTON_RSS_FEEDS" = "true" ]; then
+            args+=(--remove-stale-canton-rss-feeds)
           fi
           if [ "$DRY" = "true" ]; then
             args+=(--dry-run)

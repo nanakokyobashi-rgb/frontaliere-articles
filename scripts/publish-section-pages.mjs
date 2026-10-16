@@ -103,7 +103,7 @@ export const UPLOAD_ORDER = Object.freeze(['article', 'archive', 'hub', 'landing
 const PUBLISH_API_WORKFLOW = '.github/workflows/publish-api.yml';
 
 export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activeCorpusCoreMap() } = {}) {
-  const out = { ids: [], bootstrap: false, publish: false, dryRun: false };
+  const out = { ids: [], bootstrap: false, publish: false, dryRun: false, removeStaleCantonRssFeeds: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const value = () => {
@@ -124,6 +124,7 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
       if (!Array.isArray(ids) || ids.some((id) => typeof id !== 'string' || !id)) throw new Error('--ids deve essere un array JSON di id non vuoti');
       out.ids.push(...ids);
     } else if (a === '--bootstrap') out.bootstrap = true;
+    else if (a === '--remove-stale-canton-rss-feeds') out.removeStaleCantonRssFeeds = true;
     else if (a === '--publish') out.publish = true;
     else if (a === '--dry-run') out.dryRun = true;
     else if (a === '--out') out.out = value();
@@ -606,6 +607,20 @@ function previousArchiveReleasePages(rootDir, section, requestedRevision) {
  * Cio' che una pagina cantonale deve avere per essere pubblicata; ritorna la
  * lista dei difetti (vuota = ok).
  */
+function cantonRssFeedLinkDefects(html, requiredRssUrl) {
+  const escapedUrl = escapeHtmlAttribute(requiredRssUrl);
+  const rssHead = /<link\b(?=[^>]*data-canton-rss-feed)(?=[^>]*rel="alternate")(?=[^>]*type="application\/rss\+xml")(?=[^>]*href="([^"]+)")[^>]*>/i.exec(String(html ?? ''))?.[1];
+  const rssAnchor = /<a\b(?=[^>]*data-canton-rss-feed)(?=[^>]*rel="alternate")(?=[^>]*type="application\/rss\+xml")(?=[^>]*href="([^"]+)")[^>]*>RSS<\/a\s*>/i.exec(String(html ?? ''))?.[1];
+  const defects = [];
+  if (rssHead !== escapedUrl) defects.push(`link RSS autodiscovery ${rssHead ?? 'assente'} diverso da ${requiredRssUrl}`);
+  if (rssAnchor !== escapedUrl) defects.push(`link RSS visibile ${rssAnchor ?? 'assente'} diverso da ${requiredRssUrl}`);
+  return defects;
+}
+
+function hasExpectedCantonRssFeedLinks(html, requiredRssUrl) {
+  return cantonRssFeedLinkDefects(html, requiredRssUrl).length === 0;
+}
+
 export function pageDefects(page, html, { requiredRssUrl = null } = {}) {
   const defects = [];
   if (!html || html.length < 200) defects.push('vuota o troncata');
@@ -619,11 +634,7 @@ export function pageDefects(page, html, { requiredRssUrl = null } = {}) {
   const canonical = /<link[^>]+rel="canonical"[^>]+href="([^"]+)"/i.exec(html)?.[1];
   if (canonical !== page.apexUrl) defects.push(`canonical ${canonical ?? 'assente'} diverso da ${page.apexUrl}`);
   if (page.kind === 'landing' && requiredRssUrl) {
-    const escapedUrl = escapeHtmlAttribute(requiredRssUrl);
-    const rssHead = /<link\b(?=[^>]*data-canton-rss-feed)(?=[^>]*rel="alternate")(?=[^>]*type="application\/rss\+xml")(?=[^>]*href="([^"]+)")[^>]*>/i.exec(html)?.[1];
-    const rssAnchor = /<a\b(?=[^>]*data-canton-rss-feed)(?=[^>]*rel="alternate")(?=[^>]*type="application\/rss\+xml")(?=[^>]*href="([^"]+)")[^>]*>RSS<\/a\s*>/i.exec(html)?.[1];
-    if (rssHead !== escapedUrl) defects.push(`link RSS autodiscovery ${rssHead ?? 'assente'} diverso da ${requiredRssUrl}`);
-    if (rssAnchor !== escapedUrl) defects.push(`link RSS visibile ${rssAnchor ?? 'assente'} diverso da ${requiredRssUrl}`);
+    defects.push(...cantonRssFeedLinkDefects(html, requiredRssUrl));
   }
   return defects;
 }
@@ -807,7 +818,7 @@ export async function publishedStatus(section) {
     const registry = JSON.parse(res.body);
     if (!validateEdgeSectionRegistry(registry)) return null;
     const status = registry.sections?.[section]?.status;
-    return status === 'live' || status === 'draft' ? status : null;
+    return status === 'live' || status === 'draft' || status === 'retired' ? status : null;
   } catch {
     return null;
   }
@@ -900,12 +911,15 @@ export function apiInputsChangedInCurrentPush({ execFileSyncImpl = execFileSync 
 /**
  * Un push che cambia solo il publisher non scatena publish-api: in quel caso
  * si lega alla release API gia' disponibile. Se il push contiene input API,
- * conserva HEAD e aspetta il deploy concorrente come prima.
+ * conserva HEAD e aspetta il deploy concorrente come prima. Un replay bounded
+ * puo' propagare il commit della release osservata: viene verificato contro il
+ * manifest HTTP e non riclassificato rispetto ai commit bookkeeping successivi.
  */
 export async function resolvePublishedReleaseCommit(
   publisherCommit,
   {
     apiReleaseCommitImpl = publishedApiReleaseCommit,
+    apiReleaseCommitOverride = null,
     apiInputsChangedImpl = apiInputsChangedInCurrentPush,
     isAncestorImpl = (ancestor, descendant) => {
       try {
@@ -920,16 +934,26 @@ export async function resolvePublishedReleaseCommit(
   } = {},
 ) {
   if (!publisherCommit) return publisherCommit;
+  const override = String(apiReleaseCommitOverride ?? '').trim();
+  if (override && !/^[a-f0-9]{40,64}$/iu.test(override)) {
+    throw new Error(`commit API esplicito non valido: ${override}`);
+  }
   const apiCommit = await apiReleaseCommitImpl({ fetchImpl });
+  if (override && apiCommit !== override) {
+    throw new Error(`commit API osservato ${apiCommit ?? 'assente'} diverso da quello propagato ${override}`);
+  }
   if (typeof apiCommit !== 'string' || !apiCommit.trim() || apiCommit.trim() === publisherCommit) return publisherCommit;
-  let apiInputsChanged = true;
-  try {
-    apiInputsChanged = await apiInputsChangedImpl();
-  } catch (error) {
-    throw new Error(
-      `provenienza del push non verificabile per il commit API ${apiCommit.trim()}: ${error?.message ?? String(error)}`,
-      { cause: error },
-    );
+  let apiInputsChanged = false;
+  if (!override) {
+    apiInputsChanged = true;
+    try {
+      apiInputsChanged = await apiInputsChangedImpl();
+    } catch (error) {
+      throw new Error(
+        `provenienza del push non verificabile per il commit API ${apiCommit.trim()}: ${error?.message ?? String(error)}`,
+        { cause: error },
+      );
+    }
   }
   if (apiInputsChanged) return publisherCommit;
   const publishedCommit = apiCommit.trim();
@@ -1197,13 +1221,15 @@ export async function publishCantonRssFeeds({
   probeImpl = probe,
   releaseReadyImpl = publishedReleaseReady,
   publishedStatusImpl,
+  removeStaleCantonRssFeeds = false,
   fetchImpl = fetch,
   snapshotImpl = snapshotCantonRssFeed,
   sleepImpl = sleep,
   releaseReadyMaxWaitMs = RELEASE_READY_MAX_WAIT_MS,
   releaseReadyRetryDelayMs = RELEASE_READY_RETRY_DELAY_MS,
 }) {
-  if (effectiveStatus !== 'live') {
+  const cleanupRequested = removeStaleCantonRssFeeds === true;
+  if (effectiveStatus !== 'live' && !cleanupRequested) {
     console.error(`::error::[${LOG}] feed RSS ${section}: la sezione non è live nel registro edge`);
     return { failures: 1, uploaded: 0, verified: 0 };
   }
@@ -1235,16 +1261,16 @@ export async function publishCantonRssFeeds({
       console.error(`::error::[${LOG}] feed RSS ${section}: la release verificata non corrisponde al commit ${releaseCommit}`);
       return { failures: 1, uploaded: 0, verified: 0 };
     }
+    const declaredFeeds = cantonRssFeedsDeclaredInManifest(section, readiness.files, readiness.counts);
+    const removingStaleFeeds = declaredFeeds.length === 0;
     if (typeof publishedStatusImpl === 'function') {
       const currentStatus = await publishedStatusImpl(section);
-      if (currentStatus !== 'live') {
+      const cleanupAllowed = cleanupRequested && removingStaleFeeds;
+      if (currentStatus !== 'live' && !cleanupAllowed) {
         console.error(`::error::[${LOG}] feed RSS ${section}: il registro edge non conferma lo stato live dopo la readiness gate`);
         return { failures: 1, uploaded: 0, verified: 0, status: currentStatus };
       }
     }
-
-    const declaredFeeds = cantonRssFeedsDeclaredInManifest(section, readiness.files, readiness.counts);
-    const removingStaleFeeds = declaredFeeds.length === 0;
     if (!removingStaleFeeds && (declaredFeeds.length !== feeds.length || declaredFeeds.some(({ name }) => !requestedNames.has(name)))) {
       throw new Error(`manifest API ${section}: set feed RSS diverso da quello richiesto`);
     }
@@ -1510,7 +1536,7 @@ export async function publish({
   }
   if (cantonRssFeeds.length > 0 || removeStaleCantonRssFeeds) {
     const rssStatus = await publishedStatusImpl(section);
-    if (rssStatus !== 'live') {
+    if (rssStatus !== 'live' && !removeStaleCantonRssFeeds) {
       console.error(`::error::[${LOG}] feed RSS ${section}: il registro edge non conferma lo stato live subito prima della pubblicazione`);
       return { failures: 1, uploaded: 0, deleted: 0, status: rssStatus };
     }
@@ -1519,6 +1545,7 @@ export async function publish({
       releaseCommit,
       feedEntries: cantonRssFeeds,
       effectiveStatus: rssStatus,
+      removeStaleCantonRssFeeds,
       distDir,
       runImpl,
       probeImpl,
@@ -1594,16 +1621,21 @@ export async function publish({
     const rollbackFailures = await rollbackTransaction();
     return { failures: failures + 1 + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status: null };
   }
-  const hasMeta = (body) => body.includes(CORPUS_ROUTE_OWNER_META_TAG);
+  const hasMeta = (body) => String(body ?? '').includes(CORPUS_ROUTE_OWNER_META_TAG);
   for (const page of uploaded) {
-    const cdn = await probeImpl(page.cdnUrl, { want: hasMeta });
+    const requiredRssUrl = page.kind === 'landing' && cantonRssFeeds.length > 0
+      ? cantonRssFeedUrlForLocale(section, page.locale)
+      : null;
+    const wantsPublishedPage = (body) => hasMeta(body)
+      && (!requiredRssUrl || hasExpectedCantonRssFeedLinks(body, requiredRssUrl));
+    const cdn = await probeImpl(page.cdnUrl, { want: wantsPublishedPage });
     if (!cdn.ok) {
       failures++;
       console.log(`::error::[${LOG}] non leggibile sul CDN: ${page.cdnUrl} (${cdn.status})`);
       continue;
     }
     if (status === 'live') {
-      const apex = await probeImpl(page.apexUrl, { want: hasMeta });
+      const apex = await probeImpl(page.apexUrl, { want: wantsPublishedPage });
       if (!apex.ok) {
         failures++;
         console.log(`::error::[${LOG}] non leggibile all'apex: ${page.apexUrl} (${apex.status})`);
@@ -1717,33 +1749,37 @@ export async function main(
   // partial hub set is merely a draft refresh or a live-page defect. A draft
   // checkout must not override an edge registry that is still live.
   const effectiveStatus = publishing ? await publishedStatusImpl(section) : null;
-  if (publishing && effectiveStatus === 'live') {
+  const cleanupRssRequested = args.removeStaleCantonRssFeeds === true;
+  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested)) {
     releaseCommit = await resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: publishedApiReleaseCommitImpl,
+      apiReleaseCommitOverride: process.env.API_RELEASE_COMMIT,
       apiInputsChangedImpl,
       fetchImpl,
     });
     if (releaseCommit !== publisherCommit) {
       console.log(
-        `::notice::[${LOG}] publisher-only push: uso la release API gia' pubblicata ${releaseCommit} invece di HEAD ${publisherCommit}`,
+        `::notice::[${LOG}] uso la release API verificata ${releaseCommit} invece di HEAD ${publisherCommit}`,
       );
     }
   }
   let cantonRssFeeds = [];
   let removeStaleCantonRssFeeds = false;
-  if (publishing && effectiveStatus === 'live') {
+  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested)) {
     const readiness = await publishedReleaseReadyImpl(releaseCommit, { section, fetchImpl });
     // Se la readiness è transitoria, mantieni il gate fail-closed completo e
     // lascia che publishCantonRssFeeds ritenti. Quando è verificata, invece,
     // il set dichiarato dal manifest decide anche se la landing può annunciare
     // RSS: una sezione live senza articoli emette zero feed legittimamente.
     if (readiness === true || readiness?.ok) {
-      cantonRssFeeds = readiness?.files
+      const declaredFeeds = readiness?.files
         ? cantonRssFeedsDeclaredInManifest(section, readiness.files, readiness.counts)
         : cantonRssFeedEntries(section);
-      removeStaleCantonRssFeeds = cantonRssFeeds.length === 0;
+      cantonRssFeeds = cleanupRssRequested ? [] : declaredFeeds;
+      removeStaleCantonRssFeeds = cleanupRssRequested || cantonRssFeeds.length === 0;
     } else {
-      cantonRssFeeds = cantonRssFeedEntries(section);
+      cantonRssFeeds = effectiveStatus === 'live' && !cleanupRssRequested ? cantonRssFeedEntries(section) : [];
+      removeStaleCantonRssFeeds = cleanupRssRequested;
     }
   }
 
@@ -1798,7 +1834,11 @@ export async function main(
     console.log(`::notice::[${LOG}] feed RSS ${section} trattenuti: aggregatePagesAllowed=false`);
   }
   cantonRssFeeds = rssFeedsForPublish;
-  removeStaleCantonRssFeeds = removeStaleCantonRssFeeds && aggregatePagesAllowed === true;
+  // Una demozione/kill-switch rende invisibile la superficie HTML al Worker:
+  // il cleanup dei feed obsoleti non deve restare ostaggio del verdetto
+  // aggregati, che protegge invece la coerenza di una sezione ancora live.
+  removeStaleCantonRssFeeds = removeStaleCantonRssFeeds
+    && (aggregatePagesAllowed === true || effectiveStatus !== 'live');
 
   fs.rmSync(renderRoot, { recursive: true, force: true });
 
