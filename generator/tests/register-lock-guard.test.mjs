@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { registerLockFile, registerLockFilenamePattern } from '../scripts/lib/register-lock.mjs';
 import {
   REGISTER_LOCK_FILE_RE,
   checkRegistrationLocks,
@@ -26,6 +27,17 @@ test('la regex copre legacy, frontaliere e tutti i lock cantonali', () => {
   }
   assert.doesNotMatch('register-in-progress-.json', REGISTER_LOCK_FILE_RE);
   assert.doesNotMatch('register-in-progress-frontaliere.tmp', REGISTER_LOCK_FILE_RE);
+});
+
+test('producer e guard condividono la regex dei marker di registrazione', () => {
+  const producerPattern = registerLockFilenamePattern();
+  assert.equal(REGISTER_LOCK_FILE_RE.source, producerPattern.source);
+
+  for (const section of ['frontaliere', 'svizzera', 'canton-ti', 'canton-appenzello']) {
+    const filename = path.basename(registerLockFile(section));
+    assert.match(filename, producerPattern, `${section}: il producer deve generare un nome accettato`);
+    assert.match(filename, REGISTER_LOCK_FILE_RE, `${section}: il guard deve riconoscere il marker generato`);
+  }
 });
 
 test('un lock orfano nomina sezione e run invece di un errore generico', () => {

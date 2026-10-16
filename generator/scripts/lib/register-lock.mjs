@@ -103,11 +103,20 @@ function writeJsonExclusive(lockPath, value) {
 // the section RECORDED INSIDE IT; never written again.
 export const LEGACY_REGISTER_LOCK_FILE = `${REGISTER_LOCK_DIR}/register-in-progress.json`;
 
-// The section becomes part of a filename, so it is constrained to the shape the
-// two section names actually have rather than merely "non-empty": a value with
-// a separator in it would write the marker outside `generator/data/`, where
-// the lock guard would otherwise be unable to attribute it to a valid section.
-const SECTION_RE = /^[a-z0-9][a-z0-9-]*$/;
+// The producer validates the filename it is about to write and the CI guard
+// scans filenames with this same expression. Keep the complete legacy/scoped
+// filename contract in one place so their accepted marker sets cannot drift.
+const REGISTER_LOCK_FILENAME_RE = /^register-in-progress(?:-([a-z0-9][a-z0-9-]*))?\.json$/;
+
+/** Return a fresh regex for the legacy and section-scoped registration markers. */
+export function registerLockFilenamePattern() {
+  return new RegExp(REGISTER_LOCK_FILENAME_RE.source, REGISTER_LOCK_FILENAME_RE.flags);
+}
+
+function isValidSection(section) {
+  return typeof section === 'string'
+    && registerLockFilenamePattern().test(`register-in-progress-${section}.json`);
+}
 
 /**
  * Ogni errore che il lock lancia porta un tipo, non solo un messaggio (issue
@@ -138,7 +147,7 @@ export function isRegisterLockError(err) {
 }
 
 function assertSection(section, caller) {
-  if (typeof section !== 'string' || !SECTION_RE.test(section)) {
+  if (!isValidSection(section)) {
     throw new RegisterLockError(
       `${caller}() requires the article section (got ${JSON.stringify(section)}): the ` +
         'registration targets are section-scoped and cannot be cross-checked on a later run without it.',
@@ -162,12 +171,12 @@ function normaliseKnownSections(knownSections) {
       `resolveRegisterLock() could not read knownSections as an iterable: ${err?.message || err}`,
     );
   }
-  const invalid = sections.filter((section) => typeof section !== 'string' || !SECTION_RE.test(section));
+  const invalid = sections.filter((section) => !isValidSection(section));
   if (invalid.length > 0) {
     throw new RegisterLockError(
       `resolveRegisterLock() received invalid knownSections value(s): `
         + `${invalid.map((section) => JSON.stringify(section)).join(', ')}; `
-        + 'section names must match /^[a-z0-9][a-z0-9-]*$/',
+        + 'section names must produce a valid registration marker filename',
     );
   }
   return new Set(sections);
@@ -177,7 +186,7 @@ function normaliseKnownSections(knownSections) {
  * Validate the complete configuration key space before any registration starts.
  *
  * The section is part of a marker filename, so a key accepted by
- * `ARTICLE_SECTION_CONFIGS` but rejected by `SECTION_RE` would otherwise fail
+ * `ARTICLE_SECTION_CONFIGS` but rejected by the marker filename pattern would otherwise fail
  * only when the first article reached the registration transaction. Keep this
  * check next to the filename validator so the two accepted key spaces cannot
  * drift.
@@ -190,11 +199,11 @@ export function assertSectionConfigKeys(configs) {
       'article section configuration must be a non-array object before registration starts',
     );
   }
-  const invalid = Object.keys(configs).filter((key) => !SECTION_RE.test(key));
+  const invalid = Object.keys(configs).filter((key) => !isValidSection(key));
   if (invalid.length > 0) {
     throw new RegisterLockError(
       `invalid article section configuration key(s): ${invalid.map((key) => JSON.stringify(key)).join(', ')}; ` +
-        'section keys must match /^[a-z0-9][a-z0-9-]*$/ before registration starts',
+        'section keys must produce a valid registration marker filename before registration starts',
     );
   }
 }

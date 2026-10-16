@@ -7,8 +7,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { registerLockFilenamePattern } from '../../generator/scripts/lib/register-lock.mjs';
 
-export const REGISTER_LOCK_FILE_RE = /^register-in-progress(?:-([a-z0-9][a-z0-9-]*))?\.json$/;
+export const REGISTER_LOCK_FILE_RE = registerLockFilenamePattern();
 
 function sectionFrom(fileName, parsed) {
   if (typeof parsed?.section === 'string' && parsed.section.length > 0) return parsed.section;
