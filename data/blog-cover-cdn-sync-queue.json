@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-imposte-zurigo-aliquote-deduzioni.webp",
-      "sha256": "6e80579d8f8d2c4067925a6bda734818f1ce767254a894789a792f81efcef6d8"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-imposte-zurigo-aliquote-deduzioni-480w.webp",
-      "sha256": "49e0a6e32485cc994b6488f870204c3be57b9d26f5d5a92d095e9b4fafeb8bb8"
-    }
-  ]
+  "items": []
 }
