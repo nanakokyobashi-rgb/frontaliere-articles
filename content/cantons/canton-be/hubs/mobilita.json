@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T04:36:57.811Z",
-  "contentHash": "e05b11cbd11b3478256be5d6d3e9bc5a3f4194d32b175139fed62bbaa9f91573",
+  "updatedAt": "2026-10-16T13:49:31.855Z",
+  "contentHash": "b67183ea0b503cfdd3552d78dfa2a3c90caa09aec28dd99e9a9722e0f2f4c4bd",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T12:13:19.434Z",
+      "updatedAt": "2026-10-15T23:56:39.924Z",
       "keyFacts": 2
     },
     {
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "31",
+          "value": "30",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         },
         {
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -168,7 +168,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-16T04:36:57.811Z"
+      "updatedAt": "2026-10-16T13:49:31.855Z"
     },
     "en": {
       "canton": "BE",
@@ -178,7 +178,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "31",
+          "value": "30",
           "note": "reports as of 15 October 2026"
         },
         {
@@ -242,7 +242,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -319,7 +319,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-16T04:36:57.811Z"
+      "updatedAt": "2026-10-16T13:49:31.855Z"
     },
     "de": {
       "canton": "BE",
@@ -329,7 +329,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "31",
+          "value": "30",
           "note": "Meldungen vom 15. Oktober 2026"
         },
         {
@@ -393,7 +393,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -470,7 +470,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-16T04:36:57.811Z"
+      "updatedAt": "2026-10-16T13:49:31.855Z"
     },
     "fr": {
       "canton": "BE",
@@ -480,7 +480,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "31",
+          "value": "30",
           "note": "signalements au 15 octobre 2026"
         },
         {
@@ -544,7 +544,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -621,7 +621,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-16T04:36:57.811Z"
+      "updatedAt": "2026-10-16T13:49:31.855Z"
     }
   }
 }
