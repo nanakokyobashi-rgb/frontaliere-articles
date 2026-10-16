@@ -450,8 +450,9 @@ const PERSON_ARTICLES = new Set(['un', 'una', 'uno']);
  * articolo/determinante articolato o un numero («i ticinesi», «agli ticinesi»,
  * «due ticinesi»), dopo una quantita' collegata da «di» («decine di
  * ticinesi»), dopo un sostantivo di persona o di veicolo («turisti ticinesi»,
- * «frontalieri ticinesi», «auto ticinese»), anche quando un gruppo ha un
- * modificatore («gruppo numeroso di ticinesi»), o in apertura di frase
+ * «frontalieri ticinesi», «auto ticinese»), anche quando un gruppo ha una
+ * catena breve di modificatori («gruppo numeroso e ben organizzato di
+ * ticinesi»), o in apertura di frase
  * («Ginevrino in isolamento»). Dice chi o da dove, non dove: conta per il punteggio, ma da
  * solo non mette il cantone nel titolo. Resta luogo come aggettivo di
  * un'istituzione o di un settore («economia ticinese», «Banca cantonale
@@ -490,6 +491,8 @@ const PERSON_QUANTITY_RE = /^(?:pai[oa]|decin[ae]|centinai[ae]|migliai[ae]|dozzi
 const PERSON_HEAD_WORDS = new Set(['auto', 'automobile', 'automobili', 'moto']);
 const PERSON_GROUP_RE = /^(?:grupp[oi]|comitiv[ae]|delegazion[ei]|squadr[ae]|famigli[ae]|coppi[ae])$/u;
 const PERSON_GROUP_LINKS = new Set(['di', 'dei', 'degli', 'delle']);
+const PERSON_GROUP_MODIFIER_RE = /^(?:ben|e|molto|molta|molti|molte|poco|poca|pochi|poche|piu|grand[ei]|giovan[ei]|inter[oaie]|complet[oaie]|numeros[oaie]|organizzat[oaie]|ufficial[ei]|affiatat[oaie])$/u;
+const PERSON_GROUP_MAX_MODIFIERS = 4;
 
 /**
  * Portata nazionale dichiarata nel titolo, nell'excerpt o nell'attacco: una
@@ -854,10 +857,20 @@ export function createCantonClassifier({
       || PERSON_HEAD_RE.test(prev) || PERSON_AGE_RE_EXTENDED.test(prev)) return true;
     const head = tokens[k - 1];
     if (!head || sentenceBreak(text, head, tokens[k])) return false;
-    const groupHead = tokens[k - 2];
-    if (PERSON_GROUP_LINKS.has(prev)
-      && (PERSON_GROUP_RE.test(head.norm) || PERSON_QUANTITY_RE.test(head.norm)
-        || (groupHead && !sentenceBreak(text, groupHead, head) && PERSON_GROUP_RE.test(groupHead.norm)))) return true;
+    if (!PERSON_GROUP_LINKS.has(prev)) return false;
+    if (PERSON_QUANTITY_RE.test(head.norm)) return true;
+
+    let groupHeadIndex = k - 1;
+    let modifierCount = 0;
+    while (groupHeadIndex >= 0) {
+      const candidate = tokens[groupHeadIndex];
+      if (sentenceBreak(text, candidate, tokens[groupHeadIndex + 1])) return false;
+      if (PERSON_GROUP_RE.test(candidate.norm)) return true;
+      if (!PERSON_GROUP_MODIFIER_RE.test(candidate.norm)
+        || modifierCount >= PERSON_GROUP_MAX_MODIFIERS) return false;
+      modifierCount += 1;
+      groupHeadIndex -= 1;
+    }
     return false;
   }
 

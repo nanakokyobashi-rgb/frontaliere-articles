@@ -178,11 +178,18 @@ describe('omonimi e falsi amici', () => {
     assert.equal(c.mentionsIn('Atletica ticinese in crescita.').find((m) => m.group === 'TI')?.who, undefined);
     assert.equal(c.mentionsIn('Target ticinese in crescita.').find((m) => m.group === 'TI')?.who, undefined);
     assert.equal(c.mentionsIn('Atleti ticinesi in gara.').find((m) => m.group === 'TI')?.who, true);
+    assert.equal(c.mentionsIn('Gruppo numeroso e ben organizzato di ticinesi bloccati all\'estero.')
+      .find((m) => m.kind === 'demonym')?.who, true);
+    assert.equal(c.mentionsIn('Gruppo di lavoro ben organizzato di ticinesi bloccati all\'estero.')
+      .find((m) => m.kind === 'demonym')?.who, undefined);
+    assert.equal(c.mentionsIn('Gruppo. numeroso ben organizzato di ticinesi bloccati all\'estero.')
+      .find((m) => m.kind === 'demonym')?.who, undefined);
     for (const text of [
       'Dei ticinesi bloccati all\'estero.',
       'Agli ticinesi serve assistenza.',
       'Decine di ticinesi attendono il rimpatrio.',
       'Gruppo numeroso di ticinesi bloccato all\'estero.',
+      'Gruppo numeroso e ben organizzato di ticinesi bloccati in Medio Oriente.',
       'Comitiva numerosa di ticinesi attende assistenza.',
       'Delegazione ufficiale di ticinesi rientra.',
       'Squadra intera di ticinesi e\' partita.',
