@@ -42,8 +42,8 @@ import { fileURLToPath } from 'node:url';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
 import { CANTON_ARCHIVE_ALL_SLUG } from '../engine/shared/cantonSectionCopy.mjs';
-import { cantonHubTopicSlugs } from '../engine/shared/articleSectionCore.mjs';
 import { fetchPageManifest, pageManifestUrl } from './lib/section-page-manifest.mjs';
+import { assertHubLocaleSlug, assertHubTopicEntries } from './lib/assert-hub-locale-slug.mjs';
 import { sitemapPaths } from './publish-section-edge.mjs';
 import { validateEdgeSectionRegistry } from './lib/section-registry.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
@@ -105,7 +105,9 @@ export function expectedSectionPages(entry, slugs, sitemapXml) {
     const prefix = entry.paths[locale];
     const archivePrefix = `${prefix}${CANTON_ARCHIVE_ALL_SLUG[locale]}/`;
     const isLanding = canonicalPath === prefix;
-    const isHub = cantonHubTopicSlugs(entry.id, locale).some((slug) => canonicalPath === `${prefix}${slug}/`);
+    const hubSlugs = assertHubTopicEntries(entry.id, ARTICLE_SECTION_CORE_ALL[entry.id].topicHubs)
+      .map(([topic, localizedSlugs]) => assertHubLocaleSlug(entry.id, topic, locale, localizedSlugs));
+    const isHub = hubSlugs.some((slug) => canonicalPath === `${prefix}${slug}/`);
     const isArchive = canonicalPath === archivePrefix || (
       canonicalPath.startsWith(archivePrefix) && /^page-\d+\/$/.test(canonicalPath.slice(archivePrefix.length))
     );
