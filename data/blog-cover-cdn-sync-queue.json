@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-dati-assicurati-casse-zurigo-posta.webp",
-      "sha256": "c438252751fbb6a245e45215c87faf614b4143c48a99cc0e43dc0620b8e04333"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-dati-assicurati-casse-zurigo-posta-480w.webp",
-      "sha256": "e23fcae6973bdc3300f45ddf3c0cb7d255f6772bf4c9a6b5644baee55bbad7d5"
-    }
-  ]
+  "items": []
 }
