@@ -164,6 +164,24 @@ test('publisher normalizza i prefissi prima di concatenare i path canonici', () 
   assert.equal(normalizeRoutePrefix('/articoli-ticino///'), '/articoli-ticino');
 });
 
+test('publisher migration manifest rifiuta uno slug hub mancante per la locale corrente', () => {
+  const [topic, topicSlugs] = Object.entries(TI.topicHubs)[0];
+  const incompleteSlugs = { ...topicSlugs };
+  delete incompleteSlugs.it;
+  const all = {
+    ...ARTICLE_SECTION_CORE_ALL,
+    'canton-ti': {
+      ...TI,
+      topicHubs: { ...TI.topicHubs, [topic]: incompleteSlugs },
+    },
+  };
+
+  assert.throws(
+    () => migrationManifestPages('canton-ti', [], [], all),
+    /slug hub mancante o vuoto.*\/it$/,
+  );
+});
+
 test('publisher usa il prefisso normalizzato anche per il match della pagina', () => {
   const section = 'canton-route-prefix-fixture';
   const all = {

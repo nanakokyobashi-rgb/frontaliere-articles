@@ -286,15 +286,32 @@ export function articleManifestPages({ section, previousArticlePages = [], curre
  * percorsi derivati dal core; gli articoli e l'archivio arrivano dalla
  * release precedente usata solo per questa migrazione.
  */
-export function migrationManifestPages(section, previousArticlePages, previousArchivePages) {
-  const routes = normalizedSectionRoutes(section);
-  const topicHubs = Object.values(ARTICLE_SECTION_CORE_ALL[section].topicHubs ?? {});
+function assertHubLocaleSlug(section, topic, locale, slugs) {
+  const hasLocale = slugs !== null
+    && typeof slugs === 'object'
+    && !Array.isArray(slugs)
+    && Object.prototype.hasOwnProperty.call(slugs, locale);
+  const slug = hasLocale ? slugs[locale] : undefined;
+  if (typeof slug !== 'string' || !slug.trim()) {
+    throw new Error(`${section}: slug hub mancante o vuoto per ${topic}/${locale}`);
+  }
+  return slug;
+}
+
+export function migrationManifestPages(section, previousArticlePages, previousArchivePages, all = ARTICLE_SECTION_CORE_ALL) {
+  const routes = normalizedSectionRoutes(section, all);
+  const topicHubs = Object.entries(all[section].topicHubs ?? {});
   return [
     ...previousArticlePages.map((page) => manifestEntryFromReleasePage(section, page, 'article')),
     ...previousArchivePages.map((page) => manifestEntryFromReleasePage(section, page, 'archive')),
     ...routes.flatMap((route) => {
-      const landing = pageEntry(section, `${route.prefix.slice(1)}/index.html`, 'landing');
-      const hubs = topicHubs.map((slugs) => pageEntry(section, `${route.prefix.slice(1)}/${slugs[route.locale]}/index.html`, 'hub'));
+      const landing = pageEntry(section, `${route.prefix.slice(1)}/index.html`, 'landing', all);
+      const hubs = topicHubs.map(([topic, slugs]) => pageEntry(
+        section,
+        `${route.prefix.slice(1)}/${assertHubLocaleSlug(section, topic, route.locale, slugs)}/index.html`,
+        'hub',
+        all,
+      ));
       return [landing, ...hubs];
     }),
   ];
