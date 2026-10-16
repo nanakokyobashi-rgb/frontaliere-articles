@@ -1,6 +1,127 @@
 {
   "schemaVersion": 2,
-  "bans": [],
+  "bans": [
+    {
+      "keyword": "cercare lavoro in svizzera guida pratica 2026",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T01:30:25.522Z",
+      "lastValidatedAt": "2026-10-16T01:30:25.522Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "cercare lavoro in svizzera guida pratica 2026 canton Zurigo",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T01:32:22.451Z",
+      "lastValidatedAt": "2026-10-16T01:32:22.451Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "cercare lavoro in svizzera guida pratica 2026 canton Ginevra",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T01:34:29.160Z",
+      "lastValidatedAt": "2026-10-16T01:34:29.160Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "cercare lavoro in svizzera guida pratica 2026 canton Berna",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T01:45:10.767Z",
+      "lastValidatedAt": "2026-10-16T01:45:10.767Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "cercare lavoro in svizzera guida pratica 2026 canton Basilea",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T01:45:21.972Z",
+      "lastValidatedAt": "2026-10-16T01:45:21.972Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "cercare lavoro in svizzera guida pratica 2026 canton Vaud",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T01:45:54.919Z",
+      "lastValidatedAt": "2026-10-16T01:45:54.919Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "cercare lavoro in svizzera guida pratica 2026 canton San Gallo",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T01:48:30.017Z",
+      "lastValidatedAt": "2026-10-16T01:48:30.017Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "cercare lavoro in svizzera guida pratica 2026 canton Lucerna",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T01:48:30.031Z",
+      "lastValidatedAt": "2026-10-16T01:48:30.031Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "cercare lavoro in svizzera guida pratica 2026 canton Argovia",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T01:48:30.048Z",
+      "lastValidatedAt": "2026-10-16T01:48:30.048Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "sistema sanitario svizzero lamal guida 2026",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T01:48:30.059Z",
+      "lastValidatedAt": "2026-10-16T01:48:30.059Z",
+      "expiresAt": null
+    }
+  ],
   "strikes": [],
   "legacy": [
     {
