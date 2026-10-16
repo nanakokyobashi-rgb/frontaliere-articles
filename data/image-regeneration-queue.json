@@ -90,6 +90,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-16T17:07:03.976Z",
       "lastFailureAt": "2026-10-16T17:07:03.976Z"
+    },
+    {
+      "articleId": "giovani-lavoro-futuro-ticino",
+      "title": "Ai giovani non basta un lavoro. Serve un futuro",
+      "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T17:37:12.235Z",
+      "lastFailureAt": "2026-10-16T17:37:12.235Z"
     }
   ]
 }

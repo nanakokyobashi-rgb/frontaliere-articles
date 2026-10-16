@@ -1,9 +1,4 @@
 {
-  "https://comozero.it/attualita/canton-ticino-incendio-in-galleria-a-bordo-di-un-treno-ma-e-unesercitazione": {
-    "articleId": "incendio-galleria-monte-ceneri-esercitazione",
-    "ts": "2026-09-06T18:23:54.984Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/newsblog/verita-immobiliari/1948267/senza-empatia-non-sai-fare-questo-lavoro": {
     "articleId": "empatia-lavoro-immobiliare-ticino",
     "ts": "2026-09-07T07:11:01.196Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1957311/iniziativa-svizzera-udc-frontiere-protezione": {
     "articleId": "iniziativa-udc-asilo-limite",
     "ts": "2026-10-16T16:42:43.591Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/ospite/1957335/giovani-futuro-lavoro-luca-frasa": {
+    "articleId": "giovani-lavoro-futuro-ticino",
+    "ts": "2026-10-16T17:37:12.237Z",
     "keyForm": 2
   }
 }

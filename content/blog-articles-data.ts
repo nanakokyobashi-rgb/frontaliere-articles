@@ -44970,6 +44970,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'giovani-lavoro-futuro-ticino',
+ category: 'novita',
+ date: '2026-10-16T17:37:11.207Z',
+ image: '/images/blog/article-divario-reddito-giovani-svizzera.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
