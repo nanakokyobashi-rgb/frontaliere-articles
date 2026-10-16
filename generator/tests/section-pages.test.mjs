@@ -220,6 +220,41 @@ test('publisher: un push solo publisher si lega alla release API gia\' disponibi
     }),
     /provenienza del push non verificabile/,
   );
+  assert.equal(
+    await resolvePublishedReleaseCommit(publisherCommit, {
+      apiReleaseCommitImpl: async () => apiCommit,
+      apiInputsChangedImpl: async () => {
+        throw new Error('provenienza push assente: impossibile classificare gli input API');
+      },
+      allowPublishedApiFallbackImpl: () => true,
+      isAncestorImpl: async (ancestor, descendant) => ancestor === apiCommit && descendant === publisherCommit,
+    }),
+    apiCommit,
+    'schedule/dispatch/workflow_run senza range usano solo la release API pubblicata e verificata',
+  );
+  await assert.rejects(
+    resolvePublishedReleaseCommit(publisherCommit, {
+      apiReleaseCommitImpl: async () => apiCommit,
+      apiInputsChangedImpl: async () => {
+        throw new Error('provenienza push assente: impossibile classificare gli input API');
+      },
+      allowPublishedApiFallbackImpl: () => true,
+      isAncestorImpl: async () => false,
+    }),
+    /non e' antenato/,
+    'un fallback senza push range resta bloccato se la release API non e\' antenata del publisher',
+  );
+  await assert.rejects(
+    resolvePublishedReleaseCommit(publisherCommit, {
+      apiReleaseCommitImpl: async () => apiCommit,
+      apiInputsChangedImpl: async () => {
+        throw new Error('provenienza push assente: impossibile classificare gli input API');
+      },
+      allowPublishedApiFallbackImpl: () => false,
+    }),
+    /provenienza del push non verificabile/,
+    'un push senza provenienza non ricade sul percorso publish-only',
+  );
 });
 
 test('publisher migration manifest usa percorsi canonici per landing e hub', () => {
@@ -1559,6 +1594,12 @@ test('publisher: RSS non live fallisce, e un manifest senza feed elimina la supe
       ...common,
       effectiveStatus: 'retired',
       removeStaleCantonRssFeeds: true,
+      releaseReadyImpl: async (commit) => ({
+        ok: true,
+        commit,
+        files: {},
+        counts: { bySection: {} },
+      }),
       publishedStatusImpl: async () => 'retired',
     });
     assert.equal(retired.failures, 0);

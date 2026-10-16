@@ -921,6 +921,7 @@ export async function resolvePublishedReleaseCommit(
     apiReleaseCommitImpl = publishedApiReleaseCommit,
     apiReleaseCommitOverride = null,
     apiInputsChangedImpl = apiInputsChangedInCurrentPush,
+    allowPublishedApiFallbackImpl = () => ['schedule', 'workflow_dispatch', 'workflow_run'].includes(process.env.GITHUB_EVENT_NAME),
     isAncestorImpl = (ancestor, descendant) => {
       try {
         execFileSync('git', ['-C', ROOT_DIR, 'merge-base', '--is-ancestor', ancestor, descendant], { stdio: 'ignore' });
@@ -949,10 +950,20 @@ export async function resolvePublishedReleaseCommit(
     try {
       apiInputsChanged = await apiInputsChangedImpl();
     } catch (error) {
+      if (
+        error?.message === 'provenienza push assente: impossibile classificare gli input API'
+        && allowPublishedApiFallbackImpl() === true
+      ) {
+        // Schedule, dispatch e workflow_run non hanno un push range. La
+        // release API pubblicata resta utilizzabile solo dopo il controllo
+        // ancestry qui sotto; un range push parziale resta fail-closed.
+        apiInputsChanged = false;
+      } else {
       throw new Error(
         `provenienza del push non verificabile per il commit API ${apiCommit.trim()}: ${error?.message ?? String(error)}`,
         { cause: error },
       );
+      }
     }
   }
   if (apiInputsChanged) return publisherCommit;
@@ -1229,7 +1240,8 @@ export async function publishCantonRssFeeds({
   releaseReadyRetryDelayMs = RELEASE_READY_RETRY_DELAY_MS,
 }) {
   const cleanupRequested = removeStaleCantonRssFeeds === true;
-  if (effectiveStatus !== 'live' && !cleanupRequested) {
+  const inactiveCleanup = cleanupRequested && ['draft', 'retired'].includes(effectiveStatus);
+  if (effectiveStatus !== 'live' && !inactiveCleanup) {
     console.error(`::error::[${LOG}] feed RSS ${section}: la sezione non è live nel registro edge`);
     return { failures: 1, uploaded: 0, verified: 0 };
   }
@@ -1261,13 +1273,17 @@ export async function publishCantonRssFeeds({
       console.error(`::error::[${LOG}] feed RSS ${section}: la release verificata non corrisponde al commit ${releaseCommit}`);
       return { failures: 1, uploaded: 0, verified: 0 };
     }
-    const declaredFeeds = cantonRssFeedsDeclaredInManifest(section, readiness.files, readiness.counts);
-    const removingStaleFeeds = declaredFeeds.length === 0;
+    // Le sezioni non-live sono deliberatamente assenti da manifest/API. Il
+    // cleanup e' autorizzato solo da una transizione esplicita draft/retired;
+    // una sezione ancora live deve invece provare il conteggio zero nel manifest.
+    const declaredFeeds = inactiveCleanup
+      ? []
+      : cantonRssFeedsDeclaredInManifest(section, readiness.files, readiness.counts);
+    const removingStaleFeeds = inactiveCleanup || declaredFeeds.length === 0;
     if (typeof publishedStatusImpl === 'function') {
       const currentStatus = await publishedStatusImpl(section);
-      const cleanupAllowed = cleanupRequested && removingStaleFeeds;
-      if (currentStatus !== 'live' && !cleanupAllowed) {
-        console.error(`::error::[${LOG}] feed RSS ${section}: il registro edge non conferma lo stato live dopo la readiness gate`);
+      if (currentStatus !== effectiveStatus) {
+        console.error(`::error::[${LOG}] feed RSS ${section}: il registro edge è cambiato dopo la readiness gate`);
         return { failures: 1, uploaded: 0, verified: 0, status: currentStatus };
       }
     }
