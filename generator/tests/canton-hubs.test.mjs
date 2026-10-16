@@ -818,6 +818,36 @@ test('eventi: la stessa voce da due agende e\' una riga, due eventi omonimi in d
   assert.deepEqual(block.render('it').items.map((it) => it.detail).sort(), ['Bellinzona', 'Locarno', 'Lugano', 'Piazza Grande']);
 });
 
+test('eventi: URL e ID distinguono gli omonimi con luogo mancante o equivalente, mantenendo l\'ordine', () => {
+  const tomorrow = new Date(NOW + DAY_MS).toISOString().slice(0, 10);
+  const ev = (id, extra = {}) => ({ id, title: 'Concerto in piazza', startDate: tomorrow, canton: 'TI', ...extra });
+  const firstUrl = 'https://example.org/events/concerto-primo';
+  const secondUrl = 'https://example.org/events/concerto-secondo';
+  const samePlaceFirstUrl = 'https://example.org/events/lugano-primo';
+  const samePlaceSecondUrl = 'https://example.org/events/lugano-secondo';
+  const dataset = {
+    generatedAt: new Date(NOW - HOUR_MS).toISOString(),
+    events: [
+      ev('agenda-a:prima', { url: firstUrl, startTime: '12:00' }),
+      ev('agenda-b:prima', { url: `${firstUrl}#programma`, startTime: '12:00' }), // stessa pagina, frammento diverso
+      ev('agenda-a:seconda', { url: secondUrl, startTime: '09:00' }),
+      ev('agenda-a:terza'),
+      ev('agenda-a:terza'), // senza URL, l'ID stabile conserva la deduplica
+      ev('agenda-a:quarta'),
+      ev('agenda-a:lugano-1', { comune: 'Lugano', url: samePlaceFirstUrl, startTime: '10:00' }),
+      ev('agenda-a:lugano-2', { comune: 'Lugano', url: samePlaceSecondUrl, startTime: '11:00' }),
+      ev('agenda-a:controllo-1', { title: 'Lettura pubblica' }),
+      ev('agenda-a:controllo-2', { title: 'Mostra fotografica' }),
+    ],
+  };
+
+  const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
+  assert.equal(block.available, true);
+  const items = block.render('it').items;
+  assert.equal(items.length, 8, 'sei identità omonime più i due controlli restano otto eventi');
+  assert.deepEqual(items.map((item) => item.url).filter(Boolean), [secondUrl, samePlaceFirstUrl, samePlaceSecondUrl, firstUrl]);
+});
+
 test('eventi degli hub: loadDatasets sanitizza il payload prima di shapeEventsBlock e conserva generatedAt', () => {
   const root = tmpRoot();
   const generatedAt = new Date(NOW - HOUR_MS).toISOString();

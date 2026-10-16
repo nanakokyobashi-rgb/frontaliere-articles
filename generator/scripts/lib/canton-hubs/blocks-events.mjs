@@ -11,6 +11,33 @@ import { foldForMatch } from '../canton-section-profile.mjs';
 
 export const EVENTS_BLOCK_ID = 'prossimi-eventi';
 
+function foldedEventPart(value) {
+  return foldForMatch(typeof value === 'string' ? value : '').replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
+function eventUrlIdentity(value) {
+  const safeUrl = httpsUrlOrNull(value);
+  if (!safeUrl) return '';
+  const url = new URL(safeUrl);
+  url.hash = '';
+  return url.href;
+}
+
+function eventIdIdentity(value) {
+  if (typeof value === 'string' && value.trim()) return value.trim();
+  if (typeof value === 'number' && Number.isFinite(value)) return String(value);
+  return '';
+}
+
+/** URL o luogo identificano la copia; l'ID separa gli omonimi senza luogo. */
+function eventIdentityKey(e) {
+  const url = eventUrlIdentity(e.url);
+  const place = foldedEventPart(e.comune) || foldedEventPart(e.venue);
+  const id = eventIdIdentity(e.id);
+  const identity = url ? `url:${url}` : place ? `place:${place}` : `id:${id}`;
+  return JSON.stringify([e.firstUsefulDay, foldedEventPart(e.title), identity]);
+}
+
 const TXT = {
   it: {
     title: (days) => `Eventi dei prossimi ${days} giorni`,
@@ -78,12 +105,11 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
       || String(a.startTime ?? '').localeCompare(String(b.startTime ?? ''))
       || a.title.localeCompare(b.title)
       || String(a.id ?? '').localeCompare(String(b.id ?? '')))
-    // Lo stesso evento arriva da piu' agende: una riga per giorno, titolo e
-    // LUOGO. Il luogo sta nella chiave perche' due eventi omonimi lo stesso
-    // giorno in due comuni (un mercato, una festa nazionale) sono due eventi.
+    // Lo stesso evento arriva da piu' agende: un URL esplicito prevale,
+    // altrimenti il luogo conserva la deduplica esistente; senza luogo l'ID
+    // separa gli omonimi dello stesso giorno.
     .filter((e) => {
-      const fold = (v) => foldForMatch(typeof v === 'string' ? v : '').replace(/[^a-z0-9]+/g, ' ').trim();
-      const key = `${e.firstUsefulDay}|${fold(e.title)}|${fold(e.comune) || fold(e.venue)}`;
+      const key = eventIdentityKey(e);
       if (seen.has(key)) return false;
       seen.add(key);
       return true;
