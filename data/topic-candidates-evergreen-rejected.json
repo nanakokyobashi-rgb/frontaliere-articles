@@ -120,9 +120,106 @@
       "firstSeenAt": "2026-10-16T01:48:30.059Z",
       "lastValidatedAt": "2026-10-16T01:48:30.059Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "sistema sanitario svizzero lamal guida 2026 canton Zurigo",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T02:00:54.666Z",
+      "lastValidatedAt": "2026-10-16T02:00:54.666Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "sistema sanitario svizzero lamal guida 2026 canton Berna",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T02:04:52.504Z",
+      "lastValidatedAt": "2026-10-16T02:04:52.504Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "sistema sanitario svizzero lamal guida 2026 canton Basilea",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T02:04:52.516Z",
+      "lastValidatedAt": "2026-10-16T02:04:52.516Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "sistema sanitario svizzero lamal guida 2026 canton Vaud",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T02:06:59.650Z",
+      "lastValidatedAt": "2026-10-16T02:06:59.650Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "sistema sanitario svizzero lamal guida 2026 canton San Gallo",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T02:06:59.664Z",
+      "lastValidatedAt": "2026-10-16T02:06:59.664Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "sistema sanitario svizzero lamal guida 2026 canton Lucerna",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T02:06:59.680Z",
+      "lastValidatedAt": "2026-10-16T02:06:59.680Z",
+      "expiresAt": null
     }
   ],
-  "strikes": [],
+  "strikes": [
+    {
+      "keyword": "sistema sanitario svizzero lamal guida 2026 canton Ginevra",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-10-16T02:02:39.966Z",
+      "lastStrikeAt": "2026-10-16T02:02:39.966Z",
+      "expiresAt": "2026-11-15T02:02:39.966Z"
+    },
+    {
+      "keyword": "sistema sanitario svizzero lamal guida 2026 canton Argovia",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-10-16T02:12:36.169Z",
+      "lastStrikeAt": "2026-10-16T02:12:36.169Z",
+      "expiresAt": "2026-11-15T02:12:36.169Z"
+    }
+  ],
   "legacy": [
     {
       "kind": "ban",

@@ -28075,6 +28075,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'imposte-zurigo-aliquote-deduzioni',
+    category: 'fiscale',
+    date: '2026-10-16T02:17:43.978Z',
+    image: '/images/blog/article-imposte-zurigo-aliquote-deduzioni.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['ZH'],
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
