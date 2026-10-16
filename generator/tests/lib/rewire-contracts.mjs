@@ -291,7 +291,7 @@ export const REWIRE_CONTRACTS = [
     producedUnread: ['median', 'area', 'coverage', 'exchangeRate', 'sources'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      workflows: ['refresh-canton-hubs.yml'],
+      workflows: ['generate-article-core.yml', 'generate-article.yml', 'refresh-canton-hubs.yml'],
     },
   },
   {
@@ -334,7 +334,7 @@ export const REWIRE_CONTRACTS = [
     producedUnread: ['sourcesRegistry', 'totalNotices', 'health', 'language'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      workflows: ['refresh-canton-hubs.yml'],
+      workflows: ['generate-article-core.yml', 'generate-article.yml', 'refresh-canton-hubs.yml'],
     },
   },
   // ── P9f: i quattro input dell'aggregatore dei servizi ─────────────────────

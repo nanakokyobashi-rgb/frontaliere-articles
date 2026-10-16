@@ -64,12 +64,20 @@ import { PROMPT_SCAFFOLD_FLOOR_TOKENS, isBudgetBelowScaffoldFloor } from '../scr
 import * as IRPEF from '../scripts/lib/irpef-scaglioni.mjs';
 import { isLocalNews } from '../scripts/lib/local-news.mjs';
 import { buildCantonProfile, cantonPromptLines } from '../scripts/lib/canton-section-profile.mjs';
+import { buildCantonFactsBrief } from '../scripts/lib/canton-facts-brief.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
 const AI_MODELS_SRC = path.resolve(HERE, '../scripts/lib/ai-models.mjs');
+const REWIRE_FIXTURES = path.resolve(HERE, 'fixtures/rewire');
 
 const src = readFileSync(CREATE_ARTICLE, 'utf-8');
+const CANTON_FACTS_BRIEF_FIXTURE = buildCantonFactsBrief({
+  canton: 'TI',
+  members: ['TI'],
+  taxData: JSON.parse(readFileSync(path.join(REWIRE_FIXTURES, 'canton-tax.json'), 'utf8')),
+  pensionData: JSON.parse(readFileSync(path.join(REWIRE_FIXTURES, 'pension-parameters.json'), 'utf8')),
+});
 
 /** Ritaglia un blocco fra due anchor, fallendo forte se una non c'e' piu'. */
 function cut(startAnchor, endAnchor, { includeEnd = true, from = src } = {}) {
@@ -131,7 +139,7 @@ const DEPS = [
   'pageContent', 'url', 'sourceContext', 'existingIds',
   'CREATE_ARTICLE_MIN_IT_WORDS', 'IS_FRONTALIERE', 'SECTION_NAME',
   'AI_SEARCH_PROMPT_BLOCK_IT', 'JSON_QUOTE_SAFETY_RULE_IT',
-  'buildSourceContract', 'evergreenFactsBriefFor', 'buildArticleJsonSchema',
+  'buildSourceContract', 'evergreenFactsBriefFor', 'CANTON_FACTS_BRIEF', 'buildArticleJsonSchema',
   'lastSourcePublishedAt', '_winnerFingerprintMessage',
   'AI_MODELS', 'GH_MODEL_HEAVY', 'CATEGORIES', 'AVAILABLE_IMAGES',
   'estimateRequestTokens', 'PROMPT_TOKEN_BUDGET', 'PROMPT_TOKEN_RAW_CEILING',
@@ -217,6 +225,7 @@ const BASE_DEPS = {
   JSON_QUOTE_SAFETY_RULE_IT,
   buildSourceContract,
   evergreenFactsBriefFor,
+  CANTON_FACTS_BRIEF: '',
   buildArticleJsonSchema,
   CATEGORIES,
   AVAILABLE_IMAGES,
@@ -287,9 +296,10 @@ function newsPrompt(extra = {}, section = 'frontaliere', deps = {}) {
 }
 
 /** Il ramo EVERGREEN: `pageContent` sintetica costruita da create-article.mjs. */
-function evergreenPrompt(section = 'frontaliere') {
+function evergreenPrompt(section = 'frontaliere', deps = {}) {
   const keyword = 'frontaliere farmacista ticino stipendio requisiti';
   return assemble({
+    ...deps,
     pageContent: `[ARTICOLO EVERGREEN SEO]\nKeyword target: ${keyword}\nAngolo editoriale: guida pratica passo passo\n\nGenera un articolo approfondito e pratico ottimizzato per questa keyword long-tail. Usa solo fatti verificati e stabili sul dominio frontalieri Ticino-Italia. Se servono esempi, presentali come scenari ipotetici, senza nomi, aziende, citta' o importi specifici inventati.\n\n${evergreenFactsBriefFor(section)}\n\n⚠️ I FATTI VERIFICATI qui sopra DEVONO corrispondere ESATTAMENTE (lo stesso ground truth e' usato dal fact-checker, che blocca l'articolo se diverghi). Per dettagli NON coperti, attieniti a nozioni stabili e generali del dominio; se un dato specifico non e' certo, ometti o usa formulazioni qualitative invece di inventare cifre/date precise.`,
     url: `evergreen://${encodeURIComponent(keyword)}`,
     IS_FRONTALIERE: section === 'frontaliere',
@@ -472,6 +482,17 @@ test('il ramo NEWS di una sezione CANTONALE resta sotto il tetto e porta le righ
   assert.doesNotMatch(news.prompt, /a livello NAZIONALE\. Esempi di nesso reale/);
   const ch = newsPrompt({}, 'svizzera');
   assert.match(ch.prompt, /a livello NAZIONALE\. Esempi di nesso reale/, 'premessa: la svizzera tiene la sua REGOLA #0');
+});
+
+test('il ramo NEWS cantonale porta i fatti annuali selezionati dalla cache', () => {
+  const news = newsPrompt({}, 'canton-ti', { CANTON_FACTS_BRIEF: CANTON_FACTS_BRIEF_FIXTURE });
+  assert.ok(
+    news.estTokens <= PROMPT_TOKEN_CEILING,
+    `prompt news canton-ti con fatti annuali stimato in ${news.estTokens}, sopra ${PROMPT_TOKEN_CEILING}`,
+  );
+  assert.match(news.prompt, /FATTI ANNUALI VERIFICATI DEL CANTONE/);
+  assert.match(news.prompt, /Fisco TI, dataset 2026/);
+  assert.match(news.prompt, /Previdenza federale, dataset 2026/);
 });
 
 test('le tre sezioni pilota non superano il cap grezzo del prompt news', () => {

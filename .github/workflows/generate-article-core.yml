@@ -480,6 +480,13 @@ jobs:
       - name: Load secrets from Remote Config
         run: node generator/scripts/load-rc-env.mjs
 
+      - name: Refresh annual canton facts for the article brief
+        if: steps.mode.outputs.dry != 'true' && startsWith(steps.mode.outputs.section, 'canton-')
+        run: |
+          set -euo pipefail
+          npm run refresh:canton-tax
+          npm run refresh:pension-parameters
+
       - name: Setup Codex Luna Max article lane
         id: setup_claude_haiku_fallback
         if: steps.mode.outputs.dry != 'true'
