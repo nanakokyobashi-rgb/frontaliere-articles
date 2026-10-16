@@ -41,6 +41,6 @@ export function stripPrivateEventRecords(payload) {
   const removed = events.length - kept.length;
   if (removed === 0) return { payload, removed };
   const next = { ...payload, events: kept };
-  if (typeof payload.totalEvents === 'number') next.totalEvents = kept.length;
+  if (Object.hasOwn(payload, 'totalEvents')) next.totalEvents = kept.length;
   return { payload: next, removed };
 }

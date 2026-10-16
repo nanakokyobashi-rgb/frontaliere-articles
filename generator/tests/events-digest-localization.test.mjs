@@ -4,6 +4,7 @@ import {
   findArticleLocalizedToponymMismatches,
   parseEventsDigestBody2Safe,
   pairEventsByStableKey,
+  preserveEventTitleSyntax,
 } from '../scripts/lib/localized-toponyms.mjs';
 import { repairEventsDigestLocalizedToponyms } from '../scripts/lib/events-digest-localization.mjs';
 
@@ -71,6 +72,52 @@ describe('repairEventsDigestLocalizedToponyms', () => {
     assert.equal(repaired.content.en.faq[0].q, 'Events in Geneva?');
     assert.match(original.content.en.body2, /Concert in Zürich/);
     assert.deepEqual(repairEventsDigestLocalizedToponyms(repaired), repaired);
+  });
+
+  it('preserves title markup, entities and Unicode outside a raw variant replacement', () => {
+    const sourceTitle = 'Concerto a Zurigo';
+    const targetTitle = 'Caf&eacute; &amp; <em>Zu&#x308;rich</em> — déjà vu';
+    const title = preserveEventTitleSyntax({
+      sourceText: sourceTitle,
+      targetText: targetTitle,
+      locale: 'en',
+    });
+
+    assert.equal(title.text, 'Caf&eacute; &amp; <em>Zurich</em> — déjà vu');
+    assert.equal(title.replacements, 1);
+
+    const original = {
+      id: 'eventi-weekend-ticino',
+      content: {
+        it: {
+          body2: [
+            '## Gli eventi',
+            '',
+            '### [Ginevra](/it/events/geneva/)',
+            '- **sabato 16:00** — Concerto a Zurigo',
+          ].join('\n'),
+        },
+        en: {
+          body2: [
+            '## Events',
+            '',
+            '### [Geneva](/en/events/geneva/)',
+            `- **Saturday 16:00** — ${targetTitle}`,
+          ].join('\n'),
+        },
+      },
+    };
+
+    const repaired = repairEventsDigestLocalizedToponyms(original);
+    assert.equal(
+      repaired.content.en.body2,
+      [
+        '## Events',
+        '',
+        '### [Geneva](/en/events/geneva/)',
+        '- **Saturday 16:00** — Caf&eacute; &amp; <em>Zurich</em> — déjà vu',
+      ].join('\n'),
+    );
   });
 
   it('pairs reordered event records by heading, day and time instead of array position', () => {

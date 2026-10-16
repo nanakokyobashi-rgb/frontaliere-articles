@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/quando-il-treno-dei-bambini-porto-a-gallarate-i-figli-degli-operai-in-sciopero-a-piombino/2670583": {
-    "articleId": "treno-dei-bambini-gallarate-piombino",
-    "ts": "2026-09-05T09:59:38.868Z",
-    "keyForm": 2
-  },
   "https://www.varesenoi.it/2026/09/04/leggi-notizia/argomenti/economia-13/articolo/export-da-record-in-provincia-di-varese-che-supera-anche-milano-e-segna-il-primo-posto-regionale-2.html": {
     "articleId": "export-varese-record-2026",
     "ts": "2026-09-05T10:32:56.769Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenoi.it/2026/10/15/leggi-notizia/argomenti/canton-ticino/articolo/donna-ferita-in-canton-ticino-un-arresto-per-tentato-omicidio-2.html": {
     "articleId": "arresto-lite-domestica-ticino",
     "ts": "2026-10-16T00:07:17.273Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/a-kick-to-cocaine-a-gazzada-schianno-un-pomeriggio-tra-sport-benessere-e-solidarieta-con-agifar-varese/2709493": {
+    "articleId": "kick-cocaine-gazzada-evento",
+    "ts": "2026-10-16T01:03:49.491Z",
     "keyForm": 2
   }
 }

@@ -44748,6 +44748,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'kick-cocaine-gazzada-evento',
+ category: 'novita',
+ date: '2026-10-16T01:03:49.070Z',
+ image: '/images/blog/article-kick-cocaine-gazzada-evento.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
