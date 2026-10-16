@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-const { staticAdSlotHtml } = await import('../staticAdSlotHtml.ts');
+const { isStaticAdSlotKey, staticAdSlotHtml } = await import('../staticAdSlotHtml.ts');
 
 test('canton hub ad placements keep the reserved formats and slots', () => {
   const top = staticAdSlotHtml('canton-hub-top');
@@ -29,4 +29,13 @@ test('canton hub ad placements keep the reserved formats and slots', () => {
   assert.match(end, /data-ad-format="autorelaxed"/);
   assert.match(end, /data-ad-placement="ssg_end_multiplex"/);
   assert.doesNotMatch(end, /data-full-width-responsive/);
+});
+
+test('runtime ad slot values outside the TypeScript union fail closed', () => {
+  assert.equal(isStaticAdSlotKey('canton-hub-top'), true);
+  assert.equal(isStaticAdSlotKey('unknown-runtime-slot'), false);
+  assert.equal(isStaticAdSlotKey('toString'), false);
+  assert.equal(isStaticAdSlotKey(null), false);
+  assert.equal(staticAdSlotHtml('unknown-runtime-slot'), '');
+  assert.equal(staticAdSlotHtml(null), '');
 });
