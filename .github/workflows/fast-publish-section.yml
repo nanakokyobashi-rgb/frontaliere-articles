@@ -37,9 +37,9 @@ on:
       - 'content/cantons/**'
       - 'content/blog-body-canton-*/**'
       - 'content/blog-meta-canton-*'
-      # Il flip draft -> live cambia solo il registro: il primo pass carica le
-      # pagine necessarie al bootstrap, poi il pass post-flip attende il live
-      # effettivo e verifica feed RSS e landing prima di chiudere il publish.
+      # Il flip draft -> live cambia solo il registro. Il primo pass carica le
+      # pagine necessarie al bootstrap; il replay workflow_run, dopo il
+      # completamento di publish-api, verifica feed RSS e landing sul live.
       - 'sections/registry.json'
       # A declared image may arrive after the article body. The resolver maps
       # this path through the registry to the owning canton article(s).
@@ -76,6 +76,14 @@ on:
       - 'scripts/lib/parse-positive-num.mjs'
       - 'generator/scripts/load-rc-env.mjs'
       - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
+  # `sections/registry.json` and the edge API registry are published by
+  # publish-api.yml. Its push-triggered run can finish after this workflow's
+  # first pass, so replay only registry transitions after that API release is
+  # verified; this closes the draft→live race without duplicating content runs.
+  workflow_run:
+    workflows: ['Publish article data API']
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
     inputs:
       section:
@@ -107,6 +115,11 @@ permissions:
 
 jobs:
   resolve:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event == 'push' &&
+       github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
@@ -117,6 +130,7 @@ jobs:
       - name: Checkout (resolve)
         uses: actions/checkout@v7
         with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
           fetch-depth: 2
           persist-credentials: false
 
@@ -142,6 +156,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           PUSH_BEFORE: ${{ github.event.before }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
           if [ "$EVENT_NAME" = 'push' ]; then
@@ -157,6 +172,14 @@ jobs:
             fi
           fi
           before="${PUSH_BEFORE:-}"
+          if [ "$EVENT_NAME" = 'workflow_run' ]; then
+            if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || [ "$(git rev-parse HEAD)" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
+              echo "::error::workflow_run head non coincide con il checkout"
+              exit 1
+            fi
+            before="$(git rev-parse HEAD^)"
+            PUSH_BEFORE="$before"
+          fi
           if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             dry=true
@@ -190,9 +213,11 @@ jobs:
               echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
               dry=true
             fi
-            matrix="$(git diff --name-status "$before" HEAD 2>/dev/null \
-              | node scripts/ci/fast-publish-section.mjs r2-plan \
-              | jq -c 'map(. + {bootstrap: (.bootstrap // false), postFlip: (.postFlip // false)})')"
+            diff_args=()
+            if [ "$EVENT_NAME" = 'workflow_run' ]; then diff_args+=(-- sections/registry.json); fi
+            matrix="$(git diff --name-status "$before" HEAD "${diff_args[@]}" 2>/dev/null \
+              | PUSH_BEFORE="$before" node scripts/ci/fast-publish-section.mjs r2-plan \
+              | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
           fi
           any=false
           [ "$(printf '%s' "$matrix" | jq 'length')" -gt 0 ] && any=true
@@ -219,15 +244,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
           fetch-depth: 2
           persist-credentials: false
 
       - name: Fetch fallback corpus revision for manifest migration
-        if: github.event_name == 'push'
         env:
-          PREVIOUS_REVISION: ${{ github.event.before }}
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BEFORE: ${{ github.event.before }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
+          PREVIOUS_REVISION="${PUSH_BEFORE:-}"
+          if [ "$EVENT_NAME" = 'workflow_run' ]; then
+            if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || [ "$(git rev-parse HEAD)" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
+              echo "::error::workflow_run head non coincide con il checkout"
+              exit 1
+            fi
+            PREVIOUS_REVISION="$(git rev-parse HEAD^)"
+          fi
           if [ -n "${PREVIOUS_REVISION:-}" ] && [[ ! "$PREVIOUS_REVISION" =~ ^0+$ ]]; then
             git fetch --no-tags --depth=1 origin "$PREVIOUS_REVISION"
           fi
@@ -295,11 +330,22 @@ jobs:
           ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
           BOOTSTRAP: ${{ matrix.target.bootstrap }}
           DRY: ${{ needs.resolve.outputs.dry }}
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BEFORE: ${{ github.event.before }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
           args=(--section "$SECTION" --out "$RUNNER_TEMP/section-dist" --summary "$RUNNER_TEMP/section-summary.json")
-          if [ "${{ github.event_name }}" = "push" ] && [ -n "${{ github.event.before }}" ]; then
-            args+=(--previous-revision "${{ github.event.before }}")
+          previous_revision="${PUSH_BEFORE:-}"
+          if [ "$EVENT_NAME" = 'workflow_run' ]; then
+            if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || [ "$(git rev-parse HEAD)" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
+              echo "::error::workflow_run head non coincide con il checkout"
+              exit 1
+            fi
+            previous_revision="$(git rev-parse HEAD^)"
+          fi
+          if [ -n "$previous_revision" ] && [[ ! "$previous_revision" =~ ^0+$ ]]; then
+            args+=(--previous-revision "$previous_revision")
           fi
           if [ "$BOOTSTRAP" = "true" ]; then
             args+=(--bootstrap)
@@ -315,36 +361,6 @@ jobs:
           # registro a ogni run. Ritentare l'intero comando e' sicuro: il
           # render riscrive lo stesso scratch e gli upload R2 sono PUT
           # idempotenti sulle stesse chiavi.
-          bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"
-
-      # Una promozione draft -> live viene servita dal primo pass per
-      # permettere a publish-api di superare il bootstrap delle pagine. Quel
-      # pass vede ancora draft e quindi non può pubblicare RSS: attendere il
-      # flip e rieseguire il publisher chiude la finestra con landing senza
-      # autodiscovery e feed mancanti.
-      - name: Wait for the edge promotion
-        if: needs.resolve.outputs.dry != 'true' && matrix.target.postFlip == true
-        env:
-          SECTION: ${{ matrix.target.section }}
-        run: |
-          set -euo pipefail
-          node scripts/ci/fast-publish-section.mjs wait-live "$SECTION"
-
-      - name: Republish the promoted section after the edge flip
-        if: needs.resolve.outputs.dry != 'true' && matrix.target.postFlip == true
-        env:
-          SECTION: ${{ matrix.target.section }}
-          ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
-          BOOTSTRAP: ${{ matrix.target.bootstrap }}
-        run: |
-          set -euo pipefail
-          args=(--section "$SECTION" --out "$RUNNER_TEMP/section-dist-post-flip" --summary "$RUNNER_TEMP/section-summary-post-flip.json")
-          if [ "$BOOTSTRAP" = "true" ]; then
-            args+=(--bootstrap)
-          else
-            args+=(--ids "$(printf '%s' "$ARTICLE_IDS_JSON" | jq -c .)")
-          fi
-          args+=(--publish)
           bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"
 
       - name: Summary
