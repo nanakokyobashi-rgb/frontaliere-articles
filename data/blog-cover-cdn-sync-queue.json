@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-vantaggi-servizi-associati-ocst.webp",
-      "sha256": "bf751243e99cfb9883b7ced949f0c1e3ff00202fafd43ed1565e7c5c34c70d61"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-vantaggi-servizi-associati-ocst-480w.webp",
-      "sha256": "10faf5d856fdfe4cd74af16cfa16b3f75d08e908f61c8a78e35ea69d4d4303c2"
-    }
-  ]
+  "items": []
 }
