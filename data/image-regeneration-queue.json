@@ -60,6 +60,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-16T03:19:05.551Z",
       "lastFailureAt": "2026-10-16T05:31:28.963Z"
+    },
+    {
+      "articleId": "concerto-gallarate-uto-ughi-2026",
+      "title": "Gallarate: uto ughi torna al teatro condominio con vivaldi e bach",
+      "fallbackImage": "/images/blog/article-cantello-teatro-dialettale-ottobre-2026.webp",
+      "reason": "All image providers failed for article-concerto-gallarate-uto-ughi-2026: openai-codex (vision gate rejected image: Synthetic photorealistic theater scene with no readable text, log",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T11:26:51.536Z",
+      "lastFailureAt": "2026-10-16T11:26:51.536Z"
     }
   ]
 }

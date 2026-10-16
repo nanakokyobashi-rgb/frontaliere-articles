@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/investimento-a-busto-arsizio-28enne-trasportato-in-ospedale/2670791": {
-    "articleId": "investimento-busto-arsizio-28enne-ospedale",
-    "ts": "2026-09-06T10:47:49.862Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/lavoro-in-prefettura-sei-posti-disponibili-negli-uffici-di-varese/2670517": {
     "articleId": "bando-mobilita-prefettura-varese",
     "ts": "2026-09-06T11:02:29.171Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/masha-e-orso-diventano-burattini-e-arrivano-al-teatro-regina-pacis-di-saronno/2708833": {
     "articleId": "masha-orso-teatro-saronno",
     "ts": "2026-10-16T09:13:03.690Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/uto-ughi-torna-a-gallarate-al-teatro-condominio-una-serata-con-vivaldi-e-bach/2710177": {
+    "articleId": "concerto-gallarate-uto-ughi-2026",
+    "ts": "2026-10-16T11:26:51.538Z",
     "keyForm": 2
   }
 }

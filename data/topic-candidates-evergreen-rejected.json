@@ -8925,18 +8925,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/svizzera/economia/1956672/investimenti-casse-pensioni-illiquidi-rischi": {
-      "section": "frontaliere",
-      "ts": 1791975002366
-    },
-    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1956470/personale-di-pasture-interrogato-anche-il-governo-cantonale": {
-      "section": "frontaliere",
-      "ts": 1791976252789
-    },
-    "frontaliere::https://www.laregione.ch/cantone/luganese/1956506/la-citta-chiarisca-quanto-costa-un-affitto-sostenibile": {
-      "section": "frontaliere",
-      "ts": 1791976293405
-    },
     "frontaliere::https://www.varesenews.it/2026/10/amazon-lascia-malpensa-sindacati-nessuno-deve-essere-lasciato-indietro/2707141": {
       "section": "frontaliere",
       "ts": 1791980222000
@@ -9220,6 +9208,18 @@
     "frontaliere::https://www.tio.ch/sport/altri-sport/1957167/bencic-ka-ex-marchio-lara-gut-behrami-belinda-segue-orme-diventa": {
       "section": "frontaliere",
       "ts": 1792147294977
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/caos-nei-cieli-italiani-tra-guasto-enav-e-sciopero-easyjet-a-malpensa-voli-cancellati-e-terminal-1-pieno/2710153": {
+      "section": "frontaliere",
+      "ts": 1792149602661
+    },
+    "frontaliere::https://comozero.it/politica/dalla-candidatura-al-consiglio-comunale-il-pd-di-como-lancia-il-corso-di-formazione-con-vista-elezioni": {
+      "section": "frontaliere",
+      "ts": 1792149612452
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/sapori-di-stagione-e-filiera-corta-a-busto-arsizio-nuovo-appuntamento-con-il-mercato-contadino/2710129": {
+      "section": "frontaliere",
+      "ts": 1792149687543
     }
   }
 }
