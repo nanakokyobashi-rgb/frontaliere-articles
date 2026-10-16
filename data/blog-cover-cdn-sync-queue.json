@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-lupo-abbattimenti-facilitati.webp",
+      "sha256": "b725654ebcd99a65400277514bc03c7143b1c35af2f1c83e47e3ba16ed4286d9"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-lupo-abbattimenti-facilitati-480w.webp",
+      "sha256": "5cae1da8c12e7b60ce13f8622563e50ffe5e84dc8e9b34ca1614ebd0c5f89bf6"
+    }
+  ]
 }
