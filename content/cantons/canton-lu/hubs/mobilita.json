@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T14:33:38.367Z",
-  "contentHash": "9969c131a4417ea0e8f549c243b78bdc330100111c657a5bb0c3ff8aa6d23a03",
+  "updatedAt": "2026-10-16T15:29:31.518Z",
+  "contentHash": "a934108c5eb050e88d820aeb0bcc81ffb921519f930be5d09ce2c20d5d327be0",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "3",
+          "value": "2",
           "note": "segnalazioni aggiornate: 16 ottobre 2026"
         },
         {
@@ -42,12 +42,6 @@
           "title": "Chiusure, cantieri e disagi",
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
-            {
-              "label": "A2 Luzern <-> Basel tra Svincolo autostradale Sursee E Svincolo autostradale Reiden Situazione: problemi di traffico cantiere Limitazione del traffico: corsia d'emergenza chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 16 ottobre 2026",
-              "date": "2026-10-08T05:31:00.000Z"
-            },
             {
               "label": "A2 S. Gottardo <-> Luzern tra Svincolo autostradale Luzern Zentrum E Galleria Galleria Sonnenberg Situazione: chiusa cantiere, lunghezza [km] 2.3",
               "value": "Chiusura",
@@ -89,6 +83,12 @@
               "value": "Cantiere",
               "detail": "fine prevista: 12 novembre 2026",
               "date": "2026-02-02T07:02:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna -> Basilea Parcheggio Sonnenberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.2",
+              "value": "Cantiere",
+              "detail": "fine prevista: 13 novembre 2026",
+              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -156,7 +156,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T15:29:31.518Z"
     },
     "en": {
       "canton": "LU",
@@ -166,7 +166,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "3",
+          "value": "2",
           "note": "reports as of 16 October 2026"
         },
         {
@@ -181,12 +181,6 @@
           "title": "Closures, roadworks and disruptions",
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
-            {
-              "label": "A2 Luzern <-> Basel tra Svincolo autostradale Sursee E Svincolo autostradale Reiden Situazione: problemi di traffico cantiere Limitazione del traffico: corsia d'emergenza chiusa",
-              "value": "Closure",
-              "detail": "until 16 October 2026",
-              "date": "2026-10-08T05:31:00.000Z"
-            },
             {
               "label": "A2 S. Gottardo <-> Luzern tra Svincolo autostradale Luzern Zentrum E Galleria Galleria Sonnenberg Situazione: chiusa cantiere, lunghezza [km] 2.3",
               "value": "Closure",
@@ -228,6 +222,12 @@
               "value": "Roadworks",
               "detail": "until 12 November 2026",
               "date": "2026-02-02T07:02:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna -> Basilea Parcheggio Sonnenberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.2",
+              "value": "Roadworks",
+              "detail": "until 13 November 2026",
+              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -293,7 +293,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T15:29:31.518Z"
     },
     "de": {
       "canton": "LU",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "3",
+          "value": "2",
           "note": "Meldungen vom 16. Oktober 2026"
         },
         {
@@ -318,12 +318,6 @@
           "title": "Sperrungen, Baustellen und Störungen",
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
-            {
-              "label": "A2 Luzern <-> Basel zwischen Anschluss Sursee und Anschluss Reiden Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Pannenstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 16. Oktober 2026",
-              "date": "2026-10-08T05:31:00.000Z"
-            },
             {
               "label": "A2 Gotthard <-> Luzern zwischen Anschluss Luzern-Zentrum und Tunnel Sonnenberg-Tunnel Sachlage: Strecke gesperrt Baustelle, Länge [km] 2.3",
               "value": "Sperrung",
@@ -365,6 +359,12 @@
               "value": "Baustelle",
               "detail": "bis 12. November 2026",
               "date": "2026-02-02T07:02:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Basel Parkplatz Sonnenberg Sachlage: Parkplatz geschlossen Baustelle, Länge [km] 0.2",
+              "value": "Baustelle",
+              "detail": "bis 13. November 2026",
+              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -430,7 +430,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T15:29:31.518Z"
     },
     "fr": {
       "canton": "LU",
@@ -440,7 +440,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "3",
+          "value": "2",
           "note": "signalements au 16 octobre 2026"
         },
         {
@@ -455,12 +455,6 @@
           "title": "Fermetures, chantiers et perturbations",
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
-            {
-              "label": "A2 Lucerne <-> Bâle entre Jonction autoroutière Sursee et Jonction autoroutière Reiden Situation: trafic perturbé travaux Gestion du trafic: bande d'arrêt d'urgence fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 16 octobre 2026",
-              "date": "2026-10-08T05:31:00.000Z"
-            },
             {
               "label": "A2 St-Gothard <-> Lucerne entre Jonction autoroutière Lucerne-Centre et Tunnel Tunnel du Sonnenberg Situation: fermé travaux, longueur [km] 2.3",
               "value": "Fermeture",
@@ -502,6 +496,12 @@
               "value": "Chantier",
               "detail": "jusqu’au 12 novembre 2026",
               "date": "2026-02-02T07:02:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne -> Bâle Parking Sonnenberg Situation: parking fermé travaux, longueur [km] 0.2",
+              "value": "Chantier",
+              "detail": "jusqu’au 13 novembre 2026",
+              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -569,7 +569,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T15:29:31.518Z"
     }
   }
 }

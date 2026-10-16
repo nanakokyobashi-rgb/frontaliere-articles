@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/ad-angera-una-giornata-di-formazione-per-rendere-i-musei-accessibili-alle-persone-con-demenza/2670431": {
-    "articleId": "angera-corso-musei-demenza",
-    "ts": "2026-09-06T11:43:37.546Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/colacem-il-19-rapporto-di-sostenibilita-46-milioni-di-investimenti-ambientali-in-tre-anni/2671399": {
     "articleId": "colacem-sostenibilita-2025",
     "ts": "2026-09-06T11:58:59.246Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/rallentamenti-e-disagi-alla-dogana-di-gaggiolo-dopo-linstallazione-del-nuovo-dosso/2709703": {
     "articleId": "dosso-gaggiolo-disagi-frontalieri",
     "ts": "2026-10-16T14:28:42.662Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/dosso-e-disagi-a-gaggiolo-la-dogana-svizzera-spiega-scelta-fatta-per-la-sicurezza-di-pedoni-e-lavoratori/2710591": {
+    "articleId": "dosso-gaggiolo-sicurezza-lavoratori",
+    "ts": "2026-10-16T15:40:56.915Z",
     "keyForm": 2
   }
 }

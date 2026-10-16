@@ -5,31 +5,31 @@
       "articleId": "offerte-formazione-federale",
       "title": "Amministrazione federale: lavoro, praticantati e formazione",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to work/study in Switzerland, but it includes a recognizable foreground person viewed f",
+      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Generic synthetic study/work scene, but it includes a recognizable foreground person viewed from behind.); gemini (Gemini image re",
       "status": "failed",
-      "failureCount": 7,
+      "failureCount": 8,
       "requestedAt": "2026-10-13T23:44:58.192Z",
-      "lastFailureAt": "2026-10-16T05:24:16.105Z"
+      "lastFailureAt": "2026-10-16T15:11:56.876Z"
     },
     {
       "articleId": "opportunita-impiego-federale",
       "title": "Lavorare per l'Amministrazione federale: 50 formazioni",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-opportunita-impiego-federale: openai-codex (vision gate rejected image: Generic synthetic workshop scene in Switzerland; a recognizable foreground person is visible from behind.); gemini (Gemini image ",
+      "reason": "All image providers failed for article-opportunita-impiego-federale: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration set in Switzerland; no text, logos, or recognizable face, but a recognizable fore",
       "status": "failed",
-      "failureCount": 4,
+      "failureCount": 5,
       "requestedAt": "2026-10-15T01:49:05.613Z",
-      "lastFailureAt": "2026-10-16T05:25:16.629Z"
+      "lastFailureAt": "2026-10-16T15:12:52.549Z"
     },
     {
       "articleId": "dimissioni-rapporto-ticino",
       "title": "Dimissioni da frontaliere: termini e passi in Ticino",
       "fallbackImage": "/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp",
-      "reason": "All image providers failed for article-dimissioni-rapporto-ticino: openai-codex (vision gate rejected image: Generic synthetic commuter scene with a recognizable foreground person viewed from behind.); gemini (Gemini image request failed wi",
+      "reason": "All image providers failed for article-dimissioni-rapporto-ticino: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Ticino commuting, but it includes a recognizable foreground person viewed from behind",
       "status": "failed",
-      "failureCount": 3,
+      "failureCount": 4,
       "requestedAt": "2026-10-15T11:39:57.424Z",
-      "lastFailureAt": "2026-10-16T05:26:34.268Z"
+      "lastFailureAt": "2026-10-16T15:13:55.302Z"
     },
     {
       "articleId": "estradizione-pakistan-como",
@@ -42,54 +42,24 @@
       "lastFailureAt": "2026-10-16T10:17:58.289Z"
     },
     {
-      "articleId": "varese-piazzale-anastasi-intitolazione",
-      "title": "Varese: il piazzale dello stadio è intitolato a Anastasi",
-      "fallbackImage": "/images/blog/article-manutenzione-prato-franco-ossola-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "failed",
-      "failureCount": 1,
-      "requestedAt": "2026-10-16T01:20:06.531Z",
-      "lastFailureAt": "2026-10-16T05:28:34.418Z"
-    },
-    {
-      "articleId": "frontaliere-dimissioni-termine-preavviso",
-      "title": "Dimissioni frontaliere: termini e procedura",
-      "fallbackImage": "/images/blog/cambio-datore-lavoro-frontaliere-procedura-permesso-2026-single.webp",
-      "reason": "All image providers failed for article-frontaliere-dimissioni-termine-preavviso: openai-codex (vision gate rejected image: Generic synthetic editorial commuter scene; a prominent person is visible from behind in the foreground/midground.); ",
-      "status": "failed",
-      "failureCount": 1,
-      "requestedAt": "2026-10-16T03:19:05.551Z",
-      "lastFailureAt": "2026-10-16T05:31:28.963Z"
-    },
-    {
-      "articleId": "concerto-gallarate-uto-ughi-2026",
-      "title": "Gallarate: uto ughi torna al teatro condominio con vivaldi e bach",
-      "fallbackImage": "/images/blog/article-cantello-teatro-dialettale-ottobre-2026.webp",
-      "reason": "All image providers failed for article-concerto-gallarate-uto-ughi-2026: openai-codex (vision gate rejected image: Synthetic photorealistic theater scene with no readable text, log",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-16T11:26:51.536Z",
-      "lastFailureAt": "2026-10-16T11:26:51.536Z"
-    },
-    {
       "articleId": "mostre-maga-gallarate-2026",
       "title": "Gallarate: tre nuove mostre al Maga da Jago a Leopardi",
       "fallbackImage": "/images/blog/article-teatro-intred-varese-stagione-2026.webp",
-      "reason": "All image providers failed for article-mostre-maga-gallarate-2026: openai-codex (vision gate rejected image: Generic synthetic mountain landscape with no text, logos, or people, bu",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "image generation deadline exceeded",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-16T11:58:37.222Z",
-      "lastFailureAt": "2026-10-16T11:58:37.222Z"
+      "lastFailureAt": "2026-10-16T15:20:29.883Z"
     },
     {
       "articleId": "maratona-laghi-varese-2027",
       "title": "Maratona dei Laghi 2027: attesi 2000 runner tra Varese e Monate",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-maratona-laghi-varese-2027: openai-codex (vision gate rejected image: Synthetic photorealistic scenic illustration with no text, logos, or re",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-maratona-laghi-varese-2027: openai-codex (vision gate rejected image: Photorealistic synthetic illustration of runners beside a lake; no text, logos, or recognizable faces, but a prominent foreground r",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-16T13:10:19.548Z",
-      "lastFailureAt": "2026-10-16T13:10:19.548Z"
+      "lastFailureAt": "2026-10-16T15:21:27.833Z"
     },
     {
       "articleId": "dosso-gaggiolo-disagi-frontalieri",

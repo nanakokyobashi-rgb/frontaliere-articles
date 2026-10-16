@@ -612,6 +612,54 @@
       "firstSeenAt": "2026-10-16T13:30:56.156Z",
       "lastValidatedAt": "2026-10-16T13:30:56.156Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere tasse italia svizzera 2026 simulazione pratica",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T14:58:00.248Z",
+      "lastValidatedAt": "2026-10-16T14:58:00.248Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere tasse italia svizzera 2026 errori comuni",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T15:00:27.739Z",
+      "lastValidatedAt": "2026-10-16T15:00:27.739Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontalieri busta paga svizzera 2026",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T15:00:27.873Z",
+      "lastValidatedAt": "2026-10-16T15:00:27.873Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontalieri busta paga svizzera 2026 entro 20 km",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T15:09:28.206Z",
+      "lastValidatedAt": "2026-10-16T15:09:28.206Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -8937,10 +8985,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.swissinfo.ch/ita/casse-pensioni%2c-pi%c3%b9-investimenti-illiquidi%3a-opportunit%c3%a0-e-rischi/92215997": {
-      "section": "frontaliere",
-      "ts": 1791989471570
-    },
     "frontaliere::https://www.rsi.ch/s/4160788": {
       "section": "frontaliere",
       "ts": 1791990092032
@@ -9232,6 +9276,26 @@
     "frontaliere::https://www.vconews.it/2026/10/16/leggi-notizia/argomenti/scuola-e-formazione-9/articolo/verbania-il-cobianchi-festeggia-140-anni-di-storia-con-una-giornata-dedicata-agli-ex-studenti.html": {
       "section": "frontaliere",
       "ts": 1792157163443
+    },
+    "frontaliere::https://www.tio.ch/ticino/politica/1957258/val-colla-disagi-fino-al-2028-lugano-esclude-finanziamenti-straordinari": {
+      "section": "frontaliere",
+      "ts": 1792162172179
+    },
+    "frontaliere::https://www.rsi.ch/s/4161940": {
+      "section": "frontaliere",
+      "ts": 1792162181717
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/dallemergenza-regia-al-cuore-di-masnago-lanalisi-e-i-ricordi-di-marco-passera/2709283": {
+      "section": "frontaliere",
+      "ts": 1792162384946
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/solbiatese-ora-serve-continuita-al-chinetti-arriva-il-temuto-lentigione/2710426": {
+      "section": "frontaliere",
+      "ts": 1792162523204
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/kastritis-siamo-a-fianco-di-amedeo-a-trento-fondamentali-i-rimbalzi/2710186": {
+      "section": "frontaliere",
+      "ts": 1792162680014
     }
   }
 }
