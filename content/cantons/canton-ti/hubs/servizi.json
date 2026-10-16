@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T14:58:25.511Z",
-  "contentHash": "5b4256f065fcf1c50ea60f578e0a4e5c21fe0a3972c4f218460645e114ba9d6f",
+  "updatedAt": "2026-10-16T16:18:26.289Z",
+  "contentHash": "8328151b65bea9eb67b6cf3626c0037a25377fc96ba813117c42d587deb605e8",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -79,11 +79,6 @@
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
             {
-              "label": "Moderna",
-              "detail": "Bodio, Biasca e Valli",
-              "date": "2026-10-09T16:00:00.000Z"
-            },
-            {
               "label": "Farmacia Pharmaexpress",
               "detail": "Lugano, Luganese",
               "date": "2026-10-10T06:00:00.000Z"
@@ -107,6 +102,11 @@
               "label": "Semine",
               "detail": "Bellinzona, Bellinzonese",
               "date": "2026-10-16T16:30:00.000Z"
+            },
+            {
+              "label": "Ferregutti",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-17T06:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
@@ -295,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-16T14:58:25.511Z"
+      "updatedAt": "2026-10-16T16:18:26.289Z"
     },
     "en": {
       "canton": "TI",
@@ -342,11 +342,6 @@
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
             {
-              "label": "Moderna",
-              "detail": "Bodio, Biasca e Valli",
-              "date": "2026-10-09T16:00:00.000Z"
-            },
-            {
               "label": "Farmacia Pharmaexpress",
               "detail": "Lugano, Luganese",
               "date": "2026-10-10T06:00:00.000Z"
@@ -370,6 +365,11 @@
               "label": "Semine",
               "detail": "Bellinzona, Bellinzonese",
               "date": "2026-10-16T16:30:00.000Z"
+            },
+            {
+              "label": "Ferregutti",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-17T06:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
@@ -553,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-16T14:58:25.511Z"
+      "updatedAt": "2026-10-16T16:18:26.289Z"
     },
     "de": {
       "canton": "TI",
@@ -600,11 +600,6 @@
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
             {
-              "label": "Moderna",
-              "detail": "Bodio, Biasca e Valli",
-              "date": "2026-10-09T16:00:00.000Z"
-            },
-            {
               "label": "Farmacia Pharmaexpress",
               "detail": "Lugano, Luganese",
               "date": "2026-10-10T06:00:00.000Z"
@@ -628,6 +623,11 @@
               "label": "Semine",
               "detail": "Bellinzona, Bellinzonese",
               "date": "2026-10-16T16:30:00.000Z"
+            },
+            {
+              "label": "Ferregutti",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-17T06:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
@@ -811,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-16T14:58:25.511Z"
+      "updatedAt": "2026-10-16T16:18:26.289Z"
     },
     "fr": {
       "canton": "TI",
@@ -858,11 +858,6 @@
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
             {
-              "label": "Moderna",
-              "detail": "Bodio, Biasca e Valli",
-              "date": "2026-10-09T16:00:00.000Z"
-            },
-            {
               "label": "Farmacia Pharmaexpress",
               "detail": "Lugano, Luganese",
               "date": "2026-10-10T06:00:00.000Z"
@@ -886,6 +881,11 @@
               "label": "Semine",
               "detail": "Bellinzona, Bellinzonese",
               "date": "2026-10-16T16:30:00.000Z"
+            },
+            {
+              "label": "Ferregutti",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-17T06:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
@@ -1066,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-16T14:58:25.511Z"
+      "updatedAt": "2026-10-16T16:18:26.289Z"
     }
   }
 }
