@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T03:16:00.674Z",
-  "contentHash": "5ae262c5d6c30fb443bf9b27ecf7b18f53a2b1cef439d828813d726e33f0f7c0",
+  "updatedAt": "2026-10-16T10:23:56.350Z",
+  "contentHash": "e5213b77f864d09e6edb5cc44d124c4471f7f76ea3711583f557cebd7bbeaf9b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -19,7 +19,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-15T11:34:01.149Z",
+      "updatedAt": "2026-10-16T04:30:54.466Z",
       "keyFacts": 1
     },
     {
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "2",
-          "note": "offerta mediana 8000 CHF"
+          "note": "offerta mediana 8450 CHF"
         }
       ],
       "dataBlocks": [
@@ -115,7 +115,7 @@
           "items": [
             {
               "label": "TI426",
-              "value": "15.100 CHF",
+              "value": "16.000 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1540"
@@ -130,7 +130,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -255,7 +255,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-16T03:16:00.674Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "en": {
       "canton": "TI",
@@ -272,7 +272,7 @@
         {
           "label": "Plate auctions running",
           "value": "2",
-          "note": "typical bid 8,000 CHF"
+          "note": "typical bid 8,450 CHF"
         }
       ],
       "dataBlocks": [
@@ -343,7 +343,7 @@
           "items": [
             {
               "label": "TI426",
-              "value": "15,100 CHF",
+              "value": "16,000 CHF",
               "detail": "current bid",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1540"
@@ -358,7 +358,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -478,7 +478,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-16T03:16:00.674Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "de": {
       "canton": "TI",
@@ -495,7 +495,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "2",
-          "note": "mittleres Gebot 8’000 CHF"
+          "note": "mittleres Gebot 8’450 CHF"
         }
       ],
       "dataBlocks": [
@@ -566,7 +566,7 @@
           "items": [
             {
               "label": "TI426",
-              "value": "15’100 CHF",
+              "value": "16’000 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1540"
@@ -581,7 +581,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -701,7 +701,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-16T03:16:00.674Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "fr": {
       "canton": "TI",
@@ -718,7 +718,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "2",
-          "note": "offre centrale 8 000 CHF"
+          "note": "offre centrale 8 450 CHF"
         }
       ],
       "dataBlocks": [
@@ -789,7 +789,7 @@
           "items": [
             {
               "label": "TI426",
-              "value": "15 100 CHF",
+              "value": "16 000 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1540"
@@ -804,7 +804,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -921,7 +921,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-16T03:16:00.674Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     }
   }
 }

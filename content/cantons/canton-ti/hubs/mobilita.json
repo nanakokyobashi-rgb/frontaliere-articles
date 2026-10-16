@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T02:40:36.084Z",
-  "contentHash": "ce3529086e2e41f0db46343fa5b5c35c62e611d7ab74b45a303097ec9a3fc1d4",
+  "updatedAt": "2026-10-16T10:23:56.350Z",
+  "contentHash": "ae6caec1c8a1cc103f260e408ea2466c06c3b3cafcc00ae06aa3be37cb68cf4b",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T12:13:19.434Z",
+      "updatedAt": "2026-10-15T23:56:39.924Z",
       "keyFacts": 2
     },
     {
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "40",
+          "value": "42",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
@@ -123,9 +123,10 @@
               "date": "2026-09-21T14:56:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata",
+              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Svincolo autostradale Quinto Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsia d'emergenza…",
               "value": "Chiusura",
-              "date": "2026-10-15T09:32:00.000Z"
+              "detail": "fine prevista: 28 ottobre 2026",
+              "date": "2026-10-15T16:15:00.000Z"
             },
             {
               "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
@@ -140,24 +141,26 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 3.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 30",
+              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
               "value": "Traffico",
-              "date": "2026-10-15T09:31:00.000Z"
+              "date": "2026-10-15T23:56:39.924Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
             },
             {
-              "label": "Revocato: A2 S. Gottardo -> Chiasso tra Svincolo autostradale Chiasso Centro E Dogana Chiasso Brogeda Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-15T11:21:00.000Z"
+              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
+              "value": "Cantiere",
+              "detail": "fine prevista: 29 dicembre 2028",
+              "date": "2021-06-25T03:00:00.000Z"
             },
             {
-              "label": "Incidente della circolazione stradale nel Mendrisiotto",
-              "value": "Traffico",
-              "date": "2026-10-15T12:13:19.434Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261190"
+              "label": "A2 Chiasso -> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 29 dicembre 2028",
+              "date": "2022-04-20T03:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -290,7 +293,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T02:40:36.084Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "en": {
       "canton": "TI",
@@ -310,7 +313,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "40",
+          "value": "42",
           "note": "reports as of 15 October 2026"
         }
       ],
@@ -391,9 +394,10 @@
               "date": "2026-09-21T14:56:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata",
+              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Svincolo autostradale Quinto Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsia d'emergenza…",
               "value": "Closure",
-              "date": "2026-10-15T09:32:00.000Z"
+              "detail": "until 28 October 2026",
+              "date": "2026-10-15T16:15:00.000Z"
             },
             {
               "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
@@ -408,24 +412,26 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 3.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 30",
+              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
               "value": "Traffic",
-              "date": "2026-10-15T09:31:00.000Z"
+              "date": "2026-10-15T23:56:39.924Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
             },
             {
-              "label": "Revocato: A2 S. Gottardo -> Chiasso tra Svincolo autostradale Chiasso Centro E Dogana Chiasso Brogeda Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-15T11:21:00.000Z"
+              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
+              "value": "Roadworks",
+              "detail": "until 29 December 2028",
+              "date": "2021-06-25T03:00:00.000Z"
             },
             {
-              "label": "Incidente della circolazione stradale nel Mendrisiotto",
-              "value": "Traffic",
-              "date": "2026-10-15T12:13:19.434Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261190"
+              "label": "A2 Chiasso -> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
+              "value": "Roadworks",
+              "detail": "until 29 December 2028",
+              "date": "2022-04-20T03:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -557,7 +563,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T02:40:36.084Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "de": {
       "canton": "TI",
@@ -577,7 +583,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "40",
+          "value": "42",
           "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
@@ -658,9 +664,10 @@
               "date": "2026-09-21T14:56:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
+              "label": "A2 Chiasso -> Gotthard zwischen Anschluss Faido und Anschluss Quinto Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Verkehrsführung: Pannenstreifen gesperrt Zusatz 1: vorübergehende…",
               "value": "Sperrung",
-              "date": "2026-10-15T09:32:00.000Z"
+              "detail": "bis 28. Oktober 2026",
+              "date": "2026-10-15T16:15:00.000Z"
             },
             {
               "label": "A13 Bellinzona <-> Chur zwischen Anschluss San Bernardino und Anschluss San Bernardino-Pass Sachlage: Strecke gesperrt Baustelle, Länge [km] 7.5",
@@ -675,24 +682,26 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 3.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 30",
+              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
               "value": "Verkehr",
-              "date": "2026-10-15T09:31:00.000Z"
+              "date": "2026-10-15T23:56:39.924Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
             },
             {
-              "label": "Aufgehoben: A2 Gotthard -> Chiasso zwischen Anschluss Chiasso-Centro und Zollstation Chiasso-Brogeda Sachlage: Stau Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-15T11:21:00.000Z"
+              "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
+              "value": "Baustelle",
+              "detail": "bis 29. Dezember 2028",
+              "date": "2021-06-25T03:00:00.000Z"
             },
             {
-              "label": "Incidente della circolazione stradale nel Mendrisiotto",
-              "value": "Verkehr",
-              "date": "2026-10-15T12:13:19.434Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261190"
+              "label": "A2 Chiasso -> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
+              "value": "Baustelle",
+              "detail": "bis 29. Dezember 2028",
+              "date": "2022-04-20T03:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -824,7 +833,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T02:40:36.084Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "fr": {
       "canton": "TI",
@@ -844,7 +853,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "40",
+          "value": "42",
           "note": "signalements au 15 octobre 2026"
         }
       ],
@@ -925,9 +934,10 @@
               "date": "2026-09-21T14:56:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
+              "label": "A2 Chiasso -> St-Gothard entre Jonction autoroutière Faido et Jonction autoroutière Quinto Situation: trafic perturbé travaux, longueur [km] 0.1 Gestion du trafic: bande d'arrêt d'urgence fermée…",
               "value": "Fermeture",
-              "date": "2026-10-15T09:32:00.000Z"
+              "detail": "jusqu’au 28 octobre 2026",
+              "date": "2026-10-15T16:15:00.000Z"
             },
             {
               "label": "A13 Bellinzone <-> Coire entre Jonction autoroutière San Bernardino et Jonction autoroutière San Bernardino-Pass Situation: fermé travaux, longueur [km] 7.5",
@@ -942,24 +952,26 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 3.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 30",
+              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
               "value": "Trafic",
-              "date": "2026-10-15T09:31:00.000Z"
+              "date": "2026-10-15T23:56:39.924Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
             },
             {
-              "label": "Révoqué: A2 St-Gothard -> Chiasso entre Jonction autoroutière Chiasso-Centro et Poste de douane Chiasso-Brogeda Situation: bouchon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-15T11:21:00.000Z"
+              "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
+              "value": "Chantier",
+              "detail": "jusqu’au 29 décembre 2028",
+              "date": "2021-06-25T03:00:00.000Z"
             },
             {
-              "label": "Incidente della circolazione stradale nel Mendrisiotto",
-              "value": "Trafic",
-              "date": "2026-10-15T12:13:19.434Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261190"
+              "label": "A2 Chiasso -> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de…",
+              "value": "Chantier",
+              "detail": "jusqu’au 29 décembre 2028",
+              "date": "2022-04-20T03:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1092,7 +1104,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T02:40:36.084Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     }
   }
 }

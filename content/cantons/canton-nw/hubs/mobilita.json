@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T03:02:31.746Z",
-  "contentHash": "1b9e4bd06c4a2e35ab2457e56d7e73af88b8fe67378f42120dbd15c6a3ed4781",
+  "updatedAt": "2026-10-16T10:23:56.350Z",
+  "contentHash": "b446cbde3c48c158aec45cb4c3322cbae2c59cda9435212e09ea8ba4364a0323",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T12:13:19.434Z",
+      "updatedAt": "2026-10-15T23:56:39.924Z",
       "keyFacts": 2
     },
     {
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "5",
+          "value": "4",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -157,7 +157,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "en": {
       "canton": "NW",
@@ -172,7 +172,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "5",
+          "value": "4",
           "note": "reports as of 15 October 2026"
         }
       ],
@@ -232,7 +232,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -297,7 +297,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "de": {
       "canton": "NW",
@@ -312,7 +312,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "5",
+          "value": "4",
           "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
@@ -372,7 +372,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -437,7 +437,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "fr": {
       "canton": "NW",
@@ -452,7 +452,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "5",
+          "value": "4",
           "note": "signalements au 15 octobre 2026"
         }
       ],
@@ -512,7 +512,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -577,7 +577,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     }
   }
 }

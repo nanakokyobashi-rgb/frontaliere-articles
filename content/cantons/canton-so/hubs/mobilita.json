@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T03:02:31.746Z",
-  "contentHash": "4467ed1f661c43fd8c39a2b47f53e86503ac617f8d8d0f999c00b25bb527df2d",
+  "updatedAt": "2026-10-16T10:23:56.350Z",
+  "contentHash": "d479edfbc536b0ad25f81700948fe74a755b02f3be256f7eb9bb152245e1ffea",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T12:13:19.434Z",
+      "updatedAt": "2026-10-15T23:56:39.924Z",
       "keyFacts": 2
     },
     {
@@ -85,13 +85,14 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A5 Bienne -> Solothurn tra Svincolo autostradale Solothurn Ost E Raccordo autostradale Diramazione Luterbach Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-15T11:59:00.000Z"
+              "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
+              "value": "Cantiere",
+              "detail": "fine prevista: 31 dicembre 2028",
+              "date": "2024-12-30T04:49:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -148,7 +149,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "en": {
       "canton": "SO",
@@ -216,13 +217,14 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A5 Bienne -> Solothurn tra Svincolo autostradale Solothurn Ost E Raccordo autostradale Diramazione Luterbach Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-15T11:59:00.000Z"
+              "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
+              "value": "Roadworks",
+              "detail": "until 31 December 2028",
+              "date": "2024-12-30T04:49:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -278,7 +280,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "de": {
       "canton": "SO",
@@ -346,13 +348,14 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A5 Biel -> Solothurn zwischen Anschluss Solothurn-Ost und Autobahndreieck Verzweigung Luterbach Sachlage: Stau Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-15T11:59:00.000Z"
+              "label": "Balsthal <-> Laufen zwischen Ortschaft Oberbeinwil und Pass Passwang Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung",
+              "value": "Baustelle",
+              "detail": "bis 31. Dezember 2028",
+              "date": "2024-12-30T04:49:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -408,7 +411,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "fr": {
       "canton": "SO",
@@ -476,13 +479,14 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A5 Bienne -> Soleure entre Jonction autoroutière Soleure-Est et Echangeur Echangeur de Luterbach Situation: bouchon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-15T11:59:00.000Z"
+              "label": "Balsthal <-> Laufon entre Localité Oberbeinwil et Col Passwang Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies",
+              "value": "Chantier",
+              "detail": "jusqu’au 31 décembre 2028",
+              "date": "2024-12-30T04:49:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -539,7 +543,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T01:56:54.479Z",
-  "contentHash": "fcbc6e54ddc690401441f65f358f6c3b7a4fcc39ba804a5c3b1b8357913c1760",
+  "updatedAt": "2026-10-16T10:23:56.350Z",
+  "contentHash": "2d6be12f68ea5ec6f9afcb7203794fb52416c3f1296eaa12831c8398df5226f3",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-15T11:34:01.149Z",
+      "updatedAt": "2026-10-16T04:30:54.466Z",
       "keyFacts": 1
     },
     {
@@ -71,23 +71,23 @@
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1593"
             },
             {
+              "label": "SZ10797",
+              "value": "1500 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-27T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1597"
+            },
+            {
               "label": "SZ29900",
               "value": "1500 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-27T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1602"
-            },
-            {
-              "label": "SZ10797",
-              "value": "1100 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-27T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1597"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -204,7 +204,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "en": {
       "canton": "SZ",
@@ -253,23 +253,23 @@
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1593"
             },
             {
+              "label": "SZ10797",
+              "value": "1,500 CHF",
+              "detail": "current bid",
+              "date": "2026-10-27T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1597"
+            },
+            {
               "label": "SZ29900",
               "value": "1,500 CHF",
               "detail": "current bid",
               "date": "2026-10-27T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1602"
-            },
-            {
-              "label": "SZ10797",
-              "value": "1,100 CHF",
-              "detail": "current bid",
-              "date": "2026-10-27T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1597"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -382,7 +382,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "de": {
       "canton": "SZ",
@@ -431,23 +431,23 @@
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1593"
             },
             {
+              "label": "SZ10797",
+              "value": "1’500 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-27T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1597"
+            },
+            {
               "label": "SZ29900",
               "value": "1’500 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-27T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1602"
-            },
-            {
-              "label": "SZ10797",
-              "value": "1’100 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-27T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1597"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -560,7 +560,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "fr": {
       "canton": "SZ",
@@ -609,23 +609,23 @@
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1593"
             },
             {
+              "label": "SZ10797",
+              "value": "1 500 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-27T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1597"
+            },
+            {
               "label": "SZ29900",
               "value": "1 500 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-27T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1602"
-            },
-            {
-              "label": "SZ10797",
-              "value": "1 100 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-27T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1597"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -734,7 +734,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     }
   }
 }

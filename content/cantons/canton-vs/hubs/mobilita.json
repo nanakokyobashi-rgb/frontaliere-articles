@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T04:36:57.811Z",
-  "contentHash": "8849f684c4953585089d80682d40aee8a5f717960f60233542d823d80496a1ac",
+  "updatedAt": "2026-10-16T10:23:56.350Z",
+  "contentHash": "387ef06a941e88f2389972c1a7cdd6f6ac275f67206eb0fdd438f8c5139dbc9c",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T12:13:19.434Z",
+      "updatedAt": "2026-10-15T23:56:39.924Z",
       "keyFacts": 2
     },
     {
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "18",
+          "value": "17",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         },
         {
@@ -142,7 +142,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -243,7 +243,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T04:36:57.811Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "en": {
       "canton": "VS",
@@ -258,7 +258,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "18",
+          "value": "17",
           "note": "reports as of 15 October 2026"
         },
         {
@@ -363,7 +363,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -464,7 +464,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T04:36:57.811Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "de": {
       "canton": "VS",
@@ -479,7 +479,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "18",
+          "value": "17",
           "note": "Meldungen vom 15. Oktober 2026"
         },
         {
@@ -584,7 +584,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -685,7 +685,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T04:36:57.811Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "fr": {
       "canton": "VS",
@@ -700,7 +700,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "18",
+          "value": "17",
           "note": "signalements au 15 octobre 2026"
         },
         {
@@ -805,7 +805,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -906,7 +906,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T04:36:57.811Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     }
   }
 }
