@@ -1702,10 +1702,13 @@ function atomicallyReplaceEvergreenRejectedTracker(path, tracker, opts = {}) {
     try {
       (opts._syncDirectoryForTest || syncEvergreenLedgerDirectory)(directory);
     } catch (error) {
-      // The rename is already committed and cannot be rolled back safely. A
-      // directory fsync is a durability hint, so report its failure without
-      // making callers treat the committed ledger update as uncommitted.
-      console.warn(`[generator] evergreen ledger ${path} was replaced, but directory fsync failed: ${error.message}`);
+      // The rename is already committed and cannot be rolled back safely.
+      // Propagate unexpected durability failures, but make the committed state
+      // explicit so callers do not mistake this for a pre-commit failure.
+      error.ledgerCommitted = true;
+      error.phase = 'post-rename-directory-fsync';
+      error.message = `Evergreen ledger ${path} was replaced, but directory fsync failed: ${error.message}`;
+      throw error;
     }
   } catch (error) {
     if (fd !== undefined) closeSync(fd);

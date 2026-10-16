@@ -129,12 +129,12 @@ test('un crash prima del rename lascia il ledger precedente intatto e il lock re
   }
 });
 
-test('un errore di fsync directory dopo il rename non segnala un rollback inesistente', (t) => {
+test('un errore inatteso di fsync directory dopo il rename è propagato come già committato', (t) => {
   const { directory, file } = fixture();
   t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
   persistEvergreenRejectedTrackerAtomically(() => seededTracker(), { path: file });
 
-  const updated = persistEvergreenRejectedTrackerAtomically(
+  assert.throws(() => persistEvergreenRejectedTrackerAtomically(
     (tracker) => appendEvergreenRejected(tracker, 'committed-before-fsync-error', {
       context: CONTEXT,
       now: Date.now(),
@@ -147,10 +147,16 @@ test('un errore di fsync directory dopo il rename non segnala un rollback inesis
         throw error;
       },
     },
-  );
+  ), (error) => {
+    assert.equal(error.code, 'EIO');
+    assert.equal(error.ledgerCommitted, true);
+    assert.equal(error.phase, 'post-rename-directory-fsync');
+    assert.match(error.message, /was replaced, but directory fsync failed/);
+    return true;
+  });
 
-  assert.ok(updated.bans.some((entry) => entry.keyword === 'committed-before-fsync-error'));
-  assert.deepEqual(loadEvergreenRejectedTracker({ path: file }), updated);
+  const persisted = loadEvergreenRejectedTracker({ path: file });
+  assert.ok(persisted.bans.some((entry) => entry.keyword === 'committed-before-fsync-error'));
 });
 
 test('un reaper interrotto viene recuperato prima della prossima scrittura', async () => {
