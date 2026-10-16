@@ -42,6 +42,9 @@ on:
       - 'generator/scripts/refresh-events-dataset.mjs'
       - 'generator/scripts/lib/rewire-fetch.mjs'
       - 'generator/scripts/lib/events-digest-content.mjs'
+      - 'generator/scripts/lib/events-digest-marker.mjs'
+      - 'generator/scripts/lib/events-digest-localization.mjs'
+      - 'generator/scripts/lib/localized-toponyms.mjs'
       - 'generator/scripts/lib/events-digest-meta.mjs'
       - 'generator/scripts/lib/events-utils.mjs'
   workflow_dispatch:
