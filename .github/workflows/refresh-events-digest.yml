@@ -173,9 +173,9 @@ jobs:
           IFS=',' read -r -a CANTONS <<< "$DIGEST_CANTONS"
           IFS=',' read -r -a SECTIONS <<< "$DIGEST_SECTIONS"
           for i in "${!CANTONS[@]}"; do
-            if [ -n "${SECTIONS[$i]}" ]; then
+            if [ -n "${SECTIONS[$i]-}" ]; then
               node generator/scripts/generate-events-digest-article.mjs \
-                --section="${SECTIONS[$i]}" --canton "${CANTONS[$i]}"
+                --section="${SECTIONS[$i]-}" --canton "${CANTONS[$i]}"
             else
               node generator/scripts/generate-events-digest-article.mjs
             fi
@@ -286,7 +286,7 @@ jobs:
             IFS=',' read -r -a SECTIONS <<< "$SECTION_LIST"
             for i in "${!CANTONS[@]}"; do
               CANTON="${CANTONS[$i]}"
-              SECTION="${SECTIONS[$i]}"
+              SECTION="${SECTIONS[$i]-}"
               if [ -z "$SECTION" ]; then
                 COMMIT_MESSAGE="Refresh the weekend events digest"
                 git add content/blog-body/it/eventi-weekend-ticino.ts \
