@@ -1034,6 +1034,7 @@ const locale = (localeCode, topic, intro = HUB_TEST_INTRO) => ({
   keyFacts: [],
   dataBlocks: [],
   curatedArticles: [],
+  latestCantonArticles: [],
   links: [],
   updatedAt: '2026-10-05T00:00:00Z',
 });
@@ -1060,6 +1061,10 @@ test('hub: un solo posto sa dove sta il file dati; assente = hub non pubblicato'
   assert.equal(readCantonHubData(root, 'canton-ti', 'carburanti'), null);
   assert.equal(readCantonHubData(root, 'canton-ti', 'fisco').de.intro, HUB_TEST_INTRO);
   assert.equal(readCantonHubData(root, 'canton-ti', 'eventi').fr.intro, HUB_TEST_INTRO);
+  const legacy = hubDocument('servizi');
+  for (const entry of Object.values(legacy.locales)) delete entry.latestCantonArticles;
+  const legacyRoot = hubRoot({ 'content/cantons/canton-ti/hubs/servizi.json': legacy });
+  assert.equal(readCantonHubData(legacyRoot, 'canton-ti', 'servizi').it.curatedArticles.length, 0, 'i documenti pre-fallback restano leggibili durante il refresh');
   assert.deepEqual(cantonHubCoverage(root, 'canton-ti'), { present: ['fisco', 'eventi'], missing: ['carburanti', 'mobilita', 'pensioni', 'servizi'] });
   assert.throws(() => readCantonHubData(root, 'canton-ti', 'boh'), /sconosciuto/);
   assert.throws(() => cantonHubTopics('svizzera'), /hub tematici/);
