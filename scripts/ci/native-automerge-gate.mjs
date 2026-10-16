@@ -844,6 +844,7 @@ export function withTransientGithubReadRetry(operation, {
   maxAttempts = MAX_TRANSIENT_GH_READ_ATTEMPTS,
   delaysMs = TRANSIENT_GH_READ_RETRY_DELAYS_MS,
   sleep = sleepForTransientReadRetry,
+  retryResult = () => false,
 } = {}) {
   if (typeof operation !== 'function') throw new TypeError('read retry operation must be a function');
   const attempts = Number.isSafeInteger(maxAttempts) && maxAttempts > 0
@@ -851,15 +852,22 @@ export function withTransientGithubReadRetry(operation, {
     : MAX_TRANSIENT_GH_READ_ATTEMPTS;
   const delays = Array.isArray(delaysMs) ? delaysMs : TRANSIENT_GH_READ_RETRY_DELAYS_MS;
   const wait = typeof sleep === 'function' ? sleep : sleepForTransientReadRetry;
+  const shouldRetryResult = typeof retryResult === 'function' ? retryResult : () => false;
 
   for (let attempt = 0; attempt < attempts; attempt += 1) {
+    let result;
     try {
-      return operation();
+      result = operation();
     } catch (error) {
       if (attempt + 1 >= attempts || !isTransientGithubReadError(error)) throw error;
       const delayMs = Number(delays[attempt]);
       if (Number.isFinite(delayMs) && delayMs > 0) wait(delayMs);
+      continue;
     }
+
+    if (attempt + 1 >= attempts || !shouldRetryResult(result)) return result;
+    const delayMs = Number(delays[attempt]);
+    if (Number.isFinite(delayMs) && delayMs > 0) wait(delayMs);
   }
   throw new Error('read retry exhausted without an attempt');
 }
@@ -1174,15 +1182,29 @@ function capturedErrorOutput(error) {
     .join('\n');
 }
 
-/** Confirm that a concurrent opt-in achieved the intended state before going green. */
-function concurrentOptInSucceeded(repo, prNumber, expectedHead) {
+function isPendingConcurrentOptInResult(observed, expectedHead) {
+  return observed?.state === 'OPEN'
+    && observed.headRefOid === expectedHead
+    && observed.autoMergeRequest === null;
+}
+
+function isConfirmedConcurrentOptInResult(observed, expectedHead) {
+  if (!observed || typeof observed !== 'object' || Array.isArray(observed)) return false;
+  if (observed.state === 'MERGED') return true;
+  return observed.state === 'OPEN'
+    && observed.headRefOid === expectedHead
+    && observed.autoMergeRequest !== null
+    && typeof observed.autoMergeRequest === 'object';
+}
+
+/** Confirm a concurrent opt-in, retrying only its recognizable stale read result. */
+export function concurrentOptInSucceeded(readPullRequest, expectedHead, retryOptions = {}) {
   try {
-    const observed = ghReadJson(['pr', 'view', prNumber, '--repo', repo, '--json',
-      'state,headRefOid,autoMergeRequest']);
-    if (observed.state === 'MERGED') return true;
-    return observed.state === 'OPEN'
-      && observed.headRefOid === expectedHead
-      && observed.autoMergeRequest !== null;
+    const observed = withTransientGithubReadRetry(readPullRequest, {
+      ...retryOptions,
+      retryResult: (result) => isPendingConcurrentOptInResult(result, expectedHead),
+    });
+    return isConfirmedConcurrentOptInResult(observed, expectedHead);
   } catch {
     return false;
   }
@@ -1337,7 +1359,11 @@ function main() {
   } catch (error) {
     const details = capturedErrorOutput(error);
     if (isAlreadyInProgressOutput(details)
-      && concurrentOptInSucceeded(repo, prNumber, pr.headRefOid)) {
+      && concurrentOptInSucceeded(
+        () => JSON.parse(ghRaw(['pr', 'view', prNumber, '--repo', repo, '--json',
+          'state,headRefOid,autoMergeRequest'])),
+        pr.headRefOid,
+      )) {
       console.log(`Native auto-merge guard: opt-in concorrente confermato per PR #${prNumber} sulla HEAD corrente`);
       return;
     }
