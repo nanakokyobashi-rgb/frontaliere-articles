@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/newsblog/verita-immobiliari/1948267/senza-empatia-non-sai-fare-questo-lavoro": {
-    "articleId": "empatia-lavoro-immobiliare-ticino",
-    "ts": "2026-09-07T07:11:01.196Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/disoccupazione%3a-tasso-al-3%2c0%25%2c-stabile-su-mese-ma-in-aumento-annuo/92014348": {
     "articleId": "disoccupazione-stabile-ticino-2024",
     "ts": "2026-09-07T07:20:24.696Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/rubriche/ospite/1957335/giovani-futuro-lavoro-luca-frasa": {
     "articleId": "giovani-lavoro-futuro-ticino",
     "ts": "2026-10-16T17:37:12.237Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/ne-numeri-ne-percentuali-la-rabbia-dei-lavoratori-barco-di-saronno-dopo-lannuncio-del-trasferimento-in-cina/2710603": {
+    "articleId": "saronno-produzione-cina-protesta",
+    "ts": "2026-10-16T18:15:03.462Z",
     "keyForm": 2
   }
 }
