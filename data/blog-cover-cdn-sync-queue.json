@@ -1,4 +1,21 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-saronno-produzione-cina-protesta.webp",
+      "sha256": "a27bcc3c33b41a12023231f6f42c8b2d6a5602b059b10559720dd9cb50592f9a"
+    },
+    {
+      "path": "public/images/blog/article-stadler-rail-treno-idrogeno-sardegna.webp",
+      "sha256": "9d460818c48c80b4c90d97043cdc14442bf021f16f4bfd0908bc51443090c543"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-saronno-produzione-cina-protesta-480w.webp",
+      "sha256": "3c1c5603b71bbe58d155f1c0b48759f0bb7510ac8124734faeddd157f3855a55"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-stadler-rail-treno-idrogeno-sardegna-480w.webp",
+      "sha256": "961d9af2f239e1ce28122110f56090a5e14212b6c9f78ea507b49282e129d278"
+    }
+  ]
 }
