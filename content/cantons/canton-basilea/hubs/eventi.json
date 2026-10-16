@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T00:06:40.869Z",
-  "contentHash": "c53e8aa20466734df28634b9bb248bde9c05e0d2f6c30da588d496fa2da5c97e",
+  "updatedAt": "2026-10-16T00:00:55.142Z",
+  "contentHash": "1bd2de5dff7fab18d08e97718202ad31d642c77dbc41165f58ec8910407fc8fd",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-14T13:57:52.093Z",
+      "updatedAt": "2026-10-15T13:57:57.453Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "102",
+          "value": "106",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,42 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "8 octopi",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/8-octopi_AJkNLfX"
-            },
-            {
-              "label": "Circolo dei cantautori di Liestal",
-              "detail": "Kulturscheune, Liestal",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/eventi/musica/liestal/circolo-dei-cantautori-di-liestal_A1P1YCv"
-            },
-            {
-              "label": "Frank Richter - #Lovemyjob",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frank-richter-lovemyjob/"
-            },
-            {
-              "label": "Lesung: Ruth Wittig - Danke, wir können nicht klagen",
-              "detail": "Haus der Vereine, Riehen",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesung-ruth-wittig-danke-wir-koennen-nicht-klagen/"
-            },
-            {
-              "label": "Stéphanie Berger - Shine - fertig mit chli",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/stephanie-berger-shine-fertig-mit-chli/"
-            },
-            {
-              "label": "Römer-Weekends",
-              "detail": "Augusta Raurica, Augst — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
-            },
             {
               "label": "ADHD",
               "detail": "the bird's eye jazz club",
@@ -91,11 +55,47 @@
               "detail": "Sissach",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/von-bts-bis-anime/"
+            },
+            {
+              "label": "Hoi Leni! Helene Bossert vertont",
+              "detail": "cheesmeyer, Sissach",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sissach/hoi-leni-helene-bossert-vertont_Aqbh7qY"
+            },
+            {
+              "label": "Baloise Session: MARK FORSTER | KAMRAD",
+              "detail": "Messe Basel, Basel",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/events/music/basel/baloise-session-mark-forster-kamrad_AwNYVYn"
+            },
+            {
+              "label": "Bänz Friedli - Bänz Friedli räumt auf",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/baenz-friedli-baenz-friedli-raeumt-auf/"
+            },
+            {
+              "label": "Lennart Schilgen - Abwesenheitsnotizen",
+              "detail": "Theater Fauteuil",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lennart-schilgen-abwesenheitsnotizen_AeNQTKg"
+            },
+            {
+              "label": "Lennart Schilgen - Abwesenheitsnotizen",
+              "detail": "Basel",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lennart-schilgen-abwesenheitsnotizen/"
+            },
+            {
+              "label": "Starken Stimmen - Zonta Poetry Slam",
+              "detail": "Basel",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starken-stimmen-zonta-poetry-slam/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -116,7 +116,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -126,7 +126,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "102",
+          "value": "106",
           "note": "from the site’s events calendar"
         }
       ],
@@ -136,42 +136,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "8 octopi",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/8-octopi_AJkNLfX"
-            },
-            {
-              "label": "Liestal Songwriters' Circle",
-              "detail": "Kulturscheune, Liestal",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/eventi/musica/liestal/circolo-dei-cantautori-di-liestal_A1P1YCv"
-            },
-            {
-              "label": "Frank Richter - #Lovemyjob",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frank-richter-lovemyjob/"
-            },
-            {
-              "label": "Lesung: Ruth Wittig - Danke, wir können nicht klagen",
-              "detail": "Haus der Vereine, Riehen",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesung-ruth-wittig-danke-wir-koennen-nicht-klagen/"
-            },
-            {
-              "label": "Stéphanie Berger - Shine - fertig mit chli",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/stephanie-berger-shine-fertig-mit-chli/"
-            },
-            {
-              "label": "Römer-Weekends",
-              "detail": "Augusta Raurica, Augst — ongoing, last day: 18 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
-            },
             {
               "label": "ADHD",
               "detail": "the bird's eye jazz club",
@@ -195,11 +159,47 @@
               "detail": "Sissach",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/von-bts-bis-anime/"
+            },
+            {
+              "label": "Hoi Leni! Helene Bossert vertont",
+              "detail": "cheesmeyer, Sissach",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sissach/hoi-leni-helene-bossert-vertont_Aqbh7qY"
+            },
+            {
+              "label": "Baloise Session: MARK FORSTER | KAMRAD",
+              "detail": "Messe Basel, Basel",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/events/music/basel/baloise-session-mark-forster-kamrad_AwNYVYn"
+            },
+            {
+              "label": "Bänz Friedli - Bänz Friedli räumt auf",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/baenz-friedli-baenz-friedli-raeumt-auf/"
+            },
+            {
+              "label": "Lennart Shilgen - Abwesenheitsnotizen",
+              "detail": "Theater Fauteuil",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lennart-schilgen-abwesenheitsnotizen_AeNQTKg"
+            },
+            {
+              "label": "Lennart Schilgen - Abwesenheitsnotizen",
+              "detail": "Basel",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lennart-schilgen-abwesenheitsnotizen/"
+            },
+            {
+              "label": "Starken Stimmen - Zonta Poetry Slam",
+              "detail": "Basel",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starken-stimmen-zonta-poetry-slam/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -220,7 +220,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -230,7 +230,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "102",
+          "value": "106",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -240,42 +240,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "8 octopi",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/8-octopi_AJkNLfX"
-            },
-            {
-              "label": "Songwriter Circle Liestal",
-              "detail": "Kulturscheune, Liestal",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/eventi/musica/liestal/circolo-dei-cantautori-di-liestal_A1P1YCv"
-            },
-            {
-              "label": "Frank Richter - #Lovemyjob",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frank-richter-lovemyjob/"
-            },
-            {
-              "label": "Lesung: Ruth Wittig - Danke, wir können nicht klagen",
-              "detail": "Haus der Vereine, Riehen",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesung-ruth-wittig-danke-wir-koennen-nicht-klagen/"
-            },
-            {
-              "label": "Stéphanie Berger - Shine - fertig mit chli",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/stephanie-berger-shine-fertig-mit-chli/"
-            },
-            {
-              "label": "Römer-Weekends",
-              "detail": "Augusta Raurica, Augst — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
-            },
             {
               "label": "ADHD",
               "detail": "the bird's eye jazz club",
@@ -299,11 +263,47 @@
               "detail": "Sissach",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/von-bts-bis-anime/"
+            },
+            {
+              "label": "Hoi Leni! Helene Bossert vertont",
+              "detail": "cheesmeyer, Sissach",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sissach/hoi-leni-helene-bossert-vertont_Aqbh7qY"
+            },
+            {
+              "label": "Baloise Session: MARK FORSTER | KAMRAD",
+              "detail": "Messe Basel, Basel",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/events/music/basel/baloise-session-mark-forster-kamrad_AwNYVYn"
+            },
+            {
+              "label": "Bänz Friedli - Bänz Friedli räumt auf",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/baenz-friedli-baenz-friedli-raeumt-auf/"
+            },
+            {
+              "label": "Lennart Schilgen – Abwesenheitsnotizen",
+              "detail": "Theater Fauteuil",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lennart-schilgen-abwesenheitsnotizen_AeNQTKg"
+            },
+            {
+              "label": "Lennart Schilgen - Abwesenheitsnotizen",
+              "detail": "Basel",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lennart-schilgen-abwesenheitsnotizen/"
+            },
+            {
+              "label": "Starken Stimmen - Zonta Poetry Slam",
+              "detail": "Basel",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starken-stimmen-zonta-poetry-slam/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -324,7 +324,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -334,7 +334,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "102",
+          "value": "106",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -344,42 +344,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "8 octopi",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/8-octopi_AJkNLfX"
-            },
-            {
-              "label": "Cercle des auteurs-compositeurs de Liestal",
-              "detail": "Kulturscheune, Liestal",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/eventi/musica/liestal/circolo-dei-cantautori-di-liestal_A1P1YCv"
-            },
-            {
-              "label": "Frank Richter - #Lovemyjob",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frank-richter-lovemyjob/"
-            },
-            {
-              "label": "Lesung: Ruth Wittig - Danke, wir können nicht klagen",
-              "detail": "Haus der Vereine, Riehen",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesung-ruth-wittig-danke-wir-koennen-nicht-klagen/"
-            },
-            {
-              "label": "Stéphanie Berger - Shine - fertig mit chli",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/stephanie-berger-shine-fertig-mit-chli/"
-            },
-            {
-              "label": "Römer-Weekends",
-              "detail": "Augusta Raurica, Augst — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
-            },
             {
               "label": "ADHD",
               "detail": "the bird's eye jazz club",
@@ -403,11 +367,47 @@
               "detail": "Sissach",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/von-bts-bis-anime/"
+            },
+            {
+              "label": "Hoi Leni! Helene Bossert vertont",
+              "detail": "cheesmeyer, Sissach",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sissach/hoi-leni-helene-bossert-vertont_Aqbh7qY"
+            },
+            {
+              "label": "Baloise Session: MARK FORSTER | KAMRAD",
+              "detail": "Messe Basel, Basel",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/events/music/basel/baloise-session-mark-forster-kamrad_AwNYVYn"
+            },
+            {
+              "label": "Bänz Friedli - Bänz Friedli räumt auf",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/baenz-friedli-baenz-friedli-raeumt-auf/"
+            },
+            {
+              "label": "Lennart Schilgen - Notes d'absence",
+              "detail": "Theater Fauteuil",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lennart-schilgen-abwesenheitsnotizen_AeNQTKg"
+            },
+            {
+              "label": "Lennart Schilgen - Abwesenheitsnotizen",
+              "detail": "Basel",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lennart-schilgen-abwesenheitsnotizen/"
+            },
+            {
+              "label": "Starken Stimmen - Zonta Poetry Slam",
+              "detail": "Basel",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starken-stimmen-zonta-poetry-slam/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -428,7 +428,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     }
   }
 }

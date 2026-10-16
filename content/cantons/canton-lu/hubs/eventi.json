@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T21:03:09.722Z",
-  "contentHash": "843f470c696780b36ba7ad217e8b91ae96f33662531fd8960b0fdb76ab69a727",
+  "updatedAt": "2026-10-16T00:00:55.142Z",
+  "contentHash": "0e3877defc5759fae5575fac7554f2622d248fe0dccafa1fd3c189c4553881af",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "87",
+          "value": "82",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "SONNFELS Spaziergang – Zwangsstörungen verstehen",
-              "detail": "Verkehrshaus-Lido am Bootsanlegesteg, Luzern, Luzern",
-              "date": "2026-10-15",
-              "url": "https://www.ow.ch/_rte/anlass/94708"
+              "label": "Tanzweekend",
+              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/events/music/fluehli-lu/dance-weekend_AJPRiSW"
             },
             {
-              "label": "Pilz Tage Hasle - ein 4-Tages-Pilzkurs",
-              "detail": "Heiligkreuz",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pilz-tage-hasle-ein-4-tages-pilzkurs/"
+              "label": "Dance Weekend",
+              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tanzweekend/"
             },
             {
-              "label": "Tanznachmittag mit Live-Musik im Jlge-Saal",
-              "detail": "Landgasthaus Jlge, Ettiswil",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/tanznachmittag-mit-live-musik-im-jlge-saal_AEBdS5y"
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-10-16",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
             },
             {
-              "label": "Kurs Urban Sketching – Schüpfheim | 15.10.2026",
-              "detail": "Schüpfheim",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-urban-sketching-schuepfheim-15102026/"
+              "label": "Kurs Salben herstellen | 16.10.2026",
+              "detail": "Escholzmatt",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-in-der-salbenkueche-16102026/"
             },
             {
-              "label": "Im Gespräch über Sicherheit und Sauberkeit",
+              "label": "Salonkonzert",
               "detail": "Luzern",
-              "date": "2026-10-15",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
+              "date": "2026-10-16",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
             },
             {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+              "label": "Top Gun: Maverick – in Concert",
+              "detail": "Lucerne",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/top-gun-maverick-in-concert/"
             },
             {
-              "label": "Filmabend in Luthern",
-              "detail": "Luthern",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/filmabend-in-luthern/"
+              "label": "Luzerner Spielleute: Die Chinesische Mauer von Max Frisch",
+              "detail": "Theaterpavillon, Luzern",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/luzerner-spielleute-die-chinesische-mauer-von-max-frisch/"
             },
             {
-              "label": "Nickless",
+              "label": "Rude & Rebel Ska Fest",
               "detail": "Schüür",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/nickless_A1yPiQE"
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/luzern/rude-und-rebel-ska-fest_AcTf6rt"
             },
             {
-              "label": "Pilzkontrolle",
-              "detail": "Museum Luzern, Luzern — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
+              "label": "Stella Cruz und Band",
+              "detail": "Sigristenhaus, Ettiswil",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/stella-cruz-und-band_AUfqreX"
             },
             {
-              "label": "Fiera d'autunno - Lozärner Määs",
-              "detail": "Luzern Inseli, Luzern — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
+              "label": "The Beauty Of Gemina - Veil Of Rain Tour 2026",
+              "detail": "Grabenhalle, Rain",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/st-gallen/the-beauty-of-gemina-veil-of-rain-tour-2026_AJiRfVg"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -171,7 +171,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T21:03:09.722Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "en": {
       "canton": "LU",
@@ -181,7 +181,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "87",
+          "value": "82",
           "note": "from the site’s events calendar"
         }
       ],
@@ -192,64 +192,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "SONNFELS Spaziergang – Zwangsstörungen verstehen",
-              "detail": "Verkehrshaus-Lido am Bootsanlegesteg, Luzern, Luzern",
-              "date": "2026-10-15",
-              "url": "https://www.ow.ch/_rte/anlass/94708"
+              "label": "Dance Weekend",
+              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/events/music/fluehli-lu/dance-weekend_AJPRiSW"
             },
             {
-              "label": "Pilz Tage Hasle - ein 4-Tages-Pilzkurs",
-              "detail": "Heiligkreuz",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pilz-tage-hasle-ein-4-tages-pilzkurs/"
+              "label": "Dance Weekend",
+              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tanzweekend/"
             },
             {
-              "label": "Tanznachmittag mit Live-Musik im Jlge-Saal",
-              "detail": "Landgasthaus Jlge, Ettiswil",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/tanznachmittag-mit-live-musik-im-jlge-saal_AEBdS5y"
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-10-16",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
             },
             {
-              "label": "Kurs Urban Sketching – Schüpfheim | 15.10.2026",
-              "detail": "Schüpfheim",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-urban-sketching-schuepfheim-15102026/"
+              "label": "Kurs Salben herstellen | 16.10.2026",
+              "detail": "Escholzmatt",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-in-der-salbenkueche-16102026/"
             },
             {
-              "label": "Im Gespräch über Sicherheit und Sauberkeit",
+              "label": "Salonkonzert",
               "detail": "Luzern",
-              "date": "2026-10-15",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
+              "date": "2026-10-16",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
             },
             {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+              "label": "Top Gun: Maverick – in Concert",
+              "detail": "Lucerne",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/top-gun-maverick-in-concert/"
             },
             {
-              "label": "Filmabend in Luthern",
-              "detail": "Luthern",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/filmabend-in-luthern/"
+              "label": "Luzerner Spielleute: Die Chinesische Mauer von Max Frisch",
+              "detail": "Theaterpavillon, Luzern",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/luzerner-spielleute-die-chinesische-mauer-von-max-frisch/"
             },
             {
-              "label": "Nickless",
+              "label": "Rude & Rebel Ska Fest",
               "detail": "Schüür",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/nickless_A1yPiQE"
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/luzern/rude-und-rebel-ska-fest_AcTf6rt"
             },
             {
-              "label": "Pilzkontrolle",
-              "detail": "Museum Luzern, Luzern — ongoing, last day: 26 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
+              "label": "Stella Cruz und Band",
+              "detail": "Sigristenhaus, Ettiswil",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/stella-cruz-und-band_AUfqreX"
             },
             {
-              "label": "Autumn Fair - Lozärner Määs",
-              "detail": "Luzern Inseli, Luzern — ongoing, last day: 18 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
+              "label": "The Beauty Of Gemina - Veil Of Rain Tour 2026",
+              "detail": "Grabenhalle, Rain",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/st-gallen/the-beauty-of-gemina-veil-of-rain-tour-2026_AJiRfVg"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -325,7 +325,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T21:03:09.722Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "de": {
       "canton": "LU",
@@ -335,7 +335,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "87",
+          "value": "82",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -346,64 +346,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "SONNFELS Spaziergang – Zwangsstörungen verstehen",
-              "detail": "Verkehrshaus-Lido am Bootsanlegesteg, Luzern, Luzern",
-              "date": "2026-10-15",
-              "url": "https://www.ow.ch/_rte/anlass/94708"
+              "label": "Tanzweekend",
+              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/events/music/fluehli-lu/dance-weekend_AJPRiSW"
             },
             {
-              "label": "Pilz Tage Hasle - ein 4-Tages-Pilzkurs",
-              "detail": "Heiligkreuz",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pilz-tage-hasle-ein-4-tages-pilzkurs/"
+              "label": "Tanzweekend",
+              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tanzweekend/"
             },
             {
-              "label": "Tanznachmittag mit Live-Musik im Jlge-Saal",
-              "detail": "Landgasthaus Jlge, Ettiswil",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/tanznachmittag-mit-live-musik-im-jlge-saal_AEBdS5y"
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-10-16",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
             },
             {
-              "label": "Kurs Urban Sketching – Schüpfheim | 15.10.2026",
-              "detail": "Schüpfheim",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-urban-sketching-schuepfheim-15102026/"
+              "label": "Kurs Salben herstellen | 16.10.2026",
+              "detail": "Escholzmatt",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-in-der-salbenkueche-16102026/"
             },
             {
-              "label": "Im Gespräch über Sicherheit und Sauberkeit",
+              "label": "Salonkonzert",
               "detail": "Luzern",
-              "date": "2026-10-15",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
+              "date": "2026-10-16",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
             },
             {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+              "label": "Top Gun: Maverick – in Concert",
+              "detail": "Lucerne",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/top-gun-maverick-in-concert/"
             },
             {
-              "label": "Filmabend in Luthern",
-              "detail": "Luthern",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/filmabend-in-luthern/"
+              "label": "Luzerner Spielleute: Die Chinesische Mauer von Max Frisch",
+              "detail": "Theaterpavillon, Luzern",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/luzerner-spielleute-die-chinesische-mauer-von-max-frisch/"
             },
             {
-              "label": "Nickless",
+              "label": "Rude & Rebel Ska Fest",
               "detail": "Schüür",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/nickless_A1yPiQE"
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/luzern/rude-und-rebel-ska-fest_AcTf6rt"
             },
             {
-              "label": "Pilzkontrolle",
-              "detail": "Museum Luzern, Luzern — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
+              "label": "Stella Cruz und Band",
+              "detail": "Sigristenhaus, Ettiswil",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/stella-cruz-und-band_AUfqreX"
             },
             {
-              "label": "Herbstmesse – Lozärner Määs",
-              "detail": "Luzern Inseli, Luzern — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
+              "label": "The Beauty Of Gemina - Veil Of Rain Tour 2026",
+              "detail": "Grabenhalle, Rain",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/st-gallen/the-beauty-of-gemina-veil-of-rain-tour-2026_AJiRfVg"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -479,7 +479,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T21:03:09.722Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "fr": {
       "canton": "LU",
@@ -489,7 +489,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "87",
+          "value": "82",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -500,64 +500,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "SONNFELS Spaziergang – Zwangsstörungen verstehen",
-              "detail": "Verkehrshaus-Lido am Bootsanlegesteg, Luzern, Luzern",
-              "date": "2026-10-15",
-              "url": "https://www.ow.ch/_rte/anlass/94708"
+              "label": "Week-end de danse",
+              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/events/music/fluehli-lu/dance-weekend_AJPRiSW"
             },
             {
-              "label": "Pilz Tage Hasle - ein 4-Tages-Pilzkurs",
-              "detail": "Heiligkreuz",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pilz-tage-hasle-ein-4-tages-pilzkurs/"
+              "label": "Week-end de danse",
+              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tanzweekend/"
             },
             {
-              "label": "Tanznachmittag mit Live-Musik im Jlge-Saal",
-              "detail": "Landgasthaus Jlge, Ettiswil",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/tanznachmittag-mit-live-musik-im-jlge-saal_AEBdS5y"
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-10-16",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
             },
             {
-              "label": "Kurs Urban Sketching – Schüpfheim | 15.10.2026",
-              "detail": "Schüpfheim",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-urban-sketching-schuepfheim-15102026/"
+              "label": "Kurs Salben herstellen | 16.10.2026",
+              "detail": "Escholzmatt",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-in-der-salbenkueche-16102026/"
             },
             {
-              "label": "Im Gespräch über Sicherheit und Sauberkeit",
+              "label": "Salonkonzert",
               "detail": "Luzern",
-              "date": "2026-10-15",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
+              "date": "2026-10-16",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
             },
             {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+              "label": "Top Gun: Maverick – in Concert",
+              "detail": "Lucerne",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/top-gun-maverick-in-concert/"
             },
             {
-              "label": "Filmabend in Luthern",
-              "detail": "Luthern",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/filmabend-in-luthern/"
+              "label": "Luzerner Spielleute: Die Chinesische Mauer von Max Frisch",
+              "detail": "Theaterpavillon, Luzern",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/luzerner-spielleute-die-chinesische-mauer-von-max-frisch/"
             },
             {
-              "label": "Nickless",
+              "label": "Rude & Rebel Ska Fest",
               "detail": "Schüür",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/nickless_A1yPiQE"
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/luzern/rude-und-rebel-ska-fest_AcTf6rt"
             },
             {
-              "label": "Pilzkontrolle",
-              "detail": "Museum Luzern, Luzern — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
+              "label": "Stella Cruz und Band",
+              "detail": "Sigristenhaus, Ettiswil",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/stella-cruz-und-band_AUfqreX"
             },
             {
-              "label": "Foire d'automne - Lozärner Määs",
-              "detail": "Luzern Inseli, Luzern — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
+              "label": "The Beauty Of Gemina - Veil Of Rain Tour 2026",
+              "detail": "Grabenhalle, Rain",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/st-gallen/the-beauty-of-gemina-veil-of-rain-tour-2026_AJiRfVg"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -633,7 +633,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T21:03:09.722Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     }
   }
 }

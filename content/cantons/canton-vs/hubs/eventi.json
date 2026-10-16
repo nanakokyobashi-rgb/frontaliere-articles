@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "6960498ebac113ed4bf545a994d919319f60db9661e7dc4d27b54dedc6e9a476",
+  "updatedAt": "2026-10-16T00:00:55.142Z",
+  "contentHash": "3a832daa47e8ba044d6130c4c5d19bbd4f8f466d15da68874b34c380a8d6a75f",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "68",
+          "value": "69",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Adelia Clavien & Stéphanie Pothier, “Sens”",
-              "detail": "Riddes",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
+              "label": "An introduction to Alphorn blowing",
+              "detail": "Pra da Dzeu, Isérables",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/an-introduction-to-alphorn-blowing/"
             },
             {
-              "label": "Aufarbeiten",
-              "detail": "Mediathek Wallis - Brig Claudine Studer",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/aufarbeiten/"
+              "label": "Audiovisual Flea Market Under the Arches",
+              "detail": "Pentamedia, Sion",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/audiovisual-flea-market-under-the-arches/"
             },
             {
-              "label": "SILENT READING FÜR ERWACHSENE",
-              "detail": "Naters",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/silent-reading-fuer-erwachsene-2/"
-            },
-            {
-              "label": "Abusitz",
+              "label": "Plastic Creatures",
               "detail": "Zeughaus Kultur",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/glis/abusitz_AGDDjq5"
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/evenements/musique/glis/plastic-creatures_AuSgVdX"
+            },
+            {
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Adelia Clavien & Stéphanie Pothier, “Sens”",
+              "detail": "Riddes — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
             },
             {
               "label": "Come and make your own 'tomme' cheese !",
               "detail": "Ferme la Vernettaz, Veysonnaz — in corso, ultimo giorno: 21 ottobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/come-and-make-your-own-tomme-cheese/"
             },
             {
               "label": "Alpaca Walk",
               "detail": "auf Anfrage, Bellwald — in corso, ultimo giorno: 21 ottobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpaka-spaziergang/"
             },
             {
               "label": "East-West Encounters",
               "detail": "Maison de la Bourgeoisie, Sierre — in corso, ultimo giorno: 23 ottobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rencontres-orient-occident/"
             },
             {
               "label": "Geek – Mostra sulle console di gioco",
               "detail": "Galerie St. Laurent, Leukerbad — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
               "label": "Parental Leave, with a Twist",
               "detail": "Gasthaus Heiligkreuz, Binn — in corso, ultimo giorno: 21 ottobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/elternzeit-mal-anders/"
-            },
-            {
-              "label": "Oeno events",
-              "detail": "Vercorin, Chalais — in corso, ultimo giorno: 30 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeno-events/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -109,7 +109,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "en": {
       "canton": "VS",
@@ -119,7 +119,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "68",
+          "value": "69",
           "note": "from the site’s events calendar"
         }
       ],
@@ -130,64 +130,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Adelia Clavien & Stéphanie Pothier, “Sens”",
-              "detail": "Riddes",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
+              "label": "An introduction to Alphorn blowing",
+              "detail": "Pra da Dzeu, Isérables",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/an-introduction-to-alphorn-blowing/"
             },
             {
-              "label": "Aufarbeiten",
-              "detail": "Mediathek Wallis - Brig Claudine Studer",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/aufarbeiten/"
+              "label": "Audiovisual Flea Market Under the Arches",
+              "detail": "Pentamedia, Sion",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/audiovisual-flea-market-under-the-arches/"
             },
             {
-              "label": "SILENT READING FÜR ERWACHSENE",
-              "detail": "Naters",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/silent-reading-fuer-erwachsene-2/"
-            },
-            {
-              "label": "Abusitz",
+              "label": "Plastic Creatures",
               "detail": "Zeughaus Kultur",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/glis/abusitz_AGDDjq5"
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/evenements/musique/glis/plastic-creatures_AuSgVdX"
+            },
+            {
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Adelia Clavien & Stéphanie Pothier, “Sens”",
+              "detail": "Riddes — ongoing, last day: 31 October 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
             },
             {
               "label": "Come and make your own 'tomme' cheese !",
               "detail": "Ferme la Vernettaz, Veysonnaz — ongoing, last day: 21 October 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/come-and-make-your-own-tomme-cheese/"
             },
             {
               "label": "Alpaca Walk",
               "detail": "auf Anfrage, Bellwald — ongoing, last day: 21 October 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpaka-spaziergang/"
             },
             {
               "label": "East-West Encounters",
               "detail": "Maison de la Bourgeoisie, Sierre — ongoing, last day: 23 October 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rencontres-orient-occident/"
             },
             {
               "label": "Geek—Video Game Consoles Exhibition",
               "detail": "Galerie St. Laurent, Leukerbad — ongoing, last day: 31 October 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
               "label": "Parental Leave, with a Twist",
               "detail": "Gasthaus Heiligkreuz, Binn — ongoing, last day: 21 October 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/elternzeit-mal-anders/"
-            },
-            {
-              "label": "Oeno events",
-              "detail": "Vercorin, Chalais — ongoing, last day: 30 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeno-events/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -206,7 +206,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "de": {
       "canton": "VS",
@@ -216,7 +216,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "68",
+          "value": "69",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -227,64 +227,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Adelia Clavien & Stéphanie Pothier „Sens“",
-              "detail": "Riddes",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
+              "label": "Einführungskurse ins Alphornspiel",
+              "detail": "Pra da Dzeu, Isérables",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/an-introduction-to-alphorn-blowing/"
             },
             {
-              "label": "Aufarbeiten",
-              "detail": "Mediathek Wallis - Brig Claudine Studer",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/aufarbeiten/"
+              "label": "Audiovisueller Trödelmarkt unter den Arkaden",
+              "detail": "Pentamedia, Sion",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/audiovisual-flea-market-under-the-arches/"
             },
             {
-              "label": "SILENT READING FÜR ERWACHSENE",
-              "detail": "Naters",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/silent-reading-fuer-erwachsene-2/"
-            },
-            {
-              "label": "Abusitz",
+              "label": "Plastic Creatures",
               "detail": "Zeughaus Kultur",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/glis/abusitz_AGDDjq5"
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/evenements/musique/glis/plastic-creatures_AuSgVdX"
+            },
+            {
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Adelia Clavien & Stéphanie Pothier „Sens“",
+              "detail": "Riddes — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
             },
             {
               "label": "Käse selber machen – so geht’s!",
               "detail": "Ferme la Vernettaz, Veysonnaz — läuft, letzter Tag: 21. Oktober 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/come-and-make-your-own-tomme-cheese/"
             },
             {
               "label": "Alpaka Spaziergang",
               "detail": "auf Anfrage, Bellwald — läuft, letzter Tag: 21. Oktober 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpaka-spaziergang/"
             },
             {
               "label": "Begegnungen zwischen Orient und Okzident",
               "detail": "Maison de la Bourgeoisie, Sierre — läuft, letzter Tag: 23. Oktober 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rencontres-orient-occident/"
             },
             {
               "label": "Geek – Spielkonsolen Ausstellung",
               "detail": "Galerie St. Laurent, Leukerbad — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
               "label": "Elternzeit mal anders",
               "detail": "Gasthaus Heiligkreuz, Binn — läuft, letzter Tag: 21. Oktober 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/elternzeit-mal-anders/"
-            },
-            {
-              "label": "Veranstaltungen von Oeno",
-              "detail": "Vercorin, Chalais — läuft, letzter Tag: 30. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeno-events/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "fr": {
       "canton": "VS",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "68",
+          "value": "69",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -324,64 +324,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Adelia Clavien & Stéphanie Pothier « Sens »",
-              "detail": "Riddes",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
+              "label": "Stage d'initiation au cor des Alpes",
+              "detail": "Pra da Dzeu, Isérables",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/an-introduction-to-alphorn-blowing/"
             },
             {
-              "label": "Aufarbeiten",
-              "detail": "Mediathek Wallis - Brig Claudine Studer",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/aufarbeiten/"
+              "label": "Brocante audiovisuelle sous les arches",
+              "detail": "Pentamedia, Sion",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/audiovisual-flea-market-under-the-arches/"
             },
             {
-              "label": "SILENT READING FÜR ERWACHSENE",
-              "detail": "Naters",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/silent-reading-fuer-erwachsene-2/"
-            },
-            {
-              "label": "Abusitz",
+              "label": "Plastic Creatures",
               "detail": "Zeughaus Kultur",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/glis/abusitz_AGDDjq5"
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/evenements/musique/glis/plastic-creatures_AuSgVdX"
+            },
+            {
+              "label": "Théâtre : représentations à Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Adelia Clavien & Stéphanie Pothier « Sens »",
+              "detail": "Riddes — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
             },
             {
               "label": "Fais ta tomme !",
               "detail": "Ferme la Vernettaz, Veysonnaz — en cours, dernier jour : 21 octobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/come-and-make-your-own-tomme-cheese/"
             },
             {
               "label": "Promenade avec des alpagas",
               "detail": "auf Anfrage, Bellwald — en cours, dernier jour : 21 octobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpaka-spaziergang/"
             },
             {
               "label": "Rencontres Orient Occident",
               "detail": "Maison de la Bourgeoisie, Sierre — en cours, dernier jour : 23 octobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rencontres-orient-occident/"
             },
             {
               "label": "Exposition « Geek – Consoles de jeux »",
               "detail": "Galerie St. Laurent, Leukerbad — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
               "label": "Un congé parental pas comme les autres",
               "detail": "Gasthaus Heiligkreuz, Binn — en cours, dernier jour : 21 octobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/elternzeit-mal-anders/"
-            },
-            {
-              "label": "Événements à l'Oeno",
-              "detail": "Vercorin, Chalais — en cours, dernier jour : 30 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeno-events/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T00:06:40.869Z",
-  "contentHash": "9e6509a00be5acede7b81254d33861063f171f5392c3fd21b4c2464f883e8dd2",
+  "updatedAt": "2026-10-16T00:00:55.142Z",
+  "contentHash": "5fb51858bc1aef4bca2df0970d14c22334326baacccfabea7111c114411f5044",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-14T13:57:52.093Z",
+      "updatedAt": "2026-10-15T13:57:57.453Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "37",
+          "value": "38",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Guided tours: ‘Bulle, 1000 Years of History’",
-              "detail": "Bulle",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tours-bulle-1000-years-of-history/"
+              "label": "Bénichon Menu at Café des Bains in Châtel-St-Denis",
+              "detail": "Restaurant Le Café des Bains, Châtel-Saint-Denis",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/benichon-menu-at-cafe-des-bains-in-chatel-st-denis/"
             },
             {
-              "label": "L’IA au quotidien",
-              "detail": "Fribourg",
-              "date": "2026-10-15",
-              "url": "https://www.fr.ch/formation-et-ecoles/formation-pour-adultes-et-formation-continue/evenements/lia-au-quotidien"
+              "label": "Bénichon Menu at Le Châtel in Châtel-St-Denis",
+              "detail": "Le Châtel Restaurant, Châtel-Saint-Denis",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/menu-de-benichon-au-chatel-a-chatel-st-denis/"
             },
             {
-              "label": "Sortie au Tierpark",
+              "label": "Hommage à Amy Winehouse",
+              "detail": "La Spirale",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/fribourg/hommage-a-amy-winehouse_AUSv8a2"
+            },
+            {
+              "label": "Vêpres musicales – Martin Schmid SJ (1694–1772)",
               "detail": "Fribourg",
-              "date": "2026-10-15",
-              "url": "https://www.fr.ch/mhnf/evenements/sortie-au-tierpark"
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vepres-musicales-martin-schmid-sj-(16941772)/"
+            },
+            {
+              "label": "Les animaux de la forêt",
+              "detail": "Fribourg",
+              "date": "2026-10-16",
+              "url": "https://www.fr.ch/mhnf/evenements/les-animaux-de-la-foret"
+            },
+            {
+              "label": "Des vides à remplir : atelier créatif avec Marinka Limat et Denis Roueche",
+              "detail": "Fribourg",
+              "date": "2026-10-16",
+              "url": "https://www.fr.ch/bcu/evenements/des-vides-a-remplir-atelier-creatif-avec-marinka-limat-et-denis-roueche"
+            },
+            {
+              "label": "Yard Act + Lava La Rue",
+              "detail": "Les Docks, Rue",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/yard-act-lava-la-rue/"
             },
             {
               "label": "Des vides à remplir",
               "detail": "Bibliothèque cantonale et universitaire (BCU), Fribourg — in corso, ultimo giorno: 21 ottobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/des-vides-a-remplir/"
             },
             {
               "label": "Bénichon Menu at Café Tivoli in Châtel-St-Denis",
               "detail": "Café Tivoli, Châtel-Saint-Denis — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
             },
             {
               "label": "Camp de football",
               "detail": "MS Sports — in corso, ultimo giorno: 16 ottobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/camp-de-football/"
-            },
-            {
-              "label": "The Autumn Trail",
-              "detail": "Parcours D'Hubert Audriaz, Fribourg — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-herbst-rundgang/"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
-              "label": "Automne à Charmey",
-              "detail": "Case postale, Val-de-Charmey — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "en": {
       "canton": "FR",
@@ -119,7 +119,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "37",
+          "value": "38",
           "note": "from the site’s events calendar"
         }
       ],
@@ -130,69 +130,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Guided tours: ‘Bulle, 1000 Years of History’",
-              "detail": "Bulle",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tours-bulle-1000-years-of-history/"
+              "label": "Bénichon Menu at Café des Bains in Châtel-St-Denis",
+              "detail": "Restaurant Le Café des Bains, Châtel-Saint-Denis",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/benichon-menu-at-cafe-des-bains-in-chatel-st-denis/"
             },
             {
-              "label": "L’IA au quotidien",
-              "detail": "Fribourg",
-              "date": "2026-10-15",
-              "url": "https://www.fr.ch/formation-et-ecoles/formation-pour-adultes-et-formation-continue/evenements/lia-au-quotidien"
+              "label": "Bénichon Menu at Le Châtel in Châtel-St-Denis",
+              "detail": "Le Châtel Restaurant, Châtel-Saint-Denis",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/menu-de-benichon-au-chatel-a-chatel-st-denis/"
             },
             {
-              "label": "Sortie au Tierpark",
+              "label": "Hommage à Amy Winehouse",
+              "detail": "La Spirale",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/fribourg/hommage-a-amy-winehouse_AUSv8a2"
+            },
+            {
+              "label": "Vêpres musicales – Martin Schmid SJ (1694–1772)",
               "detail": "Fribourg",
-              "date": "2026-10-15",
-              "url": "https://www.fr.ch/mhnf/evenements/sortie-au-tierpark"
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vepres-musicales-martin-schmid-sj-(16941772)/"
+            },
+            {
+              "label": "Les animaux de la forêt",
+              "detail": "Fribourg",
+              "date": "2026-10-16",
+              "url": "https://www.fr.ch/mhnf/evenements/les-animaux-de-la-foret"
+            },
+            {
+              "label": "Des vides à remplir : atelier créatif avec Marinka Limat et Denis Roueche",
+              "detail": "Fribourg",
+              "date": "2026-10-16",
+              "url": "https://www.fr.ch/bcu/evenements/des-vides-a-remplir-atelier-creatif-avec-marinka-limat-et-denis-roueche"
+            },
+            {
+              "label": "Yard Act + Lava La Rue",
+              "detail": "Les Docks, Rue",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/yard-act-lava-la-rue/"
             },
             {
               "label": "Des vides à remplir",
               "detail": "Bibliothèque cantonale et universitaire (BCU), Fribourg — ongoing, last day: 21 October 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/des-vides-a-remplir/"
             },
             {
               "label": "Bénichon Menu at Café Tivoli in Châtel-St-Denis",
               "detail": "Café Tivoli, Châtel-Saint-Denis — ongoing, last day: 25 October 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
             },
             {
               "label": "Football Camp",
               "detail": "MS Sports — ongoing, last day: 16 October 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/camp-de-football/"
-            },
-            {
-              "label": "The Autumn Trail",
-              "detail": "Parcours D'Hubert Audriaz, Fribourg — ongoing, last day: 18 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-herbst-rundgang/"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — ongoing, last day: 31 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — ongoing, last day: 1 November 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
-              "label": "Automne à Charmey",
-              "detail": "Case postale, Val-de-Charmey — ongoing, last day: 25 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "de": {
       "canton": "FR",
@@ -216,7 +216,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "37",
+          "value": "38",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -227,69 +227,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Geführte Touren: ‘Bulle, 1000 Jahre Geschichte(n)’",
-              "detail": "Bulle",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tours-bulle-1000-years-of-history/"
+              "label": "Kilbi-Menu in Café des Bains in Châtel-St-Denis",
+              "detail": "Restaurant Le Café des Bains, Châtel-Saint-Denis",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/benichon-menu-at-cafe-des-bains-in-chatel-st-denis/"
             },
             {
-              "label": "L’IA au quotidien",
-              "detail": "Fribourg",
-              "date": "2026-10-15",
-              "url": "https://www.fr.ch/formation-et-ecoles/formation-pour-adultes-et-formation-continue/evenements/lia-au-quotidien"
+              "label": "Kilbi-Menu in Le Châtel in Châtel-St-Denis",
+              "detail": "Le Châtel Restaurant, Châtel-Saint-Denis",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/menu-de-benichon-au-chatel-a-chatel-st-denis/"
             },
             {
-              "label": "Sortie au Tierpark",
+              "label": "Hommage à Amy Winehouse",
+              "detail": "La Spirale",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/fribourg/hommage-a-amy-winehouse_AUSv8a2"
+            },
+            {
+              "label": "Musikalische Vesper Martin Schmid SJ (1694-1772)",
               "detail": "Fribourg",
-              "date": "2026-10-15",
-              "url": "https://www.fr.ch/mhnf/evenements/sortie-au-tierpark"
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vepres-musicales-martin-schmid-sj-(16941772)/"
+            },
+            {
+              "label": "Les animaux de la forêt",
+              "detail": "Fribourg",
+              "date": "2026-10-16",
+              "url": "https://www.fr.ch/mhnf/evenements/les-animaux-de-la-foret"
+            },
+            {
+              "label": "Des vides à remplir : atelier créatif avec Marinka Limat et Denis Roueche",
+              "detail": "Fribourg",
+              "date": "2026-10-16",
+              "url": "https://www.fr.ch/bcu/evenements/des-vides-a-remplir-atelier-creatif-avec-marinka-limat-et-denis-roueche"
+            },
+            {
+              "label": "Yard Act + Lava La Rue",
+              "detail": "Les Docks, Rue",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/yard-act-lava-la-rue/"
             },
             {
               "label": "Des vides à remplir",
               "detail": "Bibliothèque cantonale et universitaire (BCU), Fribourg — läuft, letzter Tag: 21. Oktober 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/des-vides-a-remplir/"
             },
             {
               "label": "Kilbi-Menu in Café Tivoli in Châtel-St-Denis",
               "detail": "Café Tivoli, Châtel-Saint-Denis — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
             },
             {
               "label": "Fußballcamp",
               "detail": "MS Sports — läuft, letzter Tag: 16. Oktober 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/camp-de-football/"
-            },
-            {
-              "label": "Der Herbst-Rundgang",
-              "detail": "Parcours D'Hubert Audriaz, Fribourg — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-herbst-rundgang/"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
-              "label": "Automne à Charmey",
-              "detail": "Case postale, Val-de-Charmey — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "fr": {
       "canton": "FR",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "37",
+          "value": "38",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -324,69 +324,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Visites guidées « Bulle, 1000 ans d’histoire(s) »",
-              "detail": "Bulle",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tours-bulle-1000-years-of-history/"
+              "label": "Menu de Bénichon au Café des Bains à Châtel-St-Denis",
+              "detail": "Restaurant Le Café des Bains, Châtel-Saint-Denis",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/benichon-menu-at-cafe-des-bains-in-chatel-st-denis/"
             },
             {
-              "label": "L’IA au quotidien",
-              "detail": "Fribourg",
-              "date": "2026-10-15",
-              "url": "https://www.fr.ch/formation-et-ecoles/formation-pour-adultes-et-formation-continue/evenements/lia-au-quotidien"
+              "label": "Menu de Bénichon au Châtel à Châtel-St-Denis",
+              "detail": "Le Châtel Restaurant, Châtel-Saint-Denis",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/menu-de-benichon-au-chatel-a-chatel-st-denis/"
             },
             {
-              "label": "Sortie au Tierpark",
+              "label": "Hommage à Amy Winehouse",
+              "detail": "La Spirale",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/fribourg/hommage-a-amy-winehouse_AUSv8a2"
+            },
+            {
+              "label": "Vêpres musicales – Martin Schmid SJ (1694–1772)",
               "detail": "Fribourg",
-              "date": "2026-10-15",
-              "url": "https://www.fr.ch/mhnf/evenements/sortie-au-tierpark"
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vepres-musicales-martin-schmid-sj-(16941772)/"
+            },
+            {
+              "label": "Les animaux de la forêt",
+              "detail": "Fribourg",
+              "date": "2026-10-16",
+              "url": "https://www.fr.ch/mhnf/evenements/les-animaux-de-la-foret"
+            },
+            {
+              "label": "Des vides à remplir : atelier créatif avec Marinka Limat et Denis Roueche",
+              "detail": "Fribourg",
+              "date": "2026-10-16",
+              "url": "https://www.fr.ch/bcu/evenements/des-vides-a-remplir-atelier-creatif-avec-marinka-limat-et-denis-roueche"
+            },
+            {
+              "label": "Yard Act + Lava La Rue",
+              "detail": "Les Docks, Rue",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/yard-act-lava-la-rue/"
             },
             {
               "label": "Des vides à remplir",
               "detail": "Bibliothèque cantonale et universitaire (BCU), Fribourg — en cours, dernier jour : 21 octobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/des-vides-a-remplir/"
             },
             {
               "label": "Menu de Bénichon au Café Tivoli à Châtel-St-Denis",
               "detail": "Café Tivoli, Châtel-Saint-Denis — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
             },
             {
               "label": "Football Camp",
               "detail": "MS Sports — en cours, dernier jour : 16 octobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/camp-de-football/"
-            },
-            {
-              "label": "Le Parcours d’automne",
-              "detail": "Parcours D'Hubert Audriaz, Fribourg — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-herbst-rundgang/"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
-              "label": "Automne à Charmey",
-              "detail": "Case postale, Val-de-Charmey — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     }
   }
 }

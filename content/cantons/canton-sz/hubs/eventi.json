@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T00:06:40.869Z",
-  "contentHash": "5a021d31f91e8b78d508b2e7da456259d9d539b384da2ba0b83fc4fe261f24e6",
+  "updatedAt": "2026-10-16T00:00:55.142Z",
+  "contentHash": "494cac4bfb2641fe2372374ca3df59cca57bb80d1b25364668fc9548c60067a5",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-14T13:57:52.093Z",
+      "updatedAt": "2026-10-15T13:57:57.453Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "26",
+          "value": "27",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,48 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Willkommen an Bord der B-100C!",
-              "detail": "Museum Fram, Einsiedeln",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/willkommen-an-bord-der-b100c/"
-            },
-            {
-              "label": "Gerhard Polt & Well-Brüder – Apropos – DER HERBST 26",
-              "detail": "Restaurant Rôtisserie Waldstätterhof Brunnen, Ingenbohl",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gerhard-polt-wellbrueder-apropos-der-herbst-26/"
-            },
-            {
-              "label": "Guided Hike to the Hochstuckli | Light & Landscape",
-              "detail": "Sattel-Hochstuckli AG, Sattel — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/guided-hike-to-the-hochstuckli-light-landscape/"
-            },
-            {
-              "label": "Children's day - Rondo's mountain adventure",
-              "detail": "Sattel-Hochstuckli AG, Sattel — in corso, ultimo giorno: 17 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/childrens-day-rondos-mountain-adventure/"
-            },
-            {
-              "label": "Light & Landscape",
-              "detail": "Sattel-Hochstuckli, Sattel — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/light-landscape/"
-            },
-            {
-              "label": "Brunch all'Heirihütte",
-              "detail": "Alpwirtschaft Heiri-Hütte, Arth — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brunch-allheirihuette/"
-            },
-            {
-              "label": "Ausstellung \"Transitus - Übergänge\"",
-              "detail": "Morschach — in corso, ultimo giorno: 17 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ausstellung-transitus-uebergaenge/"
-            },
             {
               "label": "Requiem (CH), Crypt (CH) & Vorax (CH)",
               "detail": "Siebnen",
@@ -91,11 +49,53 @@
               "detail": "Restaurant Gipfelstubli Rotenflue, Schwyz",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliches-wildbuffet/"
+            },
+            {
+              "label": "Kim Wilde - Closer Tour - DER HERBST 26",
+              "detail": "Restaurant Rôtisserie Waldstätterhof Brunnen",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kim-wilde-closer-tour-der-herbst-26/"
+            },
+            {
+              "label": "Guided Hike to the Hochstuckli | Light & Landscape",
+              "detail": "Sattel-Hochstuckli AG, Sattel — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/guided-hike-to-the-hochstuckli-light-landscape/"
+            },
+            {
+              "label": "Children's day - Rondo's mountain adventure",
+              "detail": "Sattel-Hochstuckli AG, Sattel — in corso, ultimo giorno: 17 ottobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/childrens-day-rondos-mountain-adventure/"
+            },
+            {
+              "label": "Light & Landscape",
+              "detail": "Sattel-Hochstuckli, Sattel — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/light-landscape/"
+            },
+            {
+              "label": "Brunch all'Heirihütte",
+              "detail": "Alpwirtschaft Heiri-Hütte, Arth — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brunch-allheirihuette/"
+            },
+            {
+              "label": "Ausstellung \"Transitus - Übergänge\"",
+              "detail": "Morschach — in corso, ultimo giorno: 17 ottobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ausstellung-transitus-uebergaenge/"
+            },
+            {
+              "label": "10 Jahre The Rolling Barrels (CH), Simi & The Shy Guys (CH) & Cross Country (CH)",
+              "detail": "Siebnen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/10-jahre-the-rolling-barrels-ch-simi-the-shy-guys-ch-cross-country-ch/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "en": {
       "canton": "SZ",
@@ -119,7 +119,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "26",
+          "value": "27",
           "note": "from the site’s events calendar"
         }
       ],
@@ -129,48 +129,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Willkommen an Bord der B-100C!",
-              "detail": "Museum Fram, Einsiedeln",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/willkommen-an-bord-der-b100c/"
-            },
-            {
-              "label": "Gerhard Polt & Well-Brüder – Apropos – DER HERBST 26",
-              "detail": "Restaurant Rôtisserie Waldstätterhof Brunnen, Ingenbohl",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gerhard-polt-wellbrueder-apropos-der-herbst-26/"
-            },
-            {
-              "label": "Guided Hike to the Hochstuckli | Light & Landscape",
-              "detail": "Sattel-Hochstuckli AG, Sattel — ongoing, last day: 18 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/guided-hike-to-the-hochstuckli-light-landscape/"
-            },
-            {
-              "label": "Children's day - Rondo's mountain adventure",
-              "detail": "Sattel-Hochstuckli AG, Sattel — ongoing, last day: 17 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/childrens-day-rondos-mountain-adventure/"
-            },
-            {
-              "label": "Light & Landscape",
-              "detail": "Sattel-Hochstuckli, Sattel — ongoing, last day: 18 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/light-landscape/"
-            },
-            {
-              "label": "Heirihütte brunch",
-              "detail": "Alpwirtschaft Heiri-Hütte, Arth — ongoing, last day: 18 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brunch-allheirihuette/"
-            },
-            {
-              "label": "Ausstellung \"Transitus - Übergänge\"",
-              "detail": "Morschach — ongoing, last day: 17 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ausstellung-transitus-uebergaenge/"
-            },
             {
               "label": "Requiem (CH), Crypt (CH) & Vorax (CH)",
               "detail": "Siebnen",
@@ -188,11 +146,53 @@
               "detail": "Restaurant Gipfelstubli Rotenflue, Schwyz",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliches-wildbuffet/"
+            },
+            {
+              "label": "Kim Wilde - Closer Tour - DER HERBST 26",
+              "detail": "Restaurant Rôtisserie Waldstätterhof Brunnen",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kim-wilde-closer-tour-der-herbst-26/"
+            },
+            {
+              "label": "Guided Hike to the Hochstuckli | Light & Landscape",
+              "detail": "Sattel-Hochstuckli AG, Sattel — ongoing, last day: 18 October 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/guided-hike-to-the-hochstuckli-light-landscape/"
+            },
+            {
+              "label": "Children's day - Rondo's mountain adventure",
+              "detail": "Sattel-Hochstuckli AG, Sattel — ongoing, last day: 17 October 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/childrens-day-rondos-mountain-adventure/"
+            },
+            {
+              "label": "Light & Landscape",
+              "detail": "Sattel-Hochstuckli, Sattel — ongoing, last day: 18 October 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/light-landscape/"
+            },
+            {
+              "label": "Heirihütte brunch",
+              "detail": "Alpwirtschaft Heiri-Hütte, Arth — ongoing, last day: 18 October 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brunch-allheirihuette/"
+            },
+            {
+              "label": "Ausstellung \"Transitus - Übergänge\"",
+              "detail": "Morschach — ongoing, last day: 17 October 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ausstellung-transitus-uebergaenge/"
+            },
+            {
+              "label": "10 Jahre The Rolling Barrels (CH), Simi & The Shy Guys (CH) & Cross Country (CH)",
+              "detail": "Siebnen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/10-jahre-the-rolling-barrels-ch-simi-the-shy-guys-ch-cross-country-ch/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "de": {
       "canton": "SZ",
@@ -216,7 +216,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "26",
+          "value": "27",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -226,48 +226,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Willkommen an Bord der B-100C!",
-              "detail": "Museum Fram, Einsiedeln",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/willkommen-an-bord-der-b100c/"
-            },
-            {
-              "label": "Gerhard Polt & Well-Brüder – Apropos – DER HERBST 26",
-              "detail": "Restaurant Rôtisserie Waldstätterhof Brunnen, Ingenbohl",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gerhard-polt-wellbrueder-apropos-der-herbst-26/"
-            },
-            {
-              "label": "Geführte Wanderung aufs Hochstuckli | Light & Landscape",
-              "detail": "Sattel-Hochstuckli AG, Sattel — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/guided-hike-to-the-hochstuckli-light-landscape/"
-            },
-            {
-              "label": "Kindertag - Rondos Bergabenteuer",
-              "detail": "Sattel-Hochstuckli AG, Sattel — läuft, letzter Tag: 17. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/childrens-day-rondos-mountain-adventure/"
-            },
-            {
-              "label": "Light & Landscape",
-              "detail": "Sattel-Hochstuckli, Sattel — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/light-landscape/"
-            },
-            {
-              "label": "Heirihütte Brunch",
-              "detail": "Alpwirtschaft Heiri-Hütte, Arth — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brunch-allheirihuette/"
-            },
-            {
-              "label": "Ausstellung \"Transitus - Übergänge\"",
-              "detail": "Morschach — läuft, letzter Tag: 17. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ausstellung-transitus-uebergaenge/"
-            },
             {
               "label": "Requiem (CH), Crypt (CH) & Vorax (CH)",
               "detail": "Siebnen",
@@ -285,11 +243,53 @@
               "detail": "Restaurant Gipfelstubli Rotenflue, Schwyz",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliches-wildbuffet/"
+            },
+            {
+              "label": "Kim Wilde - Closer Tour - DER HERBST 26",
+              "detail": "Restaurant Rôtisserie Waldstätterhof Brunnen",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kim-wilde-closer-tour-der-herbst-26/"
+            },
+            {
+              "label": "Geführte Wanderung aufs Hochstuckli | Light & Landscape",
+              "detail": "Sattel-Hochstuckli AG, Sattel — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/guided-hike-to-the-hochstuckli-light-landscape/"
+            },
+            {
+              "label": "Kindertag - Rondos Bergabenteuer",
+              "detail": "Sattel-Hochstuckli AG, Sattel — läuft, letzter Tag: 17. Oktober 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/childrens-day-rondos-mountain-adventure/"
+            },
+            {
+              "label": "Light & Landscape",
+              "detail": "Sattel-Hochstuckli, Sattel — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/light-landscape/"
+            },
+            {
+              "label": "Heirihütte Brunch",
+              "detail": "Alpwirtschaft Heiri-Hütte, Arth — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brunch-allheirihuette/"
+            },
+            {
+              "label": "Ausstellung \"Transitus - Übergänge\"",
+              "detail": "Morschach — läuft, letzter Tag: 17. Oktober 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ausstellung-transitus-uebergaenge/"
+            },
+            {
+              "label": "10 Jahre The Rolling Barrels (CH), Simi & The Shy Guys (CH) & Cross Country (CH)",
+              "detail": "Siebnen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/10-jahre-the-rolling-barrels-ch-simi-the-shy-guys-ch-cross-country-ch/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "fr": {
       "canton": "SZ",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "26",
+          "value": "27",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -323,48 +323,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Willkommen an Bord der B-100C!",
-              "detail": "Museum Fram, Einsiedeln",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/willkommen-an-bord-der-b100c/"
-            },
-            {
-              "label": "Gerhard Polt & Well-Brüder – Apropos – DER HERBST 26",
-              "detail": "Restaurant Rôtisserie Waldstätterhof Brunnen, Ingenbohl",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gerhard-polt-wellbrueder-apropos-der-herbst-26/"
-            },
-            {
-              "label": "Guided Hike to the Hochstuckli | Light & Landscape",
-              "detail": "Sattel-Hochstuckli AG, Sattel — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/guided-hike-to-the-hochstuckli-light-landscape/"
-            },
-            {
-              "label": "Children's day - Rondo's mountain adventure",
-              "detail": "Sattel-Hochstuckli AG, Sattel — en cours, dernier jour : 17 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/childrens-day-rondos-mountain-adventure/"
-            },
-            {
-              "label": "Light & Landscape",
-              "detail": "Sattel-Hochstuckli, Sattel — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/light-landscape/"
-            },
-            {
-              "label": "Heirihütte Brunch",
-              "detail": "Alpwirtschaft Heiri-Hütte, Arth — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brunch-allheirihuette/"
-            },
-            {
-              "label": "Ausstellung \"Transitus - Übergänge\"",
-              "detail": "Morschach — en cours, dernier jour : 17 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ausstellung-transitus-uebergaenge/"
-            },
             {
               "label": "Requiem (CH), Crypt (CH) & Vorax (CH)",
               "detail": "Siebnen",
@@ -382,11 +340,53 @@
               "detail": "Restaurant Gipfelstubli Rotenflue, Schwyz",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliches-wildbuffet/"
+            },
+            {
+              "label": "Kim Wilde - Closer Tour - DER HERBST 26",
+              "detail": "Restaurant Rôtisserie Waldstätterhof Brunnen",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kim-wilde-closer-tour-der-herbst-26/"
+            },
+            {
+              "label": "Guided Hike to the Hochstuckli | Light & Landscape",
+              "detail": "Sattel-Hochstuckli AG, Sattel — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/guided-hike-to-the-hochstuckli-light-landscape/"
+            },
+            {
+              "label": "Children's day - Rondo's mountain adventure",
+              "detail": "Sattel-Hochstuckli AG, Sattel — en cours, dernier jour : 17 octobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/childrens-day-rondos-mountain-adventure/"
+            },
+            {
+              "label": "Light & Landscape",
+              "detail": "Sattel-Hochstuckli, Sattel — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/light-landscape/"
+            },
+            {
+              "label": "Heirihütte Brunch",
+              "detail": "Alpwirtschaft Heiri-Hütte, Arth — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brunch-allheirihuette/"
+            },
+            {
+              "label": "Ausstellung \"Transitus - Übergänge\"",
+              "detail": "Morschach — en cours, dernier jour : 17 octobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ausstellung-transitus-uebergaenge/"
+            },
+            {
+              "label": "10 Jahre The Rolling Barrels (CH), Simi & The Shy Guys (CH) & Cross Country (CH)",
+              "detail": "Siebnen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/10-jahre-the-rolling-barrels-ch-simi-the-shy-guys-ch-cross-country-ch/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     }
   }
 }

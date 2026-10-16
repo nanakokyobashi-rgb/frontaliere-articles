@@ -4,12 +4,12 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "3161c2dda6ffdb87fb7f9eebd31b1a4d91ad35f629a9c941f025a04330673ee2",
+  "updatedAt": "2026-10-16T00:00:55.142Z",
+  "contentHash": "186e6d0de7eeecaaccf66b97d42c7e399b23dbe4fb7fc58124b56c5a0f3008eb",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T21:57:18.142Z",
+      "updatedAt": "2026-10-15T13:57:57.453Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "3",
+          "value": "4",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -49,11 +49,17 @@
               "detail": "Alti Moschti, Alle",
               "date": "2026-10-25",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/muehlethurnen/judith-bach-mit-streuselkuchen-ein-stueck-fuer-alle_AuCs6YB"
+            },
+            {
+              "label": "Arnaud Tsamere",
+              "detail": "Vicques",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/arnaud-tsamere/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/giura/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -80,7 +86,7 @@
           "url": "/eventi/giura/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "en": {
       "canton": "JU",
@@ -90,7 +96,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "3",
+          "value": "4",
           "note": "from the site’s events calendar"
         }
       ],
@@ -117,11 +123,17 @@
               "detail": "Alti Moschti, Alle",
               "date": "2026-10-25",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/muehlethurnen/judith-bach-mit-streuselkuchen-ein-stueck-fuer-alle_AuCs6YB"
+            },
+            {
+              "label": "Arnaud Tsamere",
+              "detail": "Vicques",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/arnaud-tsamere/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/jura/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -148,7 +160,7 @@
           "url": "/en/events/jura/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "de": {
       "canton": "JU",
@@ -158,7 +170,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "3",
+          "value": "4",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -185,11 +197,17 @@
               "detail": "Alti Moschti, Alle",
               "date": "2026-10-25",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/muehlethurnen/judith-bach-mit-streuselkuchen-ein-stueck-fuer-alle_AuCs6YB"
+            },
+            {
+              "label": "Arnaud Tsamere",
+              "detail": "Vicques",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/arnaud-tsamere/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/jura/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -216,7 +234,7 @@
           "url": "/de/veranstaltungen/jura/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "fr": {
       "canton": "JU",
@@ -226,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "3",
+          "value": "4",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -253,11 +271,17 @@
               "detail": "Alti Moschti, Alle",
               "date": "2026-10-25",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/muehlethurnen/judith-bach-mit-streuselkuchen-ein-stueck-fuer-alle_AuCs6YB"
+            },
+            {
+              "label": "Arnaud Tsamere",
+              "detail": "Vicques",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/arnaud-tsamere/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/jura/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -284,7 +308,7 @@
           "url": "/fr/evenements/jura/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     }
   }
 }

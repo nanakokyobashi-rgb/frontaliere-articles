@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "40895bfe32abe3691e7023ee9ad1a5ab14246f328db20d1edf72ed518f352118",
+  "updatedAt": "2026-10-16T00:00:55.142Z",
+  "contentHash": "5f4b059ddbf3821292da9d47672d058e10a1420aa795e973c422c8be10560e8a",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "334",
+          "value": "343",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Herbstausflug",
-              "detail": "Uitikon-Waldegg, Uitikon",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausflug/"
+              "label": "SHOWTIME! - Ein Ten Sing Ferienprogramm Herbstferien",
+              "detail": "Uetikon am See",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/showtime-ein-ten-sing-ferienprogramm-herbstferien/"
             },
             {
-              "label": "Semplicemente Zurigo",
-              "detail": "Zurigo, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/semplicemente-zurigo-2/"
+              "label": "Viehschau Hittnau",
+              "detail": "Hof Ifang, Hittnau",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viehschau-hittnau/"
             },
             {
-              "label": "Zurich Wine Festival 2026",
-              "detail": "Papiersaal, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zurich-wine-festival-2026/"
+              "label": "Metzgete a Diskretion",
+              "detail": "Rümlang",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-a-diskretion-1/"
             },
             {
-              "label": "Einladung zum Raclette- Mittag",
-              "detail": "Schlieren",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-raclette-mittag/"
+              "label": "Konzert Orchesterlager der Jugendmusikschule Winterthur u. Umgebung",
+              "detail": "Wildhaus, Winterthur",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-orchesterlager-der-jugendmusikschule-winterthur-u-umgebung/"
             },
             {
-              "label": "Dinner-Erlebnis LoveBite",
-              "detail": "Kloten",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dinner-erlebnis-lovebite/"
+              "label": "6. Schweizer Jugend Eurythmie Festival - NUSSKNACKER",
+              "detail": "Wetzikon, Wetzikon (ZH)",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/6-schweizer-jugend-eurythmie-festival-nussknacker/"
             },
             {
-              "label": "Gin & Jazz - With The Bluezone Band",
-              "detail": "Hotel Schweizerhof Zürich, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/events/music/zurich/gin-und-jazz-with-the-bluezone-band_AwE5w6g"
+              "label": "Marek Janowski mit Schubert und Beethoven",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/marek-janowski-mit-schubert-und-beethoven-1/"
             },
             {
-              "label": "Ländler Open im SEEDAMM PLAZA",
-              "detail": "Restaurant OLEA im Hotel Seedamm Plaza, Pfäffikon",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laendler-open-im-seedamm-plaza/"
+              "label": "NICKLESS (CH)",
+              "detail": "Plaza Klub",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/nickless-ch_AKpEtWX"
             },
             {
-              "label": "Hod Carrier Stompers Jazzband",
-              "detail": "Evang.-ref. Kirche Effretikon",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hod-carrier-stompers-jazzband/"
+              "label": "EHC Kloten - HC Ambri-Piotta",
+              "detail": "SWISS Arena, Kloten",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ehc-kloten-hc-ambri-piotta/"
             },
             {
-              "label": "Laura Pausini",
-              "detail": "Hallenstadion Zürich, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/laura-pausini_AM8J65Z"
+              "label": "ABGESAGT: Khalid: It’s Always Summer Somewhere Tour",
+              "detail": "Dübendorf",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/khalid-its-always-summer-somewhere-tour/"
             },
             {
-              "label": "Line Dance Night",
-              "detail": "Chesselhuus, Pfäffikon",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pfaeffikon-zh/line-dance-night_A8FCB8R"
+              "label": "Composer Jazz Orchestra",
+              "detail": "Musikklub Mehrspur",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/composer-jazz-orchestra_AubD5Vq"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -128,7 +128,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "en": {
       "canton": "ZH",
@@ -138,7 +138,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "334",
+          "value": "343",
           "note": "from the site’s events calendar"
         }
       ],
@@ -149,64 +149,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Herbstausflug",
-              "detail": "Uitikon-Waldegg, Uitikon",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausflug/"
+              "label": "SHOWTIME! - Ein Ten Sing Ferienprogramm Herbstferien",
+              "detail": "Uetikon am See",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/showtime-ein-ten-sing-ferienprogramm-herbstferien/"
             },
             {
-              "label": "Simply Zurich",
-              "detail": "Zurigo, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/semplicemente-zurigo-2/"
+              "label": "Viehschau Hittnau",
+              "detail": "Hof Ifang, Hittnau",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viehschau-hittnau/"
             },
             {
-              "label": "Zurich Wine Festival 2026",
-              "detail": "Papiersaal, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zurich-wine-festival-2026/"
+              "label": "Metzgete a Diskretion",
+              "detail": "Rümlang",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-a-diskretion-1/"
             },
             {
-              "label": "Einladung zum Raclette- Mittag",
-              "detail": "Schlieren",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-raclette-mittag/"
+              "label": "Konzert Orchesterlager der Jugendmusikschule Winterthur u. Umgebung",
+              "detail": "Wildhaus, Winterthur",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-orchesterlager-der-jugendmusikschule-winterthur-u-umgebung/"
             },
             {
-              "label": "Dinner-Erlebnis LoveBite",
-              "detail": "Kloten",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dinner-erlebnis-lovebite/"
+              "label": "6. Schweizer Jugend Eurythmie Festival - NUSSKNACKER",
+              "detail": "Wetzikon, Wetzikon (ZH)",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/6-schweizer-jugend-eurythmie-festival-nussknacker/"
             },
             {
-              "label": "Gin & Jazz - With The Bluezone Band",
-              "detail": "Hotel Schweizerhof Zürich, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/events/music/zurich/gin-und-jazz-with-the-bluezone-band_AwE5w6g"
+              "label": "Marek Janowski mit Schubert und Beethoven",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/marek-janowski-mit-schubert-und-beethoven-1/"
             },
             {
-              "label": "Ländler Open im SEEDAMM PLAZA",
-              "detail": "Restaurant OLEA im Hotel Seedamm Plaza, Pfäffikon",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laendler-open-im-seedamm-plaza/"
+              "label": "NICKLESS (CH)",
+              "detail": "Plaza Klub",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/nickless-ch_AKpEtWX"
             },
             {
-              "label": "Hod Carrier Stompers Jazzband",
-              "detail": "Evang.-ref. Kirche Effretikon",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hod-carrier-stompers-jazzband/"
+              "label": "EHC Kloten - HC Ambri-Piotta",
+              "detail": "SWISS Arena, Kloten",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ehc-kloten-hc-ambri-piotta/"
             },
             {
-              "label": "Laura Pausini",
-              "detail": "Hallenstadion Zürich, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/laura-pausini_AM8J65Z"
+              "label": "ABGESAGT: Khalid: It’s Always Summer Somewhere Tour",
+              "detail": "Dübendorf",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/khalid-its-always-summer-somewhere-tour/"
             },
             {
-              "label": "Line Dance Night",
-              "detail": "Chesselhuus, Pfäffikon",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pfaeffikon-zh/line-dance-night_A8FCB8R"
+              "label": "Composer Jazz Orchestra",
+              "detail": "Musikklub Mehrspur",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/composer-jazz-orchestra_AubD5Vq"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -244,7 +244,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "de": {
       "canton": "ZH",
@@ -254,7 +254,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "334",
+          "value": "343",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -265,64 +265,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Herbstausflug",
-              "detail": "Uitikon-Waldegg, Uitikon",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausflug/"
+              "label": "SHOWTIME! - Ein Ten Sing Ferienprogramm Herbstferien",
+              "detail": "Uetikon am See",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/showtime-ein-ten-sing-ferienprogramm-herbstferien/"
             },
             {
-              "label": "Einfach Zürich",
-              "detail": "Zurigo, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/semplicemente-zurigo-2/"
+              "label": "Viehschau Hittnau",
+              "detail": "Hof Ifang, Hittnau",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viehschau-hittnau/"
             },
             {
-              "label": "Zurich Wine Festival 2026",
-              "detail": "Papiersaal, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zurich-wine-festival-2026/"
+              "label": "Metzgete a Diskretion",
+              "detail": "Rümlang",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-a-diskretion-1/"
             },
             {
-              "label": "Einladung zum Raclette- Mittag",
-              "detail": "Schlieren",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-raclette-mittag/"
+              "label": "Konzert Orchesterlager der Jugendmusikschule Winterthur u. Umgebung",
+              "detail": "Wildhaus, Winterthur",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-orchesterlager-der-jugendmusikschule-winterthur-u-umgebung/"
             },
             {
-              "label": "LoveBite Dinner-Erlebnis",
-              "detail": "Kloten",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dinner-erlebnis-lovebite/"
+              "label": "6. Schweizer Jugend Eurythmie Festival - NUSSKNACKER",
+              "detail": "Wetzikon, Wetzikon (ZH)",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/6-schweizer-jugend-eurythmie-festival-nussknacker/"
             },
             {
-              "label": "Gin & Jazz - With The Bluezone Band",
-              "detail": "Hotel Schweizerhof Zürich, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/events/music/zurich/gin-und-jazz-with-the-bluezone-band_AwE5w6g"
+              "label": "Marek Janowski mit Schubert und Beethoven",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/marek-janowski-mit-schubert-und-beethoven-1/"
             },
             {
-              "label": "Ländler Open",
-              "detail": "Restaurant OLEA im Hotel Seedamm Plaza, Pfäffikon",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laendler-open-im-seedamm-plaza/"
+              "label": "NICKLESS (CH)",
+              "detail": "Plaza Klub",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/nickless-ch_AKpEtWX"
             },
             {
-              "label": "Hod Carrier Stompers Jazzband",
-              "detail": "Evang.-ref. Kirche Effretikon",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hod-carrier-stompers-jazzband/"
+              "label": "EHC Kloten - HC Ambri-Piotta",
+              "detail": "SWISS Arena, Kloten",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ehc-kloten-hc-ambri-piotta/"
             },
             {
-              "label": "Laura Pausini",
-              "detail": "Hallenstadion Zürich, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/laura-pausini_AM8J65Z"
+              "label": "ABGESAGT: Khalid: It’s Always Summer Somewhere Tour",
+              "detail": "Dübendorf",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/khalid-its-always-summer-somewhere-tour/"
             },
             {
-              "label": "Line Dance Night",
-              "detail": "Chesselhuus, Pfäffikon",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pfaeffikon-zh/line-dance-night_A8FCB8R"
+              "label": "Composer Jazz Orchestra",
+              "detail": "Musikklub Mehrspur",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/composer-jazz-orchestra_AubD5Vq"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -360,7 +360,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "fr": {
       "canton": "ZH",
@@ -370,7 +370,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "334",
+          "value": "343",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -381,64 +381,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Herbstausflug",
-              "detail": "Uitikon-Waldegg, Uitikon",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausflug/"
+              "label": "SHOWTIME! - Ein Ten Sing Ferienprogramm Herbstferien",
+              "detail": "Uetikon am See",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/showtime-ein-ten-sing-ferienprogramm-herbstferien/"
             },
             {
-              "label": "Simplement Zurich",
-              "detail": "Zurigo, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/semplicemente-zurigo-2/"
+              "label": "Viehschau Hittnau",
+              "detail": "Hof Ifang, Hittnau",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viehschau-hittnau/"
             },
             {
-              "label": "Zurich Wine Festival 2026",
-              "detail": "Papiersaal, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zurich-wine-festival-2026/"
+              "label": "Metzgete a Diskretion",
+              "detail": "Rümlang",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-a-diskretion-1/"
             },
             {
-              "label": "Einladung zum Raclette- Mittag",
-              "detail": "Schlieren",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-raclette-mittag/"
+              "label": "Konzert Orchesterlager der Jugendmusikschule Winterthur u. Umgebung",
+              "detail": "Wildhaus, Winterthur",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-orchesterlager-der-jugendmusikschule-winterthur-u-umgebung/"
             },
             {
-              "label": "Dîner - Erlebnis LoveBite",
-              "detail": "Kloten",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dinner-erlebnis-lovebite/"
+              "label": "6. Schweizer Jugend Eurythmie Festival - NUSSKNACKER",
+              "detail": "Wetzikon, Wetzikon (ZH)",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/6-schweizer-jugend-eurythmie-festival-nussknacker/"
             },
             {
-              "label": "Gin & Jazz - With The Bluezone Band",
-              "detail": "Hotel Schweizerhof Zürich, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/events/music/zurich/gin-und-jazz-with-the-bluezone-band_AwE5w6g"
+              "label": "Marek Janowski mit Schubert und Beethoven",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/marek-janowski-mit-schubert-und-beethoven-1/"
             },
             {
-              "label": "Ländler Open im SEEDAMM PLAZA",
-              "detail": "Restaurant OLEA im Hotel Seedamm Plaza, Pfäffikon",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laendler-open-im-seedamm-plaza/"
+              "label": "NICKLESS (CH)",
+              "detail": "Plaza Klub",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/nickless-ch_AKpEtWX"
             },
             {
-              "label": "Hod Carrier Stompers Jazzband",
-              "detail": "Evang.-ref. Kirche Effretikon",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hod-carrier-stompers-jazzband/"
+              "label": "EHC Kloten - HC Ambri-Piotta",
+              "detail": "SWISS Arena, Kloten",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ehc-kloten-hc-ambri-piotta/"
             },
             {
-              "label": "Laura Pausini",
-              "detail": "Hallenstadion Zürich, Zürich",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/laura-pausini_AM8J65Z"
+              "label": "ABGESAGT: Khalid: It’s Always Summer Somewhere Tour",
+              "detail": "Dübendorf",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/khalid-its-always-summer-somewhere-tour/"
             },
             {
-              "label": "Line Dance Night",
-              "detail": "Chesselhuus, Pfäffikon",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pfaeffikon-zh/line-dance-night_A8FCB8R"
+              "label": "Composer Jazz Orchestra",
+              "detail": "Musikklub Mehrspur",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/composer-jazz-orchestra_AubD5Vq"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -476,7 +476,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     }
   }
 }

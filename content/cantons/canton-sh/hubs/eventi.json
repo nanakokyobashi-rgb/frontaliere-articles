@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T00:06:40.869Z",
-  "contentHash": "20f90c991282e46a9aeb0bfacea46c1f0f45b8b13d0e5eab242028e41a18e635",
+  "updatedAt": "2026-10-16T00:00:55.142Z",
+  "contentHash": "c9348971f36952add57f8ba87fea9121b9462c827e7f2903bcda1e7a24b90881",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-14T13:57:52.093Z",
+      "updatedAt": "2026-10-15T13:57:57.453Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T10:37:16.619Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "22",
+          "value": "24",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,12 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
             {
               "label": "Bocktoberfest Schaffhausen 2026",
               "detail": "Messeareal, Schaffhausen",
@@ -60,6 +54,12 @@
               "detail": "Radio Rasa",
               "date": "2026-10-16",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/savana-funk_AabLSpU"
+            },
+            {
+              "label": "Wine mobile",
+              "detail": "Bringolf Weinbau, Hallau — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Auf den Spuren der Hugenotten und Waldenser",
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [],
@@ -127,7 +127,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "en": {
       "canton": "SH",
@@ -137,7 +137,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "22",
+          "value": "24",
           "note": "from the site’s events calendar"
         }
       ],
@@ -147,12 +147,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau — ongoing, last day: 25 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
             {
               "label": "Bocktoberfest Schaffhausen 2026",
               "detail": "Messeareal, Schaffhausen",
@@ -170,6 +164,12 @@
               "detail": "Radio Rasa",
               "date": "2026-10-16",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/savana-funk_AabLSpU"
+            },
+            {
+              "label": "Wine mobile",
+              "detail": "Bringolf Weinbau, Hallau — ongoing, last day: 25 October 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Auf den Spuren der Hugenotten und Waldenser",
@@ -210,7 +210,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -223,7 +223,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [],
@@ -237,7 +237,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "de": {
       "canton": "SH",
@@ -247,7 +247,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "22",
+          "value": "24",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -257,12 +257,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
             {
               "label": "Bocktoberfest Schaffhausen 2026",
               "detail": "Messeareal, Schaffhausen",
@@ -280,6 +274,12 @@
               "detail": "Radio Rasa",
               "date": "2026-10-16",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/savana-funk_AabLSpU"
+            },
+            {
+              "label": "Weinmobil",
+              "detail": "Bringolf Weinbau, Hallau — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Auf den Spuren der Hugenotten und Waldenser",
@@ -320,7 +320,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -333,7 +333,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [],
@@ -347,7 +347,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "fr": {
       "canton": "SH",
@@ -357,7 +357,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "22",
+          "value": "24",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -367,12 +367,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
             {
               "label": "Bocktoberfest Schaffhausen 2026",
               "detail": "Messeareal, Schaffhausen",
@@ -390,6 +384,12 @@
               "detail": "Radio Rasa",
               "date": "2026-10-16",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/savana-funk_AabLSpU"
+            },
+            {
+              "label": "Weinmobil",
+              "detail": "Bringolf Weinbau, Hallau — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Auf den Spuren der Hugenotten und Waldenser",
@@ -430,7 +430,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -443,7 +443,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [],
@@ -457,7 +457,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "6ba9d67aa6dcdaeb240c5c9b4578f6ca80177166927493d0b3ee394d2562c930",
+  "updatedAt": "2026-10-16T00:00:55.142Z",
+  "contentHash": "60894fb6b79e08287f8cd29b912d1048ca17fdbb6756b1434bf43faa5babb54a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T21:57:18.142Z",
+      "updatedAt": "2026-10-15T13:57:57.453Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "16",
+          "value": "15",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,18 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "4 x Murbach \"2 generazioni - 4 persone - 1 mostra\"",
-              "detail": "Gais",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/4-x-murbach-2-generazioni-4-persone-1-mostra/"
-            },
-            {
-              "label": "Giovedì conferenza Museo Heiden / Gertrud Kurz",
-              "detail": "Museum Heiden, Heiden",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-gertrud-kurz_AyWjH2M"
-            },
             {
               "label": "Raduno di Capodanno",
               "detail": "Rösslisaal, Trogen",
@@ -91,11 +79,23 @@
               "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
               "date": "2026-10-23",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/the-fools-on-the-hill_AhJcaUZ"
+            },
+            {
+              "label": "Festival del formaggio di Appenzello",
+              "detail": "Kapuzinerkloster Mariä Lichtmess",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaesefest-appenzell/"
+            },
+            {
+              "label": "Uno sguardo dietro le mura del carcere / Visite guidate pubbliche a Gmünden",
+              "detail": "Gefängnisse Gmünden, Teufen (AR)",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/blick-hinter-die-gefaengnismauern-oeffentliche-fuehrungen-in-gmuenden/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -119,7 +119,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "16",
+          "value": "15",
           "note": "from the site’s events calendar"
         }
       ],
@@ -129,18 +129,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "4 x Murbach \"2 Generations - 4 People - 1 Exhibition\"",
-              "detail": "Gais",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/4-x-murbach-2-generazioni-4-persone-1-mostra/"
-            },
-            {
-              "label": "Thursday lecture Museum Heiden / Gertrud Kurz",
-              "detail": "Museum Heiden, Heiden",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-gertrud-kurz_AyWjH2M"
-            },
             {
               "label": "New Year's Eve Gathering",
               "detail": "Rösslisaal, Trogen",
@@ -188,11 +176,23 @@
               "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
               "date": "2026-10-23",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/the-fools-on-the-hill_AhJcaUZ"
+            },
+            {
+              "label": "Appenzell Cheese Festival",
+              "detail": "Kapuzinerkloster Mariä Lichtmess",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaesefest-appenzell/"
+            },
+            {
+              "label": "A Look Behind Prison Walls / Public Tours in Gmünden",
+              "detail": "Gefängnisse Gmünden, Teufen (AR)",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/blick-hinter-die-gefaengnismauern-oeffentliche-fuehrungen-in-gmuenden/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -216,7 +216,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "16",
+          "value": "15",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -226,18 +226,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "4 x Murbach \"2 Generationen - 4 Personen - 1 Ausstellung\"",
-              "detail": "Gais",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/4-x-murbach-2-generazioni-4-persone-1-mostra/"
-            },
-            {
-              "label": "Donnerstagsvortrag Museum Heiden / Gertrud Kurz",
-              "detail": "Museum Heiden, Heiden",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-gertrud-kurz_AyWjH2M"
-            },
             {
               "label": "Herbst Gathering",
               "detail": "Rösslisaal, Trogen",
@@ -285,11 +273,23 @@
               "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
               "date": "2026-10-23",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/the-fools-on-the-hill_AhJcaUZ"
+            },
+            {
+              "label": "Käsefest Appenzell",
+              "detail": "Kapuzinerkloster Mariä Lichtmess",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaesefest-appenzell/"
+            },
+            {
+              "label": "Blick hinter die Gefängnismauern / Öffentliche Führungen in Gmünden",
+              "detail": "Gefängnisse Gmünden, Teufen (AR)",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/blick-hinter-die-gefaengnismauern-oeffentliche-fuehrungen-in-gmuenden/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "16",
+          "value": "15",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -323,18 +323,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "4 x Murbach « 2 générations - 4 personnes - 1 exposition »",
-              "detail": "Gais",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/4-x-murbach-2-generazioni-4-persone-1-mostra/"
-            },
-            {
-              "label": "Conférence du jeudi Musée de Heiden / Gertrud Kurz",
-              "detail": "Museum Heiden, Heiden",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-gertrud-kurz_AyWjH2M"
-            },
             {
               "label": "Rencontre du Nouvel An",
               "detail": "Rösslisaal, Trogen",
@@ -382,11 +370,23 @@
               "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
               "date": "2026-10-23",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/the-fools-on-the-hill_AhJcaUZ"
+            },
+            {
+              "label": "Fête du fromage d'Appenzell",
+              "detail": "Kapuzinerkloster Mariä Lichtmess",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaesefest-appenzell/"
+            },
+            {
+              "label": "Un aperçu de la vie derrière les murs de la prison / Visites guidées ouvertes au public à Gmünden",
+              "detail": "Gefängnisse Gmünden, Teufen (AR)",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/blick-hinter-die-gefaengnismauern-oeffentliche-fuehrungen-in-gmuenden/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     }
   }
 }
