@@ -70,6 +70,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-16T14:28:42.659Z",
       "lastFailureAt": "2026-10-16T14:28:42.659Z"
+    },
+    {
+      "articleId": "iniziativa-udc-asilo-limite",
+      "title": "Protezione delle frontiere: L'iniziativa UDC è controproducente",
+      "fallbackImage": "/images/blog/consiglio-federale-boccia-frontiere.webp",
+      "reason": "All image providers failed for article-iniziativa-udc-asilo-limite: openai-codex (vision gate rejected image: Generic synthetic border-crossing scene, but visible vehicle manufactu",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T16:42:43.589Z",
+      "lastFailureAt": "2026-10-16T16:42:43.589Z"
     }
   ]
 }
