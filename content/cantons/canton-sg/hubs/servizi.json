@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T14:33:38.367Z",
-  "contentHash": "1fe37ff88174d90819a08266633941836ae4e558fd0e255996c39c439753bfef",
+  "updatedAt": "2026-10-16T16:47:56.270Z",
+  "contentHash": "60072303e0221c780693951eb9d84833cf28779c8325257d1b986783d9df845a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,11 +16,6 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-16T04:30:54.466Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-16T04:46:09.647Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -103,20 +98,6 @@
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
           "updatedAt": "2026-10-16T04:30:54.466Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "St. Gallen",
-              "value": "9 °C",
-              "detail": "oggi da 8 a 18 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-16T04:46:09.647Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -234,7 +215,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T16:47:56.270Z"
     },
     "en": {
       "canton": "SG",
@@ -310,20 +291,6 @@
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
           "updatedAt": "2026-10-16T04:30:54.466Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "St. Gallen",
-              "value": "9 °C",
-              "detail": "today from 8 to 18 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-16T04:46:09.647Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -437,7 +404,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T16:47:56.270Z"
     },
     "de": {
       "canton": "SG",
@@ -513,20 +480,6 @@
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
           "updatedAt": "2026-10-16T04:30:54.466Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "St. Gallen",
-              "value": "9 °C",
-              "detail": "heute 8 bis 18 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-16T04:46:09.647Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -640,7 +593,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T16:47:56.270Z"
     },
     "fr": {
       "canton": "SG",
@@ -716,20 +669,6 @@
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
           "updatedAt": "2026-10-16T04:30:54.466Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "St. Gallen",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 8 à 18 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-16T04:46:09.647Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -839,7 +778,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T16:47:56.270Z"
     }
   }
 }

@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/colacem-il-19-rapporto-di-sostenibilita-46-milioni-di-investimenti-ambientali-in-tre-anni/2671399": {
-    "articleId": "colacem-sostenibilita-2025",
-    "ts": "2026-09-06T11:58:59.246Z",
-    "keyForm": 2
-  },
   "https://comozero.it/attualita/canton-ticino-incendio-in-galleria-a-bordo-di-un-treno-ma-e-unesercitazione": {
     "articleId": "incendio-galleria-monte-ceneri-esercitazione",
     "ts": "2026-09-06T18:23:54.984Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/dosso-e-disagi-a-gaggiolo-la-dogana-svizzera-spiega-scelta-fatta-per-la-sicurezza-di-pedoni-e-lavoratori/2710591": {
     "articleId": "dosso-gaggiolo-sicurezza-lavoratori",
     "ts": "2026-10-16T15:40:56.915Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1957311/iniziativa-svizzera-udc-frontiere-protezione": {
+    "articleId": "iniziativa-udc-asilo-limite",
+    "ts": "2026-10-16T16:42:43.591Z",
     "keyForm": 2
   }
 }

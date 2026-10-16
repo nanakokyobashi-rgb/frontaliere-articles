@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T16:18:26.289Z",
-  "contentHash": "8328151b65bea9eb67b6cf3626c0037a25377fc96ba813117c42d587deb605e8",
+  "updatedAt": "2026-10-16T16:47:56.270Z",
+  "contentHash": "214316335172bd827dc5f074f3bd2751476c9f5e38af3226990432e0e0ae21a2",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -21,11 +21,6 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-16T04:30:54.466Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-16T04:46:09.647Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -84,11 +79,6 @@
               "date": "2026-10-10T06:00:00.000Z"
             },
             {
-              "label": "Teatro",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-12T16:30:00.000Z"
-            },
-            {
               "label": "Ferrari",
               "detail": "Mendrisio, Mendrisiotto",
               "date": "2026-10-13T06:00:00.000Z"
@@ -106,6 +96,11 @@
             {
               "label": "Ferregutti",
               "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-17T06:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Salus",
+              "detail": "Lugano, Luganese",
               "date": "2026-10-17T06:00:00.000Z"
             }
           ],
@@ -136,40 +131,6 @@
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
           "updatedAt": "2026-10-16T04:30:54.466Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Bellinzona",
-              "value": "13 °C",
-              "detail": "oggi da 10 a 22 °C"
-            },
-            {
-              "label": "Chiasso",
-              "value": "11 °C",
-              "detail": "oggi da 11 a 21 °C"
-            },
-            {
-              "label": "Locarno",
-              "value": "13 °C",
-              "detail": "oggi da 13 a 22 °C"
-            },
-            {
-              "label": "Lugano",
-              "value": "14 °C",
-              "detail": "oggi da 12 a 22 °C"
-            },
-            {
-              "label": "Mendrisio",
-              "value": "11 °C",
-              "detail": "oggi da 11 a 20 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-16T04:46:09.647Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -295,7 +256,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-16T16:18:26.289Z"
+      "updatedAt": "2026-10-16T16:47:56.270Z"
     },
     "en": {
       "canton": "TI",
@@ -347,11 +308,6 @@
               "date": "2026-10-10T06:00:00.000Z"
             },
             {
-              "label": "Teatro",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-12T16:30:00.000Z"
-            },
-            {
               "label": "Ferrari",
               "detail": "Mendrisio, Mendrisiotto",
               "date": "2026-10-13T06:00:00.000Z"
@@ -369,6 +325,11 @@
             {
               "label": "Ferregutti",
               "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-17T06:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Salus",
+              "detail": "Lugano, Luganese",
               "date": "2026-10-17T06:00:00.000Z"
             }
           ],
@@ -399,40 +360,6 @@
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
           "updatedAt": "2026-10-16T04:30:54.466Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Bellinzona",
-              "value": "13 °C",
-              "detail": "today from 10 to 22 °C"
-            },
-            {
-              "label": "Chiasso",
-              "value": "11 °C",
-              "detail": "today from 11 to 21 °C"
-            },
-            {
-              "label": "Locarno",
-              "value": "13 °C",
-              "detail": "today from 13 to 22 °C"
-            },
-            {
-              "label": "Lugano",
-              "value": "14 °C",
-              "detail": "today from 12 to 22 °C"
-            },
-            {
-              "label": "Mendrisio",
-              "value": "11 °C",
-              "detail": "today from 11 to 20 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-16T04:46:09.647Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -553,7 +480,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-16T16:18:26.289Z"
+      "updatedAt": "2026-10-16T16:47:56.270Z"
     },
     "de": {
       "canton": "TI",
@@ -605,11 +532,6 @@
               "date": "2026-10-10T06:00:00.000Z"
             },
             {
-              "label": "Teatro",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-12T16:30:00.000Z"
-            },
-            {
               "label": "Ferrari",
               "detail": "Mendrisio, Mendrisiotto",
               "date": "2026-10-13T06:00:00.000Z"
@@ -627,6 +549,11 @@
             {
               "label": "Ferregutti",
               "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-17T06:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Salus",
+              "detail": "Lugano, Luganese",
               "date": "2026-10-17T06:00:00.000Z"
             }
           ],
@@ -657,40 +584,6 @@
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
           "updatedAt": "2026-10-16T04:30:54.466Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Bellinzona",
-              "value": "13 °C",
-              "detail": "heute 10 bis 22 °C"
-            },
-            {
-              "label": "Chiasso",
-              "value": "11 °C",
-              "detail": "heute 11 bis 21 °C"
-            },
-            {
-              "label": "Locarno",
-              "value": "13 °C",
-              "detail": "heute 13 bis 22 °C"
-            },
-            {
-              "label": "Lugano",
-              "value": "14 °C",
-              "detail": "heute 12 bis 22 °C"
-            },
-            {
-              "label": "Mendrisio",
-              "value": "11 °C",
-              "detail": "heute 11 bis 20 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-16T04:46:09.647Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -811,7 +704,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-16T16:18:26.289Z"
+      "updatedAt": "2026-10-16T16:47:56.270Z"
     },
     "fr": {
       "canton": "TI",
@@ -863,11 +756,6 @@
               "date": "2026-10-10T06:00:00.000Z"
             },
             {
-              "label": "Teatro",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-12T16:30:00.000Z"
-            },
-            {
               "label": "Ferrari",
               "detail": "Mendrisio, Mendrisiotto",
               "date": "2026-10-13T06:00:00.000Z"
@@ -885,6 +773,11 @@
             {
               "label": "Ferregutti",
               "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-17T06:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Salus",
+              "detail": "Lugano, Luganese",
               "date": "2026-10-17T06:00:00.000Z"
             }
           ],
@@ -915,40 +808,6 @@
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
           "updatedAt": "2026-10-16T04:30:54.466Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Bellinzona",
-              "value": "13 °C",
-              "detail": "aujourd’hui de 10 à 22 °C"
-            },
-            {
-              "label": "Chiasso",
-              "value": "11 °C",
-              "detail": "aujourd’hui de 11 à 21 °C"
-            },
-            {
-              "label": "Locarno",
-              "value": "13 °C",
-              "detail": "aujourd’hui de 13 à 22 °C"
-            },
-            {
-              "label": "Lugano",
-              "value": "14 °C",
-              "detail": "aujourd’hui de 12 à 22 °C"
-            },
-            {
-              "label": "Mendrisio",
-              "value": "11 °C",
-              "detail": "aujourd’hui de 11 à 20 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-16T04:46:09.647Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1066,7 +925,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-16T16:18:26.289Z"
+      "updatedAt": "2026-10-16T16:47:56.270Z"
     }
   }
 }

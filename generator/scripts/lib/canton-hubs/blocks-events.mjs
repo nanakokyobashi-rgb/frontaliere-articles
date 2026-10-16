@@ -28,6 +28,10 @@ function eventIdIdentity(value) {
   return '';
 }
 
+function compareEventSourceIndex(a, b) {
+  return a[EVENT_SOURCE_INDEX] - b[EVENT_SOURCE_INDEX];
+}
+
 /** URL o luogo identificano la copia; ID e indice separano gli omonimi senza luogo. */
 function eventIdentityKey(e) {
   const url = canonicalEventUrl(e.url);
@@ -104,7 +108,8 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
       || b.startDate.localeCompare(a.startDate)
       || String(a.startTime ?? '').localeCompare(String(b.startTime ?? ''))
       || a.title.localeCompare(b.title)
-      || String(a.id ?? '').localeCompare(String(b.id ?? '')))
+      || String(a.id ?? '').localeCompare(String(b.id ?? ''))
+      || compareEventSourceIndex(a, b))
     // Lo stesso evento arriva da piu' agende: un URL esplicito prevale,
     // altrimenti il luogo conserva la deduplica esistente; senza luogo l'ID
     // separa gli omonimi. Record senza identificatori restano distinti.
