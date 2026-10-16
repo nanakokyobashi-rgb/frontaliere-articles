@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-don-giusto-teatro-nuovo-gloria.webp",
-      "sha256": "f11381c51442fad5ae89de046de5165f5f8c41c066951394286ac21d046f49dd"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-don-giusto-teatro-nuovo-gloria-480w.webp",
-      "sha256": "7e3318dabc8ed3bf69ec63e767f598f22bd7513e091d8161be1337adbcdb8c4b"
-    }
-  ]
+  "items": []
 }
