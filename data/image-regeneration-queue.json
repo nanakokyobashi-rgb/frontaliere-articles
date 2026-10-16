@@ -12,16 +12,6 @@
       "lastFailureAt": "2026-10-15T21:05:23.446Z"
     },
     {
-      "articleId": "liberta-fondo-pene-sostitutive",
-      "title": "Multe non pagate? Ecco chi può salvarvi dal carcere",
-      "fallbackImage": "/images/blog/lavori-pubblica-utilita-multe-pene.webp",
-      "reason": "All image providers failed for article-liberta-fondo-pene-sostitutive: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration with no readable text, logos, or identifiable face, but a recognizable foregrou",
-      "status": "failed",
-      "failureCount": 3,
-      "requestedAt": "2026-10-14T21:58:03.380Z",
-      "lastFailureAt": "2026-10-15T17:29:00.338Z"
-    },
-    {
       "articleId": "opportunita-impiego-federale",
       "title": "Lavorare per l'Amministrazione federale: 50 formazioni",
       "fallbackImage": "/images/places/lugano-view.webp",
@@ -42,54 +32,34 @@
       "lastFailureAt": "2026-10-15T21:08:28.839Z"
     },
     {
-      "articleId": "inchiesta-medico-locarnese",
-      "title": "Reati sessuali su pazienti, un medico in carcere",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-15T21:15:44.304Z",
-      "lastFailureAt": "2026-10-15T21:15:44.304Z"
-    },
-    {
-      "articleId": "ssr-riduce-organico-risparmi",
-      "title": "La SSR taglia altri 202 posti di lavoro",
-      "fallbackImage": "/images/blog/swiss-life-taglio-posti-lavoro-2028.webp",
-      "reason": "All image providers failed for article-ssr-riduce-organico-risparmi: openai-codex (vision gate rejected image: Generic synthetic newsroom scene, but it includes a recognizable fore",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-15T21:41:27.541Z",
-      "lastFailureAt": "2026-10-15T21:41:27.541Z"
-    },
-    {
       "articleId": "arresto-cittadino-russo-como",
       "title": "Como, arrestato cittadino russo per ingresso abusivo",
       "fallbackImage": "/images/blog/devastazione-vagone-como-fermo.webp",
-      "reason": "All image providers failed for article-arresto-cittadino-russo-como: openai-codex (vision gate rejected image: Generic Como street scene, but visible traffic signage and a recogniz",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-arresto-cittadino-russo-como: openai-codex (vision gate rejected image: Generic synthetic editorial scene with no text, logo, or visible face, but a recognizable foreground person is present.); gemini ",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-15T22:59:15.513Z",
-      "lastFailureAt": "2026-10-15T22:59:15.513Z"
+      "lastFailureAt": "2026-10-16T00:06:46.437Z"
     },
     {
       "articleId": "estradizione-pakistan-como",
       "title": "Accusato di omicidio, arrestato a Como per l’estradizione",
       "fallbackImage": "/images/blog/estradizione-arresto-como.webp",
-      "reason": "All image providers failed for article-estradizione-pakistan-como: openai-codex (vision gate rejected image: Generic synthetic arrest illustration, but it includes recognizable for",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-estradizione-pakistan-como: openai-codex (vision gate rejected image: Generic synthetic train-station travel scene with no visible text, logos, or faces; however, a recognizable foreground traveler is ",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-15T23:12:57.417Z",
-      "lastFailureAt": "2026-10-15T23:12:57.417Z"
+      "lastFailureAt": "2026-10-16T00:07:40.603Z"
     },
     {
       "articleId": "mercatini-usato-svizzera",
       "title": "Mercatini usato: garanzia, marciapiede e falsi oltreconfine",
       "fallbackImage": "/images/blog/autonomi-frontalieri-svizzera-come-aprire.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-mercatini-usato-svizzera: openai-codex (vision gate rejected image: Generic synthetic secondhand-goods scene relevant to Switzerland; a faint watermark/logo is visible in the upper-right corner.); gemi",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-15T23:56:58.687Z",
-      "lastFailureAt": "2026-10-15T23:56:58.687Z"
+      "lastFailureAt": "2026-10-16T00:09:02.475Z"
     }
   ]
 }

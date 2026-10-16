@@ -108979,10 +108979,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-inchiesta-medico-locarnese.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Strada del Locarnese con un edificio pubblico in una scena sobria"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-15T21:15:43+00:00",
       "dateModified": "2026-10-15T21:15:43+00:00",
@@ -109013,10 +109013,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "La SSR ha annunciato giovedì il taglio di 202 posti a tempo pieno: 173 nelle Operazioni e 29 nei settori di supporto. Il provvedimento vale 41 milioni",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/swiss-life-taglio-posti-lavoro-2028.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ssr-riduce-organico-risparmi.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Redazione radiotelevisiva in Ticino con vista urbana, immagine simbolica dei tagli SSR."
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-15T21:41:27+00:00",
       "dateModified": "2026-10-15T21:41:27+00:00",
