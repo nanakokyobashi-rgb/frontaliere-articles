@@ -90,6 +90,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-16T03:19:05.551Z",
       "lastFailureAt": "2026-10-16T03:19:05.551Z"
+    },
+    {
+      "articleId": "farmaci-generici-prezzi-svizzera",
+      "title": "Farmaci generici: quanto paga di più la Svizzera",
+      "fallbackImage": "/images/blog/carne-prezzi-svizzera.webp",
+      "reason": "All image providers failed for article-farmaci-generici-prezzi-svizzera: openai-codex (vision gate rejected image: Small shelf price-tag-like markings are visible, though no text i",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T04:55:50.944Z",
+      "lastFailureAt": "2026-10-16T04:55:50.944Z"
     }
   ]
 }
