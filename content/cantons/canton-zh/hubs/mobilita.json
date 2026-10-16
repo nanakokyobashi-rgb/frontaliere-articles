@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T02:40:36.084Z",
-  "contentHash": "0d02c162954fda290db658060563a7416b69199dc50ff0a4428980b7ea2543ba",
+  "updatedAt": "2026-10-16T03:02:31.746Z",
+  "contentHash": "e5d602efa92a4a0dd8c48a1a623da4c83e7f1210f7748402b0ed6dec124dee22",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "14",
+          "value": "13",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         },
         {
@@ -117,12 +117,6 @@
               "date": "2026-02-04T11:53:00.000Z"
             },
             {
-              "label": "A1L Letten <-> Raccordo di Zurigo-Est tra Svincolo autostradale Letten E Galleria Galleria di Schöneich Situazione: chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 16 ottobre 2026",
-              "date": "2026-06-02T12:28:00.000Z"
-            },
-            {
               "label": "A3 Basel -> Chur Svincolo autostradale Urdorf Nord Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.3",
               "value": "Chiusura",
               "detail": "fine prevista: 5 novembre 2026",
@@ -157,6 +151,12 @@
               "value": "Chiusura",
               "detail": "fine prevista: 22 ottobre 2026",
               "date": "2026-09-30T19:00:00.000Z"
+            },
+            {
+              "label": "A52 Zürich -> Hinwil tra Svincolo autostradale Hinteregg E Svincolo autostradale Oetwil am See Situazione: chiusa cantiere Causa: lavori di costruzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 19 ottobre 2026",
+              "date": "2026-10-07T18:31:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -255,7 +255,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T02:40:36.084Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     },
     "en": {
       "canton": "ZH",
@@ -270,7 +270,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "14",
+          "value": "13",
           "note": "reports as of 15 October 2026"
         },
         {
@@ -350,12 +350,6 @@
               "date": "2026-02-04T11:53:00.000Z"
             },
             {
-              "label": "A1L Letten <-> Raccordo di Zurigo-Est tra Svincolo autostradale Letten E Galleria Galleria di Schöneich Situazione: chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 16 October 2026",
-              "date": "2026-06-02T12:28:00.000Z"
-            },
-            {
               "label": "A3 Basel -> Chur Svincolo autostradale Urdorf Nord Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.3",
               "value": "Closure",
               "detail": "until 5 November 2026",
@@ -390,6 +384,12 @@
               "value": "Closure",
               "detail": "until 22 October 2026",
               "date": "2026-09-30T19:00:00.000Z"
+            },
+            {
+              "label": "A52 Zürich -> Hinwil tra Svincolo autostradale Hinteregg E Svincolo autostradale Oetwil am See Situazione: chiusa cantiere Causa: lavori di costruzione",
+              "value": "Closure",
+              "detail": "until 19 October 2026",
+              "date": "2026-10-07T18:31:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -488,7 +488,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T02:40:36.084Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     },
     "de": {
       "canton": "ZH",
@@ -503,7 +503,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "14",
+          "value": "13",
           "note": "Meldungen vom 15. Oktober 2026"
         },
         {
@@ -583,12 +583,6 @@
               "date": "2026-02-04T11:53:00.000Z"
             },
             {
-              "label": "A1L Letten <-> Verzweigung Zürich-Ost zwischen Anschluss Letten und Tunnel Schöneich-Tunnel Sachlage: Strecke gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 16. Oktober 2026",
-              "date": "2026-06-02T12:28:00.000Z"
-            },
-            {
               "label": "A3 Basel -> Chur Anschluss Urdorf-Nord Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.3",
               "value": "Sperrung",
               "detail": "bis 5. November 2026",
@@ -623,6 +617,12 @@
               "value": "Sperrung",
               "detail": "bis 22. Oktober 2026",
               "date": "2026-09-30T19:00:00.000Z"
+            },
+            {
+              "label": "A52 Zürich -> Hinwil zwischen Anschluss Hinteregg und Anschluss Oetwil am See Sachlage: Strecke gesperrt Baustelle Ursache: Bauarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 19. Oktober 2026",
+              "date": "2026-10-07T18:31:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -721,7 +721,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T02:40:36.084Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     },
     "fr": {
       "canton": "ZH",
@@ -736,7 +736,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "14",
+          "value": "13",
           "note": "signalements au 15 octobre 2026"
         },
         {
@@ -816,12 +816,6 @@
               "date": "2026-02-04T11:53:00.000Z"
             },
             {
-              "label": "A1L Letten <-> Echangeur de Zurich-Est entre Jonction autoroutière Letten et Tunnel Tunnel de Schöneich Situation: fermé travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 16 octobre 2026",
-              "date": "2026-06-02T12:28:00.000Z"
-            },
-            {
               "label": "A3 Bâle -> Coire Jonction autoroutière Urdorf-Nord Situation: entrée fermée travaux, longueur [km] 0.3",
               "value": "Fermeture",
               "detail": "jusqu’au 5 novembre 2026",
@@ -856,6 +850,12 @@
               "value": "Fermeture",
               "detail": "jusqu’au 22 octobre 2026",
               "date": "2026-09-30T19:00:00.000Z"
+            },
+            {
+              "label": "A52 Zurich -> Hinwil entre Jonction autoroutière Hinteregg et Jonction autoroutière Oetwil am See Situation: fermé travaux Raison: travaux de construction",
+              "value": "Fermeture",
+              "detail": "jusqu’au 19 octobre 2026",
+              "date": "2026-10-07T18:31:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -954,7 +954,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T02:40:36.084Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     }
   }
 }

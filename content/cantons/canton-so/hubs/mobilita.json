@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "4dc9cc80196b6bea24b6c1f8babf5282799920f14a673ffb1f8021406010f63e",
+  "updatedAt": "2026-10-16T03:02:31.746Z",
+  "contentHash": "4467ed1f661c43fd8c39a2b47f53e86503ac617f8d8d0f999c00b25bb527df2d",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "21",
+          "value": "18",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
@@ -109,7 +109,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -148,7 +148,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     },
     "en": {
       "canton": "SO",
@@ -163,7 +163,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "21",
+          "value": "18",
           "note": "reports as of 15 October 2026"
         }
       ],
@@ -240,7 +240,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -278,7 +278,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     },
     "de": {
       "canton": "SO",
@@ -293,7 +293,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "21",
+          "value": "18",
           "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
@@ -370,7 +370,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -408,7 +408,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     },
     "fr": {
       "canton": "SO",
@@ -423,7 +423,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "21",
+          "value": "18",
           "note": "signalements au 15 octobre 2026"
         }
       ],
@@ -500,7 +500,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -539,7 +539,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     }
   }
 }
