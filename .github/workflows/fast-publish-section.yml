@@ -126,6 +126,7 @@ jobs:
       matrix: ${{ steps.plan.outputs.matrix }}
       any: ${{ steps.plan.outputs.any }}
       dry: ${{ steps.plan.outputs.dry }}
+      push_before: ${{ steps.push_range.outputs.before }}
     steps:
       - name: Checkout (resolve)
         uses: actions/checkout@v7
@@ -134,10 +135,41 @@ jobs:
           fetch-depth: 2
           persist-credentials: false
 
-      - name: Fetch push base (resolve)
-        if: github.event_name == 'push'
+      - name: Resolve originating push range
+        id: push_range
         env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
           PUSH_BEFORE: ${{ github.event.before }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          before="${PUSH_BEFORE:-}"
+          if [ "$EVENT_NAME" = 'workflow_run' ]; then
+            if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || ! [[ "$WORKFLOW_RUN_HEAD_SHA" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::error::workflow_run head SHA non valido"
+              exit 1
+            fi
+            push_events="$(gh api --paginate --slurp "repos/$REPO/commits/$WORKFLOW_RUN_HEAD_SHA/events")"
+            before="$(jq -r --arg head "$WORKFLOW_RUN_HEAD_SHA" '
+              [ .[]? | .[]?
+                | select(.type == "PushEvent"
+                  and .payload.ref == "refs/heads/main"
+                  and .payload.head == $head)
+                | .payload.before
+              ] | last // empty
+            ' <<< "$push_events")"
+            if [ -z "$before" ] || ! [[ "$before" =~ ^[a-f0-9]{40}$ ]] && ! [[ "$before" =~ ^0+$ ]]; then
+              echo "::error::before della push originaria non trovato per workflow_run head $WORKFLOW_RUN_HEAD_SHA"
+              exit 1
+            fi
+          fi
+          echo "before=$before" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch originating push base (resolve)
+        env:
+          PUSH_BEFORE: ${{ steps.push_range.outputs.before }}
         run: |
           set -euo pipefail
           if [ -n "${PUSH_BEFORE:-}" ] && [[ ! "$PUSH_BEFORE" =~ ^0+$ ]]; then
@@ -155,7 +187,7 @@ jobs:
           DRY_RUN_INPUT: ${{ inputs.dry_run }}
           EVENT_NAME: ${{ github.event_name }}
           COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-          PUSH_BEFORE: ${{ github.event.before }}
+          PUSH_BEFORE: ${{ steps.push_range.outputs.before }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
@@ -177,8 +209,6 @@ jobs:
               echo "::error::workflow_run head non coincide con il checkout"
               exit 1
             fi
-            before="$(git rev-parse HEAD^)"
-            PUSH_BEFORE="$before"
           fi
           if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -245,13 +275,16 @@ jobs:
         uses: actions/checkout@v7
         with:
           ref: ${{ github.event.workflow_run.head_sha || github.sha }}
-          fetch-depth: 2
+          # resolvePublishedReleaseCommit() verifica la release API con
+          # merge-base: una release precedente puo' essere fuori dai due
+          # commit che actions/checkout scarica di default.
+          fetch-depth: 0
           persist-credentials: false
 
       - name: Fetch fallback corpus revision for manifest migration
         env:
           EVENT_NAME: ${{ github.event_name }}
-          PUSH_BEFORE: ${{ github.event.before }}
+          PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
@@ -261,9 +294,9 @@ jobs:
               echo "::error::workflow_run head non coincide con il checkout"
               exit 1
             fi
-            PREVIOUS_REVISION="$(git rev-parse HEAD^)"
           fi
-          if [ -n "${PREVIOUS_REVISION:-}" ] && [[ ! "$PREVIOUS_REVISION" =~ ^0+$ ]]; then
+          if [ -n "${PREVIOUS_REVISION:-}" ] && [[ ! "$PREVIOUS_REVISION" =~ ^0+$ ]] \
+            && ! git cat-file -e "$PREVIOUS_REVISION^{commit}" 2>/dev/null; then
             git fetch --no-tags --depth=1 origin "$PREVIOUS_REVISION"
           fi
 
@@ -331,7 +364,7 @@ jobs:
           BOOTSTRAP: ${{ matrix.target.bootstrap }}
           DRY: ${{ needs.resolve.outputs.dry }}
           EVENT_NAME: ${{ github.event_name }}
-          PUSH_BEFORE: ${{ github.event.before }}
+          PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
@@ -342,7 +375,6 @@ jobs:
               echo "::error::workflow_run head non coincide con il checkout"
               exit 1
             fi
-            previous_revision="$(git rev-parse HEAD^)"
           fi
           if [ -n "$previous_revision" ] && [[ ! "$previous_revision" =~ ^0+$ ]]; then
             args+=(--previous-revision "$previous_revision")

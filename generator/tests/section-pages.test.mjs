@@ -1567,9 +1567,15 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /github\.event\.workflow_run\.conclusion == 'success'/);
   assert.match(wf, /github\.event\.workflow_run\.event == 'push'/);
   assert.match(wf, /ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| github\.sha \}\}/);
+  assert.match(wf, /id: push_range[\s\S]*gh api --paginate --slurp "repos\/\$REPO\/commits\/\$WORKFLOW_RUN_HEAD_SHA\/events"/);
+  assert.match(wf, /payload\.ref == "refs\/heads\/main"[\s\S]*payload\.head == \$head[\s\S]*payload\.before/);
+  assert.match(wf, /push_before: \$\{\{ steps\.push_range\.outputs\.before \}\}/);
   assert.match(wf, /diff_args=\(\)[\s\S]*EVENT_NAME.*workflow_run[\s\S]*diff_args\+=\(-- sections\/registry\.json\)/);
   assert.match(wf, /PUSH_BEFORE="\$before" node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
-  assert.match(wf, /previous_revision="\$\(git rev-parse HEAD\^\)"/);
+  const publishCheckout = wf.slice(wf.indexOf('      - name: Checkout\n', wf.indexOf('\n  publish:\n')));
+  assert.match(publishCheckout, /fetch-depth: 0/);
+  assert.match(wf, /PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
+  assert.doesNotMatch(wf, /git rev-parse HEAD\^/);
   assert.match(wf, /group: fast-publish-\$\{\{ matrix\.target\.section \}\}\n\s+cancel-in-progress: false/);
   assert.match(wf, /fail-fast: false/);
   for (const p of ["'content/cantons/**'", "'content/blog-body-canton-*/**'", "'content/blog-meta-canton-*'", "'sections/registry.json'"]) {
