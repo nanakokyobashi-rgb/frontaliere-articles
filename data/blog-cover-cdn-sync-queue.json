@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-premio-furia-giovannini-varese.webp",
-      "sha256": "1fdae5008bb64184b36f178657578d2ffcaa048132bf35d2aa11dfbc926b152d"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-premio-furia-giovannini-varese-480w.webp",
-      "sha256": "2fc7d46f7dac45fe1c50d03f97fe94bf2c7247296719df1af36e1a81769d7db4"
-    }
-  ]
+  "items": []
 }
