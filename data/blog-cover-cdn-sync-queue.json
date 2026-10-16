@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-stazione-ffs-coltello-ritrovato.webp",
+      "sha256": "0c859a1163d492545b453e9161c8469e6f9f940d7ac703f75c0c257dd8f140a2"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-stazione-ffs-coltello-ritrovato-480w.webp",
+      "sha256": "a09a6a99bdae37f3fb4000e6aad73924214d02c7e155dcd4df82eb0dfc209c40"
+    }
+  ]
 }
