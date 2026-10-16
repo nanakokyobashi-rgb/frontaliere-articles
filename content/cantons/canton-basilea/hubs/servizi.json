@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "f4190c89fd4bbee082ccb5271a5e64cdf4b6386b0c5fbafee7c53a92622c5158",
+  "updatedAt": "2026-10-16T22:03:59.742Z",
+  "contentHash": "142e7a7bf6d8a99f7d27567b813b60f5ace1757079d0137b37f70363734c6fb7",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -81,11 +81,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-15T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-10-16T22:00:00.000Z"
             },
             {
@@ -107,6 +102,11 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-10-20T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
@@ -249,7 +249,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-16T22:03:59.742Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -303,11 +303,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-15T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-10-16T22:00:00.000Z"
             },
             {
@@ -329,6 +324,11 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-10-20T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
@@ -463,7 +463,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-16T22:03:59.742Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -517,11 +517,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-15T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-10-16T22:00:00.000Z"
             },
             {
@@ -543,6 +538,11 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-10-20T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
@@ -677,7 +677,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-16T22:03:59.742Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -731,11 +731,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-15T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-10-16T22:00:00.000Z"
             },
             {
@@ -757,6 +752,11 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-10-20T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
@@ -883,7 +883,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-16T22:03:59.742Z"
     }
   }
 }

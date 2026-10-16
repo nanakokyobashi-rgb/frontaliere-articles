@@ -48,6 +48,8 @@ import {
   pageCarriesItem,
   pageTitleEvidence,
   shortHeadlineEvidence,
+  shortHeadlineTokenPolicy,
+  selectConsistentTitleEvidence,
   stripItemIdentity,
   withItemIdentity,
 } from '../scripts/lib/source-url-ledger.mjs';
@@ -237,7 +239,7 @@ test('shortHeadlineEvidence: richiede il titolo completo fra i titoli dichiarati
   // Esempi sintetici per il predicato puro; le prove di pagina sono testate
   // separatamente con i fixture RSS/HTML acquisiti dalla fonte.
   assert.equal(shortHeadlineEvidence('A 13: Stau', 'A 13: Stau'), true);
-  assert.equal(shortHeadlineEvidence('Titolo diverso\rA 13: Stau', 'A 13: Stau'), true);
+  assert.equal(shortHeadlineEvidence('Titolo diverso\rA 13: Stau', 'A 13: Stau'), false);
   assert.equal(shortHeadlineEvidence('A 13: Stau | Südostschweiz', 'A 13: Stau'), false);
   assert.equal(shortHeadlineEvidence('A 13: Unfall', 'A 13: Stau'), false);
   assert.equal(shortHeadlineEvidence('Stau im Verkehr auf der A 13', 'A 13: Stau'), false);
@@ -251,6 +253,35 @@ test('shortHeadlineEvidence: richiede il titolo completo fra i titoli dichiarati
   assert.equal(pageCarriesItem('Stau, Erdrutsch oder sonst ein Ereignis', 'A 13: Stau'), false);
   assert.equal(pageCarriesItem('testo generico con Stau', 'A 13: Stau', { titleEvidence: 'A 13: Stau' }), true);
   assert.equal(pageCarriesItem('testo generico con Stau', 'A 13: Stau', { titleEvidence: 'Titolo diverso' }), false);
+});
+
+test('shortHeadlineTokenPolicy counts visible Unicode characters instead of UTF-16 code units', () => {
+  assert.equal(shortHeadlineTokenPolicy('abcd'), true);
+  assert.equal(shortHeadlineTokenPolicy('abc'), false);
+  assert.equal(shortHeadlineTokenPolicy('𐐀𐐁'), false, 'two astral letters are two visible characters');
+  assert.equal(shortHeadlineTokenPolicy('e\u0301x'), false, 'a combining sequence is one visible character');
+  assert.equal(shortHeadlineTokenPolicy('e\u0301xit'), true, 'four grapheme clusters meet the threshold');
+
+  const headline = '𐐀𐐁 𐐂𐐃';
+  assert.equal(shortHeadlineEvidence(headline, headline), true);
+  assert.equal(pageCarriesItem('', headline, { titleEvidence: headline }), true);
+});
+
+test('selectConsistentTitleEvidence rejects conflicting declarations before matching a headline', () => {
+  const matching = 'A 13: Stau';
+  const equivalent = 'a 13 – STAU';
+  const conflicting = `A 13: Unfall\r${matching}`;
+  const conflictingHtml = pageTitleEvidence(
+    '<meta property="og:title" content="A 13: Unfall">'
+      + '<meta name="twitter:title" content="A 13: Stau">',
+  );
+
+  assert.equal(selectConsistentTitleEvidence(`${matching}\r${equivalent}`), matching);
+  assert.equal(selectConsistentTitleEvidence([`${matching}\r${equivalent}`, 'A 13: STAU']), matching);
+  assert.equal(selectConsistentTitleEvidence(conflicting), '');
+  assert.equal(selectConsistentTitleEvidence([conflicting]), '');
+  assert.equal(shortHeadlineEvidence(conflicting, matching), false);
+  assert.equal(shortHeadlineEvidence(conflictingHtml, matching), false);
 });
 
 test('checkItemOnPage: titoli della pagina, testo e giornata — sulla pagina reale del ticker', () => {

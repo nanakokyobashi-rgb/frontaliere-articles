@@ -5,31 +5,31 @@
       "articleId": "offerte-formazione-federale",
       "title": "Amministrazione federale: lavoro, praticantati e formazione",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Generic synthetic study/work scene, but it includes a recognizable foreground person viewed from behind.); gemini (Gemini image re",
+      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Generic synthetic office-work scene relevant to Swiss work, but it contains a recognizable foreground person viewed from behind.);",
       "status": "failed",
-      "failureCount": 8,
+      "failureCount": 9,
       "requestedAt": "2026-10-13T23:44:58.192Z",
-      "lastFailureAt": "2026-10-16T15:11:56.876Z"
+      "lastFailureAt": "2026-10-16T21:54:32.267Z"
     },
     {
       "articleId": "opportunita-impiego-federale",
       "title": "Lavorare per l'Amministrazione federale: 50 formazioni",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-opportunita-impiego-federale: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration set in Switzerland; no text, logos, or recognizable face, but a recognizable fore",
+      "reason": "All image providers failed for article-opportunita-impiego-federale: openai-codex (vision gate rejected image: Synthetic photorealistic illustration; a recognizable foreground person is visible from behind.); gemini (Gemini image request fa",
       "status": "failed",
-      "failureCount": 5,
+      "failureCount": 6,
       "requestedAt": "2026-10-15T01:49:05.613Z",
-      "lastFailureAt": "2026-10-16T15:12:52.549Z"
+      "lastFailureAt": "2026-10-16T21:55:25.435Z"
     },
     {
       "articleId": "dimissioni-rapporto-ticino",
       "title": "Dimissioni da frontaliere: termini e passi in Ticino",
       "fallbackImage": "/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp",
-      "reason": "All image providers failed for article-dimissioni-rapporto-ticino: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Ticino commuting, but it includes a recognizable foreground person viewed from behind",
+      "reason": "All image providers failed for article-dimissioni-rapporto-ticino: openai-codex (vision gate rejected image: Generic synthetic commuter-train illustration relevant to Ticino transit, but it includes a recognizable foreground person viewed f",
       "status": "failed",
-      "failureCount": 4,
+      "failureCount": 5,
       "requestedAt": "2026-10-15T11:39:57.424Z",
-      "lastFailureAt": "2026-10-16T15:13:55.302Z"
+      "lastFailureAt": "2026-10-16T21:56:24.019Z"
     },
     {
       "articleId": "estradizione-pakistan-como",
@@ -42,24 +42,14 @@
       "lastFailureAt": "2026-10-16T18:42:36.763Z"
     },
     {
-      "articleId": "mostre-maga-gallarate-2026",
-      "title": "Gallarate: tre nuove mostre al Maga da Jago a Leopardi",
-      "fallbackImage": "/images/blog/article-teatro-intred-varese-stagione-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "failed",
-      "failureCount": 1,
-      "requestedAt": "2026-10-16T11:58:37.222Z",
-      "lastFailureAt": "2026-10-16T15:20:29.883Z"
-    },
-    {
       "articleId": "maratona-laghi-varese-2027",
       "title": "Maratona dei Laghi 2027: attesi 2000 runner tra Varese e Monate",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-maratona-laghi-varese-2027: openai-codex (vision gate rejected image: Photorealistic synthetic illustration of runners beside a lake; no text, logos, or recognizable faces, but a prominent foreground r",
+      "reason": "All image providers failed for article-maratona-laghi-varese-2027: openai-codex (vision gate rejected image: Synthetic lakeside running illustration relevant to the marathon subject, but a recognizable foreground runner is visible from behi",
       "status": "failed",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-16T13:10:19.548Z",
-      "lastFailureAt": "2026-10-16T15:21:27.833Z"
+      "lastFailureAt": "2026-10-16T21:58:21.196Z"
     },
     {
       "articleId": "dosso-gaggiolo-disagi-frontalieri",
@@ -95,21 +85,21 @@
       "articleId": "semafori-cadenazzo-proteste-ustra",
       "title": "PATTI CHIARI Cadenazzo, si accendono semafori… e proteste",
       "fallbackImage": "/images/blog/article-semafori-autostrade-ustra-ticino.webp",
-      "reason": "All image providers failed for article-semafori-cadenazzo-proteste-ustra: openai-codex (vision gate rejected image: Topic-relevant synthetic traffic scene, but visible traffic ligh",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "image generation deadline exceeded",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-16T21:09:58.069Z",
-      "lastFailureAt": "2026-10-16T21:09:58.069Z"
+      "lastFailureAt": "2026-10-16T22:00:21.442Z"
     },
     {
       "articleId": "ia-assistente-shopping-svizzera",
       "title": "IA aiuta gli svizzeri nello shopping ma frena al pagamento",
       "fallbackImage": "/images/blog/frontaliere-acquisto-immobile-investimento-svizzera.webp",
-      "reason": "All image providers failed for article-ia-assistente-shopping-svizzera: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration relevant to AI-ass",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "image generation deadline exceeded",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-16T21:25:25.917Z",
-      "lastFailureAt": "2026-10-16T21:25:25.917Z"
+      "lastFailureAt": "2026-10-16T22:02:21.636Z"
     }
   ]
 }
