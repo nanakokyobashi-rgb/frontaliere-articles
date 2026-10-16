@@ -69,6 +69,7 @@ import { createInterface } from 'node:readline';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readArticleRegistry } from '../../scripts/lib/registry-image-reader.mjs';
+import { readCanonicalPath } from '../../scripts/lib/seo-canonical-path.mjs';
 import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, getProviderRosterStatus, providerRosterReady, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
 import { classifyWithDecisionsApi } from './lib/decisions-api.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
@@ -15658,87 +15659,10 @@ function assertSeoEntryNotRegistered(id) {
   );
 }
 
-function readCanonicalPath(block) {
-  // modifySeoService currently serializes itHubPath as a one-line
-  // single-quoted TypeScript literal. Read static string forms and literal
-  // concatenations without evaluating generated code. A dynamic expression
-  // stays distinguishable from a missing or empty field.
-  // The writer emits top-level fields with four spaces; don't mistake a
-  // similarly named field nested under structuredData for this value.
-  const field = block.match(/^ {4}canonicalPath\s*:\s*([^\r\n]*?)\s*,?[ \t\r]*$/m);
-  if (!field) return { kind: 'missing' };
-
-  const expression = field[1].trim();
-  let cursor = 0;
-  const skipWhitespace = () => {
-    while (/\s/.test(expression[cursor] || '')) cursor += 1;
-  };
-
-  const readStringLiteral = () => {
-    const templateQuote = String.fromCharCode(96);
-    const quote = expression[cursor];
-    if (quote !== "'" && quote !== '"' && quote !== templateQuote) return null;
-    cursor += 1;
-    let value = '';
-    while (cursor < expression.length) {
-      const ch = expression[cursor++];
-      if (ch === quote) return value;
-      if (ch === '\n' || ch === '\r') return null;
-      if (quote === templateQuote && ch === '$' && expression[cursor] === '{') return null;
-      if (ch !== '\\') {
-        value += ch;
-        continue;
-      }
-      if (cursor >= expression.length) return null;
-      const escaped = expression[cursor++];
-      const simpleEscapes = { n: '\n', r: '\r', t: '\t', b: '\b', f: '\f', v: '\v', '0': '\0' };
-      if (Object.hasOwn(simpleEscapes, escaped)) value += simpleEscapes[escaped];
-      else if (escaped === '\n') continue;
-      else if (escaped === '\r') {
-        if (expression[cursor] === '\n') cursor += 1;
-      } else if ("\\'\"$/".includes(escaped) || escaped === templateQuote) value += escaped;
-      else return null;
-    }
-    return null;
-  };
-
-  const readExpression = () => {
-    const readTerm = () => {
-      skipWhitespace();
-      if (expression[cursor] === '(') {
-        cursor += 1;
-        const value = readExpression();
-        skipWhitespace();
-        if (value === null || expression[cursor] !== ')') return null;
-        cursor += 1;
-        return value;
-      }
-      return readStringLiteral();
-    };
-
-    let value = readTerm();
-    if (value === null) return null;
-    while (true) {
-      skipWhitespace();
-      if (expression[cursor] !== '+') return value;
-      cursor += 1;
-      const next = readTerm();
-      if (next === null) return null;
-      value += next;
-    }
-  };
-
-  const value = readExpression();
-  skipWhitespace();
-  if (value === null || cursor !== expression.length) {
-    return { kind: 'unresolved', expression };
-  }
-  return { kind: 'resolved', value };
-}
-
 /**
- * Post-write validation re-reads the SEO entry using the same lexical,
- * balanced resolver as render-time consumers, then builds and parses JSON-LD.
+ * Post-write validation re-reads the SEO entry using the balanced entry
+ * resolver and enforces the writer's single-quoted canonicalPath grammar,
+ * then builds and parses JSON-LD.
  * This catches escaping and truncated-entry issues before publication.
  */
 function validateStructuredData(data) {

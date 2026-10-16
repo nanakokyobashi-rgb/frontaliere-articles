@@ -8,16 +8,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { readCanonicalPath } from '../../scripts/lib/seo-canonical-path.mjs';
 
 const source = readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf8');
 const start = source.indexOf('function validateStructuredData(data) {');
 const end = source.indexOf('function updateSitemapIndexLastmod(', start);
 assert.ok(start >= 0 && end > start);
-const readerStart = source.indexOf('function readCanonicalPath(block) {');
-assert.ok(readerStart >= 0 && readerStart < start);
-const readCanonicalPath = new Function(
-  source.slice(readerStart, start) + '\nreturn readCanonicalPath;',
-)();
 
 function validateCanonical(canonicalPath) {
   const entry = `{
@@ -69,26 +65,37 @@ test('validator rejects the no-slash canonicalPath the site review flagged', () 
   }
 });
 
-test('canonicalPath reader accepts static values from the SEO writer contract', () => {
+test('canonicalPath reader accepts the single-quoted value emitted by the SEO writer', () => {
   assert.match(source, /canonicalPath:\s*'\$\{itHubPath\}',/);
+  const expected = '/articoli-frontaliere/example/';
+  const expression = "'" + expected + "'";
+  const entry = '{\n    canonicalPath: ' + expression + ',\n}';
+  assert.deepEqual(readCanonicalPath(entry), { kind: 'resolved', value: expected });
+  assert.doesNotThrow(() => validateCanonicalExpression(expression));
+  const nestedOnly = '{\n    structuredData: {\n      canonicalPath: \"' + expected + '\"\n    },\n}';
+  assert.deepEqual(readCanonicalPath(nestedOnly), { kind: 'missing' });
+  const nestedBeforeTopLevel = '{\n    structuredData: {\n      canonicalPath: \"/wrong/\"\n    },\n'
+    + '    canonicalPath: ' + expression + ',\n}';
+  assert.deepEqual(readCanonicalPath(nestedBeforeTopLevel), { kind: 'resolved', value: expected });
+});
+
+test('canonicalPath reader rejects forms the writer does not emit', () => {
   const expected = '/articoli-frontaliere/example/';
   const templateQuote = String.fromCharCode(96);
   const expressions = [
-    "'" + expected + "'",
     '"' + expected + '"',
     templateQuote + expected + templateQuote,
     "('/articoli-frontaliere/' + 'example/')",
   ];
   for (const expression of expressions) {
     const entry = '{\n    canonicalPath: ' + expression + ',\n}';
-    assert.deepEqual(readCanonicalPath(entry), { kind: 'resolved', value: expected }, expression);
-    assert.doesNotThrow(() => validateCanonicalExpression(expression), expression);
+    assert.deepEqual(readCanonicalPath(entry), { kind: 'unresolved', expression }, expression);
+    assert.throws(
+      () => validateCanonicalExpression(expression),
+      /Cannot resolve canonicalPath expression/,
+      expression,
+    );
   }
-  const nestedOnly = '{\n    structuredData: {\n      canonicalPath: \"' + expected + '\"\n    },\n}';
-  assert.deepEqual(readCanonicalPath(nestedOnly), { kind: 'missing' });
-  const nestedBeforeTopLevel = '{\n    structuredData: {\n      canonicalPath: \"/wrong/\"\n    },\n'
-    + '    canonicalPath: \"' + expected + '\",\n}';
-  assert.deepEqual(readCanonicalPath(nestedBeforeTopLevel), { kind: 'resolved', value: expected });
 });
 
 test('canonicalPath reader distinguishes missing and unresolved computed values', () => {
@@ -103,9 +110,15 @@ test('canonicalPath reader distinguishes missing and unresolved computed values'
   );
 });
 
-test('resolved double-quoted canonicalPath still receives the trailing-slash validation', () => {
+test('refresh hub landing uses the same canonicalPath grammar', () => {
+  const refreshSource = readFileSync(new URL('../../scripts/refresh-hub-landing.mjs', import.meta.url), 'utf8');
+  assert.match(refreshSource, /import \{ readCanonicalPath \} from '\.\/lib\/seo-canonical-path\.mjs';/);
+  assert.doesNotMatch(refreshSource, /canonicalPath:\s*\["'\]/);
+});
+
+test('unsupported double-quoted canonicalPath is rejected before URL validation', () => {
   assert.throws(
     () => validateCanonicalExpression('"/articoli-frontaliere/example"'),
-    /canonicalPath .* must start and end with "\/"/,
+    /Cannot resolve canonicalPath expression/,
   );
 });
