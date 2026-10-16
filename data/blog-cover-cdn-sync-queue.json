@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-masha-orso-teatro-saronno.webp",
+      "sha256": "5285ee0a2ecda0f89148de2ce10cff9101aea5b54428a67515f7505ea73b61ef"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-masha-orso-teatro-saronno-480w.webp",
+      "sha256": "096ddfdd04badf4b195c21a794110d32c65d6fdd05f1bbef50ae383d75e557fb"
+    }
+  ]
 }
