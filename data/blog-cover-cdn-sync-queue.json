@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-fisco-zurigo-tre-livelli.webp",
+      "sha256": "9e3422970e619c6157fcf5c585ebe757eecaeafa99340e81f7ba76bc22b1b702"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-fisco-zurigo-tre-livelli-480w.webp",
+      "sha256": "76d53c6b8887ec32f1e67f3b6437aa1edd8ce90f7dcf0e85bbcc866d1527c406"
+    }
+  ]
 }
