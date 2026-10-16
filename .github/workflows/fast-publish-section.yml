@@ -79,9 +79,10 @@ on:
   # `sections/registry.json` and the edge API registry are published by
   # publish-api.yml. Its push-triggered run can finish after this workflow's
   # first pass; scheduled/manual runs can also change the effective API
-  # surface without a new Git diff. Completion runs read the effective edge
-  # registry, while push completions merge its non-live cleanup into the
-  # bounded diff plan.
+  # surface without a new Git diff. API push completions refresh the
+  # non-article surfaces of every live canton (RSS can change through API-only
+  # inputs), preserve article scope from the originating diff, and merge
+  # cleanup for sections no longer live.
   workflow_run:
     workflows: ['Publish article data API']
     types: [completed]
@@ -133,6 +134,11 @@ on:
         type: string
       source_commit:
         description: 'Commit del corpus da checkoutare nel replay bounded'
+        required: false
+        default: ''
+        type: string
+      source_main_commit:
+        description: 'HEAD di main osservata quando e’ stato preparato il replay bounded'
         required: false
         default: ''
         type: string
@@ -300,34 +306,24 @@ jobs:
               # Ogni completion API deve leggere il registro edge della
               # release appena completata: anche una kill-switch o un hub
               # mancante puo' rendere non-live una sezione senza una
-              # transizione in sections/registry.json. Per le push
-              # conserviamo il piano dal diff per non rinfrescare sezioni
-              # live non coinvolte, ma aggiungiamo sempre il cleanup delle
-              # sezioni effettivamente non-live.
+              # transizione in sections/registry.json.
               edge_matrix="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan \
                 "$WORKFLOW_RUN_HEAD_SHA" \
                 | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
               if [ "$WORKFLOW_RUN_EVENT" = 'push' ]; then
                 if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
-                # Il replay della push API deve riprodurre l'intero piano
+                # Il replay della push API deve riprodurre il piano dei contenuti
                 # della push originaria: il primo fast-publish puo' essere
-                # fallito mentre attendeva la release API, senza modificare
-                # il registro.
+                # fallito mentre attendeva la release API, senza modificare il registro.
                 diff_matrix="$(git diff --name-status "$before" HEAD 2>/dev/null \
                   | PUSH_BEFORE="$before" node scripts/ci/fast-publish-section.mjs r2-plan \
                   | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
-                matrix="$(jq -cn --argjson diff "$diff_matrix" --argjson edge "$edge_matrix" '
-                  reduce ($edge[] | select(.removeStaleCantonRssFeeds == true)) as $cleanup
-                    ($diff;
-                      if any(.[]; .section == $cleanup.section)
-                      then map(if .section == $cleanup.section
-                        then . + {removeStaleCantonRssFeeds: true}
-                        else .
-                        end)
-                      else . + [$cleanup]
-                      end
-                    )
-                ')"
+                # Un API push riuscito puo' cambiare RSS anche se il diff
+                # contiene solo input del generatore non associabili a una
+                # singola sezione. Aggiorna landing/archive/hub/RSS di tutte le
+                # cantonali live, mantenendo gli articoli circoscritti al diff.
+                matrix="$(printf '%s\n%s\n' "$diff_matrix" "$edge_matrix" \
+                  | node scripts/ci/fast-publish-section.mjs r2-api-push-plan)"
               else
                 matrix="$edge_matrix"
               fi
@@ -444,6 +440,7 @@ jobs:
           REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
           DRY: ${{ needs.resolve.outputs.dry }}
           STALE_HEAD: ${{ github.event.workflow_run.head_sha }}
+          CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
           ORIGINAL_PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
           ORIGINAL_PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
         run: |
@@ -463,6 +460,7 @@ jobs:
             -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
             -f api_release_commit="$STALE_HEAD" \
             -f source_commit="$STALE_HEAD" \
+            -f source_main_commit="$CURRENT_MAIN" \
             -f dry_run="$DRY" \
             -f push_before="$replay_before" \
             -f push_after="$replay_after"
@@ -560,6 +558,7 @@ jobs:
           REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
           API_RELEASE_COMMIT: ${{ inputs.api_release_commit }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          EXPECTED_MAIN_HEAD: ${{ github.event.workflow_run.head_sha || inputs.source_main_commit || github.event.after || github.sha }}
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
         run: |
@@ -586,6 +585,7 @@ jobs:
                 -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
                 -f api_release_commit="$WORKFLOW_RUN_HEAD_SHA" \
                 -f source_commit="$WORKFLOW_RUN_HEAD_SHA" \
+                -f source_main_commit="$current_main" \
                 -f dry_run="$DRY" \
                 -f push_before="$replay_before" \
                 -f push_after="$replay_after"

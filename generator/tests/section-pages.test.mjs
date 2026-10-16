@@ -75,7 +75,7 @@ import {
 import { cantonHubCoverage, cantonHubDataFile, cantonHubTopics, readCantonHubData } from '../../scripts/lib/canton-hub-data.mjs';
 import { declaredRegistryErrors, SECTION_REGISTRY_FILE } from '../../scripts/lib/section-registry.mjs';
 import { sourceRegistryIds } from '../../scripts/lib/corpus-floors.mjs';
-import { bodyRegex, liveR2ReconciliationPlan, liveRegistryTransitionSections, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
+import { bodyRegex, liveR2ReconciliationPlan, liveRegistryTransitionSections, r2ApiPushPlan, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
 import { cdnUrlFor, expectedSectionPages, headState, orphanedArticleCandidates, planSectionBackfill, reconcile } from '../../scripts/reconcile-section-pages.mjs';
 import { heroCdnUploads } from '../../scripts/lib/article-render-pipeline.mjs';
 import { cantonSectionPaths } from '../scripts/lib/canton-section-profile.mjs';
@@ -134,6 +134,7 @@ test('publisher --publish costruisce il manifest solo dopo una publish riuscita'
         parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
         fetchPageManifestImpl: async () => ({ state: 'ok', doc: publishedDoc }),
         publishedStatusImpl: async () => 'draft',
+        currentMainHeadImpl: () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
         createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
         renderSectionArticlePipelineImpl: async () => ({
           entries: [],
@@ -764,6 +765,37 @@ test('publisher: il delta comprende anche le pagine archivio page-N ritirate', (
   assert.equal(previous.filter((page) => page.canonicalPath.includes('/page-2/')).length, 4);
   assert.equal(obsolete.filter((page) => page.canonicalPath.includes('/page-2/')).length, 4);
   assert.ok(obsolete.every((page) => page.kind === 'archive'));
+});
+
+test('publisher: abortisce prima del primo upload se main avanza durante il render', async () => {
+  const events = [];
+  const realConsoleLog = console.log;
+  try {
+    console.log = () => {};
+    await assert.rejects(publish({
+      section: 'canton-ti',
+      pages: [],
+      cdnUploads: [{ local: '/tmp/hero.webp', key: 'images/hero.webp' }],
+      obsoletePages: [],
+      distDir: mkdtempSync(path.join(tmpdir(), 'publish-stale-main-')),
+      publishedStatusImpl: async () => {
+        events.push('read-status');
+        return 'draft';
+      },
+      assertMainFreshImpl: async () => {
+        events.push('check-main');
+        throw new Error('main e’ avanzato durante il render');
+      },
+      runImpl: () => {
+        events.push('upload');
+        return { code: 0, stdout: '✅ uploaded' };
+      },
+    }), /main e’ avanzato durante il render/);
+  } finally {
+    console.log = realConsoleLog;
+  }
+  assert.deepEqual(events, ['read-status', 'check-main']);
+  assert.ok(!events.includes('upload'), 'nessuna mutazione remota parte con un render obsoleto');
 });
 
 test('publisher: una pagina obsoleta resta intatta se la release corrente non e\' servita', async () => {
@@ -2076,6 +2108,37 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
   assert.deepEqual(r2PublishPlan(['content/cantons/canton-gr/registry.ts', 'content/blog-meta-canton-tipo-it.ts'], WITH_TI), []);
 });
 
+test('piano API push: aggiorna tutte le superfici cantonali live senza ampliare gli articoli', () => {
+  const otherCanton = { ...TI, section: 'canton-gr' };
+  const core = [...HISTORICAL_CORE_LIST, TI, otherCanton];
+  assert.deepEqual(
+    r2ApiPushPlan([], [
+      { section: 'canton-ti', ids: [], bootstrap: true },
+      { section: 'canton-gr', ids: [], bootstrap: true },
+    ], core),
+    [
+      { section: 'canton-ti', ids: [], bootstrap: false },
+      { section: 'canton-gr', ids: [], bootstrap: false },
+    ],
+    'una push API solo del generatore rinfresca landing/archive/hub/RSS per ogni sezione live senza il bootstrap degli articoli',
+  );
+  assert.deepEqual(
+    r2ApiPushPlan(
+      [{ section: 'canton-ti', ids: ['a'], bootstrap: false }],
+      [
+        { section: 'canton-ti', ids: [], bootstrap: true },
+        { section: 'canton-gr', ids: [], bootstrap: false, removeStaleCantonRssFeeds: true },
+      ],
+      core,
+    ),
+    [
+      { section: 'canton-ti', ids: ['a'], bootstrap: false },
+      { section: 'canton-gr', ids: [], bootstrap: false, removeStaleCantonRssFeeds: true },
+    ],
+    'conserva il diff degli articoli e aggiunge il cleanup edge delle sezioni non-live',
+  );
+});
+
 test('fast-publish verso gli shard ignora i corpi cantonali, quello R2 ignora le storiche', () => {
   assert.equal(bodyRegex(WITH_TI, { served: 'shard' }), '^content/(blog-body|blog-body-ch)/[a-z]{2}/.+\\.ts$');
   assert.equal(bodyRegex(WITH_TI, { served: 'r2' }), '^content/(blog-body-canton-ti)/[a-z]{2}/.+\\.ts$');
@@ -2110,6 +2173,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /-f source_commit="\$WORKFLOW_RUN_HEAD_SHA"/);
   assert.match(wf, /source_commit richiede una SHA completa/);
   assert.match(wf, /inputs\.source_commit/);
+  assert.match(wf, /source_main_commit:/);
+  assert.match(wf, /EXPECTED_MAIN_HEAD: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_main_commit \|\| github\.event\.after \|\| github\.sha \}\}/);
+  assert.match(wf, /-f source_main_commit="\$CURRENT_MAIN"/);
+  assert.match(wf, /-f source_main_commit="\$current_main"/);
   assert.match(wf, /replay_before="\$\{ORIGINAL_PUSH_BEFORE:-\$STALE_HEAD\}"/);
   assert.match(wf, /replay_after="\$\{ORIGINAL_PUSH_AFTER:-\$STALE_HEAD\}"/);
   assert.match(wf, /-f push_before="\$replay_before"/);
@@ -2127,9 +2194,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /r2-reconcile-plan \\\n\s+"\$WORKFLOW_RUN_HEAD_SHA"/);
   assert.match(wf, /edge_matrix="\$\(node scripts\/ci\/fast-publish-section\.mjs r2-reconcile-plan/);
   assert.match(wf, /if \[ "\$WORKFLOW_RUN_EVENT" = 'push' \]/);
-  assert.match(wf, /--argjson edge "\$edge_matrix"/);
-  assert.match(wf, /removeStaleCantonRssFeeds == true/);
-  assert.match(wf, /Il replay della push API deve riprodurre l'intero piano/);
+  assert.match(wf, /r2-api-push-plan/);
+  assert.match(wf, /landing\/archive\/hub\/RSS/);
+  assert.match(wf, /Il replay della push API deve riprodurre il piano dei\s+contenuti/);
+  assert.match(read('scripts/publish-section-pages.mjs'), /await assertMainFreshImpl\(\);\n  for \(const \{ local, key \} of cdnUploads\)/);
+  assert.match(read('scripts/publish-section-pages.mjs'), /EXPECTED_MAIN_HEAD non contiene una SHA completa/);
   const publishCheckout = wf.slice(wf.indexOf('      - name: Checkout\n', wf.indexOf('\n  publish:\n')));
   assert.match(publishCheckout, /fetch-depth: 0/);
   assert.match(wf, /PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);

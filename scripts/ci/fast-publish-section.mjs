@@ -225,6 +225,48 @@ export function liveR2ReconciliationPlan(registry, coreList = activeCorpusCoreEn
 }
 
 /**
+ * A successful API push can change canton RSS bytes even when its diff only
+ * touched an API-generation input that r2PublishPlan cannot map to one canton.
+ * Keep article work scoped to the originating diff, but refresh the
+ * non-article surfaces (landing/archive/hubs/RSS) of every currently-live
+ * section. Non-live cleanup from the edge registry remains authoritative.
+ */
+export function r2ApiPushPlan(diffPlan, edgePlan, coreList = activeCorpusCoreEntries()) {
+  if (!Array.isArray(diffPlan) || !Array.isArray(edgePlan)) {
+    throw new Error('r2 API push plan: diff ed edge devono essere matrici');
+  }
+  const sections = activeSourceSections(coreList).filter((section) => !section.shardKey);
+  const bySection = new Map();
+  const assertSection = (section) => {
+    if (!sections.some((entry) => entry.section === section && entry.kind === 'canton')) {
+      throw new Error(`r2 API push plan per sezione R2 non attiva: ${section}`);
+    }
+  };
+  for (const target of diffPlan) {
+    assertSection(target?.section);
+    bySection.set(target.section, {
+      section: target.section,
+      ids: Array.isArray(target.ids) ? [...target.ids] : [],
+      bootstrap: target.bootstrap === true,
+      ...(target.removeStaleCantonRssFeeds === true ? { removeStaleCantonRssFeeds: true } : {}),
+    });
+  }
+  for (const target of edgePlan) {
+    assertSection(target?.section);
+    const current = bySection.get(target.section);
+    if (target.removeStaleCantonRssFeeds === true) {
+      bySection.set(target.section, {
+        ...(current ?? { section: target.section, ids: [], bootstrap: false }),
+        removeStaleCantonRssFeeds: true,
+      });
+    } else if (!current) {
+      bySection.set(target.section, { section: target.section, ids: [], bootstrap: false });
+    }
+  }
+  return sections.filter(({ section }) => bySection.has(section)).map(({ section }) => bySection.get(section));
+}
+
+/**
  * L'ERE (grep -E) dei corpi delle sezioni attive. `served` restringe a chi le
  * serve: `shard` (Pages) o `r2` (Worker). Un commit di un articolo cantonale
  * non deve entrare nel fast-publish verso gli shard, dove `shard-of` lo
@@ -389,10 +431,15 @@ if (isMain()) {
       if (!response.ok) throw new Error(`registro edge HTTP ${response.status}`);
       console.log(JSON.stringify(liveR2ReconciliationPlan(await response.json(), activeCorpusCoreEntries(), arg)));
     }
+    else if (cmd === 'r2-api-push-plan') {
+      const matrices = readFileSync(0, 'utf8').split('\n').filter((line) => line.trim()).map((line) => JSON.parse(line));
+      if (matrices.length !== 2) throw new Error('r2-api-push-plan richiede due matrici JSON: diff ed edge');
+      console.log(JSON.stringify(r2ApiPushPlan(matrices[0], matrices[1], activeCorpusCoreEntries())));
+    }
     else if (cmd === 'image-plan') console.log(JSON.stringify(imagePublishPlan(readFileSync(0, 'utf8').split('\n'), activeCorpusCoreEntries(), { served: arg })));
     else if (cmd === 'section-of' && arg) console.log(sectionOf(arg));
     else if (cmd === 'shard-of' && arg) console.log(shardOf(arg));
-    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files | r2-reconcile-plan <commit>');
+    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files | r2-reconcile-plan <commit> | r2-api-push-plan < diff.json edge.json');
   };
   run().catch((error) => {
     console.error(`::error::fast-publish-section: ${error?.message ?? error}`);

@@ -101,6 +101,34 @@ export const PAGE_MANIFEST_CACHE_CONTROL = 'public,max-age=60';
 /** Ordine di upload: la landing per ultima, perche' linka tutto il resto. */
 export const UPLOAD_ORDER = Object.freeze(['article', 'archive', 'hub', 'landing']);
 const PUBLISH_API_WORKFLOW = '.github/workflows/publish-api.yml';
+const FULL_GIT_SHA_RE = /^[a-f0-9]{40}$/;
+
+function publishedMainHead() {
+  const repository = process.env.GITHUB_REPOSITORY;
+  if (!repository || !/^[^/]+\/[^/]+$/.test(repository)) {
+    throw new Error('GITHUB_REPOSITORY non disponibile per il guard di freschezza');
+  }
+  const current = execFileSync(
+    'gh',
+    ['api', `repos/${repository}/git/ref/heads/main`, '--jq', '.object.sha'],
+    { encoding: 'utf8' },
+  ).trim();
+  if (!FULL_GIT_SHA_RE.test(current)) throw new Error('revisione corrente di main non valida');
+  return current;
+}
+
+async function assertExpectedMainHead(expected, readMainHead = publishedMainHead) {
+  if (!FULL_GIT_SHA_RE.test(String(expected ?? ''))) {
+    throw new Error('EXPECTED_MAIN_HEAD non contiene una SHA completa');
+  }
+  const current = await readMainHead();
+  if (!FULL_GIT_SHA_RE.test(String(current ?? ''))) {
+    throw new Error('revisione corrente di main non valida');
+  }
+  if (current !== expected) {
+    throw new Error(`main e' avanzato durante il render (${expected} → ${current}); pubblicazione interrotta`);
+  }
+}
 
 export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activeCorpusCoreMap() } = {}) {
   const out = { ids: [], bootstrap: false, publish: false, dryRun: false, removeStaleCantonRssFeeds: false };
@@ -1505,6 +1533,7 @@ export async function publish({
   releaseReadyMaxWaitMs = RELEASE_READY_MAX_WAIT_MS,
   releaseReadyRetryDelayMs = RELEASE_READY_RETRY_DELAY_MS,
   sleepImpl = sleep,
+  assertMainFreshImpl = async () => {},
 }) {
   let failures = 0;
   let verifiedRssFeeds = cantonRssFeeds;
@@ -1575,6 +1604,10 @@ export async function publish({
     return pageFailures + await rollbackRss();
   };
   console.log(`[${LOG}] preflight: sezione ${section} nel registro pubblicato = ${beforeStatus}`);
+  // This is the first remote mutation after render/preflight. Recheck here,
+  // not only in the workflow before rendering: main may advance while pages
+  // and feeds are being built.
+  await assertMainFreshImpl();
   for (const { local, key } of cdnUploads) {
     const { stdout } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', local, key]);
     if (!stdout.includes('✅ uploaded')) {
@@ -1770,6 +1803,7 @@ export async function main(
     publishedApiReleaseCommitImpl = publishedApiReleaseCommit,
     publishedReleaseReadyImpl = publishedReleaseReady,
     latestApiInputCommitImpl = latestApiInputCommit,
+    currentMainHeadImpl = publishedMainHead,
     fetchImpl = fetch,
   } = {},
 ) {
@@ -1783,6 +1817,11 @@ export async function main(
   const publisherCommit = publishing
     ? execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()
     : null;
+  const expectedMainHead = process.env.EXPECTED_MAIN_HEAD || publisherCommit;
+  const assertMainFreshImpl = async () => {
+    if (!publishing) return;
+    await assertExpectedMainHead(expectedMainHead, currentMainHeadImpl);
+  };
   let releaseCommit = publisherCommit;
   let publishedManifest = { state: 'absent' };
   let publishedManifestPages = null;
@@ -2033,6 +2072,7 @@ export async function main(
     })
     : null;
   if (migrationManifest) {
+    await assertMainFreshImpl();
     const seeded = publishPageManifestImpl({ manifest: migrationManifest, distDir });
     summary.migrationManifestSeeded = seeded;
     if (!seeded) {
@@ -2052,6 +2092,7 @@ export async function main(
     section,
     releaseCommit,
     publishCantonRssFeedsImpl,
+    assertMainFreshImpl,
   });
   if (summary.published.failures === 0) {
     const manifestPages = aggregatePagesAllowed
@@ -2071,6 +2112,7 @@ export async function main(
       : publishedManifestPages
         ? mergePageManifests(publishedManifest.doc, currentManifest)
         : mergePageManifests(migrationManifest, currentManifest);
+    await assertMainFreshImpl();
     const manifestPublished = publishPageManifestImpl({ manifest: nextManifest, distDir });
     summary.published.manifestPublished = manifestPublished;
     if (!manifestPublished) {
