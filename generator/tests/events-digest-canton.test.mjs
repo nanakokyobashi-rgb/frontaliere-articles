@@ -109,7 +109,7 @@ describe('digest per cantone sulla fixture events-dataset', () => {
       todayIso: '2027-01-01',
     });
     assert.match(article.content.it.body2, /\*\*2 gennaio\*\*/);
-    assert.match(article.content.it.body2, /\[Mostra ricorrente\]\(https:\/\/agenda\.example\/events\/mostra-\(serie%29\)/);
+    assert.match(article.content.it.body2, /\[Mostra ricorrente\]\(https:\/\/agenda\.example\/events\/mostra-%28serie%29\)/);
     assert.doesNotMatch(article.content.it.body2, /\*\*1 gennaio\*\* —/);
   });
 
