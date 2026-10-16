@@ -113,7 +113,7 @@ test('canonicalPath reader distinguishes missing and unresolved computed values'
 test('refresh hub landing uses the same canonicalPath grammar', () => {
   const refreshSource = readFileSync(new URL('../../scripts/refresh-hub-landing.mjs', import.meta.url), 'utf8');
   assert.match(refreshSource, /import \{ readCanonicalPath \} from '\.\/lib\/seo-canonical-path\.mjs';/);
-  assert.doesNotMatch(refreshSource, /canonicalPath:\s*\["'\]/);
+  assert.doesNotMatch(refreshSource, /block\.match\(\/canonicalPath/);
 });
 
 test('unsupported double-quoted canonicalPath is rejected before URL validation', () => {
