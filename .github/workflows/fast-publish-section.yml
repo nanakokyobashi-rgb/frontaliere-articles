@@ -255,14 +255,17 @@ jobs:
             if [ "$EVENT_NAME" = 'workflow_run' ] && [ "$WORKFLOW_RUN_EVENT" != 'push' ]; then
               # Schedule/manuale possono aggiornare la superficie API senza un
               # nuovo commit. Il piano deve partire dal registro edge che il
-              # Worker serve davvero, non dal diff del checkout.
+              # Worker serve davvero, verificando che sia la release appena
+              # completata.
               matrix="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan \
+                "$WORKFLOW_RUN_HEAD_SHA" \
                 | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
             else
               if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
-              diff_args=()
-              if [ "$EVENT_NAME" = 'workflow_run' ]; then diff_args+=(-- sections/registry.json); fi
-              matrix="$(git diff --name-status "$before" HEAD "${diff_args[@]}" 2>/dev/null \
+              # Il replay della push API deve riprodurre l'intero piano della
+              # push originaria: il primo fast-publish puo' essere fallito
+              # mentre attendeva la release API, senza modificare il registro.
+              matrix="$(git diff --name-status "$before" HEAD 2>/dev/null \
                 | PUSH_BEFORE="$before" node scripts/ci/fast-publish-section.mjs r2-plan \
                 | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
             fi

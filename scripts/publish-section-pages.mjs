@@ -1080,9 +1080,6 @@ export async function publishCantonRssFeeds({
   if (feeds.length !== feedEntries.length) {
     return { failures: 1, uploaded: 0, verified: 0 };
   }
-  if (feeds.length === 0) {
-    return { failures: 0, uploaded: 0, verified: 0, feeds: [] };
-  }
   const localFiles = [];
   let prepared = [];
   let snapshots = null;
@@ -1107,33 +1104,38 @@ export async function publishCantonRssFeeds({
     }
 
     const declaredFeeds = cantonRssFeedsDeclaredInManifest(section, readiness.files);
-    if (declaredFeeds.length === 0) {
-      return { failures: 0, uploaded: 0, verified: 0, feeds: [] };
-    }
-    if (declaredFeeds.length !== feeds.length || declaredFeeds.some(({ name }) => !requestedNames.has(name))) {
+    const removingStaleFeeds = declaredFeeds.length === 0;
+    if (!removingStaleFeeds && (declaredFeeds.length !== feeds.length || declaredFeeds.some(({ name }) => !requestedNames.has(name)))) {
       throw new Error(`manifest API ${section}: set feed RSS diverso da quello richiesto`);
     }
 
-    for (let i = 0; i < feeds.length; i++) {
-      const feed = feeds[i];
-      const expectedBytes = readiness.files?.[feed.name];
-      if (!Number.isSafeInteger(expectedBytes) || expectedBytes <= 0) {
-        throw new Error(`${feed.name} non è dichiarato nel manifest API della release ${releaseCommit}`);
+    if (removingStaleFeeds) {
+      // Un manifest senza feed e' una dichiarazione di ritiro, non un no-op:
+      // ogni oggetto precedente deve diventare 404 prima di togliere i link
+      // RSS dalle landing.
+      prepared = expectedFeeds.map((feed) => ({ ...feed }));
+    } else {
+      for (let i = 0; i < feeds.length; i++) {
+        const feed = feeds[i];
+        const expectedBytes = readiness.files?.[feed.name];
+        if (!Number.isSafeInteger(expectedBytes) || expectedBytes <= 0) {
+          throw new Error(`${feed.name} non è dichiarato nel manifest API della release ${releaseCommit}`);
+        }
+        const response = await fetchWithRefTimeout(cacheBustedUrl(`${API_BASE}/${feed.name}`, '_sppr', i + 1), {
+          redirect: 'manual',
+          headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
+        }, 20000, fetchImpl);
+        if (response.status !== 200 || !response.ok) {
+          releaseFetchWithRefTimeout(response);
+          throw new Error(`${feed.name}: API HTTP ${response.status}`);
+        }
+        const sourceXml = await response.text();
+        if (Buffer.byteLength(sourceXml, 'utf8') !== expectedBytes) {
+          throw new Error(`${feed.name}: byte count diverso dal manifest API (${Buffer.byteLength(sourceXml, 'utf8')} != ${expectedBytes})`);
+        }
+        const xml = rewriteCantonRssSelfLink(sourceXml, { section, name: feed.name, url: feed.url });
+        prepared.push({ ...feed, xml });
       }
-      const response = await fetchWithRefTimeout(cacheBustedUrl(`${API_BASE}/${feed.name}`, '_sppr', i + 1), {
-        redirect: 'manual',
-        headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
-      }, 20000, fetchImpl);
-      if (response.status !== 200 || !response.ok) {
-        releaseFetchWithRefTimeout(response);
-        throw new Error(`${feed.name}: API HTTP ${response.status}`);
-      }
-      const sourceXml = await response.text();
-      if (Buffer.byteLength(sourceXml, 'utf8') !== expectedBytes) {
-        throw new Error(`${feed.name}: byte count diverso dal manifest API (${Buffer.byteLength(sourceXml, 'utf8')} != ${expectedBytes})`);
-      }
-      const xml = rewriteCantonRssSelfLink(sourceXml, { section, name: feed.name, url: feed.url });
-      prepared.push({ ...feed, xml });
     }
 
     snapshots = new Map();
@@ -1144,23 +1146,31 @@ export async function publishCantonRssFeeds({
 
     fs.mkdirSync(distDir, { recursive: true });
     for (const feed of prepared) {
+      if (typeof feed.xml !== 'string') continue;
       const local = path.join(distDir, `.canton-rss-${feed.name}`);
       fs.writeFileSync(local, feed.xml, 'utf8');
       localFiles.push(local);
     }
 
-    for (let i = 0; i < prepared.length; i++) {
-      const feed = prepared[i];
-      const { stdout } = runImpl('bash', [
-        'scripts/lib/upload-cdn-file.sh',
-        localFiles[i],
-        feed.key,
-        PAGE_CACHE_CONTROL,
-      ]);
-      if (!stdout.includes('✅ uploaded')) {
-        throw new Error(`feed RSS non caricato: ${feed.key}`);
+    if (removingStaleFeeds) {
+      for (const feed of prepared) {
+        const { stdout = '' } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', feed.key]);
+        if (!stdout.includes('✅ deleted')) throw new Error(`feed RSS non cancellato: ${feed.key}`);
       }
-      uploaded++;
+    } else {
+      for (let i = 0; i < prepared.length; i++) {
+        const feed = prepared[i];
+        const { stdout } = runImpl('bash', [
+          'scripts/lib/upload-cdn-file.sh',
+          localFiles[i],
+          feed.key,
+          PAGE_CACHE_CONTROL,
+        ]);
+        if (!stdout.includes('✅ uploaded')) {
+          throw new Error(`feed RSS non caricato: ${feed.key}`);
+        }
+        uploaded++;
+      }
     }
 
     for (const chunk of purgeChunks(prepared.map((feed) => feed.url))) {
@@ -1171,9 +1181,16 @@ export async function publishCantonRssFeeds({
     }
 
     for (const feed of prepared) {
-      const result = await probeImpl(feed.url, { want: (body) => body === feed.xml });
-      if (!result.ok) {
-        throw new Error(`feed RSS non verificato sul CDN: ${feed.url} (${result.status})`);
+      if (removingStaleFeeds) {
+        const result = await probeImpl(feed.url, { attempts: 3, delayMs: 1000, want: () => false });
+        if (result?.ok === true || !isNotFoundStatus(result?.status)) {
+          throw new Error(`feed RSS ancora servito sul CDN: ${feed.url} (${result?.status ?? 'nessuna risposta'})`);
+        }
+      } else {
+        const result = await probeImpl(feed.url, { want: (body) => body === feed.xml });
+        if (!result.ok) {
+          throw new Error(`feed RSS non verificato sul CDN: ${feed.url} (${result.status})`);
+        }
       }
       verified++;
     }
@@ -1182,7 +1199,8 @@ export async function publishCantonRssFeeds({
       failures: 0,
       uploaded,
       verified,
-      feeds: prepared.map(({ name, key, url }) => ({ name, key, url })),
+      deleted: removingStaleFeeds ? prepared.length : 0,
+      feeds: removingStaleFeeds ? [] : prepared.map(({ name, key, url }) => ({ name, key, url })),
       rollback: async () => {
         if (rolledBack) return { failures: 0 };
         rolledBack = true;
@@ -1252,6 +1270,7 @@ export async function publish({
   pages,
   cdnUploads,
   cantonRssFeeds = [],
+  removeStaleCantonRssFeeds = false,
   obsoletePages,
   distDir,
   section,
@@ -1317,7 +1336,7 @@ export async function publish({
     console.error(`::error::[${LOG}] upload hero incompleto: nessuna pagina HTML viene caricata`);
     return { failures, uploaded: 0, deleted: 0, status: beforeStatus };
   }
-  if (cantonRssFeeds.length > 0) {
+  if (cantonRssFeeds.length > 0 || removeStaleCantonRssFeeds) {
     if (beforeStatus !== 'live') {
       console.error(`::error::[${LOG}] feed RSS ${section}: il registro edge non conferma lo stato live`);
       return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
@@ -1528,15 +1547,19 @@ export async function main(
     }
   }
   let cantonRssFeeds = [];
+  let removeStaleCantonRssFeeds = false;
   if (publishing && effectiveStatus === 'live') {
     const readiness = await publishedReleaseReadyImpl(releaseCommit, { section, fetchImpl });
     // Se la readiness è transitoria, mantieni il gate fail-closed completo e
     // lascia che publishCantonRssFeeds ritenti. Quando è verificata, invece,
     // il set dichiarato dal manifest decide anche se la landing può annunciare
     // RSS: una sezione live senza articoli emette zero feed legittimamente.
-    cantonRssFeeds = readiness === true || readiness?.ok
-      ? (readiness?.files ? cantonRssFeedsDeclaredInManifest(section, readiness.files) : cantonRssFeedEntries(section))
-      : cantonRssFeedEntries(section);
+    if (readiness === true || readiness?.ok) {
+      cantonRssFeeds = readiness?.files ? cantonRssFeedsDeclaredInManifest(section, readiness.files) : cantonRssFeedEntries(section);
+      removeStaleCantonRssFeeds = cantonRssFeeds.length === 0;
+    } else {
+      cantonRssFeeds = cantonRssFeedEntries(section);
+    }
   }
 
   let hubs = { rels: [], pages: [], missing: [] };
@@ -1590,6 +1613,7 @@ export async function main(
     console.log(`::notice::[${LOG}] feed RSS ${section} trattenuti: aggregatePagesAllowed=false`);
   }
   cantonRssFeeds = rssFeedsForPublish;
+  removeStaleCantonRssFeeds = removeStaleCantonRssFeeds && aggregatePagesAllowed === true;
 
   fs.rmSync(renderRoot, { recursive: true, force: true });
 
@@ -1733,6 +1757,7 @@ export async function main(
     pages,
     cdnUploads,
     cantonRssFeeds,
+    removeStaleCantonRssFeeds,
     obsoletePages,
     distDir,
     section,

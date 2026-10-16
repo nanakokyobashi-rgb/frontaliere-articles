@@ -1272,6 +1272,21 @@ test('publisher: il contratto RSS blocca o precede gli upload HTML', async () =>
   assert.equal(success.failures, 0);
   assert.ok(successEvents.indexOf('rss-verified') < successEvents.indexOf('page-upload'));
 
+  const emptyEvents = [];
+  const empty = await publish({
+    ...common,
+    cantonRssFeeds: [],
+    removeStaleCantonRssFeeds: true,
+    runImpl: makeRun(emptyEvents),
+    publishCantonRssFeedsImpl: async (options) => {
+      emptyEvents.push('rss-cleanup');
+      assert.deepEqual(options.feedEntries, []);
+      return { failures: 0, uploaded: 0, deleted: 5, verified: 5, feeds: [] };
+    },
+  });
+  assert.equal(empty.failures, 0);
+  assert.ok(emptyEvents.indexOf('rss-cleanup') < emptyEvents.indexOf('page-upload'));
+
   const blockedEvents = [];
   const blocked = await publish({
     ...common,
@@ -1339,27 +1354,66 @@ test('publisher: il contratto RSS blocca o precede gli upload HTML', async () =>
   assert.deepEqual(verifyRollbackEvents, ['page-uploaded', 'page-verify-failed', 'rss-rollback']);
 });
 
-test('publisher: RSS non live fallisce, ma una sezione live senza feed dichiarati è un no-op', async () => {
+test('publisher: RSS non live fallisce, e un manifest senza feed elimina la superficie precedente', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-rss-empty-'));
+  const feeds = cantonRssFeedEntries('canton-ti');
+  const previousXml = Object.fromEntries(feeds.map(({ name }) => [name, `<rss>${name} precedente</rss>`]));
   let fetches = 0;
-  let uploads = 0;
+  let restoring = false;
+  const deleted = [];
+  const restored = [];
+  const verifiedMissing = [];
   const common = {
     section: 'canton-ti',
     releaseCommit: 'b'.repeat(40),
-    distDir: tmpdir(),
-    fetchImpl: async () => { fetches++; throw new Error('fetch inatteso'); },
-    runImpl: () => { uploads++; throw new Error('upload inatteso'); },
-  };
-  const draft = await publishCantonRssFeeds({ ...common, effectiveStatus: 'draft' });
-  assert.equal(draft.failures, 1);
-  const missing = await publishCantonRssFeeds({
-    ...common,
-    effectiveStatus: 'live',
+    distDir: fixtureRoot,
+    feedEntries: [],
+    fetchImpl: async () => { fetches++; throw new Error('fetch API inatteso'); },
+    releaseReadyMaxWaitMs: 0,
     releaseReadyImpl: async (commit) => ({ ok: true, commit, files: {} }),
-  });
-  assert.equal(missing.failures, 0);
-  assert.deepEqual(missing.feeds, []);
-  assert.equal(fetches, 0);
-  assert.equal(uploads, 0);
+    snapshotImpl: async (url) => {
+      const name = new URL(url).pathname.split('/').at(-1);
+      return { ok: true, status: 200, body: previousXml[name] };
+    },
+    runImpl: (_command, args) => {
+      if (args[0] === 'scripts/lib/delete-cdn-file.sh') {
+        deleted.push(args[1]);
+        return { code: 0, stdout: '✅ deleted' };
+      }
+      if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+        restored.push(args[2]);
+        return { code: 0, stdout: '✅ uploaded' };
+      }
+      if (args.includes('scripts/cf-purge-cache.mjs')) return { code: 0, stdout: '' };
+      throw new Error(`comando inatteso: ${args.join(' ')}`);
+    },
+    probeImpl: async (url) => {
+      const name = new URL(url).pathname.split('/').at(-1);
+      if (restoring) return { ok: true, status: 200, body: previousXml[name] };
+      verifiedMissing.push(name);
+      return { ok: false, status: 'HTTP 404' };
+    },
+  };
+  try {
+    const draft = await publishCantonRssFeeds({ ...common, effectiveStatus: 'draft' });
+    assert.equal(draft.failures, 1);
+
+    const missing = await publishCantonRssFeeds({ ...common, effectiveStatus: 'live' });
+    assert.equal(missing.failures, 0);
+    assert.equal(missing.deleted, feeds.length);
+    assert.equal(missing.verified, feeds.length);
+    assert.deepEqual(missing.feeds, []);
+    assert.deepEqual(deleted.sort(), feeds.map(({ key }) => key).sort());
+    assert.deepEqual(verifiedMissing.sort(), feeds.map(({ name }) => name).sort());
+    assert.equal(fetches, 0);
+
+    restoring = true;
+    const rollback = await missing.rollback();
+    assert.equal(rollback.failures, 0);
+    assert.deepEqual(restored.sort(), feeds.map(({ key }) => key).sort());
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
 });
 
 test('publisher: registry edge illeggibile o con stato sconosciuto non diventa draft', async () => {
@@ -1566,17 +1620,27 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
   const registryAfter = { schema: 1, sections: { 'canton-ti': { status: 'live' } } };
   const promotedSections = liveRegistryTransitionSections(registryBefore, registryAfter, WITH_TI);
   assert.deepEqual(promotedSections, ['canton-ti']);
+  const releaseCommit = 'a'.repeat(40);
   assert.deepEqual(
     liveR2ReconciliationPlan({
       schema: 1,
-      commit: 'a'.repeat(40),
+      commit: releaseCommit,
       sections: { 'canton-ti': { status: 'live' } },
-    }, WITH_TI),
+    }, WITH_TI, releaseCommit),
     [{ section: 'canton-ti', ids: [], bootstrap: false }],
-    'il replay schedule/manuale usa il registro edge effettivo e solo le cantonali live',
+    'il replay schedule/manuale usa il registro edge della release attesa e solo le cantonali live',
   );
   assert.throws(
-    () => liveR2ReconciliationPlan({ schema: 1, commit: 'not-a-commit', sections: {} }, WITH_TI),
+    () => liveR2ReconciliationPlan({
+      schema: 1,
+      commit: 'b'.repeat(40),
+      sections: { 'canton-ti': { status: 'live' } },
+    }, WITH_TI, releaseCommit),
+    /commit.*atteso/,
+    'un registro edge precedente non deve produrre una matrice verde',
+  );
+  assert.throws(
+    () => liveR2ReconciliationPlan({ schema: 1, commit: 'not-a-commit', sections: {} }, WITH_TI, releaseCommit),
     /registro edge effettivo non valido/,
   );
   assert.deepEqual(
@@ -1655,9 +1719,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /id: push_range[\s\S]*gh api --paginate --slurp "repos\/\$REPO\/commits\/\$WORKFLOW_RUN_HEAD_SHA\/events"/);
   assert.match(wf, /payload\.ref == "refs\/heads\/main"[\s\S]*payload\.head == \$head[\s\S]*payload\.before/);
   assert.match(wf, /push_before: \$\{\{ steps\.push_range\.outputs\.before \}\}/);
-  assert.match(wf, /diff_args=\(\)[\s\S]*EVENT_NAME.*workflow_run[\s\S]*diff_args\+=\(-- sections\/registry\.json\)/);
+  assert.doesNotMatch(wf, /diff_args=\(\)[\s\S]*sections\/registry\.json/);
   assert.match(wf, /PUSH_BEFORE="\$before" node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
-  assert.match(wf, /WORKFLOW_RUN_EVENT[\s\S]*r2-reconcile-plan/);
+  assert.match(wf, /r2-reconcile-plan \\\n\s+"\$WORKFLOW_RUN_HEAD_SHA"/);
+  assert.match(wf, /Il replay della push API deve riprodurre l'intero piano/);
   const publishCheckout = wf.slice(wf.indexOf('      - name: Checkout\n', wf.indexOf('\n  publish:\n')));
   assert.match(publishCheckout, /fetch-depth: 0/);
   assert.match(wf, /PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
