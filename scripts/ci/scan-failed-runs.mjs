@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * scan-failed-runs.mjs — apre una issue per ogni workflow di QUESTO repo che
- * fallisce, senza cablare uno step in ogni file YAML.
+ * scan-failed-runs.mjs — apre issue per i workflow di QUESTO repo che falliscono,
+ * senza cablare uno step in ogni file YAML.
  *
  * ## Perché centrale e non per-workflow
  *
@@ -17,7 +17,8 @@
  * `close-recovered-failure-issues.mjs` chiude le issue centralmente proprio
  * "without wiring a per-workflow step into ~300 YAML files". Questo script è
  * la metà simmetrica — apre centralmente ciò che quello chiude centralmente —
- * e usa le STESSE convenzioni di titolo (`Workflow Failure: <nome>`) perché il
+ * e usa le STESSE convenzioni di titolo (`Workflow Failure: <nome>`; i blocker
+ * manuali Transport usano `Workflow Failure: manual:<hash> | <nome>`) perché il
  * reconciler le richiuda da solo quando il workflow torna verde.
  *
  * ## I filtri, e perché ciascuno esiste
@@ -82,6 +83,12 @@ import { execFileSync } from 'node:child_process';
 import { appendFileSync } from 'node:fs';
 import { createGithubIssue, searchSafePrefix } from '../lib/github-issue-creator.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
+import {
+  manualBlockerFailureTitle,
+  manualBlockersFromFailureLog,
+  TRANSPORT_MANUAL_BLOCKER_WORKFLOW_PATH,
+  workflowFailureTitle,
+} from './lib/manual-blocker-issue-key.mjs';
 
 const ARGV = process.argv.slice(2);
 const flag = (n) => ARGV.includes(n);
@@ -1387,15 +1394,16 @@ export async function deliverRunReports({
   run,
   reports,
   genericDescription = '',
+  genericTitle = '',
   lost = false,
   dryRun = DRY_RUN,
   createIssue = createGithubIssue,
 } = {}) {
   const outcome = { delivered: 0, skipped: 0, undelivered: [] };
-  const groupTitle = `Workflow Failure: ${name}`;
+  const groupTitle = workflowFailureTitle(name);
   const memo = {};
   for (const report of reports) {
-    const title = report ? report.title : groupTitle;
+    const title = report ? report.title : (genericTitle || groupTitle);
     const memberLevel = Boolean(report?.slug) && !report.groupLevel;
     const reported = memberLevel
       ? memberAlreadyReported(title, run.url, { groupTitle, memo })
@@ -2102,15 +2110,19 @@ function workflowPathOfRun(runId) {
 
 /**
  * Log dei job falliti della run. Oltre agli step di push, lo scarichiamo per i
- * gruppi crawler: il loro step rosso è un aggregatore e il nome del membro
- * fallito esiste solo nel log. Per gli altri workflow resta la issue generica.
+ * gruppi crawler e per Transport identical twins: il primo ha un aggregatore,
+ * il secondo espone nel log il set dei blocker manuali che identifica la causa.
  */
-function failedRunLog(runId, jobs, workflowName = '') {
+function failedRunLog(runId, jobs, workflowName = '', workflowPath = '') {
   // I gruppi crawler sono l'unica classe in cui il job fallito è un aggregatore:
   // senza il log il report perde il nome del membro e il closer può osservare
-  // solo il verde del contenitore. Il log resta limitato alle run che possono
-  // produrre una diagnosi ricca, non a ogni workflow rosso.
-  if (!isCrawlerGroupWorkflow(workflowName) && !jobs.some((j) => /push/i.test(j.step || ''))) return '';
+  // solo il verde del contenitore. Il transport ha a sua volta una firma
+  // esplicita `⛔` nel log. Il download resta limitato a queste classi e ai push.
+  if (
+    workflowPath !== TRANSPORT_MANUAL_BLOCKER_WORKFLOW_PATH
+    && !isCrawlerGroupWorkflow(workflowName)
+    && !jobs.some((j) => /push/i.test(j.step || ''))
+  ) return '';
   return gh(['run', 'view', String(runId), '--repo', REPO, '--log-failed'], '');
 }
 
@@ -2132,9 +2144,11 @@ async function main() {
     return incompleteReasons.length > 0 ? incompleteExit() : 0;
   }
 
-  // Una issue per WORKFLOW, non per run: se lo stesso workflow e' fallito tre
-  // volte nella finestra, il segnale resta uno solo. I caller GENERATI dalla
-  // stessa sorgente con la stessa firma di guasto contano come uno (vedi
+  // Una candidata per WORKFLOW in questa scansione, non per run: se lo stesso
+  // workflow e' fallito tre volte nella finestra, il segnale resta uno solo.
+  // Il titolo distingue poi le cause Transport via hash dei blocker manuali,
+  // così una firma diversa nelle scansioni successive non ricade sulla stessa issue.
+  // I caller GENERATI dalla stessa sorgente con la stessa firma di guasto contano come uno (vedi
   // `GENERATED_WORKFLOW_FAMILIES`). Per Issue fix si tiene la
   // piu' recente run NON soppressa: una non-consegna riconosciuta nella run
   // piu' recente non deve nascondere una failure diversa ancora nella finestra.
@@ -2272,12 +2286,19 @@ async function main() {
 
     // Il rilevatore ricco gira PRIMA della dedup: e' il titolo che decide quale
     // issue guardare, e per questa classe il titolo non e' piu' quello generico.
-    const failureLog = failedRunLog(run.databaseId, jobs, name);
+    const workflowPath = workflowPathOfRun(run.databaseId);
+    const failureLog = failedRunLog(run.databaseId, jobs, name, workflowPath);
+    const manualBlockers = workflowPath === TRANSPORT_MANUAL_BLOCKER_WORKFLOW_PATH
+      ? manualBlockersFromFailureLog(failureLog)
+      : [];
+    const genericTitle = manualBlockers.length > 0
+      ? manualBlockerFailureTitle(name, manualBlockers)
+      : '';
     const lost = buildLostArticleReport({
       log: failureLog,
       run,
       workflowName: name,
-      workflowPath: workflowPathOfRun(run.databaseId),
+      workflowPath,
       jobLines,
     });
 
@@ -2328,6 +2349,9 @@ async function main() {
       `- Evento: \`${run.event || '?'}\``,
       ...(FULL_SHA_RE.test(String(run.headSha || '')) ? [`- Commit: \`${String(run.headSha).toLowerCase()}\``] : []),
       `- Concluso: ${run.updatedAt || run.createdAt}`,
+      ...(manualBlockers.length > 0
+        ? ['', '**Blocchi manuali (insieme usato per la chiave della issue)**', ...manualBlockers.map((blocker) => `- ${blocker}`)]
+        : []),
       '',
       '**Job falliti**',
       jobLines,
@@ -2343,6 +2367,7 @@ async function main() {
       run,
       reports,
       genericDescription,
+      genericTitle,
       lost: Boolean(lost),
     });
     for (const { title, reason, short } of outcome.undelivered) {
