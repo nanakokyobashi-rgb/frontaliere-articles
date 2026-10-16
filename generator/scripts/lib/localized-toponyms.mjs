@@ -108,28 +108,32 @@ function termPattern(term) {
   return pattern;
 }
 
-function rawTermPattern(term) {
-  let pattern = '';
-  for (const character of String(term)) {
-    if (/\s/u.test(character)) {
-      pattern += '\\s+';
-      continue;
-    }
-    if (DASH_CHARACTER_PATTERN.test(character)) {
-      pattern += RAW_DASH_TERM_PATTERN;
-      continue;
-    }
-    const alternatives = [escapeRegExp(character)];
-    for (const entity of RAW_HTML_ENTITY_BY_CHARACTER.get(character) || []) {
-      alternatives.push(escapeRegExp(entity));
-    }
-    const codePoint = character.codePointAt(0);
-    if (codePoint !== undefined) {
-      alternatives.push(`&#${codePoint};`, `&#x${codePoint.toString(16)};`);
-    }
-    pattern += alternatives.length === 1 ? alternatives[0] : `(?:${alternatives.join('|')})`;
+function rawCharacterPattern(character) {
+  if (/\s/u.test(character)) return '\\s+';
+  if (DASH_CHARACTER_PATTERN.test(character)) return RAW_DASH_TERM_PATTERN;
+
+  const alternatives = [escapeRegExp(character)];
+  for (const entity of RAW_HTML_ENTITY_BY_CHARACTER.get(character) || []) {
+    alternatives.push(escapeRegExp(entity));
   }
-  return pattern;
+  const codePoint = character.codePointAt(0);
+  if (codePoint !== undefined) {
+    alternatives.push(`&#${codePoint};`, `&#x${codePoint.toString(16)};`);
+  }
+  return alternatives.length === 1 ? alternatives[0] : `(?:${alternatives.join('|')})`;
+}
+
+function rawTermPattern(term) {
+  // The detector applies NFKC before matching. Keep the writer raw, but accept
+  // the equivalent composed, canonical-decomposed and compatibility-decomposed
+  // spellings so a Unicode/HTML variant is repaired instead of merely reported.
+  const forms = new Set([
+    String(term),
+    String(term).normalize('NFD'),
+    String(term).normalize('NFKD'),
+  ]);
+  const patterns = [...forms].map((form) => [...form].map(rawCharacterPattern).join(''));
+  return patterns.length === 1 ? patterns[0] : `(?:${patterns.join('|')})`;
 }
 
 // URL destinations are opaque content, including relative Markdown routes.
@@ -408,6 +412,25 @@ export function replaceLocalizedToponymMismatches({ sourceText = '', targetText 
     replacementCounts.set(issueKey(issue), issueReplacements);
   }
   return { text, replacements, replacementCounts, issues };
+}
+
+/**
+ * Repair one event title without normalizing its surrounding Markdown/HTML.
+ * The replacement routine operates on the raw target string, and this wrapper
+ * adds the title-specific invariant that a repair may not change its line
+ * shape. A title that would require a cross-line match is left untouched so
+ * the caller can keep the whole digest fail-closed.
+ */
+export function preserveEventTitleSyntax({ sourceText = '', targetText = '', locale } = {}) {
+  const original = String(targetText ?? '');
+  const result = replaceLocalizedToponymMismatches({ sourceText, targetText: original, locale });
+  if (result.text.split('\n').length === original.split('\n').length) return result;
+  return {
+    ...result,
+    text: original,
+    replacements: 0,
+    replacementCounts: new Map(),
+  };
 }
 
 /**
@@ -782,8 +805,7 @@ function transformEventsDigestBody2({ sourceText = '', targetText = '', locale }
   const issues = [];
   const replacementCounts = new Map();
   let replacements = 0;
-  const applyPair = (sourceValue, targetValue) => {
-    const result = replaceLocalizedToponymMismatches({ sourceText: sourceValue, targetText: targetValue, locale });
+  const collectPairResult = (result) => {
     replacements += result.replacements;
     for (const issue of result.issues) {
       if (!issues.some((candidate) => issueKey(candidate) === issueKey(issue))) issues.push(issue);
@@ -793,6 +815,12 @@ function transformEventsDigestBody2({ sourceText = '', targetText = '', locale }
     }
     return result.text;
   };
+  const applyPair = (sourceValue, targetValue) => collectPairResult(
+    replaceLocalizedToponymMismatches({ sourceText: sourceValue, targetText: targetValue, locale }),
+  );
+  const applyTitlePair = (sourceValue, targetValue) => collectPairResult(
+    preserveEventTitleSyntax({ sourceText: sourceValue, targetText: targetValue, locale }),
+  );
 
   for (const { sourceHeading, targetHeading } of headingPairs) {
     lines[targetHeading.lineIndex] = applyPair(
@@ -814,7 +842,7 @@ function transformEventsDigestBody2({ sourceText = '', targetText = '', locale }
       withoutDigestEventMarker(target.lines[targetEvent.lineIndices[0]].slice(targetEvent.titleStart)),
       ...targetEvent.lineIndices.slice(1).map((lineIndex) => target.lines[lineIndex]),
     ].join('\n');
-    const repairedTitle = applyPair(sourceTitle, targetTitle).split('\n');
+    const repairedTitle = applyTitlePair(sourceTitle, targetTitle).split('\n');
     if (repairedTitle.length !== targetEvent.lineIndices.length) return null;
     lines[targetEvent.lineIndices[0]] = target.lines[targetEvent.lineIndices[0]].slice(0, targetEvent.titleStart)
       + repairedTitle[0]
@@ -1016,6 +1044,7 @@ export default {
   normalizeLocalizedToponymText,
   assertLocalizedToponymPair,
   replaceLocalizedToponymMismatches,
+  preserveEventTitleSyntax,
   pairEventsByStableKey,
   findArticleLocalizedToponymMismatches,
   localizedToponymInstruction,
