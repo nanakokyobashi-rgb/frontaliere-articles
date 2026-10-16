@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-sistema-sanitario-zurigo-guida-2026.webp",
-      "sha256": "3f1c0bbfa64ed8aa8525993322c92e15ed8b3f38619f61febe0c17b2e7412e1c"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-sistema-sanitario-zurigo-guida-2026-480w.webp",
-      "sha256": "eb78a90a239b6aa4c23c3c7a375aea920ae3f9ccc3420ee927782abeba944575"
-    }
-  ]
+  "items": []
 }
