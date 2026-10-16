@@ -24,9 +24,21 @@
 //     null when fingerprint is missing/empty so the caller can skip
 //     injection cleanly (preserves byte-identical prompts).
 
-import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
-import { createHash } from 'node:crypto';
-import { dirname } from 'node:path';
+import {
+  closeSync,
+  existsSync,
+  fsyncSync,
+  mkdirSync,
+  openSync,
+  readFileSync,
+  readdirSync,
+  renameSync,
+  rmSync,
+  statSync,
+  writeFileSync,
+} from 'node:fs';
+import { createHash, randomUUID } from 'node:crypto';
+import { basename, dirname, join, resolve } from 'node:path';
 
 import {
   FRONTALIERI_DOMAIN_RE,
@@ -1489,6 +1501,199 @@ export function recordTopicGateAbortedUrl(tracker, urlKey, section, now = Date.n
   return { ...normalized, topicGateUrls };
 }
 
+const EVERGREEN_LEDGER_LOCK_TIMEOUT_MS = 30_000;
+const EVERGREEN_LEDGER_LOCK_INIT_GRACE_MS = 5_000;
+const EVERGREEN_LEDGER_LOCK_RETRY_MS = 15;
+const evergreenLedgerWaitCell = new Int32Array(new SharedArrayBuffer(4));
+
+function waitForEvergreenLedgerLock(ms) {
+  Atomics.wait(evergreenLedgerWaitCell, 0, 0, ms);
+}
+
+function processIsAlive(pid) {
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch (error) {
+    if (error.code === 'ESRCH') return false;
+    // EPERM means the process exists; unknown errors also fail closed.
+    return true;
+  }
+}
+
+function inspectEvergreenLedgerLock(lockPath) {
+  let lockStat;
+  try {
+    lockStat = statSync(lockPath);
+  } catch (error) {
+    if (error.code === 'ENOENT') return 'missing';
+    throw error;
+  }
+
+  let owner;
+  try {
+    owner = JSON.parse(readFileSync(join(lockPath, 'owner.json'), 'utf-8'));
+  } catch (error) {
+    if (error.code !== 'ENOENT' && !(error instanceof SyntaxError)) throw error;
+    return Date.now() - lockStat.mtimeMs >= EVERGREEN_LEDGER_LOCK_INIT_GRACE_MS ? 'stale' : 'busy';
+  }
+
+  if (!Number.isSafeInteger(owner?.pid) || owner.pid < 1 || typeof owner.token !== 'string' || !owner.token) {
+    return Date.now() - lockStat.mtimeMs >= EVERGREEN_LEDGER_LOCK_INIT_GRACE_MS ? 'stale' : 'busy';
+  }
+  return processIsAlive(owner.pid) ? 'busy' : 'stale';
+}
+
+/** Create a fully-owned directory, then publish it as the lock in one rename. */
+function tryAcquireEvergreenLedgerDirectoryLock(lockPath, token) {
+  const candidatePath = `${lockPath}.candidate-${process.pid}-${token}`;
+  mkdirSync(candidatePath, { mode: 0o700 });
+  try {
+    writeFileSync(
+      join(candidatePath, 'owner.json'),
+      JSON.stringify({ pid: process.pid, token, createdAt: Date.now() }),
+      { encoding: 'utf-8', flag: 'wx', mode: 0o600 },
+    );
+    try {
+      renameSync(candidatePath, lockPath);
+      return true;
+    } catch (error) {
+      if (error.code === 'EEXIST' || error.code === 'ENOTEMPTY') return false;
+      throw error;
+    }
+  } finally {
+    rmSync(candidatePath, { recursive: true, force: true });
+  }
+}
+
+/** Reclaim only a dead owner, with one reaper at a time and a fresh recheck. */
+function reclaimEvergreenLedgerLock(lockPath) {
+  const reaperPath = `${lockPath}.reaper`;
+  const reaperToken = randomUUID();
+  let ownsReaper = false;
+  try {
+    ownsReaper = tryAcquireEvergreenLedgerDirectoryLock(reaperPath, reaperToken);
+  } catch (error) {
+    if (error.code === 'EEXIST' || error.code === 'ENOTEMPTY') return false;
+    throw error;
+  }
+  if (!ownsReaper) return false;
+
+  try {
+    if (inspectEvergreenLedgerLock(lockPath) !== 'stale') return false;
+    const stalePath = `${lockPath}.stale-${randomUUID()}`;
+    try {
+      renameSync(lockPath, stalePath);
+    } catch (error) {
+      if (error.code === 'ENOENT') return false;
+      throw error;
+    }
+    rmSync(stalePath, { recursive: true, force: true });
+    return true;
+  } finally {
+    releaseEvergreenLedgerDirectoryLock(reaperPath, reaperToken);
+  }
+}
+
+function releaseEvergreenLedgerDirectoryLock(lockPath, token) {
+  let owner;
+  try {
+    owner = JSON.parse(readFileSync(join(lockPath, 'owner.json'), 'utf-8'));
+  } catch (error) {
+    throw new Error(`cannot verify evergreen ledger lock ownership at ${lockPath}: ${error.message}`);
+  }
+  if (owner.token !== token || owner.pid !== process.pid) {
+    throw new Error(`evergreen ledger lock ownership changed at ${lockPath}`);
+  }
+  const releasedPath = `${lockPath}.released-${process.pid}-${randomUUID()}`;
+  renameSync(lockPath, releasedPath);
+  rmSync(releasedPath, { recursive: true });
+}
+
+function acquireEvergreenLedgerLock(path) {
+  const lockPath = `${path}.lock`;
+  const deadline = Date.now() + EVERGREEN_LEDGER_LOCK_TIMEOUT_MS;
+  while (true) {
+    if (Date.now() >= deadline) {
+      throw new Error(`timed out waiting for evergreen ledger lock at ${lockPath}`);
+    }
+    const state = inspectEvergreenLedgerLock(lockPath);
+    if (state === 'missing') {
+      const token = randomUUID();
+      if (tryAcquireEvergreenLedgerDirectoryLock(lockPath, token)) return { lockPath, token };
+      waitForEvergreenLedgerLock(Math.min(EVERGREEN_LEDGER_LOCK_RETRY_MS, deadline - Date.now()));
+      continue;
+    }
+    if (state === 'stale') {
+      if (!reclaimEvergreenLedgerLock(lockPath)) {
+        if (Date.now() >= deadline) {
+          throw new Error(`timed out waiting for evergreen ledger lock at ${lockPath}`);
+        }
+        waitForEvergreenLedgerLock(Math.min(EVERGREEN_LEDGER_LOCK_RETRY_MS, deadline - Date.now()));
+      }
+      continue;
+    }
+    if (Date.now() >= deadline) {
+      throw new Error(`timed out waiting for evergreen ledger lock at ${lockPath}`);
+    }
+    waitForEvergreenLedgerLock(Math.min(EVERGREEN_LEDGER_LOCK_RETRY_MS, deadline - Date.now()));
+  }
+}
+
+function removeAbandonedEvergreenLedgerTemps(path) {
+  const directory = dirname(path);
+  const prefix = `.${basename(path)}.tmp-`;
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    if (!entry.name.startsWith(prefix) || (!entry.isFile() && !entry.isSymbolicLink())) continue;
+    rmSync(join(directory, entry.name), { force: true });
+  }
+}
+
+function serializedEvergreenRejectedTracker(tracker) {
+  return JSON.stringify({
+    schemaVersion: EVERGREEN_REJECTED_SCHEMA_VERSION,
+    bans: tracker.bans,
+    strikes: tracker.strikes,
+    legacy: tracker.legacy,
+    topicGateUrls: tracker.topicGateUrls,
+  }, null, 2) + '\n';
+}
+
+function syncEvergreenLedgerDirectory(directory) {
+  let fd;
+  try {
+    fd = openSync(directory, 'r');
+    fsyncSync(fd);
+  } catch (error) {
+    // Some supported filesystems do not allow fsync on directory descriptors.
+    if (!['EINVAL', 'ENOTSUP', 'EISDIR', 'EBADF'].includes(error.code)) throw error;
+  } finally {
+    if (fd !== undefined) closeSync(fd);
+  }
+}
+
+function atomicallyReplaceEvergreenRejectedTracker(path, tracker, opts = {}) {
+  const directory = dirname(path);
+  const tempPath = join(directory, `.${basename(path)}.tmp-${process.pid}-${randomUUID()}`);
+  let fd;
+  try {
+    fd = openSync(tempPath, 'wx', 0o600);
+    writeFileSync(fd, serializedEvergreenRejectedTracker(tracker), 'utf-8');
+    fsyncSync(fd);
+    closeSync(fd);
+    fd = undefined;
+
+    // Deterministic fault injection for the crash/rollback regression only.
+    opts._beforeAtomicReplaceForTest?.({ path, tempPath });
+    renameSync(tempPath, path);
+    syncEvergreenLedgerDirectory(directory);
+  } catch (error) {
+    if (fd !== undefined) closeSync(fd);
+    rmSync(tempPath, { force: true });
+    throw error;
+  }
+}
+
 /** Load and migrate in memory; a malformed existing file fails closed. */
 export function loadEvergreenRejectedTracker(opts = {}) {
   const path = (opts && opts.path) || EVERGREEN_REJECTED_PATH;
@@ -1508,31 +1713,35 @@ export function loadEvergreenRejectedTracker(opts = {}) {
   return migrated.tracker;
 }
 
-/** Persist schema v2. Invalid trackers are refused rather than overwritten. */
-export function persistEvergreenRejectedTracker(tracker, opts = {}) {
-  const path = (opts && opts.path) || EVERGREEN_REJECTED_PATH;
-  if (tracker?.invalid) {
-    console.warn(`[generator] refusing to overwrite invalid evergreen tracker at ${path}`);
-    return false;
-  }
+/**
+ * Serialize a ledger read-modify-write across generator processes. The
+ * updater runs under the lock against the latest on-disk state; an invalid
+ * ledger or failed atomic replacement throws and leaves the previous file
+ * intact. A crash before rename leaves only an ignored temp file.
+ */
+export function persistEvergreenRejectedTrackerAtomically(update, opts = {}) {
+  if (typeof update !== 'function') throw new TypeError('evergreen ledger update must be a function');
+  const path = resolve((opts && opts.path) || EVERGREEN_REJECTED_PATH);
+  mkdirSync(dirname(path), { recursive: true });
+  const lock = acquireEvergreenLedgerLock(path);
   try {
-    mkdirSync(dirname(path), { recursive: true });
-    const normalized = coerceTracker(tracker);
-    writeFileSync(
-      path,
-      JSON.stringify({
-        schemaVersion: EVERGREEN_REJECTED_SCHEMA_VERSION,
-        bans: normalized.bans,
-        strikes: normalized.strikes,
-        legacy: normalized.legacy,
-        topicGateUrls: normalized.topicGateUrls,
-      }, null, 2) + '\n',
-      'utf-8',
-    );
-    return true;
-  } catch (e) {
-    console.warn(`[generator] could not write evergreen-rejected tracker to ${path}: ${e.message}`);
-    return false;
+    removeAbandonedEvergreenLedgerTemps(path);
+    const current = loadEvergreenRejectedTracker({ path });
+    if (current.invalid) {
+      throw new Error(`refusing to update invalid evergreen ledger at ${path}: ${current.invalidReason}`);
+    }
+    const proposed = update(current);
+    if (proposed && typeof proposed.then === 'function') {
+      throw new TypeError('evergreen ledger update must be synchronous');
+    }
+    if (!isRecord(proposed) || proposed.invalid) {
+      throw new Error(`evergreen ledger update returned an invalid tracker for ${path}`);
+    }
+    const normalized = normalizeV2(proposed);
+    atomicallyReplaceEvergreenRejectedTracker(path, normalized, opts);
+    return normalized;
+  } finally {
+    releaseEvergreenLedgerDirectoryLock(lock.lockPath, lock.token);
   }
 }
 
@@ -1829,5 +2038,5 @@ export default {
   topicGateUrlKey,
   isTopicGateAbortedUrl,
   recordTopicGateAbortedUrl,
-  persistEvergreenRejectedTracker,
+  persistEvergreenRejectedTrackerAtomically,
 };

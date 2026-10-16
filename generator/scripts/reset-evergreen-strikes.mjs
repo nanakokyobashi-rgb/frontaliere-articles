@@ -50,7 +50,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   clearEvergreenStrikesForPool,
-  persistEvergreenRejectedTracker,
+  loadEvergreenRejectedTracker,
+  persistEvergreenRejectedTrackerAtomically,
 } from './lib/article-topic-selector.mjs';
 
 // Due livelli: da generator/scripts/ alla radice del repo. Uno solo punterebbe
@@ -131,10 +132,40 @@ function main(argv) {
 
   const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
   const pool = svizzeraEvergreenPool(src);
-  const ledger = JSON.parse(fs.readFileSync(LEDGER, 'utf-8'));
+  const planReset = (ledger) => {
+    if (ledger.invalid) throw new Error(`ledger evergreen non valido: ${ledger.invalidReason}`);
+    const result = clearStrikesForPool(ledger, pool);
+    return {
+      before: ledger.strikes.length,
+      next: result.ledger,
+      cleared: result.cleared,
+      keptBanned: result.keptBanned,
+    };
+  };
 
-  const before = Array.isArray(ledger.strikes) ? ledger.strikes.length : Object.keys(ledger.strikes || {}).length;
-  const { ledger: next, cleared, keptBanned } = clearStrikesForPool(ledger, pool);
+  let plan;
+  let next;
+  if (apply) {
+    try {
+      next = persistEvergreenRejectedTrackerAtomically((ledger) => {
+        plan = planReset(ledger);
+        return plan.next;
+      }, { path: LEDGER });
+    } catch (error) {
+      console.error(`\n❌ scrittura del ledger fallita: ${error.message}`);
+      return 1;
+    }
+  } else {
+    try {
+      plan = planReset(loadEvergreenRejectedTracker({ path: LEDGER }));
+    } catch (error) {
+      console.error(`\n❌ lettura del ledger fallita: ${error.message}`);
+      return 1;
+    }
+    next = plan.next;
+  }
+
+  const { before, cleared, keptBanned } = plan;
   const retired = cleared.filter((c) => c.wasRetired);
 
   console.log(`pool evergreen svizzera ricostruito : ${pool.length} keyword`);
@@ -148,10 +179,6 @@ function main(argv) {
   if (!apply) {
     console.log('\nDRY-RUN: nessuna scrittura. Rilancia con --apply per scrivere il ledger.');
     return 0;
-  }
-  if (!persistEvergreenRejectedTracker(next, { path: LEDGER })) {
-    console.error('\n❌ scrittura del ledger fallita');
-    return 1;
   }
   console.log(`\n✅ Scritto ${path.relative(PROJECT_ROOT, LEDGER)}`);
   return 0;
