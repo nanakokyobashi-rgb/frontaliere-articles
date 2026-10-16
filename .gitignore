@@ -71,3 +71,8 @@ data/image-regeneration-queue-in-progress.json
 # commit if an async drain owns the canonical queue lock.
 data/image-regeneration-queue-pending.jsonl.*.processing
 data/image-regeneration-queue-pending.jsonl.*.tmp
+
+# Evergreen ledger locks and staging files are runner-local transaction state.
+/data/topic-candidates-evergreen-rejected.json.lock
+/data/topic-candidates-evergreen-rejected.json.lock.*
+/data/.topic-candidates-evergreen-rejected.json.tmp-*

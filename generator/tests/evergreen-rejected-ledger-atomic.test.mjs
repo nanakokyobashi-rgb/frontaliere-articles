@@ -129,6 +129,30 @@ test('un crash prima del rename lascia il ledger precedente intatto e il lock re
   }
 });
 
+test('un errore di fsync directory dopo il rename non segnala un rollback inesistente', (t) => {
+  const { directory, file } = fixture();
+  t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
+  persistEvergreenRejectedTrackerAtomically(() => seededTracker(), { path: file });
+
+  const updated = persistEvergreenRejectedTrackerAtomically(
+    (tracker) => appendEvergreenRejected(tracker, 'committed-before-fsync-error', {
+      context: CONTEXT,
+      now: Date.now(),
+    }),
+    {
+      path: file,
+      _syncDirectoryForTest() {
+        const error = new Error('injected directory fsync failure');
+        error.code = 'EIO';
+        throw error;
+      },
+    },
+  );
+
+  assert.ok(updated.bans.some((entry) => entry.keyword === 'committed-before-fsync-error'));
+  assert.deepEqual(loadEvergreenRejectedTracker({ path: file }), updated);
+});
+
 test('un reaper interrotto viene recuperato prima della prossima scrittura', async () => {
   const { directory, file } = fixture();
   try {

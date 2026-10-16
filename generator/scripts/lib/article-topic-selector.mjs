@@ -1699,7 +1699,14 @@ function atomicallyReplaceEvergreenRejectedTracker(path, tracker, opts = {}) {
     // Deterministic fault injection for the crash/rollback regression only.
     opts._beforeAtomicReplaceForTest?.({ path, tempPath });
     renameSync(tempPath, path);
-    syncEvergreenLedgerDirectory(directory);
+    try {
+      (opts._syncDirectoryForTest || syncEvergreenLedgerDirectory)(directory);
+    } catch (error) {
+      // The rename is already committed and cannot be rolled back safely. A
+      // directory fsync is a durability hint, so report its failure without
+      // making callers treat the committed ledger update as uncommitted.
+      console.warn(`[generator] evergreen ledger ${path} was replaced, but directory fsync failed: ${error.message}`);
+    }
   } catch (error) {
     if (fd !== undefined) closeSync(fd);
     rmSync(tempPath, { force: true });
@@ -1729,8 +1736,10 @@ export function loadEvergreenRejectedTracker(opts = {}) {
 /**
  * Serialize a ledger read-modify-write across generator processes. The
  * updater runs under the lock against the latest on-disk state; an invalid
- * ledger or failed atomic replacement throws and leaves the previous file
- * intact. A crash before rename leaves only an ignored temp file.
+ * ledger or pre-rename replacement failure throws and leaves the previous
+ * file intact. Directory fsync after rename is best-effort because the new
+ * ledger is already committed and cannot be rolled back safely. A crash before
+ * rename leaves only an ignored temp file.
  */
 export function persistEvergreenRejectedTrackerAtomically(update, opts = {}) {
   if (typeof update !== 'function') throw new TypeError('evergreen ledger update must be a function');
