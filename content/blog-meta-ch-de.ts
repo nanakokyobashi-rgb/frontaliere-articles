@@ -8411,6 +8411,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.dati-assicurati-casse-zurigo-posta.title': 'Cyberangriff: Pensionskasse Zürich und Posta betroffen',
     'blog.article.dati-assicurati-casse-zurigo-posta.excerpt': 'Der Angriff auf den Anbieter ereignete sich Ende September.',
     'blog.article.dati-assicurati-casse-zurigo-posta.imageAlt': 'Schweizer Verwaltungsgebäude im Zusammenhang mit Pensionskassen',
+    'blog.article.fisco-zurigo-tre-livelli.title': 'Steuern in Zürich: die drei Ebenen und ihre Funktionsweise',
+    'blog.article.fisco-zurigo-tre-livelli.excerpt': 'Das Schweizer Steuersystem gliedert sich in drei Ebenen: Bund, Kanton und Gemeinde.',
+    'blog.article.fisco-zurigo-tre-livelli.imageAlt': 'Übersicht einer Schweizer Landschaft, die die Komplexität des dreistufigen Steuersystems mit Bezug auf Zürich symbolisiert.',
+    'blog.article.tre-milioni-lettere-digitali-posta.title': 'Drei Millionen digitale Briefe in sechs Monaten',
+    'blog.article.tre-milioni-lettere-digitali-posta.excerpt': 'La Posta hat die erste Zwischenbilanz zum digitalen Brief vorgelegt und in sechs Monaten sieben Millionen digitale Sendungen verzeichnet, davon waren drei Millionen Briefe.',
+    'blog.article.tre-milioni-lettere-digitali-posta.imageAlt': 'Schweizer Stadtbild mit digitalen Elementen, die moderne Postkommunikation symbolisieren',
+    'blog.article.lupo-abbattimenti-facilitati.title': 'Wolf: Erleichterte Abschüsse, Vernehmlassung endet heute',
+    'blog.article.lupo-abbattimenti-facilitati.excerpt': 'Der Bundesrat schlägt erleichterte Wolfsabschüsse vor.',
+    'blog.article.lupo-abbattimenti-facilitati.imageAlt': 'Schweizer Berglandschaft mit einer ruhigen Weide, im Hintergrund die Gipfel des Monte Generoso.',
 };
 
 export default blogMetaChDe;

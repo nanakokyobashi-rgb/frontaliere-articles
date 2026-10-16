@@ -28097,6 +28097,37 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'fisco-zurigo-tre-livelli',
+    category: 'fiscale',
+    date: '2026-10-16T05:40:11.928Z',
+    image: '/images/blog/article-fisco-zurigo-tre-livelli.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['ZH'],
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
+   {
+    id: 'tre-milioni-lettere-digitali-posta',
+    category: 'novita',
+    date: '2026-10-16T07:08:57.024Z',
+    image: '/images/blog/article-tre-milioni-lettere-digitali-posta.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'lupo-abbattimenti-facilitati',
+    category: 'novita',
+    date: '2026-10-16T08:01:09.305Z',
+    image: '/images/blog/article-lupo-abbattimenti-facilitati.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

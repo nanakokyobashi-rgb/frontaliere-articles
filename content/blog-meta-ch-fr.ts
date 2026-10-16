@@ -8411,6 +8411,15 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.dati-assicurati-casse-zurigo-posta.title': 'Cyberattaque : la caisse de pension de Zurich et Posta touchées',
     'blog.article.dati-assicurati-casse-zurigo-posta.excerpt': 'L\'attaque contre le fournisseur remonte à fin septembre.',
     'blog.article.dati-assicurati-casse-zurigo-posta.imageAlt': 'Bâtiment administratif suisse lié à la gestion des caisses de pension',
+    'blog.article.fisco-zurigo-tre-livelli.title': 'Fiscalité à Zurich : les trois niveaux et son fonctionnement',
+    'blog.article.fisco-zurigo-tre-livelli.excerpt': 'Le système fiscal suisse s’articule autour de trois niveaux : fédéral, cantonal et communal.',
+    'blog.article.fisco-zurigo-tre-livelli.imageAlt': 'Aperçu d\'un paysage suisse symbolisant la complexité du système fiscal à trois niveaux, en référence à Zurich.',
+    'blog.article.tre-milioni-lettere-digitali-posta.title': 'Trois millions de lettres numériques en six mois',
+    'blog.article.tre-milioni-lettere-digitali-posta.excerpt': 'La Posta a présenté le premier bilan intermédiaire de la lettre numérique, enregistrant sept millions d\'envois numériques en six mois, dont trois millions étaient des lettres.',
+    'blog.article.tre-milioni-lettere-digitali-posta.imageAlt': 'Paysage urbain suisse avec des éléments numériques symbolisant la communication postale moderne',
+    'blog.article.lupo-abbattimenti-facilitati.title': 'Loup : abattages facilités, la consultation se termine aujourd’hui',
+    'blog.article.lupo-abbattimenti-facilitati.excerpt': 'Le Conseil fédéral propose de faciliter l’abattage des loups.',
+    'blog.article.lupo-abbattimenti-facilitati.imageAlt': 'Paysage montagneux suisse avec un pâturage serein, avec les sommets du Monte Generoso en arrière-plan.',
 };
 
 export default blogMetaChFr;

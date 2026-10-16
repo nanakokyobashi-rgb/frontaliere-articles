@@ -202,10 +202,10 @@
       "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-10-16T02:02:39.966Z",
-      "lastStrikeAt": "2026-10-16T02:02:39.966Z",
-      "expiresAt": "2026-11-15T02:02:39.966Z"
+      "lastStrikeAt": "2026-10-16T05:27:14.913Z",
+      "expiresAt": "2026-11-15T05:27:14.913Z"
     },
     {
       "keyword": "sistema sanitario svizzero lamal guida 2026 canton Argovia",
@@ -214,10 +214,10 @@
       "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-10-16T02:12:36.169Z",
-      "lastStrikeAt": "2026-10-16T02:12:36.169Z",
-      "expiresAt": "2026-11-15T02:12:36.169Z"
+      "lastStrikeAt": "2026-10-16T05:32:40.483Z",
+      "expiresAt": "2026-11-15T05:32:40.483Z"
     }
   ],
   "legacy": [
@@ -8517,30 +8517,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/ticino/cronaca/1956456/alcoltest-al-lavoro-si-poteva-dire-no-e-cosa-rischia-chi-rifiuta": {
-      "section": "frontaliere",
-      "ts": 1791964239510
-    },
-    "frontaliere::https://comozero.it/attualita/migros-chiusura-centrale-traiteur-ecublens": {
-      "section": "frontaliere",
-      "ts": 1791964285133
-    },
-    "frontaliere::https://www.tio.ch/ticino/politica/1956451/mercato-affitti-citta-affitto-via": {
-      "section": "frontaliere",
-      "ts": 1791964307750
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/parita-salariale-a-varese-il-confronto-sul-decreto-96-la-trasparenza-e-una-sfida-culturale/2707474": {
-      "section": "frontaliere",
-      "ts": 1791964321523
-    },
-    "frontaliere::https://comozero.it/attualita/mazzata-pedaggio-milano-meda-spuntano-agevolazioni-per-i-pendolari-ma-e-polemica-ora-arriva-la-lega": {
-      "section": "frontaliere",
-      "ts": 1791964335120
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/docenti-in-ticino-nove-azioni-per-ripensare-la-formazione-444552": {
-      "section": "frontaliere",
-      "ts": 1791964349863
-    },
     "frontaliere::https://www.tio.ch/svizzera/economia/1956672/investimenti-casse-pensioni-illiquidi-rischi": {
       "section": "frontaliere",
       "ts": 1791975002366
@@ -8760,6 +8736,54 @@
     "frontaliere::https://www.varesenoi.it/2026/10/15/leggi-notizia/argomenti/territorio/articolo/nellex-convento-dei-frati-di-laveno-mombello-vive-la-comunita-del-bostano-mettiamo-in-comune-i.html": {
       "section": "frontaliere",
       "ts": 1792127168047
+    },
+    "frontaliere::https://www.tio.ch/rubriche/aziende-ticinesi-informano/1957066/international-au-storia-albergo-schmid-lac-anni-famiglia-lugano-roberto": {
+      "section": "frontaliere",
+      "ts": 1792130105656
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/le-relazioni-col-territorio-che-fanno-crescere-lazienda-la-ricetta-della-atom-srl-di-travedona-monate/2707612": {
+      "section": "frontaliere",
+      "ts": 1792130130511
+    },
+    "frontaliere::https://www.ocst.ch/il-sindacato/organi-statutari": {
+      "section": "frontaliere",
+      "ts": 1792131185208
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/a-gallarate-arriva-future-loading-la-fiera-che-aiuta-gli-studenti-a-scegliere-la-scuola-superiore/2709568": {
+      "section": "frontaliere",
+      "ts": 1792133136933
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/in-italia-54-milioni-di-poveri-listat-un-milione-sono-bambini-lavorare-non-basta-piu-per-uscire-dalla-poverta/2709526": {
+      "section": "frontaliere",
+      "ts": 1792136803755
+    },
+    "frontaliere::https://www.tio.ch/ticino/attualita/1957171/afc-percorso-metalcostruttori-media-formazione": {
+      "section": "frontaliere",
+      "ts": 1792138429841
+    },
+    "frontaliere::https://www.rsi.ch/s/4162453": {
+      "section": "frontaliere",
+      "ts": 1792138519968
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/voli-giornata-difficile-per-chi-viaggia-sciopero-easyjet-e-problemi-ai-sistemi-di-controllo-aereo/2709691": {
+      "section": "frontaliere",
+      "ts": 1792138575415
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/data-center-hanno-deciso-in-sei-cesate-insieme-mobilita-il-paese-per-il-consiglio-comunale-di-venerdi/2709085": {
+      "section": "frontaliere",
+      "ts": 1792138627565
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/16/leggi-notizia/argomenti/cronaca-20/articolo/scontro-tra-unauto-e-una-moto-sulla-statale-a-luvinate-sedicenne-ferito-e-traffico-in-tilt.html": {
+      "section": "frontaliere",
+      "ts": 1792140379057
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1957180/scanner-dacuda-mouse-inventato-azienda": {
+      "section": "frontaliere",
+      "ts": 1792140429624
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1957155/ubs-svizzera-londra-regno-strategia": {
+      "section": "frontaliere",
+      "ts": 1792140441914
     }
   }
 }

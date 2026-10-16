@@ -106223,6 +106223,123 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fisco-zurigo-tre-livelli': {
+    title: 'Fisco a Zurigo: i tre livelli e come funziona | Frontaliere Ticino',
+    description: 'Guida al sistema fiscale del Cantone di Zurigo: scopri i tre livelli (federale, cantonale, comunale), le autorità competenti e come gestire aliquote',
+    keywords: 'frontalieri, ticino, svizzera, italia, fisco, zurigo, livelli, funziona',
+    ogTitle: 'Imposte cantonali Zurigo: aliquote e deduzioni',
+    ogDescription: 'Comprendere il sistema fiscale nel Cantone di Zurigo è essenziale. L\'articolo illustra i tre livelli di imposizione (federale, cantonale e comunale), le autorità di riferimento come AFC/ESTV e le amministrazioni cantonali, e fornisce indicazioni',
+    canonicalPath: '/articoli-svizzera/fisco-zurigo-tre-livelli/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fisco a Zurigo: i tre livelli e come funziona",
+      "description": "Guida al sistema fiscale del Cantone di Zurigo: scopri i tre livelli (federale, cantonale, comunale), le autorità competenti e come gestire aliquote",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-fisco-zurigo-tre-livelli.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panoramica di un paesaggio svizzero che simboleggia la complessità del sistema fiscale a tre livelli, con riferimento a Zurigo."
+      },
+      "datePublished": "2026-10-16T05:40:12+00:00",
+      "dateModified": "2026-10-16T05:40:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fisco-zurigo-tre-livelli/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-tre-milioni-lettere-digitali-posta': {
+    title: 'Tre milioni di lettere digitali in sei mesi | Frontaliere Ticino',
+    description: 'La Posta Svizzera presenta il primo bilancio intermedio della lettera digitale: sette milioni di invii e 960\'000 account aperti in sei mesi. Novità',
+    keywords: 'frontalieri, ticino, svizzera, italia, milioni, lettere, digitali, mesi',
+    ogTitle: 'Posta Svizzera: 7 milioni di invii digitali in 6 mesi',
+    ogDescription: 'La Posta ha comunicato i primi risultati della lettera digitale: sette milioni di invii complessivi e tre milioni di lettere digitali in sei mesi. Con 960\'000 account attivi, il servizio si evolve con l\'introduzione della firma elettronica',
+    canonicalPath: '/articoli-svizzera/tre-milioni-lettere-digitali-posta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tre milioni di lettere digitali in sei mesi",
+      "description": "La Posta Svizzera presenta il primo bilancio intermedio della lettera digitale: sette milioni di invii e 960'000 account aperti in sei mesi. Novità",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tre-milioni-lettere-digitali-posta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama urbano svizzero con elementi digitali che simboleggiano la comunicazione moderna della Posta"
+      },
+      "datePublished": "2026-10-16T07:08:57+00:00",
+      "dateModified": "2026-10-16T07:08:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tre-milioni-lettere-digitali-posta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lupo-abbattimenti-facilitati': {
+    title: 'Lupo: abbattimenti più facili, consultazione si chiude oggi',
+    description: 'Il Consiglio federale propone abbattimenti dei lupi più facili. Gli ambientalisti chiedono di sospendere il progetto. L\'USC sostiene la revisione, ma la giudica',
+    keywords: 'frontalieri, ticino, svizzera, italia, lupo, abbattimenti, facili, consultazione',
+    ogTitle: 'Lupo: abbattimenti facilitati, consultazione si chiude oggi',
+    ogDescription: 'Il Consiglio federale propone abbattimenti dei lupi più facili.',
+    canonicalPath: '/articoli-svizzera/lupo-abbattimenti-facilitati/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lupo: abbattimenti più facili, consultazione si chiude oggi",
+      "description": "Il Consiglio federale propone abbattimenti dei lupi più facili. Gli ambientalisti chiedono di sospendere il progetto. L'USC sostiene la revisione, ma la giudica",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lupo-abbattimenti-facilitati.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio montano svizzero con pascolo sereno, sullo sfondo le vette del Monte Generoso."
+      },
+      "datePublished": "2026-10-16T08:01:09+00:00",
+      "dateModified": "2026-10-16T08:01:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/lupo-abbattimenti-facilitati/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

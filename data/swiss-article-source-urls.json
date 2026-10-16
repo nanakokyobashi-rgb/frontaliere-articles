@@ -1,14 +1,4 @@
 {
-  "https://www.rsi.ch/s/4077635": {
-    "articleId": "attacco-hacker-salt-dati-clienti",
-    "ts": "2026-09-13T07:05:29.317Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/cronaca/1949731/rubano-apparecchiature-mediche-a-un-azienda-svizzera-poi-le-abbandonano-in-un-prato": {
-    "articleId": "furto-apparecchiature-mediche-roma",
-    "ts": "2026-09-13T07:48:41.128Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/cronaca/1949791/ticino-calamita-per-medici-e-infermieri-italiani-denti-lancia-l-allarme-serve-un-limite": {
     "articleId": "allarme-medici-frontalieri-ticino",
     "ts": "2026-09-13T08:11:23.283Z",
@@ -2497,6 +2487,16 @@
   "https://www.swissinfo.ch/ita/attacco-informatico-a-casse-pensioni-citt%c3%a0-zurigo-e-posta/92224356": {
     "articleId": "dati-assicurati-casse-zurigo-posta",
     "ts": "2026-10-16T04:32:59.088Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4166593": {
+    "articleId": "tre-milioni-lettere-digitali-posta",
+    "ts": "2026-10-16T07:08:57.670Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/lupo%3a-abbattimenti-facilitati%3b-no-da-ambientalisti%2c-s%c3%ac-da-contadini/92225907": {
+    "articleId": "lupo-abbattimenti-facilitati",
+    "ts": "2026-10-16T08:01:09.707Z",
     "keyForm": 2
   }
 }

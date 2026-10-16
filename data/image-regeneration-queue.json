@@ -5,31 +5,31 @@
       "articleId": "offerte-formazione-federale",
       "title": "Amministrazione federale: lavoro, praticantati e formazione",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Original generic synthetic office illustration relevant to work, but it contains a recognizable foreground person viewed from behi",
+      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to work/study in Switzerland, but it includes a recognizable foreground person viewed f",
       "status": "failed",
-      "failureCount": 6,
+      "failureCount": 7,
       "requestedAt": "2026-10-13T23:44:58.192Z",
-      "lastFailureAt": "2026-10-15T21:05:23.446Z"
+      "lastFailureAt": "2026-10-16T05:24:16.105Z"
     },
     {
       "articleId": "opportunita-impiego-federale",
       "title": "Lavorare per l'Amministrazione federale: 50 formazioni",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-opportunita-impiego-federale: openai-codex (vision gate rejected image: Generic synthetic office illustration relevant to work in Switzerland, with no visible logo or readable text. It fails the gate b",
+      "reason": "All image providers failed for article-opportunita-impiego-federale: openai-codex (vision gate rejected image: Generic synthetic workshop scene in Switzerland; a recognizable foreground person is visible from behind.); gemini (Gemini image ",
       "status": "failed",
-      "failureCount": 3,
+      "failureCount": 4,
       "requestedAt": "2026-10-15T01:49:05.613Z",
-      "lastFailureAt": "2026-10-15T21:06:40.176Z"
+      "lastFailureAt": "2026-10-16T05:25:16.629Z"
     },
     {
       "articleId": "dimissioni-rapporto-ticino",
       "title": "Dimissioni da frontaliere: termini e passi in Ticino",
       "fallbackImage": "/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp",
-      "reason": "All image providers failed for article-dimissioni-rapporto-ticino: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to resignation and cross-border commuting in Ticino, but it visibly includes a foregroun",
+      "reason": "All image providers failed for article-dimissioni-rapporto-ticino: openai-codex (vision gate rejected image: Generic synthetic commuter scene with a recognizable foreground person viewed from behind.); gemini (Gemini image request failed wi",
       "status": "failed",
-      "failureCount": 2,
+      "failureCount": 3,
       "requestedAt": "2026-10-15T11:39:57.424Z",
-      "lastFailureAt": "2026-10-15T21:08:28.839Z"
+      "lastFailureAt": "2026-10-16T05:26:34.268Z"
     },
     {
       "articleId": "arresto-cittadino-russo-como",
@@ -65,41 +65,41 @@
       "articleId": "varese-piazzale-anastasi-intitolazione",
       "title": "Varese: il piazzale dello stadio è intitolato a Anastasi",
       "fallbackImage": "/images/blog/article-manutenzione-prato-franco-ossola-2026.webp",
-      "reason": "All image providers failed for article-varese-piazzale-anastasi-intitolazione: openai-codex (vision gate rejected image: The scene is relevant and contains no visible text, signage",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "image generation deadline exceeded",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-16T01:20:06.531Z",
-      "lastFailureAt": "2026-10-16T01:20:06.531Z"
-    },
-    {
-      "articleId": "olgiate-presidio-vivo-mercato",
-      "title": "Olgiate: Presidio Vivo e sentinelle nei mercati",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-olgiate-presidio-vivo-mercato: openai-codex (vision gate rejected image: Generic synthetic market scene relevant to the topic, but it promine",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-16T02:57:07.522Z",
-      "lastFailureAt": "2026-10-16T02:57:07.522Z"
+      "lastFailureAt": "2026-10-16T05:28:34.418Z"
     },
     {
       "articleId": "frontaliere-dimissioni-termine-preavviso",
       "title": "Dimissioni frontaliere: termini e procedura",
       "fallbackImage": "/images/blog/cambio-datore-lavoro-frontaliere-procedura-permesso-2026-single.webp",
-      "reason": "All image providers failed for article-frontaliere-dimissioni-termine-preavviso: openai-codex (vision gate rejected image: Synthetic editorial-style border-crossing scene with a cl",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-frontaliere-dimissioni-termine-preavviso: openai-codex (vision gate rejected image: Generic synthetic editorial commuter scene; a prominent person is visible from behind in the foreground/midground.); ",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-16T03:19:05.551Z",
-      "lastFailureAt": "2026-10-16T03:19:05.551Z"
+      "lastFailureAt": "2026-10-16T05:31:28.963Z"
     },
     {
-      "articleId": "farmaci-generici-prezzi-svizzera",
-      "title": "Farmaci generici: quanto paga di più la Svizzera",
-      "fallbackImage": "/images/blog/carne-prezzi-svizzera.webp",
-      "reason": "All image providers failed for article-farmaci-generici-prezzi-svizzera: openai-codex (vision gate rejected image: Small shelf price-tag-like markings are visible, though no text i",
+      "articleId": "varese-macello-belforte-visite-2026",
+      "title": "Varese: ex Macello Belforte apre per bonifica e mostra guidata",
+      "fallbackImage": "/images/blog/article-lavori-autolaghi-ottobre-2026.webp",
+      "reason": "All image providers failed for article-varese-macello-belforte-visite-2026: openai-codex (vision gate rejected image: Synthetic generic urban-park illustration with no readable tex",
       "status": "queued",
       "failureCount": 0,
-      "requestedAt": "2026-10-16T04:55:50.944Z",
-      "lastFailureAt": "2026-10-16T04:55:50.944Z"
+      "requestedAt": "2026-10-16T06:05:12.170Z",
+      "lastFailureAt": "2026-10-16T06:05:12.170Z"
+    },
+    {
+      "articleId": "futura-volley-roma-vittoria",
+      "title": "Futura volley busto arsizio vince 3-1 contro roma",
+      "fallbackImage": "/images/blog/article-erreci-busto-marsala-vittoria.webp",
+      "reason": "All image providers failed for article-futura-volley-roma-vittoria: openai-codex (vision gate rejected image: Synthetic photorealistic volleyball scene with no readable text or cle",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T06:52:10.287Z",
+      "lastFailureAt": "2026-10-16T06:52:10.287Z"
     }
   ]
 }

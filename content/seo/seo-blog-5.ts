@@ -109320,10 +109320,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-olgiate-presidio-vivo-mercato.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Volontari della Sentinelle del Mercato e agenti di Polizia Locale in piazza a Olgiate Olona."
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-16T02:57:07+00:00",
       "dateModified": "2026-10-16T02:57:07+00:00",
@@ -109427,10 +109427,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Dieci generici: 241,56 franchi in Svizzera. Un mese costa 2,9 volte la media dei tre Paesi vicini. Metformina: 10,85 franchi in Ticino contro 1,39 in Austria",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/carne-prezzi-svizzera.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-farmaci-generici-prezzi-svizzera.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Scaffata di farmaci generici con prezzi in franchi svizzero in una farmacia ticinese"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-16T04:55:50+00:00",
       "dateModified": "2026-10-16T04:55:50+00:00",
@@ -109482,6 +109487,240 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ocst-storia-frontalieri-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-varese-macello-belforte-visite-2026': {
+    title: 'Varese: ex Macello Belforte apre per bonifica e mostra guidata',
+    description: 'A Varese, il 17 ottobre, l\'ex Macello Civico di Belforte apre al pubblico per un incontro sui lavori di bonifica PNRR e una mostra guidata del Festival',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, macello, belforte, apre',
+    ogTitle: 'Varese: ex Macello Belforte, bonifica e mostra il 17 ottobre',
+    ogDescription: 'Sabato 17 ottobre, dalle 14.00 in via Tonale a Varese, l\'ex Macello Civico di Belforte apre per presentare i lavori di bonifica e risanamento ambientale, sostenuti dai fondi europei PNRR. Seguirà una mostra con mini tour guidato del Festival',
+    canonicalPath: '/articoli-frontaliere/varese-macello-belforte-visite-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese: ex Macello Belforte apre per bonifica e mostra guidata",
+      "description": "A Varese, il 17 ottobre, l'ex Macello Civico di Belforte apre al pubblico per un incontro sui lavori di bonifica PNRR e una mostra guidata del Festival",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lavori-autolaghi-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista di un'area verde rigenerata in Ticino, con persone che passeggiano e si rilassano"
+      },
+      "datePublished": "2026-10-16T06:05:11+00:00",
+      "dateModified": "2026-10-16T06:05:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/varese-macello-belforte-visite-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-azalee-calcio-campo-pradisera': {
+    title: 'Gallarate: Azalee Calcio lasciano il campo di via Pradisera',
+    description: 'Le Azalee Calcio lasciano il campo di via Pradisera. Il bando per l\'area è andato deserto. Ugo Tomaselli denuncia una sostanziale estromissione. Il Comune',
+    keywords: 'frontalieri, ticino, svizzera, italia, gallarate, azalee, calcio, lasciano',
+    ogTitle: 'Gallarate: Azalee Calcio lasciano il campo di via Pradisera',
+    ogDescription: 'Le Azalee Calcio lasciano il campo di via Pradisera.',
+    canonicalPath: '/articoli-frontaliere/azalee-calcio-campo-pradisera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gallarate: Azalee Calcio lasciano il campo di via Pradisera",
+      "description": "Le Azalee Calcio lasciano il campo di via Pradisera. Il bando per l'area è andato deserto. Ugo Tomaselli denuncia una sostanziale estromissione. Il Comune",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-azalee-calcio-campo-pradisera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Campo da calcio locale con manto erboso e porte"
+      },
+      "datePublished": "2026-10-16T06:28:47+00:00",
+      "dateModified": "2026-10-16T06:28:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/azalee-calcio-campo-pradisera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-futura-volley-roma-vittoria': {
+    title: 'Futura volley busto arsizio vince 3-1 contro roma',
+    description: 'Erreci Busto Arsizio supera Roma 3-1. Tre vittorie da tre punti in A2 femminile. Šiftar chiude con 24 punti e il 61% in attacco. Prossima sfida: Costa Volpino',
+    keywords: 'frontalieri, ticino, svizzera, italia, futura, volley, busto, arsizio',
+    ogTitle: 'Futura volley busto arsizio vince 3-1 contro roma',
+    ogDescription: 'Erreci Busto Arsizio supera Roma 3-1.',
+    canonicalPath: '/articoli-frontaliere/futura-volley-roma-vittoria/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Futura volley busto arsizio vince 3-1 contro roma",
+      "description": "Erreci Busto Arsizio supera Roma 3-1. Tre vittorie da tre punti in A2 femminile. Šiftar chiude con 24 punti e il 61% in attacco. Prossima sfida: Costa Volpino",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-erreci-busto-marsala-vittoria.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Partita di pallavolo femminile A2 tra Futura Volley Busto Arsizio e Roma, con Šiftar top scorer e vittoria 3-1"
+      },
+      "datePublished": "2026-10-16T06:52:09+00:00",
+      "dateModified": "2026-10-16T06:52:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/futura-volley-roma-vittoria/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-premio-furia-giovannini-varese': {
+    title: 'Premio Furia 2026 a Giovannini: sostenibilità al centro',
+    description: 'Premio Furia 2026 a Enrico Giovannini Economista e statistico, docente a Roma Tor Vergata È stato Chief Statistician dell\'OCSE e presidente ISTAT ASviS fondata',
+    keywords: 'frontalieri, ticino, svizzera, italia, premio, furia, giovannini, sostenibilità',
+    ogTitle: 'Premio Furia 2026 a Giovannini: sviluppo sostenibile',
+    ogDescription: 'Premio Furia 2026 a Enrico Giovannini Economista e statistico, docente a Roma Tor Vergata È stato Chief Statistician dell\'OCSE e presidente ISTAT ASviS fondata',
+    canonicalPath: '/articoli-frontaliere/premio-furia-giovannini-varese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premio Furia 2026 a Giovannini: sostenibilità al centro",
+      "description": "Premio Furia 2026 a Enrico Giovannini Economista e statistico, docente a Roma Tor Vergata È stato Chief Statistician dell'OCSE e presidente ISTAT ASviS fondata",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-premio-furia-giovannini-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica del Lago di Lugano al tramonto, con montagne riflesse e cielo sereno."
+      },
+      "datePublished": "2026-10-16T08:27:43+00:00",
+      "dateModified": "2026-10-16T08:27:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/premio-furia-giovannini-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-masha-orso-teatro-saronno': {
+    title: 'Masha e orso arrivano al teatro regina pacis di saronno',
+    description: 'Sabato 17 ottobre al Teatro Regina Pacis di Saronno: \'Le nuove avventure di Masha e Orso\'. Due repliche alle 15 e 16.30 con burattini interattivi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, masha, orso, arrivano, teatro',
+    ogTitle: 'Masha e Orso arrivano al Teatro Regina Pacis di Saronno',
+    ogDescription: 'Un appuntamento speciale per i bambini sabato 17 ottobre a Saronno. Due repliche di burattini interattivi con Masha e Orso e foto ricordo gratuita con Bingo.',
+    canonicalPath: '/articoli-frontaliere/masha-orso-teatro-saronno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Masha e orso arrivano al teatro regina pacis di saronno",
+      "description": "Sabato 17 ottobre al Teatro Regina Pacis di Saronno: 'Le nuove avventure di Masha e Orso'. Due repliche alle 15 e 16.30 con burattini interattivi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-masha-orso-teatro-saronno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palcoscenico di un teatro italiano con tende rosse per spettacolo di burattini"
+      },
+      "datePublished": "2026-10-16T09:13:03+00:00",
+      "dateModified": "2026-10-16T09:13:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/masha-orso-teatro-saronno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bollettino-frontaliere-2026-10-16': {
+    title: 'Frontalieri: 726 nuovi annunci in Svizzera ieri — 16 ottobre 2026',
+    description: 'Bollettino frontalieri del 16 ottobre 2026: ultime code ai valichi, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
+    ogTitle: 'Frontalieri: 726 nuovi annunci in Svizzera ieri — 16 ottobre 2026',
+    ogDescription: 'I numeri del 16 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico, in quali comuni conviene fare il pieno, quanto vale il franco al cambio rilevato e quanti nuovi annunci di lavoro sono usciti in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-10-16/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri: 726 nuovi annunci in Svizzera ieri — 16 ottobre 2026",
+      "description": "Bollettino frontalieri del 16 ottobre 2026: ultime code ai valichi, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "Deterministic media produced by frontaliereticino.ch.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/bollettino-frontaliere-2026-10-16.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I numeri del giorno per i frontalieri – 16 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro"
+      },
+      "datePublished": "2026-10-16T09:38:34+00:00",
+      "dateModified": "2026-10-16T09:38:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bollettino-frontaliere-2026-10-16/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

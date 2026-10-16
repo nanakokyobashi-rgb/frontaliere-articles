@@ -1,29 +1,4 @@
 {
-  "https://comozero.it/attualita/lungolago-chiuso-a-como-e-delirio-traffico-lira-di-9-sindaci-calpestata-la-dignita-della-sponda-orientale-dal-lago": {
-    "articleId": "lungolago-como-chiusura-traffico",
-    "ts": "2026-09-05T13:52:19.869Z",
-    "keyForm": 2
-  },
-  "https://comozero.it/attualita/cernobbio-torna-capitale-del-mondo-a-villa-deste-il-forum-teha-con-leader-ministri-e-grandi-nomi-delleconomia": {
-    "articleId": "forum-teha-cernobbio-2026",
-    "ts": "2026-09-05T14:02:59.093Z",
-    "keyForm": 2
-  },
-  "https://www.laregione.ch/cantone/luganese/1947497/la-ripresa-dei-pazienti-passa-dal-giardino-delle-cure-intense": {
-    "articleId": "giardino-cure-intense-clinica-moncucco",
-    "ts": "2026-09-05T14:12:09.470Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/ospedale-niguarda-e-istituto-dei-tumori-un-percorso-condiviso-per-le-emergenze-nei-pazienti-oncologici/2670711": {
-    "articleId": "ospedale-niguarda-istituto-tumori-emergenze-oncologici",
-    "ts": "2026-09-06T02:00:32.198Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/a8-chiusa-per-una-notte-luscita-di-busto-arsizio-lavori-alle-barriere-di-sicurezza/2671312": {
-    "articleId": "a8-busto-arsizio-chiusura-notte",
-    "ts": "2026-09-06T08:27:53.396Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/investimento-a-busto-arsizio-28enne-trasportato-in-ospedale/2670791": {
     "articleId": "investimento-busto-arsizio-28enne-ospedale",
     "ts": "2026-09-06T10:47:49.862Z",
@@ -2497,6 +2472,31 @@
   "https://www.ocst.ch/il-sindacato/piu-di-cento-anni-di-storia": {
     "articleId": "ocst-storia-frontalieri-ticino",
     "ts": "2026-10-16T05:15:00.011Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/lex-macello-di-belforte-apre-alle-visite-incontro-sui-lavori-di-bonifica-e-mostra-guidata/2708980": {
+    "articleId": "varese-macello-belforte-visite-2026",
+    "ts": "2026-10-16T06:05:12.173Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/le-azalee-lasciano-il-campo-di-via-pradisera-scontro-con-il-comune-sul-bando/2709355": {
+    "articleId": "azalee-calcio-campo-pradisera",
+    "ts": "2026-10-16T06:28:47.444Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/futura-percorso-netto-battuta-anche-roma-biancorosse-a-punteggio-pieno/2708734": {
+    "articleId": "futura-volley-roma-vittoria",
+    "ts": "2026-10-16T06:52:10.288Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/il-premio-furia-sara-assegnato-alleconomista-enrico-giovannini/2708839": {
+    "articleId": "premio-furia-giovannini-varese",
+    "ts": "2026-10-16T08:27:43.866Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/masha-e-orso-diventano-burattini-e-arrivano-al-teatro-regina-pacis-di-saronno/2708833": {
+    "articleId": "masha-orso-teatro-saronno",
+    "ts": "2026-10-16T09:13:03.690Z",
     "keyForm": 2
   }
 }
