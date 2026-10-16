@@ -44819,6 +44819,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'ocst-storia-frontalieri-ticino',
+ category: 'pratico',
+ date: '2026-10-16T05:14:59.548Z',
+ image: '/images/blog/article-ocst-storia-frontalieri-ticino.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
