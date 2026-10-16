@@ -80,6 +80,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-16T11:58:37.222Z",
       "lastFailureAt": "2026-10-16T11:58:37.222Z"
+    },
+    {
+      "articleId": "maratona-laghi-varese-2027",
+      "title": "Maratona dei Laghi 2027: attesi 2000 runner tra Varese e Monate",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-maratona-laghi-varese-2027: openai-codex (vision gate rejected image: Synthetic photorealistic scenic illustration with no text, logos, or re",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T13:10:19.548Z",
+      "lastFailureAt": "2026-10-16T13:10:19.548Z"
     }
   ]
 }

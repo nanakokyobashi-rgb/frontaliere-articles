@@ -8925,14 +8925,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/amazon-lascia-malpensa-sindacati-nessuno-deve-essere-lasciato-indietro/2707141": {
-      "section": "frontaliere",
-      "ts": 1791980222000
-    },
-    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/all%e2%80%99usi-un-nuovo-master-in-oncologia-e-immunologia--4162690.html": {
-      "section": "frontaliere",
-      "ts": 1791980257895
-    },
     "frontaliere::https://www.varesenews.it/2026/10/fotovoltaico-boom-di-richieste-dalle-imprese-varesine-esauriti-in-un-giorno-i-280mila-euro-del-bando/2707603": {
       "section": "frontaliere",
       "ts": 1791983613803
@@ -9228,6 +9220,10 @@
     "frontaliere::https://www.varesenoi.it/2026/10/16/leggi-notizia/argomenti/economia-13/articolo/la-decima-edizione-degli-stati-generali-della-scuola-digitale-arriva-a-varese-con-un-nuovo-format-a.html": {
       "section": "frontaliere",
       "ts": 1792151367112
+    },
+    "frontaliere::https://www.rsi.ch/info/scienza-e-tecnologia/cosa-c%e2%80%99%c3%a8-dietro-le-pubblicit%c3%a0-con-scene-di-sesso-che-infestano-instagram-e-tiktok--4163095.html": {
+      "section": "frontaliere",
+      "ts": 1792155725871
     }
   }
 }

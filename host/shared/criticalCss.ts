@@ -3,9 +3,6 @@
  * `build-plugins/shared/criticalCss.ts` (445 lines — the rest is the inlined
  * CSS payload the article path never emits).
  */
-import { ASSET_CDN_ORIGIN } from '../constants';
-
-
 /**
  * Filename `staticScriptsPlugin.ts` writes {@link CRITICAL_CSS} to under
  * `dist/assets/` — STABLE (no content hash), like every other file that

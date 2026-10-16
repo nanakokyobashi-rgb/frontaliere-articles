@@ -4029,6 +4029,16 @@
       }
     },
     {
+      "path": "host/tests/asset-cdn-origin.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Suite node:test della risoluzione dinamica dell'origine CDN: verifica la normalizzazione source-backed di ASSET_CDN, il getter cdnPreconnectHint del bootstrap e l'ordine con cui la fast pipeline configura l'ambiente prima di caricare host/ ed engine/. E' copertura specifica al bootstrap e alla pipeline del corpus e non ha un omonimo da trasportare sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "679d0674ea6f5b6b",
+        "alignedAt": "2026-10-16"
+      }
+    },
+    {
       "path": "host/tests/shell-contract-fingerprint.test.mjs",
       "mode": "corpus-only",
       "reason": "Gate runtime che avvia il bootstrap vero e conta i membri del contratto. Nessun omonimo sul sito: la' l'equivalente e' `tests/packages-articles-confinement.test.ts`, che pero' controlla gli import, non il contratto.",
@@ -4041,7 +4051,7 @@
     {
       "path": "host/tests/shell-contract-env.mjs",
       "mode": "corpus-only",
-      "reason": "Normalizzazione dell'ambiente per i due gate che pinnano SiteShellContract (issue #788): il digest degli scalari copre `cdnPreconnectHint`, che `host/constants.ts` deriva da `process.env.ASSET_CDN` a module-evaluation time, quindi senza azzerarlo il gate cross-repo dipende dall'ambiente del runner. Artefatto di questo lato: nessun omonimo sul sito.",
+      "reason": "Normalizzazione dell'ambiente per i due gate che pinnano SiteShellContract (issue #788): il getter di `host/siteShellBootstrap.ts` risolve `cdnPreconnectHint` da `process.env.ASSET_CDN` quando l'engine legge il contratto, quindi i test azzerano l'ambiente prima di leggere gli scalari per mantenere il digest cross-repo indipendente dal runner. Artefatto di questo lato: nessun omonimo sul sito.",
       "baseline": {
         "site": null,
         "corpus": "940356862207405b",

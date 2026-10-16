@@ -6,9 +6,9 @@
  * `host/shell-contract-fingerprint.json` registra lo SHA-256 della metà scalare
  * del contratto, e i due repo lo asseriscono entrambi: è il gate che tiene
  * insieme le due metà. Ma uno dei 22 scalari — `cdnPreconnectHint` — non è un
- * letterale: `host/constants.ts` lo deriva da `process.env.ASSET_CDN` dentro
- * una IIFE valutata al PRIMO import del modulo. Il digest quindi non è una
- * funzione della sorgente, è una funzione della sorgente E dell'ambiente:
+ * letterale: il getter del bootstrap lo risolve da `process.env.ASSET_CDN`
+ * quando il contratto viene letto. Il digest quindi dipende dalla sorgente E
+ * dall'ambiente presente al momento della lettura:
  *
  *   senza `ASSET_CDN`                            → a8d61011… (il valore registrato)
  *   con `ASSET_CDN=https://cdn.frontaliereticino.ch` → 297c380c…
@@ -57,13 +57,12 @@
 export const CONTRACT_ENV_KEYS = ['ASSET_CDN'];
 
 /**
- * Azzera l'ambiente PRIMA del primo import di `host/siteShellBootstrap.ts`.
+ * Azzera l'ambiente prima di leggere `host/siteShellBootstrap.ts`.
  *
- * DEVE essere chiamata al top level del file di test, non dentro il `test()`:
- * la valutazione del modulo è cachata per processo, quindi un `delete` dopo il
- * primo import è un no-op silenzioso — esattamente la trappola documentata in
- * `scripts/publish-article-fast.mjs` per il caso opposto (impostarla troppo
- * tardi).
+ * I test la chiamano al top level per fissare una baseline vuota prima di
+ * importare e leggere il contratto. Il resolver è dinamico: l'import non
+ * congela l'ambiente, e un'assegnazione successiva viene osservata al prossimo
+ * accesso a `cdnPreconnectHint`.
  */
 export function normalizeContractEnv() {
   for (const key of CONTRACT_ENV_KEYS) delete process.env[key];
