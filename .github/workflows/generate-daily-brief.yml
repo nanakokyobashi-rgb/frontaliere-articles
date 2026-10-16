@@ -370,7 +370,7 @@ jobs:
               --merge-registry content/blog-meta-en.ts \
               --merge-registry content/blog-meta-de.ts \
               --merge-registry content/blog-meta-fr.ts \
-              --merge-registry "content/seo/seo-blog-*.ts" \
+              --merge-registry-pattern "content/seo/seo-blog-*.ts" \
               --take-theirs content/blog-body/ \
               --take-theirs public/images/blog/ 2>&1 \
               | tee -a "$PUSH_LOG"

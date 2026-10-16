@@ -345,9 +345,15 @@ test('a plain divergence with no conflict rebases cleanly', () => {
 function parseHelperArgs(yamlText) {
   const lines = yamlText.split('\n');
   const start = lines.findIndex((l) => l.includes('bash scripts/lib/rebase-onto-remote.sh'));
-  if (start === -1) return { bookkeeping: [], registries: [], queues: [], takeTheirs: [], counters: [], sectionSurfaces: false };
+  if (start === -1) {
+    return {
+      bookkeeping: [], registries: [], registryPatterns: [], queues: [], takeTheirs: [], counters: [],
+      sectionSurfaces: false,
+    };
+  }
   const bookkeeping = [];
   const registries = [];
+  const registryPatterns = [];
   const queues = [];
   const takeTheirs = [];
   const counters = [];
@@ -368,6 +374,13 @@ function parseHelperArgs(yamlText) {
       bookkeeping.push(...derived.bookkeeping);
       registries.push(...derived.registries);
       takeTheirs.push(...derived.takeTheirs);
+    } else if (clean.startsWith('--merge-registry-pattern')) {
+      // The helper intentionally gives these options different semantics:
+      // --merge-registry is an exact path, while --merge-registry-pattern is
+      // the only place where a shell glob is allowed. Keep that distinction
+      // in the fixture's reconstructed argv as well.
+      const pattern = clean.split(/\s+/)[1];
+      if (pattern) registryPatterns.push(pattern.replace(/^(['"])(.*)\1$/, '$2'));
     } else if (clean.startsWith('--take-theirs')) {
       const prefix = clean.split(/\s+/)[1]?.replace(/^(['"])(.*)\1$/, '$2');
       if (prefix) takeTheirs.push(prefix.replace(/\s*\|\|\s*true$/, ''));
@@ -388,7 +401,7 @@ function parseHelperArgs(yamlText) {
     }
     if (!/\\\s*$/.test(line)) break; // the shell continuation ended
   }
-  return { bookkeeping, registries, queues, takeTheirs, counters, sectionSurfaces };
+  return { bookkeeping, registries, registryPatterns, queues, takeTheirs, counters, sectionSurfaces };
 }
 
 function allowlistFromWorkflow(yamlText) {
@@ -1112,6 +1125,9 @@ test('an empty allowlist is a caller bug, not a silent always-abort', () => {
 const REGISTRY = 'content/blog-articles-data.ts';
 const SWISS_REGISTRY = 'content/swiss-articles-data.ts';
 const SPACED_REGISTRY = 'content/registry with spaces.ts';
+const GLOB_LITERAL_REGISTRY = 'content/registry?.ts';
+const GLOB_DECOY_REGISTRY = 'content/registryA.ts';
+const EXPLICIT_REGISTRY_PATTERN = 'content/registry-*.ts';
 const RESOLVER = path.resolve(HERE, '../../scripts/lib/merge-content-registry-conflict.mjs');
 
 /** Il registro FRONTALIERE con gli id dati, nella forma reale (array di oggetti). */
@@ -1175,7 +1191,7 @@ function allIds(ids) {
 
 /** Gli argomenti che il WORKFLOW passa davvero, non una lista riscritta qui. */
 function helperArgsFromWorkflowText(yamlText) {
-  const { bookkeeping, registries, queues, takeTheirs, counters, sectionSurfaces } = parseHelperArgs(yamlText);
+  const { bookkeeping, registries, registryPatterns, queues, takeTheirs, counters, sectionSurfaces } = parseHelperArgs(yamlText);
   if (sectionSurfaces) {
     // Come nel workflow: il flag, non la sua espansione. Cosi' i casi git sotto
     // passano davvero dalla derivazione dentro rebase-onto-remote.sh.
@@ -1185,6 +1201,7 @@ function helperArgsFromWorkflowText(yamlText) {
       ...queues.flatMap((p) => ['--merge-queue', p]),
       ...counters.flatMap((c) => ['--merge-counter', c]),
       ...registries.filter((r) => !derived.has(r)).flatMap((r) => ['--merge-registry', r]),
+      ...registryPatterns.flatMap((p) => ['--merge-registry-pattern', p]),
       ...takeTheirs.filter((p) => !derived.has(p)).flatMap((p) => ['--take-theirs', p]),
       '--section-surfaces',
     ];
@@ -1194,6 +1211,7 @@ function helperArgsFromWorkflowText(yamlText) {
     ...queues.flatMap((p) => ['--merge-queue', p]),
     ...counters.flatMap((c) => ['--merge-counter', c]),
     ...registries.flatMap((r) => ['--merge-registry', r]),
+    ...registryPatterns.flatMap((p) => ['--merge-registry-pattern', p]),
     ...takeTheirs.flatMap((p) => ['--take-theirs', p]),
   ];
 }
@@ -1223,6 +1241,77 @@ test('un registry dichiarato con --merge-registry conserva gli spazi nel path', 
       assert.match(merged, new RegExp(id), `${id} deve restare nel registro con path spazioso`);
     }
     assert.doesNotMatch(merged, /<{7}|={7}|>{7}/, 'il registro fuso non deve contenere marker di conflitto');
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('un registry letterale con metacaratteri glob usa il confronto esatto', () => {
+  const w = makeWorld();
+  try {
+    landUpstream(w, [[
+      GLOB_LITERAL_REGISTRY,
+      articlesRegistry(['articolo-base', 'articolo-concorrente']),
+      'concurrent publisher updates literal glob-shaped registry',
+    ]]);
+
+    write(w.work, GLOB_LITERAL_REGISTRY, articlesRegistry(['articolo-base', 'articolo-locale']));
+    commitAll(w.work, 'publish local literal glob-shaped registry');
+
+    const { code, out } = runHelper(w.work, w.upstream, '--merge-registry', GLOB_LITERAL_REGISTRY);
+    assert.equal(code, 0, out);
+
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+    const merged = git(w.work, 'show', 'HEAD:' + GLOB_LITERAL_REGISTRY);
+    for (const id of ['articolo-base', 'articolo-concorrente', 'articolo-locale']) {
+      assert.match(merged, new RegExp(id), 'il record ' + id + ' deve restare nel registro glob-shaped');
+    }
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('un path letterale non classifica un altro file come registro wildcard', () => {
+  const w = makeWorld();
+  try {
+    landUpstream(w, [[
+      GLOB_DECOY_REGISTRY,
+      articlesRegistry(['articolo-base', 'articolo-concorrente']),
+      'concurrent publisher updates a different registry',
+    ]]);
+
+    write(w.work, GLOB_DECOY_REGISTRY, articlesRegistry(['articolo-base', 'articolo-locale']));
+    commitAll(w.work, 'publish a different registry');
+
+    const { code, out } = runHelper(w.work, w.upstream, '--merge-registry', GLOB_LITERAL_REGISTRY);
+    assert.equal(code, 1, 'un path non dichiarato non deve essere inviato al resolver dei registri');
+    assert.match(out, /not a whole-file bookkeeping cache/);
+    assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'il rebase deve essere abortito pulitamente');
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('un glob viene interpretato solo con --merge-registry-pattern', () => {
+  const w = makeWorld();
+  const matched = 'content/registry-primary.ts';
+  try {
+    landUpstream(w, [[
+      matched,
+      articlesRegistry(['articolo-base', 'articolo-concorrente']),
+      'concurrent publisher updates a patterned registry',
+    ]]);
+
+    write(w.work, matched, articlesRegistry(['articolo-base', 'articolo-locale']));
+    commitAll(w.work, 'publish patterned registry');
+
+    const { code, out } = runHelper(w.work, w.upstream, '--merge-registry-pattern', EXPLICIT_REGISTRY_PATTERN);
+    assert.equal(code, 0, out);
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+    const merged = git(w.work, 'show', 'HEAD:' + matched);
+    for (const id of ['articolo-base', 'articolo-concorrente', 'articolo-locale']) {
+      assert.match(merged, new RegExp(id));
+    }
   } finally {
     w.cleanup();
   }
@@ -1670,7 +1759,12 @@ test('generate-article.yml dichiara come registro OGNI target di scrittura del g
 });
 
 test('generate-daily-brief.yml classifica i registri e gli asset del bollettino per il rebase (#1696)', () => {
-  const { bookkeeping, registries, takeTheirs } = parseHelperArgs(readFileSync(DAILY_BRIEF_WORKFLOW, 'utf8'));
+  assert.match(
+    readFileSync(DAILY_BRIEF_WORKFLOW, 'utf8'),
+    /--merge-registry-pattern "content\/seo\/seo-blog-\*\.ts"/,
+    'il wildcard SEO deve essere dichiarato esplicitamente come pattern',
+  );
+  const { bookkeeping, registries, registryPatterns, takeTheirs } = parseHelperArgs(readFileSync(DAILY_BRIEF_WORKFLOW, 'utf8'));
   const expectedRegistries = [
     'content/blog-articles-data.ts',
     'content/blogArticleIds.ts',
@@ -1683,9 +1777,13 @@ test('generate-daily-brief.yml classifica i registri e gli asset del bollettino 
   ];
 
   for (const file of expectedRegistries) {
-    const declared = registries.some((pattern) => pattern === file
-      || (pattern === 'content/seo/seo-blog-*.ts' && /^content\/seo\/seo-blog-.*\.ts$/.test(file)));
-    assert.ok(declared, `${file} deve essere fuso come registro append-only; dichiarati: ${JSON.stringify(registries)}`);
+    const declared = registries.some((pattern) => pattern === file)
+      || registryPatterns.some((pattern) => pattern === 'content/seo/seo-blog-*.ts'
+        && /^content\/seo\/seo-blog-.*\.ts$/.test(file));
+    assert.ok(
+      declared,
+      `${file} deve essere fuso come registro append-only; dichiarati: ${JSON.stringify({ registries, registryPatterns })}`,
+    );
   }
   assert.ok(takeTheirs.includes('content/blog-body/'), 'i body del bollettino sono file per-articolo');
   assert.ok(takeTheirs.includes('public/images/blog/'), 'hero e thumbnail sono file per-articolo');
