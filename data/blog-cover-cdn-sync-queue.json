@@ -1,4 +1,37 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-arresto-cittadino-russo-como.webp",
+      "sha256": "cd9b68442a0ca77f5c7f184da5549d3488b31d11727bebeb9ea714a0643d22f8"
+    },
+    {
+      "path": "public/images/blog/article-futura-volley-roma-vittoria.webp",
+      "sha256": "2a2a8344ab9f7b70611f2ef0b81f0c0a630e1ab34e478debd7f41b1465263166"
+    },
+    {
+      "path": "public/images/blog/article-mercatini-usato-svizzera.webp",
+      "sha256": "20ca32501b26189cdfb393a0a2b95c758a3c36dcacdc1c32215a3c696112f73d"
+    },
+    {
+      "path": "public/images/blog/article-varese-macello-belforte-visite-2026.webp",
+      "sha256": "001b71f8e2aa983df6603317adf86ce9b8c4da86673f1d239d9f45fdad871ecc"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-arresto-cittadino-russo-como-480w.webp",
+      "sha256": "92dd8c5e309b1c279ad482060e0a49c3cd96f2ea06b5d21142f6ac199d59edd9"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-futura-volley-roma-vittoria-480w.webp",
+      "sha256": "3cef78e1cfaf92b63a49c1dec550befdaa5f50421e89f583b90bdd79009244d1"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-mercatini-usato-svizzera-480w.webp",
+      "sha256": "288ce1211c03eb065b298ca293a4b8bbe4d3acf62ff2abdfe599c6ec742e693e"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-varese-macello-belforte-visite-2026-480w.webp",
+      "sha256": "3ab8fef6109889e0b117e5fced65a7266bb725b3197d89555e3db4f535bf03cc"
+    }
+  ]
 }
