@@ -14,6 +14,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const fixture = (name) => JSON.parse(readFileSync(path.join(HERE, 'fixtures', 'rewire', name), 'utf8'));
 const taxData = fixture('canton-tax.json');
 const pensionData = fixture('pension-parameters.json');
+const NOW = Date.UTC(2026, 0, 1);
 
 test('il brief cantonale porta i valori fiscali e previdenziali del solo cantone', () => {
   const brief = buildCantonFactsBrief({
@@ -21,6 +22,7 @@ test('il brief cantonale porta i valori fiscali e previdenziali del solo cantone
     members: ['TI'],
     taxData,
     pensionData,
+    nowMs: NOW,
   });
 
   assert.match(brief, /dataset 2026/);
@@ -42,6 +44,7 @@ test('un gruppo cantonale conserva una riga distinta per ciascun membro', () => 
     members: ['AI', 'AR'],
     taxData,
     pensionData,
+    nowMs: NOW,
   });
 
   assert.match(brief, /Fisco AI/);
@@ -56,8 +59,70 @@ test('cache incompleta non produce fatti con valori undefined', () => {
     members: ['TI'],
     taxData: { year: 2026, cantons: {} },
     pensionData: { year: 2026, cantons: {} },
+    nowMs: NOW,
   });
 
   assert.equal(brief, '');
   assert.doesNotMatch(brief, /undefined|null/);
+});
+
+test('il brief scarta le aliquote A0 se cardinalità o valori non rispettano lo shaper canonico', () => {
+  const mismatched = structuredClone(taxData);
+  mismatched.cantons.TI.withholding.ratesPct.A0.pop();
+  const mismatchBrief = buildCantonFactsBrief({ canton: 'TI', taxData: mismatched, nowMs: NOW });
+  assert.doesNotMatch(mismatchBrief, /imposta alla fonte A0/);
+
+  const invalid = structuredClone(taxData);
+  invalid.cantons.TI.withholding.ratesPct.A0[2] = 50;
+  const invalidBrief = buildCantonFactsBrief({ canton: 'TI', taxData: invalid, nowMs: NOW });
+  assert.doesNotMatch(invalidBrief, /imposta alla fonte A0/);
+});
+
+test('la riga della tassa sul capitale usa il suo anno e richiede array allineati e validi', () => {
+  const differentYear = structuredClone(pensionData);
+  differentYear.capitalWithdrawalTax.year = 2025;
+  const brief = buildCantonFactsBrief({ canton: 'TI', pensionData: differentYear, nowMs: NOW });
+  assert.match(brief, /imposta sul capitale, dataset 2025/);
+  assert.match(brief, /Previdenza TI, dataset 2026/);
+
+  const mismatched = structuredClone(pensionData);
+  mismatched.cantons.TI.capitalWithdrawalTax.taxCHF.pop();
+  const mismatchBrief = buildCantonFactsBrief({ canton: 'TI', pensionData: mismatched, nowMs: NOW });
+  assert.doesNotMatch(mismatchBrief, /imposta sul capitale/);
+
+  const invalid = structuredClone(pensionData);
+  invalid.cantons.TI.capitalWithdrawalTax.taxCHF[1] = -1;
+  const invalidBrief = buildCantonFactsBrief({ canton: 'TI', pensionData: invalid, nowMs: NOW });
+  assert.doesNotMatch(invalidBrief, /imposta sul capitale/);
+});
+
+test('fatti fiscali e previdenziali rispettano la finestra annuale canonica UTC', () => {
+  const makeTaxYear = (year) => {
+    const data = structuredClone(taxData);
+    data.year = year;
+    for (const row of Object.values(data.cantons)) {
+      if (row?.burdenPct?.['2026']) row.burdenPct[String(year)] = row.burdenPct['2026'];
+    }
+    return data;
+  };
+
+  for (const year of [2025, 2026]) {
+    const brief = buildCantonFactsBrief({ canton: 'TI', taxData: makeTaxYear(year), nowMs: NOW });
+    assert.match(brief, /Fisco TI/, `tax year ${year} is within the canonical window`);
+  }
+  for (const year of [2024, 2027]) {
+    const brief = buildCantonFactsBrief({ canton: 'TI', taxData: makeTaxYear(year), nowMs: NOW });
+    assert.doesNotMatch(brief, /Fisco TI/, `tax year ${year} is outside the canonical window`);
+  }
+
+  for (const year of [2025, 2026]) {
+    const data = { ...structuredClone(pensionData), year };
+    const brief = buildCantonFactsBrief({ canton: 'TI', pensionData: data, nowMs: NOW });
+    assert.match(brief, /Previdenza federale/, `pension year ${year} is within the canonical window`);
+  }
+  for (const year of [2024, 2027]) {
+    const data = { ...structuredClone(pensionData), year };
+    const brief = buildCantonFactsBrief({ canton: 'TI', pensionData: data, nowMs: NOW });
+    assert.doesNotMatch(brief, /Previdenza federale|Previdenza TI/, `pension year ${year} is outside the canonical window`);
+  }
 });
