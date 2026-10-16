@@ -6,6 +6,11 @@ const source = readFileSync(new URL('../scripts/create-article.mjs', import.meta
 const start = source.indexOf('function validateStructuredData(data) {');
 const end = source.indexOf('function updateSitemapIndexLastmod(', start);
 assert.ok(start >= 0 && end > start);
+const readerStart = source.indexOf('function readCanonicalPath(block) {');
+assert.ok(readerStart >= 0 && readerStart < start);
+const readCanonicalPath = new Function(
+  source.slice(readerStart, start) + '\nreturn readCanonicalPath;',
+)();
 
 // Execute the real validation function with a read-only in-memory SEO entry.
 // The entry resolver is tested separately; this isolates the field Google rejects.
@@ -16,11 +21,11 @@ function validateCreator(type, id = 'https://frontaliereticino.ch/#organization'
     "image": { "creator": { "@type": "${type}", "@id": "${id}" } }
   }`;
   const validate = new Function(
-    'SECTION', 'BASE_URL', 'read', 'findSeoEntryMatches', 'corpusPath', 'console',
+    'SECTION', 'BASE_URL', 'read', 'findSeoEntryMatches', 'readCanonicalPath', 'corpusPath', 'console',
     `${source.slice(start, end)}\nreturn validateStructuredData;`,
   )(
     { seoFile: 'memory.ts' }, 'https://frontaliereticino.ch', () => entry,
-    () => [{ index: 0, closeIdx: entry.length - 1 }], (p) => p, { error() {} },
+    () => [{ index: 0, closeIdx: entry.length - 1 }], readCanonicalPath, (p) => p, { error() {} },
   );
   return validate({ id: 'example', image: 'example.webp' });
 }

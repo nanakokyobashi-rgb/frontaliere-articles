@@ -4577,8 +4577,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
       "mode": "identical",
       "baseline": {
-        "site": "22892178c53c30d3",
-        "corpus": "22892178c53c30d3",
+        "site": "c8453ec2d9e02841",
+        "corpus": "c8453ec2d9e02841",
         "alignedAt": "2026-10-16"
       }
     },
@@ -4598,8 +4598,8 @@
       "mode": "identical",
       "reason": "La baseline dell'allineamento del 2026-10-15 registra lo stesso blob sui due lati (cbec97b9b6bc154b); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "6030fc8595a28ffe",
-        "corpus": "6030fc8595a28ffe",
+        "site": "f9651ff0470b054a",
+        "corpus": "f9651ff0470b054a",
         "alignedAt": "2026-10-16"
       }
     },
@@ -5283,7 +5283,7 @@
     {
       "path": "scripts/ci/review-quota-rescuer.mjs",
       "mode": "corpus-only",
-      "reason": "Consumer zero-Claude che riattiva le run PR differite dal lease condiviso, verificando HEAD, ruolo e workflow sorgente prima del rerun. I marker v2 includono PR/HEAD, workflow/evento allowlisted; workflow_run cita il run tests che prova la HEAD, mentre workflow_dispatch dimostra l'intent del preflight trusted contro la PR HEAD corrente senza inventare un trigger tests. Un attempt avanzato chiude la fence solo con claim terminale dello stesso run o step fixer realmente avviato, mentre uno skip resta retryable. E' un percorso del ciclo Claude del corpus; il sito non possiede questo lease condiviso ne' il relativo consumer, quindi non c'e' un gemello da portare e la classificazione e' `corpus-only` per costruzione. Dal 2026-09-25 rilancia anche, una volta per HEAD e solo DOPO il reset, il run `tests` rosso per il rate limit del `GITHUB_TOKEN`: la prova viene dalle annotation del job richiesto (marker `[gh-rate-limit ...]` o 403 grezzo) e l'idempotenza dal marker `REVIEW_RATE_LIMIT_RETRY`, perche' un claim `failed-transient` in quel caso non puo' esistere: si scrive con lo stesso token esaurito.",
+      "reason": "Consumer zero-Claude che riattiva le run PR differite dal lease condiviso, verificando HEAD, ruolo e workflow sorgente prima del rerun. I marker v2 includono PR/HEAD, workflow/evento allowlisted; workflow_run cita il run tests che prova la HEAD, mentre workflow_dispatch dimostra l'intent del preflight trusted contro la PR HEAD corrente senza inventare un trigger tests. Un attempt avanzato chiude la fence solo con claim terminale dello stesso run o step fixer realmente avviato, mentre uno skip resta retryable. E' un percorso del ciclo Claude del corpus; il sito non possiede questo lease condiviso ne' il relativo consumer, quindi non c'e' un gemello da portare e la classificazione e' `corpus-only` per costruzione. Dal 2026-09-25 rilancia anche, una volta per HEAD e solo DOPO il reset, il run `tests` rosso per il rate limit del `GITHUB_TOKEN`: la prova viene dalle annotation del job richiesto (marker `[gh-rate-limit ...]` o 403 grezzo) e l'idempotenza dal marker `REVIEW_RATE_LIMIT_RETRY`, perche' un claim `failed-transient` in quel caso non puo' esistere: si scrive con lo stesso token esaurito. Dal 2026-10-16 la modalita `REVIEW_RATE_LIMIT_ONLY` richiede `GH_TOKEN` esplicito, e' invocata dal workflow schedulato con il `GITHUB_TOKEN` built-in, mai col PAT, e preflighta core e graphql da `api rate_limit` prima di qualunque scan; con un bucket a zero rinvia al prossimo tick sul reset reale.",
       "baseline": {
         "site": null,
         "corpus": "7088f7d382ddebe4",
@@ -5293,7 +5293,7 @@
     {
       "path": ".github/workflows/review-quota-rescuer.yml",
       "mode": "corpus-only",
-      "reason": "Workflow zero-Claude che osserva la fine dei consumer e il cron per riattivare le review PR differite dal lease condiviso. Il sito non possiede questo lease ne' questo consumer, quindi non esiste un gemello da portare. Dal 2026-09-25 passa `REVIEW_RATE_LIMIT_SCAN` per limitare la lettura dei run `tests` rossi per rate limit ai tick cron/dispatch e ai completamenti di `tests`.",
+      "reason": "Workflow zero-Claude che osserva la fine dei consumer e il cron per riattivare le review PR differite dal lease condiviso. Il sito non possiede questo lease ne' questo consumer, quindi non esiste un gemello da portare. Dal 2026-09-25 passa `REVIEW_RATE_LIMIT_SCAN` per limitare la lettura dei run `tests` rossi per rate limit ai tick cron/dispatch e ai completamenti di `tests`. Dal 2026-10-16 lo scan quota e' separato dal rescuer PAT: gira solo su cron/dispatch con `GITHUB_TOKEN` built-in, `checks:read` e `actions:write`; il rescuer generale non esegue lo scan quota. Prima delle API legge `rate_limit` (fuori quota) e, se `core` o `graphql` sono a zero, rinvia lo scan al tick successivo usando i reset reali.",
       "baseline": {
         "site": null,
         "corpus": "626245ac2abb68ab",

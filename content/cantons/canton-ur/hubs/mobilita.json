@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T14:33:38.367Z",
-  "contentHash": "3416e47549900b95af29e8bb2ce7db6033224c051a3241888a52ab5dd0917691",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "7a204187ce041d189609d49bbd0930787866a34f30f19da29942e1507022c110",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-16T05:03:47.755Z",
+      "updatedAt": "2026-10-16T11:58:12.009Z",
       "keyFacts": 2
     },
     {
@@ -66,6 +66,11 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
+              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 2.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20",
+              "value": "Traffico",
+              "date": "2026-10-16T08:56:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2026",
@@ -82,16 +87,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 21 ottobre 2026",
               "date": "2026-09-21T06:51:00.000Z"
-            },
-            {
-              "label": "A2 S. Gottardo -> Luzern tra Galleria Galleria Teiftal E Svincolo autostradale Amsteg Situazione: problemi di traffico cantiere, lunghezza [km] 3.5 Limitazione del traffico: circolazione…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 28 ottobre 2026",
-              "date": "2026-09-21T06:53:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -175,7 +174,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "UR",
@@ -224,6 +223,11 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
+              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 2.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20",
+              "value": "Traffic",
+              "date": "2026-10-16T08:56:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
               "value": "Roadworks",
               "detail": "until 31 December 2026",
@@ -240,16 +244,10 @@
               "value": "Roadworks",
               "detail": "until 21 October 2026",
               "date": "2026-09-21T06:51:00.000Z"
-            },
-            {
-              "label": "A2 S. Gottardo -> Luzern tra Galleria Galleria Teiftal E Svincolo autostradale Amsteg Situazione: problemi di traffico cantiere, lunghezza [km] 3.5 Limitazione del traffico: circolazione…",
-              "value": "Roadworks",
-              "detail": "until 28 October 2026",
-              "date": "2026-09-21T06:53:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -333,7 +331,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "UR",
@@ -382,6 +380,11 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
+              "label": "A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 2.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 20",
+              "value": "Verkehr",
+              "date": "2026-10-16T08:56:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen zwischen Ortschaft Andermatt und Ortschaft Hospental Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.5 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m]…",
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2026",
@@ -398,16 +401,10 @@
               "value": "Baustelle",
               "detail": "bis 21. Oktober 2026",
               "date": "2026-09-21T06:51:00.000Z"
-            },
-            {
-              "label": "A2 Gotthard -> Luzern zwischen Tunnel Teiftal-Tunnel und Anschluss Amsteg Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 3.5 Verkehrsführung: Verkehr wird über die Gegenfahrbahn geleitet Zusatz…",
-              "value": "Baustelle",
-              "detail": "bis 28. Oktober 2026",
-              "date": "2026-09-21T06:53:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -491,7 +488,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "UR",
@@ -540,6 +537,11 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
+              "label": "A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 2.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 20",
+              "value": "Trafic",
+              "date": "2026-10-16T08:56:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen entre Localité Andermatt et Localité Hospental Situation: trafic perturbé travaux, longueur [km] 0.5 Complément 1: limitation temporaire de largeur largeur de la voie [m] 4.0…",
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2026",
@@ -556,16 +558,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 21 octobre 2026",
               "date": "2026-09-21T06:51:00.000Z"
-            },
-            {
-              "label": "A2 St-Gothard -> Lucerne entre Tunnel Tunnel Teiftal et Jonction autoroutière Amsteg Situation: trafic perturbé travaux, longueur [km] 3.5 Gestion du trafic: trafic bidirectionnel Complément 1…",
-              "value": "Chantier",
-              "detail": "jusqu’au 28 octobre 2026",
-              "date": "2026-09-21T06:53:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -649,7 +645,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

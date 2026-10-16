@@ -8426,6 +8426,12 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.svizzera-abbattimenti-lupi-2025.title': 'Wolf: Leichtere Abschüsse – Umweltschützer dagegen, Landwirte dafür',
     'blog.article.svizzera-abbattimenti-lupi-2025.excerpt': 'Der Bundesrat schlägt Abschüsse das ganze Jahr über vor.',
     'blog.article.svizzera-abbattimenti-lupi-2025.imageAlt': 'Silhouette eines Wolfes, der bei Sonnenuntergang in den Schweizer Alpen zum Mond heult',
+    'blog.article.stadler-rail-treno-idrogeno-sardegna.title': 'Stadler Rail testet den ersten Wasserstoffzug auf Schmalspur',
+    'blog.article.stadler-rail-treno-idrogeno-sardegna.excerpt': 'Stadler Rail testet einen Wasserstoffzug in der Schweiz Der Zug ist für Sardinien bestimmt Die Strecke Hemishofen-Ramsen ist fast 4 km lang Die Prüfungen',
+    'blog.article.stadler-rail-treno-idrogeno-sardegna.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.crediti-bilaterali-iii-svizzera.title': 'Bilaterale III, erste Zustimmung zu Krediten in Höhe von 3,48 Milliarden',
+    'blog.article.crediti-bilaterali-iii-svizzera.excerpt': '3,48 Milliarden Franken für den Zeitraum 2030-2036 Die FK-N stimmt ab: 14 Ja-Stimmen, 8 Nein-Stimmen, 3 Enthaltungen Der Nationalrat dürfte das Dossier im Dezember prüfen',
+    'blog.article.crediti-bilaterali-iii-svizzera.imageAlt': 'Das Schweizer Bundesparlament in Bern, mit der Schweizer Flagge im Vordergrund.',
 };
 
 export default blogMetaChDe;

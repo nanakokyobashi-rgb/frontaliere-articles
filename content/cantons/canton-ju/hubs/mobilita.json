@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T14:33:38.367Z",
-  "contentHash": "12460f2d56632ce7a72306b306c210a9dba804749e9f6f7879e649b97a749917",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "53792cfbfacdd0f0b3b50ebb206ba81b0e54c9299b78f0e937cc7a842aae44fa",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-16T05:03:47.755Z",
+      "updatedAt": "2026-10-16T11:58:12.009Z",
       "keyFacts": 1
     },
     {
@@ -86,15 +86,10 @@
               "value": "Chiusura",
               "detail": "fine prevista: 20 ottobre 2026",
               "date": "2026-10-01T14:47:00.000Z"
-            },
-            {
-              "label": "A16 Boncourt -> Delémont tra Svincolo autostradale Courgenay/Cornol E Svincolo autostradale St-Ursanne Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-16T03:56:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -166,7 +161,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "JU",
@@ -230,15 +225,10 @@
               "value": "Closure",
               "detail": "until 20 October 2026",
               "date": "2026-10-01T14:47:00.000Z"
-            },
-            {
-              "label": "A16 Boncourt -> Delémont tra Svincolo autostradale Courgenay/Cornol E Svincolo autostradale St-Ursanne Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-16T03:56:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -309,7 +299,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "JU",
@@ -373,15 +363,10 @@
               "value": "Sperrung",
               "detail": "bis 20. Oktober 2026",
               "date": "2026-10-01T14:47:00.000Z"
-            },
-            {
-              "label": "A16 Boncourt -> Delsberg zwischen Anschluss Courgenay/Cornol und Anschluss St-Ursanne Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-16T03:56:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -452,7 +437,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "JU",
@@ -516,15 +501,10 @@
               "value": "Fermeture",
               "detail": "jusqu’au 20 octobre 2026",
               "date": "2026-10-01T14:47:00.000Z"
-            },
-            {
-              "label": "A16 Boncourt -> Delémont entre Jonction autoroutière Courgenay/Cornol et Jonction autoroutière St-Ursanne Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-16T03:56:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -596,7 +576,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

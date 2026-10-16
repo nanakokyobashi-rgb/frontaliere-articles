@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "cac73e0ed8c3da2ab1681222299112dc55bc15505ec2879b2531ba340aa38ba2",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "73358962f923b5c629b19c2205933f4fceec7334ff9da7972524720140ebebf5",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T03:54:22.189Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T10:09:31.602Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "56",
+          "value": "57",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -62,6 +62,12 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/jazzkonzert-stark-group_AeqFH8P"
             },
             {
+              "label": "WESTWOOD Country Band",
+              "detail": "Bichelsee-Balterswil",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/westwood-country-band/"
+            },
+            {
               "label": "Gruppen Kunstausstellung",
               "detail": "Tierpark Lange Erlen, Erlen — in corso, ultimo giorno: 25 ottobre 2026",
               "date": "2026-10-16",
@@ -90,17 +96,11 @@
               "detail": "Goldener Dachs, Weinfelden",
               "date": "2026-10-17",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/new-orleans-in-weinfelden-cd-release-konzert-nicole-johaenntgen-henry_Aqj7nD1"
-            },
-            {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Paritätische Kirche St. Laurentius, Frauenfeld",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/leidenschaft-und-samba_AneNZem"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [],
@@ -164,7 +164,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "TG",
@@ -174,7 +174,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "56",
+          "value": "57",
           "note": "from the site’s events calendar"
         }
       ],
@@ -209,6 +209,12 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/jazzkonzert-stark-group_AeqFH8P"
             },
             {
+              "label": "WESTWOOD Country Band",
+              "detail": "Bichelsee-Balterswil",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/westwood-country-band/"
+            },
+            {
               "label": "Gruppen Kunstausstellung",
               "detail": "Tierpark Lange Erlen, Erlen — ongoing, last day: 25 October 2026",
               "date": "2026-10-16",
@@ -237,17 +243,11 @@
               "detail": "Goldener Dachs, Weinfelden",
               "date": "2026-10-17",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/new-orleans-in-weinfelden-cd-release-konzert-nicole-johaenntgen-henry_Aqj7nD1"
-            },
-            {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Paritätische Kirche St. Laurentius, Frauenfeld",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/leidenschaft-und-samba_AneNZem"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -265,7 +265,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [],
@@ -311,7 +311,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "TG",
@@ -321,7 +321,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "56",
+          "value": "57",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -356,6 +356,12 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/jazzkonzert-stark-group_AeqFH8P"
             },
             {
+              "label": "WESTWOOD Country Band",
+              "detail": "Bichelsee-Balterswil",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/westwood-country-band/"
+            },
+            {
               "label": "Gruppen Kunstausstellung",
               "detail": "Tierpark Lange Erlen, Erlen — läuft, letzter Tag: 25. Oktober 2026",
               "date": "2026-10-16",
@@ -384,17 +390,11 @@
               "detail": "Goldener Dachs, Weinfelden",
               "date": "2026-10-17",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/new-orleans-in-weinfelden-cd-release-konzert-nicole-johaenntgen-henry_Aqj7nD1"
-            },
-            {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Paritätische Kirche St. Laurentius, Frauenfeld",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/leidenschaft-und-samba_AneNZem"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -412,7 +412,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [],
@@ -458,7 +458,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "TG",
@@ -468,7 +468,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "56",
+          "value": "57",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -503,6 +503,12 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/jazzkonzert-stark-group_AeqFH8P"
             },
             {
+              "label": "WESTWOOD Country Band",
+              "detail": "Bichelsee-Balterswil",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/westwood-country-band/"
+            },
+            {
               "label": "Gruppen Kunstausstellung",
               "detail": "Tierpark Lange Erlen, Erlen — en cours, dernier jour : 25 octobre 2026",
               "date": "2026-10-16",
@@ -531,17 +537,11 @@
               "detail": "Goldener Dachs, Weinfelden",
               "date": "2026-10-17",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/new-orleans-in-weinfelden-cd-release-konzert-nicole-johaenntgen-henry_Aqj7nD1"
-            },
-            {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Paritätische Kirche St. Laurentius, Frauenfeld",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/leidenschaft-und-samba_AneNZem"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -559,7 +559,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [],
@@ -605,7 +605,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

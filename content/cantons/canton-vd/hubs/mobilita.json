@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T16:18:26.289Z",
-  "contentHash": "c547fff08da1db6ae26a1494a8af89feac4c60d0f7f0f4f1b038e380664335fe",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "7a6c051568724717fee20e98c0edb29c9d9ac378052be476e17820f24c749f92",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-16T05:03:47.755Z",
+      "updatedAt": "2026-10-16T11:58:12.009Z",
       "keyFacts": 2
     },
     {
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "15",
+          "value": "17",
           "note": "segnalazioni aggiornate: 16 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "25",
+          "value": "28",
           "note": "segnalazioni aggiornate: 16 ottobre 2026"
         }
       ],
@@ -148,7 +148,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -265,7 +265,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T16:18:26.289Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "VD",
@@ -280,12 +280,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "15",
+          "value": "17",
           "note": "reports as of 16 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "25",
+          "value": "28",
           "note": "reports as of 16 October 2026"
         }
       ],
@@ -391,7 +391,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -507,7 +507,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T16:18:26.289Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "VD",
@@ -522,12 +522,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "15",
+          "value": "17",
           "note": "Meldungen vom 16. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "25",
+          "value": "28",
           "note": "Meldungen vom 16. Oktober 2026"
         }
       ],
@@ -633,7 +633,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -749,7 +749,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T16:18:26.289Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "VD",
@@ -764,12 +764,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "15",
+          "value": "17",
           "note": "signalements au 16 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "25",
+          "value": "28",
           "note": "signalements au 16 octobre 2026"
         }
       ],
@@ -875,7 +875,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -992,7 +992,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T16:18:26.289Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }
