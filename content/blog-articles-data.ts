@@ -44788,6 +44788,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'frontaliere-dimissioni-termine-preavviso',
+ category: 'pratico',
+ date: '2026-10-16T03:19:05.139Z',
+ image: '/images/blog/cambio-datore-lavoro-frontaliere-procedura-permesso-2026-single.webp',
+ hasCalculator: true,
+ articleType: 'evergreen',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

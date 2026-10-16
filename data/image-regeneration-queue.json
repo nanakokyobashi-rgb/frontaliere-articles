@@ -80,6 +80,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-16T02:57:07.522Z",
       "lastFailureAt": "2026-10-16T02:57:07.522Z"
+    },
+    {
+      "articleId": "frontaliere-dimissioni-termine-preavviso",
+      "title": "Dimissioni frontaliere: termini e procedura",
+      "fallbackImage": "/images/blog/cambio-datore-lavoro-frontaliere-procedura-permesso-2026-single.webp",
+      "reason": "All image providers failed for article-frontaliere-dimissioni-termine-preavviso: openai-codex (vision gate rejected image: Synthetic editorial-style border-crossing scene with a cl",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T03:19:05.551Z",
+      "lastFailureAt": "2026-10-16T03:19:05.551Z"
     }
   ]
 }
