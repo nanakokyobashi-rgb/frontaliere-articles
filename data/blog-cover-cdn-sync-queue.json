@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-crediti-bilaterali-iii-svizzera.webp",
+      "sha256": "0ea1d195a5a3469facfac13dac79d3a3c887f5ff1015fca9f77c65b35639017d"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-crediti-bilaterali-iii-svizzera-480w.webp",
+      "sha256": "7aae48cc9e12f60acd12f2122f8637110ba5bfbf331254241fa0604c92be5aed"
+    }
+  ]
 }
