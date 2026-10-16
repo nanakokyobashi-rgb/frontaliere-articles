@@ -296,10 +296,9 @@ function newsPrompt(extra = {}, section = 'frontaliere', deps = {}) {
 }
 
 /** Il ramo EVERGREEN: `pageContent` sintetica costruita da create-article.mjs. */
-function evergreenPrompt(section = 'frontaliere', deps = {}) {
+function evergreenPrompt(section = 'frontaliere') {
   const keyword = 'frontaliere farmacista ticino stipendio requisiti';
   return assemble({
-    ...deps,
     pageContent: `[ARTICOLO EVERGREEN SEO]\nKeyword target: ${keyword}\nAngolo editoriale: guida pratica passo passo\n\nGenera un articolo approfondito e pratico ottimizzato per questa keyword long-tail. Usa solo fatti verificati e stabili sul dominio frontalieri Ticino-Italia. Se servono esempi, presentali come scenari ipotetici, senza nomi, aziende, citta' o importi specifici inventati.\n\n${evergreenFactsBriefFor(section)}\n\n⚠️ I FATTI VERIFICATI qui sopra DEVONO corrispondere ESATTAMENTE (lo stesso ground truth e' usato dal fact-checker, che blocca l'articolo se diverghi). Per dettagli NON coperti, attieniti a nozioni stabili e generali del dominio; se un dato specifico non e' certo, ometti o usa formulazioni qualitative invece di inventare cifre/date precise.`,
     url: `evergreen://${encodeURIComponent(keyword)}`,
     IS_FRONTALIERE: section === 'frontaliere',
@@ -485,14 +484,16 @@ test('il ramo NEWS di una sezione CANTONALE resta sotto il tetto e porta le righ
 });
 
 test('il ramo NEWS cantonale porta i fatti annuali selezionati dalla cache', () => {
-  const news = newsPrompt({}, 'canton-ti', { CANTON_FACTS_BRIEF: CANTON_FACTS_BRIEF_FIXTURE });
+  const deps = { CANTON_FACTS_BRIEF: CANTON_FACTS_BRIEF_FIXTURE };
+  const pieno = newsPrompt({ _promptTokenBudget: 999_999 }, 'canton-ti', deps);
+  assert.match(pieno.prompt, /FATTI ANNUALI VERIFICATI DEL CANTONE/);
+  assert.match(pieno.prompt, /Fisco TI, dataset 2026/);
+  assert.match(pieno.prompt, /Previdenza federale, dataset 2026/);
+  const news = newsPrompt({}, 'canton-ti', deps);
   assert.ok(
     news.estTokens <= PROMPT_TOKEN_CEILING,
     `prompt news canton-ti con fatti annuali stimato in ${news.estTokens}, sopra ${PROMPT_TOKEN_CEILING}`,
   );
-  assert.match(news.prompt, /FATTI ANNUALI VERIFICATI DEL CANTONE/);
-  assert.match(news.prompt, /Fisco TI, dataset 2026/);
-  assert.match(news.prompt, /Previdenza federale, dataset 2026/);
 });
 
 test('le tre sezioni pilota non superano il cap grezzo del prompt news', () => {

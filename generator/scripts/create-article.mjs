@@ -6191,10 +6191,15 @@ const EVERGREEN_FACTS_BRIEF_CH = `FATTI VERIFICATI (ground truth — il fact-che
 - Acronimi/enti VALIDI (non inventarne altri): SECO, SEM, UST/BFS, UFSP/BAG, AFC/ESTV, UFAS/BSV, SUVA, BNS/SNB, UDSC, Fedpol, ARE, USTAT (Ticino).
 - Cifre indicizzate ogni anno (massimale 3° pilastro 3a, soglia/deduzione coordinamento LPP, massimale AD/AC, premi medi LAMal, salario mediano): NON dare importi precisi se incerto sull'anno; spiega il meccanismo, rimanda alla fonte ufficiale.`;
 
-// I due brief nella forma che serve a `stripInjectedBriefs`. Un array, non due
-// costanti nominate al call-site: cosi' aggiungere una terza sezione domani
-// non lascia indietro il denominatore del gate di recall.
-const EVERGREEN_FACTS_BRIEFS = [EVERGREEN_FACTS_BRIEF, EVERGREEN_FACTS_BRIEF_CH];
+// I brief nella forma che serve a `stripInjectedBriefs`. Il terzo elemento e'
+// presente solo per una sezione cantonale con cache valida: il denominatore
+// deve togliere sia il blocco annuale dinamico sia il brief nazionale che lo
+// segue, senza introdurre una dipendenza dalla cache nei test estratti.
+const EVERGREEN_FACTS_BRIEFS = [
+  EVERGREEN_FACTS_BRIEF,
+  EVERGREEN_FACTS_BRIEF_CH,
+  ...(typeof CANTON_FACTS_BRIEF === 'string' && CANTON_FACTS_BRIEF.length > 0 ? [CANTON_FACTS_BRIEF] : []),
+];
 
 /**
  * Il brief da iniettare per una sezione. PURA e nominata apposta: il difetto
