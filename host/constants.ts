@@ -42,25 +42,33 @@ export const SEO_STATIC_CSS_FILENAME = 'seo-static.css';
  * fetch; no `dns-prefetch` fallback is emitted (preconnect already resolves
  * DNS, and the ~57 extra bytes ride on ~822k pages).
  *
- * Built from process.env.ASSET_CDN (deploy builds only — the same env that
- * drives renderBuiltUrl). Empty string on dev / non-CDN builds, where assets
- * stay same-origin and no preconnect is needed. constants.ts is build-only
- * (it already imports child_process/node:fs), so reading process.env here is
- * safe — no client bundle pulls it in.
+ * Resolved from process.env.ASSET_CDN when the host bootstrap reads the
+ * contract. Empty string on dev / non-CDN builds, where assets stay
+ * same-origin and no preconnect is needed. constants.ts is build-only (it
+ * already imports child_process/node:fs), so reading process.env here is safe
+ * — no client bundle pulls it in.
  */
-export const ASSET_CDN_ORIGIN = ((): string => {
-  const raw = (process.env.ASSET_CDN || '').trim().replace(/\/+$/, '');
+export function normalizeAssetCdnOrigin(value: string | undefined): string {
+  const raw = (value || '').trim();
   if (!raw) return '';
   try {
-    return new URL(raw).origin;
+    const url = new URL(raw);
+    if (url.protocol !== 'http:' && url.protocol !== 'https:') return '';
+    return url.origin;
   } catch {
     return '';
   }
-})();
+}
 
-export const CDN_PRECONNECT_HINT = ASSET_CDN_ORIGIN
-  ? `<link rel="preconnect" href="${ASSET_CDN_ORIGIN}" crossorigin>`
-  : '';
+/** Read ASSET_CDN at use time so module import order cannot freeze the hint. */
+export function resolveAssetCdnOrigin(): string {
+  return normalizeAssetCdnOrigin(process.env.ASSET_CDN);
+}
+
+export function resolveCdnPreconnectHint(): string {
+  const origin = resolveAssetCdnOrigin();
+  return origin ? `<link rel="preconnect" href="${origin}" crossorigin>` : '';
+}
 
 export const BASE_URL = 'https://frontaliereticino.ch';
 

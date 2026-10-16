@@ -20,11 +20,9 @@ import { normalizeContractEnv } from './shell-contract-env.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const expected = JSON.parse(readFileSync(path.join(HERE, '..', 'shell-contract-fingerprint.json'), 'utf-8'));
 
-// Il digest copre `cdnPreconnectHint`, che host/constants.ts deriva da
-// process.env.ASSET_CDN a module-evaluation time: senza questa riga il gate
-// dipende dall'ambiente del runner e accusa l'altro repo di un drift che non
-// esiste. Deve stare PRIMA di ogni import del bootstrap (la valutazione del
-// modulo è cachata per processo). Vedi shell-contract-env.mjs.
+// Il digest copre `cdnPreconnectHint`, che il bootstrap risolve quando il
+// campo viene letto. Azzerare l'ambiente fissa il valore di baseline vuoto,
+// indipendentemente dall'ambiente del runner. Vedi shell-contract-env.mjs.
 normalizeContractEnv();
 
 test('transported SiteShellContract scalars match the recorded fingerprint', async () => {
