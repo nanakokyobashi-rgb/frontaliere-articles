@@ -23,8 +23,9 @@ function paragraphsOf(intro) {
 /** Parole che restano visibili nel contenuto dell'hub. */
 export function countCantonHubContentWords(input) {
   const paragraphs = paragraphsOf(input?.intro);
-  const curatedArticles = input?.curatedArticles ?? [];
-  const visibleArticles = curatedArticles.length > 0 ? curatedArticles : (input?.latestCantonArticles ?? []);
+  const curatedArticles = Array.isArray(input?.curatedArticles) ? input.curatedArticles : [];
+  const latestCantonArticles = Array.isArray(input?.latestCantonArticles) ? input.latestCantonArticles : [];
+  const visibleArticles = curatedArticles.length > 0 ? curatedArticles : latestCantonArticles;
   return (
     paragraphs.reduce((total, paragraph) => total + countWords(paragraph), 0) +
     (input?.keyFacts ?? []).reduce((total, fact) => total + countWords(`${fact.label} ${fact.value} ${fact.note ?? ''}`), 0) +
