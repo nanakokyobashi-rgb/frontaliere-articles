@@ -11,7 +11,16 @@
  * pagata due volte: tre catene di `.replace()` indipendenti, due rotte.
  *
  * Senza dipendenze: i content gate di `main` girano senza `npm ci`.
+ * Il decoder copre anche le forme esadecimali `\\xNN` e Unicode code-point
+ * `\\u{...}`: un URL scritto con una di queste forme deve arrivare al parser
+ * esattamente come il valore che il compilatore TS consegna a runtime.
  */
+
+function hexCodePoint(raw) {
+  if (!/^[0-9a-fA-F]+$/u.test(raw)) return null;
+  const value = Number.parseInt(raw, 16);
+  return value <= 0x10FFFF ? value : null;
+}
 
 /** Decodifica il letterale TS che comincia a `i` (apice singolo, doppio o backtick). */
 export function readTsStringLiteral(src, i) {
@@ -26,7 +35,24 @@ export function readTsStringLiteral(src, i) {
       if (n === 'n') out += '\n';
       else if (n === 't') out += '\t';
       else if (n === 'r') out += '';
-      else if (n === 'u' && /^[0-9a-fA-F]{4}$/u.test(src.slice(j + 2, j + 6))) {
+      else if (n === 'b') out += '\b';
+      else if (n === 'f') out += '\f';
+      else if (n === 'v') out += '\v';
+      else if (n === '0' && !/[0-9]/u.test(src[j + 2] || '')) out += '\0';
+      else if (n === 'x' && /^[0-9a-fA-F]{2}$/u.test(src.slice(j + 2, j + 4))) {
+        out += String.fromCharCode(parseInt(src.slice(j + 2, j + 4), 16));
+        j += 4;
+        continue;
+      } else if (n === 'u' && src[j + 2] === '{') {
+        const close = src.indexOf('}', j + 3);
+        const codePoint = close === -1 ? null : hexCodePoint(src.slice(j + 3, close));
+        if (codePoint !== null && codePoint !== undefined) {
+          out += String.fromCodePoint(codePoint);
+          j = close + 1;
+          continue;
+        }
+        out += n;
+      } else if (n === 'u' && /^[0-9a-fA-F]{4}$/u.test(src.slice(j + 2, j + 6))) {
         out += String.fromCharCode(parseInt(src.slice(j + 2, j + 6), 16));
         j += 6;
         continue;
