@@ -18,8 +18,9 @@
  * `eventi-weekend-<it slug>` (identity table `CANTON_DIGEST_ARTICLES` in
  * lib/events-digest-content.mjs; half-cantons map onto their URL group).
  * Without it the script does exactly what it always did: the Ticino digest
- * `eventi-weekend-ticino`. refresh-events-digest.yml still runs only that one;
- * the other cantons are switched on by the section rollout, not here.
+ * `eventi-weekend-ticino`. The scheduled/default workflow still runs that one;
+ * its manual batch dispatch can also materialize stable per-canton digests for
+ * the canton-section rollout.
  *
  * Usage:
  *   node scripts/generate-events-digest-article.mjs                 # Ticino: register or refresh

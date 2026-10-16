@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T22:03:59.742Z",
-  "contentHash": "3925a1c88a877d5252b3d8ec3d49e66d731de796e5f1a5f4c403afeb34af6646",
+  "updatedAt": "2026-10-16T23:03:27.210Z",
+  "contentHash": "5d384211ca99aaa21b894e9880c8e826ec9e9dac9034fd42ad64b8b78e89136b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -165,6 +165,12 @@
           "date": "2026-10-07T08:57:01.058Z"
         },
         {
+          "title": "Sistema sanitario svizzero: guida LAMal 2026 per il Canton Ginevra",
+          "url": "/articoli-svizzera/sistema-sanitario-lamal-ginevra-2026/",
+          "excerpt": "Obbligo assicurativo, franchigie e premi: come funziona la LAMal a Ginevra nel 2026.",
+          "date": "2026-10-16T22:58:50.925Z"
+        },
+        {
           "title": "Premi cassa malati LAMal 2026: canton Ginevra",
           "url": "/articoli-svizzera/franchigia-sussidi-ginevra/",
           "excerpt": "Guida 2026 ai premi LAMal nel canton Ginevra: franchigie adulti, confronto tra cantoni, cambio cassa e riduzione premi cantonale.",
@@ -193,12 +199,6 @@
           "url": "/articoli-svizzera/sistema-scolastico-canton-ginevra-iscrizione-cicli/",
           "excerpt": "Come funziona la scuola dell'obbligo a Ginevra: cicli, età di iscrizione, lingue di insegnamento e passaggio alle medie superiori.",
           "date": "2026-09-07T16:16:52.427Z"
-        },
-        {
-          "title": "Asilo nido a Ginevra: tariffe e sussidi cantonali",
-          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-ginevra-costi/",
-          "excerpt": "A Ginevra asili nido, famiglie diurne e doposcuola hanno tariffe modulate sul reddito imponibile. Sussidi cantonali riducono la quota a carico delle famiglie.",
-          "date": "2026-09-07T16:51:08.779Z"
         }
       ],
       "latestCantonArticles": [],
@@ -228,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T22:03:59.742Z"
+      "updatedAt": "2026-10-16T23:03:27.210Z"
     },
     "en": {
       "canton": "GE",
@@ -365,6 +365,12 @@
           "date": "2026-10-07T08:57:01.058Z"
         },
         {
+          "title": "Swiss healthcare system: LAMal 2026 guide for the Canton of Geneva",
+          "url": "/en/swiss-articles/swiss-healthcare-system-lamal-geneva-2026/",
+          "excerpt": "Mandatory insurance, deductibles and premiums: how LAMal works in Geneva in 2026.",
+          "date": "2026-10-16T22:58:50.925Z"
+        },
+        {
           "title": "KVG health insurance premiums in 2026: Canton of Geneva",
           "url": "/en/swiss-articles/geneva-lamal-deductible-subsidies/",
           "excerpt": "2026 guide to KVG premiums in the canton of Geneva: adult deductibles, comparison between cantons, exchange of funds and cantonal premium reduction.",
@@ -393,12 +399,6 @@
           "url": "/en/swiss-articles/canton-geneva-school-system-enrollment-cycles/",
           "excerpt": "How compulsory school works in Geneva: cycles, enrolment age, teaching languages and transition to high school.",
           "date": "2026-09-07T16:16:52.427Z"
-        },
-        {
-          "title": "Nursery in Geneva: cantonal fees and subsidies",
-          "url": "/en/swiss-articles/daycare-childcare-geneva-costs/",
-          "excerpt": "In Geneva kindergartens, day families and after-school have modulated rates on taxable income. Cantonal subsidies reduce the share borne by families.",
-          "date": "2026-09-07T16:51:08.779Z"
         }
       ],
       "latestCantonArticles": [],
@@ -424,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T22:03:59.742Z"
+      "updatedAt": "2026-10-16T23:03:27.210Z"
     },
     "de": {
       "canton": "GE",
@@ -561,6 +561,12 @@
           "date": "2026-10-07T08:57:01.058Z"
         },
         {
+          "title": "Schweizer Gesundheitssystem: LAMal-Leitfaden 2026 für den Kanton Genf",
+          "url": "/de/schweiz-artikel/schweizer-gesundheitssystem-lamal-genf-2026/",
+          "excerpt": "Versicherungspflicht, Franchisen und Prämien: So funktioniert die LAMal in Genf im Jahr 2026.",
+          "date": "2026-10-16T22:58:50.925Z"
+        },
+        {
           "title": "KVG-Krankenversicherungsprämien im Jahr 2026: Kanton Genf",
           "url": "/de/schweiz-artikel/genf-lamal-franchise-praemien/",
           "excerpt": "Leitfaden 2026 zu KVG-Prämien im Kanton Genf: Selbstbeteiligungen für Erwachsene, Vergleich zwischen Kantonen, Geldaustausch und Reduktion der kantonalen Prämien.",
@@ -589,12 +595,6 @@
           "url": "/de/schweiz-artikel/kanton-genf-schulsystem-einschreibung-zyklen/",
           "excerpt": "Wie funktioniert die obligatorische Schule in Genf: Zyklen, Einschreibungsalter, Unterrichtssprachen und Übergang in die Sekundarstufe II?",
           "date": "2026-09-07T16:16:52.427Z"
-        },
-        {
-          "title": "Kindergarten in Genf: Tarife und kantonale Zuschüsse",
-          "url": "/de/schweiz-artikel/kita-kinderbetreuung-genf-kosten/",
-          "excerpt": "In Genf haben Kindergärten, Tages- und Nachschulfamilien modulierte Tarife für das zu versteuernde Einkommen. Kantonale Subventionen senken den Anteil der Familien.",
-          "date": "2026-09-07T16:51:08.779Z"
         }
       ],
       "latestCantonArticles": [],
@@ -620,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T22:03:59.742Z"
+      "updatedAt": "2026-10-16T23:03:27.210Z"
     },
     "fr": {
       "canton": "GE",
@@ -758,6 +758,12 @@
           "date": "2026-10-07T08:57:01.058Z"
         },
         {
+          "title": "Système de santé suisse : guide LAMal 2026 pour le canton de Genève",
+          "url": "/fr/articles-suisse/systeme-sante-suisse-lamal-geneve-2026/",
+          "excerpt": "Obligation d'assurance, franchises et primes : comment fonctionne la LAMal à Genève en 2026.",
+          "date": "2026-10-16T22:58:50.925Z"
+        },
+        {
           "title": "Primes d’assurance santé KVG en 2026 : Canton de Genève",
           "url": "/fr/articles-suisse/geneve-lamal-franchise-subsides/",
           "excerpt": "Guide 2026 des primes KVG dans le canton de Genève : franchises pour adultes, comparaison entre cantons, échange de fonds et réduction cantonale des primes.",
@@ -786,12 +792,6 @@
           "url": "/fr/articles-suisse/canton-geneve-systeme-scolaire-inscription-cycles/",
           "excerpt": "Comment fonctionne l'école obligatoire à Genève : cycles, âge d'inscription, langues d'enseignement et passage au lycée.",
           "date": "2026-09-07T16:16:52.427Z"
-        },
-        {
-          "title": "Garderie à Genève : tarifs et subsides cantonaux",
-          "url": "/fr/articles-suisse/creche-garde-enfants-geneve-couts/",
-          "excerpt": "À Genève, les crèches, les familles de jour et après l'école ont des tarifs modulés sur le revenu imposable. Les allocations cantonales réduisent la part à la charge des familles.",
-          "date": "2026-09-07T16:51:08.779Z"
         }
       ],
       "latestCantonArticles": [],
@@ -813,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T22:03:59.742Z"
+      "updatedAt": "2026-10-16T23:03:27.210Z"
     }
   }
 }
