@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "c0791015ff5cffdbf8306978ddb9ef62c33bb8138e25acf1f77d8172f17feb50",
+  "updatedAt": "2026-10-16T00:00:55.142Z",
+  "contentHash": "720d3c9d8b003744af44430a4e136e90e4b6be298c1706ac62a5590eb6f5c7b2",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "295",
+          "value": "280",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "32e Mondial de l'Impro - Qualifications",
+              "label": "\"Café avec la police municipale\" Charmilles : échanger autour d’un café, au cœur des quartiers",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/mondial-impro-qualifications"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-charmilles-echanger-autour-cafe-coeur-quartiers"
             },
             {
-              "label": "A Paixão segundo G.H.B",
+              "label": "Anan Atoyama / Cie AtOU, Atlas des Souffles",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/paixao-segundo"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/anan-atoyama-atou-atlas-souffles"
             },
             {
-              "label": "Adelphité : archiver l'intimité et les luttes lesbiennes",
+              "label": "Armures et paillettes",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/adelphite-archiver-intimite-luttes-lesbiennes"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/armures-paillettes-1"
             },
             {
-              "label": "Animations et conseils autour de la borne de réparation vélo du carrefour Aïre-Furet (1203)",
+              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - De Rigot aux Pâquis: quand la…",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/animations-conseils-autour-borne-reparation-velo-carrefour-aire-furet-1203"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-rigot-paquis-ville-vert"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "label": "Comme au cinéma!",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/cinema"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "DEEJAY GREENS · ALL STYLE GROOVE",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/deejay-greens-style-groove"
             },
             {
-              "label": "Autour du deuil périnatal - Regards croisés",
+              "label": "ELECTRON CLUB TOUR",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/autour-deuil-perinatal-regards-croises"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/electron-club-tour"
             },
             {
-              "label": "Bearcave ΑΡΚΟΥΔΌΤΡΥΠΑ",
+              "label": "ÉTONNEMENTS !",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/bearcave-arkoydotrypa"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/etonnements"
             },
             {
-              "label": "Big Girls don't cry",
+              "label": "FESTIVAL DU SOIR - Palexpo",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/girls"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/festival-soir-palexpo"
             },
             {
-              "label": "Blue Boy Trial",
+              "label": "Fête lesbienne queer féministe",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/blue-trial"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/fete-lesbienne-queer-feministe"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -116,7 +116,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "en": {
       "canton": "GE",
@@ -126,7 +126,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "295",
+          "value": "280",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,64 +137,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "32e Mondial de l'Impro - Qualifications",
+              "label": "\"Café avec la police municipale\" Charmilles : échanger autour d’un café, au cœur des quartiers",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/mondial-impro-qualifications"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-charmilles-echanger-autour-cafe-coeur-quartiers"
             },
             {
-              "label": "A Paixão segundo G.H.B",
+              "label": "Anan Atoyama / Cie AtOU, Atlas des Souffles",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/paixao-segundo"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/anan-atoyama-atou-atlas-souffles"
             },
             {
-              "label": "Adelphité : archiver l'intimité et les luttes lesbiennes",
+              "label": "Armures et paillettes",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/adelphite-archiver-intimite-luttes-lesbiennes"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/armures-paillettes-1"
             },
             {
-              "label": "Animations et conseils autour de la borne de réparation vélo du carrefour Aïre-Furet (1203)",
+              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - De Rigot aux Pâquis: quand la…",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/animations-conseils-autour-borne-reparation-velo-carrefour-aire-furet-1203"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-rigot-paquis-ville-vert"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "label": "Comme au cinéma!",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/cinema"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "DEEJAY GREENS · ALL STYLE GROOVE",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/deejay-greens-style-groove"
             },
             {
-              "label": "Autour du deuil périnatal - Regards croisés",
+              "label": "ELECTRON CLUB TOUR",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/autour-deuil-perinatal-regards-croises"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/electron-club-tour"
             },
             {
-              "label": "Bearcave ΑΡΚΟΥΔΌΤΡΥΠΑ",
+              "label": "ÉTONNEMENTS !",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/bearcave-arkoydotrypa"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/etonnements"
             },
             {
-              "label": "Big Girls don't cry",
+              "label": "FESTIVAL DU SOIR - Palexpo",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/girls"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/festival-soir-palexpo"
             },
             {
-              "label": "Blue Boy Trial",
+              "label": "Fête lesbienne queer féministe",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/blue-trial"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/fete-lesbienne-queer-feministe"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -220,7 +220,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "de": {
       "canton": "GE",
@@ -230,7 +230,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "295",
+          "value": "280",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -241,64 +241,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "32e Mondial de l'Impro - Qualifications",
+              "label": "\"Café avec la police municipale\" Charmilles : échanger autour d’un café, au cœur des quartiers",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/mondial-impro-qualifications"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-charmilles-echanger-autour-cafe-coeur-quartiers"
             },
             {
-              "label": "A Paixão segundo G.H.B",
+              "label": "Anan Atoyama / Cie AtOU, Atlas des Souffles",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/paixao-segundo"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/anan-atoyama-atou-atlas-souffles"
             },
             {
-              "label": "Adelphité : archiver l'intimité et les luttes lesbiennes",
+              "label": "Armures et paillettes",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/adelphite-archiver-intimite-luttes-lesbiennes"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/armures-paillettes-1"
             },
             {
-              "label": "Animations et conseils autour de la borne de réparation vélo du carrefour Aïre-Furet (1203)",
+              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - De Rigot aux Pâquis: quand la…",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/animations-conseils-autour-borne-reparation-velo-carrefour-aire-furet-1203"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-rigot-paquis-ville-vert"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "label": "Comme au cinéma!",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/cinema"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "DEEJAY GREENS · ALL STYLE GROOVE",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/deejay-greens-style-groove"
             },
             {
-              "label": "Autour du deuil périnatal - Regards croisés",
+              "label": "ELECTRON CLUB TOUR",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/autour-deuil-perinatal-regards-croises"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/electron-club-tour"
             },
             {
-              "label": "Bearcave ΑΡΚΟΥΔΌΤΡΥΠΑ",
+              "label": "ÉTONNEMENTS !",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/bearcave-arkoydotrypa"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/etonnements"
             },
             {
-              "label": "Big Girls don't cry",
+              "label": "FESTIVAL DU SOIR - Palexpo",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/girls"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/festival-soir-palexpo"
             },
             {
-              "label": "Blue Boy Trial",
+              "label": "Fête lesbienne queer féministe",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/blue-trial"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/fete-lesbienne-queer-feministe"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -324,7 +324,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "fr": {
       "canton": "GE",
@@ -334,7 +334,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "295",
+          "value": "280",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -345,64 +345,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "32e Mondial de l'Impro - Qualifications",
+              "label": "\"Café avec la police municipale\" Charmilles : échanger autour d’un café, au cœur des quartiers",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/mondial-impro-qualifications"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-charmilles-echanger-autour-cafe-coeur-quartiers"
             },
             {
-              "label": "A Paixão segundo G.H.B",
+              "label": "Anan Atoyama / Cie AtOU, Atlas des Souffles",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/paixao-segundo"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/anan-atoyama-atou-atlas-souffles"
             },
             {
-              "label": "Adelphité : archiver l'intimité et les luttes lesbiennes",
+              "label": "Armures et paillettes",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/adelphite-archiver-intimite-luttes-lesbiennes"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/armures-paillettes-1"
             },
             {
-              "label": "Animations et conseils autour de la borne de réparation vélo du carrefour Aïre-Furet (1203)",
+              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - De Rigot aux Pâquis: quand la…",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/animations-conseils-autour-borne-reparation-velo-carrefour-aire-furet-1203"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-rigot-paquis-ville-vert"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "label": "Comme au cinéma!",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/cinema"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "DEEJAY GREENS · ALL STYLE GROOVE",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/deejay-greens-style-groove"
             },
             {
-              "label": "Autour du deuil périnatal - Regards croisés",
+              "label": "ELECTRON CLUB TOUR",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/autour-deuil-perinatal-regards-croises"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/electron-club-tour"
             },
             {
-              "label": "Bearcave ΑΡΚΟΥΔΌΤΡΥΠΑ",
+              "label": "ÉTONNEMENTS !",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/bearcave-arkoydotrypa"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/etonnements"
             },
             {
-              "label": "Big Girls don't cry",
+              "label": "FESTIVAL DU SOIR - Palexpo",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/girls"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/festival-soir-palexpo"
             },
             {
-              "label": "Blue Boy Trial",
+              "label": "Fête lesbienne queer féministe",
               "detail": "Genève",
-              "date": "2026-10-15",
-              "url": "https://www.geneve.ch/agenda/blue-trial"
+              "date": "2026-10-16",
+              "url": "https://www.geneve.ch/agenda/fete-lesbienne-queer-feministe"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -428,7 +428,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     }
   }
 }

@@ -450,8 +450,9 @@ const PERSON_ARTICLES = new Set(['un', 'una', 'uno']);
  * articolo/determinante articolato o un numero («i ticinesi», «agli ticinesi»,
  * «due ticinesi»), dopo una quantita' collegata da «di» («decine di
  * ticinesi»), dopo un sostantivo di persona o di veicolo («turisti ticinesi»,
- * «frontalieri ticinesi», «auto ticinese»), o in apertura di frase («Ginevrino
- * in isolamento»). Dice chi o da dove, non dove: conta per il punteggio, ma da
+ * «frontalieri ticinesi», «auto ticinese»), anche quando un gruppo ha un
+ * modificatore («gruppo numeroso di ticinesi»), o in apertura di frase
+ * («Ginevrino in isolamento»). Dice chi o da dove, non dove: conta per il punteggio, ma da
  * solo non mette il cantone nel titolo. Resta luogo come aggettivo di
  * un'istituzione o di un settore («economia ticinese», «Banca cantonale
  * grigionese», «hockey ticinese»).
@@ -840,8 +841,10 @@ export function createCantonClassifier({
       || PERSON_HEAD_RE.test(prev) || PERSON_AGE_RE.test(prev)) return true;
     const head = tokens[k - 1];
     if (!head || sentenceBreak(text, head, tokens[k])) return false;
+    const groupHead = tokens[k - 2];
     if (PERSON_GROUP_LINKS.has(prev)
-      && (PERSON_GROUP_RE.test(head.norm) || PERSON_QUANTITY_RE.test(head.norm))) return true;
+      && (PERSON_GROUP_RE.test(head.norm) || PERSON_QUANTITY_RE.test(head.norm)
+        || (groupHead && !sentenceBreak(text, groupHead, head) && PERSON_GROUP_RE.test(groupHead.norm)))) return true;
     return false;
   }
 

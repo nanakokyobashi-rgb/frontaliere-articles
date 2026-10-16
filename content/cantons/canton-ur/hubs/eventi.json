@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T00:06:40.869Z",
-  "contentHash": "e67b3d97c6ab67cbce45921a03368da7db148d21ae9f98e138c7b72c3071e9af",
+  "updatedAt": "2026-10-16T00:00:55.142Z",
+  "contentHash": "51fede0404b7ecf797984f77a817adfccd063dfb5a5ac5e6ed06e59f3344cd23",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-14T13:57:52.093Z",
+      "updatedAt": "2026-10-15T13:57:57.453Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "22",
+          "value": "24",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "en": {
       "canton": "UR",
@@ -119,7 +119,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "22",
+          "value": "24",
           "note": "from the site’s events calendar"
         }
       ],
@@ -192,7 +192,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "de": {
       "canton": "UR",
@@ -216,7 +216,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "22",
+          "value": "24",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -289,7 +289,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "fr": {
       "canton": "UR",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "22",
+          "value": "24",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -386,7 +386,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     }
   }
 }

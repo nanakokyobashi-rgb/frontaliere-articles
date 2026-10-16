@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T00:06:40.869Z",
-  "contentHash": "d0f33e69a44f611a7347388c3294527b2f3abd5ad6406610bdfa66997b247247",
+  "updatedAt": "2026-10-16T00:00:55.142Z",
+  "contentHash": "1b6b78ec7eef3ac937b7a04c6c2e96885a8ad7ae6561b44bed1c56bb9efc85bc",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-14T13:57:52.093Z",
+      "updatedAt": "2026-10-15T13:57:57.453Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "87",
+          "value": "92",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,30 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Jintan-LAN 2026",
-              "detail": "Sportanlage Progy, Rebstein",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
-            },
-            {
-              "label": "Jugendwoche in den Herbstferien",
-              "detail": "Stadtbibliothek Wil — in corso, ultimo giorno: 16 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
-            },
-            {
-              "label": "83a OLMA - Fiera svizzera dell'agricoltura e dell'alimentazione",
-              "detail": "Olma Areal — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — in corso, ultimo giorno: 2 novembre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
             {
               "label": "Gallusfeier 2026",
               "detail": "Pfalzkeller, St. Gallen",
@@ -91,11 +67,35 @@
               "detail": "St. Gallen",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-beauty-of-gemina-veil-of-rain-tour-2026/"
+            },
+            {
+              "label": "Egidio «Juke» Ingala & The Jacknives",
+              "detail": "Dixie- und Jazz-Club, Sargans",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sargans/egidio-juke-ingala-und-the-jacknives_AA7JHSV"
+            },
+            {
+              "label": "Burnout Ostwest (DE)",
+              "detail": "Palace",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/st-gallen/burnout-ostwest-de_AHHgvs2"
+            },
+            {
+              "label": "Jintan-LAN 2026",
+              "detail": "Sportanlage Progy, Rebstein — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
+            },
+            {
+              "label": "Jugendwoche in den Herbstferien",
+              "detail": "Stadtbibliothek Wil — in corso, ultimo giorno: 16 ottobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -116,7 +116,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "en": {
       "canton": "SG",
@@ -126,7 +126,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "87",
+          "value": "92",
           "note": "from the site’s events calendar"
         }
       ],
@@ -136,30 +136,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Jintan-LAN 2026",
-              "detail": "Sportanlage Progy, Rebstein",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
-            },
-            {
-              "label": "Jugendwoche in den Herbstferien",
-              "detail": "Stadtbibliothek Wil — ongoing, last day: 16 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
-            },
-            {
-              "label": "83rd OLMA - Swiss Agriculture and Food Fair",
-              "detail": "Olma Areal — ongoing, last day: 18 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — ongoing, last day: 2 November 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
             {
               "label": "Gallusfeier 2026",
               "detail": "Pfalzkeller, St. Gallen",
@@ -195,11 +171,35 @@
               "detail": "St. Gallen",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-beauty-of-gemina-veil-of-rain-tour-2026/"
+            },
+            {
+              "label": "Egidio «Juke» Ingala & The Jacknives",
+              "detail": "Dixie- und Jazz-Club, Sargans",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sargans/egidio-juke-ingala-und-the-jacknives_AA7JHSV"
+            },
+            {
+              "label": "Burnout Ostwest (DE)",
+              "detail": "Palace",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/st-gallen/burnout-ostwest-de_AHHgvs2"
+            },
+            {
+              "label": "Jintan-LAN 2026",
+              "detail": "Sportanlage Progy, Rebstein — ongoing, last day: 18 October 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
+            },
+            {
+              "label": "Jugendwoche in den Herbstferien",
+              "detail": "Stadtbibliothek Wil — ongoing, last day: 16 October 2026",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -220,7 +220,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "de": {
       "canton": "SG",
@@ -230,7 +230,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "87",
+          "value": "92",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -240,30 +240,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Jintan-LAN 2026",
-              "detail": "Sportanlage Progy, Rebstein",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
-            },
-            {
-              "label": "Jugendwoche in den Herbstferien",
-              "detail": "Stadtbibliothek Wil — läuft, letzter Tag: 16. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
-            },
-            {
-              "label": "83. OLMA – Schweizer Messe für Landwirtschaft und Ernährung",
-              "detail": "Olma Areal — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — läuft, letzter Tag: 2. November 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
             {
               "label": "Gallusfeier 2026",
               "detail": "Pfalzkeller, St. Gallen",
@@ -299,11 +275,35 @@
               "detail": "St. Gallen",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-beauty-of-gemina-veil-of-rain-tour-2026/"
+            },
+            {
+              "label": "Egidio «Juke» Ingala & The Jacknives",
+              "detail": "Dixie- und Jazz-Club, Sargans",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sargans/egidio-juke-ingala-und-the-jacknives_AA7JHSV"
+            },
+            {
+              "label": "Burnout Ostwest (DE)",
+              "detail": "Palace",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/st-gallen/burnout-ostwest-de_AHHgvs2"
+            },
+            {
+              "label": "Jintan-LAN 2026",
+              "detail": "Sportanlage Progy, Rebstein — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
+            },
+            {
+              "label": "Jugendwoche in den Herbstferien",
+              "detail": "Stadtbibliothek Wil — läuft, letzter Tag: 16. Oktober 2026",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -324,7 +324,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "fr": {
       "canton": "SG",
@@ -334,7 +334,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "87",
+          "value": "92",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -344,30 +344,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Jintan-LAN 2026",
-              "detail": "Sportanlage Progy, Rebstein",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
-            },
-            {
-              "label": "Jugendwoche in den Herbstferien",
-              "detail": "Stadtbibliothek Wil — en cours, dernier jour : 16 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
-            },
-            {
-              "label": "83e OLMA - Foire suisse de l'agriculture et de l'alimentation",
-              "detail": "Olma Areal — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — en cours, dernier jour : 2 novembre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
             {
               "label": "Gallusfeier 2026",
               "detail": "Pfalzkeller, St. Gallen",
@@ -403,11 +379,35 @@
               "detail": "St. Gallen",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-beauty-of-gemina-veil-of-rain-tour-2026/"
+            },
+            {
+              "label": "Egidio «Juke» Ingala & The Jacknives",
+              "detail": "Dixie- und Jazz-Club, Sargans",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sargans/egidio-juke-ingala-und-the-jacknives_AA7JHSV"
+            },
+            {
+              "label": "Burnout Ostwest (DE)",
+              "detail": "Palace",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/st-gallen/burnout-ostwest-de_AHHgvs2"
+            },
+            {
+              "label": "Jintan-LAN 2026",
+              "detail": "Sportanlage Progy, Rebstein — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
+            },
+            {
+              "label": "Jugendwoche in den Herbstferien",
+              "detail": "Stadtbibliothek Wil — en cours, dernier jour : 16 octobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -428,7 +428,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     }
   }
 }

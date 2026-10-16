@@ -33,6 +33,7 @@ import {
   main,
   migrationManifestPages,
   missingRenderedArticleIds,
+  normalizeRoutePrefix,
   pageDefects,
   pageEntry,
   obsoleteArticlePages,
@@ -155,6 +156,28 @@ test('publisher migration manifest usa percorsi canonici per landing e hub', () 
   assert.ok(rels.has('en/ticino-articles/fuel/index.html'));
   assert.ok([...rels].every((rel) => rel.endsWith('/index.html')));
   assert.ok(![...rels].some((rel) => rel.includes('ticinoindex.html') || rel.includes('ticinocarburanti')));
+});
+
+test('publisher normalizza i prefissi prima di concatenare i path canonici', () => {
+  assert.equal(normalizeRoutePrefix('/articoli-ticino'), '/articoli-ticino');
+  assert.equal(normalizeRoutePrefix('/articoli-ticino/'), '/articoli-ticino');
+  assert.equal(normalizeRoutePrefix('/articoli-ticino///'), '/articoli-ticino');
+});
+
+test('publisher usa il prefisso normalizzato anche per il match della pagina', () => {
+  const section = 'canton-route-prefix-fixture';
+  const all = {
+    [section]: {
+      ...TI,
+      section,
+      indexSlug: { ...TI.indexSlug, it: `${TI.indexSlug.it}///` },
+    },
+  };
+
+  assert.equal(
+    pageEntry(section, 'articoli-ticino/index.html', 'landing', all).canonicalPath,
+    '/articoli-ticino/',
+  );
 });
 
 test('publisher: il seed del manifest di migrazione conserva i percorsi canonici', () => {

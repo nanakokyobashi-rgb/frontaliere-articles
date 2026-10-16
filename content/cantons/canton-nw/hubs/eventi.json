@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T00:06:40.869Z",
-  "contentHash": "2d73f9c0e5fb603b4e7a1f61e7feecabaa82402191f6bba654508ff6bbd614ea",
+  "updatedAt": "2026-10-16T00:00:55.142Z",
+  "contentHash": "79b2c7de84a86366d248b7fa50ad56aabe8663894bae6023ffbc25992986d13b",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-14T13:57:52.093Z",
+      "updatedAt": "2026-10-15T13:57:57.453Z",
       "keyFacts": 1
     }
   ],
@@ -33,36 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Doggä ufem Stanserhorn",
-              "detail": "Stanserhorn, Stans, Stans",
-              "date": "2026-10-15",
-              "url": "https://www.nw.ch/_rte/anlass/90631"
-            },
-            {
-              "label": "Schulbesuchstag 15. Oktober 2026",
-              "detail": "Schulhäuser Morgenstern und St. Jakob, Ennetmoos, Ennetmoos",
-              "date": "2026-10-15",
-              "url": "https://www.nw.ch/_rte/anlass/93634"
-            },
-            {
-              "label": "Töpferanlass mit Susanne Wagner",
-              "detail": "Schulhaus 3, Werkraum, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-15",
-              "url": "https://www.nw.ch/_rte/anlass/90619"
-            },
-            {
-              "label": "Lasertraining Rütlischiessen",
-              "detail": "MZA Steini, Dallenwil, Dallenwil — in corso, ultimo giorno: 27 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.nw.ch/_rte/anlass/93010"
-            },
-            {
-              "label": "Pilze am Wegrand",
-              "detail": "Culinarium Alpinum, Stans — in corso, ultimo giorno: 23 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
-            },
-            {
               "label": "Aktuelles aus Buochs",
               "detail": "Lückertsmatthalle, Buochs, Buochs",
               "date": "2026-10-16",
@@ -73,6 +43,18 @@
               "detail": "Bulls Bike Schweiz, Stans, Stans",
               "date": "2026-10-16",
               "url": "https://www.nw.ch/_rte/anlass/94678"
+            },
+            {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — in corso, ultimo giorno: 27 ottobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.nw.ch/_rte/anlass/93010"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans — in corso, ultimo giorno: 23 ottobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
             },
             {
               "label": "32. Stanser Dogturnier",
@@ -91,11 +73,29 @@
               "detail": "Oberstufenschulhaus, Beckenried, Beckenried",
               "date": "2026-10-17",
               "url": "https://www.nw.ch/_rte/anlass/93547"
+            },
+            {
+              "label": "Heimatabig 60 Jahre Trachtengruppe Ennetbürgen",
+              "detail": "Mehrzweckanlage, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-17",
+              "url": "https://www.nw.ch/_rte/anlass/79342"
+            },
+            {
+              "label": "Öffentliche Whisky Degustation",
+              "detail": "Dorfstrasse 3, 6374 Buochs, Buochs, Buochs",
+              "date": "2026-10-17",
+              "url": "https://www.nw.ch/_rte/anlass/94063"
+            },
+            {
+              "label": "Tag der offenen Tür - Alterszentrum Oeltrotte",
+              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-17",
+              "url": "https://www.nw.ch/_rte/anlass/94762"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/nidvaldo/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/nidvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "en": {
       "canton": "NW",
@@ -130,36 +130,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Doggä ufem Stanserhorn",
-              "detail": "Stanserhorn, Stans, Stans",
-              "date": "2026-10-15",
-              "url": "https://www.nw.ch/_rte/anlass/90631"
-            },
-            {
-              "label": "Schulbesuchstag 15. Oktober 2026",
-              "detail": "Schulhäuser Morgenstern und St. Jakob, Ennetmoos, Ennetmoos",
-              "date": "2026-10-15",
-              "url": "https://www.nw.ch/_rte/anlass/93634"
-            },
-            {
-              "label": "Töpferanlass mit Susanne Wagner",
-              "detail": "Schulhaus 3, Werkraum, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-15",
-              "url": "https://www.nw.ch/_rte/anlass/90619"
-            },
-            {
-              "label": "Lasertraining Rütlischiessen",
-              "detail": "MZA Steini, Dallenwil, Dallenwil — ongoing, last day: 27 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.nw.ch/_rte/anlass/93010"
-            },
-            {
-              "label": "Pilze am Wegrand",
-              "detail": "Culinarium Alpinum, Stans — ongoing, last day: 23 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
-            },
-            {
               "label": "Aktuelles aus Buochs",
               "detail": "Lückertsmatthalle, Buochs, Buochs",
               "date": "2026-10-16",
@@ -170,6 +140,18 @@
               "detail": "Bulls Bike Schweiz, Stans, Stans",
               "date": "2026-10-16",
               "url": "https://www.nw.ch/_rte/anlass/94678"
+            },
+            {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — ongoing, last day: 27 October 2026",
+              "date": "2026-10-16",
+              "url": "https://www.nw.ch/_rte/anlass/93010"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans — ongoing, last day: 23 October 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
             },
             {
               "label": "32. Stanser Dogturnier",
@@ -188,11 +170,29 @@
               "detail": "Oberstufenschulhaus, Beckenried, Beckenried",
               "date": "2026-10-17",
               "url": "https://www.nw.ch/_rte/anlass/93547"
+            },
+            {
+              "label": "Heimatabig 60 Jahre Trachtengruppe Ennetbürgen",
+              "detail": "Mehrzweckanlage, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-17",
+              "url": "https://www.nw.ch/_rte/anlass/79342"
+            },
+            {
+              "label": "Öffentliche Whisky Degustation",
+              "detail": "Dorfstrasse 3, 6374 Buochs, Buochs, Buochs",
+              "date": "2026-10-17",
+              "url": "https://www.nw.ch/_rte/anlass/94063"
+            },
+            {
+              "label": "Tag der offenen Tür - Alterszentrum Oeltrotte",
+              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-17",
+              "url": "https://www.nw.ch/_rte/anlass/94762"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/nidwalden/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/nidwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "de": {
       "canton": "NW",
@@ -227,36 +227,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Doggä ufem Stanserhorn",
-              "detail": "Stanserhorn, Stans, Stans",
-              "date": "2026-10-15",
-              "url": "https://www.nw.ch/_rte/anlass/90631"
-            },
-            {
-              "label": "Schulbesuchstag 15. Oktober 2026",
-              "detail": "Schulhäuser Morgenstern und St. Jakob, Ennetmoos, Ennetmoos",
-              "date": "2026-10-15",
-              "url": "https://www.nw.ch/_rte/anlass/93634"
-            },
-            {
-              "label": "Töpferanlass mit Susanne Wagner",
-              "detail": "Schulhaus 3, Werkraum, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-15",
-              "url": "https://www.nw.ch/_rte/anlass/90619"
-            },
-            {
-              "label": "Lasertraining Rütlischiessen",
-              "detail": "MZA Steini, Dallenwil, Dallenwil — läuft, letzter Tag: 27. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.nw.ch/_rte/anlass/93010"
-            },
-            {
-              "label": "Pilze am Wegrand",
-              "detail": "Culinarium Alpinum, Stans — läuft, letzter Tag: 23. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
-            },
-            {
               "label": "Aktuelles aus Buochs",
               "detail": "Lückertsmatthalle, Buochs, Buochs",
               "date": "2026-10-16",
@@ -267,6 +237,18 @@
               "detail": "Bulls Bike Schweiz, Stans, Stans",
               "date": "2026-10-16",
               "url": "https://www.nw.ch/_rte/anlass/94678"
+            },
+            {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — läuft, letzter Tag: 27. Oktober 2026",
+              "date": "2026-10-16",
+              "url": "https://www.nw.ch/_rte/anlass/93010"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans — läuft, letzter Tag: 23. Oktober 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
             },
             {
               "label": "32. Stanser Dogturnier",
@@ -285,11 +267,29 @@
               "detail": "Oberstufenschulhaus, Beckenried, Beckenried",
               "date": "2026-10-17",
               "url": "https://www.nw.ch/_rte/anlass/93547"
+            },
+            {
+              "label": "Heimatabig 60 Jahre Trachtengruppe Ennetbürgen",
+              "detail": "Mehrzweckanlage, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-17",
+              "url": "https://www.nw.ch/_rte/anlass/79342"
+            },
+            {
+              "label": "Öffentliche Whisky Degustation",
+              "detail": "Dorfstrasse 3, 6374 Buochs, Buochs, Buochs",
+              "date": "2026-10-17",
+              "url": "https://www.nw.ch/_rte/anlass/94063"
+            },
+            {
+              "label": "Tag der offenen Tür - Alterszentrum Oeltrotte",
+              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-17",
+              "url": "https://www.nw.ch/_rte/anlass/94762"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/nidwalden/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "fr": {
       "canton": "NW",
@@ -324,36 +324,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Doggä ufem Stanserhorn",
-              "detail": "Stanserhorn, Stans, Stans",
-              "date": "2026-10-15",
-              "url": "https://www.nw.ch/_rte/anlass/90631"
-            },
-            {
-              "label": "Schulbesuchstag 15. Oktober 2026",
-              "detail": "Schulhäuser Morgenstern und St. Jakob, Ennetmoos, Ennetmoos",
-              "date": "2026-10-15",
-              "url": "https://www.nw.ch/_rte/anlass/93634"
-            },
-            {
-              "label": "Töpferanlass mit Susanne Wagner",
-              "detail": "Schulhaus 3, Werkraum, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-15",
-              "url": "https://www.nw.ch/_rte/anlass/90619"
-            },
-            {
-              "label": "Lasertraining Rütlischiessen",
-              "detail": "MZA Steini, Dallenwil, Dallenwil — en cours, dernier jour : 27 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.nw.ch/_rte/anlass/93010"
-            },
-            {
-              "label": "Pilze am Wegrand",
-              "detail": "Culinarium Alpinum, Stans — en cours, dernier jour : 23 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
-            },
-            {
               "label": "Aktuelles aus Buochs",
               "detail": "Lückertsmatthalle, Buochs, Buochs",
               "date": "2026-10-16",
@@ -364,6 +334,18 @@
               "detail": "Bulls Bike Schweiz, Stans, Stans",
               "date": "2026-10-16",
               "url": "https://www.nw.ch/_rte/anlass/94678"
+            },
+            {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — en cours, dernier jour : 27 octobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.nw.ch/_rte/anlass/93010"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans — en cours, dernier jour : 23 octobre 2026",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
             },
             {
               "label": "32. Stanser Dogturnier",
@@ -382,11 +364,29 @@
               "detail": "Oberstufenschulhaus, Beckenried, Beckenried",
               "date": "2026-10-17",
               "url": "https://www.nw.ch/_rte/anlass/93547"
+            },
+            {
+              "label": "Heimatabig 60 Jahre Trachtengruppe Ennetbürgen",
+              "detail": "Mehrzweckanlage, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-17",
+              "url": "https://www.nw.ch/_rte/anlass/79342"
+            },
+            {
+              "label": "Öffentliche Whisky Degustation",
+              "detail": "Dorfstrasse 3, 6374 Buochs, Buochs, Buochs",
+              "date": "2026-10-17",
+              "url": "https://www.nw.ch/_rte/anlass/94063"
+            },
+            {
+              "label": "Tag der offenen Tür - Alterszentrum Oeltrotte",
+              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-17",
+              "url": "https://www.nw.ch/_rte/anlass/94762"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/nidwald/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/nidwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     }
   }
 }

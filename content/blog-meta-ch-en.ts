@@ -8393,6 +8393,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ruag-lockheed-accordo-f35a.title': 'RUAG and Lockheed Martin agreement for three F-35As in Emmen',
     'blog.article.ruag-lockheed-accordo-f35a.excerpt': 'RUAG MRO and Lockheed Martin continue the RIGI project Three F-35As will be assembled at the RUAG facility in Emmen The first components are expected in the first half',
     'blog.article.ruag-lockheed-accordo-f35a.imageAlt': 'RUAG facility at Emmen airport with F-35A components being assembled',
+    'blog.article.attacco-software-pkzh.title': 'Cyberattack hits Zurich’s pension fund',
+    'blog.article.attacco-software-pkzh.excerpt': 'PKZH personal data stolen in an attack on a software provider Pension funds and annuities were not affected The attack dates back to the end of September',
+    'blog.article.attacco-software-pkzh.imageAlt': 'Swiss administrative building in an urban setting, with a discreet cybersecurity cue',
+    'blog.article.mercatini-usato-svizzera.title': 'Secondhand markets: warranty, sidewalk and counterfeit goods across the border',
+    'blog.article.mercatini-usato-svizzera.excerpt': 'Used: one-year warranty, unless explicitly excluded «Sold as seen» excludes the warranty Free items on public land: often prohibited Fakes',
+    'blog.article.mercatini-usato-svizzera.imageAlt': 'Swiss flea market stall with second-hand goods and vendor issuing a receipt',
 };
 
 export default blogMetaChEn;

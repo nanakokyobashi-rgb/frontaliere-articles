@@ -140,6 +140,20 @@ export function missingRenderedArticleIds(requestedIds, entries) {
   return [...new Set((requestedIds || []).map(String))].filter((articleId) => !rendered.has(articleId));
 }
 
+/** Rimuove gli slash finali dalla forma usata per match e join delle route. */
+export function normalizeRoutePrefix(prefix) {
+  const normalized = prefix.replace(/\/+$/u, '');
+  if (!normalized) throw new Error('prefisso di route vuoto');
+  return normalized;
+}
+
+function normalizedSectionRoutes(section, all = ARTICLE_SECTION_CORE_ALL) {
+  return sectionRoutes(section, all).map((route) => ({
+    ...route,
+    prefix: normalizeRoutePrefix(route.prefix),
+  }));
+}
+
 /** La sezione deve essere cantonale (R2) e ATTIVA nel core: l'engine rende solo le sezioni attive. */
 export function assertPublishableSection(section, { all = ARTICLE_SECTION_CORE_ALL, active = activeCorpusCoreMap() } = {}) {
   const core = Object.prototype.hasOwnProperty.call(all, section) ? all[section] : undefined;
@@ -162,10 +176,10 @@ export function assertPublishableSection(section, { all = ARTICLE_SECTION_CORE_A
  * calcola (`corpusSectionCdnKey`). Lancia se il path non sta sotto uno dei
  * quattro prefissi della sezione o non e' una pagina `index.html`.
  */
-export function pageEntry(section, rel, kind) {
+export function pageEntry(section, rel, kind, all = ARTICLE_SECTION_CORE_ALL) {
   if (!rel.endsWith('/index.html')) throw new Error(`pagina non canonica (attesa …/index.html): ${rel}`);
   const canonicalPath = `/${rel.slice(0, -'index.html'.length)}`;
-  const route = sectionRoutes(section).find((r) => canonicalPath === `${r.prefix}/` || canonicalPath.startsWith(`${r.prefix}/`));
+  const route = normalizedSectionRoutes(section, all).find((r) => canonicalPath === `${r.prefix}/` || canonicalPath.startsWith(`${r.prefix}/`));
   if (!route) throw new Error(`"${rel}" non sta sotto un prefisso della sezione ${section}`);
   if (!/^\/[a-z0-9/-]*\/$/.test(canonicalPath) || canonicalPath.includes('//')) throw new Error(`percorso canonico non valido: ${canonicalPath}`);
   return {
@@ -273,7 +287,7 @@ export function articleManifestPages({ section, previousArticlePages = [], curre
  * release precedente usata solo per questa migrazione.
  */
 export function migrationManifestPages(section, previousArticlePages, previousArchivePages) {
-  const routes = sectionRoutes(section);
+  const routes = normalizedSectionRoutes(section);
   const topicHubs = Object.values(ARTICLE_SECTION_CORE_ALL[section].topicHubs ?? {});
   return [
     ...previousArticlePages.map((page) => manifestEntryFromReleasePage(section, page, 'article')),
@@ -320,7 +334,7 @@ function readGitFile(rootDir, revision, rel) {
 
 /** URL canonici articolo di una release, derivati da registry + slug map. */
 export function articleReleasePages(section, { ids, slugs }) {
-  const routes = new Map(sectionRoutes(section).map((route) => [route.locale, route]));
+  const routes = new Map(normalizedSectionRoutes(section).map((route) => [route.locale, route]));
   const pages = [];
   for (const id of ids) {
     for (const locale of RELEASE_LOCALES) {
@@ -440,7 +454,7 @@ export function archiveReleasePages(section, input) {
       return archiveArticleIds(input.metaSource, input.slugSource, input.slugConst);
     })();
   const totalPages = Math.max(1, Math.ceil(articleIds.size / ARTICLES_PAGE_SIZE));
-  const routes = new Map(sectionRoutes(section).map((route) => [route.locale, route]));
+  const routes = new Map(normalizedSectionRoutes(section).map((route) => [route.locale, route]));
   return RELEASE_LOCALES.flatMap((locale) => {
     const route = routes.get(locale);
     return Array.from({ length: totalPages }, (_, index) => {

@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T00:06:40.869Z",
-  "contentHash": "72dcad537e0dfbec919ae8a313d89e52779b517b744384d3d81fd638ed234b96",
+  "updatedAt": "2026-10-16T00:00:55.142Z",
+  "contentHash": "2ac541dc0e309fa596268aff186b4804c71e6d86415ea8b5916de27fc42f1291",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-14T13:57:52.093Z",
+      "updatedAt": "2026-10-15T13:57:57.453Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Wanderung für Seniorinnen und Senioren",
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Mushroom half-days in the afternoon",
+              "detail": "Treffpunkt: Talstation Rothorn",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mushroom-half-days-in-the-afternoon/"
+            },
+            {
+              "label": "Zwei Musiker und zehn Instrumente",
               "detail": "Chur",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wanderung-fuer-seniorinnen-und-senioren-9/"
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwei-musiker-und-zehn-instrumente/"
             },
             {
-              "label": "mira!cultura Exkursion: Kunst unter freiem Himmel in Trun",
-              "detail": "Ilanz, Trun",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/miracultura-exkursion-kunst-unter-freiem-himmel-in-trun/"
+              "label": "BEASTS",
+              "detail": "Chur",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/beasts/"
             },
             {
-              "label": "Lesekreis im Pfarrhaus Fläsch",
-              "detail": "Fläsch",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesekreis-im-pfarrhaus-flaesch-1/"
+              "label": "Gian Marchet Colani – a hunters' opera after Carl Maria von Weber's 'Der Freischütz'",
+              "detail": "Kongress- und Kulturzentrum Rondo, Pontresina",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gian-marchet-colani-eine-buendner-jaegeroper-nach-carl-maria-von-webers-der-freischuetz/"
+            },
+            {
+              "label": "Concerto \"Jolly & the Flytrap\"",
+              "detail": "Konsum Cazis, Cazis",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/events/music/cazis/jolly-und-the-flytrap-concert_AuZnVMg"
+            },
+            {
+              "label": "Live-Konzert mit Patric Pleasure & Gee-K",
+              "detail": "Hotel Maistra 160, Pontresina",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pontresina/live-konzert-mit-patric-pleasure-und-gee-k_AmCD2pw"
             },
             {
               "label": "Caffè Rumantsch ad Ardez",
               "detail": "Ardez, Scuol — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
               "label": "Kinder- und Jugendzirkuswoche Savognin",
               "detail": "Val Surses: Savognin, Surses — in corso, ultimo giorno: 16 ottobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kinder-und-jugendzirkuswoche-savognin/"
             },
             {
               "label": "Polysport-Camp Chur",
               "detail": "Chur — in corso, ultimo giorno: 16 ottobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysport-camp-chur-1/"
-            },
-            {
-              "label": "Oktober-Brunch im Bergrestaurant Triel in Vella",
-              "detail": "Bergrestaurant Triel, Lumnezia — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktober-brunch-im-bergrestaurant-triel-in-vella/"
-            },
-            {
-              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
-              "detail": "Ardez, Scuol — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
-              "label": "ORIGEN | GIULIO CESARE",
-              "detail": "Clavadeira Riom, Surses — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/origen-giulio-cesare/"
-            },
-            {
-              "label": "Dorfführung in Valendas",
-              "detail": "Valendas, Safiental — in corso, ultimo giorno: 15 ottobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dorffuehrung-in-valendas/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -146,7 +146,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "en": {
       "canton": "GR",
@@ -167,69 +167,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Wanderung für Seniorinnen und Senioren",
+              "label": "Forest Bathing Alpin",
+              "detail": "Scuol",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Mushroom half-days in the afternoon",
+              "detail": "Treffpunkt: Talstation Rothorn",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mushroom-half-days-in-the-afternoon/"
+            },
+            {
+              "label": "Zwei Musiker und zehn Instrumente",
               "detail": "Chur",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wanderung-fuer-seniorinnen-und-senioren-9/"
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwei-musiker-und-zehn-instrumente/"
             },
             {
-              "label": "mira!cultura Exkursion: Kunst unter freiem Himmel in Trun",
-              "detail": "Ilanz, Trun",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/miracultura-exkursion-kunst-unter-freiem-himmel-in-trun/"
+              "label": "BEASTS",
+              "detail": "Chur",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/beasts/"
             },
             {
-              "label": "Lesekreis im Pfarrhaus Fläsch",
-              "detail": "Fläsch",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesekreis-im-pfarrhaus-flaesch-1/"
+              "label": "Gian Marchet Colani – a hunters' opera after Carl Maria von Weber's 'Der Freischütz'",
+              "detail": "Kongress- und Kulturzentrum Rondo, Pontresina",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gian-marchet-colani-eine-buendner-jaegeroper-nach-carl-maria-von-webers-der-freischuetz/"
+            },
+            {
+              "label": "\"Jolly & the Flytrap\" Concert",
+              "detail": "Konsum Cazis, Cazis",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/events/music/cazis/jolly-und-the-flytrap-concert_AuZnVMg"
+            },
+            {
+              "label": "Live concert with Patric Pleasure & Gee-K",
+              "detail": "Hotel Maistra 160, Pontresina",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pontresina/live-konzert-mit-patric-pleasure-und-gee-k_AmCD2pw"
             },
             {
               "label": "Café Rumantsch ad Ardez",
               "detail": "Ardez, Scuol — ongoing, last day: 11 November 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
               "label": "Kinder- und Jugendzirkuswoche Savognin",
               "detail": "Val Surses: Savognin, Surses — ongoing, last day: 16 October 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kinder-und-jugendzirkuswoche-savognin/"
             },
             {
               "label": "Polysport-Camp Chur",
               "detail": "Chur — ongoing, last day: 16 October 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysport-camp-chur-1/"
-            },
-            {
-              "label": "Oktober-Brunch im Bergrestaurant Triel in Vella",
-              "detail": "Bergrestaurant Triel, Lumnezia — ongoing, last day: 18 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktober-brunch-im-bergrestaurant-triel-in-vella/"
-            },
-            {
-              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
-              "detail": "Ardez, Scuol — ongoing, last day: 7 November 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
-              "label": "ORIGEN | GIULIO CESARE",
-              "detail": "Clavadeira Riom, Surses — ongoing, last day: 18 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/origen-giulio-cesare/"
-            },
-            {
-              "label": "Dorfführung in Valendas",
-              "detail": "Valendas, Safiental — ongoing, last day: 15 October 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dorffuehrung-in-valendas/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -280,7 +280,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "de": {
       "canton": "GR",
@@ -301,69 +301,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Wanderung für Seniorinnen und Senioren",
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Pilze sammeln am Nachmittag",
+              "detail": "Treffpunkt: Talstation Rothorn",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mushroom-half-days-in-the-afternoon/"
+            },
+            {
+              "label": "Zwei Musiker und zehn Instrumente",
               "detail": "Chur",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wanderung-fuer-seniorinnen-und-senioren-9/"
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwei-musiker-und-zehn-instrumente/"
             },
             {
-              "label": "mira!cultura Exkursion: Kunst unter freiem Himmel in Trun",
-              "detail": "Ilanz, Trun",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/miracultura-exkursion-kunst-unter-freiem-himmel-in-trun/"
+              "label": "BEASTS",
+              "detail": "Chur",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/beasts/"
             },
             {
-              "label": "Lesekreis im Pfarrhaus Fläsch",
-              "detail": "Fläsch",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesekreis-im-pfarrhaus-flaesch-1/"
+              "label": "Gian Marchet Colani – eine Bündner Jägeroper nach Carl Maria von Webers «Der Freischütz»",
+              "detail": "Kongress- und Kulturzentrum Rondo, Pontresina",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gian-marchet-colani-eine-buendner-jaegeroper-nach-carl-maria-von-webers-der-freischuetz/"
+            },
+            {
+              "label": "Konzert \"Jolly & the Flytrap\"",
+              "detail": "Konsum Cazis, Cazis",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/events/music/cazis/jolly-und-the-flytrap-concert_AuZnVMg"
+            },
+            {
+              "label": "Live-Konzert mit Patric Pleasure & Gee-K",
+              "detail": "Hotel Maistra 160, Pontresina",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pontresina/live-konzert-mit-patric-pleasure-und-gee-k_AmCD2pw"
             },
             {
               "label": "Cafè Rumantsch ad Ardez",
               "detail": "Ardez, Scuol — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
               "label": "Kinder- und Jugendzirkuswoche Savognin",
               "detail": "Val Surses: Savognin, Surses — läuft, letzter Tag: 16. Oktober 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kinder-und-jugendzirkuswoche-savognin/"
             },
             {
               "label": "Polysport-Camp Chur",
               "detail": "Chur — läuft, letzter Tag: 16. Oktober 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysport-camp-chur-1/"
-            },
-            {
-              "label": "Oktober-Brunch im Bergrestaurant Triel in Vella",
-              "detail": "Bergrestaurant Triel, Lumnezia — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktober-brunch-im-bergrestaurant-triel-in-vella/"
-            },
-            {
-              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
-              "detail": "Ardez, Scuol — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
-              "label": "ORIGEN | GIULIO CESARE",
-              "detail": "Clavadeira Riom, Surses — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/origen-giulio-cesare/"
-            },
-            {
-              "label": "Dorfführung in Valendas",
-              "detail": "Valendas, Safiental — läuft, letzter Tag: 15. Oktober 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dorffuehrung-in-valendas/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -414,7 +414,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "fr": {
       "canton": "GR",
@@ -435,69 +435,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Wanderung für Seniorinnen und Senioren",
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Mushroom half-days in the afternoon",
+              "detail": "Treffpunkt: Talstation Rothorn",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mushroom-half-days-in-the-afternoon/"
+            },
+            {
+              "label": "Zwei Musiker und zehn Instrumente",
               "detail": "Chur",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wanderung-fuer-seniorinnen-und-senioren-9/"
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwei-musiker-und-zehn-instrumente/"
             },
             {
-              "label": "mira!cultura Exkursion: Kunst unter freiem Himmel in Trun",
-              "detail": "Ilanz, Trun",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/miracultura-exkursion-kunst-unter-freiem-himmel-in-trun/"
+              "label": "BEASTS",
+              "detail": "Chur",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/beasts/"
             },
             {
-              "label": "Lesekreis im Pfarrhaus Fläsch",
-              "detail": "Fläsch",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesekreis-im-pfarrhaus-flaesch-1/"
+              "label": "Gian Marchet Colani – a hunters' opera after Carl Maria von Weber's 'Der Freischütz'",
+              "detail": "Kongress- und Kulturzentrum Rondo, Pontresina",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gian-marchet-colani-eine-buendner-jaegeroper-nach-carl-maria-von-webers-der-freischuetz/"
+            },
+            {
+              "label": "Concert « Jolly & the Flytrap »",
+              "detail": "Konsum Cazis, Cazis",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/events/music/cazis/jolly-und-the-flytrap-concert_AuZnVMg"
+            },
+            {
+              "label": "Live-Konzert mit Patric Pleasure & Gee-K",
+              "detail": "Hotel Maistra 160, Pontresina",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pontresina/live-konzert-mit-patric-pleasure-und-gee-k_AmCD2pw"
             },
             {
               "label": "Café Rumantsch ad Ardez",
               "detail": "Ardez, Scuol — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
               "label": "Kinder- und Jugendzirkuswoche Savognin",
               "detail": "Val Surses: Savognin, Surses — en cours, dernier jour : 16 octobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kinder-und-jugendzirkuswoche-savognin/"
             },
             {
               "label": "Polysport-Camp Chur",
               "detail": "Chur — en cours, dernier jour : 16 octobre 2026",
-              "date": "2026-10-15",
+              "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysport-camp-chur-1/"
-            },
-            {
-              "label": "Oktober-Brunch im Bergrestaurant Triel in Vella",
-              "detail": "Bergrestaurant Triel, Lumnezia — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktober-brunch-im-bergrestaurant-triel-in-vella/"
-            },
-            {
-              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
-              "detail": "Ardez, Scuol — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
-              "label": "ORIGEN | GIULIO CESARE",
-              "detail": "Clavadeira Riom, Surses — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/origen-giulio-cesare/"
-            },
-            {
-              "label": "Dorfführung in Valendas",
-              "detail": "Valendas, Safiental — en cours, dernier jour : 15 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dorffuehrung-in-valendas/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [
@@ -548,7 +548,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     }
   }
 }

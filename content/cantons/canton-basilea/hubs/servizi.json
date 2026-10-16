@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "servizi",
-  "updatedAt": "2026-10-15T23:04:29.682Z",
-  "contentHash": "8dcb0b4b257649c6b04c9e0a695f7d1a17767d6a25a25822aed7fff799c78583",
+  "updatedAt": "2026-10-16T00:00:55.142Z",
+  "contentHash": "610619fd7e2bdec7ae9c16335cf2e741a8bf69b51cf4826fe0f188ceed0064df",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -208,10 +208,10 @@
           "date": "2026-09-02T05:04:54.377Z"
         },
         {
-          "title": "Asilo nido Basilea Città: costi e sussidi",
-          "url": "/articoli-svizzera/tariffe-cura-infanzia-baselstadt/",
-          "excerpt": "Asilo nido e custodia bambini a Basilea Città: nidi, famiglie diurne e doposcuola, tariffe legate al reddito e sussidi cantonali.",
-          "date": "2026-10-01T01:12:49.462Z"
+          "title": "Permesso di dimora B Basilea Campagna: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-dimora-b-basilea-campagna/",
+          "excerpt": "Guida ai requisiti e alla procedura di rinnovo del permesso B nel Canton Basilea Campagna. Durata, documenti e contatti utili.",
+          "date": "2026-08-24T15:36:51.306Z"
         }
       ],
       "links": [
@@ -248,7 +248,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-15T23:04:29.682Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -429,10 +429,10 @@
           "date": "2026-09-02T05:04:54.377Z"
         },
         {
-          "title": "Daycare in Basel-Stadt: Costs and Subsidies",
-          "url": "/en/swiss-articles/basel-stadt-childcare-costs/",
-          "excerpt": "Crèche and childcare in Basel-Stadt: crèches, day and after-school families, income-related tariffs and cantonal subsidies.",
-          "date": "2026-10-01T01:12:49.462Z"
+          "title": "Residence Permit B Basel Countryside: Requirements and Renewal",
+          "url": "/en/swiss-articles/residence-permit-b-basel-landschaft-requirements-renewal/",
+          "excerpt": "Guide to the requirements and procedure for renewing the B permit in the Basel-Country Canton. Duration, documents and useful contacts.",
+          "date": "2026-08-24T15:36:51.306Z"
         }
       ],
       "links": [
@@ -461,7 +461,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-15T23:04:29.682Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -642,10 +642,10 @@
           "date": "2026-09-02T05:04:54.377Z"
         },
         {
-          "title": "Kindergarten Basel-Stadt: Kosten und Zuschüsse",
-          "url": "/de/schweiz-artikel/basel-stadt-kinderbetreuung-kosten/",
-          "excerpt": "Kindertagesstätten und Kinderbetreuung in Basel-Stadt: Krippen, Tagesfamilien und Nachmittagsbetreuung, einkommensabhängige Tarife und kantonale Zuschüsse.",
-          "date": "2026-10-01T01:12:49.462Z"
+          "title": "Aufenthaltsbewilligung B Basel-Landschaft: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-baselland-anforderungen-erneuerung/",
+          "excerpt": "Leitfaden zu den Anforderungen und Verfahren für die Erneuerung der B-Bewilligung im Kanton Basel-Landschaft. Dauer, Dokumente und nützliche Kontakte.",
+          "date": "2026-08-24T15:36:51.306Z"
         }
       ],
       "links": [
@@ -674,7 +674,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-15T23:04:29.682Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -855,10 +855,10 @@
           "date": "2026-09-02T05:04:54.377Z"
         },
         {
-          "title": "Maternelle Bâle-Stadt : coûts et subventions",
-          "url": "/fr/articles-suisse/bale-ville-couts-garde-enfants/",
-          "excerpt": "Crèche et garde d’enfants à Bâle-Stadt : crèches, familles de jour et après l’école, tarifs liés au revenu et subventions cantonales.",
-          "date": "2026-10-01T01:12:49.462Z"
+          "title": "Permis de séjour B Bâle-Campagne : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-sejour-b-bale-campagne-renouvellement/",
+          "excerpt": "Guide des exigences et de la procédure de renouvellement du permis B dans le canton de Bâle-Campagne. Durée, documents et contacts utiles.",
+          "date": "2026-08-24T15:36:51.306Z"
         }
       ],
       "links": [
@@ -879,7 +879,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-15T23:04:29.682Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     }
   }
 }

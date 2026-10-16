@@ -8393,6 +8393,12 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ruag-lockheed-accordo-f35a.title': 'RUAG und Lockheed Martin: Vereinbarung über drei F-35A in Emmen',
     'blog.article.ruag-lockheed-accordo-f35a.excerpt': 'RUAG MRO und Lockheed Martin setzen das RIGI-Projekt fort Drei F-35A werden am RUAG-Standort Emmen montiert Die ersten Komponenten werden in der ersten Hälfte erwartet',
     'blog.article.ruag-lockheed-accordo-f35a.imageAlt': 'RUAG-Anlage am Flughafen Emmen mit zusammengebauten F-35A-Bauteilen',
+    'blog.article.attacco-software-pkzh.title': 'Cyberangriff: Pensionskasse Zürich getroffen',
+    'blog.article.attacco-software-pkzh.excerpt': 'Persönliche Daten der PKZH bei einem Angriff auf einen Softwareanbieter entwendet Vorsorgegelder und Renten wurden nicht angetastet Der Angriff ereignete sich Ende September',
+    'blog.article.attacco-software-pkzh.imageAlt': 'Schweizer Verwaltungsgebäude in der Stadt mit einem dezenten Hinweis auf Cybersicherheit',
+    'blog.article.mercatini-usato-svizzera.title': 'Gebrauchtwarenmärkte: Garantie, Gehweg und Fälschungen über die Grenze hinweg',
+    'blog.article.mercatini-usato-svizzera.excerpt': 'Gebrauchtwaren: ein Jahr Garantie, sofern nicht ausdrücklich ausgeschlossen «Verkauft wie gesehen» schließt die Garantie aus Kostenlose Gegenstände auf öffentlichem Grund: oft verboten Fälschungen',
+    'blog.article.mercatini-usato-svizzera.imageAlt': 'Schweizer Flohmarktstand mit Second-Hand-Waren und Verkäufer, der eine Quittung ausstellt',
 };
 
 export default blogMetaChDe;

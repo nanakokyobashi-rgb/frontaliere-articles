@@ -4,12 +4,12 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "eventi",
-  "updatedAt": "2026-10-15T00:06:40.869Z",
-  "contentHash": "1918862eb06d1e6af5412c5eaf5c3bbe92ffd324f3b4089f1fa163828289d5a9",
+  "updatedAt": "2026-10-16T00:00:55.142Z",
+  "contentHash": "f2c139e01be209d8b2100009f503d9c6db6181e9f237ec9994e10005d935bea0",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-14T13:57:52.093Z",
+      "updatedAt": "2026-10-15T13:57:57.453Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "33",
+          "value": "31",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,24 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Krabbel- und Kindertreff",
-              "detail": "Pfarreiheim, Sachseln, Sachseln",
-              "date": "2026-10-15",
-              "url": "https://www.ow.ch/_rte/anlass/90871"
-            },
-            {
-              "label": "Krabbel- und Spielträff",
-              "detail": "Vereinslokal unter der Kirche, Stalden",
-              "date": "2026-10-15",
-              "url": "https://www.ow.ch/_rte/anlass/88193"
-            },
-            {
-              "label": "Mittagstisch und Geselligkeit",
-              "detail": "Felsenheim Sachseln, Sachseln, Sachseln",
-              "date": "2026-10-15",
-              "url": "https://www.ow.ch/_rte/anlass/90868"
-            },
             {
               "label": "Sternzauber Armband - kreativ - intuitiv - verbindend (2 Armbänder)",
               "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
@@ -91,11 +73,29 @@
               "detail": "Benediktinerkloster Engelberg, Engelberg",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-concert-4-matinee-to-the-crossroads-of-the-wind/"
+            },
+            {
+              "label": "Zwischentöne Conert 5: Intermezzo: ‘Century of honour in four hands’",
+              "detail": "Kursaal Engelberg AG, Engelberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-conert-5-intermezzo-century-of-honour-in-four-hands/"
+            },
+            {
+              "label": "Zwischentöne Concert 7: \"Turning point Beethoven\"",
+              "detail": "Engelberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischentoene-concert-7-turning-point-beethoven/"
+            },
+            {
+              "label": "Älplertag",
+              "detail": "Pfarrkirche Sarnen, Sarnen, Sarnen",
+              "date": "2026-10-18",
+              "url": "https://www.ow.ch/_rte/anlass/93256"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/obvaldo/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/obvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "en": {
       "canton": "OW",
@@ -119,7 +119,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "33",
+          "value": "31",
           "note": "from the site’s events calendar"
         }
       ],
@@ -129,24 +129,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Krabbel- und Kindertreff",
-              "detail": "Pfarreiheim, Sachseln, Sachseln",
-              "date": "2026-10-15",
-              "url": "https://www.ow.ch/_rte/anlass/90871"
-            },
-            {
-              "label": "Krabbel- und Spielträff",
-              "detail": "Vereinslokal unter der Kirche, Stalden",
-              "date": "2026-10-15",
-              "url": "https://www.ow.ch/_rte/anlass/88193"
-            },
-            {
-              "label": "Mittagstisch und Geselligkeit",
-              "detail": "Felsenheim Sachseln, Sachseln, Sachseln",
-              "date": "2026-10-15",
-              "url": "https://www.ow.ch/_rte/anlass/90868"
-            },
             {
               "label": "Sternzauber Armband - kreativ - intuitiv - verbindend (2 Armbänder)",
               "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
@@ -188,11 +170,29 @@
               "detail": "Benediktinerkloster Engelberg, Engelberg",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-concert-4-matinee-to-the-crossroads-of-the-wind/"
+            },
+            {
+              "label": "Zwischentöne Conert 5: Intermezzo: ‘Century of honour in four hands’",
+              "detail": "Kursaal Engelberg AG, Engelberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-conert-5-intermezzo-century-of-honour-in-four-hands/"
+            },
+            {
+              "label": "Zwischentöne Concert 7: \"Turning point Beethoven\"",
+              "detail": "Engelberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischentoene-concert-7-turning-point-beethoven/"
+            },
+            {
+              "label": "Älplertag",
+              "detail": "Pfarrkirche Sarnen, Sarnen, Sarnen",
+              "date": "2026-10-18",
+              "url": "https://www.ow.ch/_rte/anlass/93256"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/obwalden/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/obwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "de": {
       "canton": "OW",
@@ -216,7 +216,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "33",
+          "value": "31",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -226,24 +226,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Krabbel- und Kindertreff",
-              "detail": "Pfarreiheim, Sachseln, Sachseln",
-              "date": "2026-10-15",
-              "url": "https://www.ow.ch/_rte/anlass/90871"
-            },
-            {
-              "label": "Krabbel- und Spielträff",
-              "detail": "Vereinslokal unter der Kirche, Stalden",
-              "date": "2026-10-15",
-              "url": "https://www.ow.ch/_rte/anlass/88193"
-            },
-            {
-              "label": "Mittagstisch und Geselligkeit",
-              "detail": "Felsenheim Sachseln, Sachseln, Sachseln",
-              "date": "2026-10-15",
-              "url": "https://www.ow.ch/_rte/anlass/90868"
-            },
             {
               "label": "Sternzauber Armband - kreativ - intuitiv - verbindend (2 Armbänder)",
               "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
@@ -285,11 +267,29 @@
               "detail": "Benediktinerkloster Engelberg, Engelberg",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-concert-4-matinee-to-the-crossroads-of-the-wind/"
+            },
+            {
+              "label": "Zwischentöne Konzert 5: «The Broken Column»",
+              "detail": "Kursaal Engelberg AG, Engelberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-conert-5-intermezzo-century-of-honour-in-four-hands/"
+            },
+            {
+              "label": "Zwischentöne Konzert 7: «Aus tiefer Not»",
+              "detail": "Engelberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischentoene-concert-7-turning-point-beethoven/"
+            },
+            {
+              "label": "Älplertag",
+              "detail": "Pfarrkirche Sarnen, Sarnen, Sarnen",
+              "date": "2026-10-18",
+              "url": "https://www.ow.ch/_rte/anlass/93256"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/obwalden/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/obwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     },
     "fr": {
       "canton": "OW",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "33",
+          "value": "31",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -323,24 +323,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Krabbel- und Kindertreff",
-              "detail": "Pfarreiheim, Sachseln, Sachseln",
-              "date": "2026-10-15",
-              "url": "https://www.ow.ch/_rte/anlass/90871"
-            },
-            {
-              "label": "Krabbel- und Spielträff",
-              "detail": "Vereinslokal unter der Kirche, Stalden",
-              "date": "2026-10-15",
-              "url": "https://www.ow.ch/_rte/anlass/88193"
-            },
-            {
-              "label": "Mittagstisch und Geselligkeit",
-              "detail": "Felsenheim Sachseln, Sachseln, Sachseln",
-              "date": "2026-10-15",
-              "url": "https://www.ow.ch/_rte/anlass/90868"
-            },
             {
               "label": "Sternzauber Armband - kreativ - intuitiv - verbindend (2 Armbänder)",
               "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
@@ -382,11 +364,29 @@
               "detail": "Benediktinerkloster Engelberg, Engelberg",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-concert-4-matinee-to-the-crossroads-of-the-wind/"
+            },
+            {
+              "label": "Zwischentöne Conert 5: Intermezzo: ‘Century of honour in four hands’",
+              "detail": "Kursaal Engelberg AG, Engelberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-conert-5-intermezzo-century-of-honour-in-four-hands/"
+            },
+            {
+              "label": "Zwischentöne Concert 7: \"Turning point Beethoven\"",
+              "detail": "Engelberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischentoene-concert-7-turning-point-beethoven/"
+            },
+            {
+              "label": "Älplertag",
+              "detail": "Pfarrkirche Sarnen, Sarnen, Sarnen",
+              "date": "2026-10-18",
+              "url": "https://www.ow.ch/_rte/anlass/93256"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/obwald/",
-          "updatedAt": "2026-10-14T13:57:52.093Z"
+          "updatedAt": "2026-10-15T13:57:57.453Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/obwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T00:00:55.142Z"
     }
   }
 }

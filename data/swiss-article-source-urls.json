@@ -1,14 +1,4 @@
 {
-  "https://www.rsi.ch/s/4074328": {
-    "articleId": "hormuz-petrolio-200-dollari",
-    "ts": "2026-09-13T06:00:40.586Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/okbegvco54lc": {
-    "articleId": "parmelin-tag-der-wirtschaft",
-    "ts": "2026-09-13T06:41:53.334Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/politica/1949590/verdi-f-35a-conseguenze-prezzo-stato": {
     "articleId": "f35a-prezzo-incerto-politica",
     "ts": "2026-09-13T06:50:41.352Z",
@@ -2497,6 +2487,16 @@
   "https://www.tio.ch/svizzera/economia/1956974/svizzera-ruag-progetto-emmen-martin-lockheed-accordo": {
     "articleId": "ruag-lockheed-accordo-f35a",
     "ts": "2026-10-15T20:58:19.001Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4167841": {
+    "articleId": "attacco-software-pkzh",
+    "ts": "2026-10-15T23:41:40.471Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/dialogo/mercatini-e-usato-cinque-cose-da-sapere--4155286.html": {
+    "articleId": "mercatini-usato-svizzera",
+    "ts": "2026-10-15T23:56:58.688Z",
     "keyForm": 2
   }
 }

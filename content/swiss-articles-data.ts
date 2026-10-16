@@ -28033,6 +28033,27 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'attacco-software-pkzh',
+    category: 'pensione',
+    date: '2026-10-15T23:41:39.976Z',
+    image: '/images/blog/article-attacco-software-pkzh.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    canton: ['ZH'],
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
+   {
+    id: 'mercatini-usato-svizzera',
+    category: 'pratico',
+    date: '2026-10-15T23:56:58.369Z',
+    image: '/images/blog/autonomi-frontalieri-svizzera-come-aprire.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

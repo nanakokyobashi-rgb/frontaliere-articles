@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "pensioni",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "c1324aaa7862a3a7e33b2d410d044e6908c43cd5a90477d51a9bf3e89f22a8b8",
+  "updatedAt": "2026-10-15T23:46:15.709Z",
+  "contentHash": "df28b4d9f22f04511ba04bd4222fcbf56d1e4bba6e8fab2daaa9bbe2bbbbbaf0",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-15T10:18:58.161Z",
       "keyFacts": 0
     }
   ],
@@ -166,10 +166,16 @@
               "url": "https://bvk.ch/de/bvk-aktuell/detail/sonnige-aussichten-in-down-under"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Ciberattacco, colpita la cassa pensioni di Zurigo",
+          "url": "/articoli-svizzera/attacco-software-pkzh/",
+          "excerpt": "Dati personali PKZH sottratti in un attacco a un fornitore software Fondi previdenziali e rendite non sono stati toccati L'attacco risale alla fine di settembre",
+          "date": "2026-10-15T23:41:39.976Z"
+        },
         {
           "title": "Formazione continua Canton Zurigo: requisiti e contributi",
           "url": "/articoli-svizzera/formazione-continua-zurigo-contributi/",
@@ -211,12 +217,6 @@
           "url": "/articoli-svizzera/avs-prestazioni-complementari-zurigo-cassa/",
           "excerpt": "Come funziona il primo pilastro AVS nel Canton Zurigo: cassa di compensazione, calcolo della rendita, lacune e prestazioni complementari per il minimo vitale.",
           "date": "2026-08-21T19:16:14.034Z"
-        },
-        {
-          "title": "Secondo pilastro LPP Svizzera guida 2026 canton Zurigo",
-          "url": "/articoli-svizzera/secondo-pilastro-lpp-svizzera-guida-2026-zurigo/",
-          "excerpt": "Guida al secondo pilastro LPP 2026: contributi 7-18% per età, riscatto lacune, prelievo capitale e confronto nazionale con focus sul canton Zurigo",
-          "date": "2026-08-08T18:13:20.030Z"
         }
       ],
       "links": [
@@ -237,7 +237,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T23:46:15.709Z"
     },
     "en": {
       "canton": "ZH",
@@ -376,10 +376,16 @@
               "url": "https://bvk.ch/de/bvk-aktuell/detail/sonnige-aussichten-in-down-under"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Cyberattack hits Zurich’s pension fund",
+          "url": "/en/swiss-articles/zurich-pension-fund-cyberattack/",
+          "excerpt": "PKZH personal data stolen in an attack on a software provider Pension funds and annuities were not affected The attack dates back to the end of September",
+          "date": "2026-10-15T23:41:39.976Z"
+        },
         {
           "title": "Continuing education Canton Zurich: requirements and contributions",
           "url": "/en/swiss-articles/zurich-continuing-education-grants/",
@@ -421,12 +427,6 @@
           "url": "/en/swiss-articles/avs-supplementary-benefits-zurich-compensation-office/",
           "excerpt": "How the first AVS pillar works in the Canton of Zurich: compensation fund, annuity calculation, gaps and supplementary benefits for the living minimum.",
           "date": "2026-08-21T19:16:14.034Z"
-        },
-        {
-          "title": "Second pillar LPP Switzerland guide 2026 canton Zurich",
-          "url": "/en/swiss-articles/second-pillar-lpp-switzerland-guide-2026-zurich/",
-          "excerpt": "Guide to the second pillar LPP 2026: contributions 7-18% by age, redemption of gaps, capital levy and national comparison with a focus on the canton of Zurich",
-          "date": "2026-08-08T18:13:20.030Z"
         }
       ],
       "links": [
@@ -447,7 +447,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T23:46:15.709Z"
     },
     "de": {
       "canton": "ZH",
@@ -586,10 +586,16 @@
               "url": "https://bvk.ch/de/bvk-aktuell/detail/sonnige-aussichten-in-down-under"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Cyberangriff: Pensionskasse Zürich getroffen",
+          "url": "/de/schweiz-artikel/cyberangriff-pensionskasse-zurich/",
+          "excerpt": "Persönliche Daten der PKZH bei einem Angriff auf einen Softwareanbieter entwendet Vorsorgegelder und Renten wurden nicht angetastet Der Angriff ereignete sich Ende September",
+          "date": "2026-10-15T23:41:39.976Z"
+        },
         {
           "title": "Weiterbildung im Kanton Zürich: Anforderungen und Beiträge",
           "url": "/de/schweiz-artikel/weiterbildung-zuerich-beitraege/",
@@ -631,12 +637,6 @@
           "url": "/de/schweiz-artikel/avs-ergaenzungsleistungen-zuerich-ausgleichskasse/",
           "excerpt": "So funktioniert die erste AHV-Säule im Kanton Zürich: Ausgleichskasse, Rentenberechnung, Lücken und Ergänzungsleistungen für das Lebensminimum.",
           "date": "2026-08-21T19:16:14.034Z"
-        },
-        {
-          "title": "Zweite Säule BVG Schweiz Führer 2026 Kanton Zürich",
-          "url": "/de/schweiz-artikel/zweite-saeule-bvg-schweiz-leitfaden-2026-zurich/",
-          "excerpt": "Leitfaden 2. Säule BVG 2026: 7-18% Altersbeiträge, Lückenrückkauf, Kapitalbezug und nationaler Vergleich mit Fokus Kanton Zürich",
-          "date": "2026-08-08T18:13:20.030Z"
         }
       ],
       "links": [
@@ -657,7 +657,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T23:46:15.709Z"
     },
     "fr": {
       "canton": "ZH",
@@ -796,10 +796,16 @@
               "url": "https://bvk.ch/de/bvk-aktuell/detail/sonnige-aussichten-in-down-under"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T10:18:58.161Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Cyberattaque, la caisse de pension de Zurich touchée",
+          "url": "/fr/articles-suisse/cyberattaque-caisse-pension-zurich/",
+          "excerpt": "Des données personnelles de PKZH volées lors d'une attaque contre un fournisseur de logiciels Les fonds de prévoyance et les rentes n'ont pas été touchés L'attaque remonte à fin septembre",
+          "date": "2026-10-15T23:41:39.976Z"
+        },
         {
           "title": "Formation continue Canton de Zurich : exigences et cotisations",
           "url": "/fr/articles-suisse/formation-continue-zurich-subventions/",
@@ -841,12 +847,6 @@
           "url": "/fr/articles-suisse/ava-prestations-complementaires-zurich-caisse/",
           "excerpt": "Comment fonctionne le premier pilier AVS dans le canton de Zurich : caisse de compensation, calcul de la rente, lacunes et prestations complémentaires pour le minimum vital.",
           "date": "2026-08-21T19:16:14.034Z"
-        },
-        {
-          "title": "Deuxième pilier LPP Suisse guide 2026 canton Zurich",
-          "url": "/fr/articles-suisse/deuxieme-pilier-lpp-suisse-guide-2026-zurich/",
-          "excerpt": "Guide du 2e pilier LPP 2026 : cotisations 7-18% par âge, rachat lacunes, prélèvement capital et comparaison nationale en mettant l'accent sur le canton de Zurich",
-          "date": "2026-08-08T18:13:20.030Z"
         }
       ],
       "links": [
@@ -867,7 +867,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-15T23:46:15.709Z"
     }
   }
 }
