@@ -8985,10 +8985,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/via-libera-del-governo-alle-intese-con-la-lombardia-sullautonomia-fontana-ora-tocca-al-parlamento/2708017": {
-      "section": "frontaliere",
-      "ts": 1792005480523
-    },
     "frontaliere::https://comozero.it/attualita/provincia-di-como-drammatico-schianto-tra-due-moto": {
       "section": "frontaliere",
       "ts": 1792009974706
@@ -9272,6 +9268,10 @@
     "frontaliere::https://www.varesenews.it/2026/10/due-milioni-alla-liuc-per-nuovi-laboratori-di-ricerca-per-le-imprese-un-primo-passo-verso-mill/2710651": {
       "section": "frontaliere",
       "ts": 1792178177980
+    },
+    "frontaliere::https://unia.ch/it/professioni-rami/parrucchiere/sondaggio-rivendicazioni-ccl": {
+      "section": "frontaliere",
+      "ts": 1792182208504
     }
   }
 }

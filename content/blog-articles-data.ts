@@ -45002,6 +45002,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'industria-ticino-futuro-lavoro',
+ category: 'pratico',
+ date: '2026-10-16T20:29:56.949Z',
+ image: '/images/blog/article-industria-ticino-futuro-lavoro.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
