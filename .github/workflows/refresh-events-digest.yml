@@ -60,6 +60,11 @@ on:
         required: false
         default: 'TI'
         type: string
+      cantons:
+        description: 'Batch opzionale separato da virgole (es. AG,APPENZELLO,FR); prevale su canton'
+        required: false
+        default: ''
+        type: string
       dry_run:
         description: 'Fetch and render, but write and commit nothing'
         required: false
@@ -83,6 +88,7 @@ jobs:
         env:
           EVENT_NAME: ${{ github.event_name }}
           REQUESTED_CANTON: ${{ inputs.canton }}
+          REQUESTED_CANTONS: ${{ inputs.cantons }}
           REQUESTED_DRY_RUN: ${{ inputs.dry_run }}
         run: |
           # shellcheck disable=SC1083 # GitHub expressions are expanded before bash runs.
@@ -94,21 +100,35 @@ jobs:
           else
             DRY=false
           fi
-          if [ "$EVENT_NAME" != "workflow_dispatch" ] || [ -z "$REQUESTED_CANTON" ]; then
-            CANTON=TI
+          if [ "$EVENT_NAME" != "workflow_dispatch" ]; then
+            REQUESTED_CANTONS=TI
+          elif [ -z "$REQUESTED_CANTONS" ] && [ -n "$REQUESTED_CANTON" ]; then
+            REQUESTED_CANTONS="$REQUESTED_CANTON"
           else
-            CANTON="$(printf '%s' "$REQUESTED_CANTON" | tr '[:lower:]' '[:upper:]')"
+            REQUESTED_CANTONS=TI
           fi
-          case "$CANTON" in
-            TI) SECTION='' ;;
-            APPENZELLO) SECTION='canton-appenzello' ;;
-            AG|FR|GL|NE|NW|OW|SH|SZ|TG|UR|VD|VS|ZG) SECTION="canton-$(printf '%s' "$CANTON" | tr '[:upper:]' '[:lower:]')" ;;
-            *) echo "::error::canton non supportato: $CANTON"; exit 2 ;;
-          esac
+          IFS=',' read -r -a RAW_CANTONS <<< "$REQUESTED_CANTONS"
+          CANTONS=()
+          SECTIONS=()
+          for raw in "${RAW_CANTONS[@]}"; do
+            CANTON="$(printf '%s' "$raw" | tr -d '[:space:]' | tr '[:lower:]' '[:upper:]')"
+            [ -n "$CANTON" ] || continue
+            case "$CANTON" in
+              TI) SECTION='' ;;
+              APPENZELLO) SECTION='canton-appenzello' ;;
+              AG|FR|GL|NE|NW|OW|SH|SZ|TG|UR|VD|VS|ZG) SECTION="canton-$(printf '%s' "$CANTON" | tr '[:upper:]' '[:lower:]')" ;;
+              *) echo "::error::canton non supportato: $CANTON"; exit 2 ;;
+            esac
+            CANTONS+=("$CANTON")
+            SECTIONS+=("$SECTION")
+          done
+          [ "${#CANTONS[@]}" -gt 0 ] || { echo '::error::nessun cantone richiesto'; exit 2; }
+          CANTON_LIST="$(IFS=,; echo "${CANTONS[*]}")"
+          SECTION_LIST="$(IFS=,; echo "${SECTIONS[*]}")"
           echo "dry=$DRY" >> "$GITHUB_OUTPUT"
-          echo "canton=$CANTON" >> "$GITHUB_OUTPUT"
-          echo "section=$SECTION" >> "$GITHUB_OUTPUT"
-          echo "event=$EVENT_NAME → dry_run=$DRY canton=$CANTON section=${SECTION:-frontaliere}"
+          echo "cantons=$CANTON_LIST" >> "$GITHUB_OUTPUT"
+          echo "sections=$SECTION_LIST" >> "$GITHUB_OUTPUT"
+          echo "event=$EVENT_NAME → dry_run=$DRY cantons=$CANTON_LIST sections=$SECTION_LIST"
 
       - name: Checkout
         uses: actions/checkout@v7
@@ -146,16 +166,20 @@ jobs:
         id: producer
         env:
           DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
-          DIGEST_CANTON: ${{ steps.mode.outputs.canton }}
-          DIGEST_SECTION: ${{ steps.mode.outputs.section }}
+          DIGEST_CANTONS: ${{ steps.mode.outputs.cantons }}
+          DIGEST_SECTIONS: ${{ steps.mode.outputs.sections }}
         run: |
           set -euo pipefail
-          if [ -n "$DIGEST_SECTION" ]; then
-            node generator/scripts/generate-events-digest-article.mjs \
-              --section="$DIGEST_SECTION" --canton "$DIGEST_CANTON"
-          else
-            node generator/scripts/generate-events-digest-article.mjs
-          fi
+          IFS=',' read -r -a CANTONS <<< "$DIGEST_CANTONS"
+          IFS=',' read -r -a SECTIONS <<< "$DIGEST_SECTIONS"
+          for i in "${!CANTONS[@]}"; do
+            if [ -n "${SECTIONS[$i]}" ]; then
+              node generator/scripts/generate-events-digest-article.mjs \
+                --section="${SECTIONS[$i]}" --canton "${CANTONS[$i]}"
+            else
+              node generator/scripts/generate-events-digest-article.mjs
+            fi
+          done
 
       # ── La guardia sul percorso di scrittura (issue #275) ──────────────────
       #
@@ -252,29 +276,35 @@ jobs:
             echo "::warning::content guard outcome: $GUARD_OUTCOME — refusing to commit producer output"
             exit 0
           else
-            CANTON="${{ steps.mode.outputs.canton }}"
-            SECTION="${{ steps.mode.outputs.section }}"
+            CANTON_LIST="${{ steps.mode.outputs.cantons }}"
+            SECTION_LIST="${{ steps.mode.outputs.sections }}"
             # data/events.json is gitignored: it is a fetched cache of another
             # repo's dataset, and committing 1.9 MB of it per run would be noise.
             # Explicitly stage only this digest's registration/body output.
             # Registration markers are runner-local and ignored.
-            if [ -z "$SECTION" ]; then
-              COMMIT_MESSAGE="Refresh the weekend events digest"
-              git add content/blog-body/it/eventi-weekend-ticino.ts \
-                      content/blog-body/en/eventi-weekend-ticino.ts \
-                      content/blog-body/de/eventi-weekend-ticino.ts \
-                      content/blog-body/fr/eventi-weekend-ticino.ts \
-                      content/blog-articles-data.ts \
-                      content/seo/seo-blog-5.ts
-            else
-              COMMIT_MESSAGE="Add $CANTON weekend events digest to its canton section"
-              git add "content/blog-body-$SECTION/" \
-                      "content/blog-meta-$SECTION-it.ts" \
-                      "content/blog-meta-$SECTION-en.ts" \
-                      "content/blog-meta-$SECTION-de.ts" \
-                      "content/blog-meta-$SECTION-fr.ts" \
-                      "content/cantons/$SECTION/"
-            fi
+            IFS=',' read -r -a CANTONS <<< "$CANTON_LIST"
+            IFS=',' read -r -a SECTIONS <<< "$SECTION_LIST"
+            for i in "${!CANTONS[@]}"; do
+              CANTON="${CANTONS[$i]}"
+              SECTION="${SECTIONS[$i]}"
+              if [ -z "$SECTION" ]; then
+                COMMIT_MESSAGE="Refresh the weekend events digest"
+                git add content/blog-body/it/eventi-weekend-ticino.ts \
+                        content/blog-body/en/eventi-weekend-ticino.ts \
+                        content/blog-body/de/eventi-weekend-ticino.ts \
+                        content/blog-body/fr/eventi-weekend-ticino.ts \
+                        content/blog-articles-data.ts \
+                        content/seo/seo-blog-5.ts
+              else
+                COMMIT_MESSAGE="Add canton weekend events digest(s)"
+                git add "content/blog-body-$SECTION/" \
+                        "content/blog-meta-$SECTION-it.ts" \
+                        "content/blog-meta-$SECTION-en.ts" \
+                        "content/blog-meta-$SECTION-de.ts" \
+                        "content/blog-meta-$SECTION-fr.ts" \
+                        "content/cantons/$SECTION/"
+              fi
+            done
           fi
           if git diff --cached --quiet; then
             echo "no digest changes"
