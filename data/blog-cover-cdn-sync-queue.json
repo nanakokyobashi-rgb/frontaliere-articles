@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-dosso-gaggiolo-sicurezza-lavoratori.webp",
-      "sha256": "25ac1159a3d5cd6adc187fa8f5b810cd5fcb971006eaf2e2569671b9d584f939"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-dosso-gaggiolo-sicurezza-lavoratori-480w.webp",
-      "sha256": "cbbab3822b45b71177138aed179fb3bad8bdeaf0c676622af7ec8d0f3e0c1101"
-    }
-  ]
+  "items": []
 }
