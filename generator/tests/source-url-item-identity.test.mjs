@@ -277,7 +277,9 @@ test('selectConsistentTitleEvidence rejects conflicting declarations before matc
   );
 
   assert.equal(selectConsistentTitleEvidence(`${matching}\r${equivalent}`), matching);
+  assert.equal(selectConsistentTitleEvidence([`${matching}\r${equivalent}`, 'A 13: STAU']), matching);
   assert.equal(selectConsistentTitleEvidence(conflicting), '');
+  assert.equal(selectConsistentTitleEvidence([conflicting]), '');
   assert.equal(shortHeadlineEvidence(conflicting, matching), false);
   assert.equal(shortHeadlineEvidence(conflictingHtml, matching), false);
 });

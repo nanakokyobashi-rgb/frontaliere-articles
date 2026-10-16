@@ -268,9 +268,9 @@ export function shortHeadlineTokenPolicy(token) {
  * @returns {string} the first consistent declaration, or '' when absent/conflicting
  */
 export function selectConsistentTitleEvidence(titleEvidence) {
-  const lines = (Array.isArray(titleEvidence)
-    ? titleEvidence
-    : String(titleEvidence ?? '').split(/\r\n|[\r\n]/u))
+  const declarations = Array.isArray(titleEvidence) ? titleEvidence : [titleEvidence];
+  const lines = declarations
+    .flatMap((declaration) => String(declaration ?? '').split(/\r\n|[\r\n]/u))
     .map((line) => String(line ?? '').trim())
     .filter(Boolean);
   if (lines.length === 0) return '';
