@@ -253,18 +253,44 @@ export function itemIdentityToken(text, date = null) {
 export const ITEM_ON_PAGE_MIN_SHARE = 0.6;
 
 /**
- * Il testo porta le parole distintive (almeno 4 lettere) di questo titolo?
- * Sulle parole e non sulla frase: una pagina non sempre ripete il titolo alla
- * lettera. Un titolo senza parole distintive non si puo' verificare e non
- * passa.
+ * Un titolo breve e' provato solo se una riga di titolo dichiarata dalla pagina
+ * coincide con l'intero titolo dell'item. Il corpo non basta: parole come
+ * «Stau» possono comparire in una pagina diversa o nella sua navigazione.
  *
- * @param {string} text
+ * @param {string} titleEvidence titoli da `pageTitleEvidence()`
  * @param {string} headline
  * @returns {boolean}
  */
-export function pageCarriesItem(text, headline, { minShare = ITEM_ON_PAGE_MIN_SHARE } = {}) {
+export function shortHeadlineEvidence(titleEvidence, headline) {
+  const normalizedHeadline = normalizeItemText(headline);
+  if (!normalizedHeadline) return false;
+
+  const distinctiveWords = new Set(
+    normalizedHeadline.split(' ').filter((word) => word.length >= 4),
+  );
+  if (distinctiveWords.size >= 2) return false;
+
+  return String(titleEvidence ?? '').split(/\r?\n/)
+    .some((line) => normalizeItemText(line) === normalizedHeadline);
+}
+
+/**
+ * Il testo porta almeno il 60% delle parole distintive (almeno 4 lettere)?
+ * Sulle parole e non sulla frase: una pagina non sempre ripete il titolo alla
+ * lettera. Con meno di due parole distintive il corpo e' evidenza debole e
+ * serve la corrispondenza esatta con un titolo dichiarato dalla pagina.
+ *
+ * @param {string} text
+ * @param {string} headline
+ * @param {{ minShare?: number, titleEvidence?: string }} [options]
+ * @returns {boolean}
+ */
+export function pageCarriesItem(text, headline, {
+  minShare = ITEM_ON_PAGE_MIN_SHARE,
+  titleEvidence = '',
+} = {}) {
   const words = [...new Set(normalizeItemText(headline).split(' ').filter((w) => w.length >= 4))];
-  if (words.length === 0) return false;
+  if (words.length < 2) return shortHeadlineEvidence(titleEvidence, headline);
   const page = new Set(normalizeItemText(text).split(' '));
   const found = words.filter((w) => page.has(w)).length;
   return found / words.length >= minShare;
@@ -514,9 +540,12 @@ export function pageTitleEvidence(html) {
  * @returns {{ ok: boolean, reason: 'ok' | 'no-page' | 'title-not-on-page' | 'other-day' }}
  */
 export function checkItemOnPage(page, item) {
-  const evidence = `${page?.title || ''}\n${page?.text || ''}`;
+  const titleEvidence = String(page?.title || '');
+  const evidence = `${titleEvidence}\n${page?.text || ''}`;
   if (!evidence.trim()) return { ok: false, reason: 'no-page' };
-  if (!pageCarriesItem(evidence, item?.headline || '')) return { ok: false, reason: 'title-not-on-page' };
+  if (!pageCarriesItem(evidence, item?.headline || '', { titleEvidence })) {
+    return { ok: false, reason: 'title-not-on-page' };
+  }
   const dayOf = (raw) => {
     if (!raw) return '';
     const d = raw instanceof Date ? raw : new Date(raw);
