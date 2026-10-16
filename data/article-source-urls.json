@@ -1,9 +1,4 @@
 {
-  "https://comozero.it/attualita/cernobbio-torna-capitale-del-mondo-a-villa-deste-il-forum-teha-con-leader-ministri-e-grandi-nomi-delleconomia": {
-    "articleId": "forum-teha-cernobbio-2026",
-    "ts": "2026-09-05T14:02:59.093Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/cantone/luganese/1947497/la-ripresa-dei-pazienti-passa-dal-giardino-delle-cure-intense": {
     "articleId": "giardino-cure-intense-clinica-moncucco",
     "ts": "2026-09-05T14:12:09.470Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/lex-macello-di-belforte-apre-alle-visite-incontro-sui-lavori-di-bonifica-e-mostra-guidata/2708980": {
     "articleId": "varese-macello-belforte-visite-2026",
     "ts": "2026-10-16T06:05:12.173Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/le-azalee-lasciano-il-campo-di-via-pradisera-scontro-con-il-comune-sul-bando/2709355": {
+    "articleId": "azalee-calcio-campo-pradisera",
+    "ts": "2026-10-16T06:28:47.444Z",
     "keyForm": 2
   }
 }
