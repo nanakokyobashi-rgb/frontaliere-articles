@@ -26,7 +26,7 @@ import { sectionSourceSurfaces } from '../../scripts/lib/corpus-sections.mjs';
 import { sectionRebaseSurfaces } from '../../scripts/ci/rebase-section-args.mjs';
 import { cantonSectionIds, cantonSectionProfile } from '../scripts/lib/canton-section-profile.mjs';
 import { CANTON_GROUPS, buildCantonServices } from '../scripts/lib/canton-services-data.mjs';
-import { articleUrl, filterUniqueCuratedCandidates, keywordTopicScore, loadCantonPool, loadSectionArticles, selectCuratedArticles, sidecarQuality } from '../scripts/lib/canton-hubs/articles.mjs';
+import { articleUrl, filterUniqueCuratedCandidates, keywordTopicScore, loadCantonPool, loadSectionArticles, selectCuratedArticles, selectLatestCantonArticles, sidecarQuality } from '../scripts/lib/canton-hubs/articles.mjs';
 import { BLOCK_THRESHOLDS, CLOCK_SKEW_MS, DAY_MS, HOUR_MS, OMIT_CODES, dateMs, instantMs, isRealDay } from '../scripts/lib/canton-hubs/blocks-common.mjs';
 import { parseCrossingNames } from '../scripts/lib/canton-hubs/blocks-border-wait.mjs';
 import { shapeFuelBlock } from '../scripts/lib/canton-hubs/blocks-fuel.mjs';
@@ -277,7 +277,7 @@ test('canton-ti, canton-gr e canton-be: 6 hub ciascuno, 4 locali, forma del rend
       for (const locale of HUB_LOCALES) {
         const input = hub.locales[locale];
         // La firma di CantonTopicHubInput, campo per campo e nient'altro.
-        assert.deepEqual(Object.keys(input), ['canton', 'topic', 'locale', 'intro', 'keyFacts', 'dataBlocks', 'curatedArticles', 'links', 'updatedAt']);
+        assert.deepEqual(Object.keys(input), ['canton', 'topic', 'locale', 'intro', 'keyFacts', 'dataBlocks', 'curatedArticles', 'latestCantonArticles', 'links', 'updatedAt']);
         assert.equal(input.canton, canton);
         assert.equal(input.topic, topic);
         assert.equal(input.locale, locale);
@@ -286,6 +286,8 @@ test('canton-ti, canton-gr e canton-be: 6 hub ciascuno, 4 locali, forma del rend
         assert.ok(input.links.length >= 2, `${section}/${topic}/${locale}: almeno due strumenti`);
         assert.ok(input.keyFacts.length <= CONFIG.maxKeyFacts);
         assert.ok(input.curatedArticles.length <= CONFIG.maxCuratedArticles);
+        assert.ok(input.latestCantonArticles.length <= 5);
+        if (input.curatedArticles.length > 0) assert.deepEqual(input.latestCantonArticles, []);
       }
       // Stessa struttura in tutte le locali: stessi blocchi, stesso numero di righe, stesse news.
       for (const locale of HUB_LOCALES.slice(1)) {
@@ -293,6 +295,7 @@ test('canton-ti, canton-gr e canton-be: 6 hub ciascuno, 4 locali, forma del rend
         assert.deepEqual(hub.locales[locale].dataBlocks.map((b) => b.items.length), hub.locales.it.dataBlocks.map((b) => b.items.length));
         assert.equal(hub.locales[locale].keyFacts.length, hub.locales.it.keyFacts.length);
         assert.equal(hub.locales[locale].curatedArticles.length, hub.locales.it.curatedArticles.length);
+        assert.equal(hub.locales[locale].latestCantonArticles.length, hub.locales.it.latestCantonArticles.length);
       }
       assert.deepEqual(hub.blocks.map((b) => b.id), blockIds(hub));
     }
@@ -354,6 +357,7 @@ test('nessun noindex: ne\' nel file ne\' fra i campi, anche senza un solo blocco
         assert.deepEqual(input.dataBlocks, []);
         assert.deepEqual(input.keyFacts, []);
         assert.deepEqual(input.curatedArticles, []);
+        assert.deepEqual(input.latestCantonArticles, []);
         // La pagina si regge sull'intro evergreen: sopra la soglia del renderer.
         assert.doesNotThrow(() => validateHubInput(input));
         const words = input.intro.split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w)).length;
@@ -695,6 +699,23 @@ test('il bacino e\' la sezione del cantone piu\' frontaliere/svizzera etichettat
   const be = await curatedFor('canton-be');
   assert.deepEqual(idsOf(be.byTopic.fisco), ['imposte-berna']);
   assert.deepEqual(idsOf(be.byTopic.pensioni), ['avs-berna']);
+});
+
+test('il fallback neutrale privilegia la sezione cantonale e completa con le sezioni storiche', () => {
+  const articles = [
+    article('ti-own-older', 'canton-ti', 'Notizia propria meno recente', 'Notizia del cantone.', { days: 20 }),
+    article('ti-own-newer', 'canton-ti', 'Notizia propria recente', 'Notizia del cantone.', { days: 10 }),
+    article('ti-historical-1', 'frontaliere', 'Notizia storica uno', 'Notizia attribuita al cantone.', { cantons: ['TI'], days: 1 }),
+    article('ti-historical-2', 'svizzera', 'Notizia storica due', 'Notizia attribuita al cantone.', { cantons: ['TI'], days: 2 }),
+    article('ti-historical-3', 'frontaliere', 'Notizia storica tre', 'Notizia attribuita al cantone.', { cantons: ['TI'], days: 3 }),
+    article('ti-historical-4', 'svizzera', 'Notizia storica quattro', 'Notizia attribuita al cantone.', { cantons: ['TI'], days: 4 }),
+  ];
+  const root = writeCorpus(tmpRoot(), articles);
+  const pool = loadCantonPool(root, 'canton-ti');
+  assert.deepEqual(
+    idsOf(selectLatestCantonArticles({ pool, section: 'canton-ti', nowMs: NOW })),
+    ['ti-own-newer', 'ti-own-older', 'ti-historical-1', 'ti-historical-2', 'ti-historical-3'],
+  );
 });
 
 test('evidenza diretta multi-tema: una news entra in ogni hub pertinente e non in temi sfiorati', async () => {
@@ -1228,7 +1249,7 @@ test('la soglia di parole e la firma dell\'hub sono quelle del renderer dell\'en
   };
   const built = buildOne('canton-ti', 'servizi').file.locales.it;
   assert.deepEqual(Object.keys(built), fieldsOf('CantonTopicHubInput'));
-  const allowed = { keyFacts: fieldsOf('CantonHubKeyFact'), dataBlocks: fieldsOf('CantonHubDataBlock'), links: fieldsOf('CantonHubLink'), curatedArticles: fieldsOf('CantonHubArticle') };
+  const allowed = { keyFacts: fieldsOf('CantonHubKeyFact'), dataBlocks: fieldsOf('CantonHubDataBlock'), links: fieldsOf('CantonHubLink'), curatedArticles: fieldsOf('CantonHubArticle'), latestCantonArticles: fieldsOf('CantonHubArticle') };
   for (const hubTopic of CANTON_HUB_TOPIC_KEYS) {
     const input = buildOne('canton-ti', hubTopic).file.locales.de;
     for (const [list, fields] of Object.entries(allowed)) {
