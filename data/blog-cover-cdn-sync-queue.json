@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.webp",
+      "sha256": "83bc8f7ccfd1ed991ce266785f4cf1ba1d5f4a2ca83bba7a07aa1bd2cb8ef878"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti-480w.webp",
+      "sha256": "2cd43168f30b59e74ed37f4da29fb156247543d855fb7ed86a26f481e0979fd9"
+    }
+  ]
 }
