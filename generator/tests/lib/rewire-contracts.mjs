@@ -563,7 +563,7 @@ export const REWIRE_CONTRACTS = [
     ],
     producedUnread: ['taxAuthority', 'deadlines', 'deadlinesSource'],
     productionFetch: {
-      workflows: ['refresh-canton-hubs.yml'],
+      workflows: ['generate-article-core.yml', 'generate-article.yml', 'refresh-canton-hubs.yml'],
     },
     notJsonExpect: /did not return JSON/,
   },
@@ -624,7 +624,7 @@ export const REWIRE_CONTRACTS = [
     ],
     producedUnread: ['sources', 'unemployment'],
     productionFetch: {
-      workflows: ['refresh-canton-hubs.yml'],
+      workflows: ['generate-article-core.yml', 'generate-article.yml', 'refresh-canton-hubs.yml'],
     },
     notJsonExpect: /did not return JSON/,
   },

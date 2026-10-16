@@ -845,6 +845,16 @@ jobs:
       - name: Load secrets from Remote Config
         run: node generator/scripts/load-rc-env.mjs
 
+      # Le sezioni cantonali leggono queste cache nel brief di fattualita'. Il
+      # refresh e' hard-gated: generare con una cache assente o vecchia
+      # trasformerebbe il prompt in una sorgente non verificata.
+      - name: Refresh annual canton facts for the article brief
+        if: steps.mode.outputs.dry != 'true' && startsWith(steps.mode.outputs.section, 'canton-')
+        run: |
+          set -euo pipefail
+          npm run refresh:canton-tax
+          npm run refresh:pension-parameters
+
       # ── IL CLI CON UN CONTESTO CAPACE (issue #313 / #348) ─────────────────
       #
       # Va DOPO «Load secrets from Remote Config», e non prima: l'action legge

@@ -343,11 +343,13 @@ import {
   cantonClassifierPrompt,
   cantonHeadlineSelectionPrompt,
   cantonPromptLines,
+  cantonSectionProfile,
   cantonSectionConfigs,
   cantonSectionSkeletons,
   filterCantonSourceHeadlines,
   resolveCantonSectionGate,
 } from './lib/canton-section-profile.mjs';
+import { loadCantonFactsBrief } from './lib/canton-facts-brief.mjs';
 import {
   CANTON_SOURCE_USER_AGENT,
   createHostThrottle,
@@ -3515,6 +3517,16 @@ const IS_FRONTALIERE = SECTION_PROFILE.kind === 'frontaliere';
 const IS_CANTON = SECTION_PROFILE.kind === 'canton';
 // Testi di prompt e log della sezione cantonale; null altrove.
 const CANTON_LINES = IS_CANTON ? cantonPromptLines(SECTION_PROFILE) : null;
+// Le cifre indicizzate non sono scritte nel prompt: arrivano dalle due cache
+// REWIRE appena rinfrescate dal workflow cantonale. Per i gruppi (Appenzello,
+// Basilea) `members` mantiene separati i cantoni invece di fondere i numeri.
+const CANTON_FACTS_BRIEF = IS_CANTON
+  ? loadCantonFactsBrief({
+    root: PROJECT_ROOT,
+    canton: SECTION.canton,
+    members: cantonSectionProfile(SECTION_NAME).members,
+  })
+  : '';
 
 // ── --dry-run-scan ──
 // Misura una sezione senza toccarla: scansione delle fonti, recency e quota
@@ -6180,10 +6192,15 @@ const EVERGREEN_FACTS_BRIEF_CH = `FATTI VERIFICATI (ground truth — il fact-che
 - Acronimi/enti VALIDI (non inventarne altri): SECO, SEM, UST/BFS, UFSP/BAG, AFC/ESTV, UFAS/BSV, SUVA, BNS/SNB, UDSC, Fedpol, ARE, USTAT (Ticino).
 - Cifre indicizzate ogni anno (massimale 3° pilastro 3a, soglia/deduzione coordinamento LPP, massimale AD/AC, premi medi LAMal, salario mediano): NON dare importi precisi se incerto sull'anno; spiega il meccanismo, rimanda alla fonte ufficiale.`;
 
-// I due brief nella forma che serve a `stripInjectedBriefs`. Un array, non due
-// costanti nominate al call-site: cosi' aggiungere una terza sezione domani
-// non lascia indietro il denominatore del gate di recall.
-const EVERGREEN_FACTS_BRIEFS = [EVERGREEN_FACTS_BRIEF, EVERGREEN_FACTS_BRIEF_CH];
+// I brief nella forma che serve a `stripInjectedBriefs`. Il terzo elemento e'
+// presente solo per una sezione cantonale con cache valida: il denominatore
+// deve togliere sia il blocco annuale dinamico sia il brief nazionale che lo
+// segue, senza introdurre una dipendenza dalla cache nei test estratti.
+const EVERGREEN_FACTS_BRIEFS = [
+  EVERGREEN_FACTS_BRIEF,
+  EVERGREEN_FACTS_BRIEF_CH,
+  ...(typeof CANTON_FACTS_BRIEF === 'string' && CANTON_FACTS_BRIEF.length > 0 ? [CANTON_FACTS_BRIEF] : []),
+];
 
 /**
  * Il brief da iniettare per una sezione. PURA e nominata apposta: il difetto
@@ -6196,12 +6213,22 @@ const EVERGREEN_FACTS_BRIEFS = [EVERGREEN_FACTS_BRIEF, EVERGREEN_FACTS_BRIEF_CH]
  * al comportamento precedente invece di consegnare un ground truth svizzero a
  * un articolo frontaliero.
  */
-export function evergreenFactsBriefFor(sectionName) {
+export function evergreenFactsBriefFor(sectionName, cantonFactsBrief = '') {
+  // `typeof` keeps the extracted, dependency-free test block compatible with
+  // the runtime-only cache value declared by the generator module.
+  const facts = cantonFactsBrief || (typeof CANTON_FACTS_BRIEF === 'string' ? CANTON_FACTS_BRIEF : '');
   // Le sezioni cantonali (`canton-<codice>`, P6b) ricevono il brief svizzero:
   // il loro ground truth e' federale e cantonale, non quello frontaliere
   // Ticino-Italia. I fatti per cantone (fisco, pensioni) arrivano dai dataset
-  // di categoria (P9d/P9e), non da qui. Resta una funzione PURA del nome.
-  if (String(sectionName || '').startsWith('canton-')) return EVERGREEN_FACTS_BRIEF_CH;
+  // di categoria (P9d/P9e), non da cifre scritte a mano. Metterli prima del
+  // brief nazionale fa si' che il tetto del ramo news conservi i dati scelti
+  // dal cantone. Nei test estratti il secondo argomento resta esplicito; nel
+  // generatore reale il fallback legge la cache caricata per la sezione.
+  if (String(sectionName || '').startsWith('canton-')) {
+    return facts
+      ? `${facts}\n\n${EVERGREEN_FACTS_BRIEF_CH}`
+      : EVERGREEN_FACTS_BRIEF_CH;
+  }
   return sectionName === 'svizzera' ? EVERGREEN_FACTS_BRIEF_CH : EVERGREEN_FACTS_BRIEF;
 }
 
@@ -6311,7 +6338,12 @@ export function buildFactCheckCallOptions(baseOpts, cacheEnabled = isFactCheckCa
 // run over the WHOLE text regardless of this cap.
 const MAX_FACTCHECK_ARTICLE_CHARS = 24000;
 
-async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '') {
+function verifiedCantonFactsBlock(referenceText = '') {
+  if (typeof referenceText !== 'string' || !referenceText.trim()) return '';
+  return `\nFATTI ANNUALI VERIFICATI DEL CANTONE (riferimento canonico separato dalla fonte originale; confronta qui aliquote e valori annuali, senza attribuirli alla fonte):\n"""\n${referenceText.trim()}\n"""\n`;
+}
+
+async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '', verifiedReferenceText = '') {
   const articleText = [
     contentIt?.title || '',
     contentIt?.excerpt || '',
@@ -6339,6 +6371,7 @@ ${articleText.slice(0, MAX_FACTCHECK_ARTICLE_CHARS)}
 ${isEvergreen ? 'NOTA: Articolo evergreen senza fonte specifica. Verifica basandoti sulle tue conoscenze del dominio e sui fatti di riferimento sotto. Per evergreen, NON segnalare come issue un fatto solo perché non compare in una fonte originale: segnala solo se è falso, contraddetto dai fatti verificati, troppo specifico senza attribuzione, o presentato come caso reale non verificato.' : `FONTE ORIGINALE (l'articolo doveva basarsi su questo testo):\n"""\n${sourceContent.slice(0, 6000)}\n"""`}
 
 ${VERIFIED_DOMAIN_FACTS}
+${verifiedCantonFactsBlock(verifiedReferenceText)}
 
 VERIFICA SISTEMATICA — controlla OGNI categoria:
 
@@ -10555,8 +10588,10 @@ Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico d
   // intero), qui e' materiale di CONTESTO facoltativo («usali solo se
   // pertinenti al tema», sopra) — troncarlo per intere righe di elenco non
   // toglie un presidio anti-allucinazione, toglie solo fatti opzionali in coda.
+  // Per le sezioni cantonali il brief annuale selezionato viene anteposto al
+  // testo nazionale, cosi' il limite conserva prima fisco e previdenza locali.
   const MAX_DOMAIN_FACTS_CHARS = 1600;
-  const domainFactsBrief = evergreenFactsBriefFor(SECTION_NAME);
+  const domainFactsBrief = evergreenFactsBriefFor(SECTION_NAME, CANTON_FACTS_BRIEF);
   const truncatedDomainFactsBrief = domainFactsBrief.length > MAX_DOMAIN_FACTS_CHARS
     ? domainFactsBrief.slice(0, MAX_DOMAIN_FACTS_CHARS).replace(/\n-[^\n]*$/, '') + '\n[...altri fatti di dominio omessi per brevità]'
     : domainFactsBrief;
@@ -18282,7 +18317,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
 
     // Step 3a.0c: LLM fact verification — PRIMARY BLOCKING GATE
     try {
-      const factResult = await llmFactCheck(data.content.it, pageContent, url);
+      const factResult = await llmFactCheck(data.content.it, pageContent, url, CANTON_FACTS_BRIEF);
       if (!factResult.passed) {
         // Ledger only. These categories never reach the defect memory and can
         // never promote anything: they are the verifier's opinion, and the
@@ -18460,7 +18495,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         let expandFactOk = true;
         let expandFactIssues = null;
         try {
-          const expandFactResult = await llmFactCheck(data.content.it, pageContent, url);
+          const expandFactResult = await llmFactCheck(data.content.it, pageContent, url, CANTON_FACTS_BRIEF);
           if (!expandFactResult.passed) {
             for (const i of expandFactResult.issues || []) {
               const cat = String(i?.category || 'uncategorized');
@@ -18857,6 +18892,23 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   } finally {
     delete data._sourceUrl;
     delete data._sourceText;
+  }
+
+  // The ordinary blocking fact-check runs before translation/CTA/citation and
+  // can therefore miss a final mutation. Re-check canton evergreen articles
+  // against the same annual cache-backed brief at the last pre-write gate. The
+  // brief is a verified reference, never `sourceContent`: evergreen source
+  // fidelity must remain disabled for generated research briefs.
+  if (IS_CANTON && CANTON_FACTS_BRIEF && url.startsWith('evergreen://')) {
+    const finalCantonFactResult = await llmFactCheck(data.content.it, '', url, CANTON_FACTS_BRIEF);
+    if (!finalCantonFactResult.passed) {
+      const issuesSummary = (finalCantonFactResult.issues || [])
+        .map((issue) => `[${issue.category || '?'}] "${String(issue.claim || '').slice(0, 60)}" — ${String(issue.reason || '').slice(0, 80)}`)
+        .join('; ');
+      const error = new Error(`Articolo cantonale evergreen rigettato dal gate finale: ${issuesSummary}`);
+      error.qualityReject = true;
+      throw error;
+    }
   }
 
   // Step 3b: Generate article image through the governed engine.

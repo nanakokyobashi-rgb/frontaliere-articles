@@ -122,6 +122,17 @@ test('la sezione frontaliere continua a ricevere il proprio brief (nessuna regre
   assert.equal(B.evergreenFactsBriefFor('sezione-che-non-esiste'), B.EVERGREEN_FACTS_BRIEF);
 });
 
+test('il brief dinamico cantonale entra nel denominatore solo quando viene passato intero allo strip', () => {
+  const facts = 'FATTI ANNUALI VERIFICATI DEL CANTONE:\n- Fisco TI, dataset 2026: aliquota verificata 14,43%.';
+  const brief = B.evergreenFactsBriefFor('canton-ti', facts);
+  assert.match(brief, /^FATTI ANNUALI VERIFICATI DEL CANTONE:/);
+  assert.match(brief, /FATTI VERIFICATI \(ground truth/);
+
+  const source = `testo sintetico\n${brief}\nistruzioni finali`;
+  const stripped = B.stripInjectedBriefs(source, [brief]);
+  assert.equal(stripped, 'testo sintetico\n\n\nistruzioni finali');
+});
+
 test('il brief svizzero e\' davvero nazionale: enti federali, nessun tema frontaliere', () => {
   const ch = B.EVERGREEN_FACTS_BRIEF_CH;
   for (const ente of ['AFC/ESTV', 'SEM', 'UFAS/BSV', 'UST/BFS', 'LAMal']) {
