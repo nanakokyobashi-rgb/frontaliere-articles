@@ -5194,12 +5194,12 @@
     },
     {
       "path": "scripts/lib/published-slug-guard.mjs",
-      "mode": "corpus-only",
-      "reason": "Guardia unica del confine di pubblicazione: rifiuta i segmenti riservati `null`/`undefined` nei builder di sitemap, news-candidates, slugs API e URL canonicali. Il sito consuma queste mappe via HTTP e non ha un gemello del modulo; la validazione appartiene al publisher del corpus, quindi non e' `corpus-only-pending`.",
+      "mode": "adapted",
+      "reason": "Il gemello esiste anche nel sito, quindi `corpus-only` era una classificazione falsa che lasciava il modulo fuori dal controllo di loop-drift. I due contratti sono adattati: il sito esporta la sola guardia booleana usata dal pull API, mentre il corpus aggiunge le regole nominate dei marker di servizio e le API diagnostiche per id e slug localizzati, usate dai gate del publisher. La decisione di ownership e il residuo di #339 restano osservabili senza copiare artifact o sovrascrivere l'adattamento del corpus.",
       "baseline": {
-        "site": null,
-        "corpus": "3a0c8c2e14a2bfa0",
-        "alignedAt": "2026-09-08"
+        "site": "5b8ea324aa6752d0",
+        "corpus": "2b87fed4fff6f16b",
+        "alignedAt": "2026-10-16"
       }
     },
     {
