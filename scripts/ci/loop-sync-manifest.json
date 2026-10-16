@@ -4041,7 +4041,7 @@
     {
       "path": "host/tests/shell-contract-env.mjs",
       "mode": "corpus-only",
-      "reason": "Normalizzazione dell'ambiente per i due gate che pinnano SiteShellContract (issue #788): il digest degli scalari copre `cdnPreconnectHint`, che `host/constants.ts` deriva da `process.env.ASSET_CDN` a module-evaluation time, quindi senza azzerarlo il gate cross-repo dipende dall'ambiente del runner. Artefatto di questo lato: nessun omonimo sul sito.",
+      "reason": "Normalizzazione dell'ambiente per i due gate che pinnano SiteShellContract (issue #788): il getter di `host/siteShellBootstrap.ts` risolve `cdnPreconnectHint` da `process.env.ASSET_CDN` quando l'engine legge il contratto, quindi i test azzerano l'ambiente prima di leggere gli scalari per mantenere il digest cross-repo indipendente dal runner. Artefatto di questo lato: nessun omonimo sul sito.",
       "baseline": {
         "site": null,
         "corpus": "940356862207405b",

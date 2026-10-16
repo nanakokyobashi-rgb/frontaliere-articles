@@ -4,19 +4,18 @@
  * IL DIFETTO (follow-up di #764, issue #788). `host/shell-contract-fingerprint.json`
  * registra lo SHA-256 dei 22 scalari di `SiteShellContract`, e uno di quei
  * scalari — `cdnPreconnectHint` — `host/constants.ts` lo deriva da
- * `process.env.ASSET_CDN` in una IIFE valutata al primo import. Il digest
+ * `process.env.ASSET_CDN` quando il bootstrap legge il campo. Il digest
  * risultava quindi funzione della sorgente E dell'ambiente del runner:
  * esportare `ASSET_CDN` faceva sparare «host chrome drifted from the main
  * repo», cioè una diagnosi FALSA su un gate cross-repo. La variabile non è
  * esotica in questo repo: `scripts/publish-article-fast.mjs` la imposta di
  * proposito prima di caricare lo stesso bootstrap.
  *
- * PERCHÉ UN TEST QUI E NON SOLO LA FIX. La fix è una riga al top dei due file di
- * `host/tests/`, e una riga al top di un file di test è esattamente ciò che una
- * riorganizzazione degli import sposta in buona fede sotto il primo `import` del
- * bootstrap — dove è un no-op silenzioso (la valutazione del modulo è cachata
- * per processo). Questo test difende l'ORDINE e la COMPLETEZZA della lista, e
- * gira offline su testo sorgente.
+ * PERCHÉ UN TEST QUI E NON SOLO LA FIX. La baseline dei test pinnati deve restare
+ * vuota anche quando il runner esporta ASSET_CDN. Il resolver dinamico elimina
+ * la dipendenza dall'ordine di import; i test mantengono comunque la
+ * normalizzazione esplicita prima del bootstrap, e questo controllo ne difende
+ * la posizione e la completezza della lista. Gira offline su testo sorgente.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -56,7 +55,7 @@ const NOT_REACHING_CONTRACT = {
     'contratto pinna la forma del WriteCollector, non la sua strategia di conservazione.',
 };
 
-test('ogni test che pinna il contratto normalizza l\'ambiente PRIMA di importare il bootstrap', () => {
+test('ogni test che pinna il contratto normalizza l\'ambiente prima del bootstrap', () => {
   for (const name of PINNING_TESTS) {
     const src = fs.readFileSync(path.join(HOST_TESTS, name), 'utf-8');
     const callAt = src.indexOf('normalizeContractEnv()');
@@ -66,16 +65,15 @@ test('ogni test che pinna il contratto normalizza l\'ambiente PRIMA di importare
         'process.env.ASSET_CDN e il gate cross-repo accusa l\'altro repo di un drift inesistente (#788).',
     );
     // Il primo import del bootstrap, in QUALUNQUE forma (statica o dinamica),
-    // deve venire dopo: dopo di lui il delete non ha più effetto. Cerca
+    // viene dopo per rendere esplicita la fixture di baseline. Cerca
     // l'ESPRESSIONE di import, non il nome: entrambi i file nominano il
     // bootstrap in prosa nell'intestazione, molto prima di importarlo.
     const importAt = src.search(/(?:import\s*\(|from)\s*['"][^'"]*siteShellBootstrap/);
     assert.ok(importAt > 0, `${name} non importa il bootstrap: il test non pinna più niente?`);
     assert.ok(
       callAt < importAt,
-      `${name}: normalizeContractEnv() è chiamata DOPO il primo riferimento al bootstrap. ` +
-        'La valutazione del modulo è cachata per processo, quindi lì il delete è un no-op ' +
-        'silenzioso — il gate sembra normalizzato e non lo è.',
+      `${name}: normalizeContractEnv() è chiamata DOPO il primo riferimento al bootstrap; ` +
+        'la baseline deve essere fissata prima che il test legga il contratto.',
     );
   }
 });

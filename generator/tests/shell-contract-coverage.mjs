@@ -29,6 +29,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { CDN_BASE } from '../../scripts/lib/declared-image-fetch.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -103,14 +104,24 @@ if (declared.length < 20) {
   process.exit(1);
 }
 
-// Same ordering publish-article-fast.mjs uses: ASSET_CDN before the bootstrap,
-// because host/constants.ts derives CDN_PRECONNECT_HINT at module-evaluation
-// time and a later assignment is a no-op.
-process.env.ASSET_CDN ||= 'https://cdn.frontaliereticino.ch';
-
+// Import the full host bootstrap before setting ASSET_CDN. The contract's
+// getter must resolve the source-backed CDN when the engine reads the field,
+// regardless of bootstrap import order.
+const originalAssetCdn = process.env.ASSET_CDN;
+delete process.env.ASSET_CDN;
 await import(path.join(ROOT, 'host', 'siteShellBootstrap.ts'));
+process.env.ASSET_CDN = `${CDN_BASE}/shell-contract/assets///`;
 const { getSiteShell } = await import(path.join(ROOT, 'engine', 'siteShell.ts'));
 const shell = getSiteShell();
+const expectedCdnOrigin = new URL(CDN_BASE).origin;
+const expectedCdnHint = `<link rel="preconnect" href="${expectedCdnOrigin}" crossorigin>`;
+
+if (shell.cdnPreconnectHint !== expectedCdnHint) {
+  console.error(
+    `::error::cdnPreconnectHint did not resolve ASSET_CDN after bootstrap import: ${shell.cdnPreconnectHint}`,
+  );
+  process.exit(1);
+}
 
 const missing = declared.filter((k) => !(k in shell) || shell[k] === undefined);
 
@@ -128,3 +139,6 @@ if (missing.length) {
 }
 
 console.log('[shell-contract] host/ satisfies the mirrored engine contract');
+
+if (originalAssetCdn === undefined) delete process.env.ASSET_CDN;
+else process.env.ASSET_CDN = originalAssetCdn;

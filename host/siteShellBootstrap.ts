@@ -48,7 +48,7 @@ import {
   OFFERWALL_FC_SNIPPET,
   FAVICON_LINKS,
   SEO_STATIC_CSS_FILENAME,
-  CDN_PRECONNECT_HINT,
+  resolveCdnPreconnectHint,
 } from './constants';
 import { asyncCssLink, ASYNC_CSS_FALLBACK_SCRIPT, esc, asyncCssHeadBlock, rootShell } from './htmlTemplate';
 import { WriteCollector } from './batchWrite';
@@ -97,7 +97,9 @@ const contract: SiteShellContract = {
   offerwallFcSnippet: OFFERWALL_FC_SNIPPET,
   faviconLinks: FAVICON_LINKS,
   seoStaticCssFilename: SEO_STATIC_CSS_FILENAME,
-  cdnPreconnectHint: CDN_PRECONNECT_HINT,
+  get cdnPreconnectHint() {
+    return resolveCdnPreconnectHint();
+  },
 
   asyncCssLink,
   asyncCssFallbackScript: ASYNC_CSS_FALLBACK_SCRIPT,
