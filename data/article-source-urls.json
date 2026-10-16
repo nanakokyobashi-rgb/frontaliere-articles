@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4064238": {
-    "articleId": "disoccupazione-stabile-ticino-agosto-2024",
-    "ts": "2026-09-07T08:19:50.133Z",
-    "keyForm": 2
-  },
   "https://www.ticinonews.ch/ticino/disoccupazione-stabile-nel-mese-di-agosto-442099": {
     "articleId": "disoccupazione-stabile-agosto-2023",
     "ts": "2026-09-07T08:38:51.644Z",
@@ -2497,6 +2492,11 @@
   "https://www.ocst.ch/il-lavoro/548-approfondimenti/2618-industria-il-futuro-del-settore-sta-nelle-persone": {
     "articleId": "industria-ticino-futuro-lavoro",
     "ts": "2026-10-16T20:29:57.939Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/la1/programmi/informazione/patti-chiari/cadenazzo-si-accendono-semafori%e2%80%a6-e-proteste--4160668.html": {
+    "articleId": "semafori-cadenazzo-proteste-ustra",
+    "ts": "2026-10-16T21:09:58.071Z",
     "keyForm": 2
   }
 }
