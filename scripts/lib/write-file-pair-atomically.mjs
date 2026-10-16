@@ -1,7 +1,28 @@
+import { createHash, randomUUID } from 'node:crypto';
 import fs from 'node:fs';
+import { hostname } from 'node:os';
 import path from 'node:path';
 
 let temporarySequence = 0;
+
+const WRITER_LOCK_NAME = '.registry-pair-write.lock';
+const RECOVERY_LOCK_NAME = '.registry-pair-recovery.lock';
+const JOURNAL_NAME = '.registry-pair-write.journal.json';
+const JOURNAL_VERSION = 1;
+
+function digest(value) {
+  return createHash('sha256').update(value, 'utf8').digest('hex');
+}
+
+function pathExists(fsImpl, file) {
+  try {
+    fsImpl.lstatSync(file);
+    return true;
+  } catch (error) {
+    if (error?.code === 'ENOENT') return false;
+    throw error;
+  }
+}
 
 function removeTemporaryFile(fsImpl, file, errors) {
   try {
@@ -16,15 +37,257 @@ function throwWithRelatedErrors(error, relatedErrors, message) {
   throw new AggregateError([error, ...relatedErrors], `${message} (${relatedErrors.length} errori aggiuntivi)`);
 }
 
-function restoreAtomically(fsImpl, file, content) {
-  const tmp = `${file}.${process.pid}.${temporarySequence++}.pair-rollback.tmp`;
+function writeJsonAtomically(fsImpl, file, value) {
+  const tmp = `${file}.${process.pid}.${temporarySequence++}.tmp`;
+  let fd = null;
   try {
-    fsImpl.writeFileSync(tmp, content, 'utf8');
+    fd = fsImpl.openSync(tmp, 'wx', 0o600);
+    fsImpl.writeFileSync(fd, `${JSON.stringify(value)}\n`, 'utf8');
+    fsImpl.closeSync(fd);
+    fd = null;
+    fsImpl.renameSync(tmp, file);
+  } catch (error) {
+    const cleanupErrors = [];
+    if (fd !== null) {
+      try {
+        fsImpl.closeSync(fd);
+      } catch (closeError) {
+        cleanupErrors.push(closeError);
+      }
+    }
+    removeTemporaryFile(fsImpl, tmp, cleanupErrors);
+    throwWithRelatedErrors(error, cleanupErrors, `scrittura atomica di ${file} incompleta`);
+  }
+}
+
+function readJsonFile(fsImpl, file, label) {
+  let text;
+  try {
+    text = fsImpl.readFileSync(file, 'utf8');
+  } catch (error) {
+    throw new Error(`${label}: impossibile leggere ${file}`, { cause: error });
+  }
+  try {
+    return JSON.parse(text);
+  } catch (error) {
+    throw new Error(`${label}: JSON non valido in ${file}`, { cause: error });
+  }
+}
+
+function validPid(pid) {
+  return Number.isSafeInteger(pid) && pid > 0;
+}
+
+function validHost(value) {
+  return typeof value === 'string' && value.length > 0 && !/[\r\n]/u.test(value);
+}
+
+function validTransactionId(value) {
+  return typeof value === 'string'
+    && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/iu.test(value);
+}
+
+function isProcessAlive(pid) {
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch (error) {
+    // EPERM and unexpected errors are treated as live/unknown. Recovery must
+    // fail closed unless absence is positively established with ESRCH.
+    return error?.code !== 'ESRCH';
+  }
+}
+
+function writerLockRecord(pid, transactionId, host) {
+  return { version: JOURNAL_VERSION, pid, host, transactionId };
+}
+
+function readWriterLock(fsImpl, lockFile) {
+  const record = readJsonFile(fsImpl, lockFile, 'lock della coppia');
+  if (record?.version !== JOURNAL_VERSION
+      || !validPid(record.pid)
+      || !validHost(record.host)
+      || !validTransactionId(record.transactionId)) {
+    throw new Error(`lock della coppia non verificabile (${lockFile}); recovery manuale necessaria`);
+  }
+  return record;
+}
+
+function isJournalTemporaryName(name) {
+  const prefix = `${JOURNAL_NAME}.`;
+  if (!name.startsWith(prefix) || !name.endsWith('.tmp')) return false;
+  return /^\d+\.\d+\.tmp$/u.test(name.slice(prefix.length));
+}
+
+function journalTemporaryNames(fsImpl, directory) {
+  return fsImpl.readdirSync(directory).filter(isJournalTemporaryName);
+}
+
+function assertNoPendingRecovery(fsImpl, directory) {
+  const recoveryLock = path.join(directory, RECOVERY_LOCK_NAME);
+  if (pathExists(fsImpl, recoveryLock)) {
+    throw new Error(`recovery della coppia in corso o lock recovery residuo (${recoveryLock})`);
+  }
+  const journal = path.join(directory, JOURNAL_NAME);
+  const journalTemps = journalTemporaryNames(fsImpl, directory);
+  if (pathExists(fsImpl, journal) || journalTemps.length > 0) {
+    throw new Error(`journal della coppia presente (${journal}); esegui recoverInterruptedRegistryPair() dopo aver verificato i writer`);
+  }
+}
+
+function expectedStagingFile(file, pid, stagingFile, directory) {
+  if (typeof stagingFile !== 'string' || path.dirname(stagingFile) !== directory) return false;
+  const name = path.basename(stagingFile);
+  const prefix = `${path.basename(file)}.${pid}.`;
+  if (!name.startsWith(prefix) || !name.endsWith('.pair.tmp')) return false;
+  return /^\d+$/u.test(name.slice(prefix.length, -'.pair.tmp'.length));
+}
+
+function validateJournal(fsImpl, directory, journal) {
+  if (journal?.version !== JOURNAL_VERSION
+      || !validPid(journal.pid)
+      || !validHost(journal.host)
+      || !validTransactionId(journal.transactionId)
+      || journal.directory !== directory
+      || !['prepared', 'committed', 'recovered'].includes(journal.phase)
+      || !Array.isArray(journal.entries)
+      || journal.entries.length < 1) {
+    throw new Error(`journal della coppia non verificabile in ${directory}; nessun file è stato ripristinato`);
+  }
+
+  const seen = new Set();
+  for (const entry of journal.entries) {
+    if (!entry || typeof entry.file !== 'string' || !path.isAbsolute(entry.file)
+        || path.dirname(entry.file) !== directory
+        || typeof entry.before !== 'string'
+        || entry.beforeSha256 !== digest(entry.before)
+        || typeof entry.afterSha256 !== 'string'
+        || !/^[0-9a-f]{64}$/u.test(entry.afterSha256)) {
+      throw new Error(`snapshot journal non valido in ${directory}; recovery rifiutata senza modifiche`);
+    }
+    let realFile;
+    try {
+      realFile = fsImpl.realpathSync(entry.file);
+    } catch (error) {
+      throw new Error(`target journal non disponibile (${entry.file}); recovery rifiutata`, { cause: error });
+    }
+    if (realFile !== entry.file || seen.has(entry.file)) {
+      throw new Error(`target journal non canonico o duplicato (${entry.file}); recovery rifiutata`);
+    }
+    seen.add(entry.file);
+
+    if (entry.before === undefined || entry.stagingFile === undefined) {
+      throw new Error(`entry journal incompleta (${entry.file}); recovery rifiutata`);
+    }
+    if (entry.beforeSha256 === entry.afterSha256 && entry.stagingFile !== null) {
+      throw new Error(`staging inatteso per un target invariato (${entry.file}); recovery rifiutata`);
+    }
+    if (entry.beforeSha256 !== entry.afterSha256
+        && !expectedStagingFile(entry.file, journal.pid, entry.stagingFile, directory)) {
+      throw new Error(`path di staging non verificabile (${entry.file}); recovery rifiutata`);
+    }
+  }
+  return journal;
+}
+
+function readJournal(fsImpl, directory) {
+  const file = path.join(directory, JOURNAL_NAME);
+  return validateJournal(fsImpl, directory, readJsonFile(fsImpl, file, 'journal della coppia'));
+}
+
+function makeJournal(directory, transactionId, pid, host, canonical, staged) {
+  const stagingByFile = new Map(staged.map((item) => [item.file, item.tmp]));
+  return {
+    version: JOURNAL_VERSION,
+    transactionId,
+    pid,
+    host,
+    directory,
+    phase: 'prepared',
+    entries: canonical.map((change) => ({
+      file: change.file,
+      before: change.before,
+      beforeSha256: digest(change.before),
+      afterSha256: digest(change.after),
+      stagingFile: stagingByFile.get(change.file) ?? null,
+    })),
+  };
+}
+
+function currentSnapshot(fsImpl, journal) {
+  return journal.entries.map((entry) => {
+    const content = fsImpl.readFileSync(entry.file, 'utf8');
+    const sha256 = digest(content);
+    if (content !== entry.before && sha256 !== entry.afterSha256) {
+      throw new Error(`stato ambiguo per ${entry.file}; recovery rifiutata senza modifiche`);
+    }
+    return { entry, content, sha256 };
+  });
+}
+
+function allBefore(snapshot) {
+  return snapshot.every(({ entry, content }) => content === entry.before);
+}
+
+function allAfter(snapshot) {
+  return snapshot.every(({ entry, sha256 }) => sha256 === entry.afterSha256);
+}
+
+function restoreAtomically(fsImpl, file, content, suffix = 'pair-rollback.tmp') {
+  const tmp = `${file}.${process.pid}.${temporarySequence++}.${suffix}`;
+  try {
+    fsImpl.writeFileSync(tmp, content, { encoding: 'utf8', flag: 'wx' });
     fsImpl.renameSync(tmp, file);
   } catch (error) {
     const cleanupErrors = [];
     removeTemporaryFile(fsImpl, tmp, cleanupErrors);
-    throwWithRelatedErrors(error, cleanupErrors, `rollback incompleto per ${file}`);
+    throwWithRelatedErrors(error, cleanupErrors, `ripristino incompleto per ${file}`);
+  }
+}
+
+function restoreBeforeSnapshot(fsImpl, journal, snapshot) {
+  for (const { entry, content } of snapshot) {
+    if (content !== entry.before) restoreAtomically(fsImpl, entry.file, entry.before, 'pair-recovery.tmp');
+  }
+}
+
+function recoveryTemporaryNames(fsImpl, directory, journal) {
+  const names = fsImpl.readdirSync(directory);
+  const targets = journal.entries.map((entry) => path.basename(entry.file));
+  return names.filter((name) => targets.some((target) => {
+    const prefix = `${target}.`;
+    if (!name.startsWith(prefix)) return false;
+    const remainder = name.slice(prefix.length);
+    return /^\d+\.\d+\.pair-recovery\.tmp$/u.test(remainder)
+      || /^\d+\.\d+\.pair-rollback\.tmp$/u.test(remainder);
+  }));
+}
+
+function cleanupRecoveryArtifacts(fsImpl, directory, journal) {
+  const errors = [];
+  for (const entry of journal.entries) {
+    if (entry.stagingFile) removeTemporaryFile(fsImpl, entry.stagingFile, errors);
+  }
+  for (const name of recoveryTemporaryNames(fsImpl, directory, journal)) {
+    removeTemporaryFile(fsImpl, path.join(directory, name), errors);
+  }
+  for (const name of journalTemporaryNames(fsImpl, directory)) {
+    removeTemporaryFile(fsImpl, path.join(directory, name), errors);
+  }
+  if (errors.length > 0) {
+    throw new AggregateError(errors, `cleanup recovery della coppia incompleto (${errors.length} errori)`);
+  }
+}
+
+function assertAllBefore(fsImpl, journal) {
+  if (!journal.entries.every((entry) => fsImpl.readFileSync(entry.file, 'utf8') === entry.before)) {
+    throw new Error('snapshot precedente non ripristinato integralmente; lock e journal mantenuti');
+  }
+}
+
+function assertAllAfter(fsImpl, journal) {
+  if (!journal.entries.every((entry) => digest(fsImpl.readFileSync(entry.file, 'utf8')) === entry.afterSha256)) {
+    throw new Error('snapshot committed non coerente; lock e journal mantenuti');
   }
 }
 
@@ -32,6 +295,7 @@ function releaseWriterLock(fsImpl, lock, errors) {
   let closed = false;
   try {
     fsImpl.closeSync(lock.fd);
+    lock.fd = null;
     closed = true;
   } catch (error) {
     errors.push(error);
@@ -46,11 +310,20 @@ function releaseWriterLock(fsImpl, lock, errors) {
   }
 }
 
+function closeWriterLockKeepingPath(fsImpl, lock, errors) {
+  if (lock.fd === null) return;
+  try {
+    fsImpl.closeSync(lock.fd);
+    lock.fd = null;
+  } catch (error) {
+    errors.push(error);
+  }
+}
+
 function writeStagedFiles(fsImpl, staged) {
   try {
     for (const item of staged) {
-      item.tmp = `${item.file}.${process.pid}.${temporarySequence++}.pair.tmp`;
-      fsImpl.writeFileSync(item.tmp, item.after, 'utf8');
+      fsImpl.writeFileSync(item.tmp, item.after, { encoding: 'utf8', flag: 'wx' });
     }
   } catch (error) {
     const cleanupErrors = [];
@@ -83,15 +356,157 @@ function writeStagedFiles(fsImpl, staged) {
   }
 }
 
+function recoverWhileLocked(fsImpl, directory) {
+  const lockFile = path.join(directory, WRITER_LOCK_NAME);
+  const journalFile = path.join(directory, JOURNAL_NAME);
+  const lockExists = pathExists(fsImpl, lockFile);
+  const journalExists = pathExists(fsImpl, journalFile);
+  const journalTemps = journalTemporaryNames(fsImpl, directory);
+
+  if (!journalExists) {
+    if (lockExists || journalTemps.length > 0) {
+      throw new Error(`lock o journal incompleto senza snapshot verificabile in ${directory}; recovery rifiutata`);
+    }
+    return { recovered: false, state: 'clean' };
+  }
+
+  const journal = readJournal(fsImpl, directory);
+  if (lockExists) {
+    const lock = readWriterLock(fsImpl, lockFile);
+    if (lock.pid !== journal.pid || lock.host !== journal.host || lock.transactionId !== journal.transactionId) {
+      throw new Error(`lock e journal non appartengono alla stessa scrittura in ${directory}; recovery rifiutata`);
+    }
+    if (journal.host !== hostname()) {
+      throw new Error(`writer registrato su un altro host (${journal.host}); assenza verificabile solo sull'host locale`);
+    }
+    if (isProcessAlive(lock.pid)) {
+      throw new Error(`writer ${lock.pid} ancora attivo o non verificabile; recovery rifiutata`);
+    }
+  } else if (journal.phase === 'prepared') {
+    throw new Error(`journal prepared senza lock in ${directory}; stato ambiguo, recovery rifiutata`);
+  } else if (journal.phase === 'committed') {
+    if (journal.host !== hostname()) {
+      throw new Error(`writer registrato su un altro host (${journal.host}); assenza verificabile solo sull'host locale`);
+    }
+    if (isProcessAlive(journal.pid)) {
+      throw new Error(`writer ${journal.pid} ancora attivo o non verificabile; recovery rifiutata`);
+    }
+  }
+
+  const snapshot = currentSnapshot(fsImpl, journal);
+  let outcome;
+  if (journal.phase === 'prepared') {
+    restoreBeforeSnapshot(fsImpl, journal, snapshot);
+    assertAllBefore(fsImpl, journal);
+    journal.phase = 'recovered';
+    writeJsonAtomically(fsImpl, journalFile, journal);
+    outcome = 'restored-before';
+  } else if (journal.phase === 'recovered') {
+    if (!allBefore(snapshot)) {
+      throw new Error(`journal recovered con snapshot non coerente in ${directory}; recovery rifiutata senza modifiche`);
+    }
+    outcome = 'restored-before';
+  } else {
+    if (!allAfter(snapshot)) {
+      throw new Error(`journal committed con snapshot non coerente in ${directory}; recovery rifiutata senza modifiche`);
+    }
+    assertAllAfter(fsImpl, journal);
+    outcome = 'kept-committed';
+  }
+
+  if (outcome === 'restored-before') assertAllBefore(fsImpl, journal);
+  else assertAllAfter(fsImpl, journal);
+  cleanupRecoveryArtifacts(fsImpl, directory, journal);
+
+  if (lockExists) {
+    const latestLock = readWriterLock(fsImpl, lockFile);
+    if (latestLock.pid !== journal.pid || latestLock.host !== journal.host || latestLock.transactionId !== journal.transactionId
+        || isProcessAlive(latestLock.pid)) {
+      throw new Error(`lock cambiato o writer attivo prima della rimozione in ${directory}; lock mantenuto`);
+    }
+    fsImpl.unlinkSync(lockFile);
+  }
+  const journalCleanupErrors = [];
+  removeTemporaryFile(fsImpl, journalFile, journalCleanupErrors);
+  if (journalCleanupErrors.length > 0) {
+    throw new AggregateError(journalCleanupErrors, `rimozione journal recovery incompleta (${journalCleanupErrors.length} errori)`);
+  }
+  return { recovered: true, state: outcome };
+}
+
+function releaseRecoveryLock(fsImpl, lock, errors) {
+  let closed = false;
+  try {
+    fsImpl.closeSync(lock.fd);
+    lock.fd = null;
+    closed = true;
+  } catch (error) {
+    errors.push(error);
+  }
+  if (!closed) return;
+  try {
+    fsImpl.unlinkSync(lock.file);
+  } catch (error) {
+    errors.push(error);
+  }
+}
+
+/**
+ * Explicitly recover a previously interrupted registry write in one directory.
+ * Recovery requires a valid versioned snapshot and a lock whose recorded PID is
+ * positively absent. It restores the pre-write pair (or verifies an already
+ * committed pair), and removes the writer lock only after both targets agree.
+ * It refuses missing, mismatched, or third-state data. The per-file renames are
+ * not a multi-file filesystem transaction, and this journal does not promise
+ * durability across power loss or storage that loses acknowledged writes. A
+ * recovery lock left by a killed recovery is not reclaimed automatically and
+ * requires manual inspection before retrying.
+ */
+export function recoverInterruptedRegistryPair(directory, { fsImpl = fs } = {}) {
+  if (typeof directory !== 'string' || directory.length === 0) {
+    throw new TypeError('recoverInterruptedRegistryPair: directory deve essere un path testuale');
+  }
+  const canonicalDirectory = fsImpl.realpathSync(path.resolve(directory));
+  const recoveryLock = { file: path.join(canonicalDirectory, RECOVERY_LOCK_NAME), fd: null };
+  try {
+    recoveryLock.fd = fsImpl.openSync(recoveryLock.file, 'wx', 0o600);
+  } catch (error) {
+    if (error?.code === 'EEXIST') {
+      throw new Error(`recovery della coppia già attiva o lock recovery residuo (${recoveryLock.file})`, { cause: error });
+    }
+    throw error;
+  }
+
+  try {
+    fsImpl.writeFileSync(recoveryLock.fd, `${JSON.stringify({ version: JOURNAL_VERSION, pid: process.pid })}\n`, 'utf8');
+  } catch (error) {
+    const cleanupErrors = [];
+    releaseRecoveryLock(fsImpl, recoveryLock, cleanupErrors);
+    throwWithRelatedErrors(error, cleanupErrors, 'inizializzazione del lock recovery incompleta');
+  }
+
+  let result;
+  let recoveryError;
+  try {
+    result = recoverWhileLocked(fsImpl, canonicalDirectory);
+  } catch (error) {
+    recoveryError = error;
+  }
+  const releaseErrors = [];
+  releaseRecoveryLock(fsImpl, recoveryLock, releaseErrors);
+  if (recoveryError) throwWithRelatedErrors(recoveryError, releaseErrors, 'recovery della coppia e rilascio lock incompleti');
+  if (releaseErrors.length > 0) {
+    throw new AggregateError(releaseErrors, `recoverInterruptedRegistryPair: rilascio lock incompleto (${releaseErrors.length} errori)`);
+  }
+  return result;
+}
+
 /**
  * Stage all changed files before replacement and roll back earlier renames if
- * a later synchronous operation fails. Writers sharing a directory lock and
- * compare every input snapshot while holding it, preventing stale concurrent
- * invocations from overwriting each other. This is not crash/power-loss
- * atomic; an interrupted process can leave a mixed pair and a lock that needs
- * manual recovery after verifying no writer is still active. Existing targets
- * are canonicalized so symlink aliases cannot be committed twice as if they
- * were distinct files. Cleanup failures are surfaced.
+ * a later synchronous operation fails. A versioned journal lets a later,
+ * explicit recovery restore both snapshots after process interruption. Writers
+ * sharing a directory lock compare every input snapshot while holding it.
+ * Each rename is individually atomic; the pair is not a filesystem transaction.
  */
 export function writeFilePairAtomically(changes, { fsImpl = fs } = {}) {
   if (!Array.isArray(changes)) throw new TypeError('writeFilePairAtomically: changes deve essere un array');
@@ -122,40 +537,110 @@ export function writeFilePairAtomically(changes, { fsImpl = fs } = {}) {
   if (staged.length === 0) return;
 
   const directory = directories.values().next().value;
-  const lock = { file: path.join(directory, '.registry-pair-write.lock'), fd: null };
+  assertNoPendingRecovery(fsImpl, directory);
+  const transactionId = randomUUID();
+  for (const item of staged) {
+    item.tmp = `${item.file}.${process.pid}.${temporarySequence++}.pair.tmp`;
+  }
+
+  const lock = { file: path.join(directory, WRITER_LOCK_NAME), fd: null };
   try {
     lock.fd = fsImpl.openSync(lock.file, 'wx', 0o600);
   } catch (error) {
     if (error?.code === 'EEXIST') {
       throw new Error(
-        `writeFilePairAtomically: lock presente (${lock.file}); verifica un writer attivo o recupera manualmente un lock residuo`,
+        `writeFilePairAtomically: lock presente (${lock.file}); verifica un writer attivo o usa recoverInterruptedRegistryPair() dopo aver verificato il journal`,
         { cause: error },
       );
     }
     throw error;
   }
 
+  const journalFile = path.join(directory, JOURNAL_NAME);
+  const writerHost = hostname();
+  const journal = makeJournal(directory, transactionId, process.pid, writerHost, canonical, staged);
+  let journalPersisted = false;
+  let journalWriteAttempted = false;
   let transactionError;
   try {
-    fsImpl.writeFileSync(lock.fd, `pid=${process.pid}\n`, 'utf8');
+    assertNoPendingRecovery(fsImpl, directory);
+    fsImpl.writeFileSync(lock.fd, `${JSON.stringify(writerLockRecord(process.pid, transactionId, writerHost))}\n`, 'utf8');
     for (const change of canonical) {
       const current = fsImpl.readFileSync(change.file, 'utf8');
       if (current !== change.before) {
         throw new Error(`writeFilePairAtomically: snapshot obsoleto per ${change.file}; rileggi e ripeti il backfill`);
       }
     }
+    journalWriteAttempted = true;
+    writeJsonAtomically(fsImpl, journalFile, journal);
+    journalPersisted = true;
     writeStagedFiles(fsImpl, staged);
+    if (!canonical.every((change) => fsImpl.readFileSync(change.file, 'utf8') === change.after)) {
+      throw new Error('writeFilePairAtomically: verifica post-rename non coerente');
+    }
+    journal.phase = 'committed';
+    writeJsonAtomically(fsImpl, journalFile, journal);
   } catch (error) {
     transactionError = error;
   }
 
+  if (transactionError) {
+    const relatedErrors = [];
+    let unreadablePersistedJournal = false;
+    if (!journalPersisted && journalWriteAttempted && pathExists(fsImpl, journalFile)) {
+      try {
+        const existingJournal = readJournal(fsImpl, directory);
+        if (existingJournal.transactionId === transactionId) {
+          Object.assign(journal, existingJournal);
+          journalPersisted = true;
+        }
+      } catch (error) {
+        relatedErrors.push(error);
+        unreadablePersistedJournal = true;
+      }
+    }
+
+    let safeToRelease = !journalPersisted && !unreadablePersistedJournal;
+    if (journalPersisted) {
+      try {
+        const snapshot = currentSnapshot(fsImpl, journal);
+        restoreBeforeSnapshot(fsImpl, journal, snapshot);
+        assertAllBefore(fsImpl, journal);
+        journal.phase = 'recovered';
+        writeJsonAtomically(fsImpl, journalFile, journal);
+        cleanupRecoveryArtifacts(fsImpl, directory, journal);
+        safeToRelease = true;
+      } catch (error) {
+        relatedErrors.push(error);
+      }
+    }
+    if (journalWriteAttempted && !journalPersisted && journalTemporaryNames(fsImpl, directory).length > 0) {
+      relatedErrors.push(new Error(`journal temporaneo residuo in ${directory}; lock mantenuto`));
+      safeToRelease = false;
+    }
+
+    if (safeToRelease) {
+      const lockErrors = [];
+      releaseWriterLock(fsImpl, lock, lockErrors);
+      relatedErrors.push(...lockErrors);
+      if (lockErrors.length === 0 && journalPersisted) {
+        removeTemporaryFile(fsImpl, journalFile, relatedErrors);
+      }
+    } else {
+      closeWriterLockKeepingPath(fsImpl, lock, relatedErrors);
+    }
+    throwWithRelatedErrors(transactionError, relatedErrors, 'scrittura della coppia e recovery sincrona incomplete');
+  }
+
   const lockCleanupErrors = [];
   releaseWriterLock(fsImpl, lock, lockCleanupErrors);
-  if (transactionError) {
-    throwWithRelatedErrors(transactionError, lockCleanupErrors, 'scrittura della coppia e rilascio lock incompleti');
-  }
   if (lockCleanupErrors.length > 0) {
     throw new AggregateError(lockCleanupErrors, `writeFilePairAtomically: rilascio lock incompleto (${lockCleanupErrors.length} errori)`);
+  }
+  try {
+    fsImpl.unlinkSync(journalFile);
+  } catch (error) {
+    throw new Error(`writeFilePairAtomically: coppia committed ma journal residuo (${journalFile})`, { cause: error });
   }
 }
 
