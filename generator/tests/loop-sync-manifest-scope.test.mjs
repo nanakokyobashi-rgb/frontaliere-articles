@@ -230,6 +230,21 @@ test('gate-minted-followups: il mint corpus rispetta il cooldown fu-parked', () 
   assert.match(entry.reason, /cooldown/);
 });
 
+test('published-slug-guard: il gemello del sito resta dichiarato adapted (#339)', () => {
+  const entry = byPath.get('scripts/lib/published-slug-guard.mjs');
+  assert.ok(entry, 'published-slug-guard.mjs deve restare censito');
+  assert.equal(entry.mode, 'adapted',
+    'il gemello esiste sul sito: corpus-only lo renderebbe invisibile al drift check');
+  assert.equal(entry.sitePath, undefined,
+    'il gemello ha lo stesso path: sitePath sarebbe ridondante');
+  assert.ok(entry.baseline?.site, 'la baseline del sito deve essere attestata');
+  assert.ok(entry.baseline?.corpus, 'la baseline del corpus deve essere attestata');
+  assert.notEqual(entry.baseline.site, entry.baseline.corpus,
+    'i due moduli hanno contratti adattati, non byte identici');
+  assert.match(entry.reason, /#339/);
+  assert.match(entry.reason, /marker|diagnostic/i);
+});
+
 test('atomic-write-json: durability corpus e guardie crawler sito restano adattate (#13307)', () => {
   const entry = byPath.get('generator/scripts/lib/atomic-write-json.mjs');
   assert.ok(entry, 'atomic-write-json.mjs deve restare censito');

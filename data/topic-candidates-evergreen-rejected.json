@@ -600,6 +600,18 @@
       "firstSeenAt": "2026-10-16T10:46:51.527Z",
       "lastValidatedAt": "2026-10-16T10:46:51.527Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere tasse italia svizzera 2026 single",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T13:30:56.156Z",
+      "lastValidatedAt": "2026-10-16T13:30:56.156Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -8925,14 +8937,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/fotovoltaico-boom-di-richieste-dalle-imprese-varesine-esauriti-in-un-giorno-i-280mila-euro-del-bando/2707603": {
-      "section": "frontaliere",
-      "ts": 1791983613803
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/il-novantesimo-supermercato-tigros-apre-a-borgomanero-45-lavoratori-nel-nuovo-negozio-di-via-matteotti/2707177": {
-      "section": "frontaliere",
-      "ts": 1791983942721
-    },
     "frontaliere::https://www.swissinfo.ch/ita/casse-pensioni%2c-pi%c3%b9-investimenti-illiquidi%3a-opportunit%c3%a0-e-rischi/92215997": {
       "section": "frontaliere",
       "ts": 1791989471570
@@ -9224,6 +9228,10 @@
     "frontaliere::https://www.rsi.ch/info/scienza-e-tecnologia/cosa-c%e2%80%99%c3%a8-dietro-le-pubblicit%c3%a0-con-scene-di-sesso-che-infestano-instagram-e-tiktok--4163095.html": {
       "section": "frontaliere",
       "ts": 1792155725871
+    },
+    "frontaliere::https://www.vconews.it/2026/10/16/leggi-notizia/argomenti/scuola-e-formazione-9/articolo/verbania-il-cobianchi-festeggia-140-anni-di-storia-con-una-giornata-dedicata-agli-ex-studenti.html": {
+      "section": "frontaliere",
+      "ts": 1792157163443
     }
   }
 }
