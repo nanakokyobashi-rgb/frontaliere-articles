@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-tre-milioni-lettere-digitali-posta.webp",
-      "sha256": "d0f09fd7416b9ae17d7a1319bbbc1c531854b3fb358a3437a7e6516c4c5ac47d"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-tre-milioni-lettere-digitali-posta-480w.webp",
-      "sha256": "087224507049fee59683e950913d3cbe88fdf664b3a3a26e5f8f5e91ae307495"
-    }
-  ]
+  "items": []
 }
