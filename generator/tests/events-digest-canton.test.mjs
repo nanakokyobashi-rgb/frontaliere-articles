@@ -128,6 +128,28 @@ describe('digest per cantone sulla fixture events-dataset', () => {
     assert.match(article.content.it.body2, /\[Mostra \\\[estate\\\] — bambini\]\(https:\/\/agenda\.example\/events\/mostra-%28serie%29\)/);
   });
 
+  for (const url of [
+    'https://agenda.example/events/mostra (serie)',
+    'https://agenda.example/events/mostra\u0007serie',
+    'nota-url',
+  ]) {
+    it(`does not turn a malformed source URL into a Markdown link: ${JSON.stringify(url)}`, () => {
+      const article = buildWeekendDigestArticle({
+        events: [{
+          id: 'agenda-invalid-url',
+          title: 'Mostra senza link',
+          comune: 'Lugano',
+          startDate: '2027-01-02',
+          url,
+          canton: 'TI',
+        }],
+        todayIso: '2027-01-01',
+      });
+      assert.match(article.content.it.body2, /Mostra senza link/);
+      assert.doesNotMatch(article.content.it.body2, /\]\(https:\/\/agenda\.example\//);
+    });
+  }
+
   it('mantiene il producer operativo con un lone surrogate nell\'ID evento', () => {
     const article = buildWeekendDigestArticle({
       events: [{
