@@ -109374,6 +109374,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-stazione-ffs-coltello-ritrovato': {
+    title: 'Accoltellamento di Biasca, ritrovata l\'arma | Frontaliere Ticino',
+    description: 'Il coltello sarebbe stato ritrovato vicino al luogo dell\'aggressione L\'aggressione è avvenuta il 5 ottobre a Biasca Il 17enne è in carcerazione preventiva',
+    keywords: 'frontalieri, ticino, svizzera, italia, accoltellamento, biasca, ritrovata, arma',
+    ogTitle: 'Biasca, ritrovata l\'arma dell\'accoltellamento',
+    ogDescription: 'Il coltello sarebbe stato ritrovato vicino al luogo dell\'aggressione L\'aggressione è avvenuta il 5 ottobre a Biasca Il 17enne è in carcerazione preventiva',
+    canonicalPath: '/articoli-frontaliere/stazione-ffs-coltello-ritrovato/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Accoltellamento di Biasca, ritrovata l'arma",
+      "description": "Il coltello sarebbe stato ritrovato vicino al luogo dell'aggressione L'aggressione è avvenuta il 5 ottobre a Biasca Il 17enne è in carcerazione preventiva",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-stazione-ffs-coltello-ritrovato.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stazione Ffs di Biasca, vicino al luogo in cui sarebbe stato ritrovato il coltello"
+      },
+      "datePublished": "2026-10-16T03:33:06+00:00",
+      "dateModified": "2026-10-16T03:33:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/stazione-ffs-coltello-ritrovato/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

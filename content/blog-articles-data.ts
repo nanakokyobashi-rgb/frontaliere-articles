@@ -44798,6 +44798,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'stazione-ffs-coltello-ritrovato',
+ category: 'novita',
+ date: '2026-10-16T03:33:05.895Z',
+ image: '/images/blog/article-stazione-ffs-coltello-ritrovato.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -13287,6 +13287,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.frontaliere-dimissioni-termine-preavviso.title': 'Grenzüberschreitende Rücktritte: Fristen und Verfahren',
     'blog.article.frontaliere-dimissioni-termine-preavviso.excerpt': 'Wie man im Tessin zurücktritt: Kündigungsfristen, Auswirkungen auf die G-Bewilligung und Arbeitslosigkeit.',
     'blog.article.frontaliere-dimissioni-termine-preavviso.imageAlt': 'Grenzgänger kreuzt den Brogedapass Richtung Tessin am Morgen',
+    'blog.article.stazione-ffs-coltello-ritrovato.title': 'Messerstecherei in Biasca, Waffe gefunden',
+    'blog.article.stazione-ffs-coltello-ritrovato.excerpt': 'Das Messer soll in der Nähe des Tatorts gefunden worden sein Der Angriff ereignete sich am 5.',
+    'blog.article.stazione-ffs-coltello-ritrovato.imageAlt': 'Ffs-Bahnhof in Biasca, nahe dem Ort, an dem das Messer gefunden worden sein soll',
 };
 
 export default blogMetaDe;

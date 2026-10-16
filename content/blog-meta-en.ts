@@ -13288,6 +13288,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.frontaliere-dimissioni-termine-preavviso.title': 'Border resignations: deadlines and procedure',
     'blog.article.frontaliere-dimissioni-termine-preavviso.excerpt': 'How to resign in Ticino: terms of notice, impact on G leave and unemployment.',
     'blog.article.frontaliere-dimissioni-termine-preavviso.imageAlt': 'Commuter crossing Brogeda pass towards Ticino in the morning',
+    'blog.article.stazione-ffs-coltello-ritrovato.title': 'Biasca stabbing, weapon found',
+    'blog.article.stazione-ffs-coltello-ritrovato.excerpt': 'The knife was reportedly found near the scene of the attack The attack took place on October 5 in Biasca The 17-year-old is in pretrial detention',
+    'blog.article.stazione-ffs-coltello-ritrovato.imageAlt': 'Biasca FFS station, near the place where the knife was reportedly found',
 };
 
 export default blogMetaEn;

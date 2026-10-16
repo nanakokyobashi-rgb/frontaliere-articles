@@ -13290,6 +13290,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.frontaliere-dimissioni-termine-preavviso.title': 'Démission frontalière : délais et procédure',
     'blog.article.frontaliere-dimissioni-termine-preavviso.excerpt': 'Comment démissionner au Tessin : délais de préavis, impact sur le permis G et chômage.',
     'blog.article.frontaliere-dimissioni-termine-preavviso.imageAlt': 'Frontalier traversant le col de Brogeda vers le Tessin le matin',
+    'blog.article.stazione-ffs-coltello-ritrovato.title': 'Poignardement à Biasca, l\'arme retrouvée',
+    'blog.article.stazione-ffs-coltello-ritrovato.excerpt': 'Le couteau aurait été retrouvé près du lieu de l\'agression L\'agression a eu lieu le 5 octobre à Biasca Le jeune de 17 ans est en détention provisoire',
+    'blog.article.stazione-ffs-coltello-ritrovato.imageAlt': 'Gare Ffs de Biasca, près du lieu où le couteau aurait été retrouvé',
 };
 
 export default blogMetaFr;

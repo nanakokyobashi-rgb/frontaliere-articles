@@ -13289,6 +13289,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.frontaliere-dimissioni-termine-preavviso.title': 'Dimissioni frontaliere: termini e procedura',
     'blog.article.frontaliere-dimissioni-termine-preavviso.excerpt': 'Come dare le dimissioni in Ticino: termini di preavviso, impatto su permesso G e disoccupazione.',
     'blog.article.frontaliere-dimissioni-termine-preavviso.imageAlt': 'Frontaliere che attraversa il valico di Brogeda verso il Ticino al mattino',
+    'blog.article.stazione-ffs-coltello-ritrovato.title': 'Accoltellamento di Biasca, ritrovata l\'arma',
+    'blog.article.stazione-ffs-coltello-ritrovato.excerpt': 'Il coltello sarebbe stato ritrovato vicino al luogo dell\'aggressione L\'aggressione è avvenuta il 5 ottobre a Biasca Il 17enne è in carcerazione preventiva',
+    'blog.article.stazione-ffs-coltello-ritrovato.imageAlt': 'Stazione Ffs di Biasca, vicino al luogo in cui sarebbe stato ritrovato il coltello',
 };
 
 export default blogMetaIt;
