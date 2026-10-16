@@ -42,6 +42,9 @@ on:
       # The shared sitemap emitter is also a publisher input: changing its
       # filtering or XML shape must republish the API immediately.
       - 'scripts/lib/build-sitemap.mjs'
+      # The sitemap emitter's shared fail-closed hub-slug guard is part of the
+      # same publisher import closure and must trigger the rebuild too.
+      - 'scripts/lib/assert-hub-locale-slug.mjs'
       # Which sections are published, under which names, and with which floor
       # policy: build-api, build-blog-index and the floors read it (with the
       # path mapping it depends on). A change there changes the surface.
