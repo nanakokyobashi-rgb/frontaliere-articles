@@ -8517,30 +8517,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/ticino/cronaca/1956456/alcoltest-al-lavoro-si-poteva-dire-no-e-cosa-rischia-chi-rifiuta": {
-      "section": "frontaliere",
-      "ts": 1791964239510
-    },
-    "frontaliere::https://comozero.it/attualita/migros-chiusura-centrale-traiteur-ecublens": {
-      "section": "frontaliere",
-      "ts": 1791964285133
-    },
-    "frontaliere::https://www.tio.ch/ticino/politica/1956451/mercato-affitti-citta-affitto-via": {
-      "section": "frontaliere",
-      "ts": 1791964307750
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/parita-salariale-a-varese-il-confronto-sul-decreto-96-la-trasparenza-e-una-sfida-culturale/2707474": {
-      "section": "frontaliere",
-      "ts": 1791964321523
-    },
-    "frontaliere::https://comozero.it/attualita/mazzata-pedaggio-milano-meda-spuntano-agevolazioni-per-i-pendolari-ma-e-polemica-ora-arriva-la-lega": {
-      "section": "frontaliere",
-      "ts": 1791964335120
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/docenti-in-ticino-nove-azioni-per-ripensare-la-formazione-444552": {
-      "section": "frontaliere",
-      "ts": 1791964349863
-    },
     "frontaliere::https://www.tio.ch/svizzera/economia/1956672/investimenti-casse-pensioni-illiquidi-rischi": {
       "section": "frontaliere",
       "ts": 1791975002366
@@ -8780,6 +8756,22 @@
     "frontaliere::https://www.varesenews.it/2026/10/in-italia-54-milioni-di-poveri-listat-un-milione-sono-bambini-lavorare-non-basta-piu-per-uscire-dalla-poverta/2709526": {
       "section": "frontaliere",
       "ts": 1792136803755
+    },
+    "frontaliere::https://www.tio.ch/ticino/attualita/1957171/afc-percorso-metalcostruttori-media-formazione": {
+      "section": "frontaliere",
+      "ts": 1792138429841
+    },
+    "frontaliere::https://www.rsi.ch/s/4162453": {
+      "section": "frontaliere",
+      "ts": 1792138519968
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/voli-giornata-difficile-per-chi-viaggia-sciopero-easyjet-e-problemi-ai-sistemi-di-controllo-aereo/2709691": {
+      "section": "frontaliere",
+      "ts": 1792138575415
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/data-center-hanno-deciso-in-sei-cesate-insieme-mobilita-il-paese-per-il-consiglio-comunale-di-venerdi/2709085": {
+      "section": "frontaliere",
+      "ts": 1792138627565
     }
   }
 }

@@ -44860,6 +44860,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'premio-furia-giovannini-varese',
+ category: 'novita',
+ date: '2026-10-16T08:27:43.117Z',
+ image: '/images/blog/article-premio-furia-giovannini-varese.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
