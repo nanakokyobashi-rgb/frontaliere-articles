@@ -6,8 +6,10 @@ name: Refresh Events Weekend Digest
 # steps have no corpus involvement at all. Moving "the workflow" is not
 # well-formed; only `generate-events-digest-article.mjs` moves, and this is it.
 #
-# It refreshes ONE evergreen article (`eventi-weekend-ticino`) in place. It never
-# registers a new one, so it cannot flood the corpus.
+# By default it refreshes the historical evergreen article
+# (`eventi-weekend-ticino`) in place. A manual dispatch may instead register one
+# stable per-canton digest (`eventi-weekend-<slug>`) in that canton section; the
+# stable identity still prevents weekly corpus flooding.
 #
 # THE DATA COMES OVER HTTP
 #
@@ -53,6 +55,11 @@ on:
       - 'generator/scripts/lib/events-utils.mjs'
   workflow_dispatch:
     inputs:
+      canton:
+        description: 'Gruppo cantonale del digest (TI mantiene l’articolo storico; es. AG, APPENZELLO, NE)'
+        required: false
+        default: 'TI'
+        type: string
       dry_run:
         description: 'Fetch and render, but write and commit nothing'
         required: false
@@ -73,18 +80,35 @@ jobs:
     steps:
       - name: Resolve run mode
         id: mode
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REQUESTED_CANTON: ${{ inputs.canton }}
+          REQUESTED_DRY_RUN: ${{ inputs.dry_run }}
         run: |
           # shellcheck disable=SC1083 # GitHub expressions are expanded before bash runs.
           set -euo pipefail
-          if [ "${{ github.event_name }}" = "push" ]; then
+          if [ "$EVENT_NAME" = "push" ]; then
             DRY=true
-          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            DRY="${{ inputs.dry_run }}"
+          elif [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            DRY="$REQUESTED_DRY_RUN"
           else
             DRY=false
           fi
+          if [ "$EVENT_NAME" != "workflow_dispatch" ] || [ -z "$REQUESTED_CANTON" ]; then
+            CANTON=TI
+          else
+            CANTON="$(printf '%s' "$REQUESTED_CANTON" | tr '[:lower:]' '[:upper:]')"
+          fi
+          case "$CANTON" in
+            TI) SECTION='' ;;
+            APPENZELLO) SECTION='canton-appenzello' ;;
+            AG|FR|GL|NE|NW|OW|SH|SZ|TG|UR|VD|VS|ZG) SECTION="canton-$(printf '%s' "$CANTON" | tr '[:upper:]' '[:lower:]')" ;;
+            *) echo "::error::canton non supportato: $CANTON"; exit 2 ;;
+          esac
           echo "dry=$DRY" >> "$GITHUB_OUTPUT"
-          echo "event=${{ github.event_name }} → dry_run=$DRY"
+          echo "canton=$CANTON" >> "$GITHUB_OUTPUT"
+          echo "section=$SECTION" >> "$GITHUB_OUTPUT"
+          echo "event=$EVENT_NAME → dry_run=$DRY canton=$CANTON section=${SECTION:-frontaliere}"
 
       - name: Checkout
         uses: actions/checkout@v7
@@ -122,7 +146,16 @@ jobs:
         id: producer
         env:
           DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
-        run: node generator/scripts/generate-events-digest-article.mjs
+          DIGEST_CANTON: ${{ steps.mode.outputs.canton }}
+          DIGEST_SECTION: ${{ steps.mode.outputs.section }}
+        run: |
+          set -euo pipefail
+          if [ -n "$DIGEST_SECTION" ]; then
+            node generator/scripts/generate-events-digest-article.mjs \
+              --section="$DIGEST_SECTION" --canton "$DIGEST_CANTON"
+          else
+            node generator/scripts/generate-events-digest-article.mjs
+          fi
 
       # ── La guardia sul percorso di scrittura (issue #275) ──────────────────
       #
@@ -219,17 +252,29 @@ jobs:
             echo "::warning::content guard outcome: $GUARD_OUTCOME — refusing to commit producer output"
             exit 0
           else
-            COMMIT_MESSAGE="Refresh the weekend events digest"
+            CANTON="${{ steps.mode.outputs.canton }}"
+            SECTION="${{ steps.mode.outputs.section }}"
             # data/events.json is gitignored: it is a fetched cache of another
             # repo's dataset, and committing 1.9 MB of it per run would be noise.
-            # Explicitly stage article output. Registration markers are
-            # runner-local and ignored; they must never enter this commit.
-            git add content/blog-body/it/eventi-weekend-ticino.ts \
-                    content/blog-body/en/eventi-weekend-ticino.ts \
-                    content/blog-body/de/eventi-weekend-ticino.ts \
-                    content/blog-body/fr/eventi-weekend-ticino.ts \
-                    content/blog-articles-data.ts \
-                    content/seo/seo-blog-5.ts
+            # Explicitly stage only this digest's registration/body output.
+            # Registration markers are runner-local and ignored.
+            if [ -z "$SECTION" ]; then
+              COMMIT_MESSAGE="Refresh the weekend events digest"
+              git add content/blog-body/it/eventi-weekend-ticino.ts \
+                      content/blog-body/en/eventi-weekend-ticino.ts \
+                      content/blog-body/de/eventi-weekend-ticino.ts \
+                      content/blog-body/fr/eventi-weekend-ticino.ts \
+                      content/blog-articles-data.ts \
+                      content/seo/seo-blog-5.ts
+            else
+              COMMIT_MESSAGE="Add $CANTON weekend events digest to its canton section"
+              git add "content/blog-body-$SECTION/" \
+                      "content/blog-meta-$SECTION-it.ts" \
+                      "content/blog-meta-$SECTION-en.ts" \
+                      "content/blog-meta-$SECTION-de.ts" \
+                      "content/blog-meta-$SECTION-fr.ts" \
+                      "content/cantons/$SECTION/"
+            fi
           fi
           if git diff --cached --quiet; then
             echo "no digest changes"

@@ -95,6 +95,24 @@ describe('digest per cantone sulla fixture events-dataset', () => {
     assert.equal(decodeURIComponent('venue%2D%2Dseries'), 'venue--series');
   });
 
+  it('renders the current weekend date for a spanning event and cites its source record', () => {
+    const article = buildWeekendDigestArticle({
+      events: [{
+        id: 'agenda-series',
+        title: 'Mostra ricorrente',
+        comune: 'Lugano',
+        startDate: '2026-01-01',
+        endDate: '2027-01-03',
+        url: 'https://agenda.example/events/mostra-(serie)',
+        canton: 'TI',
+      }],
+      todayIso: '2027-01-01',
+    });
+    assert.match(article.content.it.body2, /\*\*2 gennaio\*\*/);
+    assert.match(article.content.it.body2, /\[Mostra ricorrente\]\(https:\/\/agenda\.example\/events\/mostra-\(serie%29\)/);
+    assert.doesNotMatch(article.content.it.body2, /\*\*1 gennaio\*\* —/);
+  });
+
   it('mantiene il producer operativo con un lone surrogate nell\'ID evento', () => {
     const article = buildWeekendDigestArticle({
       events: [{
