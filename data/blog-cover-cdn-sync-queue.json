@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-industria-ticino-futuro-lavoro.webp",
-      "sha256": "62388658ca2d6695c543e8cd543297d443ededbe834a6c68209a476bb9b8558b"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-industria-ticino-futuro-lavoro-480w.webp",
-      "sha256": "bcd2eb29c687ee541c597966602f544c2eaabb731cf1973e67ad75c7376f98ae"
-    }
-  ]
+  "items": []
 }
