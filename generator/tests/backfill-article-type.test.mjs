@@ -90,6 +90,25 @@ describe('articleType dal corpo italiano', () => {
     );
   });
 
+  test('decodifica gli escape TS dell URL e riconosce la parentesi chiusa risultante', () => {
+    const cases = [
+      ['\\)', 'https://example.ch/a)b'],
+      ['\\x29', 'https://example.ch/a)b'],
+      ['\\u0029', 'https://example.ch/a)b'],
+      ['\\u{0029}', 'https://example.ch/a)b'],
+    ];
+    for (const [escape, url] of cases) {
+      const source = `'blog.article.demo.body3': 'Testo.\\n\\n*Fonte: [example.ch](https://example.ch/a${escape}b)*',`;
+      const body = readTsStringMap(source).get('blog.article.demo.body3');
+      assert.equal(body, `Testo.\n\n*Fonte: [example.ch](${url})*`, escape);
+      assert.equal(
+        articleTypeFromItalianBody(body, 'article-escaped-ts', generatedSource('article-escaped-ts', url)),
+        'news',
+        escape,
+      );
+    }
+  });
+
   test('mantiene la compatibilita\u0300 con una chiave storica senza query identificante', () => {
     const url = 'https://example.ch/news?id=7';
     const body = `Testo della notizia.\n\n*Fonte: [example.ch](${url})*`;

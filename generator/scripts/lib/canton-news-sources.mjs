@@ -126,19 +126,25 @@ function decodeSourceCitationUrl(body, start) {
     if (character === '(') {
       depth += 1;
     } else if (character === ')') {
-      if (depth === 0) {
-        return {
-          url: body.slice(start, index).replace(/\\([()])/gu, '$1'),
-          closeIndex: index,
-        };
+      if (depth > 0) {
+        depth -= 1;
+        continue;
       }
-      depth -= 1;
+      // A generated citation always closes with `)*`. A `)` elsewhere in
+      // the destination is a valid, albeit unescaped, URL character (a
+      // legacy form found in the corpus), so do not mistake it for the
+      // Markdown delimiter.
+      if (body[index + 1] !== '*') continue;
+      return {
+        url: body.slice(start, index).replace(/\\([()])/gu, '$1'),
+        closeIndex: index,
+      };
     }
   }
   return null;
 }
 
-/** Parse the generated Italian source citations with balanced Markdown URLs. */
+/** Parse generated Italian citations with balanced or legacy unescaped URL parentheses. */
 export function parseSourceCitations(body) {
   const text = String(body ?? '');
   const citations = [];

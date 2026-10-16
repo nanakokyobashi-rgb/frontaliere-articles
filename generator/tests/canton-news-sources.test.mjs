@@ -1021,6 +1021,14 @@ test('le citazioni Fonte condividono parser bilanciato e stripper', () => {
   assert.equal(stripSourceCitations(body, { requireParagraphBreak: true }), 'Testo.');
 });
 
+test('le citazioni Fonte non confondono una parentesi chiusa non codificata col delimitatore', () => {
+  const url = 'https://example.com/articolo)concluso.html';
+  const body = `Testo.\n\n*Fonte: [example.com](${url})*`;
+  const [citation] = parseSourceCitations(body);
+  assert.equal(citation.url, url);
+  assert.equal(stripSourceCitations(body, { requireParagraphBreak: true }), 'Testo.');
+});
+
 test('html-links: i landmark interni restano contenuto, la navigazione resta esclusa', () => {
   const articleHeader = '<article><header><h2>Avviso importante per la mobilita\u0300 locale</h2><a href="/news/header">mehr</a></header></article>';
   assert.deepEqual(
