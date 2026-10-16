@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T14:33:38.367Z",
-  "contentHash": "3891dede696690d2e1bc920ee800f04a87e8f658dee6ee3c10a4ee4e51206a8f",
+  "updatedAt": "2026-10-16T14:58:25.511Z",
+  "contentHash": "5b4256f065fcf1c50ea60f578e0a4e5c21fe0a3972c4f218460645e114ba9d6f",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -230,6 +230,12 @@
           "date": "2026-10-10T11:19:26.395Z"
         },
         {
+          "title": "Sacco di rifiuti a Bizzarone: multato ticinese",
+          "url": "/articoli-ticino/multa-rifiuti-bizzarone/",
+          "excerpt": "A Bizzarone la Polizia locale ha inflitto un'ammenda di 600 euro a un ticinese per rifiuti abbandonati oltreconfine.",
+          "date": "2026-10-16T14:46:51.782Z"
+        },
+        {
           "title": "Scuola media, audizione in Ticino sui corsi attitudinali",
           "url": "/articoli-ticino/commissione-scuola-ticino/",
           "excerpt": "Audizione a Bellinzona sui corsi attitudinali e base DECS e SIT tra i rappresentanti ascoltati Rapporto firmato sull'iniziativa IP158 Prossima riunione: 19",
@@ -252,12 +258,6 @@
           "url": "/articoli-svizzera/premi-malati-ticino-aumento-franchi-2027/",
           "excerpt": "Nel 2027 il premio medio della cassa malati in Ticino aumenterà del 3,7%, raggiungendo 519.90 franchi mensili, un incremento di 18.60 franchi, superiore del 26% alla media svizzera di 412 franchi.",
           "date": "2026-09-30T17:00:48.460Z"
-        },
-        {
-          "title": "Ostinelli non paga la cassa malati e va davanti al pretore",
-          "url": "/articoli-svizzera/ostinelli-cassa-malati-udienza-pretore/",
-          "excerpt": "Roberto Ostinelli, medico di Mendrisio, non paga la cassa malati da giugno 2024 e deve comparire davanti al pretore il 6 ottobre; paga 140 euro al mese per un'assicurazione internazionale.",
-          "date": "2026-10-06T07:13:37.693Z"
         }
       ],
       "latestCantonArticles": [],
@@ -295,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T14:58:25.511Z"
     },
     "en": {
       "canton": "TI",
@@ -492,6 +492,12 @@
           "date": "2026-10-10T11:19:26.395Z"
         },
         {
+          "title": "Garbage bag in Bizzarone: Ticino resident fined",
+          "url": "/en/ticino-articles/bizzarone-waste-dumping-fine/",
+          "excerpt": "At Bizzarone, the local police fined a person from Ticino 600 euros for waste abandoned across the border.",
+          "date": "2026-10-16T14:46:51.782Z"
+        },
+        {
           "title": "Middle school, audition in Ticino on aptitude courses",
           "url": "/en/ticino-articles/ticino-school-commission-hearing/",
           "excerpt": "Hearing in Bellinzona on the DECs and sit aptitude and base courses among the representatives heard Report signed on the IP158 initiative Next meeting: 19",
@@ -514,12 +520,6 @@
           "url": "/en/swiss-articles/health-insurance-premiums-ticino-increase-francs-2027/",
           "excerpt": "In 2027, the average health insurance premium in Ticino will increase by 3,7%, reaching 519.90 francs per month, an increase of 18.60 francs, 26% higher than the Swiss average of 412 francs.",
           "date": "2026-09-30T17:00:48.460Z"
-        },
-        {
-          "title": "Ostinelli does not pay his health insurance and goes before the magistrate",
-          "url": "/en/swiss-articles/ostinelli-health-insurance-court-hearing/",
-          "excerpt": "Roberto Ostinelli, a doctor from Mendrisio, has not paid his health insurance since June 2024 and must appear before the magistrate on October 6; he pays 140 euro per month for international insurance.",
-          "date": "2026-10-06T07:13:37.693Z"
         }
       ],
       "latestCantonArticles": [],
@@ -553,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T14:58:25.511Z"
     },
     "de": {
       "canton": "TI",
@@ -750,6 +750,12 @@
           "date": "2026-10-10T11:19:26.395Z"
         },
         {
+          "title": "Müllsack in Bizzarone: Tessiner mit Geldstrafe belegt",
+          "url": "/de/tessin-artikel/busse-fuer-abfall-in-bizzarone/",
+          "excerpt": "Am Bizzarone hat die örtliche Polizei einem Tessiner wegen jenseits der Grenze abgelagerter Abfälle eine Geldstrafe von 600 Euro auferlegt.",
+          "date": "2026-10-16T14:46:51.782Z"
+        },
+        {
           "title": "Mittelschule, Anhörung im Tessin zu den Eignungskursen",
           "url": "/de/tessin-artikel/tessin-schulkommission-anhoerung/",
           "excerpt": "Anhörung in Bellinzona zu Eignungskursen und Basis DECS und Sit unter den angehörten Vertretern Unterzeichneter Bericht über die IP158-Initiative Nächstes Treffen: 19",
@@ -772,12 +778,6 @@
           "url": "/de/schweiz-artikel/krankenkassenpraemien-tessin-erhoehung-franken-2027/",
           "excerpt": "Im Jahr 2027 wird der durchschnittliche Krankenkassenbeitrag im Tessin um 3,7 % steigen und 519,90 Franken pro Monat erreichen – ein Anstieg um 18,60 Franken, der 26 % über dem Schweizer Durchschnitt von 412 Franken…",
           "date": "2026-09-30T17:00:48.460Z"
-        },
-        {
-          "title": "Ostinelli zahlt seine Krankenversicherung nicht und muss sich vor Gericht verantworten.",
-          "url": "/de/schweiz-artikel/ostinelli-krankenkasse-gerichtstermin/",
-          "excerpt": "Roberto Ostinelli, Arzt aus Mendrisio, zahlt seit Juni 2024 die Krankenkasse nicht mehr und muss am 6. Oktober vor dem Pretore erscheinen; er zahlt 140 Euro im Monat für eine internationale Versicherung.",
-          "date": "2026-10-06T07:13:37.693Z"
         }
       ],
       "latestCantonArticles": [],
@@ -811,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T14:58:25.511Z"
     },
     "fr": {
       "canton": "TI",
@@ -1009,6 +1009,12 @@
           "date": "2026-10-10T11:19:26.395Z"
         },
         {
+          "title": "Sac de déchets à Bizzarone : un Tessinois verbalisé",
+          "url": "/fr/articles-tessin/amende-dechets-bizzarone/",
+          "excerpt": "À Bizzarone, la police locale a infligé une amende de 600 euros à un Tessinois pour des déchets abandonnés de l'autre côté de la frontière.",
+          "date": "2026-10-16T14:46:51.782Z"
+        },
+        {
           "title": "Collège, audition au Tessin sur les cours d'aptitude",
           "url": "/fr/articles-tessin/commission-ecole-tessin-audition/",
           "excerpt": "Audition à Bellinzone sur les cours d'aptitude et de base DECS et SIT parmi les représentants entendus Rapport signé sur l'initiative IP158 Prochaine réunion : 19",
@@ -1031,12 +1037,6 @@
           "url": "/fr/articles-suisse/primes-assurance-maladie-tessin-augmentation-francs-2027/",
           "excerpt": "En 2027, la prime moyenne de la caisse-maladie au Tessin augmentera de 3,7%, atteignant 519.90 francs par mois, soit une hausse de 18.60 francs, supérieure de 26% à la moyenne suisse de 412 francs.",
           "date": "2026-09-30T17:00:48.460Z"
-        },
-        {
-          "title": "Ostinelli ne paie pas la caisse-maladie et se rend devant le juge",
-          "url": "/fr/articles-suisse/ostinelli-assurance-maladie-audience/",
-          "excerpt": "Roberto Ostinelli, médecin de Mendrisio, ne paie pas sa caisse-maladie depuis juin 2024 et doit comparaître devant le juge le 6 octobre ; il paie 140 euros par mois pour une assurance internationale.",
-          "date": "2026-10-06T07:13:37.693Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1066,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T14:58:25.511Z"
     }
   }
 }

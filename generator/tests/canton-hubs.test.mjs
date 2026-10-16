@@ -39,6 +39,7 @@ import { loadTopicEngine } from '../scripts/lib/canton-hubs/engine-loader.mjs';
 import { HUB_LOCALES, fmtDay, fmtNumber, fmtPct } from '../scripts/lib/canton-hubs/format.mjs';
 import { buildHubLinks, jobsPagePath } from '../scripts/lib/canton-hubs/links.mjs';
 import { enabledCantonSections, generateCantonHubs, loadDatasets, parseArgs } from '../scripts/generate-canton-hubs.mjs';
+import { countCantonHubContentWords } from '../../scripts/lib/canton-hub-content.mjs';
 import { contract, freshenGeneratedAt, freshenRecording, freshenWindow } from './lib/rewire-contracts.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -1257,6 +1258,18 @@ test('la soglia di parole e la firma dell\'hub sono quelle del renderer dell\'en
     }
     for (const b of input.dataBlocks) for (const it of b.items) for (const key of Object.keys(it)) assert.ok(fieldsOf('CantonHubDataItem').includes(key));
   }
+});
+
+test('il conteggio della soglia usa solo la lista news visibile', () => {
+  const withThematic = {
+    intro: 'Uno due',
+    keyFacts: [],
+    dataBlocks: [],
+    curatedArticles: [{ title: 'Tema' }],
+    latestCantonArticles: [{ title: 'Fallback ignorato ignorato' }],
+  };
+  assert.equal(countCantonHubContentWords(withThematic), 3);
+  assert.equal(countCantonHubContentWords({ ...withThematic, curatedArticles: [] }), 5);
 });
 
 test('il producer rifiuta cio\' che il renderer rifiuterebbe o scarterebbe in silenzio', () => {

@@ -149,4 +149,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'multa-rifiuti-bizzarone',
+ category: 'pratico',
+ date: '2026-10-16T14:46:51.782Z',
+ image: '/images/blog/article-multa-rifiuti-bizzarone.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -42,6 +42,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.title': 'Cross-border workers: health tax and omnibus decree at 100%',
     'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.excerpt': 'No worker has been asked to pay the health tax The expected contribution ranges from 3% to 6% of net income From January 2026, workers',
     'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.imageAlt': 'Panoramic view of Lugano and the lake on a cloudy day, symbol of Canton Ticino',
+    'blog.article.multa-rifiuti-bizzarone.title': 'Garbage bag in Bizzarone: Ticino resident fined',
+    'blog.article.multa-rifiuti-bizzarone.excerpt': 'At Bizzarone, the local police fined a person from Ticino 600 euros for waste abandoned across the border.',
+    'blog.article.multa-rifiuti-bizzarone.imageAlt': 'Abandoned rubbish bag beside a road in Ticino',
 };
 
 export default blogMetaCantonTiEn;
