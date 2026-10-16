@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1948295/si-trovava-sui-binari-adolescente-travolto-mortalmente-da-un-treno": {
-    "articleId": "adolescente-travolto-treno-berna",
-    "ts": "2026-09-06T11:11:23.559Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/scuola-205-collaboratori-in-meno-in-lombardia-i-sindacati-temono-ripercussioni-su-sicurezza-e-servizi/2671363": {
     "articleId": "tagli-organici-scuola-lombardia",
     "ts": "2026-09-06T11:22:05.540Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/tre-nuove-mostre-al-maga-da-jago-a-leopardi/2709940": {
     "articleId": "mostre-maga-gallarate-2026",
     "ts": "2026-10-16T11:58:37.225Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/newsblog/valute-e-frontiere/1957230/svizzera-lavoro-numero-mercato-frontalieri-stipendio-lavoratori-ticino-dati-occupazione": {
+    "articleId": "lavorare-svizzera-conviene-ancora",
+    "ts": "2026-10-16T12:43:53.122Z",
     "keyForm": 2
   }
 }
