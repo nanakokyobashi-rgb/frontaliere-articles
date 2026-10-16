@@ -55,9 +55,13 @@ const COVER_DIR = '/images/blog/';
 function isCoverPathMention(text, match, id) {
   if (match[0] !== id && match[0] !== `blog-${id}`) return false;
   const prefixStart = match.index - COVER_DIR.length;
+  const suffix = text.slice(match.index + match[0].length);
+  const extension = suffix.match(/^\.[a-z0-9]+/i)?.[0];
+  const afterExtension = extension && suffix[extension.length];
   return prefixStart >= 0
     && text.slice(prefixStart, match.index) === COVER_DIR
-    && text[match.index + match[0].length] === '.';
+    && extension !== undefined
+    && (afterExtension === undefined || /[?#'"`),;}\s]/.test(afterExtension));
 }
 
 export function mentionsId(text, id) {

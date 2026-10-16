@@ -143,6 +143,7 @@ test('il percorso di una copertina condivisa non è un residuo dell\'id', () => 
     `  '/images/${ID}.webp'\n`,
     `  '/images/blog/${ID}'\n`,
     `  '/images/blog/blog-${ID}'\n`,
+    `  '/images/blog/blog-${ID}.'\n`,
   ]) {
     assert.equal(mentionsId(text, ID), true, `residuo non visto in: ${text.trim()}`);
   }
