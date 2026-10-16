@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-multa-rifiuti-bizzarone.webp",
+      "sha256": "df694d39efd5d4a19d1d3bc5832e35c0356129aa10f6374cc532cc8d2827ea4a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-multa-rifiuti-bizzarone-480w.webp",
+      "sha256": "b1c812024a92d4ed0a320aeecdcec8cfbc433c1ccf3d0b0a33c9eeb31d979883"
+    }
+  ]
 }
