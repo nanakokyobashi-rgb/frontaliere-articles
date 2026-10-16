@@ -1306,6 +1306,7 @@ export async function publishCantonRssFeeds({
   sleepImpl = sleep,
   releaseReadyMaxWaitMs = RELEASE_READY_MAX_WAIT_MS,
   releaseReadyRetryDelayMs = RELEASE_READY_RETRY_DELAY_MS,
+  assertMainFreshImpl = async () => {},
 }) {
   const cleanupRequested = removeStaleCantonRssFeeds === true;
   const inactiveCleanup = cleanupRequested && ['draft', 'retired'].includes(effectiveStatus);
@@ -1324,6 +1325,7 @@ export async function publishCantonRssFeeds({
   let snapshots = null;
   let uploaded = 0;
   let verified = 0;
+  let mutationStarted = false;
   try {
     const readiness = await waitForPublishedReleaseReady(releaseCommit, {
       section,
@@ -1404,12 +1406,16 @@ export async function publishCantonRssFeeds({
 
     if (removingStaleFeeds) {
       for (const feed of prepared) {
+        await assertMainFreshImpl();
+        mutationStarted = true;
         const { stdout = '' } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', feed.key]);
         if (!stdout.includes('✅ deleted')) throw new Error(`feed RSS non cancellato: ${feed.key}`);
       }
     } else {
       for (let i = 0; i < prepared.length; i++) {
         const feed = prepared[i];
+        await assertMainFreshImpl();
+        mutationStarted = true;
         const { stdout } = runImpl('bash', [
           'scripts/lib/upload-cdn-file.sh',
           localFiles[i],
@@ -1424,6 +1430,8 @@ export async function publishCantonRssFeeds({
     }
 
     for (const chunk of purgeChunks(prepared.map((feed) => feed.url))) {
+      await assertMainFreshImpl();
+      mutationStarted = true;
       const { code } = runImpl('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]);
       if (code !== 0) {
         throw new Error(`purge CDN dei feed RSS ${section} fallito`);
@@ -1459,7 +1467,7 @@ export async function publishCantonRssFeeds({
     };
   } catch (error) {
     let rollbackFailures = 0;
-    if (snapshots?.size === prepared.length && prepared.length > 0) {
+    if (mutationStarted && snapshots?.size === prepared.length && prepared.length > 0) {
       rollbackFailures = (await rollbackCantonRssFeeds({
         prepared,
         snapshots,
@@ -1603,6 +1611,8 @@ export async function publish({
     }
     return pageFailures + await rollbackRss();
   };
+  const uploaded = [];
+  let status = beforeStatus;
   console.log(`[${LOG}] preflight: sezione ${section} nel registro pubblicato = ${beforeStatus}`);
   // This is the first remote mutation after render/preflight. Recheck here,
   // not only in the workflow before rendering: main may advance while pages
@@ -1624,12 +1634,16 @@ export async function publish({
     console.error(`::error::[${LOG}] upload hero incompleto: nessuna pagina HTML viene caricata`);
     return { failures, uploaded: 0, deleted: 0, status: beforeStatus };
   }
+  try {
   if (cantonRssFeeds.length > 0 || removeStaleCantonRssFeeds) {
     const rssStatus = await publishedStatusImpl(section);
     if (rssStatus !== 'live' && !removeStaleCantonRssFeeds) {
       console.error(`::error::[${LOG}] feed RSS ${section}: il registro edge non conferma lo stato live subito prima della pubblicazione`);
       return { failures: 1, uploaded: 0, deleted: 0, status: rssStatus };
     }
+    // The RSS phase has its own guards, but check at the phase boundary too:
+    // the release may have become stale while the edge status was read.
+    await assertMainFreshImpl();
     const rssResult = await publishCantonRssFeedsImpl({
       section,
       releaseCommit,
@@ -1644,6 +1658,7 @@ export async function publish({
       sleepImpl,
       releaseReadyMaxWaitMs,
       releaseReadyRetryDelayMs,
+      assertMainFreshImpl,
     });
     if (rssResult.failures > 0) {
       console.error(`::error::[${LOG}] feed RSS ${section} non verificati: nessuna pagina viene caricata`);
@@ -1670,10 +1685,8 @@ export async function publish({
       }
     }
   }
-  const uploaded = [];
-  let status = beforeStatus;
-  try {
   for (const page of inUploadOrder(pages)) {
+    await assertMainFreshImpl();
     const { stdout } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', path.join(distDir, page.rel), page.edgeKey, PAGE_CACHE_CONTROL]);
     if (stdout.includes('✅ uploaded')) uploaded.push(page);
     else {
@@ -1692,10 +1705,11 @@ export async function publish({
     return { failures: failures + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status: beforeStatus };
   }
 
-  const purgePages = (pageList) => {
+  const purgePages = async (pageList) => {
     if (pageList.length === 0) return;
     const urls = pageList.flatMap((page) => [page.apexUrl, page.cdnUrl]);
     for (const chunk of purgeChunks(urls)) {
+      await assertMainFreshImpl();
       const { code } = runImpl('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]);
       if (code !== 0) failures++;
     }
@@ -1704,7 +1718,7 @@ export async function publish({
   // Purge/verify only the current release first. Obsolete keys stay present
   // until this pass is green, so a stale sitemap never points at a 404 caused
   // by a partially published replacement.
-  purgePages(uploaded);
+  await purgePages(uploaded);
   status = await publishedStatusImpl(section);
   console.log(`[${LOG}] verify: sezione ${section} nel registro pubblicato = ${status ?? 'registro illeggibile'}`);
   if (status === null) {
@@ -1762,6 +1776,7 @@ export async function publish({
   }
 
   for (const page of obsoletePages) {
+    await assertMainFreshImpl();
     const { stdout } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', page.edgeKey]);
     if (stdout.includes('✅ deleted')) deleted.push(page);
     else {
@@ -1771,7 +1786,7 @@ export async function publish({
   }
   // The current release was already served before the delete. Purge the old
   // keys only after successful delete requests, then retain the 404 verification.
-  purgePages(deleted);
+  await purgePages(deleted);
   for (const page of obsoletePages) {
     const old = await probeImpl(page.cdnUrl, { attempts: 3, delayMs: 1000 });
     if (old.status !== 'HTTP 404') {
@@ -1779,10 +1794,11 @@ export async function publish({
       console.log(`::error::[${LOG}] vecchia pagina ancora servita o non verificabile: ${page.cdnUrl} (${old.status})`);
     }
   }
+  await assertMainFreshImpl();
   const rollbackFailures = failures > 0 ? await rollbackRssAfterObsoleteMutation() : 0;
   return { failures: failures + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: deleted.length, status };
   } catch (error) {
-    console.error(`::error::[${LOG}] pubblicazione HTML ${section} fallita: ${error?.message ?? String(error)}`);
+    console.error(`::error::[${LOG}] pubblicazione ${section} fallita: ${error?.message ?? String(error)}`);
     const rollbackFailures = await rollbackRssAfterObsoleteMutation();
     return { failures: 1 + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status };
   }

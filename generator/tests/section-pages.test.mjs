@@ -798,6 +798,70 @@ test('publisher: abortisce prima del primo upload se main avanza durante il rend
   assert.ok(!events.includes('upload'), 'nessuna mutazione remota parte con un render obsoleto');
 });
 
+test('publisher: un avanzamento di main prima dell HTML ripristina RSS e abortisce', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'publish-stale-main-html-'));
+  const page = pageEntry('canton-ti', 'articoli-ticino/index.html', 'landing');
+  const feed = cantonRssFeedEntries('canton-ti')[0];
+  const previousHtml = `<!doctype html><html><head>${CORPUS_ROUTE_OWNER_META_TAG}</head><body>precedente</body></html>`;
+  const events = [];
+  let freshnessChecks = 0;
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  try {
+    console.log = () => {};
+    console.error = () => {};
+    const result = await publish({
+      section: 'canton-ti',
+      pages: [page],
+      cdnUploads: [],
+      cantonRssFeeds: [feed],
+      obsoletePages: [],
+      distDir: fixtureRoot,
+      releaseCommit: 'f'.repeat(40),
+      publishedStatusImpl: async () => 'live',
+      assertMainFreshImpl: async () => {
+        freshnessChecks++;
+        if (freshnessChecks === 3) throw new Error('main e’ avanzato durante la pubblicazione');
+      },
+      publishCantonRssFeedsImpl: async () => ({
+        failures: 0,
+        uploaded: 1,
+        verified: 1,
+        feeds: [feed],
+        rollback: async () => {
+          events.push('rss-rollback');
+          return { failures: 0 };
+        },
+      }),
+      runImpl: (_command, args) => {
+        if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+          events.push(args[1].includes('.canton-page-rollback-') ? 'page-rollback' : 'page-upload');
+          return { code: 0, stdout: '✅ uploaded' };
+        }
+        if (args.includes('scripts/cf-purge-cache.mjs')) {
+          events.push('page-rollback-purge');
+          return { code: 0, stdout: '' };
+        }
+        throw new Error(`comando inatteso: ${args.join(' ')}`);
+      },
+      probeImpl: async () => ({ ok: true, status: 200, body: previousHtml }),
+    });
+
+    assert.equal(freshnessChecks, 3, 'il guard viene rieseguito subito prima dell upload HTML');
+    assert.equal(result.failures, 1);
+    assert.equal(result.rollbackFailures, 0);
+    assert.equal(result.uploaded, 0);
+    assert.equal(events.filter((event) => event === 'page-upload').length, 0);
+    assert.equal(events.filter((event) => event === 'page-rollback').length, 1, 'rollback della pagina prima della verifica CDN/apex');
+    assert.ok(events.includes('page-rollback-purge'));
+    assert.ok(events.includes('rss-rollback'));
+  } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('publisher: una pagina obsoleta resta intatta se la release corrente non e\' servita', async () => {
   const current = pageEntry('canton-ti', 'articoli-ticino/current/index.html', 'article');
   const obsolete = pageEntry('canton-ti', 'articoli-ticino/obsolete/index.html', 'article');
@@ -1318,6 +1382,7 @@ test('publisher: copia e verifica via HTTP tutti i feed della release prima di c
     return [feed.name, sourceXml[feed.name].replace(`${APEX}/${selfName}`, feed.url)];
   }));
   const events = [];
+  let freshnessChecks = 0;
   try {
     const result = await publishCantonRssFeeds({
       section: 'canton-ti',
@@ -1371,12 +1436,16 @@ test('publisher: copia e verifica via HTTP tutti i feed della release prima di c
       sleepImpl: async () => {},
       releaseReadyMaxWaitMs: 100,
       releaseReadyRetryDelayMs: 0,
+      assertMainFreshImpl: async () => {
+        freshnessChecks++;
+      },
     });
     assert.equal(readinessAttempts, 2);
     assert.equal(result.failures, 0);
     assert.equal(result.uploaded, 5);
     assert.equal(result.verified, 5);
     assert.equal(result.feeds.length, 5);
+    assert.equal(freshnessChecks, feeds.length + 1, 'guard prima di ogni upload RSS e del purge');
     assert.ok(events.indexOf('release-ready-2') < events.findIndex((event) => event.startsWith('fetch:')));
     assert.ok(Math.max(...events.map((event, index) => event.startsWith('snapshot:') ? index : -1)) < events.findIndex((event) => event.startsWith('upload:')));
     assert.ok(Math.max(...events.map((event, index) => event.startsWith('fetch:') ? index : -1)) < events.findIndex((event) => event.startsWith('upload:')));
