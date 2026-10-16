@@ -14,6 +14,7 @@ import {
   transportIdenticalRoutingDecision,
   isTransientGithubReadError,
   withTransientGithubReadRetry,
+  concurrentOptInSucceeded,
   revokeNativeAutoMergeSafely,
   REVIEW_GATE_STEP_NAMES,
 } from '../../scripts/ci/native-automerge-gate.mjs';
@@ -427,6 +428,87 @@ test('ritenta il timeout GraphQL in forma i/o timeout restituito da gh', () => {
   assert.deepEqual(sleeps, [250]);
 });
 
+test('conferma l’opt-in concorrente quando la prima lettura è stale', () => {
+  const snapshots = [
+    { state: 'OPEN', headRefOid: HEAD, autoMergeRequest: null },
+    { state: 'OPEN', headRefOid: HEAD, autoMergeRequest: { enabledAt: '2026-10-16T12:00:00Z' } },
+  ];
+  const sleeps = [];
+  let reads = 0;
+
+  const succeeded = concurrentOptInSucceeded(
+    () => snapshots[reads++],
+    HEAD,
+    { sleep: (delayMs) => sleeps.push(delayMs) },
+  );
+
+  assert.equal(succeeded, true);
+  assert.equal(reads, 2);
+  assert.deepEqual(sleeps, [250]);
+});
+
+test('l’opt-in concorrente resta fail-closed se il risultato è stale persistente', () => {
+  let reads = 0;
+  const sleeps = [];
+
+  const succeeded = concurrentOptInSucceeded(
+    () => {
+      reads += 1;
+      return { state: 'OPEN', headRefOid: HEAD, autoMergeRequest: null };
+    },
+    HEAD,
+    { sleep: (delayMs) => sleeps.push(delayMs) },
+  );
+
+  assert.equal(succeeded, false);
+  assert.equal(reads, 3);
+  assert.deepEqual(sleeps, [250, 750]);
+});
+
+test('head mismatch e payload auto-merge non interpretabili non sono successi né risultati stale', () => {
+  let reads = 0;
+  const sleeps = [];
+
+  const mismatchedHead = concurrentOptInSucceeded(
+    () => {
+      reads += 1;
+      return { state: 'OPEN', headRefOid: OLD_HEAD, autoMergeRequest: { enabledAt: '2026-10-16T12:00:00Z' } };
+    },
+    HEAD,
+    { sleep: (delayMs) => sleeps.push(delayMs) },
+  );
+  assert.equal(mismatchedHead, false);
+  assert.equal(reads, 1);
+  assert.deepEqual(sleeps, []);
+
+  assert.equal(concurrentOptInSucceeded(
+    () => ({ state: 'UNKNOWN', headRefOid: HEAD, autoMergeRequest: null }),
+    HEAD,
+    { sleep: (delayMs) => sleeps.push(delayMs) },
+  ), false);
+  assert.equal(concurrentOptInSucceeded(
+    () => ({ state: 'OPEN', headRefOid: HEAD }),
+    HEAD,
+    { sleep: (delayMs) => sleeps.push(delayMs) },
+  ), false);
+  assert.equal(concurrentOptInSucceeded(
+    () => ({ state: 'OPEN', headRefOid: HEAD, autoMergeRequest: [] }),
+    HEAD,
+    { sleep: (delayMs) => sleeps.push(delayMs) },
+  ), false);
+  assert.deepEqual(sleeps, []);
+});
+
+test('un opt-in concorrente confermato come MERGED è successo', () => {
+  let reads = 0;
+
+  assert.equal(concurrentOptInSucceeded(() => {
+    reads += 1;
+    return { state: 'MERGED', headRefOid: OLD_HEAD, autoMergeRequest: null };
+  }, HEAD, { sleep: () => assert.fail('MERGED non deve essere ritentato') }), true);
+  assert.equal(reads, 1);
+});
+
 test('la revoca non muta una PR già chiusa o con opt-in assente', () => {
   let disableCalls = 0;
   const result = revokeNativeAutoMergeSafely({
@@ -485,6 +567,13 @@ test('lascia fail-closed un errore GitHub permanente senza ritentarlo', () => {
     throw permanent;
   }, { sleep: () => undefined }), /gh failed/);
   assert.equal(attempts, 1);
+
+  let confirmationReads = 0;
+  assert.equal(concurrentOptInSucceeded(() => {
+    confirmationReads += 1;
+    throw permanent;
+  }, HEAD, { sleep: () => undefined }), false);
+  assert.equal(confirmationReads, 1);
 });
 
 test('il gate resta compatibile durante il rename Claude → Codex', () => {
