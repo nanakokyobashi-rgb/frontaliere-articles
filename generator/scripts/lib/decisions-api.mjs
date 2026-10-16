@@ -61,9 +61,12 @@ function safeTimeout(timeoutMs) {
   return Math.max(1, Math.floor(value));
 }
 
-async function cancelResponseBody(response) {
+function cancelResponseBody(response) {
   try {
-    await response?.body?.cancel?.();
+    const cancellation = response?.body?.cancel?.();
+    if (cancellation && typeof cancellation.then === 'function') {
+      void Promise.resolve(cancellation).catch(() => {});
+    }
   } catch {
     // Disposal must not replace the request error that triggers the fallback.
   }
@@ -170,7 +173,7 @@ export async function classifyWithDecisionsApi({
     }
 
     if (!response || !response.ok) {
-      await cancelResponseBody(response);
+      cancelResponseBody(response);
       throw new DecisionsApiError('Decision API returned an HTTP error', {
         code: 'DECISIONS_API_HTTP_ERROR',
         status: response?.status ?? null,

@@ -131,17 +131,10 @@ test('cancella il body della risposta HTTP non riuscita prima del fallback', asy
     result,
     (error) => error.code === 'DECISIONS_API_HTTP_ERROR' && error.status === 503,
   );
-  await new Promise((resolve) => setImmediate(resolve));
-  assert.equal(bodyCancelled, true);
-  let errorPropagated = false;
-  rejected.then(() => {
-    errorPropagated = true;
-  });
-  await Promise.resolve();
-  assert.equal(errorPropagated, false);
-  rejectBodyCancellation(new Error('body cancellation failed'));
   await rejected;
-  assert.equal(errorPropagated, true);
+  assert.equal(bodyCancelled, true);
+  rejectBodyCancellation(new Error('body cancellation failed'));
+  await new Promise((resolve) => setImmediate(resolve));
 });
 
 test('trasforma il timeout AbortController in un errore classificabile', async () => {
