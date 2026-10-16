@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T14:33:38.367Z",
-  "contentHash": "692642c50d25c65ee6615a20ce1d26362d47cae060c07ff2e9f4970c30275525",
+  "updatedAt": "2026-10-16T17:12:26.712Z",
+  "contentHash": "ec46e6a656c503cb3ed490e87375e4695f3f5887ab836a7cfac0eb361241259d",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "12",
+          "value": "11",
           "note": "segnalazioni aggiornate: 16 ottobre 2026"
         },
         {
@@ -129,12 +129,6 @@
               "date": "2026-09-20T22:00:00.000Z"
             },
             {
-              "label": "A1 Bern -> St. Gallen tra Svincolo autostradale Zürich-Affoltern E Svincolo autostradale Zürich-Seebach Situazione: problemi di traffico cantiere, lunghezza [km] 3.3 Limitazione del traffico: corsia…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 16 ottobre 2026",
-              "date": "2026-09-25T06:42:00.000Z"
-            },
-            {
               "label": "A51 Zürich -> Aeroporto Svincolo autostradale Werft Situazione: entrato-uscito chiusa cantiere",
               "value": "Chiusura",
               "detail": "fine prevista: 29 ottobre 2026",
@@ -157,6 +151,12 @@
               "value": "Chiusura",
               "detail": "fine prevista: 19 ottobre 2026",
               "date": "2026-10-14T10:58:00.000Z"
+            },
+            {
+              "label": "A51 Zürich -> Aeroporto tra Svincolo autostradale Glattbrugg E Svincolo autostradale Aeroporto Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 6 novembre 2026",
+              "date": "2026-10-14T11:08:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -256,7 +256,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T17:12:26.712Z"
     },
     "en": {
       "canton": "ZH",
@@ -271,7 +271,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "12",
+          "value": "11",
           "note": "reports as of 16 October 2026"
         },
         {
@@ -363,12 +363,6 @@
               "date": "2026-09-20T22:00:00.000Z"
             },
             {
-              "label": "A1 Bern -> St. Gallen tra Svincolo autostradale Zürich-Affoltern E Svincolo autostradale Zürich-Seebach Situazione: problemi di traffico cantiere, lunghezza [km] 3.3 Limitazione del traffico: corsia…",
-              "value": "Closure",
-              "detail": "until 16 October 2026",
-              "date": "2026-09-25T06:42:00.000Z"
-            },
-            {
               "label": "A51 Zürich -> Aeroporto Svincolo autostradale Werft Situazione: entrato-uscito chiusa cantiere",
               "value": "Closure",
               "detail": "until 29 October 2026",
@@ -391,6 +385,12 @@
               "value": "Closure",
               "detail": "until 19 October 2026",
               "date": "2026-10-14T10:58:00.000Z"
+            },
+            {
+              "label": "A51 Zürich -> Aeroporto tra Svincolo autostradale Glattbrugg E Svincolo autostradale Aeroporto Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 6 November 2026",
+              "date": "2026-10-14T11:08:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -490,7 +490,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T17:12:26.712Z"
     },
     "de": {
       "canton": "ZH",
@@ -505,7 +505,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "12",
+          "value": "11",
           "note": "Meldungen vom 16. Oktober 2026"
         },
         {
@@ -597,12 +597,6 @@
               "date": "2026-09-20T22:00:00.000Z"
             },
             {
-              "label": "A1 Bern -> St. Gallen zwischen Anschluss Zürich-Affoltern und Anschluss Zürich-Seebach Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 3.3 Verkehrsführung: Pannenstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 16. Oktober 2026",
-              "date": "2026-09-25T06:42:00.000Z"
-            },
-            {
               "label": "A51 Zürich -> Flughafen Anschluss Werft Sachlage: Ein- und Ausfahrt gesperrt Baustelle",
               "value": "Sperrung",
               "detail": "bis 29. Oktober 2026",
@@ -625,6 +619,12 @@
               "value": "Sperrung",
               "detail": "bis 19. Oktober 2026",
               "date": "2026-10-14T10:58:00.000Z"
+            },
+            {
+              "label": "A51 Zürich -> Flughafen zwischen Anschluss Glattbrugg und Anschluss Flughafen Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 6. November 2026",
+              "date": "2026-10-14T11:08:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -724,7 +724,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T17:12:26.712Z"
     },
     "fr": {
       "canton": "ZH",
@@ -739,7 +739,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "12",
+          "value": "11",
           "note": "signalements au 16 octobre 2026"
         },
         {
@@ -831,12 +831,6 @@
               "date": "2026-09-20T22:00:00.000Z"
             },
             {
-              "label": "A1 Berne -> St-Gall entre Jonction autoroutière Zürich-Affoltern et Jonction autoroutière Zürich-Seebach Situation: trafic perturbé travaux, longueur [km] 3.3 Gestion du trafic: bande d'arrêt…",
-              "value": "Fermeture",
-              "detail": "jusqu’au 16 octobre 2026",
-              "date": "2026-09-25T06:42:00.000Z"
-            },
-            {
               "label": "A51 Zurich -> Aéroport Jonction autoroutière Werft Situation: Entrée et sortie verrouillées travaux",
               "value": "Fermeture",
               "detail": "jusqu’au 29 octobre 2026",
@@ -859,6 +853,12 @@
               "value": "Fermeture",
               "detail": "jusqu’au 19 octobre 2026",
               "date": "2026-10-14T10:58:00.000Z"
+            },
+            {
+              "label": "A51 Zurich -> Aéroport entre Jonction autoroutière Glattbrugg et Jonction autoroutière Aéroport Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 6 novembre 2026",
+              "date": "2026-10-14T11:08:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -958,7 +958,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T17:12:26.712Z"
     }
   }
 }

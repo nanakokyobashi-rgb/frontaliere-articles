@@ -80,6 +80,36 @@
       "failureCount": 0,
       "requestedAt": "2026-10-16T16:42:43.589Z",
       "lastFailureAt": "2026-10-16T16:42:43.589Z"
+    },
+    {
+      "articleId": "stadler-rail-treno-idrogeno-sardegna",
+      "title": "Stadler Rail testa il primo treno a idrogeno a scartamento ridotto",
+      "fallbackImage": "/images/blog/svizzera-treno-oggetti-binari-2.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T17:07:03.976Z",
+      "lastFailureAt": "2026-10-16T17:07:03.976Z"
+    },
+    {
+      "articleId": "giovani-lavoro-futuro-ticino",
+      "title": "Ai giovani non basta un lavoro. Serve un futuro",
+      "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T17:37:12.235Z",
+      "lastFailureAt": "2026-10-16T17:37:12.235Z"
+    },
+    {
+      "articleId": "saronno-produzione-cina-protesta",
+      "title": "Barco di Saronno: oltre il 50% della produzione va in Cina",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T18:15:03.460Z",
+      "lastFailureAt": "2026-10-16T18:15:03.460Z"
     }
   ]
 }

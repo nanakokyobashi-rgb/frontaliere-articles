@@ -8985,34 +8985,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.rsi.ch/s/4160788": {
-      "section": "frontaliere",
-      "ts": 1791990092032
-    },
-    "frontaliere::https://comozero.it/magazine/in-svizzera-il-supermercato-ti-pesa-la-spesa-da-solo-niente-casse-e-niente-code": {
-      "section": "frontaliere",
-      "ts": 1791995678335
-    },
-    "frontaliere::https://comozero.it/attualita/como-chiude-il-circolo-arci-xanadu-sospese-tutte-le-attivita-speriamo-di-sistemare-entro-fine-anno-o-si-rischia-lo-stop-definitivo": {
-      "section": "frontaliere",
-      "ts": 1791995902232
-    },
-    "frontaliere::https://www.laregione.ch/economia/economia/1956461/quando-le-tortuose-strade-del-petrolio-portano-in-via-nassa": {
-      "section": "frontaliere",
-      "ts": 1791995921423
-    },
-    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1956493/trasformazione-ex-lati-la-protezione-civile-sostiene-il-progetto": {
-      "section": "frontaliere",
-      "ts": 1791996874930
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1956516/formazione-dei-docenti-nove-azioni-per-rafforzarla": {
-      "section": "frontaliere",
-      "ts": 1791996956867
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1956487/caso-hospita-la-cpi-ha-terminato-i-lavori-l-11-novembre-si-sapra-cosa-ha-partorito": {
-      "section": "frontaliere",
-      "ts": 1791996974241
-    },
     "frontaliere::https://www.varesenews.it/2026/10/hydrogen-valley-a-cairate-impresa-scuola-e-terzo-settore-lavorano-insieme/2708470": {
       "section": "frontaliere",
       "ts": 1792002789090
@@ -9296,6 +9268,18 @@
     "frontaliere::https://www.varesenews.it/2026/10/kastritis-siamo-a-fianco-di-amedeo-a-trento-fondamentali-i-rimbalzi/2710186": {
       "section": "frontaliere",
       "ts": 1792162680014
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1957324/denner-sconto-salari-aumenti-dipendenti-rinuncia": {
+      "section": "frontaliere",
+      "ts": 1792171021345
+    },
+    "frontaliere::https://comozero.it/attualita/il-futuro-nasce-a-como-ecco-il-primo-computer-quantistico-di-nuova-generazione-butti-nuova-frontiera": {
+      "section": "frontaliere",
+      "ts": 1792171660671
+    },
+    "frontaliere::https://comozero.it/magazine/mille-euro-a-chi-diventa-genitore-lazienda-lombarda-che-premia-i-dipendenti-che-fanno-figli": {
+      "section": "frontaliere",
+      "ts": 1792173895527
     }
   }
 }

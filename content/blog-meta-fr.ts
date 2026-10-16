@@ -13343,6 +13343,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.iniziativa-udc-asilo-limite.title': 'Protection des frontières : L\'initiative UDC est contre-productive',
     'blog.article.iniziativa-udc-asilo-limite.excerpt': 'La CIP-S rejette l\'initiative UDC par 8 voix contre 2.',
     'blog.article.iniziativa-udc-asilo-limite.imageAlt': 'Contrôle douanier à la frontière italo-suisse près de Lugano avec des officiers et des véhicules en attente',
+    'blog.article.giovani-lavoro-futuro-ticino.title': 'Un emploi ne suffit pas aux jeunes. Il faut un avenir',
+    'blog.article.giovani-lavoro-futuro-ticino.excerpt': 'En 2024, le salaire mensuel médian brut au Tessin s\'élevait à 5\'708 francs La moyenne mensuelle suisse s\'élevait à 7\'024 francs par an',
+    'blog.article.giovani-lavoro-futuro-ticino.imageAlt': 'Un jeune professionnel debout sur un sommet de montagne dans le Tessin, contemplant une vallée et réfléchissant à son avenir professionnel.',
+    'blog.article.saronno-produzione-cina-protesta.title': 'Barco di Saronno : plus de 50 % de la production va à la Chine',
+    'blog.article.saronno-produzione-cina-protesta.excerpt': 'Plus de 50 % de transfert vers le site de Suzhou, 40 % d\'impact sur la zone de production, 30 % d\'impact sur la zone de cols blancs Grève, garnison et agitation',
+    'blog.article.saronno-produzione-cina-protesta.imageAlt': 'Travailleurs en piquet devant un site industriel',
 };
 
 export default blogMetaFr;

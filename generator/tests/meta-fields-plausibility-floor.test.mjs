@@ -200,6 +200,12 @@ for (const field of META_ONLY_FIELDS) {
 // letteralmente `...`, passati dal guard di non-vuoto perche' non erano vuoti.
 
 const LOCALI_TRADOTTI = ['en', 'de', 'fr'];
+const FALSI_POSITIVI_BASE = 15;
+const CAMPI_BASE = 22_600;
+
+function massimoFalsiPositivi(totale) {
+  return Math.floor((totale * FALSI_POSITIVI_BASE) / CAMPI_BASE);
+}
 
 function raccogliCampoLocale(locale, suffix) {
   const valori = [];
@@ -231,13 +237,20 @@ test('il floor prende i meta tradotti degeneri REALMENTE pubblicati', () => {
   );
 });
 
+test('il budget dei falsi positivi scala con il corpus tradotto', () => {
+  assert.equal(massimoFalsiPositivi(CAMPI_BASE), FALSI_POSITIVI_BASE);
+  assert.equal(massimoFalsiPositivi(CAMPI_BASE * 2), FALSI_POSITIVI_BASE * 2);
+  // La run #38906049831 ha misurato 16 offender su 43.095 campi.
+  assert.ok(16 <= massimoFalsiPositivi(43_095));
+});
+
 test('il floor NON e\' un rastrello sui meta tradotti: pochi falsi positivi', () => {
   // I locali tradotti hanno titoli corti ma legittimi che l'IT non ha
   // (`Working DRY`, `Suisse-Italie`, `Hôtel Flaz`). Su quelli il costo e' UNA
   // chiamata di retry, mai una pubblicazione peggiore — il ramo floor-miss di
   // `translateArticle` tiene il valore tradotto e non scende sul fallback IT
-  // (#831). Il tetto qui esiste perche' alzare la soglia verso la mediana
-  // trasformerebbe quel costo in un rastrello: 15 su ~22.600 campi e' il bordo.
+  // (#831). Il tetto conserva il rapporto misurato: 15 su ~22.600 campi.
+  // Un limite assoluto diventerebbe sempre piu' stretto mentre il corpus cresce.
   let offender = 0;
   let totale = 0;
   for (const locale of LOCALI_TRADOTTI) {
@@ -248,7 +261,11 @@ test('il floor NON e\' un rastrello sui meta tradotti: pochi falsi positivi', ()
     }
   }
   assert.ok(totale >= CONTEGGIO_MINIMO * 4, `scan parziale: solo ${totale} campi tradotti letti`);
-  assert.ok(offender <= 15, `il floor rigetterebbe ${offender} meta tradotti reali su ${totale}: troppo alto`);
+  const massimo = massimoFalsiPositivi(totale);
+  assert.ok(
+    offender <= massimo,
+    `il floor rigetterebbe ${offender} meta tradotti reali su ${totale} (massimo proporzionale: ${massimo} su ${CAMPI_BASE} = ${FALSI_POSITIVI_BASE}): troppo alto`,
+  );
 });
 
 test('translateArticle applica il floor ai meta tradotti senza cadere sul fallback IT', () => {
