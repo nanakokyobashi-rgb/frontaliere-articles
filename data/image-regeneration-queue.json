@@ -90,6 +90,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-16T13:10:19.548Z",
       "lastFailureAt": "2026-10-16T13:10:19.548Z"
+    },
+    {
+      "articleId": "dosso-gaggiolo-disagi-frontalieri",
+      "title": "Rallentamenti al valico di Gaggiolo dopo il nuovo dosso",
+      "fallbackImage": "/images/blog/frontalieri-regime-fiscale-nuovo-accordo.webp",
+      "reason": "All image providers failed for article-dosso-gaggiolo-disagi-frontalieri: openai-codex (vision gate rejected image: Generic synthetic border-crossing illustration relevant to queue",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T14:28:42.659Z",
+      "lastFailureAt": "2026-10-16T14:28:42.659Z"
     }
   ]
 }
