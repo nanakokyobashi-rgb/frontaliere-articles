@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica.webp",
+      "sha256": "a866b7816bc2f205f10c1b7eda8242220624c1afce6ad0fc7d9a83c30514332f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica-480w.webp",
+      "sha256": "f0dd498da4b5e881a977067efe1b0323feb74beff0e6fe7648ab33dc9c339538"
+    }
+  ]
 }
