@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T00:42:06.556Z",
-  "contentHash": "ef9f73c9e3dec8fda061680a9677be6b82a7a0e73d63b26cd58f02fa459efb81",
+  "updatedAt": "2026-10-16T01:56:54.479Z",
+  "contentHash": "9b77c33b6e891ead62e03d37e6aa2fe9e801e2515c5470c106b393895f19e7ce",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -21,11 +21,6 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-15T11:34:01.149Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-15T13:31:14.704Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -150,20 +145,6 @@
           "updatedAt": "2026-10-15T11:34:01.149Z"
         },
         {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "18 °C",
-              "detail": "oggi da 10 a 19 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-15T13:31:14.704Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -210,6 +191,12 @@
           "date": "2026-10-09T22:34:18.458Z"
         },
         {
+          "title": "Sistema sanitario svizzero: guida LAMal 2026 nel canton Zurigo",
+          "url": "/articoli-svizzera/sistema-sanitario-zurigo-guida-2026/",
+          "excerpt": "Guida pratica al sistema sanitario nel canton Zurigo per il 2026: obblighi LAMal, scelta della cassa, franchigie e procedure di rimborso per i residenti.",
+          "date": "2026-10-16T01:51:47.381Z"
+        },
+        {
           "title": "Zurigo, sì al suicidio assistito nelle strutture sanitarie",
           "url": "/articoli-svizzera/zurigo-suicidio-assistito/",
           "excerpt": "A Zurigo il 68,1% approva il suicidio assistito nelle strutture sanitarie. Partecipazione 47,6%; bocciata al 59,2% la legge sugli insegnanti.",
@@ -244,12 +231,6 @@
           "url": "/articoli-svizzera/permesso-dimora-b-zurigo-guida/",
           "excerpt": "Guida completa al permesso di dimora B nel Canton Zurigo: procedure, documentazione necessaria, scadenze per il rinnovo e competenze delle autorità cantonali.",
           "date": "2026-08-11T08:49:10.999Z"
-        },
-        {
-          "title": "Premi cassa malati Zurigo e riduzione premi: guida pratica",
-          "url": "/articoli-svizzera/premi-cassa-malati-zurigo-riduzione/",
-          "excerpt": "Analisi sui premi LAMal nel Cantone di Zurigo, modelli di franchigia e requisiti per ottenere la riduzione dei premi cantonale.",
-          "date": "2026-08-11T08:38:09.912Z"
         }
       ],
       "links": [
@@ -278,7 +259,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T00:42:06.556Z"
+      "updatedAt": "2026-10-16T01:56:54.479Z"
     },
     "en": {
       "canton": "ZH",
@@ -396,20 +377,6 @@
           "updatedAt": "2026-10-15T11:34:01.149Z"
         },
         {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "18 °C",
-              "detail": "today from 10 to 19 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-15T13:31:14.704Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -456,6 +423,12 @@
           "date": "2026-10-09T22:34:18.458Z"
         },
         {
+          "title": "Swiss health system: LAMal 2026 guide in the canton of Zurich",
+          "url": "/en/swiss-articles/swiss-healthcare-system-zurich-2026-guide/",
+          "excerpt": "Practical guide to the health system in the canton of Zurich for 2026: LAMal obligations, choice of cash, deductibles and reimbursement procedures for residents.",
+          "date": "2026-10-16T01:51:47.381Z"
+        },
+        {
           "title": "Zurich, yes to assisted suicide in healthcare facilities",
           "url": "/en/swiss-articles/zurich-assisted-suicide-facilities/",
           "excerpt": "In Zurich, 68,1% approve assisted suicide in healthcare facilities. Turnout 47,6%; the law on teachers was rejected by 59,2%.",
@@ -490,12 +463,6 @@
           "url": "/en/swiss-articles/residence-permit-b-zurich-requirements/",
           "excerpt": "Complete guide to residence permit B in the Canton of Zurich: procedures, necessary documentation, deadlines for renewal and competences of the cantonal authorities.",
           "date": "2026-08-11T08:49:10.999Z"
-        },
-        {
-          "title": "Zurich health insurance premiums and premium reductions: a practical guide",
-          "url": "/en/swiss-articles/health-insurance-premiums-zurich-reduction/",
-          "excerpt": "Analysis of LAMal premiums in the Canton of Zurich, franchise models and requirements to obtain the cantonal premium reduction.",
-          "date": "2026-08-11T08:38:09.912Z"
         }
       ],
       "links": [
@@ -520,7 +487,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T00:42:06.556Z"
+      "updatedAt": "2026-10-16T01:56:54.479Z"
     },
     "de": {
       "canton": "ZH",
@@ -638,20 +605,6 @@
           "updatedAt": "2026-10-15T11:34:01.149Z"
         },
         {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "18 °C",
-              "detail": "heute 10 bis 19 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-15T13:31:14.704Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -698,6 +651,12 @@
           "date": "2026-10-09T22:34:18.458Z"
         },
         {
+          "title": "Schweizerisches Gesundheitssystem: KVG-Leitfaden 2026 im Kanton Zürich",
+          "url": "/de/schweiz-artikel/schweizer-gesundheitssystem-zuerich-2026-leitfaden/",
+          "excerpt": "Praktischer Leitfaden zum Gesundheitssystem im Kanton Zürich für das Jahr 2026: KVG-Pflichten, Kassenwahl, Franchisen und Rückerstattungsverfahren für Residenten.",
+          "date": "2026-10-16T01:51:47.381Z"
+        },
+        {
           "title": "Zürich, Ja zum assistierten Suizid in Gesundheitseinrichtungen",
           "url": "/de/schweiz-artikel/zuerich-assistierter-suizid/",
           "excerpt": "In Zürich befürworten 68,1% den assistierten Suizid in Gesundheitseinrichtungen. Beteiligung 47,6%; das Lehrergesetz wurde mit 59,2% abgelehnt.",
@@ -732,12 +691,6 @@
           "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-zuerich-voraussetzungen/",
           "excerpt": "Vollständiger Leitfaden zur Aufenthaltsbewilligung B im Kanton Zürich: Verfahren, erforderliche Unterlagen, Fristen für die Erneuerung und Zuständigkeiten der kantonalen Behörden.",
           "date": "2026-08-11T08:49:10.999Z"
-        },
-        {
-          "title": "Krankenkassenprämien Zürich und Prämienverbilligung: Praxisleitfaden",
-          "url": "/de/schweiz-artikel/krankenkassenpraemien-zuerich-verbilligung/",
-          "excerpt": "Analyse der KVG-Prämien im Kanton Zürich, Franchisemodelle und Voraussetzungen für die kantonale Prämienverbilligung.",
-          "date": "2026-08-11T08:38:09.912Z"
         }
       ],
       "links": [
@@ -762,7 +715,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T00:42:06.556Z"
+      "updatedAt": "2026-10-16T01:56:54.479Z"
     },
     "fr": {
       "canton": "ZH",
@@ -880,20 +833,6 @@
           "updatedAt": "2026-10-15T11:34:01.149Z"
         },
         {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "18 °C",
-              "detail": "aujourd’hui de 10 à 19 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-15T13:31:14.704Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -940,6 +879,12 @@
           "date": "2026-10-09T22:34:18.458Z"
         },
         {
+          "title": "Système de santé suisse : guide LAMal 2026 dans le canton de Zurich",
+          "url": "/fr/articles-suisse/systeme-sante-suisse-zurich-2026-guide/",
+          "excerpt": "Guide pratique du système de santé dans le canton de Zurich pour 2026 : obligations LAMal, choix de la caisse, franchises et procédures de remboursement pour les résidents.",
+          "date": "2026-10-16T01:51:47.381Z"
+        },
+        {
           "title": "Zurich, oui au suicide assisté dans les établissements de santé",
           "url": "/fr/articles-suisse/zurich-suicide-assiste/",
           "excerpt": "À Zurich, 68,1% approuvent le suicide assisté dans les établissements de santé. Participation 47,6%; la loi sur les enseignants rejetée à 59,2%.",
@@ -974,12 +919,6 @@
           "url": "/fr/articles-suisse/permis-de-sejour-b-zurich-exigences/",
           "excerpt": "Guide complet du permis de séjour B dans le canton de Zurich : procédures, documentation nécessaire, délais de renouvellement et compétences des autorités cantonales.",
           "date": "2026-08-11T08:49:10.999Z"
-        },
-        {
-          "title": "Primes caisse-maladie Zurich et réduction des primes : guide pratique",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-zurich-reduction/",
-          "excerpt": "Analyse des primes LAMal dans le canton de Zurich, modèles de franchise et conditions pour obtenir la réduction des primes cantonales.",
-          "date": "2026-08-11T08:38:09.912Z"
         }
       ],
       "links": [
@@ -1000,7 +939,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T00:42:06.556Z"
+      "updatedAt": "2026-10-16T01:56:54.479Z"
     }
   }
 }

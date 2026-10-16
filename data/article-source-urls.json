@@ -1,19 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/scelgo-varese-la-fiera-torna-alla-schiranna-dieci-giorni-tra-imprese-cultura-sport-e-sapori/2669656": {
-    "articleId": "fiera-varese-schiranna-2026",
-    "ts": "2026-09-05T10:42:21.355Z",
-    "keyForm": 2
-  },
-  "https://www.laregione.ch/cantone/ticino/1947827/cristina-zanini-lascia-il-gran-consiglio-per-entrare-nel-cda-dell-azienda-elettrica-ticinese": {
-    "articleId": "cristina-zanini-grande-consiglio-azienda-elettrica-ticinese",
-    "ts": "2026-09-05T10:51:04.424Z",
-    "keyForm": 2
-  },
-  "https://www.laregione.ch/cantone/luganese/1948022/via-industria-a-caslano-riuscita-l-iniziativa-popolare": {
-    "articleId": "via-industria-caslano-iniziativa-popolare",
-    "ts": "2026-09-05T11:01:29.263Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/assemblea-centro%3a-s%c3%ac-a-finanziamento-avs-con-iva/92009988": {
     "articleId": "assemblea-centro-iva-avs",
     "ts": "2026-09-05T11:17:38.612Z",
@@ -2497,6 +2482,21 @@
   "https://www.varesenews.it/2026/10/se-napoli-ha-maradona-varese-ha-anastasi-il-piazzale-dello-stadio-intitolato-a-pietruzzu/2708932": {
     "articleId": "varese-piazzale-anastasi-intitolazione",
     "ts": "2026-10-16T01:20:06.533Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/como-il-parroco-salva-larci-don-giusto-accoglie-al-teatro-nuovo-gli-spettacoli-del-cinema-gloria-chiuso-per-lanticendio": {
+    "articleId": "don-giusto-teatro-nuovo-gloria",
+    "ts": "2026-10-16T02:35:14.977Z",
+    "keyForm": 2
+  },
+  "https://www.varesenoi.it/2026/10/15/leggi-notizia/argomenti/territorio/articolo/presidio-vivo-a-olgiate-in-azione-le-sentinelle-di-mercato-1.html": {
+    "articleId": "olgiate-presidio-vivo-mercato",
+    "ts": "2026-10-16T02:57:07.524Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/bellinzonese/1956471/accoltellamento-di-biasca-ritrovata-l-arma": {
+    "articleId": "stazione-ffs-coltello-ritrovato",
+    "ts": "2026-10-16T03:33:06.327Z",
     "keyForm": 2
   }
 }

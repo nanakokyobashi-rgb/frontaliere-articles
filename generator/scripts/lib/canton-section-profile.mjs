@@ -570,15 +570,28 @@ export function sourceUrlCanonicalKey(url) {
     }
     parsed.pathname = normalizedPath.replace(/\/+$/u, '') || '/';
 
-    const normalizedQuery = [...parsed.searchParams]
-      .map(([key, value]) => `${encodeURIComponent(key.normalize('NFC'))}=${encodeURIComponent(value.normalize('NFC'))}`)
-      .join('&');
+    const normalizedQuery = sortQueryPairs(parsed.searchParams);
     parsed.search = normalizedQuery ? `?${normalizedQuery}` : '';
     parsed.hash = '';
     return parsed.toString();
   } catch {
     return '';
   }
+}
+
+function sortQueryPairs(searchParams) {
+  return [...searchParams]
+    .map(([key, value]) => ({
+      key: encodeURIComponent(key.normalize('NFC')),
+      value: encodeURIComponent(value.normalize('NFC')),
+    }))
+    .sort((left, right) => {
+      if (left.key !== right.key) return left.key < right.key ? -1 : 1;
+      if (left.value !== right.value) return left.value < right.value ? -1 : 1;
+      return 0;
+    })
+    .map(({ key, value }) => `${key}=${value}`)
+    .join('&');
 }
 
 /**

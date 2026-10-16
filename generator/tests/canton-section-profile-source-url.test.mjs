@@ -59,6 +59,34 @@ test('la chiave canonica normalizza encoding, diacritici Unicode e varianti same
   );
 });
 
+test('la chiave canonica ordina le coppie query mantenendo valori e duplicati', () => {
+  const orderedDifferently = 'https://www.example.ch/feed/story?z=2&tag=second&label=Gr%C3%A4del%20%26%20See&tag=first';
+  const reordered = 'https://example.ch/feed/story?tag=first&label=Gr%C3%A4del%20%26%20See&z=2&tag=second';
+  const key = sourceUrlCanonicalKey(orderedDifferently);
+
+  assert.equal(key, sourceUrlCanonicalKey(reordered));
+  assert.equal(
+    new URL(key).search,
+    '?label=Gr%C3%A4del%20%26%20See&tag=first&tag=second&z=2',
+    'l’encoding dei valori e le occorrenze duplicate restano nella chiave',
+  );
+  assert.notEqual(
+    key,
+    sourceUrlCanonicalKey('https://example.ch/feed/story?label=Gr%C3%A4del%20%26%20See&tag=first&z=2'),
+    'rimuovere una coppia duplicata deve produrre una chiave diversa',
+  );
+  assert.notEqual(
+    sourceUrlCanonicalKey('https://example.ch/feed/story?a=1&b=2'),
+    sourceUrlCanonicalKey('https://example.ch/feed/story?a=2&b=1'),
+    'il riordino non deve staccare i valori dalle rispettive chiavi',
+  );
+  assert.notEqual(
+    key,
+    sourceUrlCanonicalKey('https://example.ch/feed/story?label=Gr%C3%A4del&tag=first&tag=second&z=2'),
+    'un valore diverso deve restare non equivalente',
+  );
+});
+
 test('le collisioni canoniche sono misurate e rifiutate dalla source URL map', () => {
   const collision = {
     cantons: [

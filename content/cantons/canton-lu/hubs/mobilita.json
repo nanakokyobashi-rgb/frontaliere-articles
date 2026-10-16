@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "9d8b1d36c705ab5fe84b657f414f34248e2550b119d132a45f7317b63de6744d",
+  "updatedAt": "2026-10-16T03:02:31.746Z",
+  "contentHash": "2daf63058e29deac9cacc7954c181c236cd790626065d3915cae4a7fac05b8bc",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "30",
+          "value": "29",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
@@ -109,7 +109,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -154,7 +154,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     },
     "en": {
       "canton": "LU",
@@ -169,7 +169,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "30",
+          "value": "29",
           "note": "reports as of 15 October 2026"
         }
       ],
@@ -246,7 +246,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -289,7 +289,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     },
     "de": {
       "canton": "LU",
@@ -304,7 +304,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "30",
+          "value": "29",
           "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
@@ -381,7 +381,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -424,7 +424,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     },
     "fr": {
       "canton": "LU",
@@ -439,7 +439,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "30",
+          "value": "29",
           "note": "signalements au 15 octobre 2026"
         }
       ],
@@ -516,7 +516,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -561,7 +561,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     }
   }
 }

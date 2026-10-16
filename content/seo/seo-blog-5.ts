@@ -109262,6 +109262,157 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-don-giusto-teatro-nuovo-gloria': {
+    title: 'Como, don Giusto accoglie gli spettacoli del Gloria al Teatro Nuovo',
+    description: 'Il Cinema Gloria è chiuso per la messa a norma antincendio Don Giusto offre il Teatro Nuovo di Rebbio Domenica 18 alle 16 il concerto Barabàn-Musica Spiccia',
+    keywords: 'frontalieri, ticino, svizzera, italia, como, giusto, accoglie, spettacoli',
+    ogTitle: 'Como: don Giusto ospita gli eventi del Cinema Gloria',
+    ogDescription: 'Il Cinema Gloria è chiuso per la messa a norma antincendio Don Giusto offre il Teatro Nuovo di Rebbio Domenica 18 alle 16 il concerto Barabàn-Musica Spiccia',
+    canonicalPath: '/articoli-frontaliere/don-giusto-teatro-nuovo-gloria/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Como, don Giusto accoglie gli spettacoli del Gloria al Teatro Nuovo",
+      "description": "Il Cinema Gloria è chiuso per la messa a norma antincendio Don Giusto offre il Teatro Nuovo di Rebbio Domenica 18 alle 16 il concerto Barabàn-Musica Spiccia",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-don-giusto-teatro-nuovo-gloria.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Interno del Teatro Nuovo di Rebbio, a disposizione per gli spettacoli del Cinema Gloria."
+      },
+      "datePublished": "2026-10-16T02:35:14+00:00",
+      "dateModified": "2026-10-16T02:35:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/don-giusto-teatro-nuovo-gloria/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-olgiate-presidio-vivo-mercato': {
+    title: 'Olgiate: Presidio Vivo e sentinelle nei mercati',
+    description: 'A Olgiate Olona parte il progetto Presidio Vivo Due piazze ospitano i mercati coinvolti Volontari riconoscibili affiancano la Polizia Locale Appuntamenti',
+    keywords: 'frontalieri, ticino, svizzera, italia, olgiate, presidio, vivo, sentinelle',
+    ogTitle: 'Olgiate: Presidio Vivo e sentinelle nei mercati',
+    ogDescription: 'A Olgiate Olona parte il progetto Presidio Vivo Due piazze ospitano i mercati coinvolti Volontari riconoscibili affiancano la Polizia Locale Appuntamenti',
+    canonicalPath: '/articoli-frontaliere/olgiate-presidio-vivo-mercato/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Olgiate: Presidio Vivo e sentinelle nei mercati",
+      "description": "A Olgiate Olona parte il progetto Presidio Vivo Due piazze ospitano i mercati coinvolti Volontari riconoscibili affiancano la Polizia Locale Appuntamenti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Volontari della Sentinelle del Mercato e agenti di Polizia Locale in piazza a Olgiate Olona."
+      },
+      "datePublished": "2026-10-16T02:57:07+00:00",
+      "dateModified": "2026-10-16T02:57:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/olgiate-presidio-vivo-mercato/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-frontaliere-dimissioni-termine-preavviso': {
+    title: 'Dimissioni frontaliere: termini e procedura | Frontaliere Ticino',
+    description: 'Come dare le dimissioni in Ticino: termini di preavviso, impatto su permesso G e disoccupazione. Guida pratica per frontalieri.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dimissioni, termini, procedura, dare',
+    ogTitle: 'Dimissioni frontaliere: termini e procedura',
+    ogDescription: 'Scopri come dare le dimissioni in Ticino: termini di preavviso, impatto sul permesso G e sulla disoccupazione. Guida pratica con checklist e consigli fiscali per chi lavora al confine.',
+    canonicalPath: '/articoli-frontaliere/frontaliere-dimissioni-termine-preavviso/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dimissioni frontaliere: termini e procedura",
+      "description": "Come dare le dimissioni in Ticino: termini di preavviso, impatto su permesso G e disoccupazione. Guida pratica per frontalieri.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/cambio-datore-lavoro-frontaliere-procedura-permesso-2026-single.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Frontaliere che attraversa il valico di Brogeda verso il Ticino al mattino"
+      },
+      "datePublished": "2026-10-16T03:19:05+00:00",
+      "dateModified": "2026-10-16T03:19:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontaliere-dimissioni-termine-preavviso/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-stazione-ffs-coltello-ritrovato': {
+    title: 'Accoltellamento di Biasca, ritrovata l\'arma | Frontaliere Ticino',
+    description: 'Il coltello sarebbe stato ritrovato vicino al luogo dell\'aggressione L\'aggressione è avvenuta il 5 ottobre a Biasca Il 17enne è in carcerazione preventiva',
+    keywords: 'frontalieri, ticino, svizzera, italia, accoltellamento, biasca, ritrovata, arma',
+    ogTitle: 'Biasca, ritrovata l\'arma dell\'accoltellamento',
+    ogDescription: 'Il coltello sarebbe stato ritrovato vicino al luogo dell\'aggressione L\'aggressione è avvenuta il 5 ottobre a Biasca Il 17enne è in carcerazione preventiva',
+    canonicalPath: '/articoli-frontaliere/stazione-ffs-coltello-ritrovato/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Accoltellamento di Biasca, ritrovata l'arma",
+      "description": "Il coltello sarebbe stato ritrovato vicino al luogo dell'aggressione L'aggressione è avvenuta il 5 ottobre a Biasca Il 17enne è in carcerazione preventiva",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-stazione-ffs-coltello-ritrovato.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stazione Ffs di Biasca, vicino al luogo in cui sarebbe stato ritrovato il coltello"
+      },
+      "datePublished": "2026-10-16T03:33:06+00:00",
+      "dateModified": "2026-10-16T03:33:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/stazione-ffs-coltello-ritrovato/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

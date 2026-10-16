@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "628b6836e692727ad89461330eb6653f0fbde3f15958dc7388edbd318eff7467",
+  "updatedAt": "2026-10-16T03:02:31.746Z",
+  "contentHash": "0948356b8ef22c5527c6691dc5de02c7c51e7aa0c1194a575db8d58b96c422b9",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "21",
+          "value": "20",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "26",
+          "value": "25",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
@@ -180,7 +180,7 @@
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -243,7 +243,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     },
     "en": {
       "canton": "VS",
@@ -258,12 +258,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "21",
+          "value": "20",
           "note": "reports as of 15 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "26",
+          "value": "25",
           "note": "reports as of 15 October 2026"
         }
       ],
@@ -401,7 +401,7 @@
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -464,7 +464,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     },
     "de": {
       "canton": "VS",
@@ -479,12 +479,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "21",
+          "value": "20",
           "note": "Meldungen vom 15. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "26",
+          "value": "25",
           "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
@@ -622,7 +622,7 @@
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -685,7 +685,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     },
     "fr": {
       "canton": "VS",
@@ -700,12 +700,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "21",
+          "value": "20",
           "note": "signalements au 15 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "26",
+          "value": "25",
           "note": "signalements au 15 octobre 2026"
         }
       ],
@@ -843,7 +843,7 @@
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -906,7 +906,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     }
   }
 }

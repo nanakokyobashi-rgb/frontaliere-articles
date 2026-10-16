@@ -13280,6 +13280,18 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.varese-piazzale-anastasi-intitolazione.title': 'Varese: il piazzale dello stadio è intitolato a Anastasi',
     'blog.article.varese-piazzale-anastasi-intitolazione.excerpt': 'Il piazzale del Franco Ossola porta il nome di Pietro Anastasi La targa è stata posizionata dal Comune L\'intitolazione è stata votata all\'unanimità A Masnago',
     'blog.article.varese-piazzale-anastasi-intitolazione.imageAlt': 'Il piazzale dello stadio Franco Ossola a Varese intitolato a Pietro Anastasi',
+    'blog.article.don-giusto-teatro-nuovo-gloria.title': 'Como, don Giusto accoglie gli spettacoli del Gloria al Teatro Nuovo',
+    'blog.article.don-giusto-teatro-nuovo-gloria.excerpt': 'Il Cinema Gloria è chiuso per la messa a norma antincendio Don Giusto offre il Teatro Nuovo di Rebbio Domenica 18 alle 16 il concerto Barabàn-Musica Spiccia',
+    'blog.article.don-giusto-teatro-nuovo-gloria.imageAlt': 'Interno del Teatro Nuovo di Rebbio, a disposizione per gli spettacoli del Cinema Gloria.',
+    'blog.article.olgiate-presidio-vivo-mercato.title': 'Olgiate: Presidio Vivo e sentinelle nei mercati',
+    'blog.article.olgiate-presidio-vivo-mercato.excerpt': 'A Olgiate Olona parte il progetto Presidio Vivo Due piazze ospitano i mercati coinvolti Volontari riconoscibili affiancano la Polizia Locale Appuntamenti',
+    'blog.article.olgiate-presidio-vivo-mercato.imageAlt': 'Volontari della Sentinelle del Mercato e agenti di Polizia Locale in piazza a Olgiate Olona.',
+    'blog.article.frontaliere-dimissioni-termine-preavviso.title': 'Dimissioni frontaliere: termini e procedura',
+    'blog.article.frontaliere-dimissioni-termine-preavviso.excerpt': 'Come dare le dimissioni in Ticino: termini di preavviso, impatto su permesso G e disoccupazione.',
+    'blog.article.frontaliere-dimissioni-termine-preavviso.imageAlt': 'Frontaliere che attraversa il valico di Brogeda verso il Ticino al mattino',
+    'blog.article.stazione-ffs-coltello-ritrovato.title': 'Accoltellamento di Biasca, ritrovata l\'arma',
+    'blog.article.stazione-ffs-coltello-ritrovato.excerpt': 'Il coltello sarebbe stato ritrovato vicino al luogo dell\'aggressione L\'aggressione è avvenuta il 5 ottobre a Biasca Il 17enne è in carcerazione preventiva',
+    'blog.article.stazione-ffs-coltello-ritrovato.imageAlt': 'Stazione Ffs di Biasca, vicino al luogo in cui sarebbe stato ritrovato il coltello',
 };
 
 export default blogMetaIt;

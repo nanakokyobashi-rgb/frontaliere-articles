@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "fisco",
-  "updatedAt": "2026-10-15T10:49:18.785Z",
-  "contentHash": "256d0378545d1bc8be89008bee4e3f6cf8ecdc4de01744fe0590b25fceb8c2bf",
+  "updatedAt": "2026-10-16T03:16:00.674Z",
+  "contentHash": "a26a64a94fa2af996370ddadc9a5c48f2beaeb248ce157664560debbe28eb68c",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -114,6 +114,12 @@
           "date": "2026-10-08T12:15:50.666Z"
         },
         {
+          "title": "Frontalieri: tassa salute e decreto omnibus al 100%",
+          "url": "/articoli-ticino/frontalieri-tassa-salute-omnibus-giugno-2026/",
+          "excerpt": "Nessun lavoratore è stato chiamato a pagare la tassa sulla salute Il contributo previsto va dal 3% al 6% del reddito netto Dal gennaio 2026 i lavoratori",
+          "date": "2026-10-16T03:10:47.550Z"
+        },
+        {
           "title": "Decreto tassa salute frontalieri pubblicato: via libera regioni",
           "url": "/articoli-ticino/decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni/",
           "excerpt": "Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività",
@@ -142,12 +148,6 @@
           "url": "/articoli-frontaliere/frontaliere-laveno-mombello-ticino/",
           "excerpt": "Vivere a Laveno-Mombello e lavorare in Ticino: collegamenti, imposte alla fonte, franchigie e previdenza per i lavoratori frontalieri.",
           "date": "2026-09-12T01:10:28.373Z"
-        },
-        {
-          "title": "Vivere a Mornago, lavorare in Ticino: tassazione e permesso G",
-          "url": "/articoli-frontaliere/mornago-frontaliere/",
-          "excerpt": "Dal 1° gennaio 2024 il Nuovo Accordo Frontalieri garantisce franchigia €10.000 ai nuovi frontalieri. Scopri tassazione, AVS, LPP e LAMal per chi vive a Mornago e lavora in Ticino.",
-          "date": "2026-09-02T13:35:07.451Z"
         }
       ],
       "links": [
@@ -176,7 +176,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-15T10:49:18.785Z"
+      "updatedAt": "2026-10-16T03:16:00.674Z"
     },
     "en": {
       "canton": "TI",
@@ -272,6 +272,12 @@
           "date": "2026-10-08T12:15:50.666Z"
         },
         {
+          "title": "Cross-border workers: health tax and omnibus decree at 100%",
+          "url": "/en/ticino-articles/commuters-health-tax-omnibus-june-2026/",
+          "excerpt": "No worker has been asked to pay the health tax The expected contribution ranges from 3% to 6% of net income From January 2026, workers",
+          "date": "2026-10-16T03:10:47.550Z"
+        },
+        {
           "title": "Healthcare tax decree for cross-border workers approved",
           "url": "/en/ticino-articles/healthcare-tax-decree-for-cross-border-workers-approved/",
           "date": "2026-10-08T11:44:40.237Z"
@@ -299,12 +305,6 @@
           "url": "/en/cross-border-articles/cross-border-worker-laveno-mombello-ticino/",
           "excerpt": "Living in Laveno-Mombello and working in Ticino: connections, taxes at source, deductibles and pension for frontier workers.",
           "date": "2026-09-12T01:10:28.373Z"
-        },
-        {
-          "title": "Living in Mornago, working in Ticino: taxation and permit G",
-          "url": "/en/cross-border-articles/live-mornago-work-ticino-cross-border/",
-          "excerpt": "From 1 January 2024, the New Frontier Agreement guarantees a €10,000 exemption to new frontier workers. Discover taxation, AVS, LPP and LAMal for those who live in Mornago and work in Ticino.",
-          "date": "2026-09-02T13:35:07.451Z"
         }
       ],
       "links": [
@@ -333,7 +333,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-15T10:49:18.785Z"
+      "updatedAt": "2026-10-16T03:16:00.674Z"
     },
     "de": {
       "canton": "TI",
@@ -429,6 +429,12 @@
           "date": "2026-10-08T12:15:50.666Z"
         },
         {
+          "title": "Grenzgänger: Gesundheitssteuer und Omnibus-Dekret zu 100%",
+          "url": "/de/tessin-artikel/grenzganger-gesundheit-steuer-omnibus-juni-2026/",
+          "excerpt": "Kein Arbeitnehmer wurde zur Zahlung der Gesundheitssteuer aufgefordert Der vorgesehene Beitrag reicht von 3% bis 6% des Nettoeinkommens Ab Januar 2026 die Arbeitnehmer",
+          "date": "2026-10-16T03:10:47.550Z"
+        },
+        {
           "title": "Gesundheitsabgabe für Grenzgänger: Dekret publiziert",
           "url": "/de/tessin-artikel/gesundheitsabgabe-fur-grenzganger-dekret-publiziert/",
           "date": "2026-10-08T11:44:40.237Z"
@@ -456,12 +462,6 @@
           "url": "/de/grenzgaenger-artikel/grenzgaenger-laveno-mombello-tessin/",
           "excerpt": "Wohnen in Laveno-Mombello und Arbeiten im Tessin: Verbindungen, Quellensteuern, Franchisen und Vorsorge für Grenzgänger.",
           "date": "2026-09-12T01:10:28.373Z"
-        },
-        {
-          "title": "Leben in Mornago, Arbeiten im Tessin: Besteuerung und Genehmigung G",
-          "url": "/de/grenzgaenger-artikel/in-mornago-leben-im-tessin-arbeiten-grenzgaenger/",
-          "excerpt": "Ab dem 1. Januar 2024 garantiert die Neue Grenzgängervereinbarung den neuen Grenzgängern eine Selbstbeteiligung von 10.000 €. Entdecken Sie Besteuerung, AHV, BVG und KVG für diejenigen, die in Mornago leben und im…",
-          "date": "2026-09-02T13:35:07.451Z"
         }
       ],
       "links": [
@@ -490,7 +490,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-15T10:49:18.785Z"
+      "updatedAt": "2026-10-16T03:16:00.674Z"
     },
     "fr": {
       "canton": "TI",
@@ -587,6 +587,12 @@
           "date": "2026-10-08T12:15:50.666Z"
         },
         {
+          "title": "Frontaliers : taxe santé et décret omnibus à 100%",
+          "url": "/fr/articles-tessin/frontaliers-taxe-sante-omnibus-juin-2026/",
+          "excerpt": "Aucun travailleur n’a été appelé à payer la taxe sur la santé La contribution prévue va de 3% à 6% du revenu net À partir de janvier 2026 les travailleurs",
+          "date": "2026-10-16T03:10:47.550Z"
+        },
+        {
           "title": "Décret sur la taxe santé des frontaliers publié : feu vert des régions",
           "url": "/fr/articles-tessin/decret-sur-la-taxe-sante-des-frontaliers-publie-feu-vert-des-regions/",
           "excerpt": "Décret publié au Journal officiel à l'approche des fêtes",
@@ -615,12 +621,6 @@
           "url": "/fr/articles-frontalier/frontalier-laveno-mombello-tessin/",
           "excerpt": "Vivre à Laveno-Mombello et travailler au Tessin : liens, impôts à la source, franchises et prévoyance pour les travailleurs frontaliers.",
           "date": "2026-09-12T01:10:28.373Z"
-        },
-        {
-          "title": "Vivre à Mornago, travailler au Tessin : fiscalité et permis G",
-          "url": "/fr/articles-frontalier/vivre-mornago-travailler-tessin-frontalier/",
-          "excerpt": "À partir du 1er janvier 2024, le nouvel accord frontalier garantit une franchise de 10 000 € aux nouveaux frontaliers. Découvrez la fiscalité, l'AVS, la LPP et la LAMal pour ceux qui vivent à Mornago et travaillent au…",
-          "date": "2026-09-02T13:35:07.451Z"
         }
       ],
       "links": [
@@ -649,7 +649,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-15T10:49:18.785Z"
+      "updatedAt": "2026-10-16T03:16:00.674Z"
     }
   }
 }

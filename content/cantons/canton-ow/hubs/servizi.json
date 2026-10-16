@@ -4,8 +4,8 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "servizi",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "4360416db8bf382ca4d098e391bcf8ccaa0c8a444a8d412247d19f6f2c502d93",
+  "updatedAt": "2026-10-16T01:56:54.479Z",
+  "contentHash": "a5fdaaa96d485e1645b68a171e61b6f43524eb155992336fd4aea4e039062fcc",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,13 +13,8 @@
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-15T13:31:14.704Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -54,20 +49,6 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Sarnen",
-              "value": "21 °C",
-              "detail": "oggi da 12 a 21 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-15T13:31:14.704Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -83,7 +64,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -162,7 +143,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T01:56:54.479Z"
     },
     "en": {
       "canton": "OW",
@@ -194,20 +175,6 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Sarnen",
-              "value": "21 °C",
-              "detail": "today from 12 to 21 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-15T13:31:14.704Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -223,7 +190,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -298,7 +265,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T01:56:54.479Z"
     },
     "de": {
       "canton": "OW",
@@ -330,20 +297,6 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Sarnen",
-              "value": "21 °C",
-              "detail": "heute 12 bis 21 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-15T13:31:14.704Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -359,7 +312,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -434,7 +387,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T01:56:54.479Z"
     },
     "fr": {
       "canton": "OW",
@@ -466,20 +419,6 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Sarnen",
-              "value": "21 °C",
-              "detail": "aujourd’hui de 12 à 21 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-15T13:31:14.704Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -495,7 +434,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -566,7 +505,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T01:56:54.479Z"
     }
   }
 }

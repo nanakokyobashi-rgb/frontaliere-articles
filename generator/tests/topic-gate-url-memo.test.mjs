@@ -19,7 +19,7 @@ import {
   appendEvergreenRejected,
   isTopicGateAbortedUrl,
   loadEvergreenRejectedTracker,
-  persistEvergreenRejectedTracker,
+  persistEvergreenRejectedTrackerAtomically,
   recordTopicGateAbortedUrl,
   strikeEvergreenKeyword,
 } from '../scripts/lib/article-topic-selector.mjs';
@@ -67,7 +67,7 @@ test('persist e load conservano topicGateUrls, e un file senza il campo si caric
   try {
     const file = path.join(dir, 'tracker.json');
     const t = recordTopicGateAbortedUrl({ keywords: ['kw'], strikes: {} }, URL_KEY, 'svizzera', NOW);
-    assert.equal(persistEvergreenRejectedTracker(t, { path: file }), true);
+    persistEvergreenRejectedTrackerAtomically(() => t, { path: file });
     const loaded = loadEvergreenRejectedTracker({ path: file });
     assert.equal(isTopicGateAbortedUrl(loaded, URL_KEY, 'svizzera', NOW + 1), true);
     fs.writeFileSync(file, JSON.stringify({ keywords: ['a'], strikes: { b: 2 } }));
@@ -91,7 +91,10 @@ test('un ledger corrotto resta fail-closed anche quando si registra un topic-gat
     assert.equal(loaded.invalid, true);
     const updated = recordTopicGateAbortedUrl(loaded, URL_KEY, 'frontaliere', NOW);
     assert.equal(updated.invalid, true);
-    assert.equal(persistEvergreenRejectedTracker(updated, { path: file }), false);
+    assert.throws(
+      () => persistEvergreenRejectedTrackerAtomically(() => updated, { path: file }),
+      /refusing to update invalid evergreen ledger/,
+    );
     assert.equal(fs.readFileSync(file, 'utf8'), original, 'il memo non deve sovrascrivere il ledger corrotto');
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
@@ -106,7 +109,12 @@ test('create-article registra l\'abort nel catch del ciclo notizie e lo filtra p
   assert.ok(urlPrefilter > 0 && prefilter > urlPrefilter && prefilter < ranker, 'filtro dopo quello degli URL usati, prima del ranker');
   assert.match(src, /_isTopicGateAbortedUrl\(topicGateTracker, normalizeNewsUrl\(h\.url\), SECTION_NAME\)/);
   assert.match(src, /_isTopicGateAbortedUrl\(_loadEvergreenRejectedTracker\(\), normalizeNewsUrl\(realUrl\), SECTION_NAME\)/);
-  assert.match(src, /if \(isTopicGateAbort && url && !String\(url\)\.startsWith\('evergreen:\/\/'\)\) \{\n\s+try \{\n\s+_persistEvergreenRejectedTracker\(_recordTopicGateAbortedUrl\(_loadEvergreenRejectedTracker\(\), normalizeNewsUrl\(url\), SECTION_NAME\)\);/);
+  const abortWriter = src.slice(
+    src.indexOf("if (isTopicGateAbort && url && !String(url).startsWith('evergreen://')) {"),
+    src.indexOf('const isQualityReject = isQualityRejectError(e);', src.indexOf("if (isTopicGateAbort && url && !String(url).startsWith('evergreen://')) {")),
+  );
+  assert.match(abortWriter, /_persistEvergreenRejectedTracker\(\(tracker\) => _recordTopicGateAbortedUrl\(/);
+  assert.doesNotMatch(abortWriter, /_loadEvergreenRejectedTracker\(/, 'la modifica deve rileggere il ledger dentro il lock');
 });
 
 test('un corpo CMS cantonale verificato consente la rivalutazione del memo, non un bypass del gate', () => {

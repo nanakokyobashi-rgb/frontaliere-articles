@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "35bae19b1b3ab07e08af5de16cbb0e9c8bdfbbd56c951f99e743b219977c07c3",
+  "updatedAt": "2026-10-16T03:02:31.746Z",
+  "contentHash": "14feb5bad439b3f67b92582fd0351871ba56c8182286be0c9f65d0b651c16653",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "16",
+          "value": "15",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "28",
+          "value": "26",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
@@ -181,7 +181,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -264,7 +264,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     },
     "en": {
       "canton": "VD",
@@ -279,12 +279,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "16",
+          "value": "15",
           "note": "reports as of 15 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "28",
+          "value": "26",
           "note": "reports as of 15 October 2026"
         }
       ],
@@ -423,7 +423,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -505,7 +505,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     },
     "de": {
       "canton": "VD",
@@ -520,12 +520,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "16",
+          "value": "15",
           "note": "Meldungen vom 15. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "28",
+          "value": "26",
           "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
@@ -664,7 +664,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -746,7 +746,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     },
     "fr": {
       "canton": "VD",
@@ -761,12 +761,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "16",
+          "value": "15",
           "note": "signalements au 15 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "28",
+          "value": "26",
           "note": "signalements au 15 octobre 2026"
         }
       ],
@@ -905,7 +905,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -988,7 +988,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T03:02:31.746Z"
     }
   }
 }

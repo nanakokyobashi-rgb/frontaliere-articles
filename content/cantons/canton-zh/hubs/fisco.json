@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "282cd0cb2aa19d0a2e1c97ad0f66193ae409d4dbd62477c9448f6111e4716691",
+  "updatedAt": "2026-10-16T02:22:45.489Z",
+  "contentHash": "a9628d3c5dbacb2d95dd7b8b02c11246a6ad55da60355be19ffccde7cd644c99",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Imposte a Zurigo: aliquote e deduzioni",
+          "url": "/articoli-svizzera/imposte-zurigo-aliquote-deduzioni/",
+          "excerpt": "Guida a tre livelli: federale, cantonale e comunale.",
+          "date": "2026-10-16T02:17:43.978Z"
+        },
+        {
           "title": "Dichiarazione imposte svizzera 2026: guida a Zurigo",
           "url": "/articoli-svizzera/fisco-zurigo-guida-online/",
           "excerpt": "Nel 2026 la dichiarazione distingue IFD, imposte cantonali e comunali: a Zurigo contano legge e moltiplicatore del Cantone e del Comune.",
@@ -142,12 +148,6 @@
           "url": "/articoli-svizzera/successione-donazione-zurigo-guida/",
           "excerpt": "Imposte di successione e donazione nel Canton Zurigo: aliquote per grado di parentela, esenzioni totali per coniuge e figli, dichiarazione obbligatoria e scadenze da rispettare.",
           "date": "2026-08-25T09:33:40.022Z"
-        },
-        {
-          "title": "Imposte di successione e donazione nel Cantone di Zurigo",
-          "url": "/articoli-svizzera/imposta-di-succesione-e-donazione-canton-zurigo-aliquote/",
-          "excerpt": "Nel Cantone di Zurigo, l'imposta di successione e donazione è soggetta a aliquote diverse in base al grado di parentela.",
-          "date": "2026-08-12T04:05:27.662Z"
         }
       ],
       "links": [
@@ -176,7 +176,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T02:22:45.489Z"
     },
     "en": {
       "canton": "ZH",
@@ -261,6 +261,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Taxes in Zurich: rates and deductions",
+          "url": "/en/swiss-articles/zurich-tax-rates-deductions/",
+          "excerpt": "Guide to three levels: federal, cantonal and municipal.",
+          "date": "2026-10-16T02:17:43.978Z"
+        },
+        {
           "title": "Swiss tax return 2026: guide to Zurich",
           "url": "/en/swiss-articles/zurich-tax-return-online-guide/",
           "excerpt": "In 2026, the tax return distinguishes between IFD, cantonal taxes and municipal taxes: in Zurich, the law and multiplier of the canton and municipality matter.",
@@ -301,12 +307,6 @@
           "url": "/en/swiss-articles/succession-donation-zurich-guide/",
           "excerpt": "Inheritance and gift taxes in the Canton of Zurich: rates for degree of kinship, total exemptions for spouse and children, mandatory declaration and deadlines to be met.",
           "date": "2026-08-25T09:33:40.022Z"
-        },
-        {
-          "title": "Inheritance and gift taxes in the Canton of Zurich",
-          "url": "/en/swiss-articles/inheritance-tax-and-donation-canton-zurich-rates/",
-          "excerpt": "In the Canton of Zurich, inheritance and gift tax is subject to different rates depending on the degree of kinship.",
-          "date": "2026-08-12T04:05:27.662Z"
         }
       ],
       "links": [
@@ -335,7 +335,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T02:22:45.489Z"
     },
     "de": {
       "canton": "ZH",
@@ -420,6 +420,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Steuern in Zürich: Steuersätze und Abzüge",
+          "url": "/de/schweiz-artikel/zuerich-steuersaetze-abzugsvo/",
+          "excerpt": "Fahren auf drei Ebenen: Bund, Kanton und Gemeinde.",
+          "date": "2026-10-16T02:17:43.978Z"
+        },
+        {
           "title": "Schweizer Steuererklärung 2026: Leitfaden für Zürich",
           "url": "/de/schweiz-artikel/steuererklaerung-zuerich-online-ratgeber/",
           "excerpt": "Im Jahr 2026 unterscheidet die Steuererklärung zwischen IFD sowie kantonalen und kommunalen Steuern: In Zürich sind das Gesetz und der Steuerfuss des Kantons und der Gemeinde maßgeblich.",
@@ -460,12 +466,6 @@
           "url": "/de/schweiz-artikel/erbschaft-schenkung-zuerich-leitfaden/",
           "excerpt": "Erbschafts- und Schenkungssteuern im Kanton Zürich: Sätze pro Verwandtschaftsgrad, Totalbefreiungen für Ehepartner und Kinder, Meldepflicht und einzuhaltende Fristen.",
           "date": "2026-08-25T09:33:40.022Z"
-        },
-        {
-          "title": "Erbschafts- und Schenkungssteuern im Kanton Zürich",
-          "url": "/de/schweiz-artikel/erbschaftssteuer-und-schenkungssteuer-kanton-zuerich-satz/",
-          "excerpt": "Im Kanton Zürich unterliegt die Erbschafts- und Schenkungssteuer je nach Verwandtschaftsgrad unterschiedlichen Sätzen.",
-          "date": "2026-08-12T04:05:27.662Z"
         }
       ],
       "links": [
@@ -494,7 +494,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T02:22:45.489Z"
     },
     "fr": {
       "canton": "ZH",
@@ -579,6 +579,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Impôts à Zurich : taux et déductions",
+          "url": "/fr/articles-suisse/impots-zurich-baremes-deduct/",
+          "excerpt": "Conduite à trois niveaux : fédéral, cantonal et communal.",
+          "date": "2026-10-16T02:17:43.978Z"
+        },
+        {
           "title": "Déclaration fiscale suisse 2026 : guide de Zurich",
           "url": "/fr/articles-suisse/declaration-impots-zurich-guide-en-ligne/",
           "excerpt": "En 2026, la déclaration distingue IFD, impôts cantonaux et communaux : à Zurich, la loi et le multiplicateur du canton et de la commune comptent.",
@@ -619,12 +625,6 @@
           "url": "/fr/articles-suisse/succession-donation-zurich-guide/",
           "excerpt": "Droits de succession et de donation dans le canton de Zurich : taux par degré de parenté, exonérations totales pour conjoint et enfants, déclaration obligatoire et délais à respecter.",
           "date": "2026-08-25T09:33:40.022Z"
-        },
-        {
-          "title": "Droits de succession et de donation dans le canton de Zurich",
-          "url": "/fr/articles-suisse/impot-de-succession-et-dons-canton-de-zurich-taux/",
-          "excerpt": "Dans le canton de Zurich, l'impôt sur les successions et les donations est soumis à des taux différents en fonction du degré de parenté.",
-          "date": "2026-08-12T04:05:27.662Z"
         }
       ],
       "links": [
@@ -653,7 +653,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T02:22:45.489Z"
     }
   }
 }

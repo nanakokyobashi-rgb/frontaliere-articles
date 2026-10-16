@@ -39,6 +39,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.sovranita-fiscale-accordo-ue.title': 'Accord UE : risque de perte de souveraineté fiscale pour la Suisse',
     'blog.article.sovranita-fiscale-accordo-ue.excerpt': 'Le 6 octobre, la NZZ tire la sonnette d’alarme fiscale Les aides d’État peuvent inclure des allègements fiscaux La Confédération, les cantons et les communes sont concernés Prévue',
     'blog.article.sovranita-fiscale-accordo-ue.imageAlt': 'Palais fédéral à Bellinzone, symbole des institutions suisses',
+    'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.title': 'Frontaliers : taxe santé et décret omnibus à 100%',
+    'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.excerpt': 'Aucun travailleur n’a été appelé à payer la taxe sur la santé La contribution prévue va de 3% à 6% du revenu net À partir de janvier 2026 les travailleurs',
+    'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.imageAlt': 'Vue panoramique sur Lugano et le lac par temps nuageux, symbole du canton du Tessin',
 };
 
 export default blogMetaCantonTiFr;

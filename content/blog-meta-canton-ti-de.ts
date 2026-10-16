@@ -39,6 +39,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.sovranita-fiscale-accordo-ue.title': 'EU-Abkommen: Risiko des Verlusts der Steuerhoheit für die Schweiz',
     'blog.article.sovranita-fiscale-accordo-ue.excerpt': 'Am 6. Oktober schlägt die NZZ steuerlichen Alarm Staatliche Beihilfen können Steuervergünstigungen umfassen Bund, Kantone und Gemeinden betroffen Vorgesehen',
     'blog.article.sovranita-fiscale-accordo-ue.imageAlt': 'Bundespalast in Bellinzona, Symbol der Schweizer Institutionen',
+    'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.title': 'Grenzgänger: Gesundheitssteuer und Omnibus-Dekret zu 100%',
+    'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.excerpt': 'Kein Arbeitnehmer wurde zur Zahlung der Gesundheitssteuer aufgefordert Der vorgesehene Beitrag reicht von 3% bis 6% des Nettoeinkommens Ab Januar 2026 die Arbeitnehmer',
+    'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.imageAlt': 'Panoramaansicht von Lugano und dem See an einem bewölkten Tag, Symbol des Kantons Tessin',
 };
 
 export default blogMetaCantonTiDe;

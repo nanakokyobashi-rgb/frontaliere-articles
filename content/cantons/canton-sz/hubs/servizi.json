@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "babd11704acb670c177054779cdf6423a1c129eda44e566a741beb70dce04ccf",
+  "updatedAt": "2026-10-16T01:56:54.479Z",
+  "contentHash": "fcbc6e54ddc690401441f65f358f6c3b7a4fcc39ba804a5c3b1b8357913c1760",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -18,13 +18,8 @@
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-15T13:31:14.704Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -95,20 +90,6 @@
           "updatedAt": "2026-10-15T11:34:01.149Z"
         },
         {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Schwyz",
-              "value": "20 °C",
-              "detail": "oggi da 11 a 21 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-15T13:31:14.704Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -144,7 +125,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -223,7 +204,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T01:56:54.479Z"
     },
     "en": {
       "canton": "SZ",
@@ -291,20 +272,6 @@
           "updatedAt": "2026-10-15T11:34:01.149Z"
         },
         {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Schwyz",
-              "value": "20 °C",
-              "detail": "today from 11 to 21 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-15T13:31:14.704Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -340,7 +307,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -415,7 +382,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T01:56:54.479Z"
     },
     "de": {
       "canton": "SZ",
@@ -483,20 +450,6 @@
           "updatedAt": "2026-10-15T11:34:01.149Z"
         },
         {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Schwyz",
-              "value": "20 °C",
-              "detail": "heute 11 bis 21 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-15T13:31:14.704Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -532,7 +485,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -607,7 +560,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T01:56:54.479Z"
     },
     "fr": {
       "canton": "SZ",
@@ -675,20 +628,6 @@
           "updatedAt": "2026-10-15T11:34:01.149Z"
         },
         {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Schwyz",
-              "value": "20 °C",
-              "detail": "aujourd’hui de 11 à 21 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-15T13:31:14.704Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -724,7 +663,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -795,7 +734,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T01:56:54.479Z"
     }
   }
 }
