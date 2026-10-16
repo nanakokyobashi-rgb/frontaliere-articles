@@ -162,6 +162,8 @@ function gh(args, { json = true } = {}) {
  * elemento prima che il processo Node lo legga: non usiamo `--slurp`, che la
  * versione di gh in CI non accetta insieme a `--jq` e che accumulerebbe i
  * body completi di tutte le pagine nel buffer del processo.
+ * Un errore di lettura si propaga al chiamante: una pagina non letta non e'
+ * una lista vuota e non deve produrre un esito "nessun doppio instradamento".
  */
 function fetchOpenIssuesForLabel(active) {
   const repo = repoName() || '{owner}/{repo}';
@@ -204,11 +206,19 @@ function fetchOpenIssuesForLabel(active) {
     .filter((iss) => Number.isInteger(iss.number) && iss.number > 0);
 }
 
-/** Usa la timeline REST per non confondere un commento con un evento di label. */
+/** Usa la timeline REST: errore o timeline priva di eventi label non danno un'eta' affidabile. */
 function withLastRoutingLabelEvent(issues) {
   const repo = repoName();
+  const hasConflict = (iss) => {
+    const names = labelNames(iss);
+    return ROUTE_CONFLICTS.some(({ active, queued }) => names.includes(active) && names.includes(queued));
+  };
+  if (!repo && issues.some(hasConflict)) {
+    throw new Error("GH_REPO/GITHUB_REPOSITORY assente: impossibile verificare l'eta' delle label.");
+  }
   if (!repo) return issues;
   return issues.map((iss) => {
+    if (!hasConflict(iss)) return iss;
     try {
       const pages = gh([
         'api',
@@ -222,14 +232,13 @@ function withLastRoutingLabelEvent(issues) {
         lastLabelEventAt(events, queued),
       ]).filter((t) => Number.isFinite(t));
       const latest = times.length > 0 ? Math.max(...times) : null;
-      // Stringa vuota deliberata: se la timeline fallisce o non contiene un
-      // evento leggibile, reconciliations() non deve ripiegare su updatedAt
-      // e rischiare una rimozione basata su un timestamp sbagliato.
-      return { ...iss, lastLabelEventAt: latest === null ? '' : new Date(latest).toISOString() };
+      if (latest === null) {
+        throw new Error('timeline senza eventi leggibili per le label di instradamento');
+      }
+      return { ...iss, lastLabelEventAt: new Date(latest).toISOString() };
     } catch (e) {
-      console.log('::warning::timeline label di #' + iss.number + ' illeggibile ('
-        + String(e).slice(0, 120) + ') → salto.');
-      return { ...iss, lastLabelEventAt: '' };
+      throw new Error('timeline label di #' + iss.number + ' illeggibile ('
+        + String(e).slice(0, 120) + ')');
     }
   });
 }
@@ -237,23 +246,13 @@ function withLastRoutingLabelEvent(issues) {
 /** Le issue candidate: solo quelle che portano gia' una label ATTIVA. */
 function fetchCandidates(only) {
   if (only) {
-    try {
-      const iss = gh(['issue', 'view', String(only), ...repoArgs(), '--json', 'number,labels,updatedAt,state']);
-      return iss?.state && String(iss.state).toUpperCase() !== 'OPEN' ? [] : withLastRoutingLabelEvent([iss]);
-    } catch (e) {
-      console.log(`::warning::#${only} illeggibile (${String(e).slice(0, 120)}) → nessuna riconciliazione.`);
-      return [];
-    }
+    const iss = gh(['issue', 'view', String(only), ...repoArgs(), '--json', 'number,labels,updatedAt,state']);
+    return iss?.state && String(iss.state).toUpperCase() !== 'OPEN' ? [] : withLastRoutingLabelEvent([iss]);
   }
   const byNumber = new Map();
   for (const { active } of ROUTE_CONFLICTS) {
-    try {
-      for (const iss of fetchOpenIssuesForLabel(active)) {
-        byNumber.set(iss.number, iss);
-      }
-    } catch (e) {
-      // Label inesistente o `gh` in errore: lista vuota, mai fatale.
-      console.log(`::warning::lista per ${active} fallita (${String(e).slice(0, 120)}) → salto.`);
+    for (const iss of fetchOpenIssuesForLabel(active)) {
+      byNumber.set(iss.number, iss);
     }
   }
   return withLastRoutingLabelEvent([...byNumber.values()]);
@@ -272,7 +271,16 @@ function main() {
     return;
   }
 
-  const todo = reconciliations(fetchCandidates(only), {
+  let candidates;
+  try {
+    candidates = fetchCandidates(only);
+  } catch (e) {
+    console.log(`::error::lettura candidati incompleta (${String(e).slice(0, 160)}) → nessuna riconciliazione.`);
+    process.exitCode = 1;
+    return;
+  }
+
+  const todo = reconciliations(candidates, {
     minAgeSec,
   });
   if (!todo.length) {

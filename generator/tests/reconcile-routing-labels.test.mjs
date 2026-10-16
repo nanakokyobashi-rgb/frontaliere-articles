@@ -253,6 +253,10 @@ if [ "$1" = "api" ] && [ "$3" = "--paginate" ] && [ "$4" = "--jq" ] && printf '%
   printf '%s\\n' '{"number":3,"labels":["agent:fix","agent:fix-queued"],"updatedAt":"1970-01-01T00:00:00Z","isPullRequest":true}'
   exit 0
 fi
+if [ "$1" = "api" ] && printf '%s' "$2" | grep -q '/issues/[0-9][0-9]*/events'; then
+  printf '%s\\n' '[[{"event":"labeled","label":{"name":"agent:fix"},"created_at":"1970-01-01T00:00:00Z"},{"event":"labeled","label":{"name":"agent:fix-queued"},"created_at":"1970-01-01T00:00:00Z"}]]'
+  exit 0
+fi
 if [ "$1" = "api" ] && [ "$3" = "--paginate" ] && [ "$4" = "--jq" ] && printf '%s' "$2" | grep -q 'labels=agent%3Adecompose'; then
   exit 0
 fi
@@ -268,7 +272,7 @@ exit 0
     env: {
       ...process.env,
       PATH: `${fakeBin}:${process.env.PATH}`,
-      GH_REPO: '',
+      GH_REPO: 'example/repo',
       GITHUB_REPOSITORY: '',
       MIN_AGE_SEC: '0',
       TRACE_FILE: traceFile,
@@ -281,7 +285,7 @@ exit 0
   assert.match(trace, /labels/);
   assert.match(trace, /updated_at/);
   assert.doesNotMatch(trace, /body/);
-  assert.doesNotMatch(trace, /--slurp/);
+  assert.doesNotMatch(trace, /state=open[^\n]*--slurp/);
   assert.match(result.stdout, /Riconciliazioni: 1\./);
   assert.match(result.stdout, /Rimozioni riuscite: 1\./);
   assert.match(result.stdout, /Rimozioni fallite: 1\./);
@@ -291,4 +295,104 @@ exit 0
   assert.match(result.stdout, /record JSONL proiettato 1 illeggibile/);
   assert.match(result.stdout, /record JSONL proiettato 2 non-object/);
   assert.match(result.stdout, /record JSONL proiettato 3 non-object/);
+});
+
+test('una lista paginata fallita non viene presentata come lista vuota pulita', () => {
+  const fakeBin = fs.mkdtempSync(path.join(os.tmpdir(), 'reconcile-gh-list-failure-'));
+  const fakeGh = path.join(fakeBin, 'gh');
+  const traceFile = path.join(fakeBin, 'trace');
+  fs.writeFileSync(fakeGh, `#!/bin/sh
+printf 'FAKE_GH_ARGS:%s\\n' "$*" >> "$TRACE_FILE"
+case "$2" in
+  *labels=agent%3Afix*) printf '%s\\n' 'API rate limit' >&2; exit 42 ;;
+  *labels=agent%3Adecompose*) exit 0 ;;
+esac
+exit 0
+`);
+  fs.chmodSync(fakeGh, 0o755);
+  try {
+    const result = spawnSync(process.execPath, [ROUTER], {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        PATH: `${fakeBin}:${process.env.PATH}`,
+        GH_REPO: 'example/repo',
+        GITHUB_REPOSITORY: '',
+        TRACE_FILE: traceFile,
+      },
+    });
+    assert.equal(result.status, 1, `${result.stdout}\\n${result.stderr}`);
+    assert.match(result.stdout, /::error::lettura candidati incompleta/);
+    assert.doesNotMatch(result.stdout, /Nessun doppio instradamento fermo/);
+    assert.doesNotMatch(fs.readFileSync(traceFile, 'utf8'), /issue edit/);
+  } finally {
+    fs.rmSync(fakeBin, { recursive: true, force: true });
+  }
+});
+
+test("un conflitto senza repo esplicito non usa updatedAt come eta' di ripiego", () => {
+  const fakeBin = fs.mkdtempSync(path.join(os.tmpdir(), 'reconcile-gh-no-repo-'));
+  const fakeGh = path.join(fakeBin, 'gh');
+  fs.writeFileSync(fakeGh, `#!/bin/sh
+if [ "$1" = "issue" ] && [ "$2" = "view" ]; then
+  printf '%s\\n' '{"number":42,"labels":["agent:fix","agent:fix-queued"],"updatedAt":"1970-01-01T00:00:00Z","state":"OPEN"}'
+  exit 0
+fi
+exit 0
+`);
+  fs.chmodSync(fakeGh, 0o755);
+  try {
+    const result = spawnSync(process.execPath, [ROUTER, '--issue', '42'], {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        PATH: `${fakeBin}:${process.env.PATH}`,
+        GH_REPO: '',
+        GITHUB_REPOSITORY: '',
+      },
+    });
+    assert.equal(result.status, 1, `${result.stdout}\\n${result.stderr}`);
+    assert.match(result.stdout, /::error::lettura candidati incompleta/);
+    assert.doesNotMatch(result.stdout, /Nessun doppio instradamento fermo/);
+  } finally {
+    fs.rmSync(fakeBin, { recursive: true, force: true });
+  }
+});
+
+test('una timeline label illeggibile fallisce chiuso prima di dichiarare pulito o mutare', () => {
+  const fakeBin = fs.mkdtempSync(path.join(os.tmpdir(), 'reconcile-gh-timeline-failure-'));
+  const fakeGh = path.join(fakeBin, 'gh');
+  const traceFile = path.join(fakeBin, 'trace');
+  fs.writeFileSync(fakeGh, `#!/bin/sh
+printf 'FAKE_GH_ARGS:%s\\n' "$*" >> "$TRACE_FILE"
+if [ "$1" = "api" ] && printf '%s' "$2" | grep -q 'labels=agent%3Afix'; then
+  printf '%s\\n' '{"number":42,"labels":["agent:fix","agent:fix-queued"],"updatedAt":"1970-01-01T00:00:00Z","isPullRequest":false}'
+  exit 0
+fi
+if [ "$1" = "api" ] && printf '%s' "$2" | grep -q 'labels=agent%3Adecompose'; then exit 0; fi
+if [ "$1" = "api" ] && printf '%s' "$2" | grep -q '/issues/42/events'; then
+  printf '%s\\n' 'timeline unavailable' >&2
+  exit 43
+fi
+exit 0
+`);
+  fs.chmodSync(fakeGh, 0o755);
+  try {
+    const result = spawnSync(process.execPath, [ROUTER], {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        PATH: `${fakeBin}:${process.env.PATH}`,
+        GH_REPO: 'example/repo',
+        GITHUB_REPOSITORY: '',
+        TRACE_FILE: traceFile,
+      },
+    });
+    assert.equal(result.status, 1, `${result.stdout}\\n${result.stderr}`);
+    assert.match(result.stdout, /::error::lettura candidati incompleta/);
+    assert.doesNotMatch(result.stdout, /Nessun doppio instradamento fermo/);
+    assert.doesNotMatch(fs.readFileSync(traceFile, 'utf8'), /issue edit/);
+  } finally {
+    fs.rmSync(fakeBin, { recursive: true, force: true });
+  }
 });
