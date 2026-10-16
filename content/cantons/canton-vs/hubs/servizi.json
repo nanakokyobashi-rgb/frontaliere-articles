@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T10:23:56.350Z",
-  "contentHash": "d6843c786a3b49db49c23c671dba833c8c3d291c8878858d5963d4132e6bbc7a",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "c673f20912673659520beecc75ad3ab9db835a08347ee66487417c0d905196ee",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -183,6 +183,7 @@
           "date": "2026-09-06T01:34:18.109Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Premi di cassa malati per regione",
@@ -209,7 +210,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "VS",
@@ -370,6 +371,7 @@
           "date": "2026-09-06T01:34:18.109Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Number plate auctions",
@@ -392,7 +394,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "VS",
@@ -553,6 +555,7 @@
           "date": "2026-09-06T01:34:18.109Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Kontrollschild-Auktionen",
@@ -575,7 +578,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "VS",
@@ -736,6 +739,7 @@
           "date": "2026-09-06T01:34:18.109Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Offres d’emploi en Valais",
@@ -754,7 +758,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

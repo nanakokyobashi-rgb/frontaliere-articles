@@ -4,8 +4,8 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T01:56:54.479Z",
-  "contentHash": "a5fdaaa96d485e1645b68a171e61b6f43524eb155992336fd4aea4e039062fcc",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "fcdc007d1e2d889f80d4eff81b572ea15df8da4be036a5fb17fd44bc37ce8d56",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -117,6 +117,7 @@
           "date": "2026-08-16T14:15:52.976Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Premi di cassa malati per regione",
@@ -143,7 +144,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "OW",
@@ -243,6 +244,7 @@
           "date": "2026-08-16T14:15:52.976Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Number plate auctions",
@@ -265,7 +267,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "OW",
@@ -365,6 +367,7 @@
           "date": "2026-08-16T14:15:52.976Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Kontrollschild-Auktionen",
@@ -387,7 +390,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "OW",
@@ -487,6 +490,7 @@
           "date": "2026-08-16T14:15:52.976Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Offres d’emploi à Obwald",
@@ -505,7 +509,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T00:00:55.142Z",
-  "contentHash": "494cac4bfb2641fe2372374ca3df59cca57bb80d1b25364668fc9548c60067a5",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "51813b5cb4aed324b789325fc1c82cb7ebe2b2a4b4c843ebee8ff95eab9cf1a3",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-15T13:57:57.453Z",
+      "updatedAt": "2026-10-16T03:54:22.189Z",
       "keyFacts": 1
     }
   ],
@@ -95,10 +95,30 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Esercitazione militare a Egg e diga Sihlsee dal 9 al 12 ottobre 2026",
+          "url": "/articoli-svitto/esercitazione-militare-sihlsee-ottobre-2026/",
+          "excerpt": "Avviso del 'Schweizer Militär': esercitazione dal 9 al 12 ottobre 2026 a Egg e diga Sihlsee.",
+          "date": "2026-10-09T23:17:55.280Z"
+        },
+        {
+          "title": "Concorrenza sleale nel cambio cassa malati a Svitto",
+          "url": "/articoli-svitto/svitto-cambio-cassa-malati/",
+          "excerpt": "Le offerte per cambiare cassa malati spesso ingannano: una cassa locale di Svitto deve fare i conti con un business descritto come concorrenza sleale.",
+          "date": "2026-10-08T14:43:30.771Z"
+        },
+        {
+          "title": "Einsiedeln: chiusure stradali per il Gallusmarkt 2026",
+          "url": "/articoli-svitto/chiusura-strade-gallusmarkt-svitto/",
+          "excerpt": "Accesso e uscita vietati in Hauptstrasse e Sagenplatz dalle 5.00 alle 20.00 del giorno del mercato. Rumori da lunedì alle 5.00.",
+          "date": "2026-10-07T09:21:09.358Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Svitto",
@@ -109,7 +129,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "SZ",
@@ -192,10 +212,30 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Military exercise in Egg and at the Sihlsee dam from 9 to 12 October 2026",
+          "url": "/en/schwyz-articles/military-exercise-sihlsee-october-2026/",
+          "excerpt": "Notice from the 'Schweizer Militär': exercise from October 9 to 12, 2026, in Egg and at Sihlsee Dam.",
+          "date": "2026-10-09T23:17:55.280Z"
+        },
+        {
+          "title": "Unfair competition in switching health insurers in Schwyz",
+          "url": "/en/schwyz-articles/schwyz-health-insurance-switch/",
+          "excerpt": "Offers to switch health insurers are often deceptive: a local health insurer in Schwyz has to contend with a business described as unfair competition.",
+          "date": "2026-10-08T14:43:30.771Z"
+        },
+        {
+          "title": "Einsiedeln: road closures for Gallusmarkt 2026",
+          "url": "/en/schwyz-articles/road-closure-gallusmarkt-schwyz/",
+          "excerpt": "Access and exit prohibited on Hauptstrasse and Sagenplatz from 5.00 to 20.00 on market day. Noise from Monday at 5.00.",
+          "date": "2026-10-07T09:21:09.358Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in the canton of Schwyz",
@@ -206,7 +246,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "SZ",
@@ -289,10 +329,30 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Militärübung in Egg und an der Sihlsee-Staumauer vom 9. bis 12. Oktober 2026",
+          "url": "/de/schwyz-artikel/militaeruebung-sihlsee-oktober-2026/",
+          "excerpt": "Hinweis von 'Schweizer Militär': Militärübung vom 9.",
+          "date": "2026-10-09T23:17:55.280Z"
+        },
+        {
+          "title": "Unlauterer Wettbewerb beim Krankenkassenwechsel in Schwyz",
+          "url": "/de/schwyz-artikel/schwyz-krankenkassenwechsel/",
+          "excerpt": "Die Angebote für einen Krankenkassenwechsel sind oft irreführend: Eine lokale Krankenkasse in Schwyz muss sich mit einem Geschäftsmodell auseinandersetzen, das als unlauterer Wettbewerb beschrieben wird.",
+          "date": "2026-10-08T14:43:30.771Z"
+        },
+        {
+          "title": "Einsiedeln: Strassensperrungen für den Gallusmarkt 2026",
+          "url": "/de/schwyz-artikel/strassensperrung-gallusmarkt-schwyz/",
+          "excerpt": "Zufahrt und Ausfahrt in der Hauptstrasse und am Sagenplatz am Markttag von 5.00 bis 20.00 Uhr verboten. Lärm ab Montag um 5.00 Uhr.",
+          "date": "2026-10-07T09:21:09.358Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Schwyz",
@@ -303,7 +363,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "SZ",
@@ -386,10 +446,30 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Exercice militaire à Egg et au barrage du Sihlsee du 9 au 12 octobre 2026",
+          "url": "/fr/articles-schwytz/exercice-militaire-sihlsee-octobre-2026/",
+          "excerpt": "Avis du 'Schweizer Militär' : exercice du 9 au 12 octobre 2026 à Egg et au barrage du Sihlsee.",
+          "date": "2026-10-09T23:17:55.280Z"
+        },
+        {
+          "title": "Concurrence déloyale dans le changement de caisse-maladie à Schwytz",
+          "url": "/fr/articles-schwytz/schwytz-changement-caisse-maladie/",
+          "excerpt": "Les offres de changement de caisse-maladie sont souvent trompeuses : une caisse locale de Schwytz doit faire face à une activité décrite comme de la concurrence déloyale.",
+          "date": "2026-10-08T14:43:30.771Z"
+        },
+        {
+          "title": "Einsiedeln : fermetures routières pour le Gallusmarkt 2026",
+          "url": "/fr/articles-schwytz/fermeture-routes-gallusmarkt-schwytz/",
+          "excerpt": "Accès et sortie interdits dans la Hauptstrasse et sur la Sagenplatz de 5.00 à 20.00 le jour du marché. Bruits à partir de lundi à 5.00.",
+          "date": "2026-10-07T09:21:09.358Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements dans le canton de Schwytz",
@@ -400,7 +480,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

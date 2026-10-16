@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "fisco",
-  "updatedAt": "2026-10-15T00:31:36.423Z",
-  "contentHash": "6880e813b26aedc17fd0c7439f32b8d542272f5b1f452dbeb34041faa215ec03",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "fbc72cc274330763794e17d0b7e391016fef22ce7d788fc158997d4321706b6b",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -150,6 +150,7 @@
           "date": "2026-08-12T06:10:54.824Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolatore dello stipendio netto",
@@ -172,7 +173,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-15T00:31:36.423Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "BE",
@@ -305,6 +306,7 @@
           "date": "2026-08-12T06:10:54.824Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Net salary calculator",
@@ -327,7 +329,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-15T00:31:36.423Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "BE",
@@ -460,6 +462,7 @@
           "date": "2026-08-12T06:10:54.824Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Nettolohn-Rechner",
@@ -482,7 +485,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-15T00:31:36.423Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "BE",
@@ -615,6 +618,7 @@
           "date": "2026-08-12T06:10:54.824Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calculateur de salaire net",
@@ -637,7 +641,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-15T00:31:36.423Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

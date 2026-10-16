@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "1fb4013113ead659a140fcf99784859497228edbdfb23bf0aa375d490984f172",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "ca7c5c1c15ad09dabd458665fc6883ce7e140dc477699a6818106de6b2b0b432",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -70,6 +70,38 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Nuovo centro accoglienza asilo a Couvet: parte il progetto",
+          "url": "/articoli-neuchatel/nuovo-centro-asilo-couvet/",
+          "excerpt": "Nuova struttura prevista in rue du 1er Mars 11, a Couvet Sostituirà il sito attuale di Chemin des Prises 8 Progetto elaborato con il Comune di Val-de-Travers",
+          "date": "2026-10-10T19:55:31.284Z"
+        },
+        {
+          "title": "Aldi chiuderà il negozio in centro a Neuchâtel",
+          "url": "/articoli-neuchatel/aldi-chiude-centro-neuchatel/",
+          "excerpt": "Aldi chiuderà a fine novembre 2026.",
+          "date": "2026-10-08T11:37:06.437Z"
+        },
+        {
+          "title": "Neuchâtel: referendum per salari minimi cantonali e CCT",
+          "url": "/articoli-neuchatel/neuchatel-referendum-salari-minimi/",
+          "excerpt": "Oltre 100.000 firme contro la riforma del Parlamento",
+          "date": "2026-10-08T11:16:38.230Z"
+        },
+        {
+          "title": "Disoccupazione stabile 4,4% Neuchâtel settembre 2026",
+          "url": "/articoli-neuchatel/disoccupazione-stabile-4-4-neuchatel-settembre-2026/",
+          "excerpt": "3.945 disoccupati in settembre 2026",
+          "date": "2026-10-07T09:30:57.326Z"
+        },
+        {
+          "title": "Neuchâtel rinnova politica abitativa con 24 milioni",
+          "url": "/articoli-neuchatel/neuchatel-rinnova-politica-abitativa-con-24-milioni/",
+          "excerpt": "Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto",
+          "date": "2026-10-07T09:07:42.905Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -80,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "NE",
@@ -137,6 +169,34 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "New asylum reception centre in Couvet: the project starts",
+          "url": "/en/neuchatel-articles/new-asylum-center-couvet/",
+          "excerpt": "New structure planned in rue du 1er Mars 11, in Couvet It will replace the current site of Chemin des Prises 8 Project developed with the Municipality",
+          "date": "2026-10-10T19:55:31.284Z"
+        },
+        {
+          "title": "Aldi will close the downtown store in Neuchâtel",
+          "url": "/en/neuchatel-articles/aldi-closes-neuchatel-city-store/",
+          "date": "2026-10-08T11:37:06.437Z"
+        },
+        {
+          "title": "Neuchâtel: referendum on cantonal minimum wages and collective labour agreements",
+          "url": "/en/neuchatel-articles/neuchatel-minimum-wage-referendum/",
+          "date": "2026-10-08T11:16:38.230Z"
+        },
+        {
+          "title": "Unemployment stable at 4,4% Neuchâtel September 2026",
+          "url": "/en/neuchatel-articles/unemployment-stable-at-4-4-neuchatel-september-2026/",
+          "date": "2026-10-07T09:30:57.326Z"
+        },
+        {
+          "title": "Neuchâtel renews housing policy with 24 million",
+          "url": "/en/neuchatel-articles/neuchatel-renews-housing-policy-with-24-million/",
+          "date": "2026-10-07T09:07:42.905Z"
+        }
+      ],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -147,7 +207,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "NE",
@@ -204,6 +264,34 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Neue Kindertagesstätte in Couvet: Das Projekt beginnt",
+          "url": "/de/neuenburg-artikel/neues-asylzentrum-couvet/",
+          "excerpt": "Neue Struktur in der Rue du 1er Mars 11 in Couvet geplant Ersetzt den aktuellen Standort von Chemin des Prises 8 Mit der Gemeinde Val-de-Travers ausgearbeitetes",
+          "date": "2026-10-10T19:55:31.284Z"
+        },
+        {
+          "title": "Aldi wird die Filiale im Zentrum von Neuenburg schließen",
+          "url": "/de/neuenburg-artikel/aldi-schliesst-filiale-neuenburg/",
+          "date": "2026-10-08T11:37:06.437Z"
+        },
+        {
+          "title": "Neuenburg: Referendum zu kantonalen Mindestlöhnen und GAV",
+          "url": "/de/neuenburg-artikel/neuenburg-mindestlohn-referendum/",
+          "date": "2026-10-08T11:16:38.230Z"
+        },
+        {
+          "title": "Arbeitslosigkeit in Neuenburg im September 2026 stabil bei 4,4%",
+          "url": "/de/neuenburg-artikel/arbeitslosigkeit-in-neuenburg-im-september-2026-stabil-bei-4-4/",
+          "date": "2026-10-07T09:30:57.326Z"
+        },
+        {
+          "title": "Neuenburg erneuert Wohnungspolitik mit 24 Millionen",
+          "url": "/de/neuenburg-artikel/neuenburg-erneuert-wohnungspolitik-mit-24-millionen/",
+          "date": "2026-10-07T09:07:42.905Z"
+        }
+      ],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -214,7 +302,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "NE",
@@ -271,6 +359,38 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Nouveau centre d'accueil asile à Couvet : le projet commence",
+          "url": "/fr/articles-neuchatel/nouveau-centre-asile-couvet/",
+          "excerpt": "Nouvelle structure prévue rue du 1er Mars 11, à Couvet Remplacera le site actuel du Chemin des Prises 8 Projet élaboré avec la commune de Val-de-Travers Séance",
+          "date": "2026-10-10T19:55:31.284Z"
+        },
+        {
+          "title": "Aldi fermera le magasin du centre-ville de Neuchâtel",
+          "url": "/fr/articles-neuchatel/aldi-ferme-magasin-centre-neuchatel/",
+          "excerpt": "Aldi fermera fin novembre 2026.",
+          "date": "2026-10-08T11:37:06.437Z"
+        },
+        {
+          "title": "Neuchâtel : référendum sur les salaires minimaux cantonaux et les CCT",
+          "url": "/fr/articles-neuchatel/neuchatel-referendum-salaires-minimaux/",
+          "excerpt": "Plus de 100.000 signatures contre la réforme du Parlement",
+          "date": "2026-10-08T11:16:38.230Z"
+        },
+        {
+          "title": "Chômage stable à 4,4% à Neuchâtel en septembre 2026",
+          "url": "/fr/articles-neuchatel/chomage-stable-a-4-4-a-neuchatel-en-septembre-2026/",
+          "excerpt": "3.945 chômeurs en septembre 2026",
+          "date": "2026-10-07T09:30:57.326Z"
+        },
+        {
+          "title": "Neuchâtel renouvelle sa politique du logement avec 24 millions",
+          "url": "/fr/articles-neuchatel/neuchatel-renouvelle-sa-politique-du-logement-avec-24-millions/",
+          "excerpt": "Le 28 septembre 2026, le Conseil d'État a adopté le rapport",
+          "date": "2026-10-07T09:07:42.905Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -281,7 +401,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

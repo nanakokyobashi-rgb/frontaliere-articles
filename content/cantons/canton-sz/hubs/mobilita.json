@@ -4,17 +4,17 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "01f0ef71a48fb2afd407f7cb76be88334da93887a177abdc683abe117cb4b9e1",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "015b11a85bc76b11ac80e3a5b2e49b27d08c17612f41c9484fd4dfe7f6abcc90",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T12:13:19.434Z",
+      "updatedAt": "2026-10-15T23:56:39.924Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -80,7 +80,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -108,7 +108,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -131,6 +131,7 @@
           "date": "2026-08-16T11:49:12.314Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -141,7 +142,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "SZ",
@@ -204,7 +205,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -232,7 +233,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -255,6 +256,7 @@
           "date": "2026-08-16T11:49:12.314Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -265,7 +267,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "SZ",
@@ -328,7 +330,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -356,7 +358,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -379,6 +381,7 @@
           "date": "2026-08-16T11:49:12.314Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -389,7 +392,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "SZ",
@@ -452,7 +455,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -480,7 +483,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -503,6 +506,7 @@
           "date": "2026-08-16T11:49:12.314Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -513,7 +517,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T10:23:56.350Z",
-  "contentHash": "d479edfbc536b0ad25f81700948fe74a755b02f3be256f7eb9bb152245e1ffea",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "ed7a41e8115967dbf22c9726120816336c8d229e7288e0817897105944816fdd",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -139,6 +139,7 @@
           "date": "2026-08-18T02:39:49.282Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -149,7 +150,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "SO",
@@ -270,6 +271,7 @@
           "date": "2026-08-18T02:39:49.282Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -280,7 +282,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "SO",
@@ -401,6 +403,7 @@
           "date": "2026-08-18T02:39:49.282Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -411,7 +414,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "SO",
@@ -533,6 +536,7 @@
           "date": "2026-08-18T02:39:49.282Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -543,7 +547,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

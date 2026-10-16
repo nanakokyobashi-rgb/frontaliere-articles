@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T10:23:56.350Z",
-  "contentHash": "4a6d91d96889b6507665adeb4ba9cdf9a467e7fb7157de732a676dc79381aa51",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "ccc6676da60ae26d34ca35ba83084bd9716b10b0fbb37d537d026f80c7d8efa9",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -246,6 +246,7 @@
           "date": "2026-07-24T16:10:28.808Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attese ai valichi verso Austria",
@@ -284,7 +285,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "GR",
@@ -507,6 +508,7 @@
           "date": "2026-07-24T16:10:28.808Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Border waits towards Austria",
@@ -545,7 +547,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "GR",
@@ -769,6 +771,7 @@
           "date": "2026-07-24T16:10:28.808Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Wartezeiten an der Grenze Richtung Österreich",
@@ -807,7 +810,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "GR",
@@ -1031,6 +1034,7 @@
           "date": "2026-07-24T16:10:28.808Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attente aux frontières vers Autriche",
@@ -1069,7 +1073,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

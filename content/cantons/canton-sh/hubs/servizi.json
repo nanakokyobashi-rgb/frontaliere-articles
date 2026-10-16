@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T01:56:54.479Z",
-  "contentHash": "20432b2fa526f944e6d8298666982029857df4459181cfa625b2fb48934810cd",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "3bd5d0fde97adef2eea185aac2cf7f49e49b40644ea12935b796f8d66abd5596",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-15T11:34:01.149Z",
+      "updatedAt": "2026-10-16T04:30:54.466Z",
       "keyFacts": 1
     }
   ],
@@ -87,7 +87,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         }
       ],
       "curatedArticles": [
@@ -128,6 +128,7 @@
           "date": "2026-08-20T05:38:37.337Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Premi di cassa malati per regione",
@@ -154,7 +155,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "SH",
@@ -224,7 +225,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         }
       ],
       "curatedArticles": [
@@ -265,6 +266,7 @@
           "date": "2026-08-20T05:38:37.337Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Number plate auctions",
@@ -287,7 +289,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "SH",
@@ -357,7 +359,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         }
       ],
       "curatedArticles": [
@@ -398,6 +400,7 @@
           "date": "2026-08-20T05:38:37.337Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Kontrollschild-Auktionen",
@@ -420,7 +423,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "SH",
@@ -490,7 +493,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         }
       ],
       "curatedArticles": [
@@ -531,6 +534,7 @@
           "date": "2026-08-20T05:38:37.337Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Offres d’emploi dans le canton de Schaffhouse",
@@ -549,7 +553,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

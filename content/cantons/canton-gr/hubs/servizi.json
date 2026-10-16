@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T01:56:54.479Z",
-  "contentHash": "80db8c259c082299e558a2b49fa33c6286ca7db7d4d4d1bd422116d8493fdb3b",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "da26667e838c6c14a5bad8a3c1d54359a030d5407a35093ccd14093208648e52",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-15T11:34:01.149Z",
+      "updatedAt": "2026-10-16T04:30:54.466Z",
       "keyFacts": 1
     },
     {
@@ -97,7 +97,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -183,6 +183,7 @@
           "date": "2026-08-25T10:25:07.764Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Premi di cassa malati per regione",
@@ -209,7 +210,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "GR",
@@ -284,7 +285,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -370,6 +371,7 @@
           "date": "2026-08-25T10:25:07.764Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Number plate auctions",
@@ -392,7 +394,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "GR",
@@ -467,7 +469,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -553,6 +555,7 @@
           "date": "2026-08-25T10:25:07.764Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Kontrollschild-Auktionen",
@@ -575,7 +578,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "GR",
@@ -650,7 +653,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -736,6 +739,7 @@
           "date": "2026-08-25T10:25:07.764Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Offres d’emploi aux Grisons",
@@ -754,7 +758,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

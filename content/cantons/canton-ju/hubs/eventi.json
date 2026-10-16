@@ -4,12 +4,12 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T00:00:55.142Z",
-  "contentHash": "186e6d0de7eeecaaccf66b97d42c7e399b23dbe4fb7fc58124b56c5a0f3008eb",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "946efd4517a8c3973410171a0f4299d184fa1c759f04e49e32b5aee97f60aee2",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-15T13:57:57.453Z",
+      "updatedAt": "2026-10-16T03:54:22.189Z",
       "keyFacts": 1
     }
   ],
@@ -59,7 +59,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/giura/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [
@@ -76,6 +76,7 @@
           "date": "2026-03-20T17:50:17.309Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Giura",
@@ -86,7 +87,7 @@
           "url": "/eventi/giura/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "JU",
@@ -133,7 +134,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/jura/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [
@@ -150,6 +151,7 @@
           "date": "2026-03-20T17:50:17.309Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "All events in the canton of Jura",
@@ -160,7 +162,7 @@
           "url": "/en/events/jura/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "JU",
@@ -207,7 +209,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/jura/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [
@@ -224,6 +226,7 @@
           "date": "2026-03-20T17:50:17.309Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Jura",
@@ -234,7 +237,7 @@
           "url": "/de/veranstaltungen/jura/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "JU",
@@ -281,7 +284,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/jura/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [
@@ -298,6 +301,7 @@
           "date": "2026-03-20T17:50:17.309Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tous les événements dans le canton du Jura",
@@ -308,7 +312,7 @@
           "url": "/fr/evenements/jura/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

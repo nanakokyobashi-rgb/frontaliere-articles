@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T10:23:56.350Z",
-  "contentHash": "0bf0a440bc98574ace0094a4192ac696536f2d2b48a4e23ff4835c006032d10e",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "d31f476cdbbd65cd3a099f7d03e4e1ab705f5dd3452220ad977bdf8c698f8fc3",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -118,6 +118,7 @@
           "date": "2026-10-13T04:32:01.538Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -128,7 +129,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -229,6 +230,7 @@
           "date": "2026-10-13T04:32:01.538Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -239,7 +241,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -340,6 +342,7 @@
           "date": "2026-10-13T04:32:01.538Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -350,7 +353,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -451,6 +454,7 @@
           "date": "2026-10-13T04:32:01.538Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -461,7 +465,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

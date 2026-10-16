@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T00:00:55.142Z",
-  "contentHash": "51fede0404b7ecf797984f77a817adfccd063dfb5a5ac5e6ed06e59f3344cd23",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "53050bf05b59ca91eedfb3c3b603c1d44593e9c58407be6140f896f5d2d94c9d",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-15T13:57:57.453Z",
+      "updatedAt": "2026-10-16T03:54:22.189Z",
       "keyFacts": 1
     }
   ],
@@ -95,10 +95,30 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Canton Uri, bilancio 2027 con avanzo di 1,1 milioni",
+          "url": "/articoli-uri/uri-budget-avanzo-2027/",
+          "excerpt": "Il Canton Uri prevede per il 2027 un avanzo di CHF 1,1 milioni: entrate a 514,4 milioni e spese a 513,3 milioni.",
+          "date": "2026-10-10T22:08:05.095Z"
+        },
+        {
+          "title": "Passhöhe-Urnerboden: chiusura notturna della strada",
+          "url": "/articoli-uri/uri-chiusura-passhoehe/",
+          "excerpt": "Strada cantonale chiusa di notte tra Passhöhe e Urnerboden dal 14 al 15 ottobre per lavori di pavimentazione; con maltempo, i lavori slittano.",
+          "date": "2026-10-08T23:39:16.200Z"
+        },
+        {
+          "title": "Canton Uri punta sulle misure energetiche per il clima",
+          "url": "/articoli-uri/uri-misure-energia-clima/",
+          "excerpt": "Il Canton Uri punta sulle misure energetiche per la protezione del clima: il titolo della notizia indica l'orientamento, senza dettagli operativi.",
+          "date": "2026-10-07T09:07:12.834Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Uri",
@@ -109,7 +129,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "UR",
@@ -192,10 +212,30 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Canton Uri, 2027 budget with a surplus of 1,1 million",
+          "url": "/en/uri-articles/uri-budget-surplus-2027/",
+          "excerpt": "The Canton of Uri expects a surplus of CHF 1,1 million in 2027: revenue of 514,4 million and expenditure of 513,3 million.",
+          "date": "2026-10-10T22:08:05.095Z"
+        },
+        {
+          "title": "Passhöhe-Urnerboden: nighttime road closure",
+          "url": "/en/uri-articles/uri-night-road-closure/",
+          "excerpt": "Cantonal road closed at night between Passhöhe and Urnerboden from October 14 to 15 for paving work; in bad weather, the work will be postponed.",
+          "date": "2026-10-08T23:39:16.200Z"
+        },
+        {
+          "title": "Canton Uri focuses on energy measures for the climate",
+          "url": "/en/uri-articles/uri-energy-measures-climate/",
+          "excerpt": "The Canton of Uri is focusing on energy measures for climate protection: the news headline indicates the direction, without operational details.",
+          "date": "2026-10-07T09:07:12.834Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in the canton of Uri",
@@ -206,7 +246,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "UR",
@@ -289,10 +329,30 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Kanton Uri, Budget 2027 mit einem Überschuss von 1,1 Millionen",
+          "url": "/de/uri-artikel/uri-budget-ueberschuss-2027/",
+          "excerpt": "Der Kanton Uri erwartet für 2027 einen Überschuss von CHF 1,1 Millionen: Einnahmen von 514,4 Millionen und Ausgaben von 513,3 Millionen.",
+          "date": "2026-10-10T22:08:05.095Z"
+        },
+        {
+          "title": "Passhöhe-Urnerboden: nächtliche Sperrung der Straße",
+          "url": "/de/uri-artikel/uri-nachtsperrung-passhoehe/",
+          "excerpt": "Kantonsstraße zwischen Passhöhe und Urnerboden in der Nacht vom 14.",
+          "date": "2026-10-08T23:39:16.200Z"
+        },
+        {
+          "title": "Der Kanton Uri setzt auf energetische Maßnahmen für den Klimaschutz",
+          "url": "/de/uri-artikel/uri-energiemassnahmen-klimaschutz/",
+          "excerpt": "Der Kanton Uri setzt auf energetische Maßnahmen zum Schutz des Klimas: Der Nachrichtentitel gibt die Ausrichtung an, ohne operative Details.",
+          "date": "2026-10-07T09:07:12.834Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Uri",
@@ -303,7 +363,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "UR",
@@ -386,10 +446,30 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Canton d’Uri, budget 2027 avec un excédent de 1,1 million",
+          "url": "/fr/articles-uri/budget-uri-excedent-2027/",
+          "excerpt": "Le canton d’Uri prévoit pour 2027 un excédent de CHF 1,1 million : recettes de 514,4 millions et dépenses de 513,3 millions.",
+          "date": "2026-10-10T22:08:05.095Z"
+        },
+        {
+          "title": "Passhöhe-Urnerboden : fermeture nocturne de la route",
+          "url": "/fr/articles-uri/uri-fermeture-nocturne-route/",
+          "excerpt": "Route cantonale fermée de nuit entre Passhöhe et Urnerboden du 14 au 15 octobre pour des travaux de revêtement ; en cas de mauvais temps, les travaux sont reportés.",
+          "date": "2026-10-08T23:39:16.200Z"
+        },
+        {
+          "title": "Le canton d'Uri mise sur les mesures énergétiques pour le climat",
+          "url": "/fr/articles-uri/uri-mesures-energetiques-climat/",
+          "excerpt": "Le canton d'Uri mise sur les mesures énergétiques pour la protection du climat : le titre de la nouvelle indique l'orientation, sans détails opérationnels.",
+          "date": "2026-10-07T09:07:12.834Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements dans le canton d'Uri",
@@ -400,7 +480,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

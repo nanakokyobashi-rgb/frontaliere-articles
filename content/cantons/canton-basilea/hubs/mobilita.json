@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T03:02:31.746Z",
-  "contentHash": "8429b7b494b18aed32adb26ec8849b1d5c729682313df45b26809b9e63a88f1d",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "9931b092814f6674cd5e5f382bc20eacea7d856c3a2d22fbd9a34d5518718f71",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T12:13:19.434Z",
+      "updatedAt": "2026-10-15T23:56:39.924Z",
       "keyFacts": 2
     },
     {
@@ -154,7 +154,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -245,6 +245,7 @@
           "date": "2026-08-18T07:39:21.565Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attese ai valichi verso Germania",
@@ -275,7 +276,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -407,7 +408,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -498,6 +499,7 @@
           "date": "2026-08-18T07:39:21.565Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Border waits towards Germany",
@@ -528,7 +530,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -660,7 +662,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -751,6 +753,7 @@
           "date": "2026-08-18T07:39:21.565Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Wartezeiten an der Grenze Richtung Deutschland",
@@ -781,7 +784,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -913,7 +916,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1004,6 +1007,7 @@
           "date": "2026-08-18T07:39:21.565Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attente aux frontières vers Allemagne",
@@ -1034,7 +1038,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

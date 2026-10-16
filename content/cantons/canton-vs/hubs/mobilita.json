@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T10:23:56.350Z",
-  "contentHash": "387ef06a941e88f2389972c1a7cdd6f6ac275f67206eb0fdd438f8c5139dbc9c",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "5683c41710608ca135b712555d6d5b6b5b0fd2bde54ee2ba72a318e51374b1d5",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -209,6 +209,7 @@
           "date": "2026-09-06T01:55:16.584Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attese ai valichi verso Francia",
@@ -243,7 +244,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "VS",
@@ -430,6 +431,7 @@
           "date": "2026-09-06T01:55:16.584Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Border waits towards France",
@@ -464,7 +466,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "VS",
@@ -651,6 +653,7 @@
           "date": "2026-09-06T01:55:16.584Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Wartezeiten an der Grenze Richtung Frankreich",
@@ -685,7 +688,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "VS",
@@ -872,6 +875,7 @@
           "date": "2026-09-06T01:55:16.584Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attente aux frontières vers France",
@@ -906,7 +910,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

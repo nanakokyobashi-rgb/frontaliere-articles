@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T10:23:56.350Z",
-  "contentHash": "a56c39e27caf26f45394aa99c3dbc68479a562fea9851954e39b9fed18cc1818",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "caef89680c96bd1a8b70201eedda30c752c05a88e5e7a4cff478932caf5e185f",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -198,6 +198,7 @@
           "date": "2026-08-18T02:02:28.862Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Premi di cassa malati per regione",
@@ -224,7 +225,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "SO",
@@ -395,6 +396,7 @@
           "date": "2026-08-18T02:02:28.862Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Number plate auctions",
@@ -417,7 +419,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "SO",
@@ -588,6 +590,7 @@
           "date": "2026-08-18T02:02:28.862Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Kontrollschild-Auktionen",
@@ -610,7 +613,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "SO",
@@ -781,6 +784,7 @@
           "date": "2026-08-18T02:02:28.862Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Offres d’emploi dans le canton de Soleure",
@@ -799,7 +803,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

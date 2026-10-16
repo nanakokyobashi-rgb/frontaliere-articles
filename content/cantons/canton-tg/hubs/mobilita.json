@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T15:11:04.417Z",
-  "contentHash": "981549413838f9dc1a4491021d5fa4d2cbdc5b9178a84f310caba7e4e2376f3c",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "c08857d21f6735488389a29778f1311336dfba3d5a2f22ccea4e93a135eb1235",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T05:23:55.314Z",
-      "keyFacts": 2
+      "updatedAt": "2026-10-15T23:56:39.924Z",
+      "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T20:59:19.985Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -36,13 +36,8 @@
           "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 14 ottobre 2026"
         },
         {
-          "label": "Chiusure stradali in corso o imminenti",
-          "value": "1",
-          "note": "segnalazioni aggiornate: 15 ottobre 2026"
-        },
-        {
           "label": "Cantieri attivi o imminenti",
-          "value": "4",
+          "value": "3",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
@@ -87,12 +82,6 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "A1 Zürich <-> St. Gallen tra Svincolo autostradale Oberwinterthur E Svincolo autostradale Matzingen Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 16 ottobre 2026",
-              "date": "2026-10-09T12:00:00.000Z"
-            },
-            {
               "label": "A7 Winterthur <-> Kreuzlingen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 7.5 Limitazione del…",
               "value": "Cantiere",
               "detail": "fine prevista: 23 ottobre 2026",
@@ -109,16 +98,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 6 novembre 2026",
               "date": "2026-09-25T13:42:00.000Z"
-            },
-            {
-              "label": "A23 Diramazione Grüneck <-> Eschikofen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Eschikofen Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 16 ottobre 2026",
-              "date": "2026-10-13T08:16:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -156,7 +139,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80334"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -173,6 +156,7 @@
           "date": "2026-08-16T19:03:12.024Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attese ai valichi verso Germania",
@@ -203,7 +187,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-15T15:11:04.417Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "TG",
@@ -217,13 +201,8 @@
           "note": "Diessenhofen – Gailingen am Hochrhein, week ending 14 October 2026"
         },
         {
-          "label": "Road closures in force or imminent",
-          "value": "1",
-          "note": "reports as of 15 October 2026"
-        },
-        {
           "label": "Roadworks active or imminent",
-          "value": "4",
+          "value": "3",
           "note": "reports as of 15 October 2026"
         }
       ],
@@ -268,12 +247,6 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "A1 Zürich <-> St. Gallen tra Svincolo autostradale Oberwinterthur E Svincolo autostradale Matzingen Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia…",
-              "value": "Closure",
-              "detail": "until 16 October 2026",
-              "date": "2026-10-09T12:00:00.000Z"
-            },
-            {
               "label": "A7 Winterthur <-> Kreuzlingen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 7.5 Limitazione del…",
               "value": "Roadworks",
               "detail": "until 23 October 2026",
@@ -290,16 +263,10 @@
               "value": "Roadworks",
               "detail": "until 6 November 2026",
               "date": "2026-09-25T13:42:00.000Z"
-            },
-            {
-              "label": "A23 Diramazione Grüneck <-> Eschikofen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Eschikofen Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del…",
-              "value": "Roadworks",
-              "detail": "until 16 October 2026",
-              "date": "2026-10-13T08:16:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -337,7 +304,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80334"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -354,6 +321,7 @@
           "date": "2026-08-16T19:03:12.024Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Border waits towards Germany",
@@ -384,7 +352,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-15T15:11:04.417Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "TG",
@@ -398,13 +366,8 @@
           "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 14. Oktober 2026"
         },
         {
-          "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "1",
-          "note": "Meldungen vom 15. Oktober 2026"
-        },
-        {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "4",
+          "value": "3",
           "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
@@ -449,12 +412,6 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "A1 Zürich <-> St. Gallen zwischen Anschluss Oberwinterthur und Anschluss Matzingen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: Pannenstreifen gesperrt Zusatz 1…",
-              "value": "Sperrung",
-              "detail": "bis 16. Oktober 2026",
-              "date": "2026-10-09T12:00:00.000Z"
-            },
-            {
               "label": "A7 Winterthur <-> Kreuzlingen zwischen Autobahndreieck Verzweigung Grüneck und Anschluss Frauenfeld-Ost Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 7.5 Verkehrsführung: Fahrbahnverengung auf…",
               "value": "Baustelle",
               "detail": "bis 23. Oktober 2026",
@@ -471,16 +428,10 @@
               "value": "Baustelle",
               "detail": "bis 6. November 2026",
               "date": "2026-09-25T13:42:00.000Z"
-            },
-            {
-              "label": "A23 Verzweigung Grüneck <-> Eschikofen zwischen Autobahndreieck Verzweigung Grüneck und Anschluss Eschikofen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.15 Verkehrsführung…",
-              "value": "Baustelle",
-              "detail": "bis 16. Oktober 2026",
-              "date": "2026-10-13T08:16:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -518,7 +469,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80334"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -535,6 +486,7 @@
           "date": "2026-08-16T19:03:12.024Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Wartezeiten an der Grenze Richtung Deutschland",
@@ -565,7 +517,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-15T15:11:04.417Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "TG",
@@ -579,13 +531,8 @@
           "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 14 octobre 2026"
         },
         {
-          "label": "Fermetures de routes en cours ou imminentes",
-          "value": "1",
-          "note": "signalements au 15 octobre 2026"
-        },
-        {
           "label": "Chantiers actifs ou imminents",
-          "value": "4",
+          "value": "3",
           "note": "signalements au 15 octobre 2026"
         }
       ],
@@ -630,12 +577,6 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "A1 Zurich <-> St-Gall entre Jonction autoroutière Oberwinterthur et Jonction autoroutière Matzingen Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: bande d'arrêt d'urgence…",
-              "value": "Fermeture",
-              "detail": "jusqu’au 16 octobre 2026",
-              "date": "2026-10-09T12:00:00.000Z"
-            },
-            {
               "label": "A7 Winterthur <-> Kreuzlingen entre Echangeur Echangeur de Grüneck et Jonction autoroutière Frauenfeld-Est Situation: trafic perturbé travaux, longueur [km] 7.5 Gestion du trafic: rétrécissement des…",
               "value": "Chantier",
               "detail": "jusqu’au 23 octobre 2026",
@@ -652,16 +593,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 6 novembre 2026",
               "date": "2026-09-25T13:42:00.000Z"
-            },
-            {
-              "label": "A23 Echangeur de Grüneck <-> Eschikofen entre Echangeur Echangeur de Grüneck et Jonction autoroutière Eschikofen Situation: trafic perturbé travaux, longueur [km] 0.15 Gestion du trafic…",
-              "value": "Chantier",
-              "detail": "jusqu’au 16 octobre 2026",
-              "date": "2026-10-13T08:16:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -699,7 +634,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80334"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -716,6 +651,7 @@
           "date": "2026-08-16T19:03:12.024Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attente aux frontières vers Allemagne",
@@ -746,7 +682,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-15T15:11:04.417Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

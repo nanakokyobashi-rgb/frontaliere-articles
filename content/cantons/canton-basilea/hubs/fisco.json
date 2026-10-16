@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "8b89c0f54bdad6c26e4f54e12dedb1cef30bd96e1b6451ff00a127c9b46c6578",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "f28a4407ccbf39f40c76f6161dd7759825ac3b6d92dbf2e9c8f00f4a28d4ff7e",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -160,7 +160,7 @@
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -213,6 +213,7 @@
           "date": "2026-06-15T05:26:26.152Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolatore dello stipendio netto",
@@ -239,7 +240,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -377,7 +378,7 @@
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -430,6 +431,7 @@
           "date": "2026-06-15T05:26:26.152Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Net salary calculator",
@@ -456,7 +458,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -594,7 +596,7 @@
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -647,6 +649,7 @@
           "date": "2026-06-15T05:26:26.152Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Nettolohn-Rechner",
@@ -673,7 +676,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -811,7 +814,7 @@
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -864,6 +867,7 @@
           "date": "2026-06-15T05:26:26.152Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calculateur de salaire net",
@@ -890,7 +894,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

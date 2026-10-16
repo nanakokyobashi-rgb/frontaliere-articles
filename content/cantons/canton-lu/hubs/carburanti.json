@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-07T19:01:03.662Z",
-  "contentHash": "83f4210082940ff07bf3415aacdde66f23c507f26334acb6ddad8165db1fb327",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "0cc4dd7cbba9c04b765d973f78081f2b31ccfdd6d2bfa59a87d4bad9f040b084",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-07T11:34:26.362Z",
+      "updatedAt": "2026-10-15T12:02:33.404Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,10 +54,42 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-07T11:34:26.362Z"
+          "updatedAt": "2026-10-15T12:02:33.404Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Juso Lucerna: Valentin Humbel candidato al governo",
+          "url": "/articoli-lucerna/juso-lucerna-humbel-governo/",
+          "excerpt": "Valentin Humbel è il candidato Juso al governo lucernese.",
+          "date": "2026-10-10T23:52:13.512Z"
+        },
+        {
+          "title": "Riduzione premi negata a padre divorziato a Lucerna",
+          "url": "/articoli-lucerna/riduzione-premi-padre-divorziato-lucerna/",
+          "excerpt": "Il Tribunale federale conferma: niente forfait 9.000 CHF/figlio se già detratti i contributi di mantenimento.",
+          "date": "2026-10-10T09:02:37.771Z"
+        },
+        {
+          "title": "Progetto latte: Nestlé ed Emmi puntano all'estensione",
+          "url": "/articoli-lucerna/progetto-latte-climatico/",
+          "excerpt": "Dal 2022, KlimaStaR Milch ha ridotto del 23% i mangimi commestibili e dell'8% le emissioni per kg.",
+          "date": "2026-10-09T00:54:58.572Z"
+        },
+        {
+          "title": "Kriens torna in rosso dopo surplus milionari",
+          "url": "/articoli-lucerna/kriens-torna-in-deficit/",
+          "excerpt": "Dopo surplus milionari, Kriens torna in deficit: il titolo segnala un nuovo passivo, ma non indica ancora importo, data o causa.",
+          "date": "2026-10-09T00:40:17.368Z"
+        },
+        {
+          "title": "Lucerna, qualità e sviluppo scolastico più vicini",
+          "url": "/articoli-lucerna/lucerna-qualita-sviluppo-scuole/",
+          "excerpt": "I ginnasi di Lucerna rivedono il quadro QM: l'anno scolastico 2026/27 servirà a concretizzare il legame con sviluppo scolastico e didattico.",
+          "date": "2026-10-07T18:10:58.696Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -68,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-07T19:01:03.662Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "LU",
@@ -109,10 +141,42 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-07T11:34:26.362Z"
+          "updatedAt": "2026-10-15T12:02:33.404Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Juso Lucerne: Valentin Humbel candidate for government",
+          "url": "/en/lucerne-articles/juso-lucerne-humbel-government/",
+          "excerpt": "Valentin Humbel is the Juso candidate for the Lucerne cantonal government.",
+          "date": "2026-10-10T23:52:13.512Z"
+        },
+        {
+          "title": "Premium reduction denied to divorced father in Lucerne",
+          "url": "/en/lucerne-articles/premium-reduction-divorced-father-lucerne/",
+          "excerpt": "The Federal Tribunal confirms: no flat rate of 9.000 CHF/child if maintenance contributions have already been deducted.",
+          "date": "2026-10-10T09:02:37.771Z"
+        },
+        {
+          "title": "Milk project: Nestlé and Emmi are aiming for an extension",
+          "url": "/en/lucerne-articles/swiss-milk-climate-project/",
+          "excerpt": "Since 2022, KlimaStaR Milch has reduced edible feed by 23% and emissions per kg by 8%.",
+          "date": "2026-10-09T00:54:58.572Z"
+        },
+        {
+          "title": "Kriens back in the red after million-dollar surpluses",
+          "url": "/en/lucerne-articles/kriens-returns-to-deficit/",
+          "excerpt": "After multimillion surpluses, Kriens returns to a deficit: the headline indicates a new liability, but does not yet specify the amount, date, or cause.",
+          "date": "2026-10-09T00:40:17.368Z"
+        },
+        {
+          "title": "Lucerne, quality and school development closer together",
+          "url": "/en/lucerne-articles/lucerne-school-quality-development/",
+          "excerpt": "Lucerne’s grammar schools review the QM framework: the 2026/27 school year will serve to put the link with school and teaching development into practice.",
+          "date": "2026-10-07T18:10:58.696Z"
+        }
+      ],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -123,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-07T19:01:03.662Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "LU",
@@ -164,10 +228,42 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-07T11:34:26.362Z"
+          "updatedAt": "2026-10-15T12:02:33.404Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Juso Luzern: Valentin Humbel kandidiert für den Regierungsrat",
+          "url": "/de/luzern-artikel/juso-luzern-humbel-regierungsrat/",
+          "excerpt": "Valentin Humbel ist der Juso-Kandidat für den Luzerner Regierungsrat.",
+          "date": "2026-10-10T23:52:13.512Z"
+        },
+        {
+          "title": "Prämienverbilligung für geschiedenen Vater in Luzern abgelehnt",
+          "url": "/de/luzern-artikel/praemienverbilligung-geschiedener-vater-luzern/",
+          "excerpt": "Das Bundesgericht bestätigt: kein Pauschalabzug von 9.000 CHF/Kind, wenn die Unterhaltsbeiträge bereits abgezogen wurden.",
+          "date": "2026-10-10T09:02:37.771Z"
+        },
+        {
+          "title": "Milchprojekt: Nestlé und Emmi streben eine Ausweitung an",
+          "url": "/de/luzern-artikel/schweizer-milch-klimaprojekt/",
+          "excerpt": "Seit 2022 hat KlimaStaR Milch die für die menschliche Ernährung geeigneten Futtermittel um 23% und die Emissionen pro kg um 8% reduziert.",
+          "date": "2026-10-09T00:54:58.572Z"
+        },
+        {
+          "title": "Kriens schreibt nach Überschüssen in Millionenhöhe wieder rote Zahlen",
+          "url": "/de/luzern-artikel/kriens-rutscht-wieder-ins-minus/",
+          "excerpt": "Nach Überschüssen in Millionenhöhe ist Kriens wieder im Defizit: Die Überschrift weist auf einen neuen Fehlbetrag hin, nennt aber noch keinen Betrag, kein Datum und keine Ursache.",
+          "date": "2026-10-09T00:40:17.368Z"
+        },
+        {
+          "title": "Luzern, Qualität und Schulentwicklung rücken näher zusammen",
+          "url": "/de/luzern-artikel/luzern-schulqualitaet-entwicklung/",
+          "excerpt": "Die Luzerner Gymnasien überarbeiten das QM-Rahmenkonzept: Das Schuljahr 2026/27 wird dazu dienen, die Verbindung zur Schul- und Unterrichtsentwicklung zu konkretisieren.",
+          "date": "2026-10-07T18:10:58.696Z"
+        }
+      ],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -178,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-07T19:01:03.662Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "LU",
@@ -219,10 +315,42 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-07T11:34:26.362Z"
+          "updatedAt": "2026-10-15T12:02:33.404Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Juso Lucerne : Valentin Humbel candidat au gouvernement",
+          "url": "/fr/articles-lucerne/juso-lucerne-humbel-gouvernement/",
+          "excerpt": "Valentin Humbel est le candidat de Juso au gouvernement lucernois.",
+          "date": "2026-10-10T23:52:13.512Z"
+        },
+        {
+          "title": "Réduction des primes refusée à un père divorcé à Lucerne",
+          "url": "/fr/articles-lucerne/reduction-primes-pere-divorce-lucerne/",
+          "excerpt": "Le Tribunal fédéral confirme : pas de forfait 9.000 CHF/enfant si les contributions d’entretien ont déjà été déduites.",
+          "date": "2026-10-10T09:02:37.771Z"
+        },
+        {
+          "title": "Projet laitier : Nestlé et Emmi misent sur l'extension",
+          "url": "/fr/articles-lucerne/projet-lait-climatique-suisse/",
+          "excerpt": "Depuis 2022, KlimaStaR Milch a réduit de 23 % les aliments comestibles et de 8 % les émissions par kg.",
+          "date": "2026-10-09T00:54:58.572Z"
+        },
+        {
+          "title": "Kriens repasse dans le rouge après des excédents de plusieurs millions",
+          "url": "/fr/articles-lucerne/kriens-repasse-dans-le-rouge/",
+          "excerpt": "Après des excédents de plusieurs millions, Kriens repasse en déficit : le titre signale un nouveau passif, mais n’indique encore ni montant, ni date ni cause.",
+          "date": "2026-10-09T00:40:17.368Z"
+        },
+        {
+          "title": "Lucerne, qualité et développement scolaire plus proches",
+          "url": "/fr/articles-lucerne/lucerne-qualite-developpement-scolaire/",
+          "excerpt": "Les gymnases de Lucerne réexaminent le cadre QM : l’année scolaire 2026/27 servira à concrétiser le lien avec le développement scolaire et pédagogique.",
+          "date": "2026-10-07T18:10:58.696Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -233,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-07T19:01:03.662Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

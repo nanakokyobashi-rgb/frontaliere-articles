@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T12:42:07.041Z",
-  "contentHash": "c888da8d579b09c56bbba3b9f728a6ab8120033a1fa3e15b2f26bad05b239320",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "25a00c74ba993074828fad544de4e33fee017768d2c2e965392ff9748ea5174c",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -106,6 +106,7 @@
           "date": "2026-09-07T16:16:52.427Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Ginevra",
@@ -116,7 +117,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "GE",
@@ -210,6 +211,7 @@
           "date": "2026-09-07T16:16:52.427Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "All events in the canton of Geneva",
@@ -220,7 +222,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "GE",
@@ -314,6 +316,7 @@
           "date": "2026-09-07T16:16:52.427Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Genf",
@@ -324,7 +327,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "GE",
@@ -418,6 +421,7 @@
           "date": "2026-09-07T16:16:52.427Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tous les événements dans le canton de Genève",
@@ -428,7 +432,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

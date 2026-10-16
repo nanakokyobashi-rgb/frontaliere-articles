@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "0db3ff1e7c4c54bbe2a575a6ab832c0ab7ff732b67064f67e5d82a857d0bcf22",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "aa6c058c009f537ba0bfac33e76388adca006e67a06c987bb47954c14e18ff25",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -115,7 +115,7 @@
               "url": "https://www.ur.ch/_rte/information/138694"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -150,6 +150,7 @@
           "date": "2026-08-16T10:39:50.404Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolatore dello stipendio netto",
@@ -172,7 +173,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "UR",
@@ -265,7 +266,7 @@
               "url": "https://www.ur.ch/_rte/information/138694"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -300,6 +301,7 @@
           "date": "2026-08-16T10:39:50.404Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Net salary calculator",
@@ -322,7 +324,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "UR",
@@ -415,7 +417,7 @@
               "url": "https://www.ur.ch/_rte/information/138694"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -450,6 +452,7 @@
           "date": "2026-08-16T10:39:50.404Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Nettolohn-Rechner",
@@ -472,7 +475,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "UR",
@@ -565,7 +568,7 @@
               "url": "https://www.ur.ch/_rte/information/138694"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -600,6 +603,7 @@
           "date": "2026-08-16T10:39:50.404Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calculateur de salaire net",
@@ -622,7 +626,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T03:02:31.746Z",
-  "contentHash": "e5d602efa92a4a0dd8c48a1a623da4c83e7f1210f7748402b0ed6dec124dee22",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "80da6bd90e4c9d4803f8aef9a2eed95e466d67f514fa0c8d676a60bd3c14b020",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T12:13:19.434Z",
+      "updatedAt": "2026-10-15T23:56:39.924Z",
       "keyFacts": 2
     },
     {
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "13",
+          "value": "12",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "21",
+          "value": "20",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
@@ -135,12 +135,6 @@
               "date": "2026-09-25T06:42:00.000Z"
             },
             {
-              "label": "A1 Bern <-> Zürich tra Raccordo autostradale Diramazione Birrfeld E Svincolo autostradale Dietikon Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 16 ottobre 2026",
-              "date": "2026-09-25T07:37:00.000Z"
-            },
-            {
               "label": "A51 Zürich -> Aeroporto Svincolo autostradale Werft Situazione: entrato-uscito chiusa cantiere",
               "value": "Chiusura",
               "detail": "fine prevista: 29 ottobre 2026",
@@ -157,10 +151,16 @@
               "value": "Chiusura",
               "detail": "fine prevista: 19 ottobre 2026",
               "date": "2026-10-07T18:31:00.000Z"
+            },
+            {
+              "label": "A4 Winterthur -> Schaffhausen tra Svincolo autostradale Henggart E Svincolo autostradale Adlikon Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 19 ottobre 2026",
+              "date": "2026-10-14T10:58:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -225,6 +225,7 @@
           "date": "2026-08-11T11:58:09.280Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attese ai valichi verso Germania",
@@ -255,7 +256,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "ZH",
@@ -270,12 +271,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "13",
+          "value": "12",
           "note": "reports as of 15 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "21",
+          "value": "20",
           "note": "reports as of 15 October 2026"
         }
       ],
@@ -368,12 +369,6 @@
               "date": "2026-09-25T06:42:00.000Z"
             },
             {
-              "label": "A1 Bern <-> Zürich tra Raccordo autostradale Diramazione Birrfeld E Svincolo autostradale Dietikon Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia…",
-              "value": "Closure",
-              "detail": "until 16 October 2026",
-              "date": "2026-09-25T07:37:00.000Z"
-            },
-            {
               "label": "A51 Zürich -> Aeroporto Svincolo autostradale Werft Situazione: entrato-uscito chiusa cantiere",
               "value": "Closure",
               "detail": "until 29 October 2026",
@@ -390,10 +385,16 @@
               "value": "Closure",
               "detail": "until 19 October 2026",
               "date": "2026-10-07T18:31:00.000Z"
+            },
+            {
+              "label": "A4 Winterthur -> Schaffhausen tra Svincolo autostradale Henggart E Svincolo autostradale Adlikon Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 19 October 2026",
+              "date": "2026-10-14T10:58:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -458,6 +459,7 @@
           "date": "2026-08-11T11:58:09.280Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Border waits towards Germany",
@@ -488,7 +490,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "ZH",
@@ -503,12 +505,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "13",
+          "value": "12",
           "note": "Meldungen vom 15. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "21",
+          "value": "20",
           "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
@@ -601,12 +603,6 @@
               "date": "2026-09-25T06:42:00.000Z"
             },
             {
-              "label": "A1 Bern <-> Zürich zwischen Autobahndreieck Verzweigung Birrfeld und Anschluss Dietikon Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: Pannenstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 16. Oktober 2026",
-              "date": "2026-09-25T07:37:00.000Z"
-            },
-            {
               "label": "A51 Zürich -> Flughafen Anschluss Werft Sachlage: Ein- und Ausfahrt gesperrt Baustelle",
               "value": "Sperrung",
               "detail": "bis 29. Oktober 2026",
@@ -623,10 +619,16 @@
               "value": "Sperrung",
               "detail": "bis 19. Oktober 2026",
               "date": "2026-10-07T18:31:00.000Z"
+            },
+            {
+              "label": "A4 Winterthur -> Schaffhausen zwischen Anschluss Henggart und Anschluss Adlikon Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 19. Oktober 2026",
+              "date": "2026-10-14T10:58:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -691,6 +693,7 @@
           "date": "2026-08-11T11:58:09.280Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Wartezeiten an der Grenze Richtung Deutschland",
@@ -721,7 +724,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "ZH",
@@ -736,12 +739,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "13",
+          "value": "12",
           "note": "signalements au 15 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "21",
+          "value": "20",
           "note": "signalements au 15 octobre 2026"
         }
       ],
@@ -834,12 +837,6 @@
               "date": "2026-09-25T06:42:00.000Z"
             },
             {
-              "label": "A1 Berne <-> Zurich entre Echangeur Echangeur de Birrfeld et Jonction autoroutière Dietikon Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: bande d'arrêt d'urgence fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 16 octobre 2026",
-              "date": "2026-09-25T07:37:00.000Z"
-            },
-            {
               "label": "A51 Zurich -> Aéroport Jonction autoroutière Werft Situation: Entrée et sortie verrouillées travaux",
               "value": "Fermeture",
               "detail": "jusqu’au 29 octobre 2026",
@@ -856,10 +853,16 @@
               "value": "Fermeture",
               "detail": "jusqu’au 19 octobre 2026",
               "date": "2026-10-07T18:31:00.000Z"
+            },
+            {
+              "label": "A4 Winterthur -> Schaffhouse entre Jonction autoroutière Henggart et Jonction autoroutière Adlikon Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 19 octobre 2026",
+              "date": "2026-10-14T10:58:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -924,6 +927,7 @@
           "date": "2026-08-11T11:58:09.280Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attente aux frontières vers Allemagne",
@@ -954,7 +958,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

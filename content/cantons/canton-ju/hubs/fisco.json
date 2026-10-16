@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T10:56:00.728Z",
-  "contentHash": "483b799286f17a3c1fe7c28b979c4c3f8388e63c64c69fe682707647062403ff",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "b7424f32fd52600b7c5f43f8976c3533b904b9dd25d81254b8dd236372bc8341",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -108,6 +108,7 @@
           "date": "2026-09-10T22:13:44.884Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolatore dello stipendio netto",
@@ -134,7 +135,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "JU",
@@ -225,6 +226,7 @@
           "date": "2026-09-10T22:13:44.884Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Net salary calculator",
@@ -251,7 +253,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "JU",
@@ -342,6 +344,7 @@
           "date": "2026-09-10T22:13:44.884Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Nettolohn-Rechner",
@@ -368,7 +371,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "JU",
@@ -459,6 +462,7 @@
           "date": "2026-09-10T22:13:44.884Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calculateur de salaire net",
@@ -485,7 +489,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

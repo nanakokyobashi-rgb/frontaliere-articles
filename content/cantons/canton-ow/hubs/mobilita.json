@@ -4,17 +4,17 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T14:18:44.271Z",
-  "contentHash": "703e2282aad2551897b00d7e9eab864311d2bc8216b24b42fb884f92aba65a4a",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "835c32ac7d1b84a0978c394e1d8f54a96e993b3f4620b46ab3e4b629551a4fb1",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T05:23:55.314Z",
+      "updatedAt": "2026-10-15T23:56:39.924Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T20:59:19.985Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -68,7 +68,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -91,7 +91,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -114,6 +114,7 @@
           "date": "2026-08-16T16:26:07.130Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -124,7 +125,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-15T14:18:44.271Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "OW",
@@ -175,7 +176,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -198,7 +199,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -221,6 +222,7 @@
           "date": "2026-08-16T16:26:07.130Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -231,7 +233,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-15T14:18:44.271Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "OW",
@@ -282,7 +284,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -305,7 +307,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -328,6 +330,7 @@
           "date": "2026-08-16T16:26:07.130Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -338,7 +341,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-15T14:18:44.271Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "OW",
@@ -389,7 +392,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -412,7 +415,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -435,6 +438,7 @@
           "date": "2026-08-16T16:26:07.130Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -445,7 +449,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-15T14:18:44.271Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

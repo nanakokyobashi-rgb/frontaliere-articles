@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "81e8ea1f4fe73ef721f032e59a934c787deadc70bae53f35da4969cb557b4768",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "25a5861fa9d1617a9738301b601a0f5786eb2c7b335f206db1baefc2b4a5c83e",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -140,7 +140,7 @@
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10872&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6043"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -157,6 +157,7 @@
           "date": "2026-09-07T13:39:12.387Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolatore dello stipendio netto",
@@ -183,7 +184,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "GE",
@@ -301,7 +302,7 @@
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10872&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6043"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -318,6 +319,7 @@
           "date": "2026-09-07T13:39:12.387Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Net salary calculator",
@@ -344,7 +346,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "GE",
@@ -462,7 +464,7 @@
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10872&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6043"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -479,6 +481,7 @@
           "date": "2026-09-07T13:39:12.387Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Nettolohn-Rechner",
@@ -505,7 +508,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "GE",
@@ -623,7 +626,7 @@
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10872&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6043"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -640,6 +643,7 @@
           "date": "2026-09-07T13:39:12.387Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calculateur de salaire net",
@@ -666,7 +670,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

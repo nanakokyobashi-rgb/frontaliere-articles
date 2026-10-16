@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T10:23:56.350Z",
-  "contentHash": "ae6caec1c8a1cc103f260e408ea2466c06c3b3cafcc00ae06aa3be37cb68cf4b",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "180c9d583240c7e8740595352919b6037246c09c1f4040d731c241a5e508254b",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "42",
+          "value": "41",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
@@ -251,6 +251,7 @@
           "date": "2026-09-11T18:59:52.263Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attese ai valichi verso Como",
@@ -293,7 +294,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "TI",
@@ -313,7 +314,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "42",
+          "value": "41",
           "note": "reports as of 15 October 2026"
         }
       ],
@@ -521,6 +522,7 @@
           "date": "2026-09-11T18:59:52.263Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Border waits towards Como",
@@ -563,7 +565,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "TI",
@@ -583,7 +585,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "42",
+          "value": "41",
           "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
@@ -791,6 +793,7 @@
           "date": "2026-09-11T18:59:52.263Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Wartezeiten an der Grenze Richtung Como",
@@ -833,7 +836,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "TI",
@@ -853,7 +856,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "42",
+          "value": "41",
           "note": "signalements au 15 octobre 2026"
         }
       ],
@@ -1062,6 +1065,7 @@
           "date": "2026-09-11T18:59:52.263Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attente aux frontières vers Côme",
@@ -1104,7 +1108,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

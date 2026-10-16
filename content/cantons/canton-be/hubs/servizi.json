@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T01:56:54.479Z",
-  "contentHash": "ad78fb0c6f0137d0e07b6feef5a43ca55c3bab1798891e9fd84d9f6e9223c27f",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "d052f1f5cd3f1d50bd7e04a7e9f8491192d4b776197447c4ad66735330892c9d",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-15T11:34:01.149Z",
+      "updatedAt": "2026-10-16T04:30:54.466Z",
       "keyFacts": 1
     },
     {
@@ -97,7 +97,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -163,6 +163,7 @@
           "date": "2026-08-12T09:20:30.193Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Premi di cassa malati per regione",
@@ -189,7 +190,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "BE",
@@ -264,7 +265,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -330,6 +331,7 @@
           "date": "2026-08-12T09:20:30.193Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Number plate auctions",
@@ -352,7 +354,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "BE",
@@ -427,7 +429,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -493,6 +495,7 @@
           "date": "2026-08-12T09:20:30.193Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Kontrollschild-Auktionen",
@@ -515,7 +518,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "BE",
@@ -590,7 +593,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -656,6 +659,7 @@
           "date": "2026-08-12T09:20:30.193Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Offres d’emploi dans le canton de Berne",
@@ -674,7 +678,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

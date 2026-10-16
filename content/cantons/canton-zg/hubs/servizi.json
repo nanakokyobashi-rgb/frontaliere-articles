@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T01:56:54.479Z",
-  "contentHash": "47e290528c4ab4a571fd46d97c1fb8021b195ddabddf60eb3edb2ee7fc77a47b",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "07813956bcb53b7fb1cdc03e1fbd25616d3bf392a696959de32566c590a40e41",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -137,6 +137,7 @@
           "date": "2026-08-17T08:03:04.287Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Premi di cassa malati per regione",
@@ -163,7 +164,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "ZG",
@@ -283,6 +284,7 @@
           "date": "2026-08-17T08:03:04.287Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Number plate auctions",
@@ -305,7 +307,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "ZG",
@@ -425,6 +427,7 @@
           "date": "2026-08-17T08:03:04.287Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Kontrollschild-Auktionen",
@@ -447,7 +450,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "ZG",
@@ -567,6 +570,7 @@
           "date": "2026-08-17T08:03:04.287Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Offres d’emploi dans le canton de Zoug",
@@ -585,7 +589,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

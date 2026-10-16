@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-15T04:33:54.268Z",
-  "contentHash": "aea2efed5060d34f6eb9c4fd54b0f4efba10e79210d3f2ea726d15ed3a3a8f8f",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "c3e027c3bf9f8c0336c6fe67a61dd6ab7b7b1ab8cf9887cf689ff76c489833ed",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T16:01:15.871Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -146,7 +146,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -199,6 +199,7 @@
           "date": "2026-08-22T04:38:04.511Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Strumenti su tasse e pensione",
@@ -217,7 +218,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-15T04:33:54.268Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "BE",
@@ -336,7 +337,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -389,6 +390,7 @@
           "date": "2026-08-22T04:38:04.511Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tax and pension tools",
@@ -407,7 +409,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-15T04:33:54.268Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "BE",
@@ -526,7 +528,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -579,6 +581,7 @@
           "date": "2026-08-22T04:38:04.511Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tools zu Steuern und Vorsorge",
@@ -597,7 +600,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-15T04:33:54.268Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "BE",
@@ -716,7 +719,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -769,6 +772,7 @@
           "date": "2026-08-22T04:38:04.511Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Outils impôts et retraite",
@@ -787,7 +791,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-15T04:33:54.268Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

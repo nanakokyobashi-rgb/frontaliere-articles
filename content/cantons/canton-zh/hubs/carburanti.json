@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "4bc3f2ed536e8f779b74a51d1fbc2393230c97282676cd7ac9902760fdb84294",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "8461b5176585ef5032510bf58932813f502a680647bed522e24f6b3562485e6d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -70,6 +70,38 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Zurigo prepara i residenti alle crisi: 9 litri d'acqua",
+          "url": "/articoli-zurigo/crisi-resilienza-zurigo/",
+          "excerpt": "Le settimane della resilienza di Zurigo affrontano due scenari: informazioni senza elettricità e internet e 9 litri d'acqua per tre giorni.",
+          "date": "2026-10-12T01:35:59.572Z"
+        },
+        {
+          "title": "Bank-now: 300 dipendenti si spostano a Zurigo",
+          "url": "/articoli-zurigo/bank-now-dipendenti-zurigo/",
+          "excerpt": "Bank-now lascia Horgen: 300 dipendenti si spostano a Zurigo.",
+          "date": "2026-10-12T01:21:37.476Z"
+        },
+        {
+          "title": "VBZ: fino a 300 problemi al giorno in centrale",
+          "url": "/articoli-zurigo/vbz-centrale-problemi-quotidiani/",
+          "excerpt": "Nella centrale VBZ il personale affronta fino a 300 problemi al giorno legati a tram e bus.",
+          "date": "2026-10-11T01:13:16.512Z"
+        },
+        {
+          "title": "Carmen Walker Späh: meno vincoli di capitale per UBS",
+          "url": "/articoli-zurigo/lex-ubs-zurigo-capitale/",
+          "excerpt": "Walker Späh e Filippo Leutenegger cercano a Berna sostegno FDP per regole di capitale meno severe per UBS.",
+          "date": "2026-10-11T00:57:18.753Z"
+        },
+        {
+          "title": "Eolico nel Canton Zurigo: scetticismo nel Weinland",
+          "url": "/articoli-zurigo/eolico-weinland-zurigo/",
+          "excerpt": "Nel Canton Zurigo, quasi metà dell'elettricità eolica arriverebbe dal Weinland.",
+          "date": "2026-10-09T22:48:28.421Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -80,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "ZH",
@@ -137,6 +169,38 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Zurich prepares residents for crises: 9 liters of water",
+          "url": "/en/zurich-articles/zurich-crisis-resilience/",
+          "excerpt": "Zurich's resilience weeks address two scenarios: information without electricity and internet and 9 liters of water for three days.",
+          "date": "2026-10-12T01:35:59.572Z"
+        },
+        {
+          "title": "Bank-now: 300 employees move to Zurich",
+          "url": "/en/zurich-articles/bank-now-employees-zurich/",
+          "excerpt": "Bank-now leaves Horgen: 300 employees move to Zurich.",
+          "date": "2026-10-12T01:21:37.476Z"
+        },
+        {
+          "title": "VBZ: up to 300 problems a day at headquarters",
+          "url": "/en/zurich-articles/vbz-control-centre-daily-issues/",
+          "excerpt": "At the VBZ control center, staff deal with up to 300 problems a day related to trams and buses.",
+          "date": "2026-10-11T01:13:16.512Z"
+        },
+        {
+          "title": "Carmen Walker Späh: fewer capital constraints for UBS",
+          "url": "/en/zurich-articles/zurich-ubs-capital-rules/",
+          "excerpt": "Walker Späh and Filippo Leutenegger seek FDP support in Bern for less stringent capital rules for UBS.",
+          "date": "2026-10-11T00:57:18.753Z"
+        },
+        {
+          "title": "Wind power in the Canton of Zurich: skepticism in the Weinland",
+          "url": "/en/zurich-articles/wind-power-zurich-weinland/",
+          "excerpt": "In the Canton of Zurich, almost half of the wind-generated electricity would come from the Weinland.",
+          "date": "2026-10-09T22:48:28.421Z"
+        }
+      ],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -147,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "ZH",
@@ -204,6 +268,38 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Zürich bereitet die Einwohner auf Krisen vor: 9 Liter Wasser",
+          "url": "/de/zurich-artikel/zuerich-krisenresilienz/",
+          "excerpt": "Die Zürcher Resilienzwochen befassen sich mit zwei Szenarien: Informationen ohne Strom und Internet sowie 9 Liter Wasser für drei Tage.",
+          "date": "2026-10-12T01:35:59.572Z"
+        },
+        {
+          "title": "Bank-now: 300 Mitarbeiter wechseln nach Zürich",
+          "url": "/de/zurich-artikel/bank-now-mitarbeitende-zuerich/",
+          "excerpt": "Bank-now verlässt Horgen: 300 Mitarbeiter wechseln nach Zürich.",
+          "date": "2026-10-12T01:21:37.476Z"
+        },
+        {
+          "title": "VBZ: bis zu 300 Probleme pro Tag in der Leitstelle",
+          "url": "/de/zurich-artikel/vbz-leitstelle-taegliche-probleme/",
+          "excerpt": "In der VBZ-Leitstelle bewältigt das Personal bis zu 300 Probleme pro Tag im Zusammenhang mit Trams und Bussen.",
+          "date": "2026-10-11T01:13:16.512Z"
+        },
+        {
+          "title": "Carmen Walker Späh: Weniger Kapitalzwänge für UBS",
+          "url": "/de/zurich-artikel/zuerich-ubs-kapitalregeln/",
+          "excerpt": "Walker Späh und Filippo Leutenegger suchen in Bern FDP-Unterstützung für weniger strenge Kapitalregeln für UBS.",
+          "date": "2026-10-11T00:57:18.753Z"
+        },
+        {
+          "title": "Windenergie im Kanton Zürich: Skepsis im Weinland",
+          "url": "/de/zurich-artikel/windkraft-zuerich-weinland/",
+          "excerpt": "Im Kanton Zürich käme fast die Hälfte des Windstroms aus dem Weinland.",
+          "date": "2026-10-09T22:48:28.421Z"
+        }
+      ],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -214,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "ZH",
@@ -271,6 +367,38 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Zurich prépare ses habitants aux crises : 9 litres d’eau",
+          "url": "/fr/articles-zurich/zurich-resilience-crises/",
+          "excerpt": "Les semaines de la résilience de Zurich abordent deux scénarios : des informations sans électricité ni internet et 9 litres d’eau pour trois jours.",
+          "date": "2026-10-12T01:35:59.572Z"
+        },
+        {
+          "title": "Bank-now : 300 employés déménagent à Zurich",
+          "url": "/fr/articles-zurich/bank-now-employes-zurich/",
+          "excerpt": "Bank-now quitte Horgen : 300 employés déménagent à Zurich.",
+          "date": "2026-10-12T01:21:37.476Z"
+        },
+        {
+          "title": "VBZ : jusqu’à 300 problèmes par jour au centre de contrôle",
+          "url": "/fr/articles-zurich/vbz-centre-controle-problemes/",
+          "excerpt": "Dans le centre de contrôle de VBZ, le personnel fait face à jusqu’à 300 problèmes par jour liés aux tramways et aux bus.",
+          "date": "2026-10-11T01:13:16.512Z"
+        },
+        {
+          "title": "Carmen Walker Späh : moins de contraintes de fonds propres pour UBS",
+          "url": "/fr/articles-zurich/zurich-ubs-regles-capital/",
+          "excerpt": "Walker Späh et Filippo Leutenegger cherchent à Berne le soutien du FDP en faveur de règles de fonds propres moins strictes pour UBS.",
+          "date": "2026-10-11T00:57:18.753Z"
+        },
+        {
+          "title": "Éolien dans le canton de Zurich : scepticisme dans le Weinland",
+          "url": "/fr/articles-zurich/eolien-weinland-zurich/",
+          "excerpt": "Dans le canton de Zurich, près de la moitié de l'électricité éolienne proviendrait du Weinland.",
+          "date": "2026-10-09T22:48:28.421Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -281,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

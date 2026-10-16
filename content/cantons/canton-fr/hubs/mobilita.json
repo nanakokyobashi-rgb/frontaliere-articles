@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T10:23:56.350Z",
-  "contentHash": "42a141fb1f5f786a1c4e013327f2ac0d3c3cbf9260fb2ba7e6168eebb7bbd372",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "86202ccc265815cff70c0d48a955aad5cdd8b07ae0e5a942d5a2695baee86cee",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "9",
+          "value": "8",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
@@ -177,6 +177,7 @@
           "date": "2026-08-17T23:38:08.486Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -187,7 +188,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "FR",
@@ -202,7 +203,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "9",
+          "value": "8",
           "note": "reports as of 15 October 2026"
         }
       ],
@@ -347,6 +348,7 @@
           "date": "2026-08-17T23:38:08.486Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -357,7 +359,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "FR",
@@ -372,7 +374,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "9",
+          "value": "8",
           "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
@@ -517,6 +519,7 @@
           "date": "2026-08-17T23:38:08.486Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -527,7 +530,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "FR",
@@ -542,7 +545,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "9",
+          "value": "8",
           "note": "signalements au 15 octobre 2026"
         }
       ],
@@ -687,6 +690,7 @@
           "date": "2026-08-17T23:38:08.486Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -697,7 +701,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T01:56:54.479Z",
-  "contentHash": "0a63c9687e98b8744e0ecd75327bdb5b2061112ca522c8487d0b8d366a6bc5ad",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "28e43c2b9fde2ab04949b06549da9e8f7ba4c624c023b371fb4f250fc8d505a4",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-15T11:34:01.149Z",
+      "updatedAt": "2026-10-16T04:30:54.466Z",
       "keyFacts": 1
     },
     {
@@ -92,7 +92,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -183,6 +183,7 @@
           "date": "2026-09-19T04:14:39.399Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Premi di cassa malati per regione",
@@ -209,7 +210,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "VD",
@@ -279,7 +280,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -370,6 +371,7 @@
           "date": "2026-09-19T04:14:39.399Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Number plate auctions",
@@ -392,7 +394,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "VD",
@@ -462,7 +464,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -553,6 +555,7 @@
           "date": "2026-09-19T04:14:39.399Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Kontrollschild-Auktionen",
@@ -575,7 +578,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "VD",
@@ -645,7 +648,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -736,6 +739,7 @@
           "date": "2026-09-19T04:14:39.399Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Offres d’emploi dans le canton de Vaud",
@@ -754,7 +758,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

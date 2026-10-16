@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T01:56:54.479Z",
-  "contentHash": "b2bff6116a13afe454940c508ff7e943571ca4390cf35ad48cc4f3c840c57c34",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "ce4b3650afffc428a02d29fd382bf81bb293ba667bf6840092a00f83c58b6352",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -88,6 +88,7 @@
           "date": "2026-06-25T14:56:45.223Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Premi di cassa malati per regione",
@@ -114,7 +115,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "NE",
@@ -185,6 +186,7 @@
           "date": "2026-06-25T14:56:45.223Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Number plate auctions",
@@ -207,7 +209,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "NE",
@@ -278,6 +280,7 @@
           "date": "2026-06-25T14:56:45.223Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Kontrollschild-Auktionen",
@@ -300,7 +303,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "NE",
@@ -371,6 +374,7 @@
           "date": "2026-06-25T14:56:45.223Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Offres d’emploi dans le canton de Neuchâtel",
@@ -389,7 +393,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

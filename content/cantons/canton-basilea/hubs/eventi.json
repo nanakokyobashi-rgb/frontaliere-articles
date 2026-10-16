@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T12:42:07.041Z",
-  "contentHash": "2da2fbf1b51bd3e9d654cd040c068caf7b87f60a5e8a80726c603584743e468a",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "59025b42f3df2092ed4f93affc34715b069e175063810c9f385fc6682a4804b9",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -106,6 +106,7 @@
           "date": "2026-05-02T01:26:52.789Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi nella regione di Basilea",
@@ -116,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -210,6 +211,7 @@
           "date": "2026-05-02T01:26:52.789Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "All events in the Basel region",
@@ -220,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -314,6 +316,7 @@
           "date": "2026-05-02T01:26:52.789Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen in der Region Basel",
@@ -324,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -418,6 +421,7 @@
           "date": "2026-05-02T01:26:52.789Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tous les événements dans la région bâloise",
@@ -428,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

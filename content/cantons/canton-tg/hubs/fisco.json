@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "f5a7ad21fb5591bb54ec1fb177234dd53297eeb9219b1d857447bdbb6b8e0b07",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "2564cc83f7882b7a321bac1fe04e30c2e8b151cbbded0ef2152ecb0cd7918a57",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -125,7 +125,7 @@
               "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80050"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -136,6 +136,7 @@
           "date": "2026-09-03T02:50:15.636Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolatore dello stipendio netto",
@@ -162,7 +163,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "TG",
@@ -265,7 +266,7 @@
               "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80050"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -276,6 +277,7 @@
           "date": "2026-09-03T02:50:15.636Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Net salary calculator",
@@ -302,7 +304,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "TG",
@@ -405,7 +407,7 @@
               "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80050"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -416,6 +418,7 @@
           "date": "2026-09-03T02:50:15.636Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Nettolohn-Rechner",
@@ -442,7 +445,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "TG",
@@ -545,7 +548,7 @@
               "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80050"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -556,6 +559,7 @@
           "date": "2026-09-03T02:50:15.636Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calculateur de salaire net",
@@ -582,7 +586,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }
