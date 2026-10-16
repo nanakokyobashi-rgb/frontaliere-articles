@@ -873,6 +873,40 @@ test('eventi: URL e ID distinguono gli omonimi con luogo mancante o equivalente,
   assert.deepEqual(items.map((item) => item.url).filter(Boolean), [secondUrl, samePlaceFirstUrl, samePlaceSecondUrl, firstUrl]);
 });
 
+test('eventi: canonicalEventUrl deduplica equivalenti e conserva query, porta e path distinti', () => {
+  const tomorrow = new Date(NOW + DAY_MS).toISOString().slice(0, 10);
+  const ev = (id, url) => ({ id, title: 'Evento omonimo', startDate: tomorrow, canton: 'TI', url });
+  const dataset = {
+    generatedAt: new Date(NOW - HOUR_MS).toISOString(),
+    events: [
+      ev('a-query-order', 'https://events.example.ch/event/query?z=2&tag=second&tag=first#programma'),
+      ev('b-query-order', 'https://events.example.ch/event/query?tag=first&z=2&tag=second'),
+      ev('a-path-normalized', 'https://www.events.example.ch/event/Gra%CC%88del/#dettaglio'),
+      ev('b-path-normalized', 'https://events.example.ch/event/Gr%C3%A4del'),
+      ev('query-value-one', 'https://events.example.ch/event/semantic?id=one'),
+      ev('query-value-two', 'https://events.example.ch/event/semantic?id=two'),
+      ev('explicit-default-port', 'https://events.example.ch:443/event/port'),
+      ev('implicit-default-port', 'https://events.example.ch/event/port'),
+      ev('non-default-port', 'https://events.example.ch:8443/event/port'),
+      ev('path-one', 'https://events.example.ch/event/path-one'),
+      ev('path-two', 'https://events.example.ch/event/path-two'),
+    ],
+  };
+
+  const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
+  assert.equal(block.available, true);
+  const urls = block.render('it').items.map((item) => item.url);
+  assert.equal(urls.length, 8, 'due coppie canoniche collassano; query, porte e path significativi restano distinti');
+  assert.equal(urls.filter((url) => url.includes('/event/query?')).length, 1, 'l’ordine delle coppie query e il fragment non cambiano identità');
+  assert.equal(urls.filter((url) => /\/event\/(?:Gra|Gr%C3)/.test(url)).length, 1, 'www, slash finale e Unicode NFC del path si canonicalizzano');
+  assert.ok(urls.some((url) => url.endsWith('/event/semantic?id=one')));
+  assert.ok(urls.some((url) => url.endsWith('/event/semantic?id=two')));
+  assert.equal(urls.filter((url) => url.includes('/event/port')).length, 2, 'la porta HTTPS predefinita si normalizza e la porta non standard resta distinta');
+  assert.ok(urls.some((url) => url.includes(':8443/event/port')));
+  assert.ok(urls.some((url) => url.endsWith('/event/path-one')));
+  assert.ok(urls.some((url) => url.endsWith('/event/path-two')));
+});
+
 test('eventi degli hub: loadDatasets sanitizza il payload prima di shapeEventsBlock e conserva generatedAt', () => {
   const root = tmpRoot();
   const generatedAt = new Date(NOW - HOUR_MS).toISOString();
