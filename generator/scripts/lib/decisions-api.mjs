@@ -61,6 +61,36 @@ function safeTimeout(timeoutMs) {
   return Math.max(1, Math.floor(value));
 }
 
+async function cancelResponseBody(response, timeoutMs = 0) {
+  let settledCancellation;
+  try {
+    const cancellation = response?.body?.cancel?.();
+    if (!cancellation || typeof cancellation.then !== 'function') return;
+    settledCancellation = Promise.resolve(cancellation).catch(() => {});
+  } catch {
+    // Disposal must not replace the request error that triggers the fallback.
+    return;
+  }
+
+  const budgetMs = Number(timeoutMs);
+  if (!Number.isFinite(budgetMs) || budgetMs <= 0) {
+    void settledCancellation;
+    return;
+  }
+
+  let timer;
+  try {
+    await Promise.race([
+      settledCancellation,
+      new Promise((resolve) => {
+        timer = setTimeout(resolve, budgetMs);
+      }),
+    ]);
+  } finally {
+    if (timer !== undefined) clearTimeout(timer);
+  }
+}
+
 /**
  * Classify one editorial input with a Decisions API choice question.
  *
@@ -101,6 +131,7 @@ export async function classifyWithDecisionsApi({
 
   const controller = new AbortController();
   const timeout = safeTimeout(timeoutMs);
+  const deadlineAt = Date.now() + timeout;
   let timedOut = false;
   let rejectTimeout;
   const timeoutPromise = new Promise((_, reject) => {
@@ -117,35 +148,40 @@ export async function classifyWithDecisionsApi({
   try {
     let response;
     try {
-      response = await Promise.race([
-        fetchImpl(DECISIONS_API_URL, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${key}`,
-          },
-          body: JSON.stringify({
-            model: DECISIONS_API_MODEL,
-            input: normalizedInput,
-            questions: [{
-              type: 'choice',
-              name: 'relevance',
-              instructions: normalizedInstructions,
-              choices: [
-                {
-                  value: 'relevant',
-                  description: 'The content satisfies the editorial relevance criteria.',
-                },
-                {
-                  value: 'not_relevant',
-                  description: 'The content does not satisfy the editorial relevance criteria.',
-                },
-              ],
-            }],
-          }),
-          signal: controller.signal,
+      const fetchPromise = fetchImpl(DECISIONS_API_URL, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${key}`,
+        },
+        body: JSON.stringify({
+          model: DECISIONS_API_MODEL,
+          input: normalizedInput,
+          questions: [{
+            type: 'choice',
+            name: 'relevance',
+            instructions: normalizedInstructions,
+            choices: [
+              {
+                value: 'relevant',
+                description: 'The content satisfies the editorial relevance criteria.',
+              },
+              {
+                value: 'not_relevant',
+                description: 'The content does not satisfy the editorial relevance criteria.',
+              },
+            ],
+          }],
         }),
+        signal: controller.signal,
+      });
+      const trackedFetchPromise = Promise.resolve(fetchPromise).then((lateResponse) => {
+        if (timedOut) void cancelResponseBody(lateResponse);
+        return lateResponse;
+      });
+      response = await Promise.race([
+        trackedFetchPromise,
         timeoutPromise,
       ]);
     } catch (error) {
@@ -157,6 +193,12 @@ export async function classifyWithDecisionsApi({
     }
 
     if (!response || !response.ok) {
+      await cancelResponseBody(response, Math.max(0, deadlineAt - Date.now()));
+      if (timedOut) {
+        throw new DecisionsApiError('Decision API request timed out', {
+          code: 'DECISIONS_API_TIMEOUT',
+        });
+      }
       throw new DecisionsApiError('Decision API returned an HTTP error', {
         code: 'DECISIONS_API_HTTP_ERROR',
         status: response?.status ?? null,
