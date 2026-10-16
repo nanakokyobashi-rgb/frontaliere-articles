@@ -8299,14 +8299,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/ticino/attualita/1956527/comitato-pompieri-caserma-nocasa-minuti-essere-bellinzona-tempi-volontari-sant": {
-      "section": "svizzera",
-      "ts": 1791934688818
-    },
-    "svizzera::https://www.tvsvizzera.it/tvs/svizzera-istruzioni-per-luso": {
-      "section": "svizzera",
-      "ts": 1791936110531
-    },
     "frontaliere::https://www.swissinfo.ch/ita/zurigo%3a-primi-segnali-di-distensione-per-tasso-sfitto-e-pigioni/92208856": {
       "section": "frontaliere",
       "ts": 1791937944513
@@ -8538,6 +8530,14 @@
     "frontaliere::https://www.varesenoi.it/2026/10/15/leggi-notizia/argomenti/economia-13/articolo/sicurezza-sul-lavoro-emergenza-infinita-anche-in-provincia-di-varese-in-aumento-i-decessi-e-il-num.html": {
       "section": "frontaliere",
       "ts": 1792104549714
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/15/leggi-notizia/argomenti/politica-20/articolo/attivita-storiche-oltre-660mila-euro-per-41-imprese-della-provincia-di-varese-1.html": {
+      "section": "frontaliere",
+      "ts": 1792109774114
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/mauro-vitiello-e-la-battaglia-contro-i-mulini-a-vento-della-copying-di-caronno-pertusella-per-rendere-digitali-i-documenti-in-italia/2709076": {
+      "section": "frontaliere",
+      "ts": 1792109785151
     }
   }
 }
