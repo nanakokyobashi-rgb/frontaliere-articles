@@ -4,10 +4,11 @@ import { realpathSync } from 'node:fs';
 /**
  * close-recovered-failure-issues.mjs — zero-Claude reconciler.
  *
- * Auto-closes the auto-generated `Workflow Failure: <name>` / `Crawler Failure: <name>` /
- * `CI Failure: <name>` issues once the workflow has recovered — i.e. its NEXT run after
- * the failure is green. These three are the only failure-title prefixes minted by the
- * github-issue-creator.mjs reporters across all workflows (Crawler 439, Workflow 50, CI 8).
+ * Auto-closes auto-generated failure titles: `Workflow Failure: <name>`, Transport's
+ * keyed `Workflow Failure: manual:<hash> | <name>`, `Crawler Failure: <name>`, and
+ * `CI Failure: <name>`. A workflow's NEXT run after the failure must be green. These are
+ * the failure-title prefixes minted by github-issue-creator.mjs reporters (Crawler 439,
+ * Workflow 50, CI 8).
  *
  * WHY this is centralized (one reconciler, not 300 per-workflow steps):
  * Every scheduled workflow already opens a stable-titled issue on `if: failure()` via
@@ -191,16 +192,20 @@ import { resolveGithubIssueByNumber, commentOnGithubIssue, isFailureReportingDis
 import { isCrawlerGenerationToken } from '../lib/crawler-generation-token.mjs';
 import { pinnedBy } from './manifest-pinned-issues.mjs';
 import { createdFromFilter, createdSinceFilter } from './lib/run-listing-window.mjs';
+import {
+  failureIssueIdentityFromTitle,
+  failureIssueTitleForRecovery,
+} from './lib/manual-blocker-issue-key.mjs';
+export { failureIssueIdentityFromTitle };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
 const WORKFLOWS_DIR = path.join(REPO_ROOT, '.github', 'workflows');
 
 const DRY_RUN = process.argv.includes('--dry-run');
-// Stable titles minted by github-issue-creator.mjs failure reporters. For `Workflow`/`CI`
-// prefixes, group 2 is the workflow display name (equals `github.workflow` and `gh run
-// list -w <name>`). For `Crawler` prefixes (post-consolidation), group 2 is instead the
-// literal `Run <slug>` background-step identifier — see the module docstring above.
+// Stable titles minted by failure reporters. `failureIssueIdentityFromTitle()` unwraps
+// the Transport manual-blocker key back to its workflow name while retaining the cause
+// key on that issue; crawler titles still carry the literal `Run <slug>` step identifier.
 export const TITLE_RE = /^(?:Workflow|Crawler|CI) Failure: (.+)$/;
 export const CRAWLER_STEP_RE = /^Run (.+)$/;
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
@@ -842,15 +847,20 @@ function listFailureIssues() {
     '--json', 'number,title,body,createdAt,labels', ...repoFlag(),
   ]);
   return JSON.parse(out)
-    .map((i) => ({ issue: i, m: TITLE_RE.exec(i.title) }))
+    .map((i) => ({
+      issue: i,
+      m: TITLE_RE.exec(i.title),
+      identity: failureIssueIdentityFromTitle(i.title),
+    }))
     .filter(({ m }) => m)
-    .map(({ issue, m }) => ({
+    .map(({ issue, m, identity }) => ({
       number: issue.number,
       title: issue.title,
       body: issue.body || '',
       createdAt: issue.createdAt,
       labels: (issue.labels || []).map((l) => l?.name).filter(Boolean),
-      workflow: m[1].trim(),
+      workflow: identity?.workflowName ?? m[1].trim(),
+      issueKey: identity?.issueKey ?? null,
     }));
 }
 
@@ -3040,8 +3050,11 @@ function main() {
         prefaces.push(ttlReleaseNote({ code: decision.code, maxDays, ageDays: decision.ageDays }));
       }
       const preface = prefaces.length > 0 ? prefaces.join('\n\n') : undefined;
+      // Query recovery with the unwrapped workflow, but re-read and close only the exact
+      // cause-specific Transport title (including its manual blocker key).
+      const expectedTitle = failureIssueTitleForRecovery(it);
       const result = resolveGithubIssueByNumber(it.number, {
-        expectedTitle: it.title, workflow: it.workflow, runUrl, preface,
+        expectedTitle, workflow: it.workflow, runUrl, preface,
       });
       if (result === null) {
         const why = isFailureReportingDisabled() ? 'ENABLE_FAILURE_REPORT=false' : 'invalid issue number or title';
