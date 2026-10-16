@@ -34,15 +34,16 @@
  * Ogni altra forma su queste superfici — `'<id>'`, `"<id>"`,
  * `blog.article.<id>.…` — è già delimitata da un carattere non-kebab e passa.
  *
- * Unica eccezione: il percorso di una copertina, `/images/blog/<id>.<ext>`
- * (anche in coda a un URL CDN). Nomina un FILE, non l'articolo: un altro
- * articolo pubblicato può dichiarare quella copertina nel proprio `image` o
- * nel proprio blocco SEO (oggi 10 copertine sono condivise, es.
- * `a2-giornico-cantiere-disagi-frontalieri` riusata da `laccordo-…`), e
- * `scripts/retire-article.mjs` la conserva apposta. Contarla come residuo
- * farebbe uscire 1 un ritiro completo, e rossa ogni PR col gate. Il blocco
- * dell'articolo ritirato porta comunque anche `id: '<id>'` e `'blog-<id>'`,
- * quindi un suo residuo vero resta visto.
+ * Unica eccezione: il percorso di una copertina, `/images/blog/<key>.<ext>`
+ * dove `<key>` è esattamente `<id>` o `blog-<id>` (anche in coda a un URL
+ * CDN). Nomina un FILE, non l'articolo: un altro articolo pubblicato può
+ * dichiarare quella copertina nel proprio `image` o nel proprio blocco SEO
+ * (oggi 10 copertine sono condivise, es. `a2-giornico-cantiere-disagi-frontalieri`
+ * riusata da `laccordo-…`), e `scripts/retire-article.mjs` la conserva
+ * apposta. Contarla come residuo farebbe uscire 1 un ritiro completo, e rossa
+ * ogni PR col gate. Il blocco dell'articolo ritirato porta comunque anche
+ * `id: '<id>'` e `'blog-<id>'` fuori da un percorso immagine, quindi un suo
+ * residuo vero resta visto.
  *
  * @param {string} text contenuto della superficie, letto da disco
  * @param {string} id id dell'articolo ritirato
@@ -51,15 +52,26 @@
 /** Cartella delle copertine: `<COVER_DIR><chiave>.<ext>` è un file, non un id. */
 const COVER_DIR = '/images/blog/';
 
+function isCoverPathMention(text, match, id) {
+  if (match[0] !== id && match[0] !== `blog-${id}`) return false;
+  const prefixStart = match.index - COVER_DIR.length;
+  const suffix = text.slice(match.index + match[0].length);
+  const extension = suffix.match(/^\.[a-z0-9]+/i)?.[0];
+  const afterExtension = extension && suffix[extension.length];
+  return prefixStart >= 0
+    && text.slice(prefixStart, match.index) === COVER_DIR
+    && extension !== undefined
+    && (afterExtension === undefined || /[?#'"`),;}\s]/.test(afterExtension));
+}
+
 export function mentionsId(text, id) {
   if (typeof id !== 'string' || id.length === 0) return false;
   const re = new RegExp(`[a-z0-9-]*${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[a-z0-9-]*`, 'g');
   for (const m of text.matchAll(re)) {
+    if (isCoverPathMention(text, m, id)) continue;
     if (m[0] === `blog-${id}`) return true;
     if (m[0] !== id) continue;
-    const isCoverPath = text.slice(Math.max(0, m.index - COVER_DIR.length), m.index) === COVER_DIR
-      && text[m.index + id.length] === '.';
-    if (!isCoverPath) return true;
+    return true;
   }
   return false;
 }
