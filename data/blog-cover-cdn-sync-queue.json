@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-carburanti-svizzera-rincaro-settimanale.webp",
+      "sha256": "bf95be8756d5c746968838f1ee676026626e36b812031f4c308cb349accbaa5c"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-carburanti-svizzera-rincaro-settimanale-480w.webp",
+      "sha256": "f17c93a7c53f8ddbfdbf9079c4ef31ec3b3707407eebfb2f375d058fc76fa806"
+    }
+  ]
 }
