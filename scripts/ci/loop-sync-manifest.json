@@ -4029,6 +4029,16 @@
       }
     },
     {
+      "path": "host/tests/asset-cdn-origin.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Suite node:test della risoluzione dinamica dell'origine CDN: verifica la normalizzazione source-backed di ASSET_CDN, il getter cdnPreconnectHint del bootstrap e l'ordine con cui la fast pipeline configura l'ambiente prima di caricare host/ ed engine/. E' copertura specifica al bootstrap e alla pipeline del corpus e non ha un omonimo da trasportare sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "679d0674ea6f5b6b",
+        "alignedAt": "2026-10-16"
+      }
+    },
+    {
       "path": "host/tests/shell-contract-fingerprint.test.mjs",
       "mode": "corpus-only",
       "reason": "Gate runtime che avvia il bootstrap vero e conta i membri del contratto. Nessun omonimo sul sito: la' l'equivalente e' `tests/packages-articles-confinement.test.ts`, che pero' controlla gli import, non il contratto.",
