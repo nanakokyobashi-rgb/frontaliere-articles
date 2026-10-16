@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T14:33:38.367Z",
-  "contentHash": "c3eccdd7740c7a65075e20919a23810d19a4d0807ddbadb81733526a21100f71",
+  "updatedAt": "2026-10-16T15:29:31.518Z",
+  "contentHash": "6735822ebe06daaad62f364c608edcbcd7f44a67f6dc7fe3adb73dc98378ea7e",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "6",
+          "value": "5",
           "note": "segnalazioni aggiornate: 16 ottobre 2026"
         }
       ],
@@ -189,7 +189,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T15:29:31.518Z"
     },
     "en": {
       "canton": "NE",
@@ -209,7 +209,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "6",
+          "value": "5",
           "note": "reports as of 16 October 2026"
         }
       ],
@@ -356,7 +356,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T15:29:31.518Z"
     },
     "de": {
       "canton": "NE",
@@ -376,7 +376,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "6",
+          "value": "5",
           "note": "Meldungen vom 16. Oktober 2026"
         }
       ],
@@ -523,7 +523,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T15:29:31.518Z"
     },
     "fr": {
       "canton": "NE",
@@ -543,7 +543,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "6",
+          "value": "5",
           "note": "signalements au 16 octobre 2026"
         }
       ],
@@ -690,7 +690,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T15:29:31.518Z"
     }
   }
 }
