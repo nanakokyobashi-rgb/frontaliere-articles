@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "30ea534e04b8c150f8752a68a9108611cba93fe156d9018f35b640c83c1f0efd",
+  "updatedAt": "2026-10-16T00:42:06.556Z",
+  "contentHash": "2f7cbd60e570ecb4b4abefba511d78c9f827cb75b96d448d49789bce034041a3",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -100,9 +100,19 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Information / Leserbrief des Gemeinderates Stansstad zur Thematik Durchgangsverkehr",
+              "date": "2026-10-15",
+              "url": "https://www.stansstad.ch/portraet/neuigkeiten/details.html/19/news/874"
+            },
+            {
               "label": "A2 Lehnenviadukt Beckenried - Verkehrsumstellung für die nächste Bauphase und die Reinigung des Seelisbergtunnels",
               "date": "2026-10-14",
               "url": "https://www.buochs.ch/_rte/information/3010885"
+            },
+            {
+              "label": "Fahrplanwechsel ab 13. Dezember 2026",
+              "date": "2026-10-14",
+              "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
             },
             {
               "label": "Älperchilbi: Einschränkungen im Verkehr",
@@ -118,19 +128,9 @@
               "label": "Postauto Fahrplanwechsel ab dem 13. Dezember 2026",
               "date": "2026-10-09",
               "url": "https://www.buochs.ch/_rte/information/3007873"
-            },
-            {
-              "label": "Mehr Sicherheit auf dem Fuss- und Veloweg am Lopper",
-              "date": "2026-10-06",
-              "url": "https://www.nw.ch/_rte/information/138826"
-            },
-            {
-              "label": "Baustellen-News 01.10.2026: Ersatz Wasserleitung in Turmattstrasse‌",
-              "date": "2026-10-01",
-              "url": "https://www.buochs.ch/_rte/information/3000736"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -157,7 +157,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T00:42:06.556Z"
     },
     "en": {
       "canton": "NW",
@@ -240,9 +240,19 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Information / Leserbrief des Gemeinderates Stansstad zur Thematik Durchgangsverkehr",
+              "date": "2026-10-15",
+              "url": "https://www.stansstad.ch/portraet/neuigkeiten/details.html/19/news/874"
+            },
+            {
               "label": "A2 Lehnenviadukt Beckenried - Verkehrsumstellung für die nächste Bauphase und die Reinigung des Seelisbergtunnels",
               "date": "2026-10-14",
               "url": "https://www.buochs.ch/_rte/information/3010885"
+            },
+            {
+              "label": "Fahrplanwechsel ab 13. Dezember 2026",
+              "date": "2026-10-14",
+              "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
             },
             {
               "label": "Älperchilbi: Einschränkungen im Verkehr",
@@ -258,19 +268,9 @@
               "label": "Postauto Fahrplanwechsel ab dem 13. Dezember 2026",
               "date": "2026-10-09",
               "url": "https://www.buochs.ch/_rte/information/3007873"
-            },
-            {
-              "label": "Mehr Sicherheit auf dem Fuss- und Veloweg am Lopper",
-              "date": "2026-10-06",
-              "url": "https://www.nw.ch/_rte/information/138826"
-            },
-            {
-              "label": "Baustellen-News 01.10.2026: Ersatz Wasserleitung in Turmattstrasse‌",
-              "date": "2026-10-01",
-              "url": "https://www.buochs.ch/_rte/information/3000736"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -297,7 +297,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T00:42:06.556Z"
     },
     "de": {
       "canton": "NW",
@@ -380,9 +380,19 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Information / Leserbrief des Gemeinderates Stansstad zur Thematik Durchgangsverkehr",
+              "date": "2026-10-15",
+              "url": "https://www.stansstad.ch/portraet/neuigkeiten/details.html/19/news/874"
+            },
+            {
               "label": "A2 Lehnenviadukt Beckenried - Verkehrsumstellung für die nächste Bauphase und die Reinigung des Seelisbergtunnels",
               "date": "2026-10-14",
               "url": "https://www.buochs.ch/_rte/information/3010885"
+            },
+            {
+              "label": "Fahrplanwechsel ab 13. Dezember 2026",
+              "date": "2026-10-14",
+              "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
             },
             {
               "label": "Älperchilbi: Einschränkungen im Verkehr",
@@ -398,19 +408,9 @@
               "label": "Postauto Fahrplanwechsel ab dem 13. Dezember 2026",
               "date": "2026-10-09",
               "url": "https://www.buochs.ch/_rte/information/3007873"
-            },
-            {
-              "label": "Mehr Sicherheit auf dem Fuss- und Veloweg am Lopper",
-              "date": "2026-10-06",
-              "url": "https://www.nw.ch/_rte/information/138826"
-            },
-            {
-              "label": "Baustellen-News 01.10.2026: Ersatz Wasserleitung in Turmattstrasse‌",
-              "date": "2026-10-01",
-              "url": "https://www.buochs.ch/_rte/information/3000736"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -437,7 +437,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T00:42:06.556Z"
     },
     "fr": {
       "canton": "NW",
@@ -520,9 +520,19 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Information / Leserbrief des Gemeinderates Stansstad zur Thematik Durchgangsverkehr",
+              "date": "2026-10-15",
+              "url": "https://www.stansstad.ch/portraet/neuigkeiten/details.html/19/news/874"
+            },
+            {
               "label": "A2 Lehnenviadukt Beckenried - Verkehrsumstellung für die nächste Bauphase und die Reinigung des Seelisbergtunnels",
               "date": "2026-10-14",
               "url": "https://www.buochs.ch/_rte/information/3010885"
+            },
+            {
+              "label": "Fahrplanwechsel ab 13. Dezember 2026",
+              "date": "2026-10-14",
+              "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
             },
             {
               "label": "Älperchilbi: Einschränkungen im Verkehr",
@@ -538,19 +548,9 @@
               "label": "Postauto Fahrplanwechsel ab dem 13. Dezember 2026",
               "date": "2026-10-09",
               "url": "https://www.buochs.ch/_rte/information/3007873"
-            },
-            {
-              "label": "Mehr Sicherheit auf dem Fuss- und Veloweg am Lopper",
-              "date": "2026-10-06",
-              "url": "https://www.nw.ch/_rte/information/138826"
-            },
-            {
-              "label": "Baustellen-News 01.10.2026: Ersatz Wasserleitung in Turmattstrasse‌",
-              "date": "2026-10-01",
-              "url": "https://www.buochs.ch/_rte/information/3000736"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -577,7 +577,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T00:42:06.556Z"
     }
   }
 }

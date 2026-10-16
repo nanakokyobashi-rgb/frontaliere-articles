@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "33215b18d4308ab282a9ec36f14f14585f9d82598ec6fc91dac4d7b99a8c7467",
+  "updatedAt": "2026-10-16T00:42:06.556Z",
+  "contentHash": "77529351e366d0b80a00db9cdeae6ae075e756c3e0ca6ba7f86f2176b44eeb64",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -110,6 +110,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Liechtenstein und Philippinen unterzeichnen Doppelbesteuerungsabkommen",
+              "date": "2026-10-13",
+              "url": "https://www.regierung.li/medienportal-medium/16182/234994/0/medienmitteilung"
+            },
+            {
               "label": "Polysportives J+S-Jugendsportcamp Tenero",
               "date": "2026-10-12",
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/polysportives-j-s-jugendsportcamp-tenero.html"
@@ -133,14 +138,9 @@
               "label": "30. Internationaler Bodenseeschulcup",
               "date": "2026-09-28",
               "url": "https://www.sg.ch/news/sgch_sport/2026/09/30--internationaler-bodenseeschulcup.html"
-            },
-            {
-              "label": "Erste Durchführung der Talent Days Bodensee 2026 war ein voller Erfolg!",
-              "date": "2026-09-28",
-              "url": "https://www.sg.ch/news/sgch_sport/2026/09/erste-durchfuehrung-der-talent-days-bodensee-2026-war-ein-voller.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -213,7 +213,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T00:42:06.556Z"
     },
     "en": {
       "canton": "SG",
@@ -301,6 +301,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Liechtenstein und Philippinen unterzeichnen Doppelbesteuerungsabkommen",
+              "date": "2026-10-13",
+              "url": "https://www.regierung.li/medienportal-medium/16182/234994/0/medienmitteilung"
+            },
+            {
               "label": "Polysportives J+S-Jugendsportcamp Tenero",
               "date": "2026-10-12",
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/polysportives-j-s-jugendsportcamp-tenero.html"
@@ -324,14 +329,9 @@
               "label": "30. Internationaler Bodenseeschulcup",
               "date": "2026-09-28",
               "url": "https://www.sg.ch/news/sgch_sport/2026/09/30--internationaler-bodenseeschulcup.html"
-            },
-            {
-              "label": "Erste Durchführung der Talent Days Bodensee 2026 war ein voller Erfolg!",
-              "date": "2026-09-28",
-              "url": "https://www.sg.ch/news/sgch_sport/2026/09/erste-durchfuehrung-der-talent-days-bodensee-2026-war-ein-voller.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -404,7 +404,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T00:42:06.556Z"
     },
     "de": {
       "canton": "SG",
@@ -492,6 +492,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Liechtenstein und Philippinen unterzeichnen Doppelbesteuerungsabkommen",
+              "date": "2026-10-13",
+              "url": "https://www.regierung.li/medienportal-medium/16182/234994/0/medienmitteilung"
+            },
+            {
               "label": "Polysportives J+S-Jugendsportcamp Tenero",
               "date": "2026-10-12",
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/polysportives-j-s-jugendsportcamp-tenero.html"
@@ -515,14 +520,9 @@
               "label": "30. Internationaler Bodenseeschulcup",
               "date": "2026-09-28",
               "url": "https://www.sg.ch/news/sgch_sport/2026/09/30--internationaler-bodenseeschulcup.html"
-            },
-            {
-              "label": "Erste Durchführung der Talent Days Bodensee 2026 war ein voller Erfolg!",
-              "date": "2026-09-28",
-              "url": "https://www.sg.ch/news/sgch_sport/2026/09/erste-durchfuehrung-der-talent-days-bodensee-2026-war-ein-voller.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -595,7 +595,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T00:42:06.556Z"
     },
     "fr": {
       "canton": "SG",
@@ -683,6 +683,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Liechtenstein und Philippinen unterzeichnen Doppelbesteuerungsabkommen",
+              "date": "2026-10-13",
+              "url": "https://www.regierung.li/medienportal-medium/16182/234994/0/medienmitteilung"
+            },
+            {
               "label": "Polysportives J+S-Jugendsportcamp Tenero",
               "date": "2026-10-12",
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/polysportives-j-s-jugendsportcamp-tenero.html"
@@ -706,14 +711,9 @@
               "label": "30. Internationaler Bodenseeschulcup",
               "date": "2026-09-28",
               "url": "https://www.sg.ch/news/sgch_sport/2026/09/30--internationaler-bodenseeschulcup.html"
-            },
-            {
-              "label": "Erste Durchführung der Talent Days Bodensee 2026 war ein voller Erfolg!",
-              "date": "2026-09-28",
-              "url": "https://www.sg.ch/news/sgch_sport/2026/09/erste-durchfuehrung-der-talent-days-bodensee-2026-war-ein-voller.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -786,7 +786,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T00:42:06.556Z"
     }
   }
 }

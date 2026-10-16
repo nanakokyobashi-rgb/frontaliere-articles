@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-15T23:04:29.682Z",
-  "contentHash": "53307e7aa375cac969f627388045cb1ee66005630a0f99db896523ac94d44c9d",
+  "updatedAt": "2026-10-16T00:42:06.556Z",
+  "contentHash": "ef9f73c9e3dec8fda061680a9677be6b82a7a0e73d63b26cd58f02fa459efb81",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -29,7 +29,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -169,6 +169,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Auszeichnung an Dr. med. Christian Hübner – Basic Science Best Poster Award (OTA 2026)",
+              "date": "2026-10-15T11:46:37.000Z",
+              "url": "https://www.usz.ch/auszeichnung-an-dr-med-christian-huebner-basic-science-best-poster-award-ota-2026/"
+            },
+            {
               "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
               "date": "2026-10-14T13:11:34.000Z",
               "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
@@ -192,14 +197,9 @@
               "label": "Mit Berührung Nähe schaffen: Neuer Babymassage-Kurs am USZ",
               "date": "2026-10-08T12:28:56.000Z",
               "url": "https://www.usz.ch/mit-beruehrung-naehe-schaffen-neuer-babymassage-kurs-am-usz/"
-            },
-            {
-              "label": "Aussergewöhnliche Pflege am USZ",
-              "date": "2026-10-06T19:43:03.000Z",
-              "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -278,7 +278,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-15T23:04:29.682Z"
+      "updatedAt": "2026-10-16T00:42:06.556Z"
     },
     "en": {
       "canton": "ZH",
@@ -415,6 +415,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Auszeichnung an Dr. med. Christian Hübner – Basic Science Best Poster Award (OTA 2026)",
+              "date": "2026-10-15T11:46:37.000Z",
+              "url": "https://www.usz.ch/auszeichnung-an-dr-med-christian-huebner-basic-science-best-poster-award-ota-2026/"
+            },
+            {
               "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
               "date": "2026-10-14T13:11:34.000Z",
               "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
@@ -438,14 +443,9 @@
               "label": "Mit Berührung Nähe schaffen: Neuer Babymassage-Kurs am USZ",
               "date": "2026-10-08T12:28:56.000Z",
               "url": "https://www.usz.ch/mit-beruehrung-naehe-schaffen-neuer-babymassage-kurs-am-usz/"
-            },
-            {
-              "label": "Aussergewöhnliche Pflege am USZ",
-              "date": "2026-10-06T19:43:03.000Z",
-              "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -520,7 +520,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-15T23:04:29.682Z"
+      "updatedAt": "2026-10-16T00:42:06.556Z"
     },
     "de": {
       "canton": "ZH",
@@ -657,6 +657,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Auszeichnung an Dr. med. Christian Hübner – Basic Science Best Poster Award (OTA 2026)",
+              "date": "2026-10-15T11:46:37.000Z",
+              "url": "https://www.usz.ch/auszeichnung-an-dr-med-christian-huebner-basic-science-best-poster-award-ota-2026/"
+            },
+            {
               "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
               "date": "2026-10-14T13:11:34.000Z",
               "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
@@ -680,14 +685,9 @@
               "label": "Mit Berührung Nähe schaffen: Neuer Babymassage-Kurs am USZ",
               "date": "2026-10-08T12:28:56.000Z",
               "url": "https://www.usz.ch/mit-beruehrung-naehe-schaffen-neuer-babymassage-kurs-am-usz/"
-            },
-            {
-              "label": "Aussergewöhnliche Pflege am USZ",
-              "date": "2026-10-06T19:43:03.000Z",
-              "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -762,7 +762,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-15T23:04:29.682Z"
+      "updatedAt": "2026-10-16T00:42:06.556Z"
     },
     "fr": {
       "canton": "ZH",
@@ -899,6 +899,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Auszeichnung an Dr. med. Christian Hübner – Basic Science Best Poster Award (OTA 2026)",
+              "date": "2026-10-15T11:46:37.000Z",
+              "url": "https://www.usz.ch/auszeichnung-an-dr-med-christian-huebner-basic-science-best-poster-award-ota-2026/"
+            },
+            {
               "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
               "date": "2026-10-14T13:11:34.000Z",
               "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
@@ -922,14 +927,9 @@
               "label": "Mit Berührung Nähe schaffen: Neuer Babymassage-Kurs am USZ",
               "date": "2026-10-08T12:28:56.000Z",
               "url": "https://www.usz.ch/mit-beruehrung-naehe-schaffen-neuer-babymassage-kurs-am-usz/"
-            },
-            {
-              "label": "Aussergewöhnliche Pflege am USZ",
-              "date": "2026-10-06T19:43:03.000Z",
-              "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -1000,7 +1000,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-15T23:04:29.682Z"
+      "updatedAt": "2026-10-16T00:42:06.556Z"
     }
   }
 }
