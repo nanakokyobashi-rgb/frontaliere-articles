@@ -6337,7 +6337,12 @@ export function buildFactCheckCallOptions(baseOpts, cacheEnabled = isFactCheckCa
 // run over the WHOLE text regardless of this cap.
 const MAX_FACTCHECK_ARTICLE_CHARS = 24000;
 
-async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '') {
+function verifiedCantonFactsBlock(referenceText = '') {
+  if (typeof referenceText !== 'string' || !referenceText.trim()) return '';
+  return `\nFATTI ANNUALI VERIFICATI DEL CANTONE (riferimento canonico separato dalla fonte originale; confronta qui aliquote e valori annuali, senza attribuirli alla fonte):\n"""\n${referenceText.trim()}\n"""\n`;
+}
+
+async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '', verifiedReferenceText = '') {
   const articleText = [
     contentIt?.title || '',
     contentIt?.excerpt || '',
@@ -6365,6 +6370,7 @@ ${articleText.slice(0, MAX_FACTCHECK_ARTICLE_CHARS)}
 ${isEvergreen ? 'NOTA: Articolo evergreen senza fonte specifica. Verifica basandoti sulle tue conoscenze del dominio e sui fatti di riferimento sotto. Per evergreen, NON segnalare come issue un fatto solo perché non compare in una fonte originale: segnala solo se è falso, contraddetto dai fatti verificati, troppo specifico senza attribuzione, o presentato come caso reale non verificato.' : `FONTE ORIGINALE (l'articolo doveva basarsi su questo testo):\n"""\n${sourceContent.slice(0, 6000)}\n"""`}
 
 ${VERIFIED_DOMAIN_FACTS}
+${verifiedCantonFactsBlock(verifiedReferenceText)}
 
 VERIFICA SISTEMATICA — controlla OGNI categoria:
 
@@ -18299,7 +18305,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
 
     // Step 3a.0c: LLM fact verification — PRIMARY BLOCKING GATE
     try {
-      const factResult = await llmFactCheck(data.content.it, pageContent, url);
+      const factResult = await llmFactCheck(data.content.it, pageContent, url, CANTON_FACTS_BRIEF);
       if (!factResult.passed) {
         // Ledger only. These categories never reach the defect memory and can
         // never promote anything: they are the verifier's opinion, and the
@@ -18477,7 +18483,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         let expandFactOk = true;
         let expandFactIssues = null;
         try {
-          const expandFactResult = await llmFactCheck(data.content.it, pageContent, url);
+          const expandFactResult = await llmFactCheck(data.content.it, pageContent, url, CANTON_FACTS_BRIEF);
           if (!expandFactResult.passed) {
             for (const i of expandFactResult.issues || []) {
               const cat = String(i?.category || 'uncategorized');
@@ -18874,6 +18880,23 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   } finally {
     delete data._sourceUrl;
     delete data._sourceText;
+  }
+
+  // The ordinary blocking fact-check runs before translation/CTA/citation and
+  // can therefore miss a final mutation. Re-check canton evergreen articles
+  // against the same annual cache-backed brief at the last pre-write gate. The
+  // brief is a verified reference, never `sourceContent`: evergreen source
+  // fidelity must remain disabled for generated research briefs.
+  if (IS_CANTON && CANTON_FACTS_BRIEF && url.startsWith('evergreen://')) {
+    const finalCantonFactResult = await llmFactCheck(data.content.it, '', url, CANTON_FACTS_BRIEF);
+    if (!finalCantonFactResult.passed) {
+      const issuesSummary = (finalCantonFactResult.issues || [])
+        .map((issue) => `[${issue.category || '?'}] "${String(issue.claim || '').slice(0, 60)}" — ${String(issue.reason || '').slice(0, 80)}`)
+        .join('; ');
+      const error = new Error(`Articolo cantonale evergreen rigettato dal gate finale: ${issuesSummary}`);
+      error.qualityReject = true;
+      throw error;
+    }
   }
 
   // Step 3b: Generate article image through the governed engine.

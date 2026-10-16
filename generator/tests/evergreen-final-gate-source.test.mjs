@@ -236,3 +236,29 @@ test('#6 wiring: gate IT prima della traduzione, gate completo dopo, testo di fo
   assert.doesNotMatch(src, /url\.startsWith\('evergreen:\/\/'\) \? '' : pageContent/,
     'copia inline del ternario evergreen: usa factualityGateSourceText, altrimenti i gate tornano a divergere');
 });
+
+test('#7 il brief cantonale è un riferimento verificato separato dalla fonte, anche al gate finale', () => {
+  const referenceBlock = new Function(`${cutFunction('verifiedCantonFactsBlock')}\nreturn verifiedCantonFactsBlock;`)();
+  assert.equal(referenceBlock(''), '');
+  assert.equal(referenceBlock('  Fisco TI, dataset 2026.  '),
+    '\nFATTI ANNUALI VERIFICATI DEL CANTONE (riferimento canonico separato dalla fonte originale; confronta qui aliquote e valori annuali, senza attribuirli alla fonte):\n"""\nFisco TI, dataset 2026.\n"""\n');
+
+  assert.match(src, /async function llmFactCheck\(contentIt, sourceContent = '', sourceUrl = '', verifiedReferenceText = ''\)/);
+  assert.match(src, /\$\{verifiedCantonFactsBlock\(verifiedReferenceText\)\}/);
+  assert.equal(
+    [...src.matchAll(/llmFactCheck\(data\.content\.it, pageContent, url, CANTON_FACTS_BRIEF\)/g)].length,
+    2,
+    'sia la verifica iniziale sia quella post-espansione devono ricevere lo stesso brief canonico',
+  );
+
+  const start = src.indexOf('async function generateAndValidateArticle');
+  const end = src.indexOf('function slugifySlugPart', start);
+  assert.ok(start > 0 && end > start);
+  const pipeline = src.slice(start, end);
+  const finalGate = pipeline.indexOf('assertArticlePassesFactualityGates(data);');
+  const cantonCheck = pipeline.indexOf("llmFactCheck(data.content.it, '', url, CANTON_FACTS_BRIEF)");
+  const image = pipeline.indexOf('await generateArticleImage(data);');
+  assert.ok(finalGate >= 0 && cantonCheck > finalGate && image > cantonCheck,
+    'il controllo annuale cantonale deve essere l’ultimo gate fattuale prima della generazione immagine/scrittura');
+  assert.match(pipeline, /IS_CANTON && CANTON_FACTS_BRIEF && url\.startsWith\('evergreen:\/\/'\)/);
+});
