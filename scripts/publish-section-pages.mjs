@@ -217,10 +217,28 @@ export function cantonRssFeedEntries(section) {
   });
 }
 
+/** Il manifest API emette tutti i feed cantonali oppure nessuno (sezione vuota). */
+export function cantonRssFeedsDeclaredInManifest(section, files) {
+  if (!files || typeof files !== 'object' || Array.isArray(files)) {
+    throw new Error(`manifest API ${section}: files RSS non verificabili`);
+  }
+  const expected = cantonRssFeedEntries(section);
+  const declared = expected.filter(({ name }) => Object.prototype.hasOwnProperty.call(files, name));
+  if (declared.length !== 0 && declared.length !== expected.length) {
+    throw new Error(`manifest API ${section}: set feed RSS cantonali incompleto (${declared.length}/${expected.length})`);
+  }
+  return declared;
+}
+
 /** I feed edge si pubblicano solo insieme alla release degli aggregati verificati. */
-export function cantonRssFeedsForPublish(section, { publishing, effectiveStatus, aggregatePagesAllowed } = {}) {
+export function cantonRssFeedsForPublish(section, {
+  publishing,
+  effectiveStatus,
+  aggregatePagesAllowed,
+  availableFeeds = cantonRssFeedEntries(section),
+} = {}) {
   return publishing && effectiveStatus === 'live' && aggregatePagesAllowed === true
-    ? cantonRssFeedEntries(section)
+    ? availableFeeds
     : [];
 }
 
@@ -257,6 +275,14 @@ export function addCantonRssFeedLink(html, feedUrl) {
   output = replaceOrInsert(output, /<link\b[^>]*data-canton-rss-feed[^>]*>/giu, headLink, /<\/head\s*>/iu, '</head>');
   output = replaceOrInsert(output, /<a\b[^>]*data-canton-rss-feed[^>]*>[\s\S]*?<\/a\s*>/giu, bodyLink, /<\/body\s*>/iu, '</body>');
   return output;
+}
+
+/** Rimuove entrambi i link RSS quando la release API non emette alcun feed. */
+export function removeCantonRssFeedLinks(html) {
+  if (typeof html !== 'string') throw new Error('landing RSS senza HTML');
+  return html
+    .replace(/\s*<link\b[^>]*data-canton-rss-feed[^>]*>\s*/giu, '')
+    .replace(/\s*<a\b[^>]*data-canton-rss-feed[^>]*>[\s\S]*?<\/a\s*>\s*/giu, '');
 }
 
 /** Trasforma le righe del manifest in page entry verificati dalla stessa allowlist del publisher. */
@@ -1033,6 +1059,7 @@ export async function publishCantonRssFeeds({
   section,
   releaseCommit,
   effectiveStatus,
+  feedEntries = cantonRssFeedEntries(section),
   distDir,
   runImpl = run,
   probeImpl = probe,
@@ -1047,7 +1074,15 @@ export async function publishCantonRssFeeds({
     console.error(`::error::[${LOG}] feed RSS ${section}: la sezione non è live nel registro edge`);
     return { failures: 1, uploaded: 0, verified: 0 };
   }
-  const feeds = cantonRssFeedEntries(section);
+  const expectedFeeds = cantonRssFeedEntries(section);
+  const requestedNames = new Set(feedEntries.map(({ name }) => name));
+  const feeds = expectedFeeds.filter(({ name }) => requestedNames.has(name));
+  if (feeds.length !== feedEntries.length) {
+    return { failures: 1, uploaded: 0, verified: 0 };
+  }
+  if (feeds.length === 0) {
+    return { failures: 0, uploaded: 0, verified: 0, feeds: [] };
+  }
   const localFiles = [];
   let prepared = [];
   let snapshots = null;
@@ -1069,6 +1104,14 @@ export async function publishCantonRssFeeds({
     if (readiness?.commit && readiness.commit !== releaseCommit) {
       console.error(`::error::[${LOG}] feed RSS ${section}: la release verificata non corrisponde al commit ${releaseCommit}`);
       return { failures: 1, uploaded: 0, verified: 0 };
+    }
+
+    const declaredFeeds = cantonRssFeedsDeclaredInManifest(section, readiness.files);
+    if (declaredFeeds.length === 0) {
+      return { failures: 0, uploaded: 0, verified: 0, feeds: [] };
+    }
+    if (declaredFeeds.length !== feeds.length || declaredFeeds.some(({ name }) => !requestedNames.has(name))) {
+      throw new Error(`manifest API ${section}: set feed RSS diverso da quello richiesto`);
     }
 
     for (let i = 0; i < feeds.length; i++) {
@@ -1236,6 +1279,19 @@ export async function publish({
       return 1;
     }
   };
+  const deleted = [];
+  // Dopo la cancellazione di almeno una pagina precedente non si può
+  // ripristinare il feed snapshot: quel feed potrebbe annunciare proprio una
+  // URL che ora non è più presente. Il run resta rosso e il retry/reconcile
+  // lascia la superficie RSS corrente finché le pagine precedenti non sono
+  // state ripristinate.
+  const rollbackRssAfterObsoleteMutation = async () => {
+    if (deleted.length > 0) {
+      console.error(`::error::[${LOG}] rollback RSS posticipato: ${deleted.length} pagina/e obsoleta/e sono state cancellate; le pagine precedenti devono essere ripristinate prima del feed snapshot`);
+      return 0;
+    }
+    return rollbackRss();
+  };
   // A missing or malformed edge registry is UNKNOWN, not draft. Do not upload
   // into that state: otherwise the CDN verify below can be green while a live
   // apex still serves stale/404 pages. A valid draft is the bootstrap case.
@@ -1269,6 +1325,7 @@ export async function publish({
     const rssResult = await publishCantonRssFeedsImpl({
       section,
       releaseCommit,
+      feedEntries: cantonRssFeeds,
       effectiveStatus: beforeStatus,
       distDir,
       runImpl,
@@ -1281,6 +1338,15 @@ export async function publish({
     if (rssResult.failures > 0) {
       console.error(`::error::[${LOG}] feed RSS ${section} non verificati: nessuna pagina viene caricata`);
       return { failures: rssResult.failures, uploaded: 0, deleted: 0, status: beforeStatus };
+    }
+    if (Array.isArray(rssResult.feeds) && rssResult.feeds.length === 0) {
+      for (const page of pages.filter(({ kind }) => kind === 'landing')) {
+        const local = path.join(distDir, page.rel);
+        if (!fs.existsSync(local)) continue;
+        const html = fs.readFileSync(local, 'utf-8');
+        const withoutRss = removeCantonRssFeedLinks(html);
+        if (withoutRss !== html) fs.writeFileSync(local, withoutRss, 'utf-8');
+      }
     }
     if (typeof rssResult.rollback === 'function') rollbackRssPublication = rssResult.rollback;
   }
@@ -1364,7 +1430,6 @@ export async function publish({
     }
   }
 
-  const deleted = [];
   for (const page of obsoletePages) {
     const { stdout } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', page.edgeKey]);
     if (stdout.includes('✅ deleted')) deleted.push(page);
@@ -1383,11 +1448,11 @@ export async function publish({
       console.log(`::error::[${LOG}] vecchia pagina ancora servita o non verificabile: ${page.cdnUrl} (${old.status})`);
     }
   }
-  const rollbackFailures = failures > 0 ? await rollbackRss() : 0;
+  const rollbackFailures = failures > 0 ? await rollbackRssAfterObsoleteMutation() : 0;
   return { failures: failures + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: deleted.length, status };
   } catch (error) {
     console.error(`::error::[${LOG}] pubblicazione HTML ${section} fallita: ${error?.message ?? String(error)}`);
-    const rollbackFailures = await rollbackRss();
+    const rollbackFailures = await rollbackRssAfterObsoleteMutation();
     return { failures: 1 + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status };
   }
 }
@@ -1405,6 +1470,7 @@ export async function main(
     publishCantonRssFeedsImpl = publishCantonRssFeeds,
     publishPageManifestImpl = publishPageManifest,
     publishedApiReleaseCommitImpl = publishedApiReleaseCommit,
+    publishedReleaseReadyImpl = publishedReleaseReady,
     apiInputsChangedImpl = apiInputsChangedInCurrentPush,
     fetchImpl = fetch,
   } = {},
@@ -1461,7 +1527,17 @@ export async function main(
       );
     }
   }
-  let cantonRssFeeds = publishing && effectiveStatus === 'live' ? cantonRssFeedEntries(section) : [];
+  let cantonRssFeeds = [];
+  if (publishing && effectiveStatus === 'live') {
+    const readiness = await publishedReleaseReadyImpl(releaseCommit, { section, fetchImpl });
+    // Se la readiness è transitoria, mantieni il gate fail-closed completo e
+    // lascia che publishCantonRssFeeds ritenti. Quando è verificata, invece,
+    // il set dichiarato dal manifest decide anche se la landing può annunciare
+    // RSS: una sezione live senza articoli emette zero feed legittimamente.
+    cantonRssFeeds = readiness === true || readiness?.ok
+      ? (readiness?.files ? cantonRssFeedsDeclaredInManifest(section, readiness.files) : cantonRssFeedEntries(section))
+      : cantonRssFeedEntries(section);
+  }
 
   let hubs = { rels: [], pages: [], missing: [] };
   let landingPages = [];
@@ -1508,6 +1584,7 @@ export async function main(
     publishing,
     effectiveStatus,
     aggregatePagesAllowed,
+    availableFeeds: cantonRssFeeds,
   });
   if (rssFeedsForPublish.length === 0 && cantonRssFeeds.length > 0) {
     console.log(`::notice::[${LOG}] feed RSS ${section} trattenuti: aggregatePagesAllowed=false`);

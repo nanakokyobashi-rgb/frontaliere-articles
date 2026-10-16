@@ -78,8 +78,9 @@ on:
       - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
   # `sections/registry.json` and the edge API registry are published by
   # publish-api.yml. Its push-triggered run can finish after this workflow's
-  # first pass, so replay only registry transitions after that API release is
-  # verified; this closes the draft→live race without duplicating content runs.
+  # first pass; scheduled/manual runs can also change the effective API
+  # surface without a new Git diff. Replay waits for the API release and uses
+  # the push transition or the effective edge registry as its bounded plan.
   workflow_run:
     workflows: ['Publish article data API']
     types: [completed]
@@ -118,7 +119,9 @@ jobs:
     if: >-
       github.event_name != 'workflow_run' ||
       (github.event.workflow_run.conclusion == 'success' &&
-       github.event.workflow_run.event == 'push' &&
+       (github.event.workflow_run.event == 'push' ||
+        github.event.workflow_run.event == 'schedule' ||
+        github.event.workflow_run.event == 'workflow_dispatch') &&
        github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -143,6 +146,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           PUSH_BEFORE: ${{ github.event.before }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          WORKFLOW_RUN_EVENT: ${{ github.event.workflow_run.event }}
         run: |
           set -euo pipefail
           before="${PUSH_BEFORE:-}"
@@ -151,17 +155,22 @@ jobs:
               echo "::error::workflow_run head SHA non valido"
               exit 1
             fi
-            push_events="$(gh api --paginate --slurp "repos/$REPO/commits/$WORKFLOW_RUN_HEAD_SHA/events")"
-            before="$(jq -r --arg head "$WORKFLOW_RUN_HEAD_SHA" '
-              [ .[]? | .[]?
-                | select(.type == "PushEvent"
-                  and .payload.ref == "refs/heads/main"
-                  and .payload.head == $head)
-                | .payload.before
-              ] | last // empty
-            ' <<< "$push_events")"
-            if [ -z "$before" ] || ! [[ "$before" =~ ^[a-f0-9]{40}$ ]] && ! [[ "$before" =~ ^0+$ ]]; then
-              echo "::error::before della push originaria non trovato per workflow_run head $WORKFLOW_RUN_HEAD_SHA"
+            if [ "$WORKFLOW_RUN_EVENT" = 'push' ]; then
+              push_events="$(gh api --paginate --slurp "repos/$REPO/commits/$WORKFLOW_RUN_HEAD_SHA/events")"
+              before="$(jq -r --arg head "$WORKFLOW_RUN_HEAD_SHA" '
+                [ .[]? | .[]?
+                  | select(.type == "PushEvent"
+                    and .payload.ref == "refs/heads/main"
+                    and .payload.head == $head)
+                  | .payload.before
+                ] | last // empty
+              ' <<< "$push_events")"
+              if [ -z "$before" ] || ! [[ "$before" =~ ^[a-f0-9]{40}$ ]] && ! [[ "$before" =~ ^0+$ ]]; then
+                echo "::error::before della push originaria non trovato per workflow_run head $WORKFLOW_RUN_HEAD_SHA"
+                exit 1
+              fi
+            elif [ "$WORKFLOW_RUN_EVENT" != 'schedule' ] && [ "$WORKFLOW_RUN_EVENT" != 'workflow_dispatch' ]; then
+              echo "::error::workflow_run event non supportato: $WORKFLOW_RUN_EVENT"
               exit 1
             fi
           fi
@@ -189,6 +198,7 @@ jobs:
           COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           PUSH_BEFORE: ${{ steps.push_range.outputs.before }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          WORKFLOW_RUN_EVENT: ${{ github.event.workflow_run.event }}
         run: |
           set -euo pipefail
           if [ "$EVENT_NAME" = 'push' ]; then
@@ -210,7 +220,6 @@ jobs:
               exit 1
             fi
           fi
-          if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             dry=true
             [ "$DRY_RUN_INPUT" = "false" ] && dry=false
@@ -243,11 +252,20 @@ jobs:
               echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
               dry=true
             fi
-            diff_args=()
-            if [ "$EVENT_NAME" = 'workflow_run' ]; then diff_args+=(-- sections/registry.json); fi
-            matrix="$(git diff --name-status "$before" HEAD "${diff_args[@]}" 2>/dev/null \
-              | PUSH_BEFORE="$before" node scripts/ci/fast-publish-section.mjs r2-plan \
-              | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
+            if [ "$EVENT_NAME" = 'workflow_run' ] && [ "$WORKFLOW_RUN_EVENT" != 'push' ]; then
+              # Schedule/manuale possono aggiornare la superficie API senza un
+              # nuovo commit. Il piano deve partire dal registro edge che il
+              # Worker serve davvero, non dal diff del checkout.
+              matrix="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan \
+                | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
+            else
+              if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
+              diff_args=()
+              if [ "$EVENT_NAME" = 'workflow_run' ]; then diff_args+=(-- sections/registry.json); fi
+              matrix="$(git diff --name-status "$before" HEAD "${diff_args[@]}" 2>/dev/null \
+                | PUSH_BEFORE="$before" node scripts/ci/fast-publish-section.mjs r2-plan \
+                | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
+            fi
           fi
           any=false
           [ "$(printf '%s' "$matrix" | jq 'length')" -gt 0 ] && any=true

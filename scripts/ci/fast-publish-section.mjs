@@ -23,6 +23,8 @@
  *                          anche `git diff --name-status`) e stampa la matrice
  *                          JSON `[{section, ids, bootstrap}]` delle sezioni R2
  *                          da ripubblicare
+ *   r2-reconcile-plan      legge il registro edge effettivo e stampa la matrice
+ *                          delle sole sezioni cantonali R2 realmente `live`
  *   section-of <path>      la sezione che possiede quel corpo (esce 1 se nessuna)
  *   shard-of <section>     lo shard Pages della sezione. Una sezione con
  *                          `shardKey: null` (le cantonali) e' servita da R2 +
@@ -38,6 +40,7 @@ import { fileURLToPath } from 'node:url';
 
 import { activeCorpusCoreEntries, activeSourceSections, sectionForBodyPath, sectionSourceSurfaces } from '../lib/corpus-sections.mjs';
 import { articleRegistryObjectBodies, articleRegistryObjectFields } from '../../engine/shared/articleRegistryObjectBodies.mjs';
+import { EDGE_SECTION_REGISTRY_URL, validateEdgeSectionRegistry } from '../lib/section-registry.mjs';
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -181,6 +184,26 @@ export function liveRegistryTransitionSections(previousRegistry, nextRegistry, c
 }
 
 /**
+ * Piano bounded per una release API avviata da schedule/manuale. Non usa il
+ * registro committato ne' il diff Git: il registro edge e' la superficie che
+ * il Worker serve davvero, quindi solo le cantonali R2 che risultano live
+ * vengono riconciliate.
+ */
+export function liveR2ReconciliationPlan(registry, coreList = activeCorpusCoreEntries()) {
+  if (!validateEdgeSectionRegistry(registry)) {
+    throw new Error('registro edge effettivo non valido');
+  }
+  const live = new Set(
+    Object.entries(registry.sections)
+      .filter(([, entry]) => entry?.status === 'live')
+      .map(([section]) => section),
+  );
+  return coreList
+    .filter((section) => section.kind === 'canton' && !section.shardKey && live.has(section.section))
+    .map((section) => ({ section: section.section, ids: [], bootstrap: false }));
+}
+
+/**
  * L'ERE (grep -E) dei corpi delle sezioni attive. `served` restringe a chi le
  * serve: `shard` (Pages) o `r2` (Worker). Un commit di un articolo cantonale
  * non deve entrare nel fast-publish verso gli shard, dove `shard-of` lo
@@ -303,7 +326,7 @@ function isMain() {
 
 if (isMain()) {
   const [cmd, arg] = process.argv.slice(2);
-  try {
+  const run = async () => {
     if (cmd === 'body-regex') console.log(bodyRegex(activeCorpusCoreEntries(), { served: arg }));
     else if (cmd === 'r2-plan') {
       const files = readFileSync(0, 'utf8').split('\n');
@@ -318,12 +341,20 @@ if (isMain()) {
       }
       console.log(JSON.stringify(r2PublishPlan(files, activeCorpusCoreEntries(), { registryRefreshSections })));
     }
+    else if (cmd === 'r2-reconcile-plan') {
+      const response = await fetch(`${EDGE_SECTION_REGISTRY_URL}?_fpsr=${Date.now()}`, {
+        headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
+      });
+      if (!response.ok) throw new Error(`registro edge HTTP ${response.status}`);
+      console.log(JSON.stringify(liveR2ReconciliationPlan(await response.json())));
+    }
     else if (cmd === 'image-plan') console.log(JSON.stringify(imagePublishPlan(readFileSync(0, 'utf8').split('\n'), activeCorpusCoreEntries(), { served: arg })));
     else if (cmd === 'section-of' && arg) console.log(sectionOf(arg));
     else if (cmd === 'shard-of' && arg) console.log(shardOf(arg));
-    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files');
-  } catch (error) {
+    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files | r2-reconcile-plan');
+  };
+  run().catch((error) => {
     console.error(`::error::fast-publish-section: ${error?.message ?? error}`);
-    process.exit(1);
-  }
+    process.exitCode = 1;
+  });
 }
