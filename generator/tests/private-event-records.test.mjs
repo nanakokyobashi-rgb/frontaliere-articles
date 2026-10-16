@@ -49,6 +49,16 @@ describe('stripPrivateEventRecords', () => {
     assert.equal(input.events.length, 2, 'input not mutated');
   });
 
+  it('normalizes a non-numeric totalEvents when private records are removed', () => {
+    const input = { schemaVersion: 1, totalEvents: '2', events: [TIO, FROG] };
+    const { payload, removed } = stripPrivateEventRecords(input);
+    assert.equal(removed, 1);
+    assert.deepEqual(payload.events, [TIO]);
+    assert.equal(payload.totalEvents, 1);
+    assert.equal(typeof payload.totalEvents, 'number');
+    assert.equal(input.totalEvents, '2', 'input not mutated');
+  });
+
   it('returns the same payload when nothing is private', () => {
     const input = { schemaVersion: 1, events: [TIO] };
     const { payload, removed } = stripPrivateEventRecords(input);
