@@ -5,12 +5,14 @@
  * per id, fonte, argomento e contenuto.
  *
  * Uso (dalla radice del repo, a rebase concluso):
- *   node scripts/ci/check-post-rebase-uniqueness.mjs --produced <sha> [--against <rev>]
+ *   node scripts/ci/check-post-rebase-uniqueness.mjs --produced <sha> [--against <rev>] [--run-report <path>]
  *
  *   --produced  il commit prodotto da QUESTO run, preso PRIMA di ogni rebase;
  *               cio' che il run ha aggiunto e' il diff `<sha>^ → <sha>`.
  *   --against   lo stato su cui si sta per pushare (default `HEAD`, cioe' il
  *               commit rigiocato sopra upstream).
+ *   --run-report report prodotto dallo stesso run di create-article.mjs; serve
+ *               a ripristinare il contesto evergreen usato dal gate iniziale.
  *
  * Exit 0 = nessuna violazione. Exit 1 = violazione: NON pushare; ogni riga porta
  *          `POST_REBASE_UNIQUENESS_VIOLATION` per il grep della run.
@@ -94,7 +96,8 @@
  */
 import '../../host/cantonSectionsBootstrap.mjs';
 import { execFileSync } from 'node:child_process';
-import { realpathSync } from 'node:fs';
+import { readFileSync, realpathSync } from 'node:fs';
+import { resolve as resolvePath } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { activeCorpusCoreEntries } from '../lib/corpus-sections.mjs';
@@ -103,7 +106,7 @@ import { findCrossSectionSourceDuplicate } from '../../generator/scripts/lib/cro
 import { findContentDuplicate } from '../../generator/scripts/lib/article-content-duplicate.mjs';
 import { metaFieldRegex, unescapeTsValue } from '../../generator/scripts/lib/meta-field-regex.mjs';
 import { itemIdentityOf, ledgerArticleIds, legacyNewsUrlKey, readLedgerEntry, SOURCE_URL_TTL_DAYS } from '../../generator/scripts/lib/source-url-ledger.mjs';
-import { findRecentTopicCoverage } from '../../generator/scripts/lib/topic-coverage-guard.mjs';
+import { findRecentTopicCoverage, topicCoverageKey } from '../../generator/scripts/lib/topic-coverage-guard.mjs';
 import { readTopLevelString, scanTopLevelArticleRecords } from '../../scripts/lib/article-registry-reader.mjs';
 import { SECTIONS as SECTION_SURFACES } from '../lib/article-surfaces.mjs';
 
@@ -286,18 +289,64 @@ export function snapshotSections(surfaces, readAt, label) {
 const idsOf = (snap) => new Set([...(snap?.slugIds ?? []), ...(snap?.registryIds ?? [])]);
 
 /**
+ * Recupera la chiave evergreen calcolata dal generatore dal report dello stesso
+ * run. Il titolo/slug pubblicato puo' essere stato accorciato e non contenere
+ * piu' il mestiere che aveva prodotto la chiave prima della generazione.
+ *
+ * @param {object} report report finale di create-article.mjs
+ * @param {Array<{section: string, id: string}>} introducedIds id aggiunti dal commit prodotto
+ * @returns {Record<string, {kind: string, value: string}>}
+ */
+export function candidateTopicKeysFromRunReport(report, introducedIds) {
+  const selectedUrl = report?.selectedUrl;
+  if (report?.status !== 'generated' || typeof selectedUrl !== 'string' || !selectedUrl.startsWith('evergreen://')) {
+    return {};
+  }
+
+  const articleId = report?.article?.id;
+  if (typeof articleId !== 'string' || !articleId) {
+    throw new Error('il report evergreen generated non dichiara article.id');
+  }
+  const matches = introducedIds.filter((entry) => entry.id === articleId);
+  if (matches.length !== 1) {
+    throw new Error(`il report evergreen article.id '${articleId}' non corrisponde a un solo id introdotto dal commit prodotto`);
+  }
+
+  let keyword;
+  try {
+    keyword = decodeURIComponent(selectedUrl.slice('evergreen://'.length));
+  } catch {
+    throw new Error("selectedUrl evergreen del run report non e' valido");
+  }
+  if (!keyword.trim()) throw new Error('selectedUrl evergreen del run report non contiene una keyword');
+
+  const key = topicCoverageKey({ id: keyword, title: keyword });
+  return key ? { [articleId]: key } : {};
+}
+
+function introducedIdsOf({ producedBase, produced }) {
+  return Object.keys(produced).flatMap((section) => {
+    const before = idsOf(producedBase?.[section]);
+    return [...idsOf(produced[section])]
+      .filter((id) => !before.has(id))
+      .map((id) => ({ section, id }));
+  });
+}
+
+/**
  * Le violazioni di unicita' introdotte dal commit prodotto, viste sullo stato post-rebase.
  *
  * @param {{producedBase: object, produced: object, against: object}} snapshots
  *        mappe sezione → {slugIds, registryIds, articles, ledger} da `snapshotSections`.
- * @param {{now?: number, topicWindowDays?: number}} [options] l'istante per
- *        la scadenza del ledger e la finestra topic; se omessa, quest'ultima
- *        usa la configurazione condivisa col generatore.
+ * @param {{now?: number, topicWindowDays?: number, candidateTopicKeysById?: Record<string, {kind: string, value: string}>}} [options]
+ *        l'istante per la scadenza del ledger e la finestra topic; se omessa,
+ *        quest'ultima usa la configurazione condivisa col generatore. Le chiavi
+ *        evergreen del run report preservano il contesto pre-serializzazione.
  * @returns {{violations: Array<object>, newIds: Array<{section: string, id: string}>, newSourceUrls: Array<{section: string, url: string, articleId: string}>, contentChecks: number}}
  */
 export function findPostRebaseViolations(
   { producedBase, produced, against },
-  { now = Date.now(), topicWindowDays } = {},
+  { now = Date.now(), topicWindowDays, candidateTopicKeysById = {} } = {},
 ) {
   const sections = Object.keys(produced);
   const violations = [];
@@ -349,6 +398,7 @@ export function findPostRebaseViolations(
           }
           const topicOptions = { now };
           if (Number.isFinite(topicWindowDays)) topicOptions.windowDays = topicWindowDays;
+          if (candidateTopicKeysById[id]) topicOptions.candidateTopicKey = candidateTopicKeysById[id];
           const topicDuplicate = findRecentTopicCoverage(candidate, againstArticles, topicOptions);
           if (topicDuplicate) {
             violations.push({
@@ -488,11 +538,15 @@ function resolveRev(cwd, rev) {
 }
 
 function parseArgs(argv) {
-  const out = { produced: null, against: 'HEAD' };
+  const out = { produced: null, against: 'HEAD', runReport: null };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--produced') out.produced = argv[++i] ?? null;
     else if (a === '--against') out.against = argv[++i] ?? null;
+    else if (a === '--run-report') {
+      out.runReport = argv[++i] ?? null;
+      if (!out.runReport) throw new Error('--run-report vuoto');
+    }
     else throw new Error(`argomento sconosciuto: ${a}`);
   }
   if (!out.produced) throw new Error('manca --produced <sha>');
@@ -517,7 +571,19 @@ export function main(argv, { cwd = process.cwd(), log = console.log, error = con
       produced: snapshotSections(surfaces, gitReader(cwd, produced), 'produced'),
       against: snapshotSections(surfaces, gitReader(cwd, against), 'against'),
     };
-    const { violations, newIds, newSourceUrls, contentChecks } = findPostRebaseViolations(snapshots);
+    let candidateTopicKeysById = {};
+    if (args.runReport) {
+      const reportPath = resolvePath(cwd, args.runReport);
+      const report = JSON.parse(readFileSync(reportPath, 'utf8'));
+      if (process.env.GITHUB_RUN_ID && report.runId !== process.env.GITHUB_RUN_ID) {
+        throw new Error(`run report stantio: runId '${report.runId ?? '(assente)'}' diverso dal run corrente`);
+      }
+      candidateTopicKeysById = candidateTopicKeysFromRunReport(report, introducedIdsOf(snapshots));
+    }
+    const { violations, newIds, newSourceUrls, contentChecks } = findPostRebaseViolations(
+      snapshots,
+      { candidateTopicKeysById },
+    );
 
     if (violations.length) {
       for (const v of violations) error(`::error::${formatViolation(v)}`);

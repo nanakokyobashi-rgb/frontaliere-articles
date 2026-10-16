@@ -26,6 +26,7 @@ import {
   ERROR_MARKER,
   OK_MARKER,
   VIOLATION_MARKER,
+  candidateTopicKeysFromRunReport,
   formatViolation,
   findPostRebaseViolations,
   main as checkPostRebaseMain,
@@ -349,6 +350,56 @@ test('#2428: il riuso dello stesso argomento oltre la finestra lascia passare il
     { now: Date.parse(candidateDate), topicWindowDays: 90 },
   );
   assert.deepEqual(violations, []);
+});
+
+test('#2428: il run report ripristina la chiave evergreen persa nel titolo pubblicato', () => {
+  const keyword = TOPIC_CANDIDATE.title;
+  const articleId = 'guida-lavoro-ticino-requisiti';
+  const candidate = {
+    id: articleId,
+    title: 'Guida al lavoro nel Canton Ticino: requisiti e opportunita',
+    excerpt: 'Informazioni pratiche per orientarsi nel mercato del lavoro ticinese.',
+  };
+  const mine = sectionFiles(FIRST, { ids: [articleId], articles: { [articleId]: candidate } });
+  const upstream = sectionFiles(FIRST, {
+    ids: [TOPIC_EXISTING.id],
+    articles: { [TOPIC_EXISTING.id]: TOPIC_EXISTING },
+  });
+  const rebased = sectionFiles(FIRST, {
+    ids: [TOPIC_EXISTING.id, articleId],
+    articles: { [TOPIC_EXISTING.id]: TOPIC_EXISTING, [articleId]: candidate },
+  });
+  const w = world({ upstream, mine, rebased });
+  try {
+    const reportPath = path.join(w.root, 'run-report.json');
+    writeFileSync(reportPath, `${JSON.stringify({
+      runId: process.env.GITHUB_RUN_ID || 'test',
+      status: 'generated',
+      selectedUrl: `evergreen://${encodeURIComponent(keyword)}`,
+      article: { id: articleId },
+    })}\n`);
+
+    const restored = candidateTopicKeysFromRunReport(
+      JSON.parse(readFileSync(reportPath, 'utf8')),
+      [{ section: FIRST.section, id: articleId }],
+    );
+    assert.deepEqual(restored, { [articleId]: { kind: 'profession-guide', value: 'piastrellista' } });
+    assert.throws(
+      () => candidateTopicKeysFromRunReport(JSON.parse(readFileSync(reportPath, 'utf8')), [{ section: FIRST.section, id: 'other' }]),
+      /non corrisponde a un solo id introdotto/,
+    );
+
+    const { code, out } = runScript(
+      w.root,
+      '--produced', w.produced,
+      '--against', w.against,
+      '--run-report', reportPath,
+    );
+    assert.equal(code, 1, out);
+    assert.match(out, /topic=profession-guide:piastrellista/);
+  } finally {
+    w.cleanup();
+  }
 });
 
 test('id duplicato: lo stesso id appena registrato da un altro scrittore in un\'altra sezione', () => {
@@ -749,7 +800,7 @@ function assertWorkflowRebaseGate(workflow) {
   const commitAt = active.lastIndexOf('git commit -m', producedAt);
   const loopAt = active.indexOf('for attempt in');
   const rebaseAt = active.indexOf('bash scripts/lib/rebase-onto-remote.sh', loopAt);
-  const checkAt = active.indexOf('node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD');
+  const checkAt = active.indexOf('node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD --run-report .tmp/create-article-run-report.json');
   const successGuardAt = active.lastIndexOf('if [ "$rebased" -eq 1 ]; then', checkAt);
   const doneMatch = /\n\s+done\n/.exec(active.slice(Math.max(0, checkAt)));
   const doneAt = doneMatch ? checkAt + doneMatch.index : -1;
