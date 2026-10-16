@@ -28152,7 +28152,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'stadler-rail-treno-idrogeno-sardegna',
     category: 'novita',
     date: '2026-10-16T17:07:03.165Z',
-    image: '/images/blog/svizzera-treno-oggetti-binari-2.webp',
+    image: '/images/blog/article-stadler-rail-treno-idrogeno-sardegna.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',

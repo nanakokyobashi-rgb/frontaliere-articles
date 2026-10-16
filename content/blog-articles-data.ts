@@ -44985,7 +44985,7 @@ const RAW_ARTICLES = [
  id: 'saronno-produzione-cina-protesta',
  category: 'novita',
  date: '2026-10-16T18:15:02.449Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-saronno-produzione-cina-protesta.webp',
  hasCalculator: false,
  articleType: 'news',
  authorSlug: 'redazione',
