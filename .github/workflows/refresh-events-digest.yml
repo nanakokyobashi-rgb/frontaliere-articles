@@ -45,6 +45,7 @@ on:
       - 'generator/scripts/lib/events-digest-marker.mjs'
       - 'generator/scripts/lib/events-digest-localization.mjs'
       - 'generator/scripts/lib/localized-toponyms.mjs'
+      - 'generator/data/localized-toponyms.json'
       - 'generator/scripts/lib/events-digest-meta.mjs'
       - 'generator/scripts/lib/events-utils.mjs'
   workflow_dispatch:
