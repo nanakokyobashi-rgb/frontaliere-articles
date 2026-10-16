@@ -79,6 +79,35 @@ describe('digest per cantone sulla fixture events-dataset', () => {
     assert.match(sz.content.it.body2, /## Eventi anche in altri cantoni/);
     assert.match(sz.content.it.body2, /\(\/eventi\/ticino\/lugano\/\)/);
   });
+
+  it('codifica i trattini nel marker evento per mantenere valido il commento HTML', () => {
+    const article = buildWeekendDigestArticle({
+      events: [{
+        id: 'venue--series',
+        title: 'Serie speciale',
+        comune: 'Lugano',
+        startDate: '2026-08-15',
+        canton: 'TI',
+      }],
+      todayIso: TODAY,
+    });
+    assert.match(article.content.it.body2, /<!-- digest-event:venue%2D%2Dseries -->/);
+    assert.equal(decodeURIComponent('venue%2D%2Dseries'), 'venue--series');
+  });
+
+  it('mantiene il producer operativo con un lone surrogate nell\'ID evento', () => {
+    const article = buildWeekendDigestArticle({
+      events: [{
+        id: 'venue\uD800series',
+        title: 'Serie con id malformato',
+        comune: 'Lugano',
+        startDate: '2026-08-15',
+        canton: 'TI',
+      }],
+      todayIso: TODAY,
+    });
+    assert.match(article.content.it.body2, /<!-- digest-event:venue%EF%BF%BDseries -->/);
+  });
 });
 
 describe('metadati evergreen per cantone', () => {

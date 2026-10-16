@@ -25,6 +25,12 @@ import {
   UNRESOLVED_CANTON_LABEL,
   hasUsableContentText,
 } from './events-utils.mjs';
+import {
+  digestEventMarker,
+  DIGEST_EVENT_MARKER_PATTERN,
+  encodeDigestEventId,
+} from './events-digest-marker.mjs';
+export { digestEventMarker, DIGEST_EVENT_MARKER_PATTERN, encodeDigestEventId };
 
 /** Stable, evergreen identity — never changes (no date in id/slug → no flooding). */
 export const DIGEST_ARTICLE_ID = 'eventi-weekend-ticino';
@@ -325,7 +331,7 @@ function renderComuneBlocks(byComune, locale, basePath) {
       .map((ev) => {
         const localizedTitle = ev?.titleByLocale?.[locale];
         const title = hasUsableContentText(localizedTitle) ? localizedTitle : ev.title;
-        return `- **${humanDay(ev.startDate, locale)}${eventTime(ev)}** — ${String(title || '').trim()}`;
+        return `- **${humanDay(ev.startDate, locale)}${eventTime(ev)}** — ${String(title || '').trim()}${digestEventMarker(ev)}`;
       })
       .join('\n');
     return `### [${comune}](${basePath}/${slug}/)\n${lines}`;

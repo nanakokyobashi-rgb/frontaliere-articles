@@ -99,6 +99,7 @@ on:
       # Dynamic crossing localization imports these helpers and reads this
       # committed table; each is a publisher input, including the data file.
       - 'generator/scripts/lib/localized-toponyms.mjs'
+      - 'generator/scripts/lib/events-digest-marker.mjs'
       - 'generator/scripts/lib/decode-html-entities.mjs'
       - 'generator/data/localized-toponyms.json'
       - 'generator/scripts/lib/control-char-write-report.mjs'

@@ -5972,6 +5972,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/events-digest-marker.mjs",
+      "mode": "corpus-only",
+      "reason": "Contratto leggero per codificare e riconoscere i marker invisibili che abbinano gli eventi duplicati tra lingue. Il sito consuma il digest pubblicato via JSON HTTP e non esegue il generatore né il repair localizzato del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-16"
+      }
+    },
+    {
       "path": "generator/scripts/lib/slug-fallback-provenance.mjs",
       "mode": "corpus-only",
       "reason": "Parser della provenienza degli slug fallback italiani usato dal repair degli esonimi per non riscrivere URL provvisori senza emettere un bridge. È una guardia interna al generatore del corpus; il sito consuma gli slug pubblicati via JSON HTTP e non esegue questo modulo.",

@@ -180,6 +180,43 @@ describe('repairEventsDigestLocalizedToponyms', () => {
     )));
   });
 
+  it('pairs duplicate same-time records through generator event markers', () => {
+    const original = {
+      id: 'eventi-weekend-ticino',
+      content: {
+        it: {
+          body2: [
+            '## Gli eventi',
+            '',
+            '### [Ascona](/eventi/ticino/ascona/)',
+            '- **17 ottobre · 18:00** — Evento in Zurigo <!-- digest-event:source-title-lookalike --> <!-- digest-event:tio%2Dagenda%3A1 -->',
+            '- **17 ottobre · 18:00** — Secondo evento in Ginevra <!-- digest-event:tio%2Dagenda%3A2 -->',
+          ].join('\n'),
+        },
+        en: {
+          body2: [
+            '## Events',
+            '',
+            '### [Ascona](/en/events/ticino/ascona/)',
+            '- **17 October · 18:00** — Event in Zürich <!-- digest-event:target-title-lookalike --> <!-- digest-event:tio%2Dagenda%3A1 -->',
+            '- **17 October · 18:00** — Second event in Genève <!-- digest-event:tio%2Dagenda%3A2 -->',
+          ].join('\n'),
+        },
+      },
+    };
+    const source = parseEventsDigestBody2Safe(original.content.it.body2);
+    const target = parseEventsDigestBody2Safe(original.content.en.body2);
+    assert.equal(pairEventsByStableKey(source, target)?.length, 2);
+
+    const repaired = repairEventsDigestLocalizedToponyms(original);
+    assert.match(repaired.content.en.body2, /Event in Zurich/);
+    assert.match(repaired.content.en.body2, /Second event in Geneva/);
+    assert.doesNotMatch(repaired.content.en.body2, /Event in Zürich/);
+    assert.doesNotMatch(repaired.content.en.body2, /Second event in Genève/);
+    assert.match(repaired.content.en.body2, /digest-event:tio%2Dagenda%3A1/);
+    assert.match(repaired.content.en.body2, /digest-event:tio%2Dagenda%3A2/);
+  });
+
   it('fails closed for an unlinked heading containing ambiguous toponyms', () => {
     const original = incidentArticle();
     original.content.it.body2 = [

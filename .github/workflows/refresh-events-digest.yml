@@ -42,6 +42,13 @@ on:
       - 'generator/scripts/refresh-events-dataset.mjs'
       - 'generator/scripts/lib/rewire-fetch.mjs'
       - 'generator/scripts/lib/events-digest-content.mjs'
+      - 'generator/scripts/lib/events-digest-marker.mjs'
+      - 'generator/scripts/lib/events-digest-localization.mjs'
+      - 'generator/scripts/lib/localized-toponyms.mjs'
+      - 'generator/data/localized-toponyms.json'
+      - 'generator/scripts/lib/decode-html-entities.mjs'
+      - 'generator/scripts/lib/unescape-ts-string.mjs'
+      - 'generator/data/canton-url-slugs.json'
       - 'generator/scripts/lib/events-digest-meta.mjs'
       - 'generator/scripts/lib/events-utils.mjs'
   workflow_dispatch:
