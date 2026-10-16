@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-sistema-sanitario-lamal-ginevra-2026.webp",
+      "sha256": "2db22c1d07f0956298c3fe14958850890f2e5db59f4d71a1379c311a01d092db"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-sistema-sanitario-lamal-ginevra-2026-480w.webp",
+      "sha256": "e6d52ae0039a3ee4436df4907fe10df7f57054ba5a7068c080dcf0f610c073bf"
+    }
+  ]
 }
