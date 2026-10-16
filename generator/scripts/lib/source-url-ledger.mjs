@@ -270,10 +270,8 @@ export function shortHeadlineEvidence(titleEvidence, headline) {
   );
   if (distinctiveWords.size >= 2) return false;
 
-  return String(titleEvidence ?? '').split(/\r?\n/).some((line) => {
-    const candidates = [line, line.split(/\s+[|–—-]\s+/)[0]];
-    return candidates.some((candidate) => normalizeItemText(candidate) === normalizedHeadline);
-  });
+  return String(titleEvidence ?? '').split(/\r?\n/)
+    .some((line) => normalizeItemText(line) === normalizedHeadline);
 }
 
 /**
