@@ -75,6 +75,14 @@ on:
       - 'scripts/lib/parse-positive-num.mjs'
       - 'generator/scripts/load-rc-env.mjs'
       - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
+  # `sections/registry.json` and the edge API registry are published by
+  # publish-api.yml. Its push-triggered run can finish after this workflow's
+  # first pass, so replay only registry transitions after that API release is
+  # verified; this closes the draft→live race without duplicating content runs.
+  workflow_run:
+    workflows: ['Publish article data API']
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
     inputs:
       section:
@@ -106,6 +114,11 @@ permissions:
 
 jobs:
   resolve:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event == 'push' &&
+       github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
@@ -116,6 +129,7 @@ jobs:
       - name: Checkout (resolve)
         uses: actions/checkout@v7
         with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
           fetch-depth: 2
           persist-credentials: false
 
@@ -141,6 +155,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           PUSH_BEFORE: ${{ github.event.before }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
           if [ "$EVENT_NAME" = 'push' ]; then
@@ -156,6 +171,14 @@ jobs:
             fi
           fi
           before="${PUSH_BEFORE:-}"
+          if [ "$EVENT_NAME" = 'workflow_run' ]; then
+            if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || [ "$(git rev-parse HEAD)" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
+              echo "::error::workflow_run head non coincide con il checkout"
+              exit 1
+            fi
+            before="$(git rev-parse HEAD^)"
+            PUSH_BEFORE="$before"
+          fi
           if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             dry=true
@@ -189,8 +212,10 @@ jobs:
               echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
               dry=true
             fi
-            matrix="$(git diff --name-status "$before" HEAD 2>/dev/null \
-              | node scripts/ci/fast-publish-section.mjs r2-plan \
+            diff_args=()
+            if [ "$EVENT_NAME" = 'workflow_run' ]; then diff_args+=(-- sections/registry.json); fi
+            matrix="$(git diff --name-status "$before" HEAD "${diff_args[@]}" 2>/dev/null \
+              | PUSH_BEFORE="$before" node scripts/ci/fast-publish-section.mjs r2-plan \
               | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
           fi
           any=false
@@ -218,15 +243,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
           fetch-depth: 2
           persist-credentials: false
 
       - name: Fetch fallback corpus revision for manifest migration
-        if: github.event_name == 'push'
         env:
-          PREVIOUS_REVISION: ${{ github.event.before }}
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BEFORE: ${{ github.event.before }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
+          PREVIOUS_REVISION="${PUSH_BEFORE:-}"
+          if [ "$EVENT_NAME" = 'workflow_run' ]; then
+            if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || [ "$(git rev-parse HEAD)" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
+              echo "::error::workflow_run head non coincide con il checkout"
+              exit 1
+            fi
+            PREVIOUS_REVISION="$(git rev-parse HEAD^)"
+          fi
           if [ -n "${PREVIOUS_REVISION:-}" ] && [[ ! "$PREVIOUS_REVISION" =~ ^0+$ ]]; then
             git fetch --no-tags --depth=1 origin "$PREVIOUS_REVISION"
           fi
@@ -294,11 +329,22 @@ jobs:
           ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
           BOOTSTRAP: ${{ matrix.target.bootstrap }}
           DRY: ${{ needs.resolve.outputs.dry }}
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BEFORE: ${{ github.event.before }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
           args=(--section "$SECTION" --out "$RUNNER_TEMP/section-dist" --summary "$RUNNER_TEMP/section-summary.json")
-          if [ "${{ github.event_name }}" = "push" ] && [ -n "${{ github.event.before }}" ]; then
-            args+=(--previous-revision "${{ github.event.before }}")
+          previous_revision="${PUSH_BEFORE:-}"
+          if [ "$EVENT_NAME" = 'workflow_run' ]; then
+            if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || [ "$(git rev-parse HEAD)" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
+              echo "::error::workflow_run head non coincide con il checkout"
+              exit 1
+            fi
+            previous_revision="$(git rev-parse HEAD^)"
+          fi
+          if [ -n "$previous_revision" ] && [[ ! "$previous_revision" =~ ^0+$ ]]; then
+            args+=(--previous-revision "$previous_revision")
           fi
           if [ "$BOOTSTRAP" = "true" ]; then
             args+=(--bootstrap)

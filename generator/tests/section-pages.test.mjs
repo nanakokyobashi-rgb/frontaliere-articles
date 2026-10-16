@@ -1558,6 +1558,13 @@ test('fast-publish verso gli shard ignora i corpi cantonali, quello R2 ignora le
 
 test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenziali obbligatorie', () => {
   const wf = read('.github/workflows/fast-publish-section.yml');
+  assert.match(wf, /workflow_run:\n\s+workflows: \['Publish article data API'\]\n\s+types: \[completed\]\n\s+branches: \[main\]/);
+  assert.match(wf, /github\.event\.workflow_run\.conclusion == 'success'/);
+  assert.match(wf, /github\.event\.workflow_run\.event == 'push'/);
+  assert.match(wf, /ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| github\.sha \}\}/);
+  assert.match(wf, /diff_args=\(\)[\s\S]*EVENT_NAME.*workflow_run[\s\S]*diff_args\+=\(-- sections\/registry\.json\)/);
+  assert.match(wf, /PUSH_BEFORE="\$before" node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
+  assert.match(wf, /previous_revision="\$\(git rev-parse HEAD\^\)"/);
   assert.match(wf, /group: fast-publish-\$\{\{ matrix\.target\.section \}\}\n\s+cancel-in-progress: false/);
   assert.match(wf, /fail-fast: false/);
   for (const p of ["'content/cantons/**'", "'content/blog-body-canton-*/**'", "'content/blog-meta-canton-*'", "'sections/registry.json'"]) {
