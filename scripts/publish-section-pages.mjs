@@ -218,7 +218,7 @@ export function cantonRssFeedEntries(section) {
 }
 
 /** Il manifest API emette tutti i feed cantonali oppure nessuno (sezione vuota). */
-export function cantonRssFeedsDeclaredInManifest(section, files) {
+export function cantonRssFeedsDeclaredInManifest(section, files, counts) {
   if (!files || typeof files !== 'object' || Array.isArray(files)) {
     throw new Error(`manifest API ${section}: files RSS non verificabili`);
   }
@@ -226,6 +226,15 @@ export function cantonRssFeedsDeclaredInManifest(section, files) {
   const declared = expected.filter(({ name }) => Object.prototype.hasOwnProperty.call(files, name));
   if (declared.length !== 0 && declared.length !== expected.length) {
     throw new Error(`manifest API ${section}: set feed RSS cantonali incompleto (${declared.length}/${expected.length})`);
+  }
+  if (declared.length === 0) {
+    const articleCount = counts?.bySection?.[section]?.articles;
+    if (!Number.isSafeInteger(articleCount) || articleCount < 0) {
+      throw new Error(`manifest API ${section}: counts.bySection.${section}.articles non verificabile per il set RSS vuoto`);
+    }
+    if (articleCount !== 0) {
+      throw new Error(`manifest API ${section}: set RSS vuoto con ${articleCount} articoli dichiarati`);
+    }
   }
   return declared;
 }
@@ -844,26 +853,42 @@ function publishApiTriggerPaths() {
 }
 
 function currentPushRange() {
+  const explicitBefore = String(process.env.PUSH_BEFORE ?? '').trim();
+  const explicitAfter = String(process.env.PUSH_AFTER ?? '').trim();
+  if (explicitBefore || explicitAfter) {
+    if (!/^[a-f0-9]{40,64}$/iu.test(explicitBefore) || !/^[a-f0-9]{40,64}$/iu.test(explicitAfter) || /^0+$/u.test(explicitBefore)) {
+      throw new Error('provenienza push incompleta o non valida: PUSH_BEFORE/PUSH_AFTER');
+    }
+    return `${explicitBefore}..${explicitAfter}`;
+  }
   const eventPath = process.env.GITHUB_EVENT_PATH;
   if (eventPath && fs.existsSync(eventPath)) {
     try {
       const event = JSON.parse(fs.readFileSync(eventPath, 'utf8'));
-      if (typeof event.before === 'string' && typeof event.after === 'string' && !/^0+$/u.test(event.before)) {
+      if (
+        typeof event.before === 'string'
+        && typeof event.after === 'string'
+        && /^[a-f0-9]{40,64}$/iu.test(event.before)
+        && /^[a-f0-9]{40,64}$/iu.test(event.after)
+        && !/^0+$/u.test(event.before)
+      ) {
         return `${event.before}..${event.after}`;
       }
     } catch {
-      // Fail closed in apiInputsChangedInCurrentPush().
+      // Il chiamante rifiuta il run: senza range non si puo' classificare il
+      // commit che ha richiesto la pubblicazione API.
     }
   }
-  return 'HEAD^..HEAD';
+  throw new Error('provenienza push assente: impossibile classificare gli input API');
 }
 
 /** True se il push corrente contiene un input che deve rigenerare publish-api. */
 export function apiInputsChangedInCurrentPush({ execFileSyncImpl = execFileSync } = {}) {
+  const range = currentPushRange();
   try {
     const changed = execFileSyncImpl(
       'git',
-      ['-C', ROOT_DIR, 'diff', '--name-only', currentPushRange(), '--', ...publishApiTriggerPaths()],
+      ['-C', ROOT_DIR, 'diff', '--name-only', range, '--', ...publishApiTriggerPaths()],
       { encoding: 'utf8' },
     );
     return changed.trim().length > 0;
@@ -900,8 +925,11 @@ export async function resolvePublishedReleaseCommit(
   let apiInputsChanged = true;
   try {
     apiInputsChanged = await apiInputsChangedImpl();
-  } catch {
-    // A classification failure must retain the old fail-closed HEAD behavior.
+  } catch (error) {
+    throw new Error(
+      `provenienza del push non verificabile per il commit API ${apiCommit.trim()}: ${error?.message ?? String(error)}`,
+      { cause: error },
+    );
   }
   if (apiInputsChanged) return publisherCommit;
   const publishedCommit = apiCommit.trim();
@@ -946,7 +974,12 @@ export async function publishedReleaseReady(expectedCommit, { fetchImpl = fetch 
   if (!edgeRegistry || edgeRegistry.commit !== expectedCommit || !validateEdgeSectionRegistry(edgeRegistry)) {
     return { ok: false, reason: `registro edge non ancora valido sul commit ${expectedCommit}` };
   }
-  return { ok: true, commit: expectedCommit, files: manifest.files ?? null };
+  return {
+    ok: true,
+    commit: expectedCommit,
+    files: manifest.files ?? null,
+    counts: manifest.counts ?? null,
+  };
 }
 
 function rewriteCantonRssSelfLink(xml, { section, name, url }) {
@@ -1163,6 +1196,7 @@ export async function publishCantonRssFeeds({
   runImpl = run,
   probeImpl = probe,
   releaseReadyImpl = publishedReleaseReady,
+  publishedStatusImpl,
   fetchImpl = fetch,
   snapshotImpl = snapshotCantonRssFeed,
   sleepImpl = sleep,
@@ -1201,8 +1235,15 @@ export async function publishCantonRssFeeds({
       console.error(`::error::[${LOG}] feed RSS ${section}: la release verificata non corrisponde al commit ${releaseCommit}`);
       return { failures: 1, uploaded: 0, verified: 0 };
     }
+    if (typeof publishedStatusImpl === 'function') {
+      const currentStatus = await publishedStatusImpl(section);
+      if (currentStatus !== 'live') {
+        console.error(`::error::[${LOG}] feed RSS ${section}: il registro edge non conferma lo stato live dopo la readiness gate`);
+        return { failures: 1, uploaded: 0, verified: 0, status: currentStatus };
+      }
+    }
 
-    const declaredFeeds = cantonRssFeedsDeclaredInManifest(section, readiness.files);
+    const declaredFeeds = cantonRssFeedsDeclaredInManifest(section, readiness.files, readiness.counts);
     const removingStaleFeeds = declaredFeeds.length === 0;
     if (!removingStaleFeeds && (declaredFeeds.length !== feeds.length || declaredFeeds.some(({ name }) => !requestedNames.has(name)))) {
       throw new Error(`manifest API ${section}: set feed RSS diverso da quello richiesto`);
@@ -1435,16 +1476,15 @@ export async function publish({
     return pageFailures + await rollbackRss();
   };
   // Dopo la cancellazione di almeno una pagina precedente non si può
-  // ripristinare il feed snapshot: quel feed potrebbe annunciare proprio una
-  // URL che ora non è più presente. Il run resta rosso e il retry/reconcile
-  // lascia la superficie RSS corrente finché le pagine precedenti non sono
-  // state ripristinate.
+  // ripristinare la release HTML precedente: quelle pagine potrebbero essere
+  // proprio le URL già rimosse. Il run resta rosso e il retry/reconcile
+  // riparte dalla release corrente, che resta coerente col feed RSS corrente.
   const rollbackRssAfterObsoleteMutation = async () => {
-    const pageFailures = await rollbackPages();
     if (deleted.length > 0) {
-      console.error(`::error::[${LOG}] rollback RSS posticipato: ${deleted.length} pagina/e obsoleta/e sono state cancellate; le pagine precedenti devono essere ripristinate prima del feed snapshot`);
-      return pageFailures;
+      console.error(`::error::[${LOG}] rollback RSS saltato: ${deleted.length} pagina/e obsoleta/e sono state cancellate; la release HTML corrente resta servita per il retry`);
+      return 0;
     }
+    const pageFailures = await rollbackPages();
     if (pageFailures > 0) {
       console.error(`::error::[${LOG}] rollback RSS posticipato: la superficie HTML precedente non è stata ripristinata completamente`);
       return pageFailures;
@@ -1469,26 +1509,28 @@ export async function publish({
     return { failures, uploaded: 0, deleted: 0, status: beforeStatus };
   }
   if (cantonRssFeeds.length > 0 || removeStaleCantonRssFeeds) {
-    if (beforeStatus !== 'live') {
-      console.error(`::error::[${LOG}] feed RSS ${section}: il registro edge non conferma lo stato live`);
-      return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
+    const rssStatus = await publishedStatusImpl(section);
+    if (rssStatus !== 'live') {
+      console.error(`::error::[${LOG}] feed RSS ${section}: il registro edge non conferma lo stato live subito prima della pubblicazione`);
+      return { failures: 1, uploaded: 0, deleted: 0, status: rssStatus };
     }
     const rssResult = await publishCantonRssFeedsImpl({
       section,
       releaseCommit,
       feedEntries: cantonRssFeeds,
-      effectiveStatus: beforeStatus,
+      effectiveStatus: rssStatus,
       distDir,
       runImpl,
       probeImpl,
       releaseReadyImpl,
+      publishedStatusImpl,
       sleepImpl,
       releaseReadyMaxWaitMs,
       releaseReadyRetryDelayMs,
     });
     if (rssResult.failures > 0) {
       console.error(`::error::[${LOG}] feed RSS ${section} non verificati: nessuna pagina viene caricata`);
-      return { failures: rssResult.failures, uploaded: 0, deleted: 0, status: beforeStatus };
+      return { failures: rssResult.failures, uploaded: 0, deleted: 0, status: rssResult.status ?? rssStatus };
     }
     if (Array.isArray(rssResult.feeds) && rssResult.feeds.length === 0) {
       for (const page of pages.filter(({ kind }) => kind === 'landing')) {
@@ -1696,7 +1738,9 @@ export async function main(
     // il set dichiarato dal manifest decide anche se la landing può annunciare
     // RSS: una sezione live senza articoli emette zero feed legittimamente.
     if (readiness === true || readiness?.ok) {
-      cantonRssFeeds = readiness?.files ? cantonRssFeedsDeclaredInManifest(section, readiness.files) : cantonRssFeedEntries(section);
+      cantonRssFeeds = readiness?.files
+        ? cantonRssFeedsDeclaredInManifest(section, readiness.files, readiness.counts)
+        : cantonRssFeedEntries(section);
       removeStaleCantonRssFeeds = cantonRssFeeds.length === 0;
     } else {
       cantonRssFeeds = cantonRssFeedEntries(section);

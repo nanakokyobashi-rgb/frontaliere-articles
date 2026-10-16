@@ -110,6 +110,16 @@ on:
         required: false
         default: ''
         type: string
+      push_before:
+        description: 'Base SHA della provenienza push esplicita (solo replay bounded)'
+        required: false
+        default: ''
+        type: string
+      push_after:
+        description: 'Head SHA della provenienza push esplicita (solo replay bounded)'
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: read
@@ -130,6 +140,7 @@ jobs:
       any: ${{ steps.plan.outputs.any }}
       dry: ${{ steps.plan.outputs.dry }}
       push_before: ${{ steps.push_range.outputs.before }}
+      push_after: ${{ steps.push_range.outputs.after }}
     steps:
       - name: Checkout (resolve)
         uses: actions/checkout@v7
@@ -145,11 +156,15 @@ jobs:
           REPO: ${{ github.repository }}
           EVENT_NAME: ${{ github.event_name }}
           PUSH_BEFORE: ${{ github.event.before }}
+          PUSH_AFTER: ${{ github.event.after }}
+          DISPATCH_PUSH_BEFORE: ${{ inputs.push_before }}
+          DISPATCH_PUSH_AFTER: ${{ inputs.push_after }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           WORKFLOW_RUN_EVENT: ${{ github.event.workflow_run.event }}
         run: |
           set -euo pipefail
           before="${PUSH_BEFORE:-}"
+          after="${PUSH_AFTER:-}"
           if [ "$EVENT_NAME" = 'workflow_run' ]; then
             if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || ! [[ "$WORKFLOW_RUN_HEAD_SHA" =~ ^[a-f0-9]{40}$ ]]; then
               echo "::error::workflow_run head SHA non valido"
@@ -169,12 +184,27 @@ jobs:
                 echo "::error::before della push originaria non trovato per workflow_run head $WORKFLOW_RUN_HEAD_SHA"
                 exit 1
               fi
+              after="$WORKFLOW_RUN_HEAD_SHA"
             elif [ "$WORKFLOW_RUN_EVENT" != 'schedule' ] && [ "$WORKFLOW_RUN_EVENT" != 'workflow_dispatch' ]; then
               echo "::error::workflow_run event non supportato: $WORKFLOW_RUN_EVENT"
               exit 1
             fi
+          elif [ "$EVENT_NAME" = 'workflow_dispatch' ]; then
+            dispatch_before="${DISPATCH_PUSH_BEFORE:-}"
+            dispatch_after="${DISPATCH_PUSH_AFTER:-}"
+            if [ -n "$dispatch_before" ] || [ -n "$dispatch_after" ]; then
+              if [ -z "$dispatch_before" ] || [ -z "$dispatch_after" ] \
+                || ! [[ "$dispatch_before" =~ ^[a-f0-9]{40}$ ]] \
+                || ! [[ "$dispatch_after" =~ ^[a-f0-9]{40}$ ]]; then
+                echo "::error::push_before/push_after richiedono una provenienza completa di SHA"
+                exit 1
+              fi
+              before="$dispatch_before"
+              after="$dispatch_after"
+            fi
           fi
           echo "before=$before" >> "$GITHUB_OUTPUT"
+          echo "after=$after" >> "$GITHUB_OUTPUT"
 
       - name: Fetch originating push base (resolve)
         env:
@@ -323,6 +353,11 @@ jobs:
             echo "::error::impossibile verificare la revisione corrente di main prima del replay"
             exit 1
           fi
+          if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::revisione corrente di main non valida"
+            exit 1
+          fi
+          echo "current_main=$current_main" >> "$GITHUB_OUTPUT"
           if [ "$current_main" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
             echo "::notice::replay workflow_run saltato: main e' avanzato da $WORKFLOW_RUN_HEAD_SHA a $current_main"
             echo 'fresh=false' >> "$GITHUB_OUTPUT"
@@ -330,11 +365,59 @@ jobs:
           fi
           echo 'fresh=true' >> "$GITHUB_OUTPUT"
 
+      # Il replay della run API osservata e' ormai stantio. Il token viene
+      # preparato anche per il recheck immediatamente prima degli upload;
+      # redispatchamo lo stesso target bounded sulla HEAD corrente, cosi' il
+      # render legge i byte nuovi anche quando il commit successivo non tocca
+      # i path del workflow.
+      - name: Prepare Firebase credentials for stale replay recovery
+        if: github.event_name == 'workflow_run'
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — Remote Config is the only source of the dispatch token"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/stale-replay-sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/stale-replay-sa.json" >> "$GITHUB_ENV"
+
+      - name: Load dispatch token for stale replay recovery
+        if: github.event_name == 'workflow_run'
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Dispatch bounded replay on current main
+        if: steps.replay_freshness.outputs.fresh == 'false'
+        env:
+          REPO: ${{ github.repository }}
+          SECTION: ${{ matrix.target.section }}
+          ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
+          BOOTSTRAP: ${{ matrix.target.bootstrap }}
+          STALE_HEAD: ${{ github.event.workflow_run.head_sha }}
+          CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
+        run: |
+          set -euo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::error::GITHUB_PAT_NANAKO assente: impossibile redispatchare il replay stantio"
+            exit 1
+          fi
+          export GH_TOKEN="$runtime_pat"
+          gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
+            -f section="$SECTION" \
+            -f article_ids="$ARTICLE_IDS_JSON" \
+            -f bootstrap="$BOOTSTRAP" \
+            -f dry_run=false \
+            -f push_before="$STALE_HEAD" \
+            -f push_after="$CURRENT_MAIN"
+
       - name: Fetch fallback corpus revision for manifest migration
         if: steps.replay_freshness.outputs.fresh == 'true'
         env:
           EVENT_NAME: ${{ github.event_name }}
           PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
+          PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
@@ -418,6 +501,7 @@ jobs:
           DRY: ${{ needs.resolve.outputs.dry }}
           EVENT_NAME: ${{ github.event_name }}
           PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
+          PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
@@ -429,7 +513,20 @@ jobs:
               exit 1
             fi
             if [ "$current_main" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
-              echo "::notice::replay workflow_run saltato prima degli upload: main e' avanzato da $WORKFLOW_RUN_HEAD_SHA a $current_main"
+              runtime_pat="${GITHUB_PAT_NANAKO:-}"
+              if [ -z "$runtime_pat" ]; then
+                echo "::error::GITHUB_PAT_NANAKO assente: impossibile redispatchare il replay stantio prima degli upload"
+                exit 1
+              fi
+              export GH_TOKEN="$runtime_pat"
+              echo "::notice::replay workflow_run redispatchato prima degli upload: main e' avanzato da $WORKFLOW_RUN_HEAD_SHA a $current_main"
+              gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
+                -f section="$SECTION" \
+                -f article_ids="$ARTICLE_IDS_JSON" \
+                -f bootstrap="$BOOTSTRAP" \
+                -f dry_run=false \
+                -f push_before="$WORKFLOW_RUN_HEAD_SHA" \
+                -f push_after="$current_main"
               exit 0
             fi
           fi

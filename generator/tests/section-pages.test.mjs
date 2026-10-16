@@ -197,6 +197,13 @@ test('publisher: un push solo publisher si lega alla release API gia\' disponibi
     }),
     /non verificabile/,
   );
+  await assert.rejects(
+    resolvePublishedReleaseCommit(publisherCommit, {
+      apiReleaseCommitImpl: async () => apiCommit,
+      apiInputsChangedImpl: async () => { throw new Error('provenienza assente'); },
+    }),
+    /provenienza del push non verificabile/,
+  );
 });
 
 test('publisher migration manifest usa percorsi canonici per landing e hub', () => {
@@ -1023,6 +1030,8 @@ test('publisher: una cancellazione obsoleta parziale non ripristina RSS su pagin
   assert.equal(result.rollbackFailures, 0);
   assert.ok(events.includes('delete-1'));
   assert.ok(!events.includes('rss-rollback'), 'il feed snapshot non deve annunciare URL ancora rimosse');
+  assert.equal(events.filter((event) => event === 'upload').length, 1, 'la release HTML corrente resta servita dopo una cancellazione obsoleta');
+  assert.equal(events.filter((event) => event === 'purge').length, 2, 'non si fa rollback della release corrente dopo una mutazione obsoleta');
 });
 
 test('publisher: una pagina con noindex, senza meta di proprieta\', con asset same-origin o canonical altrui non esce', () => {
@@ -1058,7 +1067,16 @@ test('publisher: le landing live annunciano il feed edge della propria locale', 
 
 test('publisher: una sezione live senza articoli non annuncia feed RSS', () => {
   const feeds = cantonRssFeedEntries('canton-ti');
-  assert.deepEqual(cantonRssFeedsDeclaredInManifest('canton-ti', {}), []);
+  const emptyCounts = { bySection: { 'canton-ti': { articles: 0 } } };
+  assert.deepEqual(cantonRssFeedsDeclaredInManifest('canton-ti', {}, emptyCounts), []);
+  assert.throws(
+    () => cantonRssFeedsDeclaredInManifest('canton-ti', {}),
+    /counts\.bySection\.canton-ti\.articles non verificabile/,
+  );
+  assert.throws(
+    () => cantonRssFeedsDeclaredInManifest('canton-ti', {}, { bySection: { 'canton-ti': { articles: 1 } } }),
+    /set RSS vuoto con 1 articoli dichiarati/,
+  );
   assert.deepEqual(cantonRssFeedsDeclaredInManifest('canton-ti', Object.fromEntries(feeds.map(({ name }) => [name, 1]))), feeds);
   assert.throws(
     () => cantonRssFeedsDeclaredInManifest('canton-ti', { [feeds[0].name]: 1 }),
@@ -1162,6 +1180,32 @@ test('publisher: copia e verifica via HTTP tutti i feed della release prima di c
     assert.ok(Math.max(...events.map((event, index) => event.startsWith('fetch:') ? index : -1)) < events.findIndex((event) => event.startsWith('upload:')));
     assert.ok(Math.max(...events.map((event, index) => event.startsWith('upload:') ? index : -1)) < events.indexOf('purge'));
     assert.ok(events.indexOf('purge') < events.findIndex((event) => event.startsWith('verify:')));
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('publisher: RSS rilegge lo stato edge dopo la readiness e prima degli upload', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-rss-status-after-ready-'));
+  const releaseCommit = 'f'.repeat(40);
+  const feeds = cantonRssFeedEntries('canton-ti');
+  try {
+    const result = await publishCantonRssFeeds({
+      section: 'canton-ti',
+      releaseCommit,
+      effectiveStatus: 'live',
+      distDir: fixtureRoot,
+      releaseReadyImpl: async (commit) => ({
+        ok: true,
+        commit,
+        files: Object.fromEntries(feeds.map(({ name }) => [name, 1])),
+      }),
+      publishedStatusImpl: async () => 'draft',
+      fetchImpl: async () => { throw new Error('fetch RSS inatteso dopo il downgrade edge'); },
+      releaseReadyMaxWaitMs: 0,
+    });
+    assert.equal(result.failures, 1);
+    assert.equal(result.status, 'draft');
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }
@@ -1375,6 +1419,30 @@ test('publisher: il contratto RSS precede gli upload HTML e il rollback ripristi
   assert.deepEqual(verifyRollbackEvents, ['page-uploaded', 'page-verify-failed', 'page-restored', 'rss-rollback']);
 });
 
+test('publisher: rilegge lo stato edge subito prima di pubblicare RSS', async () => {
+  const page = pageEntry('canton-ti', 'articoli-ticino/index.html', 'landing');
+  const feed = cantonRssFeedEntries('canton-ti')[0];
+  const statuses = ['live', 'draft'];
+  let rssCalls = 0;
+  const result = await publish({
+    section: 'canton-ti',
+    pages: [page],
+    cdnUploads: [],
+    cantonRssFeeds: [feed],
+    obsoletePages: [],
+    distDir: mkdtempSync(path.join(tmpdir(), 'publish-rss-status-reread-')),
+    releaseCommit: 'e'.repeat(40),
+    publishedStatusImpl: async () => statuses.shift() ?? 'draft',
+    publishCantonRssFeedsImpl: async () => {
+      rssCalls++;
+      return { failures: 0, uploaded: 1, verified: 1 };
+    },
+  });
+  assert.equal(result.failures, 1);
+  assert.equal(result.status, 'draft');
+  assert.equal(rssCalls, 0, 'una sezione retrocessa non deve entrare nel publisher RSS');
+});
+
 test('publisher: RSS non live fallisce, e un manifest senza feed elimina la superficie precedente', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-rss-empty-'));
   const feeds = cantonRssFeedEntries('canton-ti');
@@ -1391,7 +1459,12 @@ test('publisher: RSS non live fallisce, e un manifest senza feed elimina la supe
     feedEntries: [],
     fetchImpl: async () => { fetches++; throw new Error('fetch API inatteso'); },
     releaseReadyMaxWaitMs: 0,
-    releaseReadyImpl: async (commit) => ({ ok: true, commit, files: {} }),
+    releaseReadyImpl: async (commit) => ({
+      ok: true,
+      commit,
+      files: {},
+      counts: { bySection: { 'canton-ti': { articles: 0 } } },
+    }),
     snapshotImpl: async (url) => {
       const name = new URL(url).pathname.split('/').at(-1);
       return { ok: true, status: 200, body: previousXml[name] };
@@ -1739,7 +1812,12 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| github\.sha \}\}/);
   assert.match(wf, /id: replay_freshness[\s\S]*gh api "repos\/\$REPO\/git\/ref\/heads\/main"/);
   assert.match(wf, /if: steps\.replay_freshness\.outputs\.fresh == 'true'/);
-  assert.match(wf, /replay workflow_run saltato prima degli upload/);
+  assert.match(wf, /Dispatch bounded replay on current main/);
+  assert.match(wf, /gh workflow run fast-publish-section\.yml --repo "\$REPO" --ref main/);
+  assert.match(wf, /-f push_before="\$STALE_HEAD"/);
+  assert.match(wf, /-f push_after="\$CURRENT_MAIN"/);
+  assert.match(wf, /GITHUB_PAT_NANAKO assente/);
+  assert.match(wf, /replay workflow_run redispatchato prima degli upload/);
   assert.match(wf, /id: push_range[\s\S]*gh api --paginate --slurp "repos\/\$REPO\/commits\/\$WORKFLOW_RUN_HEAD_SHA\/events"/);
   assert.match(wf, /payload\.ref == "refs\/heads\/main"[\s\S]*payload\.head == \$head[\s\S]*payload\.before/);
   assert.match(wf, /push_before: \$\{\{ steps\.push_range\.outputs\.before \}\}/);
@@ -1750,6 +1828,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   const publishCheckout = wf.slice(wf.indexOf('      - name: Checkout\n', wf.indexOf('\n  publish:\n')));
   assert.match(publishCheckout, /fetch-depth: 0/);
   assert.match(wf, /PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
+  assert.match(wf, /PUSH_AFTER: \$\{\{ needs\.resolve\.outputs\.push_after \}\}/);
+  assert.match(wf, /push_before:/);
+  assert.match(wf, /push_after:/);
   assert.doesNotMatch(wf, /git rev-parse HEAD\^/);
   assert.match(wf, /group: fast-publish-\$\{\{ matrix\.target\.section \}\}\n\s+cancel-in-progress: false/);
   assert.match(wf, /fail-fast: false/);
