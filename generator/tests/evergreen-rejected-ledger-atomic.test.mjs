@@ -129,6 +129,32 @@ test('un crash prima del rename lascia il ledger precedente intatto e il lock re
   }
 });
 
+test('un reaper interrotto viene recuperato prima della prossima scrittura', async () => {
+  const { directory, file } = fixture();
+  try {
+    const { child, exit } = startNode('process.exit(0);');
+    const deadPid = child.pid;
+    assert.ok(deadPid);
+    await exit;
+
+    const lockPath = `${file}.lock`;
+    const reaperPath = `${lockPath}.reaper`;
+    fs.mkdirSync(lockPath);
+    fs.mkdirSync(reaperPath);
+    fs.writeFileSync(lockPath + '/owner.json', JSON.stringify({ pid: deadPid, token: 'dead-ledger' }));
+    fs.writeFileSync(reaperPath + '/owner.json', JSON.stringify({ pid: deadPid, token: 'dead-reaper' }));
+
+    const updated = persistEvergreenRejectedTrackerAtomically(
+      (tracker) => appendEvergreenRejected(tracker, 'after-reaper-crash', { context: CONTEXT }),
+      { path: file },
+    );
+    assert.ok(updated.bans.some((entry) => entry.keyword === 'after-reaper-crash'));
+    assert.deepEqual(fs.readdirSync(directory), ['tracker.json']);
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+});
+
 test('un ledger non valido rifiuta la transazione e resta byte per byte invariato', (t) => {
   const { directory, file } = fixture();
   t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
@@ -148,6 +174,7 @@ test('un ledger non valido rifiuta la transazione e resta byte per byte invariat
 
 test('create-article aggiorna ban, strike e memo tramite il mutator atomico', () => {
   const source = fs.readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf-8');
+  const migrationSource = fs.readFileSync(new URL('../scripts/migrate-evergreen-rejected-ledger.mjs', import.meta.url), 'utf-8');
   const resetSource = fs.readFileSync(new URL('../scripts/reset-evergreen-strikes.mjs', import.meta.url), 'utf-8');
   assert.match(source, /persistEvergreenRejectedTrackerAtomically as _persistEvergreenRejectedTrackerAt/);
   assert.match(source, /function _persistEvergreenRejectedTracker\(update\) \{ return _persistEvergreenRejectedTrackerAt\(update, sectionStateOpts\('evergreenRejected'\)\); \}/);
@@ -155,5 +182,7 @@ test('create-article aggiorna ban, strike e memo tramite il mutator atomico', ()
   assert.match(source, /evergreenRejectedTracker = _persistEvergreenRejectedTracker\(\s*\(tracker\) => _strikeEvergreenKeyword\(/);
   assert.match(source, /_persistEvergreenRejectedTracker\(\(tracker\) => _recordTopicGateAbortedUrl\(/);
   assert.doesNotMatch(source, /_persistEvergreenRejectedTracker\(evergreenRejectedTracker\)/);
+  assert.match(migrationSource, /persistEvergreenRejectedTrackerAtomically/);
+  assert.doesNotMatch(migrationSource, /persistEvergreenRejectedTracker\(/);
   assert.match(resetSource, /persistEvergreenRejectedTrackerAtomically\(\(ledger\) =>/);
 });

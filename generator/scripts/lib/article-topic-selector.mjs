@@ -1566,32 +1566,45 @@ function tryAcquireEvergreenLedgerDirectoryLock(lockPath, token) {
   }
 }
 
-/** Reclaim only a dead owner, with one reaper at a time and a fresh recheck. */
-function reclaimEvergreenLedgerLock(lockPath) {
-  const reaperPath = `${lockPath}.reaper`;
-  const reaperToken = randomUUID();
-  let ownsReaper = false;
+function reclaimStaleEvergreenLedgerLock(lockPath) {
+  if (inspectEvergreenLedgerLock(lockPath) !== 'stale') return false;
+  const stalePath = `${lockPath}.stale-${randomUUID()}`;
   try {
-    ownsReaper = tryAcquireEvergreenLedgerDirectoryLock(reaperPath, reaperToken);
+    renameSync(lockPath, stalePath);
   } catch (error) {
-    if (error.code === 'EEXIST' || error.code === 'ENOTEMPTY') return false;
+    if (['ENOENT', 'EEXIST', 'ENOTEMPTY'].includes(error.code)) return false;
     throw error;
   }
-  if (!ownsReaper) return false;
+  rmSync(stalePath, { recursive: true, force: true });
+  return true;
+}
+
+/** Acquire the reaper, reclaiming a reaper owner that died mid-recovery. */
+function acquireEvergreenLedgerReaperLock(reaperPath) {
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    const reaperToken = randomUUID();
+    let ownsReaper = false;
+    try {
+      ownsReaper = tryAcquireEvergreenLedgerDirectoryLock(reaperPath, reaperToken);
+    } catch (error) {
+      if (error.code === 'EEXIST' || error.code === 'ENOTEMPTY') ownsReaper = false;
+      else throw error;
+    }
+    if (ownsReaper) return { lockPath: reaperPath, token: reaperToken };
+    if (!reclaimStaleEvergreenLedgerLock(reaperPath)) return null;
+  }
+  return null;
+}
+
+/** Reclaim only a dead owner, with one reaper at a time and a fresh recheck. */
+function reclaimEvergreenLedgerLock(lockPath) {
+  const reaper = acquireEvergreenLedgerReaperLock(`${lockPath}.reaper`);
+  if (!reaper) return false;
 
   try {
-    if (inspectEvergreenLedgerLock(lockPath) !== 'stale') return false;
-    const stalePath = `${lockPath}.stale-${randomUUID()}`;
-    try {
-      renameSync(lockPath, stalePath);
-    } catch (error) {
-      if (error.code === 'ENOENT') return false;
-      throw error;
-    }
-    rmSync(stalePath, { recursive: true, force: true });
-    return true;
+    return reclaimStaleEvergreenLedgerLock(lockPath);
   } finally {
-    releaseEvergreenLedgerDirectoryLock(reaperPath, reaperToken);
+    releaseEvergreenLedgerDirectoryLock(reaper.lockPath, reaper.token);
   }
 }
 
