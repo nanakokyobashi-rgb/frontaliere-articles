@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "0816b8754a6579ed505ab5ccd239428ab023b8bb9073508f596b2c3d80fb9571",
+  "updatedAt": "2026-10-16T02:40:36.084Z",
+  "contentHash": "ce3529086e2e41f0db46343fa5b5c35c62e611d7ab74b45a303097ec9a3fc1d4",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "41",
+          "value": "40",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         }
       ],
@@ -195,7 +195,7 @@
               "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T02:40:36.084Z"
     },
     "en": {
       "canton": "TI",
@@ -310,7 +310,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "41",
+          "value": "40",
           "note": "reports as of 15 October 2026"
         }
       ],
@@ -463,7 +463,7 @@
               "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T02:40:36.084Z"
     },
     "de": {
       "canton": "TI",
@@ -577,7 +577,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "41",
+          "value": "40",
           "note": "Meldungen vom 15. Oktober 2026"
         }
       ],
@@ -730,7 +730,7 @@
               "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -824,7 +824,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T02:40:36.084Z"
     },
     "fr": {
       "canton": "TI",
@@ -844,7 +844,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "41",
+          "value": "40",
           "note": "signalements au 15 octobre 2026"
         }
       ],
@@ -997,7 +997,7 @@
               "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -1092,7 +1092,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T02:40:36.084Z"
     }
   }
 }
