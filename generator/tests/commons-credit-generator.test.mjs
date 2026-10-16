@@ -184,7 +184,13 @@ test('generated and editorial records are reader-facing and discoverable by cove
     generated.sha256 = sha256File(generatedFile);
     assert.equal(validateGeneratedImageRecord(generated).valid, true);
     appendGeneratedImageRecord(root, generated);
-    assert.equal(imageRecordForPath(root, generated.imageUrl, { strict: true }).kind, 'generated');
+    const registryFile = path.join(root, 'data', 'generated-image-registry.json');
+    const persisted = JSON.parse(fs.readFileSync(registryFile, 'utf8'));
+    assert.equal(persisted.assets.find((record) => record.assetId === generated.assetId).kind, 'generated');
+
+    delete persisted.assets.find((record) => record.assetId === generated.assetId).kind;
+    fs.writeFileSync(registryFile, JSON.stringify(persisted));
+    assert.equal(imageRecordForPath(root, generated.imageUrl, { strict: true }).record.kind, 'generated');
     assert.equal(hasValidBlogImageRecord(root, generated.imageUrl), true);
 
     const editorial = {
@@ -224,6 +230,7 @@ test('generated and editorial records are reader-facing and discoverable by cove
       registry,
     });
     assert.equal(aggregate.generated[generated.imageUrl].assetId, generated.assetId);
+    assert.equal(aggregate.generated[generated.imageUrl].kind, 'generated');
     assert.equal(aggregate.generated['/images/places/lugano-view.webp'].scope, 'place');
     assert.equal(aggregate.editorial[editorial.cover].rightsHolder, editorial.rightsHolder);
     assert.equal(aggregate.sections.frontaliere, 'image-credits-frontaliere.json');
