@@ -26,6 +26,8 @@ import {
   ERROR_MARKER,
   OK_MARKER,
   VIOLATION_MARKER,
+  candidateTopicKeysFromRunReport,
+  formatViolation,
   findPostRebaseViolations,
   main as checkPostRebaseMain,
   registryIdsOf,
@@ -36,6 +38,7 @@ import {
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const WORKFLOW = path.resolve(HERE, '../../.github/workflows/generate-article.yml');
+const CORE_WORKFLOW = path.resolve(HERE, '../../.github/workflows/generate-article-core.yml');
 
 const GIT_ENV = {
   ...process.env,
@@ -120,6 +123,29 @@ test('le superfici controllate sono TUTTE le sezioni del core, ognuna col suo le
     assert.match(s.sourceLedger, /\.json$/);
   }
   assert.equal(new Set(SURFACES.map((s) => s.sourceLedger)).size, SURFACES.length, 'un ledger per sezione');
+});
+
+test('snapshot legge la data articolo dal registro per il controllo topic', () => {
+  const id = 'frontaliere-piastrellista-ticino-stipendio-requisiti';
+  const date = '2026-08-09T15:44:33.669Z';
+  const files = Object.assign({}, ...SURFACES.map((surface) => sectionFiles(
+    surface,
+    surface.section === FIRST.section
+      ? {
+        ids: [id],
+        articles: {
+          [id]: {
+            title: 'Lavorare come piastrellista in Ticino: stipendio e requisiti',
+            excerpt: '',
+          },
+        },
+      }
+      : {},
+  )));
+  files[FIRST.registryFile] = files[FIRST.registryFile]
+    .replace("date: '2026-10-05'", "date: '" + date + "'");
+  const against = snapshotSections(SURFACES, (file) => files[file] ?? null, 'against');
+  assert.equal(against[FIRST.section].articles[id].date, date);
 });
 
 test('una sezione nel core senza ledger dichiarato e\' un errore, non una sezione saltata', () => {
@@ -256,6 +282,124 @@ test('una seconda coppia con wording diverso ma stesso fatto viene bloccata', ()
   assert.equal(violations[0].kind, 'duplicate-content');
   assert.equal(violations[0].id, candidate.id);
   assert.equal(violations[0].otherId, old.id);
+});
+
+const TOPIC_EXISTING = {
+  id: 'frontaliere-piastrellista-ticino-stipendio-requisiti',
+  title: 'Lavorare come piastrellista in Ticino: stipendio, requisiti e riconoscimento del titolo',
+  excerpt: "I requisiti e il stipendio medio per i piastrellisti in Ticino da frontaliere, con informazioni sull'eventuale riconoscimento del titolo di studio e sul permesso G.",
+  date: '2026-08-09T15:44:33.669Z',
+};
+const TOPIC_CANDIDATE = {
+  id: 'lavoro-piastrellista-ticino-frontaliere',
+  title: 'Lavorare come piastrellista in Ticino: guida per frontalieri',
+  excerpt: 'Requisiti, inquadramento salariale e fiscalità per i frontalieri che operano nel settore della posa piastrelle in Canton Ticino.',
+  date: '2026-08-09T16:08:00.001Z',
+};
+
+test('#2428: una chiave argomento apparsa durante la generazione ferma il push dopo il rebase', () => {
+  const producedBase = snapshot({ [FIRST.section]: { ids: [] } });
+  const produced = snapshot({
+    [FIRST.section]: {
+      ids: [TOPIC_CANDIDATE.id],
+      articles: { [TOPIC_CANDIDATE.id]: TOPIC_CANDIDATE },
+    },
+  });
+  const against = snapshot({
+    [FIRST.section]: {
+      ids: [TOPIC_EXISTING.id, TOPIC_CANDIDATE.id],
+      articles: {
+        [TOPIC_EXISTING.id]: TOPIC_EXISTING,
+        [TOPIC_CANDIDATE.id]: TOPIC_CANDIDATE,
+      },
+    },
+  });
+  const { violations } = findPostRebaseViolations(
+    { producedBase, produced, against },
+    { now: Date.parse(TOPIC_CANDIDATE.date), topicWindowDays: 90 },
+  );
+  assert.deepEqual(violations, [{
+    kind: 'topic-coverage',
+    section: FIRST.section,
+    id: TOPIC_CANDIDATE.id,
+    otherId: TOPIC_EXISTING.id,
+    topicKind: 'profession-guide',
+    topicValue: 'piastrellista',
+  }]);
+  assert.match(formatViolation(violations[0]), /topic=profession-guide:piastrellista/);
+});
+
+test('#2428: il riuso dello stesso argomento oltre la finestra lascia passare il push', () => {
+  const candidateDate = new Date(Date.parse(TOPIC_EXISTING.date) + 120 * 86_400_000).toISOString();
+  const candidate = { ...TOPIC_CANDIDATE, date: candidateDate };
+  const producedBase = snapshot({ [FIRST.section]: { ids: [] } });
+  const produced = snapshot({
+    [FIRST.section]: { ids: [candidate.id], articles: { [candidate.id]: candidate } },
+  });
+  const against = snapshot({
+    [FIRST.section]: {
+      ids: [TOPIC_EXISTING.id, candidate.id],
+      articles: {
+        [TOPIC_EXISTING.id]: TOPIC_EXISTING,
+        [candidate.id]: candidate,
+      },
+    },
+  });
+  const { violations } = findPostRebaseViolations(
+    { producedBase, produced, against },
+    { now: Date.parse(candidateDate), topicWindowDays: 90 },
+  );
+  assert.deepEqual(violations, []);
+});
+
+test('#2428: il run report ripristina la chiave evergreen persa nel titolo pubblicato', () => {
+  const keyword = TOPIC_CANDIDATE.title;
+  const articleId = 'guida-lavoro-ticino-requisiti';
+  const candidate = {
+    id: articleId,
+    title: 'Guida al lavoro nel Canton Ticino: requisiti e opportunita',
+    excerpt: 'Informazioni pratiche per orientarsi nel mercato del lavoro ticinese.',
+  };
+  const mine = sectionFiles(FIRST, { ids: [articleId], articles: { [articleId]: candidate } });
+  const upstream = sectionFiles(FIRST, {
+    ids: [TOPIC_EXISTING.id],
+    articles: { [TOPIC_EXISTING.id]: TOPIC_EXISTING },
+  });
+  const rebased = sectionFiles(FIRST, {
+    ids: [TOPIC_EXISTING.id, articleId],
+    articles: { [TOPIC_EXISTING.id]: TOPIC_EXISTING, [articleId]: candidate },
+  });
+  const w = world({ upstream, mine, rebased });
+  try {
+    const reportPath = path.join(w.root, 'run-report.json');
+    writeFileSync(reportPath, `${JSON.stringify({
+      runId: process.env.GITHUB_RUN_ID || 'test',
+      status: 'generated',
+      selectedUrl: `evergreen://${encodeURIComponent(keyword)}`,
+      article: { id: articleId },
+    })}\n`);
+
+    const restored = candidateTopicKeysFromRunReport(
+      JSON.parse(readFileSync(reportPath, 'utf8')),
+      [{ section: FIRST.section, id: articleId }],
+    );
+    assert.deepEqual(restored, { [articleId]: { kind: 'profession-guide', value: 'piastrellista' } });
+    assert.throws(
+      () => candidateTopicKeysFromRunReport(JSON.parse(readFileSync(reportPath, 'utf8')), [{ section: FIRST.section, id: 'other' }]),
+      /non corrisponde a un solo id introdotto/,
+    );
+
+    const { code, out } = runScript(
+      w.root,
+      '--produced', w.produced,
+      '--against', w.against,
+      '--run-report', reportPath,
+    );
+    assert.equal(code, 1, out);
+    assert.match(out, /topic=profession-guide:piastrellista/);
+  } finally {
+    w.cleanup();
+  }
 });
 
 test('id duplicato: lo stesso id appena registrato da un altro scrittore in un\'altra sezione', () => {
@@ -647,8 +791,8 @@ test('CLI: una superficie presente ma vuota e\' un errore, non «nessuna voce»'
 
 // ── Il cablaggio nel workflow ──────────────────────────────────────────────
 
-test('generate-article.yml esegue il controllo dopo un rebase riuscito e non pusha se fallisce', () => {
-  const wf = readFileSync(WORKFLOW, 'utf8');
+function assertWorkflowRebaseGate(workflow) {
+  const wf = readFileSync(workflow, 'utf8');
   const step = sliceBetween(wf, '      - name: Commit and push\n', '      - name: Cleanup Codex auth broker');
   const active = step.split('\n').filter((l) => !l.trim().startsWith('#')).join('\n');
 
@@ -656,7 +800,7 @@ test('generate-article.yml esegue il controllo dopo un rebase riuscito e non pus
   const commitAt = active.lastIndexOf('git commit -m', producedAt);
   const loopAt = active.indexOf('for attempt in');
   const rebaseAt = active.indexOf('bash scripts/lib/rebase-onto-remote.sh', loopAt);
-  const checkAt = active.indexOf('node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD');
+  const checkAt = active.indexOf('node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD --run-report .tmp/create-article-run-report.json');
   const successGuardAt = active.lastIndexOf('if [ "$rebased" -eq 1 ]; then', checkAt);
   const doneMatch = /\n\s+done\n/.exec(active.slice(Math.max(0, checkAt)));
   const doneAt = doneMatch ? checkAt + doneMatch.index : -1;
@@ -672,4 +816,9 @@ test('generate-article.yml esegue il controllo dopo un rebase riuscito e non pus
   const gate = active.slice(successGuardAt, doneAt);
   assert.match(gate, /\|\| uniq_rc=\$\?/);
   assert.match(gate, /if \[ "\$uniq_rc" -ne 0 \]; then[\s\S]*?exit 1/, 'un controllo fallito deve fermare il run SENZA pushare');
+  assert.match(gate, /source URL, topic, or content/);
+}
+
+test('entrambi i generatori controllano la registry dopo il rebase e bloccano un esito negativo', () => {
+  for (const workflow of [WORKFLOW, CORE_WORKFLOW]) assertWorkflowRebaseGate(workflow);
 });
