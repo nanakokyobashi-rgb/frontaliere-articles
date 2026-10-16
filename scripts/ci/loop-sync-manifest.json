@@ -2870,7 +2870,7 @@
       "reason": "Brief annuale deterministico per le sezioni cantonali: legge le cache REWIRE `generator/data/canton-tax.json` e `generator/data/pension-parameters.json`, senza fetch ne' scritture, e costruisce i fatti fiscali e previdenziali inseriti nei prompt del generatore. La generazione e le cache vivono solo nel corpus; il sito consuma il JSON pubblicato e non ha un consumer o un gemello operativo di questo modulo.",
       "baseline": {
         "site": null,
-        "corpus": "df61dc915398fb0f",
+        "corpus": "abb14883a744d1d1",
         "alignedAt": "2026-10-16"
       }
     },
