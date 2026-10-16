@@ -7,6 +7,7 @@
  * DOVE — chiavi R2, difetti che fermano una pagina, hub senza dati, sezioni
  * toccate da un commit, riconciliazione — e il cablaggio dei workflow.
  */
+import './lib/stdout-off-runner-pipe.mjs';
 import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
