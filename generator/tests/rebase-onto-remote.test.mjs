@@ -345,9 +345,15 @@ test('a plain divergence with no conflict rebases cleanly', () => {
 function parseHelperArgs(yamlText) {
   const lines = yamlText.split('\n');
   const start = lines.findIndex((l) => l.includes('bash scripts/lib/rebase-onto-remote.sh'));
-  if (start === -1) return { bookkeeping: [], registries: [], queues: [], takeTheirs: [], counters: [], sectionSurfaces: false };
+  if (start === -1) {
+    return {
+      bookkeeping: [], registries: [], registryPatterns: [], queues: [], takeTheirs: [], counters: [],
+      sectionSurfaces: false,
+    };
+  }
   const bookkeeping = [];
   const registries = [];
+  const registryPatterns = [];
   const queues = [];
   const takeTheirs = [];
   const counters = [];
@@ -368,6 +374,13 @@ function parseHelperArgs(yamlText) {
       bookkeeping.push(...derived.bookkeeping);
       registries.push(...derived.registries);
       takeTheirs.push(...derived.takeTheirs);
+    } else if (clean.startsWith('--merge-registry-pattern')) {
+      // The helper intentionally gives these options different semantics:
+      // --merge-registry is an exact path, while --merge-registry-pattern is
+      // the only place where a shell glob is allowed. Keep that distinction
+      // in the fixture's reconstructed argv as well.
+      const pattern = clean.split(/\s+/)[1];
+      if (pattern) registryPatterns.push(pattern.replace(/^(['"])(.*)\1$/, '$2'));
     } else if (clean.startsWith('--take-theirs')) {
       const prefix = clean.split(/\s+/)[1]?.replace(/^(['"])(.*)\1$/, '$2');
       if (prefix) takeTheirs.push(prefix.replace(/\s*\|\|\s*true$/, ''));
@@ -388,7 +401,7 @@ function parseHelperArgs(yamlText) {
     }
     if (!/\\\s*$/.test(line)) break; // the shell continuation ended
   }
-  return { bookkeeping, registries, queues, takeTheirs, counters, sectionSurfaces };
+  return { bookkeeping, registries, registryPatterns, queues, takeTheirs, counters, sectionSurfaces };
 }
 
 function allowlistFromWorkflow(yamlText) {
@@ -1178,7 +1191,7 @@ function allIds(ids) {
 
 /** Gli argomenti che il WORKFLOW passa davvero, non una lista riscritta qui. */
 function helperArgsFromWorkflowText(yamlText) {
-  const { bookkeeping, registries, queues, takeTheirs, counters, sectionSurfaces } = parseHelperArgs(yamlText);
+  const { bookkeeping, registries, registryPatterns, queues, takeTheirs, counters, sectionSurfaces } = parseHelperArgs(yamlText);
   if (sectionSurfaces) {
     // Come nel workflow: il flag, non la sua espansione. Cosi' i casi git sotto
     // passano davvero dalla derivazione dentro rebase-onto-remote.sh.
@@ -1188,6 +1201,7 @@ function helperArgsFromWorkflowText(yamlText) {
       ...queues.flatMap((p) => ['--merge-queue', p]),
       ...counters.flatMap((c) => ['--merge-counter', c]),
       ...registries.filter((r) => !derived.has(r)).flatMap((r) => ['--merge-registry', r]),
+      ...registryPatterns.flatMap((p) => ['--merge-registry-pattern', p]),
       ...takeTheirs.filter((p) => !derived.has(p)).flatMap((p) => ['--take-theirs', p]),
       '--section-surfaces',
     ];
@@ -1197,6 +1211,7 @@ function helperArgsFromWorkflowText(yamlText) {
     ...queues.flatMap((p) => ['--merge-queue', p]),
     ...counters.flatMap((c) => ['--merge-counter', c]),
     ...registries.flatMap((r) => ['--merge-registry', r]),
+    ...registryPatterns.flatMap((p) => ['--merge-registry-pattern', p]),
     ...takeTheirs.flatMap((p) => ['--take-theirs', p]),
   ];
 }
@@ -1749,7 +1764,7 @@ test('generate-daily-brief.yml classifica i registri e gli asset del bollettino 
     /--merge-registry-pattern "content\/seo\/seo-blog-\*\.ts"/,
     'il wildcard SEO deve essere dichiarato esplicitamente come pattern',
   );
-  const { bookkeeping, registries, takeTheirs } = parseHelperArgs(readFileSync(DAILY_BRIEF_WORKFLOW, 'utf8'));
+  const { bookkeeping, registries, registryPatterns, takeTheirs } = parseHelperArgs(readFileSync(DAILY_BRIEF_WORKFLOW, 'utf8'));
   const expectedRegistries = [
     'content/blog-articles-data.ts',
     'content/blogArticleIds.ts',
@@ -1762,9 +1777,13 @@ test('generate-daily-brief.yml classifica i registri e gli asset del bollettino 
   ];
 
   for (const file of expectedRegistries) {
-    const declared = registries.some((pattern) => pattern === file
-      || (pattern === 'content/seo/seo-blog-*.ts' && /^content\/seo\/seo-blog-.*\.ts$/.test(file)));
-    assert.ok(declared, `${file} deve essere fuso come registro append-only; dichiarati: ${JSON.stringify(registries)}`);
+    const declared = registries.some((pattern) => pattern === file)
+      || registryPatterns.some((pattern) => pattern === 'content/seo/seo-blog-*.ts'
+        && /^content\/seo\/seo-blog-.*\.ts$/.test(file));
+    assert.ok(
+      declared,
+      `${file} deve essere fuso come registro append-only; dichiarati: ${JSON.stringify({ registries, registryPatterns })}`,
+    );
   }
   assert.ok(takeTheirs.includes('content/blog-body/'), 'i body del bollettino sono file per-articolo');
   assert.ok(takeTheirs.includes('public/images/blog/'), 'hero e thumbnail sono file per-articolo');
