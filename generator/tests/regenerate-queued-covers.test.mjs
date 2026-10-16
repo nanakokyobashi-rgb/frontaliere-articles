@@ -1297,6 +1297,12 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(workflow, /watchdog_max_age_hours=.*COVER_QUEUE_MAX_AGE_HOURS/u);
   assert.match(workflow, /recovery_age_hours=\$\(\(watchdog_max_age_hours - 2\)\)/u);
   assert.match(workflow, /imageRegenerationActionableAt/);
+  assert.match(workflow, /read -r queue_count actionable_count oldest_actionable_age_hours/);
+  assert.match(
+    workflow,
+    /if \[ "\$\{UPSTREAM_WORKFLOW:-\}" = 'Generation health watchdog' \][\s\S]*?watchdog recovery enabled:[\s\S]*?age gate applies to generator wake-ups only/u,
+  );
+  assert.match(workflow, /cover queue has no actionable items: recovery deferred until cooldown expiry/u);
   assert.match(workflow, /oldest_actionable_age_hours/);
   assert.doesNotMatch(workflow, /const oldest = requestedAt\.length \? Math\.min\(\.\.\.requestedAt\)/u);
   assert.match(workflow, /--retry-failed-after-hours "\$retry_after_hours"/u);
