@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:feed xmlns:a="http://www.w3.org/2005/Atom" xml:base="..">
+  <a:title>Feed delle notizie</a:title>
+  <a:entry xml:base="issues/">
+    <a:title>Primo titolo atom con link relativo</a:title>
+    <a:link rel="alternate" xml:base="2026/" href="today?item=1&amp;lang=it" />
+    <a:updated>2026-10-05T12:00:00Z</a:updated>
+  </a:entry>
+  <a:entry xml:base="https://news.example/issues/2026/">
+    <a:title>Secondo titolo atom con lo stesso link</a:title>
+    <a:link rel="alternate" href="today?item=1&amp;lang=it" />
+    <a:updated>2026-10-05T12:30:00Z</a:updated>
+  </a:entry>
+</a:feed>
