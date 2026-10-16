@@ -21,8 +21,10 @@
  *                          con niente.
  *   r2-plan                legge da stdin i file cambiati (uno per riga; accetta
  *                          anche `git diff --name-status`) e stampa la matrice
- *                          JSON `[{section, ids, bootstrap}]` delle sezioni R2
- *                          da ripubblicare
+ *                          JSON `[{section, ids, bootstrap, postFlip?}]` delle
+ *                          sezioni R2 da ripubblicare; `postFlip` marca una
+ *                          promozione draft -> live che richiede un secondo
+ *                          pass dopo il flip del registro edge
  *   section-of <path>      la sezione che possiede quel corpo (esce 1 se nessuna)
  *   shard-of <section>     lo shard Pages della sezione. Una sezione con
  *                          `shardKey: null` (le cantonali) e' servita da R2 +
@@ -38,6 +40,7 @@ import { fileURLToPath } from 'node:url';
 
 import { activeCorpusCoreEntries, activeSourceSections, sectionForBodyPath, sectionSourceSurfaces } from '../lib/corpus-sections.mjs';
 import { articleRegistryObjectBodies, articleRegistryObjectFields } from '../../engine/shared/articleRegistryObjectBodies.mjs';
+import { EDGE_SECTION_REGISTRY_URL, validateEdgeSectionRegistry } from '../lib/section-registry.mjs';
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -77,6 +80,67 @@ const SHARED_R2_REFRESH_PREFIXES = Object.freeze(['engine/', 'host/']);
 
 const isSharedR2RefreshPath = (rel) =>
   SHARED_R2_REFRESH_PATHS.has(rel) || SHARED_R2_REFRESH_PREFIXES.some((prefix) => rel.startsWith(prefix));
+
+export const EDGE_LIVE_WAIT_MS = 15 * 60 * 1000;
+export const EDGE_LIVE_RETRY_MS = 10 * 1000;
+const EDGE_REGISTRY_FETCH_TIMEOUT_MS = 20 * 1000;
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/**
+ * Attende che il registro realmente servito dal Worker abbia promosso una
+ * sezione. Il primo pass del workflow deve arrivare prima del flip per
+ * soddisfare il bootstrap di publish-api; la seconda passata può pubblicare
+ * RSS e landing solo dopo che quel flip è osservabile sul CDN.
+ */
+export async function waitForLiveSection(
+  section,
+  {
+    fetchImpl = fetch,
+    maxWaitMs = EDGE_LIVE_WAIT_MS,
+    retryDelayMs = EDGE_LIVE_RETRY_MS,
+    sleepImpl = sleep,
+    nowImpl = Date.now,
+  } = {},
+) {
+  if (typeof section !== 'string' || !section.trim()) throw new Error('sezione richiesta per attendere il flip edge');
+  if (!Number.isFinite(maxWaitMs) || maxWaitMs < 0) throw new Error(`maxWaitMs non valido: ${maxWaitMs}`);
+  if (!Number.isFinite(retryDelayMs) || retryDelayMs < 0) throw new Error(`retryDelayMs non valido: ${retryDelayMs}`);
+
+  const deadline = nowImpl() + maxWaitMs;
+  let reason = 'registro edge non ancora live';
+  for (;;) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), EDGE_REGISTRY_FETCH_TIMEOUT_MS);
+    try {
+      const url = `${EDGE_SECTION_REGISTRY_URL}?_fps=${nowImpl()}`;
+      const response = await fetchImpl(url, {
+        headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
+        signal: controller.signal,
+      });
+      const body = response.status === 200 && response.ok !== false ? await response.text() : '';
+      if (response.status !== 200 || response.ok === false) {
+        reason = `registro edge HTTP ${response.status}`;
+      } else {
+        try {
+          const registry = JSON.parse(body);
+          if (!validateEdgeSectionRegistry(registry)) reason = 'registro edge non valido';
+          else if (registry.sections?.[section]?.status === 'live') return { ok: true, status: 'live' };
+          else reason = `sezione ${section} ancora ${registry.sections?.[section]?.status ?? 'assente'}`;
+        } catch {
+          reason = 'registro edge non è JSON';
+        }
+      }
+    } catch (error) {
+      reason = error?.name === 'AbortError' ? 'timeout leggendo il registro edge' : (error?.message ?? String(error));
+    } finally {
+      clearTimeout(timeout);
+    }
+    const now = nowImpl();
+    if (now >= deadline || now + retryDelayMs > deadline) return { ok: false, reason };
+    await sleepImpl(retryDelayMs);
+  }
+}
 
 function changedFileRecords(files) {
   const changedFiles = [];
@@ -233,10 +297,11 @@ export function shardOf(section, coreList = activeCorpusCoreEntries()) {
  * `bootstrap: false` e con `ids: []`: rinfrescano landing, archivio e hub.
  *
  * @param {string[]} files path relativi alla radice del repo
- * @returns {Array<{ section: string, ids: string[], bootstrap: boolean }>} nell'ordine del core
+ * @returns {Array<{ section: string, ids: string[], bootstrap: boolean, postFlip?: boolean }>} nell'ordine del core
  */
 export function r2PublishPlan(files, coreList = activeCorpusCoreEntries(), { registryRefreshSections = [] } = {}) {
   const sections = activeSourceSections(coreList).filter((s) => !s.shardKey);
+  const postFlipSections = new Set(registryRefreshSections);
   const plan = new Map();
   const touch = (section) => {
     if (!plan.has(section)) plan.set(section, { ids: new Set(), bootstrap: false });
@@ -289,6 +354,7 @@ export function r2PublishPlan(files, coreList = activeCorpusCoreEntries(), { reg
         section: s.section,
         ids: state.bootstrap ? [] : [...state.ids].sort(),
         bootstrap: state.bootstrap,
+        ...(postFlipSections.has(s.section) ? { postFlip: true } : {}),
       };
     });
 }
@@ -321,7 +387,12 @@ if (isMain()) {
     else if (cmd === 'image-plan') console.log(JSON.stringify(imagePublishPlan(readFileSync(0, 'utf8').split('\n'), activeCorpusCoreEntries(), { served: arg })));
     else if (cmd === 'section-of' && arg) console.log(sectionOf(arg));
     else if (cmd === 'shard-of' && arg) console.log(shardOf(arg));
-    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files');
+    else if (cmd === 'wait-live' && arg) {
+      const result = await waitForLiveSection(arg);
+      if (!result.ok) throw new Error(`sezione ${arg} non diventata live: ${result.reason}`);
+      console.log(`[fast-publish-section] ${arg}: registro edge live`);
+    }
+    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files | wait-live <section>');
   } catch (error) {
     console.error(`::error::fast-publish-section: ${error?.message ?? error}`);
     process.exit(1);

@@ -71,7 +71,7 @@ import {
 import { cantonHubCoverage, cantonHubDataFile, cantonHubTopics, readCantonHubData } from '../../scripts/lib/canton-hub-data.mjs';
 import { declaredRegistryErrors, SECTION_REGISTRY_FILE } from '../../scripts/lib/section-registry.mjs';
 import { sourceRegistryIds } from '../../scripts/lib/corpus-floors.mjs';
-import { bodyRegex, liveRegistryTransitionSections, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
+import { bodyRegex, liveRegistryTransitionSections, r2PublishPlan, waitForLiveSection } from '../../scripts/ci/fast-publish-section.mjs';
 import { cdnUrlFor, expectedSectionPages, headState, orphanedArticleCandidates, planSectionBackfill, reconcile } from '../../scripts/reconcile-section-pages.mjs';
 import { heroCdnUploads } from '../../scripts/lib/article-render-pipeline.mjs';
 import { cantonSectionPaths } from '../scripts/lib/canton-section-profile.mjs';
@@ -1491,8 +1491,8 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
   assert.deepEqual(promotedSections, ['canton-ti']);
   assert.deepEqual(
     r2PublishPlan(['M\tsections/registry.json'], WITH_TI, { registryRefreshSections: promotedSections }),
-    [{ section: 'canton-ti', ids: [], bootstrap: false }],
-    'una promozione draft -> live deve rinfrescare landing, archivio, hub e RSS senza bootstrap articoli',
+    [{ section: 'canton-ti', ids: [], bootstrap: false, postFlip: true }],
+    'una promozione draft -> live deve rinfrescare landing, archivio, hub e RSS dopo il flip senza bootstrap articoli',
   );
   assert.deepEqual(liveRegistryTransitionSections(registryAfter, registryAfter, WITH_TI), []);
   assert.throws(
@@ -1564,6 +1564,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     assert.ok(wf.includes(`      - ${p}\n`), p);
   }
   assert.match(wf, /node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
+  assert.match(wf, /postFlip: \(\.postFlip \/\/ false\)/);
+  assert.match(wf, /node scripts\/ci\/fast-publish-section\.mjs wait-live "\$SECTION"/);
+  assert.match(wf, /matrix\.target\.postFlip == true/);
+  assert.match(wf, /Republish the promoted section after the edge flip/);
   assert.match(wf, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);
   assert.match(wf, /git diff --name-status "\$before" HEAD/);
   assert.match(wf, /Fetch fallback corpus revision for manifest migration/);
@@ -1757,6 +1761,32 @@ test('reconcile: il manifest individua una pagina articolo ritirata o con slug v
     ['gone'],
     'la decisione di ritiro usa il registro attivo, non una mappa slug eventualmente residua',
   );
+});
+
+test('promozione draft -> live: il secondo pass attende il registro edge effettivo', async () => {
+  let now = 0;
+  let attempts = 0;
+  const result = await waitForLiveSection('canton-ti', {
+    maxWaitMs: 100,
+    retryDelayMs: 10,
+    nowImpl: () => now,
+    sleepImpl: async (ms) => { now += ms; },
+    fetchImpl: async () => {
+      attempts++;
+      const status = attempts === 1 ? 'draft' : 'live';
+      return {
+        ok: true,
+        status: 200,
+        text: async () => JSON.stringify({
+          schema: 1,
+          commit: 'a'.repeat(40),
+          sections: { 'canton-ti': { status } },
+        }),
+      };
+    },
+  });
+  assert.deepEqual(result, { ok: true, status: 'live' });
+  assert.equal(attempts, 2);
 });
 
 function fakeFetch({ commit = 'abc1234', sectionsCommit = commit, edgeCommit = commit, live = true, missing = new Set(), broken = new Set(), pageManifest = null }) {

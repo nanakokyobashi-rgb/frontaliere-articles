@@ -37,8 +37,9 @@ on:
       - 'content/cantons/**'
       - 'content/blog-body-canton-*/**'
       - 'content/blog-meta-canton-*'
-      # Il flip draft -> live cambia solo il registro, ma deve rinfrescare le
-      # pagine R2 e i feed RSS prima che la sezione annunci i propri URL.
+      # Il flip draft -> live cambia solo il registro: il primo pass carica le
+      # pagine necessarie al bootstrap, poi il pass post-flip attende il live
+      # effettivo e verifica feed RSS e landing prima di chiudere il publish.
       - 'sections/registry.json'
       # A declared image may arrive after the article body. The resolver maps
       # this path through the registry to the owning canton article(s).
@@ -191,7 +192,7 @@ jobs:
             fi
             matrix="$(git diff --name-status "$before" HEAD 2>/dev/null \
               | node scripts/ci/fast-publish-section.mjs r2-plan \
-              | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
+              | jq -c 'map(. + {bootstrap: (.bootstrap // false), postFlip: (.postFlip // false)})')"
           fi
           any=false
           [ "$(printf '%s' "$matrix" | jq 'length')" -gt 0 ] && any=true
@@ -314,6 +315,36 @@ jobs:
           # registro a ogni run. Ritentare l'intero comando e' sicuro: il
           # render riscrive lo stesso scratch e gli upload R2 sono PUT
           # idempotenti sulle stesse chiavi.
+          bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"
+
+      # Una promozione draft -> live viene servita dal primo pass per
+      # permettere a publish-api di superare il bootstrap delle pagine. Quel
+      # pass vede ancora draft e quindi non può pubblicare RSS: attendere il
+      # flip e rieseguire il publisher chiude la finestra con landing senza
+      # autodiscovery e feed mancanti.
+      - name: Wait for the edge promotion
+        if: needs.resolve.outputs.dry != 'true' && matrix.target.postFlip == true
+        env:
+          SECTION: ${{ matrix.target.section }}
+        run: |
+          set -euo pipefail
+          node scripts/ci/fast-publish-section.mjs wait-live "$SECTION"
+
+      - name: Republish the promoted section after the edge flip
+        if: needs.resolve.outputs.dry != 'true' && matrix.target.postFlip == true
+        env:
+          SECTION: ${{ matrix.target.section }}
+          ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
+          BOOTSTRAP: ${{ matrix.target.bootstrap }}
+        run: |
+          set -euo pipefail
+          args=(--section "$SECTION" --out "$RUNNER_TEMP/section-dist-post-flip" --summary "$RUNNER_TEMP/section-summary-post-flip.json")
+          if [ "$BOOTSTRAP" = "true" ]; then
+            args+=(--bootstrap)
+          else
+            args+=(--ids "$(printf '%s' "$ARTICLE_IDS_JSON" | jq -c .)")
+          fi
+          args+=(--publish)
           bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"
 
       - name: Summary
