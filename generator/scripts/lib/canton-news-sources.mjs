@@ -734,9 +734,16 @@ function unterminatedHtmlTagStart(masked) {
   while (true) {
     const start = masked.indexOf('<', cursor);
     if (start < 0) return -1;
-    if (/^<\/?[A-Za-z][\w:-]*(?=$|[\s/>])/u.test(masked.slice(start))) {
+    const opening = /^<(\/)?([A-Za-z][\w:-]*)(?=$|[\s/>])/u.exec(masked.slice(start));
+    if (opening) {
       const end = findHtmlTagEndOutsideQuotes(masked, start);
       if (end < 0) return start;
+      if (!opening[1] && CHARSET_RAW_TEXT_TAGS.has(opening[2].toLowerCase())) {
+        const close = rawTextClosingTag(masked, end + 1, opening[2]);
+        if (!close) return start;
+        cursor = close.end;
+        continue;
+      }
       cursor = end + 1;
     } else {
       cursor = start + 1;
@@ -756,7 +763,7 @@ function semanticHtmlCloseEnds(masked) {
   }
 
   const ranges = [];
-  let tag = nextHtmlTag(masked);
+  let tag = nextHtmlTagOutsideRawText(masked);
   while (tag) {
     const roles = tag.closing ? [] : roleTokens(tag.attrs);
     const semantic = SEMANTIC_HTML_TAGS.has(tag.name)
@@ -771,16 +778,16 @@ function semanticHtmlCloseEnds(masked) {
       }
       ranges.push({ start: tag.start, end, name: tag.name });
     }
-    tag = nextHtmlTag(masked, tag.end);
+    tag = nextHtmlTagOutsideRawText(masked, tag.end);
   }
 
   const closeKeys = new Set(ranges.map(({ end, name }) => `${end}\u0000${name}`));
-  tag = nextHtmlTag(masked);
+  tag = nextHtmlTagOutsideRawText(masked);
   while (tag) {
     if (tag.closing && SEMANTIC_HTML_TAGS.has(tag.name) && !closeKeys.has(`${tag.end}\u0000${tag.name}`)) {
       throw new Error(`markup HTML non bilanciato: chiusura </${tag.name}> senza apertura`);
     }
-    tag = nextHtmlTag(masked, tag.end);
+    tag = nextHtmlTagOutsideRawText(masked, tag.end);
   }
 
   ranges.sort((a, b) => a.start - b.start || b.end - a.end);
@@ -796,12 +803,34 @@ function semanticHtmlCloseEnds(masked) {
   return new Map(ranges.map(({ start, end }) => [start, end]));
 }
 
+/** Nasconde i tag letterali nei raw-text solo alla scansione dei link. */
+function maskRawTextTagLikeMarkup(html) {
+  const source = String(html || '');
+  const output = source.split('');
+  let tag = nextHtmlTag(source);
+  while (tag) {
+    if (!tag.closing && !tag.selfClosing && CHARSET_RAW_TEXT_TAGS.has(tag.name)) {
+      const close = rawTextClosingTag(source, tag.end, tag.name);
+      if (!close) throw new Error(`markup HTML non bilanciato: <${tag.name}> senza chiusura`);
+      let inner = nextHtmlTag(source, tag.end);
+      while (inner && inner.start < close.start) {
+        for (let index = inner.start; index < inner.end; index += 1) output[index] = ' ';
+        inner = nextHtmlTag(source, inner.end);
+      }
+      tag = nextHtmlTag(source, close.end);
+      continue;
+    }
+    tag = nextHtmlTag(source, tag.end);
+  }
+  return output.join('');
+}
+
 /** Il contenuto principale della pagina (`<main>` o `role="main"`) sta in questo markup? */
 function containsMainContent(masked) {
-  let tag = nextHtmlTag(masked);
+  let tag = nextHtmlTagOutsideRawText(masked);
   while (tag) {
     if (!tag.closing && (tag.name === 'main' || roleTokens(tag.attrs).includes('main'))) return true;
-    tag = nextHtmlTag(masked, tag.end);
+    tag = nextHtmlTagOutsideRawText(masked, tag.end);
   }
   return false;
 }
@@ -841,19 +870,19 @@ export function stripPageChrome(html) {
   // Fine degli elementi `role="main|article|…"` aperti: finche' ce n'e' uno,
   // header e footer sono di quella sezione.
   const roleSectionEnds = [];
-  let tag = nextHtmlTag(masked);
+  let tag = nextHtmlTagOutsideRawText(masked);
   while (tag) {
     const { start, end, closing, name, attrs, selfClosing } = tag;
     while (roleSectionEnds.length > 0 && roleSectionEnds[roleSectionEnds.length - 1] <= start) roleSectionEnds.pop();
     if (SECTIONING_TAGS.has(name)) {
       if (!selfClosing) sectioningDepth = Math.max(0, sectioningDepth + (closing ? -1 : 1));
       if (closing) {
-        tag = nextHtmlTag(masked, end);
+        tag = nextHtmlTagOutsideRawText(masked, end);
         continue;
       }
     }
     if (closing || selfClosing) {
-      tag = nextHtmlTag(masked, end);
+      tag = nextHtmlTagOutsideRawText(masked, end);
       continue;
     }
     const roles = roleTokens(attrs);
@@ -866,12 +895,12 @@ export function stripPageChrome(html) {
       || roles.some((r) => CHROME_ROLES.has(r))
       || ((name === 'header' || name === 'footer') && !inSection);
     if (!isChrome) {
-      tag = nextHtmlTag(masked, end);
+      tag = nextHtmlTagOutsideRawText(masked, end);
       continue;
     }
     const sectionEnd = closeEnds.get(start) ?? -1;
     if (sectionEnd === -1) {
-      tag = nextHtmlTag(masked, end);
+      tag = nextHtmlTagOutsideRawText(masked, end);
       continue;
     }
     // Una «navigazione» che contiene il contenuto principale e' un wrapper
@@ -879,13 +908,13 @@ export function stripPageChrome(html) {
     // `<div role="navigation">`, e tagliarlo toglieva 15 comunicati datati su
     // 15. Si scende dentro: i `<nav>` veri che contiene cadono lo stesso.
     if (containsMainContent(masked.slice(end, sectionEnd))) {
-      tag = nextHtmlTag(masked, end);
+      tag = nextHtmlTagOutsideRawText(masked, end);
       continue;
     }
     ranges.push([start, sectionEnd]);
     // L'area intera e' tolta: quello che contiene (anche i tag di sezione,
     // aperti E chiusi li' dentro) non sposta il conteggio.
-    tag = nextHtmlTag(masked, sectionEnd);
+    tag = nextHtmlTagOutsideRawText(masked, sectionEnd);
   }
   if (ranges.length === 0) return { html: masked, removed: 0 };
   let out = '';
@@ -952,10 +981,10 @@ function sourceArticleText(html, requestedHeadline = '') {
 /** Fine (indice dopo `</name>`) dell'elemento `name` aperto prima di `from`, o -1. */
 function matchingCloseEnd(masked, name, from) {
   let depth = 1;
-  let tag = nextHtmlTag(masked, from);
+  let tag = nextHtmlTagOutsideRawText(masked, from);
   while (tag) {
     if (tag.name !== name) {
-      tag = nextHtmlTag(masked, tag.end);
+      tag = nextHtmlTagOutsideRawText(masked, tag.end);
       continue;
     }
     if (tag.closing) {
@@ -964,7 +993,7 @@ function matchingCloseEnd(masked, name, from) {
     } else if (!tag.selfClosing) {
       depth += 1;
     }
-    tag = nextHtmlTag(masked, tag.end);
+    tag = nextHtmlTagOutsideRawText(masked, tag.end);
   }
   return -1;
 }
@@ -1867,7 +1896,8 @@ export async function scanCantonSource(source, ctx) {
         // Prima la cornice del sito (menu, header, footer), poi i link che
         // non sono articoli: vedi stripPageChrome e filterArticleLinks.
         const page = stripPageChrome(text);
-        const links = filterArticleLinks(ctx.extractHeadlines(page.html, url, source, text), url, source);
+        const linkHtml = maskRawTextTagLikeMarkup(page.html);
+        const links = filterArticleLinks(ctx.extractHeadlines(linkHtml, url, source, text), url, source);
         if (page.removed > 0 || links.dropped > 0) {
           notes.push(`navigazione: ${page.removed} aree tolte, ${links.dropped} link non articolo scartati`);
         }

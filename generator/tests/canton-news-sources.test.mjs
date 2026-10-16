@@ -1257,6 +1257,30 @@ test('FU-010: `>` dentro attributi quotati non interrompe il tag di navigazione'
   });
 });
 
+test('FU-010: markup letterale in title e textarea non altera bilanciamento né link', async () => {
+  const rawText = '<head><title>Avvisi <nav data-note=">"><a href="/menu/title">Voce nel titolo</a></nav>'
+    + 'del Comune</title></head>'
+    + '<textarea><nav><a href="/menu/raw">Voce di menu che è testo</a></textarea>';
+  const html = rawText
+    + '<nav><a href="/menu">Voce di menu reale</a></nav>'
+    + '<main><a href="/news/raw-text">Titolo autentico conservato</a></main>';
+
+  assert.deepEqual(stripPageChrome(html), {
+    html: `${rawText}<main><a href="/news/raw-text">Titolo autentico conservato</a></main>`,
+    removed: 1,
+  });
+  assert.throws(
+    () => stripPageChrome('<textarea><nav>testo senza fine'),
+    /markup HTML non bilanciato/,
+    'un blocco raw-text incompleto resta fail-closed',
+  );
+
+  const url = 'https://sources.example/news';
+  const { impl } = fakeFetch({ [url]: { body: html, contentType: 'text/html' } });
+  const out = await scanCantonSource({ url, parser: 'html-links' }, ctx(impl));
+  assert.deepEqual(out.headlines.map((item) => item.url), ['https://sources.example/news/raw-text']);
+});
+
 test('articlePathPattern: ogni dichiarazione del profilo e\' su una fonte html-links e compila', () => {
   const declared = PROFILE.cantons.flatMap((c) => c.newsSources.filter((s) => s.quirks?.articlePathPattern).map((s) => ({ code: c.code, ...s })));
   assert.ok(declared.length >= 20, `attese almeno 20 fonti con articlePathPattern, trovate ${declared.length}`);
@@ -1419,4 +1443,42 @@ test('FU-014: Atom prefissato risolve xml:base prima di assegnare identita\' a U
     'Primo titolo atom con link relativo',
     'Secondo titolo atom con lo stesso link',
   ]);
+});
+
+test('FU-014: una dichiarazione custom locale all\'entry resta nel blocco Atom isolato', () => {
+  const feedUrl = 'https://news.example/feeds/atom.xml';
+  const xml = '<feed xmlns="http://www.w3.org/2005/Atom"><entry xml:base="issues/2026/" '
+    + 'xmlns:meta="urn:news:meta"><title>Titolo da namespace locale</title>'
+    + '<meta:label>Valore custom conservato</meta:label><link href="today" />'
+    + '<updated>2026-10-05T12:00:00Z</updated></entry></feed>';
+  const [document] = feedItemDocuments(xml, feedUrl);
+
+  assert.match(document, /xmlns:meta="urn:news:meta"><title>/);
+  assert.match(document, /<meta:label>Valore custom conservato<\/meta:label>/);
+  assert.deepEqual(extractRssItems(document, feedUrl).map((item) => item.url), [
+    'https://news.example/feeds/issues/2026/today',
+  ]);
+});
+
+test('FU-014: Atom malformato conserva la URL del periodo e non impedisce il precedente', async () => {
+  const sampleUrl = 'https://news.example/feeds/202641.xml';
+  const [currentUrl, previousUrl] = periodSitemapUrls(sampleUrl, 'iso-week', { now: NOW });
+  const malformed = '<feed xmlns="http://www.w3.org/2005/Atom"><entry><title>Rotto</title></feed>';
+  const previous = '<feed xmlns="http://www.w3.org/2005/Atom"><entry>'
+    + '<title>Notizia del periodo precedente</title><link href="https://news.example/story/previous" />'
+    + '<updated>2026-10-04T12:00:00Z</updated></entry></feed>';
+  const { impl, calls } = fakeFetch({
+    [currentUrl]: { body: malformed, contentType: 'application/atom+xml' },
+    [previousUrl]: { body: previous, contentType: 'application/atom+xml' },
+  });
+
+  const out = await scanCantonSource({
+    url: sampleUrl,
+    parser: 'atom',
+    quirks: { urlPeriod: 'iso-week', urlReusedForDifferentStories: true },
+  }, ctx(impl));
+
+  assert.deepEqual(calls.map(({ url }) => url), [currentUrl, previousUrl]);
+  assert.deepEqual(out.headlines.map((item) => item.headline), ['Notizia del periodo precedente']);
+  assert.ok(out.notes.some((note) => note.startsWith(`${currentUrl}: Atom XML non valido:`)), out.notes.join(' | '));
 });
