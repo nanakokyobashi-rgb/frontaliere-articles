@@ -65,25 +65,25 @@ async function cancelResponseBody(response, timeoutMs = 0) {
   let settledCancellation;
   try {
     const cancellation = response?.body?.cancel?.();
-    if (!cancellation || typeof cancellation.then !== 'function') return;
+    if (!cancellation || typeof cancellation.then !== 'function') return true;
     settledCancellation = Promise.resolve(cancellation).catch(() => {});
   } catch {
     // Disposal must not replace the request error that triggers the fallback.
-    return;
+    return true;
   }
 
   const budgetMs = Number(timeoutMs);
   if (!Number.isFinite(budgetMs) || budgetMs <= 0) {
     void settledCancellation;
-    return;
+    return false;
   }
 
   let timer;
   try {
-    await Promise.race([
-      settledCancellation,
+    return await Promise.race([
+      settledCancellation.then(() => true),
       new Promise((resolve) => {
-        timer = setTimeout(resolve, budgetMs);
+        timer = setTimeout(() => resolve(false), budgetMs);
       }),
     ]);
   } finally {
@@ -193,8 +193,11 @@ export async function classifyWithDecisionsApi({
     }
 
     if (!response || !response.ok) {
-      await cancelResponseBody(response, Math.max(0, deadlineAt - Date.now()));
-      if (timedOut) {
+      const bodyCancellationCompleted = await cancelResponseBody(
+        response,
+        Math.max(0, deadlineAt - Date.now()),
+      );
+      if (timedOut || !bodyCancellationCompleted || Date.now() >= deadlineAt) {
         throw new DecisionsApiError('Decision API request timed out', {
           code: 'DECISIONS_API_TIMEOUT',
         });
