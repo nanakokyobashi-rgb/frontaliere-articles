@@ -180,8 +180,9 @@ describe('omonimi e falsi amici', () => {
     assert.equal(c.mentionsIn('Atleti ticinesi in gara.').find((m) => m.group === 'TI')?.who, true);
     assert.equal(c.mentionsIn('Gruppo molto numeroso e ben organizzato di ticinesi bloccati all\'estero.')
       .find((m) => m.kind === 'demonym')?.who, true);
+    // Confine valido: 4 modificatori + 3 connettivi + la testa gruppo.
     assert.equal(c.mentionsIn('Gruppo molto e numeroso e ben e organizzato di ticinesi bloccati all\'estero.')
-      .find((m) => m.kind === 'demonym')?.who, undefined);
+      .find((m) => m.kind === 'demonym')?.who, true);
     assert.equal(c.mentionsIn('Gruppo numeroso e ben organizzato di ticinesi bloccati all\'estero.')
       .find((m) => m.kind === 'demonym')?.who, true);
     assert.equal(c.mentionsIn('Gruppo di lavoro ben organizzato di ticinesi bloccati all\'estero.')

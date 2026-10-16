@@ -495,7 +495,7 @@ const PERSON_GROUP_MODIFIER_RE = /^(?:ben|e|molto|molta|molti|molte|poco|poca|po
 const PERSON_GROUP_CONNECTORS = new Set(['e']);
 const PERSON_GROUP_MAX_MODIFIERS = 4;
 const PERSON_GROUP_MAX_CONNECTORS = 3;
-const PERSON_GROUP_MAX_CHAIN_TOKENS = 7;
+const PERSON_GROUP_MAX_CHAIN_TOKENS = PERSON_GROUP_MAX_MODIFIERS + PERSON_GROUP_MAX_CONNECTORS + 1;
 
 /**
  * Portata nazionale dichiarata nel titolo, nell'excerpt o nell'attacco: una
