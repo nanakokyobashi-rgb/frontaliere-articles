@@ -1593,6 +1593,39 @@ function rescueRateLimitedTests(prs, commentsByPr, nowSec = Math.floor(Date.now(
   return retried;
 }
 
+/**
+ * La modalità quota usa il token installation: prima di qualsiasi lettura
+ * costosa controlla i bucket dal solo endpoint `rate_limit`, che non consuma
+ * la quota che riporta. Se core o GraphQL sono a zero, lascia che il prossimo
+ * tick schedulato riprovi dopo il reset reale; stato incompleto resta rosso.
+ */
+function rateLimitOnlyHasAvailableBudget() {
+  const payload = parseJson(gh(['api', 'rate_limit']), null);
+  const resources = payload?.resources;
+  if (!resources || typeof resources !== 'object') {
+    throw new Error('stato `rate_limit` non leggibile nella modalita rate-limit-only');
+  }
+  const buckets = ['core', 'graphql'].map((resource) => {
+    const bucket = resources[resource];
+    const remaining = Number(bucket?.remaining);
+    const resetAt = Number(bucket?.reset);
+    if (!Number.isSafeInteger(remaining) || remaining < 0
+        || !Number.isSafeInteger(resetAt) || resetAt < 1) {
+      throw new Error(`bucket ${resource} non verificabile nella modalita rate-limit-only`);
+    }
+    return { resource, remaining, resetAt };
+  });
+  const exhausted = buckets.filter((bucket) => bucket.remaining === 0);
+  if (!exhausted.length) return true;
+  const resetAt = Math.max(...exhausted.map((bucket) => bucket.resetAt));
+  const resourcesText = exhausted.map((bucket) => bucket.resource).join(',');
+  console.log(
+    `review-quota-rescuer: bucket ${resourcesText} esaurito; reset reale `
+    + `${new Date(resetAt * 1000).toISOString()}, scan rinviato al prossimo tick; nessun rerun.`,
+  );
+  return false;
+}
+
 function main() {
   if (!REPO) {
     throw new Error('repository mancante: scansione non verificabile');
@@ -1604,6 +1637,7 @@ function main() {
   if (process.env.REVIEW_RATE_LIMIT_ONLY === 'true' && !process.env.GH_TOKEN) {
     throw new Error('GH_TOKEN mancante nella modalita rate-limit-only; nessun fallback a credenziali utente');
   }
+  if (process.env.REVIEW_RATE_LIMIT_ONLY === 'true' && !rateLimitOnlyHasAvailableBudget()) return;
 
   const { prs, commentsByPr } = listOpenPullRequestsWithComments();
   if (process.env.REVIEW_RATE_LIMIT_ONLY === 'true') {

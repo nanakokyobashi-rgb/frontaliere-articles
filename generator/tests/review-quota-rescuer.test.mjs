@@ -866,7 +866,7 @@ test('il wiring reagisce al completamento dei consumer e rilascia reservation es
   const reportStepStart = workflow.indexOf('- name: Report rate-limit budget');
   const quotaStep = workflow.slice(quotaStepStart, reportStepStart);
   assert.ok(quotaStepStart > generalStepStart && reportStepStart > quotaStepStart, 'lo scan quota segue il recovery generale e precede il report');
-  assert.match(quotaStep, /if: github\.event_name == 'schedule' \|\| github\.event_name == 'workflow_dispatch'/);
+  assert.match(quotaStep, /if: \$\{\{ !cancelled\(\) && \(github\.event_name == 'schedule' \|\| github\.event_name == 'workflow_dispatch'\) \}\}/);
   assert.match(quotaStep, /GH_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}/);
   assert.match(quotaStep, /REVIEW_RATE_LIMIT_ONLY: 'true'/);
   assert.match(quotaStep, /REVIEW_RATE_LIMIT_SCAN: 'true'/);
@@ -1064,6 +1064,12 @@ function runRateLimitRescuer({
   annotations,
   jobSteps = [],
   graphqlSnapshot = null,
+  rateLimitState = {
+    resources: {
+      core: { remaining: 100, reset: Math.floor(Date.now() / 1000) + 3600 },
+      graphql: { remaining: 1000, reset: Math.floor(Date.now() / 1000) + 3600 },
+    },
+  },
 }) {
   const dir = fs.mkdtempSync(path.join(fs.realpathSync('/tmp'), 'review-rate-limit-rescuer-'));
   const calls = path.join(dir, 'calls');
@@ -1090,6 +1096,7 @@ function runRateLimitRescuer({
     },
     annotations: fixtureAnnotations,
     graphql: graphqlSnapshot,
+    rateLimitState,
   }));
   fs.writeFileSync(path.join(dir, 'gh'), `#!/usr/bin/env node
 const fs = require('node:fs');
@@ -1100,6 +1107,7 @@ const f = JSON.parse(fs.readFileSync(${JSON.stringify(fixture)}, 'utf8'));
 const out = (value) => { process.stdout.write(JSON.stringify(value)); process.exit(0); };
 if (args[0] === 'pr' && args[1] === 'comment') process.exit(0);
 if (args[0] === 'run' && args[1] === 'rerun') process.exit(0);
+if (args[0] === 'api' && args[1] === 'rate_limit') out(f.rateLimitState);
 if (args[0] === 'api' && args[1] === 'graphql') out(f.graphql);
 if (line.includes('/pulls?state=open')) out(f.prs);
 if (line.includes('/issues/1800/comments')) out(f.comments);
@@ -1165,6 +1173,31 @@ test('rate limit-only: richiede il token esplicito e non esegue le altre recover
   assert.equal(missingToken.status, 1);
   assert.match(missingToken.stderr, /GH_TOKEN mancante.*nessun fallback/);
   assert.deepEqual(missingToken.calls, []);
+});
+
+test('rate limit-only: bucket esaurito rinvia le letture al reset reale', () => {
+  const resetAt = Math.floor(Date.now() / 1000) + 900;
+  const r = runRateLimitRescuer({
+    rateLimitOnly: true,
+    rateLimitState: {
+      resources: {
+        core: { remaining: 0, reset: resetAt },
+        graphql: { remaining: 1000, reset: resetAt + 3600 },
+      },
+    },
+  });
+  assert.equal(r.status, 0, r.stderr);
+  assert.deepEqual(r.calls, ['api rate_limit']);
+  assert.match(r.stdout, /bucket core esaurito; reset reale/);
+  assert.match(r.stdout, /scan rinviato al prossimo tick; nessun rerun/);
+
+  const unverified = runRateLimitRescuer({
+    rateLimitOnly: true,
+    rateLimitState: { resources: { core: { remaining: 100, reset: resetAt } } },
+  });
+  assert.equal(unverified.status, 1);
+  assert.match(unverified.stderr, /bucket graphql non verificabile/);
+  assert.deepEqual(unverified.calls, ['api rate_limit']);
 });
 
 test('rate limit-only disattivato non legge GitHub', () => {
@@ -1274,7 +1307,7 @@ test('rate limit: fuori da cron e dispatch lo scan non legge nemmeno le run', ()
     quotaStart,
     workflow.indexOf('- name: Report rate-limit budget', quotaStart),
   );
-  assert.match(quotaStep, /if: github\.event_name == 'schedule' \|\| github\.event_name == 'workflow_dispatch'/);
+  assert.match(quotaStep, /if: \$\{\{ !cancelled\(\) && \(github\.event_name == 'schedule' \|\| github\.event_name == 'workflow_dispatch'\) \}\}/);
   assert.match(quotaStep, /REVIEW_RATE_LIMIT_SCAN: 'true'/);
   assert.match(workflow, /REVIEW_RATE_LIMIT_SCAN: 'false'/);
 });

@@ -144,12 +144,12 @@ jobs:
           exit "$rc"
 
       # Recovery della quota installation senza PAT personale/operativo. Eseguito
-      # dopo il rescuer generale: una probe non retryable non lo sopprime. Il
-      # token built-in ha actions:write per il rerun e checks:read per annotation;
+      # dopo il rescuer generale, ma anche se quello fallisce (non dopo cancel).
+      # Il token built-in ha actions:write per il rerun e checks:read per annotation;
       # il processo non eredita neppure GITHUB_PAT_NANAKO. Solo cron/dispatch:
       # workflow_run arriva mentre il bucket puo' essere ancora esaurito.
       - name: Retry tests runs red for GITHUB_TOKEN quota (built-in token only)
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        if: ${{ !cancelled() && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') }}
         env:
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
