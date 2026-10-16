@@ -836,6 +836,8 @@ test('eventi: URL e ID distinguono gli omonimi con luogo mancante o equivalente,
       ev('agenda-a:quarta'),
       ev('agenda-a:lugano-1', { comune: 'Lugano', url: samePlaceFirstUrl, startTime: '10:00' }),
       ev('agenda-a:lugano-2', { comune: 'Lugano', url: samePlaceSecondUrl, startTime: '11:00' }),
+      ev(undefined, { startTime: '07:00' }),
+      ev(undefined, { startTime: '08:00' }),
       ev('agenda-a:controllo-1', { title: 'Lettura pubblica' }),
       ev('agenda-a:controllo-2', { title: 'Mostra fotografica' }),
     ],
@@ -844,7 +846,8 @@ test('eventi: URL e ID distinguono gli omonimi con luogo mancante o equivalente,
   const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
   assert.equal(block.available, true);
   const items = block.render('it').items;
-  assert.equal(items.length, 8, 'sei identità omonime più i due controlli restano otto eventi');
+  assert.equal(items.length, 10, 'le otto identità omonime e i due controlli restano distinti');
+  assert.equal(block.render('it').keyFacts[0].value, '10', 'record senza URL, luogo o ID restano distinti');
   assert.deepEqual(items.map((item) => item.url).filter(Boolean), [secondUrl, samePlaceFirstUrl, samePlaceSecondUrl, firstUrl]);
 });
 

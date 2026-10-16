@@ -10,6 +10,7 @@ import { BLOCK_THRESHOLDS, DAY_MS, freshnessProblem, inGroup, isObj, isRealDay, 
 import { foldForMatch } from '../canton-section-profile.mjs';
 
 export const EVENTS_BLOCK_ID = 'prossimi-eventi';
+const EVENT_SOURCE_INDEX = Symbol('eventSourceIndex');
 
 function foldedEventPart(value) {
   return foldForMatch(typeof value === 'string' ? value : '').replace(/[^a-z0-9]+/g, ' ').trim();
@@ -29,12 +30,12 @@ function eventIdIdentity(value) {
   return '';
 }
 
-/** URL o luogo identificano la copia; l'ID separa gli omonimi senza luogo. */
+/** URL o luogo identificano la copia; ID e indice separano gli omonimi senza luogo. */
 function eventIdentityKey(e) {
   const url = eventUrlIdentity(e.url);
   const place = foldedEventPart(e.comune) || foldedEventPart(e.venue);
   const id = eventIdIdentity(e.id);
-  const identity = url ? `url:${url}` : place ? `place:${place}` : `id:${id}`;
+  const identity = url ? `url:${url}` : place ? `place:${place}` : id ? `id:${id}` : `record:${e[EVENT_SOURCE_INDEX]}`;
   return JSON.stringify([e.firstUsefulDay, foldedEventPart(e.title), identity]);
 }
 
@@ -90,6 +91,7 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
   const until = isoDayOf(nowMs + th.windowDays * DAY_MS);
   const seen = new Set();
   const upcoming = dataset.events
+    .map((e, sourceIndex) => isObj(e) ? { ...e, [EVENT_SOURCE_INDEX]: sourceIndex } : e)
     .filter((e) => isObj(e) && inGroup(members, e.canton))
     .filter((e) => typeof e.title === 'string' && e.title.trim() && isRealDay(e.startDate))
     // Intersezione con la finestra, non solo l'inizio: un evento di piu' giorni
@@ -107,7 +109,7 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
       || String(a.id ?? '').localeCompare(String(b.id ?? '')))
     // Lo stesso evento arriva da piu' agende: un URL esplicito prevale,
     // altrimenti il luogo conserva la deduplica esistente; senza luogo l'ID
-    // separa gli omonimi dello stesso giorno.
+    // separa gli omonimi. Record senza identificatori restano distinti.
     .filter((e) => {
       const key = eventIdentityKey(e);
       if (seen.has(key)) return false;
