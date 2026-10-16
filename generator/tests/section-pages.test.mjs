@@ -28,6 +28,7 @@ import {
   UPLOAD_ORDER,
   addCantonRssFeedLink,
   aggregatePageDefects,
+  apiInputsChangedInCurrentPush,
   articleManifestPages,
   archiveReleasePages,
   articleReleasePages,
@@ -52,6 +53,7 @@ import {
   obsoleteReleasePages,
   parseArgs,
   publish,
+  publishApiTriggerPaths,
   publishCantonRssFeeds,
   removeCantonRssFeedLinks,
   resolvePublishedReleaseCommit,
@@ -255,6 +257,39 @@ test('publisher: un push solo publisher si lega alla release API gia\' disponibi
     /provenienza del push non verificabile/,
     'un push senza provenienza non ricade sul percorso publish-only',
   );
+});
+
+test('publisher: legge la struttura reale di on.push.paths e non ingoia errori di parsing', () => {
+  const workflow = [
+    'on:',
+    '    push:',
+    '      branches: [main]',
+    '      paths:',
+    "        - 'content/**'",
+    "        - 'scripts/build-api.mjs'",
+    '    schedule:',
+    "      - cron: '17 3 * * 1'",
+  ].join('\n');
+  assert.deepEqual(
+    publishApiTriggerPaths({ workflowText: workflow }),
+    ['content/**', 'scripts/build-api.mjs'],
+  );
+
+  const previousBefore = process.env.PUSH_BEFORE;
+  const previousAfter = process.env.PUSH_AFTER;
+  process.env.PUSH_BEFORE = 'a'.repeat(40);
+  process.env.PUSH_AFTER = 'b'.repeat(40);
+  try {
+    assert.throws(
+      () => apiInputsChangedInCurrentPush({ triggerPathsImpl: () => { throw new Error('push.paths illeggibile'); } }),
+      /push\.paths illeggibile/,
+    );
+  } finally {
+    if (previousBefore === undefined) delete process.env.PUSH_BEFORE;
+    else process.env.PUSH_BEFORE = previousBefore;
+    if (previousAfter === undefined) delete process.env.PUSH_AFTER;
+    else process.env.PUSH_AFTER = previousAfter;
+  }
 });
 
 test('publisher migration manifest usa percorsi canonici per landing e hub', () => {

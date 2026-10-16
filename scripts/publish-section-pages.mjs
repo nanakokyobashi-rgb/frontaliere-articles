@@ -854,11 +854,63 @@ export async function publishedApiReleaseCommit({ fetchImpl = fetch } = {}) {
 /**
  * Legge i path del trigger API dal suo stesso YAML: il fallback a una release
  * gia' pubblicata non puo' mantenere una lista parallela che invecchia.
+ *
+ * Il workflow non viene passato a un parser YAML perche' questo script gira
+ * senza dipendenze npm. Si legge pero' la struttura reale `on.push.paths`,
+ * calcolando l'indentazione dei figli invece di assumere quella di una
+ * particolare versione del file.
  */
-function publishApiTriggerPaths() {
-  const workflow = fs.readFileSync(path.join(ROOT_DIR, PUBLISH_API_WORKFLOW), 'utf8');
-  const block = /^    paths:\s*\n([\s\S]*?)(?=^  (?:schedule|workflow_dispatch):)/mu.exec(workflow)?.[1];
-  const paths = [...(block ?? '').matchAll(/^\s+-\s+['"]([^'"]+)['"]\s*$/gmu)].map(([, value]) => value);
+export function publishApiTriggerPaths({ workflowText = null } = {}) {
+  const workflow = workflowText ?? fs.readFileSync(path.join(ROOT_DIR, PUBLISH_API_WORKFLOW), 'utf8');
+  const lines = workflow.split(/\r?\n/u);
+  const leadingSpaces = (line) => line.match(/^ */u)?.[0].length ?? -1;
+  const isIgnorable = (line) => line.trim() === '' || /^\s*#/u.test(line);
+  const keyAt = (line, indent, key) => new RegExp(`^ {${indent}}${key}:\\s*(?:#.*)?$`, 'u').test(line);
+
+  const onAt = lines.findIndex((line) => keyAt(line, leadingSpaces(line), 'on') && leadingSpaces(line) === 0);
+  if (onAt < 0) throw new Error(`trigger on assente in ${PUBLISH_API_WORKFLOW}`);
+  const onIndent = leadingSpaces(lines[onAt]);
+  const pushAt = lines.findIndex((line, index) => {
+    if (index <= onAt || isIgnorable(line)) return false;
+    const indent = leadingSpaces(line);
+    if (indent >= 0 && indent <= onIndent) return false;
+    return keyAt(line, indent, 'push');
+  });
+  if (pushAt < 0) throw new Error(`trigger push assente in ${PUBLISH_API_WORKFLOW}`);
+  const pushIndent = leadingSpaces(lines[pushAt]);
+
+  let pathsAt = -1;
+  let pathsIndent = -1;
+  let pushChildIndent = -1;
+  for (let index = pushAt + 1; index < lines.length; index++) {
+    const line = lines[index];
+    if (isIgnorable(line)) continue;
+    const indent = leadingSpaces(line);
+    if (indent <= pushIndent) break;
+    pushChildIndent = pushChildIndent < 0 ? indent : pushChildIndent;
+    if (indent === pushChildIndent && keyAt(line, indent, 'paths')) {
+      pathsAt = index;
+      pathsIndent = indent;
+      break;
+    }
+  }
+  if (pathsAt < 0) throw new Error(`trigger push.paths assente in ${PUBLISH_API_WORKFLOW}`);
+
+  const paths = [];
+  let itemIndent = -1;
+  for (let index = pathsAt + 1; index < lines.length; index++) {
+    const line = lines[index];
+    if (isIgnorable(line)) continue;
+    const indent = leadingSpaces(line);
+    if (indent <= pathsIndent) break;
+    itemIndent = itemIndent < 0 ? indent : itemIndent;
+    if (indent !== itemIndent) {
+      throw new Error(`trigger push.paths malformato in ${PUBLISH_API_WORKFLOW}`);
+    }
+    const item = new RegExp(`^ {${itemIndent}}-\\s+(['"])([^'"]+)\\1\\s*(?:#.*)?$`, 'u').exec(line);
+    if (!item) throw new Error(`voce trigger push.paths malformata in ${PUBLISH_API_WORKFLOW}`);
+    paths.push(item[2]);
+  }
   if (paths.length === 0) throw new Error(`trigger paths assenti in ${PUBLISH_API_WORKFLOW}`);
   return paths;
 }
@@ -894,12 +946,13 @@ function currentPushRange() {
 }
 
 /** True se il push corrente contiene un input che deve rigenerare publish-api. */
-export function apiInputsChangedInCurrentPush({ execFileSyncImpl = execFileSync } = {}) {
+export function apiInputsChangedInCurrentPush({ execFileSyncImpl = execFileSync, triggerPathsImpl = publishApiTriggerPaths } = {}) {
   const range = currentPushRange();
+  const triggerPaths = triggerPathsImpl();
   try {
     const changed = execFileSyncImpl(
       'git',
-      ['-C', ROOT_DIR, 'diff', '--name-only', range, '--', ...publishApiTriggerPaths()],
+      ['-C', ROOT_DIR, 'diff', '--name-only', range, '--', ...triggerPaths],
       { encoding: 'utf8' },
     );
     return changed.trim().length > 0;
