@@ -32,34 +32,14 @@
       "lastFailureAt": "2026-10-16T05:26:34.268Z"
     },
     {
-      "articleId": "arresto-cittadino-russo-como",
-      "title": "Como, arrestato cittadino russo per ingresso abusivo",
-      "fallbackImage": "/images/blog/devastazione-vagone-como-fermo.webp",
-      "reason": "All image providers failed for article-arresto-cittadino-russo-como: openai-codex (vision gate rejected image: Generic synthetic editorial scene with no text, logo, or visible face, but a recognizable foreground person is present.); gemini ",
-      "status": "failed",
-      "failureCount": 1,
-      "requestedAt": "2026-10-15T22:59:15.513Z",
-      "lastFailureAt": "2026-10-16T00:06:46.437Z"
-    },
-    {
       "articleId": "estradizione-pakistan-como",
       "title": "Accusato di omicidio, arrestato a Como per l’estradizione",
       "fallbackImage": "/images/blog/estradizione-arresto-como.webp",
-      "reason": "All image providers failed for article-estradizione-pakistan-como: openai-codex (vision gate rejected image: Generic synthetic train-station travel scene with no visible text, logos, or faces; however, a recognizable foreground traveler is ",
+      "reason": "All image providers failed for article-estradizione-pakistan-como: openai-codex (vision gate rejected image: Generic synthetic editorial train-station scene with three clearly visible foreground people from behind; no readable text, logos, ",
       "status": "failed",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-15T23:12:57.417Z",
-      "lastFailureAt": "2026-10-16T00:07:40.603Z"
-    },
-    {
-      "articleId": "mercatini-usato-svizzera",
-      "title": "Mercatini usato: garanzia, marciapiede e falsi oltreconfine",
-      "fallbackImage": "/images/blog/autonomi-frontalieri-svizzera-come-aprire.webp",
-      "reason": "All image providers failed for article-mercatini-usato-svizzera: openai-codex (vision gate rejected image: Generic synthetic secondhand-goods scene relevant to Switzerland; a faint watermark/logo is visible in the upper-right corner.); gemi",
-      "status": "failed",
-      "failureCount": 1,
-      "requestedAt": "2026-10-15T23:56:58.687Z",
-      "lastFailureAt": "2026-10-16T00:09:02.475Z"
+      "lastFailureAt": "2026-10-16T10:17:58.289Z"
     },
     {
       "articleId": "varese-piazzale-anastasi-intitolazione",
@@ -82,24 +62,24 @@
       "lastFailureAt": "2026-10-16T05:31:28.963Z"
     },
     {
-      "articleId": "varese-macello-belforte-visite-2026",
-      "title": "Varese: ex Macello Belforte apre per bonifica e mostra guidata",
-      "fallbackImage": "/images/blog/article-lavori-autolaghi-ottobre-2026.webp",
-      "reason": "All image providers failed for article-varese-macello-belforte-visite-2026: openai-codex (vision gate rejected image: Synthetic generic urban-park illustration with no readable tex",
+      "articleId": "concerto-gallarate-uto-ughi-2026",
+      "title": "Gallarate: uto ughi torna al teatro condominio con vivaldi e bach",
+      "fallbackImage": "/images/blog/article-cantello-teatro-dialettale-ottobre-2026.webp",
+      "reason": "All image providers failed for article-concerto-gallarate-uto-ughi-2026: openai-codex (vision gate rejected image: Synthetic photorealistic theater scene with no readable text, log",
       "status": "queued",
       "failureCount": 0,
-      "requestedAt": "2026-10-16T06:05:12.170Z",
-      "lastFailureAt": "2026-10-16T06:05:12.170Z"
+      "requestedAt": "2026-10-16T11:26:51.536Z",
+      "lastFailureAt": "2026-10-16T11:26:51.536Z"
     },
     {
-      "articleId": "futura-volley-roma-vittoria",
-      "title": "Futura volley busto arsizio vince 3-1 contro roma",
-      "fallbackImage": "/images/blog/article-erreci-busto-marsala-vittoria.webp",
-      "reason": "All image providers failed for article-futura-volley-roma-vittoria: openai-codex (vision gate rejected image: Synthetic photorealistic volleyball scene with no readable text or cle",
+      "articleId": "mostre-maga-gallarate-2026",
+      "title": "Gallarate: tre nuove mostre al Maga da Jago a Leopardi",
+      "fallbackImage": "/images/blog/article-teatro-intred-varese-stagione-2026.webp",
+      "reason": "All image providers failed for article-mostre-maga-gallarate-2026: openai-codex (vision gate rejected image: Generic synthetic mountain landscape with no text, logos, or people, bu",
       "status": "queued",
       "failureCount": 0,
-      "requestedAt": "2026-10-16T06:52:10.287Z",
-      "lastFailureAt": "2026-10-16T06:52:10.287Z"
+      "requestedAt": "2026-10-16T11:58:37.222Z",
+      "lastFailureAt": "2026-10-16T11:58:37.222Z"
     }
   ]
 }

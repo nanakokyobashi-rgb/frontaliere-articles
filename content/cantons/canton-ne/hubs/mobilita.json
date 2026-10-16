@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T03:02:31.746Z",
-  "contentHash": "a1acabd6d31a37fe7b45ed6b4a4efee0c6967029bff5ee5d8a5a10d0068e549b",
+  "updatedAt": "2026-10-16T10:23:56.350Z",
+  "contentHash": "d49087b794e8563f5362352d5f31a3f952bde309fa1420228d4a4fccaf24cea7",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T12:13:19.434Z",
+      "updatedAt": "2026-10-15T23:56:39.924Z",
       "keyFacts": 2
     },
     {
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "11",
+          "value": "10",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         },
         {
@@ -129,7 +129,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -188,7 +188,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "en": {
       "canton": "NE",
@@ -203,7 +203,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "11",
+          "value": "10",
           "note": "reports as of 15 October 2026"
         },
         {
@@ -295,7 +295,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -354,7 +354,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "de": {
       "canton": "NE",
@@ -369,7 +369,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "11",
+          "value": "10",
           "note": "Meldungen vom 15. Oktober 2026"
         },
         {
@@ -461,7 +461,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -520,7 +520,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "fr": {
       "canton": "NE",
@@ -535,7 +535,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "11",
+          "value": "10",
           "note": "signalements au 15 octobre 2026"
         },
         {
@@ -627,7 +627,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-15T23:56:39.924Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -686,7 +686,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T03:02:31.746Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     }
   }
 }

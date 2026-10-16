@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/cronaca/1949791/ticino-calamita-per-medici-e-infermieri-italiani-denti-lancia-l-allarme-serve-un-limite": {
-    "articleId": "allarme-medici-frontalieri-ticino",
-    "ts": "2026-09-13T08:11:23.283Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/settimana-di-iniziative-contro-lo-spreco-alimentare/92045834": {
     "articleId": "settimana-contro-lo-spreco-alimentare-svizzera",
     "ts": "2026-09-13T08:29:13.373Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/lupo%3a-abbattimenti-facilitati%3b-no-da-ambientalisti%2c-s%c3%ac-da-contadini/92225907": {
     "articleId": "lupo-abbattimenti-facilitati",
     "ts": "2026-10-16T08:01:09.707Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/benzina-e-diesel%2c-i-prezzi-tornano-a-salire%3a-%2b5-centesimi-al-litro/92227260": {
+    "articleId": "carburanti-svizzera-rincaro-settimanale",
+    "ts": "2026-10-16T10:57:56.829Z",
     "keyForm": 2
   }
 }

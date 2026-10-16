@@ -8398,7 +8398,7 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.attacco-software-pkzh.imageAlt': 'Bâtiment administratif suisse en ville, avec une allusion discrète à la cybersécurité',
     'blog.article.mercatini-usato-svizzera.title': 'Marchés aux puces : garantie, trottoir et contrefaçons transfrontalières',
     'blog.article.mercatini-usato-svizzera.excerpt': 'Articles d\'occasion : garantie d\'un an, sauf exclusion explicite « Vendu en l\'état » exclut la garantie Objets gratuits sur le domaine public : souvent interdits Contrefaçons',
-    'blog.article.mercatini-usato-svizzera.imageAlt': 'Étale de marché aux puces suisse avec objets d\'occasion et vendeur délivrant un reçu',
+    'blog.article.mercatini-usato-svizzera.imageAlt': 'Illustration générée pour cet article',
     'blog.article.revoca-bonus-dirigenti-cs.title': 'Anciens dirigeants de Credit Suisse, l\'annulation des bonus confirmée',
     'blog.article.revoca-bonus-dirigenti-cs.excerpt': 'Le TF confirme la révocation des bonus des anciens dirigeants de CS Le TAF avait admis les recours en mars 2025 Réductions des bonus : 100%, 50% et 25% pour trois niveaux Le 19',
     'blog.article.revoca-bonus-dirigenti-cs.imageAlt': 'Siège de Credit Suisse en Suisse',
@@ -8420,6 +8420,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.lupo-abbattimenti-facilitati.title': 'Loup : abattages facilités, la consultation se termine aujourd’hui',
     'blog.article.lupo-abbattimenti-facilitati.excerpt': 'Le Conseil fédéral propose de faciliter l’abattage des loups.',
     'blog.article.lupo-abbattimenti-facilitati.imageAlt': 'Paysage montagneux suisse avec un pâturage serein, avec les sommets du Monte Generoso en arrière-plan.',
+    'blog.article.carburanti-svizzera-rincaro-settimanale.title': 'Essence et diesel en Suisse : +5 centimes par litre',
+    'blog.article.carburanti-svizzera-rincaro-settimanale.excerpt': 'Essence 95 à 2,16 francs le litre Essence 98 à 2,27 francs le litre Diesel à 2,45 francs, à 1 centime du maximum annuel Hausse hebdomadaire → 5 centimes',
+    'blog.article.carburanti-svizzera-rincaro-settimanale.imageAlt': 'Pompe à carburant dans une station-service suisse',
 };
 
 export default blogMetaChFr;

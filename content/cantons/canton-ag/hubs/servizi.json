@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T01:56:54.479Z",
-  "contentHash": "193b98e3fd0a618b2400e1e3e7158c3d934c44db9b328ef9a25f07294b6cb446",
+  "updatedAt": "2026-10-16T10:23:56.350Z",
+  "contentHash": "0cf6a1268f06fa2601b3f300e47d8bb38b5bd705427a6ffbf8786df3c7cc20c4",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-15T11:34:01.149Z",
+      "updatedAt": "2026-10-16T04:30:54.466Z",
       "keyFacts": 1
     },
     {
@@ -39,7 +39,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "18",
-          "note": "offerta mediana 300 CHF"
+          "note": "offerta mediana 1070 CHF"
         }
       ],
       "dataBlocks": [
@@ -64,30 +64,30 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
+              "label": "AG7493",
+              "value": "4200 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-28T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58790"
+            },
+            {
               "label": "AG10038",
-              "value": "2720 CHF",
+              "value": "2840 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58794"
             },
             {
               "label": "AG9139",
-              "value": "2400 CHF",
+              "value": "2600 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58793"
-            },
-            {
-              "label": "AG7493",
-              "value": "2000 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-28T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58790"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -192,7 +192,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "en": {
       "canton": "AG",
@@ -209,7 +209,7 @@
         {
           "label": "Plate auctions running",
           "value": "18",
-          "note": "typical bid 300 CHF"
+          "note": "typical bid 1,070 CHF"
         }
       ],
       "dataBlocks": [
@@ -234,30 +234,30 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
+              "label": "AG7493",
+              "value": "4,200 CHF",
+              "detail": "current bid",
+              "date": "2026-10-28T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58790"
+            },
+            {
               "label": "AG10038",
-              "value": "2,720 CHF",
+              "value": "2,840 CHF",
               "detail": "current bid",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58794"
             },
             {
               "label": "AG9139",
-              "value": "2,400 CHF",
+              "value": "2,600 CHF",
               "detail": "current bid",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58793"
-            },
-            {
-              "label": "AG7493",
-              "value": "2,000 CHF",
-              "detail": "current bid",
-              "date": "2026-10-28T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58790"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -358,7 +358,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "de": {
       "canton": "AG",
@@ -375,7 +375,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "18",
-          "note": "mittleres Gebot 300 CHF"
+          "note": "mittleres Gebot 1’070 CHF"
         }
       ],
       "dataBlocks": [
@@ -400,30 +400,30 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
+              "label": "AG7493",
+              "value": "4’200 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-28T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58790"
+            },
+            {
               "label": "AG10038",
-              "value": "2’720 CHF",
+              "value": "2’840 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58794"
             },
             {
               "label": "AG9139",
-              "value": "2’400 CHF",
+              "value": "2’600 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58793"
-            },
-            {
-              "label": "AG7493",
-              "value": "2’000 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-28T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58790"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -524,7 +524,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "fr": {
       "canton": "AG",
@@ -541,7 +541,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "18",
-          "note": "offre centrale 300 CHF"
+          "note": "offre centrale 1 070 CHF"
         }
       ],
       "dataBlocks": [
@@ -566,30 +566,30 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
+              "label": "AG7493",
+              "value": "4 200 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-28T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58790"
+            },
+            {
               "label": "AG10038",
-              "value": "2 720 CHF",
+              "value": "2 840 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58794"
             },
             {
               "label": "AG9139",
-              "value": "2 400 CHF",
+              "value": "2 600 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58793"
-            },
-            {
-              "label": "AG7493",
-              "value": "2 000 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-28T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58790"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -686,7 +686,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     }
   }
 }

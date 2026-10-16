@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T01:56:54.479Z",
-  "contentHash": "9b77c33b6e891ead62e03d37e6aa2fe9e801e2515c5470c106b393895f19e7ce",
+  "updatedAt": "2026-10-16T10:23:56.350Z",
+  "contentHash": "57dd41f93a74be809d405544041e12b7d25eb0053baca94f088bacf9ca000cd7",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -19,7 +19,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-15T11:34:01.149Z",
+      "updatedAt": "2026-10-16T04:30:54.466Z",
       "keyFacts": 1
     },
     {
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "31",
-          "note": "offerta mediana 260 CHF"
+          "note": "offerta mediana 330 CHF"
         }
       ],
       "dataBlocks": [
@@ -127,14 +127,14 @@
             },
             {
               "label": "ZH9381",
-              "value": "5200 CHF",
+              "value": "5600 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43625"
             },
             {
               "label": "ZH66679",
-              "value": "720 CHF",
+              "value": "2020 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43642"
@@ -142,7 +142,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -259,7 +259,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "en": {
       "canton": "ZH",
@@ -276,7 +276,7 @@
         {
           "label": "Plate auctions running",
           "value": "31",
-          "note": "typical bid 260 CHF"
+          "note": "typical bid 330 CHF"
         }
       ],
       "dataBlocks": [
@@ -359,14 +359,14 @@
             },
             {
               "label": "ZH9381",
-              "value": "5,200 CHF",
+              "value": "5,600 CHF",
               "detail": "current bid",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43625"
             },
             {
               "label": "ZH66679",
-              "value": "720 CHF",
+              "value": "2,020 CHF",
               "detail": "current bid",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43642"
@@ -374,7 +374,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "de": {
       "canton": "ZH",
@@ -504,7 +504,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "31",
-          "note": "mittleres Gebot 260 CHF"
+          "note": "mittleres Gebot 330 CHF"
         }
       ],
       "dataBlocks": [
@@ -587,14 +587,14 @@
             },
             {
               "label": "ZH9381",
-              "value": "5’200 CHF",
+              "value": "5’600 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43625"
             },
             {
               "label": "ZH66679",
-              "value": "720 CHF",
+              "value": "2’020 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43642"
@@ -602,7 +602,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -715,7 +715,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "fr": {
       "canton": "ZH",
@@ -732,7 +732,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "31",
-          "note": "offre centrale 260 CHF"
+          "note": "offre centrale 330 CHF"
         }
       ],
       "dataBlocks": [
@@ -815,14 +815,14 @@
             },
             {
               "label": "ZH9381",
-              "value": "5 200 CHF",
+              "value": "5 600 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43625"
             },
             {
               "label": "ZH66679",
-              "value": "720 CHF",
+              "value": "2 020 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43642"
@@ -830,7 +830,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -939,7 +939,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     }
   }
 }

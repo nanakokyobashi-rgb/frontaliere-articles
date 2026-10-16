@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T01:56:54.479Z",
-  "contentHash": "003e8d0977aa2e2f395d30b2fe0204f557de6d8a264d8c84fa52db7895ab96b3",
+  "updatedAt": "2026-10-16T10:23:56.350Z",
+  "contentHash": "52b7b2e4b46a205e1401da4a2b6379e149495230994c88f52952492055af38c8",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-15T11:34:01.149Z",
+      "updatedAt": "2026-10-16T04:30:54.466Z",
       "keyFacts": 1
     },
     {
@@ -39,7 +39,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "14",
-          "note": "offerta mediana 187,50 CHF"
+          "note": "offerta mediana 212,50 CHF"
         }
       ],
       "dataBlocks": [
@@ -92,7 +92,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -209,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "en": {
       "canton": "FR",
@@ -226,7 +226,7 @@
         {
           "label": "Plate auctions running",
           "value": "14",
-          "note": "typical bid 187.50 CHF"
+          "note": "typical bid 212.50 CHF"
         }
       ],
       "dataBlocks": [
@@ -279,7 +279,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -392,7 +392,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "de": {
       "canton": "FR",
@@ -409,7 +409,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "14",
-          "note": "mittleres Gebot 187.50 CHF"
+          "note": "mittleres Gebot 212.50 CHF"
         }
       ],
       "dataBlocks": [
@@ -462,7 +462,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -575,7 +575,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "fr": {
       "canton": "FR",
@@ -592,7 +592,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "14",
-          "note": "offre centrale 187,50 CHF"
+          "note": "offre centrale 212,50 CHF"
         }
       ],
       "dataBlocks": [
@@ -645,7 +645,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -754,7 +754,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     }
   }
 }

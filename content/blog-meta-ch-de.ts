@@ -8398,7 +8398,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.attacco-software-pkzh.imageAlt': 'Schweizer Verwaltungsgebäude in der Stadt mit einem dezenten Hinweis auf Cybersicherheit',
     'blog.article.mercatini-usato-svizzera.title': 'Gebrauchtwarenmärkte: Garantie, Gehweg und Fälschungen über die Grenze hinweg',
     'blog.article.mercatini-usato-svizzera.excerpt': 'Gebrauchtwaren: ein Jahr Garantie, sofern nicht ausdrücklich ausgeschlossen «Verkauft wie gesehen» schließt die Garantie aus Kostenlose Gegenstände auf öffentlichem Grund: oft verboten Fälschungen',
-    'blog.article.mercatini-usato-svizzera.imageAlt': 'Schweizer Flohmarktstand mit Second-Hand-Waren und Verkäufer, der eine Quittung ausstellt',
+    'blog.article.mercatini-usato-svizzera.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.revoca-bonus-dirigenti-cs.title': 'Ehemalige Führungskräfte von Credit Suisse: Streichung der Boni bestätigt',
     'blog.article.revoca-bonus-dirigenti-cs.excerpt': 'Das Bundesgericht bestätigt die Streichung der Boni für ehemalige CS-Führungskräfte Das Bundesverwaltungsgericht hatte den Beschwerden im März 2025 stattgegeben Kürzungen der Boni: 100%, 50% und 25% für drei Ebenen Der 19.',
     'blog.article.revoca-bonus-dirigenti-cs.imageAlt': 'Credit Suisse Hauptsitz in der Schweiz',
@@ -8420,6 +8420,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.lupo-abbattimenti-facilitati.title': 'Wolf: Erleichterte Abschüsse, Vernehmlassung endet heute',
     'blog.article.lupo-abbattimenti-facilitati.excerpt': 'Der Bundesrat schlägt erleichterte Wolfsabschüsse vor.',
     'blog.article.lupo-abbattimenti-facilitati.imageAlt': 'Schweizer Berglandschaft mit einer ruhigen Weide, im Hintergrund die Gipfel des Monte Generoso.',
+    'blog.article.carburanti-svizzera-rincaro-settimanale.title': 'Benzin und Diesel in der Schweiz: +5 Rappen pro Liter',
+    'blog.article.carburanti-svizzera-rincaro-settimanale.excerpt': 'Benzin 95 bei 2,16 Franken pro Liter Benzin 98 bei 2,27 Franken pro Liter Diesel bei 2,45 Franken, 1 Rappen vom Jahresmaximum entfernt Wöchentlicher Anstieg → 5 Rappen',
+    'blog.article.carburanti-svizzera-rincaro-settimanale.imageAlt': 'Zapfsäule an einer Schweizer Tankstelle',
 };
 
 export default blogMetaChDe;

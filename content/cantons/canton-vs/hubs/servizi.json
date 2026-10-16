@@ -4,12 +4,17 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T01:56:54.479Z",
-  "contentHash": "b25d91cb3ffb329833f5b9318e53c94c77a54cec2f748c310215a304a21e7f95",
+  "updatedAt": "2026-10-16T10:23:56.350Z",
+  "contentHash": "d6843c786a3b49db49c23c671dba833c8c3d291c8878858d5963d4132e6bbc7a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-11T10:51:47.772Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-16T04:30:54.466Z",
       "keyFacts": 1
     },
     {
@@ -30,6 +35,11 @@
           "value": "582,80 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "5",
+          "note": "offerta mediana 100 CHF"
         }
       ],
       "dataBlocks": [
@@ -52,6 +62,37 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "VS406",
+              "value": "3100 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947"
+            },
+            {
+              "label": "VS89198",
+              "value": "350 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948"
+            },
+            {
+              "label": "VS482284",
+              "value": "100 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=949"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -168,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "en": {
       "canton": "VS",
@@ -181,6 +222,11 @@
           "value": "582.80 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "5",
+          "note": "typical bid 100 CHF"
         }
       ],
       "dataBlocks": [
@@ -203,6 +249,37 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "VS406",
+              "value": "3,100 CHF",
+              "detail": "current bid",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947"
+            },
+            {
+              "label": "VS89198",
+              "value": "350 CHF",
+              "detail": "current bid",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948"
+            },
+            {
+              "label": "VS482284",
+              "value": "100 CHF",
+              "detail": "current bid",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=949"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -315,7 +392,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "de": {
       "canton": "VS",
@@ -328,6 +405,11 @@
           "value": "582.80 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "5",
+          "note": "mittleres Gebot 100 CHF"
         }
       ],
       "dataBlocks": [
@@ -350,6 +432,37 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "VS406",
+              "value": "3’100 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947"
+            },
+            {
+              "label": "VS89198",
+              "value": "350 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948"
+            },
+            {
+              "label": "VS482284",
+              "value": "100 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=949"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -462,7 +575,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     },
     "fr": {
       "canton": "VS",
@@ -475,6 +588,11 @@
           "value": "582,80 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "5",
+          "note": "offre centrale 100 CHF"
         }
       ],
       "dataBlocks": [
@@ -497,6 +615,37 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "VS406",
+              "value": "3 100 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947"
+            },
+            {
+              "label": "VS89198",
+              "value": "350 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948"
+            },
+            {
+              "label": "VS482284",
+              "value": "100 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-16T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=949"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
+          "updatedAt": "2026-10-16T04:30:54.466Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -605,7 +754,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T10:23:56.350Z"
     }
   }
 }
