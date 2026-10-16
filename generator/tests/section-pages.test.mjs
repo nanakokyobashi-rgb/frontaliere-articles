@@ -34,6 +34,7 @@ import {
   articleReleaseSnapshot,
   assertPublishableSection,
   cantonRssFeedEntries,
+  cantonRssFeedsForPublish,
   cantonRssFeedUrlForLocale,
   createRenderRoot,
   ensureRouteOwnerMeta,
@@ -51,6 +52,7 @@ import {
   parseArgs,
   publish,
   publishCantonRssFeeds,
+  resolvePublishedReleaseCommit,
   publishedReleaseReady,
   publishedStatus,
   rendererPageEntry,
@@ -157,6 +159,25 @@ test('publisher --publish costruisce il manifest solo dopo una publish riuscita'
     console.error = realConsoleError;
     rmSync(fixtureRoot, { recursive: true, force: true });
   }
+});
+
+test('publisher: un push solo publisher si lega alla release API gia\' disponibile', async () => {
+  const publisherCommit = 'a'.repeat(40);
+  const apiCommit = 'b'.repeat(40);
+  assert.equal(
+    await resolvePublishedReleaseCommit(publisherCommit, {
+      apiReleaseCommitImpl: async () => apiCommit,
+      apiInputsChangedImpl: () => false,
+    }),
+    apiCommit,
+  );
+  assert.equal(
+    await resolvePublishedReleaseCommit(publisherCommit, {
+      apiReleaseCommitImpl: async () => apiCommit,
+      apiInputsChangedImpl: () => true,
+    }),
+    publisherCommit,
+  );
 });
 
 test('publisher migration manifest usa percorsi canonici per landing e hub', () => {
@@ -959,6 +980,19 @@ test('publisher: le landing live annunciano il feed edge della propria locale', 
   assert.throws(() => addCantonRssFeedLink(html, 'https://example.test/feed.xml'), /fuori dalla superficie edge/);
 });
 
+test('publisher: i feed RSS seguono il verdetto degli aggregati', () => {
+  assert.deepEqual(cantonRssFeedsForPublish('canton-ti', {
+    publishing: true,
+    effectiveStatus: 'live',
+    aggregatePagesAllowed: false,
+  }), []);
+  assert.equal(cantonRssFeedsForPublish('canton-ti', {
+    publishing: true,
+    effectiveStatus: 'live',
+    aggregatePagesAllowed: true,
+  }).length, 5);
+});
+
 test('publisher: copia e verifica via HTTP tutti i feed della release prima di caricare pagine', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-rss-publish-'));
   const releaseCommit = 'a'.repeat(40);
@@ -995,9 +1029,16 @@ test('publisher: copia e verifica via HTTP tutti i feed della release prima di c
         };
       },
       fetchImpl: async (url) => {
-        const name = url.slice(`${API_BASE}/`.length);
+        const parsed = new URL(url);
+        assert.ok(parsed.searchParams.has('_sppr'), 'il feed API deve bypassare la cache');
+        const apiPath = new URL(API_BASE).pathname;
+        const name = parsed.pathname.slice(`${apiPath}/`.length);
         events.push(`fetch:${name}`);
         return { ok: true, status: 200, body: null, text: async () => sourceXml[name] };
+      },
+      snapshotImpl: async (url) => {
+        events.push(`snapshot:${new URL(url).pathname.split('/').at(-1)}`);
+        return { ok: false, status: 'HTTP 404' };
       },
       runImpl: (_command, args) => {
         if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
@@ -1029,9 +1070,81 @@ test('publisher: copia e verifica via HTTP tutti i feed della release prima di c
     assert.equal(result.verified, 5);
     assert.equal(result.feeds.length, 5);
     assert.ok(events.indexOf('release-ready-2') < events.findIndex((event) => event.startsWith('fetch:')));
+    assert.ok(Math.max(...events.map((event, index) => event.startsWith('snapshot:') ? index : -1)) < events.findIndex((event) => event.startsWith('upload:')));
     assert.ok(Math.max(...events.map((event, index) => event.startsWith('fetch:') ? index : -1)) < events.findIndex((event) => event.startsWith('upload:')));
     assert.ok(Math.max(...events.map((event, index) => event.startsWith('upload:') ? index : -1)) < events.indexOf('purge'));
     assert.ok(events.indexOf('purge') < events.findIndex((event) => event.startsWith('verify:')));
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('publisher: un upload RSS parziale ripristina l\'intero set precedente', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-rss-rollback-'));
+  const releaseCommit = 'd'.repeat(40);
+  const feeds = cantonRssFeedEntries('canton-ti');
+  const sourceXml = Object.fromEntries(feeds.map(({ name }) => {
+    const selfName = name === 'rss-canton-ti-it.xml' ? 'rss-canton-ti.xml' : name;
+    return [name,
+      `<?xml version="1.0"?><rss version="2.0"><channel>` +
+      `<atom:link href="${APEX}/${selfName}" rel="self" type="application/rss+xml"/>` +
+      '<item><title>Nuova release</title></item></channel></rss>\n'];
+  }));
+  const previousXml = Object.fromEntries(feeds.map(({ name }) => [name, `<rss><channel><item>${name} precedente</item></channel></rss>\n`]));
+  const events = [];
+  let sourceUploads = 0;
+  try {
+    const result = await publishCantonRssFeeds({
+      section: 'canton-ti',
+      releaseCommit,
+      effectiveStatus: 'live',
+      distDir: fixtureRoot,
+      releaseReadyImpl: async (commit) => ({
+        ok: true,
+        commit,
+        files: Object.fromEntries(feeds.map(({ name }) => [name, Buffer.byteLength(sourceXml[name], 'utf8')])),
+      }),
+      fetchImpl: async (url) => {
+        const parsed = new URL(url);
+        const name = parsed.pathname.split('/').at(-1);
+        return { ok: true, status: 200, body: null, text: async () => sourceXml[name] };
+      },
+      snapshotImpl: async (url) => {
+        const name = new URL(url).pathname.split('/').at(-1);
+        return { ok: true, status: 200, body: previousXml[name] };
+      },
+      runImpl: (_command, args) => {
+        if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+          const feed = feeds.find(({ key }) => key === args[2]);
+          if (args[1].includes('.canton-rss-rollback-')) {
+            events.push(`restore:${feed.name}`);
+            return { code: 0, stdout: '✅ uploaded' };
+          }
+          sourceUploads++;
+          events.push(`upload:${feed.name}`);
+          return sourceUploads === 1 ? { code: 0, stdout: '' } : { code: 0, stdout: '✅ uploaded' };
+        }
+        if (args.includes('scripts/cf-purge-cache.mjs')) {
+          events.push('rollback-purge');
+          return { code: 0, stdout: '' };
+        }
+        throw new Error(`comando inatteso: ${args.join(' ')}`);
+      },
+      probeImpl: async (url, { want }) => {
+        const name = new URL(url).pathname.split('/').at(-1);
+        events.push(`rollback-verify:${name}`);
+        return { ok: want(previousXml[name]), status: 'HTTP 200', body: previousXml[name] };
+      },
+      releaseReadyMaxWaitMs: 0,
+    });
+    assert.equal(result.failures, 1);
+    assert.equal(result.uploaded, 0, 'un set parziale non viene considerato pubblicato');
+    assert.equal(result.rollbackFailures, 0);
+    assert.deepEqual(
+      events.filter((event) => event.startsWith('restore:')).sort(),
+      feeds.map(({ name }) => `restore:${name}`).sort(),
+    );
+    assert.ok(events.indexOf('rollback-purge') > Math.max(...events.map((event, index) => event.startsWith('restore:') ? index : -1)));
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }

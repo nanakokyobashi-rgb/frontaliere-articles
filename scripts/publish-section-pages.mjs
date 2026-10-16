@@ -100,6 +100,7 @@ export const RELEASE_READY_RETRY_DELAY_MS = 10_000;
 export const PAGE_MANIFEST_CACHE_CONTROL = 'public,max-age=60';
 /** Ordine di upload: la landing per ultima, perche' linka tutto il resto. */
 export const UPLOAD_ORDER = Object.freeze(['article', 'archive', 'hub', 'landing']);
+const PUBLISH_API_WORKFLOW = '.github/workflows/publish-api.yml';
 
 export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activeCorpusCoreMap() } = {}) {
   const out = { ids: [], bootstrap: false, publish: false, dryRun: false };
@@ -214,6 +215,13 @@ export function cantonRssFeedEntries(section) {
     const key = `${CANTON_RSS_PREFIX}/${name}`;
     return { name, key, url: `${CDN_BASE}/${key}` };
   });
+}
+
+/** I feed edge si pubblicano solo insieme alla release degli aggregati verificati. */
+export function cantonRssFeedsForPublish(section, { publishing, effectiveStatus, aggregatePagesAllowed } = {}) {
+  return publishing && effectiveStatus === 'live' && aggregatePagesAllowed === true
+    ? cantonRssFeedEntries(section)
+    : [];
 }
 
 /** Il feed principale è l'alias canonico italiano; le altre landing usano il feed localizzato. */
@@ -770,9 +778,14 @@ export async function publishedStatus(section) {
   }
 }
 
+function cacheBustedUrl(url, parameter, suffix = '') {
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}${parameter}=${Date.now()}${suffix ? `.${suffix}` : ''}`;
+}
+
 async function fetchJsonAt(url, fetchImpl) {
   try {
-    const res = await fetchWithRefTimeout(`${url}${url.includes('?') ? '&' : '?'}_sppr=${Date.now()}`, {
+    const res = await fetchWithRefTimeout(cacheBustedUrl(url, '_sppr'), {
       headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
     }, 20000, fetchImpl);
     if (!res.ok) {
@@ -785,13 +798,87 @@ async function fetchJsonAt(url, fetchImpl) {
   }
 }
 
+/** Il commit della superficie API gia' pubblicata, non quello del publisher locale. */
+export async function publishedApiReleaseCommit({ fetchImpl = fetch } = {}) {
+  const manifest = await fetchJsonAt(`${API_BASE}/manifest.json`, fetchImpl);
+  const commit = manifest?.commit;
+  return typeof commit === 'string' && commit.trim() ? commit.trim() : null;
+}
+
+/**
+ * Legge i path del trigger API dal suo stesso YAML: il fallback a una release
+ * gia' pubblicata non puo' mantenere una lista parallela che invecchia.
+ */
+function publishApiTriggerPaths() {
+  const workflow = fs.readFileSync(path.join(ROOT_DIR, PUBLISH_API_WORKFLOW), 'utf8');
+  const block = /^    paths:\s*\n([\s\S]*?)(?=^  (?:schedule|workflow_dispatch):)/mu.exec(workflow)?.[1];
+  const paths = [...(block ?? '').matchAll(/^\s+-\s+['"]([^'"]+)['"]\s*$/gmu)].map(([, value]) => value);
+  if (paths.length === 0) throw new Error(`trigger paths assenti in ${PUBLISH_API_WORKFLOW}`);
+  return paths;
+}
+
+function currentPushRange() {
+  const eventPath = process.env.GITHUB_EVENT_PATH;
+  if (eventPath && fs.existsSync(eventPath)) {
+    try {
+      const event = JSON.parse(fs.readFileSync(eventPath, 'utf8'));
+      if (typeof event.before === 'string' && typeof event.after === 'string' && !/^0+$/u.test(event.before)) {
+        return `${event.before}..${event.after}`;
+      }
+    } catch {
+      // Fail closed in apiInputsChangedInCurrentPush().
+    }
+  }
+  return 'HEAD^..HEAD';
+}
+
+/** True se il push corrente contiene un input che deve rigenerare publish-api. */
+export function apiInputsChangedInCurrentPush({ execFileSyncImpl = execFileSync } = {}) {
+  try {
+    const changed = execFileSyncImpl(
+      'git',
+      ['-C', ROOT_DIR, 'diff', '--name-only', currentPushRange(), '--', ...publishApiTriggerPaths()],
+      { encoding: 'utf8' },
+    );
+    return changed.trim().length > 0;
+  } catch {
+    return true;
+  }
+}
+
+/**
+ * Un push che cambia solo il publisher non scatena publish-api: in quel caso
+ * si lega alla release API gia' disponibile. Se il push contiene input API,
+ * conserva HEAD e aspetta il deploy concorrente come prima.
+ */
+export async function resolvePublishedReleaseCommit(
+  publisherCommit,
+  {
+    apiReleaseCommitImpl = publishedApiReleaseCommit,
+    apiInputsChangedImpl = apiInputsChangedInCurrentPush,
+    fetchImpl = fetch,
+  } = {},
+) {
+  if (!publisherCommit) return publisherCommit;
+  const apiCommit = await apiReleaseCommitImpl({ fetchImpl });
+  if (typeof apiCommit !== 'string' || !apiCommit.trim() || apiCommit.trim() === publisherCommit) return publisherCommit;
+  let apiInputsChanged = true;
+  try {
+    apiInputsChanged = await apiInputsChangedImpl();
+  } catch {
+    // A classification failure must retain the old fail-closed HEAD behavior.
+  }
+  return apiInputsChanged ? publisherCommit : apiCommit.trim();
+}
+
 /**
  * La delete delle URL ritirate e' sicura solo dopo il flip della stessa
- * release che ha aggiornato sitemap e slug. `publish-api` e fast-publish
- * partono dallo stesso push, quindi la verifica locale dei nuovi HTML non
- * basta: attendiamo manifest, catalogo, slugs e puntatore edge sul commit
- * corrente. Se uno e' ancora vecchio, il run fallisce senza cancellare; il
- * retry del workflow ripete la prova dopo il deploy API.
+ * release che ha aggiornato sitemap e slug. Quando il push contiene input API,
+ * `publish-api` e fast-publish partono dallo stesso push; quando cambia solo
+ * questo publisher, il chiamante seleziona la release API gia' disponibile.
+ * In entrambi i casi attendiamo manifest, catalogo, slugs e puntatore edge sul
+ * commit selezionato. Se uno e' ancora vecchio, il run fallisce senza
+ * cancellare; il retry del workflow ripete la prova dopo il deploy API.
  */
 export async function publishedReleaseReady(expectedCommit, { fetchImpl = fetch } = {}) {
   if (!expectedCommit) return { ok: false, reason: 'commit corrente non disponibile' };
@@ -830,6 +917,90 @@ function rewriteCantonRssSelfLink(xml, { section, name, url }) {
   return xml.replace(selfLinks[0], selfLinks[0].replace(href[0], `href="${url}"`));
 }
 
+function isNotFoundStatus(status) {
+  return status === 404 || status === 'HTTP 404';
+}
+
+/** Snapshot del feed attualmente servito, usato per ripristinare un set parziale. */
+async function snapshotCantonRssFeed(url, { probeImpl = probe } = {}) {
+  return probeImpl(url, { attempts: 3, delayMs: 1000, want: () => true });
+}
+
+function normalizeCantonRssSnapshot(feed, result) {
+  if (result?.exists === false || (!result?.ok && isNotFoundStatus(result?.status))) {
+    return { exists: false, body: null };
+  }
+  if (result?.exists === true && typeof result.body === 'string') {
+    return { exists: true, body: result.body };
+  }
+  if (result?.ok && typeof result.body === 'string') {
+    return { exists: true, body: result.body };
+  }
+  throw new Error(`${feed.name}: superficie CDN precedente non verificabile (${result?.status ?? 'nessuna risposta'})`);
+}
+
+async function rollbackCantonRssFeeds({ prepared, snapshots, distDir, runImpl, probeImpl }) {
+  const rollbackFiles = [];
+  let failures = 0;
+  try {
+    fs.mkdirSync(distDir, { recursive: true });
+    for (const feed of prepared) {
+      const previous = snapshots.get(feed.name);
+      try {
+        if (previous?.exists) {
+          const local = path.join(distDir, `.canton-rss-rollback-${feed.name}`);
+          fs.writeFileSync(local, previous.body, 'utf8');
+          rollbackFiles.push(local);
+          const { stdout = '' } = runImpl('bash', [
+            'scripts/lib/upload-cdn-file.sh',
+            local,
+            feed.key,
+            PAGE_CACHE_CONTROL,
+          ]);
+          if (!stdout.includes('✅ uploaded')) throw new Error(`restore upload non confermato: ${feed.key}`);
+        } else {
+          const { stdout = '' } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', feed.key]);
+          if (!stdout.includes('✅ deleted')) throw new Error(`restore delete non confermato: ${feed.key}`);
+        }
+      } catch (error) {
+        failures++;
+        console.error(`::error::[${LOG}] rollback feed RSS ${feed.key} fallito: ${error?.message ?? String(error)}`);
+      }
+    }
+
+    for (const chunk of purgeChunks(prepared.map((feed) => feed.url))) {
+      try {
+        const { code = 1 } = runImpl('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]);
+        if (code !== 0) throw new Error(`purge exit ${code}`);
+      } catch (error) {
+        failures++;
+        console.error(`::error::[${LOG}] purge rollback feed RSS ${prepared[0]?.name ?? 'cantonale'} fallito: ${error?.message ?? String(error)}`);
+      }
+    }
+
+    for (const feed of prepared) {
+      const previous = snapshots.get(feed.name);
+      try {
+        const result = await probeImpl(feed.url, {
+          want: previous?.exists ? (body) => body === previous.body : () => false,
+          attempts: 3,
+          delayMs: 1000,
+        });
+        const restored = previous?.exists
+          ? result?.ok === true
+          : result?.ok !== true && isNotFoundStatus(result?.status);
+        if (!restored) throw new Error(`stato CDN inatteso (${result?.status ?? 'nessuna risposta'})`);
+      } catch (error) {
+        failures++;
+        console.error(`::error::[${LOG}] verifica rollback feed RSS ${feed.key} fallita: ${error?.message ?? String(error)}`);
+      }
+    }
+  } finally {
+    for (const local of rollbackFiles) fs.rmSync(local, { force: true });
+  }
+  return { failures };
+}
+
 /**
  * Copia su R2 i feed cantonali pubblicati dall'API HTTP dello stesso commit,
  * riscrive il solo self-link RSS verso la superficie CDN e verifica i byte
@@ -844,6 +1015,7 @@ export async function publishCantonRssFeeds({
   probeImpl = probe,
   releaseReadyImpl = publishedReleaseReady,
   fetchImpl = fetch,
+  snapshotImpl = snapshotCantonRssFeed,
   sleepImpl = sleep,
   releaseReadyMaxWaitMs = RELEASE_READY_MAX_WAIT_MS,
   releaseReadyRetryDelayMs = RELEASE_READY_RETRY_DELAY_MS,
@@ -854,6 +1026,8 @@ export async function publishCantonRssFeeds({
   }
   const feeds = cantonRssFeedEntries(section);
   const localFiles = [];
+  let prepared = [];
+  let snapshots = null;
   let uploaded = 0;
   let verified = 0;
   try {
@@ -874,13 +1048,13 @@ export async function publishCantonRssFeeds({
       return { failures: 1, uploaded: 0, verified: 0 };
     }
 
-    const prepared = [];
-    for (const feed of feeds) {
+    for (let i = 0; i < feeds.length; i++) {
+      const feed = feeds[i];
       const expectedBytes = readiness.files?.[feed.name];
       if (!Number.isSafeInteger(expectedBytes) || expectedBytes <= 0) {
         throw new Error(`${feed.name} non è dichiarato nel manifest API della release ${releaseCommit}`);
       }
-      const response = await fetchWithRefTimeout(`${API_BASE}/${feed.name}`, {
+      const response = await fetchWithRefTimeout(cacheBustedUrl(`${API_BASE}/${feed.name}`, '_sppr', i + 1), {
         redirect: 'manual',
         headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
       }, 20000, fetchImpl);
@@ -894,6 +1068,12 @@ export async function publishCantonRssFeeds({
       }
       const xml = rewriteCantonRssSelfLink(sourceXml, { section, name: feed.name, url: feed.url });
       prepared.push({ ...feed, xml });
+    }
+
+    snapshots = new Map();
+    for (const feed of prepared) {
+      const previous = await snapshotImpl(feed.url, { probeImpl });
+      snapshots.set(feed.name, normalizeCantonRssSnapshot(feed, previous));
     }
 
     fs.mkdirSync(distDir, { recursive: true });
@@ -912,8 +1092,7 @@ export async function publishCantonRssFeeds({
         PAGE_CACHE_CONTROL,
       ]);
       if (!stdout.includes('✅ uploaded')) {
-        console.error(`::error::[${LOG}] feed RSS non caricato: ${feed.key}`);
-        return { failures: 1, uploaded, verified: 0 };
+        throw new Error(`feed RSS non caricato: ${feed.key}`);
       }
       uploaded++;
     }
@@ -921,23 +1100,34 @@ export async function publishCantonRssFeeds({
     for (const chunk of purgeChunks(prepared.map((feed) => feed.url))) {
       const { code } = runImpl('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]);
       if (code !== 0) {
-        console.error(`::error::[${LOG}] purge CDN dei feed RSS ${section} fallito`);
-        return { failures: 1, uploaded, verified: 0 };
+        throw new Error(`purge CDN dei feed RSS ${section} fallito`);
       }
     }
 
     for (const feed of prepared) {
       const result = await probeImpl(feed.url, { want: (body) => body === feed.xml });
       if (!result.ok) {
-        console.error(`::error::[${LOG}] feed RSS non verificato sul CDN: ${feed.url} (${result.status})`);
-        return { failures: 1, uploaded, verified };
+        throw new Error(`feed RSS non verificato sul CDN: ${feed.url} (${result.status})`);
       }
       verified++;
     }
     return { failures: 0, uploaded, verified, feeds: prepared.map(({ name, key, url }) => ({ name, key, url })) };
   } catch (error) {
+    let rollbackFailures = 0;
+    if (snapshots?.size === prepared.length && prepared.length > 0) {
+      rollbackFailures = (await rollbackCantonRssFeeds({
+        prepared,
+        snapshots,
+        distDir,
+        runImpl,
+        probeImpl,
+      })).failures;
+    }
     console.error(`::error::[${LOG}] feed RSS ${section}: ${error?.message ?? String(error)}`);
-    return { failures: 1, uploaded, verified };
+    if (rollbackFailures > 0) {
+      console.error(`::error::[${LOG}] rollback feed RSS ${section} incompleto (${rollbackFailures} fallimenti)`);
+    }
+    return { failures: 1 + rollbackFailures, uploaded: 0, verified: 0, rollbackFailures };
   } finally {
     for (const local of localFiles) fs.rmSync(local, { force: true });
   }
@@ -1154,6 +1344,9 @@ export async function main(
     publishImpl = publish,
     publishCantonRssFeedsImpl = publishCantonRssFeeds,
     publishPageManifestImpl = publishPageManifest,
+    publishedApiReleaseCommitImpl = publishedApiReleaseCommit,
+    apiInputsChangedImpl = apiInputsChangedInCurrentPush,
+    fetchImpl = fetch,
   } = {},
 ) {
   const t0 = Date.now();
@@ -1163,9 +1356,10 @@ export async function main(
   fs.mkdirSync(distDir, { recursive: true });
   const ids = args.bootstrap ? sourceRegistryIds(ROOT_DIR, section) : args.ids;
   const publishing = args.publish && !args.dryRun;
-  const releaseCommit = publishing
+  const publisherCommit = publishing
     ? execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()
     : null;
+  let releaseCommit = publisherCommit;
   let publishedManifest = { state: 'absent' };
   let publishedManifestPages = null;
   if (publishing) {
@@ -1195,7 +1389,19 @@ export async function main(
   // partial hub set is merely a draft refresh or a live-page defect. A draft
   // checkout must not override an edge registry that is still live.
   const effectiveStatus = publishing ? await publishedStatusImpl(section) : null;
-  const cantonRssFeeds = publishing && effectiveStatus === 'live' ? cantonRssFeedEntries(section) : [];
+  if (publishing && effectiveStatus === 'live') {
+    releaseCommit = await resolvePublishedReleaseCommit(publisherCommit, {
+      apiReleaseCommitImpl: publishedApiReleaseCommitImpl,
+      apiInputsChangedImpl,
+      fetchImpl,
+    });
+    if (releaseCommit !== publisherCommit) {
+      console.log(
+        `::notice::[${LOG}] publisher-only push: uso la release API gia' pubblicata ${releaseCommit} invece di HEAD ${publisherCommit}`,
+      );
+    }
+  }
+  let cantonRssFeeds = publishing && effectiveStatus === 'live' ? cantonRssFeedEntries(section) : [];
 
   let hubs = { rels: [], pages: [], missing: [] };
   let landingPages = [];
@@ -1237,6 +1443,16 @@ export async function main(
       return [...hubs.rels, ...landingPages.map((page) => page.relPath)];
     },
   });
+
+  const rssFeedsForPublish = cantonRssFeedsForPublish(section, {
+    publishing,
+    effectiveStatus,
+    aggregatePagesAllowed,
+  });
+  if (rssFeedsForPublish.length === 0 && cantonRssFeeds.length > 0) {
+    console.log(`::notice::[${LOG}] feed RSS ${section} trattenuti: aggregatePagesAllowed=false`);
+  }
+  cantonRssFeeds = rssFeedsForPublish;
 
   fs.rmSync(renderRoot, { recursive: true, force: true });
 
