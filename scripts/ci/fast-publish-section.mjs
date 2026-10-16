@@ -32,6 +32,7 @@
  * Solo builtin Node: gira nel primo step del workflow, prima di setup-node.
  */
 import '../../host/cantonSectionsBootstrap.mjs';
+import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
@@ -155,6 +156,30 @@ export function imagePublishPlan(files, coreList = activeCorpusCoreEntries(), { 
     .map((s) => ({ section: s.section, ids: [...owners.get(s.section)].sort(), bootstrap: false }));
 }
 
+/** Sezioni cantonali R2 promosse a live fra due versioni del registro. */
+export function liveRegistryTransitionSections(previousRegistry, nextRegistry, coreList = activeCorpusCoreEntries()) {
+  const readSections = (doc, label) => {
+    if (!doc || doc.schema !== 1 || !doc.sections || typeof doc.sections !== 'object' || Array.isArray(doc.sections)) {
+      throw new Error(`${label}: sections/registry.json non valido`);
+    }
+    return doc.sections;
+  };
+  const previous = readSections(previousRegistry, 'registro precedente');
+  const next = readSections(nextRegistry, 'registro nuovo');
+  const r2CantonSections = new Set(
+    activeSourceSections(coreList).filter((section) => section.kind === 'canton' && !section.shardKey).map((section) => section.section),
+  );
+  const promoted = Object.entries(next)
+    .filter(([section, entry]) => entry?.status === 'live' && previous[section]?.status !== 'live')
+    .map(([section]) => section);
+  for (const section of promoted) {
+    if (!r2CantonSections.has(section)) {
+      throw new Error(`sections/registry.json promuove a live una sezione R2 non attiva nel core: ${section}`);
+    }
+  }
+  return promoted;
+}
+
 /**
  * L'ERE (grep -E) dei corpi delle sezioni attive. `served` restringe a chi le
  * serve: `shard` (Pages) o `r2` (Worker). Un commit di un articolo cantonale
@@ -210,13 +235,19 @@ export function shardOf(section, coreList = activeCorpusCoreEntries()) {
  * @param {string[]} files path relativi alla radice del repo
  * @returns {Array<{ section: string, ids: string[], bootstrap: boolean }>} nell'ordine del core
  */
-export function r2PublishPlan(files, coreList = activeCorpusCoreEntries()) {
+export function r2PublishPlan(files, coreList = activeCorpusCoreEntries(), { registryRefreshSections = [] } = {}) {
   const sections = activeSourceSections(coreList).filter((s) => !s.shardKey);
   const plan = new Map();
   const touch = (section) => {
     if (!plan.has(section)) plan.set(section, { ids: new Set(), bootstrap: false });
     return plan.get(section);
   };
+  for (const section of registryRefreshSections) {
+    if (!sections.some((entry) => entry.section === section && entry.kind === 'canton')) {
+      throw new Error(`refresh registry richiesto per sezione R2 non attiva: ${section}`);
+    }
+    touch(section);
+  }
   const changedFiles = changedFileRecords(files);
   if (changedFiles.some(({ rel }) => isSharedR2RefreshPath(rel))) {
     for (const section of sections) touch(section.section).bootstrap = true;
@@ -274,7 +305,19 @@ if (isMain()) {
   const [cmd, arg] = process.argv.slice(2);
   try {
     if (cmd === 'body-regex') console.log(bodyRegex(activeCorpusCoreEntries(), { served: arg }));
-    else if (cmd === 'r2-plan') console.log(JSON.stringify(r2PublishPlan(readFileSync(0, 'utf8').split('\n'))));
+    else if (cmd === 'r2-plan') {
+      const files = readFileSync(0, 'utf8').split('\n');
+      let registryRefreshSections = [];
+      if (changedFileRecords(files).some(({ rel }) => rel === 'sections/registry.json')) {
+        let before = process.env.PUSH_BEFORE ?? '';
+        if (/^0+$/.test(before)) before = execFileSync('git', ['rev-parse', 'HEAD~1'], { encoding: 'utf8' }).trim();
+        if (!/^[a-f0-9]{40,64}$/i.test(before)) throw new Error('PUSH_BEFORE non disponibile per confrontare sections/registry.json');
+        const previous = JSON.parse(execFileSync('git', ['show', `${before}:sections/registry.json`], { encoding: 'utf8' }));
+        const next = JSON.parse(readFileSync('sections/registry.json', 'utf8'));
+        registryRefreshSections = liveRegistryTransitionSections(previous, next);
+      }
+      console.log(JSON.stringify(r2PublishPlan(files, activeCorpusCoreEntries(), { registryRefreshSections })));
+    }
     else if (cmd === 'image-plan') console.log(JSON.stringify(imagePublishPlan(readFileSync(0, 'utf8').split('\n'), activeCorpusCoreEntries(), { served: arg })));
     else if (cmd === 'section-of' && arg) console.log(sectionOf(arg));
     else if (cmd === 'shard-of' && arg) console.log(shardOf(arg));

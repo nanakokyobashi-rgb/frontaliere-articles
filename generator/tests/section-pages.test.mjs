@@ -71,7 +71,7 @@ import {
 import { cantonHubCoverage, cantonHubDataFile, cantonHubTopics, readCantonHubData } from '../../scripts/lib/canton-hub-data.mjs';
 import { declaredRegistryErrors, SECTION_REGISTRY_FILE } from '../../scripts/lib/section-registry.mjs';
 import { sourceRegistryIds } from '../../scripts/lib/corpus-floors.mjs';
-import { bodyRegex, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
+import { bodyRegex, liveRegistryTransitionSections, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
 import { cdnUrlFor, expectedSectionPages, headState, orphanedArticleCandidates, planSectionBackfill, reconcile } from '../../scripts/reconcile-section-pages.mjs';
 import { heroCdnUploads } from '../../scripts/lib/article-render-pipeline.mjs';
 import { cantonSectionPaths } from '../scripts/lib/canton-section-profile.mjs';
@@ -168,6 +168,7 @@ test('publisher: un push solo publisher si lega alla release API gia\' disponibi
     await resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: async () => apiCommit,
       apiInputsChangedImpl: () => false,
+      isAncestorImpl: async () => true,
     }),
     apiCommit,
   );
@@ -177,6 +178,22 @@ test('publisher: un push solo publisher si lega alla release API gia\' disponibi
       apiInputsChangedImpl: () => true,
     }),
     publisherCommit,
+  );
+  await assert.rejects(
+    resolvePublishedReleaseCommit(publisherCommit, {
+      apiReleaseCommitImpl: async () => apiCommit,
+      apiInputsChangedImpl: () => false,
+      isAncestorImpl: async () => false,
+    }),
+    /non e' antenato/,
+  );
+  await assert.rejects(
+    resolvePublishedReleaseCommit(publisherCommit, {
+      apiReleaseCommitImpl: async () => apiCommit,
+      apiInputsChangedImpl: () => false,
+      isAncestorImpl: async () => { throw new Error('oggetto mancante'); },
+    }),
+    /non verificabile/,
   );
 });
 
@@ -1195,6 +1212,60 @@ test('publisher: il contratto RSS blocca o precede gli upload HTML', async () =>
   });
   assert.equal(blocked.failures, 1);
   assert.deepEqual(blockedEvents, ['rss-failed']);
+
+  const rollbackEvents = [];
+  const partial = await publish({
+    ...common,
+    runImpl: (_command, args) => {
+      if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+        rollbackEvents.push('page-upload-failed');
+        return { code: 1, stdout: '' };
+      }
+      throw new Error(`comando inatteso: ${args.join(' ')}`);
+    },
+    publishCantonRssFeedsImpl: async () => ({
+      failures: 0,
+      uploaded: 5,
+      verified: 5,
+      rollback: async () => {
+        rollbackEvents.push('rss-rollback');
+        return { failures: 0 };
+      },
+    }),
+  });
+  assert.equal(partial.failures, 1);
+  assert.equal(partial.rollbackFailures, 0);
+  assert.deepEqual(rollbackEvents, ['page-upload-failed', 'rss-rollback']);
+
+  const verifyRollbackEvents = [];
+  const verifyFailure = await publish({
+    ...common,
+    publishedStatusImpl: async () => 'live',
+    runImpl: (_command, args) => {
+      if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+        verifyRollbackEvents.push('page-uploaded');
+        return { code: 0, stdout: '✅ uploaded' };
+      }
+      if (args.includes('scripts/cf-purge-cache.mjs')) return { code: 0, stdout: '' };
+      throw new Error(`comando inatteso: ${args.join(' ')}`);
+    },
+    probeImpl: async () => {
+      verifyRollbackEvents.push('page-verify-failed');
+      return { ok: false, status: 'HTTP 503' };
+    },
+    publishCantonRssFeedsImpl: async () => ({
+      failures: 0,
+      uploaded: 5,
+      verified: 5,
+      rollback: async () => {
+        verifyRollbackEvents.push('rss-rollback');
+        return { failures: 0 };
+      },
+    }),
+  });
+  assert.equal(verifyFailure.failures, 1);
+  assert.equal(verifyFailure.rollbackFailures, 0);
+  assert.deepEqual(verifyRollbackEvents, ['page-uploaded', 'page-verify-failed', 'rss-rollback']);
 });
 
 test('publisher: RSS non live o senza feed dichiarato fallisce prima di upload', async () => {
@@ -1414,6 +1485,24 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     r2PublishPlan(['M\tcontent/cantons/canton-ti/hubs/fisco.json'], WITH_TI),
     [{ section: 'canton-ti', ids: [], bootstrap: false }],
   );
+  const registryBefore = { schema: 1, sections: { 'canton-ti': { status: 'draft' } } };
+  const registryAfter = { schema: 1, sections: { 'canton-ti': { status: 'live' } } };
+  const promotedSections = liveRegistryTransitionSections(registryBefore, registryAfter, WITH_TI);
+  assert.deepEqual(promotedSections, ['canton-ti']);
+  assert.deepEqual(
+    r2PublishPlan(['M\tsections/registry.json'], WITH_TI, { registryRefreshSections: promotedSections }),
+    [{ section: 'canton-ti', ids: [], bootstrap: false }],
+    'una promozione draft -> live deve rinfrescare landing, archivio, hub e RSS senza bootstrap articoli',
+  );
+  assert.deepEqual(liveRegistryTransitionSections(registryAfter, registryAfter, WITH_TI), []);
+  assert.throws(
+    () => liveRegistryTransitionSections(
+      { schema: 1, sections: {} },
+      { schema: 1, sections: { 'canton-xx': { status: 'live' } } },
+      WITH_TI,
+    ),
+    /non attiva nel core/,
+  );
   // `--name-status` preserves deletion state: a removed body triggers a full
   // refresh of the surviving registry, but the removed id is never sent to
   // renderArticlePages (which would otherwise abort before archive/landing).
@@ -1471,7 +1560,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   const wf = read('.github/workflows/fast-publish-section.yml');
   assert.match(wf, /group: fast-publish-\$\{\{ matrix\.target\.section \}\}\n\s+cancel-in-progress: false/);
   assert.match(wf, /fail-fast: false/);
-  for (const p of ["'content/cantons/**'", "'content/blog-body-canton-*/**'", "'content/blog-meta-canton-*'"]) {
+  for (const p of ["'content/cantons/**'", "'content/blog-body-canton-*/**'", "'content/blog-meta-canton-*'", "'sections/registry.json'"]) {
     assert.ok(wf.includes(`      - ${p}\n`), p);
   }
   assert.match(wf, /node scripts\/ci\/fast-publish-section\.mjs r2-plan/);

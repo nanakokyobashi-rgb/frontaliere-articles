@@ -37,6 +37,9 @@ on:
       - 'content/cantons/**'
       - 'content/blog-body-canton-*/**'
       - 'content/blog-meta-canton-*'
+      # Il flip draft -> live cambia solo il registro, ma deve rinfrescare le
+      # pagine R2 e i feed RSS prima che la sezione annunci i propri URL.
+      - 'sections/registry.json'
       # A declared image may arrive after the article body. The resolver maps
       # this path through the registry to the owning canton article(s).
       # A queued-cover drain is the explicit-outbox exception; its push is

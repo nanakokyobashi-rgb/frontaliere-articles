@@ -856,6 +856,15 @@ export async function resolvePublishedReleaseCommit(
   {
     apiReleaseCommitImpl = publishedApiReleaseCommit,
     apiInputsChangedImpl = apiInputsChangedInCurrentPush,
+    isAncestorImpl = (ancestor, descendant) => {
+      try {
+        execFileSync('git', ['-C', ROOT_DIR, 'merge-base', '--is-ancestor', ancestor, descendant], { stdio: 'ignore' });
+        return true;
+      } catch (error) {
+        if (error?.status === 1) return false;
+        throw error;
+      }
+    },
     fetchImpl = fetch,
   } = {},
 ) {
@@ -868,7 +877,21 @@ export async function resolvePublishedReleaseCommit(
   } catch {
     // A classification failure must retain the old fail-closed HEAD behavior.
   }
-  return apiInputsChanged ? publisherCommit : apiCommit.trim();
+  if (apiInputsChanged) return publisherCommit;
+  const publishedCommit = apiCommit.trim();
+  let isAncestor = false;
+  try {
+    isAncestor = await isAncestorImpl(publishedCommit, publisherCommit);
+  } catch (error) {
+    throw new Error(
+      `commit API ${publishedCommit} non verificabile rispetto al publisher ${publisherCommit}: ${error?.message ?? String(error)}`,
+      { cause: error },
+    );
+  }
+  if (isAncestor !== true) {
+    throw new Error(`commit API ${publishedCommit} non e' antenato del publisher ${publisherCommit}; pubblicazione interrotta`);
+  }
+  return publishedCommit;
 }
 
 /**
@@ -1111,7 +1134,18 @@ export async function publishCantonRssFeeds({
       }
       verified++;
     }
-    return { failures: 0, uploaded, verified, feeds: prepared.map(({ name, key, url }) => ({ name, key, url })) };
+    let rolledBack = false;
+    return {
+      failures: 0,
+      uploaded,
+      verified,
+      feeds: prepared.map(({ name, key, url }) => ({ name, key, url })),
+      rollback: async () => {
+        if (rolledBack) return { failures: 0 };
+        rolledBack = true;
+        return rollbackCantonRssFeeds({ prepared, snapshots, distDir, runImpl, probeImpl });
+      },
+    };
   } catch (error) {
     let rollbackFailures = 0;
     if (snapshots?.size === prepared.length && prepared.length > 0) {
@@ -1189,6 +1223,19 @@ export async function publish({
   sleepImpl = sleep,
 }) {
   let failures = 0;
+  let rollbackRssPublication = null;
+  const rollbackRss = async () => {
+    if (!rollbackRssPublication) return 0;
+    const rollback = rollbackRssPublication;
+    rollbackRssPublication = null;
+    try {
+      const result = await rollback();
+      return Number.isSafeInteger(result?.failures) ? result.failures : 1;
+    } catch (error) {
+      console.error(`::error::[${LOG}] rollback della release RSS fallito: ${error?.message ?? String(error)}`);
+      return 1;
+    }
+  };
   // A missing or malformed edge registry is UNKNOWN, not draft. Do not upload
   // into that state: otherwise the CDN verify below can be green while a live
   // apex still serves stale/404 pages. A valid draft is the bootstrap case.
@@ -1235,8 +1282,11 @@ export async function publish({
       console.error(`::error::[${LOG}] feed RSS ${section} non verificati: nessuna pagina viene caricata`);
       return { failures: rssResult.failures, uploaded: 0, deleted: 0, status: beforeStatus };
     }
+    if (typeof rssResult.rollback === 'function') rollbackRssPublication = rssResult.rollback;
   }
   const uploaded = [];
+  let status = beforeStatus;
+  try {
   for (const page of inUploadOrder(pages)) {
     const { stdout } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', path.join(distDir, page.rel), page.edgeKey, PAGE_CACHE_CONTROL]);
     if (stdout.includes('✅ uploaded')) uploaded.push(page);
@@ -1252,7 +1302,8 @@ export async function publish({
   // failure parziale qui deve lasciare intatta la superficie vecchia.
   if (failures) {
     console.error(`::error::[${LOG}] upload HTML incompleto: nessuna pagina obsoleta viene cancellata`);
-    return { failures, uploaded: uploaded.length, deleted: 0, status: beforeStatus };
+    const rollbackFailures = await rollbackRss();
+    return { failures: failures + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status: beforeStatus };
   }
 
   const purgePages = (pageList) => {
@@ -1268,11 +1319,12 @@ export async function publish({
   // until this pass is green, so a stale sitemap never points at a 404 caused
   // by a partially published replacement.
   purgePages(uploaded);
-  const status = await publishedStatusImpl(section);
+  status = await publishedStatusImpl(section);
   console.log(`[${LOG}] verify: sezione ${section} nel registro pubblicato = ${status ?? 'registro illeggibile'}`);
   if (status === null) {
     console.error(`::error::[${LOG}] registro edge della sezione ${section} diventato illeggibile durante la pubblicazione`);
-    return { failures: failures + 1, uploaded: uploaded.length, deleted: 0, status: null };
+    const rollbackFailures = await rollbackRss();
+    return { failures: failures + 1 + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status: null };
   }
   const hasMeta = (body) => body.includes(CORPUS_ROUTE_OWNER_META_TAG);
   for (const page of uploaded) {
@@ -1293,7 +1345,8 @@ export async function publish({
 
   if (failures) {
     console.error(`::error::[${LOG}] release corrente non verificata: nessuna pagina obsoleta viene cancellata`);
-    return { failures, uploaded: uploaded.length, deleted: 0, status };
+    const rollbackFailures = await rollbackRss();
+    return { failures: failures + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status };
   }
 
   if (obsoletePages.length > 0) {
@@ -1306,7 +1359,8 @@ export async function publish({
     });
     if (!(releaseReady === true || releaseReady?.ok)) {
       console.error(`::error::[${LOG}] API/edge non hanno ancora servito la release corrente: ${releaseReady?.reason ?? 'verifica fallita'}; nessuna pagina obsoleta viene cancellata`);
-      return { failures: failures + 1, uploaded: uploaded.length, deleted: 0, status };
+      const rollbackFailures = await rollbackRss();
+      return { failures: failures + 1 + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status };
     }
   }
 
@@ -1329,7 +1383,13 @@ export async function publish({
       console.log(`::error::[${LOG}] vecchia pagina ancora servita o non verificabile: ${page.cdnUrl} (${old.status})`);
     }
   }
-  return { failures, uploaded: uploaded.length, deleted: deleted.length, status };
+  const rollbackFailures = failures > 0 ? await rollbackRss() : 0;
+  return { failures: failures + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: deleted.length, status };
+  } catch (error) {
+    console.error(`::error::[${LOG}] pubblicazione HTML ${section} fallita: ${error?.message ?? String(error)}`);
+    const rollbackFailures = await rollbackRss();
+    return { failures: 1 + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status };
+  }
 }
 
 export async function main(
