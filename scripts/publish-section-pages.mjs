@@ -915,66 +915,52 @@ export function publishApiTriggerPaths({ workflowText = null } = {}) {
   return paths;
 }
 
-function currentPushRange() {
-  const explicitBefore = String(process.env.PUSH_BEFORE ?? '').trim();
-  const explicitAfter = String(process.env.PUSH_AFTER ?? '').trim();
-  if (explicitBefore || explicitAfter) {
-    if (!/^[a-f0-9]{40,64}$/iu.test(explicitBefore) || !/^[a-f0-9]{40,64}$/iu.test(explicitAfter) || /^0+$/u.test(explicitBefore)) {
-      throw new Error('provenienza push incompleta o non valida: PUSH_BEFORE/PUSH_AFTER');
-    }
-    return `${explicitBefore}..${explicitAfter}`;
-  }
-  const eventPath = process.env.GITHUB_EVENT_PATH;
-  if (eventPath && fs.existsSync(eventPath)) {
-    try {
-      const event = JSON.parse(fs.readFileSync(eventPath, 'utf8'));
-      if (
-        typeof event.before === 'string'
-        && typeof event.after === 'string'
-        && /^[a-f0-9]{40,64}$/iu.test(event.before)
-        && /^[a-f0-9]{40,64}$/iu.test(event.after)
-        && !/^0+$/u.test(event.before)
-      ) {
-        return `${event.before}..${event.after}`;
-      }
-    } catch {
-      // Il chiamante rifiuta il run: senza range non si puo' classificare il
-      // commit che ha richiesto la pubblicazione API.
-    }
-  }
-  throw new Error('provenienza push assente: impossibile classificare gli input API');
-}
-
-/** True se il push corrente contiene un input che deve rigenerare publish-api. */
-export function apiInputsChangedInCurrentPush({ execFileSyncImpl = execFileSync, triggerPathsImpl = publishApiTriggerPaths } = {}) {
-  const range = currentPushRange();
+/**
+ * L'ultimo input di publish-api raggiungibile dal commit del publisher.
+ *
+ * Il diff della push corrente non basta: una push solo publisher puo' seguire
+ * un input API precedente la cui release non e' mai arrivata sulla superficie
+ * HTTP. Il fallback e' sicuro solo quando la release pubblicata copre questo
+ * commit, quindi la ricerca attraversa tutta la storia del publisher usando
+ * gli stessi path dichiarati dal workflow API.
+ */
+export function latestApiInputCommit(
+  publisherCommit,
+  { execFileSyncImpl = execFileSync, triggerPathsImpl = publishApiTriggerPaths } = {},
+) {
+  const commit = String(publisherCommit ?? '').trim();
+  if (!commit) throw new Error('commit publisher assente: impossibile classificare gli input API');
   const triggerPaths = triggerPathsImpl();
   try {
-    const changed = execFileSyncImpl(
+    const latest = execFileSyncImpl(
       'git',
-      ['-C', ROOT_DIR, 'diff', '--name-only', range, '--', ...triggerPaths],
+      ['-C', ROOT_DIR, 'rev-list', '--max-count=1', commit, '--', ...triggerPaths],
       { encoding: 'utf8' },
     );
-    return changed.trim().length > 0;
-  } catch {
-    return true;
+    return String(latest ?? '').trim() || null;
+  } catch (error) {
+    throw new Error(
+      `storia Git non verificabile per gli input API raggiungibili da ${commit}: ${error?.message ?? String(error)}`,
+      { cause: error },
+    );
   }
 }
 
 /**
- * Un push che cambia solo il publisher non scatena publish-api: in quel caso
- * si lega alla release API gia' disponibile. Se il push contiene input API,
- * conserva HEAD e aspetta il deploy concorrente come prima. Un replay bounded
- * puo' propagare il commit della release osservata: viene verificato contro il
- * manifest HTTP e non riclassificato rispetto ai commit bookkeeping successivi.
+ * Un push che cambia solo il publisher puo' legarsi alla release API gia'
+ * disponibile soltanto quando questa copre l'ultimo input API raggiungibile
+ * dal publisher. Se quell'input non e' ancora nella release HTTP, usa quel
+ * commit come release attesa e lascia che la readiness resti fail-closed fino
+ * a quando la superficie lo serve. Un replay bounded puo' propagare il
+ * commit della release osservata: viene verificato contro il manifest HTTP e
+ * non riclassificato rispetto ai commit bookkeeping successivi.
  */
 export async function resolvePublishedReleaseCommit(
   publisherCommit,
   {
     apiReleaseCommitImpl = publishedApiReleaseCommit,
     apiReleaseCommitOverride = null,
-    apiInputsChangedImpl = apiInputsChangedInCurrentPush,
-    allowPublishedApiFallbackImpl = () => ['schedule', 'workflow_dispatch', 'workflow_run'].includes(process.env.GITHUB_EVENT_NAME),
+    latestApiInputCommitImpl = latestApiInputCommit,
     isAncestorImpl = (ancestor, descendant) => {
       try {
         execFileSync('git', ['-C', ROOT_DIR, 'merge-base', '--is-ancestor', ancestor, descendant], { stdio: 'ignore' });
@@ -997,29 +983,6 @@ export async function resolvePublishedReleaseCommit(
     throw new Error(`commit API osservato ${apiCommit ?? 'assente'} diverso da quello propagato ${override}`);
   }
   if (typeof apiCommit !== 'string' || !apiCommit.trim() || apiCommit.trim() === publisherCommit) return publisherCommit;
-  let apiInputsChanged = false;
-  if (!override) {
-    apiInputsChanged = true;
-    try {
-      apiInputsChanged = await apiInputsChangedImpl();
-    } catch (error) {
-      if (
-        error?.message === 'provenienza push assente: impossibile classificare gli input API'
-        && allowPublishedApiFallbackImpl() === true
-      ) {
-        // Schedule, dispatch e workflow_run non hanno un push range. La
-        // release API pubblicata resta utilizzabile solo dopo il controllo
-        // ancestry qui sotto; un range push parziale resta fail-closed.
-        apiInputsChanged = false;
-      } else {
-      throw new Error(
-        `provenienza del push non verificabile per il commit API ${apiCommit.trim()}: ${error?.message ?? String(error)}`,
-        { cause: error },
-      );
-      }
-    }
-  }
-  if (apiInputsChanged) return publisherCommit;
   const publishedCommit = apiCommit.trim();
   let isAncestor = false;
   try {
@@ -1033,6 +996,29 @@ export async function resolvePublishedReleaseCommit(
   if (isAncestor !== true) {
     throw new Error(`commit API ${publishedCommit} non e' antenato del publisher ${publisherCommit}; pubblicazione interrotta`);
   }
+  if (!override) {
+    let latestInputCommit = null;
+    try {
+      latestInputCommit = await latestApiInputCommitImpl(publisherCommit);
+    } catch (error) {
+      throw new Error(
+        `storia degli input API non verificabile per il commit API ${apiCommit.trim()}: ${error?.message ?? String(error)}`,
+        { cause: error },
+      );
+    }
+    if (latestInputCommit) {
+      let releaseCoversLatestInput = false;
+      try {
+        releaseCoversLatestInput = await isAncestorImpl(latestInputCommit, publishedCommit);
+      } catch (error) {
+        throw new Error(
+          `ultimo input API ${latestInputCommit} non verificabile rispetto alla release ${publishedCommit}: ${error?.message ?? String(error)}`,
+          { cause: error },
+        );
+      }
+      if (releaseCoversLatestInput !== true) return latestInputCommit;
+    }
+  }
   return publishedCommit;
 }
 
@@ -1040,7 +1026,8 @@ export async function resolvePublishedReleaseCommit(
  * La delete delle URL ritirate e' sicura solo dopo il flip della stessa
  * release che ha aggiornato sitemap e slug. Quando il push contiene input API,
  * `publish-api` e fast-publish partono dallo stesso push; quando cambia solo
- * questo publisher, il chiamante seleziona la release API gia' disponibile.
+ * questo publisher, il chiamante seleziona la release API che copre l'ultimo
+ * input raggiungibile e la readiness puo' attenderne la pubblicazione.
  * In entrambi i casi attendiamo manifest, catalogo, slugs e puntatore edge sul
  * commit selezionato. Se uno e' ancora vecchio, il run fallisce senza
  * cancellare; il retry del workflow ripete la prova dopo il deploy API.
@@ -1782,7 +1769,7 @@ export async function main(
     publishPageManifestImpl = publishPageManifest,
     publishedApiReleaseCommitImpl = publishedApiReleaseCommit,
     publishedReleaseReadyImpl = publishedReleaseReady,
-    apiInputsChangedImpl = apiInputsChangedInCurrentPush,
+    latestApiInputCommitImpl = latestApiInputCommit,
     fetchImpl = fetch,
   } = {},
 ) {
@@ -1831,7 +1818,7 @@ export async function main(
     releaseCommit = await resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: publishedApiReleaseCommitImpl,
       apiReleaseCommitOverride: process.env.API_RELEASE_COMMIT,
-      apiInputsChangedImpl,
+      latestApiInputCommitImpl,
       fetchImpl,
     });
     if (releaseCommit !== publisherCommit) {

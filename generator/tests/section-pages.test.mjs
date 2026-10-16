@@ -28,7 +28,6 @@ import {
   UPLOAD_ORDER,
   addCantonRssFeedLink,
   aggregatePageDefects,
-  apiInputsChangedInCurrentPush,
   articleManifestPages,
   archiveReleasePages,
   articleReleasePages,
@@ -42,6 +41,7 @@ import {
   ensureRouteOwnerMeta,
   hubMissingIsFatal,
   inUploadOrder,
+  latestApiInputCommit,
   main,
   migrationManifestPages,
   missingRenderedArticleIds,
@@ -165,29 +165,43 @@ test('publisher --publish costruisce il manifest solo dopo una publish riuscita'
   }
 });
 
-test('publisher: un push solo publisher si lega alla release API gia\' disponibile', async () => {
+test('publisher: il fallback API copre l\'ultimo input raggiungibile dal publisher', async () => {
   const publisherCommit = 'a'.repeat(40);
   const apiCommit = 'b'.repeat(40);
+  const latestInputCommit = 'c'.repeat(40);
   assert.equal(
     await resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: async () => apiCommit,
-      apiInputsChangedImpl: () => false,
-      isAncestorImpl: async () => true,
+      latestApiInputCommitImpl: async () => latestInputCommit,
+      isAncestorImpl: async (ancestor, descendant) =>
+        (ancestor === apiCommit && descendant === publisherCommit)
+        || (ancestor === latestInputCommit && descendant === apiCommit),
     }),
     apiCommit,
   );
   assert.equal(
     await resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: async () => apiCommit,
-      apiInputsChangedImpl: () => true,
+      latestApiInputCommitImpl: async () => latestInputCommit,
+      isAncestorImpl: async (ancestor, descendant) => ancestor === apiCommit && descendant === publisherCommit,
+    }),
+    latestInputCommit,
+    'una release API precedente all\'ultimo input non puo\' alimentare il fallback publisher-only',
+  );
+  assert.equal(
+    await resolvePublishedReleaseCommit(publisherCommit, {
+      apiReleaseCommitImpl: async () => apiCommit,
+      latestApiInputCommitImpl: async () => publisherCommit,
+      isAncestorImpl: async (ancestor, descendant) => ancestor === apiCommit && descendant === publisherCommit,
     }),
     publisherCommit,
+    'anche un input API nella push corrente resta in attesa della release corrispondente',
   );
   assert.equal(
     await resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: async () => apiCommit,
       apiReleaseCommitOverride: apiCommit,
-      apiInputsChangedImpl: () => { throw new Error('il bookkeeping non deve essere riclassificato'); },
+      latestApiInputCommitImpl: () => { throw new Error('il bookkeeping non deve essere riclassificato'); },
       isAncestorImpl: async () => true,
     }),
     apiCommit,
@@ -202,7 +216,7 @@ test('publisher: un push solo publisher si lega alla release API gia\' disponibi
   await assert.rejects(
     resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: async () => apiCommit,
-      apiInputsChangedImpl: () => false,
+      latestApiInputCommitImpl: async () => null,
       isAncestorImpl: async () => false,
     }),
     /non e' antenato/,
@@ -210,7 +224,7 @@ test('publisher: un push solo publisher si lega alla release API gia\' disponibi
   await assert.rejects(
     resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: async () => apiCommit,
-      apiInputsChangedImpl: () => false,
+      latestApiInputCommitImpl: async () => null,
       isAncestorImpl: async () => { throw new Error('oggetto mancante'); },
     }),
     /non verificabile/,
@@ -218,48 +232,23 @@ test('publisher: un push solo publisher si lega alla release API gia\' disponibi
   await assert.rejects(
     resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: async () => apiCommit,
-      apiInputsChangedImpl: async () => { throw new Error('provenienza assente'); },
+      latestApiInputCommitImpl: async () => { throw new Error('provenienza assente'); },
+      isAncestorImpl: async () => true,
     }),
-    /provenienza del push non verificabile/,
-  );
-  assert.equal(
-    await resolvePublishedReleaseCommit(publisherCommit, {
-      apiReleaseCommitImpl: async () => apiCommit,
-      apiInputsChangedImpl: async () => {
-        throw new Error('provenienza push assente: impossibile classificare gli input API');
-      },
-      allowPublishedApiFallbackImpl: () => true,
-      isAncestorImpl: async (ancestor, descendant) => ancestor === apiCommit && descendant === publisherCommit,
-    }),
-    apiCommit,
-    'schedule/dispatch/workflow_run senza range usano solo la release API pubblicata e verificata',
+    /storia degli input API non verificabile/,
   );
   await assert.rejects(
     resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: async () => apiCommit,
-      apiInputsChangedImpl: async () => {
-        throw new Error('provenienza push assente: impossibile classificare gli input API');
-      },
-      allowPublishedApiFallbackImpl: () => true,
+      latestApiInputCommitImpl: async () => latestInputCommit,
       isAncestorImpl: async () => false,
     }),
     /non e' antenato/,
-    'un fallback senza push range resta bloccato se la release API non e\' antenata del publisher',
-  );
-  await assert.rejects(
-    resolvePublishedReleaseCommit(publisherCommit, {
-      apiReleaseCommitImpl: async () => apiCommit,
-      apiInputsChangedImpl: async () => {
-        throw new Error('provenienza push assente: impossibile classificare gli input API');
-      },
-      allowPublishedApiFallbackImpl: () => false,
-    }),
-    /provenienza del push non verificabile/,
-    'un push senza provenienza non ricade sul percorso publish-only',
+    'una release API non antenata resta bloccata prima del fallback',
   );
 });
 
-test('publisher: legge la struttura reale di on.push.paths e non ingoia errori di parsing', () => {
+test('publisher: legge la struttura reale di on.push.paths e cerca l\'ultimo input storico', () => {
   const workflow = [
     'on:',
     '    push:',
@@ -275,21 +264,38 @@ test('publisher: legge la struttura reale di on.push.paths e non ingoia errori d
     ['content/**', 'scripts/build-api.mjs'],
   );
 
-  const previousBefore = process.env.PUSH_BEFORE;
-  const previousAfter = process.env.PUSH_AFTER;
-  process.env.PUSH_BEFORE = 'a'.repeat(40);
-  process.env.PUSH_AFTER = 'b'.repeat(40);
-  try {
-    assert.throws(
-      () => apiInputsChangedInCurrentPush({ triggerPathsImpl: () => { throw new Error('push.paths illeggibile'); } }),
-      /push\.paths illeggibile/,
-    );
-  } finally {
-    if (previousBefore === undefined) delete process.env.PUSH_BEFORE;
-    else process.env.PUSH_BEFORE = previousBefore;
-    if (previousAfter === undefined) delete process.env.PUSH_AFTER;
-    else process.env.PUSH_AFTER = previousAfter;
-  }
+  const calls = [];
+  assert.equal(
+    latestApiInputCommit('a'.repeat(40), {
+      triggerPathsImpl: () => ['content/**', 'scripts/build-api.mjs'],
+      execFileSyncImpl: (...args) => {
+        calls.push(args);
+        return `${'b'.repeat(40)}\n`;
+      },
+    }),
+    'b'.repeat(40),
+  );
+  assert.deepEqual(calls[0][1], [
+    '-C',
+    ROOT,
+    'rev-list',
+    '--max-count=1',
+    'a'.repeat(40),
+    '--',
+    'content/**',
+    'scripts/build-api.mjs',
+  ]);
+  assert.throws(
+    () => latestApiInputCommit('a'.repeat(40), { triggerPathsImpl: () => { throw new Error('push.paths illeggibile'); } }),
+    /push\.paths illeggibile/,
+  );
+  assert.throws(
+    () => latestApiInputCommit('a'.repeat(40), {
+      triggerPathsImpl: () => ['content/**'],
+      execFileSyncImpl: () => { throw new Error('oggetto mancante'); },
+    }),
+    /storia Git non verificabile/,
+  );
 });
 
 test('publisher migration manifest usa percorsi canonici per landing e hub', () => {
@@ -2084,10 +2090,14 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /workflow_run:\n\s+workflows: \['Publish article data API'\]\n\s+types: \[completed\]\n\s+branches: \[main\]/);
   assert.match(wf, /github\.event\.workflow_run\.conclusion == 'success'/);
   assert.match(wf, /github\.event\.workflow_run\.event == 'push'[\s\S]*github\.event\.workflow_run\.event == 'schedule'[\s\S]*github\.event\.workflow_run\.event == 'workflow_dispatch'/);
-  assert.match(wf, /ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| github\.sha \}\}/);
+  assert.equal(
+    (wf.match(/ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_commit \|\| github\.sha \}\}/g) ?? []).length,
+    2,
+    'resolve e publish devono checkoutare la source_commit del replay',
+  );
   assert.match(wf, /id: replay_freshness[\s\S]*gh api "repos\/\$REPO\/git\/ref\/heads\/main"/);
   assert.match(wf, /if: steps\.replay_freshness\.outputs\.fresh == 'true'/);
-  assert.match(wf, /Dispatch bounded replay on current main/);
+  assert.match(wf, /Dispatch bounded replay with originating API checkout/);
   const dispatchPlanStart = wf.indexOf('if [ "${{ github.event_name }}" = "workflow_dispatch" ]');
   const dispatchPlanEnd = wf.indexOf('any=false', dispatchPlanStart);
   const dispatchPlan = wf.slice(dispatchPlanStart, dispatchPlanEnd);
@@ -2095,7 +2105,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(dispatchPlan, /FAST_PUBLISH_ARMED/);
   assert.equal((wf.match(/-f dry_run="\$DRY"/g) ?? []).length, 2, 'entrambi i redispatch propagano il dry-run calcolato');
   assert.doesNotMatch(wf, /-f dry_run=false/);
-  assert.match(wf, /gh workflow run fast-publish-section\.yml --repo "\$REPO" --ref main/);
+  assert.equal((wf.match(/gh workflow run fast-publish-section\.yml --repo "\$REPO" --ref main/g) ?? []).length, 2);
+  assert.match(wf, /-f source_commit="\$STALE_HEAD"/);
+  assert.match(wf, /-f source_commit="\$WORKFLOW_RUN_HEAD_SHA"/);
+  assert.match(wf, /source_commit richiede una SHA completa/);
+  assert.match(wf, /inputs\.source_commit/);
   assert.match(wf, /replay_before="\$\{ORIGINAL_PUSH_BEFORE:-\$STALE_HEAD\}"/);
   assert.match(wf, /replay_after="\$\{ORIGINAL_PUSH_AFTER:-\$STALE_HEAD\}"/);
   assert.match(wf, /-f push_before="\$replay_before"/);
@@ -2111,6 +2125,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.doesNotMatch(wf, /diff_args=\(\)[\s\S]*sections\/registry\.json/);
   assert.match(wf, /PUSH_BEFORE="\$before" node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
   assert.match(wf, /r2-reconcile-plan \\\n\s+"\$WORKFLOW_RUN_HEAD_SHA"/);
+  assert.match(wf, /edge_matrix="\$\(node scripts\/ci\/fast-publish-section\.mjs r2-reconcile-plan/);
+  assert.match(wf, /if \[ "\$WORKFLOW_RUN_EVENT" = 'push' \]/);
+  assert.match(wf, /--argjson edge "\$edge_matrix"/);
+  assert.match(wf, /removeStaleCantonRssFeeds == true/);
   assert.match(wf, /Il replay della push API deve riprodurre l'intero piano/);
   const publishCheckout = wf.slice(wf.indexOf('      - name: Checkout\n', wf.indexOf('\n  publish:\n')));
   assert.match(publishCheckout, /fetch-depth: 0/);

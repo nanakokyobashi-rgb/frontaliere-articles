@@ -79,8 +79,9 @@ on:
   # `sections/registry.json` and the edge API registry are published by
   # publish-api.yml. Its push-triggered run can finish after this workflow's
   # first pass; scheduled/manual runs can also change the effective API
-  # surface without a new Git diff. Replay waits for the API release and uses
-  # the push transition or the effective edge registry as its bounded plan.
+  # surface without a new Git diff. Completion runs read the effective edge
+  # registry, while push completions merge its non-live cleanup into the
+  # bounded diff plan.
   workflow_run:
     workflows: ['Publish article data API']
     types: [completed]
@@ -130,6 +131,11 @@ on:
         required: false
         default: ''
         type: string
+      source_commit:
+        description: 'Commit del corpus da checkoutare nel replay bounded'
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: read
@@ -155,7 +161,7 @@ jobs:
       - name: Checkout (resolve)
         uses: actions/checkout@v7
         with:
-          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || github.sha }}
           fetch-depth: 2
           persist-credentials: false
 
@@ -169,6 +175,7 @@ jobs:
           PUSH_AFTER: ${{ github.event.after }}
           DISPATCH_PUSH_BEFORE: ${{ inputs.push_before }}
           DISPATCH_PUSH_AFTER: ${{ inputs.push_after }}
+          SOURCE_COMMIT_INPUT: ${{ inputs.source_commit }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           WORKFLOW_RUN_EVENT: ${{ github.event.workflow_run.event }}
         run: |
@@ -200,6 +207,10 @@ jobs:
               exit 1
             fi
           elif [ "$EVENT_NAME" = 'workflow_dispatch' ]; then
+            if [ -n "${SOURCE_COMMIT_INPUT:-}" ] && ! [[ "$SOURCE_COMMIT_INPUT" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::error::source_commit richiede una SHA completa"
+              exit 1
+            fi
             dispatch_before="${DISPATCH_PUSH_BEFORE:-}"
             dispatch_after="${DISPATCH_PUSH_AFTER:-}"
             if [ -n "$dispatch_before" ] || [ -n "$dispatch_after" ]; then
@@ -285,19 +296,43 @@ jobs:
               '[{section: $s, ids: $ids, bootstrap: $b, removeStaleCantonRssFeeds: $r}]')"
           else
             dry=false
-            if [ "$EVENT_NAME" = 'workflow_run' ] && [ "$WORKFLOW_RUN_EVENT" != 'push' ]; then
-              # Schedule/manuale possono aggiornare la superficie API senza un
-              # nuovo commit. Il piano deve partire dal registro edge che il
-              # Worker serve davvero, verificando che sia la release appena
-              # completata.
-              matrix="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan \
+            if [ "$EVENT_NAME" = 'workflow_run' ]; then
+              # Ogni completion API deve leggere il registro edge della
+              # release appena completata: anche una kill-switch o un hub
+              # mancante puo' rendere non-live una sezione senza una
+              # transizione in sections/registry.json. Per le push
+              # conserviamo il piano dal diff per non rinfrescare sezioni
+              # live non coinvolte, ma aggiungiamo sempre il cleanup delle
+              # sezioni effettivamente non-live.
+              edge_matrix="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan \
                 "$WORKFLOW_RUN_HEAD_SHA" \
                 | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
+              if [ "$WORKFLOW_RUN_EVENT" = 'push' ]; then
+                if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
+                # Il replay della push API deve riprodurre l'intero piano
+                # della push originaria: il primo fast-publish puo' essere
+                # fallito mentre attendeva la release API, senza modificare
+                # il registro.
+                diff_matrix="$(git diff --name-status "$before" HEAD 2>/dev/null \
+                  | PUSH_BEFORE="$before" node scripts/ci/fast-publish-section.mjs r2-plan \
+                  | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
+                matrix="$(jq -cn --argjson diff "$diff_matrix" --argjson edge "$edge_matrix" '
+                  reduce ($edge[] | select(.removeStaleCantonRssFeeds == true)) as $cleanup
+                    ($diff;
+                      if any(.[]; .section == $cleanup.section)
+                      then map(if .section == $cleanup.section
+                        then . + {removeStaleCantonRssFeeds: true}
+                        else .
+                        end)
+                      else . + [$cleanup]
+                      end
+                    )
+                ')"
+              else
+                matrix="$edge_matrix"
+              fi
             else
               if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
-              # Il replay della push API deve riprodurre l'intero piano della
-              # push originaria: il primo fast-publish puo' essere fallito
-              # mentre attendeva la release API, senza modificare il registro.
               matrix="$(git diff --name-status "$before" HEAD 2>/dev/null \
                 | PUSH_BEFORE="$before" node scripts/ci/fast-publish-section.mjs r2-plan \
                 | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
@@ -337,7 +372,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
-          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || github.sha }}
           # resolvePublishedReleaseCommit() verifica la release API con
           # merge-base: una release precedente puo' essere fuori dai due
           # commit che actions/checkout scarica di default.
@@ -377,11 +412,11 @@ jobs:
           fi
           echo 'fresh=true' >> "$GITHUB_OUTPUT"
 
-      # Il replay della run API osservata e' ormai stantio. Il redispatch usa la
-      # HEAD corrente per leggere eventuali byte nuovi, ma conserva il range
-      # della push originaria e il suo head come release API: un commit
-      # bookkeeping della coda cover generato durante la run non diventa cosi'
-      # una falsa provenienza che il publisher dovrebbe attendere.
+      # Il replay della run API osservata e' ormai stantio. Il redispatch usa
+      # il workflow corrente su main, ma passa source_commit per checkoutare la
+      # stessa HEAD della run originaria e conserva il range della push e il
+      # suo head come release API: renderer, readiness e feed leggono cosi' una
+      # sola release, anche se main e' avanzato nel frattempo.
       - name: Prepare Firebase credentials for stale replay recovery
         if: github.event_name == 'workflow_run'
         env:
@@ -399,7 +434,7 @@ jobs:
         if: github.event_name == 'workflow_run'
         run: node generator/scripts/load-rc-env.mjs
 
-      - name: Dispatch bounded replay on current main
+      - name: Dispatch bounded replay with originating API checkout
         if: steps.replay_freshness.outputs.fresh == 'false'
         env:
           REPO: ${{ github.repository }}
@@ -427,6 +462,7 @@ jobs:
             -f bootstrap="$BOOTSTRAP" \
             -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
             -f api_release_commit="$STALE_HEAD" \
+            -f source_commit="$STALE_HEAD" \
             -f dry_run="$DRY" \
             -f push_before="$replay_before" \
             -f push_after="$replay_after"
@@ -549,6 +585,7 @@ jobs:
                 -f bootstrap="$BOOTSTRAP" \
                 -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
                 -f api_release_commit="$WORKFLOW_RUN_HEAD_SHA" \
+                -f source_commit="$WORKFLOW_RUN_HEAD_SHA" \
                 -f dry_run="$DRY" \
                 -f push_before="$replay_before" \
                 -f push_after="$replay_after"
