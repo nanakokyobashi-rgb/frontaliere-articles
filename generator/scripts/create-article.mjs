@@ -276,7 +276,7 @@ import {
   appendEvergreenRejected as _appendEvergreenRejected,
   strikeEvergreenKeyword as _strikeEvergreenKeyword,
   EVERGREEN_STRIKE_LIMIT as _EVERGREEN_STRIKE_LIMIT,
-  persistEvergreenRejectedTracker as _persistEvergreenRejectedTrackerAt,
+  persistEvergreenRejectedTrackerAtomically as _persistEvergreenRejectedTrackerAt,
   isTopicGateAbortedUrl as _isTopicGateAbortedUrl,
   recordTopicGateAbortedUrl as _recordTopicGateAbortedUrl,
 } from './lib/article-topic-selector.mjs';
@@ -3593,7 +3593,7 @@ function _persistEvergreenCounter(state) { return _persistEvergreenCounterAt(sta
 function _loadTodayPicksByCluster() { return _loadTodayPicksByClusterAt(Date.now(), sectionStateOpts('todayPicks')); }
 function _persistTodayPicksByCluster(state) { return _persistTodayPicksByClusterAt(state, Date.now(), sectionStateOpts('todayPicks')); }
 function _loadEvergreenRejectedTracker() { return _loadEvergreenRejectedTrackerAt(sectionStateOpts('evergreenRejected')); }
-function _persistEvergreenRejectedTracker(tracker) { return _persistEvergreenRejectedTrackerAt(tracker, sectionStateOpts('evergreenRejected')); }
+function _persistEvergreenRejectedTracker(update) { return _persistEvergreenRejectedTrackerAt(update, sectionStateOpts('evergreenRejected')); }
 
 if (!IS_FRONTALIERE) {
   console.error(`📦 Sezione attiva: ${SECTION_NAME} (${SECTION.label}) — hub /${SECTION.hubSlug.it}/`);
@@ -17041,7 +17041,11 @@ async function main() {
             // pre-filtro «fonti gia' rifiutate dal topic-gate»).
             if (isTopicGateAbort && url && !String(url).startsWith('evergreen://')) {
               try {
-                _persistEvergreenRejectedTracker(_recordTopicGateAbortedUrl(_loadEvergreenRejectedTracker(), normalizeNewsUrl(url), SECTION_NAME));
+                _persistEvergreenRejectedTracker((tracker) => _recordTopicGateAbortedUrl(
+                  tracker,
+                  normalizeNewsUrl(url),
+                  SECTION_NAME,
+                ));
               } catch { /* la memoria e' un risparmio, non un gate */ }
             }
             const isQualityReject = isQualityRejectError(e);
@@ -17212,12 +17216,14 @@ async function main() {
       // A confirmed duplicate is immediately written back with fresh
       // section/pool/epoch provenance; a changed topic can rotate again.
       const rememberConfirmedEvergreenDuplicate = (keyword, reason = 'duplicate') => {
-        evergreenRejectedTracker = _appendEvergreenRejected(
-          evergreenRejectedTracker,
-          keyword,
-          { context: evergreenLedgerContext, now: Date.now(), reason },
+        const now = Date.now();
+        evergreenRejectedTracker = _persistEvergreenRejectedTracker(
+          (tracker) => _appendEvergreenRejected(
+            tracker,
+            keyword,
+            { context: evergreenLedgerContext, now, reason },
+          ),
         );
-        try { _persistEvergreenRejectedTracker(evergreenRejectedTracker); } catch { /* best effort; next run remains fail-closed */ }
       };
 
       RUN_REPORT.evergreenPool.ran = true;
@@ -17363,10 +17369,13 @@ async function main() {
             // 2026-08-03. Retired only at EVERGREEN_STRIKE_LIMIT.
             // Persisted immediately, same reason as the ban path: a later
             // wall-budget break or hard kill must not lose the count.
-            evergreenRejectedTracker = _strikeEvergreenKeyword(
-              evergreenRejectedTracker,
-              selectedTopic.keyword,
-              { context: evergreenLedgerContext, now: Date.now() },
+            const now = Date.now();
+            evergreenRejectedTracker = _persistEvergreenRejectedTracker(
+              (tracker) => _strikeEvergreenKeyword(
+                tracker,
+                selectedTopic.keyword,
+                { context: evergreenLedgerContext, now },
+              ),
             );
             const strike = evergreenRejectedTracker.strikes
               ?.find((entry) => entry.keyword === selectedTopic.keyword
@@ -17375,7 +17384,6 @@ async function main() {
                 && entry.poolEpoch === evergreenLedgerContext.poolEpoch);
             const n = strike?.count || 0;
             console.error(`   ⚠️  "${selectedTopic.keyword}": strike ${n}/${_EVERGREEN_STRIKE_LIMIT} (quality reject)`);
-            try { _persistEvergreenRejectedTracker(evergreenRejectedTracker); } catch { /* ignore */ }
           }
 
           if (isTopicGateAbort) {

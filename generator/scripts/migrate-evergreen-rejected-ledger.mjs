@@ -19,7 +19,7 @@ import { fileURLToPath } from 'node:url';
 import {
   EVERGREEN_REJECTED_PATH,
   migrateEvergreenRejectedTracker,
-  persistEvergreenRejectedTracker,
+  persistEvergreenRejectedTrackerAtomically,
 } from './lib/article-topic-selector.mjs';
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -73,7 +73,9 @@ function main(argv) {
     console.log('\nNessuna migrazione necessaria: il ledger v2 è già valido.');
     return 0;
   }
-  if (!persistEvergreenRejectedTracker(result.tracker, { path: LEDGER })) {
+  try {
+    persistEvergreenRejectedTrackerAtomically((current) => current, { path: LEDGER });
+  } catch {
     console.error('\n❌ scrittura del ledger fallita');
     return 1;
   }
