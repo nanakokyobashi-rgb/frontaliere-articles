@@ -5157,7 +5157,7 @@
       "reason": "Resolver unico del literal `canonicalPath` emesso dal writer del corpus e letto dal validator e dal fast-publish delle landing. Il contratto resta deliberatamente single-quoted, come il consumer `engine/` mirrorato: accettare template, doppie virgolette o concatenazioni qui creerebbe output che il sito non legge. Il sito consuma la superficie JSON e non esegue questi writer corpus-side.",
       "baseline": {
         "site": null,
-        "corpus": "6c0dbd55ac324769",
+        "corpus": "967a5b8c5709ca34",
         "alignedAt": "2026-10-16"
       }
     },
