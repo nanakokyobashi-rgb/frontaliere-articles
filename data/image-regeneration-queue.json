@@ -100,6 +100,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-16T21:25:25.917Z",
       "lastFailureAt": "2026-10-16T22:02:21.636Z"
+    },
+    {
+      "articleId": "assemblea-ccti-rotta-economia",
+      "title": "Assemblea Cc-Ti: l'economia non è il bancomat dello Stato",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-assemblea-ccti-rotta-economia: openai-codex (vision gate rejected image: Relevant synthetic editorial scene with no readable text or logos, b",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T23:37:31.796Z",
+      "lastFailureAt": "2026-10-16T23:37:31.796Z"
     }
   ]
 }

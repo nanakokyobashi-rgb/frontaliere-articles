@@ -1,9 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/disoccupazione-stabile-nel-mese-di-agosto-442099": {
-    "articleId": "disoccupazione-stabile-agosto-2023",
-    "ts": "2026-09-07T08:38:51.644Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1948426/emergenza-terra-racconta-la-grande-trasformazione": {
     "articleId": "emergenza-terra-trasformazione",
     "ts": "2026-09-07T08:52:51.038Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/la1/programmi/informazione/patti-chiari/cadenazzo-si-accendono-semafori%e2%80%a6-e-proteste--4160668.html": {
     "articleId": "semafori-cadenazzo-proteste-ustra",
     "ts": "2026-10-16T21:09:58.071Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/gehri-leconomia-non-e-il-bancomat-dello-stato-444773": {
+    "articleId": "assemblea-ccti-rotta-economia",
+    "ts": "2026-10-16T23:37:31.798Z",
     "keyForm": 2
   }
 }
