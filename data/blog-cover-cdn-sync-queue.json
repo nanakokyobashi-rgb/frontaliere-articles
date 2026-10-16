@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-arresto-lite-domestica-ticino.webp",
-      "sha256": "3edba7987614d170a0a032cbec6faf360b8ec0412fc7c3d4b4b160133998fe75"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-arresto-lite-domestica-ticino-480w.webp",
-      "sha256": "aca52b0600d50f3a2d75ce668f8bd7ef39cbb8a01ef71594130be16fd7378ee1"
-    }
-  ]
+  "items": []
 }
