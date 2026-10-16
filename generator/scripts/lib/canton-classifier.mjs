@@ -492,7 +492,10 @@ const PERSON_HEAD_WORDS = new Set(['auto', 'automobile', 'automobili', 'moto']);
 const PERSON_GROUP_RE = /^(?:grupp[oi]|comitiv[ae]|delegazion[ei]|squadr[ae]|famigli[ae]|coppi[ae])$/u;
 const PERSON_GROUP_LINKS = new Set(['di', 'dei', 'degli', 'delle']);
 const PERSON_GROUP_MODIFIER_RE = /^(?:ben|e|molto|molta|molti|molte|poco|poca|pochi|poche|piu|grand[ei]|giovan[ei]|inter[oaie]|complet[oaie]|numeros[oaie]|organizzat[oaie]|ufficial[ei]|affiatat[oaie])$/u;
+const PERSON_GROUP_CONNECTORS = new Set(['e']);
 const PERSON_GROUP_MAX_MODIFIERS = 4;
+const PERSON_GROUP_MAX_CONNECTORS = 3;
+const PERSON_GROUP_MAX_CHAIN_TOKENS = 7;
 
 /**
  * Portata nazionale dichiarata nel titolo, nell'excerpt o nell'attacco: una
@@ -807,8 +810,8 @@ export function createCantonClassifier({
     }));
   }
 
-  /** Separatore fra due token: un punto o un a capo chiude la frase. */
-  const sentenceBreak = (text, a, b) => /[.!?;:\n]/u.test(text.slice(a.end, b.start));
+  /** Separatore fra due token: la punteggiatura e i separatori Unicode chiudono la frase. */
+  const sentenceBreak = (text, a, b) => /[.!?;:\n\u2028\u2029…]/u.test(text.slice(a.end, b.start));
 
   function isOriginContext(text, tokens, i) {
     for (let k = i - 1; k >= 0 && k >= i - ORIGIN_WINDOW; k -= 1) {
@@ -862,10 +865,20 @@ export function createCantonClassifier({
 
     let groupHeadIndex = k - 1;
     let modifierCount = 0;
+    let connectorCount = 0;
+    let chainTokenCount = 0;
     while (groupHeadIndex >= 0) {
       const candidate = tokens[groupHeadIndex];
+      chainTokenCount += 1;
+      if (chainTokenCount > PERSON_GROUP_MAX_CHAIN_TOKENS) return false;
       if (sentenceBreak(text, candidate, tokens[groupHeadIndex + 1])) return false;
       if (PERSON_GROUP_RE.test(candidate.norm)) return true;
+      if (PERSON_GROUP_CONNECTORS.has(candidate.norm)) {
+        connectorCount += 1;
+        if (connectorCount > PERSON_GROUP_MAX_CONNECTORS) return false;
+        groupHeadIndex -= 1;
+        continue;
+      }
       if (!PERSON_GROUP_MODIFIER_RE.test(candidate.norm)
         || modifierCount >= PERSON_GROUP_MAX_MODIFIERS) return false;
       modifierCount += 1;

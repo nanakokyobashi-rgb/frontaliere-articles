@@ -178,12 +178,25 @@ describe('omonimi e falsi amici', () => {
     assert.equal(c.mentionsIn('Atletica ticinese in crescita.').find((m) => m.group === 'TI')?.who, undefined);
     assert.equal(c.mentionsIn('Target ticinese in crescita.').find((m) => m.group === 'TI')?.who, undefined);
     assert.equal(c.mentionsIn('Atleti ticinesi in gara.').find((m) => m.group === 'TI')?.who, true);
+    assert.equal(c.mentionsIn('Gruppo molto numeroso e ben organizzato di ticinesi bloccati all\'estero.')
+      .find((m) => m.kind === 'demonym')?.who, true);
+    assert.equal(c.mentionsIn('Gruppo molto e numeroso e ben e organizzato di ticinesi bloccati all\'estero.')
+      .find((m) => m.kind === 'demonym')?.who, undefined);
     assert.equal(c.mentionsIn('Gruppo numeroso e ben organizzato di ticinesi bloccati all\'estero.')
       .find((m) => m.kind === 'demonym')?.who, true);
     assert.equal(c.mentionsIn('Gruppo di lavoro ben organizzato di ticinesi bloccati all\'estero.')
       .find((m) => m.kind === 'demonym')?.who, undefined);
     assert.equal(c.mentionsIn('Gruppo. numeroso ben organizzato di ticinesi bloccati all\'estero.')
       .find((m) => m.kind === 'demonym')?.who, undefined);
+    for (const text of [
+      'Gruppo numeroso… ben organizzato di ticinesi bloccati all\'estero.',
+      'Gruppo numeroso\u2028ben organizzato di ticinesi bloccati all\'estero.',
+      'Gruppo numeroso\u2029ben organizzato di ticinesi bloccati all\'estero.',
+    ]) {
+      const mention = c.mentionsIn(text).find((m) => m.kind === 'demonym');
+      assert.ok(mention, text);
+      assert.equal(mention.who, undefined, text);
+    }
     for (const text of [
       'Dei ticinesi bloccati all\'estero.',
       'Agli ticinesi serve assistenza.',
