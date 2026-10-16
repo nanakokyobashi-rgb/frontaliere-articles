@@ -70,6 +70,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-16T01:20:06.531Z",
       "lastFailureAt": "2026-10-16T01:20:06.531Z"
+    },
+    {
+      "articleId": "olgiate-presidio-vivo-mercato",
+      "title": "Olgiate: Presidio Vivo e sentinelle nei mercati",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-olgiate-presidio-vivo-mercato: openai-codex (vision gate rejected image: Generic synthetic market scene relevant to the topic, but it promine",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T02:57:07.522Z",
+      "lastFailureAt": "2026-10-16T02:57:07.522Z"
     }
   ]
 }
