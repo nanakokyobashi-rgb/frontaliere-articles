@@ -1455,8 +1455,8 @@ describe('formatRemediation shape on the early-expansion fact-check path (#470)'
   );
 
   it('the early-expansion retry calls the same llmFactCheck() as the primary retry', () => {
-    expect(src).toContain('const factResult = await llmFactCheck(data.content.it, pageContent, url);');
-    expect(src).toContain('const expandFactResult = await llmFactCheck(data.content.it, pageContent, url);');
+    expect(src).toContain('const factResult = await llmFactCheck(data.content.it, pageContent, url, CANTON_FACTS_BRIEF);');
+    expect(src).toContain('const expandFactResult = await llmFactCheck(data.content.it, pageContent, url, CANTON_FACTS_BRIEF);');
   });
 
   it('expandFactIssues is llmFactCheck().issues passed through unmodified', () => {
