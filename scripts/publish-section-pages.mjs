@@ -1520,6 +1520,7 @@ export async function publish({
   sleepImpl = sleep,
 }) {
   let failures = 0;
+  let verifiedRssFeeds = cantonRssFeeds;
   let rollbackRssPublication = null;
   let pageSnapshots = null;
   const rollbackRss = async () => {
@@ -1628,6 +1629,7 @@ export async function publish({
       console.error(`::error::[${LOG}] feed RSS ${section} non verificati: nessuna pagina viene caricata`);
       return { failures: rssResult.failures, uploaded: 0, deleted: 0, status: rssResult.status ?? rssStatus };
     }
+    if (Array.isArray(rssResult.feeds)) verifiedRssFeeds = rssResult.feeds;
     if (Array.isArray(rssResult.feeds) && rssResult.feeds.length === 0) {
       for (const page of pages.filter(({ kind }) => kind === 'landing')) {
         const local = path.join(distDir, page.rel);
@@ -1690,10 +1692,16 @@ export async function publish({
     const rollbackFailures = await rollbackTransaction();
     return { failures: failures + 1 + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status: null };
   }
+  if (status !== beforeStatus) {
+    console.error(`::error::[${LOG}] stato edge della sezione ${section} cambiato durante la pubblicazione (${beforeStatus} → ${status})`);
+    const rollbackFailures = await rollbackTransaction();
+    return { failures: failures + 1 + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status };
+  }
   const hasMeta = (body) => String(body ?? '').includes(CORPUS_ROUTE_OWNER_META_TAG);
   for (const page of uploaded) {
-    const requiredRssUrl = page.kind === 'landing' && cantonRssFeeds.length > 0
-      ? cantonRssFeedUrlForLocale(section, page.locale)
+    const expectedRssUrl = page.kind === 'landing' ? cantonRssFeedUrlForLocale(section, page.locale) : null;
+    const requiredRssUrl = expectedRssUrl && verifiedRssFeeds.some((feed) => feed?.url === expectedRssUrl)
+      ? expectedRssUrl
       : null;
     const wantsPublishedPage = (body) => hasMeta(body)
       && (!requiredRssUrl || hasExpectedCantonRssFeedLinks(body, requiredRssUrl));

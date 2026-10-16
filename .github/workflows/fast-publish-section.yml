@@ -285,16 +285,6 @@ jobs:
               '[{section: $s, ids: $ids, bootstrap: $b, removeStaleCantonRssFeeds: $r}]')"
           else
             dry=false
-            # Stessi interruttori di fast-publish-article.yml: un file nel
-            # repo o la variabile FAST_PUBLISH_ARMED=false fermano gli upload
-            # senza toccare il codice.
-            if [ -f .github/FAST_PUBLISH_DISABLED ]; then
-              echo "::warning::.github/FAST_PUBLISH_DISABLED present — running dry"
-              dry=true
-            elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "false" ]; then
-              echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
-              dry=true
-            fi
             if [ "$EVENT_NAME" = 'workflow_run' ] && [ "$WORKFLOW_RUN_EVENT" != 'push' ]; then
               # Schedule/manuale possono aggiornare la superficie API senza un
               # nuovo commit. Il piano deve partire dal registro edge che il
@@ -312,6 +302,15 @@ jobs:
                 | PUSH_BEFORE="$before" node scripts/ci/fast-publish-section.mjs r2-plan \
                 | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
             fi
+          fi
+          # Applica i kill switch anche ai workflow_dispatch, inclusi i replay
+          # stantii: l'input dry_run=false non può riarmare il publisher.
+          if [ -f .github/FAST_PUBLISH_DISABLED ]; then
+            echo "::warning::.github/FAST_PUBLISH_DISABLED present — running dry"
+            dry=true
+          elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "false" ]; then
+            echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
+            dry=true
           fi
           any=false
           [ "$(printf '%s' "$matrix" | jq 'length')" -gt 0 ] && any=true
@@ -408,6 +407,7 @@ jobs:
           ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
           BOOTSTRAP: ${{ matrix.target.bootstrap }}
           REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
+          DRY: ${{ needs.resolve.outputs.dry }}
           STALE_HEAD: ${{ github.event.workflow_run.head_sha }}
           ORIGINAL_PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
           ORIGINAL_PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
@@ -427,7 +427,7 @@ jobs:
             -f bootstrap="$BOOTSTRAP" \
             -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
             -f api_release_commit="$STALE_HEAD" \
-            -f dry_run=false \
+            -f dry_run="$DRY" \
             -f push_before="$replay_before" \
             -f push_after="$replay_after"
 
@@ -549,7 +549,7 @@ jobs:
                 -f bootstrap="$BOOTSTRAP" \
                 -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
                 -f api_release_commit="$WORKFLOW_RUN_HEAD_SHA" \
-                -f dry_run=false \
+                -f dry_run="$DRY" \
                 -f push_before="$replay_before" \
                 -f push_after="$replay_after"
               exit 0

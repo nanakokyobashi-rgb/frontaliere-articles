@@ -1181,6 +1181,54 @@ test('publisher: la verifica CDN/apex richiede anche i link RSS della landing', 
   assert.deepEqual(probes, [{ url: page.cdnUrl, ok: false }]);
 });
 
+test('publisher: verifica le landing col set RSS effettivamente pubblicato', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-rss-verified-set-'));
+  const page = pageEntry('canton-ti', 'articoli-ticino/index.html', 'landing');
+  const feeds = cantonRssFeedEntries('canton-ti');
+  const localPage = path.join(fixtureRoot, page.rel);
+  const sourceHtml = addCantonRssFeedLink(
+    `<!doctype html><html><head>${CORPUS_ROUTE_OWNER_META_TAG}</head><body><main>${'contenuto '.repeat(30)}</main></body></html>`,
+    feeds[0].url,
+  );
+  mkdirSync(path.dirname(localPage), { recursive: true });
+  writeFileSync(localPage, sourceHtml, 'utf8');
+  let uploadedHtml = '';
+  const probes = [];
+  try {
+    const result = await publish({
+      section: 'canton-ti',
+      pages: [page],
+      cdnUploads: [],
+      cantonRssFeeds: feeds,
+      obsoletePages: [],
+      distDir: fixtureRoot,
+      releaseCommit: 'a'.repeat(40),
+      publishedStatusImpl: async () => 'live',
+      publishCantonRssFeedsImpl: async () => ({ failures: 0, uploaded: 0, verified: 5, feeds: [] }),
+      runImpl: (_command, args) => {
+        if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+          uploadedHtml = readFileSync(args[1], 'utf8');
+          return { code: 0, stdout: '✅ uploaded' };
+        }
+        if (args.includes('scripts/cf-purge-cache.mjs')) return { code: 0, stdout: '' };
+        throw new Error(`comando inatteso: ${args.join(' ')}`);
+      },
+      probeImpl: async (url, { want }) => {
+        const ok = want(uploadedHtml);
+        probes.push({ url, ok });
+        return { ok, status: ok ? 200 : 'HTTP 503', body: uploadedHtml };
+      },
+    });
+
+    assert.equal(result.failures, 0);
+    assert.doesNotMatch(uploadedHtml, /data-canton-rss-feed/);
+    assert.equal(probes.length, 2, 'CDN e apex verificano la landing senza link RSS');
+    assert.ok(probes.every(({ ok }) => ok));
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('publisher: una sezione live senza articoli non annuncia feed RSS', () => {
   const feeds = cantonRssFeedEntries('canton-ti');
   const emptyCounts = { bySection: { 'canton-ti': { articles: 0 } } };
@@ -1557,6 +1605,74 @@ test('publisher: rilegge lo stato edge subito prima di pubblicare RSS', async ()
   assert.equal(result.failures, 1);
   assert.equal(result.status, 'draft');
   assert.equal(rssCalls, 0, 'una sezione retrocessa non deve entrare nel publisher RSS');
+});
+
+test('publisher: una demozione durante la verifica ripristina HTML e feed RSS', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'publish-rss-status-changed-'));
+  const page = pageEntry('canton-ti', 'articoli-ticino/index.html', 'landing');
+  const feed = cantonRssFeedEntries('canton-ti')[0];
+  const previousHtml = `<!doctype html><html><head>${CORPUS_ROUTE_OWNER_META_TAG}</head><body>release precedente</body></html>`;
+  const publishedHtml = addCantonRssFeedLink(
+    `<!doctype html><html><head>${CORPUS_ROUTE_OWNER_META_TAG}</head><body>release nuova</body></html>`,
+    feed.url,
+  );
+  const statuses = ['live', 'live', 'draft'];
+  const events = [];
+  let snapshotTaken = false;
+  let restoring = false;
+  try {
+    const result = await publish({
+      section: 'canton-ti',
+      pages: [page],
+      cdnUploads: [],
+      cantonRssFeeds: [feed],
+      obsoletePages: [],
+      distDir: fixtureRoot,
+      releaseCommit: 'e'.repeat(40),
+      publishedStatusImpl: async () => statuses.shift() ?? 'draft',
+      publishCantonRssFeedsImpl: async () => ({
+        failures: 0,
+        uploaded: 1,
+        verified: 1,
+        feeds: [feed],
+        rollback: async () => {
+          events.push('rss-rollback');
+          return { failures: 0 };
+        },
+      }),
+      runImpl: (_command, args) => {
+        if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+          if (args[1].includes('.canton-page-rollback-')) {
+            restoring = true;
+            events.push('page-restored');
+          } else {
+            events.push('page-uploaded');
+          }
+          return { code: 0, stdout: '✅ uploaded' };
+        }
+        if (args.includes('scripts/cf-purge-cache.mjs')) {
+          events.push(restoring ? 'rollback-purge' : 'page-purge');
+          return { code: 0, stdout: '' };
+        }
+        throw new Error(`comando inatteso: ${args.join(' ')}`);
+      },
+      probeImpl: async (_url, { want }) => {
+        if (!snapshotTaken) {
+          snapshotTaken = true;
+          return { ok: true, status: 200, body: previousHtml };
+        }
+        const body = restoring ? previousHtml : publishedHtml;
+        return { ok: want(body), status: 200, body };
+      },
+    });
+
+    assert.equal(result.failures, 1);
+    assert.equal(result.rollbackFailures, 0);
+    assert.equal(result.status, 'draft');
+    assert.deepEqual(events, ['page-uploaded', 'page-purge', 'page-restored', 'rollback-purge', 'rss-rollback']);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
 });
 
 test('publisher: RSS non live fallisce, e un manifest senza feed elimina la superficie precedente', async () => {
@@ -1972,6 +2088,13 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /id: replay_freshness[\s\S]*gh api "repos\/\$REPO\/git\/ref\/heads\/main"/);
   assert.match(wf, /if: steps\.replay_freshness\.outputs\.fresh == 'true'/);
   assert.match(wf, /Dispatch bounded replay on current main/);
+  const dispatchPlanStart = wf.indexOf('if [ "${{ github.event_name }}" = "workflow_dispatch" ]');
+  const dispatchPlanEnd = wf.indexOf('any=false', dispatchPlanStart);
+  const dispatchPlan = wf.slice(dispatchPlanStart, dispatchPlanEnd);
+  assert.match(dispatchPlan, /FAST_PUBLISH_DISABLED/);
+  assert.match(dispatchPlan, /FAST_PUBLISH_ARMED/);
+  assert.equal((wf.match(/-f dry_run="\$DRY"/g) ?? []).length, 2, 'entrambi i redispatch propagano il dry-run calcolato');
+  assert.doesNotMatch(wf, /-f dry_run=false/);
   assert.match(wf, /gh workflow run fast-publish-section\.yml --repo "\$REPO" --ref main/);
   assert.match(wf, /replay_before="\$\{ORIGINAL_PUSH_BEFORE:-\$STALE_HEAD\}"/);
   assert.match(wf, /replay_after="\$\{ORIGINAL_PUSH_AFTER:-\$STALE_HEAD\}"/);
