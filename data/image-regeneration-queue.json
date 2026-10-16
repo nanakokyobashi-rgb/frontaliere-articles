@@ -80,6 +80,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-16T03:19:05.551Z",
       "lastFailureAt": "2026-10-16T05:31:28.963Z"
+    },
+    {
+      "articleId": "varese-macello-belforte-visite-2026",
+      "title": "Varese: ex Macello Belforte apre per bonifica e mostra guidata",
+      "fallbackImage": "/images/blog/article-lavori-autolaghi-ottobre-2026.webp",
+      "reason": "All image providers failed for article-varese-macello-belforte-visite-2026: openai-codex (vision gate rejected image: Synthetic generic urban-park illustration with no readable tex",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T06:05:12.170Z",
+      "lastFailureAt": "2026-10-16T06:05:12.170Z"
     }
   ]
 }
