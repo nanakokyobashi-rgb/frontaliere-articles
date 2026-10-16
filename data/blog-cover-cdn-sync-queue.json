@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-mostre-maga-gallarate-2026.webp",
+      "sha256": "80e7d08f7ac617bb29867ab456a3ea049b560539d8cc9571b354841a153bd3bc"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-mostre-maga-gallarate-2026-480w.webp",
+      "sha256": "d70075ebe60a6e09f3386a5e83af77099502ba572d5963b0ea18d73f7fd6e1bc"
+    }
+  ]
 }
