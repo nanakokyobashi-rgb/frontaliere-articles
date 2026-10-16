@@ -1,29 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-concerto-gallarate-uto-ughi-2026.webp",
-      "sha256": "0d2901d2028f8d67b704166db1ac188c34931cc85357602266e70f383bdbc2f9"
-    },
-    {
-      "path": "public/images/blog/article-frontaliere-dimissioni-termine-preavviso.webp",
-      "sha256": "03fa99657a2abc6585730adb4e142976d1f75b9ff73bf0c72045cec4c0084a7c"
-    },
-    {
-      "path": "public/images/blog/article-varese-piazzale-anastasi-intitolazione.webp",
-      "sha256": "e6785d148a773fd55bece0db80bb63ad7d232029a4290c577474e869f63c6bf8"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-concerto-gallarate-uto-ughi-2026-480w.webp",
-      "sha256": "717f5cead1c0350c5d23a1d41e296da62c6f33b607c4e84966fc40d12bc5196a"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-frontaliere-dimissioni-termine-preavviso-480w.webp",
-      "sha256": "9b3056859dda7a034c2c5ccf2d17664ff9bfc508622af6b79cd320f9a7a040db"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-varese-piazzale-anastasi-intitolazione-480w.webp",
-      "sha256": "242af3cc1e61fddbc9b09a937e0a664b4f6c98ea1dfc409edb06d691798e6dbb"
-    }
-  ]
+  "items": []
 }
