@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-ocst-storia-frontalieri-ticino.webp",
+      "sha256": "f3eebc6cc2d0c16007ce2b83ec443371693c63d164bfe495ddbb15dea2fcffc2"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-ocst-storia-frontalieri-ticino-480w.webp",
+      "sha256": "63ac2052e52eb1a7cc6d34c96a85d2150ccbe146ad13bef566656a089f958202"
+    }
+  ]
 }
