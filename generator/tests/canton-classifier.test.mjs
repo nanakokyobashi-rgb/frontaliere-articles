@@ -183,8 +183,10 @@ describe('omonimi e falsi amici', () => {
     // Confine valido: 4 modificatori + 3 connettivi + la testa gruppo.
     assert.equal(c.mentionsIn('Gruppo molto e numeroso e ben e organizzato di ticinesi bloccati all\'estero.')
       .find((m) => m.kind === 'demonym')?.who, true);
-    assert.equal(c.mentionsIn('Gruppo numeroso e ben organizzato di ticinesi bloccati all\'estero.')
-      .find((m) => m.kind === 'demonym')?.who, true);
+    // Forma maschile singolare esplicita, accanto alle forme flesse numerosa/numerosi/numerose.
+    const masculineNumeroso = c.mentionsIn('Gruppo numeroso e ben organizzato di ticinesi bloccati all\'estero.')
+      .find((m) => m.kind === 'demonym');
+    assert.equal(masculineNumeroso?.who, true);
     assert.equal(c.mentionsIn('Gruppo di lavoro ben organizzato di ticinesi bloccati all\'estero.')
       .find((m) => m.kind === 'demonym')?.who, undefined);
     assert.equal(c.mentionsIn('Gruppo. numeroso ben organizzato di ticinesi bloccati all\'estero.')
