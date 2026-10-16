@@ -1,3 +1,4 @@
+import '../../host/cantonSectionsBootstrap.mjs';
 import { CANTON_HUB_TOPIC_KEYS } from '../../engine/shared/cantonArticleSectionCore.generated.mjs';
 import { assertCantonHubLocaleSlug } from '../../engine/shared/cantonSectionCopy.mjs';
 
