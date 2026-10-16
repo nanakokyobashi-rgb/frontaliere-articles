@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T15:29:31.518Z",
-  "contentHash": "61f099f79e56d2fed969fcdbecceca16de08c6da841ac8872eab5247c8d52640",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "c7843f65ea201ffb07ab3e94113ac9a89961e87d0de0a15e2ef52eaf0822cc39",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-16T05:03:47.755Z",
+      "updatedAt": "2026-10-16T11:58:12.009Z",
       "keyFacts": 2
     },
     {
@@ -27,12 +27,12 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "30",
+          "value": "31",
           "note": "segnalazioni aggiornate: 16 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "93",
+          "value": "94",
           "note": "segnalazioni aggiornate: 16 ottobre 2026"
         }
       ],
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -169,7 +169,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-16T15:29:31.518Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "BE",
@@ -179,12 +179,12 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "30",
+          "value": "31",
           "note": "reports as of 16 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "93",
+          "value": "94",
           "note": "reports as of 16 October 2026"
         }
       ],
@@ -243,7 +243,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -321,7 +321,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-16T15:29:31.518Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "BE",
@@ -331,12 +331,12 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "30",
+          "value": "31",
           "note": "Meldungen vom 16. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "93",
+          "value": "94",
           "note": "Meldungen vom 16. Oktober 2026"
         }
       ],
@@ -395,7 +395,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -473,7 +473,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-16T15:29:31.518Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "BE",
@@ -483,12 +483,12 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "30",
+          "value": "31",
           "note": "signalements au 16 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "93",
+          "value": "94",
           "note": "signalements au 16 octobre 2026"
         }
       ],
@@ -547,7 +547,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -625,7 +625,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-16T15:29:31.518Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

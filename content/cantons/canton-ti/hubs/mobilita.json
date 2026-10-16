@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T14:33:38.367Z",
-  "contentHash": "2f973ac4fa03c17307c24416880dc73073a3a800ed07f479a0a3af5ef6548c72",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "bded338b88b7474bfd11fb2e3be344e6f32603a257f3effceefdd4cf047c8cb7",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-16T05:03:47.755Z",
+      "updatedAt": "2026-10-16T11:58:12.009Z",
       "keyFacts": 2
     },
     {
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "5",
+          "value": "7",
           "note": "segnalazioni aggiornate: 16 ottobre 2026"
         },
         {
@@ -129,6 +129,17 @@
               "date": "2026-10-15T16:15:00.000Z"
             },
             {
+              "label": "Gordola <-> Sonogno tra Luogo Gordola E Luogo Berzona Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 31 ottobre 2026",
+              "date": "2026-10-16T07:31:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata",
+              "value": "Chiusura",
+              "date": "2026-10-16T09:07:00.000Z"
+            },
+            {
               "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
               "value": "Chiusura",
               "detail": "fine prevista: 22 ottobre 2026",
@@ -141,25 +152,13 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo tra Raccordo autostradale Diramazione Mendrisio E Svincolo autostradale Melide/Bissone Situazione: colonna Causa: traffico congestionato",
+              "label": "Revocato: 406 Riazzino -> Cadenazzo tra Luogo Quartino E Luogo Cadenazzo Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffico",
-              "date": "2026-10-16T04:17:00.000Z"
-            },
-            {
-              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
-              "value": "Traffico",
-              "date": "2026-10-16T05:03:47.755Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
-            },
-            {
-              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
-              "value": "Cantiere",
-              "detail": "fine prevista: 29 dicembre 2028",
-              "date": "2021-06-25T03:00:00.000Z"
+              "date": "2026-10-16T08:33:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -293,7 +292,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "TI",
@@ -308,7 +307,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "5",
+          "value": "7",
           "note": "reports as of 16 October 2026"
         },
         {
@@ -400,6 +399,17 @@
               "date": "2026-10-15T16:15:00.000Z"
             },
             {
+              "label": "Gordola <-> Sonogno tra Luogo Gordola E Luogo Berzona Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Closure",
+              "detail": "until 31 October 2026",
+              "date": "2026-10-16T07:31:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata",
+              "value": "Closure",
+              "date": "2026-10-16T09:07:00.000Z"
+            },
+            {
               "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
               "value": "Closure",
               "detail": "until 22 October 2026",
@@ -412,25 +422,13 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo tra Raccordo autostradale Diramazione Mendrisio E Svincolo autostradale Melide/Bissone Situazione: colonna Causa: traffico congestionato",
+              "label": "Revocato: 406 Riazzino -> Cadenazzo tra Luogo Quartino E Luogo Cadenazzo Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffic",
-              "date": "2026-10-16T04:17:00.000Z"
-            },
-            {
-              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
-              "value": "Traffic",
-              "date": "2026-10-16T05:03:47.755Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
-            },
-            {
-              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
-              "value": "Roadworks",
-              "detail": "until 29 December 2028",
-              "date": "2021-06-25T03:00:00.000Z"
+              "date": "2026-10-16T08:33:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -563,7 +561,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "TI",
@@ -578,7 +576,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "5",
+          "value": "7",
           "note": "Meldungen vom 16. Oktober 2026"
         },
         {
@@ -670,6 +668,17 @@
               "date": "2026-10-15T16:15:00.000Z"
             },
             {
+              "label": "Gordola <-> Sonogno zwischen Ortschaft Gordola und Ortschaft Berzona Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 31. Oktober 2026",
+              "date": "2026-10-16T07:31:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
+              "value": "Sperrung",
+              "date": "2026-10-16T09:07:00.000Z"
+            },
+            {
               "label": "A13 Bellinzona <-> Chur zwischen Anschluss San Bernardino und Anschluss San Bernardino-Pass Sachlage: Strecke gesperrt Baustelle, Länge [km] 7.5",
               "value": "Sperrung",
               "detail": "bis 22. Oktober 2026",
@@ -682,25 +691,13 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> Gotthard zwischen Autobahndreieck Verzweigung Mendrisio und Anschluss Melide/Bissone Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "label": "Aufgehoben: 406 Riazzino -> Cadenazzo zwischen Ortschaft Quartino und Ortschaft Cadenazzo Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
               "value": "Verkehr",
-              "date": "2026-10-16T04:17:00.000Z"
-            },
-            {
-              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
-              "value": "Verkehr",
-              "date": "2026-10-16T05:03:47.755Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
-            },
-            {
-              "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
-              "value": "Baustelle",
-              "detail": "bis 29. Dezember 2028",
-              "date": "2021-06-25T03:00:00.000Z"
+              "date": "2026-10-16T08:33:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -833,7 +830,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "TI",
@@ -848,7 +845,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "5",
+          "value": "7",
           "note": "signalements au 16 octobre 2026"
         },
         {
@@ -940,6 +937,17 @@
               "date": "2026-10-15T16:15:00.000Z"
             },
             {
+              "label": "Gordola <-> Sonogno entre Localité Gordola et Localité Berzona Situation: fermé Raison: travaux de maintenance",
+              "value": "Fermeture",
+              "detail": "jusqu’au 31 octobre 2026",
+              "date": "2026-10-16T07:31:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
+              "value": "Fermeture",
+              "date": "2026-10-16T09:07:00.000Z"
+            },
+            {
               "label": "A13 Bellinzone <-> Coire entre Jonction autoroutière San Bernardino et Jonction autoroutière San Bernardino-Pass Situation: fermé travaux, longueur [km] 7.5",
               "value": "Fermeture",
               "detail": "jusqu’au 22 octobre 2026",
@@ -952,25 +960,13 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> St-Gothard entre Echangeur Echangeur de Mendrisio et Jonction autoroutière Melide/Bissone Situation: bouchon Raison: surcharge de trafic",
+              "label": "Révoqué: 406 Riazzino -> Cadenazzo entre Localité Quartino et Localité Cadenazzo Situation: trafic en accordéon Raison: surcharge de trafic",
               "value": "Trafic",
-              "date": "2026-10-16T04:17:00.000Z"
-            },
-            {
-              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
-              "value": "Trafic",
-              "date": "2026-10-16T05:03:47.755Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
-            },
-            {
-              "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
-              "value": "Chantier",
-              "detail": "jusqu’au 29 décembre 2028",
-              "date": "2021-06-25T03:00:00.000Z"
+              "date": "2026-10-16T08:33:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1104,7 +1100,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

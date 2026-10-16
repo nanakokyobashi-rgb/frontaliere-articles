@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "1f6a00dafadf55739bc027f60b55ae129237157b546b5bd5f1bce8017c81511a",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "31c709aac7246cb3eac5c2d1b4f7cc25931eddfeed250a484f22ed39f67c8621",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T03:54:22.189Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "69",
+          "value": "71",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -87,15 +87,15 @@
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
-              "label": "Parental Leave, with a Twist",
-              "detail": "Gasthaus Heiligkreuz, Binn — in corso, ultimo giorno: 21 ottobre 2026",
+              "label": "Mushroom workshop",
+              "detail": "Veysonnaz — in corso, ultimo giorno: 18 ottobre 2026",
               "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/elternzeit-mal-anders/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mushroom-workshop/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
@@ -141,7 +141,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "VS",
@@ -151,7 +151,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "69",
+          "value": "71",
           "note": "from the site’s events calendar"
         }
       ],
@@ -216,15 +216,15 @@
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
-              "label": "Parental Leave, with a Twist",
-              "detail": "Gasthaus Heiligkreuz, Binn — ongoing, last day: 21 October 2026",
+              "label": "Mushroom workshop",
+              "detail": "Veysonnaz — ongoing, last day: 18 October 2026",
               "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/elternzeit-mal-anders/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mushroom-workshop/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
@@ -268,7 +268,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "VS",
@@ -278,7 +278,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "69",
+          "value": "71",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -343,15 +343,15 @@
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
-              "label": "Elternzeit mal anders",
-              "detail": "Gasthaus Heiligkreuz, Binn — läuft, letzter Tag: 21. Oktober 2026",
+              "label": "Pilz-Workshop",
+              "detail": "Veysonnaz — läuft, letzter Tag: 18. Oktober 2026",
               "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/elternzeit-mal-anders/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mushroom-workshop/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
@@ -395,7 +395,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "VS",
@@ -405,7 +405,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "69",
+          "value": "71",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -470,15 +470,15 @@
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
-              "label": "Un congé parental pas comme les autres",
-              "detail": "Gasthaus Heiligkreuz, Binn — en cours, dernier jour : 21 octobre 2026",
+              "label": "Atelier champignons",
+              "detail": "Veysonnaz — en cours, dernier jour : 18 octobre 2026",
               "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/elternzeit-mal-anders/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mushroom-workshop/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
@@ -524,7 +524,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

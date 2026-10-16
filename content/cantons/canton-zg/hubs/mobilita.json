@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T14:33:38.367Z",
-  "contentHash": "d5645d17aaf15aafdb7f06654e85e5f31c719b80a5736481f2b53521abf67579",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "3cc5a5ff8e8dd96cb71922592054e5907d4fdac6b8b1e5eb7cf151276a70d63d",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-16T05:03:47.755Z",
+      "updatedAt": "2026-10-16T11:58:12.009Z",
       "keyFacts": 2
     },
     {
@@ -45,7 +45,7 @@
             {
               "label": "A4 Zürich -> Brunnen Svincolo autostradale Cham Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.2",
               "value": "Chiusura",
-              "detail": "fine prevista: 19 ottobre 2026",
+              "detail": "fine prevista: 20 ottobre 2026",
               "date": "2026-09-23T06:11:00.000Z"
             },
             {
@@ -87,12 +87,12 @@
             {
               "label": "A14 Diramazione Blegi <-> Walterswil tra Svincolo autostradale Walterswil E Svincolo autostradale Baar Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsie…",
               "value": "Cantiere",
-              "detail": "fine prevista: 23 ottobre 2026",
+              "detail": "fine prevista: 21 ottobre 2026",
               "date": "2026-10-12T07:36:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -178,7 +178,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "ZG",
@@ -206,7 +206,7 @@
             {
               "label": "A4 Zürich -> Brunnen Svincolo autostradale Cham Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.2",
               "value": "Closure",
-              "detail": "until 19 October 2026",
+              "detail": "until 20 October 2026",
               "date": "2026-09-23T06:11:00.000Z"
             },
             {
@@ -248,12 +248,12 @@
             {
               "label": "A14 Diramazione Blegi <-> Walterswil tra Svincolo autostradale Walterswil E Svincolo autostradale Baar Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsie…",
               "value": "Roadworks",
-              "detail": "until 23 October 2026",
+              "detail": "until 21 October 2026",
               "date": "2026-10-12T07:36:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -339,7 +339,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "ZG",
@@ -367,7 +367,7 @@
             {
               "label": "A4 Zürich -> Brunnen Anschluss Cham Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.2",
               "value": "Sperrung",
-              "detail": "bis 19. Oktober 2026",
+              "detail": "bis 20. Oktober 2026",
               "date": "2026-09-23T06:11:00.000Z"
             },
             {
@@ -409,12 +409,12 @@
             {
               "label": "A14 Verzweigung Blegi <-> Walterswil zwischen Anschluss Walterswil und Anschluss Baar Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.4 Verkehrsführung: Fahrbahnverengung auf einen…",
               "value": "Baustelle",
-              "detail": "bis 23. Oktober 2026",
+              "detail": "bis 21. Oktober 2026",
               "date": "2026-10-12T07:36:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -500,7 +500,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "ZG",
@@ -528,7 +528,7 @@
             {
               "label": "A4 Zurich -> Brunnen Jonction autoroutière Cham Situation: entrée fermée travaux, longueur [km] 0.2",
               "value": "Fermeture",
-              "detail": "jusqu’au 19 octobre 2026",
+              "detail": "jusqu’au 20 octobre 2026",
               "date": "2026-09-23T06:11:00.000Z"
             },
             {
@@ -570,12 +570,12 @@
             {
               "label": "A14 Echangeur de Blegi <-> Walterswil entre Jonction autoroutière Walterswil et Jonction autoroutière Baar Situation: trafic perturbé travaux, longueur [km] 0.4 Gestion du trafic: rétrécissement des…",
               "value": "Chantier",
-              "detail": "jusqu’au 23 octobre 2026",
+              "detail": "jusqu’au 21 octobre 2026",
               "date": "2026-10-12T07:36:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -661,7 +661,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

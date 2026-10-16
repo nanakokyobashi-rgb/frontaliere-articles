@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T14:33:38.367Z",
-  "contentHash": "00e402d8643e5d57b93a1ef2fae078788d4b935784ac85e87c1dc59687654a1d",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "aceaee71514cf6db6b97068040a783a1fe34511a95cc41156446d84ee954bff6",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-16T05:03:47.755Z",
+      "updatedAt": "2026-10-16T11:58:12.009Z",
       "keyFacts": 2
     },
     {
@@ -141,19 +141,20 @@
               "date": "2026-10-14T16:00:00.000Z"
             },
             {
-              "label": "Revocato: A1 Bern -> Zürich tra Svincolo autostradale Lenzburg E Raccordo autostradale Diramazione Birrfeld Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-16T04:25:00.000Z"
-            },
-            {
               "label": "Langenthal <-> Zofingen tra Luogo Strengelbach E Luogo St. Urban Situazione: pericolo Causa: lavori di costruzione",
               "value": "Cantiere",
               "detail": "fine prevista: 30 aprile 2027",
               "date": "2025-04-07T09:38:00.000Z"
+            },
+            {
+              "label": "H24 Aarau <-> Frick Luogo Rombach Situazione: problemi di traffico cantiere Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
+              "value": "Cantiere",
+              "detail": "fine prevista: 1 luglio 2027",
+              "date": "2025-09-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -239,7 +240,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "AG",
@@ -358,19 +359,20 @@
               "date": "2026-10-14T16:00:00.000Z"
             },
             {
-              "label": "Revocato: A1 Bern -> Zürich tra Svincolo autostradale Lenzburg E Raccordo autostradale Diramazione Birrfeld Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-16T04:25:00.000Z"
-            },
-            {
               "label": "Langenthal <-> Zofingen tra Luogo Strengelbach E Luogo St. Urban Situazione: pericolo Causa: lavori di costruzione",
               "value": "Roadworks",
               "detail": "until 30 April 2027",
               "date": "2025-04-07T09:38:00.000Z"
+            },
+            {
+              "label": "H24 Aarau <-> Frick Luogo Rombach Situazione: problemi di traffico cantiere Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
+              "value": "Roadworks",
+              "detail": "until 1 July 2027",
+              "date": "2025-09-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -456,7 +458,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "AG",
@@ -575,19 +577,20 @@
               "date": "2026-10-14T16:00:00.000Z"
             },
             {
-              "label": "Aufgehoben: A1 Bern -> Zürich zwischen Anschluss Lenzburg und Autobahndreieck Verzweigung Birrfeld Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-16T04:25:00.000Z"
-            },
-            {
               "label": "Langenthal <-> Zofingen zwischen Ortschaft Strengelbach und Ortschaft St. Urban Sachlage: Gefahr Ursache: Bauarbeiten",
               "value": "Baustelle",
               "detail": "bis 30. April 2027",
               "date": "2025-04-07T09:38:00.000Z"
+            },
+            {
+              "label": "H24 Aarau <-> Frick Ortschaft Rombach Sachlage: Verkehrsbehinderung Baustelle Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
+              "value": "Baustelle",
+              "detail": "bis 1. Juli 2027",
+              "date": "2025-09-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -673,7 +676,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "AG",
@@ -792,19 +795,20 @@
               "date": "2026-10-14T16:00:00.000Z"
             },
             {
-              "label": "Révoqué: A1 Berne -> Zurich entre Jonction autoroutière Lenzburg et Echangeur Echangeur de Birrfeld Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-16T04:25:00.000Z"
-            },
-            {
               "label": "Langenthal <-> Zofingen entre Localité Strengelbach et Localité St. Urban Situation: danger Raison: travaux de construction",
               "value": "Chantier",
               "detail": "jusqu’au 30 avril 2027",
               "date": "2025-04-07T09:38:00.000Z"
+            },
+            {
+              "label": "H24 Aarau <-> Frick Localité Rombach Situation: trafic perturbé travaux Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
+              "value": "Chantier",
+              "detail": "jusqu’au 1er juillet 2027",
+              "date": "2025-09-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -890,7 +894,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

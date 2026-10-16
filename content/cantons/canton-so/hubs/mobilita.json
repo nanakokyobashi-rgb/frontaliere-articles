@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T15:29:31.518Z",
-  "contentHash": "8db6ef45b0309aaf405d734a4af5e65548ced374b032dc71b352637cc99ae186",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "8c0e096284f6180d11128a2733cc6f417076291388ccd2e4791af628a63c66f1",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-16T05:03:47.755Z",
+      "updatedAt": "2026-10-16T11:58:12.009Z",
       "keyFacts": 2
     },
     {
@@ -85,14 +85,13 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
-              "value": "Cantiere",
-              "detail": "fine prevista: 31 dicembre 2028",
-              "date": "2024-12-30T04:49:00.000Z"
+              "label": "A1 Bern -> Zürich tra Svincolo autostradale Kriegstetten E Raccordo autostradale Diramazione Härkingen Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-16T11:36:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -150,7 +149,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-16T15:29:31.518Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "SO",
@@ -218,14 +217,13 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
-              "value": "Roadworks",
-              "detail": "until 31 December 2028",
-              "date": "2024-12-30T04:49:00.000Z"
+              "label": "A1 Bern -> Zürich tra Svincolo autostradale Kriegstetten E Raccordo autostradale Diramazione Härkingen Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-16T11:36:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -282,7 +280,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-16T15:29:31.518Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "SO",
@@ -350,14 +348,13 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "Balsthal <-> Laufen zwischen Ortschaft Oberbeinwil und Pass Passwang Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung",
-              "value": "Baustelle",
-              "detail": "bis 31. Dezember 2028",
-              "date": "2024-12-30T04:49:00.000Z"
+              "label": "A1 Bern -> Zürich zwischen Anschluss Kriegstetten und Autobahndreieck Verzweigung Härkingen Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-16T11:36:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -414,7 +411,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-16T15:29:31.518Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "SO",
@@ -482,14 +479,13 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "Balsthal <-> Laufon entre Localité Oberbeinwil et Col Passwang Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies",
-              "value": "Chantier",
-              "detail": "jusqu’au 31 décembre 2028",
-              "date": "2024-12-30T04:49:00.000Z"
+              "label": "A1 Berne -> Zurich entre Jonction autoroutière Kriegstetten et Echangeur Echangeur de Härkingen Situation: trafic en accordéon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-16T11:36:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-16T05:03:47.755Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -547,7 +543,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-16T15:29:31.518Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }
