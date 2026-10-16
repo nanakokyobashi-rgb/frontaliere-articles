@@ -13,7 +13,13 @@ import '../../../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { isLicensedPhotoRecord, validateGeneratedImageRecord, validateGeneratedImageRegistry } from '../../../engine/shared/generatedImageRegistry.mjs';
+import {
+  GENERATED_IMAGE_KIND,
+  GENERATED_IMAGE_LICENSE,
+  isLicensedPhotoRecord,
+  validateGeneratedImageRecord,
+  validateGeneratedImageRegistry,
+} from '../../../engine/shared/generatedImageRegistry.mjs';
 import { coverKey, imageCreditRecordFromGeneratedImageRecord } from '../../../engine/shared/imageCredits.mjs';
 import { IMAGE_CREDITS_ROOT, corpusCreditReader } from '../../../scripts/lib/image-credit-records.mjs';
 import { writeJsonAtomic } from './atomic-write-json.mjs';
@@ -92,6 +98,13 @@ function generatedEnvelope(assets) {
   return { schema: 1, assetCount: assets.length, assets };
 }
 
+function normalizeGeneratedImageRecord(record) {
+  if (record?.kind === undefined && record?.license === GENERATED_IMAGE_LICENSE) {
+    return { ...record, kind: GENERATED_IMAGE_KIND };
+  }
+  return record;
+}
+
 function normalizePath(value) {
   if (typeof value !== 'string') return null;
   try {
@@ -139,7 +152,9 @@ export function readGeneratedImageRecords(root, { strict = true } = {}) {
   if (!verdict.valid && strict) {
     throw new Error(`generated image registry is invalid: ${verdict.errors.join('; ')}`);
   }
-  return (raw.assets || []).filter((record) => validateGeneratedImageRecord(record).valid);
+  return (raw.assets || [])
+    .filter((record) => validateGeneratedImageRecord(record).valid)
+    .map(normalizeGeneratedImageRecord);
 }
 
 export function readEditorialImageRecords(root, { strict = true } = {}) {
@@ -191,7 +206,7 @@ export function imageRecordForPath(root, imagePath, { strict = false } = {}) {
       // The built-in governed record below keeps the outage fallback usable;
       // a malformed optional registry must not reject the article cover.
     }
-    return { kind: 'generated', record: STATIC_FALLBACK_RECORD };
+    return { kind: 'generated', record: normalizeGeneratedImageRecord(STATIC_FALLBACK_RECORD) };
   }
   const generated = readGeneratedImageRecords(root, { strict })
     .find((record) => (record.scope === 'article-hero' || record.scope === 'place') && record.imageUrl === normalized);
@@ -229,19 +244,20 @@ export function imageCreditFileForGeneratedImageRecord(root, record) {
 }
 
 export function appendGeneratedImageRecord(root, record) {
-  const verdict = validateGeneratedImageRecord(record);
+  const normalizedRecord = normalizeGeneratedImageRecord(record);
+  const verdict = validateGeneratedImageRecord(normalizedRecord);
   if (!verdict.valid) throw new Error(`generated image record rejected: ${verdict.errors.join('; ')}`);
-  const photoCredit = isLicensedPhotoRecord(record)
-    ? imageCreditRecordFromGeneratedImageRecord(record)
+  const photoCredit = isLicensedPhotoRecord(normalizedRecord)
+    ? imageCreditRecordFromGeneratedImageRecord(normalizedRecord)
     : null;
   const assets = readGeneratedImageRecords(root);
-  const replaced = assets.filter((item) => item.assetId === record.assetId || item.imageUrl === record.imageUrl);
+  const replaced = assets.filter((item) => item.assetId === normalizedRecord.assetId || item.imageUrl === normalizedRecord.imageUrl);
   const staleCreditFiles = new Set(
     replaced.map((item) => imageCreditFileForGeneratedImageRecord(root, item)).filter(Boolean),
   );
-  const creditFile = photoCredit ? imageCreditFileForGeneratedImageRecord(root, record) : null;
-  const next = assets.filter((item) => item.assetId !== record.assetId && item.imageUrl !== record.imageUrl);
-  next.push(record);
+  const creditFile = photoCredit ? imageCreditFileForGeneratedImageRecord(root, normalizedRecord) : null;
+  const next = assets.filter((item) => item.assetId !== normalizedRecord.assetId && item.imageUrl !== normalizedRecord.imageUrl);
+  next.push(normalizedRecord);
   writeJsonAtomic(absolute(root, GENERATED_IMAGE_REGISTRY_REL), generatedEnvelope(next));
   for (const staleCreditFile of staleCreditFiles) {
     if (staleCreditFile !== creditFile) fs.rmSync(staleCreditFile, { force: true });
@@ -276,7 +292,7 @@ export function buildPublishedBlogImageRegistry(root, images = []) {
   // record but no public provenance record for readers.
   const staticRecord = generatedRecords.find(
     (record) => record.scope === 'place' && record.imageUrl === STATIC_FALLBACK_IMAGE,
-  ) || STATIC_FALLBACK_RECORD;
+  ) || normalizeGeneratedImageRecord(STATIC_FALLBACK_RECORD);
   if (!selected.size || selected.has(STATIC_FALLBACK_IMAGE)) {
     generatedEntries.push([STATIC_FALLBACK_IMAGE, staticRecord]);
   }

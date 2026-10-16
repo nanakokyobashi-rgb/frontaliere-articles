@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-15T04:33:54.268Z",
-  "contentHash": "aea2efed5060d34f6eb9c4fd54b0f4efba10e79210d3f2ea726d15ed3a3a8f8f",
+  "updatedAt": "2026-10-16T14:33:38.367Z",
+  "contentHash": "553767605f7f4713bf7f6c933cf7326d526a8c533500525e9a1038dbc202aa7b",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T16:01:15.871Z",
+      "updatedAt": "2026-10-16T10:09:31.602Z",
       "keyFacts": 0
     }
   ],
@@ -139,14 +139,9 @@
               "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
-            },
-            {
-              "label": "Informationsanlass für angehende Pensionierte",
-              "date": "2026-07-21",
-              "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -199,6 +194,7 @@
           "date": "2026-08-22T04:38:04.511Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Strumenti su tasse e pensione",
@@ -217,7 +213,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-15T04:33:54.268Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "en": {
       "canton": "BE",
@@ -329,14 +325,9 @@
               "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
-            },
-            {
-              "label": "Informationsanlass für angehende Pensionierte",
-              "date": "2026-07-21",
-              "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -389,6 +380,7 @@
           "date": "2026-08-22T04:38:04.511Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tax and pension tools",
@@ -407,7 +399,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-15T04:33:54.268Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "de": {
       "canton": "BE",
@@ -519,14 +511,9 @@
               "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
-            },
-            {
-              "label": "Informationsanlass für angehende Pensionierte",
-              "date": "2026-07-21",
-              "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -579,6 +566,7 @@
           "date": "2026-08-22T04:38:04.511Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tools zu Steuern und Vorsorge",
@@ -597,7 +585,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-15T04:33:54.268Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "fr": {
       "canton": "BE",
@@ -709,14 +697,9 @@
               "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
               "date": "2026-09-03",
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
-            },
-            {
-              "label": "Informationsanlass für angehende Pensionierte",
-              "date": "2026-07-21",
-              "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -769,6 +752,7 @@
           "date": "2026-08-22T04:38:04.511Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Outils impôts et retraite",
@@ -787,7 +771,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-15T04:33:54.268Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T10:23:56.350Z",
-  "contentHash": "e5213b77f864d09e6edb5cc44d124c4471f7f76ea3711583f557cebd7bbeaf9b",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "58a5263eb084b5a9d8b5e9656a4190d7c2cd5c4b35109976e9df3ccb1c3b853e",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,22 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-15T14:34:40.531Z",
+      "updatedAt": "2026-10-16T11:49:45.888Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-16T04:30:54.466Z",
+      "updatedAt": "2026-10-16T11:22:11.131Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-16T13:23:52.574Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T10:09:31.602Z",
       "keyFacts": 0
     }
   ],
@@ -74,19 +79,9 @@
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
             {
-              "label": "Moderna",
-              "detail": "Bodio, Biasca e Valli",
-              "date": "2026-10-09T16:00:00.000Z"
-            },
-            {
               "label": "Farmacia Pharmaexpress",
               "detail": "Lugano, Luganese",
               "date": "2026-10-10T06:00:00.000Z"
-            },
-            {
-              "label": "Teatro",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-12T16:30:00.000Z"
             },
             {
               "label": "Ferrari",
@@ -102,11 +97,21 @@
               "label": "Semine",
               "detail": "Bellinzona, Bellinzonese",
               "date": "2026-10-16T16:30:00.000Z"
+            },
+            {
+              "label": "Ferregutti",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-17T06:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Salus",
+              "detail": "Lugano, Luganese",
+              "date": "2026-10-17T06:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-15T14:34:40.531Z"
+          "updatedAt": "2026-10-16T11:49:45.888Z"
         },
         {
           "id": "aste-targhe",
@@ -130,7 +135,41 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-16T04:30:54.466Z"
+          "updatedAt": "2026-10-16T11:22:11.131Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "20 °C",
+              "detail": "oggi da 12 a 22 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "20 °C",
+              "detail": "oggi da 13 a 20 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "20 °C",
+              "detail": "oggi da 14 a 21 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "21 °C",
+              "detail": "oggi da 14 a 21 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "19 °C",
+              "detail": "oggi da 12 a 20 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-16T13:23:52.574Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -168,7 +207,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -189,6 +228,12 @@
           "url": "/articoli-ticino/nuovi-spazi-ambulatoriali-bellinzona/",
           "excerpt": "Oggi inaugurati nuovi spazi all'Ospedale San Giovanni Poliambulatorio Turrita e Dermatologia nella sede di Bellinzona Ambienti pensati per pazienti",
           "date": "2026-10-10T11:19:26.395Z"
+        },
+        {
+          "title": "Sacco di rifiuti a Bizzarone: multato ticinese",
+          "url": "/articoli-ticino/multa-rifiuti-bizzarone/",
+          "excerpt": "A Bizzarone la Polizia locale ha inflitto un'ammenda di 600 euro a un ticinese per rifiuti abbandonati oltreconfine.",
+          "date": "2026-10-16T14:46:51.782Z"
         },
         {
           "title": "Scuola media, audizione in Ticino sui corsi attitudinali",
@@ -213,14 +258,9 @@
           "url": "/articoli-svizzera/premi-malati-ticino-aumento-franchi-2027/",
           "excerpt": "Nel 2027 il premio medio della cassa malati in Ticino aumenterà del 3,7%, raggiungendo 519.90 franchi mensili, un incremento di 18.60 franchi, superiore del 26% alla media svizzera di 412 franchi.",
           "date": "2026-09-30T17:00:48.460Z"
-        },
-        {
-          "title": "Ostinelli non paga la cassa malati e va davanti al pretore",
-          "url": "/articoli-svizzera/ostinelli-cassa-malati-udienza-pretore/",
-          "excerpt": "Roberto Ostinelli, medico di Mendrisio, non paga la cassa malati da giugno 2024 e deve comparire davanti al pretore il 6 ottobre; paga 140 euro al mese per un'assicurazione internazionale.",
-          "date": "2026-10-06T07:13:37.693Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Premi di cassa malati per regione",
@@ -255,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "TI",
@@ -302,19 +342,9 @@
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
             {
-              "label": "Moderna",
-              "detail": "Bodio, Biasca e Valli",
-              "date": "2026-10-09T16:00:00.000Z"
-            },
-            {
               "label": "Farmacia Pharmaexpress",
               "detail": "Lugano, Luganese",
               "date": "2026-10-10T06:00:00.000Z"
-            },
-            {
-              "label": "Teatro",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-12T16:30:00.000Z"
             },
             {
               "label": "Ferrari",
@@ -330,11 +360,21 @@
               "label": "Semine",
               "detail": "Bellinzona, Bellinzonese",
               "date": "2026-10-16T16:30:00.000Z"
+            },
+            {
+              "label": "Ferregutti",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-17T06:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Salus",
+              "detail": "Lugano, Luganese",
+              "date": "2026-10-17T06:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-15T14:34:40.531Z"
+          "updatedAt": "2026-10-16T11:49:45.888Z"
         },
         {
           "id": "aste-targhe",
@@ -358,7 +398,41 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-16T04:30:54.466Z"
+          "updatedAt": "2026-10-16T11:22:11.131Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "20 °C",
+              "detail": "today from 12 to 22 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "20 °C",
+              "detail": "today from 13 to 20 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "20 °C",
+              "detail": "today from 14 to 21 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "21 °C",
+              "detail": "today from 14 to 21 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "19 °C",
+              "detail": "today from 12 to 20 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-16T13:23:52.574Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -396,7 +470,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -416,6 +490,12 @@
           "url": "/en/ticino-articles/new-outpatient-spaces-bellinzona/",
           "excerpt": "New spaces inaugurated today at Ospedale San Giovanni Poliambulatorio Turrita and Dermatology at the Bellinzona site Spaces designed for patients",
           "date": "2026-10-10T11:19:26.395Z"
+        },
+        {
+          "title": "Garbage bag in Bizzarone: Ticino resident fined",
+          "url": "/en/ticino-articles/bizzarone-waste-dumping-fine/",
+          "excerpt": "At Bizzarone, the local police fined a person from Ticino 600 euros for waste abandoned across the border.",
+          "date": "2026-10-16T14:46:51.782Z"
         },
         {
           "title": "Middle school, audition in Ticino on aptitude courses",
@@ -440,14 +520,9 @@
           "url": "/en/swiss-articles/health-insurance-premiums-ticino-increase-francs-2027/",
           "excerpt": "In 2027, the average health insurance premium in Ticino will increase by 3,7%, reaching 519.90 francs per month, an increase of 18.60 francs, 26% higher than the Swiss average of 412 francs.",
           "date": "2026-09-30T17:00:48.460Z"
-        },
-        {
-          "title": "Ostinelli does not pay his health insurance and goes before the magistrate",
-          "url": "/en/swiss-articles/ostinelli-health-insurance-court-hearing/",
-          "excerpt": "Roberto Ostinelli, a doctor from Mendrisio, has not paid his health insurance since June 2024 and must appear before the magistrate on October 6; he pays 140 euro per month for international insurance.",
-          "date": "2026-10-06T07:13:37.693Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Number plate auctions",
@@ -478,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "TI",
@@ -525,19 +600,9 @@
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
             {
-              "label": "Moderna",
-              "detail": "Bodio, Biasca e Valli",
-              "date": "2026-10-09T16:00:00.000Z"
-            },
-            {
               "label": "Farmacia Pharmaexpress",
               "detail": "Lugano, Luganese",
               "date": "2026-10-10T06:00:00.000Z"
-            },
-            {
-              "label": "Teatro",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-12T16:30:00.000Z"
             },
             {
               "label": "Ferrari",
@@ -553,11 +618,21 @@
               "label": "Semine",
               "detail": "Bellinzona, Bellinzonese",
               "date": "2026-10-16T16:30:00.000Z"
+            },
+            {
+              "label": "Ferregutti",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-17T06:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Salus",
+              "detail": "Lugano, Luganese",
+              "date": "2026-10-17T06:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-15T14:34:40.531Z"
+          "updatedAt": "2026-10-16T11:49:45.888Z"
         },
         {
           "id": "aste-targhe",
@@ -581,7 +656,41 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-16T04:30:54.466Z"
+          "updatedAt": "2026-10-16T11:22:11.131Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "20 °C",
+              "detail": "heute 12 bis 22 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "20 °C",
+              "detail": "heute 13 bis 20 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "20 °C",
+              "detail": "heute 14 bis 21 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "21 °C",
+              "detail": "heute 14 bis 21 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "19 °C",
+              "detail": "heute 12 bis 20 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-16T13:23:52.574Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -619,7 +728,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -639,6 +748,12 @@
           "url": "/de/tessin-artikel/neue-ambulante-raeume-bellinzona/",
           "excerpt": "Heute wurden neue Räume im Krankenhaus San Giovanni Poliambulatorio Turrita e Dermatologia am Sitz in Bellinzona eingeweiht.",
           "date": "2026-10-10T11:19:26.395Z"
+        },
+        {
+          "title": "Müllsack in Bizzarone: Tessiner mit Geldstrafe belegt",
+          "url": "/de/tessin-artikel/busse-fuer-abfall-in-bizzarone/",
+          "excerpt": "Am Bizzarone hat die örtliche Polizei einem Tessiner wegen jenseits der Grenze abgelagerter Abfälle eine Geldstrafe von 600 Euro auferlegt.",
+          "date": "2026-10-16T14:46:51.782Z"
         },
         {
           "title": "Mittelschule, Anhörung im Tessin zu den Eignungskursen",
@@ -663,14 +778,9 @@
           "url": "/de/schweiz-artikel/krankenkassenpraemien-tessin-erhoehung-franken-2027/",
           "excerpt": "Im Jahr 2027 wird der durchschnittliche Krankenkassenbeitrag im Tessin um 3,7 % steigen und 519,90 Franken pro Monat erreichen – ein Anstieg um 18,60 Franken, der 26 % über dem Schweizer Durchschnitt von 412 Franken…",
           "date": "2026-09-30T17:00:48.460Z"
-        },
-        {
-          "title": "Ostinelli zahlt seine Krankenversicherung nicht und muss sich vor Gericht verantworten.",
-          "url": "/de/schweiz-artikel/ostinelli-krankenkasse-gerichtstermin/",
-          "excerpt": "Roberto Ostinelli, Arzt aus Mendrisio, zahlt seit Juni 2024 die Krankenkasse nicht mehr und muss am 6. Oktober vor dem Pretore erscheinen; er zahlt 140 Euro im Monat für eine internationale Versicherung.",
-          "date": "2026-10-06T07:13:37.693Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Kontrollschild-Auktionen",
@@ -701,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "TI",
@@ -748,19 +858,9 @@
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
             {
-              "label": "Moderna",
-              "detail": "Bodio, Biasca e Valli",
-              "date": "2026-10-09T16:00:00.000Z"
-            },
-            {
               "label": "Farmacia Pharmaexpress",
               "detail": "Lugano, Luganese",
               "date": "2026-10-10T06:00:00.000Z"
-            },
-            {
-              "label": "Teatro",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-12T16:30:00.000Z"
             },
             {
               "label": "Ferrari",
@@ -776,11 +876,21 @@
               "label": "Semine",
               "detail": "Bellinzona, Bellinzonese",
               "date": "2026-10-16T16:30:00.000Z"
+            },
+            {
+              "label": "Ferregutti",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-17T06:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Salus",
+              "detail": "Lugano, Luganese",
+              "date": "2026-10-17T06:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-15T14:34:40.531Z"
+          "updatedAt": "2026-10-16T11:49:45.888Z"
         },
         {
           "id": "aste-targhe",
@@ -804,7 +914,41 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-16T04:30:54.466Z"
+          "updatedAt": "2026-10-16T11:22:11.131Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "20 °C",
+              "detail": "aujourd’hui de 12 à 22 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "20 °C",
+              "detail": "aujourd’hui de 13 à 20 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "20 °C",
+              "detail": "aujourd’hui de 14 à 21 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "21 °C",
+              "detail": "aujourd’hui de 14 à 21 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "19 °C",
+              "detail": "aujourd’hui de 12 à 20 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-16T13:23:52.574Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -842,7 +986,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -863,6 +1007,12 @@
           "url": "/fr/articles-tessin/nouveaux-espaces-ambulatoires-bellinzona/",
           "excerpt": "Aujourd’hui, inauguration de nouveaux espaces à l’Ospedale San Giovanni Poliambulatorio Turrita et dermatologie sur le site de Bellinzona Des espaces pensés pour les patients",
           "date": "2026-10-10T11:19:26.395Z"
+        },
+        {
+          "title": "Sac de déchets à Bizzarone : un Tessinois verbalisé",
+          "url": "/fr/articles-tessin/amende-dechets-bizzarone/",
+          "excerpt": "À Bizzarone, la police locale a infligé une amende de 600 euros à un Tessinois pour des déchets abandonnés de l'autre côté de la frontière.",
+          "date": "2026-10-16T14:46:51.782Z"
         },
         {
           "title": "Collège, audition au Tessin sur les cours d'aptitude",
@@ -887,14 +1037,9 @@
           "url": "/fr/articles-suisse/primes-assurance-maladie-tessin-augmentation-francs-2027/",
           "excerpt": "En 2027, la prime moyenne de la caisse-maladie au Tessin augmentera de 3,7%, atteignant 519.90 francs par mois, soit une hausse de 18.60 francs, supérieure de 26% à la moyenne suisse de 412 francs.",
           "date": "2026-09-30T17:00:48.460Z"
-        },
-        {
-          "title": "Ostinelli ne paie pas la caisse-maladie et se rend devant le juge",
-          "url": "/fr/articles-suisse/ostinelli-assurance-maladie-audience/",
-          "excerpt": "Roberto Ostinelli, médecin de Mendrisio, ne paie pas sa caisse-maladie depuis juin 2024 et doit comparaître devant le juge le 6 octobre ; il paie 140 euros par mois pour une assurance internationale.",
-          "date": "2026-10-06T07:13:37.693Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Offres d’emploi au Tessin",
@@ -921,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

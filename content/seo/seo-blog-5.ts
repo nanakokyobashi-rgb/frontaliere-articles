@@ -109247,10 +109247,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-manutenzione-prato-franco-ossola-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-varese-piazzale-anastasi-intitolazione.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Il piazzale dello stadio Franco Ossola a Varese intitolato a Pietro Anastasi"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-16T01:20:06+00:00",
       "dateModified": "2026-10-16T01:20:06+00:00",
@@ -109359,10 +109359,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Come dare le dimissioni in Ticino: termini di preavviso, impatto su permesso G e disoccupazione. Guida pratica per frontalieri.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/cambio-datore-lavoro-frontaliere-procedura-permesso-2026-single.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-frontaliere-dimissioni-termine-preavviso.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Frontaliere che attraversa il valico di Brogeda verso il Ticino al mattino"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-16T03:19:05+00:00",
       "dateModified": "2026-10-16T03:19:05+00:00",
@@ -109749,10 +109754,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-cantello-teatro-dialettale-ottobre-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-concerto-gallarate-uto-ughi-2026.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Teatro Condominio Vittorio Gassman a Gallarate, luogo del concerto di Uto Ughi"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-16T11:26:51+00:00",
       "dateModified": "2026-10-16T11:26:51+00:00",
@@ -109804,6 +109809,425 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/mostre-maga-gallarate-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lavorare-svizzera-conviene-ancora': {
+    title: 'Lavorare in Svizzera conviene ancora? | Frontaliere Ticino',
+    description: 'A settembre 2026 la disoccupazione svizzera è al 3% In un anno i disoccupati aumentano del 5,4% Nel secondo trimestre crescono gli impieghi del 2% Pubblicazione',
+    keywords: 'frontalieri, ticino, svizzera, italia, lavorare, conviene, ancora, settembre',
+    ogTitle: 'Lavorare in Svizzera conviene ancora? Analisi 2026',
+    ogDescription: 'A settembre 2026 la disoccupazione svizzera è al 3% In un anno i disoccupati aumentano del 5,4% Nel secondo trimestre crescono gli impieghi del 2% Pubblicazione',
+    canonicalPath: '/articoli-frontaliere/lavorare-svizzera-conviene-ancora/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lavorare in Svizzera conviene ancora?",
+      "description": "A settembre 2026 la disoccupazione svizzera è al 3% In un anno i disoccupati aumentano del 5,4% Nel secondo trimestre crescono gli impieghi del 2% Pubblicazione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lavorare-svizzera-conviene-ancora.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama del Monte Generoso in Ticino, Svizzera, con cielo azzurro e natura rigogliosa."
+      },
+      "datePublished": "2026-10-16T12:43:52+00:00",
+      "dateModified": "2026-10-16T12:43:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lavorare-svizzera-conviene-ancora/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-maratona-laghi-varese-2027': {
+    title: 'Maratona dei Laghi 2027: attesi 2000 runner tra Varese e Monate',
+    description: 'Domenica 11 aprile 2027: partenza e arrivo ad Angera Tre laghi e otto comuni nel progetto Circa 2.000 runner stimati per la prima edizione Ricadute economiche',
+    keywords: 'frontalieri, ticino, svizzera, italia, maratona, laghi, attesi, runner',
+    ogTitle: 'Maratona dei Laghi 2027: tutto quello che c\'è da sapere',
+    ogDescription: 'Domenica 11 aprile 2027: partenza e arrivo ad Angera Tre laghi e otto comuni nel progetto Circa 2.000 runner stimati per la prima edizione Ricadute economiche',
+    canonicalPath: '/articoli-frontaliere/maratona-laghi-varese-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Maratona dei Laghi 2027: attesi 2000 runner tra Varese e Monate",
+      "description": "Domenica 11 aprile 2027: partenza e arrivo ad Angera Tre laghi e otto comuni nel progetto Circa 2.000 runner stimati per la prima edizione Ricadute economiche",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea del Lago Maggiore con corridori lungo la riva, circondati da villaggi pittoreschi e colline verdi."
+      },
+      "datePublished": "2026-10-16T13:10:19+00:00",
+      "dateModified": "2026-10-16T13:10:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/maratona-laghi-varese-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica': {
+    title: 'Frontaliere tasse Italia Svizzera 2026: simulazione pratica',
+    description: 'Il Nuovo Accordo Frontalieri è in vigore dal 1° gennaio 2024 Vecchi frontalieri: esenzione di €7\'500 e transitorio 2024–2033 Nuovi frontalieri: franchigia',
+    keywords: 'frontalieri, ticino, svizzera, italia, tasse, simulazione, pratica, nuovo',
+    ogTitle: 'Frontaliere tasse Italia Svizzera 2026: simulazione pratica',
+    ogDescription: 'Il Nuovo Accordo Frontalieri è in vigore dal 1° gennaio 2024 Vecchi frontalieri: esenzione di €7\'500 e transitorio 2024–2033 Nuovi frontalieri: franchigia',
+    canonicalPath: '/articoli-frontaliere/frontaliere-tasse-italia-svizzera-2026-simulazione-pratica/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontaliere tasse Italia Svizzera 2026: simulazione pratica",
+      "description": "Il Nuovo Accordo Frontalieri è in vigore dal 1° gennaio 2024 Vecchi frontalieri: esenzione di €7'500 e transitorio 2024–2033 Nuovi frontalieri: franchigia",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Modulo fiscale e calcolatrice su una scrivania con vista su Mendrisio"
+      },
+      "datePublished": "2026-10-16T13:43:53+00:00",
+      "dateModified": "2026-10-16T13:43:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontaliere-tasse-italia-svizzera-2026-simulazione-pratica/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-dosso-gaggiolo-disagi-frontalieri': {
+    title: 'Rallentamenti al valico di Gaggiolo dopo il nuovo dosso',
+    description: 'Un nuovo dosso è stato installato sul lato svizzero Code e rallentamenti al valico Stabio-Gaggiolo Disagi soprattutto nelle prime ore del mattino Segnalati',
+    keywords: 'frontalieri, ticino, svizzera, italia, rallentamenti, valico, gaggiolo, dopo',
+    ogTitle: 'Rallentamenti al valico di Gaggiolo dopo il nuovo dosso',
+    ogDescription: 'Un nuovo dosso è stato installato sul lato svizzero Code e rallentamenti al valico Stabio-Gaggiolo Disagi soprattutto nelle prime ore del mattino Segnalati',
+    canonicalPath: '/articoli-frontaliere/dosso-gaggiolo-disagi-frontalieri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Rallentamenti al valico di Gaggiolo dopo il nuovo dosso",
+      "description": "Un nuovo dosso è stato installato sul lato svizzero Code e rallentamenti al valico Stabio-Gaggiolo Disagi soprattutto nelle prime ore del mattino Segnalati",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/frontalieri-regime-fiscale-nuovo-accordo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Code e rallentamenti al valico di Stabio-Gaggiolo dopo l'installazione del nuovo dosso sul lato svizzero"
+      },
+      "datePublished": "2026-10-16T14:28:42+00:00",
+      "dateModified": "2026-10-16T14:28:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/dosso-gaggiolo-disagi-frontalieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-dosso-gaggiolo-sicurezza-lavoratori': {
+    title: 'Dosso sicurezza Gaggiolo per pedoni e lavoratori',
+    description: 'Il nuovo dosso è stato installato al valico di Gaggiolo. L\'UDSC lo collega alla sicurezza, soprattutto di notte. Al valico i veicoli devono procedere a passo',
+    keywords: 'frontalieri, ticino, svizzera, italia, dosso, sicurezza, gaggiolo, pedoni',
+    ogTitle: 'Dosso sicurezza Gaggiolo per pedoni e lavoratori',
+    ogDescription: 'Il nuovo dosso è stato installato al valico di Gaggiolo.',
+    canonicalPath: '/articoli-frontaliere/dosso-gaggiolo-sicurezza-lavoratori/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dosso sicurezza Gaggiolo per pedoni e lavoratori",
+      "description": "Il nuovo dosso è stato installato al valico di Gaggiolo. L'UDSC lo collega alla sicurezza, soprattutto di notte. Al valico i veicoli devono procedere a passo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-dosso-gaggiolo-sicurezza-lavoratori.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Dosso rallentatore al valico di Gaggiolo con posteggi ridisegnati e illuminazione migliorata per sicurezza di pedoni e lavoratori"
+      },
+      "datePublished": "2026-10-16T15:40:56+00:00",
+      "dateModified": "2026-10-16T15:40:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/dosso-gaggiolo-sicurezza-lavoratori/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-iniziativa-udc-asilo-limite': {
+    title: 'Protezione delle frontiere: L\'iniziativa UDC è controproducente',
+    description: 'La CIP-S boccia l\'iniziativa UDC con 8 voti contro 2. Il testo chiede controlli sistematici alle frontiere. La Svizzera non concederebbe asilo a oltre 5.000',
+    keywords: 'frontalieri, ticino, svizzera, italia, protezione, frontiere, iniziativa, controproducente',
+    ogTitle: 'Protezione delle frontiere: L\'iniziativa UDC è controproducente',
+    ogDescription: 'La CIP-S boccia l\'iniziativa UDC con 8 voti contro 2.',
+    canonicalPath: '/articoli-frontaliere/iniziativa-udc-asilo-limite/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Protezione delle frontiere: L'iniziativa UDC è controproducente",
+      "description": "La CIP-S boccia l'iniziativa UDC con 8 voti contro 2. Il testo chiede controlli sistematici alle frontiere. La Svizzera non concederebbe asilo a oltre 5.000",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/consiglio-federale-boccia-frontiere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Controllo doganale al confine italo-svizzero vicino a Lugano con ufficiali e veicoli in attesa"
+      },
+      "datePublished": "2026-10-16T16:42:43+00:00",
+      "dateModified": "2026-10-16T16:42:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/iniziativa-udc-asilo-limite/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-giovani-lavoro-futuro-ticino': {
+    title: 'Ai giovani non basta un lavoro. Serve un futuro',
+    description: 'Nel 2024, in Ticino il salario mediano lordo mensile si attestava a 5\'708 franchi La media mensile svizzera ammontava a 7\'024 franchi A un anno',
+    keywords: 'frontalieri, ticino, svizzera, italia, giovani, basta, lavoro, serve',
+    ogTitle: 'Opportunità per i giovani in Ticino: lavoro e futuro',
+    ogDescription: 'Nel 2024, in Ticino il salario mediano lordo mensile si attestava a 5\'708 franchi La media mensile svizzera ammontava a 7\'024 franchi A un anno',
+    canonicalPath: '/articoli-frontaliere/giovani-lavoro-futuro-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ai giovani non basta un lavoro. Serve un futuro",
+      "description": "Nel 2024, in Ticino il salario mediano lordo mensile si attestava a 5'708 franchi La media mensile svizzera ammontava a 7'024 franchi A un anno",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-divario-reddito-giovani-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un giovane professionista in piedi sulla cima di una montagna in Ticino, che osserva la valle e riflette sul proprio futuro professionale."
+      },
+      "datePublished": "2026-10-16T17:37:11+00:00",
+      "dateModified": "2026-10-16T17:37:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/giovani-lavoro-futuro-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-saronno-produzione-cina-protesta': {
+    title: 'Barco di Saronno: oltre il 50% della produzione va in Cina',
+    description: 'Spostamento di oltre il 50% verso il sito di Suzhou Impatto del 40% sull\'area produzione Impatto del 30% sull\'area impiegatizia Sciopero, presidio e agitazione',
+    keywords: 'frontalieri, ticino, svizzera, italia, barco, saronno, oltre, produzione',
+    ogTitle: 'Barco di Saronno: oltre il 50% della produzione va in Cina',
+    ogDescription: 'Spostamento di oltre il 50% verso il sito di Suzhou Impatto del 40% sull\'area produzione Impatto del 30% sull\'area impiegatizia Sciopero, presidio e agitazione',
+    canonicalPath: '/articoli-frontaliere/saronno-produzione-cina-protesta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Barco di Saronno: oltre il 50% della produzione va in Cina",
+      "description": "Spostamento di oltre il 50% verso il sito di Suzhou Impatto del 40% sull'area produzione Impatto del 30% sull'area impiegatizia Sciopero, presidio e agitazione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-saronno-produzione-cina-protesta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-16T18:15:02+00:00",
+      "dateModified": "2026-10-16T18:15:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/saronno-produzione-cina-protesta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-indennita-stage-lugano-2027': {
+    title: 'Lugano: nuova indennità per gli stage nel 2027',
+    description: 'Indennità unica: 2\'000 franchi lordi per 12 mensilità Budget 2027: da 700\'000 a 755\'000 franchi Minor costo stimato: 30\'700 franchi Il 43% del budget è',
+    keywords: 'frontalieri, ticino, svizzera, italia, lugano, nuova, indennità, stage',
+    ogTitle: 'Nuova indennità per gli stage a Lugano nel 2027',
+    ogDescription: 'Indennità unica: 2\'000 franchi lordi per 12 mensilità Budget 2027: da 700\'000 a 755\'000 franchi Minor costo stimato: 30\'700 franchi Il 43% del budget è',
+    canonicalPath: '/articoli-frontaliere/indennita-stage-lugano-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lugano: nuova indennità per gli stage nel 2027",
+      "description": "Indennità unica: 2'000 franchi lordi per 12 mensilità Budget 2027: da 700'000 a 755'000 franchi Minor costo stimato: 30'700 franchi Il 43% del budget è",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-indennita-stage-lugano-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scrivania di un giovane professionista con laptop, taccuino e caffè, vista su Lugano da Monte Brè"
+      },
+      "datePublished": "2026-10-16T20:06:58+00:00",
+      "dateModified": "2026-10-16T20:06:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/indennita-stage-lugano-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-industria-ticino-futuro-lavoro': {
+    title: 'Industria in Ticino: carenza di personale e innovazione',
+    description: 'Negli ultimi 18 mesi, numerosi licenziamenti nell’industria ticinese Quindici licenziamenti collettivi seguiti nell’ultimo anno e mezzo Circa 16 mila',
+    keywords: 'frontalieri, ticino, svizzera, italia, industria, carenza, personale, innovazione',
+    ogTitle: 'Industria Ticino: tra carenza di personale e innovazione',
+    ogDescription: 'Negli ultimi 18 mesi, numerosi licenziamenti nell’industria ticinese Quindici licenziamenti collettivi seguiti nell’ultimo anno e mezzo Circa 16 mila',
+    canonicalPath: '/articoli-frontaliere/industria-ticino-futuro-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Industria in Ticino: carenza di personale e innovazione",
+      "description": "Negli ultimi 18 mesi, numerosi licenziamenti nell’industria ticinese Quindici licenziamenti collettivi seguiti nell’ultimo anno e mezzo Circa 16 mila",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-industria-ticino-futuro-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Impianto industriale moderno in Ticino con operatori qualificati"
+      },
+      "datePublished": "2026-10-16T20:29:57+00:00",
+      "dateModified": "2026-10-16T20:29:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/industria-ticino-futuro-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-semafori-cadenazzo-proteste-ustra': {
+    title: 'PATTI CHIARI Cadenazzo, si accendono semafori… e proteste',
+    description: '73% contrari al progetto votato il 19 maggio 2019 Primi semafori a Cadenazzo il 29 agosto scorso USTRA stima un risparmio del 30% nel 2028 Voto → 73% di voti',
+    keywords: 'frontalieri, ticino, svizzera, italia, patti, chiari, cadenazzo, accendono',
+    ogTitle: 'Semafori a Cadenazzo: proteste e promesse di miglioramenti',
+    ogDescription: '73% contrari al progetto votato il 19 maggio 2019 Primi semafori a Cadenazzo il 29 agosto scorso USTRA stima un risparmio del 30% nel 2028 Voto → 73% di voti',
+    canonicalPath: '/articoli-frontaliere/semafori-cadenazzo-proteste-ustra/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PATTI CHIARI Cadenazzo, si accendono semafori… e proteste",
+      "description": "73% contrari al progetto votato il 19 maggio 2019 Primi semafori a Cadenazzo il 29 agosto scorso USTRA stima un risparmio del 30% nel 2028 Voto → 73% di voti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-semafori-autostrade-ustra-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Semafori e traffico a Cadenazzo, Ticino, con veicoli in attesa al rosso."
+      },
+      "datePublished": "2026-10-16T21:09:57+00:00",
+      "dateModified": "2026-10-16T21:09:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/semafori-cadenazzo-proteste-ustra/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

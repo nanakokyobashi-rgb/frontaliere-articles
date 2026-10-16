@@ -4,22 +4,22 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T10:23:56.350Z",
-  "contentHash": "387ef06a941e88f2389972c1a7cdd6f6ac275f67206eb0fdd438f8c5139dbc9c",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "c0b3743f281a531d226b9b6bc8be27dfaa5dd85d78cfc691a6e905d230773d9b",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-14T23:59:59.000Z",
+      "updatedAt": "2026-10-15T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T23:56:39.924Z",
+      "updatedAt": "2026-10-16T11:58:12.009Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T10:09:31.602Z",
       "keyFacts": 0
     }
   ],
@@ -33,59 +33,59 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Saint-Gingolph, settimana conclusa: 14 ottobre 2026"
+          "note": "Saint-Gingolph, settimana conclusa: 15 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "17",
-          "note": "segnalazioni aggiornate: 15 ottobre 2026"
+          "value": "18",
+          "note": "segnalazioni aggiornate: 16 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "25",
-          "note": "segnalazioni aggiornate: 15 ottobre 2026"
+          "value": "24",
+          "note": "segnalazioni aggiornate: 16 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 8 ottobre 2026 – 14 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 9 ottobre 2026 – 15 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Saint-Gingolph",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/saint-gingolph/oggi/"
             },
             {
               "label": "Le Châtelard-Vallorcine",
               "value": "0,1 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/le-chatelard-vallorcine/oggi/"
             },
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
               "value": "0,1 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/morgins-chatel/oggi/"
             },
             {
               "label": "Traforo del Gran San Bernardo",
-              "value": "0,4 min",
-              "detail": "48 rilevazioni",
+              "value": "0,3 min",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/traforo-del-gran-san-bernardo/oggi/"
             },
             {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "2 min",
-              "detail": "48 rilevazioni",
+              "value": "1,3 min",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/sempione/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-14T23:59:59.000Z"
+          "updatedAt": "2026-10-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -142,13 +142,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T23:56:39.924Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Sempione chiuso per sei mesi nel 2028, Monti: \"Territorio e sindaci non possono essere lasciati soli\"",
+              "date": "2026-10-15T16:15:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/15/leggi-notizia/argomenti/attualita-26/articolo/sempione-chiuso-per-sei-mesi-nel-2028-monti-territorio-e-sindaci-non-possono-essere-lasciati-sol-1.html"
+            },
             {
               "label": "Regione Nosere, la nuova rotatoria sarà completata entro fine ottobre",
               "date": "2026-10-14T15:40:00.000Z",
@@ -173,14 +178,9 @@
               "label": "Al via i lavori per il parcheggio di via Cadorna FOTO",
               "date": "2026-10-12T17:10:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/domodossola/articolo/domodossola-al-via-i-lavori-per-il-parcheggio-di-via-cadorna.html"
-            },
-            {
-              "label": "Viabilità in Ossola a rischio paralisi, Ferroni chiede un coordinamento urgente",
-              "date": "2026-10-12T16:50:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -209,6 +209,7 @@
           "date": "2026-09-06T01:55:16.584Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attese ai valichi verso Francia",
@@ -243,7 +244,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "VS",
@@ -254,59 +255,59 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Saint-Gingolph, week ending 14 October 2026"
+          "note": "Saint-Gingolph, week ending 15 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "17",
-          "note": "reports as of 15 October 2026"
+          "value": "18",
+          "note": "reports as of 16 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "25",
-          "note": "reports as of 15 October 2026"
+          "value": "24",
+          "note": "reports as of 16 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 8 October 2026 to 14 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 9 October 2026 to 15 October 2026, fastest first.",
           "items": [
             {
               "label": "Saint-Gingolph",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/saint-gingolph/today/"
             },
             {
               "label": "Le Châtelard-Vallorcine",
               "value": "0.1 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/le-chatelard-vallorcine/today/"
             },
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
               "value": "0.1 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/morgins-chatel/today/"
             },
             {
               "label": "Traforo del Gran San Bernardo",
-              "value": "0.4 min",
-              "detail": "48 readings",
+              "value": "0.3 min",
+              "detail": "47 readings",
               "url": "/en/border-wait/traforo-del-gran-san-bernardo/today/"
             },
             {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "2 min",
-              "detail": "48 readings",
+              "value": "1.3 min",
+              "detail": "47 readings",
               "url": "/en/border-wait/sempione/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-14T23:59:59.000Z"
+          "updatedAt": "2026-10-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -363,13 +364,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T23:56:39.924Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Sempione chiuso per sei mesi nel 2028, Monti: \"Territorio e sindaci non possono essere lasciati soli\"",
+              "date": "2026-10-15T16:15:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/15/leggi-notizia/argomenti/attualita-26/articolo/sempione-chiuso-per-sei-mesi-nel-2028-monti-territorio-e-sindaci-non-possono-essere-lasciati-sol-1.html"
+            },
             {
               "label": "Regione Nosere, la nuova rotatoria sarà completata entro fine ottobre",
               "date": "2026-10-14T15:40:00.000Z",
@@ -394,14 +400,9 @@
               "label": "Al via i lavori per il parcheggio di via Cadorna FOTO",
               "date": "2026-10-12T17:10:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/domodossola/articolo/domodossola-al-via-i-lavori-per-il-parcheggio-di-via-cadorna.html"
-            },
-            {
-              "label": "Viabilità in Ossola a rischio paralisi, Ferroni chiede un coordinamento urgente",
-              "date": "2026-10-12T16:50:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -430,6 +431,7 @@
           "date": "2026-09-06T01:55:16.584Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Border waits towards France",
@@ -464,7 +466,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "VS",
@@ -475,59 +477,59 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Saint-Gingolph, Woche bis 14. Oktober 2026"
+          "note": "Saint-Gingolph, Woche bis 15. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "17",
-          "note": "Meldungen vom 15. Oktober 2026"
+          "value": "18",
+          "note": "Meldungen vom 16. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "25",
-          "note": "Meldungen vom 15. Oktober 2026"
+          "value": "24",
+          "note": "Meldungen vom 16. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 8. Oktober 2026 bis 14. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 9. Oktober 2026 bis 15. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Saint-Gingolph",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/saint-gingolph/heute/"
             },
             {
               "label": "Le Châtelard-Vallorcine",
               "value": "0.1 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/le-chatelard-vallorcine/heute/"
             },
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
               "value": "0.1 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/morgins-chatel/heute/"
             },
             {
               "label": "Traforo del Gran San Bernardo",
-              "value": "0.4 Min.",
-              "detail": "48 Messungen",
+              "value": "0.3 Min.",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/traforo-del-gran-san-bernardo/heute/"
             },
             {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "2 Min.",
-              "detail": "48 Messungen",
+              "value": "1.3 Min.",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/sempione/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-14T23:59:59.000Z"
+          "updatedAt": "2026-10-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -584,13 +586,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T23:56:39.924Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Sempione chiuso per sei mesi nel 2028, Monti: \"Territorio e sindaci non possono essere lasciati soli\"",
+              "date": "2026-10-15T16:15:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/15/leggi-notizia/argomenti/attualita-26/articolo/sempione-chiuso-per-sei-mesi-nel-2028-monti-territorio-e-sindaci-non-possono-essere-lasciati-sol-1.html"
+            },
             {
               "label": "Regione Nosere, la nuova rotatoria sarà completata entro fine ottobre",
               "date": "2026-10-14T15:40:00.000Z",
@@ -615,14 +622,9 @@
               "label": "Al via i lavori per il parcheggio di via Cadorna FOTO",
               "date": "2026-10-12T17:10:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/domodossola/articolo/domodossola-al-via-i-lavori-per-il-parcheggio-di-via-cadorna.html"
-            },
-            {
-              "label": "Viabilità in Ossola a rischio paralisi, Ferroni chiede un coordinamento urgente",
-              "date": "2026-10-12T16:50:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -651,6 +653,7 @@
           "date": "2026-09-06T01:55:16.584Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Wartezeiten an der Grenze Richtung Frankreich",
@@ -685,7 +688,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "VS",
@@ -696,59 +699,59 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Saint-Gingolph, semaine jusqu’au 14 octobre 2026"
+          "note": "Saint-Gingolph, semaine jusqu’au 15 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "17",
-          "note": "signalements au 15 octobre 2026"
+          "value": "18",
+          "note": "signalements au 16 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "25",
-          "note": "signalements au 15 octobre 2026"
+          "value": "24",
+          "note": "signalements au 16 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 8 octobre 2026 au 14 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 9 octobre 2026 au 15 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Saint-Gingolph",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/saint-gingolph/aujourd-hui/"
             },
             {
               "label": "Le Châtelard-Vallorcine",
               "value": "0,1 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/le-chatelard-vallorcine/aujourd-hui/"
             },
             {
               "label": "Morgins-Châtel (Pas de Morgins)",
               "value": "0,1 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/morgins-chatel/aujourd-hui/"
             },
             {
               "label": "Traforo del Gran San Bernardo",
-              "value": "0,4 min",
-              "detail": "48 relevés",
+              "value": "0,3 min",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/traforo-del-gran-san-bernardo/aujourd-hui/"
             },
             {
               "label": "Sempione (Iselle-Gondo)",
-              "value": "2 min",
-              "detail": "48 relevés",
+              "value": "1,3 min",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/sempione/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-14T23:59:59.000Z"
+          "updatedAt": "2026-10-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -805,13 +808,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T23:56:39.924Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Sempione chiuso per sei mesi nel 2028, Monti: \"Territorio e sindaci non possono essere lasciati soli\"",
+              "date": "2026-10-15T16:15:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/15/leggi-notizia/argomenti/attualita-26/articolo/sempione-chiuso-per-sei-mesi-nel-2028-monti-territorio-e-sindaci-non-possono-essere-lasciati-sol-1.html"
+            },
             {
               "label": "Regione Nosere, la nuova rotatoria sarà completata entro fine ottobre",
               "date": "2026-10-14T15:40:00.000Z",
@@ -836,14 +844,9 @@
               "label": "Al via i lavori per il parcheggio di via Cadorna FOTO",
               "date": "2026-10-12T17:10:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/domodossola/articolo/domodossola-al-via-i-lavori-per-il-parcheggio-di-via-cadorna.html"
-            },
-            {
-              "label": "Viabilità in Ossola a rischio paralisi, Ferroni chiede un coordinamento urgente",
-              "date": "2026-10-12T16:50:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/crevoladossola/articolo/viabilita-in-ossola-a-rischio-paralisi-ferroni-chiede-un-coordinamento-urgente.html"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -872,6 +875,7 @@
           "date": "2026-09-06T01:55:16.584Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attente aux frontières vers France",
@@ -906,7 +910,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

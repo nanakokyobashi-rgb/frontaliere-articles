@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T01:56:54.479Z",
-  "contentHash": "8696c440fe36ff388cbcc6adaad6b0a2f587df88061b96105c761ddbd67eea65",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "13385cd909d222ab67fa3609cae023328a05015e6aa9d57ddf01f439db8c592e",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-15T11:34:01.149Z",
+      "updatedAt": "2026-10-16T11:22:11.131Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-16T13:23:52.574Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T10:09:31.602Z",
       "keyFacts": 0
     }
   ],
@@ -39,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "10",
-          "note": "offerta mediana 500 CHF"
+          "note": "offerta mediana 510 CHF"
         }
       ],
       "dataBlocks": [
@@ -82,7 +87,7 @@
             },
             {
               "label": "SG10233",
-              "value": "1320 CHF",
+              "value": "1400 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-21T17:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6648"
@@ -97,13 +102,32 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T11:22:11.131Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "18 °C",
+              "detail": "oggi da 9 a 18 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-16T13:23:52.574Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Innovation für Menschen mit ALS und seltenen neuromuskulären Erkrankungen",
+              "date": "2026-10-16",
+              "url": "https://www.h-och.ch/ueber-uns/news/innovation-fuer-menschen-mit-als-und-seltenen-neuromuskulaeren-erkrankungen-2026-10-16/"
+            },
             {
               "label": "HOCH Health Ostschweiz eröffnet in der Stadt St.Gallen eine Augenarztpraxis",
               "date": "2026-10-14",
@@ -128,14 +152,9 @@
               "label": "Orthoplastik am Kantonsspital St.Gallen: Wo Orthopädie und Traumatologie, Plastische Chirurgie und Infektiologie zusammenwirken",
               "date": "2026-10-12",
               "url": "https://www.h-och.ch/ueber-uns/news/orthoplastik-am-kantonsspital-st-gallen-wo-orthopaedie-und-traumatologie-plastische-chirurgie-und-infektiologie-zusammenwirken-2026-10-12/"
-            },
-            {
-              "label": "Spital Grabs: Neubau Haus O erreicht den höchsten Punkt",
-              "date": "2026-10-06",
-              "url": "https://www.h-och.ch/ueber-uns/news/spital-grabs-neubau-haus-o-erreicht-den-hoechsten-punkt-2026-10-06/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -188,6 +207,7 @@
           "date": "2026-08-30T01:38:51.813Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Premi di cassa malati per regione",
@@ -214,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "SG",
@@ -231,7 +251,7 @@
         {
           "label": "Plate auctions running",
           "value": "10",
-          "note": "typical bid 500 CHF"
+          "note": "typical bid 510 CHF"
         }
       ],
       "dataBlocks": [
@@ -274,7 +294,7 @@
             },
             {
               "label": "SG10233",
-              "value": "1,320 CHF",
+              "value": "1,400 CHF",
               "detail": "current bid",
               "date": "2026-10-21T17:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6648"
@@ -289,13 +309,32 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T11:22:11.131Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "18 °C",
+              "detail": "today from 9 to 18 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-16T13:23:52.574Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Innovation für Menschen mit ALS und seltenen neuromuskulären Erkrankungen",
+              "date": "2026-10-16",
+              "url": "https://www.h-och.ch/ueber-uns/news/innovation-fuer-menschen-mit-als-und-seltenen-neuromuskulaeren-erkrankungen-2026-10-16/"
+            },
             {
               "label": "HOCH Health Ostschweiz eröffnet in der Stadt St.Gallen eine Augenarztpraxis",
               "date": "2026-10-14",
@@ -320,14 +359,9 @@
               "label": "Orthoplastik am Kantonsspital St.Gallen: Wo Orthopädie und Traumatologie, Plastische Chirurgie und Infektiologie zusammenwirken",
               "date": "2026-10-12",
               "url": "https://www.h-och.ch/ueber-uns/news/orthoplastik-am-kantonsspital-st-gallen-wo-orthopaedie-und-traumatologie-plastische-chirurgie-und-infektiologie-zusammenwirken-2026-10-12/"
-            },
-            {
-              "label": "Spital Grabs: Neubau Haus O erreicht den höchsten Punkt",
-              "date": "2026-10-06",
-              "url": "https://www.h-och.ch/ueber-uns/news/spital-grabs-neubau-haus-o-erreicht-den-hoechsten-punkt-2026-10-06/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -380,6 +414,7 @@
           "date": "2026-08-30T01:38:51.813Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Number plate auctions",
@@ -402,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "SG",
@@ -419,7 +454,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "10",
-          "note": "mittleres Gebot 500 CHF"
+          "note": "mittleres Gebot 510 CHF"
         }
       ],
       "dataBlocks": [
@@ -462,7 +497,7 @@
             },
             {
               "label": "SG10233",
-              "value": "1’320 CHF",
+              "value": "1’400 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-21T17:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6648"
@@ -477,13 +512,32 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T11:22:11.131Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "18 °C",
+              "detail": "heute 9 bis 18 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-16T13:23:52.574Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Innovation für Menschen mit ALS und seltenen neuromuskulären Erkrankungen",
+              "date": "2026-10-16",
+              "url": "https://www.h-och.ch/ueber-uns/news/innovation-fuer-menschen-mit-als-und-seltenen-neuromuskulaeren-erkrankungen-2026-10-16/"
+            },
             {
               "label": "HOCH Health Ostschweiz eröffnet in der Stadt St.Gallen eine Augenarztpraxis",
               "date": "2026-10-14",
@@ -508,14 +562,9 @@
               "label": "Orthoplastik am Kantonsspital St.Gallen: Wo Orthopädie und Traumatologie, Plastische Chirurgie und Infektiologie zusammenwirken",
               "date": "2026-10-12",
               "url": "https://www.h-och.ch/ueber-uns/news/orthoplastik-am-kantonsspital-st-gallen-wo-orthopaedie-und-traumatologie-plastische-chirurgie-und-infektiologie-zusammenwirken-2026-10-12/"
-            },
-            {
-              "label": "Spital Grabs: Neubau Haus O erreicht den höchsten Punkt",
-              "date": "2026-10-06",
-              "url": "https://www.h-och.ch/ueber-uns/news/spital-grabs-neubau-haus-o-erreicht-den-hoechsten-punkt-2026-10-06/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -568,6 +617,7 @@
           "date": "2026-08-30T01:38:51.813Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Kontrollschild-Auktionen",
@@ -590,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "SG",
@@ -607,7 +657,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "10",
-          "note": "offre centrale 500 CHF"
+          "note": "offre centrale 510 CHF"
         }
       ],
       "dataBlocks": [
@@ -650,7 +700,7 @@
             },
             {
               "label": "SG10233",
-              "value": "1 320 CHF",
+              "value": "1 400 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-21T17:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6648"
@@ -665,13 +715,32 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-15T11:34:01.149Z"
+          "updatedAt": "2026-10-16T11:22:11.131Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "18 °C",
+              "detail": "aujourd’hui de 9 à 18 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-16T13:23:52.574Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Innovation für Menschen mit ALS und seltenen neuromuskulären Erkrankungen",
+              "date": "2026-10-16",
+              "url": "https://www.h-och.ch/ueber-uns/news/innovation-fuer-menschen-mit-als-und-seltenen-neuromuskulaeren-erkrankungen-2026-10-16/"
+            },
             {
               "label": "HOCH Health Ostschweiz eröffnet in der Stadt St.Gallen eine Augenarztpraxis",
               "date": "2026-10-14",
@@ -696,14 +765,9 @@
               "label": "Orthoplastik am Kantonsspital St.Gallen: Wo Orthopädie und Traumatologie, Plastische Chirurgie und Infektiologie zusammenwirken",
               "date": "2026-10-12",
               "url": "https://www.h-och.ch/ueber-uns/news/orthoplastik-am-kantonsspital-st-gallen-wo-orthopaedie-und-traumatologie-plastische-chirurgie-und-infektiologie-zusammenwirken-2026-10-12/"
-            },
-            {
-              "label": "Spital Grabs: Neubau Haus O erreicht den höchsten Punkt",
-              "date": "2026-10-06",
-              "url": "https://www.h-och.ch/ueber-uns/news/spital-grabs-neubau-haus-o-erreicht-den-hoechsten-punkt-2026-10-06/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -756,6 +820,7 @@
           "date": "2026-08-30T01:38:51.813Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Offres d’emploi dans le canton de Saint-Gall",
@@ -774,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

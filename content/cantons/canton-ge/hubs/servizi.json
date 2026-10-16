@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T01:56:54.479Z",
-  "contentHash": "456c9795131006fd140d22a63e18d6b2063dcda9d6255d6acbf27a7b72dde346",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "52f4ed6e5f71b917d33927c756e9cbb08737aeb2f091f0b4f170604d1094972c",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-15T14:35:27.546Z",
+      "updatedAt": "2026-10-16T11:50:35.483Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-16T13:23:52.574Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T10:09:31.602Z",
       "keyFacts": 0
     }
   ],
@@ -91,13 +96,32 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-15T14:35:27.546Z"
+          "updatedAt": "2026-10-16T11:50:35.483Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "21 °C",
+              "detail": "oggi da 10 a 21 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-16T13:23:52.574Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Quatre projets primés lors de la 20e édition de la Journée de l’innovation des HUG",
+              "date": "2026-10-16",
+              "url": "https://www.hug.ch/actualite/quatre-projets-primes-lors-20e-edition-journee-innovation-hug"
+            },
             {
               "label": "Formation 2026 \"Maintien au travail des salariés seniors : enjeux de santé au travail\"",
               "date": "2026-10-15",
@@ -122,14 +146,9 @@
               "label": "J'arrive en fin de droit, et après ?",
               "date": "2026-10-07",
               "url": "https://www.ge.ch/node/261"
-            },
-            {
-              "label": "Le chômage dans le canton de Genève en septembre 2026",
-              "date": "2026-10-06T07:15:00.000Z",
-              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10877&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6051"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -182,6 +201,7 @@
           "date": "2026-09-07T16:51:08.779Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Premi di cassa malati per regione",
@@ -208,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "GE",
@@ -277,13 +297,32 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-15T14:35:27.546Z"
+          "updatedAt": "2026-10-16T11:50:35.483Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "21 °C",
+              "detail": "today from 10 to 21 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-16T13:23:52.574Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Quatre projets primés lors de la 20e édition de la Journée de l’innovation des HUG",
+              "date": "2026-10-16",
+              "url": "https://www.hug.ch/actualite/quatre-projets-primes-lors-20e-edition-journee-innovation-hug"
+            },
             {
               "label": "Formation 2026 \"Maintien au travail des salariés seniors : enjeux de santé au travail\"",
               "date": "2026-10-15",
@@ -308,14 +347,9 @@
               "label": "J'arrive en fin de droit, et après ?",
               "date": "2026-10-07",
               "url": "https://www.ge.ch/node/261"
-            },
-            {
-              "label": "Le chômage dans le canton de Genève en septembre 2026",
-              "date": "2026-10-06T07:15:00.000Z",
-              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10877&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6051"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -367,6 +401,7 @@
           "date": "2026-09-07T16:51:08.779Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Number plate auctions",
@@ -389,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "GE",
@@ -458,13 +493,32 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-15T14:35:27.546Z"
+          "updatedAt": "2026-10-16T11:50:35.483Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "21 °C",
+              "detail": "heute 10 bis 21 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-16T13:23:52.574Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Quatre projets primés lors de la 20e édition de la Journée de l’innovation des HUG",
+              "date": "2026-10-16",
+              "url": "https://www.hug.ch/actualite/quatre-projets-primes-lors-20e-edition-journee-innovation-hug"
+            },
             {
               "label": "Formation 2026 \"Maintien au travail des salariés seniors : enjeux de santé au travail\"",
               "date": "2026-10-15",
@@ -489,14 +543,9 @@
               "label": "J'arrive en fin de droit, et après ?",
               "date": "2026-10-07",
               "url": "https://www.ge.ch/node/261"
-            },
-            {
-              "label": "Le chômage dans le canton de Genève en septembre 2026",
-              "date": "2026-10-06T07:15:00.000Z",
-              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10877&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6051"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -548,6 +597,7 @@
           "date": "2026-09-07T16:51:08.779Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Kontrollschild-Auktionen",
@@ -570,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "GE",
@@ -639,13 +689,32 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-15T14:35:27.546Z"
+          "updatedAt": "2026-10-16T11:50:35.483Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "21 °C",
+              "detail": "aujourd’hui de 10 à 21 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-16T13:23:52.574Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Quatre projets primés lors de la 20e édition de la Journée de l’innovation des HUG",
+              "date": "2026-10-16",
+              "url": "https://www.hug.ch/actualite/quatre-projets-primes-lors-20e-edition-journee-innovation-hug"
+            },
             {
               "label": "Formation 2026 \"Maintien au travail des salariés seniors : enjeux de santé au travail\"",
               "date": "2026-10-15",
@@ -670,14 +739,9 @@
               "label": "J'arrive en fin de droit, et après ?",
               "date": "2026-10-07",
               "url": "https://www.ge.ch/node/261"
-            },
-            {
-              "label": "Le chômage dans le canton de Genève en septembre 2026",
-              "date": "2026-10-06T07:15:00.000Z",
-              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10877&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6051"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -730,6 +794,7 @@
           "date": "2026-09-07T16:51:08.779Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Offres d’emploi dans le canton de Genève",
@@ -748,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T01:56:54.479Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

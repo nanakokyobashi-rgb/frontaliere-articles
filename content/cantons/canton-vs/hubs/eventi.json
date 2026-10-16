@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T00:00:55.142Z",
-  "contentHash": "3a832daa47e8ba044d6130c4c5d19bbd4f8f466d15da68874b34c380a8d6a75f",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "31c709aac7246cb3eac5c2d1b4f7cc25931eddfeed250a484f22ed39f67c8621",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-15T13:57:57.453Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "69",
+          "value": "71",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -87,18 +87,50 @@
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
-              "label": "Parental Leave, with a Twist",
-              "detail": "Gasthaus Heiligkreuz, Binn — in corso, ultimo giorno: 21 ottobre 2026",
+              "label": "Mushroom workshop",
+              "detail": "Veysonnaz — in corso, ultimo giorno: 18 ottobre 2026",
               "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/elternzeit-mal-anders/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mushroom-workshop/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Vallese: approvato il Piano d'azione acqua 2035",
+          "url": "/articoli-vallese/vallese-piano-acqua-2035/",
+          "excerpt": "Il Consiglio di Stato adotta il Piano d'azione 2035 Attuazione progressiva dal 2027, secondo priorità e risorse Le misure passano da 39 a 25 dopo la revisione",
+          "date": "2026-10-09T16:44:17.957Z"
+        },
+        {
+          "title": "Sion: apre la Maison de la garde per le urgenze",
+          "url": "/articoli-vallese/maison-garde-ospedale-sion/",
+          "excerpt": "Dal 1° settembre l'ospedale di Sion ha attivato un nuovo presidio per i casi non vitali, attivo ogni giorno dalle 18 alle 22.",
+          "date": "2026-10-08T17:03:41.241Z"
+        },
+        {
+          "title": "A9 Sion-Sierre: tre settimane di chiusure notturne",
+          "url": "/articoli-vallese/a9-chiusure-notturne-sion-sierre/",
+          "excerpt": "Tre settimane di chiusure: dal 12 al 30 ottobre Lavori fermi d'inverno, ripresa a marzo 2027 Chiusure notturne dalle 20 alle 5 Tratta → A9 tra Sion e Sierre",
+          "date": "2026-10-08T15:24:54.934Z"
+        },
+        {
+          "title": "Due casi di botulismo in Vallese: terrina ritirata",
+          "url": "/articoli-vallese/allerta-botulismo-terrina-vallese/",
+          "excerpt": "Due casi di botulismo segnalati in Vallese",
+          "date": "2026-10-07T16:03:38.899Z"
+        },
+        {
+          "title": "Disoccupazione Vallese: 5’755 iscritti a settembre 2026",
+          "url": "/articoli-vallese/disoccupazione-vallese-fine-estate/",
+          "excerpt": "5’755 disoccupati iscritti agli ORP a fine settembre",
+          "date": "2026-10-07T08:50:45.500Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi in Vallese",
@@ -109,7 +141,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "VS",
@@ -119,7 +151,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "69",
+          "value": "71",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,18 +216,48 @@
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
-              "label": "Parental Leave, with a Twist",
-              "detail": "Gasthaus Heiligkreuz, Binn — ongoing, last day: 21 October 2026",
+              "label": "Mushroom workshop",
+              "detail": "Veysonnaz — ongoing, last day: 18 October 2026",
               "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/elternzeit-mal-anders/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mushroom-workshop/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Valais: Water Action Plan 2035 approved",
+          "url": "/en/valais-articles/valais-water-action-plan-2035/",
+          "excerpt": "The Council of State adopts the 2035 Action Plan Gradual implementation from 2027, according to priorities and resources The measures decrease from 39 to 25",
+          "date": "2026-10-09T16:44:17.957Z"
+        },
+        {
+          "title": "Sion: the Maison de la garde opens for emergencies",
+          "url": "/en/valais-articles/maison-garde-sion-hospital/",
+          "excerpt": "As of September 1st, Sion Hospital has opened a new facility for non-life-threatening cases, open every day from 18 to 22.",
+          "date": "2026-10-08T17:03:41.241Z"
+        },
+        {
+          "title": "A9 Sion-Sierre: three weeks of nighttime closures",
+          "url": "/en/valais-articles/a9-night-closures-sion-sierre/",
+          "excerpt": "Three weeks of closures: from October 12 to 30 Work halted over the winter, resumption in March 2027 Nighttime closures from 20 to 5 Route → A9 between Sion",
+          "date": "2026-10-08T15:24:54.934Z"
+        },
+        {
+          "title": "Two cases of botulism in Valais: terrine recalled",
+          "url": "/en/valais-articles/valais-botulism-terrine-alert/",
+          "date": "2026-10-07T16:03:38.899Z"
+        },
+        {
+          "title": "Valais unemployment: 5’755 registered in September 2026",
+          "url": "/en/valais-articles/valais-unemployment-end-summer/",
+          "date": "2026-10-07T08:50:45.500Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in Valais",
@@ -206,7 +268,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "VS",
@@ -216,7 +278,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "69",
+          "value": "71",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -281,18 +343,48 @@
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
-              "label": "Elternzeit mal anders",
-              "detail": "Gasthaus Heiligkreuz, Binn — läuft, letzter Tag: 21. Oktober 2026",
+              "label": "Pilz-Workshop",
+              "detail": "Veysonnaz — läuft, letzter Tag: 18. Oktober 2026",
               "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/elternzeit-mal-anders/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mushroom-workshop/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Wallis: Wasser-Aktionsplan 2035 genehmigt",
+          "url": "/de/wallis-artikel/wallis-aktionsplan-wasser-2035/",
+          "excerpt": "Der Staatsrat verabschiedet den Aktionsplan 2035 Schrittweise Umsetzung ab 2027 nach Prioritäten und Ressourcen Die Maßnahmen gehen nach der Überarbeitung",
+          "date": "2026-10-09T16:44:17.957Z"
+        },
+        {
+          "title": "Sitten: Die Maison de la garde für Notfälle öffnet",
+          "url": "/de/wallis-artikel/maison-garde-spital-sitten/",
+          "excerpt": "Seit dem 1. September hat das Spital von Sitten eine neue Anlaufstelle für nicht lebensbedrohliche Fälle eingerichtet, die täglich von 18 bis 22 Uhr geöffnet ist.",
+          "date": "2026-10-08T17:03:41.241Z"
+        },
+        {
+          "title": "A9 Sitten-Sierre: drei Wochen nächtliche Sperrungen",
+          "url": "/de/wallis-artikel/a9-nachtsperrungen-sitten-sierre/",
+          "excerpt": "Drei Wochen Sperrungen: vom 12.",
+          "date": "2026-10-08T15:24:54.934Z"
+        },
+        {
+          "title": "Zwei Fälle von Botulismus im Wallis: Terrine zurückgezogen",
+          "url": "/de/wallis-artikel/wallis-botulismus-terrine-warnung/",
+          "date": "2026-10-07T16:03:38.899Z"
+        },
+        {
+          "title": "Arbeitslosigkeit im Wallis: 5’755 registrierte Arbeitslose im September 2026",
+          "url": "/de/wallis-artikel/wallis-arbeitslosigkeit-sommerende/",
+          "date": "2026-10-07T08:50:45.500Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen im Wallis",
@@ -303,7 +395,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "VS",
@@ -313,7 +405,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "69",
+          "value": "71",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -378,18 +470,50 @@
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
-              "label": "Un congé parental pas comme les autres",
-              "detail": "Gasthaus Heiligkreuz, Binn — en cours, dernier jour : 21 octobre 2026",
+              "label": "Atelier champignons",
+              "detail": "Veysonnaz — en cours, dernier jour : 18 octobre 2026",
               "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/elternzeit-mal-anders/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mushroom-workshop/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Valais : approbation du Plan d'action Eau 2035",
+          "url": "/fr/articles-valais/valais-plan-action-eau-2035/",
+          "excerpt": "Le Conseil d'État adopte le Plan d'action 2035 Mise en œuvre progressive à partir de 2027, selon les priorités et les ressources Les mesures passent de 39 à 25",
+          "date": "2026-10-09T16:44:17.957Z"
+        },
+        {
+          "title": "Sion : la Maison de la garde ouvre pour les urgences",
+          "url": "/fr/articles-valais/maison-garde-hopital-sion/",
+          "excerpt": "À partir du 1er septembre, l’hôpital de Sion a mis en place un nouveau dispositif pour les cas non vitaux, ouvert tous les jours de 18 à 22 heures.",
+          "date": "2026-10-08T17:03:41.241Z"
+        },
+        {
+          "title": "A9 Sion-Sierre : trois semaines de fermetures nocturnes",
+          "url": "/fr/articles-valais/a9-fermetures-nocturnes-sion-sierre/",
+          "excerpt": "Trois semaines de fermetures : du 12 au 30 octobre Travaux interrompus en hiver, reprise en mars 2027 Fermetures nocturnes de 20 h à 5 h Tronçon → A9 entre Sion",
+          "date": "2026-10-08T15:24:54.934Z"
+        },
+        {
+          "title": "Deux cas de botulisme en Valais : terrine retirée",
+          "url": "/fr/articles-valais/alerte-botulisme-terrine-valais/",
+          "excerpt": "Deux cas de botulisme signalés dans le Valais",
+          "date": "2026-10-07T16:03:38.899Z"
+        },
+        {
+          "title": "Chômage en Valais : 5’755 inscrits en septembre 2026",
+          "url": "/fr/articles-valais/chomage-valais-fin-ete/",
+          "excerpt": "5’755 chômeurs inscrits auprès des ORP à fin septembre",
+          "date": "2026-10-07T08:50:45.500Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements en Valais",
@@ -400,7 +524,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

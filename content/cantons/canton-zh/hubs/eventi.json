@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T00:00:55.142Z",
-  "contentHash": "5f4b059ddbf3821292da9d47672d058e10a1420aa795e973c422c8be10560e8a",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "a2ddfc4e71cbf2c3a9b995a73f6dfbcc75409ebe3e9e2a07581ad050013c8ef4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-15T13:57:57.453Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "343",
+          "value": "348",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,6 +32,24 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
+            {
+              "label": "Archeologia Svizzera",
+              "detail": "Zurigo, Zürich",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/archeologia-svizzera/"
+            },
+            {
+              "label": "Attraverso la storia su un tappeto volante",
+              "detail": "Zurigo, Zürich",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/attraverso-la-storia-su-un-tappeto-volante/"
+            },
+            {
+              "label": "Idee della Svizzera",
+              "detail": "Zurigo, Zürich",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/idee-della-svizzera/"
+            },
             {
               "label": "SHOWTIME! - Ein Ten Sing Ferienprogramm Herbstferien",
               "detail": "Uetikon am See",
@@ -73,29 +91,11 @@
               "detail": "Plaza Klub",
               "date": "2026-10-16",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/nickless-ch_AKpEtWX"
-            },
-            {
-              "label": "EHC Kloten - HC Ambri-Piotta",
-              "detail": "SWISS Arena, Kloten",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ehc-kloten-hc-ambri-piotta/"
-            },
-            {
-              "label": "ABGESAGT: Khalid: It’s Always Summer Somewhere Tour",
-              "detail": "Dübendorf",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/khalid-its-always-summer-somewhere-tour/"
-            },
-            {
-              "label": "Composer Jazz Orchestra",
-              "detail": "Musikklub Mehrspur",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/composer-jazz-orchestra_AubD5Vq"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -118,6 +118,7 @@
           "date": "2026-09-07T13:05:51.871Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Zurigo",
@@ -128,7 +129,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "ZH",
@@ -138,7 +139,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "343",
+          "value": "348",
           "note": "from the site’s events calendar"
         }
       ],
@@ -148,6 +149,24 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
+            {
+              "label": "Archaeology in Switzerland",
+              "detail": "Zurigo, Zürich",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/archeologia-svizzera/"
+            },
+            {
+              "label": "A magic carpet ride through history",
+              "detail": "Zurigo, Zürich",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/attraverso-la-storia-su-un-tappeto-volante/"
+            },
+            {
+              "label": "Ideas of Switzerland",
+              "detail": "Zurigo, Zürich",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/idee-della-svizzera/"
+            },
             {
               "label": "SHOWTIME! - Ein Ten Sing Ferienprogramm Herbstferien",
               "detail": "Uetikon am See",
@@ -189,29 +208,11 @@
               "detail": "Plaza Klub",
               "date": "2026-10-16",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/nickless-ch_AKpEtWX"
-            },
-            {
-              "label": "EHC Kloten - HC Ambri-Piotta",
-              "detail": "SWISS Arena, Kloten",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ehc-kloten-hc-ambri-piotta/"
-            },
-            {
-              "label": "ABGESAGT: Khalid: It’s Always Summer Somewhere Tour",
-              "detail": "Dübendorf",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/khalid-its-always-summer-somewhere-tour/"
-            },
-            {
-              "label": "Composer Jazz Orchestra",
-              "detail": "Musikklub Mehrspur",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/composer-jazz-orchestra_AubD5Vq"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -234,6 +235,7 @@
           "date": "2026-09-07T13:05:51.871Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "All events in the canton of Zurich",
@@ -244,7 +246,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "ZH",
@@ -254,7 +256,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "343",
+          "value": "348",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -264,6 +266,24 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
+            {
+              "label": "Archäologie Schweiz",
+              "detail": "Zurigo, Zürich",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/archeologia-svizzera/"
+            },
+            {
+              "label": "Mit fliegendem Teppich durch die Geschichte",
+              "detail": "Zurigo, Zürich",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/attraverso-la-storia-su-un-tappeto-volante/"
+            },
+            {
+              "label": "Ideen Schweiz",
+              "detail": "Zurigo, Zürich",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/idee-della-svizzera/"
+            },
             {
               "label": "SHOWTIME! - Ein Ten Sing Ferienprogramm Herbstferien",
               "detail": "Uetikon am See",
@@ -305,29 +325,11 @@
               "detail": "Plaza Klub",
               "date": "2026-10-16",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/nickless-ch_AKpEtWX"
-            },
-            {
-              "label": "EHC Kloten - HC Ambri-Piotta",
-              "detail": "SWISS Arena, Kloten",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ehc-kloten-hc-ambri-piotta/"
-            },
-            {
-              "label": "ABGESAGT: Khalid: It’s Always Summer Somewhere Tour",
-              "detail": "Dübendorf",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/khalid-its-always-summer-somewhere-tour/"
-            },
-            {
-              "label": "Composer Jazz Orchestra",
-              "detail": "Musikklub Mehrspur",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/composer-jazz-orchestra_AubD5Vq"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -350,6 +352,7 @@
           "date": "2026-09-07T13:05:51.871Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Zürich",
@@ -360,7 +363,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "ZH",
@@ -370,7 +373,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "343",
+          "value": "348",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -380,6 +383,24 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
+            {
+              "label": "Archéologie Suisse",
+              "detail": "Zurigo, Zürich",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/archeologia-svizzera/"
+            },
+            {
+              "label": "En tapis volant à travers l’histoire",
+              "detail": "Zurigo, Zürich",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/attraverso-la-storia-su-un-tappeto-volante/"
+            },
+            {
+              "label": "Idées de la Suisse",
+              "detail": "Zurigo, Zürich",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/idee-della-svizzera/"
+            },
             {
               "label": "SHOWTIME! - Ein Ten Sing Ferienprogramm Herbstferien",
               "detail": "Uetikon am See",
@@ -421,29 +442,11 @@
               "detail": "Plaza Klub",
               "date": "2026-10-16",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/nickless-ch_AKpEtWX"
-            },
-            {
-              "label": "EHC Kloten - HC Ambri-Piotta",
-              "detail": "SWISS Arena, Kloten",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ehc-kloten-hc-ambri-piotta/"
-            },
-            {
-              "label": "ABGESAGT: Khalid: It’s Always Summer Somewhere Tour",
-              "detail": "Dübendorf",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/khalid-its-always-summer-somewhere-tour/"
-            },
-            {
-              "label": "Composer Jazz Orchestra",
-              "detail": "Musikklub Mehrspur",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/composer-jazz-orchestra_AubD5Vq"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -466,6 +469,7 @@
           "date": "2026-09-07T13:05:51.871Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tous les événements dans le canton de Zurich",
@@ -476,7 +480,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

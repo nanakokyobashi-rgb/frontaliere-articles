@@ -4,14 +4,14 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "carburanti",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "3d00e5dc7acc412a50651dda821852683c233aa660e413a1f78ac4b705d92cde",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "fd74a671979de24c18910e8d767e8ba9253779f27a56a470f1f392d07762475f",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-15T12:02:33.404Z",
+      "updatedAt": "2026-10-16T11:53:35.759Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-22T10:51:00.000Z"
+      "carryUntilAt": "2026-10-23T11:00:08.000Z"
     }
   ],
   "locales": {
@@ -54,34 +54,66 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,270 EUR/l",
-              "detail": "media regionale: minimo 1,990 EUR/l, 74 stazioni rilevate",
-              "date": "2026-10-15T10:51:00.000Z"
+              "value": "2,274 EUR/l",
+              "detail": "media regionale: minimo 1,990 EUR/l, 73 stazioni rilevate",
+              "date": "2026-10-16T11:00:08.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,447 EUR/l",
-              "detail": "media regionale: minimo 2,185 EUR/l, 80 stazioni rilevate",
-              "date": "2026-10-15T10:51:00.000Z"
+              "value": "2,451 EUR/l",
+              "detail": "media regionale: minimo 2,208 EUR/l, 78 stazioni rilevate",
+              "date": "2026-10-16T11:00:08.000Z"
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "2,226 EUR/l",
+              "value": "2,222 EUR/l",
               "detail": "media regionale: minimo 2,209 EUR/l, 7 stazioni rilevate",
-              "date": "2026-10-15T12:02:33.404Z"
+              "date": "2026-10-16T11:53:35.759Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,290 EUR/l",
+              "value": "2,285 EUR/l",
               "detail": "media regionale: minimo 2,269 EUR/l, 7 stazioni rilevate",
-              "date": "2026-10-15T12:02:33.404Z"
+              "date": "2026-10-16T11:53:35.759Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Basilea, cantieri a Claraplatz: negozi in difficoltà",
+          "url": "/articoli-basilea/claraplatz-basel-cantieri/",
+          "excerpt": "A Claraplatz i cantieri colpiscono i negozi e il chiosco perde il 40% del fatturato.",
+          "date": "2026-10-11T00:21:48.656Z"
+        },
+        {
+          "title": "Basilea, zanzara tigre: trattamenti ogni 4 settimane",
+          "url": "/articoli-basilea/basilea-larvicida-quattro-settimane/",
+          "excerpt": "Una tesi di master su 180 caditoie nel quartiere St.",
+          "date": "2026-10-11T00:07:19.597Z"
+        },
+        {
+          "title": "Barfüsserplatz, il difficile progetto di riqualificazione",
+          "url": "/articoli-basilea/barfusserplatz-riqualificazione-urbana/",
+          "excerpt": "La ristrutturazione di Barfüsserplatz porta al centro la qualità dello spazio urbano: per il capo della Commissione, creare una bella piazza è quasi impossibile.",
+          "date": "2026-10-09T21:31:16.945Z"
+        },
+        {
+          "title": "Basel lancia Klimpact per un quotidiano più verde",
+          "url": "/articoli-basilea/basel-klimpact-programma-2026/",
+          "excerpt": "Basel-Stadt avvia Klimpact per ridurre le emissioni.",
+          "date": "2026-10-09T21:07:09.540Z"
+        },
+        {
+          "title": "Tempo 30 a Birsfelden dal 12 ottobre 2026",
+          "url": "/articoli-basilea/tempo30-birsfelden-ottobre/",
+          "excerpt": "Nel Baselbiet Birsfelden introduce il Tempo 30 dal 12 ottobre 2026, mentre Münchenstein deve ancora attendere.",
+          "date": "2026-10-08T16:01:18.338Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -92,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -133,34 +165,66 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.270 EUR/l",
-              "detail": "regional average: lowest 1.990 EUR/l, 74 stations surveyed",
-              "date": "2026-10-15T10:51:00.000Z"
+              "value": "2.274 EUR/l",
+              "detail": "regional average: lowest 1.990 EUR/l, 73 stations surveyed",
+              "date": "2026-10-16T11:00:08.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.447 EUR/l",
-              "detail": "regional average: lowest 2.185 EUR/l, 80 stations surveyed",
-              "date": "2026-10-15T10:51:00.000Z"
+              "value": "2.451 EUR/l",
+              "detail": "regional average: lowest 2.208 EUR/l, 78 stations surveyed",
+              "date": "2026-10-16T11:00:08.000Z"
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "2.226 EUR/l",
+              "value": "2.222 EUR/l",
               "detail": "regional average: lowest 2.209 EUR/l, 7 stations surveyed",
-              "date": "2026-10-15T12:02:33.404Z"
+              "date": "2026-10-16T11:53:35.759Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.290 EUR/l",
+              "value": "2.285 EUR/l",
               "detail": "regional average: lowest 2.269 EUR/l, 7 stations surveyed",
-              "date": "2026-10-15T12:02:33.404Z"
+              "date": "2026-10-16T11:53:35.759Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Basel, construction work at Claraplatz: shops struggling",
+          "url": "/en/basel-articles/claraplatz-basel-construction-sites/",
+          "excerpt": "At Claraplatz, construction sites hit the shops and the kiosk loses 40% of its turnover.",
+          "date": "2026-10-11T00:21:48.656Z"
+        },
+        {
+          "title": "Basel, tiger mosquito: treatments every 4 weeks",
+          "url": "/en/basel-articles/basel-tiger-mosquito-four-weeks/",
+          "excerpt": "A master's thesis on 180 loopholes in the St.",
+          "date": "2026-10-11T00:07:19.597Z"
+        },
+        {
+          "title": "Barfüsserplatz, the challenging redevelopment project",
+          "url": "/en/basel-articles/basel-barfusserplatz-redesign/",
+          "excerpt": "The redevelopment of Barfüsserplatz puts the quality of urban space at the center: for the head of the Commission, creating a beautiful square is almost impossible.",
+          "date": "2026-10-09T21:31:16.945Z"
+        },
+        {
+          "title": "Basel launches Klimpact for a greener everyday life",
+          "url": "/en/basel-articles/basel-launches-klimpact-for-a-greener-everyday-life/",
+          "excerpt": "Basel-Stadt launches Klimpact to reduce emissions.",
+          "date": "2026-10-09T21:07:09.540Z"
+        },
+        {
+          "title": "30 km/h in Birsfelden from October 12, 2026",
+          "url": "/en/basel-articles/tempo30-birsfelden-october/",
+          "excerpt": "In Baselbiet, Birsfelden will introduce Tempo 30 on October 12, 2026, while Münchenstein still has to wait.",
+          "date": "2026-10-08T16:01:18.338Z"
+        }
+      ],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -171,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -212,34 +276,66 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.270 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 74 erfasste Tankstellen",
-              "date": "2026-10-15T10:51:00.000Z"
+              "value": "2.274 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 73 erfasste Tankstellen",
+              "date": "2026-10-16T11:00:08.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.447 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.185 EUR/l, 80 erfasste Tankstellen",
-              "date": "2026-10-15T10:51:00.000Z"
+              "value": "2.451 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.208 EUR/l, 78 erfasste Tankstellen",
+              "date": "2026-10-16T11:00:08.000Z"
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "2.226 EUR/l",
+              "value": "2.222 EUR/l",
               "detail": "regionaler Durchschnitt: tiefster Preis 2.209 EUR/l, 7 erfasste Tankstellen",
-              "date": "2026-10-15T12:02:33.404Z"
+              "date": "2026-10-16T11:53:35.759Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.290 EUR/l",
+              "value": "2.285 EUR/l",
               "detail": "regionaler Durchschnitt: tiefster Preis 2.269 EUR/l, 7 erfasste Tankstellen",
-              "date": "2026-10-15T12:02:33.404Z"
+              "date": "2026-10-16T11:53:35.759Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Basel, Baustellen am Claraplatz: Geschäfte in Schwierigkeiten",
+          "url": "/de/basel-artikel/claraplatz-basel-baustellen/",
+          "excerpt": "Am Claraplatz setzen die Bauarbeiten den Geschäften zu, und der Kiosk verliert 40% seines Umsatzes.",
+          "date": "2026-10-11T00:21:48.656Z"
+        },
+        {
+          "title": "Basel, Tigermücke: Behandlungen alle 4 Wochen",
+          "url": "/de/basel-artikel/basel-tigermuecke-vier-wochen/",
+          "excerpt": "Eine Masterarbeit über 180 Fallrohre im Stadtteil St.",
+          "date": "2026-10-11T00:07:19.597Z"
+        },
+        {
+          "title": "Barfüsserplatz, das schwierige Sanierungsprojekt",
+          "url": "/de/basel-artikel/umbau-barfuesserplatz-basel/",
+          "excerpt": "Die Sanierung des Barfüsserplatzes rückt die Qualität des städtischen Raums in den Mittelpunkt: Für den Kommissionspräsidenten ist es fast unmöglich, einen schönen Platz zu schaffen.",
+          "date": "2026-10-09T21:31:16.945Z"
+        },
+        {
+          "title": "Basel lanciert Klimpact für einen grüneren Alltag",
+          "url": "/de/basel-artikel/basel-lanciert-klimpact-fur-einen-gruneren-alltag/",
+          "excerpt": "Basel-Stadt startet Klimpact, um Emissionen zu reduzieren.",
+          "date": "2026-10-09T21:07:09.540Z"
+        },
+        {
+          "title": "Tempo 30 in Birsfelden ab dem 12. Oktober 2026",
+          "url": "/de/basel-artikel/tempo30-birsfelden-oktober/",
+          "excerpt": "Im Baselbiet führt Birsfelden ab dem 12.",
+          "date": "2026-10-08T16:01:18.338Z"
+        }
+      ],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -250,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -291,34 +387,66 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,270 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 74 stations relevées",
-              "date": "2026-10-15T10:51:00.000Z"
+              "value": "2,274 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 73 stations relevées",
+              "date": "2026-10-16T11:00:08.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,447 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,185 EUR/l, 80 stations relevées",
-              "date": "2026-10-15T10:51:00.000Z"
+              "value": "2,451 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,208 EUR/l, 78 stations relevées",
+              "date": "2026-10-16T11:00:08.000Z"
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "2,226 EUR/l",
+              "value": "2,222 EUR/l",
               "detail": "moyenne régionale : prix le plus bas 2,209 EUR/l, 7 stations relevées",
-              "date": "2026-10-15T12:02:33.404Z"
+              "date": "2026-10-16T11:53:35.759Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,290 EUR/l",
+              "value": "2,285 EUR/l",
               "detail": "moyenne régionale : prix le plus bas 2,269 EUR/l, 7 stations relevées",
-              "date": "2026-10-15T12:02:33.404Z"
+              "date": "2026-10-16T11:53:35.759Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Bâle, travaux à Claraplatz : commerces en difficulté",
+          "url": "/fr/articles-bale/claraplatz-bale-chantiers/",
+          "excerpt": "À Claraplatz, les travaux touchent les commerces et le kiosque perd 40% de son chiffre d’affaires.",
+          "date": "2026-10-11T00:21:48.656Z"
+        },
+        {
+          "title": "Bâle, moustique tigre : traitements toutes les 4 semaines",
+          "url": "/fr/articles-bale/bale-moustique-tigre-quatre-semaines/",
+          "excerpt": "Une thèse de master sur 180 caditoires dans le quartier St.",
+          "date": "2026-10-11T00:07:19.597Z"
+        },
+        {
+          "title": "Barfüsserplatz, le difficile projet de requalification",
+          "url": "/fr/articles-bale/reamenagement-barfusserplatz-bale/",
+          "excerpt": "La rénovation de Barfüsserplatz place au centre la qualité de l’espace urbain : pour le chef de la Commission, créer une belle place est presque impossible.",
+          "date": "2026-10-09T21:31:16.945Z"
+        },
+        {
+          "title": "Bâle lance Klimpact pour un quotidien plus vert",
+          "url": "/fr/articles-bale/bale-lance-klimpact-pour-un-quotidien-plus-vert/",
+          "excerpt": "Bâle-Ville lance Klimpact pour réduire les émissions.",
+          "date": "2026-10-09T21:07:09.540Z"
+        },
+        {
+          "title": "Tempo 30 à Birsfelden à partir du 12 octobre 2026",
+          "url": "/fr/articles-bale/tempo30-birsfelden-octobre/",
+          "excerpt": "Dans le Baselbiet, Birsfelden introduit le Tempo 30 à partir du 12 octobre 2026, tandis que Münchenstein doit encore attendre.",
+          "date": "2026-10-08T16:01:18.338Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -329,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

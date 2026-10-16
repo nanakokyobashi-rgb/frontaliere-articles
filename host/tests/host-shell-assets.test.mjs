@@ -36,8 +36,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const read = (rel) => readFileSync(path.join(ROOT, rel), 'utf8');
 const ENSURE_SCRIPT = 'scripts/ci/ensure-host-shell-assets.mjs';
 
-// Stessa ragione di shell-contract-fingerprint.test.mjs: `cdnPreconnectHint`
-// dipende da ASSET_CDN al caricamento del modulo.
+// Mantiene la fixture del contratto indipendente da ASSET_CDN.
 normalizeContractEnv();
 
 /**

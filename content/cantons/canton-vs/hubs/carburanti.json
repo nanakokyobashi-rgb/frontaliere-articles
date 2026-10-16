@@ -4,14 +4,14 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "carburanti",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "566bdd472d13ccf041c2a07951a4e055fc421284edf07ccc00bfdda2d838d176",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "5f0aa5fb9ec2f168c0cfc8ae1ea4263deb6db6545cd35cc33cc575a2fa894187",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-15T12:02:33.404Z",
+      "updatedAt": "2026-10-16T11:53:35.759Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-21T05:58:14.000Z"
+      "carryUntilAt": "2026-10-22T05:58:43.000Z"
     }
   ],
   "locales": {
@@ -56,32 +56,64 @@
               "label": "Benzina 95 — Italia",
               "value": "2,043 EUR/l",
               "detail": "media regionale: minimo 1,989 EUR/l, 100 stazioni rilevate",
-              "date": "2026-10-14T05:58:14.000Z"
+              "date": "2026-10-15T05:58:43.000Z"
             },
             {
               "label": "Diesel — Italia",
-              "value": "2,262 EUR/l",
+              "value": "2,265 EUR/l",
               "detail": "media regionale: minimo 2,190 EUR/l, 100 stazioni rilevate",
-              "date": "2026-10-14T05:58:14.000Z"
+              "date": "2026-10-15T05:58:43.000Z"
             },
             {
               "label": "Benzina 95 — Francia",
               "value": "2,204 EUR/l",
-              "detail": "media regionale: minimo 1,990 EUR/l, 100 stazioni rilevate",
-              "date": "2026-10-15T11:07:29.000Z"
+              "detail": "media regionale: minimo 1,990 EUR/l, 98 stazioni rilevate",
+              "date": "2026-10-16T10:31:44.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,379 EUR/l",
-              "detail": "media regionale: minimo 2,250 EUR/l, 111 stazioni rilevate",
-              "date": "2026-10-15T10:33:58.000Z"
+              "value": "2,386 EUR/l",
+              "detail": "media regionale: minimo 2,250 EUR/l, 108 stazioni rilevate",
+              "date": "2026-10-16T10:31:44.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); MIMIT Osservaprezzi carburanti (open data); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Vallese: approvato il Piano d'azione acqua 2035",
+          "url": "/articoli-vallese/vallese-piano-acqua-2035/",
+          "excerpt": "Il Consiglio di Stato adotta il Piano d'azione 2035 Attuazione progressiva dal 2027, secondo priorità e risorse Le misure passano da 39 a 25 dopo la revisione",
+          "date": "2026-10-09T16:44:17.957Z"
+        },
+        {
+          "title": "Sion: apre la Maison de la garde per le urgenze",
+          "url": "/articoli-vallese/maison-garde-ospedale-sion/",
+          "excerpt": "Dal 1° settembre l'ospedale di Sion ha attivato un nuovo presidio per i casi non vitali, attivo ogni giorno dalle 18 alle 22.",
+          "date": "2026-10-08T17:03:41.241Z"
+        },
+        {
+          "title": "A9 Sion-Sierre: tre settimane di chiusure notturne",
+          "url": "/articoli-vallese/a9-chiusure-notturne-sion-sierre/",
+          "excerpt": "Tre settimane di chiusure: dal 12 al 30 ottobre Lavori fermi d'inverno, ripresa a marzo 2027 Chiusure notturne dalle 20 alle 5 Tratta → A9 tra Sion e Sierre",
+          "date": "2026-10-08T15:24:54.934Z"
+        },
+        {
+          "title": "Due casi di botulismo in Vallese: terrina ritirata",
+          "url": "/articoli-vallese/allerta-botulismo-terrina-vallese/",
+          "excerpt": "Due casi di botulismo segnalati in Vallese",
+          "date": "2026-10-07T16:03:38.899Z"
+        },
+        {
+          "title": "Disoccupazione Vallese: 5’755 iscritti a settembre 2026",
+          "url": "/articoli-vallese/disoccupazione-vallese-fine-estate/",
+          "excerpt": "5’755 disoccupati iscritti agli ORP a fine settembre",
+          "date": "2026-10-07T08:50:45.500Z"
+        }
+      ],
       "links": [
         {
           "label": "Prezzo della benzina oggi",
@@ -108,7 +140,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "VS",
@@ -151,32 +183,62 @@
               "label": "Petrol 95 — Italy",
               "value": "2.043 EUR/l",
               "detail": "regional average: lowest 1.989 EUR/l, 100 stations surveyed",
-              "date": "2026-10-14T05:58:14.000Z"
+              "date": "2026-10-15T05:58:43.000Z"
             },
             {
               "label": "Diesel — Italy",
-              "value": "2.262 EUR/l",
+              "value": "2.265 EUR/l",
               "detail": "regional average: lowest 2.190 EUR/l, 100 stations surveyed",
-              "date": "2026-10-14T05:58:14.000Z"
+              "date": "2026-10-15T05:58:43.000Z"
             },
             {
               "label": "Petrol 95 — France",
               "value": "2.204 EUR/l",
-              "detail": "regional average: lowest 1.990 EUR/l, 100 stations surveyed",
-              "date": "2026-10-15T11:07:29.000Z"
+              "detail": "regional average: lowest 1.990 EUR/l, 98 stations surveyed",
+              "date": "2026-10-16T10:31:44.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.379 EUR/l",
-              "detail": "regional average: lowest 2.250 EUR/l, 111 stations surveyed",
-              "date": "2026-10-15T10:33:58.000Z"
+              "value": "2.386 EUR/l",
+              "detail": "regional average: lowest 2.250 EUR/l, 108 stations surveyed",
+              "date": "2026-10-16T10:31:44.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); MIMIT Osservaprezzi carburanti (open data); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Valais: Water Action Plan 2035 approved",
+          "url": "/en/valais-articles/valais-water-action-plan-2035/",
+          "excerpt": "The Council of State adopts the 2035 Action Plan Gradual implementation from 2027, according to priorities and resources The measures decrease from 39 to 25",
+          "date": "2026-10-09T16:44:17.957Z"
+        },
+        {
+          "title": "Sion: the Maison de la garde opens for emergencies",
+          "url": "/en/valais-articles/maison-garde-sion-hospital/",
+          "excerpt": "As of September 1st, Sion Hospital has opened a new facility for non-life-threatening cases, open every day from 18 to 22.",
+          "date": "2026-10-08T17:03:41.241Z"
+        },
+        {
+          "title": "A9 Sion-Sierre: three weeks of nighttime closures",
+          "url": "/en/valais-articles/a9-night-closures-sion-sierre/",
+          "excerpt": "Three weeks of closures: from October 12 to 30 Work halted over the winter, resumption in March 2027 Nighttime closures from 20 to 5 Route → A9 between Sion",
+          "date": "2026-10-08T15:24:54.934Z"
+        },
+        {
+          "title": "Two cases of botulism in Valais: terrine recalled",
+          "url": "/en/valais-articles/valais-botulism-terrine-alert/",
+          "date": "2026-10-07T16:03:38.899Z"
+        },
+        {
+          "title": "Valais unemployment: 5’755 registered in September 2026",
+          "url": "/en/valais-articles/valais-unemployment-end-summer/",
+          "date": "2026-10-07T08:50:45.500Z"
+        }
+      ],
       "links": [
         {
           "label": "Petrol price today",
@@ -203,7 +265,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "VS",
@@ -246,32 +308,62 @@
               "label": "Benzin 95 — Italien",
               "value": "2.043 EUR/l",
               "detail": "regionaler Durchschnitt: tiefster Preis 1.989 EUR/l, 100 erfasste Tankstellen",
-              "date": "2026-10-14T05:58:14.000Z"
+              "date": "2026-10-15T05:58:43.000Z"
             },
             {
               "label": "Diesel — Italien",
-              "value": "2.262 EUR/l",
+              "value": "2.265 EUR/l",
               "detail": "regionaler Durchschnitt: tiefster Preis 2.190 EUR/l, 100 erfasste Tankstellen",
-              "date": "2026-10-14T05:58:14.000Z"
+              "date": "2026-10-15T05:58:43.000Z"
             },
             {
               "label": "Benzin 95 — Frankreich",
               "value": "2.204 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 100 erfasste Tankstellen",
-              "date": "2026-10-15T11:07:29.000Z"
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 98 erfasste Tankstellen",
+              "date": "2026-10-16T10:31:44.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.379 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.250 EUR/l, 111 erfasste Tankstellen",
-              "date": "2026-10-15T10:33:58.000Z"
+              "value": "2.386 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.250 EUR/l, 108 erfasste Tankstellen",
+              "date": "2026-10-16T10:31:44.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); MIMIT Osservaprezzi carburanti (open data); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Wallis: Wasser-Aktionsplan 2035 genehmigt",
+          "url": "/de/wallis-artikel/wallis-aktionsplan-wasser-2035/",
+          "excerpt": "Der Staatsrat verabschiedet den Aktionsplan 2035 Schrittweise Umsetzung ab 2027 nach Prioritäten und Ressourcen Die Maßnahmen gehen nach der Überarbeitung",
+          "date": "2026-10-09T16:44:17.957Z"
+        },
+        {
+          "title": "Sitten: Die Maison de la garde für Notfälle öffnet",
+          "url": "/de/wallis-artikel/maison-garde-spital-sitten/",
+          "excerpt": "Seit dem 1. September hat das Spital von Sitten eine neue Anlaufstelle für nicht lebensbedrohliche Fälle eingerichtet, die täglich von 18 bis 22 Uhr geöffnet ist.",
+          "date": "2026-10-08T17:03:41.241Z"
+        },
+        {
+          "title": "A9 Sitten-Sierre: drei Wochen nächtliche Sperrungen",
+          "url": "/de/wallis-artikel/a9-nachtsperrungen-sitten-sierre/",
+          "excerpt": "Drei Wochen Sperrungen: vom 12.",
+          "date": "2026-10-08T15:24:54.934Z"
+        },
+        {
+          "title": "Zwei Fälle von Botulismus im Wallis: Terrine zurückgezogen",
+          "url": "/de/wallis-artikel/wallis-botulismus-terrine-warnung/",
+          "date": "2026-10-07T16:03:38.899Z"
+        },
+        {
+          "title": "Arbeitslosigkeit im Wallis: 5’755 registrierte Arbeitslose im September 2026",
+          "url": "/de/wallis-artikel/wallis-arbeitslosigkeit-sommerende/",
+          "date": "2026-10-07T08:50:45.500Z"
+        }
+      ],
       "links": [
         {
           "label": "Benzinpreis heute",
@@ -294,7 +386,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "VS",
@@ -337,32 +429,64 @@
               "label": "Essence 95 — Italie",
               "value": "2,043 EUR/l",
               "detail": "moyenne régionale : prix le plus bas 1,989 EUR/l, 100 stations relevées",
-              "date": "2026-10-14T05:58:14.000Z"
+              "date": "2026-10-15T05:58:43.000Z"
             },
             {
               "label": "Diesel — Italie",
-              "value": "2,262 EUR/l",
+              "value": "2,265 EUR/l",
               "detail": "moyenne régionale : prix le plus bas 2,190 EUR/l, 100 stations relevées",
-              "date": "2026-10-14T05:58:14.000Z"
+              "date": "2026-10-15T05:58:43.000Z"
             },
             {
               "label": "Essence 95 — France",
               "value": "2,204 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 100 stations relevées",
-              "date": "2026-10-15T11:07:29.000Z"
+              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 98 stations relevées",
+              "date": "2026-10-16T10:31:44.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,379 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,250 EUR/l, 111 stations relevées",
-              "date": "2026-10-15T10:33:58.000Z"
+              "value": "2,386 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,250 EUR/l, 108 stations relevées",
+              "date": "2026-10-16T10:31:44.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); MIMIT Osservaprezzi carburanti (open data); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Valais : approbation du Plan d'action Eau 2035",
+          "url": "/fr/articles-valais/valais-plan-action-eau-2035/",
+          "excerpt": "Le Conseil d'État adopte le Plan d'action 2035 Mise en œuvre progressive à partir de 2027, selon les priorités et les ressources Les mesures passent de 39 à 25",
+          "date": "2026-10-09T16:44:17.957Z"
+        },
+        {
+          "title": "Sion : la Maison de la garde ouvre pour les urgences",
+          "url": "/fr/articles-valais/maison-garde-hopital-sion/",
+          "excerpt": "À partir du 1er septembre, l’hôpital de Sion a mis en place un nouveau dispositif pour les cas non vitaux, ouvert tous les jours de 18 à 22 heures.",
+          "date": "2026-10-08T17:03:41.241Z"
+        },
+        {
+          "title": "A9 Sion-Sierre : trois semaines de fermetures nocturnes",
+          "url": "/fr/articles-valais/a9-fermetures-nocturnes-sion-sierre/",
+          "excerpt": "Trois semaines de fermetures : du 12 au 30 octobre Travaux interrompus en hiver, reprise en mars 2027 Fermetures nocturnes de 20 h à 5 h Tronçon → A9 entre Sion",
+          "date": "2026-10-08T15:24:54.934Z"
+        },
+        {
+          "title": "Deux cas de botulisme en Valais : terrine retirée",
+          "url": "/fr/articles-valais/alerte-botulisme-terrine-valais/",
+          "excerpt": "Deux cas de botulisme signalés dans le Valais",
+          "date": "2026-10-07T16:03:38.899Z"
+        },
+        {
+          "title": "Chômage en Valais : 5’755 inscrits en septembre 2026",
+          "url": "/fr/articles-valais/chomage-valais-fin-ete/",
+          "excerpt": "5’755 chômeurs inscrits auprès des ORP à fin septembre",
+          "date": "2026-10-07T08:50:45.500Z"
+        }
+      ],
       "links": [
         {
           "label": "Prix de l’essence aujourd’hui",
@@ -389,7 +513,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

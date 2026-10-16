@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T00:00:55.142Z",
-  "contentHash": "1bd2de5dff7fab18d08e97718202ad31d642c77dbc41165f58ec8910407fc8fd",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "59025b42f3df2092ed4f93affc34715b069e175063810c9f385fc6682a4804b9",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-15T13:57:57.453Z",
+      "updatedAt": "2026-10-16T03:54:22.189Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "106",
+          "value": "107",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [
@@ -106,6 +106,7 @@
           "date": "2026-05-02T01:26:52.789Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi nella regione di Basilea",
@@ -116,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -126,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "106",
+          "value": "107",
           "note": "from the site’s events calendar"
         }
       ],
@@ -199,7 +200,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [
@@ -210,6 +211,7 @@
           "date": "2026-05-02T01:26:52.789Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "All events in the Basel region",
@@ -220,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -230,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "106",
+          "value": "107",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -303,7 +305,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [
@@ -314,6 +316,7 @@
           "date": "2026-05-02T01:26:52.789Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen in der Region Basel",
@@ -324,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -334,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "106",
+          "value": "107",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,7 +410,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [
@@ -418,6 +421,7 @@
           "date": "2026-05-02T01:26:52.789Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tous les événements dans la région bâloise",
@@ -428,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

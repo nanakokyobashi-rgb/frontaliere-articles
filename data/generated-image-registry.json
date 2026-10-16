@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 602,
+  "assetCount": 616,
   "assets": [
     {
       "schema": 1,
@@ -121,7 +121,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic illustrated alpine market scene with no readable text, logos, recognizable faces, or depiction of a specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -160,7 +161,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic editorial illustration of a lakeside vineyard landscape; no text, logos, signatures, or recognizable people."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -319,7 +321,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic illustrated train-station scene with no readable text, logos, watermark, signature, identifiable person, or specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -398,7 +401,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Generic illustrative nighttime lakeside scene; no readable text, logos, recognizable faces, or specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -517,7 +521,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic editorial illustration with no readable text, logos, identifiable faces, or depiction of a specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -636,7 +641,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Generic illustrated desk scene with an architectural landmark; no readable lettering, logos, faces, or depiction of a specific event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -675,7 +681,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic editorial illustration with no readable text, logos, recognizable people, or depiction of a specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -714,7 +721,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic illustrative mountain-lake landscape with no text, logos, faces, or depiction of a specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -913,7 +921,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic illustrated alpine lakeside scene with abstract chart panels and a clock; no text, logos, faces, or depiction of a specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -952,7 +961,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Generic illustrative office scene with abstract banknotes and charts; no readable text, logos, recognizable faces, or specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -1031,7 +1041,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic editorial-style illustration with no readable text, logos, recognizable faces, or depiction of a specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -1110,7 +1121,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic illustrated landscape; no readable text, logos, signatures, recognizable faces, or specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -24029,6 +24041,608 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Original generic synthetic petrol-station illustration with a Swiss landscape; no readable text, logos, people, or specific event."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-lavorare-svizzera-conviene-ancora",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "4e93cf84869ab4dcb6ed260ffcbeb1337c71a2ed0a335ae37e4fd872e76aff00",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "fa844c6071e812f231fda28b6c9b9bc7c357dfe625dcadf4f86f62aa0ae13f1f",
+      "bytes": 216426,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-16T12:43:43.727Z",
+      "verifiedAt": "2026-10-16T12:43:52.524Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-lavorare-svizzera-conviene-ancora.webp",
+      "area": "Ticino e pendolarismo transfrontaliero",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic synthetic editorial landscape illustrating Ticino and cross-border commuting; no text, logos, or people."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "5d4f87ad56680e3f59851b0d08cb110d277227d909129502ae01b4a9f15d5add",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "a866b7816bc2f205f10c1b7eda8242220624c1afce6ad0fc7d9a83c30514332f",
+      "bytes": 73108,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-16T13:43:34.318Z",
+      "verifiedAt": "2026-10-16T13:43:52.163Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica.webp",
+      "area": "Ticino e pendolarismo transfrontaliero",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic synthetic editorial scene with a tax form and calculator overlooking a Ticino-like mountain town; no recognizable people, logos, signage, or readable text."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-svizzera-abbattimenti-lupi-2025",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "4e3d2e86d7c1df5a21d5f15e180d3e88ac24f6a52c24f76eb40ef5ff20bedd65",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "5dc308f8cff35d4df032d8e6d1a9e854c6f41f44c1cb87e5affb021b53c8a976",
+      "bytes": 74928,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-16T14:11:54.556Z",
+      "verifiedAt": "2026-10-16T14:12:01.164Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-svizzera-abbattimenti-lupi-2025.webp",
+      "area": "Svizzera",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic synthetic editorial landscape depicting a wolf in the Swiss Alps; no people, text, logos, or specific event."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-multa-rifiuti-bizzarone",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "6ec10f6847b7297b826cdc59f3fa4e46dfc825c02ac1e6fe34417ae07aa4793b",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "df694d39efd5d4a19d1d3bc5832e35c0356129aa10f6374cc532cc8d2827ea4a",
+      "bytes": 171614,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-16T14:46:44.879Z",
+      "verifiedAt": "2026-10-16T14:46:51.737Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-multa-rifiuti-bizzarone.webp",
+      "area": "Swiss border region",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic synthetic editorial scene of a roadside rubbish bag; no people, text, logos, signage, or identifiable event."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-varese-piazzale-anastasi-intitolazione",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "d873d92fc81eac028fa12f648fb672d2c630ad1c8848acdf31600a91e9126373",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "e6785d148a773fd55bece0db80bb63ad7d232029a4290c577474e869f63c6bf8",
+      "bytes": 177484,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-16T15:15:15.077Z",
+      "verifiedAt": "2026-10-16T15:15:32.778Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-varese-piazzale-anastasi-intitolazione.webp",
+      "area": "Ticino e pendolarismo transfrontaliero",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic synthetic stadium plaza illustration with a blank plaque; no people, logos, or readable text."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-frontaliere-dimissioni-termine-preavviso",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "6c75a6369f0e823b4d68e4d62f10efa85fffa39668d57e3d27dd764ff906fad1",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "03fa99657a2abc6585730adb4e142976d1f75b9ff73bf0c72045cec4c0084a7c",
+      "bytes": 85334,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-16T15:16:44.857Z",
+      "verifiedAt": "2026-10-16T15:16:51.850Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-frontaliere-dimissioni-termine-preavviso.webp",
+      "area": "Ticino e pendolarismo transfrontaliero",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic synthetic editorial illustration of a briefcase, documents, and a train-station setting; no people, text, logos, or specific event."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-concerto-gallarate-uto-ughi-2026",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "6340259785619ea53322f30a3115e8ad38fe695617d7e3a75c66fa31ec805e0c",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "0d2901d2028f8d67b704166db1ac188c34931cc85357602266e70f383bdbc2f9",
+      "bytes": 59126,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-16T15:18:22.283Z",
+      "verifiedAt": "2026-10-16T15:18:29.170Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-concerto-gallarate-uto-ughi-2026.webp",
+      "area": "Ticino e pendolarismo transfrontaliero. Safety retry: absolutely no signs, lettering, words, numbers, logos, labels, banners, watermarks, or signature-like marks anywhere in the image.",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic synthetic editorial illustration of a violin in a concert theater; no text, logos, people, or specific-event cues."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-dosso-gaggiolo-sicurezza-lavoratori",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "adab7f557f6faaa48aedcc48597570e42035b352a0d514156ef61b6004e60f5b",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "25ac1159a3d5cd6adc187fa8f5b810cd5fcb971006eaf2e2569671b9d584f939",
+      "bytes": 113070,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-16T15:40:45.683Z",
+      "verifiedAt": "2026-10-16T15:40:55.536Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-dosso-gaggiolo-sicurezza-lavoratori.webp",
+      "area": "Ticino e pendolarismo transfrontaliero",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Original photorealistic synthetic illustration of a dusk border checkpoint with trucks, lighting, and a speed bump; no readable text, logos, or people."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-crediti-bilaterali-iii-svizzera",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "9e3790b8c9dfa11c87b7d36f31ac0acc66c06918db8d0d9e2a71ac079e7d11fa",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "0ea1d195a5a3469facfac13dac79d3a3c887f5ff1015fca9f77c65b35639017d",
+      "bytes": 108604,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-16T18:34:55.332Z",
+      "verifiedAt": "2026-10-16T18:35:02.304Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-crediti-bilaterali-iii-svizzera.webp",
+      "area": "Svizzera",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Original synthetic editorial illustration of the Swiss Federal Parliament and Swiss flag; no people, text, signage, logos, or event-specific cues."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-stadler-rail-treno-idrogeno-sardegna",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "a7ca02b98564010c1c9f2d8b3f4832547741a53bf06916a92df61f160a935b7d",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "9d460818c48c80b4c90d97043cdc14442bf021f16f4bfd0908bc51443090c543",
+      "bytes": 150568,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-16T18:46:35.235Z",
+      "verifiedAt": "2026-10-16T18:46:52.014Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-stadler-rail-treno-idrogeno-sardegna.webp",
+      "area": "Svizzera",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic synthetic illustration of a hydrogen train in a Swiss landscape; no visible text, logos, people, or specific event."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-saronno-produzione-cina-protesta",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "de8849161bacb6cde3ccb79953a539cbeb9b348c01f5ff4fedd4b87604ce33b6",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "a27bcc3c33b41a12023231f6f42c8b2d6a5602b059b10559720dd9cb50592f9a",
+      "bytes": 88640,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-16T18:49:13.932Z",
+      "verifiedAt": "2026-10-16T18:49:21.010Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-saronno-produzione-cina-protesta.webp",
+      "area": "Ticino e pendolarismo transfrontaliero",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic synthetic industrial-export illustration; no text, logos, faces, foreground people, or specific real event."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-indennita-stage-lugano-2027",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "41d4d2cbdf5b08ae2641983a86f27b0fc687165384e5c8eef4979e61a122e206",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "dff2981b7e5342ed6b8f6d4f97fd2c5733af7598a952655bb6b53f74a7159215",
+      "bytes": 85638,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-16T20:06:51.015Z",
+      "verifiedAt": "2026-10-16T20:06:56.969Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-indennita-stage-lugano-2027.webp",
+      "area": "Ticino e pendolarismo transfrontaliero",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic synthetic editorial scene of a laptop, notebook, and coffee overlooking Lugano, with no people, text, logos, or event-specific cues."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-industria-ticino-futuro-lavoro",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "2e181a73216abc21743491e6525fd95aff7442ba56f87c22a4160c0714216899",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "62388658ca2d6695c543e8cd543297d443ededbe834a6c68209a476bb9b8558b",
+      "bytes": 120108,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-16T20:29:45.879Z",
+      "verifiedAt": "2026-10-16T20:29:56.331Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-industria-ticino-futuro-lavoro.webp",
+      "area": "Ticino e pendolarismo transfrontaliero",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Original generic synthetic industrial illustration with no readable text, logos, identifiable faces, or specific real-event cues."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "ddb7b91e5a96ad7e2ee47bfa64a73df3e064c1f1cefa8618c5ae56604b944a9c",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "83bc8f7ccfd1ed991ce266785f4cf1ba1d5f4a2ca83bba7a07aa1bd2cb8ef878",
+      "bytes": 153256,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-16T20:45:56.587Z",
+      "verifiedAt": "2026-10-16T20:46:03.680Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.webp",
+      "area": "Svizzera",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic photorealistic synthetic supermarket scene with a discount grocery cart; no readable text, logos, people, or specific event."
       }
     }
   ]

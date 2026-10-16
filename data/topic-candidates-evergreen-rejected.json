@@ -600,6 +600,66 @@
       "firstSeenAt": "2026-10-16T10:46:51.527Z",
       "lastValidatedAt": "2026-10-16T10:46:51.527Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere tasse italia svizzera 2026 single",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T13:30:56.156Z",
+      "lastValidatedAt": "2026-10-16T13:30:56.156Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere tasse italia svizzera 2026 simulazione pratica",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T14:58:00.248Z",
+      "lastValidatedAt": "2026-10-16T14:58:00.248Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere tasse italia svizzera 2026 errori comuni",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T15:00:27.739Z",
+      "lastValidatedAt": "2026-10-16T15:00:27.739Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontalieri busta paga svizzera 2026",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T15:00:27.873Z",
+      "lastValidatedAt": "2026-10-16T15:00:27.873Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontalieri busta paga svizzera 2026 entro 20 km",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T15:09:28.206Z",
+      "lastValidatedAt": "2026-10-16T15:09:28.206Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -8925,74 +8985,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/amazon-lascia-malpensa-sindacati-nessuno-deve-essere-lasciato-indietro/2707141": {
-      "section": "frontaliere",
-      "ts": 1791980222000
-    },
-    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/all%e2%80%99usi-un-nuovo-master-in-oncologia-e-immunologia--4162690.html": {
-      "section": "frontaliere",
-      "ts": 1791980257895
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/fotovoltaico-boom-di-richieste-dalle-imprese-varesine-esauriti-in-un-giorno-i-280mila-euro-del-bando/2707603": {
-      "section": "frontaliere",
-      "ts": 1791983613803
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/il-novantesimo-supermercato-tigros-apre-a-borgomanero-45-lavoratori-nel-nuovo-negozio-di-via-matteotti/2707177": {
-      "section": "frontaliere",
-      "ts": 1791983942721
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/casse-pensioni%2c-pi%c3%b9-investimenti-illiquidi%3a-opportunit%c3%a0-e-rischi/92215997": {
-      "section": "frontaliere",
-      "ts": 1791989471570
-    },
-    "frontaliere::https://www.rsi.ch/s/4160788": {
-      "section": "frontaliere",
-      "ts": 1791990092032
-    },
-    "frontaliere::https://comozero.it/magazine/in-svizzera-il-supermercato-ti-pesa-la-spesa-da-solo-niente-casse-e-niente-code": {
-      "section": "frontaliere",
-      "ts": 1791995678335
-    },
-    "frontaliere::https://comozero.it/attualita/como-chiude-il-circolo-arci-xanadu-sospese-tutte-le-attivita-speriamo-di-sistemare-entro-fine-anno-o-si-rischia-lo-stop-definitivo": {
-      "section": "frontaliere",
-      "ts": 1791995902232
-    },
-    "frontaliere::https://www.laregione.ch/economia/economia/1956461/quando-le-tortuose-strade-del-petrolio-portano-in-via-nassa": {
-      "section": "frontaliere",
-      "ts": 1791995921423
-    },
-    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1956493/trasformazione-ex-lati-la-protezione-civile-sostiene-il-progetto": {
-      "section": "frontaliere",
-      "ts": 1791996874930
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1956516/formazione-dei-docenti-nove-azioni-per-rafforzarla": {
-      "section": "frontaliere",
-      "ts": 1791996956867
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1956487/caso-hospita-la-cpi-ha-terminato-i-lavori-l-11-novembre-si-sapra-cosa-ha-partorito": {
-      "section": "frontaliere",
-      "ts": 1791996974241
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/hydrogen-valley-a-cairate-impresa-scuola-e-terzo-settore-lavorano-insieme/2708470": {
-      "section": "frontaliere",
-      "ts": 1792002789090
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1956732/formazione-luganese-per-10-oculisti-africani": {
-      "section": "frontaliere",
-      "ts": 1792002821334
-    },
-    "frontaliere::https://www.rsi.ch/s/4161283": {
-      "section": "frontaliere",
-      "ts": 1792003307287
-    },
-    "frontaliere::https://www.tio.ch/ticino/politica/1956660/mps-consiglio-decisione-parlamento-ricorso-magistratura-procuratore-pagani-andrea-operato": {
-      "section": "frontaliere",
-      "ts": 1792003718722
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/via-libera-del-governo-alle-intese-con-la-lombardia-sullautonomia-fontana-ora-tocca-al-parlamento/2708017": {
-      "section": "frontaliere",
-      "ts": 1792005480523
-    },
     "frontaliere::https://comozero.it/attualita/provincia-di-como-drammatico-schianto-tra-due-moto": {
       "section": "frontaliere",
       "ts": 1792009974706
@@ -9228,6 +9220,58 @@
     "frontaliere::https://www.varesenoi.it/2026/10/16/leggi-notizia/argomenti/economia-13/articolo/la-decima-edizione-degli-stati-generali-della-scuola-digitale-arriva-a-varese-con-un-nuovo-format-a.html": {
       "section": "frontaliere",
       "ts": 1792151367112
+    },
+    "frontaliere::https://www.rsi.ch/info/scienza-e-tecnologia/cosa-c%e2%80%99%c3%a8-dietro-le-pubblicit%c3%a0-con-scene-di-sesso-che-infestano-instagram-e-tiktok--4163095.html": {
+      "section": "frontaliere",
+      "ts": 1792155725871
+    },
+    "frontaliere::https://www.vconews.it/2026/10/16/leggi-notizia/argomenti/scuola-e-formazione-9/articolo/verbania-il-cobianchi-festeggia-140-anni-di-storia-con-una-giornata-dedicata-agli-ex-studenti.html": {
+      "section": "frontaliere",
+      "ts": 1792157163443
+    },
+    "frontaliere::https://www.tio.ch/ticino/politica/1957258/val-colla-disagi-fino-al-2028-lugano-esclude-finanziamenti-straordinari": {
+      "section": "frontaliere",
+      "ts": 1792162172179
+    },
+    "frontaliere::https://www.rsi.ch/s/4161940": {
+      "section": "frontaliere",
+      "ts": 1792162181717
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/dallemergenza-regia-al-cuore-di-masnago-lanalisi-e-i-ricordi-di-marco-passera/2709283": {
+      "section": "frontaliere",
+      "ts": 1792162384946
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/solbiatese-ora-serve-continuita-al-chinetti-arriva-il-temuto-lentigione/2710426": {
+      "section": "frontaliere",
+      "ts": 1792162523204
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/kastritis-siamo-a-fianco-di-amedeo-a-trento-fondamentali-i-rimbalzi/2710186": {
+      "section": "frontaliere",
+      "ts": 1792162680014
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1957324/denner-sconto-salari-aumenti-dipendenti-rinuncia": {
+      "section": "frontaliere",
+      "ts": 1792171021345
+    },
+    "frontaliere::https://comozero.it/attualita/il-futuro-nasce-a-como-ecco-il-primo-computer-quantistico-di-nuova-generazione-butti-nuova-frontiera": {
+      "section": "frontaliere",
+      "ts": 1792171660671
+    },
+    "frontaliere::https://comozero.it/magazine/mille-euro-a-chi-diventa-genitore-lazienda-lombarda-che-premia-i-dipendenti-che-fanno-figli": {
+      "section": "frontaliere",
+      "ts": 1792173895527
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/scuola-e-impresa-a-bodio-lomnago-casa-agricola-apre-agli-studenti-con-la-mostra-labstore/2710282": {
+      "section": "frontaliere",
+      "ts": 1792177820741
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/due-milioni-alla-liuc-per-nuovi-laboratori-di-ricerca-per-le-imprese-un-primo-passo-verso-mill/2710651": {
+      "section": "frontaliere",
+      "ts": 1792178177980
+    },
+    "frontaliere::https://unia.ch/it/professioni-rami/parrucchiere/sondaggio-rivendicazioni-ccl": {
+      "section": "frontaliere",
+      "ts": 1792182208504
     }
   }
 }

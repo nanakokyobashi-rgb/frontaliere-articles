@@ -4,22 +4,22 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "1f3e0943369673a7fd9035fae06956db424e18856c30012c2932bd5a5cd821fe",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "53792cfbfacdd0f0b3b50ebb206ba81b0e54c9299b78f0e937cc7a842aae44fa",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-14T23:59:59.000Z",
+      "updatedAt": "2026-10-15T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T12:13:19.434Z",
+      "updatedAt": "2026-10-16T11:58:12.009Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-16T10:09:31.602Z",
       "keyFacts": 0
     }
   ],
@@ -33,42 +33,42 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Goumois, settimana conclusa: 14 ottobre 2026"
+          "note": "Goumois, settimana conclusa: 15 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "2",
-          "note": "segnalazioni aggiornate: 15 ottobre 2026"
+          "note": "segnalazioni aggiornate: 16 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 8 ottobre 2026 – 14 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 9 ottobre 2026 – 15 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Goumois",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/goumois/oggi/"
             },
             {
               "label": "Fahy-Abbévillers",
               "value": "0,1 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/fahy-abbevillers/oggi/"
             },
             {
               "label": "Boncourt-Delle (A16)",
               "value": "0,1 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/boncourt-delle/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-14T23:59:59.000Z"
+          "updatedAt": "2026-10-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -89,7 +89,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -107,10 +107,30 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Le casse pensioni svizzere migliorano Q3 2026",
+          "url": "/articoli-giura/casse-pensioni-migliorano-terzo-trimestre/",
+          "excerpt": "L'indice WTW sale da 130,2% a 131,9% Il tasso di attualizzazione arriva all'1,65% Gli impegni pensionistici scendono del 6,5% Gli attivi dei piani calano",
+          "date": "2026-10-08T15:48:11.331Z"
+        },
+        {
+          "title": "Giura, fondo clima da 6,7 milioni annui dal 2028",
+          "url": "/articoli-giura/fondo-clima-giura-2028/",
+          "excerpt": "CHF 6,7 milioni annui dal 2028",
+          "date": "2026-10-08T10:13:59.862Z"
+        },
+        {
+          "title": "Disoccupazione in Giura scende al 4,2% a settembre 2026",
+          "url": "/articoli-giura/disoccupazione-giura-settembre-2026/",
+          "excerpt": "A fine settembre 2026 il Giura registra 2.573 iscritti all'ORP, di cui 1.663 disoccupati e 910 richiedenti non disoccupati; tasso al 4,2%, in calo di 0,1 punti su agosto e 0,9 su anno.",
+          "date": "2026-10-07T08:42:08.212Z"
+        }
+      ],
       "links": [
         {
           "label": "Attese ai valichi verso Francia",
@@ -141,7 +161,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "JU",
@@ -152,42 +172,42 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Goumois, week ending 14 October 2026"
+          "note": "Goumois, week ending 15 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "2",
-          "note": "reports as of 15 October 2026"
+          "note": "reports as of 16 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 8 October 2026 to 14 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 9 October 2026 to 15 October 2026, fastest first.",
           "items": [
             {
               "label": "Goumois",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/goumois/today/"
             },
             {
               "label": "Fahy-Abbévillers",
               "value": "0.1 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/fahy-abbevillers/today/"
             },
             {
               "label": "Boncourt-Delle (A16)",
               "value": "0.1 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/boncourt-delle/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-14T23:59:59.000Z"
+          "updatedAt": "2026-10-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -208,7 +228,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -226,10 +246,29 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Swiss pension funds improve Q3 2026",
+          "url": "/en/jura-articles/swiss-pension-funds-improve-q3-2026/",
+          "excerpt": "WTW index rises from 130.2% to 131.9% The discount rate reaches 1.65% Pension commitments fall by 6.5% Plan assets fall by 0.6% Who → Willis Towers Watson (WTW)",
+          "date": "2026-10-08T15:48:11.331Z"
+        },
+        {
+          "title": "Jura, climate fund of 6,7 million annually from 2028",
+          "url": "/en/jura-articles/jura-climate-fund-2028/",
+          "date": "2026-10-08T10:13:59.862Z"
+        },
+        {
+          "title": "Unemployment in Jura falls to 4,2% in September 2026",
+          "url": "/en/jura-articles/unemployment-in-jura-falls-to-4-2-in-september-2026/",
+          "excerpt": "At the end of September 2026, the Jura recorded 2.573 people registered with the ORP, including 1.663 unemployed and 910 non-unemployed job seekers; rate at 4,2%, down 0,1 points from August and 0,9 year-on-year.",
+          "date": "2026-10-07T08:42:08.212Z"
+        }
+      ],
       "links": [
         {
           "label": "Border waits towards France",
@@ -260,7 +299,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "JU",
@@ -271,42 +310,42 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Goumois, Woche bis 14. Oktober 2026"
+          "note": "Goumois, Woche bis 15. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "2",
-          "note": "Meldungen vom 15. Oktober 2026"
+          "note": "Meldungen vom 16. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 8. Oktober 2026 bis 14. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 9. Oktober 2026 bis 15. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Goumois",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/goumois/heute/"
             },
             {
               "label": "Fahy-Abbévillers",
               "value": "0.1 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/fahy-abbevillers/heute/"
             },
             {
               "label": "Boncourt-Delle (A16)",
               "value": "0.1 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/boncourt-delle/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-14T23:59:59.000Z"
+          "updatedAt": "2026-10-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -327,7 +366,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -345,10 +384,29 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Schweizer Pensionskassen verbessern Q3 2026",
+          "url": "/de/jura-artikel/schweizer-pensionskassen-verbessern-q3-2026/",
+          "excerpt": "Der WTW-Index steigt von 130,2% auf 131,9% Der Abzinsungssatz beträgt bis zu 1,65% Pensionsverpflichtungen sinken um 6,5% Die Aktiva der Stockwerke sinken um",
+          "date": "2026-10-08T15:48:11.331Z"
+        },
+        {
+          "title": "Jura, Klimafonds von 6,7 Millionen jährlich ab 2028",
+          "url": "/de/jura-artikel/jura-klimafonds-2028/",
+          "date": "2026-10-08T10:13:59.862Z"
+        },
+        {
+          "title": "Arbeitslosigkeit im Jura sinkt im September 2026 auf 4,2%",
+          "url": "/de/jura-artikel/arbeitslosigkeit-im-jura-sinkt-im-september-2026-auf-4-2/",
+          "excerpt": "Ende September 2026 verzeichnet der Jura 2.573 beim ORP registrierte Personen, davon 1.663 Arbeitslose und 910 nicht arbeitslose Stellensuchende; die Quote liegt bei 4,2% und ist gegenüber August um 0,1 Punkte sowie…",
+          "date": "2026-10-07T08:42:08.212Z"
+        }
+      ],
       "links": [
         {
           "label": "Wartezeiten an der Grenze Richtung Frankreich",
@@ -379,7 +437,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "JU",
@@ -390,42 +448,42 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Goumois, semaine jusqu’au 14 octobre 2026"
+          "note": "Goumois, semaine jusqu’au 15 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "2",
-          "note": "signalements au 15 octobre 2026"
+          "note": "signalements au 16 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 8 octobre 2026 au 14 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 9 octobre 2026 au 15 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Goumois",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/goumois/aujourd-hui/"
             },
             {
               "label": "Fahy-Abbévillers",
               "value": "0,1 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/fahy-abbevillers/aujourd-hui/"
             },
             {
               "label": "Boncourt-Delle (A16)",
               "value": "0,1 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/boncourt-delle/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-14T23:59:59.000Z"
+          "updatedAt": "2026-10-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -446,7 +504,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -464,10 +522,30 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Les caisses de pension suisses améliorent Q3 2026",
+          "url": "/fr/articles-jura/les-caisses-de-pension-suisses-ameliorent-q3-2026/",
+          "excerpt": "L'indice WTW passe de 130,2 % à 131,9 % Le taux d'actualisation atteint 1,65 % Les engagements de retraite baissent de 6,5 % Les actifs des plans baissent",
+          "date": "2026-10-08T15:48:11.331Z"
+        },
+        {
+          "title": "Jura, fonds climatique de 6,7 millions par an dès 2028",
+          "url": "/fr/articles-jura/fonds-climat-jura-2028/",
+          "excerpt": "CHF 6,7 millions par an dès 2028",
+          "date": "2026-10-08T10:13:59.862Z"
+        },
+        {
+          "title": "Le chômage dans le Jura baisse à 4,2% en septembre 2026",
+          "url": "/fr/articles-jura/le-chomage-dans-le-jura-baisse-a-4-2-en-septembre-2026/",
+          "excerpt": "Fin septembre 2026, le Jura compte 2.573 inscrits à l'ORP, dont 1.663 chômeurs et 910 demandeurs non chômeurs ; taux à 4,2%, en baisse de 0,1 point par rapport à août et de 0,9 sur un an.",
+          "date": "2026-10-07T08:42:08.212Z"
+        }
+      ],
       "links": [
         {
           "label": "Attente aux frontières vers France",
@@ -498,7 +576,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

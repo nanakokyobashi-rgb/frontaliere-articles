@@ -5,7 +5,7 @@
  * con le 4 locali. Ogni `locales[<loc>]` e' ESATTAMENTE un
  * `CantonTopicHubInput` di `engine/cantonSectionPages.ts`
  * (`{ canton, topic, locale, intro, keyFacts, dataBlocks, curatedArticles,
- * links, updatedAt }`): il publisher (P7b) lo passa a `renderCantonTopicHub`
+ * latestCantonArticles, links, updatedAt }`): il publisher (P7b) lo passa a `renderCantonTopicHub`
  * senza trasformarlo. Nessun campo `indexable`/`noindex`: gli hub cantonali
  * sono sempre indicizzabili (D2/D17, decisions.md), anche senza blocchi.
  *
@@ -129,14 +129,14 @@ const text = (v, what) => {
  */
 export function validateHubInput(input) {
   const at = `hub ${input?.canton}/${input?.topic}/${input?.locale}`;
-  checkKeys(input, ['canton', 'topic', 'locale', 'intro', 'keyFacts', 'dataBlocks', 'curatedArticles', 'links', 'updatedAt'], at);
+  checkKeys(input, ['canton', 'topic', 'locale', 'intro', 'keyFacts', 'dataBlocks', 'curatedArticles', 'latestCantonArticles', 'links', 'updatedAt'], at);
   if (!HUB_LOCALES.includes(input.locale)) throw new Error(`${at}: locale non supportata`);
   if (!CANTON_HUB_TOPIC_KEYS.includes(input.topic)) throw new Error(`${at}: tema sconosciuto`);
   if (!Object.values(ARTICLE_SECTION_CORE_ALL).some((c) => c.kind === 'canton' && c.canton === input.canton)) throw new Error(`${at}: codice cantone non valido`);
   checkDate(input.updatedAt, `${at}: updatedAt`);
   const paragraphs = String(input.intro ?? '').split(/\n\s*\n/).map((p) => p.replace(/\s+/g, ' ').trim()).filter(Boolean);
   if (paragraphs.length === 0) throw new Error(`${at}: intro evergreen mancante`);
-  for (const list of ['keyFacts', 'dataBlocks', 'curatedArticles', 'links']) {
+  for (const list of ['keyFacts', 'dataBlocks', 'curatedArticles', 'latestCantonArticles', 'links']) {
     if (!Array.isArray(input[list])) throw new Error(`${at}: ${list} non e' una lista`);
   }
 
@@ -177,17 +177,19 @@ export function validateHubInput(input) {
       if (it.url !== undefined) checkHref(it.url, `${w}.url`);
     });
   });
-  const urls = new Set();
-  input.curatedArticles.forEach((a, i) => {
-    const what = `${at}: curatedArticles[${i}]`;
+  const articleUrls = new Set();
+  const validateArticleList = (articles, field) => articles.forEach((a, i) => {
+    const what = `${at}: ${field}[${i}]`;
     checkKeys(a, ['title', 'url', 'excerpt', 'date'], what);
     text(a.title, `${what}.title`);
     checkHref(a.url, `${what}.url`);
-    if (urls.has(a.url)) throw new Error(`${what}: articolo duplicato ${a.url}`);
-    urls.add(a.url);
+    if (articleUrls.has(a.url)) throw new Error(`${what}: articolo duplicato ${a.url}`);
+    articleUrls.add(a.url);
     if (a.excerpt !== undefined) text(a.excerpt, `${what}.excerpt`);
     if (a.date !== undefined) checkDate(a.date, `${what}.date`);
   });
+  validateArticleList(input.curatedArticles, 'curatedArticles');
+  validateArticleList(input.latestCantonArticles, 'latestCantonArticles');
   const linkUrls = new Set();
   input.links.forEach((l, i) => {
     const what = `${at}: links[${i}]`;
@@ -293,6 +295,7 @@ function fuelCarryMs(previous, blockId, fallbackMs) {
  * @param {{ languages: string[], members: string[] }} args.profile voce di `canton-sections.json`
  * @param {Record<string, any>} args.datasets cache dei dataset per chiave (`DATASET_KEYS`); null/assente = cache mancante
  * @param {any[]} args.curated articoli promossi del tema (`selectCuratedArticles().byTopic[topic]`)
+ * @param {any[]} [args.latestCantonArticles] articoli recenti del cantone, neutri rispetto al tema
  * @param {any} args.config `canton-hub-topics.json`
  * @param {any} args.catalogue `canton-hub-links.json`
  * @param {any} args.cantonUrlSlugs `canton-url-slugs.json`
@@ -302,7 +305,7 @@ function fuelCarryMs(previous, blockId, fallbackMs) {
  * @param {number} args.nowMs
  * @returns {{ file: any, changed: boolean, blocks: Array<{ id: string, status: 'fresh' | 'carried' | 'omitted', code?: string, reason?: string }> }}
  */
-export function buildHubFile({ section, topic, profile, datasets, curated, config, catalogue, cantonUrlSlugs, evergreenArticles, crossingNames, previous, nowMs }) {
+export function buildHubFile({ section, topic, profile, datasets, curated, latestCantonArticles, config, catalogue, cantonUrlSlugs, evergreenArticles, crossingNames, previous, nowMs }) {
   const core = ARTICLE_SECTION_CORE_ALL[section];
   if (core?.kind !== 'canton') throw new Error(`canton-hubs: "${section}" non e' una sezione cantonale`);
   const specs = TOPIC_BLOCKS[topic];
@@ -393,6 +396,7 @@ export function buildHubFile({ section, topic, profile, datasets, curated, confi
       keyFacts,
       dataBlocks,
       curatedArticles: (curated ?? []).map((a) => curatedEntry(a, locale)),
+      latestCantonArticles: (latestCantonArticles ?? []).map((a) => curatedEntry(a, locale)),
       links: buildHubLinks({ canton, topic, locale, catalogue, cantonUrlSlugs, evergreenArticles }),
       updatedAt: '',
     };

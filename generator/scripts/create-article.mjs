@@ -69,6 +69,7 @@ import { createInterface } from 'node:readline';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readArticleRegistry } from '../../scripts/lib/registry-image-reader.mjs';
+import { readCanonicalPath } from '../../scripts/lib/seo-canonical-path.mjs';
 import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, getProviderRosterStatus, providerRosterReady, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
 import { classifyWithDecisionsApi } from './lib/decisions-api.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
@@ -15694,10 +15695,10 @@ function assertSeoEntryNotRegistered(id) {
 }
 
 /**
- * Post-write validation: re-reads seo-blog-5.ts, extracts the new article's
- * SEO entry using the SAME lexical, balanced resolver used by the render-time
- * consumers, then builds and parses the JSON-LD object. This catches escaping
- * and truncated-entry issues before they reach production.
+ * Post-write validation re-reads the SEO entry using the balanced entry
+ * resolver and enforces the writer's single-quoted canonicalPath grammar,
+ * then builds and parses JSON-LD.
+ * This catches escaping and truncated-entry issues before publication.
  */
 function validateStructuredData(data) {
   const seoFile = SECTION.seoFile;
@@ -15729,7 +15730,7 @@ function validateStructuredData(data) {
   const desc = matchStr('description');
   const ogT = matchStr('ogTitle') || title;
   const ogD = matchStr('ogDescription') || desc;
-  const cp = block.match(/canonicalPath:\s*'([^']+)'/)?.[1] ?? '';
+  const canonicalPath = readCanonicalPath(block);
   const datePub = block.match(/"datePublished":\s*"([^"]+)"/)?.[1] ?? '';
   const dateMod = block.match(/"dateModified":\s*"([^"]+)"/)?.[1] ?? '';
   const siteOrganizationId = `${BASE}/#organization`;
@@ -15741,6 +15742,17 @@ function validateStructuredData(data) {
   if (!desc) throw new Error(`[validate-ld] Empty description for ${entryKey}`);
   if (!ogT) throw new Error(`[validate-ld] Empty ogTitle for ${entryKey}`);
   if (!ogD) throw new Error(`[validate-ld] Empty ogDescription for ${entryKey}`);
+  if (canonicalPath.kind === 'missing') {
+    throw new Error(`[validate-ld] Empty canonicalPath for ${entryKey}`);
+  }
+  if (canonicalPath.kind === 'unresolved') {
+    throw new Error(
+      '[validate-ld] Cannot resolve canonicalPath expression '
+      + JSON.stringify(canonicalPath.expression)
+      + ' for ' + entryKey + '; the writer must emit a static string value',
+    );
+  }
+  const cp = canonicalPath.value;
   if (!cp) throw new Error(`[validate-ld] Empty canonicalPath for ${entryKey}`);
   // The site's URL contract is slash-terminated: a canonicalPath without the
   // final slash publishes the non-canonical duplicate. modifySeoService() has

@@ -4,14 +4,14 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "carburanti",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "24fff4d5229db3e5b31f773b74f43cb3435d28f1062eb7af7535d595363e235b",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "e239467383e8d2773936511a996c797010de4f6bc2790b828415762296a859e9",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-15T12:02:33.404Z",
+      "updatedAt": "2026-10-16T11:53:35.759Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-21T05:58:14.000Z"
+      "carryUntilAt": "2026-10-22T05:58:43.000Z"
     }
   ],
   "locales": {
@@ -54,19 +54,19 @@
             },
             {
               "label": "Benzina 95 — Italia",
-              "value": "2,031 EUR/l",
-              "detail": "media regionale: minimo 1,989 EUR/l, 303 stazioni rilevate",
-              "date": "2026-10-14T05:58:14.000Z"
+              "value": "2,030 EUR/l",
+              "detail": "media regionale: minimo 1,985 EUR/l, 306 stazioni rilevate",
+              "date": "2026-10-15T05:58:43.000Z"
             },
             {
               "label": "Diesel — Italia",
               "value": "2,256 EUR/l",
-              "detail": "media regionale: minimo 2,190 EUR/l, 302 stazioni rilevate",
-              "date": "2026-10-14T05:58:14.000Z"
+              "detail": "media regionale: minimo 2,190 EUR/l, 305 stazioni rilevate",
+              "date": "2026-10-15T05:58:43.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); MIMIT Osservaprezzi carburanti (open data)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [
@@ -119,6 +119,7 @@
           "date": "2026-04-27T09:12:47.619Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Prezzo della benzina oggi",
@@ -145,7 +146,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "TI",
@@ -186,19 +187,19 @@
             },
             {
               "label": "Petrol 95 — Italy",
-              "value": "2.031 EUR/l",
-              "detail": "regional average: lowest 1.989 EUR/l, 303 stations surveyed",
-              "date": "2026-10-14T05:58:14.000Z"
+              "value": "2.030 EUR/l",
+              "detail": "regional average: lowest 1.985 EUR/l, 306 stations surveyed",
+              "date": "2026-10-15T05:58:43.000Z"
             },
             {
               "label": "Diesel — Italy",
               "value": "2.256 EUR/l",
-              "detail": "regional average: lowest 2.190 EUR/l, 302 stations surveyed",
-              "date": "2026-10-14T05:58:14.000Z"
+              "detail": "regional average: lowest 2.190 EUR/l, 305 stations surveyed",
+              "date": "2026-10-15T05:58:43.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); MIMIT Osservaprezzi carburanti (open data)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [
@@ -251,6 +252,7 @@
           "date": "2026-04-27T09:12:47.619Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Petrol price today",
@@ -277,7 +279,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "TI",
@@ -318,19 +320,19 @@
             },
             {
               "label": "Benzin 95 — Italien",
-              "value": "2.031 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.989 EUR/l, 303 erfasste Tankstellen",
-              "date": "2026-10-14T05:58:14.000Z"
+              "value": "2.030 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.985 EUR/l, 306 erfasste Tankstellen",
+              "date": "2026-10-15T05:58:43.000Z"
             },
             {
               "label": "Diesel — Italien",
               "value": "2.256 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.190 EUR/l, 302 erfasste Tankstellen",
-              "date": "2026-10-14T05:58:14.000Z"
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.190 EUR/l, 305 erfasste Tankstellen",
+              "date": "2026-10-15T05:58:43.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); MIMIT Osservaprezzi carburanti (open data)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [
@@ -383,6 +385,7 @@
           "date": "2026-04-27T09:12:47.619Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Benzinpreis heute",
@@ -405,7 +408,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "TI",
@@ -446,19 +449,19 @@
             },
             {
               "label": "Essence 95 — Italie",
-              "value": "2,031 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,989 EUR/l, 303 stations relevées",
-              "date": "2026-10-14T05:58:14.000Z"
+              "value": "2,030 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,985 EUR/l, 306 stations relevées",
+              "date": "2026-10-15T05:58:43.000Z"
             },
             {
               "label": "Diesel — Italie",
               "value": "2,256 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,190 EUR/l, 302 stations relevées",
-              "date": "2026-10-14T05:58:14.000Z"
+              "detail": "moyenne régionale : prix le plus bas 2,190 EUR/l, 305 stations relevées",
+              "date": "2026-10-15T05:58:43.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); MIMIT Osservaprezzi carburanti (open data)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [
@@ -511,6 +514,7 @@
           "date": "2026-04-27T09:12:47.619Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Prix de l’essence aujourd’hui",
@@ -537,7 +541,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

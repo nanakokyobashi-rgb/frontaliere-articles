@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "carburanti",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "9d61610d5900bcb79cf6e24714075aa2800c21b3dbff9e47aed2781ceed905b9",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "027f897c6568bc51ecfbf05afd8140d536cadd9ef746dab012ff0c99f6dca422",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-12T16:03:22.277Z",
+      "updatedAt": "2026-10-15T12:02:33.404Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,10 +54,30 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-12T16:03:22.277Z"
+          "updatedAt": "2026-10-15T12:02:33.404Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Esercitazione militare a Egg e diga Sihlsee dal 9 al 12 ottobre 2026",
+          "url": "/articoli-svitto/esercitazione-militare-sihlsee-ottobre-2026/",
+          "excerpt": "Avviso del 'Schweizer Militär': esercitazione dal 9 al 12 ottobre 2026 a Egg e diga Sihlsee.",
+          "date": "2026-10-09T23:17:55.280Z"
+        },
+        {
+          "title": "Concorrenza sleale nel cambio cassa malati a Svitto",
+          "url": "/articoli-svitto/svitto-cambio-cassa-malati/",
+          "excerpt": "Le offerte per cambiare cassa malati spesso ingannano: una cassa locale di Svitto deve fare i conti con un business descritto come concorrenza sleale.",
+          "date": "2026-10-08T14:43:30.771Z"
+        },
+        {
+          "title": "Einsiedeln: chiusure stradali per il Gallusmarkt 2026",
+          "url": "/articoli-svitto/chiusura-strade-gallusmarkt-svitto/",
+          "excerpt": "Accesso e uscita vietati in Hauptstrasse e Sagenplatz dalle 5.00 alle 20.00 del giorno del mercato. Rumori da lunedì alle 5.00.",
+          "date": "2026-10-07T09:21:09.358Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -68,7 +88,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "SZ",
@@ -109,10 +129,30 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-12T16:03:22.277Z"
+          "updatedAt": "2026-10-15T12:02:33.404Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Military exercise in Egg and at the Sihlsee dam from 9 to 12 October 2026",
+          "url": "/en/schwyz-articles/military-exercise-sihlsee-october-2026/",
+          "excerpt": "Notice from the 'Schweizer Militär': exercise from October 9 to 12, 2026, in Egg and at Sihlsee Dam.",
+          "date": "2026-10-09T23:17:55.280Z"
+        },
+        {
+          "title": "Unfair competition in switching health insurers in Schwyz",
+          "url": "/en/schwyz-articles/schwyz-health-insurance-switch/",
+          "excerpt": "Offers to switch health insurers are often deceptive: a local health insurer in Schwyz has to contend with a business described as unfair competition.",
+          "date": "2026-10-08T14:43:30.771Z"
+        },
+        {
+          "title": "Einsiedeln: road closures for Gallusmarkt 2026",
+          "url": "/en/schwyz-articles/road-closure-gallusmarkt-schwyz/",
+          "excerpt": "Access and exit prohibited on Hauptstrasse and Sagenplatz from 5.00 to 20.00 on market day. Noise from Monday at 5.00.",
+          "date": "2026-10-07T09:21:09.358Z"
+        }
+      ],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -123,7 +163,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "SZ",
@@ -164,10 +204,30 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-12T16:03:22.277Z"
+          "updatedAt": "2026-10-15T12:02:33.404Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Militärübung in Egg und an der Sihlsee-Staumauer vom 9. bis 12. Oktober 2026",
+          "url": "/de/schwyz-artikel/militaeruebung-sihlsee-oktober-2026/",
+          "excerpt": "Hinweis von 'Schweizer Militär': Militärübung vom 9.",
+          "date": "2026-10-09T23:17:55.280Z"
+        },
+        {
+          "title": "Unlauterer Wettbewerb beim Krankenkassenwechsel in Schwyz",
+          "url": "/de/schwyz-artikel/schwyz-krankenkassenwechsel/",
+          "excerpt": "Die Angebote für einen Krankenkassenwechsel sind oft irreführend: Eine lokale Krankenkasse in Schwyz muss sich mit einem Geschäftsmodell auseinandersetzen, das als unlauterer Wettbewerb beschrieben wird.",
+          "date": "2026-10-08T14:43:30.771Z"
+        },
+        {
+          "title": "Einsiedeln: Strassensperrungen für den Gallusmarkt 2026",
+          "url": "/de/schwyz-artikel/strassensperrung-gallusmarkt-schwyz/",
+          "excerpt": "Zufahrt und Ausfahrt in der Hauptstrasse und am Sagenplatz am Markttag von 5.00 bis 20.00 Uhr verboten. Lärm ab Montag um 5.00 Uhr.",
+          "date": "2026-10-07T09:21:09.358Z"
+        }
+      ],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -178,7 +238,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "SZ",
@@ -219,10 +279,30 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-12T16:03:22.277Z"
+          "updatedAt": "2026-10-15T12:02:33.404Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Exercice militaire à Egg et au barrage du Sihlsee du 9 au 12 octobre 2026",
+          "url": "/fr/articles-schwytz/exercice-militaire-sihlsee-octobre-2026/",
+          "excerpt": "Avis du 'Schweizer Militär' : exercice du 9 au 12 octobre 2026 à Egg et au barrage du Sihlsee.",
+          "date": "2026-10-09T23:17:55.280Z"
+        },
+        {
+          "title": "Concurrence déloyale dans le changement de caisse-maladie à Schwytz",
+          "url": "/fr/articles-schwytz/schwytz-changement-caisse-maladie/",
+          "excerpt": "Les offres de changement de caisse-maladie sont souvent trompeuses : une caisse locale de Schwytz doit faire face à une activité décrite comme de la concurrence déloyale.",
+          "date": "2026-10-08T14:43:30.771Z"
+        },
+        {
+          "title": "Einsiedeln : fermetures routières pour le Gallusmarkt 2026",
+          "url": "/fr/articles-schwytz/fermeture-routes-gallusmarkt-schwytz/",
+          "excerpt": "Accès et sortie interdits dans la Hauptstrasse et sur la Sagenplatz de 5.00 à 20.00 le jour du marché. Bruits à partir de lundi à 5.00.",
+          "date": "2026-10-07T09:21:09.358Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -233,7 +313,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

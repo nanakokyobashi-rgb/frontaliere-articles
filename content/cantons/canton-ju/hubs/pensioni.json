@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "pensioni",
-  "updatedAt": "2026-10-15T00:06:40.869Z",
-  "contentHash": "6474211a8680bfe5214b165cb2ebc6ee7e96768a986ffa8d825c574b62baaf99",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "59357bbfbe3a7ddc1b28f6d43c64b89c05f5f64382ff51e45421af5c345fadb5",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T10:37:16.619Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -146,7 +146,7 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/Primes-et-reduction-de-primes-jurassiennes-2027-dans-l-assurance-maladie.html"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -163,6 +163,7 @@
           "date": "2026-09-16T17:33:55.966Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Strumenti su tasse e pensione",
@@ -181,7 +182,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "JU",
@@ -300,7 +301,7 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/Primes-et-reduction-de-primes-jurassiennes-2027-dans-l-assurance-maladie.html"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -317,6 +318,7 @@
           "date": "2026-09-16T17:33:55.966Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tax and pension tools",
@@ -335,7 +337,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "JU",
@@ -454,7 +456,7 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/Primes-et-reduction-de-primes-jurassiennes-2027-dans-l-assurance-maladie.html"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -471,6 +473,7 @@
           "date": "2026-09-16T17:33:55.966Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tools zu Steuern und Vorsorge",
@@ -489,7 +492,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "JU",
@@ -608,7 +611,7 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/Primes-et-reduction-de-primes-jurassiennes-2027-dans-l-assurance-maladie.html"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -625,6 +628,7 @@
           "date": "2026-09-16T17:33:55.966Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Outils impôts et retraite",
@@ -643,7 +647,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

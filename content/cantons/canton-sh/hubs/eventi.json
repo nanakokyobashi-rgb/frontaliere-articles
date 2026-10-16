@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T00:00:55.142Z",
-  "contentHash": "c9348971f36952add57f8ba87fea9121b9462c827e7f2903bcda1e7a24b90881",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "f1412ab13751fb16d6dcc558f32f57d1446527ab99791147757b4e101c47d57e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-15T13:57:57.453Z",
+      "updatedAt": "2026-10-16T03:54:22.189Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,10 +113,42 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Sciaffusa: previste cifre rosse tra il 2027 e il 2030",
+          "url": "/articoli-sciaffusa/finanze-cantone-sciaffusa-2027/",
+          "excerpt": "Il governo cantonale attende risultati negativi per il quadriennio 2027-2030 a causa del calo delle entrate dalle imposte sulle imprese.",
+          "date": "2026-10-10T21:14:11.679Z"
+        },
+        {
+          "title": "Disoccupazione nel Canton Sciaffusa: dati settembre 2026",
+          "url": "/articoli-sciaffusa/sciaffusa-dati-lavoro-2026/",
+          "excerpt": "Il Centro regionale di collocamento comunica i dati sulla disoccupazione nel Canton Sciaffusa per settembre 2026; il lead pubblico non riporta le cifre.",
+          "date": "2026-10-09T12:18:54.869Z"
+        },
+        {
+          "title": "Seehas più pieno e viaggi più lunghi sulla Konstanz-Singen",
+          "url": "/articoli-sciaffusa/seehas-affollamento-mattutino/",
+          "excerpt": "A causa della chiusura della Schwarzwaldbahn, il Regionalexpress tra Konstanz e Singen è sospeso; più passeggeri utilizzano la S-Bahn Seehas, che al mattino può diventare molto affollata e allunga i tempi di viaggio.",
+          "date": "2026-10-08T09:19:35.696Z"
+        },
+        {
+          "title": "Sciaffusa: e-learning per farmacie sulla violenza domestica",
+          "url": "/articoli-sciaffusa/sciaffusa-formazione-farmacie/",
+          "excerpt": "Sciaffusa: moduli e-learning volontari per le farmacie, dedicati a segnali di violenza domestica, colloquio riservato e rinvio ai servizi.",
+          "date": "2026-10-08T08:29:37.131Z"
+        },
+        {
+          "title": "Thayngen: esploso un bancomat, ferito un sospetto",
+          "url": "/articoli-sciaffusa/esplosione-bancomat-thayngen/",
+          "excerpt": "Thayngen: esploso un bancomat prima delle 4; un sospetto olandese è gravemente ferito, due presunti autori sono fuggiti verso la Germania.",
+          "date": "2026-10-07T23:37:11.961Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Sciaffusa",
@@ -127,7 +159,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "SH",
@@ -210,7 +242,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -223,10 +255,42 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Schaffhausen: red figures expected between 2027 and 2030",
+          "url": "/en/schaffhausen-articles/schaffhausen-canton-finances-2027/",
+          "excerpt": "The cantonal government expects negative results for the four-year period 2027–2030 due to declining revenue from corporate taxes.",
+          "date": "2026-10-10T21:14:11.679Z"
+        },
+        {
+          "title": "Unemployment in the Canton of Schaffhausen: September 2026 data",
+          "url": "/en/schaffhausen-articles/schaffhausen-unemployment-september-2026/",
+          "excerpt": "The regional employment center reports unemployment data for the Canton of Schaffhausen for September 2026; the public lead does not include the figures.",
+          "date": "2026-10-09T12:18:54.869Z"
+        },
+        {
+          "title": "More crowded Seehas and longer journeys on the Konstanz-Singen line",
+          "url": "/en/schaffhausen-articles/more-crowded-seehas-and-longer-journeys-on-the-konstanz-singen-line/",
+          "excerpt": "Due to the closure of the Schwarzwaldbahn, the Regionalexpress between Konstanz and Singen is suspended; more passengers are using the S-Bahn Seehas, which can become very crowded in the morning and lengthens travel…",
+          "date": "2026-10-08T09:19:35.696Z"
+        },
+        {
+          "title": "Schaffhausen: e-learning for pharmacies on domestic violence",
+          "url": "/en/schaffhausen-articles/schaffhausen-pharmacy-training/",
+          "excerpt": "Schaffhausen: voluntary e-learning modules for pharmacies, focused on signs of domestic violence, confidential conversations, and referrals to services.",
+          "date": "2026-10-08T08:29:37.131Z"
+        },
+        {
+          "title": "Thayngen: ATM explodes, suspect injured",
+          "url": "/en/schaffhausen-articles/thayngen-atm-explosion/",
+          "excerpt": "Thayngen: an ATM exploded before 4 a.m.; a Dutch suspect is seriously injured, and two alleged perpetrators fled toward Germany.",
+          "date": "2026-10-07T23:37:11.961Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in the canton of Schaffhausen",
@@ -237,7 +301,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "SH",
@@ -320,7 +384,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -333,10 +397,42 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Schaffhausen: Zwischen 2027 und 2030 werden rote Zahlen erwartet",
+          "url": "/de/schaffhausen-artikel/finanzen-kanton-schaffhausen-2027/",
+          "excerpt": "Die Kantonsregierung rechnet für den Vierjahreszeitraum 2027–2030 aufgrund des Rückgangs der Einnahmen aus den Unternehmenssteuern mit negativen Ergebnissen.",
+          "date": "2026-10-10T21:14:11.679Z"
+        },
+        {
+          "title": "Arbeitslosigkeit im Kanton Schaffhausen: Daten für September 2026",
+          "url": "/de/schaffhausen-artikel/schaffhausen-arbeitslosigkeit-september-2026/",
+          "excerpt": "Das Regionale Arbeitsvermittlungszentrum teilt die Arbeitslosigkeitsdaten im Kanton Schaffhausen für September 2026 mit; der öffentlich zugängliche Lead enthält keine Zahlen.",
+          "date": "2026-10-09T12:18:54.869Z"
+        },
+        {
+          "title": "Stärker ausgelasteter Seehas und längere Fahrten auf der Strecke Konstanz-Singen",
+          "url": "/de/schaffhausen-artikel/starker-ausgelasteter-seehas-und-langere-fahrten-auf-der-strecke-konstanz-singen/",
+          "excerpt": "Aufgrund der Sperrung der Schwarzwaldbahn verkehrt der Regionalexpress zwischen Konstanz und Singen nicht; mehr Fahrgäste nutzen die S-Bahn Seehas, die morgens sehr voll werden kann und die Fahrzeiten verlängert.",
+          "date": "2026-10-08T09:19:35.696Z"
+        },
+        {
+          "title": "Schaffhausen: E-Learning für Apotheken zum Thema häusliche Gewalt",
+          "url": "/de/schaffhausen-artikel/schaffhausen-apotheken-schulung/",
+          "excerpt": "Schaffhausen: Freiwillige E-Learning-Module für Apotheken zu Anzeichen häuslicher Gewalt, vertraulichen Gesprächen und der Weitervermittlung an Unterstützungsangebote.",
+          "date": "2026-10-08T08:29:37.131Z"
+        },
+        {
+          "title": "Thayngen: Geldautomat gesprengt, Verdächtiger verletzt",
+          "url": "/de/schaffhausen-artikel/thayngen-geldautomat-gesprengt/",
+          "excerpt": "Thayngen: Geldautomat vor 4 Uhr gesprengt; ein niederländischer Verdächtiger ist schwer verletzt, zwei mutmassliche Täter sind in Richtung Deutschland geflüchtet.",
+          "date": "2026-10-07T23:37:11.961Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Schaffhausen",
@@ -347,7 +443,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "SH",
@@ -430,7 +526,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -443,10 +539,42 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Schaffhouse : des chiffres rouges prévus entre 2027 et 2030",
+          "url": "/fr/articles-schaffhouse/finances-canton-schaffhouse-2027/",
+          "excerpt": "Le gouvernement cantonal s’attend à des résultats négatifs pour la période quadriennale 2027-2030 en raison de la baisse des recettes provenant des impôts sur les entreprises.",
+          "date": "2026-10-10T21:14:11.679Z"
+        },
+        {
+          "title": "Chômage dans le canton de Schaffhouse : données de septembre 2026",
+          "url": "/fr/articles-schaffhouse/schaffhouse-chomage-septembre-2026/",
+          "excerpt": "Le Centre régional de placement communique les données sur le chômage dans le canton de Schaffhouse pour septembre 2026 ; le lead public ne rapporte pas les chiffres.",
+          "date": "2026-10-09T12:18:54.869Z"
+        },
+        {
+          "title": "Seehas plus chargé et trajets plus longs sur la ligne Konstanz-Singen",
+          "url": "/fr/articles-schaffhouse/seehas-plus-charge-et-trajets-plus-longs-sur-la-ligne-konstanz-singen/",
+          "excerpt": "En raison de la fermeture de la Schwarzwaldbahn, le Regionalexpress entre Konstanz et Singen est suspendu ; davantage de passagers utilisent le S-Bahn Seehas, qui peut devenir très bondé le matin et allonge les temps…",
+          "date": "2026-10-08T09:19:35.696Z"
+        },
+        {
+          "title": "Schaffhouse : e-learning pour les pharmacies sur la violence domestique",
+          "url": "/fr/articles-schaffhouse/schaffhouse-formation-pharmacies/",
+          "excerpt": "Schaffhouse : modules d’e-learning volontaires pour les pharmacies, consacrés aux signes de violence domestique, à l’entretien confidentiel et à l’orientation vers les services.",
+          "date": "2026-10-08T08:29:37.131Z"
+        },
+        {
+          "title": "Thayngen : un bancomat a explosé, un suspect blessé",
+          "url": "/fr/articles-schaffhouse/thayngen-distributeur-explose/",
+          "excerpt": "Thayngen : un bancomat a explosé avant 4 heures ; un suspect néerlandais est grièvement blessé, deux auteurs présumés ont pris la fuite vers l’Allemagne.",
+          "date": "2026-10-07T23:37:11.961Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements dans le canton de Schaffhouse",
@@ -457,7 +585,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

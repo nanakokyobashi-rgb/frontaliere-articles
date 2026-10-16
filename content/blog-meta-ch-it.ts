@@ -8423,6 +8423,21 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.carburanti-svizzera-rincaro-settimanale.title': 'Benzina e diesel in Svizzera: +5 centesimi al litro',
     'blog.article.carburanti-svizzera-rincaro-settimanale.excerpt': 'Benzina 95 a 2,16 franchi al litro Benzina 98 a 2,27 franchi al litro Diesel a 2,45 franchi, a 1 centesimo dal massimo annuale Aumento settimanale → 5 centesimi',
     'blog.article.carburanti-svizzera-rincaro-settimanale.imageAlt': 'Pompa di carburante in una stazione di servizio svizzera',
+    'blog.article.svizzera-abbattimenti-lupi-2025.title': 'Lupo, abbattimenti più facili: ambientalisti contrari, contadini favorevoli',
+    'blog.article.svizzera-abbattimenti-lupi-2025.excerpt': 'Il Consiglio federale propone abbattimenti durante tutto l’anno.',
+    'blog.article.svizzera-abbattimenti-lupi-2025.imageAlt': 'Silhouette di un lupo che ulula alla luna sulle Alpi svizzere al tramonto',
+    'blog.article.stadler-rail-treno-idrogeno-sardegna.title': 'Stadler Rail testa il primo treno a idrogeno a scartamento ridotto',
+    'blog.article.stadler-rail-treno-idrogeno-sardegna.excerpt': 'Stadler Rail testa un treno a idrogeno in Svizzera Il convoglio è destinato alla Sardegna Il tracciato Hemishofen-Ramsen misura quasi 4 km Le verifiche',
+    'blog.article.stadler-rail-treno-idrogeno-sardegna.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.crediti-bilaterali-iii-svizzera.title': 'Bilaterali III, primo via libera ai crediti da 3,48 miliardi',
+    'blog.article.crediti-bilaterali-iii-svizzera.excerpt': '3,48 miliardi di franchi per il periodo 2030-2036 La FK-N vota: 14 favorevoli, 8 contrari, 3 astensioni Il Nazionale dovrebbe esaminare il dossier a dicembre',
+    'blog.article.crediti-bilaterali-iii-svizzera.imageAlt': 'Il Parlamento federale svizzero a Berna, con la bandiera svizzera in primo piano.',
+    'blog.article.il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.title': 'Il discount blocca aumenti 2027 e raddoppia sconto dipendenti',
+    'blog.article.il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.excerpt': 'Denner non prevede aumenti generali nel 2027 Lo sconto al personale passa dal 10% al 20% I contributi alla cassa pensioni salgono di 1,2 punti I salari minimi',
+    'blog.article.il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.imageAlt': 'Immagine editoriale relativa a: Il discount blocca aumenti 2027 e raddoppia sconto dipendenti',
+    'blog.article.ia-assistente-shopping-svizzera.title': 'IA aiuta gli svizzeri nello shopping ma frena al pagamento',
+    'blog.article.ia-assistente-shopping-svizzera.excerpt': 'Quasi il 70% degli svizzeri usa l\'IA per un acquisto Il 49% dice che l\'IA influenza la scelta Il 67% vuole mantenere il pagamento autonomo Solo il 17% accetta',
+    'blog.article.ia-assistente-shopping-svizzera.imageAlt': 'Cliente svizzero che utilizza un assistente IA su smartphone mentre fa shopping a Lugano',
 };
 
 export default blogMetaChIt;

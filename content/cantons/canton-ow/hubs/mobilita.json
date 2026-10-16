@@ -4,17 +4,17 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T14:18:44.271Z",
-  "contentHash": "703e2282aad2551897b00d7e9eab864311d2bc8216b24b42fb884f92aba65a4a",
+  "updatedAt": "2026-10-16T14:33:38.367Z",
+  "contentHash": "8ecc20dbcc07173fcdcca169f6f2772d8bd603b2af1ec860f1c9577061ffb852",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T05:23:55.314Z",
+      "updatedAt": "2026-10-16T05:03:47.755Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T20:59:19.985Z",
+      "updatedAt": "2026-10-16T10:09:31.602Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 15 ottobre 2026"
+          "note": "segnalazioni aggiornate: 16 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 15 ottobre 2026"
+          "note": "segnalazioni aggiornate: 16 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -68,7 +68,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-16T05:03:47.755Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -91,7 +91,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -114,6 +114,7 @@
           "date": "2026-08-16T16:26:07.130Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -124,7 +125,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-15T14:18:44.271Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "en": {
       "canton": "OW",
@@ -135,12 +136,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "3",
-          "note": "reports as of 15 October 2026"
+          "note": "reports as of 16 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "1",
-          "note": "reports as of 15 October 2026"
+          "note": "reports as of 16 October 2026"
         }
       ],
       "dataBlocks": [
@@ -175,7 +176,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-16T05:03:47.755Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -198,7 +199,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -221,6 +222,7 @@
           "date": "2026-08-16T16:26:07.130Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -231,7 +233,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-15T14:18:44.271Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "de": {
       "canton": "OW",
@@ -242,12 +244,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "3",
-          "note": "Meldungen vom 15. Oktober 2026"
+          "note": "Meldungen vom 16. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "1",
-          "note": "Meldungen vom 15. Oktober 2026"
+          "note": "Meldungen vom 16. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -282,7 +284,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-16T05:03:47.755Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -305,7 +307,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -328,6 +330,7 @@
           "date": "2026-08-16T16:26:07.130Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -338,7 +341,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-15T14:18:44.271Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "fr": {
       "canton": "OW",
@@ -349,12 +352,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "3",
-          "note": "signalements au 15 octobre 2026"
+          "note": "signalements au 16 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "1",
-          "note": "signalements au 15 octobre 2026"
+          "note": "signalements au 16 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -389,7 +392,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-16T05:03:47.755Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -412,7 +415,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -435,6 +438,7 @@
           "date": "2026-08-16T16:26:07.130Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -445,7 +449,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-15T14:18:44.271Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     }
   }
 }

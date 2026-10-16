@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "db2ef7306281e542504aa5a8dc219c00b60c9c4e1ca6781968e7d7a4c4582d27",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "4d7be38e1d9acedf8c449c2e01a6e068d959defb4045f78183862a4ee4e6dbb8",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -135,7 +135,7 @@
               "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -188,6 +188,7 @@
           "date": "2026-09-16T10:26:48.561Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolatore dello stipendio netto",
@@ -210,7 +211,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "GL",
@@ -323,7 +324,7 @@
               "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -376,6 +377,7 @@
           "date": "2026-09-16T10:26:48.561Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Net salary calculator",
@@ -398,7 +400,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "GL",
@@ -511,7 +513,7 @@
               "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -564,6 +566,7 @@
           "date": "2026-09-16T10:26:48.561Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Nettolohn-Rechner",
@@ -586,7 +589,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "GL",
@@ -699,7 +702,7 @@
               "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -752,6 +755,7 @@
           "date": "2026-09-16T10:26:48.561Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calculateur de salaire net",
@@ -774,7 +778,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

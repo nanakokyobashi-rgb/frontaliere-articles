@@ -42,6 +42,9 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.title': 'Frontalieri: tassa salute e decreto omnibus al 100%',
     'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.excerpt': 'Nessun lavoratore è stato chiamato a pagare la tassa sulla salute Il contributo previsto va dal 3% al 6% del reddito netto Dal gennaio 2026 i lavoratori',
     'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.imageAlt': 'Vista panoramica su Lugano e il lago in una giornata nuvolosa, simbolo del Canton Ticino',
+    'blog.article.multa-rifiuti-bizzarone.title': 'Sacco di rifiuti a Bizzarone: multato ticinese',
+    'blog.article.multa-rifiuti-bizzarone.excerpt': 'A Bizzarone la Polizia locale ha inflitto un\'ammenda di 600 euro a un ticinese per rifiuti abbandonati oltreconfine.',
+    'blog.article.multa-rifiuti-bizzarone.imageAlt': 'Sacco di rifiuti abbandonato lungo una strada del Ticino',
 };
 
 export default blogMetaCantonTiIt;

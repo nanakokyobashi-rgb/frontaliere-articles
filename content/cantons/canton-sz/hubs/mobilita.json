@@ -4,17 +4,17 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "01f0ef71a48fb2afd407f7cb76be88334da93887a177abdc683abe117cb4b9e1",
+  "updatedAt": "2026-10-16T14:33:38.367Z",
+  "contentHash": "f618172a5291cea6bfabec5eb766199626f70ef36fd3e08850af21d1cb0716f5",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T12:13:19.434Z",
+      "updatedAt": "2026-10-16T05:03:47.755Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-16T10:09:31.602Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "2",
-          "note": "segnalazioni aggiornate: 15 ottobre 2026"
+          "note": "segnalazioni aggiornate: 16 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 15 ottobre 2026"
+          "note": "segnalazioni aggiornate: 16 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -80,13 +80,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-16T05:03:47.755Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Einbau einer Hilfsbrücke bei Biberbrugg",
+              "date": "2026-10-16",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26289"
+            },
             {
               "label": "Bahnhof Pfäffikon: Reduktion von P+R-Parkplätzen von 2028 bis 2035 für Installationsplatz",
               "date": "2026-10-12",
@@ -108,7 +113,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -131,6 +136,7 @@
           "date": "2026-08-16T11:49:12.314Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -141,7 +147,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "en": {
       "canton": "SZ",
@@ -152,12 +158,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "2",
-          "note": "reports as of 15 October 2026"
+          "note": "reports as of 16 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "4",
-          "note": "reports as of 15 October 2026"
+          "note": "reports as of 16 October 2026"
         }
       ],
       "dataBlocks": [
@@ -204,13 +210,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-16T05:03:47.755Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Einbau einer Hilfsbrücke bei Biberbrugg",
+              "date": "2026-10-16",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26289"
+            },
             {
               "label": "Bahnhof Pfäffikon: Reduktion von P+R-Parkplätzen von 2028 bis 2035 für Installationsplatz",
               "date": "2026-10-12",
@@ -232,7 +243,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -255,6 +266,7 @@
           "date": "2026-08-16T11:49:12.314Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -265,7 +277,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "de": {
       "canton": "SZ",
@@ -276,12 +288,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "2",
-          "note": "Meldungen vom 15. Oktober 2026"
+          "note": "Meldungen vom 16. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "4",
-          "note": "Meldungen vom 15. Oktober 2026"
+          "note": "Meldungen vom 16. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -328,13 +340,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-16T05:03:47.755Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Einbau einer Hilfsbrücke bei Biberbrugg",
+              "date": "2026-10-16",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26289"
+            },
             {
               "label": "Bahnhof Pfäffikon: Reduktion von P+R-Parkplätzen von 2028 bis 2035 für Installationsplatz",
               "date": "2026-10-12",
@@ -356,7 +373,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -379,6 +396,7 @@
           "date": "2026-08-16T11:49:12.314Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -389,7 +407,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "fr": {
       "canton": "SZ",
@@ -400,12 +418,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "2",
-          "note": "signalements au 15 octobre 2026"
+          "note": "signalements au 16 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "4",
-          "note": "signalements au 15 octobre 2026"
+          "note": "signalements au 16 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -452,13 +470,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-16T05:03:47.755Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Einbau einer Hilfsbrücke bei Biberbrugg",
+              "date": "2026-10-16",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26289"
+            },
             {
               "label": "Bahnhof Pfäffikon: Reduktion von P+R-Parkplätzen von 2028 bis 2035 für Installationsplatz",
               "date": "2026-10-12",
@@ -480,7 +503,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -503,6 +526,7 @@
           "date": "2026-08-16T11:49:12.314Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -513,7 +537,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     }
   }
 }

@@ -129,7 +129,9 @@ test('il percorso di una copertina condivisa non è un residuo dell\'id', () => 
   // non deve chiamarla rimozione parziale.
   for (const text of [
     `    image: '/images/blog/${ID}.webp',\n`,
+    `    image: '/images/blog/blog-${ID}.webp',\n`,
     `  url: 'https://cdn.example.org/images/blog/${ID}.webp',\n`,
+    `  url: 'https://cdn.example.org/images/blog/blog-${ID}.webp?size=large',\n`,
     `  image: '/images/blog/thumbnails/${ID}-480w.webp',\n`,
   ]) {
     assert.equal(mentionsId(text, ID), false, `falso residuo su: ${text.trim()}`);
@@ -140,6 +142,8 @@ test('il percorso di una copertina condivisa non è un residuo dell\'id', () => 
     `  'blog-${ID}': { image: { url: '/images/blog/${ID}.webp' } },\n`,
     `  '/images/${ID}.webp'\n`,
     `  '/images/blog/${ID}'\n`,
+    `  '/images/blog/blog-${ID}'\n`,
+    `  '/images/blog/blog-${ID}.'\n`,
   ]) {
     assert.equal(mentionsId(text, ID), true, `residuo non visto in: ${text.trim()}`);
   }

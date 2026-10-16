@@ -182,8 +182,10 @@ for (const [rel, workflow] of CHOKE_POINTS) {
       const helper = fs.readFileSync(SHARED_PAIR_HELPER, 'utf-8');
       assert.match(src, /import \{ writeFilePairAtomically \} from ['"][^'"]*write-file-pair-atomically\.mjs['"]/u);
       assert.match(src, /(?:writeRegistryPairAtomically|writeFilePairAtomically)\(writes(?:,\s*\{\s*fsImpl\s*\})?\)/u);
-      assert.match(helper, /item\.tmp = `\$\{item\.file\}\.\$\{process\.pid\}\.\$\{temporarySequence\+\+\}\.pair\.tmp`/u);
-      assert.match(helper, /fsImpl\.writeFileSync\(item\.tmp\s*,/u);
+      // A transaction-unique staging path created with wx prevents a stale
+      // PID/sequence temp from being adopted or overwritten by another writer.
+      assert.match(helper, /item\.tmp = makeTransactionStagingFile\(item\.file,\s*transactionId,\s*'pair'\)/u);
+      assert.match(helper, /fsImpl\.writeFileSync\(item\.tmp,\s*item\.after,\s*\{\s*encoding:\s*'utf8',\s*flag:\s*'wx'\s*\}\)/u);
       assert.match(helper, /fsImpl\.renameSync\(item\.tmp\s*,\s*item\.file\)/u);
       assert.match(helper, /removeTemporaryFile\(fsImpl, item\.tmp/u,
         'il temporaneo residuo deve essere rimosso e gli errori di cleanup propagati');

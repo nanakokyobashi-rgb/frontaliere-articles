@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T00:00:55.142Z",
-  "contentHash": "2ac541dc0e309fa596268aff186b4804c71e6d86415ea8b5916de27fc42f1291",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "2870551b4f7d51f1fae391094c6d71474d7f2d133024a5e425e7de073d3b6d82",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-15T13:57:57.453Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "97",
+          "value": "99",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,6 +37,12 @@
               "detail": "Scuol",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Visite guidate ai castagneti e pranzo a Brusio",
+              "detail": "Campocologno, Brusio",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visite-guidate-ai-castagneti-e-pranzo-a-brusio-2/"
             },
             {
               "label": "Mushroom half-days in the afternoon",
@@ -85,17 +91,11 @@
               "detail": "Val Surses: Savognin, Surses — in corso, ultimo giorno: 16 ottobre 2026",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kinder-und-jugendzirkuswoche-savognin/"
-            },
-            {
-              "label": "Polysport-Camp Chur",
-              "detail": "Chur — in corso, ultimo giorno: 16 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysport-camp-chur-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -136,6 +136,7 @@
           "date": "2026-05-06T06:00:49.305Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi nei Grigioni",
@@ -146,7 +147,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "GR",
@@ -156,7 +157,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "97",
+          "value": "99",
           "note": "from the site’s events calendar"
         }
       ],
@@ -171,6 +172,12 @@
               "detail": "Scuol",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Guided tours of the chestnut groves and lunch in Brusio",
+              "detail": "Campocologno, Brusio",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visite-guidate-ai-castagneti-e-pranzo-a-brusio-2/"
             },
             {
               "label": "Mushroom half-days in the afternoon",
@@ -219,17 +226,11 @@
               "detail": "Val Surses: Savognin, Surses — ongoing, last day: 16 October 2026",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kinder-und-jugendzirkuswoche-savognin/"
-            },
-            {
-              "label": "Polysport-Camp Chur",
-              "detail": "Chur — ongoing, last day: 16 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysport-camp-chur-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -270,6 +271,7 @@
           "date": "2026-05-06T06:00:49.305Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "All events in Graubünden",
@@ -280,7 +282,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "GR",
@@ -290,7 +292,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "97",
+          "value": "99",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -305,6 +307,12 @@
               "detail": "Scuol",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Geführte Besichtigungen der Kastanienselven und Mittagessen in Brusio",
+              "detail": "Campocologno, Brusio",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visite-guidate-ai-castagneti-e-pranzo-a-brusio-2/"
             },
             {
               "label": "Pilze sammeln am Nachmittag",
@@ -353,17 +361,11 @@
               "detail": "Val Surses: Savognin, Surses — läuft, letzter Tag: 16. Oktober 2026",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kinder-und-jugendzirkuswoche-savognin/"
-            },
-            {
-              "label": "Polysport-Camp Chur",
-              "detail": "Chur — läuft, letzter Tag: 16. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysport-camp-chur-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -404,6 +406,7 @@
           "date": "2026-05-06T06:00:49.305Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen in Graubünden",
@@ -414,7 +417,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "GR",
@@ -424,7 +427,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "97",
+          "value": "99",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -439,6 +442,12 @@
               "detail": "Scuol",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Visites guidées des châtaigneraies et déjeuner à Brusio",
+              "detail": "Campocologno, Brusio",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visite-guidate-ai-castagneti-e-pranzo-a-brusio-2/"
             },
             {
               "label": "Mushroom half-days in the afternoon",
@@ -487,17 +496,11 @@
               "detail": "Val Surses: Savognin, Surses — en cours, dernier jour : 16 octobre 2026",
               "date": "2026-10-16",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kinder-und-jugendzirkuswoche-savognin/"
-            },
-            {
-              "label": "Polysport-Camp Chur",
-              "detail": "Chur — en cours, dernier jour : 16 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysport-camp-chur-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -538,6 +541,7 @@
           "date": "2026-05-06T06:00:49.305Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tous les événements aux Grisons",
@@ -548,7 +552,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

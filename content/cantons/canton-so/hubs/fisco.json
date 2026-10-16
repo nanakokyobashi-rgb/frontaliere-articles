@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "fisco",
-  "updatedAt": "2026-10-15T00:06:40.869Z",
-  "contentHash": "e05da86bdfa16547e3e4e16d67f20da29c563b3cf312f5dc5ef6eddabb778e10",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "9e77cfc4b286e4d5bf712e5e795642ce948c3024e1af993885a409cabf598625",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T10:37:16.619Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -115,7 +115,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/ja-zur-revision-des-gesetzes-ueber-die-staats-und-gemeindesteuern-2027/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -138,6 +138,7 @@
           "date": "2026-08-18T04:41:57.730Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolatore dello stipendio netto",
@@ -160,7 +161,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "SO",
@@ -253,7 +254,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/ja-zur-revision-des-gesetzes-ueber-die-staats-und-gemeindesteuern-2027/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -276,6 +277,7 @@
           "date": "2026-08-18T04:41:57.730Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Net salary calculator",
@@ -298,7 +300,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "SO",
@@ -391,7 +393,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/ja-zur-revision-des-gesetzes-ueber-die-staats-und-gemeindesteuern-2027/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -414,6 +416,7 @@
           "date": "2026-08-18T04:41:57.730Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Nettolohn-Rechner",
@@ -436,7 +439,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "SO",
@@ -529,7 +532,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/ja-zur-revision-des-gesetzes-ueber-die-staats-und-gemeindesteuern-2027/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -552,6 +555,7 @@
           "date": "2026-08-18T04:41:57.730Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calculateur de salaire net",
@@ -574,7 +578,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

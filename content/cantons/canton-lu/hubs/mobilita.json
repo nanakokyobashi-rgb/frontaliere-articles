@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T10:23:56.350Z",
-  "contentHash": "8a20b2cb3807809061bb9fd3c886235b8b52ed78732bf3ea9b4714928f984dae",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "b4b849154f62de7633c5edfd8c164951a77fdab66b4303f1ced593832ff9c673",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T23:56:39.924Z",
+      "updatedAt": "2026-10-16T11:58:12.009Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T10:09:31.602Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "3",
-          "note": "segnalazioni aggiornate: 15 ottobre 2026"
+          "value": "2",
+          "note": "segnalazioni aggiornate: 16 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "29",
-          "note": "segnalazioni aggiornate: 15 ottobre 2026"
+          "note": "segnalazioni aggiornate: 16 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -42,12 +42,6 @@
           "title": "Chiusure, cantieri e disagi",
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
-            {
-              "label": "A2 Luzern <-> Basel tra Svincolo autostradale Sursee E Svincolo autostradale Reiden Situazione: problemi di traffico cantiere Limitazione del traffico: corsia d'emergenza chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 16 ottobre 2026",
-              "date": "2026-10-08T05:31:00.000Z"
-            },
             {
               "label": "A2 S. Gottardo <-> Luzern tra Svincolo autostradale Luzern Zentrum E Galleria Galleria Sonnenberg Situazione: chiusa cantiere, lunghezza [km] 2.3",
               "value": "Chiusura",
@@ -61,9 +55,14 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "Revocato: A2 Basel -> Luzern tra Svincolo autostradale Sursee E Parcheggio Inseli, Eich, al chilometro 74.0 Situazione: pericolo Causa: oggetto sulla strada",
+              "label": "A2 Luzern -> Basel tra Galleria Galleria Schweizerhalle E Raccordo autostradale Diramazione Wiese Situazione: colonna Causa: traffico congestionato",
               "value": "Traffico",
-              "date": "2026-10-15T23:33:00.000Z"
+              "date": "2026-10-16T08:48:00.000Z"
+            },
+            {
+              "label": "A14 Zug -> Luzern tra Svincolo autostradale Buchrain E Svincolo autostradale Emmen Süd Situazione: colonna Causa: veicolo in avaria",
+              "value": "Traffico",
+              "date": "2026-10-16T11:48:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -91,7 +90,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T23:56:39.924Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -109,7 +108,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -144,6 +143,7 @@
           "date": "2026-05-07T09:05:42.794Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -154,7 +154,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "LU",
@@ -164,13 +164,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "3",
-          "note": "reports as of 15 October 2026"
+          "value": "2",
+          "note": "reports as of 16 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "29",
-          "note": "reports as of 15 October 2026"
+          "note": "reports as of 16 October 2026"
         }
       ],
       "dataBlocks": [
@@ -179,12 +179,6 @@
           "title": "Closures, roadworks and disruptions",
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
-            {
-              "label": "A2 Luzern <-> Basel tra Svincolo autostradale Sursee E Svincolo autostradale Reiden Situazione: problemi di traffico cantiere Limitazione del traffico: corsia d'emergenza chiusa",
-              "value": "Closure",
-              "detail": "until 16 October 2026",
-              "date": "2026-10-08T05:31:00.000Z"
-            },
             {
               "label": "A2 S. Gottardo <-> Luzern tra Svincolo autostradale Luzern Zentrum E Galleria Galleria Sonnenberg Situazione: chiusa cantiere, lunghezza [km] 2.3",
               "value": "Closure",
@@ -198,9 +192,14 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "Revocato: A2 Basel -> Luzern tra Svincolo autostradale Sursee E Parcheggio Inseli, Eich, al chilometro 74.0 Situazione: pericolo Causa: oggetto sulla strada",
+              "label": "A2 Luzern -> Basel tra Galleria Galleria Schweizerhalle E Raccordo autostradale Diramazione Wiese Situazione: colonna Causa: traffico congestionato",
               "value": "Traffic",
-              "date": "2026-10-15T23:33:00.000Z"
+              "date": "2026-10-16T08:48:00.000Z"
+            },
+            {
+              "label": "A14 Zug -> Luzern tra Svincolo autostradale Buchrain E Svincolo autostradale Emmen Süd Situazione: colonna Causa: veicolo in avaria",
+              "value": "Traffic",
+              "date": "2026-10-16T11:48:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -228,7 +227,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T23:56:39.924Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -246,7 +245,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -279,6 +278,7 @@
           "date": "2026-05-07T09:05:42.794Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -289,7 +289,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "LU",
@@ -299,13 +299,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "3",
-          "note": "Meldungen vom 15. Oktober 2026"
+          "value": "2",
+          "note": "Meldungen vom 16. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "29",
-          "note": "Meldungen vom 15. Oktober 2026"
+          "note": "Meldungen vom 16. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -314,12 +314,6 @@
           "title": "Sperrungen, Baustellen und Störungen",
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
-            {
-              "label": "A2 Luzern <-> Basel zwischen Anschluss Sursee und Anschluss Reiden Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Pannenstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 16. Oktober 2026",
-              "date": "2026-10-08T05:31:00.000Z"
-            },
             {
               "label": "A2 Gotthard <-> Luzern zwischen Anschluss Luzern-Zentrum und Tunnel Sonnenberg-Tunnel Sachlage: Strecke gesperrt Baustelle, Länge [km] 2.3",
               "value": "Sperrung",
@@ -333,9 +327,14 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "Aufgehoben: A2 Basel -> Luzern zwischen Anschluss Sursee und Parkplatz Inseli, Eich, bei Kilometer 74.0 Sachlage: Gefahr Ursache: Gegenstände auf der Fahrbahn",
+              "label": "A2 Luzern -> Basel zwischen Tunnel Schweizerhalle-Tunnel und Autobahndreieck Verzweigung Wiese Sachlage: Stau Ursache: Verkehrsüberlastung",
               "value": "Verkehr",
-              "date": "2026-10-15T23:33:00.000Z"
+              "date": "2026-10-16T08:48:00.000Z"
+            },
+            {
+              "label": "A14 Zug -> Luzern zwischen Anschluss Buchrain und Anschluss Emmen-Süd Sachlage: Stau Ursache: Pannenfahrzeug",
+              "value": "Verkehr",
+              "date": "2026-10-16T11:48:00.000Z"
             },
             {
               "label": "H10 Bern <-> Luzern zwischen Ortschaft Wiggen und Ortschaft Kröschenbrunnen Sachlage: Verkehrsbehinderung Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
@@ -363,7 +362,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T23:56:39.924Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -381,7 +380,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -414,6 +413,7 @@
           "date": "2026-05-07T09:05:42.794Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -424,7 +424,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "LU",
@@ -434,13 +434,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "3",
-          "note": "signalements au 15 octobre 2026"
+          "value": "2",
+          "note": "signalements au 16 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "29",
-          "note": "signalements au 15 octobre 2026"
+          "note": "signalements au 16 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -449,12 +449,6 @@
           "title": "Fermetures, chantiers et perturbations",
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
-            {
-              "label": "A2 Lucerne <-> Bâle entre Jonction autoroutière Sursee et Jonction autoroutière Reiden Situation: trafic perturbé travaux Gestion du trafic: bande d'arrêt d'urgence fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 16 octobre 2026",
-              "date": "2026-10-08T05:31:00.000Z"
-            },
             {
               "label": "A2 St-Gothard <-> Lucerne entre Jonction autoroutière Lucerne-Centre et Tunnel Tunnel du Sonnenberg Situation: fermé travaux, longueur [km] 2.3",
               "value": "Fermeture",
@@ -468,9 +462,14 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "Révoqué: A2 Bâle -> Lucerne entre Jonction autoroutière Sursee et Parking Inseli, Eich, au kilomètre 74.0 Situation: danger Raison: objets sur la chaussée",
+              "label": "A2 Lucerne -> Bâle entre Tunnel Tunnel Schweizerhalle et Echangeur Echangeur de Wiese Situation: bouchon Raison: surcharge de trafic",
               "value": "Trafic",
-              "date": "2026-10-15T23:33:00.000Z"
+              "date": "2026-10-16T08:48:00.000Z"
+            },
+            {
+              "label": "A14 Zoug -> Lucerne entre Jonction autoroutière Buchrain et Jonction autoroutière Emmen-Sud Situation: bouchon Raison: véhicule en panne",
+              "value": "Trafic",
+              "date": "2026-10-16T11:48:00.000Z"
             },
             {
               "label": "H10 Berne <-> Lucerne entre Localité Wiggen et Localité Kröschenbrunnen Situation: trafic perturbé Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
@@ -498,7 +497,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T23:56:39.924Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -516,7 +515,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -551,6 +550,7 @@
           "date": "2026-05-07T09:05:42.794Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -561,7 +561,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-16T10:23:56.350Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

@@ -1,54 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1948295/si-trovava-sui-binari-adolescente-travolto-mortalmente-da-un-treno": {
-    "articleId": "adolescente-travolto-treno-berna",
-    "ts": "2026-09-06T11:11:23.559Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/scuola-205-collaboratori-in-meno-in-lombardia-i-sindacati-temono-ripercussioni-su-sicurezza-e-servizi/2671363": {
-    "articleId": "tagli-organici-scuola-lombardia",
-    "ts": "2026-09-06T11:22:05.540Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/amazon-lascia-malpensa-la-cub-denuncia-dieci-anni-di-lavoro-precario-al-terminal-2/2670449": {
-    "articleId": "amazon-malpensa-trasferimento",
-    "ts": "2026-09-06T11:33:13.293Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/ad-angera-una-giornata-di-formazione-per-rendere-i-musei-accessibili-alle-persone-con-demenza/2670431": {
-    "articleId": "angera-corso-musei-demenza",
-    "ts": "2026-09-06T11:43:37.546Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/colacem-il-19-rapporto-di-sostenibilita-46-milioni-di-investimenti-ambientali-in-tre-anni/2671399": {
-    "articleId": "colacem-sostenibilita-2025",
-    "ts": "2026-09-06T11:58:59.246Z",
-    "keyForm": 2
-  },
-  "https://comozero.it/attualita/canton-ticino-incendio-in-galleria-a-bordo-di-un-treno-ma-e-unesercitazione": {
-    "articleId": "incendio-galleria-monte-ceneri-esercitazione",
-    "ts": "2026-09-06T18:23:54.984Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/newsblog/verita-immobiliari/1948267/senza-empatia-non-sai-fare-questo-lavoro": {
-    "articleId": "empatia-lavoro-immobiliare-ticino",
-    "ts": "2026-09-07T07:11:01.196Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/disoccupazione%3a-tasso-al-3%2c0%25%2c-stabile-su-mese-ma-in-aumento-annuo/92014348": {
-    "articleId": "disoccupazione-stabile-ticino-2024",
-    "ts": "2026-09-07T07:20:24.696Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/newsblog/ticino-top/1948032/arredamento-progettazione-uffici-essere-aziende-ufficio-ticino": {
-    "articleId": "arredamento-uffici-ticino-ai",
-    "ts": "2026-09-07T07:42:37.357Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/s/4064238": {
-    "articleId": "disoccupazione-stabile-ticino-agosto-2024",
-    "ts": "2026-09-07T08:19:50.133Z",
-    "keyForm": 2
-  },
   "https://www.ticinonews.ch/ticino/disoccupazione-stabile-nel-mese-di-agosto-442099": {
     "articleId": "disoccupazione-stabile-agosto-2023",
     "ts": "2026-09-07T08:38:51.644Z",
@@ -2497,6 +2447,56 @@
   "https://www.varesenews.it/2026/10/tre-nuove-mostre-al-maga-da-jago-a-leopardi/2709940": {
     "articleId": "mostre-maga-gallarate-2026",
     "ts": "2026-10-16T11:58:37.225Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/newsblog/valute-e-frontiere/1957230/svizzera-lavoro-numero-mercato-frontalieri-stipendio-lavoratori-ticino-dati-occupazione": {
+    "articleId": "lavorare-svizzera-conviene-ancora",
+    "ts": "2026-10-16T12:43:53.122Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/dal-maggiore-a-monate-e-varese-presentata-la-maratona-dei-laghi-che-attraversera-otto-comuni-attesi-duemila-runner-nel-2027/2710261": {
+    "articleId": "maratona-laghi-varese-2027",
+    "ts": "2026-10-16T13:10:19.550Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/rallentamenti-e-disagi-alla-dogana-di-gaggiolo-dopo-linstallazione-del-nuovo-dosso/2709703": {
+    "articleId": "dosso-gaggiolo-disagi-frontalieri",
+    "ts": "2026-10-16T14:28:42.662Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/dosso-e-disagi-a-gaggiolo-la-dogana-svizzera-spiega-scelta-fatta-per-la-sicurezza-di-pedoni-e-lavoratori/2710591": {
+    "articleId": "dosso-gaggiolo-sicurezza-lavoratori",
+    "ts": "2026-10-16T15:40:56.915Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1957311/iniziativa-svizzera-udc-frontiere-protezione": {
+    "articleId": "iniziativa-udc-asilo-limite",
+    "ts": "2026-10-16T16:42:43.591Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/ospite/1957335/giovani-futuro-lavoro-luca-frasa": {
+    "articleId": "giovani-lavoro-futuro-ticino",
+    "ts": "2026-10-16T17:37:12.237Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/ne-numeri-ne-percentuali-la-rabbia-dei-lavoratori-barco-di-saronno-dopo-lannuncio-del-trasferimento-in-cina/2710603": {
+    "articleId": "saronno-produzione-cina-protesta",
+    "ts": "2026-10-16T18:15:03.462Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/luganese/1957285/la-citta-non-risparmia-sui-giovani-in-formazione": {
+    "articleId": "indennita-stage-lugano-2027",
+    "ts": "2026-10-16T20:06:58.692Z",
+    "keyForm": 2
+  },
+  "https://www.ocst.ch/il-lavoro/548-approfondimenti/2618-industria-il-futuro-del-settore-sta-nelle-persone": {
+    "articleId": "industria-ticino-futuro-lavoro",
+    "ts": "2026-10-16T20:29:57.939Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/la1/programmi/informazione/patti-chiari/cadenazzo-si-accendono-semafori%e2%80%a6-e-proteste--4160668.html": {
+    "articleId": "semafori-cadenazzo-proteste-ustra",
+    "ts": "2026-10-16T21:09:58.071Z",
     "keyForm": 2
   }
 }

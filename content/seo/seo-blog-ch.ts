@@ -106384,6 +106384,196 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-svizzera-abbattimenti-lupi-2025': {
+    title: 'Lupo, abbattimenti più facili: ambientalisti contrari, contadini favorevoli',
+    description: 'Il Consiglio federale propone abbattimenti durante tutto l’anno. La consultazione sulla revisione della LCP si chiude oggi. Ambientalisti contrari anche',
+    keywords: 'frontalieri, ticino, svizzera, italia, lupo, abbattimenti, facili, ambientalisti',
+    ogTitle: 'Lupo in Svizzera: abbattimenti più facili nel 2025?',
+    ogDescription: 'Il Consiglio federale propone abbattimenti durante tutto l’anno.',
+    canonicalPath: '/articoli-svizzera/svizzera-abbattimenti-lupi-2025/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lupo, abbattimenti più facili: ambientalisti contrari, contadini favorevoli",
+      "description": "Il Consiglio federale propone abbattimenti durante tutto l’anno. La consultazione sulla revisione della LCP si chiude oggi. Ambientalisti contrari anche",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-svizzera-abbattimenti-lupi-2025.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Silhouette di un lupo che ulula alla luna sulle Alpi svizzere al tramonto"
+      },
+      "datePublished": "2026-10-16T14:12:01+00:00",
+      "dateModified": "2026-10-16T14:12:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/svizzera-abbattimenti-lupi-2025/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-stadler-rail-treno-idrogeno-sardegna': {
+    title: 'Stadler Rail testa il primo treno a idrogeno a scartamento ridotto',
+    description: 'Stadler Rail testa un treno a idrogeno in Svizzera Il convoglio è destinato alla Sardegna Il tracciato Hemishofen-Ramsen misura quasi 4 km Le verifiche',
+    keywords: 'frontalieri, ticino, svizzera, italia, stadler, rail, testa, primo',
+    ogTitle: 'Stadler Rail: primo treno a idrogeno a scartamento ridotto',
+    ogDescription: 'Stadler Rail testa un treno a idrogeno in Svizzera Il convoglio è destinato alla Sardegna Il tracciato Hemishofen-Ramsen misura quasi 4 km Le verifiche',
+    canonicalPath: '/articoli-svizzera/stadler-rail-treno-idrogeno-sardegna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stadler Rail testa il primo treno a idrogeno a scartamento ridotto",
+      "description": "Stadler Rail testa un treno a idrogeno in Svizzera Il convoglio è destinato alla Sardegna Il tracciato Hemishofen-Ramsen misura quasi 4 km Le verifiche",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-stadler-rail-treno-idrogeno-sardegna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-16T17:07:03+00:00",
+      "dateModified": "2026-10-16T17:07:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/stadler-rail-treno-idrogeno-sardegna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-crediti-bilaterali-iii-svizzera': {
+    title: 'Bilaterali III, primo via libera ai crediti da 3,48 miliardi',
+    description: '3,48 miliardi di franchi per il periodo 2030-2036 La FK-N vota: 14 favorevoli, 8 contrari, 3 astensioni Il Nazionale dovrebbe esaminare il dossier a dicembre',
+    keywords: 'frontalieri, ticino, svizzera, italia, bilaterali, primo, libera, crediti',
+    ogTitle: 'Bilaterali III: approvati crediti da 3,48 miliardi',
+    ogDescription: '3,48 miliardi di franchi per il periodo 2030-2036 La FK-N vota: 14 favorevoli, 8 contrari, 3 astensioni Il Nazionale dovrebbe esaminare il dossier a dicembre',
+    canonicalPath: '/articoli-svizzera/crediti-bilaterali-iii-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bilaterali III, primo via libera ai crediti da 3,48 miliardi",
+      "description": "3,48 miliardi di franchi per il periodo 2030-2036 La FK-N vota: 14 favorevoli, 8 contrari, 3 astensioni Il Nazionale dovrebbe esaminare il dossier a dicembre",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-crediti-bilaterali-iii-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il Parlamento federale svizzero a Berna, con la bandiera svizzera in primo piano."
+      },
+      "datePublished": "2026-10-16T18:35:02+00:00",
+      "dateModified": "2026-10-16T18:35:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/crediti-bilaterali-iii-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti': {
+    title: 'Il discount blocca aumenti 2027 e raddoppia sconto dipendenti',
+    description: 'Denner non prevede aumenti generali nel 2027 Lo sconto al personale passa dal 10% al 20% I contributi alla cassa pensioni salgono di 1,2 punti I salari minimi',
+    keywords: 'frontalieri, ticino, svizzera, italia, discount, blocca, aumenti, raddoppia',
+    ogTitle: 'Il discount blocca aumenti 2027 e raddoppia sconto',
+    ogDescription: 'Denner non prevede aumenti generali nel 2027 Lo sconto al personale passa dal 10% al 20% I contributi alla cassa pensioni salgono di 1,2 punti I salari minimi',
+    canonicalPath: '/articoli-svizzera/il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Il discount blocca aumenti 2027 e raddoppia sconto dipendenti",
+      "description": "Denner non prevede aumenti generali nel 2027 Lo sconto al personale passa dal 10% al 20% I contributi alla cassa pensioni salgono di 1,2 punti I salari minimi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Il discount blocca aumenti 2027 e raddoppia sconto dipendenti"
+      },
+      "datePublished": "2026-10-16T20:46:04+00:00",
+      "dateModified": "2026-10-16T20:46:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ia-assistente-shopping-svizzera': {
+    title: 'IA aiuta gli svizzeri nello shopping ma frena al pagamento',
+    description: 'Quasi il 70% degli svizzeri usa l\'IA per un acquisto Il 49% dice che l\'IA influenza la scelta Il 67% vuole mantenere il pagamento autonomo Solo il 17% accetta',
+    keywords: 'frontalieri, ticino, svizzera, italia, aiuta, svizzeri, nello, shopping',
+    ogTitle: 'IA aiuta gli svizzeri nello shopping ma frena al pagamento',
+    ogDescription: 'Quasi il 70% degli svizzeri usa l\'IA per un acquisto Il 49% dice che l\'IA influenza la scelta Il 67% vuole mantenere il pagamento autonomo Solo il 17% accetta',
+    canonicalPath: '/articoli-svizzera/ia-assistente-shopping-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "IA aiuta gli svizzeri nello shopping ma frena al pagamento",
+      "description": "Quasi il 70% degli svizzeri usa l'IA per un acquisto Il 49% dice che l'IA influenza la scelta Il 67% vuole mantenere il pagamento autonomo Solo il 17% accetta",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/frontaliere-acquisto-immobile-investimento-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cliente svizzero che utilizza un assistente IA su smartphone mentre fa shopping a Lugano"
+      },
+      "datePublished": "2026-10-16T21:25:25+00:00",
+      "dateModified": "2026-10-16T21:25:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ia-assistente-shopping-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

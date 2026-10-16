@@ -7,7 +7,7 @@
 import { eventsBasePathForCanton } from '../events-utils.mjs';
 import { clip, fmtDay, fmtNumber, httpsUrlOrNull, isoDayOf } from './format.mjs';
 import { BLOCK_THRESHOLDS, DAY_MS, freshnessProblem, inGroup, isObj, isRealDay, omitted } from './blocks-common.mjs';
-import { foldForMatch } from '../canton-section-profile.mjs';
+import { foldForMatch, sourceUrlCanonicalKey } from '../canton-section-profile.mjs';
 
 export const EVENTS_BLOCK_ID = 'prossimi-eventi';
 const EVENT_SOURCE_INDEX = Symbol('eventSourceIndex');
@@ -16,12 +16,10 @@ function foldedEventPart(value) {
   return foldForMatch(typeof value === 'string' ? value : '').replace(/[^a-z0-9]+/g, ' ').trim();
 }
 
-function eventUrlIdentity(value) {
+/** Applica alle URL evento la stessa canonicalizzazione verificata per le fonti. */
+function canonicalEventUrl(value) {
   const safeUrl = httpsUrlOrNull(value);
-  if (!safeUrl) return '';
-  const url = new URL(safeUrl);
-  url.hash = '';
-  return url.href;
+  return safeUrl ? sourceUrlCanonicalKey(safeUrl) : '';
 }
 
 function eventIdIdentity(value) {
@@ -30,9 +28,13 @@ function eventIdIdentity(value) {
   return '';
 }
 
+function compareEventSourceIndex(a, b) {
+  return a[EVENT_SOURCE_INDEX] - b[EVENT_SOURCE_INDEX];
+}
+
 /** URL o luogo identificano la copia; ID e indice separano gli omonimi senza luogo. */
 function eventIdentityKey(e) {
-  const url = eventUrlIdentity(e.url);
+  const url = canonicalEventUrl(e.url);
   const place = foldedEventPart(e.comune) || foldedEventPart(e.venue);
   const id = eventIdIdentity(e.id);
   const identity = url ? `url:${url}` : place ? `place:${place}` : id ? `id:${id}` : `record:${e[EVENT_SOURCE_INDEX]}`;
@@ -106,7 +108,8 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
       || b.startDate.localeCompare(a.startDate)
       || String(a.startTime ?? '').localeCompare(String(b.startTime ?? ''))
       || a.title.localeCompare(b.title)
-      || String(a.id ?? '').localeCompare(String(b.id ?? '')))
+      || String(a.id ?? '').localeCompare(String(b.id ?? ''))
+      || compareEventSourceIndex(a, b))
     // Lo stesso evento arriva da piu' agende: un URL esplicito prevale,
     // altrimenti il luogo conserva la deduplica esistente; senza luogo l'ID
     // separa gli omonimi. Record senza identificatori restano distinti.

@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "pensioni",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "c248a4f9404531037c58a1385d317c88e431658903a3fa9207257d701293256a",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "69756d70b8aae5581fd675a9f9c0ddd8a2c68b8e2a9ec1475edb48f0375f3877",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -156,7 +156,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -185,6 +185,7 @@
           "date": "2026-07-23T04:10:42.678Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Strumenti su tasse e pensione",
@@ -203,7 +204,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "SG",
@@ -332,7 +333,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -361,6 +362,7 @@
           "date": "2026-07-23T04:10:42.678Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tax and pension tools",
@@ -379,7 +381,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "SG",
@@ -508,7 +510,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -537,6 +539,7 @@
           "date": "2026-07-23T04:10:42.678Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tools zu Steuern und Vorsorge",
@@ -555,7 +558,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "SG",
@@ -684,7 +687,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -713,6 +716,7 @@
           "date": "2026-07-23T04:10:42.678Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Outils impôts et retraite",
@@ -731,7 +735,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

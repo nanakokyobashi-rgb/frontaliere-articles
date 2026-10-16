@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T00:00:55.142Z",
-  "contentHash": "79b2c7de84a86366d248b7fa50ad56aabe8663894bae6023ffbc25992986d13b",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "f7d09e4682a8f76d4ad40939f0d85cb59883534fb2ae768d96c3ed6fc026ee62",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-15T13:57:57.453Z",
+      "updatedAt": "2026-10-16T03:54:22.189Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "63",
+          "value": "64",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -95,10 +95,42 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/nidvaldo/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "PostAuto, nuovo orario in Nidvaldo dal 13 dicembre 2026",
+          "url": "/articoli-nidvaldo/postauto-orario-nidvaldo-2026/",
+          "excerpt": "Dal 13 dicembre 2026 cambia l'orario PostAuto: la comunicazione segnala modifiche all'offerta nei Cantoni Obvaldo e Nidvaldo.",
+          "date": "2026-10-10T17:33:10.930Z"
+        },
+        {
+          "title": "Lopper: illuminazione sul percorso tra Stansstad e Hergiswil",
+          "url": "/articoli-nidvaldo/lopper-luce-pedoni-bici/",
+          "excerpt": "Circa 1,2 km del percorso pedonale e ciclabile sul Lopper, tra Stansstad e Hergiswil, saranno illuminati. Lavori da ottobre, accensione a fine novembre 2026.",
+          "date": "2026-10-07T18:27:16.494Z"
+        },
+        {
+          "title": "Avviare un'attività nel Canton Nidvaldo: guida pratica",
+          "url": "/articoli-svizzera/avviare-attivita-canton-nidvaldo/",
+          "excerpt": "I passi necessari per la scelta della forma giuridica, l'iscrizione al registro di commercio e i costi fissi per avviare un'impresa nel Canton Nidvaldo.",
+          "date": "2026-09-16T02:04:47.424Z"
+        },
+        {
+          "title": "Naturalizzazione a Nidvaldo: requisiti e procedura",
+          "url": "/articoli-svizzera/naturalizzazione-nidvaldo-procedura/",
+          "excerpt": "Guida completa alla naturalizzazione ordinaria nel Cantone di Nidvaldo: anni richiesti, test, tasse e passaggi burocratici.",
+          "date": "2026-09-14T01:54:08.048Z"
+        },
+        {
+          "title": "Permesso C Canton Nidvaldo: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-c-nidvaldo-requisiti/",
+          "excerpt": "Guida completa al permesso di domicilio C nel Cantone di Nidvaldo: anni di residenza, criteri di integrazione e procedura.",
+          "date": "2026-09-14T00:24:26.273Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Nidvaldo",
@@ -109,7 +141,7 @@
           "url": "/eventi/nidvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "NW",
@@ -119,7 +151,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "63",
+          "value": "64",
           "note": "from the site’s events calendar"
         }
       ],
@@ -192,10 +224,42 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/nidwalden/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "PostAuto, new timetable in Nidwalden from December 13, 2026",
+          "url": "/en/nidwalden-articles/postauto-timetable-change-nidwalden-2026/",
+          "excerpt": "Starting December 13, 2026, the PostAuto timetable will change: the communication announces changes to the service offering in the cantons of Obwalden and Nidwalden.",
+          "date": "2026-10-10T17:33:10.930Z"
+        },
+        {
+          "title": "Lopper: lighting along the route between Stansstad and Hergiswil",
+          "url": "/en/nidwalden-articles/lopper-path-lighting/",
+          "excerpt": "Approximately 1,2 km of the pedestrian and cycle path on the Lopper, between Stansstad and Hergiswil, will be illuminated. Work starts in October, with the lights switched on in late November 2026.",
+          "date": "2026-10-07T18:27:16.494Z"
+        },
+        {
+          "title": "Starting a business in Canton Nidwalden: a practical guide",
+          "url": "/en/swiss-articles/starting-business-canton-nidwalden/",
+          "excerpt": "The necessary steps for the choice of legal form, registration in the commercial register and fixed costs to start a business in the Canton of Nidwalden.",
+          "date": "2026-09-16T02:04:47.424Z"
+        },
+        {
+          "title": "Naturalization in Nidwalden: requirements and procedure",
+          "url": "/en/swiss-articles/nidwalden-naturalization-procedure/",
+          "excerpt": "Complete guide to ordinary naturalization in the Canton of Nidwalden: required years, tests, taxes and bureaucratic steps.",
+          "date": "2026-09-14T01:54:08.048Z"
+        },
+        {
+          "title": "Permit C Canton Nidwalden: requirements and application",
+          "url": "/en/swiss-articles/permits-c-nidwalden-requirements/",
+          "excerpt": "Complete guide to residence permit C in the Canton of Nidwalden: years of residence, integration criteria and procedure.",
+          "date": "2026-09-14T00:24:26.273Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in Nidwalden",
@@ -206,7 +270,7 @@
           "url": "/en/events/nidwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "NW",
@@ -216,7 +280,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "63",
+          "value": "64",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -289,10 +353,42 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/nidwalden/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "PostAuto, neuer Fahrplan in Nidwalden ab 13. Dezember 2026",
+          "url": "/de/nidwalden-artikel/postauto-fahrplanwechsel-nidwalden-2026/",
+          "excerpt": "Ab dem 13. Dezember 2026 ändert sich der Fahrplan von PostAuto: Die Mitteilung weist auf Änderungen des Angebots in den Kantonen Obwalden und Nidwalden hin.",
+          "date": "2026-10-10T17:33:10.930Z"
+        },
+        {
+          "title": "Lopper: Beleuchtung der Strecke zwischen Stansstad und Hergiswil",
+          "url": "/de/nidwalden-artikel/lopper-wegbeleuchtung/",
+          "excerpt": "Rund 1,2 km des Fuß- und Radwegs auf dem Lopper zwischen Stansstad und Hergiswil werden beleuchtet. Arbeiten ab Oktober, Einschaltung Ende November 2026.",
+          "date": "2026-10-07T18:27:16.494Z"
+        },
+        {
+          "title": "Ein Unternehmen im Kanton Nidwalden gründen: Praxisleitfaden",
+          "url": "/de/schweiz-artikel/unternehmen-starten-kanton-nidwalden/",
+          "excerpt": "Die notwendigen Schritte für die Wahl der Rechtsform, die Eintragung ins Handelsregister und die Fixkosten für die Unternehmensgründung im Kanton Nidwalden.",
+          "date": "2026-09-16T02:04:47.424Z"
+        },
+        {
+          "title": "Einbürgerung in Nidwalden: Voraussetzungen und Verfahren",
+          "url": "/de/schweiz-artikel/einbuergerung-nidwalden-verfahren/",
+          "excerpt": "Vollständiger Leitfaden zur ordentlichen Einbürgerung im Kanton Nidwalden: erforderliche Jahre, Tests, Gebühren und bürokratische Schritte.",
+          "date": "2026-09-14T01:54:08.048Z"
+        },
+        {
+          "title": "C-Genehmigung Kanton Nidwalden: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/bewilligung-c-nidwalden-voraussetzungen/",
+          "excerpt": "Vollständiger Leitfaden zur Niederlassungsbewilligung C im Kanton Nidwalden: Aufenthaltsjahre, Integrationskriterien und Verfahren.",
+          "date": "2026-09-14T00:24:26.273Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen in Nidwalden",
@@ -303,7 +399,7 @@
           "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "NW",
@@ -313,7 +409,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "63",
+          "value": "64",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -386,10 +482,42 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/nidwald/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "PostAuto, nouvel horaire dans le canton de Nidwald à partir du 13 décembre 2026",
+          "url": "/fr/articles-nidwald/changement-horaire-postauto-nidwald-2026/",
+          "excerpt": "À partir du 13 décembre 2026, l’horaire de PostAuto change : la communication signale des modifications de l’offre dans les cantons d’Obwald et de Nidwald.",
+          "date": "2026-10-10T17:33:10.930Z"
+        },
+        {
+          "title": "Lopper : éclairage du parcours entre Stansstad et Hergiswil",
+          "url": "/fr/articles-nidwald/eclairage-piste-lopper/",
+          "excerpt": "Environ 1,2 km du parcours piétonnier et cyclable sur le Lopper, entre Stansstad et Hergiswil, seront éclairés. Travaux à partir d’octobre, mise en service fin novembre 2026.",
+          "date": "2026-10-07T18:27:16.494Z"
+        },
+        {
+          "title": "Démarrer une activité dans le canton de Nidwald : guide pratique",
+          "url": "/fr/articles-suisse/lancer-entreprise-canton-nidwald/",
+          "excerpt": "Les étapes nécessaires pour choisir la forme juridique, l'inscription au registre du commerce et les coûts fixes pour démarrer une entreprise dans le canton de Nidwald.",
+          "date": "2026-09-16T02:04:47.424Z"
+        },
+        {
+          "title": "Naturalisation à Nidwald : exigences et procédure",
+          "url": "/fr/articles-suisse/naturalisation-nidwald-procedure/",
+          "excerpt": "Guide complet de la naturalisation ordinaire dans le canton de Nidwald : années requises, tests, taxes et démarches administratives.",
+          "date": "2026-09-14T01:54:08.048Z"
+        },
+        {
+          "title": "Permis C canton Nidwald : exigences et demande",
+          "url": "/fr/articles-suisse/permis-c-nidwald-conditions/",
+          "excerpt": "Guide complet du permis de séjour C dans le canton de Nidwald : années de résidence, critères d'intégration et procédure.",
+          "date": "2026-09-14T00:24:26.273Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements à Nidwald",
@@ -400,7 +528,7 @@
           "url": "/fr/evenements/nidwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

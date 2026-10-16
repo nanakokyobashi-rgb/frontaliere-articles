@@ -20,8 +20,8 @@ import '../../host/cantonSectionsBootstrap.mjs';
  *   7b. verifica che gli /assets/ riscritti esistano sul CDN (non fatale)
  *
  * Va eseguito con tsx (importa i .ts di engine/ e host/) e UNA volta per
- * processo: imposta ASSET_CDN e TZ prima del primo import dell'engine, che li
- * legge a tempo di valutazione del modulo.
+ * processo: imposta ASSET_CDN e TZ prima di iniziare il render, così il fast
+ * publish usa gli stessi valori del build completo.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -70,41 +70,15 @@ function mergeGenericFallbacks(...groups) {
  * @returns {Promise<{ written: number, entries: any[], hubResult: any, extraPaths: string[], locales: string[], declaredImages: object, downloadedImageKeys: string[], imageFetchFailures: any[], imagePostcondition: object, genericFallbackArticles: any[], aggregatePagesAllowed: boolean }>}
  */
 export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', persistentReleasedArticles = [], beforeOffload, probeOnlineImage }) {
-  // build-plugins/constants.ts reads process.env.ASSET_CDN ONCE, at module
-  // top-level evaluation (an IIFE, not a function call re-read per use), to
-  // derive CDN_PRECONNECT_HINT (consumed by ogPagesPlugin.ts). the site repo's deploy workflow's
-  // build-locale job hardcodes ASSET_CDN: 'https://cdn.frontaliereticino.ch'
-  // for every real deploy build (including the `it` shard whose vite build
-  // renders this exact article HTML) — matching that here is required for
-  // byte-identity, not optional config. Must be set BEFORE the first import
-  // of ogPagesPlugin.ts/constants.ts below (module evaluation is cached —
-  // setting it later would be a no-op on a second call in the same process,
-  // and this script only ever does ONE render per invocation anyway).
-  // Without this, CDN_PRECONNECT_HINT is empty at render time, ogPagesPlugin
-  // never emits its own preconnect (normally placed right before the
-  // blog-chunk preload links), and step 7's offload script — which DOES get
-  // CDN_BASE below — then finds no existing same-origin preconnect to dedup
-  // against and injects a redundant preconnect+dns-prefetch pair of its own
-  // at the very top of <head> instead: a real, confirmed byte-identity
-  // divergence from production (see the site repo's article byte-identity check),
-  // not a live-staleness artifact — verified by tracing both code paths and
-  // reproducing the exact live vs. fast-path <head> diff.
+  // Use the same source-backed CDN base as image offload. The host bootstrap
+  // resolves its preconnect origin when the engine reads the contract, so the
+  // value does not depend on when host/constants.ts was imported.
   process.env.ASSET_CDN = CDN_BASE;
 
-  // Configure the site-shell contract. Must come AFTER the ASSET_CDN
-  // assignment above and BEFORE any engine import: host/constants.ts derives
-  // CDN_PRECONNECT_HINT from process.env.ASSET_CDN at module-evaluation time
-  // (an IIFE, not a per-use read), and the bootstrap imports it. Loading the
-  // bootstrap first leaves CDN_PRECONNECT_HINT empty, ogPagesPlugin then emits
-  // no preconnect, and step 7's offload script — finding no same-origin
-  // preconnect to dedup against — injects its own preconnect+dns-prefetch pair
-  // at the top of <head> instead. That is a real byte divergence from the full
-  // build, confirmed by diffing this script's output against the main repo's
-  // for the same article id.
-  //
-  // In the main repo this ordering is implicit: every `build-plugins/*` shim
-  // imports the bootstrap as a side effect. Here the host tree is ours and the
-  // wiring has to be explicit.
+  // Keep bootstrap and engine initialization explicit in the fast path. The
+  // resolver also supports an environment assigned after bootstrap import;
+  // this sequence mirrors the full-build configuration and keeps the chosen
+  // CDN visible before the engine captures its contract fields.
   await import('../../host/siteShellBootstrap.ts');
 
   // Pin the process timezone to match the CI runner.

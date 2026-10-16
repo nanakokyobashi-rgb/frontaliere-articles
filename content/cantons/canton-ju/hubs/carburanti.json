@@ -4,14 +4,14 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "a9d72079d0a9448f1917824613e5e4ba6cb94b2fbfec7a806f84046f85291639",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "aa3d83a8f7a67181a248aa47383ce1d741208ea02b8b2a4fbee1862358ae6038",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-15T12:02:33.404Z",
+      "updatedAt": "2026-10-16T11:53:35.759Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-22T10:51:00.000Z"
+      "carryUntilAt": "2026-10-23T11:00:08.000Z"
     }
   ],
   "locales": {
@@ -54,22 +54,42 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,257 EUR/l",
-              "detail": "media regionale: minimo 1,990 EUR/l, 153 stazioni rilevate",
-              "date": "2026-10-15T10:51:00.000Z"
+              "value": "2,260 EUR/l",
+              "detail": "media regionale: minimo 1,990 EUR/l, 148 stazioni rilevate",
+              "date": "2026-10-16T11:00:08.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,427 EUR/l",
-              "detail": "media regionale: minimo 2,185 EUR/l, 177 stazioni rilevate",
-              "date": "2026-10-15T11:10:00.000Z"
+              "value": "2,432 EUR/l",
+              "detail": "media regionale: minimo 2,208 EUR/l, 173 stazioni rilevate",
+              "date": "2026-10-16T11:00:08.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Le casse pensioni svizzere migliorano Q3 2026",
+          "url": "/articoli-giura/casse-pensioni-migliorano-terzo-trimestre/",
+          "excerpt": "L'indice WTW sale da 130,2% a 131,9% Il tasso di attualizzazione arriva all'1,65% Gli impegni pensionistici scendono del 6,5% Gli attivi dei piani calano",
+          "date": "2026-10-08T15:48:11.331Z"
+        },
+        {
+          "title": "Giura, fondo clima da 6,7 milioni annui dal 2028",
+          "url": "/articoli-giura/fondo-clima-giura-2028/",
+          "excerpt": "CHF 6,7 milioni annui dal 2028",
+          "date": "2026-10-08T10:13:59.862Z"
+        },
+        {
+          "title": "Disoccupazione in Giura scende al 4,2% a settembre 2026",
+          "url": "/articoli-giura/disoccupazione-giura-settembre-2026/",
+          "excerpt": "A fine settembre 2026 il Giura registra 2.573 iscritti all'ORP, di cui 1.663 disoccupati e 910 richiedenti non disoccupati; tasso al 4,2%, in calo di 0,1 punti su agosto e 0,9 su anno.",
+          "date": "2026-10-07T08:42:08.212Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -80,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "JU",
@@ -121,22 +141,41 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.257 EUR/l",
-              "detail": "regional average: lowest 1.990 EUR/l, 153 stations surveyed",
-              "date": "2026-10-15T10:51:00.000Z"
+              "value": "2.260 EUR/l",
+              "detail": "regional average: lowest 1.990 EUR/l, 148 stations surveyed",
+              "date": "2026-10-16T11:00:08.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.427 EUR/l",
-              "detail": "regional average: lowest 2.185 EUR/l, 177 stations surveyed",
-              "date": "2026-10-15T11:10:00.000Z"
+              "value": "2.432 EUR/l",
+              "detail": "regional average: lowest 2.208 EUR/l, 173 stations surveyed",
+              "date": "2026-10-16T11:00:08.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Swiss pension funds improve Q3 2026",
+          "url": "/en/jura-articles/swiss-pension-funds-improve-q3-2026/",
+          "excerpt": "WTW index rises from 130.2% to 131.9% The discount rate reaches 1.65% Pension commitments fall by 6.5% Plan assets fall by 0.6% Who → Willis Towers Watson (WTW)",
+          "date": "2026-10-08T15:48:11.331Z"
+        },
+        {
+          "title": "Jura, climate fund of 6,7 million annually from 2028",
+          "url": "/en/jura-articles/jura-climate-fund-2028/",
+          "date": "2026-10-08T10:13:59.862Z"
+        },
+        {
+          "title": "Unemployment in Jura falls to 4,2% in September 2026",
+          "url": "/en/jura-articles/unemployment-in-jura-falls-to-4-2-in-september-2026/",
+          "excerpt": "At the end of September 2026, the Jura recorded 2.573 people registered with the ORP, including 1.663 unemployed and 910 non-unemployed job seekers; rate at 4,2%, down 0,1 points from August and 0,9 year-on-year.",
+          "date": "2026-10-07T08:42:08.212Z"
+        }
+      ],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -147,7 +186,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "JU",
@@ -188,22 +227,41 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.257 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 153 erfasste Tankstellen",
-              "date": "2026-10-15T10:51:00.000Z"
+              "value": "2.260 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 148 erfasste Tankstellen",
+              "date": "2026-10-16T11:00:08.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.427 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.185 EUR/l, 177 erfasste Tankstellen",
-              "date": "2026-10-15T11:10:00.000Z"
+              "value": "2.432 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.208 EUR/l, 173 erfasste Tankstellen",
+              "date": "2026-10-16T11:00:08.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Schweizer Pensionskassen verbessern Q3 2026",
+          "url": "/de/jura-artikel/schweizer-pensionskassen-verbessern-q3-2026/",
+          "excerpt": "Der WTW-Index steigt von 130,2% auf 131,9% Der Abzinsungssatz beträgt bis zu 1,65% Pensionsverpflichtungen sinken um 6,5% Die Aktiva der Stockwerke sinken um",
+          "date": "2026-10-08T15:48:11.331Z"
+        },
+        {
+          "title": "Jura, Klimafonds von 6,7 Millionen jährlich ab 2028",
+          "url": "/de/jura-artikel/jura-klimafonds-2028/",
+          "date": "2026-10-08T10:13:59.862Z"
+        },
+        {
+          "title": "Arbeitslosigkeit im Jura sinkt im September 2026 auf 4,2%",
+          "url": "/de/jura-artikel/arbeitslosigkeit-im-jura-sinkt-im-september-2026-auf-4-2/",
+          "excerpt": "Ende September 2026 verzeichnet der Jura 2.573 beim ORP registrierte Personen, davon 1.663 Arbeitslose und 910 nicht arbeitslose Stellensuchende; die Quote liegt bei 4,2% und ist gegenüber August um 0,1 Punkte sowie…",
+          "date": "2026-10-07T08:42:08.212Z"
+        }
+      ],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -214,7 +272,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "JU",
@@ -255,22 +313,42 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,257 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 153 stations relevées",
-              "date": "2026-10-15T10:51:00.000Z"
+              "value": "2,260 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 148 stations relevées",
+              "date": "2026-10-16T11:00:08.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,427 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,185 EUR/l, 177 stations relevées",
-              "date": "2026-10-15T11:10:00.000Z"
+              "value": "2,432 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,208 EUR/l, 173 stations relevées",
+              "date": "2026-10-16T11:00:08.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Les caisses de pension suisses améliorent Q3 2026",
+          "url": "/fr/articles-jura/les-caisses-de-pension-suisses-ameliorent-q3-2026/",
+          "excerpt": "L'indice WTW passe de 130,2 % à 131,9 % Le taux d'actualisation atteint 1,65 % Les engagements de retraite baissent de 6,5 % Les actifs des plans baissent",
+          "date": "2026-10-08T15:48:11.331Z"
+        },
+        {
+          "title": "Jura, fonds climatique de 6,7 millions par an dès 2028",
+          "url": "/fr/articles-jura/fonds-climat-jura-2028/",
+          "excerpt": "CHF 6,7 millions par an dès 2028",
+          "date": "2026-10-08T10:13:59.862Z"
+        },
+        {
+          "title": "Le chômage dans le Jura baisse à 4,2% en septembre 2026",
+          "url": "/fr/articles-jura/le-chomage-dans-le-jura-baisse-a-4-2-en-septembre-2026/",
+          "excerpt": "Fin septembre 2026, le Jura compte 2.573 inscrits à l'ORP, dont 1.663 chômeurs et 910 demandeurs non chômeurs ; taux à 4,2%, en baisse de 0,1 point par rapport à août et de 0,9 sur un an.",
+          "date": "2026-10-07T08:42:08.212Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -281,7 +359,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

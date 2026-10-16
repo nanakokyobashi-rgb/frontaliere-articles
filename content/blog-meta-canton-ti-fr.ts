@@ -42,6 +42,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.title': 'Frontaliers : taxe santé et décret omnibus à 100%',
     'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.excerpt': 'Aucun travailleur n’a été appelé à payer la taxe sur la santé La contribution prévue va de 3% à 6% du revenu net À partir de janvier 2026 les travailleurs',
     'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.imageAlt': 'Vue panoramique sur Lugano et le lac par temps nuageux, symbole du canton du Tessin',
+    'blog.article.multa-rifiuti-bizzarone.title': 'Sac de déchets à Bizzarone : un Tessinois verbalisé',
+    'blog.article.multa-rifiuti-bizzarone.excerpt': 'À Bizzarone, la police locale a infligé une amende de 600 euros à un Tessinois pour des déchets abandonnés de l\'autre côté de la frontière.',
+    'blog.article.multa-rifiuti-bizzarone.imageAlt': 'Sac de déchets abandonné au bord d\'une route au Tessin',
 };
 
 export default blogMetaCantonTiFr;

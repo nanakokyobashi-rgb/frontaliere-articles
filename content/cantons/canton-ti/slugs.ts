@@ -16,6 +16,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'gottardo-quadri-cupra-berna': { it: 'gottardo-quadri-cupra-berna', en: 'gottardo-quadri-questions-bern-about-cupra', de: 'gotthard-quadri-befragt-bern-zur-cupra', fr: 'gothard-quadri-interroge-berne-sur-la-cupra' },
  'sovranita-fiscale-accordo-ue': { it: 'sovranita-fiscale-accordo-ue', en: 'fiscal-sovereignty-eu-agreement', de: 'steuerhoheit-eu-abkommen', fr: 'souverainete-fiscale-accord-ue' },
  'frontalieri-tassa-salute-omnibus-giugno-2026': { it: 'frontalieri-tassa-salute-omnibus-giugno-2026', en: 'commuters-health-tax-omnibus-june-2026', de: 'grenzganger-gesundheit-steuer-omnibus-juni-2026', fr: 'frontaliers-taxe-sante-omnibus-juin-2026' },
+ 'multa-rifiuti-bizzarone': { it: 'multa-rifiuti-bizzarone', en: 'bizzarone-waste-dumping-fine', de: 'busse-fuer-abfall-in-bizzarone', fr: 'amende-dechets-bizzarone' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

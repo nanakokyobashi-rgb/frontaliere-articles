@@ -24,11 +24,18 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { searchSafePrefix } from '../../scripts/lib/github-issue-creator.mjs';
+import {
+  failureIssueTitleForRecovery,
+  manualBlockerFailureTitle,
+  manualBlockerIssueKey,
+  manualBlockersFromFailureLog,
+} from '../../scripts/ci/lib/manual-blocker-issue-key.mjs';
+import { failureIssueIdentityFromTitle } from '../../scripts/ci/close-recovered-failure-issues.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MODULE_PATH = path.resolve(HERE, '../../scripts/ci/scan-failed-runs.mjs');
 const CREATOR_PATH = path.resolve(HERE, '../../scripts/lib/github-issue-creator.mjs');
-const { alreadyReported } = await import(MODULE_PATH);
+const { alreadyReported, deliverRunReports } = await import(MODULE_PATH);
 
 // ── Il `gh` finto ───────────────────────────────────────────────────
 //
@@ -186,4 +193,82 @@ test('il ledger transitorio deduplica la stessa run prima del conio per-workflow
     /const CRAWLER_TRANSIENT_LABEL = 'crawler-transient';/,
     'la label deve restare allineata al reporter che scrive il ledger',
   );
+});
+
+test('la firma Transport canonicalizza l’ordine e i duplicati, distinguendo set diversi', () => {
+  const run38712934478 = [
+    'transport\tverify\t2026-10-15T10:00:00Z  ⛔ generator/scripts/lib/evergreen-topic-generator.mjs: fixture accoppiato a 2 path non `identical` (generator/data/borderCrossings.ts, generator/data/municipalities.ts): una copia isolata mette rossa la PR di trasporto',
+  ].join('\n');
+  const run38879499928 = [
+    'transport\tverify\t2026-10-16T10:00:00Z  ⛔ scripts/ci/harvest-agent-lessons.mjs: fixture accoppiato a 3 path non `identical` (scripts/ci/close-recovered-failure-issues.mjs, scripts/ci/followup-resolution-match.mjs, scripts/ci/lib/constants.mjs): una copia isolata mette rossa la PR di trasporto',
+    'transport\tverify\t2026-10-16T10:00:01Z  \u001b[31m⛔ generator/scripts/lib/article-factuality-gates.mjs: fixture accoppiato a 1 path non `identical` (scripts/lib/first-name-recognition.mjs): una copia isolata mette rossa la PR di trasporto\u001b[0m',
+    'transport\tverify\t2026-10-16T10:00:02Z  ⛔ generator/scripts/lib/evergreen-topic-generator.mjs: fixture accoppiato a 2 path non `identical` (generator/data/borderCrossings.ts, generator/data/municipalities.ts): una copia isolata mette rossa la PR di trasporto',
+  ].join('\n');
+  const blockers38712934478 = manualBlockersFromFailureLog(run38712934478);
+  const blockers38879499928 = manualBlockersFromFailureLog(run38879499928);
+  assert.equal(blockers38712934478.length, 1);
+  assert.equal(blockers38879499928.length, 3);
+  assert.equal(manualBlockerIssueKey(blockers38879499928), manualBlockerIssueKey([...blockers38879499928].reverse()));
+  assert.equal(manualBlockerIssueKey(blockers38879499928), manualBlockerIssueKey([...blockers38879499928, blockers38879499928[0]]));
+  assert.notEqual(manualBlockerIssueKey(blockers38712934478), manualBlockerIssueKey(blockers38879499928));
+});
+
+test('la chiave manuale nel titolo resta leggibile al reconciler come workflow e causa', () => {
+  const blockers = ['z blocker', 'a blocker'];
+  const title = manualBlockerFailureTitle('Transport identical twins (pull-side)', blockers);
+  assert.match(title, /^Workflow Failure: manual:[a-f0-9]{16} \| Transport identical twins \(pull-side\)$/);
+  assert.deepEqual(failureIssueIdentityFromTitle(title), {
+    kind: 'Workflow',
+    workflowName: 'Transport identical twins (pull-side)',
+    issueKey: manualBlockerIssueKey(blockers),
+  });
+  assert.equal(failureIssueTitleForRecovery({
+    title,
+    workflow: 'Transport identical twins (pull-side)',
+    issueKey: manualBlockerIssueKey(blockers),
+  }), title);
+  assert.deepEqual(failureIssueIdentityFromTitle('Workflow Failure: Generate Blog Article'), {
+    kind: 'Workflow',
+    workflowName: 'Generate Blog Article',
+    issueKey: null,
+  });
+  assert.equal(manualBlockerIssueKey([]), null);
+  assert.equal(
+    manualBlockerFailureTitle('Transport identical twins (pull-side)', []),
+    'Workflow Failure: Transport identical twins (pull-side)',
+  );
+  assert.equal(failureIssueTitleForRecovery({ title: 'Workflow Failure: Generate Blog Article' }), 'Workflow Failure: Generate Blog Article');
+});
+
+test('due set Transport distinti non si deduplicano sulla stessa URL di run', () => {
+  const titleA = manualBlockerFailureTitle('Transport identical twins (pull-side)', ['blocker A']);
+  const titleB = manualBlockerFailureTitle('Transport identical twins (pull-side)', ['blocker B']);
+  const runUrl = 'https://github.com/o/r/actions/runs/2361';
+  setScenario({
+    open: [{ number: 2361, title: titleA }],
+    bodies: { 2361: `run ${runUrl}` },
+  });
+  assert.equal(alreadyReported(titleA, runUrl), true);
+  assert.equal(alreadyReported(titleB, runUrl), false);
+});
+
+test('il reporter usa il titolo con la chiave manuale e conserva il nome workflow', async () => {
+  const name = 'Transport identical twins (pull-side)';
+  const title = manualBlockerFailureTitle(name, ['blocker A', 'blocker B']);
+  let createdIssue;
+  setScenario({ open: [] });
+  const outcome = await deliverRunReports({
+    name,
+    run: { databaseId: 2362, url: 'https://github.com/o/r/actions/runs/2362' },
+    reports: [null],
+    genericTitle: title,
+    dryRun: false,
+    createIssue: async (issue) => {
+      createdIssue = issue;
+      return { persisted: true };
+    },
+  });
+  assert.equal(outcome.delivered, 1);
+  assert.equal(createdIssue.title, title);
+  assert.equal(createdIssue.workflow, name);
 });

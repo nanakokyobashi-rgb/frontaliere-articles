@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "40748ed2db5feb117128222b107aea991e98b9a4a51004d36e977bbdc0b95b00",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "4811c3b9a21c6ca8eac439f9a7952a45ac530aaf5c5cd1dbd949c21b07c80fe0",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -144,6 +144,7 @@
           "date": "2026-08-23T16:37:54.053Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolatore dello stipendio netto",
@@ -166,7 +167,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "ZG",
@@ -293,6 +294,7 @@
           "date": "2026-08-23T16:37:54.053Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Net salary calculator",
@@ -315,7 +317,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "ZG",
@@ -442,6 +444,7 @@
           "date": "2026-08-23T16:37:54.053Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Nettolohn-Rechner",
@@ -464,7 +467,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "ZG",
@@ -591,6 +594,7 @@
           "date": "2026-08-23T16:37:54.053Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calculateur de salaire net",
@@ -613,7 +617,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

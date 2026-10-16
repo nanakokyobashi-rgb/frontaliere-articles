@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T00:00:55.142Z",
-  "contentHash": "60894fb6b79e08287f8cd29b912d1048ca17fdbb6756b1434bf43faa5babb54a",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "492bcc35ee35813399116d0201fd8c947e9c125bb1fe11e1ea3ff2ae3ecd8bd1",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-15T13:57:57.453Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "15",
+          "value": "16",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -95,10 +95,36 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Deficit comunale di CHF 169'500 nel preventivo 2027",
+          "url": "/articoli-appenzello/deficit-comune-preventivo-2027/",
+          "excerpt": "Il preventivo 2027 prevede un disavanzo di CHF 169'500.",
+          "date": "2026-10-12T06:43:23.669Z"
+        },
+        {
+          "title": "Herisau: i due Appenzello chiedono più rapidità",
+          "url": "/articoli-appenzello/herisau-verkehr-appenzello/",
+          "excerpt": "Durante la consultazione su «Verkehr '45», Appenzello Esterno chiede di rivedere la proposta e contesta l'orientamento della parte ferroviaria.",
+          "date": "2026-10-10T06:33:48.256Z"
+        },
+        {
+          "title": "Heiden aumenta la tassa base sui rifiuti",
+          "url": "/articoli-appenzello/heiden-tassa-base-rifiuti/",
+          "excerpt": "A Heiden la tassa base sui rifiuti passa da 24 a 31,20 franchi l'anno per nucleo familiare e impresa.",
+          "date": "2026-10-08T18:18:38.682Z"
+        },
+        {
+          "title": "Appenzello Esterno: disoccupazione al 1,5% a settembre",
+          "url": "/articoli-appenzello/lavoro-ar-rav-settembre-2026/",
+          "excerpt": "A settembre 2026 in Appenzello Esterno gli iscritti al RAV scendono a 819, i disoccupati a 455 e il tasso passa dall'1,6% all'1,5%.",
+          "date": "2026-10-07T10:17:50.894Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi in Appenzello",
@@ -109,7 +135,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -119,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "15",
+          "value": "16",
           "note": "from the site’s events calendar"
         }
       ],
@@ -192,10 +218,36 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Municipal deficit of CHF 169'500 in the 2027 budget",
+          "url": "/en/appenzell-articles/municipal-deficit-budget-2027/",
+          "excerpt": "The 2027 budget estimates a deficit of CHF 169'500.",
+          "date": "2026-10-12T06:43:23.669Z"
+        },
+        {
+          "title": "Herisau: the two Appenzells call for greater speed",
+          "url": "/en/appenzell-articles/herisau-transport-appenzell/",
+          "excerpt": "During the consultation on «Verkehr '45», Appenzell Ausserrhoden calls for the proposal to be reviewed and challenges the direction of the railway component.",
+          "date": "2026-10-10T06:33:48.256Z"
+        },
+        {
+          "title": "Heiden increases the basic waste fee",
+          "url": "/en/appenzell-articles/heiden-base-waste-fee/",
+          "excerpt": "In Heiden, the basic waste fee is increasing from 24 to 31,20 francs per year per household and business.",
+          "date": "2026-10-08T18:18:38.682Z"
+        },
+        {
+          "title": "Appenzell Ausserrhoden: unemployment at 1,5% in September",
+          "url": "/en/appenzell-articles/appenzell-ausserrhoden-rav-september-2026/",
+          "excerpt": "In September 2026 in Appenzell Ausserrhoden, those registered with the RAV fell to 819, the unemployed to 455, and the rate went from 1.6% to 1.5%.",
+          "date": "2026-10-07T10:17:50.894Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in Appenzell",
@@ -206,7 +258,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -216,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "15",
+          "value": "16",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -289,10 +341,36 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Gemeindedefizit von CHF 169'500 im Voranschlag 2027",
+          "url": "/de/appenzell-artikel/gemeinde-defizit-voranschlag-2027/",
+          "excerpt": "Der Voranschlag 2027 sieht ein Defizit von CHF 169'500 vor.",
+          "date": "2026-10-12T06:43:23.669Z"
+        },
+        {
+          "title": "Herisau: Die beiden Appenzell fordern mehr Tempo",
+          "url": "/de/appenzell-artikel/herisau-verkehr-appenzell/",
+          "excerpt": "Während der Vernehmlassung zu «Verkehr '45» fordert Appenzell Ausserrhoden, den Vorschlag zu überarbeiten, und stellt die Ausrichtung des Bahnteils infrage.",
+          "date": "2026-10-10T06:33:48.256Z"
+        },
+        {
+          "title": "Heiden erhöht die Kehrichtgrundgebühr",
+          "url": "/de/appenzell-artikel/heiden-kehrichtgrundgebuehr/",
+          "excerpt": "In Heiden steigt die Kehrichtgrundgebühr von 24 auf 31,20 Franken pro Jahr für jeden Haushalt und jedes Unternehmen.",
+          "date": "2026-10-08T18:18:38.682Z"
+        },
+        {
+          "title": "Appenzell Ausserrhoden: Arbeitslosenquote im September bei 1,5%",
+          "url": "/de/appenzell-artikel/arbeitslosenstatistik-ar-september-2026/",
+          "excerpt": "Im September 2026 sinkt in Appenzell Ausserrhoden die Zahl der beim RAV registrierten Personen auf 819, die Zahl der Arbeitslosen auf 455, und die Quote geht von 1,6% auf 1,5% zurück.",
+          "date": "2026-10-07T10:17:50.894Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen im Appenzellerland",
@@ -303,7 +381,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -313,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "15",
+          "value": "16",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -386,10 +464,36 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Déficit communal de CHF 169'500 dans le budget 2027",
+          "url": "/fr/articles-appenzell/deficit-commune-budget-2027/",
+          "excerpt": "Le budget 2027 prévoit un déficit de CHF 169'500.",
+          "date": "2026-10-12T06:43:23.669Z"
+        },
+        {
+          "title": "Herisau : les deux Appenzell demandent plus de rapidité",
+          "url": "/fr/articles-appenzell/herisau-transports-appenzell/",
+          "excerpt": "Lors de la consultation sur «Verkehr '45», Appenzell Rhodes-Extérieures demande de revoir la proposition et conteste l'orientation de la partie ferroviaire.",
+          "date": "2026-10-10T06:33:48.256Z"
+        },
+        {
+          "title": "Heiden augmente la taxe de base sur les déchets",
+          "url": "/fr/articles-appenzell/heiden-taxe-base-dechets/",
+          "excerpt": "À Heiden, la taxe de base sur les déchets passe de 24 à 31,20 francs par an pour chaque ménage et entreprise.",
+          "date": "2026-10-08T18:18:38.682Z"
+        },
+        {
+          "title": "Appenzell Rhodes-Extérieures : le chômage à 1,5 % en septembre",
+          "url": "/fr/articles-appenzell/chomage-ar-septembre-2026/",
+          "excerpt": "En septembre 2026, dans le canton d'Appenzell Rhodes-Extérieures, les personnes inscrites à l'ORP diminuent à 819, les chômeurs à 455 et le taux passe de 1,6 % à 1,5 %.",
+          "date": "2026-10-07T10:17:50.894Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements en Appenzell",
@@ -400,7 +504,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

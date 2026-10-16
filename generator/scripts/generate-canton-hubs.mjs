@@ -41,7 +41,7 @@ import { CANTON_HUB_TOPIC_KEYS } from '../../engine/shared/cantonArticleSectionC
 import { activeCorpusCoreMap } from '../../scripts/lib/corpus-sections.mjs';
 import { writeJsonAtomic } from './lib/atomic-write-json.mjs';
 import { cantonSectionIds, cantonSectionProfile, loadCantonSectionProfiles, resolveCantonSectionGate } from './lib/canton-section-profile.mjs';
-import { loadCantonPool, loadSectionArticles, selectCuratedArticles } from './lib/canton-hubs/articles.mjs';
+import { loadCantonPool, loadSectionArticles, selectCuratedArticles, selectLatestCantonArticles } from './lib/canton-hubs/articles.mjs';
 import { parseCrossingNames } from './lib/canton-hubs/blocks-border-wait.mjs';
 import { buildHubFile, hubFilePath, hubFilePaths } from './lib/canton-hubs/build.mjs';
 import { loadTopicEngine } from './lib/canton-hubs/engine-loader.mjs';
@@ -188,7 +188,11 @@ export async function generateCantonHubs({ root = ROOT, sections, topics = [], d
         } catch {
           previous = null; // file corrotto: si riscrive da zero
         }
-        const built = buildHubFile({ section, topic, profile, datasets: data, curated: byTopic[topic], config, catalogue, cantonUrlSlugs, evergreenArticles, crossingNames, previous, nowMs });
+        const curated = byTopic[topic];
+        const latestCantonArticles = curated.length === 0
+          ? selectLatestCantonArticles({ pool, section, nowMs })
+          : [];
+        const built = buildHubFile({ section, topic, profile, datasets: data, curated, latestCantonArticles, config, catalogue, cantonUrlSlugs, evergreenArticles, crossingNames, previous, nowMs });
         if (built.changed && !dryRun) writeJsonAtomic(file, built.file);
         const it = built.file.locales.it;
         hubs.push({

@@ -26,7 +26,7 @@ import { sectionSourceSurfaces } from '../../scripts/lib/corpus-sections.mjs';
 import { sectionRebaseSurfaces } from '../../scripts/ci/rebase-section-args.mjs';
 import { cantonSectionIds, cantonSectionProfile } from '../scripts/lib/canton-section-profile.mjs';
 import { CANTON_GROUPS, buildCantonServices } from '../scripts/lib/canton-services-data.mjs';
-import { articleUrl, filterUniqueCuratedCandidates, keywordTopicScore, loadCantonPool, loadSectionArticles, selectCuratedArticles, sidecarQuality } from '../scripts/lib/canton-hubs/articles.mjs';
+import { articleUrl, filterUniqueCuratedCandidates, keywordTopicScore, loadCantonPool, loadSectionArticles, selectCuratedArticles, selectLatestCantonArticles, sidecarQuality } from '../scripts/lib/canton-hubs/articles.mjs';
 import { BLOCK_THRESHOLDS, CLOCK_SKEW_MS, DAY_MS, HOUR_MS, OMIT_CODES, dateMs, instantMs, isRealDay } from '../scripts/lib/canton-hubs/blocks-common.mjs';
 import { parseCrossingNames } from '../scripts/lib/canton-hubs/blocks-border-wait.mjs';
 import { shapeFuelBlock } from '../scripts/lib/canton-hubs/blocks-fuel.mjs';
@@ -39,6 +39,7 @@ import { loadTopicEngine } from '../scripts/lib/canton-hubs/engine-loader.mjs';
 import { HUB_LOCALES, fmtDay, fmtNumber, fmtPct } from '../scripts/lib/canton-hubs/format.mjs';
 import { buildHubLinks, jobsPagePath } from '../scripts/lib/canton-hubs/links.mjs';
 import { enabledCantonSections, generateCantonHubs, loadDatasets, parseArgs } from '../scripts/generate-canton-hubs.mjs';
+import { countCantonHubContentWords } from '../../scripts/lib/canton-hub-content.mjs';
 import { contract, freshenGeneratedAt, freshenRecording, freshenWindow } from './lib/rewire-contracts.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -277,7 +278,7 @@ test('canton-ti, canton-gr e canton-be: 6 hub ciascuno, 4 locali, forma del rend
       for (const locale of HUB_LOCALES) {
         const input = hub.locales[locale];
         // La firma di CantonTopicHubInput, campo per campo e nient'altro.
-        assert.deepEqual(Object.keys(input), ['canton', 'topic', 'locale', 'intro', 'keyFacts', 'dataBlocks', 'curatedArticles', 'links', 'updatedAt']);
+        assert.deepEqual(Object.keys(input), ['canton', 'topic', 'locale', 'intro', 'keyFacts', 'dataBlocks', 'curatedArticles', 'latestCantonArticles', 'links', 'updatedAt']);
         assert.equal(input.canton, canton);
         assert.equal(input.topic, topic);
         assert.equal(input.locale, locale);
@@ -286,6 +287,8 @@ test('canton-ti, canton-gr e canton-be: 6 hub ciascuno, 4 locali, forma del rend
         assert.ok(input.links.length >= 2, `${section}/${topic}/${locale}: almeno due strumenti`);
         assert.ok(input.keyFacts.length <= CONFIG.maxKeyFacts);
         assert.ok(input.curatedArticles.length <= CONFIG.maxCuratedArticles);
+        assert.ok(input.latestCantonArticles.length <= 5);
+        if (input.curatedArticles.length > 0) assert.deepEqual(input.latestCantonArticles, []);
       }
       // Stessa struttura in tutte le locali: stessi blocchi, stesso numero di righe, stesse news.
       for (const locale of HUB_LOCALES.slice(1)) {
@@ -293,6 +296,7 @@ test('canton-ti, canton-gr e canton-be: 6 hub ciascuno, 4 locali, forma del rend
         assert.deepEqual(hub.locales[locale].dataBlocks.map((b) => b.items.length), hub.locales.it.dataBlocks.map((b) => b.items.length));
         assert.equal(hub.locales[locale].keyFacts.length, hub.locales.it.keyFacts.length);
         assert.equal(hub.locales[locale].curatedArticles.length, hub.locales.it.curatedArticles.length);
+        assert.equal(hub.locales[locale].latestCantonArticles.length, hub.locales.it.latestCantonArticles.length);
       }
       assert.deepEqual(hub.blocks.map((b) => b.id), blockIds(hub));
     }
@@ -354,6 +358,7 @@ test('nessun noindex: ne\' nel file ne\' fra i campi, anche senza un solo blocco
         assert.deepEqual(input.dataBlocks, []);
         assert.deepEqual(input.keyFacts, []);
         assert.deepEqual(input.curatedArticles, []);
+        assert.deepEqual(input.latestCantonArticles, []);
         // La pagina si regge sull'intro evergreen: sopra la soglia del renderer.
         assert.doesNotThrow(() => validateHubInput(input));
         const words = input.intro.split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w)).length;
@@ -697,6 +702,23 @@ test('il bacino e\' la sezione del cantone piu\' frontaliere/svizzera etichettat
   assert.deepEqual(idsOf(be.byTopic.pensioni), ['avs-berna']);
 });
 
+test('il fallback neutrale privilegia la sezione cantonale e completa con le sezioni storiche', () => {
+  const articles = [
+    article('ti-own-older', 'canton-ti', 'Notizia propria meno recente', 'Notizia del cantone.', { days: 20 }),
+    article('ti-own-newer', 'canton-ti', 'Notizia propria recente', 'Notizia del cantone.', { days: 10 }),
+    article('ti-historical-1', 'frontaliere', 'Notizia storica uno', 'Notizia attribuita al cantone.', { cantons: ['TI'], days: 1 }),
+    article('ti-historical-2', 'svizzera', 'Notizia storica due', 'Notizia attribuita al cantone.', { cantons: ['TI'], days: 2 }),
+    article('ti-historical-3', 'frontaliere', 'Notizia storica tre', 'Notizia attribuita al cantone.', { cantons: ['TI'], days: 3 }),
+    article('ti-historical-4', 'svizzera', 'Notizia storica quattro', 'Notizia attribuita al cantone.', { cantons: ['TI'], days: 4 }),
+  ];
+  const root = writeCorpus(tmpRoot(), articles);
+  const pool = loadCantonPool(root, 'canton-ti');
+  assert.deepEqual(
+    idsOf(selectLatestCantonArticles({ pool, section: 'canton-ti', nowMs: NOW })),
+    ['ti-own-newer', 'ti-own-older', 'ti-historical-1', 'ti-historical-2', 'ti-historical-3'],
+  );
+});
+
 test('evidenza diretta multi-tema: una news entra in ogni hub pertinente e non in temi sfiorati', async () => {
   const multi = article(
     'ti-imposta-pensione',
@@ -849,6 +871,40 @@ test('eventi: URL e ID distinguono gli omonimi con luogo mancante o equivalente,
   assert.equal(items.length, 10, 'le otto identità omonime e i due controlli restano distinti');
   assert.equal(block.render('it').keyFacts[0].value, '10', 'record senza URL, luogo o ID restano distinti');
   assert.deepEqual(items.map((item) => item.url).filter(Boolean), [secondUrl, samePlaceFirstUrl, samePlaceSecondUrl, firstUrl]);
+});
+
+test('eventi: canonicalEventUrl deduplica equivalenti e conserva query, porta e path distinti', () => {
+  const tomorrow = new Date(NOW + DAY_MS).toISOString().slice(0, 10);
+  const ev = (id, url) => ({ id, title: 'Evento omonimo', startDate: tomorrow, canton: 'TI', url });
+  const dataset = {
+    generatedAt: new Date(NOW - HOUR_MS).toISOString(),
+    events: [
+      ev('a-query-order', 'https://events.example.ch/event/query?z=2&tag=second&tag=first#programma'),
+      ev('b-query-order', 'https://events.example.ch/event/query?tag=first&z=2&tag=second'),
+      ev('a-path-normalized', 'https://www.events.example.ch/event/Gra%CC%88del/#dettaglio'),
+      ev('b-path-normalized', 'https://events.example.ch/event/Gr%C3%A4del'),
+      ev('query-value-one', 'https://events.example.ch/event/semantic?id=one'),
+      ev('query-value-two', 'https://events.example.ch/event/semantic?id=two'),
+      ev('explicit-default-port', 'https://events.example.ch:443/event/port'),
+      ev('implicit-default-port', 'https://events.example.ch/event/port'),
+      ev('non-default-port', 'https://events.example.ch:8443/event/port'),
+      ev('path-one', 'https://events.example.ch/event/path-one'),
+      ev('path-two', 'https://events.example.ch/event/path-two'),
+    ],
+  };
+
+  const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
+  assert.equal(block.available, true);
+  const urls = block.render('it').items.map((item) => item.url);
+  assert.equal(urls.length, 8, 'due coppie canoniche collassano; query, porte e path significativi restano distinti');
+  assert.equal(urls.filter((url) => url.includes('/event/query?')).length, 1, 'l’ordine delle coppie query e il fragment non cambiano identità');
+  assert.equal(urls.filter((url) => /\/event\/(?:Gra|Gr%C3)/.test(url)).length, 1, 'www, slash finale e Unicode NFC del path si canonicalizzano');
+  assert.ok(urls.some((url) => url.endsWith('/event/semantic?id=one')));
+  assert.ok(urls.some((url) => url.endsWith('/event/semantic?id=two')));
+  assert.equal(urls.filter((url) => url.includes('/event/port')).length, 2, 'la porta HTTPS predefinita si normalizza e la porta non standard resta distinta');
+  assert.ok(urls.some((url) => url.includes(':8443/event/port')));
+  assert.ok(urls.some((url) => url.endsWith('/event/path-one')));
+  assert.ok(urls.some((url) => url.endsWith('/event/path-two')));
 });
 
 test('eventi degli hub: loadDatasets sanitizza il payload prima di shapeEventsBlock e conserva generatedAt', () => {
@@ -1228,7 +1284,7 @@ test('la soglia di parole e la firma dell\'hub sono quelle del renderer dell\'en
   };
   const built = buildOne('canton-ti', 'servizi').file.locales.it;
   assert.deepEqual(Object.keys(built), fieldsOf('CantonTopicHubInput'));
-  const allowed = { keyFacts: fieldsOf('CantonHubKeyFact'), dataBlocks: fieldsOf('CantonHubDataBlock'), links: fieldsOf('CantonHubLink'), curatedArticles: fieldsOf('CantonHubArticle') };
+  const allowed = { keyFacts: fieldsOf('CantonHubKeyFact'), dataBlocks: fieldsOf('CantonHubDataBlock'), links: fieldsOf('CantonHubLink'), curatedArticles: fieldsOf('CantonHubArticle'), latestCantonArticles: fieldsOf('CantonHubArticle') };
   for (const hubTopic of CANTON_HUB_TOPIC_KEYS) {
     const input = buildOne('canton-ti', hubTopic).file.locales.de;
     for (const [list, fields] of Object.entries(allowed)) {
@@ -1236,6 +1292,18 @@ test('la soglia di parole e la firma dell\'hub sono quelle del renderer dell\'en
     }
     for (const b of input.dataBlocks) for (const it of b.items) for (const key of Object.keys(it)) assert.ok(fieldsOf('CantonHubDataItem').includes(key));
   }
+});
+
+test('il conteggio della soglia usa solo la lista news visibile', () => {
+  const withThematic = {
+    intro: 'Uno due',
+    keyFacts: [],
+    dataBlocks: [],
+    curatedArticles: [{ title: 'Tema' }],
+    latestCantonArticles: [{ title: 'Fallback ignorato ignorato' }],
+  };
+  assert.equal(countCantonHubContentWords(withThematic), 3);
+  assert.equal(countCantonHubContentWords({ ...withThematic, curatedArticles: [] }), 5);
 });
 
 test('il producer rifiuta cio\' che il renderer rifiuterebbe o scarterebbe in silenzio', () => {

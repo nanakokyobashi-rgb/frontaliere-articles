@@ -1276,13 +1276,15 @@ function reconcileRequestedRetry(candidate, number) {
 // rientrerebbe nello stesso bucket vuoto. Una volta per HEAD: il marker
 // `requested` e' scritto PRIMA del rerun (fence durevole, come i percorsi
 // sopra); un rerun fallito scrive `failed` e riapre la HEAD al massimo
-// `MAX_RATE_LIMIT_FAILED_ATTEMPTS` volte. Questo rescuer usa il PAT, cioe' un
-// bucket diverso da quello esaurito.
+// `MAX_RATE_LIMIT_FAILED_ATTEMPTS` volte. Il percorso rate-limit-only gira
+// soltanto su cron/dispatch con il GITHUB_TOKEN del repo: il workflow_run
+// immediato non interroga un bucket che puo' essere ancora vuoto. Il rescuer
+// generale conserva il PAT per le sue altre recovery.
 //
 // Costo: una lettura delle run `tests` recenti (una pagina) e due letture (job +
 // annotation) per al massimo `MAX_RATE_LIMIT_INSPECTIONS` candidati, scelti a
-// rotazione. Gira sui tick cron/dispatch e sui completamenti di `tests` (il
-// workflow passa `REVIEW_RATE_LIMIT_SCAN`), non sugli altri ~70 trigger l'ora.
+// rotazione. Lo scan gira sui quattro tick cron orari e sul dispatch manuale,
+// non sui completamenti `tests` ne' sugli altri trigger ad alta frequenza.
 
 export const REVIEW_RATE_LIMIT_RETRY_MARKER = '<!-- REVIEW_RATE_LIMIT_RETRY:';
 const REVIEW_RATE_LIMIT_RETRY_RE = /<!-- REVIEW_RATE_LIMIT_RETRY:\s*(\{[\s\S]*?\})\s*-->/;
@@ -1591,12 +1593,59 @@ function rescueRateLimitedTests(prs, commentsByPr, nowSec = Math.floor(Date.now(
   return retried;
 }
 
+/**
+ * La modalità quota usa il token installation: prima di qualsiasi lettura
+ * costosa controlla i bucket dal solo endpoint `rate_limit`, che non consuma
+ * la quota che riporta. Se core o GraphQL sono a zero, lascia che il prossimo
+ * tick schedulato riprovi dopo il reset reale; stato incompleto resta rosso.
+ */
+function rateLimitOnlyHasAvailableBudget() {
+  const payload = parseJson(gh(['api', 'rate_limit']), null);
+  const resources = payload?.resources;
+  if (!resources || typeof resources !== 'object') {
+    throw new Error('stato `rate_limit` non leggibile nella modalita rate-limit-only');
+  }
+  const buckets = ['core', 'graphql'].map((resource) => {
+    const bucket = resources[resource];
+    const remaining = Number(bucket?.remaining);
+    const resetAt = Number(bucket?.reset);
+    if (!Number.isSafeInteger(remaining) || remaining < 0
+        || !Number.isSafeInteger(resetAt) || resetAt < 1) {
+      throw new Error(`bucket ${resource} non verificabile nella modalita rate-limit-only`);
+    }
+    return { resource, remaining, resetAt };
+  });
+  const exhausted = buckets.filter((bucket) => bucket.remaining === 0);
+  if (!exhausted.length) return true;
+  const resetAt = Math.max(...exhausted.map((bucket) => bucket.resetAt));
+  const resourcesText = exhausted.map((bucket) => bucket.resource).join(',');
+  console.log(
+    `review-quota-rescuer: bucket ${resourcesText} esaurito; reset reale `
+    + `${new Date(resetAt * 1000).toISOString()}, scan rinviato al prossimo tick; nessun rerun.`,
+  );
+  return false;
+}
+
 function main() {
   if (!REPO) {
     throw new Error('repository mancante: scansione non verificabile');
   }
+  if (process.env.REVIEW_RATE_LIMIT_ONLY === 'true' && !RATE_LIMIT_SCAN) {
+    console.log('review-quota-rescuer: rate-limit-only disattivato, nessuna lettura.');
+    return;
+  }
+  if (process.env.REVIEW_RATE_LIMIT_ONLY === 'true' && !process.env.GH_TOKEN) {
+    throw new Error('GH_TOKEN mancante nella modalita rate-limit-only; nessun fallback a credenziali utente');
+  }
+  if (process.env.REVIEW_RATE_LIMIT_ONLY === 'true' && !rateLimitOnlyHasAvailableBudget()) return;
 
   const { prs, commentsByPr } = listOpenPullRequestsWithComments();
+  if (process.env.REVIEW_RATE_LIMIT_ONLY === 'true') {
+    const rateLimitRetried = rescueRateLimitedTests(prs, commentsByPr);
+    console.log(`review-quota-rescuer: modalita rate-limit-only, retry richiesti=${rateLimitRetried}.`);
+    return;
+  }
+
   const candidates = collectReviewQuotaCandidates(prs, commentsByPr);
   const reviewRevisionByPr = new Map();
   for (const pr of prs) {

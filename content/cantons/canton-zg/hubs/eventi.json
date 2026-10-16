@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T00:00:55.142Z",
-  "contentHash": "aa0eebd534be63e055afc3649634de149fe2058d358c20eeca48b1ea3a4fec22",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "b1fd235a38889085a875631ba1173e0d9e3e79812170fb9792abe428947e94df",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-15T13:57:57.453Z",
+      "updatedAt": "2026-10-16T03:54:22.189Z",
       "keyFacts": 1
     }
   ],
@@ -95,10 +95,36 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Scuola Sternmatt 1: l'IA segna il 2026/27",
+          "url": "/articoli-zugo/scuola-sternmatt-ia-2026/",
+          "excerpt": "La scuola Sternmatt 1 affronta il 2026/27 mettendo al centro un uso responsabile dell'intelligenza artificiale nelle aule.",
+          "date": "2026-10-08T18:01:57.824Z"
+        },
+        {
+          "title": "Baar: rinnovo del Gemeinderat per il 2027–2030",
+          "url": "/articoli-zugo/baar-rinnovo-comunale-2027/",
+          "excerpt": "Baarer Zytig indica i risultati del 27 settembre e il rinnovo del Gemeinderat del 4 ottobre 2026: sette membri per il mandato 2027–2030.",
+          "date": "2026-10-08T17:50:07.603Z"
+        },
+        {
+          "title": "Zugo si prepara al rischio del coleottero giapponese",
+          "url": "/articoli-zugo/zug-rischio-coleottero-giapponese/",
+          "excerpt": "Focolai confermati a Zurigo, Lucerna e Svitto: Zugo rafforza la sorveglianza e chiede di controllare veicoli, bagagli e materiali.",
+          "date": "2026-10-07T09:02:17.902Z"
+        },
+        {
+          "title": "Zugo prevede avanzo 15,6 milioni nel 2027 con tasso al 52%",
+          "url": "/articoli-zugo/zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52/",
+          "excerpt": "Il preventivo 2027 indica un avanzo di CHF 15,6 milioni, entrate CHF 446,6 milioni e uscite CHF 431,1 milioni, con tasso fiscale richiesto al 52%.",
+          "date": "2026-10-07T08:41:12.746Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Zugo",
@@ -109,7 +135,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "ZG",
@@ -192,10 +218,36 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Sternmatt School 1: AI marks 2026/27",
+          "url": "/en/zug-articles/sternmatt-school-ai-2026/",
+          "excerpt": "The Sternmatt 1 school is entering 2026/27 with the responsible use of artificial intelligence in classrooms at the forefront.",
+          "date": "2026-10-08T18:01:57.824Z"
+        },
+        {
+          "title": "Baar: renewal of the Municipal Council for 2027–2030",
+          "url": "/en/zug-articles/baar-municipal-council-renewal/",
+          "excerpt": "Baarer Zytig reports the results of September 27 and the renewal of the Gemeinderat on October 4, 2026: seven members for the 2027–2030 term.",
+          "date": "2026-10-08T17:50:07.603Z"
+        },
+        {
+          "title": "Zug prepares for the risk of the Japanese beetle",
+          "url": "/en/zug-articles/zug-japanese-beetle-risk/",
+          "excerpt": "Confirmed outbreaks in Zurich, Lucerne and Schwyz: Zug strengthens surveillance and asks people to check vehicles, luggage and materials.",
+          "date": "2026-10-07T09:02:17.902Z"
+        },
+        {
+          "title": "Zug forecasts a surplus of 15,6 million in 2027 with the tax rate at 52%",
+          "url": "/en/zug-articles/zug-forecasts-a-surplus-of-15-6-million-in-2027-with-the-tax-rate-at-52/",
+          "excerpt": "The 2027 budget indicates a surplus of CHF 15,6 million, revenue of CHF 446,6 million and expenditure of CHF 431,1 million, with the requested tax rate at 52%.",
+          "date": "2026-10-07T08:41:12.746Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in the canton of Zug",
@@ -206,7 +258,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "ZG",
@@ -289,10 +341,36 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Schule Sternmatt 1: KI prägt das Schuljahr 2026/27",
+          "url": "/de/zug-artikel/sternmatt-schule-ki-2026/",
+          "excerpt": "Die Schule Sternmatt 1 nimmt das Schuljahr 2026/27 in Angriff und stellt dabei einen verantwortungsvollen Einsatz künstlicher Intelligenz in den Klassenzimmern in den Mittelpunkt.",
+          "date": "2026-10-08T18:01:57.824Z"
+        },
+        {
+          "title": "Baar: Erneuerung des Gemeinderats für 2027–2030",
+          "url": "/de/zug-artikel/baar-erneuerung-gemeinderat/",
+          "excerpt": "Baarer Zytig nennt die Ergebnisse vom 27.",
+          "date": "2026-10-08T17:50:07.603Z"
+        },
+        {
+          "title": "Zug bereitet sich auf das Risiko des Japankäfers vor",
+          "url": "/de/zug-artikel/zug-risiko-japankaefer/",
+          "excerpt": "Befallsherde in Zürich, Luzern und Schwyz bestätigt: Zug verstärkt die Überwachung und bittet darum, Fahrzeuge, Gepäck und Materialien zu kontrollieren.",
+          "date": "2026-10-07T09:02:17.902Z"
+        },
+        {
+          "title": "Zug erwartet 2027 bei einem Steuerfuss von 52% einen Überschuss von 15,6 Millionen",
+          "url": "/de/zug-artikel/zug-erwartet-2027-bei-einem-steuerfuss-von-52-einen-uberschuss-von-15-6/",
+          "excerpt": "Der Voranschlag 2027 weist einen Überschuss von CHF 15,6 Millionen, Einnahmen von CHF 446,6 Millionen und Ausgaben von CHF 431,1 Millionen aus, bei einem beantragten Steuerfuss von 52%.",
+          "date": "2026-10-07T08:41:12.746Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Zug",
@@ -303,7 +381,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "ZG",
@@ -386,10 +464,36 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-10-15T13:57:57.453Z"
+          "updatedAt": "2026-10-16T03:54:22.189Z"
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "École Sternmatt 1 : l’IA marque l’année 2026/27",
+          "url": "/fr/articles-zoug/ecole-sternmatt-ia-2026/",
+          "excerpt": "L’école Sternmatt 1 aborde l’année 2026/27 en mettant au centre un usage responsable de l’intelligence artificielle dans les salles de classe.",
+          "date": "2026-10-08T18:01:57.824Z"
+        },
+        {
+          "title": "Baar : renouvellement du Conseil municipal pour 2027–2030",
+          "url": "/fr/articles-zoug/baar-renouvellement-conseil/",
+          "excerpt": "Baarer Zytig indique les résultats du 27 septembre et le renouvellement du Conseil municipal du 4 octobre 2026 : sept membres pour le mandat 2027–2030.",
+          "date": "2026-10-08T17:50:07.603Z"
+        },
+        {
+          "title": "Zoug se prépare au risque du scarabée japonais",
+          "url": "/fr/articles-zoug/zoug-risque-scarabee-japonais/",
+          "excerpt": "Foyers confirmés à Zurich, Lucerne et Schwytz : Zoug renforce la surveillance et demande de contrôler les véhicules, les bagages et les matériaux.",
+          "date": "2026-10-07T09:02:17.902Z"
+        },
+        {
+          "title": "Zoug prévoit un excédent de 15,6 millions en 2027 avec un taux à 52 %",
+          "url": "/fr/articles-zoug/zoug-prevoit-un-excedent-de-15-6-millions-en-2027-avec-un-taux-a-52/",
+          "excerpt": "Le budget 2027 prévoit un excédent de CHF 15,6 millions, des recettes de CHF 446,6 millions et des dépenses de CHF 431,1 millions, avec un taux fiscal requis de 52 %.",
+          "date": "2026-10-07T08:41:12.746Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements dans le canton de Zoug",
@@ -400,7 +504,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T00:00:55.142Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T04:36:57.811Z",
-  "contentHash": "e05b11cbd11b3478256be5d6d3e9bc5a3f4194d32b175139fed62bbaa9f91573",
+  "updatedAt": "2026-10-16T18:38:32.543Z",
+  "contentHash": "c7843f65ea201ffb07ab3e94113ac9a89961e87d0de0a15e2ef52eaf0822cc39",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T12:13:19.434Z",
+      "updatedAt": "2026-10-16T11:58:12.009Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T10:09:31.602Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "31",
-          "note": "segnalazioni aggiornate: 15 ottobre 2026"
+          "note": "segnalazioni aggiornate: 16 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "96",
-          "note": "segnalazioni aggiornate: 15 ottobre 2026"
+          "value": "94",
+          "note": "segnalazioni aggiornate: 16 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -87,11 +87,11 @@
               "label": "Autobahnzubringer Bern-Neufeld Bern-Neufeld <-> Tiefenaustrasse tra Svincolo autostradale Bern-Neufeld E Svincolo autostradale Bern-Tiefenaustrasse Situazione: chiusa cantiere",
               "value": "Chiusura",
               "detail": "fine prevista: 19 ottobre 2026",
-              "date": "2026-08-14T06:17:00.000Z"
+              "date": "2026-08-19T05:15:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -158,6 +158,7 @@
           "date": "2026-08-13T00:11:48.311Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -168,7 +169,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-16T04:36:57.811Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "en": {
       "canton": "BE",
@@ -179,12 +180,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "31",
-          "note": "reports as of 15 October 2026"
+          "note": "reports as of 16 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "96",
-          "note": "reports as of 15 October 2026"
+          "value": "94",
+          "note": "reports as of 16 October 2026"
         }
       ],
       "dataBlocks": [
@@ -238,11 +239,11 @@
               "label": "Autobahnzubringer Bern-Neufeld Bern-Neufeld <-> Tiefenaustrasse tra Svincolo autostradale Bern-Neufeld E Svincolo autostradale Bern-Tiefenaustrasse Situazione: chiusa cantiere",
               "value": "Closure",
               "detail": "until 19 October 2026",
-              "date": "2026-08-14T06:17:00.000Z"
+              "date": "2026-08-19T05:15:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -280,7 +281,7 @@
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -309,6 +310,7 @@
           "date": "2026-08-13T00:11:48.311Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -319,7 +321,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-16T04:36:57.811Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "de": {
       "canton": "BE",
@@ -330,12 +332,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "31",
-          "note": "Meldungen vom 15. Oktober 2026"
+          "note": "Meldungen vom 16. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "96",
-          "note": "Meldungen vom 15. Oktober 2026"
+          "value": "94",
+          "note": "Meldungen vom 16. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -389,11 +391,11 @@
               "label": "Autobahnzubringer Bern-Neufeld Bern-Neufeld <-> Tiefenaustrasse zwischen Anschluss Bern-Neufeld und Anschluss Bern-Tiefenaustrasse Sachlage: Strecke gesperrt Baustelle",
               "value": "Sperrung",
               "detail": "bis 19. Oktober 2026",
-              "date": "2026-08-14T06:17:00.000Z"
+              "date": "2026-08-19T05:15:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -431,7 +433,7 @@
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -460,6 +462,7 @@
           "date": "2026-08-13T00:11:48.311Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -470,7 +473,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-16T04:36:57.811Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     },
     "fr": {
       "canton": "BE",
@@ -481,12 +484,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "31",
-          "note": "signalements au 15 octobre 2026"
+          "note": "signalements au 16 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "96",
-          "note": "signalements au 15 octobre 2026"
+          "value": "94",
+          "note": "signalements au 16 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -540,11 +543,11 @@
               "label": "Autobahnzubringer Bern-Neufeld Berne-Neufeld <-> Tiefenaustrasse entre Jonction autoroutière Berne-Neufeld et Jonction autoroutière Bern-Tiefenaustrasse Situation: fermé travaux",
               "value": "Fermeture",
               "detail": "jusqu’au 19 octobre 2026",
-              "date": "2026-08-14T06:17:00.000Z"
+              "date": "2026-08-19T05:15:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-16T11:58:12.009Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -582,7 +585,7 @@
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -611,6 +614,7 @@
           "date": "2026-08-13T00:11:48.311Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -621,7 +625,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-16T04:36:57.811Z"
+      "updatedAt": "2026-10-16T18:38:32.543Z"
     }
   }
 }

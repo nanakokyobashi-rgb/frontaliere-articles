@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "pensioni",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "d1c83ee09c476c2f6ce173a0c42f18f7f4e16be5603c9a8d3ad5097093687d04",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "2355e6b7741760f1e51f237adeeae654bafe57740b6c1d021c61e42620fbb7aa",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -166,7 +166,7 @@
               "url": "https://www.cpev.ch/actualites/lautorite-de-surveillance-accepte-le-retrait-du-plan-de-prevoyance-2027"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -195,6 +195,7 @@
           "date": "2026-08-10T00:29:07.213Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Strumenti su tasse e pensione",
@@ -213,7 +214,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "VD",
@@ -352,7 +353,7 @@
               "url": "https://www.cpev.ch/actualites/lautorite-de-surveillance-accepte-le-retrait-du-plan-de-prevoyance-2027"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -381,6 +382,7 @@
           "date": "2026-08-10T00:29:07.213Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tax and pension tools",
@@ -399,7 +401,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "VD",
@@ -538,7 +540,7 @@
               "url": "https://www.cpev.ch/actualites/lautorite-de-surveillance-accepte-le-retrait-du-plan-de-prevoyance-2027"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -567,6 +569,7 @@
           "date": "2026-08-10T00:29:07.213Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tools zu Steuern und Vorsorge",
@@ -585,7 +588,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "VD",
@@ -724,7 +727,7 @@
               "url": "https://www.cpev.ch/actualites/lautorite-de-surveillance-accepte-le-retrait-du-plan-de-prevoyance-2027"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -753,6 +756,7 @@
           "date": "2026-08-10T00:29:07.213Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Outils impôts et retraite",
@@ -771,7 +775,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

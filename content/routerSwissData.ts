@@ -2830,6 +2830,11 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'tre-milioni-lettere-digitali-posta': { it: 'tre-milioni-lettere-digitali-posta', en: 'three-million-digital-letters-swiss-post', de: 'drei-millionen-digitale-briefe-post-schweiz', fr: 'trois-millions-lettres-numeriques-poste-suisse' },
  'lupo-abbattimenti-facilitati': { it: 'lupo-abbattimenti-facilitati', en: 'wolf-culling-eased', de: 'wolf-abschuss-erleichtert', fr: 'loup-abattages-facilite' },
  'carburanti-svizzera-rincaro-settimanale': { it: 'carburanti-svizzera-rincaro-settimanale', en: 'swiss-fuel-prices-weekly-rise', de: 'schweizer-treibstoffpreise-wochenanstieg', fr: 'prix-carburants-suisse-hausse-semaine' },
+ 'svizzera-abbattimenti-lupi-2025': { it: 'svizzera-abbattimenti-lupi-2025', en: 'switzerland-wolf-culling-2025', de: 'schweiz-wolfsabschuss-2025', fr: 'suisse-abattage-loups-2025' },
+ 'stadler-rail-treno-idrogeno-sardegna': { it: 'stadler-rail-treno-idrogeno-sardegna', en: 'stadler-rail-hydrogen-train-sardinia', de: 'stadler-rail-wasserstoffzug-sardinien', fr: 'stadler-rail-train-hydrogene-sardaigne' },
+ 'crediti-bilaterali-iii-svizzera': { it: 'crediti-bilaterali-iii-svizzera', en: 'switzerland-bilateral-iii-credits', de: 'schweiz-bilaterale-iii-kredite', fr: 'credits-bilateraux-iii-suisse' },
+ 'il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti': { it: 'il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti', en: 'discount-retailer-freezes-2027-hikes-staff-discount-doubles', de: 'der-discounter-stoppt-lohnerhohungen-2027-und-verdoppelt-den-mitarbeiterrabatt', fr: 'le-discounter-bloque-les-augmentations-de-2027-et-double-la-remise-au-personnel' },
+ 'ia-assistente-shopping-svizzera': { it: 'ia-assistente-shopping-svizzera', en: 'ai-helps-swiss-shoppers-but-stalls-at-checkout', de: 'ki-hilft-den-schweizern-beim-einkaufen-bremst-aber-beim-bezahlen', fr: 'l-ia-aide-les-suisses-a-acheter-mais-freine-au-paiement' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

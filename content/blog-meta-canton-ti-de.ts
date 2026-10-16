@@ -42,6 +42,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.title': 'Grenzgänger: Gesundheitssteuer und Omnibus-Dekret zu 100%',
     'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.excerpt': 'Kein Arbeitnehmer wurde zur Zahlung der Gesundheitssteuer aufgefordert Der vorgesehene Beitrag reicht von 3% bis 6% des Nettoeinkommens Ab Januar 2026 die Arbeitnehmer',
     'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.imageAlt': 'Panoramaansicht von Lugano und dem See an einem bewölkten Tag, Symbol des Kantons Tessin',
+    'blog.article.multa-rifiuti-bizzarone.title': 'Müllsack in Bizzarone: Tessiner mit Geldstrafe belegt',
+    'blog.article.multa-rifiuti-bizzarone.excerpt': 'Am Bizzarone hat die örtliche Polizei einem Tessiner wegen jenseits der Grenze abgelagerter Abfälle eine Geldstrafe von 600 Euro auferlegt.',
+    'blog.article.multa-rifiuti-bizzarone.imageAlt': 'Abgestellter Abfallsack an einer Strasse im Tessin',
 };
 
 export default blogMetaCantonTiDe;

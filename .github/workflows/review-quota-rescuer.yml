@@ -10,9 +10,9 @@ name: Review quota rescuer (zero-Claude)
 # Dal 2026-09-25 c'e' un terzo arco: un run `tests` rosso perche' il bucket REST
 # orario del GITHUB_TOKEN era esaurito (annotation `[gh-rate-limit …]` o 403
 # «API rate limit exceeded» nel job richiesto) viene rilanciato UNA volta per
-# HEAD, e solo DOPO il reset. Quello scan legge le run `tests` e le annotation,
-# quindi gira sui tick cron/dispatch e sui completamenti di `tests` — dove un
-# rosso nuovo puo' comparire — e non sugli altri trigger (`REVIEW_RATE_LIMIT_SCAN`).
+# HEAD, e solo DOPO il reset. Quello scan legge le run `tests` e le annotation;
+# gira sui quattro tick cron orari e sul dispatch manuale, non sul completamento
+# immediato di `tests`, quando il bucket puo' essere ancora esaurito.
 #
 # Le letture e le mutazioni del rescuer usano l'identità operativa del corpus,
 # `GITHUB_PAT_NANAKO`, caricata dal solo ponte Remote Config. Il token automatico
@@ -47,6 +47,7 @@ on:
 
 permissions:
   contents: read
+  checks: read
   actions: write
   pull-requests: write
   issues: write
@@ -128,7 +129,8 @@ jobs:
         env:
           GH_REPO: ${{ github.repository }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
-          REVIEW_RATE_LIMIT_SCAN: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.path == '.github/workflows/tests.yml' }}
+          # La scansione quota ha uno step separato che usa solo GITHUB_TOKEN.
+          REVIEW_RATE_LIMIT_SCAN: 'false'
         run: |
           set -uo pipefail
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
@@ -140,6 +142,21 @@ jobs:
           rc=$?
           unset runtime_pat
           exit "$rc"
+
+      # Recovery della quota installation senza PAT personale/operativo. Eseguito
+      # dopo il rescuer generale, ma anche se quello fallisce (non dopo cancel).
+      # Il token built-in ha actions:write per il rerun e checks:read per annotation;
+      # il processo non eredita neppure GITHUB_PAT_NANAKO. Solo cron/dispatch:
+      # workflow_run arriva mentre il bucket puo' essere ancora esaurito.
+      - name: Retry tests runs red for GITHUB_TOKEN quota (built-in token only)
+        if: ${{ !cancelled() && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') }}
+        env:
+          GH_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+          REVIEW_RATE_LIMIT_ONLY: 'true'
+          REVIEW_RATE_LIMIT_SCAN: 'true'
+        run: env -u GITHUB_PAT_NANAKO node scripts/ci/review-quota-rescuer.mjs
 
       - name: Report rate-limit budget
         if: always()

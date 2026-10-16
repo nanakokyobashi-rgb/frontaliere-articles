@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "pensioni",
-  "updatedAt": "2026-10-15T00:06:40.869Z",
-  "contentHash": "86a83986a7bfb2bacd3b45ad90377e61ccc87708c4bb5f8d98478360cd98193e",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "07ee0d2f6ef6de6f1671e0c306c5a7893bdbce60e9b08110079ec54061eaf436",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T10:37:16.619Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -163,7 +163,7 @@
               "url": "https://www.pkbs.ch/de/news/news-detail/aspekte-ausgabe-juli-2026/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -204,6 +204,7 @@
           "date": "2026-07-23T05:15:40.596Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Strumenti su tasse e pensione",
@@ -222,7 +223,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -358,7 +359,7 @@
               "url": "https://www.pkbs.ch/de/news/news-detail/aspekte-ausgabe-juli-2026/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -399,6 +400,7 @@
           "date": "2026-07-23T05:15:40.596Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tax and pension tools",
@@ -417,7 +419,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -553,7 +555,7 @@
               "url": "https://www.pkbs.ch/de/news/news-detail/aspekte-ausgabe-juli-2026/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -594,6 +596,7 @@
           "date": "2026-07-23T05:15:40.596Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tools zu Steuern und Vorsorge",
@@ -612,7 +615,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -748,7 +751,7 @@
               "url": "https://www.pkbs.ch/de/news/news-detail/aspekte-ausgabe-juli-2026/"
             }
           ],
-          "updatedAt": "2026-10-14T10:37:16.619Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -789,6 +792,7 @@
           "date": "2026-07-23T05:15:40.596Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Outils impôts et retraite",
@@ -807,7 +811,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-15T00:06:40.869Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

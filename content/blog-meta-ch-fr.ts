@@ -8423,6 +8423,21 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.carburanti-svizzera-rincaro-settimanale.title': 'Essence et diesel en Suisse : +5 centimes par litre',
     'blog.article.carburanti-svizzera-rincaro-settimanale.excerpt': 'Essence 95 à 2,16 francs le litre Essence 98 à 2,27 francs le litre Diesel à 2,45 francs, à 1 centime du maximum annuel Hausse hebdomadaire → 5 centimes',
     'blog.article.carburanti-svizzera-rincaro-settimanale.imageAlt': 'Pompe à carburant dans une station-service suisse',
+    'blog.article.svizzera-abbattimenti-lupi-2025.title': 'Loup, abattages plus faciles : écologistes opposés, paysans favorables',
+    'blog.article.svizzera-abbattimenti-lupi-2025.excerpt': 'Le Conseil fédéral propose des abattages pendant toute l’année.',
+    'blog.article.svizzera-abbattimenti-lupi-2025.imageAlt': 'Silhouette d\'un loup hurlant à la lune dans les Alpes suisses au crépuscule',
+    'blog.article.stadler-rail-treno-idrogeno-sardegna.title': 'Stadler Rail teste le premier train à hydrogène à voie étroite',
+    'blog.article.stadler-rail-treno-idrogeno-sardegna.excerpt': 'Stadler Rail teste un train à hydrogène en Suisse Le convoi est destiné à la Sardaigne Le tracé Hemishofen-Ramsen mesure presque 4 km Les vérifications',
+    'blog.article.stadler-rail-treno-idrogeno-sardegna.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.crediti-bilaterali-iii-svizzera.title': 'Bilatérales III, premier feu vert aux crédits de 3,48 milliards',
+    'blog.article.crediti-bilaterali-iii-svizzera.excerpt': '3,48 milliards de francs pour la période 2030-2036 La FK-N vote: 14 voix pour, 8 contre, 3 abstentions Le Conseil national devrait examiner le dossier en décembre',
+    'blog.article.crediti-bilaterali-iii-svizzera.imageAlt': 'Le Parlement fédéral suisse à Berne, avec le drapeau suisse en premier plan.',
+    'blog.article.il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.title': 'Le discounter bloque les augmentations de 2027 et double la remise au personnel',
+    'blog.article.il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.excerpt': 'Denner ne prévoit pas d\'augmentations générales en 2027 La remise au personnel passe de 10 % à 20 % Les cotisations à la caisse de pension augmentent de 1,2 point Les salaires minimaux',
+    'blog.article.il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.imageAlt': 'Image éditoriale relative à: Il discount blocca aumenti 2027 e raddoppia sconto dipendenti',
+    'blog.article.ia-assistente-shopping-svizzera.title': 'L’IA aide les Suisses à acheter, mais freine au paiement',
+    'blog.article.ia-assistente-shopping-svizzera.excerpt': 'Près de 70% des Suisses utilisent l’IA pour un achat 49% disent que l’IA influence le choix 67% souhaitent conserver le paiement autonome Seuls 17% acceptent',
+    'blog.article.ia-assistente-shopping-svizzera.imageAlt': 'Client suisse utilisant un assistant IA sur son smartphone pendant qu\'il fait du shopping à Lugano',
 };
 
 export default blogMetaChFr;

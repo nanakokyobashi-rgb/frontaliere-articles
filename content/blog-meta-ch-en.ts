@@ -8423,6 +8423,21 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.carburanti-svizzera-rincaro-settimanale.title': 'Gasoline and diesel in Switzerland: +5 cents per liter',
     'blog.article.carburanti-svizzera-rincaro-settimanale.excerpt': '95 gasoline at 2,16 francs per liter 98 gasoline at 2,27 francs per liter Diesel at 2,45 francs, 1 centime below the annual high Weekly increase → 5 centimes',
     'blog.article.carburanti-svizzera-rincaro-settimanale.imageAlt': 'Fuel pump at a Swiss petrol station',
+    'blog.article.svizzera-abbattimenti-lupi-2025.title': 'Wolves, easier culls: environmentalists opposed, farmers in favor',
+    'blog.article.svizzera-abbattimenti-lupi-2025.excerpt': 'The Federal Council proposes culling throughout the year.',
+    'blog.article.svizzera-abbattimenti-lupi-2025.imageAlt': 'Silhouette of a wolf howling at the moon in the Swiss Alps at dusk',
+    'blog.article.stadler-rail-treno-idrogeno-sardegna.title': 'Stadler Rail tests the first narrow-gauge hydrogen train',
+    'blog.article.stadler-rail-treno-idrogeno-sardegna.excerpt': 'Stadler Rail tests a hydrogen train in Switzerland The train is intended for Sardinia The Hemishofen-Ramsen route measures almost 4 km The tests',
+    'blog.article.stadler-rail-treno-idrogeno-sardegna.imageAlt': 'Illustration generated for this article',
+    'blog.article.crediti-bilaterali-iii-svizzera.title': 'Bilaterali III, first green light for 3,48 billion in credits',
+    'blog.article.crediti-bilaterali-iii-svizzera.excerpt': '3.48 billion francs for the period 2030-2036 The FK-N votes: 14 in favor, 8 against, 3 abstentions The National Council should examine the dossier in December',
+    'blog.article.crediti-bilaterali-iii-svizzera.imageAlt': 'The Swiss Federal Parliament in Bern, with the Swiss flag prominently displayed.',
+    'blog.article.il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.title': 'Discount retailer freezes 2027 hikes, staff discount doubles',
+    'blog.article.il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.excerpt': 'Denner does not plan general increases in 2027 The employee discount rises from 10% to 20% Pension fund contributions increase by 1,2 points Minimum wages',
+    'blog.article.il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.imageAlt': 'Editorial image related to: Il discount blocca aumenti 2027 e raddoppia sconto dipendenti',
+    'blog.article.ia-assistente-shopping-svizzera.title': 'AI helps Swiss shoppers but stalls at checkout',
+    'blog.article.ia-assistente-shopping-svizzera.excerpt': 'Almost 70% of Swiss people use AI for a purchase 49% say that AI influences their choice 67% want to keep payment autonomous Only 17% accept',
+    'blog.article.ia-assistente-shopping-svizzera.imageAlt': 'Swiss customer using an AI assistant on a smartphone while shopping in Lugano',
 };
 
 export default blogMetaChEn;

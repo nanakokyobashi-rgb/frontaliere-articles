@@ -8423,6 +8423,21 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.carburanti-svizzera-rincaro-settimanale.title': 'Benzin und Diesel in der Schweiz: +5 Rappen pro Liter',
     'blog.article.carburanti-svizzera-rincaro-settimanale.excerpt': 'Benzin 95 bei 2,16 Franken pro Liter Benzin 98 bei 2,27 Franken pro Liter Diesel bei 2,45 Franken, 1 Rappen vom Jahresmaximum entfernt Wöchentlicher Anstieg → 5 Rappen',
     'blog.article.carburanti-svizzera-rincaro-settimanale.imageAlt': 'Zapfsäule an einer Schweizer Tankstelle',
+    'blog.article.svizzera-abbattimenti-lupi-2025.title': 'Wolf: Leichtere Abschüsse – Umweltschützer dagegen, Landwirte dafür',
+    'blog.article.svizzera-abbattimenti-lupi-2025.excerpt': 'Der Bundesrat schlägt Abschüsse das ganze Jahr über vor.',
+    'blog.article.svizzera-abbattimenti-lupi-2025.imageAlt': 'Silhouette eines Wolfes, der bei Sonnenuntergang in den Schweizer Alpen zum Mond heult',
+    'blog.article.stadler-rail-treno-idrogeno-sardegna.title': 'Stadler Rail testet den ersten Wasserstoffzug auf Schmalspur',
+    'blog.article.stadler-rail-treno-idrogeno-sardegna.excerpt': 'Stadler Rail testet einen Wasserstoffzug in der Schweiz Der Zug ist für Sardinien bestimmt Die Strecke Hemishofen-Ramsen ist fast 4 km lang Die Prüfungen',
+    'blog.article.stadler-rail-treno-idrogeno-sardegna.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.crediti-bilaterali-iii-svizzera.title': 'Bilaterale III, erste Zustimmung zu Krediten in Höhe von 3,48 Milliarden',
+    'blog.article.crediti-bilaterali-iii-svizzera.excerpt': '3,48 Milliarden Franken für den Zeitraum 2030-2036 Die FK-N stimmt ab: 14 Ja-Stimmen, 8 Nein-Stimmen, 3 Enthaltungen Der Nationalrat dürfte das Dossier im Dezember prüfen',
+    'blog.article.crediti-bilaterali-iii-svizzera.imageAlt': 'Das Schweizer Bundesparlament in Bern, mit der Schweizer Flagge im Vordergrund.',
+    'blog.article.il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.title': 'Der Discounter stoppt Lohnerhöhungen 2027 und verdoppelt den Mitarbeiterrabatt',
+    'blog.article.il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.excerpt': 'Denner sieht 2027 keine allgemeinen Lohnerhöhungen vor Der Personalrabatt steigt von 10% auf 20% Die Beiträge an die Pensionskasse steigen um 1,2 Punkte Die Mindestlöhne',
+    'blog.article.il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.imageAlt': 'Redaktionelles Bild zu: Il discount blocca aumenti 2027 e raddoppia sconto dipendenti',
+    'blog.article.ia-assistente-shopping-svizzera.title': 'KI hilft den Schweizern beim Einkaufen, bremst aber beim Bezahlen',
+    'blog.article.ia-assistente-shopping-svizzera.excerpt': 'Fast 70% der Schweizer nutzen KI für einen Einkauf 49% sagen, dass KI die Wahl beeinflusst 67% wollen weiterhin selbst bezahlen Nur 17% akzeptieren',
+    'blog.article.ia-assistente-shopping-svizzera.imageAlt': 'Schweizer Kunde, der einen KI‑Assistenten auf dem Smartphone beim Einkaufen in Lugano verwendet',
 };
 
 export default blogMetaChDe;
