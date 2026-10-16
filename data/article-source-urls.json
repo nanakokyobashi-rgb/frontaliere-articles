@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/disoccupazione%3a-tasso-al-3%2c0%25%2c-stabile-su-mese-ma-in-aumento-annuo/92014348": {
-    "articleId": "disoccupazione-stabile-ticino-2024",
-    "ts": "2026-09-07T07:20:24.696Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/newsblog/ticino-top/1948032/arredamento-progettazione-uffici-essere-aziende-ufficio-ticino": {
     "articleId": "arredamento-uffici-ticino-ai",
     "ts": "2026-09-07T07:42:37.357Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/ne-numeri-ne-percentuali-la-rabbia-dei-lavoratori-barco-di-saronno-dopo-lannuncio-del-trasferimento-in-cina/2710603": {
     "articleId": "saronno-produzione-cina-protesta",
     "ts": "2026-10-16T18:15:03.462Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/luganese/1957285/la-citta-non-risparmia-sui-giovani-in-formazione": {
+    "articleId": "indennita-stage-lugano-2027",
+    "ts": "2026-10-16T20:06:58.692Z",
     "keyForm": 2
   }
 }
