@@ -138,4 +138,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'frontalieri-tassa-salute-omnibus-giugno-2026',
+ category: 'fiscale',
+ date: '2026-10-16T03:10:47.550Z',
+ image: '/images/blog/article-frontalieri-tassa-salute-omnibus-giugno-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ];

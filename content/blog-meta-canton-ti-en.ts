@@ -39,6 +39,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.sovranita-fiscale-accordo-ue.title': 'EU agreement: risk of loss of tax sovereignty for Switzerland',
     'blog.article.sovranita-fiscale-accordo-ue.excerpt': 'On October 6, NZZ raises the tax alarm State aid can include tax breaks Confederation, cantons and municipalities involved Planned',
     'blog.article.sovranita-fiscale-accordo-ue.imageAlt': 'Federal Palace in Bellinzona, symbol of Swiss institutions',
+    'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.title': 'Cross-border workers: health tax and omnibus decree at 100%',
+    'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.excerpt': 'No worker has been asked to pay the health tax The expected contribution ranges from 3% to 6% of net income From January 2026, workers',
+    'blog.article.frontalieri-tassa-salute-omnibus-giugno-2026.imageAlt': 'Panoramic view of Lugano and the lake on a cloudy day, symbol of Canton Ticino',
 };
 
 export default blogMetaCantonTiEn;

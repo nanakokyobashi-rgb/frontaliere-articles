@@ -465,6 +465,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frontalieri-tassa-salute-omnibus-giugno-2026': {
+    title: 'Frontalieri: tassa salute e decreto omnibus al 100%',
+    description: 'Nessun lavoratore è stato chiamato a pagare la tassa sulla salute Il contributo previsto va dal 3% al 6% del reddito netto Dal gennaio 2026 i lavoratori',
+    keywords: 'frontalieri, ticino, svizzera, italia, tassa, salute, decreto, omnibus',
+    ogTitle: 'Frontalieri: tassa salute e decreto omnibus 2026',
+    ogDescription: 'Nessun lavoratore è stato chiamato a pagare la tassa sulla salute Il contributo previsto va dal 3% al 6% del reddito netto Dal gennaio 2026 i lavoratori',
+    canonicalPath: '/articoli-ticino/frontalieri-tassa-salute-omnibus-giugno-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri: tassa salute e decreto omnibus al 100%",
+      "description": "Nessun lavoratore è stato chiamato a pagare la tassa sulla salute Il contributo previsto va dal 3% al 6% del reddito netto Dal gennaio 2026 i lavoratori",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-frontalieri-tassa-salute-omnibus-giugno-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica su Lugano e il lago in una giornata nuvolosa, simbolo del Canton Ticino"
+      },
+      "datePublished": "2026-10-16T03:10:47+00:00",
+      "dateModified": "2026-10-16T03:10:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/frontalieri-tassa-salute-omnibus-giugno-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
