@@ -100,6 +100,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-16T21:09:58.069Z",
       "lastFailureAt": "2026-10-16T21:09:58.069Z"
+    },
+    {
+      "articleId": "ia-assistente-shopping-svizzera",
+      "title": "IA aiuta gli svizzeri nello shopping ma frena al pagamento",
+      "fallbackImage": "/images/blog/frontaliere-acquisto-immobile-investimento-svizzera.webp",
+      "reason": "All image providers failed for article-ia-assistente-shopping-svizzera: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration relevant to AI-ass",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T21:25:25.917Z",
+      "lastFailureAt": "2026-10-16T21:25:25.917Z"
     }
   ]
 }

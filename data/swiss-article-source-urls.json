@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4079150": {
-    "articleId": "ps-chiede-cpi-su-f35",
-    "ts": "2026-09-14T00:16:27.387Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/info/dialogo/%e2%80%9cla-benzina-oggi-costa-meno-che-negli-anni-%e2%80%9880%e2%80%9d--4072903.html": {
     "articleId": "benzina-oggi-costo-confronto",
     "ts": "2026-09-14T00:56:30.800Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1957324/denner-sconto-salari-aumenti-dipendenti-rinuncia": {
     "articleId": "il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti",
     "ts": "2026-10-16T20:46:04.833Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/svizzera/l%e2%80%99ia-aiuta-i-consumatori-svizzeri-a-fare-shopping--4164661.html": {
+    "articleId": "ia-assistente-shopping-svizzera",
+    "ts": "2026-10-16T21:25:25.919Z",
     "keyForm": 2
   }
 }
