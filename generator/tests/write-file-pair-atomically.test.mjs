@@ -106,6 +106,61 @@ test('un writer concorrente non sovrascrive uno snapshot preparato prima del com
   }
 });
 
+test('un writer non ripristina il journal committed di un writer precedente', () => {
+  const root = fixture();
+  try {
+    const first = path.join(root, 'first.txt');
+    const second = path.join(root, 'second.txt');
+    const lockFile = path.join(root, '.registry-pair-write.lock');
+    const journalFile = path.join(root, '.registry-pair-write.journal.json');
+    fs.writeFileSync(first, 'first-before');
+    fs.writeFileSync(second, 'second-before');
+
+    let committedJournal = null;
+    const captureCommittedJournal = {
+      ...fs,
+      renameSync(from, to) {
+        fs.renameSync(from, to);
+        if (path.basename(to) === path.basename(journalFile)) {
+          const journal = JSON.parse(fs.readFileSync(to, 'utf8'));
+          if (journal.phase === 'committed') committedJournal = fs.readFileSync(to, 'utf8');
+        }
+      },
+    };
+    writeFilePairAtomically([
+      { file: first, before: 'first-before', after: 'first-committed' },
+      { file: second, before: 'second-before', after: 'second-committed' },
+    ], { fsImpl: captureCommittedJournal });
+    assert.equal(typeof committedJournal, 'string');
+
+    let injected = false;
+    const previousCommitAppearsAfterLock = {
+      ...fs,
+      openSync(file, ...args) {
+        const fd = fs.openSync(file, ...args);
+        if (path.basename(file) === path.basename(lockFile) && !injected) {
+          fs.writeFileSync(path.join(path.dirname(file), path.basename(journalFile)), committedJournal, 'utf8');
+          injected = true;
+        }
+        return fd;
+      },
+    };
+
+    assert.throws(() => writeFilePairAtomically([
+      { file: first, before: 'first-committed', after: 'first-next' },
+      { file: second, before: 'second-committed', after: 'second-next' },
+    ], { fsImpl: previousCommitAppearsAfterLock }), /journal della coppia presente/u);
+
+    assert.equal(injected, true);
+    assert.equal(fs.readFileSync(first, 'utf8'), 'first-committed');
+    assert.equal(fs.readFileSync(second, 'utf8'), 'second-committed');
+    assert.equal(fs.readFileSync(journalFile, 'utf8'), committedJournal);
+    assert.equal(fs.existsSync(lockFile), false);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('un writer singolo condivide lock e controllo snapshot con il writer di coppia', () => {
   const root = fixture();
   try {

@@ -560,6 +560,7 @@ export function writeFilePairAtomically(changes, { fsImpl = fs } = {}) {
   const writerHost = hostname();
   const journal = makeJournal(directory, transactionId, process.pid, writerHost, canonical, staged);
   let journalPersisted = false;
+  let journalWriteAttempted = false;
   let transactionError;
   try {
     assertNoPendingRecovery(fsImpl, directory);
@@ -570,6 +571,7 @@ export function writeFilePairAtomically(changes, { fsImpl = fs } = {}) {
         throw new Error(`writeFilePairAtomically: snapshot obsoleto per ${change.file}; rileggi e ripeti il backfill`);
       }
     }
+    journalWriteAttempted = true;
     writeJsonAtomically(fsImpl, journalFile, journal);
     journalPersisted = true;
     writeStagedFiles(fsImpl, staged);
@@ -585,10 +587,13 @@ export function writeFilePairAtomically(changes, { fsImpl = fs } = {}) {
   if (transactionError) {
     const relatedErrors = [];
     let unreadablePersistedJournal = false;
-    if (!journalPersisted && pathExists(fsImpl, journalFile)) {
+    if (!journalPersisted && journalWriteAttempted && pathExists(fsImpl, journalFile)) {
       try {
-        Object.assign(journal, readJournal(fsImpl, directory));
-        journalPersisted = true;
+        const existingJournal = readJournal(fsImpl, directory);
+        if (existingJournal.transactionId === transactionId) {
+          Object.assign(journal, existingJournal);
+          journalPersisted = true;
+        }
       } catch (error) {
         relatedErrors.push(error);
         unreadablePersistedJournal = true;
@@ -609,7 +614,7 @@ export function writeFilePairAtomically(changes, { fsImpl = fs } = {}) {
         relatedErrors.push(error);
       }
     }
-    if (!journalPersisted && journalTemporaryNames(fsImpl, directory).length > 0) {
+    if (journalWriteAttempted && !journalPersisted && journalTemporaryNames(fsImpl, directory).length > 0) {
       relatedErrors.push(new Error(`journal temporaneo residuo in ${directory}; lock mantenuto`));
       safeToRelease = false;
     }
