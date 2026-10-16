@@ -2,7 +2,7 @@
 /**
  * check-post-rebase-uniqueness.mjs — dopo il rebase e PRIMA del push, ricontrolla
  * che l'articolo appena generato resti unico nel corpus su cui sta per atterrare
- * per id, fonte e contenuto.
+ * per id, fonte, argomento e contenuto.
  *
  * Uso (dalla radice del repo, a rebase concluso):
  *   node scripts/ci/check-post-rebase-uniqueness.mjs --produced <sha> [--against <rev>]
@@ -19,7 +19,7 @@
  *
  * ── Perche' dopo il rebase (D18, rischio (e).2 di architecture.md) ──────────
  *
- * Il generatore garantisce due invarianti leggendo il working tree A INIZIO run:
+ * Il generatore garantisce quattro invarianti leggendo il working tree A INIZIO run:
  *
  *   1. un id e' unico in TUTTE le sezioni (`getAllArticleIds` in
  *      create-article.mjs): i namespace `blog-{id}` e `blog.article.{id}.*` sono
@@ -30,7 +30,9 @@
  *      vince chi la registra per prima. Dentro la PROPRIA sezione la stessa
  *      fonte e' bloccata finche' la voce e' viva (`SOURCE_URL_TTL_DAYS`):
  *      `isSourceUrlAlreadyUsed` guarda la sezione attiva per prima.
- *   3. il titolo e l'excerpt del nuovo articolo non duplicano un articolo che
+ *   3. il nuovo articolo non ripete un argomento guida già coperto nella
+ *      finestra condivisa con TOPIC_COVERAGE_WINDOW_DAYS;
+ *   4. il titolo e l'excerpt del nuovo articolo non duplicano un articolo che
  *      un altro writer ha pubblicato nel frattempo. Qui viene richiamato il
  *      detector multi-segnale di `create-article.mjs`, non una copia delle sue
  *      soglie.
@@ -41,8 +43,8 @@
  * `--merge-registry` unisce due record con lo stesso id se stanno in registri
  * DIVERSI, e il ledger URL→id e' bookkeeping (si prende upstream), quindi la
  * voce di questo run puo' sparire proprio mentre la stessa URL e' appena stata
- * registrata dall'altra sezione. Questo script rifa' le due domande sullo
- * stato post-rebase.
+ * registrata dall'altra sezione. Questo script rifà le quattro domande sullo
+ * stato post-rebase, usando anche le date del registro per la finestra topic.
  *
  * ── Cosa considera «nuovo» ─────────────────────────────────────────────────
  *
@@ -101,6 +103,8 @@ import { findCrossSectionSourceDuplicate } from '../../generator/scripts/lib/cro
 import { findContentDuplicate } from '../../generator/scripts/lib/article-content-duplicate.mjs';
 import { metaFieldRegex, unescapeTsValue } from '../../generator/scripts/lib/meta-field-regex.mjs';
 import { itemIdentityOf, ledgerArticleIds, legacyNewsUrlKey, readLedgerEntry, SOURCE_URL_TTL_DAYS } from '../../generator/scripts/lib/source-url-ledger.mjs';
+import { findRecentTopicCoverage } from '../../generator/scripts/lib/topic-coverage-guard.mjs';
+import { readTopLevelString, scanTopLevelArticleRecords } from '../../scripts/lib/article-registry-reader.mjs';
 import { SECTIONS as SECTION_SURFACES } from '../lib/article-surfaces.mjs';
 
 export const VIOLATION_MARKER = 'POST_REBASE_UNIQUENESS_VIOLATION';
@@ -172,6 +176,15 @@ function parseLedger(text, label) {
   return parsed;
 }
 
+function registryDatesById(text) {
+  const dates = new Map();
+  for (const record of scanTopLevelArticleRecords(text ?? '')) {
+    const date = readTopLevelString(record, 'date');
+    if (date && !dates.has(record.id)) dates.set(record.id, date);
+  }
+  return dates;
+}
+
 function parseArticleMeta(text, label) {
   if (text == null) return { articles: {}, titleIds: [], excerptIds: [] };
   const titleMatches = [...text.matchAll(metaFieldRegex('title'))];
@@ -235,7 +248,7 @@ function assertArticleMetaCoverage({ slugIds, registryIds, articles, titleIds, e
  * Lo stato di tutte le sezioni a una revisione.
  *
  * @param {(path: string) => string|null} readAt lettore del file a quella revisione; null = assente.
- * @returns {Record<string, {slugIds: string[], registryIds: string[], articles: Record<string, {id: string, title: string, excerpt: string}>, ledger: Record<string, unknown>}>}
+ * @returns {Record<string, {slugIds: string[], registryIds: string[], articles: Record<string, {id: string, title: string, excerpt: string, date: string|null}>, ledger: Record<string, unknown>}>}
  */
 export function snapshotSections(surfaces, readAt, label) {
   // `null` = il path non c'e' (sezione ancora vuota): legittimo. Un file che
@@ -251,10 +264,15 @@ export function snapshotSections(surfaces, readAt, label) {
   const out = {};
   for (const s of surfaces) {
     const slugIds = slugIdsOf(read(s.slugDataFile));
-    const registryIds = registryIdsOf(read(s.registryFile));
+    const registrySource = read(s.registryFile);
+    const registryIds = registryIdsOf(registrySource);
+    const dates = registryDatesById(registrySource);
     const parsedMeta = parseArticleMeta(read(s.metaFile), `${label}:${s.metaFile}`);
-    const { articles } = parsedMeta;
     assertArticleMetaCoverage({ slugIds, registryIds, ...parsedMeta }, `${label}:${s.metaFile}`);
+    const articles = Object.fromEntries(Object.entries(parsedMeta.articles).map(([id, article]) => [
+      id,
+      { ...article, date: dates.get(id) ?? null },
+    ]));
     out[s.section] = {
       slugIds,
       registryIds,
@@ -272,11 +290,15 @@ const idsOf = (snap) => new Set([...(snap?.slugIds ?? []), ...(snap?.registryIds
  *
  * @param {{producedBase: object, produced: object, against: object}} snapshots
  *        mappe sezione → {slugIds, registryIds, articles, ledger} da `snapshotSections`.
- * @param {{now?: number}} [options] l'istante rispetto a cui una voce del
- *        ledger della sezione attiva e' viva o scaduta (default: adesso).
+ * @param {{now?: number, topicWindowDays?: number}} [options] l'istante per
+ *        la scadenza del ledger e la finestra topic; se omessa, quest'ultima
+ *        usa la configurazione condivisa col generatore.
  * @returns {{violations: Array<object>, newIds: Array<{section: string, id: string}>, newSourceUrls: Array<{section: string, url: string, articleId: string}>, contentChecks: number}}
  */
-export function findPostRebaseViolations({ producedBase, produced, against }, { now = Date.now() } = {}) {
+export function findPostRebaseViolations(
+  { producedBase, produced, against },
+  { now = Date.now(), topicWindowDays } = {},
+) {
   const sections = Object.keys(produced);
   const violations = [];
   const newIds = [];
@@ -323,6 +345,19 @@ export function findPostRebaseViolations({ producedBase, produced, against }, { 
               id,
               otherId: duplicate.existing.id,
               signals: duplicate.signals.join('|'),
+            });
+          }
+          const topicOptions = { now };
+          if (Number.isFinite(topicWindowDays)) topicOptions.windowDays = topicWindowDays;
+          const topicDuplicate = findRecentTopicCoverage(candidate, againstArticles, topicOptions);
+          if (topicDuplicate) {
+            violations.push({
+              kind: 'topic-coverage',
+              section,
+              id,
+              otherId: topicDuplicate.existingId,
+              topicKind: topicDuplicate.kind,
+              topicValue: topicDuplicate.value,
             });
           }
         }
@@ -404,6 +439,7 @@ export function formatViolation(v) {
   if (v.occurrences) parts.push(`occurrences=${v.occurrences}`);
   if (v.url) parts.push(`url=${v.url}`);
   if (v.signals) parts.push(`signals=${v.signals.replace(/\s+/g, '_')}`);
+  if (v.topicKind && v.topicValue) parts.push(`topic=${v.topicKind}:${v.topicValue}`);
   return `${VIOLATION_MARKER} ${parts.join(' ')}`;
 }
 
