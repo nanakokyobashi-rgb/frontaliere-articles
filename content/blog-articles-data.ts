@@ -44870,6 +44870,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'masha-orso-teatro-saronno',
+ category: 'novita',
+ date: '2026-10-16T09:13:02.988Z',
+ image: '/images/blog/article-masha-orso-teatro-saronno.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
