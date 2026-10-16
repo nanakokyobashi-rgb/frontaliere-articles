@@ -13347,6 +13347,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.saronno-produzione-cina-protesta.title': 'Barco di Saronno: over 50% of production goes to China',
     'blog.article.saronno-produzione-cina-protesta.excerpt': 'More than 50% shift to the Suzhou site 40% impact on the production area 30% impact on the white-collar area Strike, garrison and agitation',
     'blog.article.saronno-produzione-cina-protesta.imageAlt': 'Illustration generated for this article',
+    'blog.article.indennita-stage-lugano-2027.title': 'Lugano: new allowance for internships in 2027',
+    'blog.article.indennita-stage-lugano-2027.excerpt': 'One-off allowance: 2,000 francs gross for 12 months Budget 2027: 700,000 to 755,000 francs Estimated lower cost: 30,700 francs 43% of the budget is',
+    'blog.article.indennita-stage-lugano-2027.imageAlt': 'A young professional\'s desk with a laptop, notebook, and coffee, overlooking Lugano from Monte Brè',
+    'blog.article.industria-ticino-futuro-lavoro.title': 'Industry in Ticino: staff shortages and innovation',
+    'blog.article.industria-ticino-futuro-lavoro.excerpt': 'In the last 18 months, numerous layoffs in Ticino’s industry Fifteen collective redundancies recorded over the past year and a half Approximately 16 thousand',
+    'blog.article.industria-ticino-futuro-lavoro.imageAlt': 'Modern industrial plant in Ticino with qualified operators',
+    'blog.article.semafori-cadenazzo-proteste-ustra.title': 'PATTI CHIARI Cadenazzo, traffic lights come on… and protests flare up',
+    'blog.article.semafori-cadenazzo-proteste-ustra.excerpt': '73% opposed to the project voted on May 19, 2019 First traffic lights in Cadenazzo on August 29 last year USTRA estimates a 30% saving in 2028 Vote → 73% of votes',
+    'blog.article.semafori-cadenazzo-proteste-ustra.imageAlt': 'Traffic lights and traffic in Cadenazzo, Ticino, with vehicles waiting at the red light.',
 };
 
 export default blogMetaEn;

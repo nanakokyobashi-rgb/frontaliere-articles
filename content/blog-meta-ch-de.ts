@@ -8432,6 +8432,12 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.crediti-bilaterali-iii-svizzera.title': 'Bilaterale III, erste Zustimmung zu Krediten in Höhe von 3,48 Milliarden',
     'blog.article.crediti-bilaterali-iii-svizzera.excerpt': '3,48 Milliarden Franken für den Zeitraum 2030-2036 Die FK-N stimmt ab: 14 Ja-Stimmen, 8 Nein-Stimmen, 3 Enthaltungen Der Nationalrat dürfte das Dossier im Dezember prüfen',
     'blog.article.crediti-bilaterali-iii-svizzera.imageAlt': 'Das Schweizer Bundesparlament in Bern, mit der Schweizer Flagge im Vordergrund.',
+    'blog.article.il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.title': 'Der Discounter stoppt Lohnerhöhungen 2027 und verdoppelt den Mitarbeiterrabatt',
+    'blog.article.il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.excerpt': 'Denner sieht 2027 keine allgemeinen Lohnerhöhungen vor Der Personalrabatt steigt von 10% auf 20% Die Beiträge an die Pensionskasse steigen um 1,2 Punkte Die Mindestlöhne',
+    'blog.article.il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.imageAlt': 'Redaktionelles Bild zu: Il discount blocca aumenti 2027 e raddoppia sconto dipendenti',
+    'blog.article.ia-assistente-shopping-svizzera.title': 'KI hilft den Schweizern beim Einkaufen, bremst aber beim Bezahlen',
+    'blog.article.ia-assistente-shopping-svizzera.excerpt': 'Fast 70% der Schweizer nutzen KI für einen Einkauf 49% sagen, dass KI die Wahl beeinflusst 67% wollen weiterhin selbst bezahlen Nur 17% akzeptieren',
+    'blog.article.ia-assistente-shopping-svizzera.imageAlt': 'Schweizer Kunde, der einen KI‑Assistenten auf dem Smartphone beim Einkaufen in Lugano verwendet',
 };
 
 export default blogMetaChDe;

@@ -110115,6 +110115,123 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-indennita-stage-lugano-2027': {
+    title: 'Lugano: nuova indennità per gli stage nel 2027',
+    description: 'Indennità unica: 2\'000 franchi lordi per 12 mensilità Budget 2027: da 700\'000 a 755\'000 franchi Minor costo stimato: 30\'700 franchi Il 43% del budget è',
+    keywords: 'frontalieri, ticino, svizzera, italia, lugano, nuova, indennità, stage',
+    ogTitle: 'Nuova indennità per gli stage a Lugano nel 2027',
+    ogDescription: 'Indennità unica: 2\'000 franchi lordi per 12 mensilità Budget 2027: da 700\'000 a 755\'000 franchi Minor costo stimato: 30\'700 franchi Il 43% del budget è',
+    canonicalPath: '/articoli-frontaliere/indennita-stage-lugano-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lugano: nuova indennità per gli stage nel 2027",
+      "description": "Indennità unica: 2'000 franchi lordi per 12 mensilità Budget 2027: da 700'000 a 755'000 franchi Minor costo stimato: 30'700 franchi Il 43% del budget è",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-indennita-stage-lugano-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scrivania di un giovane professionista con laptop, taccuino e caffè, vista su Lugano da Monte Brè"
+      },
+      "datePublished": "2026-10-16T20:06:58+00:00",
+      "dateModified": "2026-10-16T20:06:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/indennita-stage-lugano-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-industria-ticino-futuro-lavoro': {
+    title: 'Industria in Ticino: carenza di personale e innovazione',
+    description: 'Negli ultimi 18 mesi, numerosi licenziamenti nell’industria ticinese Quindici licenziamenti collettivi seguiti nell’ultimo anno e mezzo Circa 16 mila',
+    keywords: 'frontalieri, ticino, svizzera, italia, industria, carenza, personale, innovazione',
+    ogTitle: 'Industria Ticino: tra carenza di personale e innovazione',
+    ogDescription: 'Negli ultimi 18 mesi, numerosi licenziamenti nell’industria ticinese Quindici licenziamenti collettivi seguiti nell’ultimo anno e mezzo Circa 16 mila',
+    canonicalPath: '/articoli-frontaliere/industria-ticino-futuro-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Industria in Ticino: carenza di personale e innovazione",
+      "description": "Negli ultimi 18 mesi, numerosi licenziamenti nell’industria ticinese Quindici licenziamenti collettivi seguiti nell’ultimo anno e mezzo Circa 16 mila",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-industria-ticino-futuro-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Impianto industriale moderno in Ticino con operatori qualificati"
+      },
+      "datePublished": "2026-10-16T20:29:57+00:00",
+      "dateModified": "2026-10-16T20:29:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/industria-ticino-futuro-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-semafori-cadenazzo-proteste-ustra': {
+    title: 'PATTI CHIARI Cadenazzo, si accendono semafori… e proteste',
+    description: '73% contrari al progetto votato il 19 maggio 2019 Primi semafori a Cadenazzo il 29 agosto scorso USTRA stima un risparmio del 30% nel 2028 Voto → 73% di voti',
+    keywords: 'frontalieri, ticino, svizzera, italia, patti, chiari, cadenazzo, accendono',
+    ogTitle: 'Semafori a Cadenazzo: proteste e promesse di miglioramenti',
+    ogDescription: '73% contrari al progetto votato il 19 maggio 2019 Primi semafori a Cadenazzo il 29 agosto scorso USTRA stima un risparmio del 30% nel 2028 Voto → 73% di voti',
+    canonicalPath: '/articoli-frontaliere/semafori-cadenazzo-proteste-ustra/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PATTI CHIARI Cadenazzo, si accendono semafori… e proteste",
+      "description": "73% contrari al progetto votato il 19 maggio 2019 Primi semafori a Cadenazzo il 29 agosto scorso USTRA stima un risparmio del 30% nel 2028 Voto → 73% di voti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-semafori-autostrade-ustra-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Semafori e traffico a Cadenazzo, Ticino, con veicoli in attesa al rosso."
+      },
+      "datePublished": "2026-10-16T21:09:57+00:00",
+      "dateModified": "2026-10-16T21:09:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/semafori-cadenazzo-proteste-ustra/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

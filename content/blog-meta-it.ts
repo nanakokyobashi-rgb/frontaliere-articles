@@ -13348,6 +13348,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.saronno-produzione-cina-protesta.title': 'Barco di Saronno: oltre il 50% della produzione va in Cina',
     'blog.article.saronno-produzione-cina-protesta.excerpt': 'Spostamento di oltre il 50% verso il sito di Suzhou Impatto del 40% sull\'area produzione Impatto del 30% sull\'area impiegatizia Sciopero, presidio e agitazione',
     'blog.article.saronno-produzione-cina-protesta.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.indennita-stage-lugano-2027.title': 'Lugano: nuova indennità per gli stage nel 2027',
+    'blog.article.indennita-stage-lugano-2027.excerpt': 'Indennità unica: 2\'000 franchi lordi per 12 mensilità Budget 2027: da 700\'000 a 755\'000 franchi Minor costo stimato: 30\'700 franchi Il 43% del budget è',
+    'blog.article.indennita-stage-lugano-2027.imageAlt': 'Scrivania di un giovane professionista con laptop, taccuino e caffè, vista su Lugano da Monte Brè',
+    'blog.article.industria-ticino-futuro-lavoro.title': 'Industria in Ticino: carenza di personale e innovazione',
+    'blog.article.industria-ticino-futuro-lavoro.excerpt': 'Negli ultimi 18 mesi, numerosi licenziamenti nell’industria ticinese Quindici licenziamenti collettivi seguiti nell’ultimo anno e mezzo Circa 16 mila',
+    'blog.article.industria-ticino-futuro-lavoro.imageAlt': 'Impianto industriale moderno in Ticino con operatori qualificati',
+    'blog.article.semafori-cadenazzo-proteste-ustra.title': 'PATTI CHIARI Cadenazzo, si accendono semafori… e proteste',
+    'blog.article.semafori-cadenazzo-proteste-ustra.excerpt': '73% contrari al progetto votato il 19 maggio 2019 Primi semafori a Cadenazzo il 29 agosto scorso USTRA stima un risparmio del 30% nel 2028 Voto → 73% di voti',
+    'blog.article.semafori-cadenazzo-proteste-ustra.imageAlt': 'Semafori e traffico a Cadenazzo, Ticino, con veicoli in attesa al rosso.',
 };
 
 export default blogMetaIt;

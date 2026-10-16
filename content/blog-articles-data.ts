@@ -44991,6 +44991,38 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'indennita-stage-lugano-2027',
+ category: 'novita',
+ date: '2026-10-16T20:06:57.615Z',
+ image: '/images/blog/article-indennita-stage-lugano-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'industria-ticino-futuro-lavoro',
+ category: 'pratico',
+ date: '2026-10-16T20:29:56.949Z',
+ image: '/images/blog/article-industria-ticino-futuro-lavoro.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'semafori-cadenazzo-proteste-ustra',
+ category: 'pratico',
+ date: '2026-10-16T21:09:57.242Z',
+ image: '/images/blog/article-semafori-autostrade-ustra-ticino.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

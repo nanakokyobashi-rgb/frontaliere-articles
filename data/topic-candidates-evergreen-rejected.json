@@ -8985,26 +8985,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/hydrogen-valley-a-cairate-impresa-scuola-e-terzo-settore-lavorano-insieme/2708470": {
-      "section": "frontaliere",
-      "ts": 1792002789090
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1956732/formazione-luganese-per-10-oculisti-africani": {
-      "section": "frontaliere",
-      "ts": 1792002821334
-    },
-    "frontaliere::https://www.rsi.ch/s/4161283": {
-      "section": "frontaliere",
-      "ts": 1792003307287
-    },
-    "frontaliere::https://www.tio.ch/ticino/politica/1956660/mps-consiglio-decisione-parlamento-ricorso-magistratura-procuratore-pagani-andrea-operato": {
-      "section": "frontaliere",
-      "ts": 1792003718722
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/via-libera-del-governo-alle-intese-con-la-lombardia-sullautonomia-fontana-ora-tocca-al-parlamento/2708017": {
-      "section": "frontaliere",
-      "ts": 1792005480523
-    },
     "frontaliere::https://comozero.it/attualita/provincia-di-como-drammatico-schianto-tra-due-moto": {
       "section": "frontaliere",
       "ts": 1792009974706
@@ -9280,6 +9260,18 @@
     "frontaliere::https://comozero.it/magazine/mille-euro-a-chi-diventa-genitore-lazienda-lombarda-che-premia-i-dipendenti-che-fanno-figli": {
       "section": "frontaliere",
       "ts": 1792173895527
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/scuola-e-impresa-a-bodio-lomnago-casa-agricola-apre-agli-studenti-con-la-mostra-labstore/2710282": {
+      "section": "frontaliere",
+      "ts": 1792177820741
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/due-milioni-alla-liuc-per-nuovi-laboratori-di-ricerca-per-le-imprese-un-primo-passo-verso-mill/2710651": {
+      "section": "frontaliere",
+      "ts": 1792178177980
+    },
+    "frontaliere::https://unia.ch/it/professioni-rami/parrucchiere/sondaggio-rivendicazioni-ccl": {
+      "section": "frontaliere",
+      "ts": 1792182208504
     }
   }
 }

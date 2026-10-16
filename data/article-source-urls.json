@@ -1,19 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/disoccupazione%3a-tasso-al-3%2c0%25%2c-stabile-su-mese-ma-in-aumento-annuo/92014348": {
-    "articleId": "disoccupazione-stabile-ticino-2024",
-    "ts": "2026-09-07T07:20:24.696Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/newsblog/ticino-top/1948032/arredamento-progettazione-uffici-essere-aziende-ufficio-ticino": {
-    "articleId": "arredamento-uffici-ticino-ai",
-    "ts": "2026-09-07T07:42:37.357Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/s/4064238": {
-    "articleId": "disoccupazione-stabile-ticino-agosto-2024",
-    "ts": "2026-09-07T08:19:50.133Z",
-    "keyForm": 2
-  },
   "https://www.ticinonews.ch/ticino/disoccupazione-stabile-nel-mese-di-agosto-442099": {
     "articleId": "disoccupazione-stabile-agosto-2023",
     "ts": "2026-09-07T08:38:51.644Z",
@@ -2497,6 +2482,21 @@
   "https://www.varesenews.it/2026/10/ne-numeri-ne-percentuali-la-rabbia-dei-lavoratori-barco-di-saronno-dopo-lannuncio-del-trasferimento-in-cina/2710603": {
     "articleId": "saronno-produzione-cina-protesta",
     "ts": "2026-10-16T18:15:03.462Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/luganese/1957285/la-citta-non-risparmia-sui-giovani-in-formazione": {
+    "articleId": "indennita-stage-lugano-2027",
+    "ts": "2026-10-16T20:06:58.692Z",
+    "keyForm": 2
+  },
+  "https://www.ocst.ch/il-lavoro/548-approfondimenti/2618-industria-il-futuro-del-settore-sta-nelle-persone": {
+    "articleId": "industria-ticino-futuro-lavoro",
+    "ts": "2026-10-16T20:29:57.939Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/la1/programmi/informazione/patti-chiari/cadenazzo-si-accendono-semafori%e2%80%a6-e-proteste--4160668.html": {
+    "articleId": "semafori-cadenazzo-proteste-ustra",
+    "ts": "2026-10-16T21:09:58.071Z",
     "keyForm": 2
   }
 }
