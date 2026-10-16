@@ -861,11 +861,23 @@ test('il wiring reagisce al completamento dei consumer e rilascia reservation es
   assert.match(workflow, /Load secrets from Remote Config/);
   assert.match(workflow, /runtime_pat="\$\{GITHUB_PAT_NANAKO:-\}"/);
   assert.match(workflow, /GH_TOKEN="\$runtime_pat" node scripts\/ci\/review-quota-rescuer\.mjs/);
-  assert.doesNotMatch(
-    workflow,
-    /GH_TOKEN:\s*\$\{\{\s*secrets\.GITHUB_TOKEN\s*\}\}/,
-    'la probe quota non deve ricadere sulla quota installation del GITHUB_TOKEN',
+  const quotaStepStart = workflow.indexOf('- name: Retry tests runs red for GITHUB_TOKEN quota (built-in token only)');
+  const generalStepStart = workflow.indexOf('- name: Retry deferred/transient reviews');
+  const reportStepStart = workflow.indexOf('- name: Report rate-limit budget');
+  const quotaStep = workflow.slice(quotaStepStart, reportStepStart);
+  assert.ok(quotaStepStart > generalStepStart && reportStepStart > quotaStepStart, 'lo scan quota segue il recovery generale e precede il report');
+  assert.match(quotaStep, /if: github\.event_name == 'schedule' \|\| github\.event_name == 'workflow_dispatch'/);
+  assert.match(quotaStep, /GH_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}/);
+  assert.match(quotaStep, /REVIEW_RATE_LIMIT_ONLY: 'true'/);
+  assert.match(quotaStep, /REVIEW_RATE_LIMIT_SCAN: 'true'/);
+  assert.match(quotaStep, /run: env -u GITHUB_PAT_NANAKO node scripts\/ci\/review-quota-rescuer\.mjs/);
+  assert.doesNotMatch(quotaStep, /runtime_pat|Remote Config/);
+  assert.match(workflow, /checks: read[\s\S]*actions: write/);
+  const generalStep = workflow.slice(
+    workflow.indexOf('- name: Retry deferred/transient reviews'),
+    workflow.indexOf('- name: Report rate-limit budget'),
   );
+  assert.match(generalStep, /REVIEW_RATE_LIMIT_SCAN: 'false'/);
   const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
   assert.equal(
     manifest.files.find((entry) => entry.path === '.github/workflows/review-quota-rescuer.yml')?.mode,
@@ -1046,6 +1058,8 @@ function runRateLimitRescuer({
   comments = [],
   runs = [rlRun()],
   scan,
+  rateLimitOnly = false,
+  builtInToken = 'fixture-github-token',
   annotationLevel = 'failure',
   annotations,
   jobSteps = [],
@@ -1104,7 +1118,12 @@ process.exit(3);
       GITHUB_RUN_ID: '9',
     };
     delete env.REVIEW_RATE_LIMIT_SCAN;
+    delete env.REVIEW_RATE_LIMIT_ONLY;
     if (scan !== undefined) env.REVIEW_RATE_LIMIT_SCAN = scan;
+    if (rateLimitOnly) {
+      env.REVIEW_RATE_LIMIT_ONLY = 'true';
+      env.GH_TOKEN = builtInToken;
+    }
     const r = spawnSync(process.execPath, [path.join(ROOT, 'scripts/ci/review-quota-rescuer.mjs')], { encoding: 'utf8', env });
     return { ...r, calls: fs.readFileSync(calls, 'utf8').trim().split('\n').filter(Boolean) };
   } finally {
@@ -1124,6 +1143,35 @@ test('rate limit: dopo il reset il run tests viene rilanciato UNA volta, marker 
   assert.ok(commentAt >= 0 && rerunAt > commentAt, `marker requested PRIMA del rerun:\n${r.calls.join('\n')}`);
   assert.match(r.calls[commentAt], /REVIEW_RATE_LIMIT_RETRY: .*"state":"requested"/);
   assert.match(r.stdout, /rate-limit richiesti=1/);
+});
+
+test('rate limit-only: richiede il token esplicito e non esegue le altre recovery', () => {
+  const nowSec = Math.floor(Date.now() / 1000);
+  const recent = rlRun({ created_at: rlIso(nowSec - 1800), updated_at: rlIso(nowSec - 1700) });
+  const r = runRateLimitRescuer({
+    resetAt: nowSec - RATE_LIMIT_RESET_GRACE_SEC - 5,
+    runs: [recent],
+    rateLimitOnly: true,
+  });
+  assert.equal(r.status, 0, r.stderr);
+  assert.match(r.stdout, /modalita rate-limit-only, retry richiesti=1/);
+  assert.equal(r.calls.filter((call) => call.startsWith('run rerun')).length, 1, r.calls.join('\n'));
+
+  const missingToken = runRateLimitRescuer({
+    resetAt: nowSec - RATE_LIMIT_RESET_GRACE_SEC - 5,
+    rateLimitOnly: true,
+    builtInToken: '',
+  });
+  assert.equal(missingToken.status, 1);
+  assert.match(missingToken.stderr, /GH_TOKEN mancante.*nessun fallback/);
+  assert.deepEqual(missingToken.calls, []);
+});
+
+test('rate limit-only disattivato non legge GitHub', () => {
+  const r = runRateLimitRescuer({ resetAt: 1, scan: 'false', rateLimitOnly: true, builtInToken: '' });
+  assert.equal(r.status, 0, r.stderr);
+  assert.deepEqual(r.calls, []);
+  assert.match(r.stdout, /rate-limit-only disattivato, nessuna lettura/);
 });
 
 test('lo snapshot GraphQL sostituisce la lettura REST dei commenti per tutte le PR', () => {
@@ -1216,10 +1264,17 @@ test('rate limit: un marker requested sulla HEAD chiude il percorso, senza legge
   assert.match(r.stdout, /rerun post-reset gia' richiesto/);
 });
 
-test('rate limit: fuori dai completamenti di tests lo scan non legge nemmeno le run', () => {
+test('rate limit: fuori da cron e dispatch lo scan non legge nemmeno le run', () => {
   const r = runRateLimitRescuer({ resetAt: 1, scan: 'false' });
   assert.equal(r.status, 0, r.stderr);
   assert.equal(r.calls.some((c) => c.includes('/actions/workflows/tests.yml/runs')), false, r.calls.join('\n'));
   const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/review-quota-rescuer.yml'), 'utf8');
-  assert.match(workflow, /REVIEW_RATE_LIMIT_SCAN: \$\{\{ github\.event_name != 'workflow_run' \|\| github\.event\.workflow_run\.path == '\.github\/workflows\/tests\.yml' \}\}/);
+  const quotaStart = workflow.indexOf('- name: Retry tests runs red for GITHUB_TOKEN quota (built-in token only)');
+  const quotaStep = workflow.slice(
+    quotaStart,
+    workflow.indexOf('- name: Report rate-limit budget', quotaStart),
+  );
+  assert.match(quotaStep, /if: github\.event_name == 'schedule' \|\| github\.event_name == 'workflow_dispatch'/);
+  assert.match(quotaStep, /REVIEW_RATE_LIMIT_SCAN: 'true'/);
+  assert.match(workflow, /REVIEW_RATE_LIMIT_SCAN: 'false'/);
 });
