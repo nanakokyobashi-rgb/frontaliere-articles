@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "pensioni",
-  "updatedAt": "2026-10-15T23:46:15.709Z",
-  "contentHash": "df28b4d9f22f04511ba04bd4222fcbf56d1e4bba6e8fab2daaa9bbe2bbbbbaf0",
+  "updatedAt": "2026-10-16T04:36:57.811Z",
+  "contentHash": "d7c67a246f7ae02426f642b6ad212123dab04b9ecbb83ea40658d22cc6c5f4a6",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -166,10 +166,16 @@
               "url": "https://bvk.ch/de/bvk-aktuell/detail/sonnige-aussichten-in-down-under"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Attacco informatico: cassa pensioni Zurigo e Posta colpite",
+          "url": "/articoli-svizzera/dati-assicurati-casse-zurigo-posta/",
+          "excerpt": "L'attacco al fornitore risale alla fine di settembre.",
+          "date": "2026-10-16T04:32:58.586Z"
+        },
         {
           "title": "Ciberattacco, colpita la cassa pensioni di Zurigo",
           "url": "/articoli-svizzera/attacco-software-pkzh/",
@@ -211,12 +217,6 @@
           "url": "/articoli-svizzera/prestazioni-complementari-zurigo-minimo/",
           "excerpt": "Nel cantone Zurigo la cassa di compensazione calcola la rendita AVS e interviene con prestazioni complementari se il primo pilastro non copre il minimo vitale.",
           "date": "2026-08-21T20:44:12.172Z"
-        },
-        {
-          "title": "AVS e prestazioni complementari nel Canton Zurigo",
-          "url": "/articoli-svizzera/avs-prestazioni-complementari-zurigo-cassa/",
-          "excerpt": "Come funziona il primo pilastro AVS nel Canton Zurigo: cassa di compensazione, calcolo della rendita, lacune e prestazioni complementari per il minimo vitale.",
-          "date": "2026-08-21T19:16:14.034Z"
         }
       ],
       "links": [
@@ -237,7 +237,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-15T23:46:15.709Z"
+      "updatedAt": "2026-10-16T04:36:57.811Z"
     },
     "en": {
       "canton": "ZH",
@@ -376,10 +376,16 @@
               "url": "https://bvk.ch/de/bvk-aktuell/detail/sonnige-aussichten-in-down-under"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Cyberattack: Zurich pension fund and Swiss Post hit",
+          "url": "/en/swiss-articles/pension-data-breach-zurich-post/",
+          "excerpt": "The attack on the supplier dates back to the end of September.",
+          "date": "2026-10-16T04:32:58.586Z"
+        },
         {
           "title": "Cyberattack hits Zurich’s pension fund",
           "url": "/en/swiss-articles/zurich-pension-fund-cyberattack/",
@@ -421,12 +427,6 @@
           "url": "/en/swiss-articles/supplementary-benefits-zurich-minimum-living/",
           "excerpt": "In the canton of Zurich, the compensation fund calculates the AVS annuity and intervenes with complementary benefits if the first pillar does not cover the vital minimum.",
           "date": "2026-08-21T20:44:12.172Z"
-        },
-        {
-          "title": "AVS and complementary services in the Canton of Zurich",
-          "url": "/en/swiss-articles/avs-supplementary-benefits-zurich-compensation-office/",
-          "excerpt": "How the first AVS pillar works in the Canton of Zurich: compensation fund, annuity calculation, gaps and supplementary benefits for the living minimum.",
-          "date": "2026-08-21T19:16:14.034Z"
         }
       ],
       "links": [
@@ -447,7 +447,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-15T23:46:15.709Z"
+      "updatedAt": "2026-10-16T04:36:57.811Z"
     },
     "de": {
       "canton": "ZH",
@@ -586,10 +586,16 @@
               "url": "https://bvk.ch/de/bvk-aktuell/detail/sonnige-aussichten-in-down-under"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Cyberangriff: Pensionskasse Zürich und Posta betroffen",
+          "url": "/de/schweiz-artikel/datenleck-pensionskassen-zurich-post/",
+          "excerpt": "Der Angriff auf den Anbieter ereignete sich Ende September.",
+          "date": "2026-10-16T04:32:58.586Z"
+        },
         {
           "title": "Cyberangriff: Pensionskasse Zürich getroffen",
           "url": "/de/schweiz-artikel/cyberangriff-pensionskasse-zurich/",
@@ -631,12 +637,6 @@
           "url": "/de/schweiz-artikel/zusatzleistungen-zurich-existenzminimum/",
           "excerpt": "Im Kanton Zürich berechnet die Ausgleichskasse die AHV-Rente und greift mit Ergänzungsleistungen ein, wenn die erste Säule nicht das Existenzminimum abdeckt.",
           "date": "2026-08-21T20:44:12.172Z"
-        },
-        {
-          "title": "AHV und Ergänzungsleistungen im Kanton Zürich",
-          "url": "/de/schweiz-artikel/avs-ergaenzungsleistungen-zuerich-ausgleichskasse/",
-          "excerpt": "So funktioniert die erste AHV-Säule im Kanton Zürich: Ausgleichskasse, Rentenberechnung, Lücken und Ergänzungsleistungen für das Lebensminimum.",
-          "date": "2026-08-21T19:16:14.034Z"
         }
       ],
       "links": [
@@ -657,7 +657,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-15T23:46:15.709Z"
+      "updatedAt": "2026-10-16T04:36:57.811Z"
     },
     "fr": {
       "canton": "ZH",
@@ -796,10 +796,16 @@
               "url": "https://bvk.ch/de/bvk-aktuell/detail/sonnige-aussichten-in-down-under"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Cyberattaque : la caisse de pension de Zurich et Posta touchées",
+          "url": "/fr/articles-suisse/fuite-donnees-caisses-zurich-poste/",
+          "excerpt": "L'attaque contre le fournisseur remonte à fin septembre.",
+          "date": "2026-10-16T04:32:58.586Z"
+        },
         {
           "title": "Cyberattaque, la caisse de pension de Zurich touchée",
           "url": "/fr/articles-suisse/cyberattaque-caisse-pension-zurich/",
@@ -841,12 +847,6 @@
           "url": "/fr/articles-suisse/prestations-complementaires-zurich-minimum-vital/",
           "excerpt": "Dans le canton de Zurich, la caisse de compensation calcule la rente AVS et intervient avec des prestations complémentaires si le premier pilier ne couvre pas le minimum vital.",
           "date": "2026-08-21T20:44:12.172Z"
-        },
-        {
-          "title": "AVS et prestations complémentaires dans le canton de Zurich",
-          "url": "/fr/articles-suisse/ava-prestations-complementaires-zurich-caisse/",
-          "excerpt": "Comment fonctionne le premier pilier AVS dans le canton de Zurich : caisse de compensation, calcul de la rente, lacunes et prestations complémentaires pour le minimum vital.",
-          "date": "2026-08-21T19:16:14.034Z"
         }
       ],
       "links": [
@@ -867,7 +867,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-15T23:46:15.709Z"
+      "updatedAt": "2026-10-16T04:36:57.811Z"
     }
   }
 }

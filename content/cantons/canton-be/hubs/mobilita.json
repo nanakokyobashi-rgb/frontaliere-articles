@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "8872269e50547b94e4759e273ef11379c620b1ebeac3610010a96c19dac54416",
+  "updatedAt": "2026-10-16T04:36:57.811Z",
+  "contentHash": "e05b11cbd11b3478256be5d6d3e9bc5a3f4194d32b175139fed62bbaa9f91573",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "32",
+          "value": "31",
           "note": "segnalazioni aggiornate: 15 ottobre 2026"
         },
         {
@@ -129,7 +129,7 @@
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -168,7 +168,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T04:36:57.811Z"
     },
     "en": {
       "canton": "BE",
@@ -178,7 +178,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "32",
+          "value": "31",
           "note": "reports as of 15 October 2026"
         },
         {
@@ -280,7 +280,7 @@
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -319,7 +319,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T04:36:57.811Z"
     },
     "de": {
       "canton": "BE",
@@ -329,7 +329,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "32",
+          "value": "31",
           "note": "Meldungen vom 15. Oktober 2026"
         },
         {
@@ -431,7 +431,7 @@
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -470,7 +470,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T04:36:57.811Z"
     },
     "fr": {
       "canton": "BE",
@@ -480,7 +480,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "32",
+          "value": "31",
           "note": "signalements au 15 octobre 2026"
         },
         {
@@ -582,7 +582,7 @@
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -621,7 +621,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T04:36:57.811Z"
     }
   }
 }
