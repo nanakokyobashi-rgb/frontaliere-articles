@@ -47,6 +47,7 @@ import {
   checkItemOnPage,
   pageCarriesItem,
   pageTitleEvidence,
+  shortHeadlineEvidence,
   stripItemIdentity,
   withItemIdentity,
 } from '../scripts/lib/source-url-ledger.mjs';
@@ -63,6 +64,16 @@ const TITLES = [
   'Nach Unfall zwischen Flims und Trin: Verkehr fliesst wieder',
 ];
 const itemUrl = (title, url = TICKER) => withItemIdentity(url, itemIdentityToken(title));
+
+function readRssFixtureItem(filename, url) {
+  const xml = readFileSync(path.join(HERE, 'fixtures', 'canton-sources', filename), 'utf8');
+  const item = [...xml.matchAll(/<item\b[^>]*>([\s\S]*?)<\/item>/g)]
+    .map((match) => match[1])
+    .find((entry) => entry.includes(`<link>${url}</link>`));
+  assert.ok(item, `${filename}: item non trovato per ${url}`);
+  const value = (tag) => item.match(new RegExp(`<${tag}>([\\s\\S]*?)<\\/${tag}>`))?.[1]?.trim() || '';
+  return { url: value('link'), headline: value('title'), date: value('pubDate') };
+}
 
 function cutDecl(startAnchor) {
   const a = SRC.indexOf(startAnchor);
@@ -133,6 +144,21 @@ test('itemIdentityToken: maiuscole, accenti, punteggiatura e forma delle entita\
   assert.equal(itemIdentityToken(TITLES[0], new Date('non una data')), itemIdentityToken(TITLES[0]));
 });
 
+test('un titolo riscritto allo stesso URL e nella stessa giornata conserva una nuova identita\' (fixture feed)', () => {
+  const url = 'https://www.bazonline.ch/femizid-binningen-gerichtspraesident-wird-geruegt-173243769017';
+  const earlier = readRssFixtureItem('tamedia-bazonline.xml', url);
+  const later = readRssFixtureItem('tamedia-bazonline-later.xml', url);
+
+  assert.equal(earlier.url, later.url);
+  assert.equal(new Date(earlier.date).toISOString().slice(0, 10), '2026-10-05');
+  assert.equal(new Date(later.date).toISOString().slice(0, 10), '2026-10-05');
+  assert.notEqual(earlier.headline, later.headline);
+  assert.notEqual(
+    itemIdentityToken(earlier.headline, new Date(earlier.date)),
+    itemIdentityToken(later.headline, new Date(later.date)),
+  );
+});
+
 test('withItemIdentity / stripItemIdentity: andata e ritorno, e un frammento preesistente e\' sostituito', () => {
   const token = itemIdentityToken(TITLES[0]);
   assert.equal(stripItemIdentity(withItemIdentity(TICKER, token)), TICKER);
@@ -191,14 +217,35 @@ test('URL riusato: ne\' il ponte di forma 1 ne\' il ramo fuzzy sullo slug del co
 
 test('pageCarriesItem: la pagina reale del ticker porta la notizia di oggi e nessuna delle precedenti', () => {
   // La pagina del 2026-10-05 (ridotta: script e stile tolti), come testo.
-  const page = readFileSync(path.join(HERE, 'fixtures', 'canton-sources', 'suedostschweiz-verkehrsticker-page.html'), 'utf8').replace(/<[^>]+>/g, ' ');
-  assert.equal(pageCarriesItem(page, TITLES[3]), true, 'il titolo del feed di oggi');
+  const html = readFileSync(path.join(HERE, 'fixtures', 'canton-sources', 'suedostschweiz-verkehrsticker-page.html'), 'utf8');
+  const page = html.replace(/<[^>]+>/g, ' ');
+  const title = pageTitleEvidence(html);
+  const current = readRssFixtureItem('suedostschweiz-graubuenden.xml', TICKER);
+  assert.equal(current.headline, TITLES[3]);
+  assert.equal(new Date(current.date).toISOString(), '2026-10-05T10:49:15.000Z');
+  assert.equal(pageCarriesItem(page, current.headline), true, 'il titolo del feed di oggi');
   for (const earlier of TITLES.slice(0, 3)) assert.equal(pageCarriesItem(page, earlier), false, earlier);
   // Il corpo non ripete il titolo alla lettera: contano le parole distintive.
   assert.equal(pageCarriesItem('Zwischen Flims und Trin kam es zu einem Unfall. Der Verkehr fliesst inzwischen wieder.', TITLES[3]), true);
-  // Un titolo senza parole distintive non si puo' verificare: non passa.
+  // Un titolo breve non passa dalla sola parola nel testo; la pagina reale non lo dichiara come titolo.
   assert.equal(pageCarriesItem(page, 'A 13: Stau'), false);
+  assert.equal(pageCarriesItem(page, 'A 13: Stau', { titleEvidence: title }), false);
   assert.equal(pageCarriesItem('', TITLES[3]), false);
+});
+
+test('shortHeadlineEvidence: richiede il titolo completo fra i titoli dichiarati dalla pagina', () => {
+  // Esempi sintetici per il predicato puro; le prove di pagina sono testate
+  // separatamente con i fixture RSS/HTML acquisiti dalla fonte.
+  assert.equal(shortHeadlineEvidence('A 13: Stau', 'A 13: Stau'), true);
+  assert.equal(shortHeadlineEvidence('A 13: Stau | Südostschweiz', 'A 13: Stau'), true);
+  assert.equal(shortHeadlineEvidence('A 13: Unfall', 'A 13: Stau'), false);
+  assert.equal(shortHeadlineEvidence('Stau im Verkehr auf der A 13', 'A 13: Stau'), false);
+  assert.equal(shortHeadlineEvidence('A 13: Stau', TITLES[3]), false);
+
+  // Il testo generico da solo non basta; il titolo dichiarato si'.
+  assert.equal(pageCarriesItem('Stau, Erdrutsch oder sonst ein Ereignis', 'A 13: Stau'), false);
+  assert.equal(pageCarriesItem('testo generico con Stau', 'A 13: Stau', { titleEvidence: 'A 13: Stau' }), true);
+  assert.equal(pageCarriesItem('testo generico con Stau', 'A 13: Stau', { titleEvidence: 'Titolo diverso' }), false);
 });
 
 test('checkItemOnPage: titoli della pagina, testo e giornata — sulla pagina reale del ticker', () => {
@@ -210,8 +257,9 @@ test('checkItemOnPage: titoli della pagina, testo e giornata — sulla pagina re
   const body = 'Die Strasse war am Mittag während rund einer Stunde nur einspurig befahrbar. Verletzt wurde niemand.';
   assert.equal(pageCarriesItem(body, TITLES[3]), false, 'premessa: il solo corpo non basterebbe');
   const page = { title, text: body, publishedAt: '2026-10-05T10:49:15.000Z' };
-  const today = new Date('2026-10-05T10:49:15Z');
-  assert.deepEqual(checkItemOnPage(page, { headline: TITLES[3], date: today }), { ok: true, reason: 'ok' });
+  const current = readRssFixtureItem('suedostschweiz-graubuenden.xml', TICKER);
+  const today = new Date(current.date);
+  assert.deepEqual(checkItemOnPage(page, current), { ok: true, reason: 'ok' });
   // Un'altra notizia allo stesso indirizzo.
   assert.deepEqual(checkItemOnPage(page, { headline: TITLES[2], date: new Date('2026-08-26T09:00:00Z') }), { ok: false, reason: 'title-not-on-page' });
   // Lo stesso titolo, ma l'item e' di un altro giorno: e' un'altra notizia.
