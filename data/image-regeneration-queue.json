@@ -90,6 +90,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-16T06:05:12.170Z",
       "lastFailureAt": "2026-10-16T06:05:12.170Z"
+    },
+    {
+      "articleId": "futura-volley-roma-vittoria",
+      "title": "Futura volley busto arsizio vince 3-1 contro roma",
+      "fallbackImage": "/images/blog/article-erreci-busto-marsala-vittoria.webp",
+      "reason": "All image providers failed for article-futura-volley-roma-vittoria: openai-codex (vision gate rejected image: Synthetic photorealistic volleyball scene with no readable text or cle",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-16T06:52:10.287Z",
+      "lastFailureAt": "2026-10-16T06:52:10.287Z"
     }
   ]
 }
