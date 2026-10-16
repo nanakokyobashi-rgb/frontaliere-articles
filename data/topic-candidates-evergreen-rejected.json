@@ -192,6 +192,414 @@
       "firstSeenAt": "2026-10-16T02:06:59.680Z",
       "lastValidatedAt": "2026-10-16T02:06:59.680Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere disdetta contratto lavoro dimissioni termini",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T10:41:35.140Z",
+      "lastValidatedAt": "2026-10-16T10:41:35.140Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "cosa fare nel weekend in ticino attività outdoor",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:41:37.651Z",
+      "lastValidatedAt": "2026-10-16T10:41:37.651Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "migliori laghi balneabili ticino estate",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:41:39.481Z",
+      "lastValidatedAt": "2026-10-16T10:41:39.481Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "sentieri escursionistici ticino per principianti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:41:41.300Z",
+      "lastValidatedAt": "2026-10-16T10:41:41.300Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "stazioni sci vicino lugano bellinzona",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:41:43.721Z",
+      "lastValidatedAt": "2026-10-16T10:41:43.721Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "mercatini e mercati settimanali ticino",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:41:45.797Z",
+      "lastValidatedAt": "2026-10-16T10:41:45.797Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "migliori ristoranti tipici ticinesi lugano",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T10:41:45.907Z",
+      "lastValidatedAt": "2026-10-16T10:41:45.907Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "vino merlot ticinese cantine da visitare",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:41:47.892Z",
+      "lastValidatedAt": "2026-10-16T10:41:47.892Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "piste ciclabili ticino lombardia percorsi",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:41:50.016Z",
+      "lastValidatedAt": "2026-10-16T10:41:50.016Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "parchi naturali e riserve ticino",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:41:51.993Z",
+      "lastValidatedAt": "2026-10-16T10:41:51.993Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "mercato immobiliare ticino prezzi tendenze",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:41:54.291Z",
+      "lastValidatedAt": "2026-10-16T10:41:54.291Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "trasferirsi in svizzera da italiano non frontaliere guida",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:41:56.675Z",
+      "lastValidatedAt": "2026-10-16T10:41:56.675Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "sistema sanitario svizzero panoramica generale",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:41:58.651Z",
+      "lastValidatedAt": "2026-10-16T10:41:58.651Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "aprire un conto in banca svizzera per residenti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T10:41:58.780Z",
+      "lastValidatedAt": "2026-10-16T10:41:58.780Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "mercato del lavoro ticino settori in crescita",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T10:41:58.907Z",
+      "lastValidatedAt": "2026-10-16T10:41:58.907Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imparare lo svizzero tedesco corsi e app",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T10:41:59.066Z",
+      "lastValidatedAt": "2026-10-16T10:41:59.066Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "coworking e spazi di lavoro condiviso lugano",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T10:41:59.178Z",
+      "lastValidatedAt": "2026-10-16T10:41:59.178Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "clima e meteo ticino stagioni caratteristiche",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T10:41:59.309Z",
+      "lastValidatedAt": "2026-10-16T10:41:59.309Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "shopping outlet centri commerciali ticino",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:42:01.219Z",
+      "lastValidatedAt": "2026-10-16T10:42:01.219Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "trasporti pubblici ticino guida abbonamenti generali",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:42:03.233Z",
+      "lastValidatedAt": "2026-10-16T10:42:03.233Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "pensionarsi in svizzera per chi si trasferisce non frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:42:12.685Z",
+      "lastValidatedAt": "2026-10-16T10:42:12.685Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "sport e tempo libero ticino strutture sportive",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:42:28.681Z",
+      "lastValidatedAt": "2026-10-16T10:42:28.681Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "chiassoletteraria festival letterario chiasso date",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:46:32.269Z",
+      "lastValidatedAt": "2026-10-16T10:46:32.269Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "locarno film festival biglietti piazza grande",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T10:46:32.391Z",
+      "lastValidatedAt": "2026-10-16T10:46:32.391Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "mercatini di natale ticino lugano bellinzona",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:46:34.463Z",
+      "lastValidatedAt": "2026-10-16T10:46:34.463Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "rabadan carnevale bellinzona programma",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:46:36.406Z",
+      "lastValidatedAt": "2026-10-16T10:46:36.406Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "sagra dell uva mendrisio settembre",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:46:38.207Z",
+      "lastValidatedAt": "2026-10-16T10:46:38.207Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "longlake festival lugano eventi gratuiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:46:40.114Z",
+      "lastValidatedAt": "2026-10-16T10:46:40.114Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "blues to bop lugano concerti gratuiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-16T10:46:40.242Z",
+      "lastValidatedAt": "2026-10-16T10:46:40.242Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "fiera di lugano manifestazioni annuali",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:46:42.224Z",
+      "lastValidatedAt": "2026-10-16T10:46:42.224Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere tasse italia svizzera 2026",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:46:44.682Z",
+      "lastValidatedAt": "2026-10-16T10:46:44.682Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere tasse italia svizzera 2026 entro 20 km",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:46:47.097Z",
+      "lastValidatedAt": "2026-10-16T10:46:47.097Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere tasse italia svizzera 2026 oltre 20 km",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:46:49.365Z",
+      "lastValidatedAt": "2026-10-16T10:46:49.365Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere tasse italia svizzera 2026 famiglia con figli",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-16T10:46:51.527Z",
+      "lastValidatedAt": "2026-10-16T10:46:51.527Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -8788,6 +9196,30 @@
     "frontaliere::https://www.varesenoi.it/2026/10/16/leggi-notizia/argomenti/salute-3/articolo/gallarate-ablazione-cardiaca-senza-raggi-x-per-una-paziente-di-18-anni-la-nuova-frontiera-delle-1.html": {
       "section": "frontaliere",
       "ts": 1792145114101
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/barco-oltre-meta-della-produzione-va-in-cina-sciopero-a-saronno/2710012": {
+      "section": "frontaliere",
+      "ts": 1792147137884
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/15/leggi-notizia/argomenti/economia-13/articolo/benessere-e-star-bene-nuova-frontiera-del-turismo-in-provincia-di-varese-perche-qui-si-puo-cam.html": {
+      "section": "frontaliere",
+      "ts": 1792147156790
+    },
+    "frontaliere::https://comozero.it/attualita/como-dopo-la-chiusura-il-gloria-e-un-patrimonio-della-citta-ora-il-comune-sostenga-la-riapertura": {
+      "section": "frontaliere",
+      "ts": 1792147268539
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/vinti-al-gioco-11-milioni-di-euro-ma-incassavano-i-sussidi-22-indagati-dalla-finanza-nel-vco/2709877": {
+      "section": "frontaliere",
+      "ts": 1792147286300
+    },
+    "frontaliere::https://www.tio.ch/dal-mondo/cronaca/1957189/traffico-di-droga-e-migranti-un-indagato-rintracciato-in-svizzera": {
+      "section": "frontaliere",
+      "ts": 1792147290914
+    },
+    "frontaliere::https://www.tio.ch/sport/altri-sport/1957167/bencic-ka-ex-marchio-lara-gut-behrami-belinda-segue-orme-diventa": {
+      "section": "frontaliere",
+      "ts": 1792147294977
     }
   }
 }
