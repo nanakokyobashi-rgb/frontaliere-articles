@@ -70,6 +70,7 @@ import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 import { createRawFetcher } from './lib/cross-repo-raw-fetch.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
 import { unescapeTsValue } from '../generator/scripts/lib/meta-field-regex.mjs';
+import { readCanonicalPath } from './lib/seo-canonical-path.mjs';
 import { CORPUS_SECTIONS } from './lib/corpus-sections.mjs';
 import { patchHubLandingMetadata } from './lib/hub-landing-meta.mjs';
 import { rewriteGenericImageRefs } from './lib/article-render-pipeline.mjs';
@@ -235,7 +236,8 @@ function readSeoMap() {
       const block = extractBalanced(src, bracePos);
       if (!block) continue;
       claimedUntil = bracePos + block.length;
-      const cp = block.match(/canonicalPath:\s*["']([^"']+)["']/)?.[1];
+      const canonicalPath = readCanonicalPath(block);
+      const cp = canonicalPath.kind === 'resolved' ? canonicalPath.value : null;
       if (!cp) continue;
       const title = matchStr(block, 'title');
       out.set(seoKey(cp), {

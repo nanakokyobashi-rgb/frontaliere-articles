@@ -1,16 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { readCanonicalPath } from '../../scripts/lib/seo-canonical-path.mjs';
 
 const source = readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf8');
 const start = source.indexOf('function validateStructuredData(data) {');
 const end = source.indexOf('function updateSitemapIndexLastmod(', start);
 assert.ok(start >= 0 && end > start);
-const readerStart = source.indexOf('function readCanonicalPath(block) {');
-assert.ok(readerStart >= 0 && readerStart < start);
-const readCanonicalPath = new Function(
-  source.slice(readerStart, start) + '\nreturn readCanonicalPath;',
-)();
 
 // Execute the real validation function with a read-only in-memory SEO entry.
 // The entry resolver is tested separately; this isolates the field Google rejects.
