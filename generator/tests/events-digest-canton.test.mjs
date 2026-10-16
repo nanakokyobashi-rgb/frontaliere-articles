@@ -95,6 +95,61 @@ describe('digest per cantone sulla fixture events-dataset', () => {
     assert.equal(decodeURIComponent('venue%2D%2Dseries'), 'venue--series');
   });
 
+  it('renders the current weekend date for a spanning event and cites its source record', () => {
+    const article = buildWeekendDigestArticle({
+      events: [{
+        id: 'agenda-series',
+        title: 'Mostra ricorrente',
+        comune: 'Lugano',
+        startDate: '2026-01-01',
+        endDate: '2027-01-03',
+        url: 'https://agenda.example/events/mostra-(serie)',
+        canton: 'TI',
+      }],
+      todayIso: '2027-01-01',
+    });
+    assert.match(article.content.it.body2, /\*\*2 gennaio\*\*/);
+    assert.match(article.content.it.body2, /\[Mostra ricorrente\]\(https:\/\/agenda\.example\/events\/mostra-%28serie%29\)/);
+    assert.doesNotMatch(article.content.it.body2, /\*\*1 gennaio\*\* —/);
+  });
+
+  it('escapes Markdown delimiters in a cited event title', () => {
+    const article = buildWeekendDigestArticle({
+      events: [{
+        id: 'agenda-label',
+        title: 'Mostra [estate] — bambini',
+        comune: 'Lugano',
+        startDate: '2027-01-02',
+        url: 'https://agenda.example/events/mostra-(serie)',
+        canton: 'TI',
+      }],
+      todayIso: '2027-01-01',
+    });
+    assert.match(article.content.it.body2, /\[Mostra \\\[estate\\\] — bambini\]\(https:\/\/agenda\.example\/events\/mostra-%28serie%29\)/);
+  });
+
+  for (const url of [
+    'https://agenda.example/events/mostra (serie)',
+    'https://agenda.example/events/mostra\u0007serie',
+    'nota-url',
+  ]) {
+    it(`does not turn a malformed source URL into a Markdown link: ${JSON.stringify(url)}`, () => {
+      const article = buildWeekendDigestArticle({
+        events: [{
+          id: 'agenda-invalid-url',
+          title: 'Mostra senza link',
+          comune: 'Lugano',
+          startDate: '2027-01-02',
+          url,
+          canton: 'TI',
+        }],
+        todayIso: '2027-01-01',
+      });
+      assert.match(article.content.it.body2, /Mostra senza link/);
+      assert.doesNotMatch(article.content.it.body2, /\]\(https:\/\/agenda\.example\//);
+    });
+  }
+
   it('mantiene il producer operativo con un lone surrogate nell\'ID evento', () => {
     const article = buildWeekendDigestArticle({
       events: [{
