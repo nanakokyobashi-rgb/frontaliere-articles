@@ -469,8 +469,21 @@ const PERSON_LEAD_WORDS = new Set([
 ]);
 /** Forme lessicali complete: evita falsi prefissi come «atletica» e «target». */
 const PERSON_HEAD_RE = /^(?:turist[aei]|frontalier[ei]|lavorator[ei]|lavoratric[ei]|dipendent[ei]|pendolar[ei]|resident[ei]|cittadin[aoei]|abitant[ei]|medic[aoei]|oftalmolog[oi]|infermier[aeio]|atlet[aei]|sportiv[aeio]|giocator[ei]|giocatric[ei]|tennist[aei]|scalator[ei]|alpinist[aei]|student[ei]|studentess[ae]|giovan[eio]|anzian[aeio]|famigli[ae]|pazient[ei]|allevator[ei]|agricoltor[ei]|contadin[aoei]|imprenditor[ei]|automobilist[aei]|motociclist[aei]|ciclist[aei]|camionist[aei]|autist[aei]|conducent[ei]|passegger[oi]|viaggiator[ei]|escursionist[aei]|emigrat[aeio]|emigrant[ei]|donn[ae]|uom(?:o|ini)|ragazz[aoei]|bambin[aoei]|coppi[ae]|person[ae]|veicol[oi]|camion|furgon[ei]|targ(?:a|he|at[aeio]))$/u;
-/** Eta' scritta in cifre o in forma lessicale, anche composta: «68enne», «diciassettenne», «ventiduenne». */
-const PERSON_AGE_RE = /^(?:(?:\d{1,3}|(?:undic|dodic|tredic|quattordic|quindic|sedic|diciassett|diciott|diciannov|vent|trent|quarant|cinquant|sessant|settant|ottant|novant|cent))enn[ei]|(?:venti|trenta|quaranta|cinquanta|sessanta|settanta|ottanta|novanta)(?:du|tre|quattr|cinqu|sei|sett|nov)enn[ei]|(?:vent|trent|quarant|cinquant|sessant|settant|ottant|novant)(?:un|ott)enn[ei])$/u;
+/** Età lessicali: i composti fino a 99 e le forme centenarie da 101 a 199. */
+const PERSON_AGE_TEEN_STEMS = '(?:undic|dodic|tredic|quattordic|quindic|sedic|diciassett|diciott|diciannov)';
+const PERSON_AGE_TENS_STEMS = '(?:vent|trent|quarant|cinquant|sessant|settant|ottant|novant)';
+const PERSON_AGE_TENS_WITH_VOWEL_STEMS = '(?:venti|trenta|quaranta|cinquanta|sessanta|settanta|ottanta|novanta)';
+const PERSON_AGE_TENS_COMPOUND_STEMS = `(?:${PERSON_AGE_TENS_WITH_VOWEL_STEMS}(?:du|tre|quattr|cinqu|sei|sett|nov)|${PERSON_AGE_TENS_STEMS}(?:un|ott))`;
+const PERSON_AGE_CENTENNIAL_TENS_STEMS = '(?:vent|trent|quarant|cinquant|sessant|settant|novant)';
+const PERSON_AGE_CENTENNIAL_TENS_WITH_VOWEL_STEMS = '(?:venti|trenta|quaranta|cinquanta|sessanta|settanta|novanta)';
+const PERSON_AGE_CENTENNIAL_TENS_COMPOUND_STEMS = `(?:${PERSON_AGE_CENTENNIAL_TENS_WITH_VOWEL_STEMS}(?:du|tre|quattr|cinqu|sei|sett|nov)|${PERSON_AGE_CENTENNIAL_TENS_STEMS}(?:un|ott))`;
+const PERSON_AGE_CENTENNIAL_STEMS = `(?:un|du|tre|quattr|cinqu|sei|sett|nov|dec|${PERSON_AGE_TEEN_STEMS}|${PERSON_AGE_CENTENNIAL_TENS_STEMS}|${PERSON_AGE_CENTENNIAL_TENS_COMPOUND_STEMS})`;
+const PERSON_AGE_RE_EXTENDED = new RegExp(
+  `^(?:\\d{1,3}enn[ei]|(?:${PERSON_AGE_TEEN_STEMS}|${PERSON_AGE_TENS_STEMS}|cent)enn[ei]`
+    + `|${PERSON_AGE_TENS_COMPOUND_STEMS}enn[ei]|cento${PERSON_AGE_CENTENNIAL_STEMS}enn[ei]`
+    + '|centott(?:enn[ei]|ant(?:enn[ei]|(?:un|ott)enn[ei]|a(?:du|tre|quattr|cinqu|sei|sett|nov)enn[ei])))$',
+  'u',
+);
 /** Quantita' che possono reggere «di + demonimo»: «decine di ticinesi». */
 const PERSON_QUANTITY_RE = /^(?:pai[oa]|decin[ae]|centinai[ae]|migliai[ae]|dozzin[ae]|ventin[ae]|trentin[ae]|quarantin[ae]|cinquantin[ae]|sessantin[ae]|settantin[ae]|ottantin[ae]|novantin[ae]|centinai[oe]|migliai[oi])$/u;
 /** Parole intere (come radici catturerebbero «autorita'», «motore»). */
@@ -838,7 +851,7 @@ export function createCantonClassifier({
     if (k < 0 || sentenceBreak(text, tokens[k], tokens[i])) return true;
     const prev = tokens[k].norm;
     if (PERSON_LEAD_WORDS.has(prev) || PERSON_HEAD_WORDS.has(prev) || /^\d+$/u.test(prev)
-      || PERSON_HEAD_RE.test(prev) || PERSON_AGE_RE.test(prev)) return true;
+      || PERSON_HEAD_RE.test(prev) || PERSON_AGE_RE_EXTENDED.test(prev)) return true;
     const head = tokens[k - 1];
     if (!head || sentenceBreak(text, head, tokens[k])) return false;
     const groupHead = tokens[k - 2];
