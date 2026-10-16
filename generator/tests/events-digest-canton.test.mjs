@@ -113,6 +113,21 @@ describe('digest per cantone sulla fixture events-dataset', () => {
     assert.doesNotMatch(article.content.it.body2, /\*\*1 gennaio\*\* —/);
   });
 
+  it('escapes Markdown delimiters in a cited event title', () => {
+    const article = buildWeekendDigestArticle({
+      events: [{
+        id: 'agenda-label',
+        title: 'Mostra [estate] — bambini',
+        comune: 'Lugano',
+        startDate: '2027-01-02',
+        url: 'https://agenda.example/events/mostra-(serie)',
+        canton: 'TI',
+      }],
+      todayIso: '2027-01-01',
+    });
+    assert.match(article.content.it.body2, /\[Mostra \\\[estate\\\] — bambini\]\(https:\/\/agenda\.example\/events\/mostra-%28serie%29\)/);
+  });
+
   it('mantiene il producer operativo con un lone surrogate nell\'ID evento', () => {
     const article = buildWeekendDigestArticle({
       events: [{
