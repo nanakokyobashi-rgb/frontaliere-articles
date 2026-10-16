@@ -22,6 +22,7 @@ import '../../host/cantonSectionsBootstrap.mjs';
  */
 
 import { isReservedPublishedSlug } from './published-slug-guard.mjs';
+import { assertHubLocaleSlug, assertHubTopicEntries } from './assert-hub-locale-slug.mjs';
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { activeCorpusCoreMap } from './corpus-sections.mjs';
 
@@ -195,8 +196,8 @@ export function buildArticleUrlBlocks(
 }
 
 /** Il prefisso per locale di QUALSIASI sezione nota al core (attiva o no). */
-export function sectionPathsOf(section) {
-  const core = ARTICLE_SECTION_CORE_ALL[section];
+export function sectionPathsOf(section, all = ARTICLE_SECTION_CORE_ALL) {
+  const core = all[section];
   if (!core) throw new Error(`sectionPathsOf: sezione sconosciuta "${section}"`);
   return Object.fromEntries(
     Object.entries(core.indexSlug).map(([locale, slug]) => [locale, locale === 'it' ? `/${slug}/` : `/${locale}/${slug}/`]),
@@ -225,15 +226,21 @@ const SITEMAP_LOCALES = ['it', 'en', 'de', 'fr'];
  * @param {number} archiveTotal articoli che l'archivio pagina
  * @param {number} pageSize articoli per pagina dell'archivio (ARTICLES_PAGE_SIZE dell'host)
  */
-export function familySectionPages(section, archiveTotal, pageSize) {
+export function familySectionPages(section, archiveTotal, pageSize, all = ARTICLE_SECTION_CORE_ALL) {
   if (!Number.isInteger(pageSize) || pageSize <= 0) throw new Error(`familySectionPages: pageSize non valido (${pageSize})`);
-  const core = ARTICLE_SECTION_CORE_ALL[section];
+  const core = all[section];
   if (!core?.topicHubs) throw new Error(`familySectionPages: "${section}" non ha hub tematici nel core`);
-  const base = sectionPathsOf(section);
+  const base = sectionPathsOf(section, all);
   const at = (suffix) => Object.fromEntries(SITEMAP_LOCALES.map((loc) => [loc, `${base[loc]}${suffix(loc)}`]));
   const pages = [{ key: 'landing', paths: base, priority: '0.8', alternates: true }];
-  for (const [topic, slugs] of Object.entries(core.topicHubs)) {
-    pages.push({ key: `hub:${topic}`, paths: at((loc) => `${slugs[loc]}/`), priority: '0.7', alternates: true });
+  const topicHubs = assertHubTopicEntries(section, core.topicHubs);
+  for (const [topic, slugs] of topicHubs) {
+    pages.push({
+      key: `hub:${topic}`,
+      paths: at((loc) => `${assertHubLocaleSlug(section, topic, loc, slugs)}/`),
+      priority: '0.7',
+      alternates: true,
+    });
   }
   const archivePages = Math.max(1, Math.ceil(archiveTotal / pageSize));
   for (let page = 1; page <= archivePages; page++) {
