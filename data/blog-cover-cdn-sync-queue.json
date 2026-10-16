@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-indennita-stage-lugano-2027.webp",
-      "sha256": "dff2981b7e5342ed6b8f6d4f97fd2c5733af7598a952655bb6b53f74a7159215"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-indennita-stage-lugano-2027-480w.webp",
-      "sha256": "4e825e6fb5bade67679878c2c4b0cc5d62582e33d41bd9f3919cbf5d213e8224"
-    }
-  ]
+  "items": []
 }
