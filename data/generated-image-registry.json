@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 603,
+  "assetCount": 604,
   "assets": [
     {
       "schema": 1,
@@ -121,7 +121,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic illustrated alpine market scene with no readable text, logos, recognizable faces, or depiction of a specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -160,7 +161,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic editorial illustration of a lakeside vineyard landscape; no text, logos, signatures, or recognizable people."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -319,7 +321,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic illustrated train-station scene with no readable text, logos, watermark, signature, identifiable person, or specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -398,7 +401,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Generic illustrative nighttime lakeside scene; no readable text, logos, recognizable faces, or specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -517,7 +521,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic editorial illustration with no readable text, logos, identifiable faces, or depiction of a specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -636,7 +641,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Generic illustrated desk scene with an architectural landmark; no readable lettering, logos, faces, or depiction of a specific event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -675,7 +681,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic editorial illustration with no readable text, logos, recognizable people, or depiction of a specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -714,7 +721,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic illustrative mountain-lake landscape with no text, logos, faces, or depiction of a specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -913,7 +921,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic illustrated alpine lakeside scene with abstract chart panels and a clock; no text, logos, faces, or depiction of a specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -952,7 +961,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Generic illustrative office scene with abstract banknotes and charts; no readable text, logos, recognizable faces, or specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -1031,7 +1041,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic editorial-style illustration with no readable text, logos, recognizable faces, or depiction of a specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -1110,7 +1121,8 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "notes": "Original generic illustrated landscape; no readable text, logos, signatures, recognizable faces, or specific real event."
-      }
+      },
+      "kind": "generated"
     },
     {
       "schema": 1,
@@ -24072,6 +24084,49 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Generic synthetic editorial landscape illustrating Ticino and cross-border commuting; no text, logos, or people."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "5d4f87ad56680e3f59851b0d08cb110d277227d909129502ae01b4a9f15d5add",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "a866b7816bc2f205f10c1b7eda8242220624c1afce6ad0fc7d9a83c30514332f",
+      "bytes": 73108,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-16T13:43:34.318Z",
+      "verifiedAt": "2026-10-16T13:43:52.163Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica.webp",
+      "area": "Ticino e pendolarismo transfrontaliero",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic synthetic editorial scene with a tax form and calculator overlooking a Ticino-like mountain town; no recognizable people, logos, signage, or readable text."
       }
     }
   ]
