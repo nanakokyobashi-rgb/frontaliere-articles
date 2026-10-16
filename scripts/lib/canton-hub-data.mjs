@@ -16,7 +16,9 @@ import '../../host/cantonSectionsBootstrap.mjs';
  *   { schemaVersion: 1, id: "canton-ti:fisco", section, canton, topic,
  *     updatedAt, contentHash, blocks: [],
  *     locales: { it: { canton, topic, locale, intro, keyFacts,
- *       dataBlocks, curatedArticles, links, updatedAt }, … } }
+ *       dataBlocks, curatedArticles, latestCantonArticles, links, updatedAt }, … } }
+ * `latestCantonArticles` is optional while already published pre-fallback
+ * documents are being refreshed; new producer output always includes it.
  *
  * La forma e' validata qui, al confine fra producer e publisher. Ogni voce di
  * locale e' l'input di `renderCantonTopicHub` (engine/cantonSectionPages.ts).
@@ -80,6 +82,9 @@ function validateHubDocument(doc, section, topic, rel) {
     if (typeof entry.intro !== 'string' || entry.intro.trim() === '') throw new Error(`${rel}: intro "${locale}" vuota`);
     for (const field of ['keyFacts', 'dataBlocks', 'curatedArticles', 'links']) {
       if (!Array.isArray(entry[field])) throw new Error(`${rel}: ${field} della locale "${locale}" deve essere un array`);
+    }
+    if (entry.latestCantonArticles !== undefined && !Array.isArray(entry.latestCantonArticles)) {
+      throw new Error(`${rel}: latestCantonArticles della locale "${locale}" deve essere un array`);
     }
     const contentWords = countCantonHubContentWords(entry);
     if (contentWords < CANTON_HUB_MIN_CONTENT_WORDS) {

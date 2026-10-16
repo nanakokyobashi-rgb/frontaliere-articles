@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "pensioni",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "fe8c63420e5018f90b093ab1d953ee766466572a5b643e2263879a7f3681b990",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "704820a1b263e10ddb30683cefcdbf400f8952d03e2977286fd71edab94dd2ec",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -141,7 +141,7 @@
               "url": "https://www.vs.ch/web/communication/w/fonds-pour-la-famille-et-allocations-familiales"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -152,6 +152,7 @@
           "date": "2026-09-06T11:27:45.394Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Strumenti su tasse e pensione",
@@ -170,7 +171,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "VS",
@@ -284,7 +285,7 @@
               "url": "https://www.vs.ch/web/communication/w/fonds-pour-la-famille-et-allocations-familiales"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -295,6 +296,7 @@
           "date": "2026-09-06T11:27:45.394Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tax and pension tools",
@@ -313,7 +315,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "VS",
@@ -427,7 +429,7 @@
               "url": "https://www.vs.ch/web/communication/w/fonds-pour-la-famille-et-allocations-familiales"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -438,6 +440,7 @@
           "date": "2026-09-06T11:27:45.394Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tools zu Steuern und Vorsorge",
@@ -456,7 +459,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "VS",
@@ -570,7 +573,7 @@
               "url": "https://www.vs.ch/web/communication/w/fonds-pour-la-famille-et-allocations-familiales"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -581,6 +584,7 @@
           "date": "2026-09-06T11:27:45.394Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Outils impôts et retraite",
@@ -599,7 +603,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

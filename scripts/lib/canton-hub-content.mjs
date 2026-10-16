@@ -28,7 +28,8 @@ export function countCantonHubContentWords(input) {
     (input?.keyFacts ?? []).reduce((total, fact) => total + countWords(`${fact.label} ${fact.value} ${fact.note ?? ''}`), 0) +
     (input?.dataBlocks ?? []).reduce((total, block) => total + countWords(`${block.title} ${block.description ?? ''}`) +
       (block.items ?? []).reduce((subtotal, item) => subtotal + countWords(`${item.label} ${item.value ?? ''} ${item.detail ?? ''}`), 0), 0) +
-    (input?.curatedArticles ?? []).reduce((total, article) => total + countWords(`${article.title} ${article.excerpt ?? ''}`), 0)
+    (input?.curatedArticles ?? []).reduce((total, article) => total + countWords(`${article.title} ${article.excerpt ?? ''}`), 0) +
+    (input?.latestCantonArticles ?? []).reduce((total, article) => total + countWords(`${article.title} ${article.excerpt ?? ''}`), 0)
   );
 }
 

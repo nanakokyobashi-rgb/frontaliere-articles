@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T12:42:07.041Z",
-  "contentHash": "39a0df3a80f56a10736db3d13f7fef621d34b34c45a8edb7b5b496760f58d81a",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "28158859ad75f807cd985862bc27ab06124dcc1412310bfb6a7a21921ca0032c",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -136,6 +136,7 @@
           "date": "2026-05-06T06:00:49.305Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi nei Grigioni",
@@ -146,7 +147,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "GR",
@@ -270,6 +271,7 @@
           "date": "2026-05-06T06:00:49.305Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "All events in Graubünden",
@@ -280,7 +282,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "GR",
@@ -404,6 +406,7 @@
           "date": "2026-05-06T06:00:49.305Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen in Graubünden",
@@ -414,7 +417,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "GR",
@@ -538,6 +541,7 @@
           "date": "2026-05-06T06:00:49.305Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tous les événements aux Grisons",
@@ -548,7 +552,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

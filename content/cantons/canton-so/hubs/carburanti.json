@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "3461da9448c3d00a1a9cc992005f8b23fb14d928fef4da1f50ae279158a4246d",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "a703482c75404600daafc37e7cc0210ddb62acb58cc6f849f53ca645a56ed649",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -70,6 +70,38 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Furti con raggiro a Soletta: la polizia mette in guardia",
+          "url": "/articoli-soletta/furti-raggiro-soletta/",
+          "excerpt": "La Polizia cantonale di Soletta segnala circa dieci furti con raggiro negli ultimi giorni: autrici e autori usano gioielli economici per distrarre le vittime.",
+          "date": "2026-10-09T23:07:09.213Z"
+        },
+        {
+          "title": "Soletta: uccisi 930 suini per polmonite enzootica",
+          "url": "/articoli-soletta/solothurn-pneumonia-suini/",
+          "excerpt": "Il Servizio veterinario del Canton Soletta ha sgomberato due allevamenti: 80 scrofe e 50 giovani macellati, 930 suini uccisi e 1200 giovani esportati vivi.",
+          "date": "2026-10-09T14:03:47.492Z"
+        },
+        {
+          "title": "Soletta: Governo chiede correzioni su progetti trasporti",
+          "url": "/articoli-soletta/soletta-progetti-trasporto-governo/",
+          "excerpt": "Soletta sostiene «Verkehr ’45» e chiede correzioni.",
+          "date": "2026-10-08T11:40:05.556Z"
+        },
+        {
+          "title": "A5 a Luterbach: quattro rampe chiuse a ottobre",
+          "url": "/articoli-soletta/luterbach-a5-rampe-notte/",
+          "excerpt": "A Luterbach, sulla A5, la viabilità cambia nell'ottobre 2026: quattro rampe saranno chiuse di notte tra il 12 e il 20 ottobre. Le deviazioni saranno segnalate.",
+          "date": "2026-10-08T11:26:57.068Z"
+        },
+        {
+          "title": "Premi cassa malati a Soletta: +6% nel 2027",
+          "url": "/articoli-soletta/premi-malattia-soletta-2027/",
+          "excerpt": "Nel Canton Soletta il premio medio salirà di CHF 23.50 a CHF 417.50 nel 2027, 5.50 in più della media svizzera.",
+          "date": "2026-10-07T11:11:51.115Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -80,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "SO",
@@ -137,6 +169,37 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Thefts by deception in Solothurn: police issue warning",
+          "url": "/en/solothurn-articles/solothurn-trick-thefts-warning/",
+          "excerpt": "The Solothurn cantonal police report around ten thefts involving deception in recent days: perpetrators use inexpensive jewelry to distract their victims.",
+          "date": "2026-10-09T23:07:09.213Z"
+        },
+        {
+          "title": "Solothurn: 930 pigs killed due to enzootic pneumonia",
+          "url": "/en/solothurn-articles/solothurn-pig-pneumonia-cull/",
+          "excerpt": "The Veterinary Service of the Canton of Solothurn has cleared out two farms: 80 sows and 50 young pigs slaughtered, 930 pigs killed and 1200 young pigs exported alive.",
+          "date": "2026-10-09T14:03:47.492Z"
+        },
+        {
+          "title": "Solothurn: Government calls for corrections to transport projects",
+          "url": "/en/solothurn-articles/solothurn-transport-projects-government/",
+          "date": "2026-10-08T11:40:05.556Z"
+        },
+        {
+          "title": "A5 at Luterbach: four ramps closed in October",
+          "url": "/en/solothurn-articles/luterbach-a5-night-ramps/",
+          "excerpt": "At Luterbach, on the A5, traffic patterns will change in October 2026: four ramps will be closed at night between October 12 and 20. Detours will be signposted.",
+          "date": "2026-10-08T11:26:57.068Z"
+        },
+        {
+          "title": "Health insurance premiums in Solothurn: +6% in 2027",
+          "url": "/en/solothurn-articles/solothurn-health-premiums-2027/",
+          "excerpt": "In the Canton of Solothurn, the average premium will rise by CHF 23.50 to CHF 417.50 in 2027, 5.50 more than the Swiss average.",
+          "date": "2026-10-07T11:11:51.115Z"
+        }
+      ],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -147,7 +210,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "SO",
@@ -204,6 +267,37 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Trickdiebstähle in Solothurn: Die Polizei warnt",
+          "url": "/de/solothurn-artikel/solothurn-warnung-trickdiebstahle/",
+          "excerpt": "Die Kantonspolizei Solothurn meldet rund zehn Trickdiebstähle in den letzten Tagen: Täterinnen und Täter verwenden günstigen Schmuck, um die Opfer abzulenken.",
+          "date": "2026-10-09T23:07:09.213Z"
+        },
+        {
+          "title": "Solothurn: 930 Schweine wegen enzootischer Pneumonie getötet",
+          "url": "/de/solothurn-artikel/solothurn-schweinepneumonie-keulung/",
+          "excerpt": "Der Veterinärdienst des Kantons Solothurn hat zwei Betriebe geräumt: 80 Sauen und 50 Jungtiere geschlachtet, 930 Schweine getötet und 1200 Jungtiere lebend exportiert.",
+          "date": "2026-10-09T14:03:47.492Z"
+        },
+        {
+          "title": "Solothurn: Regierung fordert Korrekturen bei Verkehrsprojekten",
+          "url": "/de/solothurn-artikel/solothurn-verkehrsprojekte-regierung/",
+          "date": "2026-10-08T11:40:05.556Z"
+        },
+        {
+          "title": "A5 bei Luterbach: vier Rampen im Oktober gesperrt",
+          "url": "/de/solothurn-artikel/luterbach-a5-nachtsperren/",
+          "excerpt": "Bei Luterbach ändert sich auf der A5 im Oktober 2026 die Verkehrsführung: Vier Rampen werden zwischen dem 12. und 20. Oktober nachts gesperrt. Die Umleitungen werden ausgeschildert.",
+          "date": "2026-10-08T11:26:57.068Z"
+        },
+        {
+          "title": "Krankenkassenprämien in Solothurn: +6% im Jahr 2027",
+          "url": "/de/solothurn-artikel/solothurn-krankenkassenpraemien-2027/",
+          "excerpt": "Im Kanton Solothurn steigt die durchschnittliche Prämie im Jahr 2027 um CHF 23.50 auf CHF 417.50, 5.50 mehr als der Schweizer Durchschnitt.",
+          "date": "2026-10-07T11:11:51.115Z"
+        }
+      ],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -214,7 +308,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "SO",
@@ -271,6 +365,38 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Vols par ruse à Soleure : la police met en garde",
+          "url": "/fr/articles-soleure/soleure-alerte-vols-par-ruse/",
+          "excerpt": "La Police cantonale de Soleure signale une dizaine de vols par ruse ces derniers jours : les autrices et auteurs utilisent des bijoux bon marché pour distraire les victimes.",
+          "date": "2026-10-09T23:07:09.213Z"
+        },
+        {
+          "title": "Soleure : 930 porcs tués en raison d'une pneumonie enzootique",
+          "url": "/fr/articles-soleure/soleure-pneumonie-porcine-abattage/",
+          "excerpt": "Le Service vétérinaire du canton de Soleure a fait évacuer deux élevages : 80 truies et 50 jeunes porcs abattus, 930 porcs tués et 1200 jeunes porcs exportés vivants.",
+          "date": "2026-10-09T14:03:47.492Z"
+        },
+        {
+          "title": "Soleure : projets de transport, corrections demandées",
+          "url": "/fr/articles-soleure/soleure-projets-transport-gouvernement/",
+          "excerpt": "Soleure soutient « Verkehr ’45 » et demande des corrections.",
+          "date": "2026-10-08T11:40:05.556Z"
+        },
+        {
+          "title": "A5 à Luterbach : quatre bretelles fermées en octobre",
+          "url": "/fr/articles-soleure/luterbach-a5-rampes-nuit/",
+          "excerpt": "À Luterbach, sur l’A5, la circulation change en octobre 2026 : quatre bretelles seront fermées de nuit entre le 12 et le 20 octobre. Les déviations seront signalées.",
+          "date": "2026-10-08T11:26:57.068Z"
+        },
+        {
+          "title": "Primes d’assurance-maladie à Soleure : +6 % en 2027",
+          "url": "/fr/articles-soleure/primes-maladie-soleure-2027/",
+          "excerpt": "Dans le canton de Soleure, la prime moyenne augmentera de CHF 23.50 pour atteindre CHF 417.50 en 2027, soit 5.50 de plus que la moyenne suisse.",
+          "date": "2026-10-07T11:11:51.115Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -281,7 +407,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

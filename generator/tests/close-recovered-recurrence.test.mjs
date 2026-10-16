@@ -243,7 +243,7 @@ test('TITLE_RE continua a riconoscere i titoli che scan-failed-runs.mjs conia', 
     path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'scripts', 'ci', 'scan-failed-runs.mjs'),
     'utf8',
   );
-  assert.ok(src.includes('`Workflow Failure: ${name}`'), 'il template del titolo è cambiato: riallineare TITLE_RE');
+  assert.ok(src.includes('workflowFailureTitle(name)'), 'il template del titolo è cambiato: riallineare TITLE_RE');
 });
 
 test('il titolo dell\'articolo perso resta FUORI dalla famiglia coperta dal closer', () => {

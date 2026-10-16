@@ -4,22 +4,22 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T15:11:04.417Z",
-  "contentHash": "981549413838f9dc1a4491021d5fa4d2cbdc5b9178a84f310caba7e4e2376f3c",
+  "updatedAt": "2026-10-16T14:33:38.367Z",
+  "contentHash": "f42491c72d37f2483f6b6d3156044b525c32402ab16ad5f6f4527c7b0d042c92",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-14T23:59:59.000Z",
+      "updatedAt": "2026-10-15T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T05:23:55.314Z",
-      "keyFacts": 2
+      "updatedAt": "2026-10-16T05:03:47.755Z",
+      "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T20:59:19.985Z",
+      "updatedAt": "2026-10-16T10:09:31.602Z",
       "keyFacts": 0
     }
   ],
@@ -32,66 +32,55 @@
       "keyFacts": [
         {
           "label": "Valico più scorrevole della settimana",
-          "value": "0,2 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 14 ottobre 2026"
-        },
-        {
-          "label": "Chiusure stradali in corso o imminenti",
-          "value": "1",
-          "note": "segnalazioni aggiornate: 15 ottobre 2026"
+          "value": "0,1 min",
+          "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 15 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "4",
-          "note": "segnalazioni aggiornate: 15 ottobre 2026"
+          "value": "3",
+          "note": "segnalazioni aggiornate: 16 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 8 ottobre 2026 – 14 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 9 ottobre 2026 – 15 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
-              "value": "0,2 min",
-              "detail": "48 rilevazioni",
+              "value": "0,1 min",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/diessenhofen-gailingen-am-hochrhein/oggi/"
             },
             {
               "label": "Konstanz – Kreuzlingen",
-              "value": "0,3 min",
-              "detail": "48 rilevazioni",
+              "value": "0,2 min",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/konstanz-kreuzlingen/oggi/"
             },
             {
               "label": "Konstanz – Tägerwilen, Autostrada B33n/A7",
-              "value": "0,4 min",
-              "detail": "48 rilevazioni",
+              "value": "0,3 min",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/konstanz-tagerwilen-autostrada-b33n-a7/oggi/"
             },
             {
               "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
-              "value": "0,6 min",
-              "detail": "48 rilevazioni",
+              "value": "0,4 min",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/konstanz-tagerwilen-gottlieber-strasse/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-14T23:59:59.000Z"
+          "updatedAt": "2026-10-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Chiusure, cantieri e disagi",
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
-            {
-              "label": "A1 Zürich <-> St. Gallen tra Svincolo autostradale Oberwinterthur E Svincolo autostradale Matzingen Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 16 ottobre 2026",
-              "date": "2026-10-09T12:00:00.000Z"
-            },
             {
               "label": "A7 Winterthur <-> Kreuzlingen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 7.5 Limitazione del…",
               "value": "Cantiere",
@@ -109,22 +98,21 @@
               "value": "Cantiere",
               "detail": "fine prevista: 6 novembre 2026",
               "date": "2026-09-25T13:42:00.000Z"
-            },
-            {
-              "label": "A23 Diramazione Grüneck <-> Eschikofen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Eschikofen Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 16 ottobre 2026",
-              "date": "2026-10-13T08:16:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-16T05:03:47.755Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Kantonsstrasse in Felben-Wellhausen wird saniert",
+              "date": "2026-10-16",
+              "url": "https://www.tg.ch/news.html/485/news/80433"
+            },
             {
               "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
               "date": "2026-10-14T07:02:32.000Z",
@@ -149,14 +137,9 @@
               "label": "Kantonsstrasse zwischen Wängi und Lommis bleibt länger gesperrt",
               "date": "2026-10-02",
               "url": "https://www.tg.ch/news.html/485/news/80332"
-            },
-            {
-              "label": "Hauptstrasse in Hüttwilen wird gesperrt",
-              "date": "2026-10-02",
-              "url": "https://www.tg.ch/news.html/485/news/80334"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -173,6 +156,7 @@
           "date": "2026-08-16T19:03:12.024Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attese ai valichi verso Germania",
@@ -203,7 +187,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-15T15:11:04.417Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "en": {
       "canton": "TG",
@@ -213,66 +197,55 @@
       "keyFacts": [
         {
           "label": "Fastest crossing of the week",
-          "value": "0.2 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, week ending 14 October 2026"
-        },
-        {
-          "label": "Road closures in force or imminent",
-          "value": "1",
-          "note": "reports as of 15 October 2026"
+          "value": "0.1 min",
+          "note": "Diessenhofen – Gailingen am Hochrhein, week ending 15 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "4",
-          "note": "reports as of 15 October 2026"
+          "value": "3",
+          "note": "reports as of 16 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 8 October 2026 to 14 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 9 October 2026 to 15 October 2026, fastest first.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
-              "value": "0.2 min",
-              "detail": "48 readings",
+              "value": "0.1 min",
+              "detail": "47 readings",
               "url": "/en/border-wait/diessenhofen-gailingen-am-hochrhein/today/"
             },
             {
               "label": "Konstanz – Kreuzlingen",
-              "value": "0.3 min",
-              "detail": "48 readings",
+              "value": "0.2 min",
+              "detail": "47 readings",
               "url": "/en/border-wait/konstanz-kreuzlingen/today/"
             },
             {
               "label": "Konstanz – Tägerwilen, Autostrada B33n/A7",
-              "value": "0.4 min",
-              "detail": "48 readings",
+              "value": "0.3 min",
+              "detail": "47 readings",
               "url": "/en/border-wait/konstanz-tagerwilen-autostrada-b33n-a7/today/"
             },
             {
               "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
-              "value": "0.6 min",
-              "detail": "48 readings",
+              "value": "0.4 min",
+              "detail": "47 readings",
               "url": "/en/border-wait/konstanz-tagerwilen-gottlieber-strasse/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-14T23:59:59.000Z"
+          "updatedAt": "2026-10-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Closures, roadworks and disruptions",
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
-            {
-              "label": "A1 Zürich <-> St. Gallen tra Svincolo autostradale Oberwinterthur E Svincolo autostradale Matzingen Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia…",
-              "value": "Closure",
-              "detail": "until 16 October 2026",
-              "date": "2026-10-09T12:00:00.000Z"
-            },
             {
               "label": "A7 Winterthur <-> Kreuzlingen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 7.5 Limitazione del…",
               "value": "Roadworks",
@@ -290,22 +263,21 @@
               "value": "Roadworks",
               "detail": "until 6 November 2026",
               "date": "2026-09-25T13:42:00.000Z"
-            },
-            {
-              "label": "A23 Diramazione Grüneck <-> Eschikofen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Eschikofen Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del…",
-              "value": "Roadworks",
-              "detail": "until 16 October 2026",
-              "date": "2026-10-13T08:16:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-16T05:03:47.755Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Kantonsstrasse in Felben-Wellhausen wird saniert",
+              "date": "2026-10-16",
+              "url": "https://www.tg.ch/news.html/485/news/80433"
+            },
             {
               "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
               "date": "2026-10-14T07:02:32.000Z",
@@ -330,14 +302,9 @@
               "label": "Kantonsstrasse zwischen Wängi und Lommis bleibt länger gesperrt",
               "date": "2026-10-02",
               "url": "https://www.tg.ch/news.html/485/news/80332"
-            },
-            {
-              "label": "Hauptstrasse in Hüttwilen wird gesperrt",
-              "date": "2026-10-02",
-              "url": "https://www.tg.ch/news.html/485/news/80334"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -354,6 +321,7 @@
           "date": "2026-08-16T19:03:12.024Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Border waits towards Germany",
@@ -384,7 +352,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-15T15:11:04.417Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "de": {
       "canton": "TG",
@@ -394,66 +362,55 @@
       "keyFacts": [
         {
           "label": "Schnellster Grenzübergang der Woche",
-          "value": "0.2 Min.",
-          "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 14. Oktober 2026"
-        },
-        {
-          "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "1",
-          "note": "Meldungen vom 15. Oktober 2026"
+          "value": "0.1 Min.",
+          "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 15. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "4",
-          "note": "Meldungen vom 15. Oktober 2026"
+          "value": "3",
+          "note": "Meldungen vom 16. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 8. Oktober 2026 bis 14. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 9. Oktober 2026 bis 15. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
-              "value": "0.2 Min.",
-              "detail": "48 Messungen",
+              "value": "0.1 Min.",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/diessenhofen-gailingen-am-hochrhein/heute/"
             },
             {
               "label": "Konstanz – Kreuzlingen",
-              "value": "0.3 Min.",
-              "detail": "48 Messungen",
+              "value": "0.2 Min.",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/konstanz-kreuzlingen/heute/"
             },
             {
               "label": "Konstanz – Tägerwilen, Autostrada B33n/A7",
-              "value": "0.4 Min.",
-              "detail": "48 Messungen",
+              "value": "0.3 Min.",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/konstanz-tagerwilen-autostrada-b33n-a7/heute/"
             },
             {
               "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
-              "value": "0.6 Min.",
-              "detail": "48 Messungen",
+              "value": "0.4 Min.",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/konstanz-tagerwilen-gottlieber-strasse/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-14T23:59:59.000Z"
+          "updatedAt": "2026-10-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Sperrungen, Baustellen und Störungen",
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
-            {
-              "label": "A1 Zürich <-> St. Gallen zwischen Anschluss Oberwinterthur und Anschluss Matzingen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: Pannenstreifen gesperrt Zusatz 1…",
-              "value": "Sperrung",
-              "detail": "bis 16. Oktober 2026",
-              "date": "2026-10-09T12:00:00.000Z"
-            },
             {
               "label": "A7 Winterthur <-> Kreuzlingen zwischen Autobahndreieck Verzweigung Grüneck und Anschluss Frauenfeld-Ost Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 7.5 Verkehrsführung: Fahrbahnverengung auf…",
               "value": "Baustelle",
@@ -471,22 +428,21 @@
               "value": "Baustelle",
               "detail": "bis 6. November 2026",
               "date": "2026-09-25T13:42:00.000Z"
-            },
-            {
-              "label": "A23 Verzweigung Grüneck <-> Eschikofen zwischen Autobahndreieck Verzweigung Grüneck und Anschluss Eschikofen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.15 Verkehrsführung…",
-              "value": "Baustelle",
-              "detail": "bis 16. Oktober 2026",
-              "date": "2026-10-13T08:16:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-16T05:03:47.755Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Kantonsstrasse in Felben-Wellhausen wird saniert",
+              "date": "2026-10-16",
+              "url": "https://www.tg.ch/news.html/485/news/80433"
+            },
             {
               "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
               "date": "2026-10-14T07:02:32.000Z",
@@ -511,14 +467,9 @@
               "label": "Kantonsstrasse zwischen Wängi und Lommis bleibt länger gesperrt",
               "date": "2026-10-02",
               "url": "https://www.tg.ch/news.html/485/news/80332"
-            },
-            {
-              "label": "Hauptstrasse in Hüttwilen wird gesperrt",
-              "date": "2026-10-02",
-              "url": "https://www.tg.ch/news.html/485/news/80334"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -535,6 +486,7 @@
           "date": "2026-08-16T19:03:12.024Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Wartezeiten an der Grenze Richtung Deutschland",
@@ -565,7 +517,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-15T15:11:04.417Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "fr": {
       "canton": "TG",
@@ -575,66 +527,55 @@
       "keyFacts": [
         {
           "label": "Poste-frontière le plus fluide de la semaine",
-          "value": "0,2 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 14 octobre 2026"
-        },
-        {
-          "label": "Fermetures de routes en cours ou imminentes",
-          "value": "1",
-          "note": "signalements au 15 octobre 2026"
+          "value": "0,1 min",
+          "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 15 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "4",
-          "note": "signalements au 15 octobre 2026"
+          "value": "3",
+          "note": "signalements au 16 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 8 octobre 2026 au 14 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 9 octobre 2026 au 15 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
-              "value": "0,2 min",
-              "detail": "48 relevés",
+              "value": "0,1 min",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/diessenhofen-gailingen-am-hochrhein/aujourd-hui/"
             },
             {
               "label": "Konstanz – Kreuzlingen",
-              "value": "0,3 min",
-              "detail": "48 relevés",
+              "value": "0,2 min",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/konstanz-kreuzlingen/aujourd-hui/"
             },
             {
               "label": "Konstanz – Tägerwilen, Autostrada B33n/A7",
-              "value": "0,4 min",
-              "detail": "48 relevés",
+              "value": "0,3 min",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/konstanz-tagerwilen-autostrada-b33n-a7/aujourd-hui/"
             },
             {
               "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
-              "value": "0,6 min",
-              "detail": "48 relevés",
+              "value": "0,4 min",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/konstanz-tagerwilen-gottlieber-strasse/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-14T23:59:59.000Z"
+          "updatedAt": "2026-10-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Fermetures, chantiers et perturbations",
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
-            {
-              "label": "A1 Zurich <-> St-Gall entre Jonction autoroutière Oberwinterthur et Jonction autoroutière Matzingen Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: bande d'arrêt d'urgence…",
-              "value": "Fermeture",
-              "detail": "jusqu’au 16 octobre 2026",
-              "date": "2026-10-09T12:00:00.000Z"
-            },
             {
               "label": "A7 Winterthur <-> Kreuzlingen entre Echangeur Echangeur de Grüneck et Jonction autoroutière Frauenfeld-Est Situation: trafic perturbé travaux, longueur [km] 7.5 Gestion du trafic: rétrécissement des…",
               "value": "Chantier",
@@ -652,22 +593,21 @@
               "value": "Chantier",
               "detail": "jusqu’au 6 novembre 2026",
               "date": "2026-09-25T13:42:00.000Z"
-            },
-            {
-              "label": "A23 Echangeur de Grüneck <-> Eschikofen entre Echangeur Echangeur de Grüneck et Jonction autoroutière Eschikofen Situation: trafic perturbé travaux, longueur [km] 0.15 Gestion du trafic…",
-              "value": "Chantier",
-              "detail": "jusqu’au 16 octobre 2026",
-              "date": "2026-10-13T08:16:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T05:23:55.314Z"
+          "updatedAt": "2026-10-16T05:03:47.755Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Kantonsstrasse in Felben-Wellhausen wird saniert",
+              "date": "2026-10-16",
+              "url": "https://www.tg.ch/news.html/485/news/80433"
+            },
             {
               "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
               "date": "2026-10-14T07:02:32.000Z",
@@ -692,14 +632,9 @@
               "label": "Kantonsstrasse zwischen Wängi und Lommis bleibt länger gesperrt",
               "date": "2026-10-02",
               "url": "https://www.tg.ch/news.html/485/news/80332"
-            },
-            {
-              "label": "Hauptstrasse in Hüttwilen wird gesperrt",
-              "date": "2026-10-02",
-              "url": "https://www.tg.ch/news.html/485/news/80334"
             }
           ],
-          "updatedAt": "2026-10-14T20:59:19.985Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -716,6 +651,7 @@
           "date": "2026-08-16T19:03:12.024Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attente aux frontières vers Allemagne",
@@ -746,7 +682,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-15T15:11:04.417Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     }
   }
 }

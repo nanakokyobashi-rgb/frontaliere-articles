@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "carburanti",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "24fff4d5229db3e5b31f773b74f43cb3435d28f1062eb7af7535d595363e235b",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "a4999d1e47e41fee9192ef855cd5a5d828ceb9f50b6e6a9d2f633a52851788a9",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -119,6 +119,7 @@
           "date": "2026-04-27T09:12:47.619Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Prezzo della benzina oggi",
@@ -145,7 +146,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "TI",
@@ -251,6 +252,7 @@
           "date": "2026-04-27T09:12:47.619Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Petrol price today",
@@ -277,7 +279,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "TI",
@@ -383,6 +385,7 @@
           "date": "2026-04-27T09:12:47.619Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Benzinpreis heute",
@@ -405,7 +408,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "TI",
@@ -511,6 +514,7 @@
           "date": "2026-04-27T09:12:47.619Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Prix de l’essence aujourd’hui",
@@ -537,7 +541,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

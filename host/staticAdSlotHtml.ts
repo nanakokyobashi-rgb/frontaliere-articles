@@ -56,7 +56,13 @@ const STATIC_AD_SLOTS: Record<StaticAdSlotKey, {
   },
 };
 
+export function isStaticAdSlotKey(value: unknown): value is StaticAdSlotKey {
+  return typeof value === 'string' && Object.hasOwn(STATIC_AD_SLOTS, value);
+}
+
 export function staticAdSlotHtml(slot: StaticAdSlotKey): string {
+  if (!isStaticAdSlotKey(slot)) return '';
+
   const config = STATIC_AD_SLOTS[slot];
   const attrs = [
     'class="adsbygoogle"',

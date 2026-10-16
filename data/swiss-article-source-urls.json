@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/settimana-di-iniziative-contro-lo-spreco-alimentare/92045834": {
-    "articleId": "settimana-contro-lo-spreco-alimentare-svizzera",
-    "ts": "2026-09-13T08:29:13.373Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/ftwbd2hbcded": {
     "articleId": "record-imprese-culturali-svizzera",
     "ts": "2026-09-13T08:54:06.457Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/benzina-e-diesel%2c-i-prezzi-tornano-a-salire%3a-%2b5-centesimi-al-litro/92227260": {
     "articleId": "carburanti-svizzera-rincaro-settimanale",
     "ts": "2026-10-16T10:57:56.829Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1957162/lupi-svizzera-caccia-federale-lupo-contadini": {
+    "articleId": "svizzera-abbattimenti-lupi-2025",
+    "ts": "2026-10-16T14:12:02.638Z",
     "keyForm": 2
   }
 }

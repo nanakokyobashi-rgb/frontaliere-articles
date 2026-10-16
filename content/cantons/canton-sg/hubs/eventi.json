@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T12:42:07.041Z",
-  "contentHash": "36a3172d3c1fdebe586fa08c5453ca25394b8497b596ca3d0b3ad65009f6f49e",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "4b28cf2f01e3fc3eb1e5da5395f99039f64208ee506c97c5c197986bbd9009f0",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -106,6 +106,7 @@
           "date": "2026-08-13T21:21:36.698Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton San Gallo",
@@ -116,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "SG",
@@ -210,6 +211,7 @@
           "date": "2026-08-13T21:21:36.698Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "All events in the canton of St. Gallen",
@@ -220,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "SG",
@@ -314,6 +316,7 @@
           "date": "2026-08-13T21:21:36.698Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton St. Gallen",
@@ -324,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "SG",
@@ -418,6 +421,7 @@
           "date": "2026-08-13T21:21:36.698Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tous les événements dans le canton de Saint-Gall",
@@ -428,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

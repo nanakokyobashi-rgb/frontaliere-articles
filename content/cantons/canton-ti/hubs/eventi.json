@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T12:42:07.041Z",
-  "contentHash": "b7c73a8e020f558727cbc681540abb664d4095dacbd2f8f0068d0ad6f2acf3a2",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "156b1680afffde8667a98731804f257872090b3c61e420a7f568c279d62b4f6a",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -148,6 +148,7 @@
           "date": "2026-08-05T04:40:05.340Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi in Ticino",
@@ -162,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "TI",
@@ -298,6 +299,7 @@
           "date": "2026-08-05T04:40:05.340Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "All events in Ticino",
@@ -312,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "TI",
@@ -448,6 +450,7 @@
           "date": "2026-08-05T04:40:05.340Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen im Tessin",
@@ -462,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "TI",
@@ -598,6 +601,7 @@
           "date": "2026-08-05T04:40:05.340Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tous les événements au Tessin",
@@ -612,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-16T12:42:07.041Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "pensioni",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "6e48cee6bd501739d1ff29a47517cda45ec13e14ac5166d99e979883e71bd776",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "19c6cf5022b2955f2cffd288bf70dfa1e6e1238f1c64e138fecfddc70c290a1d",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -163,6 +163,7 @@
           "date": "2026-08-25T05:20:21.610Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Strumenti su tasse e pensione",
@@ -181,7 +182,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -322,6 +323,7 @@
           "date": "2026-08-25T05:20:21.610Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tax and pension tools",
@@ -340,7 +342,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -481,6 +483,7 @@
           "date": "2026-08-25T05:20:21.610Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tools zu Steuern und Vorsorge",
@@ -499,7 +502,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -640,6 +643,7 @@
           "date": "2026-08-25T05:20:21.610Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Outils impôts et retraite",
@@ -658,7 +662,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

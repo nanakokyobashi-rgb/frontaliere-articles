@@ -700,7 +700,7 @@ async function renderHubs({ section, distDir }) {
     for (const locale of CANTON_HUB_LOCALES) {
       let page;
       try {
-        page = renderCantonTopicHub({ keyFacts: [], dataBlocks: [], curatedArticles: [], links: [], ...data[locale], canton, topic, locale });
+        page = renderCantonTopicHub({ keyFacts: [], dataBlocks: [], curatedArticles: [], latestCantonArticles: [], links: [], ...data[locale], canton, topic, locale });
       } catch (error) {
         throw new Error(`${cantonHubDataFile(section, topic)} (${locale}): ${error.message}`, { cause: error });
       }

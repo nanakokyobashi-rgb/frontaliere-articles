@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "96acdeefc1b77738a6f923bdced8ac96fc4123e206e3d2c3f09affbb2c4eea03",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "5c48ba8b2988d498ede0bb26723428c0ab65a55ed0b1d036d62480f0da6539fd",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -119,7 +119,7 @@
               "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -142,6 +142,7 @@
           "date": "2026-08-23T10:50:11.516Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolatore dello stipendio netto",
@@ -164,7 +165,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "NW",
@@ -261,7 +262,7 @@
               "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -284,6 +285,7 @@
           "date": "2026-08-23T10:50:11.516Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Net salary calculator",
@@ -306,7 +308,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "NW",
@@ -403,7 +405,7 @@
               "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -426,6 +428,7 @@
           "date": "2026-08-23T10:50:11.516Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Nettolohn-Rechner",
@@ -448,7 +451,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "NW",
@@ -545,7 +548,7 @@
               "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -568,6 +571,7 @@
           "date": "2026-08-23T10:50:11.516Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calculateur de salaire net",
@@ -590,7 +594,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

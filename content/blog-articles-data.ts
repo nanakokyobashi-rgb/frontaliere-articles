@@ -44940,6 +44940,16 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'dosso-gaggiolo-disagi-frontalieri',
+ category: 'pratico',
+ date: '2026-10-16T14:28:41.661Z',
+ image: '/images/blog/frontalieri-regime-fiscale-nuovo-accordo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

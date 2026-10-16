@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "80e3292a52f21e713dc8c0bf2dfd76c0f14b2af781be5d63b1fa9116e32b74d1",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "a7a1c409f78ef1a6df6fd8257ce535278b37518ad6a2952ce48d3244e8b8cd3a",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T10:18:58.161Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -166,7 +166,7 @@
               "url": "https://www.cpeg.ch/information-generale/le-cpeg-info-n25-edition-juin-2026-est-en-ligne/"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -189,6 +189,7 @@
           "date": "2026-07-23T19:46:26.541Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Strumenti su tasse e pensione",
@@ -207,7 +208,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "GE",
@@ -346,7 +347,7 @@
               "url": "https://www.cpeg.ch/information-generale/le-cpeg-info-n25-edition-juin-2026-est-en-ligne/"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -369,6 +370,7 @@
           "date": "2026-07-23T19:46:26.541Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tax and pension tools",
@@ -387,7 +389,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "GE",
@@ -526,7 +528,7 @@
               "url": "https://www.cpeg.ch/information-generale/le-cpeg-info-n25-edition-juin-2026-est-en-ligne/"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -549,6 +551,7 @@
           "date": "2026-07-23T19:46:26.541Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tools zu Steuern und Vorsorge",
@@ -567,7 +570,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "GE",
@@ -706,7 +709,7 @@
               "url": "https://www.cpeg.ch/information-generale/le-cpeg-info-n25-edition-juin-2026-est-en-ligne/"
             }
           ],
-          "updatedAt": "2026-10-15T10:18:58.161Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -729,6 +732,7 @@
           "date": "2026-07-23T19:46:26.541Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Outils impôts et retraite",
@@ -747,7 +751,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

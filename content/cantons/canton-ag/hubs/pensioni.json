@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T09:59:11.306Z",
-  "contentHash": "82206395bc51fca358b0b4e915a49bdde490b6de867cefc2c6fce569185c2f27",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "23693880ead6c546f403b895ae44957a6f1170d17602dca2ff9853041e25f232",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -134,6 +134,7 @@
           "date": "2026-09-02T10:55:39.287Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Strumenti su tasse e pensione",
@@ -152,7 +153,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "AG",
@@ -264,6 +265,7 @@
           "date": "2026-09-02T10:55:39.287Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tax and pension tools",
@@ -282,7 +284,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "AG",
@@ -394,6 +396,7 @@
           "date": "2026-09-02T10:55:39.287Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tools zu Steuern und Vorsorge",
@@ -412,7 +415,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "AG",
@@ -524,6 +527,7 @@
           "date": "2026-09-02T10:55:39.287Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Outils impôts et retraite",
@@ -542,7 +546,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

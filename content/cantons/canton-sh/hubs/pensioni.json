@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T10:11:40.832Z",
-  "contentHash": "5073d553419fbb13b37993213bcccadebf85c22e8b51a8b88c24c6d78ca1926e",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "6bb15dbadfb695ae6f2c9fc9b7fb79468a841b8171d54f41fc44d8d918cb0d1d",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -146,7 +146,7 @@
               "url": "https://www.pksh.ch/ersatzwahl-mitglied-der-verwaltungskommission-2/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -157,6 +157,7 @@
           "date": "2026-08-20T22:04:59.613Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Strumenti su tasse e pensione",
@@ -175,7 +176,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T10:11:40.832Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "SH",
@@ -294,7 +295,7 @@
               "url": "https://www.pksh.ch/ersatzwahl-mitglied-der-verwaltungskommission-2/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -305,6 +306,7 @@
           "date": "2026-08-20T22:04:59.613Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tax and pension tools",
@@ -323,7 +325,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T10:11:40.832Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "SH",
@@ -442,7 +444,7 @@
               "url": "https://www.pksh.ch/ersatzwahl-mitglied-der-verwaltungskommission-2/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -453,6 +455,7 @@
           "date": "2026-08-20T22:04:59.613Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tools zu Steuern und Vorsorge",
@@ -471,7 +474,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T10:11:40.832Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "SH",
@@ -590,7 +593,7 @@
               "url": "https://www.pksh.ch/ersatzwahl-mitglied-der-verwaltungskommission-2/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -601,6 +604,7 @@
           "date": "2026-08-20T22:04:59.613Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Outils impôts et retraite",
@@ -619,7 +623,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T10:11:40.832Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

@@ -4,22 +4,22 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T04:36:57.811Z",
-  "contentHash": "1cba5c68590a925e63a603e03673463feda6e71a99745bbc7c00e7aea1593078",
+  "updatedAt": "2026-10-16T14:33:38.367Z",
+  "contentHash": "01ed4f292188cae302ae15b043726eb3cead9b04c19808c6536116b9956446f6",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-14T23:59:59.000Z",
+      "updatedAt": "2026-10-15T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-15T12:13:19.434Z",
+      "updatedAt": "2026-10-16T05:03:47.755Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T10:09:31.602Z",
       "keyFacts": 0
     }
   ],
@@ -33,77 +33,77 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Montlingen-Koblach, settimana conclusa: 14 ottobre 2026"
+          "note": "Montlingen-Koblach, settimana conclusa: 15 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "10",
-          "note": "segnalazioni aggiornate: 15 ottobre 2026"
+          "note": "segnalazioni aggiornate: 16 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "14",
-          "note": "segnalazioni aggiornate: 15 ottobre 2026"
+          "note": "segnalazioni aggiornate: 16 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 8 ottobre 2026 – 14 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 9 ottobre 2026 – 15 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Montlingen-Koblach",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/montlingen-koblach/oggi/"
             },
             {
               "label": "Rheineck-Gaißau",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/rheineck-gai-au/oggi/"
             },
             {
               "label": "Salez-Ruggell",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/salez-ruggell/oggi/"
             },
             {
               "label": "Sevelen-Vaduz",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/sevelen-vaduz/oggi/"
             },
             {
               "label": "Trübbach-Balzers",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/trubbach-balzers/oggi/"
             },
             {
               "label": "Widnau-Lustenau (Wiesenrain)",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/widnau-lustenau/oggi/"
             },
             {
               "label": "Kriessern-Mäder",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/kriessern-mader/oggi/"
             },
             {
               "label": "Buchs (SG)-Schaan",
-              "value": "0,1 min",
-              "detail": "48 rilevazioni",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/buchs-schaan/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-14T23:59:59.000Z"
+          "updatedAt": "2026-10-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -160,13 +160,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-16T05:03:47.755Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "A1 Neudorf – Rheineck: Nächtliche Sperrungen zum Einbau neuer Signalträger",
+              "date": "2026-10-16",
+              "url": "https://www.stadt.sg.ch/news/stsg_home/2026/10/a1-neudorf---rheineck--naechtliche--sperrungen-zum-einbau-neuer-.html"
+            },
             {
               "label": "Donnerstag, 15.10.2026 Achraintunnel: Tages- und Nachtsperren im Oktober erforderlich",
               "date": "2026-10-15",
@@ -191,14 +196,9 @@
               "label": "Donnerstag, 8.10.2026 Rinder-TBC: Weitere positive PCR-Befunde in zwei bereits gesperrten Betrieben",
               "date": "2026-10-08",
               "url": "https://presse.vorarlberg.at/land/public/Rinder-TBC-Weitere-positive-PCR-Befunde-in-zwei-bereits-gesperrten-Betrieben"
-            },
-            {
-              "label": "Mittwoch, 23.9.2026 „Tag der offenen Baustelle“ beim Stadttunnel Feldkirch",
-              "date": "2026-10-03",
-              "url": "https://presse.vorarlberg.at/land/public/-Tag-der-offenen-Baustelle-beim-Stadttunnel-Feldkirch"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -221,6 +221,7 @@
           "date": "2026-08-30T09:09:21.184Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attese ai valichi verso Austria",
@@ -255,7 +256,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T04:36:57.811Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "en": {
       "canton": "SG",
@@ -266,77 +267,77 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Montlingen-Koblach, week ending 14 October 2026"
+          "note": "Montlingen-Koblach, week ending 15 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "10",
-          "note": "reports as of 15 October 2026"
+          "note": "reports as of 16 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "14",
-          "note": "reports as of 15 October 2026"
+          "note": "reports as of 16 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 8 October 2026 to 14 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 9 October 2026 to 15 October 2026, fastest first.",
           "items": [
             {
               "label": "Montlingen-Koblach",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/montlingen-koblach/today/"
             },
             {
               "label": "Rheineck-Gaißau",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/rheineck-gai-au/today/"
             },
             {
               "label": "Salez-Ruggell",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/salez-ruggell/today/"
             },
             {
               "label": "Sevelen-Vaduz",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/sevelen-vaduz/today/"
             },
             {
               "label": "Trübbach-Balzers",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/trubbach-balzers/today/"
             },
             {
               "label": "Widnau-Lustenau (Wiesenrain)",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/widnau-lustenau/today/"
             },
             {
               "label": "Kriessern-Mäder",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/kriessern-mader/today/"
             },
             {
               "label": "Buchs (SG)-Schaan",
-              "value": "0.1 min",
-              "detail": "48 readings",
+              "value": "0 min",
+              "detail": "47 readings",
               "url": "/en/border-wait/buchs-schaan/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-14T23:59:59.000Z"
+          "updatedAt": "2026-10-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -393,13 +394,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-16T05:03:47.755Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "A1 Neudorf – Rheineck: Nächtliche Sperrungen zum Einbau neuer Signalträger",
+              "date": "2026-10-16",
+              "url": "https://www.stadt.sg.ch/news/stsg_home/2026/10/a1-neudorf---rheineck--naechtliche--sperrungen-zum-einbau-neuer-.html"
+            },
             {
               "label": "Donnerstag, 15.10.2026 Achraintunnel: Tages- und Nachtsperren im Oktober erforderlich",
               "date": "2026-10-15",
@@ -424,14 +430,9 @@
               "label": "Donnerstag, 8.10.2026 Rinder-TBC: Weitere positive PCR-Befunde in zwei bereits gesperrten Betrieben",
               "date": "2026-10-08",
               "url": "https://presse.vorarlberg.at/land/public/Rinder-TBC-Weitere-positive-PCR-Befunde-in-zwei-bereits-gesperrten-Betrieben"
-            },
-            {
-              "label": "Mittwoch, 23.9.2026 „Tag der offenen Baustelle“ beim Stadttunnel Feldkirch",
-              "date": "2026-10-03",
-              "url": "https://presse.vorarlberg.at/land/public/-Tag-der-offenen-Baustelle-beim-Stadttunnel-Feldkirch"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -453,6 +454,7 @@
           "date": "2026-08-30T09:09:21.184Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Border waits towards Austria",
@@ -487,7 +489,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T04:36:57.811Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "de": {
       "canton": "SG",
@@ -498,77 +500,77 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Montlingen-Koblach, Woche bis 14. Oktober 2026"
+          "note": "Montlingen-Koblach, Woche bis 15. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "10",
-          "note": "Meldungen vom 15. Oktober 2026"
+          "note": "Meldungen vom 16. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "14",
-          "note": "Meldungen vom 15. Oktober 2026"
+          "note": "Meldungen vom 16. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 8. Oktober 2026 bis 14. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 9. Oktober 2026 bis 15. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Montlingen-Koblach",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/montlingen-koblach/heute/"
             },
             {
               "label": "Rheineck-Gaißau",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/rheineck-gai-au/heute/"
             },
             {
               "label": "Salez-Ruggell",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/salez-ruggell/heute/"
             },
             {
               "label": "Sevelen-Vaduz",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/sevelen-vaduz/heute/"
             },
             {
               "label": "Trübbach-Balzers",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/trubbach-balzers/heute/"
             },
             {
               "label": "Widnau-Lustenau (Wiesenrain)",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/widnau-lustenau/heute/"
             },
             {
               "label": "Kriessern-Mäder",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/kriessern-mader/heute/"
             },
             {
               "label": "Buchs (SG)-Schaan",
-              "value": "0.1 Min.",
-              "detail": "48 Messungen",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/buchs-schaan/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-14T23:59:59.000Z"
+          "updatedAt": "2026-10-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -625,13 +627,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-16T05:03:47.755Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "A1 Neudorf – Rheineck: Nächtliche Sperrungen zum Einbau neuer Signalträger",
+              "date": "2026-10-16",
+              "url": "https://www.stadt.sg.ch/news/stsg_home/2026/10/a1-neudorf---rheineck--naechtliche--sperrungen-zum-einbau-neuer-.html"
+            },
             {
               "label": "Donnerstag, 15.10.2026 Achraintunnel: Tages- und Nachtsperren im Oktober erforderlich",
               "date": "2026-10-15",
@@ -656,14 +663,9 @@
               "label": "Donnerstag, 8.10.2026 Rinder-TBC: Weitere positive PCR-Befunde in zwei bereits gesperrten Betrieben",
               "date": "2026-10-08",
               "url": "https://presse.vorarlberg.at/land/public/Rinder-TBC-Weitere-positive-PCR-Befunde-in-zwei-bereits-gesperrten-Betrieben"
-            },
-            {
-              "label": "Mittwoch, 23.9.2026 „Tag der offenen Baustelle“ beim Stadttunnel Feldkirch",
-              "date": "2026-10-03",
-              "url": "https://presse.vorarlberg.at/land/public/-Tag-der-offenen-Baustelle-beim-Stadttunnel-Feldkirch"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -685,6 +687,7 @@
           "date": "2026-08-30T09:09:21.184Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Wartezeiten an der Grenze Richtung Österreich",
@@ -719,7 +722,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T04:36:57.811Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     },
     "fr": {
       "canton": "SG",
@@ -730,77 +733,77 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Montlingen-Koblach, semaine jusqu’au 14 octobre 2026"
+          "note": "Montlingen-Koblach, semaine jusqu’au 15 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "10",
-          "note": "signalements au 15 octobre 2026"
+          "note": "signalements au 16 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "14",
-          "note": "signalements au 15 octobre 2026"
+          "note": "signalements au 16 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 8 octobre 2026 au 14 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 9 octobre 2026 au 15 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Montlingen-Koblach",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/montlingen-koblach/aujourd-hui/"
             },
             {
               "label": "Rheineck-Gaißau",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/rheineck-gai-au/aujourd-hui/"
             },
             {
               "label": "Salez-Ruggell",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/salez-ruggell/aujourd-hui/"
             },
             {
               "label": "Sevelen-Vaduz",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/sevelen-vaduz/aujourd-hui/"
             },
             {
               "label": "Trübbach-Balzers",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/trubbach-balzers/aujourd-hui/"
             },
             {
               "label": "Widnau-Lustenau (Wiesenrain)",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/widnau-lustenau/aujourd-hui/"
             },
             {
               "label": "Kriessern-Mäder",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/kriessern-mader/aujourd-hui/"
             },
             {
               "label": "Buchs (SG)-Schaan",
-              "value": "0,1 min",
-              "detail": "48 relevés",
+              "value": "0 min",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/buchs-schaan/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-14T23:59:59.000Z"
+          "updatedAt": "2026-10-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -857,13 +860,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-15T12:13:19.434Z"
+          "updatedAt": "2026-10-16T05:03:47.755Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "A1 Neudorf – Rheineck: Nächtliche Sperrungen zum Einbau neuer Signalträger",
+              "date": "2026-10-16",
+              "url": "https://www.stadt.sg.ch/news/stsg_home/2026/10/a1-neudorf---rheineck--naechtliche--sperrungen-zum-einbau-neuer-.html"
+            },
             {
               "label": "Donnerstag, 15.10.2026 Achraintunnel: Tages- und Nachtsperren im Oktober erforderlich",
               "date": "2026-10-15",
@@ -888,14 +896,9 @@
               "label": "Donnerstag, 8.10.2026 Rinder-TBC: Weitere positive PCR-Befunde in zwei bereits gesperrten Betrieben",
               "date": "2026-10-08",
               "url": "https://presse.vorarlberg.at/land/public/Rinder-TBC-Weitere-positive-PCR-Befunde-in-zwei-bereits-gesperrten-Betrieben"
-            },
-            {
-              "label": "Mittwoch, 23.9.2026 „Tag der offenen Baustelle“ beim Stadttunnel Feldkirch",
-              "date": "2026-10-03",
-              "url": "https://presse.vorarlberg.at/land/public/-Tag-der-offenen-Baustelle-beim-Stadttunnel-Feldkirch"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T10:09:31.602Z"
         }
       ],
       "curatedArticles": [
@@ -918,6 +921,7 @@
           "date": "2026-08-30T09:09:21.184Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attente aux frontières vers Autriche",
@@ -952,7 +956,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T04:36:57.811Z"
+      "updatedAt": "2026-10-16T14:33:38.367Z"
     }
   }
 }

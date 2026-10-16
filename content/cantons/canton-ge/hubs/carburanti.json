@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "7e4d5dbfc6efaa6571f4b467be158f98011625850aca3988aaf5bc62e90ceaeb",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "9bf06216cefce7dfda93999538c2f03276255e9aaba645ef34b447772d32f3e3",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -70,6 +70,38 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Indagini congiunturali nelle imprese ginevrine",
+          "url": "/articoli-ginevra/indagini-imprese-ginevrine/",
+          "excerpt": "La Repubblica e il Cantone di Ginevra segnala indagini congiunturali di settembre nelle imprese ginevrine.",
+          "date": "2026-10-10T20:58:56.034Z"
+        },
+        {
+          "title": "Cantieri a Ginevra: mobilità impattata dal 12 ottobre 2026",
+          "url": "/articoli-ginevra/cantieri-mobilita-ginevra/",
+          "excerpt": "Nuovi cantieri nel Canton Ginevra partiranno il 12 ottobre 2026 e avranno un impatto sugli spostamenti.",
+          "date": "2026-10-10T20:45:24.102Z"
+        },
+        {
+          "title": "UNIGE: salute mentale, 5-10 ottobre 2026",
+          "url": "/articoli-ginevra/unige-natura-equilibrio-mentale/",
+          "excerpt": "La Settimana della salute mentale 2026 va dal 5 al 10 ottobre.",
+          "date": "2026-10-09T16:43:09.560Z"
+        },
+        {
+          "title": "Comunicato Consiglio di Stato Ginevra: 7 ottobre 2026",
+          "url": "/articoli-ginevra/comunicato-consiglio-stato-ginevra/",
+          "excerpt": "Il comunicato settimanale del Consiglio di Stato del 7 ottobre 2026: il materiale disponibile identifica la pubblicazione, senza altri dettagli.",
+          "date": "2026-10-09T16:16:45.029Z"
+        },
+        {
+          "title": "Ginevra chiede lo stop dei lavori per l'autostrada A412",
+          "url": "/articoli-ginevra/ginevra-stop-autostrada-a412/",
+          "excerpt": "La Ville de Genève chiede di fermare i lavori della A412 Sei comuni ginevrini aderiscono alla procedura La Cour d'appel de Lyon decide il 14 ottobre Nel mirino",
+          "date": "2026-10-08T15:48:49.584Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -80,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "GE",
@@ -137,6 +169,38 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Business surveys among Geneva companies",
+          "url": "/en/geneva-articles/geneva-business-surveys/",
+          "excerpt": "The Republic and Canton of Geneva reports September business surveys among Geneva companies.",
+          "date": "2026-10-10T20:58:56.034Z"
+        },
+        {
+          "title": "Construction work in Geneva: mobility affected from October 12, 2026",
+          "url": "/en/geneva-articles/geneva-mobility-construction/",
+          "excerpt": "New construction projects in the Canton of Geneva will begin on October 12, 2026, and will affect travel.",
+          "date": "2026-10-10T20:45:24.102Z"
+        },
+        {
+          "title": "UNIGE: mental health, October 5-10, 2026",
+          "url": "/en/geneva-articles/unige-nature-mental-wellbeing/",
+          "excerpt": "Mental Health Week 2026 runs from October 5 to 10.",
+          "date": "2026-10-09T16:43:09.560Z"
+        },
+        {
+          "title": "Geneva State Council press release: October 7, 2026",
+          "url": "/en/geneva-articles/geneva-state-council-communique/",
+          "excerpt": "The weekly press release of the Council of State of October 7, 2026: the available material identifies the publication, without further details.",
+          "date": "2026-10-09T16:16:45.029Z"
+        },
+        {
+          "title": "Geneva calls for work on the A412 motorway to be halted",
+          "url": "/en/geneva-articles/geneva-stop-a412-highway/",
+          "excerpt": "The City of Geneva calls for work on the A412 to be halted Six Geneva municipalities join the proceedings The Lyon Court of Appeal will rule on October 14",
+          "date": "2026-10-08T15:48:49.584Z"
+        }
+      ],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -147,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "GE",
@@ -204,6 +268,38 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Konjunkturumfragen bei Genfer Unternehmen",
+          "url": "/de/genf-artikel/konjunkturumfragen-genfer-unternehmen/",
+          "excerpt": "Die Republik und der Kanton Genf melden Konjunkturumfragen im September bei Genfer Unternehmen.",
+          "date": "2026-10-10T20:58:56.034Z"
+        },
+        {
+          "title": "Baustellen in Genf: Beeinträchtigte Mobilität ab 12. Oktober 2026",
+          "url": "/de/genf-artikel/genf-mobilitaetsbaustellen/",
+          "excerpt": "Neue Baustellen im Kanton Genf starten am 12.",
+          "date": "2026-10-10T20:45:24.102Z"
+        },
+        {
+          "title": "UNIGE: psychische Gesundheit, 5.–10. Oktober 2026",
+          "url": "/de/genf-artikel/unige-natur-psychisches-wohlbefinden/",
+          "excerpt": "Die Woche der psychischen Gesundheit 2026 findet vom 5.",
+          "date": "2026-10-09T16:43:09.560Z"
+        },
+        {
+          "title": "Mitteilung des Genfer Staatsrats: 7. Oktober 2026",
+          "url": "/de/genf-artikel/mitteilung-genfer-staatsrat/",
+          "excerpt": "Die wöchentliche Mitteilung des Staatsrats vom 7.",
+          "date": "2026-10-09T16:16:45.029Z"
+        },
+        {
+          "title": "Genf fordert den Baustopp für die Autobahn A412",
+          "url": "/de/genf-artikel/genf-stopp-autobahn-a412/",
+          "excerpt": "Die Stadt Genf fordert, die Arbeiten an der A412 einzustellen Sechs Genfer Gemeinden schließen sich dem Verfahren an Das Berufungsgericht von Lyon entscheidet",
+          "date": "2026-10-08T15:48:49.584Z"
+        }
+      ],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -214,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "GE",
@@ -271,6 +367,38 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Enquêtes conjoncturelles dans les entreprises genevoises",
+          "url": "/fr/articles-geneve/enquetes-conjoncture-entreprises-genevoises/",
+          "excerpt": "La République et le canton de Genève signale des enquêtes conjoncturelles de septembre dans les entreprises genevoises.",
+          "date": "2026-10-10T20:58:56.034Z"
+        },
+        {
+          "title": "Chantiers à Genève : mobilité perturbée à partir du 12 octobre 2026",
+          "url": "/fr/articles-geneve/chantiers-mobilite-geneve/",
+          "excerpt": "De nouveaux chantiers dans le canton de Genève débuteront le 12 octobre 2026 et auront un impact sur les déplacements.",
+          "date": "2026-10-10T20:45:24.102Z"
+        },
+        {
+          "title": "UNIGE : santé mentale, 5-10 octobre 2026",
+          "url": "/fr/articles-geneve/unige-nature-sante-mentale/",
+          "excerpt": "La Semaine de la santé mentale 2026 va du 5 au 10 octobre.",
+          "date": "2026-10-09T16:43:09.560Z"
+        },
+        {
+          "title": "Communiqué du Conseil d'État de Genève : 7 octobre 2026",
+          "url": "/fr/articles-geneve/communique-conseil-etat-geneve/",
+          "excerpt": "Le communiqué hebdomadaire du Conseil d'État du 7 octobre 2026 : le matériel disponible identifie la publication, sans autres détails.",
+          "date": "2026-10-09T16:16:45.029Z"
+        },
+        {
+          "title": "Genève demande l'arrêt des travaux de l'autoroute A412",
+          "url": "/fr/articles-geneve/geneve-arret-travaux-a412/",
+          "excerpt": "La Ville de Genève demande l'arrêt des travaux de l'A412 Six communes genevoises adhèrent à la procédure La Cour d'appel de Lyon statue le 14 octobre",
+          "date": "2026-10-08T15:48:49.584Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -281,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

@@ -243,6 +243,26 @@ export function filterUniqueCuratedCandidates(candidates) {
   });
 }
 
+export const LATEST_CANTON_ARTICLES_MIN = 3;
+export const LATEST_CANTON_ARTICLES_MAX = 5;
+
+/**
+ * Seleziona il fallback neutrale per un hub senza news pertinenti al tema.
+ * La sezione propria ha priorita': le sezioni storiche vengono usate solo
+ * per riempire fino a tre voci quando la sezione cantonale ne ha meno. Il
+ * tetto resta cinque e l'ordine e' sempre piu' recente prima.
+ */
+export function selectLatestCantonArticles({ pool, section, nowMs }) {
+  const eligible = (pool ?? [])
+    .filter((article) => Number.isFinite(dateMs(article.date)) && dateMs(article.date) <= nowMs + CLOCK_SKEW_MS)
+    .sort((a, b) => dateMs(b.date) - dateMs(a.date) || a.id.localeCompare(b.id));
+  const own = eligible.filter((article) => article.section === section).slice(0, LATEST_CANTON_ARTICLES_MAX);
+  if (own.length >= LATEST_CANTON_ARTICLES_MIN) return own;
+  const ownIds = new Set(own.map((article) => article.id));
+  const historical = eligible.filter((article) => article.section !== section && !ownIds.has(article.id));
+  return [...own, ...historical.slice(0, LATEST_CANTON_ARTICLES_MAX - own.length)];
+}
+
 /**
  * Assegna e ordina le news promosse di ogni hub del cantone.
  *

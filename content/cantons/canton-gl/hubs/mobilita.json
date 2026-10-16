@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-10-15T01:40:56.447Z",
-  "contentHash": "72be6365f7a9ffef76b0fc732ddef852d1687cb42f7b935c9b6093b5c27ee158",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "8584c4403d6b7f0f39a568fb921497cf7eaf2de6b2a5e8e1b2771882bb6bd5e0",
   "blocks": [
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-14T16:01:15.871Z",
+      "updatedAt": "2026-10-15T15:45:54.463Z",
       "keyFacts": 0
     }
   ],
@@ -57,7 +57,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -80,6 +80,7 @@
           "date": "2026-08-17T03:31:47.206Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -90,7 +91,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-15T01:40:56.447Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "GL",
@@ -135,7 +136,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -158,6 +159,7 @@
           "date": "2026-08-17T03:31:47.206Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -168,7 +170,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-15T01:40:56.447Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "GL",
@@ -213,7 +215,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -236,6 +238,7 @@
           "date": "2026-08-17T03:31:47.206Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -246,7 +249,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-15T01:40:56.447Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "GL",
@@ -291,7 +294,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-14T16:01:15.871Z"
+          "updatedAt": "2026-10-15T15:45:54.463Z"
         }
       ],
       "curatedArticles": [
@@ -314,6 +317,7 @@
           "date": "2026-08-17T03:31:47.206Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -324,7 +328,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-15T01:40:56.447Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }

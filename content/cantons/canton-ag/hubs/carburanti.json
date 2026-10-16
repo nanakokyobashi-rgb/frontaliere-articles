@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-15T20:50:11.240Z",
-  "contentHash": "ef27456b7788a79d8b0472cb1c30ddbf8dd7f1cbc183579ef5030365e67bbc5d",
+  "updatedAt": "2026-10-16T14:10:19.148Z",
+  "contentHash": "2e7531b356c9d3f19686d26d83c4e26aa4c0753ac41ccfbd1b38953ddf9023b5",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -70,6 +70,38 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Argovia: respinto il divieto per i cani pericolosi",
+          "url": "/articoli-argovia/argovia-cani-divieto-respinto/",
+          "excerpt": "Il governo argoviese respinge il divieto dei cani pericolosi: in due anni, nessuno dei sei gravi ferimenti a persone ha coinvolto un cane della lista.",
+          "date": "2026-10-12T06:22:16.181Z"
+        },
+        {
+          "title": "Axpo e le concessioni delle centrali idroelettriche",
+          "url": "/articoli-argovia/axpo-concessioni-idroelettriche/",
+          "excerpt": "Axpo pubblica un White Paper: nei prossimi anni comuni e Cantoni potranno ridisegnare proprietà, partecipazioni e rischi.",
+          "date": "2026-10-11T13:20:39.471Z"
+        },
+        {
+          "title": "Argovia: più poteri alla polizia regionale dal 2028",
+          "url": "/articoli-argovia/argovia-polizia-regionale-poteri/",
+          "excerpt": "Il Governo argoviese propone al Gran Consiglio nuovi compiti per le polizie regionali; la legge entrerebbe in vigore il 1° gennaio 2028.",
+          "date": "2026-10-10T22:10:08.251Z"
+        },
+        {
+          "title": "PFAS in Argovia: costi di bonifica ancora incerti",
+          "url": "/articoli-argovia/aargau-pfas-bonifiche-incerte/",
+          "excerpt": "In Argovia solo due terzi dei Comuni hanno risposto sul PFAS.",
+          "date": "2026-10-10T12:56:57.784Z"
+        },
+        {
+          "title": "Buchs prevede disavanzo 3,1 milioni nel budget 2027",
+          "url": "/articoli-argovia/buchs-deficit-2027-budget/",
+          "excerpt": "Il Comune di Buchs prevede un disavanzo di circa 3,1 milioni di franchi per il 2027, mantenendo il moltiplicatore fiscale al 118% e prevedendo un aumento dei costi residui di cura di 600'000 franchi.",
+          "date": "2026-10-09T18:37:12.986Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -80,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "en": {
       "canton": "AG",
@@ -137,6 +169,38 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Aargau: ban on dangerous dogs rejected",
+          "url": "/en/aargau-articles/aargau-dangerous-dog-ban-rejected/",
+          "excerpt": "The Aargau government rejects the ban on dangerous dogs: in two years, none of the six serious injuries to people involved a dog from the list.",
+          "date": "2026-10-12T06:22:16.181Z"
+        },
+        {
+          "title": "Axpo and the concessions for hydroelectric power plants",
+          "url": "/en/aargau-articles/axpo-hydropower-concessions/",
+          "excerpt": "Axpo publishes a White Paper: in the coming years, municipalities and cantons will be able to redesign ownership, holdings and risks.",
+          "date": "2026-10-11T13:20:39.471Z"
+        },
+        {
+          "title": "Aargau: more powers for the regional police from 2028",
+          "url": "/en/aargau-articles/aargau-regional-police-powers/",
+          "excerpt": "The Aargau government is proposing new tasks for the regional police forces to the Grand Council; the law would enter into force on January 1, 2028.",
+          "date": "2026-10-10T22:10:08.251Z"
+        },
+        {
+          "title": "PFAS in Aargau: remediation costs still uncertain",
+          "url": "/en/aargau-articles/aargau-pfas-site-costs/",
+          "excerpt": "In Aargau, only two-thirds of the municipalities responded about PFAS.",
+          "date": "2026-10-10T12:56:57.784Z"
+        },
+        {
+          "title": "Buchs forecasts a 3,1 million deficit in the 2027 budget",
+          "url": "/en/aargau-articles/buchs-forecasts-a-3-1-million-deficit-in-the-2027-budget/",
+          "excerpt": "The Municipality of Buchs forecasts a deficit of approximately 3,1 million francs for 2027, maintaining the tax multiplier at 118% and anticipating an increase of 600'000 francs in residual care costs.",
+          "date": "2026-10-09T18:37:12.986Z"
+        }
+      ],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -147,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "de": {
       "canton": "AG",
@@ -204,6 +268,38 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Aargau: Verbot für gefährliche Hunde abgelehnt",
+          "url": "/de/aargau-artikel/aargau-kampfhunde-verbot-abgelehnt/",
+          "excerpt": "Die Aargauer Regierung lehnt das Verbot gefährlicher Hunde ab: In zwei Jahren war bei keinem der sechs schweren Verletzungsfälle an Menschen ein Hund von der Liste beteiligt.",
+          "date": "2026-10-12T06:22:16.181Z"
+        },
+        {
+          "title": "Axpo und die Konzessionen der Wasserkraftwerke",
+          "url": "/de/aargau-artikel/axpo-wasserkraftkonzessionen/",
+          "excerpt": "Axpo veröffentlicht ein White Paper: In den kommenden Jahren können Gemeinden und Kantone Eigentumsverhältnisse, Beteiligungen und Risiken neu gestalten.",
+          "date": "2026-10-11T13:20:39.471Z"
+        },
+        {
+          "title": "Aargau: mehr Befugnisse für die Regionalpolizei ab 2028",
+          "url": "/de/aargau-artikel/aargau-regionalpolizei-befugnisse/",
+          "excerpt": "Die Aargauer Regierung schlägt dem Grossen Rat neue Aufgaben für die Regionalpolizeien vor; das Gesetz würde am 1.",
+          "date": "2026-10-10T22:10:08.251Z"
+        },
+        {
+          "title": "PFAS im Aargau: Sanierungskosten weiterhin ungewiss",
+          "url": "/de/aargau-artikel/aargau-pfas-standorte-kosten/",
+          "excerpt": "Im Aargau haben nur zwei Drittel der Gemeinden zu PFAS geantwortet.",
+          "date": "2026-10-10T12:56:57.784Z"
+        },
+        {
+          "title": "Buchs rechnet im Budget 2027 mit einem Defizit von 3,1 Millionen",
+          "url": "/de/aargau-artikel/buchs-rechnet-im-budget-2027-mit-einem-defizit-von-3-1-millionen/",
+          "excerpt": "Die Gemeinde Buchs rechnet für 2027 mit einem Defizit von rund 3,1 Millionen Franken, hält den Steuerfuss bei 118% und sieht einen Anstieg der Restkosten für Pflege um 600'000 Franken vor.",
+          "date": "2026-10-09T18:37:12.986Z"
+        }
+      ],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -214,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     },
     "fr": {
       "canton": "AG",
@@ -271,6 +367,38 @@
         }
       ],
       "curatedArticles": [],
+      "latestCantonArticles": [
+        {
+          "title": "Argovie : l’interdiction des chiens dangereux rejetée",
+          "url": "/fr/articles-argovie/argovie-interdiction-chiens-dangereux/",
+          "excerpt": "Le gouvernement argovien rejette l’interdiction des chiens dangereux : en deux ans, aucune des six graves blessures infligées à des personnes n’a impliqué un chien figurant sur la liste.",
+          "date": "2026-10-12T06:22:16.181Z"
+        },
+        {
+          "title": "Axpo et les concessions des centrales hydroélectriques",
+          "url": "/fr/articles-argovie/axpo-concessions-hydroelectriques/",
+          "excerpt": "Axpo publie un White Paper : dans les prochaines années, les communes et les cantons pourront redéfinir la propriété, les participations et les risques.",
+          "date": "2026-10-11T13:20:39.471Z"
+        },
+        {
+          "title": "Argovie : plus de pouvoirs pour la police régionale dès 2028",
+          "url": "/fr/articles-argovie/argovie-police-regionale-pouvoirs/",
+          "excerpt": "Le gouvernement argovien propose au Grand Conseil de nouvelles tâches pour les polices régionales ; la loi entrerait en vigueur le 1er janvier 2028.",
+          "date": "2026-10-10T22:10:08.251Z"
+        },
+        {
+          "title": "PFAS en Argovie : coûts d'assainissement encore incertains",
+          "url": "/fr/articles-argovie/argovie-sites-pfas-couts/",
+          "excerpt": "En Argovie, seuls deux tiers des communes ont répondu au sujet des PFAS.",
+          "date": "2026-10-10T12:56:57.784Z"
+        },
+        {
+          "title": "Buchs prévoit un déficit de 3,1 millions dans le budget 2027",
+          "url": "/fr/articles-argovie/buchs-prevoit-un-deficit-de-3-1-millions-dans-le-budget-2027/",
+          "excerpt": "La commune de Buchs prévoit un déficit d'environ 3,1 millions de francs pour 2027, en maintenant le multiplicateur fiscal à 118% et en prévoyant une hausse des coûts résiduels de soins de 600'000 francs.",
+          "date": "2026-10-09T18:37:12.986Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -281,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-15T20:50:11.240Z"
+      "updatedAt": "2026-10-16T14:10:19.148Z"
     }
   }
 }
