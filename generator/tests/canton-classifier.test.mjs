@@ -156,6 +156,21 @@ describe('omonimi e falsi amici', () => {
     }), ['TI']);
   });
 
+  test('le eta\' lessicali non diventano luoghi e i toponimi restano tali', () => {
+    assert.deepEqual(codes({
+      title: 'Centounenne ticinese ferito',
+      excerpt: 'Centounenne ticinese ricoverato.',
+      body: 'La persona centounenne ticinese e\' stata soccorsa dopo un incidente.',
+    }), []);
+
+    const c = defaultCantonClassifier();
+    const centovalliDemonym = c.mentionsIn('Le Centovalli ticinesi restano accessibili.')
+      .find((mention) => mention.kind === 'demonym');
+    assert.ok(centovalliDemonym);
+    assert.equal(centovalliDemonym.who, undefined);
+    assert.equal(isInCantonArea('TI', 'Un incidente a Centovalli.'), true);
+  });
+
   test('squadre, persone e parentesi', () => {
     const c = defaultCantonClassifier();
     assert.deepEqual(c.mentionsIn('Il Lugano batte il San Gallo 2-1.').map((m) => m.group), []);
@@ -200,6 +215,15 @@ describe('omonimi e falsi amici', () => {
       'Quarantaduenne ticinese soccorsa.',
       'Ventiduenne ticinese ferito.',
       'Quarantaduenne ticinese ferita.',
+      'Centounenne ticinese in festa.',
+      'Centoquattrenne ticinese soccorsa.',
+      'Centosettenne ticinese festeggiata.',
+      'Centottenne ticinese intervistata.',
+      'Centodiciassettenne ticinese ferito.',
+      'Centoventiduenne ticinese ferita.',
+      'Centoventottenni ticinesi rientrano.',
+      'Centottantenne ticinese festeggiata.',
+      'Centottantottenne ticinese intervistata.',
     ]) {
       assert.equal(c.mentionsIn(text).find((m) => m.group === 'TI')?.who, true, text);
     }
