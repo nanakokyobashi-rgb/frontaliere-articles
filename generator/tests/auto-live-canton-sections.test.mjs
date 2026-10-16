@@ -14,6 +14,7 @@ import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 import '../../host/cantonSectionsBootstrap.mjs';
+import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import {
   applyRegistryTransitions,
   expectedSectionPages,
@@ -112,6 +113,26 @@ test('il piano conta le superfici canoniche per tutte le locali e l articolo pro
   assert.equal(pages.filter((page) => page.kind === 'archive').length, 4);
   assert.equal(pages.filter((page) => page.kind === 'article').length, 4);
   assert.ok(pages.some((page) => page.path === '/articoli-lucerna/auto-live-fixture-it/'));
+});
+
+test('il piano auto-live rifiuta uno slug hub mancante prima di creare il path', () => {
+  const root = fixtureRoot();
+  const core = ARTICLE_SECTION_CORE_ALL['canton-lu'];
+  const [topic, topicSlugs] = Object.entries(core.topicHubs)[0];
+  const incompleteSlugs = { ...topicSlugs };
+  delete incompleteSlugs.de;
+  const coreMap = {
+    ...ARTICLE_SECTION_CORE_ALL,
+    'canton-lu': {
+      ...core,
+      topicHubs: { ...core.topicHubs, [topic]: incompleteSlugs },
+    },
+  };
+
+  assert.throws(
+    () => expectedSectionPages('canton-lu', { root, coreMap }),
+    /slug hub mancante o vuoto.*\/de$/u,
+  );
 });
 
 test('il piano include tutte le pagine archivio paginate del renderer', () => {

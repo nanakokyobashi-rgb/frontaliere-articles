@@ -370,6 +370,24 @@ test('sitemap di sezione: landing, 6 hub indicizzabili, archivio paginato, artic
   assert.throws(() => familySectionPages('frontaliere', 0, 24), /hub tematici/);
 });
 
+test('sitemap di famiglia rifiuta uno slug hub mancante prima di interpolarlo', () => {
+  const [topic, topicSlugs] = Object.entries(TI.topicHubs)[0];
+  const incompleteSlugs = { ...topicSlugs };
+  delete incompleteSlugs.en;
+  const all = {
+    ...ARTICLE_SECTION_CORE_ALL,
+    'canton-ti': {
+      ...TI,
+      topicHubs: { ...TI.topicHubs, [topic]: incompleteSlugs },
+    },
+  };
+
+  assert.throws(
+    () => familySectionPages('canton-ti', 0, 24, all),
+    /slug hub mancante o vuoto.*\/en$/u,
+  );
+});
+
 test('sitemap storica: il refactor in blocchi lascia l\'output identico', () => {
   const entries = [{ id: 'x', date: '2026-01-01', image: 'https://cdn.example/x.webp' }];
   const slugMap = { x: { it: 'x-it', en: 'x-en', de: 'x-de', fr: 'x-fr' } };

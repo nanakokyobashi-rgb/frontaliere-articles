@@ -45,6 +45,7 @@ import {
   publishedStatus,
   rendererPageEntry,
 } from '../../scripts/publish-section-pages.mjs';
+import { assertHubLocaleSlug } from '../../scripts/lib/assert-hub-locale-slug.mjs';
 import {
   fetchPageManifest,
   mergePageManifests,
@@ -179,6 +180,24 @@ test('publisher migration manifest rifiuta uno slug hub mancante per la locale c
   assert.throws(
     () => migrationManifestPages('canton-ti', [], [], all),
     /slug hub mancante o vuoto.*\/it$/,
+  );
+});
+
+test('guardia slug hub richiede una proprietà propria stringa non vuota', () => {
+  assert.equal(assertHubLocaleSlug('canton-ti', 'carburanti', 'it', { it: 'carburanti' }), 'carburanti');
+
+  const inherited = Object.create({ it: 'ereditato' });
+  assert.throws(
+    () => assertHubLocaleSlug('canton-ti', 'carburanti', 'it', inherited),
+    /slug hub mancante o vuoto.*\/it$/u,
+  );
+  assert.throws(
+    () => assertHubLocaleSlug('canton-ti', 'carburanti', 'it', { it: '' }),
+    /slug hub mancante o vuoto.*\/it$/u,
+  );
+  assert.throws(
+    () => assertHubLocaleSlug('canton-ti', 'carburanti', 'it', { it: '   ' }),
+    /slug hub mancante o vuoto.*\/it$/u,
   );
 });
 

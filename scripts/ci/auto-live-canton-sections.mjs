@@ -22,6 +22,7 @@ import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwne
 import { cantonSectionPaths, cantonSectionProfile } from '../../generator/scripts/lib/canton-section-profile.mjs';
 import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import { readRegistryEntries } from '../../generator/scripts/lib/registry-article-type.mjs';
+import { assertHubLocaleSlug } from '../../scripts/lib/assert-hub-locale-slug.mjs';
 import { cantonHubDataFile, readCantonHubData } from '../../scripts/lib/canton-hub-data.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -60,8 +61,8 @@ function registryDocument(root) {
   return doc;
 }
 
-function sectionEntry(root, section) {
-  const core = ARTICLE_SECTION_CORE_ALL[section];
+function sectionEntry(root, section, coreMap = ARTICLE_SECTION_CORE_ALL) {
+  const core = coreMap[section];
   if (!core || core.kind !== 'canton') throw new Error(`sezione cantonale sconosciuta: ${section}`);
   const entry = registryDocument(root).sections[section];
   if (!entry) throw new Error(`sections/registry.json: manca ${section}`);
@@ -129,8 +130,12 @@ function pageIdentity(page) {
   return [page.kind, page.topic || '', page.id || '', page.page || ''].join('|');
 }
 
-export function expectedSectionPages(section, { root = process.cwd(), includeArticles = true } = {}) {
-  const { core } = sectionEntry(root, section);
+export function expectedSectionPages(section, {
+  root = process.cwd(),
+  includeArticles = true,
+  coreMap = ARTICLE_SECTION_CORE_ALL,
+} = {}) {
+  const { core } = sectionEntry(root, section, coreMap);
   const own = ownArticleData(root, section);
   const archivePages = archivePageCount(root, core, own);
   const pages = [];
@@ -138,7 +143,8 @@ export function expectedSectionPages(section, { root = process.cwd(), includeArt
     const prefix = sectionPrefix(core, locale);
     pages.push({ kind: 'landing', locale, path: `${prefix}/` });
     for (const topic of CANTON_HUB_TOPIC_KEYS) {
-      pages.push({ kind: 'hub', topic, locale, path: `${prefix}/${core.topicHubs[topic][locale]}/` });
+      const slug = assertHubLocaleSlug(section, topic, locale, core.topicHubs[topic]);
+      pages.push({ kind: 'hub', topic, locale, path: `${prefix}/${slug}/` });
     }
     for (let page = 1; page <= archivePages; page += 1) {
       const suffix = page === 1

@@ -73,6 +73,7 @@ import { createEngineCorpusView } from './lib/engine-corpus-view.mjs';
 import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
 import { activeCorpusCoreMap, sectionSourceSurfaces } from './lib/corpus-sections.mjs';
+import { assertHubLocaleSlug } from './lib/assert-hub-locale-slug.mjs';
 import { EDGE_SECTION_REGISTRY_FILE, SECTION_REGISTRY_FILE, sectionRoutes, validateEdgeSectionRegistry } from './lib/section-registry.mjs';
 import {
   PAGE_MANIFEST_KINDS,
@@ -286,18 +287,6 @@ export function articleManifestPages({ section, previousArticlePages = [], curre
  * percorsi derivati dal core; gli articoli e l'archivio arrivano dalla
  * release precedente usata solo per questa migrazione.
  */
-function assertHubLocaleSlug(section, topic, locale, slugs) {
-  const hasLocale = slugs !== null
-    && typeof slugs === 'object'
-    && !Array.isArray(slugs)
-    && Object.prototype.hasOwnProperty.call(slugs, locale);
-  const slug = hasLocale ? slugs[locale] : undefined;
-  if (typeof slug !== 'string' || !slug.trim()) {
-    throw new Error(`${section}: slug hub mancante o vuoto per ${topic}/${locale}`);
-  }
-  return slug;
-}
-
 export function migrationManifestPages(section, previousArticlePages, previousArchivePages, all = ARTICLE_SECTION_CORE_ALL) {
   const routes = normalizedSectionRoutes(section, all);
   const topicHubs = Object.entries(all[section].topicHubs ?? {});
