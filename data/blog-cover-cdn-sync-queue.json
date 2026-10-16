@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-revoca-bonus-dirigenti-cs.webp",
+      "sha256": "f378220cf1323cfc0411eeb062390cb97dc8d63b0a81811980cd8dea78f888ef"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-revoca-bonus-dirigenti-cs-480w.webp",
+      "sha256": "0924b610d7f6bd08ea478bef42c7aca5ce6d6e376925817897496b7f2c6dca5b"
+    }
+  ]
 }
