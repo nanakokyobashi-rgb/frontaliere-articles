@@ -44904,7 +44904,7 @@ const RAW_ARTICLES = [
  id: 'mostre-maga-gallarate-2026',
  category: 'novita',
  date: '2026-10-16T11:58:36.392Z',
- image: '/images/blog/article-teatro-intred-varese-stagione-2026.webp',
+ image: '/images/blog/article-mostre-maga-gallarate-2026.webp',
  hasCalculator: false,
  articleType: 'news',
  authorSlug: 'redazione',
