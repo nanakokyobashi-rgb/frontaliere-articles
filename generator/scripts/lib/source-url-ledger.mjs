@@ -252,9 +252,36 @@ export function itemIdentityToken(text, date = null) {
 /** Quota minima delle parole del titolo che la pagina deve portare (vedi sotto). */
 export const ITEM_ON_PAGE_MIN_SHARE = 0.6;
 
+const SHORT_HEADLINE_GRAPHEME_SEGMENTER = new Intl.Segmenter('und', { granularity: 'grapheme' });
+
+/** A headline token is distinctive only when it has at least four visible Unicode characters. */
+export function shortHeadlineTokenPolicy(token) {
+  return [...SHORT_HEADLINE_GRAPHEME_SEGMENTER.segment(String(token ?? ''))].length >= 4;
+}
+
 /**
- * Un titolo breve e' provato solo se una riga di titolo dichiarata dalla pagina
- * coincide con l'intero titolo dell'item. Il corpo non basta: parole come
+ * Select title evidence only when every nonempty declaration agrees after the
+ * same normalization used for headline comparison. Conflicting metadata does
+ * not become positive evidence merely because one declaration happens to match.
+ *
+ * @param {string | string[]} titleEvidence
+ * @returns {string} the first consistent declaration, or '' when absent/conflicting
+ */
+export function selectConsistentTitleEvidence(titleEvidence) {
+  const lines = (Array.isArray(titleEvidence)
+    ? titleEvidence
+    : String(titleEvidence ?? '').split(/\r\n|[\r\n]/u))
+    .map((line) => String(line ?? '').trim())
+    .filter(Boolean);
+  if (lines.length === 0) return '';
+
+  const normalized = new Set(lines.map(normalizeItemText).filter(Boolean));
+  return normalized.size === 1 ? lines[0] : '';
+}
+
+/**
+ * Un titolo breve e' provato solo se le dichiarazioni di titolo concordano e il
+ * titolo risultante coincide con l'intero item. Il corpo non basta: parole come
  * «Stau» possono comparire in una pagina diversa o nella sua navigazione.
  *
  * @param {string} titleEvidence titoli da `pageTitleEvidence()`
@@ -266,16 +293,15 @@ export function shortHeadlineEvidence(titleEvidence, headline) {
   if (!normalizedHeadline) return false;
 
   const distinctiveWords = new Set(
-    normalizedHeadline.split(' ').filter((word) => word.length >= 4),
+    normalizedHeadline.split(' ').filter(shortHeadlineTokenPolicy),
   );
   if (distinctiveWords.size >= 2) return false;
 
-  return String(titleEvidence ?? '').split(/\r\n|[\r\n]/u)
-    .some((line) => normalizeItemText(line) === normalizedHeadline);
+  return normalizeItemText(selectConsistentTitleEvidence(titleEvidence)) === normalizedHeadline;
 }
 
 /**
- * Il testo porta almeno il 60% delle parole distintive (almeno 4 lettere)?
+ * Il testo porta almeno il 60% delle parole distintive (almeno 4 caratteri visibili)?
  * Sulle parole e non sulla frase: una pagina non sempre ripete il titolo alla
  * lettera. Con meno di due parole distintive il corpo e' evidenza debole e
  * serve la corrispondenza esatta con un titolo dichiarato dalla pagina.
@@ -289,7 +315,7 @@ export function pageCarriesItem(text, headline, {
   minShare = ITEM_ON_PAGE_MIN_SHARE,
   titleEvidence = '',
 } = {}) {
-  const words = [...new Set(normalizeItemText(headline).split(' ').filter((w) => w.length >= 4))];
+  const words = [...new Set(normalizeItemText(headline).split(' ').filter(shortHeadlineTokenPolicy))];
   if (words.length < 2) return shortHeadlineEvidence(titleEvidence, headline);
   const page = new Set(normalizeItemText(text).split(' '));
   const found = words.filter((w) => page.has(w)).length;

@@ -39,3 +39,24 @@ test('runtime ad slot values outside the TypeScript union fail closed', () => {
   assert.equal(staticAdSlotHtml('unknown-runtime-slot'), '');
   assert.equal(staticAdSlotHtml(null), '');
 });
+
+test('runtime ad slot validation works when the target lacks Object.hasOwn', () => {
+  const descriptor = Object.getOwnPropertyDescriptor(Object, 'hasOwn');
+  assert.ok(descriptor, 'the test runtime must expose Object.hasOwn to simulate its absence');
+
+  let validSlot;
+  let inheritedSlot;
+  let invalidMarkup;
+  try {
+    Object.defineProperty(Object, 'hasOwn', { ...descriptor, value: undefined });
+    validSlot = isStaticAdSlotKey('canton-hub-top');
+    inheritedSlot = isStaticAdSlotKey('toString');
+    invalidMarkup = staticAdSlotHtml('unknown-runtime-slot');
+  } finally {
+    Object.defineProperty(Object, 'hasOwn', descriptor);
+  }
+
+  assert.equal(validSlot, true);
+  assert.equal(inheritedSlot, false);
+  assert.equal(invalidMarkup, '');
+});
