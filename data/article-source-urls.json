@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/lavoro-in-prefettura-sei-posti-disponibili-negli-uffici-di-varese/2670517": {
-    "articleId": "bando-mobilita-prefettura-varese",
-    "ts": "2026-09-06T11:02:29.171Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/cronaca/1948295/si-trovava-sui-binari-adolescente-travolto-mortalmente-da-un-treno": {
     "articleId": "adolescente-travolto-treno-berna",
     "ts": "2026-09-06T11:11:23.559Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/uto-ughi-torna-a-gallarate-al-teatro-condominio-una-serata-con-vivaldi-e-bach/2710177": {
     "articleId": "concerto-gallarate-uto-ughi-2026",
     "ts": "2026-10-16T11:26:51.538Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/tre-nuove-mostre-al-maga-da-jago-a-leopardi/2709940": {
+    "articleId": "mostre-maga-gallarate-2026",
+    "ts": "2026-10-16T11:58:37.225Z",
     "keyForm": 2
   }
 }
