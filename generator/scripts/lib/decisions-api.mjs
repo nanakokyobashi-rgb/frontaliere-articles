@@ -61,6 +61,14 @@ function safeTimeout(timeoutMs) {
   return Math.max(1, Math.floor(value));
 }
 
+async function cancelResponseBody(response) {
+  try {
+    await response?.body?.cancel?.();
+  } catch {
+    // Disposal must not replace the request error that triggers the fallback.
+  }
+}
+
 /**
  * Classify one editorial input with a Decisions API choice question.
  *
@@ -117,35 +125,40 @@ export async function classifyWithDecisionsApi({
   try {
     let response;
     try {
-      response = await Promise.race([
-        fetchImpl(DECISIONS_API_URL, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${key}`,
-          },
-          body: JSON.stringify({
-            model: DECISIONS_API_MODEL,
-            input: normalizedInput,
-            questions: [{
-              type: 'choice',
-              name: 'relevance',
-              instructions: normalizedInstructions,
-              choices: [
-                {
-                  value: 'relevant',
-                  description: 'The content satisfies the editorial relevance criteria.',
-                },
-                {
-                  value: 'not_relevant',
-                  description: 'The content does not satisfy the editorial relevance criteria.',
-                },
-              ],
-            }],
-          }),
-          signal: controller.signal,
+      const fetchPromise = fetchImpl(DECISIONS_API_URL, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${key}`,
+        },
+        body: JSON.stringify({
+          model: DECISIONS_API_MODEL,
+          input: normalizedInput,
+          questions: [{
+            type: 'choice',
+            name: 'relevance',
+            instructions: normalizedInstructions,
+            choices: [
+              {
+                value: 'relevant',
+                description: 'The content satisfies the editorial relevance criteria.',
+              },
+              {
+                value: 'not_relevant',
+                description: 'The content does not satisfy the editorial relevance criteria.',
+              },
+            ],
+          }],
         }),
+        signal: controller.signal,
+      });
+      const trackedFetchPromise = Promise.resolve(fetchPromise).then((lateResponse) => {
+        if (timedOut) void cancelResponseBody(lateResponse);
+        return lateResponse;
+      });
+      response = await Promise.race([
+        trackedFetchPromise,
         timeoutPromise,
       ]);
     } catch (error) {
@@ -157,6 +170,7 @@ export async function classifyWithDecisionsApi({
     }
 
     if (!response || !response.ok) {
+      await cancelResponseBody(response);
       throw new DecisionsApiError('Decision API returned an HTTP error', {
         code: 'DECISIONS_API_HTTP_ERROR',
         status: response?.status ?? null,

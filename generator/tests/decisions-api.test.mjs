@@ -106,6 +106,44 @@ test('mantiene gli errori HTTP sicuri e non propaga chiave o body', async () => 
     },
   );
 });
+
+test('cancella il body della risposta HTTP non riuscita prima del fallback', async () => {
+  let bodyCancelled = false;
+  let rejectBodyCancellation;
+  const result = classifyWithDecisionsApi({
+    apiKey: 'test-decision-key',
+    input: 'contenuto',
+    instructions: 'criteri',
+    fetchImpl: async () => ({
+      ok: false,
+      status: 503,
+      body: {
+        cancel() {
+          bodyCancelled = true;
+          return new Promise((_, reject) => {
+            rejectBodyCancellation = reject;
+          });
+        },
+      },
+    }),
+  });
+  const rejected = assert.rejects(
+    result,
+    (error) => error.code === 'DECISIONS_API_HTTP_ERROR' && error.status === 503,
+  );
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.equal(bodyCancelled, true);
+  let errorPropagated = false;
+  rejected.then(() => {
+    errorPropagated = true;
+  });
+  await Promise.resolve();
+  assert.equal(errorPropagated, false);
+  rejectBodyCancellation(new Error('body cancellation failed'));
+  await rejected;
+  assert.equal(errorPropagated, true);
+});
+
 test('trasforma il timeout AbortController in un errore classificabile', async () => {
   await assert.rejects(
     classifyWithDecisionsApi({
@@ -123,6 +161,38 @@ test('trasforma il timeout AbortController in un errore classificabile', async (
     }),
     (error) => error.code === 'DECISIONS_API_TIMEOUT',
   );
+});
+
+test('cancella il body di una risposta arrivata dopo che il timeout ha vinto', async () => {
+  let resolveFetch;
+  let lateBodyCancelled = false;
+  const result = classifyWithDecisionsApi({
+    apiKey: 'test-decision-key',
+    input: 'contenuto',
+    instructions: 'criteri',
+    timeoutMs: 5,
+    fetchImpl: () => new Promise((resolve) => {
+      resolveFetch = resolve;
+    }),
+  });
+
+  await assert.rejects(result, (error) => error.code === 'DECISIONS_API_TIMEOUT');
+  resolveFetch({
+    ok: true,
+    status: 200,
+    body: {
+      cancel() {
+        lateBodyCancelled = true;
+        return Promise.reject(new Error('late body cancellation failed'));
+      },
+    },
+    async json() {
+      return { answers: [{ name: 'relevance', choice: 'relevant' }] };
+    },
+  });
+  await new Promise((resolve) => setImmediate(resolve));
+
+  assert.equal(lateBodyCancelled, true);
 });
 
 test('mantiene la deadline anche se il body HTTP non termina', async () => {
