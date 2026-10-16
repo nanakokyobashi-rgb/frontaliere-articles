@@ -1194,7 +1194,8 @@ function isConfirmedConcurrentOptInResult(observed, expectedHead) {
   return observed.state === 'OPEN'
     && observed.headRefOid === expectedHead
     && observed.autoMergeRequest !== null
-    && typeof observed.autoMergeRequest === 'object';
+    && typeof observed.autoMergeRequest === 'object'
+    && !Array.isArray(observed.autoMergeRequest);
 }
 
 /** Confirm a concurrent opt-in, retrying only its recognizable stale read result. */

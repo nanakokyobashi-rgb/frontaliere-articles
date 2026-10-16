@@ -465,7 +465,7 @@ test('l’opt-in concorrente resta fail-closed se il risultato è stale persiste
   assert.deepEqual(sleeps, [250, 750]);
 });
 
-test('head mismatch e stato non interpretabile non sono successi né risultati stale', () => {
+test('head mismatch e payload auto-merge non interpretabili non sono successi né risultati stale', () => {
   let reads = 0;
   const sleeps = [];
 
@@ -488,6 +488,11 @@ test('head mismatch e stato non interpretabile non sono successi né risultati s
   ), false);
   assert.equal(concurrentOptInSucceeded(
     () => ({ state: 'OPEN', headRefOid: HEAD }),
+    HEAD,
+    { sleep: (delayMs) => sleeps.push(delayMs) },
+  ), false);
+  assert.equal(concurrentOptInSucceeded(
+    () => ({ state: 'OPEN', headRefOid: HEAD, autoMergeRequest: [] }),
     HEAD,
     { sleep: (delayMs) => sleeps.push(delayMs) },
   ), false);
