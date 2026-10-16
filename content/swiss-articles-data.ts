@@ -28048,7 +28048,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'mercatini-usato-svizzera',
     category: 'pratico',
     date: '2026-10-15T23:56:58.369Z',
-    image: '/images/blog/autonomi-frontalieri-svizzera-come-aprire.webp',
+    image: '/images/blog/article-mercatini-usato-svizzera.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',
