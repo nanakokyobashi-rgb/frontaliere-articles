@@ -13266,6 +13266,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.estradizione-pakistan-como.title': 'Wegen Mordes beschuldigt, in Como zur Auslieferung festgenommen',
     'blog.article.estradizione-pakistan-como.excerpt': 'In Como wurde ein 40-jähriger Mann festgenommen.',
     'blog.article.estradizione-pakistan-como.imageAlt': 'Italienische Staatspolizei bei einer Kontrolle in der Via Canturina in Como',
+    'blog.article.arresto-lite-domestica-ticino.title': 'Frau im Tessin verletzt: Festnahme wegen versuchter vorsätzlicher Tötung',
+    'blog.article.arresto-lite-domestica-ticino.excerpt': 'Am 9. Oktober wurde nach einem Streit im häuslichen Umfeld im Tessin ein 28-jähriger rumänischer Staatsangehöriger festgenommen.',
+    'blog.article.arresto-lite-domestica-ticino.imageAlt': 'Blick auf Lugano im Kanton Tessin zu einer lokalen Kriminalmeldung.',
 };
 
 export default blogMetaDe;

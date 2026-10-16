@@ -13267,6 +13267,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.estradizione-pakistan-como.title': 'Accused of murder, arrested in Como for extradition',
     'blog.article.estradizione-pakistan-como.excerpt': 'A 40-year-old man was arrested in Como.',
     'blog.article.estradizione-pakistan-como.imageAlt': 'Italian State Police during a check on Via Canturina in Como',
+    'blog.article.arresto-lite-domestica-ticino.title': 'Woman injured in Ticino: arrest for attempted murder',
+    'blog.article.arresto-lite-domestica-ticino.excerpt': 'A 28-year-old Romanian citizen was arrested on October 9 after a domestic dispute in Ticino.',
+    'blog.article.arresto-lite-domestica-ticino.imageAlt': 'Lugano view in Canton Ticino for a local crime news article.',
 };
 
 export default blogMetaEn;

@@ -13269,6 +13269,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.estradizione-pakistan-como.title': 'Accusé de meurtre, arrêté à Como en vue de son extradition',
     'blog.article.estradizione-pakistan-como.excerpt': 'Arrêté à Como, un homme de 40 ans.',
     'blog.article.estradizione-pakistan-como.imageAlt': 'Police d’État italienne lors d’un contrôle via Canturina à Côme (Como)',
+    'blog.article.arresto-lite-domestica-ticino.title': 'Femme blessée au Tessin : arrestation pour tentative d’homicide',
+    'blog.article.arresto-lite-domestica-ticino.excerpt': 'Un ressortissant roumain de 28 ans a été arrêté le 9 octobre après une dispute domestique au Tessin.',
+    'blog.article.arresto-lite-domestica-ticino.imageAlt': 'Vue de Lugano au Tessin pour un article de faits divers locaux.',
 };
 
 export default blogMetaFr;

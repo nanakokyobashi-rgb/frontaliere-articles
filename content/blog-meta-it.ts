@@ -13268,6 +13268,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.estradizione-pakistan-como.title': 'Accusato di omicidio, arrestato a Como per l’estradizione',
     'blog.article.estradizione-pakistan-como.excerpt': 'Arrestato a Como un uomo di 40 anni.',
     'blog.article.estradizione-pakistan-como.imageAlt': 'Polizia di Stato durante un controllo in via Canturina a Como',
+    'blog.article.arresto-lite-domestica-ticino.title': 'Donna ferita in Ticino: arresto per tentato omicidio',
+    'blog.article.arresto-lite-domestica-ticino.excerpt': 'Arrestato il 9 ottobre un 28enne cittadino rumeno dopo una lite domestica in Ticino.',
+    'blog.article.arresto-lite-domestica-ticino.imageAlt': 'Veduta di Lugano in Canton Ticino per una notizia di cronaca.',
 };
 
 export default blogMetaIt;

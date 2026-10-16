@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/mezzo-in-fiamme-sullautostrada-tra-vergiate-e-besnate-colonna-di-fumo-e-traffico-in-tilt/2669410": {
-    "articleId": "mezzo-in-fiamme-vergiate-besnate",
-    "ts": "2026-09-05T09:46:47.787Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/quando-il-treno-dei-bambini-porto-a-gallarate-i-figli-degli-operai-in-sciopero-a-piombino/2670583": {
     "articleId": "treno-dei-bambini-gallarate-piombino",
     "ts": "2026-09-05T09:59:38.868Z",
@@ -2497,6 +2492,11 @@
   "https://comozero.it/cronaca/accusato-di-omicidio-fugge-dal-pakistan-fermato-dalla-polizia-a-como-sara-estradato": {
     "articleId": "estradizione-pakistan-como",
     "ts": "2026-10-15T23:12:57.419Z",
+    "keyForm": 2
+  },
+  "https://www.varesenoi.it/2026/10/15/leggi-notizia/argomenti/canton-ticino/articolo/donna-ferita-in-canton-ticino-un-arresto-per-tentato-omicidio-2.html": {
+    "articleId": "arresto-lite-domestica-ticino",
+    "ts": "2026-10-16T00:07:17.273Z",
     "keyForm": 2
   }
 }
