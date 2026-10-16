@@ -975,6 +975,105 @@ async function snapshotCantonRssFeed(url, { probeImpl = probe } = {}) {
   return probeImpl(url, { attempts: 3, delayMs: 1000, want: () => true });
 }
 
+function uniqueCantonPages(pages) {
+  return [...new Map((pages ?? []).map((page) => [page.edgeKey, page])).values()];
+}
+
+function normalizeCantonPageSnapshot(page, result) {
+  if (result?.exists === false || (!result?.ok && isNotFoundStatus(result?.status))) {
+    return { exists: false, body: null };
+  }
+  if (result?.exists === true && typeof result.body === 'string') {
+    return { exists: true, body: result.body };
+  }
+  if (result?.ok === true && typeof result.body === 'string') {
+    return { exists: true, body: result.body };
+  }
+  throw new Error(`${page.edgeKey}: superficie CDN precedente non verificabile (${result?.status ?? 'nessuna risposta'})`);
+}
+
+/** Snapshot delle chiavi HTML che la transazione puo' sovrascrivere. */
+async function snapshotCantonPages(pages, { probeImpl = probe } = {}) {
+  const snapshots = new Map();
+  for (const page of uniqueCantonPages(pages)) {
+    const previous = await probeImpl(page.cdnUrl, { attempts: 3, delayMs: 1000, want: () => true });
+    snapshots.set(page.edgeKey, normalizeCantonPageSnapshot(page, previous));
+  }
+  return snapshots;
+}
+
+/** Ripristina HTML, purge e verifica prima che la transazione RSS torni indietro. */
+async function rollbackCantonPages({ pages, snapshots, distDir, runImpl, probeImpl, live }) {
+  const rollbackFiles = [];
+  const targets = uniqueCantonPages(pages);
+  let failures = 0;
+  try {
+    fs.mkdirSync(distDir, { recursive: true });
+    for (let i = 0; i < targets.length; i++) {
+      const page = targets[i];
+      const previous = snapshots.get(page.edgeKey);
+      try {
+        if (!previous) throw new Error('snapshot mancante');
+        if (previous.exists) {
+          const local = path.join(distDir, `.canton-page-rollback-${i}.html`);
+          fs.writeFileSync(local, previous.body, 'utf8');
+          rollbackFiles.push(local);
+          const { stdout = '' } = runImpl('bash', [
+            'scripts/lib/upload-cdn-file.sh',
+            local,
+            page.edgeKey,
+            PAGE_CACHE_CONTROL,
+          ]);
+          if (!stdout.includes('✅ uploaded')) throw new Error(`restore upload non confermato: ${page.edgeKey}`);
+        } else {
+          const { stdout = '' } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', page.edgeKey]);
+          if (!stdout.includes('✅ deleted')) throw new Error(`restore delete non confermato: ${page.edgeKey}`);
+        }
+      } catch (error) {
+        failures++;
+        console.error(`::error::[${LOG}] rollback pagina HTML ${page.edgeKey} fallito: ${error?.message ?? String(error)}`);
+      }
+    }
+
+    for (const chunk of purgeChunks(targets.flatMap((page) => [page.apexUrl, page.cdnUrl]))) {
+      try {
+        const { code = 1 } = runImpl('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]);
+        if (code !== 0) throw new Error(`purge exit ${code}`);
+      } catch (error) {
+        failures++;
+        console.error(`::error::[${LOG}] purge rollback pagine HTML fallito: ${error?.message ?? String(error)}`);
+      }
+    }
+
+    const restored = async (page, url, previous) => {
+      const result = await probeImpl(url, {
+        attempts: 3,
+        delayMs: 1000,
+        want: previous.exists ? (body) => body === previous.body : () => false,
+      });
+      const ok = previous.exists
+        ? result?.ok === true && result.body === previous.body
+        : result?.ok !== true && isNotFoundStatus(result?.status);
+      if (!ok) throw new Error(`${url} stato inatteso (${result?.status ?? 'nessuna risposta'})`);
+      return result;
+    };
+    for (const page of targets) {
+      const previous = snapshots.get(page.edgeKey);
+      try {
+        if (!previous) throw new Error('snapshot mancante');
+        await restored(page, page.cdnUrl, previous);
+        if (live) await restored(page, page.apexUrl, previous);
+      } catch (error) {
+        failures++;
+        console.error(`::error::[${LOG}] verifica rollback pagina HTML ${page.edgeKey} fallita: ${error?.message ?? String(error)}`);
+      }
+    }
+  } finally {
+    for (const local of rollbackFiles) fs.rmSync(local, { force: true });
+  }
+  return { failures };
+}
+
 function normalizeCantonRssSnapshot(feed, result) {
   if (result?.exists === false || (!result?.ok && isNotFoundStatus(result?.status))) {
     return { exists: false, body: null };
@@ -1286,6 +1385,7 @@ export async function publish({
 }) {
   let failures = 0;
   let rollbackRssPublication = null;
+  let pageSnapshots = null;
   const rollbackRss = async () => {
     if (!rollbackRssPublication) return 0;
     const rollback = rollbackRssPublication;
@@ -1299,18 +1399,6 @@ export async function publish({
     }
   };
   const deleted = [];
-  // Dopo la cancellazione di almeno una pagina precedente non si può
-  // ripristinare il feed snapshot: quel feed potrebbe annunciare proprio una
-  // URL che ora non è più presente. Il run resta rosso e il retry/reconcile
-  // lascia la superficie RSS corrente finché le pagine precedenti non sono
-  // state ripristinate.
-  const rollbackRssAfterObsoleteMutation = async () => {
-    if (deleted.length > 0) {
-      console.error(`::error::[${LOG}] rollback RSS posticipato: ${deleted.length} pagina/e obsoleta/e sono state cancellate; le pagine precedenti devono essere ripristinate prima del feed snapshot`);
-      return 0;
-    }
-    return rollbackRss();
-  };
   // A missing or malformed edge registry is UNKNOWN, not draft. Do not upload
   // into that state: otherwise the CDN verify below can be green while a live
   // apex still serves stale/404 pages. A valid draft is the bootstrap case.
@@ -1319,6 +1407,50 @@ export async function publish({
     console.error(`::error::[${LOG}] registro edge della sezione ${section} illeggibile o con stato sconosciuto: pubblicazione bloccata`);
     return { failures: 1, uploaded: 0, status: null };
   }
+  const rollbackPages = async () => {
+    if (!pageSnapshots) return 0;
+    const snapshots = pageSnapshots;
+    pageSnapshots = null;
+    try {
+      const result = await rollbackCantonPages({
+        pages,
+        snapshots,
+        distDir,
+        runImpl,
+        probeImpl,
+        live: beforeStatus === 'live',
+      });
+      return Number.isSafeInteger(result?.failures) ? result.failures : 1;
+    } catch (error) {
+      console.error(`::error::[${LOG}] rollback della release HTML fallito: ${error?.message ?? String(error)}`);
+      return 1;
+    }
+  };
+  const rollbackTransaction = async () => {
+    const pageFailures = await rollbackPages();
+    if (pageFailures > 0) {
+      console.error(`::error::[${LOG}] rollback RSS posticipato: la superficie HTML precedente non è stata ripristinata completamente`);
+      return pageFailures;
+    }
+    return pageFailures + await rollbackRss();
+  };
+  // Dopo la cancellazione di almeno una pagina precedente non si può
+  // ripristinare il feed snapshot: quel feed potrebbe annunciare proprio una
+  // URL che ora non è più presente. Il run resta rosso e il retry/reconcile
+  // lascia la superficie RSS corrente finché le pagine precedenti non sono
+  // state ripristinate.
+  const rollbackRssAfterObsoleteMutation = async () => {
+    const pageFailures = await rollbackPages();
+    if (deleted.length > 0) {
+      console.error(`::error::[${LOG}] rollback RSS posticipato: ${deleted.length} pagina/e obsoleta/e sono state cancellate; le pagine precedenti devono essere ripristinate prima del feed snapshot`);
+      return pageFailures;
+    }
+    if (pageFailures > 0) {
+      console.error(`::error::[${LOG}] rollback RSS posticipato: la superficie HTML precedente non è stata ripristinata completamente`);
+      return pageFailures;
+    }
+    return pageFailures + await rollbackRss();
+  };
   console.log(`[${LOG}] preflight: sezione ${section} nel registro pubblicato = ${beforeStatus}`);
   for (const { local, key } of cdnUploads) {
     const { stdout } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', local, key]);
@@ -1367,7 +1499,16 @@ export async function publish({
         if (withoutRss !== html) fs.writeFileSync(local, withoutRss, 'utf-8');
       }
     }
-    if (typeof rssResult.rollback === 'function') rollbackRssPublication = rssResult.rollback;
+    if (typeof rssResult.rollback === 'function') {
+      rollbackRssPublication = rssResult.rollback;
+      try {
+        pageSnapshots = await snapshotCantonPages(pages, { probeImpl });
+      } catch (error) {
+        console.error(`::error::[${LOG}] snapshot della release HTML precedente fallito: ${error?.message ?? String(error)}`);
+        const rollbackFailures = await rollbackTransaction();
+        return { failures: 1 + rollbackFailures, rollbackFailures, uploaded: 0, deleted: 0, status: beforeStatus };
+      }
+    }
   }
   const uploaded = [];
   let status = beforeStatus;
@@ -1387,7 +1528,7 @@ export async function publish({
   // failure parziale qui deve lasciare intatta la superficie vecchia.
   if (failures) {
     console.error(`::error::[${LOG}] upload HTML incompleto: nessuna pagina obsoleta viene cancellata`);
-    const rollbackFailures = await rollbackRss();
+    const rollbackFailures = await rollbackTransaction();
     return { failures: failures + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status: beforeStatus };
   }
 
@@ -1408,7 +1549,7 @@ export async function publish({
   console.log(`[${LOG}] verify: sezione ${section} nel registro pubblicato = ${status ?? 'registro illeggibile'}`);
   if (status === null) {
     console.error(`::error::[${LOG}] registro edge della sezione ${section} diventato illeggibile durante la pubblicazione`);
-    const rollbackFailures = await rollbackRss();
+    const rollbackFailures = await rollbackTransaction();
     return { failures: failures + 1 + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status: null };
   }
   const hasMeta = (body) => body.includes(CORPUS_ROUTE_OWNER_META_TAG);
@@ -1430,7 +1571,7 @@ export async function publish({
 
   if (failures) {
     console.error(`::error::[${LOG}] release corrente non verificata: nessuna pagina obsoleta viene cancellata`);
-    const rollbackFailures = await rollbackRss();
+    const rollbackFailures = await rollbackTransaction();
     return { failures: failures + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status };
   }
 
@@ -1444,7 +1585,7 @@ export async function publish({
     });
     if (!(releaseReady === true || releaseReady?.ok)) {
       console.error(`::error::[${LOG}] API/edge non hanno ancora servito la release corrente: ${releaseReady?.reason ?? 'verifica fallita'}; nessuna pagina obsoleta viene cancellata`);
-      const rollbackFailures = await rollbackRss();
+      const rollbackFailures = await rollbackTransaction();
       return { failures: failures + 1 + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status };
     }
   }

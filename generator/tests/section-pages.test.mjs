@@ -1238,7 +1238,7 @@ test('publisher: un upload RSS parziale ripristina l\'intero set precedente', as
   }
 });
 
-test('publisher: il contratto RSS blocca o precede gli upload HTML', async () => {
+test('publisher: il contratto RSS precede gli upload HTML e il rollback ripristina la pagina', async () => {
   const page = pageEntry('canton-ti', 'articoli-ticino/index.html', 'landing');
   const feed = cantonRssFeedEntries('canton-ti')[0];
   const makeRun = (events) => (_command, args) => {
@@ -1304,8 +1304,16 @@ test('publisher: il contratto RSS blocca o precede gli upload HTML', async () =>
     ...common,
     runImpl: (_command, args) => {
       if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+        if (args[1].includes('.canton-page-rollback-')) {
+          rollbackEvents.push('page-rollback');
+          return { code: 0, stdout: '✅ uploaded' };
+        }
         rollbackEvents.push('page-upload-failed');
         return { code: 1, stdout: '' };
+      }
+      if (args.includes('scripts/cf-purge-cache.mjs')) {
+        rollbackEvents.push('page-rollback-purge');
+        return { code: 0, stdout: '' };
       }
       throw new Error(`comando inatteso: ${args.join(' ')}`);
     },
@@ -1321,14 +1329,22 @@ test('publisher: il contratto RSS blocca o precede gli upload HTML', async () =>
   });
   assert.equal(partial.failures, 1);
   assert.equal(partial.rollbackFailures, 0);
-  assert.deepEqual(rollbackEvents, ['page-upload-failed', 'rss-rollback']);
+  assert.deepEqual(rollbackEvents, ['page-upload-failed', 'page-rollback', 'page-rollback-purge', 'rss-rollback']);
 
   const verifyRollbackEvents = [];
+  const previousHtml = '<html>pagina precedente</html>';
+  let snapshotTaken = false;
+  let restoring = false;
   const verifyFailure = await publish({
     ...common,
     publishedStatusImpl: async () => 'live',
     runImpl: (_command, args) => {
       if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+        if (args[1].includes('.canton-page-rollback-')) {
+          restoring = true;
+          verifyRollbackEvents.push('page-restored');
+          return { code: 0, stdout: '✅ uploaded' };
+        }
         verifyRollbackEvents.push('page-uploaded');
         return { code: 0, stdout: '✅ uploaded' };
       }
@@ -1336,6 +1352,11 @@ test('publisher: il contratto RSS blocca o precede gli upload HTML', async () =>
       throw new Error(`comando inatteso: ${args.join(' ')}`);
     },
     probeImpl: async () => {
+      if (!snapshotTaken) {
+        snapshotTaken = true;
+        return { ok: true, status: 200, body: previousHtml };
+      }
+      if (restoring) return { ok: true, status: 200, body: previousHtml };
       verifyRollbackEvents.push('page-verify-failed');
       return { ok: false, status: 'HTTP 503' };
     },
@@ -1351,7 +1372,7 @@ test('publisher: il contratto RSS blocca o precede gli upload HTML', async () =>
   });
   assert.equal(verifyFailure.failures, 1);
   assert.equal(verifyFailure.rollbackFailures, 0);
-  assert.deepEqual(verifyRollbackEvents, ['page-uploaded', 'page-verify-failed', 'rss-rollback']);
+  assert.deepEqual(verifyRollbackEvents, ['page-uploaded', 'page-verify-failed', 'page-restored', 'rss-rollback']);
 });
 
 test('publisher: RSS non live fallisce, e un manifest senza feed elimina la superficie precedente', async () => {
@@ -1627,8 +1648,8 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
       commit: releaseCommit,
       sections: { 'canton-ti': { status: 'live' } },
     }, WITH_TI, releaseCommit),
-    [{ section: 'canton-ti', ids: [], bootstrap: false }],
-    'il replay schedule/manuale usa il registro edge della release attesa e solo le cantonali live',
+    [{ section: 'canton-ti', ids: [], bootstrap: true }],
+    'il replay schedule/manuale usa il registro edge della release attesa e fa bootstrap delle cantonali live',
   );
   assert.throws(
     () => liveR2ReconciliationPlan({
@@ -1645,8 +1666,8 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
   );
   assert.deepEqual(
     r2PublishPlan(['M\tsections/registry.json'], WITH_TI, { registryRefreshSections: promotedSections }),
-    [{ section: 'canton-ti', ids: [], bootstrap: false }],
-    'una promozione draft -> live deve rinfrescare landing, archivio, hub e RSS senza bootstrap articoli',
+    [{ section: 'canton-ti', ids: [], bootstrap: true }],
+    'una promozione draft -> live deve fare bootstrap degli articoli prima di annunciare landing, archivio, hub e RSS',
   );
   assert.deepEqual(liveRegistryTransitionSections(registryAfter, registryAfter, WITH_TI), []);
   assert.throws(
@@ -1716,6 +1737,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /github\.event\.workflow_run\.conclusion == 'success'/);
   assert.match(wf, /github\.event\.workflow_run\.event == 'push'[\s\S]*github\.event\.workflow_run\.event == 'schedule'[\s\S]*github\.event\.workflow_run\.event == 'workflow_dispatch'/);
   assert.match(wf, /ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| github\.sha \}\}/);
+  assert.match(wf, /id: replay_freshness[\s\S]*gh api "repos\/\$REPO\/git\/ref\/heads\/main"/);
+  assert.match(wf, /if: steps\.replay_freshness\.outputs\.fresh == 'true'/);
+  assert.match(wf, /replay workflow_run saltato prima degli upload/);
   assert.match(wf, /id: push_range[\s\S]*gh api --paginate --slurp "repos\/\$REPO\/commits\/\$WORKFLOW_RUN_HEAD_SHA\/events"/);
   assert.match(wf, /payload\.ref == "refs\/heads\/main"[\s\S]*payload\.head == \$head[\s\S]*payload\.before/);
   assert.match(wf, /push_before: \$\{\{ steps\.push_range\.outputs\.before \}\}/);

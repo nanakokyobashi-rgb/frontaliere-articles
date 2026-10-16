@@ -302,7 +302,36 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - name: Guard replay freshness
+        id: replay_freshness
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" != 'workflow_run' ]; then
+            echo 'fresh=true' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || ! [[ "$WORKFLOW_RUN_HEAD_SHA" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::workflow_run head SHA non valido per il guard di freschezza"
+            exit 1
+          fi
+          if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
+            echo "::error::impossibile verificare la revisione corrente di main prima del replay"
+            exit 1
+          fi
+          if [ "$current_main" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
+            echo "::notice::replay workflow_run saltato: main e' avanzato da $WORKFLOW_RUN_HEAD_SHA a $current_main"
+            echo 'fresh=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo 'fresh=true' >> "$GITHUB_OUTPUT"
+
       - name: Fetch fallback corpus revision for manifest migration
+        if: steps.replay_freshness.outputs.fresh == 'true'
         env:
           EVENT_NAME: ${{ github.event_name }}
           PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
@@ -322,18 +351,20 @@ jobs:
           fi
 
       - name: Set up Node
+        if: steps.replay_freshness.outputs.fresh == 'true'
         uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
+        if: steps.replay_freshness.outputs.fresh == 'true'
         run: bash scripts/lib/npm-ci-retry.sh
 
       # Remote Config e' la sola sorgente delle credenziali R2 e Cloudflare.
       # In dry non servono: il render e la validazione girano comunque.
       - name: Prepare Firebase credentials
-        if: needs.resolve.outputs.dry != 'true'
+        if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -346,14 +377,14 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
 
       - name: Load secrets from Remote Config
-        if: needs.resolve.outputs.dry != 'true'
+        if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
         run: node generator/scripts/load-rc-env.mjs
 
       # Un upload che «salta» per credenziali assenti esce 0 da
       # upload-cdn-file.sh: qui l'assenza deve fermare il job PRIMA del render,
       # non diventare una pubblicazione verde che non ha caricato niente.
       - name: Require the R2 and Cloudflare credentials
-        if: needs.resolve.outputs.dry != 'true'
+        if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
         run: |
           set -euo pipefail
           missing=()
@@ -375,10 +406,11 @@ jobs:
       # il file se la CDN non lo ha, non sostituisce mai un oggetto e ferma il
       # job se non riesce a stabilirlo: scripts/ci/ensure-host-shell-assets.mjs.
       - name: Ensure the host shell assets are on the CDN
-        if: needs.resolve.outputs.dry != 'true'
+        if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
         run: bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/ci/ensure-host-shell-assets.mjs
 
       - name: Render, validate and publish the section pages
+        if: steps.replay_freshness.outputs.fresh == 'true'
         env:
           SECTION: ${{ matrix.target.section }}
           ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
@@ -387,8 +419,20 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
+          if [ "$EVENT_NAME" = 'workflow_run' ]; then
+            if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
+              echo "::error::impossibile verificare la revisione corrente di main prima degli upload"
+              exit 1
+            fi
+            if [ "$current_main" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
+              echo "::notice::replay workflow_run saltato prima degli upload: main e' avanzato da $WORKFLOW_RUN_HEAD_SHA a $current_main"
+              exit 0
+            fi
+          fi
           args=(--section "$SECTION" --out "$RUNNER_TEMP/section-dist" --summary "$RUNNER_TEMP/section-summary.json")
           previous_revision="${PUSH_BEFORE:-}"
           if [ "$EVENT_NAME" = 'workflow_run' ]; then

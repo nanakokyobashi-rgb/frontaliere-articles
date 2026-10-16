@@ -206,7 +206,7 @@ export function liveR2ReconciliationPlan(registry, coreList = activeCorpusCoreEn
   );
   return coreList
     .filter((section) => section.kind === 'canton' && !section.shardKey && live.has(section.section))
-    .map((section) => ({ section: section.section, ids: [], bootstrap: false }));
+    .map((section) => ({ section: section.section, ids: [], bootstrap: true }));
 }
 
 /**
@@ -275,7 +275,7 @@ export function r2PublishPlan(files, coreList = activeCorpusCoreEntries(), { reg
     if (!sections.some((entry) => entry.section === section && entry.kind === 'canton')) {
       throw new Error(`refresh registry richiesto per sezione R2 non attiva: ${section}`);
     }
-    touch(section);
+    touch(section).bootstrap = true;
   }
   const changedFiles = changedFileRecords(files);
   if (changedFiles.some(({ rel }) => isSharedR2RefreshPath(rel))) {
