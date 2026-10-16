@@ -61,14 +61,33 @@ function safeTimeout(timeoutMs) {
   return Math.max(1, Math.floor(value));
 }
 
-function cancelResponseBody(response) {
+async function cancelResponseBody(response, timeoutMs = 0) {
+  let settledCancellation;
   try {
     const cancellation = response?.body?.cancel?.();
-    if (cancellation && typeof cancellation.then === 'function') {
-      void Promise.resolve(cancellation).catch(() => {});
-    }
+    if (!cancellation || typeof cancellation.then !== 'function') return;
+    settledCancellation = Promise.resolve(cancellation).catch(() => {});
   } catch {
     // Disposal must not replace the request error that triggers the fallback.
+    return;
+  }
+
+  const budgetMs = Number(timeoutMs);
+  if (!Number.isFinite(budgetMs) || budgetMs <= 0) {
+    void settledCancellation;
+    return;
+  }
+
+  let timer;
+  try {
+    await Promise.race([
+      settledCancellation,
+      new Promise((resolve) => {
+        timer = setTimeout(resolve, budgetMs);
+      }),
+    ]);
+  } finally {
+    if (timer !== undefined) clearTimeout(timer);
   }
 }
 
@@ -112,6 +131,7 @@ export async function classifyWithDecisionsApi({
 
   const controller = new AbortController();
   const timeout = safeTimeout(timeoutMs);
+  const deadlineAt = Date.now() + timeout;
   let timedOut = false;
   let rejectTimeout;
   const timeoutPromise = new Promise((_, reject) => {
@@ -173,7 +193,12 @@ export async function classifyWithDecisionsApi({
     }
 
     if (!response || !response.ok) {
-      cancelResponseBody(response);
+      await cancelResponseBody(response, Math.max(0, deadlineAt - Date.now()));
+      if (timedOut) {
+        throw new DecisionsApiError('Decision API request timed out', {
+          code: 'DECISIONS_API_TIMEOUT',
+        });
+      }
       throw new DecisionsApiError('Decision API returned an HTTP error', {
         code: 'DECISIONS_API_HTTP_ERROR',
         status: response?.status ?? null,

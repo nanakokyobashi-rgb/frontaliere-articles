@@ -107,7 +107,7 @@ test('mantiene gli errori HTTP sicuri e non propaga chiave o body', async () => 
   );
 });
 
-test('cancella il body della risposta HTTP non riuscita prima del fallback', async () => {
+test('attende la cancellazione del body HTTP non riuscito e assorbe il suo rigetto', async () => {
   let bodyCancelled = false;
   let rejectBodyCancellation;
   const result = classifyWithDecisionsApi({
@@ -127,14 +127,36 @@ test('cancella il body della risposta HTTP non riuscita prima del fallback', asy
       },
     }),
   });
+  let settled = false;
+  const completion = result.then(() => { settled = true; }, () => { settled = true; });
   const rejected = assert.rejects(
     result,
     (error) => error.code === 'DECISIONS_API_HTTP_ERROR' && error.status === 503,
   );
-  await rejected;
-  assert.equal(bodyCancelled, true);
-  rejectBodyCancellation(new Error('body cancellation failed'));
   await new Promise((resolve) => setImmediate(resolve));
+  assert.equal(bodyCancelled, true);
+  assert.equal(settled, false, 'l’errore HTTP aspetta il completamento del cleanup');
+  rejectBodyCancellation(new Error('body cancellation failed'));
+  await Promise.all([rejected, completion]);
+});
+
+test('limita la cancellazione pending del body al deadline residuo', async () => {
+  const startedAt = Date.now();
+  await assert.rejects(
+    classifyWithDecisionsApi({
+      apiKey: 'test-decision-key',
+      input: 'contenuto',
+      instructions: 'criteri',
+      timeoutMs: 50,
+      fetchImpl: async () => ({
+        ok: false,
+        status: 503,
+        body: { cancel: () => new Promise(() => {}) },
+      }),
+    }),
+    (error) => error.code === 'DECISIONS_API_TIMEOUT',
+  );
+  assert.ok(Date.now() - startedAt < 1_000, 'il cleanup non deve superare la deadline della richiesta');
 });
 
 test('trasforma il timeout AbortController in un errore classificabile', async () => {
