@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/cn%3a-ok-a-nuova-cartella-sanitaria-elettronica%2c-sostituir%c3%a0-cip/92056996": {
-    "articleId": "consiglio-nazionale-cartella-sanitaria",
-    "ts": "2026-09-15T00:26:33.371Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4082713": {
     "articleId": "ssr-risparmi-270-milioni-2029",
     "ts": "2026-09-15T01:03:03.335Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/info/scienza-e-tecnologia/cosa-c%e2%80%99%c3%a8-dietro-le-pubblicit%c3%a0-con-scene-di-sesso-che-infestano-instagram-e-tiktok--4163095.html": {
     "articleId": "microdrama-pubblicita-tiktok-instagram",
     "ts": "2026-10-17T21:03:32.387Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4170940": {
+    "articleId": "udc-assemblea-bulle-2026",
+    "ts": "2026-10-17T21:48:14.665Z",
     "keyForm": 2
   }
 }
