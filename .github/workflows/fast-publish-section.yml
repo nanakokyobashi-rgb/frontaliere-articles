@@ -753,7 +753,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: main
+          ref: ${{ inputs.source_commit || github.sha }}
           fetch-depth: 1
           persist-credentials: false
 
@@ -783,8 +783,20 @@ jobs:
       - name: Replay publish-api after bootstrap lock release
         env:
           REPOSITORY: ${{ github.repository }}
+          BOOTSTRAP_REVISION: ${{ inputs.source_commit || github.sha }}
         run: |
           set -euo pipefail
+          if ! [[ "$BOOTSTRAP_REVISION" =~ ^[a-f0-9]{40}$ ]] \
+            || [ "$(git rev-parse HEAD)" != "$BOOTSTRAP_REVISION" ]; then
+            echo "::error::checkout del replay non coincide con la revisione del bootstrap"
+            exit 1
+          fi
+          git fetch --no-tags --depth=1 origin main
+          current_main="$(git rev-parse FETCH_HEAD)"
+          if [ "$current_main" != "$BOOTSTRAP_REVISION" ]; then
+            echo "::notice::main e' avanzata durante il bootstrap ($BOOTSTRAP_REVISION -> $current_main); il push piu' recente avviera' il publisher API sulla revisione nuova"
+            exit 0
+          fi
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           if [ -z "$runtime_pat" ]; then
             echo "::error::GITHUB_PAT_NANAKO was not loaded from Remote Config"

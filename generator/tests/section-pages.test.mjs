@@ -2695,6 +2695,16 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(publishCheckout, /fetch-depth: 0/);
   assert.match(wf, /PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
   assert.match(wf, /PUSH_AFTER: \$\{\{ needs\.resolve\.outputs\.push_after \}\}/);
+  const bootstrapReplay = wf.slice(wf.indexOf('  replay-api-after-bootstrap:'));
+  assert.match(bootstrapReplay, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(bootstrapReplay, /BOOTSTRAP_REVISION: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(bootstrapReplay, /git fetch --no-tags --depth=1 origin main/);
+  const mainRevisionGuard = bootstrapReplay.indexOf('if [ "$current_main" != "$BOOTSTRAP_REVISION" ]');
+  const apiDispatch = bootstrapReplay.indexOf('gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main');
+  assert.ok(
+    mainRevisionGuard >= 0 && apiDispatch > mainRevisionGuard,
+    'il replay API deve saltare il dispatch se main e\' avanzata dal bootstrap',
+  );
   assert.match(wf, /push_before:/);
   assert.match(wf, /push_after:/);
   assert.doesNotMatch(wf, /git rev-parse HEAD\^/);
