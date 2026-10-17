@@ -336,7 +336,7 @@ const MASK_HEAD_ELEMENTS = new Set([
   'noscript', 'script', 'style', 'template', 'title',
 ]);
 const TEMPLATE_RAW_TEXT_TAGS = new Set([
-  'script', 'style', 'textarea', 'title', 'noscript', 'iframe', 'xmp',
+  'script', 'style', 'textarea', 'title', 'noscript', 'iframe', 'xmp', 'plaintext',
   'noembed', 'noframes',
 ]);
 
@@ -451,6 +451,7 @@ function maskSkipDocumentDeclaration(html, start) {
 }
 
 function maskSkipRawText(html, afterOpening, name) {
+  if (name === 'plaintext') return html.length;
   const closing = maskFindRawTextClose(html, afterOpening, name);
   return closing ? closing.end : -1;
 }
@@ -538,6 +539,129 @@ function maskRcdataContentForMetadata(html) {
   return output.join('');
 }
 
+function maskSkipForeignElement(html, start, startTag, name) {
+  const hasExplicitSelfClose = (tagStart, tag) => {
+    if (tag.closing) return false;
+    const nameEnd = tagStart + 1 + tag.name.length;
+    return inspectMaskSelfClosingStartTag(html, nameEnd, tag.end) === true;
+  };
+  if (hasExplicitSelfClose(start, startTag)) return startTag.end + 1;
+
+  let depth = 1;
+  let cursor = startTag.end + 1;
+  while (cursor < html.length) {
+    const tagStart = html.indexOf('<', cursor);
+    if (tagStart < 0) return html.length;
+    if (html.startsWith('<!--', tagStart)) {
+      const afterComment = maskSkipComment(html, tagStart);
+      if (afterComment < 0) return html.length;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = maskReadTag(html, tagStart);
+    if (tag?.malformed) return html.length;
+    if (!tag) {
+      cursor = tagStart + 1;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && tag.name === 'template') {
+      const afterTemplate = maskSkipTemplate(html, tag.end + 1);
+      if (afterTemplate < 0) return html.length;
+      cursor = afterTemplate;
+      continue;
+    }
+    if (
+      !tag.closing &&
+      !tag.selfClosing &&
+      (tag.name === 'title' || tag.name === 'textarea' || tag.name === 'plaintext'
+        || (INACTIVE_RAW_TEXT_TAGS.has(tag.name) && tag.name !== 'noscript'))
+    ) {
+      const afterRawText = maskSkipRawText(html, tag.end + 1, tag.name);
+      if (afterRawText < 0) return html.length;
+      cursor = afterRawText;
+      continue;
+    }
+    if (tag.name === name) {
+      if (tag.closing) {
+        depth -= 1;
+        if (depth === 0) return tag.end + 1;
+      } else if (!hasExplicitSelfClose(tagStart, tag)) {
+        depth += 1;
+      }
+    }
+    cursor = tag.end + 1;
+  }
+  return html.length;
+}
+
+function maskNonDocumentTitleMarkup(html) {
+  const source = String(html || '');
+  const output = source.split('');
+  const blank = (start, end) => {
+    for (let i = start; i < end; i++) output[i] = ' ';
+  };
+  let cursor = 0;
+  while (cursor < source.length) {
+    const start = source.indexOf('<', cursor);
+    if (start < 0) break;
+    if (source.startsWith('<!--', start)) {
+      const afterComment = maskSkipComment(source, start);
+      if (afterComment < 0) {
+        blank(start, source.length);
+        break;
+      }
+      cursor = afterComment;
+      continue;
+    }
+    const declarationEnd = maskSkipDocumentDeclaration(source, start);
+    if (declarationEnd !== null) {
+      if (declarationEnd < 0) {
+        blank(start, source.length);
+        break;
+      }
+      cursor = declarationEnd;
+      continue;
+    }
+    const tag = maskReadTag(source, start);
+    if (tag?.malformed) {
+      blank(start, source.length);
+      break;
+    }
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (!tag.closing && (tag.name === 'svg' || tag.name === 'math')) {
+      const end = maskSkipForeignElement(source, start, tag, tag.name);
+      blank(start, end);
+      cursor = end;
+      continue;
+    }
+    if (!tag.closing && tag.name === 'plaintext') {
+      blank(start, source.length);
+      break;
+    }
+    if (!tag.closing && !tag.selfClosing && tag.name === 'textarea') {
+      const end = maskSkipRawText(source, tag.end + 1, tag.name);
+      blank(start, end < 0 ? source.length : end);
+      if (end < 0) break;
+      cursor = end;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && tag.name === 'title') {
+      const end = maskSkipRawText(source, tag.end + 1, tag.name);
+      if (end < 0) {
+        blank(start, source.length);
+        break;
+      }
+      cursor = end;
+      continue;
+    }
+    cursor = tag.end + 1;
+  }
+  return output.join('');
+}
+
 function maskSkipTemplate(html, afterOpening) {
   let depth = 1;
   let cursor = afterOpening;
@@ -601,6 +725,7 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
   let sawHtml = false;
   let sawDocumentHead = false;
   let documentBodyStarted = false;
+  let documentClosed = false;
   let cursor = 0;
   while (cursor < source.length) {
     const start = source.indexOf('<', cursor);
@@ -642,8 +767,14 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
       cursor = start + 1;
       continue;
     }
+    if (tag.closing && tag.name === 'html') {
+      documentClosed = true;
+      implicitHead = false;
+      headDepth = 0;
+    }
     if (!tag.closing && tag.name === 'head') {
-      const isDocumentHead = !sawDocumentHead && !documentBodyStarted && headDepth === 0;
+      const isDocumentHead = !sawDocumentHead && !documentClosed
+        && !documentBodyStarted && headDepth === 0;
       if (!isDocumentHead) {
         const afterHead = maskSkipHead(source, tag.end + 1);
         blank(start, afterHead < 0 ? source.length : afterHead);
@@ -720,7 +851,8 @@ export function pageTitleEvidence(html, opts = {}) {
   // Solo markup attivo: un `<h1>` o un `<title>` dentro un commento, uno
   // script o un template puo' essere il titolo di un'altra notizia.
   const src = maskInactiveMarkup(html, opts);
-  const metadataSrc = maskRcdataContentForMetadata(src);
+  const titleSrc = maskNonDocumentTitleMarkup(src);
+  const metadataSrc = maskRcdataContentForMetadata(titleSrc);
   const out = [];
   for (const m of metadataSrc.matchAll(/<meta\b[^>]*>/gi)) {
     const tag = m[0];
@@ -728,7 +860,7 @@ export function pageTitleEvidence(html, opts = {}) {
     const content = /\bcontent\s*=\s*(?:"([^"]*)"|'([^']*)')/i.exec(tag);
     if (content) out.push(content[1] ?? content[2] ?? '');
   }
-  for (const m of src.matchAll(/<(title|h1)\b[^>]*>([\s\S]*?)<\/\1\s*>/gi)) out.push(m[2].replace(/<[^>]+>/g, ' '));
+  for (const m of titleSrc.matchAll(/<(title|h1)\b[^>]*>([\s\S]*?)<\/\1\s*>/gi)) out.push(m[2].replace(/<[^>]+>/g, ' '));
   return out.map((t) => t.replace(/\s+/g, ' ').trim()).filter(Boolean).join('\n');
 }
 

@@ -7739,7 +7739,7 @@ const SOURCE_HTML_VOID_ELEMENTS = new Set([
 ]);
 const SOURCE_HTML_RAW_TEXT_ELEMENTS = new Set([
   'script', 'style', 'textarea', 'title', 'iframe', 'xmp',
-  'noembed', 'noframes',
+  'noembed', 'noframes', 'plaintext',
 ]);
 // While skipping an inert template, `noscript` follows the scripting-enabled
 // raw-text rule so a literal `</template>` in its fallback cannot escape it.
@@ -7888,6 +7888,7 @@ function sourceIsRawTextElement(namespace, name) {
 }
 
 function sourceFindRawTextClose(html, afterOpening, name) {
+  if (name === 'plaintext') return html.length;
   const closing = new RegExp(`</${name}\\s*>`, 'ig');
   closing.lastIndex = afterOpening;
   const match = closing.exec(html);

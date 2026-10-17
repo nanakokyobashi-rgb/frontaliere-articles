@@ -340,6 +340,15 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
   });
 
+  it('non scansiona markup apparente dentro plaintext fino a EOF', () => {
+    const page = '<html><body><plaintext><article>'
+      + ARTICLE_PROSE + '</article></body></html>';
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.isolated, false);
+    assert.equal(res.root, 'none');
+    assert.equal(res.html, page);
+  });
+
   it('non tratta un <head> annidato nel body come head del documento', () => {
     const nestedHead = '<html><body><aside><head>'
       + '<script type="application/ld+json">{"headline":"NESTED_HEAD_SHOULD_NOT_BE_ACTIVATED"}</script>'

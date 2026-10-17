@@ -372,6 +372,24 @@ test('pageTitleEvidence non interpreta metadata letterale dentro il testo RCDATA
   assert.deepEqual(pageTitleEvidence(html).split('\n'), ['TITOLO_REALE', 'Titolo principale', 'Corpo']);
 });
 
+test('pageTitleEvidence esclude title SVG e markup letterale nel textarea', () => {
+  const html = '<html><head><title>TITLE_REALE</title></head><body>'
+    + '<svg><title>SVG_TITLE</title><h1>SVG_H1</h1>'
+    + '<meta property="og:title" content="SVG_META"></svg>'
+    + '<svg><foreignObject><textarea></svg><h1>TEXTAREA_SVG_CLOSE</h1></textarea>'
+    + '</foreignObject></svg>'
+    + '<textarea><h1>TEXTAREA_H1</h1><title>TEXTAREA_TITLE</title></textarea>'
+    + '<h1>H1_REALE</h1></body></html>';
+  assert.deepEqual(pageTitleEvidence(html).split('\n'), ['TITLE_REALE', 'H1_REALE']);
+  assert.equal(pageTitleEvidence('<plaintext><h1>PLAINTEXT_H1</h1>'), '');
+});
+
+test('pageTitleEvidence non riapre l’head dopo la chiusura del documento', () => {
+  const html = '<html><title>TITLE_DOCUMENTALE</title></html>'
+    + '<head><title>TITLE_STALE</title><meta property="og:title" content="META_STALE"></head>';
+  assert.equal(pageTitleEvidence(html), 'TITLE_DOCUMENTALE');
+});
+
 test('pageTitleEvidence esclude i metadata e i title dei head annidati nel body', () => {
   const html = '<html><head><meta property="og:title" content="META_REALE">'
     + '<title>TITLE_REALE</title></head><body><article><head>'
