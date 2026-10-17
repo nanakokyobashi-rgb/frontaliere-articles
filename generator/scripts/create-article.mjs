@@ -7863,6 +7863,20 @@ function sourceReadTag(html, start) {
   };
 }
 
+// An XHTML response may start with an XML declaration. It is a document
+// prologue, not document text, so the isolation scanner must consume it before
+// deciding whether non-whitespace content appeared before the HTML scaffold.
+function sourceReadXmlPrologueEnd(html, start) {
+  if (!/^<\?xml\s/iu.test(html.slice(start))) return -1;
+  const end = html.indexOf('?>', start + 5);
+  if (end < 0) return -1;
+  const declaration = html.slice(start, end + 2);
+  if (!/^<\?xml\s+version\s*=\s*["']1\.\d+["'](?:\s+encoding\s*=\s*["'][A-Za-z][A-Za-z0-9._-]*["'])?(?:\s+standalone\s*=\s*["'](?:yes|no)["'])?\s*\?>$/iu.test(declaration)) {
+    return -1;
+  }
+  return end + 2;
+}
+
 function sourceSkipComment(html, start) {
   const end = html.indexOf('-->', start + 4);
   return end < 0 ? -1 : end + 3;
@@ -8125,6 +8139,13 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
       if (afterComment < 0) return { malformed: true, stack };
       cursor = afterComment;
       continue;
+    }
+    if (!sawHtml && stack.length === 0) {
+      const afterXmlPrologue = sourceReadXmlPrologueEnd(html, start);
+      if (afterXmlPrologue >= 0) {
+        cursor = afterXmlPrologue;
+        continue;
+      }
     }
     const tag = sourceReadTag(html, start);
     if (tag?.malformed) {
@@ -8609,7 +8630,7 @@ function findActiveSourceHead(html) {
         tag.name === 'script' &&
         sourceTagAttribute(html, tag, 'type').trim().toLowerCase() === 'application/ld+json' &&
         documentLevel &&
-        ((bodyState?.trusted && parent === bodyState.entry) || (
+        ((bodyState?.trusted && bodyState.entry && stack.some((ancestor) => ancestor === bodyState.entry)) || (
           implicitHead &&
           stack.length === 1 &&
           parent === implicitHeadContainer
@@ -8723,8 +8744,8 @@ export function isolateMainSourceHtml(html) {
   // `<article>` prima di `<main>`: su una pagina di articolo singolo il primo
   // e' il pezzo, il secondo di solito lo contiene INSIEME ai commenti — che e'
   // esattamente il testo che si sta cercando di non consegnare.
-  const article = extractOutermostTagBlock(src, 'article');
-  const main = extractOutermostTagBlock(src, 'main');
+  const article = sourceRemoveInactiveSubtrees(extractOutermostTagBlock(src, 'article'));
+  const main = sourceRemoveInactiveSubtrees(extractOutermostTagBlock(src, 'main'));
 
   let chosen = '';
   let root = 'none';
@@ -8753,13 +8774,12 @@ export function isolateMainSourceHtml(html) {
     }
   }
   // I blocchi JSON-LD nel body si riportano solo quando lo scanner li ha
-  // riconosciuti come figli diretti di un body document-level. La raccolta
+  // riconosciuti come discendenti attivi di un body document-level. La raccolta
   // globale non distingue commenti, template e markup stale della sidebar.
   const ldBlocks = headScan.documentLevel
     ? headScan.ldBlocks.filter((block) => !head.includes(block) && !chosen.includes(block))
     : [];
 
-  chosen = sourceRemoveInactiveSubtrees(chosen);
   const isolatedHtml = `<!doctype html><html>${head}<body>${ldBlocks.join('')}${chosen}</body></html>`;
   return {
     html: sourceActivateBodyNoscript(isolatedHtml),

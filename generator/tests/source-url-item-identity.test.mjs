@@ -358,6 +358,14 @@ test('pageTitleEvidence mantiene inattivo noscript dopo il testo raw di title ne
   );
 });
 
+test('pageTitleEvidence non interpreta metadata letterale dentro il testo RCDATA di title', () => {
+  const html = '<html><head><title>Titolo principale '
+    + '<meta property="og:title" content="TITOLO_STALE_NEL_TITLE"></title>'
+    + '<meta property="og:title" content="TITOLO_REALE"></head>'
+    + '<body><h1>Corpo</h1></body></html>';
+  assert.deepEqual(pageTitleEvidence(html).split('\n'), ['TITOLO_REALE', 'Titolo principale', 'Corpo']);
+});
+
 test('pageTitleEvidence chiude il percorso su un tag non terminato', () => {
   const malformed = '<meta data="<title>Titolo falso</title>';
   assert.equal(pageTitleEvidence(malformed), '', 'un titolo dopo il tag malformato non e\' evidenza attiva');

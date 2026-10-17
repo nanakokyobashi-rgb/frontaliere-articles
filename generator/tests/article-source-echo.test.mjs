@@ -187,7 +187,7 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(res.html.includes('"articleBody":"corpo"'));
   });
 
-  it('riattiva JSON-LD attivo solo come figlio diretto del body', () => {
+  it('riattiva JSON-LD attivo sotto qualunque discendente non inattivo del body', () => {
     const stale = (label, attrs = '') => `<script${attrs ? ` ${attrs}` : ''} type="application/ld+json">{"headline":"${label}"}</script>`;
     const page2 = '<html><head><title>Pagina</title></head><body>'
       + `<!-- ${stale('COMMENT_JSON_LD_SHOULD_NOT_BE_ACTIVATED')} -->`
@@ -195,7 +195,7 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
       + `<template>${stale('TEMPLATE_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</template>`
       + `<template><head>${stale('TEMPLATE_NESTED_HEAD_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</head></template>`
       + `<aside>${stale('SIDEBAR_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</aside>`
-      + `<div class="app-shell">${stale('WRAPPED_BODY_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</div>`
+      + `<div class="app-shell"><section><div>${stale('WRAPPED_BODY_JSON_LD_ACTIVE')}</div></section></div>`
       + stale('SCRIPT_CLASS_JSON_LD_SHOULD_NOT_BE_ACTIVATED', 'class="related"')
       + stale('SCRIPT_ID_JSON_LD_SHOULD_NOT_BE_ACTIVATED', 'id="sidebar-json"')
       + stale('SCRIPT_ROLE_JSON_LD_SHOULD_NOT_BE_ACTIVATED', 'role="complementary"')
@@ -212,13 +212,44 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.equal(res.html.includes('TEMPLATE_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('TEMPLATE_NESTED_HEAD_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('SIDEBAR_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
-    assert.equal(res.html.includes('WRAPPED_BODY_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.ok(res.html.includes('WRAPPED_BODY_JSON_LD_ACTIVE'));
     assert.equal(res.html.includes('SCRIPT_CLASS_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('SCRIPT_ID_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('SCRIPT_ROLE_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('COMPLEMENTARY_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('BANNER_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('CONTENTINFO_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+  });
+
+  it('ignora il prologo XML prima dello scaffold XHTML', () => {
+    const page2 = '<?xml version="1.0"?><html><head><title>Fonte XHTML</title></head>'
+      + `<body><article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.equal(res.trustedDocument, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('<title>Fonte XHTML</title>'));
+  });
+
+  it('sceglie una radice ancora sopra soglia dopo il pruning del chrome', () => {
+    const chromeOnlyArticle = '<article><nav>'
+      + 'Navigazione stale '.repeat(80)
+      + '</nav></article>';
+    const page2 = `<html><body>${chromeOnlyArticle}<main>${ARTICLE_PROSE}</main></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'main');
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+    assert.equal(res.html.includes('Navigazione stale'), false);
+  });
+
+  it('conserva JSON-LD attivo dentro un wrapper normale del body', () => {
+    const page2 = '<html><head></head><body><div class="payload"><section>'
+      + '<script type="application/ld+json">{"articleBody":"WRAPPED_ARTICLE_BODY"}</script>'
+      + `</section></div><article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('WRAPPED_ARTICLE_BODY'));
   });
 
   it('non sceglie article/main dentro SVG rientrati da foreignObject o annotation-xml', () => {

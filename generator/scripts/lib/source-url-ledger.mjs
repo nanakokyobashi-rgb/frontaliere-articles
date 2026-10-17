@@ -424,10 +424,47 @@ function maskSkipComment(html, start) {
 }
 
 function maskSkipRawText(html, afterOpening, name) {
+  const closing = maskFindRawTextClose(html, afterOpening, name);
+  return closing ? closing.end : -1;
+}
+
+function maskFindRawTextClose(html, afterOpening, name) {
   const closing = new RegExp(`</${name}\\s*>`, 'ig');
   closing.lastIndex = afterOpening;
   const match = closing.exec(html);
-  return match ? match.index + match[0].length : -1;
+  return match ? { start: match.index, end: match.index + match[0].length } : null;
+}
+
+// RCDATA is active page content, but markup-looking text inside it is not a
+// second element. Keep the title text available to the title regex while
+// masking it in the separate metadata pass below.
+function maskRcdataContentForMetadata(html) {
+  const source = String(html || '');
+  const output = source.split('');
+  const blank = (start, end) => {
+    for (let i = start; i < end; i++) output[i] = ' ';
+  };
+  let cursor = 0;
+  while (cursor < source.length) {
+    const start = source.indexOf('<', cursor);
+    if (start < 0) break;
+    const tag = maskReadTag(source, start);
+    if (tag?.malformed) break;
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && (tag.name === 'title' || tag.name === 'textarea')) {
+      const closing = maskFindRawTextClose(source, tag.end + 1, tag.name);
+      const contentEnd = closing?.start ?? source.length;
+      blank(tag.end + 1, contentEnd);
+      if (!closing) break;
+      cursor = closing.end;
+      continue;
+    }
+    cursor = tag.end + 1;
+  }
+  return output.join('');
 }
 
 function maskSkipTemplate(html, afterOpening) {
@@ -585,8 +622,9 @@ export function pageTitleEvidence(html, opts = {}) {
   // Solo markup attivo: un `<h1>` o un `<title>` dentro un commento, uno
   // script o un template puo' essere il titolo di un'altra notizia.
   const src = maskInactiveMarkup(html, opts);
+  const metadataSrc = maskRcdataContentForMetadata(src);
   const out = [];
-  for (const m of src.matchAll(/<meta\b[^>]*>/gi)) {
+  for (const m of metadataSrc.matchAll(/<meta\b[^>]*>/gi)) {
     const tag = m[0];
     if (!/\b(?:property|name)\s*=\s*["']?(?:og:title|twitter:title)["'\s>]/i.test(tag)) continue;
     const content = /\bcontent\s*=\s*(?:"([^"]*)"|'([^']*)')/i.exec(tag);
