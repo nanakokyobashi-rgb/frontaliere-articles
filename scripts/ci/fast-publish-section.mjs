@@ -21,8 +21,11 @@
  *                          con niente.
  *   r2-plan                legge da stdin i file cambiati (uno per riga; accetta
  *                          anche `git diff --name-status`) e stampa la matrice
- *                          JSON `[{section, ids, bootstrap}]` delle sezioni R2
- *                          da ripubblicare
+ *                          JSON `[{section, ids, bootstrap, removeStaleCantonRssFeeds?}]`
+ *                          delle sezioni R2 da ripubblicare
+ *   r2-reconcile-plan <sha> legge il registro edge effettivo della release
+ *                          attesa e stampa la matrice delle sezioni cantonali
+ *                          R2 live, piu' il cleanup RSS delle non-live
  *   section-of <path>      la sezione che possiede quel corpo (esce 1 se nessuna)
  *   shard-of <section>     lo shard Pages della sezione. Una sezione con
  *                          `shardKey: null` (le cantonali) e' servita da R2 +
@@ -32,11 +35,13 @@
  * Solo builtin Node: gira nel primo step del workflow, prima di setup-node.
  */
 import '../../host/cantonSectionsBootstrap.mjs';
+import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 import { activeCorpusCoreEntries, activeSourceSections, sectionForBodyPath, sectionSourceSurfaces } from '../lib/corpus-sections.mjs';
 import { articleRegistryObjectBodies, articleRegistryObjectFields } from '../../engine/shared/articleRegistryObjectBodies.mjs';
+import { EDGE_SECTION_REGISTRY_URL, validateEdgeSectionRegistry } from '../lib/section-registry.mjs';
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -155,6 +160,112 @@ export function imagePublishPlan(files, coreList = activeCorpusCoreEntries(), { 
     .map((s) => ({ section: s.section, ids: [...owners.get(s.section)].sort(), bootstrap: false }));
 }
 
+/** Promozioni e demozioni cantonali R2 fra due versioni del registro. */
+export function liveRegistryTransitions(previousRegistry, nextRegistry, coreList = activeCorpusCoreEntries()) {
+  const readSections = (doc, label) => {
+    if (!doc || doc.schema !== 1 || !doc.sections || typeof doc.sections !== 'object' || Array.isArray(doc.sections)) {
+      throw new Error(`${label}: sections/registry.json non valido`);
+    }
+    return doc.sections;
+  };
+  const previous = readSections(previousRegistry, 'registro precedente');
+  const next = readSections(nextRegistry, 'registro nuovo');
+  const r2CantonSections = new Set(
+    activeSourceSections(coreList).filter((section) => section.kind === 'canton' && !section.shardKey).map((section) => section.section),
+  );
+  const sectionIds = [...new Set([...Object.keys(next), ...Object.keys(previous)])];
+  const transitions = [];
+  for (const section of sectionIds) {
+    const previousStatus = previous[section]?.status;
+    const nextStatus = next[section]?.status;
+    const promoted = nextStatus === 'live' && previousStatus !== 'live';
+    const demoted = previousStatus === 'live' && nextStatus !== 'live';
+    if (!promoted && !demoted) continue;
+    if (!r2CantonSections.has(section)) {
+      const verb = promoted ? 'promuove a live' : 'ritira da live';
+      throw new Error(`sections/registry.json ${verb} una sezione R2 non attiva nel core: ${section}`);
+    }
+    transitions.push({ section, removeStaleCantonRssFeeds: demoted });
+  }
+  return transitions;
+}
+
+/** Nomi delle sezioni cantonali R2 che hanno cambiato stato live/non-live. */
+export function liveRegistryTransitionSections(previousRegistry, nextRegistry, coreList = activeCorpusCoreEntries()) {
+  return liveRegistryTransitions(previousRegistry, nextRegistry, coreList).map(({ section }) => section);
+}
+
+/**
+ * Piano bounded per una release API avviata da schedule/manuale. Non usa il
+ * registro committato ne' il diff Git: il registro edge e' la superficie che
+ * il Worker serve davvero, ma deve appartenere alla release attesa; le
+ * cantonali R2 live vengono riconciliate e quelle non-live ricevono un
+ * cleanup RSS idempotente, cosi' una demozione o un kill-switch non lascia
+ * oggetti della release precedente sulla superficie edge.
+ */
+export function liveR2ReconciliationPlan(registry, coreList = activeCorpusCoreEntries(), expectedCommit) {
+  if (!validateEdgeSectionRegistry(registry)) {
+    throw new Error('registro edge effettivo non valido');
+  }
+  const expected = typeof expectedCommit === 'string' ? expectedCommit.trim() : '';
+  if (!expected) throw new Error('commit della release API attesa non disponibile');
+  if (registry.commit !== expected) {
+    throw new Error(`registro edge sul commit ${registry.commit}, atteso ${expected}`);
+  }
+  const live = new Set(
+    Object.entries(registry.sections)
+      .filter(([, entry]) => entry?.status === 'live')
+      .map(([section]) => section),
+  );
+  return coreList
+    .filter((section) => section.kind === 'canton' && !section.shardKey)
+    .map((section) => live.has(section.section)
+      ? { section: section.section, ids: [], bootstrap: true }
+      : { section: section.section, ids: [], bootstrap: false, removeStaleCantonRssFeeds: true });
+}
+
+/**
+ * A successful API push can change canton RSS bytes even when its diff only
+ * touched an API-generation input that r2PublishPlan cannot map to one canton.
+ * Keep article work scoped to the originating diff, but refresh the
+ * non-article surfaces (landing/archive/hubs/RSS) of every currently-live
+ * section. Non-live cleanup from the edge registry remains authoritative.
+ */
+export function r2ApiPushPlan(diffPlan, edgePlan, coreList = activeCorpusCoreEntries()) {
+  if (!Array.isArray(diffPlan) || !Array.isArray(edgePlan)) {
+    throw new Error('r2 API push plan: diff ed edge devono essere matrici');
+  }
+  const sections = activeSourceSections(coreList).filter((section) => !section.shardKey);
+  const bySection = new Map();
+  const assertSection = (section) => {
+    if (!sections.some((entry) => entry.section === section && entry.kind === 'canton')) {
+      throw new Error(`r2 API push plan per sezione R2 non attiva: ${section}`);
+    }
+  };
+  for (const target of diffPlan) {
+    assertSection(target?.section);
+    bySection.set(target.section, {
+      section: target.section,
+      ids: Array.isArray(target.ids) ? [...target.ids] : [],
+      bootstrap: target.bootstrap === true,
+      ...(target.removeStaleCantonRssFeeds === true ? { removeStaleCantonRssFeeds: true } : {}),
+    });
+  }
+  for (const target of edgePlan) {
+    assertSection(target?.section);
+    const current = bySection.get(target.section);
+    if (target.removeStaleCantonRssFeeds === true) {
+      bySection.set(target.section, {
+        ...(current ?? { section: target.section, ids: [], bootstrap: false }),
+        removeStaleCantonRssFeeds: true,
+      });
+    } else if (!current) {
+      bySection.set(target.section, { section: target.section, ids: [], bootstrap: false });
+    }
+  }
+  return sections.filter(({ section }) => bySection.has(section)).map(({ section }) => bySection.get(section));
+}
+
 /**
  * L'ERE (grep -E) dei corpi delle sezioni attive. `served` restringe a chi le
  * serve: `shard` (Pages) o `r2` (Worker). Un commit di un articolo cantonale
@@ -208,15 +319,31 @@ export function shardOf(section, coreList = activeCorpusCoreEntries()) {
  * `bootstrap: false` e con `ids: []`: rinfrescano landing, archivio e hub.
  *
  * @param {string[]} files path relativi alla radice del repo
- * @returns {Array<{ section: string, ids: string[], bootstrap: boolean }>} nell'ordine del core
+ * @returns {Array<{ section: string, ids: string[], bootstrap: boolean, removeStaleCantonRssFeeds?: boolean }>} nell'ordine del core
  */
-export function r2PublishPlan(files, coreList = activeCorpusCoreEntries()) {
+export function r2PublishPlan(
+  files,
+  coreList = activeCorpusCoreEntries(),
+  { registryRefreshSections = [], registryCleanupSections = [] } = {},
+) {
   const sections = activeSourceSections(coreList).filter((s) => !s.shardKey);
   const plan = new Map();
   const touch = (section) => {
     if (!plan.has(section)) plan.set(section, { ids: new Set(), bootstrap: false });
     return plan.get(section);
   };
+  for (const section of registryRefreshSections) {
+    if (!sections.some((entry) => entry.section === section && entry.kind === 'canton')) {
+      throw new Error(`refresh registry richiesto per sezione R2 non attiva: ${section}`);
+    }
+    touch(section).bootstrap = true;
+  }
+  for (const section of registryCleanupSections) {
+    if (!sections.some((entry) => entry.section === section && entry.kind === 'canton')) {
+      throw new Error(`cleanup RSS richiesto per sezione R2 non attiva: ${section}`);
+    }
+    touch(section).removeStaleCantonRssFeeds = true;
+  }
   const changedFiles = changedFileRecords(files);
   if (changedFiles.some(({ rel }) => isSharedR2RefreshPath(rel))) {
     for (const section of sections) touch(section.section).bootstrap = true;
@@ -254,11 +381,13 @@ export function r2PublishPlan(files, coreList = activeCorpusCoreEntries()) {
     .filter((s) => plan.has(s.section))
     .map((s) => {
       const state = plan.get(s.section);
-      return {
+      const target = {
         section: s.section,
         ids: state.bootstrap ? [] : [...state.ids].sort(),
         bootstrap: state.bootstrap,
       };
+      if (state.removeStaleCantonRssFeeds) target.removeStaleCantonRssFeeds = true;
+      return target;
     });
 }
 
@@ -272,15 +401,48 @@ function isMain() {
 
 if (isMain()) {
   const [cmd, arg] = process.argv.slice(2);
-  try {
+  const run = async () => {
     if (cmd === 'body-regex') console.log(bodyRegex(activeCorpusCoreEntries(), { served: arg }));
-    else if (cmd === 'r2-plan') console.log(JSON.stringify(r2PublishPlan(readFileSync(0, 'utf8').split('\n'))));
+    else if (cmd === 'r2-plan') {
+      const files = readFileSync(0, 'utf8').split('\n');
+      let registryRefreshSections = [];
+      let registryCleanupSections = [];
+      if (changedFileRecords(files).some(({ rel }) => rel === 'sections/registry.json')) {
+        let before = process.env.PUSH_BEFORE ?? '';
+        if (/^0+$/.test(before)) before = execFileSync('git', ['rev-parse', 'HEAD~1'], { encoding: 'utf8' }).trim();
+        if (!/^[a-f0-9]{40,64}$/i.test(before)) throw new Error('PUSH_BEFORE non disponibile per confrontare sections/registry.json');
+        const previous = JSON.parse(execFileSync('git', ['show', `${before}:sections/registry.json`], { encoding: 'utf8' }));
+        const next = JSON.parse(readFileSync('sections/registry.json', 'utf8'));
+        const transitions = liveRegistryTransitions(previous, next);
+        registryRefreshSections = transitions.map(({ section }) => section);
+        registryCleanupSections = transitions
+          .filter(({ removeStaleCantonRssFeeds }) => removeStaleCantonRssFeeds)
+          .map(({ section }) => section);
+      }
+      console.log(JSON.stringify(r2PublishPlan(files, activeCorpusCoreEntries(), {
+        registryRefreshSections,
+        registryCleanupSections,
+      })));
+    }
+    else if (cmd === 'r2-reconcile-plan') {
+      const response = await fetch(`${EDGE_SECTION_REGISTRY_URL}?_fpsr=${Date.now()}`, {
+        headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
+      });
+      if (!response.ok) throw new Error(`registro edge HTTP ${response.status}`);
+      console.log(JSON.stringify(liveR2ReconciliationPlan(await response.json(), activeCorpusCoreEntries(), arg)));
+    }
+    else if (cmd === 'r2-api-push-plan') {
+      const matrices = readFileSync(0, 'utf8').split('\n').filter((line) => line.trim()).map((line) => JSON.parse(line));
+      if (matrices.length !== 2) throw new Error('r2-api-push-plan richiede due matrici JSON: diff ed edge');
+      console.log(JSON.stringify(r2ApiPushPlan(matrices[0], matrices[1], activeCorpusCoreEntries())));
+    }
     else if (cmd === 'image-plan') console.log(JSON.stringify(imagePublishPlan(readFileSync(0, 'utf8').split('\n'), activeCorpusCoreEntries(), { served: arg })));
     else if (cmd === 'section-of' && arg) console.log(sectionOf(arg));
     else if (cmd === 'shard-of' && arg) console.log(shardOf(arg));
-    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files');
-  } catch (error) {
+    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files | r2-reconcile-plan <commit> | r2-api-push-plan < diff.json edge.json');
+  };
+  run().catch((error) => {
     console.error(`::error::fast-publish-section: ${error?.message ?? error}`);
-    process.exit(1);
-  }
+    process.exitCode = 1;
+  });
 }

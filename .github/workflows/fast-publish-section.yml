@@ -37,6 +37,10 @@ on:
       - 'content/cantons/**'
       - 'content/blog-body-canton-*/**'
       - 'content/blog-meta-canton-*'
+      # Il flip draft -> live cambia solo il registro. Il primo pass carica le
+      # pagine necessarie al bootstrap; il replay workflow_run, dopo il
+      # completamento di publish-api, verifica feed RSS e landing sul live.
+      - 'sections/registry.json'
       # A declared image may arrive after the article body. The resolver maps
       # this path through the registry to the owning canton article(s).
       # A queued-cover drain is the explicit-outbox exception; its push is
@@ -72,6 +76,17 @@ on:
       - 'scripts/lib/parse-positive-num.mjs'
       - 'generator/scripts/load-rc-env.mjs'
       - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
+  # `sections/registry.json` and the edge API registry are published by
+  # publish-api.yml. Its push-triggered run can finish after this workflow's
+  # first pass; scheduled/manual runs can also change the effective API
+  # surface without a new Git diff. API push completions refresh the
+  # non-article surfaces of every live canton (RSS can change through API-only
+  # inputs), preserve article scope from the originating diff, and merge
+  # cleanup for sections no longer live.
+  workflow_run:
+    workflows: ['Publish article data API']
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
     inputs:
       section:
@@ -97,29 +112,145 @@ on:
         required: false
         default: ''
         type: string
+      push_before:
+        description: 'Base SHA della provenienza push esplicita (solo replay bounded)'
+        required: false
+        default: ''
+        type: string
+      push_after:
+        description: 'Head SHA della provenienza push esplicita (solo replay bounded)'
+        required: false
+        default: ''
+        type: string
+      remove_stale_canton_rss_feeds:
+        description: 'Rimuovi i feed RSS rimasti da una sezione demossa'
+        required: false
+        default: false
+        type: boolean
+      api_release_commit:
+        description: 'Commit API pubblicato dalla run originaria (solo replay bounded)'
+        required: false
+        default: ''
+        type: string
+      source_commit:
+        description: 'Commit del corpus da checkoutare nel replay bounded'
+        required: false
+        default: ''
+        type: string
+      source_main_commit:
+        description: 'HEAD di main osservata quando e’ stato preparato il replay bounded'
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: read
 
 jobs:
   resolve:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       (github.event.workflow_run.event == 'push' ||
+        github.event.workflow_run.event == 'schedule' ||
+        github.event.workflow_run.event == 'workflow_dispatch') &&
+       github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
       matrix: ${{ steps.plan.outputs.matrix }}
       any: ${{ steps.plan.outputs.any }}
       dry: ${{ steps.plan.outputs.dry }}
+      push_before: ${{ steps.push_range.outputs.before }}
+      push_after: ${{ steps.push_range.outputs.after }}
     steps:
       - name: Checkout (resolve)
         uses: actions/checkout@v7
         with:
+          ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || github.sha }}
           fetch-depth: 2
           persist-credentials: false
 
-      - name: Fetch push base (resolve)
-        if: github.event_name == 'push'
+      - name: Resolve originating push range
+        id: push_range
         env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
           PUSH_BEFORE: ${{ github.event.before }}
+          PUSH_AFTER: ${{ github.event.after }}
+          DISPATCH_PUSH_BEFORE: ${{ inputs.push_before }}
+          DISPATCH_PUSH_AFTER: ${{ inputs.push_after }}
+          SOURCE_COMMIT_INPUT: ${{ inputs.source_commit }}
+          SOURCE_MAIN_COMMIT_INPUT: ${{ inputs.source_main_commit }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          WORKFLOW_RUN_EVENT: ${{ github.event.workflow_run.event }}
+        run: |
+          set -euo pipefail
+          before="${PUSH_BEFORE:-}"
+          after="${PUSH_AFTER:-}"
+          if [ "$EVENT_NAME" = 'workflow_run' ]; then
+            if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || ! [[ "$WORKFLOW_RUN_HEAD_SHA" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::error::workflow_run head SHA non valido"
+              exit 1
+            fi
+            if [ "$WORKFLOW_RUN_EVENT" = 'push' ]; then
+              push_events="$(gh api --paginate --slurp "repos/$REPO/commits/$WORKFLOW_RUN_HEAD_SHA/events")"
+              before="$(jq -r --arg head "$WORKFLOW_RUN_HEAD_SHA" '
+                [ .[]? | .[]?
+                  | select(.type == "PushEvent"
+                    and .payload.ref == "refs/heads/main"
+                    and .payload.head == $head)
+                  | .payload.before
+                ] | last // empty
+              ' <<< "$push_events")"
+              if [ -z "$before" ] || ! [[ "$before" =~ ^[a-f0-9]{40}$ ]] && ! [[ "$before" =~ ^0+$ ]]; then
+                echo "::error::before della push originaria non trovato per workflow_run head $WORKFLOW_RUN_HEAD_SHA"
+                exit 1
+              fi
+              after="$WORKFLOW_RUN_HEAD_SHA"
+            elif [ "$WORKFLOW_RUN_EVENT" != 'schedule' ] && [ "$WORKFLOW_RUN_EVENT" != 'workflow_dispatch' ]; then
+              echo "::error::workflow_run event non supportato: $WORKFLOW_RUN_EVENT"
+              exit 1
+            fi
+          elif [ "$EVENT_NAME" = 'workflow_dispatch' ]; then
+            if [ -n "${SOURCE_COMMIT_INPUT:-}" ] && ! [[ "$SOURCE_COMMIT_INPUT" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::error::source_commit richiede una SHA completa"
+              exit 1
+            fi
+            if [ -n "${SOURCE_COMMIT_INPUT:-}" ]; then
+              if [ -z "${SOURCE_MAIN_COMMIT_INPUT:-}" ] || ! [[ "$SOURCE_MAIN_COMMIT_INPUT" =~ ^[a-f0-9]{40}$ ]]; then
+                echo "::error::source_main_commit e' obbligatorio e richiede una SHA completa quando source_commit e' valorizzato"
+                exit 1
+              fi
+              if [ "$SOURCE_COMMIT_INPUT" != "$SOURCE_MAIN_COMMIT_INPUT" ]; then
+                echo "::error::source_commit deve coincidere con source_main_commit nel replay bounded"
+                exit 1
+              fi
+              if [ "$(git rev-parse HEAD)" != "$SOURCE_COMMIT_INPUT" ]; then
+                echo "::error::checkout non coincide con source_commit"
+                exit 1
+              fi
+            fi
+            dispatch_before="${DISPATCH_PUSH_BEFORE:-}"
+            dispatch_after="${DISPATCH_PUSH_AFTER:-}"
+            if [ -n "$dispatch_before" ] || [ -n "$dispatch_after" ]; then
+              if [ -z "$dispatch_before" ] || [ -z "$dispatch_after" ] \
+                || ! [[ "$dispatch_before" =~ ^[a-f0-9]{40}$ ]] \
+                || ! [[ "$dispatch_after" =~ ^[a-f0-9]{40}$ ]]; then
+                echo "::error::push_before/push_after richiedono una provenienza completa di SHA"
+                exit 1
+              fi
+              before="$dispatch_before"
+              after="$dispatch_after"
+            fi
+          fi
+          echo "before=$before" >> "$GITHUB_OUTPUT"
+          echo "after=$after" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch originating push base (resolve)
+        env:
+          PUSH_BEFORE: ${{ steps.push_range.outputs.before }}
         run: |
           set -euo pipefail
           if [ -n "${PUSH_BEFORE:-}" ] && [[ ! "$PUSH_BEFORE" =~ ^0+$ ]]; then
@@ -135,12 +266,21 @@ jobs:
           ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
           BOOTSTRAP_INPUT: ${{ inputs.bootstrap }}
           DRY_RUN_INPUT: ${{ inputs.dry_run }}
+          REMOVE_STALE_INPUT: ${{ inputs.remove_stale_canton_rss_feeds }}
           EVENT_NAME: ${{ github.event_name }}
           COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-          PUSH_BEFORE: ${{ github.event.before }}
+          WORKFLOW_RUN_COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.workflow_run.head_commit.message }}
+          PUSH_BEFORE: ${{ steps.push_range.outputs.before }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          WORKFLOW_RUN_EVENT: ${{ github.event.workflow_run.event }}
         run: |
           set -euo pipefail
-          if [ "$EVENT_NAME" = 'push' ]; then
+          if [ "$EVENT_NAME" = 'push' ] || { [ "$EVENT_NAME" = 'workflow_run' ] && [ "$WORKFLOW_RUN_EVENT" = 'push' ]; }; then
+            cover_drain_message="${COVER_DRAIN_COMMIT_MESSAGE:-}"
+            if [ "$EVENT_NAME" = 'workflow_run' ]; then
+              cover_drain_message="${WORKFLOW_RUN_COVER_DRAIN_COMMIT_MESSAGE:-}"
+            fi
+            export COVER_DRAIN_COMMIT_MESSAGE="$cover_drain_message"
             cover_drain_marker="$(node scripts/ci/cover-drain-commit.mjs is-cover-drain)"
             if [ "$cover_drain_marker" = 'true' ]; then
               echo 'cover-drain push is handled by the explicit publisher outbox dispatch; skipping automatic section publishing'
@@ -153,7 +293,12 @@ jobs:
             fi
           fi
           before="${PUSH_BEFORE:-}"
-          if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
+          if [ "$EVENT_NAME" = 'workflow_run' ]; then
+            if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || [ "$(git rev-parse HEAD)" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
+              echo "::error::workflow_run head non coincide con il checkout"
+              exit 1
+            fi
+          fi
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             dry=true
             [ "$DRY_RUN_INPUT" = "false" ] && dry=false
@@ -168,27 +313,56 @@ jobs:
             fi
             bootstrap=false
             [ "$BOOTSTRAP_INPUT" = "true" ] && bootstrap=true
+            remove_stale=false
+            [ "$REMOVE_STALE_INPUT" = "true" ] && remove_stale=true
             if [ "$bootstrap" = "true" ] && [ "$ids_json" != "[]" ]; then
               echo "::error::bootstrap rende tutti gli articoli: non si combina con article_ids"
               exit 1
             fi
-            matrix="$(jq -cn --arg s "$SECTION_INPUT" --argjson ids "$ids_json" --argjson b "$bootstrap" \
-              '[{section: $s, ids: $ids, bootstrap: $b}]')"
+            matrix="$(jq -cn --arg s "$SECTION_INPUT" --argjson ids "$ids_json" --argjson b "$bootstrap" --argjson r "$remove_stale" \
+              '[{section: $s, ids: $ids, bootstrap: $b, removeStaleCantonRssFeeds: $r}]')"
           else
             dry=false
-            # Stessi interruttori di fast-publish-article.yml: un file nel
-            # repo o la variabile FAST_PUBLISH_ARMED=false fermano gli upload
-            # senza toccare il codice.
-            if [ -f .github/FAST_PUBLISH_DISABLED ]; then
-              echo "::warning::.github/FAST_PUBLISH_DISABLED present — running dry"
-              dry=true
-            elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "false" ]; then
-              echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
-              dry=true
+            if [ "$EVENT_NAME" = 'workflow_run' ]; then
+              # Ogni completion API deve leggere il registro edge della
+              # release appena completata: anche una kill-switch o un hub
+              # mancante puo' rendere non-live una sezione senza una
+              # transizione in sections/registry.json.
+              edge_matrix="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan \
+                "$WORKFLOW_RUN_HEAD_SHA" \
+                | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
+              if [ "$WORKFLOW_RUN_EVENT" = 'push' ]; then
+                if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
+                # Il replay della push API deve riprodurre il piano dei contenuti
+                # della push originaria: il primo fast-publish puo' essere
+                # fallito mentre attendeva la release API, senza modificare il registro.
+                diff_matrix="$(git diff --name-status "$before" HEAD 2>/dev/null \
+                  | PUSH_BEFORE="$before" node scripts/ci/fast-publish-section.mjs r2-plan \
+                  | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
+                # Un API push riuscito puo' cambiare RSS anche se il diff
+                # contiene solo input del generatore non associabili a una
+                # singola sezione. Aggiorna landing/archive/hub/RSS di tutte le
+                # cantonali live, mantenendo gli articoli circoscritti al diff.
+                matrix="$(printf '%s\n%s\n' "$diff_matrix" "$edge_matrix" \
+                  | node scripts/ci/fast-publish-section.mjs r2-api-push-plan)"
+              else
+                matrix="$edge_matrix"
+              fi
+            else
+              if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
+              matrix="$(git diff --name-status "$before" HEAD 2>/dev/null \
+                | PUSH_BEFORE="$before" node scripts/ci/fast-publish-section.mjs r2-plan \
+                | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
             fi
-            matrix="$(git diff --name-status "$before" HEAD 2>/dev/null \
-              | node scripts/ci/fast-publish-section.mjs r2-plan \
-              | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
+          fi
+          # Applica i kill switch anche ai workflow_dispatch, inclusi i replay
+          # stantii: l'input dry_run=false non può riarmare il publisher.
+          if [ -f .github/FAST_PUBLISH_DISABLED ]; then
+            echo "::warning::.github/FAST_PUBLISH_DISABLED present — running dry"
+            dry=true
+          elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "false" ]; then
+            echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
+            dry=true
           fi
           any=false
           [ "$(printf '%s' "$matrix" | jq 'length')" -gt 0 ] && any=true
@@ -215,32 +389,155 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
-          fetch-depth: 2
+          ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || github.sha }}
+          # resolvePublishedReleaseCommit() verifica la release API con
+          # merge-base: una release precedente puo' essere fuori dai due
+          # commit che actions/checkout scarica di default.
+          fetch-depth: 0
           persist-credentials: false
 
-      - name: Fetch fallback corpus revision for manifest migration
-        if: github.event_name == 'push'
+      - name: Guard replay freshness
+        id: replay_freshness
         env:
-          PREVIOUS_REVISION: ${{ github.event.before }}
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
-          if [ -n "${PREVIOUS_REVISION:-}" ] && [[ ! "$PREVIOUS_REVISION" =~ ^0+$ ]]; then
+          if [ "$EVENT_NAME" != 'workflow_run' ]; then
+            echo 'fresh=true' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || ! [[ "$WORKFLOW_RUN_HEAD_SHA" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::workflow_run head SHA non valido per il guard di freschezza"
+            exit 1
+          fi
+          if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
+            echo "::error::impossibile verificare la revisione corrente di main prima del replay"
+            exit 1
+          fi
+          if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::revisione corrente di main non valida"
+            exit 1
+          fi
+          echo "current_main=$current_main" >> "$GITHUB_OUTPUT"
+          if [ "$current_main" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
+            echo "::notice::replay workflow_run saltato: main e' avanzato da $WORKFLOW_RUN_HEAD_SHA a $current_main"
+            echo 'fresh=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo 'fresh=true' >> "$GITHUB_OUTPUT"
+
+      # Il replay della run API osservata e' ormai stantio. Il redispatch usa
+      # il workflow corrente su main e la sua HEAD come sorgente del corpus.
+      # Conserva P come release API solo se P copre tutti gli input raggiungibili
+      # dalla HEAD corrente; altrimenti usa la HEAD corrente come gate di
+      # readiness, cosi' il replay attende la completion API invece di creare
+      # una superficie mista.
+      - name: Prepare Firebase credentials for stale replay recovery
+        if: github.event_name == 'workflow_run'
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — Remote Config is the only source of the dispatch token"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/stale-replay-sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/stale-replay-sa.json" >> "$GITHUB_ENV"
+
+      - name: Load dispatch token for stale replay recovery
+        if: github.event_name == 'workflow_run'
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Dispatch bounded replay with current corpus checkout
+        if: steps.replay_freshness.outputs.fresh == 'false'
+        env:
+          REPO: ${{ github.repository }}
+          SECTION: ${{ matrix.target.section }}
+          ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
+          BOOTSTRAP: ${{ matrix.target.bootstrap }}
+          REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
+          DRY: ${{ needs.resolve.outputs.dry }}
+          STALE_HEAD: ${{ github.event.workflow_run.head_sha }}
+          CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
+          ORIGINAL_PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
+          ORIGINAL_PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
+        run: |
+          set -euo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::error::GITHUB_PAT_NANAKO assente: impossibile redispatchare il replay stantio"
+            exit 1
+          fi
+          export GH_TOKEN="$runtime_pat"
+          replay_before="${ORIGINAL_PUSH_BEFORE:-$STALE_HEAD}"
+          replay_after="${ORIGINAL_PUSH_AFTER:-$STALE_HEAD}"
+          if [ "$(git rev-parse --is-shallow-repository)" = 'true' ]; then
+            git fetch --no-tags --unshallow origin main
+          else
+            git fetch --no-tags origin main
+          fi
+          api_release_commit="$(
+            CURRENT_MAIN="$CURRENT_MAIN" STALE_API_RELEASE="$STALE_HEAD" node --input-type=module -e '
+              import { resolveStaleReplayApiReleaseCommit } from "./scripts/publish-section-pages.mjs";
+              process.stdout.write(resolveStaleReplayApiReleaseCommit(
+                process.env.CURRENT_MAIN,
+                process.env.STALE_API_RELEASE,
+              ));
+            '
+          )"
+          echo "::notice::replay stantio: release API attesa $api_release_commit"
+          gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
+            -f section="$SECTION" \
+            -f article_ids="$ARTICLE_IDS_JSON" \
+            -f bootstrap="$BOOTSTRAP" \
+            -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
+            -f api_release_commit="$api_release_commit" \
+            -f source_commit="$CURRENT_MAIN" \
+            -f source_main_commit="$CURRENT_MAIN" \
+            -f dry_run="$DRY" \
+            -f push_before="$replay_before" \
+            -f push_after="$replay_after"
+
+      - name: Fetch fallback corpus revision for manifest migration
+        if: steps.replay_freshness.outputs.fresh == 'true'
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
+          PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          PREVIOUS_REVISION="${PUSH_BEFORE:-}"
+          if [ "$EVENT_NAME" = 'workflow_run' ]; then
+            if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || [ "$(git rev-parse HEAD)" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
+              echo "::error::workflow_run head non coincide con il checkout"
+              exit 1
+            fi
+          fi
+          if [ -n "${PREVIOUS_REVISION:-}" ] && [[ ! "$PREVIOUS_REVISION" =~ ^0+$ ]] \
+            && ! git cat-file -e "$PREVIOUS_REVISION^{commit}" 2>/dev/null; then
             git fetch --no-tags --depth=1 origin "$PREVIOUS_REVISION"
           fi
 
       - name: Set up Node
+        if: steps.replay_freshness.outputs.fresh == 'true'
         uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
+        if: steps.replay_freshness.outputs.fresh == 'true'
         run: bash scripts/lib/npm-ci-retry.sh
 
       # Remote Config e' la sola sorgente delle credenziali R2 e Cloudflare.
       # In dry non servono: il render e la validazione girano comunque.
       - name: Prepare Firebase credentials
-        if: needs.resolve.outputs.dry != 'true'
+        if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -253,14 +550,14 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
 
       - name: Load secrets from Remote Config
-        if: needs.resolve.outputs.dry != 'true'
+        if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
         run: node generator/scripts/load-rc-env.mjs
 
       # Un upload che «salta» per credenziali assenti esce 0 da
       # upload-cdn-file.sh: qui l'assenza deve fermare il job PRIMA del render,
       # non diventare una pubblicazione verde che non ha caricato niente.
       - name: Require the R2 and Cloudflare credentials
-        if: needs.resolve.outputs.dry != 'true'
+        if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
         run: |
           set -euo pipefail
           missing=()
@@ -282,25 +579,109 @@ jobs:
       # il file se la CDN non lo ha, non sostituisce mai un oggetto e ferma il
       # job se non riesce a stabilirlo: scripts/ci/ensure-host-shell-assets.mjs.
       - name: Ensure the host shell assets are on the CDN
-        if: needs.resolve.outputs.dry != 'true'
+        if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
         run: bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/ci/ensure-host-shell-assets.mjs
 
       - name: Render, validate and publish the section pages
+        if: steps.replay_freshness.outputs.fresh == 'true'
         env:
           SECTION: ${{ matrix.target.section }}
           ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
           BOOTSTRAP: ${{ matrix.target.bootstrap }}
           DRY: ${{ needs.resolve.outputs.dry }}
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
+          PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
+          REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
+          API_RELEASE_COMMIT: ${{ inputs.api_release_commit }}
+          SOURCE_COMMIT: ${{ inputs.source_commit }}
+          SOURCE_MAIN_COMMIT: ${{ inputs.source_main_commit }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          EXPECTED_MAIN_HEAD: ${{ github.event.workflow_run.head_sha || inputs.source_main_commit || github.event.after || github.sha }}
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
+          if [ -n "${SOURCE_COMMIT:-}" ]; then
+            if [ -z "${SOURCE_MAIN_COMMIT:-}" ] || ! [[ "$SOURCE_MAIN_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::error::source_main_commit e' obbligatorio e richiede una SHA completa quando source_commit e' valorizzato"
+              exit 1
+            fi
+            if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::error::source_commit richiede una SHA completa"
+              exit 1
+            fi
+            if [ "$SOURCE_COMMIT" != "$SOURCE_MAIN_COMMIT" ]; then
+              echo "::error::source_commit deve coincidere con source_main_commit nel replay bounded"
+              exit 1
+            fi
+            if [ "$(git rev-parse HEAD)" != "$SOURCE_COMMIT" ]; then
+              echo "::error::checkout non coincide con source_commit"
+              exit 1
+            fi
+          fi
+          if [ "$EVENT_NAME" = 'workflow_run' ]; then
+            if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
+              echo "::error::impossibile verificare la revisione corrente di main prima degli upload"
+              exit 1
+            fi
+            if [ "$current_main" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
+              runtime_pat="${GITHUB_PAT_NANAKO:-}"
+              if [ -z "$runtime_pat" ]; then
+                echo "::error::GITHUB_PAT_NANAKO assente: impossibile redispatchare il replay stantio prima degli upload"
+                exit 1
+              fi
+              export GH_TOKEN="$runtime_pat"
+              echo "::notice::replay workflow_run redispatchato prima degli upload: main e' avanzato da $WORKFLOW_RUN_HEAD_SHA a $current_main"
+              replay_before="${PUSH_BEFORE:-$WORKFLOW_RUN_HEAD_SHA}"
+              replay_after="${PUSH_AFTER:-$WORKFLOW_RUN_HEAD_SHA}"
+              if [ "$(git rev-parse --is-shallow-repository)" = 'true' ]; then
+                git fetch --no-tags --unshallow origin main
+              else
+                git fetch --no-tags origin main
+              fi
+              api_release_commit="$(
+                CURRENT_MAIN="$current_main" STALE_API_RELEASE="$WORKFLOW_RUN_HEAD_SHA" node --input-type=module -e '
+                  import { resolveStaleReplayApiReleaseCommit } from "./scripts/publish-section-pages.mjs";
+                  process.stdout.write(resolveStaleReplayApiReleaseCommit(
+                    process.env.CURRENT_MAIN,
+                    process.env.STALE_API_RELEASE,
+                  ));
+                '
+              )"
+              echo "::notice::replay workflow_run: release API attesa $api_release_commit"
+              gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
+                -f section="$SECTION" \
+                -f article_ids="$ARTICLE_IDS_JSON" \
+                -f bootstrap="$BOOTSTRAP" \
+                -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
+                -f api_release_commit="$api_release_commit" \
+                -f source_commit="$current_main" \
+                -f source_main_commit="$current_main" \
+                -f dry_run="$DRY" \
+                -f push_before="$replay_before" \
+                -f push_after="$replay_after"
+              exit 0
+            fi
+          fi
           args=(--section "$SECTION" --out "$RUNNER_TEMP/section-dist" --summary "$RUNNER_TEMP/section-summary.json")
-          if [ "${{ github.event_name }}" = "push" ] && [ -n "${{ github.event.before }}" ]; then
-            args+=(--previous-revision "${{ github.event.before }}")
+          previous_revision="${PUSH_BEFORE:-}"
+          if [ "$EVENT_NAME" = 'workflow_run' ]; then
+            if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || [ "$(git rev-parse HEAD)" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
+              echo "::error::workflow_run head non coincide con il checkout"
+              exit 1
+            fi
+          fi
+          if [ -n "$previous_revision" ] && [[ ! "$previous_revision" =~ ^0+$ ]]; then
+            args+=(--previous-revision "$previous_revision")
           fi
           if [ "$BOOTSTRAP" = "true" ]; then
             args+=(--bootstrap)
           else
             args+=(--ids "$(printf '%s' "$ARTICLE_IDS_JSON" | jq -c .)")
+          fi
+          if [ "$REMOVE_STALE_CANTON_RSS_FEEDS" = "true" ]; then
+            args+=(--remove-stale-canton-rss-feeds)
           fi
           if [ "$DRY" = "true" ]; then
             args+=(--dry-run)
