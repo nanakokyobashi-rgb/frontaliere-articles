@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-targa-kevin-palmieri.webp",
+      "sha256": "42b7a5b90b5008cebb24dfb038bcc615420f1161757ba6c77fd7bce19d811f65"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-targa-kevin-palmieri-480w.webp",
+      "sha256": "37346d6ae3adcdb98a2027c1d01bfca6c656653ffca06385fb8aee5eb3483c59"
+    }
+  ]
 }
