@@ -18,6 +18,9 @@ const blogMetaCantonVsEn: Record<string, string> = {
     'blog.article.vallese-piano-acqua-2035.title': 'Valais: Water Action Plan 2035 approved',
     'blog.article.vallese-piano-acqua-2035.excerpt': 'The Council of State adopts the 2035 Action Plan Gradual implementation from 2027, according to priorities and resources The measures decrease from 39 to 25',
     'blog.article.vallese-piano-acqua-2035.imageAlt': 'Water management in Canton Valais with mountains and alpine lakes',
+    'blog.article.crollo-pilone-vetroz.title': 'A high-voltage pylon collapses in Vétroz',
+    'blog.article.crollo-pilone-vetroz.excerpt': 'The pylon collapsed around 4 in the Botza industrial area.',
+    'blog.article.crollo-pilone-vetroz.imageAlt': 'Fallen high-voltage pylon in the Botza industrial zone in Vétroz.',
 };
 
 export default blogMetaCantonVsEn;

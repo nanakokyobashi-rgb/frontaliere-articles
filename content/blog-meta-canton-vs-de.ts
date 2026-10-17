@@ -18,6 +18,9 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.vallese-piano-acqua-2035.title': 'Wallis: Wasser-Aktionsplan 2035 genehmigt',
     'blog.article.vallese-piano-acqua-2035.excerpt': 'Der Staatsrat verabschiedet den Aktionsplan 2035 Schrittweise Umsetzung ab 2027 nach Prioritäten und Ressourcen Die Maßnahmen gehen nach der Überarbeitung',
     'blog.article.vallese-piano-acqua-2035.imageAlt': 'Wasserwirtschaft im Kanton Wallis mit Bergen und Alpenseen',
+    'blog.article.crollo-pilone-vetroz.title': 'Ein Hochspannungsmast in Vétroz stürzt ein',
+    'blog.article.crollo-pilone-vetroz.excerpt': 'Der Mast ist gegen 4 Uhr im Industriegebiet von Botza eingestürzt.',
+    'blog.article.crollo-pilone-vetroz.imageAlt': 'Eingestürzter Hochspannungsmast im Industriegebiet Botza in Vétroz.',
 };
 
 export default blogMetaCantonVsDe;

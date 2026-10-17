@@ -197,6 +197,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-crollo-pilone-vetroz': {
+    title: 'Crolla un pilone dell\'alta tensione a Vétroz | Frontaliere Ticino',
+    description: 'Vétroz, crolla verso le 4 un pilone dell\'alta tensione nella zona industriale del Botza: un secondo è danneggiato, la polizia chiude il settore per i lavori.',
+    keywords: 'frontalieri, ticino, svizzera, italia, crolla, pilone, dell, alta',
+    ogTitle: 'Crolla un pilone dell\'alta tensione a Vétroz',
+    ogDescription: 'La scena ha sorpreso i residenti della zona industriale del Botza: un pilone è finito al suolo durante la notte e ha colpito un secondo sostegno. Polizia cantonale e partner della rete elettrica sono intervenuti; nessun ferito.',
+    canonicalPath: '/articoli-vallese/crollo-pilone-vetroz/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Crolla un pilone dell'alta tensione a Vétroz",
+      "description": "Vétroz, crolla verso le 4 un pilone dell'alta tensione nella zona industriale del Botza: un secondo è danneggiato, la polizia chiude il settore per i lavori.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-crollo-pilone-vetroz.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pilone dell'alta tensione crollato nella zona industriale del Botza, a Vétroz."
+      },
+      "datePublished": "2026-10-17T00:38:07+00:00",
+      "dateModified": "2026-10-17T00:38:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vallese/crollo-pilone-vetroz/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

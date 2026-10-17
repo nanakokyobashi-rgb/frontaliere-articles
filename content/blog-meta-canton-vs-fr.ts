@@ -18,6 +18,9 @@ const blogMetaCantonVsFr: Record<string, string> = {
     'blog.article.vallese-piano-acqua-2035.title': 'Valais : approbation du Plan d\'action Eau 2035',
     'blog.article.vallese-piano-acqua-2035.excerpt': 'Le Conseil d\'État adopte le Plan d\'action 2035 Mise en œuvre progressive à partir de 2027, selon les priorités et les ressources Les mesures passent de 39 à 25',
     'blog.article.vallese-piano-acqua-2035.imageAlt': 'Gestion de l\'eau dans le canton du Valais avec montagnes et lacs alpins',
+    'blog.article.crollo-pilone-vetroz.title': 'Un pylône de haute tension s\'effondre à Vétroz',
+    'blog.article.crollo-pilone-vetroz.excerpt': 'Le pylône s\'est effondré vers 4 heures dans la zone industrielle de Botza.',
+    'blog.article.crollo-pilone-vetroz.imageAlt': 'Pylône à haute tension effondré dans la zone industrielle de Botza à Vétroz.',
 };
 
 export default blogMetaCantonVsFr;

@@ -61,4 +61,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'crollo-pilone-vetroz',
+ category: 'pratico',
+ date: '2026-10-17T00:38:07.569Z',
+ image: '/images/blog/article-crollo-pilone-vetroz.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VS'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
