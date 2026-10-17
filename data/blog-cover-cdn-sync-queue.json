@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-microdrama-pubblicita-tiktok-instagram.webp",
-      "sha256": "3284c6f451480f8ca3f48917ef19461e9b2c3f1f1d0d284d24531a2ebc2bd65d"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-microdrama-pubblicita-tiktok-instagram-480w.webp",
-      "sha256": "7a88f50fb866c0314acfb8c69e295d94a60483c8870809af70e66fd35bbaaf5a"
-    }
-  ]
+  "items": []
 }
