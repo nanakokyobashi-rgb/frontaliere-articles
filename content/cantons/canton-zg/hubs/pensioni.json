@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "pensioni",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "2dfaabe410dd4f8350eb219857b532866d937bd0c30833ea7c849931aafd38e0",
+  "updatedAt": "2026-10-17T00:58:07.231Z",
+  "contentHash": "484d18e1be416dae514bcd1d1a2564e6beed53747471d00b4c03a5bd65aa013e",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T15:35:32.859Z",
       "keyFacts": 0
     }
   ],
@@ -141,36 +141,18 @@
               "url": "https://www.zugerpk.ch/deu/vorstandswahlen-20272031_49022.shtml"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Scuola Sternmatt 1: l'IA segna il 2026/27",
-          "url": "/articoli-zugo/scuola-sternmatt-ia-2026/",
-          "excerpt": "La scuola Sternmatt 1 affronta il 2026/27 mettendo al centro un uso responsabile dell'intelligenza artificiale nelle aule.",
-          "date": "2026-10-08T18:01:57.824Z"
-        },
-        {
-          "title": "Baar: rinnovo del Gemeinderat per il 2027–2030",
-          "url": "/articoli-zugo/baar-rinnovo-comunale-2027/",
-          "excerpt": "Baarer Zytig indica i risultati del 27 settembre e il rinnovo del Gemeinderat del 4 ottobre 2026: sette membri per il mandato 2027–2030.",
-          "date": "2026-10-08T17:50:07.603Z"
-        },
-        {
-          "title": "Zugo si prepara al rischio del coleottero giapponese",
-          "url": "/articoli-zugo/zug-rischio-coleottero-giapponese/",
-          "excerpt": "Focolai confermati a Zurigo, Lucerna e Svitto: Zugo rafforza la sorveglianza e chiede di controllare veicoli, bagagli e materiali.",
-          "date": "2026-10-07T09:02:17.902Z"
-        },
-        {
-          "title": "Zugo prevede avanzo 15,6 milioni nel 2027 con tasso al 52%",
-          "url": "/articoli-zugo/zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52/",
-          "excerpt": "Il preventivo 2027 indica un avanzo di CHF 15,6 milioni, entrate CHF 446,6 milioni e uscite CHF 431,1 milioni, con tasso fiscale richiesto al 52%.",
-          "date": "2026-10-07T08:41:12.746Z"
+          "title": "Zuger Pensionskasse: online il rapporto 2025",
+          "url": "/articoli-zugo/zuger-rapporto-gestione-2025/",
+          "excerpt": "Il Geschäftsbericht 2025 della Zuger Pensionskasse offre una panoramica sull'esercizio concluso e rinvia alla Jahresrechnung 2025 per ulteriori informazioni.",
+          "date": "2026-10-17T00:53:57.792Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Strumenti su tasse e pensione",
@@ -189,7 +171,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:58:07.231Z"
     },
     "en": {
       "canton": "ZG",
@@ -303,36 +285,18 @@
               "url": "https://www.zugerpk.ch/deu/vorstandswahlen-20272031_49022.shtml"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Sternmatt School 1: AI marks 2026/27",
-          "url": "/en/zug-articles/sternmatt-school-ai-2026/",
-          "excerpt": "The Sternmatt 1 school is entering 2026/27 with the responsible use of artificial intelligence in classrooms at the forefront.",
-          "date": "2026-10-08T18:01:57.824Z"
-        },
-        {
-          "title": "Baar: renewal of the Municipal Council for 2027–2030",
-          "url": "/en/zug-articles/baar-municipal-council-renewal/",
-          "excerpt": "Baarer Zytig reports the results of September 27 and the renewal of the Gemeinderat on October 4, 2026: seven members for the 2027–2030 term.",
-          "date": "2026-10-08T17:50:07.603Z"
-        },
-        {
-          "title": "Zug prepares for the risk of the Japanese beetle",
-          "url": "/en/zug-articles/zug-japanese-beetle-risk/",
-          "excerpt": "Confirmed outbreaks in Zurich, Lucerne and Schwyz: Zug strengthens surveillance and asks people to check vehicles, luggage and materials.",
-          "date": "2026-10-07T09:02:17.902Z"
-        },
-        {
-          "title": "Zug forecasts a surplus of 15,6 million in 2027 with the tax rate at 52%",
-          "url": "/en/zug-articles/zug-forecasts-a-surplus-of-15-6-million-in-2027-with-the-tax-rate-at-52/",
-          "excerpt": "The 2027 budget indicates a surplus of CHF 15,6 million, revenue of CHF 446,6 million and expenditure of CHF 431,1 million, with the requested tax rate at 52%.",
-          "date": "2026-10-07T08:41:12.746Z"
+          "title": "Zuger Pensionskasse: 2025 report now online",
+          "url": "/en/zug-articles/zuger-annual-report-2025/",
+          "excerpt": "The 2025 annual report of the Zuger Pensionskasse provides an overview of the completed financial year and refers to the 2025 annual financial statements for further information.",
+          "date": "2026-10-17T00:53:57.792Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tax and pension tools",
@@ -351,7 +315,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:58:07.231Z"
     },
     "de": {
       "canton": "ZG",
@@ -465,36 +429,18 @@
               "url": "https://www.zugerpk.ch/deu/vorstandswahlen-20272031_49022.shtml"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Schule Sternmatt 1: KI prägt das Schuljahr 2026/27",
-          "url": "/de/zug-artikel/sternmatt-schule-ki-2026/",
-          "excerpt": "Die Schule Sternmatt 1 nimmt das Schuljahr 2026/27 in Angriff und stellt dabei einen verantwortungsvollen Einsatz künstlicher Intelligenz in den Klassenzimmern in den Mittelpunkt.",
-          "date": "2026-10-08T18:01:57.824Z"
-        },
-        {
-          "title": "Baar: Erneuerung des Gemeinderats für 2027–2030",
-          "url": "/de/zug-artikel/baar-erneuerung-gemeinderat/",
-          "excerpt": "Baarer Zytig nennt die Ergebnisse vom 27.",
-          "date": "2026-10-08T17:50:07.603Z"
-        },
-        {
-          "title": "Zug bereitet sich auf das Risiko des Japankäfers vor",
-          "url": "/de/zug-artikel/zug-risiko-japankaefer/",
-          "excerpt": "Befallsherde in Zürich, Luzern und Schwyz bestätigt: Zug verstärkt die Überwachung und bittet darum, Fahrzeuge, Gepäck und Materialien zu kontrollieren.",
-          "date": "2026-10-07T09:02:17.902Z"
-        },
-        {
-          "title": "Zug erwartet 2027 bei einem Steuerfuss von 52% einen Überschuss von 15,6 Millionen",
-          "url": "/de/zug-artikel/zug-erwartet-2027-bei-einem-steuerfuss-von-52-einen-uberschuss-von-15-6/",
-          "excerpt": "Der Voranschlag 2027 weist einen Überschuss von CHF 15,6 Millionen, Einnahmen von CHF 446,6 Millionen und Ausgaben von CHF 431,1 Millionen aus, bei einem beantragten Steuerfuss von 52%.",
-          "date": "2026-10-07T08:41:12.746Z"
+          "title": "Zuger Pensionskasse: Der Bericht 2025 ist online",
+          "url": "/de/zug-artikel/zuger-geschaeftsbericht-2025/",
+          "excerpt": "Der Geschäftsbericht 2025 der Zuger Pensionskasse bietet einen Überblick über das abgeschlossene Geschäftsjahr und verweist für weitere Informationen auf die Jahresrechnung 2025.",
+          "date": "2026-10-17T00:53:57.792Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tools zu Steuern und Vorsorge",
@@ -513,7 +459,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:58:07.231Z"
     },
     "fr": {
       "canton": "ZG",
@@ -627,36 +573,18 @@
               "url": "https://www.zugerpk.ch/deu/vorstandswahlen-20272031_49022.shtml"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "École Sternmatt 1 : l’IA marque l’année 2026/27",
-          "url": "/fr/articles-zoug/ecole-sternmatt-ia-2026/",
-          "excerpt": "L’école Sternmatt 1 aborde l’année 2026/27 en mettant au centre un usage responsable de l’intelligence artificielle dans les salles de classe.",
-          "date": "2026-10-08T18:01:57.824Z"
-        },
-        {
-          "title": "Baar : renouvellement du Conseil municipal pour 2027–2030",
-          "url": "/fr/articles-zoug/baar-renouvellement-conseil/",
-          "excerpt": "Baarer Zytig indique les résultats du 27 septembre et le renouvellement du Conseil municipal du 4 octobre 2026 : sept membres pour le mandat 2027–2030.",
-          "date": "2026-10-08T17:50:07.603Z"
-        },
-        {
-          "title": "Zoug se prépare au risque du scarabée japonais",
-          "url": "/fr/articles-zoug/zoug-risque-scarabee-japonais/",
-          "excerpt": "Foyers confirmés à Zurich, Lucerne et Schwytz : Zoug renforce la surveillance et demande de contrôler les véhicules, les bagages et les matériaux.",
-          "date": "2026-10-07T09:02:17.902Z"
-        },
-        {
-          "title": "Zoug prévoit un excédent de 15,6 millions en 2027 avec un taux à 52 %",
-          "url": "/fr/articles-zoug/zoug-prevoit-un-excedent-de-15-6-millions-en-2027-avec-un-taux-a-52/",
-          "excerpt": "Le budget 2027 prévoit un excédent de CHF 15,6 millions, des recettes de CHF 446,6 millions et des dépenses de CHF 431,1 millions, avec un taux fiscal requis de 52 %.",
-          "date": "2026-10-07T08:41:12.746Z"
+          "title": "Zuger Pensionskasse : le rapport 2025 est en ligne",
+          "url": "/fr/articles-zoug/zuger-rapport-gestion-2025/",
+          "excerpt": "Le Geschäftsbericht 2025 de la Zuger Pensionskasse offre une vue d’ensemble de l’exercice écoulé et renvoie à la Jahresrechnung 2025 pour de plus amples informations.",
+          "date": "2026-10-17T00:53:57.792Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Outils impôts et retraite",
@@ -675,7 +603,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:58:07.231Z"
     }
   }
 }

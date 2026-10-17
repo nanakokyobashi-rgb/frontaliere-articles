@@ -1,34 +1,16 @@
 {
-  "keywords": [],
-  "strikes": {},
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261010-les-collisions-avec-la-faune-sauvage-culminent-en-automne.html": {
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-fed-l-ia-est-le-changement-le-plus-determinant-pour-l-economie.html": {
       "section": "canton-ne",
-      "ts": 1791664298763
+      "ts": 1792197092204
     },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261009-stadler-rail-contrat-de-300-millions-de-francs-en-arabie-saoudite.html": {
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-loi-sur-la-poste-face-a-des-critiques-lors-de-la-consultation.html": {
       "section": "canton-ne",
-      "ts": 1791715885280
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261009-l-initiative-pour-le-solaire-sans-autorisation-echoue.html": {
-      "section": "canton-ne",
-      "ts": 1791749485523
-    },
-    "canton-ne::https://www.ne.ch/communiques-de-presse/les-benefices-de-la-loterie-romande-ont-permis-de-distribuer-plus-de-155-millions-de-francs-dans-le-canton-de-neuchatel": {
-      "section": "canton-ne",
-      "ts": 1791749507953
-    },
-    "canton-ne::https://www.ne.ch/communiques-de-presse/pour-sa-30eme-edition-le-prix-interculturel-salut-letranger-recompense-le-centre-portugais-de-neuchatel-et-madame-carmen-diaz-pumarejo": {
-      "section": "canton-ne",
-      "ts": 1791749544027
-    },
-    "canton-ne::https://www.rts.ch/play/tv/emission/couleurs-locales?id=470618": {
-      "section": "canton-ne",
-      "ts": 1791749874186
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261009-delta-air-lines-decoit-la-facture-de-carburant-pese.html": {
-      "section": "canton-ne",
-      "ts": 1791749893440
+      "ts": 1792197242008
     }
   }
 }

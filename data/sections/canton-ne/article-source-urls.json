@@ -28,5 +28,10 @@
     "articleId": "cpcn-rendimento-2025-copertura",
     "ts": "2026-10-17T00:07:41.196Z",
     "keyForm": 2
+  },
+  "https://cpcn.ch/placements/taux-de-couverture": {
+    "articleId": "cpcn-tasso-grado-copertura",
+    "ts": "2026-10-17T00:59:33.716Z",
+    "keyForm": 2
   }
 }

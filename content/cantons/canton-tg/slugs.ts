@@ -12,6 +12,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'servizi-imprese-turgovia-rav': { it: 'servizi-imprese-turgovia-rav', en: 'thurgau-employer-support-permits', de: 'thurgau-arbeitgeber-rav-bewilligungen', fr: 'thurgovie-services-employeurs-permis' },
  'sportello-digitale-turgovia': { it: 'sportello-digitale-turgovia', en: 'thurgau-digital-counter', de: 'digitaler-schalter-thurgau', fr: 'guichet-numerique-thurgovie' },
  'kreuzlingen-barenplatz-chilbi': { it: 'kreuzlingen-barenplatz-chilbi', en: 'kreuzlingen-barenplatz-fair', de: 'kreuzlingen-barenplatz-wegen-messe-geschlossen', fr: 'kreuzlingen-barenplatz-fete' },
+ 'turgovia-sicurezza-lavoro-orari': { it: 'turgovia-sicurezza-lavoro-orari', en: 'thurgovia-workplace-safety-hours', de: 'turgau-arbeitssicherheit-arbeitszeiten', fr: 'thurgovie-securite-travail-horaires' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

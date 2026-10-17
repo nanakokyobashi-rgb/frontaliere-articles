@@ -72,4 +72,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'friburgo-deduzioni-carburante',
+ category: 'fiscale',
+ date: '2026-10-17T00:43:04.944Z',
+ image: '/images/blog/article-friburgo-deduzioni-carburante.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['FR'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

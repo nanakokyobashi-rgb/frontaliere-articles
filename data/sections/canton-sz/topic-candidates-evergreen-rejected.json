@@ -1,22 +1,12 @@
 {
-  "keywords": [],
-  "strikes": {},
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/klausenpass-nachtliche-sperrung-wegen-belagsarbeiten-art-1726290": {
+    "canton-sz::https://www.einsiedeln.ch/verwaltung/mitteilungen/aktuelle-mitteilungen?m=4563": {
       "section": "canton-sz",
-      "ts": 1791759134514
-    },
-    "canton-sz::https://www.einsiedleranzeiger.ch/2026/10/09/schwyz-zeigt-an-der-olma-was-der-kanton-zu-bieten-hat": {
-      "section": "canton-sz",
-      "ts": 1791759615680
-    },
-    "canton-sz::https://www.einsiedleranzeiger.ch/2026/10/09/svp-schwyz-will-rueegsegger-fuer-den-bundesrat": {
-      "section": "canton-sz",
-      "ts": 1791760827360
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/juso-luzern-nominiert-valentin-humbel-fuer-die-regierungsratswahl-art-1726255": {
-      "section": "canton-sz",
-      "ts": 1791760835259
+      "ts": 1792197470578
     }
   }
 }

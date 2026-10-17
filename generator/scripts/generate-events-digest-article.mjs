@@ -50,6 +50,7 @@ import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { sanitizePromptPlaceholders } from './lib/prompt-placeholder-guard.mjs';
 import { repairEventsDigestLocalizedToponyms } from './lib/events-digest-localization.mjs';
+import { STATIC_FALLBACK_IMAGE } from './lib/blog-image-registry.mjs';
 
 // Scrittura ATOMICA del corpus: temp accanto al target + renameSync.
 // Questi file riscrivono un `content/*.ts` GIA' ESISTENTE (rerun idempotente
@@ -108,6 +109,10 @@ export function buildData(todayIso, { canton, datasetPath = path.join(REPO_ROOT,
   const data = {
     id: article.id,
     ...staticMetaForCanton(resolveDigestCanton(canton)),
+    // This producer has no AI image phase. Pin the governed site-owned place
+    // fallback so the registrar's provenance gate receives the same explicit
+    // contract as the other non-AI producers.
+    _generatedImagePath: STATIC_FALLBACK_IMAGE,
     // Niente `inspectSlugForPromptPlaceholder` qui, e non e' una dimenticanza
     // (issue #382 item 4): `article.slugs` e' `DIGEST_ARTICLE_SLUGS`, quattro
     // stringhe letterali nel sorgente di `lib/events-digest-content.mjs`. Lo

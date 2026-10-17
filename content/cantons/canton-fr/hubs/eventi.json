@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T00:12:19.402Z",
-  "contentHash": "f63e8ff3ee047f440fd78ba5f50aefec2912f65c40e3204861ca195bbfd79d7e",
+  "updatedAt": "2026-10-17T00:51:58.422Z",
+  "contentHash": "db3ab4b07a8e6bef0bcf9a9b83cc145bd7134f4b8d3e0b6027663b246b912293",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -101,6 +101,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Carburanti: il Cantone non vuole aumentare le deduzioni",
+          "url": "/articoli-friburgo/friburgo-deduzioni-carburante/",
+          "excerpt": "Il diesel supera CHF 2,40 al litro.",
+          "date": "2026-10-17T00:43:04.944Z"
+        },
+        {
           "title": "Friburgo: 2140 frontalieri esteri a fine giugno 2026",
           "url": "/articoli-friburgo/frontalieri-friburgo-giugno-2026/",
           "excerpt": "Friburgo contava 2140 frontalieri esteri a fine giugno 2026: +940 dal 2021 e +280 nell'ultimo anno, nei dati pubblicati da SSD e OFS.",
@@ -123,12 +129,6 @@
           "url": "/articoli-friburgo/nuovo-piano-ciclabile-friburgo/",
           "excerpt": "RIMU approva il nuovo piano ciclabile cantonale Consultazione: 80 pareri e quasi 270 osservazioni Obiettivo: più bici nella vita quotidiana entro il 2042",
           "date": "2026-10-08T15:33:51.044Z"
-        },
-        {
-          "title": "Fribourg adegua imposte dirette alla progressione a freddo",
-          "url": "/articoli-friburgo/fribourg-modifica-licd/",
-          "excerpt": "Voto: 97 favorevoli, 1 contrario, nessuna astensione",
-          "date": "2026-10-07T10:27:22.581Z"
         }
       ],
       "links": [
@@ -141,7 +141,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:51:58.422Z"
     },
     "en": {
       "canton": "FR",
@@ -230,6 +230,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fuels: the Canton does not want to increase deductions",
+          "url": "/en/fribourg-articles/fribourg-fuel-deductions/",
+          "excerpt": "Diesel exceeds CHF 2.40 per litre.",
+          "date": "2026-10-17T00:43:04.944Z"
+        },
+        {
           "title": "Fribourg: 2140 foreign cross-border commuters at the end of June 2026",
           "url": "/en/fribourg-articles/fribourg-foreign-frontier-workers-2026/",
           "excerpt": "Fribourg had 2140 foreign cross-border workers at the end of June 2026: +940 since 2021 and +280 over the past year, according to data published by SSD and OFS.",
@@ -252,11 +258,6 @@
           "url": "/en/fribourg-articles/fribourg-new-bicycle-network-plan/",
           "excerpt": "RIMU approves the new cantonal cycle plan Consultation: 80 opinions and almost 270 observations Goal: more bikes in daily life by 2042 The plan covers network",
           "date": "2026-10-08T15:33:51.044Z"
-        },
-        {
-          "title": "Fribourg adjusts direct taxes for bracket creep",
-          "url": "/en/fribourg-articles/fribourg-adjusts-direct-taxes-for-bracket-creep/",
-          "date": "2026-10-07T10:27:22.581Z"
         }
       ],
       "links": [
@@ -269,7 +270,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:51:58.422Z"
     },
     "de": {
       "canton": "FR",
@@ -358,6 +359,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Treibstoffe: Kanton will Abzüge nicht erhöhen",
+          "url": "/de/freiburg-artikel/freiburg-treibstoff-abzuege/",
+          "excerpt": "Diesel übersteigt CHF 2,40 pro Liter.",
+          "date": "2026-10-17T00:43:04.944Z"
+        },
+        {
           "title": "Freiburg: 2140 ausländische Grenzgänger Ende Juni 2026",
           "url": "/de/freiburg-artikel/freiburg-auslaendische-grenzgaenger-2026/",
           "excerpt": "Freiburg zählte Ende Juni 2026 2140 ausländische Grenzgänger: +940 seit 2021 und +280 im letzten Jahr, laut den von SSD und OFS veröffentlichten Daten.",
@@ -380,11 +387,6 @@
           "url": "/de/freiburg-artikel/freiburg-neuer-velowegnetzplan/",
           "excerpt": "RIMU genehmigt den neuen kantonalen Radfahrplan Befassung: 80 Stellungnahmen und fast 270 Bemerkungen Ziel: Mehr Fahrräder im Alltag bis 2042 Der Plan deckt",
           "date": "2026-10-08T15:33:51.044Z"
-        },
-        {
-          "title": "Freiburg passt die direkten Steuern an die kalte Progression an",
-          "url": "/de/freiburg-artikel/freiburg-passt-die-direkten-steuern-an-die-kalte-progression-an/",
-          "date": "2026-10-07T10:27:22.581Z"
         }
       ],
       "links": [
@@ -397,7 +399,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:51:58.422Z"
     },
     "fr": {
       "canton": "FR",
@@ -486,6 +488,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Carburants : le canton ne veut pas augmenter les déductions",
+          "url": "/fr/articles-fribourg/fribourg-deductions-carburant/",
+          "excerpt": "Le diesel dépasse 2,40 CHF le litre.",
+          "date": "2026-10-17T00:43:04.944Z"
+        },
+        {
           "title": "Fribourg : 2140 frontaliers étrangers à fin juin 2026",
           "url": "/fr/articles-fribourg/fribourg-travailleurs-frontaliers-2026/",
           "excerpt": "Fribourg comptait 2140 frontaliers étrangers à fin juin 2026 : +940 depuis 2021 et +280 au cours de la dernière année, selon les données publiées par le SSD et l’OFS.",
@@ -508,12 +516,6 @@
           "url": "/fr/articles-fribourg/fribourg-nouveau-plan-reseau-cyclable/",
           "excerpt": "RIMU approuve le nouveau plan cyclable cantonal Consultation : 80 avis et près de 270 observations Objectif : plus de vélos dans la vie quotidienne d'ici 2042",
           "date": "2026-10-08T15:33:51.044Z"
-        },
-        {
-          "title": "Fribourg adapte les impôts directs à la progression à froid",
-          "url": "/fr/articles-fribourg/fribourg-adapte-les-impots-directs-a-la-progression-a-froid/",
-          "excerpt": "Vote : 97 voix favorables, 1 voix contre, aucune abstention",
-          "date": "2026-10-07T10:27:22.581Z"
         }
       ],
       "links": [
@@ -526,7 +528,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:51:58.422Z"
     }
   }
 }

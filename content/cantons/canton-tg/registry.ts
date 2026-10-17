@@ -105,4 +105,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'turgovia-sicurezza-lavoro-orari',
+ category: 'pratico',
+ date: '2026-10-17T01:07:58.510Z',
+ image: '/images/blog/article-sicurezza-lavoro-turgovia-regole.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

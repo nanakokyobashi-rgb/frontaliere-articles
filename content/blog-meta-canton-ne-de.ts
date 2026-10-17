@@ -21,6 +21,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.cpcn-rendimento-2025-copertura.title': 'CPCN verzeichnet 2025 ein Plus von +5,6%: Deckungsgrad 84,8%',
     'blog.article.cpcn-rendimento-2025-copertura.excerpt': '+5,6% bei der Performance der CPCN im Jahr 2025 3% Verzinsung der Altersguthaben 84,8% Deckungsgrad am 31.12.2025 RFV in Höhe von CHF 979 Millionen, bei 92%',
     'blog.article.cpcn-rendimento-2025-copertura.imageAlt': 'Immobilienvermögen und Vorsorge der CPCN in Neuenburg',
+    'blog.article.cpcn-tasso-grado-copertura.title': 'CPCN: der Unterschied zwischen Deckungssatz und Deckungsgrad',
+    'blog.article.cpcn-tasso-grado-copertura.excerpt': 'Der Deckungssatz schließt die RFV aus der Berechnung aus.',
+    'blog.article.cpcn-tasso-grado-copertura.imageAlt': 'Analyse der CPCN-Deckungsgrade',
 };
 
 export default blogMetaCantonNeDe;

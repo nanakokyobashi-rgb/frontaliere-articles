@@ -14,7 +14,7 @@ const blogMetaCantonGlDe: Record<string, string> = {
     'blog.article.imposta-seconde-case-glarona.imageAlt': 'Liegenschaftssteuer auf Zweitwohnungen im Kanton Glarus',
     'blog.article.klontalstrasse-staldengarten-butzi.title': 'Klöntalerstrasse: Verkehrsbeschränkung Staldengarten–Bützi',
     'blog.article.klontalstrasse-staldengarten-butzi.excerpt': 'Eine Verkehrsbeschränkung betrifft die Klöntalerstrasse im Abschnitt Staldengarten–Bützi im Kanton Glarus.',
-    'blog.article.klontalstrasse-staldengarten-butzi.imageAlt': 'Verkehrseinschränkung auf der Klöntalerstrasse zwischen Staldengarten und Bützi',
+    'blog.article.klontalstrasse-staldengarten-butzi.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonGlDe;

@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "fisco",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "e01756bce3bcf960ff0571ccca423fd3ba9b4dd2969287649a70105409bb4c72",
+  "updatedAt": "2026-10-17T01:04:37.805Z",
+  "contentHash": "15b49b3f5b5fbe88f08fcc1990f6b2021db4a625625b5cffd0ca82a5af2c7378",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "CPCN: la differenza tra tasso e grado di copertura",
+          "url": "/articoli-neuchatel/cpcn-tasso-grado-copertura/",
+          "excerpt": "Il tasso esclude la RFV dal calcolo.",
+          "date": "2026-10-17T00:59:33.660Z"
+        },
+        {
           "title": "Imposta successione Neuchâtel: aliquote e esenzioni",
           "url": "/articoli-svizzera/imposta-successione-donazione-neuchatel-aliquote/",
           "excerpt": "Scopri le aliquote dell'imposta di successione e donazione nel Cantone di Neuchâtel, le esenzioni per coniuge e discendenti e i termini per la dichiarazione.",
@@ -135,7 +141,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T01:04:37.805Z"
     },
     "en": {
       "canton": "NE",
@@ -220,6 +226,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "CPCN: the difference between coverage rate and coverage level",
+          "url": "/en/neuchatel-articles/cpcn-coverage-rate-distinction/",
+          "excerpt": "The rate excludes the RFV from the calculation.",
+          "date": "2026-10-17T00:59:33.660Z"
+        },
+        {
           "title": "Neuchâtel inheritance tax: rates and exemptions",
           "url": "/en/swiss-articles/inheritance-and-donation-tax-neuchatel-rates/",
           "excerpt": "Learn about inheritance and gift tax rates in the Canton of Neuchâtel, spouse and descendant exemptions, and filing deadlines.",
@@ -253,7 +265,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T01:04:37.805Z"
     },
     "de": {
       "canton": "NE",
@@ -338,6 +350,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "CPCN: der Unterschied zwischen Deckungssatz und Deckungsgrad",
+          "url": "/de/neuenburg-artikel/cpcn-deckungsgrad-unterschied/",
+          "excerpt": "Der Deckungssatz schließt die RFV aus der Berechnung aus.",
+          "date": "2026-10-17T00:59:33.660Z"
+        },
+        {
           "title": "Erbschaftssteuer Neuenburg: Steuersätze und Befreiungen",
           "url": "/de/schweiz-artikel/erbschaft-und-spendensteuer-neuenburg-satz/",
           "excerpt": "Informieren Sie sich über die Erbschafts- und Schenkungssteuersätze im Kanton Neuenburg, die Befreiungen für Ehegatten und Nachkommen und die Fristen für die Deklaration.",
@@ -371,7 +389,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T01:04:37.805Z"
     },
     "fr": {
       "canton": "NE",
@@ -456,6 +474,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "CPCN : la différence entre le taux et le degré de couverture",
+          "url": "/fr/articles-neuchatel/cpcn-taux-couverture-distinction/",
+          "excerpt": "Le taux exclut la RFV du calcul.",
+          "date": "2026-10-17T00:59:33.660Z"
+        },
+        {
           "title": "Impôt succession Neuchâtel : taux et exonérations",
           "url": "/fr/articles-suisse/impot-succession-donation-neuchatel-taux/",
           "excerpt": "Découvrez les taux de l'impôt sur les successions et donations dans le canton de Neuchâtel, les exonérations pour conjoint et descendants et les délais de déclaration.",
@@ -489,7 +513,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T01:04:37.805Z"
     }
   }
 }

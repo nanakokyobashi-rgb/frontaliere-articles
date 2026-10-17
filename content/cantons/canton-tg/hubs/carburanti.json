@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "edd52cd3a336d1a256ac629274ae292ba539f0fac7140d28e42ee7e79bfb30ce",
+  "updatedAt": "2026-10-17T01:14:09.561Z",
+  "contentHash": "a651100488e7d9f5aa74378e0bdfa59e11542df8147f5df58fc8aed133d94d6e",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Turgovia: sicurezza sul lavoro, orari e tutela della salute",
+          "url": "/articoli-turgovia/turgovia-sicurezza-lavoro-orari/",
+          "excerpt": "Guida alla sicurezza sul lavoro, tutela della salute, orari e periodi di riposo nel Canton Turgovia secondo le normative e l'Ispettorato del lavoro.",
+          "date": "2026-10-17T01:07:58.510Z"
+        },
+        {
+          "title": "Kreuzlingen: Bärenplatz chiuso per la fiera",
+          "url": "/articoli-turgovia/kreuzlingen-barenplatz-chilbi/",
+          "excerpt": "A Kreuzlingen i bus sono deviati dal 25 ottobre alle 09.00 del 27; la fermata Bärenplatz va alla stazione principale.",
+          "date": "2026-10-17T00:40:57.671Z"
+        },
+        {
           "title": "Turgovia: Sportello digitale per pratiche e documenti",
           "url": "/articoli-turgovia/sportello-digitale-turgovia/",
           "excerpt": "Il Digitaler Schalter del Canton Turgovia riunisce i servizi più usati, informazioni, video brevi e un'area protetta per estratti, permessi e altri documenti.",
@@ -88,18 +100,6 @@
           "url": "/articoli-turgovia/sicurezza-lavoro-turgovia-regole/",
           "excerpt": "La sicurezza sul lavoro previene infortuni e malattie professionali.",
           "date": "2026-10-09T16:02:21.033Z"
-        },
-        {
-          "title": "Aadorf: fine status S, più spese sociali nel 2027",
-          "url": "/articoli-turgovia/aadorf-spese-sociali-2027/",
-          "excerpt": "Nel budget 2027 Aadorf prevede costi sociali nettamente più alti e più entrate fiscali; la fine dei contributi federali per gli ucraini può pesare ancora di più.",
-          "date": "2026-10-09T15:46:11.874Z"
-        },
-        {
-          "title": "Disoccupazione in Turgovia: quota stabile al 2,2%",
-          "url": "/articoli-turgovia/turgovia-occupazione-rav-settembre/",
-          "excerpt": "In Turgovia, a fine settembre, i disoccupati sono 3.558 (+54). La quota resta al 2,2%; le persone in cerca d'impiego sono 7.155 e i posti vacanti 1.824.",
-          "date": "2026-10-08T11:37:03.707Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T01:14:09.561Z"
     },
     "en": {
       "canton": "TG",
@@ -171,6 +171,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau: workplace safety, working hours and health protection",
+          "url": "/en/thurgau-articles/thurgovia-workplace-safety-hours/",
+          "excerpt": "Guide to occupational safety, health protection, working hours and rest periods in the Canton of Thurgau in accordance with regulations and the Labour Inspectorate.",
+          "date": "2026-10-17T01:07:58.510Z"
+        },
+        {
+          "title": "Kreuzlingen: Bärenplatz closed for the fair",
+          "url": "/en/thurgau-articles/kreuzlingen-barenplatz-fair/",
+          "excerpt": "In Kreuzlingen buses are diverted from 25 October at 09.00 on the 27th; the Bärenplatz stop goes to the main station.",
+          "date": "2026-10-17T00:40:57.671Z"
+        },
+        {
           "title": "Thurgau: Digital portal for procedures and documents",
           "url": "/en/thurgau-articles/thurgau-digital-counter/",
           "excerpt": "The Digitaler Schalter of the Canton of Thurgau brings together the most frequently used services, information, short videos, and a protected area for extracts, permits, and other documents.",
@@ -187,18 +199,6 @@
           "url": "/en/thurgau-articles/workplace-safety-thurgau-rules/",
           "excerpt": "Occupational safety prevents accidents and occupational diseases.",
           "date": "2026-10-09T16:02:21.033Z"
-        },
-        {
-          "title": "Aadorf: status S fee, higher social expenses in 2027",
-          "url": "/en/thurgau-articles/aadorf-social-costs-2027/",
-          "excerpt": "In its 2027 budget, Aadorf expects significantly higher social costs and more tax revenue; the end of federal contributions for Ukrainians could weigh even more heavily.",
-          "date": "2026-10-09T15:46:11.874Z"
-        },
-        {
-          "title": "Unemployment in Thurgau: rate stable at 2,2%",
-          "url": "/en/thurgau-articles/thurgau-employment-rav-september/",
-          "excerpt": "In Thurgau, at the end of September, there were 3.558 unemployed people (+54). The unemployment rate remains at 2,2%; the number of people seeking employment is 7.155 and there are 1.824 vacancies.",
-          "date": "2026-10-08T11:37:03.707Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T01:14:09.561Z"
     },
     "de": {
       "canton": "TG",
@@ -270,6 +270,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau: Arbeitssicherheit, Arbeitszeiten und Gesundheitsschutz",
+          "url": "/de/thurgau-artikel/turgau-arbeitssicherheit-arbeitszeiten/",
+          "excerpt": "Leitfaden zu Arbeitssicherheit, Gesundheitsschutz, Arbeitszeiten und Ruhezeiten im Kanton Thurgau gemäss den Vorschriften und den Vorgaben des Arbeitsinspektorats.",
+          "date": "2026-10-17T01:07:58.510Z"
+        },
+        {
+          "title": "Kreuzlingen: Bärenplatz wegen Messe geschlossen",
+          "url": "/de/thurgau-artikel/kreuzlingen-barenplatz-wegen-messe-geschlossen/",
+          "excerpt": "In Kreuzlingen werden die Busse vom 25.",
+          "date": "2026-10-17T00:40:57.671Z"
+        },
+        {
           "title": "Thurgau: Digitaler Schalter für Anliegen und Dokumente",
           "url": "/de/thurgau-artikel/digitaler-schalter-thurgau/",
           "excerpt": "Der Dienst Digitaler Schalter des Kantons Thurgau bündelt die meistgenutzten Dienstleistungen, Informationen, kurze Videos und einen geschützten Bereich für Auszüge, Bewilligungen und andere Dokumente.",
@@ -286,18 +298,6 @@
           "url": "/de/thurgau-artikel/arbeitssicherheit-turgau-regeln/",
           "excerpt": "Arbeitssicherheit verhindert Unfälle und Berufskrankheiten.",
           "date": "2026-10-09T16:02:21.033Z"
-        },
-        {
-          "title": "Aadorf: Ende des Status S, höhere Sozialausgaben im Jahr 2027",
-          "url": "/de/thurgau-artikel/aadorf-sozialausgaben-2027/",
-          "excerpt": "Im Budget 2027 sieht Aadorf deutlich höhere Sozialkosten und höhere Steuereinnahmen vor; das Ende der Bundesbeiträge für die Ukrainer kann noch stärker ins Gewicht fallen.",
-          "date": "2026-10-09T15:46:11.874Z"
-        },
-        {
-          "title": "Arbeitslosigkeit im Thurgau: Quote stabil bei 2,2%",
-          "url": "/de/thurgau-artikel/thurgau-arbeitsmarkt-rav-september/",
-          "excerpt": "Im Thurgau waren Ende September 3.558 Personen arbeitslos (+54). Die Quote bleibt bei 2,2%; die Zahl der Stellensuchenden liegt bei 7.155 und die der offenen Stellen bei 1.824.",
-          "date": "2026-10-08T11:37:03.707Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T01:14:09.561Z"
     },
     "fr": {
       "canton": "TG",
@@ -369,6 +369,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgovie : sécurité au travail, horaires et protection de la santé",
+          "url": "/fr/articles-thurgovie/thurgovie-securite-travail-horaires/",
+          "excerpt": "Guide de la sécurité au travail, de la protection de la santé, des horaires et des périodes de repos dans le canton de Thurgovie selon la réglementation et l'Inspection du travail.",
+          "date": "2026-10-17T01:07:58.510Z"
+        },
+        {
+          "title": "Kreuzlingen : Bärenplatz fermé pour le salon",
+          "url": "/fr/articles-thurgovie/kreuzlingen-barenplatz-fete/",
+          "excerpt": "À Kreuzlingen, les bus sont déviés du 25 octobre à 09h00 le 27 ; l'arrêt Bärenplatz va à la gare principale.",
+          "date": "2026-10-17T00:40:57.671Z"
+        },
+        {
           "title": "Thurgovie : Guichet numérique pour les démarches et les documents",
           "url": "/fr/articles-thurgovie/guichet-numerique-thurgovie/",
           "excerpt": "Le Digitaler Schalter du canton de Thurgovie réunit les services les plus utilisés, des informations, de courtes vidéos et un espace protégé pour les extraits, permis et autres documents.",
@@ -385,18 +397,6 @@
           "url": "/fr/articles-thurgovie/securite-travail-thurgovie-regles/",
           "excerpt": "La sécurité au travail prévient les accidents et les maladies professionnelles.",
           "date": "2026-10-09T16:02:21.033Z"
-        },
-        {
-          "title": "Aadorf : fin du statut S, davantage de dépenses sociales en 2027",
-          "url": "/fr/articles-thurgovie/aadorf-depenses-sociales-2027/",
-          "excerpt": "Dans le budget 2027, Aadorf prévoit des coûts sociaux nettement plus élevés et davantage de recettes fiscales ; la fin des contributions fédérales pour les Ukrainiens peut peser encore davantage.",
-          "date": "2026-10-09T15:46:11.874Z"
-        },
-        {
-          "title": "Chômage en Thurgovie : taux stable à 2,2 %",
-          "url": "/fr/articles-thurgovie/thurgovie-emploi-rav-septembre/",
-          "excerpt": "En Thurgovie, fin septembre, le nombre de chômeurs est de 3.558 (+54). Le taux reste à 2,2 % ; les personnes à la recherche d’un emploi sont au nombre de 7.155 et les postes vacants à 1.824.",
-          "date": "2026-10-08T11:37:03.707Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T01:14:09.561Z"
     }
   }
 }

@@ -21,6 +21,9 @@ const blogMetaCantonFrIt: Record<string, string> = {
     'blog.article.frontalieri-friburgo-giugno-2026.title': 'Friburgo: 2140 frontalieri esteri a fine giugno 2026',
     'blog.article.frontalieri-friburgo-giugno-2026.excerpt': 'Friburgo contava 2140 frontalieri esteri a fine giugno 2026: +940 dal 2021 e +280 nell\'ultimo anno, nei dati pubblicati da SSD e OFS.',
     'blog.article.frontalieri-friburgo-giugno-2026.imageAlt': 'Pendolari in una strada del Canton Friburgo durante una giornata lavorativa',
+    'blog.article.friburgo-deduzioni-carburante.title': 'Carburanti: il Cantone non vuole aumentare le deduzioni',
+    'blog.article.friburgo-deduzioni-carburante.excerpt': 'Il diesel supera CHF 2,40 al litro.',
+    'blog.article.friburgo-deduzioni-carburante.imageAlt': 'Auto in viaggio nel Canton Friburgo',
 };
 
 export default blogMetaCantonFrIt;
