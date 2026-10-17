@@ -28182,7 +28182,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'ia-assistente-shopping-svizzera',
     category: 'pratico',
     date: '2026-10-16T21:25:25.434Z',
-    image: '/images/blog/frontaliere-acquisto-immobile-investimento-svizzera.webp',
+    image: '/images/blog/article-ia-assistente-shopping-svizzera.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',

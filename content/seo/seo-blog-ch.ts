@@ -106554,10 +106554,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Quasi il 70% degli svizzeri usa l'IA per un acquisto Il 49% dice che l'IA influenza la scelta Il 67% vuole mantenere il pagamento autonomo Solo il 17% accetta",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/frontaliere-acquisto-immobile-investimento-svizzera.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ia-assistente-shopping-svizzera.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Cliente svizzero che utilizza un assistente IA su smartphone mentre fa shopping a Lugano"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-16T21:25:25+00:00",
       "dateModified": "2026-10-16T21:25:25+00:00",
