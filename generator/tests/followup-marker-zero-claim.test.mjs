@@ -162,7 +162,8 @@ test('il marker reale senza bucket nuovo ma con residui gia\' tracciati e\' uno 
   const marker = [
     '## Post-merge follow-up triage',
     '',
-    'I residui sono già tracciati e non generano un secondo contenitore: le issue figlie conservano le rispettive Sources.',
+    'I residui sono già tracciati e non generano un secondo contenitore: il backfill dei 43 body italiani aggiorna l’issue figlia #2115; le coorti #2115–#2117 aggiornano le rispettive issue; la correzione prompt condivisa aggiorna #2113 e #2114. In tutte è stata aggiunta `Sources: PR #2843`.',
+    'La voce sugli item #3/#4/#6 già presenti su `main` è droppata con motivo `closing-state`/`already-on-main`.',
     'Nessun bucket daily nuovo è stato aperto: la deduplica item-level conserva un solo tracker per ciascun residuo.',
   ].join('\n');
   const expectation = triageMarkerPersistenceExpectation(marker);
