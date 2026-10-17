@@ -1728,6 +1728,7 @@ export async function publish({
     return pageFailures + rssFailures;
   };
   const uploaded = [];
+  const immutableMismatches = [];
   let status = beforeStatus;
   console.log(`[${LOG}] preflight: sezione ${section} nel registro pubblicato = ${beforeStatus}`);
   // This is the first remote mutation after render/preflight. Recheck here,
@@ -1760,11 +1761,11 @@ export async function publish({
         const local = path.join(distDir, page.rel);
         const next = fs.existsSync(local) ? fs.readFileSync(local, 'utf8') : null;
         if (!previous?.exists || next === null || next !== previous.body) {
-          console.error(
-            `::error::[${LOG}] bootstrap live: ${page.edgeKey} esiste nella release precedente ma il render non è byte-identico; ` +
-            'la sostituzione viene differita al replay post-flip',
+          immutableMismatches.push(page.edgeKey);
+          console.log(
+            `::notice::[${LOG}] bootstrap live: ${page.edgeKey} esiste nella release precedente ma il render non è byte-identico; ` +
+            'la chiave precedente resta servita e la sostituzione viene differita al replay post-flip',
           );
-          return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus, immutableMismatch: true };
         }
       }
       pageSnapshots = new Map(uniqueCantonPages(pages).map((page) => [page.edgeKey, snapshots.get(page.edgeKey)]));
@@ -1934,7 +1935,15 @@ export async function publish({
   }
   await assertMainFreshImpl();
   const rollbackFailures = failures > 0 ? await rollbackRssAfterObsoleteMutation() : 0;
-  return { failures: failures + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: deleted.length, status };
+  return {
+    failures: failures + rollbackFailures,
+    rollbackFailures,
+    uploaded: uploaded.length,
+    deleted: deleted.length,
+    status,
+    immutableMismatch: immutableMismatches.length > 0,
+    immutableMismatches,
+  };
   } catch (error) {
     console.error(`::error::[${LOG}] pubblicazione ${section} fallita: ${error?.message ?? String(error)}`);
     const rollbackFailures = await rollbackRssAfterObsoleteMutation();

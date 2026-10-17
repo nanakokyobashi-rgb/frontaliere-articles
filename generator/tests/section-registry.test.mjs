@@ -1218,6 +1218,8 @@ test('edge: il lease R2 ha TTL oltre il timeout bootstrap e il tombstone resta s
   assert.match(cli, /conditional-cdn-put\.sh/);
   assert.match(cli, /If-Match/);
   assert.match(cli, /If-None-Match/);
+  assert.match(cli, /--wait-ms/);
+  assert.match(cli, /LockBusyError/);
 });
 
 test('edge: il release post-flip ritenta i lease rimasti attivi', async () => {

@@ -1104,7 +1104,7 @@ test('publisher: lo staging snapshotta le chiavi prima dell HTML e ripristina un
   }
 });
 
-test('publisher: lo staging rifiuta sostituzioni stale e usa il gate cross-workflow invece del polling readiness', async () => {
+test('publisher: lo staging differisce sostituzioni stale e usa il gate cross-workflow invece del polling readiness', async () => {
   const immutableRoot = mkdtempSync(path.join(tmpdir(), 'publish-bootstrap-immutable-'));
   const immutable = pageEntry('canton-ti', 'articoli-ticino/existing/index.html', 'article');
   const immutableLocal = path.join(immutableRoot, immutable.rel);
@@ -1113,7 +1113,9 @@ test('publisher: lo staging rifiuta sostituzioni stale e usa il gate cross-workf
   let immutableUploads = 0;
   const immutableResult = await publish({
     section: 'canton-ti',
-    pages: [immutable],
+    // La chiave gia' annunciata non entra nel set di upload del bootstrap:
+    // resta servita fino al replay post-flip.
+    pages: [],
     immutablePages: [immutable],
     snapshotPagesBeforeUpload: true,
     cdnUploads: [],
@@ -1128,7 +1130,7 @@ test('publisher: lo staging rifiuta sostituzioni stale e usa il gate cross-workf
     },
     probeImpl: async () => ({ ok: true, status: 200, body: '<html>render precedente</html>' }),
   });
-  assert.equal(immutableResult.failures, 1);
+  assert.equal(immutableResult.failures, 0);
   assert.equal(immutableResult.immutableMismatch, true);
   assert.equal(immutableUploads, 0, 'una sostituzione di una chiave già annunciata non parte prima del flip');
   rmSync(immutableRoot, { recursive: true, force: true });
@@ -2757,8 +2759,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /timeout-minutes: 45/);
   assert.match(wf, /Acquire bootstrap R2 gate/);
   assert.match(wf, /section-bootstrap-lock\.mjs acquire --section "\$SECTION"/);
+  assert.match(wf, /--wait-ms 2400000 --retry-ms 20000/);
   assert.match(wf, /Release bootstrap R2 gate/);
-  assert.match(wf, /if: always\(\).*matrix\.target\.bootstrap == true/);
+  assert.match(wf, /if: always\(\).*matrix\.target\.bootstrap == true.*env\.SECTION_BOOTSTRAP_LOCK_HELD == 'true'/);
   assert.match(read('scripts/publish-section-edge.mjs'), /waitForBootstrapLocks\(release\.live, io/);
 });
 

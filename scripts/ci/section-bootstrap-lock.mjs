@@ -29,18 +29,27 @@ function run(command, args) {
 
 function parseArgs(argv) {
   const [action, ...rest] = argv;
-  if (!['acquire', 'release'].includes(action)) throw new Error('uso: section-bootstrap-lock.mjs <acquire|release> --section <canton-x> [--commit <sha>]');
-  const out = { action, section: null, commit: null, role: 'bootstrap' };
+  if (!['acquire', 'release'].includes(action)) throw new Error('uso: section-bootstrap-lock.mjs <acquire|release> --section <canton-x> [--commit <sha>] [--wait-ms <n>] [--retry-ms <n>]');
+  const out = { action, section: null, commit: null, role: 'bootstrap', waitMs: 0, retryMs: 20_000 };
   for (let i = 0; i < rest.length; i++) {
     const arg = rest[i];
     if (arg === '--section') out.section = rest[++i];
     else if (arg === '--commit') out.commit = rest[++i];
     else if (arg === '--role') out.role = rest[++i];
+    else if (arg === '--wait-ms') out.waitMs = parseMilliseconds(rest[++i], '--wait-ms');
+    else if (arg === '--retry-ms') out.retryMs = parseMilliseconds(rest[++i], '--retry-ms');
     else throw new Error(`argomento sconosciuto: ${arg}`);
   }
   if (!out.section) throw new Error('--section obbligatorio');
   if (action === 'acquire' && !out.commit) throw new Error('--commit obbligatorio in acquire');
   return out;
+}
+
+function parseMilliseconds(value, flag) {
+  if (!/^\d+$/.test(String(value ?? ''))) throw new Error(`${flag} richiede millisecondi interi non negativi`);
+  const parsed = Number(value);
+  if (!Number.isSafeInteger(parsed)) throw new Error(`${flag} fuori dal range numerico`);
+  return parsed;
 }
 
 class LockBusyError extends Error {
@@ -68,9 +77,14 @@ function writeTempDocument(doc) {
   return { dir, file };
 }
 
-async function acquire({ section, commit, role }) {
+async function acquireOnce({ section, commit, role }) {
   const owner = bootstrapLockOwner();
   const existing = await readSectionBootstrapLock(section, { cdnBase: CDN_BASE });
+  if (existing.state === 'active' && existing.doc.owner === owner && existing.doc.role === role) {
+    writeGithubEnv('SECTION_BOOTSTRAP_LOCK_HELD=true');
+    console.log(`bootstrap lock gia' acquisito: ${section} (${existing.doc.commit.slice(0, 8)}, role=${role})`);
+    return;
+  }
   if (existing.state === 'active' && existing.doc.owner !== owner) {
     throw new LockBusyError(`bootstrap lock gia' detenuto da ${existing.doc.owner}`);
   }
@@ -101,6 +115,21 @@ async function acquire({ section, commit, role }) {
     console.log(`bootstrap lock acquisito atomicamente: ${section} (${doc.commit.slice(0, 8)}, role=${role})`);
   } finally {
     fs.rmSync(temp.dir, { recursive: true, force: true });
+  }
+}
+
+async function acquire({ section, commit, role, waitMs, retryMs }) {
+  const deadline = Date.now() + Math.max(0, waitMs);
+  for (;;) {
+    try {
+      return await acquireOnce({ section, commit, role });
+    } catch (error) {
+      const remaining = deadline - Date.now();
+      if (!(error instanceof LockBusyError) || remaining <= 0) throw error;
+      const delay = Math.min(Math.max(0, retryMs), remaining);
+      console.log(`::notice::[section-bootstrap-lock] ${section} occupata (${error.message}); ritento tra ${delay} ms`);
+      await new Promise((resolve) => setTimeout(resolve, delay));
+    }
   }
 }
 
