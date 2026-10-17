@@ -116,6 +116,12 @@ test('sanitiser: character references, NFC, bidi overrides and control character
   assert.equal(sanitizeCommonsHtml('a < b &unknownentity; c').text, 'a < b &unknownentity; c');
 });
 
+test('sanitiser: an unbalanced attribute quote fails closed before nested markup', () => {
+  const r = sanitizeCommonsHtml('Visible <span title="unfinished <a href="https://commons.wikimedia.org/wiki/User:Injected">Injected</a></span>');
+  assert.equal(r.text, 'Visible');
+  assert.deepEqual(r.links, []);
+});
+
 test('sanitiser: block boundaries separate words, relative links become absolute', () => {
   // textContent would glue these into «AnnLeeZurich».
   assert.equal(sanitizeCommonsHtml('Ann<br>Lee<p>Zurich</p>').text, 'Ann Lee Zurich');

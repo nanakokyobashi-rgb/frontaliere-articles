@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/a-morazzone-torna-tante-care-cose-il-mercato-di-rigatterie-e-anticaglie-a-casa-macchi/2672011": {
-    "articleId": "morazzone-tante-care-cose-2026",
-    "ts": "2026-09-07T10:25:45.217Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4065056": {
     "articleId": "rete-tram-treno-cantieri-inizio",
     "ts": "2026-09-07T10:49:29.709Z",
@@ -2497,6 +2492,11 @@
   "https://www.laregione.ch/sport/altri-sport/1957289/gli-squali-di-federico-pagani-vincono-il-derby-di-coppa": {
     "articleId": "sharks-derby-coppa-trevano",
     "ts": "2026-10-17T02:18:18.830Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/a-ternate-al-via-la-rassegna-viaggi-armonici-2026-con-il-concerto-del-duo-resonance/2709907": {
+    "articleId": "viaggi-armonici-ternate-2026",
+    "ts": "2026-10-17T02:47:49.558Z",
     "keyForm": 2
   }
 }
