@@ -8447,6 +8447,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ia-voce-truffatori-svizzera-2026.title': 'KI leiht Betrügern ihre Stimme: So schützen Sie sich vor verdächtigen Anrufen',
     'blog.article.ia-voce-truffatori-svizzera-2026.excerpt': 'Eine italienische Bank soll 95 Millionen Euro verloren haben.',
     'blog.article.ia-voce-truffatori-svizzera-2026.imageAlt': 'Smartphone mit Anrufbenachrichtigung und Schallwelle für Stimmenklonung auf Schweizer Schreibtisch',
+    'blog.article.udc-no-iva-13esima-avs.title': 'SVP lehnt Mehrwertsteuer-Erhöhung für 13. AHV-Rente ab',
+    'blog.article.udc-no-iva-13esima-avs.excerpt': 'Nein der SVP zur Erhöhung der Mehrwertsteuer für die 13.',
+    'blog.article.udc-no-iva-13esima-avs.imageAlt': 'Schweizer Wähler vor einem Wahlbüro mit MwSt-Symbol',
 };
 
 export default blogMetaChDe;

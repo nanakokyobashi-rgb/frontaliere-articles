@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4078958": {
-    "articleId": "votazione-scuola-qualita-berna-2026",
-    "ts": "2026-09-14T10:07:20.431Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/politica/1949987/transpareg-quadri-chiede-di-rinviare-l-entrata-in-vigore-rischio-informatico-enorme": {
     "articleId": "transpa-reg-quadri-rinvio-1-ottobre",
     "ts": "2026-09-14T11:57:33.166Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/info/dialogo/l%e2%80%99ia-presta-la-voce-ai-truffatori--4162924.html": {
     "articleId": "ia-voce-truffatori-svizzera-2026",
     "ts": "2026-10-17T14:18:53.814Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/svizzera/svizzera/1957457/no-dell-udc-al-ritocco-dell-iva-per-finanziare-l-avs": {
+    "articleId": "udc-no-iva-13esima-avs",
+    "ts": "2026-10-17T15:14:15.052Z",
     "keyForm": 2
   }
 }
