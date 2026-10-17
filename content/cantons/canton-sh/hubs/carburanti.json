@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T01:52:59.429Z",
-  "contentHash": "8716a5c9a88c913696ef67f4c87d9a0701619a232cf1937d490a1bd6681de194",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "3b3b69e63340d3a5d703c780597afa1a848cc024c4b2066962de649f17fd20cb",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Eventi del weekend nel Canton Sciaffusa: cosa fare sabato e domenica",
+          "url": "/articoli-sciaffusa/eventi-weekend-sciaffusa/",
+          "excerpt": "Eventi nel Canton Sciaffusa ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:30:26.249Z"
+        },
+        {
           "title": "Singen, chiusa la Schaffhauser Straße dal 26 al 30 ottobre",
           "url": "/articoli-sciaffusa/singen-chiusura-schaffhauser-strasse/",
           "excerpt": "A Singen la strada sarà chiusa al traffico dal 26 al 30 ottobre 2026 per lavori alla fermata Landesgartenschau.",
@@ -94,12 +100,6 @@
           "url": "/articoli-sciaffusa/seehas-affollamento-mattutino/",
           "excerpt": "A causa della chiusura della Schwarzwaldbahn, il Regionalexpress tra Konstanz e Singen è sospeso; più passeggeri utilizzano la S-Bahn Seehas, che al mattino può diventare molto affollata e allunga i tempi di viaggio.",
           "date": "2026-10-08T09:19:35.696Z"
-        },
-        {
-          "title": "Sciaffusa: e-learning per farmacie sulla violenza domestica",
-          "url": "/articoli-sciaffusa/sciaffusa-formazione-farmacie/",
-          "excerpt": "Sciaffusa: moduli e-learning volontari per le farmacie, dedicati a segnali di violenza domestica, colloquio riservato e rinvio ai servizi.",
-          "date": "2026-10-08T08:29:37.131Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T01:52:59.429Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "SH",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Weekend events in the canton of Schaffhausen: what to do Saturday & Sunday",
+          "url": "/en/schaffhausen-articles/weekend-events-schaffhausen/",
+          "excerpt": "Events in the canton of Schaffhausen every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:30:26.249Z"
+        },
+        {
           "title": "Singen, Schaffhauser Straße closed from October 26 to 30",
           "url": "/en/schaffhausen-articles/singen-schaffhauser-strasse-closure/",
           "excerpt": "In Singen, the road will be closed to traffic from October 26 to 30, 2026, due to work at the Landesgartenschau stop.",
@@ -193,12 +199,6 @@
           "url": "/en/schaffhausen-articles/more-crowded-seehas-and-longer-journeys-on-the-konstanz-singen-line/",
           "excerpt": "Due to the closure of the Schwarzwaldbahn, the Regionalexpress between Konstanz and Singen is suspended; more passengers are using the S-Bahn Seehas, which can become very crowded in the morning and lengthens travel…",
           "date": "2026-10-08T09:19:35.696Z"
-        },
-        {
-          "title": "Schaffhausen: e-learning for pharmacies on domestic violence",
-          "url": "/en/schaffhausen-articles/schaffhausen-pharmacy-training/",
-          "excerpt": "Schaffhausen: voluntary e-learning modules for pharmacies, focused on signs of domestic violence, confidential conversations, and referrals to services.",
-          "date": "2026-10-08T08:29:37.131Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T01:52:59.429Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "SH",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Veranstaltungen am Wochenende im Kanton Schaffhausen: was tun Sa & So",
+          "url": "/de/schaffhausen-artikel/wochenend-veranstaltungen-schaffhausen/",
+          "excerpt": "Veranstaltungen im Kanton Schaffhausen an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:30:26.249Z"
+        },
+        {
           "title": "Singen, Schaffhauser Straße vom 26. bis 30. Oktober gesperrt",
           "url": "/de/schaffhausen-artikel/singen-sperrung-schaffhauser-strasse/",
           "excerpt": "In Singen wird die Straße vom 26.",
@@ -292,12 +298,6 @@
           "url": "/de/schaffhausen-artikel/starker-ausgelasteter-seehas-und-langere-fahrten-auf-der-strecke-konstanz-singen/",
           "excerpt": "Aufgrund der Sperrung der Schwarzwaldbahn verkehrt der Regionalexpress zwischen Konstanz und Singen nicht; mehr Fahrgäste nutzen die S-Bahn Seehas, die morgens sehr voll werden kann und die Fahrzeiten verlängert.",
           "date": "2026-10-08T09:19:35.696Z"
-        },
-        {
-          "title": "Schaffhausen: E-Learning für Apotheken zum Thema häusliche Gewalt",
-          "url": "/de/schaffhausen-artikel/schaffhausen-apotheken-schulung/",
-          "excerpt": "Schaffhausen: Freiwillige E-Learning-Module für Apotheken zu Anzeichen häuslicher Gewalt, vertraulichen Gesprächen und der Weitervermittlung an Unterstützungsangebote.",
-          "date": "2026-10-08T08:29:37.131Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T01:52:59.429Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "SH",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Événements du week-end dans le canton de Schaffhouse : que faire samedi & dimanche",
+          "url": "/fr/articles-schaffhouse/evenements-week-end-schaffhouse/",
+          "excerpt": "Événements dans le canton de Schaffhouse chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:30:26.249Z"
+        },
+        {
           "title": "Singen, la Schaffhauser Straße fermée du 26 au 30 octobre",
           "url": "/fr/articles-schaffhouse/singen-fermeture-schaffhauser-strasse/",
           "excerpt": "À Singen, la route sera fermée à la circulation du 26 au 30 octobre 2026 pour des travaux à l’arrêt Landesgartenschau.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-schaffhouse/seehas-plus-charge-et-trajets-plus-longs-sur-la-ligne-konstanz-singen/",
           "excerpt": "En raison de la fermeture de la Schwarzwaldbahn, le Regionalexpress entre Konstanz et Singen est suspendu ; davantage de passagers utilisent le S-Bahn Seehas, qui peut devenir très bondé le matin et allonge les temps…",
           "date": "2026-10-08T09:19:35.696Z"
-        },
-        {
-          "title": "Schaffhouse : e-learning pour les pharmacies sur la violence domestique",
-          "url": "/fr/articles-schaffhouse/schaffhouse-formation-pharmacies/",
-          "excerpt": "Schaffhouse : modules d’e-learning volontaires pour les pharmacies, consacrés aux signes de violence domestique, à l’entretien confidentiel et à l’orientation vers les services.",
-          "date": "2026-10-08T08:29:37.131Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T01:52:59.429Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }

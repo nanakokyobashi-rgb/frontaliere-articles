@@ -42,6 +42,9 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.tuffe-falsi-poliziotti-vaud.title': 'Arnaques: faux policiers et banquiers, 100 interpellés',
     'blog.article.tuffe-falsi-poliziotti-vaud.excerpt': 'Plus de cent personnes interpellées dans le Vaud en 2026 Seize interpellations depuis le début d\'octobre Près de 2.300 cas et 900 arnaques réussies Préjudice',
     'blog.article.tuffe-falsi-poliziotti-vaud.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.eventi-weekend-vaud.title': 'Événements du week-end dans le canton de Vaud : que faire samedi & dimanche',
+    'blog.article.eventi-weekend-vaud.excerpt': 'Événements dans le canton de Vaud chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
+    'blog.article.eventi-weekend-vaud.imageAlt': 'Événements du week-end dans le canton de Vaud',
 };
 
 export default blogMetaCantonVdFr;

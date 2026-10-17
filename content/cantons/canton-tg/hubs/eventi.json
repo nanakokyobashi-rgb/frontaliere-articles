@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T00:48:07.355Z",
-  "contentHash": "ff9a0720d3c007d608d91fa9a0f035dd8c10714d5c1fea5642a40f30f2c49085",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "dbdd45ef6a17d0e1915e74a135f71076e9d737afdf9cadd3e54b43a79d38cc8f",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T15:35:32.859Z",
+      "updatedAt": "2026-10-16T20:07:19.130Z",
       "keyFacts": 0
     }
   ],
@@ -118,10 +118,16 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Eventi del weekend in Turgovia: cosa fare sabato e domenica",
+          "url": "/articoli-turgovia/eventi-weekend-turgovia/",
+          "excerpt": "Eventi in Turgovia ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:31:41.357Z"
+        },
         {
           "title": "Kreuzlingen: Bärenplatz chiuso per la fiera",
           "url": "/articoli-turgovia/kreuzlingen-barenplatz-chilbi/",
@@ -140,7 +146,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:48:07.355Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "TG",
@@ -241,10 +247,16 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Weekend events in Thurgau: what to do Saturday & Sunday",
+          "url": "/en/thurgau-articles/weekend-events-thurgau/",
+          "excerpt": "Events in Thurgau every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:31:41.357Z"
+        },
         {
           "title": "Kreuzlingen: Bärenplatz closed for the fair",
           "url": "/en/thurgau-articles/kreuzlingen-barenplatz-fair/",
@@ -263,7 +275,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:48:07.355Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "TG",
@@ -364,10 +376,16 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Veranstaltungen am Wochenende im Thurgau: was tun Sa & So",
+          "url": "/de/thurgau-artikel/wochenend-veranstaltungen-thurgau/",
+          "excerpt": "Veranstaltungen im Thurgau an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:31:41.357Z"
+        },
         {
           "title": "Kreuzlingen: Bärenplatz wegen Messe geschlossen",
           "url": "/de/thurgau-artikel/kreuzlingen-barenplatz-wegen-messe-geschlossen/",
@@ -386,7 +404,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T00:48:07.355Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "TG",
@@ -487,10 +505,16 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Événements du week-end en Thurgovie : que faire samedi & dimanche",
+          "url": "/fr/articles-thurgovie/evenements-week-end-thurgovie/",
+          "excerpt": "Événements en Thurgovie chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:31:41.357Z"
+        },
         {
           "title": "Kreuzlingen : Bärenplatz fermé pour le salon",
           "url": "/fr/articles-thurgovie/kreuzlingen-barenplatz-fete/",
@@ -509,7 +533,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T00:48:07.355Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }

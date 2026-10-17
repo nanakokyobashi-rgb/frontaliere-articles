@@ -10,7 +10,7 @@ name: Batch FAQ Generation
 #
 #   - No `mint-app-token.mjs`. That mints a token for the site repo's GitHub App
 #     installation, which is scoped to valerielinc-ops/frontaliere-si-o-no and has
-#     no rights here. The push identity is GITHUB_PAT, pulled from Remote Config.
+#     no rights here. The push identity is GITHUB_PAT_NANAKO, pulled from Remote Config.
 #   - No `setup-omniroute` composite action. It is an OPTIONAL model tier behind
 #     its own RC kill-switch and was not part of the transport manifest. The
 #     primary providers all arrive through load-rc-env.mjs, so dropping it costs
@@ -129,7 +129,7 @@ jobs:
           # `http.https://github.com/.extraheader`, and that header takes
           # PRECEDENCE over credentials embedded in a push URL. So the push
           # below authenticated as GITHUB_TOKEN — which this job grants only
-          # `contents: read` — instead of as GITHUB_PAT, and was rejected five
+          # `contents: read` — instead of as GITHUB_PAT_NANAKO, and was rejected five
           # times over. The article had already been generated and committed
           # locally by then, so it was simply lost.
           persist-credentials: false
@@ -166,7 +166,7 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
 
       # ~90 keys: every LLM/translation provider the generator can reach, plus
-      # GITHUB_PAT. Values are masked by the script itself before being written
+      # GITHUB_PAT_NANAKO. Values are masked by the script itself before being written
       # to $GITHUB_ENV.
       - name: Load secrets from Remote Config
         run: node generator/scripts/load-rc-env.mjs
@@ -341,8 +341,8 @@ jobs:
         if: steps.mode.outputs.dry != 'true' && steps.count.outputs.modified_count != '0'
         run: |
           set -euo pipefail
-          if [ -z "${GITHUB_PAT:-}" ]; then
-            echo "::error::GITHUB_PAT missing — refusing to push with a token that would not trigger publish-api.yml"
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::GITHUB_PAT_NANAKO missing — refusing to push with a token that would not trigger publish-api.yml"
             exit 1
           fi
 
@@ -367,7 +367,7 @@ jobs:
           # branch it keeps the commit on that branch, which is what makes this
           # workflow testable before cutover instead of only after.
           TARGET="${{ github.ref_name }}"
-          REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          REMOTE="https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${{ github.repository }}.git"
           for attempt in 1 2 3; do
             if git push "$REMOTE" "HEAD:$TARGET"; then
               echo "pushed ${MODIFIED} modified files to $TARGET"

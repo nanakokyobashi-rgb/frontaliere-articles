@@ -33,6 +33,9 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.argovia-cani-divieto-respinto.title': 'Argovia: respinto il divieto per i cani pericolosi',
     'blog.article.argovia-cani-divieto-respinto.excerpt': 'Il governo argoviese respinge il divieto dei cani pericolosi: in due anni, nessuno dei sei gravi ferimenti a persone ha coinvolto un cane della lista.',
     'blog.article.argovia-cani-divieto-respinto.imageAlt': 'Cane al guinzaglio in un paesaggio svizzero',
+    'blog.article.eventi-weekend-argovia.title': 'Eventi del weekend in Argovia: cosa fare sabato e domenica',
+    'blog.article.eventi-weekend-argovia.excerpt': 'Eventi in Argovia ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
+    'blog.article.eventi-weekend-argovia.imageAlt': 'Eventi del weekend in Argovia',
 };
 
 export default blogMetaCantonAgIt;

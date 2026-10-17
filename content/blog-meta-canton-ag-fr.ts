@@ -33,6 +33,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.argovia-cani-divieto-respinto.title': 'Argovie : l’interdiction des chiens dangereux rejetée',
     'blog.article.argovia-cani-divieto-respinto.excerpt': 'Le gouvernement argovien rejette l’interdiction des chiens dangereux : en deux ans, aucune des six graves blessures infligées à des personnes n’a impliqué un chien figurant sur la liste.',
     'blog.article.argovia-cani-divieto-respinto.imageAlt': 'Chien tenu en laisse dans un paysage suisse',
+    'blog.article.eventi-weekend-argovia.title': 'Événements du week-end en Argovie : que faire samedi & dimanche',
+    'blog.article.eventi-weekend-argovia.excerpt': 'Événements en Argovie chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
+    'blog.article.eventi-weekend-argovia.imageAlt': 'Événements du week-end en Argovie',
 };
 
 export default blogMetaCantonAgFr;

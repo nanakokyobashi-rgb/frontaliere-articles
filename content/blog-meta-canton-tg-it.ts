@@ -32,10 +32,13 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.kreuzlingen-barenplatz-chilbi.imageAlt': 'Autobus alla stazione principale di Kreuzlingen durante l\'allestimento della Chilbi',
     'blog.article.turgovia-sicurezza-lavoro-orari.title': 'Turgovia: sicurezza sul lavoro, orari e tutela della salute',
     'blog.article.turgovia-sicurezza-lavoro-orari.excerpt': 'Guida alla sicurezza sul lavoro, tutela della salute, orari e periodi di riposo nel Canton Turgovia secondo le normative e l\'Ispettorato del lavoro.',
-    'blog.article.turgovia-sicurezza-lavoro-orari.imageAlt': 'Sicurezza sul lavoro e tutela della salute nel Canton Turgovia',
+    'blog.article.turgovia-sicurezza-lavoro-orari.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.tredicesima-rendita-avs-2026.title': '13ª rendita AVS pagata con la pensione di dicembre 2026',
     'blog.article.tredicesima-rendita-avs-2026.excerpt': 'La 13ª rendita AVS arriva con la rendita di dicembre 2026 Non serve presentare domande o svolgere pratiche Spetta a chi riceve una rendita AVS di vecchiaia',
     'blog.article.tredicesima-rendita-avs-2026.imageAlt': 'Persona anziana in Turgovia controlla la rendita AVS di dicembre',
+    'blog.article.eventi-weekend-turgovia.title': 'Eventi del weekend in Turgovia: cosa fare sabato e domenica',
+    'blog.article.eventi-weekend-turgovia.excerpt': 'Eventi in Turgovia ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
+    'blog.article.eventi-weekend-turgovia.imageAlt': 'Eventi del weekend in Turgovia',
 };
 
 export default blogMetaCantonTgIt;

@@ -32,10 +32,13 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.kreuzlingen-barenplatz-chilbi.imageAlt': 'Bus at Kreuzlingen main station during the Chilbi fair setup',
     'blog.article.turgovia-sicurezza-lavoro-orari.title': 'Thurgau: workplace safety, working hours and health protection',
     'blog.article.turgovia-sicurezza-lavoro-orari.excerpt': 'Guide to occupational safety, health protection, working hours and rest periods in the Canton of Thurgau in accordance with regulations and the Labour Inspectorate.',
-    'blog.article.turgovia-sicurezza-lavoro-orari.imageAlt': 'Workplace safety and health protection in Canton Thurgovia',
+    'blog.article.turgovia-sicurezza-lavoro-orari.imageAlt': 'Illustration generated for this article',
     'blog.article.tredicesima-rendita-avs-2026.title': '13th AVS pension paid with the December 2026 pension',
     'blog.article.tredicesima-rendita-avs-2026.excerpt': 'The 13th AHV pension is paid with the December 2026 pension No applications or formalities are required It is due to anyone receiving an AHV old-age pension',
     'blog.article.tredicesima-rendita-avs-2026.imageAlt': 'Older person in Thurgau checks the December AHV pension payment',
+    'blog.article.eventi-weekend-turgovia.title': 'Weekend events in Thurgau: what to do Saturday & Sunday',
+    'blog.article.eventi-weekend-turgovia.excerpt': 'Events in Thurgau every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
+    'blog.article.eventi-weekend-turgovia.imageAlt': 'Weekend events in Thurgau',
 };
 
 export default blogMetaCantonTgEn;

@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T04:59:03.087Z",
-  "contentHash": "82ed761ee5150b6b09e418a7defac9f11624c92185db2decfe26019e55e5ab0b",
+  "updatedAt": "2026-10-17T14:03:25.701Z",
+  "contentHash": "a8b65aed088282bcafdfb539d986356d2d5f3a0beeedfcc82784ef45b2c88757",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-16T21:07:20.711Z",
+      "updatedAt": "2026-10-17T04:24:59.962Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-16T22:56:43.215Z",
+      "updatedAt": "2026-10-17T04:43:32.629Z",
       "keyFacts": 0
     },
     {
@@ -92,7 +92,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-16T21:07:20.711Z"
+          "updatedAt": "2026-10-17T04:24:59.962Z"
         },
         {
           "id": "meteo",
@@ -101,12 +101,12 @@
           "items": [
             {
               "label": "Frauenfeld",
-              "value": "11 °C",
-              "detail": "oggi da 11 a 11 °C"
+              "value": "9 °C",
+              "detail": "oggi da 9 a 14 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-16T22:56:43.215Z"
+          "updatedAt": "2026-10-17T04:43:32.629Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -224,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "en": {
       "canton": "TG",
@@ -289,7 +289,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-16T21:07:20.711Z"
+          "updatedAt": "2026-10-17T04:24:59.962Z"
         },
         {
           "id": "meteo",
@@ -298,12 +298,12 @@
           "items": [
             {
               "label": "Frauenfeld",
-              "value": "11 °C",
-              "detail": "today from 11 to 11 °C"
+              "value": "9 °C",
+              "detail": "today from 9 to 14 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-16T22:56:43.215Z"
+          "updatedAt": "2026-10-17T04:43:32.629Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -417,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "de": {
       "canton": "TG",
@@ -482,7 +482,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-16T21:07:20.711Z"
+          "updatedAt": "2026-10-17T04:24:59.962Z"
         },
         {
           "id": "meteo",
@@ -491,12 +491,12 @@
           "items": [
             {
               "label": "Frauenfeld",
-              "value": "11 °C",
-              "detail": "heute 11 bis 11 °C"
+              "value": "9 °C",
+              "detail": "heute 9 bis 14 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-16T22:56:43.215Z"
+          "updatedAt": "2026-10-17T04:43:32.629Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -610,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "fr": {
       "canton": "TG",
@@ -675,7 +675,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-16T21:07:20.711Z"
+          "updatedAt": "2026-10-17T04:24:59.962Z"
         },
         {
           "id": "meteo",
@@ -684,12 +684,12 @@
           "items": [
             {
               "label": "Frauenfeld",
-              "value": "11 °C",
-              "detail": "aujourd’hui de 11 à 11 °C"
+              "value": "9 °C",
+              "detail": "aujourd’hui de 9 à 14 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-16T22:56:43.215Z"
+          "updatedAt": "2026-10-17T04:43:32.629Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -799,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     }
   }
 }

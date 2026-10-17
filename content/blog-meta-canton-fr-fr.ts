@@ -30,6 +30,9 @@ const blogMetaCantonFrFr: Record<string, string> = {
     'blog.article.copertura-a12-opposizioni.title': 'Couverture de l\'A12 : 3 ans de travaux, une vingtaine d\'oppositions',
     'blog.article.copertura-a12-opposizioni.excerpt': 'Le projet de couverture de l\'autoroute A12 prévoit trois ans de travaux.',
     'blog.article.copertura-a12-opposizioni.imageAlt': 'Projet de couverture de l\'A12',
+    'blog.article.eventi-weekend-friburgo.title': 'Événements du week-end dans le canton de Fribourg : que faire samedi & dimanche',
+    'blog.article.eventi-weekend-friburgo.excerpt': 'Événements dans le canton de Fribourg chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
+    'blog.article.eventi-weekend-friburgo.imageAlt': 'Événements du week-end dans le canton de Fribourg',
 };
 
 export default blogMetaCantonFrFr;

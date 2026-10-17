@@ -21,6 +21,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.singen-chiusura-schaffhauser-strasse.title': 'Singen, Schaffhauser Straße vom 26. bis 30. Oktober gesperrt',
     'blog.article.singen-chiusura-schaffhauser-strasse.excerpt': 'In Singen wird die Straße vom 26.',
     'blog.article.singen-chiusura-schaffhauser-strasse.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.eventi-weekend-sciaffusa.title': 'Veranstaltungen am Wochenende im Kanton Schaffhausen: was tun Sa & So',
+    'blog.article.eventi-weekend-sciaffusa.excerpt': 'Veranstaltungen im Kanton Schaffhausen an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
+    'blog.article.eventi-weekend-sciaffusa.imageAlt': 'Veranstaltungen am Wochenende im Kanton Schaffhausen',
 };
 
 export default blogMetaCantonShDe;

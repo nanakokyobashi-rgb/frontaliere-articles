@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T04:59:03.087Z",
-  "contentHash": "eee31c37e564bf5d58c0c1e35f3b88b98888283a34c52268fbecf50c7f62f797",
+  "updatedAt": "2026-10-17T14:03:25.701Z",
+  "contentHash": "d0c5558dcbbb98173ba79a72518c1b0b4ee52bfa9d02465526bf23c5a2289173",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-16T21:07:20.711Z",
+      "updatedAt": "2026-10-17T04:24:59.962Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-16T22:56:43.215Z",
+      "updatedAt": "2026-10-17T04:43:32.629Z",
       "keyFacts": 0
     },
     {
@@ -102,7 +102,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-16T21:07:20.711Z"
+          "updatedAt": "2026-10-17T04:24:59.962Z"
         },
         {
           "id": "meteo",
@@ -111,12 +111,12 @@
           "items": [
             {
               "label": "Chur",
-              "value": "14 °C",
-              "detail": "oggi da 13 a 14 °C"
+              "value": "9 °C",
+              "detail": "oggi da 9 a 19 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-16T22:56:43.215Z"
+          "updatedAt": "2026-10-17T04:43:32.629Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -229,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "en": {
       "canton": "GR",
@@ -304,7 +304,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-16T21:07:20.711Z"
+          "updatedAt": "2026-10-17T04:24:59.962Z"
         },
         {
           "id": "meteo",
@@ -313,12 +313,12 @@
           "items": [
             {
               "label": "Chur",
-              "value": "14 °C",
-              "detail": "today from 13 to 14 °C"
+              "value": "9 °C",
+              "detail": "today from 9 to 19 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-16T22:56:43.215Z"
+          "updatedAt": "2026-10-17T04:43:32.629Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -427,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "de": {
       "canton": "GR",
@@ -502,7 +502,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-16T21:07:20.711Z"
+          "updatedAt": "2026-10-17T04:24:59.962Z"
         },
         {
           "id": "meteo",
@@ -511,12 +511,12 @@
           "items": [
             {
               "label": "Chur",
-              "value": "14 °C",
-              "detail": "heute 13 bis 14 °C"
+              "value": "9 °C",
+              "detail": "heute 9 bis 19 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-16T22:56:43.215Z"
+          "updatedAt": "2026-10-17T04:43:32.629Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -625,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "fr": {
       "canton": "GR",
@@ -700,7 +700,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-16T21:07:20.711Z"
+          "updatedAt": "2026-10-17T04:24:59.962Z"
         },
         {
           "id": "meteo",
@@ -709,12 +709,12 @@
           "items": [
             {
               "label": "Chur",
-              "value": "14 °C",
-              "detail": "aujourd’hui de 13 à 14 °C"
+              "value": "9 °C",
+              "detail": "aujourd’hui de 9 à 19 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-16T22:56:43.215Z"
+          "updatedAt": "2026-10-17T04:43:32.629Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -819,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     }
   }
 }

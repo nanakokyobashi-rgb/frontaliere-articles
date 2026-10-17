@@ -42,6 +42,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.tuffe-falsi-poliziotti-vaud.title': 'Betrug durch falsche Polizisten/Banker: 100 kontaktiert',
     'blog.article.tuffe-falsi-poliziotti-vaud.excerpt': 'Im Kanton Waadt 2026 über hundert Personen kontaktiert Sechzehn Kontaktaufnahmen seit Anfang Oktober Fast 2.300 Fälle und 900 erfolgreiche Betrugsfälle',
     'blog.article.tuffe-falsi-poliziotti-vaud.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.eventi-weekend-vaud.title': 'Veranstaltungen am Wochenende in der Waadt: was tun Sa & So',
+    'blog.article.eventi-weekend-vaud.excerpt': 'Veranstaltungen in der Waadt an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
+    'blog.article.eventi-weekend-vaud.imageAlt': 'Veranstaltungen am Wochenende in der Waadt',
 };
 
 export default blogMetaCantonVdDe;

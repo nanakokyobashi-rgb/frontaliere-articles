@@ -106554,10 +106554,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Quasi il 70% degli svizzeri usa l'IA per un acquisto Il 49% dice che l'IA influenza la scelta Il 67% vuole mantenere il pagamento autonomo Solo il 17% accetta",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/frontaliere-acquisto-immobile-investimento-svizzera.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ia-assistente-shopping-svizzera.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Cliente svizzero che utilizza un assistente IA su smartphone mentre fa shopping a Lugano"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-16T21:25:25+00:00",
       "dateModified": "2026-10-16T21:25:25+00:00",
@@ -106609,6 +106614,79 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/sistema-sanitario-lamal-ginevra-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-stesso-reddito-imposte-diverse': {
+    title: 'Stesso reddito, imposte diverse: risparmio fino al 90%',
+    description: 'A parità di reddito, il Comune cambia la fattura fiscale. Un caso arriva a oltre il 90% di risparmio. Il Comune più conveniente dipende da reddito e famiglia',
+    keywords: 'frontalieri, ticino, svizzera, italia, stesso, reddito, imposte, diverse',
+    ogTitle: 'Stesso reddito, imposte diverse: risparmio fino al 90%',
+    ogDescription: 'A parità di reddito, il Comune cambia la fattura fiscale.',
+    canonicalPath: '/articoli-svizzera/stesso-reddito-imposte-diverse/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stesso reddito, imposte diverse: risparmio fino al 90%",
+      "description": "A parità di reddito, il Comune cambia la fattura fiscale. Un caso arriva a oltre il 90% di risparmio. Il Comune più conveniente dipende da reddito e famiglia",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/emigrazione-cassa-pensione-risparmio-imposte-2.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada svizzera con case e documento fiscale"
+      },
+      "datePublished": "2026-10-17T10:06:40+00:00",
+      "dateModified": "2026-10-17T10:06:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/stesso-reddito-imposte-diverse/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ia-voce-truffatori-svizzera-2026': {
+    title: 'L’IA presta la voce ai truffatori: come difendersi dalle chiamate sospette',
+    description: 'Una banca italiana avrebbe perso 95 milioni di euro. Un\'azienda del canton Svitto ha perso diversi milioni di franchi. Il rapporto UFCS riguarda il primo',
+    keywords: 'frontalieri, ticino, svizzera, italia, presta, voce, truffatori, difendersi',
+    ogTitle: 'L’IA presta la voce ai truffatori: come difendersi dalle chiamate sospette',
+    ogDescription: 'Una banca italiana avrebbe perso 95 milioni di euro.',
+    canonicalPath: '/articoli-svizzera/ia-voce-truffatori-svizzera-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "L’IA presta la voce ai truffatori: come difendersi dalle chiamate sospette",
+      "description": "Una banca italiana avrebbe perso 95 milioni di euro. Un'azienda del canton Svitto ha perso diversi milioni di franchi. Il rapporto UFCS riguarda il primo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ia-voce-truffatori-svizzera-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Smartphone con notifica di chiamata e onda sonora che rappresenta la clonazione vocale su scrivania svizzera"
+      },
+      "datePublished": "2026-10-17T14:18:53+00:00",
+      "dateModified": "2026-10-17T14:18:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ia-voce-truffatori-svizzera-2026/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

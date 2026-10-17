@@ -149,4 +149,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'eventi-weekend-vaud',
+ category: 'novita',
+ date: '2026-10-17T11:32:57.082Z',
+ image: '/images/places/lugano-view.webp',
+ hasCalculator: false,
+ articleType: 'evergreen',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

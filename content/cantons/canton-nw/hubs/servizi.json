@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T04:59:03.087Z",
-  "contentHash": "2414d1b2a5923f016067f2f622e82d21ff2af05035c909b98ab7da3a94f34796",
+  "updatedAt": "2026-10-17T14:03:25.701Z",
+  "contentHash": "3489685f692d9ee0f0257c2b9b4d4ac874e6e76fb3efd41e4cf81d9721d8c1cd",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-16T22:56:43.215Z",
+      "updatedAt": "2026-10-17T04:43:32.629Z",
       "keyFacts": 0
     },
     {
@@ -60,12 +60,12 @@
           "items": [
             {
               "label": "Stans",
-              "value": "13 °C",
-              "detail": "oggi da 15 a 15 °C"
+              "value": "12 °C",
+              "detail": "oggi da 10 a 15 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-16T22:56:43.215Z"
+          "updatedAt": "2026-10-17T04:43:32.629Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -173,7 +173,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "en": {
       "canton": "NW",
@@ -211,12 +211,12 @@
           "items": [
             {
               "label": "Stans",
-              "value": "13 °C",
-              "detail": "today from 15 to 15 °C"
+              "value": "12 °C",
+              "detail": "today from 10 to 15 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-16T22:56:43.215Z"
+          "updatedAt": "2026-10-17T04:43:32.629Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -320,7 +320,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "de": {
       "canton": "NW",
@@ -358,12 +358,12 @@
           "items": [
             {
               "label": "Stans",
-              "value": "13 °C",
-              "detail": "heute 15 bis 15 °C"
+              "value": "12 °C",
+              "detail": "heute 10 bis 15 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-16T22:56:43.215Z"
+          "updatedAt": "2026-10-17T04:43:32.629Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -467,7 +467,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "fr": {
       "canton": "NW",
@@ -505,12 +505,12 @@
           "items": [
             {
               "label": "Stans",
-              "value": "13 °C",
-              "detail": "aujourd’hui de 15 à 15 °C"
+              "value": "12 °C",
+              "detail": "aujourd’hui de 10 à 15 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-16T22:56:43.215Z"
+          "updatedAt": "2026-10-17T04:43:32.629Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -610,7 +610,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     }
   }
 }

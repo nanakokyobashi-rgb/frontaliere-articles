@@ -61,4 +61,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'eventi-weekend-appenzello',
+ category: 'novita',
+ date: '2026-10-17T11:26:40.822Z',
+ image: '/images/places/lugano-view.webp',
+ hasCalculator: false,
+ articleType: 'evergreen',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

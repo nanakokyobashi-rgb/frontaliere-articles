@@ -33,6 +33,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.argovia-cani-divieto-respinto.title': 'Aargau: Verbot für gefährliche Hunde abgelehnt',
     'blog.article.argovia-cani-divieto-respinto.excerpt': 'Die Aargauer Regierung lehnt das Verbot gefährlicher Hunde ab: In zwei Jahren war bei keinem der sechs schweren Verletzungsfälle an Menschen ein Hund von der Liste beteiligt.',
     'blog.article.argovia-cani-divieto-respinto.imageAlt': 'Angeleinter Hund in einer Schweizer Landschaft',
+    'blog.article.eventi-weekend-argovia.title': 'Veranstaltungen am Wochenende im Aargau: was tun Sa & So',
+    'blog.article.eventi-weekend-argovia.excerpt': 'Veranstaltungen im Aargau an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
+    'blog.article.eventi-weekend-argovia.imageAlt': 'Veranstaltungen am Wochenende im Aargau',
 };
 
 export default blogMetaCantonAgDe;

@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T00:44:41.594Z",
-  "contentHash": "8f540b3ce5ac544ce62f467425bb05e02e92f15d7863eeba639608b44cc7118c",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "a3359024bdc6858535212ef7f29bb86e2970b4e81c2dcf8017d90159e984d8ac",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Eventi del weekend nel Canton Glarona: cosa fare sabato e domenica",
+          "url": "/articoli-glarona/eventi-weekend-glarona/",
+          "excerpt": "Eventi nel Canton Glarona ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:27:55.911Z"
+        },
+        {
           "title": "Klöntalerstrasse: limitazione staldengarten–bützi",
           "url": "/articoli-glarona/klontalstrasse-staldengarten-butzi/",
           "excerpt": "Una limitazione al traffico riguarda la Klöntalerstrasse nel tratto Staldengarten–Bützi, nel Canton Glarona.",
@@ -94,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T00:44:41.594Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "GL",
@@ -141,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Weekend events in the canton of Glarus: what to do Saturday & Sunday",
+          "url": "/en/glarus-articles/weekend-events-glarus/",
+          "excerpt": "Events in the canton of Glarus every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:27:55.911Z"
+        },
+        {
           "title": "Klöntalerstrasse: restriction staldengarten–bützi",
           "url": "/en/glarus-articles/klontalstrasse-traffic-restriction/",
           "excerpt": "A traffic restriction affects Klöntalerstrasse on the Staldengarten–Bützi section, in the Canton of Glarus.",
@@ -175,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T00:44:41.594Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "GL",
@@ -222,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Veranstaltungen am Wochenende im Glarnerland: was tun Sa & So",
+          "url": "/de/glarus-artikel/wochenend-veranstaltungen-glarus/",
+          "excerpt": "Veranstaltungen im Glarnerland an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:27:55.911Z"
+        },
+        {
           "title": "Klöntalerstrasse: Verkehrsbeschränkung Staldengarten–Bützi",
           "url": "/de/glarus-artikel/verkehrseinschraenkung-kloentalerstrasse/",
           "excerpt": "Eine Verkehrsbeschränkung betrifft die Klöntalerstrasse im Abschnitt Staldengarten–Bützi im Kanton Glarus.",
@@ -256,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T00:44:41.594Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "GL",
@@ -303,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Événements du week-end dans le canton de Glaris : que faire samedi & dimanche",
+          "url": "/fr/articles-glaris/evenements-week-end-glaris/",
+          "excerpt": "Événements dans le canton de Glaris chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:27:55.911Z"
+        },
+        {
           "title": "Klöntalerstrasse : restriction Staldengarten–Bützi",
           "url": "/fr/articles-glaris/restriction-trafic-kloentalerstrasse/",
           "excerpt": "Une restriction de circulation concerne la Klöntalerstrasse sur le tronçon Staldengarten–Bützi, dans le canton de Glaris.",
@@ -337,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T00:44:41.594Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }

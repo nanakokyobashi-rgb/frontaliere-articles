@@ -15,6 +15,9 @@ const blogMetaCantonGlDe: Record<string, string> = {
     'blog.article.klontalstrasse-staldengarten-butzi.title': 'Klöntalerstrasse: Verkehrsbeschränkung Staldengarten–Bützi',
     'blog.article.klontalstrasse-staldengarten-butzi.excerpt': 'Eine Verkehrsbeschränkung betrifft die Klöntalerstrasse im Abschnitt Staldengarten–Bützi im Kanton Glarus.',
     'blog.article.klontalstrasse-staldengarten-butzi.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.eventi-weekend-glarona.title': 'Veranstaltungen am Wochenende im Glarnerland: was tun Sa & So',
+    'blog.article.eventi-weekend-glarona.excerpt': 'Veranstaltungen im Glarnerland an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
+    'blog.article.eventi-weekend-glarona.imageAlt': 'Veranstaltungen am Wochenende im Glarnerland',
 };
 
 export default blogMetaCantonGlDe;

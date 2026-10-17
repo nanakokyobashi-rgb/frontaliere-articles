@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T01:20:30.754Z",
-  "contentHash": "f5a3a8c60abf022f0cf701de3fb54968f64ff22ea6fc1650271a92467bb7046d",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "b9a399531e2a5a2c74bd37b6a7e78d2f9082532a44c9c02c8854d2127c9d59ab",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -98,39 +98,15 @@
           "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Salario minimo in Vallese: voto il 29 novembre sui CHF 22",
-          "url": "/articoli-vallese/valais-salario-minimo-2026/",
-          "excerpt": "15'000 salariati a tempo pieno non vivono del salario Il voto sul salario minimo è fissato al 29 novembre La proposta prevede CHF 22 lordi l'ora Il Parlamento",
-          "date": "2026-10-17T01:13:51.089Z"
-        },
-        {
-          "title": "Fully: oltre 5,5 km di strada diventano ciclabili",
-          "url": "/articoli-vallese/fully-strada-ciclabile/",
-          "excerpt": "Il Comune di Fully amplia la mobilità dolce: la strada a nord del canale diventa rue cyclable e i ciclisti hanno la priorità a 12 intersezioni.",
-          "date": "2026-10-17T01:00:16.066Z"
-        },
-        {
-          "title": "Crolla un pilone dell'alta tensione a Vétroz",
-          "url": "/articoli-vallese/crollo-pilone-vetroz/",
-          "excerpt": "Il pilone è crollato verso le 4 nella zona industriale del Botza.",
-          "date": "2026-10-17T00:38:07.569Z"
-        },
-        {
-          "title": "Vallese: approvato il Piano d'azione acqua 2035",
-          "url": "/articoli-vallese/vallese-piano-acqua-2035/",
-          "excerpt": "Il Consiglio di Stato adotta il Piano d'azione 2035 Attuazione progressiva dal 2027, secondo priorità e risorse Le misure passano da 39 a 25 dopo la revisione",
-          "date": "2026-10-09T16:44:17.957Z"
-        },
-        {
-          "title": "Sion: apre la Maison de la garde per le urgenze",
-          "url": "/articoli-vallese/maison-garde-ospedale-sion/",
-          "excerpt": "Dal 1° settembre l'ospedale di Sion ha attivato un nuovo presidio per i casi non vitali, attivo ogni giorno dalle 18 alle 22.",
-          "date": "2026-10-08T17:03:41.241Z"
+          "title": "Eventi del weekend in Vallese: cosa fare sabato e domenica",
+          "url": "/articoli-vallese/eventi-weekend-vallese/",
+          "excerpt": "Eventi in Vallese ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:33:34.787Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi in Vallese",
@@ -141,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T01:20:30.754Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "VS",
@@ -227,39 +203,15 @@
           "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Minimum wage in Valais: vote on November 29 on CHF 22",
-          "url": "/en/valais-articles/valais-minimum-wage-2026/",
-          "excerpt": "15'000 full-time employees cannot make a living from their wages The vote on the minimum wage is set for November 29 The proposal provides for a gross hourly",
-          "date": "2026-10-17T01:13:51.089Z"
-        },
-        {
-          "title": "Fully: over 5,5 km of road become cycle paths",
-          "url": "/en/valais-articles/fully-cycle-street/",
-          "excerpt": "The Municipality of Fully expands active mobility: the road north of the canal becomes a bicycle street, and cyclists have priority at 12 intersections.",
-          "date": "2026-10-17T01:00:16.066Z"
-        },
-        {
-          "title": "A high-voltage pylon collapses in Vétroz",
-          "url": "/en/valais-articles/fallen-pylon-vetroz/",
-          "excerpt": "The pylon collapsed around 4 in the Botza industrial area.",
-          "date": "2026-10-17T00:38:07.569Z"
-        },
-        {
-          "title": "Valais: Water Action Plan 2035 approved",
-          "url": "/en/valais-articles/valais-water-action-plan-2035/",
-          "excerpt": "The Council of State adopts the 2035 Action Plan Gradual implementation from 2027, according to priorities and resources The measures decrease from 39 to 25",
-          "date": "2026-10-09T16:44:17.957Z"
-        },
-        {
-          "title": "Sion: the Maison de la garde opens for emergencies",
-          "url": "/en/valais-articles/maison-garde-sion-hospital/",
-          "excerpt": "As of September 1st, Sion Hospital has opened a new facility for non-life-threatening cases, open every day from 18 to 22.",
-          "date": "2026-10-08T17:03:41.241Z"
+          "title": "Weekend events in Valais: what to do Saturday & Sunday",
+          "url": "/en/valais-articles/weekend-events-valais/",
+          "excerpt": "Events in Valais every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:33:34.787Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "All events in Valais",
@@ -270,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T01:20:30.754Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "VS",
@@ -356,39 +308,15 @@
           "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Mindestlohn im Wallis: Abstimmung am 29. November über CHF 22",
-          "url": "/de/wallis-artikel/wallis-mindestlohn-2026/",
-          "excerpt": "15'000 Vollzeitbeschäftigte leben nicht vom Lohn Die Abstimmung über den Mindestlohn ist auf den 29.",
-          "date": "2026-10-17T01:13:51.089Z"
-        },
-        {
-          "title": "Fully: Mehr als 5,5 km Straße werden zu Fahrradstraßen",
-          "url": "/de/wallis-artikel/fully-fahrradstrasse/",
-          "excerpt": "Die Gemeinde Fully baut die sanfte Mobilität aus: Die Straße nördlich des Kanals wird zur Fahrradstraße, und Radfahrende haben an 12 Kreuzungen Vorrang.",
-          "date": "2026-10-17T01:00:16.066Z"
-        },
-        {
-          "title": "Ein Hochspannungsmast in Vétroz stürzt ein",
-          "url": "/de/wallis-artikel/hochspannungsmast-vetroz/",
-          "excerpt": "Der Mast ist gegen 4 Uhr im Industriegebiet von Botza eingestürzt.",
-          "date": "2026-10-17T00:38:07.569Z"
-        },
-        {
-          "title": "Wallis: Wasser-Aktionsplan 2035 genehmigt",
-          "url": "/de/wallis-artikel/wallis-aktionsplan-wasser-2035/",
-          "excerpt": "Der Staatsrat verabschiedet den Aktionsplan 2035 Schrittweise Umsetzung ab 2027 nach Prioritäten und Ressourcen Die Maßnahmen gehen nach der Überarbeitung",
-          "date": "2026-10-09T16:44:17.957Z"
-        },
-        {
-          "title": "Sitten: Die Maison de la garde für Notfälle öffnet",
-          "url": "/de/wallis-artikel/maison-garde-spital-sitten/",
-          "excerpt": "Seit dem 1. September hat das Spital von Sitten eine neue Anlaufstelle für nicht lebensbedrohliche Fälle eingerichtet, die täglich von 18 bis 22 Uhr geöffnet ist.",
-          "date": "2026-10-08T17:03:41.241Z"
+          "title": "Veranstaltungen am Wochenende im Wallis: was tun Sa & So",
+          "url": "/de/wallis-artikel/wochenend-veranstaltungen-wallis/",
+          "excerpt": "Veranstaltungen im Wallis an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:33:34.787Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen im Wallis",
@@ -399,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T01:20:30.754Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "VS",
@@ -485,39 +413,15 @@
           "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Salaire minimum en Valais : vote le 29 novembre sur les CHF 22",
-          "url": "/fr/articles-valais/valais-salaire-minimum-2026/",
-          "excerpt": "15'000 salariés à temps plein ne vivent pas de leur salaire Le vote sur le salaire minimum est fixé au 29 novembre La proposition prévoit CHF 22 bruts",
-          "date": "2026-10-17T01:13:51.089Z"
-        },
-        {
-          "title": "Fully : plus de 5,5 km de route deviennent cyclables",
-          "url": "/fr/articles-valais/fully-rue-cyclable/",
-          "excerpt": "La commune de Fully étend la mobilité douce : la route au nord du canal devient une rue cyclable et les cyclistes ont la priorité à 12 intersections.",
-          "date": "2026-10-17T01:00:16.066Z"
-        },
-        {
-          "title": "Un pylône de haute tension s'effondre à Vétroz",
-          "url": "/fr/articles-valais/pylone-haute-tension-vetroz/",
-          "excerpt": "Le pylône s'est effondré vers 4 heures dans la zone industrielle de Botza.",
-          "date": "2026-10-17T00:38:07.569Z"
-        },
-        {
-          "title": "Valais : approbation du Plan d'action Eau 2035",
-          "url": "/fr/articles-valais/valais-plan-action-eau-2035/",
-          "excerpt": "Le Conseil d'État adopte le Plan d'action 2035 Mise en œuvre progressive à partir de 2027, selon les priorités et les ressources Les mesures passent de 39 à 25",
-          "date": "2026-10-09T16:44:17.957Z"
-        },
-        {
-          "title": "Sion : la Maison de la garde ouvre pour les urgences",
-          "url": "/fr/articles-valais/maison-garde-hopital-sion/",
-          "excerpt": "À partir du 1er septembre, l’hôpital de Sion a mis en place un nouveau dispositif pour les cas non vitaux, ouvert tous les jours de 18 à 22 heures.",
-          "date": "2026-10-08T17:03:41.241Z"
+          "title": "Événements du week-end en Valais : que faire samedi & dimanche",
+          "url": "/fr/articles-valais/evenements-week-end-valais/",
+          "excerpt": "Événements en Valais chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:33:34.787Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tous les événements en Valais",
@@ -528,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T01:20:30.754Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }

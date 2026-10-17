@@ -18,6 +18,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.appenzello-tasso-fiscale-390.title': 'Appenzell: Voraussichtlicher Steuerfuss bei 3,90 Einheiten',
     'blog.article.appenzello-tasso-fiscale-390.excerpt': 'Der Voranschlag 2027 sieht ein Defizit von CHF 323\'670 vor: Der Steuerfuss soll auf 3,90 Einheiten steigen.',
     'blog.article.appenzello-tasso-fiscale-390.imageAlt': 'Gemeindegebäude in der Appenzeller Landschaft',
+    'blog.article.eventi-weekend-appenzello.title': 'Veranstaltungen am Wochenende im Appenzellerland: was tun Sa & So',
+    'blog.article.eventi-weekend-appenzello.excerpt': 'Veranstaltungen im Appenzellerland an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
+    'blog.article.eventi-weekend-appenzello.imageAlt': 'Veranstaltungen am Wochenende im Appenzellerland',
 };
 
 export default blogMetaCantonAppenzelloDe;

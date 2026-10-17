@@ -15,6 +15,9 @@ const blogMetaCantonSzDe: Record<string, string> = {
     'blog.article.kuessnacht-rete-teleriscaldamento.title': 'Küssnacht erweitert das Netz auf Immensee, Fänn und Adligenswil',
     'blog.article.kuessnacht-rete-teleriscaldamento.excerpt': 'Küssnacht strebt an, die fossilen Brennstoffe mit kommunaler Energieplanung und dem Netzausbau bis Immensee, Fänn und Adligenswil schrittweise abzuschaffen.',
     'blog.article.kuessnacht-rete-teleriscaldamento.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.eventi-weekend-svitto.title': 'Veranstaltungen am Wochenende im Kanton Schwyz: was tun Sa & So',
+    'blog.article.eventi-weekend-svitto.excerpt': 'Veranstaltungen im Kanton Schwyz an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
+    'blog.article.eventi-weekend-svitto.imageAlt': 'Veranstaltungen am Wochenende im Kanton Schwyz',
 };
 
 export default blogMetaCantonSzDe;

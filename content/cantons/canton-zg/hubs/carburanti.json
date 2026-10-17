@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T01:36:39.137Z",
-  "contentHash": "b178f3e10b5c7503bdfcb8abd5cf0c30a8ed31fec628c7c2a8ebee5bb47cfd21",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "28b764b5bd3003e718c9063ae4f14faebf36c147d029c0f91a517dfedc68b1dc",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Eventi del weekend nel Canton Zugo: cosa fare sabato e domenica",
+          "url": "/articoli-zugo/eventi-weekend-zugo/",
+          "excerpt": "Eventi nel Canton Zugo ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:34:12.899Z"
+        },
+        {
           "title": "Piano direttore 26/1: Zugo avvia la partecipazione",
           "url": "/articoli-zugo/zugo-piano-direttore-26-1/",
           "excerpt": "La modifica 26/1 prepara le «zone bianche», coordina il Piano direttore con la revisione del PBG e attua RPG 2.",
@@ -82,12 +88,6 @@
           "url": "/articoli-zugo/scuola-sternmatt-ia-2026/",
           "excerpt": "La scuola Sternmatt 1 affronta il 2026/27 mettendo al centro un uso responsabile dell'intelligenza artificiale nelle aule.",
           "date": "2026-10-08T18:01:57.824Z"
-        },
-        {
-          "title": "Baar: rinnovo del Gemeinderat per il 2027–2030",
-          "url": "/articoli-zugo/baar-rinnovo-comunale-2027/",
-          "excerpt": "Baarer Zytig indica i risultati del 27 settembre e il rinnovo del Gemeinderat del 4 ottobre 2026: sette membri per il mandato 2027–2030.",
-          "date": "2026-10-08T17:50:07.603Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T01:36:39.137Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "ZG",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Weekend events in the canton of Zug: what to do Saturday & Sunday",
+          "url": "/en/zug-articles/weekend-events-zug/",
+          "excerpt": "Events in the canton of Zug every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:34:12.899Z"
+        },
+        {
           "title": "Master plan January 26: Zug launches participation",
           "url": "/en/zug-articles/zug-structure-plan-26-1/",
           "excerpt": "The 1/26 amendment prepares the “white zones,” coordinates the master plan with the revision of the PBG, and implements RPG 2.",
@@ -169,12 +175,6 @@
           "url": "/en/zug-articles/sternmatt-school-ai-2026/",
           "excerpt": "The Sternmatt 1 school is entering 2026/27 with the responsible use of artificial intelligence in classrooms at the forefront.",
           "date": "2026-10-08T18:01:57.824Z"
-        },
-        {
-          "title": "Baar: renewal of the Municipal Council for 2027–2030",
-          "url": "/en/zug-articles/baar-municipal-council-renewal/",
-          "excerpt": "Baarer Zytig reports the results of September 27 and the renewal of the Gemeinderat on October 4, 2026: seven members for the 2027–2030 term.",
-          "date": "2026-10-08T17:50:07.603Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T01:36:39.137Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "ZG",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Veranstaltungen am Wochenende im Kanton Zug: was tun Sa & So",
+          "url": "/de/zug-artikel/wochenend-veranstaltungen-zug/",
+          "excerpt": "Veranstaltungen im Kanton Zug an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:34:12.899Z"
+        },
+        {
           "title": "Richtplan 26/1: Zug eröffnet die Mitwirkung",
           "url": "/de/zug-artikel/zug-richtplan-26-1/",
           "excerpt": "Die Änderung 26/1 bereitet die «weissen Zonen» vor, stimmt den Richtplan auf die Revision des PBG ab und setzt RPG 2 um.",
@@ -256,12 +262,6 @@
           "url": "/de/zug-artikel/sternmatt-schule-ki-2026/",
           "excerpt": "Die Schule Sternmatt 1 nimmt das Schuljahr 2026/27 in Angriff und stellt dabei einen verantwortungsvollen Einsatz künstlicher Intelligenz in den Klassenzimmern in den Mittelpunkt.",
           "date": "2026-10-08T18:01:57.824Z"
-        },
-        {
-          "title": "Baar: Erneuerung des Gemeinderats für 2027–2030",
-          "url": "/de/zug-artikel/baar-erneuerung-gemeinderat/",
-          "excerpt": "Baarer Zytig nennt die Ergebnisse vom 27.",
-          "date": "2026-10-08T17:50:07.603Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T01:36:39.137Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "ZG",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Événements du week-end dans le canton de Zoug : que faire samedi & dimanche",
+          "url": "/fr/articles-zoug/evenements-week-end-zoug/",
+          "excerpt": "Événements dans le canton de Zoug chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:34:12.899Z"
+        },
+        {
           "title": "Plan directeur 26/1 : Zoug lance la participation",
           "url": "/fr/articles-zoug/plan-directeur-zoug-26-1/",
           "excerpt": "La modification 26/1 prépare les « zones blanches », coordonne le Plan directeur avec la révision du PBG et met en œuvre RPG 2.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-zoug/ecole-sternmatt-ia-2026/",
           "excerpt": "L’école Sternmatt 1 aborde l’année 2026/27 en mettant au centre un usage responsable de l’intelligence artificielle dans les salles de classe.",
           "date": "2026-10-08T18:01:57.824Z"
-        },
-        {
-          "title": "Baar : renouvellement du Conseil municipal pour 2027–2030",
-          "url": "/fr/articles-zoug/baar-renouvellement-conseil/",
-          "excerpt": "Baarer Zytig indique les résultats du 27 septembre et le renouvellement du Conseil municipal du 4 octobre 2026 : sept membres pour le mandat 2027–2030.",
-          "date": "2026-10-08T17:50:07.603Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T01:36:39.137Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }

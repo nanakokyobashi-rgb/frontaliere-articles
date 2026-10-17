@@ -8437,10 +8437,16 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.imageAlt': 'Image éditoriale relative à: Il discount blocca aumenti 2027 e raddoppia sconto dipendenti',
     'blog.article.ia-assistente-shopping-svizzera.title': 'L’IA aide les Suisses à acheter, mais freine au paiement',
     'blog.article.ia-assistente-shopping-svizzera.excerpt': 'Près de 70% des Suisses utilisent l’IA pour un achat 49% disent que l’IA influence le choix 67% souhaitent conserver le paiement autonome Seuls 17% acceptent',
-    'blog.article.ia-assistente-shopping-svizzera.imageAlt': 'Client suisse utilisant un assistant IA sur son smartphone pendant qu\'il fait du shopping à Lugano',
+    'blog.article.ia-assistente-shopping-svizzera.imageAlt': 'Illustration générée pour cet article',
     'blog.article.sistema-sanitario-lamal-ginevra-2026.title': 'Système de santé suisse : guide LAMal 2026 pour le canton de Genève',
     'blog.article.sistema-sanitario-lamal-ginevra-2026.excerpt': 'Obligation d\'assurance, franchises et primes : comment fonctionne la LAMal à Genève en 2026.',
     'blog.article.sistema-sanitario-lamal-ginevra-2026.imageAlt': 'Panorama de Genève avec le Jet d\'Eau, symbole de la ville et de son système de santé.',
+    'blog.article.stesso-reddito-imposte-diverse.title': 'Même revenu, impôts différents : économies jusqu\'à 90 %',
+    'blog.article.stesso-reddito-imposte-diverse.excerpt': 'À revenu égal, la commune change la facture fiscale.',
+    'blog.article.stesso-reddito-imposte-diverse.imageAlt': 'Rue suisse avec maisons et document fiscal',
+    'blog.article.ia-voce-truffatori-svizzera-2026.title': 'L’IA prête la voix aux escrocs : comment se défendre contre les appels suspects',
+    'blog.article.ia-voce-truffatori-svizzera-2026.excerpt': 'Une banque italienne aurait perdu 95 millions d’euros.',
+    'blog.article.ia-voce-truffatori-svizzera-2026.imageAlt': 'Smartphone avec notification d\'appel et onde sonore représentant le clonage vocal sur un bureau suisse',
 };
 
 export default blogMetaChFr;

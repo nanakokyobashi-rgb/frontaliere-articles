@@ -14,6 +14,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'kreuzlingen-barenplatz-chilbi': { it: 'kreuzlingen-barenplatz-chilbi', en: 'kreuzlingen-barenplatz-fair', de: 'kreuzlingen-barenplatz-wegen-messe-geschlossen', fr: 'kreuzlingen-barenplatz-fete' },
  'turgovia-sicurezza-lavoro-orari': { it: 'turgovia-sicurezza-lavoro-orari', en: 'thurgovia-workplace-safety-hours', de: 'turgau-arbeitssicherheit-arbeitszeiten', fr: 'thurgovie-securite-travail-horaires' },
  'tredicesima-rendita-avs-2026': { it: 'tredicesima-rendita-avs-2026', en: 'thirteenth-ahv-pension-2026', de: 'dreizehnte-ahv-rente-2026', fr: 'treizieme-rente-avs-2026' },
+ 'eventi-weekend-turgovia': { it: 'eventi-weekend-turgovia', en: 'weekend-events-thurgau', de: 'wochenend-veranstaltungen-thurgau', fr: 'evenements-week-end-thurgovie' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

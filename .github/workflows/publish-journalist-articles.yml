@@ -110,7 +110,7 @@ jobs:
           # `http.https://github.com/.extraheader`, and that header takes
           # PRECEDENCE over credentials embedded in a push URL. So the push
           # below authenticated as GITHUB_TOKEN — which this job grants only
-          # `contents: read` — instead of as GITHUB_PAT, and was rejected five
+          # `contents: read` — instead of as GITHUB_PAT_NANAKO, and was rejected five
           # times over. The article had already been generated and committed
           # locally by then, so it was simply lost.
           persist-credentials: false
@@ -274,8 +274,8 @@ jobs:
             echo "no journalist-article changes"
             exit 0
           fi
-          if [ -z "${GITHUB_PAT:-}" ]; then
-            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push would not fire publish-api.yml"
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::GITHUB_PAT_NANAKO missing — a GITHUB_TOKEN push would not fire publish-api.yml"
             exit 1
           fi
 
@@ -299,7 +299,7 @@ jobs:
           fi
 
           TARGET="${{ github.ref_name }}"
-          REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          REMOTE="https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${{ github.repository }}.git"
           for attempt in 1 2 3 4 5; do
             if git push "$REMOTE" "HEAD:$TARGET"; then
               echo "pushed to $TARGET"

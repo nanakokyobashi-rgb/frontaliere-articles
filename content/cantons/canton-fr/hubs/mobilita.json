@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T01:40:03.654Z",
-  "contentHash": "a7e8f88053e48ccf0553360d8706a2791d69113d630688bce8c370bc91a22fd5",
+  "updatedAt": "2026-10-17T14:03:25.701Z",
+  "contentHash": "f3d2be59d68d2adcebc7389ee41039dc7fd61742e298e192c43a32ab611adaf1",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-16T17:01:51.551Z",
+      "updatedAt": "2026-10-17T05:03:12.314Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T15:35:32.859Z",
+      "updatedAt": "2026-10-16T20:07:19.130Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "22",
-          "note": "segnalazioni aggiornate: 16 ottobre 2026"
+          "note": "segnalazioni aggiornate: 17 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "11",
-          "note": "segnalazioni aggiornate: 16 ottobre 2026"
+          "note": "segnalazioni aggiornate: 17 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-16T17:01:51.551Z"
+          "updatedAt": "2026-10-17T05:03:12.314Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +130,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentliche-auflage-des-projekts-fuer-die-umfahrungsstrasse-kerzers"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
@@ -188,7 +188,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-17T01:40:03.654Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "en": {
       "canton": "FR",
@@ -199,12 +199,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "22",
-          "note": "reports as of 16 October 2026"
+          "note": "reports as of 17 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "11",
-          "note": "reports as of 16 October 2026"
+          "note": "reports as of 17 October 2026"
         }
       ],
       "dataBlocks": [
@@ -263,7 +263,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-16T17:01:51.551Z"
+          "updatedAt": "2026-10-17T05:03:12.314Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -301,7 +301,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentliche-auflage-des-projekts-fuer-die-umfahrungsstrasse-kerzers"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
@@ -359,7 +359,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-17T01:40:03.654Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "de": {
       "canton": "FR",
@@ -370,12 +370,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "22",
-          "note": "Meldungen vom 16. Oktober 2026"
+          "note": "Meldungen vom 17. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "11",
-          "note": "Meldungen vom 16. Oktober 2026"
+          "note": "Meldungen vom 17. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -434,7 +434,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-16T17:01:51.551Z"
+          "updatedAt": "2026-10-17T05:03:12.314Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -472,7 +472,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentliche-auflage-des-projekts-fuer-die-umfahrungsstrasse-kerzers"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
@@ -530,7 +530,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-17T01:40:03.654Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "fr": {
       "canton": "FR",
@@ -541,12 +541,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "22",
-          "note": "signalements au 16 octobre 2026"
+          "note": "signalements au 17 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "11",
-          "note": "signalements au 16 octobre 2026"
+          "note": "signalements au 17 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -605,7 +605,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-16T17:01:51.551Z"
+          "updatedAt": "2026-10-17T05:03:12.314Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -643,7 +643,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentliche-auflage-des-projekts-fuer-die-umfahrungsstrasse-kerzers"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
@@ -701,7 +701,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-17T01:40:03.654Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     }
   }
 }

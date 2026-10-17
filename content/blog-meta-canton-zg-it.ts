@@ -24,6 +24,9 @@ const blogMetaCantonZgIt: Record<string, string> = {
     'blog.article.zugo-piano-direttore-26-1.title': 'Piano direttore 26/1: Zugo avvia la partecipazione',
     'blog.article.zugo-piano-direttore-26-1.excerpt': 'La modifica 26/1 prepara le «zone bianche», coordina il Piano direttore con la revisione del PBG e attua RPG 2.',
     'blog.article.zugo-piano-direttore-26-1.imageAlt': 'Pianificazione urbana e Piano direttore nel Canton Zugo',
+    'blog.article.eventi-weekend-zugo.title': 'Eventi del weekend nel Canton Zugo: cosa fare sabato e domenica',
+    'blog.article.eventi-weekend-zugo.excerpt': 'Eventi nel Canton Zugo ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
+    'blog.article.eventi-weekend-zugo.imageAlt': 'Eventi del weekend nel Canton Zugo',
 };
 
 export default blogMetaCantonZgIt;

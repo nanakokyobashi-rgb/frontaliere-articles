@@ -15,6 +15,9 @@ const blogMetaCantonGlEn: Record<string, string> = {
     'blog.article.klontalstrasse-staldengarten-butzi.title': 'Klöntalerstrasse: restriction staldengarten–bützi',
     'blog.article.klontalstrasse-staldengarten-butzi.excerpt': 'A traffic restriction affects Klöntalerstrasse on the Staldengarten–Bützi section, in the Canton of Glarus.',
     'blog.article.klontalstrasse-staldengarten-butzi.imageAlt': 'Illustration generated for this article',
+    'blog.article.eventi-weekend-glarona.title': 'Weekend events in the canton of Glarus: what to do Saturday & Sunday',
+    'blog.article.eventi-weekend-glarona.excerpt': 'Events in the canton of Glarus every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
+    'blog.article.eventi-weekend-glarona.imageAlt': 'Weekend events in the canton of Glarus',
 };
 
 export default blogMetaCantonGlEn;

@@ -18,6 +18,9 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.appenzello-tasso-fiscale-390.title': 'Appenzello: tasso fiscale previsto a 3,90 unità',
     'blog.article.appenzello-tasso-fiscale-390.excerpt': 'Il preventivo 2027 prevede un disavanzo di CHF 323\'670: il tasso fiscale dovrebbe salire a 3,90 unità.',
     'blog.article.appenzello-tasso-fiscale-390.imageAlt': 'Edificio comunale nel paesaggio di Appenzello',
+    'blog.article.eventi-weekend-appenzello.title': 'Eventi del weekend in Appenzello: cosa fare sabato e domenica',
+    'blog.article.eventi-weekend-appenzello.excerpt': 'Eventi in Appenzello ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
+    'blog.article.eventi-weekend-appenzello.imageAlt': 'Eventi del weekend in Appenzello',
 };
 
 export default blogMetaCantonAppenzelloIt;

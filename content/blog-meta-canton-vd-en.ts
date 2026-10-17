@@ -42,6 +42,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.tuffe-falsi-poliziotti-vaud.title': 'Scams involving fake police officers and bankers in Vaud: 100 questioned',
     'blog.article.tuffe-falsi-poliziotti-vaud.excerpt': 'More than one hundred people contacted in Vaud in 2026 Sixteen contacts since the beginning of October Almost 2.300 cases and 900 successful scams Cumulative',
     'blog.article.tuffe-falsi-poliziotti-vaud.imageAlt': 'Illustration generated for this article',
+    'blog.article.eventi-weekend-vaud.title': 'Weekend events in the canton of Vaud: what to do Saturday & Sunday',
+    'blog.article.eventi-weekend-vaud.excerpt': 'Events in the canton of Vaud every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
+    'blog.article.eventi-weekend-vaud.imageAlt': 'Weekend events in the canton of Vaud',
 };
 
 export default blogMetaCantonVdEn;

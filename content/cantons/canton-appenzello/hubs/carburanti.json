@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T00:36:37.812Z",
-  "contentHash": "6dc441dc3e53b56a4780c0899e60f24c197faa14b907c6bae5d4daf3f8e778d6",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "4c1aab970347fb1e94cdd5d5a4520cc4397242eb6e23b40b690ca75ed18fcbae",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Eventi del weekend in Appenzello: cosa fare sabato e domenica",
+          "url": "/articoli-appenzello/eventi-weekend-appenzello/",
+          "excerpt": "Eventi in Appenzello ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:26:40.822Z"
+        },
+        {
           "title": "Appenzello: tasso fiscale previsto a 3,90 unità",
           "url": "/articoli-appenzello/appenzello-tasso-fiscale-390/",
           "excerpt": "Il preventivo 2027 prevede un disavanzo di CHF 323'670: il tasso fiscale dovrebbe salire a 3,90 unità.",
@@ -94,12 +100,6 @@
           "url": "/articoli-appenzello/heiden-tassa-base-rifiuti/",
           "excerpt": "A Heiden la tassa base sui rifiuti passa da 24 a 31,20 franchi l'anno per nucleo familiare e impresa.",
           "date": "2026-10-08T18:18:38.682Z"
-        },
-        {
-          "title": "Appenzello Esterno: disoccupazione al 1,5% a settembre",
-          "url": "/articoli-appenzello/lavoro-ar-rav-settembre-2026/",
-          "excerpt": "A settembre 2026 in Appenzello Esterno gli iscritti al RAV scendono a 819, i disoccupati a 455 e il tasso passa dall'1,6% all'1,5%.",
-          "date": "2026-10-07T10:17:50.894Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T00:36:37.812Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Weekend events in Appenzell: what to do Saturday & Sunday",
+          "url": "/en/appenzell-articles/weekend-events-appenzell/",
+          "excerpt": "Events in Appenzell every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:26:40.822Z"
+        },
+        {
           "title": "Appenzell: projected tax rate at 3,90 units",
           "url": "/en/appenzell-articles/appenzell-tax-rate-390/",
           "excerpt": "The 2027 budget forecasts a deficit of CHF 323'670: the tax rate should rise to 3,90 units.",
@@ -193,12 +199,6 @@
           "url": "/en/appenzell-articles/heiden-base-waste-fee/",
           "excerpt": "In Heiden, the basic waste fee is increasing from 24 to 31,20 francs per year per household and business.",
           "date": "2026-10-08T18:18:38.682Z"
-        },
-        {
-          "title": "Appenzell Ausserrhoden: unemployment at 1,5% in September",
-          "url": "/en/appenzell-articles/appenzell-ausserrhoden-rav-september-2026/",
-          "excerpt": "In September 2026 in Appenzell Ausserrhoden, those registered with the RAV fell to 819, the unemployed to 455, and the rate went from 1.6% to 1.5%.",
-          "date": "2026-10-07T10:17:50.894Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T00:36:37.812Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Veranstaltungen am Wochenende im Appenzellerland: was tun Sa & So",
+          "url": "/de/appenzell-artikel/wochenend-veranstaltungen-appenzell/",
+          "excerpt": "Veranstaltungen im Appenzellerland an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:26:40.822Z"
+        },
+        {
           "title": "Appenzell: Voraussichtlicher Steuerfuss bei 3,90 Einheiten",
           "url": "/de/appenzell-artikel/appenzell-steuerfuss-390/",
           "excerpt": "Der Voranschlag 2027 sieht ein Defizit von CHF 323'670 vor: Der Steuerfuss soll auf 3,90 Einheiten steigen.",
@@ -292,12 +298,6 @@
           "url": "/de/appenzell-artikel/heiden-kehrichtgrundgebuehr/",
           "excerpt": "In Heiden steigt die Kehrichtgrundgebühr von 24 auf 31,20 Franken pro Jahr für jeden Haushalt und jedes Unternehmen.",
           "date": "2026-10-08T18:18:38.682Z"
-        },
-        {
-          "title": "Appenzell Ausserrhoden: Arbeitslosenquote im September bei 1,5%",
-          "url": "/de/appenzell-artikel/arbeitslosenstatistik-ar-september-2026/",
-          "excerpt": "Im September 2026 sinkt in Appenzell Ausserrhoden die Zahl der beim RAV registrierten Personen auf 819, die Zahl der Arbeitslosen auf 455, und die Quote geht von 1,6% auf 1,5% zurück.",
-          "date": "2026-10-07T10:17:50.894Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T00:36:37.812Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Événements du week-end en Appenzell : que faire samedi & dimanche",
+          "url": "/fr/articles-appenzell/evenements-week-end-appenzell/",
+          "excerpt": "Événements en Appenzell chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:26:40.822Z"
+        },
+        {
           "title": "Appenzell : taux d'imposition prévu à 3,90 unités",
           "url": "/fr/articles-appenzell/appenzell-taux-fiscal-390/",
           "excerpt": "Le budget 2027 prévoit un déficit de CHF 323'670 : le taux d'imposition devrait passer à 3,90 unités.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-appenzell/heiden-taxe-base-dechets/",
           "excerpt": "À Heiden, la taxe de base sur les déchets passe de 24 à 31,20 francs par an pour chaque ménage et entreprise.",
           "date": "2026-10-08T18:18:38.682Z"
-        },
-        {
-          "title": "Appenzell Rhodes-Extérieures : le chômage à 1,5 % en septembre",
-          "url": "/fr/articles-appenzell/chomage-ar-septembre-2026/",
-          "excerpt": "En septembre 2026, dans le canton d'Appenzell Rhodes-Extérieures, les personnes inscrites à l'ORP diminuent à 819, les chômeurs à 455 et le taux passe de 1,6 % à 1,5 %.",
-          "date": "2026-10-07T10:17:50.894Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T00:36:37.812Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }

@@ -9,6 +9,9 @@ const blogMetaCantonOwDe: Record<string, string> = {
     'blog.article.obvaldo-verkehr45-mobilita.title': 'Obwalden: Mobilitätsvorschlag Verkehr\'45',
     'blog.article.obvaldo-verkehr45-mobilita.excerpt': 'Die Seite auf ow.ch mit dem Titel Verkehr\'45 befasst sich mit den Mobilitätsbedürfnissen über verschiedene Verkehrsmittel hinweg und nennt die Staatskanzlei in Sarnen.',
     'blog.article.obvaldo-verkehr45-mobilita.imageAlt': 'Mobilitätsvorlage Verkehr\'45 im Kanton Obwalden',
+    'blog.article.eventi-weekend-obvaldo.title': 'Veranstaltungen am Wochenende in Obwalden: was tun Sa & So',
+    'blog.article.eventi-weekend-obvaldo.excerpt': 'Veranstaltungen in Obwalden an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
+    'blog.article.eventi-weekend-obvaldo.imageAlt': 'Veranstaltungen am Wochenende in Obwalden',
 };
 
 export default blogMetaCantonOwDe;

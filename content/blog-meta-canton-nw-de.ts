@@ -12,6 +12,9 @@ const blogMetaCantonNwDe: Record<string, string> = {
     'blog.article.life-forestry-stans-liquidazione.title': 'Stans: Liquidation von Life Forestry, 800 Investoren gefährdet',
     'blog.article.life-forestry-stans-liquidazione.excerpt': 'Nach der Insolvenz im Jahr 2025 befindet sich die Life Forestry Switzerland AG aus Stans in Liquidation; etwa 800 Schweizer Investoren und über 6\'000 Europäer befürchten, die investierten rund CHF 200 Millionen nicht zurückzuerhalten, wobei zum Zeitpunkt des Konkurses nur CHF 805 auf dem Konto vorhanden waren.',
     'blog.article.life-forestry-stans-liquidazione.imageAlt': 'Blick auf die Stadt Stans mit dem Gebäude der Life Forestry Switzerland AG und einem sichtbaren Liquidationshinweis.',
+    'blog.article.eventi-weekend-nidvaldo.title': 'Veranstaltungen am Wochenende in Nidwalden: was tun Sa & So',
+    'blog.article.eventi-weekend-nidvaldo.excerpt': 'Veranstaltungen in Nidwalden an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
+    'blog.article.eventi-weekend-nidvaldo.imageAlt': 'Veranstaltungen am Wochenende in Nidwalden',
 };
 
 export default blogMetaCantonNwDe;

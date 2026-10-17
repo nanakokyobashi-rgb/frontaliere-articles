@@ -23,10 +23,13 @@ const blogMetaCantonVsEn: Record<string, string> = {
     'blog.article.crollo-pilone-vetroz.imageAlt': 'Fallen high-voltage pylon in the Botza industrial zone in Vétroz.',
     'blog.article.fully-strada-ciclabile.title': 'Fully: over 5,5 km of road become cycle paths',
     'blog.article.fully-strada-ciclabile.excerpt': 'The Municipality of Fully expands active mobility: the road north of the canal becomes a bicycle street, and cyclists have priority at 12 intersections.',
-    'blog.article.fully-strada-ciclabile.imageAlt': 'Cyclists on the cycle street north of the canal in Fully',
+    'blog.article.fully-strada-ciclabile.imageAlt': 'Illustration generated for this article',
     'blog.article.valais-salario-minimo-2026.title': 'Minimum wage in Valais: vote on November 29 on CHF 22',
     'blog.article.valais-salario-minimo-2026.excerpt': '15\'000 full-time employees cannot make a living from their wages The vote on the minimum wage is set for November 29 The proposal provides for a gross hourly',
     'blog.article.valais-salario-minimo-2026.imageAlt': 'Valais canton landscape with buildings and streets',
+    'blog.article.eventi-weekend-vallese.title': 'Weekend events in Valais: what to do Saturday & Sunday',
+    'blog.article.eventi-weekend-vallese.excerpt': 'Events in Valais every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
+    'blog.article.eventi-weekend-vallese.imageAlt': 'Weekend events in Valais',
 };
 
 export default blogMetaCantonVsEn;

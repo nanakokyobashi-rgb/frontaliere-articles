@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T01:04:37.805Z",
-  "contentHash": "185afd0500fe9f9b06607d7d283d90d75c225333bb92a58c3ac50e76a53c5023",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "90289a436addd8d1ffb0c8c9fa8bf6eb2bd88efc5b4e445c2a908df6a67cd7c2",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T15:35:32.859Z",
+      "updatedAt": "2026-10-16T20:07:19.130Z",
       "keyFacts": 0
     }
   ],
@@ -128,42 +128,18 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "CPCN: la differenza tra tasso e grado di copertura",
-          "url": "/articoli-neuchatel/cpcn-tasso-grado-copertura/",
-          "excerpt": "Il tasso esclude la RFV dal calcolo.",
-          "date": "2026-10-17T00:59:33.660Z"
-        },
-        {
-          "title": "CPCN registra +5,6% nel 2025: copertura 84,8%",
-          "url": "/articoli-neuchatel/cpcn-rendimento-2025-copertura/",
-          "excerpt": "+5,6% per la performance CPCN nel 2025 3% di remunerazione sugli averi di vecchiaia 84,8% di copertura al 31.12.2025 RFV da CHF 979 milioni, al 92%",
-          "date": "2026-10-17T00:07:41.161Z"
-        },
-        {
-          "title": "Nuovo centro accoglienza asilo a Couvet: parte il progetto",
-          "url": "/articoli-neuchatel/nuovo-centro-asilo-couvet/",
-          "excerpt": "Nuova struttura prevista in rue du 1er Mars 11, a Couvet Sostituirà il sito attuale di Chemin des Prises 8 Progetto elaborato con il Comune di Val-de-Travers",
-          "date": "2026-10-10T19:55:31.284Z"
-        },
-        {
-          "title": "Aldi chiuderà il negozio in centro a Neuchâtel",
-          "url": "/articoli-neuchatel/aldi-chiude-centro-neuchatel/",
-          "excerpt": "Aldi chiuderà a fine novembre 2026.",
-          "date": "2026-10-08T11:37:06.437Z"
-        },
-        {
-          "title": "Neuchâtel: referendum per salari minimi cantonali e CCT",
-          "url": "/articoli-neuchatel/neuchatel-referendum-salari-minimi/",
-          "excerpt": "Oltre 100.000 firme contro la riforma del Parlamento",
-          "date": "2026-10-08T11:16:38.230Z"
+          "title": "Eventi del weekend nel Canton Neuchâtel: cosa fare sabato e domenica",
+          "url": "/articoli-neuchatel/eventi-weekend-neuchatel/",
+          "excerpt": "Eventi nel Canton Neuchâtel ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:28:33.708Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Neuchâtel",
@@ -174,7 +150,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T01:04:37.805Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "NE",
@@ -285,40 +261,18 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "CPCN: the difference between coverage rate and coverage level",
-          "url": "/en/neuchatel-articles/cpcn-coverage-rate-distinction/",
-          "excerpt": "The rate excludes the RFV from the calculation.",
-          "date": "2026-10-17T00:59:33.660Z"
-        },
-        {
-          "title": "CPCN records +5,6% in 2025: coverage 84,8%",
-          "url": "/en/neuchatel-articles/cpcn-2025-return-coverage/",
-          "excerpt": "+5,6% for CPCN performance in 2025 3% remuneration on retirement savings 84,8% coverage as at December 31, 2025 RFV of CHF 979 million, at 92% of the target",
-          "date": "2026-10-17T00:07:41.161Z"
-        },
-        {
-          "title": "New asylum reception centre in Couvet: the project starts",
-          "url": "/en/neuchatel-articles/new-asylum-center-couvet/",
-          "excerpt": "New structure planned in rue du 1er Mars 11, in Couvet It will replace the current site of Chemin des Prises 8 Project developed with the Municipality",
-          "date": "2026-10-10T19:55:31.284Z"
-        },
-        {
-          "title": "Aldi will close the downtown store in Neuchâtel",
-          "url": "/en/neuchatel-articles/aldi-closes-neuchatel-city-store/",
-          "date": "2026-10-08T11:37:06.437Z"
-        },
-        {
-          "title": "Neuchâtel: referendum on cantonal minimum wages and collective labour agreements",
-          "url": "/en/neuchatel-articles/neuchatel-minimum-wage-referendum/",
-          "date": "2026-10-08T11:16:38.230Z"
+          "title": "Weekend events in the canton of Neuchâtel: what to do Saturday & Sunday",
+          "url": "/en/neuchatel-articles/weekend-events-neuchatel/",
+          "excerpt": "Events in the canton of Neuchâtel every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:28:33.708Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "All events in the canton of Neuchâtel",
@@ -329,7 +283,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T01:04:37.805Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "NE",
@@ -440,40 +394,18 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "CPCN: der Unterschied zwischen Deckungssatz und Deckungsgrad",
-          "url": "/de/neuenburg-artikel/cpcn-deckungsgrad-unterschied/",
-          "excerpt": "Der Deckungssatz schließt die RFV aus der Berechnung aus.",
-          "date": "2026-10-17T00:59:33.660Z"
-        },
-        {
-          "title": "CPCN verzeichnet 2025 ein Plus von +5,6%: Deckungsgrad 84,8%",
-          "url": "/de/neuenburg-artikel/cpcn-rendite-2025-deckung/",
-          "excerpt": "+5,6% bei der Performance der CPCN im Jahr 2025 3% Verzinsung der Altersguthaben 84,8% Deckungsgrad am 31.12.2025 RFV in Höhe von CHF 979 Millionen, bei 92%",
-          "date": "2026-10-17T00:07:41.161Z"
-        },
-        {
-          "title": "Neue Kindertagesstätte in Couvet: Das Projekt beginnt",
-          "url": "/de/neuenburg-artikel/neues-asylzentrum-couvet/",
-          "excerpt": "Neue Struktur in der Rue du 1er Mars 11 in Couvet geplant Ersetzt den aktuellen Standort von Chemin des Prises 8 Mit der Gemeinde Val-de-Travers ausgearbeitetes",
-          "date": "2026-10-10T19:55:31.284Z"
-        },
-        {
-          "title": "Aldi wird die Filiale im Zentrum von Neuenburg schließen",
-          "url": "/de/neuenburg-artikel/aldi-schliesst-filiale-neuenburg/",
-          "date": "2026-10-08T11:37:06.437Z"
-        },
-        {
-          "title": "Neuenburg: Referendum zu kantonalen Mindestlöhnen und GAV",
-          "url": "/de/neuenburg-artikel/neuenburg-mindestlohn-referendum/",
-          "date": "2026-10-08T11:16:38.230Z"
+          "title": "Veranstaltungen am Wochenende im Kanton Neuenburg: was tun Sa & So",
+          "url": "/de/neuenburg-artikel/wochenend-veranstaltungen-neuenburg/",
+          "excerpt": "Veranstaltungen im Kanton Neuenburg an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:28:33.708Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Neuenburg",
@@ -484,7 +416,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T01:04:37.805Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "NE",
@@ -595,42 +527,18 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "CPCN : la différence entre le taux et le degré de couverture",
-          "url": "/fr/articles-neuchatel/cpcn-taux-couverture-distinction/",
-          "excerpt": "Le taux exclut la RFV du calcul.",
-          "date": "2026-10-17T00:59:33.660Z"
-        },
-        {
-          "title": "La CPCN enregistre +5,6% en 2025 : taux de couverture de 84,8%",
-          "url": "/fr/articles-neuchatel/cpcn-performance-2025-couverture/",
-          "excerpt": "+5,6% pour la performance de la CPCN en 2025 3% de rémunération sur les avoirs de vieillesse 84,8% de couverture au 31 décembre 2025 RFV de CHF 979 millions",
-          "date": "2026-10-17T00:07:41.161Z"
-        },
-        {
-          "title": "Nouveau centre d'accueil asile à Couvet : le projet commence",
-          "url": "/fr/articles-neuchatel/nouveau-centre-asile-couvet/",
-          "excerpt": "Nouvelle structure prévue rue du 1er Mars 11, à Couvet Remplacera le site actuel du Chemin des Prises 8 Projet élaboré avec la commune de Val-de-Travers Séance",
-          "date": "2026-10-10T19:55:31.284Z"
-        },
-        {
-          "title": "Aldi fermera le magasin du centre-ville de Neuchâtel",
-          "url": "/fr/articles-neuchatel/aldi-ferme-magasin-centre-neuchatel/",
-          "excerpt": "Aldi fermera fin novembre 2026.",
-          "date": "2026-10-08T11:37:06.437Z"
-        },
-        {
-          "title": "Neuchâtel : référendum sur les salaires minimaux cantonaux et les CCT",
-          "url": "/fr/articles-neuchatel/neuchatel-referendum-salaires-minimaux/",
-          "excerpt": "Plus de 100.000 signatures contre la réforme du Parlement",
-          "date": "2026-10-08T11:16:38.230Z"
+          "title": "Événements du week-end dans le canton de Neuchâtel : que faire samedi & dimanche",
+          "url": "/fr/articles-neuchatel/evenements-week-end-neuchatel/",
+          "excerpt": "Événements dans le canton de Neuchâtel chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:28:33.708Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tous les événements dans le canton de Neuchâtel",
@@ -641,7 +549,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T01:04:37.805Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }

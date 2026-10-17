@@ -110704,6 +110704,124 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-como-orabasta-famiglie': {
+    title: 'Como, centinaia alla manifestazione #OraBasta | Frontaliere Ticino',
+    description: 'Centinaia hanno partecipato alla manifestazione #OraBasta. Genitori, nonni e cittadini hanno attraversato il lungolago. La partenza è stata da piazzale Somaini',
+    keywords: 'frontalieri, ticino, svizzera, italia, como, centinaia, alla, manifestazione',
+    ogTitle: 'Como, centinaia alla manifestazione #OraBasta',
+    ogDescription: 'Centinaia hanno partecipato alla manifestazione #OraBasta.',
+    canonicalPath: '/articoli-frontaliere/como-orabasta-famiglie/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Como, centinaia alla manifestazione #OraBasta",
+      "description": "Centinaia hanno partecipato alla manifestazione #OraBasta. Genitori, nonni e cittadini hanno attraversato il lungolago. La partenza è stata da piazzale Somaini",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-como-orabasta-famiglie.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Manifestazione #OraBasta sul lungolago di Como con genitori, nonni e cittadini"
+      },
+      "datePublished": "2026-10-17T10:17:58+00:00",
+      "dateModified": "2026-10-17T10:17:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/como-orabasta-famiglie/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-credito-imposta-famiglia-2026': {
+    title: 'Credito d\'imposta 2026 per frontalieri con figli',
+    description: 'Guida al credito d\'imposta 2026 per frontalieri con figli: calcolo quadro CE, aliquote IRPEF 23%-43% e differenze tra vecchi e nuovi frontalieri.',
+    keywords: 'frontalieri, ticino, svizzera, italia, credito, imposta, figli, calcolo',
+    ogTitle: 'Credito d\'imposta 2026 per frontalieri con figli',
+    ogDescription: 'Scopri come calcolare il credito d\'imposta nel 2026 per i frontalieri con figli. Analisi delle nuove aliquote IRPEF e guida alla compilazione del quadro CE.',
+    canonicalPath: '/articoli-frontaliere/credito-imposta-famiglia-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Credito d'imposta 2026 per frontalieri con figli",
+      "description": "Guida al credito d'imposta 2026 per frontalieri con figli: calcolo quadro CE, aliquote IRPEF 23%-43% e differenze tra vecchi e nuovi frontalieri.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-credito-imposta-famiglia-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica di Lugano e del lago"
+      },
+      "datePublished": "2026-10-17T10:49:11+00:00",
+      "dateModified": "2026-10-17T10:49:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/credito-imposta-famiglia-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-arcisate-bomba-seconda-guerra-mondiale': {
+    title: 'Arcisate: bomba della Seconda Guerra Mondiale ritrovata',
+    description: 'Ordigno bellico trovato ad Arcisate Ritrovamento nella mattinata di sabato 17 ottobre Si tratterebbe di una bomba da mortaio Area delimitata e messa',
+    keywords: 'frontalieri, ticino, svizzera, italia, arcisate, bomba, seconda, guerra',
+    ogTitle: 'Arcisate: bomba seconda guerra mondiale trovata',
+    ogDescription: 'Ordigno bellico trovato ad Arcisate Ritrovamento nella mattinata di sabato 17 ottobre Si tratterebbe di una bomba da mortaio Area delimitata e messa',
+    canonicalPath: '/articoli-frontaliere/arcisate-bomba-seconda-guerra-mondiale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Arcisate: bomba della Seconda Guerra Mondiale ritrovata",
+      "description": "Ordigno bellico trovato ad Arcisate Ritrovamento nella mattinata di sabato 17 ottobre Si tratterebbe di una bomba da mortaio Area delimitata e messa",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-arcisate-bomba-seconda-guerra-mondiale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Area industriale di Arcisate con nastro di sicurezza e forze dell'ordine dopo il ritrovamento di un ordigno bellico della Seconda guerra mondiale."
+      },
+      "datePublished": "2026-10-17T13:59:08+00:00",
+      "dateModified": "2026-10-17T13:59:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/arcisate-bomba-seconda-guerra-mondiale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

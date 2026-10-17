@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T01:04:37.805Z",
-  "contentHash": "1f07968ec3bf0868081131ec8f90724595b5e85dd41a360b36af972f22b312ca",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "4bd3cfcf3cf685a95ec44e8382bb6d11c71a4866315ee3b352e75d113b6c2158",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Eventi del weekend nel Canton Neuchâtel: cosa fare sabato e domenica",
+          "url": "/articoli-neuchatel/eventi-weekend-neuchatel/",
+          "excerpt": "Eventi nel Canton Neuchâtel ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:28:33.708Z"
+        },
+        {
           "title": "CPCN: la differenza tra tasso e grado di copertura",
           "url": "/articoli-neuchatel/cpcn-tasso-grado-copertura/",
           "excerpt": "Il tasso esclude la RFV dal calcolo.",
@@ -94,12 +100,6 @@
           "url": "/articoli-neuchatel/aldi-chiude-centro-neuchatel/",
           "excerpt": "Aldi chiuderà a fine novembre 2026.",
           "date": "2026-10-08T11:37:06.437Z"
-        },
-        {
-          "title": "Neuchâtel: referendum per salari minimi cantonali e CCT",
-          "url": "/articoli-neuchatel/neuchatel-referendum-salari-minimi/",
-          "excerpt": "Oltre 100.000 firme contro la riforma del Parlamento",
-          "date": "2026-10-08T11:16:38.230Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T01:04:37.805Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "NE",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Weekend events in the canton of Neuchâtel: what to do Saturday & Sunday",
+          "url": "/en/neuchatel-articles/weekend-events-neuchatel/",
+          "excerpt": "Events in the canton of Neuchâtel every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:28:33.708Z"
+        },
+        {
           "title": "CPCN: the difference between coverage rate and coverage level",
           "url": "/en/neuchatel-articles/cpcn-coverage-rate-distinction/",
           "excerpt": "The rate excludes the RFV from the calculation.",
@@ -192,11 +198,6 @@
           "title": "Aldi will close the downtown store in Neuchâtel",
           "url": "/en/neuchatel-articles/aldi-closes-neuchatel-city-store/",
           "date": "2026-10-08T11:37:06.437Z"
-        },
-        {
-          "title": "Neuchâtel: referendum on cantonal minimum wages and collective labour agreements",
-          "url": "/en/neuchatel-articles/neuchatel-minimum-wage-referendum/",
-          "date": "2026-10-08T11:16:38.230Z"
         }
       ],
       "links": [
@@ -209,7 +210,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T01:04:37.805Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "NE",
@@ -268,6 +269,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Veranstaltungen am Wochenende im Kanton Neuenburg: was tun Sa & So",
+          "url": "/de/neuenburg-artikel/wochenend-veranstaltungen-neuenburg/",
+          "excerpt": "Veranstaltungen im Kanton Neuenburg an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:28:33.708Z"
+        },
+        {
           "title": "CPCN: der Unterschied zwischen Deckungssatz und Deckungsgrad",
           "url": "/de/neuenburg-artikel/cpcn-deckungsgrad-unterschied/",
           "excerpt": "Der Deckungssatz schließt die RFV aus der Berechnung aus.",
@@ -289,11 +296,6 @@
           "title": "Aldi wird die Filiale im Zentrum von Neuenburg schließen",
           "url": "/de/neuenburg-artikel/aldi-schliesst-filiale-neuenburg/",
           "date": "2026-10-08T11:37:06.437Z"
-        },
-        {
-          "title": "Neuenburg: Referendum zu kantonalen Mindestlöhnen und GAV",
-          "url": "/de/neuenburg-artikel/neuenburg-mindestlohn-referendum/",
-          "date": "2026-10-08T11:16:38.230Z"
         }
       ],
       "links": [
@@ -306,7 +308,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T01:04:37.805Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "NE",
@@ -365,6 +367,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Événements du week-end dans le canton de Neuchâtel : que faire samedi & dimanche",
+          "url": "/fr/articles-neuchatel/evenements-week-end-neuchatel/",
+          "excerpt": "Événements dans le canton de Neuchâtel chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:28:33.708Z"
+        },
+        {
           "title": "CPCN : la différence entre le taux et le degré de couverture",
           "url": "/fr/articles-neuchatel/cpcn-taux-couverture-distinction/",
           "excerpt": "Le taux exclut la RFV du calcul.",
@@ -387,12 +395,6 @@
           "url": "/fr/articles-neuchatel/aldi-ferme-magasin-centre-neuchatel/",
           "excerpt": "Aldi fermera fin novembre 2026.",
           "date": "2026-10-08T11:37:06.437Z"
-        },
-        {
-          "title": "Neuchâtel : référendum sur les salaires minimaux cantonaux et les CCT",
-          "url": "/fr/articles-neuchatel/neuchatel-referendum-salaires-minimaux/",
-          "excerpt": "Plus de 100.000 signatures contre la réforme du Parlement",
-          "date": "2026-10-08T11:16:38.230Z"
         }
       ],
       "links": [
@@ -405,7 +407,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T01:04:37.805Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }

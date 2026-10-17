@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T02:13:23.606Z",
-  "contentHash": "341507ce2afc0310c067e50f906584ab21e6ba364ec4739edbce1f673f2a911e",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "db3f6c5b3e9a7f5da1ab4416cfdbf7456d958be9ac9612446e9336884eae9005",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Eventi del weekend nel Canton Vaud: cosa fare sabato e domenica",
+          "url": "/articoli-vaud/eventi-weekend-vaud/",
+          "excerpt": "Eventi nel Canton Vaud ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:32:57.082Z"
+        },
+        {
           "title": "Truffe falsi poliziotti e banchieri nel Vaud: 100 interpellati",
           "url": "/articoli-vaud/tuffe-falsi-poliziotti-vaud/",
           "excerpt": "Oltre cento persone interpellate nel Vaud nel 2026 Sedici interpellazioni dall'inizio di ottobre Quasi 2.300 casi e 900 truffe riuscite Danno cumulato: circa",
@@ -94,12 +100,6 @@
           "url": "/articoli-vaud/pensione-multipla-francia-svizzera-2026/",
           "excerpt": "Il netto del relevé non riflette sempre la pensione.",
           "date": "2026-10-12T02:50:47.675Z"
-        },
-        {
-          "title": "Funzione pubblica Vaud in piazza il 5 novembre 2026",
-          "url": "/articoli-vaud/funzione-pubblica-vaud-sciopero-2026/",
-          "excerpt": "Manifestazione sindacale prevista il 5 novembre 2026 Tagli contestati: 165 milioni di franchi Quasi 100 militanti hanno votato a favore Nel 2025 ci sono stati",
-          "date": "2026-10-11T02:00:39.706Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T02:13:23.606Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "VD",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Weekend events in the canton of Vaud: what to do Saturday & Sunday",
+          "url": "/en/vaud-articles/weekend-events-vaud/",
+          "excerpt": "Events in the canton of Vaud every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:32:57.082Z"
+        },
+        {
           "title": "Scams involving fake police officers and bankers in Vaud: 100 questioned",
           "url": "/en/vaud-articles/fake-police-bankers-scams-vaud/",
           "excerpt": "More than one hundred people contacted in Vaud in 2026 Sixteen contacts since the beginning of October Almost 2.300 cases and 900 successful scams Cumulative",
@@ -193,12 +199,6 @@
           "url": "/en/vaud-articles/multi-country-pension-france-switzerland-2026/",
           "excerpt": "The net amount on the statement does not always reflect the pension.",
           "date": "2026-10-12T02:50:47.675Z"
-        },
-        {
-          "title": "Vaud public service takes to the streets on November 5, 2026",
-          "url": "/en/vaud-articles/public-service-vaud-protest-2026/",
-          "excerpt": "Union demonstration scheduled for November 5, 2026 Disputed cuts: 165 million francs Almost 100 activists voted in favor In 2025, there were 13 strike days",
-          "date": "2026-10-11T02:00:39.706Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T02:13:23.606Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "VD",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Veranstaltungen am Wochenende in der Waadt: was tun Sa & So",
+          "url": "/de/waadt-artikel/wochenend-veranstaltungen-waadt/",
+          "excerpt": "Veranstaltungen in der Waadt an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:32:57.082Z"
+        },
+        {
           "title": "Betrug durch falsche Polizisten/Banker: 100 kontaktiert",
           "url": "/de/waadt-artikel/betrug-falsche-polizisten-waadt/",
           "excerpt": "Im Kanton Waadt 2026 über hundert Personen kontaktiert Sechzehn Kontaktaufnahmen seit Anfang Oktober Fast 2.300 Fälle und 900 erfolgreiche Betrugsfälle",
@@ -292,12 +298,6 @@
           "url": "/de/waadt-artikel/mehrsprachige-rente-frankreich-schweiz-2026/",
           "excerpt": "Der Nettobetrag der Abrechnung entspricht nicht immer der Rente.",
           "date": "2026-10-12T02:50:47.675Z"
-        },
-        {
-          "title": "Öffentlicher Dienst im Kanton Waadt am 5. November 2026 auf der Straße",
-          "url": "/de/waadt-artikel/oeffentlicher-dienst-waadt-streik-2026/",
-          "excerpt": "Für den 5. November 2026 geplante Gewerkschaftsdemonstration Umstrittene Kürzungen: 165 Millionen Franken Fast 100 Aktivisten stimmten dafür Im Jahr 2025 gab es",
-          "date": "2026-10-11T02:00:39.706Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T02:13:23.606Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "VD",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Événements du week-end dans le canton de Vaud : que faire samedi & dimanche",
+          "url": "/fr/articles-vaud/evenements-week-end-vaud/",
+          "excerpt": "Événements dans le canton de Vaud chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:32:57.082Z"
+        },
+        {
           "title": "Arnaques: faux policiers et banquiers, 100 interpellés",
           "url": "/fr/articles-vaud/arnaques-faux-policiers-vaud/",
           "excerpt": "Plus de cent personnes interpellées dans le Vaud en 2026 Seize interpellations depuis le début d'octobre Près de 2.300 cas et 900 arnaques réussies Préjudice",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-vaud/retraite-multi-pays-france-suisse-2026/",
           "excerpt": "Le net du relevé ne reflète pas toujours la pension.",
           "date": "2026-10-12T02:50:47.675Z"
-        },
-        {
-          "title": "La fonction publique vaudoise dans la rue le 5 novembre 2026",
-          "url": "/fr/articles-vaud/fonction-publique-vaud-greve-2026/",
-          "excerpt": "Manifestation syndicale prévue le 5 novembre 2026 Coupes contestées : 165 millions de francs Près de 100 militants ont voté en faveur En 2025, il y a eu 13",
-          "date": "2026-10-11T02:00:39.706Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T02:13:23.606Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }

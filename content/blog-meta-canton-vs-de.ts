@@ -23,10 +23,13 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.crollo-pilone-vetroz.imageAlt': 'Eingestürzter Hochspannungsmast im Industriegebiet Botza in Vétroz.',
     'blog.article.fully-strada-ciclabile.title': 'Fully: Mehr als 5,5 km Straße werden zu Fahrradstraßen',
     'blog.article.fully-strada-ciclabile.excerpt': 'Die Gemeinde Fully baut die sanfte Mobilität aus: Die Straße nördlich des Kanals wird zur Fahrradstraße, und Radfahrende haben an 12 Kreuzungen Vorrang.',
-    'blog.article.fully-strada-ciclabile.imageAlt': 'Velofahrer auf der Fahrradstrasse nördlich des Kanals in Fully',
+    'blog.article.fully-strada-ciclabile.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.valais-salario-minimo-2026.title': 'Mindestlohn im Wallis: Abstimmung am 29. November über CHF 22',
     'blog.article.valais-salario-minimo-2026.excerpt': '15\'000 Vollzeitbeschäftigte leben nicht vom Lohn Die Abstimmung über den Mindestlohn ist auf den 29.',
     'blog.article.valais-salario-minimo-2026.imageAlt': 'Landschaft im Kanton Wallis mit Gebäuden und Straßen',
+    'blog.article.eventi-weekend-vallese.title': 'Veranstaltungen am Wochenende im Wallis: was tun Sa & So',
+    'blog.article.eventi-weekend-vallese.excerpt': 'Veranstaltungen im Wallis an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
+    'blog.article.eventi-weekend-vallese.imageAlt': 'Veranstaltungen am Wochenende im Wallis',
 };
 
 export default blogMetaCantonVsDe;

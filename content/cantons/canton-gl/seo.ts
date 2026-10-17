@@ -158,6 +158,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-eventi-weekend-glarona': {
+    title: 'Eventi del weekend nel Canton Glarona: cosa fare',
+    description: 'Agenda degli eventi del weekend nel Canton Glarona: concerti, mostre, feste e mercati, comune per comune, aggiornata ogni giorno.',
+    keywords: 'eventi nel Canton Glarona, eventi weekend nel Canton Glarona, cosa fare nel Canton Glarona, agenda eventi nel Canton Glarona',
+    ogTitle: 'Eventi del weekend nel Canton Glarona',
+    ogDescription: 'Concerti, mostre, feste e mercati questo weekend nel Canton Glarona, comune per comune. Aggiornato ogni giorno.',
+    canonicalPath: '/articoli-glarona/eventi-weekend-glarona/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Eventi del weekend nel Canton Glarona: cosa fare sabato e domenica",
+      "description": "Agenda degli eventi del weekend nel Canton Glarona: concerti, mostre, feste e mercati, comune per comune, aggiornata ogni giorno.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Eventi del weekend nel Canton Glarona"
+      },
+      "datePublished": "2026-10-17T11:27:55+00:00",
+      "dateModified": "2026-10-17T11:27:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-glarona/eventi-weekend-glarona/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

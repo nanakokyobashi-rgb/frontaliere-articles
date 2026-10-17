@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T01:36:39.137Z",
-  "contentHash": "26587bd423f776c9a5db5d36af30636220cf977fff0359a0024ccf19bcb64064",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "d9411150b184c61dccaf3b2a0d1556b06afbb6d67e6e858c1237da6366e60ec0",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -98,39 +98,15 @@
           "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Piano direttore 26/1: Zugo avvia la partecipazione",
-          "url": "/articoli-zugo/zugo-piano-direttore-26-1/",
-          "excerpt": "La modifica 26/1 prepara le «zone bianche», coordina il Piano direttore con la revisione del PBG e attua RPG 2.",
-          "date": "2026-10-17T01:28:47.924Z"
-        },
-        {
-          "title": "Revisione parziale del PBG a Zugo: consultazione dal 17 settembre 2026",
-          "url": "/articoli-zugo/zugo-revisione-legge-edilizia-2026/",
-          "excerpt": "Il Cantone di Zugo avvia la consultazione sulla revisione del PBG per creare più alloggi a prezzi accessibili e semplificare le procedure edilizie.",
-          "date": "2026-10-17T01:12:22.654Z"
-        },
-        {
-          "title": "Zuger Pensionskasse: online il rapporto 2025",
-          "url": "/articoli-zugo/zuger-rapporto-gestione-2025/",
-          "excerpt": "Il Geschäftsbericht 2025 della Zuger Pensionskasse offre una panoramica sull'esercizio concluso e rinvia alla Jahresrechnung 2025 per ulteriori informazioni.",
-          "date": "2026-10-17T00:53:57.792Z"
-        },
-        {
-          "title": "Scuola Sternmatt 1: l'IA segna il 2026/27",
-          "url": "/articoli-zugo/scuola-sternmatt-ia-2026/",
-          "excerpt": "La scuola Sternmatt 1 affronta il 2026/27 mettendo al centro un uso responsabile dell'intelligenza artificiale nelle aule.",
-          "date": "2026-10-08T18:01:57.824Z"
-        },
-        {
-          "title": "Baar: rinnovo del Gemeinderat per il 2027–2030",
-          "url": "/articoli-zugo/baar-rinnovo-comunale-2027/",
-          "excerpt": "Baarer Zytig indica i risultati del 27 settembre e il rinnovo del Gemeinderat del 4 ottobre 2026: sette membri per il mandato 2027–2030.",
-          "date": "2026-10-08T17:50:07.603Z"
+          "title": "Eventi del weekend nel Canton Zugo: cosa fare sabato e domenica",
+          "url": "/articoli-zugo/eventi-weekend-zugo/",
+          "excerpt": "Eventi nel Canton Zugo ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:34:12.899Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Zugo",
@@ -141,7 +117,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T01:36:39.137Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "ZG",
@@ -227,39 +203,15 @@
           "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Master plan January 26: Zug launches participation",
-          "url": "/en/zug-articles/zug-structure-plan-26-1/",
-          "excerpt": "The 1/26 amendment prepares the “white zones,” coordinates the master plan with the revision of the PBG, and implements RPG 2.",
-          "date": "2026-10-17T01:28:47.924Z"
-        },
-        {
-          "title": "Partial revision of the PBG in Zug: consultation from September 17, 2026",
-          "url": "/en/zug-articles/zug-building-law-revision-2026/",
-          "excerpt": "The Canton of Zug launches the consultation on the revision of the PBG to create more affordable housing and simplify building procedures.",
-          "date": "2026-10-17T01:12:22.654Z"
-        },
-        {
-          "title": "Zuger Pensionskasse: 2025 report now online",
-          "url": "/en/zug-articles/zuger-annual-report-2025/",
-          "excerpt": "The 2025 annual report of the Zuger Pensionskasse provides an overview of the completed financial year and refers to the 2025 annual financial statements for further information.",
-          "date": "2026-10-17T00:53:57.792Z"
-        },
-        {
-          "title": "Sternmatt School 1: AI marks 2026/27",
-          "url": "/en/zug-articles/sternmatt-school-ai-2026/",
-          "excerpt": "The Sternmatt 1 school is entering 2026/27 with the responsible use of artificial intelligence in classrooms at the forefront.",
-          "date": "2026-10-08T18:01:57.824Z"
-        },
-        {
-          "title": "Baar: renewal of the Municipal Council for 2027–2030",
-          "url": "/en/zug-articles/baar-municipal-council-renewal/",
-          "excerpt": "Baarer Zytig reports the results of September 27 and the renewal of the Gemeinderat on October 4, 2026: seven members for the 2027–2030 term.",
-          "date": "2026-10-08T17:50:07.603Z"
+          "title": "Weekend events in the canton of Zug: what to do Saturday & Sunday",
+          "url": "/en/zug-articles/weekend-events-zug/",
+          "excerpt": "Events in the canton of Zug every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:34:12.899Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "All events in the canton of Zug",
@@ -270,7 +222,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T01:36:39.137Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "ZG",
@@ -356,39 +308,15 @@
           "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Richtplan 26/1: Zug eröffnet die Mitwirkung",
-          "url": "/de/zug-artikel/zug-richtplan-26-1/",
-          "excerpt": "Die Änderung 26/1 bereitet die «weissen Zonen» vor, stimmt den Richtplan auf die Revision des PBG ab und setzt RPG 2 um.",
-          "date": "2026-10-17T01:28:47.924Z"
-        },
-        {
-          "title": "Teilrevision des PBG in Zug: Vernehmlassung ab 17. September 2026",
-          "url": "/de/zug-artikel/zug-baugesetz-revision-2026/",
-          "excerpt": "Der Kanton Zug eröffnet die Vernehmlassung zur Revision des PBG, um mehr preisgünstigen Wohnraum zu schaffen und die Bauverfahren zu vereinfachen.",
-          "date": "2026-10-17T01:12:22.654Z"
-        },
-        {
-          "title": "Zuger Pensionskasse: Der Bericht 2025 ist online",
-          "url": "/de/zug-artikel/zuger-geschaeftsbericht-2025/",
-          "excerpt": "Der Geschäftsbericht 2025 der Zuger Pensionskasse bietet einen Überblick über das abgeschlossene Geschäftsjahr und verweist für weitere Informationen auf die Jahresrechnung 2025.",
-          "date": "2026-10-17T00:53:57.792Z"
-        },
-        {
-          "title": "Schule Sternmatt 1: KI prägt das Schuljahr 2026/27",
-          "url": "/de/zug-artikel/sternmatt-schule-ki-2026/",
-          "excerpt": "Die Schule Sternmatt 1 nimmt das Schuljahr 2026/27 in Angriff und stellt dabei einen verantwortungsvollen Einsatz künstlicher Intelligenz in den Klassenzimmern in den Mittelpunkt.",
-          "date": "2026-10-08T18:01:57.824Z"
-        },
-        {
-          "title": "Baar: Erneuerung des Gemeinderats für 2027–2030",
-          "url": "/de/zug-artikel/baar-erneuerung-gemeinderat/",
-          "excerpt": "Baarer Zytig nennt die Ergebnisse vom 27.",
-          "date": "2026-10-08T17:50:07.603Z"
+          "title": "Veranstaltungen am Wochenende im Kanton Zug: was tun Sa & So",
+          "url": "/de/zug-artikel/wochenend-veranstaltungen-zug/",
+          "excerpt": "Veranstaltungen im Kanton Zug an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:34:12.899Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Zug",
@@ -399,7 +327,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T01:36:39.137Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "ZG",
@@ -485,39 +413,15 @@
           "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Plan directeur 26/1 : Zoug lance la participation",
-          "url": "/fr/articles-zoug/plan-directeur-zoug-26-1/",
-          "excerpt": "La modification 26/1 prépare les « zones blanches », coordonne le Plan directeur avec la révision du PBG et met en œuvre RPG 2.",
-          "date": "2026-10-17T01:28:47.924Z"
-        },
-        {
-          "title": "Révision partielle du PBG à Zoug : consultation à partir du 17 septembre 2026",
-          "url": "/fr/articles-zoug/zoug-revision-loi-construction-2026/",
-          "excerpt": "Le canton de Zoug lance la consultation sur la révision du PBG afin de créer davantage de logements à prix abordables et de simplifier les procédures de construction.",
-          "date": "2026-10-17T01:12:22.654Z"
-        },
-        {
-          "title": "Zuger Pensionskasse : le rapport 2025 est en ligne",
-          "url": "/fr/articles-zoug/zuger-rapport-gestion-2025/",
-          "excerpt": "Le Geschäftsbericht 2025 de la Zuger Pensionskasse offre une vue d’ensemble de l’exercice écoulé et renvoie à la Jahresrechnung 2025 pour de plus amples informations.",
-          "date": "2026-10-17T00:53:57.792Z"
-        },
-        {
-          "title": "École Sternmatt 1 : l’IA marque l’année 2026/27",
-          "url": "/fr/articles-zoug/ecole-sternmatt-ia-2026/",
-          "excerpt": "L’école Sternmatt 1 aborde l’année 2026/27 en mettant au centre un usage responsable de l’intelligence artificielle dans les salles de classe.",
-          "date": "2026-10-08T18:01:57.824Z"
-        },
-        {
-          "title": "Baar : renouvellement du Conseil municipal pour 2027–2030",
-          "url": "/fr/articles-zoug/baar-renouvellement-conseil/",
-          "excerpt": "Baarer Zytig indique les résultats du 27 septembre et le renouvellement du Conseil municipal du 4 octobre 2026 : sept membres pour le mandat 2027–2030.",
-          "date": "2026-10-08T17:50:07.603Z"
+          "title": "Événements du week-end dans le canton de Zoug : que faire samedi & dimanche",
+          "url": "/fr/articles-zoug/evenements-week-end-zoug/",
+          "excerpt": "Événements dans le canton de Zoug chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:34:12.899Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tous les événements dans le canton de Zoug",
@@ -528,7 +432,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T01:36:39.137Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }
