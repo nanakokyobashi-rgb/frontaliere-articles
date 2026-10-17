@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T00:44:41.594Z",
-  "contentHash": "1c0fc37017ec1d294860eaa7be74c5b542a590aca55d7de4ec69bbdada3c2c84",
+  "updatedAt": "2026-10-17T01:06:44.851Z",
+  "contentHash": "b66790b6b737f46b926d3f488384c7707b1e3d3760c3a2ba9e561e86e3e64e35",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -101,6 +101,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fully: oltre 5,5 km di strada diventano ciclabili",
+          "url": "/articoli-vallese/fully-strada-ciclabile/",
+          "excerpt": "Il Comune di Fully amplia la mobilità dolce: la strada a nord del canale diventa rue cyclable e i ciclisti hanno la priorità a 12 intersezioni.",
+          "date": "2026-10-17T01:00:16.066Z"
+        },
+        {
           "title": "Crolla un pilone dell'alta tensione a Vétroz",
           "url": "/articoli-vallese/crollo-pilone-vetroz/",
           "excerpt": "Il pilone è crollato verso le 4 nella zona industriale del Botza.",
@@ -123,12 +129,6 @@
           "url": "/articoli-vallese/a9-chiusure-notturne-sion-sierre/",
           "excerpt": "Tre settimane di chiusure: dal 12 al 30 ottobre Lavori fermi d'inverno, ripresa a marzo 2027 Chiusure notturne dalle 20 alle 5 Tratta → A9 tra Sion e Sierre",
           "date": "2026-10-08T15:24:54.934Z"
-        },
-        {
-          "title": "Due casi di botulismo in Vallese: terrina ritirata",
-          "url": "/articoli-vallese/allerta-botulismo-terrina-vallese/",
-          "excerpt": "Due casi di botulismo segnalati in Vallese",
-          "date": "2026-10-07T16:03:38.899Z"
         }
       ],
       "links": [
@@ -141,7 +141,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:44:41.594Z"
+      "updatedAt": "2026-10-17T01:06:44.851Z"
     },
     "en": {
       "canton": "VS",
@@ -230,6 +230,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fully: over 5,5 km of road become cycle paths",
+          "url": "/en/valais-articles/fully-cycle-street/",
+          "excerpt": "The Municipality of Fully expands active mobility: the road north of the canal becomes a bicycle street, and cyclists have priority at 12 intersections.",
+          "date": "2026-10-17T01:00:16.066Z"
+        },
+        {
           "title": "A high-voltage pylon collapses in Vétroz",
           "url": "/en/valais-articles/fallen-pylon-vetroz/",
           "excerpt": "The pylon collapsed around 4 in the Botza industrial area.",
@@ -252,11 +258,6 @@
           "url": "/en/valais-articles/a9-night-closures-sion-sierre/",
           "excerpt": "Three weeks of closures: from October 12 to 30 Work halted over the winter, resumption in March 2027 Nighttime closures from 20 to 5 Route → A9 between Sion",
           "date": "2026-10-08T15:24:54.934Z"
-        },
-        {
-          "title": "Two cases of botulism in Valais: terrine recalled",
-          "url": "/en/valais-articles/valais-botulism-terrine-alert/",
-          "date": "2026-10-07T16:03:38.899Z"
         }
       ],
       "links": [
@@ -269,7 +270,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:44:41.594Z"
+      "updatedAt": "2026-10-17T01:06:44.851Z"
     },
     "de": {
       "canton": "VS",
@@ -358,6 +359,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fully: Mehr als 5,5 km Straße werden zu Fahrradstraßen",
+          "url": "/de/wallis-artikel/fully-fahrradstrasse/",
+          "excerpt": "Die Gemeinde Fully baut die sanfte Mobilität aus: Die Straße nördlich des Kanals wird zur Fahrradstraße, und Radfahrende haben an 12 Kreuzungen Vorrang.",
+          "date": "2026-10-17T01:00:16.066Z"
+        },
+        {
           "title": "Ein Hochspannungsmast in Vétroz stürzt ein",
           "url": "/de/wallis-artikel/hochspannungsmast-vetroz/",
           "excerpt": "Der Mast ist gegen 4 Uhr im Industriegebiet von Botza eingestürzt.",
@@ -380,11 +387,6 @@
           "url": "/de/wallis-artikel/a9-nachtsperrungen-sitten-sierre/",
           "excerpt": "Drei Wochen Sperrungen: vom 12.",
           "date": "2026-10-08T15:24:54.934Z"
-        },
-        {
-          "title": "Zwei Fälle von Botulismus im Wallis: Terrine zurückgezogen",
-          "url": "/de/wallis-artikel/wallis-botulismus-terrine-warnung/",
-          "date": "2026-10-07T16:03:38.899Z"
         }
       ],
       "links": [
@@ -397,7 +399,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T00:44:41.594Z"
+      "updatedAt": "2026-10-17T01:06:44.851Z"
     },
     "fr": {
       "canton": "VS",
@@ -486,6 +488,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fully : plus de 5,5 km de route deviennent cyclables",
+          "url": "/fr/articles-valais/fully-rue-cyclable/",
+          "excerpt": "La commune de Fully étend la mobilité douce : la route au nord du canal devient une rue cyclable et les cyclistes ont la priorité à 12 intersections.",
+          "date": "2026-10-17T01:00:16.066Z"
+        },
+        {
           "title": "Un pylône de haute tension s'effondre à Vétroz",
           "url": "/fr/articles-valais/pylone-haute-tension-vetroz/",
           "excerpt": "Le pylône s'est effondré vers 4 heures dans la zone industrielle de Botza.",
@@ -508,12 +516,6 @@
           "url": "/fr/articles-valais/a9-fermetures-nocturnes-sion-sierre/",
           "excerpt": "Trois semaines de fermetures : du 12 au 30 octobre Travaux interrompus en hiver, reprise en mars 2027 Fermetures nocturnes de 20 h à 5 h Tronçon → A9 entre Sion",
           "date": "2026-10-08T15:24:54.934Z"
-        },
-        {
-          "title": "Deux cas de botulisme en Valais : terrine retirée",
-          "url": "/fr/articles-valais/alerte-botulisme-terrine-valais/",
-          "excerpt": "Deux cas de botulisme signalés dans le Valais",
-          "date": "2026-10-07T16:03:38.899Z"
         }
       ],
       "links": [
@@ -526,7 +528,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T00:44:41.594Z"
+      "updatedAt": "2026-10-17T01:06:44.851Z"
     }
   }
 }

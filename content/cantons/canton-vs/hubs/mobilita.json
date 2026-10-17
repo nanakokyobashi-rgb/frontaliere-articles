@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "c0b3743f281a531d226b9b6bc8be27dfaa5dd85d78cfc691a6e905d230773d9b",
+  "updatedAt": "2026-10-17T01:06:44.851Z",
+  "contentHash": "a0da7cd4eef43bda387ae1e047973a18c81432bf50f32567b808dc8c5cfeb33b",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-16T11:58:12.009Z",
+      "updatedAt": "2026-10-16T17:01:51.551Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T10:09:31.602Z",
+      "updatedAt": "2026-10-16T15:35:32.859Z",
       "keyFacts": 0
     }
   ],
@@ -142,7 +142,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-16T11:58:12.009Z"
+          "updatedAt": "2026-10-16T17:01:51.551Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -180,10 +180,16 @@
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/domodossola/articolo/domodossola-al-via-i-lavori-per-il-parcheggio-di-via-cadorna.html"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Fully: oltre 5,5 km di strada diventano ciclabili",
+          "url": "/articoli-vallese/fully-strada-ciclabile/",
+          "excerpt": "Il Comune di Fully amplia la mobilità dolce: la strada a nord del canale diventa rue cyclable e i ciclisti hanno la priorità a 12 intersezioni.",
+          "date": "2026-10-17T01:00:16.066Z"
+        },
         {
           "title": "A9 Sion-Sierre: tre settimane di chiusure notturne",
           "url": "/articoli-vallese/a9-chiusure-notturne-sion-sierre/",
@@ -244,7 +250,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T01:06:44.851Z"
     },
     "en": {
       "canton": "VS",
@@ -364,7 +370,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-16T11:58:12.009Z"
+          "updatedAt": "2026-10-16T17:01:51.551Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -402,10 +408,16 @@
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/domodossola/articolo/domodossola-al-via-i-lavori-per-il-parcheggio-di-via-cadorna.html"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Fully: over 5,5 km of road become cycle paths",
+          "url": "/en/valais-articles/fully-cycle-street/",
+          "excerpt": "The Municipality of Fully expands active mobility: the road north of the canal becomes a bicycle street, and cyclists have priority at 12 intersections.",
+          "date": "2026-10-17T01:00:16.066Z"
+        },
         {
           "title": "A9 Sion-Sierre: three weeks of nighttime closures",
           "url": "/en/valais-articles/a9-night-closures-sion-sierre/",
@@ -466,7 +478,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T01:06:44.851Z"
     },
     "de": {
       "canton": "VS",
@@ -586,7 +598,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-16T11:58:12.009Z"
+          "updatedAt": "2026-10-16T17:01:51.551Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -624,10 +636,16 @@
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/domodossola/articolo/domodossola-al-via-i-lavori-per-il-parcheggio-di-via-cadorna.html"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Fully: Mehr als 5,5 km Straße werden zu Fahrradstraßen",
+          "url": "/de/wallis-artikel/fully-fahrradstrasse/",
+          "excerpt": "Die Gemeinde Fully baut die sanfte Mobilität aus: Die Straße nördlich des Kanals wird zur Fahrradstraße, und Radfahrende haben an 12 Kreuzungen Vorrang.",
+          "date": "2026-10-17T01:00:16.066Z"
+        },
         {
           "title": "A9 Sitten-Sierre: drei Wochen nächtliche Sperrungen",
           "url": "/de/wallis-artikel/a9-nachtsperrungen-sitten-sierre/",
@@ -688,7 +706,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T01:06:44.851Z"
     },
     "fr": {
       "canton": "VS",
@@ -808,7 +826,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-16T11:58:12.009Z"
+          "updatedAt": "2026-10-16T17:01:51.551Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -846,10 +864,16 @@
               "url": "https://www.ossolanews.it/2026/10/12/leggi-notizia/argomenti/domodossola/articolo/domodossola-al-via-i-lavori-per-il-parcheggio-di-via-cadorna.html"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Fully : plus de 5,5 km de route deviennent cyclables",
+          "url": "/fr/articles-valais/fully-rue-cyclable/",
+          "excerpt": "La commune de Fully étend la mobilité douce : la route au nord du canal devient une rue cyclable et les cyclistes ont la priorité à 12 intersections.",
+          "date": "2026-10-17T01:00:16.066Z"
+        },
         {
           "title": "A9 Sion-Sierre : trois semaines de fermetures nocturnes",
           "url": "/fr/articles-valais/a9-fermetures-nocturnes-sion-sierre/",
@@ -910,7 +934,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T01:06:44.851Z"
     }
   }
 }
