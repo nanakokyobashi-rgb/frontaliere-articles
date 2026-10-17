@@ -363,6 +363,8 @@ jobs:
             mapfile -t body_dir_list <<< "$body_dirs"
             gate_input_paths=(
               .github/workflows/publish-api.yml
+              engine/articleSeoFallback.ts
+              engine/rssFeeds.mjs
               engine/shared/articleSectionCore.mjs
               engine/shared/cantonArticleSectionCore.generated.mjs
               generator/data/canton-url-slugs.json

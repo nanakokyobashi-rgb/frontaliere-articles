@@ -156,6 +156,15 @@ function parseInlineLink(source, start) {
     target = source.slice(targetStart, targetEnd);
     cursor = close;
     unsupportedSuffix = true;
+  } else if (angleClosed && source[cursor] !== ')') {
+    // A suffix attached directly after `>` is still captured as href text by
+    // the site renderer. Keep the malformed occurrence visible to the gate.
+    const close = source.indexOf(')', cursor);
+    if (close < 0) return null;
+    targetEnd = close;
+    target = source.slice(targetStart, targetEnd);
+    cursor = close;
+    unsupportedSuffix = true;
   }
   if (source[cursor] !== ')') return null;
 

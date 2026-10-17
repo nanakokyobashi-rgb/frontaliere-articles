@@ -274,6 +274,8 @@ jobs:
           # push that changes a body and its gate must scan the full corpus.
           gate_input_paths=(
             .github/workflows/publish-api.yml
+            engine/articleSeoFallback.ts
+            engine/rssFeeds.mjs
             engine/shared/articleSectionCore.mjs
             engine/shared/cantonArticleSectionCore.generated.mjs
             generator/data/canton-url-slugs.json

@@ -165,6 +165,15 @@ test('il writer rimuove i target con suffisso non quotato che il renderer consid
   );
 });
 
+test('writer e gate rimuovono suffissi attaccati a un target angolare', () => {
+  const source = '[malformato](<https://example.com>tail)';
+  assert.equal(sanitizeArticleMarkdownLinks(source), 'malformato');
+  assert.deepEqual(
+    findNonCanonicalArticleLinks(source).map(({ target, replacement }) => ({ target, replacement })),
+    [{ target: 'https://example.com>tail', replacement: null }],
+  );
+});
+
 test('il writer e il gate visitano i link annidati nella label di un link esterno', () => {
   const source = '[outer [inner](bare-target)](https://example.com/article)';
   assert.equal(
@@ -381,6 +390,9 @@ test('i publisher rapidi usano la stessa chiusura delle dipendenze del gate di p
   const apiPaths = [...api.slice(apiStart, apiEnd).matchAll(/^\s+([^\s()]+)$/gm)]
     .map((match) => match[1]);
   assert.ok(apiPaths.length > 0, 'publish-api.yml deve dichiarare le dipendenze del gate');
+  for (const dependency of ['engine/articleSeoFallback.ts', 'engine/rssFeeds.mjs']) {
+    assert.ok(apiPaths.includes(dependency), `publish-api.yml deve includere ${dependency}`);
+  }
 
   for (const file of ['fast-publish-article.yml', 'fast-publish-section.yml']) {
     const workflow = readFileSync(path.join(ROOT, '.github/workflows', file), 'utf8');
