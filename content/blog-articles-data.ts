@@ -45117,6 +45117,16 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'furti-rame-cimitero-tradate',
+ category: 'novita',
+ date: '2026-10-17T08:46:42.106Z',
+ image: '/images/blog/article-furti-rame-cimitero-tradate.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

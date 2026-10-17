@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/comunita-energetiche-rinnovabili-con-camera-di-commercio-di-varese-un-convegno-per-imprese-e-cittadini/2671891": {
-    "articleId": "varese-comunita-energetiche-rinnovabili",
-    "ts": "2026-09-07T11:05:11.801Z",
-    "keyForm": 2
-  },
   "https://www.ticinonews.ch/ticino/sergio-savoia-torna-in-politica-e-sceglie-avanti-con-ticinolavoro-442116": {
     "articleId": "sergio-savoia-politica-avanti-ticino-lavoro",
     "ts": "2026-09-07T11:34:02.018Z",
@@ -2497,6 +2492,11 @@
   "https://www.laregione.ch/culture/culture/1957356/film-festival-diritti-umani-lugano-il-miglior-film-e-promised-spaces": {
     "articleId": "film-festival-diritti-umani-lugano-2026",
     "ts": "2026-10-17T03:41:58.113Z",
+    "keyForm": 2
+  },
+  "https://www.varesenoi.it/2026/10/17/leggi-notizia/argomenti/cronaca-20/articolo/furti-di-rame-nei-cimiteri-del-varesotto-nuovo-colpo-a-tradate.html": {
+    "articleId": "furti-rame-cimitero-tradate",
+    "ts": "2026-10-17T08:46:42.823Z",
     "keyForm": 2
   }
 }
