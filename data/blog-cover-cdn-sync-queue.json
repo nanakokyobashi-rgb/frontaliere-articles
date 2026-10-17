@@ -1,4 +1,29 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-fully-strada-ciclabile.webp",
+      "sha256": "dc6484488dee72c5219a38740768fe26c452df9ad450a25b90b587ed076b481b"
+    },
+    {
+      "path": "public/images/blog/article-ia-assistente-shopping-svizzera.webp",
+      "sha256": "1fd472f782476c3d7d4ca097a1d3fda1f3d31cc04be45f6af11a3443357404a5"
+    },
+    {
+      "path": "public/images/blog/article-turgovia-sicurezza-lavoro-orari.webp",
+      "sha256": "c553e138f38dd3db7d46e7f1c31157d5b9535252ec10ba9bb18e4236730d504d"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-fully-strada-ciclabile-480w.webp",
+      "sha256": "21383b00e68620b702510e83a0cf5cf8b8e428e71be78b9fc00b8975fa540e1b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-ia-assistente-shopping-svizzera-480w.webp",
+      "sha256": "a8a7644a1b60d6420255b19b1d3aa685aa38615217344da81fecf8bd6658f1ee"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-turgovia-sicurezza-lavoro-orari-480w.webp",
+      "sha256": "34e247544d0a22888ce7e870e86bd19fea2fd5143e9d615ec51e027054a0d17c"
+    }
+  ]
 }
