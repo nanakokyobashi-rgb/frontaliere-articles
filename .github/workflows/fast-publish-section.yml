@@ -386,7 +386,9 @@ jobs:
     needs: resolve
     if: needs.resolve.outputs.any == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    # Il bootstrap live può attendere il publisher edge fino a 55 minuti prima
+    # di renderizzare. Conserva il budget storico di 45 minuti dopo il gate.
+    timeout-minutes: 100
     strategy:
       fail-fast: false
       matrix:
@@ -602,7 +604,9 @@ jobs:
         if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true' && matrix.target.bootstrap == true
         env:
           SECTION: ${{ matrix.target.section }}
-        run: node scripts/ci/section-bootstrap-lock.mjs acquire --section "$SECTION" --commit "$(git rev-parse HEAD)" --wait-ms 2400000 --retry-ms 20000
+          LOCK_WAIT_MS: 3300000
+          LOCK_RETRY_MS: 20000
+        run: node scripts/ci/section-bootstrap-lock.mjs acquire --section "$SECTION" --commit "$(git rev-parse HEAD)" --wait-ms "$LOCK_WAIT_MS" --retry-ms "$LOCK_RETRY_MS"
 
       - name: Render, validate and publish the section pages
         if: steps.replay_freshness.outputs.fresh == 'true'

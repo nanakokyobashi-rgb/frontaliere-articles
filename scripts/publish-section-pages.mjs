@@ -1760,10 +1760,17 @@ export async function publish({
         const previous = snapshots.get(page.edgeKey);
         const local = path.join(distDir, page.rel);
         const next = fs.existsSync(local) ? fs.readFileSync(local, 'utf8') : null;
-        if (!previous?.exists || next === null || next !== previous.body) {
+        if (!previous?.exists || next === null) {
+          console.error(
+            `::error::[${LOG}] bootstrap live: non è possibile dimostrare la pagina precedente o il render locale per ${page.edgeKey}; ` +
+            'la release non può proseguire',
+          );
+          return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
+        }
+        if (next !== previous.body) {
           immutableMismatches.push(page.edgeKey);
           console.log(
-            `::notice::[${LOG}] bootstrap live: ${page.edgeKey} esiste nella release precedente ma il render non è byte-identico; ` +
+            `::notice::[${LOG}] bootstrap live: il render di ${page.edgeKey} differisce; ` +
             'la chiave precedente resta servita e la sostituzione viene differita al replay post-flip',
           );
         }

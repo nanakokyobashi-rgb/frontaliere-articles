@@ -95,7 +95,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
-import { spawnSync } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 
@@ -293,20 +293,43 @@ function run(cmd, args) {
   return { code: res.status ?? 1, stdout: res.stdout ?? '' };
 }
 
+function runAsync(cmd, args) {
+  return new Promise((resolve) => {
+    const child = spawn(cmd, args, { cwd: ROOT, stdio: ['ignore', 'pipe', 'pipe'] });
+    let stdout = '';
+    let stderr = '';
+    let settled = false;
+    const finish = (code) => {
+      if (settled) return;
+      settled = true;
+      process.stdout.write(stdout);
+      process.stderr.write(stderr);
+      resolve({ code, stdout, stderr });
+    };
+    child.stdout.setEncoding('utf8').on('data', (chunk) => { stdout += chunk; });
+    child.stderr.setEncoding('utf8').on('data', (chunk) => { stderr += chunk; });
+    child.on('error', (error) => {
+      stderr += error.message;
+      finish(1);
+    });
+    child.on('close', (status) => finish(status ?? 1));
+  });
+}
+
 /** Le operazioni vere su R2 e Cloudflare; i test ne passano di finte. */
 export const realIo = {
   upload: (local, key, cacheControl) => run('bash', ['scripts/lib/upload-cdn-file.sh', local, key, cacheControl]).stdout.includes('✅ uploaded'),
   remove: (key) => run('bash', ['scripts/lib/delete-cdn-file.sh', key]).stdout.includes('✅ deleted'),
-  acquireBootstrapLock: (section, commit) => {
-    const result = run('node', [
+  acquireBootstrapLock: async (section, commit) => {
+    const result = await runAsync('node', [
       'scripts/ci/section-bootstrap-lock.mjs', 'acquire',
       '--section', section, '--commit', commit, '--role', 'edge-publisher',
     ]);
     if (result.code === 2) return 'busy';
     return result.code === 0 && result.stdout.includes('bootstrap lock acquisito atomicamente') ? 'acquired' : 'error';
   },
-  releaseBootstrapLock: (section) => {
-    const result = run('node', [
+  releaseBootstrapLock: async (section) => {
+    const result = await runAsync('node', [
       'scripts/ci/section-bootstrap-lock.mjs', 'release',
       '--section', section, '--role', 'edge-publisher',
     ]);
@@ -382,10 +405,9 @@ export function requiredPageKeys(section, { sitemapXml, previousSitemapXml = nul
 
 /**
  * Quanto il publisher puo' attendere il bootstrap e ogni quanto ritenta.
- * fast-publish-section ha un timeout di 45m: il publisher attende oltre il
- * TTL del lease, lasciando al runner vivo il tempo di terminare e a un lease
- * scaduto il tempo di liberare il gate. Il replay di publish-api parte dopo
- * un bootstrap riuscito, mentre il tetto del publisher resta a 90m.
+ * fast-publish-section aggiunge questa finestra al precedente budget di 45m,
+ * quindi un runner vivo conserva il tempo del render e un lease scaduto libera
+ * il gate. Publish-api ha 180m per l'attesa, lo staging e il release concorrente.
  */
 export const BOOTSTRAP_WAIT_MS = 55 * 60 * 1000;
 export const BOOTSTRAP_RETRY_MS = 20 * 1000;
@@ -429,10 +451,10 @@ export async function waitForBootstrapLocks(
 }
 
 /**
- * Rilascia tutti i lease e conserva il sottoinsieme non confermato fra i
- * tentativi. Il publisher deve ritentare il tombstone: dopo il flip il lock
- * non puo' essere lasciato nel solo stato locale del processo, che termina
- * subito dopo un errore.
+ * Rilascia in gruppi bounded tutti i lease e conserva il sottoinsieme non
+ * confermato fra i tentativi. Il publisher deve ritentare il tombstone: dopo
+ * il flip il lock non puo' essere lasciato nel solo stato locale del processo,
+ * che termina subito dopo un errore.
  */
 export async function releaseBootstrapLocks(
   sections,
@@ -453,22 +475,20 @@ export async function releaseBootstrapLocks(
   let pending = ids;
   let failures = new Map();
   for (let attempt = 1; attempt <= maxAttempts && pending.length > 0; attempt++) {
-    const next = [];
-    const nextFailures = new Map();
-    for (const section of pending) {
+    const outcomes = await mapLimit(pending, 8, async (section) => {
       try {
-        if (await io.releaseBootstrapLock(section)) continue;
-        next.push(section);
-        nextFailures.set(section, 'release lock non confermato');
+        if (await io.releaseBootstrapLock(section)) return { section, released: true };
+        const reason = 'release lock non confermato';
         log(`::error::[section-edge] bootstrap lock di ${section} non rilasciato (tentativo ${attempt}/${maxAttempts})`);
+        return { section, reason };
       } catch (error) {
-        next.push(section);
-        nextFailures.set(section, `release lock fallito (${error?.message ?? error})`);
+        const reason = `release lock fallito (${error?.message ?? error})`;
         log(`::error::[section-edge] release bootstrap lock di ${section} fallito (tentativo ${attempt}/${maxAttempts}): ${error?.message ?? error}`);
+        return { section, reason };
       }
-    }
-    pending = next;
-    failures = nextFailures;
+    });
+    pending = outcomes.filter(({ released }) => !released).map(({ section }) => section);
+    failures = new Map(outcomes.filter(({ released }) => !released).map(({ section, reason }) => [section, reason]));
     if (pending.length > 0 && attempt < maxAttempts) {
       log(`::warning::[section-edge] ritento il release di ${pending.length} bootstrap lock (${pending.join(', ')}) (${attempt + 1}/${maxAttempts})`);
     }
@@ -507,27 +527,19 @@ export async function acquireBootstrapLocks(
   }
 
   for (;;) {
-    const held = [];
-    let busy = null;
-    let failure = null;
-    for (const section of ids) {
-      let result;
+    const outcomes = await mapLimit(ids, 8, async (section) => {
       try {
-        result = await io.acquireBootstrapLock(section, commit);
+        const result = await io.acquireBootstrapLock(section, commit);
+        if (result === 'acquired') return { section, result };
+        if (result === 'busy') return { section, result };
+        return { section, result: 'error', failure: `${section}: acquire lock non confermato (${result ?? 'nessun risultato'})` };
       } catch (error) {
-        failure = `${section}: acquire lock fallito (${error?.message ?? error})`;
-        break;
+        return { section, result: 'error', failure: `${section}: acquire lock fallito (${error?.message ?? error})` };
       }
-      if (result === 'acquired') {
-        held.push(section);
-      } else if (result === 'busy') {
-        busy = section;
-        break;
-      } else {
-        failure = `${section}: acquire lock non confermato (${result ?? 'nessun risultato'})`;
-        break;
-      }
-    }
+    });
+    const held = outcomes.filter(({ result }) => result === 'acquired').map(({ section }) => section);
+    const busy = outcomes.find(({ result }) => result === 'busy')?.section ?? null;
+    const failure = outcomes.find(({ result }) => result === 'error')?.failure ?? null;
 
     if (!busy && !failure && held.length === ids.length) return { held, error: null };
 

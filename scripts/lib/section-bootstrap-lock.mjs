@@ -13,9 +13,10 @@ import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../../generator
 
 export const SECTION_BOOTSTRAP_LOCK_PREFIX = 'edge/sections/_bootstrap-locks';
 export const SECTION_BOOTSTRAP_LOCK_SCHEMA = 1;
-// fast-publish-section.yml ha timeout 45m: il lease lascia 5m per la
-// cancellazione del runner e il rilascio fail-safe del lock. Il publisher
-// attende 55m, quindi un lease scaduto non puo' consumare tutta la finestra.
+// fast-publish-section.yml può attendere il lease edge per 55m e poi conserva
+// il budget di render precedente. Il job resta sotto i 100m totali: il lease
+// da 50m copre la fase render dopo l'acquisizione e il publisher attende 55m,
+// così anche un runner interrotto non blocca il flip oltre la propria scadenza.
 export const SECTION_BOOTSTRAP_LOCK_TTL_MS = 50 * 60 * 1000;
 export const SECTION_BOOTSTRAP_LOCK_CACHE_CONTROL = 'public,max-age=5';
 const SECTION_RE = /^canton-[a-z]+$/;

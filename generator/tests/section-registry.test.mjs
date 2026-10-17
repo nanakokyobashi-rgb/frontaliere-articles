@@ -97,6 +97,7 @@ import {
   planRelease,
   publishRelease,
   purgeChunks,
+  releaseBootstrapLocks,
   readPreviousRelease,
   releaseSnapshotCommit,
   registryState,
@@ -1308,6 +1309,24 @@ test('edge: un tombstone lease fallito dopo il flip viene ritentato prima del ri
   assert.deepEqual([exhausted.result.code, exhausted.result.phase, exhausted.result.flipped], [1, 'bootstrap-lock-release', true]);
   assert.equal(exhausted.io.releaseAttempts.length, 3, 'un release persistente resta bounded');
   assert.equal(exhausted.io.store.has(sectionBootstrapLockKey('canton-ti')), true, 'il fallimento definitivo resta osservabile');
+});
+
+test('edge: il release dei bootstrap usa concorrenza bounded', async () => {
+  let active = 0;
+  let peak = 0;
+  const sections = Array.from({ length: 24 }, (_, index) => `canton-${String.fromCharCode(97 + Math.floor(index / 26))}${String.fromCharCode(97 + (index % 26))}`);
+  const result = await releaseBootstrapLocks(sections, {
+    releaseBootstrapLock: async () => {
+      active++;
+      peak = Math.max(peak, active);
+      await new Promise((resolve) => setTimeout(resolve, 5));
+      active--;
+      return true;
+    },
+  });
+  assert.equal(result.released, true);
+  assert.ok(peak > 1, 'i lease non vengono rilasciati uno alla volta');
+  assert.ok(peak <= 8, 'la concorrenza resta entro otto richieste R2');
 });
 
 test('edge: un purge fallito viene ritentato prima del noop', async () => {

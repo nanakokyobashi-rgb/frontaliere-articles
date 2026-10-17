@@ -1104,7 +1104,7 @@ test('publisher: lo staging snapshotta le chiavi prima dell HTML e ripristina un
   }
 });
 
-test('publisher: lo staging differisce sostituzioni stale e usa il gate cross-workflow invece del polling readiness', async () => {
+test('publisher: lo staging differisce i render immutabili e usa il gate cross-workflow invece del polling readiness', async () => {
   const immutableRoot = mkdtempSync(path.join(tmpdir(), 'publish-bootstrap-immutable-'));
   const immutable = pageEntry('canton-ti', 'articoli-ticino/existing/index.html', 'article');
   const immutableLocal = path.join(immutableRoot, immutable.rel);
@@ -1132,6 +1132,8 @@ test('publisher: lo staging differisce sostituzioni stale e usa il gate cross-wo
   });
   assert.equal(immutableResult.failures, 0);
   assert.equal(immutableResult.immutableMismatch, true);
+  assert.equal(immutableResult.uploaded, 0);
+  assert.deepEqual(immutableResult.immutableMismatches, [immutable.edgeKey]);
   assert.equal(immutableUploads, 0, 'una sostituzione di una chiave già annunciata non parte prima del flip');
   rmSync(immutableRoot, { recursive: true, force: true });
 
@@ -2756,12 +2758,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /\[ "\$DRY" = "true" \]; then\n\s+args\+=\(--dry-run\)\n\s+else\n\s+args\+=\(--publish\)/);
   // upload-cdn-file.sh esce 0 senza credenziali: l'assenza deve fermare il job.
   assert.match(wf, /for v in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_S3_ENDPOINT R2_BUCKET CF_API_TOKEN; do/);
-  assert.match(wf, /timeout-minutes: 45/);
+  assert.match(wf, /timeout-minutes: 100/);
   assert.match(wf, /Acquire bootstrap R2 gate/);
-  assert.match(wf, /section-bootstrap-lock\.mjs acquire --section "\$SECTION"/);
-  assert.match(wf, /--wait-ms 2400000 --retry-ms 20000/);
+  assert.match(wf, /section-bootstrap-lock\.mjs acquire --section "\$SECTION".*--wait-ms "\$LOCK_WAIT_MS"/);
   assert.match(wf, /Release bootstrap R2 gate/);
-  assert.match(wf, /if: always\(\).*matrix\.target\.bootstrap == true.*env\.SECTION_BOOTSTRAP_LOCK_HELD == 'true'/);
+  assert.match(wf, /if: always\(\).*matrix\.target\.bootstrap == true.*SECTION_BOOTSTRAP_LOCK_HELD == 'true'/);
   assert.match(read('scripts/publish-section-edge.mjs'), /waitForBootstrapLocks\(release\.live, io/);
 });
 

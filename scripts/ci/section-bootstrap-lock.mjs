@@ -42,6 +42,8 @@ function parseArgs(argv) {
   }
   if (!out.section) throw new Error('--section obbligatorio');
   if (action === 'acquire' && !out.commit) throw new Error('--commit obbligatorio in acquire');
+  if (!Number.isSafeInteger(out.waitMs) || out.waitMs < 0) throw new Error('--wait-ms deve essere un intero non negativo');
+  if (!Number.isSafeInteger(out.retryMs) || out.retryMs < 1) throw new Error('--retry-ms deve essere un intero positivo');
   return out;
 }
 
@@ -120,14 +122,22 @@ async function acquireOnce({ section, commit, role }) {
 
 async function acquire({ section, commit, role, waitMs, retryMs }) {
   const deadline = Date.now() + Math.max(0, waitMs);
+  let reportedBusy = false;
   for (;;) {
     try {
-      return await acquireOnce({ section, commit, role });
+      await acquireOnce({ section, commit, role });
+      return;
     } catch (error) {
+      if (!(error instanceof LockBusyError)) throw error;
       const remaining = deadline - Date.now();
-      if (!(error instanceof LockBusyError) || remaining <= 0) throw error;
-      const delay = Math.min(Math.max(0, retryMs), remaining);
-      console.log(`::notice::[section-bootstrap-lock] ${section} occupata (${error.message}); ritento tra ${delay} ms`);
+      if (remaining < retryMs) {
+        throw new LockBusyError(`${error.message}; attesa bootstrap scaduta dopo ${Math.round(waitMs / 60_000)} minuti`);
+      }
+      if (!reportedBusy) {
+        console.log(`::notice::[section-bootstrap-lock] ${section} occupata (${error.message}); ritento fino a ${Math.round(waitMs / 60_000)} minuti`);
+        reportedBusy = true;
+      }
+      const delay = Math.min(retryMs, remaining);
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
