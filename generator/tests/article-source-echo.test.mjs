@@ -193,6 +193,46 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.equal(res.html.includes('SIDEBAR_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
   });
 
+  it('non perde il confine document-level dopo self-closing SVG/MathML foreign', () => {
+    const page2 = '<html><head><meta property="article:published_time" content="2026-06-12T10:00:00+02:00"></head><body>'
+      + '<svg viewBox="0 0 10 10"><path d="M0 0"/><use href="#path"/></svg>'
+      + '<math><mrow/><mi>x</mi></math>'
+      + '<script type="application/ld+json">{"headline":"FOREIGN_ELEMENTS_KEEP_BODY_TRUSTED"}</script>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('article:published_time'));
+    assert.ok(res.html.includes('FOREIGN_ELEMENTS_KEEP_BODY_TRUSTED'));
+  });
+
+  it('segue le chiusure implicite HTML per head, p e li', () => {
+    const page2 = '<html><head><title>Head senza end-tag</title>'
+      + '<meta property="article:published_time" content="2026-06-12T10:00:00+02:00">'
+      + '<body><ul><li>uno<li>due</ul><p>intro<div>chiude il paragrafo</div>'
+      + '<script type="application/ld+json">{"headline":"IMPLICIT_HTML_STAYS_TRUSTED"}</script>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('Head senza end-tag'));
+    assert.ok(res.html.includes('article:published_time'));
+    assert.ok(res.html.includes('IMPLICIT_HTML_STAYS_TRUSTED'));
+  });
+
+  it('non sceglie una radice article inattiva in commenti, template o sidebar', () => {
+    const stale = `<article>${ARTICLE_PROSE}<p>INACTIVE_ARTICLE_SHOULD_NOT_BE_SELECTED</p>${ARTICLE_PROSE}</article>`;
+    const page2 = '<html><body>'
+      + `<!-- ${stale} -->`
+      + `<template>${stale}</template>`
+      + `<div class="sidebar-wrapper">${stale}</div>`
+      + `<article>${ARTICLE_PROSE}</article>`
+      + '</body></html>';
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.equal(res.html.includes('INACTIVE_ARTICLE_SHOULD_NOT_BE_SELECTED'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
   it('non tratta un <head> annidato nel body come head del documento', () => {
     const nestedHead = '<html><body><aside><head>'
       + '<script type="application/ld+json">{"headline":"NESTED_HEAD_SHOULD_NOT_BE_ACTIVATED"}</script>'
