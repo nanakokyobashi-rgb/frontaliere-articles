@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T01:25:57.491Z",
-  "contentHash": "df74624736c986d59469a5dda3d5de9d6108bab017a0158dbcb2c2e2bb8a7f94",
+  "updatedAt": "2026-10-17T01:40:03.654Z",
+  "contentHash": "a7e8f88053e48ccf0553360d8706a2791d69113d630688bce8c370bc91a22fd5",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -147,16 +147,16 @@
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
-          "title": "Abbonamenti trasporti Friburgo: zone e tariffe",
-          "url": "/articoli-svizzera/abbonamenti-trasporti-friburgo/",
-          "excerpt": "Come funzionano zone tariffarie, metà-prezzo, AG e sconti per studenti negli abbonamenti trasporti del Cantone Friburgo.",
-          "date": "2026-08-24T01:48:56.377Z"
-        },
-        {
           "title": "Abbonamenti trasporti pubblici nel Cantone di Friburgo: zone e tariffe",
           "url": "/articoli-svizzera/trasporti-pubblici-canton-friburgo-abbonamenti/",
           "excerpt": "Ecco i dettagli sugli abbonamenti dei trasporti pubblici nel Cantone di Friburgo.",
           "date": "2026-08-18T00:58:21.517Z"
+        },
+        {
+          "title": "Abbonamenti trasporti Friburgo: zone e tariffe",
+          "url": "/articoli-svizzera/abbonamenti-trasporti-friburgo/",
+          "excerpt": "Come funzionano zone tariffarie, metà-prezzo, AG e sconti per studenti negli abbonamenti trasporti del Cantone Friburgo.",
+          "date": "2026-08-24T01:48:56.377Z"
         },
         {
           "title": "Abbonamenti trasporti pubblici canton Friburgo: zone e tariffe",
@@ -188,7 +188,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T01:40:03.654Z"
     },
     "en": {
       "canton": "FR",
@@ -318,16 +318,16 @@
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
-          "title": "Fribourg Transport Subscriptions: Zones and Rates",
-          "url": "/en/swiss-articles/public-transport-subscriptions-fribourg/",
-          "excerpt": "How fare zones, half-price, AG and student discounts work in the transport subscriptions of the Canton of Fribourg.",
-          "date": "2026-08-24T01:48:56.377Z"
-        },
-        {
           "title": "Public transport passes in the canton of Fribourg: zones and fares",
           "url": "/en/swiss-articles/fribourg-public-transport-abonements/",
           "excerpt": "Here are the details on public transport subscriptions in the Canton of Fribourg.",
           "date": "2026-08-18T00:58:21.517Z"
+        },
+        {
+          "title": "Fribourg Transport Subscriptions: Zones and Rates",
+          "url": "/en/swiss-articles/public-transport-subscriptions-fribourg/",
+          "excerpt": "How fare zones, half-price, AG and student discounts work in the transport subscriptions of the Canton of Fribourg.",
+          "date": "2026-08-24T01:48:56.377Z"
         },
         {
           "title": "Public transport tickets canton Fribourg: zones and fares",
@@ -359,7 +359,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T01:40:03.654Z"
     },
     "de": {
       "canton": "FR",
@@ -489,16 +489,16 @@
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
-          "title": "Fahrkarten Freiburg: Zonen und Tarife",
-          "url": "/de/schweiz-artikel/abonnementes-oeffentliche-verkehrsmittel-freiburg/",
-          "excerpt": "Wie Tarifzonen, Halbtax, GA und Studentenrabatte in den Verkehrsabos des Kantons Freiburg funktionieren.",
-          "date": "2026-08-24T01:48:56.377Z"
-        },
-        {
           "title": "Öffentliche Verkehrsmittel im Kanton Freiburg: Zonen und Tarife",
           "url": "/de/schweiz-artikel/freiburg-oeffentliche-verkehr-abos/",
           "excerpt": "Hier finden Sie die Details zu den ÖV-Abos im Kanton Freiburg.",
           "date": "2026-08-18T00:58:21.517Z"
+        },
+        {
+          "title": "Fahrkarten Freiburg: Zonen und Tarife",
+          "url": "/de/schweiz-artikel/abonnementes-oeffentliche-verkehrsmittel-freiburg/",
+          "excerpt": "Wie Tarifzonen, Halbtax, GA und Studentenrabatte in den Verkehrsabos des Kantons Freiburg funktionieren.",
+          "date": "2026-08-24T01:48:56.377Z"
         },
         {
           "title": "Öffentliche Verkehrsmittel Kanton Freiburg: Zonen und Tarife",
@@ -530,7 +530,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T01:40:03.654Z"
     },
     "fr": {
       "canton": "FR",
@@ -660,16 +660,16 @@
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
-          "title": "Abonnements transports Fribourg : zones et tarifs",
-          "url": "/fr/articles-suisse/abonnements-transports-publics-fribourg/",
-          "excerpt": "Comment fonctionnent les zones tarifaires, demi-tarif, AG et réductions pour étudiants dans les abonnements transports du canton de Fribourg.",
-          "date": "2026-08-24T01:48:56.377Z"
-        },
-        {
           "title": "Abonnements transports publics dans le canton de Fribourg : zones et tarifs",
           "url": "/fr/articles-suisse/fribourg-transports-en-commun-abonnements/",
           "excerpt": "Voici les détails des abonnements aux transports publics dans le canton de Fribourg.",
           "date": "2026-08-18T00:58:21.517Z"
+        },
+        {
+          "title": "Abonnements transports Fribourg : zones et tarifs",
+          "url": "/fr/articles-suisse/abonnements-transports-publics-fribourg/",
+          "excerpt": "Comment fonctionnent les zones tarifaires, demi-tarif, AG et réductions pour étudiants dans les abonnements transports du canton de Fribourg.",
+          "date": "2026-08-24T01:48:56.377Z"
         },
         {
           "title": "Abonnements transports publics canton de Fribourg : zones et tarifs",
@@ -701,7 +701,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T01:40:03.654Z"
     }
   }
 }

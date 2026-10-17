@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T01:25:57.491Z",
-  "contentHash": "655fa121541ba39448c5ba35823db7168cd7ad11a8151a75287047c831895796",
+  "updatedAt": "2026-10-17T01:40:03.654Z",
+  "contentHash": "35ded9ba377e09506041e77fc3845a037247586863801fe18236bf5807a1398a",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -101,6 +101,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Copertura A12: 3 anni di lavori, una ventina di opposizioni",
+          "url": "/articoli-friburgo/copertura-a12-opposizioni/",
+          "excerpt": "Il progetto di copertura dell'autostrada A12 indica tre anni di lavori.",
+          "date": "2026-10-17T01:32:42.387Z"
+        },
+        {
           "title": "Sarine, i sette candidati alla prefettura a confronto",
           "url": "/articoli-friburgo/dibattito-prefettura-sarine/",
           "excerpt": "A Corpataux, il 14 ottobre 2026, sette pretendenti alla Prefettura della Sarine si sono confrontati su mobilità e attrattività economica nel dibattito locale.",
@@ -123,12 +129,6 @@
           "url": "/articoli-friburgo/garanzia-hib-payerne/",
           "excerpt": "CHF 44,8 milioni per il finanziamento dell'HIB 103 voti espressi, tutti favorevoli Lavori previsti tra il 2028 e il 2032 Il Vaud deve ancora approvare CHF 67,2",
           "date": "2026-10-10T17:43:08.538Z"
-        },
-        {
-          "title": "Friburgo approva la legge sulle lingue ufficiali",
-          "url": "/articoli-friburgo/friburgo-legge-lingue-ufficiali/",
-          "excerpt": "I deputati hanno votato giovedì Friburgo ha la sua prima legge sulle lingue ufficiali Il testo promuove il bilinguismo Decisione → voto dei deputati del Canton",
-          "date": "2026-10-08T15:45:50.084Z"
         }
       ],
       "links": [
@@ -141,7 +141,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T01:40:03.654Z"
     },
     "en": {
       "canton": "FR",
@@ -230,6 +230,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "A12 cover: 3 years of work, around twenty objections",
+          "url": "/en/fribourg-articles/a12-cover-project-objections/",
+          "excerpt": "The project to cover the A12 motorway calls for three years of work.",
+          "date": "2026-10-17T01:32:42.387Z"
+        },
+        {
           "title": "Sarine, the seven candidates for the prefecture compared",
           "url": "/en/fribourg-articles/sarine-prefecture-debate/",
           "excerpt": "In Corpataux, on 14 October 2026, seven claimants to the Sarine Prefecture discussed mobility and economic attractiveness in the local debate.",
@@ -252,12 +258,6 @@
           "url": "/en/fribourg-articles/fribourg-hib-guarantee/",
           "excerpt": "CHF 44,8 million for HIB financing 103 votes cast, all in favor Work planned between 2028 and 2032 Vaud still has to approve CHF 67,2 million Beneficiary →",
           "date": "2026-10-10T17:43:08.538Z"
-        },
-        {
-          "title": "Fribourg approves the law on official languages",
-          "url": "/en/fribourg-articles/fribourg-official-languages-law/",
-          "excerpt": "The deputies voted on Thursday Fribourg has its first law on official languages The text promotes bilingualism Decision → vote by the deputies of the Canton",
-          "date": "2026-10-08T15:45:50.084Z"
         }
       ],
       "links": [
@@ -270,7 +270,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T01:40:03.654Z"
     },
     "de": {
       "canton": "FR",
@@ -359,6 +359,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Überdachung der A12: 3 Jahre Bauarbeiten, etwa zwanzig Einsprachen",
+          "url": "/de/freiburg-artikel/a12-ueberdachung-einsprachen/",
+          "excerpt": "Das Projekt zur Überdachung der Autobahn A12 gibt drei Jahre Bauarbeiten an.",
+          "date": "2026-10-17T01:32:42.387Z"
+        },
+        {
           "title": "Sarine, die sieben Präfekturkandidaten im Vergleich",
           "url": "/de/freiburg-artikel/sarine-praefektur-debatte/",
           "excerpt": "In Corpataux diskutierten am 14.",
@@ -381,12 +387,6 @@
           "url": "/de/freiburg-artikel/freiburg-hib-buergschaft/",
           "excerpt": "CHF 44,8 Millionen für die Finanzierung des HIB 103 abgegebene Stimmen, alle dafür Bauarbeiten zwischen 2028 und 2032 vorgesehen Der Kanton Waadt muss noch CHF",
           "date": "2026-10-10T17:43:08.538Z"
-        },
-        {
-          "title": "Freiburg verabschiedet das Gesetz über die Amtssprachen",
-          "url": "/de/freiburg-artikel/freiburg-amtssprachen-gesetz/",
-          "excerpt": "Die Abgeordneten stimmten am Donnerstag ab Freiburg hat sein erstes Gesetz über die Amtssprachen Der Text fördert die Zweisprachigkeit Entscheidung → Abstimmung",
-          "date": "2026-10-08T15:45:50.084Z"
         }
       ],
       "links": [
@@ -399,7 +399,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T01:40:03.654Z"
     },
     "fr": {
       "canton": "FR",
@@ -488,6 +488,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Couverture de l'A12 : 3 ans de travaux, une vingtaine d'oppositions",
+          "url": "/fr/articles-fribourg/couverture-a12-oppositions/",
+          "excerpt": "Le projet de couverture de l'autoroute A12 prévoit trois ans de travaux.",
+          "date": "2026-10-17T01:32:42.387Z"
+        },
+        {
           "title": "Sarine, les sept candidats à la préfecture comparés",
           "url": "/fr/articles-fribourg/debat-prefecture-sarine/",
           "excerpt": "A Corpataux, le 14 octobre 2026, sept prétendants à la Préfecture de la Sarine se sont affrontés sur la mobilité et l'attractivité économique dans le débat local.",
@@ -510,12 +516,6 @@
           "url": "/fr/articles-fribourg/fribourg-garantie-hib/",
           "excerpt": "44,8 millions de CHF pour le financement de l'HIB 103 votes exprimés, tous favorables Travaux prévus entre 2028 et 2032 Le canton de Vaud doit encore approuver",
           "date": "2026-10-10T17:43:08.538Z"
-        },
-        {
-          "title": "Fribourg approuve la loi sur les langues officielles",
-          "url": "/fr/articles-fribourg/fribourg-loi-langues-officielles/",
-          "excerpt": "Les députés ont voté jeudi Fribourg a sa première loi sur les langues officielles Le texte promeut le bilinguisme Décision → vote des députés du canton",
-          "date": "2026-10-08T15:45:50.084Z"
         }
       ],
       "links": [
@@ -528,7 +528,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T01:40:03.654Z"
     }
   }
 }
