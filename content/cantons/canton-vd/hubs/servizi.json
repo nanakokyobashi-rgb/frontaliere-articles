@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T01:25:57.491Z",
-  "contentHash": "28e43c2b9fde2ab04949b06549da9e8f7ba4c624c023b371fb4f250fc8d505a4",
+  "updatedAt": "2026-10-17T01:33:08.450Z",
+  "contentHash": "e122a146ace8a82a38194aaa7b34e245ef1cc1b1b5d50cda1a2479461fa8f458",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -135,6 +135,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Otto scuole vaudesi colpite da furti notturni",
+          "url": "/articoli-vaud/scuole-vaud-furti-inchieste/",
+          "excerpt": "Otto scuole vaudesi colpite in dieci giorni Tutti gli episodi sono avvenuti di notte Orbe stima danni per migliaia di franchi La polizia cantonale ha aperto più",
+          "date": "2026-10-17T01:27:48.756Z"
+        },
+        {
           "title": "Premi cassa malati LAMal 2026 nel canton Vaud",
           "url": "/articoli-svizzera/franchigia-premi-vaud-2026/",
           "excerpt": "Guida ai premi cassa malati LAMal 2026 nel canton Vaud: franchigie adulti, differenze tra cantoni e regioni, sussidio cantonale e cambio cassa.",
@@ -175,12 +181,6 @@
           "url": "/articoli-svizzera/patente-guida-canton-vaud-conversione-esami/",
           "excerpt": "Guida pratica alla conversione della patente di guida estera nel Cantone di Vaud, inclusi esami teorici e pratici, corsi obbligatori e ufficio della circolazione competente.",
           "date": "2026-09-05T09:26:04.187Z"
-        },
-        {
-          "title": "Sistema scolastico Canton Vaud: iscrizioni e cicli",
-          "url": "/articoli-svizzera/scuola-canton-vaud-iscrizioni-cicli/",
-          "excerpt": "Guida completa alla scuola dell'obbligo nel Canton Vaud: cicli di studio, età di iscrizione, lingue e passaggio alle medie superiori.",
-          "date": "2026-09-19T04:14:39.399Z"
         }
       ],
       "latestCantonArticles": [],
@@ -210,7 +210,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T01:33:08.450Z"
     },
     "en": {
       "canton": "VD",
@@ -323,6 +323,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Eight schools in Vaud hit by overnight burglaries",
+          "url": "/en/vaud-articles/vaud-schools-break-ins-investigations/",
+          "excerpt": "Eight Vaud schools hit in ten days All incidents occurred at night Orbe estimates damage amounting to thousands of francs The cantonal police have opened",
+          "date": "2026-10-17T01:27:48.756Z"
+        },
+        {
           "title": "KVG health insurance premiums in 2026 in the canton of Vaud",
           "url": "/en/swiss-articles/vaud-health-premium-deductible-2026/",
           "excerpt": "Guide to KVG health insurance premiums in 2026 in the canton of Vaud: adult deductibles, differences between cantons and regions, cantonal subsidy and change of insurance policy.",
@@ -363,12 +369,6 @@
           "url": "/en/swiss-articles/driving-license-canton-vaud-conversion-exams/",
           "excerpt": "Practical guide to the conversion of the foreign driver's license in the Canton of Vaud, including theoretical and practical exams, compulsory courses and the competent traffic office.",
           "date": "2026-09-05T09:26:04.187Z"
-        },
-        {
-          "title": "Canton Vaud school system: enrolments and cycles",
-          "url": "/en/swiss-articles/vaud-school-system-enrollment-cycles/",
-          "excerpt": "Complete guide to compulsory education in the Canton of Vaud: study cycles, age of enrollment, languages and transition to high school.",
-          "date": "2026-09-19T04:14:39.399Z"
         }
       ],
       "latestCantonArticles": [],
@@ -394,7 +394,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T01:33:08.450Z"
     },
     "de": {
       "canton": "VD",
@@ -507,6 +507,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Acht Waadtländer Schulen von nächtlichen Einbrüchen betroffen",
+          "url": "/de/waadt-artikel/waadt-schulen-einbrueche-ermittlungen/",
+          "excerpt": "Acht Waadtländer Schulen in zehn Tagen betroffen Alle Vorfälle ereigneten sich nachts Orbe schätzt die Schäden auf mehrere Tausend Franken Die Kantonspolizei",
+          "date": "2026-10-17T01:27:48.756Z"
+        },
+        {
           "title": "Krankenkassenprämien LAMal 2026 im Kanton Waadt",
           "url": "/de/schweiz-artikel/krankenkassenpraemie-waadt-franchise-2026/",
           "excerpt": "Leitfaden zu den Krankenkassenprämien LAMal 2026 im Kanton Waadt: Erwachsenenfranchisen, Unterschiede zwischen Kantonen und Regionen, kantonale Prämienverbilligung und Krankenkassenwechsel.",
@@ -547,12 +553,6 @@
           "url": "/de/schweiz-artikel/fuhrerschein-kanton-waadt-umwandlung-pruefungen/",
           "excerpt": "Praktischer Leitfaden für den Umtausch des ausländischen Führerscheins im Kanton Waadt, einschliesslich theoretischer und praktischer Prüfungen, Pflichtkurse und des zuständigen Strassenverkehrsamtes.",
           "date": "2026-09-05T09:26:04.187Z"
-        },
-        {
-          "title": "Schulsystem Kanton Waadt: Einschreibungen und Zyklen",
-          "url": "/de/schweiz-artikel/schulsystem-kanton-waadt-anmeldung/",
-          "excerpt": "Vollständiger Leitfaden zur obligatorischen Schule im Kanton Waadt: Studiengänge, Einschreibungsalter, Sprachen und Übergang in die Sekundarstufe II",
-          "date": "2026-09-19T04:14:39.399Z"
         }
       ],
       "latestCantonArticles": [],
@@ -578,7 +578,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T01:33:08.450Z"
     },
     "fr": {
       "canton": "VD",
@@ -691,6 +691,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Huit écoles vaudoises touchées par des vols nocturnes",
+          "url": "/fr/articles-vaud/ecoles-vaud-cambriolages-enquetes/",
+          "excerpt": "Huit écoles vaudoises touchées en dix jours Tous les incidents ont eu lieu la nuit Orbe estime les dommages à plusieurs milliers de francs La police cantonale",
+          "date": "2026-10-17T01:27:48.756Z"
+        },
+        {
           "title": "Primes d’assurance maladie KVG en 2026 dans le canton de Vaud",
           "url": "/fr/articles-suisse/franchise-primes-vaud-2026/",
           "excerpt": "Guide des primes d’assurance santé KVG en 2026 dans le canton de Vaud : franchises adultes, différences entre cantons et régions, subvention cantonale et changement de police d’assurance.",
@@ -731,12 +737,6 @@
           "url": "/fr/articles-suisse/permis-de-conduire-canton-de-vaud-conversion-examens/",
           "excerpt": "Guide pratique à la conversion du permis de conduire étranger dans le canton de Vaud, comprenant examens théoriques et pratiques, cours obligatoires et office de la circulation compétent.",
           "date": "2026-09-05T09:26:04.187Z"
-        },
-        {
-          "title": "Système scolaire canton de Vaud : inscriptions et cycles",
-          "url": "/fr/articles-suisse/systeme-scolaire-canton-vaud-inscription/",
-          "excerpt": "Guide complet de l'école obligatoire dans le canton de Vaud : filières d'études, âge d'inscription, langues et passage au lycée.",
-          "date": "2026-09-19T04:14:39.399Z"
         }
       ],
       "latestCantonArticles": [],
@@ -758,7 +758,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T01:33:08.450Z"
     }
   }
 }

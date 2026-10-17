@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T00:12:19.402Z",
-  "contentHash": "966c0b2c72d11e2370e8230ec004f06badf65bce34a1c9c5efa3dde920dcfc91",
+  "updatedAt": "2026-10-17T01:33:08.450Z",
+  "contentHash": "0704ad96a7817d43672c81c3e2c4c94d4177211b2cad14f331258f893cd7ee8d",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -124,6 +124,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Otto scuole vaudesi colpite da furti notturni",
+          "url": "/articoli-vaud/scuole-vaud-furti-inchieste/",
+          "excerpt": "Otto scuole vaudesi colpite in dieci giorni Tutti gli episodi sono avvenuti di notte Orbe stima danni per migliaia di franchi La polizia cantonale ha aperto più",
+          "date": "2026-10-17T01:27:48.756Z"
+        },
+        {
           "title": "Treni CFF tra Yverdon-les-Bains e Losanna: traffico ripreso",
           "url": "/articoli-vaud/cff-eclepens-treni-ripresa/",
           "excerpt": "Traffico ripreso alle 05:40 di domenica Linea Yverdon-les-Bains–Losanna tornata normale Incendio doloso a Eclépens: disagi da venerdì CFF mobilitati: circa 100",
@@ -146,12 +152,6 @@
           "url": "/articoli-vaud/incendio-cavi-cff-eclepens/",
           "excerpt": "Incendio vicino ai binari CFF a Eclépens il 9 ottobre Cavi per i segnali luminosi bruciati e fuori uso Traffico interrotto tra Lausanne e Yverdon/Vallorbe",
           "date": "2026-10-10T21:04:30.030Z"
-        },
-        {
-          "title": "Perdite agricole nel Canton Vaud: oltre 100 milioni",
-          "url": "/articoli-vaud/perdite-agricole-canton-vaud-caldo/",
-          "excerpt": "Le stime delle associazioni agricole vodesi indicano perdite superiori a 100 milioni di franchi per il biennio 2026-2027 a causa della siccità.",
-          "date": "2026-10-09T12:27:10.778Z"
         }
       ],
       "links": [
@@ -164,7 +164,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:33:08.450Z"
     },
     "en": {
       "canton": "VD",
@@ -271,6 +271,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Eight schools in Vaud hit by overnight burglaries",
+          "url": "/en/vaud-articles/vaud-schools-break-ins-investigations/",
+          "excerpt": "Eight Vaud schools hit in ten days All incidents occurred at night Orbe estimates damage amounting to thousands of francs The cantonal police have opened",
+          "date": "2026-10-17T01:27:48.756Z"
+        },
+        {
           "title": "CFF trains between Yverdon-les-Bains and Lausanne: service resumed",
           "url": "/en/vaud-articles/sbb-eclepens-train-service-resumed/",
           "excerpt": "Traffic resumed at 05:40 on Sunday Yverdon-les-Bains–Lausanne line back to normal Arson in Eclépens: disruptions since Friday CFF mobilized: approximately 100",
@@ -293,12 +299,6 @@
           "url": "/en/vaud-articles/eclepens-cff-cable-fire/",
           "excerpt": "Fire near CFF tracks in Eclépens on 9 October Cables for burned-out and out-of-use light signals Interrupted traffic between Lausanne and Yverdon/Vallorbe",
           "date": "2026-10-10T21:04:30.030Z"
-        },
-        {
-          "title": "Agricultural losses in the Canton of Vaud: over 100 million",
-          "url": "/en/vaud-articles/vaud-canton-agricultural-losses-heatwave/",
-          "excerpt": "The estimates of the Vodese agricultural associations indicate losses of more than 100 million francs for the two-year period 2026-2027 due to drought.",
-          "date": "2026-10-09T12:27:10.778Z"
         }
       ],
       "links": [
@@ -311,7 +311,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:33:08.450Z"
     },
     "de": {
       "canton": "VD",
@@ -418,6 +418,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Acht Waadtländer Schulen von nächtlichen Einbrüchen betroffen",
+          "url": "/de/waadt-artikel/waadt-schulen-einbrueche-ermittlungen/",
+          "excerpt": "Acht Waadtländer Schulen in zehn Tagen betroffen Alle Vorfälle ereigneten sich nachts Orbe schätzt die Schäden auf mehrere Tausend Franken Die Kantonspolizei",
+          "date": "2026-10-17T01:27:48.756Z"
+        },
+        {
           "title": "CFF-Züge zwischen Yverdon-les-Bains und Lausanne: Verkehr wieder aufgenommen",
           "url": "/de/waadt-artikel/sbb-eclepens-zugverkehr-wieder-normal/",
           "excerpt": "Verkehr am Sonntag um 05:40 Uhr wieder aufgenommen Bahnlinie Yverdon-les-Bains–Lausanne wieder im Normalbetrieb Brandstiftung in Eclépens: Beeinträchtigungen",
@@ -440,12 +446,6 @@
           "url": "/de/waadt-artikel/eclepens-cff-kabelbrand/",
           "excerpt": "Feuer in der Nähe der CFF-Gleise in Eclépens am 9.",
           "date": "2026-10-10T21:04:30.030Z"
-        },
-        {
-          "title": "Landwirtschaftliche Verluste im Kanton Waadt: über 100 Millionen",
-          "url": "/de/waadt-artikel/landwirtschaftliche-verluste-kanton-waadt-hitze/",
-          "excerpt": "Die Waadtländer Bauernverbände schätzen, dass die Dürre im Zweijahreszeitraum 2026-2027 Verluste von über 100 Millionen Franken verursacht hat.",
-          "date": "2026-10-09T12:27:10.778Z"
         }
       ],
       "links": [
@@ -458,7 +458,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:33:08.450Z"
     },
     "fr": {
       "canton": "VD",
@@ -565,6 +565,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Huit écoles vaudoises touchées par des vols nocturnes",
+          "url": "/fr/articles-vaud/ecoles-vaud-cambriolages-enquetes/",
+          "excerpt": "Huit écoles vaudoises touchées en dix jours Tous les incidents ont eu lieu la nuit Orbe estime les dommages à plusieurs milliers de francs La police cantonale",
+          "date": "2026-10-17T01:27:48.756Z"
+        },
+        {
           "title": "Trains CFF entre Yverdon-les-Bains et Lausanne : trafic rétabli",
           "url": "/fr/articles-vaud/cff-eclepens-trafic-repris/",
           "excerpt": "Trafic rétabli à 05:40 dimanche Ligne Yverdon-les-Bains–Lausanne revenue à la normale Incendie criminel à Eclépens : perturbations depuis vendredi CFF mobilisés",
@@ -587,12 +593,6 @@
           "url": "/fr/articles-vaud/incendie-cables-cff-eclepens/",
           "excerpt": "Incendie près des voies CFF à Eclépens le 9 octobre Câbles pour les signaux lumineux brûlés et hors d'usage Circulation interrompue entre Lausanne",
           "date": "2026-10-10T21:04:30.030Z"
-        },
-        {
-          "title": "Pertes agricoles dans le canton de Vaud : plus de 100 millions",
-          "url": "/fr/articles-vaud/pertes-agricoles-canton-vaud-canicule/",
-          "excerpt": "Les estimations des associations agricoles vaudoises indiquent des pertes supérieures à 100 millions de francs pour la période 2026-2027 en raison de la sécheresse.",
-          "date": "2026-10-09T12:27:10.778Z"
         }
       ],
       "links": [
@@ -605,7 +605,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:33:08.450Z"
     }
   }
 }
