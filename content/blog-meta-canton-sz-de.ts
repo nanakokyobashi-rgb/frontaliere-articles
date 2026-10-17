@@ -14,7 +14,7 @@ const blogMetaCantonSzDe: Record<string, string> = {
     'blog.article.esercitazione-militare-sihlsee-ottobre-2026.imageAlt': 'Staumauer Sihlsee bei Egg während der Militärübung Oktober 2026',
     'blog.article.kuessnacht-rete-teleriscaldamento.title': 'Küssnacht erweitert das Netz auf Immensee, Fänn und Adligenswil',
     'blog.article.kuessnacht-rete-teleriscaldamento.excerpt': 'Küssnacht strebt an, die fossilen Brennstoffe mit kommunaler Energieplanung und dem Netzausbau bis Immensee, Fänn und Adligenswil schrittweise abzuschaffen.',
-    'blog.article.kuessnacht-rete-teleriscaldamento.imageAlt': 'Küssnacht erweitert das Fernwärmenetz Richtung Immensee, Fänn und Adligenswil',
+    'blog.article.kuessnacht-rete-teleriscaldamento.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonSzDe;

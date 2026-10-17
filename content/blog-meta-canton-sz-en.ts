@@ -14,7 +14,7 @@ const blogMetaCantonSzEn: Record<string, string> = {
     'blog.article.esercitazione-militare-sihlsee-ottobre-2026.imageAlt': 'Sihlsee dam area at Egg during October 2026 military exercise',
     'blog.article.kuessnacht-rete-teleriscaldamento.title': 'Küssnacht expands network to Immensee, Fänn and Adligenswil',
     'blog.article.kuessnacht-rete-teleriscaldamento.excerpt': 'Küssnacht is aiming to phase out fossil fuels with municipal energy planning and the extension of the grid to Immensee, Fänn and Adligenswil.',
-    'blog.article.kuessnacht-rete-teleriscaldamento.imageAlt': 'Küssnacht expands district heating toward Immensee, Fänn and Adligenswil',
+    'blog.article.kuessnacht-rete-teleriscaldamento.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonSzEn;
