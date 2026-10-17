@@ -408,6 +408,21 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     ]) assert.ok(res.html.includes(marker), marker);
   });
 
+  it('inserisce le estensioni post-head prima della chiusura dopo aver rimosso noscript', () => {
+    const page = '<html><head><noscript><h1>STALE_HEAD_EXTENSION</h1></noscript>'
+      + '<title>Fonte valida</title></head>'
+      + '<meta name="description" content="AFTER_HEAD_EXTENSION">'
+      + `<article>${ARTICLE_PROSE}</article></html>`;
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.isolated, true);
+    assert.equal(res.html.includes('STALE_HEAD_EXTENSION'), false);
+    const extension = res.html.indexOf('AFTER_HEAD_EXTENSION');
+    const closeHead = res.html.indexOf('</head>');
+    assert.ok(extension >= 0);
+    assert.ok(closeHead >= 0);
+    assert.ok(extension < closeHead);
+  });
+
   it('non riattiva noscript di head esplicito o dopo la sua chiusura', () => {
     const staleArticle = '<article><p>STALE_HEAD_NOSCRIPT_BODY</p></article>';
     const validArticle = `<article>${ARTICLE_PROSE}</article>`;
@@ -420,13 +435,6 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.equal(explicit.html.includes('<head><noscript>'), false);
     assert.ok(explicit.html.includes('Paragrafo 7 del pezzo vero'));
 
-    const afterHead = '<html><head></head><noscript>' + staleArticle
-      + '</noscript><body>' + validArticle + '</body></html>';
-    const postHead = isolateMainSourceHtml(afterHead);
-    assert.equal(postHead.isolated, true);
-    assert.equal(postHead.root, 'article');
-    assert.equal(postHead.html.includes('STALE_HEAD_NOSCRIPT_BODY'), false);
-    assert.ok(postHead.html.includes('Paragrafo 7 del pezzo vero'));
   });
 
   it('non scarta radici editoriali con hint header nel nome della classe', () => {
@@ -437,6 +445,33 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.equal(res.root, 'article');
     assert.ok(res.html.includes('article-header'));
     assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('conserva header e wrapper editoriali dentro la radice, potando il chrome fratello', () => {
+    const page = '<html><body><article>'
+      + '<header><h1>EDITORIAL_HEADER_TITLE</h1><p>EDITORIAL_LEAD</p></header>'
+      + '<div class="article-header"><p>EDITORIAL_HEADER_WRAPPER</p></div>'
+      + '<aside>INTERNAL_CHROME</aside>'
+      + ARTICLE_PROSE + '</article></body></html>';
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    for (const marker of [
+      'EDITORIAL_HEADER_TITLE', 'EDITORIAL_LEAD', 'EDITORIAL_HEADER_WRAPPER',
+      'Paragrafo 7 del pezzo vero',
+    ]) assert.ok(res.html.includes(marker), marker);
+    assert.equal(res.html.includes('INTERNAL_CHROME'), false);
+  });
+
+  it('tratta noscript dopo la chiusura dell’head come fallback del body implicito', () => {
+    const page = '<html><head><title>Fonte valida</title></head><noscript>'
+      + `<article>${ARTICLE_PROSE.replace(/Paragrafo/g, 'POST_HEAD_NOSCRIPT_ACTIVE')}</article>`
+      + '</noscript></html>';
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('POST_HEAD_NOSCRIPT_ACTIVE 7'));
+    assert.equal(res.html.includes('<head><noscript>'), false);
   });
 
   it('rimuove i sottalberi head inattivi dalla radice editoriale scelta', () => {
