@@ -28182,7 +28182,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'ia-assistente-shopping-svizzera',
     category: 'pratico',
     date: '2026-10-16T21:25:25.434Z',
-    image: '/images/blog/frontaliere-acquisto-immobile-investimento-svizzera.webp',
+    image: '/images/blog/article-ia-assistente-shopping-svizzera.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',
@@ -28208,6 +28208,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     articleType: 'news',
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
+   },
+   {
+    id: 'ia-voce-truffatori-svizzera-2026',
+    category: 'pratico',
+    date: '2026-10-17T14:18:52.919Z',
+    image: '/images/blog/article-ia-voce-truffatori-svizzera-2026.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
    },
 ];
 
