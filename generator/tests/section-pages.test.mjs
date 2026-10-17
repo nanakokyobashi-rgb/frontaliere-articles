@@ -342,7 +342,7 @@ test('publisher: lo staging bootstrap live carica solo chiavi HTML nuove e snaps
   }
 });
 
-test('publisher: differisce RSS e cleanup finche la release API/edge non e pronta', async () => {
+test('publisher: differisce solo il bootstrap sicuro e blocca i publish live senza release verificata', async () => {
   const readiness = { ok: false, reason: 'edge in transizione' };
   const regular = cantonRssPublishPlan('canton-ti', {
     publishing: true,
@@ -355,10 +355,27 @@ test('publisher: differisce RSS e cleanup finche la release API/edge non e pront
     cleanupRssRequested: true,
     readiness,
   });
-  assert.deepEqual(regular, { cantonRssFeeds: [], removeStaleCantonRssFeeds: false, deferred: true });
-  assert.deepEqual(cleanup, { cantonRssFeeds: [], removeStaleCantonRssFeeds: false, deferred: true });
+  const deferredBootstrap = cantonRssPublishPlan('canton-ti', {
+    publishing: true,
+    effectiveStatus: 'live',
+    readiness,
+    deferUntilReplay: true,
+  });
+  assert.deepEqual(regular, {
+    cantonRssFeeds: cantonRssFeedEntries('canton-ti'),
+    removeStaleCantonRssFeeds: false,
+    deferred: false,
+  });
+  assert.deepEqual(cleanup, { cantonRssFeeds: [], removeStaleCantonRssFeeds: true, deferred: false });
+  assert.deepEqual(deferredBootstrap, { cantonRssFeeds: [], removeStaleCantonRssFeeds: false, deferred: true });
+
+  const ready = {
+    ok: true,
+    files: Object.fromEntries(cantonRssFeedEntries('canton-ti').map(({ name }) => [name, 100])),
+    counts: { bySection: { 'canton-ti': { articles: 2 } } },
+  };
   assert.deepEqual(
-    cantonRssPublishPlan('canton-ti', { publishing: true, effectiveStatus: 'live', readiness: true }),
+    cantonRssPublishPlan('canton-ti', { publishing: true, effectiveStatus: 'live', readiness: ready }),
     { cantonRssFeeds: cantonRssFeedEntries('canton-ti'), removeStaleCantonRssFeeds: false, deferred: false },
   );
   assert.deepEqual(
@@ -366,14 +383,31 @@ test('publisher: differisce RSS e cleanup finche la release API/edge non e pront
       publishing: true,
       effectiveStatus: 'live',
       cleanupRssRequested: true,
-      readiness: true,
+      readiness: ready,
     }),
     { cantonRssFeeds: [], removeStaleCantonRssFeeds: true, deferred: false },
   );
+  assert.deepEqual(
+    cantonRssPublishPlan('canton-ti', {
+      publishing: true,
+      effectiveStatus: 'live',
+      readiness: { ok: true, files: {}, counts: { bySection: { 'canton-ti': { articles: 0 } } } },
+    }),
+    { cantonRssFeeds: [], removeStaleCantonRssFeeds: true, deferred: false },
+  );
+  assert.throws(
+    () => cantonRssPublishPlan('canton-ti', { publishing: true, effectiveStatus: 'live', readiness: { ok: true } }),
+    /files RSS non verificabili/,
+  );
+  assert.throws(
+    () => cantonRssPublishPlan('canton-ti', { publishing: true, effectiveStatus: 'live', readiness: true }),
+    /readiness non può saltare la verifica di files\/counts/,
+  );
 
   let rssCalls = 0;
+  let htmlUploads = 0;
   const result = await publish({
-    pages: [],
+    pages: [{ edgeKey: 'edge/sections/articoli-ticino/new/index.html', rel: 'articoli-ticino/new/index.html', kind: 'article' }],
     cdnUploads: [],
     cantonRssFeeds: regular.cantonRssFeeds,
     removeStaleCantonRssFeeds: regular.removeStaleCantonRssFeeds,
@@ -382,14 +416,33 @@ test('publisher: differisce RSS e cleanup finche la release API/edge non e pront
     section: 'canton-ti',
     releaseCommit: 'a'.repeat(40),
     publishedStatusImpl: async () => 'live',
-    runImpl: () => ({ code: 0, stdout: '✅ uploaded' }),
+    runImpl: () => { htmlUploads++; return { code: 0, stdout: '✅ uploaded' }; },
+    publishCantonRssFeedsImpl: async () => {
+      rssCalls++;
+      return { failures: 1, uploaded: 0, verified: 0 };
+    },
+  });
+  assert.equal(result.failures, 1);
+  assert.equal(rssCalls, 1, 'la release non verificata entra nel retry RSS bounded');
+  assert.equal(htmlUploads, 0, 'una readiness che non si risolve blocca l’HTML live');
+
+  const deferredResult = await publish({
+    pages: [],
+    cdnUploads: [],
+    cantonRssFeeds: deferredBootstrap.cantonRssFeeds,
+    removeStaleCantonRssFeeds: deferredBootstrap.removeStaleCantonRssFeeds,
+    obsoletePages: [],
+    distDir: tmpdir(),
+    section: 'canton-ti',
+    releaseCommit: 'a'.repeat(40),
+    publishedStatusImpl: async () => 'live',
     publishCantonRssFeedsImpl: async () => {
       rssCalls++;
       return { failures: 0, uploaded: 0, verified: 0, feeds: [] };
     },
   });
-  assert.equal(result.failures, 0);
-  assert.equal(rssCalls, 0);
+  assert.equal(deferredResult.failures, 0);
+  assert.equal(rssCalls, 1, 'solo il bootstrap esplicitamente deferito salta il pass RSS iniziale');
 });
 
 
