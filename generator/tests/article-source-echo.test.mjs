@@ -177,6 +177,41 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(res.html.includes('"articleBody":"corpo"'));
   });
 
+  it('riattiva solo JSON-LD attivo come figlio diretto del body', () => {
+    const stale = (label) => `<script type="application/ld+json">{"headline":"${label}"}</script>`;
+    const page2 = '<html><head><title>Pagina</title></head><body>'
+      + `<!-- ${stale('COMMENT_JSON_LD_SHOULD_NOT_BE_ACTIVATED')} -->`
+      + `<template>${stale('TEMPLATE_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</template>`
+      + `<aside>${stale('SIDEBAR_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</aside>`
+      + '<script type="application/ld+json">{"headline":"ACTIVE_BODY_JSON_LD"}</script>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('ACTIVE_BODY_JSON_LD'));
+    assert.equal(res.html.includes('COMMENT_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('TEMPLATE_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('SIDEBAR_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+  });
+
+  it('non tratta un <head> annidato nel body come head del documento', () => {
+    const nestedHead = '<html><body><aside><head>'
+      + '<script type="application/ld+json">{"headline":"NESTED_HEAD_SHOULD_NOT_BE_ACTIVATED"}</script>'
+      + '</head></aside>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(nestedHead);
+    assert.equal(res.isolated, true);
+    assert.equal(res.html.includes('NESTED_HEAD_SHOULD_NOT_BE_ACTIVATED'), false);
+  });
+
+  it('mantiene un JSON-LD body-only quando il body e’ document-level', () => {
+    const bodyOnly = '<html><body>'
+      + '<script type="application/ld+json">{"headline":"BODY_ONLY_ACTIVE"}</script>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(bodyOnly);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('BODY_ONLY_ACTIVE'));
+  });
+
   it('ripiega su <main> quando <article> non c’e’ o e’ troppo corto', () => {
     const teaserOnly = `<html><body><article>Leggi anche</article><main>${ARTICLE_PROSE}</main></body></html>`;
     const res = isolateMainSourceHtml(teaserOnly);

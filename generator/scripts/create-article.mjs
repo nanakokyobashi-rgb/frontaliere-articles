@@ -7701,10 +7701,11 @@ export function checkStatsAstraCountFidelity(articleText, sourceText) {
 // sull'INTERA pagina; quindi si toglie la pagina intera, non le sue frasi.
 //
 // Isolando qui, PRIMA di chiamare l'estrattore, tutti e sei i suoi rami — cap
-// di fallback compresi — vedono solo la radice editoriale. `<head>` e i blocchi
-// JSON-LD vengono conservati ovunque stiano: sono cio' da cui l'estrattore
-// ricava il ramo migliore (`articleBody`) e la data di pubblicazione della
-// fonte, e buttarli per isolare il corpo sarebbe scambiare un difetto con due.
+// di fallback compresi — vedono solo la radice editoriale. Il `<head>` viene
+// conservato solo se document-level; i JSON-LD esterni alla radice vengono
+// riattivati solo quando lo scanner li riconosce come script attivi del body.
+// Sono cio' da cui l'estrattore ricava il ramo migliore (`articleBody`) e la
+// data di pubblicazione della fonte, ma il markup inattivo non deve riattivarli.
 //
 // `extract-article-text.mjs` non viene toccato di proposito: e'
 // `mode: identical` nel manifest del ciclo (gemello di scripts/lib/ del sito),
@@ -7812,6 +7813,7 @@ function sourceReadTag(html, start) {
     closing,
     end,
     name,
+    nameEnd,
     selfClosing: selfClosingState,
   };
 }
@@ -7864,78 +7866,202 @@ function sourceSkipTemplate(html, afterOpening) {
   return -1;
 }
 
+function sourceTagAttribute(html, tag, wantedName) {
+  if (!tag || tag.closing) return '';
+  const wanted = String(wantedName || '').toLowerCase();
+  let cursor = tag.nameEnd;
+  while (cursor < tag.end) {
+    while (cursor < tag.end && sourceHtmlWhitespace(html[cursor])) cursor += 1;
+    if (cursor >= tag.end || html[cursor] === '/') break;
+
+    const nameStart = cursor;
+    while (
+      cursor < tag.end &&
+      !sourceHtmlWhitespace(html[cursor]) &&
+      html[cursor] !== '=' &&
+      html[cursor] !== '/'
+    ) cursor += 1;
+    const name = html.slice(nameStart, cursor).toLowerCase();
+    while (cursor < tag.end && sourceHtmlWhitespace(html[cursor])) cursor += 1;
+
+    let value = '';
+    if (html[cursor] === '=') {
+      cursor += 1;
+      while (cursor < tag.end && sourceHtmlWhitespace(html[cursor])) cursor += 1;
+      const quote = html[cursor];
+      if (quote === '"' || quote === "'") {
+        cursor += 1;
+        const valueStart = cursor;
+        while (cursor < tag.end && html[cursor] !== quote) cursor += 1;
+        value = html.slice(valueStart, cursor);
+        if (cursor < tag.end) cursor += 1;
+      } else {
+        const valueStart = cursor;
+        while (cursor < tag.end && !sourceHtmlWhitespace(html[cursor])) cursor += 1;
+        value = html.slice(valueStart, cursor);
+      }
+    }
+
+    if (name === wanted) return value;
+  }
+  return '';
+}
+
+function sourceStackIndex(stack, name) {
+  for (let index = stack.length - 1; index >= 0; index -= 1) {
+    if (stack[index].name === name) return index;
+  }
+  return -1;
+}
+
 function findActiveSourceHead(html) {
   let cursor = 0;
+  const stack = [];
+  const ldBlocks = [];
+  let sawHtml = false;
+  let sawHead = false;
+  let sawBody = false;
+  let documentLevel = true;
+  let headState = null;
+  let trustedHead = null;
+  let bodyState = null;
+
+  const failClosed = () => {
+    documentLevel = false;
+    if (headState) headState.trusted = false;
+    if (bodyState) bodyState.trusted = false;
+  };
+
   while (cursor < html.length) {
     const start = html.indexOf('<', cursor);
-    if (start < 0) return { bounds: null, malformed: false };
+    if (start < 0) break;
     if (html.startsWith('<!--', start)) {
       const afterComment = sourceSkipComment(html, start);
-      if (afterComment < 0) return { bounds: null, malformed: true };
+      if (afterComment < 0) return {
+        bounds: null,
+        malformed: true,
+        documentLevel: false,
+        ldBlocks: [],
+      };
       cursor = afterComment;
       continue;
     }
     const tag = sourceReadTag(html, start);
-    if (tag?.malformed) return { bounds: null, malformed: true };
+    if (tag?.malformed) return {
+      bounds: null,
+      malformed: true,
+      documentLevel: false,
+      ldBlocks: [],
+    };
     if (!tag) {
       cursor = start + 1;
       continue;
     }
+
     if (!tag.closing && !tag.selfClosing && tag.name === 'template') {
       const afterTemplate = sourceSkipTemplate(html, tag.end + 1);
-      if (afterTemplate < 0) return { bounds: null, malformed: true };
+      if (afterTemplate < 0) return {
+        bounds: null,
+        malformed: true,
+        documentLevel: false,
+        ldBlocks: [],
+      };
       cursor = afterTemplate;
       continue;
     }
+
     if (!tag.closing && !tag.selfClosing && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(tag.name)) {
       const afterRawText = sourceFindRawTextClose(html, tag.end + 1, tag.name);
-      if (afterRawText < 0) return { bounds: null, malformed: true };
+      if (afterRawText < 0) return {
+        bounds: null,
+        malformed: true,
+        documentLevel: false,
+        ldBlocks: [],
+      };
+      if (
+        tag.name === 'script' &&
+        sourceTagAttribute(html, tag, 'type').trim().toLowerCase() === 'application/ld+json' &&
+        documentLevel &&
+        bodyState?.trusted &&
+        stack.length === bodyState.index + 1 &&
+        stack.at(-1)?.name === 'body'
+      ) {
+        ldBlocks.push(html.slice(start, afterRawText));
+      }
       cursor = afterRawText;
       continue;
     }
-    if (!tag.closing && tag.name === 'head') {
-      const headStart = start;
-      let inside = tag.end + 1;
-      while (inside < html.length) {
-        const nestedStart = html.indexOf('<', inside);
-        if (nestedStart < 0) return { bounds: null, malformed: true };
-        if (html.startsWith('<!--', nestedStart)) {
-          const afterComment = sourceSkipComment(html, nestedStart);
-          if (afterComment < 0) return { bounds: null, malformed: true };
-          inside = afterComment;
-          continue;
-        }
-        const nested = sourceReadTag(html, nestedStart);
-        if (nested?.malformed) return { bounds: null, malformed: true };
-        if (!nested) {
-          inside = nestedStart + 1;
-          continue;
-        }
-        if (nested.closing && nested.name === 'head') {
-          return {
-            bounds: { start: headStart, end: nested.end + 1 },
-            malformed: false,
-          };
-        }
-        if (!nested.closing && !nested.selfClosing && nested.name === 'template') {
-          const afterTemplate = sourceSkipTemplate(html, nested.end + 1);
-          if (afterTemplate < 0) return { bounds: null, malformed: true };
-          inside = afterTemplate;
-          continue;
-        }
-        if (!nested.closing && !nested.selfClosing && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(nested.name)) {
-          const afterRawText = sourceFindRawTextClose(html, nested.end + 1, nested.name);
-          if (afterRawText < 0) return { bounds: null, malformed: true };
-          inside = afterRawText;
-          continue;
-        }
-        inside = nested.end + 1;
+
+    if (tag.closing) {
+      const matchingIndex = sourceStackIndex(stack, tag.name);
+      if (matchingIndex < 0) {
+        failClosed();
+        cursor = tag.end + 1;
+        continue;
       }
-      return { bounds: null, malformed: true };
+      if (matchingIndex !== stack.length - 1) failClosed();
+
+      if (tag.name === 'head' && headState && matchingIndex === headState.index) {
+        if (headState.trusted && documentLevel) {
+          trustedHead = { start: headState.start, end: tag.end + 1 };
+        }
+        headState = null;
+      }
+
+      stack.length = matchingIndex;
+      cursor = tag.end + 1;
+      continue;
     }
+
+    const isVoid = SOURCE_HTML_VOID_ELEMENTS.has(tag.name) || tag.selfClosing;
+    const parent = stack.at(-1)?.name || '';
+
+    if (tag.name === 'html') {
+      if (sawHtml || stack.length !== 0 || isVoid) failClosed();
+      sawHtml = true;
+    } else if (tag.name === 'head') {
+      const directDocumentHead =
+        !sawHead && !sawBody && (stack.length === 0 || (stack.length === 1 && parent === 'html'));
+      if (!directDocumentHead || isVoid) failClosed();
+      if (headState) headState.trusted = false;
+      headState = {
+        start,
+        index: stack.length,
+        trusted: directDocumentHead && !isVoid,
+      };
+      sawHead = true;
+    } else if (tag.name === 'body') {
+      const directDocumentBody =
+        !sawBody && (stack.length === 0 || (stack.length === 1 && parent === 'html'));
+      if (!directDocumentBody || isVoid) failClosed();
+      bodyState = {
+        index: stack.length,
+        trusted: directDocumentBody && !isVoid,
+      };
+      sawBody = true;
+    } else if (stack.length === 0) {
+      // A top-level article/div/etc. is a fragment, not a document body. Do
+      // not let a later global-looking script become trusted by accident.
+      failClosed();
+    } else if (!isVoid && parent === 'head') {
+      // Valid head children are void elements, raw-text elements, or template;
+      // any other container makes the head context non-document-level.
+      failClosed();
+    }
+
+    if (!isVoid) stack.push({ name: tag.name, start });
     cursor = tag.end + 1;
   }
-  return { bounds: null, malformed: false };
+
+  const malformed = Boolean(headState || stack.some((entry) => entry.name === 'head'));
+  if (headState) headState.trusted = false;
+  const trustedDocument = documentLevel && !malformed;
+  return {
+    bounds: trustedDocument ? trustedHead : null,
+    malformed,
+    documentLevel: trustedDocument,
+    ldBlocks: trustedDocument ? ldBlocks : [],
+  };
 }
 
 /**
@@ -8014,16 +8140,12 @@ export function isolateMainSourceHtml(html) {
 
   const headScan = findActiveSourceHead(src);
   const head = headScan.bounds ? src.slice(headScan.bounds.start, headScan.bounds.end) : '';
-  // I blocchi JSON-LD stanno tanto in <head> quanto in fondo a <body>: si
-  // riportano tutti quelli che NON sono gia' dentro cio' che si conserva,
-  // perche' `articleBody` e' il ramo migliore dell'estrattore e perderlo
-  // significherebbe scendere di qualita' proprio mentre si isola. Se la
-  // scansione dell'head e' malformata, pero', una regex globale non sa piu'
-  // distinguere JSON-LD attivo da markup stale o inattivo: in quel caso si
-  // conserva solo la radice editoriale gia' riconosciuta.
-  const ldBlocks = headScan.malformed ? [] : [...src.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi)]
-    .map((x) => x[0])
-    .filter((block) => !head.includes(block) && !chosen.includes(block));
+  // I blocchi JSON-LD nel body si riportano solo quando lo scanner li ha
+  // riconosciuti come figli diretti di un body document-level. La raccolta
+  // globale non distingue commenti, template e markup stale della sidebar.
+  const ldBlocks = headScan.documentLevel
+    ? headScan.ldBlocks.filter((block) => !head.includes(block) && !chosen.includes(block))
+    : [];
 
   return {
     html: `<!doctype html><html>${head}<body>${ldBlocks.join('')}${chosen}</body></html>`,
