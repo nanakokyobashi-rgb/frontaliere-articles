@@ -184,6 +184,19 @@ test('publisher: differisce RSS e cleanup finche la release API/edge non e pront
   });
   assert.deepEqual(regular, { cantonRssFeeds: [], removeStaleCantonRssFeeds: false, deferred: true });
   assert.deepEqual(cleanup, { cantonRssFeeds: [], removeStaleCantonRssFeeds: false, deferred: true });
+  assert.deepEqual(
+    cantonRssPublishPlan('canton-ti', { publishing: true, effectiveStatus: 'live', readiness: true }),
+    { cantonRssFeeds: cantonRssFeedEntries('canton-ti'), removeStaleCantonRssFeeds: false, deferred: false },
+  );
+  assert.deepEqual(
+    cantonRssPublishPlan('canton-ti', {
+      publishing: true,
+      effectiveStatus: 'live',
+      cleanupRssRequested: true,
+      readiness: true,
+    }),
+    { cantonRssFeeds: [], removeStaleCantonRssFeeds: true, deferred: false },
+  );
 
   let rssCalls = 0;
   const result = await publish({
