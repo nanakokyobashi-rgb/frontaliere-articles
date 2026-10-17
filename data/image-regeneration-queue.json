@@ -130,6 +130,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-17T00:33:53.750Z",
       "lastFailureAt": "2026-10-17T00:33:53.750Z"
+    },
+    {
+      "articleId": "tre-valli-varesine-7-posto-mondiale",
+      "title": "Tre Valli Varesine 7ª al mondo: batte Vuelta e Paris-Roubaix",
+      "fallbackImage": "/images/blog/guida-tre-valli-varesine-2026.webp",
+      "reason": "All image providers failed for article-tre-valli-varesine-7-posto-mondiale: openai-codex (vision gate rejected image: Generic synthetic cycling scene with no text, logo, or visible",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T00:42:42.710Z",
+      "lastFailureAt": "2026-10-17T00:42:42.710Z"
     }
   ]
 }

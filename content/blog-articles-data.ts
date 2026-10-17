@@ -45045,6 +45045,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tre-valli-varesine-7-posto-mondiale',
+ category: 'novita',
+ date: '2026-10-17T00:42:42.140Z',
+ image: '/images/blog/guida-tre-valli-varesine-2026.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
