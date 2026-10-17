@@ -36,6 +36,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.tredicesima-rendita-avs-2026.title': '13th AVS pension paid with the December 2026 pension',
     'blog.article.tredicesima-rendita-avs-2026.excerpt': 'The 13th AHV pension is paid with the December 2026 pension No applications or formalities are required It is due to anyone receiving an AHV old-age pension',
     'blog.article.tredicesima-rendita-avs-2026.imageAlt': 'Older person in Thurgau checks the December AHV pension payment',
+    'blog.article.eventi-weekend-turgovia.title': 'Weekend events in Thurgau: what to do Saturday & Sunday',
+    'blog.article.eventi-weekend-turgovia.excerpt': 'Events in Thurgau every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
+    'blog.article.eventi-weekend-turgovia.imageAlt': 'Weekend events in Thurgau',
 };
 
 export default blogMetaCantonTgEn;

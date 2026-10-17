@@ -30,6 +30,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.copertura-a12-opposizioni.title': 'Überdachung der A12: 3 Jahre Bauarbeiten, etwa zwanzig Einsprachen',
     'blog.article.copertura-a12-opposizioni.excerpt': 'Das Projekt zur Überdachung der Autobahn A12 gibt drei Jahre Bauarbeiten an.',
     'blog.article.copertura-a12-opposizioni.imageAlt': 'Projekt zur Überdeckung der A12',
+    'blog.article.eventi-weekend-friburgo.title': 'Veranstaltungen am Wochenende im Kanton Freiburg: was tun Sa & So',
+    'blog.article.eventi-weekend-friburgo.excerpt': 'Veranstaltungen im Kanton Freiburg an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
+    'blog.article.eventi-weekend-friburgo.imageAlt': 'Veranstaltungen am Wochenende im Kanton Freiburg',
 };
 
 export default blogMetaCantonFrDe;

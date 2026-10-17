@@ -15,6 +15,9 @@ const blogMetaCantonUrIt: Record<string, string> = {
     'blog.article.uri-budget-2027-surplus.title': 'Uri: budget 2027 con avanzo di CHF 1,1 milioni',
     'blog.article.uri-budget-2027-surplus.excerpt': 'Per il 2027 il Cantone Uri prevede un risultato positivo di CHF 1,1 milioni: entrate a CHF 514,4 milioni e investimenti netti a CHF 25,3 milioni.',
     'blog.article.uri-budget-2027-surplus.imageAlt': 'Scena alpina evocativa del Cantone Uri per un articolo sul budget cantonale 2027',
+    'blog.article.eventi-weekend-uri.title': 'Eventi del weekend nel Canton Uri: cosa fare sabato e domenica',
+    'blog.article.eventi-weekend-uri.excerpt': 'Eventi nel Canton Uri ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
+    'blog.article.eventi-weekend-uri.imageAlt': 'Eventi del weekend nel Canton Uri',
 };
 
 export default blogMetaCantonUrIt;

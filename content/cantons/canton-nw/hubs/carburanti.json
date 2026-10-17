@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T00:41:20.673Z",
-  "contentHash": "5039b2f422fdfc94bb04e231feec28e29ad5cd2dc7cac650dc4e4871852204ca",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "6d30d8ac1a2b2500b5b9ee65137421665aa435ddc112060dc57abe4bd1a5ffff",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Eventi del weekend nel Canton Nidvaldo: cosa fare sabato e domenica",
+          "url": "/articoli-nidvaldo/eventi-weekend-nidvaldo/",
+          "excerpt": "Eventi nel Canton Nidvaldo ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:29:11.132Z"
+        },
+        {
           "title": "Stans: Life Forestry liquidazione, 800 investitori a rischio",
           "url": "/articoli-nidvaldo/life-forestry-stans-liquidazione/",
           "excerpt": "Dopo il fallimento del 2025, Life Forestry Switzerland AG di Stans è in liquidazione; circa 800 investitori svizzeri e oltre 6'000 europei temono di non recuperare i circa CHF 200 milioni investiti, con soli CHF 805…",
@@ -88,7 +94,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T00:41:20.673Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "NW",
@@ -135,6 +141,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Weekend events in Nidwalden: what to do Saturday & Sunday",
+          "url": "/en/nidwalden-articles/weekend-events-nidwalden/",
+          "excerpt": "Events in Nidwalden every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:29:11.132Z"
+        },
+        {
           "title": "Stans: Life Forestry in liquidation, 800 investors at risk",
           "url": "/en/nidwalden-articles/life-forestry-stans-liquidation/",
           "excerpt": "Following the 2025 bankruptcy, Life Forestry Switzerland AG of Stans is in liquidation; approximately 800 Swiss investors and more than 6'000 Europeans fear they will not recover the approximately CHF 200 million…",
@@ -163,7 +175,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T00:41:20.673Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "NW",
@@ -210,6 +222,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Veranstaltungen am Wochenende in Nidwalden: was tun Sa & So",
+          "url": "/de/nidwalden-artikel/wochenend-veranstaltungen-nidwalden/",
+          "excerpt": "Veranstaltungen in Nidwalden an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:29:11.132Z"
+        },
+        {
           "title": "Stans: Liquidation von Life Forestry, 800 Investoren gefährdet",
           "url": "/de/nidwalden-artikel/life-forestry-stans-liquidation/",
           "excerpt": "Nach der Insolvenz im Jahr 2025 befindet sich die Life Forestry Switzerland AG aus Stans in Liquidation; etwa 800 Schweizer Investoren und über 6'000 Europäer befürchten, die investierten rund CHF 200 Millionen nicht…",
@@ -238,7 +256,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T00:41:20.673Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "NW",
@@ -285,6 +303,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Événements du week-end à Nidwald : que faire samedi & dimanche",
+          "url": "/fr/articles-nidwald/evenements-week-end-nidwald/",
+          "excerpt": "Événements à Nidwald chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:29:11.132Z"
+        },
+        {
           "title": "Stans : Life Forestry en liquidation, 800 investisseurs à risque",
           "url": "/fr/articles-nidwald/life-forestry-stans-liquidation/",
           "excerpt": "Après la faillite de 2025, Life Forestry Switzerland AG de Stans est en liquidation ; environ 800 investisseurs suisses et plus de 6'000 Européens craignent de ne pas récupérer les quelque CHF 200 millions investis…",
@@ -313,7 +337,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T00:41:20.673Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }

@@ -36,6 +36,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.tredicesima-rendita-avs-2026.title': '13e rente AVS versée avec la rente de décembre 2026',
     'blog.article.tredicesima-rendita-avs-2026.excerpt': 'La 13e rente AVS est versée avec la rente de décembre 2026 Il n’est pas nécessaire de présenter une demande ou d’effectuer des démarches Elle est due',
     'blog.article.tredicesima-rendita-avs-2026.imageAlt': 'Personne âgée en Thurgovie vérifie la rente AVS de décembre',
+    'blog.article.eventi-weekend-turgovia.title': 'Événements du week-end en Thurgovie : que faire samedi & dimanche',
+    'blog.article.eventi-weekend-turgovia.excerpt': 'Événements en Thurgovie chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
+    'blog.article.eventi-weekend-turgovia.imageAlt': 'Événements du week-end en Thurgovie',
 };
 
 export default blogMetaCantonTgFr;

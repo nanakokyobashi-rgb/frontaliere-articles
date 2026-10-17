@@ -24,6 +24,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.cpcn-tasso-grado-copertura.title': 'CPCN: der Unterschied zwischen Deckungssatz und Deckungsgrad',
     'blog.article.cpcn-tasso-grado-copertura.excerpt': 'Der Deckungssatz schließt die RFV aus der Berechnung aus.',
     'blog.article.cpcn-tasso-grado-copertura.imageAlt': 'Analyse der CPCN-Deckungsgrade',
+    'blog.article.eventi-weekend-neuchatel.title': 'Veranstaltungen am Wochenende im Kanton Neuenburg: was tun Sa & So',
+    'blog.article.eventi-weekend-neuchatel.excerpt': 'Veranstaltungen im Kanton Neuenburg an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
+    'blog.article.eventi-weekend-neuchatel.imageAlt': 'Veranstaltungen am Wochenende im Kanton Neuenburg',
 };
 
 export default blogMetaCantonNeDe;

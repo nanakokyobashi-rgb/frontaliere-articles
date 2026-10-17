@@ -24,6 +24,9 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.zugo-piano-direttore-26-1.title': 'Master plan January 26: Zug launches participation',
     'blog.article.zugo-piano-direttore-26-1.excerpt': 'The 1/26 amendment prepares the “white zones,” coordinates the master plan with the revision of the PBG, and implements RPG 2.',
     'blog.article.zugo-piano-direttore-26-1.imageAlt': 'Urban planning and the structure plan in Canton Zug',
+    'blog.article.eventi-weekend-zugo.title': 'Weekend events in the canton of Zug: what to do Saturday & Sunday',
+    'blog.article.eventi-weekend-zugo.excerpt': 'Events in the canton of Zug every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
+    'blog.article.eventi-weekend-zugo.imageAlt': 'Weekend events in the canton of Zug',
 };
 
 export default blogMetaCantonZgEn;

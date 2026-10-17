@@ -624,7 +624,7 @@ test('a day that stages only the ledger cannot turn a lost push into a permanent
 
   // Il PAT mancante e' una config rotta che si ripete identica ogni mattina:
   // degradarla renderebbe l'allarme muto per sempre, non "in ritardo".
-  const patGuard = sliceFrom(commitStep, 'if [ -z "${GITHUB_PAT:-}" ]; then');
+  const patGuard = sliceFrom(commitStep, 'if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then');
   const patBranch = sliceUntil(patGuard, '\n          fi');
   assert.doesNotMatch(patBranch, /LEDGER_ONLY/, 'a missing PAT must be fatal even on a ledger-only day');
   assert.match(patBranch, /exit 1/, 'and it must be red');

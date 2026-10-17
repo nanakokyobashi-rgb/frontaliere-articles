@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "1987f0ae25a7def76741f6fc5d31b78869df9ff07becf0e50389366b79c4c5f0",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "89034ffa190056f75e48a02c116c8e296f1e10fb420b2e4935fbdd7a4f00f4e5",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Eventi del weekend in Argovia: cosa fare sabato e domenica",
+          "url": "/articoli-argovia/eventi-weekend-argovia/",
+          "excerpt": "Eventi in Argovia ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:26:03.017Z"
+        },
+        {
           "title": "Argovia: respinto il divieto per i cani pericolosi",
           "url": "/articoli-argovia/argovia-cani-divieto-respinto/",
           "excerpt": "Il governo argoviese respinge il divieto dei cani pericolosi: in due anni, nessuno dei sei gravi ferimenti a persone ha coinvolto un cane della lista.",
@@ -94,12 +100,6 @@
           "url": "/articoli-argovia/aargau-pfas-bonifiche-incerte/",
           "excerpt": "In Argovia solo due terzi dei Comuni hanno risposto sul PFAS.",
           "date": "2026-10-10T12:56:57.784Z"
-        },
-        {
-          "title": "Buchs prevede disavanzo 3,1 milioni nel budget 2027",
-          "url": "/articoli-argovia/buchs-deficit-2027-budget/",
-          "excerpt": "Il Comune di Buchs prevede un disavanzo di circa 3,1 milioni di franchi per il 2027, mantenendo il moltiplicatore fiscale al 118% e prevedendo un aumento dei costi residui di cura di 600'000 franchi.",
-          "date": "2026-10-09T18:37:12.986Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "AG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Weekend events in Aargau: what to do Saturday & Sunday",
+          "url": "/en/aargau-articles/weekend-events-aargau/",
+          "excerpt": "Events in Aargau every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:26:03.017Z"
+        },
+        {
           "title": "Aargau: ban on dangerous dogs rejected",
           "url": "/en/aargau-articles/aargau-dangerous-dog-ban-rejected/",
           "excerpt": "The Aargau government rejects the ban on dangerous dogs: in two years, none of the six serious injuries to people involved a dog from the list.",
@@ -193,12 +199,6 @@
           "url": "/en/aargau-articles/aargau-pfas-site-costs/",
           "excerpt": "In Aargau, only two-thirds of the municipalities responded about PFAS.",
           "date": "2026-10-10T12:56:57.784Z"
-        },
-        {
-          "title": "Buchs forecasts a 3,1 million deficit in the 2027 budget",
-          "url": "/en/aargau-articles/buchs-forecasts-a-3-1-million-deficit-in-the-2027-budget/",
-          "excerpt": "The Municipality of Buchs forecasts a deficit of approximately 3,1 million francs for 2027, maintaining the tax multiplier at 118% and anticipating an increase of 600'000 francs in residual care costs.",
-          "date": "2026-10-09T18:37:12.986Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "AG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Veranstaltungen am Wochenende im Aargau: was tun Sa & So",
+          "url": "/de/aargau-artikel/wochenend-veranstaltungen-aargau/",
+          "excerpt": "Veranstaltungen im Aargau an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:26:03.017Z"
+        },
+        {
           "title": "Aargau: Verbot für gefährliche Hunde abgelehnt",
           "url": "/de/aargau-artikel/aargau-kampfhunde-verbot-abgelehnt/",
           "excerpt": "Die Aargauer Regierung lehnt das Verbot gefährlicher Hunde ab: In zwei Jahren war bei keinem der sechs schweren Verletzungsfälle an Menschen ein Hund von der Liste beteiligt.",
@@ -292,12 +298,6 @@
           "url": "/de/aargau-artikel/aargau-pfas-standorte-kosten/",
           "excerpt": "Im Aargau haben nur zwei Drittel der Gemeinden zu PFAS geantwortet.",
           "date": "2026-10-10T12:56:57.784Z"
-        },
-        {
-          "title": "Buchs rechnet im Budget 2027 mit einem Defizit von 3,1 Millionen",
-          "url": "/de/aargau-artikel/buchs-rechnet-im-budget-2027-mit-einem-defizit-von-3-1-millionen/",
-          "excerpt": "Die Gemeinde Buchs rechnet für 2027 mit einem Defizit von rund 3,1 Millionen Franken, hält den Steuerfuss bei 118% und sieht einen Anstieg der Restkosten für Pflege um 600'000 Franken vor.",
-          "date": "2026-10-09T18:37:12.986Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "AG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Événements du week-end en Argovie : que faire samedi & dimanche",
+          "url": "/fr/articles-argovie/evenements-week-end-argovie/",
+          "excerpt": "Événements en Argovie chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:26:03.017Z"
+        },
+        {
           "title": "Argovie : l’interdiction des chiens dangereux rejetée",
           "url": "/fr/articles-argovie/argovie-interdiction-chiens-dangereux/",
           "excerpt": "Le gouvernement argovien rejette l’interdiction des chiens dangereux : en deux ans, aucune des six graves blessures infligées à des personnes n’a impliqué un chien figurant sur la liste.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-argovie/argovie-sites-pfas-couts/",
           "excerpt": "En Argovie, seuls deux tiers des communes ont répondu au sujet des PFAS.",
           "date": "2026-10-10T12:56:57.784Z"
-        },
-        {
-          "title": "Buchs prévoit un déficit de 3,1 millions dans le budget 2027",
-          "url": "/fr/articles-argovie/buchs-prevoit-un-deficit-de-3-1-millions-dans-le-budget-2027/",
-          "excerpt": "La commune de Buchs prévoit un déficit d'environ 3,1 millions de francs pour 2027, en maintenant le multiplicateur fiscal à 118% et en prévoyant une hausse des coûts résiduels de soins de 600'000 francs.",
-          "date": "2026-10-09T18:37:12.986Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }

@@ -24,6 +24,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.cpcn-tasso-grado-copertura.title': 'CPCN: la differenza tra tasso e grado di copertura',
     'blog.article.cpcn-tasso-grado-copertura.excerpt': 'Il tasso esclude la RFV dal calcolo.',
     'blog.article.cpcn-tasso-grado-copertura.imageAlt': 'Analisi dei tassi di copertura della CPCN',
+    'blog.article.eventi-weekend-neuchatel.title': 'Eventi del weekend nel Canton Neuchâtel: cosa fare sabato e domenica',
+    'blog.article.eventi-weekend-neuchatel.excerpt': 'Eventi nel Canton Neuchâtel ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
+    'blog.article.eventi-weekend-neuchatel.imageAlt': 'Eventi del weekend nel Canton Neuchâtel',
 };
 
 export default blogMetaCantonNeIt;

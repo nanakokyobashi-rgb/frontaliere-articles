@@ -21,6 +21,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.singen-chiusura-schaffhauser-strasse.title': 'Singen, chiusa la Schaffhauser Straße dal 26 al 30 ottobre',
     'blog.article.singen-chiusura-schaffhauser-strasse.excerpt': 'A Singen la strada sarà chiusa al traffico dal 26 al 30 ottobre 2026 per lavori alla fermata Landesgartenschau.',
     'blog.article.singen-chiusura-schaffhauser-strasse.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.eventi-weekend-sciaffusa.title': 'Eventi del weekend nel Canton Sciaffusa: cosa fare sabato e domenica',
+    'blog.article.eventi-weekend-sciaffusa.excerpt': 'Eventi nel Canton Sciaffusa ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
+    'blog.article.eventi-weekend-sciaffusa.imageAlt': 'Eventi del weekend nel Canton Sciaffusa',
 };
 
 export default blogMetaCantonShIt;

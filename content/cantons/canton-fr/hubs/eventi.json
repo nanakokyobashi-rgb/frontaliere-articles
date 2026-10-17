@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T01:40:03.654Z",
-  "contentHash": "35ded9ba377e09506041e77fc3845a037247586863801fe18236bf5807a1398a",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "ca037c1de502c9571bb593434a58094fdb687e178c0cbd2a284c9d356ad8430a",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -98,39 +98,15 @@
           "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Copertura A12: 3 anni di lavori, una ventina di opposizioni",
-          "url": "/articoli-friburgo/copertura-a12-opposizioni/",
-          "excerpt": "Il progetto di copertura dell'autostrada A12 indica tre anni di lavori.",
-          "date": "2026-10-17T01:32:42.387Z"
-        },
-        {
-          "title": "Sarine, i sette candidati alla prefettura a confronto",
-          "url": "/articoli-friburgo/dibattito-prefettura-sarine/",
-          "excerpt": "A Corpataux, il 14 ottobre 2026, sette pretendenti alla Prefettura della Sarine si sono confrontati su mobilità e attrattività economica nel dibattito locale.",
-          "date": "2026-10-17T01:20:36.242Z"
-        },
-        {
-          "title": "Carburanti: il Cantone non vuole aumentare le deduzioni",
-          "url": "/articoli-friburgo/friburgo-deduzioni-carburante/",
-          "excerpt": "Il diesel supera CHF 2,40 al litro.",
-          "date": "2026-10-17T00:43:04.944Z"
-        },
-        {
-          "title": "Friburgo: 2140 frontalieri esteri a fine giugno 2026",
-          "url": "/articoli-friburgo/frontalieri-friburgo-giugno-2026/",
-          "excerpt": "Friburgo contava 2140 frontalieri esteri a fine giugno 2026: +940 dal 2021 e +280 nell'ultimo anno, nei dati pubblicati da SSD e OFS.",
-          "date": "2026-10-11T06:18:12.750Z"
-        },
-        {
-          "title": "Friburgo: garanzia da CHF 44,8 milioni per l'ospedale HIB",
-          "url": "/articoli-friburgo/garanzia-hib-payerne/",
-          "excerpt": "CHF 44,8 milioni per il finanziamento dell'HIB 103 voti espressi, tutti favorevoli Lavori previsti tra il 2028 e il 2032 Il Vaud deve ancora approvare CHF 67,2",
-          "date": "2026-10-10T17:43:08.538Z"
+          "title": "Eventi del weekend nel Canton Friburgo: cosa fare sabato e domenica",
+          "url": "/articoli-friburgo/eventi-weekend-friburgo/",
+          "excerpt": "Eventi nel Canton Friburgo ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:27:18.141Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Friburgo",
@@ -141,7 +117,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T01:40:03.654Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "FR",
@@ -227,39 +203,15 @@
           "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "A12 cover: 3 years of work, around twenty objections",
-          "url": "/en/fribourg-articles/a12-cover-project-objections/",
-          "excerpt": "The project to cover the A12 motorway calls for three years of work.",
-          "date": "2026-10-17T01:32:42.387Z"
-        },
-        {
-          "title": "Sarine, the seven candidates for the prefecture compared",
-          "url": "/en/fribourg-articles/sarine-prefecture-debate/",
-          "excerpt": "In Corpataux, on 14 October 2026, seven claimants to the Sarine Prefecture discussed mobility and economic attractiveness in the local debate.",
-          "date": "2026-10-17T01:20:36.242Z"
-        },
-        {
-          "title": "Fuels: the Canton does not want to increase deductions",
-          "url": "/en/fribourg-articles/fribourg-fuel-deductions/",
-          "excerpt": "Diesel exceeds CHF 2.40 per litre.",
-          "date": "2026-10-17T00:43:04.944Z"
-        },
-        {
-          "title": "Fribourg: 2140 foreign cross-border commuters at the end of June 2026",
-          "url": "/en/fribourg-articles/fribourg-foreign-frontier-workers-2026/",
-          "excerpt": "Fribourg had 2140 foreign cross-border workers at the end of June 2026: +940 since 2021 and +280 over the past year, according to data published by SSD and OFS.",
-          "date": "2026-10-11T06:18:12.750Z"
-        },
-        {
-          "title": "Fribourg: CHF 44,8 million guarantee for HIB hospital",
-          "url": "/en/fribourg-articles/fribourg-hib-guarantee/",
-          "excerpt": "CHF 44,8 million for HIB financing 103 votes cast, all in favor Work planned between 2028 and 2032 Vaud still has to approve CHF 67,2 million Beneficiary →",
-          "date": "2026-10-10T17:43:08.538Z"
+          "title": "Weekend events in the canton of Fribourg: what to do Saturday & Sunday",
+          "url": "/en/fribourg-articles/weekend-events-fribourg/",
+          "excerpt": "Events in the canton of Fribourg every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:27:18.141Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "All events in the canton of Fribourg",
@@ -270,7 +222,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T01:40:03.654Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "FR",
@@ -356,39 +308,15 @@
           "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Überdachung der A12: 3 Jahre Bauarbeiten, etwa zwanzig Einsprachen",
-          "url": "/de/freiburg-artikel/a12-ueberdachung-einsprachen/",
-          "excerpt": "Das Projekt zur Überdachung der Autobahn A12 gibt drei Jahre Bauarbeiten an.",
-          "date": "2026-10-17T01:32:42.387Z"
-        },
-        {
-          "title": "Sarine, die sieben Präfekturkandidaten im Vergleich",
-          "url": "/de/freiburg-artikel/sarine-praefektur-debatte/",
-          "excerpt": "In Corpataux diskutierten am 14.",
-          "date": "2026-10-17T01:20:36.242Z"
-        },
-        {
-          "title": "Treibstoffe: Kanton will Abzüge nicht erhöhen",
-          "url": "/de/freiburg-artikel/freiburg-treibstoff-abzuege/",
-          "excerpt": "Diesel übersteigt CHF 2,40 pro Liter.",
-          "date": "2026-10-17T00:43:04.944Z"
-        },
-        {
-          "title": "Freiburg: 2140 ausländische Grenzgänger Ende Juni 2026",
-          "url": "/de/freiburg-artikel/freiburg-auslaendische-grenzgaenger-2026/",
-          "excerpt": "Freiburg zählte Ende Juni 2026 2140 ausländische Grenzgänger: +940 seit 2021 und +280 im letzten Jahr, laut den von SSD und OFS veröffentlichten Daten.",
-          "date": "2026-10-11T06:18:12.750Z"
-        },
-        {
-          "title": "Freiburg: Garantie in Höhe von CHF 44,8 Millionen für das HIB-Spital",
-          "url": "/de/freiburg-artikel/freiburg-hib-buergschaft/",
-          "excerpt": "CHF 44,8 Millionen für die Finanzierung des HIB 103 abgegebene Stimmen, alle dafür Bauarbeiten zwischen 2028 und 2032 vorgesehen Der Kanton Waadt muss noch CHF",
-          "date": "2026-10-10T17:43:08.538Z"
+          "title": "Veranstaltungen am Wochenende im Kanton Freiburg: was tun Sa & So",
+          "url": "/de/freiburg-artikel/wochenend-veranstaltungen-freiburg/",
+          "excerpt": "Veranstaltungen im Kanton Freiburg an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:27:18.141Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Freiburg",
@@ -399,7 +327,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T01:40:03.654Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "FR",
@@ -485,39 +413,15 @@
           "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Couverture de l'A12 : 3 ans de travaux, une vingtaine d'oppositions",
-          "url": "/fr/articles-fribourg/couverture-a12-oppositions/",
-          "excerpt": "Le projet de couverture de l'autoroute A12 prévoit trois ans de travaux.",
-          "date": "2026-10-17T01:32:42.387Z"
-        },
-        {
-          "title": "Sarine, les sept candidats à la préfecture comparés",
-          "url": "/fr/articles-fribourg/debat-prefecture-sarine/",
-          "excerpt": "A Corpataux, le 14 octobre 2026, sept prétendants à la Préfecture de la Sarine se sont affrontés sur la mobilité et l'attractivité économique dans le débat local.",
-          "date": "2026-10-17T01:20:36.242Z"
-        },
-        {
-          "title": "Carburants : le canton ne veut pas augmenter les déductions",
-          "url": "/fr/articles-fribourg/fribourg-deductions-carburant/",
-          "excerpt": "Le diesel dépasse 2,40 CHF le litre.",
-          "date": "2026-10-17T00:43:04.944Z"
-        },
-        {
-          "title": "Fribourg : 2140 frontaliers étrangers à fin juin 2026",
-          "url": "/fr/articles-fribourg/fribourg-travailleurs-frontaliers-2026/",
-          "excerpt": "Fribourg comptait 2140 frontaliers étrangers à fin juin 2026 : +940 depuis 2021 et +280 au cours de la dernière année, selon les données publiées par le SSD et l’OFS.",
-          "date": "2026-10-11T06:18:12.750Z"
-        },
-        {
-          "title": "Fribourg : garantie de 44,8 millions de CHF pour l'hôpital HIB",
-          "url": "/fr/articles-fribourg/fribourg-garantie-hib/",
-          "excerpt": "44,8 millions de CHF pour le financement de l'HIB 103 votes exprimés, tous favorables Travaux prévus entre 2028 et 2032 Le canton de Vaud doit encore approuver",
-          "date": "2026-10-10T17:43:08.538Z"
+          "title": "Événements du week-end dans le canton de Fribourg : que faire samedi & dimanche",
+          "url": "/fr/articles-fribourg/evenements-week-end-fribourg/",
+          "excerpt": "Événements dans le canton de Fribourg chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:27:18.141Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tous les événements dans le canton de Fribourg",
@@ -528,7 +432,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T01:40:03.654Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }

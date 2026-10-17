@@ -9,6 +9,9 @@ const blogMetaCantonOwEn: Record<string, string> = {
     'blog.article.obvaldo-verkehr45-mobilita.title': 'Obwalden: mobility proposal Verkehr\'45',
     'blog.article.obvaldo-verkehr45-mobilita.excerpt': 'The page on ow.ch entitled Verkehr\'45 concerns mobility needs across different modes of transport and indicates the Staatskanzlei in Sarnen.',
     'blog.article.obvaldo-verkehr45-mobilita.imageAlt': 'Verkehr\'45 mobility proposal in Canton Obwalden',
+    'blog.article.eventi-weekend-obvaldo.title': 'Weekend events in Obwalden: what to do Saturday & Sunday',
+    'blog.article.eventi-weekend-obvaldo.excerpt': 'Events in Obwalden every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
+    'blog.article.eventi-weekend-obvaldo.imageAlt': 'Weekend events in Obwalden',
 };
 
 export default blogMetaCantonOwEn;

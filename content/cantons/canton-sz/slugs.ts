@@ -7,6 +7,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'svitto-cambio-cassa-malati': { it: 'svitto-cambio-cassa-malati', en: 'schwyz-health-insurance-switch', de: 'schwyz-krankenkassenwechsel', fr: 'schwytz-changement-caisse-maladie' },
  'esercitazione-militare-sihlsee-ottobre-2026': { it: 'esercitazione-militare-sihlsee-ottobre-2026', en: 'military-exercise-sihlsee-october-2026', de: 'militaeruebung-sihlsee-oktober-2026', fr: 'exercice-militaire-sihlsee-octobre-2026' },
  'kuessnacht-rete-teleriscaldamento': { it: 'kuessnacht-rete-teleriscaldamento', en: 'kuessnacht-district-heating', de: 'kuessnacht-fernwaerme', fr: 'kuessnacht-chauffage-distance' },
+ 'eventi-weekend-svitto': { it: 'eventi-weekend-svitto', en: 'weekend-events-schwyz', de: 'wochenend-veranstaltungen-schwyz', fr: 'evenements-week-end-schwytz' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

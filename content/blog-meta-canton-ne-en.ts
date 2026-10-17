@@ -24,6 +24,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.cpcn-tasso-grado-copertura.title': 'CPCN: the difference between coverage rate and coverage level',
     'blog.article.cpcn-tasso-grado-copertura.excerpt': 'The rate excludes the RFV from the calculation.',
     'blog.article.cpcn-tasso-grado-copertura.imageAlt': 'Analysis of CPCN coverage rates',
+    'blog.article.eventi-weekend-neuchatel.title': 'Weekend events in the canton of Neuchâtel: what to do Saturday & Sunday',
+    'blog.article.eventi-weekend-neuchatel.excerpt': 'Events in the canton of Neuchâtel every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
+    'blog.article.eventi-weekend-neuchatel.imageAlt': 'Weekend events in the canton of Neuchâtel',
 };
 
 export default blogMetaCantonNeEn;

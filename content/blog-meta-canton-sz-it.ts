@@ -15,6 +15,9 @@ const blogMetaCantonSzIt: Record<string, string> = {
     'blog.article.kuessnacht-rete-teleriscaldamento.title': 'Küssnacht amplia la rete verso Immensee, Fänn e Adligenswil',
     'blog.article.kuessnacht-rete-teleriscaldamento.excerpt': 'Küssnacht punta all\'uscita dalle fonti fossili con la pianificazione energetica comunale e l\'estensione della rete verso Immensee, Fänn e Adligenswil.',
     'blog.article.kuessnacht-rete-teleriscaldamento.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.eventi-weekend-svitto.title': 'Eventi del weekend nel Canton Svitto: cosa fare sabato e domenica',
+    'blog.article.eventi-weekend-svitto.excerpt': 'Eventi nel Canton Svitto ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
+    'blog.article.eventi-weekend-svitto.imageAlt': 'Eventi del weekend nel Canton Svitto',
 };
 
 export default blogMetaCantonSzIt;

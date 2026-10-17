@@ -24,6 +24,9 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.zugo-piano-direttore-26-1.title': 'Richtplan 26/1: Zug eröffnet die Mitwirkung',
     'blog.article.zugo-piano-direttore-26-1.excerpt': 'Die Änderung 26/1 bereitet die «weissen Zonen» vor, stimmt den Richtplan auf die Revision des PBG ab und setzt RPG 2 um.',
     'blog.article.zugo-piano-direttore-26-1.imageAlt': 'Raumplanung und Richtplan im Kanton Zug',
+    'blog.article.eventi-weekend-zugo.title': 'Veranstaltungen am Wochenende im Kanton Zug: was tun Sa & So',
+    'blog.article.eventi-weekend-zugo.excerpt': 'Veranstaltungen im Kanton Zug an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
+    'blog.article.eventi-weekend-zugo.imageAlt': 'Veranstaltungen am Wochenende im Kanton Zug',
 };
 
 export default blogMetaCantonZgDe;

@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T09:25:57.838Z",
-  "contentHash": "f9092edba009a0e3ee15996bd68f96239d8c852ef28743bf45792939c88f8abb",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "9beb57ceccef91fd1c89ce775bff40f2a99e9029b6a08ba2811a881697c9b93b",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Eventi del weekend in Turgovia: cosa fare sabato e domenica",
+          "url": "/articoli-turgovia/eventi-weekend-turgovia/",
+          "excerpt": "Eventi in Turgovia ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:31:41.357Z"
+        },
+        {
           "title": "13ª rendita AVS pagata con la pensione di dicembre 2026",
           "url": "/articoli-turgovia/tredicesima-rendita-avs-2026/",
           "excerpt": "La 13ª rendita AVS arriva con la rendita di dicembre 2026 Non serve presentare domande o svolgere pratiche Spetta a chi riceve una rendita AVS di vecchiaia",
@@ -94,12 +100,6 @@
           "url": "/articoli-turgovia/sportello-digitale-turgovia/",
           "excerpt": "Il Digitaler Schalter del Canton Turgovia riunisce i servizi più usati, informazioni, video brevi e un'area protetta per estratti, permessi e altri documenti.",
           "date": "2026-10-12T00:30:28.713Z"
-        },
-        {
-          "title": "Lavoro in Turgovia: aiuto alle imprese e permessi",
-          "url": "/articoli-turgovia/servizi-imprese-turgovia-rav/",
-          "excerpt": "In Turgovia i RAV di Amriswil, Frauenfeld e Kreuzlingen aiutano le imprese a trovare personale e offrono consulenza su permessi, lavoro ridotto e tutela.",
-          "date": "2026-10-12T00:12:21.272Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T09:25:57.838Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "TG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Weekend events in Thurgau: what to do Saturday & Sunday",
+          "url": "/en/thurgau-articles/weekend-events-thurgau/",
+          "excerpt": "Events in Thurgau every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:31:41.357Z"
+        },
+        {
           "title": "13th AVS pension paid with the December 2026 pension",
           "url": "/en/thurgau-articles/thirteenth-ahv-pension-2026/",
           "excerpt": "The 13th AHV pension is paid with the December 2026 pension No applications or formalities are required It is due to anyone receiving an AHV old-age pension",
@@ -193,12 +199,6 @@
           "url": "/en/thurgau-articles/thurgau-digital-counter/",
           "excerpt": "The Digitaler Schalter of the Canton of Thurgau brings together the most frequently used services, information, short videos, and a protected area for extracts, permits, and other documents.",
           "date": "2026-10-12T00:30:28.713Z"
-        },
-        {
-          "title": "Working in Thurgau: support for businesses and permits",
-          "url": "/en/thurgau-articles/thurgau-employer-support-permits/",
-          "excerpt": "In Thurgau, the RAV offices in Amriswil, Frauenfeld and Kreuzlingen help companies find staff and offer advice on permits, short-time work and protection.",
-          "date": "2026-10-12T00:12:21.272Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T09:25:57.838Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "TG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Veranstaltungen am Wochenende im Thurgau: was tun Sa & So",
+          "url": "/de/thurgau-artikel/wochenend-veranstaltungen-thurgau/",
+          "excerpt": "Veranstaltungen im Thurgau an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:31:41.357Z"
+        },
+        {
           "title": "13 ① AHV-Rente mit Rente vom Dezember 2026 bezahlt",
           "url": "/de/thurgau-artikel/dreizehnte-ahv-rente-2026/",
           "excerpt": "Die 13. AHV-Rente wird zusammen mit der Dezemberrente 2026 ausbezahlt Es ist nicht nötig, einen Antrag zu stellen oder Formalitäten zu erledigen Begünstigt sind",
@@ -292,12 +298,6 @@
           "url": "/de/thurgau-artikel/digitaler-schalter-thurgau/",
           "excerpt": "Der Dienst Digitaler Schalter des Kantons Thurgau bündelt die meistgenutzten Dienstleistungen, Informationen, kurze Videos und einen geschützten Bereich für Auszüge, Bewilligungen und andere Dokumente.",
           "date": "2026-10-12T00:30:28.713Z"
-        },
-        {
-          "title": "Arbeit im Thurgau: Unterstützung für Unternehmen und Bewilligungen",
-          "url": "/de/thurgau-artikel/thurgau-arbeitgeber-rav-bewilligungen/",
-          "excerpt": "Im Thurgau helfen die RAV in Amriswil, Frauenfeld und Kreuzlingen Unternehmen dabei, Personal zu finden, und bieten Beratung zu Bewilligungen, Kurzarbeit und Arbeitsschutz.",
-          "date": "2026-10-12T00:12:21.272Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T09:25:57.838Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "TG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Événements du week-end en Thurgovie : que faire samedi & dimanche",
+          "url": "/fr/articles-thurgovie/evenements-week-end-thurgovie/",
+          "excerpt": "Événements en Thurgovie chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:31:41.357Z"
+        },
+        {
           "title": "13e rente AVS versée avec la rente de décembre 2026",
           "url": "/fr/articles-thurgovie/treizieme-rente-avs-2026/",
           "excerpt": "La 13e rente AVS est versée avec la rente de décembre 2026 Il n’est pas nécessaire de présenter une demande ou d’effectuer des démarches Elle est due",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-thurgovie/guichet-numerique-thurgovie/",
           "excerpt": "Le Digitaler Schalter du canton de Thurgovie réunit les services les plus utilisés, des informations, de courtes vidéos et un espace protégé pour les extraits, permis et autres documents.",
           "date": "2026-10-12T00:30:28.713Z"
-        },
-        {
-          "title": "Travail en Thurgovie : aide aux entreprises et permis",
-          "url": "/fr/articles-thurgovie/thurgovie-services-employeurs-permis/",
-          "excerpt": "En Thurgovie, les ORP d’Amriswil, de Frauenfeld et de Kreuzlingen aident les entreprises à trouver du personnel et proposent des conseils sur les permis, la réduction de l’horaire de travail et la protection.",
-          "date": "2026-10-12T00:12:21.272Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T09:25:57.838Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }

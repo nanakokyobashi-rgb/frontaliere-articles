@@ -18,6 +18,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.appenzello-tasso-fiscale-390.title': 'Appenzell : taux d\'imposition prévu à 3,90 unités',
     'blog.article.appenzello-tasso-fiscale-390.excerpt': 'Le budget 2027 prévoit un déficit de CHF 323\'670 : le taux d\'imposition devrait passer à 3,90 unités.',
     'blog.article.appenzello-tasso-fiscale-390.imageAlt': 'Bâtiment communal dans le paysage d\'Appenzell',
+    'blog.article.eventi-weekend-appenzello.title': 'Événements du week-end en Appenzell : que faire samedi & dimanche',
+    'blog.article.eventi-weekend-appenzello.excerpt': 'Événements en Appenzell chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
+    'blog.article.eventi-weekend-appenzello.imageAlt': 'Événements du week-end en Appenzell',
 };
 
 export default blogMetaCantonAppenzelloFr;

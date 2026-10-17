@@ -7,6 +7,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'uri-chiusura-passhoehe': { it: 'uri-chiusura-passhoehe', en: 'uri-night-road-closure', de: 'uri-nachtsperrung-passhoehe', fr: 'uri-fermeture-nocturne-route' },
  'uri-budget-avanzo-2027': { it: 'uri-budget-avanzo-2027', en: 'uri-budget-surplus-2027', de: 'uri-budget-ueberschuss-2027', fr: 'budget-uri-excedent-2027' },
  'uri-budget-2027-surplus': { it: 'uri-budget-2027-surplus', en: 'uri-2027-budget-with-a-surplus-of-chf-1-1-million', de: 'uri-budget-2027-ueberschuss', fr: 'uri-budget-2027-excedent' },
+ 'eventi-weekend-uri': { it: 'eventi-weekend-uri', en: 'weekend-events-uri', de: 'wochenend-veranstaltungen-uri', fr: 'evenements-week-end-uri' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

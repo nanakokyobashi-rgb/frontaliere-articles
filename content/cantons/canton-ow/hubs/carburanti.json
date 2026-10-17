@@ -4,12 +4,12 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "carburanti",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "1a888e27bf7fbf506c91342f7a33a4526a542dc202b562b767990c594071575c",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "75069d97f864fb4b3509da2381feab1d7064e74575351c89d5a16fe95db44766",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-15T12:02:33.404Z",
+      "updatedAt": "2026-10-16T11:53:35.759Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Eventi del weekend nel Canton Obvaldo: cosa fare sabato e domenica",
+          "url": "/articoli-obvaldo/eventi-weekend-obvaldo/",
+          "excerpt": "Eventi nel Canton Obvaldo ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:29:48.607Z"
+        },
         {
           "title": "Obvaldo: proposta di mobilità Verkehr'45",
           "url": "/articoli-obvaldo/obvaldo-verkehr45-mobilita/",
@@ -70,24 +76,6 @@
           "url": "/articoli-obvaldo/rtvv-obvaldo-categorie-aziendali/",
           "excerpt": "La pagina della Staatskanzlei di Sarnen segnala una revisione parziale della RTVV e l'adeguamento delle categorie tariffarie del contributo aziendale.",
           "date": "2026-10-07T10:19:16.038Z"
-        },
-        {
-          "title": "Aprire un'attività in Obvaldo: registro di commercio e costi",
-          "url": "/articoli-svizzera/aprire-attivita-canton-obvaldo-registro/",
-          "excerpt": "Guida pratica alla forma giuridica, iscrizione al registro di commercio, capitale minimo e oneri per avviare un'impresa nel Cantone Obvaldo.",
-          "date": "2026-08-30T08:32:44.012Z"
-        },
-        {
-          "title": "AVS e prestazioni complementari in Canton Obvaldo: la guida",
-          "url": "/articoli-svizzera/avs-prestazioni-complementari-obvaldo-guida/",
-          "excerpt": "Come funziona il primo pilastro AVS nel Canton Obvaldo: ruolo della cassa di compensazione, lacune contributive e prestazioni complementari a copertura del minimo vitale nel 2026.",
-          "date": "2026-08-30T05:56:32.507Z"
-        },
-        {
-          "title": "AVS e prestazioni complementari nel Canton Obvaldo: come funziona la cassa",
-          "url": "/articoli-svizzera/avs-prestazioni-complementari-obvaldo-cassa/",
-          "excerpt": "Cassa di compensazione AVS del Canton Obvaldo: contributi, calcolo della rendita, riscatto delle lacune e prestazioni complementari per il minimo vitale.",
-          "date": "2026-08-30T05:42:46.372Z"
         }
       ],
       "links": [
@@ -100,7 +88,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "OW",
@@ -141,11 +129,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Weekend events in Obwalden: what to do Saturday & Sunday",
+          "url": "/en/obwalden-articles/weekend-events-obwalden/",
+          "excerpt": "Events in Obwalden every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:29:48.607Z"
+        },
         {
           "title": "Obwalden: mobility proposal Verkehr'45",
           "url": "/en/obwalden-articles/obwalden-transport-proposal-verkehr45/",
@@ -157,24 +151,6 @@
           "url": "/en/obwalden-articles/obwalden-rtvv-business-fee-categories/",
           "excerpt": "The Staatskanzlei of Sarnen reports a partial revision of the RTVV and an adjustment to the tariff categories for the company contribution.",
           "date": "2026-10-07T10:19:16.038Z"
-        },
-        {
-          "title": "Opening a business in Obwalden: trade register and costs",
-          "url": "/en/swiss-articles/start-business-canton-obwalden-registry/",
-          "excerpt": "Practical guide to legal form, registration in the commercial register, minimum capital and charges for starting a business in the Canton of Obwalden.",
-          "date": "2026-08-30T08:32:44.012Z"
-        },
-        {
-          "title": "AVS and complementary services in Canton Obwalden: the guide",
-          "url": "/en/swiss-articles/avs-supplementary-benefits-obwalden-guide/",
-          "excerpt": "How the first AVS pillar works in the Obwalden Canton: role of the compensation fund, contribution gaps and complementary benefits to cover the minimum living wage in 2026.",
-          "date": "2026-08-30T05:56:32.507Z"
-        },
-        {
-          "title": "AVS and complementary services in the Canton of Obwalden: how the cashier works",
-          "url": "/en/swiss-articles/avs-supplementary-benefits-obwalden-fund/",
-          "excerpt": "AVS Compensation Fund of the Canton of Obwalden: contributions, calculation of the annuity, redemption of gaps and complementary benefits for the minimum living.",
-          "date": "2026-08-30T05:42:46.372Z"
         }
       ],
       "links": [
@@ -187,7 +163,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "OW",
@@ -228,11 +204,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Veranstaltungen am Wochenende in Obwalden: was tun Sa & So",
+          "url": "/de/obwalden-artikel/wochenend-veranstaltungen-obwalden/",
+          "excerpt": "Veranstaltungen in Obwalden an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:29:48.607Z"
+        },
         {
           "title": "Obwalden: Mobilitätsvorschlag Verkehr'45",
           "url": "/de/obwalden-artikel/obwalden-mobilitaetsvorlage-verkehr45/",
@@ -244,24 +226,6 @@
           "url": "/de/obwalden-artikel/obwalden-rtvv-tarifkategorien-unternehmen/",
           "excerpt": "Die Seite der Staatskanzlei in Sarnen weist auf eine Teilrevision der RTVV und die Anpassung der Tarifkategorien des Unternehmensbeitrags hin.",
           "date": "2026-10-07T10:19:16.038Z"
-        },
-        {
-          "title": "Geschäft in Obwalden eröffnen: Handelsregister und Kosten",
-          "url": "/de/schweiz-artikel/geschaeft-gruenden-kanton-obwalden-handelsregister/",
-          "excerpt": "Praktischer Leitfaden zur Rechtsform, Handelsregistereintragung, Mindestkapital und Gebühren für die Unternehmensgründung im Kanton Obwalden.",
-          "date": "2026-08-30T08:32:44.012Z"
-        },
-        {
-          "title": "AHV und Ergänzungsleistungen im Kanton Obwalden: der Leitfaden",
-          "url": "/de/schweiz-artikel/ahs-ergaenzungsleistungen-obwalden-leitfaden/",
-          "excerpt": "Wie die erste AHV-Säule im Kanton Obwalden funktioniert: Rolle der Ausgleichskasse, Beitragslücken und Ergänzungsleistungen zur Deckung des Existenzminimums im Jahr 2026.",
-          "date": "2026-08-30T05:56:32.507Z"
-        },
-        {
-          "title": "AHV und Ergänzungsleistungen im Kanton Obwalden: Funktionsweise der Kasse",
-          "url": "/de/schweiz-artikel/avs-ergaenzungsleistungen-obwalden-kasse/",
-          "excerpt": "AHV-Ausgleichskasse des Kantons Obwalden: Beiträge, Rentenberechnung, Lückenrückkauf und Ergänzungsleistungen für das Existenzminimum.",
-          "date": "2026-08-30T05:42:46.372Z"
         }
       ],
       "links": [
@@ -274,7 +238,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "OW",
@@ -315,11 +279,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Événements du week-end à Obwald : que faire samedi & dimanche",
+          "url": "/fr/articles-obwald/evenements-week-end-obwald/",
+          "excerpt": "Événements à Obwald chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:29:48.607Z"
+        },
         {
           "title": "Obwald : proposition de mobilité Verkehr'45",
           "url": "/fr/articles-obwald/obwald-projet-mobilite-verkehr45/",
@@ -331,24 +301,6 @@
           "url": "/fr/articles-obwald/obwald-rtvv-categories-redevance-entreprises/",
           "excerpt": "La page de la Staatskanzlei de Sarnen signale une révision partielle de la RTVV et l'adaptation des catégories tarifaires de la contribution des entreprises.",
           "date": "2026-10-07T10:19:16.038Z"
-        },
-        {
-          "title": "Ouvrir une entreprise à Obwald : registre du commerce et des coûts",
-          "url": "/fr/articles-suisse/creer-entreprise-canton-obwald-registre/",
-          "excerpt": "Guide pratique sur la forme juridique, l'inscription au registre du commerce, le capital minimum et les frais de démarrage d'une entreprise dans le canton d'Obwald.",
-          "date": "2026-08-30T08:32:44.012Z"
-        },
-        {
-          "title": "AVS et prestations complémentaires dans le canton d'Obwald : le guide",
-          "url": "/fr/articles-suisse/avs-prestations-complementaires-obwald-guide/",
-          "excerpt": "Comment fonctionne le premier pilier AVS dans le canton d'Obwald : rôle de la caisse de compensation, lacunes de cotisation et prestations complémentaires pour couvrir le minimum vital en 2026.",
-          "date": "2026-08-30T05:56:32.507Z"
-        },
-        {
-          "title": "AVS et prestations complémentaires à Obwald",
-          "url": "/fr/articles-suisse/avs-prestations-complementaires-obwald-caisse/",
-          "excerpt": "Caisse de compensation AVS du canton Obwald : cotisations, calcul de la rente, rachat des lacunes et prestations complémentaires pour le minimum vital.",
-          "date": "2026-08-30T05:42:46.372Z"
         }
       ],
       "links": [
@@ -361,7 +313,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }

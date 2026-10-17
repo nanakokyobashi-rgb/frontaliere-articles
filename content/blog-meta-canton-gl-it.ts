@@ -15,6 +15,9 @@ const blogMetaCantonGlIt: Record<string, string> = {
     'blog.article.klontalstrasse-staldengarten-butzi.title': 'Klöntalerstrasse: limitazione staldengarten–bützi',
     'blog.article.klontalstrasse-staldengarten-butzi.excerpt': 'Una limitazione al traffico riguarda la Klöntalerstrasse nel tratto Staldengarten–Bützi, nel Canton Glarona.',
     'blog.article.klontalstrasse-staldengarten-butzi.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.eventi-weekend-glarona.title': 'Eventi del weekend nel Canton Glarona: cosa fare sabato e domenica',
+    'blog.article.eventi-weekend-glarona.excerpt': 'Eventi nel Canton Glarona ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
+    'blog.article.eventi-weekend-glarona.imageAlt': 'Eventi del weekend nel Canton Glarona',
 };
 
 export default blogMetaCantonGlIt;
