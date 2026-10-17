@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "dc43e6a259e4e1ca999a7ead1f2faf6585cbb769a195e13bae8a63b97e7fa02f",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "46b4d13e44ca68d972e325b20bce5b5ddb0334a383c4596ca9867002e7e3941f",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "299",
+          "value": "288",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "\"Café avec la police municipale\" Charmilles : échanger autour d’un café, au cœur des quartiers",
+              "label": "Apparitions _ Patricia Bosshard",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-charmilles-echanger-autour-cafe-coeur-quartiers"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/apparitions-patricia-bosshard"
             },
             {
-              "label": "A Paixão segundo G.H.B",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/paixao-segundo"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween"
             },
             {
-              "label": "Anan Atoyama / Cie AtOU, Atlas des Souffles",
+              "label": "Atelier de création de cartographie numérique collective à la Bibliothèque de la Cité",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/anan-atoyama-atou-atlas-souffles"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/atelier-creation-cartographie-numerique-collective-bibliotheque-cite"
             },
             {
-              "label": "Animations et conseils autour de la borne de réparation vélo du carrefour Aïre-Furet (1203)",
+              "label": "Ballet pour adultes - Tous Niveaux",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/animations-conseils-autour-borne-reparation-velo-carrefour-aire-furet-1203"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/ballet-adultes-niveaux"
             },
             {
-              "label": "Armures et paillettes",
+              "label": "BLIND TEST MUSICAL | Mr HOBBS",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/armures-paillettes-1"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/blind-test-musical-hobbs"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi-1"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Cours Tango Argentin niv. debutant",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant-0"
             },
             {
-              "label": "Bearcave ΑΡΚΟΥΔΌΤΡΥΠΑ",
+              "label": "ELECTRON @ LA COMÉDIE : ART & MUSIC",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/bearcave-arkoydotrypa"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/electron-comedie-art-music"
             },
             {
-              "label": "Chroniques d'Immeuble",
+              "label": "Empreintes de fêtes",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/chroniques-immeuble"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/empreintes-fetes"
             },
             {
-              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - De Rigot aux Pâquis: quand la…",
+              "label": "Fête de clôture",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-rigot-paquis-ville-vert"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/fete-cloture"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "GE",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "299",
+          "value": "288",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,64 +138,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "\"Café avec la police municipale\" Charmilles : échanger autour d’un café, au cœur des quartiers",
+              "label": "Apparitions _ Patricia Bosshard",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-charmilles-echanger-autour-cafe-coeur-quartiers"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/apparitions-patricia-bosshard"
             },
             {
-              "label": "A Paixão segundo G.H.B",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/paixao-segundo"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween"
             },
             {
-              "label": "Anan Atoyama / Cie AtOU, Atlas des Souffles",
+              "label": "Atelier de création de cartographie numérique collective à la Bibliothèque de la Cité",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/anan-atoyama-atou-atlas-souffles"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/atelier-creation-cartographie-numerique-collective-bibliotheque-cite"
             },
             {
-              "label": "Animations et conseils autour de la borne de réparation vélo du carrefour Aïre-Furet (1203)",
+              "label": "Ballet pour adultes - Tous Niveaux",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/animations-conseils-autour-borne-reparation-velo-carrefour-aire-furet-1203"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/ballet-adultes-niveaux"
             },
             {
-              "label": "Armures et paillettes",
+              "label": "BLIND TEST MUSICAL | Mr HOBBS",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/armures-paillettes-1"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/blind-test-musical-hobbs"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi-1"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Cours Tango Argentin niv. debutant",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant-0"
             },
             {
-              "label": "Bearcave ΑΡΚΟΥΔΌΤΡΥΠΑ",
+              "label": "ELECTRON @ LA COMÉDIE : ART & MUSIC",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/bearcave-arkoydotrypa"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/electron-comedie-art-music"
             },
             {
-              "label": "Chroniques d'Immeuble",
+              "label": "Empreintes de fêtes",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/chroniques-immeuble"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/empreintes-fetes"
             },
             {
-              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - De Rigot aux Pâquis: quand la…",
+              "label": "Fête de clôture",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-rigot-paquis-ville-vert"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/fete-cloture"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "GE",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "299",
+          "value": "288",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,64 +243,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "\"Café avec la police municipale\" Charmilles : échanger autour d’un café, au cœur des quartiers",
+              "label": "Apparitions _ Patricia Bosshard",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-charmilles-echanger-autour-cafe-coeur-quartiers"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/apparitions-patricia-bosshard"
             },
             {
-              "label": "A Paixão segundo G.H.B",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/paixao-segundo"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween"
             },
             {
-              "label": "Anan Atoyama / Cie AtOU, Atlas des Souffles",
+              "label": "Atelier de création de cartographie numérique collective à la Bibliothèque de la Cité",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/anan-atoyama-atou-atlas-souffles"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/atelier-creation-cartographie-numerique-collective-bibliotheque-cite"
             },
             {
-              "label": "Animations et conseils autour de la borne de réparation vélo du carrefour Aïre-Furet (1203)",
+              "label": "Ballet pour adultes - Tous Niveaux",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/animations-conseils-autour-borne-reparation-velo-carrefour-aire-furet-1203"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/ballet-adultes-niveaux"
             },
             {
-              "label": "Armures et paillettes",
+              "label": "BLIND TEST MUSICAL | Mr HOBBS",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/armures-paillettes-1"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/blind-test-musical-hobbs"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi-1"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Cours Tango Argentin niv. debutant",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant-0"
             },
             {
-              "label": "Bearcave ΑΡΚΟΥΔΌΤΡΥΠΑ",
+              "label": "ELECTRON @ LA COMÉDIE : ART & MUSIC",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/bearcave-arkoydotrypa"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/electron-comedie-art-music"
             },
             {
-              "label": "Chroniques d'Immeuble",
+              "label": "Empreintes de fêtes",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/chroniques-immeuble"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/empreintes-fetes"
             },
             {
-              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - De Rigot aux Pâquis: quand la…",
+              "label": "Fête de clôture",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-rigot-paquis-ville-vert"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/fete-cloture"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "GE",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "299",
+          "value": "288",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,64 +348,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "\"Café avec la police municipale\" Charmilles : échanger autour d’un café, au cœur des quartiers",
+              "label": "Apparitions _ Patricia Bosshard",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-charmilles-echanger-autour-cafe-coeur-quartiers"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/apparitions-patricia-bosshard"
             },
             {
-              "label": "A Paixão segundo G.H.B",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/paixao-segundo"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween"
             },
             {
-              "label": "Anan Atoyama / Cie AtOU, Atlas des Souffles",
+              "label": "Atelier de création de cartographie numérique collective à la Bibliothèque de la Cité",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/anan-atoyama-atou-atlas-souffles"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/atelier-creation-cartographie-numerique-collective-bibliotheque-cite"
             },
             {
-              "label": "Animations et conseils autour de la borne de réparation vélo du carrefour Aïre-Furet (1203)",
+              "label": "Ballet pour adultes - Tous Niveaux",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/animations-conseils-autour-borne-reparation-velo-carrefour-aire-furet-1203"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/ballet-adultes-niveaux"
             },
             {
-              "label": "Armures et paillettes",
+              "label": "BLIND TEST MUSICAL | Mr HOBBS",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/armures-paillettes-1"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/blind-test-musical-hobbs"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi-1"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Cours Tango Argentin niv. debutant",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant-0"
             },
             {
-              "label": "Bearcave ΑΡΚΟΥΔΌΤΡΥΠΑ",
+              "label": "ELECTRON @ LA COMÉDIE : ART & MUSIC",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/bearcave-arkoydotrypa"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/electron-comedie-art-music"
             },
             {
-              "label": "Chroniques d'Immeuble",
+              "label": "Empreintes de fêtes",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/chroniques-immeuble"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/empreintes-fetes"
             },
             {
-              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - De Rigot aux Pâquis: quand la…",
+              "label": "Fête de clôture",
               "detail": "Genève",
-              "date": "2026-10-16",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-rigot-paquis-ville-vert"
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/fete-cloture"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

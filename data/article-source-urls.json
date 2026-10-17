@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1948426/emergenza-terra-racconta-la-grande-trasformazione": {
-    "articleId": "emergenza-terra-trasformazione",
-    "ts": "2026-09-07T08:52:51.038Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1948444/sciopero-italia-cancellazioni-ritardi-lunedi": {
     "articleId": "sciopero-ferroviario-italia-ticino",
     "ts": "2026-09-07T09:02:17.630Z",
@@ -2497,6 +2492,11 @@
   "https://www.ticinonews.ch/ticino/gehri-leconomia-non-e-il-bancomat-dello-stato-444773": {
     "articleId": "assemblea-ccti-rotta-economia",
     "ts": "2026-10-16T23:37:31.798Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/politica/1957269/cantieri-interventi-lavori-evitare-anni-esecutivo-municipio-disagi-obiettivo-vita": {
+    "articleId": "cantieri-lugano-riduzione-disagi",
+    "ts": "2026-10-17T00:14:09.814Z",
     "keyForm": 2
   }
 }

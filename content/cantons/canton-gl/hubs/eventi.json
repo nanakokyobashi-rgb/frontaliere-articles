@@ -4,17 +4,17 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "c4a809d26337612b8818fa023b53749afe833d059410da3041c2d860e88be0b8",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "6a50d515ae8636eca841838564869dd73f79702a8c15d281adc70b0b89ad57ee",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T03:54:22.189Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T15:35:32.859Z",
       "keyFacts": 0
     }
   ],
@@ -37,24 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Geführte Wildbeobachtung auf der Mettmen Alp",
-              "detail": "Gäste-Info Elm, Glarus Süd",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gefuehrte-wildbeobachtung-auf-der-mettmen-alp/"
-            },
-            {
-              "label": "Kletterlager Mettmen",
-              "detail": "Naturfründehuus Mettmen — in corso, ultimo giorno: 16 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kletterlager-mettmen/"
-            },
-            {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
             {
               "label": "Samstags-Brunch im Bergrestaurant Chämistube, 17. Oktober 2026",
               "detail": "Braunwald",
@@ -80,6 +62,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-2/"
             },
             {
+              "label": "Trachtenausstellung im Dorfkern Elm",
+              "detail": "Elm, Glarus Süd — in corso, ultimo giorno: 24 ottobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
+            },
+            {
               "label": "Elmer Wandertag",
               "detail": "Sportbahnen Elm",
               "date": "2026-10-18",
@@ -96,11 +84,23 @@
               "detail": "Braunwald, Glarus Süd",
               "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/saisonschluss-mit-livemusik-in-der-chaemistube-18-oktober-2026/"
+            },
+            {
+              "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
+              "detail": "Luchsingen-Hätzingen",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "Stricken in der Bibliothek Grosstal Hätzingen",
+              "detail": "Bibliothek Grosstal Hätzingen",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [],
@@ -147,7 +147,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "GL",
@@ -167,24 +167,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Geführte Wildbeobachtung auf der Mettmen Alp",
-              "detail": "Gäste-Info Elm, Glarus Süd",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gefuehrte-wildbeobachtung-auf-der-mettmen-alp/"
-            },
-            {
-              "label": "Kletterlager Mettmen",
-              "detail": "Naturfründehuus Mettmen — ongoing, last day: 16 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kletterlager-mettmen/"
-            },
-            {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — ongoing, last day: 24 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
             {
               "label": "Samstags-Brunch im Bergrestaurant Chämistube, 17. Oktober 2026",
               "detail": "Braunwald",
@@ -210,6 +192,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-2/"
             },
             {
+              "label": "Trachtenausstellung im Dorfkern Elm",
+              "detail": "Elm, Glarus Süd — ongoing, last day: 24 October 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
+            },
+            {
               "label": "Elmer Wandertag",
               "detail": "Sportbahnen Elm",
               "date": "2026-10-18",
@@ -226,11 +214,23 @@
               "detail": "Braunwald, Glarus Süd",
               "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/saisonschluss-mit-livemusik-in-der-chaemistube-18-oktober-2026/"
+            },
+            {
+              "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
+              "detail": "Luchsingen-Hätzingen",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "Stricken in der Bibliothek Grosstal Hätzingen",
+              "detail": "Bibliothek Grosstal Hätzingen",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -243,7 +243,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [],
@@ -277,7 +277,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "GL",
@@ -297,24 +297,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Geführte Wildbeobachtung auf der Mettmen Alp",
-              "detail": "Gäste-Info Elm, Glarus Süd",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gefuehrte-wildbeobachtung-auf-der-mettmen-alp/"
-            },
-            {
-              "label": "Kletterlager Mettmen",
-              "detail": "Naturfründehuus Mettmen — läuft, letzter Tag: 16. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kletterlager-mettmen/"
-            },
-            {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
             {
               "label": "Samstags-Brunch im Bergrestaurant Chämistube, 17. Oktober 2026",
               "detail": "Braunwald",
@@ -340,6 +322,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-2/"
             },
             {
+              "label": "Trachtenausstellung im Dorfkern Elm",
+              "detail": "Elm, Glarus Süd — läuft, letzter Tag: 24. Oktober 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
+            },
+            {
               "label": "Elmer Wandertag",
               "detail": "Sportbahnen Elm",
               "date": "2026-10-18",
@@ -356,11 +344,23 @@
               "detail": "Braunwald, Glarus Süd",
               "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/saisonschluss-mit-livemusik-in-der-chaemistube-18-oktober-2026/"
+            },
+            {
+              "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
+              "detail": "Luchsingen-Hätzingen",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "Stricken in der Bibliothek Grosstal Hätzingen",
+              "detail": "Bibliothek Grosstal Hätzingen",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -373,7 +373,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [],
@@ -407,7 +407,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "GL",
@@ -427,24 +427,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Geführte Wildbeobachtung auf der Mettmen Alp",
-              "detail": "Gäste-Info Elm, Glarus Süd",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gefuehrte-wildbeobachtung-auf-der-mettmen-alp/"
-            },
-            {
-              "label": "Kletterlager Mettmen",
-              "detail": "Naturfründehuus Mettmen — en cours, dernier jour : 16 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kletterlager-mettmen/"
-            },
-            {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
             {
               "label": "Samstags-Brunch im Bergrestaurant Chämistube, 17. Oktober 2026",
               "detail": "Braunwald",
@@ -470,6 +452,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-2/"
             },
             {
+              "label": "Trachtenausstellung im Dorfkern Elm",
+              "detail": "Elm, Glarus Süd — en cours, dernier jour : 24 octobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
+            },
+            {
               "label": "Elmer Wandertag",
               "detail": "Sportbahnen Elm",
               "date": "2026-10-18",
@@ -486,11 +474,23 @@
               "detail": "Braunwald, Glarus Süd",
               "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/saisonschluss-mit-livemusik-in-der-chaemistube-18-oktober-2026/"
+            },
+            {
+              "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
+              "detail": "Luchsingen-Hätzingen",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "Stricken in der Bibliothek Grosstal Hätzingen",
+              "detail": "Bibliothek Grosstal Hätzingen",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -503,7 +503,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [],
@@ -537,7 +537,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

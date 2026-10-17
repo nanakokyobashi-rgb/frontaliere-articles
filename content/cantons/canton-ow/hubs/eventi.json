@@ -4,12 +4,12 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "87f5e0d4129eef06ed24f865a9d8c2245762d923d1aee3cfd0987c83e0325d8b",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "0ffffe1b114e1469c42fc77df8bf255b110b9257841d10385a6ec1bf1f708c80",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T03:54:22.189Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     }
   ],
@@ -32,24 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Sternzauber Armband - kreativ - intuitiv - verbindend (2 Armbänder)",
-              "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
-              "date": "2026-10-16",
-              "url": "https://www.ow.ch/_rte/anlass/94054"
-            },
-            {
-              "label": "Wildwochenende im Kurhaus",
-              "detail": "Hotel Kurhaus am Sarnersee, Sarnen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
-            },
-            {
-              "label": "Cattle show Engelberg & Grafenort 2026",
-              "detail": "Festi, Engelberg",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cattle-show-engelberg-grafenort-2026/"
-            },
             {
               "label": "FG Sarnen/Familientreff: geWALDiger Spiel- und Begegnungsplatz",
               "detail": "Feuerstelle Zubersrüti Chärwald, Kerns, Kerns",
@@ -87,15 +69,33 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischentoene-concert-7-turning-point-beethoven/"
             },
             {
+              "label": "Wildwochenende im Kurhaus",
+              "detail": "Hotel Kurhaus am Sarnersee, Sarnen — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
+            },
+            {
               "label": "Älplertag",
               "detail": "Pfarrkirche Sarnen, Sarnen, Sarnen",
               "date": "2026-10-18",
               "url": "https://www.ow.ch/_rte/anlass/93256"
+            },
+            {
+              "label": "Älplertag Sarnen",
+              "detail": "Röm.-kath. Pfarrkirche St.Peter und Paul, Sarnen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aelplertag-sarnen/"
+            },
+            {
+              "label": "Der Projektraum Sarnen ist gestartet – wir laden zum nächsten Networking-Event ein",
+              "detail": "Bibliothek Obwalden, Sarnen, Sarnen",
+              "date": "2026-10-20",
+              "url": "https://www.ow.ch/_rte/anlass/93358"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/obvaldo/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
@@ -141,7 +141,7 @@
           "url": "/eventi/obvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "OW",
@@ -161,24 +161,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Sternzauber Armband - kreativ - intuitiv - verbindend (2 Armbänder)",
-              "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
-              "date": "2026-10-16",
-              "url": "https://www.ow.ch/_rte/anlass/94054"
-            },
-            {
-              "label": "Wildwochenende im Kurhaus",
-              "detail": "Hotel Kurhaus am Sarnersee, Sarnen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
-            },
-            {
-              "label": "Cattle show Engelberg & Grafenort 2026",
-              "detail": "Festi, Engelberg",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cattle-show-engelberg-grafenort-2026/"
-            },
             {
               "label": "FG Sarnen/Familientreff: geWALDiger Spiel- und Begegnungsplatz",
               "detail": "Feuerstelle Zubersrüti Chärwald, Kerns, Kerns",
@@ -216,15 +198,33 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischentoene-concert-7-turning-point-beethoven/"
             },
             {
+              "label": "Wildwochenende im Kurhaus",
+              "detail": "Hotel Kurhaus am Sarnersee, Sarnen — ongoing, last day: 18 October 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
+            },
+            {
               "label": "Älplertag",
               "detail": "Pfarrkirche Sarnen, Sarnen, Sarnen",
               "date": "2026-10-18",
               "url": "https://www.ow.ch/_rte/anlass/93256"
+            },
+            {
+              "label": "Älplertag Sarnen",
+              "detail": "Röm.-kath. Pfarrkirche St.Peter und Paul, Sarnen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aelplertag-sarnen/"
+            },
+            {
+              "label": "Der Projektraum Sarnen ist gestartet – wir laden zum nächsten Networking-Event ein",
+              "detail": "Bibliothek Obwalden, Sarnen, Sarnen",
+              "date": "2026-10-20",
+              "url": "https://www.ow.ch/_rte/anlass/93358"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/obwalden/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
@@ -270,7 +270,7 @@
           "url": "/en/events/obwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "OW",
@@ -290,24 +290,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Sternzauber Armband - kreativ - intuitiv - verbindend (2 Armbänder)",
-              "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
-              "date": "2026-10-16",
-              "url": "https://www.ow.ch/_rte/anlass/94054"
-            },
-            {
-              "label": "Wildwochenende im Kurhaus",
-              "detail": "Hotel Kurhaus am Sarnersee, Sarnen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
-            },
-            {
-              "label": "Viehschau Engelberg & Grafenort 2026",
-              "detail": "Festi, Engelberg",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cattle-show-engelberg-grafenort-2026/"
-            },
             {
               "label": "FG Sarnen/Familientreff: geWALDiger Spiel- und Begegnungsplatz",
               "detail": "Feuerstelle Zubersrüti Chärwald, Kerns, Kerns",
@@ -345,15 +327,33 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischentoene-concert-7-turning-point-beethoven/"
             },
             {
+              "label": "Wildwochenende im Kurhaus",
+              "detail": "Hotel Kurhaus am Sarnersee, Sarnen — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
+            },
+            {
               "label": "Älplertag",
               "detail": "Pfarrkirche Sarnen, Sarnen, Sarnen",
               "date": "2026-10-18",
               "url": "https://www.ow.ch/_rte/anlass/93256"
+            },
+            {
+              "label": "Älplertag Sarnen",
+              "detail": "Röm.-kath. Pfarrkirche St.Peter und Paul, Sarnen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aelplertag-sarnen/"
+            },
+            {
+              "label": "Der Projektraum Sarnen ist gestartet – wir laden zum nächsten Networking-Event ein",
+              "detail": "Bibliothek Obwalden, Sarnen, Sarnen",
+              "date": "2026-10-20",
+              "url": "https://www.ow.ch/_rte/anlass/93358"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/obwalden/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
@@ -399,7 +399,7 @@
           "url": "/de/veranstaltungen/obwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "OW",
@@ -419,24 +419,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Sternzauber Armband - kreativ - intuitiv - verbindend (2 Armbänder)",
-              "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
-              "date": "2026-10-16",
-              "url": "https://www.ow.ch/_rte/anlass/94054"
-            },
-            {
-              "label": "Wildwochenende im Kurhaus",
-              "detail": "Hotel Kurhaus am Sarnersee, Sarnen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
-            },
-            {
-              "label": "Cattle show Engelberg & Grafenort 2026",
-              "detail": "Festi, Engelberg",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cattle-show-engelberg-grafenort-2026/"
-            },
             {
               "label": "FG Sarnen/Familientreff: geWALDiger Spiel- und Begegnungsplatz",
               "detail": "Feuerstelle Zubersrüti Chärwald, Kerns, Kerns",
@@ -474,15 +456,33 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischentoene-concert-7-turning-point-beethoven/"
             },
             {
+              "label": "Wildwochenende im Kurhaus",
+              "detail": "Hotel Kurhaus am Sarnersee, Sarnen — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
+            },
+            {
               "label": "Älplertag",
               "detail": "Pfarrkirche Sarnen, Sarnen, Sarnen",
               "date": "2026-10-18",
               "url": "https://www.ow.ch/_rte/anlass/93256"
+            },
+            {
+              "label": "Älplertag Sarnen",
+              "detail": "Röm.-kath. Pfarrkirche St.Peter und Paul, Sarnen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aelplertag-sarnen/"
+            },
+            {
+              "label": "Der Projektraum Sarnen ist gestartet – wir laden zum nächsten Networking-Event ein",
+              "detail": "Bibliothek Obwalden, Sarnen, Sarnen",
+              "date": "2026-10-20",
+              "url": "https://www.ow.ch/_rte/anlass/93358"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/obwald/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
@@ -528,7 +528,7 @@
           "url": "/fr/evenements/obwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

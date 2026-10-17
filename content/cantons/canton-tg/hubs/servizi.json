@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "e0f2797dbbbb90972eaad16fe325f0ecd15f828ce8027fade6692f6d12d9d8e2",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "ef691643fd6090481805f331c80c67a9e1d1c92a8664646cb39d35bd613aafe1",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-16T11:22:11.131Z",
+      "updatedAt": "2026-10-16T16:39:19.839Z",
       "keyFacts": 1
     },
     {
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T10:09:31.602Z",
+      "updatedAt": "2026-10-16T15:35:32.859Z",
       "keyFacts": 0
     }
   ],
@@ -43,7 +43,7 @@
         },
         {
           "label": "Aste di targhe in corso",
-          "value": "44",
+          "value": "46",
           "note": "offerta mediana 600 CHF"
         }
       ],
@@ -92,7 +92,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-16T11:22:11.131Z"
+          "updatedAt": "2026-10-16T16:39:19.839Z"
         },
         {
           "id": "meteo",
@@ -144,7 +144,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -218,7 +218,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "TG",
@@ -234,7 +234,7 @@
         },
         {
           "label": "Plate auctions running",
-          "value": "44",
+          "value": "46",
           "note": "typical bid 600 CHF"
         }
       ],
@@ -283,7 +283,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-16T11:22:11.131Z"
+          "updatedAt": "2026-10-16T16:39:19.839Z"
         },
         {
           "id": "meteo",
@@ -335,7 +335,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -405,7 +405,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "TG",
@@ -421,7 +421,7 @@
         },
         {
           "label": "Laufende Kontrollschild-Auktionen",
-          "value": "44",
+          "value": "46",
           "note": "mittleres Gebot 600 CHF"
         }
       ],
@@ -470,7 +470,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-16T11:22:11.131Z"
+          "updatedAt": "2026-10-16T16:39:19.839Z"
         },
         {
           "id": "meteo",
@@ -522,7 +522,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -592,7 +592,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "TG",
@@ -608,7 +608,7 @@
         },
         {
           "label": "Enchères de plaques en cours",
-          "value": "44",
+          "value": "46",
           "note": "offre centrale 600 CHF"
         }
       ],
@@ -657,7 +657,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-16T11:22:11.131Z"
+          "updatedAt": "2026-10-16T16:39:19.839Z"
         },
         {
           "id": "meteo",
@@ -709,7 +709,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -775,7 +775,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

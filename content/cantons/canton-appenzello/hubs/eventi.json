@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "492bcc35ee35813399116d0201fd8c947e9c125bb1fe11e1ea3ff2ae3ecd8bd1",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "fc251f92a64c067314d3c0f08f9b48fb4843b0bdc23d5e52515c6a79167f8714",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -33,12 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Raduno di Capodanno",
-              "detail": "Rösslisaal, Trogen",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
-            },
-            {
               "label": "Mostra cantonale dei tori e dell'autunno a Teufen",
               "detail": "Teufen, Teufen (AR)",
               "date": "2026-10-17",
@@ -49,6 +43,12 @@
               "detail": "Kulturmüli, Urnäsch",
               "date": "2026-10-17",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/urnaesch/trio-lowell-coppo-kaerner_AgPn5BC"
+            },
+            {
+              "label": "Raduno di Capodanno",
+              "detail": "Rösslisaal, Trogen — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
             },
             {
               "label": "Cinema: Mondi intermedi",
@@ -135,7 +135,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -156,12 +156,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "New Year's Eve Gathering",
-              "detail": "Rösslisaal, Trogen",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
-            },
-            {
               "label": "Cantonal bull and fall show in Teufen",
               "detail": "Teufen, Teufen (AR)",
               "date": "2026-10-17",
@@ -172,6 +166,12 @@
               "detail": "Kulturmüli, Urnäsch",
               "date": "2026-10-17",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/urnaesch/trio-lowell-coppo-kaerner_AgPn5BC"
+            },
+            {
+              "label": "New Year's Eve Gathering",
+              "detail": "Rösslisaal, Trogen — ongoing, last day: 18 October 2026",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
             },
             {
               "label": "Movies: Between Worlds",
@@ -258,7 +258,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -279,12 +279,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Herbst Gathering",
-              "detail": "Rösslisaal, Trogen",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
-            },
-            {
               "label": "Kantonale Stier- und Herbstschau in Teufen",
               "detail": "Teufen, Teufen (AR)",
               "date": "2026-10-17",
@@ -295,6 +289,12 @@
               "detail": "Kulturmüli, Urnäsch",
               "date": "2026-10-17",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/urnaesch/trio-lowell-coppo-kaerner_AgPn5BC"
+            },
+            {
+              "label": "Herbst Gathering",
+              "detail": "Rösslisaal, Trogen — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
             },
             {
               "label": "Kino: Beyond Tradition",
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -402,12 +402,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Rencontre du Nouvel An",
-              "detail": "Rösslisaal, Trogen",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
-            },
-            {
               "label": "Concours cantonal de taureaux et d'automne à Teufen",
               "detail": "Teufen, Teufen (AR)",
               "date": "2026-10-17",
@@ -418,6 +412,12 @@
               "detail": "Kulturmüli, Urnäsch",
               "date": "2026-10-17",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/urnaesch/trio-lowell-coppo-kaerner_AgPn5BC"
+            },
+            {
+              "label": "Rencontre du Nouvel An",
+              "detail": "Rösslisaal, Trogen — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
             },
             {
               "label": "Cinéma : Entre deux mondes",
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

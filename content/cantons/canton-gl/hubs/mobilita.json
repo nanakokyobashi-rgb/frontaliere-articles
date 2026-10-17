@@ -4,12 +4,17 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "8584c4403d6b7f0f39a568fb921497cf7eaf2de6b2a5e8e1b2771882bb6bd5e0",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "efa4b8f468da49fe0daf196f2aa44ea8823f7bd94cf4c2d0dac92aa3163c9ab9",
   "blocks": [
     {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-10-16T17:01:51.551Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T15:35:32.859Z",
       "keyFacts": 0
     }
   ],
@@ -21,6 +26,20 @@
       "intro": "Nel Canton Glarona, spostarsi per lavoro significa fare i conti con cantieri, chiusure, trasporto pubblico e, dove c’è un confine, con le attese ai valichi. Questa pagina riunisce le limitazioni in corso, i tempi di attesa rilevati e gli articoli della redazione su traffico e trasporti.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
       "keyFacts": [],
       "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "Revocato: H17 Uznach -> Glarus tra Luogo Näfels E Luogo Netstal Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-16T14:44:00.000Z"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-10-16T17:01:51.551Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
@@ -57,7 +76,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -91,7 +110,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "GL",
@@ -100,6 +119,20 @@
       "intro": "In the canton of Glarus, getting to work means dealing with roadworks, closures, public transport and, where there is a border, waiting times at the crossings. This page brings together current restrictions, measured waiting times and our articles on traffic and transport.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
       "keyFacts": [],
       "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "Revocato: H17 Uznach -> Glarus tra Luogo Näfels E Luogo Netstal Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-16T14:44:00.000Z"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-10-16T17:01:51.551Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
@@ -136,7 +169,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -170,7 +203,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "GL",
@@ -179,6 +212,20 @@
       "intro": "Im Glarnerland bedeutet der Arbeitsweg, mit Baustellen, Sperrungen, dem öffentlichen Verkehr und – wo es eine Grenze gibt – mit Wartezeiten an den Übergängen zu rechnen. Diese Seite bündelt die laufenden Einschränkungen, die gemessenen Wartezeiten und die Artikel der Redaktion zu Verkehr und Mobilität.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
       "keyFacts": [],
       "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "Aufgehoben: H17 Uznach -> Glarus zwischen Ortschaft Näfels und Ortschaft Netstal Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-16T14:44:00.000Z"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-10-16T17:01:51.551Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
@@ -215,7 +262,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -249,7 +296,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "GL",
@@ -258,6 +305,20 @@
       "intro": "Dans le canton de Glaris, se déplacer pour le travail, c’est composer avec les chantiers, les fermetures, les transports publics et, là où il y a une frontière, l’attente aux postes-frontières. Cette page réunit les restrictions en cours, les temps d’attente mesurés et les articles de la rédaction sur le trafic et les transports.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
       "keyFacts": [],
       "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "Révoqué: H17 Uznach -> Glaris entre Localité Näfels et Localité Netstal Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-16T14:44:00.000Z"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-10-16T17:01:51.551Z"
+        },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
@@ -294,7 +355,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -328,7 +389,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

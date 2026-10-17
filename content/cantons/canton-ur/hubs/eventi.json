@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "53050bf05b59ca91eedfb3c3b603c1d44593e9c58407be6140f896f5d2d94c9d",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "b0470206e6e9f973b372e57ad843d038e0f6729fc4b8013495621ee23f55dd38",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T03:54:22.189Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "24",
+          "value": "23",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,18 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Keramik Workshop",
-              "detail": "Andermatt",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/keramik-workshop-1/"
-            },
-            {
-              "label": "Chilbi im Urirotstock",
-              "detail": "Hotel Urirotstock, Isenthal",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbi-im-urirotstock-1/"
-            },
             {
               "label": "Chilbi im Urirotstock",
               "detail": "Isenthal",
@@ -91,11 +79,23 @@
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-kind-of-a-mate-namay-kush/"
+            },
+            {
+              "label": "KI – ein Einblick in neue Möglichkeiten/Chancen von von ChatGPT, CoPilot und Co.",
+              "detail": "Altdorf",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ki-ein-einblick-in-neue-moeglichkeitenchancen-von-von-chatgpt-copilot-und-co/"
+            },
+            {
+              "label": "The Bash: Part I – Ufbruch (“Setting out”)",
+              "detail": "Andermatt",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-i-ufbruch-setting-out/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
@@ -129,7 +129,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "UR",
@@ -139,7 +139,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "24",
+          "value": "23",
           "note": "from the site’s events calendar"
         }
       ],
@@ -149,18 +149,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Keramik Workshop",
-              "detail": "Andermatt",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/keramik-workshop-1/"
-            },
-            {
-              "label": "Chilbi im Urirotstock",
-              "detail": "Hotel Urirotstock, Isenthal",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbi-im-urirotstock-1/"
-            },
             {
               "label": "Chilbi im Urirotstock",
               "detail": "Isenthal",
@@ -208,11 +196,23 @@
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-kind-of-a-mate-namay-kush/"
+            },
+            {
+              "label": "KI – ein Einblick in neue Möglichkeiten/Chancen von von ChatGPT, CoPilot und Co.",
+              "detail": "Altdorf",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ki-ein-einblick-in-neue-moeglichkeitenchancen-von-von-chatgpt-copilot-und-co/"
+            },
+            {
+              "label": "The Bash: Part I – Ufbruch (“Setting out”)",
+              "detail": "Andermatt",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-i-ufbruch-setting-out/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
@@ -246,7 +246,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "UR",
@@ -256,7 +256,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "24",
+          "value": "23",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -266,18 +266,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Keramik Workshop",
-              "detail": "Andermatt",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/keramik-workshop-1/"
-            },
-            {
-              "label": "Chilbi im Urirotstock",
-              "detail": "Hotel Urirotstock, Isenthal",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbi-im-urirotstock-1/"
-            },
             {
               "label": "Chilbi im Urirotstock",
               "detail": "Isenthal",
@@ -325,11 +313,23 @@
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-kind-of-a-mate-namay-kush/"
+            },
+            {
+              "label": "KI – ein Einblick in neue Möglichkeiten/Chancen von von ChatGPT, CoPilot und Co.",
+              "detail": "Altdorf",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ki-ein-einblick-in-neue-moeglichkeitenchancen-von-von-chatgpt-copilot-und-co/"
+            },
+            {
+              "label": "The Bash: Teil I – «Ufbruch»",
+              "detail": "Andermatt",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-i-ufbruch-setting-out/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
@@ -363,7 +363,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "UR",
@@ -373,7 +373,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "24",
+          "value": "23",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -383,18 +383,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Keramik Workshop",
-              "detail": "Andermatt",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/keramik-workshop-1/"
-            },
-            {
-              "label": "Chilbi im Urirotstock",
-              "detail": "Hotel Urirotstock, Isenthal",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbi-im-urirotstock-1/"
-            },
             {
               "label": "Chilbi im Urirotstock",
               "detail": "Isenthal",
@@ -442,11 +430,23 @@
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-kind-of-a-mate-namay-kush/"
+            },
+            {
+              "label": "KI – ein Einblick in neue Möglichkeiten/Chancen von von ChatGPT, CoPilot und Co.",
+              "detail": "Altdorf",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ki-ein-einblick-in-neue-moeglichkeitenchancen-von-von-chatgpt-copilot-und-co/"
+            },
+            {
+              "label": "The Bash: Part I – Ufbruch (“Setting out”)",
+              "detail": "Andermatt",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-i-ufbruch-setting-out/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
@@ -480,7 +480,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

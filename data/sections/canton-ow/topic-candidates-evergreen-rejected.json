@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
+  "topicGateUrls": {
+    "canton-ow::https://www.ow.ch/_rte/information/138949": {
+      "section": "canton-ow",
+      "ts": 1792196679164
+    }
+  }
+}

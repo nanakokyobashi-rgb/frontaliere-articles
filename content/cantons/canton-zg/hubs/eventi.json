@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "b1fd235a38889085a875631ba1173e0d9e3e79812170fb9792abe428947e94df",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "c8c2e22cca5eebe8a420c493cac21d067a0fb042f3da73fcde5363523ddc8125",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T03:54:22.189Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "37",
+          "value": "36",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,42 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Metzgete Hütten Zug",
-              "detail": "aigu Restaurant & Bar, Zug",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
-            },
-            {
-              "label": "Dancing Queens – ABBA Tribute",
-              "detail": "Zug",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dancing-queens-abba-tribute/"
-            },
-            {
-              "label": "Cocktails & Dreams Vol. II – 80er Party",
-              "detail": "Chollerhalle",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/cocktails-und-dreams-vol-ii-80er-party_A4ewm1t"
-            },
-            {
-              "label": "Autumn Camp 2026",
-              "detail": "Helvetic Institute, Zug — in corso, ultimo giorno: 16 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-camp-2026/"
-            },
-            {
-              "label": "Tea time on Lake Zug",
-              "detail": "Zug — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tea-time-on-lake-zug/"
-            },
-            {
-              "label": "Klangmeditation in Steinhausen",
-              "detail": "Steinhausen — in corso, ultimo giorno: 22 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
-            },
             {
               "label": "Klangbad in Steinhausen",
               "detail": "Praxis anderscht GmbH, Steinhausen",
@@ -91,11 +55,47 @@
               "detail": "Gemeindesaal, Baar",
               "date": "2026-10-17",
               "url": "https://www.guidle.com/it/events/music/baar/autumn-concert_Atan1st"
+            },
+            {
+              "label": "20 Jahre Heidi Happy – die Jubliäumsshow",
+              "detail": "Chollerhalle",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/20-jahre-heidi-happy-die-jubliaeumsshow_AEpfvxM"
+            },
+            {
+              "label": "20 Jahre Heidi Happy – die Jubliäumsshow",
+              "detail": "Zug",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/20-jahre-heidi-happy-die-jubliaeumsshow/"
+            },
+            {
+              "label": "Chanson Konzert Farah Erfani \"der Blues deiner Augen\"",
+              "detail": "Binzmühle",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rotkreuz/chanson-konzert-farah-erfani-der-blues-deiner-augen_ATy3nXE"
+            },
+            {
+              "label": "Metzgete Hütten Zug",
+              "detail": "aigu Restaurant & Bar, Zug — in corso, ultimo giorno: 29 ottobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
+            },
+            {
+              "label": "Tea time on Lake Zug",
+              "detail": "Zug — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tea-time-on-lake-zug/"
+            },
+            {
+              "label": "Klangmeditation in Steinhausen",
+              "detail": "Steinhausen — in corso, ultimo giorno: 22 ottobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
@@ -135,7 +135,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "ZG",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "37",
+          "value": "36",
           "note": "from the site’s events calendar"
         }
       ],
@@ -155,42 +155,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Metzgete Hütten Zug",
-              "detail": "aigu Restaurant & Bar, Zug",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
-            },
-            {
-              "label": "Dancing Queens – ABBA Tribute",
-              "detail": "Zug",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dancing-queens-abba-tribute/"
-            },
-            {
-              "label": "Cocktails & Dreams Vol. II – 80er Party",
-              "detail": "Chollerhalle",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/cocktails-und-dreams-vol-ii-80er-party_A4ewm1t"
-            },
-            {
-              "label": "Autumn Camp 2026",
-              "detail": "Helvetic Institute, Zug — ongoing, last day: 16 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-camp-2026/"
-            },
-            {
-              "label": "Tea time on Lake Zug",
-              "detail": "Zug — ongoing, last day: 18 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tea-time-on-lake-zug/"
-            },
-            {
-              "label": "Klangmeditation in Steinhausen",
-              "detail": "Steinhausen — ongoing, last day: 22 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
-            },
             {
               "label": "Klangbad in Steinhausen",
               "detail": "Praxis anderscht GmbH, Steinhausen",
@@ -214,11 +178,47 @@
               "detail": "Gemeindesaal, Baar",
               "date": "2026-10-17",
               "url": "https://www.guidle.com/it/events/music/baar/autumn-concert_Atan1st"
+            },
+            {
+              "label": "20 Jahre Heidi Happy – die Jubliäumsshow",
+              "detail": "Chollerhalle",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/20-jahre-heidi-happy-die-jubliaeumsshow_AEpfvxM"
+            },
+            {
+              "label": "20 Jahre Heidi Happy – die Jubliäumsshow",
+              "detail": "Zug",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/20-jahre-heidi-happy-die-jubliaeumsshow/"
+            },
+            {
+              "label": "Chanson Concert by Farah Erfani: \"The Blues of Your Eyes\"",
+              "detail": "Binzmühle",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rotkreuz/chanson-konzert-farah-erfani-der-blues-deiner-augen_ATy3nXE"
+            },
+            {
+              "label": "Metzgete Hütten Zug",
+              "detail": "aigu Restaurant & Bar, Zug — ongoing, last day: 29 October 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
+            },
+            {
+              "label": "Tea time on Lake Zug",
+              "detail": "Zug — ongoing, last day: 18 October 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tea-time-on-lake-zug/"
+            },
+            {
+              "label": "Klangmeditation in Steinhausen",
+              "detail": "Steinhausen — ongoing, last day: 22 October 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
@@ -258,7 +258,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "ZG",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "37",
+          "value": "36",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -278,42 +278,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Metzgete Hütten Zug",
-              "detail": "aigu Restaurant & Bar, Zug",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
-            },
-            {
-              "label": "Dancing Queens – ABBA Tribute",
-              "detail": "Zug",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dancing-queens-abba-tribute/"
-            },
-            {
-              "label": "Cocktails & Dreams Vol. II – 80er Party",
-              "detail": "Chollerhalle",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/cocktails-und-dreams-vol-ii-80er-party_A4ewm1t"
-            },
-            {
-              "label": "Herbst-Camp 2026",
-              "detail": "Helvetic Institute, Zug — läuft, letzter Tag: 16. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-camp-2026/"
-            },
-            {
-              "label": "Tea Time auf dem Zugersee",
-              "detail": "Zug — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tea-time-on-lake-zug/"
-            },
-            {
-              "label": "Klangmeditation in Steinhausen",
-              "detail": "Steinhausen — läuft, letzter Tag: 22. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
-            },
             {
               "label": "Klangbad in Steinhausen",
               "detail": "Praxis anderscht GmbH, Steinhausen",
@@ -337,11 +301,47 @@
               "detail": "Gemeindesaal, Baar",
               "date": "2026-10-17",
               "url": "https://www.guidle.com/it/events/music/baar/autumn-concert_Atan1st"
+            },
+            {
+              "label": "20 Jahre Heidi Happy – die Jubliäumsshow",
+              "detail": "Chollerhalle",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/20-jahre-heidi-happy-die-jubliaeumsshow_AEpfvxM"
+            },
+            {
+              "label": "20 Jahre Heidi Happy – die Jubliäumsshow",
+              "detail": "Zug",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/20-jahre-heidi-happy-die-jubliaeumsshow/"
+            },
+            {
+              "label": "Chanson-Konzert mit Farah Erfani: „Der Blues deiner Augen“",
+              "detail": "Binzmühle",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rotkreuz/chanson-konzert-farah-erfani-der-blues-deiner-augen_ATy3nXE"
+            },
+            {
+              "label": "Metzgete Hütten Zug",
+              "detail": "aigu Restaurant & Bar, Zug — läuft, letzter Tag: 29. Oktober 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
+            },
+            {
+              "label": "Tea Time auf dem Zugersee",
+              "detail": "Zug — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tea-time-on-lake-zug/"
+            },
+            {
+              "label": "Klangmeditation in Steinhausen",
+              "detail": "Steinhausen — läuft, letzter Tag: 22. Oktober 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "ZG",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "37",
+          "value": "36",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -401,42 +401,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Cabanes de boucherie à Zoug",
-              "detail": "aigu Restaurant & Bar, Zug",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
-            },
-            {
-              "label": "Dancing Queens – ABBA Tribute",
-              "detail": "Zug",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dancing-queens-abba-tribute/"
-            },
-            {
-              "label": "Cocktails & Dreams Vol. II – 80er Party",
-              "detail": "Chollerhalle",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/cocktails-und-dreams-vol-ii-80er-party_A4ewm1t"
-            },
-            {
-              "label": "Autumn Camp 2026",
-              "detail": "Helvetic Institute, Zug — en cours, dernier jour : 16 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-camp-2026/"
-            },
-            {
-              "label": "Tea time on Lake Zug",
-              "detail": "Zug — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tea-time-on-lake-zug/"
-            },
-            {
-              "label": "Klangmeditation in Steinhausen",
-              "detail": "Steinhausen — en cours, dernier jour : 22 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
-            },
             {
               "label": "Klangbad in Steinhausen",
               "detail": "Praxis anderscht GmbH, Steinhausen",
@@ -460,11 +424,47 @@
               "detail": "Gemeindesaal, Baar",
               "date": "2026-10-17",
               "url": "https://www.guidle.com/it/events/music/baar/autumn-concert_Atan1st"
+            },
+            {
+              "label": "20 Jahre Heidi Happy – die Jubliäumsshow",
+              "detail": "Chollerhalle",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/20-jahre-heidi-happy-die-jubliaeumsshow_AEpfvxM"
+            },
+            {
+              "label": "20 Jahre Heidi Happy – die Jubliäumsshow",
+              "detail": "Zug",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/20-jahre-heidi-happy-die-jubliaeumsshow/"
+            },
+            {
+              "label": "Concert de chanson de Farah Erfani « Le blues de tes yeux »",
+              "detail": "Binzmühle",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rotkreuz/chanson-konzert-farah-erfani-der-blues-deiner-augen_ATy3nXE"
+            },
+            {
+              "label": "Cabanes de boucherie à Zoug",
+              "detail": "aigu Restaurant & Bar, Zug — en cours, dernier jour : 29 octobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
+            },
+            {
+              "label": "Tea time on Lake Zug",
+              "detail": "Zug — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tea-time-on-lake-zug/"
+            },
+            {
+              "label": "Klangmeditation in Steinhausen",
+              "detail": "Steinhausen — en cours, dernier jour : 22 octobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [],
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

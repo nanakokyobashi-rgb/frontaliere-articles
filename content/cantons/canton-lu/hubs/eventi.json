@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T21:14:08.111Z",
-  "contentHash": "ca10289fdeee925e2cc0eefa1f0366454d4bb78d048d839f477d36f584c64db3",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "879525409ffe942152bed2518c2ee682526b6358f4e74532967886bb911b2aae",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T10:09:31.602Z",
+      "updatedAt": "2026-10-16T15:35:32.859Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "83",
+          "value": "82",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Tanzweekend",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/events/music/fluehli-lu/dance-weekend_AJPRiSW"
-            },
-            {
-              "label": "Dance Weekend",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tanzweekend/"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-10-16",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
-            },
-            {
-              "label": "Kurs Salben herstellen | 16.10.2026",
-              "detail": "Escholzmatt",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-in-der-salbenkueche-16102026/"
-            },
-            {
-              "label": "Salonkonzert",
+              "label": "Ausstellung NachtLeben",
               "detail": "Luzern",
-              "date": "2026-10-16",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
+              "date": "2026-10-17",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
             },
             {
-              "label": "Top Gun: Maverick – in Concert",
-              "detail": "Lucerne",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/top-gun-maverick-in-concert/"
+              "label": "Pilzexkursion",
+              "detail": "Luzern",
+              "date": "2026-10-17",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626880"
             },
             {
-              "label": "Luzerner Spielleute: Die Chinesische Mauer von Max Frisch",
-              "detail": "Theaterpavillon, Luzern",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/luzerner-spielleute-die-chinesische-mauer-von-max-frisch/"
+              "label": "Repair Café 17.10.",
+              "detail": "Primarschulhaus, Menznau",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/menznau/repair-cafe-1710_AWMMVbD"
             },
             {
-              "label": "Rude & Rebel Ska Fest",
+              "label": "Lucerne Cheese Festival",
+              "detail": "Kapellplatz",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kaesefest-luzern/"
+            },
+            {
+              "label": "Wurstkurs auf dem Burgrain",
+              "detail": "Agrovision Burgrain AG, Alberswil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wurstkurs-auf-dem-burgrain/"
+            },
+            {
+              "label": "Musikalische Unterhaltung",
+              "detail": "Kurhaus Seeblick, Weggis",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/weggis/musical-entertainment_AWcVDbW"
+            },
+            {
+              "label": "Der zerbrochne Krug",
+              "detail": "Luzerner Theater",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/luzern/der-zerbrochene-krug_ApjXMan"
+            },
+            {
+              "label": "Shakra",
               "detail": "Schüür",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/luzern/rude-und-rebel-ska-fest_AcTf6rt"
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/shakra_AHN2sMu"
             },
             {
-              "label": "Stella Cruz und Band",
-              "detail": "Sigristenhaus, Ettiswil",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/stella-cruz-und-band_AUfqreX"
+              "label": "Badener Punk-Night mit Sin Logica (Luzern) • PCA (Züri)",
+              "detail": "Kulturbetrieb Royal, Luzern",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/badener-punknight-mit-sin-logica-luzern-pca-zueri/"
             },
             {
-              "label": "The Beauty Of Gemina - Veil Of Rain Tour 2026",
-              "detail": "Grabenhalle, Rain",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/st-gallen/the-beauty-of-gemina-veil-of-rain-tour-2026_AJiRfVg"
+              "label": "Tanzweekend",
+              "detail": "FLÜHLI Hotel Kurhaus, Flühli — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/fluehli-lu/dance-weekend_AJPRiSW"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -138,7 +138,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7629577"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -172,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T21:14:08.111Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "LU",
@@ -182,7 +182,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "83",
+          "value": "82",
           "note": "from the site’s events calendar"
         }
       ],
@@ -193,64 +193,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Dance Weekend",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/events/music/fluehli-lu/dance-weekend_AJPRiSW"
-            },
-            {
-              "label": "Dance Weekend",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tanzweekend/"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-10-16",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
-            },
-            {
-              "label": "Kurs Salben herstellen | 16.10.2026",
-              "detail": "Escholzmatt",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-in-der-salbenkueche-16102026/"
-            },
-            {
-              "label": "Salonkonzert",
+              "label": "Ausstellung NachtLeben",
               "detail": "Luzern",
-              "date": "2026-10-16",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
+              "date": "2026-10-17",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
             },
             {
-              "label": "Top Gun: Maverick – in Concert",
-              "detail": "Lucerne",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/top-gun-maverick-in-concert/"
+              "label": "Pilzexkursion",
+              "detail": "Luzern",
+              "date": "2026-10-17",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626880"
             },
             {
-              "label": "Luzerner Spielleute: Die Chinesische Mauer von Max Frisch",
-              "detail": "Theaterpavillon, Luzern",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/luzerner-spielleute-die-chinesische-mauer-von-max-frisch/"
+              "label": "Repair Café 17.10.",
+              "detail": "Primarschulhaus, Menznau",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/menznau/repair-cafe-1710_AWMMVbD"
             },
             {
-              "label": "Rude & Rebel Ska Fest",
+              "label": "Lucerne Cheese Festival",
+              "detail": "Kapellplatz",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kaesefest-luzern/"
+            },
+            {
+              "label": "Wurstkurs auf dem Burgrain",
+              "detail": "Agrovision Burgrain AG, Alberswil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wurstkurs-auf-dem-burgrain/"
+            },
+            {
+              "label": "Musical entertainment",
+              "detail": "Kurhaus Seeblick, Weggis",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/weggis/musical-entertainment_AWcVDbW"
+            },
+            {
+              "label": "Der zerbrochne Krug",
+              "detail": "Luzerner Theater",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/luzern/der-zerbrochene-krug_ApjXMan"
+            },
+            {
+              "label": "Shakra",
               "detail": "Schüür",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/luzern/rude-und-rebel-ska-fest_AcTf6rt"
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/shakra_AHN2sMu"
             },
             {
-              "label": "Stella Cruz und Band",
-              "detail": "Sigristenhaus, Ettiswil",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/stella-cruz-und-band_AUfqreX"
+              "label": "Badener Punk-Night mit Sin Logica (Luzern) • PCA (Züri)",
+              "detail": "Kulturbetrieb Royal, Luzern",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/badener-punknight-mit-sin-logica-luzern-pca-zueri/"
             },
             {
-              "label": "The Beauty Of Gemina - Veil Of Rain Tour 2026",
-              "detail": "Grabenhalle, Rain",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/st-gallen/the-beauty-of-gemina-veil-of-rain-tour-2026_AJiRfVg"
+              "label": "Dance Weekend",
+              "detail": "FLÜHLI Hotel Kurhaus, Flühli — ongoing, last day: 18 October 2026",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/fluehli-lu/dance-weekend_AJPRiSW"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -293,7 +293,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7629577"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T21:14:08.111Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "LU",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "83",
+          "value": "82",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -348,64 +348,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Tanzweekend",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/events/music/fluehli-lu/dance-weekend_AJPRiSW"
-            },
-            {
-              "label": "Tanzweekend",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tanzweekend/"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-10-16",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
-            },
-            {
-              "label": "Kurs Salben herstellen | 16.10.2026",
-              "detail": "Escholzmatt",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-in-der-salbenkueche-16102026/"
-            },
-            {
-              "label": "Salonkonzert",
+              "label": "Ausstellung NachtLeben",
               "detail": "Luzern",
-              "date": "2026-10-16",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
+              "date": "2026-10-17",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
             },
             {
-              "label": "Top Gun: Maverick – in Concert",
-              "detail": "Lucerne",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/top-gun-maverick-in-concert/"
+              "label": "Pilzexkursion",
+              "detail": "Luzern",
+              "date": "2026-10-17",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626880"
             },
             {
-              "label": "Luzerner Spielleute: Die Chinesische Mauer von Max Frisch",
-              "detail": "Theaterpavillon, Luzern",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/luzerner-spielleute-die-chinesische-mauer-von-max-frisch/"
+              "label": "Repair Café 17.10.",
+              "detail": "Primarschulhaus, Menznau",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/menznau/repair-cafe-1710_AWMMVbD"
             },
             {
-              "label": "Rude & Rebel Ska Fest",
+              "label": "Käsefest Luzern",
+              "detail": "Kapellplatz",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kaesefest-luzern/"
+            },
+            {
+              "label": "Wurstkurs auf dem Burgrain",
+              "detail": "Agrovision Burgrain AG, Alberswil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wurstkurs-auf-dem-burgrain/"
+            },
+            {
+              "label": "Musikalische Unterhaltung",
+              "detail": "Kurhaus Seeblick, Weggis",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/weggis/musical-entertainment_AWcVDbW"
+            },
+            {
+              "label": "Der zerbrochne Krug",
+              "detail": "Luzerner Theater",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/luzern/der-zerbrochene-krug_ApjXMan"
+            },
+            {
+              "label": "Shakra",
               "detail": "Schüür",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/luzern/rude-und-rebel-ska-fest_AcTf6rt"
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/shakra_AHN2sMu"
             },
             {
-              "label": "Stella Cruz und Band",
-              "detail": "Sigristenhaus, Ettiswil",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/stella-cruz-und-band_AUfqreX"
+              "label": "Badener Punk-Night mit Sin Logica (Luzern) • PCA (Züri)",
+              "detail": "Kulturbetrieb Royal, Luzern",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/badener-punknight-mit-sin-logica-luzern-pca-zueri/"
             },
             {
-              "label": "The Beauty Of Gemina - Veil Of Rain Tour 2026",
-              "detail": "Grabenhalle, Rain",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/st-gallen/the-beauty-of-gemina-veil-of-rain-tour-2026_AJiRfVg"
+              "label": "Tanzweekend",
+              "detail": "FLÜHLI Hotel Kurhaus, Flühli — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/fluehli-lu/dance-weekend_AJPRiSW"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -448,7 +448,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7629577"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -482,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T21:14:08.111Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "LU",
@@ -492,7 +492,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "83",
+          "value": "82",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -503,64 +503,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Week-end de danse",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/events/music/fluehli-lu/dance-weekend_AJPRiSW"
-            },
-            {
-              "label": "Week-end de danse",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tanzweekend/"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-10-16",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
-            },
-            {
-              "label": "Kurs Salben herstellen | 16.10.2026",
-              "detail": "Escholzmatt",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-in-der-salbenkueche-16102026/"
-            },
-            {
-              "label": "Salonkonzert",
+              "label": "Ausstellung NachtLeben",
               "detail": "Luzern",
-              "date": "2026-10-16",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
+              "date": "2026-10-17",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
             },
             {
-              "label": "Top Gun: Maverick – in Concert",
-              "detail": "Lucerne",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/top-gun-maverick-in-concert/"
+              "label": "Pilzexkursion",
+              "detail": "Luzern",
+              "date": "2026-10-17",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626880"
             },
             {
-              "label": "Luzerner Spielleute: Die Chinesische Mauer von Max Frisch",
-              "detail": "Theaterpavillon, Luzern",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/luzerner-spielleute-die-chinesische-mauer-von-max-frisch/"
+              "label": "Repair Café 17.10.",
+              "detail": "Primarschulhaus, Menznau",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/menznau/repair-cafe-1710_AWMMVbD"
             },
             {
-              "label": "Rude & Rebel Ska Fest",
+              "label": "Lucerne Cheese Festival",
+              "detail": "Kapellplatz",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kaesefest-luzern/"
+            },
+            {
+              "label": "Wurstkurs auf dem Burgrain",
+              "detail": "Agrovision Burgrain AG, Alberswil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wurstkurs-auf-dem-burgrain/"
+            },
+            {
+              "label": "Animation musicale",
+              "detail": "Kurhaus Seeblick, Weggis",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/weggis/musical-entertainment_AWcVDbW"
+            },
+            {
+              "label": "Der zerbrochne Krug",
+              "detail": "Luzerner Theater",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/luzern/der-zerbrochene-krug_ApjXMan"
+            },
+            {
+              "label": "Shakra",
               "detail": "Schüür",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/luzern/rude-und-rebel-ska-fest_AcTf6rt"
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/shakra_AHN2sMu"
             },
             {
-              "label": "Stella Cruz und Band",
-              "detail": "Sigristenhaus, Ettiswil",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/stella-cruz-und-band_AUfqreX"
+              "label": "Badener Punk-Night mit Sin Logica (Luzern) • PCA (Züri)",
+              "detail": "Kulturbetrieb Royal, Luzern",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/badener-punknight-mit-sin-logica-luzern-pca-zueri/"
             },
             {
-              "label": "The Beauty Of Gemina - Veil Of Rain Tour 2026",
-              "detail": "Grabenhalle, Rain",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/st-gallen/the-beauty-of-gemina-veil-of-rain-tour-2026_AJiRfVg"
+              "label": "Week-end de danse",
+              "detail": "FLÜHLI Hotel Kurhaus, Flühli — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/fluehli-lu/dance-weekend_AJPRiSW"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -603,7 +603,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7629577"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -637,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T21:14:08.111Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "8efac567b3d2e658a28e7fa0e448e573f30ab1ed7e4590b566f5eef294c7b6f4",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "1662e9e6eb2ee3a9df059437fcc32d415e8160076c11f1562e749ed0966803fd",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-16T11:22:11.131Z",
+      "updatedAt": "2026-10-16T16:39:19.839Z",
       "keyFacts": 1
     },
     {
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T10:09:31.602Z",
+      "updatedAt": "2026-10-16T15:35:32.859Z",
       "keyFacts": 0
     }
   ],
@@ -97,7 +97,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-16T11:22:11.131Z"
+          "updatedAt": "2026-10-16T16:39:19.839Z"
         },
         {
           "id": "meteo",
@@ -149,7 +149,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51109625"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -178,16 +178,16 @@
           "date": "2026-09-05T17:13:22.938Z"
         },
         {
-          "title": "Sistema scolastico canton Vallese: iscrizione e cicli",
-          "url": "/articoli-svizzera/scuola-vallese-cicli-iscrizione/",
-          "excerpt": "Cicli, età di iscrizione, calendario, lingue e passaggio alle scuole medie superiori nel sistema scolastico del Vallese.",
-          "date": "2026-09-30T08:39:22.953Z"
-        },
-        {
           "title": "Permesso di domicilio C nel Canton Vallese: requisiti e domanda",
           "url": "/articoli-svizzera/permesso-domicilio-c-canton-vallese-requisiti-domanda/",
           "excerpt": "Scopri i requisiti e la procedura per ottenere il permesso di domicilio C nel Canton Vallese, inclusi anni richiesti, criteri di integrazione e conoscenze linguistiche.",
           "date": "2026-09-06T00:58:20.006Z"
+        },
+        {
+          "title": "Sistema scolastico canton Vallese: iscrizione e cicli",
+          "url": "/articoli-svizzera/scuola-vallese-cicli-iscrizione/",
+          "excerpt": "Cicli, età di iscrizione, calendario, lingue e passaggio alle scuole medie superiori nel sistema scolastico del Vallese.",
+          "date": "2026-09-30T08:39:22.953Z"
         },
         {
           "title": "Premi LAMal nel Vallese: fasce e riduzioni 2026",
@@ -229,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "VS",
@@ -299,7 +299,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-16T11:22:11.131Z"
+          "updatedAt": "2026-10-16T16:39:19.839Z"
         },
         {
           "id": "meteo",
@@ -351,7 +351,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51109625"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -380,16 +380,16 @@
           "date": "2026-09-05T17:13:22.938Z"
         },
         {
-          "title": "Valais cantonal school system: enrollment and cycles",
-          "url": "/en/swiss-articles/valais-school-enrolment-cycles/",
-          "excerpt": "Cycles, enrollment age, calendar, languages and transition to upper secondary schools in the school system of Valais.",
-          "date": "2026-09-30T08:39:22.953Z"
-        },
-        {
           "title": "Residence permit C in the Canton of Valais: requirements and application",
           "url": "/en/swiss-articles/permit-c-residence-canton-valais-requirements-application/",
           "excerpt": "Learn about the requirements and procedure for obtaining a residence permit C in the Canton of Valais, including the required years, integration criteria and language skills.",
           "date": "2026-09-06T00:58:20.006Z"
+        },
+        {
+          "title": "Valais cantonal school system: enrollment and cycles",
+          "url": "/en/swiss-articles/valais-school-enrolment-cycles/",
+          "excerpt": "Cycles, enrollment age, calendar, languages and transition to upper secondary schools in the school system of Valais.",
+          "date": "2026-09-30T08:39:22.953Z"
         },
         {
           "title": "LAMal awards in Valais: bands and reductions 2026",
@@ -427,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "VS",
@@ -497,7 +497,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-16T11:22:11.131Z"
+          "updatedAt": "2026-10-16T16:39:19.839Z"
         },
         {
           "id": "meteo",
@@ -549,7 +549,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51109625"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -578,16 +578,16 @@
           "date": "2026-09-05T17:13:22.938Z"
         },
         {
-          "title": "Schulsystem Kanton Wallis: Einschreibung und Zyklen",
-          "url": "/de/schweiz-artikel/walliser-schulsystem-anmeldung-zyklen/",
-          "excerpt": "Zyklen, Einschreibungsalter, Kalender, Sprachen und Übergang in die Sekundarstufe II im Walliser Schulsystem.",
-          "date": "2026-09-30T08:39:22.953Z"
-        },
-        {
           "title": "Niederlassungsbewilligung C im Kanton Wallis: Voraussetzungen und Antrag",
           "url": "/de/schweiz-artikel/aufenthaltsbewilligung-c-kanton-wallis-anforderungen-antrag/",
           "excerpt": "Erfahren Sie mehr über die Voraussetzungen und das Verfahren zur Erlangung der Niederlassungsbewilligung C im Kanton Wallis, einschliesslich erforderlicher Jahre, Integrationskriterien und Sprachkenntnisse.",
           "date": "2026-09-06T00:58:20.006Z"
+        },
+        {
+          "title": "Schulsystem Kanton Wallis: Einschreibung und Zyklen",
+          "url": "/de/schweiz-artikel/walliser-schulsystem-anmeldung-zyklen/",
+          "excerpt": "Zyklen, Einschreibungsalter, Kalender, Sprachen und Übergang in die Sekundarstufe II im Walliser Schulsystem.",
+          "date": "2026-09-30T08:39:22.953Z"
         },
         {
           "title": "KVG-Prämien im Wallis: Zeitabschnitte und Kürzungen 2026",
@@ -625,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "VS",
@@ -695,7 +695,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-16T11:22:11.131Z"
+          "updatedAt": "2026-10-16T16:39:19.839Z"
         },
         {
           "id": "meteo",
@@ -747,7 +747,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51109625"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -776,16 +776,16 @@
           "date": "2026-09-05T17:13:22.938Z"
         },
         {
-          "title": "Système scolaire du canton du Valais : inscription et cycles",
-          "url": "/fr/articles-suisse/ecole-valais-inscription-cycles/",
-          "excerpt": "Cycles, âge d'inscription, calendrier, langues et passage aux écoles du secondaire II dans le système scolaire du Valais.",
-          "date": "2026-09-30T08:39:22.953Z"
-        },
-        {
           "title": "Permis de séjour C dans le canton du Valais : exigences et demande",
           "url": "/fr/articles-suisse/permis-c-residence-canton-valais-conditions-demande/",
           "excerpt": "Découvrez les conditions et la procédure d'obtention du permis de séjour C dans le canton du Valais, y compris les années requises, les critères d'intégration et les connaissances linguistiques.",
           "date": "2026-09-06T00:58:20.006Z"
+        },
+        {
+          "title": "Système scolaire du canton du Valais : inscription et cycles",
+          "url": "/fr/articles-suisse/ecole-valais-inscription-cycles/",
+          "excerpt": "Cycles, âge d'inscription, calendrier, langues et passage aux écoles du secondaire II dans le système scolaire du Valais.",
+          "date": "2026-09-30T08:39:22.953Z"
         },
         {
           "title": "Primes LAMal en Valais : fourchettes et réductions 2026",
@@ -819,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

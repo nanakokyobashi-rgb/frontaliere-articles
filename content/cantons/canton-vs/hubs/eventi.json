@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "31c709aac7246cb3eac5c2d1b4f7cc25931eddfeed250a484f22ed39f67c8621",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "8dd22c69fe52e7ab1f3bf334edef2020abf8a8408a9c08099c6401706883a02a",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "71",
+          "value": "76",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "An introduction to Alphorn blowing",
-              "detail": "Pra da Dzeu, Isérables",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/an-introduction-to-alphorn-blowing/"
+              "label": "Literarisches Frühstück",
+              "detail": "Médiathèque Valais - Sion, Sion",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/sion/literary-breakfast_AUvYjEk"
             },
             {
-              "label": "Audiovisual Flea Market Under the Arches",
-              "detail": "Pentamedia, Sion",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/audiovisual-flea-market-under-the-arches/"
+              "label": "Literary Breakfast",
+              "detail": "Médiathèque Valais - Sion, Sion",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ptit-dej-litteraire/"
             },
             {
-              "label": "Plastic Creatures",
-              "detail": "Zeughaus Kultur",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/evenements/musique/glis/plastic-creatures_AuSgVdX"
+              "label": "Valaisan Nomadism",
+              "detail": "Varen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/valaisan-nomadism/"
             },
             {
-              "label": "Theater: Aufführungen in Bellwald",
-              "detail": "Mehrzweckhalle Bellwald, Bellwald",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+              "label": "Walliser Halbnomadentum - Ein Leben zwischen Berg und Tal",
+              "detail": "Varen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/walliser-halbnomadentum-ein-leben-zwischen-berg-und-tal/"
             },
             {
-              "label": "Adelia Clavien & Stéphanie Pothier, “Sens”",
-              "detail": "Riddes — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
+              "label": "300 years of the Maison du remuage",
+              "detail": "Sierre Tourisme, Sierre",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/300-jahre-maison-du-remuage/"
             },
             {
-              "label": "Come and make your own 'tomme' cheese !",
-              "detail": "Ferme la Vernettaz, Veysonnaz — in corso, ultimo giorno: 21 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/come-and-make-your-own-tomme-cheese/"
+              "label": "Anzère Fantastique",
+              "detail": "Anzère Tourisme",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/anzere-fantastique/"
             },
             {
-              "label": "Alpaca Walk",
-              "detail": "auf Anfrage, Bellwald — in corso, ultimo giorno: 21 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpaka-spaziergang/"
+              "label": "Visite commentée",
+              "detail": "Fully",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-3/"
             },
             {
-              "label": "East-West Encounters",
-              "detail": "Maison de la Bourgeoisie, Sierre — in corso, ultimo giorno: 23 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rencontres-orient-occident/"
+              "label": "Castagnata Simplon",
+              "detail": "Dorfplatz, Simplon",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/castagnata-simplon/"
             },
             {
-              "label": "Geek – Mostra sulle console di gioco",
-              "detail": "Galerie St. Laurent, Leukerbad — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
+              "label": "Escursioni e yoga, Val d'Hérens",
+              "detail": "Grand Hotel & Kurhaus",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hiking-and-yoga-val-dherens/"
             },
             {
-              "label": "Mushroom workshop",
-              "detail": "Veysonnaz — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mushroom-workshop/"
+              "label": "Guided tours led by photographer Bernard Dubuis",
+              "detail": "Martigny",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visites-guidees-par-le-photographe-bernard-dubuis/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -141,7 +141,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "VS",
@@ -151,7 +151,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "71",
+          "value": "76",
           "note": "from the site’s events calendar"
         }
       ],
@@ -162,64 +162,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "An introduction to Alphorn blowing",
-              "detail": "Pra da Dzeu, Isérables",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/an-introduction-to-alphorn-blowing/"
+              "label": "Literary Breakfast",
+              "detail": "Médiathèque Valais - Sion, Sion",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/sion/literary-breakfast_AUvYjEk"
             },
             {
-              "label": "Audiovisual Flea Market Under the Arches",
-              "detail": "Pentamedia, Sion",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/audiovisual-flea-market-under-the-arches/"
+              "label": "Literary Breakfast",
+              "detail": "Médiathèque Valais - Sion, Sion",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ptit-dej-litteraire/"
             },
             {
-              "label": "Plastic Creatures",
-              "detail": "Zeughaus Kultur",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/evenements/musique/glis/plastic-creatures_AuSgVdX"
+              "label": "Valaisan Nomadism",
+              "detail": "Varen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/valaisan-nomadism/"
             },
             {
-              "label": "Theater: Aufführungen in Bellwald",
-              "detail": "Mehrzweckhalle Bellwald, Bellwald",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+              "label": "Walliser Halbnomadentum - Ein Leben zwischen Berg und Tal",
+              "detail": "Varen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/walliser-halbnomadentum-ein-leben-zwischen-berg-und-tal/"
             },
             {
-              "label": "Adelia Clavien & Stéphanie Pothier, “Sens”",
-              "detail": "Riddes — ongoing, last day: 31 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
+              "label": "300 years of the Maison du remuage",
+              "detail": "Sierre Tourisme, Sierre",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/300-jahre-maison-du-remuage/"
             },
             {
-              "label": "Come and make your own 'tomme' cheese !",
-              "detail": "Ferme la Vernettaz, Veysonnaz — ongoing, last day: 21 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/come-and-make-your-own-tomme-cheese/"
+              "label": "Anzère Fantastique",
+              "detail": "Anzère Tourisme",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/anzere-fantastique/"
             },
             {
-              "label": "Alpaca Walk",
-              "detail": "auf Anfrage, Bellwald — ongoing, last day: 21 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpaka-spaziergang/"
+              "label": "Visite commentée",
+              "detail": "Fully",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-3/"
             },
             {
-              "label": "East-West Encounters",
-              "detail": "Maison de la Bourgeoisie, Sierre — ongoing, last day: 23 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rencontres-orient-occident/"
+              "label": "Castagnata Simplon",
+              "detail": "Dorfplatz, Simplon",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/castagnata-simplon/"
             },
             {
-              "label": "Geek—Video Game Consoles Exhibition",
-              "detail": "Galerie St. Laurent, Leukerbad — ongoing, last day: 31 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
+              "label": "Hiking and Yoga, Val d'Hérens",
+              "detail": "Grand Hotel & Kurhaus",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hiking-and-yoga-val-dherens/"
             },
             {
-              "label": "Mushroom workshop",
-              "detail": "Veysonnaz — ongoing, last day: 18 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mushroom-workshop/"
+              "label": "Guided tours led by photographer Bernard Dubuis",
+              "detail": "Martigny",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visites-guidees-par-le-photographe-bernard-dubuis/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -268,7 +268,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "VS",
@@ -278,7 +278,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "71",
+          "value": "76",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -289,64 +289,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Einführungskurse ins Alphornspiel",
-              "detail": "Pra da Dzeu, Isérables",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/an-introduction-to-alphorn-blowing/"
+              "label": "Literarisches Frühstück",
+              "detail": "Médiathèque Valais - Sion, Sion",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/sion/literary-breakfast_AUvYjEk"
             },
             {
-              "label": "Audiovisueller Trödelmarkt unter den Arkaden",
-              "detail": "Pentamedia, Sion",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/audiovisual-flea-market-under-the-arches/"
+              "label": "Literarisches Frühstück",
+              "detail": "Médiathèque Valais - Sion, Sion",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ptit-dej-litteraire/"
             },
             {
-              "label": "Plastic Creatures",
-              "detail": "Zeughaus Kultur",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/evenements/musique/glis/plastic-creatures_AuSgVdX"
+              "label": "Walliser Halbnomadentum",
+              "detail": "Varen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/valaisan-nomadism/"
             },
             {
-              "label": "Theater: Aufführungen in Bellwald",
-              "detail": "Mehrzweckhalle Bellwald, Bellwald",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+              "label": "Walliser Halbnomadentum - Ein Leben zwischen Berg und Tal",
+              "detail": "Varen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/walliser-halbnomadentum-ein-leben-zwischen-berg-und-tal/"
             },
             {
-              "label": "Adelia Clavien & Stéphanie Pothier „Sens“",
-              "detail": "Riddes — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
+              "label": "300 Jahre «Maison du Remuage»",
+              "detail": "Sierre Tourisme, Sierre",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/300-jahre-maison-du-remuage/"
             },
             {
-              "label": "Käse selber machen – so geht’s!",
-              "detail": "Ferme la Vernettaz, Veysonnaz — läuft, letzter Tag: 21. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/come-and-make-your-own-tomme-cheese/"
+              "label": "Anzère Fantastisch",
+              "detail": "Anzère Tourisme",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/anzere-fantastique/"
             },
             {
-              "label": "Alpaka Spaziergang",
-              "detail": "auf Anfrage, Bellwald — läuft, letzter Tag: 21. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpaka-spaziergang/"
+              "label": "Visite commentée",
+              "detail": "Fully",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-3/"
             },
             {
-              "label": "Begegnungen zwischen Orient und Okzident",
-              "detail": "Maison de la Bourgeoisie, Sierre — läuft, letzter Tag: 23. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rencontres-orient-occident/"
+              "label": "Castagnata Simplon",
+              "detail": "Dorfplatz, Simplon",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/castagnata-simplon/"
             },
             {
-              "label": "Geek – Spielkonsolen Ausstellung",
-              "detail": "Galerie St. Laurent, Leukerbad — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
+              "label": "Wandern und Yoga, Val d'Hérens",
+              "detail": "Grand Hotel & Kurhaus",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hiking-and-yoga-val-dherens/"
             },
             {
-              "label": "Pilz-Workshop",
-              "detail": "Veysonnaz — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mushroom-workshop/"
+              "label": "Führungen unter der Leitung des Fotografen Bernard Dubuis",
+              "detail": "Martigny",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visites-guidees-par-le-photographe-bernard-dubuis/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -395,7 +395,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "VS",
@@ -405,7 +405,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "71",
+          "value": "76",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -416,64 +416,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Stage d'initiation au cor des Alpes",
-              "detail": "Pra da Dzeu, Isérables",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/an-introduction-to-alphorn-blowing/"
+              "label": "P'tit déj littéraire",
+              "detail": "Médiathèque Valais - Sion, Sion",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/sion/literary-breakfast_AUvYjEk"
             },
             {
-              "label": "Brocante audiovisuelle sous les arches",
-              "detail": "Pentamedia, Sion",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/audiovisual-flea-market-under-the-arches/"
+              "label": "P'tit déj littéraire",
+              "detail": "Médiathèque Valais - Sion, Sion",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ptit-dej-litteraire/"
             },
             {
-              "label": "Plastic Creatures",
-              "detail": "Zeughaus Kultur",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/evenements/musique/glis/plastic-creatures_AuSgVdX"
+              "label": "Nomadisme valaisan",
+              "detail": "Varen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/valaisan-nomadism/"
             },
             {
-              "label": "Théâtre : représentations à Bellwald",
-              "detail": "Mehrzweckhalle Bellwald, Bellwald",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+              "label": "Remuage - Une vie entre plaine et montagne",
+              "detail": "Varen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/walliser-halbnomadentum-ein-leben-zwischen-berg-und-tal/"
             },
             {
-              "label": "Adelia Clavien & Stéphanie Pothier « Sens »",
-              "detail": "Riddes — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
+              "label": "300 ans de la Maison du remuage",
+              "detail": "Sierre Tourisme, Sierre",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/300-jahre-maison-du-remuage/"
             },
             {
-              "label": "Fais ta tomme !",
-              "detail": "Ferme la Vernettaz, Veysonnaz — en cours, dernier jour : 21 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/come-and-make-your-own-tomme-cheese/"
+              "label": "Anzère Fantastique",
+              "detail": "Anzère Tourisme",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/anzere-fantastique/"
             },
             {
-              "label": "Promenade avec des alpagas",
-              "detail": "auf Anfrage, Bellwald — en cours, dernier jour : 21 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpaka-spaziergang/"
+              "label": "Visite commentée",
+              "detail": "Fully",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-3/"
             },
             {
-              "label": "Rencontres Orient Occident",
-              "detail": "Maison de la Bourgeoisie, Sierre — en cours, dernier jour : 23 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rencontres-orient-occident/"
+              "label": "Castagnata Simplon",
+              "detail": "Dorfplatz, Simplon",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/castagnata-simplon/"
             },
             {
-              "label": "Exposition « Geek – Consoles de jeux »",
-              "detail": "Galerie St. Laurent, Leukerbad — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
+              "label": "Randonnée et Yoga, Val d'Hérens",
+              "detail": "Grand Hotel & Kurhaus",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hiking-and-yoga-val-dherens/"
             },
             {
-              "label": "Atelier champignons",
-              "detail": "Veysonnaz — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mushroom-workshop/"
+              "label": "Visites guidées par le photographe Bernard Dubuis",
+              "detail": "Martigny",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visites-guidees-par-le-photographe-bernard-dubuis/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -524,7 +524,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

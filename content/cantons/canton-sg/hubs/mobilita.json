@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "e095c7a89f3188e1928e7bb5fe7cadcdd1857b437e892082e5332d61ef214695",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "01ed4f292188cae302ae15b043726eb3cead9b04c19808c6536116b9956446f6",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-16T11:58:12.009Z",
+      "updatedAt": "2026-10-16T17:01:51.551Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T10:09:31.602Z",
+      "updatedAt": "2026-10-16T15:35:32.859Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "15",
+          "value": "14",
           "note": "segnalazioni aggiornate: 16 ottobre 2026"
         }
       ],
@@ -160,7 +160,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-16T11:58:12.009Z"
+          "updatedAt": "2026-10-16T17:01:51.551Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -198,7 +198,7 @@
               "url": "https://presse.vorarlberg.at/land/public/Rinder-TBC-Weitere-positive-PCR-Befunde-in-zwei-bereits-gesperrten-Betrieben"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -256,7 +256,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "SG",
@@ -276,7 +276,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "15",
+          "value": "14",
           "note": "reports as of 16 October 2026"
         }
       ],
@@ -394,7 +394,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-16T11:58:12.009Z"
+          "updatedAt": "2026-10-16T17:01:51.551Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -432,7 +432,7 @@
               "url": "https://presse.vorarlberg.at/land/public/Rinder-TBC-Weitere-positive-PCR-Befunde-in-zwei-bereits-gesperrten-Betrieben"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "SG",
@@ -509,7 +509,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "15",
+          "value": "14",
           "note": "Meldungen vom 16. Oktober 2026"
         }
       ],
@@ -627,7 +627,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-16T11:58:12.009Z"
+          "updatedAt": "2026-10-16T17:01:51.551Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -665,7 +665,7 @@
               "url": "https://presse.vorarlberg.at/land/public/Rinder-TBC-Weitere-positive-PCR-Befunde-in-zwei-bereits-gesperrten-Betrieben"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -722,7 +722,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "SG",
@@ -742,7 +742,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "15",
+          "value": "14",
           "note": "signalements au 16 octobre 2026"
         }
       ],
@@ -860,7 +860,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-16T11:58:12.009Z"
+          "updatedAt": "2026-10-16T17:01:51.551Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -898,7 +898,7 @@
               "url": "https://presse.vorarlberg.at/land/public/Rinder-TBC-Weitere-positive-PCR-Befunde-in-zwei-bereits-gesperrten-Betrieben"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -956,7 +956,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

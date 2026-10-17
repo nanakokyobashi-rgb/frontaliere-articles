@@ -110,6 +110,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-16T23:37:31.796Z",
       "lastFailureAt": "2026-10-16T23:37:31.796Z"
+    },
+    {
+      "articleId": "cantieri-lugano-riduzione-disagi",
+      "title": "Cantieri a Lugano: il Municipio punta a ridurre i disagi",
+      "fallbackImage": "/images/blog/frontalieri-assunzioni-lugano-interrogazione.webp",
+      "reason": "All image providers failed for article-cantieri-lugano-riduzione-disagi: openai-codex (vision gate rejected image: Generic synthetic construction scene relevant to Lugano, but it c",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T00:14:09.813Z",
+      "lastFailureAt": "2026-10-17T00:14:09.813Z"
     }
   ]
 }

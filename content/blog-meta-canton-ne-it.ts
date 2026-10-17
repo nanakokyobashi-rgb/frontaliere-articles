@@ -18,6 +18,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.nuovo-centro-asilo-couvet.title': 'Nuovo centro accoglienza asilo a Couvet: parte il progetto',
     'blog.article.nuovo-centro-asilo-couvet.excerpt': 'Nuova struttura prevista in rue du 1er Mars 11, a Couvet Sostituirà il sito attuale di Chemin des Prises 8 Progetto elaborato con il Comune di Val-de-Travers',
     'blog.article.nuovo-centro-asilo-couvet.imageAlt': 'Rappresentazione di un edificio pubblico ristrutturato a Couvet, Canton Neuchâtel',
+    'blog.article.cpcn-rendimento-2025-copertura.title': 'CPCN registra +5,6% nel 2025: copertura 84,8%',
+    'blog.article.cpcn-rendimento-2025-copertura.excerpt': '+5,6% per la performance CPCN nel 2025 3% di remunerazione sugli averi di vecchiaia 84,8% di copertura al 31.12.2025 RFV da CHF 979 milioni, al 92%',
+    'blog.article.cpcn-rendimento-2025-copertura.imageAlt': 'Patrimonio immobiliare e previdenza della CPCN nel Canton Neuchâtel',
 };
 
 export default blogMetaCantonNeIt;

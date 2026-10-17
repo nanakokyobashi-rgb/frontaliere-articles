@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "4b28cf2f01e3fc3eb1e5da5395f99039f64208ee506c97c5c197986bbd9009f0",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "22642c088214cc71905cc67ec9a09a56052df7dcfde51cf657926b5fe0c74f1c",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T03:54:22.189Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "93",
+          "value": "97",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Gallusfeier 2026",
-              "detail": "Pfalzkeller, St. Gallen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gallusfeier-2026/"
+              "label": "Markt am Holzsymposium im Atzmännig",
+              "detail": "Schutt-Atzmännig",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/markt-am-holzsymposium-im-atzmaennig/"
             },
             {
-              "label": "Candy Dulfer",
-              "detail": "ENTRA / KK Zürisee",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/candy-dulfer_AECkSvw"
+              "label": "Workshop Obertongesang",
+              "detail": "Klangwald",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/suche/bazenheid/workshop-obertongesang_AxkaGnY"
             },
             {
-              "label": "Darwin",
-              "detail": "Bühne Marbach",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/marbach-sg/darwin_AZFTm9K"
+              "label": "SchreibCafé im Zeit-Fenster in Wil SG",
+              "detail": "Zeit-Fenster Brigitte Künzli",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/schreibcafe-im-zeit-fenster-in-wil-sg_A33YV5f"
             },
             {
-              "label": "Frank Vetter",
-              "detail": "Musikbeiz Adler",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/frank-vetter_AwyK1rp"
+              "label": "Naturjodel-Wochenendkurs",
+              "detail": "Raum im Zentrum, St. Gallen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-wochenendkurs/"
             },
             {
-              "label": "Miss Helvetia & Band",
-              "detail": "Dömli, Ebnat-Kappel",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/miss-helvetia-und-band_AquZFRk"
+              "label": "Rheintaler Oktoberfest",
+              "detail": "Turnhalle Schöntal, Altstätten",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rheintaler-oktoberfest/"
             },
             {
-              "label": "The Beauty Of Gemina - Veil Of Rain Tour 2026",
-              "detail": "St. Gallen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-beauty-of-gemina-veil-of-rain-tour-2026/"
+              "label": "BandXost 2026",
+              "detail": "ZAK Zentrum Aktueller Kultur",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/jona/bandxost-2026_A1rnnnw"
             },
             {
-              "label": "Egidio «Juke» Ingala & The Jacknives",
-              "detail": "Dixie- und Jazz-Club, Sargans",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sargans/egidio-juke-ingala-und-the-jacknives_AA7JHSV"
+              "label": "Carson & Corokia",
+              "detail": "Krempel",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/buchs-sg/carson-und-corokia_A4ckJUR"
             },
             {
-              "label": "Burnout Ostwest (DE)",
-              "detail": "Palace",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/st-gallen/burnout-ostwest-de_AHHgvs2"
+              "label": "Hanna & Harald",
+              "detail": "Rorschach",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-1/"
             },
             {
-              "label": "Jintan-LAN 2026",
-              "detail": "Sportanlage Progy, Rebstein — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
+              "label": "Judith Bach // Streuselkuchen",
+              "detail": "Diogenes Theater, Altstätten",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/altstaetten-sg/judith-bach-streuselkuchen_AdQd5CQ"
             },
             {
-              "label": "Jugendwoche in den Herbstferien",
-              "detail": "Stadtbibliothek Wil — in corso, ultimo giorno: 16 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
+              "label": "THE SPARKLETTES - Helvetia bockt",
+              "detail": "*ALTEFABRIK",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/the-sparklettes-helvetia-bockt_AeJGEmT"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "93",
+          "value": "97",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Gallusfeier 2026",
-              "detail": "Pfalzkeller, St. Gallen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gallusfeier-2026/"
+              "label": "Markt am Holzsymposium im Atzmännig",
+              "detail": "Schutt-Atzmännig",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/markt-am-holzsymposium-im-atzmaennig/"
             },
             {
-              "label": "Candy Dulfer",
-              "detail": "ENTRA / KK Zürisee",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/candy-dulfer_AECkSvw"
+              "label": "Workshop Obertongesang",
+              "detail": "Klangwald",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/suche/bazenheid/workshop-obertongesang_AxkaGnY"
             },
             {
-              "label": "Darwin",
-              "detail": "Bühne Marbach",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/marbach-sg/darwin_AZFTm9K"
+              "label": "SchreibCafé at Zeit-Fenster in Wil, SG",
+              "detail": "Zeit-Fenster Brigitte Künzli",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/schreibcafe-im-zeit-fenster-in-wil-sg_A33YV5f"
             },
             {
-              "label": "Frank Vetter",
-              "detail": "Musikbeiz Adler",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/frank-vetter_AwyK1rp"
+              "label": "Naturjodel-Wochenendkurs",
+              "detail": "Raum im Zentrum, St. Gallen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-wochenendkurs/"
             },
             {
-              "label": "Miss Helvetia & Band",
-              "detail": "Dömli, Ebnat-Kappel",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/miss-helvetia-und-band_AquZFRk"
+              "label": "Rheintaler Oktoberfest",
+              "detail": "Turnhalle Schöntal, Altstätten",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rheintaler-oktoberfest/"
             },
             {
-              "label": "The Beauty Of Gemina - Veil Of Rain Tour 2026",
-              "detail": "St. Gallen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-beauty-of-gemina-veil-of-rain-tour-2026/"
+              "label": "BandXost 2026",
+              "detail": "ZAK Zentrum Aktueller Kultur",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/jona/bandxost-2026_A1rnnnw"
             },
             {
-              "label": "Egidio «Juke» Ingala & The Jacknives",
-              "detail": "Dixie- und Jazz-Club, Sargans",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sargans/egidio-juke-ingala-und-the-jacknives_AA7JHSV"
+              "label": "Carson & Corokia",
+              "detail": "Krempel",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/buchs-sg/carson-und-corokia_A4ckJUR"
             },
             {
-              "label": "Burnout Ostwest (DE)",
-              "detail": "Palace",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/st-gallen/burnout-ostwest-de_AHHgvs2"
+              "label": "Hanna & Harald",
+              "detail": "Rorschach",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-1/"
             },
             {
-              "label": "Jintan-LAN 2026",
-              "detail": "Sportanlage Progy, Rebstein — ongoing, last day: 18 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
+              "label": "Judith Bach // Streuselkuchen",
+              "detail": "Diogenes Theater, Altstätten",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/altstaetten-sg/judith-bach-streuselkuchen_AdQd5CQ"
             },
             {
-              "label": "Jugendwoche in den Herbstferien",
-              "detail": "Stadtbibliothek Wil — ongoing, last day: 16 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
+              "label": "THE SPARKLETTES - Helvetia bockt",
+              "detail": "*ALTEFABRIK",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/the-sparklettes-helvetia-bockt_AeJGEmT"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "93",
+          "value": "97",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Gallusfeier 2026",
-              "detail": "Pfalzkeller, St. Gallen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gallusfeier-2026/"
+              "label": "Markt am Holzsymposium im Atzmännig",
+              "detail": "Schutt-Atzmännig",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/markt-am-holzsymposium-im-atzmaennig/"
             },
             {
-              "label": "Candy Dulfer",
-              "detail": "ENTRA / KK Zürisee",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/candy-dulfer_AECkSvw"
+              "label": "Workshop Obertongesang",
+              "detail": "Klangwald",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/suche/bazenheid/workshop-obertongesang_AxkaGnY"
             },
             {
-              "label": "Darwin",
-              "detail": "Bühne Marbach",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/marbach-sg/darwin_AZFTm9K"
+              "label": "Schreibcafe im Zeit-Fenster in <url>",
+              "detail": "Zeit-Fenster Brigitte Künzli",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/schreibcafe-im-zeit-fenster-in-wil-sg_A33YV5f"
             },
             {
-              "label": "Frank Vetter",
-              "detail": "Musikbeiz Adler",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/frank-vetter_AwyK1rp"
+              "label": "Naturjodel-Wochenendkurs",
+              "detail": "Raum im Zentrum, St. Gallen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-wochenendkurs/"
             },
             {
-              "label": "Miss Helvetia & Band",
-              "detail": "Dömli, Ebnat-Kappel",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/miss-helvetia-und-band_AquZFRk"
+              "label": "Rheintaler Oktoberfest",
+              "detail": "Turnhalle Schöntal, Altstätten",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rheintaler-oktoberfest/"
             },
             {
-              "label": "The Beauty Of Gemina - Veil Of Rain Tour 2026",
-              "detail": "St. Gallen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-beauty-of-gemina-veil-of-rain-tour-2026/"
+              "label": "BandXost 2026",
+              "detail": "ZAK Zentrum Aktueller Kultur",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/jona/bandxost-2026_A1rnnnw"
             },
             {
-              "label": "Egidio «Juke» Ingala & The Jacknives",
-              "detail": "Dixie- und Jazz-Club, Sargans",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sargans/egidio-juke-ingala-und-the-jacknives_AA7JHSV"
+              "label": "Carson & Corokia",
+              "detail": "Krempel",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/buchs-sg/carson-und-corokia_A4ckJUR"
             },
             {
-              "label": "Burnout Ostwest (DE)",
-              "detail": "Palace",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/st-gallen/burnout-ostwest-de_AHHgvs2"
+              "label": "Hanna & Harald",
+              "detail": "Rorschach",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-1/"
             },
             {
-              "label": "Jintan-LAN 2026",
-              "detail": "Sportanlage Progy, Rebstein — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
+              "label": "Judith Bach // Streuselkuchen",
+              "detail": "Diogenes Theater, Altstätten",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/altstaetten-sg/judith-bach-streuselkuchen_AdQd5CQ"
             },
             {
-              "label": "Jugendwoche in den Herbstferien",
-              "detail": "Stadtbibliothek Wil — läuft, letzter Tag: 16. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
+              "label": "THE SPARKLETTES - Helvetia bockt",
+              "detail": "*ALTEFABRIK",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/the-sparklettes-helvetia-bockt_AeJGEmT"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "93",
+          "value": "97",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Gallusfeier 2026",
-              "detail": "Pfalzkeller, St. Gallen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gallusfeier-2026/"
+              "label": "Markt am Holzsymposium im Atzmännig",
+              "detail": "Schutt-Atzmännig",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/markt-am-holzsymposium-im-atzmaennig/"
             },
             {
-              "label": "Candy Dulfer",
-              "detail": "ENTRA / KK Zürisee",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/candy-dulfer_AECkSvw"
+              "label": "Workshop Obertongesang",
+              "detail": "Klangwald",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/suche/bazenheid/workshop-obertongesang_AxkaGnY"
             },
             {
-              "label": "Darwin",
-              "detail": "Bühne Marbach",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/marbach-sg/darwin_AZFTm9K"
+              "label": "SchreibCafé au Zeit-Fenster à Wil (SG)",
+              "detail": "Zeit-Fenster Brigitte Künzli",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/schreibcafe-im-zeit-fenster-in-wil-sg_A33YV5f"
             },
             {
-              "label": "François Vetter",
-              "detail": "Musikbeiz Adler",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/frank-vetter_AwyK1rp"
+              "label": "Naturjodel-Wochenendkurs",
+              "detail": "Raum im Zentrum, St. Gallen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-wochenendkurs/"
             },
             {
-              "label": "Miss Helvetia & Band",
-              "detail": "Dömli, Ebnat-Kappel",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/miss-helvetia-und-band_AquZFRk"
+              "label": "Rheintaler Oktoberfest",
+              "detail": "Turnhalle Schöntal, Altstätten",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rheintaler-oktoberfest/"
             },
             {
-              "label": "The Beauty Of Gemina - Veil Of Rain Tour 2026",
-              "detail": "St. Gallen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-beauty-of-gemina-veil-of-rain-tour-2026/"
+              "label": "BandXost 2026",
+              "detail": "ZAK Zentrum Aktueller Kultur",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/jona/bandxost-2026_A1rnnnw"
             },
             {
-              "label": "Egidio «Juke» Ingala & The Jacknives",
-              "detail": "Dixie- und Jazz-Club, Sargans",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sargans/egidio-juke-ingala-und-the-jacknives_AA7JHSV"
+              "label": "Carson & Corokia",
+              "detail": "Krempel",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/buchs-sg/carson-und-corokia_A4ckJUR"
             },
             {
-              "label": "Burnout Ostwest (DE)",
-              "detail": "Palace",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/st-gallen/burnout-ostwest-de_AHHgvs2"
+              "label": "Hanna & Harald",
+              "detail": "Rorschach",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-1/"
             },
             {
-              "label": "Jintan-LAN 2026",
-              "detail": "Sportanlage Progy, Rebstein — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
+              "label": "Judith Bach // Streuselkuchen",
+              "detail": "Diogenes Theater, Altstätten",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/altstaetten-sg/judith-bach-streuselkuchen_AdQd5CQ"
             },
             {
-              "label": "Jugendwoche in den Herbstferien",
-              "detail": "Stadtbibliothek Wil — en cours, dernier jour : 16 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
+              "label": "THE SPARKLETTES - Helvetia bockt",
+              "detail": "*ALTEFABRIK",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/the-sparklettes-helvetia-bockt_AeJGEmT"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

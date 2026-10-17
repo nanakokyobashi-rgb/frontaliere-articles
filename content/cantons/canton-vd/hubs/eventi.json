@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "6bc5fd248d3365cbe97f6a6900c39d6891f721a132008ab1522aef5dea57ea0c",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "966c0b2c72d11e2370e8230ec004f06badf65bce34a1c9c5efa3dde920dcfc91",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T03:54:22.189Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T15:35:32.859Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "77",
+          "value": "86",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Duo Dekacorde - Gitarre / Kontrabass",
-              "detail": "Nova Vita Residenz, Montreux",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/events/music/montreux/duo-dekacorde-guitar-double-bass_ApNkViq"
+              "label": "Bavois & Truffe - Walk in the heart of a truffle field",
+              "detail": "Bavois",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bavois-truffe-walk-in-the-heart-of-a-truffle-field/"
             },
             {
-              "label": "Duo Dekacorde - Guitar / double bass",
-              "detail": "Montreux",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/duo-dekacorde-guitar-double-bass/"
+              "label": "La Lactofermentation",
+              "detail": "Prangins",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/la-lactofermentation-3/"
+            },
+            {
+              "label": "Los Kjarkas",
+              "detail": "Théâtre de Beaulieu, Lausanne",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/los-kjarkas/"
             },
             {
               "label": "Tokyo-Ga",
-              "detail": "Cinémathèque suisse, Lausanne",
-              "date": "2026-10-16",
+              "detail": "Cinémathèque suisse, Lausanne — in corso, ultimo giorno: 30 ottobre 2026",
+              "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
-            },
-            {
-              "label": "Luis Alfonso",
-              "detail": "Théâtre de Beaulieu, Lausanne",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/luis-alfonso-1/"
-            },
-            {
-              "label": "St Graal (FR) + support",
-              "detail": "Rocking Chair, Vevey",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/vevey/st-graal-fr-support_A3G8dXW"
-            },
-            {
-              "label": "Stephan Eicher",
-              "detail": "Palais de Beaulieu",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/lausanne/stephan-eicher_AucHQq1"
-            },
-            {
-              "label": "Stephan Eicher «Poussière d’Or»",
-              "detail": "Palais de Beaulieu",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/stephan-eicher-poussiere-dor_Afmbw3i"
             },
             {
               "label": "Circus Knie",
               "detail": "Vevey — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-16",
+              "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-15/"
             },
             {
               "label": "Cooking Together − Fall Delights",
               "detail": "Alimentarium, Musée de l'alimentation, Vevey — in corso, ultimo giorno: 21 ottobre 2026",
-              "date": "2026-10-16",
+              "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-en-cuisine-delices-dautomne/"
             },
             {
               "label": "Montreux Jazz Festival Residency",
               "detail": "Petit Palais, Montreux — in corso, ultimo giorno: 17 ottobre 2026",
-              "date": "2026-10-16",
+              "date": "2026-10-17",
               "url": "https://www.guidle.com/it/events/music/montreux/montreux-jazz-festival-residency_ATc4uF2"
+            },
+            {
+              "label": "Lausanne Underground Film & Music Festival - LUFF",
+              "detail": "Divers lieux, Lausanne — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-underground-film-music-festival-luff/"
+            },
+            {
+              "label": "Der Himmel über Berlin",
+              "detail": "Cinémathèque suisse, Lausanne — in corso, ultimo giorno: 17 ottobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/der-himmel-ueber-berlin/"
+            },
+            {
+              "label": "Festival Le Bois qui Chante",
+              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — in corso, ultimo giorno: 19 ottobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [],
@@ -164,7 +164,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "VD",
@@ -174,7 +174,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "77",
+          "value": "86",
           "note": "from the site’s events calendar"
         }
       ],
@@ -185,69 +185,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Duo Dekacorde - Guitar / double bass",
-              "detail": "Nova Vita Residenz, Montreux",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/events/music/montreux/duo-dekacorde-guitar-double-bass_ApNkViq"
+              "label": "Bavois & Truffe - Walk in the heart of a truffle field",
+              "detail": "Bavois",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bavois-truffe-walk-in-the-heart-of-a-truffle-field/"
             },
             {
-              "label": "Duo Dekacorde - Guitar / double bass",
-              "detail": "Montreux",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/duo-dekacorde-guitar-double-bass/"
+              "label": "La Lactofermentation",
+              "detail": "Prangins",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/la-lactofermentation-3/"
+            },
+            {
+              "label": "Los Kjarkas",
+              "detail": "Théâtre de Beaulieu, Lausanne",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/los-kjarkas/"
             },
             {
               "label": "Tokyo-Ga",
-              "detail": "Cinémathèque suisse, Lausanne",
-              "date": "2026-10-16",
+              "detail": "Cinémathèque suisse, Lausanne — ongoing, last day: 30 October 2026",
+              "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
-            },
-            {
-              "label": "Luis Alfonso",
-              "detail": "Théâtre de Beaulieu, Lausanne",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/luis-alfonso-1/"
-            },
-            {
-              "label": "St Grail ( FR) + support",
-              "detail": "Rocking Chair, Vevey",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/vevey/st-graal-fr-support_A3G8dXW"
-            },
-            {
-              "label": "Stephan Eicher",
-              "detail": "Palais de Beaulieu",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/lausanne/stephan-eicher_AucHQq1"
-            },
-            {
-              "label": "Stephan Eicher «Poussière d’Or»",
-              "detail": "Palais de Beaulieu",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/stephan-eicher-poussiere-dor_Afmbw3i"
             },
             {
               "label": "Circus Knie",
               "detail": "Vevey — ongoing, last day: 18 October 2026",
-              "date": "2026-10-16",
+              "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-15/"
             },
             {
               "label": "Cooking Together − Fall Delights",
               "detail": "Alimentarium, Musée de l'alimentation, Vevey — ongoing, last day: 21 October 2026",
-              "date": "2026-10-16",
+              "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-en-cuisine-delices-dautomne/"
             },
             {
               "label": "Montreux Jazz Festival Residency",
               "detail": "Petit Palais, Montreux — ongoing, last day: 17 October 2026",
-              "date": "2026-10-16",
+              "date": "2026-10-17",
               "url": "https://www.guidle.com/it/events/music/montreux/montreux-jazz-festival-residency_ATc4uF2"
+            },
+            {
+              "label": "Lausanne Underground Film & Music Festival - LUFF",
+              "detail": "Divers lieux, Lausanne — ongoing, last day: 18 October 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-underground-film-music-festival-luff/"
+            },
+            {
+              "label": "Der Himmel über Berlin",
+              "detail": "Cinémathèque suisse, Lausanne — ongoing, last day: 17 October 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/der-himmel-ueber-berlin/"
+            },
+            {
+              "label": "Bois qui Chante",
+              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — ongoing, last day: 19 October 2026",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -265,7 +265,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [],
@@ -311,7 +311,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "VD",
@@ -321,7 +321,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "77",
+          "value": "86",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -332,69 +332,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Duo Dekacorde - Gitarre / Kontrabass",
-              "detail": "Nova Vita Residenz, Montreux",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/events/music/montreux/duo-dekacorde-guitar-double-bass_ApNkViq"
+              "label": "Bavois & Truffe - Spaziergang im Herzen einer Trüffelfarm",
+              "detail": "Bavois",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bavois-truffe-walk-in-the-heart-of-a-truffle-field/"
             },
             {
-              "label": "Duo Dekacorde - Gitarre / Kontrabass",
-              "detail": "Montreux",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/duo-dekacorde-guitar-double-bass/"
+              "label": "La Lactofermentation",
+              "detail": "Prangins",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/la-lactofermentation-3/"
+            },
+            {
+              "label": "Los Kjarkas",
+              "detail": "Théâtre de Beaulieu, Lausanne",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/los-kjarkas/"
             },
             {
               "label": "Tokyo-Ga",
-              "detail": "Cinémathèque suisse, Lausanne",
-              "date": "2026-10-16",
+              "detail": "Cinémathèque suisse, Lausanne — läuft, letzter Tag: 30. Oktober 2026",
+              "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
-            },
-            {
-              "label": "Luis Alfonso",
-              "detail": "Théâtre de Beaulieu, Lausanne",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/luis-alfonso-1/"
-            },
-            {
-              "label": "St Graal (FR) + Unterstützung",
-              "detail": "Rocking Chair, Vevey",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/vevey/st-graal-fr-support_A3G8dXW"
-            },
-            {
-              "label": "Stephan Eicher",
-              "detail": "Palais de Beaulieu",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/lausanne/stephan-eicher_AucHQq1"
-            },
-            {
-              "label": "Stephan Eicher «Poussière d’Or»",
-              "detail": "Palais de Beaulieu",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/stephan-eicher-poussiere-dor_Afmbw3i"
             },
             {
               "label": "Zirkus Knie",
               "detail": "Vevey — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-16",
+              "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-15/"
             },
             {
               "label": "Gemeinsam in der Küche – Herbstliche Köstlichkeiten",
               "detail": "Alimentarium, Musée de l'alimentation, Vevey — läuft, letzter Tag: 21. Oktober 2026",
-              "date": "2026-10-16",
+              "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-en-cuisine-delices-dautomne/"
             },
             {
               "label": "Montreux Jazz Festival Residency",
               "detail": "Petit Palais, Montreux — läuft, letzter Tag: 17. Oktober 2026",
-              "date": "2026-10-16",
+              "date": "2026-10-17",
               "url": "https://www.guidle.com/it/events/music/montreux/montreux-jazz-festival-residency_ATc4uF2"
+            },
+            {
+              "label": "Lausanne Underground Film & Music Festival - LUFF",
+              "detail": "Divers lieux, Lausanne — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-underground-film-music-festival-luff/"
+            },
+            {
+              "label": "Der Himmel über Berlin",
+              "detail": "Cinémathèque suisse, Lausanne — läuft, letzter Tag: 17. Oktober 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/der-himmel-ueber-berlin/"
+            },
+            {
+              "label": "Bois qui Gesang",
+              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — läuft, letzter Tag: 19. Oktober 2026",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -412,7 +412,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [],
@@ -458,7 +458,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "VD",
@@ -468,7 +468,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "77",
+          "value": "86",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -479,69 +479,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Duo Dekacorde - Guitare et contrebasse",
-              "detail": "Nova Vita Residenz, Montreux",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/events/music/montreux/duo-dekacorde-guitar-double-bass_ApNkViq"
+              "label": "Bavois & Truffe - Balade au cœur d’une truffière",
+              "detail": "Bavois",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bavois-truffe-walk-in-the-heart-of-a-truffle-field/"
             },
             {
-              "label": "Duo Dekacorde - Guitare et contrebasse",
-              "detail": "Montreux",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/duo-dekacorde-guitar-double-bass/"
+              "label": "La Lactofermentation",
+              "detail": "Prangins",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/la-lactofermentation-3/"
+            },
+            {
+              "label": "Los Kjarkas",
+              "detail": "Théâtre de Beaulieu, Lausanne",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/los-kjarkas/"
             },
             {
               "label": "Tokyo-Ga",
-              "detail": "Cinémathèque suisse, Lausanne",
-              "date": "2026-10-16",
+              "detail": "Cinémathèque suisse, Lausanne — en cours, dernier jour : 30 octobre 2026",
+              "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
-            },
-            {
-              "label": "Luis Alfonso",
-              "detail": "Théâtre de Beaulieu, Lausanne",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/luis-alfonso-1/"
-            },
-            {
-              "label": "Saint Graal (FR) + support",
-              "detail": "Rocking Chair, Vevey",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/vevey/st-graal-fr-support_A3G8dXW"
-            },
-            {
-              "label": "Stephan Eicher",
-              "detail": "Palais de Beaulieu",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/lausanne/stephan-eicher_AucHQq1"
-            },
-            {
-              "label": "Stephan Eicher «Poussière d’Or»",
-              "detail": "Palais de Beaulieu",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/stephan-eicher-poussiere-dor_Afmbw3i"
             },
             {
               "label": "Cirque Knie",
               "detail": "Vevey — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-16",
+              "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-15/"
             },
             {
               "label": "Ensemble en cuisine - Trésors de la Bénichon",
               "detail": "Alimentarium, Musée de l'alimentation, Vevey — en cours, dernier jour : 21 octobre 2026",
-              "date": "2026-10-16",
+              "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-en-cuisine-delices-dautomne/"
             },
             {
               "label": "Montreux Jazz Festival Residency",
               "detail": "Petit Palais, Montreux — en cours, dernier jour : 17 octobre 2026",
-              "date": "2026-10-16",
+              "date": "2026-10-17",
               "url": "https://www.guidle.com/it/events/music/montreux/montreux-jazz-festival-residency_ATc4uF2"
+            },
+            {
+              "label": "Lausanne Underground Film & Music Festival - LUFF",
+              "detail": "Divers lieux, Lausanne — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-underground-film-music-festival-luff/"
+            },
+            {
+              "label": "Der Himmel über Berlin",
+              "detail": "Cinémathèque suisse, Lausanne — en cours, dernier jour : 17 octobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/der-himmel-ueber-berlin/"
+            },
+            {
+              "label": "Festival Le Bois qui Chante",
+              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — en cours, dernier jour : 19 octobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -559,7 +559,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [],
@@ -605,7 +605,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

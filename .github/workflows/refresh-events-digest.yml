@@ -104,7 +104,7 @@ jobs:
             REQUESTED_CANTONS=TI
           elif [ -z "$REQUESTED_CANTONS" ] && [ -n "$REQUESTED_CANTON" ]; then
             REQUESTED_CANTONS="$REQUESTED_CANTON"
-          else
+          elif [ -z "$REQUESTED_CANTONS" ]; then
             REQUESTED_CANTONS=TI
           fi
           IFS=',' read -r -a RAW_CANTONS <<< "$REQUESTED_CANTONS"

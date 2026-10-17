@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T22:03:59.742Z",
-  "contentHash": "51fdbe63d22011a3e2502b24bd23f6e5d40821764459e1bcfc4d7329e0eaea81",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "cb637700d5bf24e1fabf18d1080ca07dbb6c610847a150df92d57e1d8daa2e32",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-16T11:50:36.673Z",
+      "updatedAt": "2026-10-16T16:09:54.799Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-16T11:22:11.131Z",
+      "updatedAt": "2026-10-16T16:39:19.839Z",
       "keyFacts": 1
     },
     {
@@ -29,7 +29,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T10:09:31.602Z",
+      "updatedAt": "2026-10-16T15:35:32.859Z",
       "keyFacts": 0
     }
   ],
@@ -49,7 +49,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "31",
-          "note": "offerta mediana 520 CHF"
+          "note": "offerta mediana 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -116,7 +116,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-16T11:50:36.673Z"
+          "updatedAt": "2026-10-16T16:09:54.799Z"
         },
         {
           "id": "aste-targhe",
@@ -125,7 +125,7 @@
           "items": [
             {
               "label": "ZH772",
-              "value": "10.000 CHF",
+              "value": "10.400 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43624"
@@ -147,7 +147,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-16T11:22:11.131Z"
+          "updatedAt": "2026-10-16T16:39:19.839Z"
         },
         {
           "id": "meteo",
@@ -199,7 +199,7 @@
               "url": "https://www.usz.ch/mit-beruehrung-naehe-schaffen-neuer-babymassage-kurs-am-usz/"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -279,7 +279,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T22:03:59.742Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "ZH",
@@ -296,7 +296,7 @@
         {
           "label": "Plate auctions running",
           "value": "31",
-          "note": "typical bid 520 CHF"
+          "note": "typical bid 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -363,7 +363,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-16T11:50:36.673Z"
+          "updatedAt": "2026-10-16T16:09:54.799Z"
         },
         {
           "id": "aste-targhe",
@@ -372,7 +372,7 @@
           "items": [
             {
               "label": "ZH772",
-              "value": "10,000 CHF",
+              "value": "10,400 CHF",
               "detail": "current bid",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43624"
@@ -394,7 +394,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-16T11:22:11.131Z"
+          "updatedAt": "2026-10-16T16:39:19.839Z"
         },
         {
           "id": "meteo",
@@ -446,7 +446,7 @@
               "url": "https://www.usz.ch/mit-beruehrung-naehe-schaffen-neuer-babymassage-kurs-am-usz/"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -522,7 +522,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T22:03:59.742Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "ZH",
@@ -539,7 +539,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "31",
-          "note": "mittleres Gebot 520 CHF"
+          "note": "mittleres Gebot 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -606,7 +606,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-16T11:50:36.673Z"
+          "updatedAt": "2026-10-16T16:09:54.799Z"
         },
         {
           "id": "aste-targhe",
@@ -615,7 +615,7 @@
           "items": [
             {
               "label": "ZH772",
-              "value": "10’000 CHF",
+              "value": "10’400 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43624"
@@ -637,7 +637,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-16T11:22:11.131Z"
+          "updatedAt": "2026-10-16T16:39:19.839Z"
         },
         {
           "id": "meteo",
@@ -689,7 +689,7 @@
               "url": "https://www.usz.ch/mit-beruehrung-naehe-schaffen-neuer-babymassage-kurs-am-usz/"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -765,7 +765,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T22:03:59.742Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "ZH",
@@ -782,7 +782,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "31",
-          "note": "offre centrale 520 CHF"
+          "note": "offre centrale 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -849,7 +849,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-16T11:50:36.673Z"
+          "updatedAt": "2026-10-16T16:09:54.799Z"
         },
         {
           "id": "aste-targhe",
@@ -858,7 +858,7 @@
           "items": [
             {
               "label": "ZH772",
-              "value": "10 000 CHF",
+              "value": "10 400 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43624"
@@ -880,7 +880,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-16T11:22:11.131Z"
+          "updatedAt": "2026-10-16T16:39:19.839Z"
         },
         {
           "id": "meteo",
@@ -932,7 +932,7 @@
               "url": "https://www.usz.ch/mit-beruehrung-naehe-schaffen-neuer-babymassage-kurs-am-usz/"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -1004,7 +1004,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T22:03:59.742Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }
