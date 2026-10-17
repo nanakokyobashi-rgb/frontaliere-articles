@@ -39,6 +39,36 @@ test('la sanitizzazione conserva il testo e non indovina URL sconosciute', () =>
   );
 });
 
+test('la sanitizzazione canonicalizza link angle-delimited e anchor HTML nel funnel condiviso', () => {
+  const source = [
+    '[Root](</en/foo>)',
+    '[Mail](<mailto:a@b>)',
+    '[Azione](<nav:jobs>)',
+    '[ref]: <nav:jobs>',
+    '<a class="tool" href="calculator">Calcolatore</a>',
+    '<a href="/en/foo">Route</a>',
+    '<a href="relative/unknown">Sconosciuto</a>',
+    '~~~markdown',
+    '[codice](<calculator>) <a href="relative/code">codice</a>',
+    '~~~',
+  ].join('\n');
+  assert.equal(
+    sanitizeArticleMarkdownLinks(source, 'en'),
+    [
+      '[Root](/en/foo)',
+      '[Mail](mailto:a@b)',
+      '[Azione](nav:jobs)',
+      '[ref]: nav:jobs',
+      '<a class="tool" href="nav:calculator">Calcolatore</a>',
+      '<a href="/en/foo">Route</a>',
+      'Sconosciuto',
+      '~~~markdown',
+      '[codice](<calculator>) <a href="relative/code">codice</a>',
+      '~~~',
+    ].join('\n'),
+  );
+});
+
 test('il gate decodifica i body TypeScript e copre tutte le radici attive senza leggere link dentro il codice', () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'article-body-link-gate-'));
   const markdown = [
@@ -83,17 +113,33 @@ test('il rilevatore distingue il target legacy dal testo già canonico', () => {
   ]);
 });
 
+test('il rilevatore considera non canonici anche gli angle-delimited e gli anchor HTML', () => {
+  const offenders = findNonCanonicalArticleLinks(
+    '[angle](<nav:jobs>) <a href="calculator">html</a> <a href="/ok">ok</a>',
+    'it',
+  );
+  assert.deepEqual(offenders.map(({ target, replacement }) => ({ target, replacement })), [
+    { target: 'nav:jobs', replacement: 'nav:jobs' },
+    { target: 'calculator', replacement: 'nav:calculator' },
+  ]);
+});
+
 test('publish-api esegue il link gate prima della pubblicazione', () => {
   const workflow = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
   const linkGate = workflow.indexOf('node scripts/ci/check-blog-body-links.mjs');
   const linkGateStepStart = workflow.lastIndexOf('      - name:', linkGate);
   const nextStep = workflow.indexOf('\n      - name:', linkGate);
   const linkGateStep = workflow.slice(linkGateStepStart, nextStep > linkGateStepStart ? nextStep : undefined);
+  const gateInputStart = workflow.indexOf('gate_input_paths=(');
+  const gateInputEnd = workflow.indexOf('\n            )', gateInputStart);
+  const gateInputBlock = workflow.slice(gateInputStart, gateInputEnd > gateInputStart ? gateInputEnd : undefined);
   const build = workflow.indexOf('npx -y tsx@4.23.15 scripts/build-api.mjs');
   const pushPaths = workflow.slice(workflow.indexOf('on:'), workflow.indexOf('permissions:'));
   assert.ok(linkGate > 0, 'publish-api.yml non invoca il link gate');
   assert.ok(build > linkGate, 'il link gate deve precedere la pubblicazione della superficie API');
   assert.ok(pushPaths.includes("'scripts/ci/check-blog-body-links.mjs'"), 'le modifiche al gate devono riattivare publish-api');
   assert.ok(pushPaths.includes("'scripts/lib/article-link-contract.mjs'"), 'le modifiche al contratto devono riattivare publish-api');
+  assert.match(gateInputBlock, /engine\/shared\/cantonArticleSectionCore\.generated\.mjs/);
+  assert.match(gateInputBlock, /generator\/data\/canton-url-slugs\.json/);
   assert.match(linkGateStep, /PREFLIGHT_SCAN_MODE/);
 });

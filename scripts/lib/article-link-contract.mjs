@@ -145,6 +145,55 @@ function parseInlineLink(source, start) {
     target,
     targetStart,
     targetEnd,
+    angle,
+  };
+}
+
+const HTML_HREF_ATTR_RX = /(?:^|\s)href\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))/i;
+
+function htmlTagEnd(source, start) {
+  let quote = null;
+  for (let index = start + 1; index < source.length; index += 1) {
+    const char = source[index];
+    if (quote) {
+      if (char === quote) quote = null;
+      continue;
+    }
+    if (char === '"' || char === "'") {
+      quote = char;
+      continue;
+    }
+    if (char === '>') return index;
+  }
+  return -1;
+}
+
+function parseHtmlAnchor(source, start) {
+  if (!/^<a\b/i.test(source.slice(start))) return null;
+
+  const openingEnd = htmlTagEnd(source, start);
+  if (openingEnd < 0) return null;
+  const openingTag = source.slice(start, openingEnd + 1);
+  const hrefMatch = HTML_HREF_ATTR_RX.exec(openingTag);
+  if (!hrefMatch) return null;
+
+  const target = hrefMatch[1] ?? hrefMatch[2] ?? hrefMatch[3] ?? '';
+  const targetOffset = target ? hrefMatch[0].lastIndexOf(target) : hrefMatch[0].length;
+  const targetStart = start + hrefMatch.index + targetOffset;
+  const targetEnd = targetStart + target.length;
+  const closingMatch = /<\/a\s*>/i.exec(source.slice(openingEnd + 1));
+  if (!closingMatch) return null;
+
+  const closingStart = openingEnd + 1 + closingMatch.index;
+  return {
+    start,
+    end: closingStart + closingMatch[0].length,
+    label: source.slice(openingEnd + 1, closingStart),
+    target,
+    targetStart,
+    targetEnd,
+    htmlAnchor: true,
+    angle: false,
   };
 }
 
@@ -240,6 +289,7 @@ function referenceDefinitionAt(source, start) {
     targetStart: start + targetStart,
     targetEnd: start + targetEnd,
     referenceDefinition: true,
+    angle: angled,
   };
 }
 
@@ -275,6 +325,14 @@ function markdownLinks(source, { skipCode = false } = {}) {
           index = inlineEnd;
           continue;
         }
+      }
+    }
+    if (source[index] === '<') {
+      const anchor = parseHtmlAnchor(source, index);
+      if (anchor) {
+        links.push(anchor);
+        index = anchor.end;
+        continue;
       }
     }
     if (source[index] !== '[' || (index > 0 && source[index - 1] === '!')) {
@@ -345,11 +403,13 @@ export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
   let copiedThrough = 0;
   for (const link of markdownLinks(source, { skipCode: true })) {
     const canonical = canonicalArticleLinkTarget(link.target, locale);
-    if (canonical === link.target) continue;
-    output += source.slice(copiedThrough, canonical === null ? link.start : link.targetStart);
+    if (canonical === link.target && !link.angle) continue;
+    const targetStart = link.angle ? link.targetStart - 1 : link.targetStart;
+    const targetEnd = link.angle ? link.targetEnd + 1 : link.targetEnd;
+    output += source.slice(copiedThrough, canonical === null ? link.start : targetStart);
     output += canonical === null
       ? (link.referenceDefinition ? '' : link.label)
-      : canonical + source.slice(link.targetEnd, link.end);
+      : canonical + source.slice(targetEnd, link.end);
     copiedThrough = link.end;
   }
   return copiedThrough === 0 ? source : output + source.slice(copiedThrough);
@@ -365,7 +425,7 @@ export function findNonCanonicalArticleLinks(source, locale = 'it') {
   const input = String(source ?? '');
   for (const link of markdownLinks(input, { skipCode: true })) {
     const canonical = canonicalArticleLinkTarget(link.target, locale);
-    if (canonical === link.target) continue;
+    if (canonical === link.target && !link.angle) continue;
     offenders.push({
       label: link.label,
       target: link.target,

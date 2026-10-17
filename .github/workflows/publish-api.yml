@@ -326,6 +326,8 @@ jobs:
             gate_input_paths=(
               .github/workflows/publish-api.yml
               engine/shared/articleSectionCore.mjs
+              engine/shared/cantonArticleSectionCore.generated.mjs
+              generator/data/canton-url-slugs.json
               generator/data/canton-sections.json
               generator/scripts/lib/corpus-paths.mjs
               host/cantonSectionsBootstrap.mjs
