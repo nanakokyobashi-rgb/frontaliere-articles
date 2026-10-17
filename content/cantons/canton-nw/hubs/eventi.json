@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T00:12:19.402Z",
-  "contentHash": "bfee27ed12e53464fcfc20808518ed798cc0e49a1af8eae34744063f6d43284d",
+  "updatedAt": "2026-10-17T00:41:20.673Z",
+  "contentHash": "df9cac4d377370c33b3f09129f13cf9eed74d2fc42eab1b584f3b84766adacd8",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -101,6 +101,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Stans: Life Forestry liquidazione, 800 investitori a rischio",
+          "url": "/articoli-nidvaldo/life-forestry-stans-liquidazione/",
+          "excerpt": "Dopo il fallimento del 2025, Life Forestry Switzerland AG di Stans è in liquidazione; circa 800 investitori svizzeri e oltre 6'000 europei temono di non recuperare i circa CHF 200 milioni investiti, con soli CHF 805…",
+          "date": "2026-10-17T00:31:27.953Z"
+        },
+        {
           "title": "PostAuto, nuovo orario in Nidvaldo dal 13 dicembre 2026",
           "url": "/articoli-nidvaldo/postauto-orario-nidvaldo-2026/",
           "excerpt": "Dal 13 dicembre 2026 cambia l'orario PostAuto: la comunicazione segnala modifiche all'offerta nei Cantoni Obvaldo e Nidvaldo.",
@@ -111,24 +117,6 @@
           "url": "/articoli-nidvaldo/lopper-luce-pedoni-bici/",
           "excerpt": "Circa 1,2 km del percorso pedonale e ciclabile sul Lopper, tra Stansstad e Hergiswil, saranno illuminati. Lavori da ottobre, accensione a fine novembre 2026.",
           "date": "2026-10-07T18:27:16.494Z"
-        },
-        {
-          "title": "Avviare un'attività nel Canton Nidvaldo: guida pratica",
-          "url": "/articoli-svizzera/avviare-attivita-canton-nidvaldo/",
-          "excerpt": "I passi necessari per la scelta della forma giuridica, l'iscrizione al registro di commercio e i costi fissi per avviare un'impresa nel Canton Nidvaldo.",
-          "date": "2026-09-16T02:04:47.424Z"
-        },
-        {
-          "title": "Naturalizzazione a Nidvaldo: requisiti e procedura",
-          "url": "/articoli-svizzera/naturalizzazione-nidvaldo-procedura/",
-          "excerpt": "Guida completa alla naturalizzazione ordinaria nel Cantone di Nidvaldo: anni richiesti, test, tasse e passaggi burocratici.",
-          "date": "2026-09-14T01:54:08.048Z"
-        },
-        {
-          "title": "Permesso C Canton Nidvaldo: requisiti e domanda",
-          "url": "/articoli-svizzera/permesso-c-nidvaldo-requisiti/",
-          "excerpt": "Guida completa al permesso di domicilio C nel Cantone di Nidvaldo: anni di residenza, criteri di integrazione e procedura.",
-          "date": "2026-09-14T00:24:26.273Z"
         }
       ],
       "links": [
@@ -141,7 +129,7 @@
           "url": "/eventi/nidvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:41:20.673Z"
     },
     "en": {
       "canton": "NW",
@@ -230,6 +218,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Stans: Life Forestry in liquidation, 800 investors at risk",
+          "url": "/en/nidwalden-articles/life-forestry-stans-liquidation/",
+          "excerpt": "Following the 2025 bankruptcy, Life Forestry Switzerland AG of Stans is in liquidation; approximately 800 Swiss investors and more than 6'000 Europeans fear they will not recover the approximately CHF 200 million…",
+          "date": "2026-10-17T00:31:27.953Z"
+        },
+        {
           "title": "PostAuto, new timetable in Nidwalden from December 13, 2026",
           "url": "/en/nidwalden-articles/postauto-timetable-change-nidwalden-2026/",
           "excerpt": "Starting December 13, 2026, the PostAuto timetable will change: the communication announces changes to the service offering in the cantons of Obwalden and Nidwalden.",
@@ -240,24 +234,6 @@
           "url": "/en/nidwalden-articles/lopper-path-lighting/",
           "excerpt": "Approximately 1,2 km of the pedestrian and cycle path on the Lopper, between Stansstad and Hergiswil, will be illuminated. Work starts in October, with the lights switched on in late November 2026.",
           "date": "2026-10-07T18:27:16.494Z"
-        },
-        {
-          "title": "Starting a business in Canton Nidwalden: a practical guide",
-          "url": "/en/swiss-articles/starting-business-canton-nidwalden/",
-          "excerpt": "The necessary steps for the choice of legal form, registration in the commercial register and fixed costs to start a business in the Canton of Nidwalden.",
-          "date": "2026-09-16T02:04:47.424Z"
-        },
-        {
-          "title": "Naturalization in Nidwalden: requirements and procedure",
-          "url": "/en/swiss-articles/nidwalden-naturalization-procedure/",
-          "excerpt": "Complete guide to ordinary naturalization in the Canton of Nidwalden: required years, tests, taxes and bureaucratic steps.",
-          "date": "2026-09-14T01:54:08.048Z"
-        },
-        {
-          "title": "Permit C Canton Nidwalden: requirements and application",
-          "url": "/en/swiss-articles/permits-c-nidwalden-requirements/",
-          "excerpt": "Complete guide to residence permit C in the Canton of Nidwalden: years of residence, integration criteria and procedure.",
-          "date": "2026-09-14T00:24:26.273Z"
         }
       ],
       "links": [
@@ -270,7 +246,7 @@
           "url": "/en/events/nidwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:41:20.673Z"
     },
     "de": {
       "canton": "NW",
@@ -359,6 +335,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Stans: Liquidation von Life Forestry, 800 Investoren gefährdet",
+          "url": "/de/nidwalden-artikel/life-forestry-stans-liquidation/",
+          "excerpt": "Nach der Insolvenz im Jahr 2025 befindet sich die Life Forestry Switzerland AG aus Stans in Liquidation; etwa 800 Schweizer Investoren und über 6'000 Europäer befürchten, die investierten rund CHF 200 Millionen nicht…",
+          "date": "2026-10-17T00:31:27.953Z"
+        },
+        {
           "title": "PostAuto, neuer Fahrplan in Nidwalden ab 13. Dezember 2026",
           "url": "/de/nidwalden-artikel/postauto-fahrplanwechsel-nidwalden-2026/",
           "excerpt": "Ab dem 13. Dezember 2026 ändert sich der Fahrplan von PostAuto: Die Mitteilung weist auf Änderungen des Angebots in den Kantonen Obwalden und Nidwalden hin.",
@@ -369,24 +351,6 @@
           "url": "/de/nidwalden-artikel/lopper-wegbeleuchtung/",
           "excerpt": "Rund 1,2 km des Fuß- und Radwegs auf dem Lopper zwischen Stansstad und Hergiswil werden beleuchtet. Arbeiten ab Oktober, Einschaltung Ende November 2026.",
           "date": "2026-10-07T18:27:16.494Z"
-        },
-        {
-          "title": "Ein Unternehmen im Kanton Nidwalden gründen: Praxisleitfaden",
-          "url": "/de/schweiz-artikel/unternehmen-starten-kanton-nidwalden/",
-          "excerpt": "Die notwendigen Schritte für die Wahl der Rechtsform, die Eintragung ins Handelsregister und die Fixkosten für die Unternehmensgründung im Kanton Nidwalden.",
-          "date": "2026-09-16T02:04:47.424Z"
-        },
-        {
-          "title": "Einbürgerung in Nidwalden: Voraussetzungen und Verfahren",
-          "url": "/de/schweiz-artikel/einbuergerung-nidwalden-verfahren/",
-          "excerpt": "Vollständiger Leitfaden zur ordentlichen Einbürgerung im Kanton Nidwalden: erforderliche Jahre, Tests, Gebühren und bürokratische Schritte.",
-          "date": "2026-09-14T01:54:08.048Z"
-        },
-        {
-          "title": "C-Genehmigung Kanton Nidwalden: Voraussetzungen und Antrag",
-          "url": "/de/schweiz-artikel/bewilligung-c-nidwalden-voraussetzungen/",
-          "excerpt": "Vollständiger Leitfaden zur Niederlassungsbewilligung C im Kanton Nidwalden: Aufenthaltsjahre, Integrationskriterien und Verfahren.",
-          "date": "2026-09-14T00:24:26.273Z"
         }
       ],
       "links": [
@@ -399,7 +363,7 @@
           "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:41:20.673Z"
     },
     "fr": {
       "canton": "NW",
@@ -488,6 +452,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Stans : Life Forestry en liquidation, 800 investisseurs à risque",
+          "url": "/fr/articles-nidwald/life-forestry-stans-liquidation/",
+          "excerpt": "Après la faillite de 2025, Life Forestry Switzerland AG de Stans est en liquidation ; environ 800 investisseurs suisses et plus de 6'000 Européens craignent de ne pas récupérer les quelque CHF 200 millions investis…",
+          "date": "2026-10-17T00:31:27.953Z"
+        },
+        {
           "title": "PostAuto, nouvel horaire dans le canton de Nidwald à partir du 13 décembre 2026",
           "url": "/fr/articles-nidwald/changement-horaire-postauto-nidwald-2026/",
           "excerpt": "À partir du 13 décembre 2026, l’horaire de PostAuto change : la communication signale des modifications de l’offre dans les cantons d’Obwald et de Nidwald.",
@@ -498,24 +468,6 @@
           "url": "/fr/articles-nidwald/eclairage-piste-lopper/",
           "excerpt": "Environ 1,2 km du parcours piétonnier et cyclable sur le Lopper, entre Stansstad et Hergiswil, seront éclairés. Travaux à partir d’octobre, mise en service fin novembre 2026.",
           "date": "2026-10-07T18:27:16.494Z"
-        },
-        {
-          "title": "Démarrer une activité dans le canton de Nidwald : guide pratique",
-          "url": "/fr/articles-suisse/lancer-entreprise-canton-nidwald/",
-          "excerpt": "Les étapes nécessaires pour choisir la forme juridique, l'inscription au registre du commerce et les coûts fixes pour démarrer une entreprise dans le canton de Nidwald.",
-          "date": "2026-09-16T02:04:47.424Z"
-        },
-        {
-          "title": "Naturalisation à Nidwald : exigences et procédure",
-          "url": "/fr/articles-suisse/naturalisation-nidwald-procedure/",
-          "excerpt": "Guide complet de la naturalisation ordinaire dans le canton de Nidwald : années requises, tests, taxes et démarches administratives.",
-          "date": "2026-09-14T01:54:08.048Z"
-        },
-        {
-          "title": "Permis C canton Nidwald : exigences et demande",
-          "url": "/fr/articles-suisse/permis-c-nidwald-conditions/",
-          "excerpt": "Guide complet du permis de séjour C dans le canton de Nidwald : années de résidence, critères d'intégration et procédure.",
-          "date": "2026-09-14T00:24:26.273Z"
         }
       ],
       "links": [
@@ -528,7 +480,7 @@
           "url": "/fr/evenements/nidwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:41:20.673Z"
     }
   }
 }
