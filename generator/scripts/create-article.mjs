@@ -7735,7 +7735,7 @@ const SOURCE_HTML_VOID_ELEMENTS = new Set([
   'param', 'source', 'track', 'wbr',
 ]);
 const SOURCE_HTML_RAW_TEXT_ELEMENTS = new Set([
-  'script', 'style', 'textarea', 'title', 'noscript', 'iframe', 'xmp',
+  'script', 'style', 'textarea', 'title', 'iframe', 'xmp',
   'noembed', 'noframes',
 ]);
 const SOURCE_HTML_IMPLICIT_END_TAGS = new Map([
@@ -7862,6 +7862,7 @@ function sourceFindRawTextClose(html, afterOpening, name) {
 function sourceSkipTemplate(html, afterOpening) {
   let depth = 1;
   let cursor = afterOpening;
+  const stack = [{ name: 'template', namespace: 'html', tag: null }];
   while (cursor < html.length) {
     const start = html.indexOf('<', cursor);
     if (start < 0) return -1;
@@ -7877,14 +7878,38 @@ function sourceSkipTemplate(html, afterOpening) {
       cursor = start + 1;
       continue;
     }
-    if (tag.name === 'template') {
-      if (tag.closing) {
-        depth -= 1;
-        if (depth === 0) return tag.end + 1;
-      } else if (!tag.selfClosing) {
-        depth += 1;
+    const namespace = sourceNamespaceForStart(stack, tag, html);
+    const isVoid = namespace === 'html'
+      ? SOURCE_HTML_VOID_ELEMENTS.has(tag.name)
+      : tag.explicitSelfClosing === true;
+
+    if (tag.closing) {
+      let matchingIndex = -1;
+      for (let index = stack.length - 1; index >= 0; index -= 1) {
+        if (stack[index].name === tag.name && stack[index].namespace === namespace) {
+          matchingIndex = index;
+          break;
+        }
       }
-    } else if (!tag.closing && !tag.selfClosing && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(tag.name)) {
+      if (matchingIndex >= 0) {
+        const matched = stack[matchingIndex];
+        if (matched.name === 'template' && matched.namespace === 'html') {
+          depth -= 1;
+          if (depth === 0) return tag.end + 1;
+        }
+        stack.length = matchingIndex;
+      }
+      cursor = tag.end + 1;
+      continue;
+    }
+
+    if (namespace === 'html' && tag.name === 'template' && !isVoid) {
+      depth += 1;
+    }
+    if (!isVoid && !SOURCE_HTML_RAW_TEXT_ELEMENTS.has(tag.name)) {
+      stack.push({ name: tag.name, namespace, tag });
+    }
+    if (!isVoid && namespace === 'html' && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(tag.name)) {
       const afterRawText = sourceFindRawTextClose(html, tag.end + 1, tag.name);
       if (afterRawText < 0) return -1;
       cursor = afterRawText;
@@ -8146,6 +8171,7 @@ function findActiveSourceHead(html) {
         headState = {
           start,
           entry,
+          container: parent,
           trusted: directDocumentHead && !isVoid,
         };
         sawHead = true;
@@ -8158,11 +8184,14 @@ function findActiveSourceHead(html) {
         bodyState = {
           entry,
           trusted: directDocumentBody && !isVoid,
+          implicit: false,
         };
         sawBody = true;
-      } else if (stack.length === 0) {
+      } else if (stack.length === 0 && !(bodyState?.implicit
+        && bodyState.trusted && parent === bodyState.entry)) {
         // A top-level article/div/etc. is a fragment, not a document body. Do
-        // not let a later global-looking script become trusted by accident.
+        // not let a later global-looking script become trusted by accident,
+        // unless a document head has just closed and HTML implies the body.
         failClosed();
       } else if (
         parent?.name === 'head' &&
@@ -8194,6 +8223,16 @@ function findActiveSourceHead(html) {
             end,
             closed: !implicit,
           };
+          if (!sawBody) {
+            // The body start tag is optional in HTML. After a trusted head
+            // closes, direct children of its document container belong to
+            // the implied body and may contain active body-only JSON-LD.
+            bodyState = {
+              entry: headState.container,
+              trusted: true,
+              implicit: true,
+            };
+          }
         }
         headState = null;
       }

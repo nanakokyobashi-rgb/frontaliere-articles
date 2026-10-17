@@ -239,6 +239,16 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(res.html.includes('FOREIGN_ELEMENTS_KEEP_BODY_TRUSTED'));
   });
 
+  it('ignora un template self-closing foreign dentro un template HTML', () => {
+    const page2 = '<html><body><template><svg><template/><path d="M0 0"/></svg></template>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+    assert.equal(res.html.includes('<template>'), false);
+  });
+
   it('segue le chiusure implicite HTML per head, p e li', () => {
     const page2 = '<html><head><title>Head senza end-tag</title>'
       + '<meta property="article:published_time" content="2026-06-12T10:00:00+02:00">'
@@ -284,6 +294,26 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     const res = isolateMainSourceHtml(bodyOnly);
     assert.equal(res.isolated, true);
     assert.ok(res.html.includes('BODY_ONLY_ACTIVE'));
+  });
+
+  it('mantiene il JSON-LD nel body implicito dopo la chiusura dell’head', () => {
+    const bodyOnly = '<html><head><title>Fonte valida</title></head>'
+      + '<script type="application/ld+json">{"headline":"IMPLICIT_BODY_ONLY_ACTIVE"}</script>'
+      + `<article>${ARTICLE_PROSE}</article></html>`;
+    const res = isolateMainSourceHtml(bodyOnly);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('IMPLICIT_BODY_ONLY_ACTIVE'));
+  });
+
+  it('isola l’article-markup attivo dentro noscript con scripting disabilitato', () => {
+    const page2 = '<html><body><noscript>'
+      + `<article>${ARTICLE_PROSE}</article>`
+      + '</noscript><aside>CHROME OUTSIDE THE ARTICLE</aside></body></html>';
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+    assert.equal(res.html.includes('CHROME OUTSIDE THE ARTICLE'), false);
   });
 
   it('ripiega su <main> quando <article> non c’e’ o e’ troppo corto', () => {
