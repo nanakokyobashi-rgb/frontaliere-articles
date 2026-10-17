@@ -13,11 +13,11 @@ import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../../generator
 
 export const SECTION_BOOTSTRAP_LOCK_PREFIX = 'edge/sections/_bootstrap-locks';
 export const SECTION_BOOTSTRAP_LOCK_SCHEMA = 1;
-// Il job fast-publish ha un timeout complessivo di 100m, incluso il tempo
-// precedente all'acquisizione: il lease supera l'intera durata massima del job.
-// Se publish-api incontra un bootstrap ancora attivo, il publisher edge aspetta
-// al massimo 55m e poi fallisce chiuso senza fare il flip.
-export const SECTION_BOOTSTRAP_LOCK_TTL_MS = 110 * 60 * 1000;
+// fast-publish-section.yml può durare al massimo 100m e publish-api 180m.
+// Lo stesso lease protegge anche il ruolo edge-publisher, quindi supera il
+// protocollo più lungo con 15m di margine: un marker non può scadere mentre
+// publish-api sta ancora tra acquire, flip e release dei lease.
+export const SECTION_BOOTSTRAP_LOCK_TTL_MS = 195 * 60 * 1000;
 export const SECTION_BOOTSTRAP_LOCK_CACHE_CONTROL = 'public,max-age=5';
 const SECTION_RE = /^canton-[a-z]+$/;
 const SHA_RE = /^[a-f0-9]{7,64}$/;

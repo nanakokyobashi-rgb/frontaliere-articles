@@ -1210,9 +1210,14 @@ test('edge: il bootstrap live tiene il lock fino al rilascio prima del flip', as
 test('edge: il lease R2 copre il timeout bootstrap massimo e il tombstone resta scaduto', () => {
   const fastPublish = readFileSync(path.join(ROOT, '.github/workflows/fast-publish-section.yml'), 'utf8');
   const publishJob = fastPublish.match(/\n  publish:\n([\s\S]*?)(?=\n  replay-api-after-bootstrap:)/)?.[1];
-  const jobTimeoutMinutes = Number(publishJob?.match(/^\s+timeout-minutes:\s+(\d+)\s*$/m)?.[1]);
-  assert.ok(Number.isFinite(jobTimeoutMinutes) && jobTimeoutMinutes > 0, 'timeout job fast-publish assente');
-  assert.ok(SECTION_BOOTSTRAP_LOCK_TTL_MS > jobTimeoutMinutes * 60 * 1000);
+  const fastPublishTimeoutMinutes = Number(publishJob?.match(/^\s+timeout-minutes:\s+(\d+)\s*$/m)?.[1]);
+  assert.ok(Number.isFinite(fastPublishTimeoutMinutes) && fastPublishTimeoutMinutes > 0, 'timeout job fast-publish assente');
+  const publishApi = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
+  const publishApiJob = publishApi.match(/\n  publish:\n([\s\S]*?)(?=\n  [a-z0-9_-]+:)/)?.[1]
+    ?? publishApi.slice(publishApi.indexOf('\n  publish:\n'));
+  const publishApiTimeoutMinutes = Number(publishApiJob.match(/^\s+timeout-minutes:\s+(\d+)\s*$/m)?.[1]);
+  assert.ok(Number.isFinite(publishApiTimeoutMinutes) && publishApiTimeoutMinutes > 0, 'timeout job publish-api assente');
+  assert.ok(SECTION_BOOTSTRAP_LOCK_TTL_MS > Math.max(fastPublishTimeoutMinutes, publishApiTimeoutMinutes));
   assert.ok(BOOTSTRAP_WAIT_MS < SECTION_BOOTSTRAP_LOCK_TTL_MS, 'il publisher edge fallisce chiuso prima della scadenza del bootstrap attivo');
   const active = makeSectionBootstrapLock({ section: 'canton-ti', commit: COMMIT, owner: 'test/bootstrap' });
   assert.equal(active.role, 'bootstrap');
@@ -1575,6 +1580,9 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   const wf = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
   assert.match(wf, /source_commit:\n\s+description: .*replay bootstrap bounded/);
   assert.match(wf, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(wf, /Verify bounded replay source is still main/);
+  assert.match(wf, /gh api "repos\/\$REPOSITORY\/git\/ref\/heads\/main"/);
+  assert.match(wf, /SOURCE_COMMIT: \$\{\{ inputs\.source_commit \}\}/);
   const filters = [...wf.slice(0, wf.indexOf('\n  schedule:')).matchAll(/^      - '([^']+)'$/gm)].map((m) => m[1]);
   const covered = (file) => filters.some((p) => p === file || (p.endsWith('/**') && file.startsWith(p.slice(0, -2))));
   for (const p of ['sections/**', 'scripts/lib/section-registry.mjs', 'scripts/publish-section-edge.mjs', 'scripts/lib/delete-cdn-file.sh', 'generator/scripts/load-rc-env.mjs']) {

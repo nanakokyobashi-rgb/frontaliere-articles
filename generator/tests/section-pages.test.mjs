@@ -2649,9 +2649,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   const dispatchPlan = wf.slice(dispatchPlanStart, dispatchPlanEnd);
   assert.match(dispatchPlan, /FAST_PUBLISH_DISABLED/);
   assert.match(dispatchPlan, /FAST_PUBLISH_ARMED/);
-  assert.equal((wf.match(/-f dry_run="\$DRY"/g) ?? []).length, 2, 'entrambi i redispatch propagano il dry-run calcolato');
+  assert.equal((wf.match(/-f dry_run="\$DRY"/g) ?? []).length, 3, 'tutti i redispatch propagano il dry-run calcolato');
   assert.doesNotMatch(wf, /-f dry_run=false/);
-  assert.equal((wf.match(/gh workflow run fast-publish-section\.yml --repo "\$REPO" --ref main/g) ?? []).length, 2);
+  assert.equal((wf.match(/gh workflow run fast-publish-section\.yml --repo "\$(?:REPO|REPOSITORY)" --ref main/g) ?? []).length, 3);
   assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /-f source_commit="\$current_main"/);
   assert.match(wf, /source_commit richiede una SHA completa/);
@@ -2705,6 +2705,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   const bootstrapReplay = wf.slice(wf.indexOf('  replay-api-after-bootstrap:'));
   assert.match(bootstrapReplay, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(bootstrapReplay, /BOOTSTRAP_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(bootstrapReplay, /Redispatch bootstrap on current main after stale replay/);
+  assert.match(bootstrapReplay, /TARGET_MATRIX: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/);
   const replayDispatchStep = bootstrapReplay.slice(
     bootstrapReplay.indexOf('- name: Replay publish-api after bootstrap lock release'),
   );
@@ -2716,6 +2718,14 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'il replay API deve saltare il dispatch se main e\' avanzata dal bootstrap',
   );
   assert.match(replayDispatchStep, /-f source_commit="\$BOOTSTRAP_COMMIT"/);
+  const staleRecoveryStep = bootstrapReplay.slice(
+    bootstrapReplay.indexOf('- name: Redispatch bootstrap on current main after stale replay'),
+    bootstrapReplay.indexOf('- name: Replay publish-api after bootstrap lock release'),
+  );
+  assert.match(staleRecoveryStep, /if: steps\.replay_freshness\.outputs\.fresh == 'false'/);
+  assert.match(staleRecoveryStep, /gh workflow run fast-publish-section\.yml --repo "\$REPOSITORY" --ref main/);
+  assert.match(staleRecoveryStep, /-f source_commit="\$CURRENT_MAIN"/);
+  assert.match(staleRecoveryStep, /-f source_main_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /push_before:/);
   assert.match(wf, /push_after:/);
   assert.doesNotMatch(wf, /git rev-parse HEAD\^/);

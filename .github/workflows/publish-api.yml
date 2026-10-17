@@ -236,6 +236,32 @@ jobs:
           # token del checkout non serve a nessuno.
           persist-credentials: false
 
+      # A bounded replay is allowed to checkout the exact corpus revision that
+      # uploaded the HTML, but only while that revision is still main. The
+      # caller checks before dispatch; this server-side fence closes the queue
+      # race where main advances after dispatch and before this run starts.
+      - name: Verify bounded replay source is still main
+        if: inputs.source_commit != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_COMMIT: ${{ inputs.source_commit }}
+        run: |
+          set -euo pipefail
+          if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::source_commit non e' una SHA completa"
+            exit 1
+          fi
+          if ! current_main="$(gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
+            echo "::error::impossibile verificare la HEAD corrente di main per il replay bounded"
+            exit 1
+          fi
+          if [ "$current_main" != "$SOURCE_COMMIT" ]; then
+            echo "::error::replay bounded stale: source_commit=$SOURCE_COMMIT ma main=$current_main; nessun publish API viene eseguito"
+            exit 1
+          fi
+          echo "replay bounded confermato sulla HEAD di main $SOURCE_COMMIT"
+
       - uses: actions/setup-node@v7
         with:
           node-version: '22'

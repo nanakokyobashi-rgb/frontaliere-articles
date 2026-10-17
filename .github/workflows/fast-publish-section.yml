@@ -777,8 +777,13 @@ jobs:
             echo "::error::impossibile verificare main prima del replay API"
             exit 1
           fi
+          if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::revisione corrente di main non valida per il replay bootstrap"
+            exit 1
+          fi
+          echo "current_main=$current_main" >> "$GITHUB_OUTPUT"
           if [ "$current_main" != "$BOOTSTRAP_COMMIT" ]; then
-            echo "::notice::main e' avanzata da $BOOTSTRAP_COMMIT a $current_main durante il bootstrap; nessun replay stantio, il run del nuovo push riconciliera' la superficie"
+            echo "::notice::main e' avanzata da $BOOTSTRAP_COMMIT a $current_main durante il bootstrap; il passo recovery redispatchera' il bootstrap sulla HEAD corrente"
             echo 'fresh=false' >> "$GITHUB_OUTPUT"
           else
             echo "main ancora sulla revisione bootstrap $BOOTSTRAP_COMMIT"
@@ -786,17 +791,17 @@ jobs:
           fi
 
       - uses: actions/setup-node@v7
-        if: steps.replay_freshness.outputs.fresh == 'true'
+        if: steps.replay_freshness.outcome == 'success'
         with:
           node-version: '22'
           cache: npm
 
       - name: Install dependencies for Remote Config
-        if: steps.replay_freshness.outputs.fresh == 'true'
+        if: steps.replay_freshness.outcome == 'success'
         run: bash scripts/lib/npm-ci-retry.sh
 
       - name: Prepare Firebase credentials
-        if: steps.replay_freshness.outputs.fresh == 'true'
+        if: steps.replay_freshness.outcome == 'success'
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -809,8 +814,47 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
 
       - name: Load dispatch token from Remote Config
-        if: steps.replay_freshness.outputs.fresh == 'true'
+        if: steps.replay_freshness.outcome == 'success'
         run: node generator/scripts/load-rc-env.mjs
+
+      - name: Redispatch bootstrap on current main after stale replay
+        if: steps.replay_freshness.outputs.fresh == 'false'
+        env:
+          REPOSITORY: ${{ github.repository }}
+          TARGET_MATRIX: ${{ needs.resolve.outputs.matrix }}
+          CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
+          DRY: ${{ needs.resolve.outputs.dry }}
+        run: |
+          set -euo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::error::GITHUB_PAT_NANAKO non caricato: recovery bootstrap impossibile"
+            exit 1
+          fi
+          if ! [[ "$CURRENT_MAIN" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::HEAD corrente non valida per il recovery bootstrap: $CURRENT_MAIN"
+            exit 1
+          fi
+          export GH_TOKEN="$runtime_pat"
+          dispatched=0
+          while IFS=$'\t' read -r section article_ids bootstrap remove_stale; do
+            [ -n "$section" ] || continue
+            echo "::notice::recovery bootstrap $section sulla HEAD corrente $CURRENT_MAIN"
+            gh workflow run fast-publish-section.yml --repo "$REPOSITORY" --ref main \
+              -f section="$section" \
+              -f article_ids="$article_ids" \
+              -f bootstrap="$bootstrap" \
+              -f remove_stale_canton_rss_feeds="$remove_stale" \
+              -f source_commit="$CURRENT_MAIN" \
+              -f source_main_commit="$CURRENT_MAIN" \
+              -f dry_run="$DRY" \
+              -f dispatch_nonce="stale-bootstrap-recovery-${GITHUB_RUN_ID}-${section}"
+            dispatched=$((dispatched + 1))
+          done < <(jq -r '.[] | [.section, ((.ids // []) | tojson), (.bootstrap // false), (.removeStaleCantonRssFeeds // false)] | @tsv' <<<"$TARGET_MATRIX")
+          if [ "$dispatched" -eq 0 ]; then
+            echo "::error::matrix bootstrap vuoto nel recovery stale"
+            exit 1
+          fi
 
       - name: Replay publish-api after bootstrap lock release
         if: steps.replay_freshness.outputs.fresh == 'true'
