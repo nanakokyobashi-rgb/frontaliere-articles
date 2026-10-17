@@ -13370,6 +13370,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.burraco-solidale-buguggiate.title': 'Burraco caritatif à Buguggiate : 140 participants pour ABAD ETS',
     'blog.article.burraco-solidale-buguggiate.excerpt': '140 participants à la soirée caritative 35 tables de jeu à Buguggiate Bénéfices destinés à de nouveaux projets de placement professionnel Quel → tournoi caritatif',
     'blog.article.burraco-solidale-buguggiate.imageAlt': 'Soirée de burraco solidaire à Buguggiate avec 140 participants sur 35 tables',
+    'blog.article.coppa-svizzera-lugano-taverne.title': 'Lugano très favori, la Taverne cherche l\'entreprise',
+    'blog.article.coppa-svizzera-lugano-taverne.excerpt': 'Lugano défie Pully dimanche à 14h.',
+    'blog.article.coppa-svizzera-lugano-taverne.imageAlt': 'Le Comunale de Taverne, stade du match de Coupe de Suisse contre Young Boys',
+    'blog.article.sharks-derby-coppa-trevano.title': 'Les requins de Federico Pagani remportent le derby de la Coupe',
+    'blog.article.sharks-derby-coppa-trevano.excerpt': 'Les Sharks remportent le derby de Coupe à Trevano Le Bissone se rend sur le 25-14 Veljko Krstic marque six buts au début officiel Alfano signe cinq buts Lieu',
+    'blog.article.sharks-derby-coppa-trevano.imageAlt': 'Lugano, ville des Sharks dans le derby de Coupe suisse',
 };
 
 export default blogMetaFr;

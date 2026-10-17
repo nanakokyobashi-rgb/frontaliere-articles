@@ -138,4 +138,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tuffe-falsi-poliziotti-vaud',
+ category: 'pratico',
+ date: '2026-10-17T02:07:47.946Z',
+ image: '/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

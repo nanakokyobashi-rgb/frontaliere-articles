@@ -18,6 +18,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.finanze-cantone-sciaffusa-2027.title': 'Sciaffusa: previste cifre rosse tra il 2027 e il 2030',
     'blog.article.finanze-cantone-sciaffusa-2027.excerpt': 'Il governo cantonale attende risultati negativi per il quadriennio 2027-2030 a causa del calo delle entrate dalle imposte sulle imprese.',
     'blog.article.finanze-cantone-sciaffusa-2027.imageAlt': 'Edifici governativi del Canton Sciaffusa',
+    'blog.article.singen-chiusura-schaffhauser-strasse.title': 'Singen, chiusa la Schaffhauser Straße dal 26 al 30 ottobre',
+    'blog.article.singen-chiusura-schaffhauser-strasse.excerpt': 'A Singen la strada sarà chiusa al traffico dal 26 al 30 ottobre 2026 per lavori alla fermata Landesgartenschau.',
+    'blog.article.singen-chiusura-schaffhauser-strasse.imageAlt': 'Deviazione stradale a Singen durante la chiusura della Schaffhauser Straße',
 };
 
 export default blogMetaCantonShIt;

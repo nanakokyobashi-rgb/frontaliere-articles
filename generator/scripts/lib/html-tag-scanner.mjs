@@ -57,7 +57,7 @@ function isHtmlSelfClosingStartTag(html, nameEnd, end) {
   return false;
 }
 
-export function readHtmlTagAt(html, start) {
+function readHtmlTagAtStatus(html, start) {
   if (html[start] !== '<') return null;
   let index = start + 1;
   const closing = html[index] === '/';
@@ -69,15 +69,23 @@ export function readHtmlTagAt(html, start) {
   if (html[index] && !/[\s/>]/u.test(html[index])) return null;
 
   const endIndex = findHtmlTagEndOutsideQuotes(html, start);
-  if (endIndex < 0) return MALFORMED_HTML_TAG;
+  if (endIndex < 0) return { malformed: true };
   return {
-    start,
-    end: endIndex + 1,
-    closing,
-    name: html.slice(nameStart, index).toLowerCase(),
-    attrs: html.slice(index, endIndex),
-    selfClosing: !closing && isHtmlSelfClosingStartTag(html, index, endIndex),
+    tag: {
+      start,
+      end: endIndex + 1,
+      closing,
+      name: html.slice(nameStart, index).toLowerCase(),
+      attrs: html.slice(index, endIndex),
+      selfClosing: !closing && isHtmlSelfClosingStartTag(html, index, endIndex),
+    },
   };
+}
+
+export function readHtmlTagAt(html, start) {
+  const result = readHtmlTagAtStatus(html, start);
+  if (result?.malformed) return MALFORMED_HTML_TAG;
+  return result?.tag || null;
 }
 
 export function nextHtmlTag(html, from = 0, skipComments = true) {
@@ -89,9 +97,9 @@ export function nextHtmlTag(html, from = 0, skipComments = true) {
       start = html.indexOf('<', commentEnd + 3);
       continue;
     }
-    const tag = readHtmlTagAt(html, start);
-    if (tag === MALFORMED_HTML_TAG) return null;
-    if (tag) return tag;
+    const result = readHtmlTagAtStatus(html, start);
+    if (result?.malformed) return null;
+    if (result?.tag) return result.tag;
     start = html.indexOf('<', start + 1);
   }
   return null;

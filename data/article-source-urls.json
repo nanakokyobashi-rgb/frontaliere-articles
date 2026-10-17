@@ -1,14 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1948460/arriva-la-svolta-per-il-tram-treno-i-lavori-stanno-per-iniziare": {
-    "articleId": "tram-treno-lugano-lavori-inizio",
-    "ts": "2026-09-07T10:00:14.116Z",
-    "keyForm": 2
-  },
-  "https://www.ticinonews.ch/ticino/mario-padula-direttore-dellistituto-di-ricerche-economiche-dellusi-442108": {
-    "articleId": "padula-nomina-direttore-ire-usi",
-    "ts": "2026-09-07T10:18:12.814Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/a-morazzone-torna-tante-care-cose-il-mercato-di-rigatterie-e-anticaglie-a-casa-macchi/2672011": {
     "articleId": "morazzone-tante-care-cose-2026",
     "ts": "2026-09-07T10:25:45.217Z",
@@ -2497,6 +2487,16 @@
   "https://www.varesenews.it/2026/10/burraco-e-solidarieta-a-buguggiate-successo-per-il-torneo-benefico-a-favore-della-cooperativa-abad-ets/2710831": {
     "articleId": "burraco-solidale-buguggiate",
     "ts": "2026-10-17T01:16:19.863Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/sport/calcio/1957322/ticinesi-stade-golia-davide-croci-torti": {
+    "articleId": "coppa-svizzera-lugano-taverne",
+    "ts": "2026-10-17T01:54:51.608Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/sport/altri-sport/1957289/gli-squali-di-federico-pagani-vincono-il-derby-di-coppa": {
+    "articleId": "sharks-derby-coppa-trevano",
+    "ts": "2026-10-17T02:18:18.830Z",
     "keyForm": 2
   }
 }

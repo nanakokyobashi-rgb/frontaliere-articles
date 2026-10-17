@@ -18,6 +18,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.finanze-cantone-sciaffusa-2027.title': 'Schaffhausen: red figures expected between 2027 and 2030',
     'blog.article.finanze-cantone-sciaffusa-2027.excerpt': 'The cantonal government expects negative results for the four-year period 2027–2030 due to declining revenue from corporate taxes.',
     'blog.article.finanze-cantone-sciaffusa-2027.imageAlt': 'Government buildings of the Canton of Schaffhausen',
+    'blog.article.singen-chiusura-schaffhauser-strasse.title': 'Singen, Schaffhauser Straße closed from October 26 to 30',
+    'blog.article.singen-chiusura-schaffhauser-strasse.excerpt': 'In Singen, the road will be closed to traffic from October 26 to 30, 2026, due to work at the Landesgartenschau stop.',
+    'blog.article.singen-chiusura-schaffhauser-strasse.imageAlt': 'Road detour in Singen during the Schaffhauser Straße closure',
 };
 
 export default blogMetaCantonShEn;
