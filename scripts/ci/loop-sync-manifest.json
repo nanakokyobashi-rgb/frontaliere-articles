@@ -2341,9 +2341,9 @@
       "path": "scripts/lib/pipeline-phase-timing.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "db770569fe162eee",
-        "corpus": "db770569fe162eee",
-        "alignedAt": "2026-10-14"
+        "site": "e17b5e316dfa7fab",
+        "corpus": "e17b5e316dfa7fab",
+        "alignedAt": "2026-10-17"
       }
     },
     {
@@ -3009,9 +3009,9 @@
       "sitePath": "scripts/lib/discovery/googleNewsUrlResolver.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "4ad0070a23a601d7",
-        "corpus": "4ad0070a23a601d7",
-        "alignedAt": "2026-10-11"
+        "site": "e8119bdf382931b8",
+        "corpus": "e8119bdf382931b8",
+        "alignedAt": "2026-10-17"
       }
     },
     {
