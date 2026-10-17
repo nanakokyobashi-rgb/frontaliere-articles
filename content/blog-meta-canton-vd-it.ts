@@ -41,7 +41,7 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.scuole-vaud-furti-inchieste.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.tuffe-falsi-poliziotti-vaud.title': 'Truffe falsi poliziotti e banchieri nel Vaud: 100 interpellati',
     'blog.article.tuffe-falsi-poliziotti-vaud.excerpt': 'Oltre cento persone interpellate nel Vaud nel 2026 Sedici interpellazioni dall\'inizio di ottobre Quasi 2.300 casi e 900 truffe riuscite Danno cumulato: circa',
-    'blog.article.tuffe-falsi-poliziotti-vaud.imageAlt': 'Truffe dei falsi poliziotti e banchieri nel Canton Vaud',
+    'blog.article.tuffe-falsi-poliziotti-vaud.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonVdIt;

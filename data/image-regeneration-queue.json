@@ -90,36 +90,6 @@
       "failureCount": 1,
       "requestedAt": "2026-10-17T01:07:58.548Z",
       "lastFailureAt": "2026-10-17T05:38:41.862Z"
-    },
-    {
-      "articleId": "coppa-svizzera-lugano-taverne",
-      "title": "Lugano favoritissimo, il Taverne cerca l'impresa",
-      "fallbackImage": "/images/blog/article-sfida-bar-quartiere-lugano.webp",
-      "reason": "All image providers failed for article-coppa-svizzera-lugano-taverne: openai-codex (vision gate rejected image: Generic synthetic football warm-up scene relevant to Taverne/Ticino,",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T01:54:51.606Z",
-      "lastFailureAt": "2026-10-17T01:54:51.606Z"
-    },
-    {
-      "articleId": "tuffe-falsi-poliziotti-vaud",
-      "title": "Truffe falsi poliziotti e banchieri nel Vaud: 100 interpellati",
-      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T02:07:47.983Z",
-      "lastFailureAt": "2026-10-17T02:07:47.983Z"
-    },
-    {
-      "articleId": "netto-single-paga-ticino-2026",
-      "title": "Busta paga svizzera 2026: guida per frontalieri single",
-      "fallbackImage": "/images/blog/article-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica.webp",
-      "reason": "All image providers failed for article-netto-single-paga-ticino-2026: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Swiss payslips and Tic",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T04:59:01.616Z",
-      "lastFailureAt": "2026-10-17T04:59:01.616Z"
     }
   ]
 }

@@ -41,7 +41,7 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.scuole-vaud-furti-inchieste.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.tuffe-falsi-poliziotti-vaud.title': 'Betrug durch falsche Polizisten/Banker: 100 kontaktiert',
     'blog.article.tuffe-falsi-poliziotti-vaud.excerpt': 'Im Kanton Waadt 2026 über hundert Personen kontaktiert Sechzehn Kontaktaufnahmen seit Anfang Oktober Fast 2.300 Fälle und 900 erfolgreiche Betrugsfälle',
-    'blog.article.tuffe-falsi-poliziotti-vaud.imageAlt': 'Betrug durch falsche Polizisten und Bankiers im Kanton Waadt',
+    'blog.article.tuffe-falsi-poliziotti-vaud.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonVdDe;

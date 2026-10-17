@@ -484,10 +484,10 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-tuffe-falsi-poliziotti-vaud.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Truffe dei falsi poliziotti e banchieri nel Canton Vaud"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-17T02:07:47+00:00",
       "dateModified": "2026-10-17T02:07:47+00:00",

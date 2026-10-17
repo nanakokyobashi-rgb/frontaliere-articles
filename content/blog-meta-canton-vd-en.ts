@@ -41,7 +41,7 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.scuole-vaud-furti-inchieste.imageAlt': 'Illustration generated for this article',
     'blog.article.tuffe-falsi-poliziotti-vaud.title': 'Scams involving fake police officers and bankers in Vaud: 100 questioned',
     'blog.article.tuffe-falsi-poliziotti-vaud.excerpt': 'More than one hundred people contacted in Vaud in 2026 Sixteen contacts since the beginning of October Almost 2.300 cases and 900 successful scams Cumulative',
-    'blog.article.tuffe-falsi-poliziotti-vaud.imageAlt': 'Fake police and bankers scams in Canton Vaud',
+    'blog.article.tuffe-falsi-poliziotti-vaud.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonVdEn;

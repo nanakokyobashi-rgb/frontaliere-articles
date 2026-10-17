@@ -41,7 +41,7 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.scuole-vaud-furti-inchieste.imageAlt': 'Illustration générée pour cet article',
     'blog.article.tuffe-falsi-poliziotti-vaud.title': 'Arnaques: faux policiers et banquiers, 100 interpellés',
     'blog.article.tuffe-falsi-poliziotti-vaud.excerpt': 'Plus de cent personnes interpellées dans le Vaud en 2026 Seize interpellations depuis le début d\'octobre Près de 2.300 cas et 900 arnaques réussies Préjudice',
-    'blog.article.tuffe-falsi-poliziotti-vaud.imageAlt': 'Arnaques aux faux policiers et faux banquiers dans le canton de Vaud',
+    'blog.article.tuffe-falsi-poliziotti-vaud.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonVdFr;

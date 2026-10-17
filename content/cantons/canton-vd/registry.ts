@@ -142,7 +142,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'tuffe-falsi-poliziotti-vaud',
  category: 'pratico',
  date: '2026-10-17T02:07:47.946Z',
- image: '/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp',
+ image: '/images/blog/article-tuffe-falsi-poliziotti-vaud.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['VD'],
