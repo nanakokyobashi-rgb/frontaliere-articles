@@ -180,6 +180,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-17T01:54:51.606Z",
       "lastFailureAt": "2026-10-17T01:54:51.606Z"
+    },
+    {
+      "articleId": "tuffe-falsi-poliziotti-vaud",
+      "title": "Truffe falsi poliziotti e banchieri nel Vaud: 100 interpellati",
+      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T02:07:47.983Z",
+      "lastFailureAt": "2026-10-17T02:07:47.983Z"
     }
   ]
 }

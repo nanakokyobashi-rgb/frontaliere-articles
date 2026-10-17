@@ -460,6 +460,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tuffe-falsi-poliziotti-vaud': {
+    title: 'Truffe falsi poliziotti e banchieri nel Vaud: 100 interpellati',
+    description: 'Oltre cento persone interpellate nel Vaud nel 2026 Sedici interpellazioni dall\'inizio di ottobre Quasi 2.300 casi e 900 truffe riuscite Danno cumulato: circa',
+    keywords: 'frontalieri, ticino, svizzera, italia, truffe, falsi, poliziotti, banchieri',
+    ogTitle: 'Truffe dei falsi poliziotti e banchieri nel Canton Vaud',
+    ogDescription: 'Oltre cento persone interpellate nel Vaud nel 2026 Sedici interpellazioni dall\'inizio di ottobre Quasi 2.300 casi e 900 truffe riuscite Danno cumulato: circa',
+    canonicalPath: '/articoli-vaud/tuffe-falsi-poliziotti-vaud/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Truffe falsi poliziotti e banchieri nel Vaud: 100 interpellati",
+      "description": "Oltre cento persone interpellate nel Vaud nel 2026 Sedici interpellazioni dall'inizio di ottobre Quasi 2.300 casi e 900 truffe riuscite Danno cumulato: circa",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Truffe dei falsi poliziotti e banchieri nel Canton Vaud"
+      },
+      "datePublished": "2026-10-17T02:07:47+00:00",
+      "dateModified": "2026-10-17T02:07:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/tuffe-falsi-poliziotti-vaud/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
