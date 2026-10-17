@@ -12,6 +12,9 @@ const blogMetaCantonUrEn: Record<string, string> = {
     'blog.article.uri-budget-avanzo-2027.title': 'Canton Uri, 2027 budget with a surplus of 1,1 million',
     'blog.article.uri-budget-avanzo-2027.excerpt': 'The Canton of Uri expects a surplus of CHF 1,1 million in 2027: revenue of 514,4 million and expenditure of 513,3 million.',
     'blog.article.uri-budget-avanzo-2027.imageAlt': 'Canton Uri 2027 budget with a projected surplus of 1.1 million francs',
+    'blog.article.uri-budget-2027-surplus.title': 'Uri: 2027 budget with a surplus of CHF 1,1 million',
+    'blog.article.uri-budget-2027-surplus.excerpt': 'For 2027, the Canton of Uri expects a positive result of CHF 1,1 million: revenues of CHF 514,4 million and net investments of CHF 25,3 million.',
+    'blog.article.uri-budget-2027-surplus.imageAlt': 'Evocative Alpine scene in Canton Uri for an article on the 2027 cantonal budget',
 };
 
 export default blogMetaCantonUrEn;
