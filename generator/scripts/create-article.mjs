@@ -7951,9 +7951,17 @@ function sourceNamespaceForStart(stack, tag, html) {
     return 'html';
   }
   if (parent.namespace === 'svg') {
+    // foreignObject is an HTML integration point, but SVG and MathML can
+    // re-enter from inside it. Resolve those tags before the HTML fallback.
+    if (tag.name === 'svg') return 'svg';
+    if (tag.name === 'math') return 'mathml';
     return parent.name === 'foreignobject' ? 'html' : 'svg';
   }
   if (parent.namespace === 'mathml') {
+    // annotation-xml with an HTML encoding is an HTML integration point;
+    // nested SVG/MathML tags still start their foreign namespace.
+    if (tag.name === 'svg') return 'svg';
+    if (tag.name === 'math') return 'mathml';
     if (parent.name === 'annotation-xml') {
       const encoding = sourceTagAttribute(html, parent.tag, 'encoding').trim().toLowerCase();
       if (encoding === 'text/html' || encoding === 'application/xhtml+xml') return 'html';
@@ -7961,6 +7969,20 @@ function sourceNamespaceForStart(stack, tag, html) {
     return 'mathml';
   }
   return 'html';
+}
+
+function sourceTagIsInactive(html, tag, namespace, parent) {
+  return Boolean(parent?.inactive)
+    || (namespace === 'html' && SOURCE_INACTIVE_CONTEXT_ELEMENTS.has(tag.name))
+    || (namespace === 'html' && sourceTagAttribute(html, tag, 'role')
+      .trim().toLowerCase().split(/\s+/)
+      .some((role) => SOURCE_INACTIVE_CONTEXT_ROLES.has(role)))
+    || (namespace === 'html' && SOURCE_INACTIVE_CONTEXT_HINT.test([
+      sourceTagAttribute(html, tag, 'id'),
+      sourceTagAttribute(html, tag, 'class'),
+      sourceTagAttribute(html, tag, 'role'),
+      sourceTagAttribute(html, tag, 'aria-label'),
+    ].join(' ')));
 }
 
 function sourceImplicitCloseIndex(stack, name) {
@@ -8072,17 +8094,7 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd } 
       namespace,
       start,
       tag,
-      inactive: Boolean(parent?.inactive)
-        || (namespace === 'html' && SOURCE_INACTIVE_CONTEXT_ELEMENTS.has(tag.name))
-        || (namespace === 'html' && sourceTagAttribute(html, tag, 'role')
-          .trim().toLowerCase().split(/\s+/)
-          .some((role) => SOURCE_INACTIVE_CONTEXT_ROLES.has(role)))
-        || (namespace === 'html' && SOURCE_INACTIVE_CONTEXT_HINT.test([
-          sourceTagAttribute(html, tag, 'id'),
-          sourceTagAttribute(html, tag, 'class'),
-          sourceTagAttribute(html, tag, 'role'),
-          sourceTagAttribute(html, tag, 'aria-label'),
-        ].join(' '))),
+      inactive: sourceTagIsInactive(html, tag, namespace, parent),
     };
     if (onStart) onStart({
       tag,
@@ -8168,8 +8180,8 @@ function findActiveSourceHead(html) {
         sourceTagAttribute(html, tag, 'type').trim().toLowerCase() === 'application/ld+json' &&
         documentLevel &&
         bodyState?.trusted &&
-        stack.includes(bodyState.entry) &&
-        !parent?.inactive
+        parent === bodyState.entry &&
+        !sourceTagIsInactive(html, tag, namespace, parent)
       ) {
         ldBlocks.push(html.slice(start, rawTextEnd));
       }

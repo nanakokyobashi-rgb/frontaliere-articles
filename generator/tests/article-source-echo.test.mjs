@@ -177,26 +177,54 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(res.html.includes('"articleBody":"corpo"'));
   });
 
-  it('riattiva JSON-LD attivo nel body e nei discendenti neutri', () => {
-    const stale = (label) => `<script type="application/ld+json">{"headline":"${label}"}</script>`;
+  it('riattiva JSON-LD attivo solo come figlio diretto del body', () => {
+    const stale = (label, attrs = '') => `<script${attrs ? ` ${attrs}` : ''} type="application/ld+json">{"headline":"${label}"}</script>`;
     const page2 = '<html><head><title>Pagina</title></head><body>'
       + `<!-- ${stale('COMMENT_JSON_LD_SHOULD_NOT_BE_ACTIVATED')} -->`
       + `<template>${stale('TEMPLATE_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</template>`
       + `<aside>${stale('SIDEBAR_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</aside>`
-      + `<div class="app-shell">${stale('ACTIVE_BODY_DESCENDANT_JSON_LD')}</div>`
+      + `<div class="app-shell">${stale('WRAPPED_BODY_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</div>`
+      + stale('SCRIPT_CLASS_JSON_LD_SHOULD_NOT_BE_ACTIVATED', 'class="related"')
+      + stale('SCRIPT_ID_JSON_LD_SHOULD_NOT_BE_ACTIVATED', 'id="sidebar-json"')
+      + stale('SCRIPT_ROLE_JSON_LD_SHOULD_NOT_BE_ACTIVATED', 'role="complementary"')
+      + stale('ACTIVE_BODY_DIRECT_JSON_LD')
       + `<div role="complementary">${stale('COMPLEMENTARY_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</div>`
       + `<div role="banner">${stale('BANNER_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</div>`
       + `<div role="contentinfo">${stale('CONTENTINFO_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</div>`
       + `<article>${ARTICLE_PROSE}</article></body></html>`;
     const res = isolateMainSourceHtml(page2);
     assert.equal(res.isolated, true);
-    assert.ok(res.html.includes('ACTIVE_BODY_DESCENDANT_JSON_LD'));
+    assert.ok(res.html.includes('ACTIVE_BODY_DIRECT_JSON_LD'));
     assert.equal(res.html.includes('COMMENT_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('TEMPLATE_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('SIDEBAR_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('WRAPPED_BODY_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('SCRIPT_CLASS_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('SCRIPT_ID_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('SCRIPT_ROLE_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('COMPLEMENTARY_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('BANNER_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('CONTENTINFO_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+  });
+
+  it('non sceglie article/main dentro SVG rientrati da foreignObject o annotation-xml', () => {
+    const foreignArticle = '<article><p>FOREIGN_SVG_ARTICLE_SHOULD_NOT_BE_SELECTED. '
+      + 'Contenuto grafico inerte senza radice editoriale. '.repeat(20)
+      + '</p></article>';
+    const foreignMain = '<main><p>FOREIGN_ANNOTATION_SVG_MAIN_SHOULD_NOT_BE_SELECTED. '
+      + 'Contenuto grafico inerte senza radice editoriale. '.repeat(20)
+      + '</p></main>';
+    const page2 = '<html><body>'
+      + `<svg><foreignObject><svg>${foreignArticle}</svg></foreignObject></svg>`
+      + `<math><annotation-xml encoding="text/html"><svg>${foreignMain}</svg></annotation-xml></math>`
+      + `<article>${ARTICLE_PROSE}</article>`
+      + '</body></html>';
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.equal(res.html.includes('FOREIGN_SVG_ARTICLE_SHOULD_NOT_BE_SELECTED'), false);
+    assert.equal(res.html.includes('FOREIGN_ANNOTATION_SVG_MAIN_SHOULD_NOT_BE_SELECTED'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
   });
 
   it('non perde il confine document-level dopo self-closing SVG/MathML foreign', () => {
