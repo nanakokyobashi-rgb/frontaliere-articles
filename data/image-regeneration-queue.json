@@ -120,6 +120,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-17T01:00:16.102Z",
       "lastFailureAt": "2026-10-17T01:00:16.102Z"
+    },
+    {
+      "articleId": "turgovia-sicurezza-lavoro-orari",
+      "title": "Turgovia: sicurezza sul lavoro, orari e tutela della salute",
+      "fallbackImage": "/images/blog/article-sicurezza-lavoro-turgovia-regole.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T01:07:58.548Z",
+      "lastFailureAt": "2026-10-17T01:07:58.548Z"
     }
   ]
 }

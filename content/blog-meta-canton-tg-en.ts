@@ -30,6 +30,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.kreuzlingen-barenplatz-chilbi.title': 'Kreuzlingen: Bärenplatz closed for the fair',
     'blog.article.kreuzlingen-barenplatz-chilbi.excerpt': 'In Kreuzlingen buses are diverted from 25 October at 09.00 on the 27th; the Bärenplatz stop goes to the main station.',
     'blog.article.kreuzlingen-barenplatz-chilbi.imageAlt': 'Bus at Kreuzlingen main station during the Chilbi fair setup',
+    'blog.article.turgovia-sicurezza-lavoro-orari.title': 'Thurgau: workplace safety, working hours and health protection',
+    'blog.article.turgovia-sicurezza-lavoro-orari.excerpt': 'Guide to occupational safety, health protection, working hours and rest periods in the Canton of Thurgau in accordance with regulations and the Labour Inspectorate.',
+    'blog.article.turgovia-sicurezza-lavoro-orari.imageAlt': 'Workplace safety and health protection in Canton Thurgovia',
 };
 
 export default blogMetaCantonTgEn;
