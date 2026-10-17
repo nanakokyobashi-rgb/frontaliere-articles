@@ -3215,9 +3215,9 @@
       "sitePath": "scripts/lib/extract-article-text.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "1a2339a5235f043a",
-        "corpus": "1a2339a5235f043a",
-        "alignedAt": "2026-10-05"
+        "site": "24e8b87e27da6bff",
+        "corpus": "24e8b87e27da6bff",
+        "alignedAt": "2026-10-17"
       }
     },
     {

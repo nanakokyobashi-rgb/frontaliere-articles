@@ -8447,6 +8447,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ia-voce-truffatori-svizzera-2026.title': 'L’IA presta la voce ai truffatori: come difendersi dalle chiamate sospette',
     'blog.article.ia-voce-truffatori-svizzera-2026.excerpt': 'Una banca italiana avrebbe perso 95 milioni di euro.',
     'blog.article.ia-voce-truffatori-svizzera-2026.imageAlt': 'Smartphone con notifica di chiamata e onda sonora che rappresenta la clonazione vocale su scrivania svizzera',
+    'blog.article.udc-no-iva-13esima-avs.title': 'UDC dice no all\'aumento dell\'IVA per finanziare la 13esima AVS, voto il 29 novembre',
+    'blog.article.udc-no-iva-13esima-avs.excerpt': 'No UDC all\'aumento dell\'IVA per la 13esima AVS Il popolo vota sulla proposta il 29 novembre A Bulle il no passa con 290 voti contro 3 L\'Udc dice sì',
+    'blog.article.udc-no-iva-13esima-avs.imageAlt': 'Elettori svizzeri davanti a un seggio elettorale con simbolo dell\'IVA',
 };
 
 export default blogMetaChIt;

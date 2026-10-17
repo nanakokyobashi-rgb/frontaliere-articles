@@ -2838,6 +2838,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'sistema-sanitario-lamal-ginevra-2026': { it: 'sistema-sanitario-lamal-ginevra-2026', en: 'swiss-healthcare-system-lamal-geneva-2026', de: 'schweizer-gesundheitssystem-lamal-genf-2026', fr: 'systeme-sante-suisse-lamal-geneve-2026' },
  'stesso-reddito-imposte-diverse': { it: 'stesso-reddito-imposte-diverse', en: 'same-income-different-taxes', de: 'gleiches-einkommen-verschiedene-steuern', fr: 'meme-revenu-impots-differents' },
  'ia-voce-truffatori-svizzera-2026': { it: 'ia-voce-truffatori-svizzera-2026', en: 'ai-lends-its-voice-to-scammers-how-to-defend-yourself-against-suspicious-calls', de: 'ki-leiht-betrugern-ihre-stimme-so-schutzen-sie-sich-vor-verdachtigen-anrufen', fr: 'l-ia-prete-la-voix-aux-escrocs-comment-se-defendre-contre-les-appels-suspects' },
+ 'udc-no-iva-13esima-avs': { it: 'udc-no-iva-13esima-avs', en: 'udc-rejects-vat-hike-to-fund-13th-avs-pension-vote-nov-29', de: 'svp-lehnt-mehrwertsteuer-erhohung-fur-13-ahv-rente-ab', fr: 'l-udc-dit-non-a-la-hausse-de-tva-pour-financer-la-13e-avs' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

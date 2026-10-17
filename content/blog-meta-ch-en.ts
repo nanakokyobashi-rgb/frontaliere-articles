@@ -8447,6 +8447,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ia-voce-truffatori-svizzera-2026.title': 'AI lends its voice to scammers: how to defend yourself against suspicious calls',
     'blog.article.ia-voce-truffatori-svizzera-2026.excerpt': 'An Italian bank is alleged to have lost 95 million euros.',
     'blog.article.ia-voce-truffatori-svizzera-2026.imageAlt': 'Smartphone with call notification and sound wave representing voice cloning on a Swiss desk',
+    'blog.article.udc-no-iva-13esima-avs.title': 'UDC rejects VAT hike to fund 13th AVS pension; vote Nov 29',
+    'blog.article.udc-no-iva-13esima-avs.excerpt': 'UDC says no to the VAT increase for the 13th AVS pension payment The people vote on the proposal on November 29 In Bulle, no wins by 290 votes to 3 The UDC says yes',
+    'blog.article.udc-no-iva-13esima-avs.imageAlt': 'Swiss voters in front of a polling booth with a VAT symbol',
 };
 
 export default blogMetaChEn;

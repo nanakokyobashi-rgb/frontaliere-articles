@@ -28219,6 +28219,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'udc-no-iva-13esima-avs',
+    category: 'fiscale',
+    date: '2026-10-17T15:14:14.222Z',
+    image: '/images/blog/article-avs-voto-iva-il-29-novembre-per-la-13esima-rendita.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

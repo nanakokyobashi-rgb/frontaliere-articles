@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T14:03:25.701Z",
-  "contentHash": "f3d2be59d68d2adcebc7389ee41039dc7fd61742e298e192c43a32ab611adaf1",
+  "updatedAt": "2026-10-17T15:19:23.879Z",
+  "contentHash": "1cd9bd86150a8598c1c7d159bfe378631613b7b43933e813ac2e0d84418d9c2f",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "22",
+          "value": "21",
           "note": "segnalazioni aggiornate: 17 ottobre 2026"
         },
         {
@@ -85,10 +85,10 @@
               "date": "2026-09-28T05:30:00.000Z"
             },
             {
-              "label": "Route du Rontet, Sâles in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "label": "Route de la Côte, Saint-Aubin in tutte le direzioni Situazione: chiusa",
               "value": "Chiusura",
-              "detail": "fine prevista: 17 ottobre 2026",
-              "date": "2026-09-30T08:32:00.000Z"
+              "detail": "fine prevista: 23 ottobre 2026",
+              "date": "2026-10-02T05:53:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -188,7 +188,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T15:19:23.879Z"
     },
     "en": {
       "canton": "FR",
@@ -198,7 +198,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "22",
+          "value": "21",
           "note": "reports as of 17 October 2026"
         },
         {
@@ -256,10 +256,10 @@
               "date": "2026-09-28T05:30:00.000Z"
             },
             {
-              "label": "Route du Rontet, Sâles in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "label": "Route de la Côte, Saint-Aubin in tutte le direzioni Situazione: chiusa",
               "value": "Closure",
-              "detail": "until 17 October 2026",
-              "date": "2026-09-30T08:32:00.000Z"
+              "detail": "until 23 October 2026",
+              "date": "2026-10-02T05:53:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -359,7 +359,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T15:19:23.879Z"
     },
     "de": {
       "canton": "FR",
@@ -369,7 +369,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "22",
+          "value": "21",
           "note": "Meldungen vom 17. Oktober 2026"
         },
         {
@@ -427,10 +427,10 @@
               "date": "2026-09-28T05:30:00.000Z"
             },
             {
-              "label": "Route du Rontet, Sâles in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
+              "label": "Route de la Côte, Saint-Aubin in beide Richtungen Sachlage: Strecke gesperrt",
               "value": "Sperrung",
-              "detail": "bis 17. Oktober 2026",
-              "date": "2026-09-30T08:32:00.000Z"
+              "detail": "bis 23. Oktober 2026",
+              "date": "2026-10-02T05:53:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -530,7 +530,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T15:19:23.879Z"
     },
     "fr": {
       "canton": "FR",
@@ -540,7 +540,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "22",
+          "value": "21",
           "note": "signalements au 17 octobre 2026"
         },
         {
@@ -598,10 +598,10 @@
               "date": "2026-09-28T05:30:00.000Z"
             },
             {
-              "label": "Route du Rontet, Sâles dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
+              "label": "Route de la Côte, Saint-Aubin dans les deux sens Situation: fermé",
               "value": "Fermeture",
-              "detail": "jusqu’au 17 octobre 2026",
-              "date": "2026-09-30T08:32:00.000Z"
+              "detail": "jusqu’au 23 octobre 2026",
+              "date": "2026-10-02T05:53:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -701,7 +701,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T15:19:23.879Z"
     }
   }
 }

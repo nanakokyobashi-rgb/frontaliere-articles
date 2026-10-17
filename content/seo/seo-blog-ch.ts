@@ -106691,6 +106691,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-udc-no-iva-13esima-avs': {
+    title: 'UDC dice no all\'aumento dell\'IVA per finanziare la 13esima AVS, voto il 29 novembre',
+    description: 'No UDC all\'aumento dell\'IVA per la 13esima AVS Il popolo vota sulla proposta il 29 novembre A Bulle il no passa con 290 voti contro 3 L\'Udc dice sì',
+    keywords: 'frontalieri, ticino, svizzera, italia, dice, aumento, dell, finanziare',
+    ogTitle: 'UDC dice no all\'aumento dell\'IVA per la 13esima AVS, voto il 29 novembre',
+    ogDescription: 'No UDC all\'aumento dell\'IVA per la 13esima AVS Il popolo vota sulla proposta il 29 novembre A Bulle il no passa con 290 voti contro 3 L\'Udc dice sì',
+    canonicalPath: '/articoli-svizzera/udc-no-iva-13esima-avs/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "UDC dice no all'aumento dell'IVA per finanziare la 13esima AVS, voto il 29 novembre",
+      "description": "No UDC all'aumento dell'IVA per la 13esima AVS Il popolo vota sulla proposta il 29 novembre A Bulle il no passa con 290 voti contro 3 L'Udc dice sì",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-avs-voto-iva-il-29-novembre-per-la-13esima-rendita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Elettori svizzeri davanti a un seggio elettorale con simbolo dell'IVA"
+      },
+      "datePublished": "2026-10-17T15:14:14+00:00",
+      "dateModified": "2026-10-17T15:14:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/udc-no-iva-13esima-avs/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
