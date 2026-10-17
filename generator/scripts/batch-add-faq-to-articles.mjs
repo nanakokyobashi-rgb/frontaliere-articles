@@ -55,6 +55,7 @@ import {
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { assertLocalizedToponymPair, extractArticleProjectionText } from './lib/localized-toponyms.mjs';
+import { sanitizeArticleFaqMarkdown } from '../../scripts/lib/article-link-contract.mjs';
 
 // ── CLI argument parsing ─────────────────────────────────────
 function parseLimitArgs(argv) {
@@ -1185,7 +1186,8 @@ export function replaceFaqInBodyFile(filePath, faqArray, articleId, gate = {}) {
   // controlla la sintassi JS del file, e un literal TS con un backslash di
   // troppo e' sintatticamente perfetto. Il difetto e' nel LIVELLO ANNIDATO, e
   // si manifesta solo quando qualcun altro fa JSON.parse del valore.
-  const jsonStr = escapeForSingleQuoteTS(JSON.stringify(faqArray));
+  const safeFaqArray = sanitizeArticleFaqMarkdown(faqArray, gate.locale);
+  const jsonStr = escapeForSingleQuoteTS(JSON.stringify(safeFaqArray));
   // Use escape-aware regex: (?:[^'\\]|\\.)* correctly skips \' sequences.
   // `g` + last match: write the occurrence that is actually LIVE at
   // runtime — a duplicate `.faq` key resolves to the last one in a JS
@@ -1229,7 +1231,7 @@ export function insertFaqIntoBodyFile(filePath, articleId, faqArray, gate = {}) 
     targetFaq: gate.targetFaq || faqArray,
   })) return false;
 
-  const faqJsonStr = JSON.stringify(faqArray);
+  const faqJsonStr = JSON.stringify(sanitizeArticleFaqMarkdown(faqArray, gate.locale));
   const escapedFaq = escapeForSingleQuoteTS(faqJsonStr);
   const faqLine = `    'blog.article.${articleId}.faq': '${escapedFaq}',`;
 

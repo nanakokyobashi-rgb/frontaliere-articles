@@ -30,6 +30,7 @@ import { escapeForSingleQuoteTS, unescapeForSingleQuoteTS } from './lib/article-
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { assertLocalizedToponymPair, extractArticleProjectionText } from './lib/localized-toponyms.mjs';
+import { sanitizeArticleFaqMarkdown } from '../../scripts/lib/article-link-contract.mjs';
 
 // Write-time guard (issue #66): strip any C0 control character other than
 // TAB/LF/CR before it reaches content/ — same rule as create-article.mjs write().
@@ -311,9 +312,10 @@ export function hasFaqKey(filePath, id = idOfBodyPath(filePath)) {
 }
 
 export function replaceFaqInFile(filePath, newFaqArray, id = idOfBodyPath(filePath)) {
-  if (!passesLocalizedToponymGate(filePath, id, basename(dirname(resolve(filePath))), newFaqArray)) return false;
+  const locale = basename(dirname(resolve(filePath)));
+  if (!passesLocalizedToponymGate(filePath, id, locale, newFaqArray)) return false;
   let content = readFileSync(filePath, 'utf-8');
-  const jsonStr = serializeFaqLiteral(newFaqArray);
+  const jsonStr = serializeFaqLiteral(sanitizeArticleFaqMarkdown(newFaqArray, locale));
   // Escape-aware regex + function replacer to avoid $-pattern issues.
   // `g` + last match: write the occurrence that is actually LIVE at
   // runtime, same reasoning as extractFaqFromFile above. Ancorata all'id:
@@ -331,9 +333,10 @@ export function replaceFaqInFile(filePath, newFaqArray, id = idOfBodyPath(filePa
 }
 
 function insertFaqKey(filePath, articleId, faqArray) {
-  if (!passesLocalizedToponymGate(filePath, articleId, basename(dirname(resolve(filePath))), faqArray)) return false;
+  const locale = basename(dirname(resolve(filePath)));
+  if (!passesLocalizedToponymGate(filePath, articleId, locale, faqArray)) return false;
   let content = readFileSync(filePath, 'utf-8');
-  const jsonStr = serializeFaqLiteral(faqArray);
+  const jsonStr = serializeFaqLiteral(sanitizeArticleFaqMarkdown(faqArray, locale));
   const closingIdx = content.lastIndexOf('};');
   if (closingIdx === -1) return false;
   const faqLine = `    'blog.article.${articleId}.faq': '${jsonStr}',\n`;

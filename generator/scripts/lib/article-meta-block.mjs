@@ -120,6 +120,67 @@ export function unescapeForSingleQuoteTS(s) {
   return String(s ?? '').replace(/\\([\s\S])/g, (_, c) => (c === 'n' ? '\n' : c === 'r' ? '\r' : c));
 }
 
+/** Decode the source value of a TypeScript string or no-substitution template literal. */
+export function decodeTypeScriptString(raw, quote) {
+  if (!["'", '"', '`'].includes(quote)) throw new Error('delimitatore TypeScript non supportato: ' + quote);
+  const source = String(raw ?? '');
+  let value = '';
+  for (let index = 0; index < source.length; index += 1) {
+    const char = source[index];
+    if (char !== '\\') {
+      value += char;
+      continue;
+    }
+
+    const escape = source[++index];
+    if (escape === undefined) throw new Error('escape TypeScript incompleto');
+    const simple = { b: '\b', f: '\f', n: '\n', r: '\r', t: '\t', v: '\v', '0': '\0' };
+    if (Object.hasOwn(simple, escape)) {
+      if (escape === '0' && /[0-9]/.test(source[index + 1] || '')) {
+        throw new Error('escape ottale TypeScript non supportato');
+      }
+      value += simple[escape];
+      continue;
+    }
+    if (escape === '\n') continue;
+    if (escape === '\r') {
+      if (source[index + 1] === '\n') index += 1;
+      continue;
+    }
+    if (escape === 'x') {
+      const hex = source.slice(index + 1, index + 3);
+      if (!/^[\da-f]{2}$/i.test(hex)) throw new Error('escape esadecimale TypeScript non valido');
+      value += String.fromCharCode(Number.parseInt(hex, 16));
+      index += 2;
+      continue;
+    }
+    if (escape === 'u') {
+      if (source[index + 1] === '{') {
+        const end = source.indexOf('}', index + 2);
+        const hex = end < 0 ? '' : source.slice(index + 2, end);
+        if (!/^[\da-f]{1,6}$/i.test(hex) || Number.parseInt(hex, 16) > 0x10ffff) {
+          throw new Error('escape Unicode TypeScript non valido');
+        }
+        value += String.fromCodePoint(Number.parseInt(hex, 16));
+        index = end;
+      } else {
+        const hex = source.slice(index + 1, index + 5);
+        if (!/^[\da-f]{4}$/i.test(hex)) throw new Error('escape Unicode TypeScript non valido');
+        value += String.fromCharCode(Number.parseInt(hex, 16));
+        index += 4;
+      }
+      continue;
+    }
+    if (escape === quote || (quote === '`' && escape === '$')) {
+      value += escape;
+      continue;
+    }
+    if (/[a-z\d_$]/i.test(escape)) throw new Error('escape TypeScript non supportato: \\' + escape);
+    value += escape;
+  }
+  return value;
+}
+
 /**
  * Il valore di un campo per una locale, cercato nei due posti in cui i
  * generatori di questo repo tengono i testi per-locale:
