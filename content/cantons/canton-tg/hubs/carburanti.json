@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T00:48:07.355Z",
-  "contentHash": "4290a7875e708eae8460b0347eee87d966254cb15857cb6e0c7c35688724afdd",
+  "updatedAt": "2026-10-17T01:14:09.561Z",
+  "contentHash": "a651100488e7d9f5aa74378e0bdfa59e11542df8147f5df58fc8aed133d94d6e",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Turgovia: sicurezza sul lavoro, orari e tutela della salute",
+          "url": "/articoli-turgovia/turgovia-sicurezza-lavoro-orari/",
+          "excerpt": "Guida alla sicurezza sul lavoro, tutela della salute, orari e periodi di riposo nel Canton Turgovia secondo le normative e l'Ispettorato del lavoro.",
+          "date": "2026-10-17T01:07:58.510Z"
+        },
+        {
           "title": "Kreuzlingen: Bärenplatz chiuso per la fiera",
           "url": "/articoli-turgovia/kreuzlingen-barenplatz-chilbi/",
           "excerpt": "A Kreuzlingen i bus sono deviati dal 25 ottobre alle 09.00 del 27; la fermata Bärenplatz va alla stazione principale.",
@@ -94,12 +100,6 @@
           "url": "/articoli-turgovia/sicurezza-lavoro-turgovia-regole/",
           "excerpt": "La sicurezza sul lavoro previene infortuni e malattie professionali.",
           "date": "2026-10-09T16:02:21.033Z"
-        },
-        {
-          "title": "Aadorf: fine status S, più spese sociali nel 2027",
-          "url": "/articoli-turgovia/aadorf-spese-sociali-2027/",
-          "excerpt": "Nel budget 2027 Aadorf prevede costi sociali nettamente più alti e più entrate fiscali; la fine dei contributi federali per gli ucraini può pesare ancora di più.",
-          "date": "2026-10-09T15:46:11.874Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T00:48:07.355Z"
+      "updatedAt": "2026-10-17T01:14:09.561Z"
     },
     "en": {
       "canton": "TG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau: workplace safety, working hours and health protection",
+          "url": "/en/thurgau-articles/thurgovia-workplace-safety-hours/",
+          "excerpt": "Guide to occupational safety, health protection, working hours and rest periods in the Canton of Thurgau in accordance with regulations and the Labour Inspectorate.",
+          "date": "2026-10-17T01:07:58.510Z"
+        },
+        {
           "title": "Kreuzlingen: Bärenplatz closed for the fair",
           "url": "/en/thurgau-articles/kreuzlingen-barenplatz-fair/",
           "excerpt": "In Kreuzlingen buses are diverted from 25 October at 09.00 on the 27th; the Bärenplatz stop goes to the main station.",
@@ -193,12 +199,6 @@
           "url": "/en/thurgau-articles/workplace-safety-thurgau-rules/",
           "excerpt": "Occupational safety prevents accidents and occupational diseases.",
           "date": "2026-10-09T16:02:21.033Z"
-        },
-        {
-          "title": "Aadorf: status S fee, higher social expenses in 2027",
-          "url": "/en/thurgau-articles/aadorf-social-costs-2027/",
-          "excerpt": "In its 2027 budget, Aadorf expects significantly higher social costs and more tax revenue; the end of federal contributions for Ukrainians could weigh even more heavily.",
-          "date": "2026-10-09T15:46:11.874Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T00:48:07.355Z"
+      "updatedAt": "2026-10-17T01:14:09.561Z"
     },
     "de": {
       "canton": "TG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau: Arbeitssicherheit, Arbeitszeiten und Gesundheitsschutz",
+          "url": "/de/thurgau-artikel/turgau-arbeitssicherheit-arbeitszeiten/",
+          "excerpt": "Leitfaden zu Arbeitssicherheit, Gesundheitsschutz, Arbeitszeiten und Ruhezeiten im Kanton Thurgau gemäss den Vorschriften und den Vorgaben des Arbeitsinspektorats.",
+          "date": "2026-10-17T01:07:58.510Z"
+        },
+        {
           "title": "Kreuzlingen: Bärenplatz wegen Messe geschlossen",
           "url": "/de/thurgau-artikel/kreuzlingen-barenplatz-wegen-messe-geschlossen/",
           "excerpt": "In Kreuzlingen werden die Busse vom 25.",
@@ -292,12 +298,6 @@
           "url": "/de/thurgau-artikel/arbeitssicherheit-turgau-regeln/",
           "excerpt": "Arbeitssicherheit verhindert Unfälle und Berufskrankheiten.",
           "date": "2026-10-09T16:02:21.033Z"
-        },
-        {
-          "title": "Aadorf: Ende des Status S, höhere Sozialausgaben im Jahr 2027",
-          "url": "/de/thurgau-artikel/aadorf-sozialausgaben-2027/",
-          "excerpt": "Im Budget 2027 sieht Aadorf deutlich höhere Sozialkosten und höhere Steuereinnahmen vor; das Ende der Bundesbeiträge für die Ukrainer kann noch stärker ins Gewicht fallen.",
-          "date": "2026-10-09T15:46:11.874Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T00:48:07.355Z"
+      "updatedAt": "2026-10-17T01:14:09.561Z"
     },
     "fr": {
       "canton": "TG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgovie : sécurité au travail, horaires et protection de la santé",
+          "url": "/fr/articles-thurgovie/thurgovie-securite-travail-horaires/",
+          "excerpt": "Guide de la sécurité au travail, de la protection de la santé, des horaires et des périodes de repos dans le canton de Thurgovie selon la réglementation et l'Inspection du travail.",
+          "date": "2026-10-17T01:07:58.510Z"
+        },
+        {
           "title": "Kreuzlingen : Bärenplatz fermé pour le salon",
           "url": "/fr/articles-thurgovie/kreuzlingen-barenplatz-fete/",
           "excerpt": "À Kreuzlingen, les bus sont déviés du 25 octobre à 09h00 le 27 ; l'arrêt Bärenplatz va à la gare principale.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-thurgovie/securite-travail-thurgovie-regles/",
           "excerpt": "La sécurité au travail prévient les accidents et les maladies professionnelles.",
           "date": "2026-10-09T16:02:21.033Z"
-        },
-        {
-          "title": "Aadorf : fin du statut S, davantage de dépenses sociales en 2027",
-          "url": "/fr/articles-thurgovie/aadorf-depenses-sociales-2027/",
-          "excerpt": "Dans le budget 2027, Aadorf prévoit des coûts sociaux nettement plus élevés et davantage de recettes fiscales ; la fin des contributions fédérales pour les Ukrainiens peut peser encore davantage.",
-          "date": "2026-10-09T15:46:11.874Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T00:48:07.355Z"
+      "updatedAt": "2026-10-17T01:14:09.561Z"
     }
   }
 }

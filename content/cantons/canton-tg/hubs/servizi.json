@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T00:12:19.402Z",
-  "contentHash": "ef691643fd6090481805f331c80c67a9e1d1c92a8664646cb39d35bd613aafe1",
+  "updatedAt": "2026-10-17T01:14:09.561Z",
+  "contentHash": "97cfb6da6c684169cc89899cc4ab01d6e6f9e88b064b42adb7da4c992db8ea84",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -149,6 +149,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Turgovia: sicurezza sul lavoro, orari e tutela della salute",
+          "url": "/articoli-turgovia/turgovia-sicurezza-lavoro-orari/",
+          "excerpt": "Guida alla sicurezza sul lavoro, tutela della salute, orari e periodi di riposo nel Canton Turgovia secondo le normative e l'Ispettorato del lavoro.",
+          "date": "2026-10-17T01:07:58.510Z"
+        },
+        {
           "title": "Turgovia: Sportello digitale per pratiche e documenti",
           "url": "/articoli-turgovia/sportello-digitale-turgovia/",
           "excerpt": "Il Digitaler Schalter del Canton Turgovia riunisce i servizi più usati, informazioni, video brevi e un'area protetta per estratti, permessi e altri documenti.",
@@ -218,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:14:09.561Z"
     },
     "en": {
       "canton": "TG",
@@ -340,6 +346,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Thurgau: workplace safety, working hours and health protection",
+          "url": "/en/thurgau-articles/thurgovia-workplace-safety-hours/",
+          "excerpt": "Guide to occupational safety, health protection, working hours and rest periods in the Canton of Thurgau in accordance with regulations and the Labour Inspectorate.",
+          "date": "2026-10-17T01:07:58.510Z"
+        },
+        {
           "title": "Thurgau: Digital portal for procedures and documents",
           "url": "/en/thurgau-articles/thurgau-digital-counter/",
           "excerpt": "The Digitaler Schalter of the Canton of Thurgau brings together the most frequently used services, information, short videos, and a protected area for extracts, permits, and other documents.",
@@ -405,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:14:09.561Z"
     },
     "de": {
       "canton": "TG",
@@ -527,6 +539,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Thurgau: Arbeitssicherheit, Arbeitszeiten und Gesundheitsschutz",
+          "url": "/de/thurgau-artikel/turgau-arbeitssicherheit-arbeitszeiten/",
+          "excerpt": "Leitfaden zu Arbeitssicherheit, Gesundheitsschutz, Arbeitszeiten und Ruhezeiten im Kanton Thurgau gemäss den Vorschriften und den Vorgaben des Arbeitsinspektorats.",
+          "date": "2026-10-17T01:07:58.510Z"
+        },
+        {
           "title": "Thurgau: Digitaler Schalter für Anliegen und Dokumente",
           "url": "/de/thurgau-artikel/digitaler-schalter-thurgau/",
           "excerpt": "Der Dienst Digitaler Schalter des Kantons Thurgau bündelt die meistgenutzten Dienstleistungen, Informationen, kurze Videos und einen geschützten Bereich für Auszüge, Bewilligungen und andere Dokumente.",
@@ -592,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:14:09.561Z"
     },
     "fr": {
       "canton": "TG",
@@ -714,6 +732,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Thurgovie : sécurité au travail, horaires et protection de la santé",
+          "url": "/fr/articles-thurgovie/thurgovie-securite-travail-horaires/",
+          "excerpt": "Guide de la sécurité au travail, de la protection de la santé, des horaires et des périodes de repos dans le canton de Thurgovie selon la réglementation et l'Inspection du travail.",
+          "date": "2026-10-17T01:07:58.510Z"
+        },
+        {
           "title": "Thurgovie : Guichet numérique pour les démarches et les documents",
           "url": "/fr/articles-thurgovie/guichet-numerique-thurgovie/",
           "excerpt": "Le Digitaler Schalter du canton de Thurgovie réunit les services les plus utilisés, des informations, de courtes vidéos et un espace protégé pour les extraits, permis et autres documents.",
@@ -775,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:14:09.561Z"
     }
   }
 }
