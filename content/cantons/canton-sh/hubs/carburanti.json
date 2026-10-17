@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "84362351dae6e3f5832d6e3689cfee2c2e252801b576cbd55dd36b26b97f5bda",
+  "updatedAt": "2026-10-17T01:52:59.429Z",
+  "contentHash": "8716a5c9a88c913696ef67f4c87d9a0701619a232cf1937d490a1bd6681de194",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Singen, chiusa la Schaffhauser Straße dal 26 al 30 ottobre",
+          "url": "/articoli-sciaffusa/singen-chiusura-schaffhauser-strasse/",
+          "excerpt": "A Singen la strada sarà chiusa al traffico dal 26 al 30 ottobre 2026 per lavori alla fermata Landesgartenschau.",
+          "date": "2026-10-17T01:47:28.492Z"
+        },
+        {
           "title": "Sciaffusa: previste cifre rosse tra il 2027 e il 2030",
           "url": "/articoli-sciaffusa/finanze-cantone-sciaffusa-2027/",
           "excerpt": "Il governo cantonale attende risultati negativi per il quadriennio 2027-2030 a causa del calo delle entrate dalle imposte sulle imprese.",
@@ -94,12 +100,6 @@
           "url": "/articoli-sciaffusa/sciaffusa-formazione-farmacie/",
           "excerpt": "Sciaffusa: moduli e-learning volontari per le farmacie, dedicati a segnali di violenza domestica, colloquio riservato e rinvio ai servizi.",
           "date": "2026-10-08T08:29:37.131Z"
-        },
-        {
-          "title": "Thayngen: esploso un bancomat, ferito un sospetto",
-          "url": "/articoli-sciaffusa/esplosione-bancomat-thayngen/",
-          "excerpt": "Thayngen: esploso un bancomat prima delle 4; un sospetto olandese è gravemente ferito, due presunti autori sono fuggiti verso la Germania.",
-          "date": "2026-10-07T23:37:11.961Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T01:52:59.429Z"
     },
     "en": {
       "canton": "SH",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Singen, Schaffhauser Straße closed from October 26 to 30",
+          "url": "/en/schaffhausen-articles/singen-schaffhauser-strasse-closure/",
+          "excerpt": "In Singen, the road will be closed to traffic from October 26 to 30, 2026, due to work at the Landesgartenschau stop.",
+          "date": "2026-10-17T01:47:28.492Z"
+        },
+        {
           "title": "Schaffhausen: red figures expected between 2027 and 2030",
           "url": "/en/schaffhausen-articles/schaffhausen-canton-finances-2027/",
           "excerpt": "The cantonal government expects negative results for the four-year period 2027–2030 due to declining revenue from corporate taxes.",
@@ -193,12 +199,6 @@
           "url": "/en/schaffhausen-articles/schaffhausen-pharmacy-training/",
           "excerpt": "Schaffhausen: voluntary e-learning modules for pharmacies, focused on signs of domestic violence, confidential conversations, and referrals to services.",
           "date": "2026-10-08T08:29:37.131Z"
-        },
-        {
-          "title": "Thayngen: ATM explodes, suspect injured",
-          "url": "/en/schaffhausen-articles/thayngen-atm-explosion/",
-          "excerpt": "Thayngen: an ATM exploded before 4 a.m.; a Dutch suspect is seriously injured, and two alleged perpetrators fled toward Germany.",
-          "date": "2026-10-07T23:37:11.961Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T01:52:59.429Z"
     },
     "de": {
       "canton": "SH",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Singen, Schaffhauser Straße vom 26. bis 30. Oktober gesperrt",
+          "url": "/de/schaffhausen-artikel/singen-sperrung-schaffhauser-strasse/",
+          "excerpt": "In Singen wird die Straße vom 26.",
+          "date": "2026-10-17T01:47:28.492Z"
+        },
+        {
           "title": "Schaffhausen: Zwischen 2027 und 2030 werden rote Zahlen erwartet",
           "url": "/de/schaffhausen-artikel/finanzen-kanton-schaffhausen-2027/",
           "excerpt": "Die Kantonsregierung rechnet für den Vierjahreszeitraum 2027–2030 aufgrund des Rückgangs der Einnahmen aus den Unternehmenssteuern mit negativen Ergebnissen.",
@@ -292,12 +298,6 @@
           "url": "/de/schaffhausen-artikel/schaffhausen-apotheken-schulung/",
           "excerpt": "Schaffhausen: Freiwillige E-Learning-Module für Apotheken zu Anzeichen häuslicher Gewalt, vertraulichen Gesprächen und der Weitervermittlung an Unterstützungsangebote.",
           "date": "2026-10-08T08:29:37.131Z"
-        },
-        {
-          "title": "Thayngen: Geldautomat gesprengt, Verdächtiger verletzt",
-          "url": "/de/schaffhausen-artikel/thayngen-geldautomat-gesprengt/",
-          "excerpt": "Thayngen: Geldautomat vor 4 Uhr gesprengt; ein niederländischer Verdächtiger ist schwer verletzt, zwei mutmassliche Täter sind in Richtung Deutschland geflüchtet.",
-          "date": "2026-10-07T23:37:11.961Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T01:52:59.429Z"
     },
     "fr": {
       "canton": "SH",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Singen, la Schaffhauser Straße fermée du 26 au 30 octobre",
+          "url": "/fr/articles-schaffhouse/singen-fermeture-schaffhauser-strasse/",
+          "excerpt": "À Singen, la route sera fermée à la circulation du 26 au 30 octobre 2026 pour des travaux à l’arrêt Landesgartenschau.",
+          "date": "2026-10-17T01:47:28.492Z"
+        },
+        {
           "title": "Schaffhouse : des chiffres rouges prévus entre 2027 et 2030",
           "url": "/fr/articles-schaffhouse/finances-canton-schaffhouse-2027/",
           "excerpt": "Le gouvernement cantonal s’attend à des résultats négatifs pour la période quadriennale 2027-2030 en raison de la baisse des recettes provenant des impôts sur les entreprises.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-schaffhouse/schaffhouse-formation-pharmacies/",
           "excerpt": "Schaffhouse : modules d’e-learning volontaires pour les pharmacies, consacrés aux signes de violence domestique, à l’entretien confidentiel et à l’orientation vers les services.",
           "date": "2026-10-08T08:29:37.131Z"
-        },
-        {
-          "title": "Thayngen : un bancomat a explosé, un suspect blessé",
-          "url": "/fr/articles-schaffhouse/thayngen-distributeur-explose/",
-          "excerpt": "Thayngen : un bancomat a explosé avant 4 heures ; un suspect néerlandais est grièvement blessé, deux auteurs présumés ont pris la fuite vers l’Allemagne.",
-          "date": "2026-10-07T23:37:11.961Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T01:52:59.429Z"
     }
   }
 }
