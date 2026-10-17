@@ -447,14 +447,14 @@ describe('cablaggio in fetchPageContent', () => {
     const body = SRC.slice(at, end);
     const isolateAt = body.indexOf('const isolation = isolateMainSourceHtml(html);');
     const extractAt = body.indexOf('extractArticleText(isolation.html');
-    const titleAt = body.indexOf('pageTitleEvidence(html, { scriptingDisabled: true })');
+    const titleAt = body.indexOf('pageTitleEvidence(isolation.html, { scriptingDisabled: true })');
     assert.ok(isolateAt !== -1, 'fetchPageContent non isola la pagina');
     assert.ok(extractAt !== -1, 'l’estrattore riceve ancora l’HTML grezzo invece di quello isolato');
     assert.ok(titleAt !== -1, 'la title evidence non abilita il fallback noscript della stessa fetch');
     assert.ok(isolateAt < extractAt, 'isolamento dopo l’estrazione: non serve a niente');
     assert.ok(isolateAt < titleAt, 'isolamento dopo la title evidence: non serve a niente');
     assert.match(body, /extractArticleText\(isolation\.html,\s*\{[^}]*scriptingDisabled:\s*true/);
-    assert.match(body, /pageTitleEvidence\(html,\s*\{\s*scriptingDisabled:\s*true\s*\}\)/);
+    assert.match(body, /pageTitleEvidence\(isolation\.html,\s*\{\s*scriptingDisabled:\s*true\s*\}\)/);
   });
 
   it('l’estrattore condiviso non viene modificato da questo lato', () => {
