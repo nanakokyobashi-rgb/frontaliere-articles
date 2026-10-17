@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-appenzello-tasso-fiscale-390.webp",
-      "sha256": "355616908595ff469695833065515660a1a73b498e70fc185b12afc7b7a582f0"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-appenzello-tasso-fiscale-390-480w.webp",
-      "sha256": "ebc7dd8ddcd16912cb88f47a42e97bf45e9e122b5473ff33e16a39c00b18e3ee"
-    }
-  ]
+  "items": []
 }
