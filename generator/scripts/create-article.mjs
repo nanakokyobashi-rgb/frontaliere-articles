@@ -7798,8 +7798,8 @@ function sourceReadTag(html, start) {
   const end = sourceFindTagEnd(html, start);
   // Un tag con virgolette non bilanciate fa fallire la ricerca di `>` fino a
   // fondo documento. Restituire un esito distinto da «non e' un tag» permette
-  // ai chiamanti di interrompere la scansione: avanzare di un carattere qui
-  // trasformerebbe una pagina malformata in lavoro quadratico sincrono.
+  // ai chiamanti di interrompere la scansione: il fallimento resta esplicito
+  // invece di essere trattato come un carattere da saltare.
   if (end < 0) return { malformed: true };
   const name = match[0].toLowerCase();
   return {
