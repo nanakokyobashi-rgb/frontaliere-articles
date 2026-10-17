@@ -50,36 +50,6 @@
       "failureCount": 3,
       "requestedAt": "2026-10-17T00:14:09.813Z",
       "lastFailureAt": "2026-10-17T20:27:57.944Z"
-    },
-    {
-      "articleId": "tre-valli-varesine-7-posto-mondiale",
-      "title": "Tre Valli Varesine 7ª al mondo: batte Vuelta e Paris-Roubaix",
-      "fallbackImage": "/images/blog/guida-tre-valli-varesine-2026.webp",
-      "reason": "All image providers failed for article-tre-valli-varesine-7-posto-mondiale: openai-codex (vision gate rejected image: Generic synthetic cycling scene, but a recognizable cyclist is prominently visible in the foreground.); gemini (Gemini ima",
-      "status": "queued",
-      "failureCount": 2,
-      "requestedAt": "2026-10-17T00:42:42.710Z",
-      "lastFailureAt": "2026-10-17T07:21:13.148Z"
-    },
-    {
-      "articleId": "stesso-reddito-imposte-diverse",
-      "title": "Stesso reddito, imposte diverse: risparmio fino al 90%",
-      "fallbackImage": "/images/blog/emigrazione-cassa-pensione-risparmio-imposte-2.webp",
-      "reason": "All image providers failed for article-stesso-reddito-imposte-diverse: openai-codex (vision gate rejected image: Generic synthetic Swiss residential scene; no people or readable text, but visible vehicle branding/emblems prevent a clean pas",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-17T10:06:41.197Z",
-      "lastFailureAt": "2026-10-17T12:40:15.570Z"
-    },
-    {
-      "articleId": "udc-no-iva-13esima-avs",
-      "title": "UDC dice no all'aumento dell'IVA per finanziare la 13esima AVS, voto il 29 novembre",
-      "fallbackImage": "/images/blog/article-avs-voto-iva-il-29-novembre-per-la-13esima-rendita.webp",
-      "reason": "All image providers failed for article-udc-no-iva-13esima-avs: openai-codex (vision gate rejected image: Generic synthetic polling-station illustration; the decorative percent symb",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T15:14:15.050Z",
-      "lastFailureAt": "2026-10-17T15:14:15.050Z"
     }
   ]
 }
