@@ -2002,10 +2002,11 @@ export async function main(
   let removeStaleCantonRssFeeds = false;
   if (publishing && (effectiveStatus === 'live' || cleanupRssRequested)) {
     const readiness = await publishedReleaseReadyImpl(releaseCommit, { section, fetchImpl });
-    // Se la readiness è transitoria, mantieni il gate fail-closed completo e
-    // lascia che publishCantonRssFeeds ritenti. Quando è verificata, invece,
-    // il set dichiarato dal manifest decide anche se la landing può annunciare
-    // RSS: una sezione live senza articoli emette zero feed legittimamente.
+    // Quando la readiness è verificata, il set dichiarato dal manifest decide
+    // anche se la landing può annunciare RSS: una sezione live senza articoli
+    // emette zero feed legittimamente. Se è transitoria, il primo pass deve
+    // caricare l'HTML senza avviare RSS; il replay workflow_run riprova dopo
+    // il flip edge.
     if (readiness === true || readiness?.ok) {
       const declaredFeeds = readiness?.files
         ? cantonRssFeedsDeclaredInManifest(section, readiness.files, readiness.counts)
