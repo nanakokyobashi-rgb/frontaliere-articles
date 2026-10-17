@@ -20,7 +20,7 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.finanze-cantone-sciaffusa-2027.imageAlt': 'Regierungsgebäude des Kantons Schaffhausen',
     'blog.article.singen-chiusura-schaffhauser-strasse.title': 'Singen, Schaffhauser Straße vom 26. bis 30. Oktober gesperrt',
     'blog.article.singen-chiusura-schaffhauser-strasse.excerpt': 'In Singen wird die Straße vom 26.',
-    'blog.article.singen-chiusura-schaffhauser-strasse.imageAlt': 'Umleitung in Singen während der Sperrung der Schaffhauser Straße',
+    'blog.article.singen-chiusura-schaffhauser-strasse.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonShDe;

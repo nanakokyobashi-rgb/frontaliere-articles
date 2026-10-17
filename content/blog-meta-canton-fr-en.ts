@@ -26,7 +26,7 @@ const blogMetaCantonFrEn: Record<string, string> = {
     'blog.article.friburgo-deduzioni-carburante.imageAlt': 'Car driving in the Canton of Fribourg',
     'blog.article.dibattito-prefettura-sarine.title': 'Sarine, the seven candidates for the prefecture compared',
     'blog.article.dibattito-prefettura-sarine.excerpt': 'In Corpataux, on 14 October 2026, seven claimants to the Sarine Prefecture discussed mobility and economic attractiveness in the local debate.',
-    'blog.article.dibattito-prefettura-sarine.imageAlt': 'Debate in Corpataux between the seven candidates for the Sarine prefecture',
+    'blog.article.dibattito-prefettura-sarine.imageAlt': 'Illustration generated for this article',
     'blog.article.copertura-a12-opposizioni.title': 'A12 cover: 3 years of work, around twenty objections',
     'blog.article.copertura-a12-opposizioni.excerpt': 'The project to cover the A12 motorway calls for three years of work.',
     'blog.article.copertura-a12-opposizioni.imageAlt': 'A12 motorway covering project',

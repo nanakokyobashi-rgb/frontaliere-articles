@@ -87,7 +87,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'dibattito-prefettura-sarine',
  category: 'novita',
  date: '2026-10-17T01:20:36.242Z',
- image: '/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp',
+ image: '/images/blog/article-dibattito-prefettura-sarine.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['FR'],

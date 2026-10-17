@@ -131,7 +131,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'scuole-vaud-furti-inchieste',
  category: 'pratico',
  date: '2026-10-17T01:27:48.756Z',
- image: '/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-vaud.webp',
+ image: '/images/blog/article-scuole-vaud-furti-inchieste.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['VD'],

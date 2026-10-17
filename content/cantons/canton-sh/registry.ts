@@ -65,7 +65,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'singen-chiusura-schaffhauser-strasse',
  category: 'pratico',
  date: '2026-10-17T01:47:28.492Z',
- image: '/images/blog/article-lavori-autolaghi-ottobre-2026.webp',
+ image: '/images/blog/article-singen-chiusura-schaffhauser-strasse.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['SH'],

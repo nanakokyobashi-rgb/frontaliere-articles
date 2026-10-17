@@ -289,10 +289,10 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-dibattito-prefettura-sarine.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Dibattito a Corpataux tra i sette candidati alla Prefettura della Sarine"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-17T01:20:36+00:00",
       "dateModified": "2026-10-17T01:20:36+00:00",
