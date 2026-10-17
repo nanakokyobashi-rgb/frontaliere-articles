@@ -61,10 +61,10 @@ function loadIsolationSandbox() {
   const endRel = SRC.slice(fnStart).search(/\n\}\n/);
   assert.notEqual(endRel, -1);
   const block = SRC.slice(start, fnStart + endRel + 2).replace(/^export /gm, '');
-  return new Function(`${block}\nreturn { isolateMainSourceHtml, extractOutermostTagBlock, visibleTextLength };`)();
+  return new Function(`${block}\nreturn { isolateMainSourceHtml, extractOutermostTagBlock, sourceActivateBodyNoscript, visibleTextLength };`)();
 }
 
-const { isolateMainSourceHtml, extractOutermostTagBlock, visibleTextLength } = loadIsolationSandbox();
+const { isolateMainSourceHtml, extractOutermostTagBlock, sourceActivateBodyNoscript, visibleTextLength } = loadIsolationSandbox();
 
 const ARTICLE_PROSE = Array.from({ length: 8 }, (_, i) =>
   `<p>Paragrafo ${i} del pezzo vero, con abbastanza testo da superare la soglia minima di isolamento e sembrare un corpo d'articolo reale.</p>`).join('');
@@ -328,6 +328,41 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.equal(res.html.includes('CHROME OUTSIDE THE ARTICLE'), false);
   });
 
+  it('rende attivo il fallback noscript del main per estrattore e title evidence', () => {
+    const page2 = '<html><head><noscript><h1>HEAD_INACTIVE</h1></noscript></head><body>'
+      + '<main><noscript><h1>ACTIVE_HEADLINE</h1>'
+      + `<p>${ARTICLE_PROSE.replace(/<p>|<\/p>/g, ' ')}</p></noscript>`
+      + '<template><noscript><h1>TEMPLATE_INACTIVE</h1></noscript></template></main>'
+      + '</body></html>';
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'main');
+    assert.ok(res.html.includes('ACTIVE_HEADLINE'));
+    assert.equal(res.html.includes('<main><noscript>'), false);
+    assert.ok(res.html.includes('<head><noscript>'));
+    assert.ok(res.html.includes('<template><noscript>'));
+
+    const activated = sourceActivateBodyNoscript(
+      '<html><head><noscript><h1>HEAD_INACTIVE</h1></noscript></head>'
+      + '<body><main><noscript><h1>ACTIVE_HEADLINE</h1></noscript>'
+      + '<template><noscript><h1>TEMPLATE_INACTIVE</h1></noscript></template></main></body></html>',
+    );
+    assert.ok(activated.includes('<h1>ACTIVE_HEADLINE</h1>'));
+    assert.ok(activated.includes('<head><noscript>'));
+    assert.ok(activated.includes('<template><noscript>'));
+    assert.equal(activated.includes('<main><noscript>'), false);
+  });
+
+  it('tratta script SVG foreign dentro template come raw-text opaco', () => {
+    const page2 = '<html><body><template><svg><script><svg>literal'
+      + '</script></svg></template>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
   it('ripiega su <main> quando <article> non c’e’ o e’ troppo corto', () => {
     const teaserOnly = `<html><body><article>Leggi anche</article><main>${ARTICLE_PROSE}</main></body></html>`;
     const res = isolateMainSourceHtml(teaserOnly);
@@ -398,9 +433,12 @@ describe('cablaggio in fetchPageContent', () => {
     const body = SRC.slice(at, end);
     const isolateAt = body.indexOf('const isolation = isolateMainSourceHtml(html);');
     const extractAt = body.indexOf('extractArticleText(isolation.html');
+    const titleAt = body.indexOf('pageTitleEvidence(isolation.html)');
     assert.ok(isolateAt !== -1, 'fetchPageContent non isola la pagina');
     assert.ok(extractAt !== -1, 'l’estrattore riceve ancora l’HTML grezzo invece di quello isolato');
+    assert.ok(titleAt !== -1, 'la title evidence riceve ancora l’HTML grezzo invece di quello isolato');
     assert.ok(isolateAt < extractAt, 'isolamento dopo l’estrazione: non serve a niente');
+    assert.ok(isolateAt < titleAt, 'isolamento dopo la title evidence: non serve a niente');
   });
 
   it('l’estrattore condiviso non viene modificato da questo lato', () => {

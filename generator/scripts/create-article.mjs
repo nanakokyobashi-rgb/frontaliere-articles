@@ -7709,7 +7709,10 @@ export function checkStatsAstraCountFidelity(articleText, sourceText) {
 //
 // `extract-article-text.mjs` non viene toccato di proposito: e'
 // `mode: identical` nel manifest del ciclo (gemello di scripts/lib/ del sito),
-// e una modifica la' va fatta sul sito e scende col mirror.
+// e una modifica la' va fatta sul sito e scende col mirror. Quando il pezzo
+// scelto contiene un `<noscript>` body, qui lo si rende esplicito come markup
+// attivo prima di consegnare lo stesso HTML all'estrattore e alla title
+// evidence: e' la modalita' scripting-disabled prevista dal parser HTML.
 
 // Sotto questa soglia di testo visibile il blocco isolato non e' un corpo
 // d'articolo: si preferisce non isolare affatto, per non regredire sotto il
@@ -7738,6 +7741,9 @@ const SOURCE_HTML_RAW_TEXT_ELEMENTS = new Set([
   'script', 'style', 'textarea', 'title', 'iframe', 'xmp',
   'noembed', 'noframes',
 ]);
+// SVG script contents are raw text too; apparent HTML inside them must not
+// escape through foreignObject as an active editorial root.
+const SOURCE_FOREIGN_RAW_TEXT_ELEMENTS = new Set(['script']);
 const SOURCE_HTML_HEAD_ELEMENTS = new Set([
   'base', 'basefont', 'bgsound', 'link', 'meta', 'noframes', 'noscript',
   'script', 'style', 'template', 'title',
@@ -7856,6 +7862,11 @@ function sourceSkipComment(html, start) {
   return end < 0 ? -1 : end + 3;
 }
 
+function sourceIsRawTextElement(namespace, name) {
+  return (namespace === 'html' && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(name))
+    || (namespace === 'svg' && SOURCE_FOREIGN_RAW_TEXT_ELEMENTS.has(name));
+}
+
 function sourceFindRawTextClose(html, afterOpening, name) {
   const closing = new RegExp(`</${name}\\s*>`, 'ig');
   closing.lastIndex = afterOpening;
@@ -7910,10 +7921,11 @@ function sourceSkipTemplate(html, afterOpening) {
     if (namespace === 'html' && tag.name === 'template' && !isVoid) {
       depth += 1;
     }
-    if (!isVoid && !SOURCE_HTML_RAW_TEXT_ELEMENTS.has(tag.name)) {
+    const isRawTextElement = !isVoid && sourceIsRawTextElement(namespace, tag.name);
+    if (!isRawTextElement) {
       stack.push({ name: tag.name, namespace, tag });
     }
-    if (!isVoid && namespace === 'html' && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(tag.name)) {
+    if (isRawTextElement) {
       const afterRawText = sourceFindRawTextClose(html, tag.end + 1, tag.name);
       if (afterRawText < 0) return -1;
       cursor = afterRawText;
@@ -8096,14 +8108,11 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
     }
 
     const isRawTextElement = !tag.closing && !isVoid && (
-      (namespace === 'html' && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(tag.name))
+      sourceIsRawTextElement(namespace, tag.name)
       // In head mode, noscript is a raw-text element when scripting is enabled.
       // Keep its contents from being mistaken for forbidden head containers.
       || (namespace === 'html' && tag.name === 'noscript'
         && stack.at(-1)?.name === 'head' && stack.at(-1)?.namespace === 'html')
-      // SVG script contents are raw text too; apparent HTML inside them must
-      // not escape through foreignObject as an active editorial root.
-      || (namespace === 'svg' && tag.name === 'script')
     );
 
     if (isRawTextElement) {
@@ -8136,6 +8145,7 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
         cursor = tag.end + 1;
         continue;
       }
+      stack[matchingIndex].sourceCloseStart = start;
       popThrough(matchingIndex, tag.end + 1, false, start);
       cursor = tag.end + 1;
       continue;
@@ -8171,6 +8181,41 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
   }
   popThrough(0, html.length, true);
   return { malformed, stack };
+}
+
+function sourceActivateBodyNoscript(html) {
+  const src = String(html || '');
+  if (!src) return src;
+
+  const removals = [];
+  const scan = sourceScanStructure(src, {
+    onStart: ({ tag, start, end, namespace, stack, entry }) => {
+      if (
+        !entry ||
+        namespace !== 'html' ||
+        tag.name !== 'noscript' ||
+        entry.inactive ||
+        !stack.some((ancestor) => ancestor.namespace === 'html' && ancestor.name === 'body') ||
+        stack.some((ancestor) => ancestor.namespace === 'html' && ancestor.name === 'head')
+      ) return;
+      entry.activateBodyNoscript = true;
+      removals.push([start, end]);
+    },
+    onEnd: ({ entry }) => {
+      if (!entry?.activateBodyNoscript || entry.sourceCloseStart == null) return;
+      const closing = sourceReadTag(src, entry.sourceCloseStart);
+      if (closing?.closing && closing.name === 'noscript') {
+        removals.push([entry.sourceCloseStart, closing.end + 1]);
+      }
+    },
+  });
+
+  if (scan.malformed || removals.length === 0) return src;
+  let activated = src;
+  for (const [start, end] of removals.sort((a, b) => b[0] - a[0])) {
+    activated = activated.slice(0, start) + activated.slice(end);
+  }
+  return activated;
 }
 
 function findActiveSourceHead(html) {
@@ -8409,8 +8454,9 @@ export function isolateMainSourceHtml(html) {
     ? headScan.ldBlocks.filter((block) => !head.includes(block) && !chosen.includes(block))
     : [];
 
+  const isolatedHtml = `<!doctype html><html>${head}<body>${ldBlocks.join('')}${chosen}</body></html>`;
   return {
-    html: `<!doctype html><html>${head}<body>${ldBlocks.join('')}${chosen}</body></html>`,
+    html: sourceActivateBodyNoscript(isolatedHtml),
     root,
     isolated: true,
   };
@@ -8554,7 +8600,7 @@ async function fetchPageContent(url) {
     // to feed the generator and fact-checker the actual article body instead of
     // 70%+ nav/footer/ads noise. See scripts/lib/extract-article-text.mjs.
     lastSourcePublishedAt = publishedAt || '';
-    lastSourcePageTitle = pageTitleEvidence(html);
+    lastSourcePageTitle = pageTitleEvidence(isolation.html);
     if (suppliedCantonSourceContent.length >= 200) {
       lastSourcePublishedAt = suppliedCantonSourcePublishedAt || lastSourcePublishedAt;
       lastSourcePageTitle = suppliedCantonSourceTitle || lastSourcePageTitle;
