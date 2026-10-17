@@ -506,6 +506,7 @@ const CLAIM_BULLET_LINE_RE = /^\s*[-*+]\s+\S/;
 // variant.
 const NO_NEW_DAILY_BUCKET_RE = /(?:\bnessun(?:o)?\s+(?:nuov[oa]\s+)?(?:bucket\s+(?:daily|giornalier[oa])|daily\s+bucket)\b|\bno\s+(?:new\s+)?daily\s+bucket\b)[^\r\n]*(?:apert\w*|creat\w*|modificat\w*|aggiornat\w*|opened|created|changed|updated)\b/i;
 const TRACKED_RESIDUALS_RE = /(?:\bresidu[io]\b[^\r\n]*(?:già\s+tracciat\w*|non\s+generano\s+un\s+secondo\s+contenitore)|\bresiduals?\b[^\r\n]*(?:already\s+tracked|no\s+second\s+container))/i;
+const POSITIVE_ITEM_CLAIM_RE = /(?:\b(?:aggiunt\w*|creat\w*|apert\w*|updated?|added|created|opened)\b[^\r\n]*\bitems?(?!-level)\b|\bitems?(?!-level)\b[^\r\n]*\b(?:aggiunt\w*|creat\w*|apert\w*|updated?|added|created|opened)\b)/i;
 
 /**
  * La finestra di claim del marker: ogni riga `Created/updated:` PIU' la lista
@@ -679,8 +680,10 @@ export function triageMarkerPersistenceExpectation(markerBody) {
       && /\bbucket\b[^#\r\n]*#[1-9]\d*\b[^\r\n]*\bnon\s+modificat[oa]\s+da\s+questa\s+PR\b/i.test(prose);
   });
   const inlineCodeFreeAttestations = attesting.map((line) => line.replace(/(`+)[^`]*?\1/g, ' '));
+  const hasPositiveItemClaim = inlineCodeFreeAttestations.some((line) => POSITIVE_ITEM_CLAIM_RE.test(line));
   const noNewDailyBucketZero = inlineCodeFreeAttestations.some((line) => NO_NEW_DAILY_BUCKET_RE.test(line))
-    && inlineCodeFreeAttestations.some((line) => TRACKED_RESIDUALS_RE.test(line));
+    && inlineCodeFreeAttestations.some((line) => TRACKED_RESIDUALS_RE.test(line))
+    && !hasPositiveItemClaim;
   const explicitZero = canonicalZero
     || unchangedBucketZero
     || (noNewDailyBucketZero && buckets.length === 0);

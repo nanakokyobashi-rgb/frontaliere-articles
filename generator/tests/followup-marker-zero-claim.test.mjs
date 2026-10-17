@@ -196,6 +196,11 @@ test('un nuovo bucket assente da solo non prova che non siano stati aggiunti ite
       'Nessun bucket daily nuovo è stato aperto.',
       '`I residui sono già tracciati` è solo un esempio del formato.',
     ].join('\n'),
+    [
+      '## Post-merge follow-up triage',
+      'I residui sono già tracciati e non generano un secondo contenitore.',
+      'Nessun bucket daily nuovo è stato aperto: sono stati aggiunti due item al bucket esistente.',
+    ].join('\n'),
   ]) {
     const expectation = triageMarkerPersistenceExpectation(marker);
     assert.equal(expectation.explicitZero, false, marker);
