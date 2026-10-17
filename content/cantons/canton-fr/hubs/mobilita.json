@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T00:12:19.402Z",
-  "contentHash": "0bce0b8acbd53a5f2a9e4b7e5359d061d9c716130e7435e336e3f7906de05320",
+  "updatedAt": "2026-10-17T01:25:57.491Z",
+  "contentHash": "df74624736c986d59469a5dda3d5de9d6108bab017a0158dbcb2c2e2bb8a7f94",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -147,12 +147,6 @@
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
-          "title": "Abbonamenti trasporti pubblici canton Friburgo: zone e tariffe",
-          "url": "/articoli-svizzera/abbonamenti-friburgo-zone-tariffe/",
-          "excerpt": "Zone tariffarie progressive, abbonamenti annuali e mensili, sconti per studenti: guida completa ai trasporti pubblici friburghesi e nazionali.",
-          "date": "2026-08-24T02:28:56.399Z"
-        },
-        {
           "title": "Abbonamenti trasporti Friburgo: zone e tariffe",
           "url": "/articoli-svizzera/abbonamenti-trasporti-friburgo/",
           "excerpt": "Come funzionano zone tariffarie, metà-prezzo, AG e sconti per studenti negli abbonamenti trasporti del Cantone Friburgo.",
@@ -163,6 +157,12 @@
           "url": "/articoli-svizzera/trasporti-pubblici-canton-friburgo-abbonamenti/",
           "excerpt": "Ecco i dettagli sugli abbonamenti dei trasporti pubblici nel Cantone di Friburgo.",
           "date": "2026-08-18T00:58:21.517Z"
+        },
+        {
+          "title": "Abbonamenti trasporti pubblici canton Friburgo: zone e tariffe",
+          "url": "/articoli-svizzera/abbonamenti-friburgo-zone-tariffe/",
+          "excerpt": "Zone tariffarie progressive, abbonamenti annuali e mensili, sconti per studenti: guida completa ai trasporti pubblici friburghesi e nazionali.",
+          "date": "2026-08-24T02:28:56.399Z"
         },
         {
           "title": "Friburgo: 117 milioni per 13 nuovi treni Flirt",
@@ -188,7 +188,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:25:57.491Z"
     },
     "en": {
       "canton": "FR",
@@ -318,12 +318,6 @@
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
-          "title": "Public transport tickets canton Fribourg: zones and fares",
-          "url": "/en/swiss-articles/fribourg-public-transport-subscriptions-zones/",
-          "excerpt": "Progressive fare zones, annual and monthly subscriptions, discounts for students: a complete guide to public transport in Fribourg and the country.",
-          "date": "2026-08-24T02:28:56.399Z"
-        },
-        {
           "title": "Fribourg Transport Subscriptions: Zones and Rates",
           "url": "/en/swiss-articles/public-transport-subscriptions-fribourg/",
           "excerpt": "How fare zones, half-price, AG and student discounts work in the transport subscriptions of the Canton of Fribourg.",
@@ -334,6 +328,12 @@
           "url": "/en/swiss-articles/fribourg-public-transport-abonements/",
           "excerpt": "Here are the details on public transport subscriptions in the Canton of Fribourg.",
           "date": "2026-08-18T00:58:21.517Z"
+        },
+        {
+          "title": "Public transport tickets canton Fribourg: zones and fares",
+          "url": "/en/swiss-articles/fribourg-public-transport-subscriptions-zones/",
+          "excerpt": "Progressive fare zones, annual and monthly subscriptions, discounts for students: a complete guide to public transport in Fribourg and the country.",
+          "date": "2026-08-24T02:28:56.399Z"
         },
         {
           "title": "Fribourg: 117 million for 13 new Flirt trains",
@@ -359,7 +359,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:25:57.491Z"
     },
     "de": {
       "canton": "FR",
@@ -489,12 +489,6 @@
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
-          "title": "Öffentliche Verkehrsmittel Kanton Freiburg: Zonen und Tarife",
-          "url": "/de/schweiz-artikel/freiburg-fahrkarten-abo-zonen-tarife/",
-          "excerpt": "Progressive Tarifzonen, Jahres- und Monatsabonnements, Studentenrabatte: Kompletter Leitfaden für den öffentlichen Verkehr in Freiburg und im Inland.",
-          "date": "2026-08-24T02:28:56.399Z"
-        },
-        {
           "title": "Fahrkarten Freiburg: Zonen und Tarife",
           "url": "/de/schweiz-artikel/abonnementes-oeffentliche-verkehrsmittel-freiburg/",
           "excerpt": "Wie Tarifzonen, Halbtax, GA und Studentenrabatte in den Verkehrsabos des Kantons Freiburg funktionieren.",
@@ -505,6 +499,12 @@
           "url": "/de/schweiz-artikel/freiburg-oeffentliche-verkehr-abos/",
           "excerpt": "Hier finden Sie die Details zu den ÖV-Abos im Kanton Freiburg.",
           "date": "2026-08-18T00:58:21.517Z"
+        },
+        {
+          "title": "Öffentliche Verkehrsmittel Kanton Freiburg: Zonen und Tarife",
+          "url": "/de/schweiz-artikel/freiburg-fahrkarten-abo-zonen-tarife/",
+          "excerpt": "Progressive Tarifzonen, Jahres- und Monatsabonnements, Studentenrabatte: Kompletter Leitfaden für den öffentlichen Verkehr in Freiburg und im Inland.",
+          "date": "2026-08-24T02:28:56.399Z"
         },
         {
           "title": "Freiburg: 117 Millionen für 13 neue FLIRT-Züge",
@@ -530,7 +530,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:25:57.491Z"
     },
     "fr": {
       "canton": "FR",
@@ -660,12 +660,6 @@
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
-          "title": "Abonnements transports publics canton de Fribourg : zones et tarifs",
-          "url": "/fr/articles-suisse/fribourg-abonnements-transports-zones-tarifs/",
-          "excerpt": "Zones tarifaires progressives, abonnements annuels et mensuels, réductions pour étudiants : guide complet des transports publics fribourgeois et nationaux.",
-          "date": "2026-08-24T02:28:56.399Z"
-        },
-        {
           "title": "Abonnements transports Fribourg : zones et tarifs",
           "url": "/fr/articles-suisse/abonnements-transports-publics-fribourg/",
           "excerpt": "Comment fonctionnent les zones tarifaires, demi-tarif, AG et réductions pour étudiants dans les abonnements transports du canton de Fribourg.",
@@ -676,6 +670,12 @@
           "url": "/fr/articles-suisse/fribourg-transports-en-commun-abonnements/",
           "excerpt": "Voici les détails des abonnements aux transports publics dans le canton de Fribourg.",
           "date": "2026-08-18T00:58:21.517Z"
+        },
+        {
+          "title": "Abonnements transports publics canton de Fribourg : zones et tarifs",
+          "url": "/fr/articles-suisse/fribourg-abonnements-transports-zones-tarifs/",
+          "excerpt": "Zones tarifaires progressives, abonnements annuels et mensuels, réductions pour étudiants : guide complet des transports publics fribourgeois et nationaux.",
+          "date": "2026-08-24T02:28:56.399Z"
         },
         {
           "title": "Fribourg : 117 millions pour 13 nouveaux trains Flirt",
@@ -701,7 +701,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:25:57.491Z"
     }
   }
 }

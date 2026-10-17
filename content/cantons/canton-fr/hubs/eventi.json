@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T00:51:58.422Z",
-  "contentHash": "db3ab4b07a8e6bef0bcf9a9b83cc145bd7134f4b8d3e0b6027663b246b912293",
+  "updatedAt": "2026-10-17T01:25:57.491Z",
+  "contentHash": "655fa121541ba39448c5ba35823db7168cd7ad11a8151a75287047c831895796",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -101,6 +101,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Sarine, i sette candidati alla prefettura a confronto",
+          "url": "/articoli-friburgo/dibattito-prefettura-sarine/",
+          "excerpt": "A Corpataux, il 14 ottobre 2026, sette pretendenti alla Prefettura della Sarine si sono confrontati su mobilità e attrattività economica nel dibattito locale.",
+          "date": "2026-10-17T01:20:36.242Z"
+        },
+        {
           "title": "Carburanti: il Cantone non vuole aumentare le deduzioni",
           "url": "/articoli-friburgo/friburgo-deduzioni-carburante/",
           "excerpt": "Il diesel supera CHF 2,40 al litro.",
@@ -123,12 +129,6 @@
           "url": "/articoli-friburgo/friburgo-legge-lingue-ufficiali/",
           "excerpt": "I deputati hanno votato giovedì Friburgo ha la sua prima legge sulle lingue ufficiali Il testo promuove il bilinguismo Decisione → voto dei deputati del Canton",
           "date": "2026-10-08T15:45:50.084Z"
-        },
-        {
-          "title": "Friburgo: approvato il nuovo piano della rete ciclabile",
-          "url": "/articoli-friburgo/nuovo-piano-ciclabile-friburgo/",
-          "excerpt": "RIMU approva il nuovo piano ciclabile cantonale Consultazione: 80 pareri e quasi 270 osservazioni Obiettivo: più bici nella vita quotidiana entro il 2042",
-          "date": "2026-10-08T15:33:51.044Z"
         }
       ],
       "links": [
@@ -141,7 +141,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:51:58.422Z"
+      "updatedAt": "2026-10-17T01:25:57.491Z"
     },
     "en": {
       "canton": "FR",
@@ -230,6 +230,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Sarine, the seven candidates for the prefecture compared",
+          "url": "/en/fribourg-articles/sarine-prefecture-debate/",
+          "excerpt": "In Corpataux, on 14 October 2026, seven claimants to the Sarine Prefecture discussed mobility and economic attractiveness in the local debate.",
+          "date": "2026-10-17T01:20:36.242Z"
+        },
+        {
           "title": "Fuels: the Canton does not want to increase deductions",
           "url": "/en/fribourg-articles/fribourg-fuel-deductions/",
           "excerpt": "Diesel exceeds CHF 2.40 per litre.",
@@ -252,12 +258,6 @@
           "url": "/en/fribourg-articles/fribourg-official-languages-law/",
           "excerpt": "The deputies voted on Thursday Fribourg has its first law on official languages The text promotes bilingualism Decision → vote by the deputies of the Canton",
           "date": "2026-10-08T15:45:50.084Z"
-        },
-        {
-          "title": "Fribourg: new cycle network plan approved",
-          "url": "/en/fribourg-articles/fribourg-new-bicycle-network-plan/",
-          "excerpt": "RIMU approves the new cantonal cycle plan Consultation: 80 opinions and almost 270 observations Goal: more bikes in daily life by 2042 The plan covers network",
-          "date": "2026-10-08T15:33:51.044Z"
         }
       ],
       "links": [
@@ -270,7 +270,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:51:58.422Z"
+      "updatedAt": "2026-10-17T01:25:57.491Z"
     },
     "de": {
       "canton": "FR",
@@ -359,6 +359,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Sarine, die sieben Präfekturkandidaten im Vergleich",
+          "url": "/de/freiburg-artikel/sarine-praefektur-debatte/",
+          "excerpt": "In Corpataux diskutierten am 14.",
+          "date": "2026-10-17T01:20:36.242Z"
+        },
+        {
           "title": "Treibstoffe: Kanton will Abzüge nicht erhöhen",
           "url": "/de/freiburg-artikel/freiburg-treibstoff-abzuege/",
           "excerpt": "Diesel übersteigt CHF 2,40 pro Liter.",
@@ -381,12 +387,6 @@
           "url": "/de/freiburg-artikel/freiburg-amtssprachen-gesetz/",
           "excerpt": "Die Abgeordneten stimmten am Donnerstag ab Freiburg hat sein erstes Gesetz über die Amtssprachen Der Text fördert die Zweisprachigkeit Entscheidung → Abstimmung",
           "date": "2026-10-08T15:45:50.084Z"
-        },
-        {
-          "title": "Freiburg: Neuer Radnetzplan genehmigt",
-          "url": "/de/freiburg-artikel/freiburg-neuer-velowegnetzplan/",
-          "excerpt": "RIMU genehmigt den neuen kantonalen Radfahrplan Befassung: 80 Stellungnahmen und fast 270 Bemerkungen Ziel: Mehr Fahrräder im Alltag bis 2042 Der Plan deckt",
-          "date": "2026-10-08T15:33:51.044Z"
         }
       ],
       "links": [
@@ -399,7 +399,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T00:51:58.422Z"
+      "updatedAt": "2026-10-17T01:25:57.491Z"
     },
     "fr": {
       "canton": "FR",
@@ -488,6 +488,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Sarine, les sept candidats à la préfecture comparés",
+          "url": "/fr/articles-fribourg/debat-prefecture-sarine/",
+          "excerpt": "A Corpataux, le 14 octobre 2026, sept prétendants à la Préfecture de la Sarine se sont affrontés sur la mobilité et l'attractivité économique dans le débat local.",
+          "date": "2026-10-17T01:20:36.242Z"
+        },
+        {
           "title": "Carburants : le canton ne veut pas augmenter les déductions",
           "url": "/fr/articles-fribourg/fribourg-deductions-carburant/",
           "excerpt": "Le diesel dépasse 2,40 CHF le litre.",
@@ -510,12 +516,6 @@
           "url": "/fr/articles-fribourg/fribourg-loi-langues-officielles/",
           "excerpt": "Les députés ont voté jeudi Fribourg a sa première loi sur les langues officielles Le texte promeut le bilinguisme Décision → vote des députés du canton",
           "date": "2026-10-08T15:45:50.084Z"
-        },
-        {
-          "title": "Fribourg : le nouveau plan du réseau cyclable approuvé",
-          "url": "/fr/articles-fribourg/fribourg-nouveau-plan-reseau-cyclable/",
-          "excerpt": "RIMU approuve le nouveau plan cyclable cantonal Consultation : 80 avis et près de 270 observations Objectif : plus de vélos dans la vie quotidienne d'ici 2042",
-          "date": "2026-10-08T15:33:51.044Z"
         }
       ],
       "links": [
@@ -528,7 +528,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T00:51:58.422Z"
+      "updatedAt": "2026-10-17T01:25:57.491Z"
     }
   }
 }
