@@ -12,6 +12,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.uri-budget-avanzo-2027.title': 'Kanton Uri, Budget 2027 mit einem Überschuss von 1,1 Millionen',
     'blog.article.uri-budget-avanzo-2027.excerpt': 'Der Kanton Uri erwartet für 2027 einen Überschuss von CHF 1,1 Millionen: Einnahmen von 514,4 Millionen und Ausgaben von 513,3 Millionen.',
     'blog.article.uri-budget-avanzo-2027.imageAlt': 'Budget 2027 des Kantons Uri mit erwartetem Überschuss von 1,1 Millionen Franken',
+    'blog.article.uri-budget-2027-surplus.title': 'Uri: Budget 2027 mit einem Überschuss von CHF 1,1 Millionen',
+    'blog.article.uri-budget-2027-surplus.excerpt': 'Für 2027 erwartet der Kanton Uri ein positives Ergebnis von CHF 1,1 Millionen: Einnahmen von CHF 514,4 Millionen und Nettoinvestitionen von CHF 25,3 Millionen.',
+    'blog.article.uri-budget-2027-surplus.imageAlt': 'Alpenszene im Kanton Uri zu einem Artikel über das Kantonsbudget 2027',
 };
 
 export default blogMetaCantonUrDe;

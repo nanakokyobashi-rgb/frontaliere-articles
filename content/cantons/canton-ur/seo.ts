@@ -119,6 +119,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-uri-budget-2027-surplus': {
+    title: 'Uri: budget 2027 con avanzo di CHF 1,1 milioni',
+    description: 'Uri prevede nel 2027 un avanzo di CHF 1,1 milioni. Spese: CHF 513,3 milioni; entrate: CHF 514,4 milioni; investimenti netti: CHF 25,3 milioni nel budget.',
+    keywords: 'frontalieri, ticino, svizzera, italia, budget, avanzo, milioni, cantone',
+    ogTitle: 'Uri: budget 2027 in avanzo',
+    ogDescription: 'Dopo oltre dieci anni senza un risultato positivo, il Cantone Uri stima per il 2027 un avanzo di CHF 1,1 milioni. Le entrate salgono a CHF 514,4 milioni, ma la Direzione delle finanze segnala spese in aumento e una situazione debitoria impegnativa.',
+    canonicalPath: '/articoli-uri/uri-budget-2027-surplus/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Uri: budget 2027 con avanzo di CHF 1,1 milioni",
+      "description": "Uri prevede nel 2027 un avanzo di CHF 1,1 milioni. Spese: CHF 513,3 milioni; entrate: CHF 514,4 milioni; investimenti netti: CHF 25,3 milioni nel budget.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-uri-budget-2027-surplus.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scena alpina evocativa del Cantone Uri per un articolo sul budget cantonale 2027"
+      },
+      "datePublished": "2026-10-17T05:08:12+00:00",
+      "dateModified": "2026-10-17T05:08:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-uri/uri-budget-2027-surplus/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

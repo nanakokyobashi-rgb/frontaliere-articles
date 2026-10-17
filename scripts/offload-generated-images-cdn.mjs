@@ -153,11 +153,12 @@ function findTagEnd(html, start) {
   return -1;
 }
 
-function isSelfClosingStartTag(html, nameEnd, end) {
+function inspectSelfClosingStartTag(html, nameEnd, end) {
   let i = nameEnd;
   while (i < end) {
     while (i < end && isHtmlWhitespace(html[i])) i++;
     if (i >= end) return false;
+    if (html[i] === '>') return { malformed: true };
     if (html[i] === '/') {
       return i + 1 === end;
     }
@@ -202,17 +203,21 @@ function readTag(html, start) {
   if (boundary && !isHtmlWhitespace(boundary) && boundary !== '/' && boundary !== '>') return null;
   const end = findTagEnd(html, start);
   if (end < 0) return { malformed: true };
+  const name = html.slice(nameStart, nameEnd).toLowerCase();
+  const selfClosingState = !closing && HTML_VOID_ELEMENTS.has(name)
+    ? inspectSelfClosingStartTag(html, nameEnd, end)
+    : false;
+  if (selfClosingState?.malformed) return selfClosingState;
   return {
     closing,
     end,
-    name: html.slice(nameStart, nameEnd).toLowerCase(),
+    name,
     nameEnd,
     nameStart,
     // HTML's self-closing flag is ignored on non-void elements. Treating
     // `<template/>` or `<script/>` as closed makes the scanners expose the
     // inactive text that follows them as live document markup.
-    selfClosing: !closing && HTML_VOID_ELEMENTS.has(html.slice(nameStart, nameEnd).toLowerCase())
-      && isSelfClosingStartTag(html, nameEnd, end),
+    selfClosing: selfClosingState,
   };
 }
 

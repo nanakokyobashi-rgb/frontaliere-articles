@@ -25,11 +25,16 @@ function isHtmlWhitespace(character) {
 }
 
 /** Distingue `/>` dalla slash finale di un valore non quotato. */
-function isHtmlSelfClosingStartTag(html, nameEnd, end) {
+function inspectHtmlSelfClosingStartTag(html, nameEnd, end) {
   let index = nameEnd;
   while (index < end) {
     while (index < end && isHtmlWhitespace(html[index])) index += 1;
     if (index >= end) return false;
+    // `end` is the first `>` outside quotes. Seeing another `>` before it
+    // means a malformed quote made the outer scanner jump past a real tag
+    // boundary. Treat it as malformed instead of feeding the same character
+    // back to the token loop forever.
+    if (html[index] === '>') return { malformed: true };
     if (html[index] === '/') return index + 1 === end;
 
     while (
@@ -70,6 +75,8 @@ function readHtmlTagAtStatus(html, start) {
 
   const endIndex = findHtmlTagEndOutsideQuotes(html, start);
   if (endIndex < 0) return { malformed: true };
+  const selfClosingState = inspectHtmlSelfClosingStartTag(html, index, endIndex);
+  if (selfClosingState?.malformed) return selfClosingState;
   return {
     tag: {
       start,
@@ -77,7 +84,7 @@ function readHtmlTagAtStatus(html, start) {
       closing,
       name: html.slice(nameStart, index).toLowerCase(),
       attrs: html.slice(index, endIndex),
-      selfClosing: !closing && isHtmlSelfClosingStartTag(html, index, endIndex),
+      selfClosing: !closing && selfClosingState,
     },
   };
 }
