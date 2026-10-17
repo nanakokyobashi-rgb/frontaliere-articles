@@ -8752,7 +8752,9 @@ function headlineHrefValue(attrs) {
  */
 function scanHeadlineAnchor(html, from = 0, { requireHref = false } = {}) {
   const malformedHeadlineMarkup = () => {
-    throw new Error('markup HTML malformato: scansione headline interrotta prima di EOF');
+    const error = new Error('markup HTML malformato: scansione headline interrotta prima di EOF');
+    error.code = 'ERR_MALFORMED_HEADLINE_HTML';
+    throw error;
   };
   let openingScan = nextHtmlTagStatus(html, from, true);
   while (openingScan.status !== 'eof') {
@@ -9427,6 +9429,7 @@ async function scanNewsSources() {
                   releaseFetchWithRefTimeout(fbRes);
                 }
               } catch (fbErr) {
+                if (fbErr?.code === 'ERR_MALFORMED_HEADLINE_HTML') throw fbErr;
                 console.error(`  ⚠️ ${domain}: fallback HTML fallito: ${fbErr.message}`);
               }
             } else {
@@ -9453,6 +9456,7 @@ async function scanNewsSources() {
                   releaseFetchWithRefTimeout(fbRes);
                 }
               } catch (fbErr) {
+                if (fbErr?.code === 'ERR_MALFORMED_HEADLINE_HTML') throw fbErr;
                 console.error(`  ⚠️ ${domain}: fallback HTML fallito: ${fbErr.message}`);
               }
             }
