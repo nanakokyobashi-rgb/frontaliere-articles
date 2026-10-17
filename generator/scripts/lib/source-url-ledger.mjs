@@ -331,6 +331,10 @@ const MASK_VOID_ELEMENTS = new Set([
   'param', 'source', 'track', 'wbr',
 ]);
 const INACTIVE_RAW_TEXT_TAGS = new Set(['script', 'style', 'noscript', 'iframe', 'xmp', 'noembed', 'noframes']);
+const MASK_HEAD_ELEMENTS = new Set([
+  'base', 'basefont', 'bgsound', 'head', 'html', 'link', 'meta', 'noframes',
+  'noscript', 'script', 'style', 'template', 'title',
+]);
 const TEMPLATE_RAW_TEXT_TAGS = new Set([
   'script', 'style', 'textarea', 'title', 'noscript', 'iframe', 'xmp',
   'noembed', 'noframes',
@@ -474,18 +478,33 @@ function maskSkipTemplate(html, afterOpening) {
  * esterno quando il markup contiene template annidati.
  *
  * @param {string} html
+ * @param {{ scriptingDisabled?: boolean }} [opts] Treat body `<noscript>`
+ *   fallback as active when scripting is disabled; head and template stay inert.
  * @returns {string}
  */
-export function maskInactiveMarkup(html) {
+export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
   const source = String(html || '');
   const output = source.split('');
   const blank = (start, end) => {
     for (let i = start; i < end; i++) output[i] = ' ';
   };
+  let headDepth = 0;
+  let implicitHead = false;
+  let sawHtml = false;
   let cursor = 0;
   while (cursor < source.length) {
     const start = source.indexOf('<', cursor);
-    if (start < 0) break;
+    if (start < 0) {
+      if (/\S/u.test(source.slice(cursor))) {
+        headDepth = 0;
+        implicitHead = false;
+      }
+      break;
+    }
+    if (/\S/u.test(source.slice(cursor, start))) {
+      headDepth = 0;
+      implicitHead = false;
+    }
     if (source.startsWith('<!--', start)) {
       const afterComment = maskSkipComment(source, start);
       blank(start, afterComment < 0 ? source.length : afterComment);
@@ -502,7 +521,37 @@ export function maskInactiveMarkup(html) {
       cursor = start + 1;
       continue;
     }
-    if (!tag.closing && !tag.selfClosing && INACTIVE_RAW_TEXT_TAGS.has(tag.name)) {
+    if (!tag.closing && headDepth > 0 && !MASK_HEAD_ELEMENTS.has(tag.name)) {
+      // A non-head start tag implicitly closes head before body content.
+      headDepth = 0;
+    }
+    if (!tag.closing && tag.name === 'html' && !sawHtml) {
+      sawHtml = true;
+      implicitHead = true;
+    } else if (!tag.closing && (tag.name === 'head' || tag.name === 'body')) {
+      implicitHead = false;
+    } else if (!tag.closing && implicitHead && !MASK_HEAD_ELEMENTS.has(tag.name)) {
+      implicitHead = false;
+    }
+    if (tag.name === 'head') {
+      if (tag.closing) headDepth = Math.max(0, headDepth - 1);
+      else if (!tag.selfClosing) headDepth += 1;
+    }
+    // An explicit body start closes an omitted/unclosed head in HTML. In the
+    // head, noscript fallback is never title evidence, even with scripting off.
+    if (!tag.closing && tag.name === 'body') headDepth = 0;
+    const inHead = headDepth > 0 || implicitHead;
+    if (!tag.closing && !tag.selfClosing && tag.name === 'title') {
+      // Keep title text available to pageTitleEvidence, but do not parse it as
+      // markup or mistake it for body text that closes an open head.
+      const afterTitle = maskSkipRawText(source, tag.end + 1, tag.name);
+      if (afterTitle < 0) break;
+      cursor = afterTitle;
+      continue;
+    }
+    const isInactiveRawText = INACTIVE_RAW_TEXT_TAGS.has(tag.name)
+      && !(scriptingDisabled && tag.name === 'noscript' && !inHead);
+    if (!tag.closing && !tag.selfClosing && isInactiveRawText) {
       const afterRawText = maskSkipRawText(source, tag.end + 1, tag.name);
       blank(start, afterRawText < 0 ? source.length : afterRawText);
       if (afterRawText < 0) break;
@@ -529,12 +578,13 @@ export function maskInactiveMarkup(html) {
  * parole del proprio titolo verrebbe scartato pur essendo l'item giusto.
  *
  * @param {string} html
+ * @param {{ scriptingDisabled?: boolean }} [opts]
  * @returns {string} i titoli, uno per riga ('' se non ce n'e')
  */
-export function pageTitleEvidence(html) {
+export function pageTitleEvidence(html, opts = {}) {
   // Solo markup attivo: un `<h1>` o un `<title>` dentro un commento, uno
   // script o un template puo' essere il titolo di un'altra notizia.
-  const src = maskInactiveMarkup(html);
+  const src = maskInactiveMarkup(html, opts);
   const out = [];
   for (const m of src.matchAll(/<meta\b[^>]*>/gi)) {
     const tag = m[0];

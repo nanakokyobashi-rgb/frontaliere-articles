@@ -318,6 +318,46 @@ test('pageTitleEvidence: og:title, twitter:title, <title> e <h1>; niente da una 
   assert.equal(pageTitleEvidence(''), '');
 });
 
+test('pageTitleEvidence tratta il fallback noscript come markup attivo solo con scripting disabilitato', () => {
+  const html = '<noscript><h1>Titolo di fallback</h1></noscript>';
+  assert.equal(pageTitleEvidence(html), '');
+  assert.equal(pageTitleEvidence(html, { scriptingDisabled: true }), 'Titolo di fallback');
+});
+
+test('pageTitleEvidence attiva noscript solo nel body, mai in head o template', () => {
+  const html = '<html><head><noscript><h1>TITOLO_HEAD_INATTIVO</h1></noscript></head><body>'
+    + '<noscript><h1>TITOLO_BODY_ATTIVO</h1></noscript>'
+    + '<template><noscript><h1>TITOLO_TEMPLATE_INATTIVO</h1></noscript></template>'
+    + '</body></html>';
+  assert.equal(pageTitleEvidence(html, { scriptingDisabled: true }), 'TITOLO_BODY_ATTIVO');
+
+  const implicitHead = '<html><noscript><h1>TITOLO_HEAD_IMPLICITO</h1></noscript><body>'
+    + '<noscript><h1>TITOLO_BODY_IMPLICITO</h1></noscript></body></html>';
+  assert.equal(pageTitleEvidence(implicitHead, { scriptingDisabled: true }), 'TITOLO_BODY_IMPLICITO');
+
+  const textClosesHead = '<html><head>testo non whitespace<noscript>'
+    + '<h1>TITOLO_BODY_DOPO_CHIUSURA_IMPLICITA</h1></noscript></html>';
+  assert.equal(pageTitleEvidence(textClosesHead, { scriptingDisabled: true }), 'TITOLO_BODY_DOPO_CHIUSURA_IMPLICITA');
+});
+
+test('pageTitleEvidence mantiene inattivo noscript dopo il testo raw di title nell’head', () => {
+  const explicitHead = '<html><head><title>TITOLO_ESPLICITO</title>'
+    + '<noscript><h1>TITOLO_HEAD_ESPLICITO_INATTIVO</h1></noscript></head>'
+    + '<body><h1>TITOLO_BODY_ESPLICITO</h1></body></html>';
+  assert.equal(
+    pageTitleEvidence(explicitHead, { scriptingDisabled: true }),
+    'TITOLO_ESPLICITO\nTITOLO_BODY_ESPLICITO',
+  );
+
+  const implicitHead = '<html><title>TITOLO_IMPLICITO</title>'
+    + '<noscript><h1>TITOLO_HEAD_IMPLICITO_INATTIVO</h1></noscript><body>'
+    + '<noscript><h1>TITOLO_BODY_IMPLICITO_ATTIVO</h1></noscript></body></html>';
+  assert.equal(
+    pageTitleEvidence(implicitHead, { scriptingDisabled: true }),
+    'TITOLO_IMPLICITO\nTITOLO_BODY_IMPLICITO_ATTIVO',
+  );
+});
+
 test('pageTitleEvidence chiude il percorso su un tag non terminato', () => {
   const malformed = '<meta data="<title>Titolo falso</title>';
   assert.equal(pageTitleEvidence(malformed), '', 'un titolo dopo il tag malformato non e\' evidenza attiva');
@@ -347,7 +387,9 @@ test('la generazione si ferma se la pagina di un URL riusato non e\' l\'item sce
   // I titoli della pagina vengono dalla stessa fetch del testo, e si azzerano con lei.
   const fetchFn = SRC.slice(SRC.indexOf('async function fetchPageContent(url) {'), SRC.indexOf('\nconst MAX_ARTICLE_AGE_DAYS'));
   assert.match(fetchFn, /lastSourcePageTitle = '';/);
-  assert.match(fetchFn, /lastSourcePageTitle = pageTitleEvidence\(html\);/);
+  // Title evidence must come from the same isolated source passed to the
+  // extractor; the full page can contain stale chrome titles outside the item.
+  assert.match(fetchFn, /lastSourcePageTitle = pageTitleEvidence\(isolation\.html, \{ scriptingDisabled: true \}\);/);
 });
 
 // ── Il cablaggio in create-article.mjs ──────────────────────────────────────
