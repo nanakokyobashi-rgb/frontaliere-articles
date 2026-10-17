@@ -88,4 +88,3 @@ export function run({ root = ROOT, log = console.log, error = console.error } = 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   process.exitCode = run();
 }
-
