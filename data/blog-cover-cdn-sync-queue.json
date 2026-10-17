@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-big-tech-franchi-bolla-ia.webp",
+      "sha256": "9ff0ec5f19eb0f382badcb4f9f2f6af18e3e39ca7f2fb4cd665847a34d8d57db"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-big-tech-franchi-bolla-ia-480w.webp",
+      "sha256": "1b83648013221538850b8404132cfd293508e5b04f5fe7b1ea1cad6365e4487f"
+    }
+  ]
 }
