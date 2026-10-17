@@ -20,6 +20,7 @@ import {
   cantonFromArgs,
   computeCantonSnapshot as computeSnapshot,
   RANKING_IMAGE,
+  rankingImageFields,
   staticMetaFor,
 } from '../scripts/lib/border-wait-ranking-canton.mjs';
 import {
@@ -164,6 +165,15 @@ describe('classifica dogane per cantone', () => {
     assert.equal(staticMetaFor('JU')._generatedImagePath, undefined);
     assert.equal(staticMetaFor('TI').image, 'mendrisio.webp');
     assert.equal(staticMetaFor('TI')._generatedImagePath, STATIC_FALLBACK_IMAGE);
+    assert.equal(staticMetaFor('ti')._generatedImagePath, STATIC_FALLBACK_IMAGE);
+    assert.deepEqual(
+      rankingImageFields('/images/places/future-canton-cover.webp'),
+      {
+        image: '/images/places/future-canton-cover.webp',
+        _generatedImagePath: '/images/places/future-canton-cover.webp',
+      },
+      'una futura voce non-TI /images/places deve attraversare il gate del registrar',
+    );
   });
 
   it('--canton: default TI, case-insensitive, rifiuta un cantone senza valichi', () => {
@@ -180,5 +190,12 @@ describe('classifica dogane per cantone', () => {
     assert.match(src, /\.\.\.staticMetaFor\(canton\),/);
     assert.match(src, /const canton = cantonFromArgs\(\);/);
     assert.match(src, /buildBorderWaitRankingArticle\(\{ ranking, trend, funFacts, weekStart, weekEnd, movers, todayIso, canton \}\)/);
+    assert.match(src, /refreshGovernedArticleCover\(\{/);
+    assert.match(src, /registryFiles: \['data\/blog-articles-data\.ts'\]/);
+    assert.ok(
+      src.indexOf('beginExistingArticleRefreshLock(data.id);')
+        < src.indexOf('refreshGovernedArticleCover({'),
+      'la migration del record esistente deve restare sotto il lock di refresh',
+    );
   });
 });

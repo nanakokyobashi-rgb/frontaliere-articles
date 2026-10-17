@@ -40,6 +40,7 @@ import { corpusPath } from './lib/corpus-paths.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { refreshDescriptiveTexts } from './lib/article-meta-refresh.mjs';
+import { refreshGovernedArticleCover } from './lib/governed-article-cover-refresh.mjs';
 import { sanitizePromptPlaceholders } from './lib/prompt-placeholder-guard.mjs';
 import { acquirePharmacyEvergreenRefresh } from './lib/pharmacy-evergreen-refresh-transaction.mjs';
 
@@ -139,12 +140,15 @@ export function refreshMetaAndSeo(data, repoRoot = REPO_ROOT, writeFile = null, 
       excerpt: content.excerpt,
       seoDescription: content.seoDescription,
       ogDescription: content.ogDescription,
+      imageAlt: data.imageAlt?.[locale],
     }];
   }));
   const io = {
     repoRoot,
     metaPrefix: SECTION_FILES.metaPrefix,
     seoFile: SECTION_FILES.seoFile,
+    section: SECTION_NAME,
+    refreshImageAlt: true,
   };
   if (writeFile) io.writeFile = writeFile;
   if (readFile) io.readFile = readFile;
@@ -176,6 +180,16 @@ function refreshExistingGuides(states) {
     const readFile = (file) => transaction.read(file);
     for (const { guide } of states) {
       console.log(`♻️  refreshing ${guide.id}…`);
+      refreshGovernedArticleCover({
+        repoRoot: REPO_ROOT,
+        articleId: guide.id,
+        imagePath: guide._generatedImagePath,
+        caption: guide.imageAlt.it,
+        section: SECTION_NAME,
+        registryFiles: [{ path: SECTION_FILES.registryFile, section: SECTION_NAME }],
+        readFile,
+        writeFile,
+      });
       refreshBodyFiles(guide, REPO_ROOT, console.log, writeFile);
       const meta = refreshMetaAndSeo(guide, REPO_ROOT, writeFile, readFile);
       if (meta.changed) {

@@ -36,11 +36,11 @@ export const STATIC_META = {
 /**
  * RANKING_IMAGE is deliberately an allowlist of existing, credited catalog
  * covers. Ticino uses the governed site-owned place fallback, while a
- * non-Ticino ranking uses `_generatedImagePath` for the real `/images/blog/`
- * hero; `image` remains the public registry field and carries the same path
- * for deterministic producers. Missing provenance stays null: the
- * generator's first-publication guard then refuses the ranking instead of
- * inheriting an unrelated cover.
+ * non-Ticino ranking uses `_generatedImagePath` for the selected governed
+ * image path, including future place fallbacks; `image` remains the public
+ * registry field and carries the same path for deterministic producers.
+ * Missing provenance stays null: the generator's first-publication guard then
+ * refuses the ranking instead of inheriting an unrelated cover.
  *
  * Every selected path is present in `public/data/journalist-image-catalog.json`
  * and has a matching `content/image-credits/blog/*.json` record with
@@ -62,6 +62,16 @@ export const RANKING_IMAGE = Object.freeze({
   ZH: '/images/blog/azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.webp',
 });
 
+/** Public image paths selected by the allowlist must reach the registrar gate. */
+export function rankingImageFields(image) {
+  return {
+    image,
+    ...(typeof image === 'string' && image.startsWith('/images/')
+      ? { _generatedImagePath: image }
+      : {}),
+  };
+}
+
 /**
  * Evergreen metadata of a canton's ranking. Ticino keeps STATIC_META and pins
  * the governed site-owned fallback needed by the shared registrar (the
@@ -69,16 +79,16 @@ export const RANKING_IMAGE = Object.freeze({
  * from the same place phrases the article body uses.
  */
 export function staticMetaFor(canton = 'TI') {
-  if (canton === 'TI') return { ...STATIC_META, _generatedImagePath: STATIC_FALLBACK_IMAGE };
-  const profile = BORDER_RANKING_CANTONS[canton];
-  if (!profile) throw new Error(`no border-wait ranking for canton ${canton}`);
+  const normalizedCanton = String(canton).trim().toUpperCase();
+  if (normalizedCanton === 'TI') return { ...STATIC_META, _generatedImagePath: STATIC_FALLBACK_IMAGE };
+  const profile = BORDER_RANKING_CANTONS[normalizedCanton];
+  if (!profile) throw new Error(`no border-wait ranking for canton ${normalizedCanton}`);
   const it = profile.it;
   const name = it.of.replace(/^(del Canton|della regione di|del|dei|della|dell'|di)\s*/, '');
-  const image = RANKING_IMAGE[canton] ?? null;
+  const image = RANKING_IMAGE[normalizedCanton] ?? null;
   return {
     ...STATIC_META,
-    image,
-    ...(image?.startsWith('/images/blog/') ? { _generatedImagePath: image } : {}),
+    ...rankingImageFields(image),
     seo: {
       title: `Classifica delle dogane ${it.in}: le migliori e le peggiori`,
       description:
