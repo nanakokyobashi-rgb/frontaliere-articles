@@ -267,6 +267,8 @@ jobs:
         if: always() && steps.mode.outputs.dry != 'true'
         run: |
           set -euo pipefail
+          echo "attempts=0" >> "$GITHUB_OUTPUT"
+          echo "remote_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           PRODUCER_OUTCOME="${{ steps.producer.outcome }}"
           GUARD_OUTCOME="${{ steps.guard.outcome }}"
           if [ "$PRODUCER_OUTCOME" != "success" ]; then
@@ -352,6 +354,8 @@ jobs:
           for attempt in 1 2 3; do
             if git push "$REMOTE" "HEAD:$TARGET"; then
               echo "pushed to $TARGET"
+              echo "attempts=$attempt" >> "$GITHUB_OUTPUT"
+              echo "remote_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
               exit 0
             fi
             echo "push attempt $attempt failed"
@@ -364,6 +368,8 @@ jobs:
             stage_digest_outputs
             if git diff --cached --quiet; then
               echo "digest batch already present on $TARGET"
+              echo "attempts=$attempt" >> "$GITHUB_OUTPUT"
+              echo "remote_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
               exit 0
             fi
             git commit -m "$COMMIT_MESSAGE"
@@ -378,4 +384,6 @@ jobs:
             echo "### Events Weekend Digest"
             echo "- Dry run: ${{ steps.mode.outputs.dry }}"
             echo "- Target ref: ${{ github.ref_name }}"
+            echo "- Push attempts: ${{ steps.commit.outputs.attempts }}"
+            echo "- Published SHA: ${{ steps.commit.outputs.remote_sha }}"
           } >> "$GITHUB_STEP_SUMMARY"

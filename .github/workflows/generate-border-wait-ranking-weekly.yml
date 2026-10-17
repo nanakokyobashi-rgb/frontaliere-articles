@@ -237,27 +237,46 @@ jobs:
             # The evergreen refresh also bumps the registry freshness and the
             # NewsArticle dateModified. Registration markers remain runner-local
             # and ignored, so they cannot be swept into this commit.
-            git add public/data/border-wait-ranking.json \
-                    content/blog-body/it/classifica-dogane-ticino.ts \
-                    content/blog-body/en/classifica-dogane-ticino.ts \
-                    content/blog-body/de/classifica-dogane-ticino.ts \
-                    content/blog-body/fr/classifica-dogane-ticino.ts \
-                    content/blog-articles-data.ts \
-                    content/seo/seo-blog-5.ts
+            stage_ranking_outputs() {
+              git reset --quiet
+              git add public/data/border-wait-ranking.json \
+                      content/blog-body/it/classifica-dogane-ticino.ts \
+                      content/blog-body/en/classifica-dogane-ticino.ts \
+                      content/blog-body/de/classifica-dogane-ticino.ts \
+                      content/blog-body/fr/classifica-dogane-ticino.ts \
+                      content/blog-articles-data.ts \
+                      content/seo/seo-blog-5.ts
+            }
+
+            # A concurrent publisher can advance main after this run has
+            # rendered the ranking. Replaying the old commit is unsafe when
+            # shared registries are involved: rebuild from the fetched tip and
+            # rerun the same producer/quality gates before the next push.
+            regenerate_ranking() {
+              git reset --hard FETCH_HEAD
+              npx -y tsx@4.23.15 generator/scripts/generate-border-wait-ranking-article.mjs
+              node --test \
+                generator/tests/article-fabrication-guard.test.mjs \
+                generator/tests/prompt-placeholder-guard.test.mjs
+              node scripts/ci/check-blog-locale-completeness.mjs
+              stage_ranking_outputs
+            }
+
+            stage_ranking_outputs
           fi
           if git diff --cached --quiet; then
             echo "no ranking digest changes"
             exit 0
           fi
-          if [ -z "${GITHUB_PAT:-}" ]; then
-            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push would not fire publish-api.yml, so the refreshed ranking would never reach the site"
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::GITHUB_PAT_NANAKO missing — a GITHUB_TOKEN push would not fire publish-api.yml, so the refreshed ranking would never reach the site"
             exit 1
           fi
 
           git commit -m "$COMMIT_MESSAGE"
 
           TARGET="${{ github.ref_name }}"
-          REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          REMOTE="https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${{ github.repository }}.git"
           for attempt in 1 2 3; do
             if git push "$REMOTE" "HEAD:$TARGET"; then
               echo "pushed to $TARGET"
@@ -268,7 +287,8 @@ jobs:
               break
             fi
             sleep $((attempt * 3))
-            git pull --rebase "$REMOTE" "$TARGET" || { git rebase --abort 2>/dev/null || true; }
+            git fetch "$REMOTE" "$TARGET"
+            regenerate_ranking
           done
           echo "::error::push failed after 3 attempts (git output above)"
           exit 1

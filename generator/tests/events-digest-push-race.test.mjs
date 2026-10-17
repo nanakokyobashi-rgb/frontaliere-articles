@@ -29,6 +29,9 @@ test('the digest push race rebuilds on the fetched main tip', () => {
   assert.match(commitStep, /node --test \\\n+\s+generator\/tests\/article-fabrication-guard\.test\.mjs \\\n+\s+generator\/tests\/prompt-placeholder-guard\.test\.mjs/);
   assert.match(commitStep, /node scripts\/ci\/check-blog-locale-completeness\.mjs/);
   assert.match(commitStep, /regenerate_digest_batch\(\)[\s\S]*?stage_digest_outputs/);
+  assert.match(commitStep, /echo "attempts=\$attempt" >> "\$GITHUB_OUTPUT"/);
+  assert.match(commitStep, /echo "remote_sha=\$\(git rev-parse HEAD\)" >> "\$GITHUB_OUTPUT"/);
+  assert.match(source, /Push attempts: \$\{\{ steps\.commit\.outputs\.attempts \}\}/);
   assert.match(commitStep, /GITHUB_PAT_NANAKO/);
   assert.doesNotMatch(commitStep, /\$\{GITHUB_PAT:-\}/);
   assert.doesNotMatch(commitStep, /git pull --rebase/);
