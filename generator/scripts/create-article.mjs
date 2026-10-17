@@ -8169,6 +8169,26 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
     if (!tag.closing && namespace === 'html' && !isVoid && tag.name === 'template') {
       const afterTemplate = sourceSkipTemplate(html, tag.end + 1);
       if (afterTemplate < 0) return { malformed: true, stack };
+      const parent = stack.at(-1) || null;
+      const entry = {
+        name: tag.name,
+        namespace,
+        start,
+        tag,
+        inactive: sourceTagIsInactive(html, tag, namespace, parent),
+      };
+      if (onStart) onStart({
+        tag,
+        start,
+        end: tag.end + 1,
+        namespace,
+        isVoid: false,
+        parent,
+        stack: stack.slice(),
+        entry,
+        rawText: false,
+        skippedEnd: afterTemplate,
+      });
       cursor = afterTemplate;
       continue;
     }
@@ -8303,13 +8323,13 @@ function sourceRemoveInactiveSubtrees(html) {
 
   const removals = [];
   const scan = sourceScanStructure(src, {
-    onStart: ({ tag, start, end, namespace, isVoid, parent, entry, rawText, rawTextEnd }) => {
+    onStart: ({ tag, start, end, namespace, isVoid, parent, entry, rawText, rawTextEnd, skippedEnd }) => {
       const inactive = entry?.inactive ?? sourceTagIsInactive(src, tag, namespace, parent);
       if (!inactive || parent?.inactive) return;
       if (rawText) {
         removals.push([start, rawTextEnd]);
       } else if (namespace === 'html' && tag.name === 'template') {
-        const templateEnd = sourceSkipTemplate(src, end);
+        const templateEnd = skippedEnd ?? sourceSkipTemplate(src, end);
         if (templateEnd >= 0) removals.push([start, templateEnd]);
       } else if (isVoid) {
         removals.push([start, end]);
@@ -8319,6 +8339,33 @@ function sourceRemoveInactiveSubtrees(html) {
     },
     onEnd: ({ entry, end }) => {
       if (entry?.removeInactiveSubtree) removals.push([entry.start, end]);
+    },
+  });
+
+  if (scan.malformed || removals.length === 0) return src;
+  let cleaned = src;
+  for (const [start, end] of removals.sort((a, b) => b[0] - a[0])) {
+    cleaned = cleaned.slice(0, start) + cleaned.slice(end);
+  }
+  return cleaned;
+}
+
+function sourceRemoveImplicitHeadNoscript(html) {
+  const src = String(html || '');
+  if (!src) return src;
+
+  const prefixLength = '<html>'.length;
+  const wrapped = `<html>${src}</html>`;
+  const removals = [];
+  const scan = sourceScanStructure(wrapped, {
+    onStart: ({ tag, start, namespace, parent, stack, rawText, rawTextEnd }) => {
+      if (
+        namespace === 'html' &&
+        tag.name === 'noscript' &&
+        rawText &&
+        parent?.name === 'html' &&
+        stack.length === 1
+      ) removals.push([start - prefixLength, rawTextEnd - prefixLength]);
     },
   });
 
@@ -8397,7 +8444,7 @@ function findActiveSourceHead(html) {
       };
       sawBody = true;
     },
-    onStart: ({ tag, start, namespace, isVoid, parent, stack, entry, rawTextEnd, rawText }) => {
+    onStart: ({ tag, start, namespace, isVoid, parent, stack, entry, rawTextEnd, rawText, skippedEnd }) => {
       const afterHeadElement = Boolean(
         trustedHead &&
         bodyState?.implicit &&
@@ -8497,6 +8544,7 @@ function findActiveSourceHead(html) {
       } else if (
         parent?.name === 'head' &&
         parent.namespace === 'html' &&
+        tag.name !== 'template' &&
         (!rawText && (namespace !== 'html' || !isVoid))
       ) {
         // Valid head children are void elements, raw-text elements, or template;
@@ -8508,7 +8556,7 @@ function findActiveSourceHead(html) {
         if (rawText) {
           afterHeadExtensions.push(html.slice(start, rawTextEnd));
         } else if (namespace === 'html' && tag.name === 'template') {
-          const templateEnd = sourceSkipTemplate(html, tag.end + 1);
+          const templateEnd = skippedEnd ?? sourceSkipTemplate(html, tag.end + 1);
           if (templateEnd >= 0) afterHeadExtensions.push(html.slice(start, templateEnd));
         } else if (isVoid) {
           afterHeadExtensions.push(html.slice(start, tag.end + 1));
@@ -8651,7 +8699,9 @@ export function isolateMainSourceHtml(html) {
   let head = '';
   if (headScan.bounds) {
     const { start, end, closed, implicit, closeStart } = headScan.bounds;
-    const contents = src.slice(start, end);
+    const contents = implicit
+      ? sourceRemoveImplicitHeadNoscript(src.slice(start, end))
+      : src.slice(start, end);
     if (implicit) {
       head = `<head>${contents}${headScan.afterHeadExtensions.join('')}</head>`;
     } else if (closed && closeStart != null) {
