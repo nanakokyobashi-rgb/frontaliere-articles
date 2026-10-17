@@ -76,7 +76,7 @@ assert.ok(startAt !== -1 && endAt !== -1, 'delimitatori degli estrattori non tro
 const { extractRssItems, extractHeadlines } = new Function(
   'decodeHtmlEntities',
   'htmlTagScanner',
-  `const { findHtmlRawTextClosingTag, findHtmlTagEndOutsideQuotes, nextHtmlElement, nextHtmlElementWhere, nextHtmlOpeningTag, nextHtmlTag } = htmlTagScanner;\n${SRC.slice(startAt, endAt).replace(/^export /gm, '')}\nreturn { extractRssItems, extractHeadlines };`,
+  `const { findHtmlRawTextClosingTag, findHtmlTagEndOutsideQuotes, nextHtmlElement, nextHtmlElementWhere, nextHtmlOpeningTag, nextHtmlTag, nextHtmlTagStatus } = htmlTagScanner;\n${SRC.slice(startAt, endAt).replace(/^export /gm, '')}\nreturn { extractRssItems, extractHeadlines };`,
 )(decodeHtmlEntities, htmlTagScanner);
 
 const fixture = (name) => fs.readFileSync(path.join(FIX, name));
@@ -1076,6 +1076,15 @@ test('html-links: i landmark interni restano contenuto, la navigazione resta esc
   assert.deepEqual(
     extractHeadlines(titleWithAction, 'https://example.ch/').map((h) => h.headline),
     ['Nuovi orari per gli sportelli comunali'],
+  );
+});
+
+test('html-links: un malformed dopo una headline non pubblica il prefisso parziale', () => {
+  const html = '<a href="/news/1">Titolo valido della prima notizia</a>'
+    + '<section title="virgolette non terminate';
+  assert.throws(
+    () => extractHeadlines(html, 'https://example.ch/'),
+    /markup HTML malformato: scansione headline interrotta prima di EOF/,
   );
 });
 
