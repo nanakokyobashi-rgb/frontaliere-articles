@@ -21,6 +21,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.cpcn-rendimento-2025-copertura.title': 'CPCN registra +5,6% nel 2025: copertura 84,8%',
     'blog.article.cpcn-rendimento-2025-copertura.excerpt': '+5,6% per la performance CPCN nel 2025 3% di remunerazione sugli averi di vecchiaia 84,8% di copertura al 31.12.2025 RFV da CHF 979 milioni, al 92%',
     'blog.article.cpcn-rendimento-2025-copertura.imageAlt': 'Patrimonio immobiliare e previdenza della CPCN nel Canton Neuchâtel',
+    'blog.article.cpcn-tasso-grado-copertura.title': 'CPCN: la differenza tra tasso e grado di copertura',
+    'blog.article.cpcn-tasso-grado-copertura.excerpt': 'Il tasso esclude la RFV dal calcolo.',
+    'blog.article.cpcn-tasso-grado-copertura.imageAlt': 'Analisi dei tassi di copertura della CPCN',
 };
 
 export default blogMetaCantonNeIt;
