@@ -52,7 +52,7 @@ assert.match(BLOCK, /function extractDatesFromHtml\(html, baseUrl\) \{/, 'il blo
 const { extractHeadlines, extractDatesFromHtml, extractEmbeddedHeadlineDates } = new Function(
   'decodeHtmlEntities',
   'htmlTagScanner',
-  `const { findHtmlRawTextClosingTag, findHtmlTagEndOutsideQuotes, nextHtmlElement, nextHtmlElementWhere, nextHtmlOpeningTag, nextHtmlTag } = htmlTagScanner;\n${BLOCK}\nreturn { extractHeadlines, extractDatesFromHtml, extractEmbeddedHeadlineDates, extractDateFromUrl };`,
+  `const { findHtmlRawTextClosingTag, findHtmlTagEndOutsideQuotes, nextHtmlElement, nextHtmlElementWhere, nextHtmlOpeningTag, nextHtmlTag, nextHtmlTagStatus } = htmlTagScanner;\n${BLOCK}\nreturn { extractHeadlines, extractDatesFromHtml, extractEmbeddedHeadlineDates, extractDateFromUrl };`,
 )(decodeHtmlEntities, htmlTagScanner);
 
 const BASE_URL = 'https://www.admin.ch/it/newnsb';
@@ -86,7 +86,10 @@ test('an unterminated tag fails closed instead of extracting anchors inside its 
   const html = `<section title='virgoletta non chiusa ${hiddenMarkup}`
     + '<a href="/it/newnsb/2026/notizia-nascosta">Il comunicato nascosto non deve diventare una headline</a>';
 
-  assert.deepEqual(extractHeadlines(html, BASE_URL), []);
+  assert.throws(
+    () => extractHeadlines(html, BASE_URL),
+    /markup HTML malformato: scansione headline interrotta prima di EOF/,
+  );
 });
 
 test('a link with no real title left after stripping the prefix is dropped by the length gate', () => {
