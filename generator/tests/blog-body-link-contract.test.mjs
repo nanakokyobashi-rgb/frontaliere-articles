@@ -81,10 +81,11 @@ test('writer e gate sanificano ogni link elaborato dal renderer, anche immagini,
 });
 
 test('la sanitizzazione rimuove i delimitatori angolari dai target canonici', () => {
-  const links = '[Pagina](</en/foo>) [Email](<mailto:a@b>) [Lavori](<nav:jobs>)';
+  const links = '[Pagina](</en/foo>) [Email](<mailto:a@b>) [Lavori](<nav:jobs>) '
+    + '[Sito](<https://example.com>)';
   assert.equal(
     sanitizeArticleMarkdownLinks(links, 'it'),
-    '[Pagina](/en/foo) [Email](mailto:a@b) [Lavori](nav:jobs)',
+    '[Pagina](/en/foo) [Email](mailto:a@b) [Lavori](nav:jobs) [Sito](https://example.com)',
   );
   assert.deepEqual(
     findNonCanonicalArticleLinks(links, 'it').map(({ target, replacement }) => ({ target, replacement })),
@@ -92,14 +93,26 @@ test('la sanitizzazione rimuove i delimitatori angolari dai target canonici', ()
       { target: '/en/foo', replacement: '/en/foo' },
       { target: 'mailto:a@b', replacement: 'mailto:a@b' },
       { target: 'nav:jobs', replacement: 'nav:jobs' },
+      { target: 'https://example.com', replacement: 'https://example.com' },
     ],
   );
+  assert.deepEqual(findNonCanonicalArticleLinks(sanitizeArticleMarkdownLinks(links)), []);
 });
 
-test('i target canonici con spazi conservano i delimitatori angolari', () => {
-  const source = '[Pagina](</path with space>)';
-  assert.equal(sanitizeArticleMarkdownLinks(source), source);
-  assert.deepEqual(findNonCanonicalArticleLinks(source), []);
+test('il renderer non riceve URL angolari con spazi o titoli Markdown', () => {
+  const source = '[Spazio](<https://example.com/a b>) '
+    + '[Titolo](https://example.com "titolo") '
+    + '[Titolo angolare](<https://example.com> "titolo")';
+  assert.equal(sanitizeArticleMarkdownLinks(source), 'Spazio Titolo Titolo angolare');
+  assert.deepEqual(
+    findNonCanonicalArticleLinks(source).map(({ target, replacement }) => ({ target, replacement })),
+    [
+      { target: 'https://example.com/a b', replacement: null },
+      { target: 'https://example.com', replacement: null },
+      { target: 'https://example.com', replacement: null },
+    ],
+  );
+  assert.deepEqual(findNonCanonicalArticleLinks(sanitizeArticleMarkdownLinks(source)), []);
 });
 
 test('il writer e il gate visitano i link annidati nella label di un link esterno', () => {
@@ -115,6 +128,23 @@ test('il writer e il gate visitano i link annidati nella label di un link estern
       replacement,
     })),
     [{ label: 'inner', target: 'bare-target', replacement: null }],
+  );
+});
+
+test('writer e gate visitano anchor HTML annidati nella label Markdown', () => {
+  const source = '[outer <a href="relative/path">inner</a>](https://example.com/article)';
+  assert.equal(
+    sanitizeArticleMarkdownLinks(source),
+    '[outer <a>inner</a>](https://example.com/article)',
+  );
+  assert.deepEqual(
+    findNonCanonicalArticleLinks(source).map(({ label, target, replacement, htmlAnchor }) => ({
+      label,
+      target,
+      replacement,
+      htmlAnchor,
+    })),
+    [{ label: '<a href>', target: 'relative/path', replacement: null, htmlAnchor: true }],
   );
 });
 

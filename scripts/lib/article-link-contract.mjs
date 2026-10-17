@@ -134,7 +134,9 @@ function parseInlineLink(source, start) {
 
   const whitespaceStart = cursor;
   while (/\s/.test(source[cursor] || '') && cursor < source.length) cursor += 1;
+  let hasTitle = false;
   if (cursor > whitespaceStart && ['"', "'", '('].includes(source[cursor])) {
+    hasTitle = true;
     cursor = parseLinkTitle(source, cursor);
     if (cursor < 0) return null;
     while (/\s/.test(source[cursor] || '') && cursor < source.length) cursor += 1;
@@ -152,6 +154,7 @@ function parseInlineLink(source, start) {
     targetStart,
     targetEnd,
     targetSuffixStart,
+    hasTitle,
   };
 }
 
@@ -259,7 +262,7 @@ function articleLinks(source) {
       index += 1;
       continue;
     }
-    link.nestedLinks = link.label.includes('[') ? articleLinks(link.label) : [];
+    link.nestedLinks = articleLinks(link.label);
     links.push(link);
     index = link.end;
   }
@@ -323,6 +326,9 @@ export function canonicalArticleLinkTarget(rawTarget, locale = 'it') {
 }
 
 function canonicalArticleLinkOccurrenceTarget(link, locale) {
+  // The static renderer treats angle delimiters and Markdown titles as part of
+  // href text. Remove these links instead of persisting markup it cannot render.
+  if (link.hasTitle || (link.angle && /\s/u.test(link.target))) return null;
   const canonical = canonicalArticleLinkTarget(link.target, locale);
   // The site renderer supports nav: only in Markdown links, never in literal
   // HTML anchors. Removing such hrefs keeps the gate and writer consistent.
@@ -343,10 +349,9 @@ export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
     const normalizedLabel = link.htmlAnchor || link.nestedLinks.length === 0
       ? link.label
       : sanitizeArticleMarkdownLinks(link.label, locale);
-    const angleTargetNeedsDelimiters = link.angle && /\s/u.test(link.target);
     if (
       canonical === link.target &&
-      (!link.angle || angleTargetNeedsDelimiters) &&
+      !link.angle &&
       !duplicateAnchorHref &&
       normalizedLabel === link.label
     ) continue;
@@ -370,7 +375,7 @@ export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
       output += source.slice(copiedThrough, link.start)
         + '[' + normalizedLabel + ']'
         + source.slice(link.labelEnd + 1, link.targetSyntaxStart)
-        + (angleTargetNeedsDelimiters ? `<${canonical}>` : canonical)
+        + canonical
         + source.slice(link.targetSuffixStart, link.end);
     }
     copiedThrough = link.end;
@@ -389,10 +394,9 @@ export function findNonCanonicalArticleLinks(source, locale = 'it', baseIndex = 
   for (const link of articleLinks(input)) {
     const canonical = canonicalArticleLinkOccurrenceTarget(link, locale);
     const duplicateAnchorHref = link.htmlAnchor && link.hrefAttributes.length > 1;
-    const angleTargetNeedsDelimiters = link.angle && /\s/u.test(link.target);
     if (
       canonical !== link.target ||
-      (link.angle && !angleTargetNeedsDelimiters) ||
+      link.angle ||
       duplicateAnchorHref
     ) {
       offenders.push({
