@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-credito-imposta-famiglia-2026.webp",
+      "sha256": "95d73baee014e1c25096bbb8dc91ad0659913086477d827d442a04e41d3d2210"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-credito-imposta-famiglia-2026-480w.webp",
+      "sha256": "c60c40d7e1c48fee260f908fa2d113d60cca8125bb7a45c5017c7a70fa7354c2"
+    }
+  ]
 }
