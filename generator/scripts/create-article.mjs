@@ -8513,6 +8513,13 @@ function findActiveSourceHead(html) {
         if ((!directDocumentHead && !nestedHeadInsideTrustedBody) || (directDocumentHead && isVoid)) {
           failClosed();
         }
+        // Keep the editorial root usable, but invalidate body JSON-LD once an
+        // invalid nested head appears. A direct-child script collected before
+        // or after it could be stale even though scanning reaches EOF cleanly.
+        if (nestedHeadInsideTrustedBody) {
+          bodyState.trusted = false;
+          ldBlocks.length = 0;
+        }
         implicitHead = false;
         implicitHeadContainer = null;
         if (headState) headState.trusted = false;

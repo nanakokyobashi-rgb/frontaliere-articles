@@ -191,7 +191,9 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     const stale = (label, attrs = '') => `<script${attrs ? ` ${attrs}` : ''} type="application/ld+json">{"headline":"${label}"}</script>`;
     const page2 = '<html><head><title>Pagina</title></head><body>'
       + `<!-- ${stale('COMMENT_JSON_LD_SHOULD_NOT_BE_ACTIVATED')} -->`
+      + `<!-- <head>${stale('COMMENT_NESTED_HEAD_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</head> -->`
       + `<template>${stale('TEMPLATE_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</template>`
+      + `<template><head>${stale('TEMPLATE_NESTED_HEAD_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</head></template>`
       + `<aside>${stale('SIDEBAR_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</aside>`
       + `<div class="app-shell">${stale('WRAPPED_BODY_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</div>`
       + stale('SCRIPT_CLASS_JSON_LD_SHOULD_NOT_BE_ACTIVATED', 'class="related"')
@@ -206,7 +208,9 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.equal(res.isolated, true);
     assert.ok(res.html.includes('ACTIVE_BODY_DIRECT_JSON_LD'));
     assert.equal(res.html.includes('COMMENT_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('COMMENT_NESTED_HEAD_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('TEMPLATE_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('TEMPLATE_NESTED_HEAD_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('SIDEBAR_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('WRAPPED_BODY_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('SCRIPT_CLASS_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
@@ -345,6 +349,26 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.equal(res.root, 'none');
     assert.equal(res.trustedDocument, false);
     assert.equal(res.html, nestedHead);
+  });
+
+  it('rifiuta JSON-LD diretto dopo un head annidato nel body', () => {
+    const staleJsonLd = '<script type="application/ld+json">'
+      + '{"articleBody":"STALE_BODY_FROM_INVALID_DOCUMENT","datePublished":"1999-01-01"}'
+      + '</script>';
+    const nestedHead = '<html><head><title>Fonte valida</title></head><body>'
+      + '<script type="application/ld+json">{"articleBody":"BODY_JSONLD_BEFORE_INVALID_HEAD"}</script>'
+      + '<aside><head><title>Sidebar stale</title></head></aside>'
+      + `<article>${ARTICLE_PROSE}</article>`
+      + staleJsonLd
+      + '</body></html>';
+    const res = isolateMainSourceHtml(nestedHead);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.equal(res.trustedDocument, true);
+    assert.equal(res.html.includes('BODY_JSONLD_BEFORE_INVALID_HEAD'), false);
+    assert.equal(res.html.includes('STALE_BODY_FROM_INVALID_DOCUMENT'), false);
+    assert.equal(res.html.includes('STALE_HEAD'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
   });
 
   it('non lascia uscire un article da un noscript dentro un template', () => {
