@@ -315,7 +315,9 @@ export function sanitizeArticleFaqMarkdown(faqArray, locale = 'it') {
  * `null` means keep the visible label but remove the link entirely.
  */
 export function canonicalArticleLinkTarget(rawTarget, locale = 'it') {
-  const target = String(rawTarget ?? '').trim();
+  const sourceTarget = String(rawTarget ?? '');
+  if (/[\u0000-\u001f\u007f\\]/u.test(sourceTarget)) return null;
+  const target = sourceTarget.trim();
   if (!target) return null;
   // The static article renderer stops at the first literal `)` in a link.
   // Percent-encoded parentheses remain valid and do not trigger truncation.

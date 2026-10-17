@@ -33,6 +33,16 @@ test('il contratto ripara solo le destinazioni legacy con una mappatura pubblica
   assert.equal(canonicalArticleLinkTarget(String.raw`/\evil`), null);
   assert.equal(canonicalArticleLinkTarget(`/bad${String.fromCharCode(1)}path`), null);
   assert.equal(canonicalArticleLinkTarget(`#bad${String.fromCharCode(127)}`), null);
+  const backslash = String.fromCharCode(92);
+  for (const target of [
+    `https://example.com/a${backslash}path`,
+    `https://example.com/a${String.fromCharCode(1)}path`,
+    `mailto:reader${backslash}@example.com`,
+    `mailto:reader${String.fromCharCode(1)}@example.com`,
+  ]) {
+    assert.equal(canonicalArticleLinkTarget(target), null, target);
+    assert.equal(sanitizeArticleMarkdownLinks(`[invalid](${target})`), 'invalid', target);
+  }
   assert.equal(canonicalArticleLinkTarget('link al calcolatore'), null);
 });
 
@@ -393,6 +403,7 @@ test('i publisher rapidi usano la stessa chiusura delle dipendenze del gate di p
   for (const dependency of ['engine/articleSeoFallback.ts', 'engine/rssFeeds.mjs']) {
     assert.ok(apiPaths.includes(dependency), `publish-api.yml deve includere ${dependency}`);
   }
+  assert.ok(apiPaths.includes('.github/workflows/publish-api.yml'));
 
   for (const file of ['fast-publish-article.yml', 'fast-publish-section.yml']) {
     const workflow = readFileSync(path.join(ROOT, '.github/workflows', file), 'utf8');
@@ -401,7 +412,13 @@ test('i publisher rapidi usano la stessa chiusura delle dipendenze del gate di p
     const paths = [...workflow.slice(start, end).matchAll(/^\s+([^\s()]+)$/gm)]
       .map((match) => match[1]);
     const gate = workflow.slice(start, workflow.indexOf('node scripts/ci/check-blog-body-links.mjs', start));
-    assert.deepEqual(paths, apiPaths, `${file} deve condividere la chiusura di publish-api`);
+    const selfPath = `.github/workflows/${file}`;
+    assert.ok(paths.includes(selfPath), `${file} deve riattivare il gate quando cambia`);
+    assert.deepEqual(
+      paths.filter((filePath) => filePath !== selfPath),
+      apiPaths,
+      `${file} deve condividere la chiusura di publish-api oltre al proprio path`,
+    );
     assert.match(gate, /git diff --quiet "\$BEFORE" "\$AFTER" -- "\$\{gate_input_paths\[@\]\}"/);
     assert.match(gate, /git diff --name-only "\$BEFORE" "\$AFTER" -- content/);
   }

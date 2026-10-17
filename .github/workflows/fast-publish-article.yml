@@ -174,6 +174,7 @@ jobs:
           # Keep this dependency closure identical to publish-api.yml. A mixed
           # push that changes a body and its gate must scan the full corpus.
           gate_input_paths=(
+            .github/workflows/fast-publish-article.yml
             .github/workflows/publish-api.yml
             engine/articleSeoFallback.ts
             engine/rssFeeds.mjs
