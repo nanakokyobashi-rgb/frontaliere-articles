@@ -110,7 +110,16 @@ test('the mirrored flat redirect scanner parses unquoted attribute values before
   assert.match(flatRedirect, /function isSelfClosingStartTag\(html: string, nameEnd: number, end: number\)/);
   assert.match(
     flatRedirect,
-    /selfClosing: !closing && (?:HTML_VOID_ELEMENTS\.has\(name\)\s+&&\s+)?isSelfClosingStartTag\(html, nameEnd, end\)/,
+    /if \(!closing && HTML_VOID_ELEMENTS\.has\(name\)\) \{\s+const parsedSelfClosing = isSelfClosingStartTag\(html, nameEnd, end\);/,
+  );
+  assert.match(
+    flatRedirect,
+    /if \(typeof parsedSelfClosing !== 'boolean'\) return parsedSelfClosing;/,
+    'malformed attributes must abort tag parsing instead of becoming non-self-closing',
+  );
+  assert.match(
+    flatRedirect,
+    /selfClosing = parsedSelfClosing;/,
   );
   assert.match(
     flatRedirect,
