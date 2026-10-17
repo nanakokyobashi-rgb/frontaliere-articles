@@ -164,3 +164,13 @@ test('publish-api esegue il link gate prima della pubblicazione', () => {
   assert.match(gateInputBlock, /generator\/data\/canton-url-slugs\.json/);
   assert.match(workflow, /generator\/data\/canton-url-slugs\.json/);
 });
+
+test('i publisher rapidi eseguono il link gate prima di ogni pubblicazione', () => {
+  for (const file of ['fast-publish-article.yml', 'fast-publish-section.yml']) {
+    const workflow = readFileSync(path.join(ROOT, '.github/workflows', file), 'utf8');
+    const linkGate = workflow.indexOf('node scripts/ci/check-blog-body-links.mjs');
+    const publishJob = workflow.indexOf('\n  publish:');
+    assert.ok(linkGate > 0, `${file} non invoca il link gate`);
+    assert.ok(publishJob > linkGate, `${file} deve terminare il gate prima del job di pubblicazione`);
+  }
+});

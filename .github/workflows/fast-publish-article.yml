@@ -161,6 +161,29 @@ jobs:
             git fetch --no-tags --depth=1 origin "$PUSH_BEFORE"
           fi
 
+      - name: Preflight — i link Markdown devono avere una destinazione canonica
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          changed_files="$RUNNER_TEMP/fast-publish-article-changed-bodies.txt"
+          : > "$changed_files"
+          scan_mode=full
+          if [ "$EVENT_NAME" = 'push' ] \
+            && [[ "${BEFORE:-}" =~ ^[a-f0-9]{40}$ ]] \
+            && [[ "${AFTER:-}" =~ ^[a-f0-9]{40}$ ]] \
+            && [ "$BEFORE" != '0000000000000000000000000000000000000000' ] \
+            && git cat-file -e "${BEFORE}^{commit}" 2>/dev/null \
+            && git cat-file -e "${AFTER}^{commit}" 2>/dev/null; then
+            git diff --name-only "$BEFORE" "$AFTER" -- content > "$changed_files"
+            if [ -s "$changed_files" ]; then scan_mode=changed; fi
+          fi
+          PREFLIGHT_SCAN_MODE="$scan_mode" \
+            PREFLIGHT_CHANGED_FILES_FILE="$changed_files" \
+            node scripts/ci/check-blog-body-links.mjs
+
       - name: Resolve mode, article ids and section
         id: mode
         env:
