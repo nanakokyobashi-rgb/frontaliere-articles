@@ -90,6 +90,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-17T01:07:58.548Z",
       "lastFailureAt": "2026-10-17T05:38:41.862Z"
+    },
+    {
+      "articleId": "stesso-reddito-imposte-diverse",
+      "title": "Stesso reddito, imposte diverse: risparmio fino al 90%",
+      "fallbackImage": "/images/blog/emigrazione-cassa-pensione-risparmio-imposte-2.webp",
+      "reason": "All image providers failed for article-stesso-reddito-imposte-diverse: openai-codex (vision gate rejected image: Generic synthetic tax-themed suburban scene, but it includes a blan",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T10:06:41.197Z",
+      "lastFailureAt": "2026-10-17T10:06:41.197Z"
     }
   ]
 }

@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/anche-questa-settimana-sono-previste-chiusure-sullautostrada-a8-tra-varese-e-gallarate/2672536": {
-    "articleId": "a8-chiusure-varese-gallarate-settembre-2026",
-    "ts": "2026-09-07T14:31:31.336Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/cantone/luganese/1948467/tram-treno-si-parte-a-ottobre-i-primi-lavori": {
     "articleId": "tram-treno-lavori-ottobre",
     "ts": "2026-09-07T17:30:45.480Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenoi.it/2026/10/17/leggi-notizia/argomenti/territorio/articolo/il-centro-sportivo-delloratorio-di-gornate-olona-dedicato-al-piccolo-kevin-palmieri-il-suo-nome.html": {
     "articleId": "targa-kevin-palmieri",
     "ts": "2026-10-17T09:46:18.246Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/como-centinaia-alla-manifestazione-contro-la-chiusura-delle-ora-basta-chiediamo-rispetto-video": {
+    "articleId": "como-orabasta-famiglie",
+    "ts": "2026-10-17T10:17:59.502Z",
     "keyForm": 2
   }
 }

@@ -35,7 +35,7 @@ import { failureIssueIdentityFromTitle } from '../../scripts/ci/close-recovered-
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MODULE_PATH = path.resolve(HERE, '../../scripts/ci/scan-failed-runs.mjs');
 const CREATOR_PATH = path.resolve(HERE, '../../scripts/lib/github-issue-creator.mjs');
-const { alreadyReported, deliverRunReports } = await import(MODULE_PATH);
+const { alreadyReported, deliverRunReports, failureLogArgs } = await import(MODULE_PATH);
 
 // ── Il `gh` finto ───────────────────────────────────────────────────
 //
@@ -211,6 +211,24 @@ test('la firma Transport canonicalizza l’ordine e i duplicati, distinguendo se
   assert.equal(manualBlockerIssueKey(blockers38879499928), manualBlockerIssueKey([...blockers38879499928].reverse()));
   assert.equal(manualBlockerIssueKey(blockers38879499928), manualBlockerIssueKey([...blockers38879499928, blockers38879499928[0]]));
   assert.notEqual(manualBlockerIssueKey(blockers38712934478), manualBlockerIssueKey(blockers38879499928));
+});
+
+test('la firma Transport ignora shell trace e annotazioni, e legge solo marker runtime', () => {
+  const log = [
+    'transport\tNo permanenti — serve una copia a mano\t\uFEFF2026-10-17T08:51:59.8136114Z ^[[36;1mecho "::error::Le righe `⛔` del dry-run"^[[0m',
+    'transport\tCosa c\'e\' da portare (dry-run)\t2026-10-17T08:51:04.3084391Z   ⛔ blocker runtime A',
+    'transport\tNo permanenti — serve una copia a mano\t2026-10-17T08:51:59.8475831Z ##[error]Le righe `⛔` del dry-run qui sopra',
+    'transport\tCosa c\'e\' da portare (dry-run)\t2026-10-17T08:51:04.3088261Z  \u001b[31m⛔ blocker runtime B\u001b[0m',
+  ].join('\n');
+  assert.deepEqual(manualBlockersFromFailureLog(log), ['blocker runtime A', 'blocker runtime B']);
+});
+
+test('Transport usa il log completo perché i blocker arrivano dal dry-run riuscito', () => {
+  assert.equal(
+    failureLogArgs(39018773936, '.github/workflows/transport-identical-twins.yml').at(-1),
+    '--log',
+  );
+  assert.equal(failureLogArgs(39018773936, '.github/workflows/generate-article.yml').at(-1), '--log-failed');
 });
 
 test('la chiave manuale nel titolo resta leggibile al reconciler come workflow e causa', () => {
