@@ -1933,6 +1933,7 @@ export async function main(
     publishedApiReleaseCommitImpl = publishedApiReleaseCommit,
     publishedReleaseReadyImpl = publishedReleaseReady,
     latestApiInputCommitImpl = latestApiInputCommit,
+    sourceRegistryIdsImpl = sourceRegistryIds,
     currentMainHeadImpl = publishedMainHead,
     fetchImpl = fetch,
   } = {},
@@ -1942,7 +1943,7 @@ export async function main(
   const section = args.section;
   const distDir = path.resolve(args.out);
   fs.mkdirSync(distDir, { recursive: true });
-  const ids = args.bootstrap ? sourceRegistryIds(ROOT_DIR, section) : args.ids;
+  const ids = args.bootstrap ? sourceRegistryIdsImpl(ROOT_DIR, section) : args.ids;
   const publishing = args.publish && !args.dryRun;
   const publisherCommit = publishing
     ? execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()
@@ -2000,6 +2001,14 @@ export async function main(
   }
   let cantonRssFeeds = [];
   let removeStaleCantonRssFeeds = false;
+  // A live section can receive its first article pages in the same corpus
+  // release that updates the API registry. The API publisher cannot flip that
+  // registry until those pages exist on R2, while the normal live-page path
+  // waits for the flipped registry before touching RSS. Bootstrap is the
+  // deliberate two-phase exception: validate and upload HTML first, preserve
+  // the old RSS/obsolete-page surface, and let the API completion replay do
+  // the feed/deletion phase after its release is actually served.
+  let deferredLiveBootstrapRelease = false;
   if (publishing && (effectiveStatus === 'live' || cleanupRssRequested)) {
     const readiness = await publishedReleaseReadyImpl(releaseCommit, { section, fetchImpl });
     // Se la readiness è transitoria, mantieni il gate fail-closed completo e
@@ -2012,6 +2021,12 @@ export async function main(
         : cantonRssFeedEntries(section);
       cantonRssFeeds = cleanupRssRequested ? [] : declaredFeeds;
       removeStaleCantonRssFeeds = cleanupRssRequested || cantonRssFeeds.length === 0;
+    } else if (args.bootstrap && effectiveStatus === 'live' && !cleanupRssRequested) {
+      deferredLiveBootstrapRelease = true;
+      console.log(
+        `::notice::[${LOG}] bootstrap ${section}: release API/edge non ancora servita; ` +
+        'differisco RSS e cancellazioni obsolete dopo il flip, senza allentare la verifica HTML',
+      );
     } else {
       cantonRssFeeds = effectiveStatus === 'live' && !cleanupRssRequested ? cantonRssFeedEntries(section) : [];
       removeStaleCantonRssFeeds = cleanupRssRequested;
@@ -2102,6 +2117,7 @@ export async function main(
     currentArchivePages,
     aggregatePagesAllowed,
   });
+  const obsoletePagesForPublish = deferredLiveBootstrapRelease ? [] : obsoletePages;
 
   const defects = [];
   if (publishing && effectiveStatus === null) {
@@ -2167,10 +2183,12 @@ export async function main(
     aggregatePagesAllowed,
     publishedPageManifest: publishedManifest.state,
     effectiveStatus,
+    deferredLiveBootstrapRelease,
     cantonRssFeeds: cantonRssFeeds.map(({ name, key, url }) => ({ name, key, url })),
     pages,
     cdnUploads,
     obsoletePages,
+    obsoletePagesForPublish,
     defects,
     published: null,
   };
@@ -2219,14 +2237,22 @@ export async function main(
     cdnUploads,
     cantonRssFeeds,
     removeStaleCantonRssFeeds,
-    obsoletePages,
+    // Keep the previous page manifest until the API flip is live: otherwise a
+    // bootstrap retry would lose the inventory needed to delete old slugs.
+    obsoletePages: obsoletePagesForPublish,
     distDir,
     section,
     releaseCommit,
     publishCantonRssFeedsImpl,
     assertMainFreshImpl,
   });
-  if (summary.published.failures === 0) {
+  if (summary.published.failures === 0 && deferredLiveBootstrapRelease) {
+    summary.published.manifestDeferred = true;
+    console.log(
+      `::notice::[${LOG}] manifest edge ${section} differito: ` +
+      'verrà riscritto dal replay dopo la release API/edge',
+    );
+  } else if (summary.published.failures === 0) {
     const manifestPages = aggregatePagesAllowed
       ? [
         ...articleManifestPages({

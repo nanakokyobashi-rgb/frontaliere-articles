@@ -168,6 +168,60 @@ test('publisher --publish costruisce il manifest solo dopo una publish riuscita'
   }
 });
 
+test('publisher: il bootstrap live differisce RSS, cancellazioni e manifest finche\' la release API non e\' servita', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-bootstrap-live-'));
+  const publishedDoc = pageManifestFromPages({ section: 'canton-ti', commit: 'published', pages: [] });
+  let publishOptions = null;
+  let manifestCalls = 0;
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  try {
+    console.log = () => {};
+    console.error = () => {};
+    const code = await main(
+      ['--section', 'canton-ti', '--bootstrap', '--out', path.join(fixtureRoot, 'dist'), '--summary', path.join(fixtureRoot, 'summary.json'), '--publish'],
+      {
+        parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
+        sourceRegistryIdsImpl: () => [],
+        fetchPageManifestImpl: async () => ({ state: 'ok', doc: publishedDoc }),
+        publishedStatusImpl: async () => 'live',
+        publishedApiReleaseCommitImpl: async () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        publishedReleaseReadyImpl: async () => ({ ok: false, reason: 'registro edge non ancora sul commit' }),
+        currentMainHeadImpl: () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
+        renderSectionArticlePipelineImpl: async () => ({
+          entries: [],
+          hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
+          downloadedImageKeys: [],
+          imageFetchFailures: [],
+          imagePostcondition: {},
+          aggregatePagesAllowed: false,
+        }),
+        articleReleaseSnapshotImpl: () => [],
+        publishImpl: async (options) => {
+          publishOptions = options;
+          return { failures: 0, uploaded: 0, deleted: 0, status: 'live' };
+        },
+        publishPageManifestImpl: () => {
+          manifestCalls++;
+          return true;
+        },
+      },
+    );
+    assert.equal(code, 0);
+    assert.deepEqual(publishOptions?.cantonRssFeeds, []);
+    assert.deepEqual(publishOptions?.obsoletePages, []);
+    assert.equal(manifestCalls, 0, 'il manifest precedente resta la memoria per la fase post-flip');
+    const summary = JSON.parse(readFileSync(path.join(fixtureRoot, 'summary.json'), 'utf8'));
+    assert.equal(summary.deferredLiveBootstrapRelease, true);
+    assert.equal(summary.published.manifestDeferred, true);
+  } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('publisher: il fallback API copre l\'ultimo input raggiungibile dal publisher', async () => {
   const publisherCommit = 'a'.repeat(40);
   const apiCommit = 'b'.repeat(40);
