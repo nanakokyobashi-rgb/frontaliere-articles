@@ -1249,7 +1249,7 @@ test('lo scanner condiviso interrompe il markup non terminato senza scansione qu
   const started = performance.now();
   assert.equal(htmlTagScanner.nextHtmlTag(malformed), null);
   const elapsed = performance.now() - started;
-  assert.equal(htmlTagScanner.readHtmlTagAt(malformed, 0), null);
+  assert.deepEqual(htmlTagScanner.readHtmlTagAt(malformed, 0), { status: 'malformed' });
   assert.ok(elapsed < 250, `scanner condiviso troppo lento su markup malformato: ${elapsed.toFixed(1)}ms`);
 });
 
