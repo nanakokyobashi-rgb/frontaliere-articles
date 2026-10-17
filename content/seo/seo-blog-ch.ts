@@ -106852,6 +106852,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-microdrama-pubblicita-tiktok-instagram': {
+    title: 'Microdrama sexy promuove app a pagamento su TikTok',
+    description: 'Gli annunci IA mostrano sesso tra bizzarro e fantasy. ReelShort, DramaBox e ShortMax propongono microdrama. Il fenomeno è nato in Cina tra 2018 e 2019',
+    keywords: 'frontalieri, ticino, svizzera, italia, microdrama, sexy, promuove, pagamento',
+    ogTitle: 'Microdrama sexy promuove app a pagamento su TikTok',
+    ogDescription: 'Gli annunci IA mostrano sesso tra bizzarro e fantasy.',
+    canonicalPath: '/articoli-svizzera/microdrama-pubblicita-tiktok-instagram/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Microdrama sexy promuove app a pagamento su TikTok",
+      "description": "Gli annunci IA mostrano sesso tra bizzarro e fantasy. ReelShort, DramaBox e ShortMax propongono microdrama. Il fenomeno è nato in Cina tra 2018 e 2019",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-microdrama-pubblicita-tiktok-instagram.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Smartphone con annuncio AI di microdrama sul lago di Lugano"
+      },
+      "datePublished": "2026-10-17T21:03:31+00:00",
+      "dateModified": "2026-10-17T21:03:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/microdrama-pubblicita-tiktok-instagram/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

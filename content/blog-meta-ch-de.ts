@@ -8459,6 +8459,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.svizzera-vietnam-relazioni-2026.title': 'Schweiz und Vietnam intensivieren Handel und Investitionen',
     'blog.article.svizzera-vietnam-relazioni-2026.excerpt': 'Parmelin am 17.',
     'blog.article.svizzera-vietnam-relazioni-2026.imageAlt': 'Blick auf den Luganer See mit den Alpen im Hintergrund, Symbol für die Schweiz-Vietnam-Zusammenarbeit im Handel und Investment.',
+    'blog.article.microdrama-pubblicita-tiktok-instagram.title': 'Sexy-Mikrodrama bewirbt auf TikTok eine kostenpflichtige App',
+    'blog.article.microdrama-pubblicita-tiktok-instagram.excerpt': 'KI-Anzeigen zeigen Sex zwischen dem Bizarren und Fantasy.',
+    'blog.article.microdrama-pubblicita-tiktok-instagram.imageAlt': 'Smartphone mit KI‑Microdrama‑Werbung vor dem Luganersee',
 };
 
 export default blogMetaChDe;

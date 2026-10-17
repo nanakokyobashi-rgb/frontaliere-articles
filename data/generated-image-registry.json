@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 666,
+  "assetCount": 667,
   "assets": [
     {
       "schema": 1,
@@ -26776,6 +26776,49 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Generic synthetic editorial illustration of voting and financial balance; no readable text, logos, people, or specific event."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-microdrama-pubblicita-tiktok-instagram",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "b1caa91a0fd1163c8417c37654ae4c04c0bb39089eb1d8bb1bfabcf9e2440485",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "3284c6f451480f8ca3f48917ef19461e9b2c3f1f1d0d284d24531a2ebc2bd65d",
+      "bytes": 76714,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-17T21:03:23.120Z",
+      "verifiedAt": "2026-10-17T21:03:31.012Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-microdrama-pubblicita-tiktok-instagram.webp",
+      "area": "Svizzera",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Original generic synthetic editorial illustration; no readable text, logos, watermarks, or recognizable faces/persons. Smartphone microdrama scene and Alpine lake setting match the topic."
       }
     }
   ]
