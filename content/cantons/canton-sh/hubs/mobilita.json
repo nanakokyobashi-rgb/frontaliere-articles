@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T19:17:26.345Z",
-  "contentHash": "85a444815a65975dce41d03a94925a90b566a13bd1fd13a62fcab6009cc51ed0",
+  "updatedAt": "2026-10-17T23:29:53.062Z",
+  "contentHash": "b84d9dcf332176d956b38b0f1b101c4ab13713067879d51cbd27a361811a8d8b",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -13,13 +13,8 @@
       "keyFacts": 1
     },
     {
-      "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-17T11:14:10.840Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T09:42:54.588Z",
+      "updatedAt": "2026-10-17T14:28:40.900Z",
       "keyFacts": 0
     }
   ],
@@ -96,20 +91,6 @@
           "updatedAt": "2026-10-16T23:59:59.000Z"
         },
         {
-          "id": "chiusure-cantieri",
-          "title": "Chiusure, cantieri e disagi",
-          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
-          "items": [
-            {
-              "label": "Revocato: A4 Schaffhausen -> Thayngen tra Svincolo autostradale Thayngen E Dogana Thayngen Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-17T10:40:00.000Z"
-            }
-          ],
-          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-17T11:14:10.840Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -145,7 +126,7 @@
               "url": "https://www.stadt-schaffhausen.ch/_rte/information/2992849"
             }
           ],
-          "updatedAt": "2026-10-17T09:42:54.588Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -193,7 +174,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     },
     "en": {
       "canton": "SH",
@@ -267,20 +248,6 @@
           "updatedAt": "2026-10-16T23:59:59.000Z"
         },
         {
-          "id": "chiusure-cantieri",
-          "title": "Closures, roadworks and disruptions",
-          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
-          "items": [
-            {
-              "label": "Revocato: A4 Schaffhausen -> Thayngen tra Svincolo autostradale Thayngen E Dogana Thayngen Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-17T10:40:00.000Z"
-            }
-          ],
-          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-17T11:14:10.840Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -316,7 +283,7 @@
               "url": "https://www.stadt-schaffhausen.ch/_rte/information/2992849"
             }
           ],
-          "updatedAt": "2026-10-17T09:42:54.588Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -364,7 +331,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     },
     "de": {
       "canton": "SH",
@@ -438,20 +405,6 @@
           "updatedAt": "2026-10-16T23:59:59.000Z"
         },
         {
-          "id": "chiusure-cantieri",
-          "title": "Sperrungen, Baustellen und Störungen",
-          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
-          "items": [
-            {
-              "label": "Aufgehoben: A4 Schaffhausen -> Thayngen zwischen Anschluss Thayngen und Zollstation Thayngen Sachlage: Stau Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-17T10:40:00.000Z"
-            }
-          ],
-          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-17T11:14:10.840Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -487,7 +440,7 @@
               "url": "https://www.stadt-schaffhausen.ch/_rte/information/2992849"
             }
           ],
-          "updatedAt": "2026-10-17T09:42:54.588Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -535,7 +488,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     },
     "fr": {
       "canton": "SH",
@@ -609,20 +562,6 @@
           "updatedAt": "2026-10-16T23:59:59.000Z"
         },
         {
-          "id": "chiusure-cantieri",
-          "title": "Fermetures, chantiers et perturbations",
-          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
-          "items": [
-            {
-              "label": "Révoqué: A4 Schaffhouse -> Thayngen entre Jonction autoroutière Thayngen et Poste de douane Thayngen Situation: bouchon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-17T10:40:00.000Z"
-            }
-          ],
-          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-17T11:14:10.840Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -658,7 +597,7 @@
               "url": "https://www.stadt-schaffhausen.ch/_rte/information/2992849"
             }
           ],
-          "updatedAt": "2026-10-17T09:42:54.588Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -706,7 +645,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     }
   }
 }

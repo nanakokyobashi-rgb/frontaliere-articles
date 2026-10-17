@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T19:17:26.345Z",
-  "contentHash": "4dfdb561638f80bb99877e9cb61c0134b03b95d9a6d8c29098139d6a70f2e73e",
+  "updatedAt": "2026-10-17T23:29:53.062Z",
+  "contentHash": "36ea2f45fc33a0b7d1834a6352033deae1bedd67a938f811892d1332dbf613b5",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-17T11:14:10.840Z",
+      "updatedAt": "2026-10-17T16:00:38.819Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T09:42:54.588Z",
+      "updatedAt": "2026-10-17T14:28:40.900Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "25",
+          "value": "24",
           "note": "segnalazioni aggiornate: 17 ottobre 2026"
         }
       ],
@@ -142,7 +142,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-17T11:14:10.840Z"
+          "updatedAt": "2026-10-17T16:00:38.819Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -180,7 +180,7 @@
               "url": "https://www.ossolanews.it/2026/10/13/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/galleria-montecrevola-prima-i-lavori-al-tornante-sulla-provinciale-166.html"
             }
           ],
-          "updatedAt": "2026-10-17T09:42:54.588Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -250,7 +250,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     },
     "en": {
       "canton": "VS",
@@ -270,7 +270,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "25",
+          "value": "24",
           "note": "reports as of 17 October 2026"
         }
       ],
@@ -370,7 +370,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-17T11:14:10.840Z"
+          "updatedAt": "2026-10-17T16:00:38.819Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -408,7 +408,7 @@
               "url": "https://www.ossolanews.it/2026/10/13/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/galleria-montecrevola-prima-i-lavori-al-tornante-sulla-provinciale-166.html"
             }
           ],
-          "updatedAt": "2026-10-17T09:42:54.588Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -478,7 +478,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     },
     "de": {
       "canton": "VS",
@@ -498,7 +498,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "25",
+          "value": "24",
           "note": "Meldungen vom 17. Oktober 2026"
         }
       ],
@@ -598,7 +598,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-17T11:14:10.840Z"
+          "updatedAt": "2026-10-17T16:00:38.819Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -636,7 +636,7 @@
               "url": "https://www.ossolanews.it/2026/10/13/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/galleria-montecrevola-prima-i-lavori-al-tornante-sulla-provinciale-166.html"
             }
           ],
-          "updatedAt": "2026-10-17T09:42:54.588Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -706,7 +706,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     },
     "fr": {
       "canton": "VS",
@@ -726,7 +726,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "25",
+          "value": "24",
           "note": "signalements au 17 octobre 2026"
         }
       ],
@@ -826,7 +826,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-17T11:14:10.840Z"
+          "updatedAt": "2026-10-17T16:00:38.819Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -864,7 +864,7 @@
               "url": "https://www.ossolanews.it/2026/10/13/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/galleria-montecrevola-prima-i-lavori-al-tornante-sulla-provinciale-166.html"
             }
           ],
-          "updatedAt": "2026-10-17T09:42:54.588Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -934,7 +934,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     }
   }
 }

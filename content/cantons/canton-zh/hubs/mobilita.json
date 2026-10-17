@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T14:03:25.701Z",
-  "contentHash": "f94263a20a34f6fff1fc2503e528ca7f5b19567ade37382952d58cf48d28a67e",
+  "updatedAt": "2026-10-17T23:29:53.062Z",
+  "contentHash": "dd8ba9a8789f01abe657cc27fd470644e360422248874871e3e52edaf04dca48",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-17T05:03:12.314Z",
+      "updatedAt": "2026-10-17T16:00:38.819Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T20:07:19.130Z",
+      "updatedAt": "2026-10-17T14:28:40.900Z",
       "keyFacts": 0
     }
   ],
@@ -160,13 +160,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-17T16:00:38.819Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "A1 / Wallisellen: Drängler im Feierabendverkehr ausgebremst",
+              "date": "2026-10-17",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/261017f_zh_nord_sili.html"
+            },
             {
               "label": "Stadtrat ist befremdet über Entscheid des Regierungsrats zur Rosengartenstrasse",
               "date": "2026-10-01T09:00:00.000Z",
@@ -178,7 +183,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -256,7 +261,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     },
     "en": {
       "canton": "ZH",
@@ -394,13 +399,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-17T16:00:38.819Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "A1 / Wallisellen: Drängler im Feierabendverkehr ausgebremst",
+              "date": "2026-10-17",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/261017f_zh_nord_sili.html"
+            },
             {
               "label": "Stadtrat ist befremdet über Entscheid des Regierungsrats zur Rosengartenstrasse",
               "date": "2026-10-01T09:00:00.000Z",
@@ -412,7 +422,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -490,7 +500,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     },
     "de": {
       "canton": "ZH",
@@ -628,13 +638,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-17T16:00:38.819Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "A1 / Wallisellen: Drängler im Feierabendverkehr ausgebremst",
+              "date": "2026-10-17",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/261017f_zh_nord_sili.html"
+            },
             {
               "label": "Stadtrat ist befremdet über Entscheid des Regierungsrats zur Rosengartenstrasse",
               "date": "2026-10-01T09:00:00.000Z",
@@ -646,7 +661,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -724,7 +739,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     },
     "fr": {
       "canton": "ZH",
@@ -862,13 +877,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-17T16:00:38.819Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "A1 / Wallisellen: Drängler im Feierabendverkehr ausgebremst",
+              "date": "2026-10-17",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/261017f_zh_nord_sili.html"
+            },
             {
               "label": "Stadtrat ist befremdet über Entscheid des Regierungsrats zur Rosengartenstrasse",
               "date": "2026-10-01T09:00:00.000Z",
@@ -880,7 +900,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -958,7 +978,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     }
   }
 }

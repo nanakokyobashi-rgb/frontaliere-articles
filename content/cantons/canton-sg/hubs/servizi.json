@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T19:17:26.345Z",
-  "contentHash": "fffdf3ac5246a8628edc038dcb9167678710d00f2bc1c19f2bab757aabbe7a18",
+  "updatedAt": "2026-10-17T23:29:53.062Z",
+  "contentHash": "82254131a45e5a7369befc96a84fe9e45aa683c331d7a6fe02d561d9acdb480b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-17T10:43:16.433Z",
+      "updatedAt": "2026-10-17T15:34:17.871Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-17T12:18:27.550Z",
+      "updatedAt": "2026-10-17T15:46:35.117Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T09:42:54.588Z",
+      "updatedAt": "2026-10-17T14:28:40.900Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "10",
-          "note": "offerta mediana 510 CHF"
+          "note": "offerta mediana 520 CHF"
         }
       ],
       "dataBlocks": [
@@ -102,7 +102,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-17T10:43:16.433Z"
+          "updatedAt": "2026-10-17T15:34:17.871Z"
         },
         {
           "id": "meteo",
@@ -111,12 +111,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "13 °C",
-              "detail": "oggi da 8 a 14 °C"
+              "value": "10 °C",
+              "detail": "oggi da 8 a 13 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-17T12:18:27.550Z"
+          "updatedAt": "2026-10-17T15:46:35.117Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -154,7 +154,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/orthoplastik-am-kantonsspital-st-gallen-wo-orthopaedie-und-traumatologie-plastische-chirurgie-und-infektiologie-zusammenwirken-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-17T09:42:54.588Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     },
     "en": {
       "canton": "SG",
@@ -251,7 +251,7 @@
         {
           "label": "Plate auctions running",
           "value": "10",
-          "note": "typical bid 510 CHF"
+          "note": "typical bid 520 CHF"
         }
       ],
       "dataBlocks": [
@@ -309,7 +309,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-17T10:43:16.433Z"
+          "updatedAt": "2026-10-17T15:34:17.871Z"
         },
         {
           "id": "meteo",
@@ -318,12 +318,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "13 °C",
-              "detail": "today from 8 to 14 °C"
+              "value": "10 °C",
+              "detail": "today from 8 to 13 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-17T12:18:27.550Z"
+          "updatedAt": "2026-10-17T15:46:35.117Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -361,7 +361,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/orthoplastik-am-kantonsspital-st-gallen-wo-orthopaedie-und-traumatologie-plastische-chirurgie-und-infektiologie-zusammenwirken-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-17T09:42:54.588Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -437,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     },
     "de": {
       "canton": "SG",
@@ -454,7 +454,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "10",
-          "note": "mittleres Gebot 510 CHF"
+          "note": "mittleres Gebot 520 CHF"
         }
       ],
       "dataBlocks": [
@@ -512,7 +512,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-17T10:43:16.433Z"
+          "updatedAt": "2026-10-17T15:34:17.871Z"
         },
         {
           "id": "meteo",
@@ -521,12 +521,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "13 °C",
-              "detail": "heute 8 bis 14 °C"
+              "value": "10 °C",
+              "detail": "heute 8 bis 13 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-17T12:18:27.550Z"
+          "updatedAt": "2026-10-17T15:46:35.117Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -564,7 +564,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/orthoplastik-am-kantonsspital-st-gallen-wo-orthopaedie-und-traumatologie-plastische-chirurgie-und-infektiologie-zusammenwirken-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-17T09:42:54.588Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -640,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     },
     "fr": {
       "canton": "SG",
@@ -657,7 +657,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "10",
-          "note": "offre centrale 510 CHF"
+          "note": "offre centrale 520 CHF"
         }
       ],
       "dataBlocks": [
@@ -715,7 +715,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-17T10:43:16.433Z"
+          "updatedAt": "2026-10-17T15:34:17.871Z"
         },
         {
           "id": "meteo",
@@ -724,12 +724,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "13 °C",
-              "detail": "aujourd’hui de 8 à 14 °C"
+              "value": "10 °C",
+              "detail": "aujourd’hui de 8 à 13 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-17T12:18:27.550Z"
+          "updatedAt": "2026-10-17T15:46:35.117Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -767,7 +767,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/orthoplastik-am-kantonsspital-st-gallen-wo-orthopaedie-und-traumatologie-plastische-chirurgie-und-infektiologie-zusammenwirken-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-17T09:42:54.588Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -839,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     }
   }
 }

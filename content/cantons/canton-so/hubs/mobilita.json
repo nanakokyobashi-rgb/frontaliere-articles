@@ -4,17 +4,17 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T19:17:26.345Z",
-  "contentHash": "5c0f33a855b984bd3efa7c772d90d557a171b98c354a65dbffaf699255078af3",
+  "updatedAt": "2026-10-17T23:29:53.062Z",
+  "contentHash": "aecf4368366f26c3082d2050c5c2335c37c01e8ac30b73832df50d0003942498",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-17T11:14:10.840Z",
+      "updatedAt": "2026-10-17T16:00:38.819Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T09:42:54.588Z",
+      "updatedAt": "2026-10-17T14:28:40.900Z",
       "keyFacts": 0
     }
   ],
@@ -85,13 +85,13 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A1 Bern -> Zürich tra Svincolo autostradale Kriegstetten E Raccordo autostradale Diramazione Härkingen Situazione: colonna Causa: traffico congestionato",
+              "label": "A1 Bern -> Zürich tra Raccordo autostradale Diramazione Luterbach E Raccordo autostradale Diramazione Härkingen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 15",
               "value": "Traffico",
-              "date": "2026-10-17T09:03:00.000Z"
+              "date": "2026-10-17T15:01:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-17T11:14:10.840Z"
+          "updatedAt": "2026-10-17T16:00:38.819Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -109,7 +109,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-17T09:42:54.588Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -149,7 +149,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     },
     "en": {
       "canton": "SO",
@@ -217,13 +217,13 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A1 Bern -> Zürich tra Svincolo autostradale Kriegstetten E Raccordo autostradale Diramazione Härkingen Situazione: colonna Causa: traffico congestionato",
+              "label": "A1 Bern -> Zürich tra Raccordo autostradale Diramazione Luterbach E Raccordo autostradale Diramazione Härkingen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 15",
               "value": "Traffic",
-              "date": "2026-10-17T09:03:00.000Z"
+              "date": "2026-10-17T15:01:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-17T11:14:10.840Z"
+          "updatedAt": "2026-10-17T16:00:38.819Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-17T09:42:54.588Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -280,7 +280,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     },
     "de": {
       "canton": "SO",
@@ -348,13 +348,13 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A1 Bern -> Zürich zwischen Anschluss Kriegstetten und Autobahndreieck Verzweigung Härkingen Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "label": "A1 Bern -> Zürich zwischen Autobahndreieck Verzweigung Luterbach und Autobahndreieck Verzweigung Härkingen Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 15",
               "value": "Verkehr",
-              "date": "2026-10-17T09:03:00.000Z"
+              "date": "2026-10-17T15:01:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-17T11:14:10.840Z"
+          "updatedAt": "2026-10-17T16:00:38.819Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -372,7 +372,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-17T09:42:54.588Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -411,7 +411,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     },
     "fr": {
       "canton": "SO",
@@ -479,13 +479,13 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A1 Berne -> Zurich entre Jonction autoroutière Kriegstetten et Echangeur Echangeur de Härkingen Situation: bouchon Raison: surcharge de trafic",
+              "label": "A1 Berne -> Zurich entre Echangeur Echangeur de Luterbach et Echangeur Echangeur de Härkingen Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 15",
               "value": "Trafic",
-              "date": "2026-10-17T09:03:00.000Z"
+              "date": "2026-10-17T15:01:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-17T11:14:10.840Z"
+          "updatedAt": "2026-10-17T16:00:38.819Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -503,7 +503,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-17T09:42:54.588Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -543,7 +543,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-17T23:29:53.062Z"
     }
   }
 }
