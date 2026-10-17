@@ -136,6 +136,9 @@ export const CONTENT_GATES = [
   // sul corpus reale: un registro o un pavimento pubblicato rotto deve aprire
   // la stessa issue degli altri lettori, non nascondersi nella meta-suite.
   'generator/tests/content-gates-main.test.mjs',
+  // I link Markdown sono HTML crawlable dopo il render: il gate deve vedere
+  // anche un articolo scritto da un produttore direttamente su main.
+  'generator/tests/blog-body-link-contract.test.mjs',
   // Il caso canonical override apre una superficie reale sotto content/ oltre
   // al corpus sintetico: una nuova coppia shadowed/winner deve restare valida.
   'generator/tests/canton-hubs.test.mjs',

@@ -70,6 +70,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readArticleRegistry } from '../../scripts/lib/registry-image-reader.mjs';
 import { readCanonicalPath } from '../../scripts/lib/seo-canonical-path.mjs';
+import { VALID_NAV_ACTIONS, sanitizeArticleMarkdownLinks } from '../../scripts/lib/article-link-contract.mjs';
 import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, getProviderRosterStatus, providerRosterReady, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
 import { classifyWithDecisionsApi } from './lib/decisions-api.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
@@ -14140,14 +14141,6 @@ function validate(data, opts = {}) {
   }
 
   // ── Validate internal links in body content ──
-  const VALID_NAV_ACTIONS = new Set([
-    'calculator', 'exchange', 'health', 'cost-of-living', 'pension', 'pillar3',
-    'payslip', 'tax-return', 'residency', 'ristorni', 'unemployment', 'jobs', 'companies', 'banks',
-    'first-day', 'permits', 'border', 'calendar', 'whatif', 'shopping', 'transport',
-    'salary-compare', 'traffic-history', 'job-board', 'jobs-observatory', 'search-jobs',
-    'border-map', 'municipalities', 'car-transfer', 'car-cost', 'permit-compare', 'renovation',
-    'mobile', 'ral', 'parental-leave', 'nursery', 'living-ch', 'living-it', 'livability',
-  ]);
   for (const locale of ['it', 'en', 'de', 'fr']) {
     if (!data.content[locale]) continue; // translations may not exist yet
     const bodyFields = expectedBodyFields;
@@ -14171,6 +14164,11 @@ function validate(data, opts = {}) {
       let text = data.content[locale][field];
       // Remove raw <a href="..."> tags the AI might have inserted — they cause redirect issues
       text = text.replace(/<a\s+href="[^"]*"[^>]*>(.*?)<\/a>/gi, '$1');
+      const linkContractText = sanitizeArticleMarkdownLinks(text, locale);
+      if (linkContractText !== text) {
+        console.error(`  🔗  Link Markdown non canonici normalizzati in ${locale}.${field}`);
+        text = linkContractText;
+      }
 
       // IT-only editorial sanitizers (2026-05-12):
       // 1) Strip sentences that promote competitor newsletters/services
@@ -18721,16 +18719,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         text = text.replace(/\n*📅[^\n]*evergreen:\/\/[^\n]*/g, '');
         // Remove raw <a> tags
         text = text.replace(/<a\s+href="[^"]*"[^>]*>(.*?)<\/a>/gi, '$1');
+        text = sanitizeArticleMarkdownLinks(text, locale);
         // Validate nav: links
         text = text.replace(/\[([^\]]+)\]\(nav:([a-z-]+)\)/g, (_m, linkText, action) => {
-          const VALID_NAV_ACTIONS = new Set([
-            'calculator', 'exchange', 'health', 'cost-of-living', 'pension', 'pillar3',
-            'payslip', 'tax-return', 'residency', 'ristorni', 'unemployment', 'jobs', 'companies', 'banks',
-            'first-day', 'permits', 'border', 'calendar', 'whatif', 'shopping', 'transport',
-            'salary-compare', 'traffic-history', 'job-board', 'jobs-observatory', 'search-jobs',
-            'border-map', 'municipalities', 'car-transfer', 'car-cost', 'permit-compare', 'renovation',
-            'mobile', 'ral', 'parental-leave', 'nursery', 'living-ch', 'living-it', 'livability',
-          ]);
           if (VALID_NAV_ACTIONS.has(action)) return _m;
           console.error(`  ⚠️  Link invalido [${linkText}](nav:${action}) in ${locale}.${field} — rimosso`);
           return linkText;

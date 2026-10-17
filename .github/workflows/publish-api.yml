@@ -341,6 +341,9 @@ jobs:
           PREFLIGHT_PUSH_BASE_REVISION: ${{ github.event.before }}
         run: node scripts/ci/check-blog-body-syntax.mjs
 
+      - name: Preflight — i link Markdown devono avere una destinazione canonica
+        run: node scripts/ci/check-blog-body-links.mjs
+
       - name: Preflight — ogni locale deve avere tutti i body dell’italiano
         run: node scripts/ci/check-blog-locale-completeness.mjs
 
