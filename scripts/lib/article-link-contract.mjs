@@ -54,7 +54,175 @@ const LOCALE_CANONICAL_TARGETS = {
   ]),
 };
 
-const MARKDOWN_LINK_RE = /\[([^\]]+)\]\(\s*([^\)\n]+?)\s*\)/g;
+function closingBracket(source, start) {
+  let depth = 0;
+  for (let index = start + 1; index < source.length; index += 1) {
+    const char = source[index];
+    if (char === '\\') {
+      index += 1;
+      continue;
+    }
+    if (char === '[') depth += 1;
+    else if (char === ']') {
+      if (depth === 0) return index;
+      depth -= 1;
+    } else if (char === '\n') {
+      return -1;
+    }
+  }
+  return -1;
+}
+
+function parseLinkTitle(source, start) {
+  const opener = source[start];
+  const closer = opener === '(' ? ')' : opener;
+  let depth = opener === '(' ? 1 : 0;
+  for (let index = start + 1; index < source.length; index += 1) {
+    const char = source[index];
+    if (char === '\\') {
+      index += 1;
+      continue;
+    }
+    if (opener === '(' && char === '(') depth += 1;
+    else if (char === closer) {
+      if (opener !== '(' || --depth === 0) return index + 1;
+    } else if (char === '\n' && opener !== '(') {
+      return -1;
+    }
+  }
+  return -1;
+}
+
+function parseInlineLink(source, start) {
+  const labelEnd = closingBracket(source, start);
+  if (labelEnd < 0 || source[labelEnd + 1] !== '(') return null;
+
+  let cursor = labelEnd + 2;
+  while (/\s/.test(source[cursor] || '') && cursor < source.length) cursor += 1;
+  const angle = source[cursor] === '<';
+  if (angle) cursor += 1;
+  const targetStart = cursor;
+  let depth = 0;
+  while (cursor < source.length) {
+    const char = source[cursor];
+    if (char === '\\') {
+      cursor += cursor + 1 < source.length ? 2 : 1;
+      continue;
+    }
+    if (angle) {
+      if (char === '>') break;
+      if (char === '\n') return null;
+      cursor += 1;
+      continue;
+    }
+    if (char === '(') depth += 1;
+    else if (char === ')') {
+      if (depth === 0) break;
+      depth -= 1;
+    } else if (/\s/.test(char) && depth === 0) {
+      break;
+    }
+    cursor += 1;
+  }
+  const targetEnd = cursor;
+  if (targetEnd === targetStart || (angle && source[cursor] !== '>')) return null;
+  const target = source.slice(targetStart, targetEnd);
+  if (angle) cursor += 1;
+
+  const whitespaceStart = cursor;
+  while (/\s/.test(source[cursor] || '') && cursor < source.length) cursor += 1;
+  if (cursor > whitespaceStart && ['"', "'", '('].includes(source[cursor])) {
+    cursor = parseLinkTitle(source, cursor);
+    if (cursor < 0) return null;
+    while (/\s/.test(source[cursor] || '') && cursor < source.length) cursor += 1;
+  }
+  if (source[cursor] !== ')') return null;
+
+  return {
+    start,
+    end: cursor + 1,
+    label: source.slice(start + 1, labelEnd),
+    target,
+    targetStart,
+    targetEnd,
+  };
+}
+
+function fenceEnd(source, start) {
+  const lineStart = source.lastIndexOf('\n', start - 1) + 1;
+  if (!/^[ \t]{0,3}$/.test(source.slice(lineStart, start))) return -1;
+  const lineEnd = source.indexOf('\n', start);
+  const opening = source.slice(lineStart, lineEnd < 0 ? source.length : lineEnd);
+  const match = /^[ \t]{0,3}(`{3,}|~{3,})/.exec(opening);
+  if (!match) return -1;
+  const marker = match[1][0];
+  const minimum = match[1].length;
+  let cursor = lineEnd < 0 ? source.length : lineEnd + 1;
+  while (cursor < source.length) {
+    const end = source.indexOf('\n', cursor);
+    const line = source.slice(cursor, end < 0 ? source.length : end);
+    const candidate = line.replace(/^[ \t]{0,3}/, '');
+    let run = 0;
+    while (candidate[run] === marker) run += 1;
+    if (run >= minimum && candidate.slice(run).trim() === '') {
+      return end < 0 ? source.length : end + 1;
+    }
+    if (end < 0) break;
+    cursor = end + 1;
+  }
+  return source.length;
+}
+
+function codeSpanEnd(source, start) {
+  let run = 1;
+  while (source[start + run] === '`') run += 1;
+  let cursor = start + run;
+  while (cursor < source.length) {
+    const next = source.indexOf('`', cursor);
+    if (next < 0) return -1;
+    let closingRun = 1;
+    while (source[next + closingRun] === '`') closingRun += 1;
+    if (closingRun === run) return next + closingRun;
+    cursor = next + closingRun;
+  }
+  return -1;
+}
+
+function markdownLinks(source, { skipCode = false } = {}) {
+  const links = [];
+  for (let index = 0; index < source.length;) {
+    if (source[index] === '\\') {
+      index += index + 1 < source.length ? 2 : 1;
+      continue;
+    }
+    if (skipCode && (source[index] === '`' || source[index] === '~')) {
+      const fencedEnd = fenceEnd(source, index);
+      if (fencedEnd > index) {
+        index = fencedEnd;
+        continue;
+      }
+      if (source[index] === '`') {
+        const inlineEnd = codeSpanEnd(source, index);
+        if (inlineEnd > index) {
+          index = inlineEnd;
+          continue;
+        }
+      }
+    }
+    if (source[index] !== '[' || (index > 0 && source[index - 1] === '!')) {
+      index += 1;
+      continue;
+    }
+    const link = parseInlineLink(source, index);
+    if (!link) {
+      index += 1;
+      continue;
+    }
+    links.push(link);
+    index = link.end;
+  }
+  return links;
+}
 
 /**
  * Return the only safe, deterministic repair for a raw Markdown target.
@@ -70,11 +238,8 @@ export function canonicalArticleLinkTarget(rawTarget, locale = 'it') {
   const localeTarget = LOCALE_CANONICAL_TARGETS[locale]?.get(target);
   if (localeTarget) return localeTarget;
 
-  // The generator's existing action validator is the authority for whether
-  // the action is usable. This contract only rejects malformed schemes and
-  // bare routes; preserving the shape here lets that validator report unknown
-  // `nav:` actions with its existing diagnostic.
-  if (/^nav:[a-z0-9-]+$/.test(target)) return target;
+  const navAction = /^nav:([a-z0-9-]+)$/.exec(target);
+  if (navAction) return VALID_NAV_ACTIONS.has(navAction[1]) ? target : null;
 
   // Contact links are intentional non-HTTP links. They never become a route
   // under the current article URL and are supported by the article renderer.
@@ -92,13 +257,19 @@ export function canonicalArticleLinkTarget(rawTarget, locale = 'it') {
  * Unknown or malformed targets deliberately become plain visible text.
  */
 export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
-  return String(text ?? '').replace(MARKDOWN_LINK_RE, (whole, label, rawTarget, offset, source) => {
-    // Images are not article navigation links. Leave their relative asset
-    // target to the existing image pipeline.
-    if (offset > 0 && source[offset - 1] === '!') return whole;
-    const canonical = canonicalArticleLinkTarget(rawTarget, locale);
-    return canonical ? `[${label}](${canonical})` : label;
-  });
+  const source = String(text ?? '');
+  let output = '';
+  let copiedThrough = 0;
+  for (const link of markdownLinks(source, { skipCode: true })) {
+    const canonical = canonicalArticleLinkTarget(link.target, locale);
+    if (canonical === link.target) continue;
+    output += source.slice(copiedThrough, canonical === null ? link.start : link.targetStart);
+    output += canonical === null
+      ? link.label
+      : `${canonical}${source.slice(link.targetEnd, link.end)}`;
+    copiedThrough = link.end;
+  }
+  return copiedThrough === 0 ? source : output + source.slice(copiedThrough);
 }
 
 /**
@@ -109,17 +280,14 @@ export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
 export function findNonCanonicalArticleLinks(source, locale = 'it') {
   const offenders = [];
   const input = String(source ?? '');
-  for (const match of input.matchAll(MARKDOWN_LINK_RE)) {
-    const offset = match.index ?? 0;
-    if (offset > 0 && input[offset - 1] === '!') continue;
-    const rawTarget = match[2].trim();
-    const canonical = canonicalArticleLinkTarget(rawTarget, locale);
-    if (canonical === rawTarget) continue;
+  for (const link of markdownLinks(input, { skipCode: true })) {
+    const canonical = canonicalArticleLinkTarget(link.target, locale);
+    if (canonical === link.target) continue;
     offenders.push({
-      label: match[1],
-      target: rawTarget,
+      label: link.label,
+      target: link.target,
       replacement: canonical,
-      index: offset,
+      index: link.start,
     });
   }
   return offenders;

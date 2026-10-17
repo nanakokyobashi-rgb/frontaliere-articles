@@ -12,9 +12,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { findNonCanonicalArticleLinks } from '../lib/article-link-contract.mjs';
+import { activeSourceSections, configureCorpusActiveSections } from '../lib/corpus-sections.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-export const BLOG_BODY_ROOT = 'content/blog-body';
+configureCorpusActiveSections();
+export const BLOG_BODY_ROOTS = Object.freeze(activeSourceSections().map(({ bodyDir }) => bodyDir));
 const LOCALES = new Set(['it', 'en', 'de', 'fr']);
 
 function collectTypeScriptFiles(dir) {
@@ -34,8 +36,8 @@ function collectTypeScriptFiles(dir) {
   return files.sort();
 }
 
-function localeForFile(root, file) {
-  const relative = path.relative(path.join(root, BLOG_BODY_ROOT), file);
+function localeForFile(bodyRoot, file) {
+  const relative = path.relative(bodyRoot, file);
   const [locale] = relative.split(path.sep);
   return LOCALES.has(locale) ? locale : null;
 }
@@ -45,11 +47,13 @@ function lineOf(source, index) {
 }
 
 export function scanBlogBodyLinks(root = ROOT) {
-  const bodyRoot = path.join(root, BLOG_BODY_ROOT);
-  const files = collectTypeScriptFiles(bodyRoot);
+  const bodyRoots = BLOG_BODY_ROOTS.map((directory) => path.join(root, directory));
+  const entries = bodyRoots.flatMap((bodyRoot) =>
+    collectTypeScriptFiles(bodyRoot).map((file) => ({ bodyRoot, file })));
+  const files = entries.map(({ file }) => file);
   const offenders = [];
-  for (const file of files) {
-    const locale = localeForFile(root, file);
+  for (const { bodyRoot, file } of entries) {
+    const locale = localeForFile(bodyRoot, file);
     if (!locale) continue;
     const source = fs.readFileSync(file, 'utf8');
     for (const offender of findNonCanonicalArticleLinks(source, locale)) {
@@ -73,7 +77,7 @@ export function formatOffender(offender) {
 export function run({ root = ROOT, log = console.log, error = console.error } = {}) {
   const { files, offenders } = scanBlogBodyLinks(root);
   if (files.length === 0) {
-    error(`nessun body TypeScript trovato sotto ${BLOG_BODY_ROOT}: gate non eseguito`);
+    error(`nessun body TypeScript trovato sotto ${BLOG_BODY_ROOTS.join(', ')}: gate non eseguito`);
     return 1;
   }
   if (offenders.length > 0) {
