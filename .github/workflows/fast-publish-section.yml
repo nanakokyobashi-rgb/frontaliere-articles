@@ -753,19 +753,50 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: main
+          # Il replay deve usare esattamente la revisione dalla quale il
+          # bootstrap ha renderizzato e caricato le pagine. `main` puo' essere
+          # avanzata durante il render; il guard sotto in quel caso lascia il
+          # lavoro al run generato dal nuovo push.
+          ref: ${{ github.sha }}
           fetch-depth: 1
           persist-credentials: false
 
+      - name: Verify bootstrap revision is still main
+        id: replay_freshness
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          BOOTSTRAP_COMMIT: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if ! [[ "$BOOTSTRAP_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::github.sha non e' una SHA completa per il replay bootstrap"
+            exit 1
+          fi
+          if ! current_main="$(gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
+            echo "::error::impossibile verificare main prima del replay API"
+            exit 1
+          fi
+          if [ "$current_main" != "$BOOTSTRAP_COMMIT" ]; then
+            echo "::notice::main e' avanzata da $BOOTSTRAP_COMMIT a $current_main durante il bootstrap; nessun replay stantio, il run del nuovo push riconciliera' la superficie"
+            echo 'fresh=false' >> "$GITHUB_OUTPUT"
+          else
+            echo "main ancora sulla revisione bootstrap $BOOTSTRAP_COMMIT"
+            echo 'fresh=true' >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/setup-node@v7
+        if: steps.replay_freshness.outputs.fresh == 'true'
         with:
           node-version: '22'
           cache: npm
 
       - name: Install dependencies for Remote Config
+        if: steps.replay_freshness.outputs.fresh == 'true'
         run: bash scripts/lib/npm-ci-retry.sh
 
       - name: Prepare Firebase credentials
+        if: steps.replay_freshness.outputs.fresh == 'true'
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -778,11 +809,14 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
 
       - name: Load dispatch token from Remote Config
+        if: steps.replay_freshness.outputs.fresh == 'true'
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Replay publish-api after bootstrap lock release
+        if: steps.replay_freshness.outputs.fresh == 'true'
         env:
           REPOSITORY: ${{ github.repository }}
+          BOOTSTRAP_COMMIT: ${{ github.sha }}
         run: |
           set -euo pipefail
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
@@ -791,7 +825,7 @@ jobs:
             exit 1
           fi
           export GH_TOKEN="$runtime_pat"
-          gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main
+          gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main -f source_commit="$BOOTSTRAP_COMMIT"
 
       - name: Cleanup Firebase credentials
         if: always()
