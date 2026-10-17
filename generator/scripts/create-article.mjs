@@ -8313,7 +8313,12 @@ function findActiveSourceHead(html) {
           !sawHead && !sawBody && (stack.length === 0 || (
             stack.length === 1 && parent?.name === 'html' && parent.namespace === 'html'
           ));
-        if (!directDocumentHead || isVoid) failClosed();
+        const nestedHeadInsideTrustedBody = !directDocumentHead
+          && bodyState?.trusted
+          && stack.some((ancestor) => ancestor === bodyState.entry);
+        if ((!directDocumentHead && !nestedHeadInsideTrustedBody) || (directDocumentHead && isVoid)) {
+          failClosed();
+        }
         implicitHead = false;
         implicitHeadContainer = null;
         if (headState) headState.trusted = false;
