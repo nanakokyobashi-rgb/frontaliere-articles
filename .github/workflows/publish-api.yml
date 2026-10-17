@@ -57,6 +57,8 @@ on:
       # exists for the newly active sections.
       - 'generator/data/canton-sections.json'
       - 'generator/scripts/lib/corpus-paths.mjs'
+      - 'data/canton-url-slugs.json'
+      - 'scripts/generate-canton-article-sections.mjs'
       # Il registro DICHIARATO delle sezioni cantonali (verita' del rollout, D9)
       # e cio' che lo trasforma nei documenti pubblicati (sections.json, la
       # copia per il Worker, sitemap-cantons.xml) e li porta su R2: un flip di
@@ -326,6 +328,9 @@ jobs:
             gate_input_paths=(
               .github/workflows/publish-api.yml
               engine/shared/articleSectionCore.mjs
+              engine/shared/cantonArticleSectionCore.generated.mjs
+              data/canton-url-slugs.json
+              scripts/generate-canton-article-sections.mjs
               generator/data/canton-sections.json
               generator/scripts/lib/corpus-paths.mjs
               host/cantonSectionsBootstrap.mjs

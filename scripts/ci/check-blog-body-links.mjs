@@ -256,7 +256,10 @@ export function formatOffender(offender) {
   const replacement = offender.replacement
     ? ` → ${offender.replacement}`
     : ' → plain text';
-  return `${offender.file}:${offender.line}: [${offender.label}](${offender.target})${replacement}`;
+  const link = offender.htmlAnchor
+    ? `<a href="${offender.target}">`
+    : `[${offender.label}](${offender.target})`;
+  return `${offender.file}:${offender.line}: ${link}${replacement}`;
 }
 
 export function run({ root = ROOT, log = console.log, error = console.error } = {}) {

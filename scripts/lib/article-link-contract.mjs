@@ -128,6 +128,7 @@ function parseInlineLink(source, start) {
   if (targetEnd === targetStart || (angle && source[cursor] !== '>')) return null;
   const target = source.slice(targetStart, targetEnd);
   if (angle) cursor += 1;
+  const targetSuffixStart = cursor;
 
   const whitespaceStart = cursor;
   while (/\s/.test(source[cursor] || '') && cursor < source.length) cursor += 1;
@@ -143,9 +144,92 @@ function parseInlineLink(source, start) {
     end: cursor + 1,
     label: source.slice(start + 1, labelEnd),
     target,
+    angle,
+    targetSyntaxStart: targetStart - (angle ? 1 : 0),
     targetStart,
     targetEnd,
+    targetSuffixStart,
   };
+}
+
+function parseHtmlAnchor(source, start) {
+  if (
+    source[start] !== '<' ||
+    source[start + 1]?.toLowerCase() !== 'a' ||
+    !/[\s/>]/u.test(source[start + 2] || '')
+  ) return null;
+
+  const hrefAttributes = [];
+  let cursor = start + 2;
+  while (cursor < source.length) {
+    const attributeRemovalStart = cursor;
+    while (/\s/u.test(source[cursor] || '')) cursor += 1;
+    if (source[cursor] === '>') {
+      const firstHref = hrefAttributes[0];
+      return {
+        start,
+        end: cursor + 1,
+        htmlAnchor: true,
+        hasHref: Boolean(firstHref),
+        label: '<a href>',
+        ...(firstHref ? {
+          target: firstHref.target,
+          targetStart: firstHref.targetStart,
+          targetEnd: firstHref.targetEnd,
+          hrefAttributes,
+        } : {}),
+      };
+    }
+    if (source[cursor] === '/') {
+      cursor += 1;
+      continue;
+    }
+
+    const attributeStart = cursor;
+    while (cursor < source.length && !/[\s=/>]/u.test(source[cursor])) cursor += 1;
+    if (cursor === attributeStart) {
+      cursor += 1;
+      continue;
+    }
+
+    const attributeName = source.slice(attributeStart, cursor).toLowerCase();
+    const nameEnd = cursor;
+    while (/\s/u.test(source[cursor] || '')) cursor += 1;
+    let targetStart = nameEnd;
+    let targetEnd = nameEnd;
+    let attributeEnd = nameEnd;
+    if (source[cursor] === '=') {
+      cursor += 1;
+      while (/\s/u.test(source[cursor] || '')) cursor += 1;
+      const quote = source[cursor] === '"' || source[cursor] === "'" ? source[cursor] : '';
+      if (quote) {
+        targetStart = cursor + 1;
+        const quoteEnd = source.indexOf(quote, targetStart);
+        if (quoteEnd < 0) return null;
+        targetEnd = quoteEnd;
+        cursor = quoteEnd + 1;
+      } else {
+        targetStart = cursor;
+        while (cursor < source.length && !/[\s>]/u.test(source[cursor])) cursor += 1;
+        targetEnd = cursor;
+      }
+      attributeEnd = cursor;
+    } else {
+      cursor = nameEnd;
+    }
+
+    if (attributeName === 'href') {
+      hrefAttributes.push({
+        target: source.slice(targetStart, targetEnd),
+        targetStart,
+        targetEnd,
+        attributeStart,
+        attributeRemovalStart,
+        attributeEnd,
+      });
+    }
+  }
+  return null;
 }
 
 function fenceEnd(source, start) {
@@ -237,13 +321,16 @@ function referenceDefinitionAt(source, start) {
     end: lineEnd < 0 ? source.length : lineEnd + 1,
     label: line.slice(indent + 1, labelEnd),
     target: line.slice(targetStart, targetEnd),
+    targetSyntaxStart: start + targetStart - (angled ? 1 : 0),
     targetStart: start + targetStart,
     targetEnd: start + targetEnd,
+    angle: angled,
+    targetSuffixStart: start + targetEnd + (angled ? 1 : 0),
     referenceDefinition: true,
   };
 }
 
-function markdownLinks(source, { skipCode = false } = {}) {
+function articleLinks(source, { skipCode = false } = {}) {
   const links = [];
   for (let index = 0; index < source.length;) {
     if (skipCode && (index === 0 || source[index - 1] === '\n')) {
@@ -275,6 +362,19 @@ function markdownLinks(source, { skipCode = false } = {}) {
           index = inlineEnd;
           continue;
         }
+      }
+    }
+    if (source.startsWith('<!--', index)) {
+      const commentEnd = source.indexOf('-->', index + 4);
+      index = commentEnd < 0 ? source.length : commentEnd + 3;
+      continue;
+    }
+    if (source[index] === '<') {
+      const anchor = parseHtmlAnchor(source, index);
+      if (anchor) {
+        if (anchor.hasHref) links.push(anchor);
+        index = anchor.end;
+        continue;
       }
     }
     if (source[index] !== '[' || (index > 0 && source[index - 1] === '!')) {
@@ -336,20 +436,37 @@ export function canonicalArticleLinkTarget(rawTarget, locale = 'it') {
 }
 
 /**
- * Normalize generated article Markdown before it is persisted.
- * Unknown or malformed targets deliberately become plain visible text.
+ * Normalize generated article Markdown and inline anchors before persistence.
+ * Unknown or malformed targets deliberately lose their clickable href.
  */
 export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
   const source = String(text ?? '');
   let output = '';
   let copiedThrough = 0;
-  for (const link of markdownLinks(source, { skipCode: true })) {
+  for (const link of articleLinks(source, { skipCode: true })) {
     const canonical = canonicalArticleLinkTarget(link.target, locale);
-    if (canonical === link.target) continue;
-    output += source.slice(copiedThrough, canonical === null ? link.start : link.targetStart);
-    output += canonical === null
-      ? (link.referenceDefinition ? '' : link.label)
-      : canonical + source.slice(link.targetEnd, link.end);
+    const duplicateAnchorHref = link.htmlAnchor && link.hrefAttributes.length > 1;
+    if (canonical === link.target && !link.angle && !duplicateAnchorHref) continue;
+
+    if (link.htmlAnchor) {
+      output += source.slice(copiedThrough, link.start);
+      let tagCursor = link.start;
+      let insertedCanonicalHref = false;
+      for (const attribute of link.hrefAttributes) {
+        output += source.slice(tagCursor, attribute.attributeRemovalStart);
+        if (canonical !== null && !insertedCanonicalHref) {
+          output += ` href="${canonical}"`;
+          insertedCanonicalHref = true;
+        }
+        tagCursor = attribute.attributeEnd;
+      }
+      output += source.slice(tagCursor, link.end);
+    } else {
+      output += source.slice(copiedThrough, canonical === null ? link.start : link.targetSyntaxStart);
+      output += canonical === null
+        ? (link.referenceDefinition ? '' : link.label)
+        : canonical + source.slice(link.targetSuffixStart, link.end);
+    }
     copiedThrough = link.end;
   }
   return copiedThrough === 0 ? source : output + source.slice(copiedThrough);
@@ -363,14 +480,16 @@ export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
 export function findNonCanonicalArticleLinks(source, locale = 'it') {
   const offenders = [];
   const input = String(source ?? '');
-  for (const link of markdownLinks(input, { skipCode: true })) {
+  for (const link of articleLinks(input, { skipCode: true })) {
     const canonical = canonicalArticleLinkTarget(link.target, locale);
-    if (canonical === link.target) continue;
+    const duplicateAnchorHref = link.htmlAnchor && link.hrefAttributes.length > 1;
+    if (canonical === link.target && !link.angle && !duplicateAnchorHref) continue;
     offenders.push({
       label: link.label,
       target: link.target,
       replacement: canonical,
       index: link.start,
+      htmlAnchor: Boolean(link.htmlAnchor),
     });
   }
   return offenders;
