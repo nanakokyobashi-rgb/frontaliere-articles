@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-arcisate-bomba-seconda-guerra-mondiale.webp",
+      "sha256": "6298de456039846f12c99df7a56fb5bb90fe43be10423669c9bcf57dec4e45e8"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-arcisate-bomba-seconda-guerra-mondiale-480w.webp",
+      "sha256": "8c06c0c0e1400fe514de9bd38aef8bf7bc34313d8348ae329ff84e351dc12f52"
+    }
+  ]
 }
