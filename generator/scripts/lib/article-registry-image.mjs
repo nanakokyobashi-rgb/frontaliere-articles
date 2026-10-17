@@ -13,15 +13,26 @@ function writeTextAtomic(root, relativePath, text, before) {
   writeFileSnapshotAtomically(target, before, text);
 }
 
+function persistText(root, relativePath, text, before, writeFile) {
+  if (typeof writeFile === 'function') {
+    writeFile(absolute(root, relativePath), text, before);
+    return;
+  }
+  writeTextAtomic(root, relativePath, text, before);
+}
+
 function absolute(root, relativePath) {
   return path.join(root, relativePath);
 }
 
 function registryDescriptors(registryFiles) {
   if (Array.isArray(registryFiles)) {
-    return registryFiles.map((entry) => typeof entry === 'string'
-      ? { path: entry, section: null }
-      : { path: entry.path, section: entry.section || null });
+    return registryFiles.map((entry) => {
+      const descriptor = typeof entry === 'string'
+        ? { path: entry, section: null }
+        : { path: entry.path, section: entry.section || null };
+      return { ...descriptor, path: corpusPath(descriptor.path) };
+    });
   }
 
   const seen = new Set();
@@ -291,7 +302,9 @@ function locateArticleInText(text, articleId, relativePath, section) {
 }
 
 /** Locate exactly one registry entry for an article across all corpus sections. */
-export function locateArticleRegistry(root, articleId, { registryFiles } = {}) {
+export function locateArticleRegistry(root, articleId, options = {}) {
+  const { registryFiles } = options;
+  const readFile = options.readFile || fs.readFileSync;
   const matches = [];
   for (const descriptor of registryDescriptors(registryFiles)) {
     const relativePath = descriptor.path;
@@ -299,7 +312,7 @@ export function locateArticleRegistry(root, articleId, { registryFiles } = {}) {
     const absolutePath = absolute(root, relativePath);
     if (!fs.existsSync(absolutePath)) continue;
     const located = locateArticleInText(
-      fs.readFileSync(absolutePath, 'utf8'),
+      readFile(absolutePath, 'utf8'),
       articleId,
       relativePath,
       descriptor.section,
@@ -337,17 +350,19 @@ export function updateArticleImageInRegistry(root, articleId, imageUrl, options 
   const nextText = located.text.slice(0, located.imageLiteralStart)
     + `${quote}${imageUrl}${quote}`
     + located.text.slice(located.imageLiteralEnd);
-  writeTextAtomic(root, located.path, nextText, located.text);
+  persistText(root, located.path, nextText, located.text, options.writeFile);
   return { ...located, lines: nextText.split('\n'), changed: true, nextText };
 }
 
 /** Locate the canonical image URL inside an article's SEO/JSON-LD entry. */
-export function locateArticleSeoImage(root, articleId, { section = 'frontaliere' } = {}) {
+export function locateArticleSeoImage(root, articleId, options = {}) {
+  const section = options.section || 'frontaliere';
+  const readFile = options.readFile || fs.readFileSync;
   const matches = [];
   for (const relativePath of seoSourcePaths(root, section)) {
     const absolutePath = absolute(root, relativePath);
     if (!fs.existsSync(absolutePath)) continue;
-    const source = fs.readFileSync(absolutePath, 'utf8');
+    const source = readFile(absolutePath, 'utf8');
     const marker = seoEntryRegex(articleId).exec(source);
     if (!marker) continue;
     const start = marker.index;
@@ -395,7 +410,7 @@ export function updateArticleImageInSeo(root, articleId, imageUrl, options = {})
   const nextSource = located.source.slice(0, lineStart)
     + replacement
     + located.source.slice(lineStart + located.line.length);
-  writeTextAtomic(root, located.path, nextSource, located.source);
+  persistText(root, located.path, nextSource, located.source, options.writeFile);
   return {
     ...located,
     changed: true,
@@ -425,7 +440,7 @@ export function updateArticleSeoImageBlock(root, articleId, imageBlock, options 
   const nextSource = located.source.slice(0, blockStart)
     + replacement
     + located.source.slice(blockEnd);
-  writeTextAtomic(root, located.path, nextSource, located.source);
+  persistText(root, located.path, nextSource, located.source, options.writeFile);
   return {
     ...located,
     changed: true,

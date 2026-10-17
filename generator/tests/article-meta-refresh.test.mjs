@@ -108,6 +108,24 @@ test('upsertLocaleMetaFields: e\' idempotente — un secondo giro non cambia nul
   assert.equal(twice, once, 'un rerun con gli stessi testi deve restituire la stringa invariata');
 });
 
+test('upsertLocaleMetaFields: imageAlt si aggiorna solo quando il producer lo abilita', () => {
+  const imageAlt = 'Paesaggio illustrativo del Canton Ticino';
+  const fields = { imageAlt };
+  assert.equal(
+    upsertLocaleMetaFields(META_FIXTURE, 'demo-id', fields),
+    META_FIXTURE,
+    'i refresh descrittivi esistenti non devono cambiare imageAlt implicitamente',
+  );
+
+  const updated = upsertLocaleMetaFields(META_FIXTURE, 'demo-id', fields, { refreshImageAlt: true });
+  assert.match(updated, /'blog\.article\.demo-id\.imageAlt': 'Paesaggio illustrativo del Canton Ticino'/);
+  assert.equal(
+    upsertLocaleMetaFields(updated, 'demo-id', fields, { refreshImageAlt: true }),
+    updated,
+    'il refresh esplicito deve essere idempotente',
+  );
+});
+
 test('upsertLocaleMetaFields: un valore gia\' corretto non tocca il file (nessuna riscrittura spuria)', () => {
   const out = upsertLocaleMetaFields(META_FIXTURE, 'before-article', { excerpt: 'Estratto prima' });
   assert.equal(out, META_FIXTURE, "il valore e' gia' quello giusto: la stringa deve restare la STESSA reference");

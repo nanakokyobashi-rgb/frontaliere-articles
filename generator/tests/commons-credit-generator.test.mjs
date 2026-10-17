@@ -21,6 +21,7 @@ import {
   buildPublishedBlogImageRegistry,
   hasValidBlogImageRecord,
   imageRecordForPath,
+  STATIC_FALLBACK_IMAGE,
   sha256File,
   validateEditorialImageRecord,
 } from '../scripts/lib/blog-image-registry.mjs';
@@ -219,11 +220,13 @@ test('generated and editorial records are reader-facing and discoverable by cove
     assert.equal(imageRecordForPath(root, editorial.cover, { strict: true }).kind, 'editorial-upload');
     assert.equal(hasValidBlogImageRecord(root, editorial.cover), true);
 
-    const staticProvenance = imageRecordForPath(root, '/images/places/lugano-view.webp', { strict: true });
+    const staticProvenance = imageRecordForPath(root, STATIC_FALLBACK_IMAGE, { strict: true });
     assert.equal(staticProvenance.kind, 'generated');
     assert.equal(staticProvenance.record.scope, 'place');
+    assert.equal(staticProvenance.record.imageUrl, STATIC_FALLBACK_IMAGE);
 
     const registry = buildPublishedBlogImageRegistry(root);
+    assert.ok(Object.hasOwn(registry.generated, STATIC_FALLBACK_IMAGE));
     const aggregate = buildBlogImageCreditsAggregate({
       commit: 'test-commit',
       sectionPayloads: { frontaliere: { covers: {}, files: {} } },
@@ -231,7 +234,8 @@ test('generated and editorial records are reader-facing and discoverable by cove
     });
     assert.equal(aggregate.generated[generated.imageUrl].assetId, generated.assetId);
     assert.equal(aggregate.generated[generated.imageUrl].kind, 'generated');
-    assert.equal(aggregate.generated['/images/places/lugano-view.webp'].scope, 'place');
+    assert.equal(aggregate.generated[STATIC_FALLBACK_IMAGE].scope, 'place');
+    assert.equal(aggregate.generated[STATIC_FALLBACK_IMAGE].imageUrl, STATIC_FALLBACK_IMAGE);
     assert.equal(aggregate.editorial[editorial.cover].rightsHolder, editorial.rightsHolder);
     assert.equal(aggregate.sections.frontaliere, 'image-credits-frontaliere.json');
 

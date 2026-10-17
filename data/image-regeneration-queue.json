@@ -35,11 +35,11 @@
       "articleId": "giovani-lavoro-futuro-ticino",
       "title": "Ai giovani non basta un lavoro. Serve un futuro",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
-      "reason": "All image providers failed for article-giovani-lavoro-futuro-ticino: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration relevant to Ticino commuting; a prominent generic commuter is visible from behind",
+      "reason": "All image providers failed for article-giovani-lavoro-futuro-ticino: openai-codex (vision gate rejected image: Synthetic photorealistic illustration relevant to alpine rail commuting, but it contains a recognizable foreground person viewed ",
       "status": "failed",
-      "failureCount": 2,
+      "failureCount": 3,
       "requestedAt": "2026-10-16T17:37:12.235Z",
-      "lastFailureAt": "2026-10-17T01:00:53.424Z"
+      "lastFailureAt": "2026-10-17T07:18:14.352Z"
     },
     {
       "articleId": "ia-assistente-shopping-svizzera",
@@ -55,21 +55,21 @@
       "articleId": "cantieri-lugano-riduzione-disagi",
       "title": "Cantieri a Lugano: il Municipio punta a ridurre i disagi",
       "fallbackImage": "/images/blog/frontalieri-assunzioni-lugano-interrogazione.webp",
-      "reason": "All image providers failed for article-cantieri-lugano-riduzione-disagi: openai-codex (vision gate rejected image: Generic synthetic road-construction scene relevant to Lugano, but a visible vehicle emblem/trademark makes it fail the safety",
+      "reason": "image generation deadline exceeded",
       "status": "failed",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-17T00:14:09.813Z",
-      "lastFailureAt": "2026-10-17T01:03:25.482Z"
+      "lastFailureAt": "2026-10-17T07:20:14.573Z"
     },
     {
       "articleId": "tre-valli-varesine-7-posto-mondiale",
       "title": "Tre Valli Varesine 7ª al mondo: batte Vuelta e Paris-Roubaix",
       "fallbackImage": "/images/blog/guida-tre-valli-varesine-2026.webp",
-      "reason": "All image providers failed for article-tre-valli-varesine-7-posto-mondiale: openai-codex (vision gate rejected image: Generic synthetic photorealistic illustration of a cyclist and lakeside train landscape; no readable text or visible logos",
+      "reason": "All image providers failed for article-tre-valli-varesine-7-posto-mondiale: openai-codex (vision gate rejected image: Generic synthetic cycling scene, but a recognizable cyclist is prominently visible in the foreground.); gemini (Gemini ima",
       "status": "failed",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-17T00:42:42.710Z",
-      "lastFailureAt": "2026-10-17T01:05:13.745Z"
+      "lastFailureAt": "2026-10-17T07:21:13.148Z"
     },
     {
       "articleId": "fully-strada-ciclabile",
