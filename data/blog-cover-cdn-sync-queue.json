@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-scorte-cherosene-zurigo.webp",
+      "sha256": "b37a1eff407f89c7c929396a8b7a56a39622af5c1894561dfe28349e0d812d10"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-scorte-cherosene-zurigo-480w.webp",
+      "sha256": "5a49023360408e45ab72d6473ce267c64df984825210d697058fbc2fd7219059"
+    }
+  ]
 }
