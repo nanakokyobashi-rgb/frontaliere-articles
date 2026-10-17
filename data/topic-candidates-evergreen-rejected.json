@@ -9093,30 +9093,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/un-venerdi-di-sciopero-nella-scuola-italiana-stipendi-precariato-e-assunzioni-al-centro-della-protesta/2709550": {
-      "section": "frontaliere",
-      "ts": 1792091078268
-    },
-    "frontaliere::https://www.rsi.ch/s/4167841": {
-      "section": "frontaliere",
-      "ts": 1792091144784
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1956947/supsi-master-bitetti-formazione-business-base-direttore-leandro-nuovo": {
-      "section": "frontaliere",
-      "ts": 1792091638601
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/15/leggi-notizia/argomenti/territorio/articolo/lavori-sulla-statale-e-battelli-speciali-tra-cannero-e-cannobio-dal-21-ottobre-tagliata-una-quindic.html": {
-      "section": "frontaliere",
-      "ts": 1792098411077
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/attacco-informatico-a-casse-pensioni-citt%c3%a0-zurigo-e-posta/92224356": {
-      "section": "frontaliere",
-      "ts": 1792100048024
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/tempolavoro-a-busto-arsizio-nasce-il-cantiere-sociale-per-un-lavoro-a-misura-di-persona/2708776": {
-      "section": "frontaliere",
-      "ts": 1792103241391
-    },
     "frontaliere::https://www.varesenoi.it/2026/10/15/leggi-notizia/argomenti/economia-13/articolo/sicurezza-sul-lavoro-emergenza-infinita-anche-in-provincia-di-varese-in-aumento-i-decessi-e-il-num.html": {
       "section": "frontaliere",
       "ts": 1792104549714
@@ -9432,6 +9408,10 @@
     "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/biasca-ha-un-nuovo-nodo-di-interscambio--4171162.html": {
       "section": "frontaliere",
       "ts": 1792260744593
+    },
+    "svizzera::https://www.admin.ch/it/newnsb/l4hrr2l7oxxq": {
+      "section": "svizzera",
+      "ts": 1792276543653
     }
   }
 }
