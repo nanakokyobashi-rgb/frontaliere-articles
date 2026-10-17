@@ -958,14 +958,19 @@ const PUBLISH_API_BOOKKEEPING_PATHS = new Set([
   'data/blog-cover-cdn-sync-queue.json',
 ]);
 
+function publishApiInputPaths(triggerPathsImpl) {
+  return triggerPathsImpl()
+    .filter((triggerPath) => !PUBLISH_API_BOOKKEEPING_PATHS.has(triggerPath));
+}
+
 export function latestApiInputCommit(
   publisherCommit,
   { execFileSyncImpl = execFileSync, triggerPathsImpl = publishApiTriggerPaths } = {},
 ) {
   const commit = String(publisherCommit ?? '').trim();
   if (!commit) throw new Error('commit publisher assente: impossibile classificare gli input API');
-  const triggerPaths = triggerPathsImpl()
-    .filter((triggerPath) => !PUBLISH_API_BOOKKEEPING_PATHS.has(triggerPath));
+  const triggerPaths = publishApiInputPaths(triggerPathsImpl);
+  if (triggerPaths.length === 0) return null;
   try {
     const latest = execFileSyncImpl(
       'git',
@@ -998,9 +1003,12 @@ export function apiInputChangedInRange(
   if (!/^0+$/.test(base) && !FULL_GIT_SHA_RE.test(base)) {
     throw new Error(`base della push non valida: ${base}`);
   }
+  const triggerPaths = publishApiInputPaths(triggerPathsImpl);
+  // With no pathspec, rev-list would classify every commit as an API input.
+  if (triggerPaths.length === 0) return false;
   const args = ['-C', ROOT_DIR, 'rev-list', '--max-count=1', head];
   if (!/^0+$/.test(base)) args.push(`^${base}`);
-  args.push('--', ...triggerPathsImpl());
+  args.push('--', ...triggerPaths);
   try {
     const latest = execFileSyncImpl('git', args, { encoding: 'utf8' });
     return Boolean(String(latest ?? '').trim());
