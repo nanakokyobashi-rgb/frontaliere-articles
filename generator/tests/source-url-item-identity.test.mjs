@@ -324,6 +324,14 @@ test('pageTitleEvidence tratta il fallback noscript come markup attivo solo con 
   assert.equal(pageTitleEvidence(html, { scriptingDisabled: true }), 'Titolo di fallback');
 });
 
+test('pageTitleEvidence attiva noscript solo nel body, mai in head o template', () => {
+  const html = '<html><head><noscript><h1>TITOLO_HEAD_INATTIVO</h1></noscript></head><body>'
+    + '<noscript><h1>TITOLO_BODY_ATTIVO</h1></noscript>'
+    + '<template><noscript><h1>TITOLO_TEMPLATE_INATTIVO</h1></noscript></template>'
+    + '</body></html>';
+  assert.equal(pageTitleEvidence(html, { scriptingDisabled: true }), 'TITOLO_BODY_ATTIVO');
+});
+
 test('pageTitleEvidence chiude il percorso su un tag non terminato', () => {
   const malformed = '<meta data="<title>Titolo falso</title>';
   assert.equal(pageTitleEvidence(malformed), '', 'un titolo dopo il tag malformato non e\' evidenza attiva');

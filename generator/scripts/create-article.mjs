@@ -7741,6 +7741,12 @@ const SOURCE_HTML_RAW_TEXT_ELEMENTS = new Set([
   'script', 'style', 'textarea', 'title', 'iframe', 'xmp',
   'noembed', 'noframes',
 ]);
+// While skipping an inert template, `noscript` follows the scripting-enabled
+// raw-text rule so a literal `</template>` in its fallback cannot escape it.
+const SOURCE_HTML_TEMPLATE_RAW_TEXT_ELEMENTS = new Set([
+  ...SOURCE_HTML_RAW_TEXT_ELEMENTS,
+  'noscript',
+]);
 // SVG script contents are raw text too; apparent HTML inside them must not
 // escape through foreignObject as an active editorial root.
 const SOURCE_FOREIGN_RAW_TEXT_ELEMENTS = new Set(['script', 'style']);
@@ -7921,7 +7927,11 @@ function sourceSkipTemplate(html, afterOpening) {
     if (namespace === 'html' && tag.name === 'template' && !isVoid) {
       depth += 1;
     }
-    const isRawTextElement = !isVoid && sourceIsRawTextElement(namespace, tag.name);
+    const isRawTextElement = !isVoid && (
+      namespace === 'html'
+        ? SOURCE_HTML_TEMPLATE_RAW_TEXT_ELEMENTS.has(tag.name)
+        : sourceIsRawTextElement(namespace, tag.name)
+    );
     if (!isRawTextElement) {
       stack.push({ name: tag.name, namespace, tag });
     }
@@ -8371,10 +8381,12 @@ function findActiveSourceHead(html) {
   });
 
   const trustedDocument = documentLevel && !scan.malformed;
+  const hasDocumentScaffold = sawHtml || sawHead || sawBody;
   return {
     bounds: trustedDocument ? trustedHead : null,
     malformed: !trustedDocument,
     documentLevel: trustedDocument,
+    trustedDocument: trustedDocument || (!hasDocumentScaffold && !scan.malformed),
     ldBlocks: trustedDocument ? ldBlocks : [],
   };
 }
@@ -8419,11 +8431,19 @@ export function extractOutermostTagBlock(html, tag) {
  * affidabile.
  *
  * @param {string} html
- * @returns {{ html: string, root: 'article'|'main'|'none', isolated: boolean }}
+ * @returns {{ html: string, root: 'article'|'main'|'none', isolated: boolean, trustedDocument: boolean }}
  */
 export function isolateMainSourceHtml(html) {
   const src = String(html || '');
-  if (!src) return { html: src, root: 'none', isolated: false };
+  if (!src) return { html: src, root: 'none', isolated: false, trustedDocument: true };
+
+  const headScan = findActiveSourceHead(src);
+  // If a document scaffold was present but its head/body structure became
+  // untrusted (for example a nested <head>), no root in that document is safe
+  // to promote. Fragments without document scaffolding retain legacy behavior.
+  if (!headScan.trustedDocument) {
+    return { html: src, root: 'none', isolated: false, trustedDocument: false };
+  }
 
   // `<article>` prima di `<main>`: su una pagina di articolo singolo il primo
   // e' il pezzo, il secondo di solito lo contiene INSIEME ai commenti — che e'
@@ -8440,9 +8460,8 @@ export function isolateMainSourceHtml(html) {
     chosen = main;
     root = 'main';
   }
-  if (!chosen) return { html: src, root: 'none', isolated: false };
+  if (!chosen) return { html: src, root: 'none', isolated: false, trustedDocument: true };
 
-  const headScan = findActiveSourceHead(src);
   const head = headScan.bounds
     ? src.slice(headScan.bounds.start, headScan.bounds.end)
       + (headScan.bounds.closed ? '' : '</head>')
@@ -8459,6 +8478,7 @@ export function isolateMainSourceHtml(html) {
     html: sourceActivateBodyNoscript(isolatedHtml),
     root,
     isolated: true,
+    trustedDocument: true,
   };
 }
 
@@ -8595,6 +8615,16 @@ async function fetchPageContent(url) {
     // da li' che firma di redazione, invito a commentare e spalla «ultimi
     // commenti» sono finiti nel corpo di tre articoli pubblicati.
     const isolation = isolateMainSourceHtml(html);
+    if (!isolation.trustedDocument) {
+      console.error('⚠️  Struttura HTML non attendibile: la pagina sorgente non viene estratta.');
+      if (suppliedCantonSourceContent.length >= 200) {
+        lastSourcePublishedAt = suppliedCantonSourcePublishedAt;
+        lastSourcePageTitle = suppliedCantonSourceTitle;
+        console.error(`   📄 Uso il corpo CMS già verificato dallo scanner JSON: ${suppliedCantonSourceContent.length} chars`);
+        return suppliedCantonSourceContent;
+      }
+      return '';
+    }
     const { text, method, paragraphCount, publishedAt } = extractArticleText(isolation.html, {
       maxChars: 8000,
       scriptingDisabled: true,

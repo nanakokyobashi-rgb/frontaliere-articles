@@ -313,6 +313,28 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.equal(res.html.includes('NESTED_HEAD_SHOULD_NOT_BE_ACTIVATED'), false);
   });
 
+  it('non promuove radici editoriali da un documento con head annidato non attendibile', () => {
+    const nestedHead = '<html><head><head></head>'
+      + `<article>${ARTICLE_PROSE}</article></html>`;
+    const res = isolateMainSourceHtml(nestedHead);
+    assert.equal(res.isolated, false);
+    assert.equal(res.root, 'none');
+    assert.equal(res.trustedDocument, false);
+    assert.equal(res.html, nestedHead);
+  });
+
+  it('non lascia uscire un article da un noscript dentro un template', () => {
+    const templateAttack = '<html><body><template><noscript>literal </template>'
+      + `<article>${ARTICLE_PROSE.replace(/Paragrafo/g, 'TEMPLATE_ATTACK')}</article>`
+      + '</noscript></template>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(templateAttack);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.equal(res.html.includes('TEMPLATE_ATTACK'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
   it('mantiene un JSON-LD body-only quando il body e’ document-level', () => {
     const bodyOnly = '<html><body>'
       + '<script type="application/ld+json">{"headline":"BODY_ONLY_ACTIVE"}</script>'
@@ -446,9 +468,12 @@ describe('cablaggio in fetchPageContent', () => {
     // non devono far sparire il wiring dal controllo statico.
     const body = SRC.slice(at, end);
     const isolateAt = body.indexOf('const isolation = isolateMainSourceHtml(html);');
+    const trustGuardAt = body.indexOf('if (!isolation.trustedDocument)');
     const extractAt = body.indexOf('extractArticleText(isolation.html');
     const titleAt = body.indexOf('pageTitleEvidence(isolation.html, { scriptingDisabled: true })');
     assert.ok(isolateAt !== -1, 'fetchPageContent non isola la pagina');
+    assert.ok(trustGuardAt > isolateAt, 'fetchPageContent deve rifiutare una struttura HTML non attendibile');
+    assert.ok(trustGuardAt < extractAt, 'l’estrattore non deve ricevere HTML da un documento non attendibile');
     assert.ok(extractAt !== -1, 'l’estrattore riceve ancora l’HTML grezzo invece di quello isolato');
     assert.ok(titleAt !== -1, 'la title evidence non abilita il fallback noscript della stessa fetch');
     assert.ok(isolateAt < extractAt, 'isolamento dopo l’estrazione: non serve a niente');

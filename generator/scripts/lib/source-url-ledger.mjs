@@ -331,6 +331,10 @@ const MASK_VOID_ELEMENTS = new Set([
   'param', 'source', 'track', 'wbr',
 ]);
 const INACTIVE_RAW_TEXT_TAGS = new Set(['script', 'style', 'noscript', 'iframe', 'xmp', 'noembed', 'noframes']);
+const MASK_HEAD_ELEMENTS = new Set([
+  'base', 'basefont', 'bgsound', 'head', 'html', 'link', 'meta', 'noframes',
+  'noscript', 'script', 'style', 'template', 'title',
+]);
 const TEMPLATE_RAW_TEXT_TAGS = new Set([
   'script', 'style', 'textarea', 'title', 'noscript', 'iframe', 'xmp',
   'noembed', 'noframes',
@@ -474,8 +478,8 @@ function maskSkipTemplate(html, afterOpening) {
  * esterno quando il markup contiene template annidati.
  *
  * @param {string} html
- * @param {{ scriptingDisabled?: boolean }} [opts] Treat `<noscript>` fallback
- *   markup as active when the source page was fetched without scripting.
+ * @param {{ scriptingDisabled?: boolean }} [opts] Treat body `<noscript>`
+ *   fallback as active when scripting is disabled; head and template stay inert.
  * @returns {string}
  */
 export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
@@ -484,6 +488,7 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
   const blank = (start, end) => {
     for (let i = start; i < end; i++) output[i] = ' ';
   };
+  let headDepth = 0;
   let cursor = 0;
   while (cursor < source.length) {
     const start = source.indexOf('<', cursor);
@@ -504,8 +509,19 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
       cursor = start + 1;
       continue;
     }
+    if (!tag.closing && headDepth > 0 && !MASK_HEAD_ELEMENTS.has(tag.name)) {
+      // A non-head start tag implicitly closes head before body content.
+      headDepth = 0;
+    }
+    if (tag.name === 'head') {
+      if (tag.closing) headDepth = Math.max(0, headDepth - 1);
+      else if (!tag.selfClosing) headDepth += 1;
+    }
+    // An explicit body start closes an omitted/unclosed head in HTML. In the
+    // head, noscript fallback is never title evidence, even with scripting off.
+    if (!tag.closing && tag.name === 'body') headDepth = 0;
     const isInactiveRawText = INACTIVE_RAW_TEXT_TAGS.has(tag.name)
-      && !(scriptingDisabled && tag.name === 'noscript');
+      && !(scriptingDisabled && tag.name === 'noscript' && headDepth === 0);
     if (!tag.closing && !tag.selfClosing && isInactiveRawText) {
       const afterRawText = maskSkipRawText(source, tag.end + 1, tag.name);
       blank(start, afterRawText < 0 ? source.length : afterRawText);
