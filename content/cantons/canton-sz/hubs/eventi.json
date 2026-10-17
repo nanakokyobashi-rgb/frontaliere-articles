@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T00:12:19.402Z",
-  "contentHash": "9fd9f3cf79f58855978dfdea40e0204449a0c032449b7183a0b3a229d0b16451",
+  "updatedAt": "2026-10-17T00:54:51.267Z",
+  "contentHash": "827f1d5c5d383f11bbc8a72f4cff35c6bfbb1b17088ce4ea5802d6c96bc77919",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -101,6 +101,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Küssnacht amplia la rete verso Immensee, Fänn e Adligenswil",
+          "url": "/articoli-svitto/kuessnacht-rete-teleriscaldamento/",
+          "excerpt": "Küssnacht punta all'uscita dalle fonti fossili con la pianificazione energetica comunale e l'estensione della rete verso Immensee, Fänn e Adligenswil.",
+          "date": "2026-10-17T00:46:50.657Z"
+        },
+        {
           "title": "Esercitazione militare a Egg e diga Sihlsee dal 9 al 12 ottobre 2026",
           "url": "/articoli-svitto/esercitazione-militare-sihlsee-ottobre-2026/",
           "excerpt": "Avviso del 'Schweizer Militär': esercitazione dal 9 al 12 ottobre 2026 a Egg e diga Sihlsee.",
@@ -129,7 +135,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:54:51.267Z"
     },
     "en": {
       "canton": "SZ",
@@ -218,6 +224,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Küssnacht expands network to Immensee, Fänn and Adligenswil",
+          "url": "/en/schwyz-articles/kuessnacht-district-heating/",
+          "excerpt": "Küssnacht is aiming to phase out fossil fuels with municipal energy planning and the extension of the grid to Immensee, Fänn and Adligenswil.",
+          "date": "2026-10-17T00:46:50.657Z"
+        },
+        {
           "title": "Military exercise in Egg and at the Sihlsee dam from 9 to 12 October 2026",
           "url": "/en/schwyz-articles/military-exercise-sihlsee-october-2026/",
           "excerpt": "Notice from the 'Schweizer Militär': exercise from October 9 to 12, 2026, in Egg and at Sihlsee Dam.",
@@ -246,7 +258,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:54:51.267Z"
     },
     "de": {
       "canton": "SZ",
@@ -335,6 +347,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Küssnacht erweitert das Netz auf Immensee, Fänn und Adligenswil",
+          "url": "/de/schwyz-artikel/kuessnacht-fernwaerme/",
+          "excerpt": "Küssnacht strebt an, die fossilen Brennstoffe mit kommunaler Energieplanung und dem Netzausbau bis Immensee, Fänn und Adligenswil schrittweise abzuschaffen.",
+          "date": "2026-10-17T00:46:50.657Z"
+        },
+        {
           "title": "Militärübung in Egg und an der Sihlsee-Staumauer vom 9. bis 12. Oktober 2026",
           "url": "/de/schwyz-artikel/militaeruebung-sihlsee-oktober-2026/",
           "excerpt": "Hinweis von 'Schweizer Militär': Militärübung vom 9.",
@@ -363,7 +381,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:54:51.267Z"
     },
     "fr": {
       "canton": "SZ",
@@ -452,6 +470,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Küssnacht étend son réseau à Immensee, Fänn et Adligenswil",
+          "url": "/fr/articles-schwytz/kuessnacht-chauffage-distance/",
+          "excerpt": "Küssnacht vise à éliminer progressivement les combustibles fossiles grâce à la planification énergétique municipale et à l'extension du réseau vers Immensee, Fänn et Adligenswil.",
+          "date": "2026-10-17T00:46:50.657Z"
+        },
+        {
           "title": "Exercice militaire à Egg et au barrage du Sihlsee du 9 au 12 octobre 2026",
           "url": "/fr/articles-schwytz/exercice-militaire-sihlsee-octobre-2026/",
           "excerpt": "Avis du 'Schweizer Militär' : exercice du 9 au 12 octobre 2026 à Egg et au barrage du Sihlsee.",
@@ -480,7 +504,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:54:51.267Z"
     }
   }
 }

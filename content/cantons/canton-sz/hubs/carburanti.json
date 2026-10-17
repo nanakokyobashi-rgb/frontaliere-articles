@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "carburanti",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "027f897c6568bc51ecfbf05afd8140d536cadd9ef746dab012ff0c99f6dca422",
+  "updatedAt": "2026-10-17T00:54:51.267Z",
+  "contentHash": "460487c4298a8ce23cf24505b56a8a45f778a970405ce58ad08e7ed366f1e2a4",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-15T12:02:33.404Z",
+      "updatedAt": "2026-10-16T11:53:35.759Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Küssnacht amplia la rete verso Immensee, Fänn e Adligenswil",
+          "url": "/articoli-svitto/kuessnacht-rete-teleriscaldamento/",
+          "excerpt": "Küssnacht punta all'uscita dalle fonti fossili con la pianificazione energetica comunale e l'estensione della rete verso Immensee, Fänn e Adligenswil.",
+          "date": "2026-10-17T00:46:50.657Z"
+        },
         {
           "title": "Esercitazione militare a Egg e diga Sihlsee dal 9 al 12 ottobre 2026",
           "url": "/articoli-svitto/esercitazione-militare-sihlsee-ottobre-2026/",
@@ -88,7 +94,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:54:51.267Z"
     },
     "en": {
       "canton": "SZ",
@@ -129,11 +135,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Küssnacht expands network to Immensee, Fänn and Adligenswil",
+          "url": "/en/schwyz-articles/kuessnacht-district-heating/",
+          "excerpt": "Küssnacht is aiming to phase out fossil fuels with municipal energy planning and the extension of the grid to Immensee, Fänn and Adligenswil.",
+          "date": "2026-10-17T00:46:50.657Z"
+        },
         {
           "title": "Military exercise in Egg and at the Sihlsee dam from 9 to 12 October 2026",
           "url": "/en/schwyz-articles/military-exercise-sihlsee-october-2026/",
@@ -163,7 +175,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:54:51.267Z"
     },
     "de": {
       "canton": "SZ",
@@ -204,11 +216,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Küssnacht erweitert das Netz auf Immensee, Fänn und Adligenswil",
+          "url": "/de/schwyz-artikel/kuessnacht-fernwaerme/",
+          "excerpt": "Küssnacht strebt an, die fossilen Brennstoffe mit kommunaler Energieplanung und dem Netzausbau bis Immensee, Fänn und Adligenswil schrittweise abzuschaffen.",
+          "date": "2026-10-17T00:46:50.657Z"
+        },
         {
           "title": "Militärübung in Egg und an der Sihlsee-Staumauer vom 9. bis 12. Oktober 2026",
           "url": "/de/schwyz-artikel/militaeruebung-sihlsee-oktober-2026/",
@@ -238,7 +256,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:54:51.267Z"
     },
     "fr": {
       "canton": "SZ",
@@ -279,11 +297,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Küssnacht étend son réseau à Immensee, Fänn et Adligenswil",
+          "url": "/fr/articles-schwytz/kuessnacht-chauffage-distance/",
+          "excerpt": "Küssnacht vise à éliminer progressivement les combustibles fossiles grâce à la planification énergétique municipale et à l'extension du réseau vers Immensee, Fänn et Adligenswil.",
+          "date": "2026-10-17T00:46:50.657Z"
+        },
         {
           "title": "Exercice militaire à Egg et au barrage du Sihlsee du 9 au 12 octobre 2026",
           "url": "/fr/articles-schwytz/exercice-militaire-sihlsee-octobre-2026/",
@@ -313,7 +337,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:54:51.267Z"
     }
   }
 }
