@@ -30,6 +30,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.kreuzlingen-barenplatz-chilbi.title': 'Kreuzlingen: Bärenplatz chiuso per la fiera',
     'blog.article.kreuzlingen-barenplatz-chilbi.excerpt': 'A Kreuzlingen i bus sono deviati dal 25 ottobre alle 09.00 del 27; la fermata Bärenplatz va alla stazione principale.',
     'blog.article.kreuzlingen-barenplatz-chilbi.imageAlt': 'Autobus alla stazione principale di Kreuzlingen durante l\'allestimento della Chilbi',
+    'blog.article.turgovia-sicurezza-lavoro-orari.title': 'Turgovia: sicurezza sul lavoro, orari e tutela della salute',
+    'blog.article.turgovia-sicurezza-lavoro-orari.excerpt': 'Guida alla sicurezza sul lavoro, tutela della salute, orari e periodi di riposo nel Canton Turgovia secondo le normative e l\'Ispettorato del lavoro.',
+    'blog.article.turgovia-sicurezza-lavoro-orari.imageAlt': 'Sicurezza sul lavoro e tutela della salute nel Canton Turgovia',
 };
 
 export default blogMetaCantonTgIt;

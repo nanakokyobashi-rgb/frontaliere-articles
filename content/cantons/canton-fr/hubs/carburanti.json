@@ -4,12 +4,12 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "carburanti",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "bbb30a620c0d6a32ed623a579e2b7105427fcfd22275a4bf97b98ef5acd2fb71",
+  "updatedAt": "2026-10-17T00:51:58.422Z",
+  "contentHash": "408ad5138662ff41d9dc94477aa4d66c2c3461d682bd37c3e2cbb9f63eaabd2e",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-15T12:02:33.404Z",
+      "updatedAt": "2026-10-16T11:53:35.759Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,42 +54,18 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Friburgo: 2140 frontalieri esteri a fine giugno 2026",
-          "url": "/articoli-friburgo/frontalieri-friburgo-giugno-2026/",
-          "excerpt": "Friburgo contava 2140 frontalieri esteri a fine giugno 2026: +940 dal 2021 e +280 nell'ultimo anno, nei dati pubblicati da SSD e OFS.",
-          "date": "2026-10-11T06:18:12.750Z"
-        },
-        {
-          "title": "Friburgo: garanzia da CHF 44,8 milioni per l'ospedale HIB",
-          "url": "/articoli-friburgo/garanzia-hib-payerne/",
-          "excerpt": "CHF 44,8 milioni per il finanziamento dell'HIB 103 voti espressi, tutti favorevoli Lavori previsti tra il 2028 e il 2032 Il Vaud deve ancora approvare CHF 67,2",
-          "date": "2026-10-10T17:43:08.538Z"
-        },
-        {
-          "title": "Friburgo approva la legge sulle lingue ufficiali",
-          "url": "/articoli-friburgo/friburgo-legge-lingue-ufficiali/",
-          "excerpt": "I deputati hanno votato giovedì Friburgo ha la sua prima legge sulle lingue ufficiali Il testo promuove il bilinguismo Decisione → voto dei deputati del Canton",
-          "date": "2026-10-08T15:45:50.084Z"
-        },
-        {
-          "title": "Friburgo: approvato il nuovo piano della rete ciclabile",
-          "url": "/articoli-friburgo/nuovo-piano-ciclabile-friburgo/",
-          "excerpt": "RIMU approva il nuovo piano ciclabile cantonale Consultazione: 80 pareri e quasi 270 osservazioni Obiettivo: più bici nella vita quotidiana entro il 2042",
-          "date": "2026-10-08T15:33:51.044Z"
-        },
-        {
-          "title": "Fribourg adegua imposte dirette alla progressione a freddo",
-          "url": "/articoli-friburgo/fribourg-modifica-licd/",
-          "excerpt": "Voto: 97 favorevoli, 1 contrario, nessuna astensione",
-          "date": "2026-10-07T10:27:22.581Z"
+          "title": "Carburanti: il Cantone non vuole aumentare le deduzioni",
+          "url": "/articoli-friburgo/friburgo-deduzioni-carburante/",
+          "excerpt": "Il diesel supera CHF 2,40 al litro.",
+          "date": "2026-10-17T00:43:04.944Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -100,7 +76,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:51:58.422Z"
     },
     "en": {
       "canton": "FR",
@@ -141,41 +117,18 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Fribourg: 2140 foreign cross-border commuters at the end of June 2026",
-          "url": "/en/fribourg-articles/fribourg-foreign-frontier-workers-2026/",
-          "excerpt": "Fribourg had 2140 foreign cross-border workers at the end of June 2026: +940 since 2021 and +280 over the past year, according to data published by SSD and OFS.",
-          "date": "2026-10-11T06:18:12.750Z"
-        },
-        {
-          "title": "Fribourg: CHF 44,8 million guarantee for HIB hospital",
-          "url": "/en/fribourg-articles/fribourg-hib-guarantee/",
-          "excerpt": "CHF 44,8 million for HIB financing 103 votes cast, all in favor Work planned between 2028 and 2032 Vaud still has to approve CHF 67,2 million Beneficiary →",
-          "date": "2026-10-10T17:43:08.538Z"
-        },
-        {
-          "title": "Fribourg approves the law on official languages",
-          "url": "/en/fribourg-articles/fribourg-official-languages-law/",
-          "excerpt": "The deputies voted on Thursday Fribourg has its first law on official languages The text promotes bilingualism Decision → vote by the deputies of the Canton",
-          "date": "2026-10-08T15:45:50.084Z"
-        },
-        {
-          "title": "Fribourg: new cycle network plan approved",
-          "url": "/en/fribourg-articles/fribourg-new-bicycle-network-plan/",
-          "excerpt": "RIMU approves the new cantonal cycle plan Consultation: 80 opinions and almost 270 observations Goal: more bikes in daily life by 2042 The plan covers network",
-          "date": "2026-10-08T15:33:51.044Z"
-        },
-        {
-          "title": "Fribourg adjusts direct taxes for bracket creep",
-          "url": "/en/fribourg-articles/fribourg-adjusts-direct-taxes-for-bracket-creep/",
-          "date": "2026-10-07T10:27:22.581Z"
+          "title": "Fuels: the Canton does not want to increase deductions",
+          "url": "/en/fribourg-articles/fribourg-fuel-deductions/",
+          "excerpt": "Diesel exceeds CHF 2.40 per litre.",
+          "date": "2026-10-17T00:43:04.944Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -186,7 +139,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:51:58.422Z"
     },
     "de": {
       "canton": "FR",
@@ -227,41 +180,18 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Freiburg: 2140 ausländische Grenzgänger Ende Juni 2026",
-          "url": "/de/freiburg-artikel/freiburg-auslaendische-grenzgaenger-2026/",
-          "excerpt": "Freiburg zählte Ende Juni 2026 2140 ausländische Grenzgänger: +940 seit 2021 und +280 im letzten Jahr, laut den von SSD und OFS veröffentlichten Daten.",
-          "date": "2026-10-11T06:18:12.750Z"
-        },
-        {
-          "title": "Freiburg: Garantie in Höhe von CHF 44,8 Millionen für das HIB-Spital",
-          "url": "/de/freiburg-artikel/freiburg-hib-buergschaft/",
-          "excerpt": "CHF 44,8 Millionen für die Finanzierung des HIB 103 abgegebene Stimmen, alle dafür Bauarbeiten zwischen 2028 und 2032 vorgesehen Der Kanton Waadt muss noch CHF",
-          "date": "2026-10-10T17:43:08.538Z"
-        },
-        {
-          "title": "Freiburg verabschiedet das Gesetz über die Amtssprachen",
-          "url": "/de/freiburg-artikel/freiburg-amtssprachen-gesetz/",
-          "excerpt": "Die Abgeordneten stimmten am Donnerstag ab Freiburg hat sein erstes Gesetz über die Amtssprachen Der Text fördert die Zweisprachigkeit Entscheidung → Abstimmung",
-          "date": "2026-10-08T15:45:50.084Z"
-        },
-        {
-          "title": "Freiburg: Neuer Radnetzplan genehmigt",
-          "url": "/de/freiburg-artikel/freiburg-neuer-velowegnetzplan/",
-          "excerpt": "RIMU genehmigt den neuen kantonalen Radfahrplan Befassung: 80 Stellungnahmen und fast 270 Bemerkungen Ziel: Mehr Fahrräder im Alltag bis 2042 Der Plan deckt",
-          "date": "2026-10-08T15:33:51.044Z"
-        },
-        {
-          "title": "Freiburg passt die direkten Steuern an die kalte Progression an",
-          "url": "/de/freiburg-artikel/freiburg-passt-die-direkten-steuern-an-die-kalte-progression-an/",
-          "date": "2026-10-07T10:27:22.581Z"
+          "title": "Treibstoffe: Kanton will Abzüge nicht erhöhen",
+          "url": "/de/freiburg-artikel/freiburg-treibstoff-abzuege/",
+          "excerpt": "Diesel übersteigt CHF 2,40 pro Liter.",
+          "date": "2026-10-17T00:43:04.944Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -272,7 +202,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:51:58.422Z"
     },
     "fr": {
       "canton": "FR",
@@ -313,42 +243,18 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Fribourg : 2140 frontaliers étrangers à fin juin 2026",
-          "url": "/fr/articles-fribourg/fribourg-travailleurs-frontaliers-2026/",
-          "excerpt": "Fribourg comptait 2140 frontaliers étrangers à fin juin 2026 : +940 depuis 2021 et +280 au cours de la dernière année, selon les données publiées par le SSD et l’OFS.",
-          "date": "2026-10-11T06:18:12.750Z"
-        },
-        {
-          "title": "Fribourg : garantie de 44,8 millions de CHF pour l'hôpital HIB",
-          "url": "/fr/articles-fribourg/fribourg-garantie-hib/",
-          "excerpt": "44,8 millions de CHF pour le financement de l'HIB 103 votes exprimés, tous favorables Travaux prévus entre 2028 et 2032 Le canton de Vaud doit encore approuver",
-          "date": "2026-10-10T17:43:08.538Z"
-        },
-        {
-          "title": "Fribourg approuve la loi sur les langues officielles",
-          "url": "/fr/articles-fribourg/fribourg-loi-langues-officielles/",
-          "excerpt": "Les députés ont voté jeudi Fribourg a sa première loi sur les langues officielles Le texte promeut le bilinguisme Décision → vote des députés du canton",
-          "date": "2026-10-08T15:45:50.084Z"
-        },
-        {
-          "title": "Fribourg : le nouveau plan du réseau cyclable approuvé",
-          "url": "/fr/articles-fribourg/fribourg-nouveau-plan-reseau-cyclable/",
-          "excerpt": "RIMU approuve le nouveau plan cyclable cantonal Consultation : 80 avis et près de 270 observations Objectif : plus de vélos dans la vie quotidienne d'ici 2042",
-          "date": "2026-10-08T15:33:51.044Z"
-        },
-        {
-          "title": "Fribourg adapte les impôts directs à la progression à froid",
-          "url": "/fr/articles-fribourg/fribourg-adapte-les-impots-directs-a-la-progression-a-froid/",
-          "excerpt": "Vote : 97 voix favorables, 1 voix contre, aucune abstention",
-          "date": "2026-10-07T10:27:22.581Z"
+          "title": "Carburants : le canton ne veut pas augmenter les déductions",
+          "url": "/fr/articles-fribourg/fribourg-deductions-carburant/",
+          "excerpt": "Le diesel dépasse 2,40 CHF le litre.",
+          "date": "2026-10-17T00:43:04.944Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -359,7 +265,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:51:58.422Z"
     }
   }
 }

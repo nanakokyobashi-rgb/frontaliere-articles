@@ -32,16 +32,6 @@
       "lastFailureAt": "2026-10-16T21:56:24.019Z"
     },
     {
-      "articleId": "estradizione-pakistan-como",
-      "title": "Accusato di omicidio, arrestato a Como per l’estradizione",
-      "fallbackImage": "/images/blog/estradizione-arresto-como.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "failed",
-      "failureCount": 3,
-      "requestedAt": "2026-10-15T23:12:57.417Z",
-      "lastFailureAt": "2026-10-16T18:42:36.763Z"
-    },
-    {
       "articleId": "maratona-laghi-varese-2027",
       "title": "Maratona dei Laghi 2027: attesi 2000 runner tra Varese e Monate",
       "fallbackImage": "/images/places/lugano-view.webp",
@@ -52,34 +42,14 @@
       "lastFailureAt": "2026-10-16T21:58:21.196Z"
     },
     {
-      "articleId": "dosso-gaggiolo-disagi-frontalieri",
-      "title": "Rallentamenti al valico di Gaggiolo dopo il nuovo dosso",
-      "fallbackImage": "/images/blog/frontalieri-regime-fiscale-nuovo-accordo.webp",
-      "reason": "All image providers failed for article-dosso-gaggiolo-disagi-frontalieri: openai-codex (vision gate rejected image: Generic synthetic editorial scene showing a queue of cars approaching a speed bump/checkpoint in a mountainous border settin",
-      "status": "failed",
-      "failureCount": 1,
-      "requestedAt": "2026-10-16T14:28:42.659Z",
-      "lastFailureAt": "2026-10-16T18:43:55.506Z"
-    },
-    {
-      "articleId": "iniziativa-udc-asilo-limite",
-      "title": "Protezione delle frontiere: L'iniziativa UDC è controproducente",
-      "fallbackImage": "/images/blog/consiglio-federale-boccia-frontiere.webp",
-      "reason": "All image providers failed for article-iniziativa-udc-asilo-limite: openai-codex (vision gate rejected image: Relevant synthetic border-crossing scene, but it includes recognizable foreground pedestrians, sign-like panels, and a visible veh",
-      "status": "failed",
-      "failureCount": 1,
-      "requestedAt": "2026-10-16T16:42:43.589Z",
-      "lastFailureAt": "2026-10-16T18:45:28.005Z"
-    },
-    {
       "articleId": "giovani-lavoro-futuro-ticino",
       "title": "Ai giovani non basta un lavoro. Serve un futuro",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
-      "reason": "All image providers failed for article-giovani-lavoro-futuro-ticino: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Ticino rail commuting, but it includes a recognizable foreground person viewed from",
+      "reason": "All image providers failed for article-giovani-lavoro-futuro-ticino: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration relevant to Ticino commuting; a prominent generic commuter is visible from behind",
       "status": "failed",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-16T17:37:12.235Z",
-      "lastFailureAt": "2026-10-16T18:48:33.407Z"
+      "lastFailureAt": "2026-10-17T01:00:53.424Z"
     },
     {
       "articleId": "semafori-cadenazzo-proteste-ustra",
@@ -102,44 +72,24 @@
       "lastFailureAt": "2026-10-16T22:02:21.636Z"
     },
     {
-      "articleId": "assemblea-ccti-rotta-economia",
-      "title": "Assemblea Cc-Ti: l'economia non è il bancomat dello Stato",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-assemblea-ccti-rotta-economia: openai-codex (vision gate rejected image: Relevant synthetic editorial scene with no readable text or logos, b",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-16T23:37:31.796Z",
-      "lastFailureAt": "2026-10-16T23:37:31.796Z"
-    },
-    {
       "articleId": "cantieri-lugano-riduzione-disagi",
       "title": "Cantieri a Lugano: il Municipio punta a ridurre i disagi",
       "fallbackImage": "/images/blog/frontalieri-assunzioni-lugano-interrogazione.webp",
-      "reason": "All image providers failed for article-cantieri-lugano-riduzione-disagi: openai-codex (vision gate rejected image: Generic synthetic construction scene relevant to Lugano, but it c",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-cantieri-lugano-riduzione-disagi: openai-codex (vision gate rejected image: Generic synthetic road-construction scene relevant to Lugano, but a visible vehicle emblem/trademark makes it fail the safety",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-17T00:14:09.813Z",
-      "lastFailureAt": "2026-10-17T00:14:09.813Z"
-    },
-    {
-      "articleId": "klontalstrasse-staldengarten-butzi",
-      "title": "Klöntalerstrasse: limitazione staldengarten–bützi",
-      "fallbackImage": "/images/blog/article-revisione-fiscale-canton-glarona.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T00:33:53.750Z",
-      "lastFailureAt": "2026-10-17T00:33:53.750Z"
+      "lastFailureAt": "2026-10-17T01:03:25.482Z"
     },
     {
       "articleId": "tre-valli-varesine-7-posto-mondiale",
       "title": "Tre Valli Varesine 7ª al mondo: batte Vuelta e Paris-Roubaix",
       "fallbackImage": "/images/blog/guida-tre-valli-varesine-2026.webp",
-      "reason": "All image providers failed for article-tre-valli-varesine-7-posto-mondiale: openai-codex (vision gate rejected image: Generic synthetic cycling scene with no text, logo, or visible",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-tre-valli-varesine-7-posto-mondiale: openai-codex (vision gate rejected image: Generic synthetic photorealistic illustration of a cyclist and lakeside train landscape; no readable text or visible logos",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-17T00:42:42.710Z",
-      "lastFailureAt": "2026-10-17T00:42:42.710Z"
+      "lastFailureAt": "2026-10-17T01:05:13.745Z"
     },
     {
       "articleId": "kuessnacht-rete-teleriscaldamento",
@@ -150,6 +100,76 @@
       "failureCount": 0,
       "requestedAt": "2026-10-17T00:46:50.699Z",
       "lastFailureAt": "2026-10-17T00:46:50.699Z"
+    },
+    {
+      "articleId": "zuger-rapporto-gestione-2025",
+      "title": "Zuger Pensionskasse: online il rapporto 2025",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T00:53:57.816Z",
+      "lastFailureAt": "2026-10-17T00:53:57.816Z"
+    },
+    {
+      "articleId": "fully-strada-ciclabile",
+      "title": "Fully: oltre 5,5 km di strada diventano ciclabili",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T01:00:16.102Z",
+      "lastFailureAt": "2026-10-17T01:00:16.102Z"
+    },
+    {
+      "articleId": "turgovia-sicurezza-lavoro-orari",
+      "title": "Turgovia: sicurezza sul lavoro, orari e tutela della salute",
+      "fallbackImage": "/images/blog/article-sicurezza-lavoro-turgovia-regole.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T01:07:58.548Z",
+      "lastFailureAt": "2026-10-17T01:07:58.548Z"
+    },
+    {
+      "articleId": "burraco-solidale-buguggiate",
+      "title": "Burraco benefico a Buguggiate: 140 partecipanti per ABAD ETS",
+      "fallbackImage": "/images/blog/nuovi-progetti-chiave-digitali.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T01:16:19.861Z",
+      "lastFailureAt": "2026-10-17T01:16:19.861Z"
+    },
+    {
+      "articleId": "dibattito-prefettura-sarine",
+      "title": "Sarine, i sette candidati alla prefettura a confronto",
+      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T01:20:36.277Z",
+      "lastFailureAt": "2026-10-17T01:20:36.277Z"
+    },
+    {
+      "articleId": "scuole-vaud-furti-inchieste",
+      "title": "Otto scuole vaudesi colpite da furti notturni",
+      "fallbackImage": "/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-vaud.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T01:27:48.782Z",
+      "lastFailureAt": "2026-10-17T01:27:48.782Z"
+    },
+    {
+      "articleId": "singen-chiusura-schaffhauser-strasse",
+      "title": "Singen, chiusa la Schaffhauser Straße dal 26 al 30 ottobre",
+      "fallbackImage": "/images/blog/article-lavori-autolaghi-ottobre-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T01:47:28.529Z",
+      "lastFailureAt": "2026-10-17T01:47:28.529Z"
     }
   ]
 }

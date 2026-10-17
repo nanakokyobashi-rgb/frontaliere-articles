@@ -18,6 +18,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.finanze-cantone-sciaffusa-2027.title': 'Schaffhausen: Zwischen 2027 und 2030 werden rote Zahlen erwartet',
     'blog.article.finanze-cantone-sciaffusa-2027.excerpt': 'Die Kantonsregierung rechnet für den Vierjahreszeitraum 2027–2030 aufgrund des Rückgangs der Einnahmen aus den Unternehmenssteuern mit negativen Ergebnissen.',
     'blog.article.finanze-cantone-sciaffusa-2027.imageAlt': 'Regierungsgebäude des Kantons Schaffhausen',
+    'blog.article.singen-chiusura-schaffhauser-strasse.title': 'Singen, Schaffhauser Straße vom 26. bis 30. Oktober gesperrt',
+    'blog.article.singen-chiusura-schaffhauser-strasse.excerpt': 'In Singen wird die Straße vom 26.',
+    'blog.article.singen-chiusura-schaffhauser-strasse.imageAlt': 'Umleitung in Singen während der Sperrung der Schaffhauser Straße',
 };
 
 export default blogMetaCantonShDe;

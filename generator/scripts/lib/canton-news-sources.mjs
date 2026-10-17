@@ -342,7 +342,7 @@ function readCharsetTag(html, start) {
   const boundary = html[i] ?? '';
   if (boundary && !/[\s/>]/.test(boundary)) return null;
   const end = findHtmlTagEndOutsideQuotes(html, start);
-  if (end < 0) return null;
+  if (end < 0) return { malformed: true };
   const name = html.slice(nameStart, i).toLowerCase();
   return {
     closing,
@@ -378,6 +378,7 @@ function skipCharsetTemplate(html, afterOpening) {
       continue;
     }
     const tag = readCharsetTag(html, start);
+    if (tag?.malformed) return -1;
     if (!tag) {
       cursor = start + 1;
       continue;
@@ -423,6 +424,10 @@ function maskCharsetInactiveMarkup(html) {
       continue;
     }
     const tag = readCharsetTag(source, start);
+    if (tag?.malformed) {
+      blank(start, source.length);
+      break;
+    }
     if (!tag) {
       cursor = start + 1;
       continue;

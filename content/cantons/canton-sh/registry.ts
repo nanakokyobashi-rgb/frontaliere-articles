@@ -61,4 +61,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'singen-chiusura-schaffhauser-strasse',
+ category: 'pratico',
+ date: '2026-10-17T01:47:28.492Z',
+ image: '/images/blog/article-lavori-autolaghi-ottobre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

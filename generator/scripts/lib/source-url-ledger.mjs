@@ -399,7 +399,7 @@ function maskReadTag(html, start) {
   const boundary = html[i] ?? '';
   if (boundary && !/[\s/>]/.test(boundary)) return null;
   const end = maskFindTagEnd(html, start);
-  if (end < 0) return null;
+  if (end < 0) return { malformed: true };
   const name = html.slice(nameStart, i).toLowerCase();
   return {
     closing,
@@ -435,6 +435,7 @@ function maskSkipTemplate(html, afterOpening) {
       continue;
     }
     const tag = maskReadTag(html, start);
+    if (tag?.malformed) return -1;
     if (!tag) {
       cursor = start + 1;
       continue;
@@ -489,6 +490,10 @@ export function maskInactiveMarkup(html) {
       continue;
     }
     const tag = maskReadTag(source, start);
+    if (tag?.malformed) {
+      blank(start, source.length);
+      break;
+    }
     if (!tag) {
       cursor = start + 1;
       continue;

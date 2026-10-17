@@ -30,6 +30,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.kreuzlingen-barenplatz-chilbi.title': 'Kreuzlingen: Bärenplatz wegen Messe geschlossen',
     'blog.article.kreuzlingen-barenplatz-chilbi.excerpt': 'In Kreuzlingen werden die Busse vom 25.',
     'blog.article.kreuzlingen-barenplatz-chilbi.imageAlt': 'Bus am Hauptbahnhof Kreuzlingen während des Aufbaus der Chilbi',
+    'blog.article.turgovia-sicurezza-lavoro-orari.title': 'Thurgau: Arbeitssicherheit, Arbeitszeiten und Gesundheitsschutz',
+    'blog.article.turgovia-sicurezza-lavoro-orari.excerpt': 'Leitfaden zu Arbeitssicherheit, Gesundheitsschutz, Arbeitszeiten und Ruhezeiten im Kanton Thurgau gemäss den Vorschriften und den Vorgaben des Arbeitsinspektorats.',
+    'blog.article.turgovia-sicurezza-lavoro-orari.imageAlt': 'Arbeitssicherheit und Gesundheitsschutz im Kanton Thurgau',
 };
 
 export default blogMetaCantonTgDe;

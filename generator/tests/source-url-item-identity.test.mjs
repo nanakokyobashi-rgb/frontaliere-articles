@@ -318,6 +318,19 @@ test('pageTitleEvidence: og:title, twitter:title, <title> e <h1>; niente da una 
   assert.equal(pageTitleEvidence(''), '');
 });
 
+test('pageTitleEvidence chiude il percorso su un tag non terminato', () => {
+  const malformed = '<meta data="<title>Titolo falso</title>';
+  assert.equal(pageTitleEvidence(malformed), '', 'un titolo dopo il tag malformato non e\' evidenza attiva');
+
+  // Ogni apertura apparente lascia la ricerca di `>` senza una chiusura: il
+  // vecchio caller riprovava dall\'apertura successiva e diventava quadratico.
+  const repeated = '<meta data=' + '<x '.repeat(16000) + '"';
+  const started = performance.now();
+  assert.equal(pageTitleEvidence(repeated), '');
+  const elapsed = performance.now() - started;
+  assert.ok(elapsed < 250, `ledger scanner troppo lento su markup malformato: ${elapsed.toFixed(1)}ms`);
+});
+
 test('la generazione si ferma se la pagina di un URL riusato non e\' l\'item scelto', () => {
   const start = SRC.indexOf('async function generateAndValidateArticle(sourceUrl, sourceContext = null) {');
   const fn = SRC.slice(start, SRC.indexOf('\n}\n', start));

@@ -36,6 +36,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.cff-eclepens-treni-ripresa.title': 'CFF-Züge zwischen Yverdon-les-Bains und Lausanne: Verkehr wieder aufgenommen',
     'blog.article.cff-eclepens-treni-ripresa.excerpt': 'Verkehr am Sonntag um 05:40 Uhr wieder aufgenommen Bahnlinie Yverdon-les-Bains–Lausanne wieder im Normalbetrieb Brandstiftung in Eclépens: Beeinträchtigungen',
     'blog.article.cff-eclepens-treni-ripresa.imageAlt': 'CFF-Zug auf der Strecke Yverdon-les-Bains–Lausanne nach der Wiederaufnahme.',
+    'blog.article.scuole-vaud-furti-inchieste.title': 'Acht Waadtländer Schulen von nächtlichen Einbrüchen betroffen',
+    'blog.article.scuole-vaud-furti-inchieste.excerpt': 'Acht Waadtländer Schulen in zehn Tagen betroffen Alle Vorfälle ereigneten sich nachts Orbe schätzt die Schäden auf mehrere Tausend Franken Die Kantonspolizei',
+    'blog.article.scuole-vaud-furti-inchieste.imageAlt': 'Schulflur im Kanton Waadt mit Türschäden nach einem Einbruch',
 };
 
 export default blogMetaCantonVdDe;

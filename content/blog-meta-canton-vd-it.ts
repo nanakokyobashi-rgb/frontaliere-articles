@@ -36,6 +36,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.cff-eclepens-treni-ripresa.title': 'Treni CFF tra Yverdon-les-Bains e Losanna: traffico ripreso',
     'blog.article.cff-eclepens-treni-ripresa.excerpt': 'Traffico ripreso alle 05:40 di domenica Linea Yverdon-les-Bains–Losanna tornata normale Incendio doloso a Eclépens: disagi da venerdì CFF mobilitati: circa 100',
     'blog.article.cff-eclepens-treni-ripresa.imageAlt': 'Treno CFF sulla linea tra Yverdon-les-Bains e Losanna dopo la ripresa del traffico.',
+    'blog.article.scuole-vaud-furti-inchieste.title': 'Otto scuole vaudesi colpite da furti notturni',
+    'blog.article.scuole-vaud-furti-inchieste.excerpt': 'Otto scuole vaudesi colpite in dieci giorni Tutti gli episodi sono avvenuti di notte Orbe stima danni per migliaia di franchi La polizia cantonale ha aperto più',
+    'blog.article.scuole-vaud-furti-inchieste.imageAlt': 'Sala scolastica del Canton Vaud con danni alle porte dopo un furto',
 };
 
 export default blogMetaCantonVdIt;
