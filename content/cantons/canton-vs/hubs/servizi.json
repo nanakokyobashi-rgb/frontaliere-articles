@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T01:25:57.491Z",
-  "contentHash": "15a0a1389962b65dfe9343d55e1b1def19d3fe91b07310d375544e6526a1e38a",
+  "updatedAt": "2026-10-17T04:59:03.087Z",
+  "contentHash": "aafd6089c1e3ad66e273757f283d59609e786e4dcd388e46e81bb0f852d1c042",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-16T16:39:19.839Z",
+      "updatedAt": "2026-10-16T21:07:20.711Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-16T22:56:43.215Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T15:35:32.859Z",
+      "updatedAt": "2026-10-16T20:07:19.130Z",
       "keyFacts": 0
     }
   ],
@@ -70,7 +75,7 @@
           "items": [
             {
               "label": "VS406",
-              "value": "3100 CHF",
+              "value": "4500 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-16T14:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947"
@@ -92,7 +97,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-16T16:39:19.839Z"
+          "updatedAt": "2026-10-16T21:07:20.711Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "12 °C",
+              "detail": "oggi da 14 a 15 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-16T22:56:43.215Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +149,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51109625"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
@@ -210,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T04:59:03.087Z"
     },
     "en": {
       "canton": "VS",
@@ -258,7 +277,7 @@
           "items": [
             {
               "label": "VS406",
-              "value": "3,100 CHF",
+              "value": "4,500 CHF",
               "detail": "current bid",
               "date": "2026-11-16T14:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947"
@@ -280,7 +299,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-16T16:39:19.839Z"
+          "updatedAt": "2026-10-16T21:07:20.711Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "12 °C",
+              "detail": "today from 14 to 15 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-16T22:56:43.215Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -318,7 +351,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51109625"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
@@ -394,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T04:59:03.087Z"
     },
     "de": {
       "canton": "VS",
@@ -442,7 +475,7 @@
           "items": [
             {
               "label": "VS406",
-              "value": "3’100 CHF",
+              "value": "4’500 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-16T14:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947"
@@ -464,7 +497,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-16T16:39:19.839Z"
+          "updatedAt": "2026-10-16T21:07:20.711Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "12 °C",
+              "detail": "heute 14 bis 15 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-16T22:56:43.215Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -502,7 +549,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51109625"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
@@ -578,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T04:59:03.087Z"
     },
     "fr": {
       "canton": "VS",
@@ -626,7 +673,7 @@
           "items": [
             {
               "label": "VS406",
-              "value": "3 100 CHF",
+              "value": "4 500 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-16T14:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947"
@@ -648,7 +695,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-16T16:39:19.839Z"
+          "updatedAt": "2026-10-16T21:07:20.711Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "12 °C",
+              "detail": "aujourd’hui de 14 à 15 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-16T22:56:43.215Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -686,7 +747,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51109625"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
@@ -758,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T04:59:03.087Z"
     }
   }
 }

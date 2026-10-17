@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T01:25:57.491Z",
-  "contentHash": "3bd5d0fde97adef2eea185aac2cf7f49e49b40644ea12935b796f8d66abd5596",
+  "updatedAt": "2026-10-17T04:59:03.087Z",
+  "contentHash": "c7fb28f1543b316409a2f335d04e5bee26ebcb73876025ad95628084a639b0b3",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,8 +14,13 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-16T16:39:19.839Z",
+      "updatedAt": "2026-10-16T21:07:20.711Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-16T22:56:43.215Z",
+      "keyFacts": 0
     }
   ],
   "locales": {
@@ -65,7 +70,7 @@
           "items": [
             {
               "label": "SH1721",
-              "value": "1000 CHF",
+              "value": "1050 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-21T20:00:00.000Z",
               "url": "https://www.auktion-stva.sh.ch/de/auction/69631"
@@ -87,7 +92,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-16T16:39:19.839Z"
+          "updatedAt": "2026-10-16T21:07:20.711Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "11 °C",
+              "detail": "oggi da 11 a 12 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-16T22:56:43.215Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +174,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T04:59:03.087Z"
     },
     "en": {
       "canton": "SH",
@@ -203,7 +222,7 @@
           "items": [
             {
               "label": "SH1721",
-              "value": "1,000 CHF",
+              "value": "1,050 CHF",
               "detail": "current bid",
               "date": "2026-10-21T20:00:00.000Z",
               "url": "https://www.auktion-stva.sh.ch/de/auction/69631"
@@ -225,7 +244,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-16T16:39:19.839Z"
+          "updatedAt": "2026-10-16T21:07:20.711Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "11 °C",
+              "detail": "today from 11 to 12 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-16T22:56:43.215Z"
         }
       ],
       "curatedArticles": [
@@ -289,7 +322,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T04:59:03.087Z"
     },
     "de": {
       "canton": "SH",
@@ -337,7 +370,7 @@
           "items": [
             {
               "label": "SH1721",
-              "value": "1’000 CHF",
+              "value": "1’050 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-21T20:00:00.000Z",
               "url": "https://www.auktion-stva.sh.ch/de/auction/69631"
@@ -359,7 +392,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-16T16:39:19.839Z"
+          "updatedAt": "2026-10-16T21:07:20.711Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "11 °C",
+              "detail": "heute 11 bis 12 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-16T22:56:43.215Z"
         }
       ],
       "curatedArticles": [
@@ -423,7 +470,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T04:59:03.087Z"
     },
     "fr": {
       "canton": "SH",
@@ -471,7 +518,7 @@
           "items": [
             {
               "label": "SH1721",
-              "value": "1 000 CHF",
+              "value": "1 050 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-21T20:00:00.000Z",
               "url": "https://www.auktion-stva.sh.ch/de/auction/69631"
@@ -493,7 +540,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-16T16:39:19.839Z"
+          "updatedAt": "2026-10-16T21:07:20.711Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "11 °C",
+              "detail": "aujourd’hui de 11 à 12 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-16T22:56:43.215Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +614,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T01:25:57.491Z"
+      "updatedAt": "2026-10-17T04:59:03.087Z"
     }
   }
 }
