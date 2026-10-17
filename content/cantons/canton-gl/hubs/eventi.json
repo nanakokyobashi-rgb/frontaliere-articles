@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T00:44:41.594Z",
-  "contentHash": "e6fb17dfe7242987c40287bb4c517f43bc91f3d5a9f0b18935964c9cb621bf68",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "7048511d9b4a4e5fd92c6e135ba76b4958c2d6836fdb03d221bea527dfbb6b0b",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T15:35:32.859Z",
+      "updatedAt": "2026-10-16T20:07:19.130Z",
       "keyFacts": 0
     }
   ],
@@ -113,36 +113,18 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Klöntalerstrasse: limitazione staldengarten–bützi",
-          "url": "/articoli-glarona/klontalstrasse-staldengarten-butzi/",
-          "excerpt": "Una limitazione al traffico riguarda la Klöntalerstrasse nel tratto Staldengarten–Bützi, nel Canton Glarona.",
-          "date": "2026-10-17T00:33:53.716Z"
-        },
-        {
-          "title": "Imposta immobiliare seconde case Glarona: via libera dal Governo",
-          "url": "/articoli-glarona/imposta-seconde-case-glarona/",
-          "excerpt": "La mozione è stata depositata il 10 settembre 2026.",
-          "date": "2026-10-11T12:52:17.201Z"
-        },
-        {
-          "title": "Glarona: di nuovo i premi standard più bassi",
-          "url": "/articoli-glarona/premi-standard-glarona/",
-          "excerpt": "La Glarner Krankenversicherung torna ai premi standard più bassi. In passato, lo stesso primato aveva portato la cassa in serie difficoltà.",
-          "date": "2026-10-08T13:30:13.016Z"
-        },
-        {
-          "title": "Glarona: dieci anni per compensare le perdite fiscali",
-          "url": "/articoli-glarona/revisione-fiscale-canton-glarona/",
-          "excerpt": "Il Governo di Glarona propone di estendere da sette a dieci anni la compensazione delle perdite fiscali, valida dal periodo 2020, e di dividere a metà le deduzioni per figli tra genitori non tassati congiuntamente.",
-          "date": "2026-10-07T08:45:21.300Z"
+          "title": "Eventi del weekend nel Canton Glarona: cosa fare sabato e domenica",
+          "url": "/articoli-glarona/eventi-weekend-glarona/",
+          "excerpt": "Eventi nel Canton Glarona ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:27:55.911Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Glarona",
@@ -153,7 +135,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:44:41.594Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "GL",
@@ -249,36 +231,18 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Klöntalerstrasse: restriction staldengarten–bützi",
-          "url": "/en/glarus-articles/klontalstrasse-traffic-restriction/",
-          "excerpt": "A traffic restriction affects Klöntalerstrasse on the Staldengarten–Bützi section, in the Canton of Glarus.",
-          "date": "2026-10-17T00:33:53.716Z"
-        },
-        {
-          "title": "Glarus second-home property tax: government gives the green light",
-          "url": "/en/glarus-articles/secondary-homes-tax-glarus/",
-          "excerpt": "The motion was submitted on September 10, 2026.",
-          "date": "2026-10-11T12:52:17.201Z"
-        },
-        {
-          "title": "Glarus: once again the lowest standard premiums",
-          "url": "/en/glarus-articles/glarner-lowest-standard-premiums/",
-          "excerpt": "Glarner Krankenversicherung returns to the lowest standard premiums. In the past, the same distinction had led the health insurer into serious difficulties.",
-          "date": "2026-10-08T13:30:13.016Z"
-        },
-        {
-          "title": "Glarus: ten years to offset tax losses",
-          "url": "/en/glarus-articles/tax-law-amendment-canton-glarus/",
-          "excerpt": "The Government of Glarus proposes extending the carryforward of tax losses from seven to ten years, applicable from the 2020 tax period, and splitting child deductions equally between parents who are not taxed jointly.",
-          "date": "2026-10-07T08:45:21.300Z"
+          "title": "Weekend events in the canton of Glarus: what to do Saturday & Sunday",
+          "url": "/en/glarus-articles/weekend-events-glarus/",
+          "excerpt": "Events in the canton of Glarus every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:27:55.911Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "All events in the canton of Glarus",
@@ -289,7 +253,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:44:41.594Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "GL",
@@ -385,36 +349,18 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Klöntalerstrasse: Verkehrsbeschränkung Staldengarten–Bützi",
-          "url": "/de/glarus-artikel/verkehrseinschraenkung-kloentalerstrasse/",
-          "excerpt": "Eine Verkehrsbeschränkung betrifft die Klöntalerstrasse im Abschnitt Staldengarten–Bützi im Kanton Glarus.",
-          "date": "2026-10-17T00:33:53.716Z"
-        },
-        {
-          "title": "Immobiliensteuer für Zweitwohnungen in Glarus: grünes Licht von der Regierung",
-          "url": "/de/glarus-artikel/zweitwohnungssteuer-glarus/",
-          "excerpt": "Die Motion wurde am 10.",
-          "date": "2026-10-11T12:52:17.201Z"
-        },
-        {
-          "title": "Glarus: wieder die niedrigsten Standardprämien",
-          "url": "/de/glarus-artikel/glarner-guenstigste-standardpraemien/",
-          "excerpt": "Die Glarner Krankenversicherung hat wieder die niedrigsten Standardprämien. In der Vergangenheit hatte derselbe Spitzenplatz die Kasse in ernsthafte Schwierigkeiten gebracht.",
-          "date": "2026-10-08T13:30:13.016Z"
-        },
-        {
-          "title": "Glarus: zehn Jahre zur Verrechnung steuerlicher Verluste",
-          "url": "/de/glarus-artikel/steuergesetz-aenderung-kanton-glarus/",
-          "excerpt": "Die Regierung von Glarus schlägt vor, die ab der Steuerperiode 2020 geltende Verrechnung steuerlicher Verluste von sieben auf zehn Jahre zu verlängern und die Kinderabzüge zwischen nicht gemeinsam veranlagten Eltern…",
-          "date": "2026-10-07T08:45:21.300Z"
+          "title": "Veranstaltungen am Wochenende im Glarnerland: was tun Sa & So",
+          "url": "/de/glarus-artikel/wochenend-veranstaltungen-glarus/",
+          "excerpt": "Veranstaltungen im Glarnerland an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:27:55.911Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen im Glarnerland",
@@ -425,7 +371,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T00:44:41.594Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "GL",
@@ -521,36 +467,18 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Klöntalerstrasse : restriction Staldengarten–Bützi",
-          "url": "/fr/articles-glaris/restriction-trafic-kloentalerstrasse/",
-          "excerpt": "Une restriction de circulation concerne la Klöntalerstrasse sur le tronçon Staldengarten–Bützi, dans le canton de Glaris.",
-          "date": "2026-10-17T00:33:53.716Z"
-        },
-        {
-          "title": "Impôt immobilier à Glaris : feu vert du Gouvernement",
-          "url": "/fr/articles-glaris/taxe-residences-secondaires-glaris/",
-          "excerpt": "La motion a été déposée le 10 septembre 2026.",
-          "date": "2026-10-11T12:52:17.201Z"
-        },
-        {
-          "title": "Glaris : de nouveau les primes standard les plus basses",
-          "url": "/fr/articles-glaris/glarner-primes-standard-basses/",
-          "excerpt": "La Glarner Krankenversicherung revient aux primes standard les plus basses. Par le passé, cette même distinction avait plongé la caisse dans de sérieuses difficultés.",
-          "date": "2026-10-08T13:30:13.016Z"
-        },
-        {
-          "title": "Glaris : dix ans pour compenser les pertes fiscales",
-          "url": "/fr/articles-glaris/modification-de-la-loi-fiscale-canton-de-glaris/",
-          "excerpt": "Le gouvernement de Glaris propose de prolonger de sept à dix ans la compensation des pertes fiscales, valable à partir de la période 2020, et de répartir par moitié les déductions pour enfants entre les parents non…",
-          "date": "2026-10-07T08:45:21.300Z"
+          "title": "Événements du week-end dans le canton de Glaris : que faire samedi & dimanche",
+          "url": "/fr/articles-glaris/evenements-week-end-glaris/",
+          "excerpt": "Événements dans le canton de Glaris chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:27:55.911Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tous les événements dans le canton de Glaris",
@@ -561,7 +489,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T00:44:41.594Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }

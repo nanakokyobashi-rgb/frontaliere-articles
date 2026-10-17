@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T01:20:30.754Z",
-  "contentHash": "e3964439f06011879ebe2ea3c505bda55082fee7152d96e06b303e246c3e308f",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "59a70c96554ac9b2a976ccd4db20f01ae68bcdc8c6cffb216a7cbbe0e969966b",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Eventi del weekend in Vallese: cosa fare sabato e domenica",
+          "url": "/articoli-vallese/eventi-weekend-vallese/",
+          "excerpt": "Eventi in Vallese ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:33:34.787Z"
+        },
+        {
           "title": "Salario minimo in Vallese: voto il 29 novembre sui CHF 22",
           "url": "/articoli-vallese/valais-salario-minimo-2026/",
           "excerpt": "15'000 salariati a tempo pieno non vivono del salario Il voto sul salario minimo è fissato al 29 novembre La proposta prevede CHF 22 lordi l'ora Il Parlamento",
@@ -106,12 +112,6 @@
           "url": "/articoli-vallese/vallese-piano-acqua-2035/",
           "excerpt": "Il Consiglio di Stato adotta il Piano d'azione 2035 Attuazione progressiva dal 2027, secondo priorità e risorse Le misure passano da 39 a 25 dopo la revisione",
           "date": "2026-10-09T16:44:17.957Z"
-        },
-        {
-          "title": "Sion: apre la Maison de la garde per le urgenze",
-          "url": "/articoli-vallese/maison-garde-ospedale-sion/",
-          "excerpt": "Dal 1° settembre l'ospedale di Sion ha attivato un nuovo presidio per i casi non vitali, attivo ogni giorno dalle 18 alle 22.",
-          "date": "2026-10-08T17:03:41.241Z"
         }
       ],
       "links": [
@@ -140,7 +140,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T01:20:30.754Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "VS",
@@ -211,6 +211,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Weekend events in Valais: what to do Saturday & Sunday",
+          "url": "/en/valais-articles/weekend-events-valais/",
+          "excerpt": "Events in Valais every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:33:34.787Z"
+        },
+        {
           "title": "Minimum wage in Valais: vote on November 29 on CHF 22",
           "url": "/en/valais-articles/valais-minimum-wage-2026/",
           "excerpt": "15'000 full-time employees cannot make a living from their wages The vote on the minimum wage is set for November 29 The proposal provides for a gross hourly",
@@ -233,12 +239,6 @@
           "url": "/en/valais-articles/valais-water-action-plan-2035/",
           "excerpt": "The Council of State adopts the 2035 Action Plan Gradual implementation from 2027, according to priorities and resources The measures decrease from 39 to 25",
           "date": "2026-10-09T16:44:17.957Z"
-        },
-        {
-          "title": "Sion: the Maison de la garde opens for emergencies",
-          "url": "/en/valais-articles/maison-garde-sion-hospital/",
-          "excerpt": "As of September 1st, Sion Hospital has opened a new facility for non-life-threatening cases, open every day from 18 to 22.",
-          "date": "2026-10-08T17:03:41.241Z"
         }
       ],
       "links": [
@@ -267,7 +267,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T01:20:30.754Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "VS",
@@ -338,6 +338,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Veranstaltungen am Wochenende im Wallis: was tun Sa & So",
+          "url": "/de/wallis-artikel/wochenend-veranstaltungen-wallis/",
+          "excerpt": "Veranstaltungen im Wallis an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:33:34.787Z"
+        },
+        {
           "title": "Mindestlohn im Wallis: Abstimmung am 29. November über CHF 22",
           "url": "/de/wallis-artikel/wallis-mindestlohn-2026/",
           "excerpt": "15'000 Vollzeitbeschäftigte leben nicht vom Lohn Die Abstimmung über den Mindestlohn ist auf den 29.",
@@ -360,12 +366,6 @@
           "url": "/de/wallis-artikel/wallis-aktionsplan-wasser-2035/",
           "excerpt": "Der Staatsrat verabschiedet den Aktionsplan 2035 Schrittweise Umsetzung ab 2027 nach Prioritäten und Ressourcen Die Maßnahmen gehen nach der Überarbeitung",
           "date": "2026-10-09T16:44:17.957Z"
-        },
-        {
-          "title": "Sitten: Die Maison de la garde für Notfälle öffnet",
-          "url": "/de/wallis-artikel/maison-garde-spital-sitten/",
-          "excerpt": "Seit dem 1. September hat das Spital von Sitten eine neue Anlaufstelle für nicht lebensbedrohliche Fälle eingerichtet, die täglich von 18 bis 22 Uhr geöffnet ist.",
-          "date": "2026-10-08T17:03:41.241Z"
         }
       ],
       "links": [
@@ -390,7 +390,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T01:20:30.754Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "VS",
@@ -461,6 +461,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Événements du week-end en Valais : que faire samedi & dimanche",
+          "url": "/fr/articles-valais/evenements-week-end-valais/",
+          "excerpt": "Événements en Valais chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:33:34.787Z"
+        },
+        {
           "title": "Salaire minimum en Valais : vote le 29 novembre sur les CHF 22",
           "url": "/fr/articles-valais/valais-salaire-minimum-2026/",
           "excerpt": "15'000 salariés à temps plein ne vivent pas de leur salaire Le vote sur le salaire minimum est fixé au 29 novembre La proposition prévoit CHF 22 bruts",
@@ -483,12 +489,6 @@
           "url": "/fr/articles-valais/valais-plan-action-eau-2035/",
           "excerpt": "Le Conseil d'État adopte le Plan d'action 2035 Mise en œuvre progressive à partir de 2027, selon les priorités et les ressources Les mesures passent de 39 à 25",
           "date": "2026-10-09T16:44:17.957Z"
-        },
-        {
-          "title": "Sion : la Maison de la garde ouvre pour les urgences",
-          "url": "/fr/articles-valais/maison-garde-hopital-sion/",
-          "excerpt": "À partir du 1er septembre, l’hôpital de Sion a mis en place un nouveau dispositif pour les cas non vitaux, ouvert tous les jours de 18 à 22 heures.",
-          "date": "2026-10-08T17:03:41.241Z"
         }
       ],
       "links": [
@@ -517,7 +517,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T01:20:30.754Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T00:54:51.267Z",
-  "contentHash": "460487c4298a8ce23cf24505b56a8a45f778a970405ce58ad08e7ed366f1e2a4",
+  "updatedAt": "2026-10-17T11:38:04.345Z",
+  "contentHash": "84ae1669161b27986c375e8f2ee2cb9d2ef749c447b5087333f37663877e24c2",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Eventi del weekend nel Canton Svitto: cosa fare sabato e domenica",
+          "url": "/articoli-svitto/eventi-weekend-svitto/",
+          "excerpt": "Eventi nel Canton Svitto ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
+          "date": "2026-10-17T11:31:03.638Z"
+        },
+        {
           "title": "Küssnacht amplia la rete verso Immensee, Fänn e Adligenswil",
           "url": "/articoli-svitto/kuessnacht-rete-teleriscaldamento/",
           "excerpt": "Küssnacht punta all'uscita dalle fonti fossili con la pianificazione energetica comunale e l'estensione della rete verso Immensee, Fänn e Adligenswil.",
@@ -94,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T00:54:51.267Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "en": {
       "canton": "SZ",
@@ -141,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Weekend events in the canton of Schwyz: what to do Saturday & Sunday",
+          "url": "/en/schwyz-articles/weekend-events-schwyz/",
+          "excerpt": "Events in the canton of Schwyz every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
+          "date": "2026-10-17T11:31:03.638Z"
+        },
+        {
           "title": "Küssnacht expands network to Immensee, Fänn and Adligenswil",
           "url": "/en/schwyz-articles/kuessnacht-district-heating/",
           "excerpt": "Küssnacht is aiming to phase out fossil fuels with municipal energy planning and the extension of the grid to Immensee, Fänn and Adligenswil.",
@@ -175,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T00:54:51.267Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "de": {
       "canton": "SZ",
@@ -222,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Veranstaltungen am Wochenende im Kanton Schwyz: was tun Sa & So",
+          "url": "/de/schwyz-artikel/wochenend-veranstaltungen-schwyz/",
+          "excerpt": "Veranstaltungen im Kanton Schwyz an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
+          "date": "2026-10-17T11:31:03.638Z"
+        },
+        {
           "title": "Küssnacht erweitert das Netz auf Immensee, Fänn und Adligenswil",
           "url": "/de/schwyz-artikel/kuessnacht-fernwaerme/",
           "excerpt": "Küssnacht strebt an, die fossilen Brennstoffe mit kommunaler Energieplanung und dem Netzausbau bis Immensee, Fänn und Adligenswil schrittweise abzuschaffen.",
@@ -256,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T00:54:51.267Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     },
     "fr": {
       "canton": "SZ",
@@ -303,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Événements du week-end dans le canton de Schwytz : que faire samedi & dimanche",
+          "url": "/fr/articles-schwytz/evenements-week-end-schwytz/",
+          "excerpt": "Événements dans le canton de Schwytz chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
+          "date": "2026-10-17T11:31:03.638Z"
+        },
+        {
           "title": "Küssnacht étend son réseau à Immensee, Fänn et Adligenswil",
           "url": "/fr/articles-schwytz/kuessnacht-chauffage-distance/",
           "excerpt": "Küssnacht vise à éliminer progressivement les combustibles fossiles grâce à la planification énergétique municipale et à l'extension du réseau vers Immensee, Fänn et Adligenswil.",
@@ -337,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T00:54:51.267Z"
+      "updatedAt": "2026-10-17T11:38:04.345Z"
     }
   }
 }
