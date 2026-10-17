@@ -2712,6 +2712,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'scripts/publish-section-edge.mjs',
     'scripts/lib/section-bootstrap-lock.mjs',
     'scripts/ci/section-bootstrap-lock.mjs',
+    'scripts/lib/conditional-cdn-put.sh',
     'scripts/ci/fast-publish-section.mjs',
     'scripts/ci/retry-cmd.sh',
     'scripts/cf-purge-cache.mjs',

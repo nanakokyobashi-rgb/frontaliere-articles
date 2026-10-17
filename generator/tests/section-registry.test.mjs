@@ -90,6 +90,8 @@ import {
 import { floorViolations, unpublishedFamilySectionsOf } from '../../scripts/ci/verify-api-floors.mjs';
 import {
   CANTON_HUBS_API,
+  acquireBootstrapLocks,
+  BOOTSTRAP_WAIT_MS,
   declaredFiles,
   main as edgeMain,
   planRelease,
@@ -103,7 +105,10 @@ import {
   releaseDiffers,
 } from '../../scripts/publish-section-edge.mjs';
 import {
+  SECTION_BOOTSTRAP_LOCK_TTL_MS,
+  makeReleasedSectionBootstrapLock,
   makeSectionBootstrapLock,
+  parseSectionBootstrapLock,
   sectionBootstrapLockKey,
 } from '../../scripts/lib/section-bootstrap-lock.mjs';
 
@@ -724,6 +729,30 @@ function fakeIo() {
       store.set(`cc:${key}`, cacheControl);
       return true;
     },
+    acquireBootstrapLock: (section, commit) => {
+      const key = sectionBootstrapLockKey(section);
+      const current = store.get(key);
+      if (current) {
+        try {
+          const parsed = JSON.parse(current.toString('utf8'));
+          if (Date.parse(parsed.expiresAt) > Date.now()) return 'busy';
+        } catch {
+          return 'error';
+        }
+      }
+      store.set(key, Buffer.from(JSON.stringify(makeSectionBootstrapLock({
+        section,
+        commit,
+        owner: 'test/edge-publisher',
+        role: 'edge-publisher',
+        now: Date.now(),
+      }))));
+      return 'acquired';
+    },
+    releaseBootstrapLock: (section) => {
+      store.delete(sectionBootstrapLockKey(section));
+      return true;
+    },
     remove: (key) => {
       io.ops.push(`del ${key}`);
       if (io.fail('remove', key)) return false;
@@ -1174,6 +1203,51 @@ test('edge: il bootstrap live tiene il lock fino al rilascio prima del flip', as
   assert.deepEqual(result, { code: 0, phase: 'done', flipped: true });
 });
 
+test('edge: il lease R2 ha TTL oltre il timeout bootstrap e il tombstone resta scaduto', () => {
+  assert.ok(SECTION_BOOTSTRAP_LOCK_TTL_MS > 45 * 60 * 1000);
+  assert.ok(BOOTSTRAP_WAIT_MS > SECTION_BOOTSTRAP_LOCK_TTL_MS);
+  const active = makeSectionBootstrapLock({ section: 'canton-ti', commit: COMMIT, owner: 'test/bootstrap' });
+  assert.equal(active.role, 'bootstrap');
+  const released = makeReleasedSectionBootstrapLock({ section: 'canton-ti', commit: COMMIT, owner: 'test/bootstrap' });
+  assert.equal(released.role, 'released');
+  assert.equal(parseSectionBootstrapLock(released, { section: 'canton-ti' }).state, 'expired');
+  const cli = readFileSync(path.join(ROOT, 'scripts/ci/section-bootstrap-lock.mjs'), 'utf8');
+  assert.match(cli, /conditional-cdn-put\.sh/);
+  assert.match(cli, /If-Match/);
+  assert.match(cli, /If-None-Match/);
+});
+
+test('edge: l\'acquisizione multi-sezione rilascia i lease parziali prima del retry', async () => {
+  const held = new Set();
+  const released = [];
+  let blocked = true;
+  let waits = 0;
+  const io = {
+    acquireBootstrapLock: (section) => {
+      if (section === 'canton-appenzello' && blocked) return 'busy';
+      held.add(section);
+      return 'acquired';
+    },
+    releaseBootstrapLock: (section) => {
+      held.delete(section);
+      released.push(section);
+      return true;
+    },
+  };
+  const result = await acquireBootstrapLocks(['canton-appenzello', 'canton-ag'], COMMIT, io, {
+    waitMs: 1_000,
+    retryMs: 0,
+    sleep: async () => {
+      blocked = false;
+      waits += 1;
+    },
+  });
+  assert.deepEqual(result, { held: ['canton-ag', 'canton-appenzello'], error: null });
+  assert.deepEqual(released, ['canton-ag']);
+  assert.equal(waits, 1);
+  assert.deepEqual([...held], ['canton-ag', 'canton-appenzello']);
+});
+
 test('edge: dopo il PUT la release nuova e\' servita intera; un purge fallito esce non-zero senza incoerenze', async () => {
   const { io, logs, result } = await publish(DRAFT_ALL(), { history: [withLive(['canton-ti'], OLD)], fail: (op) => op === 'purge' });
   assert.deepEqual([result.code, result.phase, result.flipped], [1, 'purge', true]);
@@ -1465,7 +1539,7 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   const edge = readFileSync(path.join(ROOT, 'scripts/publish-section-edge.mjs'), 'utf8');
   const realIoSrc = edge.slice(edge.indexOf('export const realIo = {'), edge.indexOf('/** Quanto si aspetta'));
   const spawned = [...realIoSrc.matchAll(/'(scripts\/[A-Za-z0-9_\/.-]+\.(?:sh|mjs))'/g)].map((m) => m[1]);
-  for (const required of ['scripts/cf-purge-cache.mjs', 'scripts/ci/retry-cmd.sh', 'scripts/lib/delete-cdn-file.sh', 'scripts/lib/upload-cdn-file.sh']) {
+  for (const required of ['scripts/cf-purge-cache.mjs', 'scripts/ci/retry-cmd.sh', 'scripts/lib/delete-cdn-file.sh', 'scripts/lib/upload-cdn-file.sh', 'scripts/ci/section-bootstrap-lock.mjs']) {
     assert.ok(spawned.includes(required), `${required}: helper eseguito dal publisher assente`);
   }
   for (const file of spawned) walk(file);

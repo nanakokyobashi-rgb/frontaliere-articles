@@ -65,6 +65,8 @@ on:
       - 'generator/scripts/lib/canton-hubs/paths.mjs'
       - 'scripts/publish-section-edge.mjs'
       - 'scripts/lib/section-bootstrap-lock.mjs'
+      - 'scripts/ci/section-bootstrap-lock.mjs'
+      - 'scripts/lib/conditional-cdn-put.sh'
       - 'scripts/lib/delete-cdn-file.sh'
       # Il loader di Remote Config e' un input del publisher da quando porta il
       # kill-switch delle sezioni (CANTON_ARTICLE_SECTIONS_KILL) e il marker
@@ -168,8 +170,10 @@ jobs:
     runs-on: ubuntu-latest
     # MISURATO 2026-08-09: la run riuscita piu' recente (31315163937) impiega 44s
     # in totale, di cui 6s per "Build data surface" e 22s per la spinta all'edge.
-    # 20 minuti sono ~27x il caso normale: non tagliano niente di sano, e tagliano
-    # un job appeso. Questo workflow e `generator-ci.yml` erano gli unici due dei
+    # 80 minuti coprono il caso eccezionale del gate bootstrap condizionale (70m)
+    # senza tagliare un publish-api che sta aspettando il rilascio di un runner
+    # fast-publish-section ancora vivo. Questo workflow e `generator-ci.yml`
+    # erano gli unici due dei
     # 31 senza `timeout-minutes`, e qui l'assenza pesa il doppio: la concurrency
     # `publish-api` NON cancella (`cancel-in-progress: false`), quindi un job
     # appeso non fallisce — mette in coda ogni pubblicazione successiva dietro di
@@ -179,19 +183,16 @@ jobs:
     # 3 tentativi con backoff lineare allungano il caso peggiore, e senza un
     # tetto sarebbero 3 tentativi da 6 ore.
     #
-    # 20 e' un BUDGET, scelto piu' corto del caso peggiore teorico della scala
-    # di retry (3 tentativi del wrapper x i 5 fetch-retry di npm possono, su una
-    # rete davvero giu', superarlo). E' voluto: se la rete e' giu' da venti
-    # minuti, rimandare alla pubblicazione successiva costa una finestra di
-    # staleness di circa mezz'ora — mentre un job che resta appeso quaranta
-    # minuti blocca dietro di se' OGNI pubblicazione, perche' questa concurrency
-    # non cancella. Meglio tagliare la scala che tenere la coda ferma.
+    # 80 e' comunque un BUDGET, non una promessa di attesa infinita: se il
+    # bootstrap non rilascia il lease entro il suo TTL piu' il margine del
+    # publisher, la run fallisce fail-closed e la pubblicazione successiva
+    # puo' riconciliare lo stato senza annunciare pagine non pronte.
     #
     # Nota: un job fermato da `timeout-minutes` risulta `cancelled`, non
     # `failure`, quindi i reporter con `if: failure()` non lo vedono; a coprirlo
     # e' il cron di scan-job-timeouts.mjs. Il tetto serve comunque: e' cio' che
     # fa finire il job.
-    timeout-minutes: 20
+    timeout-minutes: 80
     # ⚠️ Il tetto qui sopra NON copre l'attesa al gate di questo `environment:`:
     # un job parcheggiato al gate non e' in esecuzione, e GitHub non gli applica
     # nessuna scadenza. Run 36762664618 e' rimasta in `waiting` dal
