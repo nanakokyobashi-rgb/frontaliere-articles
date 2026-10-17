@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T11:38:04.345Z",
-  "contentHash": "e122a146ace8a82a38194aaa7b34e245ef1cc1b1b5d50cda1a2479461fa8f458",
+  "updatedAt": "2026-10-17T14:03:25.701Z",
+  "contentHash": "1132be6892674e1881f70d4a9e1e72995b057df787815e83087d226bd27d175a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,6 +16,11 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-17T04:24:59.962Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-17T04:43:32.629Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -93,6 +98,20 @@
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
           "updatedAt": "2026-10-17T04:24:59.962Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "14 °C",
+              "detail": "oggi da 11 a 15 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-17T04:43:32.629Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -210,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "en": {
       "canton": "VD",
@@ -281,6 +300,20 @@
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
           "updatedAt": "2026-10-17T04:24:59.962Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "14 °C",
+              "detail": "today from 11 to 15 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-17T04:43:32.629Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -394,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "de": {
       "canton": "VD",
@@ -465,6 +498,20 @@
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
           "updatedAt": "2026-10-17T04:24:59.962Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "14 °C",
+              "detail": "heute 11 bis 15 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-17T04:43:32.629Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -578,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "fr": {
       "canton": "VD",
@@ -649,6 +696,20 @@
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
           "updatedAt": "2026-10-17T04:24:59.962Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 11 à 15 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-17T04:43:32.629Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -758,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     }
   }
 }

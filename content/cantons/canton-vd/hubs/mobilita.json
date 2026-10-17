@@ -4,22 +4,22 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T03:47:28.379Z",
-  "contentHash": "2a02f368bfa8c2836ca18ee77553d96b65780978700a36b0e28470e05d59b10c",
+  "updatedAt": "2026-10-17T14:03:25.701Z",
+  "contentHash": "afd9dcda0da798d55f7030624a4e316061a7257935e75d7e5e79e76844e9c7db",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-15T23:59:59.000Z",
+      "updatedAt": "2026-10-16T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-16T17:01:51.551Z",
+      "updatedAt": "2026-10-17T05:03:12.314Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T15:35:32.859Z",
+      "updatedAt": "2026-10-16T20:07:19.130Z",
       "keyFacts": 0
     }
   ],
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Chavannes-de-Bogis-Divonne, settimana conclusa: 15 ottobre 2026"
+          "note": "Chavannes-de-Bogis-Divonne, settimana conclusa: 16 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "17",
-          "note": "segnalazioni aggiornate: 16 ottobre 2026"
+          "value": "18",
+          "note": "segnalazioni aggiornate: 17 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "24",
-          "note": "segnalazioni aggiornate: 16 ottobre 2026"
+          "note": "segnalazioni aggiornate: 17 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 9 ottobre 2026 – 15 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 10 ottobre 2026 – 16 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Chavannes-de-Bogis-Divonne",
@@ -91,7 +91,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-15T23:59:59.000Z"
+          "updatedAt": "2026-10-16T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -148,7 +148,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-16T17:01:51.551Z"
+          "updatedAt": "2026-10-17T05:03:12.314Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -181,7 +181,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
@@ -265,7 +265,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-17T03:47:28.379Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "en": {
       "canton": "VD",
@@ -276,24 +276,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Chavannes-de-Bogis-Divonne, week ending 15 October 2026"
+          "note": "Chavannes-de-Bogis-Divonne, week ending 16 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "17",
-          "note": "reports as of 16 October 2026"
+          "value": "18",
+          "note": "reports as of 17 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "24",
-          "note": "reports as of 16 October 2026"
+          "note": "reports as of 17 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 9 October 2026 to 15 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 10 October 2026 to 16 October 2026, fastest first.",
           "items": [
             {
               "label": "Chavannes-de-Bogis-Divonne",
@@ -334,7 +334,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-15T23:59:59.000Z"
+          "updatedAt": "2026-10-16T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -391,7 +391,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-16T17:01:51.551Z"
+          "updatedAt": "2026-10-17T05:03:12.314Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -424,7 +424,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
@@ -507,7 +507,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-17T03:47:28.379Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "de": {
       "canton": "VD",
@@ -518,24 +518,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Chavannes-de-Bogis-Divonne, Woche bis 15. Oktober 2026"
+          "note": "Chavannes-de-Bogis-Divonne, Woche bis 16. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "17",
-          "note": "Meldungen vom 16. Oktober 2026"
+          "value": "18",
+          "note": "Meldungen vom 17. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "24",
-          "note": "Meldungen vom 16. Oktober 2026"
+          "note": "Meldungen vom 17. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 9. Oktober 2026 bis 15. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 10. Oktober 2026 bis 16. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Chavannes-de-Bogis-Divonne",
@@ -576,7 +576,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-15T23:59:59.000Z"
+          "updatedAt": "2026-10-16T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -633,7 +633,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-16T17:01:51.551Z"
+          "updatedAt": "2026-10-17T05:03:12.314Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -666,7 +666,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
@@ -749,7 +749,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-17T03:47:28.379Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     },
     "fr": {
       "canton": "VD",
@@ -760,24 +760,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Chavannes-de-Bogis-Divonne, semaine jusqu’au 15 octobre 2026"
+          "note": "Chavannes-de-Bogis-Divonne, semaine jusqu’au 16 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "17",
-          "note": "signalements au 16 octobre 2026"
+          "value": "18",
+          "note": "signalements au 17 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "24",
-          "note": "signalements au 16 octobre 2026"
+          "note": "signalements au 17 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 9 octobre 2026 au 15 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 10 octobre 2026 au 16 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Chavannes-de-Bogis-Divonne",
@@ -818,7 +818,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-15T23:59:59.000Z"
+          "updatedAt": "2026-10-16T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -875,7 +875,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-16T17:01:51.551Z"
+          "updatedAt": "2026-10-17T05:03:12.314Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -908,7 +908,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
@@ -992,7 +992,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-17T03:47:28.379Z"
+      "updatedAt": "2026-10-17T14:03:25.701Z"
     }
   }
 }
