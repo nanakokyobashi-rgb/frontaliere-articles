@@ -1217,6 +1217,25 @@ test('edge: il lease R2 ha TTL oltre il timeout bootstrap e il tombstone resta s
   assert.match(cli, /If-None-Match/);
 });
 
+test('edge: il release post-flip ritenta i lease rimasti attivi', async () => {
+  let attempts = 0;
+  const { io, logs, result } = await publish(withLive(['canton-ti']), {
+    seed: (fake) => {
+      const release = fake.releaseBootstrapLock;
+      fake.releaseBootstrapLock = (section) => {
+        attempts += 1;
+        if (attempts === 1) return false;
+        return release(section);
+      };
+    },
+    sleep: async () => {},
+  });
+  assert.deepEqual(result, { code: 0, phase: 'done', flipped: true });
+  assert.equal(attempts, 2);
+  assert.equal(io.store.has(sectionBootstrapLockKey('canton-ti')), false);
+  assert.match(logs.join('\n'), /ritento il release di 1 bootstrap lock/);
+});
+
 test('edge: l\'acquisizione multi-sezione rilascia i lease parziali prima del retry', async () => {
   const held = new Set();
   const released = [];

@@ -672,27 +672,36 @@ export async function publishRelease(
   // release non sono puntati da niente: si tolgono best-effort.
   const staged = [];
   let heldBootstrapLocks = [];
-  const releaseHeldBootstrapLocks = () => {
-    const held = heldBootstrapLocks.splice(0);
-    let released = true;
-    for (const section of held) {
-      try {
-        if (!io.releaseBootstrapLock(section)) {
-          released = false;
-          log(`::error::[section-edge] bootstrap lock di ${section} non rilasciato dopo il flip`);
+  const releaseHeldBootstrapLocks = async ({ retry = false } = {}) => {
+    const maxAttempts = retry ? 3 : 1;
+    const pause = sleep ?? ((ms) => new Promise((resolve) => setTimeout(resolve, ms)));
+    for (let attempt = 1; attempt <= maxAttempts && heldBootstrapLocks.length; attempt++) {
+      const pending = [];
+      for (const section of heldBootstrapLocks) {
+        try {
+          if (!io.releaseBootstrapLock(section)) {
+            pending.push(section);
+            log(`::error::[section-edge] bootstrap lock di ${section} non rilasciato (tentativo ${attempt}/${maxAttempts})`);
+          }
+        } catch (error) {
+          pending.push(section);
+          log(`::error::[section-edge] release bootstrap lock di ${section} fallito (tentativo ${attempt}/${maxAttempts}): ${error?.message ?? error}`);
         }
-      } catch (error) {
-        released = false;
-        log(`::error::[section-edge] release bootstrap lock di ${section} fallito: ${error?.message ?? error}`);
+      }
+      heldBootstrapLocks = pending;
+      if (pending.length === 0) return true;
+      if (attempt < maxAttempts) {
+        log(`::warning::[section-edge] ritento il release di ${pending.length} bootstrap lock dopo ${bootstrapRetryMs} ms`);
+        await pause(Math.max(0, bootstrapRetryMs));
       }
     }
-    return released;
+    return heldBootstrapLocks.length === 0;
   };
-  const stopBeforeFlip = (phase, what) => {
+  const stopBeforeFlip = async (phase, what) => {
     for (const key of staged) {
       if (!io.remove(key)) log(`::notice::[section-edge] file di staging non ripulito: ${key}`);
     }
-    const released = releaseHeldBootstrapLocks();
+    const released = await releaseHeldBootstrapLocks();
     return stop(phase, released ? what : `${what}; release bootstrap lock non confermato`, false, !released);
   };
 
@@ -778,8 +787,8 @@ export async function publishRelease(
     fs.rmSync(pointerDir, { recursive: true, force: true });
   }
   if (!flipped) return stopBeforeFlip('flip', `puntatore non caricato: ${EDGE_SECTION_REGISTRY_FILE}`);
-  if (!releaseHeldBootstrapLocks()) {
-    return stop('bootstrap-lock-release', 'il puntatore e\' nuovo ma il lease non e\' stato rilasciato; attesa della scadenza', true, true);
+  if (!(await releaseHeldBootstrapLocks({ retry: true }))) {
+    return stop('bootstrap-lock-release', 'il puntatore e\' nuovo ma il lease non e\' stato rilasciato dopo i retry; riconciliazione necessaria', true, true);
   }
 
   // 3. Purge: il puntatore e le URL apex delle sitemap delle due release.
