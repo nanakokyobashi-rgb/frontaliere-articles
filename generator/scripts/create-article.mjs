@@ -8433,6 +8433,17 @@ function findActiveSourceHead(html) {
   const scan = sourceScanStructure(html, {
     onText: ({ text, start, stack }) => {
       if (
+        documentLevel &&
+        !sawHtml &&
+        !sawHead &&
+        !sawBody &&
+        stack.length === 0 &&
+        /\S/u.test(text) &&
+        !/^!doctype\b[^>]*>$/iu.test(text.trim())
+      ) {
+        failClosed();
+      }
+      if (
         bodyState?.implicit &&
         bodyState.trusted &&
         /\S/u.test(text) &&
@@ -8504,7 +8515,7 @@ function findActiveSourceHead(html) {
           implicitHeadStart = null;
         }
         const directDocumentHead =
-          !sawHead && !sawBody && (stack.length === 0 || (
+          documentLevel && !sawHead && !sawBody && (stack.length === 0 || (
             stack.length === 1 && parent?.name === 'html' && parent.namespace === 'html'
           ));
         const nestedHeadInsideTrustedBody = !directDocumentHead
@@ -8903,13 +8914,15 @@ async function fetchPageContent(url) {
     }
     const { text, method, paragraphCount, publishedAt } = extractArticleText(isolation.html, {
       maxChars: 8000,
-      scriptingDisabled: true,
+      scriptingDisabled: isolation.isolated,
     });
     // Use structured extractor (JSON-LD → article → main → og + paragraphs → naive)
     // to feed the generator and fact-checker the actual article body instead of
     // 70%+ nav/footer/ads noise. See scripts/lib/extract-article-text.mjs.
     lastSourcePublishedAt = publishedAt || '';
-    lastSourcePageTitle = pageTitleEvidence(isolation.html, { scriptingDisabled: true });
+    lastSourcePageTitle = pageTitleEvidence(isolation.html, {
+      scriptingDisabled: isolation.isolated,
+    });
     if (suppliedCantonSourceContent.length >= 200) {
       lastSourcePublishedAt = suppliedCantonSourcePublishedAt || lastSourcePublishedAt;
       lastSourcePageTitle = suppliedCantonSourceTitle || lastSourcePageTitle;

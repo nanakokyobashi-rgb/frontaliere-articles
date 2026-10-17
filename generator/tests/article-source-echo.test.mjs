@@ -597,6 +597,18 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.equal(res.html, noRoot);
   });
 
+  it('rifiuta un head dopo testo già entrato al livello documento', () => {
+    const staleJsonLd = '<script type="application/ld+json">'
+      + '{"headline":"STALE_HEAD_AFTER_TOP_LEVEL_TEXT"}</script>';
+    const page = 'testo già nel body<head><title>titolo stale</title>'
+      + staleJsonLd + '</head><article>' + ARTICLE_PROSE + '</article>';
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.trustedDocument, false);
+    assert.equal(res.isolated, false);
+    assert.equal(res.root, 'none');
+    assert.equal(res.html, page);
+  });
+
   it('regge input degeneri', () => {
     for (const input of ['', null, undefined]) {
       const res = isolateMainSourceHtml(input);
@@ -651,7 +663,7 @@ describe('cablaggio in fetchPageContent', () => {
     const isolateAt = body.indexOf('const isolation = isolateMainSourceHtml(html);');
     const trustGuardAt = body.indexOf('if (!isolation.trustedDocument)');
     const extractAt = body.indexOf('extractArticleText(isolation.html');
-    const titleAt = body.indexOf('pageTitleEvidence(isolation.html, { scriptingDisabled: true })');
+    const titleAt = body.indexOf('pageTitleEvidence(isolation.html, {');
     assert.ok(isolateAt !== -1, 'fetchPageContent non isola la pagina');
     assert.ok(trustGuardAt > isolateAt, 'fetchPageContent deve rifiutare una struttura HTML non attendibile');
     assert.ok(trustGuardAt < extractAt, 'l’estrattore non deve ricevere HTML da un documento non attendibile');
@@ -659,8 +671,8 @@ describe('cablaggio in fetchPageContent', () => {
     assert.ok(titleAt !== -1, 'la title evidence non abilita il fallback noscript della stessa fetch');
     assert.ok(isolateAt < extractAt, 'isolamento dopo l’estrazione: non serve a niente');
     assert.ok(isolateAt < titleAt, 'isolamento dopo la title evidence: non serve a niente');
-    assert.match(body, /extractArticleText\(isolation\.html,\s*\{[^}]*scriptingDisabled:\s*true/);
-    assert.match(body, /pageTitleEvidence\(isolation\.html,\s*\{\s*scriptingDisabled:\s*true\s*\}\)/);
+    assert.match(body, /extractArticleText\(isolation\.html,\s*\{[^}]*scriptingDisabled:\s*isolation\.isolated/u);
+    assert.match(body, /pageTitleEvidence\(isolation\.html,\s*\{\s*scriptingDisabled:\s*isolation\.isolated,?\s*\}\)/u);
   });
 
   it('l’estrattore condiviso non viene modificato da questo lato', () => {
