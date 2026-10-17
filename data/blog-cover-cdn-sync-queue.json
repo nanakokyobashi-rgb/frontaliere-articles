@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-sharks-derby-coppa-trevano.webp",
-      "sha256": "3a251bcc69279bb50765cda2554b6c9534fbb8d30f9ae5a22ddaf1091e46400e"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-sharks-derby-coppa-trevano-480w.webp",
-      "sha256": "d5ab3d654c88e0e8c410de8ca731dbd2d23e46cc0e6a8abd0a74f13c0471b08e"
-    }
-  ]
+  "items": []
 }
