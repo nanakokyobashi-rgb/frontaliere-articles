@@ -2223,7 +2223,7 @@
       "reason": "Helper fail-closed per il PUT condizionale dei lease R2 delle sezioni: If-None-Match/If-Match sono l'handshake atomico fra fast-publish-section e publish-api; il sito non possiede credenziali o publisher R2.",
       "baseline": {
         "site": null,
-        "corpus": "7e00b1e9b36cccee",
+        "corpus": "eb4bb369410d1238",
         "alignedAt": "2026-10-17"
       }
     },
