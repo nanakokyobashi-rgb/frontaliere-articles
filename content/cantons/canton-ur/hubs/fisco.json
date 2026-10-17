@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "fisco",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "aa6c058c009f537ba0bfac33e76388adca006e67a06c987bb47954c14e18ff25",
+  "updatedAt": "2026-10-17T05:12:25.400Z",
+  "contentHash": "e841f70dff0f41a66ce21aec5a625f89c3919aa1dd1a3752c9fd5ab496db95d9",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T20:07:19.130Z",
       "keyFacts": 0
     }
   ],
@@ -115,10 +115,16 @@
               "url": "https://www.ur.ch/_rte/information/138694"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Uri: budget 2027 con avanzo di CHF 1,1 milioni",
+          "url": "/articoli-uri/uri-budget-2027-surplus/",
+          "excerpt": "Per il 2027 il Cantone Uri prevede un risultato positivo di CHF 1,1 milioni: entrate a CHF 514,4 milioni e investimenti netti a CHF 25,3 milioni.",
+          "date": "2026-10-17T05:08:12.066Z"
+        },
         {
           "title": "Canton Uri, bilancio 2027 con avanzo di 1,1 milioni",
           "url": "/articoli-uri/uri-budget-avanzo-2027/",
@@ -173,7 +179,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T05:12:25.400Z"
     },
     "en": {
       "canton": "UR",
@@ -266,10 +272,16 @@
               "url": "https://www.ur.ch/_rte/information/138694"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Uri: 2027 budget with a surplus of CHF 1,1 million",
+          "url": "/en/uri-articles/uri-2027-budget-with-a-surplus-of-chf-1-1-million/",
+          "excerpt": "For 2027, the Canton of Uri expects a positive result of CHF 1,1 million: revenues of CHF 514,4 million and net investments of CHF 25,3 million.",
+          "date": "2026-10-17T05:08:12.066Z"
+        },
         {
           "title": "Canton Uri, 2027 budget with a surplus of 1,1 million",
           "url": "/en/uri-articles/uri-budget-surplus-2027/",
@@ -324,7 +336,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T05:12:25.400Z"
     },
     "de": {
       "canton": "UR",
@@ -417,10 +429,16 @@
               "url": "https://www.ur.ch/_rte/information/138694"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Uri: Budget 2027 mit einem Überschuss von CHF 1,1 Millionen",
+          "url": "/de/uri-artikel/uri-budget-2027-ueberschuss/",
+          "excerpt": "Für 2027 erwartet der Kanton Uri ein positives Ergebnis von CHF 1,1 Millionen: Einnahmen von CHF 514,4 Millionen und Nettoinvestitionen von CHF 25,3 Millionen.",
+          "date": "2026-10-17T05:08:12.066Z"
+        },
         {
           "title": "Kanton Uri, Budget 2027 mit einem Überschuss von 1,1 Millionen",
           "url": "/de/uri-artikel/uri-budget-ueberschuss-2027/",
@@ -475,7 +493,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T05:12:25.400Z"
     },
     "fr": {
       "canton": "UR",
@@ -568,10 +586,16 @@
               "url": "https://www.ur.ch/_rte/information/138694"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T20:07:19.130Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Uri : budget 2027 avec un excédent de CHF 1,1 million",
+          "url": "/fr/articles-uri/uri-budget-2027-excedent/",
+          "excerpt": "Pour 2027, le canton d’Uri prévoit un résultat positif de CHF 1,1 million : des recettes de CHF 514,4 millions et des investissements nets de CHF 25,3 millions.",
+          "date": "2026-10-17T05:08:12.066Z"
+        },
         {
           "title": "Canton d’Uri, budget 2027 avec un excédent de 1,1 million",
           "url": "/fr/articles-uri/budget-uri-excedent-2027/",
@@ -626,7 +650,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T05:12:25.400Z"
     }
   }
 }
