@@ -39,4 +39,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'klontalstrasse-staldengarten-butzi',
+ category: 'pratico',
+ date: '2026-10-17T00:33:53.716Z',
+ image: '/images/blog/article-revisione-fiscale-canton-glarona.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GL'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

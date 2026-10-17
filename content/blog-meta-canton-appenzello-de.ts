@@ -15,6 +15,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.deficit-comune-preventivo-2027.title': 'Gemeindedefizit von CHF 169\'500 im Voranschlag 2027',
     'blog.article.deficit-comune-preventivo-2027.excerpt': 'Der Voranschlag 2027 sieht ein Defizit von CHF 169\'500 vor.',
     'blog.article.deficit-comune-preventivo-2027.imageAlt': 'Gemeindehaus in einem Dorf im Kanton Appenzell',
+    'blog.article.appenzello-tasso-fiscale-390.title': 'Appenzell: Voraussichtlicher Steuerfuss bei 3,90 Einheiten',
+    'blog.article.appenzello-tasso-fiscale-390.excerpt': 'Der Voranschlag 2027 sieht ein Defizit von CHF 323\'670 vor: Der Steuerfuss soll auf 3,90 Einheiten steigen.',
+    'blog.article.appenzello-tasso-fiscale-390.imageAlt': 'Gemeindegebäude in der Appenzeller Landschaft',
 };
 
 export default blogMetaCantonAppenzelloDe;

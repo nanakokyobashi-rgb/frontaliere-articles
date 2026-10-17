@@ -120,6 +120,36 @@
       "failureCount": 0,
       "requestedAt": "2026-10-17T00:14:09.813Z",
       "lastFailureAt": "2026-10-17T00:14:09.813Z"
+    },
+    {
+      "articleId": "klontalstrasse-staldengarten-butzi",
+      "title": "Klöntalerstrasse: limitazione staldengarten–bützi",
+      "fallbackImage": "/images/blog/article-revisione-fiscale-canton-glarona.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T00:33:53.750Z",
+      "lastFailureAt": "2026-10-17T00:33:53.750Z"
+    },
+    {
+      "articleId": "tre-valli-varesine-7-posto-mondiale",
+      "title": "Tre Valli Varesine 7ª al mondo: batte Vuelta e Paris-Roubaix",
+      "fallbackImage": "/images/blog/guida-tre-valli-varesine-2026.webp",
+      "reason": "All image providers failed for article-tre-valli-varesine-7-posto-mondiale: openai-codex (vision gate rejected image: Generic synthetic cycling scene with no text, logo, or visible",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T00:42:42.710Z",
+      "lastFailureAt": "2026-10-17T00:42:42.710Z"
+    },
+    {
+      "articleId": "kuessnacht-rete-teleriscaldamento",
+      "title": "Küssnacht amplia la rete verso Immensee, Fänn e Adligenswil",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T00:46:50.699Z",
+      "lastFailureAt": "2026-10-17T00:46:50.699Z"
     }
   ]
 }

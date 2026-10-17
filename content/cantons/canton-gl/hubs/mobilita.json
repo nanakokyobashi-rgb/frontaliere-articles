@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T00:12:19.402Z",
-  "contentHash": "efa4b8f468da49fe0daf196f2aa44ea8823f7bd94cf4c2d0dac92aa3163c9ab9",
+  "updatedAt": "2026-10-17T00:44:41.594Z",
+  "contentHash": "2c8ee7968328911684554207901895da34288301aa3b0cc00cc525d783c94390",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -81,6 +81,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Klöntalerstrasse: limitazione staldengarten–bützi",
+          "url": "/articoli-glarona/klontalstrasse-staldengarten-butzi/",
+          "excerpt": "Una limitazione al traffico riguarda la Klöntalerstrasse nel tratto Staldengarten–Bützi, nel Canton Glarona.",
+          "date": "2026-10-17T00:33:53.716Z"
+        },
+        {
           "title": "Abbonamenti trasporti Glarona: zone, tariffe e sconti",
           "url": "/articoli-svizzera/abbonamenti-trasporti-glarona-tariffe/",
           "excerpt": "Sistema di zone tariffarie, abbonamenti annuali e mensili, combinazione con metà-prezzo AG e sconti per studenti e apprendisti nel Cantone di Glarona.",
@@ -110,7 +116,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:44:41.594Z"
     },
     "en": {
       "canton": "GL",
@@ -174,6 +180,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Klöntalerstrasse: restriction staldengarten–bützi",
+          "url": "/en/glarus-articles/klontalstrasse-traffic-restriction/",
+          "excerpt": "A traffic restriction affects Klöntalerstrasse on the Staldengarten–Bützi section, in the Canton of Glarus.",
+          "date": "2026-10-17T00:33:53.716Z"
+        },
+        {
           "title": "Glarus transport subscriptions: zones, rates and discounts",
           "url": "/en/swiss-articles/glarus-transport-passes-zones-fares/",
           "excerpt": "Tariff zone system, annual and monthly subscriptions, combination with half-price AG and discounts for students and apprentices in the Canton of Glarus.",
@@ -203,7 +215,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:44:41.594Z"
     },
     "de": {
       "canton": "GL",
@@ -267,6 +279,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Klöntalerstrasse: Verkehrsbeschränkung Staldengarten–Bützi",
+          "url": "/de/glarus-artikel/verkehrseinschraenkung-kloentalerstrasse/",
+          "excerpt": "Eine Verkehrsbeschränkung betrifft die Klöntalerstrasse im Abschnitt Staldengarten–Bützi im Kanton Glarus.",
+          "date": "2026-10-17T00:33:53.716Z"
+        },
+        {
           "title": "Fahrkarten Glarus: Zonen, Tarife und Rabatte",
           "url": "/de/schweiz-artikel/glarus-verkehrskarten-zonen-tarife/",
           "excerpt": "Tarifzonen-System, Jahres- und Monatsabonnements, Kombination mit GA-Halbtax und Rabatten für Studierende und Lernende im Kanton Glarus.",
@@ -296,7 +314,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:44:41.594Z"
     },
     "fr": {
       "canton": "GL",
@@ -360,6 +378,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Klöntalerstrasse : restriction Staldengarten–Bützi",
+          "url": "/fr/articles-glaris/restriction-trafic-kloentalerstrasse/",
+          "excerpt": "Une restriction de circulation concerne la Klöntalerstrasse sur le tronçon Staldengarten–Bützi, dans le canton de Glaris.",
+          "date": "2026-10-17T00:33:53.716Z"
+        },
+        {
           "title": "Abonnements transports Glaris : zones, tarifs et réductions",
           "url": "/fr/articles-suisse/glaris-abonnements-transport-zones-tarifs/",
           "excerpt": "Système de zones tarifaires, abonnements annuels et mensuels, combinaison avec demi-tarif AG et réductions pour étudiants et apprentis dans le canton de Glaris.",
@@ -389,7 +413,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:44:41.594Z"
     }
   }
 }

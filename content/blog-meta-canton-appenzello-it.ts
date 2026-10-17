@@ -15,6 +15,9 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.deficit-comune-preventivo-2027.title': 'Deficit comunale di CHF 169\'500 nel preventivo 2027',
     'blog.article.deficit-comune-preventivo-2027.excerpt': 'Il preventivo 2027 prevede un disavanzo di CHF 169\'500.',
     'blog.article.deficit-comune-preventivo-2027.imageAlt': 'Edificio comunale in un villaggio del Canton Appenzello',
+    'blog.article.appenzello-tasso-fiscale-390.title': 'Appenzello: tasso fiscale previsto a 3,90 unità',
+    'blog.article.appenzello-tasso-fiscale-390.excerpt': 'Il preventivo 2027 prevede un disavanzo di CHF 323\'670: il tasso fiscale dovrebbe salire a 3,90 unità.',
+    'blog.article.appenzello-tasso-fiscale-390.imageAlt': 'Edificio comunale nel paesaggio di Appenzello',
 };
 
 export default blogMetaCantonAppenzelloIt;

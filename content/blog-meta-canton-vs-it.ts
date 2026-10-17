@@ -18,6 +18,9 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.vallese-piano-acqua-2035.title': 'Vallese: approvato il Piano d\'azione acqua 2035',
     'blog.article.vallese-piano-acqua-2035.excerpt': 'Il Consiglio di Stato adotta il Piano d\'azione 2035 Attuazione progressiva dal 2027, secondo priorità e risorse Le misure passano da 39 a 25 dopo la revisione',
     'blog.article.vallese-piano-acqua-2035.imageAlt': 'Gestione dell\'acqua nel Canton Vallese con montagne e laghi alpini',
+    'blog.article.crollo-pilone-vetroz.title': 'Crolla un pilone dell\'alta tensione a Vétroz',
+    'blog.article.crollo-pilone-vetroz.excerpt': 'Il pilone è crollato verso le 4 nella zona industriale del Botza.',
+    'blog.article.crollo-pilone-vetroz.imageAlt': 'Pilone dell\'alta tensione crollato nella zona industriale del Botza, a Vétroz.',
 };
 
 export default blogMetaCantonVsIt;

@@ -21,6 +21,9 @@ const blogMetaCantonFrEn: Record<string, string> = {
     'blog.article.frontalieri-friburgo-giugno-2026.title': 'Fribourg: 2140 foreign cross-border commuters at the end of June 2026',
     'blog.article.frontalieri-friburgo-giugno-2026.excerpt': 'Fribourg had 2140 foreign cross-border workers at the end of June 2026: +940 since 2021 and +280 over the past year, according to data published by SSD and OFS.',
     'blog.article.frontalieri-friburgo-giugno-2026.imageAlt': 'Commuters on a street in the canton of Fribourg during a working day',
+    'blog.article.friburgo-deduzioni-carburante.title': 'Fuels: the Canton does not want to increase deductions',
+    'blog.article.friburgo-deduzioni-carburante.excerpt': 'Diesel exceeds CHF 2.40 per litre.',
+    'blog.article.friburgo-deduzioni-carburante.imageAlt': 'Car driving in the Canton of Fribourg',
 };
 
 export default blogMetaCantonFrEn;

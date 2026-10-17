@@ -1,58 +1,16 @@
 {
-  "keywords": [],
-  "strikes": {},
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/811569/schweizer-krankenkassen-im-vergleich-sodalis-arbeitet-am-effizientesten": {
+    "canton-vs::https://www.pomona.ch/story/814642/walliser-mindestlohn-kommt-die-initiative-dieses-mal-durch": {
       "section": "canton-vs",
-      "ts": 1791594672166
+      "ts": 1792197166143
     },
-    "canton-vs::https://www.pomona.ch/story/812654/n%c3%a4chtliche-sperrungen-wegen-neuer-passinfotafel": {
+    "canton-vs::https://www.pomona.ch/story/811840/gewerkschaften-und-linke-k%c3%a4mpfen-f%c3%bcr-22-franken-mindestlohn-im-wallis": {
       "section": "canton-vs",
-      "ts": 1791594676847
-    },
-    "canton-vs::https://www.pomona.ch/story/812868/spitalkosten-nach-brandkatastrophe-streit-mit-italien-dauert-an": {
-      "section": "canton-vs",
-      "ts": 1791594678012
-    },
-    "canton-vs::https://www.pomona.ch/story/812362/kanton-wallis-meldet-r%c3%bcckgang-von-abgasen-doch-es-gibt-noch-problemstellen": {
-      "section": "canton-vs",
-      "ts": 1791594683246
-    },
-    "canton-vs::https://www.ossolanews.it/2026/10/08/leggi-notizia/argomenti/ambiente-2/articolo/censite-37-linci-in-canton-vallese.html": {
-      "section": "canton-vs",
-      "ts": 1791594699306
-    },
-    "canton-vs::https://www.pomona.ch/story/811493/angela-portner-von-der-amavita-apotheke-vispach": {
-      "section": "canton-vs",
-      "ts": 1791594958006
-    },
-    "canton-vs::https://www.gazzettamatin.com/2026/10/09/clima-e-societa-al-centro-del-primo-seminario-di-governance-transfrontaliera": {
-      "section": "canton-vs",
-      "ts": 1791646508702
-    },
-    "canton-vs::https://www.pomona.ch/story/812129/pensionskasse-des-bundes-best%c3%a4tigt-cyberangriff-sind-bundesr%c3%a4te-betroffen": {
-      "section": "canton-vs",
-      "ts": 1791646514261
-    },
-    "canton-vs::https://www.pomona.ch/story/812859/rauchpetarden-brandalarm-zugausf%c3%a4lle-warum-die-sbb-fussballfans-trotzdem-nicht-verbannen-k%c3%b6nnen": {
-      "section": "canton-vs",
-      "ts": 1791678270262
-    },
-    "canton-vs::https://www.pomona.ch/story/811321/umsatzrekord-und-solide-finanzen-moosalp-bergbahnen-blicken-auf-erfolgreiches-gesch%c3%a4ftsjahr-zur%c3%bcck": {
-      "section": "canton-vs",
-      "ts": 1791678271598
-    },
-    "canton-vs::https://www.pomona.ch/story/813022/er-soll-die-stimmen-der-migrantischen-jugend-holen-bally-bagayoko-ist-mlenchons-banlieuejoker": {
-      "section": "canton-vs",
-      "ts": 1791678272933
-    },
-    "canton-vs::https://www.pomona.ch/story/812865/sabotageakt-feuer-legt-sbbstrecke-lahm": {
-      "section": "canton-vs",
-      "ts": 1791766234441
-    },
-    "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
-      "section": "canton-vs",
-      "ts": 1791766235670
+      "ts": 1792197167054
     }
   }
 }

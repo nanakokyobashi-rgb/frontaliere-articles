@@ -27,6 +27,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.sportello-digitale-turgovia.title': 'Thurgovie : Guichet numérique pour les démarches et les documents',
     'blog.article.sportello-digitale-turgovia.excerpt': 'Le Digitaler Schalter du canton de Thurgovie réunit les services les plus utilisés, des informations, de courtes vidéos et un espace protégé pour les extraits, permis et autres documents.',
     'blog.article.sportello-digitale-turgovia.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.kreuzlingen-barenplatz-chilbi.title': 'Kreuzlingen : Bärenplatz fermé pour le salon',
+    'blog.article.kreuzlingen-barenplatz-chilbi.excerpt': 'À Kreuzlingen, les bus sont déviés du 25 octobre à 09h00 le 27 ; l\'arrêt Bärenplatz va à la gare principale.',
+    'blog.article.kreuzlingen-barenplatz-chilbi.imageAlt': 'Bus à la gare principale de Kreuzlingen pendant l\'installation de la Chilbi',
 };
 
 export default blogMetaCantonTgFr;

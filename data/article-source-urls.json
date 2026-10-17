@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1948444/sciopero-italia-cancellazioni-ritardi-lunedi": {
-    "articleId": "sciopero-ferroviario-italia-ticino",
-    "ts": "2026-09-07T09:02:17.630Z",
-    "keyForm": 2
-  },
   "https://www.ticinonews.ch/ticino/tram-treno-a-ottobre-i-primi-cantieri-la-rete-sara-operativa-nel-2035-442114": {
     "articleId": "luganese-tram-treno-cantieri-2035",
     "ts": "2026-09-07T09:46:51.339Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/politica/1957269/cantieri-interventi-lavori-evitare-anni-esecutivo-municipio-disagi-obiettivo-vita": {
     "articleId": "cantieri-lugano-riduzione-disagi",
     "ts": "2026-10-17T00:14:09.814Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/tre-valli-varesine-al-7-posto-mondiale-per-livello-degli-atleti-supera-parigi-roubaix-e-vuelta/2710684": {
+    "articleId": "tre-valli-varesine-7-posto-mondiale",
+    "ts": "2026-10-17T00:42:42.711Z",
     "keyForm": 2
   }
 }

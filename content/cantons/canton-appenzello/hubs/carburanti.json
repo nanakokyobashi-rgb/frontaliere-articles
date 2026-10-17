@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "d3a8744adaa19721a8f42f6ddb25b2494d7d38b6b47218a450c1a00fb205ea2b",
+  "updatedAt": "2026-10-17T00:36:37.812Z",
+  "contentHash": "6dc441dc3e53b56a4780c0899e60f24c197faa14b907c6bae5d4daf3f8e778d6",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzello: tasso fiscale previsto a 3,90 unità",
+          "url": "/articoli-appenzello/appenzello-tasso-fiscale-390/",
+          "excerpt": "Il preventivo 2027 prevede un disavanzo di CHF 323'670: il tasso fiscale dovrebbe salire a 3,90 unità.",
+          "date": "2026-10-17T00:31:56.459Z"
+        },
+        {
           "title": "Deficit comunale di CHF 169'500 nel preventivo 2027",
           "url": "/articoli-appenzello/deficit-comune-preventivo-2027/",
           "excerpt": "Il preventivo 2027 prevede un disavanzo di CHF 169'500.",
@@ -106,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:36:37.812Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -165,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell: projected tax rate at 3,90 units",
+          "url": "/en/appenzell-articles/appenzell-tax-rate-390/",
+          "excerpt": "The 2027 budget forecasts a deficit of CHF 323'670: the tax rate should rise to 3,90 units.",
+          "date": "2026-10-17T00:31:56.459Z"
+        },
+        {
           "title": "Municipal deficit of CHF 169'500 in the 2027 budget",
           "url": "/en/appenzell-articles/municipal-deficit-budget-2027/",
           "excerpt": "The 2027 budget estimates a deficit of CHF 169'500.",
@@ -199,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:36:37.812Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -258,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell: Voraussichtlicher Steuerfuss bei 3,90 Einheiten",
+          "url": "/de/appenzell-artikel/appenzell-steuerfuss-390/",
+          "excerpt": "Der Voranschlag 2027 sieht ein Defizit von CHF 323'670 vor: Der Steuerfuss soll auf 3,90 Einheiten steigen.",
+          "date": "2026-10-17T00:31:56.459Z"
+        },
+        {
           "title": "Gemeindedefizit von CHF 169'500 im Voranschlag 2027",
           "url": "/de/appenzell-artikel/gemeinde-defizit-voranschlag-2027/",
           "excerpt": "Der Voranschlag 2027 sieht ein Defizit von CHF 169'500 vor.",
@@ -292,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:36:37.812Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -351,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell : taux d'imposition prévu à 3,90 unités",
+          "url": "/fr/articles-appenzell/appenzell-taux-fiscal-390/",
+          "excerpt": "Le budget 2027 prévoit un déficit de CHF 323'670 : le taux d'imposition devrait passer à 3,90 unités.",
+          "date": "2026-10-17T00:31:56.459Z"
+        },
+        {
           "title": "Déficit communal de CHF 169'500 dans le budget 2027",
           "url": "/fr/articles-appenzell/deficit-commune-budget-2027/",
           "excerpt": "Le budget 2027 prévoit un déficit de CHF 169'500.",
@@ -385,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:36:37.812Z"
     }
   }
 }

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
+  "topicGateUrls": {
+    "canton-ag::https://www.aarau24.ch/articles/410198-so-lassen-sich-krankenkassen-praemien-senken": {
+      "section": "canton-ag",
+      "ts": 1792197051272
+    }
+  }
+}

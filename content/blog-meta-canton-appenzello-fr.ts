@@ -15,6 +15,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.deficit-comune-preventivo-2027.title': 'Déficit communal de CHF 169\'500 dans le budget 2027',
     'blog.article.deficit-comune-preventivo-2027.excerpt': 'Le budget 2027 prévoit un déficit de CHF 169\'500.',
     'blog.article.deficit-comune-preventivo-2027.imageAlt': 'Bâtiment communal dans un village du canton d’Appenzell',
+    'blog.article.appenzello-tasso-fiscale-390.title': 'Appenzell : taux d\'imposition prévu à 3,90 unités',
+    'blog.article.appenzello-tasso-fiscale-390.excerpt': 'Le budget 2027 prévoit un déficit de CHF 323\'670 : le taux d\'imposition devrait passer à 3,90 unités.',
+    'blog.article.appenzello-tasso-fiscale-390.imageAlt': 'Bâtiment communal dans le paysage d\'Appenzell',
 };
 
 export default blogMetaCantonAppenzelloFr;

@@ -94,4 +94,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'kreuzlingen-barenplatz-chilbi',
+ category: 'pratico',
+ date: '2026-10-17T00:40:57.671Z',
+ image: '/images/blog/article-kreuzlingen-barenplatz-chilbi.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -158,6 +158,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-appenzello-tasso-fiscale-390': {
+    title: 'Appenzello: tasso fiscale previsto a 3,90 unità',
+    description: 'Preventivo 2027: spese CHF 9\'459\'640, entrate CHF 9\'135\'970, disavanzo CHF 323\'670. Tasso fiscale previsto a 3,90 unità nel 2027; risparmi senza risultato.',
+    keywords: 'frontalieri, ticino, svizzera, italia, appenzello, tasso, fiscale, previsto',
+    ogTitle: 'Appenzello: tasso fiscale previsto a 3,90 unità',
+    ogDescription: 'Il Consiglio comunale segnala risparmi senza il risultato desiderato. Il preventivo 2027 mostra un disavanzo di CHF 323\'670; il tasso fiscale dovrebbe salire a 3,90 unità nel quadro delle pressioni di Confederazione e Cantone, soprattutto',
+    canonicalPath: '/articoli-appenzello/appenzello-tasso-fiscale-390/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Appenzello: tasso fiscale previsto a 3,90 unità",
+      "description": "Preventivo 2027: spese CHF 9'459'640, entrate CHF 9'135'970, disavanzo CHF 323'670. Tasso fiscale previsto a 3,90 unità nel 2027; risparmi senza risultato.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-appenzello-tasso-fiscale-390.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio comunale nel paesaggio di Appenzello"
+      },
+      "datePublished": "2026-10-17T00:31:56+00:00",
+      "dateModified": "2026-10-17T00:31:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/appenzello-tasso-fiscale-390/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

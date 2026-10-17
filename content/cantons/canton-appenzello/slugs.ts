@@ -7,6 +7,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'heiden-tassa-base-rifiuti': { it: 'heiden-tassa-base-rifiuti', en: 'heiden-base-waste-fee', de: 'heiden-kehrichtgrundgebuehr', fr: 'heiden-taxe-base-dechets' },
  'herisau-verkehr-appenzello': { it: 'herisau-verkehr-appenzello', en: 'herisau-transport-appenzell', de: 'herisau-verkehr-appenzell', fr: 'herisau-transports-appenzell' },
  'deficit-comune-preventivo-2027': { it: 'deficit-comune-preventivo-2027', en: 'municipal-deficit-budget-2027', de: 'gemeinde-defizit-voranschlag-2027', fr: 'deficit-commune-budget-2027' },
+ 'appenzello-tasso-fiscale-390': { it: 'appenzello-tasso-fiscale-390', en: 'appenzell-tax-rate-390', de: 'appenzell-steuerfuss-390', fr: 'appenzell-taux-fiscal-390' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
