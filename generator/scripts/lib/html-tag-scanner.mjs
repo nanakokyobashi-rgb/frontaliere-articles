@@ -18,6 +18,7 @@ export function findHtmlTagEndOutsideQuotes(html, start) {
 // questo stato impone al walker di fermarsi invece di riprovare ogni `<`
 // contenuto nel tag aperto e ripetere la scansione fino a EOF.
 const MALFORMED_HTML_TAG = Object.freeze({ status: 'malformed' });
+const EOF_HTML_SCAN = Object.freeze({ status: 'eof' });
 
 function isHtmlWhitespace(character) {
   return character === ' ' || character === '\t' || character === '\n'
@@ -95,21 +96,34 @@ export function readHtmlTagAt(html, start) {
   return result?.tag || null;
 }
 
-export function nextHtmlTag(html, from = 0, skipComments = true) {
+/**
+ * Restituisce il prossimo tag mantenendo distinto il termine normale dalla
+ * fine anticipata su markup malformato. I caller che raccolgono dati da una
+ * fonte devono rifiutare l'intera estrazione su `malformed`: `null` da solo
+ * non permette di distinguere una pagina finita da una pagina troncata.
+ *
+ * @returns {{status: 'tag', tag: object} | {status: 'eof'} | {status: 'malformed'}}
+ */
+export function nextHtmlTagStatus(html, from = 0, skipComments = true) {
   let start = html.indexOf('<', from);
   while (start !== -1) {
     if (skipComments && html.startsWith('<!--', start)) {
       const commentEnd = html.indexOf('-->', start + 4);
-      if (commentEnd < 0) return null;
+      if (commentEnd < 0) return MALFORMED_HTML_TAG;
       start = html.indexOf('<', commentEnd + 3);
       continue;
     }
     const result = readHtmlTagAtStatus(html, start);
-    if (result?.malformed) return null;
-    if (result?.tag) return result.tag;
+    if (result?.malformed) return MALFORMED_HTML_TAG;
+    if (result?.tag) return { status: 'tag', tag: result.tag };
     start = html.indexOf('<', start + 1);
   }
-  return null;
+  return EOF_HTML_SCAN;
+}
+
+export function nextHtmlTag(html, from = 0, skipComments = true) {
+  const result = nextHtmlTagStatus(html, from, skipComments);
+  return result.status === 'tag' ? result.tag : null;
 }
 
 export function findHtmlClosingTag(html, from, name) {

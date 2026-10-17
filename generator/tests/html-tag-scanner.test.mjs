@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 
-import { nextHtmlTag, readHtmlTagAt } from '../scripts/lib/html-tag-scanner.mjs';
+import { nextHtmlTag, nextHtmlTagStatus, readHtmlTagAt } from '../scripts/lib/html-tag-scanner.mjs';
 
 function instrumentHtml(value) {
   let characterReads = 0;
@@ -39,6 +39,15 @@ test('readHtmlTagAt distinguishes an unterminated valid tag from EOF', () => {
   assert.deepEqual(readHtmlTagAt(malformed, 0), { status: 'malformed' });
   assert.equal(readHtmlTagAt('plain text', 0), null);
   assert.equal(nextHtmlTag('plain text'), null);
+});
+
+test('nextHtmlTagStatus distinguishes a valid tag, EOF, and malformed markup', () => {
+  const valid = nextHtmlTagStatus('prefix <article data-id="1">body');
+  assert.equal(valid.status, 'tag');
+  assert.equal(valid.tag.name, 'article');
+  assert.equal(valid.tag.start, 7);
+  assert.deepEqual(nextHtmlTagStatus('plain text'), { status: 'eof' });
+  assert.deepEqual(nextHtmlTagStatus('<article title="unfinished'), { status: 'malformed' });
 });
 
 test('nextHtmlTag stops at the first malformed tag within one linear scan', () => {

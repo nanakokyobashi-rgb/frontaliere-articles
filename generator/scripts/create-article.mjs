@@ -90,6 +90,7 @@ import {
   nextHtmlElementWhere,
   nextHtmlOpeningTag,
   nextHtmlTag,
+  nextHtmlTagStatus,
 } from './lib/html-tag-scanner.mjs';
 
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
@@ -8750,16 +8751,32 @@ function headlineHrefValue(attrs) {
  * `<a>` cannot borrow the closing tag of the next real link.
  */
 function scanHeadlineAnchor(html, from = 0, { requireHref = false } = {}) {
-  let opening = nextHtmlOpeningTag(html, 'a', from);
-  while (opening) {
+  const malformedHeadlineMarkup = () => {
+    const error = new Error('markup HTML malformato: scansione headline interrotta prima di EOF');
+    error.code = 'ERR_MALFORMED_HEADLINE_HTML';
+    throw error;
+  };
+  let openingScan = nextHtmlTagStatus(html, from, true);
+  while (openingScan.status !== 'eof') {
+    if (openingScan.status === 'malformed') malformedHeadlineMarkup();
+    const openingCandidate = openingScan.tag;
+    if (openingCandidate.closing || openingCandidate.name !== 'a') {
+      openingScan = nextHtmlTagStatus(html, openingCandidate.end, true);
+      continue;
+    }
+    const opening = openingCandidate;
     if (opening.selfClosing || (requireHref && !headlineHrefValue(opening.attrs))) {
-      opening = nextHtmlOpeningTag(html, 'a', opening.end);
+      openingScan = nextHtmlTagStatus(html, opening.end, true);
       continue;
     }
 
-    let tag = nextHtmlTag(html, opening.end);
-    while (tag && tag.name !== 'a') tag = nextHtmlTag(html, tag.end);
-    if (tag?.closing) {
+    let tagScan = nextHtmlTagStatus(html, opening.end, true);
+    while (tagScan.status === 'tag' && tagScan.tag.name !== 'a') {
+      tagScan = nextHtmlTagStatus(html, tagScan.tag.end, true);
+    }
+    if (tagScan.status === 'malformed') malformedHeadlineMarkup();
+    if (tagScan.status === 'tag' && tagScan.tag.closing) {
+      const tag = tagScan.tag;
       return {
         ...opening,
         openEnd: opening.end,
@@ -8771,7 +8788,7 @@ function scanHeadlineAnchor(html, from = 0, { requireHref = false } = {}) {
 
     // A new opening anchor before this one closes makes the first malformed;
     // resume there rather than letting it consume a later link's `</a>`.
-    opening = nextHtmlOpeningTag(html, 'a', opening.end);
+    openingScan = nextHtmlTagStatus(html, opening.end, true);
   }
   return null;
 }
@@ -9412,6 +9429,7 @@ async function scanNewsSources() {
                   releaseFetchWithRefTimeout(fbRes);
                 }
               } catch (fbErr) {
+                if (fbErr?.code === 'ERR_MALFORMED_HEADLINE_HTML') throw fbErr;
                 console.error(`  ⚠️ ${domain}: fallback HTML fallito: ${fbErr.message}`);
               }
             } else {
@@ -9438,6 +9456,7 @@ async function scanNewsSources() {
                   releaseFetchWithRefTimeout(fbRes);
                 }
               } catch (fbErr) {
+                if (fbErr?.code === 'ERR_MALFORMED_HEADLINE_HTML') throw fbErr;
                 console.error(`  ⚠️ ${domain}: fallback HTML fallito: ${fbErr.message}`);
               }
             }
