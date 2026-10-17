@@ -28199,6 +28199,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'stesso-reddito-imposte-diverse',
+    category: 'fiscale',
+    date: '2026-10-17T10:06:40.711Z',
+    image: '/images/blog/emigrazione-cassa-pensione-risparmio-imposte-2.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
