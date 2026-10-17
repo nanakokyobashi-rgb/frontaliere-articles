@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "439eedd414226d05e7c10399b68793b69df00358a23199afb078e9823aa99554",
+  "updatedAt": "2026-10-17T00:58:07.231Z",
+  "contentHash": "f09eb0a982ef79078a7d71130ae9ab236ee6aaa8229da4823e8d10e3d51bec33",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-15T12:02:33.404Z",
+      "updatedAt": "2026-10-16T11:53:35.759Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zuger Pensionskasse: online il rapporto 2025",
+          "url": "/articoli-zugo/zuger-rapporto-gestione-2025/",
+          "excerpt": "Il Geschäftsbericht 2025 della Zuger Pensionskasse offre una panoramica sull'esercizio concluso e rinvia alla Jahresrechnung 2025 per ulteriori informazioni.",
+          "date": "2026-10-17T00:53:57.792Z"
+        },
         {
           "title": "Scuola Sternmatt 1: l'IA segna il 2026/27",
           "url": "/articoli-zugo/scuola-sternmatt-ia-2026/",
@@ -94,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:58:07.231Z"
     },
     "en": {
       "canton": "ZG",
@@ -135,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zuger Pensionskasse: 2025 report now online",
+          "url": "/en/zug-articles/zuger-annual-report-2025/",
+          "excerpt": "The 2025 annual report of the Zuger Pensionskasse provides an overview of the completed financial year and refers to the 2025 annual financial statements for further information.",
+          "date": "2026-10-17T00:53:57.792Z"
+        },
         {
           "title": "Sternmatt School 1: AI marks 2026/27",
           "url": "/en/zug-articles/sternmatt-school-ai-2026/",
@@ -175,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:58:07.231Z"
     },
     "de": {
       "canton": "ZG",
@@ -216,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zuger Pensionskasse: Der Bericht 2025 ist online",
+          "url": "/de/zug-artikel/zuger-geschaeftsbericht-2025/",
+          "excerpt": "Der Geschäftsbericht 2025 der Zuger Pensionskasse bietet einen Überblick über das abgeschlossene Geschäftsjahr und verweist für weitere Informationen auf die Jahresrechnung 2025.",
+          "date": "2026-10-17T00:53:57.792Z"
+        },
         {
           "title": "Schule Sternmatt 1: KI prägt das Schuljahr 2026/27",
           "url": "/de/zug-artikel/sternmatt-schule-ki-2026/",
@@ -256,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:58:07.231Z"
     },
     "fr": {
       "canton": "ZG",
@@ -297,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zuger Pensionskasse : le rapport 2025 est en ligne",
+          "url": "/fr/articles-zoug/zuger-rapport-gestion-2025/",
+          "excerpt": "Le Geschäftsbericht 2025 de la Zuger Pensionskasse offre une vue d’ensemble de l’exercice écoulé et renvoie à la Jahresrechnung 2025 pour de plus amples informations.",
+          "date": "2026-10-17T00:53:57.792Z"
+        },
         {
           "title": "École Sternmatt 1 : l’IA marque l’année 2026/27",
           "url": "/fr/articles-zoug/ecole-sternmatt-ia-2026/",
@@ -337,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:58:07.231Z"
     }
   }
 }

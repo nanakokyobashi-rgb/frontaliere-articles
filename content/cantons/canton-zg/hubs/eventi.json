@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T00:12:19.402Z",
-  "contentHash": "c8c2e22cca5eebe8a420c493cac21d067a0fb042f3da73fcde5363523ddc8125",
+  "updatedAt": "2026-10-17T00:58:07.231Z",
+  "contentHash": "fb35eee8abb9efb11ee8d9990d4176f7c0cf5c550463666e35711db9595f1ace",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -101,6 +101,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zuger Pensionskasse: online il rapporto 2025",
+          "url": "/articoli-zugo/zuger-rapporto-gestione-2025/",
+          "excerpt": "Il Geschäftsbericht 2025 della Zuger Pensionskasse offre una panoramica sull'esercizio concluso e rinvia alla Jahresrechnung 2025 per ulteriori informazioni.",
+          "date": "2026-10-17T00:53:57.792Z"
+        },
+        {
           "title": "Scuola Sternmatt 1: l'IA segna il 2026/27",
           "url": "/articoli-zugo/scuola-sternmatt-ia-2026/",
           "excerpt": "La scuola Sternmatt 1 affronta il 2026/27 mettendo al centro un uso responsabile dell'intelligenza artificiale nelle aule.",
@@ -135,7 +141,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:58:07.231Z"
     },
     "en": {
       "canton": "ZG",
@@ -224,6 +230,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zuger Pensionskasse: 2025 report now online",
+          "url": "/en/zug-articles/zuger-annual-report-2025/",
+          "excerpt": "The 2025 annual report of the Zuger Pensionskasse provides an overview of the completed financial year and refers to the 2025 annual financial statements for further information.",
+          "date": "2026-10-17T00:53:57.792Z"
+        },
+        {
           "title": "Sternmatt School 1: AI marks 2026/27",
           "url": "/en/zug-articles/sternmatt-school-ai-2026/",
           "excerpt": "The Sternmatt 1 school is entering 2026/27 with the responsible use of artificial intelligence in classrooms at the forefront.",
@@ -258,7 +270,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:58:07.231Z"
     },
     "de": {
       "canton": "ZG",
@@ -347,6 +359,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zuger Pensionskasse: Der Bericht 2025 ist online",
+          "url": "/de/zug-artikel/zuger-geschaeftsbericht-2025/",
+          "excerpt": "Der Geschäftsbericht 2025 der Zuger Pensionskasse bietet einen Überblick über das abgeschlossene Geschäftsjahr und verweist für weitere Informationen auf die Jahresrechnung 2025.",
+          "date": "2026-10-17T00:53:57.792Z"
+        },
+        {
           "title": "Schule Sternmatt 1: KI prägt das Schuljahr 2026/27",
           "url": "/de/zug-artikel/sternmatt-schule-ki-2026/",
           "excerpt": "Die Schule Sternmatt 1 nimmt das Schuljahr 2026/27 in Angriff und stellt dabei einen verantwortungsvollen Einsatz künstlicher Intelligenz in den Klassenzimmern in den Mittelpunkt.",
@@ -381,7 +399,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:58:07.231Z"
     },
     "fr": {
       "canton": "ZG",
@@ -470,6 +488,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zuger Pensionskasse : le rapport 2025 est en ligne",
+          "url": "/fr/articles-zoug/zuger-rapport-gestion-2025/",
+          "excerpt": "Le Geschäftsbericht 2025 de la Zuger Pensionskasse offre une vue d’ensemble de l’exercice écoulé et renvoie à la Jahresrechnung 2025 pour de plus amples informations.",
+          "date": "2026-10-17T00:53:57.792Z"
+        },
+        {
           "title": "École Sternmatt 1 : l’IA marque l’année 2026/27",
           "url": "/fr/articles-zoug/ecole-sternmatt-ia-2026/",
           "excerpt": "L’école Sternmatt 1 aborde l’année 2026/27 en mettant au centre un usage responsable de l’intelligence artificielle dans les salles de classe.",
@@ -504,7 +528,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T00:58:07.231Z"
     }
   }
 }
