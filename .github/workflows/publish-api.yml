@@ -18,6 +18,10 @@ on:
     branches: [main]
     paths:
       - 'content/**'
+      - 'scripts/ci/check-blog-body-links.mjs'
+      - 'scripts/lib/article-link-contract.mjs'
+      - 'generator/scripts/lib/article-meta-block.mjs'
+      - 'generator/scripts/lib/article-excerpt.mjs'
       - 'public/images/blog/**'
       - 'public/images/generated/**'
       # engine/** matters as much as the corpus: build-api.mjs is a thin caller
@@ -49,11 +53,11 @@ on:
       # policy: build-api, build-blog-index and the floors read it (with the
       # path mapping it depends on). A change there changes the surface.
       - 'scripts/lib/corpus-sections.mjs'
-      # The corpus-owned enabled state is a publisher input. A three-line
-      # activation PR must trigger this workflow even before any article body
-      # exists for the newly active sections.
+      # Section configuration and canonical canton slugs are publisher inputs.
+      # A change must rebuild the API before any new section is published.
       - 'generator/data/canton-sections.json'
       - 'generator/scripts/lib/corpus-paths.mjs'
+      - 'generator/data/canton-url-slugs.json'
       # Il registro DICHIARATO delle sezioni cantonali (verita' del rollout, D9)
       # e cio' che lo trasforma nei documenti pubblicati (sections.json, la
       # copia per il Worker, sitemap-cantons.xml) e li porta su R2: un flip di
@@ -357,8 +361,24 @@ jobs:
              [ "$BEFORE" != "0000000000000000000000000000000000000000" ] && \
              git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
             mapfile -t body_dir_list <<< "$body_dirs"
-            if git diff --name-only "$BEFORE" HEAD -- "${body_dir_list[@]}" > "$changed_files_path" 2>/dev/null; then
-              scan_mode="changed"
+            gate_input_paths=(
+              .github/workflows/publish-api.yml
+              engine/shared/articleSectionCore.mjs
+              engine/shared/cantonArticleSectionCore.generated.mjs
+              generator/data/canton-url-slugs.json
+              generator/data/canton-sections.json
+              generator/scripts/lib/corpus-paths.mjs
+              host/cantonSectionsBootstrap.mjs
+              scripts/ci/check-blog-body-links.mjs
+              scripts/lib/article-link-contract.mjs
+              scripts/lib/corpus-sections.mjs
+              generator/scripts/lib/article-meta-block.mjs
+              generator/scripts/lib/article-excerpt.mjs
+            )
+            if git diff --quiet "$BEFORE" HEAD -- "${gate_input_paths[@]}" 2>/dev/null; then
+              if git diff --name-only "$BEFORE" HEAD -- "${body_dir_list[@]}" > "$changed_files_path" 2>/dev/null; then
+                scan_mode="changed"
+              fi
             fi
           fi
           echo "scan-mode=$scan_mode" >> "$GITHUB_OUTPUT"
@@ -377,6 +397,12 @@ jobs:
           PREFLIGHT_EVENT_NAME: ${{ github.event_name }}
           PREFLIGHT_PUSH_BASE_REVISION: ${{ github.event.before }}
         run: node scripts/ci/check-blog-body-syntax.mjs
+
+      - name: Preflight — i link Markdown devono avere una destinazione canonica
+        env:
+          PREFLIGHT_SCAN_MODE: ${{ steps.changed-bodies.outputs.scan-mode }}
+          PREFLIGHT_CHANGED_FILES_FILE: ${{ steps.changed-bodies.outputs.changed-files-path }}
+        run: node scripts/ci/check-blog-body-links.mjs
 
       - name: Preflight — ogni locale deve avere tutti i body dell’italiano
         run: node scripts/ci/check-blog-locale-completeness.mjs
