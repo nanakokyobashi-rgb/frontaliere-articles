@@ -13368,6 +13368,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.burraco-solidale-buguggiate.title': 'Charity burraco in Buguggiate: 140 participants for ABAD ETS',
     'blog.article.burraco-solidale-buguggiate.excerpt': '140 participants in the charity evening 35 game tables at Buguggiate Proceeds destined for new job placement projects What → charity tournament',
     'blog.article.burraco-solidale-buguggiate.imageAlt': 'Charity burraco evening in Buguggiate with 140 participants at 35 tables',
+    'blog.article.coppa-svizzera-lugano-taverne.title': 'Favourite Lugano, Taverne is looking for business',
+    'blog.article.coppa-svizzera-lugano-taverne.excerpt': 'Lugano challenges Pully on Sunday at 2pm.',
+    'blog.article.coppa-svizzera-lugano-taverne.imageAlt': 'Taverne\'s Comunale stadium, venue for the Swiss Cup match against Young Boys',
+    'blog.article.sharks-derby-coppa-trevano.title': 'Federico Pagani\'s Sharks win the Cup derby',
+    'blog.article.sharks-derby-coppa-trevano.excerpt': 'The Sharks win the Cup derby in Trevano Bissone goes down 25-14 Veljko Krstic scores six goals on his official debut Alfano scores five goals Location',
+    'blog.article.sharks-derby-coppa-trevano.imageAlt': 'Lugano, home of the Sharks in the Swiss Cup derby',
+    'blog.article.viaggi-armonici-ternate-2026.title': 'In Ternate, the 2026 Viaggi Armonici exhibition kicks off',
+    'blog.article.viaggi-armonici-ternate-2026.excerpt': '24 October, 9 pm: first concert at Ternate "Between heaven and earth" with the Duo Resonance Free entrance and music by Roberto Carnaghi → "Viaggi Armonici" Festival',
+    'blog.article.viaggi-armonici-ternate-2026.imageAlt': 'Ternate Parish Church for the Viaggi Armonici 2026 concert',
 };
 
 export default blogMetaEn;

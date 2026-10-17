@@ -15,6 +15,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'pensione-multipla-francia-svizzera-2026': { it: 'pensione-multipla-francia-svizzera-2026', en: 'multi-country-pension-france-switzerland-2026', de: 'mehrsprachige-rente-frankreich-schweiz-2026', fr: 'retraite-multi-pays-france-suisse-2026' },
  'cff-eclepens-treni-ripresa': { it: 'cff-eclepens-treni-ripresa', en: 'sbb-eclepens-train-service-resumed', de: 'sbb-eclepens-zugverkehr-wieder-normal', fr: 'cff-eclepens-trafic-repris' },
  'scuole-vaud-furti-inchieste': { it: 'scuole-vaud-furti-inchieste', en: 'vaud-schools-break-ins-investigations', de: 'waadt-schulen-einbrueche-ermittlungen', fr: 'ecoles-vaud-cambriolages-enquetes' },
+ 'tuffe-falsi-poliziotti-vaud': { it: 'tuffe-falsi-poliziotti-vaud', en: 'fake-police-bankers-scams-vaud', de: 'betrug-falsche-polizisten-waadt', fr: 'arnaques-faux-policiers-vaud' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

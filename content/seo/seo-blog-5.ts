@@ -110388,6 +110388,123 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-coppa-svizzera-lugano-taverne': {
+    title: 'Lugano favoritissimo, il Taverne cerca l\'impresa',
+    description: 'Il Lugano sfida il Pully domenica alle 14. Il Taverne ospita lo Young Boys alle 16. Quattro squadre sono già al terzo turno. Lugano e Taverne sono le ticinesi',
+    keywords: 'frontalieri, ticino, svizzera, italia, lugano, favoritissimo, taverne, cerca',
+    ogTitle: 'Coppa Svizzera: Lugano favorito, Taverne all\'impresa',
+    ogDescription: 'Il Lugano sfida il Pully domenica alle 14.',
+    canonicalPath: '/articoli-frontaliere/coppa-svizzera-lugano-taverne/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lugano favoritissimo, il Taverne cerca l'impresa",
+      "description": "Il Lugano sfida il Pully domenica alle 14. Il Taverne ospita lo Young Boys alle 16. Quattro squadre sono già al terzo turno. Lugano e Taverne sono le ticinesi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sfida-bar-quartiere-lugano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il Comunale di Taverne, sede della sfida di Coppa Svizzera contro lo Young Boys"
+      },
+      "datePublished": "2026-10-17T01:54:51+00:00",
+      "dateModified": "2026-10-17T01:54:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/coppa-svizzera-lugano-taverne/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sharks-derby-coppa-trevano': {
+    title: 'Gli Squali di Federico Pagani vincono il derby di Coppa',
+    description: 'Gli Sharks vincono il derby di Coppa a Trevano Il Bissone si arrende sul 25-14 Veljko Krstic segna sei reti all\'esordio ufficiale Alfano firma cinque reti Luogo',
+    keywords: 'frontalieri, ticino, svizzera, italia, squali, federico, pagani, vincono',
+    ogTitle: 'Sharks di Pagani, derby di Coppa vinto a Trevano',
+    ogDescription: 'Gli Sharks vincono il derby di Coppa a Trevano Il Bissone si arrende sul 25-14 Veljko Krstic segna sei reti all\'esordio ufficiale Alfano firma cinque reti Luogo',
+    canonicalPath: '/articoli-frontaliere/sharks-derby-coppa-trevano/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gli Squali di Federico Pagani vincono il derby di Coppa",
+      "description": "Gli Sharks vincono il derby di Coppa a Trevano Il Bissone si arrende sul 25-14 Veljko Krstic segna sei reti all'esordio ufficiale Alfano firma cinque reti Luogo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sharks-derby-coppa-trevano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lugano, città degli Sharks impegnati nel derby di Coppa Svizzera"
+      },
+      "datePublished": "2026-10-17T02:18:18+00:00",
+      "dateModified": "2026-10-17T02:18:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sharks-derby-coppa-trevano/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-viaggi-armonici-ternate-2026': {
+    title: 'A Ternate al via la rassegna Viaggi Armonici 2026',
+    description: '24 ottobre, ore 21: primo concerto a Ternate «Tra cielo e terra» con il Duo Resonance Ingresso libero e musiche di Roberto Carnaghi Rassegna → «Viaggi Armonici',
+    keywords: 'frontalieri, ticino, svizzera, italia, ternate, rassegna, viaggi, armonici',
+    ogTitle: 'Viaggi Armonici 2026 a Ternate con il Duo Resonance',
+    ogDescription: '24 ottobre, ore 21: primo concerto a Ternate «Tra cielo e terra» con il Duo Resonance Ingresso libero e musiche di Roberto Carnaghi Rassegna → «Viaggi Armonici',
+    canonicalPath: '/articoli-frontaliere/viaggi-armonici-ternate-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "A Ternate al via la rassegna Viaggi Armonici 2026",
+      "description": "24 ottobre, ore 21: primo concerto a Ternate «Tra cielo e terra» con il Duo Resonance Ingresso libero e musiche di Roberto Carnaghi Rassegna → «Viaggi Armonici",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-viaggi-armonici-ternate-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Chiesa Parrocchiale di Ternate per il concerto Viaggi Armonici 2026"
+      },
+      "datePublished": "2026-10-17T02:47:49+00:00",
+      "dateModified": "2026-10-17T02:47:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/viaggi-armonici-ternate-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

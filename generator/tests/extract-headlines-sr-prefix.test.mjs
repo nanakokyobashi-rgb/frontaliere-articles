@@ -81,6 +81,14 @@ test('a headline that genuinely contains the phrase mid-sentence is left alone',
   assert.equal(item.headline, 'Il portale con maggiori informazioni su pensioni è online da oggi');
 });
 
+test('an unterminated tag fails closed instead of extracting anchors inside its quoted value', () => {
+  const hiddenMarkup = '<em>markup che resta dentro il valore</em>'.repeat(32);
+  const html = `<section title='virgoletta non chiusa ${hiddenMarkup}`
+    + '<a href="/it/newnsb/2026/notizia-nascosta">Il comunicato nascosto non deve diventare una headline</a>';
+
+  assert.deepEqual(extractHeadlines(html, BASE_URL), []);
+});
+
 test('a link with no real title left after stripping the prefix is dropped by the length gate', () => {
   const html = `<a href="/it/newnsb/2026/comunicato-05">Maggiori informazioni su: Sciopero</a>`;
   const results = extractHeadlines(html, BASE_URL);

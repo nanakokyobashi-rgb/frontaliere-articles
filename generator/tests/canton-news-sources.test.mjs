@@ -1242,6 +1242,17 @@ test('stripPageChrome: attributi quotati con `>` non nascondono i ruoli né romp
   });
 });
 
+test('lo scanner condiviso interrompe il markup non terminato senza scansione quadratica', () => {
+  // Tutti i tag apparenti condividono una virgoletta aperta fino alla fine:
+  // dopo il primo fallimento non esiste un tag valido da recuperare.
+  const malformed = '<meta data=' + '<x '.repeat(16000) + '"';
+  const started = performance.now();
+  assert.equal(htmlTagScanner.nextHtmlTag(malformed), null);
+  const elapsed = performance.now() - started;
+  assert.deepEqual(htmlTagScanner.readHtmlTagAt(malformed, 0), { status: 'malformed' });
+  assert.ok(elapsed < 250, `scanner condiviso troppo lento su markup malformato: ${elapsed.toFixed(1)}ms`);
+});
+
 test('FU-010: un wrapper di navigazione non bilanciato rifiuta la pagina intera', async () => {
   const html = fixture('fu-010-unbalanced-navigation.html').toString('utf8');
   assert.throws(() => stripPageChrome(html), /markup HTML non bilanciato/);

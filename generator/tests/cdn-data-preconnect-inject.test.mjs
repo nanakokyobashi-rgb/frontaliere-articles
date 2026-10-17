@@ -75,6 +75,17 @@ test('finds the real head close past inactive raw text', () => {
   assert.ok(charsetAt < scriptAt);
 });
 
+test('fails closed quickly when the head contains an unterminated tag chain', () => {
+  const malformed = '<!doctype html><html><head><meta data='
+    + '<x '.repeat(16000)
+    + '"</head><body></body></html>';
+  const started = performance.now();
+  const output = runOffload(malformed);
+  const elapsed = performance.now() - started;
+  assert.equal(output, malformed);
+  assert.ok(elapsed < 1000, `offload scanner troppo lento su markup malformato: ${elapsed.toFixed(1)}ms`);
+});
+
 test('does not treat a slash in an unquoted template value as self-closing', () => {
   const html = '<!doctype html><html><head><template data-src=/foo/>'
     + '<meta charset=utf-8></template><meta charset=utf-8><title>Articolo</title></head></html>';

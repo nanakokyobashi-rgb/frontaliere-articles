@@ -39,6 +39,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.scuole-vaud-furti-inchieste.title': 'Acht Waadtländer Schulen von nächtlichen Einbrüchen betroffen',
     'blog.article.scuole-vaud-furti-inchieste.excerpt': 'Acht Waadtländer Schulen in zehn Tagen betroffen Alle Vorfälle ereigneten sich nachts Orbe schätzt die Schäden auf mehrere Tausend Franken Die Kantonspolizei',
     'blog.article.scuole-vaud-furti-inchieste.imageAlt': 'Schulflur im Kanton Waadt mit Türschäden nach einem Einbruch',
+    'blog.article.tuffe-falsi-poliziotti-vaud.title': 'Betrug durch falsche Polizisten/Banker: 100 kontaktiert',
+    'blog.article.tuffe-falsi-poliziotti-vaud.excerpt': 'Im Kanton Waadt 2026 über hundert Personen kontaktiert Sechzehn Kontaktaufnahmen seit Anfang Oktober Fast 2.300 Fälle und 900 erfolgreiche Betrugsfälle',
+    'blog.article.tuffe-falsi-poliziotti-vaud.imageAlt': 'Betrug durch falsche Polizisten und Bankiers im Kanton Waadt',
 };
 
 export default blogMetaCantonVdDe;
