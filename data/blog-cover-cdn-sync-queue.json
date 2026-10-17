@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-zugo-piano-direttore-26-1.webp",
+      "sha256": "ac2b4524ff9e7124adb4c44a6d262f23a3b197947b0796ba7afe6f0dcb0224f9"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-zugo-piano-direttore-26-1-480w.webp",
+      "sha256": "1eedf5540d1fac35545835975f438dd52dccb57fe5fb7fba6c07743a15f7e356"
+    }
+  ]
 }
