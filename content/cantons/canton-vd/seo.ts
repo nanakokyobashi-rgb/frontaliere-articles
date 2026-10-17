@@ -426,6 +426,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-scuole-vaud-furti-inchieste': {
+    title: 'Otto scuole vaudesi colpite da furti notturni | Frontaliere Ticino',
+    description: 'Otto scuole vaudesi colpite in dieci giorni Tutti gli episodi sono avvenuti di notte Orbe stima danni per migliaia di franchi La polizia cantonale ha aperto più',
+    keywords: 'frontalieri, ticino, svizzera, italia, otto, scuole, vaudesi, colpite',
+    ogTitle: 'Furti in otto scuole vaudesi: aperte le inchieste',
+    ogDescription: 'Otto scuole vaudesi colpite in dieci giorni Tutti gli episodi sono avvenuti di notte Orbe stima danni per migliaia di franchi La polizia cantonale ha aperto più',
+    canonicalPath: '/articoli-vaud/scuole-vaud-furti-inchieste/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Otto scuole vaudesi colpite da furti notturni",
+      "description": "Otto scuole vaudesi colpite in dieci giorni Tutti gli episodi sono avvenuti di notte Orbe stima danni per migliaia di franchi La polizia cantonale ha aperto più",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-vaud.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sala scolastica del Canton Vaud con danni alle porte dopo un furto"
+      },
+      "datePublished": "2026-10-17T01:27:48+00:00",
+      "dateModified": "2026-10-17T01:27:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/scuole-vaud-furti-inchieste/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

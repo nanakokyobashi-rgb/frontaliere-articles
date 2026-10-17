@@ -150,6 +150,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-17T01:20:36.277Z",
       "lastFailureAt": "2026-10-17T01:20:36.277Z"
+    },
+    {
+      "articleId": "scuole-vaud-furti-inchieste",
+      "title": "Otto scuole vaudesi colpite da furti notturni",
+      "fallbackImage": "/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-vaud.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T01:27:48.782Z",
+      "lastFailureAt": "2026-10-17T01:27:48.782Z"
     }
   ]
 }

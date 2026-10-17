@@ -36,6 +36,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.cff-eclepens-treni-ripresa.title': 'CFF trains between Yverdon-les-Bains and Lausanne: service resumed',
     'blog.article.cff-eclepens-treni-ripresa.excerpt': 'Traffic resumed at 05:40 on Sunday Yverdon-les-Bains–Lausanne line back to normal Arson in Eclépens: disruptions since Friday CFF mobilized: approximately 100',
     'blog.article.cff-eclepens-treni-ripresa.imageAlt': 'CFF train on the Yverdon-les-Bains–Lausanne line after rail service resumed.',
+    'blog.article.scuole-vaud-furti-inchieste.title': 'Eight schools in Vaud hit by overnight burglaries',
+    'blog.article.scuole-vaud-furti-inchieste.excerpt': 'Eight Vaud schools hit in ten days All incidents occurred at night Orbe estimates damage amounting to thousands of francs The cantonal police have opened',
+    'blog.article.scuole-vaud-furti-inchieste.imageAlt': 'School hallway in Canton Vaud with door damage after a break-in',
 };
 
 export default blogMetaCantonVdEn;
