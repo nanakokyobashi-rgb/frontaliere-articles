@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T06:16:45.379Z",
-  "contentHash": "70b01af2961db0022ac98a1cb797762eec696c7a30deb19609c864a318a5b07f",
+  "updatedAt": "2026-10-17T09:54:16.351Z",
+  "contentHash": "3a4e96b6197ad033a8947b07f2b18cba92a6b51dceae5d08c782480fc4db9abc",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-16T22:15:45.803Z",
+      "updatedAt": "2026-10-17T00:33:32.023Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-16T21:07:20.711Z",
+      "updatedAt": "2026-10-17T04:24:59.962Z",
       "keyFacts": 1
     },
     {
@@ -49,7 +49,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "2",
-          "note": "offerta mediana 8450 CHF"
+          "note": "offerta mediana 8475 CHF"
         }
       ],
       "dataBlocks": [
@@ -111,7 +111,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-16T22:15:45.803Z"
+          "updatedAt": "2026-10-17T00:33:32.023Z"
         },
         {
           "id": "aste-targhe",
@@ -127,7 +127,7 @@
             },
             {
               "label": "TI44550",
-              "value": "900 CHF",
+              "value": "950 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1539"
@@ -135,7 +135,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-16T21:07:20.711Z"
+          "updatedAt": "2026-10-17T04:24:59.962Z"
         },
         {
           "id": "meteo",
@@ -295,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-17T06:16:45.379Z"
+      "updatedAt": "2026-10-17T09:54:16.351Z"
     },
     "en": {
       "canton": "TI",
@@ -312,7 +312,7 @@
         {
           "label": "Plate auctions running",
           "value": "2",
-          "note": "typical bid 8,450 CHF"
+          "note": "typical bid 8,475 CHF"
         }
       ],
       "dataBlocks": [
@@ -374,7 +374,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-16T22:15:45.803Z"
+          "updatedAt": "2026-10-17T00:33:32.023Z"
         },
         {
           "id": "aste-targhe",
@@ -390,7 +390,7 @@
             },
             {
               "label": "TI44550",
-              "value": "900 CHF",
+              "value": "950 CHF",
               "detail": "current bid",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1539"
@@ -398,7 +398,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-16T21:07:20.711Z"
+          "updatedAt": "2026-10-17T04:24:59.962Z"
         },
         {
           "id": "meteo",
@@ -553,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-17T06:16:45.379Z"
+      "updatedAt": "2026-10-17T09:54:16.351Z"
     },
     "de": {
       "canton": "TI",
@@ -570,7 +570,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "2",
-          "note": "mittleres Gebot 8’450 CHF"
+          "note": "mittleres Gebot 8’475 CHF"
         }
       ],
       "dataBlocks": [
@@ -632,7 +632,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-16T22:15:45.803Z"
+          "updatedAt": "2026-10-17T00:33:32.023Z"
         },
         {
           "id": "aste-targhe",
@@ -648,7 +648,7 @@
             },
             {
               "label": "TI44550",
-              "value": "900 CHF",
+              "value": "950 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1539"
@@ -656,7 +656,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-16T21:07:20.711Z"
+          "updatedAt": "2026-10-17T04:24:59.962Z"
         },
         {
           "id": "meteo",
@@ -811,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-17T06:16:45.379Z"
+      "updatedAt": "2026-10-17T09:54:16.351Z"
     },
     "fr": {
       "canton": "TI",
@@ -828,7 +828,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "2",
-          "note": "offre centrale 8 450 CHF"
+          "note": "offre centrale 8 475 CHF"
         }
       ],
       "dataBlocks": [
@@ -890,7 +890,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-16T22:15:45.803Z"
+          "updatedAt": "2026-10-17T00:33:32.023Z"
         },
         {
           "id": "aste-targhe",
@@ -906,7 +906,7 @@
             },
             {
               "label": "TI44550",
-              "value": "900 CHF",
+              "value": "950 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1539"
@@ -914,7 +914,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-16T21:07:20.711Z"
+          "updatedAt": "2026-10-17T04:24:59.962Z"
         },
         {
           "id": "meteo",
@@ -1066,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-17T06:16:45.379Z"
+      "updatedAt": "2026-10-17T09:54:16.351Z"
     }
   }
 }

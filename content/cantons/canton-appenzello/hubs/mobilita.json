@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T04:59:03.087Z",
-  "contentHash": "8c7b2de89266c32a8f37904dd0fb13d9b27978ab8c75bdffed6796b449b37369",
+  "updatedAt": "2026-10-17T09:54:16.351Z",
+  "contentHash": "ff2c128a4341523eb0156ff79bec3d0e0816a2122940749eaa2ee53c7797a5d4",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-16T21:47:34.007Z",
+      "updatedAt": "2026-10-16T23:56:47.475Z",
       "keyFacts": 1
     },
     {
@@ -40,13 +40,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffico",
-              "date": "2026-10-16T21:47:34.007Z",
+              "date": "2026-10-16T23:56:47.475Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffico",
-              "date": "2026-10-16T21:47:34.007Z",
+              "date": "2026-10-16T23:56:47.475Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -63,7 +63,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-16T21:47:34.007Z"
+          "updatedAt": "2026-10-16T23:56:47.475Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T09:54:16.351Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -152,13 +152,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffic",
-              "date": "2026-10-16T21:47:34.007Z",
+              "date": "2026-10-16T23:56:47.475Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffic",
-              "date": "2026-10-16T21:47:34.007Z",
+              "date": "2026-10-16T23:56:47.475Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -175,7 +175,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-16T21:47:34.007Z"
+          "updatedAt": "2026-10-16T23:56:47.475Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T09:54:16.351Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -264,13 +264,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Verkehr",
-              "date": "2026-10-16T21:47:34.007Z",
+              "date": "2026-10-16T23:56:47.475Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Verkehr",
-              "date": "2026-10-16T21:47:34.007Z",
+              "date": "2026-10-16T23:56:47.475Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -287,7 +287,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-16T21:47:34.007Z"
+          "updatedAt": "2026-10-16T23:56:47.475Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -353,7 +353,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T09:54:16.351Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -376,13 +376,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Trafic",
-              "date": "2026-10-16T21:47:34.007Z",
+              "date": "2026-10-16T23:56:47.475Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Trafic",
-              "date": "2026-10-16T21:47:34.007Z",
+              "date": "2026-10-16T23:56:47.475Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -399,7 +399,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-16T21:47:34.007Z"
+          "updatedAt": "2026-10-16T23:56:47.475Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -465,7 +465,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T09:54:16.351Z"
     }
   }
 }
