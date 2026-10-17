@@ -355,7 +355,7 @@ test('la generazione si ferma se la pagina di un URL riusato non e\' l\'item sce
   assert.match(fetchFn, /lastSourcePageTitle = '';/);
   // Title evidence must come from the same isolated source passed to the
   // extractor; the full page can contain stale chrome titles outside the item.
-  assert.match(fetchFn, /lastSourcePageTitle = pageTitleEvidence\(isolation\.html\);/);
+  assert.match(fetchFn, /lastSourcePageTitle = pageTitleEvidence\(isolation\.html, \{ scriptingDisabled: true \}\);/);
 });
 
 // ── Il cablaggio in create-article.mjs ──────────────────────────────────────

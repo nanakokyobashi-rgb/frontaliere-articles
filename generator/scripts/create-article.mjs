@@ -8603,7 +8603,7 @@ async function fetchPageContent(url) {
     // to feed the generator and fact-checker the actual article body instead of
     // 70%+ nav/footer/ads noise. See scripts/lib/extract-article-text.mjs.
     lastSourcePublishedAt = publishedAt || '';
-    lastSourcePageTitle = pageTitleEvidence(html, { scriptingDisabled: true });
+    lastSourcePageTitle = pageTitleEvidence(isolation.html, { scriptingDisabled: true });
     if (suppliedCantonSourceContent.length >= 200) {
       lastSourcePublishedAt = suppliedCantonSourcePublishedAt || lastSourcePublishedAt;
       lastSourcePageTitle = suppliedCantonSourceTitle || lastSourcePageTitle;
