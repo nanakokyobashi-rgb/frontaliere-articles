@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "carburanti",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "4e90aec3ef8efe865d31cbe3a18e7e769984158ef06221af4a1085544c45a8da",
+  "updatedAt": "2026-10-17T00:44:41.594Z",
+  "contentHash": "8f540b3ce5ac544ce62f467425bb05e02e92f15d7863eeba639608b44cc7118c",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-15T12:02:33.404Z",
+      "updatedAt": "2026-10-16T11:53:35.759Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Klöntalerstrasse: limitazione staldengarten–bützi",
+          "url": "/articoli-glarona/klontalstrasse-staldengarten-butzi/",
+          "excerpt": "Una limitazione al traffico riguarda la Klöntalerstrasse nel tratto Staldengarten–Bützi, nel Canton Glarona.",
+          "date": "2026-10-17T00:33:53.716Z"
+        },
         {
           "title": "Imposta immobiliare seconde case Glarona: via libera dal Governo",
           "url": "/articoli-glarona/imposta-seconde-case-glarona/",
@@ -88,7 +94,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:44:41.594Z"
     },
     "en": {
       "canton": "GL",
@@ -129,11 +135,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Klöntalerstrasse: restriction staldengarten–bützi",
+          "url": "/en/glarus-articles/klontalstrasse-traffic-restriction/",
+          "excerpt": "A traffic restriction affects Klöntalerstrasse on the Staldengarten–Bützi section, in the Canton of Glarus.",
+          "date": "2026-10-17T00:33:53.716Z"
+        },
         {
           "title": "Glarus second-home property tax: government gives the green light",
           "url": "/en/glarus-articles/secondary-homes-tax-glarus/",
@@ -163,7 +175,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:44:41.594Z"
     },
     "de": {
       "canton": "GL",
@@ -204,11 +216,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Klöntalerstrasse: Verkehrsbeschränkung Staldengarten–Bützi",
+          "url": "/de/glarus-artikel/verkehrseinschraenkung-kloentalerstrasse/",
+          "excerpt": "Eine Verkehrsbeschränkung betrifft die Klöntalerstrasse im Abschnitt Staldengarten–Bützi im Kanton Glarus.",
+          "date": "2026-10-17T00:33:53.716Z"
+        },
         {
           "title": "Immobiliensteuer für Zweitwohnungen in Glarus: grünes Licht von der Regierung",
           "url": "/de/glarus-artikel/zweitwohnungssteuer-glarus/",
@@ -238,7 +256,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:44:41.594Z"
     },
     "fr": {
       "canton": "GL",
@@ -279,11 +297,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-16T11:53:35.759Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Klöntalerstrasse : restriction Staldengarten–Bützi",
+          "url": "/fr/articles-glaris/restriction-trafic-kloentalerstrasse/",
+          "excerpt": "Une restriction de circulation concerne la Klöntalerstrasse sur le tronçon Staldengarten–Bützi, dans le canton de Glaris.",
+          "date": "2026-10-17T00:33:53.716Z"
+        },
         {
           "title": "Impôt immobilier à Glaris : feu vert du Gouvernement",
           "url": "/fr/articles-glaris/taxe-residences-secondaires-glaris/",
@@ -313,7 +337,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:44:41.594Z"
     }
   }
 }

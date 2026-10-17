@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "carburanti",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "5f0aa5fb9ec2f168c0cfc8ae1ea4263deb6db6545cd35cc33cc575a2fa894187",
+  "updatedAt": "2026-10-17T00:44:41.594Z",
+  "contentHash": "4e5df0c8716e1a16bb2b9f77cb6cc56a274f230410b364fc70c8ccde8586b5d4",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Crolla un pilone dell'alta tensione a Vétroz",
+          "url": "/articoli-vallese/crollo-pilone-vetroz/",
+          "excerpt": "Il pilone è crollato verso le 4 nella zona industriale del Botza.",
+          "date": "2026-10-17T00:38:07.569Z"
+        },
+        {
           "title": "Vallese: approvato il Piano d'azione acqua 2035",
           "url": "/articoli-vallese/vallese-piano-acqua-2035/",
           "excerpt": "Il Consiglio di Stato adotta il Piano d'azione 2035 Attuazione progressiva dal 2027, secondo priorità e risorse Le misure passano da 39 a 25 dopo la revisione",
@@ -106,12 +112,6 @@
           "url": "/articoli-vallese/allerta-botulismo-terrina-vallese/",
           "excerpt": "Due casi di botulismo segnalati in Vallese",
           "date": "2026-10-07T16:03:38.899Z"
-        },
-        {
-          "title": "Disoccupazione Vallese: 5’755 iscritti a settembre 2026",
-          "url": "/articoli-vallese/disoccupazione-vallese-fine-estate/",
-          "excerpt": "5’755 disoccupati iscritti agli ORP a fine settembre",
-          "date": "2026-10-07T08:50:45.500Z"
         }
       ],
       "links": [
@@ -140,7 +140,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:44:41.594Z"
     },
     "en": {
       "canton": "VS",
@@ -211,6 +211,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "A high-voltage pylon collapses in Vétroz",
+          "url": "/en/valais-articles/fallen-pylon-vetroz/",
+          "excerpt": "The pylon collapsed around 4 in the Botza industrial area.",
+          "date": "2026-10-17T00:38:07.569Z"
+        },
+        {
           "title": "Valais: Water Action Plan 2035 approved",
           "url": "/en/valais-articles/valais-water-action-plan-2035/",
           "excerpt": "The Council of State adopts the 2035 Action Plan Gradual implementation from 2027, according to priorities and resources The measures decrease from 39 to 25",
@@ -232,11 +238,6 @@
           "title": "Two cases of botulism in Valais: terrine recalled",
           "url": "/en/valais-articles/valais-botulism-terrine-alert/",
           "date": "2026-10-07T16:03:38.899Z"
-        },
-        {
-          "title": "Valais unemployment: 5’755 registered in September 2026",
-          "url": "/en/valais-articles/valais-unemployment-end-summer/",
-          "date": "2026-10-07T08:50:45.500Z"
         }
       ],
       "links": [
@@ -265,7 +266,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:44:41.594Z"
     },
     "de": {
       "canton": "VS",
@@ -336,6 +337,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Ein Hochspannungsmast in Vétroz stürzt ein",
+          "url": "/de/wallis-artikel/hochspannungsmast-vetroz/",
+          "excerpt": "Der Mast ist gegen 4 Uhr im Industriegebiet von Botza eingestürzt.",
+          "date": "2026-10-17T00:38:07.569Z"
+        },
+        {
           "title": "Wallis: Wasser-Aktionsplan 2035 genehmigt",
           "url": "/de/wallis-artikel/wallis-aktionsplan-wasser-2035/",
           "excerpt": "Der Staatsrat verabschiedet den Aktionsplan 2035 Schrittweise Umsetzung ab 2027 nach Prioritäten und Ressourcen Die Maßnahmen gehen nach der Überarbeitung",
@@ -357,11 +364,6 @@
           "title": "Zwei Fälle von Botulismus im Wallis: Terrine zurückgezogen",
           "url": "/de/wallis-artikel/wallis-botulismus-terrine-warnung/",
           "date": "2026-10-07T16:03:38.899Z"
-        },
-        {
-          "title": "Arbeitslosigkeit im Wallis: 5’755 registrierte Arbeitslose im September 2026",
-          "url": "/de/wallis-artikel/wallis-arbeitslosigkeit-sommerende/",
-          "date": "2026-10-07T08:50:45.500Z"
         }
       ],
       "links": [
@@ -386,7 +388,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:44:41.594Z"
     },
     "fr": {
       "canton": "VS",
@@ -457,6 +459,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Un pylône de haute tension s'effondre à Vétroz",
+          "url": "/fr/articles-valais/pylone-haute-tension-vetroz/",
+          "excerpt": "Le pylône s'est effondré vers 4 heures dans la zone industrielle de Botza.",
+          "date": "2026-10-17T00:38:07.569Z"
+        },
+        {
           "title": "Valais : approbation du Plan d'action Eau 2035",
           "url": "/fr/articles-valais/valais-plan-action-eau-2035/",
           "excerpt": "Le Conseil d'État adopte le Plan d'action 2035 Mise en œuvre progressive à partir de 2027, selon les priorités et les ressources Les mesures passent de 39 à 25",
@@ -479,12 +487,6 @@
           "url": "/fr/articles-valais/alerte-botulisme-terrine-valais/",
           "excerpt": "Deux cas de botulisme signalés dans le Valais",
           "date": "2026-10-07T16:03:38.899Z"
-        },
-        {
-          "title": "Chômage en Valais : 5’755 inscrits en septembre 2026",
-          "url": "/fr/articles-valais/chomage-valais-fin-ete/",
-          "excerpt": "5’755 chômeurs inscrits auprès des ORP à fin septembre",
-          "date": "2026-10-07T08:50:45.500Z"
         }
       ],
       "links": [
@@ -513,7 +515,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:44:41.594Z"
     }
   }
 }
