@@ -543,7 +543,7 @@ export function gateForWorkflow(name, { lost = false, gate = undefined } = {}) {
 function gh(args, fallback = '') {
   try {
     // maxBuffer esplicito: il default di execFileSync e' 1 MB, e da quando
-    // failedRunLog() scarica il log dei job falliti quel tetto e' raggiungibile
+    // failedRunLog() scarica i log del trasporto e dei job falliti quel tetto e' raggiungibile
     // — la run 31459831234 ne produce gia' 220 KB, e una generazione lunga
     // arriva molto oltre. Superarlo lancia ENOBUFS, che qui viene catturato e
     // degrada in silenzio alla issue generica: cioe' proprio sulla run piu'
@@ -2108,10 +2108,17 @@ function workflowPathOfRun(runId) {
   return gh(['api', `repos/${REPO}/actions/runs/${runId}`, '--jq', '.path'], '') || '';
 }
 
+/** CLI arguments for the log read used by the rich failure detectors. */
+export function failureLogArgs(runId, workflowPath = '') {
+  const logFlag = workflowPath === TRANSPORT_MANUAL_BLOCKER_WORKFLOW_PATH ? '--log' : '--log-failed';
+  return ['run', 'view', String(runId), '--repo', REPO, logFlag];
+}
+
 /**
  * Log dei job falliti della run. Oltre agli step di push, lo scarichiamo per i
  * gruppi crawler e per Transport identical twins: il primo ha un aggregatore,
- * il secondo espone nel log il set dei blocker manuali che identifica la causa.
+ * il secondo espone il set dei blocker manuali nel dry-run riuscito, quindi
+ * richiede il log completo invece di `--log-failed`.
  */
 function failedRunLog(runId, jobs, workflowName = '', workflowPath = '') {
   // I gruppi crawler sono l'unica classe in cui il job fallito è un aggregatore:
@@ -2123,7 +2130,7 @@ function failedRunLog(runId, jobs, workflowName = '', workflowPath = '') {
     && !isCrawlerGroupWorkflow(workflowName)
     && !jobs.some((j) => /push/i.test(j.step || ''))
   ) return '';
-  return gh(['run', 'view', String(runId), '--repo', REPO, '--log-failed'], '');
+  return gh(failureLogArgs(runId, workflowPath), '');
 }
 
 async function main() {
