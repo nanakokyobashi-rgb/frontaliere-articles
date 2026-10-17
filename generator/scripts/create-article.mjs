@@ -7738,6 +7738,10 @@ const SOURCE_HTML_RAW_TEXT_ELEMENTS = new Set([
   'script', 'style', 'textarea', 'title', 'iframe', 'xmp',
   'noembed', 'noframes',
 ]);
+const SOURCE_HTML_HEAD_ELEMENTS = new Set([
+  'base', 'basefont', 'bgsound', 'link', 'meta', 'noframes', 'noscript',
+  'script', 'style', 'template', 'title',
+]);
 const SOURCE_HTML_IMPLICIT_END_TAGS = new Map([
   ['body', new Set(['head'])],
   ['li', new Set(['li'])],
@@ -8012,6 +8016,10 @@ function sourceTagIsInactive(html, tag, namespace, parent) {
 
 function sourceImplicitCloseIndex(stack, name) {
   const closers = SOURCE_HTML_IMPLICIT_END_TAGS.get(name);
+  if (stack.at(-1)?.name === 'head' && stack.at(-1)?.namespace === 'html'
+    && !SOURCE_HTML_HEAD_ELEMENTS.has(name) && name !== 'html' && name !== 'head') {
+    return stack.length - 1;
+  }
   if (!closers) return -1;
   for (let index = stack.length - 1; index >= 0; index -= 1) {
     const entry = stack[index];
@@ -8067,6 +8075,11 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd } 
       ? SOURCE_HTML_VOID_ELEMENTS.has(tag.name)
       : tag.explicitSelfClosing === true;
 
+    if (!tag.closing && namespace === 'html') {
+      const implicitIndex = sourceImplicitCloseIndex(stack, tag.name);
+      if (implicitIndex >= 0) popThrough(implicitIndex, start, true);
+    }
+
     if (!tag.closing && namespace === 'html' && !isVoid && tag.name === 'template') {
       const afterTemplate = sourceSkipTemplate(html, tag.end + 1);
       if (afterTemplate < 0) return { malformed: true, stack };
@@ -8106,11 +8119,6 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd } 
       popThrough(matchingIndex, tag.end + 1, false, start);
       cursor = tag.end + 1;
       continue;
-    }
-
-    if (namespace === 'html') {
-      const implicitIndex = sourceImplicitCloseIndex(stack, tag.name);
-      if (implicitIndex >= 0) popThrough(implicitIndex, start, true);
     }
 
     const parent = stack.at(-1) || null;
