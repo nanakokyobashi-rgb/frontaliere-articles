@@ -130,6 +130,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-17T01:07:58.548Z",
       "lastFailureAt": "2026-10-17T01:07:58.548Z"
+    },
+    {
+      "articleId": "burraco-solidale-buguggiate",
+      "title": "Burraco benefico a Buguggiate: 140 partecipanti per ABAD ETS",
+      "fallbackImage": "/images/blog/nuovi-progetti-chiave-digitali.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T01:16:19.861Z",
+      "lastFailureAt": "2026-10-17T01:16:19.861Z"
     }
   ]
 }

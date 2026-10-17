@@ -45055,6 +45055,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'burraco-solidale-buguggiate',
+ category: 'novita',
+ date: '2026-10-17T01:16:18.876Z',
+ image: '/images/blog/nuovi-progetti-chiave-digitali.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
