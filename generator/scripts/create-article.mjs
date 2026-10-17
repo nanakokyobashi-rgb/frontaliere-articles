@@ -8087,7 +8087,18 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd } 
       continue;
     }
 
-    if (!tag.closing && namespace === 'html' && !isVoid && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(tag.name)) {
+    const isRawTextElement = !tag.closing && !isVoid && (
+      (namespace === 'html' && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(tag.name))
+      // In head mode, noscript is a raw-text element when scripting is enabled.
+      // Keep its contents from being mistaken for forbidden head containers.
+      || (namespace === 'html' && tag.name === 'noscript'
+        && stack.at(-1)?.name === 'head' && stack.at(-1)?.namespace === 'html')
+      // SVG script contents are raw text too; apparent HTML inside them must
+      // not escape through foreignObject as an active editorial root.
+      || (namespace === 'svg' && tag.name === 'script')
+    );
+
+    if (isRawTextElement) {
       const afterRawText = sourceFindRawTextClose(html, tag.end + 1, tag.name);
       if (afterRawText < 0) return { malformed: true, stack };
       if (onStart) onStart({
@@ -8193,6 +8204,20 @@ function findActiveSourceHead(html) {
           entry,
           trusted: directDocumentBody && !isVoid,
           implicit: false,
+        };
+        sawBody = true;
+      } else if (
+        sawHtml && !sawHead && !sawBody &&
+        stack.length === 1 && parent?.name === 'html' && parent.namespace === 'html' &&
+        namespace === 'html' && !SOURCE_HTML_HEAD_ELEMENTS.has(tag.name)
+      ) {
+        // Both head and body start tags are optional. Once body content begins
+        // directly below <html>, model the parser's implied body so a later
+        // direct-child JSON-LD block remains part of the trusted document.
+        bodyState = {
+          entry: parent,
+          trusted: true,
+          implicit: true,
         };
         sawBody = true;
       } else if (stack.length === 0 && !(bodyState?.implicit
