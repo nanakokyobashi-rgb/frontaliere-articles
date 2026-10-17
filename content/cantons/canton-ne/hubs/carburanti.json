@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "cf3c05dbb9c245a24ac465d3d139e86ffef4b5ad1e7bed68073cf96e0cbaf8c2",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "c34346fc107292cb4fba8d62115db9e81c8c53fcc3579af8cbbe51fa2ee5fc66",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "CPCN registra +5,6% nel 2025: copertura 84,8%",
+          "url": "/articoli-neuchatel/cpcn-rendimento-2025-copertura/",
+          "excerpt": "+5,6% per la performance CPCN nel 2025 3% di remunerazione sugli averi di vecchiaia 84,8% di copertura al 31.12.2025 RFV da CHF 979 milioni, al 92%",
+          "date": "2026-10-17T00:07:41.161Z"
+        },
+        {
           "title": "Nuovo centro accoglienza asilo a Couvet: parte il progetto",
           "url": "/articoli-neuchatel/nuovo-centro-asilo-couvet/",
           "excerpt": "Nuova struttura prevista in rue du 1er Mars 11, a Couvet Sostituirà il sito attuale di Chemin des Prises 8 Progetto elaborato con il Comune di Val-de-Travers",
@@ -94,12 +100,6 @@
           "url": "/articoli-neuchatel/disoccupazione-stabile-4-4-neuchatel-settembre-2026/",
           "excerpt": "3.945 disoccupati in settembre 2026",
           "date": "2026-10-07T09:30:57.326Z"
-        },
-        {
-          "title": "Neuchâtel rinnova politica abitativa con 24 milioni",
-          "url": "/articoli-neuchatel/neuchatel-rinnova-politica-abitativa-con-24-milioni/",
-          "excerpt": "Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto",
-          "date": "2026-10-07T09:07:42.905Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "NE",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "CPCN records +5,6% in 2025: coverage 84,8%",
+          "url": "/en/neuchatel-articles/cpcn-2025-return-coverage/",
+          "excerpt": "+5,6% for CPCN performance in 2025 3% remuneration on retirement savings 84,8% coverage as at December 31, 2025 RFV of CHF 979 million, at 92% of the target",
+          "date": "2026-10-17T00:07:41.161Z"
+        },
+        {
           "title": "New asylum reception centre in Couvet: the project starts",
           "url": "/en/neuchatel-articles/new-asylum-center-couvet/",
           "excerpt": "New structure planned in rue du 1er Mars 11, in Couvet It will replace the current site of Chemin des Prises 8 Project developed with the Municipality",
@@ -190,11 +196,6 @@
           "title": "Unemployment stable at 4,4% Neuchâtel September 2026",
           "url": "/en/neuchatel-articles/unemployment-stable-at-4-4-neuchatel-september-2026/",
           "date": "2026-10-07T09:30:57.326Z"
-        },
-        {
-          "title": "Neuchâtel renews housing policy with 24 million",
-          "url": "/en/neuchatel-articles/neuchatel-renews-housing-policy-with-24-million/",
-          "date": "2026-10-07T09:07:42.905Z"
         }
       ],
       "links": [
@@ -207,7 +208,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "NE",
@@ -266,6 +267,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "CPCN verzeichnet 2025 ein Plus von +5,6%: Deckungsgrad 84,8%",
+          "url": "/de/neuenburg-artikel/cpcn-rendite-2025-deckung/",
+          "excerpt": "+5,6% bei der Performance der CPCN im Jahr 2025 3% Verzinsung der Altersguthaben 84,8% Deckungsgrad am 31.12.2025 RFV in Höhe von CHF 979 Millionen, bei 92%",
+          "date": "2026-10-17T00:07:41.161Z"
+        },
+        {
           "title": "Neue Kindertagesstätte in Couvet: Das Projekt beginnt",
           "url": "/de/neuenburg-artikel/neues-asylzentrum-couvet/",
           "excerpt": "Neue Struktur in der Rue du 1er Mars 11 in Couvet geplant Ersetzt den aktuellen Standort von Chemin des Prises 8 Mit der Gemeinde Val-de-Travers ausgearbeitetes",
@@ -285,11 +292,6 @@
           "title": "Arbeitslosigkeit in Neuenburg im September 2026 stabil bei 4,4%",
           "url": "/de/neuenburg-artikel/arbeitslosigkeit-in-neuenburg-im-september-2026-stabil-bei-4-4/",
           "date": "2026-10-07T09:30:57.326Z"
-        },
-        {
-          "title": "Neuenburg erneuert Wohnungspolitik mit 24 Millionen",
-          "url": "/de/neuenburg-artikel/neuenburg-erneuert-wohnungspolitik-mit-24-millionen/",
-          "date": "2026-10-07T09:07:42.905Z"
         }
       ],
       "links": [
@@ -302,7 +304,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "NE",
@@ -361,6 +363,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "La CPCN enregistre +5,6% en 2025 : taux de couverture de 84,8%",
+          "url": "/fr/articles-neuchatel/cpcn-performance-2025-couverture/",
+          "excerpt": "+5,6% pour la performance de la CPCN en 2025 3% de rémunération sur les avoirs de vieillesse 84,8% de couverture au 31 décembre 2025 RFV de CHF 979 millions",
+          "date": "2026-10-17T00:07:41.161Z"
+        },
+        {
           "title": "Nouveau centre d'accueil asile à Couvet : le projet commence",
           "url": "/fr/articles-neuchatel/nouveau-centre-asile-couvet/",
           "excerpt": "Nouvelle structure prévue rue du 1er Mars 11, à Couvet Remplacera le site actuel du Chemin des Prises 8 Projet élaboré avec la commune de Val-de-Travers Séance",
@@ -383,12 +391,6 @@
           "url": "/fr/articles-neuchatel/chomage-stable-a-4-4-a-neuchatel-en-septembre-2026/",
           "excerpt": "3.945 chômeurs en septembre 2026",
           "date": "2026-10-07T09:30:57.326Z"
-        },
-        {
-          "title": "Neuchâtel renouvelle sa politique du logement avec 24 millions",
-          "url": "/fr/articles-neuchatel/neuchatel-renouvelle-sa-politique-du-logement-avec-24-millions/",
-          "excerpt": "Le 28 septembre 2026, le Conseil d'État a adopté le rapport",
-          "date": "2026-10-07T09:07:42.905Z"
         }
       ],
       "links": [
@@ -401,7 +403,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

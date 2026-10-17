@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "f1412ab13751fb16d6dcc558f32f57d1446527ab99791147757b4e101c47d57e",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "43bb7181d75c66eac36e31c9fd843258e6e876071b09b4bfdf48dbb3c51591b7",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T03:54:22.189Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T15:35:32.859Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "24",
+          "value": "25",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,30 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Bocktoberfest Schaffhausen 2026",
-              "detail": "Messeareal, Schaffhausen",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/events/music/schaffhausen/bocktoberfest-schaffhausen-2026_ArDxsEg"
-            },
-            {
-              "label": "El Flecha Negra [DE]",
-              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/el-flecha-negra-de/"
-            },
-            {
-              "label": "Savana Funk",
-              "detail": "Radio Rasa",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/savana-funk_AabLSpU"
-            },
-            {
-              "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
             {
               "label": "Auf den Spuren der Hugenotten und Waldenser",
               "detail": "Sciaffusa",
@@ -72,6 +48,18 @@
               "detail": "Buchberg",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
+            },
+            {
+              "label": "Bocktoberfest Schaffhausen 2026",
+              "detail": "Messeareal, Schaffhausen — in corso, ultimo giorno: 17 ottobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/schaffhausen/bocktoberfest-schaffhausen-2026_ArDxsEg"
+            },
+            {
+              "label": "Wine mobile",
+              "detail": "Bringolf Weinbau, Hallau — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Public Moped Tour in Chläggli",
@@ -96,11 +84,23 @@
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
               "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
+            },
+            {
+              "label": "Flook",
+              "detail": "Haberhaus Bühne",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/flook_Amua7L5"
+            },
+            {
+              "label": "Ice Park Season Opener",
+              "detail": "KSS Sport- und Freizeitpark Schaffhausen, Schaffhausen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [],
@@ -159,7 +159,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "SH",
@@ -169,7 +169,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "24",
+          "value": "25",
           "note": "from the site’s events calendar"
         }
       ],
@@ -179,30 +179,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Bocktoberfest Schaffhausen 2026",
-              "detail": "Messeareal, Schaffhausen",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/events/music/schaffhausen/bocktoberfest-schaffhausen-2026_ArDxsEg"
-            },
-            {
-              "label": "El Flecha Negra [DE]",
-              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/el-flecha-negra-de/"
-            },
-            {
-              "label": "Savana Funk",
-              "detail": "Radio Rasa",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/savana-funk_AabLSpU"
-            },
-            {
-              "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau — ongoing, last day: 25 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
             {
               "label": "Auf den Spuren der Hugenotten und Waldenser",
               "detail": "Sciaffusa",
@@ -214,6 +190,18 @@
               "detail": "Buchberg",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
+            },
+            {
+              "label": "Bocktoberfest Schaffhausen 2026",
+              "detail": "Messeareal, Schaffhausen — ongoing, last day: 17 October 2026",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/schaffhausen/bocktoberfest-schaffhausen-2026_ArDxsEg"
+            },
+            {
+              "label": "Wine mobile",
+              "detail": "Bringolf Weinbau, Hallau — ongoing, last day: 25 October 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Public Moped Tour in Chläggli",
@@ -238,11 +226,23 @@
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
               "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
+            },
+            {
+              "label": "Flook",
+              "detail": "Haberhaus Bühne",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/flook_Amua7L5"
+            },
+            {
+              "label": "Ice Park Season Opener",
+              "detail": "KSS Sport- und Freizeitpark Schaffhausen, Schaffhausen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -255,7 +255,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [],
@@ -301,7 +301,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "SH",
@@ -311,7 +311,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "24",
+          "value": "25",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -321,30 +321,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Bocktoberfest Schaffhausen 2026",
-              "detail": "Messeareal, Schaffhausen",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/events/music/schaffhausen/bocktoberfest-schaffhausen-2026_ArDxsEg"
-            },
-            {
-              "label": "El Flecha Negra [DE]",
-              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/el-flecha-negra-de/"
-            },
-            {
-              "label": "Savana Funk",
-              "detail": "Radio Rasa",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/savana-funk_AabLSpU"
-            },
-            {
-              "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
             {
               "label": "Auf den Spuren der Hugenotten und Waldenser",
               "detail": "Sciaffusa",
@@ -356,6 +332,18 @@
               "detail": "Buchberg",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
+            },
+            {
+              "label": "Bocktoberfest Schaffhausen 2026",
+              "detail": "Messeareal, Schaffhausen — läuft, letzter Tag: 17. Oktober 2026",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/schaffhausen/bocktoberfest-schaffhausen-2026_ArDxsEg"
+            },
+            {
+              "label": "Weinmobil",
+              "detail": "Bringolf Weinbau, Hallau — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Öffentliche Töffli Tour im Chläggli",
@@ -380,11 +368,23 @@
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
               "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
+            },
+            {
+              "label": "Flook",
+              "detail": "Haberhaus Bühne",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/flook_Amua7L5"
+            },
+            {
+              "label": "Saisonstart Eispark",
+              "detail": "KSS Sport- und Freizeitpark Schaffhausen, Schaffhausen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -397,7 +397,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [],
@@ -443,7 +443,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "SH",
@@ -453,7 +453,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "24",
+          "value": "25",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -463,30 +463,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Bocktoberfest Schaffhausen 2026",
-              "detail": "Messeareal, Schaffhausen",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/events/music/schaffhausen/bocktoberfest-schaffhausen-2026_ArDxsEg"
-            },
-            {
-              "label": "El Flecha Negra [FR]",
-              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/el-flecha-negra-de/"
-            },
-            {
-              "label": "Savana Funk",
-              "detail": "Radio Rasa",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/savana-funk_AabLSpU"
-            },
-            {
-              "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
             {
               "label": "Auf den Spuren der Hugenotten und Waldenser",
               "detail": "Sciaffusa",
@@ -498,6 +474,18 @@
               "detail": "Buchberg",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
+            },
+            {
+              "label": "Bocktoberfest Schaffhausen 2026",
+              "detail": "Messeareal, Schaffhausen — en cours, dernier jour : 17 octobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/events/music/schaffhausen/bocktoberfest-schaffhausen-2026_ArDxsEg"
+            },
+            {
+              "label": "Weinmobil",
+              "detail": "Bringolf Weinbau, Hallau — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Balade publique en mobylette au Chläggli",
@@ -522,11 +510,23 @@
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
               "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
+            },
+            {
+              "label": "Flook",
+              "detail": "Haberhaus Bühne",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/flook_Amua7L5"
+            },
+            {
+              "label": "Ouverture de la saison à l'Eispark",
+              "detail": "KSS Sport- und Freizeitpark Schaffhausen, Schaffhausen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -539,7 +539,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [],
@@ -585,7 +585,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

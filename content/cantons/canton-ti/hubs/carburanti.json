@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "carburanti",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "e239467383e8d2773936511a996c797010de4f6bc2790b828415762296a859e9",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "eac53ba1c0e61b56a30c552fd8774f5e10438bfad04df99a36bfa9ce4332d686",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -101,12 +101,6 @@
           "date": "2026-05-04T09:11:32.268Z"
         },
         {
-          "title": "Costo benzina in Ticino: perché i frontalieri pagano di più",
-          "url": "/articoli-frontaliere/costo-benzina-ticino-frontalieri-2026/",
-          "excerpt": "I prezzi della benzina in Ticino rimangono elevati, con differenze di oltre 20 centesimi al litro tra le diverse zone. Ecco cosa cambia per i frontalieri",
-          "date": "2026-05-16T02:47:05.638Z"
-        },
-        {
           "title": "Caro carburanti, rischio stop trasporto pubblico in Ticino",
           "url": "/articoli-frontaliere/carburanti-tpl-ticino-2026/",
           "excerpt": "Il caro carburanti minaccia il trasporto pubblico locale, con costi aggiuntivi stimati in 0,54 milioni di euro al giorno per il diesel.",
@@ -117,6 +111,12 @@
           "url": "/articoli-frontaliere/carburanti-ticino-confronto-2024/",
           "excerpt": "Confronta i prezzi della benzina e del diesel in Ticino e risparmia con i nostri consigli pratici",
           "date": "2026-04-27T09:12:47.619Z"
+        },
+        {
+          "title": "Costo benzina in Ticino: perché i frontalieri pagano di più",
+          "url": "/articoli-frontaliere/costo-benzina-ticino-frontalieri-2026/",
+          "excerpt": "I prezzi della benzina in Ticino rimangono elevati, con differenze di oltre 20 centesimi al litro tra le diverse zone. Ecco cosa cambia per i frontalieri",
+          "date": "2026-05-16T02:47:05.638Z"
         }
       ],
       "latestCantonArticles": [],
@@ -146,7 +146,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "TI",
@@ -234,12 +234,6 @@
           "date": "2026-05-04T09:11:32.268Z"
         },
         {
-          "title": "Why cross-border workers pay more for fuel in Ticino",
-          "url": "/en/cross-border-articles/gas-price-ticino-cross-border-workers-2026/",
-          "excerpt": "Fuel prices in Ticino remain high, with differences of over 20 cents per litre between different areas. Here's what changes for cross-border workers",
-          "date": "2026-05-16T02:47:05.638Z"
-        },
-        {
           "title": "Fuel prices threaten public transport in Ticino",
           "url": "/en/cross-border-articles/fuel-prices-tpl-ticino-2026/",
           "excerpt": "High fuel prices are threatening local public transport, with additional costs estimated at 0.54 million euros per day for diesel.",
@@ -250,6 +244,12 @@
           "url": "/en/cross-border-articles/fuel-comparison-ticino-2024/",
           "excerpt": "Compare gasoline and diesel prices in Ticino and save with our practical tips",
           "date": "2026-04-27T09:12:47.619Z"
+        },
+        {
+          "title": "Why cross-border workers pay more for fuel in Ticino",
+          "url": "/en/cross-border-articles/gas-price-ticino-cross-border-workers-2026/",
+          "excerpt": "Fuel prices in Ticino remain high, with differences of over 20 cents per litre between different areas. Here's what changes for cross-border workers",
+          "date": "2026-05-16T02:47:05.638Z"
         }
       ],
       "latestCantonArticles": [],
@@ -279,7 +279,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "TI",
@@ -367,12 +367,6 @@
           "date": "2026-05-04T09:11:32.268Z"
         },
         {
-          "title": "Benzinpreis im Tessin: Warum Grenzgänger mehr zahlen",
-          "url": "/de/grenzgaenger-artikel/benzinkosten-tessin-grenzgaenger-2026/",
-          "excerpt": "Die Benzinpreise im Tessin bleiben hoch, mit Unterschieden von über 20 Rappen pro Liter zwischen den verschiedenen Regionen. Hier erfahren Sie, was sich für Grenzgänger ändert.",
-          "date": "2026-05-16T02:47:05.638Z"
-        },
-        {
           "title": "Hohe Kraftstoffkosten gefährden den öffentlichen Verkehr im",
           "url": "/de/grenzgaenger-artikel/kraftstoffpreise-tpl-tessin-2026/",
           "excerpt": "Die hohen Kraftstoffkosten bedrohen den öffentlichen Nahverkehr, mit zusätzlichen Kosten von geschätzten 0,54 Millionen Euro pro Tag für Diesel.",
@@ -383,6 +377,12 @@
           "url": "/de/grenzgaenger-artikel/kraftstoffvergleich-tessin-2024/",
           "excerpt": "Vergleichen Sie die Preise für Benzin und Diesel in der Schweiz und sparen Sie mit unseren praktischen Tipps",
           "date": "2026-04-27T09:12:47.619Z"
+        },
+        {
+          "title": "Benzinpreis im Tessin: Warum Grenzgänger mehr zahlen",
+          "url": "/de/grenzgaenger-artikel/benzinkosten-tessin-grenzgaenger-2026/",
+          "excerpt": "Die Benzinpreise im Tessin bleiben hoch, mit Unterschieden von über 20 Rappen pro Liter zwischen den verschiedenen Regionen. Hier erfahren Sie, was sich für Grenzgänger ändert.",
+          "date": "2026-05-16T02:47:05.638Z"
         }
       ],
       "latestCantonArticles": [],
@@ -408,7 +408,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "TI",
@@ -496,12 +496,6 @@
           "date": "2026-05-04T09:11:32.268Z"
         },
         {
-          "title": "Prix de l'essence au Tessin: pourquoi les frontaliers paient plus cher",
-          "url": "/fr/articles-frontalier/prix-essence-tessin-travailleurs-frontaliers-2026/",
-          "excerpt": "Les prix de l'essence au Tessin restent élevés, avec des différences de plus de 20 centimes par litre entre les différentes zones. Voici ce qui change pour les frontaliers",
-          "date": "2026-05-16T02:47:05.638Z"
-        },
-        {
           "title": "Cherté des carburants, risque d'arrêt des transports publics",
           "url": "/fr/articles-frontalier/prix-carburants-tpl-tessin-2026/",
           "excerpt": "La cherté des carburants menace les transports publics locaux, avec des coûts supplémentaires estimés à 0,54 million d'euros par jour pour le diesel.",
@@ -512,6 +506,12 @@
           "url": "/fr/articles-frontalier/comparaison-carburants-tessin-2024/",
           "excerpt": "Comparez les prix de l'essence et du diesel en Tessin et économisez avec nos conseils pratiques",
           "date": "2026-04-27T09:12:47.619Z"
+        },
+        {
+          "title": "Prix de l'essence au Tessin: pourquoi les frontaliers paient plus cher",
+          "url": "/fr/articles-frontalier/prix-essence-tessin-travailleurs-frontaliers-2026/",
+          "excerpt": "Les prix de l'essence au Tessin restent élevés, avec des différences de plus de 20 centimes par litre entre les différentes zones. Voici ce qui change pour les frontaliers",
+          "date": "2026-05-16T02:47:05.638Z"
         }
       ],
       "latestCantonArticles": [],
@@ -541,7 +541,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

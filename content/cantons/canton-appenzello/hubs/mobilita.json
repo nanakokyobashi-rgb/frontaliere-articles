@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "ff01da8ceec65e6d3464b906d425f1c2c21953df6a5be9bbab30cdd5bde1e84a",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "1ee93852fb85f87529604f96e8d7d7f888eded79d791211be4b68450d95f819f",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-16T11:58:12.009Z",
+      "updatedAt": "2026-10-16T17:01:51.551Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T10:09:31.602Z",
+      "updatedAt": "2026-10-16T15:35:32.859Z",
       "keyFacts": 0
     }
   ],
@@ -40,13 +40,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffico",
-              "date": "2026-10-16T11:58:12.009Z",
+              "date": "2026-10-16T17:01:51.551Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffico",
-              "date": "2026-10-16T11:58:12.009Z",
+              "date": "2026-10-16T17:01:51.551Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -63,7 +63,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-16T11:58:12.009Z"
+          "updatedAt": "2026-10-16T17:01:51.551Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -101,7 +101,7 @@
               "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -129,7 +129,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -152,13 +152,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffic",
-              "date": "2026-10-16T11:58:12.009Z",
+              "date": "2026-10-16T17:01:51.551Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffic",
-              "date": "2026-10-16T11:58:12.009Z",
+              "date": "2026-10-16T17:01:51.551Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -175,7 +175,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-16T11:58:12.009Z"
+          "updatedAt": "2026-10-16T17:01:51.551Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -213,7 +213,7 @@
               "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -241,7 +241,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -264,13 +264,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Verkehr",
-              "date": "2026-10-16T11:58:12.009Z",
+              "date": "2026-10-16T17:01:51.551Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Verkehr",
-              "date": "2026-10-16T11:58:12.009Z",
+              "date": "2026-10-16T17:01:51.551Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -287,7 +287,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-16T11:58:12.009Z"
+          "updatedAt": "2026-10-16T17:01:51.551Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -325,7 +325,7 @@
               "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -353,7 +353,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -376,13 +376,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Trafic",
-              "date": "2026-10-16T11:58:12.009Z",
+              "date": "2026-10-16T17:01:51.551Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Trafic",
-              "date": "2026-10-16T11:58:12.009Z",
+              "date": "2026-10-16T17:01:51.551Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -399,7 +399,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-16T11:58:12.009Z"
+          "updatedAt": "2026-10-16T17:01:51.551Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -437,7 +437,7 @@
               "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

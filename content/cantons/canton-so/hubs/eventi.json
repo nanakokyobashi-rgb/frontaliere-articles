@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "d8a03b47ab5ad21d24e411137464a62377fc046140cbbc32214e3354baabe43b",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "a95e67639b9a91c8d58324d48ed914f617eeb00fab72ac59c98d952a3f0eb8d4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T03:54:22.189Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "67",
+          "value": "71",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,48 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "HITS ONLY",
-              "detail": "Solothurn",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hits-only-1/"
-            },
-            {
-              "label": "Krimi-Lesung mit Whiskyverkostung",
-              "detail": "Solothurn",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krimi-lesung-mit-whiskyverkostung/"
-            },
-            {
-              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
-              "detail": "Hauslimattschulhaus, Balsthal",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
-            },
-            {
-              "label": "Theaterabend",
-              "detail": "Mehrzweckhalle, Riedholz — in corso, ultimo giorno: 17 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/theaterabend/"
-            },
-            {
-              "label": "Herbstaromen à la carte",
-              "detail": "Genussfabrik Solothurn, Solothurn — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
-            },
-            {
-              "label": "Hühner – unterschätztes Federvieh",
-              "detail": "Naturmuseum, Solothurn — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/huehner-unterschaetztes-federvieh/"
-            },
-            {
-              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
-              "detail": "Car Parking — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
-            },
             {
               "label": "Chabishoblete",
               "detail": "Riedholz",
@@ -91,11 +49,53 @@
               "detail": "Sicherheits-, Balsthal",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tag-der-natur-balsthal/"
+            },
+            {
+              "label": "SGF Kurs: Wechseljahre – Was wechselt, was bleibt?",
+              "detail": "SGF Schweizerischer Gemeinnütziger Frauenverein Sektion Solothurn, Solothurn",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sgf-kurs-wechseljahre-was-wechselt-was-bleibt/"
+            },
+            {
+              "label": "American Cars-Treffen",
+              "detail": "Derendingen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/american-cars-treffen-5/"
+            },
+            {
+              "label": "Gesteinsbestimmung «Dr. Stone gibt Auskunft!»",
+              "detail": "Haus der Museen, Olten",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/natur-mensch-tier/olten/gesteinsbestimmung-dr-stone-gibt-auskunft_A7Ty4ss"
+            },
+            {
+              "label": "Stein-Geschichten: Von Jahrmillionen und Märchenreisen",
+              "detail": "Steinmuseum",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/stein-geschichten-von-jahrmillionen-und-maerchenreisen/"
+            },
+            {
+              "label": "Thaler Sagenpfade",
+              "detail": "Mümliswil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/thaler-sagenpfade/"
+            },
+            {
+              "label": "Comedy, Wine & Dine – Weinologie",
+              "detail": "KulturBistro Solothurn, Solothurn",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/comedy-wine-dine-weinologie/"
+            },
+            {
+              "label": "Jodel-Konzert im Goetheanum mit Miss Helvetia",
+              "detail": "4143 Dornach, Dornach",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jodel-konzert-im-goetheanum/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/soletta/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/soletta/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "SO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "67",
+          "value": "71",
           "note": "from the site’s events calendar"
         }
       ],
@@ -143,48 +143,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "HITS ONLY",
-              "detail": "Solothurn",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hits-only-1/"
-            },
-            {
-              "label": "Krimi-Lesung mit Whiskyverkostung",
-              "detail": "Solothurn",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krimi-lesung-mit-whiskyverkostung/"
-            },
-            {
-              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
-              "detail": "Hauslimattschulhaus, Balsthal",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
-            },
-            {
-              "label": "Theaterabend",
-              "detail": "Mehrzweckhalle, Riedholz — ongoing, last day: 17 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/theaterabend/"
-            },
-            {
-              "label": "Herbstaromen à la carte",
-              "detail": "Genussfabrik Solothurn, Solothurn — ongoing, last day: 31 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
-            },
-            {
-              "label": "Hühner – unterschätztes Federvieh",
-              "detail": "Naturmuseum, Solothurn — ongoing, last day: 18 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/huehner-unterschaetztes-federvieh/"
-            },
-            {
-              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
-              "detail": "Car Parking — ongoing, last day: 25 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
-            },
             {
               "label": "Chabishoblete",
               "detail": "Riedholz",
@@ -202,11 +160,53 @@
               "detail": "Sicherheits-, Balsthal",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tag-der-natur-balsthal/"
+            },
+            {
+              "label": "SGF Kurs: Wechseljahre – Was wechselt, was bleibt?",
+              "detail": "SGF Schweizerischer Gemeinnütziger Frauenverein Sektion Solothurn, Solothurn",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sgf-kurs-wechseljahre-was-wechselt-was-bleibt/"
+            },
+            {
+              "label": "American Cars-Treffen",
+              "detail": "Derendingen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/american-cars-treffen-5/"
+            },
+            {
+              "label": "Gesteinsbestimmung «Dr. Stone gibt Auskunft!»",
+              "detail": "Haus der Museen, Olten",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/natur-mensch-tier/olten/gesteinsbestimmung-dr-stone-gibt-auskunft_A7Ty4ss"
+            },
+            {
+              "label": "Stein-Geschichten: Von Jahrmillionen und Märchenreisen",
+              "detail": "Steinmuseum",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/stein-geschichten-von-jahrmillionen-und-maerchenreisen/"
+            },
+            {
+              "label": "Thaler Sagenpfade",
+              "detail": "Mümliswil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/thaler-sagenpfade/"
+            },
+            {
+              "label": "Comedy, Wine & Dine – Weinologie",
+              "detail": "KulturBistro Solothurn, Solothurn",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/comedy-wine-dine-weinologie/"
+            },
+            {
+              "label": "Jodel-Konzert im Goetheanum mit Miss Helvetia",
+              "detail": "4143 Dornach, Dornach",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jodel-konzert-im-goetheanum/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/solothurn/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/solothurn/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "SO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "67",
+          "value": "71",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -254,48 +254,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "HITS ONLY",
-              "detail": "Solothurn",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hits-only-1/"
-            },
-            {
-              "label": "Krimi-Lesung mit Whiskyverkostung",
-              "detail": "Solothurn",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krimi-lesung-mit-whiskyverkostung/"
-            },
-            {
-              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
-              "detail": "Hauslimattschulhaus, Balsthal",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
-            },
-            {
-              "label": "Theaterabend",
-              "detail": "Mehrzweckhalle, Riedholz — läuft, letzter Tag: 17. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/theaterabend/"
-            },
-            {
-              "label": "Herbstaromen à la carte",
-              "detail": "Genussfabrik Solothurn, Solothurn — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
-            },
-            {
-              "label": "Hühner – unterschätztes Federvieh",
-              "detail": "Naturmuseum, Solothurn — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/huehner-unterschaetztes-federvieh/"
-            },
-            {
-              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
-              "detail": "Car Parking — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
-            },
             {
               "label": "Chabishoblete",
               "detail": "Riedholz",
@@ -313,11 +271,53 @@
               "detail": "Sicherheits-, Balsthal",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tag-der-natur-balsthal/"
+            },
+            {
+              "label": "SGF Kurs: Wechseljahre – Was wechselt, was bleibt?",
+              "detail": "SGF Schweizerischer Gemeinnütziger Frauenverein Sektion Solothurn, Solothurn",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sgf-kurs-wechseljahre-was-wechselt-was-bleibt/"
+            },
+            {
+              "label": "American Cars-Treffen",
+              "detail": "Derendingen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/american-cars-treffen-5/"
+            },
+            {
+              "label": "Gesteinsbestimmung «Dr. Stone gibt Auskunft!»",
+              "detail": "Haus der Museen, Olten",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/natur-mensch-tier/olten/gesteinsbestimmung-dr-stone-gibt-auskunft_A7Ty4ss"
+            },
+            {
+              "label": "Stein-Geschichten: Von Jahrmillionen und Märchenreisen",
+              "detail": "Steinmuseum",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/stein-geschichten-von-jahrmillionen-und-maerchenreisen/"
+            },
+            {
+              "label": "Thaler Sagenpfade",
+              "detail": "Mümliswil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/thaler-sagenpfade/"
+            },
+            {
+              "label": "Comedy, Wine & Dine – Weinologie",
+              "detail": "KulturBistro Solothurn, Solothurn",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/comedy-wine-dine-weinologie/"
+            },
+            {
+              "label": "Jodel-Konzert im Goetheanum mit Miss Helvetia",
+              "detail": "4143 Dornach, Dornach",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jodel-konzert-im-goetheanum/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/solothurn/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/solothurn/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "SO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "67",
+          "value": "71",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -365,48 +365,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "HITS ONLY",
-              "detail": "Solothurn",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hits-only-1/"
-            },
-            {
-              "label": "Krimi-Lesung mit Whiskyverkostung",
-              "detail": "Solothurn",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krimi-lesung-mit-whiskyverkostung/"
-            },
-            {
-              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
-              "detail": "Hauslimattschulhaus, Balsthal",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
-            },
-            {
-              "label": "Theaterabend",
-              "detail": "Mehrzweckhalle, Riedholz — en cours, dernier jour : 17 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/theaterabend/"
-            },
-            {
-              "label": "Herbstaromen à la carte",
-              "detail": "Genussfabrik Solothurn, Solothurn — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
-            },
-            {
-              "label": "Hühner – unterschätztes Federvieh",
-              "detail": "Naturmuseum, Solothurn — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/huehner-unterschaetztes-federvieh/"
-            },
-            {
-              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
-              "detail": "Car Parking — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
-            },
             {
               "label": "Chabishoblete",
               "detail": "Riedholz",
@@ -424,11 +382,53 @@
               "detail": "Sicherheits-, Balsthal",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tag-der-natur-balsthal/"
+            },
+            {
+              "label": "SGF Kurs: Wechseljahre – Was wechselt, was bleibt?",
+              "detail": "SGF Schweizerischer Gemeinnütziger Frauenverein Sektion Solothurn, Solothurn",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sgf-kurs-wechseljahre-was-wechselt-was-bleibt/"
+            },
+            {
+              "label": "American Cars-Treffen",
+              "detail": "Derendingen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/american-cars-treffen-5/"
+            },
+            {
+              "label": "Gesteinsbestimmung «Dr. Stone gibt Auskunft!»",
+              "detail": "Haus der Museen, Olten",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/natur-mensch-tier/olten/gesteinsbestimmung-dr-stone-gibt-auskunft_A7Ty4ss"
+            },
+            {
+              "label": "Stein-Geschichten: Von Jahrmillionen und Märchenreisen",
+              "detail": "Steinmuseum",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/stein-geschichten-von-jahrmillionen-und-maerchenreisen/"
+            },
+            {
+              "label": "Thaler Sagenpfade",
+              "detail": "Mümliswil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/thaler-sagenpfade/"
+            },
+            {
+              "label": "Comedy, Wine & Dine – Weinologie",
+              "detail": "KulturBistro Solothurn, Solothurn",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/comedy-wine-dine-weinologie/"
+            },
+            {
+              "label": "Jodel-Konzert im Goetheanum mit Miss Helvetia",
+              "detail": "4143 Dornach, Dornach",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jodel-konzert-im-goetheanum/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/soleure/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/soleure/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "59025b42f3df2092ed4f93affc34715b069e175063810c9f385fc6682a4804b9",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "f7a5cf4e10fb153c021e2db2495c738e21700eb8491f1f727d855886fbc7c820",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T03:54:22.189Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "107",
+          "value": "112",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "ADHD",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/adhd_AHAthh1"
+              "label": "Nordwestschweizer Geräte-, Gymnastik- & Aerobic Meisterschaften",
+              "detail": "Schulanlage Frenkenbündten, Liestal",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nordwestschweizer-geraete-gymnastik-aerobic-meisterschaften/"
             },
             {
-              "label": "Let's have a WINE DATE 2026 - Basel",
+              "label": "Natur verbindet - von Farnen & Haseln - 17. Oktober",
+              "detail": "Hofgut Schönthal, Langenbruck",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/natur-verbindet-von-farnen-haseln-17-oktober/"
+            },
+            {
+              "label": "Tag der Kultur Allschwil",
+              "detail": "Allschwil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tag-der-kultur-allschwil-1/"
+            },
+            {
+              "label": "Giornata della cultura al museo",
+              "detail": "Allschwil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornata-della-cultura-al-museo/"
+            },
+            {
+              "label": "Kürbis-Fest",
+              "detail": "Gerstel, Waldenburg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kuerbis-fest/"
+            },
+            {
+              "label": "Mini-mostra: laboratori di pittura",
+              "detail": "Allschwil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mini-mostra-laboratori-di-pittura/"
+            },
+            {
+              "label": "Corso intensivo di pittura in occasione della Giornata della Cultura",
+              "detail": "Museum Allschwil - Haus für Kultur und Geschichte, Allschwil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mal-crashkurs-am-tag-der-kultur/"
+            },
+            {
+              "label": "Diverse, Pioneering, Modern: The \"Neues Bauen\"-Movement in Riehen",
+              "detail": "Treffpunkt wird bei Anmeldung bekannt gegeben, Riehen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vielfaeltig-wegweisend-modern-drei-wohnhaeuser-des-neuen-bauens-in-riehen/"
+            },
+            {
+              "label": "flowerloop Workshop",
               "detail": "Basel",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lets-have-a-wine-date-2026-basel/"
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flowerloop-workshop/"
             },
             {
-              "label": "KULINARIK & STIMMEN",
-              "detail": "Restaurant Ambiente, Allschwil",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/kulinarik-und-stimmen_AWrVH4H"
-            },
-            {
-              "label": "Von BTS bis Anime",
-              "detail": "Sissach",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/von-bts-bis-anime/"
-            },
-            {
-              "label": "Hoi Leni! Helene Bossert vertont",
-              "detail": "cheesmeyer, Sissach",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sissach/hoi-leni-helene-bossert-vertont_Aqbh7qY"
-            },
-            {
-              "label": "Baloise Session: MARK FORSTER | KAMRAD",
-              "detail": "Messe Basel, Basel",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/events/music/basel/baloise-session-mark-forster-kamrad_AwNYVYn"
-            },
-            {
-              "label": "Bänz Friedli - Bänz Friedli räumt auf",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/baenz-friedli-baenz-friedli-raeumt-auf/"
-            },
-            {
-              "label": "Lennart Schilgen - Abwesenheitsnotizen",
-              "detail": "Theater Fauteuil",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lennart-schilgen-abwesenheitsnotizen_AeNQTKg"
-            },
-            {
-              "label": "Lennart Schilgen - Abwesenheitsnotizen",
+              "label": "Öffentliche Führung Kehrichtverwertungsanlage Basel",
               "detail": "Basel",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lennart-schilgen-abwesenheitsnotizen/"
-            },
-            {
-              "label": "Starken Stimmen - Zonta Poetry Slam",
-              "detail": "Basel",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starken-stimmen-zonta-poetry-slam/"
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-kehrichtverwertungsanlage-basel/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "107",
+          "value": "112",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "ADHD",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/adhd_AHAthh1"
+              "label": "Nordwestschweizer Geräte-, Gymnastik- & Aerobic Meisterschaften",
+              "detail": "Schulanlage Frenkenbündten, Liestal",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nordwestschweizer-geraete-gymnastik-aerobic-meisterschaften/"
             },
             {
-              "label": "Let's have a WINE DATE 2026 - Basel",
+              "label": "Natur verbindet - von Farnen & Haseln - 17. Oktober",
+              "detail": "Hofgut Schönthal, Langenbruck",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/natur-verbindet-von-farnen-haseln-17-oktober/"
+            },
+            {
+              "label": "Tag der Kultur Allschwil",
+              "detail": "Allschwil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tag-der-kultur-allschwil-1/"
+            },
+            {
+              "label": "Culture Day at the Museum",
+              "detail": "Allschwil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornata-della-cultura-al-museo/"
+            },
+            {
+              "label": "Kürbis-Fest",
+              "detail": "Gerstel, Waldenburg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kuerbis-fest/"
+            },
+            {
+              "label": "Mini-Exhibition: Painting Workshops",
+              "detail": "Allschwil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mini-mostra-laboratori-di-pittura/"
+            },
+            {
+              "label": "Crash Course in Painting on Culture Day",
+              "detail": "Museum Allschwil - Haus für Kultur und Geschichte, Allschwil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mal-crashkurs-am-tag-der-kultur/"
+            },
+            {
+              "label": "Diverse, Pioneering, Modern: The \"Neues Bauen\"-Movement in Riehen",
+              "detail": "Treffpunkt wird bei Anmeldung bekannt gegeben, Riehen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vielfaeltig-wegweisend-modern-drei-wohnhaeuser-des-neuen-bauens-in-riehen/"
+            },
+            {
+              "label": "flowerloop Workshop",
               "detail": "Basel",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lets-have-a-wine-date-2026-basel/"
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flowerloop-workshop/"
             },
             {
-              "label": "KULINARIK & STIMMEN",
-              "detail": "Restaurant Ambiente, Allschwil",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/kulinarik-und-stimmen_AWrVH4H"
-            },
-            {
-              "label": "Von BTS bis Anime",
-              "detail": "Sissach",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/von-bts-bis-anime/"
-            },
-            {
-              "label": "Hoi Leni! Helene Bossert vertont",
-              "detail": "cheesmeyer, Sissach",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sissach/hoi-leni-helene-bossert-vertont_Aqbh7qY"
-            },
-            {
-              "label": "Baloise Session: MARK FORSTER | KAMRAD",
-              "detail": "Messe Basel, Basel",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/events/music/basel/baloise-session-mark-forster-kamrad_AwNYVYn"
-            },
-            {
-              "label": "Bänz Friedli - Bänz Friedli räumt auf",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/baenz-friedli-baenz-friedli-raeumt-auf/"
-            },
-            {
-              "label": "Lennart Shilgen - Abwesenheitsnotizen",
-              "detail": "Theater Fauteuil",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lennart-schilgen-abwesenheitsnotizen_AeNQTKg"
-            },
-            {
-              "label": "Lennart Schilgen - Abwesenheitsnotizen",
+              "label": "Öffentliche Führung Kehrichtverwertungsanlage Basel",
               "detail": "Basel",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lennart-schilgen-abwesenheitsnotizen/"
-            },
-            {
-              "label": "Starken Stimmen - Zonta Poetry Slam",
-              "detail": "Basel",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starken-stimmen-zonta-poetry-slam/"
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-kehrichtverwertungsanlage-basel/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "107",
+          "value": "112",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "ADHD",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/adhd_AHAthh1"
+              "label": "Nordwestschweizer Geräte-, Gymnastik- & Aerobic Meisterschaften",
+              "detail": "Schulanlage Frenkenbündten, Liestal",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nordwestschweizer-geraete-gymnastik-aerobic-meisterschaften/"
             },
             {
-              "label": "Let's have a WINE DATE 2026 - Basel",
+              "label": "Natur verbindet - von Farnen & Haseln - 17. Oktober",
+              "detail": "Hofgut Schönthal, Langenbruck",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/natur-verbindet-von-farnen-haseln-17-oktober/"
+            },
+            {
+              "label": "Tag der Kultur Allschwil",
+              "detail": "Allschwil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tag-der-kultur-allschwil-1/"
+            },
+            {
+              "label": "Tag der Kultur im Museum",
+              "detail": "Allschwil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornata-della-cultura-al-museo/"
+            },
+            {
+              "label": "Kürbis-Fest",
+              "detail": "Gerstel, Waldenburg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kuerbis-fest/"
+            },
+            {
+              "label": "Mini-Ausstellung: Mal-Workshops",
+              "detail": "Allschwil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mini-mostra-laboratori-di-pittura/"
+            },
+            {
+              "label": "Mal-Crashkurs am Tag der Kultur",
+              "detail": "Museum Allschwil - Haus für Kultur und Geschichte, Allschwil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mal-crashkurs-am-tag-der-kultur/"
+            },
+            {
+              "label": "Vielfältig, wegweisend, modern: Drei Wohnhäuser des Neuen Bauens in Riehen",
+              "detail": "Treffpunkt wird bei Anmeldung bekannt gegeben, Riehen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vielfaeltig-wegweisend-modern-drei-wohnhaeuser-des-neuen-bauens-in-riehen/"
+            },
+            {
+              "label": "flowerloop Workshop",
               "detail": "Basel",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lets-have-a-wine-date-2026-basel/"
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flowerloop-workshop/"
             },
             {
-              "label": "KULINARIK & STIMMEN",
-              "detail": "Restaurant Ambiente, Allschwil",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/kulinarik-und-stimmen_AWrVH4H"
-            },
-            {
-              "label": "Von BTS bis Anime",
-              "detail": "Sissach",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/von-bts-bis-anime/"
-            },
-            {
-              "label": "Hoi Leni! Helene Bossert vertont",
-              "detail": "cheesmeyer, Sissach",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sissach/hoi-leni-helene-bossert-vertont_Aqbh7qY"
-            },
-            {
-              "label": "Baloise Session: MARK FORSTER | KAMRAD",
-              "detail": "Messe Basel, Basel",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/events/music/basel/baloise-session-mark-forster-kamrad_AwNYVYn"
-            },
-            {
-              "label": "Bänz Friedli - Bänz Friedli räumt auf",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/baenz-friedli-baenz-friedli-raeumt-auf/"
-            },
-            {
-              "label": "Lennart Schilgen – Abwesenheitsnotizen",
-              "detail": "Theater Fauteuil",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lennart-schilgen-abwesenheitsnotizen_AeNQTKg"
-            },
-            {
-              "label": "Lennart Schilgen - Abwesenheitsnotizen",
+              "label": "Öffentliche Führung Kehrichtverwertungsanlage Basel",
               "detail": "Basel",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lennart-schilgen-abwesenheitsnotizen/"
-            },
-            {
-              "label": "Starken Stimmen - Zonta Poetry Slam",
-              "detail": "Basel",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starken-stimmen-zonta-poetry-slam/"
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-kehrichtverwertungsanlage-basel/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "107",
+          "value": "112",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "ADHD",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/adhd_AHAthh1"
+              "label": "Nordwestschweizer Geräte-, Gymnastik- & Aerobic Meisterschaften",
+              "detail": "Schulanlage Frenkenbündten, Liestal",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nordwestschweizer-geraete-gymnastik-aerobic-meisterschaften/"
             },
             {
-              "label": "Let's have a WINE DATE 2026 - Basel",
+              "label": "Natur verbindet - von Farnen & Haseln - 17. Oktober",
+              "detail": "Hofgut Schönthal, Langenbruck",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/natur-verbindet-von-farnen-haseln-17-oktober/"
+            },
+            {
+              "label": "Tag der Kultur Allschwil",
+              "detail": "Allschwil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tag-der-kultur-allschwil-1/"
+            },
+            {
+              "label": "Journée de la culture au musée",
+              "detail": "Allschwil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornata-della-cultura-al-museo/"
+            },
+            {
+              "label": "Kürbis-Fest",
+              "detail": "Gerstel, Waldenburg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kuerbis-fest/"
+            },
+            {
+              "label": "Mini-exposition : ateliers de peinture",
+              "detail": "Allschwil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mini-mostra-laboratori-di-pittura/"
+            },
+            {
+              "label": "Cours intensif de peinture lors de la Journée de la culture",
+              "detail": "Museum Allschwil - Haus für Kultur und Geschichte, Allschwil",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mal-crashkurs-am-tag-der-kultur/"
+            },
+            {
+              "label": "Variées, novatrices, modernes : Le mouvement « Neues Bauen » à Riehen",
+              "detail": "Treffpunkt wird bei Anmeldung bekannt gegeben, Riehen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vielfaeltig-wegweisend-modern-drei-wohnhaeuser-des-neuen-bauens-in-riehen/"
+            },
+            {
+              "label": "flowerloop Workshop",
               "detail": "Basel",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lets-have-a-wine-date-2026-basel/"
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flowerloop-workshop/"
             },
             {
-              "label": "KULINARIK & STIMMEN",
-              "detail": "Restaurant Ambiente, Allschwil",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/kulinarik-und-stimmen_AWrVH4H"
-            },
-            {
-              "label": "Von BTS bis Anime",
-              "detail": "Sissach",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/von-bts-bis-anime/"
-            },
-            {
-              "label": "Hoi Leni! Helene Bossert vertont",
-              "detail": "cheesmeyer, Sissach",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sissach/hoi-leni-helene-bossert-vertont_Aqbh7qY"
-            },
-            {
-              "label": "Baloise Session: MARK FORSTER | KAMRAD",
-              "detail": "Messe Basel, Basel",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/events/music/basel/baloise-session-mark-forster-kamrad_AwNYVYn"
-            },
-            {
-              "label": "Bänz Friedli - Bänz Friedli räumt auf",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/baenz-friedli-baenz-friedli-raeumt-auf/"
-            },
-            {
-              "label": "Lennart Schilgen - Notes d'absence",
-              "detail": "Theater Fauteuil",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/lennart-schilgen-abwesenheitsnotizen_AeNQTKg"
-            },
-            {
-              "label": "Lennart Schilgen - Abwesenheitsnotizen",
+              "label": "Öffentliche Führung Kehrichtverwertungsanlage Basel",
               "detail": "Basel",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lennart-schilgen-abwesenheitsnotizen/"
-            },
-            {
-              "label": "Starken Stimmen - Zonta Poetry Slam",
-              "detail": "Basel",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starken-stimmen-zonta-poetry-slam/"
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-kehrichtverwertungsanlage-basel/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "946efd4517a8c3973410171a0f4299d184fa1c759f04e49e32b5aee97f60aee2",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "328eb9f67e2d6912ac640f1ac7ab34305d0f40877ad11a9cea0cadff362733d8",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T03:54:22.189Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     }
   ],
@@ -34,8 +34,8 @@
           "items": [
             {
               "label": "Foire du Jura",
-              "detail": "Halle des Exposition, Delémont",
-              "date": "2026-10-16",
+              "detail": "Halle des Exposition, Delémont — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
             },
             {
@@ -59,7 +59,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/giura/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -87,7 +87,7 @@
           "url": "/eventi/giura/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "JU",
@@ -109,8 +109,8 @@
           "items": [
             {
               "label": "Foire du Jura",
-              "detail": "Halle des Exposition, Delémont",
-              "date": "2026-10-16",
+              "detail": "Halle des Exposition, Delémont — ongoing, last day: 25 October 2026",
+              "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
             },
             {
@@ -134,7 +134,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/jura/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -162,7 +162,7 @@
           "url": "/en/events/jura/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "JU",
@@ -184,8 +184,8 @@
           "items": [
             {
               "label": "Foire du Jura",
-              "detail": "Halle des Exposition, Delémont",
-              "date": "2026-10-16",
+              "detail": "Halle des Exposition, Delémont — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
             },
             {
@@ -209,7 +209,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/jura/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -237,7 +237,7 @@
           "url": "/de/veranstaltungen/jura/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "JU",
@@ -259,8 +259,8 @@
           "items": [
             {
               "label": "Foire du Jura",
-              "detail": "Halle des Exposition, Delémont",
-              "date": "2026-10-16",
+              "detail": "Halle des Exposition, Delémont — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
             },
             {
@@ -284,7 +284,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/jura/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -312,7 +312,7 @@
           "url": "/fr/evenements/jura/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

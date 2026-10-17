@@ -4,17 +4,17 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "a0b4921157da1921b277af42c57d3952edfcee356601a7855381480a317fc878",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "804e89f3f39a5b059f3abdcd4a8717a1beb4cbbbc90ebfa0757940d23c9ffbca",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T03:54:22.189Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T15:35:32.859Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "35",
+          "value": "39",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,24 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Minitaines",
-              "detail": "La Turlutaine - Theâtre Atelier de Marionnettes, La Chaux-de-Fonds",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/minitaines/"
-            },
-            {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
-            },
-            {
-              "label": "Démonstration de dentellières",
-              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
-            },
             {
               "label": "Viaggio sul treno degli orologiai e visita guidata al Museo dell'orologio",
               "detail": "Gare de la Chaux-de-Fonds, La Chaux-de-Fonds",
@@ -66,6 +48,18 @@
               "detail": "Hauterive, Neuchâtel",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-neuchatel-empreintes-coloniales-1/"
+            },
+            {
+              "label": "Atelier de gravure pour tous",
+              "detail": "Musée d'art et d'histoire, Neuchâtel — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+            },
+            {
+              "label": "Démonstration de dentellières",
+              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
             },
             {
               "label": "Nouveaux Talents — Edna Unseld, violon",
@@ -96,11 +90,17 @@
               "detail": "Neuchâtel",
               "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-temps-qui-reste/"
+            },
+            {
+              "label": "Conférence : La fascination pour le ciel étoilé",
+              "detail": "Neuchâtel",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/conference-la-fascination-pour-le-ciel-etoile/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/neuchatel/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -128,11 +128,17 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "CPCN registra +5,6% nel 2025: copertura 84,8%",
+          "url": "/articoli-neuchatel/cpcn-rendimento-2025-copertura/",
+          "excerpt": "+5,6% per la performance CPCN nel 2025 3% di remunerazione sugli averi di vecchiaia 84,8% di copertura al 31.12.2025 RFV da CHF 979 milioni, al 92%",
+          "date": "2026-10-17T00:07:41.161Z"
+        },
         {
           "title": "Nuovo centro accoglienza asilo a Couvet: parte il progetto",
           "url": "/articoli-neuchatel/nuovo-centro-asilo-couvet/",
@@ -156,12 +162,6 @@
           "url": "/articoli-neuchatel/disoccupazione-stabile-4-4-neuchatel-settembre-2026/",
           "excerpt": "3.945 disoccupati in settembre 2026",
           "date": "2026-10-07T09:30:57.326Z"
-        },
-        {
-          "title": "Neuchâtel rinnova politica abitativa con 24 milioni",
-          "url": "/articoli-neuchatel/neuchatel-rinnova-politica-abitativa-con-24-milioni/",
-          "excerpt": "Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto",
-          "date": "2026-10-07T09:07:42.905Z"
         }
       ],
       "links": [
@@ -174,7 +174,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "NE",
@@ -184,7 +184,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "35",
+          "value": "39",
           "note": "from the site’s events calendar"
         }
       ],
@@ -194,24 +194,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Minitaines",
-              "detail": "La Turlutaine - Theâtre Atelier de Marionnettes, La Chaux-de-Fonds",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/minitaines/"
-            },
-            {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — ongoing, last day: 1 November 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
-            },
-            {
-              "label": "Démonstration de dentellières",
-              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — ongoing, last day: 25 October 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
-            },
             {
               "label": "Watchmakers' Train trip and guided tour of the Watch Box Museum",
               "detail": "Gare de la Chaux-de-Fonds, La Chaux-de-Fonds",
@@ -223,6 +205,18 @@
               "detail": "Hauterive, Neuchâtel",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-neuchatel-empreintes-coloniales-1/"
+            },
+            {
+              "label": "Atelier de gravure pour tous",
+              "detail": "Musée d'art et d'histoire, Neuchâtel — ongoing, last day: 1 November 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+            },
+            {
+              "label": "Démonstration de dentellières",
+              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — ongoing, last day: 25 October 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
             },
             {
               "label": "Nouveaux Talents — Edna Unseld, violon",
@@ -253,11 +247,17 @@
               "detail": "Neuchâtel",
               "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-temps-qui-reste/"
+            },
+            {
+              "label": "Conférence : La fascination pour le ciel étoilé",
+              "detail": "Neuchâtel",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/conference-la-fascination-pour-le-ciel-etoile/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/neuchatel/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -285,11 +285,17 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "CPCN records +5,6% in 2025: coverage 84,8%",
+          "url": "/en/neuchatel-articles/cpcn-2025-return-coverage/",
+          "excerpt": "+5,6% for CPCN performance in 2025 3% remuneration on retirement savings 84,8% coverage as at December 31, 2025 RFV of CHF 979 million, at 92% of the target",
+          "date": "2026-10-17T00:07:41.161Z"
+        },
         {
           "title": "New asylum reception centre in Couvet: the project starts",
           "url": "/en/neuchatel-articles/new-asylum-center-couvet/",
@@ -310,11 +316,6 @@
           "title": "Unemployment stable at 4,4% Neuchâtel September 2026",
           "url": "/en/neuchatel-articles/unemployment-stable-at-4-4-neuchatel-september-2026/",
           "date": "2026-10-07T09:30:57.326Z"
-        },
-        {
-          "title": "Neuchâtel renews housing policy with 24 million",
-          "url": "/en/neuchatel-articles/neuchatel-renews-housing-policy-with-24-million/",
-          "date": "2026-10-07T09:07:42.905Z"
         }
       ],
       "links": [
@@ -327,7 +328,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "NE",
@@ -337,7 +338,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "35",
+          "value": "39",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -347,24 +348,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Minitaines",
-              "detail": "La Turlutaine - Theâtre Atelier de Marionnettes, La Chaux-de-Fonds",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/minitaines/"
-            },
-            {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
-            },
-            {
-              "label": "Démonstration de dentellières",
-              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
-            },
             {
               "label": "Fahrt mit dem Uhrmacherzug und Führung durch das Uhrenschachtelmuseum",
               "detail": "Gare de la Chaux-de-Fonds, La Chaux-de-Fonds",
@@ -376,6 +359,18 @@
               "detail": "Hauterive, Neuchâtel",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-neuchatel-empreintes-coloniales-1/"
+            },
+            {
+              "label": "Atelier de gravure pour tous",
+              "detail": "Musée d'art et d'histoire, Neuchâtel — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+            },
+            {
+              "label": "Démonstration de dentellières",
+              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
             },
             {
               "label": "Nouveaux Talents — Edna Unseld, violon",
@@ -406,11 +401,17 @@
               "detail": "Neuchâtel",
               "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-temps-qui-reste/"
+            },
+            {
+              "label": "Conférence : La fascination pour le ciel étoilé",
+              "detail": "Neuchâtel",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/conference-la-fascination-pour-le-ciel-etoile/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/neuenburg/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -438,11 +439,17 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "CPCN verzeichnet 2025 ein Plus von +5,6%: Deckungsgrad 84,8%",
+          "url": "/de/neuenburg-artikel/cpcn-rendite-2025-deckung/",
+          "excerpt": "+5,6% bei der Performance der CPCN im Jahr 2025 3% Verzinsung der Altersguthaben 84,8% Deckungsgrad am 31.12.2025 RFV in Höhe von CHF 979 Millionen, bei 92%",
+          "date": "2026-10-17T00:07:41.161Z"
+        },
         {
           "title": "Neue Kindertagesstätte in Couvet: Das Projekt beginnt",
           "url": "/de/neuenburg-artikel/neues-asylzentrum-couvet/",
@@ -463,11 +470,6 @@
           "title": "Arbeitslosigkeit in Neuenburg im September 2026 stabil bei 4,4%",
           "url": "/de/neuenburg-artikel/arbeitslosigkeit-in-neuenburg-im-september-2026-stabil-bei-4-4/",
           "date": "2026-10-07T09:30:57.326Z"
-        },
-        {
-          "title": "Neuenburg erneuert Wohnungspolitik mit 24 Millionen",
-          "url": "/de/neuenburg-artikel/neuenburg-erneuert-wohnungspolitik-mit-24-millionen/",
-          "date": "2026-10-07T09:07:42.905Z"
         }
       ],
       "links": [
@@ -480,7 +482,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "NE",
@@ -490,7 +492,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "35",
+          "value": "39",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -500,24 +502,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Minitaines",
-              "detail": "La Turlutaine - Theâtre Atelier de Marionnettes, La Chaux-de-Fonds",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/minitaines/"
-            },
-            {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
-            },
-            {
-              "label": "Démonstration de dentellières",
-              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
-            },
             {
               "label": "Voyage en Train des Horlogers et visite guidée du Musée de la Boîte de Montre",
               "detail": "Gare de la Chaux-de-Fonds, La Chaux-de-Fonds",
@@ -529,6 +513,18 @@
               "detail": "Hauterive, Neuchâtel",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-neuchatel-empreintes-coloniales-1/"
+            },
+            {
+              "label": "Atelier de gravure pour tous",
+              "detail": "Musée d'art et d'histoire, Neuchâtel — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+            },
+            {
+              "label": "Démonstration de dentellières",
+              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
             },
             {
               "label": "Nouveaux Talents — Edna Unseld, violon",
@@ -559,11 +555,17 @@
               "detail": "Neuchâtel",
               "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-temps-qui-reste/"
+            },
+            {
+              "label": "Conférence : La fascination pour le ciel étoilé",
+              "detail": "Neuchâtel",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/conference-la-fascination-pour-le-ciel-etoile/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/neuchatel/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -591,11 +593,17 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "La CPCN enregistre +5,6% en 2025 : taux de couverture de 84,8%",
+          "url": "/fr/articles-neuchatel/cpcn-performance-2025-couverture/",
+          "excerpt": "+5,6% pour la performance de la CPCN en 2025 3% de rémunération sur les avoirs de vieillesse 84,8% de couverture au 31 décembre 2025 RFV de CHF 979 millions",
+          "date": "2026-10-17T00:07:41.161Z"
+        },
         {
           "title": "Nouveau centre d'accueil asile à Couvet : le projet commence",
           "url": "/fr/articles-neuchatel/nouveau-centre-asile-couvet/",
@@ -619,12 +627,6 @@
           "url": "/fr/articles-neuchatel/chomage-stable-a-4-4-a-neuchatel-en-septembre-2026/",
           "excerpt": "3.945 chômeurs en septembre 2026",
           "date": "2026-10-07T09:30:57.326Z"
-        },
-        {
-          "title": "Neuchâtel renouvelle sa politique du logement avec 24 millions",
-          "url": "/fr/articles-neuchatel/neuchatel-renouvelle-sa-politique-du-logement-avec-24-millions/",
-          "excerpt": "Le 28 septembre 2026, le Conseil d'État a adopté le rapport",
-          "date": "2026-10-07T09:07:42.905Z"
         }
       ],
       "links": [
@@ -637,7 +639,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }

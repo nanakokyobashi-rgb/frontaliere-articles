@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "0dc58a326a23bcbfb323bbca48d2e6302745b4ad684692d23e93384d92897fd8",
+  "updatedAt": "2026-10-17T00:12:19.402Z",
+  "contentHash": "2c443dce86fb6ce76b1bbf24e0d80810f68b3e9bd9206949d40cba96228fb331",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T03:54:22.189Z",
+      "updatedAt": "2026-10-16T10:44:21.348Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "206",
+          "value": "220",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Ausbildung Atemtherapie",
-              "detail": "Ateminstitut Schweiz, Bern",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ausbildung-atemtherapie/"
+              "label": "Lake Thun Breakfast Special",
+              "detail": "Thunersee, Thun",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
             },
             {
-              "label": "Les Compagnons de la Tour: Théâtre de chambre",
-              "detail": "St-Imier, Saint-Imier",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-compagnons-de-la-tour-theatre-de-chambre/"
+              "label": "Herbst-Gartenkurs in Burgistein",
+              "detail": "Burgistein",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-gartenkurs-in-burgistein/"
             },
             {
-              "label": "Langnauer Ateliertage 2026",
-              "detail": "3550 Langnau im Emmental, Langnau im Emmental",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/langnauer-ateliertage-2026/"
+              "label": "Herbstmarkt mit Kürbisverkauf",
+              "detail": "Rüschegg Eywald, Rüschegg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/herbstmarkt-mit-kuerbisverkauf/"
             },
             {
-              "label": "TANZhAUS ON STAGE // The air between us - Atemspaziergang",
-              "detail": "Bern",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzhaus-on-stage-the-air-between-us-atemspaziergang/"
+              "label": "Kreativtag – Workshops für kreative Auszeiten",
+              "detail": "Wolfisberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kreativtag-workshops-fuer-kreative-auszeiten/"
             },
             {
-              "label": "Pub Quiz Thunersee",
-              "detail": "Schiffstation Thun-Bahnhof, Thun",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/pub-quiz-thunersee_AX2SVnF"
+              "label": "Kronenplatz Herbstmärit",
+              "detail": "Spiez",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kronenplatz-herbstmaerit-1/"
             },
             {
-              "label": "Bewegende Guttanner*innen - David Tiraboschi erzählt",
-              "detail": "Hotel Bären Guttannen, Guttannen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bewegende-guttannerinnen/"
+              "label": "Pflege im Eichholz",
+              "detail": "Wabern",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflege-im-eichholz/"
             },
             {
-              "label": "Bliss Kater",
-              "detail": "BERNEXPO",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/bliss-kater_A2k8Y9g"
+              "label": "Fall cattle show Horboden-Oey",
+              "detail": "Horboden-Springenboden, Diemtigen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fall-cattle-show-horboden-oey/"
             },
             {
-              "label": "Open Mic Frutigen",
-              "detail": "Hotel-Restaurant Landhaus Adler, Frutigen",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/evenements/musique/frutigen/open-mic-frutigen_APNreL3"
+              "label": "Sauer macht glücklich – Winterfermente",
+              "detail": "Spiez",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sauer-macht-gluecklich-winterfermente/"
             },
             {
-              "label": "Salon Beethoven - Eroica im Schultheissensaal",
-              "detail": "Universitätsbibliothek Bern, Bern",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/salon-beethoven-eroica-im-schultheissensaal_A9GVW5b"
+              "label": "Nave dei giochi sul lago di Brienz",
+              "detail": "BLS Schiffahrt AG Brienzersee, Interlaken",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-brienzersee/"
             },
             {
-              "label": "Esther Hasler - 7 auf einen Streich!",
-              "detail": "Büren a. A.",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/esther-hasler-7-auf-einen-streich-2/"
+              "label": "Pflegeeinsatz Auried",
+              "detail": "Auried Naturschutzgebiet, Laupen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflegeeinsatz-auried/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "206",
+          "value": "220",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Ausbildung Atemtherapie",
-              "detail": "Ateminstitut Schweiz, Bern",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ausbildung-atemtherapie/"
+              "label": "Lake Thun Breakfast Special",
+              "detail": "Thunersee, Thun",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
             },
             {
-              "label": "Les Compagnons de la Tour: Théâtre de chambre",
-              "detail": "St-Imier, Saint-Imier",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-compagnons-de-la-tour-theatre-de-chambre/"
+              "label": "Herbst-Gartenkurs in Burgistein",
+              "detail": "Burgistein",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-gartenkurs-in-burgistein/"
             },
             {
-              "label": "Langnauer Ateliertage 2026",
-              "detail": "3550 Langnau im Emmental, Langnau im Emmental",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/langnauer-ateliertage-2026/"
+              "label": "Herbstmarkt mit Kürbisverkauf",
+              "detail": "Rüschegg Eywald, Rüschegg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/herbstmarkt-mit-kuerbisverkauf/"
             },
             {
-              "label": "TANZhAUS ON STAGE // The air between us - Atemspaziergang",
-              "detail": "Bern",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzhaus-on-stage-the-air-between-us-atemspaziergang/"
+              "label": "Kreativtag – Workshops für kreative Auszeiten",
+              "detail": "Wolfisberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kreativtag-workshops-fuer-kreative-auszeiten/"
             },
             {
-              "label": "Pub Quiz Thunersee",
-              "detail": "Schiffstation Thun-Bahnhof, Thun",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/pub-quiz-thunersee_AX2SVnF"
+              "label": "Kronenplatz Herbstmärit",
+              "detail": "Spiez",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kronenplatz-herbstmaerit-1/"
             },
             {
-              "label": "Bewegende Guttanner*innen - David Tiraboschi erzählt",
-              "detail": "Hotel Bären Guttannen, Guttannen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bewegende-guttannerinnen/"
+              "label": "Pflege im Eichholz",
+              "detail": "Wabern",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflege-im-eichholz/"
             },
             {
-              "label": "Bliss Kater",
-              "detail": "BERNEXPO",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/bliss-kater_A2k8Y9g"
+              "label": "Fall cattle show Horboden-Oey",
+              "detail": "Horboden-Springenboden, Diemtigen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fall-cattle-show-horboden-oey/"
             },
             {
-              "label": "Open Mic Frutigen",
-              "detail": "Hotel-Restaurant Landhaus Adler, Frutigen",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/evenements/musique/frutigen/open-mic-frutigen_APNreL3"
+              "label": "Sauer macht glücklich – Winterfermente",
+              "detail": "Spiez",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sauer-macht-gluecklich-winterfermente/"
             },
             {
-              "label": "Salon Beethoven - Eroica im Schultheissensaal",
-              "detail": "Universitätsbibliothek Bern, Bern",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/salon-beethoven-eroica-im-schultheissensaal_A9GVW5b"
+              "label": "Brienzersee Playboat",
+              "detail": "BLS Schiffahrt AG Brienzersee, Interlaken",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-brienzersee/"
             },
             {
-              "label": "Esther Hasler - 7 auf einen Streich!",
-              "detail": "Büren a. A.",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/esther-hasler-7-auf-einen-streich-2/"
+              "label": "Pflegeeinsatz Auried",
+              "detail": "Auried Naturschutzgebiet, Laupen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflegeeinsatz-auried/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "206",
+          "value": "220",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Ausbildung Atemtherapie",
-              "detail": "Ateminstitut Schweiz, Bern",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ausbildung-atemtherapie/"
+              "label": "Frühstücksspezial Thunersee",
+              "detail": "Thunersee, Thun",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
             },
             {
-              "label": "Les Compagnons de la Tour: Théâtre de chambre",
-              "detail": "St-Imier, Saint-Imier",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-compagnons-de-la-tour-theatre-de-chambre/"
+              "label": "Herbst-Gartenkurs in Burgistein",
+              "detail": "Burgistein",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-gartenkurs-in-burgistein/"
             },
             {
-              "label": "Langnauer Ateliertage 2026",
-              "detail": "3550 Langnau im Emmental, Langnau im Emmental",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/langnauer-ateliertage-2026/"
+              "label": "Herbstmarkt mit Kürbisverkauf",
+              "detail": "Rüschegg Eywald, Rüschegg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/herbstmarkt-mit-kuerbisverkauf/"
             },
             {
-              "label": "TANZhAUS ON STAGE // The air between us - Atemspaziergang",
-              "detail": "Bern",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzhaus-on-stage-the-air-between-us-atemspaziergang/"
+              "label": "Kreativtag – Workshops für kreative Auszeiten",
+              "detail": "Wolfisberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kreativtag-workshops-fuer-kreative-auszeiten/"
             },
             {
-              "label": "Pub Quiz Thunersee",
-              "detail": "Schiffstation Thun-Bahnhof, Thun",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/pub-quiz-thunersee_AX2SVnF"
+              "label": "Kronenplatz Herbstmärit",
+              "detail": "Spiez",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kronenplatz-herbstmaerit-1/"
             },
             {
-              "label": "Bewegende Guttanner*innen - David Tiraboschi erzählt",
-              "detail": "Hotel Bären Guttannen, Guttannen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bewegende-guttannerinnen/"
+              "label": "Pflege im Eichholz",
+              "detail": "Wabern",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflege-im-eichholz/"
             },
             {
-              "label": "Bliss Kater",
-              "detail": "BERNEXPO",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/bliss-kater_A2k8Y9g"
+              "label": "Herbstviehschau Horboden-Oey",
+              "detail": "Horboden-Springenboden, Diemtigen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fall-cattle-show-horboden-oey/"
             },
             {
-              "label": "Open Mic Frutigen",
-              "detail": "Hotel-Restaurant Landhaus Adler, Frutigen",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/evenements/musique/frutigen/open-mic-frutigen_APNreL3"
+              "label": "Sauer macht glücklich – Winterfermente",
+              "detail": "Spiez",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sauer-macht-gluecklich-winterfermente/"
             },
             {
-              "label": "Salon Beethoven - Eroica im Schultheissensaal",
-              "detail": "Universitätsbibliothek Bern, Bern",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/salon-beethoven-eroica-im-schultheissensaal_A9GVW5b"
+              "label": "Spieleschiff Brienzersee",
+              "detail": "BLS Schiffahrt AG Brienzersee, Interlaken",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-brienzersee/"
             },
             {
-              "label": "Esther Hasler - 7 auf einen Streich!",
-              "detail": "Büren a. A.",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/esther-hasler-7-auf-einen-streich-2/"
+              "label": "Pflegeeinsatz Auried",
+              "detail": "Auried Naturschutzgebiet, Laupen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflegeeinsatz-auried/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "206",
+          "value": "220",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Ausbildung Atemtherapie",
-              "detail": "Ateminstitut Schweiz, Bern",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ausbildung-atemtherapie/"
+              "label": "Spécial petit-déjeuner du lac de Thoune",
+              "detail": "Thunersee, Thun",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
             },
             {
-              "label": "Les Compagnons de la Tour: Théâtre de chambre",
-              "detail": "St-Imier, Saint-Imier",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-compagnons-de-la-tour-theatre-de-chambre/"
+              "label": "Herbst-Gartenkurs in Burgistein",
+              "detail": "Burgistein",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-gartenkurs-in-burgistein/"
             },
             {
-              "label": "Langnauer Ateliertage 2026",
-              "detail": "3550 Langnau im Emmental, Langnau im Emmental",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/langnauer-ateliertage-2026/"
+              "label": "Herbstmarkt mit Kürbisverkauf",
+              "detail": "Rüschegg Eywald, Rüschegg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/herbstmarkt-mit-kuerbisverkauf/"
             },
             {
-              "label": "TANZhAUS ON STAGE // The air between us - Atemspaziergang",
-              "detail": "Bern",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzhaus-on-stage-the-air-between-us-atemspaziergang/"
+              "label": "Kreativtag – Workshops für kreative Auszeiten",
+              "detail": "Wolfisberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kreativtag-workshops-fuer-kreative-auszeiten/"
             },
             {
-              "label": "Pub Quiz Thunersee",
-              "detail": "Schiffstation Thun-Bahnhof, Thun",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/pub-quiz-thunersee_AX2SVnF"
+              "label": "Kronenplatz Herbstmärit",
+              "detail": "Spiez",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kronenplatz-herbstmaerit-1/"
             },
             {
-              "label": "Bewegende Guttanner*innen - David Tiraboschi erzählt",
-              "detail": "Hotel Bären Guttannen, Guttannen",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bewegende-guttannerinnen/"
+              "label": "Pflege im Eichholz",
+              "detail": "Wabern",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflege-im-eichholz/"
             },
             {
-              "label": "Bliss Kater",
-              "detail": "BERNEXPO",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/bliss-kater_A2k8Y9g"
+              "label": "Exposition de bétail d'automne à Horboden-Oey",
+              "detail": "Horboden-Springenboden, Diemtigen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fall-cattle-show-horboden-oey/"
             },
             {
-              "label": "Open Mic Frutigen",
-              "detail": "Hotel-Restaurant Landhaus Adler, Frutigen",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/evenements/musique/frutigen/open-mic-frutigen_APNreL3"
+              "label": "Sauer macht glücklich – Winterfermente",
+              "detail": "Spiez",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sauer-macht-gluecklich-winterfermente/"
             },
             {
-              "label": "Salon Beethoven - Eroica im Schultheissensaal",
-              "detail": "Universitätsbibliothek Bern, Bern",
-              "date": "2026-10-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/salon-beethoven-eroica-im-schultheissensaal_A9GVW5b"
+              "label": "Bateau ludique du lac de Brienz",
+              "detail": "BLS Schiffahrt AG Brienzersee, Interlaken",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-brienzersee/"
             },
             {
-              "label": "Esther Hasler - 7 auf einen Streich!",
-              "detail": "Büren a. A.",
-              "date": "2026-10-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/esther-hasler-7-auf-einen-streich-2/"
+              "label": "Pflegeeinsatz Auried",
+              "detail": "Auried Naturschutzgebiet, Laupen",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflegeeinsatz-auried/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-10-16T03:54:22.189Z"
+          "updatedAt": "2026-10-16T10:44:21.348Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:12:19.402Z"
     }
   }
 }
