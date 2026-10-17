@@ -120,6 +120,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-17T00:14:09.813Z",
       "lastFailureAt": "2026-10-17T00:14:09.813Z"
+    },
+    {
+      "articleId": "klontalstrasse-staldengarten-butzi",
+      "title": "Klöntalerstrasse: limitazione staldengarten–bützi",
+      "fallbackImage": "/images/blog/article-revisione-fiscale-canton-glarona.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T00:33:53.750Z",
+      "lastFailureAt": "2026-10-17T00:33:53.750Z"
     }
   ]
 }

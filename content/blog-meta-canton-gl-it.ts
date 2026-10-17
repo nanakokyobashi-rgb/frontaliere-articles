@@ -12,6 +12,9 @@ const blogMetaCantonGlIt: Record<string, string> = {
     'blog.article.imposta-seconde-case-glarona.title': 'Imposta immobiliare seconde case Glarona: via libera dal Governo',
     'blog.article.imposta-seconde-case-glarona.excerpt': 'La mozione è stata depositata il 10 settembre 2026.',
     'blog.article.imposta-seconde-case-glarona.imageAlt': 'Imposta immobiliare sulle seconde case nel Canton Glarona',
+    'blog.article.klontalstrasse-staldengarten-butzi.title': 'Klöntalerstrasse: limitazione staldengarten–bützi',
+    'blog.article.klontalstrasse-staldengarten-butzi.excerpt': 'Una limitazione al traffico riguarda la Klöntalerstrasse nel tratto Staldengarten–Bützi, nel Canton Glarona.',
+    'blog.article.klontalstrasse-staldengarten-butzi.imageAlt': 'Limitazione al traffico sulla Klöntalerstrasse tra Staldengarten e Bützi',
 };
 
 export default blogMetaCantonGlIt;
