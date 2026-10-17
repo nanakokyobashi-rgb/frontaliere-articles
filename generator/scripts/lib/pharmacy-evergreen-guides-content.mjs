@@ -9,6 +9,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { STATIC_FALLBACK_IMAGE, STATIC_FALLBACK_IMAGE_ALT } from './blog-image-registry.mjs';
 
 export const PHARMACY_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 
@@ -736,12 +737,6 @@ const GUIDE_SPECS = Object.freeze([
       headline: 'Farmacie di turno in Ticino: come leggere fonti e copertura',
       breadcrumbName: 'Farmacie di turno in Ticino',
     },
-    imageAlt: {
-      it: 'Vista di Bellinzona in Ticino',
-      en: 'View of Bellinzona in Ticino',
-      de: 'Blick auf Bellinzona im Tessin',
-      fr: 'Vue de Bellinzone au Tessin',
-    },
     copy: {
       it: {
         title: 'Farmacie di turno in Ticino: guida a fonti e copertura',
@@ -807,12 +802,6 @@ const GUIDE_SPECS = Object.freeze([
       keywords: 'farmacie Ticino elenco, contatti farmacie Ticino, lista ufficiale farmacie, farmacia Lugano, farmacia Bellinzona',
       headline: 'Farmacie in Ticino: elenco ufficiale e contatti',
       breadcrumbName: 'Farmacie in Ticino',
-    },
-    imageAlt: {
-      it: 'Panorama di Lugano in Ticino',
-      en: 'Panorama of Lugano in Ticino',
-      de: 'Panorama von Lugano im Tessin',
-      fr: 'Panorama de Lugano au Tessin',
     },
     copy: {
       it: {
@@ -880,12 +869,6 @@ const GUIDE_SPECS = Object.freeze([
       headline: 'Farmacie al confine: il catalogo per Como, Varese e Verbano',
       breadcrumbName: 'Farmacie al confine',
     },
-    imageAlt: {
-      it: 'Paesaggio del Mendrisiotto vicino al confine',
-      en: 'Mendrisiotto landscape near the border',
-      de: 'Landschaft des Mendrisiotto nahe der Grenze',
-      fr: 'Paysage du Mendrisiotto près de la frontière',
-    },
     copy: {
       it: {
         title: 'Farmacie al confine: Como, Varese e Verbano',
@@ -952,12 +935,6 @@ const GUIDE_SPECS = Object.freeze([
       headline: 'Farmacia aperta o di turno: come leggere l’elenco',
       breadcrumbName: 'Farmacia aperta o di turno',
     },
-    imageAlt: {
-      it: 'Castelgrande a Bellinzona, Ticino',
-      en: 'Castelgrande in Bellinzona, Ticino',
-      de: 'Castelgrande in Bellinzona, Tessin',
-      fr: 'Castelgrande à Bellinzone, Tessin',
-    },
     copy: {
       it: {
         title: 'Farmacia aperta o di turno: come leggere l’elenco',
@@ -1023,12 +1000,6 @@ const GUIDE_SPECS = Object.freeze([
       keywords: 'farmacie di turno Svizzera, farmacia di guardia cantone, farmacia aperta confine Italia, OFCT Ticino, farmacie Varese Como, Locarnese',
       headline: 'Farmacie di turno in Svizzera: verifica per cantone e confine italiano',
       breadcrumbName: 'Farmacie di turno Svizzera',
-    },
-    imageAlt: {
-      it: 'Vista di Lugano e del suo lago',
-      en: 'View of Lugano and its lake',
-      de: 'Blick auf Lugano und seinen See',
-      fr: 'Vue de Lugano et de son lac',
     },
     copy: {
       it: {
@@ -1249,11 +1220,14 @@ export function buildPharmacyEvergreenGuides(snapshots, { now = Date.now } = {})
     category: 'pratico',
     date,
     image: spec.image,
+    // The legacy catalog name remains part of the payload shape, but the
+    // shared registrar needs the governed web path for its first-write gate.
+    _generatedImagePath: STATIC_FALLBACK_IMAGE,
     hasCalculator: false,
     author: { slug: 'redazione', name: 'Redazione Frontaliere Ticino' },
     seo: buildSeo(spec, validated),
     slugs: { ...spec.slugs },
-    imageAlt: { ...spec.imageAlt },
+    imageAlt: { ...STATIC_FALLBACK_IMAGE_ALT },
     content: Object.fromEntries(PHARMACY_LOCALES.map((locale) => {
       const copy = COPY[locale];
       const localized = spec.copy[locale];

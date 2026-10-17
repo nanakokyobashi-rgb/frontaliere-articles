@@ -82,6 +82,18 @@ const SHARED_PAIR_HELPER = path.join(root, 'scripts/lib/write-file-pair-atomical
 // scrivere da solo.
 const COVERED_ELSEWHERE = ['generator/scripts/create-article.mjs'];
 
+// `governed-article-cover-refresh.mjs` e' una facciata di transazione: importa
+// i locator/writer per raggiungere le due superfici pubblicate, ma non scrive
+// da sola. Riceve `writeFile` dal producer e lo inoltra identico a registry e
+// SEO; il producer lo lega a `stageCorpusFile`, che committa poi l'intera
+// transazione con i rename atomici di `pharmacy-evergreen-refresh-transaction`
+// (o con il writer atomico del ranking). E' una via d'uscita sanzionata solo
+// per questo contratto: il test dedicato sotto verifica il codice, cosi' una
+// futura primitiva di scrittura propria la rimette nel censimento operativo.
+const DELEGATED_WRITERS = [
+  'generator/scripts/lib/governed-article-cover-refresh.mjs',
+];
+
 // Scrivono sotto blog-body ma NON sono nella classe: nessun workflow li
 // invoca (verificato con un grep su .github/workflows/), quindi non esiste il
 // SIGKILL da `timeout-minutes` che rende il troncamento possibile. Sono
@@ -223,6 +235,21 @@ for (const [rel, workflow] of CHOKE_POINTS) {
   });
 }
 
+test('i coordinatori delegati non introducono una scrittura propria', () => {
+  for (const rel of DELEGATED_WRITERS) {
+    const src = codeOnly(fs.readFileSync(path.join(root, rel), 'utf-8'));
+    assert.doesNotMatch(
+      src,
+      /\b(?:writeFileAtomic|writeFilePairAtomically|writeFileSnapshotAtomically|writeFileSync|writeFile|appendFileSync|appendFile|createWriteStream|copyFileSync|cpSync)\s*\(/u,
+      `${rel}: un coordinatore delegato non deve introdurre una primitiva di scrittura`,
+    );
+    assert.match(src, /const registryOptions = \{ registryFiles, readFile, writeFile \}/u);
+    assert.match(src, /const seoOptions = \{ section, readFile, writeFile \}/u);
+    assert.match(src, /updateArticleImageInRegistry\(repoRoot, articleId, imagePath, registryOptions\)/u);
+    assert.match(src, /updateArticleSeoImageBlock\(repoRoot, articleId, imageBlock, seoOptions\)/u);
+  }
+});
+
 test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato", () => {
   // Il difetto vero del round 1 non e' stato il codice: e' stato un audit a
   // mano che ha mancato meta' della classe. La prima stesura di questo
@@ -313,6 +340,7 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
   const listed = new Set([
     ...CHOKE_POINTS.map(([rel]) => rel),
     ...COVERED_ELSEWHERE,
+    ...DELEGATED_WRITERS,
     ...REGENERABLE_STATE,
     ...NOT_WORKFLOW_DRIVEN,
     ...APPEND_ONLY_CHANNEL,

@@ -18,6 +18,7 @@ import {
   loadPharmacySnapshots,
   validatePharmacySnapshots,
 } from '../scripts/lib/pharmacy-evergreen-guides-content.mjs';
+import { STATIC_FALLBACK_IMAGE, STATIC_FALLBACK_IMAGE_ALT } from '../scripts/lib/blog-image-registry.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = path.join(HERE, '..', 'data');
@@ -103,6 +104,8 @@ test('pharmacy evergreen: ogni guida localizzata espone scope, fonti, semantica 
   assert.deepEqual(guides.map((guide) => guide.id), PHARMACY_GUIDE_IDS);
   for (const guide of guides) {
     assert.ok(['bellinzona.webp', 'lugano-view.webp', 'mendrisio.webp', 'castelgrande.webp'].includes(guide.image));
+    assert.equal(guide._generatedImagePath, STATIC_FALLBACK_IMAGE);
+    assert.deepEqual(guide.imageAlt, STATIC_FALLBACK_IMAGE_ALT);
     assert.doesNotMatch(guide.id, /-20\d\d-\d\d-\d\d/);
     assert.deepEqual(Object.keys(guide.content).sort(), [...PHARMACY_LOCALES].sort());
 
@@ -372,6 +375,10 @@ test('pharmacy evergreen: il producer usa il registrar condiviso e la sezione se
   assert.match(source, /endExistingArticleRefreshLock/);
   assert.match(source, /transaction\.commit\(\)/);
   assert.match(source, /transaction\.rollback\(\)/);
+  assert.match(source, /refreshGovernedArticleCover\(\{/);
+  assert.match(source, /registryFiles: \[\{ path: SECTION_FILES\.registryFile, section: SECTION_NAME \}\]/);
+  assert.match(source, /refreshImageAlt: true/);
+  assert.match(source, /imageAlt: data\.imageAlt\?\.\[locale\]/);
   const lockAt = source.indexOf('beginExistingArticleRefreshLock(`pharmacy-evergreen:${states[0].guide.id}`);');
   const commitAt = source.indexOf('transaction.commit();');
   const rollbackAt = source.indexOf('transaction.rollback();');
