@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4082713": {
-    "articleId": "ssr-risparmi-270-milioni-2029",
-    "ts": "2026-09-15T01:03:03.335Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/rubriche/ospite/1950107/premi-politica-continua-responsabilita-salute": {
     "articleId": "premi-lamal-politica-responsabilita",
     "ts": "2026-09-15T01:18:20.269Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4170940": {
     "articleId": "udc-assemblea-bulle-2026",
     "ts": "2026-10-17T21:48:14.665Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4166929": {
+    "articleId": "scorte-cherosene-zurigo",
+    "ts": "2026-10-17T23:24:22.512Z",
     "keyForm": 2
   }
 }
