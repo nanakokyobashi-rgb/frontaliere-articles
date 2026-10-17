@@ -158,6 +158,51 @@ test('il marker reale senza item e con bucket invariato e\' uno zero, non un cla
   }
 });
 
+test('il marker reale senza bucket nuovo ma con residui gia\' tracciati e\' uno zero (#2299)', () => {
+  const marker = [
+    '## Post-merge follow-up triage',
+    '',
+    'I residui sono già tracciati e non generano un secondo contenitore: le issue figlie conservano le rispettive Sources.',
+    'Nessun bucket daily nuovo è stato aperto: la deduplica item-level conserva un solo tracker per ciascun residuo.',
+  ].join('\n');
+  const expectation = triageMarkerPersistenceExpectation(marker);
+  let reads = 0;
+
+  assert.deepEqual(expectation.items, []);
+  assert.deepEqual(expectation.buckets, []);
+  assert.equal(expectation.explicitZero, true);
+  assert.equal(expectation.requiresBucket, false);
+  assert.equal(verifyTriageMarkerPersistence(marker, 2843, () => { reads += 1; return null; }), true);
+  assert.equal(reads, 0, 'una dichiarazione negativa senza bucket non deve fare letture REST');
+
+  const english = [
+    '## Post-merge follow-up triage',
+    'All residuals are already tracked and do not create a second container.',
+    'No new daily bucket was opened for this PR.',
+  ].join('\n');
+  assert.equal(triageMarkerPersistenceExpectation(english).explicitZero, true);
+});
+
+test('un nuovo bucket assente da solo non prova che non siano stati aggiunti item (#2299)', () => {
+  for (const marker of [
+    [
+      '## Post-merge follow-up triage',
+      'Nessun bucket daily nuovo è stato aperto.',
+      'Sono stati aggiunti due item al bucket esistente.',
+    ].join('\n'),
+    [
+      '## Post-merge follow-up triage',
+      'Nessun bucket daily nuovo è stato aperto.',
+      '`I residui sono già tracciati` è solo un esempio del formato.',
+    ].join('\n'),
+  ]) {
+    const expectation = triageMarkerPersistenceExpectation(marker);
+    assert.equal(expectation.explicitZero, false, marker);
+    assert.equal(expectation.requiresBucket, true, marker);
+    assert.notEqual(verifyTriageMarkerPersistence(marker, 2843, () => null), true, marker);
+  }
+});
+
 test('fail-closed: un formato non riconosciuto NON e\' uno zero (review #1593, 🔴 L393)', () => {
   // Nessun `Follow-up item:`, nessun `bucket #N`, e l'intestazione non e'
   // quella dello zero imposta dal prompt. Prima: `requiresBucket=false` →

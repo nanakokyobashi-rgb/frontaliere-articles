@@ -498,6 +498,15 @@ export function dailyTagBucketReferences(text) {
 const TRIAGE_CLAIM_LINE_RE = /^\s*(?:[-*]\s+)?Created(?:\/updated)?:/i;
 const CLAIM_BULLET_LINE_RE = /^\s*[-*+]\s+\S/;
 
+// A few post-merge triage comments have used prose instead of the required
+// zero heading when every residual was already tracked elsewhere. Accept
+// that observed shape only as a paired negative attestation: a bare
+// "no bucket" sentence is not enough, because items may have been appended to
+// an existing bucket. The parser remains fail-closed for every other prose
+// variant.
+const NO_NEW_DAILY_BUCKET_RE = /(?:\bnessun(?:o)?\s+(?:nuov[oa]\s+)?(?:bucket\s+(?:daily|giornalier[oa])|daily\s+bucket)\b|\bno\s+(?:new\s+)?daily\s+bucket\b)[^\r\n]*(?:apert\w*|creat\w*|modificat\w*|aggiornat\w*|opened|created|changed|updated)\b/i;
+const TRACKED_RESIDUALS_RE = /(?:\bresidu[io]\b[^\r\n]*(?:già\s+tracciat\w*|non\s+generano\s+un\s+secondo\s+contenitore)|\bresiduals?\b[^\r\n]*(?:already\s+tracked|no\s+second\s+container))/i;
+
 /**
  * La finestra di claim del marker: ogni riga `Created/updated:` PIU' la lista
  * di bullet che la segue immediatamente, fino alla prima riga che non e' un
@@ -611,7 +620,11 @@ function attestationLines(lines) {
  *    contesto, non un claim positivo da verificare nel bucket. Zero e skip
  *    contano solo su righe fuori da blocchi di codice recintati e citazioni
  *    `>`, e la coppia solo fuori da span di codice: una frase riportata come
- *    esempio non e' un esito.
+ *    esempio non e' un esito;
+ *  - compatibilita' con il marker reale di PR #2843: «residui gia' tracciati»
+ *    PIU' «nessun nuovo bucket daily aperto» (anche in inglese). Questa forma
+ *    vale solo se non dichiara item o bucket strutturali; un semplice «nessun
+ *    bucket» resta non provato.
  *  - uno SKIP esplicito e' l'intestazione "## Post-merge follow-up triage:
  *    skipped by anti-nipote gate". In questo caso il finding resta di
  *    proprieta' della follow-up issue genitrice, quindi non esiste un bucket o
@@ -665,7 +678,12 @@ export function triageMarkerPersistenceExpectation(markerBody) {
     return /\bnessun\s+item\s+per\s+questa\s+PR\b/i.test(prose)
       && /\bbucket\b[^#\r\n]*#[1-9]\d*\b[^\r\n]*\bnon\s+modificat[oa]\s+da\s+questa\s+PR\b/i.test(prose);
   });
-  const explicitZero = canonicalZero || unchangedBucketZero;
+  const inlineCodeFreeAttestations = attesting.map((line) => line.replace(/(`+)[^`]*?\1/g, ' '));
+  const noNewDailyBucketZero = inlineCodeFreeAttestations.some((line) => NO_NEW_DAILY_BUCKET_RE.test(line))
+    && inlineCodeFreeAttestations.some((line) => TRACKED_RESIDUALS_RE.test(line));
+  const explicitZero = canonicalZero
+    || unchangedBucketZero
+    || (noNewDailyBucketZero && buckets.length === 0);
   const explicitAntiNipoteSkip = attesting.some((line) =>
     /^\s*##\s+Post-merge follow-up triage\s*:\s*skipped by anti-nipote gate\b/i.test(line));
   const uniqueItems = [...new Set(items)];
