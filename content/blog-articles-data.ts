@@ -45137,6 +45137,16 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'targa-kevin-palmieri',
+ category: 'novita',
+ date: '2026-10-17T09:46:17.351Z',
+ image: '/images/blog/article-targa-kevin-palmieri.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

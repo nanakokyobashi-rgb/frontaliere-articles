@@ -1,9 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/sergio-savoia-torna-in-politica-e-sceglie-avanti-con-ticinolavoro-442116": {
-    "articleId": "sergio-savoia-politica-avanti-ticino-lavoro",
-    "ts": "2026-09-07T11:34:02.018Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/anche-questa-settimana-sono-previste-chiusure-sullautostrada-a8-tra-varese-e-gallarate/2672536": {
     "articleId": "a8-chiusure-varese-gallarate-settembre-2026",
     "ts": "2026-09-07T14:31:31.336Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenoi.it/2026/10/17/leggi-notizia/argomenti/cronaca-20/articolo/furti-di-rame-nei-cimiteri-del-varesotto-nuovo-colpo-a-tradate.html": {
     "articleId": "furti-rame-cimitero-tradate",
     "ts": "2026-10-17T08:46:42.823Z",
+    "keyForm": 2
+  },
+  "https://www.varesenoi.it/2026/10/17/leggi-notizia/argomenti/territorio/articolo/il-centro-sportivo-delloratorio-di-gornate-olona-dedicato-al-piccolo-kevin-palmieri-il-suo-nome.html": {
+    "articleId": "targa-kevin-palmieri",
+    "ts": "2026-10-17T09:46:18.246Z",
     "keyForm": 2
   }
 }

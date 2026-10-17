@@ -9069,10 +9069,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.ticinonews.ch/ticino/a13-chiusure-notturne-tra-mesocco-roveredo-e-lostallo-444654": {
-      "section": "frontaliere",
-      "ts": 1792057193930
-    },
     "frontaliere::https://www.tio.ch/ticino/attualita/1956881/segnaletica-a13-lavori-mesocco-pannelli": {
       "section": "frontaliere",
       "ts": 1792063261682
@@ -9404,6 +9400,14 @@
     "frontaliere::https://www.tio.ch/svizzera/economia/1957148/stesso-reddito-imposte-diverse-cambiando-comune-risparmi-il-90": {
       "section": "frontaliere",
       "ts": 1792226459023
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/17/leggi-notizia/argomenti/eventi-20/articolo/msf-a-varese-per-la-terza-edizione-di-biscotti-senza-frontiere.html": {
+      "section": "frontaliere",
+      "ts": 1792229679797
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/a-ceriano-laghetto-il-campionato-a-squadre-trofeo-lombardia-di-scacchi/2710561": {
+      "section": "frontaliere",
+      "ts": 1792230028779
     }
   }
 }
