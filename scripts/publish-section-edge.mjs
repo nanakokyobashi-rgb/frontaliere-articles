@@ -59,9 +59,9 @@
  *
  * 2. HANDSHAKE + FLIP. Il publisher prende con PUT condizionale i lease delle
  *    sezioni live, ricontrolla le pagine e fa UN PUT del puntatore. I lease
- *    vengono rilasciati dopo il flip. E' l'unico passo che cambia cio' che il
- *    Worker serve. Fallimento: la release servita resta quella di prima,
- *    intera.
+ *    vengono rilasciati dopo il flip, con retry bounded per ogni tombstone non
+ *    confermato. E' l'unico passo che cambia cio' che il Worker serve.
+ *    Fallimento del flip: la release servita resta quella di prima, intera.
  *
  * 3. PURGE (la release nuova e' gia' servita, intera). Il puntatore e le URL
  *    apex delle sitemap che la release precedente o la nuova espongono. Un
@@ -389,6 +389,8 @@ export function requiredPageKeys(section, { sitemapXml, previousSitemapXml = nul
  */
 export const BOOTSTRAP_WAIT_MS = 55 * 60 * 1000;
 export const BOOTSTRAP_RETRY_MS = 20 * 1000;
+/** Un tombstone transitorio non deve lasciare un lease attivo fino al TTL. */
+export const BOOTSTRAP_RELEASE_ATTEMPTS = 3;
 
 /**
  * Attende che i bootstrap live in corso rilascino il gate R2.
@@ -427,6 +429,54 @@ export async function waitForBootstrapLocks(
 }
 
 /**
+ * Rilascia tutti i lease e conserva il sottoinsieme non confermato fra i
+ * tentativi. Il publisher deve ritentare il tombstone: dopo il flip il lock
+ * non puo' essere lasciato nel solo stato locale del processo, che termina
+ * subito dopo un errore.
+ */
+export async function releaseBootstrapLocks(
+  sections,
+  io,
+  { attempts = BOOTSTRAP_RELEASE_ATTEMPTS, log = () => {} } = {},
+) {
+  const ids = [...new Set((sections ?? []).filter((section) => typeof section === 'string' && section))];
+  if (ids.length === 0) return { released: true, pending: [], failures: new Map() };
+  if (typeof io?.releaseBootstrapLock !== 'function') {
+    return {
+      released: false,
+      pending: ids,
+      failures: new Map(ids.map((section) => [section, 'releaseBootstrapLock mancante'])),
+    };
+  }
+
+  const maxAttempts = Math.max(1, Math.floor(Number(attempts) || 0));
+  let pending = ids;
+  let failures = new Map();
+  for (let attempt = 1; attempt <= maxAttempts && pending.length > 0; attempt++) {
+    const next = [];
+    const nextFailures = new Map();
+    for (const section of pending) {
+      try {
+        if (await io.releaseBootstrapLock(section)) continue;
+        next.push(section);
+        nextFailures.set(section, 'release lock non confermato');
+        log(`::error::[section-edge] bootstrap lock di ${section} non rilasciato (tentativo ${attempt}/${maxAttempts})`);
+      } catch (error) {
+        next.push(section);
+        nextFailures.set(section, `release lock fallito (${error?.message ?? error})`);
+        log(`::error::[section-edge] release bootstrap lock di ${section} fallito (tentativo ${attempt}/${maxAttempts}): ${error?.message ?? error}`);
+      }
+    }
+    pending = next;
+    failures = nextFailures;
+    if (pending.length > 0 && attempt < maxAttempts) {
+      log(`::warning::[section-edge] ritento il release di ${pending.join(', ')} (${attempt + 1}/${maxAttempts})`);
+    }
+  }
+  return { released: pending.length === 0, pending, failures };
+}
+
+/**
  * Acquisisce i lease di tutte le sezioni della release con PUT condizionali.
  * Il GET usato dal comando CLI serve solo a ottenere l'ETag per sostituire un
  * tombstone scaduto: la decisione che vince la gara e' sempre il PUT R2 con
@@ -438,7 +488,15 @@ export async function acquireBootstrapLocks(
   sections,
   commit,
   io,
-  { waitMs = BOOTSTRAP_WAIT_MS, retryMs = BOOTSTRAP_RETRY_MS, sleep, now = Date.now, deadline: deadlineAt } = {},
+  {
+    waitMs = BOOTSTRAP_WAIT_MS,
+    retryMs = BOOTSTRAP_RETRY_MS,
+    releaseAttempts = BOOTSTRAP_RELEASE_ATTEMPTS,
+    sleep,
+    now = Date.now,
+    deadline: deadlineAt,
+    log,
+  } = {},
 ) {
   const pause = sleep ?? ((ms) => new Promise((resolve) => setTimeout(resolve, ms)));
   const ids = [...new Set((sections ?? []).filter((section) => typeof section === 'string' && section))].sort();
@@ -473,15 +531,11 @@ export async function acquireBootstrapLocks(
 
     if (!busy && !failure && held.length === ids.length) return { held, error: null };
 
-    let releaseFailure = null;
-    for (const section of held) {
-      try {
-        if (!io.releaseBootstrapLock(section)) releaseFailure = releaseFailure ?? `${section}: release lock non confermato`;
-      } catch (error) {
-        releaseFailure = releaseFailure ?? `${section}: release lock fallito (${error?.message ?? error})`;
-      }
+    const released = await releaseBootstrapLocks(held, io, { attempts: releaseAttempts, log });
+    if (!released.released) {
+      const section = released.pending[0] ?? held[0];
+      return { held: [], error: `${section}: ${released.failures.get(section) ?? 'release lock non confermato'}` };
     }
-    if (releaseFailure) return { held: [], error: releaseFailure };
     if (failure) return { held: [], error: failure };
     if (now() + Math.max(0, retryMs) > deadline) {
       return { held: [], error: `bootstrap lock occupato fino alla scadenza (${busy})` };
@@ -587,6 +641,7 @@ export async function publishRelease(
     tmpDir = os.tmpdir(),
     bootstrapWaitMs = BOOTSTRAP_WAIT_MS,
     bootstrapRetryMs = BOOTSTRAP_RETRY_MS,
+    bootstrapReleaseAttempts = BOOTSTRAP_RELEASE_ATTEMPTS,
     sleep,
   },
 ) {
@@ -672,27 +727,19 @@ export async function publishRelease(
   // release non sono puntati da niente: si tolgono best-effort.
   const staged = [];
   let heldBootstrapLocks = [];
-  const releaseHeldBootstrapLocks = () => {
-    const held = heldBootstrapLocks.splice(0);
-    let released = true;
-    for (const section of held) {
-      try {
-        if (!io.releaseBootstrapLock(section)) {
-          released = false;
-          log(`::error::[section-edge] bootstrap lock di ${section} non rilasciato dopo il flip`);
-        }
-      } catch (error) {
-        released = false;
-        log(`::error::[section-edge] release bootstrap lock di ${section} fallito: ${error?.message ?? error}`);
-      }
-    }
-    return released;
+  const releaseHeldBootstrapLocks = async () => {
+    const outcome = await releaseBootstrapLocks(heldBootstrapLocks, io, {
+      attempts: bootstrapReleaseAttempts,
+      log,
+    });
+    heldBootstrapLocks = outcome.pending;
+    return outcome.released;
   };
-  const stopBeforeFlip = (phase, what) => {
+  const stopBeforeFlip = async (phase, what) => {
     for (const key of staged) {
       if (!io.remove(key)) log(`::notice::[section-edge] file di staging non ripulito: ${key}`);
     }
-    const released = releaseHeldBootstrapLocks();
+    const released = await releaseHeldBootstrapLocks();
     return stop(phase, released ? what : `${what}; release bootstrap lock non confermato`, false, !released);
   };
 
@@ -737,8 +784,10 @@ export async function publishRelease(
   // pagine; se vince il bootstrap, il publisher aspetta senza fare il flip.
   const acquired = await acquireBootstrapLocks(release.live, release.commit, io, {
     retryMs: bootstrapRetryMs,
+    releaseAttempts: bootstrapReleaseAttempts,
     sleep,
     deadline: bootstrapDeadline,
+    log,
   });
   if (acquired.error) {
     return stopBeforeFlip('bootstrap-lock', acquired.error);
@@ -778,7 +827,7 @@ export async function publishRelease(
     fs.rmSync(pointerDir, { recursive: true, force: true });
   }
   if (!flipped) return stopBeforeFlip('flip', `puntatore non caricato: ${EDGE_SECTION_REGISTRY_FILE}`);
-  if (!releaseHeldBootstrapLocks()) {
+  if (!(await releaseHeldBootstrapLocks())) {
     return stop('bootstrap-lock-release', 'il puntatore e\' nuovo ma il lease non e\' stato rilasciato; attesa della scadenza', true, true);
   }
 

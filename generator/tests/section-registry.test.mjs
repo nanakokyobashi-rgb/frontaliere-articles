@@ -719,6 +719,7 @@ function fakeIo() {
   const io = {
     store,
     ops: [],
+    releaseAttempts: [],
     purged: [],
     fail: () => false,
     corrupt: () => false,
@@ -750,6 +751,8 @@ function fakeIo() {
       return 'acquired';
     },
     releaseBootstrapLock: (section) => {
+      io.releaseAttempts.push(section);
+      if (io.fail('release', section)) return false;
       store.delete(sectionBootstrapLockKey(section));
       return true;
     },
@@ -1261,6 +1264,29 @@ test('edge: dopo il PUT la release nuova e\' servita intera; un purge fallito es
     'https://frontaliereticino.ch/sitemap-articles-canton-ti.xml',
     'https://frontaliereticino.ch/sitemap-cantons.xml',
   ].sort());
+});
+
+test('edge: un tombstone lease fallito dopo il flip viene ritentato prima del ritorno', async () => {
+  let failedOnce = false;
+  const { io, result } = await publish(withLive(['canton-ti']), {
+    history: [DRAFT_ALL(OLD)],
+    fail: (op) => {
+      if (op !== 'release' || failedOnce) return false;
+      failedOnce = true;
+      return true;
+    },
+  });
+  assert.deepEqual(result, { code: 0, phase: 'done', flipped: true });
+  assert.deepEqual(io.releaseAttempts, ['canton-ti', 'canton-ti']);
+  assert.equal(io.store.has(sectionBootstrapLockKey('canton-ti')), false, 'il lease non resta attivo dopo il flip');
+
+  const exhausted = await publish(withLive(['canton-ti']), {
+    history: [DRAFT_ALL(OLD)],
+    fail: (op) => op === 'release',
+  });
+  assert.deepEqual([exhausted.result.code, exhausted.result.phase, exhausted.result.flipped], [1, 'bootstrap-lock-release', true]);
+  assert.equal(exhausted.io.releaseAttempts.length, 3, 'un release persistente resta bounded');
+  assert.equal(exhausted.io.store.has(sectionBootstrapLockKey('canton-ti')), true, 'il fallimento definitivo resta osservabile');
 });
 
 test('edge: un purge fallito viene ritentato prima del noop', async () => {
