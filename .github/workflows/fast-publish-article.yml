@@ -171,14 +171,32 @@ jobs:
           changed_files="$RUNNER_TEMP/fast-publish-article-changed-bodies.txt"
           : > "$changed_files"
           scan_mode=full
+          # Keep this dependency closure identical to publish-api.yml. A mixed
+          # push that changes a body and its gate must scan the full corpus.
+          gate_input_paths=(
+            .github/workflows/publish-api.yml
+            engine/shared/articleSectionCore.mjs
+            engine/shared/cantonArticleSectionCore.generated.mjs
+            generator/data/canton-url-slugs.json
+            generator/data/canton-sections.json
+            generator/scripts/lib/corpus-paths.mjs
+            host/cantonSectionsBootstrap.mjs
+            scripts/ci/check-blog-body-links.mjs
+            scripts/lib/article-link-contract.mjs
+            scripts/lib/corpus-sections.mjs
+            generator/scripts/lib/article-meta-block.mjs
+            generator/scripts/lib/article-excerpt.mjs
+          )
           if [ "$EVENT_NAME" = 'push' ] \
             && [[ "${BEFORE:-}" =~ ^[a-f0-9]{40}$ ]] \
             && [[ "${AFTER:-}" =~ ^[a-f0-9]{40}$ ]] \
             && [ "$BEFORE" != '0000000000000000000000000000000000000000' ] \
             && git cat-file -e "${BEFORE}^{commit}" 2>/dev/null \
             && git cat-file -e "${AFTER}^{commit}" 2>/dev/null; then
-            git diff --name-only "$BEFORE" "$AFTER" -- content > "$changed_files"
-            if [ -s "$changed_files" ]; then scan_mode=changed; fi
+            if git diff --quiet "$BEFORE" "$AFTER" -- "${gate_input_paths[@]}" 2>/dev/null; then
+              git diff --name-only "$BEFORE" "$AFTER" -- content > "$changed_files"
+              if [ -s "$changed_files" ]; then scan_mode=changed; fi
+            fi
           fi
           PREFLIGHT_SCAN_MODE="$scan_mode" \
             PREFLIGHT_CHANGED_FILES_FILE="$changed_files" \

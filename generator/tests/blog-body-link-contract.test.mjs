@@ -125,13 +125,26 @@ test('il writer rifiuta le parentesi letterali che il renderer tronca', () => {
     + '[codificato](https://example.test/a%28b%29)';
   assert.equal(
     sanitizeArticleMarkdownLinks(source),
-    'esterno relativo [codificato](https://example.test/a%28b%29)',
+    'esterno) relativo) [codificato](https://example.test/a%28b%29)',
   );
   assert.deepEqual(
     findNonCanonicalArticleLinks(source).map(({ target, replacement }) => ({ target, replacement })),
     [
-      { target: 'https://example.test/a(b)', replacement: null },
-      { target: '/percorso(a)', replacement: null },
+      { target: 'https://example.test/a(b', replacement: null },
+      { target: '/percorso(a', replacement: null },
+    ],
+  );
+});
+
+test('writer e gate seguono i delimitatori reali del renderer su link malformati', () => {
+  const source = '[escaped\\](bare) [parenthesis](/foo(bar) [angle](<foo)';
+  assert.equal(sanitizeArticleMarkdownLinks(source), 'escaped\\ parenthesis angle');
+  assert.deepEqual(
+    findNonCanonicalArticleLinks(source).map(({ target, replacement }) => ({ target, replacement })),
+    [
+      { target: 'bare', replacement: null },
+      { target: '/foo(bar', replacement: null },
+      { target: '<foo', replacement: null },
     ],
   );
 });
@@ -285,6 +298,7 @@ test('il gate fallisce chiuso sulle chiavi body computed e riporta l’espressio
     "const body = { [`blog.article.${id}.body1`]: '[x](bare-target)' };\n",
     "const body = { [bodyKey]: '[x](bare-target)' };\n",
     "const body = { [`blog.article.${id}.${field}`]: '[x](bare-target)' };\n",
+    "const body = { [/(?:\\])/.source]: '[x](bare-target)' };\n",
   ];
   try {
     for (const [index, source] of sources.entries()) {
@@ -297,6 +311,7 @@ test('il gate fallisce chiuso sulle chiavi body computed e riporta l’espressio
         'blog.article.${id}.body1',
         'bodyKey',
         'blog.article.${id}.${field}',
+        '/(?:\\])/.source',
       ][index]));
     }
   } finally {
@@ -356,5 +371,26 @@ test('i publisher rapidi eseguono il link gate prima di ogni pubblicazione', () 
     const publishJob = workflow.indexOf('\n  publish:');
     assert.ok(linkGate > 0, `${file} non invoca il link gate`);
     assert.ok(publishJob > linkGate, `${file} deve terminare il gate prima del job di pubblicazione`);
+  }
+});
+
+test('i publisher rapidi usano la stessa chiusura delle dipendenze del gate di publish-api', () => {
+  const api = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
+  const apiStart = api.indexOf('gate_input_paths=(');
+  const apiEnd = api.indexOf('\n            )', apiStart);
+  const apiPaths = [...api.slice(apiStart, apiEnd).matchAll(/^\s+([^\s()]+)$/gm)]
+    .map((match) => match[1]);
+  assert.ok(apiPaths.length > 0, 'publish-api.yml deve dichiarare le dipendenze del gate');
+
+  for (const file of ['fast-publish-article.yml', 'fast-publish-section.yml']) {
+    const workflow = readFileSync(path.join(ROOT, '.github/workflows', file), 'utf8');
+    const start = workflow.indexOf('gate_input_paths=(');
+    const end = workflow.indexOf('\n          )', start);
+    const paths = [...workflow.slice(start, end).matchAll(/^\s+([^\s()]+)$/gm)]
+      .map((match) => match[1]);
+    const gate = workflow.slice(start, workflow.indexOf('node scripts/ci/check-blog-body-links.mjs', start));
+    assert.deepEqual(paths, apiPaths, `${file} deve condividere la chiusura di publish-api`);
+    assert.match(gate, /git diff --quiet "\$BEFORE" "\$AFTER" -- "\$\{gate_input_paths\[@\]\}"/);
+    assert.match(gate, /git diff --name-only "\$BEFORE" "\$AFTER" -- content/);
   }
 });

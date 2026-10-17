@@ -131,6 +131,39 @@ function skipQuotedToken(source, start) {
   return source.length;
 }
 
+function regexCanStartLiteral(source, start) {
+  let cursor = start - 1;
+  while (cursor >= 0 && /\s/.test(source[cursor])) cursor -= 1;
+  if (cursor < 0) return true;
+  const previous = source[cursor];
+  if ('([{,:;=!?&|^~*%<>/'.includes(previous)) return true;
+  if ((previous === '+' || previous === '-') && source[cursor - 1] !== previous) return true;
+  const word = /[A-Za-z_$][A-Za-z0-9_$]*$/u.exec(source.slice(0, cursor + 1))?.[0];
+  return /^(?:case|delete|do|else|in|instanceof|of|return|throw|typeof|void|yield|await)$/u.test(word || '');
+}
+
+function skipRegexLiteral(source, start) {
+  let cursor = start + 1;
+  let inCharacterClass = false;
+  while (cursor < source.length) {
+    const char = source[cursor];
+    if (char === '\\') {
+      cursor += 2;
+      continue;
+    }
+    if (char === '\n' || char === '\r') return -1;
+    if (char === '[') inCharacterClass = true;
+    else if (char === ']' && inCharacterClass) inCharacterClass = false;
+    else if (char === '/' && !inCharacterClass) {
+      cursor += 1;
+      while (/[A-Za-z]/u.test(source[cursor] || '')) cursor += 1;
+      return cursor;
+    }
+    cursor += 1;
+  }
+  return -1;
+}
+
 function skipTriviaAndComments(source, start) {
   let cursor = start;
   while (cursor < source.length) {
@@ -157,6 +190,11 @@ function computedPropertyKeyEnd(source, start) {
       cursor = skipLineComment(source, cursor);
     } else if (char === '/' && next === '*') {
       cursor = skipBlockComment(source, cursor);
+    } else if (char === '/') {
+      const regexEnd = regexCanStartLiteral(source, cursor)
+        ? skipRegexLiteral(source, cursor)
+        : -1;
+      cursor = regexEnd >= 0 ? regexEnd : cursor + 1;
     } else if (char === "'" || char === '"' || char === TEMPLATE_QUOTE) {
       cursor = skipQuotedToken(source, cursor);
     } else if (char === '[') {

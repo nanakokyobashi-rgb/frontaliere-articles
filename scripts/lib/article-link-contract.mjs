@@ -58,7 +58,7 @@ function closingBracket(source, start) {
   let depth = 0;
   for (let index = start + 1; index < source.length; index += 1) {
     const char = source[index];
-    if (char === '\\') {
+    if (char === '\\' && source[index + 1] !== ']') {
       index += 1;
       continue;
     }
@@ -112,7 +112,7 @@ function parseInlineLink(source, start) {
       continue;
     }
     if (angle) {
-      if (char === '>') break;
+      if (char === '>' || char === ')') break;
       if (char === '\n') return null;
       cursor += 1;
       continue;
@@ -120,16 +120,22 @@ function parseInlineLink(source, start) {
     if (char === '(') depth += 1;
     else if (char === ')') {
       if (depth === 0) break;
-      depth -= 1;
+      // The site renderer stops at the first `)`, even inside a parenthesized
+      // destination. Keep that same boundary so the writer can strip the href
+      // the browser would actually receive.
+      break;
     } else if (/\s/.test(char) && depth === 0) {
       break;
     }
     cursor += 1;
   }
   let targetEnd = cursor;
-  if (targetEnd === targetStart || (angle && source[cursor] !== '>')) return null;
-  let target = source.slice(targetStart, targetEnd);
-  if (angle) cursor += 1;
+  const angleClosed = angle && source[cursor] === '>';
+  if (targetEnd === targetStart && !angle) return null;
+  let target = angle && !angleClosed
+    ? `<${source.slice(targetStart, targetEnd)}`
+    : source.slice(targetStart, targetEnd);
+  if (angleClosed) cursor += 1;
   const targetSuffixStart = cursor;
 
   const whitespaceStart = cursor;
