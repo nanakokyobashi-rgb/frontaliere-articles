@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T04:59:03.087Z",
-  "contentHash": "0f5f3921e7b0834bfba247564a2bbb554a908c709ec309483fb962a35463e775",
+  "updatedAt": "2026-10-17T06:16:45.379Z",
+  "contentHash": "70b01af2961db0022ac98a1cb797762eec696c7a30deb19609c864a318a5b07f",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -79,16 +79,6 @@
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
             {
-              "label": "Farmacia Pharmaexpress",
-              "detail": "Lugano, Luganese",
-              "date": "2026-10-10T06:00:00.000Z"
-            },
-            {
-              "label": "Ferrari",
-              "detail": "Mendrisio, Mendrisiotto",
-              "date": "2026-10-13T06:00:00.000Z"
-            },
-            {
               "label": "delle Alpi",
               "detail": "Faido, Biasca e Valli",
               "date": "2026-10-16T16:00:00.000Z"
@@ -107,6 +97,16 @@
               "label": "Farmacia Salus",
               "detail": "Lugano, Luganese",
               "date": "2026-10-17T06:00:00.000Z"
+            },
+            {
+              "label": "San Rocco",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-19T16:30:00.000Z"
+            },
+            {
+              "label": "Fuoriporta",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-20T06:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
@@ -295,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T06:16:45.379Z"
     },
     "en": {
       "canton": "TI",
@@ -342,16 +342,6 @@
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
             {
-              "label": "Farmacia Pharmaexpress",
-              "detail": "Lugano, Luganese",
-              "date": "2026-10-10T06:00:00.000Z"
-            },
-            {
-              "label": "Ferrari",
-              "detail": "Mendrisio, Mendrisiotto",
-              "date": "2026-10-13T06:00:00.000Z"
-            },
-            {
               "label": "delle Alpi",
               "detail": "Faido, Biasca e Valli",
               "date": "2026-10-16T16:00:00.000Z"
@@ -370,6 +360,16 @@
               "label": "Farmacia Salus",
               "detail": "Lugano, Luganese",
               "date": "2026-10-17T06:00:00.000Z"
+            },
+            {
+              "label": "San Rocco",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-19T16:30:00.000Z"
+            },
+            {
+              "label": "Fuoriporta",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-20T06:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
@@ -553,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T06:16:45.379Z"
     },
     "de": {
       "canton": "TI",
@@ -600,16 +600,6 @@
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
             {
-              "label": "Farmacia Pharmaexpress",
-              "detail": "Lugano, Luganese",
-              "date": "2026-10-10T06:00:00.000Z"
-            },
-            {
-              "label": "Ferrari",
-              "detail": "Mendrisio, Mendrisiotto",
-              "date": "2026-10-13T06:00:00.000Z"
-            },
-            {
               "label": "delle Alpi",
               "detail": "Faido, Biasca e Valli",
               "date": "2026-10-16T16:00:00.000Z"
@@ -628,6 +618,16 @@
               "label": "Farmacia Salus",
               "detail": "Lugano, Luganese",
               "date": "2026-10-17T06:00:00.000Z"
+            },
+            {
+              "label": "San Rocco",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-19T16:30:00.000Z"
+            },
+            {
+              "label": "Fuoriporta",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-20T06:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
@@ -811,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T06:16:45.379Z"
     },
     "fr": {
       "canton": "TI",
@@ -858,16 +858,6 @@
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
             {
-              "label": "Farmacia Pharmaexpress",
-              "detail": "Lugano, Luganese",
-              "date": "2026-10-10T06:00:00.000Z"
-            },
-            {
-              "label": "Ferrari",
-              "detail": "Mendrisio, Mendrisiotto",
-              "date": "2026-10-13T06:00:00.000Z"
-            },
-            {
               "label": "delle Alpi",
               "detail": "Faido, Biasca e Valli",
               "date": "2026-10-16T16:00:00.000Z"
@@ -886,6 +876,16 @@
               "label": "Farmacia Salus",
               "detail": "Lugano, Luganese",
               "date": "2026-10-17T06:00:00.000Z"
+            },
+            {
+              "label": "San Rocco",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-19T16:30:00.000Z"
+            },
+            {
+              "label": "Fuoriporta",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-20T06:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
@@ -1066,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-17T06:16:45.379Z"
     }
   }
 }
