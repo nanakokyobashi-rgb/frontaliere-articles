@@ -24,6 +24,12 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.friburgo-deduzioni-carburante.title': 'Treibstoffe: Kanton will Abzüge nicht erhöhen',
     'blog.article.friburgo-deduzioni-carburante.excerpt': 'Diesel übersteigt CHF 2,40 pro Liter.',
     'blog.article.friburgo-deduzioni-carburante.imageAlt': 'Auto im Kanton Freiburg',
+    'blog.article.dibattito-prefettura-sarine.title': 'Sarine, die sieben Präfekturkandidaten im Vergleich',
+    'blog.article.dibattito-prefettura-sarine.excerpt': 'In Corpataux diskutierten am 14.',
+    'blog.article.dibattito-prefettura-sarine.imageAlt': 'Debatte in Corpataux zwischen den sieben Kandidierenden für die Präfektur Saane',
+    'blog.article.copertura-a12-opposizioni.title': 'Überdachung der A12: 3 Jahre Bauarbeiten, etwa zwanzig Einsprachen',
+    'blog.article.copertura-a12-opposizioni.excerpt': 'Das Projekt zur Überdachung der Autobahn A12 gibt drei Jahre Bauarbeiten an.',
+    'blog.article.copertura-a12-opposizioni.imageAlt': 'Projekt zur Überdeckung der A12',
 };
 
 export default blogMetaCantonFrDe;

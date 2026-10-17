@@ -21,6 +21,9 @@ const blogMetaCantonZgIt: Record<string, string> = {
     'blog.article.zugo-revisione-legge-edilizia-2026.title': 'Revisione parziale del PBG a Zugo: consultazione dal 17 settembre 2026',
     'blog.article.zugo-revisione-legge-edilizia-2026.excerpt': 'Il Cantone di Zugo avvia la consultazione sulla revisione del PBG per creare più alloggi a prezzi accessibili e semplificare le procedure edilizie.',
     'blog.article.zugo-revisione-legge-edilizia-2026.imageAlt': 'Nuova revisione della legge edilizia nel Cantone di Zugo',
+    'blog.article.zugo-piano-direttore-26-1.title': 'Piano direttore 26/1: Zugo avvia la partecipazione',
+    'blog.article.zugo-piano-direttore-26-1.excerpt': 'La modifica 26/1 prepara le «zone bianche», coordina il Piano direttore con la revisione del PBG e attua RPG 2.',
+    'blog.article.zugo-piano-direttore-26-1.imageAlt': 'Pianificazione urbana e Piano direttore nel Canton Zugo',
 };
 
 export default blogMetaCantonZgIt;

@@ -72,4 +72,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'zugo-piano-direttore-26-1',
+ category: 'novita',
+ date: '2026-10-17T01:28:47.924Z',
+ image: '/images/blog/article-zugo-piano-direttore-26-1.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

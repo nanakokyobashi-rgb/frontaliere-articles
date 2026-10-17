@@ -140,6 +140,36 @@
       "failureCount": 0,
       "requestedAt": "2026-10-17T01:16:19.861Z",
       "lastFailureAt": "2026-10-17T01:16:19.861Z"
+    },
+    {
+      "articleId": "dibattito-prefettura-sarine",
+      "title": "Sarine, i sette candidati alla prefettura a confronto",
+      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T01:20:36.277Z",
+      "lastFailureAt": "2026-10-17T01:20:36.277Z"
+    },
+    {
+      "articleId": "scuole-vaud-furti-inchieste",
+      "title": "Otto scuole vaudesi colpite da furti notturni",
+      "fallbackImage": "/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-vaud.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T01:27:48.782Z",
+      "lastFailureAt": "2026-10-17T01:27:48.782Z"
+    },
+    {
+      "articleId": "singen-chiusura-schaffhauser-strasse",
+      "title": "Singen, chiusa la Schaffhauser Straße dal 26 al 30 ottobre",
+      "fallbackImage": "/images/blog/article-lavori-autolaghi-ottobre-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T01:47:28.529Z",
+      "lastFailureAt": "2026-10-17T01:47:28.529Z"
     }
   ]
 }

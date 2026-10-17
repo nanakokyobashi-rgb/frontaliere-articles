@@ -502,6 +502,17 @@ test('charset: template annidati e slash in valore non quotato restano inattivi'
   assert.equal(charsetFromDocumentHead(unquotedSlash), 'utf-8');
 });
 
+test('charset: un tag non terminato chiude il masking e non riesegue la scansione', () => {
+  const malformed = '<meta data="<meta charset=windows-1252>';
+  assert.equal(charsetFromDocumentHead(malformed), null, 'una dichiarazione dopo markup malformato non e\' affidabile');
+
+  const repeated = '<meta data=' + '<x '.repeat(16000) + '"';
+  const started = performance.now();
+  assert.equal(charsetFromDocumentHead(repeated), null);
+  const elapsed = performance.now() - started;
+  assert.ok(elapsed < 250, `charset scanner troppo lento su markup malformato: ${elapsed.toFixed(1)}ms`);
+});
+
 test('pubDate vuoto (bs.ch): voci SENZA data per la quota undated, mai «recenti»', async () => {
   const source = sourceOf('BASILEA', 'https://www.bs.ch/rss');
   assert.equal(source.quirks.emptyPubDate, true);

@@ -127,4 +127,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'scuole-vaud-furti-inchieste',
+ category: 'pratico',
+ date: '2026-10-17T01:27:48.756Z',
+ image: '/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-vaud.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

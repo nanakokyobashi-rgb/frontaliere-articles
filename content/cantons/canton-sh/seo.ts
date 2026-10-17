@@ -202,6 +202,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-singen-chiusura-schaffhauser-strasse': {
+    title: 'Singen, chiusa la Schaffhauser Straße dal 26 al 30 ottobre',
+    description: 'Schaffhauser Straße chiusa a Singen dal 26 al 30 ottobre 2026: lavori alla fermata Landesgartenschau, passaggio per pedoni e ciclisti, deviazioni segnalate.',
+    keywords: 'frontalieri, ticino, svizzera, italia, singen, chiusa, schaffhauser, straße',
+    ogTitle: 'Singen: Schaffhauser Straße chiusa per lavori',
+    ogDescription: 'Durante le ferie autunnali, la Schaffhauser Straße sarà completamente chiusa a Singen dal 26 al 30 ottobre 2026. Pedoni e ciclisti potranno passare; autobus di linea e soccorsi useranno la Roseneggstraße, mentre il resto del traffico seguirà',
+    canonicalPath: '/articoli-sciaffusa/singen-chiusura-schaffhauser-strasse/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Singen, chiusa la Schaffhauser Straße dal 26 al 30 ottobre",
+      "description": "Schaffhauser Straße chiusa a Singen dal 26 al 30 ottobre 2026: lavori alla fermata Landesgartenschau, passaggio per pedoni e ciclisti, deviazioni segnalate.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lavori-autolaghi-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Deviazione stradale a Singen durante la chiusura della Schaffhauser Straße"
+      },
+      "datePublished": "2026-10-17T01:47:28+00:00",
+      "dateModified": "2026-10-17T01:47:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/singen-chiusura-schaffhauser-strasse/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

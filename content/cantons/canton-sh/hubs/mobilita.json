@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T14:33:38.367Z",
-  "contentHash": "23ba744afa060bdbd4b279a27c8625a8bb003b75391f9ea8fa10dfa2125c9f2f",
+  "updatedAt": "2026-10-17T01:52:59.429Z",
+  "contentHash": "259e2fd33a023bf62fd3630b6a072b03aa68d2fd2697a029f3711f6543fde31b",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T10:09:31.602Z",
+      "updatedAt": "2026-10-16T15:35:32.859Z",
       "keyFacts": 0
     }
   ],
@@ -126,10 +126,16 @@
               "url": "https://www.stadt-schaffhausen.ch/_rte/information/2992849"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Singen, chiusa la Schaffhauser Straße dal 26 al 30 ottobre",
+          "url": "/articoli-sciaffusa/singen-chiusura-schaffhauser-strasse/",
+          "excerpt": "A Singen la strada sarà chiusa al traffico dal 26 al 30 ottobre 2026 per lavori alla fermata Landesgartenschau.",
+          "date": "2026-10-17T01:47:28.492Z"
+        },
         {
           "title": "Abbonamenti trasporti Sciaffusa: zone e tariffe",
           "url": "/articoli-svizzera/abbonamenti-trasporti-sciaffusa-tariffe/",
@@ -168,7 +174,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-17T01:52:59.429Z"
     },
     "en": {
       "canton": "SH",
@@ -277,10 +283,16 @@
               "url": "https://www.stadt-schaffhausen.ch/_rte/information/2992849"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Singen, Schaffhauser Straße closed from October 26 to 30",
+          "url": "/en/schaffhausen-articles/singen-schaffhauser-strasse-closure/",
+          "excerpt": "In Singen, the road will be closed to traffic from October 26 to 30, 2026, due to work at the Landesgartenschau stop.",
+          "date": "2026-10-17T01:47:28.492Z"
+        },
         {
           "title": "Schaffhausen transport subscriptions: zones and rates",
           "url": "/en/swiss-articles/schaffhausen-transport-passes-zones-fares/",
@@ -319,7 +331,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-17T01:52:59.429Z"
     },
     "de": {
       "canton": "SH",
@@ -428,10 +440,16 @@
               "url": "https://www.stadt-schaffhausen.ch/_rte/information/2992849"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Singen, Schaffhauser Straße vom 26. bis 30. Oktober gesperrt",
+          "url": "/de/schaffhausen-artikel/singen-sperrung-schaffhauser-strasse/",
+          "excerpt": "In Singen wird die Straße vom 26.",
+          "date": "2026-10-17T01:47:28.492Z"
+        },
         {
           "title": "Verkehrstickets Schaffhausen: Zonen und Tarife",
           "url": "/de/schweiz-artikel/schaffhausen-oeffentliche-verkehrsmittel-abos-zonen/",
@@ -470,7 +488,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-17T01:52:59.429Z"
     },
     "fr": {
       "canton": "SH",
@@ -579,10 +597,16 @@
               "url": "https://www.stadt-schaffhausen.ch/_rte/information/2992849"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Singen, la Schaffhauser Straße fermée du 26 au 30 octobre",
+          "url": "/fr/articles-schaffhouse/singen-fermeture-schaffhauser-strasse/",
+          "excerpt": "À Singen, la route sera fermée à la circulation du 26 au 30 octobre 2026 pour des travaux à l’arrêt Landesgartenschau.",
+          "date": "2026-10-17T01:47:28.492Z"
+        },
         {
           "title": "Abonnements transports Schaffhouse : zones et tarifs",
           "url": "/fr/articles-suisse/schaffhouse-transports-publics-abonnements-zones/",
@@ -621,7 +645,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-17T01:52:59.429Z"
     }
   }
 }
