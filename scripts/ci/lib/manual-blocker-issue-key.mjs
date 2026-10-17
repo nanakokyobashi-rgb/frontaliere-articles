@@ -42,17 +42,27 @@ export function failureIssueTitleForRecovery(issue) {
   return String(issue?.title ?? '');
 }
 
-/** Extract the `⛔` manual blocker lines from an Actions log, in canonical order. */
+/**
+ * Extract runtime `⛔` manual blocker lines from an Actions log, in canonical
+ * order. `gh run view --log` also includes the shell trace and `##[error]`
+ * annotation, both of which quote the marker from the workflow source. A
+ * blocker is valid only when it is the first runtime message after the
+ * job/step/timestamp prefix.
+ */
 export function manualBlockersFromFailureLog(log) {
   const blockers = [];
   for (const rawLine of String(log ?? '').split(/\r?\n/)) {
-    const line = rawLine
+    const fields = rawLine.split('\t');
+    const runtime = fields.length >= 3
+      ? fields.slice(2).join('\t').replace(/^\uFEFF?\d{4}-\d{2}-\d{2}T[^\s]+\s+/, '')
+      : rawLine;
+    const line = runtime
       .replace(/\r$/, '')
       .replace(ANSI_RE, '')
       .replace(CARET_ANSI_RE, '');
-    const marker = line.indexOf('⛔');
-    if (marker < 0) continue;
-    const blocker = line.slice(marker + '⛔'.length).trim();
+    const message = line.trimStart();
+    if (!message.startsWith('⛔')) continue;
+    const blocker = message.slice('⛔'.length).trim();
     if (blocker) blockers.push(blocker);
   }
   return canonicalManualBlockers(blockers);
