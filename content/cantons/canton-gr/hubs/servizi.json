@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T14:03:25.701Z",
-  "contentHash": "d0c5558dcbbb98173ba79a72518c1b0b4ee52bfa9d02465526bf23c5a2289173",
+  "updatedAt": "2026-10-17T19:17:26.345Z",
+  "contentHash": "a4bbb5864b3126bcac2b7198e54985ead7eb460951a9fdec8267634bb650d545",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-17T04:24:59.962Z",
+      "updatedAt": "2026-10-17T10:43:16.433Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-17T04:43:32.629Z",
+      "updatedAt": "2026-10-17T12:18:27.550Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T20:07:19.130Z",
+      "updatedAt": "2026-10-17T09:42:54.588Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "5",
-          "note": "offerta mediana 500 CHF"
+          "note": "offerta mediana 550 CHF"
         }
       ],
       "dataBlocks": [
@@ -87,14 +87,14 @@
             },
             {
               "label": "GR16361",
-              "value": "650 CHF",
+              "value": "700 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2255&locale=de_ch"
             },
             {
               "label": "GR13843",
-              "value": "500 CHF",
+              "value": "550 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2254&locale=de_ch"
@@ -102,7 +102,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-17T04:24:59.962Z"
+          "updatedAt": "2026-10-17T10:43:16.433Z"
         },
         {
           "id": "meteo",
@@ -111,12 +111,12 @@
           "items": [
             {
               "label": "Chur",
-              "value": "9 °C",
-              "detail": "oggi da 9 a 19 °C"
+              "value": "19 °C",
+              "detail": "oggi da 10 a 19 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-17T04:43:32.629Z"
+          "updatedAt": "2026-10-17T12:18:27.550Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -149,7 +149,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T09:42:54.588Z"
         }
       ],
       "curatedArticles": [
@@ -229,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "en": {
       "canton": "GR",
@@ -246,7 +246,7 @@
         {
           "label": "Plate auctions running",
           "value": "5",
-          "note": "typical bid 500 CHF"
+          "note": "typical bid 550 CHF"
         }
       ],
       "dataBlocks": [
@@ -289,14 +289,14 @@
             },
             {
               "label": "GR16361",
-              "value": "650 CHF",
+              "value": "700 CHF",
               "detail": "current bid",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2255&locale=de_ch"
             },
             {
               "label": "GR13843",
-              "value": "500 CHF",
+              "value": "550 CHF",
               "detail": "current bid",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2254&locale=de_ch"
@@ -304,7 +304,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-17T04:24:59.962Z"
+          "updatedAt": "2026-10-17T10:43:16.433Z"
         },
         {
           "id": "meteo",
@@ -313,12 +313,12 @@
           "items": [
             {
               "label": "Chur",
-              "value": "9 °C",
-              "detail": "today from 9 to 19 °C"
+              "value": "19 °C",
+              "detail": "today from 10 to 19 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-17T04:43:32.629Z"
+          "updatedAt": "2026-10-17T12:18:27.550Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -351,7 +351,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T09:42:54.588Z"
         }
       ],
       "curatedArticles": [
@@ -427,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "de": {
       "canton": "GR",
@@ -444,7 +444,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "5",
-          "note": "mittleres Gebot 500 CHF"
+          "note": "mittleres Gebot 550 CHF"
         }
       ],
       "dataBlocks": [
@@ -487,14 +487,14 @@
             },
             {
               "label": "GR16361",
-              "value": "650 CHF",
+              "value": "700 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2255&locale=de_ch"
             },
             {
               "label": "GR13843",
-              "value": "500 CHF",
+              "value": "550 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2254&locale=de_ch"
@@ -502,7 +502,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-17T04:24:59.962Z"
+          "updatedAt": "2026-10-17T10:43:16.433Z"
         },
         {
           "id": "meteo",
@@ -511,12 +511,12 @@
           "items": [
             {
               "label": "Chur",
-              "value": "9 °C",
-              "detail": "heute 9 bis 19 °C"
+              "value": "19 °C",
+              "detail": "heute 10 bis 19 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-17T04:43:32.629Z"
+          "updatedAt": "2026-10-17T12:18:27.550Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -549,7 +549,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T09:42:54.588Z"
         }
       ],
       "curatedArticles": [
@@ -625,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "fr": {
       "canton": "GR",
@@ -642,7 +642,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "5",
-          "note": "offre centrale 500 CHF"
+          "note": "offre centrale 550 CHF"
         }
       ],
       "dataBlocks": [
@@ -685,14 +685,14 @@
             },
             {
               "label": "GR16361",
-              "value": "650 CHF",
+              "value": "700 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2255&locale=de_ch"
             },
             {
               "label": "GR13843",
-              "value": "500 CHF",
+              "value": "550 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2254&locale=de_ch"
@@ -700,7 +700,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-17T04:24:59.962Z"
+          "updatedAt": "2026-10-17T10:43:16.433Z"
         },
         {
           "id": "meteo",
@@ -709,12 +709,12 @@
           "items": [
             {
               "label": "Chur",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 9 à 19 °C"
+              "value": "19 °C",
+              "detail": "aujourd’hui de 10 à 19 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-17T04:43:32.629Z"
+          "updatedAt": "2026-10-17T12:18:27.550Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -747,7 +747,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T09:42:54.588Z"
         }
       ],
       "curatedArticles": [
@@ -819,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     }
   }
 }

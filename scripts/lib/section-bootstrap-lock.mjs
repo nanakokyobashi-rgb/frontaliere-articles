@@ -71,6 +71,18 @@ export function makeReleasedSectionBootstrapLock({ section, commit, owner, now =
   });
 }
 
+/**
+ * Cloudflare may expose the R2 object's strong ETag as a weak HTTP validator
+ * (`W/"..."`). S3 If-Match accepts the entity tag value, not the HTTP weak
+ * validator prefix; keep the quotes and remove only that transport marker.
+ */
+export function normalizeS3MatchEtag(etag) {
+  if (typeof etag !== 'string') return null;
+  const value = etag.trim();
+  if (!value) return null;
+  return value.startsWith('W/') ? value.slice(2).trim() || null : value;
+}
+
 export function parseSectionBootstrapLock(value, { section, now = Date.now() } = {}) {
   let doc = value;
   if (Buffer.isBuffer(doc)) doc = doc.toString('utf8');
@@ -116,7 +128,7 @@ export async function readSectionBootstrapLock(
       releaseFetchWithRefTimeout(response);
       return { state: 'unknown', reason: `HTTP ${response.status}` };
     }
-    const etag = response.headers.get('etag');
+    const etag = normalizeS3MatchEtag(response.headers.get('etag'));
     const body = await response.text();
     return { ...parseSectionBootstrapLock(body, { section, now }), etag: etag || null };
   } catch (error) {

@@ -157,6 +157,29 @@ test('ogni consumer critico re-inietta il token runtime nel comando che muta Git
   }
 });
 
+test('le letture cross-repo del trasporto usano il PAT runtime anche nei dry-run', () => {
+  const step = (yaml, name) => {
+    const start = yaml.indexOf(`      - name: ${name}`);
+    assert.notEqual(start, -1, `${name}: step mancante`);
+    const next = yaml.indexOf('\n      - name:', start + 1);
+    return yaml.slice(start, next === -1 ? yaml.length : next);
+  };
+
+  const transportDryRun = step(source('transport-identical-twins.yml'), "Cosa c'e' da portare (dry-run)");
+  assert.match(transportDryRun, /runtime_pat="\$\{GITHUB_PAT_NANAKO:-\}"/);
+  assert.match(transportDryRun, /export GH_TOKEN="\$runtime_pat"/);
+  assert.match(transportDryRun, /node scripts\/ci\/transport-identical-twins\.mjs/);
+
+  const adaptedRealign = step(
+    source('transport-identical-twins-realign.yml'),
+    'Riallinea le baseline adapted dichiarate',
+  );
+  const exportAt = adaptedRealign.indexOf('export GH_TOKEN="$runtime_pat"');
+  const commandAt = adaptedRealign.indexOf('node scripts/ci/realign-adapted-baseline.mjs');
+  assert.ok(exportAt >= 0, 'realign adapted: manca l\'handoff del PAT dalla shell');
+  assert.ok(commandAt > exportAt, 'realign adapted: il PAT deve essere esportato prima della lettura API');
+});
+
 test('i consumer del lease usano il PAT runtime per il bucket REST separato', () => {
   const files = [
     'issue-fix.yml',

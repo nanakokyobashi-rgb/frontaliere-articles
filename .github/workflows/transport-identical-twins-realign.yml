@@ -193,8 +193,10 @@ jobs:
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
-      # Le letture (PR del corpus, storia e PR del sito) usano il token del
-      # job; il PAT serve solo al push del manifest sul branch protetto.
+      # Le letture (PR del corpus, storia e PR del sito) usano il PAT caricato
+      # da Remote Config quando è disponibile; il GITHUB_TOKEN resta solo il
+      # fallback del dry-run senza PAT. Il PAT serve anche al push del manifest
+      # sul branch protetto.
       - name: Riallinea le baseline adapted dichiarate
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -209,6 +211,9 @@ jobs:
           if [ -n "${INPUT_PATHS:-}" ]; then args+=("--paths=${INPUT_PATHS}"); fi
           if [ -n "${INPUT_SITE_PRS:-}" ]; then args+=("--site-prs=${INPUT_SITE_PRS}"); fi
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -n "$runtime_pat" ]; then
+            export GH_TOKEN="$runtime_pat"
+          fi
           if [ "${INPUT_DRY_RUN:-}" = "true" ] || [ -z "$runtime_pat" ]; then
             # Senza PAT il manifest non si puo' pushare: si decide e si stampa
             # lo stesso, ma il job resta rosso per dire che non ha scritto.

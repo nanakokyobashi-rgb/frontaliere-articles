@@ -109,7 +109,9 @@ import {
   SECTION_BOOTSTRAP_LOCK_TTL_MS,
   makeReleasedSectionBootstrapLock,
   makeSectionBootstrapLock,
+  normalizeS3MatchEtag,
   parseSectionBootstrapLock,
+  readSectionBootstrapLock,
   sectionBootstrapLockKey,
 } from '../../scripts/lib/section-bootstrap-lock.mjs';
 
@@ -1230,6 +1232,29 @@ test('edge: il lease R2 copre il timeout bootstrap massimo e il tombstone resta 
   assert.match(cli, /If-None-Match/);
   assert.match(cli, /--wait-ms/);
   assert.match(cli, /LockBusyError/);
+});
+
+test('edge: normalizza gli ETag weak del CDN prima di If-Match S3/R2', async () => {
+  assert.equal(normalizeS3MatchEtag('W/"b4f4f3f069b9052ef343cb96f178a53c"'), '"b4f4f3f069b9052ef343cb96f178a53c"');
+  assert.equal(normalizeS3MatchEtag('"strong"'), '"strong"');
+  assert.equal(normalizeS3MatchEtag(''), null);
+  const result = await readSectionBootstrapLock('canton-ti', {
+    now: Date.parse('2026-10-17T18:00:00Z'),
+    fetchImpl: async () => ({
+      ok: true,
+      status: 200,
+      headers: new Headers({ etag: 'W/"cdn-etag"' }),
+      text: async () => JSON.stringify(makeSectionBootstrapLock({
+        section: 'canton-ti',
+        commit: COMMIT,
+        owner: 'test/bootstrap',
+        now: Date.parse('2026-10-17T17:59:00Z'),
+        ttlMs: 120_000,
+      })),
+    }),
+  });
+  assert.equal(result.state, 'active');
+  assert.equal(result.etag, '"cdn-etag"');
 });
 
 test('edge: il release post-flip ritenta i lease rimasti attivi', async () => {
