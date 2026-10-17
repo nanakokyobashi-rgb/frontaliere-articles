@@ -160,6 +160,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-17T01:27:48.782Z",
       "lastFailureAt": "2026-10-17T01:27:48.782Z"
+    },
+    {
+      "articleId": "singen-chiusura-schaffhauser-strasse",
+      "title": "Singen, chiusa la Schaffhauser Straße dal 26 al 30 ottobre",
+      "fallbackImage": "/images/blog/article-lavori-autolaghi-ottobre-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T01:47:28.529Z",
+      "lastFailureAt": "2026-10-17T01:47:28.529Z"
     }
   ]
 }
