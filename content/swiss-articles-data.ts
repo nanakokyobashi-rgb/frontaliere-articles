@@ -28209,6 +28209,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'ia-voce-truffatori-svizzera-2026',
+    category: 'pratico',
+    date: '2026-10-17T14:18:52.919Z',
+    image: '/images/blog/article-ia-voce-truffatori-svizzera-2026.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

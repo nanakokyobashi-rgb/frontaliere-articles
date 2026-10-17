@@ -8444,6 +8444,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.stesso-reddito-imposte-diverse.title': 'Même revenu, impôts différents : économies jusqu\'à 90 %',
     'blog.article.stesso-reddito-imposte-diverse.excerpt': 'À revenu égal, la commune change la facture fiscale.',
     'blog.article.stesso-reddito-imposte-diverse.imageAlt': 'Rue suisse avec maisons et document fiscal',
+    'blog.article.ia-voce-truffatori-svizzera-2026.title': 'L’IA prête la voix aux escrocs : comment se défendre contre les appels suspects',
+    'blog.article.ia-voce-truffatori-svizzera-2026.excerpt': 'Une banque italienne aurait perdu 95 millions d’euros.',
+    'blog.article.ia-voce-truffatori-svizzera-2026.imageAlt': 'Smartphone avec notification d\'appel et onde sonore représentant le clonage vocal sur un bureau suisse',
 };
 
 export default blogMetaChFr;

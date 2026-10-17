@@ -8444,6 +8444,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.stesso-reddito-imposte-diverse.title': 'Gleiches Einkommen, unterschiedliche Steuern: Einsparung von bis zu 90%',
     'blog.article.stesso-reddito-imposte-diverse.excerpt': 'Bei gleichem Einkommen fällt die Steuerrechnung je nach Gemeinde anders aus.',
     'blog.article.stesso-reddito-imposte-diverse.imageAlt': 'Schweizer Straße mit Häusern und Steuerdokument',
+    'blog.article.ia-voce-truffatori-svizzera-2026.title': 'KI leiht Betrügern ihre Stimme: So schützen Sie sich vor verdächtigen Anrufen',
+    'blog.article.ia-voce-truffatori-svizzera-2026.excerpt': 'Eine italienische Bank soll 95 Millionen Euro verloren haben.',
+    'blog.article.ia-voce-truffatori-svizzera-2026.imageAlt': 'Smartphone mit Anrufbenachrichtigung und Schallwelle für Stimmenklonung auf Schweizer Schreibtisch',
 };
 
 export default blogMetaChDe;

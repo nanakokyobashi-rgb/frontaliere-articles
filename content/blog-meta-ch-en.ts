@@ -8444,6 +8444,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.stesso-reddito-imposte-diverse.title': 'Same income, different taxes: savings of up to 90%',
     'blog.article.stesso-reddito-imposte-diverse.excerpt': 'For the same income, the municipality changes the tax bill.',
     'blog.article.stesso-reddito-imposte-diverse.imageAlt': 'Swiss street with houses and tax document',
+    'blog.article.ia-voce-truffatori-svizzera-2026.title': 'AI lends its voice to scammers: how to defend yourself against suspicious calls',
+    'blog.article.ia-voce-truffatori-svizzera-2026.excerpt': 'An Italian bank is alleged to have lost 95 million euros.',
+    'blog.article.ia-voce-truffatori-svizzera-2026.imageAlt': 'Smartphone with call notification and sound wave representing voice cloning on a Swiss desk',
 };
 
 export default blogMetaChEn;

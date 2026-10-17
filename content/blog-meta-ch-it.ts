@@ -8444,6 +8444,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.stesso-reddito-imposte-diverse.title': 'Stesso reddito, imposte diverse: risparmio fino al 90%',
     'blog.article.stesso-reddito-imposte-diverse.excerpt': 'A parità di reddito, il Comune cambia la fattura fiscale.',
     'blog.article.stesso-reddito-imposte-diverse.imageAlt': 'Strada svizzera con case e documento fiscale',
+    'blog.article.ia-voce-truffatori-svizzera-2026.title': 'L’IA presta la voce ai truffatori: come difendersi dalle chiamate sospette',
+    'blog.article.ia-voce-truffatori-svizzera-2026.excerpt': 'Una banca italiana avrebbe perso 95 milioni di euro.',
+    'blog.article.ia-voce-truffatori-svizzera-2026.imageAlt': 'Smartphone con notifica di chiamata e onda sonora che rappresenta la clonazione vocale su scrivania svizzera',
 };
 
 export default blogMetaChIt;
