@@ -15415,7 +15415,14 @@ function buildBodyFile(data, locale) {
   let faqLine = '';
   if (c.faq && Array.isArray(c.faq) && c.faq.length > 0) {
     try {
-      const faqJson = JSON.stringify(c.faq);
+      const normalizedFaq = c.faq.map((item) => (item && typeof item === 'object'
+        ? {
+            ...item,
+            q: typeof item.q === 'string' ? sanitizeArticleMarkdownLinks(item.q, locale) : item.q,
+            a: typeof item.a === 'string' ? sanitizeArticleMarkdownLinks(item.a, locale) : item.a,
+          }
+        : item));
+      const faqJson = JSON.stringify(normalizedFaq);
       // Roundtrip: verify the escaped string produces valid JSON when parsed back
       const escaped = escapeForSingleQuoteTS(faqJson);
       const unescaped = escaped.replace(/\\'/g, "'").replace(/\\\\/g, '\\').replace(/\\n/g, '\n');
@@ -15430,7 +15437,8 @@ function buildBodyFile(data, locale) {
   for (let i = 1; i <= MAX_BODY_KEYS; i += 1) {
     const key = `body${i}`;
     if (!(key in c) || typeof c[key] !== 'string') continue;
-    bodyLines.push(`    'blog.article.${id}.${key}': '${escapeForSingleQuoteTS(c[key])}',`);
+    const normalized = sanitizeArticleMarkdownLinks(c[key], locale);
+    bodyLines.push(`    'blog.article.${id}.${key}': '${escapeForSingleQuoteTS(normalized)}',`);
   }
 
   return `const ${varName}: Record<string, string> = {

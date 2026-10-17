@@ -13,13 +13,13 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { findNonCanonicalArticleLinks } from '../lib/article-link-contract.mjs';
 import { activeSourceSections, configureCorpusActiveSections } from '../lib/corpus-sections.mjs';
-import { unescapeForSingleQuoteTS } from '../../generator/scripts/lib/article-meta-block.mjs';
+import { decodeTypeScriptString } from '../../generator/scripts/lib/article-meta-block.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 configureCorpusActiveSections();
 export const BLOG_BODY_ROOTS = Object.freeze(activeSourceSections().map(({ bodyDir }) => bodyDir));
 const LOCALES = new Set(['it', 'en', 'de', 'fr']);
-const ARTICLE_BODY_PROPERTY = /(['"])blog\.article\.([^'"]+)\.(body\d+|faq)\1\s*:\s*(['"])/g;
+const ARTICLE_BODY_PROPERTY = /(['"`])blog\.article\.([^'"`]+)\.(body\d+|faq)\1\s*:\s*/g;
 
 function collectTypeScriptFiles(dir) {
   let entries;
@@ -52,21 +52,27 @@ function readQuotedValue(source, start, quote) {
   let cursor = start + 1;
   while (cursor < source.length) {
     if (source[cursor] === '\\') {
+      if (source[cursor + 1] === '\r' && source[cursor + 2] === '\n') {
+        cursor += 3;
+        continue;
+      }
       cursor += 2;
       continue;
+    }
+    if (quote === '`' && source[cursor] === '$' && source[cursor + 1] === '{') {
+      return { dynamic: true };
     }
     if (source[cursor] === quote) {
       return { raw: source.slice(start + 1, cursor), end: cursor + 1 };
     }
-    if (source[cursor] === '\n' || source[cursor] === '\r') return null;
+    if (quote !== '`' && (source[cursor] === '\n' || source[cursor] === '\r')) return null;
     cursor += 1;
   }
   return null;
 }
 
 function decodeBodyValue(raw, quote) {
-  if (quote === "'") return unescapeForSingleQuoteTS(raw);
-  return JSON.parse(`"${raw}"`);
+  return decodeTypeScriptString(raw, quote);
 }
 
 function extractArticleBodyValues(source) {
@@ -74,11 +80,18 @@ function extractArticleBodyValues(source) {
   const matcher = new RegExp(ARTICLE_BODY_PROPERTY.source, 'g');
   let match;
   while ((match = matcher.exec(source)) !== null) {
-    const valueStart = matcher.lastIndex - 1;
-    const quote = match[4];
+    const valueStart = matcher.lastIndex;
+    const quote = source[valueStart];
+    if (!["'", '"', '`'].includes(quote)) {
+      throw new Error('valore TypeScript non letterale per blog.article.' + match[2] + '.' + match[3]);
+    }
     const literal = readQuotedValue(source, valueStart, quote);
     if (!literal) {
       throw new Error(`stringa TypeScript non terminata per blog.article.${match[2]}.${match[3]}`);
+    }
+    if (literal.dynamic) {
+      throw new Error('template TypeScript dinamico non verificabile per blog.article.'
+        + match[2] + '.' + match[3]);
     }
     values.push({
       field: `blog.article.${match[2]}.${match[3]}`,

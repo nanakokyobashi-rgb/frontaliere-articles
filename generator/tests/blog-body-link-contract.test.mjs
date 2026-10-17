@@ -86,11 +86,14 @@ test('il rilevatore distingue il target legacy dal testo già canonico', () => {
 test('publish-api esegue il link gate prima della pubblicazione', () => {
   const workflow = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
   const linkGate = workflow.indexOf('node scripts/ci/check-blog-body-links.mjs');
+  const linkGateStepStart = workflow.lastIndexOf('      - name:', linkGate);
+  const nextStep = workflow.indexOf('\n      - name:', linkGate);
+  const linkGateStep = workflow.slice(linkGateStepStart, nextStep > linkGateStepStart ? nextStep : undefined);
   const build = workflow.indexOf('npx -y tsx@4.23.15 scripts/build-api.mjs');
   const pushPaths = workflow.slice(workflow.indexOf('on:'), workflow.indexOf('permissions:'));
   assert.ok(linkGate > 0, 'publish-api.yml non invoca il link gate');
   assert.ok(build > linkGate, 'il link gate deve precedere la pubblicazione della superficie API');
   assert.ok(pushPaths.includes("'scripts/ci/check-blog-body-links.mjs'"), 'le modifiche al gate devono riattivare publish-api');
   assert.ok(pushPaths.includes("'scripts/lib/article-link-contract.mjs'"), 'le modifiche al contratto devono riattivare publish-api');
-  assert.match(workflow.slice(linkGate, linkGate + 550), /PREFLIGHT_SCAN_MODE/);
+  assert.match(linkGateStep, /PREFLIGHT_SCAN_MODE/);
 });
