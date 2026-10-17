@@ -9069,10 +9069,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/a-castiglione-olona-un-workshop-gratuito-di-difesa-personale-sabato-17-ottobre-con-gli-istruttori-stefano-gallucci-ed-enrico-roma/2707852": {
-      "section": "frontaliere",
-      "ts": 1792050012664
-    },
     "frontaliere::https://www.ticinonews.ch/ticino/a13-chiusure-notturne-tra-mesocco-roveredo-e-lostallo-444654": {
       "section": "frontaliere",
       "ts": 1792057193930
@@ -9400,6 +9396,10 @@
     "svizzera::https://lenews.ch/2026/10/16/swiss-flu-vaccines-delayed-but-no-shortage-expected": {
       "section": "svizzera",
       "ts": 1792222687723
+    },
+    "frontaliere::http://www.cd-ocst.ch": {
+      "section": "frontaliere",
+      "ts": 1792224210489
     }
   }
 }
