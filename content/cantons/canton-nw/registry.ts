@@ -28,4 +28,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'life-forestry-stans-liquidazione',
+ category: 'novita',
+ date: '2026-10-17T00:31:27.953Z',
+ image: '/images/blog/article-life-forestry-stans-liquidazione.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NW'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
