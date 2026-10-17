@@ -1,4 +1,37 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-burraco-solidale-buguggiate.webp",
+      "sha256": "a98d6d42e3c6c00b2ab0b5e04eae476023acd8ddc166de2bc25923746cd3c38d"
+    },
+    {
+      "path": "public/images/blog/article-dibattito-prefettura-sarine.webp",
+      "sha256": "98bcf085856c234441cfbd658107ae4e13cf0c7a08a9b90334983f937797feba"
+    },
+    {
+      "path": "public/images/blog/article-scuole-vaud-furti-inchieste.webp",
+      "sha256": "feb322c8e039258fb89b8e04405d68ca3b46a32765f83d8d53e05f7e2101fca8"
+    },
+    {
+      "path": "public/images/blog/article-singen-chiusura-schaffhauser-strasse.webp",
+      "sha256": "749b619777a2304f25931764229ba863155240a6633a4df06154b95279d3e840"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-burraco-solidale-buguggiate-480w.webp",
+      "sha256": "131cc8640f4674f5e428e400942ce1c57f0ce792d03ac270825d6a37b9b95fe5"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-dibattito-prefettura-sarine-480w.webp",
+      "sha256": "0e7e99a4aaee11440f670d65c7a2df9e0673e6f00b3dbb3f21da0e5841b6aa5e"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-scuole-vaud-furti-inchieste-480w.webp",
+      "sha256": "74c90ba2ec9c5a9ffdd20a69889f97953aae71cb9568f6cac5d6832757830f2c"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-singen-chiusura-schaffhauser-strasse-480w.webp",
+      "sha256": "57b2781bce5f5bdfc0c97803352e889f49a5475ab012ba102699c5729344f548"
+    }
+  ]
 }
