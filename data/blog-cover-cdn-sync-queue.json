@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-furti-rame-cimitero-tradate.webp",
+      "sha256": "6f14e0ad20b7f52b6ece9e24c10084b45eaad8c127506f96004a6ac080c5ecfb"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-furti-rame-cimitero-tradate-480w.webp",
+      "sha256": "7fa59bbb1373cbea3ba563844727b68e884cafe168e1ac3b95727fc406889ce4"
+    }
+  ]
 }
