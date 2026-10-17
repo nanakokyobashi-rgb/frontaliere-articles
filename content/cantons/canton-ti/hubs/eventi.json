@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T00:12:19.402Z",
-  "contentHash": "2e9914d6efcd8409eda4426d24ee41d842f0eed2c537a8f59ca60088abcaddef",
+  "updatedAt": "2026-10-17T03:47:28.379Z",
+  "contentHash": "4e96d2904f2188de582864b255025c61fd19dcb8cac52c8a395863d574658074",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -112,6 +112,12 @@
           "date": "2026-10-13T08:19:26.782Z"
         },
         {
+          "title": "Film festival diritti umani Lugano: il miglior film è promised spaces",
+          "url": "/articoli-frontaliere/film-festival-diritti-umani-lugano-2026/",
+          "excerpt": "Vincitore Miglior film: Promised Spaces di Ivan Markovic Premio ONG assegnato a Effondrement di Anat Even Premio del Pubblico a Trop c'est trop di Elisé",
+          "date": "2026-10-17T03:41:57.400Z"
+        },
+        {
           "title": "Mendrisiotto: tre eventi e strade chiuse nel fine settimana",
           "url": "/articoli-frontaliere/mendrisiotto-strade-chiuse-weekend/",
           "excerpt": "Dal 18 al 20 settembre Rally del Ticino, Penziamo e Chiasso-Pedrinate causano chiusure stradali, limitazioni per pedoni e bus deviati nel Mendrisiotto.",
@@ -140,12 +146,6 @@
           "url": "/articoli-svizzera/rientro-maternita-filanda/",
           "excerpt": "Le Città di Chiasso e Mendrisio promuovono a LaFilanda un percorso gratuito con colloqui, incontri e babysitting per il rientro al lavoro dopo la maternità.",
           "date": "2026-10-02T07:54:35.169Z"
-        },
-        {
-          "title": "Locarno Film Festival: la cultura come legame",
-          "url": "/articoli-frontaliere/locarno-film-festival-resistenza-legami/",
-          "excerpt": "Il Locarno Film Festival inaugura con 'Les Yeux Verts', esplorando temi di trauma e resilienza attraverso il cinema in Piazza Grande.",
-          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T03:47:28.379Z"
     },
     "en": {
       "canton": "TI",
@@ -263,6 +263,12 @@
           "date": "2026-10-13T08:19:26.782Z"
         },
         {
+          "title": "Lugano human rights film festival: the best film is promised spaces",
+          "url": "/en/cross-border-articles/lugano-human-rights-film-festival-the-best-film-is-promised-spaces/",
+          "excerpt": "Best Film Winner: Ivan Markovic's Promised Spaces NGO Award for Effondrement of Anat Even Audience Award for Trop c 'est trop by Elisé",
+          "date": "2026-10-17T03:41:57.400Z"
+        },
+        {
           "title": "Mendrisiotto: three events and roads closed at the weekend",
           "url": "/en/cross-border-articles/mendrisiotto-road-closures-weekend/",
           "excerpt": "From 18 to 20 September Rally del Ticino, Penziamo and Chiasso-Pedrinate cause road closures, limitations for pedestrians and diverted buses in Mendrisiotto.",
@@ -291,12 +297,6 @@
           "url": "/en/swiss-articles/return-to-work-maternity-filanda/",
           "excerpt": "The cities of Chiasso and Mendrisio are offering a free program at LaFilanda that includes counseling sessions, meetings, and childcare services to help women return to work after maternity leave.",
           "date": "2026-10-02T07:54:35.169Z"
-        },
-        {
-          "title": "Locarno Film Festival: culture as a link",
-          "url": "/en/cross-border-articles/locarno-film-festival-bonds-resistance/",
-          "excerpt": "The Locarno Film Festival opens with 'Les Yeux Verts', exploring themes of trauma and resilience through cinema in Piazza Grande.",
-          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T03:47:28.379Z"
     },
     "de": {
       "canton": "TI",
@@ -414,6 +414,12 @@
           "date": "2026-10-13T08:19:26.782Z"
         },
         {
+          "title": "Filmfestival Menschenrechte Lugano: Der beste Film ist promised spaces",
+          "url": "/de/grenzgaenger-artikel/filmfestival-menschenrechte-lugano-der-beste-film-ist-promised-spaces/",
+          "excerpt": "Bester Film: Promised Spaces von Ivan Markovic NGO Award für Effondrement von Anat Even Publikumspreis für Trop c 'est trop von Elisé",
+          "date": "2026-10-17T03:41:57.400Z"
+        },
+        {
           "title": "Mendrisiotto: Drei Veranstaltungen und gesperrte Straßen am Wochenende",
           "url": "/de/grenzgaenger-artikel/mendrisiotto-strassensperrungen-wochenende/",
           "excerpt": "Vom 18. bis 20. September verursachen die Rally del Tessin, Peniamo und Chiasso-Pedrinate Straßensperrungen, Einschränkungen für Fußgänger und umgeleitete Busse im Mendrisiotto.",
@@ -442,12 +448,6 @@
           "url": "/de/schweiz-artikel/wiedereinstieg-mutterschaft-filanda/",
           "excerpt": "Die Städte Chiasso und Mendrisio bieten bei LaFilanda ein kostenloses Programm mit Beratungsgesprächen, Treffen und Kinderbetreuung an, um Frauen den Wiedereinstieg in den Beruf nach der Mutterschaft zu erleichtern.",
           "date": "2026-10-02T07:54:35.169Z"
-        },
-        {
-          "title": "Locarno Film Festival: Kultur als Verbindung",
-          "url": "/de/grenzgaenger-artikel/locarno-film-festival-bande-widerstand/",
-          "excerpt": "Das Locarno Film Festival eröffnet mit \"Les Yeux Verts\" und erforscht Themen wie Trauma und Resilienz durch das Kino auf der Piazza Grande.",
-          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T03:47:28.379Z"
     },
     "fr": {
       "canton": "TI",
@@ -565,6 +565,12 @@
           "date": "2026-10-13T08:19:26.782Z"
         },
         {
+          "title": "Film festival droits humains Lugano : le meilleur film est promise spaces",
+          "url": "/fr/articles-frontalier/film-festival-droits-humains-lugano-le-meilleur-film-est-promise-spaces/",
+          "excerpt": "Gagnant du meilleur film : Promised Spaces d'Ivan Markovic Prix ONG décerné à Effondrement d'Anat Even Prix du Public à Trop c'est trop d'Elisé",
+          "date": "2026-10-17T03:41:57.400Z"
+        },
+        {
           "title": "Mendrisiotto : trois événements et des routes fermées le week-end",
           "url": "/fr/articles-frontalier/mendrisiotto-routes-fermees-week-end/",
           "excerpt": "Du 18 au 20 septembre, le Rallye du Tessin, Penziamo et Chiasso-Pedrinate provoquent des fermetures de routes, des restrictions pour les piétons et les bus déviés dans le Mendrisiotto.",
@@ -593,12 +599,6 @@
           "url": "/fr/articles-suisse/retour-travail-maternite-filanda/",
           "excerpt": "Les villes de Chiasso et de Mendrisio proposent à LaFilanda un parcours gratuit comprenant des entretiens, des rencontres et un service de garde d'enfants pour faciliter le retour au travail après un congé maternité.",
           "date": "2026-10-02T07:54:35.169Z"
-        },
-        {
-          "title": "Festival du film de Locarno : la culture comme lien",
-          "url": "/fr/articles-frontalier/locarno-film-festival-liens-resistance/",
-          "excerpt": "Le Locarno Film Festival ouvre avec « Les Yeux Verts », explorant les thèmes du traumatisme et de la résilience à travers le cinéma sur la Piazza Grande.",
-          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T03:47:28.379Z"
     }
   }
 }
