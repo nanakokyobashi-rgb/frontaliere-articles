@@ -2791,9 +2791,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /for v in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_S3_ENDPOINT R2_BUCKET CF_API_TOKEN; do/);
   assert.match(wf, /timeout-minutes: 100/);
   assert.match(wf, /Acquire bootstrap R2 gate/);
+  assert.match(wf, /- name: Acquire bootstrap R2 gate\n\s+id: acquire_bootstrap/);
   assert.match(wf, /section-bootstrap-lock\.mjs acquire --section "\$SECTION".*--wait-ms "\$LOCK_WAIT_MS"/);
   assert.match(wf, /Release bootstrap R2 gate/);
-  assert.match(wf, /if: always\(\).*matrix\.target\.bootstrap == true.*SECTION_BOOTSTRAP_LOCK_HELD == 'true'/);
+  assert.match(wf, /if: always\(\).*steps\.acquire_bootstrap\.outcome == 'success'.*matrix\.target\.bootstrap == true/);
+  assert.doesNotMatch(wf, /matrix\.target\.bootstrap == true.*SECTION_BOOTSTRAP_LOCK_HELD == 'true'/);
   assert.match(read('scripts/publish-section-edge.mjs'), /waitForBootstrapLocks\(release\.live, io/);
 });
 
