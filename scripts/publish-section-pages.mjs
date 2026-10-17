@@ -280,6 +280,30 @@ export function cantonRssFeedsForPublish(section, {
     : [];
 }
 
+/** Il primo pass HTML non avvia RSS finche' API e registro edge non coincidono. */
+export function cantonRssPublishPlan(section, {
+  publishing,
+  effectiveStatus,
+  cleanupRssRequested = false,
+  readiness,
+} = {}) {
+  let cantonRssFeeds = [];
+  let removeStaleCantonRssFeeds = false;
+  let deferred = false;
+  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested)) {
+    if (readiness === true || readiness?.ok) {
+      const declaredFeeds = readiness?.files
+        ? cantonRssFeedsDeclaredInManifest(section, readiness.files, readiness.counts)
+        : cantonRssFeedEntries(section);
+      cantonRssFeeds = cleanupRssRequested ? [] : declaredFeeds;
+      removeStaleCantonRssFeeds = cleanupRssRequested || cantonRssFeeds.length === 0;
+    } else {
+      deferred = true;
+    }
+  }
+  return { cantonRssFeeds, removeStaleCantonRssFeeds, deferred };
+}
+
 /** Il feed principale è l'alias canonico italiano; le altre landing usano il feed localizzato. */
 export function cantonRssFeedUrlForLocale(section, locale) {
   if (!CANTON_HUB_LOCALES.includes(locale)) throw new Error(`locale RSS cantonale sconosciuta: "${locale}"`);
@@ -2057,44 +2081,46 @@ export async function main(
     // emette zero feed legittimamente. Se è transitoria, il primo pass deve
     // caricare l'HTML senza avviare RSS; il replay workflow_run riprova dopo
     // il flip edge.
-    if (readiness === true || readiness?.ok) {
-      const declaredFeeds = readiness?.files
-        ? cantonRssFeedsDeclaredInManifest(section, readiness.files, readiness.counts)
-        : cantonRssFeedEntries(section);
-      cantonRssFeeds = cleanupRssRequested ? [] : declaredFeeds;
-      removeStaleCantonRssFeeds = cleanupRssRequested || cantonRssFeeds.length === 0;
-    } else if (
-      args.bootstrap
-      && effectiveStatus === 'live'
-      && !cleanupRssRequested
-      && publishedManifest.state === 'ok'
-      && publishedManifestPages
-    ) {
-      deferredLiveBootstrapRelease = true;
-      console.log(
-        `::notice::[${LOG}] bootstrap ${section}: release API/edge non ancora servita; ` +
-        'differisco RSS e cancellazioni obsolete dopo il flip, senza allentare la verifica HTML',
-      );
-    } else if (
-      args.bootstrap
-      && effectiveStatus === 'live'
-      && !cleanupRssRequested
-      && publishedManifest.state === 'absent'
-    ) {
-      liveBootstrapManifestMissing = true;
-      console.log(
-        `::notice::[${LOG}] bootstrap ${section}: manifest precedente assente e release API/edge non pronta; ` +
-        'blocco la pubblicazione finché la superficie precedente non è dimostrata',
-      );
-    } else {
-      // The API manifest can be ahead of the edge registry while publish-api
-      // is still waiting for these pages. The first pass must therefore upload
-      // HTML without starting the RSS phase; the workflow_run replay after the
-      // edge flip publishes feeds and performs any stale-feed cleanup.
-      console.log(`::notice::[${LOG}] release API/edge non pronta: RSS e cleanup differiti al replay workflow_run`);
-      cantonRssFeeds = [];
-      removeStaleCantonRssFeeds = false;
+    const rssPlan = cantonRssPublishPlan(section, {
+      publishing,
+      effectiveStatus,
+      cleanupRssRequested,
+      readiness,
+    });
+    if (rssPlan.deferred) {
+      if (
+        args.bootstrap
+        && effectiveStatus === 'live'
+        && !cleanupRssRequested
+        && publishedManifest.state === 'ok'
+        && publishedManifestPages
+      ) {
+        deferredLiveBootstrapRelease = true;
+        console.log(
+          `::notice::[${LOG}] bootstrap ${section}: release API/edge non ancora servita; ` +
+          'differisco RSS e cancellazioni obsolete dopo il flip, senza allentare la verifica HTML',
+        );
+      } else if (
+        args.bootstrap
+        && effectiveStatus === 'live'
+        && !cleanupRssRequested
+        && publishedManifest.state === 'absent'
+      ) {
+        liveBootstrapManifestMissing = true;
+        console.log(
+          `::notice::[${LOG}] bootstrap ${section}: manifest precedente assente e release API/edge non pronta; ` +
+          'blocco la pubblicazione finché la superficie precedente non è dimostrata',
+        );
+      } else {
+        // The API manifest can be ahead of the edge registry while publish-api
+        // is still waiting for these pages. The first pass must therefore upload
+        // HTML without starting the RSS phase; the workflow_run replay after the
+        // edge flip publishes feeds and performs any stale-feed cleanup.
+        console.log(`::notice::[${LOG}] release API/edge non pronta: RSS e cleanup differiti al replay workflow_run`);
+      }
     }
+    cantonRssFeeds = rssPlan.cantonRssFeeds;
+    removeStaleCantonRssFeeds = rssPlan.removeStaleCantonRssFeeds;
   }
 
   let hubs = { rels: [], pages: [], missing: [] };
