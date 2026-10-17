@@ -1093,13 +1093,15 @@ function rewriteCantonRssSelfLink(xml, { section, name, url }) {
   const selfLinks = [...xml.matchAll(/<atom:link\b[^>]*>/giu)].map(([tag]) => tag)
     .filter((tag) => /\brel\s*=\s*(["'])self\1/iu.test(tag));
   if (selfLinks.length !== 1) throw new Error(`${name}: atteso un solo atom:link rel="self"`);
-  const selfName = name === `rss-${section}-it.xml` ? `rss-${section}.xml` : name;
+  const isItalianAlias = name === `rss-${section}-it.xml`;
+  const selfName = isItalianAlias ? `rss-${section}.xml` : name;
   const expectedSource = `${APEX}/${selfName}`;
   const href = /\bhref\s*=\s*(["'])(.*?)\1/iu.exec(selfLinks[0]);
   if (!href || href[2] !== expectedSource) {
     throw new Error(`${name}: self-link API inatteso (${href?.[2] ?? 'assente'})`);
   }
-  return xml.replace(selfLinks[0], selfLinks[0].replace(href[0], `href="${url}"`));
+  const targetUrl = isItalianAlias ? cantonRssFeedUrlForLocale(section, 'it') : url;
+  return xml.replace(selfLinks[0], selfLinks[0].replace(href[0], `href="${targetUrl}"`));
 }
 
 function isNotFoundStatus(status) {

@@ -1379,7 +1379,8 @@ test('publisher: copia e verifica via HTTP tutti i feed della release prima di c
   }));
   const expectedXml = Object.fromEntries(feeds.map((feed) => {
     const selfName = feed.name === 'rss-canton-ti-it.xml' ? 'rss-canton-ti.xml' : feed.name;
-    return [feed.name, sourceXml[feed.name].replace(`${APEX}/${selfName}`, feed.url)];
+    const targetUrl = feed.name === 'rss-canton-ti-it.xml' ? cantonRssFeedUrlForLocale('canton-ti', 'it') : feed.url;
+    return [feed.name, sourceXml[feed.name].replace(`${APEX}/${selfName}`, targetUrl)];
   }));
   const events = [];
   let freshnessChecks = 0;
@@ -2222,6 +2223,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /workflow_run:\n\s+workflows: \['Publish article data API'\]\n\s+types: \[completed\]\n\s+branches: \[main\]/);
   assert.match(wf, /github\.event\.workflow_run\.conclusion == 'success'/);
   assert.match(wf, /github\.event\.workflow_run\.event == 'push'[\s\S]*github\.event\.workflow_run\.event == 'schedule'[\s\S]*github\.event\.workflow_run\.event == 'workflow_dispatch'/);
+  assert.match(wf, /COVER_DRAIN_COMMIT_MESSAGE: \$\{\{ github\.event\.head_commit\.message \}\}/);
+  assert.match(wf, /WORKFLOW_RUN_COVER_DRAIN_COMMIT_MESSAGE: \$\{\{ github\.event\.workflow_run\.head_commit\.message \}\}/);
+  assert.match(wf, /if \[ "\$EVENT_NAME" = 'push' \] \|\| \{ \[ "\$EVENT_NAME" = 'workflow_run' \] && \[ "\$WORKFLOW_RUN_EVENT" = 'push' \]; \}; then/);
   assert.equal(
     (wf.match(/ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_commit \|\| github\.sha \}\}/g) ?? []).length,
     2,
