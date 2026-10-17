@@ -96,6 +96,28 @@ test('la sanitizzazione rimuove i delimitatori angolari dai target canonici', ()
   );
 });
 
+test('i target canonici con spazi conservano i delimitatori angolari', () => {
+  const source = '[Pagina](</path with space>)';
+  assert.equal(sanitizeArticleMarkdownLinks(source), source);
+  assert.deepEqual(findNonCanonicalArticleLinks(source), []);
+});
+
+test('il writer e il gate visitano i link annidati nella label di un link esterno', () => {
+  const source = '[outer [inner](bare-target)](https://example.com/article)';
+  assert.equal(
+    sanitizeArticleMarkdownLinks(source),
+    '[outer inner](https://example.com/article)',
+  );
+  assert.deepEqual(
+    findNonCanonicalArticleLinks(source).map(({ label, target, replacement }) => ({
+      label,
+      target,
+      replacement,
+    })),
+    [{ label: 'inner', target: 'bare-target', replacement: null }],
+  );
+});
+
 test('la sanitizzazione valida href HTML e rimuove gli attributi duplicati', () => {
   const source = '<a class="article" href="calculator">Calcola</a> '
     + '<a href="relative/path">Relativo</a> '
@@ -182,6 +204,31 @@ test('il gate rifiuta espressioni concatenate dopo un literal invece di saltarle
     assert.deepEqual(result.offenders, []);
     assert.equal(result.errors.length, 1);
     assert.match(result.errors[0].message, /espressione TypeScript non letterale non verificabile/);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('il gate fallisce chiuso sulle chiavi body computed e riporta l’espressione', () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'article-body-link-computed-key-'));
+  const relative = `${BLOG_BODY_ROOTS[0]}/it/computed-key.ts`;
+  const file = path.join(fixtureRoot, relative);
+  mkdirSync(path.dirname(file), { recursive: true });
+  const sources = [
+    "const body = { [`blog.article.${id}.body1`]: '[x](bare-target)' };\n",
+    "const body = { [bodyKey]: '[x](bare-target)' };\n",
+  ];
+  try {
+    for (const source of sources) {
+      writeFileSync(file, source, 'utf8');
+      const result = scanBlogBodyLinks(fixtureRoot);
+      assert.deepEqual(result.offenders, []);
+      assert.equal(result.errors.length, 1);
+      assert.match(result.errors[0].message, /chiave TypeScript computata non verificabile/);
+      assert.ok(result.errors[0].message.includes(source.includes('${id}')
+        ? 'blog.article.${id}.body1'
+        : 'bodyKey'));
+    }
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }

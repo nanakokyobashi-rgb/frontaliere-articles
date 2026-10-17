@@ -145,6 +145,7 @@ function parseInlineLink(source, start) {
     start,
     end: cursor + 1,
     label: source.slice(start + 1, labelEnd),
+    labelEnd,
     target,
     angle,
     targetSyntaxStart: targetStart - (angle ? 1 : 0),
@@ -338,7 +339,16 @@ export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
   for (const link of articleLinks(source)) {
     const canonical = canonicalArticleLinkOccurrenceTarget(link, locale);
     const duplicateAnchorHref = link.htmlAnchor && link.hrefAttributes.length > 1;
-    if (canonical === link.target && !link.angle && !duplicateAnchorHref) continue;
+    const normalizedLabel = link.htmlAnchor
+      ? link.label
+      : sanitizeArticleMarkdownLinks(link.label, locale);
+    const angleTargetNeedsDelimiters = link.angle && /\s/u.test(link.target);
+    if (
+      canonical === link.target &&
+      (!link.angle || angleTargetNeedsDelimiters) &&
+      !duplicateAnchorHref &&
+      normalizedLabel === link.label
+    ) continue;
 
     if (link.htmlAnchor) {
       output += source.slice(copiedThrough, link.start);
@@ -353,11 +363,14 @@ export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
         tagCursor = attribute.attributeEnd;
       }
       output += source.slice(tagCursor, link.end);
+    } else if (canonical === null) {
+      output += source.slice(copiedThrough, link.start) + normalizedLabel;
     } else {
-      output += source.slice(copiedThrough, canonical === null ? link.start : link.targetSyntaxStart);
-      output += canonical === null
-        ? (link.referenceDefinition ? '' : link.label)
-        : canonical + source.slice(link.targetSuffixStart, link.end);
+      output += source.slice(copiedThrough, link.start)
+        + '[' + normalizedLabel + ']'
+        + source.slice(link.labelEnd + 1, link.targetSyntaxStart)
+        + (angleTargetNeedsDelimiters ? `<${canonical}>` : canonical)
+        + source.slice(link.targetSuffixStart, link.end);
     }
     copiedThrough = link.end;
   }
@@ -369,20 +382,29 @@ export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
  * The returned index is byte-oriented enough for diagnostics on the UTF-8
  * source files and is intentionally independent of a TypeScript parser.
  */
-export function findNonCanonicalArticleLinks(source, locale = 'it') {
+export function findNonCanonicalArticleLinks(source, locale = 'it', baseIndex = 0) {
   const offenders = [];
   const input = String(source ?? '');
   for (const link of articleLinks(input)) {
     const canonical = canonicalArticleLinkOccurrenceTarget(link, locale);
     const duplicateAnchorHref = link.htmlAnchor && link.hrefAttributes.length > 1;
-    if (canonical === link.target && !link.angle && !duplicateAnchorHref) continue;
-    offenders.push({
-      label: link.label,
-      target: link.target,
-      replacement: canonical,
-      index: link.start,
-      htmlAnchor: Boolean(link.htmlAnchor),
-    });
+    const angleTargetNeedsDelimiters = link.angle && /\s/u.test(link.target);
+    if (
+      canonical !== link.target ||
+      (link.angle && !angleTargetNeedsDelimiters) ||
+      duplicateAnchorHref
+    ) {
+      offenders.push({
+        label: link.label,
+        target: link.target,
+        replacement: canonical,
+        index: baseIndex + link.start,
+        htmlAnchor: Boolean(link.htmlAnchor),
+      });
+    }
+    if (!link.htmlAnchor) {
+      offenders.push(...findNonCanonicalArticleLinks(link.label, locale, baseIndex + link.start + 1));
+    }
   }
-  return offenders;
+  return offenders.sort((a, b) => a.index - b.index);
 }

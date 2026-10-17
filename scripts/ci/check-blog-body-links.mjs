@@ -147,6 +147,32 @@ function skipTriviaAndComments(source, start) {
   return cursor;
 }
 
+function computedPropertyKeyEnd(source, start) {
+  let depth = 0;
+  let cursor = start + 1;
+  while (cursor < source.length) {
+    const char = source[cursor];
+    const next = source[cursor + 1];
+    if (char === '/' && next === '/') {
+      cursor = skipLineComment(source, cursor);
+    } else if (char === '/' && next === '*') {
+      cursor = skipBlockComment(source, cursor);
+    } else if (char === "'" || char === '"' || char === TEMPLATE_QUOTE) {
+      cursor = skipQuotedToken(source, cursor);
+    } else if (char === '[') {
+      depth += 1;
+      cursor += 1;
+    } else if (char === ']') {
+      if (depth === 0) return cursor + 1;
+      depth -= 1;
+      cursor += 1;
+    } else {
+      cursor += 1;
+    }
+  }
+  return -1;
+}
+
 function extractArticleBodyValues(source) {
   const values = [];
   let cursor = 0;
@@ -165,6 +191,15 @@ function extractArticleBodyValues(source) {
     if (char === '/' && next === '*') {
       cursor = skipBlockComment(source, cursor);
       continue;
+    }
+    if (char === '[' && (previousToken === '{' || previousToken === ',')) {
+      const keyEnd = computedPropertyKeyEnd(source, cursor);
+      if (keyEnd >= 0 && source[skipTriviaAndComments(source, keyEnd)] === ':') {
+        const expression = source.slice(cursor + 1, keyEnd - 1).trim();
+        const reported = expression.length > 160 ? expression.slice(0, 157) + '...' : expression;
+        throw new Error('chiave TypeScript computata non verificabile per blog.article: ['
+          + reported + ']');
+      }
     }
     if (char === "'" || char === '"' || char === TEMPLATE_QUOTE) {
       const tokenStart = cursor;
