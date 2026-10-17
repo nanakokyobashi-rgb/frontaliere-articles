@@ -50,11 +50,12 @@ function findTagEnd(html, start) {
   return -1;
 }
 
-function isSelfClosingStartTag(html, nameEnd, end) {
+function inspectSelfClosingStartTag(html, nameEnd, end) {
   let i = nameEnd;
   while (i < end) {
     while (i < end && isHtmlWhitespace(html[i])) i++;
     if (i >= end) return false;
+    if (html[i] === '>') return { malformed: true };
     if (html[i] === '/') {
       return i + 1 === end;
     }
@@ -99,12 +100,15 @@ function readTag(html, start) {
   const boundary = html[i] ?? '';
   if (boundary && !/[\s/>]/.test(boundary)) return null;
   const name = html.slice(nameStart, i).toLowerCase();
+  const selfClosingState = !closing && HTML_VOID_ELEMENTS.has(name)
+    ? inspectSelfClosingStartTag(html, i, end)
+    : false;
+  if (selfClosingState?.malformed) return selfClosingState;
   return {
     closing,
     end,
     name,
-    selfClosing: !closing && HTML_VOID_ELEMENTS.has(name)
-      && isSelfClosingStartTag(html, i, end),
+    selfClosing: selfClosingState,
   };
 }
 

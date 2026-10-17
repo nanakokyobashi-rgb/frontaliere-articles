@@ -7756,11 +7756,12 @@ function sourceFindTagEnd(html, start) {
   return -1;
 }
 
-function sourceIsSelfClosingStartTag(html, nameEnd, end) {
+function inspectSourceSelfClosingStartTag(html, nameEnd, end) {
   let index = nameEnd;
   while (index < end) {
     while (index < end && sourceHtmlWhitespace(html[index])) index += 1;
     if (index >= end) return false;
+    if (html[index] === '>') return { malformed: true };
     if (html[index] === '/') return index + 1 === end;
     while (
       index < end &&
@@ -7802,12 +7803,15 @@ function sourceReadTag(html, start) {
   // invece di essere trattato come un carattere da saltare.
   if (end < 0) return { malformed: true };
   const name = match[0].toLowerCase();
+  const selfClosingState = !closing && SOURCE_HTML_VOID_ELEMENTS.has(name)
+    ? inspectSourceSelfClosingStartTag(html, nameEnd, end)
+    : false;
+  if (selfClosingState?.malformed) return selfClosingState;
   return {
     closing,
     end,
     name,
-    selfClosing: !closing && SOURCE_HTML_VOID_ELEMENTS.has(name)
-      && sourceIsSelfClosingStartTag(html, nameEnd, end),
+    selfClosing: selfClosingState,
   };
 }
 
