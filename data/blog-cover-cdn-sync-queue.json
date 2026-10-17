@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-film-festival-diritti-umani-lugano-2026.webp",
+      "sha256": "2686dcd19795521b30a75e1ac409e904ccff766c12d0c054304cc30b3f9445c0"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-film-festival-diritti-umani-lugano-2026-480w.webp",
+      "sha256": "8debabba07412d7b086c567be9f9a6ea1c13cbeba0feb2e0bd8a29f67fae7e62"
+    }
+  ]
 }
