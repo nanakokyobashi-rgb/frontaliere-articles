@@ -601,6 +601,7 @@ jobs:
       # riprende dopo il suo rilascio; il replay API successivo riallinea il
       # registry alla nuova superficie HTML.
       - name: Acquire bootstrap R2 gate
+        id: acquire_bootstrap
         if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true' && matrix.target.bootstrap == true
         env:
           SECTION: ${{ matrix.target.section }}
@@ -721,7 +722,11 @@ jobs:
           bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"
 
       - name: Release bootstrap R2 gate
-        if: always() && steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true' && matrix.target.bootstrap == true && env.SECTION_BOOTSTRAP_LOCK_HELD == 'true'
+        # GITHUB_ENV aggiorna l'ambiente dei passi successivi, ma non è una
+        # base affidabile per la valutazione dell'espressione `if` del passo.
+        # L'outcome dell'acquire è il fatto durevole: se ha acquisito il lease,
+        # il release deve partire anche quando il render fallisce.
+        if: always() && steps.acquire_bootstrap.outcome == 'success' && steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true' && matrix.target.bootstrap == true
         env:
           SECTION: ${{ matrix.target.section }}
         run: node scripts/ci/section-bootstrap-lock.mjs release --section "$SECTION"
