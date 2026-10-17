@@ -19992,20 +19992,6 @@ export async function registerArticleFiles(data, opts = {}) {
   if (!data || !data.id || !data.content?.it?.title) {
     throw new Error('registerArticleFiles: data.id and data.content.it.title are required');
   }
-  // Every deterministic producer enters this shared writer directly. Apply
-  // the same Markdown-link contract before lock recovery or any registration
-  // state can be written, so invalid nav actions cannot reach published files.
-  for (const [locale, content] of Object.entries(data.content || {})) {
-    if (!content || typeof content !== 'object' || Array.isArray(content)) continue;
-    for (const [field, value] of Object.entries(content)) {
-      if (!/^body\d+$/.test(field) || typeof value !== 'string') continue;
-      const normalized = sanitizeArticleMarkdownLinks(value, locale);
-      if (normalized !== value) {
-        console.error(`  🔗  Link Markdown non canonici normalizzati in ${locale}.${field}`);
-        content[field] = normalized;
-      }
-    }
-  }
   // PRIMA del guard append-only, non dopo (issue #964). Sul percorso di
   // scrittura CONDIVISO perche' generate-daily-brief-article.mjs,
   // generate-events-digest-article.mjs, generate-border-wait-ranking-article.mjs
@@ -20064,6 +20050,20 @@ export async function registerArticleFiles(data, opts = {}) {
   // slug, così copre anche l'identita' pubblicata senza rifiutare un valore
   // provvisorio ancora non sanitizzato.
   assertArticlePassesFactualityGates(data);
+  // Every deterministic producer enters this shared writer directly. Apply
+  // the Markdown-link contract before registration writes, so invalid nav
+  // actions cannot reach the published body files.
+  for (const [locale, content] of Object.entries(data.content || {})) {
+    if (!content || typeof content !== 'object' || Array.isArray(content)) continue;
+    for (const [field, value] of Object.entries(content)) {
+      if (!/^body\d+$/.test(field) || typeof value !== 'string') continue;
+      const normalized = sanitizeArticleMarkdownLinks(value, locale);
+      if (normalized !== value) {
+        console.error(`  🔗  Link Markdown non canonici normalizzati in ${locale}.${field}`);
+        content[field] = normalized;
+      }
+    }
+  }
   // Il tipo dell'articolo nel registry: esplicito del produttore, altrimenti
   // dalla stessa dichiarazione che decide la sitemap news (`skipNews`). Prima
   // del lock, come gli altri controlli: un tipo invalido lancia senza scritture.
