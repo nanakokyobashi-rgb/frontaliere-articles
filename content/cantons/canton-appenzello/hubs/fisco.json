@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "fisco",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "8d2e95075cf29a323c3d28a64575182e4d20def3828e2ef19ae68ad38f97fff6",
+  "updatedAt": "2026-10-17T00:36:37.812Z",
+  "contentHash": "2ec6cf528e5a04b07f83443ebe5e673d01f580dc8384dde5bf3153171551a665",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-16T15:35:32.859Z",
       "keyFacts": 0
     }
   ],
@@ -160,10 +160,16 @@
               "url": "https://www.ai.ch/themen/steuern/aktuelles/warnung-vor-betruegerischen-e-mails-im-namen-von-etax"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Appenzello: tasso fiscale previsto a 3,90 unità",
+          "url": "/articoli-appenzello/appenzello-tasso-fiscale-390/",
+          "excerpt": "Il preventivo 2027 prevede un disavanzo di CHF 323'670: il tasso fiscale dovrebbe salire a 3,90 unità.",
+          "date": "2026-10-17T00:31:56.459Z"
+        },
         {
           "title": "Deficit comunale di CHF 169'500 nel preventivo 2027",
           "url": "/articoli-appenzello/deficit-comune-preventivo-2027/",
@@ -205,12 +211,6 @@
           "url": "/articoli-svizzera/imposte-cantonali-appenzello-interno/",
           "excerpt": "Come funzionano le imposte cantonali nel Canton Appenzello Interno: i 3 livelli fiscali, deduzioni ammesse, scadenze di dichiarazione e portale dell'amministrazione cantonale.",
           "date": "2026-08-21T03:56:52.687Z"
-        },
-        {
-          "title": "Imposta di successione e donazione in Appenzello Esterno",
-          "url": "/articoli-svizzera/imposta-eredita-appenzello-esterno/",
-          "excerpt": "Aliquote per grado di parentela, esenzioni per coniuge e discendenti diretti, dichiarazione e termini di pagamento nel Canton Appenzello Esterno.",
-          "date": "2026-09-07T02:20:47.161Z"
         }
       ],
       "latestCantonArticles": [],
@@ -236,7 +236,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:36:37.812Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -374,10 +374,16 @@
               "url": "https://www.ai.ch/themen/steuern/aktuelles/warnung-vor-betruegerischen-e-mails-im-namen-von-etax"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Appenzell: projected tax rate at 3,90 units",
+          "url": "/en/appenzell-articles/appenzell-tax-rate-390/",
+          "excerpt": "The 2027 budget forecasts a deficit of CHF 323'670: the tax rate should rise to 3,90 units.",
+          "date": "2026-10-17T00:31:56.459Z"
+        },
         {
           "title": "Municipal deficit of CHF 169'500 in the 2027 budget",
           "url": "/en/appenzell-articles/municipal-deficit-budget-2027/",
@@ -419,12 +425,6 @@
           "url": "/en/swiss-articles/cantonal-taxes-appenzell-innerrhoden/",
           "excerpt": "How cantonal taxes work in the Inner Appenzell Canton: the 3 tax levels, allowable deductions, reporting deadlines and portal of the cantonal administration.",
           "date": "2026-08-21T03:56:52.687Z"
-        },
-        {
-          "title": "Inheritance and donation tax in Appenzell Ausserrhoden",
-          "url": "/en/swiss-articles/inheritance-tax-appenzell-rhodes-outer/",
-          "excerpt": "Rates for degree of kinship, exemptions for spouse and direct descendants, declaration and payment terms in the Outer Appenzell Canton.",
-          "date": "2026-09-07T02:20:47.161Z"
         }
       ],
       "latestCantonArticles": [],
@@ -450,7 +450,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:36:37.812Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -588,10 +588,16 @@
               "url": "https://www.ai.ch/themen/steuern/aktuelles/warnung-vor-betruegerischen-e-mails-im-namen-von-etax"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Appenzell: Voraussichtlicher Steuerfuss bei 3,90 Einheiten",
+          "url": "/de/appenzell-artikel/appenzell-steuerfuss-390/",
+          "excerpt": "Der Voranschlag 2027 sieht ein Defizit von CHF 323'670 vor: Der Steuerfuss soll auf 3,90 Einheiten steigen.",
+          "date": "2026-10-17T00:31:56.459Z"
+        },
         {
           "title": "Gemeindedefizit von CHF 169'500 im Voranschlag 2027",
           "url": "/de/appenzell-artikel/gemeinde-defizit-voranschlag-2027/",
@@ -633,12 +639,6 @@
           "url": "/de/schweiz-artikel/kantonale-steuern-appenzell-innerrhoden/",
           "excerpt": "So funktionieren die kantonalen Steuern im Kanton Appenzell Innerrhoden: die 3 Steuerstufen, zulässige Abzüge, Deklarationsfristen und das Portal der kantonalen Verwaltung.",
           "date": "2026-08-21T03:56:52.687Z"
-        },
-        {
-          "title": "Erbschafts- und Schenkungssteuer in Appenzell Ausserrhoden",
-          "url": "/de/schweiz-artikel/erbschaftsteuer-appenzell-ausserrhoden/",
-          "excerpt": "Sätze nach Verwandtschaftsgrad, Befreiungen für Ehegatten und direkte Nachkommen, Erklärung und Zahlungsfristen im Kanton Appenzell Ausserrhoden.",
-          "date": "2026-09-07T02:20:47.161Z"
         }
       ],
       "latestCantonArticles": [],
@@ -664,7 +664,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:36:37.812Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -802,10 +802,16 @@
               "url": "https://www.ai.ch/themen/steuern/aktuelles/warnung-vor-betruegerischen-e-mails-im-namen-von-etax"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Appenzell : taux d'imposition prévu à 3,90 unités",
+          "url": "/fr/articles-appenzell/appenzell-taux-fiscal-390/",
+          "excerpt": "Le budget 2027 prévoit un déficit de CHF 323'670 : le taux d'imposition devrait passer à 3,90 unités.",
+          "date": "2026-10-17T00:31:56.459Z"
+        },
         {
           "title": "Déficit communal de CHF 169'500 dans le budget 2027",
           "url": "/fr/articles-appenzell/deficit-commune-budget-2027/",
@@ -847,12 +853,6 @@
           "url": "/fr/articles-suisse/impots-cantonaux-appenzell-rhodes-internes/",
           "excerpt": "Comment fonctionnent les impôts cantonaux dans le canton d'Appenzell Intérieur : les 3 niveaux fiscaux, les déductions admises, les délais de déclaration et le portail de l'administration cantonale.",
           "date": "2026-08-21T03:56:52.687Z"
-        },
-        {
-          "title": "Droit de succession et donation à Appenzell Extérieur",
-          "url": "/fr/articles-suisse/impot-succession-appenzell-rhodes-externes/",
-          "excerpt": "Taux par degré de parenté, exonérations pour conjoint et descendants directs, déclaration et délais de paiement dans le canton d'Appenzell Extérieur.",
-          "date": "2026-09-07T02:20:47.161Z"
         }
       ],
       "latestCantonArticles": [],
@@ -878,7 +878,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-17T00:36:37.812Z"
     }
   }
 }
