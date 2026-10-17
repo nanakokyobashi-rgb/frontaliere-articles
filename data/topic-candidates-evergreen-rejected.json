@@ -672,6 +672,30 @@
       "firstSeenAt": "2026-10-17T03:16:15.948Z",
       "lastValidatedAt": "2026-10-17T03:16:15.948Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontalieri busta paga svizzera 2026 oltre 20 km",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-17T04:16:45.482Z",
+      "lastValidatedAt": "2026-10-17T04:16:45.482Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontalieri busta paga svizzera 2026 famiglia con figli",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-17T04:23:32.140Z",
+      "lastValidatedAt": "2026-10-17T04:23:32.140Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -9312,6 +9336,10 @@
     "svizzera::https://www.seco.admin.ch/it/la-seco-in-qualita-di-datore-di-lavoro": {
       "section": "svizzera",
       "ts": 1792206975646
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/da-varese-a-londra-fino-a-fellini-le-musiche-di-lorenzo-bassignani-per-ultimo-fellini-alla-festa-del-cinema-di-roma/2710159": {
+      "section": "frontaliere",
+      "ts": 1792210072557
     }
   }
 }
