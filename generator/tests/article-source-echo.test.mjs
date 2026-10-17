@@ -439,6 +439,18 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
   });
 
+  it('conserva header e wrapper con hint header dentro la radice editoriale', () => {
+    const page = '<html><body><main><article>'
+      + '<header class="article-header"><h1>EDITORIAL_HEADER_KEPT</h1></header>'
+      + '<div class="article-header"><p>EDITORIAL_WRAPPER_KEPT</p></div>'
+      + ARTICLE_PROSE + '</article></main></body></html>';
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('EDITORIAL_HEADER_KEPT'));
+    assert.ok(res.html.includes('EDITORIAL_WRAPPER_KEPT'));
+  });
+
   it('rimuove i sottalberi head inattivi dalla radice editoriale scelta', () => {
     const nestedHead = '<html><head><title>Fonte valida</title></head><body><article>'
       + '<head><script type="application/ld+json">'
@@ -521,6 +533,17 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.equal(bodyFallback.isolated, true);
     assert.equal(bodyFallback.root, 'article');
     assert.ok(bodyFallback.html.includes('NOSCRIPT_BODY_ACTIVE 7'));
+  });
+
+  it('tratta il noscript diretto dopo </head> come body anche senza <body>', () => {
+    const page = '<html><head><title>Fonte</title></head><noscript><article>'
+      + ARTICLE_PROSE.replace(/Paragrafo/g, 'POST_HEAD_NOSCRIPT_BODY')
+      + '</article></noscript></html>';
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('POST_HEAD_NOSCRIPT_BODY 7'));
+    assert.equal(res.html.includes('<head><noscript>'), false);
   });
 
   it('tratta script SVG foreign dentro template come raw-text opaco', () => {

@@ -8027,20 +8027,29 @@ function sourceNamespaceForStart(stack, tag, html) {
   return 'html';
 }
 
-function sourceTagIsInactive(html, tag, namespace, parent) {
+function sourceTagIsInactive(html, tag, namespace, parent, stack = []) {
   const documentScaffold = namespace === 'html' && (tag.name === 'html' || tag.name === 'body');
   const editorialRoot = namespace === 'html' && (tag.name === 'article' || tag.name === 'main');
+  const insideEditorialRoot = stack.some((ancestor) => (
+    ancestor.namespace === 'html' && (ancestor.name === 'article' || ancestor.name === 'main')
+  ));
+  const contextAttributes = [
+    sourceTagAttribute(html, tag, 'id'),
+    sourceTagAttribute(html, tag, 'class'),
+    sourceTagAttribute(html, tag, 'role'),
+    sourceTagAttribute(html, tag, 'aria-label'),
+  ].join(' ');
+  const editorialHeader = insideEditorialRoot && (
+    tag.name === 'header' || /\bheader\b/i.test(contextAttributes)
+  );
+  const pruneChrome = !editorialRoot && !editorialHeader;
   return Boolean(parent?.inactive)
-    || (!editorialRoot && namespace === 'html' && SOURCE_INACTIVE_CONTEXT_ELEMENTS.has(tag.name))
-    || (!documentScaffold && !editorialRoot && namespace === 'html' && sourceTagAttribute(html, tag, 'role')
+    || (pruneChrome && namespace === 'html' && SOURCE_INACTIVE_CONTEXT_ELEMENTS.has(tag.name))
+    || (pruneChrome && !documentScaffold && namespace === 'html' && sourceTagAttribute(html, tag, 'role')
       .trim().toLowerCase().split(/\s+/)
       .some((role) => SOURCE_INACTIVE_CONTEXT_ROLES.has(role)))
-    || (!documentScaffold && !editorialRoot && namespace === 'html' && SOURCE_INACTIVE_CONTEXT_HINT.test([
-      sourceTagAttribute(html, tag, 'id'),
-      sourceTagAttribute(html, tag, 'class'),
-      sourceTagAttribute(html, tag, 'role'),
-      sourceTagAttribute(html, tag, 'aria-label'),
-    ].join(' ')));
+    || (pruneChrome && !documentScaffold && namespace === 'html'
+      && SOURCE_INACTIVE_CONTEXT_HINT.test(contextAttributes));
 }
 
 function sourceImplicitCloseIndex(stack, name) {
@@ -8138,11 +8147,16 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
       : tag.explicitSelfClosing === true;
 
     if (!tag.closing && namespace === 'html') {
+      const bodyNoscriptAfterHead = tag.name === 'noscript'
+        && afterHead
+        && stack.length === 1
+        && stack[0]?.name === 'html'
+        && stack[0]?.namespace === 'html';
       if (tag.name === 'html' && stack.length === 0 && !sawHtml) {
         sawHtml = true;
         implicitHead = true;
         afterHead = false;
-      } else if (tag.name === 'head' || tag.name === 'body') {
+      } else if (tag.name === 'head' || tag.name === 'body' || bodyNoscriptAfterHead) {
         implicitHead = false;
         afterHead = false;
       } else if (
@@ -8176,7 +8190,7 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
         namespace,
         start,
         tag,
-        inactive: sourceTagIsInactive(html, tag, namespace, parent),
+        inactive: sourceTagIsInactive(html, tag, namespace, parent, stack),
       };
       if (onStart) onStart({
         tag,
@@ -8196,11 +8210,12 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
 
     const isRawTextElement = !tag.closing && !isVoid && (
       sourceIsRawTextElement(namespace, tag.name)
-      // In head mode, noscript is a raw-text element when scripting is enabled.
-      // Keep its contents from being mistaken for forbidden head containers.
+      // In an actual head (explicit or implicit), noscript is a raw-text
+      // element when scripting is enabled. A direct noscript after </head> is
+      // body fallback content instead, so it must be scanned as markup.
       || (namespace === 'html' && tag.name === 'noscript'
         && ((stack.at(-1)?.name === 'head' && stack.at(-1)?.namespace === 'html')
-          || ((implicitHead || afterHead)
+          || (implicitHead
             && stack.at(-1)?.name === 'html' && stack.at(-1)?.namespace === 'html')))
     );
 
@@ -8255,7 +8270,7 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
       namespace,
       start,
       tag,
-      inactive: sourceTagIsInactive(html, tag, namespace, parent),
+      inactive: sourceTagIsInactive(html, tag, namespace, parent, stack),
     };
     if (onStart) onStart({
       tag,
@@ -8324,8 +8339,8 @@ function sourceRemoveInactiveSubtrees(html) {
 
   const removals = [];
   const scan = sourceScanStructure(src, {
-    onStart: ({ tag, start, end, namespace, isVoid, parent, entry, rawText, rawTextEnd, skippedEnd }) => {
-      const inactive = entry?.inactive ?? sourceTagIsInactive(src, tag, namespace, parent);
+    onStart: ({ tag, start, end, namespace, isVoid, parent, stack, entry, rawText, rawTextEnd, skippedEnd }) => {
+      const inactive = entry?.inactive ?? sourceTagIsInactive(src, tag, namespace, parent, stack);
       if (!inactive || parent?.inactive) return;
       if (rawText) {
         removals.push([start, rawTextEnd]);
@@ -8444,19 +8459,25 @@ function findActiveSourceHead(html) {
       sawBody = true;
     },
     onStart: ({ tag, start, namespace, isVoid, parent, stack, entry, rawTextEnd, rawText, skippedEnd }) => {
-      const afterHeadElement = Boolean(
+      const directPostHeadContainer = Boolean(
         trustedHead &&
         bodyState?.implicit &&
         bodyState.afterHead &&
         bodyState.trusted &&
         !sawBody &&
         namespace === 'html' &&
-        SOURCE_HTML_HEAD_ELEMENTS.has(tag.name) &&
-        tag.name !== 'head' &&
-        tag.name !== 'body' &&
         parent === trustedHead.container &&
         stack.length === (trustedHead.container ? 1 : 0)
       );
+      const afterHeadElement = Boolean(
+        directPostHeadContainer &&
+        SOURCE_HTML_HEAD_ELEMENTS.has(tag.name) &&
+        tag.name !== 'head' &&
+        tag.name !== 'body' &&
+        tag.name !== 'noscript'
+      );
+      const postHeadNoscript = directPostHeadContainer && tag.name === 'noscript';
+      if (postHeadNoscript) bodyState.postHeadNoscript = true;
       if (
         bodyState?.implicit &&
         bodyState.trusted &&
@@ -8504,8 +8525,9 @@ function findActiveSourceHead(html) {
         sawHead = true;
       } else if (namespace === 'html' && tag.name === 'body') {
         if (implicitHead) closeImplicitHead(start);
+        const implicitPostHeadNoscript = bodyState?.implicit && bodyState.postHeadNoscript;
         const directDocumentBody =
-          !sawBody && (stack.length === 0 || (
+          (!sawBody || implicitPostHeadNoscript) && (stack.length === 0 || (
             stack.length === 1 && parent?.name === 'html' && parent.namespace === 'html'
           ));
         if (!directDocumentBody || isVoid) failClosed();
@@ -8575,7 +8597,7 @@ function findActiveSourceHead(html) {
           parent === implicitHeadContainer
         )) &&
         !afterHeadElement &&
-        !sourceTagIsInactive(html, tag, namespace, parent)
+        !sourceTagIsInactive(html, tag, namespace, parent, stack)
       ) {
         ldBlocks.push(html.slice(start, rawTextEnd));
       }
