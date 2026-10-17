@@ -8029,12 +8029,13 @@ function sourceNamespaceForStart(stack, tag, html) {
 
 function sourceTagIsInactive(html, tag, namespace, parent) {
   const documentScaffold = namespace === 'html' && (tag.name === 'html' || tag.name === 'body');
+  const editorialRoot = namespace === 'html' && (tag.name === 'article' || tag.name === 'main');
   return Boolean(parent?.inactive)
-    || (namespace === 'html' && SOURCE_INACTIVE_CONTEXT_ELEMENTS.has(tag.name))
-    || (!documentScaffold && namespace === 'html' && sourceTagAttribute(html, tag, 'role')
+    || (!editorialRoot && namespace === 'html' && SOURCE_INACTIVE_CONTEXT_ELEMENTS.has(tag.name))
+    || (!documentScaffold && !editorialRoot && namespace === 'html' && sourceTagAttribute(html, tag, 'role')
       .trim().toLowerCase().split(/\s+/)
       .some((role) => SOURCE_INACTIVE_CONTEXT_ROLES.has(role)))
-    || (!documentScaffold && namespace === 'html' && SOURCE_INACTIVE_CONTEXT_HINT.test([
+    || (!documentScaffold && !editorialRoot && namespace === 'html' && SOURCE_INACTIVE_CONTEXT_HINT.test([
       sourceTagAttribute(html, tag, 'id'),
       sourceTagAttribute(html, tag, 'class'),
       sourceTagAttribute(html, tag, 'role'),
@@ -8350,7 +8351,7 @@ function sourceRemoveInactiveSubtrees(html) {
   return cleaned;
 }
 
-function sourceRemoveImplicitHeadNoscript(html) {
+function sourceRemoveHeadNoscript(html) {
   const src = String(html || '');
   if (!src) return src;
 
@@ -8358,13 +8359,11 @@ function sourceRemoveImplicitHeadNoscript(html) {
   const wrapped = `<html>${src}</html>`;
   const removals = [];
   const scan = sourceScanStructure(wrapped, {
-    onStart: ({ tag, start, namespace, parent, stack, rawText, rawTextEnd }) => {
+    onStart: ({ tag, start, namespace, rawText, rawTextEnd }) => {
       if (
         namespace === 'html' &&
         tag.name === 'noscript' &&
-        rawText &&
-        parent?.name === 'html' &&
-        stack.length === 1
+        rawText
       ) removals.push([start - prefixLength, rawTextEnd - prefixLength]);
     },
   });
@@ -8553,13 +8552,15 @@ function findActiveSourceHead(html) {
       }
 
       if (afterHeadElement) {
-        if (rawText) {
-          afterHeadExtensions.push(html.slice(start, rawTextEnd));
-        } else if (namespace === 'html' && tag.name === 'template') {
-          const templateEnd = skippedEnd ?? sourceSkipTemplate(html, tag.end + 1);
-          if (templateEnd >= 0) afterHeadExtensions.push(html.slice(start, templateEnd));
-        } else if (isVoid) {
-          afterHeadExtensions.push(html.slice(start, tag.end + 1));
+        if (tag.name !== 'noscript') {
+          if (rawText) {
+            afterHeadExtensions.push(html.slice(start, rawTextEnd));
+          } else if (namespace === 'html' && tag.name === 'template') {
+            const templateEnd = skippedEnd ?? sourceSkipTemplate(html, tag.end + 1);
+            if (templateEnd >= 0) afterHeadExtensions.push(html.slice(start, templateEnd));
+          } else if (isVoid) {
+            afterHeadExtensions.push(html.slice(start, tag.end + 1));
+          }
         }
       }
 
@@ -8699,9 +8700,7 @@ export function isolateMainSourceHtml(html) {
   let head = '';
   if (headScan.bounds) {
     const { start, end, closed, implicit, closeStart } = headScan.bounds;
-    const contents = implicit
-      ? sourceRemoveImplicitHeadNoscript(src.slice(start, end))
-      : src.slice(start, end);
+    const contents = sourceRemoveHeadNoscript(src.slice(start, end));
     if (implicit) {
       head = `<head>${contents}${headScan.afterHeadExtensions.join('')}</head>`;
     } else if (closed && closeStart != null) {

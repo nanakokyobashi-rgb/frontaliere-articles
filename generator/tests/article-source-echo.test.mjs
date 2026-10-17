@@ -408,6 +408,37 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     ]) assert.ok(res.html.includes(marker), marker);
   });
 
+  it('non riattiva noscript di head esplicito o dopo la sua chiusura', () => {
+    const staleArticle = '<article><p>STALE_HEAD_NOSCRIPT_BODY</p></article>';
+    const validArticle = `<article>${ARTICLE_PROSE}</article>`;
+    const explicitHead = '<html><head><noscript>' + staleArticle
+      + '</noscript></head><body>' + validArticle + '</body></html>';
+    const explicit = isolateMainSourceHtml(explicitHead);
+    assert.equal(explicit.isolated, true);
+    assert.equal(explicit.root, 'article');
+    assert.equal(explicit.html.includes('STALE_HEAD_NOSCRIPT_BODY'), false);
+    assert.equal(explicit.html.includes('<head><noscript>'), false);
+    assert.ok(explicit.html.includes('Paragrafo 7 del pezzo vero'));
+
+    const afterHead = '<html><head></head><noscript>' + staleArticle
+      + '</noscript><body>' + validArticle + '</body></html>';
+    const postHead = isolateMainSourceHtml(afterHead);
+    assert.equal(postHead.isolated, true);
+    assert.equal(postHead.root, 'article');
+    assert.equal(postHead.html.includes('STALE_HEAD_NOSCRIPT_BODY'), false);
+    assert.ok(postHead.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('non scarta radici editoriali con hint header nel nome della classe', () => {
+    const page = '<html><body><main><article class="article-header">'
+      + ARTICLE_PROSE + '</article></main></body></html>';
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('article-header'));
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
   it('rimuove i sottalberi head inattivi dalla radice editoriale scelta', () => {
     const nestedHead = '<html><head><title>Fonte valida</title></head><body><article>'
       + '<head><script type="application/ld+json">'
@@ -456,7 +487,8 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.equal(res.root, 'main');
     assert.ok(res.html.includes('ACTIVE_HEADLINE'));
     assert.equal(res.html.includes('<main><noscript>'), false);
-    assert.ok(res.html.includes('<head><noscript>'));
+    assert.equal(res.html.includes('HEAD_INACTIVE'), false);
+    assert.equal(res.html.includes('<head><noscript>'), false);
     assert.ok(res.html.includes('<template><noscript>'));
 
     const activated = sourceActivateBodyNoscript(
