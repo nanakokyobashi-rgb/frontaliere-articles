@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-como-orabasta-famiglie.webp",
+      "sha256": "fc916173b41a27fbd9bb72914963a1ae1e341debfa5bd447d3db39da39d00285"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-como-orabasta-famiglie-480w.webp",
+      "sha256": "2822d324ff5aa4a8d19aaa09109593a1146f95add2112916c8c0022c9ecd8747"
+    }
+  ]
 }
