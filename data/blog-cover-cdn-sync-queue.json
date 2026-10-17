@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-ia-voce-truffatori-svizzera-2026.webp",
+      "sha256": "46f83a1c8cbd87faf5940bc7b47178df35a17a36231ffa1aeab18cb9b8f3af33"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-ia-voce-truffatori-svizzera-2026-480w.webp",
+      "sha256": "d9964adccc4abae1e5d951efdce1321a8cfb0e3b5cbd675db494519c7fb86be2"
+    }
+  ]
 }
