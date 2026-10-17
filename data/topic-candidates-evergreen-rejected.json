@@ -8985,18 +8985,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://comozero.it/attualita/provincia-di-como-drammatico-schianto-tra-due-moto": {
-      "section": "frontaliere",
-      "ts": 1792009974706
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/il-consiglio-di-stato-rende-onore-allo-sport-ticinese-444591": {
-      "section": "frontaliere",
-      "ts": 1792011152986
-    },
-    "frontaliere::https://comozero.it/politica/como-cambio-al-vertice-del-m5s-massimo-benedetti-nuovo-responsabile-pacifista-e-progressista": {
-      "section": "frontaliere",
-      "ts": 1792011172211
-    },
     "svizzera::https://www.rsi.ch/s/4153382": {
       "section": "svizzera",
       "ts": 1792040622668
@@ -9272,6 +9260,10 @@
     "frontaliere::https://unia.ch/it/professioni-rami/parrucchiere/sondaggio-rivendicazioni-ccl": {
       "section": "frontaliere",
       "ts": 1792182208504
+    },
+    "frontaliere::https://www.tio.ch/svizzera/attualita/1957141/pensionato-la-spunta-contro-le-ffs-dopo-mesi-di-battaglia": {
+      "section": "frontaliere",
+      "ts": 1792192585595
     }
   }
 }
