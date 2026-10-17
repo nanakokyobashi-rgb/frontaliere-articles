@@ -29,6 +29,12 @@ export const GENERATED_IMAGE_REGISTRY_REL = 'data/generated-image-registry.json'
 export const EDITORIAL_IMAGE_REGISTRY_REL = 'data/editorial-image-registry.json';
 export const BLOG_IMAGE_CREDITS_AGGREGATE = 'data/image-credits-blog.json';
 export const STATIC_FALLBACK_IMAGE = '/images/places/lugano-view.webp';
+export const STATIC_FALLBACK_IMAGE_ALT = Object.freeze({
+  it: 'Paesaggio illustrativo del Canton Ticino',
+  en: 'Illustrative landscape of Canton Ticino',
+  de: 'Illustrative Landschaft des Kantons Tessin',
+  fr: 'Paysage illustratif du canton du Tessin',
+});
 
 // The place asset is owned by the site and is materialized in the site tree,
 // not in this corpus checkout. Keep its governed record available here so a

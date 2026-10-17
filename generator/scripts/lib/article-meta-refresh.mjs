@@ -96,10 +96,9 @@ const LOCALES = ['it', 'en', 'de', 'fr'];
 
 /**
  * The per-locale meta fields this module may touch, in the order they'd be
- * INSERTED when missing. `imageAlt` is never touched; titles require the explicit
- * `refreshTitles` option used by the same-day daily edition. Historically this
- * issue is scoped to the three descriptive surfaces #79/#80/#83 collapsed and
- * split, not to every field the meta block carries.
+ * INSERTED when missing. `imageAlt` is opt-in via `refreshImageAlt` so existing
+ * descriptive refresh callers remain unchanged; titles likewise require the
+ * explicit `refreshTitles` option.
  */
 const LOCALE_FIELDS = ['excerpt', 'seoDescription', 'ogDescription'];
 
@@ -210,12 +209,18 @@ function localeMetaFieldPattern(id, field) {
  *
  * @param {string} src - the meta file's current content
  * @param {string} id
- * @param {Record<string,string>} fields - a subset of LOCALE_FIELDS → value
+ * @param {Record<string,string>} fields - descriptive fields; imageAlt is accepted with refreshImageAlt
+ * @param {{ refreshTitles?: boolean, refreshImageAlt?: boolean }} [options]
  * @returns {string} the new content (`=== src` when nothing changed)
  */
-export function upsertLocaleMetaFields(src, id, fields, { refreshTitles = false } = {}) {
+export function upsertLocaleMetaFields(src, id, fields, { refreshTitles = false, refreshImageAlt = false } = {}) {
   const requested = [];
-  for (const field of refreshTitles ? ['title', ...LOCALE_FIELDS] : LOCALE_FIELDS) {
+  const fieldOrder = [
+    ...(refreshTitles ? ['title'] : []),
+    ...LOCALE_FIELDS,
+    ...(refreshImageAlt ? ['imageAlt'] : []),
+  ];
+  for (const field of fieldOrder) {
     if (!(field in fields)) continue;
     const value = fields[field];
     if (typeof value !== 'string' || value.trim() === '') continue;
@@ -344,6 +349,7 @@ export function upsertSeoDescriptionBlock(src, id, seo, { refreshTitles = false 
  * @param {(file: string, encoding?: string) => string} [opts.readFile] - optional staged reader
  * @param {string} [opts.section] - explicit article section; inferred from metaPrefix otherwise
  * @param {boolean} [opts.refreshTitles] - refresh title/ogTitle/headline from the observed daily snapshot
+ * @param {boolean} [opts.refreshImageAlt] - update localized imageAlt meta only for an explicitly governed cover refresh
  * @param {boolean} [opts.lockHeld] - caller already holds the section refresh lock
  * @returns {{ changed: boolean, touched: string[] }}
  */

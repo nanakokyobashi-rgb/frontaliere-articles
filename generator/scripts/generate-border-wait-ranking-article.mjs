@@ -53,6 +53,7 @@ import {
   buildBodyFile,
 } from './create-article.mjs';
 import { bumpUpdatedAt, bumpDateModified, bumpSitemapLastmod } from './lib/evergreen-article-refresh.mjs';
+import { refreshGovernedArticleCover } from './lib/governed-article-cover-refresh.mjs';
 import { corpusPath } from './lib/corpus-paths.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
@@ -288,6 +289,14 @@ async function main() {
   // no content change (same rationale as generate-events-digest-article.mjs).
   console.log('♻️  refreshing body files (article already registered)…');
   beginExistingArticleRefreshLock(data.id);
+  refreshGovernedArticleCover({
+    repoRoot: REPO_ROOT,
+    articleId: data.id,
+    imagePath: data._generatedImagePath,
+    caption: data.imageAlt?.it || data.seo.headline,
+    section: 'frontaliere',
+    registryFiles: ['data/blog-articles-data.ts'],
+  });
   refreshBodyFiles(data);
   if (!bumpUpdatedAt(data.id, todayIso)) console.warn('⚠️  updatedAt not bumped (entry not matched).');
   if (!bumpDateModified(data.id, `${todayIso}T00:00:00+02:00`)) {
