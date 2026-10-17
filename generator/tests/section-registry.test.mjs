@@ -1569,6 +1569,8 @@ test('load-rc-env: kill-switch mappato, assente per default, marker scritto solo
 
 test('publish-api: osserva tutta la chiusura degli import del publisher, e pubblica la release edge DOPO il deploy Pages, per ultima', () => {
   const wf = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
+  assert.match(wf, /source_commit:\n\s+description: .*replay bootstrap bounded/);
+  assert.match(wf, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
   const filters = [...wf.slice(0, wf.indexOf('\n  schedule:')).matchAll(/^      - '([^']+)'$/gm)].map((m) => m[1]);
   const covered = (file) => filters.some((p) => p === file || (p.endsWith('/**') && file.startsWith(p.slice(0, -2))));
   for (const p of ['sections/**', 'scripts/lib/section-registry.mjs', 'scripts/publish-section-edge.mjs', 'scripts/lib/delete-cdn-file.sh', 'generator/scripts/load-rc-env.mjs']) {

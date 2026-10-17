@@ -149,6 +149,11 @@ on:
         required: false
         default: ''
         type: string
+      source_commit:
+        description: 'Commit esatto del corpus da pubblicare (solo replay bootstrap bounded)'
+        required: false
+        default: ''
+        type: string
 
 # One publish at a time, and never cancel one in flight: a half-written data
 # surface is worse than a slightly stale one.
@@ -207,6 +212,11 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
+          # Un replay post-bootstrap puo' essere dispatchato mentre main si
+          # muove. Il chiamante passa la revisione che ha caricato gli HTML;
+          # senza questo ref il checkout seguirebbe la main corrente e il
+          # registry API potrebbe annunciare una release diversa dalle pagine.
+          ref: ${{ inputs.source_commit || github.sha }}
           # fetch-depth: 0 perche' `github.event.before` deve essere raggiungibile
           # dal passo sotto: senza storia completa il diff sui corpi toccati non
           # si calcola, e lo scoping del preflight deve poter ricadere su

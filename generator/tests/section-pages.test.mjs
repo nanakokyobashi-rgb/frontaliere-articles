@@ -2677,6 +2677,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /remove_stale_canton_rss_feeds/);
   assert.match(wf, /API_RELEASE_COMMIT: \$\{\{ inputs\.api_release_commit \}\}/);
   assert.match(wf, /GITHUB_PAT_NANAKO assente/);
+  assert.match(wf, /Verify bootstrap revision is still main/);
+  assert.match(wf, /BOOTSTRAP_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(wf, /main e' avanzata da \$BOOTSTRAP_COMMIT a \$current_main/);
+  assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$BOOTSTRAP_COMMIT"/);
+  assert.match(wf, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(wf, /replay workflow_run redispatchato prima degli upload/);
   assert.match(wf, /id: push_range[\s\S]*gh api --paginate --slurp "repos\/\$REPO\/commits\/\$WORKFLOW_RUN_HEAD_SHA\/events"/);
   assert.match(wf, /payload\.ref == "refs\/heads\/main"[\s\S]*payload\.head == \$head[\s\S]*payload\.before/);
@@ -2697,14 +2702,18 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /PUSH_AFTER: \$\{\{ needs\.resolve\.outputs\.push_after \}\}/);
   const bootstrapReplay = wf.slice(wf.indexOf('  replay-api-after-bootstrap:'));
   assert.match(bootstrapReplay, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
-  assert.match(bootstrapReplay, /BOOTSTRAP_REVISION: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
-  assert.match(bootstrapReplay, /git fetch --no-tags --depth=1 origin main/);
-  const mainRevisionGuard = bootstrapReplay.indexOf('if [ "$current_main" != "$BOOTSTRAP_REVISION" ]');
-  const apiDispatch = bootstrapReplay.indexOf('gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main');
+  assert.match(bootstrapReplay, /BOOTSTRAP_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  const replayDispatchStep = bootstrapReplay.slice(
+    bootstrapReplay.indexOf('- name: Replay publish-api after bootstrap lock release'),
+  );
+  assert.match(replayDispatchStep, /git fetch --no-tags --depth=1 origin main/);
+  const mainRevisionGuard = replayDispatchStep.indexOf('if [ "$current_main" != "$BOOTSTRAP_COMMIT" ]');
+  const apiDispatch = replayDispatchStep.indexOf('gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main');
   assert.ok(
     mainRevisionGuard >= 0 && apiDispatch > mainRevisionGuard,
     'il replay API deve saltare il dispatch se main e\' avanzata dal bootstrap',
   );
+  assert.match(replayDispatchStep, /-f source_commit="\$BOOTSTRAP_COMMIT"/);
   assert.match(wf, /push_before:/);
   assert.match(wf, /push_after:/);
   assert.doesNotMatch(wf, /git rev-parse HEAD\^/);
