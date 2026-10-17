@@ -381,6 +381,20 @@ test('pageTitleEvidence esclude i metadata e i title dei head annidati nel body'
   assert.deepEqual(pageTitleEvidence(html).split('\n'), ['META_REALE', 'TITLE_REALE', 'H1_REALE']);
 });
 
+test('pageTitleEvidence ignora DOCTYPE e prologo XML prima dell’head documentale', () => {
+  const declarations = ['<!doctype html>', '<?xml version="1.0"?>'];
+  for (const declaration of declarations) {
+    const html = declaration + '<html><head>'
+      + '<meta property="og:title" content="TITLE_DOCUMENTALE">'
+      + '<title>TITLE_DOCUMENTALE</title></head><body><h1>H1_DOCUMENTALE</h1></body></html>';
+    assert.deepEqual(
+      pageTitleEvidence(html).split('\n'),
+      ['TITLE_DOCUMENTALE', 'TITLE_DOCUMENTALE', 'H1_DOCUMENTALE'],
+      `${declaration} non deve spostare l’head nel body`,
+    );
+  }
+});
+
 test('pageTitleEvidence chiude il percorso su un tag non terminato', () => {
   const malformed = '<meta data="<title>Titolo falso</title>';
   assert.equal(pageTitleEvidence(malformed), '', 'un titolo dopo il tag malformato non e\' evidenza attiva');

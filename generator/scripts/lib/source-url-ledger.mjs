@@ -423,6 +423,33 @@ function maskSkipComment(html, start) {
   return end < 0 ? -1 : end + 3;
 }
 
+function maskSkipDocumentDeclaration(html, start) {
+  if (/^<!doctype(?:\s|>)/iu.test(html.slice(start))) {
+    let quote = '';
+    let subsetDepth = 0;
+    for (let index = start + 9; index < html.length; index += 1) {
+      const char = html[index];
+      if (quote) {
+        if (char === quote) quote = '';
+      } else if (char === '"' || char === "'") {
+        quote = char;
+      } else if (char === '[') {
+        subsetDepth += 1;
+      } else if (char === ']') {
+        subsetDepth = Math.max(0, subsetDepth - 1);
+      } else if (char === '>' && subsetDepth === 0) {
+        return index + 1;
+      }
+    }
+    return -1;
+  }
+  if (/^<\?xml(?:\s|\?|>)/iu.test(html.slice(start))) {
+    const end = html.indexOf('?>', start + 5);
+    return end < 0 ? -1 : end + 2;
+  }
+  return null;
+}
+
 function maskSkipRawText(html, afterOpening, name) {
   const closing = maskFindRawTextClose(html, afterOpening, name);
   return closing ? closing.end : -1;
@@ -595,6 +622,15 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
       blank(start, afterComment < 0 ? source.length : afterComment);
       if (afterComment < 0) break;
       cursor = afterComment;
+      continue;
+    }
+    const declarationEnd = maskSkipDocumentDeclaration(source, start);
+    if (declarationEnd !== null) {
+      if (declarationEnd < 0) {
+        blank(start, source.length);
+        break;
+      }
+      cursor = declarationEnd;
       continue;
     }
     const tag = maskReadTag(source, start);

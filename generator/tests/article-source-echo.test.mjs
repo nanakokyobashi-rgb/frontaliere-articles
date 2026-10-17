@@ -402,6 +402,41 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
   });
 
+  it('rimuove dalla radice editoriale ogni JSON-LD dopo un head annidato nel body', () => {
+    const articleJsonLd = (label) => '<script type="application/ld+json">'
+      + `{"headline":"${label}","articleBody":"${label}"}</script>`;
+    const page = '<html><head><title>Fonte</title></head><body><article>'
+      + articleJsonLd('ARTICLE_JSONLD_BEFORE_INVALID_HEAD')
+      + '<head><title>Sidebar</title></head>'
+      + articleJsonLd('ARTICLE_JSONLD_AFTER_INVALID_HEAD')
+      + ARTICLE_PROSE + '</article></body></html>';
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.equal(res.html.includes('application/ld+json'), false);
+    assert.equal(res.html.includes('ARTICLE_JSONLD_BEFORE_INVALID_HEAD'), false);
+    assert.equal(res.html.includes('ARTICLE_JSONLD_AFTER_INVALID_HEAD'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('non raccoglie JSON-LD dal namespace SVG, MathML o dai loro integration point', () => {
+    const script = (label) => '<script type="application/ld+json">'
+      + `{"headline":"${label}"}</script>`;
+    const foreignContexts = [
+      `<svg>${script('SVG_JSONLD_INACTIVE')}</svg>`,
+      `<svg><foreignObject>${script('FOREIGN_OBJECT_JSONLD_INACTIVE')}</foreignObject></svg>`,
+      `<math><annotation-xml encoding="text/html">${script('MATHML_JSONLD_INACTIVE')}</annotation-xml></math>`,
+    ];
+    for (const context of foreignContexts) {
+      const page = '<html><head></head><body>' + context
+        + `<article>${ARTICLE_PROSE}</article></body></html>`;
+      const res = isolateMainSourceHtml(page);
+      assert.equal(res.isolated, true);
+      assert.equal(res.html.includes('JSONLD_INACTIVE'), false, context);
+      assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+    }
+  });
+
   it('non lascia uscire un article da un noscript dentro un template', () => {
     const templateAttack = '<html><body><template><noscript>literal </template>'
       + `<article>${ARTICLE_PROSE.replace(/Paragrafo/g, 'TEMPLATE_ATTACK')}</article>`

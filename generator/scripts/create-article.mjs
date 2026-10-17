@@ -8428,6 +8428,27 @@ function sourceRemoveInactiveSubtrees(html) {
   return cleaned;
 }
 
+function sourceRemoveJsonLdScripts(html) {
+  const src = String(html || '');
+  const removals = [];
+  const scan = sourceScanStructure(src, {
+    onStart: ({ tag, start, rawText, rawTextEnd }) => {
+      if (
+        tag.name === 'script' &&
+        sourceTagAttribute(src, tag, 'type').trim().toLowerCase() === 'application/ld+json' &&
+        rawText
+      ) removals.push([start, rawTextEnd]);
+    },
+  });
+
+  if (scan.malformed) return null;
+  let cleaned = src;
+  for (const [start, end] of removals.sort((a, b) => b[0] - a[0])) {
+    cleaned = cleaned.slice(0, start) + cleaned.slice(end);
+  }
+  return cleaned;
+}
+
 function sourceRemoveHeadNoscript(html) {
   const src = String(html || '');
   if (!src) return src;
@@ -8464,6 +8485,7 @@ function findActiveSourceHead(html) {
   let headState = null;
   let trustedHead = null;
   let bodyState = null;
+  let bodyJsonLdInvalid = false;
   const ldBlocks = [];
   const afterHeadExtensions = [];
 
@@ -8601,6 +8623,7 @@ function findActiveSourceHead(html) {
         // or after it could be stale even though scanning reaches EOF cleanly.
         if (nestedHeadInsideTrustedBody) {
           bodyState.trusted = false;
+          bodyJsonLdInvalid = true;
           ldBlocks.length = 0;
         }
         implicitHead = false;
@@ -8680,6 +8703,8 @@ function findActiveSourceHead(html) {
         rawText &&
         tag.name === 'script' &&
         sourceTagAttribute(html, tag, 'type').trim().toLowerCase() === 'application/ld+json' &&
+        namespace === 'html' &&
+        !stack.some((ancestor) => ancestor.namespace === 'svg' || ancestor.namespace === 'mathml') &&
         documentLevel &&
         ((bodyState?.trusted && bodyState.entry && stack.some((ancestor) => ancestor === bodyState.entry)) || (
           implicitHead &&
@@ -8732,6 +8757,7 @@ function findActiveSourceHead(html) {
     malformed: !trustedDocument,
     documentLevel: trustedDocument,
     trustedDocument: trustedDocument || (!hasDocumentScaffold && !scan.malformed),
+    bodyJsonLdInvalid,
     ldBlocks: trustedDocument ? ldBlocks : [],
     afterHeadExtensions: trustedDocument ? afterHeadExtensions : [],
   };
@@ -8795,8 +8821,15 @@ export function isolateMainSourceHtml(html) {
   // `<article>` prima di `<main>`: su una pagina di articolo singolo il primo
   // e' il pezzo, il secondo di solito lo contiene INSIEME ai commenti — che e'
   // esattamente il testo che si sta cercando di non consegnare.
-  const article = sourceRemoveInactiveSubtrees(extractOutermostTagBlock(src, 'article'));
-  const main = sourceRemoveInactiveSubtrees(extractOutermostTagBlock(src, 'main'));
+  let article = sourceRemoveInactiveSubtrees(extractOutermostTagBlock(src, 'article'));
+  let main = sourceRemoveInactiveSubtrees(extractOutermostTagBlock(src, 'main'));
+  if (headScan.bodyJsonLdInvalid) {
+    article = sourceRemoveJsonLdScripts(article);
+    main = sourceRemoveJsonLdScripts(main);
+    if (article === null || main === null) {
+      return { html: '', root: 'none', isolated: false, trustedDocument: false };
+    }
+  }
 
   let chosen = '';
   let root = 'none';
@@ -8807,7 +8840,11 @@ export function isolateMainSourceHtml(html) {
     chosen = main;
     root = 'main';
   }
-  if (!chosen) return { html: src, root: 'none', isolated: false, trustedDocument: true };
+  if (!chosen) {
+    return headScan.bodyJsonLdInvalid
+      ? { html: '', root: 'none', isolated: false, trustedDocument: false }
+      : { html: src, root: 'none', isolated: false, trustedDocument: true };
+  }
 
   let head = '';
   if (headScan.bounds) {
