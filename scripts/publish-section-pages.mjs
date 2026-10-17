@@ -2086,8 +2086,13 @@ export async function main(
         'blocco la pubblicazione finché la superficie precedente non è dimostrata',
       );
     } else {
-      cantonRssFeeds = effectiveStatus === 'live' && !cleanupRssRequested ? cantonRssFeedEntries(section) : [];
-      removeStaleCantonRssFeeds = cleanupRssRequested;
+      // The API manifest can be ahead of the edge registry while publish-api
+      // is still waiting for these pages. The first pass must therefore upload
+      // HTML without starting the RSS phase; the workflow_run replay after the
+      // edge flip publishes feeds and performs any stale-feed cleanup.
+      console.log(`::notice::[${LOG}] release API/edge non pronta: RSS e cleanup differiti al replay workflow_run`);
+      cantonRssFeeds = [];
+      removeStaleCantonRssFeeds = false;
     }
   }
 

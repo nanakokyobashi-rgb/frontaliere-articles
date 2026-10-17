@@ -341,6 +341,84 @@ test('publisher: lo staging bootstrap live carica solo chiavi HTML nuove e snaps
   }
 });
 
+test('publisher: differisce RSS e cleanup finche la release API/edge non e pronta', async () => {
+  const publisherCommit = execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  const runCase = async (extraArgs) => {
+    const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-rss-deferred-'));
+    const publishedDoc = pageManifestFromPages({ section: 'canton-ti', commit: 'published', pages: [] });
+    let planned = null;
+    let rssCalls = 0;
+    try {
+      const code = await main(
+        [
+          '--section', 'canton-ti',
+          '--ids', '[]',
+          '--out', path.join(fixtureRoot, 'dist'),
+          '--summary', path.join(fixtureRoot, 'summary.json'),
+          '--publish',
+          ...extraArgs,
+        ],
+        {
+          parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
+          fetchPageManifestImpl: async () => ({ state: 'ok', doc: publishedDoc }),
+          publishedStatusImpl: async () => 'live',
+          publishedApiReleaseCommitImpl: async () => publisherCommit,
+          publishedReleaseReadyImpl: async () => ({ ok: false, reason: 'edge in transizione' }),
+          currentMainHeadImpl: () => publisherCommit,
+          createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
+          renderSectionArticlePipelineImpl: async () => ({
+            entries: [],
+            hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
+            downloadedImageKeys: [],
+            imageFetchFailures: [],
+            imagePostcondition: {},
+            aggregatePagesAllowed: true,
+          }),
+          articleReleaseSnapshotImpl: () => [],
+          publishImpl: async (options) => {
+            planned = {
+              feeds: options.cantonRssFeeds,
+              cleanup: options.removeStaleCantonRssFeeds,
+            };
+            return publish({
+              ...options,
+              publishedStatusImpl: async () => 'live',
+              runImpl: () => ({ code: 0, stdout: '✅ uploaded' }),
+              publishCantonRssFeedsImpl: async () => {
+                rssCalls++;
+                return { failures: 0, uploaded: 0, verified: 0, feeds: [] };
+              },
+            });
+          },
+          publishPageManifestImpl: () => true,
+        },
+      );
+      return { code, planned, rssCalls };
+    } finally {
+      rmSync(fixtureRoot, { recursive: true, force: true });
+    }
+  };
+
+  try {
+    console.log = () => {};
+    console.error = () => {};
+    const regular = await runCase([]);
+    const cleanup = await runCase(['--remove-stale-canton-rss-feeds']);
+    assert.equal(regular.code, 0);
+    assert.equal(cleanup.code, 0);
+    assert.deepEqual(regular.planned, { feeds: [], cleanup: false });
+    assert.deepEqual(cleanup.planned, { feeds: [], cleanup: false });
+    assert.equal(regular.rssCalls, 0);
+    assert.equal(cleanup.rssCalls, 0);
+  } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+  }
+});
+
+
 test('publisher: il fallback API copre l\'ultimo input raggiungibile dal publisher', async () => {
   const publisherCommit = 'a'.repeat(40);
   const apiCommit = 'b'.repeat(40);
