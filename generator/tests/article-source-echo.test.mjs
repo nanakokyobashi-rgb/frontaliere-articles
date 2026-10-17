@@ -201,6 +201,22 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     }
     assert.ok(visibleTextLength('<p>ciao</p>') > 0);
   });
+
+  it('abbandona un head malformato senza riesaminare ogni tag fino a fondo pagina', () => {
+    // Ogni `<x ` ha un attributo apparente e condivide una virgoletta non
+    // chiusa in fondo: il vecchio scanner rifaceva la ricerca di `>` per ogni
+    // apertura, bloccando l’event loop su una risposta ancora piccola.
+    const malformedHead = '<html><head><meta data='
+      + '<x '.repeat(16000)
+      + '"</head><body><article>' + ARTICLE_PROSE + '</article></body></html>';
+    const started = performance.now();
+    const res = isolateMainSourceHtml(malformedHead);
+    const elapsed = performance.now() - started;
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+    assert.ok(elapsed < 250, `scanner sorgente troppo lento su markup malformato: ${elapsed.toFixed(1)}ms`);
+  });
 });
 
 // ── 2. WIRING ──────────────────────────────────────────────────────────────

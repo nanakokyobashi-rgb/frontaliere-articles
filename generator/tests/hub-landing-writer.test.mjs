@@ -177,3 +177,13 @@ test('the metadata patch scans one real head and leaves inactive/body metadata a
   assert.ok(patched.includes('<meta data-name="description" data-content="' + staleDescription + '">'));
   assert.ok(patched.includes('<body><meta name="description" content="' + staleDescription + '"></body>'));
 });
+
+test('the metadata patch fails closed on an unterminated tag without quadratic scanning', () => {
+  const malformed = '<html><head><meta data='
+    + '<x '.repeat(16000)
+    + '"</head><body></body></html>';
+  const started = performance.now();
+  assert.equal(patchHubLandingMetadata(malformed, 'svizzera', 'it'), malformed);
+  const elapsed = performance.now() - started;
+  assert.ok(elapsed < 250, `hub scanner troppo lento su markup malformato: ${elapsed.toFixed(1)}ms`);
+});
