@@ -210,6 +210,27 @@ test('writer e gate riconoscono anchor con il confine `<a\\b` usato dal renderer
   );
 });
 
+test('writer e gate riconoscono gli alias href accettati dal matcher del renderer', () => {
+  const source = '<a data-href="bare">Data</a> '
+    + '<a aria-href="relative/path">Aria</a> '
+    + '<a data-href="/en/legal">Canonico</a>';
+  assert.equal(
+    sanitizeArticleMarkdownLinks(source, 'it'),
+    '<a>Data</a> <a>Aria</a> <a data-href="/en/legal">Canonico</a>',
+  );
+  assert.deepEqual(
+    findNonCanonicalArticleLinks(source, 'it').map(({ target, replacement, htmlAnchor }) => ({
+      target,
+      replacement,
+      htmlAnchor,
+    })),
+    [
+      { target: 'bare', replacement: null, htmlAnchor: true },
+      { target: 'relative/path', replacement: null, htmlAnchor: true },
+    ],
+  );
+});
+
 test('writer e gate attraversano le righe vuote in una label quando è dentro un fence', () => {
   const fenced = '~~~markdown\n[x\n\n](bare)\n~~~';
   assert.deepEqual(

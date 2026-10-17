@@ -283,7 +283,9 @@ function parseHtmlAnchor(source, start) {
       cursor = nameEnd;
     }
 
-    if (attributeName === 'href') {
+    // The renderer uses `/\bhref\s*=/` inside the full attribute text, so
+    // names such as `data-href` and `aria-href` are active there as well.
+    if (/(?:^|\W)href$/u.test(attributeName)) {
       hrefAttributes.push({
         target: source.slice(targetStart, targetEnd),
         targetStart,
