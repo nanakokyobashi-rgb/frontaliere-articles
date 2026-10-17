@@ -1,5 +1,6 @@
 import { editorialHeadlineGuidance } from '../scripts/lib/editorial-headline-guidance.mjs';
 import { enrichArticleInternalLinks } from '../scripts/lib/contextual-article-links.mjs';
+import { sanitizeArticleMarkdownLinks } from '../../scripts/lib/article-link-contract.mjs';
 /**
  * translate-article-truncation-fallback.test.mjs — un fallback IT vuoto non
  * deve sovrascrivere un body tradotto troncato-ma-presente (#686).
@@ -957,6 +958,7 @@ async function runPostTranslationToBodyFiles(data, url) {
     'enrichArticleInternalLinks', 'bodyTextForQuality', 'pickDefaultCTA', 'CTA_KEYWORDS_IT', 'CTA_KEYWORDS_EN', 'CTA_KEYWORDS_DE', 'CTA_KEYWORDS_FR',
     'decodeHtmlEntities', 'normalizeLocalizedToponymText', 'META_SEO_FIELDS', 'escapeForSingleQuoteTS', 'MAX_BODY_KEYS',
     'evaluateSourceCopy', 'logSourceCopyVerdict', 'SOURCE_COPY_OVERLAP_THRESHOLD', 'SourceCopyError', 'sourceCopyRetries', 'sourceCopyMode', 'repairGeneratedArticleSourceCopy', 'appendSourceCitation',
+    'sanitizeArticleMarkdownLinks',
     `${COLLECT_BODY_SECTIONS_SRC}\n${BOLD_SRC}\n${LINKS_SRC}\n${CTA_SRC}\n${DECODE_ENTITIES_SRC}\n${BUILD_BODY_FILE_SRC}\n${SOURCE_COPY_INPUT_SRC}\n`
     + `${STEP_3C_SRC}\nvalidateAndEnforceCTA(data);\nenforceStrongInternalLinks(data);\n${STEP_3E_SRC}\n`
     + "const out = {};\nfor (const locale of ['it', 'en', 'de', 'fr']) { decodeLocaleContentEntities(data, locale); out[locale] = buildBodyFile(data, locale); }\nreturn out;",
@@ -974,6 +976,7 @@ async function runPostTranslationToBodyFiles(data, url) {
       rejected: false,
     }),
     () => {},
+    sanitizeArticleMarkdownLinks,
   );
 }
 
@@ -1032,7 +1035,7 @@ test('#1875 end-to-end: la chiave in attesa resta ASSENTE nel file di body emess
 test('#1875: il sanitizer dei body di validate() non ricrea una chiave assente (niente body vuoto)', () => {
   const block = sliceBetween('  // ── Validate internal links in body content ──', '\n  // Coerce all seo fields to strings');
   const fn = new Function(
-    'data', 'expectedBodyFields', 'stripFabricatedExamples', 'stripCompetitorPromotion', 'sanitizeNavLinkSemantics', 'console',
+    'data', 'expectedBodyFields', 'stripFabricatedExamples', 'stripCompetitorPromotion', 'sanitizeNavLinkSemantics', 'console', 'sanitizeArticleMarkdownLinks',
     `${block}\nreturn data;`,
   );
   const passThrough = (text) => ({ text, removedSections: 0, removed: 0, stripped: 0, examples: [] });
@@ -1045,7 +1048,15 @@ test('#1875: il sanitizer dei body di validate() non ricrea una chiave assente (
   };
   markBodyTranslationPending(data, { locale: 'fr', field: 'body1', reason: 'retry-error' });
 
-  fn(data, ['body1', 'body2', 'body3'], passThrough, passThrough, passThrough, { error: () => {}, warn: () => {} });
+  fn(
+    data,
+    ['body1', 'body2', 'body3'],
+    passThrough,
+    passThrough,
+    passThrough,
+    { error: () => {}, warn: () => {} },
+    sanitizeArticleMarkdownLinks,
+  );
 
   assert.equal(Object.hasOwn(data.content.fr, 'body1'), false, 'la chiave in attesa non diventa un body vuoto');
   assert.equal(data.content.fr.body2, 'Deux lien.', 'i body presenti sono ancora sanitizzati (link nav invalido rimosso)');
