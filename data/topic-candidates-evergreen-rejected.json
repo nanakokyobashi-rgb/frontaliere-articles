@@ -9093,10 +9093,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/il-cantiere-della-nuova-superstrada-pedemontana-malpensa-sono-ancora-fermi-sbloccati-i-pagamenti/2709238": {
-      "section": "frontaliere",
-      "ts": 1792078558980
-    },
     "frontaliere::https://www.tio.ch/rubriche/ospite/1957045/energia-infrastrutture-data-center-puo-produzione-ated-ticino-sostenibilita-ticinesi": {
       "section": "frontaliere",
       "ts": 1792083114007
@@ -9444,6 +9440,14 @@
     "frontaliere::https://www.vconews.it/2026/10/17/leggi-notizia/argomenti/economia-e-lavoro-9/articolo/plastipak-a-verbania-il-futuro-del-riciclo-il-nostro-obiettivo-e-ridurre-limpatto-ambientale.html": {
       "section": "frontaliere",
       "ts": 1792250634913
+    },
+    "frontaliere::https://www.rsi.ch/s/4171186": {
+      "section": "frontaliere",
+      "ts": 1792252614985
+    },
+    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/manifestazione-antifascista-nelle-strade-di-lugano--4171186.html": {
+      "section": "frontaliere",
+      "ts": 1792252621553
     }
   }
 }

@@ -8453,6 +8453,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ps-iniziativa-violenza-genero.title': 'PS launches initiative against gender-based violence in Thun',
     'blog.article.ps-iniziativa-violenza-genero.excerpt': 'The SP launches an initiative on gender-based violence in Thun The delegates unanimously approve the project At least 500 million additional francs requested',
     'blog.article.ps-iniziativa-violenza-genero.imageAlt': 'PS initiative against gender-based violence launched in Thun, calling for an extra 500 million francs per year.',
+    'blog.article.big-tech-franchi-bolla-ia.title': 'Big Tech issue franc-denominated bonds for data centers',
+    'blog.article.big-tech-franchi-bolla-ia.excerpt': 'U.S. tech giants issue Swiss franc bonds to finance data centers.',
+    'blog.article.big-tech-franchi-bolla-ia.imageAlt': 'Swiss urban skyline with offices and technology infrastructure linked to finance.',
 };
 
 export default blogMetaChEn;

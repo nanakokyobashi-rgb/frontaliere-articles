@@ -8453,6 +8453,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ps-iniziativa-violenza-genero.title': 'PS lancia iniziativa contro la violenza di genere a Thun',
     'blog.article.ps-iniziativa-violenza-genero.excerpt': 'Il PS lancia a Thun un\'iniziativa sulla violenza di genere I delegati approvano il progetto all\'unanimità Chiesti almeno 500 milioni di franchi supplementari',
     'blog.article.ps-iniziativa-violenza-genero.imageAlt': 'Iniziativa PS contro la violenza di genere a Thun, richiesta di 500 milioni di franchi supplementari all\'anno.',
+    'blog.article.big-tech-franchi-bolla-ia.title': 'Big Tech emettono obbligazioni in franchi per data center',
+    'blog.article.big-tech-franchi-bolla-ia.excerpt': 'I giganti tecnologici Usa emettono obbligazioni in franchi svizzeri per finanziare data center.',
+    'blog.article.big-tech-franchi-bolla-ia.imageAlt': 'Vista urbana svizzera con uffici e infrastrutture tecnologiche legate alla finanza.',
 };
 
 export default blogMetaChIt;

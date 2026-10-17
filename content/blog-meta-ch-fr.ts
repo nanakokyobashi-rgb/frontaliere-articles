@@ -8453,6 +8453,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.ps-iniziativa-violenza-genero.title': 'Le PS lance une initiative contre la violence de genre à Thun',
     'blog.article.ps-iniziativa-violenza-genero.excerpt': 'Le PS lance à Thun une initiative sur la violence de genre Les délégués approuvent le projet à l\'unanimité Au moins 500 millions de francs supplémentaires demandés',
     'blog.article.ps-iniziativa-violenza-genero.imageAlt': 'Initiative du PS contre la violence de genere lancée à Thun, réclamant 500 millions de francs supplémentaires par an.',
+    'blog.article.big-tech-franchi-bolla-ia.title': 'Les Big Tech émettent des obligations en francs pour les centres de données',
+    'blog.article.big-tech-franchi-bolla-ia.excerpt': 'Les géants technologiques américains émettent des obligations en francs suisses pour financer des centres de données.',
+    'blog.article.big-tech-franchi-bolla-ia.imageAlt': 'Vue urbaine suisse avec bureaux et infrastructures technologiques liées à la finance.',
 };
 
 export default blogMetaChFr;
