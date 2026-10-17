@@ -425,8 +425,19 @@ export function canonicalArticleLinkTarget(rawTarget, locale = 'it') {
   if (navAction) return VALID_NAV_ACTIONS.has(navAction[1]) ? target : null;
 
   // Mail links and HTTP(S) links are supported by the article renderer.
+  // Require a parseable HTTP(S) URL with a host: the renderer rejects values
+  // like `https://`, which otherwise look canonical but become plain text.
+  if (/^https?:\/\//i.test(target)) {
+    try {
+      const url = new URL(target);
+      if (['http:', 'https:'].includes(url.protocol) && url.hostname) return target;
+    } catch {
+      return null;
+    }
+    return null;
+  }
   // `tel:` is intentionally stripped: the site renderer does not preserve it.
-  if (/^(?:https?:\/\/|mailto:)/i.test(target)) return target;
+  if (/^mailto:/i.test(target)) return target;
 
   // Root-relative and fragment links are already anchored to the public site
   // rather than to the article directory. Protocol-relative URLs are denied.

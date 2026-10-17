@@ -23,6 +23,8 @@ test('il contratto ripara solo le destinazioni legacy con una mappatura pubblica
   assert.equal(canonicalArticleLinkTarget('nav:unknown-action'), null);
   assert.equal(canonicalArticleLinkTarget('tel:+41123456789'), null);
   assert.equal(canonicalArticleLinkTarget('discovery://orphan/example'), null);
+  assert.equal(canonicalArticleLinkTarget('https://'), null);
+  assert.equal(canonicalArticleLinkTarget('http://?missing-host'), null);
   assert.equal(canonicalArticleLinkTarget('link al calcolatore'), null);
 });
 
@@ -32,10 +34,11 @@ test('la sanitizzazione conserva il testo e non indovina URL sconosciute', () =>
     '[Costo della vita](calculator:cost-of-living)',
     '[Statistiche](statistiche/)',
     '[Affitti](border:rental)',
+    '[Link senza host](https://)',
   ].join(' ');
   assert.equal(
     sanitizeArticleMarkdownLinks(source, 'it'),
-    '[Calcolatore](nav:calculator) [Costo della vita](nav:cost-of-living) [Statistiche](/statistiche/) Affitti',
+    '[Calcolatore](nav:calculator) [Costo della vita](nav:cost-of-living) [Statistiche](/statistiche/) Affitti Link senza host',
   );
 });
 
@@ -117,6 +120,22 @@ test('il gate decodifica i body TypeScript e copre tutte le radici attive senza 
     assert.equal(full.files.length, BLOG_BODY_ROOTS.length);
     assert.equal(full.offenders.length, BLOG_BODY_ROOTS.length * 5);
     assert.deepEqual(full.errors, []);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('il gate rifiuta espressioni concatenate dopo un literal invece di saltarle', () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'article-body-link-expression-'));
+  const relative = `${BLOG_BODY_ROOTS[0]}/it/concatenated.ts`;
+  const file = path.join(fixtureRoot, relative);
+  mkdirSync(path.dirname(file), { recursive: true });
+  writeFileSync(file, "const body = { 'blog.article.fixture.body1': 'safe' + '[x](https://example.com)' };\n", 'utf8');
+  try {
+    const result = scanBlogBodyLinks(fixtureRoot);
+    assert.deepEqual(result.offenders, []);
+    assert.equal(result.errors.length, 1);
+    assert.match(result.errors[0].message, /espressione TypeScript non letterale non verificabile/);
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }

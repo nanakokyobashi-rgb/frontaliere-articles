@@ -191,6 +191,11 @@ function extractArticleBodyValues(source) {
               throw new Error('template TypeScript dinamico non verificabile per blog.article.'
                 + keyMatch[1] + '.' + keyMatch[2]);
             }
+            const valueEnd = skipTriviaAndComments(source, literal.end);
+            if (![',', '}'].includes(source[valueEnd])) {
+              throw new Error('espressione TypeScript non letterale non verificabile per blog.article.'
+                + keyMatch[1] + '.' + keyMatch[2]);
+            }
             values.push({
               field: 'blog.article.' + keyMatch[1] + '.' + keyMatch[2],
               markdown: decodeBodyValue(literal.raw, valueQuote),
