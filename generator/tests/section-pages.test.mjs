@@ -231,6 +231,13 @@ test('publisher: il fallback API copre l\'ultimo input raggiungibile dal publish
   );
   await assert.rejects(
     resolvePublishedReleaseCommit(publisherCommit, {
+      apiReleaseCommitImpl: async () => null,
+    }),
+    /commit API pubblicato assente o non verificabile/,
+    'un manifest API illeggibile non puo\' inventare la provenienza della HEAD del publisher',
+  );
+  await assert.rejects(
+    resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: async () => apiCommit,
       latestApiInputCommitImpl: async () => null,
       isAncestorImpl: async () => false,
@@ -2338,6 +2345,13 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /-f source_commit="\$current_main"/);
   assert.match(wf, /source_commit richiede una SHA completa/);
   assert.match(wf, /source_main_commit e' obbligatorio e richiede una SHA completa quando source_commit e' valorizzato/);
+  assert.match(wf, /if \[ "\$SOURCE_COMMIT_INPUT" != "\$SOURCE_MAIN_COMMIT_INPUT" \]/);
+  assert.match(wf, /if \[ "\$SOURCE_COMMIT" != "\$SOURCE_MAIN_COMMIT" \]/);
+  assert.equal(
+    (wf.match(/source_commit deve coincidere con source_main_commit nel replay bounded/g) ?? []).length,
+    2,
+    'resolve e publish devono rifiutare un checkout diverso dalla HEAD certificata',
+  );
   assert.match(wf, /checkout non coincide con source_commit/);
   assert.match(wf, /inputs\.source_commit/);
   assert.match(wf, /source_main_commit:/);

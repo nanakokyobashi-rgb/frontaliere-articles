@@ -1046,7 +1046,8 @@ export function resolveStaleReplayApiReleaseCommit(
  * HEAD nel manifest anche quando l'ultimo file API e' un commit precedente.
  * Un replay bounded puo' propagare il commit della release osservata: viene
  * verificato contro il manifest HTTP e non riclassificato rispetto ai commit
- * bookkeeping successivi.
+ * bookkeeping successivi. Un manifest assente o illeggibile non e' una
+ * provenienza: il publisher resta bloccato invece di inventare la HEAD locale.
  */
 export async function resolvePublishedReleaseCommit(
   publisherCommit,
@@ -1070,7 +1071,10 @@ export async function resolvePublishedReleaseCommit(
   if (override && apiCommit !== override) {
     throw new Error(`commit API osservato ${apiCommit ?? 'assente'} diverso da quello propagato ${override}`);
   }
-  if (typeof apiCommit !== 'string' || !apiCommit.trim() || apiCommit.trim() === publisherCommit) return publisherCommit;
+  if (typeof apiCommit !== 'string' || !apiCommit.trim()) {
+    throw new Error('commit API pubblicato assente o non verificabile; pubblicazione interrotta');
+  }
+  if (apiCommit.trim() === publisherCommit) return publisherCommit;
   const publishedCommit = apiCommit.trim();
   let isAncestor = false;
   try {

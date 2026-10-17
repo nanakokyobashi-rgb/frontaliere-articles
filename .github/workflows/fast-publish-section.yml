@@ -223,6 +223,10 @@ jobs:
                 echo "::error::source_main_commit e' obbligatorio e richiede una SHA completa quando source_commit e' valorizzato"
                 exit 1
               fi
+              if [ "$SOURCE_COMMIT_INPUT" != "$SOURCE_MAIN_COMMIT_INPUT" ]; then
+                echo "::error::source_commit deve coincidere con source_main_commit nel replay bounded"
+                exit 1
+              fi
               if [ "$(git rev-parse HEAD)" != "$SOURCE_COMMIT_INPUT" ]; then
                 echo "::error::checkout non coincide con source_commit"
                 exit 1
@@ -605,6 +609,10 @@ jobs:
             fi
             if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
               echo "::error::source_commit richiede una SHA completa"
+              exit 1
+            fi
+            if [ "$SOURCE_COMMIT" != "$SOURCE_MAIN_COMMIT" ]; then
+              echo "::error::source_commit deve coincidere con source_main_commit nel replay bounded"
               exit 1
             fi
             if [ "$(git rev-parse HEAD)" != "$SOURCE_COMMIT" ]; then
