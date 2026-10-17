@@ -27,9 +27,16 @@ import { imageRecordForPath } from '../scripts/lib/blog-image-registry.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const BERNA_COVER = '/images/blog/article-contributi-formazione-berna-requisiti.webp';
 const BERNA_SHA256 = 'a06ebb2026a70ff9d90e0919094c3ac1e5b3f29d5aedde2a8f23d43223918960';
+// Il registro supera già 1 MiB: il default di execFileSync lo tronca prima
+// che il gate possa leggere i record e produce un falso fallimento ENOBUFS.
+const GIT_OUTPUT_MAX_BYTES = 16 * 1024 * 1024;
 
 function gitText(args) {
-  return execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' }).trim();
+  return execFileSync('git', args, {
+    cwd: ROOT,
+    encoding: 'utf8',
+    maxBuffer: GIT_OUTPUT_MAX_BYTES,
+  }).trim();
 }
 
 function pullRequestBase() {
