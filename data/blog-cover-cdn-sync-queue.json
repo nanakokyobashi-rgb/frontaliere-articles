@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-udc-assemblea-bulle-2026.webp",
-      "sha256": "b481a2c48b1bf716105c9d56b1d2199987ce57512fd7c8d81b77958fe071db9b"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-udc-assemblea-bulle-2026-480w.webp",
-      "sha256": "4ac30aeac71bbd85bc79f2a0198b23a6d9aa6915a3094085322d87c005ebf98e"
-    }
-  ]
+  "items": []
 }
