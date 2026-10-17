@@ -201,7 +201,7 @@ function readTag(html, start) {
   const boundary = html[i] ?? '';
   if (boundary && !isHtmlWhitespace(boundary) && boundary !== '/' && boundary !== '>') return null;
   const end = findTagEnd(html, start);
-  if (end < 0) return null;
+  if (end < 0) return { malformed: true };
   return {
     closing,
     end,
@@ -268,6 +268,7 @@ function findRawTextClose(html, afterOpening, name) {
     const start = html.indexOf('<', searchFrom);
     if (start < 0) return null;
     const tag = readTag(html, start);
+    if (tag?.malformed) return null;
     if (tag && tag.closing && isTagNamed(html, tag, name)) {
       return { start, end: tag.end + 1 };
     }
@@ -293,6 +294,7 @@ function skipTemplateElement(html, afterOpening) {
       continue;
     }
     const tag = readTag(html, start);
+    if (tag?.malformed) return html.length;
     if (!tag) {
       searchFrom = start + 1;
       continue;
@@ -338,6 +340,7 @@ function findCharsetMetaEnd(headContent) {
       continue;
     }
     const tag = readTag(headContent, start);
+    if (tag?.malformed) return -1;
     if (!tag) {
       searchFrom = start + 1;
       continue;
@@ -381,6 +384,7 @@ function findActiveHeadContent(html) {
       continue;
     }
     const tag = readTag(html, start);
+    if (tag?.malformed) return null;
     if (!tag) {
       searchFrom = start + 1;
       continue;
@@ -413,6 +417,7 @@ function findActiveHeadContent(html) {
           continue;
         }
         const nested = readTag(html, nestedStart);
+        if (nested?.malformed) return null;
         if (!nested) {
           cursor = nestedStart + 1;
           continue;
@@ -483,6 +488,7 @@ function hasExecutableCdnBaseMarker(html, head) {
       continue;
     }
     const tag = readTag(html, start);
+    if (tag?.malformed) return false;
     if (!tag) {
       cursor = start + 1;
       continue;
