@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-ps-iniziativa-violenza-genero.webp",
-      "sha256": "5f50853ebc8e64b04860f09ead5fbb9db9716656b76a379ae9a462f1971f70d8"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-ps-iniziativa-violenza-genero-480w.webp",
-      "sha256": "751c7ad1ca710ea32b41e4edc6c2c7e08a83ad314afce419415bed74b8889f4d"
-    }
-  ]
+  "items": []
 }
