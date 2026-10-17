@@ -95,7 +95,7 @@ function readTag(html, start) {
   while (i < html.length && /[A-Za-z0-9:_-]/.test(html[i])) i++;
   if (i === nameStart) return null;
   const end = findTagEnd(html, start);
-  if (end < 0) return null;
+  if (end < 0) return { malformed: true };
   const boundary = html[i] ?? '';
   if (boundary && !/[\s/>]/.test(boundary)) return null;
   const name = html.slice(nameStart, i).toLowerCase();
@@ -137,6 +137,7 @@ function skipTemplateElement(html, afterOpening) {
       continue;
     }
     const tag = readTag(html, start);
+    if (tag?.malformed) return -1;
     if (!tag) {
       cursor = start + 1;
       continue;
@@ -171,6 +172,7 @@ function findActiveHeadContent(html) {
       continue;
     }
     const tag = readTag(html, start);
+    if (tag?.malformed) return null;
     if (!tag) {
       cursor = start + 1;
       continue;
@@ -200,6 +202,7 @@ function findActiveHeadContent(html) {
           continue;
         }
         const nested = readTag(html, nestedStart);
+        if (nested?.malformed) return null;
         if (!nested) {
           inside = nestedStart + 1;
           continue;
@@ -286,6 +289,7 @@ function patchActiveHeadMetadata(html) {
       continue;
     }
     const tag = readTag(source, start);
+    if (tag?.malformed) break;
     if (!tag || tag.end >= head.end) {
       cursor = start + 1;
       continue;
