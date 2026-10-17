@@ -170,6 +170,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-17T01:47:28.529Z",
       "lastFailureAt": "2026-10-17T01:47:28.529Z"
+    },
+    {
+      "articleId": "coppa-svizzera-lugano-taverne",
+      "title": "Lugano favoritissimo, il Taverne cerca l'impresa",
+      "fallbackImage": "/images/blog/article-sfida-bar-quartiere-lugano.webp",
+      "reason": "All image providers failed for article-coppa-svizzera-lugano-taverne: openai-codex (vision gate rejected image: Generic synthetic football warm-up scene relevant to Taverne/Ticino,",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T01:54:51.606Z",
+      "lastFailureAt": "2026-10-17T01:54:51.606Z"
     }
   ]
 }
