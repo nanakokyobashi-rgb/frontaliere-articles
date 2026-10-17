@@ -14,7 +14,7 @@ const blogMetaCantonGlEn: Record<string, string> = {
     'blog.article.imposta-seconde-case-glarona.imageAlt': 'Real estate tax on secondary homes in Canton Glarus',
     'blog.article.klontalstrasse-staldengarten-butzi.title': 'Klöntalerstrasse: restriction staldengarten–bützi',
     'blog.article.klontalstrasse-staldengarten-butzi.excerpt': 'A traffic restriction affects Klöntalerstrasse on the Staldengarten–Bützi section, in the Canton of Glarus.',
-    'blog.article.klontalstrasse-staldengarten-butzi.imageAlt': 'Traffic restriction on the Klöntalerstrasse between Staldengarten and Bützi',
+    'blog.article.klontalstrasse-staldengarten-butzi.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonGlEn;

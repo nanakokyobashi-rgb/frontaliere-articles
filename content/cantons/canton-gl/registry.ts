@@ -43,7 +43,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'klontalstrasse-staldengarten-butzi',
  category: 'pratico',
  date: '2026-10-17T00:33:53.716Z',
- image: '/images/blog/article-revisione-fiscale-canton-glarona.webp',
+ image: '/images/blog/article-klontalstrasse-staldengarten-butzi.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['GL'],

@@ -14,7 +14,7 @@ const blogMetaCantonGlFr: Record<string, string> = {
     'blog.article.imposta-seconde-case-glarona.imageAlt': 'Taxe immobilière sur les résidences secondaires dans le canton de Glaris',
     'blog.article.klontalstrasse-staldengarten-butzi.title': 'Klöntalerstrasse : restriction Staldengarten–Bützi',
     'blog.article.klontalstrasse-staldengarten-butzi.excerpt': 'Une restriction de circulation concerne la Klöntalerstrasse sur le tronçon Staldengarten–Bützi, dans le canton de Glaris.',
-    'blog.article.klontalstrasse-staldengarten-butzi.imageAlt': 'Restriction de circulation sur la Klöntalerstrasse entre Staldengarten et Bützi',
+    'blog.article.klontalstrasse-staldengarten-butzi.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonGlFr;

@@ -14,7 +14,7 @@ const blogMetaCantonGlIt: Record<string, string> = {
     'blog.article.imposta-seconde-case-glarona.imageAlt': 'Imposta immobiliare sulle seconde case nel Canton Glarona',
     'blog.article.klontalstrasse-staldengarten-butzi.title': 'Klöntalerstrasse: limitazione staldengarten–bützi',
     'blog.article.klontalstrasse-staldengarten-butzi.excerpt': 'Una limitazione al traffico riguarda la Klöntalerstrasse nel tratto Staldengarten–Bützi, nel Canton Glarona.',
-    'blog.article.klontalstrasse-staldengarten-butzi.imageAlt': 'Limitazione al traffico sulla Klöntalerstrasse tra Staldengarten e Bützi',
+    'blog.article.klontalstrasse-staldengarten-butzi.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonGlIt;
