@@ -7796,7 +7796,11 @@ function sourceReadTag(html, start) {
   const boundary = html[nameEnd] ?? '';
   if (boundary && !/[\s/>]/.test(boundary)) return null;
   const end = sourceFindTagEnd(html, start);
-  if (end < 0) return null;
+  // Un tag con virgolette non bilanciate fa fallire la ricerca di `>` fino a
+  // fondo documento. Restituire un esito distinto da «non e' un tag» permette
+  // ai chiamanti di interrompere la scansione: avanzare di un carattere qui
+  // trasformerebbe una pagina malformata in lavoro quadratico sincrono.
+  if (end < 0) return { malformed: true };
   const name = match[0].toLowerCase();
   return {
     closing,
@@ -7832,6 +7836,7 @@ function sourceSkipTemplate(html, afterOpening) {
       continue;
     }
     const tag = sourceReadTag(html, start);
+    if (tag?.malformed) return -1;
     if (!tag) {
       cursor = start + 1;
       continue;
@@ -7866,6 +7871,7 @@ function findActiveSourceHead(html) {
       continue;
     }
     const tag = sourceReadTag(html, start);
+    if (tag?.malformed) return null;
     if (!tag) {
       cursor = start + 1;
       continue;
@@ -7895,6 +7901,7 @@ function findActiveSourceHead(html) {
           continue;
         }
         const nested = sourceReadTag(html, nestedStart);
+        if (nested?.malformed) return null;
         if (!nested) {
           inside = nestedStart + 1;
           continue;
