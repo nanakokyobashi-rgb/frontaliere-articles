@@ -52,13 +52,11 @@ on:
       # policy: build-api, build-blog-index and the floors read it (with the
       # path mapping it depends on). A change there changes the surface.
       - 'scripts/lib/corpus-sections.mjs'
-      # The corpus-owned enabled state is a publisher input. A three-line
-      # activation PR must trigger this workflow even before any article body
-      # exists for the newly active sections.
+      # Section configuration and canonical canton slugs are publisher inputs.
+      # A change must rebuild the API before any new section is published.
       - 'generator/data/canton-sections.json'
       - 'generator/scripts/lib/corpus-paths.mjs'
-      - 'data/canton-url-slugs.json'
-      - 'scripts/generate-canton-article-sections.mjs'
+      - 'generator/data/canton-url-slugs.json'
       # Il registro DICHIARATO delle sezioni cantonali (verita' del rollout, D9)
       # e cio' che lo trasforma nei documenti pubblicati (sections.json, la
       # copia per il Worker, sitemap-cantons.xml) e li porta su R2: un flip di
@@ -330,8 +328,6 @@ jobs:
               engine/shared/articleSectionCore.mjs
               engine/shared/cantonArticleSectionCore.generated.mjs
               generator/data/canton-url-slugs.json
-              data/canton-url-slugs.json
-              scripts/generate-canton-article-sections.mjs
               generator/data/canton-sections.json
               generator/scripts/lib/corpus-paths.mjs
               host/cantonSectionsBootstrap.mjs
