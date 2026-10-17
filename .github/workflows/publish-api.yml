@@ -170,10 +170,10 @@ jobs:
     runs-on: ubuntu-latest
     # MISURATO 2026-08-09: la run riuscita piu' recente (31315163937) impiega 44s
     # in totale, di cui 6s per "Build data surface" e 22s per la spinta all'edge.
-    # 80 minuti coprono il caso eccezionale del gate bootstrap condizionale (70m)
-    # senza tagliare un publish-api che sta aspettando il rilascio di un runner
-    # fast-publish-section ancora vivo. Questo workflow e `generator-ci.yml`
-    # erano gli unici due dei
+    # Il job resta limitato a 60 minuti per non tenere la concurrency bloccata.
+    # Se un bootstrap live supera questo budget o parte tardi, il workflow del
+    # bootstrap rilancia publish-api dopo il rilascio del lock R2. Questo
+    # workflow e `generator-ci.yml` erano gli unici due dei
     # 31 senza `timeout-minutes`, e qui l'assenza pesa il doppio: la concurrency
     # `publish-api` NON cancella (`cancel-in-progress: false`), quindi un job
     # appeso non fallisce — mette in coda ogni pubblicazione successiva dietro di
@@ -183,16 +183,15 @@ jobs:
     # 3 tentativi con backoff lineare allungano il caso peggiore, e senza un
     # tetto sarebbero 3 tentativi da 6 ore.
     #
-    # 80 e' comunque un BUDGET, non una promessa di attesa infinita: se il
-    # bootstrap non rilascia il lease entro il suo TTL piu' il margine del
-    # publisher, la run fallisce fail-closed e la pubblicazione successiva
-    # puo' riconciliare lo stato senza annunciare pagine non pronte.
+    # 60 e' comunque un BUDGET, non una promessa di attesa infinita: se il
+    # bootstrap non rilascia il lease entro il limite, la run fallisce
+    # fail-closed e il replay dopo il bootstrap riconcilia la superficie.
     #
     # Nota: un job fermato da `timeout-minutes` risulta `cancelled`, non
     # `failure`, quindi i reporter con `if: failure()` non lo vedono; a coprirlo
     # e' il cron di scan-job-timeouts.mjs. Il tetto serve comunque: e' cio' che
     # fa finire il job.
-    timeout-minutes: 80
+    timeout-minutes: 60
     # ⚠️ Il tetto qui sopra NON copre l'attesa al gate di questo `environment:`:
     # un job parcheggiato al gate non e' in esecuzione, e GitHub non gli applica
     # nessuna scadenza. Run 36762664618 e' rimasta in `waiting` dal

@@ -382,12 +382,11 @@ export function requiredPageKeys(section, { sitemapXml, previousSitemapXml = nul
 
 /**
  * Quanto il publisher puo' attendere il bootstrap e ogni quanto ritenta.
- * fast-publish-section ha un timeout di 45m: il TTL del lock resta piu' lungo
- * e il job publish-api ha un tetto di 80m per coprire un bootstrap lento senza
- * aprire una finestra in cui il lease scada mentre le pagine sono ancora in
- * upload.
+ * fast-publish-section ha un timeout di 45m: il TTL resta piu' lungo per
+ * lasciare finire un runner vivo. Il replay di publish-api parte dopo un
+ * bootstrap riuscito, mentre il tetto del publisher resta a 60m.
  */
-export const BOOTSTRAP_WAIT_MS = 70 * 60 * 1000;
+export const BOOTSTRAP_WAIT_MS = 55 * 60 * 1000;
 export const BOOTSTRAP_RETRY_MS = 20 * 1000;
 
 /**

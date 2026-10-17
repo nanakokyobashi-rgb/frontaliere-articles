@@ -13,10 +13,9 @@ import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../../generator
 
 export const SECTION_BOOTSTRAP_LOCK_PREFIX = 'edge/sections/_bootstrap-locks';
 export const SECTION_BOOTSTRAP_LOCK_SCHEMA = 1;
-// fast-publish-section.yml ha timeout 45m: un runner vivo deve sempre poter
-// rilasciare il lock prima della scadenza. Il publisher edge attende anche
-// l'orfano fino a questo TTL, invece di fare un flip concorrente.
-export const SECTION_BOOTSTRAP_LOCK_TTL_MS = 60 * 60 * 1000;
+// fast-publish-section.yml ha timeout 45m: il lease lascia 10m per la
+// cancellazione del runner e il rilascio fail-safe del lock.
+export const SECTION_BOOTSTRAP_LOCK_TTL_MS = 55 * 60 * 1000;
 export const SECTION_BOOTSTRAP_LOCK_CACHE_CONTROL = 'public,max-age=5';
 const SECTION_RE = /^canton-[a-z]+$/;
 const SHA_RE = /^[a-f0-9]{7,64}$/;

@@ -164,6 +164,7 @@ jobs:
       matrix: ${{ steps.plan.outputs.matrix }}
       any: ${{ steps.plan.outputs.any }}
       dry: ${{ steps.plan.outputs.dry }}
+      bootstrap: ${{ steps.plan.outputs.bootstrap }}
       push_before: ${{ steps.push_range.outputs.before }}
       push_after: ${{ steps.push_range.outputs.after }}
     steps:
@@ -369,10 +370,15 @@ jobs:
           fi
           any=false
           [ "$(printf '%s' "$matrix" | jq 'length')" -gt 0 ] && any=true
+          bootstrap=false
+          if [ "$(printf '%s' "$matrix" | jq 'any(.[]; .bootstrap == true)')" = "true" ]; then
+            bootstrap=true
+          fi
           {
             echo "matrix=$matrix"
             echo "any=$any"
             echo "dry=$dry"
+            echo "bootstrap=$bootstrap"
           } >> "$GITHUB_OUTPUT"
           echo "resolved matrix=$matrix dry=$dry"
 
@@ -720,3 +726,66 @@ jobs:
           s="$RUNNER_TEMP/section-summary.json"
           [ -s "$s" ] || { echo "nessun summary: il render non e' arrivato in fondo"; exit 0; }
           jq -r '"sezione \(.section) (\(.declaredStatus // "?")): pagine \(.counts | tostring), hub mancanti \(.hubsMissing | tostring), difetti \(.defects | length), pubblicato \(.published | tostring)"' "$s"
+
+  # A push can start the API publisher before the bootstrap runner acquires
+  # its R2 lease. After a successful bootstrap releases every matrix lock,
+  # replay the API once so an earlier fail-closed timeout cannot strand the
+  # registry on the previous release. API-triggered replays are excluded to
+  # prevent a workflow_run loop.
+  replay-api-after-bootstrap:
+    needs: [resolve, publish]
+    if: >-
+      always() &&
+      needs.resolve.result == 'success' &&
+      needs.publish.result == 'success' &&
+      needs.resolve.outputs.bootstrap == 'true' &&
+      needs.resolve.outputs.dry != 'true' &&
+      github.event_name != 'workflow_run'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies for Remote Config
+        run: bash scripts/lib/npm-ci-retry.sh
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — Remote Config is the only source of the dispatch token"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Load dispatch token from Remote Config
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Replay publish-api after bootstrap lock release
+        env:
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::error::GITHUB_PAT_NANAKO was not loaded from Remote Config"
+            exit 1
+          fi
+          export GH_TOKEN="$runtime_pat"
+          gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f "$RUNNER_TEMP/sa.json"
