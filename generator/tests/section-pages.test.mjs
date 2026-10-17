@@ -1058,6 +1058,66 @@ test('publisher: lo staging snapshotta le chiavi prima dell HTML e ripristina un
   }
 });
 
+test('publisher: lo staging rifiuta sostituzioni stale e ricontrolla la readiness durante gli upload', async () => {
+  const immutableRoot = mkdtempSync(path.join(tmpdir(), 'publish-bootstrap-immutable-'));
+  const immutable = pageEntry('canton-ti', 'articoli-ticino/existing/index.html', 'article');
+  const immutableLocal = path.join(immutableRoot, immutable.rel);
+  mkdirSync(path.dirname(immutableLocal), { recursive: true });
+  writeFileSync(immutableLocal, '<html>render nuovo</html>', 'utf8');
+  let immutableUploads = 0;
+  const immutableResult = await publish({
+    section: 'canton-ti',
+    pages: [immutable],
+    immutablePages: [immutable],
+    snapshotPagesBeforeUpload: true,
+    cdnUploads: [],
+    obsoletePages: [],
+    distDir: immutableRoot,
+    releaseCommit: 'old-release',
+    publishedStatusImpl: async () => 'live',
+    releaseReadyImpl: async () => ({ ok: false }),
+    runImpl: () => {
+      immutableUploads++;
+      return { code: 0, stdout: '✅ uploaded' };
+    },
+    probeImpl: async () => ({ ok: true, status: 200, body: '<html>render precedente</html>' }),
+  });
+  assert.equal(immutableResult.failures, 1);
+  assert.equal(immutableResult.immutableMismatch, true);
+  assert.equal(immutableUploads, 0, 'una sostituzione di una chiave già annunciata non parte prima del flip');
+  rmSync(immutableRoot, { recursive: true, force: true });
+
+  const recheckRoot = mkdtempSync(path.join(tmpdir(), 'publish-bootstrap-recheck-'));
+  const staged = pageEntry('canton-ti', 'articoli-ticino/staged/index.html', 'article');
+  let readinessCalls = 0;
+  let stagedUploads = 0;
+  try {
+    const recheckResult = await publish({
+      section: 'canton-ti',
+      pages: [staged],
+      snapshotPagesBeforeUpload: true,
+      cdnUploads: [],
+      obsoletePages: [],
+      distDir: recheckRoot,
+      releaseCommit: 'old-release',
+      publishedStatusImpl: async () => 'draft',
+      releaseReadyImpl: async () => ({ ok: ++readinessCalls > 1 }),
+      runImpl: (_command, args) => {
+        if (args[0] === 'scripts/lib/upload-cdn-file.sh') stagedUploads++;
+        return { code: 0, stdout: '✅ uploaded' };
+      },
+      probeImpl: async () => ({ ok: false, status: 'HTTP 404' }),
+    });
+    assert.equal(recheckResult.failures, 1);
+    assert.equal(recheckResult.releaseAdvanced, true);
+    assert.equal(recheckResult.uploaded, 1);
+    assert.equal(stagedUploads, 1);
+    assert.equal(readinessCalls, 2, 'la release viene ricontrollata prima e dopo lo staging');
+  } finally {
+    rmSync(recheckRoot, { recursive: true, force: true });
+  }
+});
+
 test('publisher: un avanzamento di main prima dell HTML ripristina RSS e abortisce', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'publish-stale-main-html-'));
   const page = pageEntry('canton-ti', 'articoli-ticino/index.html', 'landing');

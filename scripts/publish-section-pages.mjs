@@ -1646,6 +1646,7 @@ export async function publish({
   releaseReadyRetryDelayMs = RELEASE_READY_RETRY_DELAY_MS,
   sleepImpl = sleep,
   snapshotPagesBeforeUpload = false,
+  immutablePages = [],
   assertMainFreshImpl = async () => {},
 }) {
   let failures = 0;
@@ -1728,6 +1729,11 @@ export async function publish({
   };
   const uploaded = [];
   let status = beforeStatus;
+  const bootstrapReleaseAdvanced = async () => {
+    if (!snapshotPagesBeforeUpload || !releaseCommit) return false;
+    const readiness = await releaseReadyImpl(releaseCommit, { section });
+    return readiness === true || readiness?.ok === true;
+  };
   console.log(`[${LOG}] preflight: sezione ${section} nel registro pubblicato = ${beforeStatus}`);
   // This is the first remote mutation after render/preflight. Recheck here,
   // not only in the workflow before rendering: main may advance while pages
@@ -1753,7 +1759,20 @@ export async function publish({
   if (snapshotPagesBeforeUpload && !pageSnapshots) {
     await assertMainFreshImpl();
     try {
-      pageSnapshots = await snapshotCantonPages(pages, { probeImpl });
+      const snapshots = await snapshotCantonPages([...pages, ...immutablePages], { probeImpl });
+      for (const page of uniqueCantonPages(immutablePages)) {
+        const previous = snapshots.get(page.edgeKey);
+        const local = path.join(distDir, page.rel);
+        const next = fs.existsSync(local) ? fs.readFileSync(local, 'utf8') : null;
+        if (!previous?.exists || next === null || next !== previous.body) {
+          console.error(
+            `::error::[${LOG}] bootstrap live: ${page.edgeKey} esiste nella release precedente ma il render non è byte-identico; ` +
+            'la sostituzione viene differita al replay post-flip',
+          );
+          return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus, immutableMismatch: true };
+        }
+      }
+      pageSnapshots = new Map(uniqueCantonPages(pages).map((page) => [page.edgeKey, snapshots.get(page.edgeKey)]));
     } catch (error) {
       console.error(`::error::[${LOG}] snapshot della release HTML precedente fallito: ${error?.message ?? String(error)}`);
       return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
@@ -1811,6 +1830,13 @@ export async function publish({
   }
   for (const page of inUploadOrder(pages)) {
     await assertMainFreshImpl();
+    if (await bootstrapReleaseAdvanced()) {
+      console.error(
+        `::error::[${LOG}] bootstrap live interrotto: release API/edge cambiata prima di caricare ${page.edgeKey}; ` +
+        'il replay workflow_run deve completare la superficie',
+      );
+      return { failures: 1, uploaded: uploaded.length, deleted: 0, status, releaseAdvanced: true };
+    }
     const { stdout } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', path.join(distDir, page.rel), page.edgeKey, PAGE_CACHE_CONTROL]);
     if (stdout.includes('✅ uploaded')) uploaded.push(page);
     else {
@@ -1827,6 +1853,14 @@ export async function publish({
     console.error(`::error::[${LOG}] upload HTML incompleto: nessuna pagina obsoleta viene cancellata`);
     const rollbackFailures = await rollbackTransaction();
     return { failures: failures + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status: beforeStatus };
+  }
+
+  if (await bootstrapReleaseAdvanced()) {
+    console.error(
+      `::error::[${LOG}] bootstrap live interrotto dopo gli upload: release API/edge cambiata; ` +
+      'le chiavi nuove restano immutable e il replay workflow_run deve completare manifest e RSS',
+    );
+    return { failures: 1, uploaded: uploaded.length, deleted: 0, status, releaseAdvanced: true };
   }
 
   const purgePages = async (pageList) => {
@@ -2141,6 +2175,9 @@ export async function main(
   const pagesForPublish = deferredLiveBootstrapRelease
     ? pages.filter((page) => !publishedPageKeys.has(page.edgeKey))
     : pages;
+  const immutableBootstrapPages = deferredLiveBootstrapRelease
+    ? pages.filter((page) => publishedPageKeys.has(page.edgeKey))
+    : [];
 
   if (publishing && effectiveStatus === null) {
     defects.push('registro edge illeggibile o non valido: stato effettivo della sezione non dimostrato');
@@ -2209,6 +2246,7 @@ export async function main(
     cantonRssFeeds: cantonRssFeeds.map(({ name, key, url }) => ({ name, key, url })),
     pages,
     pagesForPublish,
+    immutableBootstrapPages,
     cdnUploads,
     obsoletePages,
     obsoletePagesForPublish,
@@ -2268,6 +2306,7 @@ export async function main(
     releaseCommit,
     publishCantonRssFeedsImpl,
     snapshotPagesBeforeUpload: deferredLiveBootstrapRelease,
+    immutablePages: immutableBootstrapPages,
     assertMainFreshImpl,
   });
   if (summary.published.failures === 0 && deferredLiveBootstrapRelease) {
