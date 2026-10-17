@@ -7764,6 +7764,7 @@ const SOURCE_HTML_IMPLICIT_END_TAGS = new Map([
 const SOURCE_INACTIVE_CONTEXT_ELEMENTS = new Set([
   'aside', 'footer', 'form', 'head', 'header', 'nav',
 ]);
+const SOURCE_INACTIVE_CONTEXT_ROLES = new Set(['banner', 'complementary', 'contentinfo']);
 const SOURCE_INACTIVE_CONTEXT_HINT = /\b(?:advert|breadcrumb|comment|cookie|footer|header|latest|modal|navigation|promo|recommend|related|sidebar|social|teaser)\b/i;
 
 function sourceHtmlWhitespace(char) {
@@ -7973,18 +7974,6 @@ function sourceImplicitCloseIndex(stack, name) {
   return -1;
 }
 
-function sourceFindRecoveryBoundary(html, start) {
-  const body = /<body(?=[\s/>])/ig;
-  body.lastIndex = start + 1;
-  const bodyMatch = body.exec(html);
-  if (bodyMatch) return bodyMatch.index;
-
-  const root = /<(?:main|article)(?=[\s/>])/ig;
-  root.lastIndex = start + 1;
-  const rootMatch = root.exec(html);
-  return rootMatch ? rootMatch.index : -1;
-}
-
 function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd } = {}) {
   let cursor = 0;
   const stack = [];
@@ -8015,8 +8004,10 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd } 
     if (tag?.malformed) {
       malformed = true;
       if (!recoverMalformed) return { malformed, stack };
-      const recovery = sourceFindRecoveryBoundary(html, start);
-      cursor = recovery < 0 ? html.length : recovery;
+      // Once a quoted attribute is unterminated, later apparent document tags
+      // may still be part of that value. With no lexical proof of a boundary,
+      // stop instead of resuming at a regex match inside malformed markup.
+      cursor = html.length;
       continue;
     }
     if (!tag) {
@@ -8083,6 +8074,9 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd } 
       tag,
       inactive: Boolean(parent?.inactive)
         || (namespace === 'html' && SOURCE_INACTIVE_CONTEXT_ELEMENTS.has(tag.name))
+        || (namespace === 'html' && sourceTagAttribute(html, tag, 'role')
+          .trim().toLowerCase().split(/\s+/)
+          .some((role) => SOURCE_INACTIVE_CONTEXT_ROLES.has(role)))
         || (namespace === 'html' && SOURCE_INACTIVE_CONTEXT_HINT.test([
           sourceTagAttribute(html, tag, 'id'),
           sourceTagAttribute(html, tag, 'class'),
@@ -8174,7 +8168,8 @@ function findActiveSourceHead(html) {
         sourceTagAttribute(html, tag, 'type').trim().toLowerCase() === 'application/ld+json' &&
         documentLevel &&
         bodyState?.trusted &&
-        parent === bodyState.entry
+        stack.includes(bodyState.entry) &&
+        !parent?.inactive
       ) {
         ldBlocks.push(html.slice(start, rawTextEnd));
       }

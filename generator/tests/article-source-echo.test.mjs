@@ -177,20 +177,26 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(res.html.includes('"articleBody":"corpo"'));
   });
 
-  it('riattiva solo JSON-LD attivo come figlio diretto del body', () => {
+  it('riattiva JSON-LD attivo nel body e nei discendenti neutri', () => {
     const stale = (label) => `<script type="application/ld+json">{"headline":"${label}"}</script>`;
     const page2 = '<html><head><title>Pagina</title></head><body>'
       + `<!-- ${stale('COMMENT_JSON_LD_SHOULD_NOT_BE_ACTIVATED')} -->`
       + `<template>${stale('TEMPLATE_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</template>`
       + `<aside>${stale('SIDEBAR_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</aside>`
-      + '<script type="application/ld+json">{"headline":"ACTIVE_BODY_JSON_LD"}</script>'
+      + `<div class="app-shell">${stale('ACTIVE_BODY_DESCENDANT_JSON_LD')}</div>`
+      + `<div role="complementary">${stale('COMPLEMENTARY_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</div>`
+      + `<div role="banner">${stale('BANNER_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</div>`
+      + `<div role="contentinfo">${stale('CONTENTINFO_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</div>`
       + `<article>${ARTICLE_PROSE}</article></body></html>`;
     const res = isolateMainSourceHtml(page2);
     assert.equal(res.isolated, true);
-    assert.ok(res.html.includes('ACTIVE_BODY_JSON_LD'));
+    assert.ok(res.html.includes('ACTIVE_BODY_DESCENDANT_JSON_LD'));
     assert.equal(res.html.includes('COMMENT_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('TEMPLATE_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('SIDEBAR_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('COMPLEMENTARY_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('BANNER_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('CONTENTINFO_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
   });
 
   it('non perde il confine document-level dopo self-closing SVG/MathML foreign', () => {
@@ -277,7 +283,7 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(visibleTextLength('<p>ciao</p>') > 0);
   });
 
-  it('abbandona un head malformato senza riesaminare ogni tag fino a fondo pagina', () => {
+  it('fallisce chiuso su un head malformato senza riesaminare ogni tag fino a fondo pagina', () => {
     // Ogni `<x ` ha un attributo apparente e condivide una virgoletta non
     // chiusa in fondo: il vecchio scanner rifaceva la ricerca di `>` per ogni
     // apertura, bloccando l’event loop su una risposta ancora piccola.
@@ -287,22 +293,22 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     const started = performance.now();
     const res = isolateMainSourceHtml(malformedHead);
     const elapsed = performance.now() - started;
-    assert.equal(res.isolated, true);
-    assert.equal(res.root, 'article');
-    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+    assert.equal(res.isolated, false);
+    assert.equal(res.root, 'none');
+    assert.equal(res.html, malformedHead);
     assert.ok(elapsed < 250, `scanner sorgente troppo lento su markup malformato: ${elapsed.toFixed(1)}ms`);
   });
 
-  it('non riattiva JSON-LD stale quando la scansione dell’head è malformata', () => {
+  it('non isola né promuove JSON-LD con una scansione dell’head malformata', () => {
     const staleJsonLd = '<script type="application/ld+json">'
       + '{"headline":"STALE_JSON_LD_SHOULD_NOT_BE_ACTIVATED"}</script>';
     const malformedHead = '<html><head><meta data="unterminated'
       + '</head><body><article>' + ARTICLE_PROSE + '</article>'
       + staleJsonLd + '</body></html>';
     const res = isolateMainSourceHtml(malformedHead);
-    assert.equal(res.isolated, true);
-    assert.equal(res.root, 'article');
-    assert.equal(res.html.includes('STALE_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.isolated, false);
+    assert.equal(res.root, 'none');
+    assert.equal(res.html, malformedHead);
   });
 });
 
