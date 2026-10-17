@@ -45157,6 +45157,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'credito-imposta-famiglia-2026',
+ category: 'fiscale',
+ date: '2026-10-17T10:49:11.000Z',
+ image: '/images/blog/article-credito-imposta-famiglia-2026.webp',
+ hasCalculator: true,
+ articleType: 'evergreen',
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
