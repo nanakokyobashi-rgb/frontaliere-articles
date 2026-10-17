@@ -8029,7 +8029,7 @@ function sourceImplicitCloseIndex(stack, name) {
   return -1;
 }
 
-function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd } = {}) {
+function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, onText } = {}) {
   let cursor = 0;
   const stack = [];
   let malformed = false;
@@ -8048,7 +8048,15 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd } 
 
   while (cursor < html.length) {
     const start = html.indexOf('<', cursor);
-    if (start < 0) break;
+    if (start < 0) {
+      if (onText && cursor < html.length) {
+        onText({ text: html.slice(cursor), start: cursor, end: html.length, stack: stack.slice() });
+      }
+      break;
+    }
+    if (onText && start > cursor) {
+      onText({ text: html.slice(cursor, start), start: cursor, end: start, stack: stack.slice() });
+    }
     if (html.startsWith('<!--', start)) {
       const afterComment = sourceSkipComment(html, start);
       if (afterComment < 0) return { malformed: true, stack };
@@ -8170,6 +8178,8 @@ function findActiveSourceHead(html) {
   let sawHead = false;
   let sawBody = false;
   let documentLevel = true;
+  let implicitHead = false;
+  let implicitHeadContainer = null;
   let headState = null;
   let trustedHead = null;
   let bodyState = null;
@@ -8177,14 +8187,37 @@ function findActiveSourceHead(html) {
 
   const failClosed = () => {
     documentLevel = false;
+    implicitHead = false;
+    implicitHeadContainer = null;
     if (headState) headState.trusted = false;
     if (bodyState) bodyState.trusted = false;
   };
 
   const scan = sourceScanStructure(html, {
+    onText: ({ text, stack }) => {
+      if (
+        !implicitHead ||
+        !/\S/u.test(text) ||
+        stack.length !== 1 ||
+        stack[0] !== implicitHeadContainer
+      ) return;
+      bodyState = {
+        entry: implicitHeadContainer,
+        trusted: true,
+        implicit: true,
+      };
+      sawBody = true;
+      implicitHead = false;
+      implicitHeadContainer = null;
+    },
     onStart: ({ tag, start, namespace, isVoid, parent, stack, entry, rawTextEnd, rawText }) => {
       if (namespace === 'html' && tag.name === 'html') {
-        if (sawHtml || stack.length !== 0 || isVoid) failClosed();
+        if (sawHtml || stack.length !== 0 || isVoid) {
+          failClosed();
+        } else {
+          implicitHead = true;
+          implicitHeadContainer = entry;
+        }
         sawHtml = true;
       } else if (namespace === 'html' && tag.name === 'head') {
         const directDocumentHead =
@@ -8192,6 +8225,8 @@ function findActiveSourceHead(html) {
             stack.length === 1 && parent?.name === 'html' && parent.namespace === 'html'
           ));
         if (!directDocumentHead || isVoid) failClosed();
+        implicitHead = false;
+        implicitHeadContainer = null;
         if (headState) headState.trusted = false;
         headState = {
           start,
@@ -8206,6 +8241,8 @@ function findActiveSourceHead(html) {
             stack.length === 1 && parent?.name === 'html' && parent.namespace === 'html'
           ));
         if (!directDocumentBody || isVoid) failClosed();
+        implicitHead = false;
+        implicitHeadContainer = null;
         bodyState = {
           entry,
           trusted: directDocumentBody && !isVoid,
@@ -8226,6 +8263,8 @@ function findActiveSourceHead(html) {
           implicit: true,
         };
         sawBody = true;
+        implicitHead = false;
+        implicitHeadContainer = null;
       } else if (stack.length === 0 && !(bodyState?.implicit
         && bodyState.trusted && parent === bodyState.entry)) {
         // A top-level article/div/etc. is a fragment, not a document body. Do
@@ -8247,8 +8286,11 @@ function findActiveSourceHead(html) {
         tag.name === 'script' &&
         sourceTagAttribute(html, tag, 'type').trim().toLowerCase() === 'application/ld+json' &&
         documentLevel &&
-        bodyState?.trusted &&
-        parent === bodyState.entry &&
+        ((bodyState?.trusted && parent === bodyState.entry) || (
+          implicitHead &&
+          stack.length === 1 &&
+          parent === implicitHeadContainer
+        )) &&
         !sourceTagIsInactive(html, tag, namespace, parent)
       ) {
         ldBlocks.push(html.slice(start, rawTextEnd));
@@ -8274,6 +8316,10 @@ function findActiveSourceHead(html) {
           }
         }
         headState = null;
+      }
+      if (implicitHeadContainer === entry) {
+        implicitHead = false;
+        implicitHeadContainer = null;
       }
       if (bodyState?.entry === entry) bodyState = null;
     },

@@ -158,6 +158,18 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(out.html.includes('og:title'));
   });
 
+  it('conserva il JSON-LD nel head implicito prima del body omesso', () => {
+    const page2 = '<html><meta property="article:published_time" content="2026-06-12">'
+      + '<script type="application/ld+json">'
+      + '{"articleBody":"IMPLICIT_HEAD_ARTICLE_BODY","datePublished":"2026-06-12"}'
+      + '</script>'
+      + `<article>${ARTICLE_PROSE}</article></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('IMPLICIT_HEAD_ARTICLE_BODY'));
+    assert.ok(res.html.includes('"datePublished":"2026-06-12"'));
+  });
+
   it('non tronca l’head su un </head> letterale dentro JSON-LD o script', () => {
     const pageWithLiteralBoundary = '<html><head>'
       + '<script type="application/ld+json">{"description":"testo </head> incorporato"}</script>'
