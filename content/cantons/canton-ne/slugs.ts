@@ -8,6 +8,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'neuchatel-referendum-salari-minimi': { it: 'neuchatel-referendum-salari-minimi', en: 'neuchatel-minimum-wage-referendum', de: 'neuenburg-mindestlohn-referendum', fr: 'neuchatel-referendum-salaires-minimaux' },
  'aldi-chiude-centro-neuchatel': { it: 'aldi-chiude-centro-neuchatel', en: 'aldi-closes-neuchatel-city-store', de: 'aldi-schliesst-filiale-neuenburg', fr: 'aldi-ferme-magasin-centre-neuchatel' },
  'nuovo-centro-asilo-couvet': { it: 'nuovo-centro-asilo-couvet', en: 'new-asylum-center-couvet', de: 'neues-asylzentrum-couvet', fr: 'nouveau-centre-asile-couvet' },
+ 'cpcn-rendimento-2025-copertura': { it: 'cpcn-rendimento-2025-copertura', en: 'cpcn-2025-return-coverage', de: 'cpcn-rendite-2025-deckung', fr: 'cpcn-performance-2025-couverture' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

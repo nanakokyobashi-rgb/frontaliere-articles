@@ -18,6 +18,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.nuovo-centro-asilo-couvet.title': 'Neue Kindertagesstätte in Couvet: Das Projekt beginnt',
     'blog.article.nuovo-centro-asilo-couvet.excerpt': 'Neue Struktur in der Rue du 1er Mars 11 in Couvet geplant Ersetzt den aktuellen Standort von Chemin des Prises 8 Mit der Gemeinde Val-de-Travers ausgearbeitetes',
     'blog.article.nuovo-centro-asilo-couvet.imageAlt': 'Darstellung eines renovierten öffentlichen Gebäudes in Couvet, Kanton Neuenburg',
+    'blog.article.cpcn-rendimento-2025-copertura.title': 'CPCN verzeichnet 2025 ein Plus von +5,6%: Deckungsgrad 84,8%',
+    'blog.article.cpcn-rendimento-2025-copertura.excerpt': '+5,6% bei der Performance der CPCN im Jahr 2025 3% Verzinsung der Altersguthaben 84,8% Deckungsgrad am 31.12.2025 RFV in Höhe von CHF 979 Millionen, bei 92%',
+    'blog.article.cpcn-rendimento-2025-copertura.imageAlt': 'Immobilienvermögen und Vorsorge der CPCN in Neuenburg',
 };
 
 export default blogMetaCantonNeDe;

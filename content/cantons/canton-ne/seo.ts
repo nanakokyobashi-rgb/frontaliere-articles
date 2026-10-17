@@ -192,6 +192,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cpcn-rendimento-2025-copertura': {
+    title: 'CPCN registra +5,6% nel 2025: copertura 84,8% | Frontaliere Ticino',
+    description: '+5,6% per la performance CPCN nel 2025 3% di remunerazione sugli averi di vecchiaia 84,8% di copertura al 31.12.2025 RFV da CHF 979 milioni, al 92%',
+    keywords: 'frontalieri, ticino, svizzera, italia, cpcn, registra, copertura, performance',
+    ogTitle: 'CPCN 2025: performance 5,6% e copertura 84,8%',
+    ogDescription: '+5,6% per la performance CPCN nel 2025 3% di remunerazione sugli averi di vecchiaia 84,8% di copertura al 31.12.2025 RFV da CHF 979 milioni, al 92%',
+    canonicalPath: '/articoli-neuchatel/cpcn-rendimento-2025-copertura/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "CPCN registra +5,6% nel 2025: copertura 84,8%",
+      "description": "+5,6% per la performance CPCN nel 2025 3% di remunerazione sugli averi di vecchiaia 84,8% di copertura al 31.12.2025 RFV da CHF 979 milioni, al 92%",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cpcn-rendimento-2025-copertura.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Patrimonio immobiliare e previdenza della CPCN nel Canton Neuchâtel"
+      },
+      "datePublished": "2026-10-17T00:07:41+00:00",
+      "dateModified": "2026-10-17T00:07:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/cpcn-rendimento-2025-copertura/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

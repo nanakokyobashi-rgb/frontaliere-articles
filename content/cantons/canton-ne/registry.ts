@@ -61,4 +61,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'cpcn-rendimento-2025-copertura',
+ category: 'pensione',
+ date: '2026-10-17T00:07:41.161Z',
+ image: '/images/blog/article-cpcn-rendimento-2025-copertura.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ];
