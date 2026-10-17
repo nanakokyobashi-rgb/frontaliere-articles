@@ -18,6 +18,8 @@ on:
     branches: [main]
     paths:
       - 'content/**'
+      - 'scripts/ci/check-blog-body-links.mjs'
+      - 'scripts/lib/article-link-contract.mjs'
       - 'public/images/blog/**'
       - 'public/images/generated/**'
       # engine/** matters as much as the corpus: build-api.mjs is a thin caller
@@ -342,6 +344,9 @@ jobs:
         run: node scripts/ci/check-blog-body-syntax.mjs
 
       - name: Preflight — i link Markdown devono avere una destinazione canonica
+        env:
+          PREFLIGHT_SCAN_MODE: ${{ steps.changed-bodies.outputs.scan-mode }}
+          PREFLIGHT_CHANGED_FILES_FILE: ${{ steps.changed-bodies.outputs.changed-files-path }}
         run: node scripts/ci/check-blog-body-links.mjs
 
       - name: Preflight — ogni locale deve avere tutti i body dell’italiano

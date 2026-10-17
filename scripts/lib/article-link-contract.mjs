@@ -241,9 +241,9 @@ export function canonicalArticleLinkTarget(rawTarget, locale = 'it') {
   const navAction = /^nav:([a-z0-9-]+)$/.exec(target);
   if (navAction) return VALID_NAV_ACTIONS.has(navAction[1]) ? target : null;
 
-  // Contact links are intentional non-HTTP links. They never become a route
-  // under the current article URL and are supported by the article renderer.
-  if (/^(?:https?:\/\/|mailto:|tel:)/i.test(target)) return target;
+  // Mail links and HTTP(S) links are supported by the article renderer.
+  // `tel:` is intentionally stripped: the site renderer does not preserve it.
+  if (/^(?:https?:\/\/|mailto:)/i.test(target)) return target;
 
   // Root-relative and fragment links are already anchored to the public site
   // rather than to the article directory. Protocol-relative URLs are denied.
