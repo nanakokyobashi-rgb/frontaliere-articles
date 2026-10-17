@@ -140,6 +140,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-17T00:42:42.710Z",
       "lastFailureAt": "2026-10-17T00:42:42.710Z"
+    },
+    {
+      "articleId": "kuessnacht-rete-teleriscaldamento",
+      "title": "Küssnacht amplia la rete verso Immensee, Fänn e Adligenswil",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T00:46:50.699Z",
+      "lastFailureAt": "2026-10-17T00:46:50.699Z"
     }
   ]
 }
