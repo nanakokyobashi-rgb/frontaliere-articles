@@ -24,6 +24,9 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.fully-strada-ciclabile.title': 'Fully: Mehr als 5,5 km Straße werden zu Fahrradstraßen',
     'blog.article.fully-strada-ciclabile.excerpt': 'Die Gemeinde Fully baut die sanfte Mobilität aus: Die Straße nördlich des Kanals wird zur Fahrradstraße, und Radfahrende haben an 12 Kreuzungen Vorrang.',
     'blog.article.fully-strada-ciclabile.imageAlt': 'Velofahrer auf der Fahrradstrasse nördlich des Kanals in Fully',
+    'blog.article.valais-salario-minimo-2026.title': 'Mindestlohn im Wallis: Abstimmung am 29. November über CHF 22',
+    'blog.article.valais-salario-minimo-2026.excerpt': '15\'000 Vollzeitbeschäftigte leben nicht vom Lohn Die Abstimmung über den Mindestlohn ist auf den 29.',
+    'blog.article.valais-salario-minimo-2026.imageAlt': 'Landschaft im Kanton Wallis mit Gebäuden und Straßen',
 };
 
 export default blogMetaCantonVsDe;

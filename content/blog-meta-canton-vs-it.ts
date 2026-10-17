@@ -24,6 +24,9 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.fully-strada-ciclabile.title': 'Fully: oltre 5,5 km di strada diventano ciclabili',
     'blog.article.fully-strada-ciclabile.excerpt': 'Il Comune di Fully amplia la mobilità dolce: la strada a nord del canale diventa rue cyclable e i ciclisti hanno la priorità a 12 intersezioni.',
     'blog.article.fully-strada-ciclabile.imageAlt': 'Ciclisti sulla strada ciclabile a nord del canale a Fully',
+    'blog.article.valais-salario-minimo-2026.title': 'Salario minimo in Vallese: voto il 29 novembre sui CHF 22',
+    'blog.article.valais-salario-minimo-2026.excerpt': '15\'000 salariati a tempo pieno non vivono del salario Il voto sul salario minimo è fissato al 29 novembre La proposta prevede CHF 22 lordi l\'ora Il Parlamento',
+    'blog.article.valais-salario-minimo-2026.imageAlt': 'Panorama del Canton Vallese con edifici e strade',
 };
 
 export default blogMetaCantonVsIt;
