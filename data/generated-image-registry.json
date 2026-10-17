@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 650,
+  "assetCount": 651,
   "assets": [
     {
       "schema": 1,
@@ -26114,6 +26114,24 @@
         "is_topic_relevant": true,
         "notes": "Generic synthetic editorial illustration of a cemetery building with missing copper roofing; no people, text, logos, or identifying details."
       }
+    },
+    {
+      "schema": 1,
+      "assetId": "bollettino-frontaliere-2026-10-17",
+      "source": "deterministic-card",
+      "provider": "site-owned",
+      "note": "Deterministic SVG card rendered by the repository; no external image provider is used.",
+      "credit": "frontaliereticino.ch",
+      "producer": "generator/scripts/lib/daily-brief-image.mjs",
+      "templateVersion": "frontaliereticino.daily-brief-card.v1",
+      "license": "private-grant",
+      "sha256": "88d2de74a034f69579b10af9e155889008eef236b5fe2ffc6ca72b87d83c6660",
+      "bytes": 27282,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/bollettino-frontaliere-2026-10-17.webp"
     }
   ]
 }
