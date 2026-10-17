@@ -190,6 +190,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-17T02:07:47.983Z",
       "lastFailureAt": "2026-10-17T02:07:47.983Z"
+    },
+    {
+      "articleId": "netto-single-paga-ticino-2026",
+      "title": "Busta paga svizzera 2026: guida per frontalieri single",
+      "fallbackImage": "/images/blog/article-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica.webp",
+      "reason": "All image providers failed for article-netto-single-paga-ticino-2026: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Swiss payslips and Tic",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T04:59:01.616Z",
+      "lastFailureAt": "2026-10-17T04:59:01.616Z"
     }
   ]
 }
