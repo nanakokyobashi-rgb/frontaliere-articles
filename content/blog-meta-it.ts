@@ -13368,10 +13368,10 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.tre-valli-varesine-7-posto-mondiale.imageAlt': 'Ciclista in salita sulla Tre Valli Varesine, autunno ticinese',
     'blog.article.burraco-solidale-buguggiate.title': 'Burraco benefico a Buguggiate: 140 partecipanti per ABAD ETS',
     'blog.article.burraco-solidale-buguggiate.excerpt': '140 partecipanti alla serata benefica 35 tavoli da gioco a Buguggiate Ricavato destinato a nuovi progetti di inserimento lavorativo Cosa → torneo benefico',
-    'blog.article.burraco-solidale-buguggiate.imageAlt': 'Serata di burraco benefico a Buguggiate con 140 partecipanti su 35 tavoli',
+    'blog.article.burraco-solidale-buguggiate.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.coppa-svizzera-lugano-taverne.title': 'Lugano favoritissimo, il Taverne cerca l\'impresa',
     'blog.article.coppa-svizzera-lugano-taverne.excerpt': 'Il Lugano sfida il Pully domenica alle 14.',
-    'blog.article.coppa-svizzera-lugano-taverne.imageAlt': 'Il Comunale di Taverne, sede della sfida di Coppa Svizzera contro lo Young Boys',
+    'blog.article.coppa-svizzera-lugano-taverne.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.sharks-derby-coppa-trevano.title': 'Gli Squali di Federico Pagani vincono il derby di Coppa',
     'blog.article.sharks-derby-coppa-trevano.excerpt': 'Gli Sharks vincono il derby di Coppa a Trevano Il Bissone si arrende sul 25-14 Veljko Krstic segna sei reti all\'esordio ufficiale Alfano firma cinque reti Luogo',
     'blog.article.sharks-derby-coppa-trevano.imageAlt': 'Lugano, città degli Sharks impegnati nel derby di Coppa Svizzera',
@@ -13383,7 +13383,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.film-festival-diritti-umani-lugano-2026.imageAlt': 'Film Festival Diritti Umani Lugano: premiazione e proiezioni',
     'blog.article.netto-single-paga-ticino-2026.title': 'Busta paga svizzera 2026: guida per frontalieri single',
     'blog.article.netto-single-paga-ticino-2026.excerpt': 'AVS/AI 5.3%, AD/AC 1.1% e LAMal: cosa controllare nella busta paga di un frontaliere single nel 2026.',
-    'blog.article.netto-single-paga-ticino-2026.imageAlt': 'Pendolare frontaliero davanti a una busta paga svizzera in Ticino',
+    'blog.article.netto-single-paga-ticino-2026.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaIt;

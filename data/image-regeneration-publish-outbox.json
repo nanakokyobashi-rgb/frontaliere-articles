@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "items": [
+    {
+      "articleId": "coppa-svizzera-lugano-taverne",
+      "section": "frontaliere"
+    },
+    {
+      "articleId": "tuffe-falsi-poliziotti-vaud",
+      "section": "canton-vd"
+    },
+    {
+      "articleId": "netto-single-paga-ticino-2026",
+      "section": "frontaliere"
+    }
+  ]
+}

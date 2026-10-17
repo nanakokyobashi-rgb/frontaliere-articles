@@ -75,91 +75,21 @@
       "articleId": "fully-strada-ciclabile",
       "title": "Fully: oltre 5,5 km di strada diventano ciclabili",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-fully-strada-ciclabile: openai-codex (vision gate rejected image: Clear generic Alpine cycle-lane scene relevant to the subject, but the painted bicycle-lane symbol is signage and violates the no-signa",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-17T01:00:16.102Z",
-      "lastFailureAt": "2026-10-17T01:00:16.102Z"
+      "lastFailureAt": "2026-10-17T05:37:45.258Z"
     },
     {
       "articleId": "turgovia-sicurezza-lavoro-orari",
       "title": "Turgovia: sicurezza sul lavoro, orari e tutela della salute",
       "fallbackImage": "/images/blog/article-sicurezza-lavoro-turgovia-regole.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-turgovia-sicurezza-lavoro-orari: openai-codex (vision gate rejected image: Generic synthetic workplace-safety illustration, but it contains a recognizable foreground worker viewed from behind.); gemini",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-17T01:07:58.548Z",
-      "lastFailureAt": "2026-10-17T01:07:58.548Z"
-    },
-    {
-      "articleId": "burraco-solidale-buguggiate",
-      "title": "Burraco benefico a Buguggiate: 140 partecipanti per ABAD ETS",
-      "fallbackImage": "/images/blog/nuovi-progetti-chiave-digitali.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T01:16:19.861Z",
-      "lastFailureAt": "2026-10-17T01:16:19.861Z"
-    },
-    {
-      "articleId": "dibattito-prefettura-sarine",
-      "title": "Sarine, i sette candidati alla prefettura a confronto",
-      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T01:20:36.277Z",
-      "lastFailureAt": "2026-10-17T01:20:36.277Z"
-    },
-    {
-      "articleId": "scuole-vaud-furti-inchieste",
-      "title": "Otto scuole vaudesi colpite da furti notturni",
-      "fallbackImage": "/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-vaud.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T01:27:48.782Z",
-      "lastFailureAt": "2026-10-17T01:27:48.782Z"
-    },
-    {
-      "articleId": "singen-chiusura-schaffhauser-strasse",
-      "title": "Singen, chiusa la Schaffhauser Straße dal 26 al 30 ottobre",
-      "fallbackImage": "/images/blog/article-lavori-autolaghi-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T01:47:28.529Z",
-      "lastFailureAt": "2026-10-17T01:47:28.529Z"
-    },
-    {
-      "articleId": "coppa-svizzera-lugano-taverne",
-      "title": "Lugano favoritissimo, il Taverne cerca l'impresa",
-      "fallbackImage": "/images/blog/article-sfida-bar-quartiere-lugano.webp",
-      "reason": "All image providers failed for article-coppa-svizzera-lugano-taverne: openai-codex (vision gate rejected image: Generic synthetic football warm-up scene relevant to Taverne/Ticino,",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T01:54:51.606Z",
-      "lastFailureAt": "2026-10-17T01:54:51.606Z"
-    },
-    {
-      "articleId": "tuffe-falsi-poliziotti-vaud",
-      "title": "Truffe falsi poliziotti e banchieri nel Vaud: 100 interpellati",
-      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T02:07:47.983Z",
-      "lastFailureAt": "2026-10-17T02:07:47.983Z"
-    },
-    {
-      "articleId": "netto-single-paga-ticino-2026",
-      "title": "Busta paga svizzera 2026: guida per frontalieri single",
-      "fallbackImage": "/images/blog/article-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica.webp",
-      "reason": "All image providers failed for article-netto-single-paga-ticino-2026: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Swiss payslips and Tic",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T04:59:01.616Z",
-      "lastFailureAt": "2026-10-17T04:59:01.616Z"
+      "lastFailureAt": "2026-10-17T05:38:41.862Z"
     }
   ]
 }

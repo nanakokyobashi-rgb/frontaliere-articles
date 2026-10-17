@@ -13367,10 +13367,10 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.tre-valli-varesine-7-posto-mondiale.imageAlt': 'Cyclist climbing Tre Valli Varesine, Ticino autumn scenery',
     'blog.article.burraco-solidale-buguggiate.title': 'Charity burraco in Buguggiate: 140 participants for ABAD ETS',
     'blog.article.burraco-solidale-buguggiate.excerpt': '140 participants in the charity evening 35 game tables at Buguggiate Proceeds destined for new job placement projects What → charity tournament',
-    'blog.article.burraco-solidale-buguggiate.imageAlt': 'Charity burraco evening in Buguggiate with 140 participants at 35 tables',
+    'blog.article.burraco-solidale-buguggiate.imageAlt': 'Illustration generated for this article',
     'blog.article.coppa-svizzera-lugano-taverne.title': 'Favourite Lugano, Taverne is looking for business',
     'blog.article.coppa-svizzera-lugano-taverne.excerpt': 'Lugano challenges Pully on Sunday at 2pm.',
-    'blog.article.coppa-svizzera-lugano-taverne.imageAlt': 'Taverne\'s Comunale stadium, venue for the Swiss Cup match against Young Boys',
+    'blog.article.coppa-svizzera-lugano-taverne.imageAlt': 'Illustration generated for this article',
     'blog.article.sharks-derby-coppa-trevano.title': 'Federico Pagani\'s Sharks win the Cup derby',
     'blog.article.sharks-derby-coppa-trevano.excerpt': 'The Sharks win the Cup derby in Trevano Bissone goes down 25-14 Veljko Krstic scores six goals on his official debut Alfano scores five goals Location',
     'blog.article.sharks-derby-coppa-trevano.imageAlt': 'Lugano, home of the Sharks in the Swiss Cup derby',
@@ -13382,7 +13382,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.film-festival-diritti-umani-lugano-2026.imageAlt': 'Lugano Human Rights Film Festival: awards and screenings',
     'blog.article.netto-single-paga-ticino-2026.title': 'Swiss paycheck 2026: guide for single border workers',
     'blog.article.netto-single-paga-ticino-2026.excerpt': 'AVS/AI 5.3%, AD/AC 1.1% and LAMal: what to check in the paycheck of a single border crossing in 2026.',
-    'blog.article.netto-single-paga-ticino-2026.imageAlt': 'Cross-border commuter reviewing a Swiss payslip in Ticino',
+    'blog.article.netto-single-paga-ticino-2026.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaEn;
