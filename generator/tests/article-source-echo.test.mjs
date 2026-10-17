@@ -311,6 +311,28 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     const res = isolateMainSourceHtml(nestedHead);
     assert.equal(res.isolated, true);
     assert.equal(res.html.includes('NESTED_HEAD_SHOULD_NOT_BE_ACTIVATED'), false);
+
+    const headAfterImplicitBody = '<html>testo che avvia il body implicito<head>'
+      + '<script type="application/ld+json">{"headline":"IMPLICIT_BODY_NESTED_HEAD"}</script>'
+      + '</head>'
+      + `<article>${ARTICLE_PROSE}</article></html>`;
+    const implicitRes = isolateMainSourceHtml(headAfterImplicitBody);
+    assert.equal(implicitRes.isolated, true);
+    assert.equal(implicitRes.root, 'article');
+    assert.equal(implicitRes.html.includes('IMPLICIT_BODY_NESTED_HEAD'), false);
+    assert.ok(implicitRes.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('non propaga gli hint chrome da html e body alla radice editoriale', () => {
+    for (const page of [
+      `<html class="has-header"><body><article>${ARTICLE_PROSE}</article></body></html>`,
+      `<html><body class="social"><article>${ARTICLE_PROSE}</article></body></html>`,
+    ]) {
+      const res = isolateMainSourceHtml(page);
+      assert.equal(res.isolated, true);
+      assert.equal(res.root, 'article');
+      assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+    }
   });
 
   it('non promuove radici editoriali da un documento con head annidato non attendibile', () => {

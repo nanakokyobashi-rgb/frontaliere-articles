@@ -8023,12 +8023,13 @@ function sourceNamespaceForStart(stack, tag, html) {
 }
 
 function sourceTagIsInactive(html, tag, namespace, parent) {
+  const documentScaffold = namespace === 'html' && (tag.name === 'html' || tag.name === 'body');
   return Boolean(parent?.inactive)
     || (namespace === 'html' && SOURCE_INACTIVE_CONTEXT_ELEMENTS.has(tag.name))
-    || (namespace === 'html' && sourceTagAttribute(html, tag, 'role')
+    || (!documentScaffold && namespace === 'html' && sourceTagAttribute(html, tag, 'role')
       .trim().toLowerCase().split(/\s+/)
       .some((role) => SOURCE_INACTIVE_CONTEXT_ROLES.has(role)))
-    || (namespace === 'html' && SOURCE_INACTIVE_CONTEXT_HINT.test([
+    || (!documentScaffold && namespace === 'html' && SOURCE_INACTIVE_CONTEXT_HINT.test([
       sourceTagAttribute(html, tag, 'id'),
       sourceTagAttribute(html, tag, 'class'),
       sourceTagAttribute(html, tag, 'role'),
@@ -8072,19 +8073,21 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
 
   const emitText = (start, end) => {
     const text = html.slice(start, end);
+    let closesImplicitHead = false;
     if (/\S/u.test(text)) {
       const head = stack.at(-1);
       if (head?.name === 'head' && head.namespace === 'html') {
         popThrough(stack.length - 1, start, true);
       }
-      if (
+      closesImplicitHead = Boolean(
         implicitHead
         && stack.length === 1
         && stack[0]?.name === 'html'
         && stack[0]?.namespace === 'html'
-      ) implicitHead = false;
+      );
     }
     if (onText) onText({ text, start, end, stack: stack.slice() });
+    if (closesImplicitHead) implicitHead = false;
   };
 
   while (cursor < html.length) {
