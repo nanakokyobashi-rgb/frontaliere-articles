@@ -8123,6 +8123,7 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd } 
         if (stack.at(-1)?.namespace !== 'html') {
           malformed = true;
           if (!recoverMalformed) return { malformed, stack };
+          return { malformed, stack: [] };
         }
         cursor = tag.end + 1;
         continue;
@@ -8155,6 +8156,11 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd } 
     cursor = tag.end + 1;
   }
 
+  if (malformed) {
+    // An open article/main at the point of malformed input has no reliable
+    // end boundary. Do not turn it into a completed editorial root at EOF.
+    return { malformed, stack: [] };
+  }
   popThrough(0, html.length, true);
   return { malformed, stack };
 }
