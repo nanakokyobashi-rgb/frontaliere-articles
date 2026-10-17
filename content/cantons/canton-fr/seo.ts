@@ -270,6 +270,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-dibattito-prefettura-sarine': {
+    title: 'Sarine, i sette candidati alla prefettura a confronto',
+    description: 'A Corpataux, il 14 ottobre 2026, sette pretendenti alla Prefettura della Sarine si sono confrontati su mobilità e attrattività economica nel dibattito locale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sarine, sette, candidati, alla',
+    ogTitle: 'Sette candidati alla Prefettura della Sarine a confronto',
+    ogDescription: 'Il lead pubblico racconta il confronto tra i sette pretendenti alla Prefettura della Sarine, riuniti a Corpataux mercoledì 14 ottobre 2026. La discussione aveva al centro mobilità e attrattività economica, senza dettagli su misure operative.',
+    canonicalPath: '/articoli-friburgo/dibattito-prefettura-sarine/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sarine, i sette candidati alla prefettura a confronto",
+      "description": "A Corpataux, il 14 ottobre 2026, sette pretendenti alla Prefettura della Sarine si sono confrontati su mobilità e attrattività economica nel dibattito locale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Dibattito a Corpataux tra i sette candidati alla Prefettura della Sarine"
+      },
+      "datePublished": "2026-10-17T01:20:36+00:00",
+      "dateModified": "2026-10-17T01:20:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-friburgo/dibattito-prefettura-sarine/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

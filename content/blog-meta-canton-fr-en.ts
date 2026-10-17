@@ -24,6 +24,9 @@ const blogMetaCantonFrEn: Record<string, string> = {
     'blog.article.friburgo-deduzioni-carburante.title': 'Fuels: the Canton does not want to increase deductions',
     'blog.article.friburgo-deduzioni-carburante.excerpt': 'Diesel exceeds CHF 2.40 per litre.',
     'blog.article.friburgo-deduzioni-carburante.imageAlt': 'Car driving in the Canton of Fribourg',
+    'blog.article.dibattito-prefettura-sarine.title': 'Sarine, the seven candidates for the prefecture compared',
+    'blog.article.dibattito-prefettura-sarine.excerpt': 'In Corpataux, on 14 October 2026, seven claimants to the Sarine Prefecture discussed mobility and economic attractiveness in the local debate.',
+    'blog.article.dibattito-prefettura-sarine.imageAlt': 'Debate in Corpataux between the seven candidates for the Sarine prefecture',
 };
 
 export default blogMetaCantonFrEn;

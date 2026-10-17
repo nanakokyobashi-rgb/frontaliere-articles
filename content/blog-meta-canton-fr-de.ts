@@ -24,6 +24,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.friburgo-deduzioni-carburante.title': 'Treibstoffe: Kanton will Abzüge nicht erhöhen',
     'blog.article.friburgo-deduzioni-carburante.excerpt': 'Diesel übersteigt CHF 2,40 pro Liter.',
     'blog.article.friburgo-deduzioni-carburante.imageAlt': 'Auto im Kanton Freiburg',
+    'blog.article.dibattito-prefettura-sarine.title': 'Sarine, die sieben Präfekturkandidaten im Vergleich',
+    'blog.article.dibattito-prefettura-sarine.excerpt': 'In Corpataux diskutierten am 14.',
+    'blog.article.dibattito-prefettura-sarine.imageAlt': 'Debatte in Corpataux zwischen den sieben Kandidierenden für die Präfektur Saane',
 };
 
 export default blogMetaCantonFrDe;

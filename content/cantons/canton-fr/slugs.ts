@@ -10,6 +10,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'garanzia-hib-payerne': { it: 'garanzia-hib-payerne', en: 'fribourg-hib-guarantee', de: 'freiburg-hib-buergschaft', fr: 'fribourg-garantie-hib' },
  'frontalieri-friburgo-giugno-2026': { it: 'frontalieri-friburgo-giugno-2026', en: 'fribourg-foreign-frontier-workers-2026', de: 'freiburg-auslaendische-grenzgaenger-2026', fr: 'fribourg-travailleurs-frontaliers-2026' },
  'friburgo-deduzioni-carburante': { it: 'friburgo-deduzioni-carburante', en: 'fribourg-fuel-deductions', de: 'freiburg-treibstoff-abzuege', fr: 'fribourg-deductions-carburant' },
+ 'dibattito-prefettura-sarine': { it: 'dibattito-prefettura-sarine', en: 'sarine-prefecture-debate', de: 'sarine-praefektur-debatte', fr: 'debat-prefecture-sarine' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
