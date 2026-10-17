@@ -2213,7 +2213,7 @@
       "reason": "Contratto e lettore del lock R2 temporaneo usato per impedire che publish-api annunci una release mentre il bootstrap sta ancora caricando le pagine della stessa sezione; la pubblicazione edge e' una responsabilita' del corpus, mentre il sito legge il registry gia' pubblicato.",
       "baseline": {
         "site": null,
-        "corpus": "66dc0c663b9106fd",
+        "corpus": "e1cc80ab7d16cc03",
         "alignedAt": "2026-10-17"
       }
     },

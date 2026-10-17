@@ -1627,7 +1627,9 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.ok(at > wf.indexOf('uses: actions/deploy-pages'));
   assert.ok(at > wf.indexOf('- name: Push the article sitemaps and the blog index to the edge'));
   assert.ok(notify > at, 'la notifica al sito parte dopo il flip edge');
-  assert.equal(wf.slice(at, wf.indexOf('      # Tell the site the surface moved.')).trimEnd(), [
+  const edgeEnd = wf.indexOf('\n\n', at);
+  assert.ok(edgeEnd > at, 'il passo edge deve avere un delimitatore');
+  assert.equal(wf.slice(at, edgeEnd).trimEnd(), [
     '      - name: Publish the canton sections release to the edge',
     '        id: publish_edge',
     "        if: steps.deploy.outcome == 'success'",
