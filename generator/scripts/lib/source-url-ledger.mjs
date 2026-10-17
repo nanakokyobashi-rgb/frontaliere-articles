@@ -331,8 +331,12 @@ const MASK_VOID_ELEMENTS = new Set([
   'param', 'source', 'track', 'wbr',
 ]);
 const INACTIVE_RAW_TEXT_TAGS = new Set(['script', 'style', 'noscript', 'iframe', 'xmp', 'noembed', 'noframes']);
+const MASK_HEAD_ELEMENTS = new Set([
+  'base', 'basefont', 'bgsound', 'head', 'html', 'link', 'meta', 'noframes',
+  'noscript', 'script', 'style', 'template', 'title',
+]);
 const TEMPLATE_RAW_TEXT_TAGS = new Set([
-  'script', 'style', 'textarea', 'title', 'noscript', 'iframe', 'xmp',
+  'script', 'style', 'textarea', 'title', 'noscript', 'iframe', 'xmp', 'plaintext',
   'noembed', 'noframes',
 ]);
 
@@ -419,11 +423,243 @@ function maskSkipComment(html, start) {
   return end < 0 ? -1 : end + 3;
 }
 
+function maskSkipDocumentDeclaration(html, start) {
+  if (/^<!doctype(?:\s|>)/iu.test(html.slice(start))) {
+    let quote = '';
+    let subsetDepth = 0;
+    for (let index = start + 9; index < html.length; index += 1) {
+      const char = html[index];
+      if (quote) {
+        if (char === quote) quote = '';
+      } else if (char === '"' || char === "'") {
+        quote = char;
+      } else if (char === '[') {
+        subsetDepth += 1;
+      } else if (char === ']') {
+        subsetDepth = Math.max(0, subsetDepth - 1);
+      } else if (char === '>' && subsetDepth === 0) {
+        return index + 1;
+      }
+    }
+    return -1;
+  }
+  if (/^<\?xml(?:\s|\?|>)/iu.test(html.slice(start))) {
+    const end = html.indexOf('?>', start + 5);
+    return end < 0 ? -1 : end + 2;
+  }
+  return null;
+}
+
 function maskSkipRawText(html, afterOpening, name) {
+  if (name === 'plaintext') return html.length;
+  const closing = maskFindRawTextClose(html, afterOpening, name);
+  return closing ? closing.end : -1;
+}
+
+function maskSkipHead(html, afterOpening) {
+  let depth = 1;
+  let cursor = afterOpening;
+  while (cursor < html.length) {
+    const start = html.indexOf('<', cursor);
+    if (start < 0) return -1;
+    if (html.startsWith('<!--', start)) {
+      const afterComment = maskSkipComment(html, start);
+      if (afterComment < 0) return -1;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = maskReadTag(html, start);
+    if (tag?.malformed) return -1;
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (tag.name === 'template' && !tag.closing && !tag.selfClosing) {
+      const afterTemplate = maskSkipTemplate(html, tag.end + 1);
+      if (afterTemplate < 0) return -1;
+      cursor = afterTemplate;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && TEMPLATE_RAW_TEXT_TAGS.has(tag.name)) {
+      const afterRawText = maskSkipRawText(html, tag.end + 1, tag.name);
+      if (afterRawText < 0) return -1;
+      cursor = afterRawText;
+      continue;
+    }
+    if (!tag.closing && tag.name === 'plaintext') return html.length;
+    if (tag.name === 'head') {
+      if (tag.closing) {
+        depth--;
+        if (depth === 0) return tag.end + 1;
+      } else if (!tag.selfClosing) {
+        depth++;
+      }
+    }
+    cursor = tag.end + 1;
+  }
+  return -1;
+}
+
+function maskFindRawTextClose(html, afterOpening, name) {
   const closing = new RegExp(`</${name}\\s*>`, 'ig');
   closing.lastIndex = afterOpening;
   const match = closing.exec(html);
-  return match ? match.index + match[0].length : -1;
+  return match ? { start: match.index, end: match.index + match[0].length } : null;
+}
+
+// RCDATA is active page content, but markup-looking text inside it is not a
+// second element. Keep the title text available to the title regex while
+// masking it in the separate metadata pass below.
+function maskRcdataContentForMetadata(html) {
+  const source = String(html || '');
+  const output = source.split('');
+  const blank = (start, end) => {
+    for (let i = start; i < end; i++) output[i] = ' ';
+  };
+  let cursor = 0;
+  while (cursor < source.length) {
+    const start = source.indexOf('<', cursor);
+    if (start < 0) break;
+    const tag = maskReadTag(source, start);
+    if (tag?.malformed) break;
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && (tag.name === 'title' || tag.name === 'textarea')) {
+      const closing = maskFindRawTextClose(source, tag.end + 1, tag.name);
+      const contentEnd = closing?.start ?? source.length;
+      blank(tag.end + 1, contentEnd);
+      if (!closing) break;
+      cursor = closing.end;
+      continue;
+    }
+    cursor = tag.end + 1;
+  }
+  return output.join('');
+}
+
+function maskSkipForeignElement(html, start, startTag, name) {
+  const hasExplicitSelfClose = (tagStart, tag) => {
+    if (tag.closing) return false;
+    const nameEnd = tagStart + 1 + tag.name.length;
+    return inspectMaskSelfClosingStartTag(html, nameEnd, tag.end) === true;
+  };
+  if (hasExplicitSelfClose(start, startTag)) return startTag.end + 1;
+
+  let depth = 1;
+  let cursor = startTag.end + 1;
+  while (cursor < html.length) {
+    const tagStart = html.indexOf('<', cursor);
+    if (tagStart < 0) return html.length;
+    if (html.startsWith('<!--', tagStart)) {
+      const afterComment = maskSkipComment(html, tagStart);
+      if (afterComment < 0) return html.length;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = maskReadTag(html, tagStart);
+    if (tag?.malformed) return html.length;
+    if (!tag) {
+      cursor = tagStart + 1;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && tag.name === 'template') {
+      const afterTemplate = maskSkipTemplate(html, tag.end + 1);
+      if (afterTemplate < 0) return html.length;
+      cursor = afterTemplate;
+      continue;
+    }
+    if (
+      !tag.closing &&
+      !tag.selfClosing &&
+      (tag.name === 'title' || tag.name === 'textarea' || tag.name === 'plaintext'
+        || (INACTIVE_RAW_TEXT_TAGS.has(tag.name) && tag.name !== 'noscript'))
+    ) {
+      const afterRawText = maskSkipRawText(html, tag.end + 1, tag.name);
+      if (afterRawText < 0) return html.length;
+      cursor = afterRawText;
+      continue;
+    }
+    if (tag.name === name) {
+      if (tag.closing) {
+        depth -= 1;
+        if (depth === 0) return tag.end + 1;
+      } else if (!hasExplicitSelfClose(tagStart, tag)) {
+        depth += 1;
+      }
+    }
+    cursor = tag.end + 1;
+  }
+  return html.length;
+}
+
+function maskNonDocumentTitleMarkup(html) {
+  const source = String(html || '');
+  const output = source.split('');
+  const blank = (start, end) => {
+    for (let i = start; i < end; i++) output[i] = ' ';
+  };
+  let cursor = 0;
+  while (cursor < source.length) {
+    const start = source.indexOf('<', cursor);
+    if (start < 0) break;
+    if (source.startsWith('<!--', start)) {
+      const afterComment = maskSkipComment(source, start);
+      if (afterComment < 0) {
+        blank(start, source.length);
+        break;
+      }
+      cursor = afterComment;
+      continue;
+    }
+    const declarationEnd = maskSkipDocumentDeclaration(source, start);
+    if (declarationEnd !== null) {
+      if (declarationEnd < 0) {
+        blank(start, source.length);
+        break;
+      }
+      cursor = declarationEnd;
+      continue;
+    }
+    const tag = maskReadTag(source, start);
+    if (tag?.malformed) {
+      blank(start, source.length);
+      break;
+    }
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (!tag.closing && (tag.name === 'svg' || tag.name === 'math')) {
+      const end = maskSkipForeignElement(source, start, tag, tag.name);
+      blank(start, end);
+      cursor = end;
+      continue;
+    }
+    if (!tag.closing && tag.name === 'plaintext') {
+      blank(start, source.length);
+      break;
+    }
+    if (!tag.closing && !tag.selfClosing && tag.name === 'textarea') {
+      const end = maskSkipRawText(source, tag.end + 1, tag.name);
+      blank(start, end < 0 ? source.length : end);
+      if (end < 0) break;
+      cursor = end;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && tag.name === 'title') {
+      const end = maskSkipRawText(source, tag.end + 1, tag.name);
+      if (end < 0) {
+        blank(start, source.length);
+        break;
+      }
+      cursor = end;
+      continue;
+    }
+    cursor = tag.end + 1;
+  }
+  return output.join('');
 }
 
 function maskSkipTemplate(html, afterOpening) {
@@ -474,23 +710,52 @@ function maskSkipTemplate(html, afterOpening) {
  * esterno quando il markup contiene template annidati.
  *
  * @param {string} html
+ * @param {{ scriptingDisabled?: boolean }} [opts] Treat body `<noscript>`
+ *   fallback as active when scripting is disabled; head and template stay inert.
  * @returns {string}
  */
-export function maskInactiveMarkup(html) {
+export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
   const source = String(html || '');
   const output = source.split('');
   const blank = (start, end) => {
     for (let i = start; i < end; i++) output[i] = ' ';
   };
+  let headDepth = 0;
+  let implicitHead = false;
+  let sawHtml = false;
+  let sawDocumentHead = false;
+  let documentBodyStarted = false;
+  let documentClosed = false;
   let cursor = 0;
   while (cursor < source.length) {
     const start = source.indexOf('<', cursor);
-    if (start < 0) break;
+    if (start < 0) {
+      if (/\S/u.test(source.slice(cursor))) {
+        documentBodyStarted = true;
+        headDepth = 0;
+        implicitHead = false;
+      }
+      break;
+    }
+    if (/\S/u.test(source.slice(cursor, start))) {
+      documentBodyStarted = true;
+      headDepth = 0;
+      implicitHead = false;
+    }
     if (source.startsWith('<!--', start)) {
       const afterComment = maskSkipComment(source, start);
       blank(start, afterComment < 0 ? source.length : afterComment);
       if (afterComment < 0) break;
       cursor = afterComment;
+      continue;
+    }
+    const declarationEnd = maskSkipDocumentDeclaration(source, start);
+    if (declarationEnd !== null) {
+      if (declarationEnd < 0) {
+        blank(start, source.length);
+        break;
+      }
+      cursor = declarationEnd;
       continue;
     }
     const tag = maskReadTag(source, start);
@@ -502,7 +767,57 @@ export function maskInactiveMarkup(html) {
       cursor = start + 1;
       continue;
     }
-    if (!tag.closing && !tag.selfClosing && INACTIVE_RAW_TEXT_TAGS.has(tag.name)) {
+    if (tag.closing && tag.name === 'html') {
+      documentClosed = true;
+      implicitHead = false;
+      headDepth = 0;
+    }
+    if (!tag.closing && tag.name === 'head') {
+      const isDocumentHead = !sawDocumentHead && !documentClosed
+        && !documentBodyStarted && headDepth === 0;
+      if (!isDocumentHead) {
+        const afterHead = maskSkipHead(source, tag.end + 1);
+        blank(start, afterHead < 0 ? source.length : afterHead);
+        if (afterHead < 0) break;
+        cursor = afterHead;
+        continue;
+      }
+      sawDocumentHead = true;
+    }
+    if (!tag.closing && headDepth > 0 && !MASK_HEAD_ELEMENTS.has(tag.name)) {
+      // A non-head start tag implicitly closes head before body content.
+      headDepth = 0;
+    }
+    if (!tag.closing && tag.name === 'html' && !sawHtml) {
+      sawHtml = true;
+      implicitHead = true;
+    } else if (!tag.closing && (tag.name === 'head' || tag.name === 'body')) {
+      implicitHead = false;
+    } else if (!tag.closing && implicitHead && !MASK_HEAD_ELEMENTS.has(tag.name)) {
+      implicitHead = false;
+    }
+    if (tag.name === 'head') {
+      if (tag.closing) headDepth = Math.max(0, headDepth - 1);
+      else if (!tag.selfClosing) headDepth += 1;
+    }
+    // An explicit body start closes an omitted/unclosed head in HTML. In the
+    // head, noscript fallback is never title evidence, even with scripting off.
+    if (!tag.closing && tag.name === 'body') headDepth = 0;
+    if (!tag.closing && tag.name !== 'html' && !MASK_HEAD_ELEMENTS.has(tag.name)) {
+      documentBodyStarted = true;
+    }
+    const inHead = headDepth > 0 || implicitHead;
+    if (!tag.closing && !tag.selfClosing && tag.name === 'title') {
+      // Keep title text available to pageTitleEvidence, but do not parse it as
+      // markup or mistake it for body text that closes an open head.
+      const afterTitle = maskSkipRawText(source, tag.end + 1, tag.name);
+      if (afterTitle < 0) break;
+      cursor = afterTitle;
+      continue;
+    }
+    const isInactiveRawText = INACTIVE_RAW_TEXT_TAGS.has(tag.name)
+      && !(scriptingDisabled && tag.name === 'noscript' && !inHead);
+    if (!tag.closing && !tag.selfClosing && isInactiveRawText) {
       const afterRawText = maskSkipRawText(source, tag.end + 1, tag.name);
       blank(start, afterRawText < 0 ? source.length : afterRawText);
       if (afterRawText < 0) break;
@@ -529,20 +844,23 @@ export function maskInactiveMarkup(html) {
  * parole del proprio titolo verrebbe scartato pur essendo l'item giusto.
  *
  * @param {string} html
+ * @param {{ scriptingDisabled?: boolean }} [opts]
  * @returns {string} i titoli, uno per riga ('' se non ce n'e')
  */
-export function pageTitleEvidence(html) {
+export function pageTitleEvidence(html, opts = {}) {
   // Solo markup attivo: un `<h1>` o un `<title>` dentro un commento, uno
   // script o un template puo' essere il titolo di un'altra notizia.
-  const src = maskInactiveMarkup(html);
+  const src = maskInactiveMarkup(html, opts);
+  const titleSrc = maskNonDocumentTitleMarkup(src);
+  const metadataSrc = maskRcdataContentForMetadata(titleSrc);
   const out = [];
-  for (const m of src.matchAll(/<meta\b[^>]*>/gi)) {
+  for (const m of metadataSrc.matchAll(/<meta\b[^>]*>/gi)) {
     const tag = m[0];
     if (!/\b(?:property|name)\s*=\s*["']?(?:og:title|twitter:title)["'\s>]/i.test(tag)) continue;
     const content = /\bcontent\s*=\s*(?:"([^"]*)"|'([^']*)')/i.exec(tag);
     if (content) out.push(content[1] ?? content[2] ?? '');
   }
-  for (const m of src.matchAll(/<(title|h1)\b[^>]*>([\s\S]*?)<\/\1\s*>/gi)) out.push(m[2].replace(/<[^>]+>/g, ' '));
+  for (const m of titleSrc.matchAll(/<(title|h1)\b[^>]*>([\s\S]*?)<\/\1\s*>/gi)) out.push(m[2].replace(/<[^>]+>/g, ' '));
   return out.map((t) => t.replace(/\s+/g, ' ').trim()).filter(Boolean).join('\n');
 }
 

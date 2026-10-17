@@ -7701,14 +7701,18 @@ export function checkStatsAstraCountFidelity(articleText, sourceText) {
 // sull'INTERA pagina; quindi si toglie la pagina intera, non le sue frasi.
 //
 // Isolando qui, PRIMA di chiamare l'estrattore, tutti e sei i suoi rami — cap
-// di fallback compresi — vedono solo la radice editoriale. `<head>` e i blocchi
-// JSON-LD vengono conservati ovunque stiano: sono cio' da cui l'estrattore
-// ricava il ramo migliore (`articleBody`) e la data di pubblicazione della
-// fonte, e buttarli per isolare il corpo sarebbe scambiare un difetto con due.
+// di fallback compresi — vedono solo la radice editoriale. Il `<head>` viene
+// conservato solo se document-level; i JSON-LD esterni alla radice vengono
+// riattivati solo quando lo scanner li riconosce come script attivi del body.
+// Sono cio' da cui l'estrattore ricava il ramo migliore (`articleBody`) e la
+// data di pubblicazione della fonte, ma il markup inattivo non deve riattivarli.
 //
 // `extract-article-text.mjs` non viene toccato di proposito: e'
 // `mode: identical` nel manifest del ciclo (gemello di scripts/lib/ del sito),
-// e una modifica la' va fatta sul sito e scende col mirror.
+// e una modifica la' va fatta sul sito e scende col mirror. Quando il pezzo
+// scelto contiene un `<noscript>` body, qui lo si rende esplicito come markup
+// attivo prima di consegnare lo stesso HTML all'estrattore e alla title
+// evidence: e' la modalita' scripting-disabled prevista dal parser HTML.
 
 // Sotto questa soglia di testo visibile il blocco isolato non e' un corpo
 // d'articolo: si preferisce non isolare affatto, per non regredire sotto il
@@ -7734,9 +7738,50 @@ const SOURCE_HTML_VOID_ELEMENTS = new Set([
   'param', 'source', 'track', 'wbr',
 ]);
 const SOURCE_HTML_RAW_TEXT_ELEMENTS = new Set([
-  'script', 'style', 'textarea', 'title', 'noscript', 'iframe', 'xmp',
-  'noembed', 'noframes',
+  'script', 'style', 'textarea', 'title', 'iframe', 'xmp',
+  'noembed', 'noframes', 'plaintext',
 ]);
+// While skipping an inert template, `noscript` follows the scripting-enabled
+// raw-text rule so a literal `</template>` in its fallback cannot escape it.
+const SOURCE_HTML_TEMPLATE_RAW_TEXT_ELEMENTS = new Set([
+  ...SOURCE_HTML_RAW_TEXT_ELEMENTS,
+  'noscript',
+]);
+// SVG script contents are raw text too; apparent HTML inside them must not
+// escape through foreignObject as an active editorial root.
+const SOURCE_FOREIGN_RAW_TEXT_ELEMENTS = new Set(['script', 'style']);
+const SOURCE_HTML_HEAD_ELEMENTS = new Set([
+  'base', 'basefont', 'bgsound', 'link', 'meta', 'noframes', 'noscript',
+  'script', 'style', 'template', 'title',
+]);
+const SOURCE_HTML_IMPLICIT_END_TAGS = new Map([
+  ['body', new Set(['head'])],
+  ['li', new Set(['li'])],
+  ['dt', new Set(['dt', 'dd'])],
+  ['dd', new Set(['dt', 'dd'])],
+  ...[
+    'address', 'article', 'aside', 'blockquote', 'details', 'div', 'dl',
+    'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3',
+    'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'main', 'menu', 'nav', 'ol',
+    'p', 'pre', 'search', 'section', 'table', 'ul',
+  ].map((name) => [name, new Set(['p'])]),
+  ['rt', new Set(['rt', 'rp'])],
+  ['rp', new Set(['rt', 'rp'])],
+  ['optgroup', new Set(['optgroup'])],
+  ['option', new Set(['option', 'optgroup'])],
+  ['thead', new Set(['colgroup'])],
+  ['tbody', new Set(['colgroup', 'thead', 'tbody', 'tfoot'])],
+  ['tfoot', new Set(['colgroup', 'thead', 'tbody', 'tfoot'])],
+  ['tr', new Set(['colgroup', 'tr'])],
+  ['td', new Set(['td', 'th'])],
+  ['th', new Set(['td', 'th'])],
+  ['colgroup', new Set(['colgroup'])],
+]);
+const SOURCE_INACTIVE_CONTEXT_ELEMENTS = new Set([
+  'aside', 'footer', 'form', 'head', 'header', 'nav',
+]);
+const SOURCE_INACTIVE_CONTEXT_ROLES = new Set(['banner', 'complementary', 'contentinfo']);
+const SOURCE_INACTIVE_CONTEXT_HINT = /\b(?:advert|breadcrumb|comment|cookie|footer|header|latest|modal|navigation|promo|recommend|related|sidebar|social|teaser)\b/i;
 
 function sourceHtmlWhitespace(char) {
   return char === ' ' || char === '\t' || char === '\n' || char === '\r' || char === '\f';
@@ -7762,7 +7807,7 @@ function inspectSourceSelfClosingStartTag(html, nameEnd, end) {
   while (index < end) {
     while (index < end && sourceHtmlWhitespace(html[index])) index += 1;
     if (index >= end) return false;
-    if (html[index] === '>') return { malformed: true };
+    if (html[index] === '>') return false;
     if (html[index] === '/') return index + 1 === end;
     while (
       index < end &&
@@ -7804,7 +7849,7 @@ function sourceReadTag(html, start) {
   // invece di essere trattato come un carattere da saltare.
   if (end < 0) return { malformed: true };
   const name = match[0].toLowerCase();
-  const selfClosingState = !closing && SOURCE_HTML_VOID_ELEMENTS.has(name)
+  const selfClosingState = !closing
     ? inspectSourceSelfClosingStartTag(html, nameEnd, end)
     : false;
   if (selfClosingState?.malformed) return selfClosingState;
@@ -7812,8 +7857,24 @@ function sourceReadTag(html, start) {
     closing,
     end,
     name,
-    selfClosing: selfClosingState,
+    nameEnd,
+    selfClosing: SOURCE_HTML_VOID_ELEMENTS.has(name) && selfClosingState === true,
+    explicitSelfClosing: selfClosingState === true,
   };
+}
+
+// An XHTML response may start with an XML declaration. It is a document
+// prologue, not document text, so the isolation scanner must consume it before
+// deciding whether non-whitespace content appeared before the HTML scaffold.
+function sourceReadXmlPrologueEnd(html, start) {
+  if (!/^<\?xml\s/iu.test(html.slice(start))) return -1;
+  const end = html.indexOf('?>', start + 5);
+  if (end < 0) return -1;
+  const declaration = html.slice(start, end + 2);
+  if (!/^<\?xml\s+version\s*=\s*["']1\.\d+["'](?:\s+encoding\s*=\s*["'][A-Za-z][A-Za-z0-9._-]*["'])?(?:\s+standalone\s*=\s*["'](?:yes|no)["'])?\s*\?>$/iu.test(declaration)) {
+    return -1;
+  }
+  return end + 2;
 }
 
 function sourceSkipComment(html, start) {
@@ -7821,7 +7882,13 @@ function sourceSkipComment(html, start) {
   return end < 0 ? -1 : end + 3;
 }
 
+function sourceIsRawTextElement(namespace, name) {
+  return (namespace === 'html' && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(name))
+    || (namespace === 'svg' && SOURCE_FOREIGN_RAW_TEXT_ELEMENTS.has(name));
+}
+
 function sourceFindRawTextClose(html, afterOpening, name) {
+  if (name === 'plaintext') return html.length;
   const closing = new RegExp(`</${name}\\s*>`, 'ig');
   closing.lastIndex = afterOpening;
   const match = closing.exec(html);
@@ -7831,6 +7898,7 @@ function sourceFindRawTextClose(html, afterOpening, name) {
 function sourceSkipTemplate(html, afterOpening) {
   let depth = 1;
   let cursor = afterOpening;
+  const stack = [{ name: 'template', namespace: 'html', tag: null }];
   while (cursor < html.length) {
     const start = html.indexOf('<', cursor);
     if (start < 0) return -1;
@@ -7846,14 +7914,43 @@ function sourceSkipTemplate(html, afterOpening) {
       cursor = start + 1;
       continue;
     }
-    if (tag.name === 'template') {
-      if (tag.closing) {
-        depth -= 1;
-        if (depth === 0) return tag.end + 1;
-      } else if (!tag.selfClosing) {
-        depth += 1;
+    const namespace = sourceNamespaceForStart(stack, tag, html);
+    const isVoid = namespace === 'html'
+      ? SOURCE_HTML_VOID_ELEMENTS.has(tag.name)
+      : tag.explicitSelfClosing === true;
+
+    if (tag.closing) {
+      let matchingIndex = -1;
+      for (let index = stack.length - 1; index >= 0; index -= 1) {
+        if (stack[index].name === tag.name && stack[index].namespace === namespace) {
+          matchingIndex = index;
+          break;
+        }
       }
-    } else if (!tag.closing && !tag.selfClosing && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(tag.name)) {
+      if (matchingIndex >= 0) {
+        const matched = stack[matchingIndex];
+        if (matched.name === 'template' && matched.namespace === 'html') {
+          depth -= 1;
+          if (depth === 0) return tag.end + 1;
+        }
+        stack.length = matchingIndex;
+      }
+      cursor = tag.end + 1;
+      continue;
+    }
+
+    if (namespace === 'html' && tag.name === 'template' && !isVoid) {
+      depth += 1;
+    }
+    const isRawTextElement = !isVoid && (
+      namespace === 'html'
+        ? SOURCE_HTML_TEMPLATE_RAW_TEXT_ELEMENTS.has(tag.name)
+        : sourceIsRawTextElement(namespace, tag.name)
+    );
+    if (!isRawTextElement) {
+      stack.push({ name: tag.name, namespace, tag });
+    }
+    if (isRawTextElement) {
       const afterRawText = sourceFindRawTextClose(html, tag.end + 1, tag.name);
       if (afterRawText < 0) return -1;
       cursor = afterRawText;
@@ -7864,138 +7961,916 @@ function sourceSkipTemplate(html, afterOpening) {
   return -1;
 }
 
-function findActiveSourceHead(html) {
+function sourceTagAttribute(html, tag, wantedName) {
+  if (!tag || tag.closing) return '';
+  const wanted = String(wantedName || '').toLowerCase();
+  let cursor = tag.nameEnd;
+  while (cursor < tag.end) {
+    while (cursor < tag.end && sourceHtmlWhitespace(html[cursor])) cursor += 1;
+    if (cursor >= tag.end || html[cursor] === '/') break;
+
+    const nameStart = cursor;
+    while (
+      cursor < tag.end &&
+      !sourceHtmlWhitespace(html[cursor]) &&
+      html[cursor] !== '=' &&
+      html[cursor] !== '/'
+    ) cursor += 1;
+    const name = html.slice(nameStart, cursor).toLowerCase();
+    while (cursor < tag.end && sourceHtmlWhitespace(html[cursor])) cursor += 1;
+
+    let value = '';
+    if (html[cursor] === '=') {
+      cursor += 1;
+      while (cursor < tag.end && sourceHtmlWhitespace(html[cursor])) cursor += 1;
+      const quote = html[cursor];
+      if (quote === '"' || quote === "'") {
+        cursor += 1;
+        const valueStart = cursor;
+        while (cursor < tag.end && html[cursor] !== quote) cursor += 1;
+        value = html.slice(valueStart, cursor);
+        if (cursor < tag.end) cursor += 1;
+      } else {
+        const valueStart = cursor;
+        while (cursor < tag.end && !sourceHtmlWhitespace(html[cursor])) cursor += 1;
+        value = html.slice(valueStart, cursor);
+      }
+    }
+
+    if (name === wanted) return value;
+  }
+  return '';
+}
+
+function sourceStackIndex(stack, name) {
+  for (let index = stack.length - 1; index >= 0; index -= 1) {
+    if (stack[index].name === name) return index;
+  }
+  return -1;
+}
+
+function sourceNamespaceForStart(stack, tag, html) {
+  if (tag.closing) {
+    for (let index = stack.length - 1; index >= 0; index -= 1) {
+      if (stack[index].name === tag.name) return stack[index].namespace;
+    }
+  }
+  const parent = stack.at(-1);
+  if (!parent || parent.namespace === 'html') {
+    if (tag.name === 'svg') return 'svg';
+    if (tag.name === 'math') return 'mathml';
+    return 'html';
+  }
+  if (parent.namespace === 'svg') {
+    // foreignObject is an HTML integration point, but SVG and MathML can
+    // re-enter from inside it. Resolve those tags before the HTML fallback.
+    if (tag.name === 'svg') return 'svg';
+    if (tag.name === 'math') return 'mathml';
+    return parent.name === 'foreignobject' ? 'html' : 'svg';
+  }
+  if (parent.namespace === 'mathml') {
+    // annotation-xml with an HTML encoding is an HTML integration point;
+    // nested SVG/MathML tags still start their foreign namespace.
+    if (tag.name === 'svg') return 'svg';
+    if (tag.name === 'math') return 'mathml';
+    if (parent.name === 'annotation-xml') {
+      const encoding = sourceTagAttribute(html, parent.tag, 'encoding').trim().toLowerCase();
+      if (encoding === 'text/html' || encoding === 'application/xhtml+xml') return 'html';
+    }
+    return 'mathml';
+  }
+  return 'html';
+}
+
+function sourceTagIsInactive(html, tag, namespace, parent, stack = []) {
+  const documentScaffold = namespace === 'html' && (tag.name === 'html' || tag.name === 'body');
+  const editorialRoot = namespace === 'html' && (tag.name === 'article' || tag.name === 'main');
+  const insideEditorialRoot = stack.some((ancestor) => (
+    ancestor.namespace === 'html' && (ancestor.name === 'article' || ancestor.name === 'main')
+  ));
+  const contextAttributes = [
+    sourceTagAttribute(html, tag, 'id'),
+    sourceTagAttribute(html, tag, 'class'),
+    sourceTagAttribute(html, tag, 'role'),
+    sourceTagAttribute(html, tag, 'aria-label'),
+  ].join(' ');
+  const editorialHeader = insideEditorialRoot && (
+    tag.name === 'header' || /\bheader\b/i.test(contextAttributes)
+  );
+  const pruneChrome = !editorialRoot && !editorialHeader;
+  return Boolean(parent?.inactive)
+    || (pruneChrome && namespace === 'html' && SOURCE_INACTIVE_CONTEXT_ELEMENTS.has(tag.name))
+    || (pruneChrome && !documentScaffold && namespace === 'html' && sourceTagAttribute(html, tag, 'role')
+      .trim().toLowerCase().split(/\s+/)
+      .some((role) => SOURCE_INACTIVE_CONTEXT_ROLES.has(role)))
+    || (pruneChrome && !documentScaffold && namespace === 'html'
+      && SOURCE_INACTIVE_CONTEXT_HINT.test(contextAttributes));
+}
+
+function sourceImplicitCloseIndex(stack, name) {
+  const closers = SOURCE_HTML_IMPLICIT_END_TAGS.get(name);
+  if (stack.at(-1)?.name === 'head' && stack.at(-1)?.namespace === 'html'
+    && !SOURCE_HTML_HEAD_ELEMENTS.has(name) && name !== 'html' && name !== 'head') {
+    return stack.length - 1;
+  }
+  if (!closers) return -1;
+  for (let index = stack.length - 1; index >= 0; index -= 1) {
+    const entry = stack[index];
+    if (entry.namespace !== 'html') break;
+    if (closers.has(entry.name)) return index;
+  }
+  return -1;
+}
+
+function sourceScanStructure(html, {
+  recoverMalformed = false,
+  onStart,
+  onEnd,
+  onText,
+  onImplicitHeadEnd,
+} = {}) {
   let cursor = 0;
+  const stack = [];
+  let malformed = false;
+  let implicitHead = false;
+  let implicitHeadHasContent = false;
+  let afterHead = false;
+  let sawHtml = false;
+
+  const emitEnd = (entry, end, implicit) => {
+    if (onEnd) onEnd({ entry, end, implicit });
+  };
+
+  const popThrough = (index, end, implicit, ancestorEnd = end) => {
+    const popped = stack.splice(index);
+    for (let offset = popped.length - 1; offset >= 0; offset -= 1) {
+      const ancestor = offset !== 0;
+      emitEnd(popped[offset], implicit || !ancestor ? end : ancestorEnd, implicit || ancestor);
+    }
+  };
+
+  const emitText = (start, end) => {
+    const text = html.slice(start, end);
+    let closesImplicitHead = false;
+    if (/\S/u.test(text)) {
+      const head = stack.at(-1);
+      if (head?.name === 'head' && head.namespace === 'html') {
+        popThrough(stack.length - 1, start, true);
+      }
+      closesImplicitHead = Boolean(
+        implicitHead
+        && stack.length === 1
+        && stack[0]?.name === 'html'
+        && stack[0]?.namespace === 'html'
+      );
+    }
+    if (onText) onText({ text, start, end, stack: stack.slice() });
+    if (closesImplicitHead) implicitHead = false;
+    if (
+      /\S/u.test(text) &&
+      afterHead &&
+      stack.length === 1 &&
+      stack[0]?.name === 'html' &&
+      stack[0]?.namespace === 'html'
+    ) afterHead = false;
+  };
+
   while (cursor < html.length) {
     const start = html.indexOf('<', cursor);
-    if (start < 0) return null;
+    if (start < 0) {
+      if (cursor < html.length) emitText(cursor, html.length);
+      break;
+    }
+    if (start > cursor) emitText(cursor, start);
     if (html.startsWith('<!--', start)) {
       const afterComment = sourceSkipComment(html, start);
-      if (afterComment < 0) return null;
+      if (afterComment < 0) return { malformed: true, stack };
       cursor = afterComment;
       continue;
     }
+    if (!sawHtml && stack.length === 0) {
+      const afterXmlPrologue = sourceReadXmlPrologueEnd(html, start);
+      if (afterXmlPrologue >= 0) {
+        cursor = afterXmlPrologue;
+        continue;
+      }
+    }
     const tag = sourceReadTag(html, start);
-    if (tag?.malformed) return null;
+    if (tag?.malformed) {
+      malformed = true;
+      if (!recoverMalformed) return { malformed, stack };
+      // Once a quoted attribute is unterminated, later apparent document tags
+      // may still be part of that value. With no lexical proof of a boundary,
+      // stop instead of resuming at a regex match inside malformed markup.
+      cursor = html.length;
+      continue;
+    }
     if (!tag) {
       cursor = start + 1;
       continue;
     }
-    if (!tag.closing && !tag.selfClosing && tag.name === 'template') {
+
+    const namespace = sourceNamespaceForStart(stack, tag, html);
+    const isVoid = namespace === 'html'
+      ? SOURCE_HTML_VOID_ELEMENTS.has(tag.name)
+      : tag.explicitSelfClosing === true;
+
+    const ignoredHeadDuringImplicitHead = !tag.closing
+      && namespace === 'html'
+      && tag.name === 'head'
+      && implicitHead
+      && implicitHeadHasContent
+      && stack.length === 1
+      && stack[0]?.name === 'html'
+      && stack[0]?.namespace === 'html';
+    if (ignoredHeadDuringImplicitHead) {
+      // A late explicit <head> is ignored by HTML recovery while the implied
+      // document head is still open; keep its earlier metadata and title.
+      cursor = tag.end + 1;
+      continue;
+    }
+
+    if (!tag.closing && namespace === 'html') {
+      if (implicitHead && SOURCE_HTML_HEAD_ELEMENTS.has(tag.name)) {
+        implicitHeadHasContent = true;
+      }
+      const bodyNoscriptAfterHead = tag.name === 'noscript'
+        && afterHead
+        && stack.length === 1
+        && stack[0]?.name === 'html'
+        && stack[0]?.namespace === 'html';
+      if (tag.name === 'html' && stack.length === 0 && !sawHtml) {
+        sawHtml = true;
+        implicitHead = true;
+        implicitHeadHasContent = false;
+        afterHead = false;
+      } else if (tag.name === 'head' || tag.name === 'body' || bodyNoscriptAfterHead) {
+        if (
+          tag.name === 'body' &&
+          implicitHead &&
+          stack.length === 1 &&
+          stack[0]?.name === 'html' &&
+          stack[0]?.namespace === 'html'
+        ) {
+          onImplicitHeadEnd?.({ start, end: tag.end + 1, container: stack[0] });
+        }
+        implicitHead = false;
+        afterHead = false;
+      } else if (
+        implicitHead
+        && stack.length === 1
+        && stack[0]?.name === 'html'
+        && stack[0]?.namespace === 'html'
+        && !SOURCE_HTML_HEAD_ELEMENTS.has(tag.name)
+      ) {
+        implicitHead = false;
+      }
+      if (
+        afterHead &&
+        stack.length === 1 &&
+        stack[0]?.name === 'html' &&
+        stack[0]?.namespace === 'html' &&
+        !SOURCE_HTML_HEAD_ELEMENTS.has(tag.name)
+      ) afterHead = false;
+      const implicitIndex = sourceImplicitCloseIndex(stack, tag.name);
+      if (implicitIndex >= 0) popThrough(implicitIndex, start, true);
+    } else if (tag.closing && namespace === 'html' && tag.name === 'html') {
+      implicitHead = false;
+    }
+
+    if (!tag.closing && namespace === 'html' && !isVoid && tag.name === 'template') {
       const afterTemplate = sourceSkipTemplate(html, tag.end + 1);
-      if (afterTemplate < 0) return null;
+      if (afterTemplate < 0) return { malformed: true, stack };
+      const parent = stack.at(-1) || null;
+      const entry = {
+        name: tag.name,
+        namespace,
+        start,
+        tag,
+        inactive: sourceTagIsInactive(html, tag, namespace, parent, stack),
+      };
+      if (onStart) onStart({
+        tag,
+        start,
+        end: tag.end + 1,
+        namespace,
+        isVoid: false,
+        parent,
+        stack: stack.slice(),
+        entry,
+        rawText: false,
+        skippedEnd: afterTemplate,
+      });
       cursor = afterTemplate;
       continue;
     }
-    if (!tag.closing && !tag.selfClosing && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(tag.name)) {
+
+    const isRawTextElement = !tag.closing && !isVoid && (
+      sourceIsRawTextElement(namespace, tag.name)
+      // In an actual head (explicit or implicit), noscript is a raw-text
+      // element when scripting is enabled. A direct noscript after </head> is
+      // body fallback content instead, so it must be scanned as markup.
+      || (namespace === 'html' && tag.name === 'noscript'
+        && ((stack.at(-1)?.name === 'head' && stack.at(-1)?.namespace === 'html')
+          || (implicitHead
+            && stack.at(-1)?.name === 'html' && stack.at(-1)?.namespace === 'html')))
+    );
+
+    if (isRawTextElement) {
       const afterRawText = sourceFindRawTextClose(html, tag.end + 1, tag.name);
-      if (afterRawText < 0) return null;
+      if (afterRawText < 0) return { malformed: true, stack };
+      if (onStart) onStart({
+        tag,
+        start,
+        end: tag.end + 1,
+        rawTextEnd: afterRawText,
+        namespace,
+        isVoid: false,
+        parent: stack.at(-1) || null,
+        stack: stack.slice(),
+        entry: null,
+        rawText: true,
+      });
       cursor = afterRawText;
       continue;
     }
-    if (!tag.closing && tag.name === 'head') {
-      const headStart = start;
-      let inside = tag.end + 1;
-      while (inside < html.length) {
-        const nestedStart = html.indexOf('<', inside);
-        if (nestedStart < 0) return null;
-        if (html.startsWith('<!--', nestedStart)) {
-          const afterComment = sourceSkipComment(html, nestedStart);
-          if (afterComment < 0) return null;
-          inside = afterComment;
+
+    if (tag.closing) {
+      const matchingIndex = sourceStackIndex(stack, tag.name);
+      if (matchingIndex < 0) {
+        if (
+          namespace === 'html' &&
+          tag.name === 'head' &&
+          implicitHead &&
+          implicitHeadHasContent &&
+          stack.length === 1 &&
+          stack[0]?.name === 'html' &&
+          stack[0]?.namespace === 'html'
+        ) {
+          onImplicitHeadEnd?.({ start, end: tag.end + 1, container: stack[0] });
+          implicitHead = false;
+          afterHead = true;
+          cursor = tag.end + 1;
           continue;
         }
-        const nested = sourceReadTag(html, nestedStart);
-        if (nested?.malformed) return null;
-        if (!nested) {
-          inside = nestedStart + 1;
-          continue;
+        if (stack.at(-1)?.namespace !== 'html') {
+          malformed = true;
+          if (!recoverMalformed) return { malformed, stack };
+          return { malformed, stack: [] };
         }
-        if (nested.closing && nested.name === 'head') {
-          return { start: headStart, end: nested.end + 1 };
-        }
-        if (!nested.closing && !nested.selfClosing && nested.name === 'template') {
-          const afterTemplate = sourceSkipTemplate(html, nested.end + 1);
-          if (afterTemplate < 0) return null;
-          inside = afterTemplate;
-          continue;
-        }
-        if (!nested.closing && !nested.selfClosing && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(nested.name)) {
-          const afterRawText = sourceFindRawTextClose(html, nested.end + 1, nested.name);
-          if (afterRawText < 0) return null;
-          inside = afterRawText;
-          continue;
-        }
-        inside = nested.end + 1;
+        cursor = tag.end + 1;
+        continue;
       }
-      return null;
+      if (
+        namespace === 'html' &&
+        tag.name === 'head' &&
+        (matchingIndex === 0 || (
+          matchingIndex === 1 &&
+          stack[0]?.name === 'html' &&
+          stack[0]?.namespace === 'html'
+        ))
+      ) afterHead = true;
+      stack[matchingIndex].sourceCloseStart = start;
+      popThrough(matchingIndex, tag.end + 1, false, start);
+      cursor = tag.end + 1;
+      continue;
     }
+
+    const parent = stack.at(-1) || null;
+    const entry = {
+      name: tag.name,
+      namespace,
+      start,
+      tag,
+      inactive: sourceTagIsInactive(html, tag, namespace, parent, stack),
+    };
+    if (onStart) onStart({
+      tag,
+      start,
+      end: tag.end + 1,
+      namespace,
+      isVoid,
+      parent,
+      stack: stack.slice(),
+      entry,
+      rawText: false,
+    });
+    if (!isVoid) stack.push(entry);
     cursor = tag.end + 1;
   }
-  return null;
+
+  if (malformed) {
+    // An open article/main at the point of malformed input has no reliable
+    // end boundary. Do not turn it into a completed editorial root at EOF.
+    return { malformed, stack: [] };
+  }
+  popThrough(0, html.length, true);
+  return { malformed, stack };
+}
+
+function sourceActivateBodyNoscript(html) {
+  const src = String(html || '');
+  if (!src) return src;
+
+  const removals = [];
+  const scan = sourceScanStructure(src, {
+    onStart: ({ tag, start, end, namespace, stack, entry }) => {
+      const inDocumentBody = stack.some((ancestor) => ancestor.namespace === 'html' && ancestor.name === 'body')
+        || (stack.some((ancestor) => ancestor.namespace === 'html' && ancestor.name === 'html')
+          && !stack.some((ancestor) => ancestor.namespace === 'html' && ancestor.name === 'head'));
+      if (
+        !entry ||
+        namespace !== 'html' ||
+        tag.name !== 'noscript' ||
+        entry.inactive ||
+        !inDocumentBody
+      ) return;
+      entry.activateBodyNoscript = true;
+      removals.push([start, end]);
+    },
+    onEnd: ({ entry }) => {
+      if (!entry?.activateBodyNoscript || entry.sourceCloseStart == null) return;
+      const closing = sourceReadTag(src, entry.sourceCloseStart);
+      if (closing?.closing && closing.name === 'noscript') {
+        removals.push([entry.sourceCloseStart, closing.end + 1]);
+      }
+    },
+  });
+
+  if (scan.malformed || removals.length === 0) return src;
+  let activated = src;
+  for (const [start, end] of removals.sort((a, b) => b[0] - a[0])) {
+    activated = activated.slice(0, start) + activated.slice(end);
+  }
+  return activated;
+}
+
+function sourceRemoveInactiveSubtrees(html) {
+  const src = String(html || '');
+  if (!src) return src;
+
+  const removals = [];
+  const scan = sourceScanStructure(src, {
+    onStart: ({ tag, start, end, namespace, isVoid, parent, stack, entry, rawText, rawTextEnd, skippedEnd }) => {
+      const inactive = entry?.inactive ?? sourceTagIsInactive(src, tag, namespace, parent, stack);
+      if (!inactive || parent?.inactive) return;
+      if (rawText) {
+        removals.push([start, rawTextEnd]);
+      } else if (namespace === 'html' && tag.name === 'template') {
+        const templateEnd = skippedEnd ?? sourceSkipTemplate(src, end);
+        if (templateEnd >= 0) removals.push([start, templateEnd]);
+      } else if (isVoid) {
+        removals.push([start, end]);
+      } else if (entry) {
+        entry.removeInactiveSubtree = true;
+      }
+    },
+    onEnd: ({ entry, end }) => {
+      if (entry?.removeInactiveSubtree) removals.push([entry.start, end]);
+    },
+  });
+
+  if (scan.malformed || removals.length === 0) return src;
+  let cleaned = src;
+  for (const [start, end] of removals.sort((a, b) => b[0] - a[0])) {
+    cleaned = cleaned.slice(0, start) + cleaned.slice(end);
+  }
+  return cleaned;
+}
+
+function sourceRemoveJsonLdScripts(html) {
+  const src = String(html || '');
+  const removals = [];
+  const scan = sourceScanStructure(src, {
+    onStart: ({ tag, start, rawText, rawTextEnd }) => {
+      if (
+        tag.name === 'script' &&
+        sourceTagAttribute(src, tag, 'type').trim().toLowerCase() === 'application/ld+json' &&
+        rawText
+      ) removals.push([start, rawTextEnd]);
+    },
+  });
+
+  if (scan.malformed) return null;
+  let cleaned = src;
+  for (const [start, end] of removals.sort((a, b) => b[0] - a[0])) {
+    cleaned = cleaned.slice(0, start) + cleaned.slice(end);
+  }
+  return cleaned;
+}
+
+function sourceRemoveHeadNoscript(html) {
+  const src = String(html || '');
+  if (!src) return src;
+
+  const prefixLength = '<html>'.length;
+  const wrapped = `<html>${src}</html>`;
+  const removals = [];
+  const scan = sourceScanStructure(wrapped, {
+    onStart: ({ tag, start, namespace, rawText, rawTextEnd }) => {
+      if (
+        namespace === 'html' &&
+        tag.name === 'noscript' &&
+        rawText
+      ) removals.push([start - prefixLength, rawTextEnd - prefixLength]);
+    },
+  });
+
+  if (scan.malformed || removals.length === 0) return src;
+  let cleaned = src;
+  for (const [start, end] of removals.sort((a, b) => b[0] - a[0])) {
+    cleaned = cleaned.slice(0, start) + cleaned.slice(end);
+  }
+  return cleaned;
+}
+
+function findActiveSourceHead(html) {
+  let sawHtml = false;
+  let sawHead = false;
+  let sawBody = false;
+  let documentLevel = true;
+  let implicitHead = false;
+  let implicitHeadContainer = null;
+  let implicitHeadStart = null;
+  let headState = null;
+  let trustedHead = null;
+  let bodyState = null;
+  let bodyJsonLdInvalid = false;
+  const ldBlocks = [];
+  const afterHeadExtensions = [];
+
+  const closeImplicitHead = (end) => {
+    if (implicitHead && documentLevel && implicitHeadContainer && implicitHeadStart != null) {
+      trustedHead = {
+        start: implicitHeadStart,
+        end,
+        closed: false,
+        implicit: true,
+        container: implicitHeadContainer,
+      };
+      sawHead = true;
+    }
+    implicitHead = false;
+    implicitHeadContainer = null;
+    implicitHeadStart = null;
+  };
+
+  const failClosed = () => {
+    documentLevel = false;
+    implicitHead = false;
+    implicitHeadContainer = null;
+    implicitHeadStart = null;
+    if (headState) headState.trusted = false;
+    if (bodyState) bodyState.trusted = false;
+  };
+
+  const documentContainerIsCurrent = (stack, container) => (
+    container ? stack.length === 1 && stack[0] === container : stack.length === 0
+  );
+  const sourceBodyIsActive = (stack, state) => (
+    state.entry
+      ? stack.some((ancestor) => ancestor === state.entry)
+      : state.implicit && stack.length === 0
+  );
+
+  const scan = sourceScanStructure(html, {
+    onText: ({ text, start, stack }) => {
+      if (
+        documentLevel &&
+        !sawHtml &&
+        !sawHead &&
+        !sawBody &&
+        stack.length === 0 &&
+        /\S/u.test(text) &&
+        !/^!doctype\b[^>]*>$/iu.test(text.trim())
+      ) {
+        failClosed();
+      }
+      if (
+        bodyState?.implicit &&
+        bodyState.trusted &&
+        /\S/u.test(text) &&
+        documentContainerIsCurrent(stack, bodyState.entry)
+      ) {
+        sawBody = true;
+        bodyState.afterHead = false;
+      }
+      if (
+        !implicitHead ||
+        !/\S/u.test(text) ||
+        stack.length !== 1 ||
+        stack[0] !== implicitHeadContainer
+      ) return;
+      const container = implicitHeadContainer;
+      closeImplicitHead(start);
+      bodyState = {
+        entry: container,
+        trusted: true,
+        implicit: true,
+        afterHead: false,
+      };
+      sawBody = true;
+    },
+    onImplicitHeadEnd: ({ start, container }) => {
+      const headContainer = implicitHeadContainer || container;
+      closeImplicitHead(start);
+      bodyState = {
+        entry: headContainer,
+        trusted: true,
+        implicit: true,
+        afterHead: true,
+      };
+    },
+    onStart: ({ tag, start, namespace, isVoid, parent, stack, entry, rawTextEnd, rawText, skippedEnd }) => {
+      const directPostHeadContainer = Boolean(
+        trustedHead &&
+        bodyState?.implicit &&
+        bodyState.afterHead &&
+        bodyState.trusted &&
+        !sawBody &&
+        namespace === 'html' &&
+        parent === trustedHead.container &&
+        documentContainerIsCurrent(stack, trustedHead.container)
+      );
+      const afterHeadElement = Boolean(
+        directPostHeadContainer &&
+        SOURCE_HTML_HEAD_ELEMENTS.has(tag.name) &&
+        tag.name !== 'head' &&
+        tag.name !== 'body' &&
+        tag.name !== 'noscript'
+      );
+      const postHeadNoscript = directPostHeadContainer && tag.name === 'noscript';
+      if (postHeadNoscript) bodyState.postHeadNoscript = true;
+      if (
+        bodyState?.implicit &&
+        bodyState.trusted &&
+        parent === bodyState.entry &&
+        documentContainerIsCurrent(stack, bodyState.entry) &&
+        tag.name !== 'body' &&
+        !afterHeadElement
+      ) {
+        sawBody = true;
+        bodyState.afterHead = false;
+      }
+      if (namespace === 'html' && tag.name === 'html') {
+        if (sawHtml || stack.length !== 0 || isVoid) {
+          failClosed();
+        } else {
+          implicitHead = true;
+          implicitHeadContainer = entry;
+          implicitHeadStart = tag.end + 1;
+        }
+        sawHtml = true;
+      } else if (namespace === 'html' && tag.name === 'head') {
+        if (implicitHead) {
+          implicitHead = false;
+          implicitHeadContainer = null;
+          implicitHeadStart = null;
+        }
+        const directDocumentHead =
+          documentLevel && !sawHead && !sawBody && (stack.length === 0 || (
+            stack.length === 1 && parent?.name === 'html' && parent.namespace === 'html'
+          ));
+        const nestedHeadInsideTrustedBody = !directDocumentHead
+          && bodyState?.trusted
+          && stack.some((ancestor) => ancestor === bodyState.entry);
+        if ((!directDocumentHead && !nestedHeadInsideTrustedBody) || (directDocumentHead && isVoid)) {
+          failClosed();
+        }
+        // Keep the editorial root usable, but invalidate body JSON-LD once an
+        // invalid nested head appears. A direct-child script collected before
+        // or after it could be stale even though scanning reaches EOF cleanly.
+        if (nestedHeadInsideTrustedBody) {
+          bodyState.trusted = false;
+          bodyJsonLdInvalid = true;
+          ldBlocks.length = 0;
+        }
+        implicitHead = false;
+        implicitHeadContainer = null;
+        if (headState) headState.trusted = false;
+        headState = {
+          start,
+          entry,
+          container: parent,
+          trusted: directDocumentHead && !isVoid,
+        };
+        sawHead = true;
+      } else if (namespace === 'html' && tag.name === 'body') {
+        if (implicitHead) closeImplicitHead(start);
+        const implicitPostHeadNoscript = bodyState?.implicit && bodyState.postHeadNoscript;
+        const directDocumentBody =
+          (!sawBody || implicitPostHeadNoscript) && (stack.length === 0 || (
+            stack.length === 1 && parent?.name === 'html' && parent.namespace === 'html'
+          ));
+        if (!directDocumentBody || isVoid) failClosed();
+        implicitHead = false;
+        implicitHeadContainer = null;
+        bodyState = {
+          entry,
+          trusted: directDocumentBody && !isVoid,
+          implicit: false,
+          documentContainer: directDocumentBody ? parent : null,
+          afterHead: false,
+        };
+        sawBody = true;
+      } else if (
+        sawHtml && !sawHead && !sawBody &&
+        stack.length === 1 && parent?.name === 'html' && parent.namespace === 'html' &&
+        namespace === 'html' && !SOURCE_HTML_HEAD_ELEMENTS.has(tag.name)
+      ) {
+        closeImplicitHead(start);
+        // Both head and body start tags are optional. Once body content begins
+        // directly below <html>, model the parser's implied body so a later
+        // direct-child JSON-LD block remains part of the trusted document.
+        bodyState = {
+          entry: parent,
+          trusted: true,
+          implicit: true,
+          afterHead: false,
+        };
+        sawBody = true;
+      } else if (stack.length === 0 && !(bodyState?.implicit
+        && bodyState.trusted && parent === bodyState.entry
+        && documentContainerIsCurrent(stack, bodyState.entry))) {
+        // A top-level article/div/etc. is a fragment, not a document body. Do
+        // not let a later global-looking script become trusted by accident,
+        // unless a document head has just closed and HTML implies the body.
+        failClosed();
+      } else if (
+        parent?.name === 'head' &&
+        parent.namespace === 'html' &&
+        tag.name !== 'template' &&
+        (!rawText && (namespace !== 'html' || !isVoid))
+      ) {
+        // Valid head children are void elements, raw-text elements, or template;
+        // any other container makes the head context non-document-level.
+        failClosed();
+      }
+
+      if (afterHeadElement) {
+        if (tag.name !== 'noscript') {
+          if (rawText) {
+            afterHeadExtensions.push(html.slice(start, rawTextEnd));
+          } else if (namespace === 'html' && tag.name === 'template') {
+            const templateEnd = skippedEnd ?? sourceSkipTemplate(html, tag.end + 1);
+            if (templateEnd >= 0) afterHeadExtensions.push(html.slice(start, templateEnd));
+          } else if (isVoid) {
+            afterHeadExtensions.push(html.slice(start, tag.end + 1));
+          }
+        }
+      }
+
+      if (
+        rawText &&
+        tag.name === 'script' &&
+        sourceTagAttribute(html, tag, 'type').trim().toLowerCase() === 'application/ld+json' &&
+        namespace === 'html' &&
+        !stack.some((ancestor) => ancestor.namespace === 'svg' || ancestor.namespace === 'mathml') &&
+        documentLevel &&
+        ((bodyState?.trusted && sourceBodyIsActive(stack, bodyState)) || (
+          implicitHead &&
+          stack.length === 1 &&
+          parent === implicitHeadContainer
+        )) &&
+        !afterHeadElement &&
+        !sourceTagIsInactive(html, tag, namespace, parent, stack)
+      ) {
+        ldBlocks.push(html.slice(start, rawTextEnd));
+      }
+    },
+    onEnd: ({ entry, end, implicit }) => {
+      if (headState?.entry === entry) {
+        if (headState.trusted && documentLevel) {
+          trustedHead = {
+            start: headState.start,
+            end,
+            closed: !implicit,
+            implicit: false,
+            container: headState.container,
+            closeStart: entry.sourceCloseStart,
+          };
+          if (!sawBody) {
+            // The body start tag is optional in HTML. After a trusted head
+            // closes, direct children of its document container belong to
+            // the implied body and may contain active body-only JSON-LD.
+            bodyState = {
+              entry: headState.container,
+              trusted: true,
+              implicit: true,
+              afterHead: true,
+            };
+          }
+        }
+        headState = null;
+      }
+      if (implicitHeadContainer === entry) {
+        const endBeforeHtmlClose = entry.sourceCloseStart ?? end;
+        closeImplicitHead(endBeforeHtmlClose);
+      }
+      if (bodyState?.entry === entry) {
+        if (
+          !implicit &&
+          entry.name === 'body' &&
+          entry.namespace === 'html' &&
+          bodyState.trusted &&
+          bodyState.documentContainer
+        ) {
+          // HTML reprocesses tokens after </body> in the body insertion mode
+          // until </html>; retain that trusted document context for JSON-LD.
+          bodyState = {
+            ...bodyState,
+            entry: bodyState.documentContainer,
+            implicit: true,
+            afterHead: false,
+            afterBody: true,
+          };
+        } else {
+          bodyState = null;
+        }
+      }
+    },
+  });
+
+  const trustedDocument = documentLevel && !scan.malformed;
+  const hasDocumentScaffold = sawHtml || sawHead || sawBody;
+  return {
+    bounds: trustedDocument ? trustedHead : null,
+    malformed: !trustedDocument,
+    documentLevel: trustedDocument,
+    trustedDocument: trustedDocument || (!hasDocumentScaffold && !scan.malformed),
+    bodyJsonLdInvalid,
+    ldBlocks: trustedDocument ? ldBlocks : [],
+    afterHeadExtensions: trustedDocument ? afterHeadExtensions : [],
+  };
 }
 
 /**
- * Blocco `<tag>…</tag>` di primo livello piu' lungo, con conteggio della
- * profondita' — una regex greedy prenderebbe dal primo `<article>` all'ultimo
- * `</article>` (quindi tutti i teaser di una pagina indice), una non-greedy si
- * fermerebbe al primo `</article>` annidato.
+ * Blocco `<tag>…</tag>` attivo piu' lungo, con conteggio della profondita'. Lo
+ * scanner condiviso con il confine documentale ignora commenti, template,
+ * raw-text e chrome inattivo prima di considerare una radice editoriale.
  *
  * @returns {string} il blocco piu' lungo, o '' se il tag non c'e'
  */
 export function extractOutermostTagBlock(html, tag) {
   const src = String(html || '');
-  const open = new RegExp(`<${tag}(?=[\\s>])[^>]*>`, 'gi');
-  const close = new RegExp(`</${tag}\\s*>`, 'gi');
-  const marks = [];
-  let m;
-  while ((m = open.exec(src)) !== null) marks.push({ at: m.index, end: open.lastIndex, kind: 1 });
-  while ((m = close.exec(src)) !== null) marks.push({ at: m.index, end: close.lastIndex, kind: -1 });
-  if (marks.length === 0) return '';
-  marks.sort((a, b) => a.at - b.at);
-
-  let depth = 0;
-  let start = -1;
   let best = '';
-  for (const mark of marks) {
-    if (mark.kind === 1) {
-      if (depth === 0) start = mark.at;
-      depth += 1;
-      continue;
-    }
-    if (depth === 0) continue; // chiusura spaiata: markup rotto, si ignora
-    depth -= 1;
-    if (depth === 0 && start !== -1) {
-      const block = src.slice(start, mark.end);
-      if (block.length > best.length) best = block;
-      start = -1;
-    }
-  }
-  // Apertura mai chiusa (accade davvero: `<main>` senza `</main>`): si prende
-  // fino alla fine, che e' comunque meno della pagina intera.
-  if (depth > 0 && start !== -1) {
-    const block = src.slice(start);
-    if (block.length > best.length) best = block;
-  }
+  const wanted = String(tag || '').toLowerCase();
+  if (!/^[a-z][a-z0-9:_-]*$/u.test(wanted)) return best;
+  sourceScanStructure(src, {
+    recoverMalformed: true,
+    onStart: ({ tag: opened, namespace, isVoid, entry, stack }) => {
+      if (
+        namespace === 'html' &&
+        opened.name === wanted &&
+        !isVoid &&
+        !entry.inactive &&
+        !stack.some((ancestor) => ancestor.namespace === 'svg' || ancestor.namespace === 'mathml')
+      ) {
+        entry.sourceRootCandidate = true;
+      }
+    },
+    onEnd: ({ entry, end }) => {
+      if (entry.sourceRootCandidate) {
+        const block = src.slice(entry.start, end);
+        if (block.length > best.length) best = block;
+      }
+    },
+  });
   return best;
 }
 
 /**
- * Riduce una pagina scrapata alla sua radice editoriale, conservando `<head>`
- * e ogni blocco JSON-LD ovunque si trovi.
+ * Riduce una pagina scrapata alla sua radice editoriale, conservando il `<head>`
+ * trusted e i blocchi JSON-LD complementari solo quando la sua scansione e'
+ * affidabile.
  *
  * @param {string} html
- * @returns {{ html: string, root: 'article'|'main'|'none', isolated: boolean }}
+ * @returns {{ html: string, root: 'article'|'main'|'none', isolated: boolean, trustedDocument: boolean }}
  */
 export function isolateMainSourceHtml(html) {
   const src = String(html || '');
-  if (!src) return { html: src, root: 'none', isolated: false };
+  if (!src) return { html: src, root: 'none', isolated: false, trustedDocument: true };
+
+  const headScan = findActiveSourceHead(src);
+  // If a document scaffold was present but its head/body structure became
+  // untrusted (for example a nested <head>), no root in that document is safe
+  // to promote. Fragments without document scaffolding retain legacy behavior.
+  if (!headScan.trustedDocument) {
+    return { html: src, root: 'none', isolated: false, trustedDocument: false };
+  }
 
   // `<article>` prima di `<main>`: su una pagina di articolo singolo il primo
   // e' il pezzo, il secondo di solito lo contiene INSIEME ai commenti — che e'
   // esattamente il testo che si sta cercando di non consegnare.
-  const article = extractOutermostTagBlock(src, 'article');
-  const main = extractOutermostTagBlock(src, 'main');
+  let article = sourceRemoveInactiveSubtrees(extractOutermostTagBlock(src, 'article'));
+  let main = sourceRemoveInactiveSubtrees(extractOutermostTagBlock(src, 'main'));
+  if (headScan.bodyJsonLdInvalid) {
+    article = sourceRemoveJsonLdScripts(article);
+    main = sourceRemoveJsonLdScripts(main);
+    if (article === null || main === null) {
+      return { html: '', root: 'none', isolated: false, trustedDocument: false };
+    }
+  }
 
   let chosen = '';
   let root = 'none';
@@ -8006,22 +8881,40 @@ export function isolateMainSourceHtml(html) {
     chosen = main;
     root = 'main';
   }
-  if (!chosen) return { html: src, root: 'none', isolated: false };
+  if (!chosen) {
+    return headScan.bodyJsonLdInvalid
+      ? { html: '', root: 'none', isolated: false, trustedDocument: false }
+      : { html: src, root: 'none', isolated: false, trustedDocument: true };
+  }
 
-  const headBounds = findActiveSourceHead(src);
-  const head = headBounds ? src.slice(headBounds.start, headBounds.end) : '';
-  // I blocchi JSON-LD stanno tanto in <head> quanto in fondo a <body>: si
-  // riportano tutti quelli che NON sono gia' dentro cio' che si conserva,
-  // perche' `articleBody` e' il ramo migliore dell'estrattore e perderlo
-  // significherebbe scendere di qualita' proprio mentre si isola.
-  const ldBlocks = [...src.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi)]
-    .map((x) => x[0])
-    .filter((block) => !head.includes(block) && !chosen.includes(block));
+  let head = '';
+  if (headScan.bounds) {
+    const { start, end, closed, implicit, closeStart } = headScan.bounds;
+    const contents = sourceRemoveHeadNoscript(src.slice(start, end));
+    if (implicit) {
+      head = `<head>${contents}${headScan.afterHeadExtensions.join('')}</head>`;
+    } else if (closed && closeStart != null) {
+      const closeOffset = closeStart - start;
+      head = contents.slice(0, closeOffset)
+        + headScan.afterHeadExtensions.join('')
+        + contents.slice(closeOffset);
+    } else {
+      head = contents + headScan.afterHeadExtensions.join('') + '</head>';
+    }
+  }
+  // I blocchi JSON-LD nel body si riportano solo quando lo scanner li ha
+  // riconosciuti come discendenti attivi di un body document-level. La raccolta
+  // globale non distingue commenti, template e markup stale della sidebar.
+  const ldBlocks = headScan.documentLevel
+    ? headScan.ldBlocks.filter((block) => !head.includes(block) && !chosen.includes(block))
+    : [];
 
+  const isolatedHtml = `<!doctype html><html>${head}<body>${ldBlocks.join('')}${chosen}</body></html>`;
   return {
-    html: `<!doctype html><html>${head}<body>${ldBlocks.join('')}${chosen}</body></html>`,
+    html: sourceActivateBodyNoscript(isolatedHtml),
     root,
     isolated: true,
+    trustedDocument: true,
   };
 }
 
@@ -8158,12 +9051,27 @@ async function fetchPageContent(url) {
     // da li' che firma di redazione, invito a commentare e spalla «ultimi
     // commenti» sono finiti nel corpo di tre articoli pubblicati.
     const isolation = isolateMainSourceHtml(html);
-    const { text, method, paragraphCount, publishedAt } = extractArticleText(isolation.html, { maxChars: 8000 });
+    if (!isolation.trustedDocument) {
+      console.error('⚠️  Struttura HTML non attendibile: la pagina sorgente non viene estratta.');
+      if (suppliedCantonSourceContent.length >= 200) {
+        lastSourcePublishedAt = suppliedCantonSourcePublishedAt;
+        lastSourcePageTitle = suppliedCantonSourceTitle;
+        console.error(`   📄 Uso il corpo CMS già verificato dallo scanner JSON: ${suppliedCantonSourceContent.length} chars`);
+        return suppliedCantonSourceContent;
+      }
+      return '';
+    }
+    const { text, method, paragraphCount, publishedAt } = extractArticleText(isolation.html, {
+      maxChars: 8000,
+      scriptingDisabled: isolation.isolated,
+    });
     // Use structured extractor (JSON-LD → article → main → og + paragraphs → naive)
     // to feed the generator and fact-checker the actual article body instead of
     // 70%+ nav/footer/ads noise. See scripts/lib/extract-article-text.mjs.
     lastSourcePublishedAt = publishedAt || '';
-    lastSourcePageTitle = pageTitleEvidence(html);
+    lastSourcePageTitle = pageTitleEvidence(isolation.html, {
+      scriptingDisabled: isolation.isolated,
+    });
     if (suppliedCantonSourceContent.length >= 200) {
       lastSourcePublishedAt = suppliedCantonSourcePublishedAt || lastSourcePublishedAt;
       lastSourcePageTitle = suppliedCantonSourceTitle || lastSourcePageTitle;

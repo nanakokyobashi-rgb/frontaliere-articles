@@ -318,6 +318,101 @@ test('pageTitleEvidence: og:title, twitter:title, <title> e <h1>; niente da una 
   assert.equal(pageTitleEvidence(''), '');
 });
 
+test('pageTitleEvidence non legge i meta letterali dentro il testo di <title>', () => {
+  const html = '<html><head><title><meta property="og:title" content="FALSO_META_TITLE">Titolo vero</title>'
+    + '</head><body><p>corpo</p></body></html>';
+  assert.equal(pageTitleEvidence(html), 'Titolo vero');
+});
+
+test('pageTitleEvidence tratta il fallback noscript come markup attivo solo con scripting disabilitato', () => {
+  const html = '<noscript><h1>Titolo di fallback</h1></noscript>';
+  assert.equal(pageTitleEvidence(html), '');
+  assert.equal(pageTitleEvidence(html, { scriptingDisabled: true }), 'Titolo di fallback');
+});
+
+test('pageTitleEvidence attiva noscript solo nel body, mai in head o template', () => {
+  const html = '<html><head><noscript><h1>TITOLO_HEAD_INATTIVO</h1></noscript></head><body>'
+    + '<noscript><h1>TITOLO_BODY_ATTIVO</h1></noscript>'
+    + '<template><noscript><h1>TITOLO_TEMPLATE_INATTIVO</h1></noscript></template>'
+    + '</body></html>';
+  assert.equal(pageTitleEvidence(html, { scriptingDisabled: true }), 'TITOLO_BODY_ATTIVO');
+
+  const implicitHead = '<html><noscript><h1>TITOLO_HEAD_IMPLICITO</h1></noscript><body>'
+    + '<noscript><h1>TITOLO_BODY_IMPLICITO</h1></noscript></body></html>';
+  assert.equal(pageTitleEvidence(implicitHead, { scriptingDisabled: true }), 'TITOLO_BODY_IMPLICITO');
+
+  const textClosesHead = '<html><head>testo non whitespace<noscript>'
+    + '<h1>TITOLO_BODY_DOPO_CHIUSURA_IMPLICITA</h1></noscript></html>';
+  assert.equal(pageTitleEvidence(textClosesHead, { scriptingDisabled: true }), 'TITOLO_BODY_DOPO_CHIUSURA_IMPLICITA');
+});
+
+test('pageTitleEvidence mantiene inattivo noscript dopo il testo raw di title nell’head', () => {
+  const explicitHead = '<html><head><title>TITOLO_ESPLICITO</title>'
+    + '<noscript><h1>TITOLO_HEAD_ESPLICITO_INATTIVO</h1></noscript></head>'
+    + '<body><h1>TITOLO_BODY_ESPLICITO</h1></body></html>';
+  assert.equal(
+    pageTitleEvidence(explicitHead, { scriptingDisabled: true }),
+    'TITOLO_ESPLICITO\nTITOLO_BODY_ESPLICITO',
+  );
+
+  const implicitHead = '<html><title>TITOLO_IMPLICITO</title>'
+    + '<noscript><h1>TITOLO_HEAD_IMPLICITO_INATTIVO</h1></noscript><body>'
+    + '<noscript><h1>TITOLO_BODY_IMPLICITO_ATTIVO</h1></noscript></body></html>';
+  assert.equal(
+    pageTitleEvidence(implicitHead, { scriptingDisabled: true }),
+    'TITOLO_IMPLICITO\nTITOLO_BODY_IMPLICITO_ATTIVO',
+  );
+});
+
+test('pageTitleEvidence non interpreta metadata letterale dentro il testo RCDATA di title', () => {
+  const html = '<html><head><title>Titolo principale '
+    + '<meta property="og:title" content="TITOLO_STALE_NEL_TITLE"></title>'
+    + '<meta property="og:title" content="TITOLO_REALE"></head>'
+    + '<body><h1>Corpo</h1></body></html>';
+  assert.deepEqual(pageTitleEvidence(html).split('\n'), ['TITOLO_REALE', 'Titolo principale', 'Corpo']);
+});
+
+test('pageTitleEvidence esclude title SVG e markup letterale nel textarea', () => {
+  const html = '<html><head><title>TITLE_REALE</title></head><body>'
+    + '<svg><title>SVG_TITLE</title><h1>SVG_H1</h1>'
+    + '<meta property="og:title" content="SVG_META"></svg>'
+    + '<svg><foreignObject><textarea></svg><h1>TEXTAREA_SVG_CLOSE</h1></textarea>'
+    + '</foreignObject></svg>'
+    + '<textarea><h1>TEXTAREA_H1</h1><title>TEXTAREA_TITLE</title></textarea>'
+    + '<h1>H1_REALE</h1></body></html>';
+  assert.deepEqual(pageTitleEvidence(html).split('\n'), ['TITLE_REALE', 'H1_REALE']);
+  assert.equal(pageTitleEvidence('<plaintext><h1>PLAINTEXT_H1</h1>'), '');
+});
+
+test('pageTitleEvidence non riapre l’head dopo la chiusura del documento', () => {
+  const html = '<html><title>TITLE_DOCUMENTALE</title></html>'
+    + '<head><title>TITLE_STALE</title><meta property="og:title" content="META_STALE"></head>';
+  assert.equal(pageTitleEvidence(html), 'TITLE_DOCUMENTALE');
+});
+
+test('pageTitleEvidence esclude i metadata e i title dei head annidati nel body', () => {
+  const html = '<html><head><meta property="og:title" content="META_REALE">'
+    + '<title>TITLE_REALE</title></head><body><article><head>'
+    + '<meta property="og:title" content="META_STALE_HEAD_NESTED">'
+    + '<title>TITLE_STALE_HEAD_NESTED</title></head>'
+    + '<h1>H1_REALE</h1></article></body></html>';
+  assert.deepEqual(pageTitleEvidence(html).split('\n'), ['META_REALE', 'TITLE_REALE', 'H1_REALE']);
+});
+
+test('pageTitleEvidence ignora DOCTYPE e prologo XML prima dell’head documentale', () => {
+  const declarations = ['<!doctype html>', '<?xml version="1.0"?>'];
+  for (const declaration of declarations) {
+    const html = declaration + '<html><head>'
+      + '<meta property="og:title" content="TITLE_DOCUMENTALE">'
+      + '<title>TITLE_DOCUMENTALE</title></head><body><h1>H1_DOCUMENTALE</h1></body></html>';
+    assert.deepEqual(
+      pageTitleEvidence(html).split('\n'),
+      ['TITLE_DOCUMENTALE', 'TITLE_DOCUMENTALE', 'H1_DOCUMENTALE'],
+      `${declaration} non deve spostare l’head nel body`,
+    );
+  }
+});
+
 test('pageTitleEvidence chiude il percorso su un tag non terminato', () => {
   const malformed = '<meta data="<title>Titolo falso</title>';
   assert.equal(pageTitleEvidence(malformed), '', 'un titolo dopo il tag malformato non e\' evidenza attiva');
@@ -347,7 +442,9 @@ test('la generazione si ferma se la pagina di un URL riusato non e\' l\'item sce
   // I titoli della pagina vengono dalla stessa fetch del testo, e si azzerano con lei.
   const fetchFn = SRC.slice(SRC.indexOf('async function fetchPageContent(url) {'), SRC.indexOf('\nconst MAX_ARTICLE_AGE_DAYS'));
   assert.match(fetchFn, /lastSourcePageTitle = '';/);
-  assert.match(fetchFn, /lastSourcePageTitle = pageTitleEvidence\(html\);/);
+  // Title evidence must come from the same isolated source passed to the
+  // extractor; the full page can contain stale chrome titles outside the item.
+  assert.match(fetchFn, /lastSourcePageTitle = pageTitleEvidence\(isolation\.html,\s*\{\s*scriptingDisabled:\s*isolation\.isolated,?\s*\}\);/);
 });
 
 // ── Il cablaggio in create-article.mjs ──────────────────────────────────────

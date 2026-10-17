@@ -11,7 +11,7 @@
  * cosi', e la REGOLA #1 del prompt («ogni fatto DEVE essere presente nel SOURCE
  * CONTENT») lo rende fedele proprio a cio' che non doveva ricevere.
  *
- * ## La causa, e perche' non e' l'estrattore
+ * ## La causa, e perche' isolamento ed estrazione devono concordare
  *
  * `extractArticleText()` prova sei rami: i primi quattro isolano una radice
  * editoriale, gli ULTIMI DUE no — il quinto legge i `<p>` di `document.body`,
@@ -21,13 +21,11 @@
  *
  * `create-article.mjs` isola quindi la radice PRIMA di chiamarlo, cosi' che
  * tutti e sei i rami — cap di fallback compresi — vedano solo il pezzo.
- * `extract-article-text.mjs` non e' toccato: e' `mode: identical` nel manifest
- * del ciclo, ma nessun mirror porta `generator/scripts/lib/**` (i filtri
- * `paths:` dei mirror del sito coprono solo `engine/`, `index.ts`,
- * `articleSections.ts`, `content/` — vedi
- * `generator/tests/generation-health-watchdog.test.mjs` §8), quindi una
- * modifica la' andrebbe fatta a mano su ENTRAMBI i repo, non "sul sito e
- * scende col mirror".
+ * Anche i no-script fallback richiedono coerenza: l'estrattore e la prova del
+ * titolo eliminavano entrambi il markup `<noscript>`. L'opzione condivisa
+ * `scriptingDisabled` arriva dal sito tramite il trasporto dei gemelli
+ * `identical`; questa PR la attiva nel generatore corpus e nel ledger dei
+ * titoli. Il mirror dell'engine non trasporta `generator/scripts/lib/**`.
  *
  * ## I due strati di questo banco
  *
@@ -61,10 +59,10 @@ function loadIsolationSandbox() {
   const endRel = SRC.slice(fnStart).search(/\n\}\n/);
   assert.notEqual(endRel, -1);
   const block = SRC.slice(start, fnStart + endRel + 2).replace(/^export /gm, '');
-  return new Function(`${block}\nreturn { isolateMainSourceHtml, extractOutermostTagBlock, visibleTextLength };`)();
+  return new Function(`${block}\nreturn { isolateMainSourceHtml, extractOutermostTagBlock, sourceActivateBodyNoscript, visibleTextLength };`)();
 }
 
-const { isolateMainSourceHtml, extractOutermostTagBlock, visibleTextLength } = loadIsolationSandbox();
+const { isolateMainSourceHtml, extractOutermostTagBlock, sourceActivateBodyNoscript, visibleTextLength } = loadIsolationSandbox();
 
 const ARTICLE_PROSE = Array.from({ length: 8 }, (_, i) =>
   `<p>Paragrafo ${i} del pezzo vero, con abbastanza testo da superare la soglia minima di isolamento e sembrare un corpo d'articolo reale.</p>`).join('');
@@ -158,6 +156,31 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(out.html.includes('og:title'));
   });
 
+  it('conserva il JSON-LD nel head implicito prima del body omesso', () => {
+    const page2 = '<html><meta property="article:published_time" content="2026-06-12">'
+      + '<script type="application/ld+json">'
+      + '{"articleBody":"IMPLICIT_HEAD_ARTICLE_BODY","datePublished":"2026-06-12"}'
+      + '</script>'
+      + `<article>${ARTICLE_PROSE}</article></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('IMPLICIT_HEAD_ARTICLE_BODY'));
+    assert.ok(res.html.includes('"datePublished":"2026-06-12"'));
+  });
+
+  it('chiude il head implicito prima di un body esplicito e conserva title e meta', () => {
+    const page2 = '<html><meta property="article:published_time" content="2026-06-12">'
+      + '<title>IMPLICIT_HEAD_TITLE_BEFORE_EXPLICIT_BODY</title>'
+      + '<body><main><article>' + ARTICLE_PROSE + '</article></main>'
+      + '<script type="application/ld+json">{"articleBody":"EXPLICIT_BODY_JSONLD"}</script>'
+      + '</body></html>';
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('article:published_time'));
+    assert.ok(res.html.includes('IMPLICIT_HEAD_TITLE_BEFORE_EXPLICIT_BODY'));
+    assert.ok(res.html.includes('EXPLICIT_BODY_JSONLD'));
+  });
+
   it('non tronca l’head su un </head> letterale dentro JSON-LD o script', () => {
     const pageWithLiteralBoundary = '<html><head>'
       + '<script type="application/ld+json">{"description":"testo </head> incorporato"}</script>'
@@ -177,11 +200,561 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(res.html.includes('"articleBody":"corpo"'));
   });
 
+  it('riattiva il contesto body per JSON-LD dopo </body> e prima di </html>', () => {
+    const page2 = `<html><head><title>Pagina</title></head><body><main><article>${ARTICLE_PROSE}</article></main></body>`
+      + '<script type="application/ld+json">{"articleBody":"AFTER_BODY_REPROCESSED_JSONLD"}</script>'
+      + '</html>';
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('AFTER_BODY_REPROCESSED_JSONLD'));
+  });
+
+  it('riattiva JSON-LD attivo sotto qualunque discendente non inattivo del body', () => {
+    const stale = (label, attrs = '') => `<script${attrs ? ` ${attrs}` : ''} type="application/ld+json">{"headline":"${label}"}</script>`;
+    const page2 = '<html><head><title>Pagina</title></head><body>'
+      + `<!-- ${stale('COMMENT_JSON_LD_SHOULD_NOT_BE_ACTIVATED')} -->`
+      + `<!-- <head>${stale('COMMENT_NESTED_HEAD_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</head> -->`
+      + `<template>${stale('TEMPLATE_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</template>`
+      + `<template><head>${stale('TEMPLATE_NESTED_HEAD_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</head></template>`
+      + `<aside>${stale('SIDEBAR_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</aside>`
+      + `<div class="app-shell"><section><div>${stale('WRAPPED_BODY_JSON_LD_ACTIVE')}</div></section></div>`
+      + stale('SCRIPT_CLASS_JSON_LD_SHOULD_NOT_BE_ACTIVATED', 'class="related"')
+      + stale('SCRIPT_ID_JSON_LD_SHOULD_NOT_BE_ACTIVATED', 'id="sidebar-json"')
+      + stale('SCRIPT_ROLE_JSON_LD_SHOULD_NOT_BE_ACTIVATED', 'role="complementary"')
+      + stale('ACTIVE_BODY_DIRECT_JSON_LD')
+      + `<div role="complementary">${stale('COMPLEMENTARY_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</div>`
+      + `<div role="banner">${stale('BANNER_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</div>`
+      + `<div role="contentinfo">${stale('CONTENTINFO_JSON_LD_SHOULD_NOT_BE_ACTIVATED')}</div>`
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('ACTIVE_BODY_DIRECT_JSON_LD'));
+    assert.equal(res.html.includes('COMMENT_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('COMMENT_NESTED_HEAD_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('TEMPLATE_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('TEMPLATE_NESTED_HEAD_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('SIDEBAR_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.ok(res.html.includes('WRAPPED_BODY_JSON_LD_ACTIVE'));
+    assert.equal(res.html.includes('SCRIPT_CLASS_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('SCRIPT_ID_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('SCRIPT_ROLE_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('COMPLEMENTARY_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('BANNER_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.equal(res.html.includes('CONTENTINFO_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+  });
+
+  it('ignora il prologo XML prima dello scaffold XHTML', () => {
+    const page2 = '<?xml version="1.0"?><html><head><title>Fonte XHTML</title></head>'
+      + `<body><article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.equal(res.trustedDocument, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('<title>Fonte XHTML</title>'));
+  });
+
+  it('sceglie una radice ancora sopra soglia dopo il pruning del chrome', () => {
+    const chromeOnlyArticle = '<article><nav>'
+      + 'Navigazione stale '.repeat(80)
+      + '</nav></article>';
+    const page2 = `<html><body>${chromeOnlyArticle}<main>${ARTICLE_PROSE}</main></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'main');
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+    assert.equal(res.html.includes('Navigazione stale'), false);
+  });
+
+  it('conserva JSON-LD attivo dentro un wrapper normale del body', () => {
+    const page2 = '<html><head></head><body><div class="payload"><section>'
+      + '<script type="application/ld+json">{"articleBody":"WRAPPED_ARTICLE_BODY"}</script>'
+      + `</section></div><article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('WRAPPED_ARTICLE_BODY'));
+  });
+
+  it('non sceglie article/main dentro SVG rientrati da foreignObject o annotation-xml', () => {
+    const foreignArticle = '<article><p>FOREIGN_SVG_ARTICLE_SHOULD_NOT_BE_SELECTED. '
+      + 'Contenuto grafico inerte senza radice editoriale. '.repeat(20)
+      + '</p></article>';
+    const foreignMain = '<main><p>FOREIGN_ANNOTATION_SVG_MAIN_SHOULD_NOT_BE_SELECTED. '
+      + 'Contenuto grafico inerte senza radice editoriale. '.repeat(20)
+      + '</p></main>';
+    const page2 = '<html><body>'
+      + `<svg><foreignObject>${foreignArticle}</foreignObject></svg>`
+      + `<math><annotation-xml encoding="text/html">${foreignMain}</annotation-xml></math>`
+      + '<script type="application/ld+json">{"headline":"FOREIGN_INTEGRATION_CLOSES_KEEP_BODY_TRUSTED"}</script>'
+      + `<article>${ARTICLE_PROSE}</article>`
+      + '</body></html>';
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('FOREIGN_INTEGRATION_CLOSES_KEEP_BODY_TRUSTED'));
+    assert.equal(res.root, 'article');
+    assert.equal(res.html.includes('FOREIGN_SVG_ARTICLE_SHOULD_NOT_BE_SELECTED'), false);
+    assert.equal(res.html.includes('FOREIGN_ANNOTATION_SVG_MAIN_SHOULD_NOT_BE_SELECTED'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('non perde il confine document-level dopo self-closing SVG/MathML foreign', () => {
+    const page2 = '<html><head><meta property="article:published_time" content="2026-06-12T10:00:00+02:00"></head><body>'
+      + '<svg viewBox="0 0 10 10"><path d="M0 0"/><use href="#path"/></svg>'
+      + '<math><mrow/><mi>x</mi></math>'
+      + '<script type="application/ld+json">{"headline":"FOREIGN_ELEMENTS_KEEP_BODY_TRUSTED"}</script>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('article:published_time'));
+    assert.ok(res.html.includes('FOREIGN_ELEMENTS_KEEP_BODY_TRUSTED'));
+  });
+
+  it('ignora un template self-closing foreign dentro un template HTML', () => {
+    const page2 = '<html><body><template><svg><template/><path d="M0 0"/></svg></template>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+    assert.equal(res.html.includes('<template>'), false);
+  });
+
+  it('ignora le chiusure apparenti dentro script SVG quando salta un template HTML', () => {
+    const decoy = '<article><p>SVG_SCRIPT_TEMPLATE_DECOY. '
+      + 'Questo markup appartiene al testo dello script, non a un articolo attivo. '.repeat(20)
+      + '</p></article>';
+    const embeddedMarkup = `</svg></template>${decoy}`;
+    const page2 = '<html><body><template><svg><script>'
+      + `const source = ${JSON.stringify(embeddedMarkup)};`
+      + '</script></svg></template>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.equal(res.html.includes('SVG_SCRIPT_TEMPLATE_DECOY'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('segue le chiusure implicite HTML per head, p e li', () => {
+    const page2 = '<html><head><title>Head senza end-tag</title>'
+      + '<meta property="article:published_time" content="2026-06-12T10:00:00+02:00">'
+      + '<body><ul><li>uno<li>due</ul><p>intro<div>chiude il paragrafo</div>'
+      + '<script type="application/ld+json">{"headline":"IMPLICIT_HTML_STAYS_TRUSTED"}</script>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('Head senza end-tag'));
+    assert.ok(res.html.includes('article:published_time'));
+    assert.ok(res.html.includes('IMPLICIT_HTML_STAYS_TRUSTED'));
+  });
+
+  it('non sceglie una radice article inattiva in commenti, template o sidebar', () => {
+    const stale = `<article>${ARTICLE_PROSE}<p>INACTIVE_ARTICLE_SHOULD_NOT_BE_SELECTED</p>${ARTICLE_PROSE}</article>`;
+    const page2 = '<html><body>'
+      + `<!-- ${stale} -->`
+      + `<template>${stale}</template>`
+      + `<div class="sidebar-wrapper">${stale}</div>`
+      + `<article>${ARTICLE_PROSE}</article>`
+      + '</body></html>';
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.equal(res.html.includes('INACTIVE_ARTICLE_SHOULD_NOT_BE_SELECTED'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('non scansiona markup apparente dentro plaintext fino a EOF', () => {
+    const page = '<html><body><plaintext><article>'
+      + ARTICLE_PROSE + '</article></body></html>';
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.isolated, false);
+    assert.equal(res.root, 'none');
+    assert.equal(res.html, page);
+  });
+
+  it('non tratta un <head> annidato nel body come head del documento', () => {
+    const nestedHead = '<html><body><aside><head>'
+      + '<script type="application/ld+json">{"headline":"NESTED_HEAD_SHOULD_NOT_BE_ACTIVATED"}</script>'
+      + '</head></aside>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(nestedHead);
+    assert.equal(res.isolated, true);
+    assert.equal(res.html.includes('NESTED_HEAD_SHOULD_NOT_BE_ACTIVATED'), false);
+
+    const headAfterImplicitBody = '<html>testo che avvia il body implicito<head>'
+      + '<script type="application/ld+json">{"headline":"IMPLICIT_BODY_NESTED_HEAD"}</script>'
+      + '</head>'
+      + `<article>${ARTICLE_PROSE}</article></html>`;
+    const implicitRes = isolateMainSourceHtml(headAfterImplicitBody);
+    assert.equal(implicitRes.isolated, true);
+    assert.equal(implicitRes.root, 'article');
+    assert.equal(implicitRes.html.includes('IMPLICIT_BODY_NESTED_HEAD'), false);
+    assert.ok(implicitRes.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('non propaga gli hint chrome da html e body alla radice editoriale', () => {
+    for (const page of [
+      `<html class="has-header"><body><article>${ARTICLE_PROSE}</article></body></html>`,
+      `<html><body class="social"><article>${ARTICLE_PROSE}</article></body></html>`,
+    ]) {
+      const res = isolateMainSourceHtml(page);
+      assert.equal(res.isolated, true);
+      assert.equal(res.root, 'article');
+      assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+    }
+  });
+
+  it('non promuove radici editoriali da un documento con head annidato non attendibile', () => {
+    const nestedHead = '<html><head><head></head>'
+      + `<article>${ARTICLE_PROSE}</article></html>`;
+    const res = isolateMainSourceHtml(nestedHead);
+    assert.equal(res.isolated, false);
+    assert.equal(res.root, 'none');
+    assert.equal(res.trustedDocument, false);
+    assert.equal(res.html, nestedHead);
+  });
+
+  it('rifiuta JSON-LD diretto dopo un head annidato nel body', () => {
+    const staleJsonLd = '<script type="application/ld+json">'
+      + '{"articleBody":"STALE_BODY_FROM_INVALID_DOCUMENT","datePublished":"1999-01-01"}'
+      + '</script>';
+    const nestedHead = '<html><head><title>Fonte valida</title></head><body>'
+      + '<script type="application/ld+json">{"articleBody":"BODY_JSONLD_BEFORE_INVALID_HEAD"}</script>'
+      + '<aside><head><title>Sidebar stale</title></head></aside>'
+      + `<article>${ARTICLE_PROSE}</article>`
+      + staleJsonLd
+      + '</body></html>';
+    const res = isolateMainSourceHtml(nestedHead);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.equal(res.trustedDocument, true);
+    assert.equal(res.html.includes('BODY_JSONLD_BEFORE_INVALID_HEAD'), false);
+    assert.equal(res.html.includes('STALE_BODY_FROM_INVALID_DOCUMENT'), false);
+    assert.equal(res.html.includes('STALE_HEAD'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('rimuove dalla radice editoriale ogni JSON-LD dopo un head annidato nel body', () => {
+    const articleJsonLd = (label) => '<script type="application/ld+json">'
+      + `{"headline":"${label}","articleBody":"${label}"}</script>`;
+    const page = '<html><head><title>Fonte</title></head><body><article>'
+      + articleJsonLd('ARTICLE_JSONLD_BEFORE_INVALID_HEAD')
+      + '<head><title>Sidebar</title></head>'
+      + articleJsonLd('ARTICLE_JSONLD_AFTER_INVALID_HEAD')
+      + ARTICLE_PROSE + '</article></body></html>';
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.equal(res.html.includes('application/ld+json'), false);
+    assert.equal(res.html.includes('ARTICLE_JSONLD_BEFORE_INVALID_HEAD'), false);
+    assert.equal(res.html.includes('ARTICLE_JSONLD_AFTER_INVALID_HEAD'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('non raccoglie JSON-LD dal namespace SVG, MathML o dai loro integration point', () => {
+    const script = (label) => '<script type="application/ld+json">'
+      + `{"headline":"${label}"}</script>`;
+    const foreignContexts = [
+      `<svg>${script('SVG_JSONLD_INACTIVE')}</svg>`,
+      `<svg><foreignObject>${script('FOREIGN_OBJECT_JSONLD_INACTIVE')}</foreignObject></svg>`,
+      `<math><annotation-xml encoding="text/html">${script('MATHML_JSONLD_INACTIVE')}</annotation-xml></math>`,
+    ];
+    for (const context of foreignContexts) {
+      const page = '<html><head></head><body>' + context
+        + `<article>${ARTICLE_PROSE}</article></body></html>`;
+      const res = isolateMainSourceHtml(page);
+      assert.equal(res.isolated, true);
+      assert.equal(res.html.includes('JSONLD_INACTIVE'), false, context);
+      assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+    }
+  });
+
+  it('non lascia uscire un article da un noscript dentro un template', () => {
+    const templateAttack = '<html><body><template><noscript>literal </template>'
+      + `<article>${ARTICLE_PROSE.replace(/Paragrafo/g, 'TEMPLATE_ATTACK')}</article>`
+      + '</noscript></template>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(templateAttack);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.equal(res.html.includes('TEMPLATE_ATTACK'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('mantiene un JSON-LD body-only quando il body e’ document-level', () => {
+    const bodyOnly = '<html><body>'
+      + '<script type="application/ld+json">{"headline":"BODY_ONLY_ACTIVE"}</script>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(bodyOnly);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('BODY_ONLY_ACTIVE'));
+  });
+
+  it('mantiene il JSON-LD nel body implicito dopo la chiusura dell’head', () => {
+    const bodyOnly = '<html><head><title>Fonte valida</title></head>'
+      + '<script type="application/ld+json">{"headline":"IMPLICIT_BODY_ONLY_ACTIVE"}</script>'
+      + `<article>${ARTICLE_PROSE}</article></html>`;
+    const res = isolateMainSourceHtml(bodyOnly);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('IMPLICIT_BODY_ONLY_ACTIVE'));
+  });
+
+  it('il testo apre il body implicito vuoto prima del JSON-LD dopo un head top-level', () => {
+    const bodyOnly = '<head><title>Fonte valida</title></head>'
+      + 'Testo di apertura del body implicito.'
+      + '<script type="application/ld+json">{"headline":"TOP_LEVEL_BODY_JSONLD_ACTIVE"}</script>'
+      + `<article>${ARTICLE_PROSE}</article>`;
+    const res = isolateMainSourceHtml(bodyOnly);
+    assert.equal(res.isolated, true);
+    assert.match(
+      res.html,
+      /<head><title>Fonte valida<\/title><\/head><body><script type="application\/ld\+json">\{"headline":"TOP_LEVEL_BODY_JSONLD_ACTIVE"\}<\/script>/,
+    );
+    assert.equal(res.html.includes('<head><title>Fonte valida</title><script'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('conserva title e meta in un head implicito', () => {
+    const implicitHead = '<html><title>Fonte senza head esplicito</title>'
+      + '<meta property="article:published_time" content="2026-10-17T09:30:00+02:00">'
+      + `<article>${ARTICLE_PROSE}</article></html>`;
+    const res = isolateMainSourceHtml(implicitHead);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('<head><title>Fonte senza head esplicito</title>'));
+    assert.ok(res.html.includes('content="2026-10-17T09:30:00+02:00"'));
+  });
+
+  it('chiude l’head implicito con </head> prima del noscript nel body', () => {
+    const implicitHead = '<html><title>Fonte senza head esplicito</title></head>'
+      + '<noscript><article>' + ARTICLE_PROSE + '</article></noscript></html>';
+    const res = isolateMainSourceHtml(implicitHead);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('ignora </head> prima del primo contenuto head implicito', () => {
+    const page = '<html></head><head><title>Head esplicito</title></head><body>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('Head esplicito'));
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('mantiene il primo head implicito quando arriva un <head> tardivo', () => {
+    const implicitHead = '<html><meta property="og:title" content="META_HEAD_IMPLICITO">'
+      + '<head><title>TITLE_DOPO_HEAD_TARDIVO</title></head>'
+      + `<article>${ARTICLE_PROSE}</article></html>`;
+    const res = isolateMainSourceHtml(implicitHead);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('META_HEAD_IMPLICITO'));
+    assert.ok(res.html.includes('TITLE_DOPO_HEAD_TARDIVO'));
+  });
+
+  it('mantiene nel head i tag consentiti dopo la sua chiusura', () => {
+    const afterHead = '<html><head><title>Fonte valida</title></head>'
+      + '<script>window.HEAD_AFTER_CLOSE = true;</script>'
+      + '<meta name="description" content="HEAD_META_AFTER_CLOSE">'
+      + '<link rel="canonical" href="https://example.test/article">'
+      + '<style>.head-after-close { color: red }</style>'
+      + '<template><meta name="template-head" content="HEAD_TEMPLATE_AFTER_CLOSE"></template>'
+      + '<body>' + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(afterHead);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    for (const marker of [
+      'HEAD_AFTER_CLOSE',
+      'HEAD_META_AFTER_CLOSE',
+      'https://example.test/article',
+      '.head-after-close',
+      'HEAD_TEMPLATE_AFTER_CLOSE',
+    ]) assert.ok(res.html.includes(marker), marker);
+  });
+
+  it('non riattiva noscript di head esplicito o dopo la sua chiusura', () => {
+    const staleArticle = '<article><p>STALE_HEAD_NOSCRIPT_BODY</p></article>';
+    const validArticle = `<article>${ARTICLE_PROSE}</article>`;
+    const explicitHead = '<html><head><noscript>' + staleArticle
+      + '</noscript></head><body>' + validArticle + '</body></html>';
+    const explicit = isolateMainSourceHtml(explicitHead);
+    assert.equal(explicit.isolated, true);
+    assert.equal(explicit.root, 'article');
+    assert.equal(explicit.html.includes('STALE_HEAD_NOSCRIPT_BODY'), false);
+    assert.equal(explicit.html.includes('<head><noscript>'), false);
+    assert.ok(explicit.html.includes('Paragrafo 7 del pezzo vero'));
+
+    const afterHead = '<html><head></head><noscript>' + staleArticle
+      + '</noscript><body>' + validArticle + '</body></html>';
+    const postHead = isolateMainSourceHtml(afterHead);
+    assert.equal(postHead.isolated, true);
+    assert.equal(postHead.root, 'article');
+    assert.equal(postHead.html.includes('STALE_HEAD_NOSCRIPT_BODY'), false);
+    assert.ok(postHead.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('non scarta radici editoriali con hint header nel nome della classe', () => {
+    const page = '<html><body><main><article class="article-header">'
+      + ARTICLE_PROSE + '</article></main></body></html>';
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('article-header'));
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('conserva header e wrapper con hint header dentro la radice editoriale', () => {
+    const page = '<html><body><main><article>'
+      + '<header class="article-header"><h1>EDITORIAL_HEADER_KEPT</h1></header>'
+      + '<div class="article-header"><p>EDITORIAL_WRAPPER_KEPT</p></div>'
+      + ARTICLE_PROSE + '</article></main></body></html>';
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('EDITORIAL_HEADER_KEPT'));
+    assert.ok(res.html.includes('EDITORIAL_WRAPPER_KEPT'));
+  });
+
+  it('rimuove i sottalberi head inattivi dalla radice editoriale scelta', () => {
+    const nestedHead = '<html><head><title>Fonte valida</title></head><body><article>'
+      + '<head><script type="application/ld+json">'
+      + '{"headline":"STALE_NESTED_HEAD_JSON_LD","articleBody":"STALE_BODY"}'
+      + '</script></head>'
+      + ARTICLE_PROSE + '</article></body></html>';
+    const res = isolateMainSourceHtml(nestedHead);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.equal(res.html.includes('STALE_NESTED_HEAD_JSON_LD'), false);
+    assert.equal(res.html.includes('STALE_BODY'), false);
+    assert.equal(res.html.includes('<head><script'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('rifiuta un body esplicito dopo contenuto nel body implicito', () => {
+    const repeatedBody = '<html><head></head>'
+      + `<article>${ARTICLE_PROSE}</article>`
+      + '<body><script type="application/ld+json">{"headline":"SECOND_BODY_JSON_LD_UNTRUSTED"}</script>'
+      + '</body></html>';
+    const res = isolateMainSourceHtml(repeatedBody);
+    assert.equal(res.isolated, false);
+    assert.equal(res.trustedDocument, false);
+    assert.equal(res.html, repeatedBody);
+  });
+
+  it('isola l’article-markup attivo dentro noscript con scripting disabilitato', () => {
+    const page2 = '<html><body><noscript>'
+      + `<article>${ARTICLE_PROSE}</article>`
+      + '</noscript><aside>CHROME OUTSIDE THE ARTICLE</aside></body></html>';
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+    assert.equal(res.html.includes('CHROME OUTSIDE THE ARTICLE'), false);
+  });
+
+  it('rende attivo il fallback noscript del main per estrattore e title evidence', () => {
+    const page2 = '<html><head><noscript><h1>HEAD_INACTIVE</h1></noscript></head><body>'
+      + '<main><noscript><h1>ACTIVE_HEADLINE</h1>'
+      + `<p>${ARTICLE_PROSE.replace(/<p>|<\/p>/g, ' ')}</p></noscript>`
+      + '<template><noscript><h1>TEMPLATE_INACTIVE</h1></noscript></template></main>'
+      + '</body></html>';
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'main');
+    assert.ok(res.html.includes('ACTIVE_HEADLINE'));
+    assert.equal(res.html.includes('<main><noscript>'), false);
+    assert.equal(res.html.includes('HEAD_INACTIVE'), false);
+    assert.equal(res.html.includes('<head><noscript>'), false);
+    assert.ok(res.html.includes('<template><noscript>'));
+
+    const activated = sourceActivateBodyNoscript(
+      '<html><head><noscript><h1>HEAD_INACTIVE</h1></noscript></head>'
+      + '<body><main><noscript><h1>ACTIVE_HEADLINE</h1></noscript>'
+      + '<template><noscript><h1>TEMPLATE_INACTIVE</h1></noscript></template></main></body></html>',
+    );
+    assert.ok(activated.includes('<h1>ACTIVE_HEADLINE</h1>'));
+    assert.ok(activated.includes('<head><noscript>'));
+    assert.ok(activated.includes('<template><noscript>'));
+    assert.equal(activated.includes('<main><noscript>'), false);
+  });
+
+  it('mantiene inattivo il noscript nell’head implicito e chiude l’head esplicito sul testo', () => {
+    const headFallback = '<html><noscript>'
+      + `<article><p>${'CONTENUTO_HEAD_STALE '.repeat(20)}</p></article>`
+      + '</noscript><body>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const implicit = isolateMainSourceHtml(headFallback);
+    assert.equal(implicit.isolated, true);
+    assert.equal(implicit.root, 'article');
+    assert.equal(implicit.html.includes('CONTENUTO_HEAD_STALE'), false);
+    assert.ok(implicit.html.includes('Paragrafo 7 del pezzo vero'));
+
+    const textClosesHead = '<html><head><title>Fonte</title>testo che chiude l’head'
+      + '<noscript><article>'
+      + `${ARTICLE_PROSE.replace(/Paragrafo/g, 'NOSCRIPT_BODY_ACTIVE')}`
+      + '</article></noscript></html>';
+    const bodyFallback = isolateMainSourceHtml(textClosesHead);
+    assert.equal(bodyFallback.isolated, true);
+    assert.equal(bodyFallback.root, 'article');
+    assert.ok(bodyFallback.html.includes('NOSCRIPT_BODY_ACTIVE 7'));
+  });
+
+  it('tratta il noscript diretto dopo </head> come body anche senza <body>', () => {
+    const page = '<html><head><title>Fonte</title></head><noscript><article>'
+      + ARTICLE_PROSE.replace(/Paragrafo/g, 'POST_HEAD_NOSCRIPT_BODY')
+      + '</article></noscript></html>';
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('POST_HEAD_NOSCRIPT_BODY 7'));
+    assert.equal(res.html.includes('<head><noscript>'), false);
+  });
+
+  it('tratta script SVG foreign dentro template come raw-text opaco', () => {
+    const page2 = '<html><body><template><svg><script><svg>literal'
+      + '</script></svg></template>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+
+    const malformed = '<?xml unsupported?>\n<!doctype html><html><head></head><body>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const rejected = isolateMainSourceHtml(malformed);
+    assert.equal(rejected.trustedDocument, false);
+    assert.equal(rejected.isolated, false);
+  });
+
   it('ripiega su <main> quando <article> non c’e’ o e’ troppo corto', () => {
     const teaserOnly = `<html><body><article>Leggi anche</article><main>${ARTICLE_PROSE}</main></body></html>`;
     const res = isolateMainSourceHtml(teaserOnly);
     assert.equal(res.root, 'main');
     assert.ok(res.html.includes('Paragrafo 3 del pezzo vero'));
+  });
+
+  it('misura la soglia della radice dopo aver rimosso il chrome interno', () => {
+    const chrome = '<aside>' + 'CHROME_ONLY '.repeat(60) + '</aside>';
+    const shortArticle = `<article><p>Testo editoriale breve.</p>${chrome}</article>`;
+    const page = `<html><body><main>${shortArticle}${ARTICLE_PROSE}</main></body></html>`;
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'main');
+    assert.equal(res.html.includes('CHROME_ONLY'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('accetta il prologo XML XHTML prima del doctype senza perdere la fiducia nel documento', () => {
+    const xhtml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+      + '<!doctype html><html><head><title>Fonte XHTML</title></head><body>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(xhtml);
+    assert.equal(res.trustedDocument, true);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
   });
 
   it('NON isola quando non riconosce una radice: nessuna regressione sotto il comportamento precedente', () => {
@@ -194,6 +767,18 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.equal(res.html, noRoot);
   });
 
+  it('rifiuta un head dopo testo già entrato al livello documento', () => {
+    const staleJsonLd = '<script type="application/ld+json">'
+      + '{"headline":"STALE_HEAD_AFTER_TOP_LEVEL_TEXT"}</script>';
+    const page = 'testo già nel body<head><title>titolo stale</title>'
+      + staleJsonLd + '</head><article>' + ARTICLE_PROSE + '</article>';
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.trustedDocument, false);
+    assert.equal(res.isolated, false);
+    assert.equal(res.root, 'none');
+    assert.equal(res.html, page);
+  });
+
   it('regge input degeneri', () => {
     for (const input of ['', null, undefined]) {
       const res = isolateMainSourceHtml(input);
@@ -202,7 +787,7 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(visibleTextLength('<p>ciao</p>') > 0);
   });
 
-  it('abbandona un head malformato senza riesaminare ogni tag fino a fondo pagina', () => {
+  it('fallisce chiuso su un head malformato senza riesaminare ogni tag fino a fondo pagina', () => {
     // Ogni `<x ` ha un attributo apparente e condivide una virgoletta non
     // chiusa in fondo: il vecchio scanner rifaceva la ricerca di `>` per ogni
     // apertura, bloccando l’event loop su una risposta ancora piccola.
@@ -212,10 +797,22 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     const started = performance.now();
     const res = isolateMainSourceHtml(malformedHead);
     const elapsed = performance.now() - started;
-    assert.equal(res.isolated, true);
-    assert.equal(res.root, 'article');
-    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+    assert.equal(res.isolated, false);
+    assert.equal(res.root, 'none');
+    assert.equal(res.html, malformedHead);
     assert.ok(elapsed < 250, `scanner sorgente troppo lento su markup malformato: ${elapsed.toFixed(1)}ms`);
+  });
+
+  it('non isola né promuove JSON-LD con una scansione dell’head malformata', () => {
+    const staleJsonLd = '<script type="application/ld+json">'
+      + '{"headline":"STALE_JSON_LD_SHOULD_NOT_BE_ACTIVATED"}</script>';
+    const malformedHead = '<html><head><meta data="unterminated'
+      + '</head><body><article>' + ARTICLE_PROSE + '</article>'
+      + staleJsonLd + '</body></html>';
+    const res = isolateMainSourceHtml(malformedHead);
+    assert.equal(res.isolated, false);
+    assert.equal(res.root, 'none');
+    assert.equal(res.html, malformedHead);
   });
 });
 
@@ -234,10 +831,18 @@ describe('cablaggio in fetchPageContent', () => {
     // non devono far sparire il wiring dal controllo statico.
     const body = SRC.slice(at, end);
     const isolateAt = body.indexOf('const isolation = isolateMainSourceHtml(html);');
+    const trustGuardAt = body.indexOf('if (!isolation.trustedDocument)');
     const extractAt = body.indexOf('extractArticleText(isolation.html');
+    const titleAt = body.indexOf('pageTitleEvidence(isolation.html, {');
     assert.ok(isolateAt !== -1, 'fetchPageContent non isola la pagina');
+    assert.ok(trustGuardAt > isolateAt, 'fetchPageContent deve rifiutare una struttura HTML non attendibile');
+    assert.ok(trustGuardAt < extractAt, 'l’estrattore non deve ricevere HTML da un documento non attendibile');
     assert.ok(extractAt !== -1, 'l’estrattore riceve ancora l’HTML grezzo invece di quello isolato');
+    assert.ok(titleAt !== -1, 'la title evidence non abilita il fallback noscript della stessa fetch');
     assert.ok(isolateAt < extractAt, 'isolamento dopo l’estrazione: non serve a niente');
+    assert.ok(isolateAt < titleAt, 'isolamento dopo la title evidence: non serve a niente');
+    assert.match(body, /extractArticleText\(isolation\.html,\s*\{[^}]*scriptingDisabled:\s*isolation\.isolated/u);
+    assert.match(body, /pageTitleEvidence\(isolation\.html,\s*\{\s*scriptingDisabled:\s*isolation\.isolated,?\s*\}\)/u);
   });
 
   it('l’estrattore condiviso non viene modificato da questo lato', () => {
