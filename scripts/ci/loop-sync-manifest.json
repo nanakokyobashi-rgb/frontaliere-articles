@@ -226,7 +226,7 @@
       "reason": "Acquisisce e rilascia il lock R2 breve che coordina il bootstrap HTML di una sezione live con il flip del registry API/edge; il sito consuma soltanto la release risultante e non possiede il publisher o il suo workflow.",
       "baseline": {
         "site": null,
-        "corpus": "bf12d9406de23b54",
+        "corpus": "0388436f82df73a5",
         "alignedAt": "2026-10-17"
       }
     },
@@ -2213,7 +2213,7 @@
       "reason": "Contratto e lettore del lock R2 temporaneo usato per impedire che publish-api annunci una release mentre il bootstrap sta ancora caricando le pagine della stessa sezione; la pubblicazione edge e' una responsabilita' del corpus, mentre il sito legge il registry gia' pubblicato.",
       "baseline": {
         "site": null,
-        "corpus": "e1cc80ab7d16cc03",
+        "corpus": "bf12d9406de23b54",
         "alignedAt": "2026-10-17"
       }
     },
