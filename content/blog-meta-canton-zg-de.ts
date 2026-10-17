@@ -21,6 +21,9 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.zugo-revisione-legge-edilizia-2026.title': 'Teilrevision des PBG in Zug: Vernehmlassung ab 17. September 2026',
     'blog.article.zugo-revisione-legge-edilizia-2026.excerpt': 'Der Kanton Zug eröffnet die Vernehmlassung zur Revision des PBG, um mehr preisgünstigen Wohnraum zu schaffen und die Bauverfahren zu vereinfachen.',
     'blog.article.zugo-revisione-legge-edilizia-2026.imageAlt': 'Neue Revision des Planungs- und Baugesetzes im Kanton Zug',
+    'blog.article.zugo-piano-direttore-26-1.title': 'Richtplan 26/1: Zug eröffnet die Mitwirkung',
+    'blog.article.zugo-piano-direttore-26-1.excerpt': 'Die Änderung 26/1 bereitet die «weissen Zonen» vor, stimmt den Richtplan auf die Revision des PBG ab und setzt RPG 2 um.',
+    'blog.article.zugo-piano-direttore-26-1.imageAlt': 'Raumplanung und Richtplan im Kanton Zug',
 };
 
 export default blogMetaCantonZgDe;

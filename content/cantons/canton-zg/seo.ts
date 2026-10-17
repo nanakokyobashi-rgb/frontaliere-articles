@@ -231,6 +231,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-zugo-piano-direttore-26-1': {
+    title: 'Piano direttore 26/1: Zugo avvia la partecipazione',
+    description: 'Zugo pubblica il Piano direttore 26/1: zone bianche, revisione del PBG e strategia di stabilizzazione per l\'area non edificabile. Scadenza: 16 novembre 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, piano, direttore, zugo, avvia',
+    ogTitle: 'Zugo: partecipazione sul Piano direttore 26/1',
+    ogDescription: 'La proposta 26/1 accompagna la revisione parziale del PBG, prepara le «zone bianche» per aumentare la produzione di abitazioni e attua la strategia di stabilizzazione richiesta da RPG 2. La partecipazione termina il 16 novembre 2026.',
+    canonicalPath: '/articoli-zugo/zugo-piano-direttore-26-1/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Piano direttore 26/1: Zugo avvia la partecipazione",
+      "description": "Zugo pubblica il Piano direttore 26/1: zone bianche, revisione del PBG e strategia di stabilizzazione per l'area non edificabile. Scadenza: 16 novembre 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-zugo-piano-direttore-26-1.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pianificazione urbana e Piano direttore nel Canton Zugo"
+      },
+      "datePublished": "2026-10-17T01:28:47+00:00",
+      "dateModified": "2026-10-17T01:28:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zugo/zugo-piano-direttore-26-1/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
