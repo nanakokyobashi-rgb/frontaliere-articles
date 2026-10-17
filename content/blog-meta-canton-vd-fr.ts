@@ -38,10 +38,10 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.cff-eclepens-treni-ripresa.imageAlt': 'Train CFF sur la ligne Yverdon-les-Bains–Lausanne après la reprise du trafic.',
     'blog.article.scuole-vaud-furti-inchieste.title': 'Huit écoles vaudoises touchées par des vols nocturnes',
     'blog.article.scuole-vaud-furti-inchieste.excerpt': 'Huit écoles vaudoises touchées en dix jours Tous les incidents ont eu lieu la nuit Orbe estime les dommages à plusieurs milliers de francs La police cantonale',
-    'blog.article.scuole-vaud-furti-inchieste.imageAlt': 'Couloir d\'école dans le canton de Vaud avec des portes endommagées',
+    'blog.article.scuole-vaud-furti-inchieste.imageAlt': 'Illustration générée pour cet article',
     'blog.article.tuffe-falsi-poliziotti-vaud.title': 'Arnaques: faux policiers et banquiers, 100 interpellés',
     'blog.article.tuffe-falsi-poliziotti-vaud.excerpt': 'Plus de cent personnes interpellées dans le Vaud en 2026 Seize interpellations depuis le début d\'octobre Près de 2.300 cas et 900 arnaques réussies Préjudice',
-    'blog.article.tuffe-falsi-poliziotti-vaud.imageAlt': 'Arnaques aux faux policiers et faux banquiers dans le canton de Vaud',
+    'blog.article.tuffe-falsi-poliziotti-vaud.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonVdFr;

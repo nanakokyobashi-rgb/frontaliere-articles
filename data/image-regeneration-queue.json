@@ -5,41 +5,31 @@
       "articleId": "offerte-formazione-federale",
       "title": "Amministrazione federale: lavoro, praticantati e formazione",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Generic synthetic office-work scene relevant to Swiss work, but it contains a recognizable foreground person viewed from behind.);",
+      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Generic synthetic work scene, but it includes a recognizable foreground person and text-like content on the laptop screen.); gemin",
       "status": "failed",
-      "failureCount": 9,
+      "failureCount": 10,
       "requestedAt": "2026-10-13T23:44:58.192Z",
-      "lastFailureAt": "2026-10-16T21:54:32.267Z"
+      "lastFailureAt": "2026-10-17T05:10:52.333Z"
     },
     {
       "articleId": "opportunita-impiego-federale",
       "title": "Lavorare per l'Amministrazione federale: 50 formazioni",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-opportunita-impiego-federale: openai-codex (vision gate rejected image: Synthetic photorealistic illustration; a recognizable foreground person is visible from behind.); gemini (Gemini image request fa",
+      "reason": "All image providers failed for article-opportunita-impiego-federale: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Swiss professional training, but it contains a recognizable foreground person viewe",
       "status": "failed",
-      "failureCount": 6,
+      "failureCount": 7,
       "requestedAt": "2026-10-15T01:49:05.613Z",
-      "lastFailureAt": "2026-10-16T21:55:25.435Z"
-    },
-    {
-      "articleId": "dimissioni-rapporto-ticino",
-      "title": "Dimissioni da frontaliere: termini e passi in Ticino",
-      "fallbackImage": "/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp",
-      "reason": "All image providers failed for article-dimissioni-rapporto-ticino: openai-codex (vision gate rejected image: Generic synthetic commuter-train illustration relevant to Ticino transit, but it includes a recognizable foreground person viewed f",
-      "status": "failed",
-      "failureCount": 5,
-      "requestedAt": "2026-10-15T11:39:57.424Z",
-      "lastFailureAt": "2026-10-16T21:56:24.019Z"
+      "lastFailureAt": "2026-10-17T05:12:10.718Z"
     },
     {
       "articleId": "maratona-laghi-varese-2027",
       "title": "Maratona dei Laghi 2027: attesi 2000 runner tra Varese e Monate",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-maratona-laghi-varese-2027: openai-codex (vision gate rejected image: Synthetic lakeside running illustration relevant to the marathon subject, but a recognizable foreground runner is visible from behi",
+      "reason": "All image providers failed for article-maratona-laghi-varese-2027: openai-codex (vision gate rejected image: Generic synthetic lakeside running scene with a recognizable foreground runner viewed from behind.); gemini (Gemini image request f",
       "status": "failed",
-      "failureCount": 2,
+      "failureCount": 3,
       "requestedAt": "2026-10-16T13:10:19.548Z",
-      "lastFailureAt": "2026-10-16T21:58:21.196Z"
+      "lastFailureAt": "2026-10-17T05:14:11.869Z"
     },
     {
       "articleId": "giovani-lavoro-futuro-ticino",
@@ -52,24 +42,14 @@
       "lastFailureAt": "2026-10-17T01:00:53.424Z"
     },
     {
-      "articleId": "semafori-cadenazzo-proteste-ustra",
-      "title": "PATTI CHIARI Cadenazzo, si accendono semafori… e proteste",
-      "fallbackImage": "/images/blog/article-semafori-autostrade-ustra-ticino.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "failed",
-      "failureCount": 1,
-      "requestedAt": "2026-10-16T21:09:58.069Z",
-      "lastFailureAt": "2026-10-16T22:00:21.442Z"
-    },
-    {
       "articleId": "ia-assistente-shopping-svizzera",
       "title": "IA aiuta gli svizzeri nello shopping ma frena al pagamento",
       "fallbackImage": "/images/blog/frontaliere-acquisto-immobile-investimento-svizzera.webp",
       "reason": "image generation deadline exceeded",
       "status": "failed",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-16T21:25:25.917Z",
-      "lastFailureAt": "2026-10-16T22:02:21.636Z"
+      "lastFailureAt": "2026-10-17T05:16:57.534Z"
     },
     {
       "articleId": "cantieri-lugano-riduzione-disagi",
@@ -92,104 +72,24 @@
       "lastFailureAt": "2026-10-17T01:05:13.745Z"
     },
     {
-      "articleId": "kuessnacht-rete-teleriscaldamento",
-      "title": "Küssnacht amplia la rete verso Immensee, Fänn e Adligenswil",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T00:46:50.699Z",
-      "lastFailureAt": "2026-10-17T00:46:50.699Z"
-    },
-    {
-      "articleId": "zuger-rapporto-gestione-2025",
-      "title": "Zuger Pensionskasse: online il rapporto 2025",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T00:53:57.816Z",
-      "lastFailureAt": "2026-10-17T00:53:57.816Z"
-    },
-    {
       "articleId": "fully-strada-ciclabile",
       "title": "Fully: oltre 5,5 km di strada diventano ciclabili",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-fully-strada-ciclabile: openai-codex (vision gate rejected image: Clear generic Alpine cycle-lane scene relevant to the subject, but the painted bicycle-lane symbol is signage and violates the no-signa",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-17T01:00:16.102Z",
-      "lastFailureAt": "2026-10-17T01:00:16.102Z"
+      "lastFailureAt": "2026-10-17T05:37:45.258Z"
     },
     {
       "articleId": "turgovia-sicurezza-lavoro-orari",
       "title": "Turgovia: sicurezza sul lavoro, orari e tutela della salute",
       "fallbackImage": "/images/blog/article-sicurezza-lavoro-turgovia-regole.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-turgovia-sicurezza-lavoro-orari: openai-codex (vision gate rejected image: Generic synthetic workplace-safety illustration, but it contains a recognizable foreground worker viewed from behind.); gemini",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-17T01:07:58.548Z",
-      "lastFailureAt": "2026-10-17T01:07:58.548Z"
-    },
-    {
-      "articleId": "burraco-solidale-buguggiate",
-      "title": "Burraco benefico a Buguggiate: 140 partecipanti per ABAD ETS",
-      "fallbackImage": "/images/blog/nuovi-progetti-chiave-digitali.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T01:16:19.861Z",
-      "lastFailureAt": "2026-10-17T01:16:19.861Z"
-    },
-    {
-      "articleId": "dibattito-prefettura-sarine",
-      "title": "Sarine, i sette candidati alla prefettura a confronto",
-      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T01:20:36.277Z",
-      "lastFailureAt": "2026-10-17T01:20:36.277Z"
-    },
-    {
-      "articleId": "scuole-vaud-furti-inchieste",
-      "title": "Otto scuole vaudesi colpite da furti notturni",
-      "fallbackImage": "/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-vaud.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T01:27:48.782Z",
-      "lastFailureAt": "2026-10-17T01:27:48.782Z"
-    },
-    {
-      "articleId": "singen-chiusura-schaffhauser-strasse",
-      "title": "Singen, chiusa la Schaffhauser Straße dal 26 al 30 ottobre",
-      "fallbackImage": "/images/blog/article-lavori-autolaghi-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T01:47:28.529Z",
-      "lastFailureAt": "2026-10-17T01:47:28.529Z"
-    },
-    {
-      "articleId": "coppa-svizzera-lugano-taverne",
-      "title": "Lugano favoritissimo, il Taverne cerca l'impresa",
-      "fallbackImage": "/images/blog/article-sfida-bar-quartiere-lugano.webp",
-      "reason": "All image providers failed for article-coppa-svizzera-lugano-taverne: openai-codex (vision gate rejected image: Generic synthetic football warm-up scene relevant to Taverne/Ticino,",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T01:54:51.606Z",
-      "lastFailureAt": "2026-10-17T01:54:51.606Z"
-    },
-    {
-      "articleId": "tuffe-falsi-poliziotti-vaud",
-      "title": "Truffe falsi poliziotti e banchieri nel Vaud: 100 interpellati",
-      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-17T02:07:47.983Z",
-      "lastFailureAt": "2026-10-17T02:07:47.983Z"
+      "lastFailureAt": "2026-10-17T05:38:41.862Z"
     }
   ]
 }

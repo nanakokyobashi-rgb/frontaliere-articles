@@ -355,11 +355,12 @@ function maskFindTagEnd(html, start) {
   return -1;
 }
 
-function maskIsSelfClosingStartTag(html, nameEnd, end) {
+function inspectMaskSelfClosingStartTag(html, nameEnd, end) {
   let i = nameEnd;
   while (i < end) {
     while (i < end && maskHtmlWhitespace(html[i])) i++;
     if (i >= end) return false;
+    if (html[i] === '>') return { malformed: true };
     if (html[i] === '/') return i + 1 === end;
 
     while (
@@ -401,12 +402,15 @@ function maskReadTag(html, start) {
   const end = maskFindTagEnd(html, start);
   if (end < 0) return { malformed: true };
   const name = html.slice(nameStart, i).toLowerCase();
+  const selfClosingState = !closing && MASK_VOID_ELEMENTS.has(name)
+    ? inspectMaskSelfClosingStartTag(html, i, end)
+    : false;
+  if (selfClosingState?.malformed) return selfClosingState;
   return {
     closing,
     end,
     name,
-    selfClosing: !closing && MASK_VOID_ELEMENTS.has(name)
-      && maskIsSelfClosingStartTag(html, i, end),
+    selfClosing: selfClosingState,
   };
 }
 

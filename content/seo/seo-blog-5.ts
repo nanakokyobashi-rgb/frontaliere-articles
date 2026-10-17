@@ -108511,10 +108511,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp`,
+        "url": `${BASE_URL}/images/blog/article-dimissioni-rapporto-ticino.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Frontaliere con contratto di lavoro svizzero in un paesaggio del Ticino"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-15T11:39:57+00:00",
       "dateModified": "2026-10-15T11:39:57+00:00",
@@ -110227,10 +110227,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-semafori-autostrade-ustra-ticino.webp`,
+        "url": `${BASE_URL}/images/blog/article-semafori-cadenazzo-proteste-ustra.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Semafori e traffico a Cadenazzo, Ticino, con veicoli in attesa al rosso."
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-16T21:09:57+00:00",
       "dateModified": "2026-10-16T21:09:57+00:00",
@@ -110368,10 +110368,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "140 partecipanti alla serata benefica 35 tavoli da gioco a Buguggiate Ricavato destinato a nuovi progetti di inserimento lavorativo Cosa → torneo benefico",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/nuovi-progetti-chiave-digitali.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-burraco-solidale-buguggiate.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Serata di burraco benefico a Buguggiate con 140 partecipanti su 35 tavoli"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-17T01:16:19+00:00",
       "dateModified": "2026-10-17T01:16:19+00:00",
@@ -110407,10 +110412,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-sfida-bar-quartiere-lugano.webp`,
+        "url": `${BASE_URL}/images/blog/article-coppa-svizzera-lugano-taverne.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Il Comunale di Taverne, sede della sfida di Coppa Svizzera contro lo Young Boys"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-17T01:54:51+00:00",
       "dateModified": "2026-10-17T01:54:51+00:00",
@@ -110501,6 +110506,84 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/viaggi-armonici-ternate-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-film-festival-diritti-umani-lugano-2026': {
+    title: 'Film festival diritti umani Lugano: il miglior film è promised spaces',
+    description: 'Vincitore Miglior film: Promised Spaces di Ivan Markovic Premio ONG assegnato a Effondrement di Anat Even Premio del Pubblico a Trop c\'est trop di Elisé',
+    keywords: 'frontalieri, ticino, svizzera, italia, film, festival, diritti, umani',
+    ogTitle: 'Film Festival Diritti Umani Lugano: il Miglior film è Promised Spaces',
+    ogDescription: 'Vincitore Miglior film: Promised Spaces di Ivan Markovic Premio ONG assegnato a Effondrement di Anat Even Premio del Pubblico a Trop c\'est trop di Elisé',
+    canonicalPath: '/articoli-frontaliere/film-festival-diritti-umani-lugano-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Film festival diritti umani Lugano: il miglior film è promised spaces",
+      "description": "Vincitore Miglior film: Promised Spaces di Ivan Markovic Premio ONG assegnato a Effondrement di Anat Even Premio del Pubblico a Trop c'est trop di Elisé",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-film-festival-diritti-umani-lugano-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Film Festival Diritti Umani Lugano: premiazione e proiezioni"
+      },
+      "datePublished": "2026-10-17T03:41:57+00:00",
+      "dateModified": "2026-10-17T03:41:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/film-festival-diritti-umani-lugano-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-netto-single-paga-ticino-2026': {
+    title: 'Busta paga svizzera 2026: guida per frontalieri single',
+    description: 'Busta paga svizzera 2026 per single: imposta alla fonte, AVS, LPP, LAMal e differenze tra vecchi e nuovi frontalieri, contributi e netto reale nel 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, busta, paga, single, lamal',
+    ogTitle: 'Frontalieri single: busta paga svizzera 2026',
+    ogDescription: 'Dal Nuovo Accordo Frontalieri alle trattenute AVS/AI/IPG, AD/AC, LAINF e LPP: la guida per leggere il netto di un frontaliere single, distinguere il regime dei vecchi e nuovi frontalieri e capire il ruolo di LAMal e credito d\'imposta.',
+    canonicalPath: '/articoli-frontaliere/netto-single-paga-ticino-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Busta paga svizzera 2026: guida per frontalieri single",
+      "description": "Busta paga svizzera 2026 per single: imposta alla fonte, AVS, LPP, LAMal e differenze tra vecchi e nuovi frontalieri, contributi e netto reale nel 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-netto-single-paga-ticino-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-17T04:59:00+00:00",
+      "dateModified": "2026-10-17T04:59:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/netto-single-paga-ticino-2026/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
