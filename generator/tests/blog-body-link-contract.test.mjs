@@ -50,6 +50,36 @@ test('la sanitizzazione conserva il testo e non indovina URL sconosciute', () =>
   );
 });
 
+test('writer e gate sanificano ogni link elaborato dal renderer, anche immagini, code span e fence', () => {
+  const source = [
+    '![immagine](relative/image)',
+    '`[codice](relative/code)`',
+    '~~~markdown',
+    '[fence](relative/fence)',
+    '~~~',
+    '<!-- [commento](relative/comment) -->',
+  ].join('\n');
+  assert.deepEqual(
+    findNonCanonicalArticleLinks(source).map(({ target, replacement }) => ({ target, replacement })),
+    [
+      { target: 'relative/image', replacement: null },
+      { target: 'relative/code', replacement: null },
+      { target: 'relative/fence', replacement: null },
+      { target: 'relative/comment', replacement: null },
+    ],
+  );
+  const sanitized = sanitizeArticleMarkdownLinks(source);
+  assert.equal(sanitized, [
+    '!immagine',
+    '`codice`',
+    '~~~markdown',
+    'fence',
+    '~~~',
+    '<!-- commento -->',
+  ].join('\n'));
+  assert.deepEqual(findNonCanonicalArticleLinks(sanitized), []);
+});
+
 test('la sanitizzazione rimuove i delimitatori angolari dai target canonici', () => {
   const links = '[Pagina](</en/foo>) [Email](<mailto:a@b>) [Lavori](<nav:jobs>)';
   assert.equal(
@@ -95,7 +125,7 @@ test('la sanitizzazione valida href HTML e rimuove gli attributi duplicati', () 
   );
 });
 
-test('il gate decodifica i body TypeScript e copre tutte le radici attive senza leggere link dentro il codice', () => {
+test('il gate decodifica i body TypeScript e allinea i confini al renderer statico', () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'article-body-link-gate-'));
   const markdown = [
     '~~~markdown',
@@ -103,6 +133,10 @@ test('il gate decodifica i body TypeScript e copre tutte le radici attive senza 
     '<a href="calculator">esempio</a>',
     '~~~',
     '[legacy](calculator)',
+    '![immagine](relative/image)',
+    '`[codice](relative/code)`',
+    '\\[escaped](relative/escaped)',
+    '<!-- [commento](relative/comment-markdown) -->',
     '[azione sconosciuta](nav:unknown-action)',
     '[telefono](tel:+41123456789)',
     '<a href="calculator">legacy HTML</a>',
@@ -123,13 +157,14 @@ test('il gate decodifica i body TypeScript e copre tutte le radici attive senza 
     const scoped = scanBlogBodyLinks(fixtureRoot, [changedFiles.at(-1)]);
     assert.equal(scoped.files.length, 1, 'il filtro include anche una radice attiva non primaria');
     assert.deepEqual(scoped.offenders.map(({ label }) => label), [
-      'legacy', 'azione sconosciuta', 'telefono', '<a href>', '<a href>',
+      'esempio', '<a href>', 'legacy', 'immagine', 'codice', 'escaped', 'commento',
+      'azione sconosciuta', 'telefono', '<a href>', '<a href>', '<a href>',
     ]);
     assert.deepEqual(scoped.errors, []);
 
     const full = scanBlogBodyLinks(fixtureRoot);
     assert.equal(full.files.length, BLOG_BODY_ROOTS.length);
-    assert.equal(full.offenders.length, BLOG_BODY_ROOTS.length * 5);
+    assert.equal(full.offenders.length, BLOG_BODY_ROOTS.length * 12);
     assert.deepEqual(full.errors, []);
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
@@ -188,10 +223,12 @@ test('publish-api esegue il link gate prima della pubblicazione', () => {
   assert.ok(build > linkGate, 'il link gate deve precedere la pubblicazione della superficie API');
   assert.ok(pushPaths.includes("'scripts/ci/check-blog-body-links.mjs'"), 'le modifiche al gate devono riattivare publish-api');
   assert.ok(pushPaths.includes("'scripts/lib/article-link-contract.mjs'"), 'le modifiche al contratto devono riattivare publish-api');
+  assert.ok(pushPaths.includes("'generator/scripts/lib/article-excerpt.mjs'"), 'la dipendenza transitiva del writer deve riattivare publish-api');
   assert.ok(pushPaths.includes("'generator/data/canton-url-slugs.json'"), 'la sorgente delle radici attive deve riattivare publish-api');
   assert.match(linkGateStep, /PREFLIGHT_SCAN_MODE/);
   assert.match(workflow, /engine\/shared\/cantonArticleSectionCore\.generated\.mjs/);
   assert.match(gateInputBlock, /generator\/data\/canton-url-slugs\.json/);
+  assert.match(gateInputBlock, /generator\/scripts\/lib\/article-excerpt\.mjs/);
   assert.match(workflow, /generator\/data\/canton-url-slugs\.json/);
 });
 

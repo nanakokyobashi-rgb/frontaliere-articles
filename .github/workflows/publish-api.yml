@@ -21,6 +21,7 @@ on:
       - 'scripts/ci/check-blog-body-links.mjs'
       - 'scripts/lib/article-link-contract.mjs'
       - 'generator/scripts/lib/article-meta-block.mjs'
+      - 'generator/scripts/lib/article-excerpt.mjs'
       - 'public/images/blog/**'
       - 'public/images/generated/**'
       # engine/** matters as much as the corpus: build-api.mjs is a thin caller
@@ -335,6 +336,7 @@ jobs:
               scripts/lib/article-link-contract.mjs
               scripts/lib/corpus-sections.mjs
               generator/scripts/lib/article-meta-block.mjs
+              generator/scripts/lib/article-excerpt.mjs
             )
             if git diff --quiet "$BEFORE" HEAD -- "${gate_input_paths[@]}" 2>/dev/null; then
               if git diff --name-only "$BEFORE" HEAD -- "${body_dir_list[@]}" > "$changed_files_path" 2>/dev/null; then

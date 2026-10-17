@@ -234,143 +234,13 @@ function parseHtmlAnchor(source, start) {
   return null;
 }
 
-function fenceEnd(source, start) {
-  const lineStart = source.lastIndexOf('\n', start - 1) + 1;
-  if (!/^[ \t]{0,3}$/.test(source.slice(lineStart, start))) return -1;
-  const lineEnd = source.indexOf('\n', start);
-  const opening = source.slice(lineStart, lineEnd < 0 ? source.length : lineEnd);
-  const match = /^[ \t]{0,3}(`{3,}|~{3,})/.exec(opening);
-  if (!match) return -1;
-  const marker = match[1][0];
-  const minimum = match[1].length;
-  let cursor = lineEnd < 0 ? source.length : lineEnd + 1;
-  while (cursor < source.length) {
-    const end = source.indexOf('\n', cursor);
-    const line = source.slice(cursor, end < 0 ? source.length : end);
-    const candidate = line.replace(/^[ \t]{0,3}/, '');
-    let run = 0;
-    while (candidate[run] === marker) run += 1;
-    if (run >= minimum && candidate.slice(run).trim() === '') {
-      return end < 0 ? source.length : end + 1;
-    }
-    if (end < 0) break;
-    cursor = end + 1;
-  }
-  return source.length;
-}
-
-function codeSpanEnd(source, start) {
-  let run = 1;
-  while (source[start + run] === '`') run += 1;
-  let cursor = start + run;
-  while (cursor < source.length) {
-    const next = source.indexOf('`', cursor);
-    if (next < 0) return -1;
-    let closingRun = 1;
-    while (source[next + closingRun] === '`') closingRun += 1;
-    if (closingRun === run) return next + closingRun;
-    cursor = next + closingRun;
-  }
-  return -1;
-}
-
-function indentedCodeBlockEnd(source, start) {
-  if (start > 0 && source[start - 1] !== '\n') return -1;
-  const firstEnd = source.indexOf('\n', start);
-  const firstLine = source.slice(start, firstEnd < 0 ? source.length : firstEnd);
-  if (!firstLine.trim() || !/^(?: {4,}|\t)/.test(firstLine)) return -1;
-
-  let cursor = firstEnd < 0 ? source.length : firstEnd + 1;
-  while (cursor < source.length) {
-    const lineEnd = source.indexOf('\n', cursor);
-    const line = source.slice(cursor, lineEnd < 0 ? source.length : lineEnd);
-    if (line.trim() && !/^(?: {4,}|\t)/.test(line)) return cursor;
-    cursor = lineEnd < 0 ? source.length : lineEnd + 1;
-  }
-  return source.length;
-}
-
-function referenceDefinitionAt(source, start) {
-  if (start > 0 && source[start - 1] !== '\n') return null;
-  const lineEnd = source.indexOf('\n', start);
-  const line = source.slice(start, lineEnd < 0 ? source.length : lineEnd);
-  const indent = /^ {0,3}/.exec(line)[0].length;
-  if (line[indent] !== '[') return null;
-
-  const labelEnd = line.indexOf(']', indent + 1);
-  if (labelEnd < 0) return null;
-  let cursor = labelEnd + 1;
-  while (line[cursor] === ' ' || line[cursor] === '\t') cursor += 1;
-  if (line[cursor] !== ':') return null;
-  cursor += 1;
-  while (line[cursor] === ' ' || line[cursor] === '\t') cursor += 1;
-
-  const angled = line[cursor] === '<';
-  const targetStart = angled ? cursor + 1 : cursor;
-  let targetEnd;
-  if (angled) {
-    const close = line.indexOf('>', targetStart);
-    if (close < 0) return null;
-    targetEnd = close;
-  } else {
-    targetEnd = targetStart;
-    while (targetEnd < line.length && !/[ \t]/.test(line[targetEnd])) targetEnd += 1;
-  }
-  if (targetEnd === targetStart) return null;
-
-  return {
-    start,
-    end: lineEnd < 0 ? source.length : lineEnd + 1,
-    label: line.slice(indent + 1, labelEnd),
-    target: line.slice(targetStart, targetEnd),
-    targetSyntaxStart: start + targetStart - (angled ? 1 : 0),
-    targetStart: start + targetStart,
-    targetEnd: start + targetEnd,
-    angle: angled,
-    targetSuffixStart: start + targetEnd + (angled ? 1 : 0),
-    referenceDefinition: true,
-  };
-}
-
-function articleLinks(source, { skipCode = false } = {}) {
+// The static article renderer applies its inline-link regex before formatting
+// code spans and does not distinguish image syntax. Inspect those same source
+// forms here, including comments and escaped prefixes, so hidden links cannot
+// bypass the writer and publication gate.
+function articleLinks(source) {
   const links = [];
   for (let index = 0; index < source.length;) {
-    if (skipCode && (index === 0 || source[index - 1] === '\n')) {
-      const definition = referenceDefinitionAt(source, index);
-      if (definition) {
-        links.push(definition);
-        index = definition.end;
-        continue;
-      }
-      const indentedEnd = indentedCodeBlockEnd(source, index);
-      if (indentedEnd > index) {
-        index = indentedEnd;
-        continue;
-      }
-    }
-    if (source[index] === '\\') {
-      index += index + 1 < source.length ? 2 : 1;
-      continue;
-    }
-    if (skipCode && (source[index] === '`' || source[index] === '~')) {
-      const fencedEnd = fenceEnd(source, index);
-      if (fencedEnd > index) {
-        index = fencedEnd;
-        continue;
-      }
-      if (source[index] === '`') {
-        const inlineEnd = codeSpanEnd(source, index);
-        if (inlineEnd > index) {
-          index = inlineEnd;
-          continue;
-        }
-      }
-    }
-    if (source.startsWith('<!--', index)) {
-      const commentEnd = source.indexOf('-->', index + 4);
-      index = commentEnd < 0 ? source.length : commentEnd + 3;
-      continue;
-    }
     if (source[index] === '<') {
       const anchor = parseHtmlAnchor(source, index);
       if (anchor) {
@@ -379,7 +249,7 @@ function articleLinks(source, { skipCode = false } = {}) {
         continue;
       }
     }
-    if (source[index] !== '[' || (index > 0 && source[index - 1] === '!')) {
+    if (source[index] !== '[') {
       index += 1;
       continue;
     }
@@ -465,7 +335,7 @@ export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
   const source = String(text ?? '');
   let output = '';
   let copiedThrough = 0;
-  for (const link of articleLinks(source, { skipCode: true })) {
+  for (const link of articleLinks(source)) {
     const canonical = canonicalArticleLinkOccurrenceTarget(link, locale);
     const duplicateAnchorHref = link.htmlAnchor && link.hrefAttributes.length > 1;
     if (canonical === link.target && !link.angle && !duplicateAnchorHref) continue;
@@ -502,7 +372,7 @@ export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
 export function findNonCanonicalArticleLinks(source, locale = 'it') {
   const offenders = [];
   const input = String(source ?? '');
-  for (const link of articleLinks(input, { skipCode: true })) {
+  for (const link of articleLinks(input)) {
     const canonical = canonicalArticleLinkOccurrenceTarget(link, locale);
     const duplicateAnchorHref = link.htmlAnchor && link.hrefAttributes.length > 1;
     if (canonical === link.target && !link.angle && !duplicateAnchorHref) continue;
