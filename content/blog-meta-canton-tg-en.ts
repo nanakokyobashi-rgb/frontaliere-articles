@@ -27,6 +27,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.sportello-digitale-turgovia.title': 'Thurgau: Digital portal for procedures and documents',
     'blog.article.sportello-digitale-turgovia.excerpt': 'The Digitaler Schalter of the Canton of Thurgau brings together the most frequently used services, information, short videos, and a protected area for extracts, permits, and other documents.',
     'blog.article.sportello-digitale-turgovia.imageAlt': 'Illustration generated for this article',
+    'blog.article.kreuzlingen-barenplatz-chilbi.title': 'Kreuzlingen: Bärenplatz closed for the fair',
+    'blog.article.kreuzlingen-barenplatz-chilbi.excerpt': 'In Kreuzlingen buses are diverted from 25 October at 09.00 on the 27th; the Bärenplatz stop goes to the main station.',
+    'blog.article.kreuzlingen-barenplatz-chilbi.imageAlt': 'Bus at Kreuzlingen main station during the Chilbi fair setup',
 };
 
 export default blogMetaCantonTgEn;

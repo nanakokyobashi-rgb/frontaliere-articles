@@ -11,6 +11,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'sicurezza-lavoro-turgovia-regole': { it: 'sicurezza-lavoro-turgovia-regole', en: 'workplace-safety-thurgau-rules', de: 'arbeitssicherheit-turgau-regeln', fr: 'securite-travail-thurgovie-regles' },
  'servizi-imprese-turgovia-rav': { it: 'servizi-imprese-turgovia-rav', en: 'thurgau-employer-support-permits', de: 'thurgau-arbeitgeber-rav-bewilligungen', fr: 'thurgovie-services-employeurs-permis' },
  'sportello-digitale-turgovia': { it: 'sportello-digitale-turgovia', en: 'thurgau-digital-counter', de: 'digitaler-schalter-thurgau', fr: 'guichet-numerique-thurgovie' },
+ 'kreuzlingen-barenplatz-chilbi': { it: 'kreuzlingen-barenplatz-chilbi', en: 'kreuzlingen-barenplatz-fair', de: 'kreuzlingen-barenplatz-wegen-messe-geschlossen', fr: 'kreuzlingen-barenplatz-fete' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

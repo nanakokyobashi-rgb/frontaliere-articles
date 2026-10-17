@@ -27,6 +27,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.sportello-digitale-turgovia.title': 'Turgovia: Sportello digitale per pratiche e documenti',
     'blog.article.sportello-digitale-turgovia.excerpt': 'Il Digitaler Schalter del Canton Turgovia riunisce i servizi più usati, informazioni, video brevi e un\'area protetta per estratti, permessi e altri documenti.',
     'blog.article.sportello-digitale-turgovia.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.kreuzlingen-barenplatz-chilbi.title': 'Kreuzlingen: Bärenplatz chiuso per la fiera',
+    'blog.article.kreuzlingen-barenplatz-chilbi.excerpt': 'A Kreuzlingen i bus sono deviati dal 25 ottobre alle 09.00 del 27; la fermata Bärenplatz va alla stazione principale.',
+    'blog.article.kreuzlingen-barenplatz-chilbi.imageAlt': 'Autobus alla stazione principale di Kreuzlingen durante l\'allestimento della Chilbi',
 };
 
 export default blogMetaCantonTgIt;

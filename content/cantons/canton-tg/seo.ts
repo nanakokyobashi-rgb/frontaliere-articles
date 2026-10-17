@@ -309,6 +309,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-kreuzlingen-barenplatz-chilbi': {
+    title: 'Kreuzlingen: Bärenplatz chiuso per la fiera | Frontaliere Ticino',
+    description: 'A Kreuzlingen i bus sono deviati dal 25 ottobre alle 09.00 del 27; la fermata Bärenplatz va alla stazione principale. Possibili ritardi nel traffico locale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, kreuzlingen, bärenplatz, chiuso, fiera',
+    ogTitle: 'Kreuzlingen, bus deviati per la fiera',
+    ogDescription: 'La chiusura del Bärenplatz per l\'allestimento della Chilbi modifica il servizio autobus a Kreuzlingen: la fermata si sposta alla stazione principale, la linea 924 segue un percorso diretto e sono possibili ritardi.',
+    canonicalPath: '/articoli-turgovia/kreuzlingen-barenplatz-chilbi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Kreuzlingen: Bärenplatz chiuso per la fiera",
+      "description": "A Kreuzlingen i bus sono deviati dal 25 ottobre alle 09.00 del 27; la fermata Bärenplatz va alla stazione principale. Possibili ritardi nel traffico locale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-kreuzlingen-barenplatz-chilbi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Autobus alla stazione principale di Kreuzlingen durante l'allestimento della Chilbi"
+      },
+      "datePublished": "2026-10-17T00:40:57+00:00",
+      "dateModified": "2026-10-17T00:40:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/kreuzlingen-barenplatz-chilbi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

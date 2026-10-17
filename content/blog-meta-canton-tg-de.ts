@@ -27,6 +27,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.sportello-digitale-turgovia.title': 'Thurgau: Digitaler Schalter für Anliegen und Dokumente',
     'blog.article.sportello-digitale-turgovia.excerpt': 'Der Dienst Digitaler Schalter des Kantons Thurgau bündelt die meistgenutzten Dienstleistungen, Informationen, kurze Videos und einen geschützten Bereich für Auszüge, Bewilligungen und andere Dokumente.',
     'blog.article.sportello-digitale-turgovia.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.kreuzlingen-barenplatz-chilbi.title': 'Kreuzlingen: Bärenplatz wegen Messe geschlossen',
+    'blog.article.kreuzlingen-barenplatz-chilbi.excerpt': 'In Kreuzlingen werden die Busse vom 25.',
+    'blog.article.kreuzlingen-barenplatz-chilbi.imageAlt': 'Bus am Hauptbahnhof Kreuzlingen während des Aufbaus der Chilbi',
 };
 
 export default blogMetaCantonTgDe;
