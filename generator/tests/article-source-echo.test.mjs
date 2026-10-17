@@ -11,7 +11,7 @@
  * cosi', e la REGOLA #1 del prompt («ogni fatto DEVE essere presente nel SOURCE
  * CONTENT») lo rende fedele proprio a cio' che non doveva ricevere.
  *
- * ## La causa, e perche' non e' l'estrattore
+ * ## La causa, e perche' isolamento ed estrazione devono concordare
  *
  * `extractArticleText()` prova sei rami: i primi quattro isolano una radice
  * editoriale, gli ULTIMI DUE no — il quinto legge i `<p>` di `document.body`,
@@ -21,13 +21,11 @@
  *
  * `create-article.mjs` isola quindi la radice PRIMA di chiamarlo, cosi' che
  * tutti e sei i rami — cap di fallback compresi — vedano solo il pezzo.
- * `extract-article-text.mjs` non e' toccato: e' `mode: identical` nel manifest
- * del ciclo, ma nessun mirror porta `generator/scripts/lib/**` (i filtri
- * `paths:` dei mirror del sito coprono solo `engine/`, `index.ts`,
- * `articleSections.ts`, `content/` — vedi
- * `generator/tests/generation-health-watchdog.test.mjs` §8), quindi una
- * modifica la' andrebbe fatta a mano su ENTRAMBI i repo, non "sul sito e
- * scende col mirror".
+ * Anche i no-script fallback richiedono coerenza: l'estrattore e la prova del
+ * titolo eliminavano entrambi il markup `<noscript>`. L'opzione condivisa
+ * `scriptingDisabled` arriva dal sito tramite il trasporto dei gemelli
+ * `identical`; questa PR la attiva nel generatore corpus e nel ledger dei
+ * titoli. Il mirror dell'engine non trasporta `generator/scripts/lib/**`.
  *
  * ## I due strati di questo banco
  *
@@ -261,6 +259,22 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.equal(res.html.includes('<template>'), false);
   });
 
+  it('ignora le chiusure apparenti dentro script SVG quando salta un template HTML', () => {
+    const decoy = '<article><p>SVG_SCRIPT_TEMPLATE_DECOY. '
+      + 'Questo markup appartiene al testo dello script, non a un articolo attivo. '.repeat(20)
+      + '</p></article>';
+    const embeddedMarkup = `</svg></template>${decoy}`;
+    const page2 = '<html><body><template><svg><script>'
+      + `const source = ${JSON.stringify(embeddedMarkup)};`
+      + '</script></svg></template>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.equal(res.html.includes('SVG_SCRIPT_TEMPLATE_DECOY'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
   it('segue le chiusure implicite HTML per head, p e li', () => {
     const page2 = '<html><head><title>Head senza end-tag</title>'
       + '<meta property="article:published_time" content="2026-06-12T10:00:00+02:00">'
@@ -433,12 +447,14 @@ describe('cablaggio in fetchPageContent', () => {
     const body = SRC.slice(at, end);
     const isolateAt = body.indexOf('const isolation = isolateMainSourceHtml(html);');
     const extractAt = body.indexOf('extractArticleText(isolation.html');
-    const titleAt = body.indexOf('pageTitleEvidence(isolation.html)');
+    const titleAt = body.indexOf('pageTitleEvidence(html, { scriptingDisabled: true })');
     assert.ok(isolateAt !== -1, 'fetchPageContent non isola la pagina');
     assert.ok(extractAt !== -1, 'l’estrattore riceve ancora l’HTML grezzo invece di quello isolato');
-    assert.ok(titleAt !== -1, 'la title evidence riceve ancora l’HTML grezzo invece di quello isolato');
+    assert.ok(titleAt !== -1, 'la title evidence non abilita il fallback noscript della stessa fetch');
     assert.ok(isolateAt < extractAt, 'isolamento dopo l’estrazione: non serve a niente');
     assert.ok(isolateAt < titleAt, 'isolamento dopo la title evidence: non serve a niente');
+    assert.match(body, /extractArticleText\(isolation\.html,\s*\{[^}]*scriptingDisabled:\s*true/);
+    assert.match(body, /pageTitleEvidence\(html,\s*\{\s*scriptingDisabled:\s*true\s*\}\)/);
   });
 
   it('l’estrattore condiviso non viene modificato da questo lato', () => {

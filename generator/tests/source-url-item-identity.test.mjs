@@ -318,6 +318,12 @@ test('pageTitleEvidence: og:title, twitter:title, <title> e <h1>; niente da una 
   assert.equal(pageTitleEvidence(''), '');
 });
 
+test('pageTitleEvidence tratta il fallback noscript come markup attivo solo con scripting disabilitato', () => {
+  const html = '<noscript><h1>Titolo di fallback</h1></noscript>';
+  assert.equal(pageTitleEvidence(html), '');
+  assert.equal(pageTitleEvidence(html, { scriptingDisabled: true }), 'Titolo di fallback');
+});
+
 test('pageTitleEvidence chiude il percorso su un tag non terminato', () => {
   const malformed = '<meta data="<title>Titolo falso</title>';
   assert.equal(pageTitleEvidence(malformed), '', 'un titolo dopo il tag malformato non e\' evidenza attiva');

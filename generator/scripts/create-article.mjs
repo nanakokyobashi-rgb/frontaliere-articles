@@ -7743,7 +7743,7 @@ const SOURCE_HTML_RAW_TEXT_ELEMENTS = new Set([
 ]);
 // SVG script contents are raw text too; apparent HTML inside them must not
 // escape through foreignObject as an active editorial root.
-const SOURCE_FOREIGN_RAW_TEXT_ELEMENTS = new Set(['script']);
+const SOURCE_FOREIGN_RAW_TEXT_ELEMENTS = new Set(['script', 'style']);
 const SOURCE_HTML_HEAD_ELEMENTS = new Set([
   'base', 'basefont', 'bgsound', 'link', 'meta', 'noframes', 'noscript',
   'script', 'style', 'template', 'title',
@@ -8595,12 +8595,15 @@ async function fetchPageContent(url) {
     // da li' che firma di redazione, invito a commentare e spalla «ultimi
     // commenti» sono finiti nel corpo di tre articoli pubblicati.
     const isolation = isolateMainSourceHtml(html);
-    const { text, method, paragraphCount, publishedAt } = extractArticleText(isolation.html, { maxChars: 8000 });
+    const { text, method, paragraphCount, publishedAt } = extractArticleText(isolation.html, {
+      maxChars: 8000,
+      scriptingDisabled: true,
+    });
     // Use structured extractor (JSON-LD → article → main → og + paragraphs → naive)
     // to feed the generator and fact-checker the actual article body instead of
     // 70%+ nav/footer/ads noise. See scripts/lib/extract-article-text.mjs.
     lastSourcePublishedAt = publishedAt || '';
-    lastSourcePageTitle = pageTitleEvidence(isolation.html);
+    lastSourcePageTitle = pageTitleEvidence(html, { scriptingDisabled: true });
     if (suppliedCantonSourceContent.length >= 200) {
       lastSourcePublishedAt = suppliedCantonSourcePublishedAt || lastSourcePublishedAt;
       lastSourcePageTitle = suppliedCantonSourceTitle || lastSourcePageTitle;

@@ -474,9 +474,11 @@ function maskSkipTemplate(html, afterOpening) {
  * esterno quando il markup contiene template annidati.
  *
  * @param {string} html
+ * @param {{ scriptingDisabled?: boolean }} [opts] Treat `<noscript>` fallback
+ *   markup as active when the source page was fetched without scripting.
  * @returns {string}
  */
-export function maskInactiveMarkup(html) {
+export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
   const source = String(html || '');
   const output = source.split('');
   const blank = (start, end) => {
@@ -502,7 +504,9 @@ export function maskInactiveMarkup(html) {
       cursor = start + 1;
       continue;
     }
-    if (!tag.closing && !tag.selfClosing && INACTIVE_RAW_TEXT_TAGS.has(tag.name)) {
+    const isInactiveRawText = INACTIVE_RAW_TEXT_TAGS.has(tag.name)
+      && !(scriptingDisabled && tag.name === 'noscript');
+    if (!tag.closing && !tag.selfClosing && isInactiveRawText) {
       const afterRawText = maskSkipRawText(source, tag.end + 1, tag.name);
       blank(start, afterRawText < 0 ? source.length : afterRawText);
       if (afterRawText < 0) break;
@@ -529,12 +533,13 @@ export function maskInactiveMarkup(html) {
  * parole del proprio titolo verrebbe scartato pur essendo l'item giusto.
  *
  * @param {string} html
+ * @param {{ scriptingDisabled?: boolean }} [opts]
  * @returns {string} i titoli, uno per riga ('' se non ce n'e')
  */
-export function pageTitleEvidence(html) {
+export function pageTitleEvidence(html, opts = {}) {
   // Solo markup attivo: un `<h1>` o un `<title>` dentro un commento, uno
   // script o un template puo' essere il titolo di un'altra notizia.
-  const src = maskInactiveMarkup(html);
+  const src = maskInactiveMarkup(html, opts);
   const out = [];
   for (const m of src.matchAll(/<meta\b[^>]*>/gi)) {
     const tag = m[0];
