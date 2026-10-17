@@ -311,7 +311,11 @@ test('publisher: legge la struttura reale di on.push.paths e cerca l\'ultimo inp
   const calls = [];
   assert.equal(
     latestApiInputCommit('a'.repeat(40), {
-      triggerPathsImpl: () => ['content/**', 'scripts/build-api.mjs'],
+      triggerPathsImpl: () => [
+        'content/**',
+        'scripts/build-api.mjs',
+        'data/blog-cover-cdn-sync-queue.json',
+      ],
       execFileSyncImpl: (...args) => {
         calls.push(args);
         return `${'b'.repeat(40)}\n`;

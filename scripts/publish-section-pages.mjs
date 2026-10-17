@@ -950,15 +950,22 @@ export function publishApiTriggerPaths({ workflowText = null } = {}) {
  * un input API precedente la cui release non e' mai arrivata sulla superficie
  * HTTP. Il fallback e' sicuro solo quando la release pubblicata copre questo
  * commit, quindi la ricerca attraversa tutta la storia del publisher usando
- * gli stessi path dichiarati dal workflow API.
+ * i path dichiarati dal workflow API. La coda di sync delle cover e' un trigger
+ * post-build e non rappresenta input della release: il workflow la riscrive
+ * dopo la build con `[skip ci]`.
  */
+const PUBLISH_API_BOOKKEEPING_PATHS = new Set([
+  'data/blog-cover-cdn-sync-queue.json',
+]);
+
 export function latestApiInputCommit(
   publisherCommit,
   { execFileSyncImpl = execFileSync, triggerPathsImpl = publishApiTriggerPaths } = {},
 ) {
   const commit = String(publisherCommit ?? '').trim();
   if (!commit) throw new Error('commit publisher assente: impossibile classificare gli input API');
-  const triggerPaths = triggerPathsImpl();
+  const triggerPaths = triggerPathsImpl()
+    .filter((triggerPath) => !PUBLISH_API_BOOKKEEPING_PATHS.has(triggerPath));
   try {
     const latest = execFileSyncImpl(
       'git',
