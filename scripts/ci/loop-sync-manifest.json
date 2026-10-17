@@ -6196,7 +6196,7 @@
       "mode": "corpus-only",
       "reason": "Gate pre-pubblicazione che scansiona i body TypeScript del corpus e blocca link Markdown che diventerebbero route relative crawlable. Il sito consuma la superficie JSON via HTTP e non pubblica direttamente questi file sorgente.",
       "baseline": {
-        "corpus": "e50b366a3e246fc1",
+        "corpus": "04ccaa1b124647b9",
         "site": null,
         "alignedAt": "2026-10-17"
       }
@@ -6207,7 +6207,7 @@
       "reason": "Contratto del writer e del gate di pubblicazione per canonicalizzare i link Markdown prima che i body del corpus siano serviti al sito. Il sito consuma JSON via HTTP e non genera né conserva i sorgenti content/blog-body.",
       "baseline": {
         "site": null,
-        "corpus": "22d0fbe5089e48b1",
+        "corpus": "27daa4a6430124c8",
         "alignedAt": "2026-10-17"
       }
     }
