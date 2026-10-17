@@ -470,7 +470,7 @@ export async function releaseBootstrapLocks(
     pending = next;
     failures = nextFailures;
     if (pending.length > 0 && attempt < maxAttempts) {
-      log(`::warning::[section-edge] ritento il release di ${pending.join(', ')} (${attempt + 1}/${maxAttempts})`);
+      log(`::warning::[section-edge] ritento il release di ${pending.length} bootstrap lock (${pending.join(', ')}) (${attempt + 1}/${maxAttempts})`);
     }
   }
   return { released: pending.length === 0, pending, failures };
@@ -828,7 +828,7 @@ export async function publishRelease(
   }
   if (!flipped) return stopBeforeFlip('flip', `puntatore non caricato: ${EDGE_SECTION_REGISTRY_FILE}`);
   if (!(await releaseHeldBootstrapLocks())) {
-    return stop('bootstrap-lock-release', 'il puntatore e\' nuovo ma il lease non e\' stato rilasciato; attesa della scadenza', true, true);
+    return stop('bootstrap-lock-release', 'il puntatore e\' nuovo ma il lease non e\' stato rilasciato dopo i retry; riconciliazione necessaria', true, true);
   }
 
   // 3. Purge: il puntatore e le URL apex delle sitemap delle due release.
