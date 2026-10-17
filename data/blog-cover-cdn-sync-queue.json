@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-cpcn-rendimento-2025-copertura.webp",
-      "sha256": "32b2b3ec42223389fa9d7232b8d083bc3f8508b9b03658d6aff3dba2cbcd34a1"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-cpcn-rendimento-2025-copertura-480w.webp",
-      "sha256": "9999495374a57682932002927d955b1f4c353f7505c8f29c87f381f587e68131"
-    }
-  ]
+  "items": []
 }
