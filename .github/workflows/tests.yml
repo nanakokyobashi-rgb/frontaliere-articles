@@ -885,8 +885,7 @@ jobs:
             def has_clean_lgtm:
               (any((.body // "") | split("\n")[];
                 test("^[[:space:]]{0,3}##[[:space:]]+LGTM[[:space:]]*$")))
-              and (((.body // "")
-                | test("🔴[[:space:]]*\\*{0,2}[[:space:]]*Important[[:space:]]*\\*{0,2}[[:space:]]*[:—-]")) | not);
+              and (any((.body // "") | split("\n")[]; test("^(?:[^`«]|`[^`]*`|«[^»]*»|«(?![^»]*»))*🔴[[:space:]]*\\*{0,2}[[:space:]]*Important[[:space:]]*\\*{0,2}[[:space:]]*[:—-]")) | not);
             def review_state_known: (.state | type) == "string" and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED", "PENDING", "DISMISSED"));
             def review_state_terminal: review_state_known and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED"));
             [flatten[]
@@ -919,8 +918,7 @@ jobs:
             def has_clean_lgtm:
               (any((.body // "") | split("\n")[];
                 test("^[[:space:]]{0,3}##[[:space:]]+LGTM[[:space:]]*$")))
-              and (((.body // "")
-                | test("🔴[[:space:]]*\\*{0,2}[[:space:]]*Important[[:space:]]*\\*{0,2}[[:space:]]*[:—-]")) | not);
+              and (any((.body // "") | split("\n")[]; test("^(?:[^`«]|`[^`]*`|«[^»]*»|«(?![^»]*»))*🔴[[:space:]]*\\*{0,2}[[:space:]]*Important[[:space:]]*\\*{0,2}[[:space:]]*[:—-]")) | not);
             def review_state_known: (.state | type) == "string" and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED", "PENDING", "DISMISSED"));
             def review_state_terminal: review_state_known and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED"));
             [flatten[]
