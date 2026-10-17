@@ -50,4 +50,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'appenzello-tasso-fiscale-390',
+ category: 'fiscale',
+ date: '2026-10-17T00:31:56.459Z',
+ image: '/images/blog/article-appenzello-tasso-fiscale-390.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
