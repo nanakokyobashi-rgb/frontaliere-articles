@@ -23,6 +23,10 @@
     "canton-vd::https://www.ledauphine.com/economie/2026/10/16/cette-entree-de-ville-va-devenir-accueillante-un-parking-relais-de-534-places-et-un-nouveau-quartier-en-chantier-a-la-gare": {
       "section": "canton-vd",
       "ts": 1792199939794
+    },
+    "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-155?s=4": {
+      "section": "canton-vd",
+      "ts": 1792201902528
     }
   }
 }
