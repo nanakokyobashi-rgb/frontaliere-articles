@@ -428,6 +428,50 @@ function maskSkipRawText(html, afterOpening, name) {
   return closing ? closing.end : -1;
 }
 
+function maskSkipHead(html, afterOpening) {
+  let depth = 1;
+  let cursor = afterOpening;
+  while (cursor < html.length) {
+    const start = html.indexOf('<', cursor);
+    if (start < 0) return -1;
+    if (html.startsWith('<!--', start)) {
+      const afterComment = maskSkipComment(html, start);
+      if (afterComment < 0) return -1;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = maskReadTag(html, start);
+    if (tag?.malformed) return -1;
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (tag.name === 'template' && !tag.closing && !tag.selfClosing) {
+      const afterTemplate = maskSkipTemplate(html, tag.end + 1);
+      if (afterTemplate < 0) return -1;
+      cursor = afterTemplate;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && TEMPLATE_RAW_TEXT_TAGS.has(tag.name)) {
+      const afterRawText = maskSkipRawText(html, tag.end + 1, tag.name);
+      if (afterRawText < 0) return -1;
+      cursor = afterRawText;
+      continue;
+    }
+    if (!tag.closing && tag.name === 'plaintext') return html.length;
+    if (tag.name === 'head') {
+      if (tag.closing) {
+        depth--;
+        if (depth === 0) return tag.end + 1;
+      } else if (!tag.selfClosing) {
+        depth++;
+      }
+    }
+    cursor = tag.end + 1;
+  }
+  return -1;
+}
+
 function maskFindRawTextClose(html, afterOpening, name) {
   const closing = new RegExp(`</${name}\\s*>`, 'ig');
   closing.lastIndex = afterOpening;
@@ -528,17 +572,21 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
   let headDepth = 0;
   let implicitHead = false;
   let sawHtml = false;
+  let sawDocumentHead = false;
+  let documentBodyStarted = false;
   let cursor = 0;
   while (cursor < source.length) {
     const start = source.indexOf('<', cursor);
     if (start < 0) {
       if (/\S/u.test(source.slice(cursor))) {
+        documentBodyStarted = true;
         headDepth = 0;
         implicitHead = false;
       }
       break;
     }
     if (/\S/u.test(source.slice(cursor, start))) {
+      documentBodyStarted = true;
       headDepth = 0;
       implicitHead = false;
     }
@@ -557,6 +605,17 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
     if (!tag) {
       cursor = start + 1;
       continue;
+    }
+    if (!tag.closing && tag.name === 'head') {
+      const isDocumentHead = !sawDocumentHead && !documentBodyStarted && headDepth === 0;
+      if (!isDocumentHead) {
+        const afterHead = maskSkipHead(source, tag.end + 1);
+        blank(start, afterHead < 0 ? source.length : afterHead);
+        if (afterHead < 0) break;
+        cursor = afterHead;
+        continue;
+      }
+      sawDocumentHead = true;
     }
     if (!tag.closing && headDepth > 0 && !MASK_HEAD_ELEMENTS.has(tag.name)) {
       // A non-head start tag implicitly closes head before body content.
@@ -577,6 +636,9 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
     // An explicit body start closes an omitted/unclosed head in HTML. In the
     // head, noscript fallback is never title evidence, even with scripting off.
     if (!tag.closing && tag.name === 'body') headDepth = 0;
+    if (!tag.closing && tag.name !== 'html' && !MASK_HEAD_ELEMENTS.has(tag.name)) {
+      documentBodyStarted = true;
+    }
     const inHead = headDepth > 0 || implicitHead;
     if (!tag.closing && !tag.selfClosing && tag.name === 'title') {
       // Keep title text available to pageTitleEvidence, but do not parse it as

@@ -372,6 +372,15 @@ test('pageTitleEvidence non interpreta metadata letterale dentro il testo RCDATA
   assert.deepEqual(pageTitleEvidence(html).split('\n'), ['TITOLO_REALE', 'Titolo principale', 'Corpo']);
 });
 
+test('pageTitleEvidence esclude i metadata e i title dei head annidati nel body', () => {
+  const html = '<html><head><meta property="og:title" content="META_REALE">'
+    + '<title>TITLE_REALE</title></head><body><article><head>'
+    + '<meta property="og:title" content="META_STALE_HEAD_NESTED">'
+    + '<title>TITLE_STALE_HEAD_NESTED</title></head>'
+    + '<h1>H1_REALE</h1></article></body></html>';
+  assert.deepEqual(pageTitleEvidence(html).split('\n'), ['META_REALE', 'TITLE_REALE', 'H1_REALE']);
+});
+
 test('pageTitleEvidence chiude il percorso su un tag non terminato', () => {
   const malformed = '<meta data="<title>Titolo falso</title>';
   assert.equal(pageTitleEvidence(malformed), '', 'un titolo dopo il tag malformato non e\' evidenza attiva');

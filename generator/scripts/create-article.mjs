@@ -8081,11 +8081,18 @@ function sourceImplicitCloseIndex(stack, name) {
   return -1;
 }
 
-function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, onText } = {}) {
+function sourceScanStructure(html, {
+  recoverMalformed = false,
+  onStart,
+  onEnd,
+  onText,
+  onImplicitHeadEnd,
+} = {}) {
   let cursor = 0;
   const stack = [];
   let malformed = false;
   let implicitHead = false;
+  let implicitHeadHasContent = false;
   let afterHead = false;
   let sawHtml = false;
 
@@ -8167,7 +8174,25 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
       ? SOURCE_HTML_VOID_ELEMENTS.has(tag.name)
       : tag.explicitSelfClosing === true;
 
+    const ignoredHeadDuringImplicitHead = !tag.closing
+      && namespace === 'html'
+      && tag.name === 'head'
+      && implicitHead
+      && implicitHeadHasContent
+      && stack.length === 1
+      && stack[0]?.name === 'html'
+      && stack[0]?.namespace === 'html';
+    if (ignoredHeadDuringImplicitHead) {
+      // A late explicit <head> is ignored by HTML recovery while the implied
+      // document head is still open; keep its earlier metadata and title.
+      cursor = tag.end + 1;
+      continue;
+    }
+
     if (!tag.closing && namespace === 'html') {
+      if (implicitHead && SOURCE_HTML_HEAD_ELEMENTS.has(tag.name)) {
+        implicitHeadHasContent = true;
+      }
       const bodyNoscriptAfterHead = tag.name === 'noscript'
         && afterHead
         && stack.length === 1
@@ -8176,6 +8201,7 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
       if (tag.name === 'html' && stack.length === 0 && !sawHtml) {
         sawHtml = true;
         implicitHead = true;
+        implicitHeadHasContent = false;
         afterHead = false;
       } else if (tag.name === 'head' || tag.name === 'body' || bodyNoscriptAfterHead) {
         implicitHead = false;
@@ -8262,6 +8288,21 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
     if (tag.closing) {
       const matchingIndex = sourceStackIndex(stack, tag.name);
       if (matchingIndex < 0) {
+        if (
+          namespace === 'html' &&
+          tag.name === 'head' &&
+          implicitHead &&
+          implicitHeadHasContent &&
+          stack.length === 1 &&
+          stack[0]?.name === 'html' &&
+          stack[0]?.namespace === 'html'
+        ) {
+          onImplicitHeadEnd?.({ start, end: tag.end + 1, container: stack[0] });
+          implicitHead = false;
+          afterHead = true;
+          cursor = tag.end + 1;
+          continue;
+        }
         if (stack.at(-1)?.namespace !== 'html') {
           malformed = true;
           if (!recoverMalformed) return { malformed, stack };
@@ -8489,6 +8530,16 @@ function findActiveSourceHead(html) {
         afterHead: false,
       };
       sawBody = true;
+    },
+    onImplicitHeadEnd: ({ start, container }) => {
+      const headContainer = implicitHeadContainer || container;
+      closeImplicitHead(start);
+      bodyState = {
+        entry: headContainer,
+        trusted: true,
+        implicit: true,
+        afterHead: true,
+      };
     },
     onStart: ({ tag, start, namespace, isVoid, parent, stack, entry, rawTextEnd, rawText, skippedEnd }) => {
       const directPostHeadContainer = Boolean(

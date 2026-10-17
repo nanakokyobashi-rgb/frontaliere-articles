@@ -443,6 +443,36 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(res.html.includes('content="2026-10-17T09:30:00+02:00"'));
   });
 
+  it('chiude l’head implicito con </head> prima del noscript nel body', () => {
+    const implicitHead = '<html><title>Fonte senza head esplicito</title></head>'
+      + '<noscript><article>' + ARTICLE_PROSE + '</article></noscript></html>';
+    const res = isolateMainSourceHtml(implicitHead);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('ignora </head> prima del primo contenuto head implicito', () => {
+    const page = '<html></head><head><title>Head esplicito</title></head><body>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('Head esplicito'));
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('mantiene il primo head implicito quando arriva un <head> tardivo', () => {
+    const implicitHead = '<html><meta property="og:title" content="META_HEAD_IMPLICITO">'
+      + '<head><title>TITLE_DOPO_HEAD_TARDIVO</title></head>'
+      + `<article>${ARTICLE_PROSE}</article></html>`;
+    const res = isolateMainSourceHtml(implicitHead);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('META_HEAD_IMPLICITO'));
+    assert.ok(res.html.includes('TITLE_DOPO_HEAD_TARDIVO'));
+  });
+
   it('mantiene nel head i tag consentiti dopo la sua chiusura', () => {
     const afterHead = '<html><head><title>Fonte valida</title></head>'
       + '<script>window.HEAD_AFTER_CLOSE = true;</script>'
