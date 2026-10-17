@@ -796,7 +796,7 @@ test('il job di pubblicazione ha un tetto di tempo', () => {
   const src = fs.readFileSync(WORKFLOW, 'utf8');
   const m = /^\s*timeout-minutes:\s*(\d+)\s*$/m.exec(src);
   assert.ok(m, 'publish-api.yml non ha timeout-minutes');
-  assert.ok(Number(m[1]) <= 60, `timeout-minutes ${m[1]}: troppo alto per un job da ~45s`);
+  assert.equal(Number(m[1]), 80, `timeout-minutes ${m[1]}: il budget deve coprire il lease bootstrap da 70 minuti`);
 });
 
 // ── Integrazione vera, solo se il parser c'e' ───────────────────────────────
