@@ -24,7 +24,7 @@ name: Generate Daily Brief Edition (Bollettino del Frontaliere)
 #     that URL. The raw.githubusercontent client fallback does not cover the
 #     static markup, so the CDN warm belongs to this job.
 #
-# The push uses GITHUB_PAT from Remote Config, NOT GITHUB_TOKEN — a
+# The push uses GITHUB_PAT_NANAKO from Remote Config, NOT GITHUB_TOKEN — a
 # GITHUB_TOKEN push would not fire publish-api.yml (GitHub anti-recursion),
 # and the edition would never reach the API surface, the sitemap, or the site.
 
@@ -203,7 +203,7 @@ jobs:
           fi
           exit 0
 
-      # RC is loaded only when there is a commit to push (GITHUB_PAT) and
+      # RC is loaded only when there is a commit to push (GITHUB_PAT_NANAKO) and
       # assets to warm on the CDN (R2_*). A dry run never touches it.
       - name: Load secrets from Remote Config
         if: always() && steps.mode.outputs.dry != 'true'
@@ -298,8 +298,8 @@ jobs:
           else
             LEDGER_ONLY=false
           fi
-          if [ -z "${GITHUB_PAT:-}" ]; then
-            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push would not fire publish-api.yml and the edition would never go live; on a ledger-only day the streak would never reach main and the alarm would never fire (#885)"
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::GITHUB_PAT_NANAKO missing — a GITHUB_TOKEN push would not fire publish-api.yml and the edition would never go live; on a ledger-only day the streak would never reach main and the alarm would never fire (#885)"
             exit 1
           fi
 
@@ -317,7 +317,7 @@ jobs:
           cp data/generated-image-registry.json "$registry_snapshot"
 
           TARGET="${{ github.ref_name }}"
-          REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          REMOTE="https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${{ github.repository }}.git"
           PUSH_LOG="$(mktemp)"
           PUSH_OUTCOME_LOG="$(mktemp)"
           PERMANENT_OUTCOME_LOG="$(mktemp)"
