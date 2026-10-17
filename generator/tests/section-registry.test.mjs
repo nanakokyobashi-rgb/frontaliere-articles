@@ -1207,9 +1207,13 @@ test('edge: il bootstrap live tiene il lock fino al rilascio prima del flip', as
   assert.deepEqual(result, { code: 0, phase: 'done', flipped: true });
 });
 
-test('edge: il lease R2 ha TTL oltre il timeout bootstrap e il tombstone resta scaduto', () => {
-  assert.ok(SECTION_BOOTSTRAP_LOCK_TTL_MS > 45 * 60 * 1000);
-  assert.ok(BOOTSTRAP_WAIT_MS > SECTION_BOOTSTRAP_LOCK_TTL_MS);
+test('edge: il lease R2 copre il timeout bootstrap massimo e il tombstone resta scaduto', () => {
+  const fastPublish = readFileSync(path.join(ROOT, '.github/workflows/fast-publish-section.yml'), 'utf8');
+  const publishJob = fastPublish.match(/\n  publish:\n([\s\S]*?)(?=\n  replay-api-after-bootstrap:)/)?.[1];
+  const jobTimeoutMinutes = Number(publishJob?.match(/^\s+timeout-minutes:\s+(\d+)\s*$/m)?.[1]);
+  assert.ok(Number.isFinite(jobTimeoutMinutes) && jobTimeoutMinutes > 0, 'timeout job fast-publish assente');
+  assert.ok(SECTION_BOOTSTRAP_LOCK_TTL_MS > jobTimeoutMinutes * 60 * 1000);
+  assert.ok(BOOTSTRAP_WAIT_MS < SECTION_BOOTSTRAP_LOCK_TTL_MS, 'il publisher edge fallisce chiuso prima della scadenza del bootstrap attivo');
   const active = makeSectionBootstrapLock({ section: 'canton-ti', commit: COMMIT, owner: 'test/bootstrap' });
   assert.equal(active.role, 'bootstrap');
   const released = makeReleasedSectionBootstrapLock({ section: 'canton-ti', commit: COMMIT, owner: 'test/bootstrap' });
@@ -1625,6 +1629,7 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.ok(notify > at, 'la notifica al sito parte dopo il flip edge');
   assert.equal(wf.slice(at, wf.indexOf('      # Tell the site the surface moved.')).trimEnd(), [
     '      - name: Publish the canton sections release to the edge',
+    '        id: publish_edge',
     "        if: steps.deploy.outcome == 'success'",
     '        run: node scripts/publish-section-edge.mjs',
   ].join('\n'));

@@ -257,10 +257,12 @@ test('publisher: bootstrap live senza manifest non arma il percorso differito', 
         publishPageManifestImpl: () => true,
       },
     );
-    assert.equal(code, 0);
-    assert.equal(publishOptions?.snapshotPagesBeforeUpload, false);
+    assert.equal(code, 1, 'senza inventario e senza release API pronta il bootstrap live deve fallire chiuso');
+    assert.equal(publishOptions, null, 'nessuna pagina viene caricata con il manifest precedente assente');
     const summary = JSON.parse(readFileSync(path.join(fixtureRoot, 'summary.json'), 'utf8'));
     assert.equal(summary.deferredLiveBootstrapRelease, false, 'senza inventario non si assume che il set live sia completo');
+    assert.equal(summary.liveBootstrapManifestMissing, true);
+    assert.match(summary.defects.join('\n'), /senza manifest precedente e senza release API\/edge verificata/);
   } finally {
     console.log = realConsoleLog;
     console.error = realConsoleError;

@@ -2049,6 +2049,7 @@ export async function main(
   // the old RSS/obsolete-page surface, and let the API completion replay do
   // the feed/deletion phase after its release is actually served.
   let deferredLiveBootstrapRelease = false;
+  let liveBootstrapManifestMissing = false;
   if (publishing && (effectiveStatus === 'live' || cleanupRssRequested)) {
     const readiness = await publishedReleaseReadyImpl(releaseCommit, { section, fetchImpl });
     // Se la readiness è transitoria, mantieni il gate fail-closed completo e
@@ -2072,6 +2073,17 @@ export async function main(
       console.log(
         `::notice::[${LOG}] bootstrap ${section}: release API/edge non ancora servita; ` +
         'differisco RSS e cancellazioni obsolete dopo il flip, senza allentare la verifica HTML',
+      );
+    } else if (
+      args.bootstrap
+      && effectiveStatus === 'live'
+      && !cleanupRssRequested
+      && publishedManifest.state === 'absent'
+    ) {
+      liveBootstrapManifestMissing = true;
+      console.log(
+        `::notice::[${LOG}] bootstrap ${section}: manifest precedente assente e release API/edge non pronta; ` +
+        'blocco la pubblicazione finché la superficie precedente non è dimostrata',
       );
     } else {
       cantonRssFeeds = effectiveStatus === 'live' && !cleanupRssRequested ? cantonRssFeedEntries(section) : [];
@@ -2190,6 +2202,12 @@ export async function main(
       'pubblicazione bloccata per non calcolare cancellazioni dal parent del push',
     );
   }
+  if (liveBootstrapManifestMissing) {
+    defects.push(
+      `bootstrap live ${section} senza manifest precedente e senza release API/edge verificata: ` +
+      'pubblicazione bloccata per non sovrascrivere pagine già live senza inventario',
+    );
+  }
   for (const page of pages) {
     const abs = path.join(distDir, page.rel);
     const html = fs.existsSync(abs) ? fs.readFileSync(abs, 'utf-8') : '';
@@ -2245,6 +2263,7 @@ export async function main(
     publishedPageManifest: publishedManifest.state,
     effectiveStatus,
     deferredLiveBootstrapRelease,
+    liveBootstrapManifestMissing,
     cantonRssFeeds: cantonRssFeeds.map(({ name, key, url }) => ({ name, key, url })),
     pages,
     pagesForPublish,
