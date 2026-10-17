@@ -289,7 +289,9 @@ jobs:
             sleep $((attempt * 3))
             git fetch "$REMOTE" "$TARGET"
             regenerate_ranking
-            git commit -m "$COMMIT_MESSAGE"
+            if ! git diff --cached --quiet; then
+              git commit -m "$COMMIT_MESSAGE"
+            fi
           done
           echo "::error::push failed after 3 attempts (git output above)"
           exit 1
