@@ -318,6 +318,12 @@ test('pageTitleEvidence: og:title, twitter:title, <title> e <h1>; niente da una 
   assert.equal(pageTitleEvidence(''), '');
 });
 
+test('pageTitleEvidence non legge i meta letterali dentro il testo di <title>', () => {
+  const html = '<html><head><title><meta property="og:title" content="FALSO_META_TITLE">Titolo vero</title>'
+    + '</head><body><p>corpo</p></body></html>';
+  assert.equal(pageTitleEvidence(html), 'Titolo vero');
+});
+
 test('pageTitleEvidence tratta il fallback noscript come markup attivo solo con scripting disabilitato', () => {
   const html = '<noscript><h1>Titolo di fallback</h1></noscript>';
   assert.equal(pageTitleEvidence(html), '');

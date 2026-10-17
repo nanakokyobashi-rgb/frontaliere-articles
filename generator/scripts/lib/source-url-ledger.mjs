@@ -585,8 +585,9 @@ export function pageTitleEvidence(html, opts = {}) {
   // Solo markup attivo: un `<h1>` o un `<title>` dentro un commento, uno
   // script o un template puo' essere il titolo di un'altra notizia.
   const src = maskInactiveMarkup(html, opts);
+  const metaSrc = maskTitleElements(src);
   const out = [];
-  for (const m of src.matchAll(/<meta\b[^>]*>/gi)) {
+  for (const m of metaSrc.matchAll(/<meta\b[^>]*>/gi)) {
     const tag = m[0];
     if (!/\b(?:property|name)\s*=\s*["']?(?:og:title|twitter:title)["'\s>]/i.test(tag)) continue;
     const content = /\bcontent\s*=\s*(?:"([^"]*)"|'([^']*)')/i.exec(tag);
@@ -594,6 +595,36 @@ export function pageTitleEvidence(html, opts = {}) {
   }
   for (const m of src.matchAll(/<(title|h1)\b[^>]*>([\s\S]*?)<\/\1\s*>/gi)) out.push(m[2].replace(/<[^>]+>/g, ' '));
   return out.map((t) => t.replace(/\s+/g, ' ').trim()).filter(Boolean).join('\n');
+}
+
+function maskTitleElements(source) {
+  const output = source.split('');
+  const blank = (start, end) => {
+    for (let i = start; i < end; i++) output[i] = ' ';
+  };
+  let cursor = 0;
+  while (cursor < source.length) {
+    const start = source.indexOf('<', cursor);
+    if (start < 0) break;
+    const tag = maskReadTag(source, start);
+    if (tag?.malformed) {
+      blank(start, source.length);
+      break;
+    }
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && tag.name === 'title') {
+      const afterTitle = maskSkipRawText(source, tag.end + 1, tag.name);
+      blank(start, afterTitle < 0 ? source.length : afterTitle);
+      if (afterTitle < 0) break;
+      cursor = afterTitle;
+      continue;
+    }
+    cursor = tag.end + 1;
+  }
+  return output.join('');
 }
 
 /**

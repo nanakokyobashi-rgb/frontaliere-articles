@@ -187,7 +187,7 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(res.html.includes('"articleBody":"corpo"'));
   });
 
-  it('riattiva JSON-LD attivo solo come figlio diretto del body', () => {
+  it('riattiva JSON-LD attivo nei discendenti del body e filtra il chrome', () => {
     const stale = (label, attrs = '') => `<script${attrs ? ` ${attrs}` : ''} type="application/ld+json">{"headline":"${label}"}</script>`;
     const page2 = '<html><head><title>Pagina</title></head><body>'
       + `<!-- ${stale('COMMENT_JSON_LD_SHOULD_NOT_BE_ACTIVATED')} -->`
@@ -212,7 +212,7 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.equal(res.html.includes('TEMPLATE_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('TEMPLATE_NESTED_HEAD_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('SIDEBAR_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
-    assert.equal(res.html.includes('WRAPPED_BODY_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+    assert.ok(res.html.includes('WRAPPED_BODY_JSON_LD_SHOULD_NOT_BE_ACTIVATED'));
     assert.equal(res.html.includes('SCRIPT_CLASS_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('SCRIPT_ID_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
     assert.equal(res.html.includes('SCRIPT_ROLE_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
@@ -578,6 +578,12 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.equal(res.isolated, true);
     assert.equal(res.root, 'article');
     assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+
+    const malformed = '<?xml unsupported?>\n<!doctype html><html><head></head><body>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const rejected = isolateMainSourceHtml(malformed);
+    assert.equal(rejected.trustedDocument, false);
+    assert.equal(rejected.isolated, false);
   });
 
   it('ripiega su <main> quando <article> non c’e’ o e’ troppo corto', () => {
@@ -585,6 +591,28 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     const res = isolateMainSourceHtml(teaserOnly);
     assert.equal(res.root, 'main');
     assert.ok(res.html.includes('Paragrafo 3 del pezzo vero'));
+  });
+
+  it('misura la soglia della radice dopo aver rimosso il chrome interno', () => {
+    const chrome = '<aside>' + 'CHROME_ONLY '.repeat(60) + '</aside>';
+    const shortArticle = `<article><p>Testo editoriale breve.</p>${chrome}</article>`;
+    const page = `<html><body><main>${shortArticle}${ARTICLE_PROSE}</main></body></html>`;
+    const res = isolateMainSourceHtml(page);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'main');
+    assert.equal(res.html.includes('CHROME_ONLY'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
+  it('accetta il prologo XML XHTML prima del doctype senza perdere la fiducia nel documento', () => {
+    const xhtml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+      + '<!doctype html><html><head><title>Fonte XHTML</title></head><body>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(xhtml);
+    assert.equal(res.trustedDocument, true);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
   });
 
   it('NON isola quando non riconosce una radice: nessuna regressione sotto il comportamento precedente', () => {
