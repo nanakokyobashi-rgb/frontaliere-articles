@@ -169,7 +169,7 @@ test('il rilevatore considera non canonici anche gli angle-delimited e gli ancho
   );
   assert.deepEqual(offenders.map(({ target, replacement }) => ({ target, replacement })), [
     { target: 'nav:jobs', replacement: 'nav:jobs' },
-    { target: 'calculator', replacement: 'nav:calculator' },
+    { target: 'calculator', replacement: null },
   ]);
 });
 
