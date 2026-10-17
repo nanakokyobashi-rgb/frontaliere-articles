@@ -330,6 +330,14 @@ test('pageTitleEvidence attiva noscript solo nel body, mai in head o template', 
     + '<template><noscript><h1>TITOLO_TEMPLATE_INATTIVO</h1></noscript></template>'
     + '</body></html>';
   assert.equal(pageTitleEvidence(html, { scriptingDisabled: true }), 'TITOLO_BODY_ATTIVO');
+
+  const implicitHead = '<html><noscript><h1>TITOLO_HEAD_IMPLICITO</h1></noscript><body>'
+    + '<noscript><h1>TITOLO_BODY_IMPLICITO</h1></noscript></body></html>';
+  assert.equal(pageTitleEvidence(implicitHead, { scriptingDisabled: true }), 'TITOLO_BODY_IMPLICITO');
+
+  const textClosesHead = '<html><head>testo non whitespace<noscript>'
+    + '<h1>TITOLO_BODY_DOPO_CHIUSURA_IMPLICITA</h1></noscript></html>';
+  assert.equal(pageTitleEvidence(textClosesHead, { scriptingDisabled: true }), 'TITOLO_BODY_DOPO_CHIUSURA_IMPLICITA');
 });
 
 test('pageTitleEvidence chiude il percorso su un tag non terminato', () => {

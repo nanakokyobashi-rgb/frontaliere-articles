@@ -225,8 +225,8 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
       + 'Contenuto grafico inerte senza radice editoriale. '.repeat(20)
       + '</p></main>';
     const page2 = '<html><body>'
-      + `<svg><foreignObject><svg>${foreignArticle}</svg></foreignObject></svg>`
-      + `<math><annotation-xml encoding="text/html"><svg>${foreignMain}</svg></annotation-xml></math>`
+      + `<svg><foreignObject>${foreignArticle}</foreignObject></svg>`
+      + `<math><annotation-xml encoding="text/html">${foreignMain}</annotation-xml></math>`
       + `<article>${ARTICLE_PROSE}</article>`
       + '</body></html>';
     const res = isolateMainSourceHtml(page2);
@@ -387,6 +387,27 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(activated.includes('<head><noscript>'));
     assert.ok(activated.includes('<template><noscript>'));
     assert.equal(activated.includes('<main><noscript>'), false);
+  });
+
+  it('mantiene inattivo il noscript nell’head implicito e chiude l’head esplicito sul testo', () => {
+    const headFallback = '<html><noscript>'
+      + `<article><p>${'CONTENUTO_HEAD_STALE '.repeat(20)}</p></article>`
+      + '</noscript><body>'
+      + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const implicit = isolateMainSourceHtml(headFallback);
+    assert.equal(implicit.isolated, true);
+    assert.equal(implicit.root, 'article');
+    assert.equal(implicit.html.includes('CONTENUTO_HEAD_STALE'), false);
+    assert.ok(implicit.html.includes('Paragrafo 7 del pezzo vero'));
+
+    const textClosesHead = '<html><head><title>Fonte</title>testo che chiude l’head'
+      + '<noscript><article>'
+      + `${ARTICLE_PROSE.replace(/Paragrafo/g, 'NOSCRIPT_BODY_ACTIVE')}`
+      + '</article></noscript></html>';
+    const bodyFallback = isolateMainSourceHtml(textClosesHead);
+    assert.equal(bodyFallback.isolated, true);
+    assert.equal(bodyFallback.root, 'article');
+    assert.ok(bodyFallback.html.includes('NOSCRIPT_BODY_ACTIVE 7'));
   });
 
   it('tratta script SVG foreign dentro template come raw-text opaco', () => {

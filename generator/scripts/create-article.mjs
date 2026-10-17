@@ -8055,6 +8055,8 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
   let cursor = 0;
   const stack = [];
   let malformed = false;
+  let implicitHead = false;
+  let sawHtml = false;
 
   const emitEnd = (entry, end, implicit) => {
     if (onEnd) onEnd({ entry, end, implicit });
@@ -8068,17 +8070,30 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
     }
   };
 
+  const emitText = (start, end) => {
+    const text = html.slice(start, end);
+    if (/\S/u.test(text)) {
+      const head = stack.at(-1);
+      if (head?.name === 'head' && head.namespace === 'html') {
+        popThrough(stack.length - 1, start, true);
+      }
+      if (
+        implicitHead
+        && stack.length === 1
+        && stack[0]?.name === 'html'
+        && stack[0]?.namespace === 'html'
+      ) implicitHead = false;
+    }
+    if (onText) onText({ text, start, end, stack: stack.slice() });
+  };
+
   while (cursor < html.length) {
     const start = html.indexOf('<', cursor);
     if (start < 0) {
-      if (onText && cursor < html.length) {
-        onText({ text: html.slice(cursor), start: cursor, end: html.length, stack: stack.slice() });
-      }
+      if (cursor < html.length) emitText(cursor, html.length);
       break;
     }
-    if (onText && start > cursor) {
-      onText({ text: html.slice(cursor, start), start: cursor, end: start, stack: stack.slice() });
-    }
+    if (start > cursor) emitText(cursor, start);
     if (html.startsWith('<!--', start)) {
       const afterComment = sourceSkipComment(html, start);
       if (afterComment < 0) return { malformed: true, stack };
@@ -8106,8 +8121,24 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
       : tag.explicitSelfClosing === true;
 
     if (!tag.closing && namespace === 'html') {
+      if (tag.name === 'html' && stack.length === 0 && !sawHtml) {
+        sawHtml = true;
+        implicitHead = true;
+      } else if (tag.name === 'head' || tag.name === 'body') {
+        implicitHead = false;
+      } else if (
+        implicitHead
+        && stack.length === 1
+        && stack[0]?.name === 'html'
+        && stack[0]?.namespace === 'html'
+        && !SOURCE_HTML_HEAD_ELEMENTS.has(tag.name)
+      ) {
+        implicitHead = false;
+      }
       const implicitIndex = sourceImplicitCloseIndex(stack, tag.name);
       if (implicitIndex >= 0) popThrough(implicitIndex, start, true);
+    } else if (tag.closing && namespace === 'html' && tag.name === 'html') {
+      implicitHead = false;
     }
 
     if (!tag.closing && namespace === 'html' && !isVoid && tag.name === 'template') {
@@ -8122,7 +8153,8 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
       // In head mode, noscript is a raw-text element when scripting is enabled.
       // Keep its contents from being mistaken for forbidden head containers.
       || (namespace === 'html' && tag.name === 'noscript'
-        && stack.at(-1)?.name === 'head' && stack.at(-1)?.namespace === 'html')
+        && ((stack.at(-1)?.name === 'head' && stack.at(-1)?.namespace === 'html')
+          || (implicitHead && stack.at(-1)?.name === 'html' && stack.at(-1)?.namespace === 'html')))
     );
 
     if (isRawTextElement) {
@@ -8200,13 +8232,15 @@ function sourceActivateBodyNoscript(html) {
   const removals = [];
   const scan = sourceScanStructure(src, {
     onStart: ({ tag, start, end, namespace, stack, entry }) => {
+      const inDocumentBody = stack.some((ancestor) => ancestor.namespace === 'html' && ancestor.name === 'body')
+        || (stack.some((ancestor) => ancestor.namespace === 'html' && ancestor.name === 'html')
+          && !stack.some((ancestor) => ancestor.namespace === 'html' && ancestor.name === 'head'));
       if (
         !entry ||
         namespace !== 'html' ||
         tag.name !== 'noscript' ||
         entry.inactive ||
-        !stack.some((ancestor) => ancestor.namespace === 'html' && ancestor.name === 'body') ||
-        stack.some((ancestor) => ancestor.namespace === 'html' && ancestor.name === 'head')
+        !inDocumentBody
       ) return;
       entry.activateBodyNoscript = true;
       removals.push([start, end]);
@@ -8405,12 +8439,13 @@ export function extractOutermostTagBlock(html, tag) {
   if (!/^[a-z][a-z0-9:_-]*$/u.test(wanted)) return best;
   sourceScanStructure(src, {
     recoverMalformed: true,
-    onStart: ({ tag: opened, namespace, isVoid, entry }) => {
+    onStart: ({ tag: opened, namespace, isVoid, entry, stack }) => {
       if (
         namespace === 'html' &&
         opened.name === wanted &&
         !isVoid &&
-        !entry.inactive
+        !entry.inactive &&
+        !stack.some((ancestor) => ancestor.namespace === 'svg' || ancestor.namespace === 'mathml')
       ) {
         entry.sourceRootCandidate = true;
       }

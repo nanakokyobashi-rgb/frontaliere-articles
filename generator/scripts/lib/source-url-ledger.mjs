@@ -489,10 +489,22 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
     for (let i = start; i < end; i++) output[i] = ' ';
   };
   let headDepth = 0;
+  let implicitHead = false;
+  let sawHtml = false;
   let cursor = 0;
   while (cursor < source.length) {
     const start = source.indexOf('<', cursor);
-    if (start < 0) break;
+    if (start < 0) {
+      if (/\S/u.test(source.slice(cursor))) {
+        headDepth = 0;
+        implicitHead = false;
+      }
+      break;
+    }
+    if (/\S/u.test(source.slice(cursor, start))) {
+      headDepth = 0;
+      implicitHead = false;
+    }
     if (source.startsWith('<!--', start)) {
       const afterComment = maskSkipComment(source, start);
       blank(start, afterComment < 0 ? source.length : afterComment);
@@ -513,6 +525,14 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
       // A non-head start tag implicitly closes head before body content.
       headDepth = 0;
     }
+    if (!tag.closing && tag.name === 'html' && !sawHtml) {
+      sawHtml = true;
+      implicitHead = true;
+    } else if (!tag.closing && (tag.name === 'head' || tag.name === 'body')) {
+      implicitHead = false;
+    } else if (!tag.closing && implicitHead && !MASK_HEAD_ELEMENTS.has(tag.name)) {
+      implicitHead = false;
+    }
     if (tag.name === 'head') {
       if (tag.closing) headDepth = Math.max(0, headDepth - 1);
       else if (!tag.selfClosing) headDepth += 1;
@@ -520,8 +540,9 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
     // An explicit body start closes an omitted/unclosed head in HTML. In the
     // head, noscript fallback is never title evidence, even with scripting off.
     if (!tag.closing && tag.name === 'body') headDepth = 0;
+    const inHead = headDepth > 0 || implicitHead;
     const isInactiveRawText = INACTIVE_RAW_TEXT_TAGS.has(tag.name)
-      && !(scriptingDisabled && tag.name === 'noscript' && headDepth === 0);
+      && !(scriptingDisabled && tag.name === 'noscript' && !inHead);
     if (!tag.closing && !tag.selfClosing && isInactiveRawText) {
       const afterRawText = maskSkipRawText(source, tag.end + 1, tag.name);
       blank(start, afterRawText < 0 ? source.length : afterRawText);
