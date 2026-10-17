@@ -415,10 +415,10 @@ jobs:
           echo 'fresh=true' >> "$GITHUB_OUTPUT"
 
       # Il replay della run API osservata e' ormai stantio. Il redispatch usa
-      # il workflow corrente su main, ma passa source_commit per checkoutare la
-      # stessa HEAD della run originaria e conserva il range della push e il
-      # suo head come release API: renderer, readiness e feed leggono cosi' una
-      # sola release, anche se main e' avanzato nel frattempo.
+      # il workflow corrente su main e la sua HEAD come sorgente del corpus,
+      # mentre conserva il range della push e il suo head come release API
+      # attesa: readiness e feed restano legati a P, ma HTML e dati non possono
+      # riscrivere su R2 la provenienza stantia sopra una release Q piu' nuova.
       - name: Prepare Firebase credentials for stale replay recovery
         if: github.event_name == 'workflow_run'
         env:
@@ -436,7 +436,7 @@ jobs:
         if: github.event_name == 'workflow_run'
         run: node generator/scripts/load-rc-env.mjs
 
-      - name: Dispatch bounded replay with originating API checkout
+      - name: Dispatch bounded replay with current corpus checkout
         if: steps.replay_freshness.outputs.fresh == 'false'
         env:
           REPO: ${{ github.repository }}
@@ -465,7 +465,7 @@ jobs:
             -f bootstrap="$BOOTSTRAP" \
             -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
             -f api_release_commit="$STALE_HEAD" \
-            -f source_commit="$STALE_HEAD" \
+            -f source_commit="$CURRENT_MAIN" \
             -f source_main_commit="$CURRENT_MAIN" \
             -f dry_run="$DRY" \
             -f push_before="$replay_before" \
@@ -590,7 +590,7 @@ jobs:
                 -f bootstrap="$BOOTSTRAP" \
                 -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
                 -f api_release_commit="$WORKFLOW_RUN_HEAD_SHA" \
-                -f source_commit="$WORKFLOW_RUN_HEAD_SHA" \
+                -f source_commit="$current_main" \
                 -f source_main_commit="$current_main" \
                 -f dry_run="$DRY" \
                 -f push_before="$replay_before" \

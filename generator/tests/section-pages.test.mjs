@@ -2233,7 +2233,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   assert.match(wf, /id: replay_freshness[\s\S]*gh api "repos\/\$REPO\/git\/ref\/heads\/main"/);
   assert.match(wf, /if: steps\.replay_freshness\.outputs\.fresh == 'true'/);
-  assert.match(wf, /Dispatch bounded replay with originating API checkout/);
+  assert.match(wf, /Dispatch bounded replay with current corpus checkout/);
   const dispatchPlanStart = wf.indexOf('if [ "${{ github.event_name }}" = "workflow_dispatch" ]');
   const dispatchPlanEnd = wf.indexOf('any=false', dispatchPlanStart);
   const dispatchPlan = wf.slice(dispatchPlanStart, dispatchPlanEnd);
@@ -2242,8 +2242,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.equal((wf.match(/-f dry_run="\$DRY"/g) ?? []).length, 2, 'entrambi i redispatch propagano il dry-run calcolato');
   assert.doesNotMatch(wf, /-f dry_run=false/);
   assert.equal((wf.match(/gh workflow run fast-publish-section\.yml --repo "\$REPO" --ref main/g) ?? []).length, 2);
-  assert.match(wf, /-f source_commit="\$STALE_HEAD"/);
-  assert.match(wf, /-f source_commit="\$WORKFLOW_RUN_HEAD_SHA"/);
+  assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
+  assert.match(wf, /-f source_commit="\$current_main"/);
   assert.match(wf, /source_commit richiede una SHA completa/);
   assert.match(wf, /inputs\.source_commit/);
   assert.match(wf, /source_main_commit:/);
@@ -2255,6 +2255,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /-f push_before="\$replay_before"/);
   assert.match(wf, /-f push_after="\$replay_after"/);
   assert.match(wf, /-f api_release_commit="\$STALE_HEAD"/);
+  assert.match(wf, /-f api_release_commit="\$WORKFLOW_RUN_HEAD_SHA"/);
   assert.match(wf, /remove_stale_canton_rss_feeds/);
   assert.match(wf, /API_RELEASE_COMMIT: \$\{\{ inputs\.api_release_commit \}\}/);
   assert.match(wf, /GITHUB_PAT_NANAKO assente/);
