@@ -39,33 +39,45 @@ test('la sanitizzazione conserva il testo e non indovina URL sconosciute', () =>
   );
 });
 
-test('la sanitizzazione canonicalizza link angle-delimited e anchor HTML nel funnel condiviso', () => {
-  const source = [
-    '[Root](</en/foo>)',
-    '[Mail](<mailto:a@b>)',
-    '[Azione](<nav:jobs>)',
-    '[ref]: <nav:jobs>',
-    '<a class="tool" href="calculator">Calcolatore</a>',
-    '<a href="/en/foo">Route</a>',
-    '<a href="relative/unknown">Sconosciuto</a>',
-    '~~~markdown',
-    '[codice](<calculator>) <a href="relative/code">codice</a>',
-    '~~~',
-  ].join('\n');
+test('la sanitizzazione rimuove i delimitatori angolari dai target canonici', () => {
+  const links = '[Pagina](</en/foo>) [Email](<mailto:a@b>) [Lavori](<nav:jobs>)';
   assert.equal(
-    sanitizeArticleMarkdownLinks(source, 'en'),
+    sanitizeArticleMarkdownLinks(links, 'it'),
+    '[Pagina](/en/foo) [Email](mailto:a@b) [Lavori](nav:jobs)',
+  );
+  assert.deepEqual(
+    findNonCanonicalArticleLinks(links, 'it').map(({ target, replacement }) => ({ target, replacement })),
     [
-      '[Root](/en/foo)',
-      '[Mail](mailto:a@b)',
-      '[Azione](nav:jobs)',
-      '[ref]: nav:jobs',
-      '<a class="tool" href="nav:calculator">Calcolatore</a>',
-      '<a href="/en/foo">Route</a>',
-      'Sconosciuto',
-      '~~~markdown',
-      '[codice](<calculator>) <a href="relative/code">codice</a>',
-      '~~~',
-    ].join('\n'),
+      { target: '/en/foo', replacement: '/en/foo' },
+      { target: 'mailto:a@b', replacement: 'mailto:a@b' },
+      { target: 'nav:jobs', replacement: 'nav:jobs' },
+    ],
+  );
+});
+
+test('la sanitizzazione valida href HTML e rimuove gli attributi duplicati', () => {
+  const source = '<a class="article" href="calculator">Calcola</a> '
+    + '<a href="relative/path">Relativo</a> '
+    + '<a href="/en/legal">Canonico</a> '
+    + '<a href="relative/path" href="/en/legal">Duplicato</a>';
+  assert.equal(
+    sanitizeArticleMarkdownLinks(source, 'it'),
+    '<a class="article" href="nav:calculator">Calcola</a> '
+      + '<a>Relativo</a> '
+      + '<a href="/en/legal">Canonico</a> '
+      + '<a>Duplicato</a>',
+  );
+  assert.deepEqual(
+    findNonCanonicalArticleLinks(source, 'it').map(({ target, replacement, htmlAnchor }) => ({
+      target,
+      replacement,
+      htmlAnchor,
+    })),
+    [
+      { target: 'calculator', replacement: 'nav:calculator', htmlAnchor: true },
+      { target: 'relative/path', replacement: null, htmlAnchor: true },
+      { target: 'relative/path', replacement: null, htmlAnchor: true },
+    ],
   );
 });
 
@@ -74,10 +86,15 @@ test('il gate decodifica i body TypeScript e copre tutte le radici attive senza 
   const markdown = [
     '~~~markdown',
     '[esempio](calculator)',
+    '<a href="calculator">esempio</a>',
     '~~~',
     '[legacy](calculator)',
     '[azione sconosciuta](nav:unknown-action)',
     '[telefono](tel:+41123456789)',
+    '<a href="calculator">legacy HTML</a>',
+    '<a href="relative/path">relativo</a>',
+    '<a href="/en/legal">canonico</a>',
+    '<!-- <a href="relative/commented">commentato</a> -->',
   ].join('\n');
   const changedFiles = [];
   try {
@@ -91,12 +108,14 @@ test('il gate decodifica i body TypeScript e copre tutte le radici attive senza 
 
     const scoped = scanBlogBodyLinks(fixtureRoot, [changedFiles.at(-1)]);
     assert.equal(scoped.files.length, 1, 'il filtro include anche una radice attiva non primaria');
-    assert.deepEqual(scoped.offenders.map(({ label }) => label), ['legacy', 'azione sconosciuta', 'telefono']);
+    assert.deepEqual(scoped.offenders.map(({ label }) => label), [
+      'legacy', 'azione sconosciuta', 'telefono', '<a href>', '<a href>',
+    ]);
     assert.deepEqual(scoped.errors, []);
 
     const full = scanBlogBodyLinks(fixtureRoot);
     assert.equal(full.files.length, BLOG_BODY_ROOTS.length);
-    assert.equal(full.offenders.length, BLOG_BODY_ROOTS.length * 3);
+    assert.equal(full.offenders.length, BLOG_BODY_ROOTS.length * 5);
     assert.deepEqual(full.errors, []);
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
@@ -139,7 +158,13 @@ test('publish-api esegue il link gate prima della pubblicazione', () => {
   assert.ok(build > linkGate, 'il link gate deve precedere la pubblicazione della superficie API');
   assert.ok(pushPaths.includes("'scripts/ci/check-blog-body-links.mjs'"), 'le modifiche al gate devono riattivare publish-api');
   assert.ok(pushPaths.includes("'scripts/lib/article-link-contract.mjs'"), 'le modifiche al contratto devono riattivare publish-api');
-  assert.match(gateInputBlock, /engine\/shared\/cantonArticleSectionCore\.generated\.mjs/);
-  assert.match(gateInputBlock, /generator\/data\/canton-url-slugs\.json/);
+  assert.ok(pushPaths.includes("'data/canton-url-slugs.json'"), 'la sorgente delle radici attive deve riattivare publish-api');
+  assert.ok(pushPaths.includes("'scripts/generate-canton-article-sections.mjs'"), 'il generatore delle radici attive deve riattivare publish-api');
   assert.match(linkGateStep, /PREFLIGHT_SCAN_MODE/);
+  assert.match(workflow, /engine\/shared\/cantonArticleSectionCore\.generated\.mjs/);
+  assert.match(gateInputBlock, /generator\/data\/canton-url-slugs\.json/);
+  assert.match(gateInputBlock, /data\/canton-url-slugs\.json/);
+  assert.match(gateInputBlock, /scripts\/generate-canton-article-sections\.mjs/);
+  assert.match(workflow, /data\/canton-url-slugs\.json/);
+  assert.match(workflow, /scripts\/generate-canton-article-sections\.mjs/);
 });
