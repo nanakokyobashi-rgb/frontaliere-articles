@@ -9093,30 +9093,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/rubriche/ospite/1957045/energia-infrastrutture-data-center-puo-produzione-ated-ticino-sostenibilita-ticinesi": {
-      "section": "frontaliere",
-      "ts": 1792083114007
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/15/leggi-notizia/argomenti/politica-20/articolo/programma-regionale-della-mobilita-e-dei-trasporti-licata-forza-italia-piu-attenzione-al-ruo-1.html": {
-      "section": "frontaliere",
-      "ts": 1792083773137
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/il-movimento-5-stelle-presenta-uninterrogazione-urgente-in-regione-lombardia-sulla-vertenza-beko/2708794": {
-      "section": "frontaliere",
-      "ts": 1792083899266
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1956937/tra-lavoro-e-aiuti-sociali-perche-tante-famiglie-ticinesi-soffrono-la-poverta": {
-      "section": "frontaliere",
-      "ts": 1792084151806
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/15/leggi-notizia/argomenti/territorio/articolo/fiera-del-lavoro-della-valceresio-imprese-e-candidati-si-incontrano-a-besano-per-costruire-nuove-op.html": {
-      "section": "frontaliere",
-      "ts": 1792087584753
-    },
-    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/dall%e2%80%99acqua-ticinese-uno-sconto-sulla-bolletta--4167313.html": {
-      "section": "frontaliere",
-      "ts": 1792087647535
-    },
     "frontaliere::https://www.varesenews.it/2026/10/un-venerdi-di-sciopero-nella-scuola-italiana-stipendi-precariato-e-assunzioni-al-centro-della-protesta/2709550": {
       "section": "frontaliere",
       "ts": 1792091078268
@@ -9452,6 +9428,10 @@
     "frontaliere::https://www.varesenews.it/2026/10/caro-carburanti-avanti-psi-varese-siamo-dalla-parte-di-chi-lavora-e-protesta/2711272": {
       "section": "frontaliere",
       "ts": 1792254337820
+    },
+    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/biasca-ha-un-nuovo-nodo-di-interscambio--4171162.html": {
+      "section": "frontaliere",
+      "ts": 1792260744593
     }
   }
 }
