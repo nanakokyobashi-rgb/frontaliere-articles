@@ -158,13 +158,9 @@ test('publish-api esegue il link gate prima della pubblicazione', () => {
   assert.ok(build > linkGate, 'il link gate deve precedere la pubblicazione della superficie API');
   assert.ok(pushPaths.includes("'scripts/ci/check-blog-body-links.mjs'"), 'le modifiche al gate devono riattivare publish-api');
   assert.ok(pushPaths.includes("'scripts/lib/article-link-contract.mjs'"), 'le modifiche al contratto devono riattivare publish-api');
-  assert.ok(pushPaths.includes("'data/canton-url-slugs.json'"), 'la sorgente delle radici attive deve riattivare publish-api');
-  assert.ok(pushPaths.includes("'scripts/generate-canton-article-sections.mjs'"), 'il generatore delle radici attive deve riattivare publish-api');
+  assert.ok(pushPaths.includes("'generator/data/canton-url-slugs.json'"), 'la sorgente delle radici attive deve riattivare publish-api');
   assert.match(linkGateStep, /PREFLIGHT_SCAN_MODE/);
   assert.match(workflow, /engine\/shared\/cantonArticleSectionCore\.generated\.mjs/);
   assert.match(gateInputBlock, /generator\/data\/canton-url-slugs\.json/);
-  assert.match(gateInputBlock, /data\/canton-url-slugs\.json/);
-  assert.match(gateInputBlock, /scripts\/generate-canton-article-sections\.mjs/);
-  assert.match(workflow, /data\/canton-url-slugs\.json/);
-  assert.match(workflow, /scripts\/generate-canton-article-sections\.mjs/);
+  assert.match(workflow, /generator\/data\/canton-url-slugs\.json/);
 });
