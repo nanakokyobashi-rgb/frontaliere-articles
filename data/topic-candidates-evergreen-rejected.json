@@ -696,6 +696,54 @@
       "firstSeenAt": "2026-10-17T04:23:32.140Z",
       "lastValidatedAt": "2026-10-17T04:23:32.140Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontalieri busta paga svizzera 2026 single",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-17T07:20:59.843Z",
+      "lastValidatedAt": "2026-10-17T07:20:59.843Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontalieri busta paga svizzera 2026 simulazione pratica",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-17T07:20:59.950Z",
+      "lastValidatedAt": "2026-10-17T07:20:59.950Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontalieri busta paga svizzera 2026 errori comuni",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-17T07:22:04.124Z",
+      "lastValidatedAt": "2026-10-17T07:22:04.124Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere credito imposta 2026",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-17T07:23:29.398Z",
+      "lastValidatedAt": "2026-10-17T07:23:29.398Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -9021,22 +9069,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.rsi.ch/s/4153382": {
-      "section": "svizzera",
-      "ts": 1792040622668
-    },
-    "frontaliere::http://www.cd-ocst.ch": {
-      "section": "frontaliere",
-      "ts": 1792047743118
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1956870/mobilita-esperienze-forum-territorio-bike-bellinzona-confronto-ticinesi": {
-      "section": "frontaliere",
-      "ts": 1792049697554
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/a-castiglione-olona-un-workshop-gratuito-di-difesa-personale-sabato-17-ottobre-con-gli-istruttori-stefano-gallucci-ed-enrico-roma/2707852": {
-      "section": "frontaliere",
-      "ts": 1792050012664
-    },
     "frontaliere::https://www.ticinonews.ch/ticino/a13-chiusure-notturne-tra-mesocco-roveredo-e-lostallo-444654": {
       "section": "frontaliere",
       "ts": 1792057193930
@@ -9340,6 +9372,34 @@
     "frontaliere::https://www.varesenews.it/2026/10/da-varese-a-londra-fino-a-fellini-le-musiche-di-lorenzo-bassignani-per-ultimo-fellini-alla-festa-del-cinema-di-roma/2710159": {
       "section": "frontaliere",
       "ts": 1792210072557
+    },
+    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1957292/il-centro-d-asilo-di-chiasso-a-gennaio-non-riaprira-imbucate-le-lettere-di-licenziamento": {
+      "section": "frontaliere",
+      "ts": 1792220546515
+    },
+    "frontaliere::https://www.rsi.ch/cultura/film-e-serie/naza-in-cartellone-a-lugano--4147847.html": {
+      "section": "frontaliere",
+      "ts": 1792220847947
+    },
+    "frontaliere::https://www.laregione.ch/economia/economia/1957352/le-big-tech-vogliono-franchi-ma-occhio-alla-bolla-dell-ia": {
+      "section": "frontaliere",
+      "ts": 1792220862180
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/casalinghi-disperati-apre-la-stagione-del-teatro-dellolmo-a-taino/2710735": {
+      "section": "frontaliere",
+      "ts": 1792220984945
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/sara-un-autunno-caldo-alla-barco-di-saronno-mezzora-di-sciopero-ogni-giorno-e-mobilitazione-a-oltranza/2710798": {
+      "section": "frontaliere",
+      "ts": 1792221602207
+    },
+    "svizzera::https://lenews.ch/2026/10/16/swiss-flu-vaccines-delayed-but-no-shortage-expected": {
+      "section": "svizzera",
+      "ts": 1792222687723
+    },
+    "frontaliere::http://www.cd-ocst.ch": {
+      "section": "frontaliere",
+      "ts": 1792224210489
     }
   }
 }
