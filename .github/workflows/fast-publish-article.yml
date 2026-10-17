@@ -76,6 +76,12 @@ on:
       - 'scripts/ci/fast-publish-section.mjs'
       - 'scripts/ci/article-image-fallbacks.mjs'
       - 'generator/scripts/lib/corpus-paths.mjs'
+      # The body-link preflight is a publisher dependency too: changing its
+      # implementation or one of its parser helpers must rerun the chain.
+      - 'scripts/ci/check-blog-body-links.mjs'
+      - 'scripts/lib/article-link-contract.mjs'
+      - 'generator/scripts/lib/article-meta-block.mjs'
+      - 'generator/scripts/lib/article-excerpt.mjs'
       - 'scripts/ci/retry-cmd.sh'
       - 'scripts/cf-purge-cache.mjs'
       - 'generator/scripts/load-rc-env.mjs'
@@ -177,9 +183,11 @@ jobs:
             .github/workflows/fast-publish-article.yml
             .github/workflows/publish-api.yml
             engine/articleSeoFallback.ts
+            engine/ogPagesPlugin.ts
             engine/rssFeeds.mjs
             engine/shared/articleSectionCore.mjs
             engine/shared/cantonArticleSectionCore.generated.mjs
+            engine/shared/normalizeArticleMarkdown.ts
             generator/data/canton-url-slugs.json
             generator/data/canton-sections.json
             generator/scripts/lib/corpus-paths.mjs

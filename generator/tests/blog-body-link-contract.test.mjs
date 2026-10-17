@@ -256,6 +256,37 @@ test('writer e gate visitano anchor HTML annidati nella label Markdown', () => {
   );
 });
 
+test('writer e gate rispettano la precedenza degli anchor HTML del renderer', () => {
+  const safeOuterAnchor = '<a href="/x">[testo](bare)</a>';
+  assert.equal(sanitizeArticleMarkdownLinks(safeOuterAnchor), safeOuterAnchor);
+  assert.deepEqual(findNonCanonicalArticleLinks(safeOuterAnchor), []);
+
+  const unsafeOuterAnchor = '<a href="bare">[testo](inner-bare)</a>';
+  assert.equal(sanitizeArticleMarkdownLinks(unsafeOuterAnchor), '<a>testo</a>');
+  assert.deepEqual(
+    findNonCanonicalArticleLinks(unsafeOuterAnchor).map(({ label, target, htmlAnchor }) => ({
+      label,
+      target,
+      htmlAnchor,
+    })),
+    [
+      { label: '<a href>', target: 'bare', htmlAnchor: true },
+      { label: 'testo', target: 'inner-bare', htmlAnchor: false },
+    ],
+  );
+
+  const noHrefOuterAnchor = '<a>[testo](bare)</a>';
+  assert.equal(sanitizeArticleMarkdownLinks(noHrefOuterAnchor), '<a>testo</a>');
+  assert.deepEqual(
+    findNonCanonicalArticleLinks(noHrefOuterAnchor).map(({ label, target, htmlAnchor }) => ({
+      label,
+      target,
+      htmlAnchor,
+    })),
+    [{ label: 'testo', target: 'bare', htmlAnchor: false }],
+  );
+});
+
 test('la sanitizzazione valida href HTML e rimuove gli attributi duplicati', () => {
   const source = '<a class="article" href="calculator">Calcola</a> '
     + '<a href="relative/path">Relativo</a> '
@@ -419,6 +450,8 @@ test('publish-api esegue il link gate prima della pubblicazione', () => {
   assert.match(workflow, /engine\/shared\/cantonArticleSectionCore\.generated\.mjs/);
   assert.match(gateInputBlock, /generator\/data\/canton-url-slugs\.json/);
   assert.match(gateInputBlock, /generator\/scripts\/lib\/article-excerpt\.mjs/);
+  assert.match(gateInputBlock, /engine\/ogPagesPlugin\.ts/);
+  assert.match(gateInputBlock, /engine\/shared\/normalizeArticleMarkdown\.ts/);
   assert.match(workflow, /generator\/data\/canton-url-slugs\.json/);
 });
 
@@ -427,8 +460,17 @@ test('i publisher rapidi eseguono il link gate prima di ogni pubblicazione', () 
     const workflow = readFileSync(path.join(ROOT, '.github/workflows', file), 'utf8');
     const linkGate = workflow.indexOf('node scripts/ci/check-blog-body-links.mjs');
     const publishJob = workflow.indexOf('\n  publish:');
+    const pushPaths = workflow.slice(workflow.indexOf('on:'), workflow.indexOf('permissions:'));
     assert.ok(linkGate > 0, `${file} non invoca il link gate`);
     assert.ok(publishJob > linkGate, `${file} deve terminare il gate prima del job di pubblicazione`);
+    for (const dependency of [
+      'scripts/ci/check-blog-body-links.mjs',
+      'scripts/lib/article-link-contract.mjs',
+      'generator/scripts/lib/article-meta-block.mjs',
+      'generator/scripts/lib/article-excerpt.mjs',
+    ]) {
+      assert.ok(pushPaths.includes(`'${dependency}'`), `${file} deve ripartire quando cambia ${dependency}`);
+    }
   }
 });
 
@@ -439,7 +481,12 @@ test('i publisher rapidi usano la stessa chiusura delle dipendenze del gate di p
   const apiPaths = [...api.slice(apiStart, apiEnd).matchAll(/^\s+([^\s()]+)$/gm)]
     .map((match) => match[1]);
   assert.ok(apiPaths.length > 0, 'publish-api.yml deve dichiarare le dipendenze del gate');
-  for (const dependency of ['engine/articleSeoFallback.ts', 'engine/rssFeeds.mjs']) {
+  for (const dependency of [
+    'engine/articleSeoFallback.ts',
+    'engine/ogPagesPlugin.ts',
+    'engine/rssFeeds.mjs',
+    'engine/shared/normalizeArticleMarkdown.ts',
+  ]) {
     assert.ok(apiPaths.includes(dependency), `publish-api.yml deve includere ${dependency}`);
   }
   assert.ok(apiPaths.includes('.github/workflows/publish-api.yml'));

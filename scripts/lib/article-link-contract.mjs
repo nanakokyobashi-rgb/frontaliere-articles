@@ -219,17 +219,29 @@ function parseHtmlAnchor(source, start) {
     while (/\s/u.test(source[cursor] || '')) cursor += 1;
     if (source[cursor] === '>') {
       const firstHref = hrefAttributes[0];
+      const openingEnd = cursor + 1;
+      const closing = /<\/a>/iu.exec(source.slice(openingEnd));
+      // The renderer's first pass matches a complete anchor. If no close tag
+      // exists, it leaves this text for the later Markdown pass unchanged.
+      if (!closing) return null;
+      const labelStart = openingEnd;
+      const labelEnd = openingEnd + closing.index;
+      const end = labelEnd + closing[0].length;
       return {
         start,
-        end: cursor + 1,
+        end,
+        openingEnd,
+        labelStart,
+        labelEnd,
+        htmlLabel: source.slice(labelStart, labelEnd),
         htmlAnchor: true,
         hasHref: Boolean(firstHref),
         label: '<a href>',
+        hrefAttributes,
         ...(firstHref ? {
           target: firstHref.target,
           targetStart: firstHref.targetStart,
           targetEnd: firstHref.targetEnd,
-          hrefAttributes,
         } : {}),
       };
     }
@@ -289,13 +301,25 @@ function parseHtmlAnchor(source, start) {
 // code spans and does not distinguish image syntax. Inspect those same source
 // forms here, including comments and escaped prefixes, so hidden links cannot
 // bypass the writer and publication gate.
-function articleLinks(source, allowedBlankLines = fencedBlankLineStarts(source)) {
+function articleLinks(
+  source,
+  allowedBlankLines = fencedBlankLineStarts(source),
+  scanHtmlAnchors = true,
+) {
   const links = [];
   for (let index = 0; index < source.length;) {
-    if (source[index] === '<') {
+    if (scanHtmlAnchors && source[index] === '<') {
       const anchor = parseHtmlAnchor(source, index);
       if (anchor) {
-        if (anchor.hasHref) links.push(anchor);
+        // The renderer does not run its HTML-anchor replacement again on a
+        // label returned by an outer anchor. Markdown links are still handled
+        // in that label when the outer href is absent or removed.
+        anchor.nestedLinks = articleLinks(
+          anchor.htmlLabel,
+          nestedFencedBlankLineStarts(allowedBlankLines, anchor.labelStart, anchor.labelEnd),
+          false,
+        );
+        links.push(anchor);
         index = anchor.end;
         continue;
       }
@@ -312,6 +336,7 @@ function articleLinks(source, allowedBlankLines = fencedBlankLineStarts(source))
     link.nestedLinks = articleLinks(
       link.label,
       nestedFencedBlankLineStarts(allowedBlankLines, link.start + 1, link.labelEnd),
+      scanHtmlAnchors,
     );
     links.push(link);
     index = link.end;
@@ -394,23 +419,38 @@ function canonicalArticleLinkOccurrenceTarget(link, locale) {
  * Normalize generated article Markdown and inline anchors before persistence.
  * Unknown or malformed targets deliberately lose their clickable href.
  */
-function sanitizeArticleMarkdownLinksInternal(source, locale, allowedBlankLines) {
+function sanitizeArticleMarkdownLinksInternal(source, locale, allowedBlankLines, scanHtmlAnchors = true) {
   let output = '';
   let copiedThrough = 0;
-  for (const link of articleLinks(source, allowedBlankLines)) {
-    const canonical = canonicalArticleLinkOccurrenceTarget(link, locale);
+  for (const link of articleLinks(source, allowedBlankLines, scanHtmlAnchors)) {
+    const canonical = link.htmlAnchor && !link.hasHref
+      ? null
+      : canonicalArticleLinkOccurrenceTarget(link, locale);
     const duplicateAnchorHref = link.htmlAnchor && link.hrefAttributes.length > 1;
-    const normalizedLabel = link.htmlAnchor || link.nestedLinks.length === 0
-      ? link.label
+    const htmlLabelNeedsMarkdown = link.htmlAnchor && (!link.hasHref || canonical === null);
+    const originalLabel = link.htmlAnchor ? link.htmlLabel : link.label;
+    const normalizedLabel = link.nestedLinks.length === 0
+      || (link.htmlAnchor && !htmlLabelNeedsMarkdown)
+      ? originalLabel
       : sanitizeArticleMarkdownLinksInternal(
-        link.label,
+        originalLabel,
         locale,
-        nestedFencedBlankLineStarts(allowedBlankLines, link.start + 1, link.labelEnd),
+        nestedFencedBlankLineStarts(
+          allowedBlankLines,
+          link.htmlAnchor ? link.labelStart : link.start + 1,
+          link.labelEnd,
+        ),
+        link.htmlAnchor ? false : scanHtmlAnchors,
       );
-    if (
+    if (link.htmlAnchor) {
+      if (
+        (!link.hasHref || canonical === link.target) &&
+        !duplicateAnchorHref &&
+        normalizedLabel === originalLabel
+      ) continue;
+    } else if (
       canonical === link.target &&
       !link.angle &&
-      !duplicateAnchorHref &&
       normalizedLabel === link.label
     ) continue;
 
@@ -426,7 +466,9 @@ function sanitizeArticleMarkdownLinksInternal(source, locale, allowedBlankLines)
         }
         tagCursor = attribute.attributeEnd;
       }
-      output += source.slice(tagCursor, link.end);
+      output += source.slice(tagCursor, link.openingEnd)
+        + normalizedLabel
+        + source.slice(link.labelEnd, link.end);
     } else if (canonical === null) {
       output += source.slice(copiedThrough, link.start) + normalizedLabel;
     } else {
@@ -451,15 +493,17 @@ export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
  * The returned index is byte-oriented enough for diagnostics on the UTF-8
  * source files and is intentionally independent of a TypeScript parser.
  */
-function findNonCanonicalArticleLinksInternal(input, locale, baseIndex, allowedBlankLines) {
+function findNonCanonicalArticleLinksInternal(input, locale, baseIndex, allowedBlankLines, scanHtmlAnchors = true) {
   const offenders = [];
-  for (const link of articleLinks(input, allowedBlankLines)) {
-    const canonical = canonicalArticleLinkOccurrenceTarget(link, locale);
+  for (const link of articleLinks(input, allowedBlankLines, scanHtmlAnchors)) {
+    const canonical = link.htmlAnchor && !link.hasHref
+      ? null
+      : canonicalArticleLinkOccurrenceTarget(link, locale);
     const duplicateAnchorHref = link.htmlAnchor && link.hrefAttributes.length > 1;
     if (
-      canonical !== link.target ||
-      link.angle ||
-      duplicateAnchorHref
+      link.htmlAnchor
+        ? link.hasHref && (canonical !== link.target || duplicateAnchorHref)
+        : canonical !== link.target || link.angle
     ) {
       offenders.push({
         label: link.label,
@@ -469,12 +513,22 @@ function findNonCanonicalArticleLinksInternal(input, locale, baseIndex, allowedB
         htmlAnchor: Boolean(link.htmlAnchor),
       });
     }
-    if (!link.htmlAnchor && link.nestedLinks.length > 0) {
+    const scanHtmlLabelMarkdown = link.htmlAnchor && (!link.hasHref || canonical === null);
+    if (link.htmlAnchor && scanHtmlLabelMarkdown && link.nestedLinks.length > 0) {
+      offenders.push(...findNonCanonicalArticleLinksInternal(
+        link.htmlLabel,
+        locale,
+        baseIndex + link.labelStart,
+        nestedFencedBlankLineStarts(allowedBlankLines, link.labelStart, link.labelEnd),
+        false,
+      ));
+    } else if (!link.htmlAnchor && link.nestedLinks.length > 0) {
       offenders.push(...findNonCanonicalArticleLinksInternal(
         link.label,
         locale,
         baseIndex + link.start + 1,
         nestedFencedBlankLineStarts(allowedBlankLines, link.start + 1, link.labelEnd),
+        scanHtmlAnchors,
       ));
     }
   }

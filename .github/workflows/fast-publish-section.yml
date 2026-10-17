@@ -49,6 +49,12 @@ on:
       - 'generator/scripts/lib/canton-hubs/paths.mjs'
       - 'generator/scripts/lib/corpus-paths.mjs'
       - 'generator/scripts/lib/control-char-write-report.mjs'
+      # The article-body preflight is part of the publication chain. Changes
+      # to its implementation or parser helpers must rerun this publisher.
+      - 'scripts/ci/check-blog-body-links.mjs'
+      - 'scripts/lib/article-link-contract.mjs'
+      - 'generator/scripts/lib/article-meta-block.mjs'
+      - 'generator/scripts/lib/article-excerpt.mjs'
       - 'engine/**'
       - 'host/**'
       - 'scripts/publish-section-pages.mjs'
@@ -276,9 +282,11 @@ jobs:
             .github/workflows/fast-publish-section.yml
             .github/workflows/publish-api.yml
             engine/articleSeoFallback.ts
+            engine/ogPagesPlugin.ts
             engine/rssFeeds.mjs
             engine/shared/articleSectionCore.mjs
             engine/shared/cantonArticleSectionCore.generated.mjs
+            engine/shared/normalizeArticleMarkdown.ts
             generator/data/canton-url-slugs.json
             generator/data/canton-sections.json
             generator/scripts/lib/corpus-paths.mjs

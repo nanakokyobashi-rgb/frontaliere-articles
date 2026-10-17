@@ -364,9 +364,11 @@ jobs:
             gate_input_paths=(
               .github/workflows/publish-api.yml
               engine/articleSeoFallback.ts
+              engine/ogPagesPlugin.ts
               engine/rssFeeds.mjs
               engine/shared/articleSectionCore.mjs
               engine/shared/cantonArticleSectionCore.generated.mjs
+              engine/shared/normalizeArticleMarkdown.ts
               generator/data/canton-url-slugs.json
               generator/data/canton-sections.json
               generator/scripts/lib/corpus-paths.mjs
