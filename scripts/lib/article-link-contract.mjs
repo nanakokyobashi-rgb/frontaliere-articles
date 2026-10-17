@@ -54,7 +54,41 @@ const LOCALE_CANONICAL_TARGETS = {
   ]),
 };
 
-function closingBracket(source, start) {
+function fencedBlankLineStarts(source) {
+  // The static renderer joins every line in a fenced block before applying
+  // its inline-link regex, so a blank source line there does not break a label.
+  const starts = new Set();
+  let fence = null;
+  let lineStart = 0;
+  while (lineStart <= source.length) {
+    const lineEnd = source.indexOf('\n', lineStart);
+    const line = source.slice(lineStart, lineEnd < 0 ? source.length : lineEnd);
+    const trimmed = line.trim();
+    if (fence) {
+      if (!trimmed) starts.add(lineStart);
+      const closing = /^(\x60{3,}|~{3,})\s*$/u.exec(trimmed);
+      if (closing && closing[1][0] === fence.char && closing[1].length >= fence.length) {
+        fence = null;
+      }
+    } else {
+      const opening = /^(\x60{3,}|~{3,})/u.exec(trimmed);
+      if (opening) fence = { char: opening[1][0], length: opening[1].length };
+    }
+    if (lineEnd < 0) break;
+    lineStart = lineEnd + 1;
+  }
+  return starts;
+}
+
+function nestedFencedBlankLineStarts(parentStarts, labelStart, labelEnd) {
+  const starts = new Set();
+  for (const lineStart of parentStarts) {
+    if (lineStart > labelStart && lineStart < labelEnd) starts.add(lineStart - labelStart);
+  }
+  return starts;
+}
+
+function closingBracket(source, start, allowedBlankLines) {
   let depth = 0;
   for (let index = start + 1; index < source.length; index += 1) {
     const char = source[index];
@@ -69,34 +103,14 @@ function closingBracket(source, start) {
     } else if (char === '\n') {
       const nextLineEnd = source.indexOf('\n', index + 1);
       const nextLine = source.slice(index + 1, nextLineEnd < 0 ? source.length : nextLineEnd);
-      if (!nextLine.trim()) return -1;
+      if (!nextLine.trim() && !allowedBlankLines.has(index + 1)) return -1;
     }
   }
   return -1;
 }
 
-function parseLinkTitle(source, start) {
-  const opener = source[start];
-  const closer = opener === '(' ? ')' : opener;
-  let depth = opener === '(' ? 1 : 0;
-  for (let index = start + 1; index < source.length; index += 1) {
-    const char = source[index];
-    if (char === '\\') {
-      index += 1;
-      continue;
-    }
-    if (opener === '(' && char === '(') depth += 1;
-    else if (char === closer) {
-      if (opener !== '(' || --depth === 0) return index + 1;
-    } else if (char === '\n' && opener !== '(') {
-      return -1;
-    }
-  }
-  return -1;
-}
-
-function parseInlineLink(source, start) {
-  const labelEnd = closingBracket(source, start);
+function parseInlineLink(source, start, allowedBlankLines) {
+  const labelEnd = closingBracket(source, start, allowedBlankLines);
   if (labelEnd < 0 || source[labelEnd + 1] !== '(') return null;
 
   let cursor = labelEnd + 2;
@@ -144,9 +158,14 @@ function parseInlineLink(source, start) {
   let unsupportedSuffix = false;
   if (cursor > whitespaceStart && ['"', "'", '('].includes(source[cursor])) {
     hasTitle = true;
-    cursor = parseLinkTitle(source, cursor);
-    if (cursor < 0) return null;
-    while (/\s/.test(source[cursor] || '') && cursor < source.length) cursor += 1;
+    // The static renderer does not parse link titles: its href match ends at
+    // the first `)`, even when a quote or parenthesis suffix looks balanced.
+    const close = source.indexOf(')', cursor);
+    if (close < 0) return null;
+    targetEnd = close;
+    target = source.slice(targetStart, targetEnd);
+    cursor = close;
+    unsupportedSuffix = true;
   } else if (cursor > whitespaceStart && source[cursor] !== ')') {
     // The site renderer captures every character through `)` as href text.
     // Consume unquoted suffixes so the writer and gate can strip this shape.
@@ -185,10 +204,12 @@ function parseInlineLink(source, start) {
 }
 
 function parseHtmlAnchor(source, start) {
+  // The renderer starts literal anchors with `<a\b`, which also accepts a
+  // punctuation boundary such as `<a-foo` but rejects `<abbr` and `<a1`.
   if (
     source[start] !== '<' ||
     source[start + 1]?.toLowerCase() !== 'a' ||
-    !/[\s/>]/u.test(source[start + 2] || '')
+    /[\w]/u.test(source[start + 2] || '')
   ) return null;
 
   const hrefAttributes = [];
@@ -268,7 +289,7 @@ function parseHtmlAnchor(source, start) {
 // code spans and does not distinguish image syntax. Inspect those same source
 // forms here, including comments and escaped prefixes, so hidden links cannot
 // bypass the writer and publication gate.
-function articleLinks(source) {
+function articleLinks(source, allowedBlankLines = fencedBlankLineStarts(source)) {
   const links = [];
   for (let index = 0; index < source.length;) {
     if (source[index] === '<') {
@@ -283,12 +304,15 @@ function articleLinks(source) {
       index += 1;
       continue;
     }
-    const link = parseInlineLink(source, index);
+    const link = parseInlineLink(source, index, allowedBlankLines);
     if (!link) {
       index += 1;
       continue;
     }
-    link.nestedLinks = articleLinks(link.label);
+    link.nestedLinks = articleLinks(
+      link.label,
+      nestedFencedBlankLineStarts(allowedBlankLines, link.start + 1, link.labelEnd),
+    );
     links.push(link);
     index = link.end;
   }
@@ -370,16 +394,19 @@ function canonicalArticleLinkOccurrenceTarget(link, locale) {
  * Normalize generated article Markdown and inline anchors before persistence.
  * Unknown or malformed targets deliberately lose their clickable href.
  */
-export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
-  const source = String(text ?? '');
+function sanitizeArticleMarkdownLinksInternal(source, locale, allowedBlankLines) {
   let output = '';
   let copiedThrough = 0;
-  for (const link of articleLinks(source)) {
+  for (const link of articleLinks(source, allowedBlankLines)) {
     const canonical = canonicalArticleLinkOccurrenceTarget(link, locale);
     const duplicateAnchorHref = link.htmlAnchor && link.hrefAttributes.length > 1;
     const normalizedLabel = link.htmlAnchor || link.nestedLinks.length === 0
       ? link.label
-      : sanitizeArticleMarkdownLinks(link.label, locale);
+      : sanitizeArticleMarkdownLinksInternal(
+        link.label,
+        locale,
+        nestedFencedBlankLineStarts(allowedBlankLines, link.start + 1, link.labelEnd),
+      );
     if (
       canonical === link.target &&
       !link.angle &&
@@ -414,15 +441,19 @@ export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
   return copiedThrough === 0 ? source : output + source.slice(copiedThrough);
 }
 
+export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
+  const source = String(text ?? '');
+  return sanitizeArticleMarkdownLinksInternal(source, locale, fencedBlankLineStarts(source));
+}
+
 /**
  * Find links that still need the contract's repair before publication.
  * The returned index is byte-oriented enough for diagnostics on the UTF-8
  * source files and is intentionally independent of a TypeScript parser.
  */
-export function findNonCanonicalArticleLinks(source, locale = 'it', baseIndex = 0) {
+function findNonCanonicalArticleLinksInternal(input, locale, baseIndex, allowedBlankLines) {
   const offenders = [];
-  const input = String(source ?? '');
-  for (const link of articleLinks(input)) {
+  for (const link of articleLinks(input, allowedBlankLines)) {
     const canonical = canonicalArticleLinkOccurrenceTarget(link, locale);
     const duplicateAnchorHref = link.htmlAnchor && link.hrefAttributes.length > 1;
     if (
@@ -439,8 +470,18 @@ export function findNonCanonicalArticleLinks(source, locale = 'it', baseIndex = 
       });
     }
     if (!link.htmlAnchor && link.nestedLinks.length > 0) {
-      offenders.push(...findNonCanonicalArticleLinks(link.label, locale, baseIndex + link.start + 1));
+      offenders.push(...findNonCanonicalArticleLinksInternal(
+        link.label,
+        locale,
+        baseIndex + link.start + 1,
+        nestedFencedBlankLineStarts(allowedBlankLines, link.start + 1, link.labelEnd),
+      ));
     }
   }
   return offenders.sort((a, b) => a.index - b.index);
+}
+
+export function findNonCanonicalArticleLinks(source, locale = 'it', baseIndex = 0) {
+  const input = String(source ?? '');
+  return findNonCanonicalArticleLinksInternal(input, locale, baseIndex, fencedBlankLineStarts(input));
 }

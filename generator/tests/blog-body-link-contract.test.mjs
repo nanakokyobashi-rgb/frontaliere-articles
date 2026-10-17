@@ -123,8 +123,8 @@ test('il renderer non riceve URL angolari con spazi o titoli Markdown', () => {
     findNonCanonicalArticleLinks(source).map(({ target, replacement }) => ({ target, replacement })),
     [
       { target: 'https://example.com/a b', replacement: null },
-      { target: 'https://example.com', replacement: null },
-      { target: 'https://example.com', replacement: null },
+      { target: 'https://example.com "titolo"', replacement: null },
+      { target: 'https://example.com> "titolo"', replacement: null },
     ],
   );
   assert.deepEqual(findNonCanonicalArticleLinks(sanitizeArticleMarkdownLinks(source)), []);
@@ -182,6 +182,45 @@ test('writer e gate rimuovono suffissi attaccati a un target angolare', () => {
     findNonCanonicalArticleLinks(source).map(({ target, replacement }) => ({ target, replacement })),
     [{ target: 'https://example.com>tail', replacement: null }],
   );
+});
+
+test('writer e gate seguono il primo delimitatore del renderer su suffissi titolo malformati', () => {
+  const sources = [
+    '[quoted](bare "title)',
+    '[parentetico](bare (title)',
+  ];
+  for (const source of sources) {
+    const occurrences = findNonCanonicalArticleLinks(source);
+    assert.equal(occurrences.length, 1, source);
+    assert.equal(occurrences[0].replacement, null, source);
+    assert.equal(sanitizeArticleMarkdownLinks(source), source.slice(1, source.indexOf(']')), source);
+  }
+});
+
+test('writer e gate riconoscono anchor con il confine `<a\\b` usato dal renderer', () => {
+  const source = '<a-foo href="bare">x</a> <abbr href="bare">y</abbr>';
+  assert.equal(sanitizeArticleMarkdownLinks(source), '<a-foo>x</a> <abbr href="bare">y</abbr>');
+  assert.deepEqual(
+    findNonCanonicalArticleLinks(source).map(({ target, replacement, htmlAnchor }) => ({
+      target,
+      replacement,
+      htmlAnchor,
+    })),
+    [{ target: 'bare', replacement: null, htmlAnchor: true }],
+  );
+});
+
+test('writer e gate attraversano le righe vuote in una label quando è dentro un fence', () => {
+  const fenced = '~~~markdown\n[x\n\n](bare)\n~~~';
+  assert.deepEqual(
+    findNonCanonicalArticleLinks(fenced).map(({ target, replacement }) => ({ target, replacement })),
+    [{ target: 'bare', replacement: null }],
+  );
+  assert.equal(sanitizeArticleMarkdownLinks(fenced).includes('](bare)'), false);
+
+  const separateParagraphs = '[x\n\n](bare)';
+  assert.deepEqual(findNonCanonicalArticleLinks(separateParagraphs), []);
+  assert.equal(sanitizeArticleMarkdownLinks(separateParagraphs), separateParagraphs);
 });
 
 test('il writer e il gate visitano i link annidati nella label di un link esterno', () => {
