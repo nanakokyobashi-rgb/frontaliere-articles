@@ -70,6 +70,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-17T10:06:41.197Z",
       "lastFailureAt": "2026-10-17T12:40:15.570Z"
+    },
+    {
+      "articleId": "udc-no-iva-13esima-avs",
+      "title": "UDC dice no all'aumento dell'IVA per finanziare la 13esima AVS, voto il 29 novembre",
+      "fallbackImage": "/images/blog/article-avs-voto-iva-il-29-novembre-per-la-13esima-rendita.webp",
+      "reason": "All image providers failed for article-udc-no-iva-13esima-avs: openai-codex (vision gate rejected image: Generic synthetic polling-station illustration; the decorative percent symb",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T15:14:15.050Z",
+      "lastFailureAt": "2026-10-17T15:14:15.050Z"
     }
   ]
 }

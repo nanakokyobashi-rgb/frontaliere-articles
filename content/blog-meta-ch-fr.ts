@@ -8447,6 +8447,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.ia-voce-truffatori-svizzera-2026.title': 'L’IA prête la voix aux escrocs : comment se défendre contre les appels suspects',
     'blog.article.ia-voce-truffatori-svizzera-2026.excerpt': 'Une banque italienne aurait perdu 95 millions d’euros.',
     'blog.article.ia-voce-truffatori-svizzera-2026.imageAlt': 'Smartphone avec notification d\'appel et onde sonore représentant le clonage vocal sur un bureau suisse',
+    'blog.article.udc-no-iva-13esima-avs.title': 'L\'UDC dit non à la hausse de TVA pour financer la 13e AVS',
+    'blog.article.udc-no-iva-13esima-avs.excerpt': 'Non de l\'UDC à l\'augmentation de la TVA pour la 13e AVS Le peuple vote sur la proposition le 29 novembre À Bulle, le non passe avec 290 voix contre 3 L\'Udc dit oui',
+    'blog.article.udc-no-iva-13esima-avs.imageAlt': 'Électeurs suisses devant un bureau de vote avec symbole de la TVA',
 };
 
 export default blogMetaChFr;
