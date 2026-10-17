@@ -1,29 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-stesso-reddito-imposte-diverse.webp",
-      "sha256": "21fd4372a8ce81e2b57a3adccd59dfc5b21269dd4bcef18f86bb47fc0604369a"
-    },
-    {
-      "path": "public/images/blog/article-tre-valli-varesine-7-posto-mondiale.webp",
-      "sha256": "cb83c9a3b09a150d1d797f0e8b5b1d245cd12a16e12f0a6a4236ed9d0e31d90f"
-    },
-    {
-      "path": "public/images/blog/article-udc-no-iva-13esima-avs.webp",
-      "sha256": "3a49e28aaa174c92838ebaa8194bb16bb134fd24f73f89a2a4c027b506292319"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-stesso-reddito-imposte-diverse-480w.webp",
-      "sha256": "0320ad342f8a753472b6d4289e0d0601e28ccca94f8e55a3358b2d46a3c32ec3"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-tre-valli-varesine-7-posto-mondiale-480w.webp",
-      "sha256": "4f59c7a669b8a3a3a5c9525b1ef762b419d4f12dee8303ec93a1ac1cbe43fbf8"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-udc-no-iva-13esima-avs-480w.webp",
-      "sha256": "834b424e73a0cfdfc52193db5fecfa46a9c0a6961bc0787880e89d5784e206a2"
-    }
-  ]
+  "items": []
 }
