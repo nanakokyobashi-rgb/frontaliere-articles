@@ -8450,6 +8450,12 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.udc-no-iva-13esima-avs.title': 'L\'UDC dit non à la hausse de TVA pour financer la 13e AVS',
     'blog.article.udc-no-iva-13esima-avs.excerpt': 'Non de l\'UDC à l\'augmentation de la TVA pour la 13e AVS Le peuple vote sur la proposition le 29 novembre À Bulle, le non passe avec 290 voix contre 3 L\'Udc dit oui',
     'blog.article.udc-no-iva-13esima-avs.imageAlt': 'Électeurs suisses devant un bureau de vote avec symbole de la TVA',
+    'blog.article.ps-iniziativa-violenza-genero.title': 'Le PS lance une initiative contre la violence de genre à Thun',
+    'blog.article.ps-iniziativa-violenza-genero.excerpt': 'Le PS lance à Thun une initiative sur la violence de genre Les délégués approuvent le projet à l\'unanimité Au moins 500 millions de francs supplémentaires demandés',
+    'blog.article.ps-iniziativa-violenza-genero.imageAlt': 'Initiative du PS contre la violence de genere lancée à Thun, réclamant 500 millions de francs supplémentaires par an.',
+    'blog.article.big-tech-franchi-bolla-ia.title': 'Les Big Tech émettent des obligations en francs pour les centres de données',
+    'blog.article.big-tech-franchi-bolla-ia.excerpt': 'Les géants technologiques américains émettent des obligations en francs suisses pour financer des centres de données.',
+    'blog.article.big-tech-franchi-bolla-ia.imageAlt': 'Vue urbaine suisse avec bureaux et infrastructures technologiques liées à la finance.',
 };
 
 export default blogMetaChFr;

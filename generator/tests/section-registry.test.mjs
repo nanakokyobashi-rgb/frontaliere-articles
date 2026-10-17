@@ -90,11 +90,14 @@ import {
 import { floorViolations, unpublishedFamilySectionsOf } from '../../scripts/ci/verify-api-floors.mjs';
 import {
   CANTON_HUBS_API,
+  acquireBootstrapLocks,
+  BOOTSTRAP_WAIT_MS,
   declaredFiles,
   main as edgeMain,
   planRelease,
   publishRelease,
   purgeChunks,
+  releaseBootstrapLocks,
   readPreviousRelease,
   releaseSnapshotCommit,
   registryState,
@@ -102,6 +105,13 @@ import {
   sitemapPaths,
   releaseDiffers,
 } from '../../scripts/publish-section-edge.mjs';
+import {
+  SECTION_BOOTSTRAP_LOCK_TTL_MS,
+  makeReleasedSectionBootstrapLock,
+  makeSectionBootstrapLock,
+  parseSectionBootstrapLock,
+  sectionBootstrapLockKey,
+} from '../../scripts/lib/section-bootstrap-lock.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const COMMIT = 'ce0973785b6fff2ce470b7f7dcba7c1ebdb9dd48';
@@ -710,6 +720,7 @@ function fakeIo() {
   const io = {
     store,
     ops: [],
+    releaseAttempts: [],
     purged: [],
     fail: () => false,
     corrupt: () => false,
@@ -718,6 +729,32 @@ function fakeIo() {
       if (io.fail('upload', key)) return false;
       store.set(key, io.corrupt(key) ? Buffer.from('troncato') : readFileSync(local));
       store.set(`cc:${key}`, cacheControl);
+      return true;
+    },
+    acquireBootstrapLock: (section, commit) => {
+      const key = sectionBootstrapLockKey(section);
+      const current = store.get(key);
+      if (current) {
+        try {
+          const parsed = JSON.parse(current.toString('utf8'));
+          if (Date.parse(parsed.expiresAt) > Date.now()) return 'busy';
+        } catch {
+          return 'error';
+        }
+      }
+      store.set(key, Buffer.from(JSON.stringify(makeSectionBootstrapLock({
+        section,
+        commit,
+        owner: 'test/edge-publisher',
+        role: 'edge-publisher',
+        now: Date.now(),
+      }))));
+      return 'acquired';
+    },
+    releaseBootstrapLock: (section) => {
+      io.releaseAttempts.push(section);
+      if (io.fail('release', section)) return false;
+      store.delete(sectionBootstrapLockKey(section));
       return true;
     },
     remove: (key) => {
@@ -1138,6 +1175,113 @@ test('edge: il puntatore non gira finche\' OGNI URL che le sitemap annunciano no
   assert.deepEqual([lost.result.code, lost.result.phase], [1, 'bootstrap']);
 });
 
+test('edge: il bootstrap live tiene il lock fino al rilascio prima del flip', async () => {
+  const io = fakeIo();
+  seedPages(io, ['canton-ti']);
+  const lockKey = sectionBootstrapLockKey('canton-ti');
+  io.store.set(
+    lockKey,
+    Buffer.from(JSON.stringify(makeSectionBootstrapLock({
+      section: 'canton-ti',
+      commit: COMMIT,
+      owner: 'test/bootstrap',
+      now: Date.now(),
+      ttlMs: 60_000,
+    }))),
+  );
+  let released = false;
+  const result = await publishRelease(planRelease(fakeDist(withLive(['canton-ti']))), {
+    io,
+    env: CREDS,
+    log: () => {},
+    bootstrapWaitMs: 10,
+    bootstrapRetryMs: 0,
+    sleep: async () => {
+      if (!released) {
+        io.store.delete(lockKey);
+        released = true;
+      }
+    },
+  });
+  assert.equal(released, true, 'il publisher aspetta il rilascio del bootstrap');
+  assert.deepEqual(result, { code: 0, phase: 'done', flipped: true });
+});
+
+test('edge: il lease R2 copre il timeout bootstrap massimo e il tombstone resta scaduto', () => {
+  const fastPublish = readFileSync(path.join(ROOT, '.github/workflows/fast-publish-section.yml'), 'utf8');
+  const publishJob = fastPublish.match(/\n  publish:\n([\s\S]*?)(?=\n  replay-api-after-bootstrap:)/)?.[1];
+  const fastPublishTimeoutMinutes = Number(publishJob?.match(/^\s+timeout-minutes:\s+(\d+)\s*$/m)?.[1]);
+  assert.ok(Number.isFinite(fastPublishTimeoutMinutes) && fastPublishTimeoutMinutes > 0, 'timeout job fast-publish assente');
+  const publishApi = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
+  const publishApiJob = publishApi.match(/\n  publish:\n([\s\S]*?)(?=\n  [a-z0-9_-]+:)/)?.[1]
+    ?? publishApi.slice(publishApi.indexOf('\n  publish:\n'));
+  const publishApiTimeoutMinutes = Number(publishApiJob.match(/^\s+timeout-minutes:\s+(\d+)\s*$/m)?.[1]);
+  assert.ok(Number.isFinite(publishApiTimeoutMinutes) && publishApiTimeoutMinutes > 0, 'timeout job publish-api assente');
+  assert.ok(SECTION_BOOTSTRAP_LOCK_TTL_MS > Math.max(fastPublishTimeoutMinutes, publishApiTimeoutMinutes));
+  assert.ok(BOOTSTRAP_WAIT_MS < SECTION_BOOTSTRAP_LOCK_TTL_MS, 'il publisher edge fallisce chiuso prima della scadenza del bootstrap attivo');
+  const active = makeSectionBootstrapLock({ section: 'canton-ti', commit: COMMIT, owner: 'test/bootstrap' });
+  assert.equal(active.role, 'bootstrap');
+  const released = makeReleasedSectionBootstrapLock({ section: 'canton-ti', commit: COMMIT, owner: 'test/bootstrap' });
+  assert.equal(released.role, 'released');
+  assert.equal(parseSectionBootstrapLock(released, { section: 'canton-ti' }).state, 'expired');
+  const cli = readFileSync(path.join(ROOT, 'scripts/ci/section-bootstrap-lock.mjs'), 'utf8');
+  assert.match(cli, /conditional-cdn-put\.sh/);
+  assert.match(cli, /If-Match/);
+  assert.match(cli, /If-None-Match/);
+  assert.match(cli, /--wait-ms/);
+  assert.match(cli, /LockBusyError/);
+});
+
+test('edge: il release post-flip ritenta i lease rimasti attivi', async () => {
+  let attempts = 0;
+  const { io, logs, result } = await publish(withLive(['canton-ti']), {
+    seed: (fake) => {
+      const release = fake.releaseBootstrapLock;
+      fake.releaseBootstrapLock = (section) => {
+        attempts += 1;
+        if (attempts === 1) return false;
+        return release(section);
+      };
+    },
+    sleep: async () => {},
+  });
+  assert.deepEqual(result, { code: 0, phase: 'done', flipped: true });
+  assert.equal(attempts, 2);
+  assert.equal(io.store.has(sectionBootstrapLockKey('canton-ti')), false);
+  assert.match(logs.join('\n'), /ritento il release di 1 bootstrap lock/);
+});
+
+test('edge: l\'acquisizione multi-sezione rilascia i lease parziali prima del retry', async () => {
+  const held = new Set();
+  const released = [];
+  let blocked = true;
+  let waits = 0;
+  const io = {
+    acquireBootstrapLock: (section) => {
+      if (section === 'canton-appenzello' && blocked) return 'busy';
+      held.add(section);
+      return 'acquired';
+    },
+    releaseBootstrapLock: (section) => {
+      held.delete(section);
+      released.push(section);
+      return true;
+    },
+  };
+  const result = await acquireBootstrapLocks(['canton-appenzello', 'canton-ag'], COMMIT, io, {
+    waitMs: 1_000,
+    retryMs: 0,
+    sleep: async () => {
+      blocked = false;
+      waits += 1;
+    },
+  });
+  assert.deepEqual(result, { held: ['canton-ag', 'canton-appenzello'], error: null });
+  assert.deepEqual(released, ['canton-ag']);
+  assert.equal(waits, 1);
+  assert.deepEqual([...held], ['canton-ag', 'canton-appenzello']);
+});
+
 test('edge: dopo il PUT la release nuova e\' servita intera; un purge fallito esce non-zero senza incoerenze', async () => {
   const { io, logs, result } = await publish(DRAFT_ALL(), { history: [withLive(['canton-ti'], OLD)], fail: (op) => op === 'purge' });
   assert.deepEqual([result.code, result.phase, result.flipped], [1, 'purge', true]);
@@ -1151,6 +1295,47 @@ test('edge: dopo il PUT la release nuova e\' servita intera; un purge fallito es
     'https://frontaliereticino.ch/sitemap-articles-canton-ti.xml',
     'https://frontaliereticino.ch/sitemap-cantons.xml',
   ].sort());
+});
+
+test('edge: un tombstone lease fallito dopo il flip viene ritentato prima del ritorno', async () => {
+  let failedOnce = false;
+  const { io, result } = await publish(withLive(['canton-ti']), {
+    history: [DRAFT_ALL(OLD)],
+    fail: (op) => {
+      if (op !== 'release' || failedOnce) return false;
+      failedOnce = true;
+      return true;
+    },
+  });
+  assert.deepEqual(result, { code: 0, phase: 'done', flipped: true });
+  assert.deepEqual(io.releaseAttempts, ['canton-ti', 'canton-ti']);
+  assert.equal(io.store.has(sectionBootstrapLockKey('canton-ti')), false, 'il lease non resta attivo dopo il flip');
+
+  const exhausted = await publish(withLive(['canton-ti']), {
+    history: [DRAFT_ALL(OLD)],
+    fail: (op) => op === 'release',
+  });
+  assert.deepEqual([exhausted.result.code, exhausted.result.phase, exhausted.result.flipped], [1, 'bootstrap-lock-release', true]);
+  assert.equal(exhausted.io.releaseAttempts.length, 3, 'un release persistente resta bounded');
+  assert.equal(exhausted.io.store.has(sectionBootstrapLockKey('canton-ti')), true, 'il fallimento definitivo resta osservabile');
+});
+
+test('edge: il release dei bootstrap usa concorrenza bounded', async () => {
+  let active = 0;
+  let peak = 0;
+  const sections = Array.from({ length: 24 }, (_, index) => `canton-${String.fromCharCode(97 + Math.floor(index / 26))}${String.fromCharCode(97 + (index % 26))}`);
+  const result = await releaseBootstrapLocks(sections, {
+    releaseBootstrapLock: async () => {
+      active++;
+      peak = Math.max(peak, active);
+      await new Promise((resolve) => setTimeout(resolve, 5));
+      active--;
+      return true;
+    },
+  });
+  assert.equal(result.released, true);
+  assert.ok(peak > 1, 'i lease non vengono rilasciati uno alla volta');
+  assert.ok(peak <= 8, 'la concorrenza resta entro otto richieste R2');
 });
 
 test('edge: un purge fallito viene ritentato prima del noop', async () => {
@@ -1393,6 +1578,11 @@ test('load-rc-env: kill-switch mappato, assente per default, marker scritto solo
 
 test('publish-api: osserva tutta la chiusura degli import del publisher, e pubblica la release edge DOPO il deploy Pages, per ultima', () => {
   const wf = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
+  assert.match(wf, /source_commit:\n\s+description: .*replay bootstrap bounded/);
+  assert.match(wf, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(wf, /Verify bounded replay source is still main/);
+  assert.match(wf, /gh api "repos\/\$REPOSITORY\/git\/ref\/heads\/main"/);
+  assert.match(wf, /SOURCE_COMMIT: \$\{\{ inputs\.source_commit \}\}/);
   const filters = [...wf.slice(0, wf.indexOf('\n  schedule:')).matchAll(/^      - '([^']+)'$/gm)].map((m) => m[1]);
   const covered = (file) => filters.some((p) => p === file || (p.endsWith('/**') && file.startsWith(p.slice(0, -2))));
   for (const p of ['sections/**', 'scripts/lib/section-registry.mjs', 'scripts/publish-section-edge.mjs', 'scripts/lib/delete-cdn-file.sh', 'generator/scripts/load-rc-env.mjs']) {
@@ -1429,7 +1619,7 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   const edge = readFileSync(path.join(ROOT, 'scripts/publish-section-edge.mjs'), 'utf8');
   const realIoSrc = edge.slice(edge.indexOf('export const realIo = {'), edge.indexOf('/** Quanto si aspetta'));
   const spawned = [...realIoSrc.matchAll(/'(scripts\/[A-Za-z0-9_\/.-]+\.(?:sh|mjs))'/g)].map((m) => m[1]);
-  for (const required of ['scripts/cf-purge-cache.mjs', 'scripts/ci/retry-cmd.sh', 'scripts/lib/delete-cdn-file.sh', 'scripts/lib/upload-cdn-file.sh']) {
+  for (const required of ['scripts/cf-purge-cache.mjs', 'scripts/ci/retry-cmd.sh', 'scripts/lib/delete-cdn-file.sh', 'scripts/lib/upload-cdn-file.sh', 'scripts/ci/section-bootstrap-lock.mjs']) {
     assert.ok(spawned.includes(required), `${required}: helper eseguito dal publisher assente`);
   }
   for (const file of spawned) walk(file);
@@ -1445,8 +1635,11 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.ok(at > wf.indexOf('uses: actions/deploy-pages'));
   assert.ok(at > wf.indexOf('- name: Push the article sitemaps and the blog index to the edge'));
   assert.ok(notify > at, 'la notifica al sito parte dopo il flip edge');
-  assert.equal(wf.slice(at, wf.indexOf('      # Tell the site the surface moved.')).trimEnd(), [
+  const edgeEnd = wf.indexOf('\n\n', at);
+  assert.ok(edgeEnd > at, 'il passo edge deve avere un delimitatore');
+  assert.equal(wf.slice(at, edgeEnd).trimEnd(), [
     '      - name: Publish the canton sections release to the edge',
+    '        id: publish_edge',
     "        if: steps.deploy.outcome == 'success'",
     '        run: node scripts/publish-section-edge.mjs',
   ].join('\n'));

@@ -44,8 +44,12 @@ const EXPECTED_FIELDS = [
 ];
 
 test('Notify the site emette il payload bounded con il contratto completo', () => {
-  assert.match(NOTIFY_STEP, /if: steps\.deploy\.outcome == 'success' && github\.event_name == 'push'/);
+  const normalizedNotifyStep = NOTIFY_STEP.replace(/\s+/g, ' ');
+  assert.match(normalizedNotifyStep, /if: >- steps\.deploy\.outcome == 'success' && steps\.publish_edge\.outcome == 'success'/);
+  assert.match(normalizedNotifyStep, /github\.event_name == 'push' \|\| \(github\.event_name == 'workflow_dispatch' && inputs\.source_commit != ''\)/);
   assert.match(NOTIFY_STEP, /continue-on-error: true/);
+  assert.match(NOTIFY_STEP, /PUBLISHED_SOURCE_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(NOTIFY_STEP, /SOURCE_EVENT: \$\{\{ github\.event_name \}\}/);
   assert.match(PAYLOAD_CONSTRUCTION, /jq -cn/);
   assert.match(PAYLOAD_CONSTRUCTION, /--argjson schema_version 1/);
   assert.match(PAYLOAD_CONSTRUCTION, /--arg event_type "articles-published"/);
@@ -56,9 +60,9 @@ test('Notify the site emette il payload bounded con il contratto completo', () =
     ['source_workflow_path', ''],
     ['source_run_id', 'GITHUB_RUN_ID'],
     ['source_run_attempt', 'GITHUB_RUN_ATTEMPT'],
-    ['source_sha', 'GITHUB_SHA'],
+    ['source_sha', 'PUBLISHED_SOURCE_COMMIT'],
     ['source_branch', 'GITHUB_REF_NAME'],
-    ['source_event', ''],
+    ['source_event', 'SOURCE_EVENT'],
   ]) {
     if (envName) {
       assert.match(
