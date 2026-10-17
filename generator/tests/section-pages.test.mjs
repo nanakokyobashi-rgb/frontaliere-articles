@@ -222,6 +222,52 @@ test('publisher: il bootstrap live differisce RSS, cancellazioni e manifest finc
   }
 });
 
+test('publisher: bootstrap live senza manifest non arma il percorso differito', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-bootstrap-no-manifest-'));
+  let publishOptions = null;
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  try {
+    console.log = () => {};
+    console.error = () => {};
+    const code = await main(
+      ['--section', 'canton-ti', '--bootstrap', '--out', path.join(fixtureRoot, 'dist'), '--summary', path.join(fixtureRoot, 'summary.json'), '--publish'],
+      {
+        parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
+        sourceRegistryIdsImpl: () => [],
+        fetchPageManifestImpl: async () => ({ state: 'absent' }),
+        publishedStatusImpl: async () => 'live',
+        publishedApiReleaseCommitImpl: async () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        publishedReleaseReadyImpl: async () => ({ ok: false, reason: 'registro edge non ancora sul commit' }),
+        currentMainHeadImpl: () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
+        renderSectionArticlePipelineImpl: async () => ({
+          entries: [],
+          hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
+          downloadedImageKeys: [],
+          imageFetchFailures: [],
+          imagePostcondition: {},
+          aggregatePagesAllowed: false,
+        }),
+        articleReleaseSnapshotImpl: () => [],
+        publishImpl: async (options) => {
+          publishOptions = options;
+          return { failures: 0, uploaded: 0, deleted: 0, status: 'live' };
+        },
+        publishPageManifestImpl: () => true,
+      },
+    );
+    assert.equal(code, 0);
+    assert.equal(publishOptions?.snapshotPagesBeforeUpload, false);
+    const summary = JSON.parse(readFileSync(path.join(fixtureRoot, 'summary.json'), 'utf8'));
+    assert.equal(summary.deferredLiveBootstrapRelease, false, 'senza inventario non si assume che il set live sia completo');
+  } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('publisher: lo staging bootstrap live carica solo chiavi HTML nuove e snapshotta prima dell upload', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-bootstrap-stage-'));
   const outDir = path.join(fixtureRoot, 'dist');
@@ -1058,7 +1104,7 @@ test('publisher: lo staging snapshotta le chiavi prima dell HTML e ripristina un
   }
 });
 
-test('publisher: lo staging rifiuta sostituzioni stale e ricontrolla la readiness durante gli upload', async () => {
+test('publisher: lo staging rifiuta sostituzioni stale e usa il gate cross-workflow invece del polling readiness', async () => {
   const immutableRoot = mkdtempSync(path.join(tmpdir(), 'publish-bootstrap-immutable-'));
   const immutable = pageEntry('canton-ti', 'articoli-ticino/existing/index.html', 'article');
   const immutableLocal = path.join(immutableRoot, immutable.rel);
@@ -1091,6 +1137,7 @@ test('publisher: lo staging rifiuta sostituzioni stale e ricontrolla la readines
   const staged = pageEntry('canton-ti', 'articoli-ticino/staged/index.html', 'article');
   let readinessCalls = 0;
   let stagedUploads = 0;
+  let stagedOnCdn = false;
   try {
     const recheckResult = await publish({
       section: 'canton-ti',
@@ -1103,16 +1150,21 @@ test('publisher: lo staging rifiuta sostituzioni stale e ricontrolla la readines
       publishedStatusImpl: async () => 'draft',
       releaseReadyImpl: async () => ({ ok: ++readinessCalls > 1 }),
       runImpl: (_command, args) => {
-        if (args[0] === 'scripts/lib/upload-cdn-file.sh') stagedUploads++;
+        if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+          stagedUploads++;
+          stagedOnCdn = true;
+        }
         return { code: 0, stdout: '✅ uploaded' };
       },
-      probeImpl: async () => ({ ok: false, status: 'HTTP 404' }),
+      probeImpl: async () => stagedOnCdn
+        ? { ok: true, status: 200, body: `<html>${CORPUS_ROUTE_OWNER_META_TAG}</html>` }
+        : { ok: false, status: 'HTTP 404' },
     });
-    assert.equal(recheckResult.failures, 1);
-    assert.equal(recheckResult.releaseAdvanced, true);
+    assert.equal(recheckResult.failures, 0);
+    assert.notEqual(recheckResult.releaseAdvanced, true);
     assert.equal(recheckResult.uploaded, 1);
     assert.equal(stagedUploads, 1);
-    assert.equal(readinessCalls, 2, 'la release viene ricontrollata prima e dopo lo staging');
+    assert.equal(readinessCalls, 0, 'la readiness non viene usata come lock: la coordinazione e\' cross-workflow');
   } finally {
     rmSync(recheckRoot, { recursive: true, force: true });
   }
@@ -2658,6 +2710,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'generator/scripts/lib/control-char-write-report.mjs',
     'scripts/publish-section-pages.mjs',
     'scripts/publish-section-edge.mjs',
+    'scripts/lib/section-bootstrap-lock.mjs',
+    'scripts/ci/section-bootstrap-lock.mjs',
     'scripts/ci/fast-publish-section.mjs',
     'scripts/ci/retry-cmd.sh',
     'scripts/cf-purge-cache.mjs',
@@ -2700,6 +2754,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   // upload-cdn-file.sh esce 0 senza credenziali: l'assenza deve fermare il job.
   assert.match(wf, /for v in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_S3_ENDPOINT R2_BUCKET CF_API_TOKEN; do/);
   assert.match(wf, /timeout-minutes: 45/);
+  assert.match(wf, /Acquire bootstrap R2 gate/);
+  assert.match(wf, /section-bootstrap-lock\.mjs acquire --section "\$SECTION"/);
+  assert.match(wf, /Release bootstrap R2 gate/);
+  assert.match(wf, /if: always\(\).*matrix\.target\.bootstrap == true/);
+  assert.match(read('scripts/publish-section-edge.mjs'), /waitForBootstrapLocks\(release\.live, io/);
 });
 
 // ── Riconciliazione ──────────────────────────────────────────────────────────

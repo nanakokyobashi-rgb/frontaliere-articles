@@ -53,6 +53,8 @@ on:
       - 'host/**'
       - 'scripts/publish-section-pages.mjs'
       - 'scripts/publish-section-edge.mjs'
+      - 'scripts/lib/section-bootstrap-lock.mjs'
+      - 'scripts/ci/section-bootstrap-lock.mjs'
       - 'scripts/ci/fast-publish-section.mjs'
       - 'scripts/ci/retry-cmd.sh'
       - 'scripts/cf-purge-cache.mjs'
@@ -582,6 +584,16 @@ jobs:
         if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
         run: bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/ci/ensure-host-shell-assets.mjs
 
+      # Un bootstrap di una sezione gia' live carica HTML mentre il publisher
+      # API prepara la stessa release. Il gate R2 viene acquisito PRIMA del
+      # render e rilasciato anche su errore: publish-section-edge aspetta il
+      # suo sblocco prima di fare il PUT del registro.
+      - name: Acquire bootstrap R2 gate
+        if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true' && matrix.target.bootstrap == true
+        env:
+          SECTION: ${{ matrix.target.section }}
+        run: node scripts/ci/section-bootstrap-lock.mjs acquire --section "$SECTION" --commit "$(git rev-parse HEAD)"
+
       - name: Render, validate and publish the section pages
         if: steps.replay_freshness.outputs.fresh == 'true'
         env:
@@ -693,6 +705,12 @@ jobs:
           # render riscrive lo stesso scratch e gli upload R2 sono PUT
           # idempotenti sulle stesse chiavi.
           bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"
+
+      - name: Release bootstrap R2 gate
+        if: always() && steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true' && matrix.target.bootstrap == true
+        env:
+          SECTION: ${{ matrix.target.section }}
+        run: node scripts/ci/section-bootstrap-lock.mjs release --section "$SECTION"
 
       - name: Summary
         if: always()

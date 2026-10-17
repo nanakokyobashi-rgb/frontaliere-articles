@@ -100,6 +100,10 @@ import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../generator/sc
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../engine/shared/corpusRouteOwner.mjs';
 import { familySectionPages } from './lib/build-sitemap.mjs';
 import {
+  parseSectionBootstrapLock,
+  sectionBootstrapLockKey,
+} from './lib/section-bootstrap-lock.mjs';
+import {
   EDGE_SECTION_REGISTRY_FILE,
   SECTION_SITEMAP_INDEX_FILE,
   validateEdgeSectionRegistry,
@@ -363,6 +367,42 @@ export function requiredPageKeys(section, { sitemapXml, previousSitemapXml = nul
 export const BOOTSTRAP_WAIT_MS = 6 * 60 * 1000;
 export const BOOTSTRAP_RETRY_MS = 20 * 1000;
 
+/**
+ * Attende che i bootstrap live in corso rilascino il gate R2.
+ *
+ * La verifica delle pagine resta necessaria, ma non basta: senza questo gate
+ * il publisher API potrebbe leggere una release pronta e fare il flip mentre
+ * fast-publish sta ancora sostituendo le chiavi. Il marker e' breve e ha una
+ * scadenza: un runner morto non puo' bloccare per sempre il publisher.
+ */
+export async function waitForBootstrapLocks(
+  sections,
+  io,
+  { waitMs = BOOTSTRAP_WAIT_MS, retryMs = BOOTSTRAP_RETRY_MS, sleep, now = Date.now } = {},
+) {
+  const pause = sleep ?? ((ms) => new Promise((resolve) => setTimeout(resolve, ms)));
+  const ids = [...new Set((sections ?? []).filter((section) => typeof section === 'string' && section))];
+  const deadline = now() + Math.max(0, waitMs);
+  let pending = [];
+  for (;;) {
+    pending = [];
+    for (const section of ids) {
+      const key = sectionBootstrapLockKey(section);
+      const got = await io.fetchBytes(`${CDN}/${key}`);
+      if (got.status === 404) continue;
+      if (got.status !== 200) {
+        pending.push(`${section} (lock non verificabile: HTTP ${got.status || 'nessuna risposta'})`);
+        continue;
+      }
+      const state = parseSectionBootstrapLock(got.body, { section, now: now() });
+      if (state.state === 'active') pending.push(`${section} (${state.doc.owner})`);
+      else if (state.state === 'unknown') pending.push(`${section} (${state.reason})`);
+    }
+    if (pending.length === 0 || now() + retryMs > deadline) return pending;
+    await pause(Math.max(0, retryMs));
+  }
+}
+
 async function mapLimit(items, limit, fn) {
   const out = new Array(items.length);
   let next = 0;
@@ -446,7 +486,18 @@ export async function readPreviousRelease(io) {
  * `{ code, phase, flipped }`: `phase` e' dove si e' fermato (`done` se in fondo),
  * `flipped` se il puntatore e' stato scritto.
  */
-export async function publishRelease(release, { io, env = process.env, log = console.log, tmpDir = os.tmpdir(), bootstrapWaitMs = BOOTSTRAP_WAIT_MS, sleep }) {
+export async function publishRelease(
+  release,
+  {
+    io,
+    env = process.env,
+    log = console.log,
+    tmpDir = os.tmpdir(),
+    bootstrapWaitMs = BOOTSTRAP_WAIT_MS,
+    bootstrapRetryMs = BOOTSTRAP_RETRY_MS,
+    sleep,
+  },
+) {
   const previous = await readPreviousRelease(io);
   const mandatory = releaseDiffers(release, previous);
   log(
@@ -547,6 +598,15 @@ export async function publishRelease(release, { io, env = process.env, log = con
     }
   }
 
+  const lockedBeforeBootstrap = await waitForBootstrapLocks(release.live, io, {
+    waitMs: bootstrapWaitMs,
+    retryMs: bootstrapRetryMs,
+    sleep,
+  });
+  if (lockedBeforeBootstrap.length) {
+    return stopBeforeFlip('bootstrap-lock', `bootstrap live ancora in corso (${lockedBeforeBootstrap.join(', ')})`);
+  }
+
   // 1b. Bootstrap: le pagine delle sezioni che il puntatore dichiarera' live.
   const missingPages = await missingBootstrapPages(release, previous, io, { waitMs: bootstrapWaitMs, sleep });
   if (missingPages.length) {
@@ -555,6 +615,19 @@ export async function publishRelease(release, { io, env = process.env, log = con
       `${missingPages.length} pagine annunciate dalle sitemap delle sezioni live non sono su R2 ` +
         `(es. ${missingPages.slice(0, 3).join(', ')}): prima le pagine (fast-publish-section), poi il flip`,
     );
+  }
+
+  // Rilettura immediatamente prima del PUT: un bootstrap puo' essersi
+  // acquisito mentre la verifica delle pagine era in corso. In quel caso il
+  // puntatore non deve avanzare e il retry riprendera' dopo il release del
+  // lock, quando il set HTML e' di nuovo stabile.
+  const lockedBeforeFlip = await waitForBootstrapLocks(release.live, io, {
+    waitMs: bootstrapWaitMs,
+    retryMs: bootstrapRetryMs,
+    sleep,
+  });
+  if (lockedBeforeFlip.length) {
+    return stopBeforeFlip('bootstrap-lock', `bootstrap live acquisito prima del flip (${lockedBeforeFlip.join(', ')})`);
   }
 
   // 2. Flip: UN PUT del puntatore. Ricorda la release che sostituisce, per la

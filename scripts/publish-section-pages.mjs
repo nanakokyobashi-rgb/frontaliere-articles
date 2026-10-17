@@ -1729,11 +1729,6 @@ export async function publish({
   };
   const uploaded = [];
   let status = beforeStatus;
-  const bootstrapReleaseAdvanced = async () => {
-    if (!snapshotPagesBeforeUpload || !releaseCommit) return false;
-    const readiness = await releaseReadyImpl(releaseCommit, { section });
-    return readiness === true || readiness?.ok === true;
-  };
   console.log(`[${LOG}] preflight: sezione ${section} nel registro pubblicato = ${beforeStatus}`);
   // This is the first remote mutation after render/preflight. Recheck here,
   // not only in the workflow before rendering: main may advance while pages
@@ -1830,13 +1825,6 @@ export async function publish({
   }
   for (const page of inUploadOrder(pages)) {
     await assertMainFreshImpl();
-    if (await bootstrapReleaseAdvanced()) {
-      console.error(
-        `::error::[${LOG}] bootstrap live interrotto: release API/edge cambiata prima di caricare ${page.edgeKey}; ` +
-        'il replay workflow_run deve completare la superficie',
-      );
-      return { failures: 1, uploaded: uploaded.length, deleted: 0, status, releaseAdvanced: true };
-    }
     const { stdout } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', path.join(distDir, page.rel), page.edgeKey, PAGE_CACHE_CONTROL]);
     if (stdout.includes('✅ uploaded')) uploaded.push(page);
     else {
@@ -1853,14 +1841,6 @@ export async function publish({
     console.error(`::error::[${LOG}] upload HTML incompleto: nessuna pagina obsoleta viene cancellata`);
     const rollbackFailures = await rollbackTransaction();
     return { failures: failures + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status: beforeStatus };
-  }
-
-  if (await bootstrapReleaseAdvanced()) {
-    console.error(
-      `::error::[${LOG}] bootstrap live interrotto dopo gli upload: release API/edge cambiata; ` +
-      'le chiavi nuove restano immutable e il replay workflow_run deve completare manifest e RSS',
-    );
-    return { failures: 1, uploaded: uploaded.length, deleted: 0, status, releaseAdvanced: true };
   }
 
   const purgePages = async (pageList) => {
@@ -2065,7 +2045,13 @@ export async function main(
         : cantonRssFeedEntries(section);
       cantonRssFeeds = cleanupRssRequested ? [] : declaredFeeds;
       removeStaleCantonRssFeeds = cleanupRssRequested || cantonRssFeeds.length === 0;
-    } else if (args.bootstrap && effectiveStatus === 'live' && !cleanupRssRequested) {
+    } else if (
+      args.bootstrap
+      && effectiveStatus === 'live'
+      && !cleanupRssRequested
+      && publishedManifest.state === 'ok'
+      && publishedManifestPages
+    ) {
       deferredLiveBootstrapRelease = true;
       console.log(
         `::notice::[${LOG}] bootstrap ${section}: release API/edge non ancora servita; ` +

@@ -64,6 +64,7 @@ on:
       - 'scripts/lib/canton-hub-content.mjs'
       - 'generator/scripts/lib/canton-hubs/paths.mjs'
       - 'scripts/publish-section-edge.mjs'
+      - 'scripts/lib/section-bootstrap-lock.mjs'
       - 'scripts/lib/delete-cdn-file.sh'
       # Il loader di Remote Config e' un input del publisher da quando porta il
       # kill-switch delle sezioni (CANTON_ARTICLE_SECTIONS_KILL) e il marker

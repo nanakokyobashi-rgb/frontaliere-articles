@@ -102,6 +102,10 @@ import {
   sitemapPaths,
   releaseDiffers,
 } from '../../scripts/publish-section-edge.mjs';
+import {
+  makeSectionBootstrapLock,
+  sectionBootstrapLockKey,
+} from '../../scripts/lib/section-bootstrap-lock.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const COMMIT = 'ce0973785b6fff2ce470b7f7dcba7c1ebdb9dd48';
@@ -1136,6 +1140,38 @@ test('edge: il puntatore non gira finche\' OGNI URL che le sitemap annunciano no
     seed: (io) => io.store.delete('edge/sections/articoli-ticino/index.html'),
   });
   assert.deepEqual([lost.result.code, lost.result.phase], [1, 'bootstrap']);
+});
+
+test('edge: il bootstrap live tiene il lock fino al rilascio prima del flip', async () => {
+  const io = fakeIo();
+  seedPages(io, ['canton-ti']);
+  const lockKey = sectionBootstrapLockKey('canton-ti');
+  io.store.set(
+    lockKey,
+    Buffer.from(JSON.stringify(makeSectionBootstrapLock({
+      section: 'canton-ti',
+      commit: COMMIT,
+      owner: 'test/bootstrap',
+      now: Date.now(),
+      ttlMs: 60_000,
+    }))),
+  );
+  let released = false;
+  const result = await publishRelease(planRelease(fakeDist(withLive(['canton-ti']))), {
+    io,
+    env: CREDS,
+    log: () => {},
+    bootstrapWaitMs: 10,
+    bootstrapRetryMs: 0,
+    sleep: async () => {
+      if (!released) {
+        io.store.delete(lockKey);
+        released = true;
+      }
+    },
+  });
+  assert.equal(released, true, 'il publisher aspetta il rilascio del bootstrap');
+  assert.deepEqual(result, { code: 0, phase: 'done', flipped: true });
 });
 
 test('edge: dopo il PUT la release nuova e\' servita intera; un purge fallito esce non-zero senza incoerenze', async () => {
