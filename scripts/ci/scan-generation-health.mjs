@@ -414,8 +414,11 @@ export const isDegradedOutcome = (status) => DEGRADED_OUTCOMES.has(String(status
  * comportamento normale del cascade, non la prova che il prompt fosse oltre
  * il tetto del roster. Per ogni run servono quindi entrambe le evidenze:
  * almeno `OVERSIZE_MIN_MODELS` modelli distinti e almeno uno skip al cap
- * massimo di pre-flight (o a un cap più alto appreso a runtime). Il valore è
- * importato dalla sorgente unica di `ai-models.mjs`, non replicato qui.
+ * massimo di pre-flight (o a un cap più alto appreso a runtime). Gli skip
+ * devono appartenere alla chiamata di generazione: il fact-checker usa lo
+ * stesso pre-flight e può superare 8000 token per ragioni indipendenti. Il
+ * valore del cap è importato dalla sorgente unica di `ai-models.mjs`, non
+ * replicato qui.
  *
  * Misurato sulle 200 run: 7 hanno prodotto salti, e i modelli distinti saltati
  * per run sono 1, 2, 2, 5, 7, 20, 22 (su 18 modelli con tetto hardcoded in
@@ -700,6 +703,57 @@ export function parseMarkerRecords(text, marker, required = []) {
 const num = (v, fallback = 0) => (Number.isFinite(Number(v)) ? Number(v) : fallback);
 const TOKEN_LIMIT_RE = /\[([^\]\s]+)\] Skipped — request would exceed (\d+)-token limit \(estimated (\d+)\)/g;
 
+// `[prompt-budget]` is emitted by the article-generation prompt builder. A
+// generic `request would exceed` line can also come from the fact-checker,
+// translations, or another LLM call later in the same workflow step, so the
+// watchdog must retain the position of the generation marker before assigning
+// a skip to `prompt-oversize`.
+const PROMPT_BUDGET_RE =
+  /\[prompt-budget\]\s+branch=(\S+)\s+section=(\S+)\s+attempt=(\d+)\s+est=(\d+)\s+budget=(\d+)\s+over=(\d+)\s+shrink=(\d+)\s+raw=(\d+)\b/g;
+const ARTICLE_GENERATED_RE = /(?:^|\s)✅\s+Articolo IT generato\b/g;
+
+function parsePromptBudgetMarkers(text) {
+  return [...String(text || '').matchAll(PROMPT_BUDGET_RE)].map((m) => ({
+    index: m.index ?? -1,
+    branch: m[1],
+    section: m[2],
+    attempt: Number(m[3]),
+    estimated: Number(m[4]),
+    budget: Number(m[5]),
+    over: m[6] === '1',
+    shrink: Number(m[7]),
+    raw: Number(m[8]),
+  }));
+}
+
+/**
+ * Keep only input-cap skips belonging to article generation.
+ *
+ * The workflow puts generation, fact-check, translation, and repair calls in
+ * one `Generate the article` step. They all use the same pre-flight log line,
+ * which made a fact-check request at 8510 tokens look like a generation
+ * prompt over the roster ceiling. Once a prompt-budget marker exists, a skip
+ * after the article-complete marker is not generation evidence. A log without
+ * the marker is legacy input and keeps the old permissive interpretation.
+ */
+function selectGenerationTokenLimitSkips(text, tokenLimitSkips, promptBudgetMarkers) {
+  if (promptBudgetMarkers.length === 0) return tokenLimitSkips;
+  const articleGeneratedAt = [...String(text || '').matchAll(ARTICLE_GENERATED_RE)]
+    .map((m) => m.index ?? -1);
+
+  return tokenLimitSkips
+    .filter((skip) => {
+      const marker = [...promptBudgetMarkers]
+        .reverse()
+        .find((candidate) => candidate.index < skip.index);
+      if (!marker) return false;
+      return !articleGeneratedAt.some(
+        (completedAt) => completedAt > marker.index && completedAt < skip.index,
+      );
+    })
+    .map(({ index, ...skip }) => skip);
+}
+
 // ── I due marker del roster. Nessuna emoji nel pattern, come in TOKEN_LIMIT_RE:
 // il log arriva da `gh run view --log` come flusso di byte e le emoji sono la
 // parte che si corrompe per prima. Il testo ASCII intorno basta a disambiguare.
@@ -772,6 +826,7 @@ export function parseCoverOutcomes(text) {
  *   totalRejections: Array<{before: number, classifierCalls: number, anchorCandidates: number, restored: number, backstop: string|null, keptAfter: number, section: string}>,
  *   evergreenSaturated: boolean, evergreenNone: boolean,
  *   tokenLimitSkips: Array<{model: string, limit: number, estimated: number}>,
+ *   generationTokenLimitSkips: Array<{model: string, limit: number, estimated: number}>,
  *   modelFailures: Array<{model: string, code: string}>,
  *   modelsTouched: string[],
  *   coverOutcomes: Array<{articleId: string, kind: 'generated'|'fallback', source: string, reason: string}>
@@ -803,6 +858,19 @@ export function parseRunLog(text) {
   // un'altra domanda da «di che sezione è questo esito»: serve solo a chi conta
   // le run (`runs`, `saturated`), e solo quando i marker di modo non si leggono.
   const section = mode ? mode[3] : (targetM ? targetM[1] : (gates[0] ? gates[0].section : null));
+  const promptBudgetMarkers = parsePromptBudgetMarkers(t);
+  const tokenLimitSkipMatches = [...t.matchAll(TOKEN_LIMIT_RE)].map((m) => ({
+    index: m.index ?? -1,
+    model: m[1],
+    limit: Number(m[2]),
+    estimated: Number(m[3]),
+  }));
+  const tokenLimitSkips = tokenLimitSkipMatches.map(({ index, ...skip }) => skip);
+  const generationTokenLimitSkips = selectGenerationTokenLimitSkips(
+    t,
+    tokenLimitSkipMatches,
+    promptBudgetMarkers,
+  );
 
   return {
     section,
@@ -833,11 +901,12 @@ export function parseRunLog(text) {
       })),
     evergreenSaturated: EVERGREEN_SATURATED_RE.test(t),
     evergreenNone: EVERGREEN_NONE_RE.test(t),
-    tokenLimitSkips: [...t.matchAll(TOKEN_LIMIT_RE)].map((m) => ({
-      model: m[1],
-      limit: Number(m[2]),
-      estimated: Number(m[3]),
-    })),
+    // Keep the complete diagnostic stream for backwards-compatible callers,
+    // but give `prompt-oversize` a phase-scoped view. The same run step hosts
+    // fact-check and translation requests, whose cap skips are not evidence
+    // about the article-generation prompt.
+    tokenLimitSkips,
+    generationTokenLimitSkips,
     // Deduplicati QUI, non da chi aggrega: la stessa riga si ripete decine di
     // volte per run (27 volte per `gpt-4.1-nano` nella run 32169621635), e un
     // chiamante che dimenticasse il `Set` conterebbe round-trip invece di
@@ -1087,14 +1156,21 @@ export function summarizeRuns(runs) {
       for (const model of billing) billingIn.set(model, (billingIn.get(model) || 0) + 1);
     }
 
-    const distinctModels = new Set(r.tokenLimitSkips.map((s) => s.model));
+    // `tokenLimitSkips` includes every pre-flight in the workflow step for
+    // diagnostics. `generationTokenLimitSkips` is the phase-scoped subset;
+    // legacy parsed records without that field deliberately fall back to the
+    // old interpretation so retained logs remain measurable.
+    const generationSkips = Array.isArray(r.generationTokenLimitSkips)
+      ? r.generationTokenLimitSkips
+      : (r.tokenLimitSkips || []);
+    const distinctModels = new Set(generationSkips.map((s) => s.model));
     // I cap bassi sono una proprietà normale del roster, non una prova che il
     // prompt sia oltre il suo limite massimo. Un record a 8000 (o oltre, se un
     // provider ha dichiarato/appreso un limite più alto) è l'unica evidenza
     // contenuta nello skip log che chiude questa ambiguità. Il confronto usa la
     // costante esportata da ai-models.mjs: il watchdog e il pre-flight non
     // possono divergere su quale sia il tetto statico più permissivo.
-    const crossedRosterCeiling = r.tokenLimitSkips.some(
+    const crossedRosterCeiling = generationSkips.some(
       (s) => s.limit >= MAX_PREFLIGHT_REQUEST_TOKENS,
     );
     if (distinctModels.size >= OVERSIZE_MIN_MODELS && crossedRosterCeiling) {
@@ -1112,7 +1188,7 @@ export function summarizeRuns(runs) {
       // fail-closed until the contract is understood.
       else if (st === 'generated') oversizeGenerated++;
     }
-    for (const s of r.tokenLimitSkips) {
+    for (const s of generationSkips) {
       if (s.estimated > maxEstimated) maxEstimated = s.estimated;
       limitsCrossed.add(s.limit);
       modelsSkipped.add(s.model);

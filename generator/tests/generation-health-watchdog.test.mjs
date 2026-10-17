@@ -142,6 +142,30 @@ const LOG_OVERSIZE = [
   'generate\tGenerate the article\t2026-08-10T12:36:06.1Z ⏭️  [gpt-4.1] Skipped — request would exceed 8000-token limit (estimated 10930)',
 ].join('\n');
 
+// Regresso dalla run 39007315482 (2026-10-17): il prompt di generazione viene
+// diviso sotto 8000 token, poi il fact-checker costruisce una richiesta da 8510
+// token e stampa gli stessi skip del pre-flight. Prima del fix il watchdog
+// attribuiva questi cinque modelli al prompt dell'articolo e riapriva #313.
+const LOG_FACT_CHECK_CAP_SKIPS = [
+  'generate\tResolve run mode and section\t2026-10-17T06:21:00.1Z event=schedule chain=false → section=frontaliere dry_run=false',
+  'generate\tGenerate the article\t2026-10-17T06:21:29.6084051Z [prompt-budget] branch=news section=frontaliere attempt=1 est=8637 budget=8000 over=0 shrink=0 raw=8637 fonte=5254ch fatti=1739ch unsat=0',
+  'generate\tGenerate the article\t2026-10-17T06:21:29.6091951Z [prompt-split] mode=auto section=frontaliere attempt=1 call=1/2 part=body est=7258 budget=8000 fonte=5254ch fatti=1739ch motivo=fuori-budget',
+  'generate\tGenerate the article\t2026-10-17T06:23:06.3624036Z   ✅ Articolo IT generato',
+  'generate\tGenerate the article\t2026-10-17T06:23:50.1Z ⏭️  [nvidia/nvidia/nemotron-3-ultra-550b-a55b] Skipped — request would exceed 8000-token limit (estimated 8510)',
+  'generate\tGenerate the article\t2026-10-17T06:23:50.2Z ⏭️  [nvidia/google/gemma-4-31b-it] Skipped — request would exceed 8000-token limit (estimated 8510)',
+  'generate\tGenerate the article\t2026-10-17T06:23:50.3Z ⏭️  [nvidia/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning] Skipped — request would exceed 8000-token limit (estimated 8510)',
+  'generate\tGenerate the article\t2026-10-17T06:23:50.4Z ⏭️  [nvidia/nvidia/nemotron-3.5-super-vl-120b-a12b] Skipped — request would exceed 8000-token limit (estimated 8510)',
+  'generate\tGenerate the article\t2026-10-17T06:23:50.5Z ⏭️  [cohere/command-a-vision-07-2025] Skipped — request would exceed 8000-token limit (estimated 8510)',
+  'generate\tGenerate the article\t2026-10-17T06:24:01.7082746Z   🔍 LLM fact-check (nvidia/nvidia/nemotron-3-ultra-550b-a55b): fallito',
+  'generate\tGenerate the article\t2026-10-17T06:24:05.1Z PRESPEND_GATE_OUTCOME emptied=0 recovered=news before=20 kept=12 status=generated section=frontaliere',
+].join('\n');
+
+const LOG_MARKED_GENERATION_SKIP = [
+  'generate\tResolve run mode and section\t2026-10-17T06:21:00.1Z event=schedule chain=false → section=frontaliere dry_run=false',
+  'generate\tGenerate the article\t2026-10-17T06:21:29.6084051Z [prompt-budget] branch=news section=frontaliere attempt=1 est=9431 budget=8000 over=1 shrink=0 raw=9431 fonte=5254ch fatti=1739ch unsat=0',
+  'generate\tGenerate the article\t2026-10-17T06:21:30.1Z ⏭️  [gpt-4.1] Skipped — request would exceed 8000-token limit (estimated 9431)',
+].join('\n');
+
 const LOG_OVERSIZE_GENERATED = [
   LOG_OVERSIZE,
   'generate\tGenerate the article\t2026-08-10T12:36:10.1Z PRESPEND_GATE_OUTCOME emptied=0 recovered=news before=20 kept=12 status=generated section=frontaliere',
@@ -345,11 +369,29 @@ describe('parseRunLog — i marker già emessi dalla pipeline', () => {
   test('estrae ogni salto per tetto di token, con modello, tetto e stima', () => {
     const r = parseRunLog(LOG_OVERSIZE);
     assert.equal(r.tokenLimitSkips.length, 6);
+    assert.equal(r.generationTokenLimitSkips.length, 6, 'il formato legacy resta misurabile');
     assert.deepEqual(r.tokenLimitSkips[0], { model: 'gpt-4.1', limit: 8000, estimated: 9431 });
     // Il nome del modello può contenere `/`: un parser che si fermasse al primo
     // separatore perderebbe l'intera famiglia groq/nvidia.
     assert.ok(r.tokenLimitSkips.some((s) => s.model === 'groq/qwen/qwen3.6-27b'));
     assert.equal(new Set(r.tokenLimitSkips.map((s) => s.model)).size, 5);
+  });
+
+  test('separa gli skip del fact-check da quelli del prompt di generazione', () => {
+    const r = parseRunLog(LOG_FACT_CHECK_CAP_SKIPS);
+    assert.equal(r.tokenLimitSkips.length, 5, 'la diagnostica completa deve restare disponibile');
+    assert.deepEqual(
+      r.generationTokenLimitSkips,
+      [],
+      'dopo Articolo IT generato gli skip appartengono al fact-check, non alla generazione',
+    );
+  });
+
+  test('mantiene gli skip che seguono un marker di budget della generazione', () => {
+    const r = parseRunLog(LOG_MARKED_GENERATION_SKIP);
+    assert.deepEqual(r.generationTokenLimitSkips, [
+      { model: 'gpt-4.1', limit: 8000, estimated: 9431 },
+    ]);
   });
 
   test('una run dry è riconosciuta come tale (non è evidenza di niente)', () => {
@@ -486,6 +528,16 @@ describe('summarizeRuns — i denominatori', () => {
     assert.equal(s.oversize.distinctModels, 5, 'la diagnostica dei modelli saltati deve restare disponibile');
     assert.equal(s.oversize.maxEstimated, 7994);
     assert.deepEqual(s.oversize.limitsCrossed, [3000, 4000]);
+  });
+
+  test('non apre prompt-oversize per skip del fact-check dopo una generazione riuscita', () => {
+    const s = summarizeRuns([
+      parseRunLog(LOG_FACT_CHECK_CAP_SKIPS),
+      parseRunLog(LOG_FACT_CHECK_CAP_SKIPS),
+    ]);
+    assert.equal(s.oversize.runs, 0, 'gli skip del fact-check non sono evidenza del prompt articolo');
+    assert.equal(s.oversize.maxEstimated, 0);
+    assert.deepEqual(s.oversize.limitsCrossed, []);
   });
 
   test('somma gli esiti senza confondere no-article, timeout e skip', () => {
