@@ -116,4 +116,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tredicesima-rendita-avs-2026',
+ category: 'pensione',
+ date: '2026-10-17T09:16:03.959Z',
+ image: '/images/blog/article-tredicesima-rendita-avs-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ];

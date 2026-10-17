@@ -33,6 +33,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.turgovia-sicurezza-lavoro-orari.title': 'Thurgovie : sécurité au travail, horaires et protection de la santé',
     'blog.article.turgovia-sicurezza-lavoro-orari.excerpt': 'Guide de la sécurité au travail, de la protection de la santé, des horaires et des périodes de repos dans le canton de Thurgovie selon la réglementation et l\'Inspection du travail.',
     'blog.article.turgovia-sicurezza-lavoro-orari.imageAlt': 'Sécurité au travail et protection de la santé dans le canton de Thurgovie',
+    'blog.article.tredicesima-rendita-avs-2026.title': '13e rente AVS versée avec la rente de décembre 2026',
+    'blog.article.tredicesima-rendita-avs-2026.excerpt': 'La 13e rente AVS est versée avec la rente de décembre 2026 Il n’est pas nécessaire de présenter une demande ou d’effectuer des démarches Elle est due',
+    'blog.article.tredicesima-rendita-avs-2026.imageAlt': 'Personne âgée en Thurgovie vérifie la rente AVS de décembre',
 };
 
 export default blogMetaCantonTgFr;
