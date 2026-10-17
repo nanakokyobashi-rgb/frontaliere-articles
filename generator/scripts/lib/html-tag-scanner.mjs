@@ -14,6 +14,11 @@ export function findHtmlTagEndOutsideQuotes(html, start) {
   return -1;
 }
 
+// Distinto da null: null significa che da `start` non inizia un tag, mentre
+// questo stato impone al walker di fermarsi invece di riprovare ogni `<`
+// contenuto nel tag aperto e ripetere la scansione fino a EOF.
+const MALFORMED_HTML_TAG = Object.freeze({ status: 'malformed' });
+
 function isHtmlWhitespace(character) {
   return character === ' ' || character === '\t' || character === '\n'
     || character === '\r' || character === '\f';
@@ -78,7 +83,9 @@ function readHtmlTagAtStatus(html, start) {
 }
 
 export function readHtmlTagAt(html, start) {
-  return readHtmlTagAtStatus(html, start)?.tag || null;
+  const result = readHtmlTagAtStatus(html, start);
+  if (result?.malformed) return MALFORMED_HTML_TAG;
+  return result?.tag || null;
 }
 
 export function nextHtmlTag(html, from = 0, skipComments = true) {
