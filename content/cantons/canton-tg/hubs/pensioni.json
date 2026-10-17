@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "pensioni",
-  "updatedAt": "2026-10-17T01:14:09.561Z",
-  "contentHash": "ac24cad7795724e04f45e46196482fdc9bd86c86e8e10d027fce0f70ea09f447",
+  "updatedAt": "2026-10-17T09:25:57.838Z",
+  "contentHash": "8e7ed3b1af76d7a08c8ba5c7f64664086eb5376815d1a820bf0963379efb5eea",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -126,39 +126,15 @@
           "updatedAt": "2026-10-05T09:44:09.891Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Turgovia: sicurezza sul lavoro, orari e tutela della salute",
-          "url": "/articoli-turgovia/turgovia-sicurezza-lavoro-orari/",
-          "excerpt": "Guida alla sicurezza sul lavoro, tutela della salute, orari e periodi di riposo nel Canton Turgovia secondo le normative e l'Ispettorato del lavoro.",
-          "date": "2026-10-17T01:07:58.510Z"
-        },
-        {
-          "title": "Kreuzlingen: Bärenplatz chiuso per la fiera",
-          "url": "/articoli-turgovia/kreuzlingen-barenplatz-chilbi/",
-          "excerpt": "A Kreuzlingen i bus sono deviati dal 25 ottobre alle 09.00 del 27; la fermata Bärenplatz va alla stazione principale.",
-          "date": "2026-10-17T00:40:57.671Z"
-        },
-        {
-          "title": "Turgovia: Sportello digitale per pratiche e documenti",
-          "url": "/articoli-turgovia/sportello-digitale-turgovia/",
-          "excerpt": "Il Digitaler Schalter del Canton Turgovia riunisce i servizi più usati, informazioni, video brevi e un'area protetta per estratti, permessi e altri documenti.",
-          "date": "2026-10-12T00:30:28.713Z"
-        },
-        {
-          "title": "Lavoro in Turgovia: aiuto alle imprese e permessi",
-          "url": "/articoli-turgovia/servizi-imprese-turgovia-rav/",
-          "excerpt": "In Turgovia i RAV di Amriswil, Frauenfeld e Kreuzlingen aiutano le imprese a trovare personale e offrono consulenza su permessi, lavoro ridotto e tutela.",
-          "date": "2026-10-12T00:12:21.272Z"
-        },
-        {
-          "title": "Sicurezza e salute sul lavoro nel Canton Turgovia",
-          "url": "/articoli-turgovia/sicurezza-lavoro-turgovia-regole/",
-          "excerpt": "La sicurezza sul lavoro previene infortuni e malattie professionali.",
-          "date": "2026-10-09T16:02:21.033Z"
+          "title": "13ª rendita AVS pagata con la pensione di dicembre 2026",
+          "url": "/articoli-turgovia/tredicesima-rendita-avs-2026/",
+          "excerpt": "La 13ª rendita AVS arriva con la rendita di dicembre 2026 Non serve presentare domande o svolgere pratiche Spetta a chi riceve una rendita AVS di vecchiaia",
+          "date": "2026-10-17T09:16:03.959Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Strumenti su tasse e pensione",
@@ -177,7 +153,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-17T01:14:09.561Z"
+      "updatedAt": "2026-10-17T09:25:57.838Z"
     },
     "en": {
       "canton": "TG",
@@ -281,39 +257,15 @@
           "updatedAt": "2026-10-05T09:44:09.891Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Thurgau: workplace safety, working hours and health protection",
-          "url": "/en/thurgau-articles/thurgovia-workplace-safety-hours/",
-          "excerpt": "Guide to occupational safety, health protection, working hours and rest periods in the Canton of Thurgau in accordance with regulations and the Labour Inspectorate.",
-          "date": "2026-10-17T01:07:58.510Z"
-        },
-        {
-          "title": "Kreuzlingen: Bärenplatz closed for the fair",
-          "url": "/en/thurgau-articles/kreuzlingen-barenplatz-fair/",
-          "excerpt": "In Kreuzlingen buses are diverted from 25 October at 09.00 on the 27th; the Bärenplatz stop goes to the main station.",
-          "date": "2026-10-17T00:40:57.671Z"
-        },
-        {
-          "title": "Thurgau: Digital portal for procedures and documents",
-          "url": "/en/thurgau-articles/thurgau-digital-counter/",
-          "excerpt": "The Digitaler Schalter of the Canton of Thurgau brings together the most frequently used services, information, short videos, and a protected area for extracts, permits, and other documents.",
-          "date": "2026-10-12T00:30:28.713Z"
-        },
-        {
-          "title": "Working in Thurgau: support for businesses and permits",
-          "url": "/en/thurgau-articles/thurgau-employer-support-permits/",
-          "excerpt": "In Thurgau, the RAV offices in Amriswil, Frauenfeld and Kreuzlingen help companies find staff and offer advice on permits, short-time work and protection.",
-          "date": "2026-10-12T00:12:21.272Z"
-        },
-        {
-          "title": "Occupational safety and health in the Canton of Thurgau",
-          "url": "/en/thurgau-articles/workplace-safety-thurgau-rules/",
-          "excerpt": "Occupational safety prevents accidents and occupational diseases.",
-          "date": "2026-10-09T16:02:21.033Z"
+          "title": "13th AVS pension paid with the December 2026 pension",
+          "url": "/en/thurgau-articles/thirteenth-ahv-pension-2026/",
+          "excerpt": "The 13th AHV pension is paid with the December 2026 pension No applications or formalities are required It is due to anyone receiving an AHV old-age pension",
+          "date": "2026-10-17T09:16:03.959Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tax and pension tools",
@@ -332,7 +284,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-17T01:14:09.561Z"
+      "updatedAt": "2026-10-17T09:25:57.838Z"
     },
     "de": {
       "canton": "TG",
@@ -436,39 +388,15 @@
           "updatedAt": "2026-10-05T09:44:09.891Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Thurgau: Arbeitssicherheit, Arbeitszeiten und Gesundheitsschutz",
-          "url": "/de/thurgau-artikel/turgau-arbeitssicherheit-arbeitszeiten/",
-          "excerpt": "Leitfaden zu Arbeitssicherheit, Gesundheitsschutz, Arbeitszeiten und Ruhezeiten im Kanton Thurgau gemäss den Vorschriften und den Vorgaben des Arbeitsinspektorats.",
-          "date": "2026-10-17T01:07:58.510Z"
-        },
-        {
-          "title": "Kreuzlingen: Bärenplatz wegen Messe geschlossen",
-          "url": "/de/thurgau-artikel/kreuzlingen-barenplatz-wegen-messe-geschlossen/",
-          "excerpt": "In Kreuzlingen werden die Busse vom 25.",
-          "date": "2026-10-17T00:40:57.671Z"
-        },
-        {
-          "title": "Thurgau: Digitaler Schalter für Anliegen und Dokumente",
-          "url": "/de/thurgau-artikel/digitaler-schalter-thurgau/",
-          "excerpt": "Der Dienst Digitaler Schalter des Kantons Thurgau bündelt die meistgenutzten Dienstleistungen, Informationen, kurze Videos und einen geschützten Bereich für Auszüge, Bewilligungen und andere Dokumente.",
-          "date": "2026-10-12T00:30:28.713Z"
-        },
-        {
-          "title": "Arbeit im Thurgau: Unterstützung für Unternehmen und Bewilligungen",
-          "url": "/de/thurgau-artikel/thurgau-arbeitgeber-rav-bewilligungen/",
-          "excerpt": "Im Thurgau helfen die RAV in Amriswil, Frauenfeld und Kreuzlingen Unternehmen dabei, Personal zu finden, und bieten Beratung zu Bewilligungen, Kurzarbeit und Arbeitsschutz.",
-          "date": "2026-10-12T00:12:21.272Z"
-        },
-        {
-          "title": "Arbeitssicherheit und Gesundheitsschutz im Kanton Thurgau",
-          "url": "/de/thurgau-artikel/arbeitssicherheit-turgau-regeln/",
-          "excerpt": "Arbeitssicherheit verhindert Unfälle und Berufskrankheiten.",
-          "date": "2026-10-09T16:02:21.033Z"
+          "title": "13 ① AHV-Rente mit Rente vom Dezember 2026 bezahlt",
+          "url": "/de/thurgau-artikel/dreizehnte-ahv-rente-2026/",
+          "excerpt": "Die 13. AHV-Rente wird zusammen mit der Dezemberrente 2026 ausbezahlt Es ist nicht nötig, einen Antrag zu stellen oder Formalitäten zu erledigen Begünstigt sind",
+          "date": "2026-10-17T09:16:03.959Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Tools zu Steuern und Vorsorge",
@@ -487,7 +415,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-17T01:14:09.561Z"
+      "updatedAt": "2026-10-17T09:25:57.838Z"
     },
     "fr": {
       "canton": "TG",
@@ -591,39 +519,15 @@
           "updatedAt": "2026-10-05T09:44:09.891Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Thurgovie : sécurité au travail, horaires et protection de la santé",
-          "url": "/fr/articles-thurgovie/thurgovie-securite-travail-horaires/",
-          "excerpt": "Guide de la sécurité au travail, de la protection de la santé, des horaires et des périodes de repos dans le canton de Thurgovie selon la réglementation et l'Inspection du travail.",
-          "date": "2026-10-17T01:07:58.510Z"
-        },
-        {
-          "title": "Kreuzlingen : Bärenplatz fermé pour le salon",
-          "url": "/fr/articles-thurgovie/kreuzlingen-barenplatz-fete/",
-          "excerpt": "À Kreuzlingen, les bus sont déviés du 25 octobre à 09h00 le 27 ; l'arrêt Bärenplatz va à la gare principale.",
-          "date": "2026-10-17T00:40:57.671Z"
-        },
-        {
-          "title": "Thurgovie : Guichet numérique pour les démarches et les documents",
-          "url": "/fr/articles-thurgovie/guichet-numerique-thurgovie/",
-          "excerpt": "Le Digitaler Schalter du canton de Thurgovie réunit les services les plus utilisés, des informations, de courtes vidéos et un espace protégé pour les extraits, permis et autres documents.",
-          "date": "2026-10-12T00:30:28.713Z"
-        },
-        {
-          "title": "Travail en Thurgovie : aide aux entreprises et permis",
-          "url": "/fr/articles-thurgovie/thurgovie-services-employeurs-permis/",
-          "excerpt": "En Thurgovie, les ORP d’Amriswil, de Frauenfeld et de Kreuzlingen aident les entreprises à trouver du personnel et proposent des conseils sur les permis, la réduction de l’horaire de travail et la protection.",
-          "date": "2026-10-12T00:12:21.272Z"
-        },
-        {
-          "title": "Sécurité et santé au travail dans le canton de Thurgovie",
-          "url": "/fr/articles-thurgovie/securite-travail-thurgovie-regles/",
-          "excerpt": "La sécurité au travail prévient les accidents et les maladies professionnelles.",
-          "date": "2026-10-09T16:02:21.033Z"
+          "title": "13e rente AVS versée avec la rente de décembre 2026",
+          "url": "/fr/articles-thurgovie/treizieme-rente-avs-2026/",
+          "excerpt": "La 13e rente AVS est versée avec la rente de décembre 2026 Il n’est pas nécessaire de présenter une demande ou d’effectuer des démarches Elle est due",
+          "date": "2026-10-17T09:16:03.959Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Outils impôts et retraite",
@@ -642,7 +546,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-17T01:14:09.561Z"
+      "updatedAt": "2026-10-17T09:25:57.838Z"
     }
   }
 }
