@@ -14,7 +14,7 @@ const blogMetaCantonSzFr: Record<string, string> = {
     'blog.article.esercitazione-militare-sihlsee-ottobre-2026.imageAlt': 'Zone du barrage du Sihlsee à Egg pendant l\'exercice militaire d\'octobre 2026',
     'blog.article.kuessnacht-rete-teleriscaldamento.title': 'Küssnacht étend son réseau à Immensee, Fänn et Adligenswil',
     'blog.article.kuessnacht-rete-teleriscaldamento.excerpt': 'Küssnacht vise à éliminer progressivement les combustibles fossiles grâce à la planification énergétique municipale et à l\'extension du réseau vers Immensee, Fänn et Adligenswil.',
-    'blog.article.kuessnacht-rete-teleriscaldamento.imageAlt': 'Küssnacht étend le réseau de chauffage à distance vers Immensee, Fänn et Adligenswil',
+    'blog.article.kuessnacht-rete-teleriscaldamento.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonSzFr;

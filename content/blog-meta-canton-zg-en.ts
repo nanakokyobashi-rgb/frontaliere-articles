@@ -17,7 +17,7 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.scuola-sternmatt-ia-2026.imageAlt': 'Illustration generated for this article',
     'blog.article.zuger-rapporto-gestione-2025.title': 'Zuger Pensionskasse: 2025 report now online',
     'blog.article.zuger-rapporto-gestione-2025.excerpt': 'The 2025 annual report of the Zuger Pensionskasse provides an overview of the completed financial year and refers to the 2025 annual financial statements for further information.',
-    'blog.article.zuger-rapporto-gestione-2025.imageAlt': '2025 annual report of the Zuger Pensionskasse',
+    'blog.article.zuger-rapporto-gestione-2025.imageAlt': 'Illustration generated for this article',
     'blog.article.zugo-revisione-legge-edilizia-2026.title': 'Partial revision of the PBG in Zug: consultation from September 17, 2026',
     'blog.article.zugo-revisione-legge-edilizia-2026.excerpt': 'The Canton of Zug launches the consultation on the revision of the PBG to create more affordable housing and simplify building procedures.',
     'blog.article.zugo-revisione-legge-edilizia-2026.imageAlt': 'New building law revision in Canton Zug',
