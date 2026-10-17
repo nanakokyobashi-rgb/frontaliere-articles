@@ -8062,6 +8062,7 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
   const stack = [];
   let malformed = false;
   let implicitHead = false;
+  let afterHead = false;
   let sawHtml = false;
 
   const emitEnd = (entry, end, implicit) => {
@@ -8093,6 +8094,13 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
     }
     if (onText) onText({ text, start, end, stack: stack.slice() });
     if (closesImplicitHead) implicitHead = false;
+    if (
+      /\S/u.test(text) &&
+      afterHead &&
+      stack.length === 1 &&
+      stack[0]?.name === 'html' &&
+      stack[0]?.namespace === 'html'
+    ) afterHead = false;
   };
 
   while (cursor < html.length) {
@@ -8132,8 +8140,10 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
       if (tag.name === 'html' && stack.length === 0 && !sawHtml) {
         sawHtml = true;
         implicitHead = true;
+        afterHead = false;
       } else if (tag.name === 'head' || tag.name === 'body') {
         implicitHead = false;
+        afterHead = false;
       } else if (
         implicitHead
         && stack.length === 1
@@ -8143,6 +8153,13 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
       ) {
         implicitHead = false;
       }
+      if (
+        afterHead &&
+        stack.length === 1 &&
+        stack[0]?.name === 'html' &&
+        stack[0]?.namespace === 'html' &&
+        !SOURCE_HTML_HEAD_ELEMENTS.has(tag.name)
+      ) afterHead = false;
       const implicitIndex = sourceImplicitCloseIndex(stack, tag.name);
       if (implicitIndex >= 0) popThrough(implicitIndex, start, true);
     } else if (tag.closing && namespace === 'html' && tag.name === 'html') {
@@ -8162,7 +8179,8 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
       // Keep its contents from being mistaken for forbidden head containers.
       || (namespace === 'html' && tag.name === 'noscript'
         && ((stack.at(-1)?.name === 'head' && stack.at(-1)?.namespace === 'html')
-          || (implicitHead && stack.at(-1)?.name === 'html' && stack.at(-1)?.namespace === 'html')))
+          || ((implicitHead || afterHead)
+            && stack.at(-1)?.name === 'html' && stack.at(-1)?.namespace === 'html')))
     );
 
     if (isRawTextElement) {
@@ -8195,6 +8213,15 @@ function sourceScanStructure(html, { recoverMalformed = false, onStart, onEnd, o
         cursor = tag.end + 1;
         continue;
       }
+      if (
+        namespace === 'html' &&
+        tag.name === 'head' &&
+        (matchingIndex === 0 || (
+          matchingIndex === 1 &&
+          stack[0]?.name === 'html' &&
+          stack[0]?.namespace === 'html'
+        ))
+      ) afterHead = true;
       stack[matchingIndex].sourceCloseStart = start;
       popThrough(matchingIndex, tag.end + 1, false, start);
       cursor = tag.end + 1;
@@ -8270,6 +8297,39 @@ function sourceActivateBodyNoscript(html) {
   return activated;
 }
 
+function sourceRemoveInactiveSubtrees(html) {
+  const src = String(html || '');
+  if (!src) return src;
+
+  const removals = [];
+  const scan = sourceScanStructure(src, {
+    onStart: ({ tag, start, end, namespace, isVoid, parent, entry, rawText, rawTextEnd }) => {
+      const inactive = entry?.inactive ?? sourceTagIsInactive(src, tag, namespace, parent);
+      if (!inactive || parent?.inactive) return;
+      if (rawText) {
+        removals.push([start, rawTextEnd]);
+      } else if (namespace === 'html' && tag.name === 'template') {
+        const templateEnd = sourceSkipTemplate(src, end);
+        if (templateEnd >= 0) removals.push([start, templateEnd]);
+      } else if (isVoid) {
+        removals.push([start, end]);
+      } else if (entry) {
+        entry.removeInactiveSubtree = true;
+      }
+    },
+    onEnd: ({ entry, end }) => {
+      if (entry?.removeInactiveSubtree) removals.push([entry.start, end]);
+    },
+  });
+
+  if (scan.malformed || removals.length === 0) return src;
+  let cleaned = src;
+  for (const [start, end] of removals.sort((a, b) => b[0] - a[0])) {
+    cleaned = cleaned.slice(0, start) + cleaned.slice(end);
+  }
+  return cleaned;
+}
+
 function findActiveSourceHead(html) {
   let sawHtml = false;
   let sawHead = false;
@@ -8277,59 +8337,105 @@ function findActiveSourceHead(html) {
   let documentLevel = true;
   let implicitHead = false;
   let implicitHeadContainer = null;
+  let implicitHeadStart = null;
   let headState = null;
   let trustedHead = null;
   let bodyState = null;
   const ldBlocks = [];
+  const afterHeadExtensions = [];
+
+  const closeImplicitHead = (end) => {
+    if (implicitHead && documentLevel && implicitHeadContainer && implicitHeadStart != null) {
+      trustedHead = {
+        start: implicitHeadStart,
+        end,
+        closed: false,
+        implicit: true,
+        container: implicitHeadContainer,
+      };
+      sawHead = true;
+    }
+    implicitHead = false;
+    implicitHeadContainer = null;
+    implicitHeadStart = null;
+  };
 
   const failClosed = () => {
     documentLevel = false;
     implicitHead = false;
     implicitHeadContainer = null;
+    implicitHeadStart = null;
     if (headState) headState.trusted = false;
     if (bodyState) bodyState.trusted = false;
   };
 
   const scan = sourceScanStructure(html, {
-    onText: ({ text, stack }) => {
+    onText: ({ text, start, stack }) => {
       if (
         bodyState?.implicit &&
         bodyState.trusted &&
         /\S/u.test(text) &&
         stack.length === 1 &&
         stack[0] === bodyState.entry
-      ) sawBody = true;
+      ) {
+        sawBody = true;
+        bodyState.afterHead = false;
+      }
       if (
         !implicitHead ||
         !/\S/u.test(text) ||
         stack.length !== 1 ||
         stack[0] !== implicitHeadContainer
       ) return;
+      const container = implicitHeadContainer;
+      closeImplicitHead(start);
       bodyState = {
-        entry: implicitHeadContainer,
+        entry: container,
         trusted: true,
         implicit: true,
+        afterHead: false,
       };
       sawBody = true;
-      implicitHead = false;
-      implicitHeadContainer = null;
     },
     onStart: ({ tag, start, namespace, isVoid, parent, stack, entry, rawTextEnd, rawText }) => {
+      const afterHeadElement = Boolean(
+        trustedHead &&
+        bodyState?.implicit &&
+        bodyState.afterHead &&
+        bodyState.trusted &&
+        !sawBody &&
+        namespace === 'html' &&
+        SOURCE_HTML_HEAD_ELEMENTS.has(tag.name) &&
+        tag.name !== 'head' &&
+        tag.name !== 'body' &&
+        parent === trustedHead.container &&
+        stack.length === (trustedHead.container ? 1 : 0)
+      );
       if (
         bodyState?.implicit &&
         bodyState.trusted &&
         parent === bodyState.entry &&
-        tag.name !== 'body'
-      ) sawBody = true;
+        tag.name !== 'body' &&
+        !afterHeadElement
+      ) {
+        sawBody = true;
+        bodyState.afterHead = false;
+      }
       if (namespace === 'html' && tag.name === 'html') {
         if (sawHtml || stack.length !== 0 || isVoid) {
           failClosed();
         } else {
           implicitHead = true;
           implicitHeadContainer = entry;
+          implicitHeadStart = tag.end + 1;
         }
         sawHtml = true;
       } else if (namespace === 'html' && tag.name === 'head') {
+        if (implicitHead) {
+          implicitHead = false;
+          implicitHeadContainer = null;
+          implicitHeadStart = null;
+        }
         const directDocumentHead =
           !sawHead && !sawBody && (stack.length === 0 || (
             stack.length === 1 && parent?.name === 'html' && parent.namespace === 'html'
@@ -8351,6 +8457,7 @@ function findActiveSourceHead(html) {
         };
         sawHead = true;
       } else if (namespace === 'html' && tag.name === 'body') {
+        if (implicitHead) closeImplicitHead(start);
         const directDocumentBody =
           !sawBody && (stack.length === 0 || (
             stack.length === 1 && parent?.name === 'html' && parent.namespace === 'html'
@@ -8362,6 +8469,7 @@ function findActiveSourceHead(html) {
           entry,
           trusted: directDocumentBody && !isVoid,
           implicit: false,
+          afterHead: false,
         };
         sawBody = true;
       } else if (
@@ -8369,6 +8477,7 @@ function findActiveSourceHead(html) {
         stack.length === 1 && parent?.name === 'html' && parent.namespace === 'html' &&
         namespace === 'html' && !SOURCE_HTML_HEAD_ELEMENTS.has(tag.name)
       ) {
+        closeImplicitHead(start);
         // Both head and body start tags are optional. Once body content begins
         // directly below <html>, model the parser's implied body so a later
         // direct-child JSON-LD block remains part of the trusted document.
@@ -8376,10 +8485,9 @@ function findActiveSourceHead(html) {
           entry: parent,
           trusted: true,
           implicit: true,
+          afterHead: false,
         };
         sawBody = true;
-        implicitHead = false;
-        implicitHeadContainer = null;
       } else if (stack.length === 0 && !(bodyState?.implicit
         && bodyState.trusted && parent === bodyState.entry)) {
         // A top-level article/div/etc. is a fragment, not a document body. Do
@@ -8396,6 +8504,17 @@ function findActiveSourceHead(html) {
         failClosed();
       }
 
+      if (afterHeadElement) {
+        if (rawText) {
+          afterHeadExtensions.push(html.slice(start, rawTextEnd));
+        } else if (namespace === 'html' && tag.name === 'template') {
+          const templateEnd = sourceSkipTemplate(html, tag.end + 1);
+          if (templateEnd >= 0) afterHeadExtensions.push(html.slice(start, templateEnd));
+        } else if (isVoid) {
+          afterHeadExtensions.push(html.slice(start, tag.end + 1));
+        }
+      }
+
       if (
         rawText &&
         tag.name === 'script' &&
@@ -8406,6 +8525,7 @@ function findActiveSourceHead(html) {
           stack.length === 1 &&
           parent === implicitHeadContainer
         )) &&
+        !afterHeadElement &&
         !sourceTagIsInactive(html, tag, namespace, parent)
       ) {
         ldBlocks.push(html.slice(start, rawTextEnd));
@@ -8418,6 +8538,9 @@ function findActiveSourceHead(html) {
             start: headState.start,
             end,
             closed: !implicit,
+            implicit: false,
+            container: headState.container,
+            closeStart: entry.sourceCloseStart,
           };
           if (!sawBody) {
             // The body start tag is optional in HTML. After a trusted head
@@ -8427,14 +8550,15 @@ function findActiveSourceHead(html) {
               entry: headState.container,
               trusted: true,
               implicit: true,
+              afterHead: true,
             };
           }
         }
         headState = null;
       }
       if (implicitHeadContainer === entry) {
-        implicitHead = false;
-        implicitHeadContainer = null;
+        const endBeforeHtmlClose = entry.sourceCloseStart ?? end;
+        closeImplicitHead(endBeforeHtmlClose);
       }
       if (bodyState?.entry === entry) bodyState = null;
     },
@@ -8448,6 +8572,7 @@ function findActiveSourceHead(html) {
     documentLevel: trustedDocument,
     trustedDocument: trustedDocument || (!hasDocumentScaffold && !scan.malformed),
     ldBlocks: trustedDocument ? ldBlocks : [],
+    afterHeadExtensions: trustedDocument ? afterHeadExtensions : [],
   };
 }
 
@@ -8523,10 +8648,21 @@ export function isolateMainSourceHtml(html) {
   }
   if (!chosen) return { html: src, root: 'none', isolated: false, trustedDocument: true };
 
-  const head = headScan.bounds
-    ? src.slice(headScan.bounds.start, headScan.bounds.end)
-      + (headScan.bounds.closed ? '' : '</head>')
-    : '';
+  let head = '';
+  if (headScan.bounds) {
+    const { start, end, closed, implicit, closeStart } = headScan.bounds;
+    const contents = src.slice(start, end);
+    if (implicit) {
+      head = `<head>${contents}${headScan.afterHeadExtensions.join('')}</head>`;
+    } else if (closed && closeStart != null) {
+      const closeOffset = closeStart - start;
+      head = contents.slice(0, closeOffset)
+        + headScan.afterHeadExtensions.join('')
+        + contents.slice(closeOffset);
+    } else {
+      head = contents + headScan.afterHeadExtensions.join('') + '</head>';
+    }
+  }
   // I blocchi JSON-LD nel body si riportano solo quando lo scanner li ha
   // riconosciuti come figli diretti di un body document-level. La raccolta
   // globale non distingue commenti, template e markup stale della sidebar.
@@ -8534,6 +8670,7 @@ export function isolateMainSourceHtml(html) {
     ? headScan.ldBlocks.filter((block) => !head.includes(block) && !chosen.includes(block))
     : [];
 
+  chosen = sourceRemoveInactiveSubtrees(chosen);
   const isolatedHtml = `<!doctype html><html>${head}<body>${ldBlocks.join('')}${chosen}</body></html>`;
   return {
     html: sourceActivateBodyNoscript(isolatedHtml),

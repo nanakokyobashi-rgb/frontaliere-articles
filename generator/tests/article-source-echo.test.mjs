@@ -377,6 +377,52 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(res.html.includes('IMPLICIT_BODY_ONLY_ACTIVE'));
   });
 
+  it('conserva title e meta in un head implicito', () => {
+    const implicitHead = '<html><title>Fonte senza head esplicito</title>'
+      + '<meta property="article:published_time" content="2026-10-17T09:30:00+02:00">'
+      + `<article>${ARTICLE_PROSE}</article></html>`;
+    const res = isolateMainSourceHtml(implicitHead);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.ok(res.html.includes('<head><title>Fonte senza head esplicito</title>'));
+    assert.ok(res.html.includes('content="2026-10-17T09:30:00+02:00"'));
+  });
+
+  it('mantiene nel head i tag consentiti dopo la sua chiusura', () => {
+    const afterHead = '<html><head><title>Fonte valida</title></head>'
+      + '<script>window.HEAD_AFTER_CLOSE = true;</script>'
+      + '<meta name="description" content="HEAD_META_AFTER_CLOSE">'
+      + '<link rel="canonical" href="https://example.test/article">'
+      + '<style>.head-after-close { color: red }</style>'
+      + '<template><meta name="template-head" content="HEAD_TEMPLATE_AFTER_CLOSE"></template>'
+      + '<body>' + `<article>${ARTICLE_PROSE}</article></body></html>`;
+    const res = isolateMainSourceHtml(afterHead);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    for (const marker of [
+      'HEAD_AFTER_CLOSE',
+      'HEAD_META_AFTER_CLOSE',
+      'https://example.test/article',
+      '.head-after-close',
+      'HEAD_TEMPLATE_AFTER_CLOSE',
+    ]) assert.ok(res.html.includes(marker), marker);
+  });
+
+  it('rimuove i sottalberi head inattivi dalla radice editoriale scelta', () => {
+    const nestedHead = '<html><head><title>Fonte valida</title></head><body><article>'
+      + '<head><script type="application/ld+json">'
+      + '{"headline":"STALE_NESTED_HEAD_JSON_LD","articleBody":"STALE_BODY"}'
+      + '</script></head>'
+      + ARTICLE_PROSE + '</article></body></html>';
+    const res = isolateMainSourceHtml(nestedHead);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.equal(res.html.includes('STALE_NESTED_HEAD_JSON_LD'), false);
+    assert.equal(res.html.includes('STALE_BODY'), false);
+    assert.equal(res.html.includes('<head><script'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
   it('rifiuta un body esplicito dopo contenuto nel body implicito', () => {
     const repeatedBody = '<html><head></head>'
       + `<article>${ARTICLE_PROSE}</article>`
