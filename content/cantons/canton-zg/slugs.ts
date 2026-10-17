@@ -8,6 +8,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'baar-rinnovo-comunale-2027': { it: 'baar-rinnovo-comunale-2027', en: 'baar-municipal-council-renewal', de: 'baar-erneuerung-gemeinderat', fr: 'baar-renouvellement-conseil' },
  'scuola-sternmatt-ia-2026': { it: 'scuola-sternmatt-ia-2026', en: 'sternmatt-school-ai-2026', de: 'sternmatt-schule-ki-2026', fr: 'ecole-sternmatt-ia-2026' },
  'zuger-rapporto-gestione-2025': { it: 'zuger-rapporto-gestione-2025', en: 'zuger-annual-report-2025', de: 'zuger-geschaeftsbericht-2025', fr: 'zuger-rapport-gestion-2025' },
+ 'zugo-revisione-legge-edilizia-2026': { it: 'zugo-revisione-legge-edilizia-2026', en: 'zug-building-law-revision-2026', de: 'zug-baugesetz-revision-2026', fr: 'zoug-revision-loi-construction-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

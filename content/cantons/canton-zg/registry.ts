@@ -61,4 +61,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'zugo-revisione-legge-edilizia-2026',
+ category: 'novita',
+ date: '2026-10-17T01:12:22.654Z',
+ image: '/images/blog/article-zugo-revisione-legge-edilizia-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

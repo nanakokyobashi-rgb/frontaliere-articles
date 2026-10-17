@@ -18,6 +18,9 @@ const blogMetaCantonZgIt: Record<string, string> = {
     'blog.article.zuger-rapporto-gestione-2025.title': 'Zuger Pensionskasse: online il rapporto 2025',
     'blog.article.zuger-rapporto-gestione-2025.excerpt': 'Il Geschäftsbericht 2025 della Zuger Pensionskasse offre una panoramica sull\'esercizio concluso e rinvia alla Jahresrechnung 2025 per ulteriori informazioni.',
     'blog.article.zuger-rapporto-gestione-2025.imageAlt': 'Rapporto di gestione 2025 della Zuger Pensionskasse',
+    'blog.article.zugo-revisione-legge-edilizia-2026.title': 'Revisione parziale del PBG a Zugo: consultazione dal 17 settembre 2026',
+    'blog.article.zugo-revisione-legge-edilizia-2026.excerpt': 'Il Cantone di Zugo avvia la consultazione sulla revisione del PBG per creare più alloggi a prezzi accessibili e semplificare le procedure edilizie.',
+    'blog.article.zugo-revisione-legge-edilizia-2026.imageAlt': 'Nuova revisione della legge edilizia nel Cantone di Zugo',
 };
 
 export default blogMetaCantonZgIt;
