@@ -25,6 +25,9 @@ test('il contratto ripara solo le destinazioni legacy con una mappatura pubblica
   assert.equal(canonicalArticleLinkTarget('discovery://orphan/example'), null);
   assert.equal(canonicalArticleLinkTarget('https://'), null);
   assert.equal(canonicalArticleLinkTarget('http://?missing-host'), null);
+  assert.equal(canonicalArticleLinkTarget(String.raw`/\evil`), null);
+  assert.equal(canonicalArticleLinkTarget(`/bad${String.fromCharCode(1)}path`), null);
+  assert.equal(canonicalArticleLinkTarget(`#bad${String.fromCharCode(127)}`), null);
   assert.equal(canonicalArticleLinkTarget('link al calcolatore'), null);
 });
 
@@ -35,10 +38,15 @@ test('la sanitizzazione conserva il testo e non indovina URL sconosciute', () =>
     '[Statistiche](statistiche/)',
     '[Affitti](border:rental)',
     '[Link senza host](https://)',
+    '[Link\nmultilinea](relative/path)',
   ].join(' ');
   assert.equal(
     sanitizeArticleMarkdownLinks(source, 'it'),
-    '[Calcolatore](nav:calculator) [Costo della vita](nav:cost-of-living) [Statistiche](/statistiche/) Affitti Link senza host',
+    '[Calcolatore](nav:calculator) [Costo della vita](nav:cost-of-living) [Statistiche](/statistiche/) Affitti Link senza host Link\nmultilinea',
+  );
+  assert.deepEqual(
+    findNonCanonicalArticleLinks('[Link\nmultilinea](relative/path)').map(({ label, target, replacement }) => ({ label, target, replacement })),
+    [{ label: 'Link\nmultilinea', target: 'relative/path', replacement: null }],
   );
 });
 
@@ -62,13 +70,15 @@ test('la sanitizzazione valida href HTML e rimuove gli attributi duplicati', () 
   const source = '<a class="article" href="calculator">Calcola</a> '
     + '<a href="relative/path">Relativo</a> '
     + '<a href="/en/legal">Canonico</a> '
-    + '<a href="relative/path" href="/en/legal">Duplicato</a>';
+    + '<a href="relative/path" href="/en/legal">Duplicato</a> '
+    + '<a href="nav:calculator">Azione</a>';
   assert.equal(
     sanitizeArticleMarkdownLinks(source, 'it'),
-    '<a class="article" href="nav:calculator">Calcola</a> '
+    '<a class="article">Calcola</a> '
       + '<a>Relativo</a> '
       + '<a href="/en/legal">Canonico</a> '
-      + '<a>Duplicato</a>',
+      + '<a>Duplicato</a> '
+      + '<a>Azione</a>',
   );
   assert.deepEqual(
     findNonCanonicalArticleLinks(source, 'it').map(({ target, replacement, htmlAnchor }) => ({
@@ -77,9 +87,10 @@ test('la sanitizzazione valida href HTML e rimuove gli attributi duplicati', () 
       htmlAnchor,
     })),
     [
-      { target: 'calculator', replacement: 'nav:calculator', htmlAnchor: true },
+      { target: 'calculator', replacement: null, htmlAnchor: true },
       { target: 'relative/path', replacement: null, htmlAnchor: true },
       { target: 'relative/path', replacement: null, htmlAnchor: true },
+      { target: 'nav:calculator', replacement: null, htmlAnchor: true },
     ],
   );
 });

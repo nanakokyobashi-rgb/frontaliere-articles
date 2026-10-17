@@ -67,7 +67,9 @@ function closingBracket(source, start) {
       if (depth === 0) return index;
       depth -= 1;
     } else if (char === '\n') {
-      return -1;
+      const nextLineEnd = source.indexOf('\n', index + 1);
+      const nextLine = source.slice(index + 1, nextLineEnd < 0 ? source.length : nextLineEnd);
+      if (!nextLine.trim()) return -1;
     }
   }
   return -1;
@@ -441,9 +443,18 @@ export function canonicalArticleLinkTarget(rawTarget, locale = 'it') {
 
   // Root-relative and fragment links are already anchored to the public site
   // rather than to the article directory. Protocol-relative URLs are denied.
-  if (/^(?:\/(?!\/)|#)/.test(target)) return target;
+  if (/^(?:\/(?!\/)|#)/.test(target)) {
+    return /[\\\u0000-\u001f\u007f]/.test(target) ? null : target;
+  }
 
   return null;
+}
+
+function canonicalArticleLinkOccurrenceTarget(link, locale) {
+  const canonical = canonicalArticleLinkTarget(link.target, locale);
+  // The site renderer supports nav: only in Markdown links, never in literal
+  // HTML anchors. Removing such hrefs keeps the gate and writer consistent.
+  return link.htmlAnchor && canonical?.startsWith('nav:') ? null : canonical;
 }
 
 /**
@@ -455,7 +466,7 @@ export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
   let output = '';
   let copiedThrough = 0;
   for (const link of articleLinks(source, { skipCode: true })) {
-    const canonical = canonicalArticleLinkTarget(link.target, locale);
+    const canonical = canonicalArticleLinkOccurrenceTarget(link, locale);
     const duplicateAnchorHref = link.htmlAnchor && link.hrefAttributes.length > 1;
     if (canonical === link.target && !link.angle && !duplicateAnchorHref) continue;
 
@@ -492,7 +503,7 @@ export function findNonCanonicalArticleLinks(source, locale = 'it') {
   const offenders = [];
   const input = String(source ?? '');
   for (const link of articleLinks(input, { skipCode: true })) {
-    const canonical = canonicalArticleLinkTarget(link.target, locale);
+    const canonical = canonicalArticleLinkOccurrenceTarget(link, locale);
     const duplicateAnchorHref = link.htmlAnchor && link.hrefAttributes.length > 1;
     if (canonical === link.target && !link.angle && !duplicateAnchorHref) continue;
     offenders.push({
