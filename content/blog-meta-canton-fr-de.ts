@@ -21,6 +21,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.frontalieri-friburgo-giugno-2026.title': 'Freiburg: 2140 ausländische Grenzgänger Ende Juni 2026',
     'blog.article.frontalieri-friburgo-giugno-2026.excerpt': 'Freiburg zählte Ende Juni 2026 2140 ausländische Grenzgänger: +940 seit 2021 und +280 im letzten Jahr, laut den von SSD und OFS veröffentlichten Daten.',
     'blog.article.frontalieri-friburgo-giugno-2026.imageAlt': 'Pendler auf einer Strasse im Kanton Freiburg an einem Arbeitstag',
+    'blog.article.friburgo-deduzioni-carburante.title': 'Treibstoffe: Kanton will Abzüge nicht erhöhen',
+    'blog.article.friburgo-deduzioni-carburante.excerpt': 'Diesel übersteigt CHF 2,40 pro Liter.',
+    'blog.article.friburgo-deduzioni-carburante.imageAlt': 'Auto im Kanton Freiburg',
 };
 
 export default blogMetaCantonFrDe;
