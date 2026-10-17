@@ -6177,7 +6177,7 @@
       "reason": "Contratto del writer e del gate di pubblicazione per canonicalizzare i link Markdown prima che i body del corpus siano serviti al sito. Il sito consuma JSON via HTTP e non genera né conserva i sorgenti content/blog-body.",
       "baseline": {
         "site": null,
-        "corpus": "ea104aa12fc36177",
+        "corpus": "506d335c314dc561",
         "alignedAt": "2026-10-17"
       }
     }
