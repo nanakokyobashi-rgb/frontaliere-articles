@@ -8205,6 +8205,15 @@ function sourceScanStructure(html, {
         implicitHeadHasContent = false;
         afterHead = false;
       } else if (tag.name === 'head' || tag.name === 'body' || bodyNoscriptAfterHead) {
+        if (
+          tag.name === 'body' &&
+          implicitHead &&
+          stack.length === 1 &&
+          stack[0]?.name === 'html' &&
+          stack[0]?.namespace === 'html'
+        ) {
+          onImplicitHeadEnd?.({ start, end: tag.end + 1, container: stack[0] });
+        }
         implicitHead = false;
         afterHead = false;
       } else if (
@@ -8660,6 +8669,7 @@ function findActiveSourceHead(html) {
           entry,
           trusted: directDocumentBody && !isVoid,
           implicit: false,
+          documentContainer: directDocumentBody ? parent : null,
           afterHead: false,
         };
         sawBody = true;
@@ -8757,7 +8767,27 @@ function findActiveSourceHead(html) {
         const endBeforeHtmlClose = entry.sourceCloseStart ?? end;
         closeImplicitHead(endBeforeHtmlClose);
       }
-      if (bodyState?.entry === entry) bodyState = null;
+      if (bodyState?.entry === entry) {
+        if (
+          !implicit &&
+          entry.name === 'body' &&
+          entry.namespace === 'html' &&
+          bodyState.trusted &&
+          bodyState.documentContainer
+        ) {
+          // HTML reprocesses tokens after </body> in the body insertion mode
+          // until </html>; retain that trusted document context for JSON-LD.
+          bodyState = {
+            ...bodyState,
+            entry: bodyState.documentContainer,
+            implicit: true,
+            afterHead: false,
+            afterBody: true,
+          };
+        } else {
+          bodyState = null;
+        }
+      }
     },
   });
 

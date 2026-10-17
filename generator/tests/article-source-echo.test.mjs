@@ -168,6 +168,19 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(res.html.includes('"datePublished":"2026-06-12"'));
   });
 
+  it('chiude il head implicito prima di un body esplicito e conserva title e meta', () => {
+    const page2 = '<html><meta property="article:published_time" content="2026-06-12">'
+      + '<title>IMPLICIT_HEAD_TITLE_BEFORE_EXPLICIT_BODY</title>'
+      + '<body><main><article>' + ARTICLE_PROSE + '</article></main>'
+      + '<script type="application/ld+json">{"articleBody":"EXPLICIT_BODY_JSONLD"}</script>'
+      + '</body></html>';
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('article:published_time'));
+    assert.ok(res.html.includes('IMPLICIT_HEAD_TITLE_BEFORE_EXPLICIT_BODY'));
+    assert.ok(res.html.includes('EXPLICIT_BODY_JSONLD'));
+  });
+
   it('non tronca l’head su un </head> letterale dentro JSON-LD o script', () => {
     const pageWithLiteralBoundary = '<html><head>'
       + '<script type="application/ld+json">{"description":"testo </head> incorporato"}</script>'
@@ -185,6 +198,15 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     const res = isolateMainSourceHtml(page2);
     assert.equal(res.isolated, true);
     assert.ok(res.html.includes('"articleBody":"corpo"'));
+  });
+
+  it('riattiva il contesto body per JSON-LD dopo </body> e prima di </html>', () => {
+    const page2 = `<html><head><title>Pagina</title></head><body><main><article>${ARTICLE_PROSE}</article></main></body>`
+      + '<script type="application/ld+json">{"articleBody":"AFTER_BODY_REPROCESSED_JSONLD"}</script>'
+      + '</html>';
+    const res = isolateMainSourceHtml(page2);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('AFTER_BODY_REPROCESSED_JSONLD'));
   });
 
   it('riattiva JSON-LD attivo sotto qualunque discendente non inattivo del body', () => {
