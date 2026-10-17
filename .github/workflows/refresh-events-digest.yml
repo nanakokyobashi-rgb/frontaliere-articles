@@ -139,7 +139,7 @@ jobs:
           # `http.https://github.com/.extraheader`, and that header takes
           # PRECEDENCE over credentials embedded in a push URL. So the push
           # below authenticated as GITHUB_TOKEN — which this job grants only
-          # `contents: read` — instead of as GITHUB_PAT, and was rejected five
+          # `contents: read` — instead of as GITHUB_PAT_NANAKO, and was rejected five
           # times over. The article had already been generated and committed
           # locally by then, so it was simply lost.
           persist-credentials: false
@@ -278,40 +278,68 @@ jobs:
           else
             CANTON_LIST="${{ steps.mode.outputs.cantons }}"
             SECTION_LIST="${{ steps.mode.outputs.sections }}"
+            IFS=',' read -r -a CANTONS <<< "$CANTON_LIST"
+            IFS=',' read -r -a SECTIONS <<< "$SECTION_LIST"
+
             # data/events.json is gitignored: it is a fetched cache of another
             # repo's dataset, and committing 1.9 MB of it per run would be noise.
             # Explicitly stage only this digest's registration/body output.
             # Registration markers are runner-local and ignored.
-            IFS=',' read -r -a CANTONS <<< "$CANTON_LIST"
-            IFS=',' read -r -a SECTIONS <<< "$SECTION_LIST"
-            for i in "${!CANTONS[@]}"; do
-              CANTON="${CANTONS[$i]}"
-              SECTION="${SECTIONS[$i]-}"
-              if [ -z "$SECTION" ]; then
-                COMMIT_MESSAGE="Refresh the weekend events digest"
-                git add content/blog-body/it/eventi-weekend-ticino.ts \
-                        content/blog-body/en/eventi-weekend-ticino.ts \
-                        content/blog-body/de/eventi-weekend-ticino.ts \
-                        content/blog-body/fr/eventi-weekend-ticino.ts \
-                        content/blog-articles-data.ts \
-                        content/seo/seo-blog-5.ts
-              else
-                COMMIT_MESSAGE="Add canton weekend events digest(s)"
-                git add "content/blog-body-$SECTION/" \
-                        "content/blog-meta-$SECTION-it.ts" \
-                        "content/blog-meta-$SECTION-en.ts" \
-                        "content/blog-meta-$SECTION-de.ts" \
-                        "content/blog-meta-$SECTION-fr.ts" \
-                        "content/cantons/$SECTION/"
-              fi
-            done
+            stage_digest_outputs() {
+              git reset --quiet
+              COMMIT_MESSAGE="Refresh the weekend events digest"
+              for i in "${!CANTONS[@]}"; do
+                SECTION="${SECTIONS[$i]-}"
+                if [ -z "$SECTION" ]; then
+                  git add content/blog-body/it/eventi-weekend-ticino.ts \
+                          content/blog-body/en/eventi-weekend-ticino.ts \
+                          content/blog-body/de/eventi-weekend-ticino.ts \
+                          content/blog-body/fr/eventi-weekend-ticino.ts \
+                          content/blog-articles-data.ts \
+                          content/seo/seo-blog-5.ts
+                else
+                  COMMIT_MESSAGE="Add canton weekend events digest(s)"
+                  git add "content/blog-body-$SECTION/" \
+                          "content/blog-meta-$SECTION-it.ts" \
+                          "content/blog-meta-$SECTION-en.ts" \
+                          "content/blog-meta-$SECTION-de.ts" \
+                          "content/blog-meta-$SECTION-fr.ts" \
+                          "content/cantons/$SECTION/"
+                fi
+              done
+            }
+
+            # A digest batch writes shared section registries. Other article
+            # workflows can advance main between generation and push, so a
+            # rebase of the already-generated commit is not safe: it conflicts
+            # on those registries and choosing either side loses content. On a
+            # push race, start from the current main and regenerate the same
+            # deterministic batch, then run the same fail-closed guards again.
+            regenerate_digest_batch() {
+              git reset --hard FETCH_HEAD
+              for i in "${!CANTONS[@]}"; do
+                SECTION="${SECTIONS[$i]-}"
+                if [ -n "$SECTION" ]; then
+                  node generator/scripts/generate-events-digest-article.mjs \
+                    --section="$SECTION" --canton "${CANTONS[$i]}"
+                else
+                  node generator/scripts/generate-events-digest-article.mjs
+                fi
+              done
+              node --test \
+                generator/tests/article-fabrication-guard.test.mjs \
+                generator/tests/prompt-placeholder-guard.test.mjs
+              node scripts/ci/check-blog-locale-completeness.mjs
+            }
+
+            stage_digest_outputs
           fi
           if git diff --cached --quiet; then
             echo "no digest changes"
             exit 0
           fi
-          if [ -z "${GITHUB_PAT:-}" ]; then
-            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push would not fire publish-api.yml"
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::GITHUB_PAT_NANAKO missing — a GITHUB_TOKEN push would not fire publish-api.yml"
             exit 1
           fi
 
@@ -320,7 +348,7 @@ jobs:
           git commit -m "$COMMIT_MESSAGE"
 
           TARGET="${{ github.ref_name }}"
-          REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          REMOTE="https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${{ github.repository }}.git"
           for attempt in 1 2 3; do
             if git push "$REMOTE" "HEAD:$TARGET"; then
               echo "pushed to $TARGET"
@@ -331,7 +359,14 @@ jobs:
               break
             fi
             sleep $((attempt * 3))
-            git pull --rebase "$REMOTE" "$TARGET" || { git rebase --abort 2>/dev/null || true; }
+            git fetch "$REMOTE" "$TARGET"
+            regenerate_digest_batch
+            stage_digest_outputs
+            if git diff --cached --quiet; then
+              echo "digest batch already present on $TARGET"
+              exit 0
+            fi
+            git commit -m "$COMMIT_MESSAGE"
           done
           echo "::error::push failed after 3 attempts (git output above)"
           exit 1
