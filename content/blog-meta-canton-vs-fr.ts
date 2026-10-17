@@ -23,7 +23,7 @@ const blogMetaCantonVsFr: Record<string, string> = {
     'blog.article.crollo-pilone-vetroz.imageAlt': 'Pylône à haute tension effondré dans la zone industrielle de Botza à Vétroz.',
     'blog.article.fully-strada-ciclabile.title': 'Fully : plus de 5,5 km de route deviennent cyclables',
     'blog.article.fully-strada-ciclabile.excerpt': 'La commune de Fully étend la mobilité douce : la route au nord du canal devient une rue cyclable et les cyclistes ont la priorité à 12 intersections.',
-    'blog.article.fully-strada-ciclabile.imageAlt': 'Cyclistes sur la rue cyclable au nord du canal à Fully',
+    'blog.article.fully-strada-ciclabile.imageAlt': 'Illustration générée pour cet article',
     'blog.article.valais-salario-minimo-2026.title': 'Salaire minimum en Valais : vote le 29 novembre sur les CHF 22',
     'blog.article.valais-salario-minimo-2026.excerpt': '15\'000 salariés à temps plein ne vivent pas de leur salaire Le vote sur le salaire minimum est fixé au 29 novembre La proposition prévoit CHF 22 bruts',
     'blog.article.valais-salario-minimo-2026.imageAlt': 'Paysage du canton du Valais avec bâtiments et rues',

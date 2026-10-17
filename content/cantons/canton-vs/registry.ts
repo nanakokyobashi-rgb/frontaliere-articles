@@ -76,7 +76,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'fully-strada-ciclabile',
  category: 'novita',
  date: '2026-10-17T01:00:16.066Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-fully-strada-ciclabile.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['VS'],

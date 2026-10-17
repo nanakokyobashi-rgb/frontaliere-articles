@@ -8437,13 +8437,16 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.il-discount-blocca-aumenti-2027-e-raddoppia-sconto-dipendenti.imageAlt': 'Editorial image related to: Il discount blocca aumenti 2027 e raddoppia sconto dipendenti',
     'blog.article.ia-assistente-shopping-svizzera.title': 'AI helps Swiss shoppers but stalls at checkout',
     'blog.article.ia-assistente-shopping-svizzera.excerpt': 'Almost 70% of Swiss people use AI for a purchase 49% say that AI influences their choice 67% want to keep payment autonomous Only 17% accept',
-    'blog.article.ia-assistente-shopping-svizzera.imageAlt': 'Swiss customer using an AI assistant on a smartphone while shopping in Lugano',
+    'blog.article.ia-assistente-shopping-svizzera.imageAlt': 'Illustration generated for this article',
     'blog.article.sistema-sanitario-lamal-ginevra-2026.title': 'Swiss healthcare system: LAMal 2026 guide for the Canton of Geneva',
     'blog.article.sistema-sanitario-lamal-ginevra-2026.excerpt': 'Mandatory insurance, deductibles and premiums: how LAMal works in Geneva in 2026.',
     'blog.article.sistema-sanitario-lamal-ginevra-2026.imageAlt': 'Geneva skyline featuring the Jet d\'Eau fountain, symbolizing the city and its healthcare system.',
     'blog.article.stesso-reddito-imposte-diverse.title': 'Same income, different taxes: savings of up to 90%',
     'blog.article.stesso-reddito-imposte-diverse.excerpt': 'For the same income, the municipality changes the tax bill.',
     'blog.article.stesso-reddito-imposte-diverse.imageAlt': 'Swiss street with houses and tax document',
+    'blog.article.ia-voce-truffatori-svizzera-2026.title': 'AI lends its voice to scammers: how to defend yourself against suspicious calls',
+    'blog.article.ia-voce-truffatori-svizzera-2026.excerpt': 'An Italian bank is alleged to have lost 95 million euros.',
+    'blog.article.ia-voce-truffatori-svizzera-2026.imageAlt': 'Smartphone with call notification and sound wave representing voice cloning on a Swiss desk',
 };
 
 export default blogMetaChEn;
