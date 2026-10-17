@@ -27,6 +27,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.dibattito-prefettura-sarine.title': 'Sarine, die sieben Präfekturkandidaten im Vergleich',
     'blog.article.dibattito-prefettura-sarine.excerpt': 'In Corpataux diskutierten am 14.',
     'blog.article.dibattito-prefettura-sarine.imageAlt': 'Debatte in Corpataux zwischen den sieben Kandidierenden für die Präfektur Saane',
+    'blog.article.copertura-a12-opposizioni.title': 'Überdachung der A12: 3 Jahre Bauarbeiten, etwa zwanzig Einsprachen',
+    'blog.article.copertura-a12-opposizioni.excerpt': 'Das Projekt zur Überdachung der Autobahn A12 gibt drei Jahre Bauarbeiten an.',
+    'blog.article.copertura-a12-opposizioni.imageAlt': 'Projekt zur Überdeckung der A12',
 };
 
 export default blogMetaCantonFrDe;
