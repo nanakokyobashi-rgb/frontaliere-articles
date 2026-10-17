@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-tredicesima-rendita-avs-2026.webp",
-      "sha256": "b8e93f9523ab75dc25890898d68eb823a3d18566fb3936c32cd0b61d62d4cd7b"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-tredicesima-rendita-avs-2026-480w.webp",
-      "sha256": "b66a51d12e6ce8d943b2abeb43154ea0192f93df680f1c7e78661239c1504314"
-    }
-  ]
+  "items": []
 }
