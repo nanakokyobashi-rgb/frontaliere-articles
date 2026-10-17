@@ -307,6 +307,7 @@ const PARITY_LINES = [
   ['🔴 **Important —** sibling non spazzato', true],
   ['- `scripts/ci/transport-identical-twins.mjs:L446`: 🔴 Important: shard non coperto', true],
   ['Correction: zero 🔴 Important findings (both nits are non-blocking).', false],
+  ['«🔴 Important: quoted»', false],
   ['Il test pinna la stringa `🔴 Important: x` come fixture.', false],
   ['- `constants.mjs:L84`: 🟡 Nit: il pattern `🔴 Important:` va documentato.', false],
   ['scripts/ci/x.mjs:L12: 🔴 Important il ramo non chiude', true],
