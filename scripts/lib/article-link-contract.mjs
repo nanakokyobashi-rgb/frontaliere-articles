@@ -126,20 +126,30 @@ function parseInlineLink(source, start) {
     }
     cursor += 1;
   }
-  const targetEnd = cursor;
+  let targetEnd = cursor;
   if (targetEnd === targetStart || (angle && source[cursor] !== '>')) return null;
-  const target = source.slice(targetStart, targetEnd);
+  let target = source.slice(targetStart, targetEnd);
   if (angle) cursor += 1;
   const targetSuffixStart = cursor;
 
   const whitespaceStart = cursor;
   while (/\s/.test(source[cursor] || '') && cursor < source.length) cursor += 1;
   let hasTitle = false;
+  let unsupportedSuffix = false;
   if (cursor > whitespaceStart && ['"', "'", '('].includes(source[cursor])) {
     hasTitle = true;
     cursor = parseLinkTitle(source, cursor);
     if (cursor < 0) return null;
     while (/\s/.test(source[cursor] || '') && cursor < source.length) cursor += 1;
+  } else if (cursor > whitespaceStart && source[cursor] !== ')') {
+    // The site renderer captures every character through `)` as href text.
+    // Consume unquoted suffixes so the writer and gate can strip this shape.
+    const close = source.indexOf(')', cursor);
+    if (close < 0) return null;
+    targetEnd = close;
+    target = source.slice(targetStart, targetEnd);
+    cursor = close;
+    unsupportedSuffix = true;
   }
   if (source[cursor] !== ')') return null;
 
@@ -155,6 +165,7 @@ function parseInlineLink(source, start) {
     targetEnd,
     targetSuffixStart,
     hasTitle,
+    unsupportedSuffix,
   };
 }
 
@@ -329,9 +340,9 @@ export function canonicalArticleLinkTarget(rawTarget, locale = 'it') {
 }
 
 function canonicalArticleLinkOccurrenceTarget(link, locale) {
-  // The static renderer treats angle delimiters and Markdown titles as part of
-  // href text. Remove these links instead of persisting markup it cannot render.
-  if (link.hasTitle || (link.angle && /\s/u.test(link.target))) return null;
+  // The static renderer treats angle delimiters, titles, and unquoted suffixes
+  // as part of href text. Remove forms the writer cannot canonicalize safely.
+  if (link.hasTitle || link.unsupportedSuffix || (link.angle && /\s/u.test(link.target))) return null;
   const canonical = canonicalArticleLinkTarget(link.target, locale);
   // The site renderer supports nav: only in Markdown links, never in literal
   // HTML anchors. Removing such hrefs keeps the gate and writer consistent.

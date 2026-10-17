@@ -136,6 +136,22 @@ test('il writer rifiuta le parentesi letterali che il renderer tronca', () => {
   );
 });
 
+test('il writer rimuove i target con suffisso non quotato che il renderer considera href', () => {
+  const source = '[relativo](foo bar) [esterno](https://example.test/percorso token) '
+    + '[codificato](https://example.test/percorso%20token)';
+  assert.equal(
+    sanitizeArticleMarkdownLinks(source),
+    'relativo esterno [codificato](https://example.test/percorso%20token)',
+  );
+  assert.deepEqual(
+    findNonCanonicalArticleLinks(source).map(({ target, replacement }) => ({ target, replacement })),
+    [
+      { target: 'foo bar', replacement: null },
+      { target: 'https://example.test/percorso token', replacement: null },
+    ],
+  );
+});
+
 test('il writer e il gate visitano i link annidati nella label di un link esterno', () => {
   const source = '[outer [inner](bare-target)](https://example.com/article)';
   assert.equal(
