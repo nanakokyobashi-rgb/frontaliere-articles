@@ -165,7 +165,7 @@ test('le letture cross-repo del trasporto usano il PAT runtime anche nei dry-run
     return yaml.slice(start, next === -1 ? yaml.length : next);
   };
 
-  const transportDryRun = step(source('transport-identical-twins.yml'), 'Cosa c\'e da portare (dry-run)');
+  const transportDryRun = step(source('transport-identical-twins.yml'), "Cosa c'e' da portare (dry-run)");
   assert.match(transportDryRun, /runtime_pat="\$\{GITHUB_PAT_NANAKO:-\}"/);
   assert.match(transportDryRun, /export GH_TOKEN="\$runtime_pat"/);
   assert.match(transportDryRun, /node scripts\/ci\/transport-identical-twins\.mjs/);
