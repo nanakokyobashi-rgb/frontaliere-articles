@@ -476,6 +476,21 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(res.html.includes('IMPLICIT_BODY_ONLY_ACTIVE'));
   });
 
+  it('il testo apre il body implicito vuoto prima del JSON-LD dopo un head top-level', () => {
+    const bodyOnly = '<head><title>Fonte valida</title></head>'
+      + 'Testo di apertura del body implicito.'
+      + '<script type="application/ld+json">{"headline":"TOP_LEVEL_BODY_JSONLD_ACTIVE"}</script>'
+      + `<article>${ARTICLE_PROSE}</article>`;
+    const res = isolateMainSourceHtml(bodyOnly);
+    assert.equal(res.isolated, true);
+    assert.match(
+      res.html,
+      /<head><title>Fonte valida<\/title><\/head><body><script type="application\/ld\+json">\{"headline":"TOP_LEVEL_BODY_JSONLD_ACTIVE"\}<\/script>/,
+    );
+    assert.equal(res.html.includes('<head><title>Fonte valida</title><script'), false);
+    assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
+  });
+
   it('conserva title e meta in un head implicito', () => {
     const implicitHead = '<html><title>Fonte senza head esplicito</title>'
       + '<meta property="article:published_time" content="2026-10-17T09:30:00+02:00">'

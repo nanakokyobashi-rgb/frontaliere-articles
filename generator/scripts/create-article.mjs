@@ -8515,6 +8515,15 @@ function findActiveSourceHead(html) {
     if (bodyState) bodyState.trusted = false;
   };
 
+  const documentContainerIsCurrent = (stack, container) => (
+    container ? stack.length === 1 && stack[0] === container : stack.length === 0
+  );
+  const sourceBodyIsActive = (stack, state) => (
+    state.entry
+      ? stack.some((ancestor) => ancestor === state.entry)
+      : state.implicit && stack.length === 0
+  );
+
   const scan = sourceScanStructure(html, {
     onText: ({ text, start, stack }) => {
       if (
@@ -8532,8 +8541,7 @@ function findActiveSourceHead(html) {
         bodyState?.implicit &&
         bodyState.trusted &&
         /\S/u.test(text) &&
-        stack.length === 1 &&
-        stack[0] === bodyState.entry
+        documentContainerIsCurrent(stack, bodyState.entry)
       ) {
         sawBody = true;
         bodyState.afterHead = false;
@@ -8573,7 +8581,7 @@ function findActiveSourceHead(html) {
         !sawBody &&
         namespace === 'html' &&
         parent === trustedHead.container &&
-        stack.length === (trustedHead.container ? 1 : 0)
+        documentContainerIsCurrent(stack, trustedHead.container)
       );
       const afterHeadElement = Boolean(
         directPostHeadContainer &&
@@ -8588,6 +8596,7 @@ function findActiveSourceHead(html) {
         bodyState?.implicit &&
         bodyState.trusted &&
         parent === bodyState.entry &&
+        documentContainerIsCurrent(stack, bodyState.entry) &&
         tag.name !== 'body' &&
         !afterHeadElement
       ) {
@@ -8671,7 +8680,8 @@ function findActiveSourceHead(html) {
         };
         sawBody = true;
       } else if (stack.length === 0 && !(bodyState?.implicit
-        && bodyState.trusted && parent === bodyState.entry)) {
+        && bodyState.trusted && parent === bodyState.entry
+        && documentContainerIsCurrent(stack, bodyState.entry))) {
         // A top-level article/div/etc. is a fragment, not a document body. Do
         // not let a later global-looking script become trusted by accident,
         // unless a document head has just closed and HTML implies the body.
@@ -8707,7 +8717,7 @@ function findActiveSourceHead(html) {
         namespace === 'html' &&
         !stack.some((ancestor) => ancestor.namespace === 'svg' || ancestor.namespace === 'mathml') &&
         documentLevel &&
-        ((bodyState?.trusted && bodyState.entry && stack.some((ancestor) => ancestor === bodyState.entry)) || (
+        ((bodyState?.trusted && sourceBodyIsActive(stack, bodyState)) || (
           implicitHead &&
           stack.length === 1 &&
           parent === implicitHeadContainer
