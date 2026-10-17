@@ -9093,22 +9093,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/ticino/attualita/1956881/segnaletica-a13-lavori-mesocco-pannelli": {
-      "section": "frontaliere",
-      "ts": 1792063261682
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/scuola-e-impresa-si-incontrano-a-gavirate-la-sedicesima-edizione-di-generazione-dindustria/2708818": {
-      "section": "frontaliere",
-      "ts": 1792063695528
-    },
-    "frontaliere::https://www.rsi.ch/info/mondo/netflix-taglia-quasi-1%e2%80%99000-posti-di-lavoro--4164406.html": {
-      "section": "frontaliere",
-      "ts": 1792063965426
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/duplomatic-di-legnano-stipendio-a-meta-scatta-lo-sciopero-a-singhiozzo/2708569": {
-      "section": "frontaliere",
-      "ts": 1792063974978
-    },
     "frontaliere::https://www.rsi.ch/info/svizzera/l%e2%80%99ia-aiuta-i-consumatori-svizzeri-a-fare-shopping--4164661.html": {
       "section": "frontaliere",
       "ts": 1792069217136
@@ -9436,6 +9420,10 @@
     "frontaliere::https://www.varesenews.it/2026/10/castellanzese-nel-momento-doro-trasferta-a-correggio-per-continuare-a-volare/2710636": {
       "section": "frontaliere",
       "ts": 1792232881935
+    },
+    "frontaliere::https://cassa-disoccupazione.unia.ch": {
+      "section": "frontaliere",
+      "ts": 1792240710869
     }
   }
 }
