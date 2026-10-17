@@ -53,6 +53,9 @@ on:
       - 'host/**'
       - 'scripts/publish-section-pages.mjs'
       - 'scripts/publish-section-edge.mjs'
+      - 'scripts/lib/section-bootstrap-lock.mjs'
+      - 'scripts/ci/section-bootstrap-lock.mjs'
+      - 'scripts/lib/conditional-cdn-put.sh'
       - 'scripts/ci/fast-publish-section.mjs'
       - 'scripts/ci/retry-cmd.sh'
       - 'scripts/cf-purge-cache.mjs'
@@ -161,6 +164,7 @@ jobs:
       matrix: ${{ steps.plan.outputs.matrix }}
       any: ${{ steps.plan.outputs.any }}
       dry: ${{ steps.plan.outputs.dry }}
+      bootstrap: ${{ steps.plan.outputs.bootstrap }}
       push_before: ${{ steps.push_range.outputs.before }}
       push_after: ${{ steps.push_range.outputs.after }}
     steps:
@@ -387,10 +391,15 @@ jobs:
           fi
           any=false
           [ "$(printf '%s' "$matrix" | jq 'length')" -gt 0 ] && any=true
+          bootstrap=false
+          if [ "$(printf '%s' "$matrix" | jq 'any(.[]; .bootstrap == true)')" = "true" ]; then
+            bootstrap=true
+          fi
           {
             echo "matrix=$matrix"
             echo "any=$any"
             echo "dry=$dry"
+            echo "bootstrap=$bootstrap"
           } >> "$GITHUB_OUTPUT"
           echo "resolved matrix=$matrix dry=$dry"
 
@@ -398,7 +407,9 @@ jobs:
     needs: resolve
     if: needs.resolve.outputs.any == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    # Il bootstrap live può attendere il publisher edge fino a 55 minuti prima
+    # di renderizzare. Conserva il budget storico di 45 minuti dopo il gate.
+    timeout-minutes: 100
     strategy:
       fail-fast: false
       matrix:
@@ -603,6 +614,22 @@ jobs:
         if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
         run: bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/ci/ensure-host-shell-assets.mjs
 
+      # Un bootstrap di una sezione gia' live carica HTML mentre il publisher
+      # API prepara la stessa release. Il gate R2 viene acquisito PRIMA del
+      # render e rilasciato anche su errore: publish-section-edge aspetta il
+      # suo sblocco prima di fare il PUT del registro. Se publish-api ha vinto
+      # la gara di avvio, il bootstrap attende il lease edge-publisher e
+      # riprende dopo il suo rilascio; il replay API successivo riallinea il
+      # registry alla nuova superficie HTML.
+      - name: Acquire bootstrap R2 gate
+        id: acquire_bootstrap
+        if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true' && matrix.target.bootstrap == true
+        env:
+          SECTION: ${{ matrix.target.section }}
+          LOCK_WAIT_MS: 3300000
+          LOCK_RETRY_MS: 20000
+        run: node scripts/ci/section-bootstrap-lock.mjs acquire --section "$SECTION" --commit "$(git rev-parse HEAD)" --wait-ms "$LOCK_WAIT_MS" --retry-ms "$LOCK_RETRY_MS"
+
       - name: Render, validate and publish the section pages
         if: steps.replay_freshness.outputs.fresh == 'true'
         env:
@@ -715,6 +742,16 @@ jobs:
           # idempotenti sulle stesse chiavi.
           bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"
 
+      - name: Release bootstrap R2 gate
+        # GITHUB_ENV aggiorna l'ambiente dei passi successivi, ma non è una
+        # base affidabile per la valutazione dell'espressione `if` del passo.
+        # L'outcome dell'acquire è il fatto durevole: se ha acquisito il lease,
+        # il release deve partire anche quando il render fallisce.
+        if: always() && steps.acquire_bootstrap.outcome == 'success' && steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true' && matrix.target.bootstrap == true
+        env:
+          SECTION: ${{ matrix.target.section }}
+        run: node scripts/ci/section-bootstrap-lock.mjs release --section "$SECTION"
+
       - name: Summary
         if: always()
         run: |
@@ -722,3 +759,155 @@ jobs:
           s="$RUNNER_TEMP/section-summary.json"
           [ -s "$s" ] || { echo "nessun summary: il render non e' arrivato in fondo"; exit 0; }
           jq -r '"sezione \(.section) (\(.declaredStatus // "?")): pagine \(.counts | tostring), hub mancanti \(.hubsMissing | tostring), difetti \(.defects | length), pubblicato \(.published | tostring)"' "$s"
+
+  # A push can start the API publisher before the bootstrap runner acquires
+  # its R2 lease. After a successful bootstrap releases every matrix lock,
+  # replay the API once so an earlier fail-closed timeout cannot strand the
+  # registry on the previous release. API-triggered replays are excluded to
+  # prevent a workflow_run loop.
+  replay-api-after-bootstrap:
+    needs: [resolve, publish]
+    if: >-
+      always() &&
+      needs.resolve.result == 'success' &&
+      needs.publish.result == 'success' &&
+      needs.resolve.outputs.bootstrap == 'true' &&
+      needs.resolve.outputs.dry != 'true' &&
+      github.event_name != 'workflow_run'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # Il replay deve usare esattamente la revisione dalla quale il
+          # bootstrap ha renderizzato e caricato le pagine. `main` puo' essere
+          # avanzata durante il render; il guard sotto in quel caso lascia il
+          # lavoro al run generato dal nuovo push.
+          ref: ${{ inputs.source_commit || github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Verify bootstrap revision is still main
+        id: replay_freshness
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          BOOTSTRAP_COMMIT: ${{ inputs.source_commit || github.sha }}
+        run: |
+          set -euo pipefail
+          if ! [[ "$BOOTSTRAP_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::github.sha non e' una SHA completa per il replay bootstrap"
+            exit 1
+          fi
+          if ! current_main="$(gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
+            echo "::error::impossibile verificare main prima del replay API"
+            exit 1
+          fi
+          if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::revisione corrente di main non valida per il replay bootstrap"
+            exit 1
+          fi
+          echo "current_main=$current_main" >> "$GITHUB_OUTPUT"
+          if [ "$current_main" != "$BOOTSTRAP_COMMIT" ]; then
+            echo "::notice::main e' avanzata da $BOOTSTRAP_COMMIT a $current_main durante il bootstrap; il passo recovery redispatchera' il bootstrap sulla HEAD corrente"
+            echo 'fresh=false' >> "$GITHUB_OUTPUT"
+          else
+            echo "main ancora sulla revisione bootstrap $BOOTSTRAP_COMMIT"
+            echo 'fresh=true' >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-node@v7
+        if: steps.replay_freshness.outcome == 'success'
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies for Remote Config
+        if: steps.replay_freshness.outcome == 'success'
+        run: bash scripts/lib/npm-ci-retry.sh
+
+      - name: Prepare Firebase credentials
+        if: steps.replay_freshness.outcome == 'success'
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — Remote Config is the only source of the dispatch token"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Load dispatch token from Remote Config
+        if: steps.replay_freshness.outcome == 'success'
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Redispatch bootstrap on current main after stale replay
+        if: steps.replay_freshness.outputs.fresh == 'false'
+        env:
+          REPOSITORY: ${{ github.repository }}
+          TARGET_MATRIX: ${{ needs.resolve.outputs.matrix }}
+          CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
+          DRY: ${{ needs.resolve.outputs.dry }}
+        run: |
+          set -euo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::error::GITHUB_PAT_NANAKO non caricato: recovery bootstrap impossibile"
+            exit 1
+          fi
+          if ! [[ "$CURRENT_MAIN" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::HEAD corrente non valida per il recovery bootstrap: $CURRENT_MAIN"
+            exit 1
+          fi
+          export GH_TOKEN="$runtime_pat"
+          dispatched=0
+          while IFS=$'\t' read -r section article_ids bootstrap remove_stale; do
+            [ -n "$section" ] || continue
+            echo "::notice::recovery bootstrap $section sulla HEAD corrente $CURRENT_MAIN"
+            gh workflow run fast-publish-section.yml --repo "$REPOSITORY" --ref main \
+              -f section="$section" \
+              -f article_ids="$article_ids" \
+              -f bootstrap="$bootstrap" \
+              -f remove_stale_canton_rss_feeds="$remove_stale" \
+              -f source_commit="$CURRENT_MAIN" \
+              -f source_main_commit="$CURRENT_MAIN" \
+              -f dry_run="$DRY" \
+              -f dispatch_nonce="stale-bootstrap-recovery-${GITHUB_RUN_ID}-${section}"
+            dispatched=$((dispatched + 1))
+          done < <(jq -r '.[] | [.section, ((.ids // []) | tojson), (.bootstrap // false), (.removeStaleCantonRssFeeds // false)] | @tsv' <<<"$TARGET_MATRIX")
+          if [ "$dispatched" -eq 0 ]; then
+            echo "::error::matrix bootstrap vuoto nel recovery stale"
+            exit 1
+          fi
+
+      - name: Replay publish-api after bootstrap lock release
+        if: steps.replay_freshness.outputs.fresh == 'true'
+        env:
+          REPOSITORY: ${{ github.repository }}
+          BOOTSTRAP_COMMIT: ${{ inputs.source_commit || github.sha }}
+        run: |
+          set -euo pipefail
+          if ! [[ "$BOOTSTRAP_COMMIT" =~ ^[a-f0-9]{40}$ ]] \
+            || [ "$(git rev-parse HEAD)" != "$BOOTSTRAP_COMMIT" ]; then
+            echo "::error::checkout del replay non coincide con la revisione del bootstrap"
+            exit 1
+          fi
+          git fetch --no-tags --depth=1 origin main
+          current_main="$(git rev-parse FETCH_HEAD)"
+          if [ "$current_main" != "$BOOTSTRAP_COMMIT" ]; then
+            echo "::notice::main e' avanzata durante il bootstrap ($BOOTSTRAP_COMMIT -> $current_main); nessun replay stantio, il run del nuovo push riconciliera' la superficie"
+            exit 0
+          fi
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::error::GITHUB_PAT_NANAKO was not loaded from Remote Config"
+            exit 1
+          fi
+          export GH_TOKEN="$runtime_pat"
+          gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main -f source_commit="$BOOTSTRAP_COMMIT"
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f "$RUNNER_TEMP/sa.json"

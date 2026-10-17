@@ -8450,6 +8450,12 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.udc-no-iva-13esima-avs.title': 'SVP lehnt Mehrwertsteuer-Erhöhung für 13. AHV-Rente ab',
     'blog.article.udc-no-iva-13esima-avs.excerpt': 'Nein der SVP zur Erhöhung der Mehrwertsteuer für die 13.',
     'blog.article.udc-no-iva-13esima-avs.imageAlt': 'Schweizer Wähler vor einem Wahlbüro mit MwSt-Symbol',
+    'blog.article.ps-iniziativa-violenza-genero.title': 'SP lanciert Initiative gegen geschlechtsspezifische Gewalt',
+    'blog.article.ps-iniziativa-violenza-genero.excerpt': 'Die SP lanciert in Thun eine Initiative zur geschlechtsspezifischen Gewalt Die Delegierten genehmigen das Projekt einstimmig Mindestens 500 Millionen Franken zusätzlich gefordert',
+    'blog.article.ps-iniziativa-violenza-genero.imageAlt': 'PS-Initiative gegen geschlechtsspezifische Gewalt lanciert in Thun, fordert zusätzliche 500 Millionen Franken pro Jahr.',
+    'blog.article.big-tech-franchi-bolla-ia.title': 'Big Tech geben Anleihen in Franken für Rechenzentren aus',
+    'blog.article.big-tech-franchi-bolla-ia.excerpt': 'Die US-Technologiegiganten geben Anleihen in Schweizer Franken aus, um Rechenzentren zu finanzieren.',
+    'blog.article.big-tech-franchi-bolla-ia.imageAlt': 'Schweizer Stadtansicht mit Büros und Technologieinfrastruktur im Finanzbereich.',
 };
 
 export default blogMetaChDe;

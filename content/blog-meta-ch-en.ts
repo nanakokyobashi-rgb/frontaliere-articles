@@ -8450,6 +8450,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.udc-no-iva-13esima-avs.title': 'UDC rejects VAT hike to fund 13th AVS pension; vote Nov 29',
     'blog.article.udc-no-iva-13esima-avs.excerpt': 'UDC says no to the VAT increase for the 13th AVS pension payment The people vote on the proposal on November 29 In Bulle, no wins by 290 votes to 3 The UDC says yes',
     'blog.article.udc-no-iva-13esima-avs.imageAlt': 'Swiss voters in front of a polling booth with a VAT symbol',
+    'blog.article.ps-iniziativa-violenza-genero.title': 'PS launches initiative against gender-based violence in Thun',
+    'blog.article.ps-iniziativa-violenza-genero.excerpt': 'The SP launches an initiative on gender-based violence in Thun The delegates unanimously approve the project At least 500 million additional francs requested',
+    'blog.article.ps-iniziativa-violenza-genero.imageAlt': 'PS initiative against gender-based violence launched in Thun, calling for an extra 500 million francs per year.',
+    'blog.article.big-tech-franchi-bolla-ia.title': 'Big Tech issue franc-denominated bonds for data centers',
+    'blog.article.big-tech-franchi-bolla-ia.excerpt': 'U.S. tech giants issue Swiss franc bonds to finance data centers.',
+    'blog.article.big-tech-franchi-bolla-ia.imageAlt': 'Swiss urban skyline with offices and technology infrastructure linked to finance.',
 };
 
 export default blogMetaChEn;

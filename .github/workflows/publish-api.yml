@@ -68,6 +68,9 @@ on:
       - 'scripts/lib/canton-hub-content.mjs'
       - 'generator/scripts/lib/canton-hubs/paths.mjs'
       - 'scripts/publish-section-edge.mjs'
+      - 'scripts/lib/section-bootstrap-lock.mjs'
+      - 'scripts/ci/section-bootstrap-lock.mjs'
+      - 'scripts/lib/conditional-cdn-put.sh'
       - 'scripts/lib/delete-cdn-file.sh'
       # Il loader di Remote Config e' un input del publisher da quando porta il
       # kill-switch delle sezioni (CANTON_ARTICLE_SECTIONS_KILL) e il marker
@@ -150,6 +153,11 @@ on:
         required: false
         default: ''
         type: string
+      source_commit:
+        description: 'Commit esatto del corpus da pubblicare (solo replay bootstrap bounded)'
+        required: false
+        default: ''
+        type: string
 
 # One publish at a time, and never cancel one in flight: a half-written data
 # surface is worse than a slightly stale one.
@@ -171,8 +179,10 @@ jobs:
     runs-on: ubuntu-latest
     # MISURATO 2026-08-09: la run riuscita piu' recente (31315163937) impiega 44s
     # in totale, di cui 6s per "Build data surface" e 22s per la spinta all'edge.
-    # 20 minuti sono ~27x il caso normale: non tagliano niente di sano, e tagliano
-    # un job appeso. Questo workflow e `generator-ci.yml` erano gli unici due dei
+    # Il budget esteso copre l'attesa bounded dei bootstrap, lo staging edge e il
+    # rilascio concorrente dei lease dopo il flip. Se il bootstrap termina prima,
+    # il suo replay rilancia comunque publish-api per riconciliare la release.
+    # workflow e `generator-ci.yml` erano gli unici due dei
     # 31 senza `timeout-minutes`, e qui l'assenza pesa il doppio: la concurrency
     # `publish-api` NON cancella (`cancel-in-progress: false`), quindi un job
     # appeso non fallisce — mette in coda ogni pubblicazione successiva dietro di
@@ -182,19 +192,15 @@ jobs:
     # 3 tentativi con backoff lineare allungano il caso peggiore, e senza un
     # tetto sarebbero 3 tentativi da 6 ore.
     #
-    # 20 e' un BUDGET, scelto piu' corto del caso peggiore teorico della scala
-    # di retry (3 tentativi del wrapper x i 5 fetch-retry di npm possono, su una
-    # rete davvero giu', superarlo). E' voluto: se la rete e' giu' da venti
-    # minuti, rimandare alla pubblicazione successiva costa una finestra di
-    # staleness di circa mezz'ora — mentre un job che resta appeso quaranta
-    # minuti blocca dietro di se' OGNI pubblicazione, perche' questa concurrency
-    # non cancella. Meglio tagliare la scala che tenere la coda ferma.
+    # 180 e' comunque un BUDGET, non una promessa di attesa infinita: se il
+    # protocollo bounded non si completa entro il limite, la run fallisce
+    # fail-closed e il replay dopo il bootstrap riconcilia la superficie.
     #
     # Nota: un job fermato da `timeout-minutes` risulta `cancelled`, non
     # `failure`, quindi i reporter con `if: failure()` non lo vedono; a coprirlo
     # e' il cron di scan-job-timeouts.mjs. Il tetto serve comunque: e' cio' che
     # fa finire il job.
-    timeout-minutes: 20
+    timeout-minutes: 180
     # ⚠️ Il tetto qui sopra NON copre l'attesa al gate di questo `environment:`:
     # un job parcheggiato al gate non e' in esecuzione, e GitHub non gli applica
     # nessuna scadenza. Run 36762664618 e' rimasta in `waiting` dal
@@ -210,6 +216,11 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
+          # Un replay post-bootstrap puo' essere dispatchato mentre main si
+          # muove. Il chiamante passa la revisione che ha caricato gli HTML;
+          # senza questo ref il checkout seguirebbe la main corrente e il
+          # registry API potrebbe annunciare una release diversa dalle pagine.
+          ref: ${{ inputs.source_commit || github.sha }}
           # fetch-depth: 0 perche' `github.event.before` deve essere raggiungibile
           # dal passo sotto: senza storia completa il diff sui corpi toccati non
           # si calcola, e lo scoping del preflight deve poter ricadere su
@@ -228,6 +239,32 @@ jobs:
           # CDN. In questo job nessun altro comando git va in rete, quindi il
           # token del checkout non serve a nessuno.
           persist-credentials: false
+
+      # A bounded replay is allowed to checkout the exact corpus revision that
+      # uploaded the HTML, but only while that revision is still main. The
+      # caller checks before dispatch; this server-side fence closes the queue
+      # race where main advances after dispatch and before this run starts.
+      - name: Verify bounded replay source is still main
+        if: inputs.source_commit != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_COMMIT: ${{ inputs.source_commit }}
+        run: |
+          set -euo pipefail
+          if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::source_commit non e' una SHA completa"
+            exit 1
+          fi
+          if ! current_main="$(gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
+            echo "::error::impossibile verificare la HEAD corrente di main per il replay bounded"
+            exit 1
+          fi
+          if [ "$current_main" != "$SOURCE_COMMIT" ]; then
+            echo "::error::replay bounded stale: source_commit=$SOURCE_COMMIT ma main=$current_main; nessun publish API viene eseguito"
+            exit 1
+          fi
+          echo "replay bounded confermato sulla HEAD di main $SOURCE_COMMIT"
 
       - uses: actions/setup-node@v7
         with:
@@ -1091,21 +1128,29 @@ jobs:
       # Se niente di servito cambia (oggi: tutto draft) un problema di R2 e' un
       # warning e la notifica parte come sempre.
       - name: Publish the canton sections release to the edge
+        id: publish_edge
         if: steps.deploy.outcome == 'success'
         run: node scripts/publish-section-edge.mjs
 
-      # Tell the site the surface moved. The publisher knows when it has
-      # published, so the push is the event — the consumer's schedule is only a
-      # safety net for a dispatch that never arrives. Without this a new article
-      # waits up to twelve hours before entering the sitemap, which for fresh
-      # content is the difference that matters.
+      # Tell the site the surface moved after the edge flip. A push is the
+      # normal trigger; a bounded bootstrap replay must notify too because it
+      # can be the run that completes the release. The payload carries the
+      # exact source commit; the consumer's schedule is only a safety net.
       # Best-effort: a failed dispatch must never fail a good publish. The
       # scheduled sync picks it up.
       - name: Notify the site
-        if: steps.deploy.outcome == 'success' && github.event_name == 'push'
+        if: >-
+          steps.deploy.outcome == 'success' &&
+          steps.publish_edge.outcome == 'success' &&
+          (
+            github.event_name == 'push' ||
+            (github.event_name == 'workflow_dispatch' && inputs.source_commit != '')
+          )
         continue-on-error: true
         env:
           PAT: ${{ secrets.SITE_REPO_PAT }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          SOURCE_EVENT: ${{ github.event_name }}
         run: |
           set -euo pipefail
           if [ -z "${PAT:-}" ]; then
@@ -1120,9 +1165,9 @@ jobs:
             --arg source_workflow_path ".github/workflows/publish-api.yml" \
             --arg source_run_id "$GITHUB_RUN_ID" \
             --arg source_run_attempt "$GITHUB_RUN_ATTEMPT" \
-            --arg source_sha "$GITHUB_SHA" \
+            --arg source_sha "$PUBLISHED_SOURCE_COMMIT" \
             --arg source_branch "$GITHUB_REF_NAME" \
-            --arg source_event "push" \
+            --arg source_event "$SOURCE_EVENT" \
             '{
               event_type: $event_type,
               client_payload: {

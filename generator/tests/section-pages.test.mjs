@@ -168,6 +168,179 @@ test('publisher --publish costruisce il manifest solo dopo una publish riuscita'
   }
 });
 
+test('publisher: il bootstrap live differisce RSS, cancellazioni e manifest finche\' la release API non e\' servita', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-bootstrap-live-'));
+  const publishedDoc = pageManifestFromPages({ section: 'canton-ti', commit: 'published', pages: [] });
+  let publishOptions = null;
+  let manifestCalls = 0;
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  try {
+    console.log = () => {};
+    console.error = () => {};
+    const code = await main(
+      ['--section', 'canton-ti', '--bootstrap', '--out', path.join(fixtureRoot, 'dist'), '--summary', path.join(fixtureRoot, 'summary.json'), '--publish'],
+      {
+        parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
+        sourceRegistryIdsImpl: () => [],
+        fetchPageManifestImpl: async () => ({ state: 'ok', doc: publishedDoc }),
+        publishedStatusImpl: async () => 'live',
+        publishedApiReleaseCommitImpl: async () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        publishedReleaseReadyImpl: async () => ({ ok: false, reason: 'registro edge non ancora sul commit' }),
+        currentMainHeadImpl: () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
+        renderSectionArticlePipelineImpl: async () => ({
+          entries: [],
+          hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
+          downloadedImageKeys: [],
+          imageFetchFailures: [],
+          imagePostcondition: {},
+          aggregatePagesAllowed: false,
+        }),
+        articleReleaseSnapshotImpl: () => [],
+        publishImpl: async (options) => {
+          publishOptions = options;
+          return { failures: 0, uploaded: 0, deleted: 0, status: 'live' };
+        },
+        publishPageManifestImpl: () => {
+          manifestCalls++;
+          return true;
+        },
+      },
+    );
+    assert.equal(code, 0);
+    assert.deepEqual(publishOptions?.cantonRssFeeds, []);
+    assert.deepEqual(publishOptions?.obsoletePages, []);
+    assert.equal(manifestCalls, 0, 'il manifest precedente resta la memoria per la fase post-flip');
+    const summary = JSON.parse(readFileSync(path.join(fixtureRoot, 'summary.json'), 'utf8'));
+    assert.equal(summary.deferredLiveBootstrapRelease, true);
+    assert.equal(summary.published.manifestDeferred, true);
+  } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('publisher: bootstrap live senza manifest non arma il percorso differito', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-bootstrap-no-manifest-'));
+  let publishOptions = null;
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  try {
+    console.log = () => {};
+    console.error = () => {};
+    const code = await main(
+      ['--section', 'canton-ti', '--bootstrap', '--out', path.join(fixtureRoot, 'dist'), '--summary', path.join(fixtureRoot, 'summary.json'), '--publish'],
+      {
+        parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
+        sourceRegistryIdsImpl: () => [],
+        fetchPageManifestImpl: async () => ({ state: 'absent' }),
+        publishedStatusImpl: async () => 'live',
+        publishedApiReleaseCommitImpl: async () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        publishedReleaseReadyImpl: async () => ({ ok: false, reason: 'registro edge non ancora sul commit' }),
+        currentMainHeadImpl: () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
+        renderSectionArticlePipelineImpl: async () => ({
+          entries: [],
+          hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
+          downloadedImageKeys: [],
+          imageFetchFailures: [],
+          imagePostcondition: {},
+          aggregatePagesAllowed: false,
+        }),
+        articleReleaseSnapshotImpl: () => [],
+        publishImpl: async (options) => {
+          publishOptions = options;
+          return { failures: 0, uploaded: 0, deleted: 0, status: 'live' };
+        },
+        publishPageManifestImpl: () => true,
+      },
+    );
+    assert.equal(code, 1, 'senza inventario e senza release API pronta il bootstrap live deve fallire chiuso');
+    assert.equal(publishOptions, null, 'nessuna pagina viene caricata con il manifest precedente assente');
+    const summary = JSON.parse(readFileSync(path.join(fixtureRoot, 'summary.json'), 'utf8'));
+    assert.equal(summary.deferredLiveBootstrapRelease, false, 'senza inventario non si assume che il set live sia completo');
+    assert.equal(summary.liveBootstrapManifestMissing, true);
+    assert.match(summary.defects.join('\n'), /senza manifest precedente e senza release API\/edge verificata/);
+  } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('publisher: lo staging bootstrap live carica solo chiavi HTML nuove e snapshotta prima dell upload', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-bootstrap-stage-'));
+  const outDir = path.join(fixtureRoot, 'dist');
+  const routePrefix = { it: 'articoli-ticino', en: 'en/ticino-articles', de: 'de/tessin-artikel', fr: 'fr/articles-tessin' };
+  const oldPages = ['it', 'en', 'de', 'fr'].map((localeCode) => ({
+    ...pageEntry('canton-ti', `${routePrefix[localeCode]}/old/index.html`, 'article'),
+    id: 'old',
+  }));
+  const publishedDoc = pageManifestFromPages({ section: 'canton-ti', commit: 'published', pages: oldPages });
+  const newPages = ['it', 'en', 'de', 'fr'].map((localeCode) => ({
+    localeCode,
+    rel: `${routePrefix[localeCode]}/new/index.html`,
+  }));
+  let publishOptions = null;
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  try {
+    console.log = () => {};
+    console.error = () => {};
+    const code = await main(
+      ['--section', 'canton-ti', '--bootstrap', '--out', outDir, '--summary', path.join(fixtureRoot, 'summary.json'), '--publish'],
+      {
+        parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
+        sourceRegistryIdsImpl: () => ['new'],
+        fetchPageManifestImpl: async () => ({ state: 'ok', doc: publishedDoc }),
+        publishedStatusImpl: async () => 'live',
+        publishedApiReleaseCommitImpl: async () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        publishedReleaseReadyImpl: async () => ({ ok: false, reason: 'registro edge non ancora sul commit' }),
+        currentMainHeadImpl: () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
+        renderSectionArticlePipelineImpl: async () => {
+          for (const { rel } of newPages) {
+            const page = pageEntry('canton-ti', rel, 'article');
+            const local = path.join(outDir, page.rel);
+            mkdirSync(path.dirname(local), { recursive: true });
+            writeFileSync(
+              local,
+              `<!doctype html><html><head><link rel="canonical" href="${page.apexUrl}">${CORPUS_ROUTE_OWNER_META_TAG}</head><body>${'nuova release '.repeat(30)}</body></html>`,
+              'utf8',
+            );
+          }
+          return {
+            entries: [{
+              articleId: 'new',
+              paths: Object.fromEntries(newPages.map(({ localeCode, rel }) => [localeCode, rel])),
+            }],
+            hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
+            downloadedImageKeys: [],
+            imageFetchFailures: [],
+            imagePostcondition: {},
+            aggregatePagesAllowed: false,
+          };
+        },
+        articleReleaseSnapshotImpl: () => [],
+        publishImpl: async (options) => {
+          publishOptions = options;
+          return { failures: 0, uploaded: options.pages.length, deleted: 0, status: 'live' };
+        },
+        publishPageManifestImpl: () => true,
+      },
+    );
+    assert.equal(code, 0);
+    assert.deepEqual(publishOptions.pages.map((page) => page.edgeKey), newPages.map(({ rel }) => pageEntry('canton-ti', rel, 'article').edgeKey));
+    assert.equal(publishOptions.snapshotPagesBeforeUpload, true);
+  } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('publisher: il fallback API copre l\'ultimo input raggiungibile dal publisher', async () => {
   const publisherCommit = 'a'.repeat(40);
   const apiCommit = 'b'.repeat(40);
@@ -867,6 +1040,140 @@ test('publisher: abortisce prima del primo upload se main avanza durante il rend
   }
   assert.deepEqual(events, ['read-status', 'check-main']);
   assert.ok(!events.includes('upload'), 'nessuna mutazione remota parte con un render obsoleto');
+});
+
+test('publisher: lo staging snapshotta le chiavi prima dell HTML e ripristina un upload parziale', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'publish-bootstrap-snapshot-'));
+  const first = pageEntry('canton-ti', 'articoli-ticino/new-one/index.html', 'article');
+  const second = pageEntry('canton-ti', 'articoli-ticino/new-two/index.html', 'article');
+  const previousHtml = `<!doctype html><html><head>${CORPUS_ROUTE_OWNER_META_TAG}</head><body>precedente</body></html>`;
+  const events = [];
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  try {
+    console.log = () => {};
+    console.error = () => {};
+    const result = await publish({
+      section: 'canton-ti',
+      pages: [first, second],
+      cdnUploads: [],
+      obsoletePages: [],
+      distDir: fixtureRoot,
+      snapshotPagesBeforeUpload: true,
+      publishedStatusImpl: async () => 'live',
+      runImpl: (_command, args) => {
+        if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+          if (args[1].includes('.canton-page-rollback-')) {
+            events.push('restore');
+            return { code: 0, stdout: '✅ uploaded' };
+          }
+          events.push(`upload:${args[2].includes('new-one') ? 'one' : 'two'}`);
+          return args[2].includes('new-one')
+            ? { code: 0, stdout: '✅ uploaded' }
+            : { code: 1, stdout: '' };
+        }
+        if (args[0] === 'scripts/lib/delete-cdn-file.sh') {
+          events.push('delete-new-two');
+          return { code: 0, stdout: '✅ deleted' };
+        }
+        if (args.includes('scripts/cf-purge-cache.mjs')) {
+          events.push('purge');
+          return { code: 0, stdout: '' };
+        }
+        throw new Error(`comando inatteso: ${args.join(' ')}`);
+      },
+      probeImpl: async (url) => {
+        const isFirst = url === first.cdnUrl || url === first.apexUrl;
+        events.push(isFirst ? 'probe-one' : 'probe-two');
+        return isFirst
+          ? { ok: true, status: 200, body: previousHtml }
+          : { ok: false, status: 'HTTP 404' };
+      },
+    });
+    assert.equal(result.failures, 1, JSON.stringify({ result, events }));
+    assert.equal(result.uploaded, 1);
+    assert.equal(result.rollbackFailures, 0);
+    assert.deepEqual(events, [
+      'probe-one', 'probe-two',
+      'upload:one', 'upload:two',
+      'restore', 'delete-new-two', 'purge',
+      'probe-one', 'probe-one', 'probe-two', 'probe-two',
+    ]);
+  } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('publisher: lo staging differisce i render immutabili e usa il gate cross-workflow invece del polling readiness', async () => {
+  const immutableRoot = mkdtempSync(path.join(tmpdir(), 'publish-bootstrap-immutable-'));
+  const immutable = pageEntry('canton-ti', 'articoli-ticino/existing/index.html', 'article');
+  const immutableLocal = path.join(immutableRoot, immutable.rel);
+  mkdirSync(path.dirname(immutableLocal), { recursive: true });
+  writeFileSync(immutableLocal, '<html>render nuovo</html>', 'utf8');
+  let immutableUploads = 0;
+  const immutableResult = await publish({
+    section: 'canton-ti',
+    // La chiave gia' annunciata non entra nel set di upload del bootstrap:
+    // resta servita fino al replay post-flip.
+    pages: [],
+    immutablePages: [immutable],
+    snapshotPagesBeforeUpload: true,
+    cdnUploads: [],
+    obsoletePages: [],
+    distDir: immutableRoot,
+    releaseCommit: 'old-release',
+    publishedStatusImpl: async () => 'live',
+    releaseReadyImpl: async () => ({ ok: false }),
+    runImpl: () => {
+      immutableUploads++;
+      return { code: 0, stdout: '✅ uploaded' };
+    },
+    probeImpl: async () => ({ ok: true, status: 200, body: '<html>render precedente</html>' }),
+  });
+  assert.equal(immutableResult.failures, 0);
+  assert.equal(immutableResult.immutableMismatch, true);
+  assert.equal(immutableResult.uploaded, 0);
+  assert.deepEqual(immutableResult.immutableMismatches, [immutable.edgeKey]);
+  assert.equal(immutableUploads, 0, 'una sostituzione di una chiave già annunciata non parte prima del flip');
+  rmSync(immutableRoot, { recursive: true, force: true });
+
+  const recheckRoot = mkdtempSync(path.join(tmpdir(), 'publish-bootstrap-recheck-'));
+  const staged = pageEntry('canton-ti', 'articoli-ticino/staged/index.html', 'article');
+  let readinessCalls = 0;
+  let stagedUploads = 0;
+  let stagedOnCdn = false;
+  try {
+    const recheckResult = await publish({
+      section: 'canton-ti',
+      pages: [staged],
+      snapshotPagesBeforeUpload: true,
+      cdnUploads: [],
+      obsoletePages: [],
+      distDir: recheckRoot,
+      releaseCommit: 'old-release',
+      publishedStatusImpl: async () => 'draft',
+      releaseReadyImpl: async () => ({ ok: ++readinessCalls > 1 }),
+      runImpl: (_command, args) => {
+        if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+          stagedUploads++;
+          stagedOnCdn = true;
+        }
+        return { code: 0, stdout: '✅ uploaded' };
+      },
+      probeImpl: async () => stagedOnCdn
+        ? { ok: true, status: 200, body: `<html>${CORPUS_ROUTE_OWNER_META_TAG}</html>` }
+        : { ok: false, status: 'HTTP 404' },
+    });
+    assert.equal(recheckResult.failures, 0);
+    assert.notEqual(recheckResult.releaseAdvanced, true);
+    assert.equal(recheckResult.uploaded, 1);
+    assert.equal(stagedUploads, 1);
+    assert.equal(readinessCalls, 0, 'la readiness non viene usata come lock: la coordinazione e\' cross-workflow');
+  } finally {
+    rmSync(recheckRoot, { recursive: true, force: true });
+  }
 });
 
 test('publisher: un avanzamento di main prima dell HTML ripristina RSS e abortisce', async () => {
@@ -2342,9 +2649,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   const dispatchPlan = wf.slice(dispatchPlanStart, dispatchPlanEnd);
   assert.match(dispatchPlan, /FAST_PUBLISH_DISABLED/);
   assert.match(dispatchPlan, /FAST_PUBLISH_ARMED/);
-  assert.equal((wf.match(/-f dry_run="\$DRY"/g) ?? []).length, 2, 'entrambi i redispatch propagano il dry-run calcolato');
+  assert.equal((wf.match(/-f dry_run="\$DRY"/g) ?? []).length, 3, 'tutti i redispatch propagano il dry-run calcolato');
   assert.doesNotMatch(wf, /-f dry_run=false/);
-  assert.equal((wf.match(/gh workflow run fast-publish-section\.yml --repo "\$REPO" --ref main/g) ?? []).length, 2);
+  assert.equal((wf.match(/gh workflow run fast-publish-section\.yml --repo "\$(?:REPO|REPOSITORY)" --ref main/g) ?? []).length, 3);
   assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /-f source_commit="\$current_main"/);
   assert.match(wf, /source_commit richiede una SHA completa/);
@@ -2372,6 +2679,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /remove_stale_canton_rss_feeds/);
   assert.match(wf, /API_RELEASE_COMMIT: \$\{\{ inputs\.api_release_commit \}\}/);
   assert.match(wf, /GITHUB_PAT_NANAKO assente/);
+  assert.match(wf, /Verify bootstrap revision is still main/);
+  assert.match(wf, /BOOTSTRAP_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(wf, /main e' avanzata da \$BOOTSTRAP_COMMIT a \$current_main/);
+  assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$BOOTSTRAP_COMMIT"/);
+  assert.match(wf, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(wf, /replay workflow_run redispatchato prima degli upload/);
   assert.match(wf, /id: push_range[\s\S]*gh api --paginate --slurp "repos\/\$REPO\/commits\/\$WORKFLOW_RUN_HEAD_SHA\/events"/);
   assert.match(wf, /payload\.ref == "refs\/heads\/main"[\s\S]*payload\.head == \$head[\s\S]*payload\.before/);
@@ -2390,6 +2702,30 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(publishCheckout, /fetch-depth: 0/);
   assert.match(wf, /PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
   assert.match(wf, /PUSH_AFTER: \$\{\{ needs\.resolve\.outputs\.push_after \}\}/);
+  const bootstrapReplay = wf.slice(wf.indexOf('  replay-api-after-bootstrap:'));
+  assert.match(bootstrapReplay, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(bootstrapReplay, /BOOTSTRAP_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(bootstrapReplay, /Redispatch bootstrap on current main after stale replay/);
+  assert.match(bootstrapReplay, /TARGET_MATRIX: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/);
+  const replayDispatchStep = bootstrapReplay.slice(
+    bootstrapReplay.indexOf('- name: Replay publish-api after bootstrap lock release'),
+  );
+  assert.match(replayDispatchStep, /git fetch --no-tags --depth=1 origin main/);
+  const mainRevisionGuard = replayDispatchStep.indexOf('if [ "$current_main" != "$BOOTSTRAP_COMMIT" ]');
+  const apiDispatch = replayDispatchStep.indexOf('gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main');
+  assert.ok(
+    mainRevisionGuard >= 0 && apiDispatch > mainRevisionGuard,
+    'il replay API deve saltare il dispatch se main e\' avanzata dal bootstrap',
+  );
+  assert.match(replayDispatchStep, /-f source_commit="\$BOOTSTRAP_COMMIT"/);
+  const staleRecoveryStep = bootstrapReplay.slice(
+    bootstrapReplay.indexOf('- name: Redispatch bootstrap on current main after stale replay'),
+    bootstrapReplay.indexOf('- name: Replay publish-api after bootstrap lock release'),
+  );
+  assert.match(staleRecoveryStep, /if: steps\.replay_freshness\.outputs\.fresh == 'false'/);
+  assert.match(staleRecoveryStep, /gh workflow run fast-publish-section\.yml --repo "\$REPOSITORY" --ref main/);
+  assert.match(staleRecoveryStep, /-f source_commit="\$CURRENT_MAIN"/);
+  assert.match(staleRecoveryStep, /-f source_main_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /push_before:/);
   assert.match(wf, /push_after:/);
   assert.doesNotMatch(wf, /git rev-parse HEAD\^/);
@@ -2409,6 +2745,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'generator/scripts/lib/control-char-write-report.mjs',
     'scripts/publish-section-pages.mjs',
     'scripts/publish-section-edge.mjs',
+    'scripts/lib/section-bootstrap-lock.mjs',
+    'scripts/ci/section-bootstrap-lock.mjs',
+    'scripts/lib/conditional-cdn-put.sh',
     'scripts/ci/fast-publish-section.mjs',
     'scripts/ci/retry-cmd.sh',
     'scripts/cf-purge-cache.mjs',
@@ -2450,7 +2789,14 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /\[ "\$DRY" = "true" \]; then\n\s+args\+=\(--dry-run\)\n\s+else\n\s+args\+=\(--publish\)/);
   // upload-cdn-file.sh esce 0 senza credenziali: l'assenza deve fermare il job.
   assert.match(wf, /for v in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_S3_ENDPOINT R2_BUCKET CF_API_TOKEN; do/);
-  assert.match(wf, /timeout-minutes: 45/);
+  assert.match(wf, /timeout-minutes: 100/);
+  assert.match(wf, /Acquire bootstrap R2 gate/);
+  assert.match(wf, /- name: Acquire bootstrap R2 gate\n\s+id: acquire_bootstrap/);
+  assert.match(wf, /section-bootstrap-lock\.mjs acquire --section "\$SECTION".*--wait-ms "\$LOCK_WAIT_MS"/);
+  assert.match(wf, /Release bootstrap R2 gate/);
+  assert.match(wf, /if: always\(\).*steps\.acquire_bootstrap\.outcome == 'success'.*matrix\.target\.bootstrap == true/);
+  assert.doesNotMatch(wf, /matrix\.target\.bootstrap == true.*SECTION_BOOTSTRAP_LOCK_HELD == 'true'/);
+  assert.match(read('scripts/publish-section-edge.mjs'), /waitForBootstrapLocks\(release\.live, io/);
 });
 
 // ── Riconciliazione ──────────────────────────────────────────────────────────

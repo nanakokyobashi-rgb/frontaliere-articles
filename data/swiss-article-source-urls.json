@@ -1,14 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1949987/transpareg-quadri-chiede-di-rinviare-l-entrata-in-vigore-rischio-informatico-enorme": {
-    "articleId": "transpa-reg-quadri-rinvio-1-ottobre",
-    "ts": "2026-09-14T11:57:33.166Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/politica/1949755/nazionale-consiglio-manifestazione-berna-dovrebbe-vuole-politica-carcere": {
-    "articleId": "detenzione-48-ore-manifestazioni",
-    "ts": "2026-09-14T12:38:56.978Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4082782": {
     "articleId": "tassi-interesse-svizzera-bassi",
     "ts": "2026-09-14T19:40:31.778Z",
@@ -2497,6 +2487,16 @@
   "https://www.laregione.ch/svizzera/svizzera/1957457/no-dell-udc-al-ritocco-dell-iva-per-finanziare-l-avs": {
     "articleId": "udc-no-iva-13esima-avs",
     "ts": "2026-10-17T15:14:15.052Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4171117": {
+    "articleId": "ps-iniziativa-violenza-genero",
+    "ts": "2026-10-17T15:49:05.871Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/economia/economia/1957352/le-big-tech-vogliono-franchi-ma-occhio-alla-bolla-dell-ia": {
+    "articleId": "big-tech-franchi-bolla-ia",
+    "ts": "2026-10-17T16:18:34.775Z",
     "keyForm": 2
   }
 }

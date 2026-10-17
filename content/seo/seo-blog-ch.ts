@@ -106730,6 +106730,84 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ps-iniziativa-violenza-genero': {
+    title: 'PS lancia iniziativa contro la violenza di genere a Thun',
+    description: 'Il PS lancia a Thun un\'iniziativa sulla violenza di genere I delegati approvano il progetto all\'unanimità Chiesti almeno 500 milioni di franchi supplementari',
+    keywords: 'frontalieri, ticino, svizzera, italia, lancia, iniziativa, contro, violenza',
+    ogTitle: 'PS lancia iniziativa contro la violenza di genere a Thun',
+    ogDescription: 'Il PS lancia a Thun un\'iniziativa sulla violenza di genere I delegati approvano il progetto all\'unanimità Chiesti almeno 500 milioni di franchi supplementari',
+    canonicalPath: '/articoli-svizzera/ps-iniziativa-violenza-genero/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PS lancia iniziativa contro la violenza di genere a Thun",
+      "description": "Il PS lancia a Thun un'iniziativa sulla violenza di genere I delegati approvano il progetto all'unanimità Chiesti almeno 500 milioni di franchi supplementari",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ps-iniziativa-violenza-genero.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Iniziativa PS contro la violenza di genere a Thun, richiesta di 500 milioni di franchi supplementari all'anno."
+      },
+      "datePublished": "2026-10-17T15:49:05+00:00",
+      "dateModified": "2026-10-17T15:49:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ps-iniziativa-violenza-genero/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-big-tech-franchi-bolla-ia': {
+    title: 'Big Tech emettono obbligazioni in franchi per data center',
+    description: 'Big Tech Usa emettono obbligazioni in franchi per finanziare data center: Sergio Rossi spiega i rischi per la piazza elvetica, con titolo sulla bolla dell\'IA.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tech, emettono, obbligazioni, franchi',
+    ogTitle: 'Big Tech emettono obbligazioni in franchi per data center',
+    ogDescription: 'Le emissioni in franchi dei giganti tecnologici Usa finanziano la costruzione di data center. Sergio Rossi richiama i rischi per la piazza elvetica; il titolo apre il tema della bolla dell\'IA e del finanziamento dei data center.',
+    canonicalPath: '/articoli-svizzera/big-tech-franchi-bolla-ia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Big Tech emettono obbligazioni in franchi per data center",
+      "description": "Big Tech Usa emettono obbligazioni in franchi per finanziare data center: Sergio Rossi spiega i rischi per la piazza elvetica, con titolo sulla bolla dell'IA.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-big-tech-franchi-bolla-ia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista urbana svizzera con uffici e infrastrutture tecnologiche legate alla finanza."
+      },
+      "datePublished": "2026-10-17T16:18:34+00:00",
+      "dateModified": "2026-10-17T16:18:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/big-tech-franchi-bolla-ia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
