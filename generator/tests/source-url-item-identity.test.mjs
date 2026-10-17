@@ -340,6 +340,24 @@ test('pageTitleEvidence attiva noscript solo nel body, mai in head o template', 
   assert.equal(pageTitleEvidence(textClosesHead, { scriptingDisabled: true }), 'TITOLO_BODY_DOPO_CHIUSURA_IMPLICITA');
 });
 
+test('pageTitleEvidence mantiene inattivo noscript dopo il testo raw di title nell’head', () => {
+  const explicitHead = '<html><head><title>TITOLO_ESPLICITO</title>'
+    + '<noscript><h1>TITOLO_HEAD_ESPLICITO_INATTIVO</h1></noscript></head>'
+    + '<body><h1>TITOLO_BODY_ESPLICITO</h1></body></html>';
+  assert.equal(
+    pageTitleEvidence(explicitHead, { scriptingDisabled: true }),
+    'TITOLO_ESPLICITO\nTITOLO_BODY_ESPLICITO',
+  );
+
+  const implicitHead = '<html><title>TITOLO_IMPLICITO</title>'
+    + '<noscript><h1>TITOLO_HEAD_IMPLICITO_INATTIVO</h1></noscript><body>'
+    + '<noscript><h1>TITOLO_BODY_IMPLICITO_ATTIVO</h1></noscript></body></html>';
+  assert.equal(
+    pageTitleEvidence(implicitHead, { scriptingDisabled: true }),
+    'TITOLO_IMPLICITO\nTITOLO_BODY_IMPLICITO_ATTIVO',
+  );
+});
+
 test('pageTitleEvidence chiude il percorso su un tag non terminato', () => {
   const malformed = '<meta data="<title>Titolo falso</title>';
   assert.equal(pageTitleEvidence(malformed), '', 'un titolo dopo il tag malformato non e\' evidenza attiva');

@@ -7995,6 +7995,11 @@ function sourceStackIndex(stack, name) {
 }
 
 function sourceNamespaceForStart(stack, tag, html) {
+  if (tag.closing) {
+    for (let index = stack.length - 1; index >= 0; index -= 1) {
+      if (stack[index].name === tag.name) return stack[index].namespace;
+    }
+  }
   const parent = stack.at(-1);
   if (!parent || parent.namespace === 'html') {
     if (tag.name === 'svg') return 'svg';
@@ -8288,6 +8293,13 @@ function findActiveSourceHead(html) {
   const scan = sourceScanStructure(html, {
     onText: ({ text, stack }) => {
       if (
+        bodyState?.implicit &&
+        bodyState.trusted &&
+        /\S/u.test(text) &&
+        stack.length === 1 &&
+        stack[0] === bodyState.entry
+      ) sawBody = true;
+      if (
         !implicitHead ||
         !/\S/u.test(text) ||
         stack.length !== 1 ||
@@ -8303,6 +8315,12 @@ function findActiveSourceHead(html) {
       implicitHeadContainer = null;
     },
     onStart: ({ tag, start, namespace, isVoid, parent, stack, entry, rawTextEnd, rawText }) => {
+      if (
+        bodyState?.implicit &&
+        bodyState.trusted &&
+        parent === bodyState.entry &&
+        tag.name !== 'body'
+      ) sawBody = true;
       if (namespace === 'html' && tag.name === 'html') {
         if (sawHtml || stack.length !== 0 || isVoid) {
           failClosed();

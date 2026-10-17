@@ -541,6 +541,14 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
     // head, noscript fallback is never title evidence, even with scripting off.
     if (!tag.closing && tag.name === 'body') headDepth = 0;
     const inHead = headDepth > 0 || implicitHead;
+    if (!tag.closing && !tag.selfClosing && tag.name === 'title') {
+      // Keep title text available to pageTitleEvidence, but do not parse it as
+      // markup or mistake it for body text that closes an open head.
+      const afterTitle = maskSkipRawText(source, tag.end + 1, tag.name);
+      if (afterTitle < 0) break;
+      cursor = afterTitle;
+      continue;
+    }
     const isInactiveRawText = INACTIVE_RAW_TEXT_TAGS.has(tag.name)
       && !(scriptingDisabled && tag.name === 'noscript' && !inHead);
     if (!tag.closing && !tag.selfClosing && isInactiveRawText) {

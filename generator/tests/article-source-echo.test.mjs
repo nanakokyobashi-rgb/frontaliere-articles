@@ -227,10 +227,12 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     const page2 = '<html><body>'
       + `<svg><foreignObject>${foreignArticle}</foreignObject></svg>`
       + `<math><annotation-xml encoding="text/html">${foreignMain}</annotation-xml></math>`
+      + '<script type="application/ld+json">{"headline":"FOREIGN_INTEGRATION_CLOSES_KEEP_BODY_TRUSTED"}</script>'
       + `<article>${ARTICLE_PROSE}</article>`
       + '</body></html>';
     const res = isolateMainSourceHtml(page2);
     assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('FOREIGN_INTEGRATION_CLOSES_KEEP_BODY_TRUSTED'));
     assert.equal(res.root, 'article');
     assert.equal(res.html.includes('FOREIGN_SVG_ARTICLE_SHOULD_NOT_BE_SELECTED'), false);
     assert.equal(res.html.includes('FOREIGN_ANNOTATION_SVG_MAIN_SHOULD_NOT_BE_SELECTED'), false);
@@ -373,6 +375,17 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     const res = isolateMainSourceHtml(bodyOnly);
     assert.equal(res.isolated, true);
     assert.ok(res.html.includes('IMPLICIT_BODY_ONLY_ACTIVE'));
+  });
+
+  it('rifiuta un body esplicito dopo contenuto nel body implicito', () => {
+    const repeatedBody = '<html><head></head>'
+      + `<article>${ARTICLE_PROSE}</article>`
+      + '<body><script type="application/ld+json">{"headline":"SECOND_BODY_JSON_LD_UNTRUSTED"}</script>'
+      + '</body></html>';
+    const res = isolateMainSourceHtml(repeatedBody);
+    assert.equal(res.isolated, false);
+    assert.equal(res.trustedDocument, false);
+    assert.equal(res.html, repeatedBody);
   });
 
   it('isola l’article-markup attivo dentro noscript con scripting disabilitato', () => {
