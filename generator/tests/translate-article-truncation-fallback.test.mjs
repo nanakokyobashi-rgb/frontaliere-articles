@@ -1,6 +1,6 @@
 import { editorialHeadlineGuidance } from '../scripts/lib/editorial-headline-guidance.mjs';
 import { enrichArticleInternalLinks } from '../scripts/lib/contextual-article-links.mjs';
-import { sanitizeArticleMarkdownLinks } from '../../scripts/lib/article-link-contract.mjs';
+import { VALID_NAV_ACTIONS, sanitizeArticleMarkdownLinks } from '../../scripts/lib/article-link-contract.mjs';
 /**
  * translate-article-truncation-fallback.test.mjs — un fallback IT vuoto non
  * deve sovrascrivere un body tradotto troncato-ma-presente (#686).
@@ -1035,7 +1035,7 @@ test('#1875 end-to-end: la chiave in attesa resta ASSENTE nel file di body emess
 test('#1875: il sanitizer dei body di validate() non ricrea una chiave assente (niente body vuoto)', () => {
   const block = sliceBetween('  // ── Validate internal links in body content ──', '\n  // Coerce all seo fields to strings');
   const fn = new Function(
-    'data', 'expectedBodyFields', 'stripFabricatedExamples', 'stripCompetitorPromotion', 'sanitizeNavLinkSemantics', 'console', 'sanitizeArticleMarkdownLinks',
+    'data', 'expectedBodyFields', 'stripFabricatedExamples', 'stripCompetitorPromotion', 'sanitizeNavLinkSemantics', 'console', 'sanitizeArticleMarkdownLinks', 'VALID_NAV_ACTIONS',
     `${block}\nreturn data;`,
   );
   const passThrough = (text) => ({ text, removedSections: 0, removed: 0, stripped: 0, examples: [] });
@@ -1056,6 +1056,7 @@ test('#1875: il sanitizer dei body di validate() non ricrea una chiave assente (
     passThrough,
     { error: () => {}, warn: () => {} },
     sanitizeArticleMarkdownLinks,
+    VALID_NAV_ACTIONS,
   );
 
   assert.equal(Object.hasOwn(data.content.fr, 'body1'), false, 'la chiave in attesa non diventa un body vuoto');
