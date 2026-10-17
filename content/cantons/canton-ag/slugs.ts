@@ -13,6 +13,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'argovia-polizia-regionale-poteri': { it: 'argovia-polizia-regionale-poteri', en: 'aargau-regional-police-powers', de: 'aargau-regionalpolizei-befugnisse', fr: 'argovie-police-regionale-pouvoirs' },
  'axpo-concessioni-idroelettriche': { it: 'axpo-concessioni-idroelettriche', en: 'axpo-hydropower-concessions', de: 'axpo-wasserkraftkonzessionen', fr: 'axpo-concessions-hydroelectriques' },
  'argovia-cani-divieto-respinto': { it: 'argovia-cani-divieto-respinto', en: 'aargau-dangerous-dog-ban-rejected', de: 'aargau-kampfhunde-verbot-abgelehnt', fr: 'argovie-interdiction-chiens-dangereux' },
+ 'eventi-weekend-argovia': { it: 'eventi-weekend-argovia', en: 'weekend-events-aargau', de: 'wochenend-veranstaltungen-aargau', fr: 'evenements-week-end-argovie' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

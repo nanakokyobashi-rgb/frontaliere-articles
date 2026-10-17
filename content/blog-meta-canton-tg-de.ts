@@ -36,6 +36,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.tredicesima-rendita-avs-2026.title': '13 ① AHV-Rente mit Rente vom Dezember 2026 bezahlt',
     'blog.article.tredicesima-rendita-avs-2026.excerpt': 'Die 13. AHV-Rente wird zusammen mit der Dezemberrente 2026 ausbezahlt Es ist nicht nötig, einen Antrag zu stellen oder Formalitäten zu erledigen Begünstigt sind',
     'blog.article.tredicesima-rendita-avs-2026.imageAlt': 'Ältere Person im Thurgau prüft die AHV-Rente für Dezember',
+    'blog.article.eventi-weekend-turgovia.title': 'Veranstaltungen am Wochenende im Thurgau: was tun Sa & So',
+    'blog.article.eventi-weekend-turgovia.excerpt': 'Veranstaltungen im Thurgau an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
+    'blog.article.eventi-weekend-turgovia.imageAlt': 'Veranstaltungen am Wochenende im Thurgau',
 };
 
 export default blogMetaCantonTgDe;

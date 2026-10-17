@@ -5,6 +5,7 @@
 export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; fr: string }> = {
  'rtvv-obvaldo-categorie-aziendali': { it: 'rtvv-obvaldo-categorie-aziendali', en: 'obwalden-rtvv-business-fee-categories', de: 'obwalden-rtvv-tarifkategorien-unternehmen', fr: 'obwald-rtvv-categories-redevance-entreprises' },
  'obvaldo-verkehr45-mobilita': { it: 'obvaldo-verkehr45-mobilita', en: 'obwalden-transport-proposal-verkehr45', de: 'obwalden-mobilitaetsvorlage-verkehr45', fr: 'obwald-projet-mobilite-verkehr45' },
+ 'eventi-weekend-obvaldo': { it: 'eventi-weekend-obvaldo', en: 'weekend-events-obwalden', de: 'wochenend-veranstaltungen-obwalden', fr: 'evenements-week-end-obwald' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

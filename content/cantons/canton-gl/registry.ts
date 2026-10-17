@@ -50,4 +50,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'eventi-weekend-glarona',
+ category: 'novita',
+ date: '2026-10-17T11:27:55.911Z',
+ image: '/images/places/lugano-view.webp',
+ hasCalculator: false,
+ articleType: 'evergreen',
+ canton: ['GL'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

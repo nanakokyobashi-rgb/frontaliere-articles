@@ -24,6 +24,9 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.zugo-piano-direttore-26-1.title': 'Plan directeur 26/1 : Zoug lance la participation',
     'blog.article.zugo-piano-direttore-26-1.excerpt': 'La modification 26/1 prépare les « zones blanches », coordonne le Plan directeur avec la révision du PBG et met en œuvre RPG 2.',
     'blog.article.zugo-piano-direttore-26-1.imageAlt': 'Aménagement urbain et plan directeur dans le canton de Zoug',
+    'blog.article.eventi-weekend-zugo.title': 'Événements du week-end dans le canton de Zoug : que faire samedi & dimanche',
+    'blog.article.eventi-weekend-zugo.excerpt': 'Événements dans le canton de Zoug chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
+    'blog.article.eventi-weekend-zugo.imageAlt': 'Événements du week-end dans le canton de Zoug',
 };
 
 export default blogMetaCantonZgFr;

@@ -15,6 +15,9 @@ const blogMetaCantonSzFr: Record<string, string> = {
     'blog.article.kuessnacht-rete-teleriscaldamento.title': 'Küssnacht étend son réseau à Immensee, Fänn et Adligenswil',
     'blog.article.kuessnacht-rete-teleriscaldamento.excerpt': 'Küssnacht vise à éliminer progressivement les combustibles fossiles grâce à la planification énergétique municipale et à l\'extension du réseau vers Immensee, Fänn et Adligenswil.',
     'blog.article.kuessnacht-rete-teleriscaldamento.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.eventi-weekend-svitto.title': 'Événements du week-end dans le canton de Schwytz : que faire samedi & dimanche',
+    'blog.article.eventi-weekend-svitto.excerpt': 'Événements dans le canton de Schwytz chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
+    'blog.article.eventi-weekend-svitto.imageAlt': 'Événements du week-end dans le canton de Schwytz',
 };
 
 export default blogMetaCantonSzFr;

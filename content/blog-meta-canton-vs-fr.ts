@@ -27,6 +27,9 @@ const blogMetaCantonVsFr: Record<string, string> = {
     'blog.article.valais-salario-minimo-2026.title': 'Salaire minimum en Valais : vote le 29 novembre sur les CHF 22',
     'blog.article.valais-salario-minimo-2026.excerpt': '15\'000 salariés à temps plein ne vivent pas de leur salaire Le vote sur le salaire minimum est fixé au 29 novembre La proposition prévoit CHF 22 bruts',
     'blog.article.valais-salario-minimo-2026.imageAlt': 'Paysage du canton du Valais avec bâtiments et rues',
+    'blog.article.eventi-weekend-vallese.title': 'Événements du week-end en Valais : que faire samedi & dimanche',
+    'blog.article.eventi-weekend-vallese.excerpt': 'Événements en Valais chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
+    'blog.article.eventi-weekend-vallese.imageAlt': 'Événements du week-end en Valais',
 };
 
 export default blogMetaCantonVsFr;

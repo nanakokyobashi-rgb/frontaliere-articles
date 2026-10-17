@@ -21,6 +21,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.singen-chiusura-schaffhauser-strasse.title': 'Singen, Schaffhauser Straße closed from October 26 to 30',
     'blog.article.singen-chiusura-schaffhauser-strasse.excerpt': 'In Singen, the road will be closed to traffic from October 26 to 30, 2026, due to work at the Landesgartenschau stop.',
     'blog.article.singen-chiusura-schaffhauser-strasse.imageAlt': 'Illustration generated for this article',
+    'blog.article.eventi-weekend-sciaffusa.title': 'Weekend events in the canton of Schaffhausen: what to do Saturday & Sunday',
+    'blog.article.eventi-weekend-sciaffusa.excerpt': 'Events in the canton of Schaffhausen every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
+    'blog.article.eventi-weekend-sciaffusa.imageAlt': 'Weekend events in the canton of Schaffhausen',
 };
 
 export default blogMetaCantonShEn;

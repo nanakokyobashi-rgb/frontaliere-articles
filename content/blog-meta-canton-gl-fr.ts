@@ -15,6 +15,9 @@ const blogMetaCantonGlFr: Record<string, string> = {
     'blog.article.klontalstrasse-staldengarten-butzi.title': 'Klöntalerstrasse : restriction Staldengarten–Bützi',
     'blog.article.klontalstrasse-staldengarten-butzi.excerpt': 'Une restriction de circulation concerne la Klöntalerstrasse sur le tronçon Staldengarten–Bützi, dans le canton de Glaris.',
     'blog.article.klontalstrasse-staldengarten-butzi.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.eventi-weekend-glarona.title': 'Événements du week-end dans le canton de Glaris : que faire samedi & dimanche',
+    'blog.article.eventi-weekend-glarona.excerpt': 'Événements dans le canton de Glaris chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
+    'blog.article.eventi-weekend-glarona.imageAlt': 'Événements du week-end dans le canton de Glaris',
 };
 
 export default blogMetaCantonGlFr;

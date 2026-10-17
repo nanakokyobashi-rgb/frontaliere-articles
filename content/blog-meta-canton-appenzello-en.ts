@@ -18,6 +18,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.appenzello-tasso-fiscale-390.title': 'Appenzell: projected tax rate at 3,90 units',
     'blog.article.appenzello-tasso-fiscale-390.excerpt': 'The 2027 budget forecasts a deficit of CHF 323\'670: the tax rate should rise to 3,90 units.',
     'blog.article.appenzello-tasso-fiscale-390.imageAlt': 'Municipal building in the Appenzell landscape',
+    'blog.article.eventi-weekend-appenzello.title': 'Weekend events in Appenzell: what to do Saturday & Sunday',
+    'blog.article.eventi-weekend-appenzello.excerpt': 'Events in Appenzell every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
+    'blog.article.eventi-weekend-appenzello.imageAlt': 'Weekend events in Appenzell',
 };
 
 export default blogMetaCantonAppenzelloEn;

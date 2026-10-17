@@ -33,6 +33,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.argovia-cani-divieto-respinto.title': 'Aargau: ban on dangerous dogs rejected',
     'blog.article.argovia-cani-divieto-respinto.excerpt': 'The Aargau government rejects the ban on dangerous dogs: in two years, none of the six serious injuries to people involved a dog from the list.',
     'blog.article.argovia-cani-divieto-respinto.imageAlt': 'Leashed dog in a Swiss landscape',
+    'blog.article.eventi-weekend-argovia.title': 'Weekend events in Aargau: what to do Saturday & Sunday',
+    'blog.article.eventi-weekend-argovia.excerpt': 'Events in Aargau every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
+    'blog.article.eventi-weekend-argovia.imageAlt': 'Weekend events in Aargau',
 };
 
 export default blogMetaCantonAgEn;

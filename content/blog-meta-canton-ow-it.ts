@@ -9,6 +9,9 @@ const blogMetaCantonOwIt: Record<string, string> = {
     'blog.article.obvaldo-verkehr45-mobilita.title': 'Obvaldo: proposta di mobilità Verkehr\'45',
     'blog.article.obvaldo-verkehr45-mobilita.excerpt': 'La pagina su ow.ch intitolata Verkehr\'45 riguarda le esigenze di mobilità attraverso diversi modi di trasporto e indica la Staatskanzlei a Sarnen.',
     'blog.article.obvaldo-verkehr45-mobilita.imageAlt': 'Proposta di mobilità Verkehr\'45 nel Canton Obvaldo',
+    'blog.article.eventi-weekend-obvaldo.title': 'Eventi del weekend nel Canton Obvaldo: cosa fare sabato e domenica',
+    'blog.article.eventi-weekend-obvaldo.excerpt': 'Eventi nel Canton Obvaldo ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
+    'blog.article.eventi-weekend-obvaldo.imageAlt': 'Eventi del weekend nel Canton Obvaldo',
 };
 
 export default blogMetaCantonOwIt;

@@ -9,6 +9,9 @@ const blogMetaCantonOwFr: Record<string, string> = {
     'blog.article.obvaldo-verkehr45-mobilita.title': 'Obwald : proposition de mobilité Verkehr\'45',
     'blog.article.obvaldo-verkehr45-mobilita.excerpt': 'La page sur ow.ch intitulée Verkehr\'45 concerne les besoins en matière de mobilité au moyen de différents modes de transport et indique la Staatskanzlei à Sarnen.',
     'blog.article.obvaldo-verkehr45-mobilita.imageAlt': 'Projet de mobilité Verkehr\'45 dans le canton d\'Obwald',
+    'blog.article.eventi-weekend-obvaldo.title': 'Événements du week-end à Obwald : que faire samedi & dimanche',
+    'blog.article.eventi-weekend-obvaldo.excerpt': 'Événements à Obwald chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
+    'blog.article.eventi-weekend-obvaldo.imageAlt': 'Événements du week-end à Obwald',
 };
 
 export default blogMetaCantonOwFr;

@@ -15,6 +15,9 @@ const blogMetaCantonSzEn: Record<string, string> = {
     'blog.article.kuessnacht-rete-teleriscaldamento.title': 'Küssnacht expands network to Immensee, Fänn and Adligenswil',
     'blog.article.kuessnacht-rete-teleriscaldamento.excerpt': 'Küssnacht is aiming to phase out fossil fuels with municipal energy planning and the extension of the grid to Immensee, Fänn and Adligenswil.',
     'blog.article.kuessnacht-rete-teleriscaldamento.imageAlt': 'Illustration generated for this article',
+    'blog.article.eventi-weekend-svitto.title': 'Weekend events in the canton of Schwyz: what to do Saturday & Sunday',
+    'blog.article.eventi-weekend-svitto.excerpt': 'Events in the canton of Schwyz every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
+    'blog.article.eventi-weekend-svitto.imageAlt': 'Weekend events in the canton of Schwyz',
 };
 
 export default blogMetaCantonSzEn;

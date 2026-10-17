@@ -10,6 +10,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'nuovo-centro-asilo-couvet': { it: 'nuovo-centro-asilo-couvet', en: 'new-asylum-center-couvet', de: 'neues-asylzentrum-couvet', fr: 'nouveau-centre-asile-couvet' },
  'cpcn-rendimento-2025-copertura': { it: 'cpcn-rendimento-2025-copertura', en: 'cpcn-2025-return-coverage', de: 'cpcn-rendite-2025-deckung', fr: 'cpcn-performance-2025-couverture' },
  'cpcn-tasso-grado-copertura': { it: 'cpcn-tasso-grado-copertura', en: 'cpcn-coverage-rate-distinction', de: 'cpcn-deckungsgrad-unterschied', fr: 'cpcn-taux-couverture-distinction' },
+ 'eventi-weekend-neuchatel': { it: 'eventi-weekend-neuchatel', en: 'weekend-events-neuchatel', de: 'wochenend-veranstaltungen-neuenburg', fr: 'evenements-week-end-neuchatel' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

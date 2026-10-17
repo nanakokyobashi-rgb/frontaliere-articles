@@ -83,4 +83,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'eventi-weekend-zugo',
+ category: 'novita',
+ date: '2026-10-17T11:34:12.899Z',
+ image: '/images/places/lugano-view.webp',
+ hasCalculator: false,
+ articleType: 'evergreen',
+ canton: ['ZG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

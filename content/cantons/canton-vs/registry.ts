@@ -94,4 +94,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'eventi-weekend-vallese',
+ category: 'novita',
+ date: '2026-10-17T11:33:34.787Z',
+ image: '/images/places/lugano-view.webp',
+ hasCalculator: false,
+ articleType: 'evergreen',
+ canton: ['VS'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
