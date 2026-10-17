@@ -25,6 +25,11 @@ test('il contratto ripara solo le destinazioni legacy con una mappatura pubblica
   assert.equal(canonicalArticleLinkTarget('discovery://orphan/example'), null);
   assert.equal(canonicalArticleLinkTarget('https://'), null);
   assert.equal(canonicalArticleLinkTarget('http://?missing-host'), null);
+  assert.equal(canonicalArticleLinkTarget('https://example.com/a(b)'), null);
+  assert.equal(
+    canonicalArticleLinkTarget('https://example.com/a%28b%29'),
+    'https://example.com/a%28b%29',
+  );
   assert.equal(canonicalArticleLinkTarget(String.raw`/\evil`), null);
   assert.equal(canonicalArticleLinkTarget(`/bad${String.fromCharCode(1)}path`), null);
   assert.equal(canonicalArticleLinkTarget(`#bad${String.fromCharCode(127)}`), null);
@@ -113,6 +118,22 @@ test('il renderer non riceve URL angolari con spazi o titoli Markdown', () => {
     ],
   );
   assert.deepEqual(findNonCanonicalArticleLinks(sanitizeArticleMarkdownLinks(source)), []);
+});
+
+test('il writer rifiuta le parentesi letterali che il renderer tronca', () => {
+  const source = '[esterno](https://example.test/a(b)) [relativo](/percorso(a)) '
+    + '[codificato](https://example.test/a%28b%29)';
+  assert.equal(
+    sanitizeArticleMarkdownLinks(source),
+    'esterno relativo [codificato](https://example.test/a%28b%29)',
+  );
+  assert.deepEqual(
+    findNonCanonicalArticleLinks(source).map(({ target, replacement }) => ({ target, replacement })),
+    [
+      { target: 'https://example.test/a(b)', replacement: null },
+      { target: '/percorso(a)', replacement: null },
+    ],
+  );
 });
 
 test('il writer e il gate visitano i link annidati nella label di un link esterno', () => {
@@ -247,17 +268,20 @@ test('il gate fallisce chiuso sulle chiavi body computed e riporta l’espressio
   const sources = [
     "const body = { [`blog.article.${id}.body1`]: '[x](bare-target)' };\n",
     "const body = { [bodyKey]: '[x](bare-target)' };\n",
+    "const body = { [`blog.article.${id}.${field}`]: '[x](bare-target)' };\n",
   ];
   try {
-    for (const source of sources) {
+    for (const [index, source] of sources.entries()) {
       writeFileSync(file, source, 'utf8');
       const result = scanBlogBodyLinks(fixtureRoot);
       assert.deepEqual(result.offenders, []);
       assert.equal(result.errors.length, 1);
       assert.match(result.errors[0].message, /chiave TypeScript computata non verificabile/);
-      assert.ok(result.errors[0].message.includes(source.includes('${id}')
-        ? 'blog.article.${id}.body1'
-        : 'bodyKey'));
+      assert.ok(result.errors[0].message.includes([
+        'blog.article.${id}.body1',
+        'bodyKey',
+        'blog.article.${id}.${field}',
+      ][index]));
     }
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });

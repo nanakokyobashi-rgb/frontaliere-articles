@@ -291,6 +291,9 @@ export function sanitizeArticleFaqMarkdown(faqArray, locale = 'it') {
 export function canonicalArticleLinkTarget(rawTarget, locale = 'it') {
   const target = String(rawTarget ?? '').trim();
   if (!target) return null;
+  // The static article renderer stops at the first literal `)` in a link.
+  // Percent-encoded parentheses remain valid and do not trigger truncation.
+  if (/[()]/u.test(target)) return null;
 
   const legacyAction = LEGACY_TARGET_TO_NAV.get(target.toLowerCase());
   if (legacyAction) return `nav:${legacyAction}`;

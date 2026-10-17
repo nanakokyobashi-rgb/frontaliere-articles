@@ -209,7 +209,7 @@ function extractArticleBodyValues(source) {
         const dynamicKeyExpression = source.slice(tokenStart, tokenEnd);
         if (
           keyLiteral?.dynamic &&
-          /^`blog\.article\.[\s\S]*\.(?:body\d+|faq)`$/u.test(dynamicKeyExpression)
+          /^`blog\.article\.[\s\S]*`$/u.test(dynamicKeyExpression)
         ) {
           throw new Error('chiave TypeScript dinamica non verificabile per blog.article: '
             + dynamicKeyExpression);
