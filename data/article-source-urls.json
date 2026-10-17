@@ -1,9 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/tram-treno-a-ottobre-i-primi-cantieri-la-rete-sara-operativa-nel-2035-442114": {
-    "articleId": "luganese-tram-treno-cantieri-2035",
-    "ts": "2026-09-07T09:46:51.339Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1948460/arriva-la-svolta-per-il-tram-treno-i-lavori-stanno-per-iniziare": {
     "articleId": "tram-treno-lugano-lavori-inizio",
     "ts": "2026-09-07T10:00:14.116Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/tre-valli-varesine-al-7-posto-mondiale-per-livello-degli-atleti-supera-parigi-roubaix-e-vuelta/2710684": {
     "articleId": "tre-valli-varesine-7-posto-mondiale",
     "ts": "2026-10-17T00:42:42.711Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/burraco-e-solidarieta-a-buguggiate-successo-per-il-torneo-benefico-a-favore-della-cooperativa-abad-ets/2710831": {
+    "articleId": "burraco-solidale-buguggiate",
+    "ts": "2026-10-17T01:16:19.863Z",
     "keyForm": 2
   }
 }

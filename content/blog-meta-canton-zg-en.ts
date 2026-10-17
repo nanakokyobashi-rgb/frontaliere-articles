@@ -18,6 +18,12 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.zuger-rapporto-gestione-2025.title': 'Zuger Pensionskasse: 2025 report now online',
     'blog.article.zuger-rapporto-gestione-2025.excerpt': 'The 2025 annual report of the Zuger Pensionskasse provides an overview of the completed financial year and refers to the 2025 annual financial statements for further information.',
     'blog.article.zuger-rapporto-gestione-2025.imageAlt': '2025 annual report of the Zuger Pensionskasse',
+    'blog.article.zugo-revisione-legge-edilizia-2026.title': 'Partial revision of the PBG in Zug: consultation from September 17, 2026',
+    'blog.article.zugo-revisione-legge-edilizia-2026.excerpt': 'The Canton of Zug launches the consultation on the revision of the PBG to create more affordable housing and simplify building procedures.',
+    'blog.article.zugo-revisione-legge-edilizia-2026.imageAlt': 'New building law revision in Canton Zug',
+    'blog.article.zugo-piano-direttore-26-1.title': 'Master plan January 26: Zug launches participation',
+    'blog.article.zugo-piano-direttore-26-1.excerpt': 'The 1/26 amendment prepares the “white zones,” coordinates the master plan with the revision of the PBG, and implements RPG 2.',
+    'blog.article.zugo-piano-direttore-26-1.imageAlt': 'Urban planning and the structure plan in Canton Zug',
 };
 
 export default blogMetaCantonZgEn;

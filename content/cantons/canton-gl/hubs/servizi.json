@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "servizi",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "d270aff510bb860607c2772d4c05ed6aa25bca3f235f34d8e27df67f7ed8af63",
+  "updatedAt": "2026-10-17T01:25:57.491Z",
+  "contentHash": "4aa012333340885ee1b36572425711c868e32be6f688987abe94f15311abd3c7",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,13 +13,8 @@
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-16T13:23:52.574Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T10:09:31.602Z",
+      "updatedAt": "2026-10-16T15:35:32.859Z",
       "keyFacts": 0
     }
   ],
@@ -54,20 +49,6 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Glarus",
-              "value": "21 °C",
-              "detail": "oggi da 12 a 21 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-16T13:23:52.574Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -93,7 +74,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -173,7 +154,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T01:25:57.491Z"
     },
     "en": {
       "canton": "GL",
@@ -205,20 +186,6 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Glarus",
-              "value": "21 °C",
-              "detail": "today from 12 to 21 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-16T13:23:52.574Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -244,7 +211,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -320,7 +287,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T01:25:57.491Z"
     },
     "de": {
       "canton": "GL",
@@ -352,20 +319,6 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Glarus",
-              "value": "21 °C",
-              "detail": "heute 12 bis 21 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-16T13:23:52.574Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -391,7 +344,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -467,7 +420,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T01:25:57.491Z"
     },
     "fr": {
       "canton": "GL",
@@ -499,20 +452,6 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Glarus",
-              "value": "21 °C",
-              "detail": "aujourd’hui de 12 à 21 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-16T13:23:52.574Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -538,7 +477,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -610,7 +549,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T01:25:57.491Z"
     }
   }
 }

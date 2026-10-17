@@ -9,6 +9,8 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'maison-garde-ospedale-sion': { it: 'maison-garde-ospedale-sion', en: 'maison-garde-sion-hospital', de: 'maison-garde-spital-sitten', fr: 'maison-garde-hopital-sion' },
  'vallese-piano-acqua-2035': { it: 'vallese-piano-acqua-2035', en: 'valais-water-action-plan-2035', de: 'wallis-aktionsplan-wasser-2035', fr: 'valais-plan-action-eau-2035' },
  'crollo-pilone-vetroz': { it: 'crollo-pilone-vetroz', en: 'fallen-pylon-vetroz', de: 'hochspannungsmast-vetroz', fr: 'pylone-haute-tension-vetroz' },
+ 'fully-strada-ciclabile': { it: 'fully-strada-ciclabile', en: 'fully-cycle-street', de: 'fully-fahrradstrasse', fr: 'fully-rue-cyclable' },
+ 'valais-salario-minimo-2026': { it: 'valais-salario-minimo-2026', en: 'valais-minimum-wage-2026', de: 'wallis-mindestlohn-2026', fr: 'valais-salaire-minimum-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

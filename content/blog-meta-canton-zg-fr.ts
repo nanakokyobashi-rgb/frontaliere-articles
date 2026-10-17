@@ -18,6 +18,12 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.zuger-rapporto-gestione-2025.title': 'Zuger Pensionskasse : le rapport 2025 est en ligne',
     'blog.article.zuger-rapporto-gestione-2025.excerpt': 'Le Geschäftsbericht 2025 de la Zuger Pensionskasse offre une vue d’ensemble de l’exercice écoulé et renvoie à la Jahresrechnung 2025 pour de plus amples informations.',
     'blog.article.zuger-rapporto-gestione-2025.imageAlt': 'Rapport de gestion 2025 de la Zuger Pensionskasse',
+    'blog.article.zugo-revisione-legge-edilizia-2026.title': 'Révision partielle du PBG à Zoug : consultation à partir du 17 septembre 2026',
+    'blog.article.zugo-revisione-legge-edilizia-2026.excerpt': 'Le canton de Zoug lance la consultation sur la révision du PBG afin de créer davantage de logements à prix abordables et de simplifier les procédures de construction.',
+    'blog.article.zugo-revisione-legge-edilizia-2026.imageAlt': 'Nouvelle revision de la loi sur l\'amenagement et la construction dans le canton de Zoug',
+    'blog.article.zugo-piano-direttore-26-1.title': 'Plan directeur 26/1 : Zoug lance la participation',
+    'blog.article.zugo-piano-direttore-26-1.excerpt': 'La modification 26/1 prépare les « zones blanches », coordonne le Plan directeur avec la révision du PBG et met en œuvre RPG 2.',
+    'blog.article.zugo-piano-direttore-26-1.imageAlt': 'Aménagement urbain et plan directeur dans le canton de Zoug',
 };
 
 export default blogMetaCantonZgFr;

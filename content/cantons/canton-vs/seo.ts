@@ -236,6 +236,79 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fully-strada-ciclabile': {
+    title: 'Fully: oltre 5,5 km di strada diventano ciclabili',
+    description: 'A Fully la strada a nord del canale diventa ciclabile per oltre 5,5 km. I ciclisti hanno la priorità in 12 intersezioni tra i quartieri di pianura e Martigny.',
+    keywords: 'frontalieri, ticino, svizzera, italia, fully, oltre, strada, diventano',
+    ogTitle: 'Fully, nuova strada ciclabile per oltre 5,5 km',
+    ogDescription: 'Il Comune di Fully presenta una nuova tappa per la mobilità dolce: la strada a nord del canale viene trasformata in rue cyclable per più di 5,5 km. La priorità ai ciclisti in 12 intersezioni facilita i collegamenti verso Martigny.',
+    canonicalPath: '/articoli-vallese/fully-strada-ciclabile/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fully: oltre 5,5 km di strada diventano ciclabili",
+      "description": "A Fully la strada a nord del canale diventa ciclabile per oltre 5,5 km. I ciclisti hanno la priorità in 12 intersezioni tra i quartieri di pianura e Martigny.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ciclisti sulla strada ciclabile a nord del canale a Fully"
+      },
+      "datePublished": "2026-10-17T01:00:16+00:00",
+      "dateModified": "2026-10-17T01:00:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vallese/fully-strada-ciclabile/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-valais-salario-minimo-2026': {
+    title: 'Salario minimo in Vallese: voto il 29 novembre sui CHF 22',
+    description: '15\'000 salariati a tempo pieno non vivono del salario Il voto sul salario minimo è fissato al 29 novembre La proposta prevede CHF 22 lordi l\'ora Il Parlamento',
+    keywords: 'frontalieri, ticino, svizzera, italia, salario, minimo, vallese, voto',
+    ogTitle: 'Salario minimo in Vallese: voto il 29 novembre sui 22 franchi',
+    ogDescription: '15\'000 salariati a tempo pieno non vivono del salario Il voto sul salario minimo è fissato al 29 novembre La proposta prevede CHF 22 lordi l\'ora Il Parlamento',
+    canonicalPath: '/articoli-vallese/valais-salario-minimo-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salario minimo in Vallese: voto il 29 novembre sui CHF 22",
+      "description": "15'000 salariati a tempo pieno non vivono del salario Il voto sul salario minimo è fissato al 29 novembre La proposta prevede CHF 22 lordi l'ora Il Parlamento",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/article-valais-salario-minimo-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama del Canton Vallese con edifici e strade"
+      },
+      "datePublished": "2026-10-17T01:13:51+00:00",
+      "dateModified": "2026-10-17T01:13:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vallese/valais-salario-minimo-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T00:12:19.402Z",
-  "contentHash": "ef691643fd6090481805f331c80c67a9e1d1c92a8664646cb39d35bd613aafe1",
+  "updatedAt": "2026-10-17T01:25:57.491Z",
+  "contentHash": "06708a49ae5733a035bc196abffb8040b080d89a807c4baf81fb6cf382e57acf",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,11 +16,6 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-16T16:39:19.839Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-16T13:23:52.574Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -95,20 +90,6 @@
           "updatedAt": "2026-10-16T16:39:19.839Z"
         },
         {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Frauenfeld",
-              "value": "19 °C",
-              "detail": "oggi da 10 a 19 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-16T13:23:52.574Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -148,6 +129,12 @@
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Turgovia: sicurezza sul lavoro, orari e tutela della salute",
+          "url": "/articoli-turgovia/turgovia-sicurezza-lavoro-orari/",
+          "excerpt": "Guida alla sicurezza sul lavoro, tutela della salute, orari e periodi di riposo nel Canton Turgovia secondo le normative e l'Ispettorato del lavoro.",
+          "date": "2026-10-17T01:07:58.510Z"
+        },
         {
           "title": "Turgovia: Sportello digitale per pratiche e documenti",
           "url": "/articoli-turgovia/sportello-digitale-turgovia/",
@@ -218,7 +205,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:25:57.491Z"
     },
     "en": {
       "canton": "TG",
@@ -286,20 +273,6 @@
           "updatedAt": "2026-10-16T16:39:19.839Z"
         },
         {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Frauenfeld",
-              "value": "19 °C",
-              "detail": "today from 10 to 19 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-16T13:23:52.574Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -339,6 +312,12 @@
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Thurgau: workplace safety, working hours and health protection",
+          "url": "/en/thurgau-articles/thurgovia-workplace-safety-hours/",
+          "excerpt": "Guide to occupational safety, health protection, working hours and rest periods in the Canton of Thurgau in accordance with regulations and the Labour Inspectorate.",
+          "date": "2026-10-17T01:07:58.510Z"
+        },
         {
           "title": "Thurgau: Digital portal for procedures and documents",
           "url": "/en/thurgau-articles/thurgau-digital-counter/",
@@ -405,7 +384,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:25:57.491Z"
     },
     "de": {
       "canton": "TG",
@@ -473,20 +452,6 @@
           "updatedAt": "2026-10-16T16:39:19.839Z"
         },
         {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Frauenfeld",
-              "value": "19 °C",
-              "detail": "heute 10 bis 19 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-16T13:23:52.574Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -526,6 +491,12 @@
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Thurgau: Arbeitssicherheit, Arbeitszeiten und Gesundheitsschutz",
+          "url": "/de/thurgau-artikel/turgau-arbeitssicherheit-arbeitszeiten/",
+          "excerpt": "Leitfaden zu Arbeitssicherheit, Gesundheitsschutz, Arbeitszeiten und Ruhezeiten im Kanton Thurgau gemäss den Vorschriften und den Vorgaben des Arbeitsinspektorats.",
+          "date": "2026-10-17T01:07:58.510Z"
+        },
         {
           "title": "Thurgau: Digitaler Schalter für Anliegen und Dokumente",
           "url": "/de/thurgau-artikel/digitaler-schalter-thurgau/",
@@ -592,7 +563,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:25:57.491Z"
     },
     "fr": {
       "canton": "TG",
@@ -660,20 +631,6 @@
           "updatedAt": "2026-10-16T16:39:19.839Z"
         },
         {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Frauenfeld",
-              "value": "19 °C",
-              "detail": "aujourd’hui de 10 à 19 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-16T13:23:52.574Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -713,6 +670,12 @@
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Thurgovie : sécurité au travail, horaires et protection de la santé",
+          "url": "/fr/articles-thurgovie/thurgovie-securite-travail-horaires/",
+          "excerpt": "Guide de la sécurité au travail, de la protection de la santé, des horaires et des périodes de repos dans le canton de Thurgovie selon la réglementation et l'Inspection du travail.",
+          "date": "2026-10-17T01:07:58.510Z"
+        },
         {
           "title": "Thurgovie : Guichet numérique pour les démarches et les documents",
           "url": "/fr/articles-thurgovie/guichet-numerique-thurgovie/",
@@ -775,7 +738,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:25:57.491Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T00:58:07.231Z",
-  "contentHash": "fb35eee8abb9efb11ee8d9990d4176f7c0cf5c550463666e35711db9595f1ace",
+  "updatedAt": "2026-10-17T01:36:39.137Z",
+  "contentHash": "26587bd423f776c9a5db5d36af30636220cf977fff0359a0024ccf19bcb64064",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -101,6 +101,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Piano direttore 26/1: Zugo avvia la partecipazione",
+          "url": "/articoli-zugo/zugo-piano-direttore-26-1/",
+          "excerpt": "La modifica 26/1 prepara le «zone bianche», coordina il Piano direttore con la revisione del PBG e attua RPG 2.",
+          "date": "2026-10-17T01:28:47.924Z"
+        },
+        {
+          "title": "Revisione parziale del PBG a Zugo: consultazione dal 17 settembre 2026",
+          "url": "/articoli-zugo/zugo-revisione-legge-edilizia-2026/",
+          "excerpt": "Il Cantone di Zugo avvia la consultazione sulla revisione del PBG per creare più alloggi a prezzi accessibili e semplificare le procedure edilizie.",
+          "date": "2026-10-17T01:12:22.654Z"
+        },
+        {
           "title": "Zuger Pensionskasse: online il rapporto 2025",
           "url": "/articoli-zugo/zuger-rapporto-gestione-2025/",
           "excerpt": "Il Geschäftsbericht 2025 della Zuger Pensionskasse offre una panoramica sull'esercizio concluso e rinvia alla Jahresrechnung 2025 per ulteriori informazioni.",
@@ -117,18 +129,6 @@
           "url": "/articoli-zugo/baar-rinnovo-comunale-2027/",
           "excerpt": "Baarer Zytig indica i risultati del 27 settembre e il rinnovo del Gemeinderat del 4 ottobre 2026: sette membri per il mandato 2027–2030.",
           "date": "2026-10-08T17:50:07.603Z"
-        },
-        {
-          "title": "Zugo si prepara al rischio del coleottero giapponese",
-          "url": "/articoli-zugo/zug-rischio-coleottero-giapponese/",
-          "excerpt": "Focolai confermati a Zurigo, Lucerna e Svitto: Zugo rafforza la sorveglianza e chiede di controllare veicoli, bagagli e materiali.",
-          "date": "2026-10-07T09:02:17.902Z"
-        },
-        {
-          "title": "Zugo prevede avanzo 15,6 milioni nel 2027 con tasso al 52%",
-          "url": "/articoli-zugo/zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52/",
-          "excerpt": "Il preventivo 2027 indica un avanzo di CHF 15,6 milioni, entrate CHF 446,6 milioni e uscite CHF 431,1 milioni, con tasso fiscale richiesto al 52%.",
-          "date": "2026-10-07T08:41:12.746Z"
         }
       ],
       "links": [
@@ -141,7 +141,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:58:07.231Z"
+      "updatedAt": "2026-10-17T01:36:39.137Z"
     },
     "en": {
       "canton": "ZG",
@@ -230,6 +230,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Master plan January 26: Zug launches participation",
+          "url": "/en/zug-articles/zug-structure-plan-26-1/",
+          "excerpt": "The 1/26 amendment prepares the “white zones,” coordinates the master plan with the revision of the PBG, and implements RPG 2.",
+          "date": "2026-10-17T01:28:47.924Z"
+        },
+        {
+          "title": "Partial revision of the PBG in Zug: consultation from September 17, 2026",
+          "url": "/en/zug-articles/zug-building-law-revision-2026/",
+          "excerpt": "The Canton of Zug launches the consultation on the revision of the PBG to create more affordable housing and simplify building procedures.",
+          "date": "2026-10-17T01:12:22.654Z"
+        },
+        {
           "title": "Zuger Pensionskasse: 2025 report now online",
           "url": "/en/zug-articles/zuger-annual-report-2025/",
           "excerpt": "The 2025 annual report of the Zuger Pensionskasse provides an overview of the completed financial year and refers to the 2025 annual financial statements for further information.",
@@ -246,18 +258,6 @@
           "url": "/en/zug-articles/baar-municipal-council-renewal/",
           "excerpt": "Baarer Zytig reports the results of September 27 and the renewal of the Gemeinderat on October 4, 2026: seven members for the 2027–2030 term.",
           "date": "2026-10-08T17:50:07.603Z"
-        },
-        {
-          "title": "Zug prepares for the risk of the Japanese beetle",
-          "url": "/en/zug-articles/zug-japanese-beetle-risk/",
-          "excerpt": "Confirmed outbreaks in Zurich, Lucerne and Schwyz: Zug strengthens surveillance and asks people to check vehicles, luggage and materials.",
-          "date": "2026-10-07T09:02:17.902Z"
-        },
-        {
-          "title": "Zug forecasts a surplus of 15,6 million in 2027 with the tax rate at 52%",
-          "url": "/en/zug-articles/zug-forecasts-a-surplus-of-15-6-million-in-2027-with-the-tax-rate-at-52/",
-          "excerpt": "The 2027 budget indicates a surplus of CHF 15,6 million, revenue of CHF 446,6 million and expenditure of CHF 431,1 million, with the requested tax rate at 52%.",
-          "date": "2026-10-07T08:41:12.746Z"
         }
       ],
       "links": [
@@ -270,7 +270,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:58:07.231Z"
+      "updatedAt": "2026-10-17T01:36:39.137Z"
     },
     "de": {
       "canton": "ZG",
@@ -359,6 +359,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Richtplan 26/1: Zug eröffnet die Mitwirkung",
+          "url": "/de/zug-artikel/zug-richtplan-26-1/",
+          "excerpt": "Die Änderung 26/1 bereitet die «weissen Zonen» vor, stimmt den Richtplan auf die Revision des PBG ab und setzt RPG 2 um.",
+          "date": "2026-10-17T01:28:47.924Z"
+        },
+        {
+          "title": "Teilrevision des PBG in Zug: Vernehmlassung ab 17. September 2026",
+          "url": "/de/zug-artikel/zug-baugesetz-revision-2026/",
+          "excerpt": "Der Kanton Zug eröffnet die Vernehmlassung zur Revision des PBG, um mehr preisgünstigen Wohnraum zu schaffen und die Bauverfahren zu vereinfachen.",
+          "date": "2026-10-17T01:12:22.654Z"
+        },
+        {
           "title": "Zuger Pensionskasse: Der Bericht 2025 ist online",
           "url": "/de/zug-artikel/zuger-geschaeftsbericht-2025/",
           "excerpt": "Der Geschäftsbericht 2025 der Zuger Pensionskasse bietet einen Überblick über das abgeschlossene Geschäftsjahr und verweist für weitere Informationen auf die Jahresrechnung 2025.",
@@ -375,18 +387,6 @@
           "url": "/de/zug-artikel/baar-erneuerung-gemeinderat/",
           "excerpt": "Baarer Zytig nennt die Ergebnisse vom 27.",
           "date": "2026-10-08T17:50:07.603Z"
-        },
-        {
-          "title": "Zug bereitet sich auf das Risiko des Japankäfers vor",
-          "url": "/de/zug-artikel/zug-risiko-japankaefer/",
-          "excerpt": "Befallsherde in Zürich, Luzern und Schwyz bestätigt: Zug verstärkt die Überwachung und bittet darum, Fahrzeuge, Gepäck und Materialien zu kontrollieren.",
-          "date": "2026-10-07T09:02:17.902Z"
-        },
-        {
-          "title": "Zug erwartet 2027 bei einem Steuerfuss von 52% einen Überschuss von 15,6 Millionen",
-          "url": "/de/zug-artikel/zug-erwartet-2027-bei-einem-steuerfuss-von-52-einen-uberschuss-von-15-6/",
-          "excerpt": "Der Voranschlag 2027 weist einen Überschuss von CHF 15,6 Millionen, Einnahmen von CHF 446,6 Millionen und Ausgaben von CHF 431,1 Millionen aus, bei einem beantragten Steuerfuss von 52%.",
-          "date": "2026-10-07T08:41:12.746Z"
         }
       ],
       "links": [
@@ -399,7 +399,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T00:58:07.231Z"
+      "updatedAt": "2026-10-17T01:36:39.137Z"
     },
     "fr": {
       "canton": "ZG",
@@ -488,6 +488,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Plan directeur 26/1 : Zoug lance la participation",
+          "url": "/fr/articles-zoug/plan-directeur-zoug-26-1/",
+          "excerpt": "La modification 26/1 prépare les « zones blanches », coordonne le Plan directeur avec la révision du PBG et met en œuvre RPG 2.",
+          "date": "2026-10-17T01:28:47.924Z"
+        },
+        {
+          "title": "Révision partielle du PBG à Zoug : consultation à partir du 17 septembre 2026",
+          "url": "/fr/articles-zoug/zoug-revision-loi-construction-2026/",
+          "excerpt": "Le canton de Zoug lance la consultation sur la révision du PBG afin de créer davantage de logements à prix abordables et de simplifier les procédures de construction.",
+          "date": "2026-10-17T01:12:22.654Z"
+        },
+        {
           "title": "Zuger Pensionskasse : le rapport 2025 est en ligne",
           "url": "/fr/articles-zoug/zuger-rapport-gestion-2025/",
           "excerpt": "Le Geschäftsbericht 2025 de la Zuger Pensionskasse offre une vue d’ensemble de l’exercice écoulé et renvoie à la Jahresrechnung 2025 pour de plus amples informations.",
@@ -504,18 +516,6 @@
           "url": "/fr/articles-zoug/baar-renouvellement-conseil/",
           "excerpt": "Baarer Zytig indique les résultats du 27 septembre et le renouvellement du Conseil municipal du 4 octobre 2026 : sept membres pour le mandat 2027–2030.",
           "date": "2026-10-08T17:50:07.603Z"
-        },
-        {
-          "title": "Zoug se prépare au risque du scarabée japonais",
-          "url": "/fr/articles-zoug/zoug-risque-scarabee-japonais/",
-          "excerpt": "Foyers confirmés à Zurich, Lucerne et Schwytz : Zoug renforce la surveillance et demande de contrôler les véhicules, les bagages et les matériaux.",
-          "date": "2026-10-07T09:02:17.902Z"
-        },
-        {
-          "title": "Zoug prévoit un excédent de 15,6 millions en 2027 avec un taux à 52 %",
-          "url": "/fr/articles-zoug/zoug-prevoit-un-excedent-de-15-6-millions-en-2027-avec-un-taux-a-52/",
-          "excerpt": "Le budget 2027 prévoit un excédent de CHF 15,6 millions, des recettes de CHF 446,6 millions et des dépenses de CHF 431,1 millions, avec un taux fiscal requis de 52 %.",
-          "date": "2026-10-07T08:41:12.746Z"
         }
       ],
       "links": [
@@ -528,7 +528,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T00:58:07.231Z"
+      "updatedAt": "2026-10-17T01:36:39.137Z"
     }
   }
 }

@@ -72,4 +72,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'cpcn-tasso-grado-copertura',
+ category: 'pensione',
+ date: '2026-10-17T00:59:33.660Z',
+ image: '/images/blog/article-cpcn-tasso-grado-copertura.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ];

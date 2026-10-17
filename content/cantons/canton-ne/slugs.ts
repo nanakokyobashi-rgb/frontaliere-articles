@@ -9,6 +9,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'aldi-chiude-centro-neuchatel': { it: 'aldi-chiude-centro-neuchatel', en: 'aldi-closes-neuchatel-city-store', de: 'aldi-schliesst-filiale-neuenburg', fr: 'aldi-ferme-magasin-centre-neuchatel' },
  'nuovo-centro-asilo-couvet': { it: 'nuovo-centro-asilo-couvet', en: 'new-asylum-center-couvet', de: 'neues-asylzentrum-couvet', fr: 'nouveau-centre-asile-couvet' },
  'cpcn-rendimento-2025-copertura': { it: 'cpcn-rendimento-2025-copertura', en: 'cpcn-2025-return-coverage', de: 'cpcn-rendite-2025-deckung', fr: 'cpcn-performance-2025-couverture' },
+ 'cpcn-tasso-grado-copertura': { it: 'cpcn-tasso-grado-copertura', en: 'cpcn-coverage-rate-distinction', de: 'cpcn-deckungsgrad-unterschied', fr: 'cpcn-taux-couverture-distinction' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

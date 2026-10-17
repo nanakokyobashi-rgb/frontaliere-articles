@@ -8,6 +8,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'seehas-affollamento-mattutino': { it: 'seehas-affollamento-mattutino', en: 'more-crowded-seehas-and-longer-journeys-on-the-konstanz-singen-line', de: 'starker-ausgelasteter-seehas-und-langere-fahrten-auf-der-strecke-konstanz-singen', fr: 'seehas-plus-charge-et-trajets-plus-longs-sur-la-ligne-konstanz-singen' },
  'sciaffusa-dati-lavoro-2026': { it: 'sciaffusa-dati-lavoro-2026', en: 'schaffhausen-unemployment-september-2026', de: 'schaffhausen-arbeitslosigkeit-september-2026', fr: 'schaffhouse-chomage-septembre-2026' },
  'finanze-cantone-sciaffusa-2027': { it: 'finanze-cantone-sciaffusa-2027', en: 'schaffhausen-canton-finances-2027', de: 'finanzen-kanton-schaffhausen-2027', fr: 'finances-canton-schaffhouse-2027' },
+ 'singen-chiusura-schaffhauser-strasse': { it: 'singen-chiusura-schaffhauser-strasse', en: 'singen-schaffhauser-strasse-closure', de: 'singen-sperrung-schaffhauser-strasse', fr: 'singen-fermeture-schaffhauser-strasse' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

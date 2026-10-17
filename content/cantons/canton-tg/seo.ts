@@ -348,6 +348,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-turgovia-sicurezza-lavoro-orari': {
+    title: 'Turgovia: sicurezza sul lavoro, orari e tutela della salute',
+    description: 'Scopri le regole su sicurezza sul lavoro, tutela della salute, orari e riposi nel Canton Turgovia. Informazioni per datori e lavoratori.',
+    keywords: 'frontalieri, ticino, svizzera, italia, turgovia, sicurezza, lavoro, orari',
+    ogTitle: 'Sicurezza sul lavoro e orari nel Canton Turgovia',
+    ogDescription: 'Approfondimento sulla sicurezza sul lavoro, la tutela della salute, gli orari e i periodi di riposo nel Canton Turgovia secondo le normative vigenti e il supporto dell\'Ispettorato del lavoro.',
+    canonicalPath: '/articoli-turgovia/turgovia-sicurezza-lavoro-orari/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Turgovia: sicurezza sul lavoro, orari e tutela della salute",
+      "description": "Scopri le regole su sicurezza sul lavoro, tutela della salute, orari e riposi nel Canton Turgovia. Informazioni per datori e lavoratori.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sicurezza-lavoro-turgovia-regole.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sicurezza sul lavoro e tutela della salute nel Canton Turgovia"
+      },
+      "datePublished": "2026-10-17T01:07:58+00:00",
+      "dateModified": "2026-10-17T01:07:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/turgovia-sicurezza-lavoro-orari/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

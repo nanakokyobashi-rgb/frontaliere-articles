@@ -21,6 +21,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.cpcn-rendimento-2025-copertura.title': 'CPCN records +5,6% in 2025: coverage 84,8%',
     'blog.article.cpcn-rendimento-2025-copertura.excerpt': '+5,6% for CPCN performance in 2025 3% remuneration on retirement savings 84,8% coverage as at December 31, 2025 RFV of CHF 979 million, at 92% of the target',
     'blog.article.cpcn-rendimento-2025-copertura.imageAlt': 'CPCN real-estate assets and pension provision in Neuchâtel',
+    'blog.article.cpcn-tasso-grado-copertura.title': 'CPCN: the difference between coverage rate and coverage level',
+    'blog.article.cpcn-tasso-grado-copertura.excerpt': 'The rate excludes the RFV from the calculation.',
+    'blog.article.cpcn-tasso-grado-copertura.imageAlt': 'Analysis of CPCN coverage rates',
 };
 
 export default blogMetaCantonNeEn;
