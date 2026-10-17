@@ -6167,7 +6167,7 @@
       "reason": "Gate pre-pubblicazione che scansiona i body TypeScript del corpus e blocca link Markdown che diventerebbero route relative crawlable. Il sito consuma la superficie JSON via HTTP e non pubblica direttamente questi file sorgente.",
       "baseline": {
         "site": null,
-        "corpus": "1ad0662ca590f5ad",
+        "corpus": "2a3ebc64c70c69db",
         "alignedAt": "2026-10-17"
       }
     },
