@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T01:06:44.851Z",
-  "contentHash": "c8c4c743006bb939c07286c634bd00d43570eafbc2d7c663640fac77e3cce8e5",
+  "updatedAt": "2026-10-17T01:20:30.754Z",
+  "contentHash": "e3964439f06011879ebe2ea3c505bda55082fee7152d96e06b303e246c3e308f",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Salario minimo in Vallese: voto il 29 novembre sui CHF 22",
+          "url": "/articoli-vallese/valais-salario-minimo-2026/",
+          "excerpt": "15'000 salariati a tempo pieno non vivono del salario Il voto sul salario minimo è fissato al 29 novembre La proposta prevede CHF 22 lordi l'ora Il Parlamento",
+          "date": "2026-10-17T01:13:51.089Z"
+        },
+        {
           "title": "Fully: oltre 5,5 km di strada diventano ciclabili",
           "url": "/articoli-vallese/fully-strada-ciclabile/",
           "excerpt": "Il Comune di Fully amplia la mobilità dolce: la strada a nord del canale diventa rue cyclable e i ciclisti hanno la priorità a 12 intersezioni.",
@@ -106,12 +112,6 @@
           "url": "/articoli-vallese/maison-garde-ospedale-sion/",
           "excerpt": "Dal 1° settembre l'ospedale di Sion ha attivato un nuovo presidio per i casi non vitali, attivo ogni giorno dalle 18 alle 22.",
           "date": "2026-10-08T17:03:41.241Z"
-        },
-        {
-          "title": "A9 Sion-Sierre: tre settimane di chiusure notturne",
-          "url": "/articoli-vallese/a9-chiusure-notturne-sion-sierre/",
-          "excerpt": "Tre settimane di chiusure: dal 12 al 30 ottobre Lavori fermi d'inverno, ripresa a marzo 2027 Chiusure notturne dalle 20 alle 5 Tratta → A9 tra Sion e Sierre",
-          "date": "2026-10-08T15:24:54.934Z"
         }
       ],
       "links": [
@@ -140,7 +140,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T01:06:44.851Z"
+      "updatedAt": "2026-10-17T01:20:30.754Z"
     },
     "en": {
       "canton": "VS",
@@ -211,6 +211,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Minimum wage in Valais: vote on November 29 on CHF 22",
+          "url": "/en/valais-articles/valais-minimum-wage-2026/",
+          "excerpt": "15'000 full-time employees cannot make a living from their wages The vote on the minimum wage is set for November 29 The proposal provides for a gross hourly",
+          "date": "2026-10-17T01:13:51.089Z"
+        },
+        {
           "title": "Fully: over 5,5 km of road become cycle paths",
           "url": "/en/valais-articles/fully-cycle-street/",
           "excerpt": "The Municipality of Fully expands active mobility: the road north of the canal becomes a bicycle street, and cyclists have priority at 12 intersections.",
@@ -233,12 +239,6 @@
           "url": "/en/valais-articles/maison-garde-sion-hospital/",
           "excerpt": "As of September 1st, Sion Hospital has opened a new facility for non-life-threatening cases, open every day from 18 to 22.",
           "date": "2026-10-08T17:03:41.241Z"
-        },
-        {
-          "title": "A9 Sion-Sierre: three weeks of nighttime closures",
-          "url": "/en/valais-articles/a9-night-closures-sion-sierre/",
-          "excerpt": "Three weeks of closures: from October 12 to 30 Work halted over the winter, resumption in March 2027 Nighttime closures from 20 to 5 Route → A9 between Sion",
-          "date": "2026-10-08T15:24:54.934Z"
         }
       ],
       "links": [
@@ -267,7 +267,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T01:06:44.851Z"
+      "updatedAt": "2026-10-17T01:20:30.754Z"
     },
     "de": {
       "canton": "VS",
@@ -338,6 +338,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Mindestlohn im Wallis: Abstimmung am 29. November über CHF 22",
+          "url": "/de/wallis-artikel/wallis-mindestlohn-2026/",
+          "excerpt": "15'000 Vollzeitbeschäftigte leben nicht vom Lohn Die Abstimmung über den Mindestlohn ist auf den 29.",
+          "date": "2026-10-17T01:13:51.089Z"
+        },
+        {
           "title": "Fully: Mehr als 5,5 km Straße werden zu Fahrradstraßen",
           "url": "/de/wallis-artikel/fully-fahrradstrasse/",
           "excerpt": "Die Gemeinde Fully baut die sanfte Mobilität aus: Die Straße nördlich des Kanals wird zur Fahrradstraße, und Radfahrende haben an 12 Kreuzungen Vorrang.",
@@ -360,12 +366,6 @@
           "url": "/de/wallis-artikel/maison-garde-spital-sitten/",
           "excerpt": "Seit dem 1. September hat das Spital von Sitten eine neue Anlaufstelle für nicht lebensbedrohliche Fälle eingerichtet, die täglich von 18 bis 22 Uhr geöffnet ist.",
           "date": "2026-10-08T17:03:41.241Z"
-        },
-        {
-          "title": "A9 Sitten-Sierre: drei Wochen nächtliche Sperrungen",
-          "url": "/de/wallis-artikel/a9-nachtsperrungen-sitten-sierre/",
-          "excerpt": "Drei Wochen Sperrungen: vom 12.",
-          "date": "2026-10-08T15:24:54.934Z"
         }
       ],
       "links": [
@@ -390,7 +390,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T01:06:44.851Z"
+      "updatedAt": "2026-10-17T01:20:30.754Z"
     },
     "fr": {
       "canton": "VS",
@@ -461,6 +461,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Salaire minimum en Valais : vote le 29 novembre sur les CHF 22",
+          "url": "/fr/articles-valais/valais-salaire-minimum-2026/",
+          "excerpt": "15'000 salariés à temps plein ne vivent pas de leur salaire Le vote sur le salaire minimum est fixé au 29 novembre La proposition prévoit CHF 22 bruts",
+          "date": "2026-10-17T01:13:51.089Z"
+        },
+        {
           "title": "Fully : plus de 5,5 km de route deviennent cyclables",
           "url": "/fr/articles-valais/fully-rue-cyclable/",
           "excerpt": "La commune de Fully étend la mobilité douce : la route au nord du canal devient une rue cyclable et les cyclistes ont la priorité à 12 intersections.",
@@ -483,12 +489,6 @@
           "url": "/fr/articles-valais/maison-garde-hopital-sion/",
           "excerpt": "À partir du 1er septembre, l’hôpital de Sion a mis en place un nouveau dispositif pour les cas non vitaux, ouvert tous les jours de 18 à 22 heures.",
           "date": "2026-10-08T17:03:41.241Z"
-        },
-        {
-          "title": "A9 Sion-Sierre : trois semaines de fermetures nocturnes",
-          "url": "/fr/articles-valais/a9-fermetures-nocturnes-sion-sierre/",
-          "excerpt": "Trois semaines de fermetures : du 12 au 30 octobre Travaux interrompus en hiver, reprise en mars 2027 Fermetures nocturnes de 20 h à 5 h Tronçon → A9 entre Sion",
-          "date": "2026-10-08T15:24:54.934Z"
         }
       ],
       "links": [
@@ -517,7 +517,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T01:06:44.851Z"
+      "updatedAt": "2026-10-17T01:20:30.754Z"
     }
   }
 }
