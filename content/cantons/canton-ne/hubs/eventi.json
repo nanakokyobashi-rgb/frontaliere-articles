@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T00:12:19.402Z",
-  "contentHash": "804e89f3f39a5b059f3abdcd4a8717a1beb4cbbbc90ebfa0757940d23c9ffbca",
+  "updatedAt": "2026-10-17T01:04:37.805Z",
+  "contentHash": "185afd0500fe9f9b06607d7d283d90d75c225333bb92a58c3ac50e76a53c5023",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -134,6 +134,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "CPCN: la differenza tra tasso e grado di copertura",
+          "url": "/articoli-neuchatel/cpcn-tasso-grado-copertura/",
+          "excerpt": "Il tasso esclude la RFV dal calcolo.",
+          "date": "2026-10-17T00:59:33.660Z"
+        },
+        {
           "title": "CPCN registra +5,6% nel 2025: copertura 84,8%",
           "url": "/articoli-neuchatel/cpcn-rendimento-2025-copertura/",
           "excerpt": "+5,6% per la performance CPCN nel 2025 3% di remunerazione sugli averi di vecchiaia 84,8% di copertura al 31.12.2025 RFV da CHF 979 milioni, al 92%",
@@ -156,12 +162,6 @@
           "url": "/articoli-neuchatel/neuchatel-referendum-salari-minimi/",
           "excerpt": "Oltre 100.000 firme contro la riforma del Parlamento",
           "date": "2026-10-08T11:16:38.230Z"
-        },
-        {
-          "title": "Disoccupazione stabile 4,4% Neuchâtel settembre 2026",
-          "url": "/articoli-neuchatel/disoccupazione-stabile-4-4-neuchatel-settembre-2026/",
-          "excerpt": "3.945 disoccupati in settembre 2026",
-          "date": "2026-10-07T09:30:57.326Z"
         }
       ],
       "links": [
@@ -174,7 +174,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:04:37.805Z"
     },
     "en": {
       "canton": "NE",
@@ -291,6 +291,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "CPCN: the difference between coverage rate and coverage level",
+          "url": "/en/neuchatel-articles/cpcn-coverage-rate-distinction/",
+          "excerpt": "The rate excludes the RFV from the calculation.",
+          "date": "2026-10-17T00:59:33.660Z"
+        },
+        {
           "title": "CPCN records +5,6% in 2025: coverage 84,8%",
           "url": "/en/neuchatel-articles/cpcn-2025-return-coverage/",
           "excerpt": "+5,6% for CPCN performance in 2025 3% remuneration on retirement savings 84,8% coverage as at December 31, 2025 RFV of CHF 979 million, at 92% of the target",
@@ -311,11 +317,6 @@
           "title": "Neuchâtel: referendum on cantonal minimum wages and collective labour agreements",
           "url": "/en/neuchatel-articles/neuchatel-minimum-wage-referendum/",
           "date": "2026-10-08T11:16:38.230Z"
-        },
-        {
-          "title": "Unemployment stable at 4,4% Neuchâtel September 2026",
-          "url": "/en/neuchatel-articles/unemployment-stable-at-4-4-neuchatel-september-2026/",
-          "date": "2026-10-07T09:30:57.326Z"
         }
       ],
       "links": [
@@ -328,7 +329,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:04:37.805Z"
     },
     "de": {
       "canton": "NE",
@@ -445,6 +446,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "CPCN: der Unterschied zwischen Deckungssatz und Deckungsgrad",
+          "url": "/de/neuenburg-artikel/cpcn-deckungsgrad-unterschied/",
+          "excerpt": "Der Deckungssatz schließt die RFV aus der Berechnung aus.",
+          "date": "2026-10-17T00:59:33.660Z"
+        },
+        {
           "title": "CPCN verzeichnet 2025 ein Plus von +5,6%: Deckungsgrad 84,8%",
           "url": "/de/neuenburg-artikel/cpcn-rendite-2025-deckung/",
           "excerpt": "+5,6% bei der Performance der CPCN im Jahr 2025 3% Verzinsung der Altersguthaben 84,8% Deckungsgrad am 31.12.2025 RFV in Höhe von CHF 979 Millionen, bei 92%",
@@ -465,11 +472,6 @@
           "title": "Neuenburg: Referendum zu kantonalen Mindestlöhnen und GAV",
           "url": "/de/neuenburg-artikel/neuenburg-mindestlohn-referendum/",
           "date": "2026-10-08T11:16:38.230Z"
-        },
-        {
-          "title": "Arbeitslosigkeit in Neuenburg im September 2026 stabil bei 4,4%",
-          "url": "/de/neuenburg-artikel/arbeitslosigkeit-in-neuenburg-im-september-2026-stabil-bei-4-4/",
-          "date": "2026-10-07T09:30:57.326Z"
         }
       ],
       "links": [
@@ -482,7 +484,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:04:37.805Z"
     },
     "fr": {
       "canton": "NE",
@@ -599,6 +601,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "CPCN : la différence entre le taux et le degré de couverture",
+          "url": "/fr/articles-neuchatel/cpcn-taux-couverture-distinction/",
+          "excerpt": "Le taux exclut la RFV du calcul.",
+          "date": "2026-10-17T00:59:33.660Z"
+        },
+        {
           "title": "La CPCN enregistre +5,6% en 2025 : taux de couverture de 84,8%",
           "url": "/fr/articles-neuchatel/cpcn-performance-2025-couverture/",
           "excerpt": "+5,6% pour la performance de la CPCN en 2025 3% de rémunération sur les avoirs de vieillesse 84,8% de couverture au 31 décembre 2025 RFV de CHF 979 millions",
@@ -621,12 +629,6 @@
           "url": "/fr/articles-neuchatel/neuchatel-referendum-salaires-minimaux/",
           "excerpt": "Plus de 100.000 signatures contre la réforme du Parlement",
           "date": "2026-10-08T11:16:38.230Z"
-        },
-        {
-          "title": "Chômage stable à 4,4% à Neuchâtel en septembre 2026",
-          "url": "/fr/articles-neuchatel/chomage-stable-a-4-4-a-neuchatel-en-septembre-2026/",
-          "excerpt": "3.945 chômeurs en septembre 2026",
-          "date": "2026-10-07T09:30:57.326Z"
         }
       ],
       "links": [
@@ -639,7 +641,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T01:04:37.805Z"
     }
   }
 }
