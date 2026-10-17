@@ -1645,6 +1645,8 @@ export async function publish({
   releaseReadyMaxWaitMs = RELEASE_READY_MAX_WAIT_MS,
   releaseReadyRetryDelayMs = RELEASE_READY_RETRY_DELAY_MS,
   sleepImpl = sleep,
+  snapshotPagesBeforeUpload = false,
+  immutablePages = [],
   assertMainFreshImpl = async () => {},
 }) {
   let failures = 0;
@@ -1726,6 +1728,7 @@ export async function publish({
     return pageFailures + rssFailures;
   };
   const uploaded = [];
+  const immutableMismatches = [];
   let status = beforeStatus;
   console.log(`[${LOG}] preflight: sezione ${section} nel registro pubblicato = ${beforeStatus}`);
   // This is the first remote mutation after render/preflight. Recheck here,
@@ -1749,6 +1752,35 @@ export async function publish({
     return { failures, uploaded: 0, deleted: 0, status: beforeStatus };
   }
   try {
+  if (snapshotPagesBeforeUpload && !pageSnapshots) {
+    await assertMainFreshImpl();
+    try {
+      const snapshots = await snapshotCantonPages([...pages, ...immutablePages], { probeImpl });
+      for (const page of uniqueCantonPages(immutablePages)) {
+        const previous = snapshots.get(page.edgeKey);
+        const local = path.join(distDir, page.rel);
+        const next = fs.existsSync(local) ? fs.readFileSync(local, 'utf8') : null;
+        if (!previous?.exists || next === null) {
+          console.error(
+            `::error::[${LOG}] bootstrap live: non è possibile dimostrare la pagina precedente o il render locale per ${page.edgeKey}; ` +
+            'la release non può proseguire',
+          );
+          return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
+        }
+        if (next !== previous.body) {
+          immutableMismatches.push(page.edgeKey);
+          console.log(
+            `::notice::[${LOG}] bootstrap live: il render di ${page.edgeKey} differisce; ` +
+            'la chiave precedente resta servita e la sostituzione viene differita al replay post-flip',
+          );
+        }
+      }
+      pageSnapshots = new Map(uniqueCantonPages(pages).map((page) => [page.edgeKey, snapshots.get(page.edgeKey)]));
+    } catch (error) {
+      console.error(`::error::[${LOG}] snapshot della release HTML precedente fallito: ${error?.message ?? String(error)}`);
+      return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
+    }
+  }
   if (cantonRssFeeds.length > 0 || removeStaleCantonRssFeeds) {
     const rssStatus = await publishedStatusImpl(section);
     if (rssStatus !== 'live' && !removeStaleCantonRssFeeds) {
@@ -1910,7 +1942,15 @@ export async function publish({
   }
   await assertMainFreshImpl();
   const rollbackFailures = failures > 0 ? await rollbackRssAfterObsoleteMutation() : 0;
-  return { failures: failures + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: deleted.length, status };
+  return {
+    failures: failures + rollbackFailures,
+    rollbackFailures,
+    uploaded: uploaded.length,
+    deleted: deleted.length,
+    status,
+    immutableMismatch: immutableMismatches.length > 0,
+    immutableMismatches,
+  };
   } catch (error) {
     console.error(`::error::[${LOG}] pubblicazione ${section} fallita: ${error?.message ?? String(error)}`);
     const rollbackFailures = await rollbackRssAfterObsoleteMutation();
@@ -1933,6 +1973,7 @@ export async function main(
     publishedApiReleaseCommitImpl = publishedApiReleaseCommit,
     publishedReleaseReadyImpl = publishedReleaseReady,
     latestApiInputCommitImpl = latestApiInputCommit,
+    sourceRegistryIdsImpl = sourceRegistryIds,
     currentMainHeadImpl = publishedMainHead,
     fetchImpl = fetch,
   } = {},
@@ -1942,7 +1983,7 @@ export async function main(
   const section = args.section;
   const distDir = path.resolve(args.out);
   fs.mkdirSync(distDir, { recursive: true });
-  const ids = args.bootstrap ? sourceRegistryIds(ROOT_DIR, section) : args.ids;
+  const ids = args.bootstrap ? sourceRegistryIdsImpl(ROOT_DIR, section) : args.ids;
   const publishing = args.publish && !args.dryRun;
   const publisherCommit = publishing
     ? execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()
@@ -2000,6 +2041,15 @@ export async function main(
   }
   let cantonRssFeeds = [];
   let removeStaleCantonRssFeeds = false;
+  // A live section can receive its first article pages in the same corpus
+  // release that updates the API registry. The API publisher cannot flip that
+  // registry until those pages exist on R2, while the normal live-page path
+  // waits for the flipped registry before touching RSS. Bootstrap is the
+  // deliberate two-phase exception: validate and upload HTML first, preserve
+  // the old RSS/obsolete-page surface, and let the API completion replay do
+  // the feed/deletion phase after its release is actually served.
+  let deferredLiveBootstrapRelease = false;
+  let liveBootstrapManifestMissing = false;
   if (publishing && (effectiveStatus === 'live' || cleanupRssRequested)) {
     const readiness = await publishedReleaseReadyImpl(releaseCommit, { section, fetchImpl });
     // Se la readiness è transitoria, mantieni il gate fail-closed completo e
@@ -2012,6 +2062,29 @@ export async function main(
         : cantonRssFeedEntries(section);
       cantonRssFeeds = cleanupRssRequested ? [] : declaredFeeds;
       removeStaleCantonRssFeeds = cleanupRssRequested || cantonRssFeeds.length === 0;
+    } else if (
+      args.bootstrap
+      && effectiveStatus === 'live'
+      && !cleanupRssRequested
+      && publishedManifest.state === 'ok'
+      && publishedManifestPages
+    ) {
+      deferredLiveBootstrapRelease = true;
+      console.log(
+        `::notice::[${LOG}] bootstrap ${section}: release API/edge non ancora servita; ` +
+        'differisco RSS e cancellazioni obsolete dopo il flip, senza allentare la verifica HTML',
+      );
+    } else if (
+      args.bootstrap
+      && effectiveStatus === 'live'
+      && !cleanupRssRequested
+      && publishedManifest.state === 'absent'
+    ) {
+      liveBootstrapManifestMissing = true;
+      console.log(
+        `::notice::[${LOG}] bootstrap ${section}: manifest precedente assente e release API/edge non pronta; ` +
+        'blocco la pubblicazione finché la superficie precedente non è dimostrata',
+      );
     } else {
       cantonRssFeeds = effectiveStatus === 'live' && !cleanupRssRequested ? cantonRssFeedEntries(section) : [];
       removeStaleCantonRssFeeds = cleanupRssRequested;
@@ -2102,8 +2175,24 @@ export async function main(
     currentArchivePages,
     aggregatePagesAllowed,
   });
-
   const defects = [];
+  const obsoletePagesForPublish = deferredLiveBootstrapRelease ? [] : obsoletePages;
+  const publishedPageKeys = new Set(
+    publishedManifestPages
+      ? Object.values(publishedManifestPages).flatMap((kindPages) => kindPages.map((page) => page.edgeKey))
+      : [],
+  );
+  // During the bootstrap phase the old sitemap and edge registry are still
+  // live. Only keys absent from the verified old page manifest are immutable
+  // additions; replacing an already announced key here would mix two releases
+  // before the API/edge pointer flips.
+  const pagesForPublish = deferredLiveBootstrapRelease
+    ? pages.filter((page) => !publishedPageKeys.has(page.edgeKey))
+    : pages;
+  const immutableBootstrapPages = deferredLiveBootstrapRelease
+    ? pages.filter((page) => publishedPageKeys.has(page.edgeKey))
+    : [];
+
   if (publishing && effectiveStatus === null) {
     defects.push('registro edge illeggibile o non valido: stato effettivo della sezione non dimostrato');
   }
@@ -2111,6 +2200,12 @@ export async function main(
     defects.push(
       `manifest edge ${section} non verificabile (${publishedManifest.reason ?? 'errore sconosciuto'}): ` +
       'pubblicazione bloccata per non calcolare cancellazioni dal parent del push',
+    );
+  }
+  if (liveBootstrapManifestMissing) {
+    defects.push(
+      `bootstrap live ${section} senza manifest precedente e senza release API/edge verificata: ` +
+      'pubblicazione bloccata per non sovrascrivere pagine già live senza inventario',
     );
   }
   for (const page of pages) {
@@ -2167,10 +2262,15 @@ export async function main(
     aggregatePagesAllowed,
     publishedPageManifest: publishedManifest.state,
     effectiveStatus,
+    deferredLiveBootstrapRelease,
+    liveBootstrapManifestMissing,
     cantonRssFeeds: cantonRssFeeds.map(({ name, key, url }) => ({ name, key, url })),
     pages,
+    pagesForPublish,
+    immutableBootstrapPages,
     cdnUploads,
     obsoletePages,
+    obsoletePagesForPublish,
     defects,
     published: null,
   };
@@ -2215,18 +2315,28 @@ export async function main(
     }
   }
   summary.published = await publishImpl({
-    pages,
+    pages: pagesForPublish,
     cdnUploads,
     cantonRssFeeds,
     removeStaleCantonRssFeeds,
-    obsoletePages,
+    // Keep the previous page manifest until the API flip is live: otherwise a
+    // bootstrap retry would lose the inventory needed to delete old slugs.
+    obsoletePages: obsoletePagesForPublish,
     distDir,
     section,
     releaseCommit,
     publishCantonRssFeedsImpl,
+    snapshotPagesBeforeUpload: deferredLiveBootstrapRelease,
+    immutablePages: immutableBootstrapPages,
     assertMainFreshImpl,
   });
-  if (summary.published.failures === 0) {
+  if (summary.published.failures === 0 && deferredLiveBootstrapRelease) {
+    summary.published.manifestDeferred = true;
+    console.log(
+      `::notice::[${LOG}] manifest edge ${section} differito: ` +
+      'verrà riscritto dal replay dopo la release API/edge',
+    );
+  } else if (summary.published.failures === 0) {
     const manifestPages = aggregatePagesAllowed
       ? [
         ...articleManifestPages({
@@ -2253,7 +2363,7 @@ export async function main(
     }
   }
   writeSummary();
-  console.log(`[${LOG}] pubblicate ${summary.published.uploaded}/${pages.length} pagine, ${summary.published.failures} fallimenti`);
+  console.log(`[${LOG}] pubblicate ${summary.published.uploaded}/${pagesForPublish.length} pagine, ${summary.published.failures} fallimenti`);
   return summary.published.failures ? 1 : 0;
 }
 
