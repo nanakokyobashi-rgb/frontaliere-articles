@@ -222,6 +222,77 @@ test('publisher: il bootstrap live differisce RSS, cancellazioni e manifest finc
   }
 });
 
+test('publisher: lo staging bootstrap live carica solo chiavi HTML nuove e snapshotta prima dell upload', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-bootstrap-stage-'));
+  const outDir = path.join(fixtureRoot, 'dist');
+  const routePrefix = { it: 'articoli-ticino', en: 'en/ticino-articles', de: 'de/tessin-artikel', fr: 'fr/articles-tessin' };
+  const oldPages = ['it', 'en', 'de', 'fr'].map((localeCode) => ({
+    ...pageEntry('canton-ti', `${routePrefix[localeCode]}/old/index.html`, 'article'),
+    id: 'old',
+  }));
+  const publishedDoc = pageManifestFromPages({ section: 'canton-ti', commit: 'published', pages: oldPages });
+  const newPages = ['it', 'en', 'de', 'fr'].map((localeCode) => ({
+    localeCode,
+    rel: `${routePrefix[localeCode]}/new/index.html`,
+  }));
+  let publishOptions = null;
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  try {
+    console.log = () => {};
+    console.error = () => {};
+    const code = await main(
+      ['--section', 'canton-ti', '--bootstrap', '--out', outDir, '--summary', path.join(fixtureRoot, 'summary.json'), '--publish'],
+      {
+        parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
+        sourceRegistryIdsImpl: () => ['new'],
+        fetchPageManifestImpl: async () => ({ state: 'ok', doc: publishedDoc }),
+        publishedStatusImpl: async () => 'live',
+        publishedApiReleaseCommitImpl: async () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        publishedReleaseReadyImpl: async () => ({ ok: false, reason: 'registro edge non ancora sul commit' }),
+        currentMainHeadImpl: () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
+        renderSectionArticlePipelineImpl: async () => {
+          for (const { rel } of newPages) {
+            const page = pageEntry('canton-ti', rel, 'article');
+            const local = path.join(outDir, page.rel);
+            mkdirSync(path.dirname(local), { recursive: true });
+            writeFileSync(
+              local,
+              `<!doctype html><html><head><link rel="canonical" href="${page.apexUrl}">${CORPUS_ROUTE_OWNER_META_TAG}</head><body>${'nuova release '.repeat(30)}</body></html>`,
+              'utf8',
+            );
+          }
+          return {
+            entries: [{
+              articleId: 'new',
+              paths: Object.fromEntries(newPages.map(({ localeCode, rel }) => [localeCode, rel])),
+            }],
+            hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
+            downloadedImageKeys: [],
+            imageFetchFailures: [],
+            imagePostcondition: {},
+            aggregatePagesAllowed: false,
+          };
+        },
+        articleReleaseSnapshotImpl: () => [],
+        publishImpl: async (options) => {
+          publishOptions = options;
+          return { failures: 0, uploaded: options.pages.length, deleted: 0, status: 'live' };
+        },
+        publishPageManifestImpl: () => true,
+      },
+    );
+    assert.equal(code, 0);
+    assert.deepEqual(publishOptions.pages.map((page) => page.edgeKey), newPages.map(({ rel }) => pageEntry('canton-ti', rel, 'article').edgeKey));
+    assert.equal(publishOptions.snapshotPagesBeforeUpload, true);
+  } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('publisher: il fallback API copre l\'ultimo input raggiungibile dal publisher', async () => {
   const publisherCommit = 'a'.repeat(40);
   const apiCommit = 'b'.repeat(40);
@@ -921,6 +992,70 @@ test('publisher: abortisce prima del primo upload se main avanza durante il rend
   }
   assert.deepEqual(events, ['read-status', 'check-main']);
   assert.ok(!events.includes('upload'), 'nessuna mutazione remota parte con un render obsoleto');
+});
+
+test('publisher: lo staging snapshotta le chiavi prima dell HTML e ripristina un upload parziale', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'publish-bootstrap-snapshot-'));
+  const first = pageEntry('canton-ti', 'articoli-ticino/new-one/index.html', 'article');
+  const second = pageEntry('canton-ti', 'articoli-ticino/new-two/index.html', 'article');
+  const previousHtml = `<!doctype html><html><head>${CORPUS_ROUTE_OWNER_META_TAG}</head><body>precedente</body></html>`;
+  const events = [];
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  try {
+    console.log = () => {};
+    console.error = () => {};
+    const result = await publish({
+      section: 'canton-ti',
+      pages: [first, second],
+      cdnUploads: [],
+      obsoletePages: [],
+      distDir: fixtureRoot,
+      snapshotPagesBeforeUpload: true,
+      publishedStatusImpl: async () => 'live',
+      runImpl: (_command, args) => {
+        if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+          if (args[1].includes('.canton-page-rollback-')) {
+            events.push('restore');
+            return { code: 0, stdout: '✅ uploaded' };
+          }
+          events.push(`upload:${args[2].includes('new-one') ? 'one' : 'two'}`);
+          return args[2].includes('new-one')
+            ? { code: 0, stdout: '✅ uploaded' }
+            : { code: 1, stdout: '' };
+        }
+        if (args[0] === 'scripts/lib/delete-cdn-file.sh') {
+          events.push('delete-new-two');
+          return { code: 0, stdout: '✅ deleted' };
+        }
+        if (args.includes('scripts/cf-purge-cache.mjs')) {
+          events.push('purge');
+          return { code: 0, stdout: '' };
+        }
+        throw new Error(`comando inatteso: ${args.join(' ')}`);
+      },
+      probeImpl: async (url) => {
+        const isFirst = url === first.cdnUrl || url === first.apexUrl;
+        events.push(isFirst ? 'probe-one' : 'probe-two');
+        return isFirst
+          ? { ok: true, status: 200, body: previousHtml }
+          : { ok: false, status: 'HTTP 404' };
+      },
+    });
+    assert.equal(result.failures, 1, JSON.stringify({ result, events }));
+    assert.equal(result.uploaded, 1);
+    assert.equal(result.rollbackFailures, 0);
+    assert.deepEqual(events, [
+      'probe-one', 'probe-two',
+      'upload:one', 'upload:two',
+      'restore', 'delete-new-two', 'purge',
+      'probe-one', 'probe-one', 'probe-two', 'probe-two',
+    ]);
+  } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
 });
 
 test('publisher: un avanzamento di main prima dell HTML ripristina RSS e abortisce', async () => {

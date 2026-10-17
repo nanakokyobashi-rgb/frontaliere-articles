@@ -1645,6 +1645,7 @@ export async function publish({
   releaseReadyMaxWaitMs = RELEASE_READY_MAX_WAIT_MS,
   releaseReadyRetryDelayMs = RELEASE_READY_RETRY_DELAY_MS,
   sleepImpl = sleep,
+  snapshotPagesBeforeUpload = false,
   assertMainFreshImpl = async () => {},
 }) {
   let failures = 0;
@@ -1749,6 +1750,15 @@ export async function publish({
     return { failures, uploaded: 0, deleted: 0, status: beforeStatus };
   }
   try {
+  if (snapshotPagesBeforeUpload && !pageSnapshots) {
+    await assertMainFreshImpl();
+    try {
+      pageSnapshots = await snapshotCantonPages(pages, { probeImpl });
+    } catch (error) {
+      console.error(`::error::[${LOG}] snapshot della release HTML precedente fallito: ${error?.message ?? String(error)}`);
+      return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
+    }
+  }
   if (cantonRssFeeds.length > 0 || removeStaleCantonRssFeeds) {
     const rssStatus = await publishedStatusImpl(section);
     if (rssStatus !== 'live' && !removeStaleCantonRssFeeds) {
@@ -2117,9 +2127,21 @@ export async function main(
     currentArchivePages,
     aggregatePagesAllowed,
   });
-  const obsoletePagesForPublish = deferredLiveBootstrapRelease ? [] : obsoletePages;
-
   const defects = [];
+  const obsoletePagesForPublish = deferredLiveBootstrapRelease ? [] : obsoletePages;
+  const publishedPageKeys = new Set(
+    publishedManifestPages
+      ? Object.values(publishedManifestPages).flatMap((kindPages) => kindPages.map((page) => page.edgeKey))
+      : [],
+  );
+  // During the bootstrap phase the old sitemap and edge registry are still
+  // live. Only keys absent from the verified old page manifest are immutable
+  // additions; replacing an already announced key here would mix two releases
+  // before the API/edge pointer flips.
+  const pagesForPublish = deferredLiveBootstrapRelease
+    ? pages.filter((page) => !publishedPageKeys.has(page.edgeKey))
+    : pages;
+
   if (publishing && effectiveStatus === null) {
     defects.push('registro edge illeggibile o non valido: stato effettivo della sezione non dimostrato');
   }
@@ -2186,6 +2208,7 @@ export async function main(
     deferredLiveBootstrapRelease,
     cantonRssFeeds: cantonRssFeeds.map(({ name, key, url }) => ({ name, key, url })),
     pages,
+    pagesForPublish,
     cdnUploads,
     obsoletePages,
     obsoletePagesForPublish,
@@ -2233,7 +2256,7 @@ export async function main(
     }
   }
   summary.published = await publishImpl({
-    pages,
+    pages: pagesForPublish,
     cdnUploads,
     cantonRssFeeds,
     removeStaleCantonRssFeeds,
@@ -2244,6 +2267,7 @@ export async function main(
     section,
     releaseCommit,
     publishCantonRssFeedsImpl,
+    snapshotPagesBeforeUpload: deferredLiveBootstrapRelease,
     assertMainFreshImpl,
   });
   if (summary.published.failures === 0 && deferredLiveBootstrapRelease) {
@@ -2279,7 +2303,7 @@ export async function main(
     }
   }
   writeSummary();
-  console.log(`[${LOG}] pubblicate ${summary.published.uploaded}/${pages.length} pagine, ${summary.published.failures} fallimenti`);
+  console.log(`[${LOG}] pubblicate ${summary.published.uploaded}/${pagesForPublish.length} pagine, ${summary.published.failures} fallimenti`);
   return summary.published.failures ? 1 : 0;
 }
 
