@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T03:47:28.379Z",
-  "contentHash": "4e96d2904f2188de582864b255025c61fd19dcb8cac52c8a395863d574658074",
+  "updatedAt": "2026-10-17T19:17:26.345Z",
+  "contentHash": "e5e67a24f206fdb61166ec2c01a3dbead12d37600d0229ee8fad2a441931c4a4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T10:44:21.348Z",
+      "updatedAt": "2026-10-17T13:31:50.370Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "246",
+          "value": "253",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Lugano Classic 2026",
-              "detail": "Piazza Riforma 1, Lugano",
+              "label": "Carlo Agostino Meletta - pittore",
+              "detail": "Museo Onsernonese, Locarno",
               "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lugano-classic-2026/"
+              "url": "https://www.tio.ch/agenda/day/20261017/63364"
             },
             {
-              "label": "Pro-Am - Comune di Ascona & OTLMV",
-              "detail": "Golf Club Patriziale Ascona, Ascona",
+              "label": "Film festival diritti umani",
+              "detail": "Cinema Corso e Iride, Lugano",
               "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/proam-comune-di-ascona-otlmv/"
+              "url": "https://www.tio.ch/agenda/day/20261017/64146"
             },
             {
-              "label": "10 anni di Caffè riparazione!",
-              "detail": "Capannone, Lugano",
+              "label": "Film Trail Locarno",
+              "detail": "Palacinema, Locarno",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64465"
+              "url": "https://www.tio.ch/agenda/day/20261017/63993"
             },
             {
-              "label": "Amici animali 2026",
-              "detail": "Centro Eventi, Cadempino",
+              "label": "Fra Roberto tra le mura",
+              "detail": "Sasso Corbaro, Bellinzona",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64455"
+              "url": "https://www.tio.ch/agenda/day/20261017/61525"
             },
             {
-              "label": "Dolore cronico: nuove frontiere terapeutiche",
-              "detail": "Sala del Palazzo dei Congressi, Muralto",
+              "label": "Fuori di Zucca, il villaggio delle zucche",
+              "detail": "Fuori di Zucca, Savosa",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/62838"
+              "url": "https://www.tio.ch/agenda/day/20261017/64302"
             },
             {
-              "label": "Vivi il giardino",
-              "detail": "GiardinoPiù di Gudo, Bellinzona",
+              "label": "Impressioni - Mostra di pittura di Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/62880"
+              "url": "https://www.tio.ch/agenda/day/20261017/64414"
             },
             {
-              "label": "Escursione Verzasca seminomade",
-              "detail": "Fermata bus Motta, Verzasca",
+              "label": "Ivo Soldini - Progetto Castel Grande",
+              "detail": "Castel Grande, Bellinzona",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64054"
+              "url": "https://www.tio.ch/agenda/day/20261017/62822"
             },
             {
-              "label": "Mercatino del vinile e del fumetto",
-              "detail": "Piazza buffi, Bellinzona",
+              "label": "Jannis Kounellis: Io sono un pittore",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64540"
+              "url": "https://www.tio.ch/agenda/day/20261017/63037"
             },
             {
-              "label": "Schermo aperto. Opere video dalla collezione",
-              "detail": "Masi, sede Palazzo Reali, Lugano",
+              "label": "Mattia Polli - Vent'anni di scultura",
+              "detail": "Galleria Vecchia Posta, Brusino Arsizio",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64595"
+              "url": "https://www.tio.ch/agenda/day/20261017/64143"
             },
             {
-              "label": "Una giornata con Frank il castoro",
-              "detail": "Percorso vita, Castel San Pietro",
+              "label": "Mona Caron - La resilienza della vita",
+              "detail": "Museo Centovalli e Pedemonte, Centovalli",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64475"
+              "url": "https://www.tio.ch/agenda/day/20261017/63363"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T13:31:50.370Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-17T03:47:28.379Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "246",
+          "value": "253",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,69 +184,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Lugano Classic 2026",
-              "detail": "Piazza Riforma 1, Lugano",
+              "label": "Carlo Agostino Meletta - painter",
+              "detail": "Museo Onsernonese, Locarno",
               "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lugano-classic-2026/"
+              "url": "https://www.tio.ch/agenda/day/20261017/63364"
             },
             {
-              "label": "Pro-Am - Comune di Ascona & OTLMV",
-              "detail": "Golf Club Patriziale Ascona, Ascona",
+              "label": "Human Rights Film Festival",
+              "detail": "Cinema Corso e Iride, Lugano",
               "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/proam-comune-di-ascona-otlmv/"
+              "url": "https://www.tio.ch/agenda/day/20261017/64146"
             },
             {
-              "label": "10 Years of Coffee Repair!",
-              "detail": "Capannone, Lugano",
+              "label": "Film Trail Locarno",
+              "detail": "Palacinema, Locarno",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64465"
+              "url": "https://www.tio.ch/agenda/day/20261017/63993"
             },
             {
-              "label": "Animal friends",
-              "detail": "Centro Eventi, Cadempino",
+              "label": "Fra Roberto fra le mura",
+              "detail": "Sasso Corbaro, Bellinzona",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64455"
+              "url": "https://www.tio.ch/agenda/day/20261017/61525"
             },
             {
-              "label": "Chronic pain: new therapeutic frontiers",
-              "detail": "Sala del Palazzo dei Congressi, Muralto",
+              "label": "Outside of Zucca, the village of pumpkins",
+              "detail": "Fuori di Zucca, Savosa",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/62838"
+              "url": "https://www.tio.ch/agenda/day/20261017/64302"
             },
             {
-              "label": "ENJOY YOUR GARDEN",
-              "detail": "GiardinoPiù di Gudo, Bellinzona",
+              "label": "Impressions - Painting exhibition by Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/62880"
+              "url": "https://www.tio.ch/agenda/day/20261017/64414"
             },
             {
-              "label": "Semi-nomadic Verzasca hike",
-              "detail": "Fermata bus Motta, Verzasca",
+              "label": "Ivo Soldini - Castel Grande Project",
+              "detail": "Castel Grande, Bellinzona",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64054"
+              "url": "https://www.tio.ch/agenda/day/20261017/62822"
             },
             {
-              "label": "Vinyl and comic book market",
-              "detail": "Piazza buffi, Bellinzona",
+              "label": "Jannis Kounellis: I am a painter",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64540"
+              "url": "https://www.tio.ch/agenda/day/20261017/63037"
             },
             {
-              "label": "Open screen. Video works from the collection",
-              "detail": "Masi, sede Palazzo Reali, Lugano",
+              "label": "Mattia Polli - Twentyyears of sculpture",
+              "detail": "Galleria Vecchia Posta, Brusino Arsizio",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64595"
+              "url": "https://www.tio.ch/agenda/day/20261017/64143"
             },
             {
-              "label": "A day with Frank the Beaver",
-              "detail": "Percorso vita, Castel San Pietro",
+              "label": "Mona Caron - The Resilience of Life",
+              "detail": "Museo Centovalli e Pedemonte, Centovalli",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64475"
+              "url": "https://www.tio.ch/agenda/day/20261017/63363"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T13:31:50.370Z"
         }
       ],
       "curatedArticles": [
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-17T03:47:28.379Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "246",
+          "value": "253",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,69 +335,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Lugano Classic 2026",
-              "detail": "Piazza Riforma 1, Lugano",
+              "label": "Carlo Agostino Meletta - Maler",
+              "detail": "Museo Onsernonese, Locarno",
               "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lugano-classic-2026/"
+              "url": "https://www.tio.ch/agenda/day/20261017/63364"
             },
             {
-              "label": "Pro-Am - Comune di Ascona & OTLMV",
-              "detail": "Golf Club Patriziale Ascona, Ascona",
+              "label": "Filmfestival Menschenrechte",
+              "detail": "Cinema Corso e Iride, Lugano",
               "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/proam-comune-di-ascona-otlmv/"
+              "url": "https://www.tio.ch/agenda/day/20261017/64146"
             },
             {
-              "label": "10 Jahre Kaffee-Reparatur!",
-              "detail": "Capannone, Lugano",
+              "label": "Filmweg Locarno",
+              "detail": "Palacinema, Locarno",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64465"
+              "url": "https://www.tio.ch/agenda/day/20261017/63993"
             },
             {
-              "label": "Tierfreunde 2026",
-              "detail": "Centro Eventi, Cadempino",
+              "label": "Fra Roberto zwischen den Mauern",
+              "detail": "Sasso Corbaro, Bellinzona",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64455"
+              "url": "https://www.tio.ch/agenda/day/20261017/61525"
             },
             {
-              "label": "Chronische Schmerzen: Neue therapeutische Grenzen",
-              "detail": "Sala del Palazzo dei Congressi, Muralto",
+              "label": "Außerhalb von Zucca, dem Dorf der Kürbisse",
+              "detail": "Fuori di Zucca, Savosa",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/62838"
+              "url": "https://www.tio.ch/agenda/day/20261017/64302"
             },
             {
-              "label": "Der Garten",
-              "detail": "GiardinoPiù di Gudo, Bellinzona",
+              "label": "Impressionen - Gemäldeausstellung von Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/62880"
+              "url": "https://www.tio.ch/agenda/day/20261017/64414"
             },
             {
-              "label": "Exkursion Verzasca Seminomade",
-              "detail": "Fermata bus Motta, Verzasca",
+              "label": "Ivo Soldini - Projekt Castel Grande",
+              "detail": "Castel Grande, Bellinzona",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64054"
+              "url": "https://www.tio.ch/agenda/day/20261017/62822"
             },
             {
-              "label": "Vinyl- und Comicmarkt",
-              "detail": "Piazza buffi, Bellinzona",
+              "label": "Jannis Kounellis: Ich bin Maler",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64540"
+              "url": "https://www.tio.ch/agenda/day/20261017/63037"
             },
             {
-              "label": "Offener Bildschirm. Videoarbeiten aus der Sammlung",
-              "detail": "Masi, sede Palazzo Reali, Lugano",
+              "label": "Mattia Polli - 20Jahre Bildhauerei",
+              "detail": "Galleria Vecchia Posta, Brusino Arsizio",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64595"
+              "url": "https://www.tio.ch/agenda/day/20261017/64143"
             },
             {
-              "label": "Ein Tag mit Frank dem Biber",
-              "detail": "Percorso vita, Castel San Pietro",
+              "label": "Mona Caron - Die Belastbarkeit des Lebens",
+              "detail": "Museo Centovalli e Pedemonte, Centovalli",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64475"
+              "url": "https://www.tio.ch/agenda/day/20261017/63363"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T13:31:50.370Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-17T03:47:28.379Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "246",
+          "value": "253",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,69 +486,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Lugano Classic 2026",
-              "detail": "Piazza Riforma 1, Lugano",
+              "label": "Carlo Agostino Meletta - peintre",
+              "detail": "Museo Onsernonese, Locarno",
               "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lugano-classic-2026/"
+              "url": "https://www.tio.ch/agenda/day/20261017/63364"
             },
             {
-              "label": "Pro-Am - Comune di Ascona & OTLMV",
-              "detail": "Golf Club Patriziale Ascona, Ascona",
+              "label": "Festival DU film droits DE L'HOMME",
+              "detail": "Cinema Corso e Iride, Lugano",
               "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/proam-comune-di-ascona-otlmv/"
+              "url": "https://www.tio.ch/agenda/day/20261017/64146"
             },
             {
-              "label": "10 ans de Café réparation !",
-              "detail": "Capannone, Lugano",
+              "label": "Parcours cinématographique Locarno",
+              "detail": "Palacinema, Locarno",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64465"
+              "url": "https://www.tio.ch/agenda/day/20261017/63993"
             },
             {
-              "label": "Amis animaux",
-              "detail": "Centro Eventi, Cadempino",
+              "label": "Frère Roberto entre les murs",
+              "detail": "Sasso Corbaro, Bellinzona",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64455"
+              "url": "https://www.tio.ch/agenda/day/20261017/61525"
             },
             {
-              "label": "Douleur chronique : nouvelles frontières thérapeutiques",
-              "detail": "Sala del Palazzo dei Congressi, Muralto",
+              "label": "En dehors de Zucca, le village des citrouilles",
+              "detail": "Fuori di Zucca, Savosa",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/62838"
+              "url": "https://www.tio.ch/agenda/day/20261017/64302"
             },
             {
-              "label": "VIVEZ VOTRE JARDIN",
-              "detail": "GiardinoPiù di Gudo, Bellinzona",
+              "label": "Impressions - Exposition de peinture de Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/62880"
+              "url": "https://www.tio.ch/agenda/day/20261017/64414"
             },
             {
-              "label": "Excursion Verzasca semi-nomade",
-              "detail": "Fermata bus Motta, Verzasca",
+              "label": "Ivo Soldini - Projet Castel Grande",
+              "detail": "Castel Grande, Bellinzona",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64054"
+              "url": "https://www.tio.ch/agenda/day/20261017/62822"
             },
             {
-              "label": "Marché du vinyle et de la bande dessinée",
-              "detail": "Piazza buffi, Bellinzona",
+              "label": "Jannis Kounellis : Je suis un peintre",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64540"
+              "url": "https://www.tio.ch/agenda/day/20261017/63037"
             },
             {
-              "label": "Écran ouvert. Œuvres vidéo de la collection",
-              "detail": "Masi, sede Palazzo Reali, Lugano",
+              "label": "Mattia Polli - Vingtans de sculpture",
+              "detail": "Galleria Vecchia Posta, Brusino Arsizio",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64595"
+              "url": "https://www.tio.ch/agenda/day/20261017/64143"
             },
             {
-              "label": "Une journée avec Frank le castor",
-              "detail": "Percorso vita, Castel San Pietro",
+              "label": "Mona Caron - La résilience de la vie",
+              "detail": "Museo Centovalli e Pedemonte, Centovalli",
               "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64475"
+              "url": "https://www.tio.ch/agenda/day/20261017/63363"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T13:31:50.370Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-17T03:47:28.379Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     }
   }
 }

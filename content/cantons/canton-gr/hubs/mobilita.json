@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T14:03:25.701Z",
-  "contentHash": "192c9d6f21991cb55fdfa118c1286d49d7d7b5779a10d6c21b4545726173f695",
+  "updatedAt": "2026-10-17T19:17:26.345Z",
+  "contentHash": "6bcc0d6f78f19356b133ef363182d13f98e6973ff7589c00de915a615ebc11b4",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-17T05:03:12.314Z",
+      "updatedAt": "2026-10-17T11:14:10.840Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T20:07:19.130Z",
+      "updatedAt": "2026-10-17T09:42:54.588Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "12",
+          "value": "13",
           "note": "segnalazioni aggiornate: 17 ottobre 2026"
         },
         {
@@ -160,7 +160,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-17T11:14:10.840Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -193,7 +193,7 @@
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T09:42:54.588Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "en": {
       "canton": "GR",
@@ -300,7 +300,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "12",
+          "value": "13",
           "note": "reports as of 17 October 2026"
         },
         {
@@ -423,7 +423,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-17T11:14:10.840Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -456,7 +456,7 @@
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T09:42:54.588Z"
         }
       ],
       "curatedArticles": [
@@ -547,7 +547,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "de": {
       "canton": "GR",
@@ -562,7 +562,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "12",
+          "value": "13",
           "note": "Meldungen vom 17. Oktober 2026"
         },
         {
@@ -685,7 +685,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-17T11:14:10.840Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -718,7 +718,7 @@
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T09:42:54.588Z"
         }
       ],
       "curatedArticles": [
@@ -810,7 +810,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "fr": {
       "canton": "GR",
@@ -825,7 +825,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "12",
+          "value": "13",
           "note": "signalements au 17 octobre 2026"
         },
         {
@@ -948,7 +948,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-17T11:14:10.840Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -981,7 +981,7 @@
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T09:42:54.588Z"
         }
       ],
       "curatedArticles": [
@@ -1073,7 +1073,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     }
   }
 }

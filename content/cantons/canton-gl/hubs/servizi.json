@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T14:03:25.701Z",
-  "contentHash": "f54c81f8cac1fc6b7bde36e0f6faf6099043fe9c4252249754f817889926c6b4",
+  "updatedAt": "2026-10-17T19:17:26.345Z",
+  "contentHash": "66442f5a69e07675d55112e6521c120422311af5b605d66e87fe54976df9248e",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-17T04:43:32.629Z",
+      "updatedAt": "2026-10-17T12:18:27.550Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T20:07:19.130Z",
+      "updatedAt": "2026-10-17T09:42:54.588Z",
       "keyFacts": 0
     }
   ],
@@ -60,12 +60,12 @@
           "items": [
             {
               "label": "Glarus",
-              "value": "11 °C",
-              "detail": "oggi da 11 a 17 °C"
+              "value": "17 °C",
+              "detail": "oggi da 10 a 17 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-17T04:43:32.629Z"
+          "updatedAt": "2026-10-17T12:18:27.550Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -93,7 +93,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T09:42:54.588Z"
         }
       ],
       "curatedArticles": [
@@ -173,7 +173,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "en": {
       "canton": "GL",
@@ -211,12 +211,12 @@
           "items": [
             {
               "label": "Glarus",
-              "value": "11 °C",
-              "detail": "today from 11 to 17 °C"
+              "value": "17 °C",
+              "detail": "today from 10 to 17 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-17T04:43:32.629Z"
+          "updatedAt": "2026-10-17T12:18:27.550Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -244,7 +244,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T09:42:54.588Z"
         }
       ],
       "curatedArticles": [
@@ -320,7 +320,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "de": {
       "canton": "GL",
@@ -358,12 +358,12 @@
           "items": [
             {
               "label": "Glarus",
-              "value": "11 °C",
-              "detail": "heute 11 bis 17 °C"
+              "value": "17 °C",
+              "detail": "heute 10 bis 17 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-17T04:43:32.629Z"
+          "updatedAt": "2026-10-17T12:18:27.550Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T09:42:54.588Z"
         }
       ],
       "curatedArticles": [
@@ -467,7 +467,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "fr": {
       "canton": "GL",
@@ -505,12 +505,12 @@
           "items": [
             {
               "label": "Glarus",
-              "value": "11 °C",
-              "detail": "aujourd’hui de 11 à 17 °C"
+              "value": "17 °C",
+              "detail": "aujourd’hui de 10 à 17 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-17T04:43:32.629Z"
+          "updatedAt": "2026-10-17T12:18:27.550Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -538,7 +538,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T09:42:54.588Z"
         }
       ],
       "curatedArticles": [
@@ -610,7 +610,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     }
   }
 }

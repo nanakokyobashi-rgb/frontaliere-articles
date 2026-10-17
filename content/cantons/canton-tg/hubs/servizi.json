@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T14:03:25.701Z",
-  "contentHash": "a8b65aed088282bcafdfb539d986356d2d5f3a0beeedfcc82784ef45b2c88757",
+  "updatedAt": "2026-10-17T19:17:26.345Z",
+  "contentHash": "e4ffd6fa62d6e96ec0379cb2f7f5b30b80d12f2c6c189d4352f239defa780d5c",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-17T04:24:59.962Z",
+      "updatedAt": "2026-10-17T10:43:16.433Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-17T04:43:32.629Z",
+      "updatedAt": "2026-10-17T12:18:27.550Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T20:07:19.130Z",
+      "updatedAt": "2026-10-17T09:42:54.588Z",
       "keyFacts": 0
     }
   ],
@@ -77,7 +77,7 @@
             },
             {
               "label": "TG800007",
-              "value": "1020 CHF",
+              "value": "1050 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.tg.ch/de/auction/109684"
@@ -92,7 +92,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-17T04:24:59.962Z"
+          "updatedAt": "2026-10-17T10:43:16.433Z"
         },
         {
           "id": "meteo",
@@ -101,12 +101,12 @@
           "items": [
             {
               "label": "Frauenfeld",
-              "value": "9 °C",
+              "value": "14 °C",
               "detail": "oggi da 9 a 14 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-17T04:43:32.629Z"
+          "updatedAt": "2026-10-17T12:18:27.550Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -144,7 +144,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T09:42:54.588Z"
         }
       ],
       "curatedArticles": [
@@ -224,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "en": {
       "canton": "TG",
@@ -274,7 +274,7 @@
             },
             {
               "label": "TG800007",
-              "value": "1,020 CHF",
+              "value": "1,050 CHF",
               "detail": "current bid",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.tg.ch/de/auction/109684"
@@ -289,7 +289,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-17T04:24:59.962Z"
+          "updatedAt": "2026-10-17T10:43:16.433Z"
         },
         {
           "id": "meteo",
@@ -298,12 +298,12 @@
           "items": [
             {
               "label": "Frauenfeld",
-              "value": "9 °C",
+              "value": "14 °C",
               "detail": "today from 9 to 14 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-17T04:43:32.629Z"
+          "updatedAt": "2026-10-17T12:18:27.550Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -341,7 +341,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T09:42:54.588Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "de": {
       "canton": "TG",
@@ -467,7 +467,7 @@
             },
             {
               "label": "TG800007",
-              "value": "1’020 CHF",
+              "value": "1’050 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.tg.ch/de/auction/109684"
@@ -482,7 +482,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-17T04:24:59.962Z"
+          "updatedAt": "2026-10-17T10:43:16.433Z"
         },
         {
           "id": "meteo",
@@ -491,12 +491,12 @@
           "items": [
             {
               "label": "Frauenfeld",
-              "value": "9 °C",
+              "value": "14 °C",
               "detail": "heute 9 bis 14 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-17T04:43:32.629Z"
+          "updatedAt": "2026-10-17T12:18:27.550Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -534,7 +534,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T09:42:54.588Z"
         }
       ],
       "curatedArticles": [
@@ -610,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "fr": {
       "canton": "TG",
@@ -660,7 +660,7 @@
             },
             {
               "label": "TG800007",
-              "value": "1 020 CHF",
+              "value": "1 050 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.tg.ch/de/auction/109684"
@@ -675,7 +675,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-17T04:24:59.962Z"
+          "updatedAt": "2026-10-17T10:43:16.433Z"
         },
         {
           "id": "meteo",
@@ -684,12 +684,12 @@
           "items": [
             {
               "label": "Frauenfeld",
-              "value": "9 °C",
+              "value": "14 °C",
               "detail": "aujourd’hui de 9 à 14 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-17T04:43:32.629Z"
+          "updatedAt": "2026-10-17T12:18:27.550Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -727,7 +727,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T09:42:54.588Z"
         }
       ],
       "curatedArticles": [
@@ -799,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     }
   }
 }

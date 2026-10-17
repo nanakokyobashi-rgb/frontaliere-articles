@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T00:12:19.402Z",
-  "contentHash": "2c82f5ca77a5679dcba6d401854e582b9dc8b12159f3f6c816349072e3493e0f",
+  "updatedAt": "2026-10-17T19:17:26.345Z",
+  "contentHash": "12a12a1eeac349aa2b59eb7ac9fad568af1dbacb7df46afa7642b7d683fc17d5",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T10:44:21.348Z",
+      "updatedAt": "2026-10-17T13:31:50.370Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "94",
+          "value": "95",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T13:31:50.370Z"
         }
       ],
       "curatedArticles": [
@@ -147,7 +147,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "en": {
       "canton": "GR",
@@ -157,7 +157,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "94",
+          "value": "95",
           "note": "from the site’s events calendar"
         }
       ],
@@ -230,7 +230,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T13:31:50.370Z"
         }
       ],
       "curatedArticles": [
@@ -282,7 +282,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "de": {
       "canton": "GR",
@@ -292,7 +292,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "94",
+          "value": "95",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -365,7 +365,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T13:31:50.370Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "fr": {
       "canton": "GR",
@@ -427,7 +427,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "94",
+          "value": "95",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -500,7 +500,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T13:31:50.370Z"
         }
       ],
       "curatedArticles": [
@@ -552,7 +552,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T00:12:19.402Z",
-  "contentHash": "46b4d13e44ca68d972e325b20bce5b5ddb0334a383c4596ca9867002e7e3941f",
+  "updatedAt": "2026-10-17T19:17:26.345Z",
+  "contentHash": "86a31b5412e7bd122a8c2091dfd4e64a4c8898c8f48b04b7172fb83afd35e122",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T10:44:21.348Z",
+      "updatedAt": "2026-10-17T13:31:50.370Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "288",
+          "value": "289",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,6 +32,12 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
+            {
+              "label": "A Paixão segundo G.H.B",
+              "detail": "Genève",
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/paixao-segundo"
+            },
             {
               "label": "Apparitions _ Patricia Bosshard",
               "detail": "Genève",
@@ -51,10 +57,28 @@
               "url": "https://www.geneve.ch/agenda/atelier-creation-cartographie-numerique-collective-bibliotheque-cite"
             },
             {
+              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "detail": "Genève",
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+            },
+            {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
               "label": "Ballet pour adultes - Tous Niveaux",
               "detail": "Genève",
               "date": "2026-10-17",
               "url": "https://www.geneve.ch/agenda/ballet-adultes-niveaux"
+            },
+            {
+              "label": "Bearcave ΑΡΚΟΥΔΌΤΡΥΠΑ",
+              "detail": "Genève",
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/bearcave-arkoydotrypa"
             },
             {
               "label": "BLIND TEST MUSICAL | Mr HOBBS",
@@ -63,39 +87,15 @@
               "url": "https://www.geneve.ch/agenda/blind-test-musical-hobbs"
             },
             {
-              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
+              "label": "Chroniques d'Immeuble",
               "detail": "Genève",
               "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi-1"
-            },
-            {
-              "label": "Cours Tango Argentin niv. debutant",
-              "detail": "Genève",
-              "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant-0"
-            },
-            {
-              "label": "ELECTRON @ LA COMÉDIE : ART & MUSIC",
-              "detail": "Genève",
-              "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/electron-comedie-art-music"
-            },
-            {
-              "label": "Empreintes de fêtes",
-              "detail": "Genève",
-              "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/empreintes-fetes"
-            },
-            {
-              "label": "Fête de clôture",
-              "detail": "Genève",
-              "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/fete-cloture"
+              "url": "https://www.geneve.ch/agenda/chroniques-immeuble"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T13:31:50.370Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "en": {
       "canton": "GE",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "288",
+          "value": "289",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,6 +137,12 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
+            {
+              "label": "A Paixão segundo G.H.B",
+              "detail": "Genève",
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/paixao-segundo"
+            },
             {
               "label": "Apparitions _ Patricia Bosshard",
               "detail": "Genève",
@@ -156,10 +162,28 @@
               "url": "https://www.geneve.ch/agenda/atelier-creation-cartographie-numerique-collective-bibliotheque-cite"
             },
             {
+              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "detail": "Genève",
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+            },
+            {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
               "label": "Ballet pour adultes - Tous Niveaux",
               "detail": "Genève",
               "date": "2026-10-17",
               "url": "https://www.geneve.ch/agenda/ballet-adultes-niveaux"
+            },
+            {
+              "label": "Bearcave ΑΡΚΟΥΔΌΤΡΥΠΑ",
+              "detail": "Genève",
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/bearcave-arkoydotrypa"
             },
             {
               "label": "BLIND TEST MUSICAL | Mr HOBBS",
@@ -168,39 +192,15 @@
               "url": "https://www.geneve.ch/agenda/blind-test-musical-hobbs"
             },
             {
-              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
+              "label": "Chroniques d'Immeuble",
               "detail": "Genève",
               "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi-1"
-            },
-            {
-              "label": "Cours Tango Argentin niv. debutant",
-              "detail": "Genève",
-              "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant-0"
-            },
-            {
-              "label": "ELECTRON @ LA COMÉDIE : ART & MUSIC",
-              "detail": "Genève",
-              "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/electron-comedie-art-music"
-            },
-            {
-              "label": "Empreintes de fêtes",
-              "detail": "Genève",
-              "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/empreintes-fetes"
-            },
-            {
-              "label": "Fête de clôture",
-              "detail": "Genève",
-              "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/fete-cloture"
+              "url": "https://www.geneve.ch/agenda/chroniques-immeuble"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T13:31:50.370Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "de": {
       "canton": "GE",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "288",
+          "value": "289",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,6 +242,12 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
+            {
+              "label": "A Paixão segundo G.H.B",
+              "detail": "Genève",
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/paixao-segundo"
+            },
             {
               "label": "Apparitions _ Patricia Bosshard",
               "detail": "Genève",
@@ -261,10 +267,28 @@
               "url": "https://www.geneve.ch/agenda/atelier-creation-cartographie-numerique-collective-bibliotheque-cite"
             },
             {
+              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "detail": "Genève",
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+            },
+            {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
               "label": "Ballet pour adultes - Tous Niveaux",
               "detail": "Genève",
               "date": "2026-10-17",
               "url": "https://www.geneve.ch/agenda/ballet-adultes-niveaux"
+            },
+            {
+              "label": "Bearcave ΑΡΚΟΥΔΌΤΡΥΠΑ",
+              "detail": "Genève",
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/bearcave-arkoydotrypa"
             },
             {
               "label": "BLIND TEST MUSICAL | Mr HOBBS",
@@ -273,39 +297,15 @@
               "url": "https://www.geneve.ch/agenda/blind-test-musical-hobbs"
             },
             {
-              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
+              "label": "Chroniques d'Immeuble",
               "detail": "Genève",
               "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi-1"
-            },
-            {
-              "label": "Cours Tango Argentin niv. debutant",
-              "detail": "Genève",
-              "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant-0"
-            },
-            {
-              "label": "ELECTRON @ LA COMÉDIE : ART & MUSIC",
-              "detail": "Genève",
-              "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/electron-comedie-art-music"
-            },
-            {
-              "label": "Empreintes de fêtes",
-              "detail": "Genève",
-              "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/empreintes-fetes"
-            },
-            {
-              "label": "Fête de clôture",
-              "detail": "Genève",
-              "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/fete-cloture"
+              "url": "https://www.geneve.ch/agenda/chroniques-immeuble"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T13:31:50.370Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "fr": {
       "canton": "GE",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "288",
+          "value": "289",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,6 +347,12 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
+            {
+              "label": "A Paixão segundo G.H.B",
+              "detail": "Genève",
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/paixao-segundo"
+            },
             {
               "label": "Apparitions _ Patricia Bosshard",
               "detail": "Genève",
@@ -366,10 +372,28 @@
               "url": "https://www.geneve.ch/agenda/atelier-creation-cartographie-numerique-collective-bibliotheque-cite"
             },
             {
+              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "detail": "Genève",
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+            },
+            {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
               "label": "Ballet pour adultes - Tous Niveaux",
               "detail": "Genève",
               "date": "2026-10-17",
               "url": "https://www.geneve.ch/agenda/ballet-adultes-niveaux"
+            },
+            {
+              "label": "Bearcave ΑΡΚΟΥΔΌΤΡΥΠΑ",
+              "detail": "Genève",
+              "date": "2026-10-17",
+              "url": "https://www.geneve.ch/agenda/bearcave-arkoydotrypa"
             },
             {
               "label": "BLIND TEST MUSICAL | Mr HOBBS",
@@ -378,39 +402,15 @@
               "url": "https://www.geneve.ch/agenda/blind-test-musical-hobbs"
             },
             {
-              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
+              "label": "Chroniques d'Immeuble",
               "detail": "Genève",
               "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi-1"
-            },
-            {
-              "label": "Cours Tango Argentin niv. debutant",
-              "detail": "Genève",
-              "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant-0"
-            },
-            {
-              "label": "ELECTRON @ LA COMÉDIE : ART & MUSIC",
-              "detail": "Genève",
-              "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/electron-comedie-art-music"
-            },
-            {
-              "label": "Empreintes de fêtes",
-              "detail": "Genève",
-              "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/empreintes-fetes"
-            },
-            {
-              "label": "Fête de clôture",
-              "detail": "Genève",
-              "date": "2026-10-17",
-              "url": "https://www.geneve.ch/agenda/fete-cloture"
+              "url": "https://www.geneve.ch/agenda/chroniques-immeuble"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T13:31:50.370Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     }
   }
 }

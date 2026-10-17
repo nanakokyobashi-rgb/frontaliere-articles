@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T11:38:04.345Z",
-  "contentHash": "d9411150b184c61dccaf3b2a0d1556b06afbb6d67e6e858c1237da6366e60ec0",
+  "updatedAt": "2026-10-17T19:17:26.345Z",
+  "contentHash": "9899c4a4918621a538c65c5e7883bb45da0601824ba5a6415859a474f589f323",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T10:44:21.348Z",
+      "updatedAt": "2026-10-17T13:31:50.370Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "36",
+          "value": "37",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T13:31:50.370Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "en": {
       "canton": "ZG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "36",
+          "value": "37",
           "note": "from the site’s events calendar"
         }
       ],
@@ -200,7 +200,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T13:31:50.370Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "de": {
       "canton": "ZG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "36",
+          "value": "37",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -305,7 +305,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T13:31:50.370Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     },
     "fr": {
       "canton": "ZG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "36",
+          "value": "37",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -410,7 +410,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T13:31:50.370Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-17T19:17:26.345Z"
     }
   }
 }
