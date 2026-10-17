@@ -7868,28 +7868,28 @@ function findActiveSourceHead(html) {
   let cursor = 0;
   while (cursor < html.length) {
     const start = html.indexOf('<', cursor);
-    if (start < 0) return null;
+    if (start < 0) return { bounds: null, malformed: false };
     if (html.startsWith('<!--', start)) {
       const afterComment = sourceSkipComment(html, start);
-      if (afterComment < 0) return null;
+      if (afterComment < 0) return { bounds: null, malformed: true };
       cursor = afterComment;
       continue;
     }
     const tag = sourceReadTag(html, start);
-    if (tag?.malformed) return null;
+    if (tag?.malformed) return { bounds: null, malformed: true };
     if (!tag) {
       cursor = start + 1;
       continue;
     }
     if (!tag.closing && !tag.selfClosing && tag.name === 'template') {
       const afterTemplate = sourceSkipTemplate(html, tag.end + 1);
-      if (afterTemplate < 0) return null;
+      if (afterTemplate < 0) return { bounds: null, malformed: true };
       cursor = afterTemplate;
       continue;
     }
     if (!tag.closing && !tag.selfClosing && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(tag.name)) {
       const afterRawText = sourceFindRawTextClose(html, tag.end + 1, tag.name);
-      if (afterRawText < 0) return null;
+      if (afterRawText < 0) return { bounds: null, malformed: true };
       cursor = afterRawText;
       continue;
     }
@@ -7898,41 +7898,44 @@ function findActiveSourceHead(html) {
       let inside = tag.end + 1;
       while (inside < html.length) {
         const nestedStart = html.indexOf('<', inside);
-        if (nestedStart < 0) return null;
+        if (nestedStart < 0) return { bounds: null, malformed: true };
         if (html.startsWith('<!--', nestedStart)) {
           const afterComment = sourceSkipComment(html, nestedStart);
-          if (afterComment < 0) return null;
+          if (afterComment < 0) return { bounds: null, malformed: true };
           inside = afterComment;
           continue;
         }
         const nested = sourceReadTag(html, nestedStart);
-        if (nested?.malformed) return null;
+        if (nested?.malformed) return { bounds: null, malformed: true };
         if (!nested) {
           inside = nestedStart + 1;
           continue;
         }
         if (nested.closing && nested.name === 'head') {
-          return { start: headStart, end: nested.end + 1 };
+          return {
+            bounds: { start: headStart, end: nested.end + 1 },
+            malformed: false,
+          };
         }
         if (!nested.closing && !nested.selfClosing && nested.name === 'template') {
           const afterTemplate = sourceSkipTemplate(html, nested.end + 1);
-          if (afterTemplate < 0) return null;
+          if (afterTemplate < 0) return { bounds: null, malformed: true };
           inside = afterTemplate;
           continue;
         }
         if (!nested.closing && !nested.selfClosing && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(nested.name)) {
           const afterRawText = sourceFindRawTextClose(html, nested.end + 1, nested.name);
-          if (afterRawText < 0) return null;
+          if (afterRawText < 0) return { bounds: null, malformed: true };
           inside = afterRawText;
           continue;
         }
         inside = nested.end + 1;
       }
-      return null;
+      return { bounds: null, malformed: true };
     }
     cursor = tag.end + 1;
   }
-  return null;
+  return { bounds: null, malformed: false };
 }
 
 /**
@@ -7981,8 +7984,9 @@ export function extractOutermostTagBlock(html, tag) {
 }
 
 /**
- * Riduce una pagina scrapata alla sua radice editoriale, conservando `<head>`
- * e ogni blocco JSON-LD ovunque si trovi.
+ * Riduce una pagina scrapata alla sua radice editoriale, conservando il `<head>`
+ * trusted e i blocchi JSON-LD complementari solo quando la sua scansione e'
+ * affidabile.
  *
  * @param {string} html
  * @returns {{ html: string, root: 'article'|'main'|'none', isolated: boolean }}
@@ -8008,13 +8012,16 @@ export function isolateMainSourceHtml(html) {
   }
   if (!chosen) return { html: src, root: 'none', isolated: false };
 
-  const headBounds = findActiveSourceHead(src);
-  const head = headBounds ? src.slice(headBounds.start, headBounds.end) : '';
+  const headScan = findActiveSourceHead(src);
+  const head = headScan.bounds ? src.slice(headScan.bounds.start, headScan.bounds.end) : '';
   // I blocchi JSON-LD stanno tanto in <head> quanto in fondo a <body>: si
   // riportano tutti quelli che NON sono gia' dentro cio' che si conserva,
   // perche' `articleBody` e' il ramo migliore dell'estrattore e perderlo
-  // significherebbe scendere di qualita' proprio mentre si isola.
-  const ldBlocks = [...src.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi)]
+  // significherebbe scendere di qualita' proprio mentre si isola. Se la
+  // scansione dell'head e' malformata, pero', una regex globale non sa piu'
+  // distinguere JSON-LD attivo da markup stale o inattivo: in quel caso si
+  // conserva solo la radice editoriale gia' riconosciuta.
+  const ldBlocks = headScan.malformed ? [] : [...src.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi)]
     .map((x) => x[0])
     .filter((block) => !head.includes(block) && !chosen.includes(block));
 

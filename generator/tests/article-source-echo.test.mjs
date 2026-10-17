@@ -217,6 +217,18 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(res.html.includes('Paragrafo 7 del pezzo vero'));
     assert.ok(elapsed < 250, `scanner sorgente troppo lento su markup malformato: ${elapsed.toFixed(1)}ms`);
   });
+
+  it('non riattiva JSON-LD stale quando la scansione dell’head è malformata', () => {
+    const staleJsonLd = '<script type="application/ld+json">'
+      + '{"headline":"STALE_JSON_LD_SHOULD_NOT_BE_ACTIVATED"}</script>';
+    const malformedHead = '<html><head><meta data="unterminated'
+      + '</head><body><article>' + ARTICLE_PROSE + '</article>'
+      + staleJsonLd + '</body></html>';
+    const res = isolateMainSourceHtml(malformedHead);
+    assert.equal(res.isolated, true);
+    assert.equal(res.root, 'article');
+    assert.equal(res.html.includes('STALE_JSON_LD_SHOULD_NOT_BE_ACTIVATED'), false);
+  });
 });
 
 // ── 2. WIRING ──────────────────────────────────────────────────────────────
