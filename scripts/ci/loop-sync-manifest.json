@@ -5426,7 +5426,7 @@
       "reason": "Coordinatore publisher-only che preflight-a registry e JSON-LD e inoltra le scritture al callback della transazione del generatore. Il sito consuma il risultato via HTTP e non possiede questo helper operativo, quindi non esiste un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "9a031a043bdc1ae2",
+        "corpus": "9705163306cb71be",
         "alignedAt": "2026-10-17"
       }
     },
