@@ -240,7 +240,11 @@ export function sanitizeCommonsHtml(html) {
     }
     TAG_RX.lastIndex = i;
     const m = TAG_RX.exec(source);
-    if (!m) { append('<'); i += 1; continue; }
+    if (!m) {
+      const nameStart = i + (source[i + 1] === '/' ? 2 : 1);
+      if (/[A-Za-z]/u.test(source[nameStart] || '')) break;
+      append('<'); i += 1; continue;
+    }
     i = TAG_RX.lastIndex;
     if (!m[2]) continue; // <!doctype …>, <?…>: not content
     const name = m[2].toLowerCase();
