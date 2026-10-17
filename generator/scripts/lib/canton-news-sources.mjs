@@ -296,11 +296,12 @@ function isHtmlWhitespace(char) {
 }
 
 /** Legge gli stati degli attributi fino al `>` per distinguere `/` sintattico da un valore. */
-function isHtmlSelfClosingStartTag(html, nameEnd, end) {
+function inspectHtmlSelfClosingStartTag(html, nameEnd, end) {
   let i = nameEnd;
   while (i < end) {
     while (i < end && isHtmlWhitespace(html[i])) i++;
     if (i >= end) return false;
+    if (html[i] === '>') return { malformed: true };
     if (html[i] === '/') {
       return i + 1 === end;
     }
@@ -344,12 +345,15 @@ function readCharsetTag(html, start) {
   const end = findHtmlTagEndOutsideQuotes(html, start);
   if (end < 0) return { malformed: true };
   const name = html.slice(nameStart, i).toLowerCase();
+  const selfClosingState = !closing && CHARSET_VOID_ELEMENTS.has(name)
+    ? inspectHtmlSelfClosingStartTag(html, i, end)
+    : false;
+  if (selfClosingState?.malformed) return selfClosingState;
   return {
     closing,
     end,
     name,
-    selfClosing: !closing && CHARSET_VOID_ELEMENTS.has(name)
-      && isHtmlSelfClosingStartTag(html, i, end),
+    selfClosing: selfClosingState,
   };
 }
 
