@@ -45167,6 +45167,16 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'arcisate-bomba-seconda-guerra-mondiale',
+ category: 'novita',
+ date: '2026-10-17T13:59:07.993Z',
+ image: '/images/blog/article-arcisate-bomba-seconda-guerra-mondiale.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
