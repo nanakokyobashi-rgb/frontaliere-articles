@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-16T18:38:32.543Z",
-  "contentHash": "bee512e7084cd2f65b41fdeb71d55389487ad5674680a59a2a3b3b35d9fc66da",
+  "updatedAt": "2026-10-17T03:47:28.379Z",
+  "contentHash": "0976e25116e4918fa18ab3476fa1d2607a00c3b7d993541ae268d3dbcb91c2f8",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-16T11:58:12.009Z",
+      "updatedAt": "2026-10-16T17:01:51.551Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T10:09:31.602Z",
+      "updatedAt": "2026-10-16T15:35:32.859Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "12",
+          "value": "11",
           "note": "segnalazioni aggiornate: 16 ottobre 2026"
         },
         {
@@ -93,12 +93,6 @@
               "date": "2026-03-10T15:09:00.000Z"
             },
             {
-              "label": "A20 Diramazione Neuchâtel-Vauseyon <-> La Chaux-de-Fonds tra Svincolo autostradale Bas-du-Reymond E Svincolo autostradale Boudevilliers Situazione: chiusa cantiere, lunghezza [km] 11.2 Limitazione…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 17 ottobre 2026",
-              "date": "2026-09-25T11:02:00.000Z"
-            },
-            {
               "label": "A20 Diramazione Neuchâtel-Vauseyon <-> La Chaux-de-Fonds tra Svincolo autostradale Bas-du-Reymond E Svincolo autostradale Boudevilliers Situazione: chiusa cantiere, lunghezza [km] 11.2",
               "value": "Chiusura",
               "detail": "fine prevista: 22 ottobre 2026",
@@ -126,10 +120,16 @@
               "label": "Neuchâtel, Neuenburg <-> Rue de la Pierre-à-Mazel, Neuenburg Situazione: chiusa Causa: incidente",
               "value": "Chiusura",
               "date": "2026-10-05T02:26:00.000Z"
+            },
+            {
+              "label": "A5 Neuchâtel -> Bienne Svincolo autostradale Neuenburg-Monruz Situazione: chiusa cantiere, lunghezza [km] 0.2",
+              "value": "Chiusura",
+              "detail": "fine prevista: 6 novembre 2026",
+              "date": "2026-10-13T06:15:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-16T11:58:12.009Z"
+          "updatedAt": "2026-10-16T17:01:51.551Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -147,7 +147,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -189,7 +189,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T03:47:28.379Z"
     },
     "en": {
       "canton": "NE",
@@ -204,7 +204,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "12",
+          "value": "11",
           "note": "reports as of 16 October 2026"
         },
         {
@@ -260,12 +260,6 @@
               "date": "2026-03-10T15:09:00.000Z"
             },
             {
-              "label": "A20 Diramazione Neuchâtel-Vauseyon <-> La Chaux-de-Fonds tra Svincolo autostradale Bas-du-Reymond E Svincolo autostradale Boudevilliers Situazione: chiusa cantiere, lunghezza [km] 11.2 Limitazione…",
-              "value": "Closure",
-              "detail": "until 17 October 2026",
-              "date": "2026-09-25T11:02:00.000Z"
-            },
-            {
               "label": "A20 Diramazione Neuchâtel-Vauseyon <-> La Chaux-de-Fonds tra Svincolo autostradale Bas-du-Reymond E Svincolo autostradale Boudevilliers Situazione: chiusa cantiere, lunghezza [km] 11.2",
               "value": "Closure",
               "detail": "until 22 October 2026",
@@ -293,10 +287,16 @@
               "label": "Neuchâtel, Neuenburg <-> Rue de la Pierre-à-Mazel, Neuenburg Situazione: chiusa Causa: incidente",
               "value": "Closure",
               "date": "2026-10-05T02:26:00.000Z"
+            },
+            {
+              "label": "A5 Neuchâtel -> Bienne Svincolo autostradale Neuenburg-Monruz Situazione: chiusa cantiere, lunghezza [km] 0.2",
+              "value": "Closure",
+              "detail": "until 6 November 2026",
+              "date": "2026-10-13T06:15:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-16T11:58:12.009Z"
+          "updatedAt": "2026-10-16T17:01:51.551Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -314,7 +314,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -356,7 +356,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T03:47:28.379Z"
     },
     "de": {
       "canton": "NE",
@@ -371,7 +371,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "12",
+          "value": "11",
           "note": "Meldungen vom 16. Oktober 2026"
         },
         {
@@ -427,12 +427,6 @@
               "date": "2026-03-10T15:09:00.000Z"
             },
             {
-              "label": "A20 Verzweigung Neuenburg-Vauseyon <-> La Chaux-de-Fonds zwischen Anschluss Bas-du-Reymond und Anschluss Boudevilliers Sachlage: Strecke gesperrt Baustelle, Länge [km] 11.2 Verkehrsführung…",
-              "value": "Sperrung",
-              "detail": "bis 17. Oktober 2026",
-              "date": "2026-09-25T11:02:00.000Z"
-            },
-            {
               "label": "A20 Verzweigung Neuenburg-Vauseyon <-> La Chaux-de-Fonds zwischen Anschluss Bas-du-Reymond und Anschluss Boudevilliers Sachlage: Strecke gesperrt Baustelle, Länge [km] 11.2",
               "value": "Sperrung",
               "detail": "bis 22. Oktober 2026",
@@ -460,10 +454,16 @@
               "label": "Neuchâtel, Neuenburg <-> Rue de la Pierre-à-Mazel, Neuenburg Sachlage: Strecke gesperrt Ursache: Unfall",
               "value": "Sperrung",
               "date": "2026-10-05T02:26:00.000Z"
+            },
+            {
+              "label": "A5 Neuenburg -> Biel Anschluss Neuenburg-Monruz Sachlage: Strecke gesperrt Baustelle, Länge [km] 0.2",
+              "value": "Sperrung",
+              "detail": "bis 6. November 2026",
+              "date": "2026-10-13T06:15:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-16T11:58:12.009Z"
+          "updatedAt": "2026-10-16T17:01:51.551Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -481,7 +481,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -523,7 +523,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T03:47:28.379Z"
     },
     "fr": {
       "canton": "NE",
@@ -538,7 +538,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "12",
+          "value": "11",
           "note": "signalements au 16 octobre 2026"
         },
         {
@@ -594,12 +594,6 @@
               "date": "2026-03-10T15:09:00.000Z"
             },
             {
-              "label": "A20 Echangeur de Neuchâtel-Vauseyon <-> La Chaux-de-Fonds entre Jonction autoroutière Bas-du-Reymond et Jonction autoroutière Boudevilliers Situation: fermé travaux, longueur [km] 11.2 Gestion du…",
-              "value": "Fermeture",
-              "detail": "jusqu’au 17 octobre 2026",
-              "date": "2026-09-25T11:02:00.000Z"
-            },
-            {
               "label": "A20 Echangeur de Neuchâtel-Vauseyon <-> La Chaux-de-Fonds entre Jonction autoroutière Bas-du-Reymond et Jonction autoroutière Boudevilliers Situation: fermé travaux, longueur [km] 11.2",
               "value": "Fermeture",
               "detail": "jusqu’au 22 octobre 2026",
@@ -627,10 +621,16 @@
               "label": "Neuchâtel, Neuenburg <-> Rue de la Pierre-à-Mazel, Neuenburg Situation: fermé Raison: accident",
               "value": "Fermeture",
               "date": "2026-10-05T02:26:00.000Z"
+            },
+            {
+              "label": "A5 Neuchâtel -> Bienne Jonction autoroutière Neuenburg-Monruz Situation: fermé travaux, longueur [km] 0.2",
+              "value": "Fermeture",
+              "detail": "jusqu’au 6 novembre 2026",
+              "date": "2026-10-13T06:15:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-16T11:58:12.009Z"
+          "updatedAt": "2026-10-16T17:01:51.551Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -648,7 +648,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-16T15:35:32.859Z"
         }
       ],
       "curatedArticles": [
@@ -690,7 +690,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-16T18:38:32.543Z"
+      "updatedAt": "2026-10-17T03:47:28.379Z"
     }
   }
 }

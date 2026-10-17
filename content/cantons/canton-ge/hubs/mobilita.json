@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T02:52:35.704Z",
-  "contentHash": "6b23f1d86e24386a2a9807512006b8ce92dba03544b1ce8e3e5976988a52ddd1",
+  "updatedAt": "2026-10-17T03:47:28.379Z",
+  "contentHash": "3b00c264d63054b9bec7cc92d3c0d690a3d30bc44b91b12dde83dbb61984f548",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "16",
+          "value": "15",
           "note": "segnalazioni aggiornate: 16 ottobre 2026"
         },
         {
@@ -117,12 +117,6 @@
               "date": "2026-09-24T08:06:00.000Z"
             },
             {
-              "label": "A1 Lausanne -> Genève Svincolo autostradale Perly Nord Situazione: uscita chiusa cantiere, lunghezza [km] 0.1",
-              "value": "Chiusura",
-              "detail": "fine prevista: 17 ottobre 2026",
-              "date": "2026-09-24T08:08:00.000Z"
-            },
-            {
               "label": "A1 Lausanne -> Genève Svincolo autostradale Perly Nord Situazione: uscita chiusa cantiere",
               "value": "Chiusura",
               "detail": "fine prevista: 24 ottobre 2026",
@@ -157,6 +151,12 @@
               "value": "Chiusura",
               "detail": "fine prevista: 29 ottobre 2026",
               "date": "2026-09-24T08:13:00.000Z"
+            },
+            {
+              "label": "A1a Etoile -> Diramazione Perly Svincolo autostradale La Praille-Carouge Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 28 ottobre 2026",
+              "date": "2026-09-24T08:16:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -258,7 +258,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-17T02:52:35.704Z"
+      "updatedAt": "2026-10-17T03:47:28.379Z"
     },
     "en": {
       "canton": "GE",
@@ -273,7 +273,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "16",
+          "value": "15",
           "note": "reports as of 16 October 2026"
         },
         {
@@ -353,12 +353,6 @@
               "date": "2026-09-24T08:06:00.000Z"
             },
             {
-              "label": "A1 Lausanne -> Genève Svincolo autostradale Perly Nord Situazione: uscita chiusa cantiere, lunghezza [km] 0.1",
-              "value": "Closure",
-              "detail": "until 17 October 2026",
-              "date": "2026-09-24T08:08:00.000Z"
-            },
-            {
               "label": "A1 Lausanne -> Genève Svincolo autostradale Perly Nord Situazione: uscita chiusa cantiere",
               "value": "Closure",
               "detail": "until 24 October 2026",
@@ -393,6 +387,12 @@
               "value": "Closure",
               "detail": "until 29 October 2026",
               "date": "2026-09-24T08:13:00.000Z"
+            },
+            {
+              "label": "A1a Etoile -> Diramazione Perly Svincolo autostradale La Praille-Carouge Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "value": "Closure",
+              "detail": "until 28 October 2026",
+              "date": "2026-09-24T08:16:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -494,7 +494,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-17T02:52:35.704Z"
+      "updatedAt": "2026-10-17T03:47:28.379Z"
     },
     "de": {
       "canton": "GE",
@@ -509,7 +509,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "16",
+          "value": "15",
           "note": "Meldungen vom 16. Oktober 2026"
         },
         {
@@ -589,12 +589,6 @@
               "date": "2026-09-24T08:06:00.000Z"
             },
             {
-              "label": "A1 Lausanne -> Genf Anschluss Perly Nord Sachlage: Ausfahrt gesperrt Baustelle, Länge [km] 0.1",
-              "value": "Sperrung",
-              "detail": "bis 17. Oktober 2026",
-              "date": "2026-09-24T08:08:00.000Z"
-            },
-            {
               "label": "A1 Lausanne -> Genf Anschluss Perly Nord Sachlage: Ausfahrt gesperrt Baustelle",
               "value": "Sperrung",
               "detail": "bis 24. Oktober 2026",
@@ -629,6 +623,12 @@
               "value": "Sperrung",
               "detail": "bis 29. Oktober 2026",
               "date": "2026-09-24T08:13:00.000Z"
+            },
+            {
+              "label": "A1a Etoile -> Verzweigung Perly Anschluss La Praille-Carouge Sachlage: Einfahrt gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 28. Oktober 2026",
+              "date": "2026-09-24T08:16:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -730,7 +730,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-17T02:52:35.704Z"
+      "updatedAt": "2026-10-17T03:47:28.379Z"
     },
     "fr": {
       "canton": "GE",
@@ -745,7 +745,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "16",
+          "value": "15",
           "note": "signalements au 16 octobre 2026"
         },
         {
@@ -825,12 +825,6 @@
               "date": "2026-09-24T08:06:00.000Z"
             },
             {
-              "label": "A1 Lausanne -> Genève Jonction autoroutière Perly Nord Situation: sortie fermée travaux, longueur [km] 0.1",
-              "value": "Fermeture",
-              "detail": "jusqu’au 17 octobre 2026",
-              "date": "2026-09-24T08:08:00.000Z"
-            },
-            {
               "label": "A1 Lausanne -> Genève Jonction autoroutière Perly Nord Situation: sortie fermée travaux",
               "value": "Fermeture",
               "detail": "jusqu’au 24 octobre 2026",
@@ -865,6 +859,12 @@
               "value": "Fermeture",
               "detail": "jusqu’au 29 octobre 2026",
               "date": "2026-09-24T08:13:00.000Z"
+            },
+            {
+              "label": "A1a Etoile -> Echangeur de Perly Jonction autoroutière La Praille-Carouge Situation: entrée fermée travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 28 octobre 2026",
+              "date": "2026-09-24T08:16:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -966,7 +966,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-17T02:52:35.704Z"
+      "updatedAt": "2026-10-17T03:47:28.379Z"
     }
   }
 }
