@@ -9093,10 +9093,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.rsi.ch/info/svizzera/l%e2%80%99ia-aiuta-i-consumatori-svizzeri-a-fare-shopping--4164661.html": {
-      "section": "frontaliere",
-      "ts": 1792069217136
-    },
     "frontaliere::https://www.varesenews.it/2026/10/il-cantiere-della-nuova-superstrada-pedemontana-malpensa-sono-ancora-fermi-sbloccati-i-pagamenti/2709238": {
       "section": "frontaliere",
       "ts": 1792078558980
@@ -9424,6 +9420,14 @@
     "frontaliere::https://cassa-disoccupazione.unia.ch": {
       "section": "frontaliere",
       "ts": 1792240710869
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/inaugurato-il-nuovo-nodo-di-interscambio-a-biasca-444809": {
+      "section": "frontaliere",
+      "ts": 1792241714329
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/transizione-economica-ed-ecologica-possono-avanzare-insieme-imprese-scienza-e-politica-si-confrontano/2711059": {
+      "section": "frontaliere",
+      "ts": 1792242171852
     }
   }
 }
