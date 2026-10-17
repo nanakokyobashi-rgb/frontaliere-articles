@@ -259,6 +259,7 @@ function articleLinks(source) {
       index += 1;
       continue;
     }
+    link.nestedLinks = link.label.includes('[') ? articleLinks(link.label) : [];
     links.push(link);
     index = link.end;
   }
@@ -339,7 +340,7 @@ export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
   for (const link of articleLinks(source)) {
     const canonical = canonicalArticleLinkOccurrenceTarget(link, locale);
     const duplicateAnchorHref = link.htmlAnchor && link.hrefAttributes.length > 1;
-    const normalizedLabel = link.htmlAnchor
+    const normalizedLabel = link.htmlAnchor || link.nestedLinks.length === 0
       ? link.label
       : sanitizeArticleMarkdownLinks(link.label, locale);
     const angleTargetNeedsDelimiters = link.angle && /\s/u.test(link.target);
@@ -402,7 +403,7 @@ export function findNonCanonicalArticleLinks(source, locale = 'it', baseIndex = 
         htmlAnchor: Boolean(link.htmlAnchor),
       });
     }
-    if (!link.htmlAnchor) {
+    if (!link.htmlAnchor && link.nestedLinks.length > 0) {
       offenders.push(...findNonCanonicalArticleLinks(link.label, locale, baseIndex + link.start + 1));
     }
   }

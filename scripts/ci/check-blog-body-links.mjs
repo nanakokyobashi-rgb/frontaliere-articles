@@ -206,6 +206,14 @@ function extractArticleBodyValues(source) {
       const tokenEnd = skipQuotedToken(source, tokenStart);
       if (previousToken === '{' || previousToken === ',') {
         const keyLiteral = readQuotedValue(source, tokenStart, char);
+        const dynamicKeyExpression = source.slice(tokenStart, tokenEnd);
+        if (
+          keyLiteral?.dynamic &&
+          /^`blog\.article\.[\s\S]*\.(?:body\d+|faq)`$/u.test(dynamicKeyExpression)
+        ) {
+          throw new Error('chiave TypeScript dinamica non verificabile per blog.article: '
+            + dynamicKeyExpression);
+        }
         if (keyLiteral && !keyLiteral.dynamic) {
           const propertyKey = decodeBodyValue(keyLiteral.raw, char);
           const keyMatch = /^blog\.article\.(.+)\.(body\d+|faq)$/.exec(propertyKey);
