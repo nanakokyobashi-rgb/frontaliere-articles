@@ -7,6 +7,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'zug-rischio-coleottero-giapponese': { it: 'zug-rischio-coleottero-giapponese', en: 'zug-japanese-beetle-risk', de: 'zug-risiko-japankaefer', fr: 'zoug-risque-scarabee-japonais' },
  'baar-rinnovo-comunale-2027': { it: 'baar-rinnovo-comunale-2027', en: 'baar-municipal-council-renewal', de: 'baar-erneuerung-gemeinderat', fr: 'baar-renouvellement-conseil' },
  'scuola-sternmatt-ia-2026': { it: 'scuola-sternmatt-ia-2026', en: 'sternmatt-school-ai-2026', de: 'sternmatt-schule-ki-2026', fr: 'ecole-sternmatt-ia-2026' },
+ 'zuger-rapporto-gestione-2025': { it: 'zuger-rapporto-gestione-2025', en: 'zuger-annual-report-2025', de: 'zuger-geschaeftsbericht-2025', fr: 'zuger-rapport-gestion-2025' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

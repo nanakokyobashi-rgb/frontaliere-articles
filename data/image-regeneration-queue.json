@@ -150,6 +150,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-17T00:46:50.699Z",
       "lastFailureAt": "2026-10-17T00:46:50.699Z"
+    },
+    {
+      "articleId": "zuger-rapporto-gestione-2025",
+      "title": "Zuger Pensionskasse: online il rapporto 2025",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T00:53:57.816Z",
+      "lastFailureAt": "2026-10-17T00:53:57.816Z"
     }
   ]
 }

@@ -15,6 +15,9 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.scuola-sternmatt-ia-2026.title': 'Schule Sternmatt 1: KI prägt das Schuljahr 2026/27',
     'blog.article.scuola-sternmatt-ia-2026.excerpt': 'Die Schule Sternmatt 1 nimmt das Schuljahr 2026/27 in Angriff und stellt dabei einen verantwortungsvollen Einsatz künstlicher Intelligenz in den Klassenzimmern in den Mittelpunkt.',
     'blog.article.scuola-sternmatt-ia-2026.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.zuger-rapporto-gestione-2025.title': 'Zuger Pensionskasse: Der Bericht 2025 ist online',
+    'blog.article.zuger-rapporto-gestione-2025.excerpt': 'Der Geschäftsbericht 2025 der Zuger Pensionskasse bietet einen Überblick über das abgeschlossene Geschäftsjahr und verweist für weitere Informationen auf die Jahresrechnung 2025.',
+    'blog.article.zuger-rapporto-gestione-2025.imageAlt': 'Geschäftsbericht 2025 der Zuger Pensionskasse',
 };
 
 export default blogMetaCantonZgDe;

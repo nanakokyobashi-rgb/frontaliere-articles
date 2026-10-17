@@ -153,6 +153,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-zuger-rapporto-gestione-2025': {
+    title: 'Zuger Pensionskasse: online il rapporto 2025 | Frontaliere Ticino',
+    description: 'Il Geschäftsbericht 2025 della Zuger Pensionskasse è online: offre una panoramica sull\'esercizio concluso e rinvia alla Jahresrechnung 2025 per approfondire.',
+    keywords: 'frontalieri, ticino, svizzera, italia, zuger, pensionskasse, online, rapporto',
+    ogTitle: 'Zuger Pensionskasse: rapporto 2025 online',
+    ogDescription: 'Il rapporto di gestione 2025 della Zuger Pensionskasse è online e offre una panoramica sull\'esercizio concluso. La pagina rinvia alla Jahresrechnung 2025 e raccoglie sezioni per assicurati, pensionati, datori di lavoro e investimenti.',
+    canonicalPath: '/articoli-zugo/zuger-rapporto-gestione-2025/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Zuger Pensionskasse: online il rapporto 2025",
+      "description": "Il Geschäftsbericht 2025 della Zuger Pensionskasse è online: offre una panoramica sull'esercizio concluso e rinvia alla Jahresrechnung 2025 per approfondire.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Rapporto di gestione 2025 della Zuger Pensionskasse"
+      },
+      "datePublished": "2026-10-17T00:53:57+00:00",
+      "dateModified": "2026-10-17T00:53:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zugo/zuger-rapporto-gestione-2025/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

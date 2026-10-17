@@ -15,6 +15,9 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.scuola-sternmatt-ia-2026.title': 'Sternmatt School 1: AI marks 2026/27',
     'blog.article.scuola-sternmatt-ia-2026.excerpt': 'The Sternmatt 1 school is entering 2026/27 with the responsible use of artificial intelligence in classrooms at the forefront.',
     'blog.article.scuola-sternmatt-ia-2026.imageAlt': 'Illustration generated for this article',
+    'blog.article.zuger-rapporto-gestione-2025.title': 'Zuger Pensionskasse: 2025 report now online',
+    'blog.article.zuger-rapporto-gestione-2025.excerpt': 'The 2025 annual report of the Zuger Pensionskasse provides an overview of the completed financial year and refers to the 2025 annual financial statements for further information.',
+    'blog.article.zuger-rapporto-gestione-2025.imageAlt': '2025 annual report of the Zuger Pensionskasse',
 };
 
 export default blogMetaCantonZgEn;
