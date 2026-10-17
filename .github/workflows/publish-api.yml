@@ -325,6 +325,10 @@ jobs:
             mapfile -t body_dir_list <<< "$body_dirs"
             gate_input_paths=(
               .github/workflows/publish-api.yml
+              engine/shared/articleSectionCore.mjs
+              generator/data/canton-sections.json
+              generator/scripts/lib/corpus-paths.mjs
+              host/cantonSectionsBootstrap.mjs
               scripts/ci/check-blog-body-links.mjs
               scripts/lib/article-link-contract.mjs
               scripts/lib/corpus-sections.mjs
