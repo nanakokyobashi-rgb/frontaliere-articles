@@ -188,9 +188,77 @@ function codeSpanEnd(source, start) {
   return -1;
 }
 
+function indentedCodeBlockEnd(source, start) {
+  if (start > 0 && source[start - 1] !== '\n') return -1;
+  const firstEnd = source.indexOf('\n', start);
+  const firstLine = source.slice(start, firstEnd < 0 ? source.length : firstEnd);
+  if (!firstLine.trim() || !/^(?: {4,}|\t)/.test(firstLine)) return -1;
+
+  let cursor = firstEnd < 0 ? source.length : firstEnd + 1;
+  while (cursor < source.length) {
+    const lineEnd = source.indexOf('\n', cursor);
+    const line = source.slice(cursor, lineEnd < 0 ? source.length : lineEnd);
+    if (line.trim() && !/^(?: {4,}|\t)/.test(line)) return cursor;
+    cursor = lineEnd < 0 ? source.length : lineEnd + 1;
+  }
+  return source.length;
+}
+
+function referenceDefinitionAt(source, start) {
+  if (start > 0 && source[start - 1] !== '\n') return null;
+  const lineEnd = source.indexOf('\n', start);
+  const line = source.slice(start, lineEnd < 0 ? source.length : lineEnd);
+  const indent = /^ {0,3}/.exec(line)[0].length;
+  if (line[indent] !== '[') return null;
+
+  const labelEnd = line.indexOf(']', indent + 1);
+  if (labelEnd < 0) return null;
+  let cursor = labelEnd + 1;
+  while (line[cursor] === ' ' || line[cursor] === '\t') cursor += 1;
+  if (line[cursor] !== ':') return null;
+  cursor += 1;
+  while (line[cursor] === ' ' || line[cursor] === '\t') cursor += 1;
+
+  const angled = line[cursor] === '<';
+  const targetStart = angled ? cursor + 1 : cursor;
+  let targetEnd;
+  if (angled) {
+    const close = line.indexOf('>', targetStart);
+    if (close < 0) return null;
+    targetEnd = close;
+  } else {
+    targetEnd = targetStart;
+    while (targetEnd < line.length && !/[ \t]/.test(line[targetEnd])) targetEnd += 1;
+  }
+  if (targetEnd === targetStart) return null;
+
+  return {
+    start,
+    end: lineEnd < 0 ? source.length : lineEnd + 1,
+    label: line.slice(indent + 1, labelEnd),
+    target: line.slice(targetStart, targetEnd),
+    targetStart: start + targetStart,
+    targetEnd: start + targetEnd,
+    referenceDefinition: true,
+  };
+}
+
 function markdownLinks(source, { skipCode = false } = {}) {
   const links = [];
   for (let index = 0; index < source.length;) {
+    if (skipCode && (index === 0 || source[index - 1] === '\n')) {
+      const definition = referenceDefinitionAt(source, index);
+      if (definition) {
+        links.push(definition);
+        index = definition.end;
+        continue;
+      }
+      const indentedEnd = indentedCodeBlockEnd(source, index);
+      if (indentedEnd > index) {
+        index = indentedEnd;
+        continue;
+      }
+    }
     if (source[index] === '\\') {
       index += index + 1 < source.length ? 2 : 1;
       continue;
@@ -222,6 +290,21 @@ function markdownLinks(source, { skipCode = false } = {}) {
     index = link.end;
   }
   return links;
+}
+
+/**
+ * Sanitize every Markdown string field in generated FAQ pairs before the
+ * object is serialized into a TypeScript body literal.
+ */
+export function sanitizeArticleFaqMarkdown(faqArray, locale = 'it') {
+  if (!Array.isArray(faqArray)) return faqArray;
+  return faqArray.map((pair) => {
+    if (!pair || typeof pair !== 'object' || Array.isArray(pair)) return pair;
+    return Object.fromEntries(Object.entries(pair).map(([key, value]) => [
+      key,
+      typeof value === 'string' ? sanitizeArticleMarkdownLinks(value, locale) : value,
+    ]));
+  });
 }
 
 /**
@@ -265,8 +348,8 @@ export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
     if (canonical === link.target) continue;
     output += source.slice(copiedThrough, canonical === null ? link.start : link.targetStart);
     output += canonical === null
-      ? link.label
-      : `${canonical}${source.slice(link.targetEnd, link.end)}`;
+      ? (link.referenceDefinition ? '' : link.label)
+      : canonical + source.slice(link.targetEnd, link.end);
     copiedThrough = link.end;
   }
   return copiedThrough === 0 ? source : output + source.slice(copiedThrough);

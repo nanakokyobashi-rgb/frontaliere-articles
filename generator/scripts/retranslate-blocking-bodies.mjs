@@ -181,6 +181,7 @@ import { detectLanguage, detectLanguageWithConfidence } from './lib/detect-langu
 import { assertLocalizedToponymPair, extractArticleProjectionText } from './lib/localized-toponyms.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
+import { sanitizeArticleMarkdownLinks } from '../../scripts/lib/article-link-contract.mjs';
 import {
   BODY_FIELDS as WRITER_BODY_FIELDS,
   extractBodyFields,
@@ -606,7 +607,7 @@ export function sanitizeTranslatedField(value) {
  * file (le altre chiavi, `faq`, l'export finale). Ritorna `null` se la chiave
  * non c'e': meglio saltare l'articolo che riscriverlo a meta'.
  */
-export function replaceBodyField(src, id, field, value) {
+export function replaceBodyField(src, id, field, value, locale = 'it') {
   const key = bodyKey(id, field);
   const i = src.indexOf(key);
   if (i === -1) return null;
@@ -620,6 +621,7 @@ export function replaceBodyField(src, id, field, value) {
     j += 1;
   }
   if (j >= src.length) return null;
+  value = sanitizeArticleMarkdownLinks(value, locale);
   // Si riscrive sempre come single-quoted: e' la forma che lo scrittore
   // canonico emette, e `escapeForSingleQuoteTS` e' il suo inverso esatto.
   return `${src.slice(0, i + key.length)}'${escapeForSingleQuoteTS(value)}'${src.slice(j + 1)}`;
@@ -634,9 +636,10 @@ export function replaceBodyField(src, id, field, value) {
  * articolo (quindi prima di `.faq` nei file storici che ne contengono solo
  * quella), mantenendo il formato single-quoted dello writer canonico.
  */
-export function insertBodyField(src, id, field, value) {
+export function insertBodyField(src, id, field, value, locale = 'it') {
   const key = bodyKey(id, field);
   if (src.includes(key)) return null;
+  value = sanitizeArticleMarkdownLinks(value, locale);
   const firstKey = new RegExp(
     `^([ \\t]*)['"]blog\\.article\\.${escapeRegExp(id)}\\.(?:body[123]|faq)['"]\\s*:`,
     'mu',
@@ -1330,15 +1333,15 @@ export function completenessPairsFromReport(report) {
  * nuovi e non chiama `registerArticleFiles()` (append-only). `null` su
  * una chiave assente: meglio saltare che riscrivere a meta'.
  */
-export function rewriteExistingLocaleBody(src, id, sections, { allowMissing = false } = {}) {
+export function rewriteExistingLocaleBody(src, id, sections, { allowMissing = false, locale = 'it' } = {}) {
   let next = src;
   for (const [field, value] of Object.entries(sections || {})) {
-    const replaced = replaceBodyField(next, id, field, value);
+    const replaced = replaceBodyField(next, id, field, value, locale);
     if (replaced !== null) {
       next = replaced;
       continue;
     }
-    const inserted = allowMissing ? insertBodyField(next, id, field, value) : null;
+    const inserted = allowMissing ? insertBodyField(next, id, field, value, locale) : null;
     if (inserted === null) return { src: next, missing: field };
     next = inserted;
   }
@@ -1971,6 +1974,7 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
 
   const rewritten = rewriteExistingLocaleBody(trSrc, pair.id, checkedSections, {
     allowMissing: Boolean(pair.structural),
+    locale: pair.locale,
   });
   if (rewritten.missing) return { ...row, reason: `chiave-assente: ${rewritten.missing}` };
   writeAtomic(trPath, rewritten.src);

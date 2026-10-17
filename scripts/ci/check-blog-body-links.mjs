@@ -19,7 +19,6 @@ export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 configureCorpusActiveSections();
 export const BLOG_BODY_ROOTS = Object.freeze(activeSourceSections().map(({ bodyDir }) => bodyDir));
 const LOCALES = new Set(['it', 'en', 'de', 'fr']);
-const ARTICLE_BODY_PROPERTY = /(['"`])blog\.article\.([^'"`]+)\.(body\d+|faq)\1\s*:\s*/g;
 
 function collectTypeScriptFiles(dir) {
   let entries;
@@ -75,30 +74,140 @@ function decodeBodyValue(raw, quote) {
   return decodeTypeScriptString(raw, quote);
 }
 
+const TEMPLATE_QUOTE = String.fromCharCode(96);
+
+function skipLineComment(source, start) {
+  const end = source.indexOf('\n', start + 2);
+  return end < 0 ? source.length : end + 1;
+}
+
+function skipBlockComment(source, start) {
+  const end = source.indexOf('*/', start + 2);
+  return end < 0 ? source.length : end + 2;
+}
+
+function skipTemplateExpression(source, start) {
+  let depth = 1;
+  let cursor = start;
+  while (cursor < source.length) {
+    const char = source[cursor];
+    const next = source[cursor + 1];
+    if (char === '/' && next === '/') {
+      cursor = skipLineComment(source, cursor);
+    } else if (char === '/' && next === '*') {
+      cursor = skipBlockComment(source, cursor);
+    } else if (char === "'" || char === '"' || char === TEMPLATE_QUOTE) {
+      cursor = skipQuotedToken(source, cursor);
+    } else if (char === '{') {
+      depth += 1;
+      cursor += 1;
+    } else if (char === '}') {
+      depth -= 1;
+      cursor += 1;
+      if (depth === 0) return cursor;
+    } else {
+      cursor += 1;
+    }
+  }
+  return source.length;
+}
+
+function skipQuotedToken(source, start) {
+  const quote = source[start];
+  let cursor = start + 1;
+  while (cursor < source.length) {
+    const char = source[cursor];
+    if (char === '\\') {
+      cursor += 2;
+      continue;
+    }
+    if (quote === TEMPLATE_QUOTE && char === '$' && source[cursor + 1] === '{') {
+      cursor = skipTemplateExpression(source, cursor + 2);
+      continue;
+    }
+    if (char === quote) return cursor + 1;
+    cursor += 1;
+  }
+  return source.length;
+}
+
+function skipTriviaAndComments(source, start) {
+  let cursor = start;
+  while (cursor < source.length) {
+    if (/\s/.test(source[cursor])) {
+      cursor += 1;
+    } else if (source[cursor] === '/' && source[cursor + 1] === '/') {
+      cursor = skipLineComment(source, cursor);
+    } else if (source[cursor] === '/' && source[cursor + 1] === '*') {
+      cursor = skipBlockComment(source, cursor);
+    } else {
+      break;
+    }
+  }
+  return cursor;
+}
+
 function extractArticleBodyValues(source) {
   const values = [];
-  const matcher = new RegExp(ARTICLE_BODY_PROPERTY.source, 'g');
-  let match;
-  while ((match = matcher.exec(source)) !== null) {
-    const valueStart = matcher.lastIndex;
-    const quote = source[valueStart];
-    if (!["'", '"', '`'].includes(quote)) {
-      throw new Error('valore TypeScript non letterale per blog.article.' + match[2] + '.' + match[3]);
+  let cursor = 0;
+  let previousToken = '';
+  while (cursor < source.length) {
+    const char = source[cursor];
+    const next = source[cursor + 1];
+    if (/\s/.test(char)) {
+      cursor += 1;
+      continue;
     }
-    const literal = readQuotedValue(source, valueStart, quote);
-    if (!literal) {
-      throw new Error(`stringa TypeScript non terminata per blog.article.${match[2]}.${match[3]}`);
+    if (char === '/' && next === '/') {
+      cursor = skipLineComment(source, cursor);
+      continue;
     }
-    if (literal.dynamic) {
-      throw new Error('template TypeScript dinamico non verificabile per blog.article.'
-        + match[2] + '.' + match[3]);
+    if (char === '/' && next === '*') {
+      cursor = skipBlockComment(source, cursor);
+      continue;
     }
-    values.push({
-      field: `blog.article.${match[2]}.${match[3]}`,
-      markdown: decodeBodyValue(literal.raw, quote),
-      index: match.index,
-    });
-    matcher.lastIndex = literal.end;
+    if (char === "'" || char === '"' || char === TEMPLATE_QUOTE) {
+      const tokenStart = cursor;
+      const tokenEnd = skipQuotedToken(source, tokenStart);
+      if (previousToken === '{' || previousToken === ',') {
+        const keyLiteral = readQuotedValue(source, tokenStart, char);
+        if (keyLiteral && !keyLiteral.dynamic) {
+          const propertyKey = decodeBodyValue(keyLiteral.raw, char);
+          const keyMatch = /^blog\.article\.(.+)\.(body\d+|faq)$/.exec(propertyKey);
+          const afterKey = skipTriviaAndComments(source, tokenEnd);
+          if (keyMatch && source[afterKey] === ':') {
+            const valueStart = skipTriviaAndComments(source, afterKey + 1);
+            const valueQuote = source[valueStart];
+            if (!["'", '"', TEMPLATE_QUOTE].includes(valueQuote)) {
+              throw new Error('valore TypeScript non letterale per blog.article.'
+                + keyMatch[1] + '.' + keyMatch[2]);
+            }
+            const literal = readQuotedValue(source, valueStart, valueQuote);
+            if (!literal) {
+              throw new Error('stringa TypeScript non terminata per blog.article.'
+                + keyMatch[1] + '.' + keyMatch[2]);
+            }
+            if (literal.dynamic) {
+              throw new Error('template TypeScript dinamico non verificabile per blog.article.'
+                + keyMatch[1] + '.' + keyMatch[2]);
+            }
+            values.push({
+              field: 'blog.article.' + keyMatch[1] + '.' + keyMatch[2],
+              markdown: decodeBodyValue(literal.raw, valueQuote),
+              index: tokenStart,
+            });
+            cursor = literal.end;
+            previousToken = 'string';
+            continue;
+          }
+        }
+      }
+      cursor = tokenEnd;
+      previousToken = 'string';
+      continue;
+    }
+    previousToken = char;
+    cursor += 1;
   }
   return values;
 }
