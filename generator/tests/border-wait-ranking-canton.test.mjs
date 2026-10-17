@@ -27,6 +27,7 @@ import {
   buildBorderWaitRankingArticle,
   rankingArticleIdentity,
 } from '../scripts/lib/border-wait-ranking-content.mjs';
+import { STATIC_FALLBACK_IMAGE } from '../scripts/lib/blog-image-registry.mjs';
 import { isTicinoCrossing } from '../build-plugins/borderWaitData.ts';
 import { freshenWindow } from './lib/rewire-contracts.mjs';
 
@@ -83,6 +84,7 @@ describe('classifica dogane per cantone', () => {
     assert.equal(data.id, 'classifica-dogane-ticino');
     assert.equal(data.seo.title, 'Classifica delle dogane in Ticino: le migliori e le peggiori');
     assert.equal(data.image, 'mendrisio.webp');
+    assert.equal(data._generatedImagePath, STATIC_FALLBACK_IMAGE);
     // 8 ticinesi nel fixture; anieres (GE) e au-lustenau (SG) restano fuori.
     assert.equal(data._rankedCount, 8);
   });
@@ -161,6 +163,7 @@ describe('classifica dogane per cantone', () => {
     assert.equal(staticMetaFor('JU').image, null);
     assert.equal(staticMetaFor('JU')._generatedImagePath, undefined);
     assert.equal(staticMetaFor('TI').image, 'mendrisio.webp');
+    assert.equal(staticMetaFor('TI')._generatedImagePath, STATIC_FALLBACK_IMAGE);
   });
 
   it('--canton: default TI, case-insensitive, rifiuta un cantone senza valichi', () => {

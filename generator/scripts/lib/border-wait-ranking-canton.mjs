@@ -11,6 +11,7 @@
 import { rankingFromStats, trendFromStats, computeFunFacts, computeWeekWindow, computeMovers } from './border-wait-ranking.mjs';
 import { BORDER_RANKING_CANTONS } from './border-wait-ranking-content.mjs';
 import { isTicinoCrossing } from '../../build-plugins/borderWaitData.ts';
+import { STATIC_FALLBACK_IMAGE } from './blog-image-registry.mjs';
 
 // Evergreen metadata — registered once, NEVER refreshed (no date/count inside).
 export const STATIC_META = {
@@ -34,11 +35,12 @@ export const STATIC_META = {
 
 /**
  * RANKING_IMAGE is deliberately an allowlist of existing, credited catalog
- * covers. A non-Ticino ranking uses `_generatedImagePath` for the real
- * `/images/blog/` hero; `image` remains the public registry field and carries
- * the same path for deterministic producers. Missing provenance stays null:
- * the generator's first-publication guard then refuses the ranking instead of
- * inheriting a Ticino place photo.
+ * covers. Ticino uses the governed site-owned place fallback, while a
+ * non-Ticino ranking uses `_generatedImagePath` for the real `/images/blog/`
+ * hero; `image` remains the public registry field and carries the same path
+ * for deterministic producers. Missing provenance stays null: the
+ * generator's first-publication guard then refuses the ranking instead of
+ * inheriting an unrelated cover.
  *
  * Every selected path is present in `public/data/journalist-image-catalog.json`
  * and has a matching `content/image-credits/blog/*.json` record with
@@ -61,12 +63,13 @@ export const RANKING_IMAGE = Object.freeze({
 });
 
 /**
- * Evergreen metadata of a canton's ranking. Ticino returns STATIC_META itself
- * (registered once in 2026, never rewritten); the others are derived from the
- * same place phrases the article body uses.
+ * Evergreen metadata of a canton's ranking. Ticino keeps STATIC_META and pins
+ * the governed site-owned fallback needed by the shared registrar (the
+ * article is registered once and never rewritten); the others are derived
+ * from the same place phrases the article body uses.
  */
 export function staticMetaFor(canton = 'TI') {
-  if (canton === 'TI') return STATIC_META;
+  if (canton === 'TI') return { ...STATIC_META, _generatedImagePath: STATIC_FALLBACK_IMAGE };
   const profile = BORDER_RANKING_CANTONS[canton];
   if (!profile) throw new Error(`no border-wait ranking for canton ${canton}`);
   const it = profile.it;

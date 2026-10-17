@@ -9,6 +9,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { STATIC_FALLBACK_IMAGE } from './blog-image-registry.mjs';
 
 export const PHARMACY_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 
@@ -1249,6 +1250,9 @@ export function buildPharmacyEvergreenGuides(snapshots, { now = Date.now } = {})
     category: 'pratico',
     date,
     image: spec.image,
+    // The legacy catalog name remains part of the payload shape, but the
+    // shared registrar needs the governed web path for its first-write gate.
+    _generatedImagePath: STATIC_FALLBACK_IMAGE,
     hasCalculator: false,
     author: { slug: 'redazione', name: 'Redazione Frontaliere Ticino' },
     seo: buildSeo(spec, validated),

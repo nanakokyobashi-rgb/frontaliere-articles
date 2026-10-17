@@ -18,6 +18,7 @@ import {
   loadPharmacySnapshots,
   validatePharmacySnapshots,
 } from '../scripts/lib/pharmacy-evergreen-guides-content.mjs';
+import { STATIC_FALLBACK_IMAGE } from '../scripts/lib/blog-image-registry.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = path.join(HERE, '..', 'data');
@@ -103,6 +104,7 @@ test('pharmacy evergreen: ogni guida localizzata espone scope, fonti, semantica 
   assert.deepEqual(guides.map((guide) => guide.id), PHARMACY_GUIDE_IDS);
   for (const guide of guides) {
     assert.ok(['bellinzona.webp', 'lugano-view.webp', 'mendrisio.webp', 'castelgrande.webp'].includes(guide.image));
+    assert.equal(guide._generatedImagePath, STATIC_FALLBACK_IMAGE);
     assert.doesNotMatch(guide.id, /-20\d\d-\d\d-\d\d/);
     assert.deepEqual(Object.keys(guide.content).sort(), [...PHARMACY_LOCALES].sort());
 
