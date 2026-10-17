@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-viaggi-armonici-ternate-2026.webp",
-      "sha256": "0e131d2dd1d49dc6750f9d4e3e15ac95070a7b29bd3492144876b6bc4bdcdf49"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-viaggi-armonici-ternate-2026-480w.webp",
-      "sha256": "b85590b62d698706dd0e66d492c4aa2a113137629ee56e050b19e4b5a40903bf"
-    }
-  ]
+  "items": []
 }
