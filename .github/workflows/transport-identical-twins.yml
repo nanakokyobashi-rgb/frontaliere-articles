@@ -151,6 +151,10 @@ jobs:
           SITE_REF: main
         run: |
           set -uo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -n "$runtime_pat" ]; then
+            export GH_TOKEN="$runtime_pat"
+          fi
           rc=0
           node scripts/ci/transport-identical-twins.mjs || rc=$?
           # exit 2 = «c'e' un no permanente con divergenza reale». NON deve
