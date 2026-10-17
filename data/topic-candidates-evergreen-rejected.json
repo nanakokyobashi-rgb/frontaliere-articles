@@ -660,6 +660,18 @@
       "firstSeenAt": "2026-10-16T15:09:28.206Z",
       "lastValidatedAt": "2026-10-16T15:09:28.206Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "sistema sanitario svizzero lamal guida 2026 canton Ginevra",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-17T03:16:15.948Z",
+      "lastValidatedAt": "2026-10-17T03:16:15.948Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -9296,6 +9308,10 @@
     "frontaliere::https://www.varesenews.it/2026/10/la-uyba-cerca-la-prima-vittoria-nel-classico-contro-bergamo/2710654": {
       "section": "frontaliere",
       "ts": 1792204780482
+    },
+    "svizzera::https://www.seco.admin.ch/it/la-seco-in-qualita-di-datore-di-lavoro": {
+      "section": "svizzera",
+      "ts": 1792206975646
     }
   }
 }
