@@ -5,58 +5,58 @@
       "articleId": "offerte-formazione-federale",
       "title": "Amministrazione federale: lavoro, praticantati e formazione",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Generic synthetic office-work illustration in a Swiss-looking setting, but it contains a recognizable foreground person viewed fro",
+      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to work and administration, but it prominently features a foreground person.); gemini (",
       "status": "failed",
-      "failureCount": 11,
+      "failureCount": 12,
       "requestedAt": "2026-10-13T23:44:58.192Z",
-      "lastFailureAt": "2026-10-17T12:32:12.558Z"
+      "lastFailureAt": "2026-10-17T20:23:02.671Z"
     },
     {
       "articleId": "opportunita-impiego-federale",
       "title": "Lavorare per l'Amministrazione federale: 50 formazioni",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-opportunita-impiego-federale: openai-codex (vision gate rejected image: Synthetic photorealistic lab scene with no readable text, logos, or recognizable face, but it prominently features a foreground p",
+      "reason": "All image providers failed for article-opportunita-impiego-federale: openai-codex (vision gate rejected image: Generic synthetic Swiss workshop/training scene with no readable text or logos, but a recognizable foreground person is present.)",
       "status": "failed",
-      "failureCount": 8,
+      "failureCount": 9,
       "requestedAt": "2026-10-15T01:49:05.613Z",
-      "lastFailureAt": "2026-10-17T12:33:15.835Z"
+      "lastFailureAt": "2026-10-17T20:24:12.941Z"
     },
     {
       "articleId": "maratona-laghi-varese-2027",
       "title": "Maratona dei Laghi 2027: attesi 2000 runner tra Varese e Monate",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-maratona-laghi-varese-2027: openai-codex (vision gate rejected image: Generic synthetic lakeside running scene with no visible text, logo, or face; the foreground runner is recognizable from behind.); ",
+      "reason": "All image providers failed for article-maratona-laghi-varese-2027: openai-codex (vision gate rejected image: Generic synthetic lakeside running illustration; no face, text, logo, or specific event, but a recognizable foreground runner is pr",
       "status": "failed",
-      "failureCount": 4,
+      "failureCount": 5,
       "requestedAt": "2026-10-16T13:10:19.548Z",
-      "lastFailureAt": "2026-10-17T12:34:36.958Z"
+      "lastFailureAt": "2026-10-17T20:25:14.602Z"
     },
     {
       "articleId": "giovani-lavoro-futuro-ticino",
       "title": "Ai giovani non basta un lavoro. Serve un futuro",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
-      "reason": "All image providers failed for article-giovani-lavoro-futuro-ticino: openai-codex (vision gate rejected image: Synthetic photorealistic illustration relevant to alpine rail commuting, but it contains a recognizable foreground person viewed ",
+      "reason": "All image providers failed for article-giovani-lavoro-futuro-ticino: openai-codex (vision gate rejected image: Synthetic photorealistic illustration with a clearly recognizable foreground commuter seen from behind; no visible text or logos.",
       "status": "failed",
-      "failureCount": 3,
+      "failureCount": 4,
       "requestedAt": "2026-10-16T17:37:12.235Z",
-      "lastFailureAt": "2026-10-17T07:18:14.352Z"
+      "lastFailureAt": "2026-10-17T20:26:42.101Z"
     },
     {
       "articleId": "cantieri-lugano-riduzione-disagi",
       "title": "Cantieri a Lugano: il Municipio punta a ridurre i disagi",
       "fallbackImage": "/images/blog/frontalieri-assunzioni-lugano-interrogazione.webp",
-      "reason": "image generation deadline exceeded",
+      "reason": "All image providers failed for article-cantieri-lugano-riduzione-disagi: openai-codex (vision gate rejected image: Generic synthetic construction illustration, but it contains multiple roadwork and traffic-control signs.); gemini (Gemini im",
       "status": "failed",
-      "failureCount": 2,
+      "failureCount": 3,
       "requestedAt": "2026-10-17T00:14:09.813Z",
-      "lastFailureAt": "2026-10-17T07:20:14.573Z"
+      "lastFailureAt": "2026-10-17T20:27:57.944Z"
     },
     {
       "articleId": "tre-valli-varesine-7-posto-mondiale",
       "title": "Tre Valli Varesine 7ª al mondo: batte Vuelta e Paris-Roubaix",
       "fallbackImage": "/images/blog/guida-tre-valli-varesine-2026.webp",
       "reason": "All image providers failed for article-tre-valli-varesine-7-posto-mondiale: openai-codex (vision gate rejected image: Generic synthetic cycling scene, but a recognizable cyclist is prominently visible in the foreground.); gemini (Gemini ima",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 2,
       "requestedAt": "2026-10-17T00:42:42.710Z",
       "lastFailureAt": "2026-10-17T07:21:13.148Z"
@@ -66,7 +66,7 @@
       "title": "Stesso reddito, imposte diverse: risparmio fino al 90%",
       "fallbackImage": "/images/blog/emigrazione-cassa-pensione-risparmio-imposte-2.webp",
       "reason": "All image providers failed for article-stesso-reddito-imposte-diverse: openai-codex (vision gate rejected image: Generic synthetic Swiss residential scene; no people or readable text, but visible vehicle branding/emblems prevent a clean pas",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 1,
       "requestedAt": "2026-10-17T10:06:41.197Z",
       "lastFailureAt": "2026-10-17T12:40:15.570Z"
