@@ -23,6 +23,7 @@ import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwne
 import {
   API_BASE,
   APEX,
+  apiInputChangedInRange,
   CANTON_RSS_PREFIX,
   PAGE_CACHE_CONTROL,
   UPLOAD_ORDER,
@@ -56,6 +57,7 @@ import {
   publishApiTriggerPaths,
   publishCantonRssFeeds,
   removeCantonRssFeedLinks,
+  resolveStaleReplayApiReleaseCommit,
   resolvePublishedReleaseCommit,
   publishedReleaseReady,
   publishedStatus,
@@ -189,6 +191,19 @@ test('publisher: il fallback API copre l\'ultimo input raggiungibile dal publish
     latestInputCommit,
     'una release API precedente all\'ultimo input non puo\' alimentare il fallback publisher-only',
   );
+  const pushHead = 'd'.repeat(40);
+  assert.equal(
+    await resolvePublishedReleaseCommit(publisherCommit, {
+      apiReleaseCommitImpl: async () => apiCommit,
+      latestApiInputCommitImpl: async () => latestInputCommit,
+      currentPushApiInputImpl: async () => true,
+      pushBefore: 'e'.repeat(40),
+      pushAfter: pushHead,
+      isAncestorImpl: async (ancestor, descendant) => ancestor === apiCommit && descendant === publisherCommit,
+    }),
+    pushHead,
+    'una push che contiene input API attende la HEAD effettiva della release, non il commit dell\'ultimo file API',
+  );
   assert.equal(
     await resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: async () => apiCommit,
@@ -249,6 +264,27 @@ test('publisher: il fallback API copre l\'ultimo input raggiungibile dal publish
   );
 });
 
+test('publisher: il replay stantio cambia release attesa se main contiene input API non coperti', () => {
+  const currentMain = 'a'.repeat(40);
+  const staleRelease = 'b'.repeat(40);
+  const latestInput = 'c'.repeat(40);
+  assert.equal(
+    resolveStaleReplayApiReleaseCommit(currentMain, staleRelease, {
+      latestApiInputCommitImpl: () => latestInput,
+      isAncestorImpl: () => true,
+    }),
+    staleRelease,
+  );
+  assert.equal(
+    resolveStaleReplayApiReleaseCommit(currentMain, staleRelease, {
+      latestApiInputCommitImpl: () => latestInput,
+      isAncestorImpl: () => false,
+    }),
+    currentMain,
+    'il replay deve attendere la release della HEAD corrente quando la release stantia non copre gli input API',
+  );
+});
+
 test('publisher: legge la struttura reale di on.push.paths e cerca l\'ultimo input storico', () => {
   const workflow = [
     'on:',
@@ -297,6 +333,30 @@ test('publisher: legge la struttura reale di on.push.paths e cerca l\'ultimo inp
     }),
     /storia Git non verificabile/,
   );
+  const rangeCalls = [];
+  assert.equal(
+    apiInputChangedInRange(
+      { before: 'a'.repeat(40), after: 'b'.repeat(40) },
+      {
+        triggerPathsImpl: () => ['content/**'],
+        execFileSyncImpl: (...args) => {
+          rangeCalls.push(args);
+          return `${'c'.repeat(40)}\n`;
+        },
+      },
+    ),
+    true,
+  );
+  assert.deepEqual(rangeCalls[0][1], [
+    '-C',
+    ROOT,
+    'rev-list',
+    '--max-count=1',
+    'b'.repeat(40),
+    `^${'a'.repeat(40)}`,
+    '--',
+    'content/**',
+  ]);
 });
 
 test('publisher migration manifest usa percorsi canonici per landing e hub', () => {
@@ -1647,6 +1707,38 @@ test('publisher: il contratto RSS precede gli upload HTML e il rollback ripristi
   assert.equal(partial.rollbackFailures, 0);
   assert.deepEqual(rollbackEvents, ['page-upload-failed', 'page-rollback', 'page-rollback-purge', 'rss-rollback']);
 
+  const incompleteRollbackEvents = [];
+  const incompleteRollback = await publish({
+    ...common,
+    runImpl: (_command, args) => {
+      if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+        if (args[1].includes('.canton-page-rollback-')) {
+          incompleteRollbackEvents.push('page-rollback-failed');
+          return { code: 1, stdout: '' };
+        }
+        incompleteRollbackEvents.push('page-upload-failed');
+        return { code: 1, stdout: '' };
+      }
+      if (args.includes('scripts/cf-purge-cache.mjs')) {
+        incompleteRollbackEvents.push('page-rollback-purge');
+        return { code: 0, stdout: '' };
+      }
+      throw new Error(`comando inatteso: ${args.join(' ')}`);
+    },
+    publishCantonRssFeedsImpl: async () => ({
+      failures: 0,
+      uploaded: 5,
+      verified: 5,
+      rollback: async ({ neutralize } = {}) => {
+        incompleteRollbackEvents.push(neutralize ? 'rss-neutralize' : 'rss-rollback');
+        return { failures: 0 };
+      },
+    }),
+  });
+  assert.equal(incompleteRollback.failures, 2);
+  assert.equal(incompleteRollback.rollbackFailures, 1);
+  assert.ok(incompleteRollbackEvents.includes('rss-neutralize'), 'RSS viene neutralizzato anche con rollback HTML incompleto');
+
   const verifyRollbackEvents = [];
   const previousHtml = '<html>pagina precedente</html>';
   let snapshotTaken = false;
@@ -2245,6 +2337,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /-f source_commit="\$current_main"/);
   assert.match(wf, /source_commit richiede una SHA completa/);
+  assert.match(wf, /source_main_commit e' obbligatorio e richiede una SHA completa quando source_commit e' valorizzato/);
+  assert.match(wf, /checkout non coincide con source_commit/);
   assert.match(wf, /inputs\.source_commit/);
   assert.match(wf, /source_main_commit:/);
   assert.match(wf, /EXPECTED_MAIN_HEAD: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_main_commit \|\| github\.event\.after \|\| github\.sha \}\}/);
@@ -2254,8 +2348,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /replay_after="\$\{ORIGINAL_PUSH_AFTER:-\$STALE_HEAD\}"/);
   assert.match(wf, /-f push_before="\$replay_before"/);
   assert.match(wf, /-f push_after="\$replay_after"/);
-  assert.match(wf, /-f api_release_commit="\$STALE_HEAD"/);
-  assert.match(wf, /-f api_release_commit="\$WORKFLOW_RUN_HEAD_SHA"/);
+  assert.equal((wf.match(/-f api_release_commit="\$api_release_commit"/g) ?? []).length, 2);
+  assert.match(wf, /resolveStaleReplayApiReleaseCommit/);
+  assert.match(wf, /git rev-parse --is-shallow-repository/);
   assert.match(wf, /remove_stale_canton_rss_feeds/);
   assert.match(wf, /API_RELEASE_COMMIT: \$\{\{ inputs\.api_release_commit \}\}/);
   assert.match(wf, /GITHUB_PAT_NANAKO assente/);

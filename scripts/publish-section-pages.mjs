@@ -975,13 +975,78 @@ export function latestApiInputCommit(
 }
 
 /**
+ * Indica se l'intervallo della push/run contiene almeno un input di
+ * publish-api. Il commit piu' recente nella storia non basta: quando una
+ * singola push contiene I (input API) e P (solo publisher), build-api stampa
+ * P nel manifest perche' costruisce dalla HEAD della push.
+ */
+export function apiInputChangedInRange(
+  { before, after },
+  { execFileSyncImpl = execFileSync, triggerPathsImpl = publishApiTriggerPaths } = {},
+) {
+  const base = String(before ?? '').trim();
+  const head = String(after ?? '').trim();
+  if (!base || !head) return false;
+  if (!FULL_GIT_SHA_RE.test(head)) throw new Error(`HEAD della push non valida: ${head}`);
+  if (!/^0+$/.test(base) && !FULL_GIT_SHA_RE.test(base)) {
+    throw new Error(`base della push non valida: ${base}`);
+  }
+  const args = ['-C', ROOT_DIR, 'rev-list', '--max-count=1', head];
+  if (!/^0+$/.test(base)) args.push(`^${base}`);
+  args.push('--', ...triggerPathsImpl());
+  try {
+    const latest = execFileSyncImpl('git', args, { encoding: 'utf8' });
+    return Boolean(String(latest ?? '').trim());
+  } catch (error) {
+    throw new Error(
+      `intervallo Git non verificabile per gli input API ${base}..${head}: ${error?.message ?? String(error)}`,
+      { cause: error },
+    );
+  }
+}
+
+function gitIsAncestor(ancestor, descendant) {
+  try {
+    execFileSync('git', ['-C', ROOT_DIR, 'merge-base', '--is-ancestor', ancestor, descendant], { stdio: 'ignore' });
+    return true;
+  } catch (error) {
+    if (error?.status === 1) return false;
+    throw error;
+  }
+}
+
+/**
+ * Se un replay stantio ha una release API che copre ancora tutti gli input
+ * raggiungibili dalla HEAD corrente, puo' conservare quella release. Altrimenti
+ * la HEAD corrente diventa il gate di readiness: il replay aspetta la
+ * completion API corrente invece di pubblicare HTML nuovo sopra dati vecchi.
+ */
+export function resolveStaleReplayApiReleaseCommit(
+  currentMainCommit,
+  staleApiReleaseCommit,
+  {
+    latestApiInputCommitImpl = latestApiInputCommit,
+    isAncestorImpl = gitIsAncestor,
+  } = {},
+) {
+  const currentMain = String(currentMainCommit ?? '').trim();
+  const staleRelease = String(staleApiReleaseCommit ?? '').trim();
+  if (!FULL_GIT_SHA_RE.test(currentMain)) throw new Error(`HEAD corrente di main non valida: ${currentMain}`);
+  if (!FULL_GIT_SHA_RE.test(staleRelease)) throw new Error(`release API stantia non valida: ${staleRelease}`);
+  const latestInput = latestApiInputCommitImpl(currentMain);
+  if (!latestInput) return staleRelease;
+  return isAncestorImpl(latestInput, staleRelease) ? staleRelease : currentMain;
+}
+
+/**
  * Un push che cambia solo il publisher puo' legarsi alla release API gia'
  * disponibile soltanto quando questa copre l'ultimo input API raggiungibile
- * dal publisher. Se quell'input non e' ancora nella release HTTP, usa quel
- * commit come release attesa e lascia che la readiness resti fail-closed fino
- * a quando la superficie lo serve. Un replay bounded puo' propagare il
- * commit della release osservata: viene verificato contro il manifest HTTP e
- * non riclassificato rispetto ai commit bookkeeping successivi.
+ * dal publisher. Se l'ultimo input appartiene invece alla push corrente,
+ * l'attesa deve usare la HEAD effettiva della push: build-api registra quella
+ * HEAD nel manifest anche quando l'ultimo file API e' un commit precedente.
+ * Un replay bounded puo' propagare il commit della release osservata: viene
+ * verificato contro il manifest HTTP e non riclassificato rispetto ai commit
+ * bookkeeping successivi.
  */
 export async function resolvePublishedReleaseCommit(
   publisherCommit,
@@ -989,15 +1054,10 @@ export async function resolvePublishedReleaseCommit(
     apiReleaseCommitImpl = publishedApiReleaseCommit,
     apiReleaseCommitOverride = null,
     latestApiInputCommitImpl = latestApiInputCommit,
-    isAncestorImpl = (ancestor, descendant) => {
-      try {
-        execFileSync('git', ['-C', ROOT_DIR, 'merge-base', '--is-ancestor', ancestor, descendant], { stdio: 'ignore' });
-        return true;
-      } catch (error) {
-        if (error?.status === 1) return false;
-        throw error;
-      }
-    },
+    currentPushApiInputImpl = apiInputChangedInRange,
+    pushBefore = null,
+    pushAfter = publisherCommit,
+    isAncestorImpl = gitIsAncestor,
     fetchImpl = fetch,
   } = {},
 ) {
@@ -1044,7 +1104,23 @@ export async function resolvePublishedReleaseCommit(
           { cause: error },
         );
       }
-      if (releaseCoversLatestInput !== true) return latestInputCommit;
+      if (releaseCoversLatestInput !== true) {
+        const base = String(pushBefore ?? '').trim();
+        if (base) {
+          const head = String(pushAfter ?? publisherCommit).trim() || publisherCommit;
+          let currentPushHasApiInput = false;
+          try {
+            currentPushHasApiInput = await currentPushApiInputImpl({ before: base, after: head });
+          } catch (error) {
+            throw new Error(
+              `intervallo della push non verificabile per gli input API ${base}..${head}: ${error?.message ?? String(error)}`,
+              { cause: error },
+            );
+          }
+          if (currentPushHasApiInput === true) return head;
+        }
+        return latestInputCommit;
+      }
     }
   }
   return publishedCommit;
@@ -1225,7 +1301,7 @@ function normalizeCantonRssSnapshot(feed, result) {
   throw new Error(`${feed.name}: superficie CDN precedente non verificabile (${result?.status ?? 'nessuna risposta'})`);
 }
 
-async function rollbackCantonRssFeeds({ prepared, snapshots, distDir, runImpl, probeImpl }) {
+async function rollbackCantonRssFeeds({ prepared, snapshots, distDir, runImpl, probeImpl, neutralize = false }) {
   const rollbackFiles = [];
   let failures = 0;
   try {
@@ -1233,7 +1309,10 @@ async function rollbackCantonRssFeeds({ prepared, snapshots, distDir, runImpl, p
     for (const feed of prepared) {
       const previous = snapshots.get(feed.name);
       try {
-        if (previous?.exists) {
+        if (neutralize) {
+          const { stdout = '' } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', feed.key]);
+          if (!stdout.includes('✅ deleted')) throw new Error(`neutralizzazione delete non confermata: ${feed.key}`);
+        } else if (previous?.exists) {
           const local = path.join(distDir, `.canton-rss-rollback-${feed.name}`);
           fs.writeFileSync(local, previous.body, 'utf8');
           rollbackFiles.push(local);
@@ -1268,13 +1347,17 @@ async function rollbackCantonRssFeeds({ prepared, snapshots, distDir, runImpl, p
       const previous = snapshots.get(feed.name);
       try {
         const result = await probeImpl(feed.url, {
-          want: previous?.exists ? (body) => body === previous.body : () => false,
+          want: neutralize
+            ? () => false
+            : previous?.exists ? (body) => body === previous.body : () => false,
           attempts: 3,
           delayMs: 1000,
         });
-        const restored = previous?.exists
-          ? result?.ok === true
-          : result?.ok !== true && isNotFoundStatus(result?.status);
+        const restored = neutralize
+          ? result?.ok !== true && isNotFoundStatus(result?.status)
+          : previous?.exists
+            ? result?.ok === true
+            : result?.ok !== true && isNotFoundStatus(result?.status);
         if (!restored) throw new Error(`stato CDN inatteso (${result?.status ?? 'nessuna risposta'})`);
       } catch (error) {
         failures++;
@@ -1461,10 +1544,10 @@ export async function publishCantonRssFeeds({
       verified,
       deleted: removingStaleFeeds ? prepared.length : 0,
       feeds: removingStaleFeeds ? [] : prepared.map(({ name, key, url }) => ({ name, key, url })),
-      rollback: async () => {
+      rollback: async ({ neutralize = false } = {}) => {
         if (rolledBack) return { failures: 0 };
         rolledBack = true;
-        return rollbackCantonRssFeeds({ prepared, snapshots, distDir, runImpl, probeImpl });
+        return rollbackCantonRssFeeds({ prepared, snapshots, distDir, runImpl, probeImpl, neutralize });
       },
     };
   } catch (error) {
@@ -1549,15 +1632,17 @@ export async function publish({
   let verifiedRssFeeds = cantonRssFeeds;
   let rollbackRssPublication = null;
   let pageSnapshots = null;
-  const rollbackRss = async () => {
+  const rollbackRss = async ({ neutralize = false } = {}) => {
     if (!rollbackRssPublication) return 0;
     const rollback = rollbackRssPublication;
     rollbackRssPublication = null;
     try {
-      const result = await rollback();
+      const result = await rollback({ neutralize });
       return Number.isSafeInteger(result?.failures) ? result.failures : 1;
     } catch (error) {
-      console.error(`::error::[${LOG}] rollback della release RSS fallito: ${error?.message ?? String(error)}`);
+      console.error(
+        `::error::[${LOG}] ${neutralize ? 'neutralizzazione' : 'rollback'} della release RSS fallita: ${error?.message ?? String(error)}`,
+      );
       return 1;
     }
   };
@@ -1591,11 +1676,15 @@ export async function publish({
   };
   const rollbackTransaction = async () => {
     const pageFailures = await rollbackPages();
+    const rssFailures = await rollbackRss({ neutralize: pageFailures > 0 });
     if (pageFailures > 0) {
-      console.error(`::error::[${LOG}] rollback RSS posticipato: la superficie HTML precedente non è stata ripristinata completamente`);
-      return pageFailures;
+      console.error(
+        rssFailures === 0
+          ? `::error::[${LOG}] HTML precedente non completamente ripristinato: feed RSS neutralizzati e verificati come assenti`
+          : `::error::[${LOG}] HTML precedente non completamente ripristinato e neutralizzazione RSS fallita (${rssFailures} errore/i)`,
+      );
     }
-    return pageFailures + await rollbackRss();
+    return pageFailures + rssFailures;
   };
   // Dopo la cancellazione di almeno una pagina precedente non si può
   // ripristinare la release HTML precedente: quelle pagine potrebbero essere
@@ -1607,11 +1696,15 @@ export async function publish({
       return 0;
     }
     const pageFailures = await rollbackPages();
+    const rssFailures = await rollbackRss({ neutralize: pageFailures > 0 });
     if (pageFailures > 0) {
-      console.error(`::error::[${LOG}] rollback RSS posticipato: la superficie HTML precedente non è stata ripristinata completamente`);
-      return pageFailures;
+      console.error(
+        rssFailures === 0
+          ? `::error::[${LOG}] HTML precedente non completamente ripristinato: feed RSS neutralizzati e verificati come assenti`
+          : `::error::[${LOG}] HTML precedente non completamente ripristinato e neutralizzazione RSS fallita (${rssFailures} errore/i)`,
+      );
     }
-    return pageFailures + await rollbackRss();
+    return pageFailures + rssFailures;
   };
   const uploaded = [];
   let status = beforeStatus;
@@ -1876,6 +1969,8 @@ export async function main(
       apiReleaseCommitImpl: publishedApiReleaseCommitImpl,
       apiReleaseCommitOverride: process.env.API_RELEASE_COMMIT,
       latestApiInputCommitImpl,
+      pushBefore: process.env.PUSH_BEFORE,
+      pushAfter: process.env.PUSH_AFTER || publisherCommit,
       fetchImpl,
     });
     if (releaseCommit !== publisherCommit) {
