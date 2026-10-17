@@ -37,3 +37,17 @@ test('the digest push race rebuilds on the fetched main tip', () => {
   assert.doesNotMatch(commitStep, /git pull --rebase/);
   assert.doesNotMatch(commitStep, /git push[^\n]*--force/);
 });
+
+test('the ranking sibling commits regenerated output before retrying its push', () => {
+  const ranking = fs.readFileSync(
+    path.join(HERE, '..', '..', '.github', 'workflows', 'generate-border-wait-ranking-weekly.yml'),
+    'utf8',
+  );
+  const start = ranking.indexOf('- name: Commit and push');
+  const end = ranking.indexOf('- name: Summary', start);
+  assert.ok(start >= 0 && end > start, 'ranking commit step must remain bounded by its summary');
+  const commitStep = ranking.slice(start, end);
+  assert.match(commitStep, /regenerate_ranking\(\)[\s\S]*?git commit -m "\$COMMIT_MESSAGE"/);
+  assert.doesNotMatch(commitStep, /git pull --rebase/);
+  assert.match(commitStep, /GITHUB_PAT_NANAKO/);
+});
