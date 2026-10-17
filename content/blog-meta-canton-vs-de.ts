@@ -21,6 +21,9 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.crollo-pilone-vetroz.title': 'Ein Hochspannungsmast in Vétroz stürzt ein',
     'blog.article.crollo-pilone-vetroz.excerpt': 'Der Mast ist gegen 4 Uhr im Industriegebiet von Botza eingestürzt.',
     'blog.article.crollo-pilone-vetroz.imageAlt': 'Eingestürzter Hochspannungsmast im Industriegebiet Botza in Vétroz.',
+    'blog.article.fully-strada-ciclabile.title': 'Fully: Mehr als 5,5 km Straße werden zu Fahrradstraßen',
+    'blog.article.fully-strada-ciclabile.excerpt': 'Die Gemeinde Fully baut die sanfte Mobilität aus: Die Straße nördlich des Kanals wird zur Fahrradstraße, und Radfahrende haben an 12 Kreuzungen Vorrang.',
+    'blog.article.fully-strada-ciclabile.imageAlt': 'Velofahrer auf der Fahrradstrasse nördlich des Kanals in Fully',
 };
 
 export default blogMetaCantonVsDe;

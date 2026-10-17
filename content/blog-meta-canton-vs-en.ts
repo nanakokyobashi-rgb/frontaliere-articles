@@ -21,6 +21,9 @@ const blogMetaCantonVsEn: Record<string, string> = {
     'blog.article.crollo-pilone-vetroz.title': 'A high-voltage pylon collapses in Vétroz',
     'blog.article.crollo-pilone-vetroz.excerpt': 'The pylon collapsed around 4 in the Botza industrial area.',
     'blog.article.crollo-pilone-vetroz.imageAlt': 'Fallen high-voltage pylon in the Botza industrial zone in Vétroz.',
+    'blog.article.fully-strada-ciclabile.title': 'Fully: over 5,5 km of road become cycle paths',
+    'blog.article.fully-strada-ciclabile.excerpt': 'The Municipality of Fully expands active mobility: the road north of the canal becomes a bicycle street, and cyclists have priority at 12 intersections.',
+    'blog.article.fully-strada-ciclabile.imageAlt': 'Cyclists on the cycle street north of the canal in Fully',
 };
 
 export default blogMetaCantonVsEn;

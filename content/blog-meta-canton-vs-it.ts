@@ -21,6 +21,9 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.crollo-pilone-vetroz.title': 'Crolla un pilone dell\'alta tensione a Vétroz',
     'blog.article.crollo-pilone-vetroz.excerpt': 'Il pilone è crollato verso le 4 nella zona industriale del Botza.',
     'blog.article.crollo-pilone-vetroz.imageAlt': 'Pilone dell\'alta tensione crollato nella zona industriale del Botza, a Vétroz.',
+    'blog.article.fully-strada-ciclabile.title': 'Fully: oltre 5,5 km di strada diventano ciclabili',
+    'blog.article.fully-strada-ciclabile.excerpt': 'Il Comune di Fully amplia la mobilità dolce: la strada a nord del canale diventa rue cyclable e i ciclisti hanno la priorità a 12 intersezioni.',
+    'blog.article.fully-strada-ciclabile.imageAlt': 'Ciclisti sulla strada ciclabile a nord del canale a Fully',
 };
 
 export default blogMetaCantonVsIt;

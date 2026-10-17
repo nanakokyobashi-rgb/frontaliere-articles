@@ -160,6 +160,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-17T00:53:57.816Z",
       "lastFailureAt": "2026-10-17T00:53:57.816Z"
+    },
+    {
+      "articleId": "fully-strada-ciclabile",
+      "title": "Fully: oltre 5,5 km di strada diventano ciclabili",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-17T01:00:16.102Z",
+      "lastFailureAt": "2026-10-17T01:00:16.102Z"
     }
   ]
 }
