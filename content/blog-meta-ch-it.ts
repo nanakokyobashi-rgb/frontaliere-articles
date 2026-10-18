@@ -8492,6 +8492,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.competitivita-svizzera-ocse-berna.title': 'OCSE Svizzera: chieste riforme per sanità e crescita',
     'blog.article.competitivita-svizzera-ocse-berna.excerpt': 'Rapporto OCSE pubblicato il 15 settembre 2026 Apprezzato l’approccio economico della Svizzera Servono riforme per competitività e innovazione Seguito',
     'blog.article.competitivita-svizzera-ocse-berna.imageAlt': 'Palazzo federale a Berna, sede delle istituzioni svizzere',
+    'blog.article.aiuti-sociali-rifugiati-ucraini.title': 'Aiuti sociali ai rifugiati ucraini: opinioni contrastanti',
+    'blog.article.aiuti-sociali-rifugiati-ucraini.excerpt': 'I Cantoni potranno fissare l\'importo dell\'aiuto sociale S L\'anno prossimo 46\'000 rifugiati potranno riceverlo Consultazione sull\'ordinanza 2 sull\'asilo fino',
+    'blog.article.aiuti-sociali-rifugiati-ucraini.imageAlt': 'Ufficiale cantonale che consegna aiuti sociali a rifugiati ucraini in Svizzera',
 };
 
 export default blogMetaChIt;

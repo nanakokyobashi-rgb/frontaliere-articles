@@ -8492,6 +8492,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.competitivita-svizzera-ocse-berna.title': 'OCDE Suisse : des réformes demandées pour la santé et la croissance',
     'blog.article.competitivita-svizzera-ocse-berna.excerpt': 'Rapport de l’OCDE publié le 15 septembre 2026 Approche économique de la Suisse saluée Des réformes sont nécessaires pour la compétitivité et l’innovation Suivi',
     'blog.article.competitivita-svizzera-ocse-berna.imageAlt': 'Palais fédéral à Berne, siège des institutions suisses',
+    'blog.article.aiuti-sociali-rifugiati-ucraini.title': 'Aides sociales aux réfugiés ukrainiens : avis partagés',
+    'blog.article.aiuti-sociali-rifugiati-ucraini.excerpt': 'Les cantons pourront fixer le montant de l\'aide sociale S L\'année prochaine, 46\'000 réfugiés pourront en bénéficier Consultation sur l\'ordonnance 2 sur l\'asile jusqu\'au',
+    'blog.article.aiuti-sociali-rifugiati-ucraini.imageAlt': 'Fonctionnaire cantonal distribuant l\'aide sociale aux réfugiés ukrainiens en Suisse',
 };
 
 export default blogMetaChFr;

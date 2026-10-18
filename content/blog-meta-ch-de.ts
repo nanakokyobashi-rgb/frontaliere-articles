@@ -8492,6 +8492,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.competitivita-svizzera-ocse-berna.title': 'OECD Schweiz: Reformen für Gesundheitswesen und Wachstum gefordert',
     'blog.article.competitivita-svizzera-ocse-berna.excerpt': 'OECD-Bericht veröffentlicht am 15.',
     'blog.article.competitivita-svizzera-ocse-berna.imageAlt': 'Bundeshaus in Bern, Sitz der Schweizer Bundesinstitutionen',
+    'blog.article.aiuti-sociali-rifugiati-ucraini.title': 'Sozialhilfe für ukrainische Flüchtlinge: geteilte Meinungen',
+    'blog.article.aiuti-sociali-rifugiati-ucraini.excerpt': 'Die Kantone können die Höhe der Sozialhilfe festlegen S Nächstes Jahr können 46\'000 Flüchtlinge sie erhalten Vernehmlassung zur Asylverordnung 2 bis',
+    'blog.article.aiuti-sociali-rifugiati-ucraini.imageAlt': 'Kantonalbeamter, der Sozialhilfe an ukrainische Flüchtlinge in der Schweiz aushändigt',
 };
 
 export default blogMetaChDe;

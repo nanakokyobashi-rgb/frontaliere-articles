@@ -8492,6 +8492,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.competitivita-svizzera-ocse-berna.title': 'OECD Switzerland: calls for reforms in healthcare and growth',
     'blog.article.competitivita-svizzera-ocse-berna.excerpt': 'OECD report published on September 15, 2026 Switzerland\'s economic approach appreciated Reforms needed for competitiveness and innovation Follow-up',
     'blog.article.competitivita-svizzera-ocse-berna.imageAlt': 'Federal Palace in Bern, seat of Swiss federal institutions',
+    'blog.article.aiuti-sociali-rifugiati-ucraini.title': 'Social assistance for Ukrainian refugees: mixed opinions',
+    'blog.article.aiuti-sociali-rifugiati-ucraini.excerpt': 'The cantons will be able to set the amount of social assistance S Next year, 46\'000 refugees will be able to receive it Consultation on Ordinance 2 on asylum until',
+    'blog.article.aiuti-sociali-rifugiati-ucraini.imageAlt': 'Cantonal officer delivering social aid to Ukrainian refugees in Switzerland',
 };
 
 export default blogMetaChEn;

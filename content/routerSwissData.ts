@@ -2853,6 +2853,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'prezzi-carburanti-rinviati-rinviati': { it: 'prezzi-carburanti-rinviati-rinviati', en: 'fuel-prices-delay-switzerland', de: 'treibstoffpreise-verzoegert', fr: 'prix-carburants-retard' },
  'dacuda-mouse-scanner': { it: 'dacuda-mouse-scanner', en: 'dacuda-scanner-mouse', de: 'dacuda-scanner-maus', fr: 'dacuda-souris-scanner' },
  'competitivita-svizzera-ocse-berna': { it: 'competitivita-svizzera-ocse-berna', en: 'switzerland-oecd-competitiveness-reforms', de: 'schweiz-oecd-wettbewerbsfaehigkeit-reformen', fr: 'suisse-ocde-competitivite-reformes' },
+ 'aiuti-sociali-rifugiati-ucraini': { it: 'aiuti-sociali-rifugiati-ucraini', en: 'social-assistance-for-ukrainian-refugees-mixed-opinions', de: 'sozialhilfe-fur-ukrainische-fluchtlinge-geteilte-meinungen', fr: 'aides-sociales-aux-refugies-ukrainiens-avis-partages' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
