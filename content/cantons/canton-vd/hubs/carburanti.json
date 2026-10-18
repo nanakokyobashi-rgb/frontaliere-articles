@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "carburanti",
-  "updatedAt": "2026-10-18T07:04:15.428Z",
-  "contentHash": "15bf8dd5762b5f7eada270b22d107c44da84fbd6044c660b4d2c27d91ba105f7",
+  "updatedAt": "2026-10-18T07:18:16.558Z",
+  "contentHash": "41f343be4de1da8acf9b30ee37d80e0b9d6ccaa7d3e8c578c2011cb3d45ce5df",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Falsi poliziotti: oltre 100 interpellati nel Vaud",
+          "url": "/articoli-vaud/truffe-falsi-banchieri-lausanna/",
+          "excerpt": "Oltre cento persone interpellate nel Vaud dall'inizio del 2026 Sedici persone interpellate dall'inizio di ottobre Coinvolte polizia cantonale, Lausanne",
+          "date": "2026-10-18T07:14:52.238Z"
+        },
+        {
           "title": "Losanna: Hôpital des Nounours al CHUV il 14 e 15 novembre",
           "url": "/articoli-vaud/hopital-nounours-chuv-lausanne/",
           "excerpt": "Nuova edizione al CHUV il 14 e 15 novembre Iscrizioni dal 24 ottobre alle 8 Partecipazione gratuita su iscrizione Attività per bambini nella zona degli auditori",
@@ -94,12 +100,6 @@
           "url": "/articoli-vaud/scuole-vaud-furti-inchieste/",
           "excerpt": "Otto scuole vaudesi colpite in dieci giorni Tutti gli episodi sono avvenuti di notte Orbe stima danni per migliaia di franchi La polizia cantonale ha aperto più",
           "date": "2026-10-17T01:27:48.756Z"
-        },
-        {
-          "title": "Treni CFF tra Yverdon-les-Bains e Losanna: traffico ripreso",
-          "url": "/articoli-vaud/cff-eclepens-treni-ripresa/",
-          "excerpt": "Traffico ripreso alle 05:40 di domenica Linea Yverdon-les-Bains–Losanna tornata normale Incendio doloso a Eclépens: disagi da venerdì CFF mobilitati: circa 100",
-          "date": "2026-10-12T03:05:29.472Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-18T07:04:15.428Z"
+      "updatedAt": "2026-10-18T07:18:16.558Z"
     },
     "en": {
       "canton": "VD",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fake police officers: more than 100 questioned in Vaud",
+          "url": "/en/vaud-articles/fake-police-bankers-vaud/",
+          "excerpt": "More than one hundred people questioned in Vaud since the beginning of 2026 Sixteen people questioned since the beginning of October Cantonal police, Lausanne",
+          "date": "2026-10-18T07:14:52.238Z"
+        },
+        {
           "title": "Lausanne: Hôpital des Nounours at CHUV on 14 and 15 November",
           "url": "/en/vaud-articles/lausanne-teddy-bear-hospital-chuv/",
           "excerpt": "New edition at CHUV on 14 and 15 November Registration opens on 24 October at 8 Free participation upon registration Activities for children in the auditorium",
@@ -193,12 +199,6 @@
           "url": "/en/vaud-articles/vaud-schools-break-ins-investigations/",
           "excerpt": "Eight Vaud schools hit in ten days All incidents occurred at night Orbe estimates damage amounting to thousands of francs The cantonal police have opened",
           "date": "2026-10-17T01:27:48.756Z"
-        },
-        {
-          "title": "CFF trains between Yverdon-les-Bains and Lausanne: service resumed",
-          "url": "/en/vaud-articles/sbb-eclepens-train-service-resumed/",
-          "excerpt": "Traffic resumed at 05:40 on Sunday Yverdon-les-Bains–Lausanne line back to normal Arson in Eclépens: disruptions since Friday CFF mobilized: approximately 100",
-          "date": "2026-10-12T03:05:29.472Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-18T07:04:15.428Z"
+      "updatedAt": "2026-10-18T07:18:16.558Z"
     },
     "de": {
       "canton": "VD",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Falsche Polizisten: über 100 Befragte im Kanton Waadt",
+          "url": "/de/waadt-artikel/falsche-polizisten-banker-waadt/",
+          "excerpt": "Über hundert Personen im Kanton Waadt seit Anfang 2026 befragt Sechzehn Personen seit Anfang Oktober befragt Beteiligt sind die Kantonspolizei, Lausanne",
+          "date": "2026-10-18T07:14:52.238Z"
+        },
+        {
           "title": "Lausanne: Hôpital des Nounours am CHUV am 14. und 15. November",
           "url": "/de/waadt-artikel/lausanne-kuscheltier-spital-chuv/",
           "excerpt": "Neue Ausgabe am CHUV am 14.",
@@ -292,12 +298,6 @@
           "url": "/de/waadt-artikel/waadt-schulen-einbrueche-ermittlungen/",
           "excerpt": "Acht Waadtländer Schulen in zehn Tagen betroffen Alle Vorfälle ereigneten sich nachts Orbe schätzt die Schäden auf mehrere Tausend Franken Die Kantonspolizei",
           "date": "2026-10-17T01:27:48.756Z"
-        },
-        {
-          "title": "CFF-Züge zwischen Yverdon-les-Bains und Lausanne: Verkehr wieder aufgenommen",
-          "url": "/de/waadt-artikel/sbb-eclepens-zugverkehr-wieder-normal/",
-          "excerpt": "Verkehr am Sonntag um 05:40 Uhr wieder aufgenommen Bahnlinie Yverdon-les-Bains–Lausanne wieder im Normalbetrieb Brandstiftung in Eclépens: Beeinträchtigungen",
-          "date": "2026-10-12T03:05:29.472Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-18T07:04:15.428Z"
+      "updatedAt": "2026-10-18T07:18:16.558Z"
     },
     "fr": {
       "canton": "VD",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Faux policiers : plus de 100 personnes interpellées dans le canton de Vaud",
+          "url": "/fr/articles-vaud/faux-policiers-banquiers-vaud/",
+          "excerpt": "Plus de cent personnes interpellées dans le canton de Vaud depuis le début de 2026 Seize personnes interpellées depuis le début du mois d’octobre Police",
+          "date": "2026-10-18T07:14:52.238Z"
+        },
+        {
           "title": "Lausanne : Hôpital des Nounours au CHUV les 14 et 15 novembre",
           "url": "/fr/articles-vaud/lausanne-hopital-des-nounours-au-chuv-les-14-et-15-novembre/",
           "excerpt": "Nouvelle édition au CHUV les 14 et 15 novembre Inscriptions à partir du 24 octobre à 8 h Participation gratuite sur inscription Activités pour enfants",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-vaud/ecoles-vaud-cambriolages-enquetes/",
           "excerpt": "Huit écoles vaudoises touchées en dix jours Tous les incidents ont eu lieu la nuit Orbe estime les dommages à plusieurs milliers de francs La police cantonale",
           "date": "2026-10-17T01:27:48.756Z"
-        },
-        {
-          "title": "Trains CFF entre Yverdon-les-Bains et Lausanne : trafic rétabli",
-          "url": "/fr/articles-vaud/cff-eclepens-trafic-repris/",
-          "excerpt": "Trafic rétabli à 05:40 dimanche Ligne Yverdon-les-Bains–Lausanne revenue à la normale Incendie criminel à Eclépens : perturbations depuis vendredi CFF mobilisés",
-          "date": "2026-10-12T03:05:29.472Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-18T07:04:15.428Z"
+      "updatedAt": "2026-10-18T07:18:16.558Z"
     }
   }
 }
