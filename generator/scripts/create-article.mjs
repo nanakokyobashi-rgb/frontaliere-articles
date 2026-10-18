@@ -318,6 +318,7 @@ import { DETERMINISTIC_CARD_KIND, DETERMINISTIC_CARD_LICENSE_URL } from './lib/d
 import {
   CATALOG_FALLBACK_MIN_SHARED_WORDS,
   catalogFallbackSharedWordCount,
+  classifyImageRegenerationFailure,
   queueArticleCoverRegeneration,
   resolveArticleCoverFallback,
 } from './lib/article-cover-fallback.mjs';
@@ -15952,6 +15953,7 @@ async function generateArticleImage(data) {
   delete data._generatedImageRecord;
   delete data._editorialImageRecord;
   delete data._imageGenerationFailureReason;
+  delete data._imageGenerationFailureDisposition;
 
   const imageDeadline = Date.now() + IMAGE_PHASE_BUDGET_MS;
   if (Date.now() >= imageDeadline) {
@@ -15976,6 +15978,7 @@ async function generateArticleImage(data) {
     const stagingDir = result?.stagingDir || (result?.filePath ? path.dirname(result.filePath) : null);
     if (stagingDir && existsSync(stagingDir)) rmSync(stagingDir, { recursive: true, force: true });
     console.error(`  ⚠️  Motore immagini governato fallito: ${error.message}`);
+    data._imageGenerationFailureDisposition = classifyImageRegenerationFailure(error);
     data._imageGenerationFailureReason = String(error.message || 'engine-failed')
       .replace(/\s+/g, ' ').trim().slice(0, 180) || 'engine-failed';
     console.error(`[cover] article=${data.id} source=engine reason=${data._imageGenerationFailureReason}`);
@@ -15989,6 +15992,7 @@ async function generateArticleImage(data) {
   } catch (error) {
     if (materialized?.destination && existsSync(materialized.destination)) unlinkSync(materialized.destination);
     console.error(`  ⚠️  Provenienza immagine governata rifiutata: ${error.message}`);
+    data._imageGenerationFailureDisposition = classifyImageRegenerationFailure(error);
     data._imageGenerationFailureReason = String(error.message || 'provenance-rejected')
       .replace(/\s+/g, ' ').trim().slice(0, 180) || 'provenance-rejected';
     console.error(`[cover] article=${data.id} source=engine reason=${data._imageGenerationFailureReason}`);
@@ -19898,6 +19902,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     });
   }
   delete data._imageGenerationFailureReason;
+  delete data._imageGenerationFailureDisposition;
 
   // Step 4: Modify files
   console.error('\n📂 Modifica file sorgente:');
