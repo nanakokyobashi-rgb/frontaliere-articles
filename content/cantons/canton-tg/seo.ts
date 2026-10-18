@@ -465,6 +465,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-felben-wellhausen-cantiere': {
+    title: 'Strada principale di Felben-Wellhausen: risanamento',
+    description: 'A Felben-Wellhausen, dal 19 ottobre 2026 a metà luglio 2027, la Hauptstrasse sarà risanata: Römerstrasse chiusa a tratti, Römerhof spostata o soppressa.',
+    keywords: 'frontalieri, ticino, svizzera, italia, strada, principale, felben-wellhausen, risanamento',
+    ogTitle: 'Risanamento della strada principale a Felben-Wellhausen',
+    ogDescription: 'Il progetto del Canton Turgovia unisce risanamento e sicurezza: piste ciclabili su entrambi i lati, innesto Römerstrasse ottimizzato, fermata Römerhof senza barriere e attraversamento pedonale. Durante i lavori, l\'uscita Römerstrasse sarà chiusa',
+    canonicalPath: '/articoli-turgovia/felben-wellhausen-cantiere/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Strada principale di Felben-Wellhausen: risanamento",
+      "description": "A Felben-Wellhausen, dal 19 ottobre 2026 a metà luglio 2027, la Hauptstrasse sarà risanata: Römerstrasse chiusa a tratti, Römerhof spostata o soppressa.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cantiere sulla strada principale di Felben-Wellhausen con ciclabili e fermata Römerhof."
+      },
+      "datePublished": "2026-10-18T03:25:32+00:00",
+      "dateModified": "2026-10-18T03:25:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/felben-wellhausen-cantiere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

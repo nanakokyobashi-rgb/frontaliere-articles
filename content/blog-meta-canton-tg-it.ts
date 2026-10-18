@@ -39,6 +39,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.eventi-weekend-turgovia.title': 'Eventi del weekend in Turgovia: cosa fare sabato e domenica',
     'blog.article.eventi-weekend-turgovia.excerpt': 'Eventi in Turgovia ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
     'blog.article.eventi-weekend-turgovia.imageAlt': 'Eventi del weekend in Turgovia',
+    'blog.article.felben-wellhausen-cantiere.title': 'Strada principale di Felben-Wellhausen: risanamento',
+    'blog.article.felben-wellhausen-cantiere.excerpt': 'Dal 19 ottobre 2026 a metà luglio 2027, la Hauptstrasse di Felben-Wellhausen sarà risanata: Römerstrasse chiusa a tratti, Römerhof spostata o soppressa.',
+    'blog.article.felben-wellhausen-cantiere.imageAlt': 'Cantiere sulla strada principale di Felben-Wellhausen con ciclabili e fermata Römerhof.',
 };
 
 export default blogMetaCantonTgIt;

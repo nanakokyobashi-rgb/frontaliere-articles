@@ -138,4 +138,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'felben-wellhausen-cantiere',
+ category: 'pratico',
+ date: '2026-10-18T03:25:32.644Z',
+ image: '/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

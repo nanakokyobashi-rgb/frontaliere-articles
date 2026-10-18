@@ -120,6 +120,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T03:25:08.346Z",
       "lastFailureAt": "2026-10-18T03:25:08.346Z"
+    },
+    {
+      "articleId": "felben-wellhausen-cantiere",
+      "title": "Strada principale di Felben-Wellhausen: risanamento",
+      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T03:25:32.688Z",
+      "lastFailureAt": "2026-10-18T03:25:32.688Z"
     }
   ]
 }

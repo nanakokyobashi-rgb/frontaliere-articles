@@ -39,6 +39,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.eventi-weekend-turgovia.title': 'Weekend events in Thurgau: what to do Saturday & Sunday',
     'blog.article.eventi-weekend-turgovia.excerpt': 'Events in Thurgau every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
     'blog.article.eventi-weekend-turgovia.imageAlt': 'Weekend events in Thurgau',
+    'blog.article.felben-wellhausen-cantiere.title': 'Felben-Wellhausen main road: renovation',
+    'blog.article.felben-wellhausen-cantiere.excerpt': 'From October 19, 2026 to mid-July 2027, Felben-Wellhausen’s Hauptstrasse will be renovated: Römerstrasse closed in sections, Römerhof relocated or discontinued.',
+    'blog.article.felben-wellhausen-cantiere.imageAlt': 'Roadworks on Felben-Wellhausen main road with cycle paths and the Römerhof bus stop.',
 };
 
 export default blogMetaCantonTgEn;
