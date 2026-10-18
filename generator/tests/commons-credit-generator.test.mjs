@@ -98,8 +98,8 @@ function governedArticleCoverPath() {
 }
 
 test('the new-cover pipeline uses only the governed article-hero engine', () => {
-  const imageFunction = slice(CREATE, 'async function generateArticleImage(data) {', 'const imageDeadline');
-  const imageAdapter = slice(CREATE, 'async function generateArticleImage(data) {', '// ── Step 4: Modify source files');
+  const imageFunction = slice(CREATE, 'async function generateArticleImage(data, {', 'const imageDeadline');
+  const imageAdapter = slice(CREATE, 'async function generateArticleImage(data, {', '// ── Step 4: Modify source files');
   const imageStep = slice(CREATE, '  // Step 3b: Generate article image through the governed engine.', '  // Step 4: Modify files');
 
   assert.match(imageAdapter, /generateGovernedArticleHero/);
@@ -124,13 +124,16 @@ test('the new-cover pipeline uses only the governed article-hero engine', () => 
 
 test('a failed generation falls back without a quality rejection', () => {
   const imageStep = slice(CREATE, '  // Step 3b: Generate article image through the governed engine.', '  // Step 4: Modify files');
-  assert.match(imageStep, /findCatalogImage: findBestFallbackImage/);
+  assert.match(imageStep, /verifyCatalogFallbackCandidates\(data/);
+  assert.match(imageStep, /findCatalogImages: findBestFallbackImages/);
+  assert.match(imageStep, /verifiedCatalogImage/);
+  assert.doesNotMatch(imageStep, /findCatalogImage: findBestFallbackImage/);
   assert.match(imageStep, /reason: data\._imageGenerationFailureReason/);
   assert.doesNotMatch(imageStep, /imagePolicyReject|qualityReject/);
 });
 
 test('the article adapter clears stale provenance before each governed attempt', () => {
-  const imageFunction = slice(CREATE, 'async function generateArticleImage(data) {', 'const imageDeadline');
+  const imageFunction = slice(CREATE, 'async function generateArticleImage(data, {', 'const imageDeadline');
   for (const field of ['_imageCredit', '_generatedImageRecord', '_editorialImageRecord']) {
     assert.match(imageFunction, new RegExp(`delete data\\.${field};`));
   }

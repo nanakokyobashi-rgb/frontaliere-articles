@@ -19,6 +19,7 @@ import {
   buildDailyBriefImageRecord,
   materializeDailyBriefHero,
 } from '../scripts/lib/daily-brief-image.mjs';
+import { buildDailyBriefArticle } from '../scripts/lib/daily-brief-content.mjs';
 import { articleImageAssetId } from '../scripts/lib/article-cover-identity.mjs';
 import { refreshGovernedArticleCover } from '../scripts/lib/governed-article-cover-refresh.mjs';
 import { DETERMINISTIC_CARD_KIND } from '../scripts/lib/deterministic-card-provenance.mjs';
@@ -136,15 +137,23 @@ test('the daily cover scene follows the headline kind without embedding its numb
     assert.match(buildDailyBriefCoverAlt(headline).it, /^Illustrazione di /);
   }
 
-  const actualPreviewHeadline = {
-    kind: 'jobsTrend',
-    currentWeekAdded: 6942,
-    previousWeekAdded: 9713,
-    weeklyChange: -2771,
-    weeklyChangePct: -28.5,
-    currentPeriod: { from: '2026-10-11', to: '2026-10-17' },
-    previousPeriod: { from: '2026-10-04', to: '2026-10-10' },
-  };
+  const actualPreview = buildDailyBriefArticle({
+    dateIso: '2026-10-18',
+    blocks: { jobs: { available: true, yesterdayAdded: 942, activeJobs: 22645, activeCompanies: 857 } },
+    insights: { jobs: {
+      lastClosedDay: '2026-10-17',
+      currentWeekAdded: 6942,
+      previousWeekAdded: 9713,
+      weeklyChange: -2771,
+      weeklyChangePct: -28.5,
+      currentPeriod: { from: '2026-10-11', to: '2026-10-17' },
+      previousPeriod: { from: '2026-10-04', to: '2026-10-10' },
+    } },
+  });
+  const actualPreviewHeadline = actualPreview._headline;
+  assert.equal(actualPreviewHeadline.kind, 'jobsTrend');
+  assert.equal(actualPreviewHeadline.weeklyChange, -2771);
+  assert.match(actualPreview.content.it.body1, /6[.,’']?942/);
   const actualPrompt = buildDailyBriefCoverPrompt(actualPreviewHeadline);
   assert.match(actualPrompt, /cross-border employment/i);
   assert.doesNotMatch(actualPrompt, /employment trend is falling|unemployment|job losses/i);

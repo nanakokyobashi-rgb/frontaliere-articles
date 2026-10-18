@@ -388,13 +388,13 @@ test('cronaca locale senza angolo frontaliere: niente sei termini obbligatori, e
   assert.equal(isLocalNewsWithoutFrontaliereAngle(CRONACA), true);
   assert.match(local.prompt, /Cronaca locale: nomina luoghi, enti e persone della fonte/);
   assert.doesNotMatch(local.prompt, /Almeno 6 dei seguenti termini DEVONO comparire/);
-  assert.match(local.prompt, /body2 = CONTESTO: sviluppi, dati, reazioni e ricadute locali/);
+  assert.match(local.prompt, /body2 = CONTESTO O CONFRONTO: spiega un elemento locale documentato/);
   // Review di PR #1871: ogni richiesta solo-frontaliere ha il suo ramo locale.
   assert.match(local.prompt, /REGOLA EDITORIALE FONDAMENTALE — CRONACA LOCALE:/);
-  assert.match(local.prompt, /body3 = SEGUITO: cosa succede ora secondo la fonte/);
+  assert.match(local.prompt, /body3 = ALTRI FATTI O LIMITI: aggiungi soltanto sviluppi e ricadute documentati/);
   assert.match(local.prompt, /CTA: nessuna CTA obbligatoria/);
   assert.match(local.prompt, /LINK INTERNI — sintassi ESCLUSIVA `\[testo\]\(nav:azione\)`, SOLO se pertinenti alla notizia: nessun minimo/);
-  assert.match(local.prompt, /"body3": "Seguito: cosa succede ora secondo la fonte\./);
+  assert.match(local.prompt, /"body3": "Altri fatti o limiti documentati; non inventare sviluppi/);
   for (const frontaliereOnly of [
     /FRONTALIERI AL CENTRO/,
     /body3 = AZIONE/,
@@ -439,10 +439,10 @@ test('cronaca locale senza angolo frontaliere: niente sei termini obbligatori, e
   assert.match(userText(news), /EACH body field \(body1, body2, body3\) MUST be at least 300 words individually\. Target 350-400 words each\./);
   assert.equal(isLocalNewsWithoutFrontaliereAngle(NEWS_PAGE_CONTENT), false);
   assert.match(news.prompt, /Almeno 6 dei seguenti termini DEVONO comparire/);
-  assert.match(news.prompt, /FRONTALIERI AL CENTRO/);
+  assert.match(news.prompt, /REGOLA EDITORIALE FONDAMENTALE — TEMI FRONTALIERE/);
   assert.match(news.prompt, /massimo 3 collegamenti pertinenti per articolo/);
-  assert.match(news.prompt, /Descrivi PROCEDURE concrete/);
-  assert.match(news.prompt, /"body3": "Azione: procedura step-by-step, scadenze, strumenti \+ CTA finale\./);
+  assert.doesNotMatch(news.prompt, /Descrivi PROCEDURE concrete/);
+  assert.match(news.prompt, /"body3": "Ulteriori prove, sviluppi o limiti documentati/);
 });
 
 test('il ramo NEWS SVIZZERA resta sotto il tetto — non solo l\'evergreen svizzera', () => {
