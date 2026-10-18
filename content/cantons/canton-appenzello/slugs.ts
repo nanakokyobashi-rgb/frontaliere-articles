@@ -9,6 +9,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'deficit-comune-preventivo-2027': { it: 'deficit-comune-preventivo-2027', en: 'municipal-deficit-budget-2027', de: 'gemeinde-defizit-voranschlag-2027', fr: 'deficit-commune-budget-2027' },
  'appenzello-tasso-fiscale-390': { it: 'appenzello-tasso-fiscale-390', en: 'appenzell-tax-rate-390', de: 'appenzell-steuerfuss-390', fr: 'appenzell-taux-fiscal-390' },
  'eventi-weekend-appenzello': { it: 'eventi-weekend-appenzello', en: 'weekend-events-appenzell', de: 'wochenend-veranstaltungen-appenzell', fr: 'evenements-week-end-appenzell' },
+ 'raiba-nuova-area-previdenza': { it: 'raiba-nuova-area-previdenza', en: 'raiba-new-pension-area', de: 'raiba-neuer-vorsorgebereich', fr: 'raiba-nouveau-domaine-prevoyance' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -21,6 +21,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.eventi-weekend-appenzello.title': 'Weekend events in Appenzell: what to do Saturday & Sunday',
     'blog.article.eventi-weekend-appenzello.excerpt': 'Events in Appenzell every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
     'blog.article.eventi-weekend-appenzello.imageAlt': 'Weekend events in Appenzell',
+    'blog.article.raiba-nuova-area-previdenza.title': 'New area in the Appenzeller Hinterland: two managers',
+    'blog.article.raiba-nuova-area-previdenza.excerpt': 'Raiffeisenbank Appenzeller Hinterland brings together retirement planning, succession planning, coverage analysis and insurance.',
+    'blog.article.raiba-nuova-area-previdenza.imageAlt': 'Bank office in the Appenzell landscape for pension services',
 };
 
 export default blogMetaCantonAppenzelloEn;

@@ -236,6 +236,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-raiba-nuova-area-previdenza': {
+    title: 'Nuova area nell\'Appenzeller Hinterland: due responsabili',
+    description: 'Nuova area nell\'Appenzeller Hinterland: previdenza, successioni, analisi di copertura e consulenza assicurativa. Lennart Büchler la guiderà da gennaio.',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuova, area, nell, appenzeller',
+    ogTitle: 'Nuova area nell\'Appenzeller Hinterland: due responsabili',
+    ogDescription: 'La Raiffeisenbank Appenzeller Hinterland concentra in un nuovo ambito la pianificazione pensionistica e successoria, le analisi di previdenza e copertura e la consulenza assicurativa. Da gennaio la guida passa a Lennart Büchler.',
+    canonicalPath: '/articoli-appenzello/raiba-nuova-area-previdenza/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nuova area nell'Appenzeller Hinterland: due responsabili",
+      "description": "Nuova area nell'Appenzeller Hinterland: previdenza, successioni, analisi di copertura e consulenza assicurativa. Lennart Büchler la guiderà da gennaio.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-raiba-nuova-area-previdenza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio bancario nel paesaggio dell'Appenzello per servizi previdenziali"
+      },
+      "datePublished": "2026-10-18T05:22:07+00:00",
+      "dateModified": "2026-10-18T05:22:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/raiba-nuova-area-previdenza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

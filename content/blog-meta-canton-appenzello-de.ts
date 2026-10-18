@@ -21,6 +21,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.eventi-weekend-appenzello.title': 'Veranstaltungen am Wochenende im Appenzellerland: was tun Sa & So',
     'blog.article.eventi-weekend-appenzello.excerpt': 'Veranstaltungen im Appenzellerland an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
     'blog.article.eventi-weekend-appenzello.imageAlt': 'Veranstaltungen am Wochenende im Appenzellerland',
+    'blog.article.raiba-nuova-area-previdenza.title': 'Neuer Bereich im Appenzeller Hinterland: zwei Verantwortliche',
+    'blog.article.raiba-nuova-area-previdenza.excerpt': 'Die Raiffeisenbank Appenzeller Hinterland vereint Vorsorge, Nachfolge, Deckungsanalyse und Versicherungen.',
+    'blog.article.raiba-nuova-area-previdenza.imageAlt': 'Bankbüro in der Appenzeller Landschaft für Vorsorgeangebote',
 };
 
 export default blogMetaCantonAppenzelloDe;
