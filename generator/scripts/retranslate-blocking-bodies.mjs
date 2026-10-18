@@ -1010,7 +1010,7 @@ function addressTokenIsPreserved({ token, sourceSegment, targetSegment, locale }
   });
 }
 
-function addressLineTarget(lines, sourceLine, sourceLineIndex, usedTargetLines) {
+function addressLineTarget(lines, sourceLine, sourceLineIndex, usedTargetLines, usedTargetMatches) {
   const candidates = [];
   lines.forEach((rawLine, index) => {
     // A single visible line may contain more than one postal-code/address
@@ -1019,16 +1019,19 @@ function addressLineTarget(lines, sourceLine, sourceLineIndex, usedTargetLines) 
     const assignedSourceLine = usedTargetLines.get(index);
     if (assignedSourceLine !== undefined && assignedSourceLine !== sourceLineIndex) return;
     const line = visibleAddressText(rawLine);
-    const postalMatch = addressPostalMatches(line)
-      .find((match) => match[0] === sourceLine.postalCode);
-    if (!postalMatch) return;
-    const targetSegment = addressSegmentForPostalCode(line, postalMatch);
-    candidates.push({
-      index,
-      text: rawLine,
-      segment: targetSegment,
-      context: addressContextForPostalCode(line, postalMatch),
-    });
+    for (const postalMatch of addressPostalMatches(line)) {
+      if (postalMatch[0] !== sourceLine.postalCode) continue;
+      const matchKey = `${index}:${postalMatch.index}`;
+      if (usedTargetMatches.has(matchKey)) continue;
+      const targetSegment = addressSegmentForPostalCode(line, postalMatch);
+      candidates.push({
+        index,
+        matchKey,
+        text: rawLine,
+        segment: targetSegment,
+        context: addressContextForPostalCode(line, postalMatch),
+      });
+    }
   });
   if (candidates.length === 0) return { index: -1, text: '', segment: '' };
 
@@ -1048,6 +1051,7 @@ function addressLineTarget(lines, sourceLine, sourceLineIndex, usedTargetLines) 
   // the resulting mismatch keeps the old corpus in place.
   if (!selected) return { index: -1, text: '', segment: '' };
   usedTargetLines.set(selected.index, sourceLineIndex);
+  usedTargetMatches.add(selected.matchKey);
   return selected;
 }
 
@@ -1063,6 +1067,7 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
     const sourceLines = String(italianText ?? '').split('\n');
     const targetLines = String(newSections?.[field] ?? '').split('\n');
     const usedTargetLines = new Map();
+    const usedTargetMatches = new Set();
     sourceLines.forEach((line, lineIndex) => {
       const visibleLine = visibleAddressText(line);
       for (const postalMatch of addressPostalMatches(visibleLine)) {
@@ -1079,7 +1084,7 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
           context: addressContextForPostalCode(visibleLine, postalMatch),
           tokens: [...new Set(tokens)],
         };
-        const target = addressLineTarget(targetLines, sourceLine, lineIndex, usedTargetLines);
+        const target = addressLineTarget(targetLines, sourceLine, lineIndex, usedTargetLines, usedTargetMatches);
         const missing = sourceLine.tokens.filter((token) => !addressTokenIsPreserved({
           token,
           sourceSegment,
