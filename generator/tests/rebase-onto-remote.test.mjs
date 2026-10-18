@@ -1141,6 +1141,41 @@ test('il merge della coda non riesuma un rifiuto terminale della stessa richiest
   assert.equal(revived.terminalAt, undefined);
 });
 
+test('i fast path three-way preservano il terminale della richiesta invariata', () => {
+  const baseTerminal = {
+    ...queueItem('article-fast-terminal', 'safety rejection', '2026-10-07T00:01:00.000Z'),
+    status: 'terminal',
+    failureCount: 1,
+    terminalAt: '2026-10-07T00:01:00.000Z',
+    terminalReason: 'vision-safety-rejection',
+  };
+  const replayedRetry = {
+    ...baseTerminal,
+    reason: 'stale retry',
+    status: 'failed',
+    failureCount: 2,
+    lastFailureAt: '2026-10-07T00:02:00.000Z',
+    terminalAt: undefined,
+    terminalReason: undefined,
+  };
+  const upstreamUnchanged = mergeImageRegenerationQueues(
+    { schema: 1, items: [baseTerminal] },
+    { schema: 1, items: [replayedRetry] },
+    { schema: 1, items: [baseTerminal] },
+  ).items[0];
+  assert.equal(upstreamUnchanged.status, 'terminal');
+  assert.equal(upstreamUnchanged.terminalReason, 'vision-safety-rejection');
+
+  const upstreamRetry = { ...replayedRetry, reason: 'upstream stale retry' };
+  const replayedUnchanged = mergeImageRegenerationQueues(
+    { schema: 1, items: [upstreamRetry] },
+    { schema: 1, items: [baseTerminal] },
+    { schema: 1, items: [baseTerminal] },
+  ).items[0];
+  assert.equal(replayedUnchanged.status, 'terminal');
+  assert.equal(replayedUnchanged.terminalReason, 'vision-safety-rejection');
+});
+
 test('an empty allowlist is a caller bug, not a silent always-abort', () => {
   // Without this guard a caller that forgot its paths would degrade to exactly
   // the old behaviour, which is indistinguishable from the fix not being there.

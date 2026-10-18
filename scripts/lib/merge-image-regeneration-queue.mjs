@@ -21,6 +21,7 @@ import { fileURLToPath } from 'node:url';
 import {
   IMAGE_REGENERATION_TERMINAL_STATUS,
   IMAGE_REGENERATION_TERMINAL_VISION_REASON,
+  imageRegenerationTimestamp,
 } from '../../generator/scripts/lib/image-regeneration-queue.mjs';
 
 export const IMAGE_REGENERATION_QUEUE = 'data/image-regeneration-queue.json';
@@ -62,14 +63,9 @@ function parseQueue(text, label) {
   return queue;
 }
 
-function timeOf(value) {
-  const time = Date.parse(String(value || ''));
-  return Number.isFinite(time) ? time : null;
-}
-
 function latest(a, b) {
-  const left = timeOf(a);
-  const right = timeOf(b);
+  const left = imageRegenerationTimestamp(a);
+  const right = imageRegenerationTimestamp(b);
   if (left == null) return b || a;
   if (right == null) return a || b;
   return left >= right ? a : b;
@@ -83,14 +79,9 @@ function comparable(value) {
   return value;
 }
 
-function sameItem(left, right) {
-  return left != null && right != null
-    && JSON.stringify(comparable(left)) === JSON.stringify(comparable(right));
-}
-
 function requestWinner(existing, candidate) {
-  const existingRequestedAt = timeOf(existing.requestedAt);
-  const candidateRequestedAt = timeOf(candidate.requestedAt);
+  const existingRequestedAt = imageRegenerationTimestamp(existing.requestedAt);
+  const candidateRequestedAt = imageRegenerationTimestamp(candidate.requestedAt);
   if (existingRequestedAt != null || candidateRequestedAt != null) {
     if (existingRequestedAt == null) return candidate;
     if (candidateRequestedAt == null) return existing;
@@ -99,16 +90,16 @@ function requestWinner(existing, candidate) {
     }
   }
 
-  const existingFailureAt = timeOf(existing.lastFailureAt) ?? -Infinity;
-  const candidateFailureAt = timeOf(candidate.lastFailureAt) ?? -Infinity;
+  const existingFailureAt = imageRegenerationTimestamp(existing.lastFailureAt) ?? -Infinity;
+  const candidateFailureAt = imageRegenerationTimestamp(candidate.lastFailureAt) ?? -Infinity;
   // A tie deliberately prefers the replayed commit: it is the article commit
   // currently being kept alive by the retry, matching the registry resolver.
   return candidateFailureAt >= existingFailureAt ? candidate : existing;
 }
 
 function sameRequest(existing, candidate) {
-  const existingRequestedAt = timeOf(existing.requestedAt);
-  const candidateRequestedAt = timeOf(candidate.requestedAt);
+  const existingRequestedAt = imageRegenerationTimestamp(existing.requestedAt);
+  const candidateRequestedAt = imageRegenerationTimestamp(candidate.requestedAt);
   if (existingRequestedAt != null || candidateRequestedAt != null) {
     return existingRequestedAt != null
       && candidateRequestedAt != null
@@ -155,8 +146,8 @@ function indexItems(items) {
 }
 
 function isNewRequestAfterDrainStart(baseItem, candidate) {
-  const baseRequestedAt = timeOf(baseItem.requestedAt);
-  const candidateRequestedAt = timeOf(candidate.requestedAt);
+  const baseRequestedAt = imageRegenerationTimestamp(baseItem.requestedAt);
+  const candidateRequestedAt = imageRegenerationTimestamp(candidate.requestedAt);
   return candidateRequestedAt != null
     && (baseRequestedAt == null || candidateRequestedAt > baseRequestedAt);
 }

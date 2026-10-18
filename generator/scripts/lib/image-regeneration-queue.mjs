@@ -12,6 +12,11 @@ export const IMAGE_REGENERATION_TERMINAL_VISION_REASON = 'vision-safety-rejectio
 
 const HOUR_MS = 3_600_000;
 
+export function imageRegenerationTimestamp(value) {
+  const parsed = Date.parse(String(value || ''));
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
 /**
  * A text/logo rejection is adaptable: the drainer adds a stricter no-text
  * hint before trying the governed provider chain again. Other pure vision
@@ -29,7 +34,10 @@ export function isVisualTextFailure(reason) {
     'gi',
   );
   const normalized = String(reason || '')
-    .replace(/contains_(?:text|logo)\s*[:=]\s*false/gi, '')
+    // Structured vision ledgers are authoritative for these fields. Without
+    // removing explicit false values, the field names themselves look like a
+    // positive text/logo cue and a face-only rejection becomes retryable.
+    .replace(/\bcontains[_ ](?:text|logo)\s*[:=]\s*false\b/gi, '')
     .replace(negativeCue, '');
   return /vision gate rejected image/i.test(normalized)
     && /(?:text|letter(?:ing)?|sign(?:age)?|watermark|signature|writing|logo|emblem|mark(?:ing)?s?|word|number|caption|label|banner|inscription|poster|typograph|brand|trademark|contains[_ ]text\s*[:=]\s*true|cartell|segnaletica|scritte?|parol[ae]|numer[io]|beschriftung|schrift|texte?|forbidden content)/i.test(normalized);
@@ -191,15 +199,22 @@ function mergeQueueItem(queue, request) {
   if (!item) return false;
   const existing = queue.items.find((entry) => entry?.articleId === item.articleId);
   if (existing) {
-    const existingRequestedAt = Date.parse(String(existing.requestedAt || ''));
-    const itemRequestedAt = Date.parse(String(item.requestedAt || ''));
-    const sameRequest = Number.isFinite(existingRequestedAt)
-      && Number.isFinite(itemRequestedAt)
-      && existingRequestedAt === itemRequestedAt;
-    if (Number.isFinite(existingRequestedAt) && Number.isFinite(itemRequestedAt)) {
-      if (itemRequestedAt < existingRequestedAt) return true;
-      if (sameRequest && item.status !== IMAGE_REGENERATION_TERMINAL_STATUS) return true;
-      if (sameRequest && existing.status === IMAGE_REGENERATION_TERMINAL_STATUS) return true;
+    const existingRequestedAt = imageRegenerationTimestamp(existing.requestedAt);
+    const incomingRequestedAt = imageRegenerationTimestamp(item.requestedAt);
+    const sameRequest = existingRequestedAt !== null
+      && incomingRequestedAt !== null
+      && existingRequestedAt === incomingRequestedAt;
+    // A pending/direct record is allowed to replace an existing item only
+    // when it proves a strictly newer request. A stale writer must not revive
+    // a terminal verdict or replace a newer retryable request. A terminal
+    // result at the exact same timestamp is retained as the safer outcome.
+    if (incomingRequestedAt === null
+      || (existingRequestedAt !== null && incomingRequestedAt < existingRequestedAt)
+      || (sameRequest && (
+        item.status !== IMAGE_REGENERATION_TERMINAL_STATUS
+        || existing.status === IMAGE_REGENERATION_TERMINAL_STATUS
+      ))) {
+      return true;
     }
     Object.assign(existing, item, {
       failureCount: Number.isInteger(existing.failureCount) && existing.failureCount >= 0 ? existing.failureCount : 0,
@@ -230,10 +245,11 @@ function flushPendingQueue(root) {
   if (!fs.existsSync(directory)) return 0;
 
   const processingPrefix = `${path.basename(file)}.`;
-  const pendingFiles = fs.readdirSync(directory)
+  const directoryEntries = fs.readdirSync(directory).sort();
+  const pendingFiles = directoryEntries
     .filter((name) => name.startsWith(processingPrefix) && name.endsWith('.pending'))
     .map((name) => path.join(directory, name));
-  const processing = fs.readdirSync(directory)
+  const processing = directoryEntries
     .filter((name) => name.startsWith(processingPrefix) && name.endsWith('.processing'))
     .map((name) => path.join(directory, name));
   if (fs.existsSync(file)) {

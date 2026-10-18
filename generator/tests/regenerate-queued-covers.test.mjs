@@ -597,6 +597,55 @@ test('una nuova accodatura aggiorna requestedAt ma conserva il contatore dei fal
   }
 });
 
+test('un append stale non può sostituire una richiesta più nuova, anche dal pending', () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'stale-queue-writer';
+    queue(root, [{
+      ...item(articleId, '2026-10-07T22:42:00.000Z'),
+      status: 'terminal',
+      terminalAt: '2026-10-07T22:42:00.000Z',
+      terminalReason: 'vision-safety-rejection',
+    }]);
+
+    assert.equal(appendImageRegenerationQueue(root, {
+      articleId,
+      title: articleId,
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'stale retry',
+      requestedAt: '2026-10-07T22:41:00.000Z',
+    }), true);
+
+    write(root, 'data/image-regeneration-queue-in-progress.json', '{}\n');
+    assert.equal(appendImageRegenerationQueue(root, {
+      articleId,
+      title: articleId,
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'stale pending retry',
+      requestedAt: '2026-10-07T22:40:00.000Z',
+    }), true);
+    fs.unlinkSync(path.join(root, 'data/image-regeneration-queue-in-progress.json'));
+
+    assert.equal(appendImageRegenerationQueue(root, {
+      articleId: 'flush-pending',
+      title: 'flush-pending',
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'new request',
+      requestedAt: '2026-10-07T22:43:00.000Z',
+    }), true);
+
+    const preserved = JSON.parse(
+      fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'),
+    ).items.find((entry) => entry.articleId === articleId);
+    assert.equal(preserved.status, 'terminal');
+    assert.equal(preserved.requestedAt, '2026-10-07T22:42:00.000Z');
+    assert.equal(preserved.reason, 'engine failed');
+    assert.equal(preserved.terminalReason, 'vision-safety-rejection');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('il percorso pending conserva un rifiuto terminale mentre il drain possiede il lock', () => {
   const root = tempRoot();
   try {
