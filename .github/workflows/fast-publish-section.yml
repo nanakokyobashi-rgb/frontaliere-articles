@@ -177,7 +177,10 @@ jobs:
       - name: Checkout (resolve)
         uses: actions/checkout@v7
         with:
-          ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || github.sha }}
+          # Normal cover-drain dispatches carry article ids, not a source
+          # commit: resolve the live dispatch ref. workflow_run and bounded
+          # replays remain pinned to the exact source revision.
+          ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || (github.event_name == 'workflow_dispatch' && github.ref) || github.sha }}
           fetch-depth: 2
           persist-credentials: false
 
@@ -454,7 +457,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
-          ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || github.sha }}
+          # Keep normal cover-drain dispatches on the live ref; only a
+          # workflow_run or bounded replay may pin an older source commit.
+          ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || (github.event_name == 'workflow_dispatch' && github.ref) || github.sha }}
           # resolvePublishedReleaseCommit() verifica la release API con
           # merge-base: una release precedente puo' essere fuori dai due
           # commit che actions/checkout scarica di default.
@@ -769,11 +774,45 @@ jobs:
           else
             args+=(--publish)
           fi
-          # Attraverso il wrapper di retry (issue #98): `npx -y` scarica tsx dal
-          # registro a ogni run. Ritentare l'intero comando e' sicuro: il
-          # render riscrive lo stesso scratch e gli upload R2 sono PUT
-          # idempotenti sulle stesse chiavi.
-          bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"
+          # A normal cover-drain dispatch has no immutable source commit. It
+          # must rebase onto the live main between attempts when the
+          # freshness guard reports that main advanced during the render.
+          # workflow_run and bounded replays keep their existing fail-closed
+          # behavior: a stale pinned source is redispatched by the replay
+          # logic above, never silently moved here.
+          normal_dispatch='false'
+          if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -z "${SOURCE_COMMIT:-}" ]; then
+            normal_dispatch='true'
+          fi
+          if [ "$normal_dispatch" != 'true' ]; then
+            # Attraverso il wrapper di retry (issue #98): `npx -y` scarica tsx
+            # dal registro a ogni run. Ritentare l'intero comando e' sicuro:
+            # il render riscrive lo stesso scratch e gli upload R2 sono PUT
+            # idempotenti sulle stesse chiavi.
+            bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"
+            exit 0
+          fi
+
+          for publish_attempt in 1 2 3; do
+            git fetch --no-tags origin main
+            git checkout --detach origin/main
+            export EXPECTED_MAIN_HEAD="$(git rev-parse HEAD)"
+            echo "::notice::normal cover dispatch on main $EXPECTED_MAIN_HEAD (freshness attempt $publish_attempt/3)"
+            if bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"; then
+              exit 0
+            fi
+            if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
+              echo "::error::impossibile rileggere la revisione corrente di main dopo un render fallito"
+              exit 1
+            fi
+            if [ "$current_main" = "$EXPECTED_MAIN_HEAD" ]; then
+              echo "::error::render fallito senza un avanzamento concorrente di main"
+              exit 1
+            fi
+            echo "::notice::main avanzata durante il render ($EXPECTED_MAIN_HEAD → $current_main); riallineo il checkout"
+          done
+          echo "::error::main e' avanzata durante tre tentativi di render del publisher"
+          exit 1
 
       - name: Release bootstrap R2 gate
         # GITHUB_ENV aggiorna l'ambiente dei passi successivi, ma non è una

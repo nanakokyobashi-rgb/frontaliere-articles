@@ -154,6 +154,10 @@ jobs:
       - name: Checkout (resolve)
         uses: actions/checkout@v7
         with:
+          # A normal cover-drain dispatch must resolve the live branch when
+          # the queue waits behind another main commit; push events keep the
+          # exact event SHA, which is their immutable publication input.
+          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || github.sha }}
           fetch-depth: 2
           persist-credentials: false
 
@@ -408,6 +412,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          # The explicit cover dispatch carries article ids, not a source
+          # commit. Follow the live dispatch ref so a queued run does not
+          # render an obsolete corpus snapshot.
+          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || github.sha }}
           fetch-depth: 2
           # persist-credentials: false is load-bearing, not hygiene. It stops
           # actions/checkout leaving its GITHUB_TOKEN in an extraheader that
