@@ -2810,9 +2810,21 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     wf.indexOf('      - name: Release bootstrap R2 gate'),
   );
   const liveCheckout = liveRetryLoop.indexOf('git checkout --detach origin/main');
+  const liveKillSwitch = liveRetryLoop.indexOf('if [ -f .github/FAST_PUBLISH_DISABLED ]');
+  const liveDependencyRefresh = liveRetryLoop.indexOf('bash scripts/lib/npm-ci-retry.sh');
   const liveEnsure = liveRetryLoop.indexOf('scripts/ci/ensure-host-shell-assets.mjs');
   const liveRender = liveRetryLoop.indexOf('scripts/publish-section-pages.mjs');
-  assert.ok(liveCheckout >= 0 && liveEnsure > liveCheckout && liveRender > liveEnsure, 'il retry live aggiorna la CDN dopo ogni checkout e prima del render');
+  assert.ok(
+    liveCheckout >= 0
+      && liveKillSwitch > liveCheckout
+      && liveDependencyRefresh > liveKillSwitch
+      && liveEnsure > liveDependencyRefresh
+      && liveRender > liveEnsure,
+    'il retry live rilegge il kill switch, riallinea le dipendenze e aggiorna la CDN dopo ogni checkout e prima del render',
+  );
+  assert.match(liveRetryLoop, /build_publish_args "\$attempt_dry"/);
+  assert.match(wf, /INSTALLED_DEPENDENCY_LOCK_HASH/);
+  assert.doesNotMatch(liveRetryLoop, /if bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/);
   assert.match(wf, /PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
   assert.match(wf, /PUSH_AFTER: \$\{\{ needs\.resolve\.outputs\.push_after \}\}/);
   const bootstrapReplay = wf.slice(wf.indexOf('  replay-api-after-bootstrap:'));
@@ -2899,7 +2911,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'host/**'\n"));
   assert.match(wf, /if: needs\.resolve\.outputs\.any == 'true'/);
   assert.match(wf, /bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs "\$\{args\[@\]\}"/);
-  assert.match(wf, /\[ "\$DRY" = "true" \]; then\n\s+args\+=\(--dry-run\)\n\s+else\n\s+args\+=\(--publish\)/);
+  assert.match(wf, /\[ "\$dry_mode" = "true" \]; then\n\s+args\+=\(--dry-run\)\n\s+else\n\s+args\+=\(--publish\)/);
   // upload-cdn-file.sh esce 0 senza credenziali: l'assenza deve fermare il job.
   assert.match(wf, /for v in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_S3_ENDPOINT R2_BUCKET CF_API_TOKEN; do/);
   assert.match(wf, /timeout-minutes: 100/);

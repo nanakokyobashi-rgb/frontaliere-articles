@@ -603,7 +603,11 @@ jobs:
 
       - name: Install dependencies
         if: steps.replay_freshness.outputs.fresh == 'true'
-        run: bash scripts/lib/npm-ci-retry.sh
+        run: |
+          set -euo pipefail
+          bash scripts/lib/npm-ci-retry.sh
+          lock_hash="$(sha256sum package.json package-lock.json | sha256sum | cut -d' ' -f1)"
+          echo "INSTALLED_DEPENDENCY_LOCK_HASH=$lock_hash" >> "$GITHUB_ENV"
 
       # Remote Config e' la sola sorgente delle credenziali R2 e Cloudflare.
       # In dry non servono: il render e la validazione girano comunque.
@@ -752,7 +756,6 @@ jobs:
               exit 0
             fi
           fi
-          args=(--section "$SECTION" --out "$RUNNER_TEMP/section-dist" --summary "$RUNNER_TEMP/section-summary.json")
           previous_revision="${PUSH_BEFORE:-}"
           if [ "$EVENT_NAME" = 'workflow_run' ]; then
             if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || [ "$(git rev-parse HEAD)" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
@@ -760,22 +763,27 @@ jobs:
               exit 1
             fi
           fi
-          if [ -n "$previous_revision" ] && [[ ! "$previous_revision" =~ ^0+$ ]]; then
-            args+=(--previous-revision "$previous_revision")
-          fi
-          if [ "$BOOTSTRAP" = "true" ]; then
-            args+=(--bootstrap)
-          else
-            args+=(--ids "$(printf '%s' "$ARTICLE_IDS_JSON" | jq -c .)")
-          fi
-          if [ "$REMOVE_STALE_CANTON_RSS_FEEDS" = "true" ]; then
-            args+=(--remove-stale-canton-rss-feeds)
-          fi
-          if [ "$DRY" = "true" ]; then
-            args+=(--dry-run)
-          else
-            args+=(--publish)
-          fi
+          build_publish_args() {
+            local dry_mode="$1"
+            args=(--section "$SECTION" --out "$RUNNER_TEMP/section-dist" --summary "$RUNNER_TEMP/section-summary.json")
+            if [ -n "$previous_revision" ] && [[ ! "$previous_revision" =~ ^0+$ ]]; then
+              args+=(--previous-revision "$previous_revision")
+            fi
+            if [ "$BOOTSTRAP" = "true" ]; then
+              args+=(--bootstrap)
+            else
+              args+=(--ids "$(printf '%s' "$ARTICLE_IDS_JSON" | jq -c .)")
+            fi
+            if [ "$REMOVE_STALE_CANTON_RSS_FEEDS" = "true" ]; then
+              args+=(--remove-stale-canton-rss-feeds)
+            fi
+            if [ "$dry_mode" = "true" ]; then
+              args+=(--dry-run)
+            else
+              args+=(--publish)
+            fi
+          }
+          build_publish_args "$DRY"
           # A normal cover-drain dispatch from main has no immutable source
           # commit. It must rebase onto the live main between attempts when
           # the freshness guard reports that main advanced during the render.
@@ -800,12 +808,36 @@ jobs:
             git checkout --detach origin/main
             export EXPECTED_MAIN_HEAD="$(git rev-parse HEAD)"
             echo "::notice::normal cover dispatch on main $EXPECTED_MAIN_HEAD (freshness attempt $publish_attempt/3)"
-            if [ "$DRY" != "true" ]; then
+
+            # main puo' essere avanzata dopo resolve. Rileggi il kill switch
+            # dalla revisione appena checkoutata: il dry calcolato da resolve
+            # non puo' riarmare una revisione che ora e' disabilitata.
+            attempt_dry="$DRY"
+            if [ -f .github/FAST_PUBLISH_DISABLED ]; then
+              echo "::warning::.github/FAST_PUBLISH_DISABLED present on live checkout — running dry"
+              attempt_dry=true
+            elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "false" ]; then
+              echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
+              attempt_dry=true
+            fi
+            build_publish_args "$attempt_dry"
+
+            live_dependency_lock_hash="$(sha256sum package.json package-lock.json | sha256sum | cut -d' ' -f1)"
+            if [ "${INSTALLED_DEPENDENCY_LOCK_HASH:-}" != "$live_dependency_lock_hash" ]; then
+              echo "::notice::package metadata changed with the live checkout; reinstalling dependencies"
+              bash scripts/lib/npm-ci-retry.sh
+              export INSTALLED_DEPENDENCY_LOCK_HASH="$live_dependency_lock_hash"
+              echo "INSTALLED_DEPENDENCY_LOCK_HASH=$live_dependency_lock_hash" >> "$GITHUB_ENV"
+            fi
+
+            if [ "$attempt_dry" != "true" ]; then
               # Il checkout puo' aver cambiato host/constants.ts e quindi il
               # nome dell'asset gtag: riallinea la CDN prima di ogni render.
               bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/ci/ensure-host-shell-assets.mjs
             fi
-            if bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"; then
+            # Non usare retry-cmd.sh qui: un errore di freschezza deve tornare
+            # subito al loop esterno, che rifà fetch e checkout della main.
+            if npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"; then
               exit 0
             fi
             if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
