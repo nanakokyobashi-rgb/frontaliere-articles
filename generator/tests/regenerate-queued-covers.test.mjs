@@ -1366,6 +1366,12 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
     'i due checkout principali del publisher sezione devono distinguere dispatch live e replay pinnato',
   );
   assert.match(sectionPublisher, /normal_dispatch='false'/u);
+  assert.match(sectionPublisher, /REF: \$\{\{ github\.ref \}\}/u);
+  assert.match(
+    sectionPublisher,
+    /if \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ "\$REF" = 'refs\/heads\/main' \] && \[ -z "\$\{SOURCE_COMMIT:-\}" \] && \[ "\$BOOTSTRAP" != 'true' \]; then/u,
+    'il retry live del publisher sezione e\u0027 consentito solo per dispatch dalla main',
+  );
   assert.match(sectionPublisher, /\[ "\$BOOTSTRAP" != 'true' \]/u);
   assert.match(sectionPublisher, /for publish_attempt in 1 2 3/u);
   assert.match(sectionPublisher, /git fetch --no-tags origin main/u);
