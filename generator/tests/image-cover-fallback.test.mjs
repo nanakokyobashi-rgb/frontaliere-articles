@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import {
   CATALOG_FALLBACK_MIN_SHARED_WORDS,
   catalogFallbackSharedWordCount,
+  classifyImageRegenerationFailure,
   queueArticleCoverRegeneration,
   resolveArticleCoverFallback,
 } from '../scripts/lib/article-cover-fallback.mjs';
@@ -150,6 +151,54 @@ test('engine failure uses a record-bearing catalog cover and queues regeneration
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
+});
+
+test('un rifiuto vision interamente non adattabile resta nel ledger come terminale', () => {
+  const root = tempRoot();
+  try {
+    const data = article('terminal-vision-cover');
+    const failure = new Error('All image providers failed');
+    failure.failures = [
+      { provider: 'openai-codex', reason: 'vision gate rejected image: recognizable foreground person' },
+      { provider: 'gemini', reason: 'vision gate rejected image: recognizable human face' },
+    ];
+    data._imageGenerationFailureDisposition = classifyImageRegenerationFailure(failure);
+    resolveArticleCoverFallback(data, {
+      root,
+      findCatalogImage: () => null,
+      reason: failure.message,
+    });
+    queueArticleCoverRegeneration(root, data);
+
+    const queued = JSON.parse(
+      fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'),
+    ).items[0];
+    assert.equal(queued.status, 'terminal');
+    assert.equal(queued.terminalReason, 'vision-safety-rejection');
+    assert.equal(queued.terminalAt, queued.requestedAt);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un errore transient o un rifiuto testuale adattabile resta retryable', () => {
+  const transient = new Error('All image providers failed');
+  transient.failures = [
+    { provider: 'openai-codex', reason: 'provider unavailable' },
+    { provider: 'gemini', reason: 'vision gate rejected image: recognizable face' },
+  ];
+  const adaptable = new Error('All image providers failed');
+  adaptable.failures = [
+    { provider: 'openai-codex', reason: 'vision gate rejected image: visible lettering and signage' },
+  ];
+
+  assert.equal(classifyImageRegenerationFailure(transient).retryable, true);
+  assert.equal(classifyImageRegenerationFailure(adaptable).retryable, true);
+  assert.equal(
+    classifyImageRegenerationFailure(new Error('vision gate rejected image: recognizable face')).retryable,
+    true,
+    'un messaggio senza il ledger completo dei provider non prova la terminalità',
+  );
 });
 
 test('a licensed article hero writes the shared attribution ledger and resolves as licensed-photo', () => {

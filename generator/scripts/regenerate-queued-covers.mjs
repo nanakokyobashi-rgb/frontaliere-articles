@@ -33,7 +33,10 @@ import {
   IMAGE_REGENERATION_PUBLISH_OUTBOX_REL,
 } from './lib/image-regeneration-publish-outbox.mjs';
 import {
+  classifyImageRegenerationFailure,
   failedImageRegenerationRetryIsEligible,
+  IMAGE_REGENERATION_TERMINAL_STATUS,
+  isVisualTextFailure,
   withImageRegenerationQueueLockAsync,
 } from './lib/image-regeneration-queue.mjs';
 import {
@@ -48,6 +51,7 @@ export const DEFAULT_LIMIT = 10;
 export const MAX_LIMIT = 100;
 export const IMAGE_BUDGET_MS = 120_000;
 export const NO_TEXT_IMAGE_RETRY_HINT = 'Safety retry: absolutely no signs, lettering, words, numbers, logos, labels, banners, watermarks, or signature-like marks anywhere in the image.';
+export { isVisualTextFailure } from './lib/image-regeneration-queue.mjs';
 
 const GENERATED_REGISTRY_REL = 'data/generated-image-registry.json';
 let writeTmpSeq = 0;
@@ -165,12 +169,6 @@ function normalizeReason(value) {
     .trim()
     .slice(0, 240);
   return reason || 'engine-failed';
-}
-
-export function isVisualTextFailure(reason) {
-  const normalized = String(reason || '');
-  return /vision gate rejected image/i.test(normalized)
-    && /(?:text|letter(?:ing)?|sign(?:age)?|watermark|signature|writing|logo|emblem|mark(?:ing)?s?|word|number|caption|label|banner|inscription|poster|typograph|brand|trademark|contains[_ ]text\s*[:=]\s*true|cartell|segnaletica|scritte?|parol[ae]|numer[io]|beschriftung|schrift|texte?|forbidden content)/i.test(normalized);
 }
 
 function parseLimit(value) {
@@ -461,12 +459,19 @@ async function processItem({ root, item, generateCover, generateThumbnail, regis
 }
 
 function summaryFor(queue, result) {
+  const terminalIds = queue.items
+    .filter((item) => item.status === IMAGE_REGENERATION_TERMINAL_STATUS)
+    .map((item) => item.articleId);
   return {
     drained: result.drained,
     residual: queue.items.length,
     failed: result.failed,
     marked: queue.items.filter((item) => Number(item.failureCount || 0) >= 3).map((item) => item.articleId),
     failedIds: result.failedIds,
+    terminal: terminalIds.length,
+    terminalIds,
+    terminalized: result.terminalizedIds.length,
+    terminalizedIds: result.terminalizedIds,
     reused: result.reused,
     alreadySatisfied: result.alreadySatisfiedIds.length,
     alreadySatisfiedIds: result.alreadySatisfiedIds,
@@ -529,7 +534,7 @@ export async function drainQueuedCovers({
     if (requeued.length > 0) write(queue);
   }
   const selected = queue.items
-    .filter((item) => item.status !== 'failed')
+    .filter((item) => item.status !== 'failed' && item.status !== IMAGE_REGENERATION_TERMINAL_STATUS)
     .map((item, index) => ({ item, index }))
     .sort(queueAttemptSort)
     .slice(0, boundedLimit)
@@ -538,6 +543,7 @@ export async function drainQueuedCovers({
     drained: 0,
     failed: 0,
     failedIds: [],
+    terminalizedIds: [],
     reused: 0,
     alreadySatisfiedIds,
     requeued,
@@ -597,13 +603,21 @@ export async function drainQueuedCovers({
       if (outcome?.snapshots) restoreTransaction(outcome.snapshots);
       const failureCount = Number.isInteger(item.failureCount) && item.failureCount >= 0 ? item.failureCount + 1 : 1;
       item.failureCount = failureCount;
+      const disposition = classifyImageRegenerationFailure(error);
       // Automatic runs pass an explicit cooldown. Persist the first failure as
       // failed immediately so the next automatic run cannot select it while
       // the cooldown is active. Manual callers keep the bounded immediate
       // retry burst because they deliberately omit the cooldown.
-      item.status = retryAfterHours !== null || failureCount >= 3 ? 'failed' : 'queued';
+      item.status = disposition.retryable === false
+        ? IMAGE_REGENERATION_TERMINAL_STATUS
+        : retryAfterHours !== null || failureCount >= 3 ? 'failed' : 'queued';
       item.lastFailureAt = typeof now === 'function' ? now() : String(now);
       item.reason = normalizeReason(error);
+      if (disposition.retryable === false) {
+        item.terminalAt = item.lastFailureAt;
+        item.terminalReason = disposition.reason;
+        result.terminalizedIds.push(item.articleId);
+      }
       write(queue);
       result.failed += 1;
       result.failedIds.push(item.articleId);

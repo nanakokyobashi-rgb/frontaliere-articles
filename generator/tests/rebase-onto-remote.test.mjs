@@ -1094,6 +1094,45 @@ test('il merge della coda canonizza gli articleId duplicati prima del drain', ()
   assert.equal(merged.items[0].lastFailureAt, '2026-10-07T00:10:00.000Z');
 });
 
+test('il merge della coda non riesuma un rifiuto terminale della stessa richiesta', () => {
+  const terminal = {
+    ...queueItem('article-terminal', 'safety rejection', '2026-10-07T00:00:00.000Z'),
+    status: 'terminal',
+    failureCount: 1,
+    lastFailureAt: '2026-10-07T00:01:00.000Z',
+    terminalAt: '2026-10-07T00:01:00.000Z',
+    terminalReason: 'vision-safety-rejection',
+  };
+  const staleRetry = {
+    ...queueItem('article-terminal', 'stale retry', '2026-10-07T00:00:00.000Z'),
+    status: 'failed',
+    failureCount: 2,
+    lastFailureAt: '2026-10-07T00:02:00.000Z',
+  };
+  const merged = mergeImageRegenerationQueues(
+    { schema: 1, items: [terminal] },
+    { schema: 1, items: [staleRetry] },
+  ).items[0];
+  assert.equal(merged.status, 'terminal');
+  assert.equal(merged.terminalAt, terminal.terminalAt);
+  assert.equal(merged.terminalReason, 'vision-safety-rejection');
+  assert.equal(merged.failureCount, 2);
+  assert.equal(merged.lastFailureAt, staleRetry.lastFailureAt);
+
+  const freshRequest = {
+    ...staleRetry,
+    status: 'queued',
+    requestedAt: '2026-10-07T00:03:00.000Z',
+    lastFailureAt: '2026-10-07T00:03:00.000Z',
+  };
+  const revived = mergeImageRegenerationQueues(
+    { schema: 1, items: [terminal] },
+    { schema: 1, items: [freshRequest] },
+  ).items[0];
+  assert.equal(revived.status, 'queued', 'solo una requestedAt nuova può sostituire il terminale');
+  assert.equal(revived.terminalAt, undefined);
+});
+
 test('an empty allowlist is a caller bug, not a silent always-abort', () => {
   // Without this guard a caller that forgot its paths would degrade to exactly
   // the old behaviour, which is indistinguishable from the fix not being there.

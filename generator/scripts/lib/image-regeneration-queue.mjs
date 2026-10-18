@@ -7,8 +7,48 @@ export const IMAGE_REGENERATION_QUEUE_REL = 'data/image-regeneration-queue.json'
 export const IMAGE_REGENERATION_QUEUE_LOCK_REL = 'data/image-regeneration-queue-in-progress.json';
 export const IMAGE_REGENERATION_QUEUE_PENDING_REL = 'data/image-regeneration-queue-pending.jsonl';
 export const IMAGE_REGENERATION_QUEUE_SCHEMA = 1;
+export const IMAGE_REGENERATION_TERMINAL_STATUS = 'terminal';
+export const IMAGE_REGENERATION_TERMINAL_VISION_REASON = 'vision-safety-rejection';
 
 const HOUR_MS = 3_600_000;
+
+/**
+ * A text/logo rejection is adaptable: the drainer adds a stricter no-text
+ * hint before trying the governed provider chain again. Other pure vision
+ * rejections would replay the same provider/prompt sequence, so a complete
+ * structured failure made only of those rejections is terminal.
+ */
+export function isVisualTextFailure(reason) {
+  // Vision notes routinely state a satisfied constraint before naming the
+  // real rejection (for example "no visible text or logos; recognizable
+  // foreground person"). Remove those negative clauses before looking for an
+  // adaptable text/logo violation, otherwise a face rejection loops forever.
+  const cue = '(?:text|letter(?:ing)?|sign(?:age)?|watermarks?|signatures?|writing|logos?|emblems?|marks?|words?|numbers?|captions?|labels?|banners?|inscriptions?|posters?|typograph(?:y|ic)?|brands?|trademarks?)';
+  const negativeCue = new RegExp(
+    `\\b(?:no|without|lacks?)\\s+(?:(?:visible|readable|discernible|legible|recognizable)\\s+)*${cue}(?:\\s*(?:,|and|or)\\s*(?:(?:visible|readable|discernible|legible|recognizable)\\s+)*${cue})*`,
+    'gi',
+  );
+  const normalized = String(reason || '').replace(negativeCue, '');
+  return /vision gate rejected image/i.test(normalized)
+    && /(?:text|letter(?:ing)?|sign(?:age)?|watermark|signature|writing|logo|emblem|mark(?:ing)?s?|word|number|caption|label|banner|inscription|poster|typograph|brand|trademark|contains[_ ]text\s*[:=]\s*true|cartell|segnaletica|scritte?|parol[ae]|numer[io]|beschriftung|schrift|texte?|forbidden content)/i.test(normalized);
+}
+
+export function classifyImageRegenerationFailure(error) {
+  const structuredFailures = Array.isArray(error?.failures)
+    ? error.failures
+        .map((failure) => String(failure?.reason || '').trim())
+        .filter(Boolean)
+    : [];
+  // Only the governed engine's complete provider ledger is sufficient proof.
+  // A flattened/truncated message can show one rejection while hiding a
+  // transient lane later in the chain, so it always remains retryable.
+  const terminal = structuredFailures.length > 0
+    && structuredFailures.every((reason) => /^vision gate rejected image:/i.test(reason))
+    && !structuredFailures.some(isVisualTextFailure);
+  return terminal
+    ? { retryable: false, reason: IMAGE_REGENERATION_TERMINAL_VISION_REASON }
+    : { retryable: true, reason: 'transient-or-adaptable' };
+}
 
 /**
  * A failed cover is retryable only after the caller's explicit cooldown.
@@ -16,6 +56,7 @@ const HOUR_MS = 3_600_000;
  * watchdog from disagreeing about whether a failed item is actionable.
  */
 export function failedImageRegenerationRetryIsEligible(item, nowMs, retryAfterHours) {
+  if (String(item?.status || '') === IMAGE_REGENERATION_TERMINAL_STATUS) return false;
   if (retryAfterHours === null) return true;
   const retryHours = Number(retryAfterHours);
   const lastFailureAt = Date.parse(String(item?.lastFailureAt || ''));
@@ -39,6 +80,7 @@ export function failedImageRegenerationRetryIsEligible(item, nowMs, retryAfterHo
 export function imageRegenerationActionableAt(item, retryAfterHours) {
   const requestedAt = Date.parse(String(item?.requestedAt || ''));
   if (!Number.isFinite(requestedAt)) return null;
+  if (String(item?.status || '') === IMAGE_REGENERATION_TERMINAL_STATUS) return null;
   if (String(item?.status || 'unknown') !== 'failed' || retryAfterHours === null) {
     return requestedAt;
   }
@@ -99,18 +141,31 @@ function queueItemFromRequest({
   title,
   fallbackImage,
   reason,
+  retryDisposition,
+  status,
+  terminalAt,
+  terminalReason,
   requestedAt = new Date().toISOString(),
 } = {}) {
   if (!articleId) return null;
+  // Pending records are already normalized queue items, while direct callers
+  // provide retryDisposition. Accept both forms so taking the busy-lock path
+  // cannot silently revive a terminal rejection as queued work.
+  const terminal = retryDisposition === 'terminal'
+    || status === IMAGE_REGENERATION_TERMINAL_STATUS;
   return {
     articleId: String(articleId),
     title: String(title || '').trim().slice(0, 240),
     fallbackImage: String(fallbackImage || ''),
     reason: normalizeReason(reason),
-    status: 'queued',
+    status: terminal ? IMAGE_REGENERATION_TERMINAL_STATUS : 'queued',
     failureCount: 0,
     requestedAt: String(requestedAt),
     lastFailureAt: String(requestedAt),
+    ...(terminal ? {
+      terminalAt: String(terminalAt || requestedAt),
+      terminalReason: String(terminalReason || IMAGE_REGENERATION_TERMINAL_VISION_REASON),
+    } : {}),
   };
 }
 
@@ -125,6 +180,10 @@ function mergeQueueItem(queue, request) {
       // metadata and deliberately leaves requestedAt untouched.
       requestedAt: item.requestedAt,
     });
+    if (item.status !== IMAGE_REGENERATION_TERMINAL_STATUS) {
+      delete existing.terminalAt;
+      delete existing.terminalReason;
+    }
   } else {
     queue.items.push(item);
   }

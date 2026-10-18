@@ -10,13 +10,18 @@
  * non va reintrodotta. Un requestedAt successivo identifica invece una nuova
  * richiesta, che resta in coda; le aggiunte senza uno stage 1 restano sempre.
  * Per lo stesso articolo la metadata della richiesta segue il requestedAt piu'
- * recente; a parita' di richiesta vince il fallimento piu' recente. I contatori
- * di fallimento vengono fusi separatamente, cosi' un tentativo stale non puo'
- * cambiare lo stato di una nuova richiesta.
+ * recente; a parita' di richiesta uno stato terminale prevale su un fallimento
+ * concorrente piu' recente. I contatori di fallimento vengono fusi
+ * separatamente, cosi' un tentativo stale non puo' cambiare lo stato di una
+ * nuova richiesta.
  */
 import { execFileSync } from 'node:child_process';
 import { realpathSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import {
+  IMAGE_REGENERATION_TERMINAL_STATUS,
+  IMAGE_REGENERATION_TERMINAL_VISION_REASON,
+} from '../../generator/scripts/lib/image-regeneration-queue.mjs';
 
 export const IMAGE_REGENERATION_QUEUE = 'data/image-regeneration-queue.json';
 export const IMAGE_REGENERATION_QUEUE_SCHEMA = 1;
@@ -113,9 +118,16 @@ function sameRequest(existing, candidate) {
 }
 
 function mergeItem(existing, candidate) {
-  const winner = requestWinner(existing, candidate);
-  if (!sameRequest(existing, candidate)) return { ...winner, articleId: String(existing.articleId) };
-  return {
+  const same = sameRequest(existing, candidate);
+  const terminalWinner = same
+    ? [existing, candidate].find((item) => item.status === IMAGE_REGENERATION_TERMINAL_STATUS)
+    : null;
+  // A later failure timestamp belongs to the same generation request and must
+  // not revive a terminal safety verdict produced concurrently. A genuinely
+  // new request is still selected by requestedAt below.
+  const winner = terminalWinner || requestWinner(existing, candidate);
+  if (!same) return { ...winner, articleId: String(existing.articleId) };
+  const merged = {
     ...winner,
     articleId: String(existing.articleId),
     lastFailureAt: latest(existing.lastFailureAt, candidate.lastFailureAt),
@@ -124,6 +136,12 @@ function mergeItem(existing, candidate) {
       Number.isInteger(candidate.failureCount) && candidate.failureCount >= 0 ? candidate.failureCount : 0,
     ),
   };
+  if (terminalWinner) {
+    merged.status = IMAGE_REGENERATION_TERMINAL_STATUS;
+    merged.terminalAt = terminalWinner.terminalAt || terminalWinner.lastFailureAt || terminalWinner.requestedAt;
+    merged.terminalReason = terminalWinner.terminalReason || IMAGE_REGENERATION_TERMINAL_VISION_REASON;
+  }
+  return merged;
 }
 
 function indexItems(items) {
