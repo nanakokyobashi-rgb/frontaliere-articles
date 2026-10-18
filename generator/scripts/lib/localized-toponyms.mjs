@@ -281,21 +281,37 @@ const NAME_SPAN_PATTERN = new RegExp(
 );
 const QUOTED_NAME_PATTERN = /["«“]([^"»”\r\n]+)["»”]/gu;
 const NAME_TOKEN_PATTERN = /[\p{L}\p{N}]+(?:['’.-][\p{L}\p{N}]+)*/gu;
-const NAME_LEADING_STOP_WORDS = new Set(['il', 'lo', 'la', 'i', 'gli', 'le', 'un', 'una', 'uno', 'der', 'die', 'das', 'ein', 'eine', 'einer', 'einem', 'einen', 'the', 'a', 'an', 'le', 'la', 'les', 'un', 'une', 'des']);
+const NAME_LEADING_STOP_WORDS = new Set([
+  'il', 'lo', 'la', 'i', 'gli', 'le', 'un', 'una', 'uno',
+  'der', 'die', 'das', 'ein', 'eine', 'einer', 'einem', 'einen',
+  'the', 'a', 'an', 'le', 'les', 'un', 'une', 'des',
+  'ad', 'al', 'alla', 'allo', 'ai', 'agli', 'da', 'dal', 'dalla',
+  'di', 'in', 'nel', 'nella', 'sul', 'sulla', 'con', 'per',
+  'au', 'aux', 'du', 'dans', 'en', 'à', 'im', 'am', 'auf', 'mit',
+]);
+const OFFICIAL_NAME_MARKERS = new Set([
+  'associazione', 'association', 'azienda', 'banca', 'bancastato', 'bank',
+  'bureau', 'caisse', 'cassa', 'centro', 'centre', 'comune',
+  'ente', 'fondazione', 'fondation', 'foundation', 'istituto', 'istituzione',
+  'ospedale', 'spital', 'ufficio', 'università', 'universita',
+  'université', 'universite', 'universität', 'universitaet',
+  'società', 'societa', 'société', 'societe',
+  'canton', 'cantone', 'kanton',
+]);
 const ADMINISTRATIVE_NAME_PREFIXES = new Set(['canton', 'cantone', 'kanton']);
 const CODE_SPAN_PATTERN = /`+[\s\S]*?`+/gu;
 const MAX_PROTECTED_NAME_SPAN_CHARS = 160;
 const MAX_PROTECTED_NAME_SPAN_TOKENS = 12;
 
-function isLikelyProperNameSpan(value, { quoted = false } = {}) {
+function isLikelyProperNameSpan(value) {
   if (String(value).length > MAX_PROTECTED_NAME_SPAN_CHARS) return false;
   const tokens = String(value).match(NAME_TOKEN_PATTERN) || [];
   while (tokens.length > 0 && NAME_LEADING_STOP_WORDS.has(tokens[0].toLocaleLowerCase('en'))) tokens.shift();
   if (tokens.length < 2) return false;
   if (tokens.length > MAX_PROTECTED_NAME_SPAN_TOKENS) return false;
-  if (quoted) return true;
-  if (tokens.length >= 3) return true;
-  return !ADMINISTRATIVE_NAME_PREFIXES.has(tokens[0].toLocaleLowerCase('en'));
+  const normalizedTokens = tokens.map((token) => token.toLocaleLowerCase('en'));
+  if (!normalizedTokens.some((token) => OFFICIAL_NAME_MARKERS.has(token))) return false;
+  return !(normalizedTokens.length === 2 && ADMINISTRATIVE_NAME_PREFIXES.has(normalizedTokens[0]));
 }
 
 function normalizeNameSearchText(value) {
@@ -324,9 +340,9 @@ function sourceIdenticalNameRanges(value, sourceText) {
   }
   if (knownToponymRanges.length === 0) return [];
   const ranges = [];
-  const add = (start, end, candidate, quoted = false) => {
+  const add = (start, end, candidate) => {
     if (!knownToponymRanges.some(([toponymStart, toponymEnd]) => toponymStart >= start && toponymEnd <= end)) return;
-    if (!isLikelyProperNameSpan(candidate, { quoted })) return;
+    if (!isLikelyProperNameSpan(candidate)) return;
     const candidateSearchText = normalizeNameSearchText(candidate);
     if (!candidateSearchText || !sourceSearchText.includes(candidateSearchText)) return;
     ranges.push([start, end]);
@@ -340,14 +356,65 @@ function sourceIdenticalNameRanges(value, sourceText) {
   QUOTED_NAME_PATTERN.lastIndex = 0;
   for (const match of text.matchAll(QUOTED_NAME_PATTERN)) {
     const start = (match.index ?? 0) + match[0].indexOf(match[1]);
-    add(start, start + match[1].length, match[1], true);
+    add(start, start + match[1].length, match[1]);
   }
   return ranges;
 }
 
+const RAW_ENTITY_SEQUENCE_AT_START_PATTERN = /^&(?:amp;)*(?:#(?:x[0-9a-f]+|[0-9]+);|[a-z][a-z0-9]*;)/iu;
+const COMBINING_MARK_PATTERN = /^\p{M}$/u;
+
+/** Map normalized ranges back to the raw string used by the replacement writer. */
+function mapNormalizedRangesToRaw(value, ranges) {
+  const rawText = String(value);
+  const normalizedText = normalizeToponymMatchText(rawText);
+  if (rawText === normalizedText || ranges.length === 0) return ranges;
+
+  const units = [];
+  let rawOffset = 0;
+  let normalizedOffset = 0;
+  while (rawOffset < rawText.length) {
+    const entity = rawText.slice(rawOffset).match(RAW_ENTITY_SEQUENCE_AT_START_PATTERN);
+    let rawEnd = entity ? rawOffset + entity[0].length : rawOffset + (rawText.codePointAt(rawOffset) > 0xffff ? 2 : 1);
+    while (rawEnd < rawText.length) {
+      const codePoint = rawText.codePointAt(rawEnd);
+      const character = String.fromCodePoint(codePoint);
+      if (!COMBINING_MARK_PATTERN.test(character)) break;
+      rawEnd += codePoint > 0xffff ? 2 : 1;
+    }
+    const normalizedUnit = normalizeToponymMatchText(rawText.slice(rawOffset, rawEnd));
+    units.push({
+      rawStart: rawOffset,
+      rawEnd,
+      normalizedStart: normalizedOffset,
+      normalizedEnd: normalizedOffset + normalizedUnit.length,
+    });
+    normalizedOffset += normalizedUnit.length;
+    rawOffset = rawEnd;
+  }
+
+  const rawOffsetFor = (offset, endBoundary) => {
+    if (offset <= 0) return 0;
+    for (const unit of units) {
+      if (offset < unit.normalizedStart) return unit.rawStart;
+      if (offset <= unit.normalizedEnd) {
+        if (offset === unit.normalizedEnd) return unit.rawEnd;
+        return endBoundary ? unit.rawEnd : unit.rawStart;
+      }
+    }
+    return rawText.length;
+  };
+
+  return ranges.map(([start, end]) => [
+    rawOffsetFor(start, false),
+    rawOffsetFor(end, true),
+  ]);
+}
+
 function protectedRanges(value, sourceText = '') {
   const ranges = [];
-  const text = String(value);
+  const rawText = String(value);
+  const text = normalizeToponymMatchText(rawText);
   for (const pattern of [...PROTECTED_NAME_PATTERNS, CODE_SPAN_PATTERN]) {
     pattern.lastIndex = 0;
     for (const match of text.matchAll(pattern)) {
@@ -355,7 +422,7 @@ function protectedRanges(value, sourceText = '') {
     }
   }
   ranges.push(...sourceIdenticalNameRanges(text, sourceText));
-  return ranges;
+  return mapNormalizedRangesToRaw(rawText, ranges);
 }
 
 function replaceOutsideUrls(value, pattern, replacer) {
