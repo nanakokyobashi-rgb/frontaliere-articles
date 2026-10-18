@@ -65,7 +65,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'muehlehorn-strada-chiusa-ottobre',
  category: 'pratico',
  date: '2026-10-18T03:25:08.301Z',
- image: '/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp',
+ image: '/images/blog/article-muehlehorn-strada-chiusa-ottobre.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['GL'],

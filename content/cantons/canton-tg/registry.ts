@@ -142,7 +142,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'felben-wellhausen-cantiere',
  category: 'pratico',
  date: '2026-10-18T03:25:32.644Z',
- image: '/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp',
+ image: '/images/blog/article-felben-wellhausen-cantiere.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['TG'],

@@ -20,7 +20,7 @@ const blogMetaCantonGlDe: Record<string, string> = {
     'blog.article.eventi-weekend-glarona.imageAlt': 'Veranstaltungen am Wochenende im Glarnerland',
     'blog.article.muehlehorn-strada-chiusa-ottobre.title': 'Mühlehorn: Alte Kerenzerstrasse ab dem 19. Oktober gesperrt',
     'blog.article.muehlehorn-strada-chiusa-ottobre.excerpt': 'Mühlehorn: Vollsperrung der Strasse Alte Kerenzerstrasse zwischen Hanenchilchli und Rüteggli bis zum 23.',
-    'blog.article.muehlehorn-strada-chiusa-ottobre.imageAlt': 'Alte Kerenzerstrasse in Mühlehorn während der Strassenarbeiten',
+    'blog.article.muehlehorn-strada-chiusa-ottobre.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonGlDe;

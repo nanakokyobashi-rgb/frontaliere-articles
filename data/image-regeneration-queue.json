@@ -55,71 +55,31 @@
       "articleId": "pensionato-vince-contro-ffs",
       "title": "Pensionato la spunta contro le FFS dopo mesi di battaglia",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-pensionato-vince-contro-ffs: openai-codex (vision gate rejected image: Synthetic photorealistic editorial scene, but it includes a recognizable foreground pensioner and a station display/signage.); gem",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-18T01:47:23.656Z",
-      "lastFailureAt": "2026-10-18T01:47:23.656Z"
-    },
-    {
-      "articleId": "agra-sagra-zucca",
-      "title": "Agra, la Sagra della Zucca rinviata al 25 ottobre",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-agra-sagra-zucca: openai-codex (vision gate rejected image: Generic synthetic autumn pumpkin market scene with no readable text, logos, or re",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-18T02:02:44.586Z",
-      "lastFailureAt": "2026-10-18T02:02:44.586Z"
-    },
-    {
-      "articleId": "gallarate-furto-strappo-minori",
-      "title": "Gallarate, due minori fermati per furto con strappo",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-18T03:06:56.481Z",
-      "lastFailureAt": "2026-10-18T03:06:56.481Z"
-    },
-    {
-      "articleId": "muehlehorn-strada-chiusa-ottobre",
-      "title": "Mühlehorn: Alte Kerenzerstrasse chiusa dal 19 ottobre",
-      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-18T03:25:08.346Z",
-      "lastFailureAt": "2026-10-18T03:25:08.346Z"
-    },
-    {
-      "articleId": "felben-wellhausen-cantiere",
-      "title": "Strada principale di Felben-Wellhausen: risanamento",
-      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-18T03:25:32.688Z",
-      "lastFailureAt": "2026-10-18T03:25:32.688Z"
+      "lastFailureAt": "2026-10-18T09:54:53.773Z"
     },
     {
       "articleId": "franchigia-accordo-redditi-single",
       "title": "Credito d'imposta 2026: calcolo per il frontaliere single",
       "fallbackImage": "/images/blog/article-credito-imposta-famiglia-2026.webp",
-      "reason": "All image providers failed for article-franchigia-accordo-redditi-single: openai-codex (vision gate rejected image: Generic synthetic editorial scene with no readable text or logos",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-franchigia-accordo-redditi-single: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Ticino cross-border commuting, but it includes a recognizable foreground perso",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-18T03:51:56.775Z",
-      "lastFailureAt": "2026-10-18T03:51:56.775Z"
+      "lastFailureAt": "2026-10-18T10:00:59.141Z"
     },
     {
       "articleId": "passaggio-nuovo-impiego-g",
       "title": "Cambio datore per frontalieri: permesso G e procedura 2026",
       "fallbackImage": "/images/blog/cambio-datore-lavoro-frontaliere-procedura-permesso-2026-single.webp",
-      "reason": "All image providers failed for article-passaggio-nuovo-impiego-g: openai-codex (vision gate rejected image: A clear foreground person is present, viewed from behind; no readable te",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-passaggio-nuovo-impiego-g: openai-codex (vision gate rejected image: Generic synthetic Ticino commuter scene, but it contains a foreground person and visible train/platform lettering, signage, and bran",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-18T05:22:21.056Z",
-      "lastFailureAt": "2026-10-18T05:22:21.056Z"
+      "lastFailureAt": "2026-10-18T10:02:30.760Z"
     },
     {
       "articleId": "g-verifica-datore-20km",

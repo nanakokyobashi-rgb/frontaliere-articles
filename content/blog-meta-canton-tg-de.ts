@@ -41,7 +41,7 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.eventi-weekend-turgovia.imageAlt': 'Veranstaltungen am Wochenende im Thurgau',
     'blog.article.felben-wellhausen-cantiere.title': 'Hauptstrasse in Felben-Wellhausen: Sanierung',
     'blog.article.felben-wellhausen-cantiere.excerpt': 'Vom 19. Oktober 2026 bis Mitte Juli 2027 wird die Hauptstrasse in Felben-Wellhausen saniert: Die Römerstrasse wird abschnittsweise gesperrt, die Haltestelle Römerhof verlegt oder aufgehoben.',
-    'blog.article.felben-wellhausen-cantiere.imageAlt': 'Sanierung der Hauptstrasse in Felben-Wellhausen mit Velowegen und Bushaltestelle Römerhof.',
+    'blog.article.felben-wellhausen-cantiere.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonTgDe;

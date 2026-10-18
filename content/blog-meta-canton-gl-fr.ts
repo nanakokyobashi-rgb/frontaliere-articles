@@ -20,7 +20,7 @@ const blogMetaCantonGlFr: Record<string, string> = {
     'blog.article.eventi-weekend-glarona.imageAlt': 'Événements du week-end dans le canton de Glaris',
     'blog.article.muehlehorn-strada-chiusa-ottobre.title': 'Mühlehorn : Alte Kerenzerstrasse fermée à partir du 19 octobre',
     'blog.article.muehlehorn-strada-chiusa-ottobre.excerpt': 'Mühlehorn : fermeture totale de Alte Kerenzerstrasse entre Hanenchilchli et Rüteggli jusqu’au 23 octobre 2026, à 17.00.',
-    'blog.article.muehlehorn-strada-chiusa-ottobre.imageAlt': 'Alte Kerenzerstrasse à Mühlehorn pendant les travaux routiers',
+    'blog.article.muehlehorn-strada-chiusa-ottobre.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonGlFr;

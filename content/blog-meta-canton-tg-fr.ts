@@ -41,7 +41,7 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.eventi-weekend-turgovia.imageAlt': 'Événements du week-end en Thurgovie',
     'blog.article.felben-wellhausen-cantiere.title': 'Route principale de Felben-Wellhausen : assainissement',
     'blog.article.felben-wellhausen-cantiere.excerpt': 'Du 19 octobre 2026 à la mi-juillet 2027, la Hauptstrasse de Felben-Wellhausen sera assainie : Römerstrasse fermée par tronçons, Römerhof déplacé ou supprimé.',
-    'blog.article.felben-wellhausen-cantiere.imageAlt': 'Travaux sur la route principale de Felben-Wellhausen, avec pistes cyclables et arrêt Römerhof.',
+    'blog.article.felben-wellhausen-cantiere.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonTgFr;
