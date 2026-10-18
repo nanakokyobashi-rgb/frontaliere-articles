@@ -111178,6 +111178,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-passaggio-nuovo-impiego-g': {
+    title: 'Cambio datore per frontalieri: permesso G e procedura 2026',
+    description: 'Cambio datore per frontalieri nel 2026: procedura del permesso G, preavviso, contributi AVS e LPP, LAMal, imposta alla fonte e documenti da aggiornare in Ticino',
+    keywords: 'frontalieri, ticino, svizzera, italia, cambio, datore, permesso, procedura',
+    ogTitle: 'Cambio datore per frontalieri: permesso G e procedura 2026',
+    ogDescription: 'Dal preavviso al rinnovo del permesso G: guida pratica per il frontaliere che cambia datore nel 2026, con aliquote AVS, AD/AC, LAINF e LPP, regole LAMal, doppia imposizione e distinzione tra vecchi e nuovi frontalieri.',
+    canonicalPath: '/articoli-frontaliere/passaggio-nuovo-impiego-g/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cambio datore per frontalieri: permesso G e procedura 2026",
+      "description": "Cambio datore per frontalieri nel 2026: procedura del permesso G, preavviso, contributi AVS e LPP, LAMal, imposta alla fonte e documenti da aggiornare in Ticino",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/cambio-datore-lavoro-frontaliere-procedura-permesso-2026-single.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Frontaliere al valico di Brogeda con documenti per il cambio datore"
+      },
+      "datePublished": "2026-10-18T05:22:20+00:00",
+      "dateModified": "2026-10-18T05:22:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/passaggio-nuovo-impiego-g/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

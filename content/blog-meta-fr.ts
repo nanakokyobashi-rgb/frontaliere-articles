@@ -13432,6 +13432,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.varese-arconatese-18-ottobre.title': 'Le Varese affronte l\'Arconatese à Caronno Pertusella',
     'blog.article.varese-arconatese-18-ottobre.excerpt': 'Dimanche 18 octobre le Varese joue à 15 heures Match au \'Comunale\' de Caronno Pertusella Le Varese reste sur une victoire contre l\'Oltrepò Ciceri demande confirmation',
     'blog.article.varese-arconatese-18-ottobre.imageAlt': 'Stade Comunale de Caronno Pertusella pour le match (Varese)',
+    'blog.article.passaggio-nuovo-impiego-g.title': 'Changement d\'employeur pour frontaliers : permis G et procédure 2026',
+    'blog.article.passaggio-nuovo-impiego-g.excerpt': 'Guide 2026 du changement d\'employeur pour les frontaliers : préavis, renouvellement du permis G, continuité des cotisations, impôt à la source et documents à jour.',
+    'blog.article.passaggio-nuovo-impiego-g.imageAlt': 'Travailleur frontalier à Brogeda avec des documents pour changer d\'employeur',
 };
 
 export default blogMetaFr;

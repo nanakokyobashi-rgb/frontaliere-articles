@@ -13430,6 +13430,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.varese-arconatese-18-ottobre.title': 'Varese take on Arconatese in Caronno Pertusella',
     'blog.article.varese-arconatese-18-ottobre.excerpt': 'Sunday, October 18 Varese plays at 15 Challenge at Caronno Pertusella\'s \'Comunale\' Varese comes off a victory against Oltrepò Ciceri seeks confirmation',
     'blog.article.varese-arconatese-18-ottobre.imageAlt': 'Comunale stadium in Caronno Pertusella for the match (Varese)',
+    'blog.article.passaggio-nuovo-impiego-g.title': 'Change of employer for border workers: G permit and 2026 procedure',
+    'blog.article.passaggio-nuovo-impiego-g.excerpt': '2026 Guide to the change of employer for border workers: notice, renewal of the G permit, continuity of contributions, tax at source and updated documents.',
+    'blog.article.passaggio-nuovo-impiego-g.imageAlt': 'Cross-border worker at Brogeda border with documents for changing employer',
 };
 
 export default blogMetaEn;

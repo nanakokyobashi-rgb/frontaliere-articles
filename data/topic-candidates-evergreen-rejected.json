@@ -1284,6 +1284,30 @@
       "firstSeenAt": "2026-10-18T04:24:23.347Z",
       "lastValidatedAt": "2026-10-18T04:24:23.347Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere cambio chf eur strategia 2026 entro 20 km",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T05:05:56.832Z",
+      "lastValidatedAt": "2026-10-18T05:05:56.832Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere cambio chf eur strategia 2026 simulazione pratica",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T05:08:07.337Z",
+      "lastValidatedAt": "2026-10-18T05:08:07.337Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -1334,6 +1358,18 @@
       "firstStrikeAt": "2026-10-18T04:20:52.835Z",
       "lastStrikeAt": "2026-10-18T04:20:52.835Z",
       "expiresAt": "2026-11-17T04:20:52.835Z"
+    },
+    {
+      "keyword": "frontaliere trasporti chiasso lugano abbonamenti 2026 errori comuni",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-10-18T05:15:05.386Z",
+      "lastStrikeAt": "2026-10-18T05:15:05.386Z",
+      "expiresAt": "2026-11-17T05:15:05.386Z"
     }
   ],
   "legacy": [

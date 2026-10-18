@@ -45268,6 +45268,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'passaggio-nuovo-impiego-g',
+ category: 'pratico',
+ date: '2026-10-18T05:22:20.043Z',
+ image: '/images/blog/cambio-datore-lavoro-frontaliere-procedura-permesso-2026-single.webp',
+ hasCalculator: true,
+ articleType: 'evergreen',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

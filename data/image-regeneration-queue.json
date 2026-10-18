@@ -110,6 +110,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T03:51:56.775Z",
       "lastFailureAt": "2026-10-18T03:51:56.775Z"
+    },
+    {
+      "articleId": "passaggio-nuovo-impiego-g",
+      "title": "Cambio datore per frontalieri: permesso G e procedura 2026",
+      "fallbackImage": "/images/blog/cambio-datore-lavoro-frontaliere-procedura-permesso-2026-single.webp",
+      "reason": "All image providers failed for article-passaggio-nuovo-impiego-g: openai-codex (vision gate rejected image: A clear foreground person is present, viewed from behind; no readable te",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T05:22:21.056Z",
+      "lastFailureAt": "2026-10-18T05:22:21.056Z"
     }
   ]
 }

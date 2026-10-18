@@ -13429,6 +13429,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.varese-arconatese-18-ottobre.title': 'Varese trifft in Caronno Pertusella auf Arconatese',
     'blog.article.varese-arconatese-18-ottobre.excerpt': 'Am Sonntag, 18. (Varese)',
     'blog.article.varese-arconatese-18-ottobre.imageAlt': 'Stadion Comunale in Caronno Pertusella für das Spiel (Varese)',
+    'blog.article.passaggio-nuovo-impiego-g.title': 'Arbeitgeberwechsel für Grenzgänger: Genehmigung G und Verfahren 2026',
+    'blog.article.passaggio-nuovo-impiego-g.excerpt': 'Leitfaden 2026 zum Arbeitgeberwechsel für Grenzgänger: Vorankündigung, Erneuerung der Genehmigung G, Beitragskontinuität, Quellensteuer und aktualisierte Dokumente.',
+    'blog.article.passaggio-nuovo-impiego-g.imageAlt': 'Grenzgänger am Grenzübergang Brogeda mit Unterlagen zum Arbeitgeberwechsel',
 };
 
 export default blogMetaDe;
