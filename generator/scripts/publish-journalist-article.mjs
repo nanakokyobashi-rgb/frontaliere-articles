@@ -61,7 +61,7 @@ import {
   isRegisterLockHeld,
   translateArticle,
   enforceStrongInternalLinks,
-  findBestFallbackImage,
+  findBestFallbackImages,
   pickAuthorForTopic,
   getAuthorByUid,
   sanitizeBoldFormatting,
@@ -80,7 +80,6 @@ import {
   generateArticleImage,
   repairGeneratedArticleSourceCopy,
   refreshSourceCopyDerivedMetadata,
-  resolveArticleCoverFallback,
 } from './create-article.mjs';
 import { isRegisterLockError } from './lib/register-lock.mjs';
 import { requeuePublishedDocuments } from './lib/journalist-publish-recovery.mjs';
@@ -90,7 +89,11 @@ import {
   SourceCopyError,
 } from './lib/source-copy-guard.mjs';
 import { classifyJournalistImage, editorialUploadMetadata } from './lib/journalist-image-policy.mjs';
-import { queueArticleCoverRegeneration } from './lib/article-cover-fallback.mjs';
+import {
+  queueArticleCoverRegeneration,
+  resolveArticleCoverFallback,
+  verifyCatalogFallbackCandidates,
+} from './lib/article-cover-fallback.mjs';
 import { generateFaqIT } from './batch-add-faq-to-articles.mjs';
 import {
   appendEditorialImageRecord,
@@ -272,8 +275,9 @@ function setHeroProvenance(data, imagePath, provenance) {
 
 /**
  * Resolve a hero image under the publication policy:
- * catalog record → governed engine → documented editorial upload → governed
- * catalog/static fallback. The URL branch is deliberately last and fail-closed.
+ * catalog record → governed engine → documented editorial upload → freshly
+ * verified relevant catalog fallback. Arbitrary URLs and static landscapes
+ * cannot satisfy the last step.
  */
 async function resolveHeroImage(data, doc) {
   const rawImage = String(doc?.image || '').trim();
@@ -373,9 +377,13 @@ async function resolveHeroImage(data, doc) {
     return { source: 'generated-engine', path: generatedPath, provenance: 'generated' };
   }
 
+  const verifiedCatalogImage = await verifyCatalogFallbackCandidates(data, {
+    root: PROJECT_ROOT,
+    findCatalogImages: findBestFallbackImages,
+  });
   const fallback = resolveArticleCoverFallback(data, {
     root: PROJECT_ROOT,
-    findCatalogImage: findBestFallbackImage,
+    verifiedCatalogImage,
     reason: data._imageGenerationFailureReason || 'engine-failed',
   });
   delete data._imageGenerationFailureReason;

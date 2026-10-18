@@ -2,6 +2,7 @@ import '../../host/cantonSectionsBootstrap.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import net from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -11,7 +12,9 @@ import {
   classifyImageRegenerationFailure,
   queueArticleCoverRegeneration,
   resolveArticleCoverFallback,
+  verifyCatalogFallbackCandidates,
 } from '../scripts/lib/article-cover-fallback.mjs';
+import { articleImageAssetId } from '../scripts/lib/article-cover-identity.mjs';
 import {
   appendGeneratedImageRecord,
   imageRecordForPath,
@@ -27,6 +30,7 @@ import {
   GENERATED_IMAGE_RESTRICTIONS,
   LICENSED_PHOTO_RESTRICTIONS,
 } from '../../engine/shared/generatedImageRegistry.mjs';
+const { isCompleteArticleHeroVisionVerdict } = await import('../../engine/shared/generatedImageEngine.mjs');
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -118,26 +122,47 @@ function article(id, title = 'Titolo di prova') {
   };
 }
 
-test('engine failure uses a record-bearing catalog cover and queues regeneration', () => {
+const safeGeneratedVision = Object.freeze({
+  ok: true,
+  contains_text: false,
+  contains_logo: false,
+  contains_recognizable_face: false,
+  contains_recognizable_foreground_person: false,
+  looks_like_specific_real_event: false,
+  is_photograph: false,
+  is_topic_relevant: true,
+  notes: 'Relevant generated image without prohibited content.',
+});
+
+async function addAndVerifyCandidate(root, data, record = generatedCatalogRecord(), vision = safeGeneratedVision) {
+  const file = path.join(root, 'public', record.imageUrl.slice(1));
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, Buffer.alloc(record.bytes, 0x47));
+  record.sha256 = sha256File(file);
+  appendGeneratedImageRecord(root, record);
+  const verifiedCatalogImage = await verifyCatalogFallbackCandidates(data, {
+    root,
+    findCatalogImages: () => [record.imageUrl],
+    verifyImage: async () => (typeof vision === 'function' ? vision() : vision),
+  });
+  return { record, file, verifiedCatalogImage };
+}
+
+test('engine failure uses a freshly verified catalog hero and queues regeneration', async () => {
   const root = tempRoot();
   try {
-    const record = generatedCatalogRecord();
-    const file = path.join(root, 'public', record.imageUrl.slice(1));
-    fs.mkdirSync(path.dirname(file), { recursive: true });
-    fs.writeFileSync(file, Buffer.alloc(record.bytes, 0x47));
-    record.sha256 = sha256File(file);
-    appendGeneratedImageRecord(root, record);
-
     const data = article('article-cover-fallback', 'Catalog fallback test');
+    const { record, verifiedCatalogImage } = await addAndVerifyCandidate(root, data);
     const result = resolveArticleCoverFallback(data, {
       root,
-      findCatalogImage: () => record.imageUrl,
+      verifiedCatalogImage,
       reason: 'Gemini image request failed with HTTP 400',
     });
 
     assert.equal(result.source, 'catalog-fallback');
     assert.equal(data._generatedImagePath, record.imageUrl);
     assert.equal(data._generatedImageRecord.assetId, record.assetId);
+    assert.match(data.imageAlt.it, /illustrativ/i);
     assert.equal(data.qualityReject, undefined);
     assert.equal(data.imagePolicyReject, undefined);
     assert.equal(fs.existsSync(path.join(root, 'data/image-regeneration-queue.json')), false);
@@ -153,10 +178,126 @@ test('engine failure uses a record-bearing catalog cover and queues regeneration
   }
 });
 
-test('un rifiuto vision interamente non adattabile resta nel ledger come terminale', () => {
+test('skipped, unavailable, or non-topic vision never grants a fallback token', async () => {
+  const root = tempRoot();
+  try {
+    const data = article('fallback-verifier-outcomes', 'Cross-border jobs in Ticino');
+    const { record } = await addAndVerifyCandidate(root, data);
+    const cases = [
+      { name: 'skipped', verifyImage: async () => undefined, code: 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE' },
+      { name: 'unavailable', verifyImage: async () => { throw new Error('vision service unavailable'); }, code: 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE' },
+      {
+        name: 'missing topic signal',
+        verifyImage: async () => {
+          const { is_topic_relevant: _topic, ...partial } = safeGeneratedVision;
+          return partial;
+        },
+        code: 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE',
+      },
+      {
+        name: 'negative topic signal',
+        verifyImage: async () => ({ ...safeGeneratedVision, is_topic_relevant: false }),
+        code: 'ARTICLE_COVER_NO_RELEVANT_FALLBACK',
+        imageQualityFailure: true,
+      },
+    ];
+
+    for (const scenario of cases) {
+      await assert.rejects(verifyCatalogFallbackCandidates(data, {
+        root,
+        findCatalogImages: () => [record.imageUrl],
+        verifyImage: scenario.verifyImage,
+      }), (error) => error.code === scenario.code
+        && error.retryable === true
+        && Boolean(error.imageQualityFailure) === (scenario.imageQualityFailure === true), scenario.name);
+    }
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('injected verdicts do not poison the production cache, which is keyed by bytes and context', async () => {
+  const root = fs.mkdtempSync(path.join(ROOT, '.cover-fallback-cache-test-'));
+  const socketPath = path.join(os.tmpdir(), `cover-fallback-vision-${process.pid}-${Date.now()}.sock`);
+  const originalSocket = process.env.CODEX_AUTH_BROKER_SOCKET;
+  let providerCalls = 0;
+  const verdicts = [
+    safeGeneratedVision,
+    { ...safeGeneratedVision, is_topic_relevant: false, notes: 'This image is not about the current article.' },
+  ];
+  const server = net.createServer((socket) => {
+    socket.setEncoding('utf8');
+    socket.once('data', () => {
+      const verdict = verdicts[Math.min(providerCalls, verdicts.length - 1)];
+      providerCalls += 1;
+      socket.end(`${JSON.stringify({ ok: true, result: JSON.stringify(verdict) })}\n`);
+    });
+  });
+
+  try {
+    const data = article('fallback-cache-policy', 'Cross-border jobs in Ticino');
+    const { record } = await addAndVerifyCandidate(root, data, generatedCatalogRecord());
+    await new Promise((resolve, reject) => {
+      server.once('error', reject);
+      server.listen(socketPath, resolve);
+    });
+    process.env.CODEX_AUTH_BROKER_SOCKET = socketPath;
+
+    // A test seam can grant a private test token, but it must not populate the
+    // cache read by the production verifier on the next call.
+    await verifyCatalogFallbackCandidates(data, {
+      root,
+      findCatalogImages: () => [record.imageUrl],
+      verifyImage: async () => safeGeneratedVision,
+    });
+    await verifyCatalogFallbackCandidates(data, {
+      root,
+      findCatalogImages: () => [record.imageUrl],
+    });
+    assert.equal(providerCalls, 1, 'the production verifier must execute after an injected verdict');
+
+    await verifyCatalogFallbackCandidates(data, {
+      root,
+      findCatalogImages: () => [record.imageUrl],
+    });
+    assert.equal(providerCalls, 1, 'the same verified bytes and context may reuse the production result');
+
+    data.content.it.title = 'Swiss pharmacy opening hours';
+    await assert.rejects(verifyCatalogFallbackCandidates(data, {
+      root,
+      findCatalogImages: () => [record.imageUrl],
+    }), (error) => error.code === 'ARTICLE_COVER_NO_RELEVANT_FALLBACK'
+      && error.imageQualityFailure === true);
+    assert.equal(providerCalls, 2, 'a changed article context must be verified again');
+  } finally {
+    if (originalSocket === undefined) delete process.env.CODEX_AUTH_BROKER_SOCKET;
+    else process.env.CODEX_AUTH_BROKER_SOCKET = originalSocket;
+    await new Promise((resolve) => server.close(() => resolve()));
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('a changed or missing binary invalidates the fallback capability as retryable stale state', async () => {
+  const root = tempRoot();
+  try {
+    const data = article('fallback-stale-capability', 'Cross-border jobs in Ticino');
+    const { file, verifiedCatalogImage } = await addAndVerifyCandidate(root, data);
+    fs.rmSync(file);
+
+    assert.throws(() => resolveArticleCoverFallback(data, { root, verifiedCatalogImage }), {
+      code: 'ARTICLE_COVER_VERIFICATION_STALE',
+      retryable: true,
+    });
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un rifiuto vision interamente non adattabile resta nel ledger come terminale', async () => {
   const root = tempRoot();
   try {
     const data = article('terminal-vision-cover');
+    const { verifiedCatalogImage } = await addAndVerifyCandidate(root, data);
     const failure = new Error('All image providers failed');
     failure.failures = [
       { provider: 'openai-codex', reason: 'vision gate rejected image: recognizable foreground person' },
@@ -171,7 +312,7 @@ test('un rifiuto vision interamente non adattabile resta nel ledger come termina
     data._imageGenerationFailureDisposition = classifyImageRegenerationFailure(failure);
     resolveArticleCoverFallback(data, {
       root,
-      findCatalogImage: () => null,
+      verifiedCatalogImage,
       reason: failure.message,
     });
     queueArticleCoverRegeneration(root, data);
@@ -334,7 +475,7 @@ test('i flag vision strutturati governano adattamento e terminalità senza dipen
   );
 });
 
-test('un flag strutturato text/logo persiste il retry hint anche con note generiche', () => {
+test('un flag strutturato text/logo persiste il retry hint anche con note generiche', async () => {
   const root = tempRoot();
   try {
     const failure = new Error('All image providers failed');
@@ -350,10 +491,11 @@ test('un flag strutturato text/logo persiste il retry hint anche con note generi
       vision: { contains_text: true, contains_logo: false },
     }];
     const data = article('structured-text-retry-hint');
+    const { verifiedCatalogImage } = await addAndVerifyCandidate(root, data);
     data._imageGenerationFailureDisposition = classifyImageRegenerationFailure(failure);
     resolveArticleCoverFallback(data, {
       root,
-      findCatalogImage: () => null,
+      verifiedCatalogImage,
       reason: failure.message,
     });
     queueArticleCoverRegeneration(root, data);
@@ -369,7 +511,7 @@ test('un flag strutturato text/logo persiste il retry hint anche con note generi
   }
 });
 
-test('a licensed article hero writes the shared attribution ledger and resolves as licensed-photo', () => {
+test('a licensed article hero writes the shared attribution ledger and resolves as licensed-photo', async () => {
   const root = tempRoot();
   try {
     const record = licensedCatalogRecord();
@@ -386,9 +528,55 @@ test('a licensed article hero writes the shared attribution ledger and resolves 
     const provenance = imageRecordForPath(root, record.imageUrl, { strict: true });
     assert.equal(provenance.kind, 'licensed-photo');
     const data = article('licensed-cover-ledger-test', 'Tasse e lavoro a Zurigo');
-    resolveArticleCoverFallback(data, { root, findCatalogImage: () => record.imageUrl });
+    const licensedVision = {
+      ...safeGeneratedVision,
+      is_photograph: true,
+      looks_like_specific_real_event: true,
+      notes: 'Authorized documentary photo relevant to the topic.',
+    };
+    const verifiedCatalogImage = await verifyCatalogFallbackCandidates(data, {
+      root,
+      findCatalogImages: () => [record.imageUrl],
+      verifyImage: async () => licensedVision,
+    });
+    resolveArticleCoverFallback(data, { root, verifiedCatalogImage });
     assert.equal(data._imageCredit.source, 'licensed-photo');
     assert.equal(data._imageCredit.licence.attributionRequired, true);
+    assert.match(data.imageAlt.it, /^Fotografia /);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('an incomplete licensed-photo safety verdict is unavailable, not a quality rejection', {
+  skip: typeof isCompleteArticleHeroVisionVerdict !== 'function'
+    ? 'waiting for the site-owned article-hero schema mirror'
+    : false,
+}, async () => {
+  const root = tempRoot();
+  try {
+    const record = licensedCatalogRecord();
+    const data = article('licensed-incomplete-verdict', 'Tasse e lavoro a Zurigo');
+    const file = path.join(root, 'public', record.imageUrl.slice(1));
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, Buffer.alloc(record.bytes, 0x47));
+    record.sha256 = sha256File(file);
+    appendGeneratedImageRecord(root, record);
+
+    const incompletePhotoVerdict = {
+      ...safeGeneratedVision,
+      contains_text: undefined,
+      is_photograph: true,
+      looks_like_specific_real_event: true,
+      notes: '',
+    };
+    await assert.rejects(verifyCatalogFallbackCandidates(data, {
+      root,
+      findCatalogImages: () => [record.imageUrl],
+      verifyImage: async () => incompletePhotoVerdict,
+    }), (error) => error.code === 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE'
+      && error.retryable === true
+      && !error.imageQualityFailure);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
@@ -426,7 +614,7 @@ test('il blocco SEO di una foto licenziata espone autore, licenza e sorgente', (
   assert.match(block, /"creator": \{[^\n]*"name":"Ada Foto"/);
   assert.match(block, /"isBasedOn": "https:\/\/commons\.wikimedia\.org\/wiki\/File:Zurich_employment_office\.jpg"/);
 });
-test('un catalogo valido ma non pertinente non diventa la copertina finale', () => {
+test('un catalogo valido ma non pertinente non diventa la copertina finale', async () => {
   const root = tempRoot();
   try {
     const record = generatedCatalogRecord();
@@ -437,15 +625,13 @@ test('un catalogo valido ma non pertinente non diventa la copertina finale', () 
     appendGeneratedImageRecord(root, record);
 
     const data = article('article-cover-irrelevant', 'Aggressione turisti Como');
-    const result = resolveArticleCoverFallback(data, {
+    await assert.rejects(verifyCatalogFallbackCandidates(data, {
       root,
-      findCatalogImage: () => record.imageUrl,
-      reason: 'Codex broker timed out after 119999ms',
-    });
-
-    assert.equal(result.source, 'static');
-    assert.equal(result.path, '/images/places/lugano-view.webp');
-    assert.equal(data._generatedImageRecord.scope, 'place');
+      findCatalogImages: () => [record.imageUrl],
+      verifyImage: async () => ({ ...safeGeneratedVision, is_topic_relevant: false }),
+    }), (error) => error.code === 'ARTICLE_COVER_NO_RELEVANT_FALLBACK'
+      && error.imageQualityFailure === true);
+    assert.equal(data._generatedImagePath, undefined);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
@@ -487,26 +673,22 @@ test('the mirrored engine closes photo collisions across legacy URL spellings', 
   assert.match(engine, /const excludedPages = new Set\(\(excludedSourcePageUrls[\s\S]*?\.map\(canonicalPhotoSourceUrl\)/);
 });
 
-test('when the catalog is empty, the governed static cover still publishes and deduplicates the queue', () => {
+test('when no visually relevant catalog cover exists, nothing generic crosses the resolver', async () => {
   const root = tempRoot();
   try {
     const data = article('article-static-fallback');
-    const options = {
+    await assert.rejects(verifyCatalogFallbackCandidates(data, {
       root,
-      findCatalogImage: () => null,
-      reason: 'image-budget-expired',
-    };
-    const first = resolveArticleCoverFallback(data, options);
-    queueArticleCoverRegeneration(root, data);
-    resolveArticleCoverFallback(data, { ...options, reason: 'provider-timeout' });
-    queueArticleCoverRegeneration(root, data);
-
-    assert.equal(first.source, 'static');
-    assert.equal(first.path, '/images/places/lugano-view.webp');
-    assert.equal(data._generatedImageRecord.scope, 'place');
-    const queue = JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'));
-    assert.equal(queue.items.length, 1);
-    assert.equal(queue.items[0].reason, 'provider-timeout');
+      findCatalogImages: () => [],
+    }), (error) => error.code === 'ARTICLE_COVER_NO_RELEVANT_FALLBACK'
+      && error.retryable === true
+      && error.imageQualityFailure !== true);
+    assert.throws(() => resolveArticleCoverFallback(data, { root }), {
+      code: 'ARTICLE_COVER_NO_RELEVANT_FALLBACK',
+      retryable: true,
+    });
+    assert.equal(data._generatedImagePath, undefined);
+    assert.equal(fs.existsSync(path.join(root, 'data/image-regeneration-queue.json')), false);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
