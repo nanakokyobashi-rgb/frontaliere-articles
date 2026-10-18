@@ -153,14 +153,12 @@ test('i due wrapper non divergono su tentativi e backoff', () => {
 });
 
 /**
- * I punti `npx` dei workflow ANCORA senza wrapper, al 2026-08-09.
+ * I punti `npx` dei workflow ANCORA senza wrapper.
  *
- * Non e' un condono ed e' volutamente scomodo da tenere: questa PR possiede
- * `publish-api.yml` e basta, e wrappare i workflow di altri qui dentro
- * significherebbe metterli nel grafo delle collisioni per una riga a testa.
- * Il valore del registro non e' assolvere questi quattro: e' che il quinto —
- * un workflow nuovo copiato da uno vecchio, che e' esattamente come tornano i
- * `npm ci` nudi — non possa entrare in silenzio.
+ * Non e' un condono ed e' volutamente scomodo da tenere: ogni voce deve avere
+ * una issue e una ragione concreta. Il valore del registro non e' assolvere
+ * questi punti: e' che un workflow nuovo copiato da uno vecchio, che e'
+ * esattamente come tornano i `npm ci` nudi, non possa entrare in silenzio.
  *
  * Chiave: `<file> :: <comando a partire da npx>`.
  */
@@ -177,6 +175,18 @@ const NOT_YET_WRAPPED = {
     reason:
       "Stesso file e stesso motivo del precedente: e' il refresh degli hub che segue la " +
       'pubblicazione veloce, e un blip qui lascia gli hub indietro rispetto allo shard.',
+  },
+  // Eccezione documentata dal guard: il loop `publish_attempt` di
+  // `fast-publish-section.yml` deve ricevere direttamente il fallimento di
+  // freschezza. `scripts/publish-section-pages.mjs` verifica
+  // `EXPECTED_MAIN_HEAD`, mentre il workflow rilegge `main` e rifà checkout
+  // solo se quella HEAD è avanzata; `generator/tests/section-pages.test.mjs`
+  // vincola esplicitamente questa forma non avvolta.
+  'fast-publish-section.yml :: npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"; then': {
+    issue: 98,
+    reason:
+      'Il retry live deve osservare il fallimento di freschezza, ricontrollare main e rifare checkout; ' +
+      'avvolgere il render nasconderebbe quel segnale al loop esterno.',
   },
   'generate-border-wait-ranking-weekly.yml :: npx -y tsx@4.23.15 generator/scripts/generate-border-wait-ranking-article.mjs': {
     issue: 98,
