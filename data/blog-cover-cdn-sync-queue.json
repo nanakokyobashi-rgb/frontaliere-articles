@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-morto-andena-varese.webp",
+      "sha256": "af7d7217e2cc53941fd63e1fd01e829819824079ae9f7b89f331b9572b51b614"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-morto-andena-varese-480w.webp",
+      "sha256": "c40bc53f6f62c8e3a590aebaeff6f8ce2aecf242c427e21eb65fba2526aeb9ea"
+    }
+  ]
 }
