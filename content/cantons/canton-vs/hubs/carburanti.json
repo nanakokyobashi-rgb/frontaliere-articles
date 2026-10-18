@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T19:17:26.345Z",
-  "contentHash": "4f21a85838935643cd825e4153e260ade4a6b51a7f1c315b220be8533d3b68db",
+  "updatedAt": "2026-10-18T07:01:41.128Z",
+  "contentHash": "142e147269440387f1a5797bee4d655761c61be3f14b79f1fc3071d09a04a1d2",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Iselle, parcheggio frontalieri a pagamento: 50 euro",
+          "url": "/articoli-vallese/iselle-parcheggio-frontalieri/",
+          "excerpt": "Il parcheggio di Iselle per frontalieri diventa a pagamento: l'abbonamento mensile è di 50 euro.",
+          "date": "2026-10-18T06:55:42.164Z"
+        },
+        {
           "title": "Eventi del weekend in Vallese: cosa fare sabato e domenica",
           "url": "/articoli-vallese/eventi-weekend-vallese/",
           "excerpt": "Eventi in Vallese ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
@@ -94,12 +100,6 @@
           "url": "/articoli-vallese/crollo-pilone-vetroz/",
           "excerpt": "Il pilone è crollato verso le 4 nella zona industriale del Botza.",
           "date": "2026-10-17T00:38:07.569Z"
-        },
-        {
-          "title": "Vallese: approvato il Piano d'azione acqua 2035",
-          "url": "/articoli-vallese/vallese-piano-acqua-2035/",
-          "excerpt": "Il Consiglio di Stato adotta il Piano d'azione 2035 Attuazione progressiva dal 2027, secondo priorità e risorse Le misure passano da 39 a 25 dopo la revisione",
-          "date": "2026-10-09T16:44:17.957Z"
         }
       ],
       "links": [
@@ -128,7 +128,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T07:01:41.128Z"
     },
     "en": {
       "canton": "VS",
@@ -187,6 +187,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Iselle, paid parking for cross-border commuters: 50 euro",
+          "url": "/en/valais-articles/iselle-frontier-parking/",
+          "excerpt": "The Iselle car park for cross-border commuters is becoming paid parking: the monthly subscription is 50 euros.",
+          "date": "2026-10-18T06:55:42.164Z"
+        },
+        {
           "title": "Weekend events in Valais: what to do Saturday & Sunday",
           "url": "/en/valais-articles/weekend-events-valais/",
           "excerpt": "Events in Valais every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
@@ -209,12 +215,6 @@
           "url": "/en/valais-articles/fallen-pylon-vetroz/",
           "excerpt": "The pylon collapsed around 4 in the Botza industrial area.",
           "date": "2026-10-17T00:38:07.569Z"
-        },
-        {
-          "title": "Valais: Water Action Plan 2035 approved",
-          "url": "/en/valais-articles/valais-water-action-plan-2035/",
-          "excerpt": "The Council of State adopts the 2035 Action Plan Gradual implementation from 2027, according to priorities and resources The measures decrease from 39 to 25",
-          "date": "2026-10-09T16:44:17.957Z"
         }
       ],
       "links": [
@@ -243,7 +243,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T07:01:41.128Z"
     },
     "de": {
       "canton": "VS",
@@ -302,6 +302,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Iselle, kostenpflichtiger Parkplatz für Grenzgänger: 50 euro",
+          "url": "/de/wallis-artikel/iselle-grenzgaengerparkplatz/",
+          "excerpt": "Der Parkplatz für Grenzgänger in Iselle wird kostenpflichtig: Das Monatsabonnement beträgt 50 euro.",
+          "date": "2026-10-18T06:55:42.164Z"
+        },
+        {
           "title": "Veranstaltungen am Wochenende im Wallis: was tun Sa & So",
           "url": "/de/wallis-artikel/wochenend-veranstaltungen-wallis/",
           "excerpt": "Veranstaltungen im Wallis an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
@@ -324,12 +330,6 @@
           "url": "/de/wallis-artikel/hochspannungsmast-vetroz/",
           "excerpt": "Der Mast ist gegen 4 Uhr im Industriegebiet von Botza eingestürzt.",
           "date": "2026-10-17T00:38:07.569Z"
-        },
-        {
-          "title": "Wallis: Wasser-Aktionsplan 2035 genehmigt",
-          "url": "/de/wallis-artikel/wallis-aktionsplan-wasser-2035/",
-          "excerpt": "Der Staatsrat verabschiedet den Aktionsplan 2035 Schrittweise Umsetzung ab 2027 nach Prioritäten und Ressourcen Die Maßnahmen gehen nach der Überarbeitung",
-          "date": "2026-10-09T16:44:17.957Z"
         }
       ],
       "links": [
@@ -354,7 +354,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T07:01:41.128Z"
     },
     "fr": {
       "canton": "VS",
@@ -413,6 +413,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Iselle, parking pour frontaliers payant : 50 euro",
+          "url": "/fr/articles-valais/iselle-parking-frontaliers/",
+          "excerpt": "Le parking d'Iselle pour frontaliers devient payant : l'abonnement mensuel est de 50 euro.",
+          "date": "2026-10-18T06:55:42.164Z"
+        },
+        {
           "title": "Événements du week-end en Valais : que faire samedi & dimanche",
           "url": "/fr/articles-valais/evenements-week-end-valais/",
           "excerpt": "Événements en Valais chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
@@ -435,12 +441,6 @@
           "url": "/fr/articles-valais/pylone-haute-tension-vetroz/",
           "excerpt": "Le pylône s'est effondré vers 4 heures dans la zone industrielle de Botza.",
           "date": "2026-10-17T00:38:07.569Z"
-        },
-        {
-          "title": "Valais : approbation du Plan d'action Eau 2035",
-          "url": "/fr/articles-valais/valais-plan-action-eau-2035/",
-          "excerpt": "Le Conseil d'État adopte le Plan d'action 2035 Mise en œuvre progressive à partir de 2027, selon les priorités et les ressources Les mesures passent de 39 à 25",
-          "date": "2026-10-09T16:44:17.957Z"
         }
       ],
       "links": [
@@ -469,7 +469,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T07:01:41.128Z"
     }
   }
 }
