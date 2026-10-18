@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T19:17:26.345Z",
-  "contentHash": "9e1322fcdbe3337e0c7ab3b1a414fcd37386db9a1f6cfdf2d295d24b5876e9c7",
+  "updatedAt": "2026-10-18T05:27:25.436Z",
+  "contentHash": "69af734ba79dcf893448de17a3e7336a5ad02247c802c09d5bd9620ec2cba017",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Nuova area nell'Appenzeller Hinterland: due responsabili",
+          "url": "/articoli-appenzello/raiba-nuova-area-previdenza/",
+          "excerpt": "La Raiffeisenbank Appenzeller Hinterland riunisce previdenza, successioni, analisi di copertura e assicurazioni.",
+          "date": "2026-10-18T05:22:07.781Z"
+        },
+        {
           "title": "Eventi del weekend in Appenzello: cosa fare sabato e domenica",
           "url": "/articoli-appenzello/eventi-weekend-appenzello/",
           "excerpt": "Eventi in Appenzello ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
@@ -94,12 +100,6 @@
           "url": "/articoli-appenzello/herisau-verkehr-appenzello/",
           "excerpt": "Durante la consultazione su «Verkehr '45», Appenzello Esterno chiede di rivedere la proposta e contesta l'orientamento della parte ferroviaria.",
           "date": "2026-10-10T06:33:48.256Z"
-        },
-        {
-          "title": "Heiden aumenta la tassa base sui rifiuti",
-          "url": "/articoli-appenzello/heiden-tassa-base-rifiuti/",
-          "excerpt": "A Heiden la tassa base sui rifiuti passa da 24 a 31,20 franchi l'anno per nucleo familiare e impresa.",
-          "date": "2026-10-08T18:18:38.682Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T05:27:25.436Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "New area in the Appenzeller Hinterland: two managers",
+          "url": "/en/appenzell-articles/raiba-new-pension-area/",
+          "excerpt": "Raiffeisenbank Appenzeller Hinterland brings together retirement planning, succession planning, coverage analysis and insurance.",
+          "date": "2026-10-18T05:22:07.781Z"
+        },
+        {
           "title": "Weekend events in Appenzell: what to do Saturday & Sunday",
           "url": "/en/appenzell-articles/weekend-events-appenzell/",
           "excerpt": "Events in Appenzell every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
@@ -193,12 +199,6 @@
           "url": "/en/appenzell-articles/herisau-transport-appenzell/",
           "excerpt": "During the consultation on «Verkehr '45», Appenzell Ausserrhoden calls for the proposal to be reviewed and challenges the direction of the railway component.",
           "date": "2026-10-10T06:33:48.256Z"
-        },
-        {
-          "title": "Heiden increases the basic waste fee",
-          "url": "/en/appenzell-articles/heiden-base-waste-fee/",
-          "excerpt": "In Heiden, the basic waste fee is increasing from 24 to 31,20 francs per year per household and business.",
-          "date": "2026-10-08T18:18:38.682Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T05:27:25.436Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Neuer Bereich im Appenzeller Hinterland: zwei Verantwortliche",
+          "url": "/de/appenzell-artikel/raiba-neuer-vorsorgebereich/",
+          "excerpt": "Die Raiffeisenbank Appenzeller Hinterland vereint Vorsorge, Nachfolge, Deckungsanalyse und Versicherungen.",
+          "date": "2026-10-18T05:22:07.781Z"
+        },
+        {
           "title": "Veranstaltungen am Wochenende im Appenzellerland: was tun Sa & So",
           "url": "/de/appenzell-artikel/wochenend-veranstaltungen-appenzell/",
           "excerpt": "Veranstaltungen im Appenzellerland an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
@@ -292,12 +298,6 @@
           "url": "/de/appenzell-artikel/herisau-verkehr-appenzell/",
           "excerpt": "Während der Vernehmlassung zu «Verkehr '45» fordert Appenzell Ausserrhoden, den Vorschlag zu überarbeiten, und stellt die Ausrichtung des Bahnteils infrage.",
           "date": "2026-10-10T06:33:48.256Z"
-        },
-        {
-          "title": "Heiden erhöht die Kehrichtgrundgebühr",
-          "url": "/de/appenzell-artikel/heiden-kehrichtgrundgebuehr/",
-          "excerpt": "In Heiden steigt die Kehrichtgrundgebühr von 24 auf 31,20 Franken pro Jahr für jeden Haushalt und jedes Unternehmen.",
-          "date": "2026-10-08T18:18:38.682Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T05:27:25.436Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Nouvelle unité dans l’Appenzeller Hinterland : deux responsables",
+          "url": "/fr/articles-appenzell/raiba-nouveau-domaine-prevoyance/",
+          "excerpt": "La Raiffeisenbank Appenzeller Hinterland réunit la prévoyance, les successions, l’analyse de couverture et les assurances.",
+          "date": "2026-10-18T05:22:07.781Z"
+        },
+        {
           "title": "Événements du week-end en Appenzell : que faire samedi & dimanche",
           "url": "/fr/articles-appenzell/evenements-week-end-appenzell/",
           "excerpt": "Événements en Appenzell chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-appenzell/herisau-transports-appenzell/",
           "excerpt": "Lors de la consultation sur «Verkehr '45», Appenzell Rhodes-Extérieures demande de revoir la proposition et conteste l'orientation de la partie ferroviaire.",
           "date": "2026-10-10T06:33:48.256Z"
-        },
-        {
-          "title": "Heiden augmente la taxe de base sur les déchets",
-          "url": "/fr/articles-appenzell/heiden-taxe-base-dechets/",
-          "excerpt": "À Heiden, la taxe de base sur les déchets passe de 24 à 31,20 francs par an pour chaque ménage et entreprise.",
-          "date": "2026-10-08T18:18:38.682Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T05:27:25.436Z"
     }
   }
 }
