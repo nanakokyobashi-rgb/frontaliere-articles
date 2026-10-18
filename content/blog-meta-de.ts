@@ -13470,6 +13470,12 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.indennita-giornaliere-stop-cosa-fare.title': 'Krankentaggeldleistungen eingestellt: 5 Schritte zum Schutz',
     'blog.article.indennita-giornaliere-stop-cosa-fare.excerpt': 'Ein Burnout führt bei Patrick zu einer vollständigen Abwesenheit von der Arbeit Die Police sieht eine Begrenzung auf 720 oder 730 Tage vor Die Versicherung stellt die Zahlungen nach wenigen',
     'blog.article.indennita-giornaliere-stop-cosa-fare.imageAlt': 'Grenzgänger prüft Krankenversicherungsunterlagen in Bellinzona Büro',
+    'blog.article.ps-tre-iniziative-thun.title': 'SP sagt Ja zu drei Initiativen: Bienen, Mobilität und Internet',
+    'blog.article.ps-tre-iniziative-thun.excerpt': 'Drei Initiativen haben in Thun das Ja der SP erhalten Der Mobilitätsgutschein betrifft den öffentlichen Verkehr und die Eisenbahnen Der Text fordert eine Steuer auf Flugtickets',
+    'blog.article.ps-tre-iniziative-thun.imageAlt': 'Sozialistenkongress in Thun: Initiativen zu Bienen, Mobilität und digitaler Sicherheit.',
+    'blog.article.cassano-indagine-schianto.title': 'Varese, bei einem Unfall gestorben: Ex wegen Femizids beschuldigt',
+    'blog.article.cassano-indagine-schianto.excerpt': 'Pierina Buffon starb bei dem Zusammenstoß auf der Umgehungsstraße Gegen Fulvio Ielmini wird auch wegen Femizids ermittelt Die Carabinieri vermuten einen herbeigeführten Zusammenstoß',
+    'blog.article.cassano-indagine-schianto.imageAlt': 'Strasse im Tessin im Morgenlicht, symbolisches Bild für eine lokale Nachricht',
 };
 
 export default blogMetaDe;

@@ -1,14 +1,4 @@
 {
-  "https://www.laregione.ch/cantone/ticino/1949361/cari-deputati-votate-il-pecc-e-anche-una-scelta-economica": {
-    "articleId": "voto-pecc-gran-consiglio-ticino",
-    "ts": "2026-09-12T02:18:53.034Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/lavoro-a-settembre-6-470-assunzioni-previste-nellalto-piemonte/2676130": {
-    "articleId": "assunzioni-alto-piemonte-settembre-2026",
-    "ts": "2026-09-12T04:26:11.242Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4076029": {
     "articleId": "imprese-culturali-svizzera-2024",
     "ts": "2026-09-12T04:52:17.141Z",
@@ -2497,6 +2487,16 @@
   "https://www.ocst.ch/il-lavoro/549-il-caso/2622-il-caso-cosa-e-importante-fare-quando-lassicurazione-malattia-interrompe-le-prestazioni": {
     "articleId": "indennita-giornaliere-stop-cosa-fare",
     "ts": "2026-10-18T11:49:39.063Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1957544/iniziativa-api-mobilita-internet-tre-congresso": {
+    "articleId": "ps-tre-iniziative-thun",
+    "ts": "2026-10-18T12:57:15.543Z",
+    "keyForm": 2
+  },
+  "https://www.varesenoi.it/2026/10/18/leggi-notizia/articolo/varese-morta-in-incidente-dauto-ex-accusato-di-femminicidio.html": {
+    "articleId": "cassano-indagine-schianto",
+    "ts": "2026-10-18T13:16:47.493Z",
     "keyForm": 2
   }
 }
