@@ -111139,6 +111139,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-varese-arconatese-18-ottobre': {
+    title: 'Il Varese affronta l\'Arconatese a Caronno Pertusella',
+    description: 'Domenica 18 ottobre il Varese gioca alle ore 15 Sfida al \'Comunale\' di Caronno Pertusella Il Varese arriva dal successo contro l\'Oltrepò Ciceri chiede conferme',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, affronta, arconatese, caronno',
+    ogTitle: 'Il Varese fa visita all\'Arconatese alla ricerca di conferme',
+    ogDescription: 'Domenica 18 ottobre il Varese gioca alle ore 15 Sfida al \'Comunale\' di Caronno Pertusella Il Varese arriva dal successo contro l\'Oltrepò Ciceri chiede conferme',
+    canonicalPath: '/articoli-frontaliere/varese-arconatese-18-ottobre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Il Varese affronta l'Arconatese a Caronno Pertusella",
+      "description": "Domenica 18 ottobre il Varese gioca alle ore 15 Sfida al 'Comunale' di Caronno Pertusella Il Varese arriva dal successo contro l'Oltrepò Ciceri chiede conferme",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-varese-arconatese-18-ottobre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stadio Comunale di Caronno Pertusella per la partita Arconatese Varese"
+      },
+      "datePublished": "2026-10-18T04:49:51+00:00",
+      "dateModified": "2026-10-18T04:49:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/varese-arconatese-18-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

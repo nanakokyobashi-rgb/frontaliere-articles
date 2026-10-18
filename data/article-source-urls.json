@@ -1,9 +1,4 @@
 {
-  "https://comozero.it/attualita/canton-ticino-esplosione-nella-centrale-idroelettrica-che-alimenta-la-linea-ferroviaria-del-san-gottardo": {
-    "articleId": "esplosione-centrale-ritom-san-gottardo",
-    "ts": "2026-09-10T00:26:41.015Z",
-    "keyForm": 2
-  },
   "https://comozero.it/attualita/unione-sindacale-svizzera-richiesta-aumento-stipendi-2027-salario-minimo": {
     "articleId": "uss-stipendi-minimo-2027",
     "ts": "2026-09-10T12:11:42.273Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/radar-in-canton-ticino-dal-19-al-25-ottobre-ecco-dove-saranno-i-controlli-della-velocita/2711350": {
     "articleId": "radar-velocita-ticino-ottobre",
     "ts": "2026-10-18T03:20:55.768Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/il-varese-fa-visita-allarconatese-alla-ricerca-di-conferme-e-di-continuita/2711119": {
+    "articleId": "varese-arconatese-18-ottobre",
+    "ts": "2026-10-18T04:49:52.458Z",
     "keyForm": 2
   }
 }

@@ -13429,6 +13429,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.franchigia-accordo-redditi-single.title': 'Crédit d\'impôt 2026 : calcul pour le frontalier célibataire',
     'blog.article.franchigia-accordo-redditi-single.excerpt': 'Accord signé le 23 décembre 2020 En vigueur depuis le 1er janvier 2024 Anciens frontaliers : exemption de 7\'500 € Nouveaux frontaliers : franchise de 10\'000 € Accord : 23',
     'blog.article.franchigia-accordo-redditi-single.imageAlt': 'Frontalier célibataire vérifie une fiche de salaire suisse et sa déclaration italienne à Mendrisio',
+    'blog.article.varese-arconatese-18-ottobre.title': 'Le Varese affronte l\'Arconatese à Caronno Pertusella',
+    'blog.article.varese-arconatese-18-ottobre.excerpt': 'Dimanche 18 octobre le Varese joue à 15 heures Match au \'Comunale\' de Caronno Pertusella Le Varese reste sur une victoire contre l\'Oltrepò Ciceri demande confirmation',
+    'blog.article.varese-arconatese-18-ottobre.imageAlt': 'Stade Comunale de Caronno Pertusella pour le match (Varese)',
 };
 
 export default blogMetaFr;

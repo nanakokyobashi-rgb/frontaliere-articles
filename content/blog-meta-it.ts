@@ -13428,6 +13428,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.franchigia-accordo-redditi-single.title': 'Credito d\'imposta 2026: calcolo per il frontaliere single',
     'blog.article.franchigia-accordo-redditi-single.excerpt': 'Accordo firmato il 23 dicembre 2020 In vigore dal 1° gennaio 2024 Vecchi frontalieri: esenzione di €7\'500 Nuovi frontalieri: franchigia di €10\'000 Accordo: 23',
     'blog.article.franchigia-accordo-redditi-single.imageAlt': 'Frontaliere single controlla busta paga svizzera e dichiarazione italiana a Mendrisio',
+    'blog.article.varese-arconatese-18-ottobre.title': 'Il Varese affronta l\'Arconatese a Caronno Pertusella',
+    'blog.article.varese-arconatese-18-ottobre.excerpt': 'Domenica 18 ottobre il Varese gioca alle ore 15 Sfida al \'Comunale\' di Caronno Pertusella Il Varese arriva dal successo contro l\'Oltrepò Ciceri chiede conferme',
+    'blog.article.varese-arconatese-18-ottobre.imageAlt': 'Stadio Comunale di Caronno Pertusella per la partita Arconatese Varese',
 };
 
 export default blogMetaIt;

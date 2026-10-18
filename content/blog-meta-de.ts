@@ -13426,6 +13426,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.franchigia-accordo-redditi-single.title': 'Steuergutschrift 2026: Berechnung für Single-Grenzgänger',
     'blog.article.franchigia-accordo-redditi-single.excerpt': 'Vereinbarung unterzeichnet am 23.',
     'blog.article.franchigia-accordo-redditi-single.imageAlt': 'Single-Grenzgänger prüft Schweizer Lohnabrechnung und italienische Steuererklärung in Mendrisio',
+    'blog.article.varese-arconatese-18-ottobre.title': 'Varese trifft in Caronno Pertusella auf Arconatese',
+    'blog.article.varese-arconatese-18-ottobre.excerpt': 'Am Sonntag, 18. (Varese)',
+    'blog.article.varese-arconatese-18-ottobre.imageAlt': 'Stadion Comunale in Caronno Pertusella für das Spiel (Varese)',
 };
 
 export default blogMetaDe;

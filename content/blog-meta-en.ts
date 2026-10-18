@@ -13427,6 +13427,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.franchigia-accordo-redditi-single.title': '2026 tax credit: calculation for the single cross-border commuter',
     'blog.article.franchigia-accordo-redditi-single.excerpt': 'Agreement signed on 23 December 2020 In force from 1 January 2024 Old frontier workers: exemption of €7,500 New frontier workers: excess of €10,000 Agreement: 23',
     'blog.article.franchigia-accordo-redditi-single.imageAlt': 'Single cross-border worker checks a Swiss payslip and Italian tax return in Mendrisio',
+    'blog.article.varese-arconatese-18-ottobre.title': 'Varese take on Arconatese in Caronno Pertusella',
+    'blog.article.varese-arconatese-18-ottobre.excerpt': 'Sunday, October 18 Varese plays at 15 Challenge at Caronno Pertusella\'s \'Comunale\' Varese comes off a victory against Oltrepò Ciceri seeks confirmation',
+    'blog.article.varese-arconatese-18-ottobre.imageAlt': 'Comunale stadium in Caronno Pertusella for the match (Varese)',
 };
 
 export default blogMetaEn;
