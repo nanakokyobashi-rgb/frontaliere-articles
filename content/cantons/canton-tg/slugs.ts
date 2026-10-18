@@ -16,6 +16,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'tredicesima-rendita-avs-2026': { it: 'tredicesima-rendita-avs-2026', en: 'thirteenth-ahv-pension-2026', de: 'dreizehnte-ahv-rente-2026', fr: 'treizieme-rente-avs-2026' },
  'eventi-weekend-turgovia': { it: 'eventi-weekend-turgovia', en: 'weekend-events-thurgau', de: 'wochenend-veranstaltungen-thurgau', fr: 'evenements-week-end-thurgovie' },
  'felben-wellhausen-cantiere': { it: 'felben-wellhausen-cantiere', en: 'felben-wellhausen-road-works', de: 'felben-wellhausen-hauptstrasse-sanierung', fr: 'felben-wellhausen-travaux-route' },
+ 'supporto-imprese-turgovia': { it: 'supporto-imprese-turgovia', en: 'thurgau-business-support', de: 'thurgau-unterstuetzung-firmen', fr: 'soutien-entreprises-thurgovie' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

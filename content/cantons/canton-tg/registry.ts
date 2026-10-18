@@ -149,4 +149,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'supporto-imprese-turgovia',
+ category: 'pratico',
+ date: '2026-10-18T11:06:15.235Z',
+ image: '/images/blog/article-servizi-imprese-turgovia-rav.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

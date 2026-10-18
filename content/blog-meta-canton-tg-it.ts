@@ -42,6 +42,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.felben-wellhausen-cantiere.title': 'Strada principale di Felben-Wellhausen: risanamento',
     'blog.article.felben-wellhausen-cantiere.excerpt': 'Dal 19 ottobre 2026 a metà luglio 2027, la Hauptstrasse di Felben-Wellhausen sarà risanata: Römerstrasse chiusa a tratti, Römerhof spostata o soppressa.',
     'blog.article.felben-wellhausen-cantiere.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.supporto-imprese-turgovia.title': 'Turgovia: supporto alle imprese che valutano l\'insediamento',
+    'blog.article.supporto-imprese-turgovia.excerpt': 'Il Canton Turgovia offre alle imprese informazioni, consulenza e sostegno per condizioni quadro, immobili, autorizzazioni e contatti con uffici e autorità.',
+    'blog.article.supporto-imprese-turgovia.imageAlt': 'Imprese e insediamento aziendale nel Canton Turgovia',
 };
 
 export default blogMetaCantonTgIt;

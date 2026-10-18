@@ -170,6 +170,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T11:05:16.549Z",
       "lastFailureAt": "2026-10-18T11:05:16.549Z"
+    },
+    {
+      "articleId": "supporto-imprese-turgovia",
+      "title": "Turgovia: supporto alle imprese che valutano l'insediamento",
+      "fallbackImage": "/images/blog/article-servizi-imprese-turgovia-rav.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T11:06:15.287Z",
+      "lastFailureAt": "2026-10-18T11:06:15.287Z"
     }
   ]
 }

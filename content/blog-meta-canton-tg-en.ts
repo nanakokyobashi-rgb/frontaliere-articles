@@ -42,6 +42,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.felben-wellhausen-cantiere.title': 'Felben-Wellhausen main road: renovation',
     'blog.article.felben-wellhausen-cantiere.excerpt': 'From October 19, 2026 to mid-July 2027, Felben-Wellhausen’s Hauptstrasse will be renovated: Römerstrasse closed in sections, Römerhof relocated or discontinued.',
     'blog.article.felben-wellhausen-cantiere.imageAlt': 'Illustration generated for this article',
+    'blog.article.supporto-imprese-turgovia.title': 'Thurgau: support for companies considering establishing themselves',
+    'blog.article.supporto-imprese-turgovia.excerpt': 'The Canton of Thurgau offers businesses information, advice and support regarding framework conditions, real estate, permits, and contacts with offices and authorities.',
+    'blog.article.supporto-imprese-turgovia.imageAlt': 'Businesses and company relocation in Canton Thurgau',
 };
 
 export default blogMetaCantonTgEn;

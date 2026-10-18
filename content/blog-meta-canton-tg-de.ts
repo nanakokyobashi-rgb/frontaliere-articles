@@ -42,6 +42,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.felben-wellhausen-cantiere.title': 'Hauptstrasse in Felben-Wellhausen: Sanierung',
     'blog.article.felben-wellhausen-cantiere.excerpt': 'Vom 19. Oktober 2026 bis Mitte Juli 2027 wird die Hauptstrasse in Felben-Wellhausen saniert: Die Römerstrasse wird abschnittsweise gesperrt, die Haltestelle Römerhof verlegt oder aufgehoben.',
     'blog.article.felben-wellhausen-cantiere.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.supporto-imprese-turgovia.title': 'Thurgau: Unterstützung für Unternehmen, die eine Ansiedlung prüfen',
+    'blog.article.supporto-imprese-turgovia.excerpt': 'Der Kanton Thurgau bietet Unternehmen Informationen, Beratung und Unterstützung zu Rahmenbedingungen, Immobilien, Bewilligungen und Kontakten zu Ämtern und Behörden.',
+    'blog.article.supporto-imprese-turgovia.imageAlt': 'Unternehmen und Firmenansiedlung im Kanton Thurgau',
 };
 
 export default blogMetaCantonTgDe;
