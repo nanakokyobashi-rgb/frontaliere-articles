@@ -44,3 +44,13 @@ test('a deterministic no-relevant-cover result skips its article; verifier outag
     retryable: true,
   }), false, 'il codice generico senza il marker deterministico non basta a riclassificare');
 });
+
+test('a cover-only rejection skips an evergreen candidate without striking its topic keyword', () => {
+  const strikeCondition = 'isQualityReject && e.imageQualityFailure !== true && selectedTopic';
+  assert.ok(SRC.includes(`} else if (${strikeCondition}) {`), 'il ramo strike evergreen deve escludere esplicitamente i rifiuti solo immagine');
+  const mayStrikeKeyword = new Function('isQualityReject', 'e', 'selectedTopic', `return ${strikeCondition};`);
+
+  assert.equal(mayStrikeKeyword(true, { imageQualityFailure: true }, true), false);
+  assert.equal(mayStrikeKeyword(true, { qualityReject: true }, true), true);
+  assert.equal(mayStrikeKeyword(false, { retryable: true }, true), false);
+});

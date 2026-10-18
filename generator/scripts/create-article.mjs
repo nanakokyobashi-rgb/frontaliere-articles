@@ -18446,7 +18446,7 @@ async function main() {
               selectedTopic.keyword,
               isTopicGateAbort ? 'topic-gate' : 'duplicate',
             );
-          } else if (isQualityReject && selectedTopic) {
+          } else if (isQualityReject && e.imageQualityFailure !== true && selectedTopic) {
             // A STRIKE, not a ban — the reasoning above is right that one bad
             // draft is variance, but "never record it" was the wrong conclusion:
             // it left no way to tell variance from a keyword that fails every
