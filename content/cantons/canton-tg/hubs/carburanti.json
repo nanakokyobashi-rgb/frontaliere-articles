@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-18T03:33:29.942Z",
-  "contentHash": "55eb009d31c8056e962341707b885e0eef93f35dd45b0d0bae802dcbdbaed84a",
+  "updatedAt": "2026-10-18T11:12:43.512Z",
+  "contentHash": "7e1d64742a34f5eb28e0a4fa339cdea1c2b2561a3b4313f6416b63639722278c",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Turgovia: supporto alle imprese che valutano l'insediamento",
+          "url": "/articoli-turgovia/supporto-imprese-turgovia/",
+          "excerpt": "Il Canton Turgovia offre alle imprese informazioni, consulenza e sostegno per condizioni quadro, immobili, autorizzazioni e contatti con uffici e autorità.",
+          "date": "2026-10-18T11:06:15.235Z"
+        },
+        {
           "title": "Strada principale di Felben-Wellhausen: risanamento",
           "url": "/articoli-turgovia/felben-wellhausen-cantiere/",
           "excerpt": "Dal 19 ottobre 2026 a metà luglio 2027, la Hauptstrasse di Felben-Wellhausen sarà risanata: Römerstrasse chiusa a tratti, Römerhof spostata o soppressa.",
@@ -94,12 +100,6 @@
           "url": "/articoli-turgovia/turgovia-sicurezza-lavoro-orari/",
           "excerpt": "Guida alla sicurezza sul lavoro, tutela della salute, orari e periodi di riposo nel Canton Turgovia secondo le normative e l'Ispettorato del lavoro.",
           "date": "2026-10-17T01:07:58.510Z"
-        },
-        {
-          "title": "Kreuzlingen: Bärenplatz chiuso per la fiera",
-          "url": "/articoli-turgovia/kreuzlingen-barenplatz-chilbi/",
-          "excerpt": "A Kreuzlingen i bus sono deviati dal 25 ottobre alle 09.00 del 27; la fermata Bärenplatz va alla stazione principale.",
-          "date": "2026-10-17T00:40:57.671Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-18T03:33:29.942Z"
+      "updatedAt": "2026-10-18T11:12:43.512Z"
     },
     "en": {
       "canton": "TG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau: support for companies considering establishing themselves",
+          "url": "/en/thurgau-articles/thurgau-business-support/",
+          "excerpt": "The Canton of Thurgau offers businesses information, advice and support regarding framework conditions, real estate, permits, and contacts with offices and authorities.",
+          "date": "2026-10-18T11:06:15.235Z"
+        },
+        {
           "title": "Felben-Wellhausen main road: renovation",
           "url": "/en/thurgau-articles/felben-wellhausen-road-works/",
           "excerpt": "From October 19, 2026 to mid-July 2027, Felben-Wellhausen’s Hauptstrasse will be renovated: Römerstrasse closed in sections, Römerhof relocated or discontinued.",
@@ -193,12 +199,6 @@
           "url": "/en/thurgau-articles/thurgovia-workplace-safety-hours/",
           "excerpt": "Guide to occupational safety, health protection, working hours and rest periods in the Canton of Thurgau in accordance with regulations and the Labour Inspectorate.",
           "date": "2026-10-17T01:07:58.510Z"
-        },
-        {
-          "title": "Kreuzlingen: Bärenplatz closed for the fair",
-          "url": "/en/thurgau-articles/kreuzlingen-barenplatz-fair/",
-          "excerpt": "In Kreuzlingen buses are diverted from 25 October at 09.00 on the 27th; the Bärenplatz stop goes to the main station.",
-          "date": "2026-10-17T00:40:57.671Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-18T03:33:29.942Z"
+      "updatedAt": "2026-10-18T11:12:43.512Z"
     },
     "de": {
       "canton": "TG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau: Unterstützung für Unternehmen, die eine Ansiedlung prüfen",
+          "url": "/de/thurgau-artikel/thurgau-unterstuetzung-firmen/",
+          "excerpt": "Der Kanton Thurgau bietet Unternehmen Informationen, Beratung und Unterstützung zu Rahmenbedingungen, Immobilien, Bewilligungen und Kontakten zu Ämtern und Behörden.",
+          "date": "2026-10-18T11:06:15.235Z"
+        },
+        {
           "title": "Hauptstrasse in Felben-Wellhausen: Sanierung",
           "url": "/de/thurgau-artikel/felben-wellhausen-hauptstrasse-sanierung/",
           "excerpt": "Vom 19. Oktober 2026 bis Mitte Juli 2027 wird die Hauptstrasse in Felben-Wellhausen saniert: Die Römerstrasse wird abschnittsweise gesperrt, die Haltestelle Römerhof verlegt oder aufgehoben.",
@@ -292,12 +298,6 @@
           "url": "/de/thurgau-artikel/turgau-arbeitssicherheit-arbeitszeiten/",
           "excerpt": "Leitfaden zu Arbeitssicherheit, Gesundheitsschutz, Arbeitszeiten und Ruhezeiten im Kanton Thurgau gemäss den Vorschriften und den Vorgaben des Arbeitsinspektorats.",
           "date": "2026-10-17T01:07:58.510Z"
-        },
-        {
-          "title": "Kreuzlingen: Bärenplatz wegen Messe geschlossen",
-          "url": "/de/thurgau-artikel/kreuzlingen-barenplatz-wegen-messe-geschlossen/",
-          "excerpt": "In Kreuzlingen werden die Busse vom 25.",
-          "date": "2026-10-17T00:40:57.671Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-18T03:33:29.942Z"
+      "updatedAt": "2026-10-18T11:12:43.512Z"
     },
     "fr": {
       "canton": "TG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgovie : soutien aux entreprises qui envisagent de s'implanter",
+          "url": "/fr/articles-thurgovie/soutien-entreprises-thurgovie/",
+          "excerpt": "Le canton de Thurgovie offre aux entreprises des informations, des conseils et un soutien concernant les conditions-cadres, les biens immobiliers, les autorisations et les contacts avec les services et les autorités.",
+          "date": "2026-10-18T11:06:15.235Z"
+        },
+        {
           "title": "Route principale de Felben-Wellhausen : assainissement",
           "url": "/fr/articles-thurgovie/felben-wellhausen-travaux-route/",
           "excerpt": "Du 19 octobre 2026 à la mi-juillet 2027, la Hauptstrasse de Felben-Wellhausen sera assainie : Römerstrasse fermée par tronçons, Römerhof déplacé ou supprimé.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-thurgovie/thurgovie-securite-travail-horaires/",
           "excerpt": "Guide de la sécurité au travail, de la protection de la santé, des horaires et des périodes de repos dans le canton de Thurgovie selon la réglementation et l'Inspection du travail.",
           "date": "2026-10-17T01:07:58.510Z"
-        },
-        {
-          "title": "Kreuzlingen : Bärenplatz fermé pour le salon",
-          "url": "/fr/articles-thurgovie/kreuzlingen-barenplatz-fete/",
-          "excerpt": "À Kreuzlingen, les bus sont déviés du 25 octobre à 09h00 le 27 ; l'arrêt Bärenplatz va à la gare principale.",
-          "date": "2026-10-17T00:40:57.671Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-18T03:33:29.942Z"
+      "updatedAt": "2026-10-18T11:12:43.512Z"
     }
   }
 }
