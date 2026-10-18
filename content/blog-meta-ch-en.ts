@@ -8468,6 +8468,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.scorte-cherosene-zurigo.title': 'Zurich Airport: withdrawals from kerosene reserves',
     'blog.article.scorte-cherosene-zurigo.excerpt': '30\'000 m³ of reserves can be used Authorized withdrawals from October 15 to November 1 The authorized quota is 6,5% of the available amount The supply',
     'blog.article.scorte-cherosene-zurigo.imageAlt': 'Zurich Airport with aviation kerosene delivered by rail',
+    'blog.article.svizzera-attualita-istituzioni-2026.title': 'Switzerland, instructions for use: politics, institutions and the environment',
+    'blog.article.svizzera-attualita-istituzioni-2026.excerpt': 'UDC almost at 30% one year before the federal elections On November 29, a vote will be held on the law on war materiel Adula and Grauhorn are no longer united Solar Express',
+    'blog.article.svizzera-attualita-istituzioni-2026.imageAlt': 'Federal Palace in Bern representing Swiss political landscape',
 };
 
 export default blogMetaChEn;

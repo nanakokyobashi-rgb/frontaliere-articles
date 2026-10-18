@@ -8468,6 +8468,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.scorte-cherosene-zurigo.title': 'Aeroporto di Zurigo: prelievi dalle scorte di cherosene',
     'blog.article.scorte-cherosene-zurigo.excerpt': '30\'000 m³ di scorte possono essere utilizzati Prelievi autorizzati dal 15 ottobre al 1° novembre La quota autorizzata è il 6,5% del disponibile La fornitura',
     'blog.article.scorte-cherosene-zurigo.imageAlt': 'Aeroporto di Zurigo con rifornimento di cherosene trasportato via ferrovia',
+    'blog.article.svizzera-attualita-istituzioni-2026.title': 'Svizzera, istruzioni per l\'uso: politica, istituzioni e ambiente',
+    'blog.article.svizzera-attualita-istituzioni-2026.excerpt': 'UDC quasi al 30% a un anno dalle elezioni federali Il 29 novembre si vota sulla legge sul materiale bellico Adula e Grauhorn non sono più uniti Solar Express',
+    'blog.article.svizzera-attualita-istituzioni-2026.imageAlt': 'Palazzo federale a Berna con rappresentanza della politica svizzera',
 };
 
 export default blogMetaChIt;

@@ -8468,6 +8468,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.scorte-cherosene-zurigo.title': 'Aéroport de Zurich : prélèvements sur les réserves de kérosène',
     'blog.article.scorte-cherosene-zurigo.excerpt': '30\'000 m³ de réserves peuvent être utilisées Prélèvements autorisés du 15 octobre au 1er novembre La part autorisée est de 6,5% du disponible L\'approvisionnement',
     'blog.article.scorte-cherosene-zurigo.imageAlt': 'Aéroport de Zurich approvisionné en kérosène par le rail',
+    'blog.article.svizzera-attualita-istituzioni-2026.title': 'Suisse, mode d\'emploi : politique, institutions et environnement',
+    'blog.article.svizzera-attualita-istituzioni-2026.excerpt': 'UDC à près de 30% à un an des élections fédérales Le 29 novembre on vote sur la loi sur le matériel de guerre L\'Adula et le Grauhorn ne sont plus reliés Solar Express peine à s\'imposer en montagne',
+    'blog.article.svizzera-attualita-istituzioni-2026.imageAlt': 'Palais fédéral à Berne représentant le paysage politique suisse',
 };
 
 export default blogMetaChFr;

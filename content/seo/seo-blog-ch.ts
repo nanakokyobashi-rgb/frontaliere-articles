@@ -106969,6 +106969,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-svizzera-attualita-istituzioni-2026': {
+    title: 'Svizzera, istruzioni per l\'uso: politica, istituzioni e ambiente',
+    description: 'UDC quasi al 30% a un anno dalle elezioni federali Il 29 novembre si vota sulla legge sul materiale bellico Adula e Grauhorn non sono più uniti Solar Express',
+    keywords: 'frontalieri, ticino, svizzera, italia, istruzioni, politica, istituzioni, ambiente',
+    ogTitle: 'Svizzera, istruzioni per l\'uso: politica, armi e ghiacciai',
+    ogDescription: 'UDC quasi al 30% a un anno dalle elezioni federali Il 29 novembre si vota sulla legge sul materiale bellico Adula e Grauhorn non sono più uniti Solar Express',
+    canonicalPath: '/articoli-svizzera/svizzera-attualita-istituzioni-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Svizzera, istruzioni per l'uso: politica, istituzioni e ambiente",
+      "description": "UDC quasi al 30% a un anno dalle elezioni federali Il 29 novembre si vota sulla legge sul materiale bellico Adula e Grauhorn non sono più uniti Solar Express",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-svizzera-attualita-istituzioni-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna con rappresentanza della politica svizzera"
+      },
+      "datePublished": "2026-10-18T01:29:15+00:00",
+      "dateModified": "2026-10-18T01:29:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/svizzera-attualita-istituzioni-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

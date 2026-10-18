@@ -8468,6 +8468,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.scorte-cherosene-zurigo.title': 'Flughafen Zürich: Entnahmen aus den Kerosinreserven',
     'blog.article.scorte-cherosene-zurigo.excerpt': '30\'000 m³ der Reserven können genutzt werden Entnahmen vom 15.',
     'blog.article.scorte-cherosene-zurigo.imageAlt': 'Flughafen Zürich mit Kerosinlieferung per Bahn',
+    'blog.article.svizzera-attualita-istituzioni-2026.title': 'Schweiz, Gebrauchsanweisung: Politik, Institutionen und Umwelt',
+    'blog.article.svizzera-attualita-istituzioni-2026.excerpt': 'SVP fast bei 30% ein Jahr vor den eidgenössischen Wahlen Am 29.',
+    'blog.article.svizzera-attualita-istituzioni-2026.imageAlt': 'Bundeshaus in Bern als Zentrum der Schweizer Politik',
 };
 
 export default blogMetaChDe;

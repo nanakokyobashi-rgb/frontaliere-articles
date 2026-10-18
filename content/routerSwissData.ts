@@ -2845,6 +2845,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'microdrama-pubblicita-tiktok-instagram': { it: 'microdrama-pubblicita-tiktok-instagram', en: 'microdrama-advertising-tiktok-instagram', de: 'microdrama-werbung-tiktok-instagram', fr: 'microdrama-publicite-tiktok-instagram' },
  'udc-assemblea-bulle-2026': { it: 'udc-assemblea-bulle-2026', en: 'udc-assembly-bulle-2026', de: 'udc-versammlung-bulle-2026', fr: 'udc-assemblee-bulle-2026' },
  'scorte-cherosene-zurigo': { it: 'scorte-cherosene-zurigo', en: 'zurich-kerosene-reserves', de: 'zuerich-kerosin-reserven', fr: 'reserves-kerosene-zurich' },
+ 'svizzera-attualita-istituzioni-2026': { it: 'svizzera-attualita-istituzioni-2026', en: 'switzerland-current-affairs-institutions-2026', de: 'schweiz-aktuelles-institutionen-2026', fr: 'suisse-actualite-institutions-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
