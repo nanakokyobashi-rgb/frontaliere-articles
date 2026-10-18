@@ -2011,6 +2011,7 @@ export async function main(
     latestApiInputCommitImpl = latestApiInputCommit,
     sourceRegistryIdsImpl = sourceRegistryIds,
     currentMainHeadImpl = publishedMainHead,
+    publisherCommitImpl = () => execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
     fetchImpl = fetch,
   } = {},
 ) {
@@ -2021,9 +2022,7 @@ export async function main(
   fs.mkdirSync(distDir, { recursive: true });
   const ids = args.bootstrap ? sourceRegistryIdsImpl(ROOT_DIR, section) : args.ids;
   const publishing = args.publish && !args.dryRun;
-  const publisherCommit = publishing
-    ? execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()
-    : null;
+  const publisherCommit = publishing ? publisherCommitImpl() : null;
   const expectedMainHead = process.env.EXPECTED_MAIN_HEAD || publisherCommit;
   const assertMainFreshImpl = async () => {
     if (!publishing) return;

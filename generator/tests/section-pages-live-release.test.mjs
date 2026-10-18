@@ -51,6 +51,7 @@ test('publisher: una release live con manifest precedente deferisce RSS al repla
         publishedApiReleaseCommitImpl: async () => head,
         latestApiInputCommitImpl: async () => head,
         publishedReleaseReadyImpl: async () => ({ ok: false, reason: 'edge in transizione' }),
+        publisherCommitImpl: () => head,
         currentMainHeadImpl: () => head,
         createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
         renderSectionArticlePipelineImpl: async () => ({
@@ -59,7 +60,7 @@ test('publisher: una release live con manifest precedente deferisce RSS al repla
           downloadedImageKeys: [],
           imageFetchFailures: [],
           imagePostcondition: {},
-          aggregatePagesAllowed: true,
+          aggregatePagesAllowed: false,
         }),
         articleReleaseSnapshotImpl: () => [],
         publishImpl: async (options) => {
