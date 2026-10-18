@@ -1303,6 +1303,30 @@ export function imageVisionRejected(verdict, { kind = GENERATED_IMAGE_KIND, scop
   return verdict.contains_text !== false || verdict.contains_logo !== false || verdict.contains_recognizable_face !== false || verdict.looks_like_specific_real_event !== false;
 }
 
+const VISION_FAILURE_FLAG_NAMES = Object.freeze([
+  'contains_text',
+  'contains_logo',
+  'contains_recognizable_face',
+  'contains_recognizable_foreground_person',
+  'looks_like_specific_real_event',
+  'is_photograph',
+  'is_topic_relevant',
+]);
+
+function structuredVisionFailure(verdict) {
+  return Object.fromEntries(VISION_FAILURE_FLAG_NAMES
+    .filter((name) => typeof verdict?.[name] === 'boolean')
+    .map((name) => [name, verdict[name]]));
+}
+
+/** Build the typed rejection consumed by the provider failure ledger. */
+export function imageVisionRejectionError(verdict) {
+  const error = new Error(`vision gate rejected image: ${String(verdict?.notes || 'forbidden content')}`);
+  error.code = 'IMAGE_VISION_REJECTED';
+  error.vision = structuredVisionFailure(verdict);
+  return error;
+}
+
 export async function verifyGeneratedImage(filePath, {
   deadlineAt,
   kind = GENERATED_IMAGE_KIND,
@@ -1360,7 +1384,7 @@ export async function verifyGeneratedImage(filePath, {
   assertBeforeDeadline(deadlineAt, 'image vision result');
   const rejected = imageVisionRejected(verdict, { kind, scope });
   if (rejected) {
-    throw new Error(`vision gate rejected image: ${String(verdict.notes || 'forbidden content')}`);
+    throw imageVisionRejectionError(verdict);
   }
   return verdict;
 }
@@ -1404,10 +1428,12 @@ export async function generateImageFromSpec(spec, {
     : sequence.length;
   let lastError;
   const failures = [];
+  const attemptedProviders = [];
   const rejectedPhotoSources = new Set();
   for (let attempt = 0; attempt < attemptLimit; attempt++) {
     assertBeforeDeadline(deadlineAt, 'image generation');
     const selectedProvider = sequence[attempt];
+    attemptedProviders.push(selectedProvider);
     const availability = providerConfiguration(selectedProvider);
     if (!availability.configured) {
       onProviderAttempt?.({ provider: selectedProvider, attempt: attempt + 1, assetId: finalAssetId, status: 'skipped', reason: availability.reason });
@@ -1575,7 +1601,13 @@ export async function generateImageFromSpec(spec, {
       return { filePath: finalPath, record, prompt };
       } catch (error) {
         lastError = error;
-        failures.push({ provider: selectedProvider, reason: summarizeProviderErrorBody(error?.message || error) });
+        failures.push({
+          provider: selectedProvider,
+          reason: summarizeProviderErrorBody(error?.message || error),
+          ...(error?.code === 'IMAGE_VISION_REJECTED' && error?.vision && typeof error.vision === 'object'
+            ? { vision: structuredVisionFailure(error.vision) }
+            : {}),
+        });
         fs.rmSync(rawPath, { force: true });
         fs.rmSync(finalPath, { force: true });
         if (deadlineExpired(deadlineAt)) break;
@@ -1590,6 +1622,12 @@ export async function generateImageFromSpec(spec, {
   }
   const error = new Error(`All image providers failed for ${finalAssetId}: ${failures.map((item) => `${item.provider} (${item.reason})`).join('; ') || lastError?.message || 'unknown error'}`);
   error.failures = failures;
+  error.imageProviderLedger = {
+    schema: 1,
+    complete: attemptedProviders.length === sequence.length,
+    expectedProviders: [...sequence],
+    attemptedProviders: [...attemptedProviders],
+  };
   throw error;
 }
 

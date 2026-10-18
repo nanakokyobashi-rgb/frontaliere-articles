@@ -27,6 +27,7 @@ import {
   GENERATED_IMAGE_RESTRICTIONS,
   LICENSED_PHOTO_RESTRICTIONS,
 } from '../../engine/shared/generatedImageRegistry.mjs';
+import { imageVisionRejectionError } from '../../engine/shared/generatedImageEngine.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -162,7 +163,12 @@ test('un rifiuto vision interamente non adattabile resta nel ledger come termina
       { provider: 'openai-codex', reason: 'vision gate rejected image: recognizable foreground person' },
       { provider: 'gemini', reason: 'vision gate rejected image: recognizable human face' },
     ];
-    failure.imageProviderChain = ['openai-codex', 'gemini'];
+    failure.imageProviderLedger = {
+      schema: 1,
+      complete: true,
+      expectedProviders: ['openai-codex', 'gemini'],
+      attemptedProviders: ['openai-codex', 'gemini'],
+    };
     data._imageGenerationFailureDisposition = classifyImageRegenerationFailure(failure);
     resolveArticleCoverFallback(data, {
       root,
@@ -204,14 +210,24 @@ test('un errore transient o un rifiuto testuale adattabile resta retryable', () 
 
 test('solo un ledger completo e riconosciuto prova la terminalità vision', () => {
   const partial = new Error('image generation deadline exceeded');
-  partial.imageProviderChain = ['openai-codex', 'gemini'];
+  partial.imageProviderLedger = {
+    schema: 1,
+    complete: false,
+    expectedProviders: ['openai-codex', 'gemini'],
+    attemptedProviders: ['openai-codex'],
+  };
   partial.failures = [
     { provider: 'openai-codex', reason: 'vision gate rejected image: recognizable foreground person' },
   ];
   assert.equal(classifyImageRegenerationFailure(partial).retryable, true, 'deadline: catena incompleta');
 
   const malformed = new Error('All image providers failed');
-  malformed.imageProviderChain = ['openai-codex', 'gemini'];
+  malformed.imageProviderLedger = {
+    schema: 1,
+    complete: true,
+    expectedProviders: ['openai-codex', 'gemini'],
+    attemptedProviders: ['openai-codex', 'gemini'],
+  };
   malformed.failures = [
     { provider: 'openai-codex', reason: 'vision gate rejected image: recognizable foreground person' },
     { provider: 'gemini', reason: '' },
@@ -219,16 +235,102 @@ test('solo un ledger completo e riconosciuto prova la terminalità vision', () =
   assert.equal(classifyImageRegenerationFailure(malformed).retryable, true, 'reason vuoto: fail-closed');
 
   const flagsWithoutNotes = new Error('All image providers failed');
-  flagsWithoutNotes.imageProviderChain = ['openai-codex', 'gemini'];
+  flagsWithoutNotes.imageProviderLedger = {
+    schema: 1,
+    complete: true,
+    expectedProviders: ['openai-codex', 'gemini'],
+    attemptedProviders: ['openai-codex', 'gemini'],
+  };
   flagsWithoutNotes.failures = [
     { provider: 'openai-codex', reason: 'vision gate rejected image: generic synthetic illustration', vision: { contains_text: true } },
     { provider: 'gemini', reason: 'vision gate rejected image: generic synthetic illustration', vision: { contains_logo: true } },
   ];
-  assert.equal(
-    classifyImageRegenerationFailure(flagsWithoutNotes).retryable,
-    true,
-    'un cue non riconosciuto resta adattabile/retryable quando i flag non sono nel messaggio',
-  );
+  assert.deepEqual(classifyImageRegenerationFailure(flagsWithoutNotes), {
+    retryable: true,
+    reason: 'transient-or-adaptable',
+    retryHint: 'no-text',
+  });
+
+  const legacy = new Error('All image providers failed');
+  legacy.imageProviderChain = ['openai-codex'];
+  legacy.failures = [
+    { provider: 'openai-codex', reason: 'vision gate rejected image: recognizable face' },
+  ];
+  assert.equal(classifyImageRegenerationFailure(legacy).retryable, true, 'lo schema legacy non prova il completamento');
+});
+
+test('i flag vision strutturati governano adattamento e terminalità senza dipendere dalle note', () => {
+  const ledger = {
+    schema: 1,
+    complete: true,
+    expectedProviders: ['openai-codex'],
+    attemptedProviders: ['openai-codex'],
+  };
+  const cases = [
+    [{ contains_text: true, contains_logo: false, contains_recognizable_face: true }, true],
+    [{ contains_text: false, contains_logo: true, contains_recognizable_face: true }, true],
+    [{ contains_text: true, contains_logo: true, contains_recognizable_face: false }, true],
+    [{ contains_text: false, contains_logo: false, contains_recognizable_face: true }, false],
+  ];
+
+  for (const [vision, retryable] of cases) {
+    const rejection = imageVisionRejectionError({ ...vision, notes: 'generic synthetic illustration' });
+    const error = new Error('All image providers failed');
+    error.imageProviderLedger = ledger;
+    error.failures = [{ provider: 'openai-codex', reason: rejection.message, vision: rejection.vision }];
+    const disposition = classifyImageRegenerationFailure(error);
+    assert.equal(disposition.retryable, retryable, JSON.stringify(vision));
+    assert.equal(disposition.retryHint, retryable ? 'no-text' : undefined, JSON.stringify(vision));
+  }
+
+  const malformedFlag = new Error('All image providers failed');
+  malformedFlag.imageProviderLedger = ledger;
+  malformedFlag.failures = [{
+    provider: 'openai-codex',
+    reason: 'vision gate rejected image: recognizable face',
+    vision: { contains_text: 'false', contains_recognizable_face: true },
+  }];
+  assert.equal(classifyImageRegenerationFailure(malformedFlag).retryable, true, 'flag malformato: fail-closed');
+
+  const legacyFailure = new Error('All image providers failed');
+  legacyFailure.imageProviderLedger = ledger;
+  legacyFailure.failures = [{ provider: 'openai-codex', reason: 'vision gate rejected image: recognizable face' }];
+  assert.equal(classifyImageRegenerationFailure(legacyFailure).retryable, false, 'record failure legacy riconosciuto');
+});
+
+test('un flag strutturato text/logo persiste il retry hint anche con note generiche', () => {
+  const root = tempRoot();
+  try {
+    const failure = new Error('All image providers failed');
+    failure.imageProviderLedger = {
+      schema: 1,
+      complete: true,
+      expectedProviders: ['openai-codex'],
+      attemptedProviders: ['openai-codex'],
+    };
+    failure.failures = [{
+      provider: 'openai-codex',
+      reason: 'vision gate rejected image: generic synthetic illustration',
+      vision: { contains_text: true, contains_logo: false },
+    }];
+    const data = article('structured-text-retry-hint');
+    data._imageGenerationFailureDisposition = classifyImageRegenerationFailure(failure);
+    resolveArticleCoverFallback(data, {
+      root,
+      findCatalogImage: () => null,
+      reason: failure.message,
+    });
+    queueArticleCoverRegeneration(root, data);
+
+    const queued = JSON.parse(
+      fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'),
+    ).items[0];
+    assert.equal(queued.status, 'queued');
+    assert.equal(queued.retryHint, 'no-text');
+    assert.doesNotMatch(queued.reason, /text|logo/i);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('a licensed article hero writes the shared attribution ledger and resolves as licensed-photo', () => {

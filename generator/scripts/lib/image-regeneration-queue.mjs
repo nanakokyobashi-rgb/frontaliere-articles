@@ -43,36 +43,84 @@ export function isVisualTextFailure(reason) {
     && /(?:text|letter(?:ing)?|sign(?:age)?|watermark|signature|writing|logo|emblem|mark(?:ing)?s?|word|number|caption|label|banner|inscription|poster|typograph|brand|trademark|contains[_ ]text\s*[:=]\s*true|cartell|segnaletica|scritte?|parol[ae]|numer[io]|beschriftung|schrift|texte?|forbidden content)/i.test(normalized);
 }
 
-function isClearlyTerminalVisionFailure(reason) {
-  const normalized = String(reason || '');
+const VISION_BOOLEAN_FIELDS = Object.freeze([
+  'contains_text',
+  'contains_logo',
+  'contains_recognizable_face',
+  'contains_recognizable_foreground_person',
+  'looks_like_specific_real_event',
+  'is_photograph',
+  'is_topic_relevant',
+]);
+
+function visionFlagsAreMalformed(failure) {
+  if (!Object.hasOwn(failure || {}, 'vision')) return false;
+  if (!failure.vision || typeof failure.vision !== 'object' || Array.isArray(failure.vision)) return true;
+  return VISION_BOOLEAN_FIELDS.some((field) => (
+    Object.hasOwn(failure.vision, field) && typeof failure.vision[field] !== 'boolean'
+  ));
+}
+
+function isStructuredVisualTextFailure(failure) {
+  return failure?.vision?.contains_text === true || failure?.vision?.contains_logo === true;
+}
+
+function isClearlyTerminalVisionFailure(failure) {
+  if (failure?.vision?.contains_recognizable_face === true
+    || failure?.vision?.contains_recognizable_foreground_person === true
+    || failure?.vision?.looks_like_specific_real_event === true) return true;
+  const normalized = String(failure?.reason || '');
   return /(?:recognizable|identifiable)\s+(?:(?:foreground|human)\s+)*(?:face|person|people|figure|individual)|contains_recognizable_(?:face|foreground_person)\s*[:=]\s*true|(?:specific real event|looks_like_specific_real_event\s*[:=]\s*true)/i.test(normalized);
 }
 
 export function classifyImageRegenerationFailure(error) {
-  const expectedProviders = Array.isArray(error?.imageProviderChain)
-    ? error.imageProviderChain.map((provider) => String(provider || '').trim()).filter(Boolean)
+  const ledger = error?.imageProviderLedger;
+  const expectedProviders = Array.isArray(ledger?.expectedProviders)
+    ? ledger.expectedProviders.map((provider) => String(provider || '').trim())
+    : [];
+  const attemptedProviders = Array.isArray(ledger?.attemptedProviders)
+    ? ledger.attemptedProviders.map((provider) => String(provider || '').trim())
     : [];
   const rawFailures = Array.isArray(error?.failures) ? error.failures : [];
   const structuredFailures = rawFailures.map((failure) => ({
     provider: String(failure?.provider || '').trim(),
     reason: String(failure?.reason || '').trim(),
+    ...(Object.hasOwn(failure || {}, 'vision') ? { vision: failure.vision } : {}),
   }));
-  // Terminality requires proof that the adapter's entire requested chain was
-  // exhausted. Missing/malformed entries and deadline-truncated prefixes stay
-  // retryable. An unrecognized vision note also stays retryable because the
-  // engine's structured text/logo flags are not part of its public error.
-  const completeLedger = expectedProviders.length > 0
-    && rawFailures.length === expectedProviders.length
-    && structuredFailures.every(({ provider, reason }, index) => (
-      provider === expectedProviders[index] && reason.length > 0
+  const expectedProviderSet = new Set(expectedProviders);
+  const failureProviderIndexes = structuredFailures
+    .map(({ provider }) => expectedProviders.indexOf(provider));
+  // Terminality requires the engine's explicit proof that its entire chain was
+  // exhausted. Legacy ledgers, malformed entries and deadline-truncated
+  // prefixes remain retryable even when their surviving notes look terminal.
+  const completeLedger = ledger?.schema === 1
+    && ledger?.complete === true
+    && expectedProviders.length > 0
+    && expectedProviderSet.size === expectedProviders.length
+    && expectedProviders.every(Boolean)
+    && attemptedProviders.length === expectedProviders.length
+    && attemptedProviders.every((provider, index) => provider === expectedProviders[index])
+    && structuredFailures.length >= expectedProviders.length
+    && structuredFailures.every(({ provider, reason }) => expectedProviderSet.has(provider) && reason.length > 0)
+    && expectedProviders.every((provider) => structuredFailures.some((failure) => failure.provider === provider))
+    && failureProviderIndexes.every((providerIndex, index) => (
+      providerIndex >= 0 && (index === 0 || providerIndex >= failureProviderIndexes[index - 1])
     ));
+  const adaptable = structuredFailures.some((failure) => (
+    isStructuredVisualTextFailure(failure) || isVisualTextFailure(failure.reason)
+  ));
   const terminal = completeLedger
     && structuredFailures.every(({ reason }) => /^vision gate rejected image:/i.test(reason))
-    && structuredFailures.every(({ reason }) => isClearlyTerminalVisionFailure(reason))
-    && !structuredFailures.some(({ reason }) => isVisualTextFailure(reason));
+    && !structuredFailures.some(visionFlagsAreMalformed)
+    && structuredFailures.every(isClearlyTerminalVisionFailure)
+    && !adaptable;
   return terminal
     ? { retryable: false, reason: IMAGE_REGENERATION_TERMINAL_VISION_REASON }
-    : { retryable: true, reason: 'transient-or-adaptable' };
+    : {
+        retryable: true,
+        reason: 'transient-or-adaptable',
+        ...(adaptable ? { retryHint: 'no-text' } : {}),
+      };
 }
 
 /**
@@ -170,6 +218,7 @@ function queueItemFromRequest({
   status,
   terminalAt,
   terminalReason,
+  retryHint,
   requestedAt = new Date().toISOString(),
 } = {}) {
   if (!articleId) return null;
@@ -190,7 +239,7 @@ function queueItemFromRequest({
     ...(terminal ? {
       terminalAt: String(terminalAt || requestedAt),
       terminalReason: String(terminalReason || IMAGE_REGENERATION_TERMINAL_VISION_REASON),
-    } : {}),
+    } : retryHint === 'no-text' ? { retryHint: 'no-text' } : {}),
   };
 }
 
@@ -226,6 +275,7 @@ function mergeQueueItem(queue, request) {
       delete existing.terminalAt;
       delete existing.terminalReason;
     }
+    if (item.retryHint !== 'no-text') delete existing.retryHint;
   } else {
     queue.items.push(item);
   }

@@ -131,6 +131,7 @@ export function resolveArticleCoverFallback(data, {
       reason: engineReason,
       retryDisposition: failureDisposition.retryable === false ? 'terminal' : 'retryable',
       ...(failureDisposition.retryable === false ? { terminalReason: failureDisposition.reason } : {}),
+      ...(failureDisposition.retryHint === 'no-text' ? { retryHint: 'no-text' } : {}),
     },
     configurable: true,
     writable: true,

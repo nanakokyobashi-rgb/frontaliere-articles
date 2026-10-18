@@ -916,7 +916,12 @@ test('un fallimento strutturato solo vision diventa terminale, il transient risp
       { provider: 'openai-codex', reason: 'vision gate rejected image: recognizable foreground person' },
       { provider: 'gemini', reason: 'vision gate rejected image: recognizable human face' },
     ];
-    terminalFailure.imageProviderChain = ['openai-codex', 'gemini'];
+    terminalFailure.imageProviderLedger = {
+      schema: 1,
+      complete: true,
+      expectedProviders: ['openai-codex', 'gemini'],
+      attemptedProviders: ['openai-codex', 'gemini'],
+    };
     let transientCalls = 0;
     const first = await drain({
       root,

@@ -306,7 +306,9 @@ async function defaultGenerateCover(item, context) {
     articleId: item.articleId,
     title: item.title,
     area: context.area,
-    safetyHint: isVisualTextFailure(item.reason) ? NO_TEXT_IMAGE_RETRY_HINT : '',
+    safetyHint: item.retryHint === 'no-text' || isVisualTextFailure(item.reason)
+      ? NO_TEXT_IMAGE_RETRY_HINT
+      : '',
     deadlineAt: Date.now() + IMAGE_BUDGET_MS,
     onProviderAttempt: ({ provider, attempt }) => {
       console.error(`  🎨 Copertina ${item.articleId}: ${provider}, tentativo ${attempt}`);
@@ -613,6 +615,8 @@ export async function drainQueuedCovers({
         : retryAfterHours !== null || failureCount >= 3 ? 'failed' : 'queued';
       item.lastFailureAt = typeof now === 'function' ? now() : String(now);
       item.reason = normalizeReason(error);
+      if (disposition.retryHint === 'no-text') item.retryHint = 'no-text';
+      else delete item.retryHint;
       if (disposition.retryable === false) {
         item.terminalAt = item.lastFailureAt;
         item.terminalReason = disposition.reason;
