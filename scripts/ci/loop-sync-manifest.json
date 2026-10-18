@@ -461,10 +461,10 @@
       "mode": "adapted",
       "reason": "Parser condiviso del fallback con riconoscimento corpus dei log testuali Claude/Anthropic e dei messaggi di quota legacy; il sito usa il parser degli eventi strutturati.",
       "baseline": {
-        "site": "d6c27c773c46b556",
-        "corpus": "1f419e03b6446a4c",
-        "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T21:28:52.268Z"
+        "site": "6205a9014cc8c107",
+        "corpus": "75216ffef6b35c3b",
+        "alignedAt": "2026-10-18",
+        "forcedAt": "2026-10-18T18:20:48.506Z"
       }
     },
     {
@@ -511,10 +511,10 @@
       "mode": "adapted",
       "reason": "Regressione del falso 429 osservato nella run corpus 33338838671: status=allowed con overageStatus=rejected deve restare un successo. Il sito usa Vitest e conserva la suite completa del parser; qui il gemello Node test pinna il caso di produzione e il controllo positivo status=rejected senza introdurre Vitest nel repo pubblicatore.",
       "baseline": {
-        "site": "2751cb3f3f6e92b4",
-        "corpus": "aab43957a2ca3fa0",
-        "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T02:04:36.000Z"
+        "site": "827448a5b2678032",
+        "corpus": "30108af7a685a411",
+        "alignedAt": "2026-10-18",
+        "forcedAt": "2026-10-18T18:20:48.559Z"
       }
     },
     {
@@ -644,10 +644,10 @@
       "mode": "adapted",
       "reason": "Il corpus espone il contratto aggregate canonical ai consumer locali e conserva la propria risoluzione di locator sul percorso di pubblicazione; per questo la copia non è byte-identica al matcher sorgente del sito. La baseline registra separatamente i due blob e il trasporto successivo deve preservare l'adattamento, non sovrascriverlo con un mirror cieco. MOVIMENTO CORPUS 2026-09-20: `stripFencedBlocks` e' stata ESPORTATA perche' `scripts/ci/lib/review-findings.mjs` (sceso dal sito con #9318) la riusa invece di riscriverla; `commandReferent()` ora accetta anche file senza estensione e directory, cioe' il contratto adattato del follow-up #8067. MOVIMENTO CORPUS 2026-10-12: portata dalla PR sito #12658 la normalizzazione del solo span Markdown inline-code completo nei campi `Target repository`, mantenendo la risoluzione di locator e gli altri contratti adattati del corpus.",
       "baseline": {
-        "site": "8e96dd403273e416",
-        "corpus": "cf11b993cf839dd5",
-        "alignedAt": "2026-10-12",
-        "forcedAt": "2026-10-12T15:50:23.150Z"
+        "site": "075adde00d69f661",
+        "corpus": "fe384bf4d7d19266",
+        "alignedAt": "2026-10-18",
+        "forcedAt": "2026-10-18T18:20:48.628Z"
       }
     },
     {
@@ -1822,9 +1822,10 @@
       "mode": "adapted",
       "reason": "Gemello node:test (via expect-shim) del test Vitest del sito sull'overlap-skip che non consuma tentativi (overlapSkipBlocker, overlapBlockerActive, ramo del rescue e hold del drain), con in piu' i casi delle PR ferme di #10708 del sito (isStalledPr, findOverlapFile con ignorePr, label nella mappa delle PR aperte) che qui arrivano nello stesso porting. Il wiring legge il followup-drainer.mjs e il prompt di issue-fix.yml di questo repo, che sono adapted.",
       "baseline": {
-        "site": "43b33f063ddfdd42",
-        "corpus": "ec1cf0b369b1321e",
-        "alignedAt": "2026-10-02"
+        "site": "86b87648fc52e935",
+        "corpus": "ce0226aa68562cc2",
+        "alignedAt": "2026-10-18",
+        "forcedAt": "2026-10-18T18:20:48.670Z"
       }
     },
     {
@@ -1855,9 +1856,10 @@
       "mode": "adapted",
       "reason": "L'archivio va renderizzato PRIMA dell'offload CDN, non dopo (issue #5270): un ordine invertito lascia riferimenti /assets/ 404 su ogni pagina archivio pubblicata via fast-publish. scripts/publish-article-fast.mjs e' una copia di quello del sito senza canale di mirror automatico (mirror-articles-engine.yml porta solo engine/), e il sito aveva gia' corretto l'ordine in valerielinc-ops/frontaliere-si-o-no#5271: la suite e' il gemello che chiude il ritardo qui.",
       "baseline": {
-        "site": "9dbc2ce29b6d3b0f",
-        "corpus": "ac21e4d755d4ed6a",
-        "alignedAt": "2026-08-10"
+        "site": "5d3c055352f514be",
+        "corpus": "d9842ecc395bf603",
+        "alignedAt": "2026-10-18",
+        "forcedAt": "2026-10-18T18:20:48.703Z"
       }
     },
     {
@@ -1927,10 +1929,10 @@
       "mode": "adapted",
       "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; resta sorvegliato, ma le decisioni di pubblicazione delle copertine vivono nel corpus: le nuove immagini passano dal motore mirrorato con scope `article-hero`, se il motore fallisce, il fallback usa un record reader-facing del catalogo o la cover statica governata e accoda la rigenerazione senza rigettare l'articolo; la generazione del testo applica la guardia anti-copia. Il gemello del sito e' il generatore legacy disabilitato (`confirm_corpus_write=yes`) e non va aggiornato per questa pipeline corpus-only; i registri pubblici vengono esposti via JSON HTTP.",
       "baseline": {
-        "site": "dd9f281a289f5eca",
-        "corpus": "82e9f9c3b8abcd50",
-        "alignedAt": "2026-10-14",
-        "forcedAt": "2026-10-14T13:11:05Z"
+        "site": "09254622b320cf9a",
+        "corpus": "f070f855033bb0f4",
+        "alignedAt": "2026-10-18",
+        "forcedAt": "2026-10-18T18:20:48.806Z"
       }
     },
     {
@@ -2643,10 +2645,10 @@
       "mode": "adapted",
       "reason": "Selettore dei topic. Divergente anche da `be6b31d5`: due righe di trasporto (`corpusPath` e il default di `loadExistingItTitles`) e, qui soltanto, il ledger evergreen schema v2 con provenance per sezione/pool/pool-epoch, TTL di 30 giorni per gli strike, revalidazione preflight delle decisioni legacy e cap indipendente a 2048 record. La migrazione corpus-only conserva i 517 ban e 284 strike storici senza attribuire loro una provenienza inventata; un pool epoch cambiato riapre il preflight e una conferma scrive il contesto corrente. La generazione live usa `generator/` nel corpus, che i workflow mirror non trasportano; il sito resta la sorgente per le altre modifiche al selettore.",
       "baseline": {
-        "site": "f2dee9a957a468d3",
-        "corpus": "720ed7bd9d3a345c",
-        "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T22:32:19.685Z"
+        "site": "8c6a45970bc91667",
+        "corpus": "80040646f6f537a4",
+        "alignedAt": "2026-10-18",
+        "forcedAt": "2026-10-18T18:20:48.858Z"
       }
     },
     {
