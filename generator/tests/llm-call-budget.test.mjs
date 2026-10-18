@@ -217,7 +217,9 @@ test('② l espansione ANTICIPATA ripassa il fact-check; quella di ultima spiagg
     'REGRESSIONE: l espansione anticipata non ripassa piu llmFactCheck. E il percorso piu incline '
     + 'alla ripetizione e, da quando puo scattare al tentativo 2, produce l articolo PUBBLICATO nel caso normale.',
   );
-  const block = body.slice(i, i + 1400);
+  const expansionEnd = body.indexOf('const expandedWords = italianBodyWordCount(data);', i);
+  assert.ok(expansionEnd > i, 'il blocco dell espansione non ha piu il confine di conteggio atteso');
+  const block = body.slice(i, expansionEnd);
   assert.match(block, /await llmFactCheck\(/, 'il ramo esiste ma non chiama piu il fact-check');
   assert.match(block, /data = preExpansionData;/, 'un fact-check fallito deve tornare al testo pre-espansione');
 
