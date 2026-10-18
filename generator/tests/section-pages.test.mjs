@@ -2742,9 +2742,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /WORKFLOW_RUN_COVER_DRAIN_COMMIT_MESSAGE: \$\{\{ github\.event\.workflow_run\.head_commit\.message \}\}/);
   assert.match(wf, /if \[ "\$EVENT_NAME" = 'push' \] \|\| \{ \[ "\$EVENT_NAME" = 'workflow_run' \] && \[ "\$WORKFLOW_RUN_EVENT" = 'push' \]; \}; then/);
   assert.equal(
-    (wf.match(/ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_commit \|\| github\.sha \}\}/g) ?? []).length,
+    (wf.match(/ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_commit \|\| \(github\.event_name == 'workflow_dispatch' && inputs\.bootstrap != true && github\.ref\) \|\| github\.sha \}\}/g) ?? []).length,
     2,
-    'resolve e publish devono checkoutare la source_commit del replay',
+    'resolve e publish devono distinguere dispatch live, bootstrap e source_commit del replay',
   );
   assert.match(wf, /id: replay_freshness[\s\S]*gh api "repos\/\$REPO\/git\/ref\/heads\/main"/);
   assert.match(wf, /if: steps\.replay_freshness\.outputs\.fresh == 'true'/);
