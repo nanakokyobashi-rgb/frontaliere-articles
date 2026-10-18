@@ -36,6 +36,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.eventi-weekend-argovia.title': 'Weekend events in Aargau: what to do Saturday & Sunday',
     'blog.article.eventi-weekend-argovia.excerpt': 'Events in Aargau every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
     'blog.article.eventi-weekend-argovia.imageAlt': 'Weekend events in Aargau',
+    'blog.article.riniker-governo-argovia.title': 'Maja Riniker (FDP) elected to the Aargau government',
+    'blog.article.riniker-governo-argovia.excerpt': 'With 70\'137 votes and a turnout of 21,01%, Maja Riniker is elected to the Aargau government.',
+    'blog.article.riniker-governo-argovia.imageAlt': 'Aargau cantonal government after Maja Riniker\'s election',
 };
 
 export default blogMetaCantonAgEn;

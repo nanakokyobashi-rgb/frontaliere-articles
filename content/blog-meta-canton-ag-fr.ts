@@ -36,6 +36,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.eventi-weekend-argovia.title': 'Événements du week-end en Argovie : que faire samedi & dimanche',
     'blog.article.eventi-weekend-argovia.excerpt': 'Événements en Argovie chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
     'blog.article.eventi-weekend-argovia.imageAlt': 'Événements du week-end en Argovie',
+    'blog.article.riniker-governo-argovia.title': 'Maja Riniker (FDP) élue au gouvernement argovien',
+    'blog.article.riniker-governo-argovia.excerpt': 'Avec 70\'137 voix et une participation de 21,01%, Maja Riniker est élue au gouvernement argovien.',
+    'blog.article.riniker-governo-argovia.imageAlt': 'Gouvernement cantonal argovien après l\'élection de Maja Riniker',
 };
 
 export default blogMetaCantonAgFr;

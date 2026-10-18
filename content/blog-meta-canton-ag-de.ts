@@ -36,6 +36,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.eventi-weekend-argovia.title': 'Veranstaltungen am Wochenende im Aargau: was tun Sa & So',
     'blog.article.eventi-weekend-argovia.excerpt': 'Veranstaltungen im Aargau an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
     'blog.article.eventi-weekend-argovia.imageAlt': 'Veranstaltungen am Wochenende im Aargau',
+    'blog.article.riniker-governo-argovia.title': 'Maja Riniker (FDP) in die Aargauer Regierung gewählt',
+    'blog.article.riniker-governo-argovia.excerpt': 'Mit 70\'137 Stimmen und einer Wahlbeteiligung von 21,01% wurde Maja Riniker in die Aargauer Regierung gewählt.',
+    'blog.article.riniker-governo-argovia.imageAlt': 'Aargauer Kantonsregierung nach der Wahl von Maja Riniker',
 };
 
 export default blogMetaCantonAgDe;
