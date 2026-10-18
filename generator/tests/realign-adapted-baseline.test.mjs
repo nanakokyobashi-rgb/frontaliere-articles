@@ -561,7 +561,7 @@ test('workflow: il push e\' condizionato al diff del SOLO manifest (e del ratche
   const diffGuard = job.indexOf(`git diff --name-only | grep -vxF -e ${MANIFEST_REL} -e ${RATCHET_REL}`);
   const noChange = job.indexOf(`git diff --quiet -- ${MANIFEST_REL}`);
   const add = job.indexOf(`git add -- ${MANIFEST_REL}`);
-  const push = job.indexOf('git push origin HEAD:main');
+  const push = job.indexOf('node scripts/ci/guard-main-tree-shrink.mjs --push-main --remote origin --target main --after HEAD');
   assert.ok(noChange >= 0 && diffGuard > noChange, 'manca il controllo «solo il manifest e\' cambiato»');
   assert.ok(add > diffGuard && push > add, 'il push deve venire dopo il controllo sul diff');
   assert.doesNotMatch(job, /git add (?!-- scripts\/ci\/(?:loop-sync-manifest|adapted-drift-ratchet)\.json)/);
@@ -585,6 +585,6 @@ test('workflow: si pusha solo con rc 0 o 3; un\'eccezione (rc 1) non porta il ma
   assert.ok(add > gate, 'il cancello sull\'exit code deve precedere `git add`');
   // L'esito parziale pusha le voci certificate ma chiude rosso.
   assert.match(job, /if \[ "\$rc" = "3" \]; then final=1; fi/);
-  const pushBlock = job.slice(job.indexOf('if git push origin HEAD:main; then'));
+  const pushBlock = job.slice(job.indexOf('if node scripts/ci/guard-main-tree-shrink.mjs --push-main --remote origin --target main --after HEAD'));
   assert.match(pushBlock.slice(0, pushBlock.indexOf('fi\n')), /exit "\$final"/);
 });

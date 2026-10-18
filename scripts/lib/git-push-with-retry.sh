@@ -375,7 +375,10 @@ TREE_SHRINK_GUARD_SCRIPT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../ci" && pwd)/gu
 push_head() {
   local status=0
   if [ "${BRANCH#refs/heads/}" = "main" ]; then
-    local guarded_push_timeout_ms=$((GIT_PUSH_WITH_RETRY_PUSH_TIMEOUT_SECONDS * 1000 - 1000))
+    local push_timeout_ms=$((GIT_PUSH_WITH_RETRY_PUSH_TIMEOUT_SECONDS * 1000))
+    local guarded_push_safety_margin_ms=$((push_timeout_ms / 2))
+    if [ "$guarded_push_safety_margin_ms" -gt 1000 ]; then guarded_push_safety_margin_ms=1000; fi
+    local guarded_push_timeout_ms=$((push_timeout_ms - guarded_push_safety_margin_ms))
     if [ "$guarded_push_timeout_ms" -lt 1 ]; then guarded_push_timeout_ms=1; fi
     run_bounded "$GIT_PUSH_WITH_RETRY_PUSH_TIMEOUT_SECONDS" "guarded main push" \
       node "$TREE_SHRINK_GUARD_SCRIPT" --push-main --remote origin --target main --after HEAD \

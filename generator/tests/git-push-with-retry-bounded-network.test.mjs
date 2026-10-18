@@ -556,7 +556,7 @@ test('un push scaduto al primo tentativo viene ritentato e pubblicato', () => {
 
     assert.equal(result.status, 0, result.output);
     assert.equal(pushAttempts(scenario), 2);
-    assert.match(result.output, /git push --no-thin origin HEAD:main timed out after 1 second/u);
+    assert.match(result.output, /Git command timed out after \d+ms/u);
     assert.match(result.output, /Push rejected \(attempt 1\/2\)/u);
     assert.equal(git(scenario.remote, ['show', 'main:generated/payload.txt']), 'published by push retry');
   } finally {
@@ -573,7 +573,7 @@ test('un push che scade sempre mantiene il codice di esaurimento', () => {
 
     assert.equal(result.status, 1, result.output);
     assert.equal(pushAttempts(scenario), 2);
-    assert.match(result.output, /git push --no-thin origin HEAD:main timed out after 1 second/u);
+    assert.match(result.output, /Git command timed out after \d+ms/u);
     assert.match(result.output, /Failed to push after 2 attempts/u);
   } finally {
     rmSync(scenario.root, { recursive: true, force: true });

@@ -20,7 +20,7 @@ test('publish-api uploads changed hero and thumbnail bytes from public-only cove
   assert.match(step, /scripts\/lib\/upload-cdn-file\.sh/);
   assert.match(step, /https:\/\/cdn\.frontaliereticino\.ch\/\$key/);
   assert.match(step, /scripts\/cf-purge-cache\.mjs/);
-  assert.match(step, /push origin HEAD:main/);
+  assert.match(step, /guard-main-tree-shrink\.mjs --push-main --remote origin --target main --after HEAD/);
   assert.match(step, /GITHUB_PAT_NANAKO is required to persist the cover sync queue/);
   assert.match(step, /rebuild_manifest_from_queue/);
   assert.match(step, /rebase conflict/);
@@ -44,7 +44,7 @@ test('publish-api pushes the cover queue as the owner PAT, and names a rule reje
   assert.match(checkoutBlock, /^\s*persist-credentials:\s*false\s*$/m);
   // The dead mitigation must not come back as the only one.
   assert.doesNotMatch(step, /--unset-all http\.https:\/\/github\.com\/\.extraheader/);
-  assert.match(step, /git -c "http\.extraheader=AUTHORIZATION: basic \$auth_header" push origin HEAD:main/);
+  assert.match(step, /--git-config "http\.extraheader=AUTHORIZATION: basic \$auth_header"/);
   // A rule rejection is reported as such and stops the retries: the old loop
   // printed «main advanced … rebasing» for it, three times, on every failure.
   assert.match(step, /GH013\|repository rule violations/);
