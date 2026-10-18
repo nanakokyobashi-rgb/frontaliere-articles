@@ -8489,6 +8489,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.dacuda-mouse-scanner.title': 'Dacuda en liquidation : la société zurichoise dissoute',
     'blog.article.dacuda-mouse-scanner.excerpt': 'Dacuda entre en liquidation après le vote de l\'assemblée La start-up était née en 2009 d\'un spin-off de l\'ETH La souris-scanner numérisait des documents',
     'blog.article.dacuda-mouse-scanner.imageAlt': 'Souris d\'ordinateur avec fonction scanner près de documents dans un bureau suisse',
+    'blog.article.competitivita-svizzera-ocse-berna.title': 'OCDE Suisse : des réformes demandées pour la santé et la croissance',
+    'blog.article.competitivita-svizzera-ocse-berna.excerpt': 'Rapport de l’OCDE publié le 15 septembre 2026 Approche économique de la Suisse saluée Des réformes sont nécessaires pour la compétitivité et l’innovation Suivi',
+    'blog.article.competitivita-svizzera-ocse-berna.imageAlt': 'Palais fédéral à Berne, siège des institutions suisses',
 };
 
 export default blogMetaChFr;

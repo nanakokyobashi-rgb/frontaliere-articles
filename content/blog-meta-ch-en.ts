@@ -8489,6 +8489,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.dacuda-mouse-scanner.title': 'Dacuda in liquidation: Zurich-based company dissolved',
     'blog.article.dacuda-mouse-scanner.excerpt': 'Dacuda enters liquidation after the assembly\'s vote The start-up was founded in 2009 as a spin-off of ETH The mouse scanner digitized documents',
     'blog.article.dacuda-mouse-scanner.imageAlt': 'Computer mouse with scanner function beside documents in a Swiss office',
+    'blog.article.competitivita-svizzera-ocse-berna.title': 'OECD Switzerland: calls for reforms in healthcare and growth',
+    'blog.article.competitivita-svizzera-ocse-berna.excerpt': 'OECD report published on September 15, 2026 Switzerland\'s economic approach appreciated Reforms needed for competitiveness and innovation Follow-up',
+    'blog.article.competitivita-svizzera-ocse-berna.imageAlt': 'Federal Palace in Bern, seat of Swiss federal institutions',
 };
 
 export default blogMetaChEn;

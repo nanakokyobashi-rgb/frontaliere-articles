@@ -8489,6 +8489,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.dacuda-mouse-scanner.title': 'Dacuda in liquidazione: sciolta la società zurighese',
     'blog.article.dacuda-mouse-scanner.excerpt': 'Dacuda entra in liquidazione dopo il voto dell\'assemblea La start-up era nata nel 2009 da uno spin-off dell\'ETH Il mouse-scanner digitalizzava documenti',
     'blog.article.dacuda-mouse-scanner.imageAlt': 'Mouse con funzione di scanner accanto a documenti in un ufficio svizzero',
+    'blog.article.competitivita-svizzera-ocse-berna.title': 'OCSE Svizzera: chieste riforme per sanità e crescita',
+    'blog.article.competitivita-svizzera-ocse-berna.excerpt': 'Rapporto OCSE pubblicato il 15 settembre 2026 Apprezzato l’approccio economico della Svizzera Servono riforme per competitività e innovazione Seguito',
+    'blog.article.competitivita-svizzera-ocse-berna.imageAlt': 'Palazzo federale a Berna, sede delle istituzioni svizzere',
 };
 
 export default blogMetaChIt;

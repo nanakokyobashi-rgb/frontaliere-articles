@@ -170,6 +170,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T08:02:44.198Z",
       "lastFailureAt": "2026-10-18T08:02:44.198Z"
+    },
+    {
+      "articleId": "competitivita-svizzera-ocse-berna",
+      "title": "OCSE Svizzera: chieste riforme per sanità e crescita",
+      "fallbackImage": "/images/blog/article-disoccupazione-berna-settembre-2026-stabile.webp",
+      "reason": "All image providers failed for article-competitivita-svizzera-ocse-berna: openai-codex (vision gate rejected image: Swiss Federal Palace scene is clearly topic-relevant, but decora",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T08:25:09.017Z",
+      "lastFailureAt": "2026-10-18T08:25:09.017Z"
     }
   ]
 }

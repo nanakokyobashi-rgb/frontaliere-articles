@@ -107242,6 +107242,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-competitivita-svizzera-ocse-berna': {
+    title: 'OCSE Svizzera: chieste riforme per sanità e crescita',
+    description: 'Rapporto OCSE pubblicato il 15 settembre 2026 Apprezzato l’approccio economico della Svizzera Servono riforme per competitività e innovazione Seguito',
+    keywords: 'frontalieri, ticino, svizzera, italia, ocse, chieste, riforme, sanità',
+    ogTitle: 'OCSE: la Svizzera va bene ma servono riforme',
+    ogDescription: 'Rapporto OCSE pubblicato il 15 settembre 2026 Apprezzato l’approccio economico della Svizzera Servono riforme per competitività e innovazione Seguito',
+    canonicalPath: '/articoli-svizzera/competitivita-svizzera-ocse-berna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "OCSE Svizzera: chieste riforme per sanità e crescita",
+      "description": "Rapporto OCSE pubblicato il 15 settembre 2026 Apprezzato l’approccio economico della Svizzera Servono riforme per competitività e innovazione Seguito",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-disoccupazione-berna-settembre-2026-stabile.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna, sede delle istituzioni svizzere"
+      },
+      "datePublished": "2026-10-18T08:25:08+00:00",
+      "dateModified": "2026-10-18T08:25:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/competitivita-svizzera-ocse-berna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

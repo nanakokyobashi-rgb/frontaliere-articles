@@ -2852,6 +2852,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'ordinanza-liste-validita': { it: 'ordinanza-liste-validita', en: 'sanctions-list-validity', de: 'sanktionslisten-gueltigkeit', fr: 'validite-listes-sanctions' },
  'prezzi-carburanti-rinviati-rinviati': { it: 'prezzi-carburanti-rinviati-rinviati', en: 'fuel-prices-delay-switzerland', de: 'treibstoffpreise-verzoegert', fr: 'prix-carburants-retard' },
  'dacuda-mouse-scanner': { it: 'dacuda-mouse-scanner', en: 'dacuda-scanner-mouse', de: 'dacuda-scanner-maus', fr: 'dacuda-souris-scanner' },
+ 'competitivita-svizzera-ocse-berna': { it: 'competitivita-svizzera-ocse-berna', en: 'switzerland-oecd-competitiveness-reforms', de: 'schweiz-oecd-wettbewerbsfaehigkeit-reformen', fr: 'suisse-ocde-competitivite-reformes' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

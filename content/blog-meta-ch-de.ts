@@ -8489,6 +8489,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.dacuda-mouse-scanner.title': 'Dacuda in Liquidation: Zürcher Gesellschaft aufgelöst',
     'blog.article.dacuda-mouse-scanner.excerpt': 'Dacuda geht nach dem Beschluss der Generalversammlung in Liquidation Das Start-up war 2009 aus einem Spin-off der ETH hervorgegangen Der Maus-Scanner digitalisierte Dokumente',
     'blog.article.dacuda-mouse-scanner.imageAlt': 'Computermaus mit Scannerfunktion neben Dokumenten in einem Schweizer Büro',
+    'blog.article.competitivita-svizzera-ocse-berna.title': 'OECD Schweiz: Reformen für Gesundheitswesen und Wachstum gefordert',
+    'blog.article.competitivita-svizzera-ocse-berna.excerpt': 'OECD-Bericht veröffentlicht am 15.',
+    'blog.article.competitivita-svizzera-ocse-berna.imageAlt': 'Bundeshaus in Bern, Sitz der Schweizer Bundesinstitutionen',
 };
 
 export default blogMetaChDe;

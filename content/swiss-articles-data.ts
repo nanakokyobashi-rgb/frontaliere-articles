@@ -28363,6 +28363,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'competitivita-svizzera-ocse-berna',
+    category: 'novita',
+    date: '2026-10-18T08:25:08.424Z',
+    image: '/images/blog/article-disoccupazione-berna-settembre-2026-stabile.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
