@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-radar-ticino-ottobre-2026.webp",
-      "sha256": "5b6d6107d2bedf76098e99d0762e9606ff12c5857889d277677c6f62c29b0742"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-radar-ticino-ottobre-2026-480w.webp",
-      "sha256": "bcc165450a5fef3445ff580fbcb874f4dc312b6b886647dbd2fb78c49abd37db"
-    }
-  ]
+  "items": []
 }
