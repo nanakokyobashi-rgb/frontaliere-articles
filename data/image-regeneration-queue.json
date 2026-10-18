@@ -180,6 +180,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T11:06:15.287Z",
       "lastFailureAt": "2026-10-18T11:06:15.287Z"
+    },
+    {
+      "articleId": "disoccupazione-neuchatel-luglio-2026",
+      "title": "Stabilità del tasso di disoccupazione nel Canton Neuchâtel a luglio 2026",
+      "fallbackImage": "/images/blog/article-disoccupazione-stabile-4-4-neuchatel-settembre-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T11:17:54.485Z",
+      "lastFailureAt": "2026-10-18T11:17:54.485Z"
     }
   ]
 }

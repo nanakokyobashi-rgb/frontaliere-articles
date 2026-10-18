@@ -309,6 +309,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-disoccupazione-neuchatel-luglio-2026': {
+    title: 'Stabilità del tasso di disoccupazione nel Canton Neuchâtel a luglio 2026',
+    description: 'Il numero di disoccupati nel Canton Neuchâtel è aumentato di 54 unità nel luglio 2026, ma il tasso di disoccupazione cantonale è rimasto stabile al 4,3%.',
+    keywords: 'frontalieri, ticino, svizzera, italia, stabilità, tasso, disoccupazione, canton',
+    ogTitle: 'Disoccupazione Neuchâtel luglio 2026',
+    ogDescription: 'Il numero di disoccupati nel Canton Neuchâtel è aumentato a luglio, ma il tasso di disoccupazione è rimasto stabile. Scopri i dettagli e le variazioni per fasce d\'età e settori.',
+    canonicalPath: '/articoli-neuchatel/disoccupazione-neuchatel-luglio-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stabilità del tasso di disoccupazione nel Canton Neuchâtel a luglio 2026",
+      "description": "Il numero di disoccupati nel Canton Neuchâtel è aumentato di 54 unità nel luglio 2026, ma il tasso di disoccupazione cantonale è rimasto stabile al 4,3%.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-disoccupazione-stabile-4-4-neuchatel-settembre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Donna in cerca di lavoro a Neuchâtel"
+      },
+      "datePublished": "2026-10-18T11:17:54+00:00",
+      "dateModified": "2026-10-18T11:17:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/disoccupazione-neuchatel-luglio-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

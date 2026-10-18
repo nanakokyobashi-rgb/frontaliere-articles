@@ -27,6 +27,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.eventi-weekend-neuchatel.title': 'Eventi del weekend nel Canton Neuchâtel: cosa fare sabato e domenica',
     'blog.article.eventi-weekend-neuchatel.excerpt': 'Eventi nel Canton Neuchâtel ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
     'blog.article.eventi-weekend-neuchatel.imageAlt': 'Eventi del weekend nel Canton Neuchâtel',
+    'blog.article.disoccupazione-neuchatel-luglio-2026.title': 'Stabilità del tasso di disoccupazione nel Canton Neuchâtel a luglio 2026',
+    'blog.article.disoccupazione-neuchatel-luglio-2026.excerpt': 'Il numero di disoccupati nel Canton Neuchâtel è aumentato di 54 unità nel luglio 2026, raggiungendo le 3.905 persone.',
+    'blog.article.disoccupazione-neuchatel-luglio-2026.imageAlt': 'Donna in cerca di lavoro a Neuchâtel',
 };
 
 export default blogMetaCantonNeIt;

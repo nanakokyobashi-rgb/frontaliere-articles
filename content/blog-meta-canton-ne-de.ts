@@ -27,6 +27,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.eventi-weekend-neuchatel.title': 'Veranstaltungen am Wochenende im Kanton Neuenburg: was tun Sa & So',
     'blog.article.eventi-weekend-neuchatel.excerpt': 'Veranstaltungen im Kanton Neuenburg an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
     'blog.article.eventi-weekend-neuchatel.imageAlt': 'Veranstaltungen am Wochenende im Kanton Neuenburg',
+    'blog.article.disoccupazione-neuchatel-luglio-2026.title': 'Stabilität der Arbeitslosenquote im Kanton Neuenburg im Juli 2026',
+    'blog.article.disoccupazione-neuchatel-luglio-2026.excerpt': 'Die Zahl der Arbeitslosen im Kanton Neuenburg ist im Juli 2026 um 54 Personen gestiegen und erreichte 3.905 Personen.',
+    'blog.article.disoccupazione-neuchatel-luglio-2026.imageAlt': 'Frau auf Stellensuche in Neuenburg',
 };
 
 export default blogMetaCantonNeDe;
