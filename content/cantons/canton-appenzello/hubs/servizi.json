@@ -4,17 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T15:52:30.685Z",
-  "contentHash": "352c712abaf13104e97b5c63cf6692040ed12335bdd30cc63e5770fd098873b0",
+  "updatedAt": "2026-10-18T16:09:32.587Z",
+  "contentHash": "99fa88838250378dfafa1437f37e9424eb47a81acc50aef2bb74b1dfcdfc6399",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-18T08:53:01.888Z",
-      "keyFacts": 1
-    },
-    {
-      "id": "aste-targhe",
-      "updatedAt": "2026-10-18T11:03:15.929Z",
       "keyFacts": 1
     },
     {
@@ -40,11 +35,6 @@
           "value": "447,80 CHF",
           "note": "regione di premio 0, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        },
-        {
-          "label": "Aste di targhe in corso",
-          "value": "5",
-          "note": "offerta mediana 750 CHF"
         }
       ],
       "dataBlocks": [
@@ -67,37 +57,6 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Aste delle targhe",
-          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
-          "items": [
-            {
-              "label": "AR2771",
-              "value": "2000 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
-            },
-            {
-              "label": "AR8924",
-              "value": "800 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1786"
-            },
-            {
-              "label": "AR4790",
-              "value": "750 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1784"
-            }
-          ],
-          "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
         },
         {
           "id": "meteo",
@@ -242,7 +201,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-18T16:09:32.587Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -255,11 +214,6 @@
           "value": "447.80 CHF",
           "note": "premium region 0, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
-        },
-        {
-          "label": "Plate auctions running",
-          "value": "5",
-          "note": "typical bid 750 CHF"
         }
       ],
       "dataBlocks": [
@@ -282,37 +236,6 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Number plate auctions",
-          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
-          "items": [
-            {
-              "label": "AR2771",
-              "value": "2,000 CHF",
-              "detail": "current bid",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
-            },
-            {
-              "label": "AR8924",
-              "value": "800 CHF",
-              "detail": "current bid",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1786"
-            },
-            {
-              "label": "AR4790",
-              "value": "750 CHF",
-              "detail": "current bid",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1784"
-            }
-          ],
-          "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
         },
         {
           "id": "meteo",
@@ -449,7 +372,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-18T16:09:32.587Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -462,11 +385,6 @@
           "value": "447.80 CHF",
           "note": "Prämienregion 0, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
-        },
-        {
-          "label": "Laufende Kontrollschild-Auktionen",
-          "value": "5",
-          "note": "mittleres Gebot 750 CHF"
         }
       ],
       "dataBlocks": [
@@ -489,37 +407,6 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Kontrollschild-Auktionen",
-          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
-          "items": [
-            {
-              "label": "AR2771",
-              "value": "2’000 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
-            },
-            {
-              "label": "AR8924",
-              "value": "800 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1786"
-            },
-            {
-              "label": "AR4790",
-              "value": "750 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1784"
-            }
-          ],
-          "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
         },
         {
           "id": "meteo",
@@ -656,7 +543,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-18T16:09:32.587Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -669,11 +556,6 @@
           "value": "447,80 CHF",
           "note": "région de primes 0, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
-        },
-        {
-          "label": "Enchères de plaques en cours",
-          "value": "5",
-          "note": "offre centrale 750 CHF"
         }
       ],
       "dataBlocks": [
@@ -696,37 +578,6 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Enchères de plaques",
-          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
-          "items": [
-            {
-              "label": "AR2771",
-              "value": "2 000 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
-            },
-            {
-              "label": "AR8924",
-              "value": "800 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1786"
-            },
-            {
-              "label": "AR4790",
-              "value": "750 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1784"
-            }
-          ],
-          "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
         },
         {
           "id": "meteo",
@@ -855,7 +706,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-18T16:09:32.587Z"
     }
   }
 }
