@@ -90,6 +90,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T01:47:23.656Z",
       "lastFailureAt": "2026-10-18T01:47:23.656Z"
+    },
+    {
+      "articleId": "agra-sagra-zucca",
+      "title": "Agra, la Sagra della Zucca rinviata al 25 ottobre",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-agra-sagra-zucca: openai-codex (vision gate rejected image: Generic synthetic autumn pumpkin market scene with no readable text, logos, or re",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T02:02:44.586Z",
+      "lastFailureAt": "2026-10-18T02:02:44.586Z"
     }
   ]
 }

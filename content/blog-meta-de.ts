@@ -13411,6 +13411,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.camerino-teatro-sociale-soccorsi.title': 'Como, Verdacht auf einen Bruch: 118 und Feuerwehr im Sociale',
     'blog.article.camerino-teatro-sociale-soccorsi.excerpt': 'Heute Abend Rettungseinsatz im Teatro Sociale di Como Ein Künstler mit Verdacht auf einen Bruch in einer Garderobe Eine Drehleiter war erforderlich, um die Trage auf die Straße zu bringen',
     'blog.article.camerino-teatro-sociale-soccorsi.imageAlt': 'Das Teatro Sociale in Como am Abend',
+    'blog.article.agra-sagra-zucca.title': 'Agra, das Kürbisfest auf den 25. Oktober verschoben',
+    'blog.article.agra-sagra-zucca.excerpt': 'Das 43. Kürbisfest wurde auf den 25. Oktober verschoben Die Veranstaltung war für Sonntag, den 18. Oktober, vorgesehen Die Verschiebung wurde wegen des erwarteten schlechten Wetters beschlossen Pro',
+    'blog.article.agra-sagra-zucca.imageAlt': 'Herbstfest mit Kürbissen, Maronen und Marktständen in Agra',
 };
 
 export default blogMetaDe;

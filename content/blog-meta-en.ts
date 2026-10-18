@@ -13412,6 +13412,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.camerino-teatro-sociale-soccorsi.title': 'Como, suspected fracture: 118 and firefighters at the Sociale',
     'blog.article.camerino-teatro-sociale-soccorsi.excerpt': 'This evening, emergency services at the Teatro Sociale di Como An artist with a suspected fracture in a dressing room An aerial ladder truck was needed to bring the stretcher out onto the street',
     'blog.article.camerino-teatro-sociale-soccorsi.imageAlt': 'Teatro Sociale in Como in the evening',
+    'blog.article.agra-sagra-zucca.title': 'Agra, the Pumpkin Festival postponed to October 25',
+    'blog.article.agra-sagra-zucca.excerpt': 'The 43rd Pumpkin Festival has been postponed to October 25 The event was scheduled for Sunday, October 18 The postponement was decided due to the expected bad weather Pro',
+    'blog.article.agra-sagra-zucca.imageAlt': 'Autumn festival with pumpkins, roasted chestnuts and stalls in Agra',
 };
 
 export default blogMetaEn;

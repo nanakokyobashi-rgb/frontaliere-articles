@@ -1,9 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/traffico-ferroviario-interrotto-tra-cadenazzo-e-luino-per-un-guasto-tecnico-442213": {
-    "articleId": "s30-guasto-tecnico-cadenazzo-luino",
-    "ts": "2026-09-08T15:20:15.545Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/frontalieri%3a-ecco-il-libro-che-spiega-il-boom-avvenuto-in-svizzera/92024342": {
     "articleId": "libro-boom-frontalieri-svizzera",
     "ts": "2026-09-08T19:06:51.173Z",
@@ -2497,6 +2492,11 @@
   "https://comozero.it/cronaca/como-malore-in-camerino-al-teatro-sociale-arrivano-118-e-vigili-del-fuoco": {
     "articleId": "camerino-teatro-sociale-soccorsi",
     "ts": "2026-10-18T01:13:08.355Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/agra-la-sagra-della-zucca-rinviata-al-25-ottobre-per-il-maltempo/2711344": {
+    "articleId": "agra-sagra-zucca",
+    "ts": "2026-10-18T02:02:44.588Z",
     "keyForm": 2
   }
 }

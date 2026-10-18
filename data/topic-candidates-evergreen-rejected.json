@@ -9093,14 +9093,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.tvsvizzera.it/tvs/svizzera-istruzioni-per-luso": {
-      "section": "svizzera",
-      "ts": 1792110848791
-    },
-    "frontaliere::https://www.rsi.ch/s/4160968": {
-      "section": "frontaliere",
-      "ts": 1792111749560
-    },
     "frontaliere::https://www.varesenews.it/2026/10/il-fotovoltaico-e-la-scelta-giusta-per-la-tua-azienda-le-risposte-di-elmec-solar/2709187": {
       "section": "frontaliere",
       "ts": 1792117649657
@@ -9412,6 +9404,10 @@
     "frontaliere::https://www.varesenews.it/2026/10/monteiro-barbosa-raddrizza-la-solbiatese-2-2-contro-il-lentigione/2711191": {
       "section": "frontaliere",
       "ts": 1792283205200
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/lavori-sulla-ss34-cambia-la-navigazione-tra-laveno-e-intra/2711356": {
+      "section": "frontaliere",
+      "ts": 1792288653783
     }
   }
 }

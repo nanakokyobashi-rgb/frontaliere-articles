@@ -110944,6 +110944,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-agra-sagra-zucca': {
+    title: 'Agra, la Sagra della Zucca rinviata al 25 ottobre',
+    description: 'La 43ª Sagra della Zucca è stata rinviata al 25 ottobre L\'appuntamento era previsto per domenica 18 ottobre Il rinvio è stato deciso per il maltempo atteso Pro',
+    keywords: 'frontalieri, ticino, svizzera, italia, agra, sagra, zucca, rinviata',
+    ogTitle: 'Agra: Sagra della Zucca rinviata al 25 ottobre',
+    ogDescription: 'La 43ª Sagra della Zucca è stata rinviata al 25 ottobre L\'appuntamento era previsto per domenica 18 ottobre Il rinvio è stato deciso per il maltempo atteso Pro',
+    canonicalPath: '/articoli-frontaliere/agra-sagra-zucca/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Agra, la Sagra della Zucca rinviata al 25 ottobre",
+      "description": "La 43ª Sagra della Zucca è stata rinviata al 25 ottobre L'appuntamento era previsto per domenica 18 ottobre Il rinvio è stato deciso per il maltempo atteso Pro",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Festa autunnale con zucche, caldarroste e bancarelle ad Agra"
+      },
+      "datePublished": "2026-10-18T02:02:43+00:00",
+      "dateModified": "2026-10-18T02:02:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/agra-sagra-zucca/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

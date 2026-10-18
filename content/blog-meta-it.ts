@@ -13413,6 +13413,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.camerino-teatro-sociale-soccorsi.title': 'Como, sospetta frattura: 118 e vigili del fuoco al Sociale',
     'blog.article.camerino-teatro-sociale-soccorsi.excerpt': 'Questa sera soccorsi al Teatro Sociale di Como Un artista con sospetta frattura in un camerino Necessaria l\'autoscala per portare la barella in strada',
     'blog.article.camerino-teatro-sociale-soccorsi.imageAlt': 'Il Teatro Sociale di Como in serata',
+    'blog.article.agra-sagra-zucca.title': 'Agra, la Sagra della Zucca rinviata al 25 ottobre',
+    'blog.article.agra-sagra-zucca.excerpt': 'La 43ª Sagra della Zucca è stata rinviata al 25 ottobre L\'appuntamento era previsto per domenica 18 ottobre Il rinvio è stato deciso per il maltempo atteso Pro',
+    'blog.article.agra-sagra-zucca.imageAlt': 'Festa autunnale con zucche, caldarroste e bancarelle ad Agra',
 };
 
 export default blogMetaIt;

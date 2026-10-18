@@ -13414,6 +13414,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.camerino-teatro-sociale-soccorsi.title': 'Como, suspicion de fracture : le 118 et les pompiers au Sociale',
     'blog.article.camerino-teatro-sociale-soccorsi.excerpt': 'Ce soir, secours au Teatro Sociale de Como Un artiste avec une suspicion de fracture dans une loge Nécessaire, la grande échelle pour porter la civière dans la rue',
     'blog.article.camerino-teatro-sociale-soccorsi.imageAlt': 'Le Teatro Sociale de Côme en soirée (Como)',
+    'blog.article.agra-sagra-zucca.title': 'Agra, la fête de la citrouille reportée au 25 octobre',
+    'blog.article.agra-sagra-zucca.excerpt': 'La 43ª fête de la citrouille a été reportée au 25 octobre Le rendez-vous était prévu pour le dimanche 18 octobre Le report a été décidé en raison du mauvais temps attendu Pro',
+    'blog.article.agra-sagra-zucca.imageAlt': 'Fête d\'automne avec citrouilles, marrons et stands à Agra',
 };
 
 export default blogMetaFr;
