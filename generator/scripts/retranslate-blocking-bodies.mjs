@@ -1013,7 +1013,11 @@ function addressTokenIsPreserved({ token, sourceSegment, targetSegment, locale }
 function addressLineTarget(lines, sourceLine, sourceLineIndex, usedTargetLines) {
   const candidates = [];
   lines.forEach((rawLine, index) => {
-    if (usedTargetLines.has(index)) return;
+    // A single visible line may contain more than one postal-code/address
+    // segment. It can therefore satisfy several source postal matches, while
+    // a line belonging to a different source row must remain unavailable.
+    const assignedSourceLine = usedTargetLines.get(index);
+    if (assignedSourceLine !== undefined && assignedSourceLine !== sourceLineIndex) return;
     const line = visibleAddressText(rawLine);
     const postalMatch = addressPostalMatches(line)
       .find((match) => match[0] === sourceLine.postalCode);
@@ -1043,7 +1047,7 @@ function addressLineTarget(lines, sourceLine, sourceLineIndex, usedTargetLines) 
   // the association instead of comparing the source with a different row;
   // the resulting mismatch keeps the old corpus in place.
   if (!selected) return { index: -1, text: '', segment: '' };
-  usedTargetLines.add(selected.index);
+  usedTargetLines.set(selected.index, sourceLineIndex);
   return selected;
 }
 
@@ -1058,7 +1062,7 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
   for (const [field, italianText] of Object.entries(italianSections || {})) {
     const sourceLines = String(italianText ?? '').split('\n');
     const targetLines = String(newSections?.[field] ?? '').split('\n');
-    const usedTargetLines = new Set();
+    const usedTargetLines = new Map();
     sourceLines.forEach((line, lineIndex) => {
       const visibleLine = visibleAddressText(line);
       for (const postalMatch of addressPostalMatches(visibleLine)) {
