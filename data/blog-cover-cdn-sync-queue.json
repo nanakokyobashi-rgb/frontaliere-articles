@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-aic-lombardia-varese-2026.webp",
-      "sha256": "efdf60e9d7ab264bcae8f59fe5aa099cf984a6688f093e898554fd473b9cd088"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-aic-lombardia-varese-2026-480w.webp",
-      "sha256": "c3d0609b749e9c88edf91d3be5fff0732f4003e4c55c4b16b2d4ad6fabc05f6f"
-    }
-  ]
+  "items": []
 }
