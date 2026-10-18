@@ -111704,6 +111704,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cassano-indagine-schianto': {
+    title: 'Varese, morta in incidente: ex accusato di femminicidio',
+    description: 'Pierina Buffon è morta nello scontro sulla tangenziale Fulvio Ielmini è indagato anche per femminicidio I carabinieri ipotizzano uno schianto provocato',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, morta, incidente, accusato',
+    ogTitle: 'Varese, morta in incidente: ex accusato di femminicidio',
+    ogDescription: 'Pierina Buffon è morta nello scontro sulla tangenziale Fulvio Ielmini è indagato anche per femminicidio I carabinieri ipotizzano uno schianto provocato',
+    canonicalPath: '/articoli-frontaliere/cassano-indagine-schianto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese, morta in incidente: ex accusato di femminicidio",
+      "description": "Pierina Buffon è morta nello scontro sulla tangenziale Fulvio Ielmini è indagato anche per femminicidio I carabinieri ipotizzano uno schianto provocato",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cassano-indagine-schianto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada del Ticino in luce mattutina, immagine simbolica per una notizia di cronaca locale"
+      },
+      "datePublished": "2026-10-18T13:16:47+00:00",
+      "dateModified": "2026-10-18T13:16:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/cassano-indagine-schianto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

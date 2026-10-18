@@ -13474,6 +13474,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.ps-tre-iniziative-thun.title': 'PS, yes to three initiatives: bees, mobility and internet',
     'blog.article.ps-tre-iniziative-thun.excerpt': 'Three initiatives won the PS’s approval in Thun The mobility voucher concerns public transport and railways The text calls for a tax on airline tickets',
     'blog.article.ps-tre-iniziative-thun.imageAlt': 'Socialist congress in Thun: initiatives on bees, mobility and digital security approved.',
+    'blog.article.cassano-indagine-schianto.title': 'Varese, woman dies in accident: ex accused of femicide',
+    'blog.article.cassano-indagine-schianto.excerpt': 'Pierina Buffon died in the collision Fulvio Ielmini is also under investigation for femicide The Carabinieri suspect the crash was deliberate',
+    'blog.article.cassano-indagine-schianto.imageAlt': 'Ticino road in morning light, a symbolic image for a local news report',
 };
 
 export default blogMetaEn;

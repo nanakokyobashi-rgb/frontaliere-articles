@@ -13475,6 +13475,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.ps-tre-iniziative-thun.title': 'PS, sì a tre iniziative: api, mobilità e internet',
     'blog.article.ps-tre-iniziative-thun.excerpt': 'Tre iniziative hanno ottenuto il sì del PS a Thun Il buono mobilità riguarda trasporti pubblici e ferrovie Il testo chiede una tassa sui biglietti aerei',
     'blog.article.ps-tre-iniziative-thun.imageAlt': 'Congresso socialista a Thun: sì alle iniziative su api, mobilità e sicurezza digitale.',
+    'blog.article.cassano-indagine-schianto.title': 'Varese, morta in incidente: ex accusato di femminicidio',
+    'blog.article.cassano-indagine-schianto.excerpt': 'Pierina Buffon è morta nello scontro sulla tangenziale Fulvio Ielmini è indagato anche per femminicidio I carabinieri ipotizzano uno schianto provocato',
+    'blog.article.cassano-indagine-schianto.imageAlt': 'Strada del Ticino in luce mattutina, immagine simbolica per una notizia di cronaca locale',
 };
 
 export default blogMetaIt;
