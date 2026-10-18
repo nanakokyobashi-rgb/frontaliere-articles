@@ -13484,6 +13484,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.live-arconatese-varese-caronno.title': 'Arconatese-varese, diretta da caronno pertusella',
     'blog.article.live-arconatese-varese-caronno.excerpt': 'Ottava giornata di Serie D, Girone D Il Varese sfida l\'Arconatese a Caronno Pertusella I biancorossi cercano continuità dopo la vittoria scorsa La gara è',
     'blog.article.live-arconatese-varese-caronno.imageAlt': 'La sfida Arconatese-Varese a Caronno Pertusella',
+    'blog.article.tutele-frontaliero-uscita-ticino.title': 'Frontaliere licenziato nel 2026: diritti oltre 20 km',
+    'blog.article.tutele-frontaliero-uscita-ticino.excerpt': 'Guida pratica per il frontaliere oltre 20 km: accordo CH-IT, imposta alla fonte, franchigie, AVS, LPP, LAMal e controlli dopo il licenziamento.',
+    'blog.article.tutele-frontaliero-uscita-ticino.imageAlt': 'Frontaliere con documenti di lavoro davanti a un ufficio in Ticino',
 };
 
 export default blogMetaIt;

@@ -13485,6 +13485,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.live-arconatese-varese-caronno.title': 'Arconatese-varese, réalisé par Caronno pertusella',
     'blog.article.live-arconatese-varese-caronno.excerpt': 'Huitième journée de Serie D, Groupe D Le Varese défie Arconatese à Caronno Pertusella Les rouges et blancs cherchent une continuité après la dernière victoire Le match est',
     'blog.article.live-arconatese-varese-caronno.imageAlt': 'Match Arconatese-Varese à Caronno Pertusella',
+    'blog.article.tutele-frontaliero-uscita-ticino.title': 'Un navetteur transfrontalier renvoyé en 2026 : droits sur plus de 20 km',
+    'blog.article.tutele-frontaliero-uscita-ticino.excerpt': 'Guide pratique pour les navetteurs transfrontaliers sur plus de 20 km : accord CH-IT, retenue à la source, déductibles, AHV, BVG, KVG et chèques post-congédiement.',
+    'blog.article.tutele-frontaliero-uscita-ticino.imageAlt': 'Frontalier avec des documents de travail devant un bureau au Tessin',
 };
 
 export default blogMetaFr;

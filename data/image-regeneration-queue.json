@@ -230,6 +230,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T16:04:42.643Z",
       "lastFailureAt": "2026-10-18T16:04:42.643Z"
+    },
+    {
+      "articleId": "tutele-frontaliero-uscita-ticino",
+      "title": "Frontaliere licenziato nel 2026: diritti oltre 20 km",
+      "fallbackImage": "/images/blog/article-lamal-guida-2026-canton-argovia.webp",
+      "reason": "All image providers failed for article-tutele-frontaliero-uscita-ticino: openai-codex (vision gate rejected image: Generic synthetic editorial scene with no readable text or logos;",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T16:43:36.224Z",
+      "lastFailureAt": "2026-10-18T16:43:36.224Z"
     }
   ]
 }

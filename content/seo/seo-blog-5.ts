@@ -111821,6 +111821,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tutele-frontaliero-uscita-ticino': {
+    title: 'Frontaliere licenziato nel 2026: diritti oltre 20 km',
+    description: 'Guida al licenziamento del frontaliere nel 2026: preavviso, indennità, accordo CH-IT, imposta alla fonte, franchigie, AVS, LPP, LAMal e fisco italiano.',
+    keywords: 'frontalieri, ticino, svizzera, italia, licenziato, diritti, oltre, pratica',
+    ogTitle: 'Frontaliere licenziato nel 2026: diritti e controlli',
+    ogDescription: 'Un licenziamento in Ticino va letto separando rapporto di lavoro, preavviso e indennità dal fisco: l\'accordo firmato nel 2020 è in vigore dal 2024, con franchigie diverse e credito d\'imposta nel quadro CE del 730.',
+    canonicalPath: '/articoli-frontaliere/tutele-frontaliero-uscita-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontaliere licenziato nel 2026: diritti oltre 20 km",
+      "description": "Guida al licenziamento del frontaliere nel 2026: preavviso, indennità, accordo CH-IT, imposta alla fonte, franchigie, AVS, LPP, LAMal e fisco italiano.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lamal-guida-2026-canton-argovia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Frontaliere con documenti di lavoro davanti a un ufficio in Ticino"
+      },
+      "datePublished": "2026-10-18T16:43:35+00:00",
+      "dateModified": "2026-10-18T16:43:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tutele-frontaliero-uscita-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

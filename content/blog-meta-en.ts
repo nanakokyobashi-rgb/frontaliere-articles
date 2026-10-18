@@ -13483,6 +13483,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.live-arconatese-varese-caronno.title': 'Arconatese-varese, directed by caronno pertusella',
     'blog.article.live-arconatese-varese-caronno.excerpt': 'Eighth day of Serie D, Group D The Varese challenges Arconatese in Caronno Pertusella The red and whites are looking for continuity after the last victory The match is',
     'blog.article.live-arconatese-varese-caronno.imageAlt': 'Arconatese-Varese match in Caronno Pertusella',
+    'blog.article.tutele-frontaliero-uscita-ticino.title': 'Cross-border commuter dismissed in 2026: rights over 20 km',
+    'blog.article.tutele-frontaliero-uscita-ticino.excerpt': 'Practical guide for cross-border commuters over 20 km: CH-IT agreement, withholding tax, deductibles, AHV, BVG, KVG and post-dismissal checks.',
+    'blog.article.tutele-frontaliero-uscita-ticino.imageAlt': 'Cross-border worker with work documents outside an office in Ticino',
 };
 
 export default blogMetaEn;

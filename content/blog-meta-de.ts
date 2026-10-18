@@ -13482,6 +13482,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.live-arconatese-varese-caronno.title': 'Arconatese-varese, Regie: caronno pertusella',
     'blog.article.live-arconatese-varese-caronno.excerpt': 'Achter Tag der Serie D, Gruppe D. (Varese)',
     'blog.article.live-arconatese-varese-caronno.imageAlt': 'Partie Arconatese gegen Varese in Caronno Pertusella',
+    'blog.article.tutele-frontaliero-uscita-ticino.title': 'Grenzüberschreitender Pendler 2026 entlassen: Rechte über 20 km',
+    'blog.article.tutele-frontaliero-uscita-ticino.excerpt': 'Praktischer Leitfaden für grenzüberschreitende Pendler über 20 km: CH-IT-Vereinbarung, Quellensteuer, Selbstbehalte, AHV, BVG, KVG und Nachentlassungsprüfungen.',
+    'blog.article.tutele-frontaliero-uscita-ticino.imageAlt': 'Grenzgänger mit Arbeitsunterlagen vor einem Büro im Tessin',
 };
 
 export default blogMetaDe;

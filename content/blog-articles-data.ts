@@ -45442,6 +45442,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tutele-frontaliero-uscita-ticino',
+ category: 'pratico',
+ date: '2026-10-18T16:43:35.261Z',
+ image: '/images/blog/article-lamal-guida-2026-canton-argovia.webp',
+ hasCalculator: true,
+ articleType: 'evergreen',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

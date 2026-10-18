@@ -1740,6 +1740,30 @@
       "firstSeenAt": "2026-10-18T14:47:11.805Z",
       "lastValidatedAt": "2026-10-18T14:47:11.805Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere licenziamento diritti preavviso indennita 2026",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T16:34:01.830Z",
+      "lastValidatedAt": "2026-10-18T16:34:01.830Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere licenziamento diritti preavviso indennita 2026 entro 20 km",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T16:37:08.677Z",
+      "lastValidatedAt": "2026-10-18T16:37:08.677Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -10384,6 +10408,10 @@
     "frontaliere::https://www.varesenews.it/2026/10/cinquina-varese-nel-ricordo-di-lele-andena-arconatese-battuta-5-1/2711380": {
       "section": "frontaliere",
       "ts": 1792337556381
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/i-voti-del-varese-cinque-gol-dautore-malinverno-piantoni-beretta-la-mediana-perfetta/2711386": {
+      "section": "frontaliere",
+      "ts": 1792340561459
     }
   }
 }
