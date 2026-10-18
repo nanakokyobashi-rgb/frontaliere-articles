@@ -24,6 +24,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.eventi-weekend-sciaffusa.title': 'Eventi del weekend nel Canton Sciaffusa: cosa fare sabato e domenica',
     'blog.article.eventi-weekend-sciaffusa.excerpt': 'Eventi nel Canton Sciaffusa ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
     'blog.article.eventi-weekend-sciaffusa.imageAlt': 'Eventi del weekend nel Canton Sciaffusa',
+    'blog.article.treni-zurigo-stoccarda.title': 'SBB e DB pianificano riserve tra Zurigo e Stoccarda',
+    'blog.article.treni-zurigo-stoccarda.excerpt': 'SBB e DB pianificano riserve di percorrenza aggiuntive tra Zurigo e Stoccarda.',
+    'blog.article.treni-zurigo-stoccarda.imageAlt': 'Treno passeggeri sul collegamento ferroviario tra Zurigo e Stoccarda',
 };
 
 export default blogMetaCantonShIt;

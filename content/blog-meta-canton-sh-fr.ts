@@ -24,6 +24,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.eventi-weekend-sciaffusa.title': 'Événements du week-end dans le canton de Schaffhouse : que faire samedi & dimanche',
     'blog.article.eventi-weekend-sciaffusa.excerpt': 'Événements dans le canton de Schaffhouse chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
     'blog.article.eventi-weekend-sciaffusa.imageAlt': 'Événements du week-end dans le canton de Schaffhouse',
+    'blog.article.treni-zurigo-stoccarda.title': 'SBB et DB planifient des réserves entre Zurich et Stuttgart',
+    'blog.article.treni-zurigo-stoccarda.excerpt': 'SBB et DB planifient des réserves de temps de parcours supplémentaires entre Zurich et Stuttgart.',
+    'blog.article.treni-zurigo-stoccarda.imageAlt': 'Train de voyageurs sur la liaison ferroviaire entre Zurich et Stuttgart',
 };
 
 export default blogMetaCantonShFr;

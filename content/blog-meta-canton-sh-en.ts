@@ -24,6 +24,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.eventi-weekend-sciaffusa.title': 'Weekend events in the canton of Schaffhausen: what to do Saturday & Sunday',
     'blog.article.eventi-weekend-sciaffusa.excerpt': 'Events in the canton of Schaffhausen every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
     'blog.article.eventi-weekend-sciaffusa.imageAlt': 'Weekend events in the canton of Schaffhausen',
+    'blog.article.treni-zurigo-stoccarda.title': 'SBB and DB plan reserve services between Zurich and Stuttgart',
+    'blog.article.treni-zurigo-stoccarda.excerpt': 'SBB and DB plan additional running-time reserves between Zurich and Stuttgart.',
+    'blog.article.treni-zurigo-stoccarda.imageAlt': 'Passenger train on the rail connection between Zurich and Stuttgart',
 };
 
 export default blogMetaCantonShEn;

@@ -24,6 +24,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.eventi-weekend-sciaffusa.title': 'Veranstaltungen am Wochenende im Kanton Schaffhausen: was tun Sa & So',
     'blog.article.eventi-weekend-sciaffusa.excerpt': 'Veranstaltungen im Kanton Schaffhausen an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
     'blog.article.eventi-weekend-sciaffusa.imageAlt': 'Veranstaltungen am Wochenende im Kanton Schaffhausen',
+    'blog.article.treni-zurigo-stoccarda.title': 'SBB und DB planen Reserven zwischen Zürich und Stuttgart',
+    'blog.article.treni-zurigo-stoccarda.excerpt': 'SBB und DB planen zusätzliche Fahrzeitreserven zwischen Zürich und Stuttgart.',
+    'blog.article.treni-zurigo-stoccarda.imageAlt': 'Personenzug auf der Bahnverbindung zwischen Zürich und Stuttgart',
 };
 
 export default blogMetaCantonShDe;

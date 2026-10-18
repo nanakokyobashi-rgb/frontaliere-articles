@@ -10,6 +10,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'finanze-cantone-sciaffusa-2027': { it: 'finanze-cantone-sciaffusa-2027', en: 'schaffhausen-canton-finances-2027', de: 'finanzen-kanton-schaffhausen-2027', fr: 'finances-canton-schaffhouse-2027' },
  'singen-chiusura-schaffhauser-strasse': { it: 'singen-chiusura-schaffhauser-strasse', en: 'singen-schaffhauser-strasse-closure', de: 'singen-sperrung-schaffhauser-strasse', fr: 'singen-fermeture-schaffhauser-strasse' },
  'eventi-weekend-sciaffusa': { it: 'eventi-weekend-sciaffusa', en: 'weekend-events-schaffhausen', de: 'wochenend-veranstaltungen-schaffhausen', fr: 'evenements-week-end-schaffhouse' },
+ 'treni-zurigo-stoccarda': { it: 'treni-zurigo-stoccarda', en: 'zurich-stuttgart-trains', de: 'zuerich-stuttgart-zuege', fr: 'trains-zurich-stuttgart' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

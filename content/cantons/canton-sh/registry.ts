@@ -83,4 +83,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'treni-zurigo-stoccarda',
+ category: 'novita',
+ date: '2026-10-18T06:56:55.996Z',
+ image: '/images/blog/article-treni-zurigo-stoccarda.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH', 'ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
