@@ -967,7 +967,12 @@ const ADDRESS_TOPONYM_GLOSSARY = Object.freeze([
 ]);
 
 function addressTermStartsLocality(text, term) {
-  const visibleText = visibleAddressText(text).replace(ADDRESS_POSTAL_LOCALITY_MARKER_PREFIX_RE, '');
+  let visibleText = visibleAddressText(text).trimStart();
+  const marker = visibleText.match(ADDRESS_POSTAL_LOCALITY_MARKER_PREFIX_RE);
+  if (marker) {
+    visibleText = visibleText.slice(marker[0].length)
+      .replace(ADDRESS_POSTAL_LOCALITY_PREPOSITION_PREFIX_RE, '');
+  }
   const foldedText = foldAddressText(visibleText);
   const pattern = addressTermPattern(term);
   if (!pattern) return false;
@@ -978,6 +983,17 @@ function addressTermStartsLocality(text, term) {
 
 function addressLocalityFormsForSourceLine(sourceLine, locale) {
   const forms = new Set(sourceLine.tokens);
+  const postalPlaceNames = String(sourceLine.postalSegment)
+    .replace(/^\s*(?:(?:[,;:]|[-‐‑‒–—−])\s*)/u, '');
+  if (postalSegmentContainsOnlyPlaceNames(postalPlaceNames)) {
+    for (const component of postalPlaceNames.split(/\s*,\s*/u)) {
+      const marker = component.match(ADDRESS_POSTAL_LOCALITY_MARKER_PREFIX_RE);
+      const placeName = (marker
+        ? component.slice(marker[0].length).replace(ADDRESS_POSTAL_LOCALITY_PREPOSITION_PREFIX_RE, '')
+        : component).trim().replace(/^[,;:]\s*|\s*[,;:]$/gu, '').trim();
+      if (placeName) forms.add(placeName);
+    }
+  }
   for (const entry of ADDRESS_TOPONYM_GLOSSARY) {
     const sourceForm = entry.source.find((form) =>
       sourceLine.tokens.some((token) => addressTermIsPresent(form, token)));
@@ -1028,7 +1044,7 @@ function addressSegmentForPostalCode(
     ? firstColonOffset
     : -1;
   const colonBoundary = forceFirstColonBoundary
-    ? firstColonOffset
+    ? (colonHasExpectedLocality ? descriptionColonOffset : firstColonOffset)
     : descriptionColonOffset >= 0
       ? descriptionColonOffset
       : missingLocalityColonOffset;
@@ -1265,6 +1281,7 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
           postalCode: postalMatch[0],
           line: line.trim(),
           segment: sourceAddressSegment,
+          postalSegment: sourceSegment,
           localityMarkerSegment: sourceLocalityMarkerSegment,
           hasDescriptionColon: addressHasDescriptionColon(visibleLine, postalMatch),
           context: addressContextForPostalCode(visibleLine, postalMatch),

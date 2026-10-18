@@ -1280,6 +1280,37 @@ test('la guardia ferma il segmento indirizzo prima della descrizione dopo i due 
   })[0]?.missing, ['Como']);
 });
 
+test('la guardia conserva la località dopo i due punti prima della descrizione', () => {
+  for (const [italian, target] of [
+    [
+      'Via Roma 10, 22100: Como: Municipio di Como',
+      'Rue Roma 10, 22100: Como: City Hall of Como',
+    ],
+    [
+      'Via Roma 10, 22100: San Pietro in Campo: Municipio di Como',
+      'Rue Roma 10, 22100: San Pietro in Campo: City Hall of Como',
+    ],
+  ]) {
+    assert.deepEqual(findAddressToponymMismatches({
+      italianSections: { body1: italian },
+      newSections: { body1: target },
+      locale: 'en',
+    }), [], `${italian} -> ${target}`);
+  }
+});
+
+test('la guardia riconosce marker e preposizione localizzati nella località post-CAP', () => {
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: {
+      body1: 'Via Roma 10, 22100 frazione di Como: Municipio di Como',
+    },
+    newSections: {
+      body1: 'Rue Roma 10, 22100: hameau de Côme: Hôtel de ville de Côme',
+    },
+    locale: 'fr',
+  }), []);
+});
+
 test('la guardia non prende la descrizione dopo un colon post-CAP per località persa', () => {
   const italianSections = {
     body1: 'Indirizzo: Via Roma 1, 22100 Como: Municipio di Como',
@@ -1308,6 +1339,19 @@ test('la guardia non prende la descrizione dopo un colon post-CAP per località 
       locale: 'en',
     })[0]?.missing, ['Como'], target);
   }
+});
+
+test('la guardia non scambia una frase dopo il CAP per una località seguita da descrizione', () => {
+  const mismatches = findAddressToponymMismatches({
+    italianSections: {
+      body1: 'Via Roma 10, 22100 Como: Municipio di Como',
+    },
+    newSections: {
+      body1: 'Rue Roma 10, 22100: This address is in Como: City Hall of Como',
+    },
+    locale: 'en',
+  });
+  assert.deepEqual(mismatches[0]?.missing, ['Como']);
 });
 
 test('la guardia non interpreta numeri di pratica come indirizzi', () => {
