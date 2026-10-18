@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T19:17:26.345Z",
-  "contentHash": "062f45eedc2cdc00e9856d944671dc38d2efc668084fc96887356ee0d8b30e17",
+  "updatedAt": "2026-10-18T03:33:29.942Z",
+  "contentHash": "55eb009d31c8056e962341707b885e0eef93f35dd45b0d0bae802dcbdbaed84a",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Strada principale di Felben-Wellhausen: risanamento",
+          "url": "/articoli-turgovia/felben-wellhausen-cantiere/",
+          "excerpt": "Dal 19 ottobre 2026 a metà luglio 2027, la Hauptstrasse di Felben-Wellhausen sarà risanata: Römerstrasse chiusa a tratti, Römerhof spostata o soppressa.",
+          "date": "2026-10-18T03:25:32.644Z"
+        },
+        {
           "title": "Eventi del weekend in Turgovia: cosa fare sabato e domenica",
           "url": "/articoli-turgovia/eventi-weekend-turgovia/",
           "excerpt": "Eventi in Turgovia ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
@@ -94,12 +100,6 @@
           "url": "/articoli-turgovia/kreuzlingen-barenplatz-chilbi/",
           "excerpt": "A Kreuzlingen i bus sono deviati dal 25 ottobre alle 09.00 del 27; la fermata Bärenplatz va alla stazione principale.",
           "date": "2026-10-17T00:40:57.671Z"
-        },
-        {
-          "title": "Turgovia: Sportello digitale per pratiche e documenti",
-          "url": "/articoli-turgovia/sportello-digitale-turgovia/",
-          "excerpt": "Il Digitaler Schalter del Canton Turgovia riunisce i servizi più usati, informazioni, video brevi e un'area protetta per estratti, permessi e altri documenti.",
-          "date": "2026-10-12T00:30:28.713Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T03:33:29.942Z"
     },
     "en": {
       "canton": "TG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Felben-Wellhausen main road: renovation",
+          "url": "/en/thurgau-articles/felben-wellhausen-road-works/",
+          "excerpt": "From October 19, 2026 to mid-July 2027, Felben-Wellhausen’s Hauptstrasse will be renovated: Römerstrasse closed in sections, Römerhof relocated or discontinued.",
+          "date": "2026-10-18T03:25:32.644Z"
+        },
+        {
           "title": "Weekend events in Thurgau: what to do Saturday & Sunday",
           "url": "/en/thurgau-articles/weekend-events-thurgau/",
           "excerpt": "Events in Thurgau every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
@@ -193,12 +199,6 @@
           "url": "/en/thurgau-articles/kreuzlingen-barenplatz-fair/",
           "excerpt": "In Kreuzlingen buses are diverted from 25 October at 09.00 on the 27th; the Bärenplatz stop goes to the main station.",
           "date": "2026-10-17T00:40:57.671Z"
-        },
-        {
-          "title": "Thurgau: Digital portal for procedures and documents",
-          "url": "/en/thurgau-articles/thurgau-digital-counter/",
-          "excerpt": "The Digitaler Schalter of the Canton of Thurgau brings together the most frequently used services, information, short videos, and a protected area for extracts, permits, and other documents.",
-          "date": "2026-10-12T00:30:28.713Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T03:33:29.942Z"
     },
     "de": {
       "canton": "TG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Hauptstrasse in Felben-Wellhausen: Sanierung",
+          "url": "/de/thurgau-artikel/felben-wellhausen-hauptstrasse-sanierung/",
+          "excerpt": "Vom 19. Oktober 2026 bis Mitte Juli 2027 wird die Hauptstrasse in Felben-Wellhausen saniert: Die Römerstrasse wird abschnittsweise gesperrt, die Haltestelle Römerhof verlegt oder aufgehoben.",
+          "date": "2026-10-18T03:25:32.644Z"
+        },
+        {
           "title": "Veranstaltungen am Wochenende im Thurgau: was tun Sa & So",
           "url": "/de/thurgau-artikel/wochenend-veranstaltungen-thurgau/",
           "excerpt": "Veranstaltungen im Thurgau an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
@@ -292,12 +298,6 @@
           "url": "/de/thurgau-artikel/kreuzlingen-barenplatz-wegen-messe-geschlossen/",
           "excerpt": "In Kreuzlingen werden die Busse vom 25.",
           "date": "2026-10-17T00:40:57.671Z"
-        },
-        {
-          "title": "Thurgau: Digitaler Schalter für Anliegen und Dokumente",
-          "url": "/de/thurgau-artikel/digitaler-schalter-thurgau/",
-          "excerpt": "Der Dienst Digitaler Schalter des Kantons Thurgau bündelt die meistgenutzten Dienstleistungen, Informationen, kurze Videos und einen geschützten Bereich für Auszüge, Bewilligungen und andere Dokumente.",
-          "date": "2026-10-12T00:30:28.713Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T03:33:29.942Z"
     },
     "fr": {
       "canton": "TG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Route principale de Felben-Wellhausen : assainissement",
+          "url": "/fr/articles-thurgovie/felben-wellhausen-travaux-route/",
+          "excerpt": "Du 19 octobre 2026 à la mi-juillet 2027, la Hauptstrasse de Felben-Wellhausen sera assainie : Römerstrasse fermée par tronçons, Römerhof déplacé ou supprimé.",
+          "date": "2026-10-18T03:25:32.644Z"
+        },
+        {
           "title": "Événements du week-end en Thurgovie : que faire samedi & dimanche",
           "url": "/fr/articles-thurgovie/evenements-week-end-thurgovie/",
           "excerpt": "Événements en Thurgovie chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-thurgovie/kreuzlingen-barenplatz-fete/",
           "excerpt": "À Kreuzlingen, les bus sont déviés du 25 octobre à 09h00 le 27 ; l'arrêt Bärenplatz va à la gare principale.",
           "date": "2026-10-17T00:40:57.671Z"
-        },
-        {
-          "title": "Thurgovie : Guichet numérique pour les démarches et les documents",
-          "url": "/fr/articles-thurgovie/guichet-numerique-thurgovie/",
-          "excerpt": "Le Digitaler Schalter du canton de Thurgovie réunit les services les plus utilisés, des informations, de courtes vidéos et un espace protégé pour les extraits, permis et autres documents.",
-          "date": "2026-10-12T00:30:28.713Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T03:33:29.942Z"
     }
   }
 }

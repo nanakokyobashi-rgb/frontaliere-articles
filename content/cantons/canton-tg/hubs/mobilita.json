@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T14:03:25.701Z",
-  "contentHash": "e34b59b0be00984d557ab2af1c030f75271d7e0479f2b26e0bdbebdf300885f8",
+  "updatedAt": "2026-10-18T03:33:29.942Z",
+  "contentHash": "d9a2c4c9b20750a48b2a2a4ecdcd99c9abd35775e1c8d2ddf46aab1613cc6c5f",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-17T05:03:12.314Z",
+      "updatedAt": "2026-10-17T21:02:52.166Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T20:07:19.130Z",
+      "updatedAt": "2026-10-17T19:45:28.268Z",
       "keyFacts": 0
     }
   ],
@@ -101,7 +101,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-17T21:02:52.166Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -139,7 +139,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80332"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -148,6 +148,12 @@
           "url": "/articoli-turgovia/chiusura-strada-kesswil/",
           "excerpt": "La Uttwilerstrasse di Kesswil sarà chiusa dal 15 ottobre 2026 alle 7 al 18 ottobre alle 17. Traffico deviato e possibile rinvio per pioggia o freddo.",
           "date": "2026-10-08T11:25:33.511Z"
+        },
+        {
+          "title": "Strada principale di Felben-Wellhausen: risanamento",
+          "url": "/articoli-turgovia/felben-wellhausen-cantiere/",
+          "excerpt": "Dal 19 ottobre 2026 a metà luglio 2027, la Hauptstrasse di Felben-Wellhausen sarà risanata: Römerstrasse chiusa a tratti, Römerhof spostata o soppressa.",
+          "date": "2026-10-18T03:25:32.644Z"
         },
         {
           "title": "Kreuzlingen: Bärenplatz chiuso per la fiera",
@@ -193,7 +199,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-18T03:33:29.942Z"
     },
     "en": {
       "canton": "TG",
@@ -272,7 +278,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-17T21:02:52.166Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -310,7 +316,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80332"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -319,6 +325,12 @@
           "url": "/en/thurgau-articles/kesswil-road-closure-october-2026/",
           "excerpt": "The Uttwilerstrasse in Kesswil will be closed from 7 on October 15, 2026, until 17 on October 18. Traffic will be diverted, and postponement is possible due to rain or cold.",
           "date": "2026-10-08T11:25:33.511Z"
+        },
+        {
+          "title": "Felben-Wellhausen main road: renovation",
+          "url": "/en/thurgau-articles/felben-wellhausen-road-works/",
+          "excerpt": "From October 19, 2026 to mid-July 2027, Felben-Wellhausen’s Hauptstrasse will be renovated: Römerstrasse closed in sections, Römerhof relocated or discontinued.",
+          "date": "2026-10-18T03:25:32.644Z"
         },
         {
           "title": "Kreuzlingen: Bärenplatz closed for the fair",
@@ -364,7 +376,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-18T03:33:29.942Z"
     },
     "de": {
       "canton": "TG",
@@ -443,7 +455,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-17T21:02:52.166Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -481,7 +493,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80332"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -490,6 +502,12 @@
           "url": "/de/thurgau-artikel/strassensperrung-kesswil-oktober-2026/",
           "excerpt": "Die Uttwilerstrasse in Kesswil wird vom 15. Oktober 2026 um 7 Uhr bis zum 18. Oktober um 17 Uhr gesperrt. Der Verkehr wird umgeleitet, und wegen Regen oder Kälte ist eine Verschiebung möglich.",
           "date": "2026-10-08T11:25:33.511Z"
+        },
+        {
+          "title": "Hauptstrasse in Felben-Wellhausen: Sanierung",
+          "url": "/de/thurgau-artikel/felben-wellhausen-hauptstrasse-sanierung/",
+          "excerpt": "Vom 19. Oktober 2026 bis Mitte Juli 2027 wird die Hauptstrasse in Felben-Wellhausen saniert: Die Römerstrasse wird abschnittsweise gesperrt, die Haltestelle Römerhof verlegt oder aufgehoben.",
+          "date": "2026-10-18T03:25:32.644Z"
         },
         {
           "title": "Kreuzlingen: Bärenplatz wegen Messe geschlossen",
@@ -535,7 +553,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-18T03:33:29.942Z"
     },
     "fr": {
       "canton": "TG",
@@ -614,7 +632,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-17T21:02:52.166Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -652,7 +670,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80332"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -661,6 +679,12 @@
           "url": "/fr/articles-thurgovie/fermeture-route-kesswil-octobre-2026/",
           "excerpt": "L’Uttwilerstrasse de Kesswil sera fermée du 15 octobre 2026 à 7 h au 18 octobre à 17 h. Trafic dévié et report possible en cas de pluie ou de froid.",
           "date": "2026-10-08T11:25:33.511Z"
+        },
+        {
+          "title": "Route principale de Felben-Wellhausen : assainissement",
+          "url": "/fr/articles-thurgovie/felben-wellhausen-travaux-route/",
+          "excerpt": "Du 19 octobre 2026 à la mi-juillet 2027, la Hauptstrasse de Felben-Wellhausen sera assainie : Römerstrasse fermée par tronçons, Römerhof déplacé ou supprimé.",
+          "date": "2026-10-18T03:25:32.644Z"
         },
         {
           "title": "Kreuzlingen : Bärenplatz fermé pour le salon",
@@ -706,7 +730,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-18T03:33:29.942Z"
     }
   }
 }

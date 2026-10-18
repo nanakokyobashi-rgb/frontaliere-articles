@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "fisco",
-  "updatedAt": "2026-10-17T00:51:58.422Z",
-  "contentHash": "85d89761545bd52d8b1b0617718840e8f0657de424c4c4c867148bedf5bd2458",
+  "updatedAt": "2026-10-18T03:33:29.942Z",
+  "contentHash": "4fd6cbc83cb971814929c138b251fda7c5ac7a6ccb4466d25d8a198083be2438",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T15:35:32.859Z",
+      "updatedAt": "2026-10-17T19:45:28.268Z",
       "keyFacts": 0
     }
   ],
@@ -129,7 +129,7 @@
               "url": "https://www.fr.ch/dfin/scc/actualites/modification-des-codes-qr"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -138,6 +138,12 @@
           "url": "/articoli-friburgo/fribourg-modifica-licd/",
           "excerpt": "Voto: 97 favorevoli, 1 contrario, nessuna astensione",
           "date": "2026-10-07T10:27:22.581Z"
+        },
+        {
+          "title": "Budget 2027 del canton Friburgo",
+          "url": "/articoli-friburgo/dossier-friburgo-2027/",
+          "excerpt": "La pagina fr.ch sul Budget 2027 del Canton Friburgo è il solo elemento disponibile: il materiale fornito non riporta cifre, date, decisioni o misure specifiche.",
+          "date": "2026-10-18T03:25:38.161Z"
         },
         {
           "title": "Carburanti: il Cantone non vuole aumentare le deduzioni",
@@ -187,7 +193,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-17T00:51:58.422Z"
+      "updatedAt": "2026-10-18T03:33:29.942Z"
     },
     "en": {
       "canton": "FR",
@@ -294,7 +300,7 @@
               "url": "https://www.fr.ch/dfin/scc/actualites/modification-des-codes-qr"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -302,6 +308,12 @@
           "title": "Fribourg adjusts direct taxes for bracket creep",
           "url": "/en/fribourg-articles/fribourg-adjusts-direct-taxes-for-bracket-creep/",
           "date": "2026-10-07T10:27:22.581Z"
+        },
+        {
+          "title": "2027 Budget of the Canton of Fribourg",
+          "url": "/en/fribourg-articles/fribourg-dossier-2027/",
+          "excerpt": "The fr.ch page on the 2027 Budget of the Canton of Fribourg is the only available element: the material provided does not report any figures, dates, decisions, or specific measures.",
+          "date": "2026-10-18T03:25:38.161Z"
         },
         {
           "title": "Fuels: the Canton does not want to increase deductions",
@@ -351,7 +363,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-17T00:51:58.422Z"
+      "updatedAt": "2026-10-18T03:33:29.942Z"
     },
     "de": {
       "canton": "FR",
@@ -458,7 +470,7 @@
               "url": "https://www.fr.ch/dfin/scc/actualites/modification-des-codes-qr"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -466,6 +478,12 @@
           "title": "Freiburg passt die direkten Steuern an die kalte Progression an",
           "url": "/de/freiburg-artikel/freiburg-passt-die-direkten-steuern-an-die-kalte-progression-an/",
           "date": "2026-10-07T10:27:22.581Z"
+        },
+        {
+          "title": "Budget 2027 des Kantons Freiburg",
+          "url": "/de/freiburg-artikel/freiburg-dossier-2027/",
+          "excerpt": "Die Seite fr.ch zum Budget 2027 des Kantons Freiburg ist das einzige verfügbare Element: Das bereitgestellte Material enthält keine Zahlen, Datumsangaben, Entscheidungen oder konkreten Maßnahmen.",
+          "date": "2026-10-18T03:25:38.161Z"
         },
         {
           "title": "Treibstoffe: Kanton will Abzüge nicht erhöhen",
@@ -515,7 +533,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-17T00:51:58.422Z"
+      "updatedAt": "2026-10-18T03:33:29.942Z"
     },
     "fr": {
       "canton": "FR",
@@ -622,7 +640,7 @@
               "url": "https://www.fr.ch/dfin/scc/actualites/modification-des-codes-qr"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -631,6 +649,12 @@
           "url": "/fr/articles-fribourg/fribourg-adapte-les-impots-directs-a-la-progression-a-froid/",
           "excerpt": "Vote : 97 voix favorables, 1 voix contre, aucune abstention",
           "date": "2026-10-07T10:27:22.581Z"
+        },
+        {
+          "title": "Budget 2027 du canton de Fribourg",
+          "url": "/fr/articles-fribourg/dossier-fribourg-2027/",
+          "excerpt": "La page fr.ch sur le Budget 2027 du canton de Fribourg est le seul élément disponible : le matériel fourni ne mentionne aucun chiffre, aucune date, aucune décision ni mesure spécifique.",
+          "date": "2026-10-18T03:25:38.161Z"
         },
         {
           "title": "Carburants : le canton ne veut pas augmenter les déductions",
@@ -680,7 +704,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-17T00:51:58.422Z"
+      "updatedAt": "2026-10-18T03:33:29.942Z"
     }
   }
 }
