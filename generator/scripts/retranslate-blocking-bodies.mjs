@@ -2029,13 +2029,25 @@ export function engineTranslator(engine, {
 } = {}) {
   const runLocalCodex = async (args, provider) => {
     const attempt = Number.isInteger(args?._outcome?.attempt) ? args._outcome.attempt + 1 : 1;
+    const reasonOffset = args?._outcome?._tierReasons?.length || 0;
     try {
       const out = await codexTranslate({ ...args, call: codexCall });
+      // `translateWithCodexEngine` records the reason at the guard that saw
+      // it. Preserve those bounded engine reasons when this local fallback
+      // wraps the result; otherwise every rejected answer is flattened to
+      // `incomplete-output` and the report loses the actionable distinction
+      // between an echo, a meta-response and a structure rejection.
+      const engineReasons = (args?._outcome?._tierReasons || [])
+        .slice(reasonOffset)
+        .map((event) => event?.reason)
+        .filter((reason) => reason === 'source-passthrough'
+          || reason === 'meta-response'
+          || String(reason || '').startsWith('structure:'));
       recordTranslationProviderAttempt(args?._outcome, {
         provider,
         attempt,
         status: out ? 'success' : 'failed',
-        reasons: out ? [] : ['incomplete-output'],
+        reasons: out ? [] : [...new Set(engineReasons.length ? engineReasons : ['incomplete-output'])],
       });
       return out;
     } catch (error) {
@@ -2279,7 +2291,7 @@ async function main() {
   report(results, { APPLY, AS_JSON, ENGINE, total: pairs.length, OUT: flag('out') && resolve(flag('out')) });
 }
 
-async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslateWithRetry }) {
+export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslateWithRetry }) {
   const base = { ...pair };
   const realDir = DIR_TO_REAL[pair.dir];
   if (!realDir) return { ...base, written: false, reason: `dir-sconosciuta: ${pair.dir}` };
@@ -2324,7 +2336,10 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
 
   const newSections = {};
   let missingField = null;
+  const missingFields = [];
   let translationFailure = null;
+  const translationFailures = [];
+  const translationFieldResults = [];
   // Solo sull'italiano con scaffolding: la riga del prompt da togliere e le
   // intestazioni-etichetta del prompt da riportare a titoli normali, per campo.
   const titleMarkerRepair = isSourceLocale && oldCodes.includes(TITLE_MARKER_REPAIR_CODE)
@@ -2361,7 +2376,11 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
         titleMarkerRepair.skipped.push(...stripped.skipped.map((s) => `${f} ${s}`));
       }
       const sanitized = sanitizeTranslatedField(source);
-      if (sanitized === null) { missingField = f; break; }
+      if (sanitized === null) {
+        missingField ??= f;
+        missingFields.push(f);
+        continue;
+      }
       newSections[f] = sanitized;
     }
   } else {
@@ -2385,26 +2404,32 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
         translationOutcome,
       });
       if (!out) {
-        missingField = f;
-        translationFailure = { field: f, ...summarizeTranslationOutcome(translationOutcome) };
-        break;
+        missingField ??= f;
+        missingFields.push(f);
+        translationFailures.push({ field: f, ...summarizeTranslationOutcome(translationOutcome) });
+        translationFieldResults.push({ field: f, status: 'empty' });
+        continue;
       }
       // Stesso post-processing del percorso di produzione (`create-article.mjs`
       // lo applica alla stessa identica uscita di `translateFieldFreeMt`): la
       // cascata e' la stessa, e da qui in poi lo e' anche cio' che le succede.
       const sanitized = sanitizeTranslatedField(out);
       if (sanitized === null) {
-        missingField = f;
-        translationFailure = {
+        missingField ??= f;
+        missingFields.push(f);
+        translationFailures.push({
           field: f,
           stage: 'sanitize-output',
           ...summarizeTranslationOutcome(translationOutcome),
-        };
-        break;
+        });
+        translationFieldResults.push({ field: f, status: 'rejected' });
+        continue;
       }
       newSections[f] = sanitized;
+      translationFieldResults.push({ field: f, status: 'translated' });
     }
   }
+  translationFailure = translationFailures[0] || null;
 
   // La guardia dei fatti chiave deve precedere factuality e writeAtomic: il
   // primo puo' vedere zero `critical` anche quando il secondo non deve mai
@@ -2490,6 +2515,9 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
     newCodes,
     missingField,
     ...(translationFailure ? { translationFailure } : {}),
+    ...(missingFields.length ? { missingFields } : {}),
+    ...(translationFailures.length ? { translationFailures } : {}),
+    ...(translationFieldResults.length ? { translationFieldResults } : {}),
     written: false,
     reason: localizedToponymError ? `esonimo-non-valido: ${localizedToponymError.message}` : verdict.reason,
     ...(localizedToponymError?.localizedToponymIssues
@@ -2531,8 +2559,29 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
 export const EMPTY_CASCADE_RATE_THRESHOLD = 0.2;
 
 export function emptyCascadeMetric(results, threshold = EMPTY_CASCADE_RATE_THRESHOLD) {
-  const total = results.length;
-  const count = results.filter((row) => row.reason === 'campo-vuoto-dalla-cascata').length;
+  let count = 0;
+  let total = 0;
+  for (const row of Array.isArray(results) ? results : []) {
+    // New reports measure every attempted translation field. A rejected field
+    // is still part of the denominator, even when another field in the same
+    // pair translated successfully. The legacy fallback keeps old report
+    // fixtures readable as one field per pair.
+    if (Array.isArray(row?.translationFieldResults)) {
+      total += row.translationFieldResults.length;
+      count += row.translationFieldResults.filter((field) => field?.status !== 'translated').length;
+      continue;
+    }
+    if (Array.isArray(row?.translationFailures) || Number.isInteger(row?.translationFieldsAttempted)) {
+      const attempted = Number.isInteger(row.translationFieldsAttempted)
+        ? Math.max(0, row.translationFieldsAttempted)
+        : row.translationFailures.length;
+      total += attempted;
+      count += Math.min(attempted, row.translationFailures?.length || 0);
+      continue;
+    }
+    total += 1;
+    if (row?.reason === 'campo-vuoto-dalla-cascata') count += 1;
+  }
   const rate = total > 0 ? count / total : 0;
   return { count, total, rate, threshold, firing: total > 0 && rate > threshold };
 }

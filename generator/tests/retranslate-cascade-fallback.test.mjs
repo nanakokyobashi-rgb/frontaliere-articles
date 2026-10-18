@@ -1,10 +1,15 @@
 import assert from 'node:assert/strict';
+import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import test from 'node:test';
 
 import {
   EMPTY_CASCADE_RATE_THRESHOLD,
   emptyCascadeMetric,
   engineTranslator,
+  escapeForSingleQuoteTS,
+  processPair,
 } from '../scripts/retranslate-blocking-bodies.mjs';
 import { translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 import {
@@ -85,6 +90,33 @@ test('una cascata riuscita non spende il fallback Codex locale', async () => {
   assert.equal(codexCalls, 0);
 });
 
+test('il fallback Codex conserva passthrough, meta-response e struttura come motivi bounded', async () => {
+  const source = ['## Titolo', '', 'Testo italiano da tradurre.'].join('\n');
+  for (const { answer, reason } of [
+    { answer: source, reason: 'source-passthrough' },
+    { answer: "Sorry, I can't help with that.", reason: 'meta-response' },
+    { answer: 'Der Text.', reason: 'structure:directPathRejected' },
+  ]) {
+    const outcome = { tierAttempts: [] };
+    const translate = engineTranslator('cascade', {
+      cascadeTranslate: async () => '',
+      codexCall: async () => answer,
+    });
+
+    assert.equal(await translate({
+      text: source,
+      sourceLang: 'it',
+      targetLang: 'de',
+      fieldType: 'description',
+      _outcome: outcome,
+    }), '');
+    const provider = summarizeTranslationOutcome(outcome).providers
+      .find((entry) => entry.provider === 'codex-local-fallback');
+    assert.deepEqual(provider?.reasons, { [reason]: 1 }, reason);
+    assert.equal(provider?.reasons['incomplete-output'], undefined, reason);
+  }
+});
+
 test('il riepilogo nomina provider e cause senza includere payload o errori grezzi', () => {
   const outcome = { tierAttempts: [] };
   recordTranslationProviderAttempt(outcome, {
@@ -116,23 +148,74 @@ test('il riepilogo nomina provider e cause senza includere payload o errori grez
   });
 });
 
-test('l osservatore del lotto segnala una quota di campi vuoti sopra soglia', () => {
+test('l osservatore conta vuoti e reiezioni per campo, non per coppia', () => {
   const rows = [
-    { reason: 'pulita' },
-    { reason: 'campo-vuoto-dalla-cascata' },
-    { reason: 'ri-fallita: italian-residue' },
-    { reason: 'campo-vuoto-dalla-cascata' },
-    { reason: 'pulita' },
+    {
+      reason: 'campo-vuoto-dalla-cascata',
+      translationFieldResults: [
+        { field: 'body1', status: 'empty' },
+        { field: 'body2', status: 'rejected' },
+        { field: 'body3', status: 'translated' },
+      ],
+    },
+    {
+      reason: 'campo-vuoto-dalla-cascata',
+      translationFieldResults: [
+        { field: 'body1', status: 'translated' },
+        { field: 'body2', status: 'translated' },
+      ],
+    },
+    {
+      reason: 'pulita',
+      translationFieldResults: [{ field: 'body1', status: 'translated' }],
+    },
   ];
 
   assert.equal(EMPTY_CASCADE_RATE_THRESHOLD, 0.2);
   assert.deepEqual(emptyCascadeMetric(rows), {
     count: 2,
-    total: 5,
-    rate: 0.4,
+    total: 6,
+    rate: 2 / 6,
     threshold: 0.2,
     firing: true,
   });
   assert.equal(emptyCascadeMetric([{ reason: 'pulita' }]).firing, false);
   assert.equal(emptyCascadeMetric([]).firing, false);
+});
+
+test('una reiezione non interrompe la raccolta dei campi successivi', async () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'retranslate-multifield-'));
+  const itDir = path.join(root, 'content/blog-body/it');
+  const frDir = path.join(root, 'content/blog-body/fr');
+  mkdirSync(itDir, { recursive: true });
+  mkdirSync(frDir, { recursive: true });
+  const article = (fields) => [
+    'const b = {',
+    ...Object.entries(fields).map(([field, value]) => `  'blog.article.multi.${field}': '${escapeForSingleQuoteTS(value)}',`),
+    '};',
+    'export default b;',
+    '',
+  ].join('\n');
+  writeFileSync(path.join(itDir, 'multi.ts'), article({ body1: 'Primo campo.', body2: 'Secondo campo.' }));
+  writeFileSync(path.join(frDir, 'multi.ts'), article({ body1: 'Ancien premier.', body2: 'Ancien second.' }));
+
+  const row = await processPair({
+    id: 'multi',
+    locale: 'fr',
+    dir: 'services/locales/blog-body',
+    codes: ['missing-key'],
+    fields: ['body1', 'body2'],
+    structural: true,
+  }, {
+    CONTENT_ROOT: root,
+    APPLY: false,
+    translate: async ({ text }) => text === 'Primo campo.' ? '' : 'Deuxième champ.',
+  });
+
+  assert.deepEqual(row.missingFields, ['body1']);
+  assert.deepEqual(row.translationFieldResults, [
+    { field: 'body1', status: 'empty' },
+    { field: 'body2', status: 'translated' },
+  ]);
+  assert.equal(row.reason, 'campo-vuoto-dalla-cascata');
 });
