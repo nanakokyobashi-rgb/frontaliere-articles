@@ -111665,6 +111665,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ps-tre-iniziative-thun': {
+    title: 'PS, sì a tre iniziative: api, mobilità e internet',
+    description: 'Tre iniziative hanno ottenuto il sì del PS a Thun Il buono mobilità riguarda trasporti pubblici e ferrovie Il testo chiede una tassa sui biglietti aerei',
+    keywords: 'frontalieri, ticino, svizzera, italia, iniziative, mobilità, internet, hanno',
+    ogTitle: 'A Thun il PS sostiene tre iniziative',
+    ogDescription: 'Tre iniziative hanno ottenuto il sì del PS a Thun Il buono mobilità riguarda trasporti pubblici e ferrovie Il testo chiede una tassa sui biglietti aerei',
+    canonicalPath: '/articoli-frontaliere/ps-tre-iniziative-thun/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PS, sì a tre iniziative: api, mobilità e internet",
+      "description": "Tre iniziative hanno ottenuto il sì del PS a Thun Il buono mobilità riguarda trasporti pubblici e ferrovie Il testo chiede una tassa sui biglietti aerei",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ps-tre-iniziative-thun.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Congresso socialista a Thun: sì alle iniziative su api, mobilità e sicurezza digitale."
+      },
+      "datePublished": "2026-10-18T12:57:15+00:00",
+      "dateModified": "2026-10-18T12:57:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ps-tre-iniziative-thun/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

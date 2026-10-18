@@ -13472,6 +13472,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.indennita-giornaliere-stop-cosa-fare.title': 'Indennità malattia interrotte: 5 passi per tutelarsi',
     'blog.article.indennita-giornaliere-stop-cosa-fare.excerpt': 'Un burnout porta Patrick a un\'assenza completa dal lavoro La polizza prevede un limite di 720 o 730 giorni L\'assicurazione interrompe i pagamenti dopo poche',
     'blog.article.indennita-giornaliere-stop-cosa-fare.imageAlt': 'Lavoratore frontaliere consulta documenti assicurazione malattia in ufficio a Bellinzona',
+    'blog.article.ps-tre-iniziative-thun.title': 'PS, sì a tre iniziative: api, mobilità e internet',
+    'blog.article.ps-tre-iniziative-thun.excerpt': 'Tre iniziative hanno ottenuto il sì del PS a Thun Il buono mobilità riguarda trasporti pubblici e ferrovie Il testo chiede una tassa sui biglietti aerei',
+    'blog.article.ps-tre-iniziative-thun.imageAlt': 'Congresso socialista a Thun: sì alle iniziative su api, mobilità e sicurezza digitale.',
 };
 
 export default blogMetaIt;

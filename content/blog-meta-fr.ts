@@ -13473,6 +13473,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.indennita-giornaliere-stop-cosa-fare.title': 'Indemnités maladie interrompues : 5 étapes pour se protéger',
     'blog.article.indennita-giornaliere-stop-cosa-fare.excerpt': 'Un burnout entraîne pour Patrick une absence complète du travail La police d\'assurance prévoit une limite de 720 ou 730 jours L\'assurance interrompt les paiements après quelques',
     'blog.article.indennita-giornaliere-stop-cosa-fare.imageAlt': 'Travailleur frontalier examine documents assurance maladie dans bureau à Bellinzone',
+    'blog.article.ps-tre-iniziative-thun.title': 'PS, oui à trois initiatives : abeilles, mobilité et Internet',
+    'blog.article.ps-tre-iniziative-thun.excerpt': 'Trois initiatives ont obtenu le oui du PS à Thoune Le bon de mobilité concerne les transports publics et les chemins de fer Le texte demande une taxe sur les billets d’avion',
+    'blog.article.ps-tre-iniziative-thun.imageAlt': 'Congrès socialiste à Thun: initiatives sur les abeilles, la mobilité et la sécurité numérique.',
 };
 
 export default blogMetaFr;
