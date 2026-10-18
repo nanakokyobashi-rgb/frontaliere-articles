@@ -4,18 +4,13 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T07:29:55.438Z",
-  "contentHash": "89b4b2644b6af281fd6b1ea8faa3427349da1482e4afceb3c6326ef83335a998",
+  "updatedAt": "2026-10-18T10:04:43.396Z",
+  "contentHash": "64e61836999f63230110b1a10e432dbc86c69b74551d6387279fc73e5279134d",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
-    },
-    {
-      "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-17T23:04:43.613Z",
-      "keyFacts": 0
     },
     {
       "id": "aste-targhe",
@@ -67,31 +62,6 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Farmacie di turno",
-          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
-          "items": [
-            {
-              "label": "Saner Apotheke Dornach",
-              "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-10-18T07:00:00.000Z"
-            },
-            {
-              "label": "Central-Apotheke Olten",
-              "detail": "Olten, Olten",
-              "date": "2026-10-18T08:00:00.000Z"
-            },
-            {
-              "label": "Medbase Apotheke - Zuchwil",
-              "detail": "Zuchwil, Solothurn",
-              "date": "2026-10-18T08:00:00.000Z"
-            }
-          ],
-          "sourceName": "Servizio ufficiale dei turni farmacia",
-          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-17T23:04:43.613Z"
         },
         {
           "id": "aste-targhe",
@@ -244,7 +214,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T07:29:55.438Z"
+      "updatedAt": "2026-10-18T10:04:43.396Z"
     },
     "en": {
       "canton": "SO",
@@ -279,31 +249,6 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "On-duty pharmacies",
-          "description": "Upcoming duty shifts published by the canton’s official service.",
-          "items": [
-            {
-              "label": "Saner Apotheke Dornach",
-              "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-10-18T07:00:00.000Z"
-            },
-            {
-              "label": "Central-Apotheke Olten",
-              "detail": "Olten, Olten",
-              "date": "2026-10-18T08:00:00.000Z"
-            },
-            {
-              "label": "Medbase Apotheke - Zuchwil",
-              "detail": "Zuchwil, Solothurn",
-              "date": "2026-10-18T08:00:00.000Z"
-            }
-          ],
-          "sourceName": "Official pharmacy duty service",
-          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-17T23:04:43.613Z"
         },
         {
           "id": "aste-targhe",
@@ -452,7 +397,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T07:29:55.438Z"
+      "updatedAt": "2026-10-18T10:04:43.396Z"
     },
     "de": {
       "canton": "SO",
@@ -487,31 +432,6 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Notfallapotheken",
-          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
-          "items": [
-            {
-              "label": "Saner Apotheke Dornach",
-              "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-10-18T07:00:00.000Z"
-            },
-            {
-              "label": "Central-Apotheke Olten",
-              "detail": "Olten, Olten",
-              "date": "2026-10-18T08:00:00.000Z"
-            },
-            {
-              "label": "Medbase Apotheke - Zuchwil",
-              "detail": "Zuchwil, Solothurn",
-              "date": "2026-10-18T08:00:00.000Z"
-            }
-          ],
-          "sourceName": "Offizieller Apotheken-Notfalldienst",
-          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-17T23:04:43.613Z"
         },
         {
           "id": "aste-targhe",
@@ -660,7 +580,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T07:29:55.438Z"
+      "updatedAt": "2026-10-18T10:04:43.396Z"
     },
     "fr": {
       "canton": "SO",
@@ -695,31 +615,6 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Pharmacies de garde",
-          "description": "Prochaines gardes publiées par le service officiel du canton.",
-          "items": [
-            {
-              "label": "Saner Apotheke Dornach",
-              "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-10-18T07:00:00.000Z"
-            },
-            {
-              "label": "Central-Apotheke Olten",
-              "detail": "Olten, Olten",
-              "date": "2026-10-18T08:00:00.000Z"
-            },
-            {
-              "label": "Medbase Apotheke - Zuchwil",
-              "detail": "Zuchwil, Solothurn",
-              "date": "2026-10-18T08:00:00.000Z"
-            }
-          ],
-          "sourceName": "Service officiel des pharmacies de garde",
-          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-17T23:04:43.613Z"
         },
         {
           "id": "aste-targhe",
@@ -864,7 +759,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T07:29:55.438Z"
+      "updatedAt": "2026-10-18T10:04:43.396Z"
     }
   }
 }
