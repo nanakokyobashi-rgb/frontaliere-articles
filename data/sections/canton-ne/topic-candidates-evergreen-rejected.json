@@ -27,6 +27,22 @@
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-nvidia-toute-entreprise-finira-par-devenir-une-societe-d-ia.html": {
       "section": "canton-ne",
       "ts": 1792294822901
+    },
+    "canton-ne::https://www.estrepublicain.fr/economie/2026/10/18/frontaliers-ca-tangue-pour-les-marques-horlogeres-du-groupe-de-luxe-lvmh": {
+      "section": "canton-ne",
+      "ts": 1792306308843
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-alcon-obtient-l-approbation-de-la-fda-pour-un-collyre.html": {
+      "section": "canton-ne",
+      "ts": 1792307730775
+    },
+    "canton-ne::https://www.letemps.ch/sciences/la-mission-suisse-solarstratos-obtient-le-record-mondial-du-plus-haut-vol-solaire-et-electrique": {
+      "section": "canton-ne",
+      "ts": 1792307745489
+    },
+    "canton-ne::https://www.rts.ch/play/tv/emission/couleurs-locales?id=470618": {
+      "section": "canton-ne",
+      "ts": 1792307759847
     }
   }
 }
