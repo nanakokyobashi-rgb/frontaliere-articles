@@ -1103,8 +1103,11 @@ test('la guardia riconosce CAP-località senza glossario o numero civico', () =>
 test('la guardia riconosce marker minuscoli e non li tratta come toponimi', () => {
   const cases = [
     ['22100, località Como', '22100, locality Wie'],
+    ['22100 località Como', '22100 locality Wie'],
     ['22100, frazione Como', '22100, hamlet Wie'],
+    ['22100 frazione Como', '22100 hamlet Wie'],
     ['22100, Frazione Como', '22100, hamlet Wie'],
+    ['Indirizzo: 22100 Località Como', 'Adresse: 22100 Locality Wie'],
   ];
   for (const [italianAddress, englishAddress] of cases) {
     const mismatches = findAddressToponymMismatches({
@@ -1146,6 +1149,48 @@ test('la guardia riconosce CAP e località separati solo da spazio', () => {
     newSections: { body1: '22100 Wie' },
     locale: 'en',
   })[0].missing, ['Como']);
+});
+
+test('la guardia riconosce CAP e località separati da due punti o trattino', () => {
+  for (const italianAddress of ['22100: Como', '22100 - Como']) {
+    const mismatches = findAddressToponymMismatches({
+      italianSections: { body1: italianAddress },
+      newSections: { body1: italianAddress.replace('Como', 'Wie') },
+      locale: 'en',
+    });
+    assert.deepEqual(mismatches[0]?.missing, ['Como'], italianAddress);
+  }
+});
+
+test('la guardia ignora enfasi e codice Markdown intorno all indirizzo', () => {
+  for (const delimiter of ['**', '`']) {
+    const mismatches = findAddressToponymMismatches({
+      italianSections: { body1: `${delimiter}22100 Como${delimiter}` },
+      newSections: { body1: `${delimiter}22100 Wie${delimiter}` },
+      locale: 'en',
+    });
+    assert.deepEqual(mismatches[0]?.missing, ['Como'], delimiter);
+  }
+});
+
+test('la guardia ferma il segmento indirizzo prima della descrizione dopo i due punti', () => {
+  const italianSections = {
+    body1: 'Indirizzo: Via Roma 1, 22100 Como: Municipio di Como',
+  };
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections,
+    newSections: {
+      body1: 'Adresse: Rue Roma 1, 22100 Como: City Hall of Como',
+    },
+    locale: 'en',
+  }), []);
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections,
+    newSections: {
+      body1: 'Adresse: Rue Roma 1, 22100 Wie: City Hall of Como',
+    },
+    locale: 'en',
+  })[0]?.missing, ['Como']);
 });
 
 test('la guardia non interpreta numeri di pratica come indirizzi', () => {

@@ -858,23 +858,26 @@ export const LENGTH_FLOOR = { VS_OLD: 0.7, VS_IT: 0.4 };
 const ADDRESS_POSTAL_CODE_RE = /\b\d{5}\b/gu;
 const ADDRESS_CAPITALIZED_TOKEN_RE = /(?<![\p{L}\p{N}])\p{Lu}[\p{L}\p{M}]*(?:[’'\-][\p{L}\p{M}]+)*/gu;
 const ADDRESS_STREET_CONTEXT_SOURCE = '(?:via|viale|piazza|piazzale|corso|strada|contrada|largo|vicolo|località|loc\\.|sentiero|riva|lungolago|route|rue|avenue|chemin|strasse|weg|platz)';
-const ADDRESS_STREET_NUMBER_RE = new RegExp(`\\b${ADDRESS_STREET_CONTEXT_SOURCE}\\b[^,\\n]*?(?:,\\s*)?\\d{1,5}\\s*,?\\s*$`, 'iu');
-const ADDRESS_STREET_CONTEXT_RE = new RegExp(`\\b${ADDRESS_STREET_CONTEXT_SOURCE}\\b`, 'iu');
-const ADDRESS_STREET_CONTEXT_GLOBAL_RE = new RegExp(`\\b${ADDRESS_STREET_CONTEXT_SOURCE}\\b`, 'giu');
+const ADDRESS_STREET_NUMBER_RE = new RegExp(`(?<![\\p{L}\\p{N}])${ADDRESS_STREET_CONTEXT_SOURCE}(?![\\p{L}\\p{N}])[^,\\n]*?(?:,\\s*)?\\d{1,5}\\s*,?\\s*$`, 'iu');
+const ADDRESS_STREET_CONTEXT_RE = new RegExp(`(?<![\\p{L}\\p{N}])${ADDRESS_STREET_CONTEXT_SOURCE}(?![\\p{L}\\p{N}])`, 'iu');
+const ADDRESS_STREET_CONTEXT_GLOBAL_RE = new RegExp(`(?<![\\p{L}\\p{N}])${ADDRESS_STREET_CONTEXT_SOURCE}(?![\\p{L}\\p{N}])`, 'giu');
 const ADDRESS_LABEL_CONTEXT_RE = /\b(?:indirizzo|address|adresse|cap|codice\s+postale|postal\s+code|postcode|plz|npa)\b/iu;
-const ADDRESS_POSTAL_SEPARATOR_RE = /^(?:\s*(?:[,;]|$)|\s+\p{Lu})/u;
-const ADDRESS_POSTAL_LOCALITY_RE = /^\s*(?:[,;]\s*)?\p{Lu}[\p{L}\p{M}]*(?:[’'\-][\p{L}\p{M}]+)*/u;
-const ADDRESS_POSTAL_LOCALITY_MARKER_PREFIX_RE = /^(?:fraz(?:ione)?\.?|localit(?:à|a)|loc\.?|hameau|lieu-dit|ortsteil)\s+/iu;
+const ADDRESS_POSTAL_SEPARATOR_RE = /^(?:\s*(?:[,;:]|[-‐‑‒–—−])\s*|\s+\p{Lu}|\s+(?:fraz(?:ione)?\.?|localit(?:à|a)|loc\.?|hameau|lieu-dit|ortsteil)(?![\p{L}\p{N}])|\s*$)/iu;
+const ADDRESS_POSTAL_LOCALITY_RE = /^\s*(?:(?:[,;:]|[-‐‑‒–—−])\s*)?\p{Lu}[\p{L}\p{M}]*(?:[’'\-][\p{L}\p{M}]+)*/u;
+const ADDRESS_POSTAL_LOCALITY_MARKER_PREFIX_RE = /^(?:fraz(?:ione)?\.?|localit(?:à|a)|loc\.?|hameau|lieu-dit|ortsteil)(?![\p{L}\p{N}])\s+/iu;
 const ADDRESS_COMPACT_PREFIX_RE = /^\s*(?:[-‐‑‒–—−>→•*]\s*)?$/u;
-const ADDRESS_LOCALITY_MARKER_RE = /\b(?:fraz(?:ione)?\.?|localit(?:à|a)|loc\.|hameau|lieu-dit|ortsteil)\b/iu;
+const ADDRESS_LOCALITY_MARKER_SOURCE = '(?:fraz(?:ione)?\\.?|localit(?:à|a)|loc\\.?|hameau|lieu-dit|ortsteil)';
+const ADDRESS_LOCALITY_MARKER_RE = new RegExp(`(?<![\\p{L}\\p{N}])${ADDRESS_LOCALITY_MARKER_SOURCE}(?![\\p{L}\\p{N}])`, 'iu');
 const ADDRESS_LOCALITY_MARKER_TOKEN_RE = /^(?:fraz(?:ione)?|localit(?:à|a)|loc|hameau|lieu-dit|ortsteil)$/iu;
 const ADDRESS_COUNTRY_BOUNDARY_RE = /(?:^|[,;]|\s+)(?:italia|italy|italien|italie|svizzera|switzerland|schweiz|suisse|germania|germany|deutschland|allemagne|francia|france|spagna|spain|spanien|espagne|austria|österreich|autriche)\b[\s\S]*$/iu;
 const ADDRESS_SENTENCE_BOUNDARY_RE = /(?<!\bfraz)(?<!\bfrazione)(?<!\bloc)[.!?](?=\s|$)/iu;
 const ADDRESS_RECORD_BOUNDARY_RE = /[;\n]/u;
 const ADDRESS_DASH_RE = /[-‐‑‒–—−]/u;
 const ADDRESS_MARKDOWN_LINK_RE = /!?\[([^\]\n]*)\]\((?:<[^>\n]*>|[^)\n]*)\)/gu;
+const ADDRESS_MARKDOWN_DECORATION_RE = /(?:\*{1,3}|_{1,3}|~~|`{1,3})|(?<![\p{L}\p{N}])[*_]|[*_](?![\p{L}\p{N}])/gu;
 const ADDRESS_HTML_TAG_RE = /<[^>\n]*>/gu;
 const ADDRESS_URL_RE = /(?:https?:\/\/|www\.)[^\s)\]>"]+|(?<![\p{L}\p{N}@])\/[a-z0-9][^\s)\]>"]*/giu;
+const ADDRESS_DESCRIPTION_COLON_RE = /:/gu;
 
 /**
  * The address guard is deliberately narrower than a generic capitalized-word
@@ -896,12 +899,13 @@ function foldAddressText(value) {
     .toLocaleLowerCase('en');
 }
 
-/** Keep Markdown labels and HTML text, but never count opaque link metadata. */
+/** Keep Markdown labels and HTML text, but discard opaque metadata and formatting. */
 function visibleAddressText(value) {
   return String(value ?? '')
     .replace(ADDRESS_MARKDOWN_LINK_RE, '$1')
     .replace(ADDRESS_URL_RE, ' ')
-    .replace(ADDRESS_HTML_TAG_RE, ' ');
+    .replace(ADDRESS_HTML_TAG_RE, ' ')
+    .replace(ADDRESS_MARKDOWN_DECORATION_RE, '');
 }
 
 function addressTermPattern(term) {
@@ -959,9 +963,14 @@ function addressSegmentForPostalCode(line, postalMatch) {
   const bounded = nextPostalOffset < 0
     ? afterPostal
     : afterPostal.slice(0, nextPostalOffset);
+  ADDRESS_DESCRIPTION_COLON_RE.lastIndex = 0;
+  const descriptionColon = [...bounded.matchAll(ADDRESS_DESCRIPTION_COLON_RE)]
+    .find((match) => postalSegmentHasLocality(bounded.slice(0, match.index)));
+  ADDRESS_DESCRIPTION_COLON_RE.lastIndex = 0;
   const boundaryOffsets = [
     bounded.search(ADDRESS_SENTENCE_BOUNDARY_RE),
     bounded.search(ADDRESS_RECORD_BOUNDARY_RE),
+    descriptionColon?.index ?? -1,
   ].filter((offset) => offset >= 0);
   const addressText = boundaryOffsets.length === 0
     ? bounded
@@ -978,7 +987,7 @@ function postalHasAddressSeparator(line, postalMatch) {
 }
 
 function postalSegmentHasLocality(addressSegment) {
-  const segment = String(addressSegment).replace(/^\s*(?:[,;]\s*)?/u, '');
+  const segment = String(addressSegment).replace(/^\s*(?:(?:[,;:]|[-‐‑‒–—−])\s*)?/u, '');
   const afterMarker = segment.replace(ADDRESS_POSTAL_LOCALITY_MARKER_PREFIX_RE, '');
   return ADDRESS_POSTAL_LOCALITY_RE.test(afterMarker);
 }
