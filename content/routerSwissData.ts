@@ -2856,6 +2856,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'aiuti-sociali-rifugiati-ucraini': { it: 'aiuti-sociali-rifugiati-ucraini', en: 'social-assistance-for-ukrainian-refugees-mixed-opinions', de: 'sozialhilfe-fur-ukrainische-fluchtlinge-geteilte-meinungen', fr: 'aides-sociales-aux-refugies-ukrainiens-avis-partages' },
  'prodex-40-anni-esericerca-spaziale': { it: 'prodex-40-anni-esericerca-spaziale', en: 'prodex-40-years-space-research', de: 'prodex-40-jahre-weltraumforschung', fr: 'prodex-40-ans-recherche-spatiale' },
  'ffs-binari-deformazioni-canicola-2024': { it: 'ffs-binari-deformazioni-canicola-2024', en: 'ffs-rail-deformations-heatwave-2024', de: 'ffs-schienen-verformungen-hitze-2024', fr: 'cff-rails-deformations-canicule-2024' },
+ 'indennita-covid-abusi-aziende': { it: 'indennita-covid-abusi-aziende', en: 'covid-allowance-abuses-hit-hundreds-of-firms', de: 'covid-entschadigungen-lastminute-zahlt-28-9-mio-zuruck', fr: 'indemnites-covid-abus-dans-des-centaines-d-entreprises' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

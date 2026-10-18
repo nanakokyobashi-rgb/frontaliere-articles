@@ -8501,6 +8501,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ffs-binari-deformazioni-canicola-2024.title': 'FFS: 97 Gleisverformungen wegen Hitze, Taskforce für Sommer 2026',
     'blog.article.ffs-binari-deformazioni-canicola-2024.excerpt': 'Die FFS haben 97 Verformungen und Stauchungen registriert.',
     'blog.article.ffs-binari-deformazioni-canicola-2024.imageAlt': 'FFS-Gleise unter der Sommersonne mit sichtbarer Hitzewelle',
+    'blog.article.indennita-covid-abusi-aziende.title': 'Covid-Entschädigungen: Lastminute zahlt 28,9 Mio. zurück',
+    'blog.article.indennita-covid-abusi-aziende.excerpt': '7\'200 von über 167\'000 begünstigten Unternehmen überprüft Das SECO hat 243,53 Millionen an Kurzarbeitsentschädigungen zurückgefordert Lastminute hat im Tessin 28,9 Millionen zurückerstattet Ende',
+    'blog.article.indennita-covid-abusi-aziende.imageAlt': 'Schweizer Büro mit Mitarbeitern, die finanzielle Dokumente zu Covid‑Subventionen prüfen',
 };
 
 export default blogMetaChDe;

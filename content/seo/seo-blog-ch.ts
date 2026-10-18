@@ -107393,6 +107393,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-indennita-covid-abusi-aziende': {
+    title: 'Indennità Covid: abusi in centinaia di aziende. Lastminute ha restituito 28,9 milioni',
+    description: '7\'200 aziende verificate su oltre 167\'000 beneficiarie La SECO ha reclamato 243,53 milioni di ILR Lastminute ha restituito 28,9 milioni in Ticino A fine',
+    keywords: 'frontalieri, ticino, svizzera, italia, indennità, covid, abusi, centinaia',
+    ogTitle: 'Indennità Covid: abusi in centinaia di aziende. Lastminute ha restituito 28,9 milioni',
+    ogDescription: '7\'200 aziende verificate su oltre 167\'000 beneficiarie La SECO ha reclamato 243,53 milioni di ILR Lastminute ha restituito 28,9 milioni in Ticino A fine',
+    canonicalPath: '/articoli-svizzera/indennita-covid-abusi-aziende/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Indennità Covid: abusi in centinaia di aziende. Lastminute ha restituito 28,9 milioni",
+      "description": "7'200 aziende verificate su oltre 167'000 beneficiarie La SECO ha reclamato 243,53 milioni di ILR Lastminute ha restituito 28,9 milioni in Ticino A fine",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio svizzero con impiegati che controllano documenti finanziari legati alle indennità Covid"
+      },
+      "datePublished": "2026-10-18T16:04:42+00:00",
+      "dateModified": "2026-10-18T16:04:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/indennita-covid-abusi-aziende/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
