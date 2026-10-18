@@ -13448,6 +13448,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.morto-andena-varese.title': 'Gabriele “Lele” Andena, a stalwart of Varese football, has died',
     'blog.article.morto-andena-varese.excerpt': 'Gabriele Andena died at 79 after a sudden illness.',
     'blog.article.morto-andena-varese.imageAlt': 'Football stadium with red-and-white colors',
+    'blog.article.incendio-palazzina-lugano.title': 'Nighttime fire in an apartment building in Lugano: one victim',
+    'blog.article.incendio-palazzina-lugano.excerpt': 'Fire shortly after 3 on via Cortivallo in Lugano Flames started from an apartment on the second floor 22 tenants temporarily evacuated One person found',
+    'blog.article.incendio-palazzina-lugano.imageAlt': 'Residential building on Via Cortivallo in Lugano after the night fire',
 };
 
 export default blogMetaEn;

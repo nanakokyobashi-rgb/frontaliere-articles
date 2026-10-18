@@ -13447,6 +13447,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.morto-andena-varese.title': 'Gabriele «Lele» Andena, eine Säule des Fußballs in Varese, ist gestorben',
     'blog.article.morto-andena-varese.excerpt': 'Gabriele Andena ist im Alter von 79 Jahren nach einem plötzlichen Unwohlsein gestorben.',
     'blog.article.morto-andena-varese.imageAlt': 'Fussballstadion in Rot und Weiss',
+    'blog.article.incendio-palazzina-lugano.title': 'Nächtlicher Brand in einem Mehrfamilienhaus in Lugano: ein Todesopfer',
+    'blog.article.incendio-palazzina-lugano.excerpt': 'Brand kurz nach 3 Uhr in der Via Cortivallo in Lugano Flammen gingen von einer Wohnung im zweiten Stock aus 22 Mieter vorübergehend evakuiert Eine Person aufgefunden',
+    'blog.article.incendio-palazzina-lugano.imageAlt': 'Wohnhaus an der Via Cortivallo in Lugano nach dem nächtlichen Brand',
 };
 
 export default blogMetaDe;

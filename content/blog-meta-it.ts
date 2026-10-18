@@ -13449,6 +13449,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.morto-andena-varese.title': 'È morto Gabriele «Lele» Andena, colonna del Varese calcio',
     'blog.article.morto-andena-varese.excerpt': 'Gabriele Andena è morto a 79 anni dopo un malore improvviso.',
     'blog.article.morto-andena-varese.imageAlt': 'Stadio di calcio con colori biancorossi',
+    'blog.article.incendio-palazzina-lugano.title': 'Incendio notturno in una palazzina di Lugano: una vittima',
+    'blog.article.incendio-palazzina-lugano.excerpt': 'Incendio poco dopo le 3 in via Cortivallo a Lugano Fiamme partite da un appartamento al secondo piano Evacuati temporaneamente 22 inquilini Una persona trovata',
+    'blog.article.incendio-palazzina-lugano.imageAlt': 'Palazzina di via Cortivallo a Lugano dopo l\'incendio notturno',
 };
 
 export default blogMetaIt;

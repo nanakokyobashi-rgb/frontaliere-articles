@@ -111402,6 +111402,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-incendio-palazzina-lugano': {
+    title: 'Incendio notturno in una palazzina di Lugano: una vittima',
+    description: 'Incendio poco dopo le 3 in via Cortivallo a Lugano Fiamme partite da un appartamento al secondo piano Evacuati temporaneamente 22 inquilini Una persona trovata',
+    keywords: 'frontalieri, ticino, svizzera, italia, incendio, notturno, palazzina, lugano',
+    ogTitle: 'Incendio a Lugano: una vittima in via Cortivallo',
+    ogDescription: 'Incendio poco dopo le 3 in via Cortivallo a Lugano Fiamme partite da un appartamento al secondo piano Evacuati temporaneamente 22 inquilini Una persona trovata',
+    canonicalPath: '/articoli-frontaliere/incendio-palazzina-lugano/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incendio notturno in una palazzina di Lugano: una vittima",
+      "description": "Incendio poco dopo le 3 in via Cortivallo a Lugano Fiamme partite da un appartamento al secondo piano Evacuati temporaneamente 22 inquilini Una persona trovata",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-incendio-palazzina-lugano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzina di via Cortivallo a Lugano dopo l'incendio notturno"
+      },
+      "datePublished": "2026-10-18T09:03:30+00:00",
+      "dateModified": "2026-10-18T09:03:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/incendio-palazzina-lugano/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

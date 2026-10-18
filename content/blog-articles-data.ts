@@ -45330,6 +45330,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'incendio-palazzina-lugano',
+ category: 'novita',
+ date: '2026-10-18T09:03:30.423Z',
+ image: '/images/blog/article-incendio-palazzina-lugano.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
