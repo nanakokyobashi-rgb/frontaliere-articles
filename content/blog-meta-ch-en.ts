@@ -8471,6 +8471,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.svizzera-attualita-istituzioni-2026.title': 'Switzerland, instructions for use: politics, institutions and the environment',
     'blog.article.svizzera-attualita-istituzioni-2026.excerpt': 'UDC almost at 30% one year before the federal elections On November 29, a vote will be held on the law on war materiel Adula and Grauhorn are no longer united Solar Express',
     'blog.article.svizzera-attualita-istituzioni-2026.imageAlt': 'Federal Palace in Bern representing Swiss political landscape',
+    'blog.article.pensionato-vince-contro-ffs.title': 'Retiree prevails over FFS after months-long battle',
+    'blog.article.pensionato-vince-contro-ffs.excerpt': 'UFT: 75-franc surcharge deemed unjustified Bus delay, then an alternative route The story begins with the Küsnacht-Rafz journey The case',
+    'blog.article.pensionato-vince-contro-ffs.imageAlt': 'Pensionist wins battle against SBB on public transport',
 };
 
 export default blogMetaChEn;

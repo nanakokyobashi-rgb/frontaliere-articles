@@ -8471,6 +8471,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.svizzera-attualita-istituzioni-2026.title': 'Schweiz, Gebrauchsanweisung: Politik, Institutionen und Umwelt',
     'blog.article.svizzera-attualita-istituzioni-2026.excerpt': 'SVP fast bei 30% ein Jahr vor den eidgenössischen Wahlen Am 29.',
     'blog.article.svizzera-attualita-istituzioni-2026.imageAlt': 'Bundeshaus in Bern als Zentrum der Schweizer Politik',
+    'blog.article.pensionato-vince-contro-ffs.title': 'Rentner setzt sich nach monatelangem Kampf gegen die FFS durch',
+    'blog.article.pensionato-vince-contro-ffs.excerpt': 'UFT: Zuschlag von 75 Franken als ungerechtfertigt eingestuft Verspätung eines Busses, dann eine alternative Route Der Fall beginnt mit der Reise Küsnacht-Rafz Der Fall',
+    'blog.article.pensionato-vince-contro-ffs.imageAlt': 'Rentner gewinnt Kampf gegen die SBB im öffentlichen Verkehr',
 };
 
 export default blogMetaChDe;

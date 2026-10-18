@@ -8471,6 +8471,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.svizzera-attualita-istituzioni-2026.title': 'Suisse, mode d\'emploi : politique, institutions et environnement',
     'blog.article.svizzera-attualita-istituzioni-2026.excerpt': 'UDC à près de 30% à un an des élections fédérales Le 29 novembre on vote sur la loi sur le matériel de guerre L\'Adula et le Grauhorn ne sont plus reliés Solar Express peine à s\'imposer en montagne',
     'blog.article.svizzera-attualita-istituzioni-2026.imageAlt': 'Palais fédéral à Berne représentant le paysage politique suisse',
+    'blog.article.pensionato-vince-contro-ffs.title': 'Un retraité obtient gain de cause contre les FFS après des mois de bataille',
+    'blog.article.pensionato-vince-contro-ffs.excerpt': 'UFT : supplément de 75 francs jugé injustifié Retard d’un bus, puis un itinéraire alternatif L’affaire commence par le trajet Küsnacht-Rafz Le cas',
+    'blog.article.pensionato-vince-contro-ffs.imageAlt': 'Un retraité gagne la bataille contre les CFF sur les transports',
 };
 
 export default blogMetaChFr;

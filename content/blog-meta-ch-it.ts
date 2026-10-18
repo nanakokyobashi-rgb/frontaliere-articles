@@ -8471,6 +8471,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.svizzera-attualita-istituzioni-2026.title': 'Svizzera, istruzioni per l\'uso: politica, istituzioni e ambiente',
     'blog.article.svizzera-attualita-istituzioni-2026.excerpt': 'UDC quasi al 30% a un anno dalle elezioni federali Il 29 novembre si vota sulla legge sul materiale bellico Adula e Grauhorn non sono più uniti Solar Express',
     'blog.article.svizzera-attualita-istituzioni-2026.imageAlt': 'Palazzo federale a Berna con rappresentanza della politica svizzera',
+    'blog.article.pensionato-vince-contro-ffs.title': 'Pensionato la spunta contro le FFS dopo mesi di battaglia',
+    'blog.article.pensionato-vince-contro-ffs.excerpt': 'UFT: supplemento di 75 franchi dichiarato ingiustificato Ritardo di un autobus, poi un itinerario alternativo La vicenda parte dal viaggio Küsnacht-Rafz Il caso',
+    'blog.article.pensionato-vince-contro-ffs.imageAlt': 'Pensionato vince la battaglia contro le FFS sui trasporti pubblici',
 };
 
 export default blogMetaChIt;

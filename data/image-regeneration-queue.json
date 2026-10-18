@@ -80,6 +80,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T01:13:08.353Z",
       "lastFailureAt": "2026-10-18T01:13:08.353Z"
+    },
+    {
+      "articleId": "pensionato-vince-contro-ffs",
+      "title": "Pensionato la spunta contro le FFS dopo mesi di battaglia",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T01:47:23.656Z",
+      "lastFailureAt": "2026-10-18T01:47:23.656Z"
     }
   ]
 }
