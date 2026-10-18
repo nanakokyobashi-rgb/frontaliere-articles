@@ -1100,6 +1100,30 @@ test('la guardia riconosce CAP-località senza glossario o numero civico', () =>
   }
 });
 
+test('la guardia riconosce marker minuscoli e non li tratta come toponimi', () => {
+  const cases = [
+    ['22100, località Como', '22100, locality Wie'],
+    ['22100, frazione Como', '22100, hamlet Wie'],
+    ['22100, Frazione Como', '22100, hamlet Wie'],
+  ];
+  for (const [italianAddress, englishAddress] of cases) {
+    const mismatches = findAddressToponymMismatches({
+      italianSections: { body1: italianAddress },
+      newSections: { body1: englishAddress },
+      locale: 'en',
+    });
+    assert.deepEqual(mismatches[0]?.missing, ['Como'], italianAddress);
+  }
+});
+
+test('la guardia associa per località le righe riordinate con CAP duplicati senza via', () => {
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: '22100 Como\n22100 Varese' },
+    newSections: { body1: '22100 Varese\n22100 Como' },
+    locale: 'en',
+  }), []);
+});
+
 test('la guardia riconosce gli indirizzi con trattino o due punti prima del CAP', () => {
   for (const italianAddress of [
     'Via Roma 10 - 22100 Como',
