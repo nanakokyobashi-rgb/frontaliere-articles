@@ -13426,6 +13426,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.radar-velocita-ticino-ottobre.title': 'Radar dans le canton du Tessin du 19 au 25 octobre : les contrôles',
     'blog.article.radar-velocita-ticino-ottobre.excerpt': 'Contrôles du 19 au 25 octobre 2026 Radars mobiles et semi-stationnaires dans diverses localités Sont également concernées des zones fréquentées par les frontaliers italiens Qui → Police',
     'blog.article.radar-velocita-ticino-ottobre.imageAlt': 'Contrôles de vitesse par radar au Tessin',
+    'blog.article.franchigia-accordo-redditi-single.title': 'Crédit d\'impôt 2026 : calcul pour le frontalier célibataire',
+    'blog.article.franchigia-accordo-redditi-single.excerpt': 'Accord signé le 23 décembre 2020 En vigueur depuis le 1er janvier 2024 Anciens frontaliers : exemption de 7\'500 € Nouveaux frontaliers : franchise de 10\'000 € Accord : 23',
+    'blog.article.franchigia-accordo-redditi-single.imageAlt': 'Frontalier célibataire vérifie une fiche de salaire suisse et sa déclaration italienne à Mendrisio',
 };
 
 export default blogMetaFr;

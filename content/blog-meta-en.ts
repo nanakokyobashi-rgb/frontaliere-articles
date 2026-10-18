@@ -13424,6 +13424,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.radar-velocita-ticino-ottobre.title': 'Speed cameras in Canton Ticino from October 19 to 25: the checks',
     'blog.article.radar-velocita-ticino-ottobre.excerpt': 'Checks from October 19 to 25, 2026 Mobile and semi-stationary speed cameras in various locations Also affected are areas frequented by Italian cross-border commuters Who → Police',
     'blog.article.radar-velocita-ticino-ottobre.imageAlt': 'Speed radar controls in Canton Ticino',
+    'blog.article.franchigia-accordo-redditi-single.title': '2026 tax credit: calculation for the single cross-border commuter',
+    'blog.article.franchigia-accordo-redditi-single.excerpt': 'Agreement signed on 23 December 2020 In force from 1 January 2024 Old frontier workers: exemption of €7,500 New frontier workers: excess of €10,000 Agreement: 23',
+    'blog.article.franchigia-accordo-redditi-single.imageAlt': 'Single cross-border worker checks a Swiss payslip and Italian tax return in Mendrisio',
 };
 
 export default blogMetaEn;

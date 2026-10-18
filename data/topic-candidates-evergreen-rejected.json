@@ -768,6 +768,18 @@
       "firstSeenAt": "2026-10-17T10:42:20.115Z",
       "lastValidatedAt": "2026-10-17T10:42:20.115Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere credito imposta 2026 famiglia con figli",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T03:39:02.015Z",
+      "lastValidatedAt": "2026-10-18T03:39:02.015Z",
+      "expiresAt": null
     }
   ],
   "strikes": [

@@ -13423,6 +13423,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.radar-velocita-ticino-ottobre.title': 'Radar im Kanton Tessin vom 19. bis 25. Oktober: die Kontrollen',
     'blog.article.radar-velocita-ticino-ottobre.excerpt': 'Kontrollen vom 19.',
     'blog.article.radar-velocita-ticino-ottobre.imageAlt': 'Geschwindigkeitskontrollen mit Radar im Tessin',
+    'blog.article.franchigia-accordo-redditi-single.title': 'Steuergutschrift 2026: Berechnung für Single-Grenzgänger',
+    'blog.article.franchigia-accordo-redditi-single.excerpt': 'Vereinbarung unterzeichnet am 23.',
+    'blog.article.franchigia-accordo-redditi-single.imageAlt': 'Single-Grenzgänger prüft Schweizer Lohnabrechnung und italienische Steuererklärung in Mendrisio',
 };
 
 export default blogMetaDe;

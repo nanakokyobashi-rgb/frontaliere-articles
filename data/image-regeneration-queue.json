@@ -130,6 +130,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T03:25:32.688Z",
       "lastFailureAt": "2026-10-18T03:25:32.688Z"
+    },
+    {
+      "articleId": "franchigia-accordo-redditi-single",
+      "title": "Credito d'imposta 2026: calcolo per il frontaliere single",
+      "fallbackImage": "/images/blog/article-credito-imposta-famiglia-2026.webp",
+      "reason": "All image providers failed for article-franchigia-accordo-redditi-single: openai-codex (vision gate rejected image: Generic synthetic editorial scene with no readable text or logos",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T03:51:56.775Z",
+      "lastFailureAt": "2026-10-18T03:51:56.775Z"
     }
   ]
 }
