@@ -8480,6 +8480,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.lamal-guida-2026-canton-argovia.title': 'Schweizer Gesundheitssystem nach LAMal: Leitfaden 2026 für den Kanton Aargau',
     'blog.article.lamal-guida-2026-canton-argovia.excerpt': 'Wer in der Schweiz wohnt, muss eine LAMal-Versicherung haben.',
     'blog.article.lamal-guida-2026-canton-argovia.imageAlt': 'LAMal Leitfaden 2026 fuer Einwohner im Kanton Aargau',
+    'blog.article.ordinanza-liste-validita.title': 'UNO ändert Sanktionsliste: SESAM aktualisiert',
+    'blog.article.ordinanza-liste-validita.excerpt': 'Am 16. Oktober 2026 hat die UNO eine Sanktionsliste geändert.',
+    'blog.article.ordinanza-liste-validita.imageAlt': 'Bern, Schweizer Gebäude und Unterlagen zur Aktualisierung der UN-Sanktionslisten in SESAM.',
 };
 
 export default blogMetaChDe;

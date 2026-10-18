@@ -8480,6 +8480,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.lamal-guida-2026-canton-argovia.title': 'Système de santé suisse LAMal : guide 2026 du canton d\'Argovie',
     'blog.article.lamal-guida-2026-canton-argovia.excerpt': 'Toute personne résidant en Suisse doit avoir une assurance LAMal La police doit être souscrite dans les trois mois suivant l\'arrivée Pour les adultes, des franchises de CHF 300 sont prévues',
     'blog.article.lamal-guida-2026-canton-argovia.imageAlt': 'Guide LAMal 2026 pour les residents du canton d\'Argovie',
+    'blog.article.ordinanza-liste-validita.title': 'L’ONU modifie la liste des sanctions : SESAM mis à jour',
+    'blog.article.ordinanza-liste-validita.excerpt': 'Le 16 octobre 2026, l’ONU a apporté une modification à une liste de sanctions.',
+    'blog.article.ordinanza-liste-validita.imageAlt': 'Berne, bâtiment institutionnel et documents sur la mise à jour des listes de l’ONU dans SESAM.',
 };
 
 export default blogMetaChFr;

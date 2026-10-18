@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/tgijvny5fjil": {
-    "articleId": "ocse-rapporto-svizzera-2026",
-    "ts": "2026-09-16T00:28:43.235Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/crescita-in-svizzera%2c-bak-economics-alza-nettamente-le-stime/92060939": {
     "articleId": "bak-economics-pil-2026-18",
     "ts": "2026-09-16T00:54:45.042Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/cronaca/1957434/franchi-ffs-denaro-florida-casa-manager-lamborghini": {
     "articleId": "manager-ffs-denaro-pubblico",
     "ts": "2026-10-18T02:31:56.257Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/xnnqhbeivwar": {
+    "articleId": "ordinanza-liste-validita",
+    "ts": "2026-10-18T04:35:28.733Z",
     "keyForm": 2
   }
 }

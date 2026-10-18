@@ -107125,6 +107125,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ordinanza-liste-validita': {
+    title: 'ONU modifica la lista di sanzioni: SESAM aggiornato',
+    description: 'Il 16 ottobre 2026 l’ONU ha apportato una modifica a una lista di sanzioni. SESAM è stata aggiornata di conseguenza. Il 4 marzo 2016 il Consiglio federale aveva',
+    keywords: 'frontalieri, ticino, svizzera, italia, modifica, lista, sanzioni, sesam',
+    ogTitle: 'ONU modifica la lista di sanzioni: SESAM aggiornato',
+    ogDescription: 'Il 16 ottobre 2026 l’ONU ha apportato una modifica a una lista di sanzioni.',
+    canonicalPath: '/articoli-svizzera/ordinanza-liste-validita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "ONU modifica la lista di sanzioni: SESAM aggiornato",
+      "description": "Il 16 ottobre 2026 l’ONU ha apportato una modifica a una lista di sanzioni. SESAM è stata aggiornata di conseguenza. Il 4 marzo 2016 il Consiglio federale aveva",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ordinanza-liste-validita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Berna, edificio istituzionale e documenti sulla modifica delle liste ONU nella banca dati SESAM."
+      },
+      "datePublished": "2026-10-18T04:35:28+00:00",
+      "dateModified": "2026-10-18T04:35:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ordinanza-liste-validita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

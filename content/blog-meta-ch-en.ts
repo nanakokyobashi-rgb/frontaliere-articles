@@ -8480,6 +8480,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.lamal-guida-2026-canton-argovia.title': 'Swiss LAMal healthcare system: 2026 guide to the Canton of Aargau',
     'blog.article.lamal-guida-2026-canton-argovia.excerpt': 'Anyone residing in Switzerland must have LAMal insurance The policy must be taken out within three months of arrival For adults, deductibles of CHF 300 apply',
     'blog.article.lamal-guida-2026-canton-argovia.imageAlt': 'LAMal 2026 guide for residents in Canton Aargau',
+    'blog.article.ordinanza-liste-validita.title': 'UN modifies sanctions list: SESAM updated',
+    'blog.article.ordinanza-liste-validita.excerpt': 'On October 16, 2026, the UN made a change to a sanctions list.',
+    'blog.article.ordinanza-liste-validita.imageAlt': 'Bern, Swiss institutional building and documents on the UN list update in the SESAM database.',
 };
 
 export default blogMetaChEn;

@@ -8480,6 +8480,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.lamal-guida-2026-canton-argovia.title': 'Sistema sanitario svizzero LAMal: guida 2026 Canton Argovia',
     'blog.article.lamal-guida-2026-canton-argovia.excerpt': 'Chi risiede in Svizzera deve avere un\'assicurazione LAMal La polizza va stipulata entro tre mesi dall\'arrivo Per gli adulti sono previste franchigie di CHF 300',
     'blog.article.lamal-guida-2026-canton-argovia.imageAlt': 'Guida LAMal 2026 per residenti nel canton Argovia',
+    'blog.article.ordinanza-liste-validita.title': 'ONU modifica la lista di sanzioni: SESAM aggiornato',
+    'blog.article.ordinanza-liste-validita.excerpt': 'Il 16 ottobre 2026 l’ONU ha apportato una modifica a una lista di sanzioni.',
+    'blog.article.ordinanza-liste-validita.imageAlt': 'Berna, edificio istituzionale e documenti sulla modifica delle liste ONU nella banca dati SESAM.',
 };
 
 export default blogMetaChIt;

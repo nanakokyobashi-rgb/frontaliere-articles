@@ -2849,6 +2849,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'pensionato-vince-contro-ffs': { it: 'pensionato-vince-contro-ffs', en: 'pensioner-wins-against-sbb', de: 'rentner-gewinnt-gegen-sbb', fr: 'retraite-gagne-contre-cff' },
  'manager-ffs-denaro-pubblico': { it: 'manager-ffs-denaro-pubblico', en: 'ffs-manager-public-funds', de: 'sbb-manager-oeffentliche-gelder', fr: 'manager-ffs-fonds-publics' },
  'lamal-guida-2026-canton-argovia': { it: 'lamal-guida-2026-canton-argovia', en: 'lamal-guide-2026-canton-aargau', de: 'lamal-leitfaden-2026-kanton-argau', fr: 'guide-lamal-2026-canton-argovie' },
+ 'ordinanza-liste-validita': { it: 'ordinanza-liste-validita', en: 'sanctions-list-validity', de: 'sanktionslisten-gueltigkeit', fr: 'validite-listes-sanctions' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
