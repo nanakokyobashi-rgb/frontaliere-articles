@@ -121,11 +121,19 @@
       },
       {
         "prefix": ".github/workflows/observers/scripts/crawler-generation-observer-selector.mjs",
-        "reason": "Gemello di classe `identical` (sorgente sul sito in .github/corpus-workflows/observers/), ma i due lati sono DIVERSI: il sito ha aggiunto il budget cumulativo MAX_DISCOVERY_ARTIFACT_REFERENCES e qui non e' sceso. Non registrato come `identical` perche' `--init` lo rifiuta con ragione — registrare due lati diversi come allineati fa leggere `undeclared-drift` alla passata successiva e FERMA il trasporto su questo file. La baseline giusta e' l'ultimo stato in cui i due lati combaciavano, che va cercata nella storia: e' lavoro di trasporto, non una registrazione. Dichiarato qui per non lasciare ambiguo fra «non ha un gemello» e «nessuno ha guardato». Non e' byte-identico, quindi il censimento non lo segnala comunque."
+        "reason": "Il selector nested del corpus e' ora byte-identico alla sorgente sul sito e include il budget cumulativo MAX_DISCOVERY_ARTIFACT_REFERENCES (#2898). Resta nel layout legacy `.github/workflows/observers/`: `prepare-crawler-workflow-corpus-sync.mjs` elimina ogni voce `files` sotto questo path quando e' mappata a una sorgente observer. Questa eccezione documenta il layout e la regola di trasporto, non una divergenza di contenuto."
       },
       {
         "prefix": ".github/workflows/observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
-        "reason": "Stessa ragione del selector che questo test copre: il lato sito importa MAX_DISCOVERY_ARTIFACT_REFERENCES e asserisce il budget cumulativo, questa copia no. In piu' il lato sito importa `../../scripts/ci/crawler-generation-observer-selector.mjs`, path che nella disposizione del corpus (observers/scripts/, senza `ci/`) non risolve: copiarlo alla lettera non basta, e questa e' una dipendenza implicita che il drift check non vede. Va trasportato insieme al selector, non da solo."
+        "reason": "Il test nested del corpus e' ora byte-identico al gemello aggiornato del sito e asserisce il budget cumulativo MAX_DISCOVERY_ARTIFACT_REFERENCES. L'import relativo `../../scripts/ci/crawler-generation-observer-selector.mjs` non risolve dalla disposizione nested del corpus, dove `.github/workflows/observers/scripts/ci/` non esiste: il test va eseguito o adattato in un percorso che risolva il selector, non copiato isolatamente. La voce documenta questa dipendenza di percorso, non una divergenza di contenuto."
+      },
+      {
+        "prefix": ".github/workflows/observers/scripts/lib/crawler-generation-group-ids.mjs",
+        "reason": "Helper byte-identico alla sorgente del sito, aggiunto nel trasporto observer di #2898. Resta nel layout legacy `.github/workflows/observers/`, dove `prepare-crawler-workflow-corpus-sync.mjs` elimina le voci `files` mappate a sorgenti observer; questa eccezione documenta il percorso generato, non una divergenza di contenuto."
+      },
+      {
+        "prefix": ".github/workflows/observers/scripts/lib/crawler-generation-observer-report.mjs",
+        "reason": "Helper byte-identico alla sorgente del sito, aggiornato nel trasporto observer di #2898. Resta nel layout legacy `.github/workflows/observers/`, dove `prepare-crawler-workflow-corpus-sync.mjs` elimina le voci `files` mappate a sorgenti observer; questa eccezione documenta il percorso generato, non una divergenza di contenuto."
       },
       {
         "prefix": ".github/workflows/observers/scripts/lib/crawler-generation-token.mjs",
