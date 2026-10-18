@@ -6501,7 +6501,9 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // itself may be perfectly fine. Re-running just the fact-check (~5s) is far
   // cheaper and the most common cause (non-JSON output) usually clears on a
   // second pass. The hard quality gate is preserved: if every attempt still
-  // yields zero verdicts we throw exactly as before (never publish unverified).
+  // yields zero verdicts, return a fail-closed `unverified` result. The caller
+  // must defer the run rather than regenerate the whole article: the article
+  // is still never published without a verifier verdict.
   const FACTCHECK_INFRA_RETRIES = 3;
   // Cap on retry-after-derived backoff between outer fact-check attempts.
   // The per-model retry inside ai-models.mjs already honours the retry-after
@@ -17159,6 +17161,28 @@ const LOCAL_MIN_VIABLE_MS = 11 * 60_000;
 const MIN_VIABLE_ATTEMPT_MS = 2 * 60_000;
 
 /**
+ * Turn a fail-closed verifier outage into a typed run-level error. The
+ * `unverified` result is deliberately kept at the llmFactCheck boundary so
+ * its existing fail-closed contract remains testable; callers must not feed
+ * it into the content-remediation loop, which would regenerate the article
+ * indefinitely while the verifier roster is unavailable.
+ */
+function createFactCheckUnavailableError(result, stage) {
+  const rawReason = Array.isArray(result?.issues) ? result.issues[0]?.reason : '';
+  const reason = String(rawReason || 'nessun verificatore ha prodotto un verdetto')
+    .replace(/\s+/g, ' ')
+    .slice(0, 300);
+  const error = new Error(`Fact-check unavailable (${stage}): ${reason}`);
+  error.factCheckUnavailable = true;
+  error.unverified = true;
+  return error;
+}
+
+function isFactCheckUnavailableError(e) {
+  return e?.factCheckUnavailable === true;
+}
+
+/**
  * True when the error is a CONTENT/QUALITY rejection (fact-check block,
  * topic-gate REGOLA #0 abort, fabrication, or a non-conformant headline that
  * survived its retry budget) rather than an infrastructure bug.
@@ -17179,6 +17203,10 @@ const MIN_VIABLE_ATTEMPT_MS = 2 * 60_000;
  */
 function isQualityRejectError(e) {
   if (!e) return false;
+  // A verifier outage is neither a content verdict nor a candidate-level
+  // rejection. Let it reach the run-level deferral so the headline loop does
+  // not spend its whole budget repeating the same unavailable check.
+  if (isFactCheckUnavailableError(e)) return false;
   // Un errore del lock non e' mai un rigetto di qualita' ne' un duplicato
   // (issue #964): entrambi i rami classificano SUL MESSAGGIO ed escono con
   // EXIT_NO_ARTICLE_DECLARED, cioe' un differimento pulito che il self-trigger
@@ -19262,6 +19290,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     // Step 3a.0c: LLM fact verification — PRIMARY BLOCKING GATE
     try {
       const factResult = await llmFactCheck(data.content.it, pageContent, url, CANTON_FACTS_BRIEF);
+      if (factResult.unverified === true) {
+        throw createFactCheckUnavailableError(factResult, 'article');
+      }
       if (!factResult.passed) {
         // Ledger only. These categories never reach the defect memory and can
         // never promote anything: they are the verifier's opinion, and the
@@ -19304,15 +19335,10 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       // gates already do this above; repeated here since this is a distinct
       // failure source that can set the same field independently).
       lastFactCheckErrors = null;
-      // NOTE: there is deliberately no `if (factResult.unverified)` branch here
-      // any more. Since the verifier fails CLOSED (2026-07-28), `unverified`
-      // only ever comes back paired with `passed: false`, which the branch above
-      // has already turned into a retry or a throw — so a published article can
-      // never be unverified, and a RUN_REPORT flag saying otherwise would be
-      // permanently false and misleading. The outage is recorded on the failure
-      // path instead (see the `🚫` log in llmFactCheck).
     } catch (fcErr) {
-      // Both fact-check rejections AND all-models-failed errors retry
+      // Content rejections retry; an unavailable verifier defers the whole
+      // run so every headline does not repeat the same failed cascade.
+      if (isFactCheckUnavailableError(fcErr)) throw fcErr;
       if (attempt < maxAttempts) {
         console.error(`  🔄 Rigenero per fact-check: ${fcErr.message.slice(0, 120)} (${attempt}/${maxAttempts})...`);
         continue;
@@ -19440,6 +19466,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         let expandFactIssues = null;
         try {
           const expandFactResult = await llmFactCheck(data.content.it, pageContent, url, CANTON_FACTS_BRIEF);
+          if (expandFactResult.unverified === true) {
+            throw createFactCheckUnavailableError(expandFactResult, 'expansion');
+          }
           if (!expandFactResult.passed) {
             for (const i of expandFactResult.issues || []) {
               const cat = String(i?.category || 'uncategorized');
@@ -19451,6 +19480,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
             expandFactOk = false;
           }
         } catch (expandFcErr) {
+          if (isFactCheckUnavailableError(expandFcErr)) throw expandFcErr;
           console.error(`  ⚠️  Fact-check dell'espansione anticipata fallito: ${expandFcErr.message.slice(0, 120)}`);
           expandFactOk = false;
         }
@@ -19838,6 +19868,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // fidelity must remain disabled for generated research briefs.
   if (IS_CANTON && CANTON_FACTS_BRIEF && url.startsWith('evergreen://')) {
     const finalCantonFactResult = await llmFactCheck(data.content.it, '', url, CANTON_FACTS_BRIEF);
+    if (finalCantonFactResult.unverified === true) {
+      throw createFactCheckUnavailableError(finalCantonFactResult, 'final-canton');
+    }
     if (!finalCantonFactResult.passed) {
       const issuesSummary = (finalCantonFactResult.issues || [])
         .map((issue) => `[${issue.category || '?'}] "${String(issue.claim || '').slice(0, 60)}" — ${String(issue.reason || '').slice(0, 80)}`)
@@ -21155,6 +21188,17 @@ if (invokedDirectly) {
     }
   } catch (probeErr) {
     console.error(`  ⚠️  Campione di deferral non registrato: ${probeErr.message}`);
+  }
+  // A verifier outage is already fail-closed at the article boundary. Stop
+  // before quota/quality classification so the run declares one clean
+  // deferral instead of rotating through every headline or mislabelling the
+  // outage as bad content.
+  if (isFactCheckUnavailableError(e)) {
+    finalizeRunReport('deferred', {
+      notes: [...RUN_REPORT.notes, `Deferred (fact-check unavailable; article not published): ${e.message}`],
+    });
+    console.error(`\n⚠️  Differito: fact-check indisponibile, articolo non pubblicato. Riprovo al prossimo run. ${e.message}`);
+    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   // Transient free-model pool exhaustion (every model in the fallback chain hit
   // its daily quota / rate limit) is NOT a code bug — free-tier daily limits
