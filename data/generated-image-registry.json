@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 696,
+  "assetCount": 697,
   "assets": [
     {
       "schema": 1,
@@ -28067,6 +28067,24 @@
         "is_topic_relevant": true,
         "notes": "Generic synthetic nighttime apartment-fire illustration with no readable text, logos, or identifiable people."
       }
+    },
+    {
+      "schema": 1,
+      "assetId": "bollettino-frontaliere-2026-10-18",
+      "source": "deterministic-card",
+      "provider": "site-owned",
+      "note": "Deterministic SVG card rendered by the repository; no external image provider is used.",
+      "credit": "frontaliereticino.ch",
+      "producer": "generator/scripts/lib/daily-brief-image.mjs",
+      "templateVersion": "frontaliereticino.daily-brief-card.v1",
+      "license": "private-grant",
+      "sha256": "1501a039947c0c4846231efad372ce4422d15dc8d6410ce406fe35c95c0cd755",
+      "bytes": 27278,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/bollettino-frontaliere-2026-10-18.webp"
     }
   ]
 }

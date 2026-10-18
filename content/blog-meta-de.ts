@@ -13450,6 +13450,11 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.incendio-palazzina-lugano.title': 'Nächtlicher Brand in einem Mehrfamilienhaus in Lugano: ein Todesopfer',
     'blog.article.incendio-palazzina-lugano.excerpt': 'Brand kurz nach 3 Uhr in der Via Cortivallo in Lugano Flammen gingen von einer Wohnung im zweiten Stock aus 22 Mieter vorübergehend evakuiert Eine Person aufgefunden',
     'blog.article.incendio-palazzina-lugano.imageAlt': 'Wohnhaus an der Via Cortivallo in Lugano nach dem nächtlichen Brand',
+    'blog.article.bollettino-frontaliere-2026-10-18.title': 'Grenzgänger: 666 neue Stellen in der Schweiz gestern — 18. Oktober 2026',
+    'blog.article.bollettino-frontaliere-2026-10-18.excerpt': 'Die Zahlen von heute, 18. Oktober 2026, für Grenzgänger: die zuletzt gemeldeten Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der zuletzt erfasste Franken-Euro-Kurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.',
+    'blog.article.bollettino-frontaliere-2026-10-18.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 18. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
+    'blog.article.bollettino-frontaliere-2026-10-18.seoDescription': 'Grenzgänger-Bulletin vom 18. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
+    'blog.article.bollettino-frontaliere-2026-10-18.ogDescription': 'Die Zahlen vom 18. Oktober 2026 für Grenzgänger: wie lange man an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, wie der Franken zuletzt zum Euro stand und wie viele Stellen neu dazugekommen sind.',
 };
 
 export default blogMetaDe;

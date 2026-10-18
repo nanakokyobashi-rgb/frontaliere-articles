@@ -13453,6 +13453,11 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.incendio-palazzina-lugano.title': 'Incendie nocturne dans un immeuble de Lugano : une victime',
     'blog.article.incendio-palazzina-lugano.excerpt': 'Incendie peu après 3 heures dans la via Cortivallo à Lugano Flammes parties d\'un appartement au deuxième étage 22 locataires temporairement évacués Une personne retrouvée',
     'blog.article.incendio-palazzina-lugano.imageAlt': 'Immeuble de la via Cortivallo à Lugano après l\'incendie nocturne',
+    'blog.article.bollettino-frontaliere-2026-10-18.title': 'Frontaliers : 666 nouvelles offres en Suisse hier — 18 octobre 2026',
+    'blog.article.bollettino-frontaliere-2026-10-18.excerpt': 'Les chiffres du jour, 18 octobre 2026, pour les frontaliers : les dernières attentes relevées à chaque douane, les communes où l\'essence coûte le moins cher, le dernier taux franc-euro relevé et les offres d\'emploi parues en Suisse. Des données de notre suivi, relevées chaque jour.',
+    'blog.article.bollettino-frontaliere-2026-10-18.imageAlt': 'Les chiffres du jour pour les frontaliers – 18 octobre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
+    'blog.article.bollettino-frontaliere-2026-10-18.seoDescription': 'Bulletin du frontalier du 18 octobre 2026 : les files relevées aux douanes, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
+    'blog.article.bollettino-frontaliere-2026-10-18.ogDescription': 'Les chiffres du 18 octobre 2026 pour les frontaliers : combien de temps on attend à chaque douane, où l\'essence coûte le moins cher, quel est le dernier taux franc-euro relevé et combien d\'offres d\'emploi sont parues en Suisse.',
 };
 
 export default blogMetaFr;

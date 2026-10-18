@@ -13452,6 +13452,11 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.incendio-palazzina-lugano.title': 'Incendio notturno in una palazzina di Lugano: una vittima',
     'blog.article.incendio-palazzina-lugano.excerpt': 'Incendio poco dopo le 3 in via Cortivallo a Lugano Fiamme partite da un appartamento al secondo piano Evacuati temporaneamente 22 inquilini Una persona trovata',
     'blog.article.incendio-palazzina-lugano.imageAlt': 'Palazzina di via Cortivallo a Lugano dopo l\'incendio notturno',
+    'blog.article.bollettino-frontaliere-2026-10-18.title': 'Frontalieri: 666 nuovi annunci in Svizzera ieri — 18 ottobre 2026',
+    'blog.article.bollettino-frontaliere-2026-10-18.excerpt': 'I numeri di oggi, 18 ottobre 2026, per chi attraversa il confine: le ultime attese rilevate ai valichi, i comuni dove la benzina costa meno, il cambio franco-euro aggiornato e i nuovi annunci di lavoro pubblicati in Svizzera. Dati del nostro monitoraggio, rilevati ogni giorno.',
+    'blog.article.bollettino-frontaliere-2026-10-18.imageAlt': 'I numeri del giorno per i frontalieri – 18 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
+    'blog.article.bollettino-frontaliere-2026-10-18.seoDescription': 'Bollettino frontalieri del 18 ottobre 2026: ultime code ai valichi, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    'blog.article.bollettino-frontaliere-2026-10-18.ogDescription': 'I numeri del 18 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico, in quali comuni conviene fare il pieno, quanto vale il franco al cambio rilevato e quanti nuovi annunci di lavoro sono usciti in Svizzera.',
 };
 
 export default blogMetaIt;
