@@ -21,7 +21,7 @@
 import { readFileSync, writeFileSync, appendFileSync, readdirSync, existsSync, renameSync, unlinkSync, realpathSync } from 'fs';
 import { resolve, basename, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { execFileSync, execSync } from 'child_process';
+import { execFileSync, execSync, spawnSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -378,18 +378,52 @@ export function gitPushChainTimeoutMs(chainStartedAt, commandTimeoutMs, now = Da
   return Math.min(commandTimeoutMs, remainingMs);
 }
 
-function guardMainTreeBeforePush(chainStartedAt) {
-  execFileSync(process.execPath, [
+function pushMainWithTreeGuard(chainStartedAt, reserveMs = 0) {
+  if (!process.env.GITHUB_PAT?.trim()) {
+    throw new Error('GITHUB_PAT missing — refusing checkpoint push');
+  }
+  const wrapperTimeoutMs = gitPushChainTimeoutMs(chainStartedAt, 60_000, Date.now(), reserveMs);
+  if (wrapperTimeoutMs <= 1_000) {
+    const error = new Error('not enough checkpoint deadline remains to start a guarded Git push');
+    error.code = 'GIT_PUSH_CHAIN_DEADLINE';
+    throw error;
+  }
+  const result = spawnSync(process.execPath, [
     resolve(ROOT, 'scripts/ci/guard-main-tree-shrink.mjs'),
-    '--before',
-    'origin/main',
+    '--push-main',
+    '--remote',
+    'origin',
+    '--target',
+    'main',
     '--after',
     'HEAD',
+    '--timeout-ms',
+    String(wrapperTimeoutMs - 1_000),
+    '--git-config',
+    'credential.helper=',
+    '--git-config',
+    `credential.helper=${GIT_PAT_CREDENTIAL_HELPER}`,
+    '--git-config',
+    'http.https://github.com/.extraheader=',
   ], {
     cwd: ROOT,
-    stdio: 'inherit',
-    timeout: gitPushChainTimeoutMs(chainStartedAt, 30_000),
+    encoding: 'utf8',
+    stdio: ['ignore', 'inherit', 'pipe'],
+    timeout: wrapperTimeoutMs,
+    maxBuffer: 16 * 1024 * 1024,
+    env: { ...process.env, GIT_TERMINAL_PROMPT: '0' },
   });
+  if (result.stderr) process.stderr.write(result.stderr);
+  if (result.status !== 0) {
+    const detail = result.stderr?.match(/error: \[main-tree-guard\] ([^\n]+)/u)?.[1]
+      || result.error?.message
+      || `guarded Git push failed with status ${result.status ?? 'unknown'}`;
+    const error = new Error(detail);
+    error.code = result.stderr?.includes('MAIN_TREE_GUARD_FATAL:')
+      ? 'MAIN_TREE_GUARD_FATAL'
+      : result.error?.code || 'GIT_PUSH_FAILED';
+    throw error;
+  }
 }
 
 /**
@@ -417,15 +451,11 @@ function gitCommitAndPush(label, { sectionBodyDir, progressFile }) {
     // Checkpoint pushes use the Remote Config PAT; the workflow grants only
     // contents: read and disables checkout's ambient credential persistence.
     try {
-      guardMainTreeBeforePush(chainStartedAt);
-      authenticatedGit(['push', 'origin', 'main'], {
-        cwd: ROOT,
-        stdio: 'pipe',
-        timeout: gitPushChainTimeoutMs(chainStartedAt, 60000),
-      });
+      pushMainWithTreeGuard(chainStartedAt);
       outcome = 'pushed';
       console.error(`💾 Checkpoint pushed: ${label}`);
     } catch (pushErr) {
+      if (pushErr?.code === 'MAIN_TREE_GUARD_FATAL') throw pushErr;
       // Rebase and retry once (handles concurrent pushes)
       try {
         authenticatedGit(['pull', '--rebase', 'origin', 'main'], {
@@ -433,12 +463,7 @@ function gitCommitAndPush(label, { sectionBodyDir, progressFile }) {
           stdio: 'pipe',
           timeout: gitPushChainTimeoutMs(chainStartedAt, 30000, Date.now(), GIT_REBASE_ABORT_RESERVE_MS),
         });
-        guardMainTreeBeforePush(chainStartedAt);
-        authenticatedGit(['push', 'origin', 'main'], {
-          cwd: ROOT,
-          stdio: 'pipe',
-          timeout: gitPushChainTimeoutMs(chainStartedAt, 60000, Date.now(), GIT_REBASE_ABORT_RESERVE_MS),
-        });
+        pushMainWithTreeGuard(chainStartedAt, GIT_REBASE_ABORT_RESERVE_MS);
         outcome = 'rebased';
         console.error(`💾 Checkpoint pushed (after rebase): ${label}`);
       } catch (retryErr) {
@@ -453,12 +478,14 @@ function gitCommitAndPush(label, { sectionBodyDir, progressFile }) {
             timeout: gitPushChainTimeoutMs(chainStartedAt, 30000),
           });
         } catch { /* no rebase in progress, oppure deadline complessiva esaurita */ }
+        if (retryErr?.code === 'MAIN_TREE_GUARD_FATAL') throw retryErr;
         const failure = retryErr?.code === 'GIT_PUSH_CHAIN_DEADLINE' ? retryErr : pushErr;
         console.error(`⚠️  Checkpoint committed but push failed: ${failure.message?.slice(0, 100)}`);
       }
     }
   } catch (err) {
     console.error(`⚠️  Checkpoint failed: ${err.message?.slice(0, 100)}`);
+    if (err?.code === 'MAIN_TREE_GUARD_FATAL') throw err;
   } finally {
     // Nel `finally` e non in coda al `try`: la misura serve SOPRATTUTTO sul
     // ramo che fallisce, che e' quello in cui la catena e' lunga.

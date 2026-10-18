@@ -144,9 +144,13 @@ jobs:
             fi
             git add -- scripts/ci/loop-sync-manifest.json
             git commit -m "chore(loop): riallinea baseline dopo trasporto"
-            node scripts/ci/guard-main-tree-shrink.mjs --before origin/main --after HEAD || exit 1
-            if git push origin HEAD:main; then
+            push_log="$RUNNER_TEMP/transport-realign-push-$attempt.log"
+            if node scripts/ci/guard-main-tree-shrink.mjs --push-main --remote origin --target main --after HEAD 2>&1 | tee "$push_log"; then
               exit 0
+            fi
+            if grep -q 'MAIN_TREE_GUARD_FATAL:' "$push_log"; then
+              echo "::error::The post-merge baseline push failed a fatal main-tree guard check."
+              exit 1
             fi
             echo "::warning::Push post-merge non fast-forward o temporaneamente rifiutato; aggiorno main e ritento ($attempt/3)."
           done
@@ -259,11 +263,15 @@ jobs:
               git add -- scripts/ci/adapted-drift-ratchet.json
             fi
             git commit -m "chore(loop): riallinea baseline adapted dichiarate"
-            node scripts/ci/guard-main-tree-shrink.mjs --before origin/main --after HEAD || exit 1
-            if git push origin HEAD:main; then
+            push_log="$RUNNER_TEMP/transport-adapted-realign-push-$attempt.log"
+            if node scripts/ci/guard-main-tree-shrink.mjs --push-main --remote origin --target main --after HEAD 2>&1 | tee "$push_log"; then
               # Le voci certificate sono su main; un esito parziale (rc=3)
               # resta comunque un rosso da guardare.
               exit "$final"
+            fi
+            if grep -q 'MAIN_TREE_GUARD_FATAL:' "$push_log"; then
+              echo "::error::The adapted baseline push failed a fatal main-tree guard check."
+              exit 1
             fi
             echo "::warning::Push non fast-forward o temporaneamente rifiutato; aggiorno main e ritento ($attempt/3)."
           done

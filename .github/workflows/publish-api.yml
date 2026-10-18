@@ -861,9 +861,12 @@ jobs:
             # does not persist its own token (`persist-credentials: false`):
             # the header below is the only identity git can send.
             for attempt in 1 2 3; do
-              node scripts/ci/guard-main-tree-shrink.mjs --before origin/main --after HEAD || return 1
-              if git -c "http.extraheader=AUTHORIZATION: basic $auth_header" push origin HEAD:main 2>&1 | tee "$push_log"; then
+              if node scripts/ci/guard-main-tree-shrink.mjs --push-main --remote origin --target main --after HEAD --git-config "http.extraheader=AUTHORIZATION: basic $auth_header" 2>&1 | tee "$push_log"; then
                 return 0
+              fi
+              if grep -q 'MAIN_TREE_GUARD_FATAL:' "$push_log"; then
+                echo '::error::cover queue push stopped by a fatal main-tree guard check.'
+                return 1
               fi
               # A rule rejection is not a race: rebasing and pushing again as
               # the same identity gets the same answer. Name it and stop.
