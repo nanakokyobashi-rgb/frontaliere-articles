@@ -240,6 +240,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T16:43:36.224Z",
       "lastFailureAt": "2026-10-18T16:43:36.224Z"
+    },
+    {
+      "articleId": "iniziativa-parita-salariale-ag",
+      "title": "Argovia: iniziativa per rafforzare la parità salariale",
+      "fallbackImage": "/images/blog/article-argovia-parita-salariale.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T17:13:03.704Z",
+      "lastFailureAt": "2026-10-18T17:13:03.704Z"
     }
   ]
 }

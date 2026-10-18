@@ -15,6 +15,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'argovia-cani-divieto-respinto': { it: 'argovia-cani-divieto-respinto', en: 'aargau-dangerous-dog-ban-rejected', de: 'aargau-kampfhunde-verbot-abgelehnt', fr: 'argovie-interdiction-chiens-dangereux' },
  'eventi-weekend-argovia': { it: 'eventi-weekend-argovia', en: 'weekend-events-aargau', de: 'wochenend-veranstaltungen-aargau', fr: 'evenements-week-end-argovie' },
  'riniker-governo-argovia': { it: 'riniker-governo-argovia', en: 'riniker-aargau-government', de: 'riniker-aargauer-regierung', fr: 'riniker-gouvernement-argovie' },
+ 'iniziativa-parita-salariale-ag': { it: 'iniziativa-parita-salariale-ag', en: 'aargau-pay-equality-initiative', de: 'aargau-lohngleichheitsinitiative', fr: 'initiative-egalite-salariale-argovie' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

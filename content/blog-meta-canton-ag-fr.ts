@@ -39,6 +39,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.riniker-governo-argovia.title': 'Maja Riniker (FDP) élue au gouvernement argovien',
     'blog.article.riniker-governo-argovia.excerpt': 'Avec 70\'137 voix et une participation de 21,01%, Maja Riniker est élue au gouvernement argovien.',
     'blog.article.riniker-governo-argovia.imageAlt': 'Gouvernement cantonal argovien après l\'élection de Maja Riniker',
+    'blog.article.iniziativa-parita-salariale-ag.title': 'Argovie : initiative visant à renforcer l’égalité salariale',
+    'blog.article.iniziativa-parita-salariale-ag.excerpt': 'ArbeitAargau et une alliance d’organisations féminines et de partis demandent des analyses salariales à partir de 50 employés, des sanctions et le rétablissement de la Fachstelle.',
+    'blog.article.iniziativa-parita-salariale-ag.imageAlt': 'Initiative pour l\'égalité salariale en Argovie',
 };
 
 export default blogMetaCantonAgFr;

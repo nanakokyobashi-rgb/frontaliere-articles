@@ -465,6 +465,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-iniziativa-parita-salariale-ag': {
+    title: 'Argovia: iniziativa per rafforzare la parità salariale',
+    description: 'In Canton Argovia, ArbeitAargau e un\'alleanza di donne e partiti chiedono analisi salariali da 50 dipendenti, sanzioni e un ufficio per la parità.',
+    keywords: 'frontalieri, ticino, svizzera, italia, argovia, iniziativa, rafforzare, parità',
+    ogTitle: 'Argovia, la proposta sulla parità salariale',
+    ogDescription: 'La raccolta firme, iniziata il 14 giugno 2023, accompagna una richiesta precisa: analisi salariali per aziende da 50 dipendenti, sanzioni per il mancato adempimento e ripristino della Fachstelle per l\'uguaglianza.',
+    canonicalPath: '/articoli-argovia/iniziativa-parita-salariale-ag/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Argovia: iniziativa per rafforzare la parità salariale",
+      "description": "In Canton Argovia, ArbeitAargau e un'alleanza di donne e partiti chiedono analisi salariali da 50 dipendenti, sanzioni e un ufficio per la parità.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-argovia-parita-salariale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Iniziativa per la parità salariale nel Canton Argovia"
+      },
+      "datePublished": "2026-10-18T17:13:03+00:00",
+      "dateModified": "2026-10-18T17:13:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/iniziativa-parita-salariale-ag/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
