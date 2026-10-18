@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T04:59:03.087Z",
-  "contentHash": "6e5b4c334a8c9f21808725c4aeb9e827c87f5a30e4ffa2813d419224b897fd1f",
+  "updatedAt": "2026-10-18T03:31:06.413Z",
+  "contentHash": "a4e16a93e42e1f474c950b549c3ccdd52746e3c40544f7393aade8822a54eca2",
   "blocks": [
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T20:07:19.130Z",
+      "updatedAt": "2026-10-17T19:45:28.268Z",
       "keyFacts": 0
     }
   ],
@@ -57,7 +57,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -66,6 +66,12 @@
           "url": "/articoli-glarona/klontalstrasse-staldengarten-butzi/",
           "excerpt": "Una limitazione al traffico riguarda la Klöntalerstrasse nel tratto Staldengarten–Bützi, nel Canton Glarona.",
           "date": "2026-10-17T00:33:53.716Z"
+        },
+        {
+          "title": "Mühlehorn: Alte Kerenzerstrasse chiusa dal 19 ottobre",
+          "url": "/articoli-glarona/muehlehorn-strada-chiusa-ottobre/",
+          "excerpt": "Mühlehorn: chiusura totale di Alte Kerenzerstrasse tra Hanenchilchli e Rüteggli fino al 23 ottobre 2026, ore 17.00.",
+          "date": "2026-10-18T03:25:08.301Z"
         },
         {
           "title": "Abbonamenti trasporti Glarona: zone, tariffe e sconti",
@@ -97,7 +103,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-18T03:31:06.413Z"
     },
     "en": {
       "canton": "GL",
@@ -142,7 +148,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -151,6 +157,12 @@
           "url": "/en/glarus-articles/klontalstrasse-traffic-restriction/",
           "excerpt": "A traffic restriction affects Klöntalerstrasse on the Staldengarten–Bützi section, in the Canton of Glarus.",
           "date": "2026-10-17T00:33:53.716Z"
+        },
+        {
+          "title": "Mühlehorn: Alte Kerenzerstrasse closed from October 19",
+          "url": "/en/glarus-articles/muehlehorn-road-closure-october/",
+          "excerpt": "Mühlehorn: full closure of Alte Kerenzerstrasse between Hanenchilchli and Rüteggli until October 23, 2026, at 5:00 p.m.",
+          "date": "2026-10-18T03:25:08.301Z"
         },
         {
           "title": "Glarus transport subscriptions: zones, rates and discounts",
@@ -182,7 +194,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-18T03:31:06.413Z"
     },
     "de": {
       "canton": "GL",
@@ -227,7 +239,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -236,6 +248,12 @@
           "url": "/de/glarus-artikel/verkehrseinschraenkung-kloentalerstrasse/",
           "excerpt": "Eine Verkehrsbeschränkung betrifft die Klöntalerstrasse im Abschnitt Staldengarten–Bützi im Kanton Glarus.",
           "date": "2026-10-17T00:33:53.716Z"
+        },
+        {
+          "title": "Mühlehorn: Alte Kerenzerstrasse ab dem 19. Oktober gesperrt",
+          "url": "/de/glarus-artikel/muehlehorn-strassensperrung-oktober/",
+          "excerpt": "Mühlehorn: Vollsperrung der Strasse Alte Kerenzerstrasse zwischen Hanenchilchli und Rüteggli bis zum 23.",
+          "date": "2026-10-18T03:25:08.301Z"
         },
         {
           "title": "Fahrkarten Glarus: Zonen, Tarife und Rabatte",
@@ -267,7 +285,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-18T03:31:06.413Z"
     },
     "fr": {
       "canton": "GL",
@@ -312,7 +330,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -321,6 +339,12 @@
           "url": "/fr/articles-glaris/restriction-trafic-kloentalerstrasse/",
           "excerpt": "Une restriction de circulation concerne la Klöntalerstrasse sur le tronçon Staldengarten–Bützi, dans le canton de Glaris.",
           "date": "2026-10-17T00:33:53.716Z"
+        },
+        {
+          "title": "Mühlehorn : Alte Kerenzerstrasse fermée à partir du 19 octobre",
+          "url": "/fr/articles-glaris/muehlehorn-route-fermee-octobre/",
+          "excerpt": "Mühlehorn : fermeture totale de Alte Kerenzerstrasse entre Hanenchilchli et Rüteggli jusqu’au 23 octobre 2026, à 17.00.",
+          "date": "2026-10-18T03:25:08.301Z"
         },
         {
           "title": "Abonnements transports Glaris : zones, tarifs et réductions",
@@ -352,7 +376,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-17T04:59:03.087Z"
+      "updatedAt": "2026-10-18T03:31:06.413Z"
     }
   }
 }
