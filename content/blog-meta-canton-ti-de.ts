@@ -45,6 +45,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.multa-rifiuti-bizzarone.title': 'Müllsack in Bizzarone: Tessiner mit Geldstrafe belegt',
     'blog.article.multa-rifiuti-bizzarone.excerpt': 'Am Bizzarone hat die örtliche Polizei einem Tessiner wegen jenseits der Grenze abgelagerter Abfälle eine Geldstrafe von 600 Euro auferlegt.',
     'blog.article.multa-rifiuti-bizzarone.imageAlt': 'Abgestellter Abfallsack an einer Strasse im Tessin',
+    'blog.article.radar-ticino-ottobre-2026.title': 'Radar im Kanton Tessin vom 19. bis 25. Oktober 2026',
+    'blog.article.radar-ticino-ottobre-2026.excerpt': 'Kontrollen vom 19.',
+    'blog.article.radar-ticino-ottobre-2026.imageAlt': 'Geschwindigkeitskontrollen mit Radar im Tessin',
 };
 
 export default blogMetaCantonTiDe;

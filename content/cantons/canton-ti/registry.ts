@@ -160,4 +160,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'radar-ticino-ottobre-2026',
+ category: 'pratico',
+ date: '2026-10-18T00:13:04.004Z',
+ image: '/images/blog/article-radar-ticino-ottobre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

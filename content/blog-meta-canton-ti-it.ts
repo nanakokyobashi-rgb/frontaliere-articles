@@ -45,6 +45,9 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.multa-rifiuti-bizzarone.title': 'Sacco di rifiuti a Bizzarone: multato ticinese',
     'blog.article.multa-rifiuti-bizzarone.excerpt': 'A Bizzarone la Polizia locale ha inflitto un\'ammenda di 600 euro a un ticinese per rifiuti abbandonati oltreconfine.',
     'blog.article.multa-rifiuti-bizzarone.imageAlt': 'Sacco di rifiuti abbandonato lungo una strada del Ticino',
+    'blog.article.radar-ticino-ottobre-2026.title': 'Radar in Canton Ticino dal 19 al 25 ottobre 2026',
+    'blog.article.radar-ticino-ottobre-2026.excerpt': 'Controlli dal 19 al 25 ottobre 2026 Radar mobili e semi-stazionari in Ticino Coinvolte Polizia cantonale e polizie comunali Possibili anche controlli',
+    'blog.article.radar-ticino-ottobre-2026.imageAlt': 'Controlli della velocità con radar in Canton Ticino',
 };
 
 export default blogMetaCantonTiIt;

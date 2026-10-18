@@ -45,6 +45,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.multa-rifiuti-bizzarone.title': 'Sac de déchets à Bizzarone : un Tessinois verbalisé',
     'blog.article.multa-rifiuti-bizzarone.excerpt': 'À Bizzarone, la police locale a infligé une amende de 600 euros à un Tessinois pour des déchets abandonnés de l\'autre côté de la frontière.',
     'blog.article.multa-rifiuti-bizzarone.imageAlt': 'Sac de déchets abandonné au bord d\'une route au Tessin',
+    'blog.article.radar-ticino-ottobre-2026.title': 'Radar dans le canton du Tessin du 19 au 25 octobre 2026',
+    'blog.article.radar-ticino-ottobre-2026.excerpt': 'Contrôles du 19 au 25 octobre 2026 Radars mobiles et semi-stationnaires au Tessin Police cantonale et polices communales impliquées Contrôles également possibles',
+    'blog.article.radar-ticino-ottobre-2026.imageAlt': 'Contrôles de vitesse par radar au Tessin',
 };
 
 export default blogMetaCantonTiFr;

@@ -45,6 +45,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.multa-rifiuti-bizzarone.title': 'Garbage bag in Bizzarone: Ticino resident fined',
     'blog.article.multa-rifiuti-bizzarone.excerpt': 'At Bizzarone, the local police fined a person from Ticino 600 euros for waste abandoned across the border.',
     'blog.article.multa-rifiuti-bizzarone.imageAlt': 'Abandoned rubbish bag beside a road in Ticino',
+    'blog.article.radar-ticino-ottobre-2026.title': 'Speed cameras in Canton Ticino from October 19 to 25, 2026',
+    'blog.article.radar-ticino-ottobre-2026.excerpt': 'Checks from October 19 to 25, 2026 Mobile and semi-stationary speed cameras in Ticino Cantonal Police and municipal police involved Checks also possible',
+    'blog.article.radar-ticino-ottobre-2026.imageAlt': 'Speed radar controls in Canton Ticino',
 };
 
 export default blogMetaCantonTiEn;
