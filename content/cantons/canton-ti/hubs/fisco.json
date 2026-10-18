@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "fisco",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "27d935a0c8ee44c70fbd725197f74ada7a31fd6b95c87830cafbea0a00da0d48",
+  "updatedAt": "2026-10-18T01:20:09.452Z",
+  "contentHash": "f760e4aac6187c65bd64f7e0438d3a26c1487d9c3735bc4540c4d1bdb634a989",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -120,6 +120,12 @@
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
+          "title": "Mozione in Gran Consiglio contro la tassa sulla salute",
+          "url": "/articoli-ticino/mozione-gran-consiglio-tassa-salute/",
+          "excerpt": "Una mozione interpartitica è stata presentata in Gran Consiglio La richiesta riguarda il blocco dei ristorni verso l’Italia OCST indica la via diplomatica",
+          "date": "2026-10-18T01:16:12.242Z"
+        },
+        {
           "title": "Decreto tassa salute frontalieri pubblicato: via libera regioni",
           "url": "/articoli-ticino/decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni/",
           "excerpt": "Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività",
@@ -142,12 +148,6 @@
           "url": "/articoli-frontaliere/rimborso-imposta-lpp-2024/",
           "excerpt": "Dal 2024 il Canton Ticino non rimborsa più l'imposta alla fonte del 7% sul capitale LPP, costringendo i frontalieri a pagare anche l'imposta sostitutiva italiana del 5%.",
           "date": "2026-09-23T10:40:11.448Z"
-        },
-        {
-          "title": "Frontalieri a Laveno-Mombello: guida e fisco in Ticino",
-          "url": "/articoli-frontaliere/frontaliere-laveno-mombello-ticino/",
-          "excerpt": "Vivere a Laveno-Mombello e lavorare in Ticino: collegamenti, imposte alla fonte, franchigie e previdenza per i lavoratori frontalieri.",
-          "date": "2026-09-12T01:10:28.373Z"
         }
       ],
       "latestCantonArticles": [],
@@ -177,7 +177,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-18T01:20:09.452Z"
     },
     "en": {
       "canton": "TI",
@@ -279,6 +279,12 @@
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
+          "title": "Motion in the Grand Council against the health tax",
+          "url": "/en/ticino-articles/grand-council-motion-health-tax/",
+          "excerpt": "A cross-party motion has been submitted to the Grand Council The request concerns blocking the tax rebates to Italy OCST points to the diplomatic route",
+          "date": "2026-10-18T01:16:12.242Z"
+        },
+        {
           "title": "Healthcare tax decree for cross-border workers approved",
           "url": "/en/ticino-articles/healthcare-tax-decree-for-cross-border-workers-approved/",
           "date": "2026-10-08T11:44:40.237Z"
@@ -300,12 +306,6 @@
           "url": "/en/cross-border-articles/lpp-tax-refund-2024/",
           "excerpt": "From 2024, the Canton of Ticino no longer reimburses the 7% tax at source on LPP capital, forcing border workers to also pay the 5% Italian substitute tax.",
           "date": "2026-09-23T10:40:11.448Z"
-        },
-        {
-          "title": "Frontier workers in Laveno-Mombello: driving and tax in Ticino",
-          "url": "/en/cross-border-articles/cross-border-worker-laveno-mombello-ticino/",
-          "excerpt": "Living in Laveno-Mombello and working in Ticino: connections, taxes at source, deductibles and pension for frontier workers.",
-          "date": "2026-09-12T01:10:28.373Z"
         }
       ],
       "latestCantonArticles": [],
@@ -335,7 +335,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-18T01:20:09.452Z"
     },
     "de": {
       "canton": "TI",
@@ -437,6 +437,12 @@
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
+          "title": "Motion im Grossen Rat gegen die Gesundheitssteuer",
+          "url": "/de/tessin-artikel/grossrat-moeglicherweise-gesundheitssteuer/",
+          "excerpt": "Eine überparteiliche Motion wurde im Grossen Rat eingereicht Die Forderung betrifft die Sperrung der Rückerstattungen an Italien OCST weist auf den diplomatischen Weg hin",
+          "date": "2026-10-18T01:16:12.242Z"
+        },
+        {
           "title": "Gesundheitsabgabe für Grenzgänger: Dekret publiziert",
           "url": "/de/tessin-artikel/gesundheitsabgabe-fur-grenzganger-dekret-publiziert/",
           "date": "2026-10-08T11:44:40.237Z"
@@ -458,12 +464,6 @@
           "url": "/de/grenzgaenger-artikel/lpp-steuererstattung-2024/",
           "excerpt": "Seit 2024 erstattet der Kanton Tessin die Quellensteuer von 7% auf das BVG-Kapital nicht mehr UND zwingt die Grenzgänger, auch die italienische Ersatzsteuer von 5% zu zahlen.",
           "date": "2026-09-23T10:40:11.448Z"
-        },
-        {
-          "title": "Grenzgänger in Laveno-Mombello: Fahren und Steuern im Tessin",
-          "url": "/de/grenzgaenger-artikel/grenzgaenger-laveno-mombello-tessin/",
-          "excerpt": "Wohnen in Laveno-Mombello und Arbeiten im Tessin: Verbindungen, Quellensteuern, Franchisen und Vorsorge für Grenzgänger.",
-          "date": "2026-09-12T01:10:28.373Z"
         }
       ],
       "latestCantonArticles": [],
@@ -493,7 +493,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-18T01:20:09.452Z"
     },
     "fr": {
       "canton": "TI",
@@ -596,6 +596,12 @@
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
+          "title": "Motion au Grand Conseil contre la taxe sur la santé",
+          "url": "/fr/articles-tessin/motion-grand-conseil-taxe-sante/",
+          "excerpt": "Une motion interpartis a été présentée au Grand Conseil La demande concerne le blocage des ristournes vers l’Italie L’OCST indique la voie diplomatique",
+          "date": "2026-10-18T01:16:12.242Z"
+        },
+        {
           "title": "Décret sur la taxe santé des frontaliers publié : feu vert des régions",
           "url": "/fr/articles-tessin/decret-sur-la-taxe-sante-des-frontaliers-publie-feu-vert-des-regions/",
           "excerpt": "Décret publié au Journal officiel à l'approche des fêtes",
@@ -618,12 +624,6 @@
           "url": "/fr/articles-frontalier/remboursement-taxe-lpp-2024/",
           "excerpt": "Depuis 2024, le canton du Tessin ne rembourse plus l'impôt à la source de 7 % sur le capital LPP, obligeant les frontaliers à payer également l'impôt de remplacement italien de 5 %.",
           "date": "2026-09-23T10:40:11.448Z"
-        },
-        {
-          "title": "Frontaliers à Laveno-Mombello : guide et fiscalité au Tessin",
-          "url": "/fr/articles-frontalier/frontalier-laveno-mombello-tessin/",
-          "excerpt": "Vivre à Laveno-Mombello et travailler au Tessin : liens, impôts à la source, franchises et prévoyance pour les travailleurs frontaliers.",
-          "date": "2026-09-12T01:10:28.373Z"
         }
       ],
       "latestCantonArticles": [],
@@ -653,7 +653,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-18T01:20:09.452Z"
     }
   }
 }

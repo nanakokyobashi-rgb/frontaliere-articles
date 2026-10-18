@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T23:29:53.062Z",
-  "contentHash": "cc7490889c573ce743d0b131785eaf086136791237dbb05f32212235ae5bee61",
+  "updatedAt": "2026-10-18T01:20:09.452Z",
+  "contentHash": "c936cf69b4f05ebc12a716c78c12bf61fb63e3c49bd5e2b3b54583dd84bd645b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -218,6 +218,12 @@
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
+          "title": "Mozione in Gran Consiglio contro la tassa sulla salute",
+          "url": "/articoli-ticino/mozione-gran-consiglio-tassa-salute/",
+          "excerpt": "Una mozione interpartitica è stata presentata in Gran Consiglio La richiesta riguarda il blocco dei ristorni verso l’Italia OCST indica la via diplomatica",
+          "date": "2026-10-18T01:16:12.242Z"
+        },
+        {
           "title": "Decreto tassa salute frontalieri pubblicato: via libera regioni",
           "url": "/articoli-ticino/decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni/",
           "excerpt": "Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività",
@@ -252,12 +258,6 @@
           "url": "/articoli-frontaliere/tassa-salute-frontalieri-ticino-settembre/",
           "excerpt": "Nuova tassa sanitaria per frontalieri: avvio previsto entro settembre, ma mancano decreti attuativi e pagamenti non ancora riscossi.",
           "date": "2026-10-04T18:17:43.880Z"
-        },
-        {
-          "title": "Premi di cassa malati: quando il 3,7% non racconta tutto",
-          "url": "/articoli-svizzera/premi-malati-ticino-aumento-franchi-2027/",
-          "excerpt": "Nel 2027 il premio medio della cassa malati in Ticino aumenterà del 3,7%, raggiungendo 519.90 franchi mensili, un incremento di 18.60 franchi, superiore del 26% alla media svizzera di 412 franchi.",
-          "date": "2026-09-30T17:00:48.460Z"
         }
       ],
       "latestCantonArticles": [],
@@ -295,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T01:20:09.452Z"
     },
     "en": {
       "canton": "TI",
@@ -481,6 +481,12 @@
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
+          "title": "Motion in the Grand Council against the health tax",
+          "url": "/en/ticino-articles/grand-council-motion-health-tax/",
+          "excerpt": "A cross-party motion has been submitted to the Grand Council The request concerns blocking the tax rebates to Italy OCST points to the diplomatic route",
+          "date": "2026-10-18T01:16:12.242Z"
+        },
+        {
           "title": "Healthcare tax decree for cross-border workers approved",
           "url": "/en/ticino-articles/healthcare-tax-decree-for-cross-border-workers-approved/",
           "date": "2026-10-08T11:44:40.237Z"
@@ -514,12 +520,6 @@
           "url": "/en/cross-border-articles/health-tax-cross-border-workers-ticino-september/",
           "excerpt": "New healthcare tax for cross-border workers: launch expected by September, but implementing decrees are missing and payments have not yet been collected.",
           "date": "2026-10-04T18:17:43.880Z"
-        },
-        {
-          "title": "Health Insurance Premiums: When 3.7% Doesn't Tell the Whole Story",
-          "url": "/en/swiss-articles/health-insurance-premiums-ticino-increase-francs-2027/",
-          "excerpt": "In 2027, the average health insurance premium in Ticino will increase by 3,7%, reaching 519.90 francs per month, an increase of 18.60 francs, 26% higher than the Swiss average of 412 francs.",
-          "date": "2026-09-30T17:00:48.460Z"
         }
       ],
       "latestCantonArticles": [],
@@ -553,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T01:20:09.452Z"
     },
     "de": {
       "canton": "TI",
@@ -739,6 +739,12 @@
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
+          "title": "Motion im Grossen Rat gegen die Gesundheitssteuer",
+          "url": "/de/tessin-artikel/grossrat-moeglicherweise-gesundheitssteuer/",
+          "excerpt": "Eine überparteiliche Motion wurde im Grossen Rat eingereicht Die Forderung betrifft die Sperrung der Rückerstattungen an Italien OCST weist auf den diplomatischen Weg hin",
+          "date": "2026-10-18T01:16:12.242Z"
+        },
+        {
           "title": "Gesundheitsabgabe für Grenzgänger: Dekret publiziert",
           "url": "/de/tessin-artikel/gesundheitsabgabe-fur-grenzganger-dekret-publiziert/",
           "date": "2026-10-08T11:44:40.237Z"
@@ -772,12 +778,6 @@
           "url": "/de/grenzgaenger-artikel/gesundheitssteuer-grenzgaenger-tessin-september/",
           "excerpt": "Neue Gesundheitsabgabe für Grenzgänger: Einführung bis September geplant, doch es fehlen noch die Ausführungsverordnungen, und Zahlungen wurden noch nicht eingezogen.",
           "date": "2026-10-04T18:17:43.880Z"
-        },
-        {
-          "title": "Krankenkassenprämien: Wenn 3,7 % nicht alles sagen",
-          "url": "/de/schweiz-artikel/krankenkassenpraemien-tessin-erhoehung-franken-2027/",
-          "excerpt": "Im Jahr 2027 wird der durchschnittliche Krankenkassenbeitrag im Tessin um 3,7 % steigen und 519,90 Franken pro Monat erreichen – ein Anstieg um 18,60 Franken, der 26 % über dem Schweizer Durchschnitt von 412 Franken…",
-          "date": "2026-09-30T17:00:48.460Z"
         }
       ],
       "latestCantonArticles": [],
@@ -811,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T01:20:09.452Z"
     },
     "fr": {
       "canton": "TI",
@@ -997,6 +997,12 @@
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
+          "title": "Motion au Grand Conseil contre la taxe sur la santé",
+          "url": "/fr/articles-tessin/motion-grand-conseil-taxe-sante/",
+          "excerpt": "Une motion interpartis a été présentée au Grand Conseil La demande concerne le blocage des ristournes vers l’Italie L’OCST indique la voie diplomatique",
+          "date": "2026-10-18T01:16:12.242Z"
+        },
+        {
           "title": "Décret sur la taxe santé des frontaliers publié : feu vert des régions",
           "url": "/fr/articles-tessin/decret-sur-la-taxe-sante-des-frontaliers-publie-feu-vert-des-regions/",
           "excerpt": "Décret publié au Journal officiel à l'approche des fêtes",
@@ -1031,12 +1037,6 @@
           "url": "/fr/articles-frontalier/taxe-sante-travailleurs-frontaliers-tessin-septembre/",
           "excerpt": "Nouvelle taxe sanitaire pour les frontaliers : entrée en vigueur prévue d’ici septembre, mais les décrets d’application font encore défaut et les paiements n’ont pas encore été recouvrés.",
           "date": "2026-10-04T18:17:43.880Z"
-        },
-        {
-          "title": "Primes d'assurance maladie : quand le 3,7% ne dit pas tout",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-tessin-augmentation-francs-2027/",
-          "excerpt": "En 2027, la prime moyenne de la caisse-maladie au Tessin augmentera de 3,7%, atteignant 519.90 francs par mois, soit une hausse de 18.60 francs, supérieure de 26% à la moyenne suisse de 412 francs.",
-          "date": "2026-09-30T17:00:48.460Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1066,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T01:20:09.452Z"
     }
   }
 }
