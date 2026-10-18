@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/frontalieri%3a-ecco-il-libro-che-spiega-il-boom-avvenuto-in-svizzera/92024342": {
-    "articleId": "libro-boom-frontalieri-svizzera",
-    "ts": "2026-09-08T19:06:51.173Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/presidente-economiesuisse-critica-governo%2c-%22si-parli-di-et%c3%a0-avs%22/92027236": {
     "articleId": "avs-eta-pensionabile-frontalieri",
     "ts": "2026-09-09T09:51:32.991Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/agra-la-sagra-della-zucca-rinviata-al-25-ottobre-per-il-maltempo/2711344": {
     "articleId": "agra-sagra-zucca",
     "ts": "2026-10-18T02:02:44.588Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/aic-lombardia-a-varese-sport-senza-glutine-alla-cityrun-e-attivita-educative-alle-pulciniadi/2711110": {
+    "articleId": "aic-lombardia-varese-2026",
+    "ts": "2026-10-18T02:15:49.768Z",
     "keyForm": 2
   }
 }

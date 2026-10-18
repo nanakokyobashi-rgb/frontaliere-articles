@@ -13415,6 +13415,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.agra-sagra-zucca.title': 'Agra, the Pumpkin Festival postponed to October 25',
     'blog.article.agra-sagra-zucca.excerpt': 'The 43rd Pumpkin Festival has been postponed to October 25 The event was scheduled for Sunday, October 18 The postponement was decided due to the expected bad weather Pro',
     'blog.article.agra-sagra-zucca.imageAlt': 'Autumn festival with pumpkins, roasted chestnuts and stalls in Agra',
+    'blog.article.aic-lombardia-varese-2026.title': 'AIC Lombardia in Varese: gluten-free sport and Pulciniadi',
+    'blog.article.aic-lombardia-varese-2026.excerpt': 'AIC Lombardia at Varese from October 23 to 25 Gluten-free information desks and refreshments at the Giardini Estensi About 450 children at the Pulciniadi Who → AIC Lombardia APS When →',
+    'blog.article.aic-lombardia-varese-2026.imageAlt': 'AIC Lombardia informative desk at Giardini Estensi in Varese',
 };
 
 export default blogMetaEn;

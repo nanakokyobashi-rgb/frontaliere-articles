@@ -13416,6 +13416,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.agra-sagra-zucca.title': 'Agra, la Sagra della Zucca rinviata al 25 ottobre',
     'blog.article.agra-sagra-zucca.excerpt': 'La 43ª Sagra della Zucca è stata rinviata al 25 ottobre L\'appuntamento era previsto per domenica 18 ottobre Il rinvio è stato deciso per il maltempo atteso Pro',
     'blog.article.agra-sagra-zucca.imageAlt': 'Festa autunnale con zucche, caldarroste e bancarelle ad Agra',
+    'blog.article.aic-lombardia-varese-2026.title': 'AIC Lombardia a Varese: sport senza glutine e Pulciniadi',
+    'blog.article.aic-lombardia-varese-2026.excerpt': 'AIC Lombardia a Varese dal 23 al 25 ottobre Desk e ristori senza glutine ai Giardini Estensi Circa 450 bambini alle Pulciniadi Chi → AIC Lombardia APS Quando →',
+    'blog.article.aic-lombardia-varese-2026.imageAlt': 'Desk informativo di AIC Lombardia ai Giardini Estensi a Varese',
 };
 
 export default blogMetaIt;

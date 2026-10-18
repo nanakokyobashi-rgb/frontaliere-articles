@@ -110983,6 +110983,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-aic-lombardia-varese-2026': {
+    title: 'AIC Lombardia a Varese: sport senza glutine e Pulciniadi',
+    description: 'AIC Lombardia a Varese dal 23 al 25 ottobre Desk e ristori senza glutine ai Giardini Estensi Circa 450 bambini alle Pulciniadi Chi → AIC Lombardia APS Quando →',
+    keywords: 'frontalieri, ticino, svizzera, italia, lombardia, varese, sport, senza',
+    ogTitle: 'AIC Lombardia a Varese con sport senza glutine e Pulciniadi',
+    ogDescription: 'AIC Lombardia a Varese dal 23 al 25 ottobre Desk e ristori senza glutine ai Giardini Estensi Circa 450 bambini alle Pulciniadi Chi → AIC Lombardia APS Quando →',
+    canonicalPath: '/articoli-frontaliere/aic-lombardia-varese-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "AIC Lombardia a Varese: sport senza glutine e Pulciniadi",
+      "description": "AIC Lombardia a Varese dal 23 al 25 ottobre Desk e ristori senza glutine ai Giardini Estensi Circa 450 bambini alle Pulciniadi Chi → AIC Lombardia APS Quando →",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-aic-lombardia-varese-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Desk informativo di AIC Lombardia ai Giardini Estensi a Varese"
+      },
+      "datePublished": "2026-10-18T02:15:49+00:00",
+      "dateModified": "2026-10-18T02:15:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/aic-lombardia-varese-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

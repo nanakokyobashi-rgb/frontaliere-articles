@@ -13414,6 +13414,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.agra-sagra-zucca.title': 'Agra, das Kürbisfest auf den 25. Oktober verschoben',
     'blog.article.agra-sagra-zucca.excerpt': 'Das 43. Kürbisfest wurde auf den 25. Oktober verschoben Die Veranstaltung war für Sonntag, den 18. Oktober, vorgesehen Die Verschiebung wurde wegen des erwarteten schlechten Wetters beschlossen Pro',
     'blog.article.agra-sagra-zucca.imageAlt': 'Herbstfest mit Kürbissen, Maronen und Marktständen in Agra',
+    'blog.article.aic-lombardia-varese-2026.title': 'AIC Lombardia in Varese: glutenfreier Sport und Pulciniadi',
+    'blog.article.aic-lombardia-varese-2026.excerpt': 'AIC Lombardia in Varese vom 23.',
+    'blog.article.aic-lombardia-varese-2026.imageAlt': 'Informationsstand von AIC Lombardia in den Giardini Estensi in Varese',
 };
 
 export default blogMetaDe;

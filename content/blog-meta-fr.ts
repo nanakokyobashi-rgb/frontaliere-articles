@@ -13417,6 +13417,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.agra-sagra-zucca.title': 'Agra, la fête de la citrouille reportée au 25 octobre',
     'blog.article.agra-sagra-zucca.excerpt': 'La 43ª fête de la citrouille a été reportée au 25 octobre Le rendez-vous était prévu pour le dimanche 18 octobre Le report a été décidé en raison du mauvais temps attendu Pro',
     'blog.article.agra-sagra-zucca.imageAlt': 'Fête d\'automne avec citrouilles, marrons et stands à Agra',
+    'blog.article.aic-lombardia-varese-2026.title': 'AIC Lombardia à Varèse : sport sans gluten et Pulciniadi',
+    'blog.article.aic-lombardia-varese-2026.excerpt': 'AIC Lombardia à Varese du 23 au 25 octobre Desk et ravitaillements sans gluten aux Giardini Estensi Environ 450 enfants aux Pulciniadi Qui → AIC Lombardia APS Quand →',
+    'blog.article.aic-lombardia-varese-2026.imageAlt': 'Bureau d\'information d\'AIC Lombardia aux Giardini Estensi à Varèse (Varese)',
 };
 
 export default blogMetaFr;
