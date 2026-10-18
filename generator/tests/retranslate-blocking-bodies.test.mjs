@@ -1169,6 +1169,48 @@ test('la guardia limita il confronto al segmento dell indirizzo', () => {
   assert.deepEqual(rejected[0].missing, ['Como']);
 });
 
+test('la guardia non trova toponimi persi dopo confini di frase o dentro URL', () => {
+  const italianSections = { body1: '22100 Como' };
+  for (const target of [
+    '22100 Wie! in Como',
+    '22100 Wie? in Como',
+    '22100 Wie. Fonte: https://example.org/12345',
+  ]) {
+    const mismatches = findAddressToponymMismatches({
+      italianSections,
+      newSections: { body1: target },
+      locale: 'en',
+    });
+    assert.deepEqual(mismatches[0]?.missing, ['Como'], target);
+  }
+});
+
+test('la guardia valuta ogni CAP nel proprio contesto anche se la riga ne contiene piu di uno', () => {
+  const mismatches = findAddressToponymMismatches({
+    italianSections: { body1: 'Via Roma 1, 22100 Como; Via Milano 2, 20100 Varese' },
+    newSections: { body1: 'Rue Roma 1, 22100 Wie; Rue Milano 2, 20100 Varese' },
+    locale: 'en',
+  });
+  assert.deepEqual(mismatches.map(({ postalCode, missing }) => ({ postalCode, missing })), [
+    { postalCode: '22100', missing: ['Como'] },
+  ]);
+});
+
+test('la guardia classifica il testo visibile nei link e nei tag HTML prima di verificare il CAP', () => {
+  const italianSections = { body1: '22100 Como' };
+  for (const target of [
+    '22100 [Wie](https://example.org/como)',
+    '22100 <strong>Wie</strong>',
+  ]) {
+    const mismatches = findAddressToponymMismatches({
+      italianSections,
+      newSections: { body1: target },
+      locale: 'en',
+    });
+    assert.deepEqual(mismatches[0]?.missing, ['Como'], target);
+  }
+});
+
 test('la guardia non conta i toponimi nelle destinazioni dei link', () => {
   const mismatches = findAddressToponymMismatches({
     italianSections: {

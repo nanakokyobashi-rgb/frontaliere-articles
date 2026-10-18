@@ -867,7 +867,8 @@ const ADDRESS_POSTAL_LOCALITY_RE = /^\s*(?:[,;]\s*)?\p{Lu}[\p{L}\p{M}]*(?:[’'\
 const ADDRESS_COMPACT_PREFIX_RE = /^\s*(?:[-‐‑‒–—−>→•*]\s*)?$/u;
 const ADDRESS_LOCALITY_MARKER_RE = /\b(?:fraz(?:ione)?\.?|localit(?:à|a)|loc\.|hameau|lieu-dit|ortsteil)\b/iu;
 const ADDRESS_COUNTRY_BOUNDARY_RE = /(?:^|[,;]|\s+)(?:italia|italy|italien|italie|svizzera|switzerland|schweiz|suisse|germania|germany|deutschland|allemagne|francia|france|spagna|spain|spanien|espagne|austria|österreich|autriche)\b[\s\S]*$/iu;
-const ADDRESS_SENTENCE_BOUNDARY_RE = /(?<!\bfraz)(?<!\bfrazione)(?<!\bloc)\.(?=\s+\p{Lu})/iu;
+const ADDRESS_SENTENCE_BOUNDARY_RE = /(?<!\bfraz)(?<!\bfrazione)(?<!\bloc)[.!?](?=\s|$)/iu;
+const ADDRESS_RECORD_BOUNDARY_RE = /[;\n]/u;
 const ADDRESS_DASH_RE = /[-‐‑‒–—−]/u;
 const ADDRESS_MARKDOWN_LINK_RE = /!?\[([^\]\n]*)\]\((?:<[^>\n]*>|[^)\n]*)\)/gu;
 const ADDRESS_HTML_TAG_RE = /<[^>\n]*>/gu;
@@ -955,10 +956,13 @@ function addressSegmentForPostalCode(line, postalMatch) {
   const bounded = nextPostalOffset < 0
     ? afterPostal
     : afterPostal.slice(0, nextPostalOffset);
-  const sentenceBoundaryOffset = bounded.search(ADDRESS_SENTENCE_BOUNDARY_RE);
-  const addressText = sentenceBoundaryOffset < 0
+  const boundaryOffsets = [
+    bounded.search(ADDRESS_SENTENCE_BOUNDARY_RE),
+    bounded.search(ADDRESS_RECORD_BOUNDARY_RE),
+  ].filter((offset) => offset >= 0);
+  const addressText = boundaryOffsets.length === 0
     ? bounded
-    : bounded.slice(0, sentenceBoundaryOffset);
+    : bounded.slice(0, Math.min(...boundaryOffsets));
   return addressText.replace(ADDRESS_COUNTRY_BOUNDARY_RE, '').trim();
 }
 
@@ -970,20 +974,11 @@ function postalHasAddressSeparator(line, postalMatch) {
     && ADDRESS_POSTAL_SEPARATOR_RE.test(afterPostal);
 }
 
-/**
- * A line with more than one five-digit candidate is evaluated at each
- * candidate, but an earlier candidate cannot inherit the address context of a
- * later CAP. This is what lets a practice/statistical number precede the real
- * postal code without masking it from the scan.
- */
+/** Evaluate each visible postal-code candidate using only its own segment. */
 function isAddressLine(line, postalMatch) {
   const text = String(line);
   const beforePostal = text.slice(0, postalMatch.index);
   const addressSegment = addressSegmentForPostalCode(text, postalMatch);
-  const hasLaterPostal = /\b\d{5}\b/u.test(
-    text.slice(postalMatch.index + postalMatch[0].length),
-  );
-  if (hasLaterPostal) return false;
   if (ADDRESS_STREET_NUMBER_RE.test(beforePostal)) return true;
   if (ADDRESS_LABEL_CONTEXT_RE.test(beforePostal)) return true;
   if (!postalHasAddressSeparator(text, postalMatch)) return false;
@@ -1017,15 +1012,16 @@ function addressTokenIsPreserved({ token, sourceSegment, targetSegment, locale }
 
 function addressLineTarget(lines, sourceLine, sourceLineIndex, usedTargetLines) {
   const candidates = [];
-  lines.forEach((line, index) => {
+  lines.forEach((rawLine, index) => {
     if (usedTargetLines.has(index)) return;
+    const line = visibleAddressText(rawLine);
     const postalMatch = addressPostalMatches(line)
       .find((match) => match[0] === sourceLine.postalCode);
     if (!postalMatch) return;
     const targetSegment = addressSegmentForPostalCode(line, postalMatch);
     candidates.push({
       index,
-      text: line,
+      text: rawLine,
       segment: targetSegment,
       context: addressContextForPostalCode(line, postalMatch),
     });
@@ -1064,9 +1060,10 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
     const targetLines = String(newSections?.[field] ?? '').split('\n');
     const usedTargetLines = new Set();
     sourceLines.forEach((line, lineIndex) => {
-      for (const postalMatch of addressPostalMatches(line)) {
-        if (!isAddressLine(line, postalMatch)) continue;
-        const sourceSegment = addressSegmentForPostalCode(line, postalMatch);
+      const visibleLine = visibleAddressText(line);
+      for (const postalMatch of addressPostalMatches(visibleLine)) {
+        if (!isAddressLine(visibleLine, postalMatch)) continue;
+        const sourceSegment = addressSegmentForPostalCode(visibleLine, postalMatch);
         ADDRESS_CAPITALIZED_TOKEN_RE.lastIndex = 0;
         const tokens = [...sourceSegment.matchAll(ADDRESS_CAPITALIZED_TOKEN_RE)].map((match) => match[0]);
         ADDRESS_CAPITALIZED_TOKEN_RE.lastIndex = 0;
@@ -1075,7 +1072,7 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
           postalCode: postalMatch[0],
           line: line.trim(),
           segment: sourceSegment,
-          context: addressContextForPostalCode(line, postalMatch),
+          context: addressContextForPostalCode(visibleLine, postalMatch),
           tokens: [...new Set(tokens)],
         };
         const target = addressLineTarget(targetLines, sourceLine, lineIndex, usedTargetLines);
