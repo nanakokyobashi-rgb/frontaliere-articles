@@ -90,6 +90,7 @@ test('publisher: una release live con manifest precedente deferisce RSS al repla
     assert.equal(manifestCalls, 0, 'il manifest precedente resta la memoria fino al replay post-API');
     const summary = JSON.parse(readFileSync(path.join(fixtureRoot, 'summary.json'), 'utf8'));
     assert.equal(summary.deferredLiveRelease, true);
+    assert.equal(summary.deferredLiveBootstrapRelease, false);
     assert.equal(summary.published.manifestDeferred, true);
   } finally {
     console.log = realConsoleLog;

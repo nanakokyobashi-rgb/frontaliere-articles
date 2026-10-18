@@ -2299,18 +2299,17 @@ export async function main(
     publishedPageManifest: publishedManifest.state,
     effectiveStatus,
     deferredLiveRelease,
-    // Kept for consumers of the pre-RSS summary shape; the staged path now
-    // covers every live release with a verified previous manifest, not only
-    // explicit bootstrap runs.
-    deferredLiveBootstrapRelease: deferredLiveRelease,
+    // Kept for consumers of the pre-RSS summary shape; this legacy field
+    // retains its bootstrap-only meaning while deferredLiveRelease covers the
+    // broader staged live-release path.
+    deferredLiveBootstrapRelease: args.bootstrap && deferredLiveRelease,
     liveBootstrapManifestMissing,
     cantonRssFeeds: cantonRssFeeds.map(({ name, key, url }) => ({ name, key, url })),
     pages,
     pagesForPublish,
     immutableLivePages,
-    // Legacy summary key retained while staged live releases are no longer
-    // limited to explicit bootstrap runs.
-    immutableBootstrapPages: immutableLivePages,
+    // Legacy summary key retains its bootstrap-only meaning.
+    immutableBootstrapPages: args.bootstrap ? immutableLivePages : [],
     cdnUploads,
     obsoletePages,
     obsoletePagesForPublish,
