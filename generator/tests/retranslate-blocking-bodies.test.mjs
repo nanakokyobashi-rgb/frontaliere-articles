@@ -1080,6 +1080,26 @@ test('la guardia riconosce anche un indirizzo con nome strada minimo', () => {
   })[0].missing, ['Como']);
 });
 
+test('la guardia riconosce CAP-località senza glossario o numero civico', () => {
+  const cases = [
+    {
+      italianSections: { body1: 'Via Roma, 22100 Tavernola' },
+      newSections: { body1: 'Rue Roma, 22100 Wie' },
+    },
+    {
+      italianSections: { body1: '22100 Tavernola' },
+      newSections: { body1: '22100 Wie' },
+    },
+  ];
+  for (const { italianSections, newSections } of cases) {
+    assert.deepEqual(findAddressToponymMismatches({
+      italianSections,
+      newSections,
+      locale: 'en',
+    })[0].missing, ['Tavernola']);
+  }
+});
+
 test('la guardia riconosce CAP e località separati solo da spazio', () => {
   const italianSections = { body1: '22100 Como' };
   assert.deepEqual(findAddressToponymMismatches({
@@ -1149,6 +1169,28 @@ test('la guardia limita il confronto al segmento dell indirizzo', () => {
   assert.deepEqual(rejected[0].missing, ['Como']);
 });
 
+test('la guardia non conta i toponimi nelle destinazioni dei link', () => {
+  const mismatches = findAddressToponymMismatches({
+    italianSections: {
+      body1: 'Via Roma 1, 22100 Como',
+    },
+    newSections: {
+      body1: 'Rue Roma 1, 22100 [la città](/en/como)',
+    },
+    locale: 'en',
+  });
+  assert.deepEqual(mismatches[0].missing, ['Como']);
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: {
+      body1: 'Via Roma 1, 22100 Como',
+    },
+    newSections: {
+      body1: 'Rue Roma 1, 22100 [Como](/en/another-place)',
+    },
+    locale: 'en',
+  }), []);
+});
+
 test('la guardia non rende obbligatorio il paese che segue il toponimo', () => {
   const italianSections = {
     body1: 'Via 15, 22100 Como, Italia',
@@ -1179,6 +1221,28 @@ test('la guardia disambigua due righe con lo stesso CAP dopo il riordino', () =>
     },
     locale: 'en',
   }), []);
+});
+
+test('la guardia rifiuta località scambiate fra righe con lo stesso CAP', () => {
+  const mismatches = findAddressToponymMismatches({
+    italianSections: {
+      body1: [
+        'Via Roma 1, 22100 Como',
+        'Via Milano 2, 22100 Lecco',
+      ].join('\n'),
+    },
+    newSections: {
+      body1: [
+        'Rue Roma 1, 22100 Lecco',
+        'Rue Milano 2, 22100 Como',
+      ].join('\n'),
+    },
+    locale: 'en',
+  });
+  assert.deepEqual(mismatches.map(({ line, missing }) => ({ line, missing })), [
+    { line: 1, missing: ['Como'] },
+    { line: 2, missing: ['Lecco'] },
+  ]);
 });
 
 test('stratify copre piu codici invece di prendere i primi N dello stesso', () => {
