@@ -857,6 +857,7 @@ test('un rifiuto visivo per testo o cartelli rafforza il prompt del ritentativo'
   assert.equal(isVisualTextFailure('vision gate rejected image: no visible text or logos; recognizable foreground person'), false);
   assert.equal(isVisualTextFailure('vision gate rejected image: there is no readable text, but the face is recognizable'), false);
   assert.equal(isVisualTextFailure('vision gate rejected image: contains_text=false; contains_logo=false; contains_recognizable_face=true'), false);
+  assert.equal(isVisualTextFailure('vision gate rejected image: {"contains_text": false, "contains_logo": false, "contains_recognizable_face": true}'), false);
   assert.equal(isVisualTextFailure('vision gate rejected image: no text, but visible vehicle logos prevent approval'), true);
   assert.equal(isVisualTextFailure('vision gate rejected image: recognizable face'), false);
   assert.equal(isVisualTextFailure('provider unavailable'), false);

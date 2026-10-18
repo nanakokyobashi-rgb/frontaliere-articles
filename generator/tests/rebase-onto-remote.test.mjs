@@ -1176,6 +1176,26 @@ test('i fast path three-way preservano il terminale della richiesta invariata', 
   assert.equal(replayedUnchanged.terminalReason, 'vision-safety-rejection');
 });
 
+test('il fast path three-way preserva una transizione di stato senza timestamp nuovo', () => {
+  const baseFailed = {
+    ...queueItem('article-state-only', 'failed before wake-up', '2026-10-07T00:01:00.000Z'),
+    status: 'failed',
+    failureCount: 2,
+  };
+  const replayedQueued = {
+    ...baseFailed,
+    status: 'queued',
+  };
+  const merged = mergeImageRegenerationQueues(
+    { schema: 1, items: [baseFailed] },
+    { schema: 1, items: [replayedQueued] },
+    { schema: 1, items: [baseFailed] },
+  ).items[0];
+  assert.equal(merged.status, 'queued');
+  assert.equal(merged.lastFailureAt, baseFailed.lastFailureAt);
+  assert.equal(merged.failureCount, baseFailed.failureCount);
+});
+
 test('an empty allowlist is a caller bug, not a silent always-abort', () => {
   // Without this guard a caller that forgot its paths would degrade to exactly
   // the old behaviour, which is indistinguishable from the fix not being there.

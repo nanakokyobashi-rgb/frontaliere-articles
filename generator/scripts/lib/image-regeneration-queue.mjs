@@ -37,7 +37,7 @@ export function isVisualTextFailure(reason) {
     // Structured vision ledgers are authoritative for these fields. Without
     // removing explicit false values, the field names themselves look like a
     // positive text/logo cue and a face-only rejection becomes retryable.
-    .replace(/\bcontains[_ ](?:text|logo)\s*[:=]\s*false\b/gi, '')
+    .replace(/["']?contains[_ ](?:text|logo)["']?\s*[:=]\s*false\b/gi, '')
     .replace(negativeCue, '');
   return /vision gate rejected image/i.test(normalized)
     && /(?:text|letter(?:ing)?|sign(?:age)?|watermark|signature|writing|logo|emblem|mark(?:ing)?s?|word|number|caption|label|banner|inscription|poster|typograph|brand|trademark|contains[_ ]text\s*[:=]\s*true|cartell|segnaletica|scritte?|parol[ae]|numer[io]|beschriftung|schrift|texte?|forbidden content)/i.test(normalized);
@@ -66,10 +66,20 @@ function isStructuredVisualTextFailure(failure) {
 }
 
 function isClearlyTerminalVisionFailure(failure) {
-  if (failure?.vision?.contains_recognizable_face === true
-    || failure?.vision?.contains_recognizable_foreground_person === true
-    || failure?.vision?.looks_like_specific_real_event === true) return true;
-  const normalized = String(failure?.reason || '');
+  if (Object.hasOwn(failure || {}, 'vision')) {
+    return failure?.vision?.contains_recognizable_face === true
+      || failure?.vision?.contains_recognizable_foreground_person === true
+      || failure?.vision?.looks_like_specific_real_event === true;
+  }
+  // Legacy failures have only a prose reason. Remove explicit negative cues
+  // before matching positive safety evidence: "no recognizable face" and
+  // JSON-shaped false fields must never become terminal merely because they
+  // contain the same nouns as a real rejection.
+  const normalized = String(failure?.reason || '')
+    .replace(/["']?contains_recognizable_(?:face|foreground_person)["']?\s*[:=]\s*false\b/gi, '')
+    .replace(/["']?looks_like_specific_real_event["']?\s*[:=]\s*false\b/gi, '')
+    .replace(/\b(?:no|without|lacks?|does\s+not\s+contain|not)\s+(?:(?:a|an|any|the)\s+)?(?:(?:clearly\s+)?(?:recognizable|identifiable)\s+)(?:(?:foreground|human|real)\s+)*(?:face|person|people|figure|individual)\b/gi, '')
+    .replace(/\b(?:not|no)\s+(?:(?:a|an|the)\s+)?specific\s+real\s+event\b/gi, '');
   return /(?:recognizable|identifiable)\s+(?:(?:foreground|human)\s+)*(?:face|person|people|figure|individual)|contains_recognizable_(?:face|foreground_person)\s*[:=]\s*true|(?:specific real event|looks_like_specific_real_event\s*[:=]\s*true)/i.test(normalized);
 }
 

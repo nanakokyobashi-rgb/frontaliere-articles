@@ -79,6 +79,11 @@ function comparable(value) {
   return value;
 }
 
+function sameItem(left, right) {
+  return left != null && right != null
+    && JSON.stringify(comparable(left)) === JSON.stringify(comparable(right));
+}
+
 function requestWinner(existing, candidate) {
   const existingRequestedAt = imageRegenerationTimestamp(existing.requestedAt);
   const candidateRequestedAt = imageRegenerationTimestamp(candidate.requestedAt);
@@ -185,11 +190,26 @@ export function mergeImageRegenerationQueues(upstream, replayed, base = { items:
     }
 
     if (upstreamItem && replayedItem) {
-      // Even when one side equals base, use the same-request merge: a stale
-      // retry may only have advanced failure metadata and must not overwrite a
-      // terminal verdict. mergeItem still lets a strictly newer requestedAt
-      // replace that verdict as a genuinely new request.
-      byArticle.set(articleId, mergeItem(upstreamItem, replayedItem));
+      const upstreamUnchanged = baseItem && sameItem(upstreamItem, baseItem);
+      const replayedUnchanged = baseItem && sameItem(replayedItem, baseItem);
+      if (upstreamUnchanged && !replayedUnchanged) {
+        // Preserve a real state-only change (for example failed -> queued)
+        // unless the unchanged base already contains a terminal verdict for
+        // the same request, which stale retry progress cannot revive.
+        byArticle.set(articleId, sameRequest(upstreamItem, replayedItem)
+          && upstreamItem.status === IMAGE_REGENERATION_TERMINAL_STATUS
+          && replayedItem.status !== IMAGE_REGENERATION_TERMINAL_STATUS
+          ? mergeItem(upstreamItem, replayedItem)
+          : { ...replayedItem, articleId });
+      } else if (replayedUnchanged && !upstreamUnchanged) {
+        byArticle.set(articleId, sameRequest(upstreamItem, replayedItem)
+          && replayedItem.status === IMAGE_REGENERATION_TERMINAL_STATUS
+          && upstreamItem.status !== IMAGE_REGENERATION_TERMINAL_STATUS
+          ? mergeItem(upstreamItem, replayedItem)
+          : { ...upstreamItem, articleId });
+      } else {
+        byArticle.set(articleId, mergeItem(upstreamItem, replayedItem));
+      }
     } else {
       const item = upstreamItem || replayedItem;
       if (item) byArticle.set(articleId, {...item, articleId});

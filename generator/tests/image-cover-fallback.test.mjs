@@ -296,6 +296,27 @@ test('i flag vision strutturati governano adattamento e terminalità senza dipen
   legacyFailure.imageProviderLedger = ledger;
   legacyFailure.failures = [{ provider: 'openai-codex', reason: 'vision gate rejected image: recognizable face' }];
   assert.equal(classifyImageRegenerationFailure(legacyFailure).retryable, false, 'record failure legacy riconosciuto');
+
+  for (const reason of [
+    'vision gate rejected image: no recognizable face',
+    'vision gate rejected image: without identifiable person',
+    'vision gate rejected image: {"contains_recognizable_face": false}',
+    'vision gate rejected image: {"looks_like_specific_real_event": false}',
+  ]) {
+    const negatedLegacyFailure = new Error('All image providers failed');
+    negatedLegacyFailure.imageProviderLedger = ledger;
+    negatedLegacyFailure.failures = [{ provider: 'openai-codex', reason }];
+    assert.equal(classifyImageRegenerationFailure(negatedLegacyFailure).retryable, true, reason);
+  }
+
+  const structuredNegative = new Error('All image providers failed');
+  structuredNegative.imageProviderLedger = ledger;
+  structuredNegative.failures = [{
+    provider: 'openai-codex',
+    reason: 'vision gate rejected image: recognizable face',
+    vision: { contains_recognizable_face: false },
+  }];
+  assert.equal(classifyImageRegenerationFailure(structuredNegative).retryable, true, 'il flag strutturato prevale sulla nota');
 });
 
 test('un flag strutturato text/logo persiste il retry hint anche con note generiche', () => {
