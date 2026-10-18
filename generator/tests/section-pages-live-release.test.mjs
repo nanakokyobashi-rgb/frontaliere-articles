@@ -162,6 +162,52 @@ test('publisher: la staging usa tutto il manifest live anche con un render --ids
   }
 });
 
+test('publisher: una pagina live omessa dal render parziale non blocca la staging', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-omitted-'));
+  const immutable = pageEntry('canton-ti', 'articoli-ticino/untouched/index.html', 'article');
+  const staged = pageEntry('canton-ti', 'articoli-ticino/new/index.html', 'article');
+  const stagedHtml = '<!doctype html><html><body>nuova</body></html>';
+  let stagedUploaded = false;
+  const stagedLocal = path.join(fixtureRoot, staged.rel);
+  mkdirSync(path.dirname(stagedLocal), { recursive: true });
+  writeFileSync(stagedLocal, stagedHtml, 'utf8');
+  try {
+    const result = await publish({
+      section: 'canton-ti',
+      pages: [staged],
+      immutablePages: [immutable],
+      snapshotPagesBeforeUpload: true,
+      cdnUploads: [],
+      obsoletePages: [],
+      distDir: fixtureRoot,
+      publishedStatusImpl: async () => 'live',
+      runImpl: (_command, args) => {
+        if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+          stagedUploaded = true;
+          return { code: 0, stdout: '✅ uploaded' };
+        }
+        if (args.includes('scripts/cf-purge-cache.mjs')) return { code: 0, stdout: '' };
+        throw new Error(`comando inatteso: ${args.join(' ')}`);
+      },
+      probeImpl: async (url) => {
+        if (url === immutable.cdnUrl) {
+          return { ok: true, status: 200, body: '<!doctype html><html><body>precedente</body></html>' };
+        }
+        if (url === staged.cdnUrl || url === staged.apexUrl) {
+          return stagedUploaded
+            ? { ok: true, status: 200, body: `${stagedHtml}${CORPUS_ROUTE_OWNER_META_TAG}` }
+            : { ok: false, status: 'HTTP 404' };
+        }
+        throw new Error(`URL inatteso: ${url}`);
+      },
+    });
+    assert.equal(result.failures, 0);
+    assert.equal(result.uploaded, 1);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('publisher: lo staging snapshotta prima degli asset e trattiene quelli delle pagine immutabili', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-assets-'));
   const immutable = pageEntry('canton-ti', 'articoli-ticino/existing/index.html', 'article');

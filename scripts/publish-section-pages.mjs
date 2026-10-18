@@ -1802,12 +1802,19 @@ export async function publish({
         const previous = snapshots.get(page.edgeKey);
         const local = path.join(distDir, page.rel);
         const next = fs.existsSync(local) ? fs.readFileSync(local, 'utf8') : null;
-        if (!previous?.exists || next === null) {
+        if (!previous?.exists) {
           console.error(
-            `::error::[${LOG}] release live differita: non è possibile dimostrare la pagina precedente o il render locale per ${page.edgeKey}; ` +
+            `::error::[${LOG}] release live differita: non è possibile dimostrare la pagina precedente per ${page.edgeKey}; ` +
             'la release non può proseguire',
           );
           return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
+        }
+        if (next === null) {
+          console.log(
+            `::notice::[${LOG}] release live differita: ${page.edgeKey} non è stata rigenerata nel render parziale; ` +
+            'la pagina precedente resta immutabile fino al replay',
+          );
+          continue;
         }
         if (next !== previous.body) {
           immutableMismatches.push(page.edgeKey);
