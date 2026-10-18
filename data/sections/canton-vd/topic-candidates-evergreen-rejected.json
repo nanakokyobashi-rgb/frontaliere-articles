@@ -27,6 +27,18 @@
     "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-155?s=4": {
       "section": "canton-vd",
       "ts": 1792201902528
+    },
+    "canton-vd::https://www.ledauphine.com/economie/2026/10/17/ce-troncon-n-est-pas-simple-il-faut-etre-vigilant": {
+      "section": "canton-vd",
+      "ts": 1792293451483
+    },
+    "canton-vd::https://www.ledauphine.com/economie/2026/10/16/a-geneve-les-femmes-gagnent-27-de-moins-que-les-hommes": {
+      "section": "canton-vd",
+      "ts": 1792293460330
+    },
+    "canton-vd::https://www.ledauphine.com/economie/2026/10/17/un-batiment-de-la-zac-etoile-recompense-au-trophee-beton-pro-2026": {
+      "section": "canton-vd",
+      "ts": 1792293582701
     }
   }
 }
