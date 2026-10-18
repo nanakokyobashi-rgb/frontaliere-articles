@@ -1,14 +1,16 @@
 {
-  "keywords": [],
-  "strikes": {},
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
   "topicGateUrls": {
-    "canton-zg::https://www.20min.ch/story/kanton-zug-informatiker-stefan-20-komponiert-klavierstueck-ohne-noten-103642319": {
-      "section": "canton-zg",
-      "ts": 1791648087351
-    },
     "canton-zg::https://zg.ch/de/news/2026/september/tigermueckeimkantonzugnachgewiesen": {
       "section": "canton-zg",
-      "ts": 1791771070601
+      "ts": 1792293445357
+    },
+    "canton-zg::https://www.zugerwoche.ch/zuger-news/detail/kantonsschueler-verwandeln-ideen-in-unternehmen": {
+      "section": "canton-zg",
+      "ts": 1792293458184
     }
   }
 }
