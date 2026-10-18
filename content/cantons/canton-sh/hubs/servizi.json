@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T10:55:16.337Z",
-  "contentHash": "1e139c0855df2643166a85370099bc21c8a03fef1b3b063c5e63f8897bcec4a7",
+  "updatedAt": "2026-10-18T11:55:07.779Z",
+  "contentHash": "6a69436eb69703ac83956d4b8bdcfc05592a176592e08cec14282031c92ba283",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-17T20:37:10.348Z",
+      "updatedAt": "2026-10-18T04:30:33.305Z",
       "keyFacts": 1
     }
   ],
@@ -65,7 +65,7 @@
           "items": [
             {
               "label": "SH1721",
-              "value": "1050 CHF",
+              "value": "1100 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-21T20:00:00.000Z",
               "url": "https://www.auktion-stva.sh.ch/de/auction/69631"
@@ -87,7 +87,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-17T20:37:10.348Z"
+          "updatedAt": "2026-10-18T04:30:33.305Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-18T11:55:07.779Z"
     },
     "en": {
       "canton": "SH",
@@ -203,7 +203,7 @@
           "items": [
             {
               "label": "SH1721",
-              "value": "1,050 CHF",
+              "value": "1,100 CHF",
               "detail": "current bid",
               "date": "2026-10-21T20:00:00.000Z",
               "url": "https://www.auktion-stva.sh.ch/de/auction/69631"
@@ -225,7 +225,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-17T20:37:10.348Z"
+          "updatedAt": "2026-10-18T04:30:33.305Z"
         }
       ],
       "curatedArticles": [
@@ -289,7 +289,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-18T11:55:07.779Z"
     },
     "de": {
       "canton": "SH",
@@ -337,7 +337,7 @@
           "items": [
             {
               "label": "SH1721",
-              "value": "1’050 CHF",
+              "value": "1’100 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-21T20:00:00.000Z",
               "url": "https://www.auktion-stva.sh.ch/de/auction/69631"
@@ -359,7 +359,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-17T20:37:10.348Z"
+          "updatedAt": "2026-10-18T04:30:33.305Z"
         }
       ],
       "curatedArticles": [
@@ -423,7 +423,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-18T11:55:07.779Z"
     },
     "fr": {
       "canton": "SH",
@@ -471,7 +471,7 @@
           "items": [
             {
               "label": "SH1721",
-              "value": "1 050 CHF",
+              "value": "1 100 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-21T20:00:00.000Z",
               "url": "https://www.auktion-stva.sh.ch/de/auction/69631"
@@ -493,7 +493,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-17T20:37:10.348Z"
+          "updatedAt": "2026-10-18T04:30:33.305Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-18T11:55:07.779Z"
     }
   }
 }
