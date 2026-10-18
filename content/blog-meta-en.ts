@@ -13445,6 +13445,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.incendio-via-cortivallo.title': 'Lugano, fire on Via Cortivallo: one person dead',
     'blog.article.incendio-via-cortivallo.excerpt': 'Fire shortly after 3.00 on Via Cortivallo in Lugano A person found dead in the apartment on the second floor Twenty-two tenants evacuated and six residents',
     'blog.article.incendio-via-cortivallo.imageAlt': 'Emergency response after a fire in an apartment building on Via Cortivallo in Lugano',
+    'blog.article.morto-andena-varese.title': 'Gabriele “Lele” Andena, a stalwart of Varese football, has died',
+    'blog.article.morto-andena-varese.excerpt': 'Gabriele Andena died at 79 after a sudden illness.',
+    'blog.article.morto-andena-varese.imageAlt': 'Football stadium with red-and-white colors',
 };
 
 export default blogMetaEn;

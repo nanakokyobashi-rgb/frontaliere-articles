@@ -13447,6 +13447,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.incendio-via-cortivallo.title': 'Lugano, incendie à la Via Cortivallo : une personne décédée',
     'blog.article.incendio-via-cortivallo.excerpt': 'Incendie peu après 3.00 à la Via Cortivallo à Lugano Une personne retrouvée sans vie dans le logement au deuxième étage Vingt-deux locataires évacués et six résidents',
     'blog.article.incendio-via-cortivallo.imageAlt': 'Intervention après un incendie dans un immeuble de la Via Cortivallo à Lugano',
+    'blog.article.morto-andena-varese.title': 'Gabriele «Lele» Andena, pilier du Varese calcio, est décédé',
+    'blog.article.morto-andena-varese.excerpt': 'Gabriele Andena est décédé à 79 ans après un malaise soudain.',
+    'blog.article.morto-andena-varese.imageAlt': 'Stade de football aux couleurs rouge et blanc',
 };
 
 export default blogMetaFr;
