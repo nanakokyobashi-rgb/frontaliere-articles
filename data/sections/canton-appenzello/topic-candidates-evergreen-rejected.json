@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
+  "topicGateUrls": {
+    "canton-appenzello::https://appenzell24.ch/news/hoehere-pension-und-betreuungstaxen-ab-2027": {
+      "section": "canton-appenzello",
+      "ts": 1792294452290
+    },
+    "canton-appenzello::https://appenzell24.ch/news/felssturzgefahr-am-saentis-bestaetigt": {
+      "section": "canton-appenzello",
+      "ts": 1792294458373
+    },
+    "canton-appenzello::https://www.ar.ch/verwaltung/departement-gesundheit-und-soziales": {
+      "section": "canton-appenzello",
+      "ts": 1792294466653
+    },
+    "canton-appenzello::https://appenzell24.ch/news/urnaescher-kaese-ueberzeugt-an-swiss-cheese-awards": {
+      "section": "canton-appenzello",
+      "ts": 1792294469873
+    }
+  }
+}
