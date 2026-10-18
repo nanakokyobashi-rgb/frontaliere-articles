@@ -46,4 +46,3 @@ test('a fail-closed fact-check outage defers the run instead of retrying the art
   assert.match(runDeferral, /EXIT_NO_ARTICLE_DECLARED/);
   assert.match(runDeferral, /articolo non pubblicato/);
 });
-
