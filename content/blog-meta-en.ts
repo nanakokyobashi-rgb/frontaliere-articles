@@ -13439,6 +13439,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.arianna-di-claudio-roma.title': 'Arianna di claudio at the Rome Film Festival',
     'blog.article.arianna-di-claudio-roma.excerpt': 'Arianna Di Claudio at the Rome Film Festival The Varese actress paraded on the red carpet The film is signed by Giacomo Ciarrapico and Luca Vendruscolo Foto',
     'blog.article.arianna-di-claudio-roma.imageAlt': 'Arianna Di Claudio on the red carpet at the Rome Film Festival',
+    'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.title': 'Cross-border workers: harvest at CHF 15, 4k entry tax',
+    'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.excerpt': 'In the Mendrisiotto, grape harvesting is set at 15 francs an hour The entry fee is set at up to 4mila francs For unemployed cross-border workers, 900 is mentioned',
+    'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.imageAlt': 'Mendrisiotto vineyards during harvest with Lake Lugano view',
 };
 
 export default blogMetaEn;

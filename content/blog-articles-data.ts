@@ -45298,6 +45298,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'frontalieri-vendemmia-tasse-ristorni-settembre',
+ category: 'novita',
+ date: '2026-10-18T07:49:24.331Z',
+ image: '/images/blog/article-tassa-salute-ristorni-17-settembre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

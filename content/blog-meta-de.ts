@@ -13438,6 +13438,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.arianna-di-claudio-roma.title': 'Ariadne von Claudio beim Filmfest in Rom',
     'blog.article.arianna-di-claudio-roma.excerpt': 'Arianna Di Claudio beim Filmfestival in Rom Die Schauspielerin aus Varese zog auf dem roten Teppich Der Film wurde von Giacomo Ciarrapico und Luca Vendruscolo signiert Foto',
     'blog.article.arianna-di-claudio-roma.imageAlt': 'Arianna Di Claudio auf dem roten Teppich des Filmfestivals in Rom',
+    'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.title': 'Grenzgänger: Weinlese zu 15 franchi, Einreisegebühr 4mila, 900 mln Arbeitslose',
+    'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.excerpt': 'Im Mendrisiotto wird die Weinlese mit 15 franchi pro Stunde angegeben Die Einreisegebühr wird mit bis zu 4mila franchi angegeben Für arbeitslose Grenzgänger ist von 900 die Rede',
+    'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.imageAlt': 'Weinberge im Mendrisiotto während der Weinlese mit Blick auf den Luganersee',
 };
 
 export default blogMetaDe;

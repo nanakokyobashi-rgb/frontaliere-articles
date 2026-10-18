@@ -13440,6 +13440,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.arianna-di-claudio-roma.title': 'Arianna di claudio alla festa del cinema di roma',
     'blog.article.arianna-di-claudio-roma.excerpt': 'Arianna Di Claudio alla Festa del Cinema di Roma L\'attrice varesina ha sfilato sul red carpet Il film è firmato da Giacomo Ciarrapico e Luca Vendruscolo Foto',
     'blog.article.arianna-di-claudio-roma.imageAlt': 'Arianna Di Claudio sul red carpet della Festa del Cinema di Roma',
+    'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.title': 'Frontalieri: vendemmia a 15 franchi, tassa ingresso 4mila, 900 mln disoccupati',
+    'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.excerpt': 'Nel Mendrisiotto la vendemmia è indicata a 15 franchi l’ora La tassa d’ingresso è indicata fino a 4mila franchi Per i frontalieri disoccupati si parla di 900',
+    'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.imageAlt': 'Vigneti del Mendrisiotto durante la vendemmia con vista sul Lago di Lugano',
 };
 
 export default blogMetaIt;

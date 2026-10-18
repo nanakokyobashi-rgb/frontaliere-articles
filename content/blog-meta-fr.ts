@@ -13441,6 +13441,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.arianna-di-claudio-roma.title': 'Ariane de Claude à la fête du cinéma de Rome',
     'blog.article.arianna-di-claudio-roma.excerpt': 'Arianna Di Claudio à la Fête du Cinéma de Rome L\'actrice Varesina a défilé sur le tapis rouge Le film est signé Giacomo Ciarrapico et Luca Vendruscolo Photo',
     'blog.article.arianna-di-claudio-roma.imageAlt': 'Arianna Di Claudio sur le tapis rouge du Festival du cinéma de Rome',
+    'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.title': 'Frontaliers : vendanges à 15 francs, taxe d’entrée 4mila, 900 mln de chômeurs',
+    'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.excerpt': 'Dans le Mendrisiotto les vendanges sont indiquées à 15 francs l’heure La taxe d’entrée est indiquée jusqu’à 4mila francs Pour les frontaliers au chômage il est question de 900',
+    'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.imageAlt': 'Vignobles du Mendrisiotto pendant les vendanges avec vue sur le lac de Lugano',
 };
 
 export default blogMetaFr;

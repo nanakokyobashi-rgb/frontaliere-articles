@@ -150,6 +150,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T07:27:16.643Z",
       "lastFailureAt": "2026-10-18T07:27:16.643Z"
+    },
+    {
+      "articleId": "frontalieri-vendemmia-tasse-ristorni-settembre",
+      "title": "Frontalieri: vendemmia a 15 franchi, tassa ingresso 4mila, 900 mln disoccupati",
+      "fallbackImage": "/images/blog/article-tassa-salute-ristorni-17-settembre.webp",
+      "reason": "All image providers failed for article-frontalieri-vendemmia-tasse-ristorni-settembre: openai-codex (vision gate rejected image: Generic synthetic vineyard scene relevant to Ticino",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T07:49:25.309Z",
+      "lastFailureAt": "2026-10-18T07:49:25.309Z"
     }
   ]
 }

@@ -111285,6 +111285,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frontalieri-vendemmia-tasse-ristorni-settembre': {
+    title: 'Frontalieri: vendemmia a 15 franchi, tassa ingresso 4mila, 900 mln disoccupati',
+    description: 'Nel Mendrisiotto la vendemmia è indicata a 15 franchi l’ora La tassa d’ingresso è indicata fino a 4mila franchi Per i frontalieri disoccupati si parla di 900',
+    keywords: 'frontalieri, ticino, svizzera, italia, vendemmia, franchi, tassa, ingresso',
+    ogTitle: 'Frontalieri: vendemmia a 15 franchi, tassa ingresso 4mila, 900 mln disoccupati',
+    ogDescription: 'Nel Mendrisiotto la vendemmia è indicata a 15 franchi l’ora La tassa d’ingresso è indicata fino a 4mila franchi Per i frontalieri disoccupati si parla di 900',
+    canonicalPath: '/articoli-frontaliere/frontalieri-vendemmia-tasse-ristorni-settembre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri: vendemmia a 15 franchi, tassa ingresso 4mila, 900 mln disoccupati",
+      "description": "Nel Mendrisiotto la vendemmia è indicata a 15 franchi l’ora La tassa d’ingresso è indicata fino a 4mila franchi Per i frontalieri disoccupati si parla di 900",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tassa-salute-ristorni-17-settembre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vigneti del Mendrisiotto durante la vendemmia con vista sul Lago di Lugano"
+      },
+      "datePublished": "2026-10-18T07:49:24+00:00",
+      "dateModified": "2026-10-18T07:49:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontalieri-vendemmia-tasse-ristorni-settembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
