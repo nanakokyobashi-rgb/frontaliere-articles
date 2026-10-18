@@ -8483,6 +8483,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ordinanza-liste-validita.title': 'ONU modifica la lista di sanzioni: SESAM aggiornato',
     'blog.article.ordinanza-liste-validita.excerpt': 'Il 16 ottobre 2026 l’ONU ha apportato una modifica a una lista di sanzioni.',
     'blog.article.ordinanza-liste-validita.imageAlt': 'Berna, edificio istituzionale e documenti sulla modifica delle liste ONU nella banca dati SESAM.',
+    'blog.article.prezzi-carburanti-rinviati-rinviati.title': 'Carburanti: perché i prezzi alla pompa restano alti',
+    'blog.article.prezzi-carburanti-rinviati-rinviati.excerpt': 'Il greggio resta vicino ai 100 dollari al barile.',
+    'blog.article.prezzi-carburanti-rinviati-rinviati.imageAlt': 'Pompa di carburante in Svizzera con camion cisterna in sfondo',
 };
 
 export default blogMetaChIt;

@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/crescita-in-svizzera%2c-bak-economics-alza-nettamente-le-stime/92060939": {
-    "articleId": "bak-economics-pil-2026-18",
-    "ts": "2026-09-16T00:54:45.042Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4086802": {
     "articleId": "too-big-to-fail-consiglio-stati",
     "ts": "2026-09-16T01:04:39.901Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/xnnqhbeivwar": {
     "articleId": "ordinanza-liste-validita",
     "ts": "2026-10-18T04:35:28.733Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/dialogo/perch%c3%a9-i-prezzi-alla-pompa-non-calano-in-svizzera--4160152.html": {
+    "articleId": "prezzi-carburanti-rinviati-rinviati",
+    "ts": "2026-10-18T06:40:53.545Z",
     "keyForm": 2
   }
 }

@@ -8483,6 +8483,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ordinanza-liste-validita.title': 'UN modifies sanctions list: SESAM updated',
     'blog.article.ordinanza-liste-validita.excerpt': 'On October 16, 2026, the UN made a change to a sanctions list.',
     'blog.article.ordinanza-liste-validita.imageAlt': 'Bern, Swiss institutional building and documents on the UN list update in the SESAM database.',
+    'blog.article.prezzi-carburanti-rinviati-rinviati.title': 'Fuel: why prices at the pump remain high',
+    'blog.article.prezzi-carburanti-rinviati-rinviati.excerpt': 'Crude oil remains close to 100 dollars per barrel.',
+    'blog.article.prezzi-carburanti-rinviati-rinviati.imageAlt': 'Fuel pump in Switzerland with tanker truck in the background',
 };
 
 export default blogMetaChEn;

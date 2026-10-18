@@ -8483,6 +8483,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ordinanza-liste-validita.title': 'UNO ändert Sanktionsliste: SESAM aktualisiert',
     'blog.article.ordinanza-liste-validita.excerpt': 'Am 16. Oktober 2026 hat die UNO eine Sanktionsliste geändert.',
     'blog.article.ordinanza-liste-validita.imageAlt': 'Bern, Schweizer Gebäude und Unterlagen zur Aktualisierung der UN-Sanktionslisten in SESAM.',
+    'blog.article.prezzi-carburanti-rinviati-rinviati.title': 'Kraftstoffe: Warum die Preise an der Zapfsäule hoch bleiben',
+    'blog.article.prezzi-carburanti-rinviati-rinviati.excerpt': 'Das Rohöl bleibt nahe bei 100 Dollar pro Barrel.',
+    'blog.article.prezzi-carburanti-rinviati-rinviati.imageAlt': 'Tankstelle in der Schweiz mit Tanklastwagen im Hintergrund',
 };
 
 export default blogMetaChDe;

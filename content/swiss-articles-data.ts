@@ -28342,6 +28342,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'prezzi-carburanti-rinviati-rinviati',
+    category: 'pratico',
+    date: '2026-10-18T06:40:52.933Z',
+    image: '/images/blog/article-prezzi-carburanti-rinviati-rinviati.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
