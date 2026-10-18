@@ -104,6 +104,64 @@ test('publisher: una release live con manifest precedente resta rossa finché il
   }
 });
 
+test('publisher: la staging usa tutto il manifest live anche con un render --ids parziale', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-inventory-'));
+  const head = 'test-head';
+  const untouched = { ...pageEntry('canton-ti', 'articoli-ticino/untouched/index.html', 'article'), id: 'untouched' };
+  const publishedDoc = pageManifestFromPages({ section: 'canton-ti', commit: 'published', pages: [untouched] });
+  let publishOptions = null;
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  try {
+    console.log = () => {};
+    console.error = () => {};
+    const code = await main(
+      [
+        '--section', 'canton-ti',
+        '--ids', '[]',
+        '--out', path.join(fixtureRoot, 'dist'),
+        '--summary', path.join(fixtureRoot, 'summary.json'),
+        '--publish',
+      ],
+      {
+        parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
+        fetchPageManifestImpl: async () => ({ state: 'ok', doc: publishedDoc }),
+        publishedStatusImpl: async () => 'live',
+        publishedApiReleaseCommitImpl: async () => head,
+        latestApiInputCommitImpl: async () => head,
+        publishedReleaseReadyImpl: async () => ({ ok: false, reason: 'edge in transizione' }),
+        publisherCommitImpl: () => head,
+        currentMainHeadImpl: () => head,
+        createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
+        renderSectionArticlePipelineImpl: async () => ({
+          entries: [],
+          hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
+          downloadedImageKeys: [],
+          imageFetchFailures: [],
+          imagePostcondition: {},
+          aggregatePagesAllowed: false,
+        }),
+        articleReleaseSnapshotImpl: () => [],
+        publishImpl: async (options) => {
+          publishOptions = options;
+          return { failures: 0, uploaded: 0, deleted: 0, status: 'live' };
+        },
+        publishPageManifestImpl: () => true,
+      },
+    );
+    assert.equal(code, 1, 'una deferral non verificata non deve chiudere verde il workflow_run');
+    assert.deepEqual(
+      publishOptions?.immutablePages?.map((page) => page.edgeKey),
+      [untouched.edgeKey],
+      'la staging deve trattenere anche la pagina live non inclusa nel render parziale',
+    );
+  } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('publisher: lo staging snapshotta prima degli asset e trattiene quelli delle pagine immutabili', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-assets-'));
   const immutable = pageEntry('canton-ti', 'articoli-ticino/existing/index.html', 'article');

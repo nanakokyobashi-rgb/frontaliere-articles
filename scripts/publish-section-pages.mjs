@@ -2252,11 +2252,16 @@ export async function main(
   });
   const defects = [];
   const obsoletePagesForPublish = deferredLiveRelease ? [] : obsoletePages;
-  const publishedPageKeys = new Set(
-    publishedManifestPages
-      ? Object.values(publishedManifestPages).flatMap((kindPages) => kindPages.map((page) => page.edgeKey))
-      : [],
-  );
+  // Keep two inventories separate during a staged release: the current render
+  // decides which pages can be uploaded now, while the complete published
+  // manifest is the surface that remains live until the API pointer flips.
+  // With --ids the current render is intentionally partial; using it as the
+  // immutable inventory would miss untouched pages and could let an asset PUT
+  // change bytes still referenced by one of those pages.
+  const publishedLivePages = publishedManifestPages
+    ? Object.values(publishedManifestPages).flat()
+    : [];
+  const publishedPageKeys = new Set(publishedLivePages.map((page) => page.edgeKey));
   // During a deferred live release the old sitemap and edge registry are still
   // live. Only keys absent from the verified old page manifest are immutable
   // additions; replacing an already announced key here would mix two releases
@@ -2264,9 +2269,7 @@ export async function main(
   const pagesForPublish = deferredLiveRelease
     ? pages.filter((page) => !publishedPageKeys.has(page.edgeKey))
     : pages;
-  const immutableLivePages = deferredLiveRelease
-    ? pages.filter((page) => publishedPageKeys.has(page.edgeKey))
-    : [];
+  const immutableLivePages = deferredLiveRelease ? publishedLivePages : [];
 
   if (publishing && effectiveStatus === null) {
     defects.push('registro edge illeggibile o non valido: stato effettivo della sezione non dimostrato');
