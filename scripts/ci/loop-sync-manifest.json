@@ -569,6 +569,16 @@
       }
     },
     {
+      "path": "scripts/ci/lib/automation-risk-policy.mjs",
+      "mode": "identical",
+      "reason": "Gemello byte-identico del sito, importato qui da `scripts/lib/classify-issue.mjs` (`adapted`); il `sitePath` coincide con `path` e resta quindi implicito secondo il formato del manifest.",
+      "baseline": {
+        "site": "c704232742159040",
+        "corpus": "c704232742159040",
+        "alignedAt": "2026-10-18"
+      }
+    },
+    {
       "path": "scripts/ci/report-validate-dist-failure.mjs",
       "mode": "adapted",
       "baseline": {
@@ -1241,12 +1251,12 @@
     {
       "path": "scripts/lib/classify-issue.mjs",
       "mode": "adapted",
-      "reason": "Superficie del modulo e CLI IDENTICHE al sito — classifyIssue(title,labels) -> {category,autofix,route,fuPrio} — cosi' triage-sweep.mjs e lo YAML del triage restano copiabili. Cambiano solo le categorie: il sito ha crawler/revenue/RPM, qui ci sono publish (l'unica che salta la coda: se publish-api non riparte il sito serve dati vecchi in silenzio), engine (si rompe dietro una CI verde), generation (il grosso del volume, transiente da provider LLM) e ci. RIALLINEATO 2026-09-02 (corpus-ahead, issue #722): due aggiunte locali dopo la baseline, entrambe `route: 'none'` come `crawler-transient`, nessuna presente sul sito (verificato su raw.githubusercontent.com/valerielinc-ops/frontaliere-si-o-no@main). (1) categoria `backlog` (nanako#28 punto 6, nanako#40): la label vince su qualunque categoria decisa dal titolo perche' una issue-contenitore puo' nominare 'publish' o 'engine' nel corpo senza essere quel guasto; prima l'unico modo di escluderla era `fu-parked`, un uso improprio della label (significa 'parcheggiata dopo troppi tentativi', non 'non e' lavoro per un agente'). (2) assorbimento di `needs-human` (issue #649): se il triage instrada comunque un'issue che porta gia' quella label, il route normale brucerebbe un run del fixer su qualcosa che `needs-human-sweep.yml` ha gia' giudicato non risolvibile in automatico — osservato sul digest dello sweep stesso, rientrato in `agent:fix` lo stesso giorno. Non e' un miglioramento del meccanismo da proporre al sito: entrambe le label (`backlog`, `needs-human`) e i workflow che le gestiscono (`needs-human-sweep.yml`) sono topologia di QUESTO loop, che il sito non ha. RIALLINEATO 2026-09-11 (corpus-ahead, issue #1294): esporta anche il predicato locale usato da `triage-sweep.mjs`, mantenendo la decisione delle label fuori da copie inline.",
+      "reason": "Superficie del modulo e CLI adattate al sito: `classifyIssue(title, labels)` restituisce le quattro decisioni di routing piu' l'evidenza della policy (`automationDeferred`, `riskBlocked`, `riskDomains` e i campi diagnostici), cosi' `triage-sweep.mjs` resta copiabile. `scripts/ci/lib/automation-risk-policy.mjs` e' il gemello identical della policy f1-f7-v4 del sito: i domini di rischio sulla superficie issue restano evidenza, mentre `automation-deferred` resta un pin tecnico non instradabile. Cambiano solo le categorie: il sito ha crawler/revenue/RPM, qui ci sono publish (l'unica che salta la coda: se publish-api non riparte il sito serve dati vecchi in silenzio), engine (si rompe dietro una CI verde), generation (il grosso del volume, transiente da provider LLM) e ci. Restano corpus-only i pin `backlog` e `needs-human` e il predicato locale consumato dal triage: `needs-human` continua a essere assorbente, come fissato da d04c9d54a/#1739, senza trasformare il defer tecnico in una decisione umana del sito. RIALLINEATO 2026-10-18 per la review #2904: aggiunta la superficie di rischio condivisa senza sovrascrivere le categorie e i pin propri del corpus.",
       "baseline": {
-        "site": "e7d86d8bb43b6c33",
-        "corpus": "8152d132bdc14074",
-        "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T23:19:30.031Z"
+        "site": "3731d2618ebfcce3",
+        "corpus": "0dd00a4478b1616c",
+        "alignedAt": "2026-10-18",
+        "forcedAt": "2026-10-18T20:05:16.281Z"
       }
     },
     {
@@ -1318,8 +1328,8 @@
       "reason": "Equivalente in node:test del guard vitest del sito. Due dei test coprono l'ORDINE delle regex: `fast-publish-article` non deve essere catturato dalla categoria publish (8 fallimenti transienti a settimana salterebbero la coda), e un vero publish-api non deve finire in generation.",
       "baseline": {
         "site": null,
-        "corpus": "e09e8de48907fe2e",
-        "alignedAt": "2026-08-07"
+        "corpus": "0c6908675be9e012",
+        "alignedAt": "2026-10-18"
       }
     },
     {
@@ -1417,8 +1427,8 @@
       "reason": "Il corpus e' nato con le sole label di default di GitHub: nessuna delle 13 del ciclo esisteva. `gh issue edit --add-label` NON crea la label mancante, fallisce — e nei workflow quel fallimento e' un warning non bloccante, quindi il ciclo sarebbe girato INERTE senza un errore. Il sito non ha questo script perche' le sue label ci sono da sempre; qui e' un prerequisito. Idempotente, girato come primo step di triage e fixer perche' una label cancellata per sbaglio ricreerebbe lo stesso stallo mesi dopo.",
       "baseline": {
         "site": null,
-        "corpus": "cd556496fc4e86c6",
-        "alignedAt": "2026-09-03"
+        "corpus": "26af16a435ddecef",
+        "alignedAt": "2026-10-18"
       }
     },
     {
@@ -1464,8 +1474,8 @@
       "path": "scripts/ci/orphan-pr-custodian.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "5e06bae213153fb0",
-        "corpus": "5e06bae213153fb0",
+        "site": "ecdcdbdb7cf8a7de",
+        "corpus": "ecdcdbdb7cf8a7de",
         "alignedAt": "2026-10-18"
       }
     },
@@ -1475,10 +1485,10 @@
       "mode": "adapted",
       "reason": "Gemello node:test del test Vitest del sito sul custode delle PR orfane: stessi casi sulla decisione pura (rerun di una suite CANCELLED con LGTM, adozione di un 🔴 fuori scope, guardie) e sul cablaggio di stale-pr-rescuer.yml. Cambia il runner; qui asserisce anche il dispatch del redflag-fixer (`REDFLAG_FIXER_DISPATCH_INPUT: pr`), che il sito non ha perche' il suo fixer non accetta workflow_dispatch, e calcola la closure transitiva degli import statici/dinamici che il checkout sparse deve materializzare (#929, site #9528).",
       "baseline": {
-        "site": "be1b0e165eae1c4b",
-        "corpus": "e41762ea8b88373b",
-        "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T02:04:36.000Z"
+        "site": "b674853e6b878e5d",
+        "corpus": "720fa73d5214a84a",
+        "alignedAt": "2026-10-18",
+        "forcedAt": "2026-10-18T20:05:16.421Z"
       }
     },
     {
@@ -4388,8 +4398,8 @@
       "reason": "Wrapper zero-dep che verifica la post-condizione dei close richiesti dai tre workflow del corpus (issue #1005): rilegge lo stato per numero o la lista REST paginata per titolo, ritenta una volta e annota + esce non-zero se l'issue resta aperta. `scripts/lib/github-issue-creator.mjs` resta best-effort e `identical`: la decisione se una chiusura e' obbligatoria appartiene al chiamante. Candidato a risalire al sito insieme ai call-site adattati.",
       "baseline": {
         "site": null,
-        "corpus": "e72cf3f25bb9052c",
-        "alignedAt": "2026-09-12"
+        "corpus": "ec3b9a6db7847939",
+        "alignedAt": "2026-10-18"
       }
     },
     {
