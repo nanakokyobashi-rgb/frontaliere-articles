@@ -443,9 +443,9 @@ jobs:
     needs: resolve
     if: needs.resolve.outputs.any == 'true'
     runs-on: ubuntu-latest
-    # Il bootstrap live può attendere il publisher edge fino a 55 minuti prima
-    # di renderizzare. Conserva il budget storico di 45 minuti dopo il gate.
-    timeout-minutes: 100
+    # Budget: fino a 55 min per il gate bootstrap, 3 checkout main x 2 tentativi
+    # di render da 45 min, più margine operativo; il limite del job resta 6h.
+    timeout-minutes: 360
     strategy:
       fail-fast: false
       matrix:
@@ -838,7 +838,7 @@ jobs:
             # Il wrapper ritenta i blip npm/R2. Se il publish fallisce anche
             # dopo i tentativi, il controllo sotto distingue un avanzamento di
             # main e fa ripartire il loop dal checkout aggiornato.
-            if bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"; then
+            if RETRY_CMD_ATTEMPTS=2 bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"; then
               exit 0
             fi
             if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then

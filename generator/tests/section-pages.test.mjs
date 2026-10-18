@@ -2824,7 +2824,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   assert.match(liveRetryLoop, /build_publish_args "\$attempt_dry"/);
   assert.match(wf, /INSTALLED_DEPENDENCY_LOCK_HASH/);
-  assert.match(liveRetryLoop, /if bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/);
+  assert.match(liveRetryLoop, /if RETRY_CMD_ATTEMPTS=2 bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/);
   assert.match(wf, /PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
   assert.match(wf, /PUSH_AFTER: \$\{\{ needs\.resolve\.outputs\.push_after \}\}/);
   const bootstrapReplay = wf.slice(wf.indexOf('  replay-api-after-bootstrap:'));
@@ -2910,11 +2910,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'engine/**'\n"));
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'host/**'\n"));
   assert.match(wf, /if: needs\.resolve\.outputs\.any == 'true'/);
-  assert.match(wf, /bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs "\$\{args\[@\]\}"/);
+  assert.match(wf, /RETRY_CMD_ATTEMPTS=2 bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs "\$\{args\[@\]\}"/);
   assert.match(wf, /\[ "\$dry_mode" = "true" \]; then\n\s+args\+=\(--dry-run\)\n\s+else\n\s+args\+=\(--publish\)/);
   // upload-cdn-file.sh esce 0 senza credenziali: l'assenza deve fermare il job.
   assert.match(wf, /for v in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_S3_ENDPOINT R2_BUCKET CF_API_TOKEN; do/);
-  assert.match(wf, /timeout-minutes: 100/);
+  assert.match(wf, /timeout-minutes: 360/);
   assert.match(wf, /Acquire bootstrap R2 gate/);
   assert.match(wf, /- name: Acquire bootstrap R2 gate\n\s+id: acquire_bootstrap/);
   assert.match(wf, /section-bootstrap-lock\.mjs acquire --section "\$SECTION".*--wait-ms "\$LOCK_WAIT_MS"/);

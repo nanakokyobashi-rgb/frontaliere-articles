@@ -50,11 +50,11 @@
 #     VERIFICATO leggendo i due sorgenti. Un tentativo interrotto non lascia
 #     stato che il successivo possa leggere.
 #   - `npx -y tsx@4.23.15 scripts/publish-section-pages.mjs` nel loop live di
-#     `fast-publish-section.yml` — il render riusa lo stesso scratch e gli upload
-#     R2 sono PUT sulle stesse chiavi. `publish-section-pages.mjs` verifica
-#     `EXPECTED_MAIN_HEAD` prima degli upload; dopo l'ultimo tentativo fallito,
-#     il workflow ricontrolla main e rifà il checkout solo se è avanzata.
-#     VERIFICATO nel publisher e nel loop live.
+#     `fast-publish-section.yml` (2 tentativi per ogni HEAD) — il render riusa
+#     lo stesso scratch e gli upload R2 sono PUT sulle stesse chiavi.
+#     `publish-section-pages.mjs` verifica `EXPECTED_MAIN_HEAD` prima degli
+#     upload; dopo l'ultimo tentativo fallito il workflow ricontrolla main e
+#     rifà il checkout solo se è avanzata. VERIFICATO nel publisher e nel loop.
 #
 # Se aggiungi un call-site, scrivi qui perche' ritentarlo e' sicuro. Un wrapper
 # di retry applicato a un comando non idempotente non ripara un guasto: ne
