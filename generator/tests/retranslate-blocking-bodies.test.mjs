@@ -1088,6 +1088,67 @@ test('la guardia riconosce una frazione prima del CAP', () => {
     locale: 'en',
   });
   assert.deepEqual(mismatches[0]?.missing, ['Como']);
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: 'Frazione Pieve, 22100 Como' },
+    newSections: { body1: 'Hamlet, 22100 Como' },
+    locale: 'en',
+  })[0]?.missing, ['Pieve']);
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: 'Frazione Pieve, 22100 Como' },
+    newSections: { body1: 'Hamlet Pieve, 22100 Como' },
+    locale: 'en',
+  }), []);
+});
+
+test('la guardia estrae la frazione prima della via e non la prende dalla prosa', () => {
+  const italianSections = { body1: 'Frazione Pieve, Via Roma 1, 22100 Como' };
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections,
+    newSections: { body1: 'Pieve, Rue Roma 1, 22100 Como' },
+    locale: 'en',
+  }), []);
+  for (const localityPrefix of ['Around', 'Nearby', 'Close to', 'Adjacent to']) {
+    assert.deepEqual(findAddressToponymMismatches({
+      italianSections,
+      newSections: { body1: `${localityPrefix} Pieve, Rue Roma 1, 22100 Como` },
+      locale: 'en',
+    })[0]?.missing, ['Pieve'], localityPrefix);
+  }
+  for (const marker of ['Hamlet around', 'Hamlet: Around', 'Hamlet — Around']) {
+    assert.deepEqual(findAddressToponymMismatches({
+      italianSections,
+      newSections: { body1: `${marker} Pieve, Rue Roma 1, 22100 Como` },
+      locale: 'en',
+    })[0]?.missing, ['Pieve'], marker);
+  }
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: 'Frazione Pieve, 22100 Como' },
+    newSections: { body1: 'Hamlet: A note about Pieve, 22100 Como' },
+    locale: 'en',
+  })[0]?.missing, ['Pieve']);
+});
+
+test('la guardia riconosce le preposizioni localizzate dopo il marker', () => {
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: '22100 frazione del Comune di Como' },
+    newSections: { body1: '22100 hamlet of the municipality of Como' },
+    locale: 'en',
+  }), []);
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: '22100 frazione del Comune di Como' },
+    newSections: { body1: '22100 hamlet of the municipality of Wie' },
+    locale: 'en',
+  })[0]?.missing, ['Como']);
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: '22100 frazione di Como' },
+    newSections: { body1: '22100 hameau de Côme' },
+    locale: 'fr',
+  }), []);
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: '22100 frazione di Como' },
+    newSections: { body1: '22100 Ortsteil von Como' },
+    locale: 'de',
+  }), []);
 });
 
 test('la guardia riconosce CAP-località senza glossario o numero civico', () => {
@@ -1135,6 +1196,22 @@ test('la guardia associa per località le righe riordinate con CAP duplicati sen
     newSections: { body1: '22100 Varese\n22100 Como' },
     locale: 'en',
   }), []);
+});
+
+test('la guardia associa località accorpate in righe anche se sono riordinate', () => {
+  for (const separator of [',', ';']) {
+    for (const [source, target] of [
+      ['22100 Como\n22100 Varese', `22100 Como${separator} 22100 Varese`],
+      ['22100 Como\n22100 Varese', `22100 Varese${separator} 22100 Como`],
+      ['22100 San Pietro in Campo\n22100 Varese', `22100 San Pietro in Campo${separator} 22100 Varese`],
+    ]) {
+      assert.deepEqual(findAddressToponymMismatches({
+        italianSections: { body1: source },
+        newSections: { body1: target },
+        locale: 'en',
+      }), [], `separatore ${separator}: ${source} → ${target}`);
+    }
+  }
 });
 
 test('la guardia riconosce gli indirizzi con trattino o due punti prima del CAP', () => {
@@ -1220,6 +1297,17 @@ test('la guardia non prende la descrizione dopo un colon post-CAP per località 
     newSections: { body1: 'Rue Roma 1, 22100: Description sur Como' },
     locale: 'en',
   })[0]?.missing, ['Como']);
+  for (const target of [
+    '22100 Wie: Description 22100 Como',
+    '22100 Wie, report, 22100 Como',
+    '22100 Wie, 22100 è associato a Como',
+  ]) {
+    assert.deepEqual(findAddressToponymMismatches({
+      italianSections: { body1: '22100 Como' },
+      newSections: { body1: target },
+      locale: 'en',
+    })[0]?.missing, ['Como'], target);
+  }
 });
 
 test('la guardia non interpreta numeri di pratica come indirizzi', () => {
