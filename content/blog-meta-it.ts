@@ -13443,6 +13443,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.title': 'Frontalieri: vendemmia a 15 franchi, tassa ingresso 4mila, 900 mln disoccupati',
     'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.excerpt': 'Nel Mendrisiotto la vendemmia è indicata a 15 franchi l’ora La tassa d’ingresso è indicata fino a 4mila franchi Per i frontalieri disoccupati si parla di 900',
     'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.imageAlt': 'Vigneti del Mendrisiotto durante la vendemmia con vista sul Lago di Lugano',
+    'blog.article.incendio-via-cortivallo.title': 'Lugano, incendio in Via Cortivallo: una persona deceduta',
+    'blog.article.incendio-via-cortivallo.excerpt': 'Incendio poco dopo le 3.00 in Via Cortivallo a Lugano Una persona trovata senza vita nell\'alloggio al secondo piano Ventidue inquilini evacuati e sei residenti',
+    'blog.article.incendio-via-cortivallo.imageAlt': 'Intervento dei soccorritori dopo l\'incendio in una palazzina di Via Cortivallo a Lugano',
 };
 
 export default blogMetaIt;

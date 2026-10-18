@@ -160,6 +160,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T07:49:25.309Z",
       "lastFailureAt": "2026-10-18T07:49:25.309Z"
+    },
+    {
+      "articleId": "incendio-via-cortivallo",
+      "title": "Lugano, incendio in Via Cortivallo: una persona deceduta",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-incendio-via-cortivallo: openai-codex (vision gate rejected image: Relevant synthetic fire-response scene, but multiple recognizable firefigh",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T08:02:44.198Z",
+      "lastFailureAt": "2026-10-18T08:02:44.198Z"
     }
   ]
 }

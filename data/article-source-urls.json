@@ -1,9 +1,4 @@
 {
-  "https://comozero.it/attualita/trenord-potenzia-la-linea-como-milano-ecco-quattro-corse-aggiuntive-la-mattina": {
-    "articleId": "trenord-como-milano-corse-aggiuntive-2025",
-    "ts": "2026-09-11T00:39:11.833Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/newsblog/valute-e-frontiere/1949613/frontalieri-modifiche-ai-treni-tilo-da-domenica-bus-al-posto-della-s10-tra-chiasso-e-melide": {
     "articleId": "tilo-s10-bus-chiasso-melide",
     "ts": "2026-09-11T18:59:52.422Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/arianna-di-claudio-sul-red-carpet-della-festa-del-cinema-di-roma/2711176": {
     "articleId": "arianna-di-claudio-roma",
     "ts": "2026-10-18T07:27:16.644Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4172320": {
+    "articleId": "incendio-via-cortivallo",
+    "ts": "2026-10-18T08:02:44.200Z",
     "keyForm": 2
   }
 }

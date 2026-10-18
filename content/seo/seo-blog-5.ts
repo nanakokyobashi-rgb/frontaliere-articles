@@ -111324,6 +111324,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-incendio-via-cortivallo': {
+    title: 'Lugano, incendio in Via Cortivallo: una persona deceduta',
+    description: 'Incendio poco dopo le 3.00 in Via Cortivallo a Lugano Una persona trovata senza vita nell\'alloggio al secondo piano Ventidue inquilini evacuati e sei residenti',
+    keywords: 'frontalieri, ticino, svizzera, italia, lugano, incendio, cortivallo, persona',
+    ogTitle: 'Incendio in Via Cortivallo a Lugano: una vittima',
+    ogDescription: 'Incendio poco dopo le 3.00 in Via Cortivallo a Lugano Una persona trovata senza vita nell\'alloggio al secondo piano Ventidue inquilini evacuati e sei residenti',
+    canonicalPath: '/articoli-frontaliere/incendio-via-cortivallo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lugano, incendio in Via Cortivallo: una persona deceduta",
+      "description": "Incendio poco dopo le 3.00 in Via Cortivallo a Lugano Una persona trovata senza vita nell'alloggio al secondo piano Ventidue inquilini evacuati e sei residenti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Intervento dei soccorritori dopo l'incendio in una palazzina di Via Cortivallo a Lugano"
+      },
+      "datePublished": "2026-10-18T08:02:43+00:00",
+      "dateModified": "2026-10-18T08:02:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/incendio-via-cortivallo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

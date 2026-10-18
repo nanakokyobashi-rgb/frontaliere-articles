@@ -13442,6 +13442,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.title': 'Cross-border workers: harvest at CHF 15, 4k entry tax',
     'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.excerpt': 'In the Mendrisiotto, grape harvesting is set at 15 francs an hour The entry fee is set at up to 4mila francs For unemployed cross-border workers, 900 is mentioned',
     'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.imageAlt': 'Mendrisiotto vineyards during harvest with Lake Lugano view',
+    'blog.article.incendio-via-cortivallo.title': 'Lugano, fire on Via Cortivallo: one person dead',
+    'blog.article.incendio-via-cortivallo.excerpt': 'Fire shortly after 3.00 on Via Cortivallo in Lugano A person found dead in the apartment on the second floor Twenty-two tenants evacuated and six residents',
+    'blog.article.incendio-via-cortivallo.imageAlt': 'Emergency response after a fire in an apartment building on Via Cortivallo in Lugano',
 };
 
 export default blogMetaEn;

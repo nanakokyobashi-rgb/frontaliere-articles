@@ -13441,6 +13441,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.title': 'Grenzgänger: Weinlese zu 15 franchi, Einreisegebühr 4mila, 900 mln Arbeitslose',
     'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.excerpt': 'Im Mendrisiotto wird die Weinlese mit 15 franchi pro Stunde angegeben Die Einreisegebühr wird mit bis zu 4mila franchi angegeben Für arbeitslose Grenzgänger ist von 900 die Rede',
     'blog.article.frontalieri-vendemmia-tasse-ristorni-settembre.imageAlt': 'Weinberge im Mendrisiotto während der Weinlese mit Blick auf den Luganersee',
+    'blog.article.incendio-via-cortivallo.title': 'Lugano, Brand in der Via Cortivallo: eine Person verstorben',
+    'blog.article.incendio-via-cortivallo.excerpt': 'Brand kurz nach 3.00 Uhr in der Via Cortivallo in Lugano Eine Person in der Wohnung im zweiten Stock leblos aufgefunden Zweiundzwanzig Mieter evakuiert und sechs Bewohner',
+    'blog.article.incendio-via-cortivallo.imageAlt': 'Einsatz nach einem Brand in einem Wohnhaus an der Via Cortivallo in Lugano',
 };
 
 export default blogMetaDe;
