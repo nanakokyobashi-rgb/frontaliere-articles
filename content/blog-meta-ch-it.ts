@@ -8477,6 +8477,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.manager-ffs-denaro-pubblico.title': 'Ex manager FFS, Lamborghini e casa in Florida con soldi pubblici',
     'blog.article.manager-ffs-denaro-pubblico.excerpt': 'Ex dirigente FFS accusato di sottrarre circa 9 milioni Indagine federale aperta dal dicembre 2024 Processo previsto a fine ottobre Danno penalmente rilevante',
     'blog.article.manager-ffs-denaro-pubblico.imageAlt': 'Edifici istituzionali federali in Svizzera',
+    'blog.article.lamal-guida-2026-canton-argovia.title': 'Sistema sanitario svizzero LAMal: guida 2026 Canton Argovia',
+    'blog.article.lamal-guida-2026-canton-argovia.excerpt': 'Chi risiede in Svizzera deve avere un\'assicurazione LAMal La polizza va stipulata entro tre mesi dall\'arrivo Per gli adulti sono previste franchigie di CHF 300',
+    'blog.article.lamal-guida-2026-canton-argovia.imageAlt': 'Guida LAMal 2026 per residenti nel canton Argovia',
 };
 
 export default blogMetaChIt;

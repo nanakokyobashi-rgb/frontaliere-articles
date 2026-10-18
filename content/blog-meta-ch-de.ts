@@ -8477,6 +8477,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.manager-ffs-denaro-pubblico.title': 'Ex-Manager der FFS, Lamborghini und Haus in Florida mit öffentlichen Geldern',
     'blog.article.manager-ffs-denaro-pubblico.excerpt': 'Ex-FFS-Manager beschuldigt, rund 9 Millionen veruntreut zu haben Seit Dezember 2024 laufende Bundesuntersuchung Prozess für Ende Oktober vorgesehen Strafrechtlich relevanter Schaden',
     'blog.article.manager-ffs-denaro-pubblico.imageAlt': 'Eidgenössische Gebäude in der Schweiz',
+    'blog.article.lamal-guida-2026-canton-argovia.title': 'Schweizer Gesundheitssystem nach LAMal: Leitfaden 2026 für den Kanton Aargau',
+    'blog.article.lamal-guida-2026-canton-argovia.excerpt': 'Wer in der Schweiz wohnt, muss eine LAMal-Versicherung haben.',
+    'blog.article.lamal-guida-2026-canton-argovia.imageAlt': 'LAMal Leitfaden 2026 fuer Einwohner im Kanton Aargau',
 };
 
 export default blogMetaChDe;

@@ -28321,6 +28321,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'lamal-guida-2026-canton-argovia',
+    category: 'pratico',
+    date: '2026-10-18T02:46:20.782Z',
+    image: '/images/blog/article-lamal-guida-2026-canton-argovia.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['AG'],
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

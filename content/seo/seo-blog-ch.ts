@@ -107086,6 +107086,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lamal-guida-2026-canton-argovia': {
+    title: 'Sistema sanitario svizzero LAMal: guida 2026 Canton Argovia',
+    description: 'Chi risiede in Svizzera deve avere un\'assicurazione LAMal La polizza va stipulata entro tre mesi dall\'arrivo Per gli adulti sono previste franchigie di CHF 300',
+    keywords: 'frontalieri, ticino, svizzera, italia, sistema, sanitario, svizzero, lamal',
+    ogTitle: 'Guida LAMal 2026 per residenti in Argovia: premi e franchigie',
+    ogDescription: 'Chi risiede in Svizzera deve avere un\'assicurazione LAMal La polizza va stipulata entro tre mesi dall\'arrivo Per gli adulti sono previste franchigie di CHF 300',
+    canonicalPath: '/articoli-svizzera/lamal-guida-2026-canton-argovia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sistema sanitario svizzero LAMal: guida 2026 Canton Argovia",
+      "description": "Chi risiede in Svizzera deve avere un'assicurazione LAMal La polizza va stipulata entro tre mesi dall'arrivo Per gli adulti sono previste franchigie di CHF 300",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lamal-guida-2026-canton-argovia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Guida LAMal 2026 per residenti nel canton Argovia"
+      },
+      "datePublished": "2026-10-18T02:46:20+00:00",
+      "dateModified": "2026-10-18T02:46:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/lamal-guida-2026-canton-argovia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
