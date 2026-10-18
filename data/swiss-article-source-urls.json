@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/jyzpuh-clp7c": {
-    "articleId": "consiglio-federale-obiettivi-2027",
-    "ts": "2026-09-16T01:40:06.867Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1950325/online-migros-nuovo-colosso-strutture": {
     "articleId": "migros-ristruttura-online-retail",
     "ts": "2026-09-16T01:48:49.535Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/rgv3th7wah1v": {
     "articleId": "prodex-40-anni-esericerca-spaziale",
     "ts": "2026-10-18T11:05:16.551Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1957532/ffs-estate-binari-casi-dilatazione": {
+    "articleId": "ffs-binari-deformazioni-canicola-2024",
+    "ts": "2026-10-18T13:36:40.494Z",
     "keyForm": 2
   }
 }
