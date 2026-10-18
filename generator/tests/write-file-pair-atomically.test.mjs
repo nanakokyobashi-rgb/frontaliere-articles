@@ -40,6 +40,54 @@ function interruptAfterTargetRenames(first, second, exitAfter) {
   return spawnSync(process.execPath, ['--input-type=module', '-e', program], { encoding: 'utf8' });
 }
 
+function failAfterUncertainStaging(file) {
+  const helper = new URL('../../scripts/lib/write-file-pair-atomically.mjs', import.meta.url).href;
+  const canonicalFile = fs.realpathSync(file);
+  const program = `
+    import fs from 'node:fs';
+    import { writeFilePairAtomically } from ${JSON.stringify(helper)};
+    const target = ${JSON.stringify(canonicalFile)};
+    let stagingFile = null;
+    const fsImpl = {
+      ...fs,
+      writeFileSync(file, ...args) {
+        if (stagingFile === null && typeof file === 'string' && file.endsWith('.pair.tmp')) {
+          stagingFile = file;
+          fs.writeFileSync(file, 'partial', { encoding: 'utf8', flag: 'wx' });
+          const error = new Error('injected ENOSPC after partial staging write');
+          error.code = 'ENOSPC';
+          throw error;
+        }
+        return fs.writeFileSync(file, ...args);
+      },
+      lstatSync(file, ...args) {
+        if (file === stagingFile) {
+          const error = new Error('injected EIO during staging ownership probe');
+          error.code = 'EIO';
+          throw error;
+        }
+        return fs.lstatSync(file, ...args);
+      },
+    };
+    function errorCodes(error) {
+      return [
+        error?.code,
+        ...(error instanceof AggregateError ? error.errors.flatMap(errorCodes) : []),
+      ].filter(Boolean);
+    }
+    try {
+      writeFilePairAtomically([
+        { file: target, before: 'before', after: 'after' },
+      ], { fsImpl });
+    } catch (error) {
+      console.error(error.stack);
+      console.error('error codes: ' + errorCodes(error).join(','));
+      process.exitCode = 73;
+    }
+  `;
+  return spawnSync(process.execPath, ['--input-type=module', '-e', program], { encoding: 'utf8' });
+}
+
 function spawnPairWriter(first, second, firstAfter, secondAfter, { holdMarker = null, releaseMarker = null } = {}) {
   const helper = new URL('../../scripts/lib/write-file-pair-atomically.mjs', import.meta.url).href;
   const canonicalFirst = fs.realpathSync(first);
@@ -235,6 +283,36 @@ test('un errore dopo la creazione dello staging rimuove solo il temporaneo della
     assert.deepEqual(fs.readdirSync(root).filter((name) => name.endsWith('.pair.tmp')), []);
     assert.equal(fs.existsSync(path.join(root, '.registry-pair-write.lock')), false);
     assert.equal(fs.existsSync(path.join(root, '.registry-pair-write.journal.json')), false);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('una probe ownership incerta conserva target, marker, journal e lock per recovery', () => {
+  const root = fixture();
+  try {
+    const first = path.join(root, 'first.txt');
+    fs.writeFileSync(first, 'before');
+    const child = failAfterUncertainStaging(first);
+    assert.equal(child.status, 73, child.stderr);
+    assert.match(child.stderr, /error codes:.*ENOSPC/u);
+    assert.match(child.stderr, /error codes:.*EIO/u);
+    assert.equal(fs.readFileSync(first, 'utf8'), 'before');
+
+    const stagingFiles = fs.readdirSync(root).filter((name) => name.endsWith('.pair.tmp'));
+    assert.deepEqual(stagingFiles.length, 1);
+    const stagingFile = path.join(root, stagingFiles[0]);
+    assert.equal(fs.readFileSync(stagingFile, 'utf8'), 'partial');
+    const journalFile = path.join(root, '.registry-pair-write.journal.json');
+    assert.equal(fs.existsSync(path.join(root, '.registry-pair-write.lock')), true);
+    assert.equal(fs.existsSync(journalFile), true);
+    assert.equal(JSON.parse(fs.readFileSync(journalFile, 'utf8')).phase, 'prepared');
+
+    assert.deepEqual(recoverInterruptedRegistryPair(root), { recovered: true, state: 'restored-before' });
+    assert.equal(fs.readFileSync(first, 'utf8'), 'before');
+    assert.deepEqual(fs.readdirSync(root).filter((name) => name.endsWith('.pair.tmp')), []);
+    assert.equal(fs.existsSync(path.join(root, '.registry-pair-write.lock')), false);
+    assert.equal(fs.existsSync(journalFile), false);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
