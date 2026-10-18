@@ -36,6 +36,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.dossier-friburgo-2027.title': 'Budget 2027 des Kantons Freiburg',
     'blog.article.dossier-friburgo-2027.excerpt': 'Die Seite fr.ch zum Budget 2027 des Kantons Freiburg ist das einzige verfügbare Element: Das bereitgestellte Material enthält keine Zahlen, Datumsangaben, Entscheidungen oder konkreten Maßnahmen.',
     'blog.article.dossier-friburgo-2027.imageAlt': 'Schweizerisches redaktionelles Bild zum Budget 2027 des Kantons Freiburg',
+    'blog.article.bulle-riassetto-centro-2027.title': 'Bulle hat die erste Phase der Neugestaltung öffentlich aufgelegt',
+    'blog.article.bulle-riassetto-centro-2027.excerpt': 'Die erste Phase der Neugestaltung des Zentrums von Bulle wurde öffentlich aufgelegt.',
+    'blog.article.bulle-riassetto-centro-2027.imageAlt': 'Stadtzentrum von Bulle und geplante Neugestaltung',
 };
 
 export default blogMetaCantonFrDe;

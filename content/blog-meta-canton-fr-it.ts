@@ -36,6 +36,9 @@ const blogMetaCantonFrIt: Record<string, string> = {
     'blog.article.dossier-friburgo-2027.title': 'Budget 2027 del canton Friburgo',
     'blog.article.dossier-friburgo-2027.excerpt': 'La pagina fr.ch sul Budget 2027 del Canton Friburgo è il solo elemento disponibile: il materiale fornito non riporta cifre, date, decisioni o misure specifiche.',
     'blog.article.dossier-friburgo-2027.imageAlt': 'Immagine editoriale svizzera associata al Budget 2027 del Canton Friburgo',
+    'blog.article.bulle-riassetto-centro-2027.title': 'Bulle ha messo all\'inchiesta la prima fase del riassetto',
+    'blog.article.bulle-riassetto-centro-2027.excerpt': 'La prima fase del riassetto del centro di Bulle è stata messa all\'inchiesta.',
+    'blog.article.bulle-riassetto-centro-2027.imageAlt': 'Centro città di Bulle e progetto di riassetto urbano',
 };
 
 export default blogMetaCantonFrIt;

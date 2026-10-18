@@ -426,6 +426,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bulle-riassetto-centro-2027': {
+    title: 'Bulle ha messo all\'inchiesta la prima fase del riassetto',
+    description: 'Riassetto del centro di Bulle: la prima fase è all\'inchiesta. I lavori dovrebbero iniziare nel secondo semestre 2027, salvo ostacoli. Avvio condizionato.',
+    keywords: 'frontalieri, ticino, svizzera, italia, bulle, messo, inchiesta, prima',
+    ogTitle: 'Bulle, riassetto del centro: lavori attesi nel 2027',
+    ogDescription: 'La città di Bulle ha messo all\'inchiesta la prima fase del riassetto del centro. I lavori dovrebbero iniziare nel secondo semestre 2027, ma la previsione resta legata alla formula salvo ostacoli. Il lead non elenca opere specifiche.',
+    canonicalPath: '/articoli-friburgo/bulle-riassetto-centro-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bulle ha messo all'inchiesta la prima fase del riassetto",
+      "description": "Riassetto del centro di Bulle: la prima fase è all'inchiesta. I lavori dovrebbero iniziare nel secondo semestre 2027, salvo ostacoli. Avvio condizionato.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-bulle-riassetto-centro-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centro città di Bulle e progetto di riassetto urbano"
+      },
+      "datePublished": "2026-10-18T03:41:36+00:00",
+      "dateModified": "2026-10-18T03:41:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-friburgo/bulle-riassetto-centro-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

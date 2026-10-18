@@ -14,6 +14,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'copertura-a12-opposizioni': { it: 'copertura-a12-opposizioni', en: 'a12-cover-project-objections', de: 'a12-ueberdachung-einsprachen', fr: 'couverture-a12-oppositions' },
  'eventi-weekend-friburgo': { it: 'eventi-weekend-friburgo', en: 'weekend-events-fribourg', de: 'wochenend-veranstaltungen-freiburg', fr: 'evenements-week-end-fribourg' },
  'dossier-friburgo-2027': { it: 'dossier-friburgo-2027', en: 'fribourg-dossier-2027', de: 'freiburg-dossier-2027', fr: 'dossier-fribourg-2027' },
+ 'bulle-riassetto-centro-2027': { it: 'bulle-riassetto-centro-2027', en: 'bulle-centre-redevelopment-2027', de: 'bulle-stadtzentrum-umbau-2027', fr: 'bulle-reamenagement-centre-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
