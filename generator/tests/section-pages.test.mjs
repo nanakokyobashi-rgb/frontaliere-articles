@@ -2805,6 +2805,14 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(read('scripts/publish-section-pages.mjs'), /EXPECTED_MAIN_HEAD non contiene una SHA completa/);
   const publishCheckout = wf.slice(wf.indexOf('      - name: Checkout\n', wf.indexOf('\n  publish:\n')));
   assert.match(publishCheckout, /fetch-depth: 0/);
+  const liveRetryLoop = wf.slice(
+    wf.indexOf('          for publish_attempt in 1 2 3; do'),
+    wf.indexOf('      - name: Release bootstrap R2 gate'),
+  );
+  const liveCheckout = liveRetryLoop.indexOf('git checkout --detach origin/main');
+  const liveEnsure = liveRetryLoop.indexOf('scripts/ci/ensure-host-shell-assets.mjs');
+  const liveRender = liveRetryLoop.indexOf('scripts/publish-section-pages.mjs');
+  assert.ok(liveCheckout >= 0 && liveEnsure > liveCheckout && liveRender > liveEnsure, 'il retry live aggiorna la CDN dopo ogni checkout e prima del render');
   assert.match(wf, /PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
   assert.match(wf, /PUSH_AFTER: \$\{\{ needs\.resolve\.outputs\.push_after \}\}/);
   const bootstrapReplay = wf.slice(wf.indexOf('  replay-api-after-bootstrap:'));

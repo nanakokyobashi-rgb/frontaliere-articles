@@ -800,6 +800,11 @@ jobs:
             git checkout --detach origin/main
             export EXPECTED_MAIN_HEAD="$(git rev-parse HEAD)"
             echo "::notice::normal cover dispatch on main $EXPECTED_MAIN_HEAD (freshness attempt $publish_attempt/3)"
+            if [ "$DRY" != "true" ]; then
+              # Il checkout puo' aver cambiato host/constants.ts e quindi il
+              # nome dell'asset gtag: riallinea la CDN prima di ogni render.
+              bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/ci/ensure-host-shell-assets.mjs
+            fi
             if bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"; then
               exit 0
             fi
