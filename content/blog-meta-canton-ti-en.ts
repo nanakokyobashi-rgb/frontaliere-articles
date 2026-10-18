@@ -48,6 +48,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.radar-ticino-ottobre-2026.title': 'Speed cameras in Canton Ticino from October 19 to 25, 2026',
     'blog.article.radar-ticino-ottobre-2026.excerpt': 'Checks from October 19 to 25, 2026 Mobile and semi-stationary speed cameras in Ticino Cantonal Police and municipal police involved Checks also possible',
     'blog.article.radar-ticino-ottobre-2026.imageAlt': 'Speed radar controls in Canton Ticino',
+    'blog.article.mozione-gran-consiglio-tassa-salute.title': 'Motion in the Grand Council against the health tax',
+    'blog.article.mozione-gran-consiglio-tassa-salute.excerpt': 'A cross-party motion has been submitted to the Grand Council The request concerns blocking the tax rebates to Italy OCST points to the diplomatic route',
+    'blog.article.mozione-gran-consiglio-tassa-salute.imageAlt': 'Grand Council of Canton Ticino in Bellinzona',
 };
 
 export default blogMetaCantonTiEn;

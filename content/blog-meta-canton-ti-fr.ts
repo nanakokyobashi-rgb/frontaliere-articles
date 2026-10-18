@@ -48,6 +48,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.radar-ticino-ottobre-2026.title': 'Radar dans le canton du Tessin du 19 au 25 octobre 2026',
     'blog.article.radar-ticino-ottobre-2026.excerpt': 'Contrôles du 19 au 25 octobre 2026 Radars mobiles et semi-stationnaires au Tessin Police cantonale et polices communales impliquées Contrôles également possibles',
     'blog.article.radar-ticino-ottobre-2026.imageAlt': 'Contrôles de vitesse par radar au Tessin',
+    'blog.article.mozione-gran-consiglio-tassa-salute.title': 'Motion au Grand Conseil contre la taxe sur la santé',
+    'blog.article.mozione-gran-consiglio-tassa-salute.excerpt': 'Une motion interpartis a été présentée au Grand Conseil La demande concerne le blocage des ristournes vers l’Italie L’OCST indique la voie diplomatique',
+    'blog.article.mozione-gran-consiglio-tassa-salute.imageAlt': 'Grand Conseil du Canton du Tessin à Bellinzona',
 };
 
 export default blogMetaCantonTiFr;

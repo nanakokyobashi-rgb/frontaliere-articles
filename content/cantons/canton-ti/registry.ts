@@ -171,4 +171,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'mozione-gran-consiglio-tassa-salute',
+ category: 'fiscale',
+ date: '2026-10-18T01:16:12.242Z',
+ image: '/images/blog/article-mozione-gran-consiglio-tassa-salute.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ];

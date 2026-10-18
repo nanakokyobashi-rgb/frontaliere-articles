@@ -48,6 +48,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.radar-ticino-ottobre-2026.title': 'Radar im Kanton Tessin vom 19. bis 25. Oktober 2026',
     'blog.article.radar-ticino-ottobre-2026.excerpt': 'Kontrollen vom 19.',
     'blog.article.radar-ticino-ottobre-2026.imageAlt': 'Geschwindigkeitskontrollen mit Radar im Tessin',
+    'blog.article.mozione-gran-consiglio-tassa-salute.title': 'Motion im Grossen Rat gegen die Gesundheitssteuer',
+    'blog.article.mozione-gran-consiglio-tassa-salute.excerpt': 'Eine überparteiliche Motion wurde im Grossen Rat eingereicht Die Forderung betrifft die Sperrung der Rückerstattungen an Italien OCST weist auf den diplomatischen Weg hin',
+    'blog.article.mozione-gran-consiglio-tassa-salute.imageAlt': 'Grosser Rat des Kantons Tessin in Bellinzona',
 };
 
 export default blogMetaCantonTiDe;

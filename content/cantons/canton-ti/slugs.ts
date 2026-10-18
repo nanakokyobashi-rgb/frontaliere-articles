@@ -18,6 +18,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'frontalieri-tassa-salute-omnibus-giugno-2026': { it: 'frontalieri-tassa-salute-omnibus-giugno-2026', en: 'commuters-health-tax-omnibus-june-2026', de: 'grenzganger-gesundheit-steuer-omnibus-juni-2026', fr: 'frontaliers-taxe-sante-omnibus-juin-2026' },
  'multa-rifiuti-bizzarone': { it: 'multa-rifiuti-bizzarone', en: 'bizzarone-waste-dumping-fine', de: 'busse-fuer-abfall-in-bizzarone', fr: 'amende-dechets-bizzarone' },
  'radar-ticino-ottobre-2026': { it: 'radar-ticino-ottobre-2026', en: 'radar-ticino-october-2026', de: 'radar-tessin-oktober-2026', fr: 'radar-tessin-octobre-2026' },
+ 'mozione-gran-consiglio-tassa-salute': { it: 'mozione-gran-consiglio-tassa-salute', en: 'grand-council-motion-health-tax', de: 'grossrat-moeglicherweise-gesundheitssteuer', fr: 'motion-grand-conseil-taxe-sante' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

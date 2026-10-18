@@ -48,6 +48,9 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.radar-ticino-ottobre-2026.title': 'Radar in Canton Ticino dal 19 al 25 ottobre 2026',
     'blog.article.radar-ticino-ottobre-2026.excerpt': 'Controlli dal 19 al 25 ottobre 2026 Radar mobili e semi-stazionari in Ticino Coinvolte Polizia cantonale e polizie comunali Possibili anche controlli',
     'blog.article.radar-ticino-ottobre-2026.imageAlt': 'Controlli della velocità con radar in Canton Ticino',
+    'blog.article.mozione-gran-consiglio-tassa-salute.title': 'Mozione in Gran Consiglio contro la tassa sulla salute',
+    'blog.article.mozione-gran-consiglio-tassa-salute.excerpt': 'Una mozione interpartitica è stata presentata in Gran Consiglio La richiesta riguarda il blocco dei ristorni verso l’Italia OCST indica la via diplomatica',
+    'blog.article.mozione-gran-consiglio-tassa-salute.imageAlt': 'Gran Consiglio del Canton Ticino a Bellinzona',
 };
 
 export default blogMetaCantonTiIt;
