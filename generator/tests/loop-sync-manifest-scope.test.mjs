@@ -429,13 +429,147 @@ test('files: ogni voce non `not-ported` punta a un file che esiste qui', () => {
  * Risponde alla domanda che la parte offline non puo' porsi: esiste un albero
  * NUOVO, mai dichiarato, i cui file sono byte-identici a file del sito? Il
  * confronto e' sullo sha del blob git, che e' l'hash del CONTENUTO: due file
- * identici hanno lo stesso sha anche in repo diversi, quindi bastano due
- * chiamate git/trees e zero download.
+ * identici hanno lo stesso sha anche in repo diversi, quindi basta inventariare
+ * i due git tree e non serve scaricare i blob. Se GitHub tronca un inventario
+ * ricorsivo, il loader lo divide in sottoalberi finche' ogni risposta e'
+ * completa: accettare silenziosamente `truncated: true` costruirebbe un verde
+ * su dati parziali.
  *
  * Fuori dal `node --test` di CI per la ragione nell'intestazione (quota API
  * senza token). La forma giusta e' uno step di `.github/workflows/loop-drift-check.yml`,
  * che gira una volta al giorno e ha gia' GH_TOKEN in env.
  */
+async function readGitTree(repo, treeish, { recursive, fetchImpl, headers }) {
+  const suffix = recursive ? '?recursive=1' : '';
+  const res = await fetchImpl(
+    `https://api.github.com/repos/${repo}/git/trees/${encodeURIComponent(treeish)}${suffix}`,
+    { headers },
+  );
+  assert.ok(res.ok, `GET tree ${repo}@${treeish}${suffix} → HTTP ${res.status}`);
+  const body = await res.json();
+  assert.ok(Array.isArray(body.tree), `GET tree ${repo}@${treeish}${suffix} → risposta senza tree`);
+  return body;
+}
+
+async function completeTreeBlobs(repo, { fetchImpl = globalThis.fetch, headers = {} } = {}) {
+  const collect = async (treeish, prefix) => {
+    const recursive = await readGitTree(repo, treeish, { recursive: true, fetchImpl, headers });
+    if (!recursive.truncated) {
+      return recursive.tree
+        .filter((entry) => entry.type === 'blob')
+        .map((entry) => ({ ...entry, path: `${prefix}${entry.path}` }));
+    }
+
+    // Una risposta ricorsiva troncata si puo' partizionare solo partendo
+    // dall'elenco completo dei figli diretti. Se anche quello fosse troncato,
+    // il censimento resta fail-closed: non esiste una partizione affidabile.
+    const shallow = await readGitTree(repo, treeish, { recursive: false, fetchImpl, headers });
+    assert.equal(
+      shallow.truncated,
+      false,
+      `l'albero non ricorsivo di ${repo}@${treeish} e' troncato: il censimento non e' affidabile`,
+    );
+
+    const blobs = [];
+    for (const entry of shallow.tree) {
+      if (entry.type === 'blob') {
+        blobs.push({ ...entry, path: `${prefix}${entry.path}` });
+      } else if (entry.type === 'tree') {
+        blobs.push(...await collect(entry.sha, `${prefix}${entry.path}/`));
+      }
+    }
+    return blobs;
+  };
+
+  return collect('HEAD', '');
+}
+
+function treeResponse(body, { ok = true, status = 200 } = {}) {
+  return { ok, status, json: async () => body };
+}
+
+test('censimento: il loader usa direttamente un tree ricorsivo completo', async () => {
+  const calls = [];
+  const blobs = await completeTreeBlobs('owner/repo', {
+    fetchImpl: async (url) => {
+      calls.push(url);
+      return treeResponse({
+        truncated: false,
+        tree: [
+          { path: 'src/a.mjs', type: 'blob', sha: 'a' },
+          { path: 'src', type: 'tree', sha: 'tree-src' },
+        ],
+      });
+    },
+  });
+
+  assert.deepEqual(blobs.map(({ path, sha }) => ({ path, sha })), [{ path: 'src/a.mjs', sha: 'a' }]);
+  assert.equal(calls.length, 1);
+  assert.match(calls[0], /\/git\/trees\/HEAD\?recursive=1$/);
+});
+
+test('censimento: un tree ricorsivo troncato viene diviso fino a inventario completo', async () => {
+  const replies = new Map([
+    ['HEAD?recursive=1', { truncated: true, tree: [] }],
+    ['HEAD', {
+      truncated: false,
+      tree: [
+        { path: 'README.md', type: 'blob', sha: 'readme' },
+        { path: 'src', type: 'tree', sha: 'tree-src' },
+      ],
+    }],
+    ['tree-src?recursive=1', { truncated: true, tree: [] }],
+    ['tree-src', {
+      truncated: false,
+      tree: [
+        { path: 'index.mjs', type: 'blob', sha: 'index' },
+        { path: 'lib', type: 'tree', sha: 'tree-lib' },
+      ],
+    }],
+    ['tree-lib?recursive=1', {
+      truncated: false,
+      tree: [{ path: 'helper.mjs', type: 'blob', sha: 'helper' }],
+    }],
+  ]);
+  const calls = [];
+  const blobs = await completeTreeBlobs('owner/repo', {
+    fetchImpl: async (url) => {
+      const key = url.split('/git/trees/')[1];
+      calls.push(key);
+      assert.ok(replies.has(key), `richiesta inattesa: ${key}`);
+      return treeResponse(replies.get(key));
+    },
+  });
+
+  assert.deepEqual(
+    blobs.map(({ path, sha }) => ({ path, sha })),
+    [
+      { path: 'README.md', sha: 'readme' },
+      { path: 'src/index.mjs', sha: 'index' },
+      { path: 'src/lib/helper.mjs', sha: 'helper' },
+    ],
+  );
+  assert.deepEqual(calls, [
+    'HEAD?recursive=1',
+    'HEAD',
+    'tree-src?recursive=1',
+    'tree-src',
+    'tree-lib?recursive=1',
+  ]);
+});
+
+test('censimento: resta fail-closed se non si puo partizionare un tree troncato', async () => {
+  await assert.rejects(
+    completeTreeBlobs('owner/repo', {
+      fetchImpl: async (url) => treeResponse({
+        truncated: true,
+        tree: url.endsWith('?recursive=1') ? [] : [{ path: 'omesso', type: 'blob', sha: 'x' }],
+      }),
+    }),
+    /albero non ricorsivo .* e' troncato/,
+  );
+});
+
 test('censimento: nessun gemello byte-identico fuori da roots, files e outOfScope', { skip: process.env.LOOP_TWIN_CENSUS !== '1' && 'LOOP_TWIN_CENSUS!=1 (richiede rete: vedi intestazione)' }, async () => {
   const SITE_REPO = process.env.SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no';
   const SELF_REPO = process.env.GITHUB_REPOSITORY || 'nanakokyobashi-rgb/frontaliere-articles';
@@ -443,17 +577,10 @@ test('censimento: nessun gemello byte-identico fuori da roots, files e outOfScop
   const token = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
   if (token) headers.Authorization = `Bearer ${token}`;
 
-  const tree = async (repo) => {
-    const res = await fetch(`https://api.github.com/repos/${repo}/git/trees/HEAD?recursive=1`, { headers });
-    assert.ok(res.ok, `GET tree ${repo} → HTTP ${res.status}`);
-    const body = await res.json();
-    // Un albero troncato darebbe un verdetto costruito su meta' dei dati, che e'
-    // peggio di nessun verdetto: meglio fallire dicendo perche'.
-    assert.equal(body.truncated, false, `l'albero di ${repo} e' troncato: il censimento non e' affidabile`);
-    return body.tree.filter((e) => e.type === 'blob');
-  };
-
-  const [mine, theirs] = await Promise.all([tree(SELF_REPO), tree(SITE_REPO)]);
+  const [mine, theirs] = await Promise.all([
+    completeTreeBlobs(SELF_REPO, { headers }),
+    completeTreeBlobs(SITE_REPO, { headers }),
+  ]);
   const siteShas = new Set(theirs.map((e) => e.sha));
   const outOfScope = (manifest.scope.outOfScope || []).map((x) => x.prefix);
 
