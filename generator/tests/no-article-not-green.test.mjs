@@ -291,21 +291,21 @@ test('senza il campo nuovo il verdetto e\' quello di oggi, byte per byte (#805)'
 
 // ── 2. IL CABLAGGIO in create-article.mjs ──────────────────────────────────
 
-test('le otto ragioni legittime del corpus escono TUTTE con la costante, e nessun\'altra', () => {
+test('le nove ragioni legittime del corpus escono TUTTE con la costante, e nessun\'altra', () => {
   const src = fs.readFileSync(CREATE_ARTICLE, 'utf8');
   // L'invariante e' la COSTANTE, non il nome della funzione che esce: dal
   // 2026-08-18 le uscite passano da `exitAfterFlush()`, che scrive il ledger
   // dei punteggi prima di terminare (`process.exit()` non fa scattare
   // `beforeExit`, quindi i successi dell'ultima finestra si perdevano). Il
-  // conteggio resta 6 e il letterale resta bocciato, sotto. Dal P6b del piano
-  // «sezioni cantonali» le ragioni del corpus sono 7: la settima e' la sezione
-  // cantonale senza news utilizzabili, che per costruzione non ha un pool
-  // evergreen (CANTON_EVERGREEN_POOL_DISABLED). La scadenza del budget dopo il
-  // pool news e' l'ottava: e' un differimento esplicito, non un return muto.
+  // corpus ha sei ragioni comuni, una ragione cantonale senza pool evergreen,
+  // una scadenza del budget dopo il pool news e, dal ramo fail-closed del
+  // verifier, una ragione esplicita per l'indisponibilita' del fact-check. Il
+  // conteggio resta esatto: ogni nuova uscita deve aggiungere anche la propria
+  // prova semantica qui sotto, non solo aumentare il numero.
   const declared = src.match(/(?:process\.exit|await exitAfterFlush)\(EXIT_NO_ARTICLE_DECLARED\)/g) || [];
   assert.equal(
-    declared.length, 8,
-    'le otto ragioni legittime (3 evergreen + cantonale senza pool evergreen + budget + duplicato + qualita\' + quota) devono uscire con la costante condivisa',
+    declared.length, 9,
+    'le nove ragioni legittime (3 evergreen + cantonale senza pool evergreen + budget + duplicato + qualita\' + quota + fact-check indisponibile) devono uscire con la costante condivisa',
   );
   assert.ok(
     /CANTON_EVERGREEN_POOL_DISABLED[\s\S]{0,1500}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/.test(src),
@@ -314,6 +314,10 @@ test('le otto ragioni legittime del corpus escono TUTTE con la costante, e nessu
   assert.ok(
     /else if \(!newsSuccess && !candidateSuccess && wallBudgetExceeded\(\)\)[\s\S]{0,1800}finalizeRunReport\('deferred'[\s\S]{0,500}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/.test(src),
     'la scadenza del budget dopo il pool news deve dichiarare il differimento prima di uscire',
+  );
+  assert.ok(
+    /if \(isFactCheckUnavailableError\(e\)\)[\s\S]{0,1200}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/.test(src),
+    'l indisponibilita\' del fact-check deve dichiarare il differimento fail-closed prima degli altri rami',
   );
   // Il letterale scritto a mano e' la via con cui le due meta' divergono.
   assert.ok(!/(?:process\.exit|exitAfterFlush)\(4\)/.test(src), 'nessun `process.exit(4)` letterale: solo la costante');

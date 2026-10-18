@@ -6501,7 +6501,9 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // itself may be perfectly fine. Re-running just the fact-check (~5s) is far
   // cheaper and the most common cause (non-JSON output) usually clears on a
   // second pass. The hard quality gate is preserved: if every attempt still
-  // yields zero verdicts we throw exactly as before (never publish unverified).
+  // yields zero verdicts, return a fail-closed `unverified` result. The caller
+  // must defer the run rather than regenerate the whole article: the article
+  // is still never published without a verifier verdict.
   const FACTCHECK_INFRA_RETRIES = 3;
   // Cap on retry-after-derived backoff between outer fact-check attempts.
   // The per-model retry inside ai-models.mjs already honours the retry-after
@@ -17159,6 +17161,28 @@ const LOCAL_MIN_VIABLE_MS = 11 * 60_000;
 const MIN_VIABLE_ATTEMPT_MS = 2 * 60_000;
 
 /**
+ * Turn a fail-closed verifier outage into a typed run-level error. The
+ * `unverified` result is deliberately kept at the llmFactCheck boundary so
+ * its existing fail-closed contract remains testable; callers must not feed
+ * it into the content-remediation loop, which would regenerate the article
+ * indefinitely while the verifier roster is unavailable.
+ */
+function createFactCheckUnavailableError(result, stage) {
+  const rawReason = Array.isArray(result?.issues) ? result.issues[0]?.reason : '';
+  const reason = String(rawReason || 'nessun verificatore ha prodotto un verdetto')
+    .replace(/\s+/g, ' ')
+    .slice(0, 300);
+  const error = new Error(`Fact-check unavailable (${stage}): ${reason}`);
+  error.factCheckUnavailable = true;
+  error.unverified = true;
+  return error;
+}
+
+function isFactCheckUnavailableError(e) {
+  return e?.factCheckUnavailable === true;
+}
+
+/**
  * True when the error is a CONTENT/QUALITY rejection (fact-check block,
  * topic-gate REGOLA #0 abort, fabrication, or a non-conformant headline that
  * survived its retry budget) rather than an infrastructure bug.
@@ -17179,6 +17203,10 @@ const MIN_VIABLE_ATTEMPT_MS = 2 * 60_000;
  */
 function isQualityRejectError(e) {
   if (!e) return false;
+  // A verifier outage is neither a content verdict nor a candidate-level
+  // rejection. Let it reach the run-level deferral so the headline loop does
+  // not spend its whole budget repeating the same unavailable check.
+  if (isFactCheckUnavailableError(e)) return false;
   // Un errore del lock non e' mai un rigetto di qualita' ne' un duplicato
   // (issue #964): entrambi i rami classificano SUL MESSAGGIO ed escono con
   // EXIT_NO_ARTICLE_DECLARED, cioe' un differimento pulito che il self-trigger
@@ -18134,7 +18162,7 @@ async function main() {
       // `status=running` e trasforma una condizione prevista in
       // `no-article-undeclared-exit`.
       finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, note] });
-      // Ragione legittima #8 di otto (corpus): il budget della run e' finito
+      // Ragione legittima #8 di nove (corpus): il budget della run e' finito
       // prima del fallback evergreen; il giro successivo puo' scegliere fonti
       // e tempi diversi. Non si abbassa nessun gate e non si pubblica slop.
       await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
@@ -18145,7 +18173,7 @@ async function main() {
       // articolo in questo run, dichiarato come le altre ragioni legittime.
       console.error(`CANTON_EVERGREEN_POOL_DISABLED section=${SECTION_NAME} — nessuna news utilizzabile e nessun pool evergreen per le sezioni cantonali: nessun articolo in questo run.`);
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, `No usable news for canton section ${SECTION_NAME} (no evergreen pool by construction)`] });
-      // Ragione legittima #7 di sette — vedi EXIT_NO_ARTICLE_DECLARED. Esiste
+      // Ragione legittima #7 di nove — vedi EXIT_NO_ARTICLE_DECLARED. Esiste
       // solo nel corpus: lib/exhaustion-disposition.mjs e' un gemello identico
       // del sito, dove create-article non ha sezioni cantonali, e il suo elenco
       // resta quello delle sei ragioni comuni ai due repo.
@@ -18260,7 +18288,7 @@ async function main() {
         reportEvergreenPoolSaturation('preflight');
         console.error('\n⚠️  Tutte le keyword evergreen risultano già coperte dal pre-flight. Push prosegue senza nuovo articolo.');
         finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'All evergreen keywords rejected by pre-generation duplicate checks'] });
-        // Ragione legittima #1 di sette: niente da pubblicare. Exit 4 e non 0 —
+        // Ragione legittima #1 di nove: niente da pubblicare. Exit 4 e non 0 —
         // vedi EXIT_NO_ARTICLE_DECLARED: da qui in poi un exit 0 SENZA articolo
         // e' un percorso che non ha dichiarato niente, ed e' rosso.
         await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
@@ -18420,7 +18448,7 @@ async function main() {
             reportEvergreenPoolSaturation('retry');
             console.error('\n⚠️  Nessuna keyword evergreen disponibile. Push prosegue senza nuovo articolo.');
             finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'No evergreen keyword available after duplicate checks'] });
-            // Ragione legittima #2 di sette — vedi EXIT_NO_ARTICLE_DECLARED.
+            // Ragione legittima #2 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
             await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
           }
         }
@@ -18429,7 +18457,7 @@ async function main() {
       // All retry attempts exhausted
       console.error('\n⚠️  Tentativi evergreen esauriti. Push prosegue senza nuovo articolo.');
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'Evergreen retries exhausted'] });
-      // Ragione legittima #3 di sette — vedi EXIT_NO_ARTICLE_DECLARED.
+      // Ragione legittima #3 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
       await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     }
     return;
@@ -18804,7 +18832,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       // MISURATO su 926 run (2026-08-13 → 18): 2510s mediani per una run
       // `failure` contro 254s per una `success`.
       //
-      // NON e' un `success` muto e non e' una delle sette ragioni legittime: si
+      // NON e' un `success` muto e non e' una delle nove ragioni legittime: si
       // marca l'errore e lo si rilancia, cosi' che il catch di primo livello
       // esca `EXIT_ROSTER_CANNOT_SERVE_PROMPT`. Vedi isPromptFloorIrreducible()
       // per il perche' dichiararla «legittima» ricreerebbe il verde di #313.
@@ -19262,6 +19290,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     // Step 3a.0c: LLM fact verification — PRIMARY BLOCKING GATE
     try {
       const factResult = await llmFactCheck(data.content.it, pageContent, url, CANTON_FACTS_BRIEF);
+      if (factResult.unverified === true) {
+        throw createFactCheckUnavailableError(factResult, 'article');
+      }
       if (!factResult.passed) {
         // Ledger only. These categories never reach the defect memory and can
         // never promote anything: they are the verifier's opinion, and the
@@ -19304,15 +19335,10 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       // gates already do this above; repeated here since this is a distinct
       // failure source that can set the same field independently).
       lastFactCheckErrors = null;
-      // NOTE: there is deliberately no `if (factResult.unverified)` branch here
-      // any more. Since the verifier fails CLOSED (2026-07-28), `unverified`
-      // only ever comes back paired with `passed: false`, which the branch above
-      // has already turned into a retry or a throw — so a published article can
-      // never be unverified, and a RUN_REPORT flag saying otherwise would be
-      // permanently false and misleading. The outage is recorded on the failure
-      // path instead (see the `🚫` log in llmFactCheck).
     } catch (fcErr) {
-      // Both fact-check rejections AND all-models-failed errors retry
+      // Content rejections retry; an unavailable verifier defers the whole
+      // run so every headline does not repeat the same failed cascade.
+      if (isFactCheckUnavailableError(fcErr)) throw fcErr;
       if (attempt < maxAttempts) {
         console.error(`  🔄 Rigenero per fact-check: ${fcErr.message.slice(0, 120)} (${attempt}/${maxAttempts})...`);
         continue;
@@ -19440,6 +19466,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         let expandFactIssues = null;
         try {
           const expandFactResult = await llmFactCheck(data.content.it, pageContent, url, CANTON_FACTS_BRIEF);
+          if (expandFactResult.unverified === true) {
+            throw createFactCheckUnavailableError(expandFactResult, 'expansion');
+          }
           if (!expandFactResult.passed) {
             for (const i of expandFactResult.issues || []) {
               const cat = String(i?.category || 'uncategorized');
@@ -19451,6 +19480,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
             expandFactOk = false;
           }
         } catch (expandFcErr) {
+          if (isFactCheckUnavailableError(expandFcErr)) throw expandFcErr;
           console.error(`  ⚠️  Fact-check dell'espansione anticipata fallito: ${expandFcErr.message.slice(0, 120)}`);
           expandFactOk = false;
         }
@@ -19838,6 +19868,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // fidelity must remain disabled for generated research briefs.
   if (IS_CANTON && CANTON_FACTS_BRIEF && url.startsWith('evergreen://')) {
     const finalCantonFactResult = await llmFactCheck(data.content.it, '', url, CANTON_FACTS_BRIEF);
+    if (finalCantonFactResult.unverified === true) {
+      throw createFactCheckUnavailableError(finalCantonFactResult, 'final-canton');
+    }
     if (!finalCantonFactResult.passed) {
       const issuesSummary = (finalCantonFactResult.issues || [])
         .map((issue) => `[${issue.category || '?'}] "${String(issue.claim || '').slice(0, 60)}" — ${String(issue.reason || '').slice(0, 80)}`)
@@ -21106,7 +21139,7 @@ if (invokedDirectly) {
     if (RUN_REPORT?.status === 'generated') return;
     console.error(
       `\n❌ Uscita non dichiarata: main() e' ritornato con status='${RUN_REPORT?.status ?? '(mai finalizzato)'}'`
-      + ' senza aver prodotto un articolo e senza dichiarare una delle sette ragioni legittime'
+      + ' senza aver prodotto un articolo e senza dichiarare una delle nove ragioni legittime'
       + ' (vedi EXIT_NO_ARTICLE_DECLARED in lib/exhaustion-disposition.mjs).'
       + ' Un exit 0 in questo stato e\' esattamente il verde silenzioso di #313.',
     );
@@ -21155,6 +21188,19 @@ if (invokedDirectly) {
     }
   } catch (probeErr) {
     console.error(`  ⚠️  Campione di deferral non registrato: ${probeErr.message}`);
+  }
+  // A verifier outage is already fail-closed at the article boundary. Stop
+  // before quota/quality classification so the run declares one clean
+  // deferral instead of rotating through every headline or mislabelling the
+  // outage as bad content.
+  if (isFactCheckUnavailableError(e)) {
+    finalizeRunReport('deferred', {
+      notes: [...RUN_REPORT.notes, `Deferred (fact-check unavailable; article not published): ${e.message}`],
+    });
+    console.error(`\n⚠️  Differito: fact-check indisponibile, articolo non pubblicato. Riprovo al prossimo run. ${e.message}`);
+    // Ragione legittima #9 di nove — il verifier non ha prodotto un verdetto:
+    // il run si differisce fail-closed e non pubblica contenuto non verificato.
+    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   // Transient free-model pool exhaustion (every model in the fallback chain hit
   // its daily quota / rate limit) is NOT a code bug — free-tier daily limits
@@ -21272,7 +21318,7 @@ if (invokedDirectly) {
     if (isLegitimateQuotaDeferral(e)) {
       finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`] });
       console.error(`\n⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera, ${share.transient}/${share.total} = ${pct}%). Riprovo al prossimo run. ${e.message}`);
-      // Ragione legittima #6 di sette — vedi EXIT_NO_ARTICLE_DECLARED.
+      // Ragione legittima #6 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
       await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     }
     finalizeRunReport('error', {
@@ -21300,7 +21346,7 @@ if (invokedDirectly) {
   if (isQualityRejectError(e)) {
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (content quality rejected, slop not published): ${e.message}`] });
     console.error(`\n⚠️  Differito: nessun articolo conforme prodotto in questa run (rigetto qualità — slop non pubblicato). Riprovo al prossimo run. ${e.message}`);
-    // Ragione legittima #5 di sette — vedi EXIT_NO_ARTICLE_DECLARED.
+    // Ragione legittima #5 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   // Duplicate rejection that bubbled all the way up from the direct-URL
@@ -21310,7 +21356,7 @@ if (invokedDirectly) {
     captureDuplicateReasons(e.message);
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (duplicate detected, not published): ${e.message}`] });
     console.error(`\n⚠️  Differito: duplicato rilevato, articolo non pubblicato in questa run. Riprovo al prossimo run. ${e.message}`);
-    // Ragione legittima #4 di sette — vedi EXIT_NO_ARTICLE_DECLARED.
+    // Ragione legittima #4 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   finalizeRunReport('error', { notes: [...RUN_REPORT.notes, `Error: ${e.message}`] });
