@@ -13461,6 +13461,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.rogo-cortivallo-persona-morta.title': 'Incendie dans un appartement à Lugano : une personne décédée',
     'blog.article.rogo-cortivallo-persona-morta.excerpt': 'Incendie peu après 03:00 à la via Cortivallo à Lugano Les flammes sont parties d\'un appartement au deuxième étage Un corps a été retrouvé dans l\'appartement',
     'blog.article.rogo-cortivallo-persona-morta.imageAlt': 'Via Cortivallo à Lugano, après un incendie d\'appartement ayant fait une victime',
+    'blog.article.lissago-corte-case-popolari.title': 'Lissago, nouvelle occupation illégale et nouvelles plaintes',
+    'blog.article.lissago-corte-case-popolari.excerpt': 'Dans la nuit du 16 au 17 octobre, une autre porte a été forcée Le même couple a de nouveau été identifié et dénoncé La grande cour abrite 18 appartements',
+    'blog.article.lissago-corte-case-popolari.imageAlt': 'Cour résidentielle avec logements sociaux dans une lumière automnale',
 };
 
 export default blogMetaFr;

@@ -111518,6 +111518,46 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-lissago-corte-case-popolari': {
+    title: 'Lissago, nuova occupazione abusiva e nuove denunce',
+    description: 'Nella notte del 16-17 ottobre è stata sfondata un\'altra porta La stessa coppia è stata identificata e denunciata di nuovo La corte grande ospita 18 appartamenti',
+    keywords: 'frontalieri, ticino, svizzera, italia, lissago, nuova, occupazione, abusiva',
+    ogTitle: 'Lissago, nuova occupazione e nuove denunce',
+    ogDescription: 'Nella notte del 16-17 ottobre è stata sfondata un\'altra porta La stessa coppia è stata identificata e denunciata di nuovo La corte grande ospita 18 appartamenti',
+    canonicalPath: '/articoli-frontaliere/lissago-corte-case-popolari/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lissago, nuova occupazione abusiva e nuove denunce",
+      "description": "Nella notte del 16-17 ottobre è stata sfondata un'altra porta La stessa coppia è stata identificata e denunciata di nuovo La corte grande ospita 18 appartamenti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lissago-corte-case-popolari.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Corte residenziale con appartamenti popolari nella luce autunnale"
+      },
+      "datePublished": "2026-10-18T10:15:13+00:00",
+      "dateModified": "2026-10-18T10:15:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lissago-corte-case-popolari/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

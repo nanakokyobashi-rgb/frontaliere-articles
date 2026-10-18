@@ -13460,6 +13460,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.rogo-cortivallo-persona-morta.title': 'Incendio in appartamento a Lugano: morta una persona',
     'blog.article.rogo-cortivallo-persona-morta.excerpt': 'Incendio poco dopo le 03:00 in via Cortivallo a Lugano Le fiamme sono partite da un appartamento al secondo piano Nell\'appartamento è stato trovato un corpo',
     'blog.article.rogo-cortivallo-persona-morta.imageAlt': 'Via Cortivallo a Lugano, dove un incendio in appartamento ha causato una vittima',
+    'blog.article.lissago-corte-case-popolari.title': 'Lissago, nuova occupazione abusiva e nuove denunce',
+    'blog.article.lissago-corte-case-popolari.excerpt': 'Nella notte del 16-17 ottobre è stata sfondata un\'altra porta La stessa coppia è stata identificata e denunciata di nuovo La corte grande ospita 18 appartamenti',
+    'blog.article.lissago-corte-case-popolari.imageAlt': 'Corte residenziale con appartamenti popolari nella luce autunnale',
 };
 
 export default blogMetaIt;

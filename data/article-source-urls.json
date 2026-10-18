@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/guasto-alla-linea-ferroviaria-a-melegnano-sulla-saronno-lodi-ritardi-fino-a-30-minuti/2675884": {
-    "articleId": "guasto-ferrovia-melegnano-settembre",
-    "ts": "2026-09-12T01:27:53.949Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4074187": {
     "articleId": "traffico-merci-alpi-ferrovia-camion",
     "ts": "2026-09-12T02:10:13.481Z",
@@ -2497,6 +2492,11 @@
   "https://www.ticinonews.ch/ticino/incendio-in-un-appartamento-a-lugano-morta-una-persona-444850": {
     "articleId": "rogo-cortivallo-persona-morta",
     "ts": "2026-10-18T09:43:01.892Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/nuova-occupazione-abusiva-a-lissago-e-nuove-denunce-dei-residenti/2711479": {
+    "articleId": "lissago-corte-case-popolari",
+    "ts": "2026-10-18T10:15:13.765Z",
     "keyForm": 2
   }
 }

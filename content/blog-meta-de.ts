@@ -13458,6 +13458,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.rogo-cortivallo-persona-morta.title': 'Wohnungsbrand in Lugano: Eine Person gestorben',
     'blog.article.rogo-cortivallo-persona-morta.excerpt': 'Brand kurz nach 03:00 Uhr in der Via Cortivallo in Lugano Die Flammen gingen von einer Wohnung im zweiten Stock aus In der Wohnung wurde eine Leiche gefunden',
     'blog.article.rogo-cortivallo-persona-morta.imageAlt': 'Via Cortivallo in Lugano nach einem Wohnungsbrand mit einem Todesopfer',
+    'blog.article.lissago-corte-case-popolari.title': 'Lissago, neue illegale Besetzung und neue Anzeigen',
+    'blog.article.lissago-corte-case-popolari.excerpt': 'In der Nacht vom 16.',
+    'blog.article.lissago-corte-case-popolari.imageAlt': 'Wohnhof mit Sozialwohnungen im herbstlichen Licht',
 };
 
 export default blogMetaDe;
