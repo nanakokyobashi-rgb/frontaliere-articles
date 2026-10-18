@@ -13464,6 +13464,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.lissago-corte-case-popolari.title': 'Lissago, nouvelle occupation illégale et nouvelles plaintes',
     'blog.article.lissago-corte-case-popolari.excerpt': 'Dans la nuit du 16 au 17 octobre, une autre porte a été forcée Le même couple a de nouveau été identifié et dénoncé La grande cour abrite 18 appartements',
     'blog.article.lissago-corte-case-popolari.imageAlt': 'Cour résidentielle avec logements sociaux dans une lumière automnale',
+    'blog.article.checklist-neonato-ticino.title': 'Naissance de l\'enfant et registre : dossiers 2026 pour les frontaliers',
+    'blog.article.checklist-neonato-ticino.excerpt': 'Checklist 2026 au Tessin pour le frontalier avec un enfant : état civil, chèques et dossiers consulaires, impôt à la source en Suisse, cadre CE de 730 et LAMal.',
+    'blog.article.checklist-neonato-ticino.imageAlt': 'Famille frontalière avec nouveau-né et documents sur une table',
 };
 
 export default blogMetaFr;

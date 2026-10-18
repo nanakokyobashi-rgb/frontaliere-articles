@@ -13461,6 +13461,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.lissago-corte-case-popolari.title': 'Lissago, neue illegale Besetzung und neue Anzeigen',
     'blog.article.lissago-corte-case-popolari.excerpt': 'In der Nacht vom 16.',
     'blog.article.lissago-corte-case-popolari.imageAlt': 'Wohnhof mit Sozialwohnungen im herbstlichen Licht',
+    'blog.article.checklist-neonato-ticino.title': 'Geburt Kind und Einwohnermeldeamt: Verfahren 2026 für Grenzgänger',
+    'blog.article.checklist-neonato-ticino.excerpt': 'Checkliste 2026 im Tessin für Grenzgänger mit Kind: Melde-, Scheck- und Konsularverfahren, Quellensteuer in der Schweiz, EG-Rahmen von 730 und KVG.',
+    'blog.article.checklist-neonato-ticino.imageAlt': 'Grenzgängerfamilie mit Neugeborenem und Dokumenten auf dem Tisch',
 };
 
 export default blogMetaDe;

@@ -45372,6 +45372,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'checklist-neonato-ticino',
+ category: 'pratico',
+ date: '2026-10-18T10:50:48.137Z',
+ image: '/images/blog/frontaliere-nascita-figlio-anagrafe-2026.webp',
+ hasCalculator: true,
+ articleType: 'evergreen',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

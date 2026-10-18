@@ -111558,6 +111558,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-checklist-neonato-ticino': {
+    title: 'Nascita figlio e anagrafe: pratiche 2026 per frontalieri',
+    description: 'Checklist 2026 in Ticino per il frontaliere con un figlio: anagrafe, assegni e pratiche consolari, imposta alla fonte in Svizzera, quadro CE del 730 e LAMal.',
+    keywords: 'frontalieri, ticino, svizzera, italia, nascita, figlio, anagrafe, pratiche',
+    ogTitle: 'Nascita e pratiche 2026 per famiglie frontaliere',
+    ogDescription: 'Per le famiglie frontaliere, la nascita di un figlio riunisce iscrizione anagrafica, assegni familiari e pratiche consolari. Il quadro fiscale resta distinto: imposta alla fonte solo in Svizzera e credito d\'imposta nel quadro CE del 730.',
+    canonicalPath: '/articoli-frontaliere/checklist-neonato-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nascita figlio e anagrafe: pratiche 2026 per frontalieri",
+      "description": "Checklist 2026 in Ticino per il frontaliere con un figlio: anagrafe, assegni e pratiche consolari, imposta alla fonte in Svizzera, quadro CE del 730 e LAMal.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/frontaliere-nascita-figlio-anagrafe-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Famiglia frontaliere con neonato e documenti sul tavolo"
+      },
+      "datePublished": "2026-10-18T10:50:48+00:00",
+      "dateModified": "2026-10-18T10:50:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/checklist-neonato-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

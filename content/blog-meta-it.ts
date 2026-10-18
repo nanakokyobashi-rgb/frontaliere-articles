@@ -13463,6 +13463,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.lissago-corte-case-popolari.title': 'Lissago, nuova occupazione abusiva e nuove denunce',
     'blog.article.lissago-corte-case-popolari.excerpt': 'Nella notte del 16-17 ottobre è stata sfondata un\'altra porta La stessa coppia è stata identificata e denunciata di nuovo La corte grande ospita 18 appartamenti',
     'blog.article.lissago-corte-case-popolari.imageAlt': 'Corte residenziale con appartamenti popolari nella luce autunnale',
+    'blog.article.checklist-neonato-ticino.title': 'Nascita figlio e anagrafe: pratiche 2026 per frontalieri',
+    'blog.article.checklist-neonato-ticino.excerpt': 'Checklist 2026 in Ticino per il frontaliere con un figlio: anagrafe, assegni e pratiche consolari, imposta alla fonte in Svizzera, quadro CE del 730 e LAMal.',
+    'blog.article.checklist-neonato-ticino.imageAlt': 'Famiglia frontaliere con neonato e documenti sul tavolo',
 };
 
 export default blogMetaIt;

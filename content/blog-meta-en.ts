@@ -13462,6 +13462,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.lissago-corte-case-popolari.title': 'Lissago, new illegal occupation and new complaints',
     'blog.article.lissago-corte-case-popolari.excerpt': 'On the night of October 16–17, another door was broken down The same couple was identified and reported again The large courtyard houses 18 apartments',
     'blog.article.lissago-corte-case-popolari.imageAlt': 'Residential courtyard with social housing apartments in autumn light',
+    'blog.article.checklist-neonato-ticino.title': 'Child birth and registry records: 2026 procedures for border workers',
+    'blog.article.checklist-neonato-ticino.excerpt': 'Checklist 2026 in Ticino for the border worker with a child: registries, checks and consular procedures, tax at source in Switzerland, CE framework of 730 and LAMal.',
+    'blog.article.checklist-neonato-ticino.imageAlt': 'Cross-border family with a newborn and documents on a table',
 };
 
 export default blogMetaEn;

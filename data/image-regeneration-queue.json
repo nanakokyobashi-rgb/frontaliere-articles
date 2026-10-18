@@ -150,6 +150,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T09:43:01.890Z",
       "lastFailureAt": "2026-10-18T09:43:01.890Z"
+    },
+    {
+      "articleId": "checklist-neonato-ticino",
+      "title": "Nascita figlio e anagrafe: pratiche 2026 per frontalieri",
+      "fallbackImage": "/images/blog/frontaliere-nascita-figlio-anagrafe-2026.webp",
+      "reason": "All image providers failed for article-checklist-neonato-ticino: openai-codex (vision gate rejected image: Original synthetic photorealistic illustration with no readable text or l",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T10:50:48.628Z",
+      "lastFailureAt": "2026-10-18T10:50:48.628Z"
     }
   ]
 }
