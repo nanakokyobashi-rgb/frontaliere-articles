@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-18T16:15:31.066Z",
-  "contentHash": "fb3fe75b66a8ed7a59bd6815badb51e3cec86ac3c095656f67ca1c61bfbbe676",
+  "updatedAt": "2026-10-18T17:18:28.692Z",
+  "contentHash": "9a2922af48c918eed2ea4623e016000844f1dbf048b43bda92b4fce4e030e52d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Argovia: iniziativa per rafforzare la parità salariale",
+          "url": "/articoli-argovia/iniziativa-parita-salariale-ag/",
+          "excerpt": "ArbeitAargau e un'alleanza di organizzazioni femminili e partiti chiedono analisi salariali da 50 dipendenti, sanzioni e il ripristino della Fachstelle.",
+          "date": "2026-10-18T17:13:03.661Z"
+        },
+        {
           "title": "Maja Riniker (FDP) eletta nel governo argoviese",
           "url": "/articoli-argovia/riniker-governo-argovia/",
           "excerpt": "Con 70'137 voti e un'affluenza del 21,01%, Maja Riniker è eletta nel governo argoviese.",
@@ -94,12 +100,6 @@
           "url": "/articoli-argovia/axpo-concessioni-idroelettriche/",
           "excerpt": "Axpo pubblica un White Paper: nei prossimi anni comuni e Cantoni potranno ridisegnare proprietà, partecipazioni e rischi.",
           "date": "2026-10-11T13:20:39.471Z"
-        },
-        {
-          "title": "Argovia: più poteri alla polizia regionale dal 2028",
-          "url": "/articoli-argovia/argovia-polizia-regionale-poteri/",
-          "excerpt": "Il Governo argoviese propone al Gran Consiglio nuovi compiti per le polizie regionali; la legge entrerebbe in vigore il 1° gennaio 2028.",
-          "date": "2026-10-10T22:10:08.251Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-18T16:15:31.066Z"
+      "updatedAt": "2026-10-18T17:18:28.692Z"
     },
     "en": {
       "canton": "AG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Aargau: initiative to strengthen pay equality",
+          "url": "/en/aargau-articles/aargau-pay-equality-initiative/",
+          "excerpt": "ArbeitAargau and an alliance of women’s organizations and political parties are calling for pay analyses for companies with 50 or more employees, sanctions, and the restoration of the Fachstelle.",
+          "date": "2026-10-18T17:13:03.661Z"
+        },
+        {
           "title": "Maja Riniker (FDP) elected to the Aargau government",
           "url": "/en/aargau-articles/riniker-aargau-government/",
           "excerpt": "With 70'137 votes and a turnout of 21,01%, Maja Riniker is elected to the Aargau government.",
@@ -193,12 +199,6 @@
           "url": "/en/aargau-articles/axpo-hydropower-concessions/",
           "excerpt": "Axpo publishes a White Paper: in the coming years, municipalities and cantons will be able to redesign ownership, holdings and risks.",
           "date": "2026-10-11T13:20:39.471Z"
-        },
-        {
-          "title": "Aargau: more powers for the regional police from 2028",
-          "url": "/en/aargau-articles/aargau-regional-police-powers/",
-          "excerpt": "The Aargau government is proposing new tasks for the regional police forces to the Grand Council; the law would enter into force on January 1, 2028.",
-          "date": "2026-10-10T22:10:08.251Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-18T16:15:31.066Z"
+      "updatedAt": "2026-10-18T17:18:28.692Z"
     },
     "de": {
       "canton": "AG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Aargau: Initiative zur Stärkung der Lohngleichheit",
+          "url": "/de/aargau-artikel/aargau-lohngleichheitsinitiative/",
+          "excerpt": "ArbeitAargau und ein Bündnis von Frauenorganisationen und Parteien fordern Lohnanalysen ab 50 Beschäftigten, Sanktionen und die Wiederherstellung der Fachstelle.",
+          "date": "2026-10-18T17:13:03.661Z"
+        },
+        {
           "title": "Maja Riniker (FDP) in die Aargauer Regierung gewählt",
           "url": "/de/aargau-artikel/riniker-aargauer-regierung/",
           "excerpt": "Mit 70'137 Stimmen und einer Wahlbeteiligung von 21,01% wurde Maja Riniker in die Aargauer Regierung gewählt.",
@@ -292,12 +298,6 @@
           "url": "/de/aargau-artikel/axpo-wasserkraftkonzessionen/",
           "excerpt": "Axpo veröffentlicht ein White Paper: In den kommenden Jahren können Gemeinden und Kantone Eigentumsverhältnisse, Beteiligungen und Risiken neu gestalten.",
           "date": "2026-10-11T13:20:39.471Z"
-        },
-        {
-          "title": "Aargau: mehr Befugnisse für die Regionalpolizei ab 2028",
-          "url": "/de/aargau-artikel/aargau-regionalpolizei-befugnisse/",
-          "excerpt": "Die Aargauer Regierung schlägt dem Grossen Rat neue Aufgaben für die Regionalpolizeien vor; das Gesetz würde am 1.",
-          "date": "2026-10-10T22:10:08.251Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-18T16:15:31.066Z"
+      "updatedAt": "2026-10-18T17:18:28.692Z"
     },
     "fr": {
       "canton": "AG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Argovie : initiative visant à renforcer l’égalité salariale",
+          "url": "/fr/articles-argovie/initiative-egalite-salariale-argovie/",
+          "excerpt": "ArbeitAargau et une alliance d’organisations féminines et de partis demandent des analyses salariales à partir de 50 employés, des sanctions et le rétablissement de la Fachstelle.",
+          "date": "2026-10-18T17:13:03.661Z"
+        },
+        {
           "title": "Maja Riniker (FDP) élue au gouvernement argovien",
           "url": "/fr/articles-argovie/riniker-gouvernement-argovie/",
           "excerpt": "Avec 70'137 voix et une participation de 21,01%, Maja Riniker est élue au gouvernement argovien.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-argovie/axpo-concessions-hydroelectriques/",
           "excerpt": "Axpo publie un White Paper : dans les prochaines années, les communes et les cantons pourront redéfinir la propriété, les participations et les risques.",
           "date": "2026-10-11T13:20:39.471Z"
-        },
-        {
-          "title": "Argovie : plus de pouvoirs pour la police régionale dès 2028",
-          "url": "/fr/articles-argovie/argovie-police-regionale-pouvoirs/",
-          "excerpt": "Le gouvernement argovien propose au Grand Conseil de nouvelles tâches pour les polices régionales ; la loi entrerait en vigueur le 1er janvier 2028.",
-          "date": "2026-10-10T22:10:08.251Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-18T16:15:31.066Z"
+      "updatedAt": "2026-10-18T17:18:28.692Z"
     }
   }
 }
