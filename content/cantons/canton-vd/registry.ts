@@ -182,4 +182,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'truffa-falsi-poliziotti-vaud',
+ category: 'pratico',
+ date: '2026-10-18T07:26:28.156Z',
+ image: '/images/blog/article-tuffe-falsi-poliziotti-vaud.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

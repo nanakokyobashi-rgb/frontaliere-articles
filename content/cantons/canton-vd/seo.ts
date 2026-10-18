@@ -621,6 +621,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-truffa-falsi-poliziotti-vaud': {
+    title: 'Sette milioni truffati nel Vaud da falsi agenti',
+    description: 'Quasi 2.300 casi dall\'inizio dell\'anno Danno complessivo: CHF 7 milioni Oltre 100 interpellati, 19 in detenzione 16 interpellazioni a inizio ottobre, 5',
+    keywords: 'frontalieri, ticino, svizzera, italia, sette, milioni, truffati, vaud',
+    ogTitle: 'Sette milioni truffati nel Vaud da falsi agenti',
+    ogDescription: 'Quasi 2.300 casi dall\'inizio dell\'anno Danno complessivo: CHF 7 milioni Oltre 100 interpellati, 19 in detenzione 16 interpellazioni a inizio ottobre, 5',
+    canonicalPath: '/articoli-vaud/truffa-falsi-poliziotti-vaud/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sette milioni truffati nel Vaud da falsi agenti",
+      "description": "Quasi 2.300 casi dall'inizio dell'anno Danno complessivo: CHF 7 milioni Oltre 100 interpellati, 19 in detenzione 16 interpellazioni a inizio ottobre, 5",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tuffe-falsi-poliziotti-vaud.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Anziano che riceve una chiamata sospetta da finto polizioso sul divano, con sfondo di una casa tipica del canton Vaud"
+      },
+      "datePublished": "2026-10-18T07:26:28+00:00",
+      "dateModified": "2026-10-18T07:26:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/truffa-falsi-poliziotti-vaud/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

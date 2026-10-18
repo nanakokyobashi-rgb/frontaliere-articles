@@ -51,6 +51,9 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.truffe-falsi-banchieri-lausanna.title': 'Faux policiers : plus de 100 personnes interpellées dans le canton de Vaud',
     'blog.article.truffe-falsi-banchieri-lausanna.excerpt': 'Plus de cent personnes interpellées dans le canton de Vaud depuis le début de 2026 Seize personnes interpellées depuis le début du mois d’octobre Police',
     'blog.article.truffe-falsi-banchieri-lausanna.imageAlt': 'Lausanne dans le canton de Vaud face aux escroqueries aux faux policiers et banquiers',
+    'blog.article.truffa-falsi-poliziotti-vaud.title': 'Sept millions escroqués dans le canton de Vaud par de faux agents',
+    'blog.article.truffa-falsi-poliziotti-vaud.excerpt': 'Près de 2.300 cas depuis le début de l\'année Préjudice total : CHF 7 millions Plus de 100 personnes interpellées, 19 en détention 16 interpellations début',
+    'blog.article.truffa-falsi-poliziotti-vaud.imageAlt': 'Personne âgée recevant un appel suspect d\'un faux policier sur le canapé, avec un arrière-plan d\'une maison typique du canton de Vaud',
 };
 
 export default blogMetaCantonVdFr;

@@ -51,6 +51,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.truffe-falsi-banchieri-lausanna.title': 'Falsche Polizisten: über 100 Befragte im Kanton Waadt',
     'blog.article.truffe-falsi-banchieri-lausanna.excerpt': 'Über hundert Personen im Kanton Waadt seit Anfang 2026 befragt Sechzehn Personen seit Anfang Oktober befragt Beteiligt sind die Kantonspolizei, Lausanne',
     'blog.article.truffe-falsi-banchieri-lausanna.imageAlt': 'Lausanne im Waadtland im Zusammenhang mit Betrug durch falsche Polizisten und Banker',
+    'blog.article.truffa-falsi-poliziotti-vaud.title': 'Sieben Millionen im Kanton Waadt von falschen Agenten ergaunert',
+    'blog.article.truffa-falsi-poliziotti-vaud.excerpt': 'Fast 2.300 Fälle seit Jahresbeginn Gesamtschaden: CHF 7 Millionen Über 100 Personen befragt, 19 in Haft 16 Befragungen Anfang Oktober, 5 in Lausanne Fälle →',
+    'blog.article.truffa-falsi-poliziotti-vaud.imageAlt': 'Ältere Person erhält einen verdächtigen Anruf von einem falschen Polizisten auf dem Sofa, mit Hintergrund eines typischen Waadtländer Hauses',
 };
 
 export default blogMetaCantonVdDe;

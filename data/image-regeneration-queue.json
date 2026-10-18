@@ -130,6 +130,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T05:51:33.759Z",
       "lastFailureAt": "2026-10-18T05:51:33.759Z"
+    },
+    {
+      "articleId": "truffa-falsi-poliziotti-vaud",
+      "title": "Sette milioni truffati nel Vaud da falsi agenti",
+      "fallbackImage": "/images/blog/article-tuffe-falsi-poliziotti-vaud.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T07:26:28.181Z",
+      "lastFailureAt": "2026-10-18T07:26:28.181Z"
     }
   ]
 }
