@@ -13417,6 +13417,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.aic-lombardia-varese-2026.title': 'AIC Lombardia in Varese: glutenfreier Sport und Pulciniadi',
     'blog.article.aic-lombardia-varese-2026.excerpt': 'AIC Lombardia in Varese vom 23.',
     'blog.article.aic-lombardia-varese-2026.imageAlt': 'Informationsstand von AIC Lombardia in den Giardini Estensi in Varese',
+    'blog.article.gallarate-furto-strappo-minori.title': 'Gallarate: Zwei Minderjährige nach Raubdiebstahl',
+    'blog.article.gallarate-furto-strappo-minori.excerpt': 'Zwei Minderjährige im Alter von 17 und 14 Jahren auf frischer Tat festgenommen Ein 75-jähriger Rentner stürzt, bleibt aber unverletzt Das Diebesgut wird sichergestellt und zurückgegeben Ort: Platz',
+    'blog.article.gallarate-furto-strappo-minori.imageAlt': 'Vorplatz eines Bahnhofs, Symbolbild zur lokalen Kriminalmeldung aus Gallarate.',
 };
 
 export default blogMetaDe;

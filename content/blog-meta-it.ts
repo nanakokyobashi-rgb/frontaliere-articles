@@ -13419,6 +13419,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.aic-lombardia-varese-2026.title': 'AIC Lombardia a Varese: sport senza glutine e Pulciniadi',
     'blog.article.aic-lombardia-varese-2026.excerpt': 'AIC Lombardia a Varese dal 23 al 25 ottobre Desk e ristori senza glutine ai Giardini Estensi Circa 450 bambini alle Pulciniadi Chi → AIC Lombardia APS Quando →',
     'blog.article.aic-lombardia-varese-2026.imageAlt': 'Desk informativo di AIC Lombardia ai Giardini Estensi a Varese',
+    'blog.article.gallarate-furto-strappo-minori.title': 'Gallarate, due minori fermati per furto con strappo',
+    'blog.article.gallarate-furto-strappo-minori.excerpt': 'Due minori di 17 e 14 anni arrestati in flagranza Un pensionato di 75 anni cade, ma non resta ferito La refurtiva viene recuperata e restituita Luogo: piazza',
+    'blog.article.gallarate-furto-strappo-minori.imageAlt': 'Area davanti a una stazione ferroviaria, immagine di repertorio per la cronaca di Gallarate.',
 };
 
 export default blogMetaIt;

@@ -100,6 +100,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T02:02:44.586Z",
       "lastFailureAt": "2026-10-18T02:02:44.586Z"
+    },
+    {
+      "articleId": "gallarate-furto-strappo-minori",
+      "title": "Gallarate, due minori fermati per furto con strappo",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T03:06:56.481Z",
+      "lastFailureAt": "2026-10-18T03:06:56.481Z"
     }
   ]
 }

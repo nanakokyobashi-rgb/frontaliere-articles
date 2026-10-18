@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/presidente-economiesuisse-critica-governo%2c-%22si-parli-di-et%c3%a0-avs%22/92027236": {
-    "articleId": "avs-eta-pensionabile-frontalieri",
-    "ts": "2026-09-09T09:51:32.991Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/cantone/luganese/1949131/frontalieri-e-cittadini-stranieri-a-lugano-com-e-la-situazione": {
     "articleId": "frontalieri-assunzioni-lugano-interrogazione",
     "ts": "2026-09-09T21:02:38.232Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/aic-lombardia-a-varese-sport-senza-glutine-alla-cityrun-e-attivita-educative-alle-pulciniadi/2711110": {
     "articleId": "aic-lombardia-varese-2026",
     "ts": "2026-10-18T02:15:49.768Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/buttano-a-terra-un-75enne-per-rubargli-una-stecca-di-sigarette-due-minori-fermati-dai-carabinieri-a-gallarate/2711179": {
+    "articleId": "gallarate-furto-strappo-minori",
+    "ts": "2026-10-18T03:06:56.482Z",
     "keyForm": 2
   }
 }

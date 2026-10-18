@@ -13420,6 +13420,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.aic-lombardia-varese-2026.title': 'AIC Lombardia à Varèse : sport sans gluten et Pulciniadi',
     'blog.article.aic-lombardia-varese-2026.excerpt': 'AIC Lombardia à Varese du 23 au 25 octobre Desk et ravitaillements sans gluten aux Giardini Estensi Environ 450 enfants aux Pulciniadi Qui → AIC Lombardia APS Quand →',
     'blog.article.aic-lombardia-varese-2026.imageAlt': 'Bureau d\'information d\'AIC Lombardia aux Giardini Estensi à Varèse (Varese)',
+    'blog.article.gallarate-furto-strappo-minori.title': 'Gallarate, deux mineurs interpellés pour vol à l’arraché',
+    'blog.article.gallarate-furto-strappo-minori.excerpt': 'Deux mineurs de 17 et 14 ans arrêtés en flagrant délit Un retraité de 75 ans tombe, mais ne se blesse pas Le butin est récupéré et rendu Lieu : place',
+    'blog.article.gallarate-furto-strappo-minori.imageAlt': 'Parvis d\'une gare, image d\'illustration pour le fait divers de Gallarate.',
 };
 
 export default blogMetaFr;

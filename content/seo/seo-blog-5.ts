@@ -111022,6 +111022,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-gallarate-furto-strappo-minori': {
+    title: 'Gallarate, due minori fermati per furto con strappo',
+    description: 'Due minori di 17 e 14 anni arrestati in flagranza Un pensionato di 75 anni cade, ma non resta ferito La refurtiva viene recuperata e restituita Luogo: piazza',
+    keywords: 'frontalieri, ticino, svizzera, italia, gallarate, minori, fermati, furto',
+    ogTitle: 'Gallarate, due minori fermati per furto con strappo',
+    ogDescription: 'Due minori di 17 e 14 anni arrestati in flagranza Un pensionato di 75 anni cade, ma non resta ferito La refurtiva viene recuperata e restituita Luogo: piazza',
+    canonicalPath: '/articoli-frontaliere/gallarate-furto-strappo-minori/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gallarate, due minori fermati per furto con strappo",
+      "description": "Due minori di 17 e 14 anni arrestati in flagranza Un pensionato di 75 anni cade, ma non resta ferito La refurtiva viene recuperata e restituita Luogo: piazza",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Area davanti a una stazione ferroviaria, immagine di repertorio per la cronaca di Gallarate."
+      },
+      "datePublished": "2026-10-18T03:06:55+00:00",
+      "dateModified": "2026-10-18T03:06:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/gallarate-furto-strappo-minori/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
