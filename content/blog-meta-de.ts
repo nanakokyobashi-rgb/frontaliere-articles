@@ -13470,6 +13470,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.indennita-giornaliere-stop-cosa-fare.title': 'Krankentaggeldleistungen eingestellt: 5 Schritte zum Schutz',
     'blog.article.indennita-giornaliere-stop-cosa-fare.excerpt': 'Ein Burnout führt bei Patrick zu einer vollständigen Abwesenheit von der Arbeit Die Police sieht eine Begrenzung auf 720 oder 730 Tage vor Die Versicherung stellt die Zahlungen nach wenigen',
     'blog.article.indennita-giornaliere-stop-cosa-fare.imageAlt': 'Grenzgänger prüft Krankenversicherungsunterlagen in Bellinzona Büro',
+    'blog.article.ps-tre-iniziative-thun.title': 'SP sagt Ja zu drei Initiativen: Bienen, Mobilität und Internet',
+    'blog.article.ps-tre-iniziative-thun.excerpt': 'Drei Initiativen haben in Thun das Ja der SP erhalten Der Mobilitätsgutschein betrifft den öffentlichen Verkehr und die Eisenbahnen Der Text fordert eine Steuer auf Flugtickets',
+    'blog.article.ps-tre-iniziative-thun.imageAlt': 'Sozialistenkongress in Thun: Initiativen zu Bienen, Mobilität und digitaler Sicherheit.',
 };
 
 export default blogMetaDe;

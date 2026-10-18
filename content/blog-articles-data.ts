@@ -45402,6 +45402,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'ps-tre-iniziative-thun',
+ category: 'novita',
+ date: '2026-10-18T12:57:14.842Z',
+ image: '/images/blog/article-ps-tre-iniziative-thun.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

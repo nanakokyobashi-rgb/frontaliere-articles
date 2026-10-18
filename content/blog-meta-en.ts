@@ -13471,6 +13471,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.indennita-giornaliere-stop-cosa-fare.title': 'Interrupted sickness benefits: 5 steps to protect yourself',
     'blog.article.indennita-giornaliere-stop-cosa-fare.excerpt': 'A burnout leads Patrick to a complete absence from work The policy sets a limit of 720 or 730 days The insurance company stops payments after a few',
     'blog.article.indennita-giornaliere-stop-cosa-fare.imageAlt': 'Cross-border worker reviews health insurance documents in Bellinzona office',
+    'blog.article.ps-tre-iniziative-thun.title': 'PS, yes to three initiatives: bees, mobility and internet',
+    'blog.article.ps-tre-iniziative-thun.excerpt': 'Three initiatives won the PS’s approval in Thun The mobility voucher concerns public transport and railways The text calls for a tax on airline tickets',
+    'blog.article.ps-tre-iniziative-thun.imageAlt': 'Socialist congress in Thun: initiatives on bees, mobility and digital security approved.',
 };
 
 export default blogMetaEn;
