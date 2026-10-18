@@ -1067,6 +1067,19 @@ test('la guardia degli indirizzi accetta la località conservata e gli esonimi d
   }), []);
 });
 
+test('la guardia riconosce anche un indirizzo con nome strada minimo', () => {
+  const italianSections = {
+    body1: '- Cantiere → Via 15, 22100 Tavernola fraz. Como',
+  };
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections,
+    newSections: {
+      body1: '- Construction site → Via 15, 22100 Tavernola fraz. Wie',
+    },
+    locale: 'en',
+  })[0].missing, ['Como']);
+});
+
 test('la guardia non interpreta numeri di pratica come indirizzi', () => {
   const italianSections = {
     body1: "L'ordinanza n. 10440/2026, Questa interpretazione è stata pubblicata ieri.",

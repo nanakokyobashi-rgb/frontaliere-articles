@@ -857,7 +857,7 @@ export const LENGTH_FLOOR = { VS_OLD: 0.7, VS_IT: 0.4 };
 
 const ADDRESS_POSTAL_CODE_RE = /\b\d{5}\b/u;
 const ADDRESS_CAPITALIZED_TOKEN_RE = /(?<![\p{L}\p{N}])\p{Lu}[\p{L}\p{M}]*(?:[’'\-][\p{L}\p{M}]+)*/gu;
-const ADDRESS_STREET_NUMBER_RE = /\b(?:via|viale|piazza|piazzale|corso|strada|contrada|largo|vicolo|località|loc\.|sentiero|riva|lungolago|route|rue|avenue|chemin|strasse|weg|platz)\b[^,\n]{2,100}\s+\d{1,5}\s*,?\s*$/iu;
+const ADDRESS_STREET_NUMBER_RE = /\b(?:via|viale|piazza|piazzale|corso|strada|contrada|largo|vicolo|località|loc\.|sentiero|riva|lungolago|route|rue|avenue|chemin|strasse|weg|platz)\b[^,\n]*?(?:,\s*)?\d{1,5}\s*,?\s*$/iu;
 const ADDRESS_LABEL_CONTEXT_RE = /\b(?:indirizzo|address|adresse|cap|codice\s+postale|postal\s+code|postcode|plz|npa)\b/iu;
 const ADDRESS_POSTAL_SEPARATOR_RE = /(?:^|[,;])\s*\d{5}\s*(?:[,;]|$)/u;
 const ADDRESS_DASH_RE = /[-‐‑‒–—−]/u;
