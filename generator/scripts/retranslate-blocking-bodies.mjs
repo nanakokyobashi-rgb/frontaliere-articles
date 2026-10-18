@@ -855,11 +855,15 @@ export const LENGTH_FLOOR_MIN_CHARS = 400;
  */
 export const LENGTH_FLOOR = { VS_OLD: 0.7, VS_IT: 0.4 };
 
-const ADDRESS_POSTAL_CODE_RE = /\b\d{5}\b/u;
+const ADDRESS_POSTAL_CODE_RE = /\b\d{5}\b/gu;
 const ADDRESS_CAPITALIZED_TOKEN_RE = /(?<![\p{L}\p{N}])\p{Lu}[\p{L}\p{M}]*(?:[’'\-][\p{L}\p{M}]+)*/gu;
 const ADDRESS_STREET_NUMBER_RE = /\b(?:via|viale|piazza|piazzale|corso|strada|contrada|largo|vicolo|località|loc\.|sentiero|riva|lungolago|route|rue|avenue|chemin|strasse|weg|platz)\b[^,\n]*?(?:,\s*)?\d{1,5}\s*,?\s*$/iu;
 const ADDRESS_LABEL_CONTEXT_RE = /\b(?:indirizzo|address|adresse|cap|codice\s+postale|postal\s+code|postcode|plz|npa)\b/iu;
-const ADDRESS_POSTAL_SEPARATOR_RE = /(?:^|[,;])\s*\d{5}(?:\s*(?:[,;]|$)|\s+(?=\p{Lu}))/u;
+const ADDRESS_POSTAL_SEPARATOR_RE = /^(?:\s*(?:[,;]|$)|\s+\p{Lu})/u;
+const ADDRESS_COMPACT_PREFIX_RE = /^\s*(?:[-‐‑‒–—−>→•*]\s*)?$/u;
+const ADDRESS_LOCALITY_MARKER_RE = /\b(?:fraz(?:ione)?\.?|localit(?:à|a)|loc\.|hameau|lieu-dit|ortsteil)\b/iu;
+const ADDRESS_COUNTRY_BOUNDARY_RE = /(?:^|[,;]|\s+)(?:italia|italy|italien|italie|svizzera|switzerland|schweiz|suisse|germania|germany|deutschland|allemagne|francia|france|spagna|spain|spanien|espagne|austria|österreich|autriche)\b[\s\S]*$/iu;
+const ADDRESS_SENTENCE_BOUNDARY_RE = /(?<!\bfraz)(?<!\bfrazione)(?<!\bloc)\.(?=\s+\p{Lu})/iu;
 const ADDRESS_DASH_RE = /[-‐‑‒–—−]/u;
 
 /**
@@ -867,16 +871,10 @@ const ADDRESS_DASH_RE = /[-‐‑‒–—−]/u;
  * check: a five-digit number also occurs in dates, case numbers and source
  * URLs. These contexts are the address shapes used by the corpus, while the
  * postal separator covers compact facts such as `22100, Tavernola, Como` and
- * the space-separated `22100 Como` form, without treating an embedded case
- * number as an address.
+ * the space-separated `22100 Como` form only when the following segment has
+ * an address-locality marker or a glossary toponym. An embedded case number
+ * is bounded at the next five-digit candidate and cannot borrow that context.
  */
-function isAddressLine(line, postalMatch) {
-  const beforePostal = String(line).slice(0, postalMatch.index);
-  return ADDRESS_STREET_NUMBER_RE.test(beforePostal)
-    || ADDRESS_LABEL_CONTEXT_RE.test(beforePostal)
-    || ADDRESS_POSTAL_SEPARATOR_RE.test(String(line));
-}
-
 function foldAddressText(value) {
   return normalizeLocalizedToponymText(value)
     .normalize('NFKC')
@@ -926,27 +924,106 @@ const ADDRESS_TOPONYM_GLOSSARY = Object.freeze([
   },
 ]);
 
-function addressTokenIsPreserved({ token, sourceTail, targetLine, locale }) {
-  if (addressTermIsPresent(targetLine, token)) return true;
+function addressPostalMatches(line) {
+  ADDRESS_POSTAL_CODE_RE.lastIndex = 0;
+  const matches = [...String(line).matchAll(ADDRESS_POSTAL_CODE_RE)];
+  ADDRESS_POSTAL_CODE_RE.lastIndex = 0;
+  return matches;
+}
+
+function addressSegmentForPostalCode(line, postalMatch) {
+  const text = String(line);
+  const start = postalMatch.index + postalMatch[0].length;
+  const afterPostal = text.slice(start);
+  const nextPostalOffset = afterPostal.search(/\b\d{5}\b/u);
+  const bounded = nextPostalOffset < 0
+    ? afterPostal
+    : afterPostal.slice(0, nextPostalOffset);
+  const sentenceBoundaryOffset = bounded.search(ADDRESS_SENTENCE_BOUNDARY_RE);
+  const addressText = sentenceBoundaryOffset < 0
+    ? bounded
+    : bounded.slice(0, sentenceBoundaryOffset);
+  return addressText.replace(ADDRESS_COUNTRY_BOUNDARY_RE, '').trim();
+}
+
+function addressGlossaryToponymIsPresent(text) {
+  return ADDRESS_TOPONYM_GLOSSARY.some((entry) =>
+    entry.source.some((form) => addressTermIsPresent(text, form)));
+}
+
+function postalHasAddressSeparator(line, postalMatch) {
+  const text = String(line);
+  const beforePostal = text.slice(0, postalMatch.index);
+  const afterPostal = text.slice(postalMatch.index + postalMatch[0].length);
+  return /(?:^|[,;])\s*$/u.test(beforePostal)
+    && ADDRESS_POSTAL_SEPARATOR_RE.test(afterPostal);
+}
+
+/**
+ * A line with more than one five-digit candidate is evaluated at each
+ * candidate, but an earlier candidate cannot inherit the address context of a
+ * later CAP. This is what lets a practice/statistical number precede the real
+ * postal code without masking it from the scan.
+ */
+function isAddressLine(line, postalMatch) {
+  const text = String(line);
+  const beforePostal = text.slice(0, postalMatch.index);
+  const addressSegment = addressSegmentForPostalCode(text, postalMatch);
+  const hasLaterPostal = /\b\d{5}\b/u.test(
+    text.slice(postalMatch.index + postalMatch[0].length),
+  );
+  if (hasLaterPostal) return false;
+  if (ADDRESS_STREET_NUMBER_RE.test(beforePostal)) return true;
+  if (ADDRESS_LABEL_CONTEXT_RE.test(beforePostal)) return true;
+  if (!postalHasAddressSeparator(text, postalMatch)) return false;
+  const hasLocalityCue = ADDRESS_LOCALITY_MARKER_RE.test(addressSegment)
+    || addressGlossaryToponymIsPresent(addressSegment);
+  return hasLocalityCue && (
+    ADDRESS_COMPACT_PREFIX_RE.test(beforePostal)
+    || ADDRESS_LOCALITY_MARKER_RE.test(addressSegment)
+  );
+}
+
+function addressTokenIsPreserved({ token, sourceSegment, targetSegment, locale }) {
+  if (addressTermIsPresent(targetSegment, token)) return true;
   return ADDRESS_TOPONYM_GLOSSARY.some((entry) => {
     const sourceForm = entry.source.find((form) =>
-      addressTermIsPresent(sourceTail, form) && addressTermIsPresent(form, token));
+      addressTermIsPresent(sourceSegment, form) && addressTermIsPresent(form, token));
     if (!sourceForm) return false;
-    return (entry.localized[locale] || []).some((form) => addressTermIsPresent(targetLine, form));
+    return (entry.localized[locale] || []).some((form) => addressTermIsPresent(targetSegment, form));
   });
 }
 
-function addressLineTarget(lines, sourceLine, sourceLineIndex, usedTargetLines) {
-  const sameIndex = lines[sourceLineIndex];
-  if (sameIndex?.includes(sourceLine.postalCode) && !usedTargetLines.has(sourceLineIndex)) {
-    usedTargetLines.add(sourceLineIndex);
-    return { index: sourceLineIndex, text: sameIndex };
+function addressLineTarget(lines, sourceLine, sourceLineIndex, usedTargetLines, locale) {
+  const candidates = [];
+  lines.forEach((line, index) => {
+    if (usedTargetLines.has(index)) return;
+    const postalMatch = addressPostalMatches(line)
+      .find((match) => match[0] === sourceLine.postalCode);
+    if (!postalMatch) return;
+    const targetSegment = addressSegmentForPostalCode(line, postalMatch);
+    const preservedCount = sourceLine.tokens.filter((token) => addressTokenIsPreserved({
+      token,
+      sourceSegment: sourceLine.segment,
+      targetSegment,
+      locale,
+    })).length;
+    candidates.push({ index, text: line, segment: targetSegment, preservedCount });
+  });
+  if (candidates.length === 0) return { index: -1, text: '', segment: '' };
+
+  const bestScore = Math.max(...candidates.map((candidate) => candidate.preservedCount));
+  const best = candidates.filter((candidate) => candidate.preservedCount === bestScore);
+  let selected = best.length === 1 ? best[0] : null;
+  if (!selected && bestScore === 0) {
+    selected = best.find((candidate) => candidate.index === sourceLineIndex) || null;
   }
-  const fallbackIndex = lines.findIndex((line, index) =>
-    !usedTargetLines.has(index) && line.includes(sourceLine.postalCode));
-  if (fallbackIndex < 0) return { index: -1, text: '' };
-  usedTargetLines.add(fallbackIndex);
-  return { index: fallbackIndex, text: lines[fallbackIndex] };
+  // A positive tie means that the CAP alone cannot disambiguate two target
+  // lines. Refuse the association instead of comparing the source with the
+  // wrong line; the resulting mismatch keeps the old corpus in place.
+  if (!selected) return { index: -1, text: '', segment: '' };
+  usedTargetLines.add(selected.index);
+  return selected;
 }
 
 /**
@@ -962,33 +1039,36 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
     const targetLines = String(newSections?.[field] ?? '').split('\n');
     const usedTargetLines = new Set();
     sourceLines.forEach((line, lineIndex) => {
-      const postalMatch = ADDRESS_POSTAL_CODE_RE.exec(line);
-      ADDRESS_POSTAL_CODE_RE.lastIndex = 0;
-      if (!postalMatch || !isAddressLine(line, postalMatch)) return;
-      const sourceTail = line.slice(postalMatch.index + postalMatch[0].length);
-      const tokens = [...sourceTail.matchAll(ADDRESS_CAPITALIZED_TOKEN_RE)].map((match) => match[0]);
-      if (tokens.length === 0) return;
-      const sourceLine = {
-        postalCode: postalMatch[0],
-        line: line.trim(),
-        tokens: [...new Set(tokens)],
-      };
-      const target = addressLineTarget(targetLines, sourceLine, lineIndex, usedTargetLines);
-      const missing = sourceLine.tokens.filter((token) => !addressTokenIsPreserved({
-        token,
-        sourceTail,
-        targetLine: target.text,
-        locale,
-      }));
-      if (missing.length > 0) {
-        mismatches.push({
-          field,
-          line: lineIndex + 1,
-          postalCode: sourceLine.postalCode,
-          source: sourceLine.line,
-          target: target.text.trim(),
-          missing,
-        });
+      for (const postalMatch of addressPostalMatches(line)) {
+        if (!isAddressLine(line, postalMatch)) continue;
+        const sourceSegment = addressSegmentForPostalCode(line, postalMatch);
+        ADDRESS_CAPITALIZED_TOKEN_RE.lastIndex = 0;
+        const tokens = [...sourceSegment.matchAll(ADDRESS_CAPITALIZED_TOKEN_RE)].map((match) => match[0]);
+        ADDRESS_CAPITALIZED_TOKEN_RE.lastIndex = 0;
+        if (tokens.length === 0) continue;
+        const sourceLine = {
+          postalCode: postalMatch[0],
+          line: line.trim(),
+          segment: sourceSegment,
+          tokens: [...new Set(tokens)],
+        };
+        const target = addressLineTarget(targetLines, sourceLine, lineIndex, usedTargetLines, locale);
+        const missing = sourceLine.tokens.filter((token) => !addressTokenIsPreserved({
+          token,
+          sourceSegment,
+          targetSegment: target.segment,
+          locale,
+        }));
+        if (missing.length > 0) {
+          mismatches.push({
+            field,
+            line: lineIndex + 1,
+            postalCode: sourceLine.postalCode,
+            source: sourceLine.line,
+            target: target.text.trim(),
+            missing,
+          });
+        }
       }
     });
   }
