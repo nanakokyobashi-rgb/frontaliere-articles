@@ -1100,6 +1100,21 @@ test('la guardia riconosce CAP-località senza glossario o numero civico', () =>
   }
 });
 
+test('la guardia riconosce gli indirizzi con trattino o due punti prima del CAP', () => {
+  for (const italianAddress of [
+    'Via Roma 10 - 22100 Como',
+    'Via Roma 10: 22100 Como',
+  ]) {
+    const englishAddress = italianAddress.replace('Como', 'Wie');
+    const mismatches = findAddressToponymMismatches({
+      italianSections: { body1: italianAddress },
+      newSections: { body1: englishAddress },
+      locale: 'en',
+    });
+    assert.deepEqual(mismatches[0]?.missing, ['Como'], italianAddress);
+  }
+});
+
 test('la guardia riconosce CAP e località separati solo da spazio', () => {
   const italianSections = { body1: '22100 Como' };
   assert.deepEqual(findAddressToponymMismatches({

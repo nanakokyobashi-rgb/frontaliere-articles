@@ -862,7 +862,7 @@ const ADDRESS_STREET_NUMBER_RE = new RegExp(`\\b${ADDRESS_STREET_CONTEXT_SOURCE}
 const ADDRESS_STREET_CONTEXT_RE = new RegExp(`\\b${ADDRESS_STREET_CONTEXT_SOURCE}\\b`, 'iu');
 const ADDRESS_STREET_CONTEXT_GLOBAL_RE = new RegExp(`\\b${ADDRESS_STREET_CONTEXT_SOURCE}\\b`, 'giu');
 const ADDRESS_LABEL_CONTEXT_RE = /\b(?:indirizzo|address|adresse|cap|codice\s+postale|postal\s+code|postcode|plz|npa)\b/iu;
-const ADDRESS_POSTAL_SEPARATOR_RE = /^(?:\s*(?:[,;]|$)|\s+\p{Lu})/u;
+const ADDRESS_POSTAL_SEPARATOR_RE = /^(?:\s*(?:[,;:]|[-‐‑‒–—−]|$)|\s+\p{Lu})/u;
 const ADDRESS_POSTAL_LOCALITY_RE = /^\s*(?:[,;]\s*)?\p{Lu}[\p{L}\p{M}]*(?:[’'\-][\p{L}\p{M}]+)*/u;
 const ADDRESS_COMPACT_PREFIX_RE = /^\s*(?:[-‐‑‒–—−>→•*]\s*)?$/u;
 const ADDRESS_LOCALITY_MARKER_RE = /\b(?:fraz(?:ione)?\.?|localit(?:à|a)|loc\.|hameau|lieu-dit|ortsteil)\b/iu;
@@ -879,7 +879,8 @@ const ADDRESS_URL_RE = /(?:https?:\/\/|www\.)[^\s)\]>"]+|(?<![\p{L}\p{N}@])\/[a-
  * check: a five-digit number also occurs in dates, case numbers and source
  * URLs. These contexts are the address shapes used by the corpus, while the
  * postal separator covers compact facts such as `22100, Tavernola, Como` and
- * the space-separated `22100 Como` form. A street marker before the CAP is
+ * the space-separated `22100 Como` form. Street lines may also put a dash or
+ * colon between the house number and CAP. A street marker before the CAP is
  * enough address context even when the house number or locality is unknown.
  * An embedded case number is bounded at the next five-digit candidate and
  * cannot borrow that context.
@@ -970,7 +971,7 @@ function postalHasAddressSeparator(line, postalMatch) {
   const text = String(line);
   const beforePostal = text.slice(0, postalMatch.index);
   const afterPostal = text.slice(postalMatch.index + postalMatch[0].length);
-  return /(?:^|[,;])\s*$/u.test(beforePostal)
+  return /(?:^|[,;:]|[-‐‑‒–—−])\s*$/u.test(beforePostal)
     && ADDRESS_POSTAL_SEPARATOR_RE.test(afterPostal);
 }
 
