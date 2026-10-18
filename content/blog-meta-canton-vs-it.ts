@@ -33,6 +33,9 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.iselle-parcheggio-frontalieri.title': 'Iselle, parcheggio frontalieri a pagamento: 50 euro',
     'blog.article.iselle-parcheggio-frontalieri.excerpt': 'Il parcheggio di Iselle per frontalieri diventa a pagamento: l\'abbonamento mensile è di 50 euro.',
     'blog.article.iselle-parcheggio-frontalieri.imageAlt': 'Parcheggio di Iselle per frontalieri con abbonamento mensile a 50 euro',
+    'blog.article.salute-vallese-2026-ovs.title': 'Rapporto OVS: 83% vallesani in buona salute, obesità al 13% e rischi psicosociali al 44%',
+    'blog.article.salute-vallese-2026-ovs.excerpt': '83% degli adulti vallesani si sente in buona salute nel 2022 Speranza di vita: 85,9 anni per le donne, 82,4 per gli uomini Gli over 65 sono il 21%',
+    'blog.article.salute-vallese-2026-ovs.imageAlt': 'Veduta aerea della valle del Rodano in Vallese con vigneti e vette alpine',
 };
 
 export default blogMetaCantonVsIt;

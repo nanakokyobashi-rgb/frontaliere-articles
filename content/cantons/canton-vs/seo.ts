@@ -387,6 +387,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-salute-vallese-2026-ovs': {
+    title: 'Rapporto OVS: 83% vallesani in buona salute, obesità al 13% e rischi psicosociali al 44%',
+    description: '83% degli adulti vallesani si sente in buona salute nel 2022 Speranza di vita: 85,9 anni per le donne, 82,4 per gli uomini Gli over 65 sono il 21%',
+    keywords: 'frontalieri, ticino, svizzera, italia, rapporto, vallesani, buona, salute',
+    ogTitle: 'Salute in Vallese 2026: dati OVS su popolazione, comportamenti e rischi',
+    ogDescription: '83% degli adulti vallesani si sente in buona salute nel 2022 Speranza di vita: 85,9 anni per le donne, 82,4 per gli uomini Gli over 65 sono il 21%',
+    canonicalPath: '/articoli-vallese/salute-vallese-2026-ovs/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Rapporto OVS: 83% vallesani in buona salute, obesità al 13% e rischi psicosociali al 44%",
+      "description": "83% degli adulti vallesani si sente in buona salute nel 2022 Speranza di vita: 85,9 anni per le donne, 82,4 per gli uomini Gli over 65 sono il 21%",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-salute-vallese-2026-ovs.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta aerea della valle del Rodano in Vallese con vigneti e vette alpine"
+      },
+      "datePublished": "2026-10-18T08:16:12+00:00",
+      "dateModified": "2026-10-18T08:16:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vallese/salute-vallese-2026-ovs/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

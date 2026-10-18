@@ -33,6 +33,9 @@ const blogMetaCantonVsFr: Record<string, string> = {
     'blog.article.iselle-parcheggio-frontalieri.title': 'Iselle, parking pour frontaliers payant : 50 euro',
     'blog.article.iselle-parcheggio-frontalieri.excerpt': 'Le parking d\'Iselle pour frontaliers devient payant : l\'abonnement mensuel est de 50 euro.',
     'blog.article.iselle-parcheggio-frontalieri.imageAlt': 'Parking d\'Iselle pour frontaliers avec abonnement mensuel de 50 euros',
+    'blog.article.salute-vallese-2026-ovs.title': 'Rapport OVS : 83% des Valaisans en bonne santé, 13% obèses',
+    'blog.article.salute-vallese-2026-ovs.excerpt': '83% des adultes valaisans se sentent en bonne santé en 2022 Espérance de vie : 85,9 ans pour les femmes, 82,4 pour les hommes Les plus de 65 ans représentent',
+    'blog.article.salute-vallese-2026-ovs.imageAlt': 'Vue aérienne de la vallée du Rhône en Valais avec vignobles et sommets alpins',
 };
 
 export default blogMetaCantonVsFr;

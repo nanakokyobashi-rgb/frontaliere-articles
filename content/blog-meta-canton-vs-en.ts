@@ -33,6 +33,9 @@ const blogMetaCantonVsEn: Record<string, string> = {
     'blog.article.iselle-parcheggio-frontalieri.title': 'Iselle, paid parking for cross-border commuters: 50 euro',
     'blog.article.iselle-parcheggio-frontalieri.excerpt': 'The Iselle car park for cross-border commuters is becoming paid parking: the monthly subscription is 50 euros.',
     'blog.article.iselle-parcheggio-frontalieri.imageAlt': 'Iselle parking for cross-border commuters with a monthly 50-euro pass',
+    'blog.article.salute-vallese-2026-ovs.title': 'OVS report: 83% of Valais residents in good health',
+    'blog.article.salute-vallese-2026-ovs.excerpt': '83% of Valais adults feel in good health in 2022 Life expectancy: 85,9 years for women, 82,4 for men People over 65 account for 21% of the population in 2024',
+    'blog.article.salute-vallese-2026-ovs.imageAlt': 'Aerial view of Rhone valley in Valais with vineyards and alpine peaks',
 };
 
 export default blogMetaCantonVsEn;

@@ -33,6 +33,9 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.iselle-parcheggio-frontalieri.title': 'Iselle, kostenpflichtiger Parkplatz für Grenzgänger: 50 euro',
     'blog.article.iselle-parcheggio-frontalieri.excerpt': 'Der Parkplatz für Grenzgänger in Iselle wird kostenpflichtig: Das Monatsabonnement beträgt 50 euro.',
     'blog.article.iselle-parcheggio-frontalieri.imageAlt': 'Parkplatz in Iselle für Grenzgänger mit Monatsabo für 50 Euro',
+    'blog.article.salute-vallese-2026-ovs.title': 'OVS-Bericht: 83% Walliser fit, 13% adipös, 44% Psychorisiken',
+    'blog.article.salute-vallese-2026-ovs.excerpt': '83% der erwachsenen Walliser fühlen sich 2022 bei guter Gesundheit Lebenserwartung: 85,9 Jahre für Frauen, 82,4 für Männer Die über 65-Jährigen machen 2024 21%',
+    'blog.article.salute-vallese-2026-ovs.imageAlt': 'Luftbild des Rhonetals im Wallis mit Weinbergen und Alpengipfeln',
 };
 
 export default blogMetaCantonVsDe;
