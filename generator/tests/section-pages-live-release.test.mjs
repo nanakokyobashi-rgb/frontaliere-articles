@@ -28,7 +28,7 @@ const HISTORICAL_CORE = Object.fromEntries(
 );
 const ACTIVE_WITH_TI = { ...HISTORICAL_CORE, 'canton-ti': ARTICLE_SECTION_CORE_ALL['canton-ti'] };
 
-test('publisher: una release live con manifest precedente deferisce RSS al replay anche senza bootstrap', async () => {
+test('publisher: una release live con manifest precedente resta rossa finché il replay non verifica la release', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-release-'));
   const head = 'test-head';
   const publishedDoc = pageManifestFromPages({ section: 'canton-ti', commit: 'published', pages: [] });
@@ -76,7 +76,7 @@ test('publisher: una release live con manifest precedente deferisce RSS al repla
         },
       },
     );
-    assert.equal(code, 0);
+    assert.equal(code, 1, 'una deferral non verificata non deve chiudere verde il workflow_run');
     assert.deepEqual(cantonRssPublishPlan('canton-ti', {
       publishing: true,
       effectiveStatus: 'live',
@@ -95,6 +95,8 @@ test('publisher: una release live con manifest precedente deferisce RSS al repla
     assert.equal(summary.deferredLiveRelease, true);
     assert.equal(summary.deferredLiveBootstrapRelease, false);
     assert.equal(summary.published.manifestDeferred, true);
+    assert.equal(summary.published.failures, 1);
+    assert.match(summary.published.deferredReason, /replay/);
   } finally {
     console.log = realConsoleLog;
     console.error = realConsoleError;
@@ -167,6 +169,70 @@ test('publisher: lo staging snapshotta prima degli asset e trattiene quelli dell
     ]);
     assert.ok(!events.includes('asset-upload:images/shared.webp'), 'l’asset ancora referenziato non viene sovrascritto');
     assert.ok(events.indexOf('snapshot:immutable') < events.indexOf('asset-upload:images/new.webp'));
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('publisher: una pagina nuova che riusa un asset trattenuto viene differita al replay', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-held-page-'));
+  const immutable = pageEntry('canton-ti', 'articoli-ticino/existing/index.html', 'article');
+  const staged = pageEntry('canton-ti', 'articoli-ticino/new/index.html', 'article');
+  const previousHtml = '<!doctype html><html><body><img src="https://cdn.frontaliereticino.ch/images/shared.webp"></body></html>';
+  const stagedHtml = '<!doctype html><html><body><img src="https://cdn.frontaliereticino.ch/images/shared.webp"></body></html>';
+  const events = [];
+  let stagedProbeCalls = 0;
+  const immutableLocal = path.join(fixtureRoot, immutable.rel);
+  const stagedLocal = path.join(fixtureRoot, staged.rel);
+  mkdirSync(path.dirname(immutableLocal), { recursive: true });
+  mkdirSync(path.dirname(stagedLocal), { recursive: true });
+  writeFileSync(immutableLocal, previousHtml, 'utf8');
+  writeFileSync(stagedLocal, stagedHtml, 'utf8');
+  try {
+    const result = await publish({
+      section: 'canton-ti',
+      pages: [staged],
+      immutablePages: [immutable],
+      snapshotPagesBeforeUpload: true,
+      cdnUploads: [
+        { local: 'public/images/shared.webp', key: 'images/shared.webp' },
+        { local: 'public/images/new.webp', key: 'images/new.webp' },
+      ],
+      obsoletePages: [],
+      distDir: fixtureRoot,
+      publishedStatusImpl: async () => 'live',
+      runImpl: (_command, args) => {
+        if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+          if (args[2].startsWith('edge/')) events.push('page-upload');
+          else events.push(`asset-upload:${args[2]}`);
+          return { code: 0, stdout: '✅ uploaded' };
+        }
+        if (args.includes('scripts/cf-purge-cache.mjs')) {
+          events.push('purge');
+          return { code: 0, stdout: '' };
+        }
+        throw new Error(`comando inatteso: ${args.join(' ')}`);
+      },
+      probeImpl: async (url) => {
+        if (url === immutable.cdnUrl) {
+          events.push('snapshot:immutable');
+          return { ok: true, status: 200, body: previousHtml };
+        }
+        if (url === staged.cdnUrl) {
+          stagedProbeCalls++;
+          events.push('snapshot:staged');
+          return { ok: false, status: 'HTTP 404' };
+        }
+        throw new Error(`URL inatteso: ${url}`);
+      },
+    });
+    assert.equal(result.failures, 0);
+    assert.equal(result.uploaded, 0, 'la pagina che riusa l’asset trattenuto non viene pubblicata');
+    assert.equal(result.deferredAssetPages, 1);
+    assert.equal(stagedProbeCalls, 1, 'la pagina nuova viene comunque inclusa nella fotografia pre-upload');
+    assert.ok(events.includes('asset-upload:images/new.webp'));
+    assert.ok(!events.includes('asset-upload:images/shared.webp'));
+    assert.ok(!events.includes('page-upload'));
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }

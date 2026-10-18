@@ -1713,6 +1713,7 @@ export async function publish({
   let verifiedRssFeeds = cantonRssFeeds;
   let rollbackRssPublication = null;
   let pageSnapshots = null;
+  let pagesForUpload = pages;
   const rollbackRss = async ({ neutralize = false } = {}) => {
     if (!rollbackRssPublication) return 0;
     const rollback = rollbackRssPublication;
@@ -1742,7 +1743,7 @@ export async function publish({
     pageSnapshots = null;
     try {
       const result = await rollbackCantonPages({
-        pages,
+        pages: pagesForUpload,
         snapshots,
         distDir,
         runImpl,
@@ -1822,7 +1823,21 @@ export async function publish({
           .filter(({ key }) => immutableBodies.some((body) => cantonPageReferencesAsset(body, key)))
           .map(({ key }) => key),
       );
-      pageSnapshots = new Map(uniqueCantonPages(pages).map((page) => [page.edgeKey, snapshots.get(page.edgeKey)]));
+      const heldPageKeys = new Set();
+      for (const page of pages) {
+        const local = path.join(distDir, page.rel);
+        if (!fs.existsSync(local) || heldAssetKeys.size === 0) continue;
+        const body = fs.readFileSync(local, 'utf8');
+        if ([...heldAssetKeys].some((key) => cantonPageReferencesAsset(body, key))) {
+          heldPageKeys.add(page.edgeKey);
+          console.log(
+            `::notice::[${LOG}] release live differita: differisco anche ${page.edgeKey}; ` +
+            'il render nuovo riusa un asset trattenuto dalla superficie precedente',
+          );
+        }
+      }
+      pagesForUpload = pages.filter((page) => !heldPageKeys.has(page.edgeKey));
+      pageSnapshots = new Map(uniqueCantonPages(pagesForUpload).map((page) => [page.edgeKey, snapshots.get(page.edgeKey)]));
     } catch (error) {
       console.error(`::error::[${LOG}] snapshot della release HTML precedente fallito: ${error?.message ?? String(error)}`);
       return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
@@ -1871,7 +1886,7 @@ export async function publish({
     }
     if (Array.isArray(rssResult.feeds)) verifiedRssFeeds = rssResult.feeds;
     if (Array.isArray(rssResult.feeds) && rssResult.feeds.length === 0) {
-      for (const page of pages.filter(({ kind }) => kind === 'landing')) {
+      for (const page of pagesForUpload.filter(({ kind }) => kind === 'landing')) {
         const local = path.join(distDir, page.rel);
         if (!fs.existsSync(local)) continue;
         const html = fs.readFileSync(local, 'utf-8');
@@ -1882,7 +1897,7 @@ export async function publish({
     if (typeof rssResult.rollback === 'function') {
       rollbackRssPublication = rssResult.rollback;
       try {
-        pageSnapshots = await snapshotCantonPages(pages, { probeImpl });
+      pageSnapshots = await snapshotCantonPages(pagesForUpload, { probeImpl });
       } catch (error) {
         console.error(`::error::[${LOG}] snapshot della release HTML precedente fallito: ${error?.message ?? String(error)}`);
         const rollbackFailures = await rollbackTransaction();
@@ -1890,7 +1905,7 @@ export async function publish({
       }
     }
   }
-  for (const page of inUploadOrder(pages)) {
+  for (const page of inUploadOrder(pagesForUpload)) {
     await assertMainFreshImpl();
     const { stdout } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', path.join(distDir, page.rel), page.edgeKey, PAGE_CACHE_CONTROL]);
     if (stdout.includes('✅ uploaded')) uploaded.push(page);
@@ -2005,6 +2020,7 @@ export async function publish({
     failures: failures + rollbackFailures,
     rollbackFailures,
     uploaded: uploaded.length,
+    deferredAssetPages: pages.length - pagesForUpload.length,
     deleted: deleted.length,
     status,
     immutableMismatch: immutableMismatches.length > 0,
@@ -2397,10 +2413,18 @@ export async function main(
   });
   if (summary.published.failures === 0 && deferredLiveRelease) {
     summary.published.manifestDeferred = true;
-    console.log(
-      `::notice::[${LOG}] manifest edge ${section} differito: ` +
-      'verrà riscritto dal replay dopo la release API/edge',
-    );
+    if (!args.bootstrap) {
+      summary.published.failures = 1;
+      summary.published.deferredReason = 'release API/edge non verificata: il replay deve ritentare prima di chiudere verde';
+      console.log(
+        `::notice::[${LOG}] manifest edge ${section} differito: ` +
+        'il run resta rosso finché il replay non verifica la release API/edge',
+      );
+      writeSummary();
+      return 1;
+    }
+    writeSummary();
+    return 0;
   } else if (summary.published.failures === 0) {
     const manifestPages = aggregatePagesAllowed
       ? [
