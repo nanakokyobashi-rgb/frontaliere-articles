@@ -582,6 +582,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-truffe-falsi-banchieri-lausanna': {
+    title: 'Falsi poliziotti: oltre 100 interpellati nel Vaud',
+    description: 'Oltre cento persone interpellate nel Vaud dall\'inizio del 2026 Sedici persone interpellate dall\'inizio di ottobre Coinvolte polizia cantonale, Lausanne',
+    keywords: 'frontalieri, ticino, svizzera, italia, falsi, poliziotti, oltre, interpellati',
+    ogTitle: 'Falsi poliziotti: oltre 100 interpellati nel Vaud',
+    ogDescription: 'Oltre cento persone interpellate nel Vaud dall\'inizio del 2026 Sedici persone interpellate dall\'inizio di ottobre Coinvolte polizia cantonale, Lausanne',
+    canonicalPath: '/articoli-vaud/truffe-falsi-banchieri-lausanna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Falsi poliziotti: oltre 100 interpellati nel Vaud",
+      "description": "Oltre cento persone interpellate nel Vaud dall'inizio del 2026 Sedici persone interpellate dall'inizio di ottobre Coinvolte polizia cantonale, Lausanne",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-truffe-falsi-banchieri-lausanna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lausanne nel Canton Vaud, teatro delle truffe dei falsi poliziotti e banchieri"
+      },
+      "datePublished": "2026-10-18T07:14:52+00:00",
+      "dateModified": "2026-10-18T07:14:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/truffe-falsi-banchieri-lausanna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

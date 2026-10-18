@@ -48,6 +48,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.hopital-nounours-chuv-lausanne.title': 'Lausanne: Hôpital des Nounours am CHUV am 14. und 15. November',
     'blog.article.hopital-nounours-chuv-lausanne.excerpt': 'Neue Ausgabe am CHUV am 14.',
     'blog.article.hopital-nounours-chuv-lausanne.imageAlt': 'CHUV in Lausanne beim Kinderanlass Hôpital des Nounours',
+    'blog.article.truffe-falsi-banchieri-lausanna.title': 'Falsche Polizisten: über 100 Befragte im Kanton Waadt',
+    'blog.article.truffe-falsi-banchieri-lausanna.excerpt': 'Über hundert Personen im Kanton Waadt seit Anfang 2026 befragt Sechzehn Personen seit Anfang Oktober befragt Beteiligt sind die Kantonspolizei, Lausanne',
+    'blog.article.truffe-falsi-banchieri-lausanna.imageAlt': 'Lausanne im Waadtland im Zusammenhang mit Betrug durch falsche Polizisten und Banker',
 };
 
 export default blogMetaCantonVdDe;

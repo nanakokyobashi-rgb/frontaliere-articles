@@ -171,4 +171,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'truffe-falsi-banchieri-lausanna',
+ category: 'novita',
+ date: '2026-10-18T07:14:52.238Z',
+ image: '/images/blog/article-truffe-falsi-banchieri-lausanna.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

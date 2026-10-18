@@ -48,6 +48,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.hopital-nounours-chuv-lausanne.title': 'Lausanne: Hôpital des Nounours at CHUV on 14 and 15 November',
     'blog.article.hopital-nounours-chuv-lausanne.excerpt': 'New edition at CHUV on 14 and 15 November Registration opens on 24 October at 8 Free participation upon registration Activities for children in the auditorium',
     'blog.article.hopital-nounours-chuv-lausanne.imageAlt': 'CHUV in Lausanne for the Hôpital des Nounours children\'s event',
+    'blog.article.truffe-falsi-banchieri-lausanna.title': 'Fake police officers: more than 100 questioned in Vaud',
+    'blog.article.truffe-falsi-banchieri-lausanna.excerpt': 'More than one hundred people questioned in Vaud since the beginning of 2026 Sixteen people questioned since the beginning of October Cantonal police, Lausanne',
+    'blog.article.truffe-falsi-banchieri-lausanna.imageAlt': 'Lausanne in Vaud amid scams involving fake police officers and bankers',
 };
 
 export default blogMetaCantonVdEn;

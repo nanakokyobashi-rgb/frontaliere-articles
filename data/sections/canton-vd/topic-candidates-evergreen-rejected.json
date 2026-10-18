@@ -39,6 +39,14 @@
     "canton-vd::https://www.ledauphine.com/economie/2026/10/17/un-batiment-de-la-zac-etoile-recompense-au-trophee-beton-pro-2026": {
       "section": "canton-vd",
       "ts": 1792293582701
+    },
+    "canton-vd::https://www.estrepublicain.fr/economie/2026/10/18/frontaliers-ca-tangue-pour-les-marques-horlogeres-du-groupe-de-luxe-lvmh": {
+      "section": "canton-vd",
+      "ts": 1792307001876
+    },
+    "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-155?s=5": {
+      "section": "canton-vd",
+      "ts": 1792307024558
     }
   }
 }

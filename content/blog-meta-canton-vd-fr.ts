@@ -48,6 +48,9 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.hopital-nounours-chuv-lausanne.title': 'Lausanne : Hôpital des Nounours au CHUV les 14 et 15 novembre',
     'blog.article.hopital-nounours-chuv-lausanne.excerpt': 'Nouvelle édition au CHUV les 14 et 15 novembre Inscriptions à partir du 24 octobre à 8 h Participation gratuite sur inscription Activités pour enfants',
     'blog.article.hopital-nounours-chuv-lausanne.imageAlt': 'CHUV de Lausanne pour l\'Hôpital des Nounours destiné aux enfants',
+    'blog.article.truffe-falsi-banchieri-lausanna.title': 'Faux policiers : plus de 100 personnes interpellées dans le canton de Vaud',
+    'blog.article.truffe-falsi-banchieri-lausanna.excerpt': 'Plus de cent personnes interpellées dans le canton de Vaud depuis le début de 2026 Seize personnes interpellées depuis le début du mois d’octobre Police',
+    'blog.article.truffe-falsi-banchieri-lausanna.imageAlt': 'Lausanne dans le canton de Vaud face aux escroqueries aux faux policiers et banquiers',
 };
 
 export default blogMetaCantonVdFr;
