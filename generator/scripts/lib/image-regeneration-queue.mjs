@@ -117,7 +117,8 @@ export function classifyImageRegenerationFailure(error) {
       providerIndex >= 0 && (index === 0 || providerIndex >= failureProviderIndexes[index - 1])
     ));
   const adaptable = structuredFailures.some((failure) => (
-    isStructuredVisualTextFailure(failure) || isVisualTextFailure(failure.reason)
+    isStructuredVisualTextFailure(failure)
+      || (!Object.hasOwn(failure, 'vision') && isVisualTextFailure(failure.reason))
   ));
   const terminal = completeLedger
     && structuredFailures.every(({ reason }) => /^vision gate rejected image:/i.test(reason))

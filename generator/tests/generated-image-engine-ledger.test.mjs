@@ -11,6 +11,7 @@ test('il rejection error conserva i flag vision booleani nel ledger provider', (
 
 test('il ledger prova completezza solo dopo l esaurimento della catena richiesta', () => {
   assert.match(ENGINE, /const attemptLimit = Number\.isInteger\(maxAttempts\)[\s\S]*?Math\.min\(maxAttempts, sequence\.length\)[\s\S]*?: sequence\.length;/);
-  assert.match(ENGINE, /for \(let attempt = 0; attempt < attemptLimit; attempt\+\+\)[\s\S]*?attemptedProviders\.push\(selectedProvider\);/);
+  assert.match(ENGINE, /providerLoop: for \(let attempt = 0; attempt < attemptLimit; attempt\+\+\)[\s\S]*?attemptedProviders\.push\(selectedProvider\);/);
+  assert.match(ENGINE, /photoCandidateLoop: while \(true\)[\s\S]*?if \(deadlineExpired\(deadlineAt\)\) break providerLoop;[\s\S]*?continue photoCandidateLoop;[\s\S]*?continue providerLoop;/);
   assert.match(ENGINE, /error\.imageProviderLedger = \{[\s\S]*?schema: 1,[\s\S]*?complete: attemptedProviders\.length === sequence\.length,[\s\S]*?expectedProviders: \[\.\.\.sequence\],[\s\S]*?attemptedProviders: \[\.\.\.attemptedProviders\],[\s\S]*?\};/);
 });

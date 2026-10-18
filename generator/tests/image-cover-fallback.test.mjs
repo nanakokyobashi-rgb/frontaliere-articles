@@ -319,6 +319,19 @@ test('i flag vision strutturati governano adattamento e terminalità senza dipen
     vision: { contains_recognizable_face: false },
   }];
   assert.equal(classifyImageRegenerationFailure(structuredNegative).retryable, true, 'il flag strutturato prevale sulla nota');
+
+  const structuredTerminalWithGenericNote = new Error('All image providers failed');
+  structuredTerminalWithGenericNote.imageProviderLedger = ledger;
+  structuredTerminalWithGenericNote.failures = [{
+    provider: 'openai-codex',
+    reason: 'vision gate rejected image: forbidden content',
+    vision: { contains_text: false, contains_logo: false, contains_recognizable_face: true },
+  }];
+  assert.equal(
+    classifyImageRegenerationFailure(structuredTerminalWithGenericNote).retryable,
+    false,
+    'una nota generica non scavalca i flag strutturati non adattabili',
+  );
 });
 
 test('un flag strutturato text/logo persiste il retry hint anche con note generiche', () => {

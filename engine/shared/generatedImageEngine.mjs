@@ -1430,7 +1430,7 @@ export async function generateImageFromSpec(spec, {
   const failures = [];
   const attemptedProviders = [];
   const rejectedPhotoSources = new Set();
-  for (let attempt = 0; attempt < attemptLimit; attempt++) {
+  providerLoop: for (let attempt = 0; attempt < attemptLimit; attempt++) {
     assertBeforeDeadline(deadlineAt, 'image generation');
     const selectedProvider = sequence[attempt];
     attemptedProviders.push(selectedProvider);
@@ -1457,7 +1457,7 @@ export async function generateImageFromSpec(spec, {
     const rawPath = path.join(destinationDir, `.${finalAssetId}.${attempt}.raw`);
     onProviderAttempt?.({ provider: selectedProvider, attempt: attempt + 1, assetId: finalAssetId, status: 'started', kind: recordKind });
     let photoCandidateAttempts = 0;
-    while (true) {
+    photoCandidateLoop: while (true) {
       let attemptedPhotoSource = '';
       try {
       const timeoutMs = timeoutForDeadline(deadlineAt, providerTimeoutMs(selectedProvider, providerTimeouts));
@@ -1610,13 +1610,16 @@ export async function generateImageFromSpec(spec, {
         });
         fs.rmSync(rawPath, { force: true });
         fs.rmSync(finalPath, { force: true });
-        if (deadlineExpired(deadlineAt)) break;
+        if (deadlineExpired(deadlineAt)) break providerLoop;
         if (recordKind === LICENSED_PHOTO_KIND && attemptedPhotoSource && photoCandidateAttempts < 19) {
           rejectedPhotoSources.add(attemptedPhotoSource);
           photoCandidateAttempts += 1;
-          continue;
+          continue photoCandidateLoop;
         }
-        break;
+        // A provider failure exhausts only this provider. Advance through the
+        // governed chain so terminality is possible only after every expected
+        // provider has produced structured, non-adaptable vision evidence.
+        continue providerLoop;
       }
     }
   }
