@@ -13479,6 +13479,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.frontaliere-tasse-dopo-licenziamento.title': 'Grenzüberschreitende Entlassung 2026: Steueransprüche und Beiträge',
     'blog.article.frontaliere-tasse-dopo-licenziamento.excerpt': 'Die neue Frontalieri-Vereinbarung gilt ab dem 1.',
     'blog.article.frontaliere-tasse-dopo-licenziamento.imageAlt': 'Grenzgänger prüft Arbeitsunterlagen nahe der Grenze zum Tessin',
+    'blog.article.live-arconatese-varese-caronno.title': 'Arconatese-varese, Regie: caronno pertusella',
+    'blog.article.live-arconatese-varese-caronno.excerpt': 'Achter Tag der Serie D, Gruppe D. (Varese)',
+    'blog.article.live-arconatese-varese-caronno.imageAlt': 'Partie Arconatese gegen Varese in Caronno Pertusella',
 };
 
 export default blogMetaDe;

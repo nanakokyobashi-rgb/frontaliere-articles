@@ -10113,26 +10113,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/ticino/politica/1957258/val-colla-disagi-fino-al-2028-lugano-esclude-finanziamenti-straordinari": {
-      "section": "frontaliere",
-      "ts": 1792162172179
-    },
-    "frontaliere::https://www.rsi.ch/s/4161940": {
-      "section": "frontaliere",
-      "ts": 1792162181717
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/dallemergenza-regia-al-cuore-di-masnago-lanalisi-e-i-ricordi-di-marco-passera/2709283": {
-      "section": "frontaliere",
-      "ts": 1792162384946
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/solbiatese-ora-serve-continuita-al-chinetti-arriva-il-temuto-lentigione/2710426": {
-      "section": "frontaliere",
-      "ts": 1792162523204
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/kastritis-siamo-a-fianco-di-amedeo-a-trento-fondamentali-i-rimbalzi/2710186": {
-      "section": "frontaliere",
-      "ts": 1792162680014
-    },
     "frontaliere::https://www.tio.ch/svizzera/economia/1957324/denner-sconto-salari-aumenti-dipendenti-rinuncia": {
       "section": "frontaliere",
       "ts": 1792171021345
@@ -10400,6 +10380,10 @@
     "svizzera::https://www.tio.ch/dal-mondo/cronaca/1957546/recinzione-aeroporto-sfondata-lipsia-polizia": {
       "section": "svizzera",
       "ts": 1792333343276
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/cinquina-varese-nel-ricordo-di-lele-andena-arconatese-battuta-5-1/2711380": {
+      "section": "frontaliere",
+      "ts": 1792337556381
     }
   }
 }

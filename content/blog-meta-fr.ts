@@ -13482,6 +13482,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.frontaliere-tasse-dopo-licenziamento.title': 'Licenciement frontalier 2026 : droits fiscaux et cotisations',
     'blog.article.frontaliere-tasse-dopo-licenziamento.excerpt': 'Le nouvel accord frontalier est valable à partir du 1er janvier 2024.',
     'blog.article.frontaliere-tasse-dopo-licenziamento.imageAlt': 'Un frontalier vérifie des documents de travail près de la frontière tessinoise',
+    'blog.article.live-arconatese-varese-caronno.title': 'Arconatese-varese, réalisé par Caronno pertusella',
+    'blog.article.live-arconatese-varese-caronno.excerpt': 'Huitième journée de Serie D, Groupe D Le Varese défie Arconatese à Caronno Pertusella Les rouges et blancs cherchent une continuité après la dernière victoire Le match est',
+    'blog.article.live-arconatese-varese-caronno.imageAlt': 'Match Arconatese-Varese à Caronno Pertusella',
 };
 
 export default blogMetaFr;

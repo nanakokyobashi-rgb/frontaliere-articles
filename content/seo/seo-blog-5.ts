@@ -111782,6 +111782,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-live-arconatese-varese-caronno': {
+    title: 'Arconatese-varese, diretta da caronno pertusella',
+    description: 'Ottava giornata di Serie D, Girone D Il Varese sfida l\'Arconatese a Caronno Pertusella I biancorossi cercano continuità dopo la vittoria scorsa La gara è',
+    keywords: 'frontalieri, ticino, svizzera, italia, arconatese-varese, diretta, caronno, pertusella',
+    ogTitle: 'Arconatese-Varese: diretta da Caronno Pertusella',
+    ogDescription: 'Ottava giornata di Serie D, Girone D Il Varese sfida l\'Arconatese a Caronno Pertusella I biancorossi cercano continuità dopo la vittoria scorsa La gara è',
+    canonicalPath: '/articoli-frontaliere/live-arconatese-varese-caronno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Arconatese-varese, diretta da caronno pertusella",
+      "description": "Ottava giornata di Serie D, Girone D Il Varese sfida l'Arconatese a Caronno Pertusella I biancorossi cercano continuità dopo la vittoria scorsa La gara è",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-live-arconatese-varese-caronno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "La sfida Arconatese-Varese a Caronno Pertusella"
+      },
+      "datePublished": "2026-10-18T15:47:28+00:00",
+      "dateModified": "2026-10-18T15:47:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/live-arconatese-varese-caronno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
