@@ -13479,6 +13479,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.cassano-indagine-schianto.title': 'Varese, morte dans un accident : son ex accusé de féminicide',
     'blog.article.cassano-indagine-schianto.excerpt': 'Pierina Buffon est morte dans la collision sur le périphérique Fulvio Ielmini fait également l’objet d’une enquête pour féminicide Les carabiniers envisagent un accident provoqué',
     'blog.article.cassano-indagine-schianto.imageAlt': 'Route au Tessin dans la lumière du matin, image symbolique pour une actualité locale',
+    'blog.article.frontaliere-tasse-dopo-licenziamento.title': 'Licenciement frontalier 2026 : droits fiscaux et cotisations',
+    'blog.article.frontaliere-tasse-dopo-licenziamento.excerpt': 'Le nouvel accord frontalier est valable à partir du 1er janvier 2024.',
+    'blog.article.frontaliere-tasse-dopo-licenziamento.imageAlt': 'Un frontalier vérifie des documents de travail près de la frontière tessinoise',
 };
 
 export default blogMetaFr;

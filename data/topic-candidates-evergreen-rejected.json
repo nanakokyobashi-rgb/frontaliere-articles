@@ -1620,6 +1620,30 @@
       "firstSeenAt": "2026-10-18T11:26:44.851Z",
       "lastValidatedAt": "2026-10-18T11:26:44.851Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere nascita figlio anagrafe pratiche 2026 simulazione pratica",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T14:06:22.385Z",
+      "lastValidatedAt": "2026-10-18T14:06:22.385Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere nascita figlio anagrafe pratiche 2026 errori comuni",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T14:08:52.656Z",
+      "lastValidatedAt": "2026-10-18T14:08:52.656Z",
+      "expiresAt": null
     }
   ],
   "strikes": [

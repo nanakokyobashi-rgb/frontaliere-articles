@@ -45422,6 +45422,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'frontaliere-tasse-dopo-licenziamento',
+ category: 'pratico',
+ date: '2026-10-18T14:15:04.266Z',
+ image: '/images/blog/article-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica.webp',
+ hasCalculator: true,
+ articleType: 'evergreen',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

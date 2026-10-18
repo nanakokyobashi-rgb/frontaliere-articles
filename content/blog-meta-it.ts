@@ -13478,6 +13478,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.cassano-indagine-schianto.title': 'Varese, morta in incidente: ex accusato di femminicidio',
     'blog.article.cassano-indagine-schianto.excerpt': 'Pierina Buffon è morta nello scontro sulla tangenziale Fulvio Ielmini è indagato anche per femminicidio I carabinieri ipotizzano uno schianto provocato',
     'blog.article.cassano-indagine-schianto.imageAlt': 'Strada del Ticino in luce mattutina, immagine simbolica per una notizia di cronaca locale',
+    'blog.article.frontaliere-tasse-dopo-licenziamento.title': 'Licenziamento frontaliere 2026: diritti fiscali e contributi',
+    'blog.article.frontaliere-tasse-dopo-licenziamento.excerpt': 'Il Nuovo Accordo Frontalieri vale dal 1° gennaio 2024.',
+    'blog.article.frontaliere-tasse-dopo-licenziamento.imageAlt': 'Frontaliere esamina documenti di lavoro vicino al confine del Ticino',
 };
 
 export default blogMetaIt;
