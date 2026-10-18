@@ -13477,6 +13477,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.cassano-indagine-schianto.title': 'Varese, woman dies in accident: ex accused of femicide',
     'blog.article.cassano-indagine-schianto.excerpt': 'Pierina Buffon died in the collision Fulvio Ielmini is also under investigation for femicide The Carabinieri suspect the crash was deliberate',
     'blog.article.cassano-indagine-schianto.imageAlt': 'Ticino road in morning light, a symbolic image for a local news report',
+    'blog.article.frontaliere-tasse-dopo-licenziamento.title': 'Border redundancy 2026: tax rights and contributions',
+    'blog.article.frontaliere-tasse-dopo-licenziamento.excerpt': 'The New Cross-Border Commuter Agreement is valid from 1 January 2024.',
+    'blog.article.frontaliere-tasse-dopo-licenziamento.imageAlt': 'Cross-border worker checks employment papers near the Ticino border',
 };
 
 export default blogMetaEn;

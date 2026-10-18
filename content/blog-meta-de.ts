@@ -13476,6 +13476,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.cassano-indagine-schianto.title': 'Varese, bei einem Unfall gestorben: Ex wegen Femizids beschuldigt',
     'blog.article.cassano-indagine-schianto.excerpt': 'Pierina Buffon starb bei dem Zusammenstoß auf der Umgehungsstraße Gegen Fulvio Ielmini wird auch wegen Femizids ermittelt Die Carabinieri vermuten einen herbeigeführten Zusammenstoß',
     'blog.article.cassano-indagine-schianto.imageAlt': 'Strasse im Tessin im Morgenlicht, symbolisches Bild für eine lokale Nachricht',
+    'blog.article.frontaliere-tasse-dopo-licenziamento.title': 'Grenzüberschreitende Entlassung 2026: Steueransprüche und Beiträge',
+    'blog.article.frontaliere-tasse-dopo-licenziamento.excerpt': 'Die neue Frontalieri-Vereinbarung gilt ab dem 1.',
+    'blog.article.frontaliere-tasse-dopo-licenziamento.imageAlt': 'Grenzgänger prüft Arbeitsunterlagen nahe der Grenze zum Tessin',
 };
 
 export default blogMetaDe;
