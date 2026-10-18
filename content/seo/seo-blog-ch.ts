@@ -107471,6 +107471,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-apprendistato-zurigo-guida-pratica': {
+    title: 'Apprendistato a Zurigo: posto, contratto, retribuzione e maturità',
+    description: 'Guida pratica per l\'apprendistato nel Canton Zurigo: come trovare il posto, verificare il contratto, leggere la retribuzione e inquadrare la maturità',
+    keywords: 'frontalieri, ticino, svizzera, italia, apprendistato, zurigo, posto, contratto',
+    ogTitle: 'Apprendistato a Zurigo: posto, contratto, retribuzione e maturità',
+    ogDescription: 'Una mappa pratica per orientarsi nell\'apprendistato nel Canton Zurigo: dalla ricerca del posto di tirocinio alla verifica del contratto, dalla lettura della busta paga con i contributi sociali alla maturità professionale. Scopri i passaggi chiave',
+    canonicalPath: '/articoli-svizzera/apprendistato-zurigo-guida-pratica/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Apprendistato a Zurigo: posto, contratto, retribuzione e maturità",
+      "description": "Guida pratica per l'apprendistato nel Canton Zurigo: come trovare il posto, verificare il contratto, leggere la retribuzione e inquadrare la maturità",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/apprendistato-formazione-professionale-canton-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Giovane apprendista in un'officina svizzera a Zurigo che esamina un contratto"
+      },
+      "datePublished": "2026-10-18T19:10:16+00:00",
+      "dateModified": "2026-10-18T19:10:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/apprendistato-zurigo-guida-pratica/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

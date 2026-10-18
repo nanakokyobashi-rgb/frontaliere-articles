@@ -8507,6 +8507,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso.title': 'PS sostiene tre iniziative e documento lavoro dignitoso',
     'blog.article.ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso.excerpt': 'A Thun il PS ha sostenuto tre iniziative popolari Baume-Schneider ha parlato del finanziamento della 13ª AVS Il PS chiede orari più brevi e salari più alti',
     'blog.article.ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso.imageAlt': 'Immagine editoriale relativa a: PS sostiene tre iniziative e documento lavoro dignitoso',
+    'blog.article.apprendistato-zurigo-guida-pratica.title': 'Apprendistato a Zurigo: posto, contratto, retribuzione e maturità',
+    'blog.article.apprendistato-zurigo-guida-pratica.excerpt': 'Guida pratica per l\'apprendistato nel Canton Zurigo: ricerca del posto, verifica del contratto, lettura della retribuzione e maturità professionale.',
+    'blog.article.apprendistato-zurigo-guida-pratica.imageAlt': 'Giovane apprendista in un\'officina svizzera a Zurigo che esamina un contratto',
 };
 
 export default blogMetaChIt;

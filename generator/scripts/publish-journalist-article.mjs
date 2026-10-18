@@ -369,6 +369,7 @@ async function resolveHeroImage(data, doc) {
   if (generatedPath) {
     console.error(`[cover] article=${data.id} source=engine reason=generated`);
     delete data._imageGenerationFailureReason;
+    delete data._imageGenerationFailureDisposition;
     return { source: 'generated-engine', path: generatedPath, provenance: 'generated' };
   }
 
@@ -378,6 +379,7 @@ async function resolveHeroImage(data, doc) {
     reason: data._imageGenerationFailureReason || 'engine-failed',
   });
   delete data._imageGenerationFailureReason;
+  delete data._imageGenerationFailureDisposition;
   return fallback;
 }
 
