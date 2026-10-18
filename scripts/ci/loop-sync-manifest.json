@@ -4427,9 +4427,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-04.yml",
       "mode": "identical",
       "baseline": {
-        "site": "e3f69704e6a39ad6",
-        "corpus": "e3f69704e6a39ad6",
-        "alignedAt": "2026-10-16"
+        "site": "4d71070d6a502ba8",
+        "corpus": "4d71070d6a502ba8",
+        "alignedAt": "2026-10-18"
       }
     },
     {
@@ -4597,9 +4597,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-21.yml",
       "mode": "identical",
       "baseline": {
-        "site": "9d599e9ebc1d6355",
-        "corpus": "9d599e9ebc1d6355",
-        "alignedAt": "2026-10-16"
+        "site": "165a0d6facbabe70",
+        "corpus": "165a0d6facbabe70",
+        "alignedAt": "2026-10-18"
       }
     },
     {
@@ -4638,9 +4638,9 @@
       "mode": "identical",
       "reason": "La baseline dell'allineamento del 2026-10-15 registra lo stesso blob sui due lati (cbec97b9b6bc154b); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "d52479f628895577",
-        "corpus": "d52479f628895577",
-        "alignedAt": "2026-10-17"
+        "site": "61cbc67b7245431e",
+        "corpus": "61cbc67b7245431e",
+        "alignedAt": "2026-10-18"
       }
     },
     {
