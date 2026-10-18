@@ -177,10 +177,10 @@ jobs:
       - name: Checkout (resolve)
         uses: actions/checkout@v7
         with:
-          # Normal cover-drain dispatches carry article ids, not a source
-          # commit: resolve the live dispatch ref. workflow_run and bounded
-          # replays remain pinned to the exact source revision.
-          ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || (github.event_name == 'workflow_dispatch' && github.ref) || github.sha }}
+          # Normal non-bootstrap cover-drain dispatches carry article ids, not
+          # a source commit: resolve the live dispatch ref. workflow_run,
+          # bounded replays, and bootstrap keep their exact source revision.
+          ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || (github.event_name == 'workflow_dispatch' && inputs.bootstrap != true && github.ref) || github.sha }}
           fetch-depth: 2
           persist-credentials: false
 
@@ -457,9 +457,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
-          # Keep normal cover-drain dispatches on the live ref; only a
-          # workflow_run or bounded replay may pin an older source commit.
-          ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || (github.event_name == 'workflow_dispatch' && github.ref) || github.sha }}
+          # Keep normal non-bootstrap cover-drain dispatches on the live ref;
+          # workflow_run, bounded replay, and bootstrap may pin an older
+          # source commit.
+          ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || (github.event_name == 'workflow_dispatch' && inputs.bootstrap != true && github.ref) || github.sha }}
           # resolvePublishedReleaseCommit() verifica la release API con
           # merge-base: una release precedente puo' essere fuori dai due
           # commit che actions/checkout scarica di default.
@@ -781,7 +782,7 @@ jobs:
           # behavior: a stale pinned source is redispatched by the replay
           # logic above, never silently moved here.
           normal_dispatch='false'
-          if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -z "${SOURCE_COMMIT:-}" ]; then
+          if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -z "${SOURCE_COMMIT:-}" ] && [ "$BOOTSTRAP" != 'true' ]; then
             normal_dispatch='true'
           fi
           if [ "$normal_dispatch" != 'true' ]; then
