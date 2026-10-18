@@ -17283,6 +17283,11 @@ function isQualityRejectError(e) {
   // registrazione e' stata interrotta a meta' e nessun errore di questo run
   // e' piu' un differimento pulito.
   if (isRegisterLockError(e) || isRegisterLockHeld()) return false;
+  // An available verifier that rejects every catalog image is a permanent
+  // candidate-quality result: skip this headline and try the next candidate.
+  // Provider/verifier outages remain retryable infrastructure errors and do
+  // not set this explicit marker.
+  if (e.imageQualityFailure === true) return true;
   if (e.qualityReject === true || e.topicGateAbort === true) return true;
   // `troppo corto` covers the whole thin-content class (too-short IT body
   // after the retry+expand ladder, too-short char count, too-short locale
