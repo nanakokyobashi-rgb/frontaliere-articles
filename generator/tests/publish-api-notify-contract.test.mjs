@@ -49,6 +49,7 @@ test('Notify the site emette il payload bounded con il contratto completo', () =
   assert.match(normalizedNotifyStep, /github\.event_name == 'push' \|\| \(github\.event_name == 'workflow_dispatch' && inputs\.source_commit != ''\)/);
   assert.match(NOTIFY_STEP, /continue-on-error: true/);
   assert.match(NOTIFY_STEP, /PUBLISHED_SOURCE_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(NOTIFY_STEP, /published_source_commit="\$\{PUBLISH_API_SOURCE_COMMIT:-\$PUBLISHED_SOURCE_COMMIT\}"/);
   assert.match(NOTIFY_STEP, /SOURCE_EVENT: \$\{\{ github\.event_name \}\}/);
   assert.match(PAYLOAD_CONSTRUCTION, /jq -cn/);
   assert.match(PAYLOAD_CONSTRUCTION, /--argjson schema_version 1/);
@@ -60,7 +61,7 @@ test('Notify the site emette il payload bounded con il contratto completo', () =
     ['source_workflow_path', ''],
     ['source_run_id', 'GITHUB_RUN_ID'],
     ['source_run_attempt', 'GITHUB_RUN_ATTEMPT'],
-    ['source_sha', 'PUBLISHED_SOURCE_COMMIT'],
+    ['source_sha', 'published_source_commit'],
     ['source_branch', 'GITHUB_REF_NAME'],
     ['source_event', 'SOURCE_EVENT'],
   ]) {
