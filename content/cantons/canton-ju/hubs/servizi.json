@@ -4,22 +4,27 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T10:55:16.337Z",
-  "contentHash": "fffb1dad586eb56774ec761efce1aa78d3266ac94cde9afa9d03bd535915b22a",
+  "updatedAt": "2026-10-18T15:52:30.685Z",
+  "contentHash": "74514861e0c386524ffd1b9cb6366f6139889bca3b252235c7728cf1ad728832",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-11T10:51:47.772Z",
+      "updatedAt": "2026-10-18T08:53:01.888Z",
       "keyFacts": 1
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-17T23:04:43.613Z",
+      "updatedAt": "2026-10-18T10:29:03.820Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-18T04:48:36.783Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T19:45:28.268Z",
+      "updatedAt": "2026-10-18T09:56:00.107Z",
       "keyFacts": 0
     }
   ],
@@ -51,7 +56,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-11T10:51:47.772Z"
+          "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -91,7 +96,21 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-17T23:04:43.613Z"
+          "updatedAt": "2026-10-18T10:29:03.820Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "8 °C",
+              "detail": "oggi da 8 a 9 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-18T04:48:36.783Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -109,7 +128,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -159,7 +178,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-18T15:52:30.685Z"
     },
     "en": {
       "canton": "JU",
@@ -188,7 +207,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-11T10:51:47.772Z"
+          "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -228,7 +247,21 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-17T23:04:43.613Z"
+          "updatedAt": "2026-10-18T10:29:03.820Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "8 °C",
+              "detail": "today from 8 to 9 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-18T04:48:36.783Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -246,7 +279,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -292,7 +325,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-18T15:52:30.685Z"
     },
     "de": {
       "canton": "JU",
@@ -321,7 +354,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-11T10:51:47.772Z"
+          "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -361,7 +394,21 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-17T23:04:43.613Z"
+          "updatedAt": "2026-10-18T10:29:03.820Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "8 °C",
+              "detail": "heute 8 bis 9 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-18T04:48:36.783Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -379,7 +426,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -425,7 +472,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-18T15:52:30.685Z"
     },
     "fr": {
       "canton": "JU",
@@ -454,7 +501,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-11T10:51:47.772Z"
+          "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -494,7 +541,21 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-17T23:04:43.613Z"
+          "updatedAt": "2026-10-18T10:29:03.820Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "8 °C",
+              "detail": "aujourd’hui de 8 à 9 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-18T04:48:36.783Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -512,7 +573,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -554,7 +615,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-18T15:52:30.685Z"
     }
   }
 }

@@ -4,22 +4,22 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-18T03:12:27.140Z",
-  "contentHash": "fbdc19dc46698fb72a8e6cf99af5ae9cde601f8595a7c7359307361465268709",
+  "updatedAt": "2026-10-18T15:52:30.685Z",
+  "contentHash": "c2e3b1a4ff4b0d9100521fc0b757e17f89e0b38d8507f57d1415cdd3eabb4d77",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-16T23:59:59.000Z",
+      "updatedAt": "2026-10-17T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-17T21:02:52.166Z",
+      "updatedAt": "2026-10-18T11:46:52.571Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T19:45:28.268Z",
+      "updatedAt": "2026-10-18T09:56:00.107Z",
       "keyFacts": 0
     }
   ],
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Saint-Gingolph, settimana conclusa: 16 ottobre 2026"
+          "note": "Saint-Gingolph, settimana conclusa: 17 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "18",
-          "note": "segnalazioni aggiornate: 17 ottobre 2026"
+          "note": "segnalazioni aggiornate: 18 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "24",
-          "note": "segnalazioni aggiornate: 17 ottobre 2026"
+          "note": "segnalazioni aggiornate: 18 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 10 ottobre 2026 – 16 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 11 ottobre 2026 – 17 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Saint-Gingolph",
@@ -59,20 +59,20 @@
               "url": "/traffico-dogane/saint-gingolph/oggi/"
             },
             {
-              "label": "Le Châtelard-Vallorcine",
-              "value": "0,1 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/le-chatelard-vallorcine/oggi/"
-            },
-            {
               "label": "Morgins-Châtel (Pas de Morgins)",
-              "value": "0,1 min",
+              "value": "0 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/morgins-chatel/oggi/"
             },
             {
+              "label": "Le Châtelard-Vallorcine",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/le-chatelard-vallorcine/oggi/"
+            },
+            {
               "label": "Traforo del Gran San Bernardo",
-              "value": "0,2 min",
+              "value": "0,1 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/traforo-del-gran-san-bernardo/oggi/"
             },
@@ -85,7 +85,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-17T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -142,7 +142,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-17T21:02:52.166Z"
+          "updatedAt": "2026-10-18T11:46:52.571Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -180,7 +180,7 @@
               "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-in-funzione-il-nuovo-impianto-semaforico-di-via-trabucchi.html"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -250,7 +250,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-18T03:12:27.140Z"
+      "updatedAt": "2026-10-18T15:52:30.685Z"
     },
     "en": {
       "canton": "VS",
@@ -261,24 +261,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Saint-Gingolph, week ending 16 October 2026"
+          "note": "Saint-Gingolph, week ending 17 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "18",
-          "note": "reports as of 17 October 2026"
+          "note": "reports as of 18 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "24",
-          "note": "reports as of 17 October 2026"
+          "note": "reports as of 18 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 10 October 2026 to 16 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 11 October 2026 to 17 October 2026, fastest first.",
           "items": [
             {
               "label": "Saint-Gingolph",
@@ -287,20 +287,20 @@
               "url": "/en/border-wait/saint-gingolph/today/"
             },
             {
-              "label": "Le Châtelard-Vallorcine",
-              "value": "0.1 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/le-chatelard-vallorcine/today/"
-            },
-            {
               "label": "Morgins-Châtel (Pas de Morgins)",
-              "value": "0.1 min",
+              "value": "0 min",
               "detail": "47 readings",
               "url": "/en/border-wait/morgins-chatel/today/"
             },
             {
+              "label": "Le Châtelard-Vallorcine",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/le-chatelard-vallorcine/today/"
+            },
+            {
               "label": "Traforo del Gran San Bernardo",
-              "value": "0.2 min",
+              "value": "0.1 min",
               "detail": "47 readings",
               "url": "/en/border-wait/traforo-del-gran-san-bernardo/today/"
             },
@@ -313,7 +313,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-17T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -370,7 +370,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-17T21:02:52.166Z"
+          "updatedAt": "2026-10-18T11:46:52.571Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -408,7 +408,7 @@
               "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-in-funzione-il-nuovo-impianto-semaforico-di-via-trabucchi.html"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -478,7 +478,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-18T03:12:27.140Z"
+      "updatedAt": "2026-10-18T15:52:30.685Z"
     },
     "de": {
       "canton": "VS",
@@ -489,24 +489,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Saint-Gingolph, Woche bis 16. Oktober 2026"
+          "note": "Saint-Gingolph, Woche bis 17. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "18",
-          "note": "Meldungen vom 17. Oktober 2026"
+          "note": "Meldungen vom 18. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "24",
-          "note": "Meldungen vom 17. Oktober 2026"
+          "note": "Meldungen vom 18. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 10. Oktober 2026 bis 16. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 11. Oktober 2026 bis 17. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Saint-Gingolph",
@@ -515,20 +515,20 @@
               "url": "/de/wartezeit-grenze/saint-gingolph/heute/"
             },
             {
-              "label": "Le Châtelard-Vallorcine",
-              "value": "0.1 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/le-chatelard-vallorcine/heute/"
-            },
-            {
               "label": "Morgins-Châtel (Pas de Morgins)",
-              "value": "0.1 Min.",
+              "value": "0 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/morgins-chatel/heute/"
             },
             {
+              "label": "Le Châtelard-Vallorcine",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/le-chatelard-vallorcine/heute/"
+            },
+            {
               "label": "Traforo del Gran San Bernardo",
-              "value": "0.2 Min.",
+              "value": "0.1 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/traforo-del-gran-san-bernardo/heute/"
             },
@@ -541,7 +541,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-17T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -598,7 +598,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-17T21:02:52.166Z"
+          "updatedAt": "2026-10-18T11:46:52.571Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -636,7 +636,7 @@
               "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-in-funzione-il-nuovo-impianto-semaforico-di-via-trabucchi.html"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -706,7 +706,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-18T03:12:27.140Z"
+      "updatedAt": "2026-10-18T15:52:30.685Z"
     },
     "fr": {
       "canton": "VS",
@@ -717,24 +717,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Saint-Gingolph, semaine jusqu’au 16 octobre 2026"
+          "note": "Saint-Gingolph, semaine jusqu’au 17 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "18",
-          "note": "signalements au 17 octobre 2026"
+          "note": "signalements au 18 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "24",
-          "note": "signalements au 17 octobre 2026"
+          "note": "signalements au 18 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 10 octobre 2026 au 16 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 11 octobre 2026 au 17 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Saint-Gingolph",
@@ -743,20 +743,20 @@
               "url": "/fr/temps-attente-douane/saint-gingolph/aujourd-hui/"
             },
             {
-              "label": "Le Châtelard-Vallorcine",
-              "value": "0,1 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/le-chatelard-vallorcine/aujourd-hui/"
-            },
-            {
               "label": "Morgins-Châtel (Pas de Morgins)",
-              "value": "0,1 min",
+              "value": "0 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/morgins-chatel/aujourd-hui/"
             },
             {
+              "label": "Le Châtelard-Vallorcine",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/le-chatelard-vallorcine/aujourd-hui/"
+            },
+            {
               "label": "Traforo del Gran San Bernardo",
-              "value": "0,2 min",
+              "value": "0,1 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/traforo-del-gran-san-bernardo/aujourd-hui/"
             },
@@ -769,7 +769,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-17T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -826,7 +826,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-17T21:02:52.166Z"
+          "updatedAt": "2026-10-18T11:46:52.571Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -864,7 +864,7 @@
               "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-in-funzione-il-nuovo-impianto-semaforico-di-via-trabucchi.html"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -934,7 +934,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-18T03:12:27.140Z"
+      "updatedAt": "2026-10-18T15:52:30.685Z"
     }
   }
 }

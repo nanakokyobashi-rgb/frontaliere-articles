@@ -153,14 +153,12 @@ test('i due wrapper non divergono su tentativi e backoff', () => {
 });
 
 /**
- * I punti `npx` dei workflow ANCORA senza wrapper, al 2026-08-09.
+ * I punti `npx` dei workflow ANCORA senza wrapper.
  *
- * Non e' un condono ed e' volutamente scomodo da tenere: questa PR possiede
- * `publish-api.yml` e basta, e wrappare i workflow di altri qui dentro
- * significherebbe metterli nel grafo delle collisioni per una riga a testa.
- * Il valore del registro non e' assolvere questi quattro: e' che il quinto —
- * un workflow nuovo copiato da uno vecchio, che e' esattamente come tornano i
- * `npm ci` nudi — non possa entrare in silenzio.
+ * Non e' un condono ed e' volutamente scomodo da tenere: ogni voce deve avere
+ * una issue e una ragione concreta. Il valore del registro non e' assolvere
+ * questi punti: e' che un workflow nuovo copiato da uno vecchio, che e'
+ * esattamente come tornano i `npm ci` nudi, non possa entrare in silenzio.
  *
  * Chiave: `<file> :: <comando a partire da npx>`.
  */

@@ -13480,6 +13480,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.frontaliere-tasse-dopo-licenziamento.title': 'Border redundancy 2026: tax rights and contributions',
     'blog.article.frontaliere-tasse-dopo-licenziamento.excerpt': 'The New Cross-Border Commuter Agreement is valid from 1 January 2024.',
     'blog.article.frontaliere-tasse-dopo-licenziamento.imageAlt': 'Cross-border worker checks employment papers near the Ticino border',
+    'blog.article.live-arconatese-varese-caronno.title': 'Arconatese-varese, directed by caronno pertusella',
+    'blog.article.live-arconatese-varese-caronno.excerpt': 'Eighth day of Serie D, Group D The Varese challenges Arconatese in Caronno Pertusella The red and whites are looking for continuity after the last victory The match is',
+    'blog.article.live-arconatese-varese-caronno.imageAlt': 'Arconatese-Varese match in Caronno Pertusella',
 };
 
 export default blogMetaEn;

@@ -2742,9 +2742,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /WORKFLOW_RUN_COVER_DRAIN_COMMIT_MESSAGE: \$\{\{ github\.event\.workflow_run\.head_commit\.message \}\}/);
   assert.match(wf, /if \[ "\$EVENT_NAME" = 'push' \] \|\| \{ \[ "\$EVENT_NAME" = 'workflow_run' \] && \[ "\$WORKFLOW_RUN_EVENT" = 'push' \]; \}; then/);
   assert.equal(
-    (wf.match(/ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_commit \|\| github\.sha \}\}/g) ?? []).length,
+    (wf.match(/ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_commit \|\| \(github\.event_name == 'workflow_dispatch' && inputs\.bootstrap != true && github\.ref\) \|\| github\.sha \}\}/g) ?? []).length,
     2,
-    'resolve e publish devono checkoutare la source_commit del replay',
+    'resolve e publish devono distinguere dispatch live, bootstrap e source_commit del replay',
   );
   assert.match(wf, /id: replay_freshness[\s\S]*gh api "repos\/\$REPO\/git\/ref\/heads\/main"/);
   assert.match(wf, /if: steps\.replay_freshness\.outputs\.fresh == 'true'/);
@@ -2805,6 +2805,26 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(read('scripts/publish-section-pages.mjs'), /EXPECTED_MAIN_HEAD non contiene una SHA completa/);
   const publishCheckout = wf.slice(wf.indexOf('      - name: Checkout\n', wf.indexOf('\n  publish:\n')));
   assert.match(publishCheckout, /fetch-depth: 0/);
+  const liveRetryLoop = wf.slice(
+    wf.indexOf('          for publish_attempt in 1 2 3; do'),
+    wf.indexOf('      - name: Release bootstrap R2 gate'),
+  );
+  const liveCheckout = liveRetryLoop.indexOf('git checkout --detach origin/main');
+  const liveKillSwitch = liveRetryLoop.indexOf('if [ -f .github/FAST_PUBLISH_DISABLED ]');
+  const liveDependencyRefresh = liveRetryLoop.indexOf('bash scripts/lib/npm-ci-retry.sh');
+  const liveEnsure = liveRetryLoop.indexOf('scripts/ci/ensure-host-shell-assets.mjs');
+  const liveRender = liveRetryLoop.indexOf('scripts/publish-section-pages.mjs');
+  assert.ok(
+    liveCheckout >= 0
+      && liveKillSwitch > liveCheckout
+      && liveDependencyRefresh > liveKillSwitch
+      && liveEnsure > liveDependencyRefresh
+      && liveRender > liveEnsure,
+    'il retry live rilegge il kill switch, riallinea le dipendenze e aggiorna la CDN dopo ogni checkout e prima del render',
+  );
+  assert.match(liveRetryLoop, /build_publish_args "\$attempt_dry"/);
+  assert.match(wf, /INSTALLED_DEPENDENCY_LOCK_HASH/);
+  assert.match(liveRetryLoop, /if RETRY_CMD_ATTEMPTS=2 bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/);
   assert.match(wf, /PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
   assert.match(wf, /PUSH_AFTER: \$\{\{ needs\.resolve\.outputs\.push_after \}\}/);
   const bootstrapReplay = wf.slice(wf.indexOf('  replay-api-after-bootstrap:'));
@@ -2890,11 +2910,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'engine/**'\n"));
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'host/**'\n"));
   assert.match(wf, /if: needs\.resolve\.outputs\.any == 'true'/);
-  assert.match(wf, /bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs "\$\{args\[@\]\}"/);
-  assert.match(wf, /\[ "\$DRY" = "true" \]; then\n\s+args\+=\(--dry-run\)\n\s+else\n\s+args\+=\(--publish\)/);
+  assert.match(wf, /RETRY_CMD_ATTEMPTS=2 bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs "\$\{args\[@\]\}"/);
+  assert.match(wf, /\[ "\$dry_mode" = "true" \]; then\n\s+args\+=\(--dry-run\)\n\s+else\n\s+args\+=\(--publish\)/);
   // upload-cdn-file.sh esce 0 senza credenziali: l'assenza deve fermare il job.
   assert.match(wf, /for v in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_S3_ENDPOINT R2_BUCKET CF_API_TOKEN; do/);
-  assert.match(wf, /timeout-minutes: 100/);
+  assert.match(wf, /timeout-minutes: 360/);
   assert.match(wf, /Acquire bootstrap R2 gate/);
   assert.match(wf, /- name: Acquire bootstrap R2 gate\n\s+id: acquire_bootstrap/);
   assert.match(wf, /section-bootstrap-lock\.mjs acquire --section "\$SECTION".*--wait-ms "\$LOCK_WAIT_MS"/);

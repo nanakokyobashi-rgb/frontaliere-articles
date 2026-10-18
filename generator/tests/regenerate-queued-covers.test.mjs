@@ -1353,8 +1353,39 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
 
   const articlePublisher = fs.readFileSync(new URL('../../.github/workflows/fast-publish-article.yml', import.meta.url), 'utf8');
   assert.match(articlePublisher, /publisher omitted requested article IDs/u);
+  assert.match(articlePublisher, /name: Verify shard assignment against publish checkout/u);
+  assert.match(articlePublisher, /actual_shard="\$\(node scripts\/ci\/fast-publish-section\.mjs shard-of "\$SECTION"\)"/u);
+  assert.match(articlePublisher, /actual_shard" != "\$EXPECTED_SHARD"/u);
+  assert.match(articlePublisher, /shard="\$FAST_PUBLISH_SHARD"/u);
+  assert.equal(
+    articlePublisher.match(/ref: \$\{\{ github\.event_name == 'workflow_dispatch' && github\.ref \|\| github\.sha \}\}/gu)?.length,
+    2,
+    'i due checkout del publisher articolo devono seguire il ref live nei dispatch espliciti',
+  );
 
   const sectionPublisher = fs.readFileSync(new URL('../../.github/workflows/fast-publish-section.yml', import.meta.url), 'utf8');
+  assert.equal(
+    sectionPublisher.match(/ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_commit \|\| \(github\.event_name == 'workflow_dispatch' && inputs\.bootstrap != true && github\.ref\) \|\| github\.sha \}\}/gu)?.length,
+    2,
+    'i due checkout principali del publisher sezione devono distinguere dispatch live e replay pinnato',
+  );
+  assert.match(sectionPublisher, /normal_dispatch='false'/u);
+  assert.match(sectionPublisher, /REF: \$\{\{ github\.ref \}\}/u);
+  assert.match(
+    sectionPublisher,
+    /if \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ "\$REF" = 'refs\/heads\/main' \] && \[ -z "\$\{SOURCE_COMMIT:-\}" \] && \[ "\$BOOTSTRAP" != 'true' \]; then/u,
+    'il retry live del publisher sezione e\u0027 consentito solo per dispatch dalla main',
+  );
+  assert.match(sectionPublisher, /\[ "\$BOOTSTRAP" != 'true' \]/u);
+  assert.match(sectionPublisher, /for publish_attempt in 1 2 3/u);
+  assert.match(sectionPublisher, /git fetch --no-tags origin main/u);
+  assert.match(sectionPublisher, /git checkout --detach origin\/main/u);
+  assert.match(sectionPublisher, /main avanzata durante il render/u);
+  const sectionLiveLoop = sectionPublisher.slice(sectionPublisher.indexOf('for publish_attempt in 1 2 3'));
+  assert.match(sectionLiveLoop, /if \[ -f \.github\/FAST_PUBLISH_DISABLED \]/u);
+  assert.match(sectionLiveLoop, /build_publish_args "\$attempt_dry"/u);
+  assert.match(sectionLiveLoop, /bash scripts\/lib\/npm-ci-retry\.sh/u);
+  assert.match(sectionLiveLoop, /if RETRY_CMD_ATTEMPTS=2 bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/u);
   for (const publisher of [articlePublisher, sectionPublisher]) {
     assert.match(publisher, /COVER_DRAIN_COMMIT_MESSAGE: \$\{\{ github\.event\.head_commit\.message \}\}/u);
     assert.match(publisher, /cover_drain_marker="\$\(node scripts\/ci\/cover-drain-commit\.mjs is-cover-drain\)"/u);
