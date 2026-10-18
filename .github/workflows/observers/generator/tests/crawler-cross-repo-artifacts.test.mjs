@@ -5,6 +5,13 @@ import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { TITLE_RE } from '../../scripts/ci/close-recovered-failure-issues.mjs';
+import {
+  MAX_DISCOVERY_ARTIFACTS,
+  MAX_DISCOVERY_ARTIFACT_REFERENCES,
+  MAX_DISCOVERY_RUNS,
+  MAX_DISCOVERY_TOKENS,
+  recordDiscoveredArtifactIds,
+} from '../../scripts/ci/crawler-generation-observer-selector.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOWS = path.join(ROOT, '.github/workflows');
@@ -13,6 +20,10 @@ const CONTRACT = JSON.parse(readFileSync(CONTRACT_PATH, 'utf8'));
 const LOOP_MANIFEST = JSON.parse(
   readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'),
 );
+const GROUP_ARTIFACTS = CONTRACT.artifacts
+  .filter((artifact) => /^crawler-group-\d{2}\.yml$/.test(artifact.file))
+  .sort((left, right) => left.file.localeCompare(right.file));
+const DISCOVERED_GROUP_IDS = GROUP_ARTIFACTS.map((artifact) => artifact.file.match(/(\d{2})/)?.[1]);
 
 function sha256(text) {
   return createHash('sha256').update(text).digest('hex');
@@ -21,6 +32,32 @@ function sha256(text) {
 function occurrences(text, pattern) {
   return [...text.matchAll(pattern)].length;
 }
+
+test('il budget cumulativo dell observer copre le liste bounded della finestra', () => {
+  assert.equal(
+    MAX_DISCOVERY_ARTIFACT_REFERENCES,
+    MAX_DISCOVERY_RUNS + MAX_DISCOVERY_TOKENS * MAX_DISCOVERY_ARTIFACTS,
+  );
+
+  const seen = new Set();
+  recordDiscoveredArtifactIds(
+    seen,
+    Array.from({ length: 26 }, (_, index) => ({ id: index + 1 })),
+  );
+  recordDiscoveredArtifactIds(
+    seen,
+    Array.from({ length: 96 }, (_, index) => ({ id: 1_000 + index })),
+  );
+  assert.equal(seen.size, 122);
+
+  assert.throws(
+    () => recordDiscoveredArtifactIds(
+      new Set(Array.from({ length: MAX_DISCOVERY_ARTIFACT_REFERENCES }, (_, index) => index + 1)),
+      [{ id: MAX_DISCOVERY_ARTIFACT_REFERENCES + 1 }],
+    ),
+    /discovery artifact cap exceeded/,
+  );
+});
 
 function crawlerIdsFromArtifact(text) {
   const lines = text.split(/\r?\n/);
@@ -106,16 +143,14 @@ test('crawler group 07 usa gli stessi id canonici in step, expected roster e art
   assert.equal(expected.some((entry) => entry.crawlerId === 'vf'), false);
 });
 
-test('il contratto censisce 23 gruppi + translate-pending e tutti i crawler unici', () => {
+test('il contratto censisce tutti i gruppi scoperti + translate-pending e tutti i crawler unici', () => {
   assert.equal(CONTRACT.schemaVersion, 1);
-  assert.equal(CONTRACT.groupCount, 23);
-  assert.equal(CONTRACT.artifactCount, 24);
-  assert.equal(CONTRACT.observerCount, 7);
-  assert.equal(CONTRACT.artifacts.length, 24);
+  assert.equal(CONTRACT.groupCount, DISCOVERED_GROUP_IDS.length);
+  assert.equal(CONTRACT.artifactCount, DISCOVERED_GROUP_IDS.length + 1);
+  assert.equal(CONTRACT.observerCount, CONTRACT.observers.length);
+  assert.equal(CONTRACT.artifacts.length, DISCOVERED_GROUP_IDS.length + 1);
 
-  const groups = CONTRACT.artifacts.filter((artifact) => /^crawler-group-\d{2}\.yml$/.test(artifact.file));
-  assert.equal(groups.length, 23);
-  const members = groups.flatMap((artifact) => artifact.members);
+  const members = GROUP_ARTIFACTS.flatMap((artifact) => artifact.members);
   assert.equal(members.length, CONTRACT.crawlerCount);
   assert.equal(new Set(members).size, CONTRACT.crawlerCount);
   assert.ok(CONTRACT.crawlerCount > 0);
@@ -145,10 +180,8 @@ test('il contratto censisce 23 gruppi + translate-pending e tutti i crawler unic
   assert.deepEqual(
     [...observerWorkflow.matchAll(/^      - (Crawler Group \d{2} \(sparse cross-repo execution\))$/gm)]
       .map((match) => match[1]),
-    Array.from(
-      { length: 23 },
-      (_, index) => `Crawler Group ${String(index + 1).padStart(2, '0')} (sparse cross-repo execution)`,
-    ),
+    DISCOVERED_GROUP_IDS.map((group) =>
+      `Crawler Group ${group} (sparse cross-repo execution)`),
   );
   assert.match(
     observerWorkflow,
@@ -193,7 +226,7 @@ test('le installazioni standalone usano il retry site-owned', () => {
   }
 });
 
-test('loop-drift osserva live i 24 artifact portabili e il contratto del generatore', () => {
+test('loop-drift osserva live tutti gli artifact portabili scoperti e il contratto del generatore', () => {
   const entries = new Map(
     LOOP_MANIFEST.files.map((entry) => [entry.path, entry]),
   );
@@ -229,7 +262,7 @@ test('il retry e limitato al checkout sparse pre-logica, con backoff', () => {
 
   for (const artifact of CONTRACT.artifacts) {
     const text = readFileSync(path.join(WORKFLOWS, artifact.file), 'utf8');
-    assert.equal(occurrences(text, /^\s+uses: actions\/checkout@v5$/gm), 2, artifact.file);
+    assert.equal(occurrences(text, /^\s+uses: actions\/checkout@v7$/gm), 2, artifact.file);
     assert.equal(occurrences(text, /^\s+id: site_checkout_primary$/gm), 1, artifact.file);
     assert.equal(occurrences(text, /^\s+id: site_checkout_retry$/gm), 1, artifact.file);
     assert.equal(occurrences(text, /^\s+id: checkout$/gm), 1, artifact.file);
@@ -302,7 +335,7 @@ test('il reporter diagnostico usa identita e workflow standalone corpus richiudi
       assert.match(text, /name: Report failure to GitHub Issues/);
     }
   }
-  assert.equal(reporterCount, 24);
+  assert.equal(reporterCount, CONTRACT.artifactCount);
 });
 
 test('nessun artifact usa codeload/reusable cross-repo o replica la logica dopo un fallimento parziale', () => {
@@ -317,9 +350,16 @@ test('nessun artifact usa codeload/reusable cross-repo o replica la logica dopo 
     assert.equal(new Set(crawlerIds).size, crawlerIds.length, `${artifact.file}: crawler duplicato`);
     assert.equal(occurrences(text, /^\s+id: crawler-launch-[a-z0-9-]+$/gm), artifact.members.length);
 
-    // Un solo job runnable: il secondo tentativo e un secondo checkout nello
-    // stesso job, non un job `_retry` che rilancia crawl/push gia avvenuti.
-    assert.equal(occurrences(text, /^  [a-z0-9_]+:\n    runs-on:/gm), 1, artifact.file);
+    // Un solo job runnable per i crawler: il secondo tentativo e un secondo
+    // checkout nello stesso job, non un job `_retry` che rilancia crawl/push
+    // gia avvenuti. Translate ha in piu' il guard leggero fuori dal mutex;
+    // il job pesante resta comunque unico e serializzato.
+    const expectedRunnableJobs = artifact.file === 'translate-pending.yml' ? 2 : 1;
+    assert.equal(occurrences(text, /^  [a-z0-9_]+:\n    runs-on:/gm), expectedRunnableJobs, artifact.file);
+    if (artifact.file === 'translate-pending.yml') {
+      assert.match(text, /^  translate_queue_guard:\n    runs-on:/m);
+      assert.match(text, /needs: translate_queue_guard/);
+    }
     assert.doesNotMatch(text, /^  [a-z0-9_]+_retry:/m);
   }
 });
