@@ -47,6 +47,14 @@
     "canton-ne::https://www.ne.ch/communiques-de-presse/pour-sa-30eme-edition-le-prix-interculturel-salut-letranger-recompense-le-centre-portugais-de-neuchatel-et-madame-carmen-diaz-pumarejo": {
       "section": "canton-ne",
       "ts": 1792323251760
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-panzani-veut-fusionner-avec-le-portugais-cerealis.html": {
+      "section": "canton-ne",
+      "ts": 1792326321135
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-des-drones-pour-observer-les-chauffards-st-gall-suit-la-thurgovie.html": {
+      "section": "canton-ne",
+      "ts": 1792326329040
     }
   }
 }
