@@ -305,7 +305,8 @@ export function cantonRssPublishPlan(section, {
       // A normal live publish must enter publishCantonRssFeeds even when the
       // first readiness probe is stale. That phase retries for a bounded
       // window and fails before HTML upload if API/edge never become verifiable.
-      // Only a safe bootstrap with a previous page manifest may defer this phase.
+      // Only a safe staged live release with a previous page manifest may defer
+      // this phase to the workflow_run replay.
       cantonRssFeeds = cleanupRssRequested || effectiveStatus !== 'live'
         ? []
         : cantonRssFeedEntries(section);
@@ -1797,7 +1798,7 @@ export async function publish({
         const next = fs.existsSync(local) ? fs.readFileSync(local, 'utf8') : null;
         if (!previous?.exists || next === null) {
           console.error(
-            `::error::[${LOG}] bootstrap live: non è possibile dimostrare la pagina precedente o il render locale per ${page.edgeKey}; ` +
+            `::error::[${LOG}] release live differita: non è possibile dimostrare la pagina precedente o il render locale per ${page.edgeKey}; ` +
             'la release non può proseguire',
           );
           return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
@@ -1805,7 +1806,7 @@ export async function publish({
         if (next !== previous.body) {
           immutableMismatches.push(page.edgeKey);
           console.log(
-            `::notice::[${LOG}] bootstrap live: il render di ${page.edgeKey} differisce; ` +
+            `::notice::[${LOG}] release live differita: il render di ${page.edgeKey} differisce; ` +
             'la chiave precedente resta servita e la sostituzione viene differita al replay post-flip',
           );
         }
@@ -2076,14 +2077,14 @@ export async function main(
   }
   let cantonRssFeeds = [];
   let removeStaleCantonRssFeeds = false;
-  // A live section can receive its first article pages in the same corpus
-  // release that updates the API registry. The API publisher cannot flip that
-  // registry until those pages exist on R2, while the normal live-page path
-  // waits for the flipped registry before touching RSS. Bootstrap is the
-  // deliberate two-phase exception: validate and upload HTML first, preserve
-  // the old RSS/obsolete-page surface, and let the API completion replay do
-  // the feed/deletion phase after its release is actually served.
-  let deferredLiveBootstrapRelease = false;
+  // A live section can receive new or changed pages in the same corpus release
+  // that updates the API registry. The API publisher cannot flip that registry
+  // until the required pages exist on R2, while the normal live-page path waits
+  // for the flipped registry before touching RSS. When a verified page manifest
+  // exists, stage the live release in two phases: upload only keys that are not
+  // already announced, preserve RSS/obsolete-page state, and let the API
+  // completion replay finish the release after its edge pointer is served.
+  let deferredLiveRelease = false;
   let liveBootstrapManifestMissing = false;
   if (publishing && (effectiveStatus === 'live' || cleanupRssRequested)) {
     const readiness = await publishedReleaseReadyImpl(releaseCommit, { section, fetchImpl });
@@ -2092,8 +2093,7 @@ export async function main(
     // emette zero feed legittimamente. Se è transitoria, il primo pass deve
     // caricare l'HTML senza avviare RSS; il replay workflow_run riprova dopo
     // il flip edge.
-    const canDeferRssToBootstrapReplay = args.bootstrap
-      && effectiveStatus === 'live'
+    const canDeferRssToReplay = effectiveStatus === 'live'
       && !cleanupRssRequested
       && publishedManifest.state === 'ok'
       && publishedManifestPages;
@@ -2107,13 +2107,13 @@ export async function main(
       effectiveStatus,
       cleanupRssRequested,
       readiness,
-      deferUntilReplay: canDeferRssToBootstrapReplay,
+      deferUntilReplay: canDeferRssToReplay,
     });
     if (rssPlan.deferred) {
-      deferredLiveBootstrapRelease = true;
+      deferredLiveRelease = true;
       console.log(
-        `::notice::[${LOG}] bootstrap ${section}: release API/edge non ancora servita; ` +
-        'differisco RSS e cancellazioni obsolete dopo il flip, senza allentare la verifica HTML',
+        `::notice::[${LOG}] live ${section}: release API/edge non ancora servita; ` +
+        'differisco RSS e cancellazioni obsolete al replay dopo il flip, senza allentare la verifica HTML',
       );
     } else if (hasPreviousManifestForLiveBootstrap && !readinessVerified) {
       liveBootstrapManifestMissing = true;
@@ -2213,20 +2213,20 @@ export async function main(
     aggregatePagesAllowed,
   });
   const defects = [];
-  const obsoletePagesForPublish = deferredLiveBootstrapRelease ? [] : obsoletePages;
+  const obsoletePagesForPublish = deferredLiveRelease ? [] : obsoletePages;
   const publishedPageKeys = new Set(
     publishedManifestPages
       ? Object.values(publishedManifestPages).flatMap((kindPages) => kindPages.map((page) => page.edgeKey))
       : [],
   );
-  // During the bootstrap phase the old sitemap and edge registry are still
+  // During a deferred live release the old sitemap and edge registry are still
   // live. Only keys absent from the verified old page manifest are immutable
   // additions; replacing an already announced key here would mix two releases
   // before the API/edge pointer flips.
-  const pagesForPublish = deferredLiveBootstrapRelease
+  const pagesForPublish = deferredLiveRelease
     ? pages.filter((page) => !publishedPageKeys.has(page.edgeKey))
     : pages;
-  const immutableBootstrapPages = deferredLiveBootstrapRelease
+  const immutableLivePages = deferredLiveRelease
     ? pages.filter((page) => publishedPageKeys.has(page.edgeKey))
     : [];
 
@@ -2299,12 +2299,19 @@ export async function main(
     aggregatePagesAllowed,
     publishedPageManifest: publishedManifest.state,
     effectiveStatus,
-    deferredLiveBootstrapRelease,
+    deferredLiveRelease,
+    // Kept for consumers of the pre-RSS summary shape; the staged path now
+    // covers every live release with a verified previous manifest, not only
+    // explicit bootstrap runs.
+    deferredLiveBootstrapRelease: deferredLiveRelease,
     liveBootstrapManifestMissing,
     cantonRssFeeds: cantonRssFeeds.map(({ name, key, url }) => ({ name, key, url })),
     pages,
     pagesForPublish,
-    immutableBootstrapPages,
+    immutableLivePages,
+    // Legacy summary key retained while staged live releases are no longer
+    // limited to explicit bootstrap runs.
+    immutableBootstrapPages: immutableLivePages,
     cdnUploads,
     obsoletePages,
     obsoletePagesForPublish,
@@ -2363,11 +2370,11 @@ export async function main(
     section,
     releaseCommit,
     publishCantonRssFeedsImpl,
-    snapshotPagesBeforeUpload: deferredLiveBootstrapRelease,
-    immutablePages: immutableBootstrapPages,
+    snapshotPagesBeforeUpload: deferredLiveRelease,
+    immutablePages: immutableLivePages,
     assertMainFreshImpl,
   });
-  if (summary.published.failures === 0 && deferredLiveBootstrapRelease) {
+  if (summary.published.failures === 0 && deferredLiveRelease) {
     summary.published.manifestDeferred = true;
     console.log(
       `::notice::[${LOG}] manifest edge ${section} differito: ` +
