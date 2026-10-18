@@ -267,6 +267,22 @@ test('shortHeadlineTokenPolicy counts visible Unicode characters instead of UTF-
   assert.equal(pageCarriesItem('', headline, { titleEvidence: headline }), true);
 });
 
+test('shortHeadlineEvidence splits CR, LF and CRLF title declarations', () => {
+  const matching = 'A 13: Stau';
+  for (const separator of ['\r', '\n', '\r\n']) {
+    assert.equal(
+      shortHeadlineEvidence(`${matching}${separator}${matching}`, matching),
+      true,
+      `separator ${JSON.stringify(separator)} should preserve two matching declarations`,
+    );
+    assert.equal(
+      shortHeadlineEvidence(`A 13: Unfall${separator}${matching}`, matching),
+      false,
+      `separator ${JSON.stringify(separator)} should not hide a conflicting declaration`,
+    );
+  }
+});
+
 test('selectConsistentTitleEvidence rejects conflicting declarations before matching a headline', () => {
   const matching = 'A 13: Stau';
   const equivalent = 'a 13 – STAU';
@@ -277,11 +293,13 @@ test('selectConsistentTitleEvidence rejects conflicting declarations before matc
   );
 
   assert.equal(selectConsistentTitleEvidence(`${matching}\r${equivalent}`), matching);
-  assert.equal(selectConsistentTitleEvidence([`${matching}\r${equivalent}`, 'A 13: STAU']), matching);
+  assert.equal(selectConsistentTitleEvidence([`${matching}\r\n${equivalent}`, 'A 13: STAU']), matching);
   assert.equal(selectConsistentTitleEvidence(conflicting), '');
   assert.equal(selectConsistentTitleEvidence([conflicting]), '');
+  assert.equal(selectConsistentTitleEvidence(`${matching}\r—`), '', 'punctuation-only declarations are not silently ignored');
   assert.equal(shortHeadlineEvidence(conflicting, matching), false);
   assert.equal(shortHeadlineEvidence(conflictingHtml, matching), false);
+  assert.equal(shortHeadlineEvidence(`${matching}\r—`, matching), false);
 });
 
 test('checkItemOnPage: titoli della pagina, testo e giornata — sulla pagina reale del ticker', () => {

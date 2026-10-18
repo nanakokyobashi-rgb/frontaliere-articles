@@ -270,12 +270,18 @@ export function shortHeadlineTokenPolicy(token) {
 export function selectConsistentTitleEvidence(titleEvidence) {
   const declarations = Array.isArray(titleEvidence) ? titleEvidence : [titleEvidence];
   const lines = declarations
-    .flatMap((declaration) => String(declaration ?? '').split(/\r\n|[\r\n]/u))
+    .flatMap((declaration) => String(declaration ?? '').split(/\r\n|[\r\n]/))
     .map((line) => String(line ?? '').trim())
     .filter(Boolean);
   if (lines.length === 0) return '';
 
-  const normalized = new Set(lines.map(normalizeItemText).filter(Boolean));
+  // A raw, non-empty declaration that normalizes to nothing (for example an
+  // entity or punctuation-only title) is still a declaration. Dropping it
+  // would let a matching sibling become positive evidence by accident.
+  const normalizedLines = lines.map(normalizeItemText);
+  if (normalizedLines.some((line) => !line)) return '';
+
+  const normalized = new Set(normalizedLines);
   return normalized.size === 1 ? lines[0] : '';
 }
 
@@ -284,7 +290,7 @@ export function selectConsistentTitleEvidence(titleEvidence) {
  * titolo risultante coincide con l'intero item. Il corpo non basta: parole come
  * «Stau» possono comparire in una pagina diversa o nella sua navigazione.
  *
- * @param {string} titleEvidence titoli da `pageTitleEvidence()`
+ * @param {string | string[]} titleEvidence titoli da `pageTitleEvidence()`
  * @param {string} headline
  * @returns {boolean}
  */
@@ -308,7 +314,7 @@ export function shortHeadlineEvidence(titleEvidence, headline) {
  *
  * @param {string} text
  * @param {string} headline
- * @param {{ minShare?: number, titleEvidence?: string }} [options]
+ * @param {{ minShare?: number, titleEvidence?: string | string[] }} [options]
  * @returns {boolean}
  */
 export function pageCarriesItem(text, headline, {
