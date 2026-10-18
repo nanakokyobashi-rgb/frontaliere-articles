@@ -627,6 +627,57 @@ test('il percorso pending conserva un rifiuto terminale mentre il drain possiede
     assert.equal(terminal.status, 'terminal');
     assert.equal(terminal.terminalAt, '2026-10-07T22:41:00.000Z');
     assert.equal(terminal.terminalReason, 'vision-safety-rejection');
+
+    write(root, 'data/image-regeneration-queue-in-progress.json', '{}\n');
+    assert.equal(appendImageRegenerationQueue(root, {
+      articleId: 'terminal-pending',
+      title: 'Stale retry',
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'stale provider timeout',
+      requestedAt: '2026-10-07T22:40:00.000Z',
+    }), true);
+    fs.unlinkSync(lockPath);
+    appendImageRegenerationQueue(root, {
+      articleId: 'flush-stale-retry',
+      title: 'Flush stale retry',
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'provider timeout',
+      requestedAt: '2026-10-07T22:43:00.000Z',
+    });
+    const afterStaleRetry = JSON.parse(
+      fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'),
+    ).items.find((entry) => entry.articleId === 'terminal-pending');
+    assert.equal(afterStaleRetry.status, 'terminal', 'un pending più vecchio non riesuma il terminale');
+
+    appendImageRegenerationQueue(root, {
+      articleId: 'terminal-pending',
+      title: 'Fresh changed input',
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'new request after input change',
+      requestedAt: '2026-10-07T22:44:00.000Z',
+    });
+    write(root, 'data/image-regeneration-queue-in-progress.json', '{}\n');
+    appendImageRegenerationQueue(root, {
+      articleId: 'terminal-pending',
+      title: 'Stale terminal',
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'old safety rejection',
+      retryDisposition: 'terminal',
+      requestedAt: '2026-10-07T22:41:00.000Z',
+    });
+    fs.unlinkSync(lockPath);
+    appendImageRegenerationQueue(root, {
+      articleId: 'flush-stale-terminal',
+      title: 'Flush stale terminal',
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'provider timeout',
+      requestedAt: '2026-10-07T22:45:00.000Z',
+    });
+    const afterStaleTerminal = JSON.parse(
+      fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'),
+    ).items.find((entry) => entry.articleId === 'terminal-pending');
+    assert.equal(afterStaleTerminal.status, 'queued', 'un terminale pending vecchio non sostituisce la nuova richiesta');
+    assert.equal(afterStaleTerminal.requestedAt, '2026-10-07T22:44:00.000Z');
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
@@ -756,6 +807,7 @@ test('un rifiuto visivo per testo o cartelli rafforza il prompt del ritentativo'
   assert.equal(isVisualTextFailure('vision gate rejected image: forbidden content'), true);
   assert.equal(isVisualTextFailure('vision gate rejected image: no visible text or logos; recognizable foreground person'), false);
   assert.equal(isVisualTextFailure('vision gate rejected image: there is no readable text, but the face is recognizable'), false);
+  assert.equal(isVisualTextFailure('vision gate rejected image: contains_text=false; contains_logo=false; contains_recognizable_face=true'), false);
   assert.equal(isVisualTextFailure('vision gate rejected image: no text, but visible vehicle logos prevent approval'), true);
   assert.equal(isVisualTextFailure('vision gate rejected image: recognizable face'), false);
   assert.equal(isVisualTextFailure('provider unavailable'), false);
@@ -815,6 +867,7 @@ test('un fallimento strutturato solo vision diventa terminale, il transient risp
       { provider: 'openai-codex', reason: 'vision gate rejected image: recognizable foreground person' },
       { provider: 'gemini', reason: 'vision gate rejected image: recognizable human face' },
     ];
+    terminalFailure.imageProviderChain = ['openai-codex', 'gemini'];
     let transientCalls = 0;
     const first = await drain({
       root,

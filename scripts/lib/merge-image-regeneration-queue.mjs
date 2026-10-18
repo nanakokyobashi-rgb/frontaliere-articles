@@ -194,13 +194,11 @@ export function mergeImageRegenerationQueues(upstream, replayed, base = { items:
     }
 
     if (upstreamItem && replayedItem) {
-      if (baseItem && sameItem(upstreamItem, baseItem) && !sameItem(replayedItem, baseItem)) {
-        byArticle.set(articleId, {...replayedItem, articleId});
-      } else if (baseItem && sameItem(replayedItem, baseItem) && !sameItem(upstreamItem, baseItem)) {
-        byArticle.set(articleId, {...upstreamItem, articleId});
-      } else {
-        byArticle.set(articleId, mergeItem(upstreamItem, replayedItem));
-      }
+      // Even when one side equals base, use the same-request merge: a stale
+      // retry may only have advanced failure metadata and must not overwrite a
+      // terminal verdict. mergeItem still lets a strictly newer requestedAt
+      // replace that verdict as a genuinely new request.
+      byArticle.set(articleId, mergeItem(upstreamItem, replayedItem));
     } else {
       const item = upstreamItem || replayedItem;
       if (item) byArticle.set(articleId, {...item, articleId});

@@ -28,23 +28,40 @@ export function isVisualTextFailure(reason) {
     `\\b(?:no|without|lacks?)\\s+(?:(?:visible|readable|discernible|legible|recognizable)\\s+)*${cue}(?:\\s*(?:,|and|or)\\s*(?:(?:visible|readable|discernible|legible|recognizable)\\s+)*${cue})*`,
     'gi',
   );
-  const normalized = String(reason || '').replace(negativeCue, '');
+  const normalized = String(reason || '')
+    .replace(/contains_(?:text|logo)\s*[:=]\s*false/gi, '')
+    .replace(negativeCue, '');
   return /vision gate rejected image/i.test(normalized)
     && /(?:text|letter(?:ing)?|sign(?:age)?|watermark|signature|writing|logo|emblem|mark(?:ing)?s?|word|number|caption|label|banner|inscription|poster|typograph|brand|trademark|contains[_ ]text\s*[:=]\s*true|cartell|segnaletica|scritte?|parol[ae]|numer[io]|beschriftung|schrift|texte?|forbidden content)/i.test(normalized);
 }
 
+function isClearlyTerminalVisionFailure(reason) {
+  const normalized = String(reason || '');
+  return /(?:recognizable|identifiable)\s+(?:(?:foreground|human)\s+)*(?:face|person|people|figure|individual)|contains_recognizable_(?:face|foreground_person)\s*[:=]\s*true|(?:specific real event|looks_like_specific_real_event\s*[:=]\s*true)/i.test(normalized);
+}
+
 export function classifyImageRegenerationFailure(error) {
-  const structuredFailures = Array.isArray(error?.failures)
-    ? error.failures
-        .map((failure) => String(failure?.reason || '').trim())
-        .filter(Boolean)
+  const expectedProviders = Array.isArray(error?.imageProviderChain)
+    ? error.imageProviderChain.map((provider) => String(provider || '').trim()).filter(Boolean)
     : [];
-  // Only the governed engine's complete provider ledger is sufficient proof.
-  // A flattened/truncated message can show one rejection while hiding a
-  // transient lane later in the chain, so it always remains retryable.
-  const terminal = structuredFailures.length > 0
-    && structuredFailures.every((reason) => /^vision gate rejected image:/i.test(reason))
-    && !structuredFailures.some(isVisualTextFailure);
+  const rawFailures = Array.isArray(error?.failures) ? error.failures : [];
+  const structuredFailures = rawFailures.map((failure) => ({
+    provider: String(failure?.provider || '').trim(),
+    reason: String(failure?.reason || '').trim(),
+  }));
+  // Terminality requires proof that the adapter's entire requested chain was
+  // exhausted. Missing/malformed entries and deadline-truncated prefixes stay
+  // retryable. An unrecognized vision note also stays retryable because the
+  // engine's structured text/logo flags are not part of its public error.
+  const completeLedger = expectedProviders.length > 0
+    && rawFailures.length === expectedProviders.length
+    && structuredFailures.every(({ provider, reason }, index) => (
+      provider === expectedProviders[index] && reason.length > 0
+    ));
+  const terminal = completeLedger
+    && structuredFailures.every(({ reason }) => /^vision gate rejected image:/i.test(reason))
+    && structuredFailures.every(({ reason }) => isClearlyTerminalVisionFailure(reason))
+    && !structuredFailures.some(({ reason }) => isVisualTextFailure(reason));
   return terminal
     ? { retryable: false, reason: IMAGE_REGENERATION_TERMINAL_VISION_REASON }
     : { retryable: true, reason: 'transient-or-adaptable' };
@@ -174,6 +191,16 @@ function mergeQueueItem(queue, request) {
   if (!item) return false;
   const existing = queue.items.find((entry) => entry?.articleId === item.articleId);
   if (existing) {
+    const existingRequestedAt = Date.parse(String(existing.requestedAt || ''));
+    const itemRequestedAt = Date.parse(String(item.requestedAt || ''));
+    const sameRequest = Number.isFinite(existingRequestedAt)
+      && Number.isFinite(itemRequestedAt)
+      && existingRequestedAt === itemRequestedAt;
+    if (Number.isFinite(existingRequestedAt) && Number.isFinite(itemRequestedAt)) {
+      if (itemRequestedAt < existingRequestedAt) return true;
+      if (sameRequest && item.status !== IMAGE_REGENERATION_TERMINAL_STATUS) return true;
+      if (sameRequest && existing.status === IMAGE_REGENERATION_TERMINAL_STATUS) return true;
+    }
     Object.assign(existing, item, {
       failureCount: Number.isInteger(existing.failureCount) && existing.failureCount >= 0 ? existing.failureCount : 0,
       // A fresh enqueue is a new request. The drainer changes only failure
@@ -221,6 +248,7 @@ function flushPendingQueue(root) {
   // drain can never read a partially-written JSONL record. Files published
   // after this directory scan remain for the next lock holder.
   processing.push(...pendingFiles);
+  processing.sort();
   if (processing.length === 0) return 0;
 
   const pending = [];

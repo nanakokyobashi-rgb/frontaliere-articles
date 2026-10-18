@@ -1119,6 +1119,14 @@ test('il merge della coda non riesuma un rifiuto terminale della stessa richiest
   assert.equal(merged.failureCount, 2);
   assert.equal(merged.lastFailureAt, staleRetry.lastFailureAt);
 
+  const fastPathMerged = mergeImageRegenerationQueues(
+    { schema: 1, items: [terminal] },
+    { schema: 1, items: [staleRetry] },
+    { schema: 1, items: [terminal] },
+  ).items[0];
+  assert.equal(fastPathMerged.status, 'terminal', 'il lato uguale a base non salta la precedenza terminale');
+  assert.equal(fastPathMerged.terminalReason, 'vision-safety-rejection');
+
   const freshRequest = {
     ...staleRetry,
     status: 'queued',

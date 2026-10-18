@@ -162,6 +162,7 @@ test('un rifiuto vision interamente non adattabile resta nel ledger come termina
       { provider: 'openai-codex', reason: 'vision gate rejected image: recognizable foreground person' },
       { provider: 'gemini', reason: 'vision gate rejected image: recognizable human face' },
     ];
+    failure.imageProviderChain = ['openai-codex', 'gemini'];
     data._imageGenerationFailureDisposition = classifyImageRegenerationFailure(failure);
     resolveArticleCoverFallback(data, {
       root,
@@ -198,6 +199,35 @@ test('un errore transient o un rifiuto testuale adattabile resta retryable', () 
     classifyImageRegenerationFailure(new Error('vision gate rejected image: recognizable face')).retryable,
     true,
     'un messaggio senza il ledger completo dei provider non prova la terminalità',
+  );
+});
+
+test('solo un ledger completo e riconosciuto prova la terminalità vision', () => {
+  const partial = new Error('image generation deadline exceeded');
+  partial.imageProviderChain = ['openai-codex', 'gemini'];
+  partial.failures = [
+    { provider: 'openai-codex', reason: 'vision gate rejected image: recognizable foreground person' },
+  ];
+  assert.equal(classifyImageRegenerationFailure(partial).retryable, true, 'deadline: catena incompleta');
+
+  const malformed = new Error('All image providers failed');
+  malformed.imageProviderChain = ['openai-codex', 'gemini'];
+  malformed.failures = [
+    { provider: 'openai-codex', reason: 'vision gate rejected image: recognizable foreground person' },
+    { provider: 'gemini', reason: '' },
+  ];
+  assert.equal(classifyImageRegenerationFailure(malformed).retryable, true, 'reason vuoto: fail-closed');
+
+  const flagsWithoutNotes = new Error('All image providers failed');
+  flagsWithoutNotes.imageProviderChain = ['openai-codex', 'gemini'];
+  flagsWithoutNotes.failures = [
+    { provider: 'openai-codex', reason: 'vision gate rejected image: generic synthetic illustration', vision: { contains_text: true } },
+    { provider: 'gemini', reason: 'vision gate rejected image: generic synthetic illustration', vision: { contains_logo: true } },
+  ];
+  assert.equal(
+    classifyImageRegenerationFailure(flagsWithoutNotes).retryable,
+    true,
+    'un cue non riconosciuto resta adattabile/retryable quando i flag non sono nel messaggio',
   );
 });
 
