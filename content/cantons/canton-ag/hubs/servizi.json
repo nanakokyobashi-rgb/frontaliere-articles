@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T23:29:53.062Z",
-  "contentHash": "03f098d49e52c1b0e4883d084665a6258dcbde99a0f0789f1b8b150f4e4d1ca4",
+  "updatedAt": "2026-10-18T02:50:38.569Z",
+  "contentHash": "1abbaba76f00116858002370e8a06ac8637d4258677b07f6d6f3284df68c7b98",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -155,6 +155,12 @@
           "date": "2026-10-07T09:03:30.904Z"
         },
         {
+          "title": "Sistema sanitario svizzero LAMal: guida 2026 Canton Argovia",
+          "url": "/articoli-svizzera/lamal-guida-2026-canton-argovia/",
+          "excerpt": "Chi risiede in Svizzera deve avere un'assicurazione LAMal La polizza va stipulata entro tre mesi dall'arrivo Per gli adulti sono previste franchigie di CHF 300",
+          "date": "2026-10-18T02:46:20.782Z"
+        },
+        {
           "title": "Permesso L nel Canton Argovia: validità e rinnovo",
           "url": "/articoli-svizzera/permesso-l-argovia-guida/",
           "excerpt": "Guida al permesso L di breve durata nel Canton Argovia: regole di validità, procedure di proroga e criteri per il passaggio al permesso B.",
@@ -212,7 +218,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T02:50:38.569Z"
     },
     "en": {
       "canton": "AG",
@@ -340,6 +346,12 @@
           "date": "2026-10-07T09:03:30.904Z"
         },
         {
+          "title": "Swiss LAMal healthcare system: 2026 guide to the Canton of Aargau",
+          "url": "/en/swiss-articles/lamal-guide-2026-canton-aargau/",
+          "excerpt": "Anyone residing in Switzerland must have LAMal insurance The policy must be taken out within three months of arrival For adults, deductibles of CHF 300 apply",
+          "date": "2026-10-18T02:46:20.782Z"
+        },
+        {
           "title": "Permit L in the Canton of Aargau: validity and renewal",
           "url": "/en/swiss-articles/residence-permit-l-aargau-guide/",
           "excerpt": "Guide to Short-Term Permit L in the Canton of Aargau: Validity Rules, Extension Procedures, and Criteria for Switching to Permit B.",
@@ -393,7 +405,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T02:50:38.569Z"
     },
     "de": {
       "canton": "AG",
@@ -521,6 +533,12 @@
           "date": "2026-10-07T09:03:30.904Z"
         },
         {
+          "title": "Schweizer Gesundheitssystem nach LAMal: Leitfaden 2026 für den Kanton Aargau",
+          "url": "/de/schweiz-artikel/lamal-leitfaden-2026-kanton-argau/",
+          "excerpt": "Wer in der Schweiz wohnt, muss eine LAMal-Versicherung haben.",
+          "date": "2026-10-18T02:46:20.782Z"
+        },
+        {
           "title": "L-Bewilligung im Kanton Aargau: Gültigkeit und Erneuerung",
           "url": "/de/schweiz-artikel/aufenthaltsbewilligung-l-aargau-leitfaden/",
           "excerpt": "Leitfaden zur Kurzzeitbewilligung L im Kanton Aargau: Gültigkeitsregeln, Verlängerungsverfahren und Kriterien für den Übergang zur Bewilligung B.",
@@ -574,7 +592,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T02:50:38.569Z"
     },
     "fr": {
       "canton": "AG",
@@ -702,6 +720,12 @@
           "date": "2026-10-07T09:03:30.904Z"
         },
         {
+          "title": "Système de santé suisse LAMal : guide 2026 du canton d'Argovie",
+          "url": "/fr/articles-suisse/guide-lamal-2026-canton-argovie/",
+          "excerpt": "Toute personne résidant en Suisse doit avoir une assurance LAMal La police doit être souscrite dans les trois mois suivant l'arrivée Pour les adultes, des franchises de CHF 300 sont prévues",
+          "date": "2026-10-18T02:46:20.782Z"
+        },
+        {
           "title": "Permis L dans le canton d'Argovie : validité et renouvellement",
           "url": "/fr/articles-suisse/permis-l-argovie-guide/",
           "excerpt": "Guide du permis L de courte durée dans le canton d'Argovie : règles de validité, procédures de prolongation et critères de passage au permis B.",
@@ -751,7 +775,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T02:50:38.569Z"
     }
   }
 }
