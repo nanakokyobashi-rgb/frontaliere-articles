@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-live-arconatese-varese-caronno.webp",
-      "sha256": "262db7fa6f4e8048e01bfd76d4523a18a211d6f8f87441d4d4bfd28bc26535b4"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-live-arconatese-varese-caronno-480w.webp",
-      "sha256": "752429caf05a50400849832e6deade53a3cfc08b81052f9bb478d5d0ffc5ed6a"
-    }
-  ]
+  "items": []
 }
