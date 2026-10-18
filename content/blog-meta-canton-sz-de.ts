@@ -18,6 +18,9 @@ const blogMetaCantonSzDe: Record<string, string> = {
     'blog.article.eventi-weekend-svitto.title': 'Veranstaltungen am Wochenende im Kanton Schwyz: was tun Sa & So',
     'blog.article.eventi-weekend-svitto.excerpt': 'Veranstaltungen im Kanton Schwyz an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
     'blog.article.eventi-weekend-svitto.imageAlt': 'Veranstaltungen am Wochenende im Kanton Schwyz',
+    'blog.article.unteriberg-budget-2027.title': 'Unteriberg, Budget 2027: Überschuss von 13.500 Franken',
+    'blog.article.unteriberg-budget-2027.excerpt': 'Die Kirchgemeinde Unteriberg erwartet für 2027 Einnahmen von 525.743 Franken und Ausgaben von 512.245 Franken; der ausgewiesene Überschuss beträgt 13.500 Franken.',
+    'blog.article.unteriberg-budget-2027.imageAlt': 'Symbolische Alpenlandschaft zum Budget der Kirchgemeinde Unteriberg',
 };
 
 export default blogMetaCantonSzDe;

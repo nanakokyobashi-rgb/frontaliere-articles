@@ -197,6 +197,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-unteriberg-budget-2027': {
+    title: 'Unteriberg, budget 2027: avanzo di 13.500 franchi',
+    description: 'Unteriberg: il preventivo 2027 indica 525.743 franchi di entrate, 512.245 di uscite e un avanzo di 13.500; i piani 2028 e 2029 prevedono 700 franchi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, unteriberg, budget, avanzo, franchi',
+    ogTitle: 'Unteriberg: budget 2027 con avanzo di 13.500 franchi',
+    ogDescription: 'Il preventivo 2027 della Kirchgemeinde Unteriberg mette a bilancio 525.743 franchi di entrate e 512.245 di uscite. L\'avanzo previsto è di 13.500 franchi; i piani finanziari del Kirchenrat indicano 700 franchi per il 2028 e per il 2029.',
+    canonicalPath: '/articoli-svitto/unteriberg-budget-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Unteriberg, budget 2027: avanzo di 13.500 franchi",
+      "description": "Unteriberg: il preventivo 2027 indica 525.743 franchi di entrate, 512.245 di uscite e un avanzo di 13.500; i piani 2028 e 2029 prevedono 700 franchi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-unteriberg-budget-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scena alpina simbolica per il bilancio della Kirchgemeinde Unteriberg"
+      },
+      "datePublished": "2026-10-18T07:01:31+00:00",
+      "dateModified": "2026-10-18T07:01:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svitto/unteriberg-budget-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -18,6 +18,9 @@ const blogMetaCantonSzFr: Record<string, string> = {
     'blog.article.eventi-weekend-svitto.title': 'Événements du week-end dans le canton de Schwytz : que faire samedi & dimanche',
     'blog.article.eventi-weekend-svitto.excerpt': 'Événements dans le canton de Schwytz chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
     'blog.article.eventi-weekend-svitto.imageAlt': 'Événements du week-end dans le canton de Schwytz',
+    'blog.article.unteriberg-budget-2027.title': 'Unteriberg, budget 2027 : excédent de 13.500 francs',
+    'blog.article.unteriberg-budget-2027.excerpt': 'La Kirchgemeinde Unteriberg prévoit 525.743 francs de recettes et 512.245 de dépenses en 2027 ; l\'excédent indiqué est de 13.500 francs.',
+    'blog.article.unteriberg-budget-2027.imageAlt': 'Paysage alpin symbolique pour le budget de la Kirchgemeinde Unteriberg',
 };
 
 export default blogMetaCantonSzFr;

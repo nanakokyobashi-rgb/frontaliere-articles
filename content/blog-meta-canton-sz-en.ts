@@ -18,6 +18,9 @@ const blogMetaCantonSzEn: Record<string, string> = {
     'blog.article.eventi-weekend-svitto.title': 'Weekend events in the canton of Schwyz: what to do Saturday & Sunday',
     'blog.article.eventi-weekend-svitto.excerpt': 'Events in the canton of Schwyz every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
     'blog.article.eventi-weekend-svitto.imageAlt': 'Weekend events in the canton of Schwyz',
+    'blog.article.unteriberg-budget-2027.title': 'Unteriberg, budget 2027: surplus of 13.500 francs',
+    'blog.article.unteriberg-budget-2027.excerpt': 'Kirchgemeinde Unteriberg forecasts revenues of 525.743 francs and expenditures of 512.245 in 2027; the indicated surplus is 13.500 francs.',
+    'blog.article.unteriberg-budget-2027.imageAlt': 'Symbolic Alpine scene for the Kirchgemeinde Unteriberg budget',
 };
 
 export default blogMetaCantonSzEn;

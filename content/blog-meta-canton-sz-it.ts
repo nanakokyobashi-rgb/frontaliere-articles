@@ -18,6 +18,9 @@ const blogMetaCantonSzIt: Record<string, string> = {
     'blog.article.eventi-weekend-svitto.title': 'Eventi del weekend nel Canton Svitto: cosa fare sabato e domenica',
     'blog.article.eventi-weekend-svitto.excerpt': 'Eventi nel Canton Svitto ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
     'blog.article.eventi-weekend-svitto.imageAlt': 'Eventi del weekend nel Canton Svitto',
+    'blog.article.unteriberg-budget-2027.title': 'Unteriberg, budget 2027: avanzo di 13.500 franchi',
+    'blog.article.unteriberg-budget-2027.excerpt': 'La Kirchgemeinde Unteriberg prevede 525.743 franchi di entrate e 512.245 di uscite nel 2027; l\'avanzo indicato è di 13.500 franchi.',
+    'blog.article.unteriberg-budget-2027.imageAlt': 'Scena alpina simbolica per il bilancio della Kirchgemeinde Unteriberg',
 };
 
 export default blogMetaCantonSzIt;
