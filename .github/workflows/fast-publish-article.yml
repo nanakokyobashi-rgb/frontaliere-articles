@@ -302,9 +302,12 @@ jobs:
           fi
 
           # Keep the legacy empty-dispatch behavior: with no explicit id, use
-          # the body files from the last corpus commit. Collect every match,
-          # group it by its owning section and publish the whole batch, even
-          # when one commit legitimately updates more than one Pages section.
+          # the registered body files from the last corpus commit. Group every
+          # publishable match by its owning section and publish the whole batch,
+          # even when one commit legitimately updates more than one Pages
+          # section. Historical orphan bodies cannot be rendered because they
+          # have no registry entry: report and skip them without suppressing
+          # the registered IDs changed by the same commit.
           # Which directories hold article bodies, and which section owns each,
           # comes from the section core (scripts/ci/fast-publish-section.mjs):
           # the old `case` sent every non-`blog-body-ch` body to frontaliere,
@@ -312,23 +315,23 @@ jobs:
           # shard without an error.
           if [ "${#ids[@]}" -eq 0 ]; then
             changed="$(git diff --name-only "$before" HEAD 2>/dev/null || true)"
-            body_re="$(node scripts/ci/fast-publish-section.mjs body-regex shard)"
-            mapfile -t bodies < <(
-              printf '%s\n' "$changed" \
-                | grep -E "$body_re" \
-                | sort -u || true
-            )
-            for body in "${bodies[@]}"; do
-              [ -f "$body" ] || continue
-              body_id="$(basename "$body" .ts)"
-              body_section="$(node scripts/ci/fast-publish-section.mjs section-of "$body")"
+            body_plan="$(printf '%s\n' "$changed" | node scripts/ci/fast-publish-section.mjs body-plan shard)"
+            while IFS= read -r body_target; do
+              [ -n "$body_target" ] || continue
+              body_section="$(printf '%s' "$body_target" | jq -r '.section')"
+              body_ids_json="$(printf '%s' "$body_target" | jq -c '.ids')"
+              skipped_ids_json="$(printf '%s' "$body_target" | jq -c '.skippedIds')"
+              while IFS= read -r skipped_id; do
+                [ -n "$skipped_id" ] || continue
+                echo "::warning::skipping changed body '$skipped_id' in section '$body_section': no publishable registry entry"
+              done < <(printf '%s' "$skipped_ids_json" | jq -r '.[]')
               if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -n "${section:-}" ] && [ "$section" != "$body_section" ]; then
                 echo "::error::derived body section '$body_section' does not match requested section '$section'"
                 exit 1
               fi
-              body_ids_json="$(jq -cn --arg id "$body_id" '[$id]')"
+              [ "$(printf '%s' "$body_ids_json" | jq 'length')" -gt 0 ] || continue
               groups="$(jq -c --arg s "$body_section" --argjson ids "$body_ids_json" '.[$s] = ((.[$s] // []) + $ids | unique | sort)' <<<"$groups")"
-            done
+            done < <(printf '%s' "$body_plan" | jq -c '.[]')
           fi
 
           # Explicit dispatch ids form one target; body and image changes are
