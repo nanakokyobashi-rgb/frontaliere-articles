@@ -30,6 +30,9 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.eventi-weekend-vallese.title': 'Eventi del weekend in Vallese: cosa fare sabato e domenica',
     'blog.article.eventi-weekend-vallese.excerpt': 'Eventi in Vallese ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
     'blog.article.eventi-weekend-vallese.imageAlt': 'Eventi del weekend in Vallese',
+    'blog.article.iselle-parcheggio-frontalieri.title': 'Iselle, parcheggio frontalieri a pagamento: 50 euro',
+    'blog.article.iselle-parcheggio-frontalieri.excerpt': 'Il parcheggio di Iselle per frontalieri diventa a pagamento: l\'abbonamento mensile è di 50 euro.',
+    'blog.article.iselle-parcheggio-frontalieri.imageAlt': 'Parcheggio di Iselle per frontalieri con abbonamento mensile a 50 euro',
 };
 
 export default blogMetaCantonVsIt;

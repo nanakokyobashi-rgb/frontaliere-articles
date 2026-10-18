@@ -30,6 +30,9 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.eventi-weekend-vallese.title': 'Veranstaltungen am Wochenende im Wallis: was tun Sa & So',
     'blog.article.eventi-weekend-vallese.excerpt': 'Veranstaltungen im Wallis an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
     'blog.article.eventi-weekend-vallese.imageAlt': 'Veranstaltungen am Wochenende im Wallis',
+    'blog.article.iselle-parcheggio-frontalieri.title': 'Iselle, kostenpflichtiger Parkplatz für Grenzgänger: 50 euro',
+    'blog.article.iselle-parcheggio-frontalieri.excerpt': 'Der Parkplatz für Grenzgänger in Iselle wird kostenpflichtig: Das Monatsabonnement beträgt 50 euro.',
+    'blog.article.iselle-parcheggio-frontalieri.imageAlt': 'Parkplatz in Iselle für Grenzgänger mit Monatsabo für 50 Euro',
 };
 
 export default blogMetaCantonVsDe;

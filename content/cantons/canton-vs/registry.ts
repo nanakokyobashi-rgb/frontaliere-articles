@@ -105,4 +105,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'iselle-parcheggio-frontalieri',
+ category: 'pratico',
+ date: '2026-10-18T06:55:42.164Z',
+ image: '/images/blog/article-iselle-parcheggio-frontalieri.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VS'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

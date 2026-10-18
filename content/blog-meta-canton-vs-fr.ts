@@ -30,6 +30,9 @@ const blogMetaCantonVsFr: Record<string, string> = {
     'blog.article.eventi-weekend-vallese.title': 'Événements du week-end en Valais : que faire samedi & dimanche',
     'blog.article.eventi-weekend-vallese.excerpt': 'Événements en Valais chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
     'blog.article.eventi-weekend-vallese.imageAlt': 'Événements du week-end en Valais',
+    'blog.article.iselle-parcheggio-frontalieri.title': 'Iselle, parking pour frontaliers payant : 50 euro',
+    'blog.article.iselle-parcheggio-frontalieri.excerpt': 'Le parking d\'Iselle pour frontaliers devient payant : l\'abonnement mensuel est de 50 euro.',
+    'blog.article.iselle-parcheggio-frontalieri.imageAlt': 'Parking d\'Iselle pour frontaliers avec abonnement mensuel de 50 euros',
 };
 
 export default blogMetaCantonVsFr;

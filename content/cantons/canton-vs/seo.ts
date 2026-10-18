@@ -348,6 +348,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-iselle-parcheggio-frontalieri': {
+    title: 'Iselle, parcheggio frontalieri a pagamento: 50 euro',
+    description: 'Il parcheggio di Iselle per frontalieri diventa a pagamento: l\'abbonamento mensile è di 50 euro. Cosa cambia per il budget in CHF di chi lavora oltreconfine.',
+    keywords: 'frontalieri, ticino, svizzera, italia, iselle, parcheggio, pagamento, euro',
+    ogTitle: 'Iselle, parcheggio frontalieri a pagamento',
+    ogDescription: 'Il parcheggio per frontalieri di Iselle cambia regime: l\'abbonamento mensile indicato costa 50 euro. Per chi lavora in Vallese, la spesa va inserita nel budget in euro e poi convertita in franchi secondo il cambio applicato.',
+    canonicalPath: '/articoli-vallese/iselle-parcheggio-frontalieri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Iselle, parcheggio frontalieri a pagamento: 50 euro",
+      "description": "Il parcheggio di Iselle per frontalieri diventa a pagamento: l'abbonamento mensile è di 50 euro. Cosa cambia per il budget in CHF di chi lavora oltreconfine.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-iselle-parcheggio-frontalieri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Parcheggio di Iselle per frontalieri con abbonamento mensile a 50 euro"
+      },
+      "datePublished": "2026-10-18T06:55:42+00:00",
+      "dateModified": "2026-10-18T06:55:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vallese/iselle-parcheggio-frontalieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
