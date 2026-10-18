@@ -45237,6 +45237,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'radar-velocita-ticino-ottobre',
+ category: 'pratico',
+ date: '2026-10-18T03:20:55.269Z',
+ image: '/images/blog/article-radar-velocita-ticino-ottobre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

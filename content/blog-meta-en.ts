@@ -13421,6 +13421,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.gallarate-furto-strappo-minori.title': 'Gallarate, two minors detained for snatch theft',
     'blog.article.gallarate-furto-strappo-minori.excerpt': 'Two minors aged 17 and 14 arrested in the act A 75-year-old pensioner falls but is not injured The stolen goods are recovered and returned Location: square',
     'blog.article.gallarate-furto-strappo-minori.imageAlt': 'Railway station forecourt, a file image for the Gallarate local crime report.',
+    'blog.article.radar-velocita-ticino-ottobre.title': 'Speed cameras in Canton Ticino from October 19 to 25: the checks',
+    'blog.article.radar-velocita-ticino-ottobre.excerpt': 'Checks from October 19 to 25, 2026 Mobile and semi-stationary speed cameras in various locations Also affected are areas frequented by Italian cross-border commuters Who → Police',
+    'blog.article.radar-velocita-ticino-ottobre.imageAlt': 'Speed radar controls in Canton Ticino',
 };
 
 export default blogMetaEn;

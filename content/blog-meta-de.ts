@@ -13420,6 +13420,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.gallarate-furto-strappo-minori.title': 'Gallarate: Zwei Minderjährige nach Raubdiebstahl',
     'blog.article.gallarate-furto-strappo-minori.excerpt': 'Zwei Minderjährige im Alter von 17 und 14 Jahren auf frischer Tat festgenommen Ein 75-jähriger Rentner stürzt, bleibt aber unverletzt Das Diebesgut wird sichergestellt und zurückgegeben Ort: Platz',
     'blog.article.gallarate-furto-strappo-minori.imageAlt': 'Vorplatz eines Bahnhofs, Symbolbild zur lokalen Kriminalmeldung aus Gallarate.',
+    'blog.article.radar-velocita-ticino-ottobre.title': 'Radar im Kanton Tessin vom 19. bis 25. Oktober: die Kontrollen',
+    'blog.article.radar-velocita-ticino-ottobre.excerpt': 'Kontrollen vom 19.',
+    'blog.article.radar-velocita-ticino-ottobre.imageAlt': 'Geschwindigkeitskontrollen mit Radar im Tessin',
 };
 
 export default blogMetaDe;

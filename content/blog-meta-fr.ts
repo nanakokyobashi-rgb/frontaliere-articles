@@ -13423,6 +13423,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.gallarate-furto-strappo-minori.title': 'Gallarate, deux mineurs interpellés pour vol à l’arraché',
     'blog.article.gallarate-furto-strappo-minori.excerpt': 'Deux mineurs de 17 et 14 ans arrêtés en flagrant délit Un retraité de 75 ans tombe, mais ne se blesse pas Le butin est récupéré et rendu Lieu : place',
     'blog.article.gallarate-furto-strappo-minori.imageAlt': 'Parvis d\'une gare, image d\'illustration pour le fait divers de Gallarate.',
+    'blog.article.radar-velocita-ticino-ottobre.title': 'Radar dans le canton du Tessin du 19 au 25 octobre : les contrôles',
+    'blog.article.radar-velocita-ticino-ottobre.excerpt': 'Contrôles du 19 au 25 octobre 2026 Radars mobiles et semi-stationnaires dans diverses localités Sont également concernées des zones fréquentées par les frontaliers italiens Qui → Police',
+    'blog.article.radar-velocita-ticino-ottobre.imageAlt': 'Contrôles de vitesse par radar au Tessin',
 };
 
 export default blogMetaFr;

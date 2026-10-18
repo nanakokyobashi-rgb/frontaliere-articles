@@ -13422,6 +13422,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.gallarate-furto-strappo-minori.title': 'Gallarate, due minori fermati per furto con strappo',
     'blog.article.gallarate-furto-strappo-minori.excerpt': 'Due minori di 17 e 14 anni arrestati in flagranza Un pensionato di 75 anni cade, ma non resta ferito La refurtiva viene recuperata e restituita Luogo: piazza',
     'blog.article.gallarate-furto-strappo-minori.imageAlt': 'Area davanti a una stazione ferroviaria, immagine di repertorio per la cronaca di Gallarate.',
+    'blog.article.radar-velocita-ticino-ottobre.title': 'Radar in Canton Ticino dal 19 al 25 ottobre: i controlli',
+    'blog.article.radar-velocita-ticino-ottobre.excerpt': 'Controlli dal 19 al 25 ottobre 2026 Radar mobili e semi-stazionari in diverse località Coinvolte anche zone frequentate dai frontalieri italiani Chi → Polizia',
+    'blog.article.radar-velocita-ticino-ottobre.imageAlt': 'Controlli della velocità con radar in Canton Ticino',
 };
 
 export default blogMetaIt;
