@@ -830,9 +830,9 @@ test('eventi: la stessa voce da due agende e\' una riga, due eventi omonimi in d
   const dataset = {
     generatedAt: new Date(NOW - HOUR_MS).toISOString(),
     events: [
-      ev('tio:1', 'Lugano'), ev('guidle:9', 'Lugano', { title: 'MERCATO  settimanale' }),
+      ev('tio:1', 'Lugano'), ev('tio:1', 'Lugano', { title: 'MERCATO  settimanale' }),
       ev('tio:2', 'Bellinzona'), ev('tio:3', 'Locarno'),
-      ev('tio:4', undefined, { venue: 'Piazza Grande' }), ev('guidle:5', undefined, { venue: 'Piazza Grande' }),
+      ev('tio:4', undefined, { venue: 'Piazza Grande' }), ev('tio:4', undefined, { venue: 'Piazza Grande' }),
     ],
   };
   const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
@@ -898,10 +898,13 @@ test('eventi: canonicalEventUrl deduplica equivalenti e conserva query, porta e 
   const urls = block.render('it').items.map((item) => item.url);
   assert.equal(urls.length, 8, 'due coppie canoniche collassano; query, porte e path significativi restano distinti');
   assert.equal(urls.filter((url) => url.includes('/event/query?')).length, 1, 'l’ordine delle coppie query e il fragment non cambiano identità');
+  assert.ok(urls.includes('https://events.example.ch/event/query?tag=first&tag=second&z=2'), 'la query viene emessa nella forma canonica');
   assert.equal(urls.filter((url) => /\/event\/(?:Gra|Gr%C3)/.test(url)).length, 1, 'www, slash finale e Unicode NFC del path si canonicalizzano');
+  assert.ok(urls.includes('https://events.example.ch/event/Gr%C3%A4del'), 'host, slash e path Unicode vengono emessi nella forma canonica');
   assert.ok(urls.some((url) => url.endsWith('/event/semantic?id=one')));
   assert.ok(urls.some((url) => url.endsWith('/event/semantic?id=two')));
   assert.equal(urls.filter((url) => url.includes('/event/port')).length, 2, 'la porta HTTPS predefinita si normalizza e la porta non standard resta distinta');
+  assert.ok(urls.includes('https://events.example.ch/event/port'), 'la porta HTTPS predefinita viene rimossa');
   assert.ok(urls.some((url) => url.includes(':8443/event/port')));
   assert.ok(urls.some((url) => url.endsWith('/event/path-one')));
   assert.ok(urls.some((url) => url.endsWith('/event/path-two')));

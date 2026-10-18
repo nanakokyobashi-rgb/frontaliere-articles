@@ -28,16 +28,21 @@ function eventIdIdentity(value) {
   return '';
 }
 
-function compareEventSourceIndex(a, b) {
-  return a[EVENT_SOURCE_INDEX] - b[EVENT_SOURCE_INDEX];
+function eventSourceIndex(value) {
+  const index = value?.[EVENT_SOURCE_INDEX];
+  return Number.isInteger(index) && index >= 0 ? index : Number.MAX_SAFE_INTEGER;
 }
 
-/** URL o luogo identificano la copia; ID e indice separano gli omonimi senza luogo. */
+function compareEventSourceIndex(a, b) {
+  return eventSourceIndex(a) - eventSourceIndex(b);
+}
+
+/** URL o ID identificano l'evento; il luogo e l'indice separano i fallback. */
 function eventIdentityKey(e) {
   const url = canonicalEventUrl(e.url);
   const place = foldedEventPart(e.comune) || foldedEventPart(e.venue);
   const id = eventIdIdentity(e.id);
-  const identity = url ? `url:${url}` : place ? `place:${place}` : id ? `id:${id}` : `record:${e[EVENT_SOURCE_INDEX]}`;
+  const identity = url ? `url:${url}` : id ? `id:${id}` : place ? `place:${place}` : `record:${eventSourceIndex(e)}`;
   return JSON.stringify([e.firstUsefulDay, foldedEventPart(e.title), identity]);
 }
 
@@ -111,8 +116,8 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
       || String(a.id ?? '').localeCompare(String(b.id ?? ''))
       || compareEventSourceIndex(a, b))
     // Lo stesso evento arriva da piu' agende: un URL esplicito prevale,
-    // altrimenti il luogo conserva la deduplica esistente; senza luogo l'ID
-    // separa gli omonimi. Record senza identificatori restano distinti.
+    // poi l'ID separa gli omonimi anche quando condividono il luogo; il luogo
+    // e' il fallback quando l'ID manca. Record senza identificatori restano distinti.
     .filter((e) => {
       const key = eventIdentityKey(e);
       if (seen.has(key)) return false;
@@ -137,7 +142,7 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
         description: t.description,
         items: rows.map((e) => {
           const place = [e.venue, e.comune].map((v) => (typeof v === 'string' ? v.trim() : '')).filter(Boolean);
-          const url = httpsUrlOrNull(e.url);
+          const url = canonicalEventUrl(e.url);
           const where = place.length ? clip([...new Set(place)].join(', '), 100) : '';
           const ongoing = e.startDate < today ? t.ongoing(fmtDay(e.lastDay, locale)) : '';
           const detail = [where, ongoing].filter(Boolean).join(' — ');

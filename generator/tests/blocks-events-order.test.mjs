@@ -30,3 +30,35 @@ test('eventi senza identità: indice sorgente stabile prima del limite righe', (
     'a parità degli altri campi, l’ordine sorgente è il tie-break prima del taglio',
   );
 });
+
+test('eventi: ID separa gli omonimi nello stesso luogo e il fallback conserva l’ordine sorgente', () => {
+  const tomorrow = new Date(NOW + DAY_MS).toISOString().slice(0, 10);
+  const event = (label, extra = {}) => ({
+    title: 'Evento condiviso',
+    titleByLocale: { it: label },
+    startDate: tomorrow,
+    startTime: '10:00',
+    canton: 'TI',
+    ...extra,
+  });
+  const dataset = {
+    generatedAt: new Date(NOW - 60 * 60 * 1000).toISOString(),
+    events: [
+      event('source-0'),
+      event('source-1'),
+      event('id-b', { id: 'event-b', comune: 'Lugano' }),
+      event('id-a', { id: 'event-a', comune: 'Lugano' }),
+      event('id-a-duplicate', { id: 'event-a', comune: 'Lugano' }),
+    ],
+  };
+
+  const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
+
+  assert.equal(block.available, true);
+  assert.equal(block.render('it').keyFacts[0].value, '4', 'l’ID evita la collisione nello stesso luogo, il duplicato con lo stesso ID collassa');
+  assert.deepEqual(
+    block.render('it').items.map((item) => item.label),
+    ['source-0', 'source-1', 'id-a', 'id-b'],
+    'i record senza URL, luogo o ID rispettano l’ordine sorgente e gli ID danno un ordine stabile agli omonimi',
+  );
+});
