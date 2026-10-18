@@ -857,18 +857,29 @@ export const LENGTH_FLOOR = { VS_OLD: 0.7, VS_IT: 0.4 };
 
 const ADDRESS_POSTAL_CODE_RE = /\b\d{5}\b/gu;
 const ADDRESS_CAPITALIZED_TOKEN_RE = /(?<![\p{L}\p{N}])\p{Lu}[\p{L}\p{M}]*(?:[’'\-][\p{L}\p{M}]+)*/gu;
-const ADDRESS_STREET_CONTEXT_SOURCE = '(?:via|viale|piazza|piazzale|corso|strada|contrada|largo|vicolo|località|loc\\.|sentiero|riva|lungolago|route|rue|avenue|chemin|strasse|weg|platz)';
+const ADDRESS_LOCALITY_MARKER_SOURCE = '(?:fraz(?:ione)?\\.?|localit(?:à|a|é)|locality|loc\\.?|hameau|hamlet|lieu-dit|ortsteil)';
+const ADDRESS_STREET_CONTEXT_SOURCE = '(?:via|viale|piazza|piazzale|corso|strada|contrada|largo|vicolo|' + ADDRESS_LOCALITY_MARKER_SOURCE + '|sentiero|riva|lungolago|route|rue|avenue|chemin|strasse|weg|platz)';
 const ADDRESS_STREET_NUMBER_RE = new RegExp(`(?<![\\p{L}\\p{N}])${ADDRESS_STREET_CONTEXT_SOURCE}(?![\\p{L}\\p{N}])[^,\\n]*?(?:,\\s*)?\\d{1,5}\\s*,?\\s*$`, 'iu');
 const ADDRESS_STREET_CONTEXT_RE = new RegExp(`(?<![\\p{L}\\p{N}])${ADDRESS_STREET_CONTEXT_SOURCE}(?![\\p{L}\\p{N}])`, 'iu');
 const ADDRESS_STREET_CONTEXT_GLOBAL_RE = new RegExp(`(?<![\\p{L}\\p{N}])${ADDRESS_STREET_CONTEXT_SOURCE}(?![\\p{L}\\p{N}])`, 'giu');
 const ADDRESS_LABEL_CONTEXT_RE = /\b(?:indirizzo|address|adresse|cap|codice\s+postale|postal\s+code|postcode|plz|npa)\b/iu;
-const ADDRESS_POSTAL_SEPARATOR_RE = /^(?:\s*(?:[,;:]|[-‐‑‒–—−])\s*|\s+\p{Lu}|\s+(?:fraz(?:ione)?\.?|localit(?:à|a)|loc\.?|hameau|lieu-dit|ortsteil)(?![\p{L}\p{N}])|\s*$)/iu;
+const ADDRESS_POSTAL_SEPARATOR_RE = new RegExp(
+  '^(?:\\s*(?:[,;:]|[-‐‑‒–—−])\\s*|\\s+\\p{Lu}|\\s+'
+    + ADDRESS_LOCALITY_MARKER_SOURCE
+    + '(?![\\p{L}\\p{N}])|\\s*$)',
+  'iu',
+);
 const ADDRESS_POSTAL_LOCALITY_RE = /^\s*(?:(?:[,;:]|[-‐‑‒–—−])\s*)?\p{Lu}[\p{L}\p{M}]*(?:[’'\-][\p{L}\p{M}]+)*/u;
-const ADDRESS_POSTAL_LOCALITY_MARKER_PREFIX_RE = /^(?:fraz(?:ione)?\.?|localit(?:à|a)|loc\.?|hameau|lieu-dit|ortsteil)(?![\p{L}\p{N}])\s+/iu;
+const ADDRESS_POSTAL_LOCALITY_MARKER_PREFIX_RE = new RegExp(
+  '^' + ADDRESS_LOCALITY_MARKER_SOURCE + '(?![\\p{L}\\p{N}])\\s+',
+  'iu',
+);
 const ADDRESS_COMPACT_PREFIX_RE = /^\s*(?:[-‐‑‒–—−>→•*]\s*)?$/u;
-const ADDRESS_LOCALITY_MARKER_SOURCE = '(?:fraz(?:ione)?\\.?|localit(?:à|a)|loc\\.?|hameau|lieu-dit|ortsteil)';
 const ADDRESS_LOCALITY_MARKER_RE = new RegExp(`(?<![\\p{L}\\p{N}])${ADDRESS_LOCALITY_MARKER_SOURCE}(?![\\p{L}\\p{N}])`, 'iu');
-const ADDRESS_LOCALITY_MARKER_TOKEN_RE = /^(?:fraz(?:ione)?|localit(?:à|a)|loc|hameau|lieu-dit|ortsteil)$/iu;
+const ADDRESS_LOCALITY_MARKER_TOKEN_RE = new RegExp(
+  '^' + ADDRESS_LOCALITY_MARKER_SOURCE + '$',
+  'iu',
+);
 const ADDRESS_COUNTRY_BOUNDARY_RE = /(?:^|[,;]|\s+)(?:italia|italy|italien|italie|svizzera|switzerland|schweiz|suisse|germania|germany|deutschland|allemagne|francia|france|spagna|spain|spanien|espagne|austria|österreich|autriche)\b[\s\S]*$/iu;
 const ADDRESS_SENTENCE_BOUNDARY_RE = /(?<!\bfraz)(?<!\bfrazione)(?<!\bloc)[.!?](?=\s|$)/iu;
 const ADDRESS_RECORD_BOUNDARY_RE = /[;\n]/u;
@@ -948,6 +959,27 @@ const ADDRESS_TOPONYM_GLOSSARY = Object.freeze([
   },
 ]);
 
+function addressTermStartsLocality(text, term) {
+  const visibleText = visibleAddressText(text).replace(ADDRESS_POSTAL_LOCALITY_MARKER_PREFIX_RE, '');
+  const foldedText = foldAddressText(visibleText);
+  const pattern = addressTermPattern(term);
+  if (!pattern) return false;
+  const match = pattern.exec(foldedText);
+  if (!match || match.index !== 0) return false;
+  return /^(?:\s*(?:[,;:]|[-‐‑‒–—−])|\s*$)/u.test(foldedText.slice(match[0].length));
+}
+
+function addressLocalityFormsForSourceLine(sourceLine, locale) {
+  const forms = new Set(sourceLine.tokens);
+  for (const entry of ADDRESS_TOPONYM_GLOSSARY) {
+    const sourceForm = entry.source.find((form) =>
+      sourceLine.tokens.some((token) => addressTermIsPresent(form, token)));
+    if (!sourceForm) continue;
+    for (const form of entry.localized[locale] || []) forms.add(form);
+  }
+  return [...forms];
+}
+
 function addressPostalMatches(line) {
   ADDRESS_POSTAL_CODE_RE.lastIndex = 0;
   const matches = [...String(line).matchAll(ADDRESS_POSTAL_CODE_RE)];
@@ -955,27 +987,57 @@ function addressPostalMatches(line) {
   return matches;
 }
 
-function addressSegmentForPostalCode(line, postalMatch) {
+function boundedAddressTextForPostalCode(line, postalMatch) {
   const text = String(line);
   const start = postalMatch.index + postalMatch[0].length;
   const afterPostal = text.slice(start);
   const nextPostalOffset = afterPostal.search(/\b\d{5}\b/u);
-  const bounded = nextPostalOffset < 0
+  return nextPostalOffset < 0
     ? afterPostal
     : afterPostal.slice(0, nextPostalOffset);
+}
+
+function addressDescriptionColonOffset(bounded) {
   ADDRESS_DESCRIPTION_COLON_RE.lastIndex = 0;
-  const descriptionColon = [...bounded.matchAll(ADDRESS_DESCRIPTION_COLON_RE)]
+  const descriptionColon = [...String(bounded).matchAll(ADDRESS_DESCRIPTION_COLON_RE)]
     .find((match) => postalSegmentHasLocality(bounded.slice(0, match.index)));
   ADDRESS_DESCRIPTION_COLON_RE.lastIndex = 0;
+  return descriptionColon?.index ?? -1;
+}
+
+function addressSegmentForPostalCode(
+  line,
+  postalMatch,
+  { forceFirstColonBoundary = false, expectedLocalityTerms = [] } = {},
+) {
+  const bounded = boundedAddressTextForPostalCode(line, postalMatch);
+  const descriptionColonOffset = addressDescriptionColonOffset(bounded);
+  const firstColonOffset = bounded.indexOf(':');
+  const colonHasExpectedLocality = expectedLocalityTerms.length > 0
+    ? expectedLocalityTerms.some((term) =>
+      addressTermStartsLocality(bounded.slice(firstColonOffset + 1), term))
+    : postalSegmentHasLocality(bounded);
+  const missingLocalityColonOffset = firstColonOffset >= 0 && !colonHasExpectedLocality
+    ? firstColonOffset
+    : -1;
+  const colonBoundary = forceFirstColonBoundary
+    ? firstColonOffset
+    : descriptionColonOffset >= 0
+      ? descriptionColonOffset
+      : missingLocalityColonOffset;
   const boundaryOffsets = [
     bounded.search(ADDRESS_SENTENCE_BOUNDARY_RE),
     bounded.search(ADDRESS_RECORD_BOUNDARY_RE),
-    descriptionColon?.index ?? -1,
+    colonBoundary,
   ].filter((offset) => offset >= 0);
   const addressText = boundaryOffsets.length === 0
     ? bounded
     : bounded.slice(0, Math.min(...boundaryOffsets));
   return addressText.replace(ADDRESS_COUNTRY_BOUNDARY_RE, '').trim();
+}
+
+function addressHasDescriptionColon(line, postalMatch) {
+  return addressDescriptionColonOffset(boundedAddressTextForPostalCode(line, postalMatch)) >= 0;
 }
 
 function postalHasAddressSeparator(line, postalMatch) {
@@ -1030,6 +1092,7 @@ function addressTokenIsPreserved({ token, sourceSegment, targetSegment, locale }
 
 function addressLineTarget(lines, sourceLine, sourceLineIndex, usedTargetLines, usedTargetMatches, locale) {
   const candidates = [];
+  const expectedLocalityTerms = addressLocalityFormsForSourceLine(sourceLine, locale);
   lines.forEach((rawLine, index) => {
     // A single visible line may contain more than one postal-code/address
     // segment. It can therefore satisfy several source postal matches, while
@@ -1041,7 +1104,11 @@ function addressLineTarget(lines, sourceLine, sourceLineIndex, usedTargetLines, 
       if (postalMatch[0] !== sourceLine.postalCode) continue;
       const matchKey = `${index}:${postalMatch.index}`;
       if (usedTargetMatches.has(matchKey)) continue;
-      const targetSegment = addressSegmentForPostalCode(line, postalMatch);
+      if (!isAddressLine(line, postalMatch)) continue;
+      const targetSegment = addressSegmentForPostalCode(line, postalMatch, {
+        forceFirstColonBoundary: sourceLine.hasDescriptionColon,
+        expectedLocalityTerms,
+      });
       candidates.push({
         index,
         matchKey,
@@ -1108,6 +1175,7 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
           postalCode: postalMatch[0],
           line: line.trim(),
           segment: sourceSegment,
+          hasDescriptionColon: addressHasDescriptionColon(visibleLine, postalMatch),
           context: addressContextForPostalCode(visibleLine, postalMatch),
           tokens: [...new Set(tokens)],
         };

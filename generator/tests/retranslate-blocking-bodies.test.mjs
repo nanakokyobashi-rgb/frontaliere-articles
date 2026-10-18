@@ -1080,6 +1080,16 @@ test('la guardia riconosce anche un indirizzo con nome strada minimo', () => {
   })[0].missing, ['Como']);
 });
 
+test('la guardia riconosce una frazione prima del CAP', () => {
+  const italianSections = { body1: 'Frazione Pieve, 22100 Como' };
+  const mismatches = findAddressToponymMismatches({
+    italianSections,
+    newSections: { body1: 'Frazione Pieve, 22100 Wie' },
+    locale: 'en',
+  });
+  assert.deepEqual(mismatches[0]?.missing, ['Como']);
+});
+
 test('la guardia riconosce CAP-località senza glossario o numero civico', () => {
   const cases = [
     {
@@ -1193,6 +1203,25 @@ test('la guardia ferma il segmento indirizzo prima della descrizione dopo i due 
   })[0]?.missing, ['Como']);
 });
 
+test('la guardia non prende la descrizione dopo un colon post-CAP per località persa', () => {
+  const italianSections = {
+    body1: 'Indirizzo: Via Roma 1, 22100 Como: Municipio di Como',
+  };
+  const mismatches = findAddressToponymMismatches({
+    italianSections,
+    newSections: {
+      body1: 'Adresse: Rue Roma 1, 22100: Description sur Como',
+    },
+    locale: 'en',
+  });
+  assert.deepEqual(mismatches[0]?.missing, ['Como']);
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: 'Via Roma 1, 22100 Como' },
+    newSections: { body1: 'Rue Roma 1, 22100: Description sur Como' },
+    locale: 'en',
+  })[0]?.missing, ['Como']);
+});
+
 test('la guardia non interpreta numeri di pratica come indirizzi', () => {
   const italianSections = {
     body1: "L'ordinanza n. 10440/2026, Questa interpretazione è stata pubblicata ieri.",
@@ -1219,6 +1248,15 @@ test('la guardia valuta il CAP reale anche dopo un numero di pratica', () => {
   });
   assert.deepEqual(mismatches[0].missing, ['Como']);
   assert.equal(mismatches[0].postalCode, '22100');
+});
+
+test('la guardia non associa il CAP di una pratica alla riga di indirizzo', () => {
+  const mismatches = findAddressToponymMismatches({
+    italianSections: { body1: 'Via Roma 1, 22100 Como' },
+    newSections: { body1: 'Pratica 22100: descrizione su Como' },
+    locale: 'en',
+  });
+  assert.deepEqual(mismatches[0]?.missing, ['Como']);
 });
 
 test('la guardia non scambia un numero statistico separato da virgole per un CAP', () => {
