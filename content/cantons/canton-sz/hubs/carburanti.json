@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T11:38:04.345Z",
-  "contentHash": "84ae1669161b27986c375e8f2ee2cb9d2ef749c447b5087333f37663877e24c2",
+  "updatedAt": "2026-10-18T07:06:50.545Z",
+  "contentHash": "c2561d8e70b54b7ed481117a4f749df78c66180e74a12c0c6a1ea09b40625c10",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-16T11:53:35.759Z",
+      "updatedAt": "2026-10-17T11:10:59.318Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-16T11:53:35.759Z"
+          "updatedAt": "2026-10-17T11:10:59.318Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Unteriberg, budget 2027: avanzo di 13.500 franchi",
+          "url": "/articoli-svitto/unteriberg-budget-2027/",
+          "excerpt": "La Kirchgemeinde Unteriberg prevede 525.743 franchi di entrate e 512.245 di uscite nel 2027; l'avanzo indicato è di 13.500 franchi.",
+          "date": "2026-10-18T07:01:31.505Z"
+        },
         {
           "title": "Eventi del weekend nel Canton Svitto: cosa fare sabato e domenica",
           "url": "/articoli-svitto/eventi-weekend-svitto/",
@@ -82,12 +88,6 @@
           "url": "/articoli-svitto/svitto-cambio-cassa-malati/",
           "excerpt": "Le offerte per cambiare cassa malati spesso ingannano: una cassa locale di Svitto deve fare i conti con un business descritto come concorrenza sleale.",
           "date": "2026-10-08T14:43:30.771Z"
-        },
-        {
-          "title": "Einsiedeln: chiusure stradali per il Gallusmarkt 2026",
-          "url": "/articoli-svitto/chiusura-strade-gallusmarkt-svitto/",
-          "excerpt": "Accesso e uscita vietati in Hauptstrasse e Sagenplatz dalle 5.00 alle 20.00 del giorno del mercato. Rumori da lunedì alle 5.00.",
-          "date": "2026-10-07T09:21:09.358Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T07:06:50.545Z"
     },
     "en": {
       "canton": "SZ",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-16T11:53:35.759Z"
+          "updatedAt": "2026-10-17T11:10:59.318Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Unteriberg, budget 2027: surplus of 13.500 francs",
+          "url": "/en/schwyz-articles/unteriberg-2027-budget/",
+          "excerpt": "Kirchgemeinde Unteriberg forecasts revenues of 525.743 francs and expenditures of 512.245 in 2027; the indicated surplus is 13.500 francs.",
+          "date": "2026-10-18T07:01:31.505Z"
+        },
         {
           "title": "Weekend events in the canton of Schwyz: what to do Saturday & Sunday",
           "url": "/en/schwyz-articles/weekend-events-schwyz/",
@@ -169,12 +175,6 @@
           "url": "/en/schwyz-articles/schwyz-health-insurance-switch/",
           "excerpt": "Offers to switch health insurers are often deceptive: a local health insurer in Schwyz has to contend with a business described as unfair competition.",
           "date": "2026-10-08T14:43:30.771Z"
-        },
-        {
-          "title": "Einsiedeln: road closures for Gallusmarkt 2026",
-          "url": "/en/schwyz-articles/road-closure-gallusmarkt-schwyz/",
-          "excerpt": "Access and exit prohibited on Hauptstrasse and Sagenplatz from 5.00 to 20.00 on market day. Noise from Monday at 5.00.",
-          "date": "2026-10-07T09:21:09.358Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T07:06:50.545Z"
     },
     "de": {
       "canton": "SZ",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-16T11:53:35.759Z"
+          "updatedAt": "2026-10-17T11:10:59.318Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Unteriberg, Budget 2027: Überschuss von 13.500 Franken",
+          "url": "/de/schwyz-artikel/unteriberg-budget-2027-uberschuss-von-13-500-franken/",
+          "excerpt": "Die Kirchgemeinde Unteriberg erwartet für 2027 Einnahmen von 525.743 Franken und Ausgaben von 512.245 Franken; der ausgewiesene Überschuss beträgt 13.500 Franken.",
+          "date": "2026-10-18T07:01:31.505Z"
+        },
         {
           "title": "Veranstaltungen am Wochenende im Kanton Schwyz: was tun Sa & So",
           "url": "/de/schwyz-artikel/wochenend-veranstaltungen-schwyz/",
@@ -256,12 +262,6 @@
           "url": "/de/schwyz-artikel/schwyz-krankenkassenwechsel/",
           "excerpt": "Die Angebote für einen Krankenkassenwechsel sind oft irreführend: Eine lokale Krankenkasse in Schwyz muss sich mit einem Geschäftsmodell auseinandersetzen, das als unlauterer Wettbewerb beschrieben wird.",
           "date": "2026-10-08T14:43:30.771Z"
-        },
-        {
-          "title": "Einsiedeln: Strassensperrungen für den Gallusmarkt 2026",
-          "url": "/de/schwyz-artikel/strassensperrung-gallusmarkt-schwyz/",
-          "excerpt": "Zufahrt und Ausfahrt in der Hauptstrasse und am Sagenplatz am Markttag von 5.00 bis 20.00 Uhr verboten. Lärm ab Montag um 5.00 Uhr.",
-          "date": "2026-10-07T09:21:09.358Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T07:06:50.545Z"
     },
     "fr": {
       "canton": "SZ",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-16T11:53:35.759Z"
+          "updatedAt": "2026-10-17T11:10:59.318Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Unteriberg, budget 2027 : excédent de 13.500 francs",
+          "url": "/fr/articles-schwytz/budget-2027-unteriberg/",
+          "excerpt": "La Kirchgemeinde Unteriberg prévoit 525.743 francs de recettes et 512.245 de dépenses en 2027 ; l'excédent indiqué est de 13.500 francs.",
+          "date": "2026-10-18T07:01:31.505Z"
+        },
         {
           "title": "Événements du week-end dans le canton de Schwytz : que faire samedi & dimanche",
           "url": "/fr/articles-schwytz/evenements-week-end-schwytz/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-schwytz/schwytz-changement-caisse-maladie/",
           "excerpt": "Les offres de changement de caisse-maladie sont souvent trompeuses : une caisse locale de Schwytz doit faire face à une activité décrite comme de la concurrence déloyale.",
           "date": "2026-10-08T14:43:30.771Z"
-        },
-        {
-          "title": "Einsiedeln : fermetures routières pour le Gallusmarkt 2026",
-          "url": "/fr/articles-schwytz/fermeture-routes-gallusmarkt-schwytz/",
-          "excerpt": "Accès et sortie interdits dans la Hauptstrasse et sur la Sagenplatz de 5.00 à 20.00 le jour du marché. Bruits à partir de lundi à 5.00.",
-          "date": "2026-10-07T09:21:09.358Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T07:06:50.545Z"
     }
   }
 }

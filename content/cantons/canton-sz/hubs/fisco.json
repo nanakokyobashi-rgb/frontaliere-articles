@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "fisco",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "f086f107b43f44af05fa2986548437571422696a41b1b17de491a429588f8f97",
+  "updatedAt": "2026-10-18T07:06:50.545Z",
+  "contentHash": "086ad897b5bd40712f2e68e754fb236f47897158c6ef377466c18fe547a31a4e",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-17T19:45:28.268Z",
       "keyFacts": 0
     }
   ],
@@ -115,10 +115,16 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26125"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Unteriberg, budget 2027: avanzo di 13.500 franchi",
+          "url": "/articoli-svitto/unteriberg-budget-2027/",
+          "excerpt": "La Kirchgemeinde Unteriberg prevede 525.743 franchi di entrate e 512.245 di uscite nel 2027; l'avanzo indicato è di 13.500 franchi.",
+          "date": "2026-10-18T07:01:31.505Z"
+        },
         {
           "title": "Imposta di successione e donazione: guida Svitto",
           "url": "/articoli-svizzera/guida-imposta-successione-donazione-svitto/",
@@ -167,7 +173,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-18T07:06:50.545Z"
     },
     "en": {
       "canton": "SZ",
@@ -260,10 +266,16 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26125"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Unteriberg, budget 2027: surplus of 13.500 francs",
+          "url": "/en/schwyz-articles/unteriberg-2027-budget/",
+          "excerpt": "Kirchgemeinde Unteriberg forecasts revenues of 525.743 francs and expenditures of 512.245 in 2027; the indicated surplus is 13.500 francs.",
+          "date": "2026-10-18T07:01:31.505Z"
+        },
         {
           "title": "Inheritance and donation tax: Schwyz guide",
           "url": "/en/swiss-articles/guide-inheritance-gift-tax-schwyz/",
@@ -312,7 +324,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-18T07:06:50.545Z"
     },
     "de": {
       "canton": "SZ",
@@ -405,10 +417,16 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26125"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Unteriberg, Budget 2027: Überschuss von 13.500 Franken",
+          "url": "/de/schwyz-artikel/unteriberg-budget-2027-uberschuss-von-13-500-franken/",
+          "excerpt": "Die Kirchgemeinde Unteriberg erwartet für 2027 Einnahmen von 525.743 Franken und Ausgaben von 512.245 Franken; der ausgewiesene Überschuss beträgt 13.500 Franken.",
+          "date": "2026-10-18T07:01:31.505Z"
+        },
         {
           "title": "Erbschafts- und Schenkungssteuer: Leitfaden Schwyz",
           "url": "/de/schweiz-artikel/leitfaden-erbschafts-schenkungssteuer-schwyz/",
@@ -457,7 +475,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-18T07:06:50.545Z"
     },
     "fr": {
       "canton": "SZ",
@@ -550,10 +568,16 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26125"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Unteriberg, budget 2027 : excédent de 13.500 francs",
+          "url": "/fr/articles-schwytz/budget-2027-unteriberg/",
+          "excerpt": "La Kirchgemeinde Unteriberg prévoit 525.743 francs de recettes et 512.245 de dépenses en 2027 ; l'excédent indiqué est de 13.500 francs.",
+          "date": "2026-10-18T07:01:31.505Z"
+        },
         {
           "title": "Droit de succession et donation : guide Schwytz",
           "url": "/fr/articles-suisse/guide-droits-succession-donation-schwytz/",
@@ -602,7 +626,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-18T07:06:50.545Z"
     }
   }
 }
