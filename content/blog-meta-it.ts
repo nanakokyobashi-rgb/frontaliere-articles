@@ -13481,6 +13481,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.frontaliere-tasse-dopo-licenziamento.title': 'Licenziamento frontaliere 2026: diritti fiscali e contributi',
     'blog.article.frontaliere-tasse-dopo-licenziamento.excerpt': 'Il Nuovo Accordo Frontalieri vale dal 1° gennaio 2024.',
     'blog.article.frontaliere-tasse-dopo-licenziamento.imageAlt': 'Frontaliere esamina documenti di lavoro vicino al confine del Ticino',
+    'blog.article.live-arconatese-varese-caronno.title': 'Arconatese-varese, diretta da caronno pertusella',
+    'blog.article.live-arconatese-varese-caronno.excerpt': 'Ottava giornata di Serie D, Girone D Il Varese sfida l\'Arconatese a Caronno Pertusella I biancorossi cercano continuità dopo la vittoria scorsa La gara è',
+    'blog.article.live-arconatese-varese-caronno.imageAlt': 'La sfida Arconatese-Varese a Caronno Pertusella',
 };
 
 export default blogMetaIt;
