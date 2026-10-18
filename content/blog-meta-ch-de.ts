@@ -8504,6 +8504,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.indennita-covid-abusi-aziende.title': 'Covid-Entschädigungen: Lastminute zahlt 28,9 Mio. zurück',
     'blog.article.indennita-covid-abusi-aziende.excerpt': '7\'200 von über 167\'000 begünstigten Unternehmen überprüft Das SECO hat 243,53 Millionen an Kurzarbeitsentschädigungen zurückgefordert Lastminute hat im Tessin 28,9 Millionen zurückerstattet Ende',
     'blog.article.indennita-covid-abusi-aziende.imageAlt': 'Schweizer Büro mit Mitarbeitern, die finanzielle Dokumente zu Covid‑Subventionen prüfen',
+    'blog.article.ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso.title': 'SP unterstützt drei Initiativen und ein Dokument zu menschenwürdiger Arbeit',
+    'blog.article.ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso.excerpt': 'In Thun hat die SP drei Volksinitiativen unterstützt Baume-Schneider hat über die Finanzierung der 13.',
+    'blog.article.ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso.imageAlt': 'Redaktionelles Bild zu: PS sostiene tre iniziative e documento lavoro dignitoso',
 };
 
 export default blogMetaChDe;

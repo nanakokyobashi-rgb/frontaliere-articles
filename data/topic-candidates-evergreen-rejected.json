@@ -1764,6 +1764,42 @@
       "firstSeenAt": "2026-10-18T16:37:08.677Z",
       "lastValidatedAt": "2026-10-18T16:37:08.677Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere licenziamento diritti preavviso indennita 2026 oltre 20 km",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T17:07:46.439Z",
+      "lastValidatedAt": "2026-10-18T17:07:46.439Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere licenziamento diritti preavviso indennita 2026 famiglia con figli",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T17:10:45.677Z",
+      "lastValidatedAt": "2026-10-18T17:10:45.677Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere licenziamento diritti preavviso indennita 2026 single",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T17:26:43.852Z",
+      "lastValidatedAt": "2026-10-18T17:26:43.852Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -10412,6 +10448,14 @@
     "frontaliere::https://www.varesenews.it/2026/10/i-voti-del-varese-cinque-gol-dautore-malinverno-piantoni-beretta-la-mediana-perfetta/2711386": {
       "section": "frontaliere",
       "ts": 1792340561459
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/la-varesina-non-sfonda-con-la-pro-sesto-arriva-un-altro-pareggio/2711776": {
+      "section": "frontaliere",
+      "ts": 1792343069004
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/ps%3a-s%c3%ac-a-tre-iniziative-e-a-documento-per-lavoro-pi%c3%b9-dignitoso/92235291": {
+      "section": "frontaliere",
+      "ts": 1792343085897
     }
   }
 }

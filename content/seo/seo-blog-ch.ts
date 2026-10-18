@@ -107432,6 +107432,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso': {
+    title: 'PS sostiene tre iniziative e documento lavoro dignitoso',
+    description: 'A Thun il PS ha sostenuto tre iniziative popolari Baume-Schneider ha parlato del finanziamento della 13ª AVS Il PS chiede orari più brevi e salari più alti',
+    keywords: 'frontalieri, ticino, svizzera, italia, sostiene, iniziative, documento, lavoro',
+    ogTitle: 'PS sostiene tre iniziative e documento lavoro dignitoso',
+    ogDescription: 'A Thun il PS ha sostenuto tre iniziative popolari Baume-Schneider ha parlato del finanziamento della 13ª AVS Il PS chiede orari più brevi e salari più alti',
+    canonicalPath: '/articoli-svizzera/ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PS sostiene tre iniziative e documento lavoro dignitoso",
+      "description": "A Thun il PS ha sostenuto tre iniziative popolari Baume-Schneider ha parlato del finanziamento della 13ª AVS Il PS chiede orari più brevi e salari più alti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: PS sostiene tre iniziative e documento lavoro dignitoso"
+      },
+      "datePublished": "2026-10-18T17:36:19+00:00",
+      "dateModified": "2026-10-18T17:36:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

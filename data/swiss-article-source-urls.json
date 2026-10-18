@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1950337/svizzera-domanda-turismo-estate-destinazioni": {
-    "articleId": "turismo-svizzera-estate-normalizzazione",
-    "ts": "2026-09-16T02:14:12.187Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/cronaca/1950305/esercitazione-polizia-sicurezza-esercito-collaborazione-risultati": {
     "articleId": "fides-26-polizia-esercito-berna",
     "ts": "2026-09-16T02:26:07.712Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1957573/seco-controlli-aziende-abusi-centinaia-indennita": {
     "articleId": "indennita-covid-abusi-aziende",
     "ts": "2026-10-18T16:04:42.645Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/ps%3a-s%c3%ac-a-tre-iniziative-e-a-documento-per-lavoro-pi%c3%b9-dignitoso/92235291": {
+    "articleId": "ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso",
+    "ts": "2026-10-18T17:36:19.970Z",
     "keyForm": 2
   }
 }

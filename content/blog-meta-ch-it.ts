@@ -8504,6 +8504,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.indennita-covid-abusi-aziende.title': 'Indennità Covid: abusi in centinaia di aziende. Lastminute ha restituito 28,9 milioni',
     'blog.article.indennita-covid-abusi-aziende.excerpt': '7\'200 aziende verificate su oltre 167\'000 beneficiarie La SECO ha reclamato 243,53 milioni di ILR Lastminute ha restituito 28,9 milioni in Ticino A fine',
     'blog.article.indennita-covid-abusi-aziende.imageAlt': 'Ufficio svizzero con impiegati che controllano documenti finanziari legati alle indennità Covid',
+    'blog.article.ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso.title': 'PS sostiene tre iniziative e documento lavoro dignitoso',
+    'blog.article.ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso.excerpt': 'A Thun il PS ha sostenuto tre iniziative popolari Baume-Schneider ha parlato del finanziamento della 13ª AVS Il PS chiede orari più brevi e salari più alti',
+    'blog.article.ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso.imageAlt': 'Immagine editoriale relativa a: PS sostiene tre iniziative e documento lavoro dignitoso',
 };
 
 export default blogMetaChIt;

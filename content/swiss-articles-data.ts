@@ -28413,6 +28413,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso',
+    category: 'novita',
+    date: '2026-10-18T17:36:19.429Z',
+    image: '/images/blog/article-ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso.webp',
+    hasCalculator: false,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
