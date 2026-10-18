@@ -45,6 +45,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.eventi-weekend-vaud.title': 'Veranstaltungen am Wochenende in der Waadt: was tun Sa & So',
     'blog.article.eventi-weekend-vaud.excerpt': 'Veranstaltungen in der Waadt an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
     'blog.article.eventi-weekend-vaud.imageAlt': 'Veranstaltungen am Wochenende in der Waadt',
+    'blog.article.hopital-nounours-chuv-lausanne.title': 'Lausanne: Hôpital des Nounours am CHUV am 14. und 15. November',
+    'blog.article.hopital-nounours-chuv-lausanne.excerpt': 'Neue Ausgabe am CHUV am 14.',
+    'blog.article.hopital-nounours-chuv-lausanne.imageAlt': 'CHUV in Lausanne beim Kinderanlass Hôpital des Nounours',
 };
 
 export default blogMetaCantonVdDe;

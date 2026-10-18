@@ -543,6 +543,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-hopital-nounours-chuv-lausanne': {
+    title: 'Losanna: Hôpital des Nounours al CHUV il 14 e 15 novembre',
+    description: 'Nuova edizione al CHUV il 14 e 15 novembre Iscrizioni dal 24 ottobre alle 8 Partecipazione gratuita su iscrizione Attività per bambini nella zona degli auditori',
+    keywords: 'frontalieri, ticino, svizzera, italia, losanna, pital, nounours, chuv',
+    ogTitle: 'Losanna, Hôpital des Nounours: iscrizioni dal 24 ottobre',
+    ogDescription: 'Nuova edizione al CHUV il 14 e 15 novembre Iscrizioni dal 24 ottobre alle 8 Partecipazione gratuita su iscrizione Attività per bambini nella zona degli auditori',
+    canonicalPath: '/articoli-vaud/hopital-nounours-chuv-lausanne/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Losanna: Hôpital des Nounours al CHUV il 14 e 15 novembre",
+      "description": "Nuova edizione al CHUV il 14 e 15 novembre Iscrizioni dal 24 ottobre alle 8 Partecipazione gratuita su iscrizione Attività per bambini nella zona degli auditori",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-hopital-nounours-chuv-lausanne.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "CHUV di Losanna per l'Hôpital des Nounours dedicato ai bambini"
+      },
+      "datePublished": "2026-10-18T06:56:42+00:00",
+      "dateModified": "2026-10-18T06:56:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/hopital-nounours-chuv-lausanne/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

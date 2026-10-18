@@ -45,6 +45,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.eventi-weekend-vaud.title': 'Eventi del weekend nel Canton Vaud: cosa fare sabato e domenica',
     'blog.article.eventi-weekend-vaud.excerpt': 'Eventi nel Canton Vaud ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
     'blog.article.eventi-weekend-vaud.imageAlt': 'Eventi del weekend nel Canton Vaud',
+    'blog.article.hopital-nounours-chuv-lausanne.title': 'Losanna: Hôpital des Nounours al CHUV il 14 e 15 novembre',
+    'blog.article.hopital-nounours-chuv-lausanne.excerpt': 'Nuova edizione al CHUV il 14 e 15 novembre Iscrizioni dal 24 ottobre alle 8 Partecipazione gratuita su iscrizione Attività per bambini nella zona degli auditori',
+    'blog.article.hopital-nounours-chuv-lausanne.imageAlt': 'CHUV di Losanna per l\'Hôpital des Nounours dedicato ai bambini',
 };
 
 export default blogMetaCantonVdIt;

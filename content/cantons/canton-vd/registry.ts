@@ -160,4 +160,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'hopital-nounours-chuv-lausanne',
+ category: 'pratico',
+ date: '2026-10-18T06:56:42.455Z',
+ image: '/images/blog/article-hopital-nounours-chuv-lausanne.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

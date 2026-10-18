@@ -45,6 +45,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.eventi-weekend-vaud.title': 'Weekend events in the canton of Vaud: what to do Saturday & Sunday',
     'blog.article.eventi-weekend-vaud.excerpt': 'Events in the canton of Vaud every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
     'blog.article.eventi-weekend-vaud.imageAlt': 'Weekend events in the canton of Vaud',
+    'blog.article.hopital-nounours-chuv-lausanne.title': 'Lausanne: Hôpital des Nounours at CHUV on 14 and 15 November',
+    'blog.article.hopital-nounours-chuv-lausanne.excerpt': 'New edition at CHUV on 14 and 15 November Registration opens on 24 October at 8 Free participation upon registration Activities for children in the auditorium',
+    'blog.article.hopital-nounours-chuv-lausanne.imageAlt': 'CHUV in Lausanne for the Hôpital des Nounours children\'s event',
 };
 
 export default blogMetaCantonVdEn;

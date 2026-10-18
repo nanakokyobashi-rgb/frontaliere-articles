@@ -17,6 +17,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'scuole-vaud-furti-inchieste': { it: 'scuole-vaud-furti-inchieste', en: 'vaud-schools-break-ins-investigations', de: 'waadt-schulen-einbrueche-ermittlungen', fr: 'ecoles-vaud-cambriolages-enquetes' },
  'tuffe-falsi-poliziotti-vaud': { it: 'tuffe-falsi-poliziotti-vaud', en: 'fake-police-bankers-scams-vaud', de: 'betrug-falsche-polizisten-waadt', fr: 'arnaques-faux-policiers-vaud' },
  'eventi-weekend-vaud': { it: 'eventi-weekend-vaud', en: 'weekend-events-vaud', de: 'wochenend-veranstaltungen-waadt', fr: 'evenements-week-end-vaud' },
+ 'hopital-nounours-chuv-lausanne': { it: 'hopital-nounours-chuv-lausanne', en: 'lausanne-teddy-bear-hospital-chuv', de: 'lausanne-kuscheltier-spital-chuv', fr: 'lausanne-hopital-des-nounours-au-chuv-les-14-et-15-novembre' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
