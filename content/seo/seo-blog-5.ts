@@ -110827,6 +110827,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-halloween-sassofoni-varese': {
+    title: 'Varese, il concerto di Halloween dei sassofoni il 31 ottobre',
+    description: 'Sabato 31 ottobre l’Auditorium Paolo Conti ospita il concerto L’appuntamento è alle 20.30 Dirige Giuseppina Levato In programma Orff, de Falla e Musorgskij',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, concerto, halloween, sassofoni',
+    ogTitle: 'Varese, «Due note… da paura» il 31 ottobre',
+    ogDescription: 'Sabato 31 ottobre l’Auditorium Paolo Conti ospita il concerto L’appuntamento è alle 20.30 Dirige Giuseppina Levato In programma Orff, de Falla e Musorgskij',
+    canonicalPath: '/articoli-frontaliere/halloween-sassofoni-varese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese, il concerto di Halloween dei sassofoni il 31 ottobre",
+      "description": "Sabato 31 ottobre l’Auditorium Paolo Conti ospita il concerto L’appuntamento è alle 20.30 Dirige Giuseppina Levato In programma Orff, de Falla e Musorgskij",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-festival-racconto-varese-ottobre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ensemble di sassofoni in concerto in un auditorium, con atmosfera serale."
+      },
+      "datePublished": "2026-10-18T00:35:29+00:00",
+      "dateModified": "2026-10-18T00:35:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/halloween-sassofoni-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

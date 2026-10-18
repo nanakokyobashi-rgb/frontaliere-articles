@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/cassa-malati%3a-bonus%2ech%2c-aumento-premi-sar%c3%a0-del-5%25/92021297": {
-    "articleId": "aumento-premi-cassa-malati-2027",
-    "ts": "2026-09-08T09:28:19.380Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4067713": {
     "articleId": "cassa-malati-rincari-2027",
     "ts": "2026-09-08T10:31:08.034Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/una-bomba-della-seconda-guerra-mondiale-spunta-dai-lavori-in-un-cantiere-di-arcisate-li-cera-la-polveriera/2711077": {
     "articleId": "arcisate-bomba-seconda-guerra-mondiale",
     "ts": "2026-10-17T13:59:08.918Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/due-note-da-paura-a-varese-il-concerto-di-halloween-dellensemble-de-saxophones/2711260": {
+    "articleId": "halloween-sassofoni-varese",
+    "ts": "2026-10-18T00:35:29.770Z",
     "keyForm": 2
   }
 }

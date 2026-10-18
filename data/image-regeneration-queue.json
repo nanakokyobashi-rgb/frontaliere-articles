@@ -50,6 +50,16 @@
       "failureCount": 3,
       "requestedAt": "2026-10-17T00:14:09.813Z",
       "lastFailureAt": "2026-10-17T20:27:57.944Z"
+    },
+    {
+      "articleId": "halloween-sassofoni-varese",
+      "title": "Varese, il concerto di Halloween dei sassofoni il 31 ottobre",
+      "fallbackImage": "/images/blog/article-festival-racconto-varese-ottobre.webp",
+      "reason": "All image providers failed for article-halloween-sassofoni-varese: openai-codex (vision gate rejected image: Synthetic-looking staged concert scene with visible performer faces and",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T00:35:29.769Z",
+      "lastFailureAt": "2026-10-18T00:35:29.769Z"
     }
   ]
 }

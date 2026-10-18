@@ -13403,6 +13403,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.arcisate-bomba-seconda-guerra-mondiale.title': 'Arcisate: World War II bomb found',
     'blog.article.arcisate-bomba-seconda-guerra-mondiale.excerpt': 'Explosive device found in Arcisate Discovery on the morning of Saturday, October 17 It is believed to be a mortar bomb Area cordoned off and put',
     'blog.article.arcisate-bomba-seconda-guerra-mondiale.imageAlt': 'Industrial area in Arcisate with safety tape and police after the discovery of a WWII ordnance.',
+    'blog.article.halloween-sassofoni-varese.title': 'Varese, the saxophone Halloween concert on October 31',
+    'blog.article.halloween-sassofoni-varese.excerpt': 'On Saturday, October 31, the Auditorium Paolo Conti hosts the concert The appointment is at 20.30 Conducted by Giuseppina Levato On the program: Orff, de Falla and Musorgskij',
+    'blog.article.halloween-sassofoni-varese.imageAlt': 'Saxophone ensemble performing in an auditorium with a warm evening atmosphere.',
 };
 
 export default blogMetaEn;

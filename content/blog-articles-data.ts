@@ -45177,6 +45177,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'halloween-sassofoni-varese',
+ category: 'novita',
+ date: '2026-10-18T00:35:28.799Z',
+ image: '/images/blog/article-festival-racconto-varese-ottobre.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

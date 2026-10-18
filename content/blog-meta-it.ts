@@ -13404,6 +13404,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.arcisate-bomba-seconda-guerra-mondiale.title': 'Arcisate: bomba della Seconda Guerra Mondiale ritrovata',
     'blog.article.arcisate-bomba-seconda-guerra-mondiale.excerpt': 'Ordigno bellico trovato ad Arcisate Ritrovamento nella mattinata di sabato 17 ottobre Si tratterebbe di una bomba da mortaio Area delimitata e messa',
     'blog.article.arcisate-bomba-seconda-guerra-mondiale.imageAlt': 'Area industriale di Arcisate con nastro di sicurezza e forze dell\'ordine dopo il ritrovamento di un ordigno bellico della Seconda guerra mondiale.',
+    'blog.article.halloween-sassofoni-varese.title': 'Varese, il concerto di Halloween dei sassofoni il 31 ottobre',
+    'blog.article.halloween-sassofoni-varese.excerpt': 'Sabato 31 ottobre l’Auditorium Paolo Conti ospita il concerto L’appuntamento è alle 20.30 Dirige Giuseppina Levato In programma Orff, de Falla e Musorgskij',
+    'blog.article.halloween-sassofoni-varese.imageAlt': 'Ensemble di sassofoni in concerto in un auditorium, con atmosfera serale.',
 };
 
 export default blogMetaIt;

@@ -9093,18 +9093,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenoi.it/2026/10/15/leggi-notizia/argomenti/economia-13/articolo/sicurezza-sul-lavoro-emergenza-infinita-anche-in-provincia-di-varese-in-aumento-i-decessi-e-il-num.html": {
-      "section": "frontaliere",
-      "ts": 1792104549714
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/15/leggi-notizia/argomenti/politica-20/articolo/attivita-storiche-oltre-660mila-euro-per-41-imprese-della-provincia-di-varese-1.html": {
-      "section": "frontaliere",
-      "ts": 1792109774114
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/mauro-vitiello-e-la-battaglia-contro-i-mulini-a-vento-della-copying-di-caronno-pertusella-per-rendere-digitali-i-documenti-in-italia/2709076": {
-      "section": "frontaliere",
-      "ts": 1792109785151
-    },
     "svizzera::https://www.tvsvizzera.it/tvs/svizzera-istruzioni-per-luso": {
       "section": "svizzera",
       "ts": 1792110848791
@@ -9412,6 +9400,18 @@
     "svizzera::https://www.admin.ch/it/newnsb/l4hrr2l7oxxq": {
       "section": "svizzera",
       "ts": 1792276543653
+    },
+    "frontaliere::https://www.rsi.ch/s/4171162": {
+      "section": "frontaliere",
+      "ts": 1792283151640
+    },
+    "frontaliere::https://comozero.it/attualita/como-dopo-i-lavori-riaprono-i-giardini-di-via-anzani-e-volpati-profonda-rigenerazione-e-riqualificazione": {
+      "section": "frontaliere",
+      "ts": 1792283194965
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/monteiro-barbosa-raddrizza-la-solbiatese-2-2-contro-il-lentigione/2711191": {
+      "section": "frontaliere",
+      "ts": 1792283205200
     }
   }
 }
