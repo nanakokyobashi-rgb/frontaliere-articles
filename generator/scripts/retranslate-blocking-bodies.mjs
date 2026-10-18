@@ -178,7 +178,13 @@ import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
 import { stripLeakedTitleMarkerLine, diffIsExactlyRemovedLines } from './lib/strip-leaked-title-marker.mjs';
 import { normalizePromptSectionHeadings, applyConvertedHeadings } from './lib/normalize-prompt-section-headings.mjs';
 import { detectLanguage, detectLanguageWithConfidence } from './lib/detect-language.mjs';
-import { assertLocalizedToponymPair, extractArticleProjectionText } from './lib/localized-toponyms.mjs';
+import {
+  assertLocalizedToponymPair,
+  extractArticleProjectionText,
+  LOCALIZED_TOPONYM_LOCALES,
+  LOCALIZED_TOPONYMS,
+  normalizeLocalizedToponymText,
+} from './lib/localized-toponyms.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { sanitizeArticleMarkdownLinks } from '../../scripts/lib/article-link-contract.mjs';
@@ -849,6 +855,144 @@ export const LENGTH_FLOOR_MIN_CHARS = 400;
  */
 export const LENGTH_FLOOR = { VS_OLD: 0.7, VS_IT: 0.4 };
 
+const ADDRESS_POSTAL_CODE_RE = /\b\d{5}\b/u;
+const ADDRESS_CAPITALIZED_TOKEN_RE = /(?<![\p{L}\p{N}])\p{Lu}[\p{L}\p{M}]*(?:[’'\-][\p{L}\p{M}]+)*/gu;
+const ADDRESS_STREET_NUMBER_RE = /\b(?:via|viale|piazza|piazzale|corso|strada|contrada|largo|vicolo|località|loc\.|sentiero|riva|lungolago|route|rue|avenue|chemin|strasse|weg|platz)\b[^,\n]{2,100}\s+\d{1,5}\s*,?\s*$/iu;
+const ADDRESS_LABEL_CONTEXT_RE = /\b(?:indirizzo|address|adresse|cap|codice\s+postale|postal\s+code|postcode|plz|npa)\b/iu;
+const ADDRESS_POSTAL_SEPARATOR_RE = /(?:^|[,;])\s*\d{5}\s*(?:[,;]|$)/u;
+const ADDRESS_DASH_RE = /[-‐‑‒–—−]/u;
+
+/**
+ * The address guard is deliberately narrower than a generic capitalized-word
+ * check: a five-digit number also occurs in dates, case numbers and source
+ * URLs. These contexts are the address shapes used by the corpus, while the
+ * postal separator covers compact facts such as `22100, Tavernola, Como`.
+ */
+function isAddressLine(line, postalMatch) {
+  const beforePostal = String(line).slice(0, postalMatch.index);
+  return ADDRESS_STREET_NUMBER_RE.test(beforePostal)
+    || ADDRESS_LABEL_CONTEXT_RE.test(beforePostal)
+    || ADDRESS_POSTAL_SEPARATOR_RE.test(String(line));
+}
+
+function foldAddressText(value) {
+  return normalizeLocalizedToponymText(value)
+    .normalize('NFKC')
+    .replace(/[‐‑‒–—−]/gu, '-')
+    .replace(/\s+/gu, ' ')
+    .trim()
+    .toLocaleLowerCase('en');
+}
+
+function addressTermPattern(term) {
+  let pattern = '';
+  for (const character of foldAddressText(term)) {
+    if (/\s/u.test(character)) pattern += '\\s+';
+    else if (ADDRESS_DASH_RE.test(character)) pattern += '\\s*[-]\\s*';
+    else pattern += escapeRegExp(character);
+  }
+  return pattern
+    ? new RegExp(`(?<![\\p{L}\\p{N}])${pattern}(?![\\p{L}\\p{N}])`, 'u')
+    : null;
+}
+
+function addressTermIsPresent(text, term) {
+  const pattern = addressTermPattern(term);
+  return pattern ? pattern.test(foldAddressText(text)) : false;
+}
+
+/**
+ * The normal localized-toponym table covers Swiss cantons and capitals. The
+ * address guard also needs the one cross-border exonym explicitly named by
+ * its contract: Como stays `Como` in EN/DE and is `Côme` in FR.
+ */
+const ADDRESS_TOPONYM_GLOSSARY = Object.freeze([
+  ...LOCALIZED_TOPONYMS.flatMap((entity) => ['canton', 'capital'].map((type) => ({
+    source: Object.freeze([...entity[type].it]),
+    localized: Object.freeze(Object.fromEntries(
+      LOCALIZED_TOPONYM_LOCALES.filter((locale) => locale !== 'it')
+        .map((locale) => [locale, Object.freeze([...entity[type][locale]])]),
+    )),
+  }))),
+  {
+    source: Object.freeze(['Como']),
+    localized: Object.freeze({
+      en: Object.freeze(['Como']),
+      de: Object.freeze(['Como']),
+      fr: Object.freeze(['Côme']),
+    }),
+  },
+]);
+
+function addressTokenIsPreserved({ token, sourceTail, targetLine, locale }) {
+  if (addressTermIsPresent(targetLine, token)) return true;
+  return ADDRESS_TOPONYM_GLOSSARY.some((entry) => {
+    const sourceForm = entry.source.find((form) =>
+      addressTermIsPresent(sourceTail, form) && addressTermIsPresent(form, token));
+    if (!sourceForm) return false;
+    return (entry.localized[locale] || []).some((form) => addressTermIsPresent(targetLine, form));
+  });
+}
+
+function addressLineTarget(lines, sourceLine, sourceLineIndex, usedTargetLines) {
+  const sameIndex = lines[sourceLineIndex];
+  if (sameIndex?.includes(sourceLine.postalCode) && !usedTargetLines.has(sourceLineIndex)) {
+    usedTargetLines.add(sourceLineIndex);
+    return { index: sourceLineIndex, text: sameIndex };
+  }
+  const fallbackIndex = lines.findIndex((line, index) =>
+    !usedTargetLines.has(index) && line.includes(sourceLine.postalCode));
+  if (fallbackIndex < 0) return { index: -1, text: '' };
+  usedTargetLines.add(fallbackIndex);
+  return { index: fallbackIndex, text: lines[fallbackIndex] };
+}
+
+/**
+ * Find Italian address toponyms that disappeared or became ordinary words in
+ * the corresponding localized line. It is intentionally a write guard, not a
+ * repair: the retranslator must discard a bad MT result and ask the cascade
+ * again rather than guessing which word should be restored.
+ */
+export function findAddressToponymMismatches({ italianSections, newSections, locale }) {
+  const mismatches = [];
+  for (const [field, italianText] of Object.entries(italianSections || {})) {
+    const sourceLines = String(italianText ?? '').split('\n');
+    const targetLines = String(newSections?.[field] ?? '').split('\n');
+    const usedTargetLines = new Set();
+    sourceLines.forEach((line, lineIndex) => {
+      const postalMatch = ADDRESS_POSTAL_CODE_RE.exec(line);
+      ADDRESS_POSTAL_CODE_RE.lastIndex = 0;
+      if (!postalMatch || !isAddressLine(line, postalMatch)) return;
+      const sourceTail = line.slice(postalMatch.index + postalMatch[0].length);
+      const tokens = [...sourceTail.matchAll(ADDRESS_CAPITALIZED_TOKEN_RE)].map((match) => match[0]);
+      if (tokens.length === 0) return;
+      const sourceLine = {
+        postalCode: postalMatch[0],
+        line: line.trim(),
+        tokens: [...new Set(tokens)],
+      };
+      const target = addressLineTarget(targetLines, sourceLine, lineIndex, usedTargetLines);
+      const missing = sourceLine.tokens.filter((token) => !addressTokenIsPreserved({
+        token,
+        sourceTail,
+        targetLine: target.text,
+        locale,
+      }));
+      if (missing.length > 0) {
+        mismatches.push({
+          field,
+          line: lineIndex + 1,
+          postalCode: sourceLine.postalCode,
+          source: sourceLine.line,
+          target: target.text.trim(),
+          missing,
+        });
+      }
+    });
+  }
+  return mismatches;
+}
+
 /**
  * Lunghezza minima di testo sotto cui `detectLanguage` non ha segnale — stessa
  * soglia di `isWrongLocale()` in `batch-add-faq-to-articles.mjs` e
@@ -892,6 +1036,16 @@ export function translationSanityIssue({ oldSections, newSections, italianSectio
     : italianResidue;
   if (residueForWrite.length >= ITALIAN_RESIDUE_MIN_LINES) {
     return `italian-residue: ${residueForWrite.length} righe residue`;
+  }
+  const addressToponymMismatches = findAddressToponymMismatches({
+    italianSections,
+    newSections,
+    locale,
+  });
+  if (addressToponymMismatches.length > 0) {
+    const first = addressToponymMismatches[0];
+    return `toponym-dropped: ${first.field} riga ${first.line} `
+      + `(${first.missing.join(', ')})`;
   }
   for (const [f, text] of Object.entries(newSections)) {
     // DUE confronti, non uno scelto fra i due. Il pavimento contro la

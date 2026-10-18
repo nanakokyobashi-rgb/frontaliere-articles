@@ -44,6 +44,7 @@ import { fileURLToPath } from 'node:url';
 import {
   shouldWrite,
   translationSanityIssue,
+  findAddressToponymMismatches,
   LENGTH_FLOOR,
   replaceBodyField,
   insertBodyField,
@@ -1020,6 +1021,63 @@ test('translationSanityIssue rifiuta una nuova traduzione che conserva tre righe
     locale: 'fr',
   });
   assert.equal(reason, 'italian-residue: 3 righe residue');
+});
+
+test('translationSanityIssue rifiuta un toponimo di indirizzo diventato una parola comune', () => {
+  const italianSections = {
+    body1: '- Cantiere → Via per Cernobbio 15, 22100, Tavernola fraz. Como',
+  };
+  const rejected = translationSanityIssue({
+    oldSections: {},
+    newSections: {
+      body1: '- Baustelle → Via per Cernobbio 15, 22100, Tavernola fraz. Wie',
+    },
+    italianSections,
+    locale: 'de',
+  });
+  assert.match(rejected, /^toponym-dropped: body1 riga 1/);
+  assert.match(rejected, /Como/);
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections,
+    newSections: {
+      body1: '- Baustelle → Via per Cernobbio 15, 22100, Tavernola, Ortsteil von Wie',
+    },
+    locale: 'de',
+  })[0].missing, ['Como']);
+});
+
+test('la guardia degli indirizzi accetta la località conservata e gli esonimi del glossario', () => {
+  const italianSections = {
+    body1: '- Cantiere → Via per Cernobbio 15, 22100, Tavernola fraz. Como',
+  };
+  assert.equal(translationSanityIssue({
+    oldSections: {},
+    newSections: {
+      body1: '- Baustelle → Via per Cernobbio 15, 22100, Tavernola, Ortsteil von Como',
+    },
+    italianSections,
+    locale: 'de',
+  }), null);
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections,
+    newSections: {
+      body1: '- Chantier → Via per Cernobbio 15, 22100, Tavernola, hameau de Côme',
+    },
+    locale: 'fr',
+  }), []);
+});
+
+test('la guardia non interpreta numeri di pratica come indirizzi', () => {
+  const italianSections = {
+    body1: "L'ordinanza n. 10440/2026, Questa interpretazione è stata pubblicata ieri.",
+  };
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections,
+    newSections: {
+      body1: 'The order no. 10440/2026 established this principle yesterday.',
+    },
+    locale: 'en',
+  }), []);
 });
 
 test('stratify copre piu codici invece di prendere i primi N dello stesso', () => {
