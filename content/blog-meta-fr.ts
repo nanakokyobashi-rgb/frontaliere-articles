@@ -13435,6 +13435,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.passaggio-nuovo-impiego-g.title': 'Changement d\'employeur pour frontaliers : permis G et procédure 2026',
     'blog.article.passaggio-nuovo-impiego-g.excerpt': 'Guide 2026 du changement d\'employeur pour les frontaliers : préavis, renouvellement du permis G, continuité des cotisations, impôt à la source et documents à jour.',
     'blog.article.passaggio-nuovo-impiego-g.imageAlt': 'Travailleur frontalier à Brogeda avec des documents pour changer d\'employeur',
+    'blog.article.g-verifica-datore-20km.title': 'Changement d\'employeur pour les frontaliers dans les 20 km : permis G',
+    'blog.article.g-verifica-datore-20km.excerpt': 'Le Nouvel Accord est en vigueur depuis le 1er janvier 2024 L\'impôt à la source n\'est retenu qu\'en Suisse Vieux frontaliers : 7\'500 € sous le régime transitoire 2024–2033',
+    'blog.article.g-verifica-datore-20km.imageAlt': 'Frontalier à la frontière tessinoise avec des documents de changement d’employeur',
 };
 
 export default blogMetaFr;

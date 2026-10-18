@@ -120,6 +120,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T05:22:21.056Z",
       "lastFailureAt": "2026-10-18T05:22:21.056Z"
+    },
+    {
+      "articleId": "g-verifica-datore-20km",
+      "title": "Cambio datore per frontalieri entro 20 km: permesso G",
+      "fallbackImage": "/images/blog/frontalieri-regime-fiscale-nuovo-accordo.webp",
+      "reason": "All image providers failed for article-g-verifica-datore-20km: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to cross-border commuting, but i",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T05:51:33.759Z",
+      "lastFailureAt": "2026-10-18T05:51:33.759Z"
     }
   ]
 }

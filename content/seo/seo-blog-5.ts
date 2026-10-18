@@ -111212,6 +111212,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-g-verifica-datore-20km': {
+    title: 'Cambio datore per frontalieri entro 20 km: permesso G',
+    description: 'Il Nuovo Accordo è in vigore dal 1° gennaio 2024 L\'imposta alla fonte è trattenuta solo in Svizzera Vecchi frontalieri: €7\'500 nel regime transitorio 2024–2033',
+    keywords: 'frontalieri, ticino, svizzera, italia, cambio, datore, entro, permesso',
+    ogTitle: 'Permesso G: cambio datore frontaliere nel 2026',
+    ogDescription: 'Il Nuovo Accordo è in vigore dal 1° gennaio 2024 L\'imposta alla fonte è trattenuta solo in Svizzera Vecchi frontalieri: €7\'500 nel regime transitorio 2024–2033',
+    canonicalPath: '/articoli-frontaliere/g-verifica-datore-20km/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cambio datore per frontalieri entro 20 km: permesso G",
+      "description": "Il Nuovo Accordo è in vigore dal 1° gennaio 2024 L'imposta alla fonte è trattenuta solo in Svizzera Vecchi frontalieri: €7'500 nel regime transitorio 2024–2033",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/frontalieri-regime-fiscale-nuovo-accordo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Frontaliere al confine ticinese con documenti per il cambio datore"
+      },
+      "datePublished": "2026-10-18T05:51:33+00:00",
+      "dateModified": "2026-10-18T05:51:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/g-verifica-datore-20km/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

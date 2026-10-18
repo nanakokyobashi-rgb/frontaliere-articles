@@ -13432,6 +13432,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.passaggio-nuovo-impiego-g.title': 'Arbeitgeberwechsel für Grenzgänger: Genehmigung G und Verfahren 2026',
     'blog.article.passaggio-nuovo-impiego-g.excerpt': 'Leitfaden 2026 zum Arbeitgeberwechsel für Grenzgänger: Vorankündigung, Erneuerung der Genehmigung G, Beitragskontinuität, Quellensteuer und aktualisierte Dokumente.',
     'blog.article.passaggio-nuovo-impiego-g.imageAlt': 'Grenzgänger am Grenzübergang Brogeda mit Unterlagen zum Arbeitgeberwechsel',
+    'blog.article.g-verifica-datore-20km.title': 'Arbeitgeberwechsel für Grenzgänger im Umkreis von 20 km: Ausweis G',
+    'blog.article.g-verifica-datore-20km.excerpt': 'Das neue Abkommen ist seit dem 1.',
+    'blog.article.g-verifica-datore-20km.imageAlt': 'Grenzgänger an der Tessiner Grenze mit Unterlagen zum Arbeitgeberwechsel',
 };
 
 export default blogMetaDe;

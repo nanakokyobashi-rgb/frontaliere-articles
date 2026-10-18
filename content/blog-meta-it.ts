@@ -13434,6 +13434,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.passaggio-nuovo-impiego-g.title': 'Cambio datore per frontalieri: permesso G e procedura 2026',
     'blog.article.passaggio-nuovo-impiego-g.excerpt': 'Guida 2026 al cambio datore per frontalieri: preavviso, rinnovo del permesso G, continuità contributiva, imposta alla fonte e documenti aggiornati.',
     'blog.article.passaggio-nuovo-impiego-g.imageAlt': 'Frontaliere al valico di Brogeda con documenti per il cambio datore',
+    'blog.article.g-verifica-datore-20km.title': 'Cambio datore per frontalieri entro 20 km: permesso G',
+    'blog.article.g-verifica-datore-20km.excerpt': 'Il Nuovo Accordo è in vigore dal 1° gennaio 2024 L\'imposta alla fonte è trattenuta solo in Svizzera Vecchi frontalieri: €7\'500 nel regime transitorio 2024–2033',
+    'blog.article.g-verifica-datore-20km.imageAlt': 'Frontaliere al confine ticinese con documenti per il cambio datore',
 };
 
 export default blogMetaIt;

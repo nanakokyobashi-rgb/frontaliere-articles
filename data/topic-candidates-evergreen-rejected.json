@@ -1308,6 +1308,18 @@
       "firstSeenAt": "2026-10-18T05:08:07.337Z",
       "lastValidatedAt": "2026-10-18T05:08:07.337Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere cambio datore lavoro procedura permesso 2026",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T05:44:30.099Z",
+      "lastValidatedAt": "2026-10-18T05:44:30.099Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -1366,10 +1378,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-10-18T05:15:05.386Z",
-      "lastStrikeAt": "2026-10-18T05:15:05.386Z",
-      "expiresAt": "2026-11-17T05:15:05.386Z"
+      "lastStrikeAt": "2026-10-18T05:44:29.927Z",
+      "expiresAt": "2026-11-17T05:44:29.927Z"
     }
   ],
   "legacy": [

@@ -45278,6 +45278,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'g-verifica-datore-20km',
+ category: 'pratico',
+ date: '2026-10-18T05:51:32.704Z',
+ image: '/images/blog/frontalieri-regime-fiscale-nuovo-accordo.webp',
+ hasCalculator: true,
+ articleType: 'evergreen',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
