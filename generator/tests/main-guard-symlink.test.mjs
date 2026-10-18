@@ -53,3 +53,33 @@ test('il batch esegue main anche quando viene avviato tramite symlink', () => {
     rmSync(tempDir, { recursive: true, force: true });
   }
 });
+
+function runViaSymlink(relativePath, args = []) {
+  const tempDir = mkdtempSync(path.join(os.tmpdir(), 'frontaliere-main-guard-'));
+  const link = path.join(tempDir, 'entry.mjs');
+  symlinkSync(path.join(ROOT, relativePath), link);
+  const env = { ...process.env };
+  delete env.GITHUB_REPOSITORY;
+  delete env.GH_REPO;
+  try {
+    return spawnSync(process.execPath, [link, ...args], {
+      cwd: ROOT,
+      encoding: 'utf8',
+      env,
+    });
+  } finally {
+    rmSync(tempDir, { recursive: true, force: true });
+  }
+}
+
+test('resolve-issue-verified entra in CLI anche quando invocato via symlink', () => {
+  const result = runViaSymlink('scripts/ci/resolve-issue-verified.mjs');
+  assert.equal(result.status, 1, result.stderr);
+  assert.match(result.stderr, /serve --number <n> oppure --title/);
+});
+
+test('ensure-loop-labels entra in CLI anche quando invocato via symlink', () => {
+  const result = runViaSymlink('scripts/ci/ensure-loop-labels.mjs', ['--dry-run']);
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stderr, /GITHUB_REPOSITORY non impostato/);
+});
