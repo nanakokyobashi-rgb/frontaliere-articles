@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-ordinanza-liste-validita.webp",
-      "sha256": "c7a1bcebc683d2fe470aa7c05394f3ec658d3d371fbaf9fa5fb5bbdf0edb5c70"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-ordinanza-liste-validita-480w.webp",
-      "sha256": "7e221b26e1ab69589f2f1bc504a0690b82d8f67c684cf05b249bd31c3635d85d"
-    }
-  ]
+  "items": []
 }
