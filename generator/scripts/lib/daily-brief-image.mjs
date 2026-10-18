@@ -190,8 +190,8 @@ export function buildDailyBriefCoverAlt(headline, { photograph = false } = {}) {
 }
 
 /**
- * Atomically materialize a fresh governed daily hero and its 480px thumbnail,
- * then append the provider/license record. No existing article-id record is a
+ * Materialize a fresh governed daily hero and its 480px thumbnail, then append
+ * the provider/license record. No existing article-id record is a
  * cache hit: each daily run passes a newly generated engine result here.
  */
 export async function materializeDailyBriefHero({
