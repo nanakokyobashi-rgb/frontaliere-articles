@@ -1080,6 +1080,15 @@ test('la guardia riconosce anche un indirizzo con nome strada minimo', () => {
   })[0].missing, ['Como']);
 });
 
+test('la guardia riconosce CAP e località separati solo da spazio', () => {
+  const italianSections = { body1: '22100 Como' };
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections,
+    newSections: { body1: '22100 Wie' },
+    locale: 'en',
+  })[0].missing, ['Como']);
+});
+
 test('la guardia non interpreta numeri di pratica come indirizzi', () => {
   const italianSections = {
     body1: "L'ordinanza n. 10440/2026, Questa interpretazione è stata pubblicata ieri.",

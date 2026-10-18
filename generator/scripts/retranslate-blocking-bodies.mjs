@@ -859,14 +859,16 @@ const ADDRESS_POSTAL_CODE_RE = /\b\d{5}\b/u;
 const ADDRESS_CAPITALIZED_TOKEN_RE = /(?<![\p{L}\p{N}])\p{Lu}[\p{L}\p{M}]*(?:[’'\-][\p{L}\p{M}]+)*/gu;
 const ADDRESS_STREET_NUMBER_RE = /\b(?:via|viale|piazza|piazzale|corso|strada|contrada|largo|vicolo|località|loc\.|sentiero|riva|lungolago|route|rue|avenue|chemin|strasse|weg|platz)\b[^,\n]*?(?:,\s*)?\d{1,5}\s*,?\s*$/iu;
 const ADDRESS_LABEL_CONTEXT_RE = /\b(?:indirizzo|address|adresse|cap|codice\s+postale|postal\s+code|postcode|plz|npa)\b/iu;
-const ADDRESS_POSTAL_SEPARATOR_RE = /(?:^|[,;])\s*\d{5}\s*(?:[,;]|$)/u;
+const ADDRESS_POSTAL_SEPARATOR_RE = /(?:^|[,;])\s*\d{5}(?:\s*(?:[,;]|$)|\s+(?=\p{Lu}))/u;
 const ADDRESS_DASH_RE = /[-‐‑‒–—−]/u;
 
 /**
  * The address guard is deliberately narrower than a generic capitalized-word
  * check: a five-digit number also occurs in dates, case numbers and source
  * URLs. These contexts are the address shapes used by the corpus, while the
- * postal separator covers compact facts such as `22100, Tavernola, Como`.
+ * postal separator covers compact facts such as `22100, Tavernola, Como` and
+ * the space-separated `22100 Como` form, without treating an embedded case
+ * number as an address.
  */
 function isAddressLine(line, postalMatch) {
   const beforePostal = String(line).slice(0, postalMatch.index);
