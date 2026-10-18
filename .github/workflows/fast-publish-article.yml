@@ -154,6 +154,10 @@ jobs:
       - name: Checkout (resolve)
         uses: actions/checkout@v7
         with:
+          # A normal cover-drain dispatch must resolve the live branch when
+          # the queue waits behind another main commit; push events keep the
+          # exact event SHA, which is their immutable publication input.
+          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || github.sha }}
           fetch-depth: 2
           persist-credentials: false
 
@@ -408,6 +412,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          # The explicit cover dispatch carries article ids, not a source
+          # commit. Follow the live dispatch ref so a queued run does not
+          # render an obsolete corpus snapshot.
+          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || github.sha }}
           fetch-depth: 2
           # persist-credentials: false is load-bearing, not hygiene. It stops
           # actions/checkout leaving its GITHUB_TOKEN in an extraheader that
@@ -415,6 +423,20 @@ jobs:
           # `contents: read` token, which cannot write and whose push fires no
           # workflow anyway.
           persist-credentials: false
+
+      - name: Verify shard assignment against publish checkout
+        if: needs.resolve.outputs.skip != 'true'
+        env:
+          SECTION: ${{ matrix.target.section }}
+          EXPECTED_SHARD: ${{ matrix.target.shard }}
+        run: |
+          set -euo pipefail
+          actual_shard="$(node scripts/ci/fast-publish-section.mjs shard-of "$SECTION")"
+          if [ "$actual_shard" != "$EXPECTED_SHARD" ]; then
+            echo "::error::section-to-shard mapping changed after matrix resolution; refusing to publish to stale shard (expected $EXPECTED_SHARD, checkout maps to $actual_shard)"
+            exit 1
+          fi
+          echo "FAST_PUBLISH_SHARD=$actual_shard" >> "$GITHUB_ENV"
 
       - name: Set up Node
         if: needs.resolve.outputs.skip != 'true'
@@ -704,7 +726,7 @@ jobs:
           set -euo pipefail
           summary="$RUNNER_TEMP/fast-summary.json"
           dist="$RUNNER_TEMP/fast-dist"
-          shard="${{ matrix.target.shard }}"
+          shard="$FAST_PUBLISH_SHARD"
 
           # UN SOLO push per locale, articolo + hub insieme.
           #
