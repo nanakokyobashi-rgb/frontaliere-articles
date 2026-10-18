@@ -13425,6 +13425,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.radar-velocita-ticino-ottobre.title': 'Radar in Canton Ticino dal 19 al 25 ottobre: i controlli',
     'blog.article.radar-velocita-ticino-ottobre.excerpt': 'Controlli dal 19 al 25 ottobre 2026 Radar mobili e semi-stazionari in diverse località Coinvolte anche zone frequentate dai frontalieri italiani Chi → Polizia',
     'blog.article.radar-velocita-ticino-ottobre.imageAlt': 'Controlli della velocità con radar in Canton Ticino',
+    'blog.article.franchigia-accordo-redditi-single.title': 'Credito d\'imposta 2026: calcolo per il frontaliere single',
+    'blog.article.franchigia-accordo-redditi-single.excerpt': 'Accordo firmato il 23 dicembre 2020 In vigore dal 1° gennaio 2024 Vecchi frontalieri: esenzione di €7\'500 Nuovi frontalieri: franchigia di €10\'000 Accordo: 23',
+    'blog.article.franchigia-accordo-redditi-single.imageAlt': 'Frontaliere single controlla busta paga svizzera e dichiarazione italiana a Mendrisio',
 };
 
 export default blogMetaIt;

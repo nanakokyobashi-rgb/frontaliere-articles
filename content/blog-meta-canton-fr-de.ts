@@ -39,6 +39,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.bulle-riassetto-centro-2027.title': 'Bulle hat die erste Phase der Neugestaltung öffentlich aufgelegt',
     'blog.article.bulle-riassetto-centro-2027.excerpt': 'Die erste Phase der Neugestaltung des Zentrums von Bulle wurde öffentlich aufgelegt.',
     'blog.article.bulle-riassetto-centro-2027.imageAlt': 'Stadtzentrum von Bulle und geplante Neugestaltung',
+    'blog.article.vuadens-centro-lavorazione.title': 'Ein neues kompaktes Bearbeitungszentrum aus Vuadens',
+    'blog.article.vuadens-centro-lavorazione.excerpt': 'Starrag stellt aus Vuadens ein kompakteres Bearbeitungszentrum vor, das in Stuttgart weltweit lanciert wurde.',
+    'blog.article.vuadens-centro-lavorazione.imageAlt': 'Kompaktes Bearbeitungszentrum von Starrag in Vuadens, Kanton Freiburg.',
 };
 
 export default blogMetaCantonFrDe;
