@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1948807/svizzera-frontalieri-lavoro-europa-residenti-rubano": {
-    "articleId": "frontalieri-libro-analisi-miti",
-    "ts": "2026-09-08T14:53:30.071Z",
-    "keyForm": 2
-  },
   "https://www.ticinonews.ch/ticino/traffico-ferroviario-interrotto-tra-cadenazzo-e-luino-per-un-guasto-tecnico-442213": {
     "articleId": "s30-guasto-tecnico-cadenazzo-luino",
     "ts": "2026-09-08T15:20:15.545Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/info/ticino-grigioni-e-insubria/l%e2%80%99hcap-cerca-fondi-obiettivo-35-milioni-di-franchi--4171423.html": {
     "articleId": "hcap-raccolta-fondi-3-milioni",
     "ts": "2026-10-18T00:52:04.199Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/cronaca/como-malore-in-camerino-al-teatro-sociale-arrivano-118-e-vigili-del-fuoco": {
+    "articleId": "camerino-teatro-sociale-soccorsi",
+    "ts": "2026-10-18T01:13:08.355Z",
     "keyForm": 2
   }
 }

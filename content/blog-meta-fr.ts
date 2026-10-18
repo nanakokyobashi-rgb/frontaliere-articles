@@ -13411,6 +13411,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.hcap-raccolta-fondi-3-milioni.title': 'HCAP : objectif de 3,5 millions de francs et échéance le 22 octobre',
     'blog.article.hcap-raccolta-fondi-3-milioni.excerpt': 'L\'HCAP vise à récolter 3-3,5 millions de francs Le deuxième tour se clôt le 22 octobre La collecte s\'adresse à la base des supporters Davide Mottis indique',
     'blog.article.hcap-raccolta-fondi-3-milioni.imageAlt': 'Supporteurs du HC Ambri-Piotta mobilisés pour la collecte de fonds',
+    'blog.article.camerino-teatro-sociale-soccorsi.title': 'Como, suspicion de fracture : le 118 et les pompiers au Sociale',
+    'blog.article.camerino-teatro-sociale-soccorsi.excerpt': 'Ce soir, secours au Teatro Sociale de Como Un artiste avec une suspicion de fracture dans une loge Nécessaire, la grande échelle pour porter la civière dans la rue',
+    'blog.article.camerino-teatro-sociale-soccorsi.imageAlt': 'Le Teatro Sociale de Côme en soirée (Como)',
 };
 
 export default blogMetaFr;

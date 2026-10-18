@@ -13408,6 +13408,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.hcap-raccolta-fondi-3-milioni.title': 'HCAP: Ziel von 3,5 Millionen Franken und Frist am 22. Oktober',
     'blog.article.hcap-raccolta-fondi-3-milioni.excerpt': 'Der HCAP will 3-3,5 Millionen Franken aufbringen Die zweite Runde endet am 22.',
     'blog.article.hcap-raccolta-fondi-3-milioni.imageAlt': 'Ambri-Piotta Eishockeyfans unterstützen die Spendenaktion',
+    'blog.article.camerino-teatro-sociale-soccorsi.title': 'Como, Verdacht auf einen Bruch: 118 und Feuerwehr im Sociale',
+    'blog.article.camerino-teatro-sociale-soccorsi.excerpt': 'Heute Abend Rettungseinsatz im Teatro Sociale di Como Ein Künstler mit Verdacht auf einen Bruch in einer Garderobe Eine Drehleiter war erforderlich, um die Trage auf die Straße zu bringen',
+    'blog.article.camerino-teatro-sociale-soccorsi.imageAlt': 'Das Teatro Sociale in Como am Abend',
 };
 
 export default blogMetaDe;

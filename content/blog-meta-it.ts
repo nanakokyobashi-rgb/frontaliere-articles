@@ -13410,6 +13410,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.hcap-raccolta-fondi-3-milioni.title': 'HCAP: obiettivo 3,5 milioni di franchi e scadenza il 22 ottobre',
     'blog.article.hcap-raccolta-fondi-3-milioni.excerpt': 'L\'HCAP punta a raccogliere 3-3,5 milioni di franchi Il secondo giro si chiude il 22 ottobre La raccolta è rivolta alla base dei tifosi Davide Mottis indica',
     'blog.article.hcap-raccolta-fondi-3-milioni.imageAlt': 'Tifosi dell\'Hockey Club Ambrì-Piotta mobilitati per la raccolta fondi',
+    'blog.article.camerino-teatro-sociale-soccorsi.title': 'Como, sospetta frattura: 118 e vigili del fuoco al Sociale',
+    'blog.article.camerino-teatro-sociale-soccorsi.excerpt': 'Questa sera soccorsi al Teatro Sociale di Como Un artista con sospetta frattura in un camerino Necessaria l\'autoscala per portare la barella in strada',
+    'blog.article.camerino-teatro-sociale-soccorsi.imageAlt': 'Il Teatro Sociale di Como in serata',
 };
 
 export default blogMetaIt;

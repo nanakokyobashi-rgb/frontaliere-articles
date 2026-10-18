@@ -70,6 +70,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T00:52:04.196Z",
       "lastFailureAt": "2026-10-18T00:52:04.196Z"
+    },
+    {
+      "articleId": "camerino-teatro-sociale-soccorsi",
+      "title": "Como, sospetta frattura: 118 e vigili del fuoco al Sociale",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-camerino-teatro-sociale-soccorsi: openai-codex (vision gate rejected image: Photorealistic synthetic dusk view of a historic Como theatre fac",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T01:13:08.353Z",
+      "lastFailureAt": "2026-10-18T01:13:08.353Z"
     }
   ]
 }
