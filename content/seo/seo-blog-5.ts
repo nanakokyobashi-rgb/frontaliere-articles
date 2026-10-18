@@ -110846,10 +110846,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-festival-racconto-varese-ottobre.webp`,
+        "url": `${BASE_URL}/images/blog/article-halloween-sassofoni-varese.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Ensemble di sassofoni in concerto in un auditorium, con atmosfera serale."
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-18T00:35:29+00:00",
       "dateModified": "2026-10-18T00:35:29+00:00",
@@ -110885,10 +110885,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-hcap-raccolta-fondi-3-milioni.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Tifosi dell'Hockey Club Ambrì-Piotta mobilitati per la raccolta fondi"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-18T00:52:03+00:00",
       "dateModified": "2026-10-18T00:52:03+00:00",
@@ -110924,10 +110924,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-camerino-teatro-sociale-soccorsi.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Il Teatro Sociale di Como in serata"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-18T01:13:07+00:00",
       "dateModified": "2026-10-18T01:13:07+00:00",
