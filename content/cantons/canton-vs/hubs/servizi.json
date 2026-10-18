@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T07:29:55.438Z",
-  "contentHash": "a0192b654ba47209b837671c513e63fc3d6c1bd04b6af1c196001c32e35457c1",
+  "updatedAt": "2026-10-18T08:20:56.511Z",
+  "contentHash": "ed6342761f08500341c8dd0249cefd3df3fea26a5e0cdd6d304d3fe279ab2729",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -154,6 +154,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Rapporto OVS: 83% vallesani in buona salute, obesità al 13% e rischi psicosociali al 44%",
+          "url": "/articoli-vallese/salute-vallese-2026-ovs/",
+          "excerpt": "83% degli adulti vallesani si sente in buona salute nel 2022 Speranza di vita: 85,9 anni per le donne, 82,4 per gli uomini Gli over 65 sono il 21%",
+          "date": "2026-10-18T08:16:12.890Z"
+        },
+        {
           "title": "Sion: apre la Maison de la garde per le urgenze",
           "url": "/articoli-vallese/maison-garde-ospedale-sion/",
           "excerpt": "Dal 1° settembre l'ospedale di Sion ha attivato un nuovo presidio per i casi non vitali, attivo ogni giorno dalle 18 alle 22.",
@@ -194,12 +200,6 @@
           "url": "/articoli-svizzera/premi-lamal-vallese-riduzione/",
           "excerpt": "Guida ai premi obbligatori di cassa malati nel canton Vallese: franchigie disponibili, modelli assicurativi, riduzione premi e procedura per ottenere sussidi cantonali.",
           "date": "2026-09-05T16:42:46.103Z"
-        },
-        {
-          "title": "Permesso L di breve durata nel Canton Vallese: validità e proroga",
-          "url": "/articoli-svizzera/permesso-l-breve-durata-canton-vallese/",
-          "excerpt": "Il permesso L di breve durata nel Cantone di Vallese ha una validità massima di 1 anno e può essere prorogato solo in casi specifici.",
-          "date": "2026-09-06T01:34:18.109Z"
         }
       ],
       "latestCantonArticles": [],
@@ -229,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T07:29:55.438Z"
+      "updatedAt": "2026-10-18T08:20:56.511Z"
     },
     "en": {
       "canton": "VS",
@@ -356,6 +356,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "OVS report: 83% of Valais residents in good health",
+          "url": "/en/valais-articles/valais-health-2026-ovs/",
+          "excerpt": "83% of Valais adults feel in good health in 2022 Life expectancy: 85,9 years for women, 82,4 for men People over 65 account for 21% of the population in 2024",
+          "date": "2026-10-18T08:16:12.890Z"
+        },
+        {
           "title": "Sion: the Maison de la garde opens for emergencies",
           "url": "/en/valais-articles/maison-garde-sion-hospital/",
           "excerpt": "As of September 1st, Sion Hospital has opened a new facility for non-life-threatening cases, open every day from 18 to 22.",
@@ -396,12 +402,6 @@
           "url": "/en/swiss-articles/valais-lamal-premiums-reduction/",
           "excerpt": "Guide to compulsory sick pay premiums in the canton of Valais: deductibles available, insurance models, premium reduction and procedure for obtaining cantonal subsidies.",
           "date": "2026-09-05T16:42:46.103Z"
-        },
-        {
-          "title": "Short-term permit L in the Canton of Valais: validity and extension",
-          "url": "/en/swiss-articles/short-term-permit-canton-valais/",
-          "excerpt": "The short-term L permit in the Canton of Valais is valid for a maximum of 1 year and can only be extended in specific cases.",
-          "date": "2026-09-06T01:34:18.109Z"
         }
       ],
       "latestCantonArticles": [],
@@ -427,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T07:29:55.438Z"
+      "updatedAt": "2026-10-18T08:20:56.511Z"
     },
     "de": {
       "canton": "VS",
@@ -554,6 +554,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "OVS-Bericht: 83% Walliser fit, 13% adipös, 44% Psychorisiken",
+          "url": "/de/wallis-artikel/wallis-gesundheit-2026-ovs/",
+          "excerpt": "83% der erwachsenen Walliser fühlen sich 2022 bei guter Gesundheit Lebenserwartung: 85,9 Jahre für Frauen, 82,4 für Männer Die über 65-Jährigen machen 2024 21%",
+          "date": "2026-10-18T08:16:12.890Z"
+        },
+        {
           "title": "Sitten: Die Maison de la garde für Notfälle öffnet",
           "url": "/de/wallis-artikel/maison-garde-spital-sitten/",
           "excerpt": "Seit dem 1. September hat das Spital von Sitten eine neue Anlaufstelle für nicht lebensbedrohliche Fälle eingerichtet, die täglich von 18 bis 22 Uhr geöffnet ist.",
@@ -594,12 +600,6 @@
           "url": "/de/schweiz-artikel/wallis-lamal-praemien-reduktion/",
           "excerpt": "Leitfaden zu den obligatorischen Krankenkassenprämien im Kanton Wallis: verfügbare Franchisen, Versicherungsmodelle, Prämienverbilligung und Verfahren zur Erlangung kantonaler Beiträge.",
           "date": "2026-09-05T16:42:46.103Z"
-        },
-        {
-          "title": "Kurzzeitbewilligung L im Kanton Wallis: Gültigkeit und Verlängerung",
-          "url": "/de/schweiz-artikel/kurzfristige-bewilligung-kanton-wallis/",
-          "excerpt": "Die Kurzzeitbewilligung L im Kanton Wallis ist maximal 1 Jahr gültig und kann nur in Einzelfällen verlängert werden.",
-          "date": "2026-09-06T01:34:18.109Z"
         }
       ],
       "latestCantonArticles": [],
@@ -625,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T07:29:55.438Z"
+      "updatedAt": "2026-10-18T08:20:56.511Z"
     },
     "fr": {
       "canton": "VS",
@@ -752,6 +752,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Rapport OVS : 83% des Valaisans en bonne santé, 13% obèses",
+          "url": "/fr/articles-valais/valais-sante-2026-ovs/",
+          "excerpt": "83% des adultes valaisans se sentent en bonne santé en 2022 Espérance de vie : 85,9 ans pour les femmes, 82,4 pour les hommes Les plus de 65 ans représentent",
+          "date": "2026-10-18T08:16:12.890Z"
+        },
+        {
           "title": "Sion : la Maison de la garde ouvre pour les urgences",
           "url": "/fr/articles-valais/maison-garde-hopital-sion/",
           "excerpt": "À partir du 1er septembre, l’hôpital de Sion a mis en place un nouveau dispositif pour les cas non vitaux, ouvert tous les jours de 18 à 22 heures.",
@@ -792,12 +798,6 @@
           "url": "/fr/articles-suisse/valais-lamal-cotisazioni-riduzione/",
           "excerpt": "Guide des primes obligatoires d'assurance-maladie dans le canton du Valais : franchises disponibles, modèles d'assurance, réduction des primes et procédure d'obtention des allocations cantonales.",
           "date": "2026-09-05T16:42:46.103Z"
-        },
-        {
-          "title": "Permis L de courte durée dans le canton du Valais : validité et prolongation",
-          "url": "/fr/articles-suisse/permis-de-courte-duree-canton-valais/",
-          "excerpt": "Le permis L de courte durée dans le canton du Valais a une durée de validité maximale de 1 an et ne peut être prolongé que dans des cas spécifiques.",
-          "date": "2026-09-06T01:34:18.109Z"
         }
       ],
       "latestCantonArticles": [],
@@ -819,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T07:29:55.438Z"
+      "updatedAt": "2026-10-18T08:20:56.511Z"
     }
   }
 }
