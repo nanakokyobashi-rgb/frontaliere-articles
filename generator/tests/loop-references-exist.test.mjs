@@ -1695,6 +1695,20 @@ const DECLARED_ABSENT = {
       'il custode del corpus non lo invoca e nessun percorso runtime locale dipende dalla sua ' +
       'presenza.',
   },
+  'scripts/ci/lib/automation-risk-policy.mjs :: .github/workflows/retry-native-automerge.yml': {
+    kind: 'site-only',
+    reason:
+      'Voce dell\'elenco esplicito `CONTROL_PLANE_PATHS`, usata dalla policy come evidenza del ' +
+      'dominio control-plane quando un issue nomina il workflow del sito: il corpus non lo ' +
+      'importa, non lo esegue e nessun percorso runtime locale dipende dalla sua esistenza.',
+  },
+  'scripts/ci/lib/automation-risk-policy.mjs :: .github/actions/run-agent/action.yml': {
+    kind: 'site-only',
+    reason:
+      'Voce dell\'elenco esplicito `CONTROL_PLANE_PATHS`, usata dalla policy come evidenza del ' +
+      'dominio control-plane quando un issue nomina l\'azione del sito: il corpus non la importa, ' +
+      'non la esegue e nessun percorso runtime locale dipende dalla sua esistenza.',
+  },
 };
 
 // Prima del rollout, i caller reusable esistenti richiedono le dichiarazioni
