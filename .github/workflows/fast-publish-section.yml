@@ -177,7 +177,10 @@ jobs:
       - name: Checkout (resolve)
         uses: actions/checkout@v7
         with:
-          ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || github.sha }}
+          # Normal non-bootstrap cover-drain dispatches carry article ids, not
+          # a source commit: resolve the live dispatch ref. workflow_run,
+          # bounded replays, and bootstrap keep their exact source revision.
+          ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || (github.event_name == 'workflow_dispatch' && inputs.bootstrap != true && github.ref) || github.sha }}
           fetch-depth: 2
           persist-credentials: false
 
@@ -440,9 +443,9 @@ jobs:
     needs: resolve
     if: needs.resolve.outputs.any == 'true'
     runs-on: ubuntu-latest
-    # Il bootstrap live può attendere il publisher edge fino a 55 minuti prima
-    # di renderizzare. Conserva il budget storico di 45 minuti dopo il gate.
-    timeout-minutes: 100
+    # Budget: fino a 55 min per il gate bootstrap, 3 checkout main x 2 tentativi
+    # di render da 45 min, più margine operativo; il limite del job resta 6h.
+    timeout-minutes: 360
     strategy:
       fail-fast: false
       matrix:
@@ -454,7 +457,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
-          ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || github.sha }}
+          # Keep normal non-bootstrap cover-drain dispatches on the live ref;
+          # workflow_run, bounded replay, and bootstrap may pin an older
+          # source commit.
+          ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || (github.event_name == 'workflow_dispatch' && inputs.bootstrap != true && github.ref) || github.sha }}
           # resolvePublishedReleaseCommit() verifica la release API con
           # merge-base: una release precedente puo' essere fuori dai due
           # commit che actions/checkout scarica di default.
@@ -597,7 +603,11 @@ jobs:
 
       - name: Install dependencies
         if: steps.replay_freshness.outputs.fresh == 'true'
-        run: bash scripts/lib/npm-ci-retry.sh
+        run: |
+          set -euo pipefail
+          bash scripts/lib/npm-ci-retry.sh
+          lock_hash="$(sha256sum package.json package-lock.json | sha256sum | cut -d' ' -f1)"
+          echo "INSTALLED_DEPENDENCY_LOCK_HASH=$lock_hash" >> "$GITHUB_ENV"
 
       # Remote Config e' la sola sorgente delle credenziali R2 e Cloudflare.
       # In dry non servono: il render e la validazione girano comunque.
@@ -677,6 +687,7 @@ jobs:
           API_RELEASE_COMMIT: ${{ inputs.api_release_commit }}
           SOURCE_COMMIT: ${{ inputs.source_commit }}
           SOURCE_MAIN_COMMIT: ${{ inputs.source_main_commit }}
+          REF: ${{ github.ref }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           EXPECTED_MAIN_HEAD: ${{ github.event.workflow_run.head_sha || inputs.source_main_commit || github.event.after || github.sha }}
           GH_TOKEN: ${{ github.token }}
@@ -745,7 +756,6 @@ jobs:
               exit 0
             fi
           fi
-          args=(--section "$SECTION" --out "$RUNNER_TEMP/section-dist" --summary "$RUNNER_TEMP/section-summary.json")
           previous_revision="${PUSH_BEFORE:-}"
           if [ "$EVENT_NAME" = 'workflow_run' ]; then
             if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || [ "$(git rev-parse HEAD)" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
@@ -753,27 +763,96 @@ jobs:
               exit 1
             fi
           fi
-          if [ -n "$previous_revision" ] && [[ ! "$previous_revision" =~ ^0+$ ]]; then
-            args+=(--previous-revision "$previous_revision")
+          build_publish_args() {
+            local dry_mode="$1"
+            args=(--section "$SECTION" --out "$RUNNER_TEMP/section-dist" --summary "$RUNNER_TEMP/section-summary.json")
+            if [ -n "$previous_revision" ] && [[ ! "$previous_revision" =~ ^0+$ ]]; then
+              args+=(--previous-revision "$previous_revision")
+            fi
+            if [ "$BOOTSTRAP" = "true" ]; then
+              args+=(--bootstrap)
+            else
+              args+=(--ids "$(printf '%s' "$ARTICLE_IDS_JSON" | jq -c .)")
+            fi
+            if [ "$REMOVE_STALE_CANTON_RSS_FEEDS" = "true" ]; then
+              args+=(--remove-stale-canton-rss-feeds)
+            fi
+            if [ "$dry_mode" = "true" ]; then
+              args+=(--dry-run)
+            else
+              args+=(--publish)
+            fi
+          }
+          build_publish_args "$DRY"
+          # A normal cover-drain dispatch from main has no immutable source
+          # commit. It must rebase onto the live main between attempts when
+          # the freshness guard reports that main advanced during the render.
+          # workflow_run and bounded replays keep their existing fail-closed
+          # behavior: a stale pinned source is redispatched by the replay
+          # logic above, never silently moved here.
+          normal_dispatch='false'
+          if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ "$REF" = 'refs/heads/main' ] && [ -z "${SOURCE_COMMIT:-}" ] && [ "$BOOTSTRAP" != 'true' ]; then
+            normal_dispatch='true'
           fi
-          if [ "$BOOTSTRAP" = "true" ]; then
-            args+=(--bootstrap)
-          else
-            args+=(--ids "$(printf '%s' "$ARTICLE_IDS_JSON" | jq -c .)")
+          if [ "$normal_dispatch" != 'true' ]; then
+            # Attraverso il wrapper di retry (issue #98): `npx -y` scarica tsx
+            # dal registro a ogni run. Ritentare l'intero comando e' sicuro:
+            # il render riscrive lo stesso scratch e gli upload R2 sono PUT
+            # idempotenti sulle stesse chiavi.
+            bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"
+            exit 0
           fi
-          if [ "$REMOVE_STALE_CANTON_RSS_FEEDS" = "true" ]; then
-            args+=(--remove-stale-canton-rss-feeds)
-          fi
-          if [ "$DRY" = "true" ]; then
-            args+=(--dry-run)
-          else
-            args+=(--publish)
-          fi
-          # Attraverso il wrapper di retry (issue #98): `npx -y` scarica tsx dal
-          # registro a ogni run. Ritentare l'intero comando e' sicuro: il
-          # render riscrive lo stesso scratch e gli upload R2 sono PUT
-          # idempotenti sulle stesse chiavi.
-          bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"
+
+          for publish_attempt in 1 2 3; do
+            git fetch --no-tags origin main
+            git checkout --detach origin/main
+            export EXPECTED_MAIN_HEAD="$(git rev-parse HEAD)"
+            echo "::notice::normal cover dispatch on main $EXPECTED_MAIN_HEAD (freshness attempt $publish_attempt/3)"
+
+            # main puo' essere avanzata dopo resolve. Rileggi il kill switch
+            # dalla revisione appena checkoutata: il dry calcolato da resolve
+            # non puo' riarmare una revisione che ora e' disabilitata.
+            attempt_dry="$DRY"
+            if [ -f .github/FAST_PUBLISH_DISABLED ]; then
+              echo "::warning::.github/FAST_PUBLISH_DISABLED present on live checkout — running dry"
+              attempt_dry=true
+            elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "false" ]; then
+              echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
+              attempt_dry=true
+            fi
+            build_publish_args "$attempt_dry"
+
+            live_dependency_lock_hash="$(sha256sum package.json package-lock.json | sha256sum | cut -d' ' -f1)"
+            if [ "${INSTALLED_DEPENDENCY_LOCK_HASH:-}" != "$live_dependency_lock_hash" ]; then
+              echo "::notice::package metadata changed with the live checkout; reinstalling dependencies"
+              bash scripts/lib/npm-ci-retry.sh
+              export INSTALLED_DEPENDENCY_LOCK_HASH="$live_dependency_lock_hash"
+              echo "INSTALLED_DEPENDENCY_LOCK_HASH=$live_dependency_lock_hash" >> "$GITHUB_ENV"
+            fi
+
+            if [ "$attempt_dry" != "true" ]; then
+              # Il checkout puo' aver cambiato host/constants.ts e quindi il
+              # nome dell'asset gtag: riallinea la CDN prima di ogni render.
+              bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/ci/ensure-host-shell-assets.mjs
+            fi
+            # Il wrapper ritenta i blip npm/R2. Se il publish fallisce anche
+            # dopo i tentativi, il controllo sotto distingue un avanzamento di
+            # main e fa ripartire il loop dal checkout aggiornato.
+            if RETRY_CMD_ATTEMPTS=2 bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"; then
+              exit 0
+            fi
+            if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
+              echo "::error::impossibile rileggere la revisione corrente di main dopo un render fallito"
+              exit 1
+            fi
+            if [ "$current_main" = "$EXPECTED_MAIN_HEAD" ]; then
+              echo "::error::render fallito senza un avanzamento concorrente di main"
+              exit 1
+            fi
+            echo "::notice::main avanzata durante il render ($EXPECTED_MAIN_HEAD → $current_main); riallineo il checkout"
+          done
+          echo "::error::main e' avanzata durante tre tentativi di render del publisher"
+          exit 1
 
       - name: Release bootstrap R2 gate
         # GITHUB_ENV aggiorna l'ambiente dei passi successivi, ma non è una

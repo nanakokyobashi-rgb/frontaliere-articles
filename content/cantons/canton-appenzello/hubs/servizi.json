@@ -4,22 +4,22 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T10:55:16.337Z",
-  "contentHash": "69f111d3623e7f59d65430a8fa12774faf827999316d6b8733f9fb3b13d1db52",
+  "updatedAt": "2026-10-18T16:09:32.587Z",
+  "contentHash": "99fa88838250378dfafa1437f37e9424eb47a81acc50aef2bb74b1dfcdfc6399",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-11T10:51:47.772Z",
+      "updatedAt": "2026-10-18T08:53:01.888Z",
       "keyFacts": 1
     },
     {
-      "id": "aste-targhe",
-      "updatedAt": "2026-10-17T20:37:10.348Z",
-      "keyFacts": 1
+      "id": "meteo",
+      "updatedAt": "2026-10-18T04:48:36.783Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T19:45:28.268Z",
+      "updatedAt": "2026-10-18T09:56:00.107Z",
       "keyFacts": 0
     }
   ],
@@ -35,11 +35,6 @@
           "value": "447,80 CHF",
           "note": "regione di premio 0, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        },
-        {
-          "label": "Aste di targhe in corso",
-          "value": "5",
-          "note": "offerta mediana 750 CHF"
         }
       ],
       "dataBlocks": [
@@ -61,38 +56,26 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-11T10:51:47.772Z"
+          "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Aste delle targhe",
-          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
           "items": [
             {
-              "label": "AR2771",
-              "value": "2000 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
+              "label": "Appenzell",
+              "value": "7 °C",
+              "detail": "oggi da 7 a 11 °C"
             },
             {
-              "label": "AR8924",
-              "value": "800 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1786"
-            },
-            {
-              "label": "AR4790",
-              "value": "750 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1784"
+              "label": "Herisau",
+              "value": "7 °C",
+              "detail": "oggi da 7 a 10 °C"
             }
           ],
-          "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-17T20:37:10.348Z"
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-18T04:48:36.783Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +113,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -218,7 +201,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-18T16:09:32.587Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -231,11 +214,6 @@
           "value": "447.80 CHF",
           "note": "premium region 0, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
-        },
-        {
-          "label": "Plate auctions running",
-          "value": "5",
-          "note": "typical bid 750 CHF"
         }
       ],
       "dataBlocks": [
@@ -257,38 +235,26 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-11T10:51:47.772Z"
+          "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Number plate auctions",
-          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
           "items": [
             {
-              "label": "AR2771",
-              "value": "2,000 CHF",
-              "detail": "current bid",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
+              "label": "Appenzell",
+              "value": "7 °C",
+              "detail": "today from 7 to 11 °C"
             },
             {
-              "label": "AR8924",
-              "value": "800 CHF",
-              "detail": "current bid",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1786"
-            },
-            {
-              "label": "AR4790",
-              "value": "750 CHF",
-              "detail": "current bid",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1784"
+              "label": "Herisau",
+              "value": "7 °C",
+              "detail": "today from 7 to 10 °C"
             }
           ],
-          "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-17T20:37:10.348Z"
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-18T04:48:36.783Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -326,7 +292,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -406,7 +372,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-18T16:09:32.587Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -419,11 +385,6 @@
           "value": "447.80 CHF",
           "note": "Prämienregion 0, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
-        },
-        {
-          "label": "Laufende Kontrollschild-Auktionen",
-          "value": "5",
-          "note": "mittleres Gebot 750 CHF"
         }
       ],
       "dataBlocks": [
@@ -445,38 +406,26 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-11T10:51:47.772Z"
+          "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Kontrollschild-Auktionen",
-          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
           "items": [
             {
-              "label": "AR2771",
-              "value": "2’000 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
+              "label": "Appenzell",
+              "value": "7 °C",
+              "detail": "heute 7 bis 11 °C"
             },
             {
-              "label": "AR8924",
-              "value": "800 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1786"
-            },
-            {
-              "label": "AR4790",
-              "value": "750 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1784"
+              "label": "Herisau",
+              "value": "7 °C",
+              "detail": "heute 7 bis 10 °C"
             }
           ],
-          "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-17T20:37:10.348Z"
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-18T04:48:36.783Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -514,7 +463,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -594,7 +543,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-18T16:09:32.587Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -607,11 +556,6 @@
           "value": "447,80 CHF",
           "note": "région de primes 0, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
-        },
-        {
-          "label": "Enchères de plaques en cours",
-          "value": "5",
-          "note": "offre centrale 750 CHF"
         }
       ],
       "dataBlocks": [
@@ -633,38 +577,26 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-11T10:51:47.772Z"
+          "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Enchères de plaques",
-          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
           "items": [
             {
-              "label": "AR2771",
-              "value": "2 000 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
+              "label": "Appenzell",
+              "value": "7 °C",
+              "detail": "aujourd’hui de 7 à 11 °C"
             },
             {
-              "label": "AR8924",
-              "value": "800 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1786"
-            },
-            {
-              "label": "AR4790",
-              "value": "750 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1784"
+              "label": "Herisau",
+              "value": "7 °C",
+              "detail": "aujourd’hui de 7 à 10 °C"
             }
           ],
-          "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-17T20:37:10.348Z"
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-18T04:48:36.783Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -702,7 +634,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -774,7 +706,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-18T16:09:32.587Z"
     }
   }
 }

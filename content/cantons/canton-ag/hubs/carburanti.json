@@ -4,14 +4,14 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T19:17:26.345Z",
-  "contentHash": "a53a8c6ed9451e6d27d9afc7c6fc3b6da052ad95de0f32951de5ca139008150f",
+  "updatedAt": "2026-10-18T16:15:31.066Z",
+  "contentHash": "fb3fe75b66a8ed7a59bd6815badb51e3cec86ac3c095656f67ca1c61bfbbe676",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-17T11:10:59.318Z",
+      "updatedAt": "2026-10-18T11:41:56.271Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-24T11:10:59.318Z"
+      "carryUntilAt": "2026-10-25T11:41:56.271Z"
     }
   ],
   "locales": {
@@ -54,23 +54,29 @@
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "2,261 EUR/l",
-              "detail": "media regionale: minimo 2,139 EUR/l, 5 stazioni rilevate",
-              "date": "2026-10-17T11:10:59.318Z"
+              "value": "2,115 EUR/l",
+              "detail": "media regionale: minimo 2,109 EUR/l, 5 stazioni rilevate",
+              "date": "2026-10-18T11:41:56.271Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,391 EUR/l",
-              "detail": "media regionale: minimo 2,249 EUR/l, 5 stazioni rilevate",
-              "date": "2026-10-17T11:10:59.318Z"
+              "value": "2,219 EUR/l",
+              "detail": "media regionale: minimo 2,209 EUR/l, 5 stazioni rilevate",
+              "date": "2026-10-18T11:41:56.271Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-17T11:10:59.318Z"
+          "updatedAt": "2026-10-18T11:41:56.271Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Maja Riniker (FDP) eletta nel governo argoviese",
+          "url": "/articoli-argovia/riniker-governo-argovia/",
+          "excerpt": "Con 70'137 voti e un'affluenza del 21,01%, Maja Riniker è eletta nel governo argoviese.",
+          "date": "2026-10-18T16:09:14.829Z"
+        },
         {
           "title": "Eventi del weekend in Argovia: cosa fare sabato e domenica",
           "url": "/articoli-argovia/eventi-weekend-argovia/",
@@ -94,12 +100,6 @@
           "url": "/articoli-argovia/argovia-polizia-regionale-poteri/",
           "excerpt": "Il Governo argoviese propone al Gran Consiglio nuovi compiti per le polizie regionali; la legge entrerebbe in vigore il 1° gennaio 2028.",
           "date": "2026-10-10T22:10:08.251Z"
-        },
-        {
-          "title": "PFAS in Argovia: costi di bonifica ancora incerti",
-          "url": "/articoli-argovia/aargau-pfas-bonifiche-incerte/",
-          "excerpt": "In Argovia solo due terzi dei Comuni hanno risposto sul PFAS.",
-          "date": "2026-10-10T12:56:57.784Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T16:15:31.066Z"
     },
     "en": {
       "canton": "AG",
@@ -153,23 +153,29 @@
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "2.261 EUR/l",
-              "detail": "regional average: lowest 2.139 EUR/l, 5 stations surveyed",
-              "date": "2026-10-17T11:10:59.318Z"
+              "value": "2.115 EUR/l",
+              "detail": "regional average: lowest 2.109 EUR/l, 5 stations surveyed",
+              "date": "2026-10-18T11:41:56.271Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.391 EUR/l",
-              "detail": "regional average: lowest 2.249 EUR/l, 5 stations surveyed",
-              "date": "2026-10-17T11:10:59.318Z"
+              "value": "2.219 EUR/l",
+              "detail": "regional average: lowest 2.209 EUR/l, 5 stations surveyed",
+              "date": "2026-10-18T11:41:56.271Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-17T11:10:59.318Z"
+          "updatedAt": "2026-10-18T11:41:56.271Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Maja Riniker (FDP) elected to the Aargau government",
+          "url": "/en/aargau-articles/riniker-aargau-government/",
+          "excerpt": "With 70'137 votes and a turnout of 21,01%, Maja Riniker is elected to the Aargau government.",
+          "date": "2026-10-18T16:09:14.829Z"
+        },
         {
           "title": "Weekend events in Aargau: what to do Saturday & Sunday",
           "url": "/en/aargau-articles/weekend-events-aargau/",
@@ -193,12 +199,6 @@
           "url": "/en/aargau-articles/aargau-regional-police-powers/",
           "excerpt": "The Aargau government is proposing new tasks for the regional police forces to the Grand Council; the law would enter into force on January 1, 2028.",
           "date": "2026-10-10T22:10:08.251Z"
-        },
-        {
-          "title": "PFAS in Aargau: remediation costs still uncertain",
-          "url": "/en/aargau-articles/aargau-pfas-site-costs/",
-          "excerpt": "In Aargau, only two-thirds of the municipalities responded about PFAS.",
-          "date": "2026-10-10T12:56:57.784Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T16:15:31.066Z"
     },
     "de": {
       "canton": "AG",
@@ -252,23 +252,29 @@
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "2.261 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.139 EUR/l, 5 erfasste Tankstellen",
-              "date": "2026-10-17T11:10:59.318Z"
+              "value": "2.115 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.109 EUR/l, 5 erfasste Tankstellen",
+              "date": "2026-10-18T11:41:56.271Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.391 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.249 EUR/l, 5 erfasste Tankstellen",
-              "date": "2026-10-17T11:10:59.318Z"
+              "value": "2.219 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.209 EUR/l, 5 erfasste Tankstellen",
+              "date": "2026-10-18T11:41:56.271Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-17T11:10:59.318Z"
+          "updatedAt": "2026-10-18T11:41:56.271Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Maja Riniker (FDP) in die Aargauer Regierung gewählt",
+          "url": "/de/aargau-artikel/riniker-aargauer-regierung/",
+          "excerpt": "Mit 70'137 Stimmen und einer Wahlbeteiligung von 21,01% wurde Maja Riniker in die Aargauer Regierung gewählt.",
+          "date": "2026-10-18T16:09:14.829Z"
+        },
         {
           "title": "Veranstaltungen am Wochenende im Aargau: was tun Sa & So",
           "url": "/de/aargau-artikel/wochenend-veranstaltungen-aargau/",
@@ -292,12 +298,6 @@
           "url": "/de/aargau-artikel/aargau-regionalpolizei-befugnisse/",
           "excerpt": "Die Aargauer Regierung schlägt dem Grossen Rat neue Aufgaben für die Regionalpolizeien vor; das Gesetz würde am 1.",
           "date": "2026-10-10T22:10:08.251Z"
-        },
-        {
-          "title": "PFAS im Aargau: Sanierungskosten weiterhin ungewiss",
-          "url": "/de/aargau-artikel/aargau-pfas-standorte-kosten/",
-          "excerpt": "Im Aargau haben nur zwei Drittel der Gemeinden zu PFAS geantwortet.",
-          "date": "2026-10-10T12:56:57.784Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T16:15:31.066Z"
     },
     "fr": {
       "canton": "AG",
@@ -351,23 +351,29 @@
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "2,261 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,139 EUR/l, 5 stations relevées",
-              "date": "2026-10-17T11:10:59.318Z"
+              "value": "2,115 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,109 EUR/l, 5 stations relevées",
+              "date": "2026-10-18T11:41:56.271Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,391 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,249 EUR/l, 5 stations relevées",
-              "date": "2026-10-17T11:10:59.318Z"
+              "value": "2,219 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,209 EUR/l, 5 stations relevées",
+              "date": "2026-10-18T11:41:56.271Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-17T11:10:59.318Z"
+          "updatedAt": "2026-10-18T11:41:56.271Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Maja Riniker (FDP) élue au gouvernement argovien",
+          "url": "/fr/articles-argovie/riniker-gouvernement-argovie/",
+          "excerpt": "Avec 70'137 voix et une participation de 21,01%, Maja Riniker est élue au gouvernement argovien.",
+          "date": "2026-10-18T16:09:14.829Z"
+        },
         {
           "title": "Événements du week-end en Argovie : que faire samedi & dimanche",
           "url": "/fr/articles-argovie/evenements-week-end-argovie/",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-argovie/argovie-police-regionale-pouvoirs/",
           "excerpt": "Le gouvernement argovien propose au Grand Conseil de nouvelles tâches pour les polices régionales ; la loi entrerait en vigueur le 1er janvier 2028.",
           "date": "2026-10-10T22:10:08.251Z"
-        },
-        {
-          "title": "PFAS en Argovie : coûts d'assainissement encore incertains",
-          "url": "/fr/articles-argovie/argovie-sites-pfas-couts/",
-          "excerpt": "En Argovie, seuls deux tiers des communes ont répondu au sujet des PFAS.",
-          "date": "2026-10-10T12:56:57.784Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T16:15:31.066Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-18T03:12:27.140Z",
-  "contentHash": "245f6c5eb5306f4302870b3d8a2e708e417c8eb7b545aa3fdc30d4dd882e3864",
+  "updatedAt": "2026-10-18T16:09:32.587Z",
+  "contentHash": "25aab1c58f6281e5db5fc509fbb22b919fbc52712f2ed2ff59f6d2f61e94773a",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-17T21:02:52.166Z",
+      "updatedAt": "2026-10-18T11:46:52.571Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T19:45:28.268Z",
+      "updatedAt": "2026-10-18T09:56:00.107Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "30",
-          "note": "segnalazioni aggiornate: 17 ottobre 2026"
+          "value": "29",
+          "note": "segnalazioni aggiornate: 18 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "94",
-          "note": "segnalazioni aggiornate: 17 ottobre 2026"
+          "note": "segnalazioni aggiornate: 18 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-17T21:02:52.166Z"
+          "updatedAt": "2026-10-18T11:46:52.571Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -169,7 +169,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-18T03:12:27.140Z"
+      "updatedAt": "2026-10-18T16:09:32.587Z"
     },
     "en": {
       "canton": "BE",
@@ -179,13 +179,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "30",
-          "note": "reports as of 17 October 2026"
+          "value": "29",
+          "note": "reports as of 18 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "94",
-          "note": "reports as of 17 October 2026"
+          "note": "reports as of 18 October 2026"
         }
       ],
       "dataBlocks": [
@@ -243,7 +243,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-17T21:02:52.166Z"
+          "updatedAt": "2026-10-18T11:46:52.571Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -281,7 +281,7 @@
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -321,7 +321,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-18T03:12:27.140Z"
+      "updatedAt": "2026-10-18T16:09:32.587Z"
     },
     "de": {
       "canton": "BE",
@@ -331,13 +331,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "30",
-          "note": "Meldungen vom 17. Oktober 2026"
+          "value": "29",
+          "note": "Meldungen vom 18. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "94",
-          "note": "Meldungen vom 17. Oktober 2026"
+          "note": "Meldungen vom 18. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -395,7 +395,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-17T21:02:52.166Z"
+          "updatedAt": "2026-10-18T11:46:52.571Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -433,7 +433,7 @@
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -473,7 +473,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-18T03:12:27.140Z"
+      "updatedAt": "2026-10-18T16:09:32.587Z"
     },
     "fr": {
       "canton": "BE",
@@ -483,13 +483,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "30",
-          "note": "signalements au 17 octobre 2026"
+          "value": "29",
+          "note": "signalements au 18 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "94",
-          "note": "signalements au 17 octobre 2026"
+          "note": "signalements au 18 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -547,7 +547,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-17T21:02:52.166Z"
+          "updatedAt": "2026-10-18T11:46:52.571Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -585,7 +585,7 @@
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -625,7 +625,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-18T03:12:27.140Z"
+      "updatedAt": "2026-10-18T16:09:32.587Z"
     }
   }
 }

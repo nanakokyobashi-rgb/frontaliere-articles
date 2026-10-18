@@ -426,6 +426,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-riniker-governo-argovia': {
+    title: 'Maja Riniker (FDP) eletta nel governo argoviese',
+    description: 'Maja Riniker eletta nel governo del Canton Argovia: 70\'137 voti, affluenza al 21,01%. Per la prima volta, due donne siedono nell\'esecutivo cantonale argoviese.',
+    keywords: 'frontalieri, ticino, svizzera, italia, maja, riniker, eletta, governo',
+    ogTitle: 'Maja Riniker entra nel governo argoviese',
+    ogDescription: 'Il voto per il seggio FDP si è chiuso con 70\'137 preferenze per Maja Riniker, sostenuta da SVP, Mitte, Gewerbeverband e Hauseigentümerverband. Nell\'esecutivo argoviese siedono ora, per la prima volta, due donne.',
+    canonicalPath: '/articoli-argovia/riniker-governo-argovia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Maja Riniker (FDP) eletta nel governo argoviese",
+      "description": "Maja Riniker eletta nel governo del Canton Argovia: 70'137 voti, affluenza al 21,01%. Per la prima volta, due donne siedono nell'esecutivo cantonale argoviese.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-riniker-governo-argovia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Governo cantonale argoviese dopo l'elezione di Maja Riniker"
+      },
+      "datePublished": "2026-10-18T16:09:14+00:00",
+      "dateModified": "2026-10-18T16:09:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/riniker-governo-argovia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

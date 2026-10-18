@@ -174,7 +174,7 @@ GIT_PAT_OPTS=()
 keyfile="$RUNNER_TEMP/article-shard_${section}_${loc}_key"
 if [ "$pat_mode" = 0 ]; then
   printf '%s\n' "$key_val" > "$keyfile" && chmod 600 "$keyfile"
-  export GIT_SSH_COMMAND="ssh -i $keyfile -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
+  export GIT_SSH_COMMAND="ssh -i $keyfile -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o TCPKeepAlive=yes"
 else
   # HTTPS remote + the same credential helper shard_pat_push uses: the token is
   # read from $SHARD_PUSH_TOKEN inside the helper, so it never reaches the

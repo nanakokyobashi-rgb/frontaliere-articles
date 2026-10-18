@@ -8501,6 +8501,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.ffs-binari-deformazioni-canicola-2024.title': 'FFS : 97 déformations rails par chaleur, task force été 2026',
     'blog.article.ffs-binari-deformazioni-canicola-2024.excerpt': 'Les FFS ont enregistré 97 déformations et écrasements.',
     'blog.article.ffs-binari-deformazioni-canicola-2024.imageAlt': 'Voies ferroviaires CFF sous le soleil d\'été avec brume de chaleur visible',
+    'blog.article.indennita-covid-abusi-aziende.title': 'Indemnités Covid : abus dans des centaines d’entreprises',
+    'blog.article.indennita-covid-abusi-aziende.excerpt': '7\'200 entreprises vérifiées sur plus de 167\'000 bénéficiaires La SECO a réclamé 243,53 millions d’ILR Lastminute a remboursé 28,9 millions au Tessin À fin',
+    'blog.article.indennita-covid-abusi-aziende.imageAlt': 'Bureau suisse avec des employés qui vérifient des documents financiers liés aux subventions Covid',
 };
 
 export default blogMetaChFr;

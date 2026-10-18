@@ -21,3 +21,10 @@ test('the shard marker readers distinguish absence from an unreadable lazy blob'
     /git -C \"\$stage\" show HEAD:\.shard-filecount[\s\S]*?echo 0/,
   );
 });
+
+test('the deploy-key SSH transport has bounded keepalive options', () => {
+  assert.match(
+    publisher,
+    /export GIT_SSH_COMMAND="ssh -i \$keyfile -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o TCPKeepAlive=yes"/,
+  );
+});

@@ -220,6 +220,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T14:15:05.535Z",
       "lastFailureAt": "2026-10-18T14:15:05.535Z"
+    },
+    {
+      "articleId": "indennita-covid-abusi-aziende",
+      "title": "Indennità Covid: abusi in centinaia di aziende. Lastminute ha restituito 28,9 milioni",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-indennita-covid-abusi-aziende: openai-codex (vision gate rejected image: Relevant generic Swiss office scene, but it includes recognizable fo",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T16:04:42.643Z",
+      "lastFailureAt": "2026-10-18T16:04:42.643Z"
     }
   ]
 }

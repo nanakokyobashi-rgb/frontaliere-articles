@@ -4,17 +4,22 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T10:55:16.337Z",
-  "contentHash": "ce4b3650afffc428a02d29fd382bf81bb293ba667bf6840092a00f83c58b6352",
+  "updatedAt": "2026-10-18T15:52:30.685Z",
+  "contentHash": "e6ae2dde0ef8b43d39edbe368c5ab38cf4abaed6c47dbe41b14d9867d7fe94d5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-11T10:51:47.772Z",
+      "updatedAt": "2026-10-18T08:53:01.888Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-18T04:48:36.783Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T19:45:28.268Z",
+      "updatedAt": "2026-10-18T09:56:00.107Z",
       "keyFacts": 0
     }
   ],
@@ -46,7 +51,21 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-11T10:51:47.772Z"
+          "updatedAt": "2026-10-18T08:53:01.888Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "10 °C",
+              "detail": "oggi da 9 a 11 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-18T04:48:36.783Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -59,7 +78,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -115,7 +134,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-18T15:52:30.685Z"
     },
     "en": {
       "canton": "NE",
@@ -144,7 +163,21 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-11T10:51:47.772Z"
+          "updatedAt": "2026-10-18T08:53:01.888Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "10 °C",
+              "detail": "today from 9 to 11 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-18T04:48:36.783Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -157,7 +190,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +242,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-18T15:52:30.685Z"
     },
     "de": {
       "canton": "NE",
@@ -238,7 +271,21 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-11T10:51:47.772Z"
+          "updatedAt": "2026-10-18T08:53:01.888Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "10 °C",
+              "detail": "heute 9 bis 11 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-18T04:48:36.783Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -251,7 +298,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -303,7 +350,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-18T15:52:30.685Z"
     },
     "fr": {
       "canton": "NE",
@@ -332,7 +379,21 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-11T10:51:47.772Z"
+          "updatedAt": "2026-10-18T08:53:01.888Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "10 °C",
+              "detail": "aujourd’hui de 9 à 11 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-18T04:48:36.783Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -345,7 +406,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T09:56:00.107Z"
         }
       ],
       "curatedArticles": [
@@ -393,7 +454,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-18T15:52:30.685Z"
     }
   }
 }
