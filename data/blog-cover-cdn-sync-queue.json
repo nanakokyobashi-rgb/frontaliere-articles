@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-mozione-gran-consiglio-tassa-salute.webp",
+      "sha256": "254c107d69a7bf8f9392c8ab7211e24958d2b572aaf7d0fba87294ee09cd1824"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-mozione-gran-consiglio-tassa-salute-480w.webp",
+      "sha256": "271029b935f5a5b67507c112f49e833d8912bc87a9f40cdfc61f3a8b3042a940"
+    }
+  ]
 }
