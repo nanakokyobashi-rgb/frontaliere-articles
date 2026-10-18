@@ -6215,7 +6215,7 @@
       "reason": "Guard indipendente per i writer corpus che aggiornano main. La copia sito è nella PR concatenata di questo fix; dopo il merge di entrambe le copie il manifest va promosso a identical con la baseline condivisa.",
       "baseline": {
         "site": null,
-        "corpus": "0d04821ccecd96d6",
+        "corpus": null,
         "alignedAt": "2026-10-18"
       }
     },
