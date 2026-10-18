@@ -1652,15 +1652,6 @@ const DECLARED_ABSENT = {
       'e non dipende da quel workflow. Il file e\' `identical` nel manifest, quindi il commento resta ' +
       'byte-identico al sito.',
   },
-  'scripts/ci/harvest-agent-lessons.mjs :: pr-body-contract.yml': {
-    kind: 'retired',
-    reason:
-      'Il referente e\' sparito da ENTRAMBI i repo il 2026-09-03: la Claude review vive ora ' +
-      'dentro `tests.yml` e i quattro workflow che facevano review, contratto del body e ' +
-      'merge non esistono piu\'. La frase qui e\' storica e descrittiva — nomina il vecchio workflow del contratto del body, ora uno step di tests.yml. ' +
-      'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
-      'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
-  },
   'scripts/ci/lib/fetchPrFiles.mjs :: pr-review-loop.yml': {
     kind: 'retired',
     reason:

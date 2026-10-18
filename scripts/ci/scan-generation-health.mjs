@@ -1664,7 +1664,7 @@ export const CONDITIONS = [
           'le finestre. La soglia sta quindi 14 punti sopra l\'ultima quota "sana" osservata e 70 sopra il lato sano.',
           '',
           'Punto da cui guardare: `generator/scripts/lib/evergreen-topic-generator.mjs`, la costruzione del pool.',
-          'È `identical` nel `loop-sync-manifest.json`, **ma nessun mirror porta `generator/`**: `mirror-articles-engine.yml`',
+          'È `adapted` nel `loop-sync-manifest.json`, **ma nessun mirror porta `generator/`**: `mirror-articles-engine.yml`',
           'filtra su `packages/articles/engine/**` (più `index.ts` e `articleSections.ts`) e `mirror-articles-corpus.yml`',
           'su `content/`, dispatch-only. **La fix va quindi applicata a MANO su entrambi i repo, QUESTO PER PRIMO** — è',
           'qui che la generazione gira, e una fix solo sul sito lascia il difetto vivo con la CI verde di entrambi.',
