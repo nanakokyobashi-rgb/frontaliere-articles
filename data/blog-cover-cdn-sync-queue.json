@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-prezzi-carburanti-rinviati-rinviati.webp",
-      "sha256": "aa2c2c1eecad6f1abb983d2fa3313dde40700e4a987ff39bb3dae92172d4d0d6"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-prezzi-carburanti-rinviati-rinviati-480w.webp",
-      "sha256": "54dd1000941e63f8bea4e1a6cac382adbeef0e3a5dc09ee517c391ffb490e722"
-    }
-  ]
+  "items": []
 }
