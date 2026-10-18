@@ -43,6 +43,10 @@
     "canton-ne::https://www.rts.ch/play/tv/emission/couleurs-locales?id=470618": {
       "section": "canton-ne",
       "ts": 1792307759847
+    },
+    "canton-ne::https://www.ne.ch/communiques-de-presse/pour-sa-30eme-edition-le-prix-interculturel-salut-letranger-recompense-le-centre-portugais-de-neuchatel-et-madame-carmen-diaz-pumarejo": {
+      "section": "canton-ne",
+      "ts": 1792323251760
     }
   }
 }
