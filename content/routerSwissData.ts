@@ -2847,6 +2847,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'scorte-cherosene-zurigo': { it: 'scorte-cherosene-zurigo', en: 'zurich-kerosene-reserves', de: 'zuerich-kerosin-reserven', fr: 'reserves-kerosene-zurich' },
  'svizzera-attualita-istituzioni-2026': { it: 'svizzera-attualita-istituzioni-2026', en: 'switzerland-current-affairs-institutions-2026', de: 'schweiz-aktuelles-institutionen-2026', fr: 'suisse-actualite-institutions-2026' },
  'pensionato-vince-contro-ffs': { it: 'pensionato-vince-contro-ffs', en: 'pensioner-wins-against-sbb', de: 'rentner-gewinnt-gegen-sbb', fr: 'retraite-gagne-contre-cff' },
+ 'manager-ffs-denaro-pubblico': { it: 'manager-ffs-denaro-pubblico', en: 'ffs-manager-public-funds', de: 'sbb-manager-oeffentliche-gelder', fr: 'manager-ffs-fonds-publics' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

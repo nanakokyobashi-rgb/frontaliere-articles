@@ -8474,6 +8474,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.pensionato-vince-contro-ffs.title': 'Rentner setzt sich nach monatelangem Kampf gegen die FFS durch',
     'blog.article.pensionato-vince-contro-ffs.excerpt': 'UFT: Zuschlag von 75 Franken als ungerechtfertigt eingestuft Verspätung eines Busses, dann eine alternative Route Der Fall beginnt mit der Reise Küsnacht-Rafz Der Fall',
     'blog.article.pensionato-vince-contro-ffs.imageAlt': 'Rentner gewinnt Kampf gegen die SBB im öffentlichen Verkehr',
+    'blog.article.manager-ffs-denaro-pubblico.title': 'Ex-Manager der FFS, Lamborghini und Haus in Florida mit öffentlichen Geldern',
+    'blog.article.manager-ffs-denaro-pubblico.excerpt': 'Ex-FFS-Manager beschuldigt, rund 9 Millionen veruntreut zu haben Seit Dezember 2024 laufende Bundesuntersuchung Prozess für Ende Oktober vorgesehen Strafrechtlich relevanter Schaden',
+    'blog.article.manager-ffs-denaro-pubblico.imageAlt': 'Eidgenössische Gebäude in der Schweiz',
 };
 
 export default blogMetaChDe;

@@ -8474,6 +8474,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.pensionato-vince-contro-ffs.title': 'Retiree prevails over FFS after months-long battle',
     'blog.article.pensionato-vince-contro-ffs.excerpt': 'UFT: 75-franc surcharge deemed unjustified Bus delay, then an alternative route The story begins with the Küsnacht-Rafz journey The case',
     'blog.article.pensionato-vince-contro-ffs.imageAlt': 'Pensionist wins battle against SBB on public transport',
+    'blog.article.manager-ffs-denaro-pubblico.title': 'Former FFS manager, Lamborghini and house in Florida with public funds',
+    'blog.article.manager-ffs-denaro-pubblico.excerpt': 'Former FFS executive accused of misappropriating around 9 million Federal investigation open since December 2024 Trial scheduled for late October Damage relevant under criminal law',
+    'blog.article.manager-ffs-denaro-pubblico.imageAlt': 'Federal institutional buildings in Switzerland',
 };
 
 export default blogMetaChEn;
