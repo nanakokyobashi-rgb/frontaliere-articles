@@ -33,6 +33,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.eventi-weekend-friburgo.title': 'Veranstaltungen am Wochenende im Kanton Freiburg: was tun Sa & So',
     'blog.article.eventi-weekend-friburgo.excerpt': 'Veranstaltungen im Kanton Freiburg an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
     'blog.article.eventi-weekend-friburgo.imageAlt': 'Veranstaltungen am Wochenende im Kanton Freiburg',
+    'blog.article.dossier-friburgo-2027.title': 'Budget 2027 des Kantons Freiburg',
+    'blog.article.dossier-friburgo-2027.excerpt': 'Die Seite fr.ch zum Budget 2027 des Kantons Freiburg ist das einzige verfügbare Element: Das bereitgestellte Material enthält keine Zahlen, Datumsangaben, Entscheidungen oder konkreten Maßnahmen.',
+    'blog.article.dossier-friburgo-2027.imageAlt': 'Schweizerisches redaktionelles Bild zum Budget 2027 des Kantons Freiburg',
 };
 
 export default blogMetaCantonFrDe;

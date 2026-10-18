@@ -33,6 +33,9 @@ const blogMetaCantonFrIt: Record<string, string> = {
     'blog.article.eventi-weekend-friburgo.title': 'Eventi del weekend nel Canton Friburgo: cosa fare sabato e domenica',
     'blog.article.eventi-weekend-friburgo.excerpt': 'Eventi nel Canton Friburgo ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
     'blog.article.eventi-weekend-friburgo.imageAlt': 'Eventi del weekend nel Canton Friburgo',
+    'blog.article.dossier-friburgo-2027.title': 'Budget 2027 del canton Friburgo',
+    'blog.article.dossier-friburgo-2027.excerpt': 'La pagina fr.ch sul Budget 2027 del Canton Friburgo è il solo elemento disponibile: il materiale fornito non riporta cifre, date, decisioni o misure specifiche.',
+    'blog.article.dossier-friburgo-2027.imageAlt': 'Immagine editoriale svizzera associata al Budget 2027 del Canton Friburgo',
 };
 
 export default blogMetaCantonFrIt;

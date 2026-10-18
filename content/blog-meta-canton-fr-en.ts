@@ -33,6 +33,9 @@ const blogMetaCantonFrEn: Record<string, string> = {
     'blog.article.eventi-weekend-friburgo.title': 'Weekend events in the canton of Fribourg: what to do Saturday & Sunday',
     'blog.article.eventi-weekend-friburgo.excerpt': 'Events in the canton of Fribourg every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
     'blog.article.eventi-weekend-friburgo.imageAlt': 'Weekend events in the canton of Fribourg',
+    'blog.article.dossier-friburgo-2027.title': '2027 Budget of the Canton of Fribourg',
+    'blog.article.dossier-friburgo-2027.excerpt': 'The fr.ch page on the 2027 Budget of the Canton of Fribourg is the only available element: the material provided does not report any figures, dates, decisions, or specific measures.',
+    'blog.article.dossier-friburgo-2027.imageAlt': 'Swiss editorial image associated with the 2027 budget of the Canton of Fribourg',
 };
 
 export default blogMetaCantonFrEn;

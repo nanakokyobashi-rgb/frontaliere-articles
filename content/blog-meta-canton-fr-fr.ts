@@ -33,6 +33,9 @@ const blogMetaCantonFrFr: Record<string, string> = {
     'blog.article.eventi-weekend-friburgo.title': 'Événements du week-end dans le canton de Fribourg : que faire samedi & dimanche',
     'blog.article.eventi-weekend-friburgo.excerpt': 'Événements dans le canton de Fribourg chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
     'blog.article.eventi-weekend-friburgo.imageAlt': 'Événements du week-end dans le canton de Fribourg',
+    'blog.article.dossier-friburgo-2027.title': 'Budget 2027 du canton de Fribourg',
+    'blog.article.dossier-friburgo-2027.excerpt': 'La page fr.ch sur le Budget 2027 du canton de Fribourg est le seul élément disponible : le matériel fourni ne mentionne aucun chiffre, aucune date, aucune décision ni mesure spécifique.',
+    'blog.article.dossier-friburgo-2027.imageAlt': 'Image éditoriale suisse associée au budget 2027 du canton de Fribourg',
 };
 
 export default blogMetaCantonFrFr;

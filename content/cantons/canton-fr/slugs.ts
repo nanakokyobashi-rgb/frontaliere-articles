@@ -13,6 +13,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'dibattito-prefettura-sarine': { it: 'dibattito-prefettura-sarine', en: 'sarine-prefecture-debate', de: 'sarine-praefektur-debatte', fr: 'debat-prefecture-sarine' },
  'copertura-a12-opposizioni': { it: 'copertura-a12-opposizioni', en: 'a12-cover-project-objections', de: 'a12-ueberdachung-einsprachen', fr: 'couverture-a12-oppositions' },
  'eventi-weekend-friburgo': { it: 'eventi-weekend-friburgo', en: 'weekend-events-fribourg', de: 'wochenend-veranstaltungen-freiburg', fr: 'evenements-week-end-fribourg' },
+ 'dossier-friburgo-2027': { it: 'dossier-friburgo-2027', en: 'fribourg-dossier-2027', de: 'freiburg-dossier-2027', fr: 'dossier-fribourg-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -1,34 +1,20 @@
 {
-  "keywords": [],
-  "strikes": {},
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
   "topicGateUrls": {
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/296142/freiburg-sagt-ja-zum-ausbau-des-spitals-payerne-nun-ist-die-waadt-an-der-reihe": {
+    "canton-fr::https://latele.ch/emissions/info-fribourg/info-fribourg-s-2026-e-128?s=1": {
       "section": "canton-fr",
-      "ts": 1791699072687
+      "ts": 1792293573951
     },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/296362/pr%c3%a4mien-wieso-ist-das-telefon-pl%c3%b6tzlich-teurer-als-der-arzt": {
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/296701/grosser-rat-%c3%b6ffnet-weg-f%c3%bcr-zweisprachige-gemeinden": {
       "section": "canton-fr",
-      "ts": 1791786025482
+      "ts": 1792293584924
     },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/294705/herbstferien-f%c3%bcr-0-franken-10-kostenlose-ausflugstipps-im-kanton-freiburg": {
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/297111/laupen-%c3%b6ffnet-die-baustelle-f%c3%bcr-die-bev%c3%b6lkerung": {
       "section": "canton-fr",
-      "ts": 1791786047072
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/296132/sp-will-krankenkassenpr%c3%a4mien-senken-doch-der-rat-bremst": {
-      "section": "canton-fr",
-      "ts": 1791786053007
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/296280/sabotageakt-feuer-legt-sbbstrecke-lahm": {
-      "section": "canton-fr",
-      "ts": 1791786849132
-    },
-    "canton-fr::https://www.laliberte.ch/articles/regions/canton/voici-pourquoi-vous-avez-ete-touche-par-une-panne-delectricite-ce-vendredi-1462043": {
-      "section": "canton-fr",
-      "ts": 1791786853199
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/295885/neue-r%c3%a4ume-f%c3%bcr-eine-wachsende-schule": {
-      "section": "canton-fr",
-      "ts": 1791786858066
+      "ts": 1792293586032
     }
   }
 }

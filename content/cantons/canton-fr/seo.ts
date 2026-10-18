@@ -387,6 +387,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-dossier-friburgo-2027': {
+    title: 'Budget 2027 del canton Friburgo | Frontaliere Ticino',
+    description: 'La pagina fr.ch sul Budget 2027 del Canton Friburgo è il solo elemento disponibile: il materiale fornito non riporta cifre, date, decisioni o misure specifiche.',
+    keywords: 'frontalieri, ticino, svizzera, italia, budget, canton, friburgo, pagina',
+    ogTitle: 'Budget 2027: pagina del Canton Friburgo',
+    ogDescription: 'Il titolo della pagina indica il Budget 2027 sul portale fr.ch. Il testo della fonte non è disponibile: perciò non vengono attribuiti importi, scadenze, voti, misure fiscali o effetti sui servizi. L\'analisi resta sul dato verificabile.',
+    canonicalPath: '/articoli-friburgo/dossier-friburgo-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Budget 2027 del canton Friburgo",
+      "description": "La pagina fr.ch sul Budget 2027 del Canton Friburgo è il solo elemento disponibile: il materiale fornito non riporta cifre, date, decisioni o misure specifiche.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-dossier-friburgo-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale svizzera associata al Budget 2027 del Canton Friburgo"
+      },
+      "datePublished": "2026-10-18T03:25:38+00:00",
+      "dateModified": "2026-10-18T03:25:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-friburgo/dossier-friburgo-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
