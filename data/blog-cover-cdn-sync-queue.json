@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-ps-tre-iniziative-thun.webp",
+      "sha256": "5bd79601dc6ba554b1c03f9ce8885ab26fec0af21a8a1f9c149566b78e832e66"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-ps-tre-iniziative-thun-480w.webp",
+      "sha256": "1a3a56ff0ee4adb41a1e359058a230bce8b01150a5965a9f67e29e046f88e6d9"
+    }
+  ]
 }
