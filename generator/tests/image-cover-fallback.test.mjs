@@ -27,7 +27,6 @@ import {
   GENERATED_IMAGE_RESTRICTIONS,
   LICENSED_PHOTO_RESTRICTIONS,
 } from '../../engine/shared/generatedImageRegistry.mjs';
-import { imageVisionRejectionError } from '../../engine/shared/generatedImageEngine.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -274,10 +273,13 @@ test('i flag vision strutturati governano adattamento e terminalità senza dipen
   ];
 
   for (const [vision, retryable] of cases) {
-    const rejection = imageVisionRejectionError({ ...vision, notes: 'generic synthetic illustration' });
     const error = new Error('All image providers failed');
     error.imageProviderLedger = ledger;
-    error.failures = [{ provider: 'openai-codex', reason: rejection.message, vision: rejection.vision }];
+    error.failures = [{
+      provider: 'openai-codex',
+      reason: 'vision gate rejected image: generic synthetic illustration',
+      vision,
+    }];
     const disposition = classifyImageRegenerationFailure(error);
     assert.equal(disposition.retryable, retryable, JSON.stringify(vision));
     assert.equal(disposition.retryHint, retryable ? 'no-text' : undefined, JSON.stringify(vision));
