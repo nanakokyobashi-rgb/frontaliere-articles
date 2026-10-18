@@ -2851,6 +2851,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'lamal-guida-2026-canton-argovia': { it: 'lamal-guida-2026-canton-argovia', en: 'lamal-guide-2026-canton-aargau', de: 'lamal-leitfaden-2026-kanton-argau', fr: 'guide-lamal-2026-canton-argovie' },
  'ordinanza-liste-validita': { it: 'ordinanza-liste-validita', en: 'sanctions-list-validity', de: 'sanktionslisten-gueltigkeit', fr: 'validite-listes-sanctions' },
  'prezzi-carburanti-rinviati-rinviati': { it: 'prezzi-carburanti-rinviati-rinviati', en: 'fuel-prices-delay-switzerland', de: 'treibstoffpreise-verzoegert', fr: 'prix-carburants-retard' },
+ 'dacuda-mouse-scanner': { it: 'dacuda-mouse-scanner', en: 'dacuda-scanner-mouse', de: 'dacuda-scanner-maus', fr: 'dacuda-souris-scanner' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

@@ -8486,6 +8486,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.prezzi-carburanti-rinviati-rinviati.title': 'Kraftstoffe: Warum die Preise an der Zapfsäule hoch bleiben',
     'blog.article.prezzi-carburanti-rinviati-rinviati.excerpt': 'Das Rohöl bleibt nahe bei 100 Dollar pro Barrel.',
     'blog.article.prezzi-carburanti-rinviati-rinviati.imageAlt': 'Tankstelle in der Schweiz mit Tanklastwagen im Hintergrund',
+    'blog.article.dacuda-mouse-scanner.title': 'Dacuda in Liquidation: Zürcher Gesellschaft aufgelöst',
+    'blog.article.dacuda-mouse-scanner.excerpt': 'Dacuda geht nach dem Beschluss der Generalversammlung in Liquidation Das Start-up war 2009 aus einem Spin-off der ETH hervorgegangen Der Maus-Scanner digitalisierte Dokumente',
+    'blog.article.dacuda-mouse-scanner.imageAlt': 'Computermaus mit Scannerfunktion neben Dokumenten in einem Schweizer Büro',
 };
 
 export default blogMetaChDe;

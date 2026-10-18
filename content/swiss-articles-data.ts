@@ -28352,6 +28352,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'dacuda-mouse-scanner',
+    category: 'novita',
+    date: '2026-10-18T06:52:25.206Z',
+    image: '/images/blog/article-dacuda-mouse-scanner.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    canton: ['ZH'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

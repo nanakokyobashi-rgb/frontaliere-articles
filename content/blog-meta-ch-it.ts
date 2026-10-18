@@ -8486,6 +8486,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.prezzi-carburanti-rinviati-rinviati.title': 'Carburanti: perché i prezzi alla pompa restano alti',
     'blog.article.prezzi-carburanti-rinviati-rinviati.excerpt': 'Il greggio resta vicino ai 100 dollari al barile.',
     'blog.article.prezzi-carburanti-rinviati-rinviati.imageAlt': 'Pompa di carburante in Svizzera con camion cisterna in sfondo',
+    'blog.article.dacuda-mouse-scanner.title': 'Dacuda in liquidazione: sciolta la società zurighese',
+    'blog.article.dacuda-mouse-scanner.excerpt': 'Dacuda entra in liquidazione dopo il voto dell\'assemblea La start-up era nata nel 2009 da uno spin-off dell\'ETH Il mouse-scanner digitalizzava documenti',
+    'blog.article.dacuda-mouse-scanner.imageAlt': 'Mouse con funzione di scanner accanto a documenti in un ufficio svizzero',
 };
 
 export default blogMetaChIt;

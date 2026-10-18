@@ -8486,6 +8486,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.prezzi-carburanti-rinviati-rinviati.title': 'Fuel: why prices at the pump remain high',
     'blog.article.prezzi-carburanti-rinviati-rinviati.excerpt': 'Crude oil remains close to 100 dollars per barrel.',
     'blog.article.prezzi-carburanti-rinviati-rinviati.imageAlt': 'Fuel pump in Switzerland with tanker truck in the background',
+    'blog.article.dacuda-mouse-scanner.title': 'Dacuda in liquidation: Zurich-based company dissolved',
+    'blog.article.dacuda-mouse-scanner.excerpt': 'Dacuda enters liquidation after the assembly\'s vote The start-up was founded in 2009 as a spin-off of ETH The mouse scanner digitized documents',
+    'blog.article.dacuda-mouse-scanner.imageAlt': 'Computer mouse with scanner function beside documents in a Swiss office',
 };
 
 export default blogMetaChEn;

@@ -9921,26 +9921,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenoi.it/2026/10/15/leggi-notizia/argomenti/territorio/articolo/nellex-convento-dei-frati-di-laveno-mombello-vive-la-comunita-del-bostano-mettiamo-in-comune-i.html": {
-      "section": "frontaliere",
-      "ts": 1792127168047
-    },
-    "frontaliere::https://www.tio.ch/rubriche/aziende-ticinesi-informano/1957066/international-au-storia-albergo-schmid-lac-anni-famiglia-lugano-roberto": {
-      "section": "frontaliere",
-      "ts": 1792130105656
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/le-relazioni-col-territorio-che-fanno-crescere-lazienda-la-ricetta-della-atom-srl-di-travedona-monate/2707612": {
-      "section": "frontaliere",
-      "ts": 1792130130511
-    },
-    "frontaliere::https://www.ocst.ch/il-sindacato/organi-statutari": {
-      "section": "frontaliere",
-      "ts": 1792131185208
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/a-gallarate-arriva-future-loading-la-fiera-che-aiuta-gli-studenti-a-scegliere-la-scuola-superiore/2709568": {
-      "section": "frontaliere",
-      "ts": 1792133136933
-    },
     "frontaliere::https://www.varesenews.it/2026/10/in-italia-54-milioni-di-poveri-listat-un-milione-sono-bambini-lavorare-non-basta-piu-per-uscire-dalla-poverta/2709526": {
       "section": "frontaliere",
       "ts": 1792136803755
@@ -10248,6 +10228,14 @@
     "frontaliere::https://www.varesenews.it/2026/10/openjobmetis-contro-il-tabu-trento-varese-non-vince-dalla-doppietta-di-roijakkers/2710981": {
       "section": "frontaliere",
       "ts": 1792296009319
+    },
+    "svizzera::https://www.tio.ch/svizzera/attualita/1957270/favore-giovani-svizzera-ricerca-progetto": {
+      "section": "svizzera",
+      "ts": 1792306051428
+    },
+    "svizzera::https://www.rsi.ch/info/salute/cervello-e-memoria-il-mistero-dell%e2%80%99amnesia--4163491.html": {
+      "section": "svizzera",
+      "ts": 1792306065219
     }
   }
 }

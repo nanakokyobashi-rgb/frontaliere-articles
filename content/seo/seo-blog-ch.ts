@@ -107203,6 +107203,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-dacuda-mouse-scanner': {
+    title: 'Dacuda in liquidazione: sciolta la società zurighese',
+    description: 'Dacuda entra in liquidazione dopo il voto dell\'assemblea La start-up era nata nel 2009 da uno spin-off dell\'ETH Il mouse-scanner digitalizzava documenti',
+    keywords: 'frontalieri, ticino, svizzera, italia, dacuda, liquidazione, sciolta, società',
+    ogTitle: 'Dacuda in liquidazione: sciolta la società zurighese',
+    ogDescription: 'Dacuda entra in liquidazione dopo il voto dell\'assemblea La start-up era nata nel 2009 da uno spin-off dell\'ETH Il mouse-scanner digitalizzava documenti',
+    canonicalPath: '/articoli-svizzera/dacuda-mouse-scanner/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dacuda in liquidazione: sciolta la società zurighese",
+      "description": "Dacuda entra in liquidazione dopo il voto dell'assemblea La start-up era nata nel 2009 da uno spin-off dell'ETH Il mouse-scanner digitalizzava documenti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-dacuda-mouse-scanner.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Mouse con funzione di scanner accanto a documenti in un ufficio svizzero"
+      },
+      "datePublished": "2026-10-18T06:52:25+00:00",
+      "dateModified": "2026-10-18T06:52:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/dacuda-mouse-scanner/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
