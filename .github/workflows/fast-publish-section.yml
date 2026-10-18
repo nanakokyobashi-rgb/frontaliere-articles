@@ -835,9 +835,10 @@ jobs:
               # nome dell'asset gtag: riallinea la CDN prima di ogni render.
               bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/ci/ensure-host-shell-assets.mjs
             fi
-            # Non usare retry-cmd.sh qui: un errore di freschezza deve tornare
-            # subito al loop esterno, che rifà fetch e checkout della main.
-            if npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"; then
+            # Il wrapper ritenta i blip npm/R2. Se il publish fallisce anche
+            # dopo i tentativi, il controllo sotto distingue un avanzamento di
+            # main e fa ripartire il loop dal checkout aggiornato.
+            if bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"; then
               exit 0
             fi
             if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then

@@ -1385,7 +1385,7 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(sectionLiveLoop, /if \[ -f \.github\/FAST_PUBLISH_DISABLED \]/u);
   assert.match(sectionLiveLoop, /build_publish_args "\$attempt_dry"/u);
   assert.match(sectionLiveLoop, /bash scripts\/lib\/npm-ci-retry\.sh/u);
-  assert.doesNotMatch(sectionLiveLoop, /if bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/u);
+  assert.match(sectionLiveLoop, /if bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/u);
   for (const publisher of [articlePublisher, sectionPublisher]) {
     assert.match(publisher, /COVER_DRAIN_COMMIT_MESSAGE: \$\{\{ github\.event\.head_commit\.message \}\}/u);
     assert.match(publisher, /cover_drain_marker="\$\(node scripts\/ci\/cover-drain-commit\.mjs is-cover-drain\)"/u);

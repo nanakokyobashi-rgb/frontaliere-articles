@@ -2824,7 +2824,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   assert.match(liveRetryLoop, /build_publish_args "\$attempt_dry"/);
   assert.match(wf, /INSTALLED_DEPENDENCY_LOCK_HASH/);
-  assert.doesNotMatch(liveRetryLoop, /if bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/);
+  assert.match(liveRetryLoop, /if bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/);
   assert.match(wf, /PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
   assert.match(wf, /PUSH_AFTER: \$\{\{ needs\.resolve\.outputs\.push_after \}\}/);
   const bootstrapReplay = wf.slice(wf.indexOf('  replay-api-after-bootstrap:'));
