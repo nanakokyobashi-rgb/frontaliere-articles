@@ -4,17 +4,17 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T11:38:04.345Z",
-  "contentHash": "9b4c0e1cd0411981d204997592826da8d487f40b65aa42c247bf6586be5b5b83",
+  "updatedAt": "2026-10-18T00:18:32.280Z",
+  "contentHash": "7844a61199544b99ed08071270ce0e56abdb014d0c7bfbb6ebaa512a18a630b6",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T10:44:21.348Z",
+      "updatedAt": "2026-10-17T17:01:03.100Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T20:07:19.130Z",
+      "updatedAt": "2026-10-17T14:28:40.900Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "104",
+          "value": "97",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Landschaft lesen und erleben - Geschichte, Wandel, Bedeutung",
-              "detail": "Oberhof",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/landschaft-lesen-und-erleben-geschichte-wandel-bedeutung-1/"
+              "label": "Brunch MBote",
+              "detail": "Röm.-kath. Pfarreiheim, Spreitenbach",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/brunch-mbote/"
             },
             {
-              "label": "Landschaft lesen und erleben - Geschichte, Wandel, Bedeutung",
-              "detail": "Küttigen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/landschaft-lesen-und-erleben-geschichte-wandel-bedeutung/"
+              "label": "Buchvernissage \"Eine Messerspitze Safran\"",
+              "detail": "Muri AG",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchvernissage-eine-messerspitze-safran/"
             },
             {
-              "label": "Mostifest 2026",
-              "detail": "5075 Hornussen, Böztal",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mostifest-2026/"
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
             },
             {
-              "label": "Repair Café Wittnau",
-              "detail": "Mehrzweckgebäude, Wittnau",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/wittnau/repair-cafe-wittnau_AvZFDS7"
+              "label": "Musikalisches Echo",
+              "detail": "Singisen Forum",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/musikalisches-echo_A4MDPKH"
             },
             {
-              "label": "Repair Café Zurzach",
-              "detail": "Schulhaus Neuberg, Zurzach",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bad-zurzach/repair-cafe-zurzach_A4puuwG"
+              "label": "Robert Jon & The Wreck",
+              "detail": "Konservi, Seon",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/robert-jon-und-the-wreck_ABHwbPN"
             },
             {
-              "label": "Create and Curate",
-              "detail": "Kunstraum Baden, Baden",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/baden/create-and-curate_ApnqRg8"
+              "label": "Gretchen Parlato Quartet",
+              "detail": "Pflegi Muri",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/gretchen-parlato-quartet_A2gx3sR"
             },
             {
-              "label": "Klang-Tauchen",
-              "detail": "Klang im Herz, Untersiggenthal",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/untersiggenthal/klang-tauchen_AKwAfT8"
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
             },
             {
-              "label": "STOFFwechsel Kleidertauschbörse für Frauen",
-              "detail": "Röm.-kath. Pfarreisaal St. Michael, Ennetbaden",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/stoffwechsel-kleidertauschboerse-fuer-frauen/"
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — in corso, ultimo giorno: 30 ottobre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
             },
             {
-              "label": "Käfer – Theater Sgaramusch",
-              "detail": "Bühne Aarau, Aarau",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaefer-theater-sgaramusch/"
+              "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
+              "detail": "Wettingen — in corso, ultimo giorno: 19 ottobre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
             },
             {
-              "label": "BierBeizenBummel",
-              "detail": "Rathaus, Rheinfelden",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bierbeizenbummel/"
+              "label": "Verslimorgen",
+              "detail": "Muri AG",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verslimorgen-6/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "en": {
       "canton": "AG",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "104",
+          "value": "97",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Landschaft lesen und erleben - Geschichte, Wandel, Bedeutung",
-              "detail": "Oberhof",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/landschaft-lesen-und-erleben-geschichte-wandel-bedeutung-1/"
+              "label": "Brunch MBote",
+              "detail": "Röm.-kath. Pfarreiheim, Spreitenbach",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/brunch-mbote/"
             },
             {
-              "label": "Landschaft lesen und erleben - Geschichte, Wandel, Bedeutung",
-              "detail": "Küttigen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/landschaft-lesen-und-erleben-geschichte-wandel-bedeutung/"
+              "label": "Buchvernissage \"Eine Messerspitze Safran\"",
+              "detail": "Muri AG",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchvernissage-eine-messerspitze-safran/"
             },
             {
-              "label": "Mostifest 2026",
-              "detail": "5075 Hornussen, Böztal",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mostifest-2026/"
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
             },
             {
-              "label": "Repair Café Wittnau",
-              "detail": "Mehrzweckgebäude, Wittnau",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/wittnau/repair-cafe-wittnau_AvZFDS7"
+              "label": "Musikalisches Echo",
+              "detail": "Singisen Forum",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/musikalisches-echo_A4MDPKH"
             },
             {
-              "label": "Repair Café Zurzach",
-              "detail": "Schulhaus Neuberg, Zurzach",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bad-zurzach/repair-cafe-zurzach_A4puuwG"
+              "label": "Robert Jon & The Wreck",
+              "detail": "Konservi, Seon",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/robert-jon-und-the-wreck_ABHwbPN"
             },
             {
-              "label": "Create and Curate",
-              "detail": "Kunstraum Baden, Baden",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/baden/create-and-curate_ApnqRg8"
+              "label": "Gretchen Parlato Quartet",
+              "detail": "Pflegi Muri",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/gretchen-parlato-quartet_A2gx3sR"
             },
             {
-              "label": "Klang-Tauchen",
-              "detail": "Klang im Herz, Untersiggenthal",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/untersiggenthal/klang-tauchen_AKwAfT8"
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — ongoing, last day: 31 October 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
             },
             {
-              "label": "STOFFwechsel Kleidertauschbörse für Frauen",
-              "detail": "Röm.-kath. Pfarreisaal St. Michael, Ennetbaden",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/stoffwechsel-kleidertauschboerse-fuer-frauen/"
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — ongoing, last day: 30 October 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
             },
             {
-              "label": "Käfer – Theater Sgaramusch",
-              "detail": "Bühne Aarau, Aarau",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaefer-theater-sgaramusch/"
+              "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
+              "detail": "Wettingen — ongoing, last day: 19 October 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
             },
             {
-              "label": "BierBeizenBummel",
-              "detail": "Rathaus, Rheinfelden",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bierbeizenbummel/"
+              "label": "Verslimorgen",
+              "detail": "Muri AG",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verslimorgen-6/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -231,7 +231,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +253,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "de": {
       "canton": "AG",
@@ -263,7 +263,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "104",
+          "value": "97",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -274,69 +274,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Landschaft lesen und erleben - Geschichte, Wandel, Bedeutung",
-              "detail": "Oberhof",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/landschaft-lesen-und-erleben-geschichte-wandel-bedeutung-1/"
+              "label": "Brunch MBote",
+              "detail": "Röm.-kath. Pfarreiheim, Spreitenbach",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/brunch-mbote/"
             },
             {
-              "label": "Landschaft lesen und erleben - Geschichte, Wandel, Bedeutung",
-              "detail": "Küttigen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/landschaft-lesen-und-erleben-geschichte-wandel-bedeutung/"
+              "label": "Buchvernissage \"Eine Messerspitze Safran\"",
+              "detail": "Muri AG",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchvernissage-eine-messerspitze-safran/"
             },
             {
-              "label": "Mostifest 2026",
-              "detail": "5075 Hornussen, Böztal",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mostifest-2026/"
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
             },
             {
-              "label": "Repair Café Wittnau",
-              "detail": "Mehrzweckgebäude, Wittnau",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/wittnau/repair-cafe-wittnau_AvZFDS7"
+              "label": "Musikalisches Echo",
+              "detail": "Singisen Forum",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/musikalisches-echo_A4MDPKH"
             },
             {
-              "label": "Repair Café Zurzach",
-              "detail": "Schulhaus Neuberg, Zurzach",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bad-zurzach/repair-cafe-zurzach_A4puuwG"
+              "label": "Robert Jon & The Wreck",
+              "detail": "Konservi, Seon",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/robert-jon-und-the-wreck_ABHwbPN"
             },
             {
-              "label": "Create and Curate",
-              "detail": "Kunstraum Baden, Baden",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/baden/create-and-curate_ApnqRg8"
+              "label": "Gretchen Parlato Quartet",
+              "detail": "Pflegi Muri",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/gretchen-parlato-quartet_A2gx3sR"
             },
             {
-              "label": "Klang-Tauchen",
-              "detail": "Klang im Herz, Untersiggenthal",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/untersiggenthal/klang-tauchen_AKwAfT8"
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
             },
             {
-              "label": "STOFFwechsel Kleidertauschbörse für Frauen",
-              "detail": "Röm.-kath. Pfarreisaal St. Michael, Ennetbaden",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/stoffwechsel-kleidertauschboerse-fuer-frauen/"
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — läuft, letzter Tag: 30. Oktober 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
             },
             {
-              "label": "Käfer – Theater Sgaramusch",
-              "detail": "Bühne Aarau, Aarau",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaefer-theater-sgaramusch/"
+              "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
+              "detail": "Wettingen — läuft, letzter Tag: 19. Oktober 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
             },
             {
-              "label": "BierBeizenBummel",
-              "detail": "Rathaus, Rheinfelden",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bierbeizenbummel/"
+              "label": "Verslimorgen",
+              "detail": "Muri AG",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verslimorgen-6/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -349,7 +349,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "fr": {
       "canton": "AG",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "104",
+          "value": "97",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -392,69 +392,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Landschaft lesen und erleben - Geschichte, Wandel, Bedeutung",
-              "detail": "Oberhof",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/landschaft-lesen-und-erleben-geschichte-wandel-bedeutung-1/"
+              "label": "Brunch MBote",
+              "detail": "Röm.-kath. Pfarreiheim, Spreitenbach",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/brunch-mbote/"
             },
             {
-              "label": "Landschaft lesen und erleben - Geschichte, Wandel, Bedeutung",
-              "detail": "Küttigen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/landschaft-lesen-und-erleben-geschichte-wandel-bedeutung/"
+              "label": "Buchvernissage \"Eine Messerspitze Safran\"",
+              "detail": "Muri AG",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchvernissage-eine-messerspitze-safran/"
             },
             {
-              "label": "Mostifest 2026",
-              "detail": "5075 Hornussen, Böztal",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mostifest-2026/"
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
             },
             {
-              "label": "Repair Café Wittnau",
-              "detail": "Mehrzweckgebäude, Wittnau",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/wittnau/repair-cafe-wittnau_AvZFDS7"
+              "label": "Musikalisches Echo",
+              "detail": "Singisen Forum",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/musikalisches-echo_A4MDPKH"
             },
             {
-              "label": "Repair Café Zurzach",
-              "detail": "Schulhaus Neuberg, Zurzach",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bad-zurzach/repair-cafe-zurzach_A4puuwG"
+              "label": "Robert Jon & The Wreck",
+              "detail": "Konservi, Seon",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/robert-jon-und-the-wreck_ABHwbPN"
             },
             {
-              "label": "Create and Curate",
-              "detail": "Kunstraum Baden, Baden",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/baden/create-and-curate_ApnqRg8"
+              "label": "Gretchen Parlato Quartet",
+              "detail": "Pflegi Muri",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/gretchen-parlato-quartet_A2gx3sR"
             },
             {
-              "label": "Klang-Tauchen",
-              "detail": "Klang im Herz, Untersiggenthal",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/untersiggenthal/klang-tauchen_AKwAfT8"
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
             },
             {
-              "label": "STOFFwechsel Kleidertauschbörse für Frauen",
-              "detail": "Röm.-kath. Pfarreisaal St. Michael, Ennetbaden",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/stoffwechsel-kleidertauschboerse-fuer-frauen/"
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — en cours, dernier jour : 30 octobre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
             },
             {
-              "label": "Käfer – Theater Sgaramusch",
-              "detail": "Bühne Aarau, Aarau",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaefer-theater-sgaramusch/"
+              "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
+              "detail": "Wettingen — en cours, dernier jour : 19 octobre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
             },
             {
-              "label": "BierBeizenBummel",
-              "detail": "Rathaus, Rheinfelden",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bierbeizenbummel/"
+              "label": "Verslimorgen",
+              "detail": "Muri AG",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verslimorgen-6/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -467,7 +467,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     }
   }
 }

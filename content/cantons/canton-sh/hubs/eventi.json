@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T11:38:04.345Z",
-  "contentHash": "0c8b4aa73aee9d3ff22d8ad1311b8aaafa6a377b9de57db0e1c2595637099130",
+  "updatedAt": "2026-10-18T00:18:32.280Z",
+  "contentHash": "f4b976d5592cf86b376538c97cc3328a38a5451a2d47ee4b4f40534f9e8ab6d0",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T10:44:21.348Z",
+      "updatedAt": "2026-10-17T17:01:03.100Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T20:07:19.130Z",
+      "updatedAt": "2026-10-17T14:28:40.900Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "25",
+          "value": "27",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,30 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Auf den Spuren der Hugenotten und Waldenser",
-              "detail": "Sciaffusa",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/auf-den-spuren-der-hugenotten-und-waldenser/"
-            },
-            {
-              "label": "Sagi Fish",
-              "detail": "Buchberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
-            },
-            {
-              "label": "Bocktoberfest Schaffhausen 2026",
-              "detail": "Messeareal, Schaffhausen — in corso, ultimo giorno: 17 ottobre 2026",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/events/music/schaffhausen/bocktoberfest-schaffhausen-2026_ArDxsEg"
-            },
-            {
-              "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
             {
               "label": "Public Moped Tour in Chläggli",
               "detail": "Mofun Töffli Garage in Gächlingen, Gächlingen",
@@ -72,6 +48,18 @@
               "detail": "Christliche Gemeinde Neuhausen (CGN)",
               "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/neuhausen/vortrag-du-musst-sterben-waehrend-du-lebst-damit-du-lebst-wenn-du-stirbst_ANjpwEh"
+            },
+            {
+              "label": "Sagi Fish",
+              "detail": "Buchberg — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
+            },
+            {
+              "label": "Wine mobile",
+              "detail": "Bringolf Weinbau, Hallau — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Riscoprire Sciaffusa - Un viaggio archeologico e storico nel tempo",
@@ -96,11 +84,23 @@
               "detail": "KSS Sport- und Freizeitpark Schaffhausen, Schaffhausen",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
+            },
+            {
+              "label": "In 80 Tagen um die Welt",
+              "detail": "Schaffhausen",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/in-80-tagen-um-die-welt-1/"
+            },
+            {
+              "label": "JULE X [CH]",
+              "detail": "Kulturzentrum Kammgarn",
+              "date": "2026-10-24",
+              "url": "https://www.guidle.com/it/events/music/schaffhausen/jule-x-ch_Aa7FMYe"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "en": {
       "canton": "SH",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "25",
+          "value": "27",
           "note": "from the site’s events calendar"
         }
       ],
@@ -155,30 +155,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Auf den Spuren der Hugenotten und Waldenser",
-              "detail": "Sciaffusa",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/auf-den-spuren-der-hugenotten-und-waldenser/"
-            },
-            {
-              "label": "Sagi Fish",
-              "detail": "Buchberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
-            },
-            {
-              "label": "Bocktoberfest Schaffhausen 2026",
-              "detail": "Messeareal, Schaffhausen — ongoing, last day: 17 October 2026",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/events/music/schaffhausen/bocktoberfest-schaffhausen-2026_ArDxsEg"
-            },
-            {
-              "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau — ongoing, last day: 25 October 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
             {
               "label": "Public Moped Tour in Chläggli",
               "detail": "Mofun Töffli Garage in Gächlingen, Gächlingen",
@@ -190,6 +166,18 @@
               "detail": "Christliche Gemeinde Neuhausen (CGN)",
               "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/neuhausen/vortrag-du-musst-sterben-waehrend-du-lebst-damit-du-lebst-wenn-du-stirbst_ANjpwEh"
+            },
+            {
+              "label": "Sagi Fish",
+              "detail": "Buchberg — ongoing, last day: 18 October 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
+            },
+            {
+              "label": "Wine mobile",
+              "detail": "Bringolf Weinbau, Hallau — ongoing, last day: 25 October 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Rediscover Schaffhausen - An archaeological-historical journey through time",
@@ -214,11 +202,23 @@
               "detail": "KSS Sport- und Freizeitpark Schaffhausen, Schaffhausen",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
+            },
+            {
+              "label": "In 80 Tagen um die Welt",
+              "detail": "Schaffhausen",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/in-80-tagen-um-die-welt-1/"
+            },
+            {
+              "label": "JULE X [CH]",
+              "detail": "Kulturzentrum Kammgarn",
+              "date": "2026-10-24",
+              "url": "https://www.guidle.com/it/events/music/schaffhausen/jule-x-ch_Aa7FMYe"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -231,7 +231,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +253,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "de": {
       "canton": "SH",
@@ -263,7 +263,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "25",
+          "value": "27",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -273,30 +273,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Auf den Spuren der Hugenotten und Waldenser",
-              "detail": "Sciaffusa",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/auf-den-spuren-der-hugenotten-und-waldenser/"
-            },
-            {
-              "label": "Sagi-Fisch",
-              "detail": "Buchberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
-            },
-            {
-              "label": "Bocktoberfest Schaffhausen 2026",
-              "detail": "Messeareal, Schaffhausen — läuft, letzter Tag: 17. Oktober 2026",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/events/music/schaffhausen/bocktoberfest-schaffhausen-2026_ArDxsEg"
-            },
-            {
-              "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
             {
               "label": "Öffentliche Töffli Tour im Chläggli",
               "detail": "Mofun Töffli Garage in Gächlingen, Gächlingen",
@@ -308,6 +284,18 @@
               "detail": "Christliche Gemeinde Neuhausen (CGN)",
               "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/neuhausen/vortrag-du-musst-sterben-waehrend-du-lebst-damit-du-lebst-wenn-du-stirbst_ANjpwEh"
+            },
+            {
+              "label": "Sagi-Fisch",
+              "detail": "Buchberg — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
+            },
+            {
+              "label": "Weinmobil",
+              "detail": "Bringolf Weinbau, Hallau — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Schaffhausen neu entdecken ̶ Eine archäologisch-historische Zeitreise",
@@ -332,11 +320,23 @@
               "detail": "KSS Sport- und Freizeitpark Schaffhausen, Schaffhausen",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
+            },
+            {
+              "label": "In 80 Tagen um die Welt",
+              "detail": "Schaffhausen",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/in-80-tagen-um-die-welt-1/"
+            },
+            {
+              "label": "JULE X [CH]",
+              "detail": "Kulturzentrum Kammgarn",
+              "date": "2026-10-24",
+              "url": "https://www.guidle.com/it/events/music/schaffhausen/jule-x-ch_Aa7FMYe"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -349,7 +349,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "fr": {
       "canton": "SH",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "25",
+          "value": "27",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -391,30 +391,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Auf den Spuren der Hugenotten und Waldenser",
-              "detail": "Sciaffusa",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/auf-den-spuren-der-hugenotten-und-waldenser/"
-            },
-            {
-              "label": "Poisson sagi",
-              "detail": "Buchberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
-            },
-            {
-              "label": "Bocktoberfest Schaffhausen 2026",
-              "detail": "Messeareal, Schaffhausen — en cours, dernier jour : 17 octobre 2026",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/events/music/schaffhausen/bocktoberfest-schaffhausen-2026_ArDxsEg"
-            },
-            {
-              "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
             {
               "label": "Balade publique en mobylette au Chläggli",
               "detail": "Mofun Töffli Garage in Gächlingen, Gächlingen",
@@ -426,6 +402,18 @@
               "detail": "Christliche Gemeinde Neuhausen (CGN)",
               "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/neuhausen/vortrag-du-musst-sterben-waehrend-du-lebst-damit-du-lebst-wenn-du-stirbst_ANjpwEh"
+            },
+            {
+              "label": "Poisson sagi",
+              "detail": "Buchberg — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
+            },
+            {
+              "label": "Weinmobil",
+              "detail": "Bringolf Weinbau, Hallau — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Redécouvrir Schaffhouse ̶ Un voyage dans le temps archéologique et historique",
@@ -450,11 +438,23 @@
               "detail": "KSS Sport- und Freizeitpark Schaffhausen, Schaffhausen",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
+            },
+            {
+              "label": "In 80 Tagen um die Welt",
+              "detail": "Schaffhausen",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/in-80-tagen-um-die-welt-1/"
+            },
+            {
+              "label": "JULE X [CH]",
+              "detail": "Kulturzentrum Kammgarn",
+              "date": "2026-10-24",
+              "url": "https://www.guidle.com/it/events/music/schaffhausen/jule-x-ch_Aa7FMYe"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -467,7 +467,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     }
   }
 }

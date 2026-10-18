@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T11:38:04.345Z",
-  "contentHash": "dbdd45ef6a17d0e1915e74a135f71076e9d737afdf9cadd3e54b43a79d38cc8f",
+  "updatedAt": "2026-10-18T00:18:32.280Z",
+  "contentHash": "5bb2be5b5d88ff2eb55ef38b1309450b295f138f25ecc0adbc5f4f055562e483",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T10:44:21.348Z",
+      "updatedAt": "2026-10-17T17:01:03.100Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T20:07:19.130Z",
+      "updatedAt": "2026-10-17T14:28:40.900Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "59",
+          "value": "61",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "New Orleans in Weinfelden - CD Release Konzert Nicole Johänntgen Henry",
-              "detail": "Goldener Dachs, Weinfelden",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/new-orleans-in-weinfelden-cd-release-konzert-nicole-johaenntgen-henry_Aqj7nD1"
+              "label": "Heimrunde Damen Kleinfeld emotion Weinfelden",
+              "detail": "Sporthalle Paul Reinhart, Weinfelden",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/heimrunde-damen-kleinfeld-emotion-weinfelden/"
             },
             {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Paritätische Kirche St. Laurentius, Frauenfeld",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/leidenschaft-und-samba_AneNZem"
-            },
-            {
-              "label": "Der Karneval der Tiere",
-              "detail": "Museum im Turmhof, Steckborn",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/der-karneval-der-tiere/"
-            },
-            {
-              "label": "Egidio Juke Ingala and The Jacknives",
-              "detail": "Restaurant Panem, Romanshorn",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/romanshorn/egidio-juke-ingala-and-the-jacknives_ACYFQu6"
-            },
-            {
-              "label": "Frauenfeld ROCKT – 1. Halbfinal",
-              "detail": "KAFF Kulturlokal, Frauenfeld",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/frauenfeld-rockt-1-halbfinal_AeUe2N2"
-            },
-            {
-              "label": "Worries And Other Plants",
+              "label": "Garstig, genial, Pfannkuchen",
               "detail": "Kulturhaus APOLLO, Kreuzlingen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/worries-and-other-plants/"
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/garstig-genial-pfannkuchen_AuKw4nS"
+            },
+            {
+              "label": "Apfel und Saft",
+              "detail": "Diessenhofen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-apfel-zum-saft/"
+            },
+            {
+              "label": "Trio Todo Tango - Sternstunde Tango",
+              "detail": "Klostergut Paradies",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schlatt-tg/trio-todo-tango-sternstunde-tango_A383GY1"
             },
             {
               "label": "Gruppen Kunstausstellung",
               "detail": "Tierpark Lange Erlen, Erlen — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
             },
             {
               "label": "Ziegentrekking",
               "detail": "geissgada, Hohentannen — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
             },
             {
               "label": "Mission Erde",
               "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
             },
             {
               "label": "Limit - Expedition zum Rande der Welt",
               "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/konstanz/kreuzlingen/limit-expedition-zum-rande-der-welt_Af6BCNs"
+            },
+            {
+              "label": "Schulden- und Budgetberatungen Caritas",
+              "detail": "Kreuzlingen",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schulden-und-budgetberatungen-caritas-15/"
+            },
+            {
+              "label": "Schriftbilder-Bilderschrift",
+              "detail": "Kreuzlingen",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/schriftbilder-bilderschrift/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -146,7 +146,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "en": {
       "canton": "TG",
@@ -156,7 +156,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "59",
+          "value": "61",
           "note": "from the site’s events calendar"
         }
       ],
@@ -167,69 +167,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "New Orleans in Weinfelden — Nicole Johänntgen Henry CD Release Concert",
-              "detail": "Goldener Dachs, Weinfelden",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/new-orleans-in-weinfelden-cd-release-konzert-nicole-johaenntgen-henry_Aqj7nD1"
+              "label": "Heimrunde Damen Kleinfeld emotion Weinfelden",
+              "detail": "Sporthalle Paul Reinhart, Weinfelden",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/heimrunde-damen-kleinfeld-emotion-weinfelden/"
             },
             {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Paritätische Kirche St. Laurentius, Frauenfeld",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/leidenschaft-und-samba_AneNZem"
-            },
-            {
-              "label": "Der Karneval der Tiere",
-              "detail": "Museum im Turmhof, Steckborn",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/der-karneval-der-tiere/"
-            },
-            {
-              "label": "Egidio Juke Ingala and The Jacknives",
-              "detail": "Restaurant Panem, Romanshorn",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/romanshorn/egidio-juke-ingala-and-the-jacknives_ACYFQu6"
-            },
-            {
-              "label": "Frauenfeld ROCKT – 1. Halbfinal",
-              "detail": "KAFF Kulturlokal, Frauenfeld",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/frauenfeld-rockt-1-halbfinal_AeUe2N2"
-            },
-            {
-              "label": "Worries And Other Plants",
+              "label": "Delicious, brilliant, pancakes",
               "detail": "Kulturhaus APOLLO, Kreuzlingen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/worries-and-other-plants/"
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/garstig-genial-pfannkuchen_AuKw4nS"
+            },
+            {
+              "label": "Apfel und Saft",
+              "detail": "Diessenhofen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-apfel-zum-saft/"
+            },
+            {
+              "label": "Trio Todo Tango - Sternstunde Tango",
+              "detail": "Klostergut Paradies",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schlatt-tg/trio-todo-tango-sternstunde-tango_A383GY1"
             },
             {
               "label": "Gruppen Kunstausstellung",
               "detail": "Tierpark Lange Erlen, Erlen — ongoing, last day: 25 October 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
             },
             {
               "label": "Ziegentrekking",
               "detail": "geissgada, Hohentannen — ongoing, last day: 31 October 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
             },
             {
               "label": "Mission Erde",
               "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — ongoing, last day: 25 October 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
             },
             {
               "label": "Limit - Expedition zum Rande der Welt",
               "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — ongoing, last day: 18 October 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/konstanz/kreuzlingen/limit-expedition-zum-rande-der-welt_Af6BCNs"
+            },
+            {
+              "label": "Schulden- und Budgetberatungen Caritas",
+              "detail": "Kreuzlingen",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schulden-und-budgetberatungen-caritas-15/"
+            },
+            {
+              "label": "Schriftbilder-Bilderschrift",
+              "detail": "Kreuzlingen",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/schriftbilder-bilderschrift/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -247,7 +247,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -275,7 +275,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "de": {
       "canton": "TG",
@@ -285,7 +285,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "59",
+          "value": "61",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -296,69 +296,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "New Orleans in Weinfelden – CD-Release-Konzert von Nicole Johänntgen Henry",
-              "detail": "Goldener Dachs, Weinfelden",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/new-orleans-in-weinfelden-cd-release-konzert-nicole-johaenntgen-henry_Aqj7nD1"
+              "label": "Heimrunde Damen Kleinfeld emotion Weinfelden",
+              "detail": "Sporthalle Paul Reinhart, Weinfelden",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/heimrunde-damen-kleinfeld-emotion-weinfelden/"
             },
             {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Paritätische Kirche St. Laurentius, Frauenfeld",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/leidenschaft-und-samba_AneNZem"
-            },
-            {
-              "label": "Der Karneval der Tiere",
-              "detail": "Museum im Turmhof, Steckborn",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/der-karneval-der-tiere/"
-            },
-            {
-              "label": "Egidio Juke Ingala and The Jacknives",
-              "detail": "Restaurant Panem, Romanshorn",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/romanshorn/egidio-juke-ingala-and-the-jacknives_ACYFQu6"
-            },
-            {
-              "label": "Frauenfeld ROCKT – 1. Halbfinal",
-              "detail": "KAFF Kulturlokal, Frauenfeld",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/frauenfeld-rockt-1-halbfinal_AeUe2N2"
-            },
-            {
-              "label": "Worries And Other Plants",
+              "label": "Eklig, genial, Pfannkuchen",
               "detail": "Kulturhaus APOLLO, Kreuzlingen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/worries-and-other-plants/"
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/garstig-genial-pfannkuchen_AuKw4nS"
+            },
+            {
+              "label": "Apfel und Saft",
+              "detail": "Diessenhofen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-apfel-zum-saft/"
+            },
+            {
+              "label": "Trio Todo Tango - Sternstunde Tango",
+              "detail": "Klostergut Paradies",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schlatt-tg/trio-todo-tango-sternstunde-tango_A383GY1"
             },
             {
               "label": "Gruppen Kunstausstellung",
               "detail": "Tierpark Lange Erlen, Erlen — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
             },
             {
               "label": "Ziegentrekking",
               "detail": "geissgada, Hohentannen — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
             },
             {
               "label": "Mission Erde",
               "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
             },
             {
               "label": "Limit - Expedition zum Rande der Welt",
               "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/konstanz/kreuzlingen/limit-expedition-zum-rande-der-welt_Af6BCNs"
+            },
+            {
+              "label": "Schulden- und Budgetberatungen Caritas",
+              "detail": "Kreuzlingen",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schulden-und-budgetberatungen-caritas-15/"
+            },
+            {
+              "label": "Schriftbilder-Bilderschrift",
+              "detail": "Kreuzlingen",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/schriftbilder-bilderschrift/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -376,7 +376,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -404,7 +404,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "fr": {
       "canton": "TG",
@@ -414,7 +414,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "59",
+          "value": "61",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -425,69 +425,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "La Nouvelle-Orléans à Weinfelden – Concert de lancement du CD de Nicole Johänntgen Henry",
-              "detail": "Goldener Dachs, Weinfelden",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/new-orleans-in-weinfelden-cd-release-konzert-nicole-johaenntgen-henry_Aqj7nD1"
+              "label": "Heimrunde Damen Kleinfeld emotion Weinfelden",
+              "detail": "Sporthalle Paul Reinhart, Weinfelden",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/heimrunde-damen-kleinfeld-emotion-weinfelden/"
             },
             {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Paritätische Kirche St. Laurentius, Frauenfeld",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/leidenschaft-und-samba_AneNZem"
-            },
-            {
-              "label": "Der Karneval der Tiere",
-              "detail": "Museum im Turmhof, Steckborn",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/der-karneval-der-tiere/"
-            },
-            {
-              "label": "Egidio Juke Ingala and The Jacknives",
-              "detail": "Restaurant Panem, Romanshorn",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/romanshorn/egidio-juke-ingala-and-the-jacknives_ACYFQu6"
-            },
-            {
-              "label": "Frauenfeld ROCKT – 1. Halbfinal",
-              "detail": "KAFF Kulturlokal, Frauenfeld",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/frauenfeld-rockt-1-halbfinal_AeUe2N2"
-            },
-            {
-              "label": "Worries And Other Plants",
+              "label": "Dégoûtant, génial, crêpes",
               "detail": "Kulturhaus APOLLO, Kreuzlingen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/worries-and-other-plants/"
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/garstig-genial-pfannkuchen_AuKw4nS"
+            },
+            {
+              "label": "Apfel und Saft",
+              "detail": "Diessenhofen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-apfel-zum-saft/"
+            },
+            {
+              "label": "Trio Todo Tango - Sternstunde Tango",
+              "detail": "Klostergut Paradies",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schlatt-tg/trio-todo-tango-sternstunde-tango_A383GY1"
             },
             {
               "label": "Gruppen Kunstausstellung",
               "detail": "Tierpark Lange Erlen, Erlen — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
             },
             {
               "label": "Ziegentrekking",
               "detail": "geissgada, Hohentannen — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
             },
             {
               "label": "Mission Erde",
               "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
             },
             {
               "label": "Limit - Expedition zum Rande der Welt",
               "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/konstanz/kreuzlingen/limit-expedition-zum-rande-der-welt_Af6BCNs"
+            },
+            {
+              "label": "Schulden- und Budgetberatungen Caritas",
+              "detail": "Kreuzlingen",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schulden-und-budgetberatungen-caritas-15/"
+            },
+            {
+              "label": "Schriftbilder-Bilderschrift",
+              "detail": "Kreuzlingen",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/schriftbilder-bilderschrift/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -505,7 +505,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -533,7 +533,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T00:12:19.402Z",
-  "contentHash": "f7a5cf4e10fb153c021e2db2495c738e21700eb8491f1f727d855886fbc7c820",
+  "updatedAt": "2026-10-18T00:18:32.280Z",
+  "contentHash": "5374e272064fbe636215ecb969b021cb6a855e26a6593ed27288bffaaa17395f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T10:44:21.348Z",
+      "updatedAt": "2026-10-17T17:01:03.100Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "112",
+          "value": "102",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Nordwestschweizer Geräte-, Gymnastik- & Aerobic Meisterschaften",
-              "detail": "Schulanlage Frenkenbündten, Liestal",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nordwestschweizer-geraete-gymnastik-aerobic-meisterschaften/"
+              "label": "Der Tag, an dem die Musik verboten wurde | The Day Music Was Banned",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/der-tag-an-dem-die-musik-verboten-wurde-the-day-music-was-banned_AfY6sf7"
             },
             {
-              "label": "Natur verbindet - von Farnen & Haseln - 17. Oktober",
-              "detail": "Hofgut Schönthal, Langenbruck",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/natur-verbindet-von-farnen-haseln-17-oktober/"
+              "label": "Ruth Asawa",
+              "detail": "Fondation Beyeler, Riehen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ruth-asawa/"
             },
             {
-              "label": "Tag der Kultur Allschwil",
-              "detail": "Allschwil",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tag-der-kultur-allschwil-1/"
-            },
-            {
-              "label": "Giornata della cultura al museo",
-              "detail": "Allschwil",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornata-della-cultura-al-museo/"
-            },
-            {
-              "label": "Kürbis-Fest",
-              "detail": "Gerstel, Waldenburg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kuerbis-fest/"
-            },
-            {
-              "label": "Mini-mostra: laboratori di pittura",
-              "detail": "Allschwil",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mini-mostra-laboratori-di-pittura/"
-            },
-            {
-              "label": "Corso intensivo di pittura in occasione della Giornata della Cultura",
-              "detail": "Museum Allschwil - Haus für Kultur und Geschichte, Allschwil",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mal-crashkurs-am-tag-der-kultur/"
-            },
-            {
-              "label": "Diverse, Pioneering, Modern: The \"Neues Bauen\"-Movement in Riehen",
-              "detail": "Treffpunkt wird bei Anmeldung bekannt gegeben, Riehen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vielfaeltig-wegweisend-modern-drei-wohnhaeuser-des-neuen-bauens-in-riehen/"
-            },
-            {
-              "label": "flowerloop Workshop",
+              "label": "Zaubersocken - Neue Trixx, frisch serviert!",
               "detail": "Basel",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flowerloop-workshop/"
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubersocken-neue-trixx-frisch-serviert/"
             },
             {
-              "label": "Öffentliche Führung Kehrichtverwertungsanlage Basel",
+              "label": "OpenSunday Riehen",
+              "detail": "Hallenbad Schulhaus Wasserstelzen, Riehen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/opensunday-riehen/"
+            },
+            {
+              "label": "Sing & Jam Session #zusammen singen und musizieren, #pop/rock cover songs",
+              "detail": "Quartiertreffpunkt LoLa",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sing-und-jam-session-zusammen-singen-und-musizieren-poprock-cover-songs_A3miUT6"
+            },
+            {
+              "label": "«Les Voix» - Jubiläumskonzert",
+              "detail": "Röm.-kath. Kirche St. Stephan, Therwil",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/therwil/les-voix-jubilaeumskonzert_AwcggBs"
+            },
+            {
+              "label": "«Les Voix» - Jubiläumskonzert",
+              "detail": "Therwil",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-voix-jubilaeumskonzert/"
+            },
+            {
+              "label": "Famiglia Dimitri mit - Cabaret Sorelle Forelle",
               "detail": "Basel",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-kehrichtverwertungsanlage-basel/"
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/famiglia-dimitri-mit-cabaret-sorelle-forelle-1/"
+            },
+            {
+              "label": "Sofalesung mit Julia Trachsel",
+              "detail": "Riehen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sofalesung-mit-julia-trachsel/"
+            },
+            {
+              "label": "Auf allerhand Art",
+              "detail": "Kartäuserkirche",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/auf-allerhand-art_AJvHsH2"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "112",
+          "value": "102",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Nordwestschweizer Geräte-, Gymnastik- & Aerobic Meisterschaften",
-              "detail": "Schulanlage Frenkenbündten, Liestal",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nordwestschweizer-geraete-gymnastik-aerobic-meisterschaften/"
+              "label": "Der Tag, an dem die Musik verboten wurde | The Day Music Was Banned",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/der-tag-an-dem-die-musik-verboten-wurde-the-day-music-was-banned_AfY6sf7"
             },
             {
-              "label": "Natur verbindet - von Farnen & Haseln - 17. Oktober",
-              "detail": "Hofgut Schönthal, Langenbruck",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/natur-verbindet-von-farnen-haseln-17-oktober/"
+              "label": "Ruth Asawa",
+              "detail": "Fondation Beyeler, Riehen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ruth-asawa/"
             },
             {
-              "label": "Tag der Kultur Allschwil",
-              "detail": "Allschwil",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tag-der-kultur-allschwil-1/"
-            },
-            {
-              "label": "Culture Day at the Museum",
-              "detail": "Allschwil",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornata-della-cultura-al-museo/"
-            },
-            {
-              "label": "Kürbis-Fest",
-              "detail": "Gerstel, Waldenburg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kuerbis-fest/"
-            },
-            {
-              "label": "Mini-Exhibition: Painting Workshops",
-              "detail": "Allschwil",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mini-mostra-laboratori-di-pittura/"
-            },
-            {
-              "label": "Crash Course in Painting on Culture Day",
-              "detail": "Museum Allschwil - Haus für Kultur und Geschichte, Allschwil",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mal-crashkurs-am-tag-der-kultur/"
-            },
-            {
-              "label": "Diverse, Pioneering, Modern: The \"Neues Bauen\"-Movement in Riehen",
-              "detail": "Treffpunkt wird bei Anmeldung bekannt gegeben, Riehen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vielfaeltig-wegweisend-modern-drei-wohnhaeuser-des-neuen-bauens-in-riehen/"
-            },
-            {
-              "label": "flowerloop Workshop",
+              "label": "Zaubersocken - Neue Trixx, frisch serviert!",
               "detail": "Basel",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flowerloop-workshop/"
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubersocken-neue-trixx-frisch-serviert/"
             },
             {
-              "label": "Öffentliche Führung Kehrichtverwertungsanlage Basel",
+              "label": "OpenSunday Riehen",
+              "detail": "Hallenbad Schulhaus Wasserstelzen, Riehen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/opensunday-riehen/"
+            },
+            {
+              "label": "Sing & Jam Session #zusammen singen und musicieren, #pop/rock cover songs",
+              "detail": "Quartiertreffpunkt LoLa",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sing-und-jam-session-zusammen-singen-und-musizieren-poprock-cover-songs_A3miUT6"
+            },
+            {
+              "label": "«Les Voix» - Jubiläumskonzert",
+              "detail": "Röm.-kath. Kirche St. Stephan, Therwil",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/therwil/les-voix-jubilaeumskonzert_AwcggBs"
+            },
+            {
+              "label": "«Les Voix» - Jubiläumskonzert",
+              "detail": "Therwil",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-voix-jubilaeumskonzert/"
+            },
+            {
+              "label": "Famiglia Dimitri mit - Cabaret Sorelle Forelle",
               "detail": "Basel",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-kehrichtverwertungsanlage-basel/"
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/famiglia-dimitri-mit-cabaret-sorelle-forelle-1/"
+            },
+            {
+              "label": "Sofalesung mit Julia Trachsel",
+              "detail": "Riehen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sofalesung-mit-julia-trachsel/"
+            },
+            {
+              "label": "Auf allerhand Art",
+              "detail": "Kartäuserkirche",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/auf-allerhand-art_AJvHsH2"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "112",
+          "value": "102",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Nordwestschweizer Geräte-, Gymnastik- & Aerobic Meisterschaften",
-              "detail": "Schulanlage Frenkenbündten, Liestal",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nordwestschweizer-geraete-gymnastik-aerobic-meisterschaften/"
+              "label": "Der Tag, an dem die Musik verboten wurde | The Day Music Was Banned",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/der-tag-an-dem-die-musik-verboten-wurde-the-day-music-was-banned_AfY6sf7"
             },
             {
-              "label": "Natur verbindet - von Farnen & Haseln - 17. Oktober",
-              "detail": "Hofgut Schönthal, Langenbruck",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/natur-verbindet-von-farnen-haseln-17-oktober/"
+              "label": "Ruth Asawa",
+              "detail": "Fondation Beyeler, Riehen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ruth-asawa/"
             },
             {
-              "label": "Tag der Kultur Allschwil",
-              "detail": "Allschwil",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tag-der-kultur-allschwil-1/"
-            },
-            {
-              "label": "Tag der Kultur im Museum",
-              "detail": "Allschwil",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornata-della-cultura-al-museo/"
-            },
-            {
-              "label": "Kürbis-Fest",
-              "detail": "Gerstel, Waldenburg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kuerbis-fest/"
-            },
-            {
-              "label": "Mini-Ausstellung: Mal-Workshops",
-              "detail": "Allschwil",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mini-mostra-laboratori-di-pittura/"
-            },
-            {
-              "label": "Mal-Crashkurs am Tag der Kultur",
-              "detail": "Museum Allschwil - Haus für Kultur und Geschichte, Allschwil",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mal-crashkurs-am-tag-der-kultur/"
-            },
-            {
-              "label": "Vielfältig, wegweisend, modern: Drei Wohnhäuser des Neuen Bauens in Riehen",
-              "detail": "Treffpunkt wird bei Anmeldung bekannt gegeben, Riehen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vielfaeltig-wegweisend-modern-drei-wohnhaeuser-des-neuen-bauens-in-riehen/"
-            },
-            {
-              "label": "flowerloop Workshop",
+              "label": "Zaubersocken - Neue Trixx, frisch serviert!",
               "detail": "Basel",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flowerloop-workshop/"
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubersocken-neue-trixx-frisch-serviert/"
             },
             {
-              "label": "Öffentliche Führung Kehrichtverwertungsanlage Basel",
+              "label": "OpenSunday Riehen",
+              "detail": "Hallenbad Schulhaus Wasserstelzen, Riehen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/opensunday-riehen/"
+            },
+            {
+              "label": "Sing & Jam Session #zusammen singen und musizieren, #pop/Rock-Coversongs",
+              "detail": "Quartiertreffpunkt LoLa",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sing-und-jam-session-zusammen-singen-und-musizieren-poprock-cover-songs_A3miUT6"
+            },
+            {
+              "label": "«Les Voix» - Jubiläumskonzert",
+              "detail": "Röm.-kath. Kirche St. Stephan, Therwil",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/therwil/les-voix-jubilaeumskonzert_AwcggBs"
+            },
+            {
+              "label": "«Les Voix» - Jubiläumskonzert",
+              "detail": "Therwil",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-voix-jubilaeumskonzert/"
+            },
+            {
+              "label": "Famiglia Dimitri mit - Cabaret Sorelle Forelle",
               "detail": "Basel",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-kehrichtverwertungsanlage-basel/"
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/famiglia-dimitri-mit-cabaret-sorelle-forelle-1/"
+            },
+            {
+              "label": "Sofalesung mit Julia Trachsel",
+              "detail": "Riehen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sofalesung-mit-julia-trachsel/"
+            },
+            {
+              "label": "Auf allerhand Art",
+              "detail": "Kartäuserkirche",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/auf-allerhand-art_AJvHsH2"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "112",
+          "value": "102",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Nordwestschweizer Geräte-, Gymnastik- & Aerobic Meisterschaften",
-              "detail": "Schulanlage Frenkenbündten, Liestal",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nordwestschweizer-geraete-gymnastik-aerobic-meisterschaften/"
+              "label": "Der Tag, an dem die Musik verboten wurde | The Day Music Was Banned",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/der-tag-an-dem-die-musik-verboten-wurde-the-day-music-was-banned_AfY6sf7"
             },
             {
-              "label": "Natur verbindet - von Farnen & Haseln - 17. Oktober",
-              "detail": "Hofgut Schönthal, Langenbruck",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/natur-verbindet-von-farnen-haseln-17-oktober/"
+              "label": "Ruth Asawa",
+              "detail": "Fondation Beyeler, Riehen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ruth-asawa/"
             },
             {
-              "label": "Tag der Kultur Allschwil",
-              "detail": "Allschwil",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tag-der-kultur-allschwil-1/"
-            },
-            {
-              "label": "Journée de la culture au musée",
-              "detail": "Allschwil",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornata-della-cultura-al-museo/"
-            },
-            {
-              "label": "Kürbis-Fest",
-              "detail": "Gerstel, Waldenburg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kuerbis-fest/"
-            },
-            {
-              "label": "Mini-exposition : ateliers de peinture",
-              "detail": "Allschwil",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mini-mostra-laboratori-di-pittura/"
-            },
-            {
-              "label": "Cours intensif de peinture lors de la Journée de la culture",
-              "detail": "Museum Allschwil - Haus für Kultur und Geschichte, Allschwil",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mal-crashkurs-am-tag-der-kultur/"
-            },
-            {
-              "label": "Variées, novatrices, modernes : Le mouvement « Neues Bauen » à Riehen",
-              "detail": "Treffpunkt wird bei Anmeldung bekannt gegeben, Riehen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vielfaeltig-wegweisend-modern-drei-wohnhaeuser-des-neuen-bauens-in-riehen/"
-            },
-            {
-              "label": "flowerloop Workshop",
+              "label": "Zaubersocken - Neue Trixx, frisch serviert!",
               "detail": "Basel",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flowerloop-workshop/"
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubersocken-neue-trixx-frisch-serviert/"
             },
             {
-              "label": "Öffentliche Führung Kehrichtverwertungsanlage Basel",
+              "label": "OpenSunday Riehen",
+              "detail": "Hallenbad Schulhaus Wasserstelzen, Riehen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/opensunday-riehen/"
+            },
+            {
+              "label": "Session Sing & Jam #zusammen singen und musizieren, reprises #pop/rock",
+              "detail": "Quartiertreffpunkt LoLa",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sing-und-jam-session-zusammen-singen-und-musizieren-poprock-cover-songs_A3miUT6"
+            },
+            {
+              "label": "«Les Voix» - Jubiläumskonzert",
+              "detail": "Röm.-kath. Kirche St. Stephan, Therwil",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/therwil/les-voix-jubilaeumskonzert_AwcggBs"
+            },
+            {
+              "label": "«Les Voix» - Jubiläumskonzert",
+              "detail": "Therwil",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-voix-jubilaeumskonzert/"
+            },
+            {
+              "label": "Famiglia Dimitri mit - Cabaret Sorelle Forelle",
               "detail": "Basel",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-kehrichtverwertungsanlage-basel/"
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/famiglia-dimitri-mit-cabaret-sorelle-forelle-1/"
+            },
+            {
+              "label": "Sofalesung mit Julia Trachsel",
+              "detail": "Riehen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sofalesung-mit-julia-trachsel/"
+            },
+            {
+              "label": "Auf allerhand Art",
+              "detail": "Kartäuserkirche",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/auf-allerhand-art_AJvHsH2"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     }
   }
 }

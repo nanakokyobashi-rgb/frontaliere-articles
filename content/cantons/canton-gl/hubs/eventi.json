@@ -4,17 +4,17 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T11:38:04.345Z",
-  "contentHash": "7048511d9b4a4e5fd92c6e135ba76b4958c2d6836fdb03d221bea527dfbb6b0b",
+  "updatedAt": "2026-10-18T00:18:32.280Z",
+  "contentHash": "4e8fc77fcdf85fc625322e67a4ccc5f66dfdfa797e42e08cf7eb8f1e0b276c72",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T10:44:21.348Z",
+      "updatedAt": "2026-10-17T17:01:03.100Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T20:07:19.130Z",
+      "updatedAt": "2026-10-17T14:28:40.900Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "26",
+          "value": "29",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,36 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Samstags-Brunch im Bergrestaurant Chämistube, 17. Oktober 2026",
-              "detail": "Braunwald",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samstagsbrunch-im-bergrestaurant-chaemistube-17-oktober-2026/"
-            },
-            {
-              "label": "Finissage Wild, Wein & Kunst",
-              "detail": "Näfels, Glarus Nord",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-wild-wein-kunst/"
-            },
-            {
-              "label": "Nicole Johänntgen «Henry» – Original Quartett",
-              "detail": "Anna Göldi Museum",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ennenda/nicole-johaenntgen-henry-original-quartett_AkSvnhF"
-            },
-            {
-              "label": "Mercado Latino - Salsa Night",
-              "detail": "Glarus",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-2/"
-            },
-            {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
             {
               "label": "Elmer Wandertag",
               "detail": "Sportbahnen Elm",
@@ -86,6 +56,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/saisonschluss-mit-livemusik-in-der-chaemistube-18-oktober-2026/"
             },
             {
+              "label": "Trachtenausstellung im Dorfkern Elm",
+              "detail": "Elm, Glarus Süd — in corso, ultimo giorno: 24 ottobre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
+            },
+            {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
               "detail": "Luchsingen-Hätzingen",
               "date": "2026-10-19",
@@ -96,11 +72,35 @@
               "detail": "Bibliothek Grosstal Hätzingen",
               "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "«Industriespionage» bei der GESKA AG & Glarona Käsegenossenschaft",
+              "detail": "Glarona Käsegenossenschaft, Glarus",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/industriespionage-bei-der-geska-ag-glarona-kaesegenossenschaft/"
+            },
+            {
+              "label": "Erzählstunde \"Knacknuss\"",
+              "detail": "Buchhandlung Baeschlin, Glarus",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlstunde-knacknuss/"
+            },
+            {
+              "label": "Balboa Schnupperkurs",
+              "detail": "Ennenda, Glarus",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Lesung im Wortreich: Caroline Roger mit \"Unter Gästen\"",
+              "detail": "Glarus",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-im-wortreich-caroline-roger-mit-unter-gaesten/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "en": {
       "canton": "GL",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "26",
+          "value": "29",
           "note": "from the site’s events calendar"
         }
       ],
@@ -155,36 +155,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Samstags-Brunch im Bergrestaurant Chämistube, 17. Oktober 2026",
-              "detail": "Braunwald",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samstagsbrunch-im-bergrestaurant-chaemistube-17-oktober-2026/"
-            },
-            {
-              "label": "Finissage Wild, Wein & Kunst",
-              "detail": "Näfels, Glarus Nord",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-wild-wein-kunst/"
-            },
-            {
-              "label": "Nicole Johänntgen «Henry» – Original Quartett",
-              "detail": "Anna Göldi Museum",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ennenda/nicole-johaenntgen-henry-original-quartett_AkSvnhF"
-            },
-            {
-              "label": "Mercado Latino - Salsa Night",
-              "detail": "Glarus",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-2/"
-            },
-            {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — ongoing, last day: 24 October 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
             {
               "label": "Elmer Wandertag",
               "detail": "Sportbahnen Elm",
@@ -204,6 +174,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/saisonschluss-mit-livemusik-in-der-chaemistube-18-oktober-2026/"
             },
             {
+              "label": "Trachtenausstellung im Dorfkern Elm",
+              "detail": "Elm, Glarus Süd — ongoing, last day: 24 October 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
+            },
+            {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
               "detail": "Luchsingen-Hätzingen",
               "date": "2026-10-19",
@@ -214,11 +190,35 @@
               "detail": "Bibliothek Grosstal Hätzingen",
               "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "«Industriespionage» bei der GESKA AG & Glarona Käsegenossenschaft",
+              "detail": "Glarona Käsegenossenschaft, Glarus",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/industriespionage-bei-der-geska-ag-glarona-kaesegenossenschaft/"
+            },
+            {
+              "label": "Erzählstunde \"Knacknuss\"",
+              "detail": "Buchhandlung Baeschlin, Glarus",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlstunde-knacknuss/"
+            },
+            {
+              "label": "Balboa Schnupperkurs",
+              "detail": "Ennenda, Glarus",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Lesung im Wortreich: Caroline Roger mit \"Unter Gästen\"",
+              "detail": "Glarus",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-im-wortreich-caroline-roger-mit-unter-gaesten/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -231,7 +231,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +253,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "de": {
       "canton": "GL",
@@ -263,7 +263,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "26",
+          "value": "29",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -273,36 +273,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Samstags-Brunch im Bergrestaurant Chämistube, 17. Oktober 2026",
-              "detail": "Braunwald",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samstagsbrunch-im-bergrestaurant-chaemistube-17-oktober-2026/"
-            },
-            {
-              "label": "Finissage Wild, Wein & Kunst",
-              "detail": "Näfels, Glarus Nord",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-wild-wein-kunst/"
-            },
-            {
-              "label": "Nicole Johänntgen «Henry» – Original Quartett",
-              "detail": "Anna Göldi Museum",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ennenda/nicole-johaenntgen-henry-original-quartett_AkSvnhF"
-            },
-            {
-              "label": "Mercado Latino - Salsa Night",
-              "detail": "Glarus",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-2/"
-            },
-            {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
             {
               "label": "Elmer Wandertag",
               "detail": "Sportbahnen Elm",
@@ -322,6 +292,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/saisonschluss-mit-livemusik-in-der-chaemistube-18-oktober-2026/"
             },
             {
+              "label": "Trachtenausstellung im Dorfkern Elm",
+              "detail": "Elm, Glarus Süd — läuft, letzter Tag: 24. Oktober 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
+            },
+            {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
               "detail": "Luchsingen-Hätzingen",
               "date": "2026-10-19",
@@ -332,11 +308,35 @@
               "detail": "Bibliothek Grosstal Hätzingen",
               "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "«Industriespionage» bei der GESKA AG & Glarona Käsegenossenschaft",
+              "detail": "Glarona Käsegenossenschaft, Glarus",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/industriespionage-bei-der-geska-ag-glarona-kaesegenossenschaft/"
+            },
+            {
+              "label": "Erzählstunde \"Knacknuss\"",
+              "detail": "Buchhandlung Baeschlin, Glarus",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlstunde-knacknuss/"
+            },
+            {
+              "label": "Balboa Schnupperkurs",
+              "detail": "Ennenda, Glarus",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Lesung im Wortreich: Caroline Roger mit \"Unter Gästen\"",
+              "detail": "Glarus",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-im-wortreich-caroline-roger-mit-unter-gaesten/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -349,7 +349,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "fr": {
       "canton": "GL",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "26",
+          "value": "29",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -391,36 +391,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Samstags-Brunch im Bergrestaurant Chämistube, 17. Oktober 2026",
-              "detail": "Braunwald",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samstagsbrunch-im-bergrestaurant-chaemistube-17-oktober-2026/"
-            },
-            {
-              "label": "Finissage Wild, Wein & Kunst",
-              "detail": "Näfels, Glarus Nord",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-wild-wein-kunst/"
-            },
-            {
-              "label": "Nicole Johänntgen «Henry» – Original Quartett",
-              "detail": "Anna Göldi Museum",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ennenda/nicole-johaenntgen-henry-original-quartett_AkSvnhF"
-            },
-            {
-              "label": "Mercado Latino - Salsa Night",
-              "detail": "Glarus",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-2/"
-            },
-            {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
             {
               "label": "Elmer Wandertag",
               "detail": "Sportbahnen Elm",
@@ -440,6 +410,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/saisonschluss-mit-livemusik-in-der-chaemistube-18-oktober-2026/"
             },
             {
+              "label": "Trachtenausstellung im Dorfkern Elm",
+              "detail": "Elm, Glarus Süd — en cours, dernier jour : 24 octobre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
+            },
+            {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
               "detail": "Luchsingen-Hätzingen",
               "date": "2026-10-19",
@@ -450,11 +426,35 @@
               "detail": "Bibliothek Grosstal Hätzingen",
               "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "«Industriespionage» bei der GESKA AG & Glarona Käsegenossenschaft",
+              "detail": "Glarona Käsegenossenschaft, Glarus",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/industriespionage-bei-der-geska-ag-glarona-kaesegenossenschaft/"
+            },
+            {
+              "label": "Erzählstunde \"Knacknuss\"",
+              "detail": "Buchhandlung Baeschlin, Glarus",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlstunde-knacknuss/"
+            },
+            {
+              "label": "Schnupperkurs de Balboa",
+              "detail": "Ennenda, Glarus",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Lesung im Wortreich: Caroline Roger mit \"Unter Gästen\"",
+              "detail": "Glarus",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-im-wortreich-caroline-roger-mit-unter-gaesten/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -467,7 +467,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     }
   }
 }

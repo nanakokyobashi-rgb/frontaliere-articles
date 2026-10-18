@@ -4,17 +4,17 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T11:38:04.345Z",
-  "contentHash": "90289a436addd8d1ffb0c8c9fa8bf6eb2bd88efc5b4e445c2a908df6a67cd7c2",
+  "updatedAt": "2026-10-18T00:18:32.280Z",
+  "contentHash": "b81e761ce0b9f944faabc1d45fe44959fb23c31377d25094a57f54b25e9bf7d5",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T10:44:21.348Z",
+      "updatedAt": "2026-10-17T17:01:03.100Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T20:07:19.130Z",
+      "updatedAt": "2026-10-17T14:28:40.900Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "39",
+          "value": "41",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,34 +38,22 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Viaggio sul treno degli orologiai e visita guidata al Museo dell'orologio",
-              "detail": "Gare de la Chaux-de-Fonds, La Chaux-de-Fonds",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/viaggio-sul-treno-degli-orologiai-e-visita-guidata-al-museo-dellorologio/"
-            },
-            {
-              "label": "Visite guidée Neuchâtel, empreintes coloniales",
-              "detail": "Hauterive, Neuchâtel",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-neuchatel-empreintes-coloniales-1/"
+              "label": "Nouveaux Talents — Edna Unseld, violon",
+              "detail": "Salle de musique de La Chaux-de-Fonds, La Chaux-de-Fonds",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/nouveaux-talents-edna-unseld-violon/"
             },
             {
               "label": "Atelier de gravure pour tous",
               "detail": "Musée d'art et d'histoire, Neuchâtel — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
             },
             {
               "label": "Démonstration de dentellières",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
-            },
-            {
-              "label": "Nouveaux Talents — Edna Unseld, violon",
-              "detail": "Salle de musique de La Chaux-de-Fonds, La Chaux-de-Fonds",
               "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/nouveaux-talents-edna-unseld-violon/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
             },
             {
               "label": "Je n’ai jamais vu le Kremlin. D’après « Moscou-Petouchki » de Venedikt Erofeïev",
@@ -96,11 +84,23 @@
               "detail": "Neuchâtel",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/conference-la-fascination-pour-le-ciel-etoile/"
+            },
+            {
+              "label": "Adam Laloum & l’Orchestre Philharmonique de Strasbourg",
+              "detail": "La Chaux-de-Fonds",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adam-laloum-lorchestre-philharmonique-de-strasbourg/"
+            },
+            {
+              "label": "Babillages ! Atelier d'éveil pour les tout petits",
+              "detail": "Musée d'art et d'histoire, Neuchâtel",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/babillages-atelier-deveil-pour-les-tout-petits/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/neuchatel/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -128,7 +128,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -150,7 +150,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "en": {
       "canton": "NE",
@@ -160,7 +160,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "39",
+          "value": "41",
           "note": "from the site’s events calendar"
         }
       ],
@@ -171,34 +171,22 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Watchmakers' Train trip and guided tour of the Watch Box Museum",
-              "detail": "Gare de la Chaux-de-Fonds, La Chaux-de-Fonds",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/viaggio-sul-treno-degli-orologiai-e-visita-guidata-al-museo-dellorologio/"
-            },
-            {
-              "label": "Visite guidée Neuchâtel, empreintes coloniales",
-              "detail": "Hauterive, Neuchâtel",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-neuchatel-empreintes-coloniales-1/"
+              "label": "Nouveaux Talents — Edna Unseld, violon",
+              "detail": "Salle de musique de La Chaux-de-Fonds, La Chaux-de-Fonds",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/nouveaux-talents-edna-unseld-violon/"
             },
             {
               "label": "Atelier de gravure pour tous",
               "detail": "Musée d'art et d'histoire, Neuchâtel — ongoing, last day: 1 November 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
             },
             {
               "label": "Démonstration de dentellières",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — ongoing, last day: 25 October 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
-            },
-            {
-              "label": "Nouveaux Talents — Edna Unseld, violon",
-              "detail": "Salle de musique de La Chaux-de-Fonds, La Chaux-de-Fonds",
               "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/nouveaux-talents-edna-unseld-violon/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
             },
             {
               "label": "Je n’ai jamais vu le Kremlin. D’après « Moscou-Petouchki » de Venedikt Erofeïev",
@@ -229,11 +217,23 @@
               "detail": "Neuchâtel",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/conference-la-fascination-pour-le-ciel-etoile/"
+            },
+            {
+              "label": "Adam Laloum & l’Orchestre Philharmonique de Strasbourg",
+              "detail": "La Chaux-de-Fonds",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adam-laloum-lorchestre-philharmonique-de-strasbourg/"
+            },
+            {
+              "label": "Babillages ! Atelier d'éveil pour les tout petits",
+              "detail": "Musée d'art et d'histoire, Neuchâtel",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/babillages-atelier-deveil-pour-les-tout-petits/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/neuchatel/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -261,7 +261,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -283,7 +283,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "de": {
       "canton": "NE",
@@ -293,7 +293,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "39",
+          "value": "41",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -304,34 +304,22 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Fahrt mit dem Uhrmacherzug und Führung durch das Uhrenschachtelmuseum",
-              "detail": "Gare de la Chaux-de-Fonds, La Chaux-de-Fonds",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/viaggio-sul-treno-degli-orologiai-e-visita-guidata-al-museo-dellorologio/"
-            },
-            {
-              "label": "Visite guidée Neuchâtel, empreintes coloniales",
-              "detail": "Hauterive, Neuchâtel",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-neuchatel-empreintes-coloniales-1/"
+              "label": "Nouveaux Talents — Edna Unseld, violon",
+              "detail": "Salle de musique de La Chaux-de-Fonds, La Chaux-de-Fonds",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/nouveaux-talents-edna-unseld-violon/"
             },
             {
               "label": "Atelier de gravure pour tous",
               "detail": "Musée d'art et d'histoire, Neuchâtel — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
             },
             {
               "label": "Démonstration de dentellières",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
-            },
-            {
-              "label": "Nouveaux Talents — Edna Unseld, violon",
-              "detail": "Salle de musique de La Chaux-de-Fonds, La Chaux-de-Fonds",
               "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/nouveaux-talents-edna-unseld-violon/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
             },
             {
               "label": "Je n’ai jamais vu le Kremlin. D’après « Moscou-Petouchki » de Venedikt Erofeïev",
@@ -362,11 +350,23 @@
               "detail": "Neuchâtel",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/conference-la-fascination-pour-le-ciel-etoile/"
+            },
+            {
+              "label": "Adam Laloum & l’Orchestre Philharmonique de Strasbourg",
+              "detail": "La Chaux-de-Fonds",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adam-laloum-lorchestre-philharmonique-de-strasbourg/"
+            },
+            {
+              "label": "Babillages ! Atelier d'éveil pour les tout petits",
+              "detail": "Musée d'art et d'histoire, Neuchâtel",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/babillages-atelier-deveil-pour-les-tout-petits/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/neuenburg/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -394,7 +394,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -416,7 +416,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "fr": {
       "canton": "NE",
@@ -426,7 +426,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "39",
+          "value": "41",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -437,34 +437,22 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Voyage en Train des Horlogers et visite guidée du Musée de la Boîte de Montre",
-              "detail": "Gare de la Chaux-de-Fonds, La Chaux-de-Fonds",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/viaggio-sul-treno-degli-orologiai-e-visita-guidata-al-museo-dellorologio/"
-            },
-            {
-              "label": "Visite guidée Neuchâtel, empreintes coloniales",
-              "detail": "Hauterive, Neuchâtel",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-neuchatel-empreintes-coloniales-1/"
+              "label": "Nouveaux Talents — Edna Unseld, violon",
+              "detail": "Salle de musique de La Chaux-de-Fonds, La Chaux-de-Fonds",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/nouveaux-talents-edna-unseld-violon/"
             },
             {
               "label": "Atelier de gravure pour tous",
               "detail": "Musée d'art et d'histoire, Neuchâtel — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
             },
             {
               "label": "Démonstration de dentellières",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
-            },
-            {
-              "label": "Nouveaux Talents — Edna Unseld, violon",
-              "detail": "Salle de musique de La Chaux-de-Fonds, La Chaux-de-Fonds",
               "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/nouveaux-talents-edna-unseld-violon/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
             },
             {
               "label": "Je n’ai jamais vu le Kremlin. D’après « Moscou-Petouchki » de Venedikt Erofeïev",
@@ -495,11 +483,23 @@
               "detail": "Neuchâtel",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/conference-la-fascination-pour-le-ciel-etoile/"
+            },
+            {
+              "label": "Adam Laloum & l’Orchestre Philharmonique de Strasbourg",
+              "detail": "La Chaux-de-Fonds",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adam-laloum-lorchestre-philharmonique-de-strasbourg/"
+            },
+            {
+              "label": "Babillages ! Atelier d'éveil pour les tout petits",
+              "detail": "Musée d'art et d'histoire, Neuchâtel",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/babillages-atelier-deveil-pour-les-tout-petits/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/neuchatel/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -527,7 +527,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-17T14:28:40.900Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     }
   }
 }

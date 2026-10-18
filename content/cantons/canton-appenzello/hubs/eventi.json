@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T11:38:04.345Z",
-  "contentHash": "a8e51e381c9782edaab05c14dd2ae391003bb1838ffc2e360c3f5649d94d4cee",
+  "updatedAt": "2026-10-18T00:18:32.280Z",
+  "contentHash": "99abb96d3bc56113a500e606e2594a0f235dbb6293555492d08a868787a5341f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T10:44:21.348Z",
+      "updatedAt": "2026-10-17T17:01:03.100Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "16",
+          "value": "21",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,21 +33,9 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Mostra cantonale dei tori e dell'autunno a Teufen",
-              "detail": "Teufen, Teufen (AR)",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-cantonale-dei-tori-e-dellautunno-a-teufen/"
-            },
-            {
-              "label": "Trio Lowell Coppo Kaerner",
-              "detail": "Kulturmüli, Urnäsch",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/urnaesch/trio-lowell-coppo-kaerner_AgPn5BC"
-            },
-            {
               "label": "Raduno di Capodanno",
               "detail": "Rösslisaal, Trogen — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
             },
             {
@@ -91,11 +79,23 @@
               "detail": "Gefängnisse Gmünden, Teufen (AR)",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/blick-hinter-die-gefaengnismauern-oeffentliche-fuehrungen-in-gmuenden/"
+            },
+            {
+              "label": "Concerto in chiesa: Club di jodel Alpeblueme di Herisau",
+              "detail": "Herisau",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concerto-in-chiesa-club-di-jodel-alpeblueme-di-herisau/"
+            },
+            {
+              "label": "Manuel Stahlberger – Es geht",
+              "detail": "Altes Zeughaus, Herisau",
+              "date": "2026-10-24",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/manuel-stahlberger-es-geht_ARGwXiE"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "16",
+          "value": "21",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,21 +138,9 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Cantonal bull and fall show in Teufen",
-              "detail": "Teufen, Teufen (AR)",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-cantonale-dei-tori-e-dellautunno-a-teufen/"
-            },
-            {
-              "label": "Trio Lowell Coppo Kaerner",
-              "detail": "Kulturmüli, Urnäsch",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/urnaesch/trio-lowell-coppo-kaerner_AgPn5BC"
-            },
-            {
               "label": "New Year's Eve Gathering",
               "detail": "Rösslisaal, Trogen — ongoing, last day: 18 October 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
             },
             {
@@ -196,11 +184,23 @@
               "detail": "Gefängnisse Gmünden, Teufen (AR)",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/blick-hinter-die-gefaengnismauern-oeffentliche-fuehrungen-in-gmuenden/"
+            },
+            {
+              "label": "Church Concert: Alpeblueme Herisau Yodeling Club",
+              "detail": "Herisau",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concerto-in-chiesa-club-di-jodel-alpeblueme-di-herisau/"
+            },
+            {
+              "label": "Manuel Stahlberger – Es geht",
+              "detail": "Altes Zeughaus, Herisau",
+              "date": "2026-10-24",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/manuel-stahlberger-es-geht_ARGwXiE"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "16",
+          "value": "21",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,21 +243,9 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Kantonale Stier- und Herbstschau in Teufen",
-              "detail": "Teufen, Teufen (AR)",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-cantonale-dei-tori-e-dellautunno-a-teufen/"
-            },
-            {
-              "label": "Trio Lowell Coppo Kaerner",
-              "detail": "Kulturmüli, Urnäsch",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/urnaesch/trio-lowell-coppo-kaerner_AgPn5BC"
-            },
-            {
               "label": "Herbst Gathering",
               "detail": "Rösslisaal, Trogen — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
             },
             {
@@ -301,11 +289,23 @@
               "detail": "Gefängnisse Gmünden, Teufen (AR)",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/blick-hinter-die-gefaengnismauern-oeffentliche-fuehrungen-in-gmuenden/"
+            },
+            {
+              "label": "Kirchenkonzert: Jodlerclub Alpeblueme Herisau",
+              "detail": "Herisau",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concerto-in-chiesa-club-di-jodel-alpeblueme-di-herisau/"
+            },
+            {
+              "label": "Manuel Stahlberger – Es geht",
+              "detail": "Altes Zeughaus, Herisau",
+              "date": "2026-10-24",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/manuel-stahlberger-es-geht_ARGwXiE"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "16",
+          "value": "21",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,21 +348,9 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Concours cantonal de taureaux et d'automne à Teufen",
-              "detail": "Teufen, Teufen (AR)",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-cantonale-dei-tori-e-dellautunno-a-teufen/"
-            },
-            {
-              "label": "Trio Lowell Coppo Kaerner",
-              "detail": "Kulturmüli, Urnäsch",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/urnaesch/trio-lowell-coppo-kaerner_AgPn5BC"
-            },
-            {
               "label": "Rencontre du Nouvel An",
               "detail": "Rösslisaal, Trogen — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
             },
             {
@@ -406,11 +394,23 @@
               "detail": "Gefängnisse Gmünden, Teufen (AR)",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/blick-hinter-die-gefaengnismauern-oeffentliche-fuehrungen-in-gmuenden/"
+            },
+            {
+              "label": "Concert à l'église : Club de yodel Alpeblueme d'Herisau",
+              "detail": "Herisau",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concerto-in-chiesa-club-di-jodel-alpeblueme-di-herisau/"
+            },
+            {
+              "label": "Manuel Stahlberger – Es geht",
+              "detail": "Altes Zeughaus, Herisau",
+              "date": "2026-10-24",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/manuel-stahlberger-es-geht_ARGwXiE"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     }
   }
 }

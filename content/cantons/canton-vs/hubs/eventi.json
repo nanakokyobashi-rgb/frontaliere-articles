@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T11:38:04.345Z",
-  "contentHash": "b9a399531e2a5a2c74bd37b6a7e78d2f9082532a44c9c02c8854d2127c9d59ab",
+  "updatedAt": "2026-10-18T00:18:32.280Z",
+  "contentHash": "af73bb022d74d9abc47a483ddcd5e85ea88f5f8b364cd3cbed54dc07d2c4ac87",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T10:44:21.348Z",
+      "updatedAt": "2026-10-17T17:01:03.100Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "76",
+          "value": "68",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Literarisches Frühstück",
-              "detail": "Médiathèque Valais - Sion, Sion",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/events/music/sion/literary-breakfast_AUvYjEk"
+              "label": "Es ist dies beinahe Unsichtbare",
+              "detail": "Visp",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
             },
             {
-              "label": "Literary Breakfast",
-              "detail": "Médiathèque Valais - Sion, Sion",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ptit-dej-litteraire/"
+              "label": "Season End Brunch",
+              "detail": "Grächen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/season-end-brunch-2/"
             },
             {
-              "label": "Valaisan Nomadism",
-              "detail": "Varen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/valaisan-nomadism/"
+              "label": "Klavierrezital",
+              "detail": "Tellenhaus, Ernen",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/events/ernen/piano-recital-1_AGhp4fs"
             },
             {
-              "label": "Walliser Halbnomadentum - Ein Leben zwischen Berg und Tal",
-              "detail": "Varen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/walliser-halbnomadentum-ein-leben-zwischen-berg-und-tal/"
+              "label": "Piano recital",
+              "detail": "Tellenhaus, Ernen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/klavierrezital-1/"
             },
             {
-              "label": "300 years of the Maison du remuage",
-              "detail": "Sierre Tourisme, Sierre",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/300-jahre-maison-du-remuage/"
+              "label": "Delizie per il palato “Autunno”",
+              "detail": "Ferden",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/delizie-per-il-palato-autunno-1/"
+            },
+            {
+              "label": "Concert",
+              "detail": "Martigny",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-3/"
+            },
+            {
+              "label": "Stéphane Lambiel, floor dance, and Lionel Monnet, piano",
+              "detail": "Saxon",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stephane-lambiel-danse-au-sol-et-lionel-monnet-piano/"
             },
             {
               "label": "Anzère Fantastique",
-              "detail": "Anzère Tourisme",
-              "date": "2026-10-17",
+              "detail": "Anzère Tourisme — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/anzere-fantastique/"
             },
             {
-              "label": "Visite commentée",
-              "detail": "Fully",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-3/"
-            },
-            {
-              "label": "Castagnata Simplon",
-              "detail": "Dorfplatz, Simplon",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/castagnata-simplon/"
-            },
-            {
               "label": "Escursioni e yoga, Val d'Hérens",
-              "detail": "Grand Hotel & Kurhaus",
-              "date": "2026-10-17",
+              "detail": "Grand Hotel & Kurhaus — in corso, ultimo giorno: 19 ottobre 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/hiking-and-yoga-val-dherens/"
             },
             {
-              "label": "Guided tours led by photographer Bernard Dubuis",
-              "detail": "Martigny",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visites-guidees-par-le-photographe-bernard-dubuis/"
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "en": {
       "canton": "VS",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "76",
+          "value": "68",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Literary Breakfast",
-              "detail": "Médiathèque Valais - Sion, Sion",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/events/music/sion/literary-breakfast_AUvYjEk"
+              "label": "It is these days that are unavailable",
+              "detail": "Visp",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
             },
             {
-              "label": "Literary Breakfast",
-              "detail": "Médiathèque Valais - Sion, Sion",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ptit-dej-litteraire/"
+              "label": "Season End Brunch",
+              "detail": "Grächen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/season-end-brunch-2/"
             },
             {
-              "label": "Valaisan Nomadism",
-              "detail": "Varen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/valaisan-nomadism/"
+              "label": "Piano recital",
+              "detail": "Tellenhaus, Ernen",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/events/ernen/piano-recital-1_AGhp4fs"
             },
             {
-              "label": "Walliser Halbnomadentum - Ein Leben zwischen Berg und Tal",
-              "detail": "Varen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/walliser-halbnomadentum-ein-leben-zwischen-berg-und-tal/"
+              "label": "Piano recital",
+              "detail": "Tellenhaus, Ernen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/klavierrezital-1/"
             },
             {
-              "label": "300 years of the Maison du remuage",
-              "detail": "Sierre Tourisme, Sierre",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/300-jahre-maison-du-remuage/"
+              "label": "\"Fall\" Culinary Delights",
+              "detail": "Ferden",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/delizie-per-il-palato-autunno-1/"
+            },
+            {
+              "label": "Concert",
+              "detail": "Martigny",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-3/"
+            },
+            {
+              "label": "Stéphane Lambiel, floor dance, and Lionel Monnet, piano",
+              "detail": "Saxon",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stephane-lambiel-danse-au-sol-et-lionel-monnet-piano/"
             },
             {
               "label": "Anzère Fantastique",
-              "detail": "Anzère Tourisme",
-              "date": "2026-10-17",
+              "detail": "Anzère Tourisme — ongoing, last day: 18 October 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/anzere-fantastique/"
             },
             {
-              "label": "Visite commentée",
-              "detail": "Fully",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-3/"
-            },
-            {
-              "label": "Castagnata Simplon",
-              "detail": "Dorfplatz, Simplon",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/castagnata-simplon/"
-            },
-            {
               "label": "Hiking and Yoga, Val d'Hérens",
-              "detail": "Grand Hotel & Kurhaus",
-              "date": "2026-10-17",
+              "detail": "Grand Hotel & Kurhaus — ongoing, last day: 19 October 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/hiking-and-yoga-val-dherens/"
             },
             {
-              "label": "Guided tours led by photographer Bernard Dubuis",
-              "detail": "Martigny",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visites-guidees-par-le-photographe-bernard-dubuis/"
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — ongoing, last day: 8 November 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "de": {
       "canton": "VS",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "76",
+          "value": "68",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Literarisches Frühstück",
-              "detail": "Médiathèque Valais - Sion, Sion",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/events/music/sion/literary-breakfast_AUvYjEk"
+              "label": "Es ist die beinahe Unsichtbare",
+              "detail": "Visp",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
             },
             {
-              "label": "Literarisches Frühstück",
-              "detail": "Médiathèque Valais - Sion, Sion",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ptit-dej-litteraire/"
+              "label": "Season End Brunch",
+              "detail": "Grächen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/season-end-brunch-2/"
             },
             {
-              "label": "Walliser Halbnomadentum",
-              "detail": "Varen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/valaisan-nomadism/"
+              "label": "Klavierrezital",
+              "detail": "Tellenhaus, Ernen",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/events/ernen/piano-recital-1_AGhp4fs"
             },
             {
-              "label": "Walliser Halbnomadentum - Ein Leben zwischen Berg und Tal",
-              "detail": "Varen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/walliser-halbnomadentum-ein-leben-zwischen-berg-und-tal/"
+              "label": "Klavierrezital",
+              "detail": "Tellenhaus, Ernen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/klavierrezital-1/"
             },
             {
-              "label": "300 Jahre «Maison du Remuage»",
-              "detail": "Sierre Tourisme, Sierre",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/300-jahre-maison-du-remuage/"
+              "label": "Gaumenkitzeln „Herbst“",
+              "detail": "Ferden",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/delizie-per-il-palato-autunno-1/"
+            },
+            {
+              "label": "Konzert",
+              "detail": "Martigny",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-3/"
+            },
+            {
+              "label": "Stéphane Lambiel, Bodentanz, und Lionel Monnet, Klavier",
+              "detail": "Saxon",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stephane-lambiel-danse-au-sol-et-lionel-monnet-piano/"
             },
             {
               "label": "Anzère Fantastisch",
-              "detail": "Anzère Tourisme",
-              "date": "2026-10-17",
+              "detail": "Anzère Tourisme — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/anzere-fantastique/"
             },
             {
-              "label": "Visite commentée",
-              "detail": "Fully",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-3/"
-            },
-            {
-              "label": "Castagnata Simplon",
-              "detail": "Dorfplatz, Simplon",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/castagnata-simplon/"
-            },
-            {
               "label": "Wandern und Yoga, Val d'Hérens",
-              "detail": "Grand Hotel & Kurhaus",
-              "date": "2026-10-17",
+              "detail": "Grand Hotel & Kurhaus — läuft, letzter Tag: 19. Oktober 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/hiking-and-yoga-val-dherens/"
             },
             {
-              "label": "Führungen unter der Leitung des Fotografen Bernard Dubuis",
-              "detail": "Martigny",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visites-guidees-par-le-photographe-bernard-dubuis/"
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "fr": {
       "canton": "VS",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "76",
+          "value": "68",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "P'tit déj littéraire",
-              "detail": "Médiathèque Valais - Sion, Sion",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/events/music/sion/literary-breakfast_AUvYjEk"
+              "label": "Es is dies beinahe Unsichtbare",
+              "detail": "Visp",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
             },
             {
-              "label": "P'tit déj littéraire",
-              "detail": "Médiathèque Valais - Sion, Sion",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ptit-dej-litteraire/"
+              "label": "Brunch de fin de saison",
+              "detail": "Grächen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/season-end-brunch-2/"
             },
             {
-              "label": "Nomadisme valaisan",
-              "detail": "Varen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/valaisan-nomadism/"
+              "label": "Récital de piano",
+              "detail": "Tellenhaus, Ernen",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/events/ernen/piano-recital-1_AGhp4fs"
             },
             {
-              "label": "Remuage - Une vie entre plaine et montagne",
-              "detail": "Varen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/walliser-halbnomadentum-ein-leben-zwischen-berg-und-tal/"
+              "label": "Récital de piano",
+              "detail": "Tellenhaus, Ernen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/klavierrezital-1/"
             },
             {
-              "label": "300 ans de la Maison du remuage",
-              "detail": "Sierre Tourisme, Sierre",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/300-jahre-maison-du-remuage/"
+              "label": "Délices « d'automne »",
+              "detail": "Ferden",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/delizie-per-il-palato-autunno-1/"
+            },
+            {
+              "label": "Concert",
+              "detail": "Martigny",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-3/"
+            },
+            {
+              "label": "Stéphane Lambiel, danse au sol et Lionel Monnet, piano",
+              "detail": "Saxon",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stephane-lambiel-danse-au-sol-et-lionel-monnet-piano/"
             },
             {
               "label": "Anzère Fantastique",
-              "detail": "Anzère Tourisme",
-              "date": "2026-10-17",
+              "detail": "Anzère Tourisme — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/anzere-fantastique/"
             },
             {
-              "label": "Visite commentée",
-              "detail": "Fully",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-commentee-3/"
-            },
-            {
-              "label": "Castagnata Simplon",
-              "detail": "Dorfplatz, Simplon",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/castagnata-simplon/"
-            },
-            {
               "label": "Randonnée et Yoga, Val d'Hérens",
-              "detail": "Grand Hotel & Kurhaus",
-              "date": "2026-10-17",
+              "detail": "Grand Hotel & Kurhaus — en cours, dernier jour : 19 octobre 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/hiking-and-yoga-val-dherens/"
             },
             {
-              "label": "Visites guidées par le photographe Bernard Dubuis",
-              "detail": "Martigny",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visites-guidees-par-le-photographe-bernard-dubuis/"
+              "label": "Théâtre : représentations à Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     }
   }
 }

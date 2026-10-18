@@ -4,12 +4,12 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T11:38:04.345Z",
-  "contentHash": "77a268107fef98814229d9d6def2655e48a3622d553467b97e5fc27ad2355ef9",
+  "updatedAt": "2026-10-18T00:18:32.280Z",
+  "contentHash": "ef5ac0936d6176ad6fd333f0d59dff6e084bc1fa0cccb067f124257e6e1d22d8",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T10:44:21.348Z",
+      "updatedAt": "2026-10-17T17:01:03.100Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "31",
+          "value": "26",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,48 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "FG Sarnen/Familientreff: geWALDiger Spiel- und Begegnungsplatz",
-              "detail": "Feuerstelle Zubersrüti Chärwald, Kerns, Kerns",
-              "date": "2026-10-17",
-              "url": "https://www.ow.ch/_rte/anlass/88739"
-            },
-            {
-              "label": "Glas-Recycling",
-              "detail": "Boni, Giswil, Giswil",
-              "date": "2026-10-17",
-              "url": "https://www.ow.ch/_rte/anlass/92359"
-            },
-            {
-              "label": "Sternzauber Mala Halskette - kreativ - intuitiv - verbindend",
-              "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
-              "date": "2026-10-17",
-              "url": "https://www.ow.ch/_rte/anlass/94051"
-            },
-            {
-              "label": "Zwischentöne Concert 4: Matinee:\"...... to the crossroads of the wind\"",
-              "detail": "Benediktinerkloster Engelberg, Engelberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-concert-4-matinee-to-the-crossroads-of-the-wind/"
-            },
-            {
-              "label": "Zwischentöne Conert 5: Intermezzo: ‘Century of honour in four hands’",
-              "detail": "Kursaal Engelberg AG, Engelberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-conert-5-intermezzo-century-of-honour-in-four-hands/"
-            },
-            {
-              "label": "Zwischentöne Concert 7: \"Turning point Beethoven\"",
-              "detail": "Engelberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischentoene-concert-7-turning-point-beethoven/"
-            },
-            {
-              "label": "Wildwochenende im Kurhaus",
-              "detail": "Hotel Kurhaus am Sarnersee, Sarnen — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
-            },
             {
               "label": "Älplertag",
               "detail": "Pfarrkirche Sarnen, Sarnen, Sarnen",
@@ -87,15 +45,57 @@
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/aelplertag-sarnen/"
             },
             {
+              "label": "Wildwochenende im Kurhaus",
+              "detail": "Hotel Kurhaus am Sarnersee, Sarnen — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
+            },
+            {
               "label": "Der Projektraum Sarnen ist gestartet – wir laden zum nächsten Networking-Event ein",
               "detail": "Bibliothek Obwalden, Sarnen, Sarnen",
               "date": "2026-10-20",
               "url": "https://www.ow.ch/_rte/anlass/93358"
+            },
+            {
+              "label": "Babyschwimmen Kinderschwimmen Schwimmschule",
+              "detail": "Aquazenter Kerns, Kerns, Kerns",
+              "date": "2026-10-21",
+              "url": "https://www.ow.ch/_rte/anlass/94702"
+            },
+            {
+              "label": "Besichtigung Heizzentrale Chalchofen",
+              "detail": "Heizzentrale Chalchofen, Flüeli-Ranft",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/92164"
+            },
+            {
+              "label": "Engelberger Dialoge «Netzwerk: über- oder unterschätzte Notwendigkeit?»",
+              "detail": "Kursaal, Engelberg, Engelberg",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/93208"
+            },
+            {
+              "label": "Feuerwehr Giswil Pikettübung, Pikettzug 1",
+              "detail": "Feuerwehrlokal, Giswil, Giswil",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/88115"
+            },
+            {
+              "label": "Jass- und Spielnachmittag",
+              "detail": "Restaurant Bahnhof",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/85792"
+            },
+            {
+              "label": "NIklaus und Dorothee in den Schweizer Medien",
+              "detail": "Pfarreiheim Sachseln, Sachseln, Sachseln",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/93802"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/obvaldo/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/obvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "en": {
       "canton": "OW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "31",
+          "value": "26",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,48 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "FG Sarnen/Familientreff: geWALDiger Spiel- und Begegnungsplatz",
-              "detail": "Feuerstelle Zubersrüti Chärwald, Kerns, Kerns",
-              "date": "2026-10-17",
-              "url": "https://www.ow.ch/_rte/anlass/88739"
-            },
-            {
-              "label": "Glas-Recycling",
-              "detail": "Boni, Giswil, Giswil",
-              "date": "2026-10-17",
-              "url": "https://www.ow.ch/_rte/anlass/92359"
-            },
-            {
-              "label": "Sternzauber Mala Halskette - kreativ - intuitiv - verbindend",
-              "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
-              "date": "2026-10-17",
-              "url": "https://www.ow.ch/_rte/anlass/94051"
-            },
-            {
-              "label": "Zwischentöne Concert 4: Matinee:\"...... to the crossroads of the wind\"",
-              "detail": "Benediktinerkloster Engelberg, Engelberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-concert-4-matinee-to-the-crossroads-of-the-wind/"
-            },
-            {
-              "label": "Zwischentöne Conert 5: Intermezzo: ‘Century of honour in four hands’",
-              "detail": "Kursaal Engelberg AG, Engelberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-conert-5-intermezzo-century-of-honour-in-four-hands/"
-            },
-            {
-              "label": "Zwischentöne Concert 7: \"Turning point Beethoven\"",
-              "detail": "Engelberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischentoene-concert-7-turning-point-beethoven/"
-            },
-            {
-              "label": "Wildwochenende im Kurhaus",
-              "detail": "Hotel Kurhaus am Sarnersee, Sarnen — ongoing, last day: 18 October 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
-            },
             {
               "label": "Älplertag",
               "detail": "Pfarrkirche Sarnen, Sarnen, Sarnen",
@@ -192,15 +150,57 @@
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/aelplertag-sarnen/"
             },
             {
+              "label": "Wildwochenende im Kurhaus",
+              "detail": "Hotel Kurhaus am Sarnersee, Sarnen — ongoing, last day: 18 October 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
+            },
+            {
               "label": "Der Projektraum Sarnen ist gestartet – wir laden zum nächsten Networking-Event ein",
               "detail": "Bibliothek Obwalden, Sarnen, Sarnen",
               "date": "2026-10-20",
               "url": "https://www.ow.ch/_rte/anlass/93358"
+            },
+            {
+              "label": "Babyschwimmen Kinderschwimmen Schwimmschule",
+              "detail": "Aquazenter Kerns, Kerns, Kerns",
+              "date": "2026-10-21",
+              "url": "https://www.ow.ch/_rte/anlass/94702"
+            },
+            {
+              "label": "Besichtigung Heizzentrale Chalchofen",
+              "detail": "Heizzentrale Chalchofen, Flüeli-Ranft",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/92164"
+            },
+            {
+              "label": "Engelberger Dialoge «Netzwerk: über- oder unterschätzte Notwendigkeit?»",
+              "detail": "Kursaal, Engelberg, Engelberg",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/93208"
+            },
+            {
+              "label": "Feuerwehr Giswil Pikettübung, Pikettzug 1",
+              "detail": "Feuerwehrlokal, Giswil, Giswil",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/88115"
+            },
+            {
+              "label": "Jass- und Spielnachmittag",
+              "detail": "Restaurant Bahnhof",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/85792"
+            },
+            {
+              "label": "NIklaus und Dorothee in den Schweizer Medien",
+              "detail": "Pfarreiheim Sachseln, Sachseln, Sachseln",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/93802"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/obwalden/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/obwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "de": {
       "canton": "OW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "31",
+          "value": "26",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,48 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "FG Sarnen/Familientreff: geWALDiger Spiel- und Begegnungsplatz",
-              "detail": "Feuerstelle Zubersrüti Chärwald, Kerns, Kerns",
-              "date": "2026-10-17",
-              "url": "https://www.ow.ch/_rte/anlass/88739"
-            },
-            {
-              "label": "Glas-Recycling",
-              "detail": "Boni, Giswil, Giswil",
-              "date": "2026-10-17",
-              "url": "https://www.ow.ch/_rte/anlass/92359"
-            },
-            {
-              "label": "Sternzauber Mala Halskette - kreativ - intuitiv - verbindend",
-              "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
-              "date": "2026-10-17",
-              "url": "https://www.ow.ch/_rte/anlass/94051"
-            },
-            {
-              "label": "Zwischentöne Konzert 4: Matinee: «Dialoge»",
-              "detail": "Benediktinerkloster Engelberg, Engelberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-concert-4-matinee-to-the-crossroads-of-the-wind/"
-            },
-            {
-              "label": "Zwischentöne Konzert 5: «The Broken Column»",
-              "detail": "Kursaal Engelberg AG, Engelberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-conert-5-intermezzo-century-of-honour-in-four-hands/"
-            },
-            {
-              "label": "Zwischentöne Konzert 7: «Aus tiefer Not»",
-              "detail": "Engelberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischentoene-concert-7-turning-point-beethoven/"
-            },
-            {
-              "label": "Wildwochenende im Kurhaus",
-              "detail": "Hotel Kurhaus am Sarnersee, Sarnen — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
-            },
             {
               "label": "Älplertag",
               "detail": "Pfarrkirche Sarnen, Sarnen, Sarnen",
@@ -297,15 +255,57 @@
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/aelplertag-sarnen/"
             },
             {
+              "label": "Wildwochenende im Kurhaus",
+              "detail": "Hotel Kurhaus am Sarnersee, Sarnen — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
+            },
+            {
               "label": "Der Projektraum Sarnen ist gestartet – wir laden zum nächsten Networking-Event ein",
               "detail": "Bibliothek Obwalden, Sarnen, Sarnen",
               "date": "2026-10-20",
               "url": "https://www.ow.ch/_rte/anlass/93358"
+            },
+            {
+              "label": "Babyschwimmen Kinderschwimmen Schwimmschule",
+              "detail": "Aquazenter Kerns, Kerns, Kerns",
+              "date": "2026-10-21",
+              "url": "https://www.ow.ch/_rte/anlass/94702"
+            },
+            {
+              "label": "Besichtigung Heizzentrale Chalchofen",
+              "detail": "Heizzentrale Chalchofen, Flüeli-Ranft",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/92164"
+            },
+            {
+              "label": "Engelberger Dialoge «Netzwerk: über- oder unterschätzte Notwendigkeit?»",
+              "detail": "Kursaal, Engelberg, Engelberg",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/93208"
+            },
+            {
+              "label": "Feuerwehr Giswil Pikettübung, Pikettzug 1",
+              "detail": "Feuerwehrlokal, Giswil, Giswil",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/88115"
+            },
+            {
+              "label": "Jass- und Spielnachmittag",
+              "detail": "Restaurant Bahnhof",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/85792"
+            },
+            {
+              "label": "NIklaus und Dorothee in den Schweizer Medien",
+              "detail": "Pfarreiheim Sachseln, Sachseln, Sachseln",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/93802"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/obwalden/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/obwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "fr": {
       "canton": "OW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "31",
+          "value": "26",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,48 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "FG Sarnen/Familientreff: geWALDiger Spiel- und Begegnungsplatz",
-              "detail": "Feuerstelle Zubersrüti Chärwald, Kerns, Kerns",
-              "date": "2026-10-17",
-              "url": "https://www.ow.ch/_rte/anlass/88739"
-            },
-            {
-              "label": "Glas-Recycling",
-              "detail": "Boni, Giswil, Giswil",
-              "date": "2026-10-17",
-              "url": "https://www.ow.ch/_rte/anlass/92359"
-            },
-            {
-              "label": "Sternzauber Mala Halskette - kreativ - intuitiv - verbindend",
-              "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
-              "date": "2026-10-17",
-              "url": "https://www.ow.ch/_rte/anlass/94051"
-            },
-            {
-              "label": "Zwischentöne Concert 4: Matinee:\"...... to the crossroads of the wind\"",
-              "detail": "Benediktinerkloster Engelberg, Engelberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-concert-4-matinee-to-the-crossroads-of-the-wind/"
-            },
-            {
-              "label": "Zwischentöne Conert 5: Intermezzo: ‘Century of honour in four hands’",
-              "detail": "Kursaal Engelberg AG, Engelberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zwischentoene-conert-5-intermezzo-century-of-honour-in-four-hands/"
-            },
-            {
-              "label": "Zwischentöne Concert 7: \"Turning point Beethoven\"",
-              "detail": "Engelberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischentoene-concert-7-turning-point-beethoven/"
-            },
-            {
-              "label": "Wildwochenende im Kurhaus",
-              "detail": "Hotel Kurhaus am Sarnersee, Sarnen — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
-            },
             {
               "label": "Älplertag",
               "detail": "Pfarrkirche Sarnen, Sarnen, Sarnen",
@@ -402,15 +360,57 @@
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/aelplertag-sarnen/"
             },
             {
+              "label": "Wildwochenende im Kurhaus",
+              "detail": "Hotel Kurhaus am Sarnersee, Sarnen — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
+            },
+            {
               "label": "Der Projektraum Sarnen ist gestartet – wir laden zum nächsten Networking-Event ein",
               "detail": "Bibliothek Obwalden, Sarnen, Sarnen",
               "date": "2026-10-20",
               "url": "https://www.ow.ch/_rte/anlass/93358"
+            },
+            {
+              "label": "Babyschwimmen Kinderschwimmen Schwimmschule",
+              "detail": "Aquazenter Kerns, Kerns, Kerns",
+              "date": "2026-10-21",
+              "url": "https://www.ow.ch/_rte/anlass/94702"
+            },
+            {
+              "label": "Besichtigung Heizzentrale Chalchofen",
+              "detail": "Heizzentrale Chalchofen, Flüeli-Ranft",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/92164"
+            },
+            {
+              "label": "Engelberger Dialoge «Netzwerk: über- oder unterschätzte Notwendigkeit?»",
+              "detail": "Kursaal, Engelberg, Engelberg",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/93208"
+            },
+            {
+              "label": "Feuerwehr Giswil Pikettübung, Pikettzug 1",
+              "detail": "Feuerwehrlokal, Giswil, Giswil",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/88115"
+            },
+            {
+              "label": "Jass- und Spielnachmittag",
+              "detail": "Restaurant Bahnhof",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/85792"
+            },
+            {
+              "label": "NIklaus und Dorothee in den Schweizer Medien",
+              "detail": "Pfarreiheim Sachseln, Sachseln, Sachseln",
+              "date": "2026-10-22",
+              "url": "https://www.ow.ch/_rte/anlass/93802"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/obwald/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/obwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     }
   }
 }

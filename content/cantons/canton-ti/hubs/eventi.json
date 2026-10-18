@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T19:17:26.345Z",
-  "contentHash": "e5e67a24f206fdb61166ec2c01a3dbead12d37600d0229ee8fad2a441931c4a4",
+  "updatedAt": "2026-10-18T00:18:32.280Z",
+  "contentHash": "a942c9bab19b26298d9e8bbb5434ec492bd91cb1a9a831aa31b1db3ff7dd8b0c",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T13:31:50.370Z",
+      "updatedAt": "2026-10-17T17:01:03.100Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "253",
+          "value": "230",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Carlo Agostino Meletta - pittore",
-              "detail": "Museo Onsernonese, Locarno",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/63364"
+              "label": "Arp, Cahn, Magnelli, Taeuber-Arp. L’arte del dono",
+              "detail": "Fondazione Marguerite Arp, Locarno",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/61586"
             },
             {
-              "label": "Film festival diritti umani",
-              "detail": "Cinema Corso e Iride, Lugano",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64146"
+              "label": "Gyotaku - Tracce di pesci",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/61721"
             },
             {
-              "label": "Film Trail Locarno",
-              "detail": "Palacinema, Locarno",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/63993"
+              "label": "Lemba, piccola scimpanzé",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/63707"
             },
             {
-              "label": "Fra Roberto tra le mura",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/61525"
+              "label": "Mercatino Svuotacantine",
+              "detail": "Posteggio MANOR, Biasca",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/60688"
             },
             {
-              "label": "Fuori di Zucca, il villaggio delle zucche",
-              "detail": "Fuori di Zucca, Savosa",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64302"
+              "label": "Bellinzona in zucca",
+              "detail": "Centro storico, Bellinzona",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64448"
             },
             {
-              "label": "Impressioni - Mostra di pittura di Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64414"
+              "label": "NEUROSCIENZE E YVES KLEIN",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64598"
             },
             {
-              "label": "Ivo Soldini - Progetto Castel Grande",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/62822"
+              "label": "Transumanza Carènt du Sosct",
+              "detail": "Piazza d'Armi",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/63995"
             },
             {
-              "label": "Jannis Kounellis: Io sono un pittore",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/63037"
+              "label": "Laboratorio per famiglie",
+              "detail": "Teatro dell'architettura, Mendrisio",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64211"
             },
             {
-              "label": "Mattia Polli - Vent'anni di scultura",
-              "detail": "Galleria Vecchia Posta, Brusino Arsizio",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64143"
+              "label": "Matinée",
+              "detail": "sala musica nel Mendrisiotto, Mendrisio",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64456"
             },
             {
-              "label": "Mona Caron - La resilienza della vita",
-              "detail": "Museo Centovalli e Pedemonte, Centovalli",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/63363"
+              "label": "ANNULLATA CAUSA PIOGGIA - Birra formaggio miele al lago",
+              "detail": "Zona Burbaglio, Muralto",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64291"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-10-17T13:31:50.370Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -112,16 +112,16 @@
           "date": "2026-10-13T08:19:26.782Z"
         },
         {
-          "title": "Film festival diritti umani Lugano: il miglior film è promised spaces",
-          "url": "/articoli-frontaliere/film-festival-diritti-umani-lugano-2026/",
-          "excerpt": "Vincitore Miglior film: Promised Spaces di Ivan Markovic Premio ONG assegnato a Effondrement di Anat Even Premio del Pubblico a Trop c'est trop di Elisé",
-          "date": "2026-10-17T03:41:57.400Z"
-        },
-        {
           "title": "Mendrisiotto: tre eventi e strade chiuse nel fine settimana",
           "url": "/articoli-frontaliere/mendrisiotto-strade-chiuse-weekend/",
           "excerpt": "Dal 18 al 20 settembre Rally del Ticino, Penziamo e Chiasso-Pedrinate causano chiusure stradali, limitazioni per pedoni e bus deviati nel Mendrisiotto.",
           "date": "2026-09-16T01:17:21.635Z"
+        },
+        {
+          "title": "Film festival diritti umani Lugano: il miglior film è promised spaces",
+          "url": "/articoli-frontaliere/film-festival-diritti-umani-lugano-2026/",
+          "excerpt": "Vincitore Miglior film: Promised Spaces di Ivan Markovic Premio ONG assegnato a Effondrement di Anat Even Premio del Pubblico a Trop c'est trop di Elisé",
+          "date": "2026-10-17T03:41:57.400Z"
         },
         {
           "title": "Sagra dell'uva a Mendrisio: bilancio positivo",
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "253",
+          "value": "230",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,69 +184,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Carlo Agostino Meletta - painter",
-              "detail": "Museo Onsernonese, Locarno",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/63364"
+              "label": "Arp, Cahn, Magnelli, Taeuber-Arp. The Art of the Gift",
+              "detail": "Fondazione Marguerite Arp, Locarno",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/61586"
             },
             {
-              "label": "Human Rights Film Festival",
-              "detail": "Cinema Corso e Iride, Lugano",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64146"
+              "label": "Gyotaku - Fish Trails",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/61721"
             },
             {
-              "label": "Film Trail Locarno",
-              "detail": "Palacinema, Locarno",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/63993"
+              "label": "Lemba, little chimpanzee",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/63707"
             },
             {
-              "label": "Fra Roberto fra le mura",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/61525"
+              "label": "Vacutacantine Market",
+              "detail": "Posteggio MANOR, Biasca",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/60688"
             },
             {
-              "label": "Outside of Zucca, the village of pumpkins",
-              "detail": "Fuori di Zucca, Savosa",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64302"
+              "label": "Bellinzona in pumpkin",
+              "detail": "Centro storico, Bellinzona",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64448"
             },
             {
-              "label": "Impressions - Painting exhibition by Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64414"
+              "label": "NEUROSCIENCE AND YVES KLEIN",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64598"
             },
             {
-              "label": "Ivo Soldini - Castel Grande Project",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/62822"
+              "label": "Carènt du Sosct Transhumance",
+              "detail": "Piazza d'Armi",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/63995"
             },
             {
-              "label": "Jannis Kounellis: I am a painter",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/63037"
+              "label": "Workshop for families",
+              "detail": "Teatro dell'architettura, Mendrisio",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64211"
             },
             {
-              "label": "Mattia Polli - Twentyyears of sculpture",
-              "detail": "Galleria Vecchia Posta, Brusino Arsizio",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64143"
+              "label": "Matinee",
+              "detail": "sala musica nel Mendrisiotto, Mendrisio",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64456"
             },
             {
-              "label": "Mona Caron - The Resilience of Life",
-              "detail": "Museo Centovalli e Pedemonte, Centovalli",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/63363"
+              "label": "CANCELLED DUE TO RAIN - Beer cheese honey at the lake",
+              "detail": "Zona Burbaglio, Muralto",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64291"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-10-17T13:31:50.370Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -263,16 +263,16 @@
           "date": "2026-10-13T08:19:26.782Z"
         },
         {
-          "title": "Lugano human rights film festival: the best film is promised spaces",
-          "url": "/en/cross-border-articles/lugano-human-rights-film-festival-the-best-film-is-promised-spaces/",
-          "excerpt": "Best Film Winner: Ivan Markovic's Promised Spaces NGO Award for Effondrement of Anat Even Audience Award for Trop c 'est trop by Elisé",
-          "date": "2026-10-17T03:41:57.400Z"
-        },
-        {
           "title": "Mendrisiotto: three events and roads closed at the weekend",
           "url": "/en/cross-border-articles/mendrisiotto-road-closures-weekend/",
           "excerpt": "From 18 to 20 September Rally del Ticino, Penziamo and Chiasso-Pedrinate cause road closures, limitations for pedestrians and diverted buses in Mendrisiotto.",
           "date": "2026-09-16T01:17:21.635Z"
+        },
+        {
+          "title": "Lugano human rights film festival: the best film is promised spaces",
+          "url": "/en/cross-border-articles/lugano-human-rights-film-festival-the-best-film-is-promised-spaces/",
+          "excerpt": "Best Film Winner: Ivan Markovic's Promised Spaces NGO Award for Effondrement of Anat Even Audience Award for Trop c 'est trop by Elisé",
+          "date": "2026-10-17T03:41:57.400Z"
         },
         {
           "title": "Grape Festival in Mendrisio: positive outcome",
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "253",
+          "value": "230",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,69 +335,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Carlo Agostino Meletta - Maler",
-              "detail": "Museo Onsernonese, Locarno",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/63364"
+              "label": "Arp, Cahn, Magnelli, Taeuber-Arp. Die Kunst des Schenkens",
+              "detail": "Fondazione Marguerite Arp, Locarno",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/61586"
             },
             {
-              "label": "Filmfestival Menschenrechte",
-              "detail": "Cinema Corso e Iride, Lugano",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64146"
+              "label": "Gyotaku - Spuren von Fischen",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/61721"
             },
             {
-              "label": "Filmweg Locarno",
-              "detail": "Palacinema, Locarno",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/63993"
+              "label": "Lemba, kleiner Schimpanse",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/63707"
             },
             {
-              "label": "Fra Roberto zwischen den Mauern",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/61525"
+              "label": "Markt für die Entleerung von Stiften",
+              "detail": "Posteggio MANOR, Biasca",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/60688"
             },
             {
-              "label": "Außerhalb von Zucca, dem Dorf der Kürbisse",
-              "detail": "Fuori di Zucca, Savosa",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64302"
+              "label": "Bellinzona aus Kürbis",
+              "detail": "Centro storico, Bellinzona",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64448"
             },
             {
-              "label": "Impressionen - Gemäldeausstellung von Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64414"
+              "label": "NEUROWISSENSCHAFTEN UND YVES KLEIN",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64598"
             },
             {
-              "label": "Ivo Soldini - Projekt Castel Grande",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/62822"
+              "label": "Transhumanz Carènt du Sosct",
+              "detail": "Piazza d'Armi",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/63995"
             },
             {
-              "label": "Jannis Kounellis: Ich bin Maler",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/63037"
+              "label": "Familien-Workshop",
+              "detail": "Teatro dell'architettura, Mendrisio",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64211"
             },
             {
-              "label": "Mattia Polli - 20Jahre Bildhauerei",
-              "detail": "Galleria Vecchia Posta, Brusino Arsizio",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64143"
+              "label": "Matinee",
+              "detail": "sala musica nel Mendrisiotto, Mendrisio",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64456"
             },
             {
-              "label": "Mona Caron - Die Belastbarkeit des Lebens",
-              "detail": "Museo Centovalli e Pedemonte, Centovalli",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/63363"
+              "label": "WEGEN REGENS ABGESAGT - Honigkäsebier am See",
+              "detail": "Zona Burbaglio, Muralto",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64291"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-10-17T13:31:50.370Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -414,16 +414,16 @@
           "date": "2026-10-13T08:19:26.782Z"
         },
         {
-          "title": "Filmfestival Menschenrechte Lugano: Der beste Film ist promised spaces",
-          "url": "/de/grenzgaenger-artikel/filmfestival-menschenrechte-lugano-der-beste-film-ist-promised-spaces/",
-          "excerpt": "Bester Film: Promised Spaces von Ivan Markovic NGO Award für Effondrement von Anat Even Publikumspreis für Trop c 'est trop von Elisé",
-          "date": "2026-10-17T03:41:57.400Z"
-        },
-        {
           "title": "Mendrisiotto: Drei Veranstaltungen und gesperrte Straßen am Wochenende",
           "url": "/de/grenzgaenger-artikel/mendrisiotto-strassensperrungen-wochenende/",
           "excerpt": "Vom 18. bis 20. September verursachen die Rally del Tessin, Peniamo und Chiasso-Pedrinate Straßensperrungen, Einschränkungen für Fußgänger und umgeleitete Busse im Mendrisiotto.",
           "date": "2026-09-16T01:17:21.635Z"
+        },
+        {
+          "title": "Filmfestival Menschenrechte Lugano: Der beste Film ist promised spaces",
+          "url": "/de/grenzgaenger-artikel/filmfestival-menschenrechte-lugano-der-beste-film-ist-promised-spaces/",
+          "excerpt": "Bester Film: Promised Spaces von Ivan Markovic NGO Award für Effondrement von Anat Even Publikumspreis für Trop c 'est trop von Elisé",
+          "date": "2026-10-17T03:41:57.400Z"
         },
         {
           "title": "Traubenfest in Mendrisio: positive Bilanz",
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "253",
+          "value": "230",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,69 +486,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Carlo Agostino Meletta - peintre",
-              "detail": "Museo Onsernonese, Locarno",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/63364"
+              "label": "Arp, Cahn, Magnelli, Taeuber-Arp. L’art du don",
+              "detail": "Fondazione Marguerite Arp, Locarno",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/61586"
             },
             {
-              "label": "Festival DU film droits DE L'HOMME",
-              "detail": "Cinema Corso e Iride, Lugano",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64146"
+              "label": "Gyotaku - Traces de poissons",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/61721"
             },
             {
-              "label": "Parcours cinématographique Locarno",
-              "detail": "Palacinema, Locarno",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/63993"
+              "label": "Lemba, petit chimpanzé",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/63707"
             },
             {
-              "label": "Frère Roberto entre les murs",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/61525"
+              "label": "Marché vide-citernes",
+              "detail": "Posteggio MANOR, Biasca",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/60688"
             },
             {
-              "label": "En dehors de Zucca, le village des citrouilles",
-              "detail": "Fuori di Zucca, Savosa",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64302"
+              "label": "Bellinzone en citrouille",
+              "detail": "Centro storico, Bellinzona",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64448"
             },
             {
-              "label": "Impressions - Exposition de peinture de Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64414"
+              "label": "NEUROSCIENCES ET YVES KLEIN",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64598"
             },
             {
-              "label": "Ivo Soldini - Projet Castel Grande",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/62822"
+              "label": "Transhumance Carènt du Sosct",
+              "detail": "Piazza d'Armi",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/63995"
             },
             {
-              "label": "Jannis Kounellis : Je suis un peintre",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/63037"
+              "label": "Atelier pour les familles",
+              "detail": "Teatro dell'architettura, Mendrisio",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64211"
             },
             {
-              "label": "Mattia Polli - Vingtans de sculpture",
-              "detail": "Galleria Vecchia Posta, Brusino Arsizio",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/64143"
+              "label": "- jusqu'à la levée du couvre-feu. - Matinées ?",
+              "detail": "sala musica nel Mendrisiotto, Mendrisio",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64456"
             },
             {
-              "label": "Mona Caron - La résilience de la vie",
-              "detail": "Museo Centovalli e Pedemonte, Centovalli",
-              "date": "2026-10-17",
-              "url": "https://www.tio.ch/agenda/day/20261017/63363"
+              "label": "ANNULÉE À CAUSE DE LA PLUIE - Bière fromage miel au lac",
+              "detail": "Zona Burbaglio, Muralto",
+              "date": "2026-10-18",
+              "url": "https://www.tio.ch/agenda/day/20261018/64291"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-10-17T13:31:50.370Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -565,16 +565,16 @@
           "date": "2026-10-13T08:19:26.782Z"
         },
         {
-          "title": "Film festival droits humains Lugano : le meilleur film est promise spaces",
-          "url": "/fr/articles-frontalier/film-festival-droits-humains-lugano-le-meilleur-film-est-promise-spaces/",
-          "excerpt": "Gagnant du meilleur film : Promised Spaces d'Ivan Markovic Prix ONG décerné à Effondrement d'Anat Even Prix du Public à Trop c'est trop d'Elisé",
-          "date": "2026-10-17T03:41:57.400Z"
-        },
-        {
           "title": "Mendrisiotto : trois événements et des routes fermées le week-end",
           "url": "/fr/articles-frontalier/mendrisiotto-routes-fermees-week-end/",
           "excerpt": "Du 18 au 20 septembre, le Rallye du Tessin, Penziamo et Chiasso-Pedrinate provoquent des fermetures de routes, des restrictions pour les piétons et les bus déviés dans le Mendrisiotto.",
           "date": "2026-09-16T01:17:21.635Z"
+        },
+        {
+          "title": "Film festival droits humains Lugano : le meilleur film est promise spaces",
+          "url": "/fr/articles-frontalier/film-festival-droits-humains-lugano-le-meilleur-film-est-promise-spaces/",
+          "excerpt": "Gagnant du meilleur film : Promised Spaces d'Ivan Markovic Prix ONG décerné à Effondrement d'Anat Even Prix du Public à Trop c'est trop d'Elisé",
+          "date": "2026-10-17T03:41:57.400Z"
         },
         {
           "title": "Fête du raisin à Mendrisio : bilan positif",
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     }
   }
 }

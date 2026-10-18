@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T19:17:26.345Z",
-  "contentHash": "12a12a1eeac349aa2b59eb7ac9fad568af1dbacb7df46afa7642b7d683fc17d5",
+  "updatedAt": "2026-10-18T00:18:32.280Z",
+  "contentHash": "22bc3689ef7fbf6e65732d42d2a2de43b8decda65816d217ebe0c802136dcd8d",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T13:31:50.370Z",
+      "updatedAt": "2026-10-17T17:01:03.100Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "95",
+          "value": "83",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Westernkurs mit Julie Hossmann",
-              "detail": "Scuol",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/westernkurs-mit-julie-hossmann/"
+              "label": "Sagra della castagna",
+              "detail": "Campascio, Brusio",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-dautunno/"
+            },
+            {
+              "label": "Matinée concert Choir Stilli",
+              "detail": "Kloster St. Johann, Val Müstair",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/matinee-konzert-chor-stilli/"
+            },
+            {
+              "label": "Matinée-Konzert Chor Stilli",
+              "detail": "Kloster St. Johann",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/events/music/muestair/matinee-concert-choir-stilli_AGBP64e"
+            },
+            {
+              "label": "Rendez-vous des arts mit Hans-Ulrich Obrist und Susan Hefuna",
+              "detail": "Bündner Kunstmuseum, Chur",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rendez-vous-des-arts-mit-hans-ulrich-obrist-und-susan-hefuna/"
+            },
+            {
+              "label": "Bergkonzert mit \"Trio u Fiore\" (CH)",
+              "detail": "Skihütte Feldis",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/feldis-veulden/bergkonzert-mit-trio-u-fiore-ch_AAfZXkM"
+            },
+            {
+              "label": "Tanznachmittag im Hotel Sunstar Pontresina – Herbstserie 2026",
+              "detail": "Sunstar Hotel Pontresina, Pontresina",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/events/music/pontresina/dance-afternoon-at-hotel-sunstar-pontresina-autumn-series-2026_AGthkV8"
+            },
+            {
+              "label": "Buchvorstellung von Laura Decurtins in Ilanz",
+              "detail": "Ilanz, Ilanz/Glion",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/buchvorstellung-von-laura-decurtins-in-ilanz/"
+            },
+            {
+              "label": "Cinzia & Romana Ganzoni - Per Tai",
+              "detail": "Chur",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cinzia-romana-ganzoni-per-tai/"
             },
             {
               "label": "Klapperlapapp: the fairy tale & story festival",
-              "detail": "Taiswald, Pontresina",
-              "date": "2026-10-17",
+              "detail": "Taiswald, Pontresina — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/klapperlapapp-the-fairy-tale-story-festival/"
             },
             {
               "label": "Bergbierfestival 2026",
-              "detail": "Bergbierfestival",
-              "date": "2026-10-17",
+              "detail": "Bergbierfestival — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/ramosch/bergbierfestival-2026_At6NGRX"
-            },
-            {
-              "label": "Danza - Laboratorio con Gabrielle Neuhaus",
-              "detail": "Poschiavo",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/danza-laboratorio-con-gabrielle-neuhaus/"
-            },
-            {
-              "label": "Visite guidate ai castagneti e pranzo a Brusio",
-              "detail": "Campocologno, Brusio",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visite-guidate-ai-castagneti-e-pranzo-a-brusio-3/"
-            },
-            {
-              "label": "Vortrag bei der Rätischen Vereinigung für Familienforschung",
-              "detail": "Chur",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortrag-bei-der-raetischen-vereinigung-fuer-familienforschung-1/"
-            },
-            {
-              "label": "Satz, Druck und Papierschöpfen / cumposiziun, stampar e far palperi",
-              "detail": "Strada, Valsot",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/satz-druck-und-papierschoepfen-cumposiziun-stampar-e-far-palperi/"
-            },
-            {
-              "label": "Finissage «plomer plajer culer»",
-              "detail": "Valchava, Val Müstair",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-plomer-plajer-culer/"
-            },
-            {
-              "label": "Finissage - PLOMER PLAJER CULER #2",
-              "detail": "Sta. Maria Val Müstair, Val Müstair",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-plomer-plajer-culer-2/"
-            },
-            {
-              "label": "Silvester Dinner",
-              "detail": "Flem Mountain Lodge Restaurant-Café, Flims",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/new-years-dinner/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-10-17T13:31:50.370Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -147,7 +147,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "en": {
       "canton": "GR",
@@ -157,7 +157,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "95",
+          "value": "83",
           "note": "from the site’s events calendar"
         }
       ],
@@ -168,69 +168,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Westernkurs mit Julie Hossmann",
-              "detail": "Scuol",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/westernkurs-mit-julie-hossmann/"
+              "label": "Chestnut Festival",
+              "detail": "Campascio, Brusio",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-dautunno/"
+            },
+            {
+              "label": "Matinée concert Choir Stilli",
+              "detail": "Kloster St. Johann, Val Müstair",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/matinee-konzert-chor-stilli/"
+            },
+            {
+              "label": "Matinée concert Choir Stilli",
+              "detail": "Kloster St. Johann",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/events/music/muestair/matinee-concert-choir-stilli_AGBP64e"
+            },
+            {
+              "label": "Rendez-vous des arts mit Hans-Ulrich Obrist und Susan Hefuna",
+              "detail": "Bündner Kunstmuseum, Chur",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rendez-vous-des-arts-mit-hans-ulrich-obrist-und-susan-hefuna/"
+            },
+            {
+              "label": "Bergkonzert mit \"Trio u Fiore\" (CH)",
+              "detail": "Skihütte Feldis",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/feldis-veulden/bergkonzert-mit-trio-u-fiore-ch_AAfZXkM"
+            },
+            {
+              "label": "Dance afternoon at Hotel Sunstar Pontresina – Autumn series 2026",
+              "detail": "Sunstar Hotel Pontresina, Pontresina",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/events/music/pontresina/dance-afternoon-at-hotel-sunstar-pontresina-autumn-series-2026_AGthkV8"
+            },
+            {
+              "label": "Buchvorstellung von Laura Decurtins in Ilanz",
+              "detail": "Ilanz, Ilanz/Glion",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/buchvorstellung-von-laura-decurtins-in-ilanz/"
+            },
+            {
+              "label": "Cinzia & Romana Ganzoni - Per Tai",
+              "detail": "Chur",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cinzia-romana-ganzoni-per-tai/"
             },
             {
               "label": "Klapperlapapp: the fairy tale & story festival",
-              "detail": "Taiswald, Pontresina",
-              "date": "2026-10-17",
+              "detail": "Taiswald, Pontresina — ongoing, last day: 18 October 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/klapperlapapp-the-fairy-tale-story-festival/"
             },
             {
               "label": "Bergbierfestival 2026",
-              "detail": "Bergbierfestival",
-              "date": "2026-10-17",
+              "detail": "Bergbierfestival — ongoing, last day: 18 October 2026",
+              "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/ramosch/bergbierfestival-2026_At6NGRX"
-            },
-            {
-              "label": "Tanz- und Bewegungsworkshop mit Gabrielle Neuhaus",
-              "detail": "Poschiavo",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/danza-laboratorio-con-gabrielle-neuhaus/"
-            },
-            {
-              "label": "Guided tours of the chestnut groves and lunch in Brusio",
-              "detail": "Campocologno, Brusio",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visite-guidate-ai-castagneti-e-pranzo-a-brusio-3/"
-            },
-            {
-              "label": "Vortrag bei der Rätischen Vereinigung für Familienforschung",
-              "detail": "Chur",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortrag-bei-der-raetischen-vereinigung-fuer-familienforschung-1/"
-            },
-            {
-              "label": "Satz, Druck und Papierschöpfen / cumposiziun, stampar e far palperi",
-              "detail": "Strada, Valsot",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/satz-druck-und-papierschoepfen-cumposiziun-stampar-e-far-palperi/"
-            },
-            {
-              "label": "Finissage «plomer plajer culer»",
-              "detail": "Valchava, Val Müstair",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-plomer-plajer-culer/"
-            },
-            {
-              "label": "Finissage - PLOMER PLAJER CULER #2",
-              "detail": "Sta. Maria Val Müstair, Val Müstair",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-plomer-plajer-culer-2/"
-            },
-            {
-              "label": "New Years Dinner",
-              "detail": "Flem Mountain Lodge Restaurant-Café, Flims",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/new-years-dinner/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-10-17T13:31:50.370Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -282,7 +282,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "de": {
       "canton": "GR",
@@ -292,7 +292,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "95",
+          "value": "83",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -303,69 +303,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Westernkurs mit Julie Hossmann",
-              "detail": "Scuol",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/westernkurs-mit-julie-hossmann/"
+              "label": "Kastanienfest",
+              "detail": "Campascio, Brusio",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-dautunno/"
+            },
+            {
+              "label": "Matinée-Konzert Chor Stilli",
+              "detail": "Kloster St. Johann, Val Müstair",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/matinee-konzert-chor-stilli/"
+            },
+            {
+              "label": "Matinée-Konzert Chor Stilli",
+              "detail": "Kloster St. Johann",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/events/music/muestair/matinee-concert-choir-stilli_AGBP64e"
+            },
+            {
+              "label": "Rendez-vous des arts mit Hans-Ulrich Obrist und Susan Hefuna",
+              "detail": "Bündner Kunstmuseum, Chur",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rendez-vous-des-arts-mit-hans-ulrich-obrist-und-susan-hefuna/"
+            },
+            {
+              "label": "Bergkonzert mit \"Trio u Fiore\" (CH)",
+              "detail": "Skihütte Feldis",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/feldis-veulden/bergkonzert-mit-trio-u-fiore-ch_AAfZXkM"
+            },
+            {
+              "label": "Tanznachmittag im Hotel Sunstar Pontresina – Herbstserie 2026",
+              "detail": "Sunstar Hotel Pontresina, Pontresina",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/events/music/pontresina/dance-afternoon-at-hotel-sunstar-pontresina-autumn-series-2026_AGthkV8"
+            },
+            {
+              "label": "Buchvorstellung von Laura Decurtins in Ilanz",
+              "detail": "Ilanz, Ilanz/Glion",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/buchvorstellung-von-laura-decurtins-in-ilanz/"
+            },
+            {
+              "label": "Cinzia & Romana Ganzoni - Per Tai",
+              "detail": "Chur",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cinzia-romana-ganzoni-per-tai/"
             },
             {
               "label": "Klapperlapapp: das Märchen- & Geschichtenfestival",
-              "detail": "Taiswald, Pontresina",
-              "date": "2026-10-17",
+              "detail": "Taiswald, Pontresina — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/klapperlapapp-the-fairy-tale-story-festival/"
             },
             {
               "label": "Bergbierfestival 2026",
-              "detail": "Bergbierfestival",
-              "date": "2026-10-17",
+              "detail": "Bergbierfestival — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/ramosch/bergbierfestival-2026_At6NGRX"
-            },
-            {
-              "label": "Tanz- und Bewegungsworkshop mit Gabrielle Neuhaus",
-              "detail": "Poschiavo",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/danza-laboratorio-con-gabrielle-neuhaus/"
-            },
-            {
-              "label": "Geführte Besichtigungen der Kastanienselven und Mittagessen in Brusio",
-              "detail": "Campocologno, Brusio",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visite-guidate-ai-castagneti-e-pranzo-a-brusio-3/"
-            },
-            {
-              "label": "Vortrag bei der Rätischen Vereinigung für Familienforschung",
-              "detail": "Chur",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortrag-bei-der-raetischen-vereinigung-fuer-familienforschung-1/"
-            },
-            {
-              "label": "Satz, Druck und Papierschöpfen / cumposiziun, stampar e far palperi",
-              "detail": "Strada, Valsot",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/satz-druck-und-papierschoepfen-cumposiziun-stampar-e-far-palperi/"
-            },
-            {
-              "label": "Finissage «plomer plajer culer»",
-              "detail": "Valchava, Val Müstair",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-plomer-plajer-culer/"
-            },
-            {
-              "label": "Finissage – PLOMER PLAJER CULER #2",
-              "detail": "Sta. Maria Val Müstair, Val Müstair",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-plomer-plajer-culer-2/"
-            },
-            {
-              "label": "Herbst Wild Tavolata",
-              "detail": "Flem Mountain Lodge Restaurant-Café, Flims",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/new-years-dinner/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-10-17T13:31:50.370Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "fr": {
       "canton": "GR",
@@ -427,7 +427,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "95",
+          "value": "83",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -438,69 +438,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Westernkurs mit Julie Hossmann",
-              "detail": "Scuol",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/westernkurs-mit-julie-hossmann/"
+              "label": "Fête des châtaignes",
+              "detail": "Campascio, Brusio",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-dautunno/"
+            },
+            {
+              "label": "Matinée concert Choir Stilli",
+              "detail": "Kloster St. Johann, Val Müstair",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/matinee-konzert-chor-stilli/"
+            },
+            {
+              "label": "Matinée-Konzert Chor Stilli",
+              "detail": "Kloster St. Johann",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/events/music/muestair/matinee-concert-choir-stilli_AGBP64e"
+            },
+            {
+              "label": "Rendez-vous des arts mit Hans-Ulrich Obrist und Susan Hefuna",
+              "detail": "Bündner Kunstmuseum, Chur",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rendez-vous-des-arts-mit-hans-ulrich-obrist-und-susan-hefuna/"
+            },
+            {
+              "label": "Bergkonzert mit \"Trio u Fiore\" (CH)",
+              "detail": "Skihütte Feldis",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/feldis-veulden/bergkonzert-mit-trio-u-fiore-ch_AAfZXkM"
+            },
+            {
+              "label": "Tanznachmittag im Hotel Sunstar Pontresina – Herbstserie 2026",
+              "detail": "Sunstar Hotel Pontresina, Pontresina",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/events/music/pontresina/dance-afternoon-at-hotel-sunstar-pontresina-autumn-series-2026_AGthkV8"
+            },
+            {
+              "label": "Buchvorstellung von Laura Decurtins in Ilanz",
+              "detail": "Ilanz, Ilanz/Glion",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/buchvorstellung-von-laura-decurtins-in-ilanz/"
+            },
+            {
+              "label": "Cinzia & Romana Ganzoni - Per Tai",
+              "detail": "Chur",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cinzia-romana-ganzoni-per-tai/"
             },
             {
               "label": "Klapperlapapp: the fairy tale & story festival",
-              "detail": "Taiswald, Pontresina",
-              "date": "2026-10-17",
+              "detail": "Taiswald, Pontresina — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/klapperlapapp-the-fairy-tale-story-festival/"
             },
             {
               "label": "Bergbierfestival 2026",
-              "detail": "Bergbierfestival",
-              "date": "2026-10-17",
+              "detail": "Bergbierfestival — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-18",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/ramosch/bergbierfestival-2026_At6NGRX"
-            },
-            {
-              "label": "Danse - workshop avec Gabrielle Neuhaus, en résidence à Poschiavo",
-              "detail": "Poschiavo",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/danza-laboratorio-con-gabrielle-neuhaus/"
-            },
-            {
-              "label": "Visites guidées des châtaigneraies et déjeuner à Brusio",
-              "detail": "Campocologno, Brusio",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visite-guidate-ai-castagneti-e-pranzo-a-brusio-3/"
-            },
-            {
-              "label": "Vortrag bei der Rätischen Vereinigung für Familienforschung",
-              "detail": "Chur",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortrag-bei-der-raetischen-vereinigung-fuer-familienforschung-1/"
-            },
-            {
-              "label": "Satz, Druck und Papierschöpfen / cumposiziun, stampar e far palperi",
-              "detail": "Strada, Valsot",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/satz-druck-und-papierschoepfen-cumposiziun-stampar-e-far-palperi/"
-            },
-            {
-              "label": "Finissage «plomer plajer culer»",
-              "detail": "Valchava, Val Müstair",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-plomer-plajer-culer/"
-            },
-            {
-              "label": "Finissage - PLOMER PLAJER CULER #2",
-              "detail": "Sta. Maria Val Müstair, Val Müstair",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-plomer-plajer-culer-2/"
-            },
-            {
-              "label": "Silvester Dinner",
-              "detail": "Flem Mountain Lodge Restaurant-Café, Flims",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/new-years-dinner/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-10-17T13:31:50.370Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -552,7 +552,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     }
   }
 }

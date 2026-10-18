@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T00:12:19.402Z",
-  "contentHash": "566d1c61e6e56351f9d6844313ea3487297eec558ebd50b82e7cce0f65866a94",
+  "updatedAt": "2026-10-18T00:18:32.280Z",
+  "contentHash": "f575cddd8cc7037fb9fa6bb50152b956f3669b65521bf89f4f3468327326d183",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T10:44:21.348Z",
+      "updatedAt": "2026-10-17T17:01:03.100Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "361",
+          "value": "375",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Couture Fashion Night 4.0",
-              "detail": "The Dolder Grand, Zürich",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/couture-fashion-night-40/"
+              "label": "Einblick in die Zukunft des Museums – Fokus \"Spinnen\"",
+              "detail": "Bäretswil",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einblick-in-die-zukunft-des-museums-fokus-spinnen-1/"
             },
             {
-              "label": "Pilzkurs",
-              "detail": "Sihlwald",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pilzkurs-2/"
+              "label": "Sonntagszmorge mit Oldtimerpostauto",
+              "detail": "Bauma",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonntagszmorge-mit-oldtimerpostauto-1/"
             },
             {
-              "label": "Unser Wald im Klimawandel",
-              "detail": "Kaiserstuhl",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/unser-wald-im-klimawandel/"
+              "label": "Ein tierisch lustiger Fall (Kursnr. 2.2e)",
+              "detail": "Freizeitanlage Chrüzacher, Dietikon",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ein-tierisch-lustiger-fall-kursnr-22e/"
             },
             {
-              "label": "Nachhaltig unterwegs",
+              "label": "Familientag",
+              "detail": "Landesmuseum Zürich, Zürich",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/familientag/"
+            },
+            {
+              "label": "Guided tour of the exhibition \"Swiss Design Collection\"",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tour-of-the-exhibition-swiss-design-collection/"
+            },
+            {
+              "label": "Sichlete Dietikon 2026",
+              "detail": "Festgelände Sichlete Dietikon, Dietikon",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sichlete-dietikon-2026/"
+            },
+            {
+              "label": "Transnatura - Bilder der Aescher Künstlerin Mariann Wiederkehr",
+              "detail": "Aesch ZH, Aesch (ZH)",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/werkschau-mariann-wiederkehr/"
+            },
+            {
+              "label": "Europäischer Tag der Restaurierung",
               "detail": "Winterthur",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/nachhaltig-unterwegs/"
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/europaeischer-tag-der-restaurierung/"
             },
             {
-              "label": "Einsteiger Workshops im Oktober in der SalsaRica!",
-              "detail": "SalsaRica Tanzschule",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/einsteiger-workshops-im-oktober-in-der-salsarica_AdwvF1y"
+              "label": "Collection Insights: “She-Devils on Wheels – Headquaters” mit Kamilla Ødegård",
+              "detail": "Migros Museum für Gegenwartskunst, Zürich",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/collection-insights-she-devils-on-wheels-headquaters-mit-kamilla-odegard/"
             },
             {
-              "label": "Pizza Masterclass Pizza Napoletana Kurs",
-              "detail": "Wildberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pizza-masterclass-pizza-napoletana-kurs-1/"
-            },
-            {
-              "label": "Spezialführung mit der Kuratorin: «Rot»",
-              "detail": "Museum Rietberg Zürich, Zürich",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spezialfuehrung-mit-der-kuratorin-rot/"
-            },
-            {
-              "label": "Workshop Ballette entdecken «Ein Sommernachtstraum»",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-ballette-entdecken-ein-sommernachtstraum/"
-            },
-            {
-              "label": "Animationsfilm \"Minions & Monster\"",
-              "detail": "Dübendorf",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/animationsfilm-minions-monster/"
-            },
-            {
-              "label": "Geschichtenfenster – lauschen und entdecken",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/geschichtenfenster-lauschen-und-entdecken-3/"
+              "label": "«LEIDENSCHAFT & SAMBA»",
+              "detail": "Musik Container Uster, Uster",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/uster/leidenschaft-und-samba_ATLTvK3"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -129,7 +129,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "en": {
       "canton": "ZH",
@@ -139,7 +139,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "361",
+          "value": "375",
           "note": "from the site’s events calendar"
         }
       ],
@@ -150,69 +150,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Couture Fashion Night 4.0",
-              "detail": "The Dolder Grand, Zürich",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/couture-fashion-night-40/"
+              "label": "Einblick in die Zukunft des Museums – Fokus \"Spinnen\"",
+              "detail": "Bäretswil",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einblick-in-die-zukunft-des-museums-fokus-spinnen-1/"
             },
             {
-              "label": "Pilzkurs",
-              "detail": "Sihlwald",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pilzkurs-2/"
+              "label": "Sonntagszmorge mit Oldtimerpostauto",
+              "detail": "Bauma",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonntagszmorge-mit-oldtimerpostauto-1/"
             },
             {
-              "label": "Unser Wald im Klimawandel",
-              "detail": "Kaiserstuhl",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/unser-wald-im-klimawandel/"
+              "label": "Ein tierisch lustiger Fall (Kursnr. 2.2e)",
+              "detail": "Freizeitanlage Chrüzacher, Dietikon",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ein-tierisch-lustiger-fall-kursnr-22e/"
             },
             {
-              "label": "Nachhaltig unterwegs",
+              "label": "Familientag",
+              "detail": "Landesmuseum Zürich, Zürich",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/familientag/"
+            },
+            {
+              "label": "Guided tour of the exhibition \"Swiss Design Collection\"",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tour-of-the-exhibition-swiss-design-collection/"
+            },
+            {
+              "label": "Sichlete Dietikon 2026",
+              "detail": "Festgelände Sichlete Dietikon, Dietikon",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sichlete-dietikon-2026/"
+            },
+            {
+              "label": "Transnatura - Bilder der Aescher Künstlerin Mariann Wiederkehr",
+              "detail": "Aesch ZH, Aesch (ZH)",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/werkschau-mariann-wiederkehr/"
+            },
+            {
+              "label": "Europäischer Tag der Restaurierung",
               "detail": "Winterthur",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/nachhaltig-unterwegs/"
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/europaeischer-tag-der-restaurierung/"
             },
             {
-              "label": "Einsteiger Workshops im Oktober in der SalsaRica!",
-              "detail": "SalsaRica Tanzschule",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/einsteiger-workshops-im-oktober-in-der-salsarica_AdwvF1y"
+              "label": "Collection Insights: “She-Devils on Wheels – Headquaters” mit Kamilla Ødegård",
+              "detail": "Migros Museum für Gegenwartskunst, Zürich",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/collection-insights-she-devils-on-wheels-headquaters-mit-kamilla-odegard/"
             },
             {
-              "label": "Pizza Masterclass Pizza Napoletana Kurs",
-              "detail": "Wildberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pizza-masterclass-pizza-napoletana-kurs-1/"
-            },
-            {
-              "label": "Spezialführung mit der Kuratorin: «Rot»",
-              "detail": "Museum Rietberg Zürich, Zürich",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spezialfuehrung-mit-der-kuratorin-rot/"
-            },
-            {
-              "label": "Workshop Ballette entdecken «Ein Sommernachtstraum»",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-ballette-entdecken-ein-sommernachtstraum/"
-            },
-            {
-              "label": "Animationsfilm \"Minions & Monster\"",
-              "detail": "Dübendorf",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/animationsfilm-minions-monster/"
-            },
-            {
-              "label": "Geschichtenfenster – lauschen und entdecken",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/geschichtenfenster-lauschen-und-entdecken-3/"
+              "label": "«LEIDENSCHAFT & SAMBA»",
+              "detail": "Musik Container Uster, Uster",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/uster/leidenschaft-und-samba_ATLTvK3"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -246,7 +246,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "de": {
       "canton": "ZH",
@@ -256,7 +256,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "361",
+          "value": "375",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -267,69 +267,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Couture Fashion Night 4.0",
-              "detail": "The Dolder Grand, Zürich",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/couture-fashion-night-40/"
+              "label": "Einblick in die Zukunft des Museums – Fokus \"Spinnen\"",
+              "detail": "Bäretswil",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einblick-in-die-zukunft-des-museums-fokus-spinnen-1/"
             },
             {
-              "label": "Pilzkurs",
-              "detail": "Sihlwald",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pilzkurs-2/"
+              "label": "Sonntagszmorge mit Oldtimerpostauto",
+              "detail": "Bauma",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonntagszmorge-mit-oldtimerpostauto-1/"
             },
             {
-              "label": "Unser Wald im Klimawandel",
-              "detail": "Kaiserstuhl",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/unser-wald-im-klimawandel/"
+              "label": "Ein tierisch lustiger Fall (Kursnr. 2.2e)",
+              "detail": "Freizeitanlage Chrüzacher, Dietikon",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ein-tierisch-lustiger-fall-kursnr-22e/"
             },
             {
-              "label": "Nachhaltig unterwegs",
+              "label": "Familientag",
+              "detail": "Landesmuseum Zürich, Zürich",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/familientag/"
+            },
+            {
+              "label": "Guided tour of the exhibition \"Swiss Design Collection\"",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tour-of-the-exhibition-swiss-design-collection/"
+            },
+            {
+              "label": "Sichlete Dietikon 2026",
+              "detail": "Festgelände Sichlete Dietikon, Dietikon",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sichlete-dietikon-2026/"
+            },
+            {
+              "label": "Transnatura - Bilder der Aescher Künstlerin Mariann Wiederkehr",
+              "detail": "Aesch ZH, Aesch (ZH)",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/werkschau-mariann-wiederkehr/"
+            },
+            {
+              "label": "Europäischer Tag der Restaurierung",
               "detail": "Winterthur",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/nachhaltig-unterwegs/"
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/europaeischer-tag-der-restaurierung/"
             },
             {
-              "label": "Einsteiger Workshops im Oktober in der SalsaRica!",
-              "detail": "SalsaRica Tanzschule",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/einsteiger-workshops-im-oktober-in-der-salsarica_AdwvF1y"
+              "label": "Collection Insights: “She-Devils on Wheels – Headquaters” mit Kamilla Ødegård",
+              "detail": "Migros Museum für Gegenwartskunst, Zürich",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/collection-insights-she-devils-on-wheels-headquaters-mit-kamilla-odegard/"
             },
             {
-              "label": "Pizza Masterclass Pizza Napoletana Kurs",
-              "detail": "Wildberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pizza-masterclass-pizza-napoletana-kurs-1/"
-            },
-            {
-              "label": "Spezialführung mit der Kuratorin: «Rot»",
-              "detail": "Museum Rietberg Zürich, Zürich",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spezialfuehrung-mit-der-kuratorin-rot/"
-            },
-            {
-              "label": "Workshop Ballette entdecken «Ein Sommernachtstraum»",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-ballette-entdecken-ein-sommernachtstraum/"
-            },
-            {
-              "label": "Animationsfilm \"Minions & Monster\"",
-              "detail": "Dübendorf",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/animationsfilm-minions-monster/"
-            },
-            {
-              "label": "Geschichtenfenster – lauschen und entdecken",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/geschichtenfenster-lauschen-und-entdecken-3/"
+              "label": "«LEIDENSCHAFT & SAMBA»",
+              "detail": "Musik Container Uster, Uster",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/uster/leidenschaft-und-samba_ATLTvK3"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -363,7 +363,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "fr": {
       "canton": "ZH",
@@ -373,7 +373,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "361",
+          "value": "375",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -384,69 +384,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Couture Fashion Night 4.0",
-              "detail": "The Dolder Grand, Zürich",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/couture-fashion-night-40/"
+              "label": "Einblick in die Zukunft des Museums – Fokus \"Spinnen\"",
+              "detail": "Bäretswil",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einblick-in-die-zukunft-des-museums-fokus-spinnen-1/"
             },
             {
-              "label": "Pilzkurs",
-              "detail": "Sihlwald",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pilzkurs-2/"
+              "label": "Sonntagszmorge mit Oldtimerpostauto",
+              "detail": "Bauma",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonntagszmorge-mit-oldtimerpostauto-1/"
             },
             {
-              "label": "Unser Wald im Klimawandel",
-              "detail": "Kaiserstuhl",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/unser-wald-im-klimawandel/"
+              "label": "Ein tierisch lustiger Fall (Kursnr. 2.2e)",
+              "detail": "Freizeitanlage Chrüzacher, Dietikon",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ein-tierisch-lustiger-fall-kursnr-22e/"
             },
             {
-              "label": "Nachhaltig unterwegs",
+              "label": "Familientag",
+              "detail": "Landesmuseum Zürich, Zürich",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/familientag/"
+            },
+            {
+              "label": "Guided tour of the exhibition \"Swiss Design Collection\"",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tour-of-the-exhibition-swiss-design-collection/"
+            },
+            {
+              "label": "Sichlete Dietikon 2026",
+              "detail": "Festgelände Sichlete Dietikon, Dietikon",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sichlete-dietikon-2026/"
+            },
+            {
+              "label": "Transnatura - Bilder der Aescher Künstlerin Mariann Wiederkehr",
+              "detail": "Aesch ZH, Aesch (ZH)",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/werkschau-mariann-wiederkehr/"
+            },
+            {
+              "label": "Europäischer Tag der Restaurierung",
               "detail": "Winterthur",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/nachhaltig-unterwegs/"
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/europaeischer-tag-der-restaurierung/"
             },
             {
-              "label": "Einsteiger Workshops im Oktober in der SalsaRica!",
-              "detail": "SalsaRica Tanzschule",
-              "date": "2026-10-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/einsteiger-workshops-im-oktober-in-der-salsarica_AdwvF1y"
+              "label": "Collection Insights: “She-Devils on Wheels – Headquaters” mit Kamilla Ødegård",
+              "detail": "Migros Museum für Gegenwartskunst, Zürich",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/collection-insights-she-devils-on-wheels-headquaters-mit-kamilla-odegard/"
             },
             {
-              "label": "Pizza Masterclass Pizza Napoletana Kurs",
-              "detail": "Wildberg",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pizza-masterclass-pizza-napoletana-kurs-1/"
-            },
-            {
-              "label": "Spezialführung mit der Kuratorin: «Rot»",
-              "detail": "Museum Rietberg Zürich, Zürich",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spezialfuehrung-mit-der-kuratorin-rot/"
-            },
-            {
-              "label": "Workshop Ballette entdecken «Ein Sommernachtstraum»",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-ballette-entdecken-ein-sommernachtstraum/"
-            },
-            {
-              "label": "Animationsfilm \"Minions & Monster\"",
-              "detail": "Dübendorf",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/animationsfilm-minions-monster/"
-            },
-            {
-              "label": "Geschichtenfenster – lauschen und entdecken",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/geschichtenfenster-lauschen-und-entdecken-3/"
+              "label": "«LEIDENSCHAFT & SAMBA»",
+              "detail": "Musik Container Uster, Uster",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/uster/leidenschaft-und-samba_ATLTvK3"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -480,7 +480,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-10-17T11:38:04.345Z",
-  "contentHash": "a258ae53537007bf9ae3175eb9c1703bf46548cab645904c7a9bdd40df48750a",
+  "updatedAt": "2026-10-18T00:18:32.280Z",
+  "contentHash": "ffbfcd59cbbb8fda25cbdccd2b29be1a0980633d3fa157e8c0943779be8442fb",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-16T10:44:21.348Z",
+      "updatedAt": "2026-10-17T17:01:03.100Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "26",
+          "value": "24",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Trail Run Einsiedeln",
+              "detail": "8840 Einsiedeln, Einsiedeln",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/trail-run-einsiedeln/"
+            },
+            {
+              "label": "Zwischen Sehnsucht und Selbsttäuschung: Die Reise als Spiegel",
+              "detail": "Schwyz",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-sehnsucht-und-selbsttaeuschung-die-reise-als-spiegel/"
+            },
+            {
               "label": "10 Jahre The Rolling Barrels (CH), Simi & The Shy Guys (CH) & Cross Country (CH)",
-              "detail": "Siebnen",
-              "date": "2026-10-17",
+              "detail": "Siebnen — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/10-jahre-the-rolling-barrels-ch-simi-the-shy-guys-ch-cross-country-ch/"
             },
             {
               "label": "Herbschtmärt Freyebach",
-              "detail": "Kirchstrasse, Freienbach",
-              "date": "2026-10-17",
+              "detail": "Kirchstrasse, Freienbach — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbschtmaert-freyebach/"
             },
             {
-              "label": "FRÖNELI-FÄSCHT",
-              "detail": "Stoos",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/froeneli-faescht/"
-            },
-            {
               "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
-              "detail": "Einsiedeln",
-              "date": "2026-10-17",
+              "detail": "Einsiedeln — in corso, ultimo giorno: 24 ottobre 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
-            },
-            {
-              "label": "Candy Dulfer - DER HERBST 26",
-              "detail": "Restaurant Rôtisserie Waldstätterhof Brunnen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/candy-dulfer-der-herbst-26-1/"
-            },
-            {
-              "label": "Requiem (CH), Crypt (CH) & Vorax (CH)",
-              "detail": "Siebnen — in corso, ultimo giorno: 17 ottobre 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/requiem-ch-crypt-ch-vorax-ch/"
             },
             {
               "label": "SCHWIIZERGOOFE FERIENSPASS",
               "detail": "Stoos Lodge, Morschach — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schwiizergoofe-ferienspass/"
             },
             {
               "label": "Guided Hike to the Hochstuckli | Light & Landscape",
               "detail": "Sattel-Hochstuckli AG, Sattel — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/guided-hike-to-the-hochstuckli-light-landscape/"
-            },
-            {
-              "label": "Children's day - Rondo's mountain adventure",
-              "detail": "Sattel-Hochstuckli AG, Sattel — in corso, ultimo giorno: 17 ottobre 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/childrens-day-rondos-mountain-adventure/"
             },
             {
               "label": "Light & Landscape",
               "detail": "Sattel-Hochstuckli, Sattel — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/light-landscape/"
+            },
+            {
+              "label": "Brunch all'Heirihütte",
+              "detail": "Alpwirtschaft Heiri-Hütte, Arth — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brunch-allheirihuette/"
+            },
+            {
+              "label": "Greifler-Musig \"Arther Chilbi\"",
+              "detail": "Restaurant Engel, Arth",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/greifler-musig-arther-chilbi/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "en": {
       "canton": "SZ",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "26",
+          "value": "24",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Trail Run Einsiedeln",
+              "detail": "8840 Einsiedeln, Einsiedeln",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/trail-run-einsiedeln/"
+            },
+            {
+              "label": "Zwischen Sehnsucht und Selbsttäuschung: Die Reise als Spiegel",
+              "detail": "Schwyz",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-sehnsucht-und-selbsttaeuschung-die-reise-als-spiegel/"
+            },
+            {
               "label": "10 Jahre The Rolling Barrels (CH), Simi & The Shy Guys (CH) & Cross Country (CH)",
-              "detail": "Siebnen",
-              "date": "2026-10-17",
+              "detail": "Siebnen — ongoing, last day: 18 October 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/10-jahre-the-rolling-barrels-ch-simi-the-shy-guys-ch-cross-country-ch/"
             },
             {
               "label": "Herbschtmärt Freyebach",
-              "detail": "Kirchstrasse, Freienbach",
-              "date": "2026-10-17",
+              "detail": "Kirchstrasse, Freienbach — ongoing, last day: 18 October 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbschtmaert-freyebach/"
             },
             {
-              "label": "FRÖNELI-FÄSCHT",
-              "detail": "Stoos",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/froeneli-faescht/"
-            },
-            {
               "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
-              "detail": "Einsiedeln",
-              "date": "2026-10-17",
+              "detail": "Einsiedeln — ongoing, last day: 24 October 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
-            },
-            {
-              "label": "Candy Dulfer - DER HERBST 26",
-              "detail": "Restaurant Rôtisserie Waldstätterhof Brunnen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/candy-dulfer-der-herbst-26-1/"
-            },
-            {
-              "label": "Requiem (CH), Crypt (CH) & Vorax (CH)",
-              "detail": "Siebnen — ongoing, last day: 17 October 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/requiem-ch-crypt-ch-vorax-ch/"
             },
             {
               "label": "SCHWIIZERGOOFE FERIENSPASS",
               "detail": "Stoos Lodge, Morschach — ongoing, last day: 18 October 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schwiizergoofe-ferienspass/"
             },
             {
               "label": "Guided Hike to the Hochstuckli | Light & Landscape",
               "detail": "Sattel-Hochstuckli AG, Sattel — ongoing, last day: 18 October 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/guided-hike-to-the-hochstuckli-light-landscape/"
-            },
-            {
-              "label": "Children's day - Rondo's mountain adventure",
-              "detail": "Sattel-Hochstuckli AG, Sattel — ongoing, last day: 17 October 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/childrens-day-rondos-mountain-adventure/"
             },
             {
               "label": "Light & Landscape",
               "detail": "Sattel-Hochstuckli, Sattel — ongoing, last day: 18 October 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/light-landscape/"
+            },
+            {
+              "label": "Heirihütte brunch",
+              "detail": "Alpwirtschaft Heiri-Hütte, Arth — ongoing, last day: 18 October 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brunch-allheirihuette/"
+            },
+            {
+              "label": "Greifler-Musig \"Arther Chilbi\"",
+              "detail": "Restaurant Engel, Arth",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/greifler-musig-arther-chilbi/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "de": {
       "canton": "SZ",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "26",
+          "value": "24",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Trail Run Einsiedeln",
+              "detail": "8840 Einsiedeln, Einsiedeln",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/trail-run-einsiedeln/"
+            },
+            {
+              "label": "Zwischen Sehnsucht und Selbsttäuschung: Die Reise als Spiegel",
+              "detail": "Schwyz",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-sehnsucht-und-selbsttaeuschung-die-reise-als-spiegel/"
+            },
+            {
               "label": "10 Jahre The Rolling Barrels (CH), Simi & The Shy Guys (CH) & Cross Country (CH)",
-              "detail": "Siebnen",
-              "date": "2026-10-17",
+              "detail": "Siebnen — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/10-jahre-the-rolling-barrels-ch-simi-the-shy-guys-ch-cross-country-ch/"
             },
             {
               "label": "Herbschtmärt Freyebach",
-              "detail": "Kirchstrasse, Freienbach",
-              "date": "2026-10-17",
+              "detail": "Kirchstrasse, Freienbach — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbschtmaert-freyebach/"
             },
             {
-              "label": "FRÖNELI-FÄSCHT",
-              "detail": "Stoos",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/froeneli-faescht/"
-            },
-            {
               "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
-              "detail": "Einsiedeln",
-              "date": "2026-10-17",
+              "detail": "Einsiedeln — läuft, letzter Tag: 24. Oktober 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
-            },
-            {
-              "label": "Candy Dulfer - DER HERBST 26",
-              "detail": "Restaurant Rôtisserie Waldstätterhof Brunnen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/candy-dulfer-der-herbst-26-1/"
-            },
-            {
-              "label": "Requiem (CH), Crypt (CH) & Vorax (CH)",
-              "detail": "Siebnen — läuft, letzter Tag: 17. Oktober 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/requiem-ch-crypt-ch-vorax-ch/"
             },
             {
               "label": "SCHWIIZERGOOFE FERIENSPASS",
               "detail": "Stoos Lodge, Morschach — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schwiizergoofe-ferienspass/"
             },
             {
               "label": "Geführte Wanderung aufs Hochstuckli | Light & Landscape",
               "detail": "Sattel-Hochstuckli AG, Sattel — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/guided-hike-to-the-hochstuckli-light-landscape/"
-            },
-            {
-              "label": "Kindertag - Rondos Bergabenteuer",
-              "detail": "Sattel-Hochstuckli AG, Sattel — läuft, letzter Tag: 17. Oktober 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/childrens-day-rondos-mountain-adventure/"
             },
             {
               "label": "Light & Landscape",
               "detail": "Sattel-Hochstuckli, Sattel — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/light-landscape/"
+            },
+            {
+              "label": "Heirihütte Brunch",
+              "detail": "Alpwirtschaft Heiri-Hütte, Arth — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brunch-allheirihuette/"
+            },
+            {
+              "label": "Greifler-Musig \"Arther Chilbi\"",
+              "detail": "Restaurant Engel, Arth",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/greifler-musig-arther-chilbi/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     },
     "fr": {
       "canton": "SZ",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "26",
+          "value": "24",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Trail Run Einsiedeln",
+              "detail": "8840 Einsiedeln, Einsiedeln",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/trail-run-einsiedeln/"
+            },
+            {
+              "label": "Zwischen Sehnsucht und Selbsttäuschung: Die Reise als Spiegel",
+              "detail": "Schwyz",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-sehnsucht-und-selbsttaeuschung-die-reise-als-spiegel/"
+            },
+            {
               "label": "10 Jahre The Rolling Barrels (CH), Simi & The Shy Guys (CH) & Cross Country (CH)",
-              "detail": "Siebnen",
-              "date": "2026-10-17",
+              "detail": "Siebnen — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/10-jahre-the-rolling-barrels-ch-simi-the-shy-guys-ch-cross-country-ch/"
             },
             {
               "label": "Herbschtmärt Freyebach",
-              "detail": "Kirchstrasse, Freienbach",
-              "date": "2026-10-17",
+              "detail": "Kirchstrasse, Freienbach — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbschtmaert-freyebach/"
             },
             {
-              "label": "FRÖNELI-FÄSCHT",
-              "detail": "Stoos",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/froeneli-faescht/"
-            },
-            {
               "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
-              "detail": "Einsiedeln",
-              "date": "2026-10-17",
+              "detail": "Einsiedeln — en cours, dernier jour : 24 octobre 2026",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
-            },
-            {
-              "label": "Candy Dulfer - DER HERBST 26",
-              "detail": "Restaurant Rôtisserie Waldstätterhof Brunnen",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/candy-dulfer-der-herbst-26-1/"
-            },
-            {
-              "label": "Requiem (CH), Crypt (CH) & Vorax (CH)",
-              "detail": "Siebnen — en cours, dernier jour : 17 octobre 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/requiem-ch-crypt-ch-vorax-ch/"
             },
             {
               "label": "SCHWIIZERGOOFE FERIENSPASS",
               "detail": "Stoos Lodge, Morschach — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schwiizergoofe-ferienspass/"
             },
             {
               "label": "Guided Hike to the Hochstuckli | Light & Landscape",
               "detail": "Sattel-Hochstuckli AG, Sattel — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/guided-hike-to-the-hochstuckli-light-landscape/"
-            },
-            {
-              "label": "Children's day - Rondo's mountain adventure",
-              "detail": "Sattel-Hochstuckli AG, Sattel — en cours, dernier jour : 17 octobre 2026",
-              "date": "2026-10-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/childrens-day-rondos-mountain-adventure/"
             },
             {
               "label": "Light & Landscape",
               "detail": "Sattel-Hochstuckli, Sattel — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-17",
+              "date": "2026-10-18",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/light-landscape/"
+            },
+            {
+              "label": "Heirihütte Brunch",
+              "detail": "Alpwirtschaft Heiri-Hütte, Arth — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brunch-allheirihuette/"
+            },
+            {
+              "label": "Greifler-Musig \"Arther Chilbi\"",
+              "detail": "Restaurant Engel, Arth",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/greifler-musig-arther-chilbi/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-10-16T10:44:21.348Z"
+          "updatedAt": "2026-10-17T17:01:03.100Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T00:18:32.280Z"
     }
   }
 }
