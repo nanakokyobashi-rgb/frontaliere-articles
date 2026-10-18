@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T15:52:30.685Z",
-  "contentHash": "74514861e0c386524ffd1b9cb6366f6139889bca3b252235c7728cf1ad728832",
+  "updatedAt": "2026-10-18T16:48:41.470Z",
+  "contentHash": "fffb1dad586eb56774ec761efce1aa78d3266ac94cde9afa9d03bd535915b22a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -15,11 +15,6 @@
     {
       "id": "farmacie-di-turno",
       "updatedAt": "2026-10-18T10:29:03.820Z",
-      "keyFacts": 0
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-18T04:48:36.783Z",
       "keyFacts": 0
     },
     {
@@ -99,20 +94,6 @@
           "updatedAt": "2026-10-18T10:29:03.820Z"
         },
         {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Delémont",
-              "value": "8 °C",
-              "detail": "oggi da 8 a 9 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-18T04:48:36.783Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -178,7 +159,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-18T16:48:41.470Z"
     },
     "en": {
       "canton": "JU",
@@ -250,20 +231,6 @@
           "updatedAt": "2026-10-18T10:29:03.820Z"
         },
         {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Delémont",
-              "value": "8 °C",
-              "detail": "today from 8 to 9 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-18T04:48:36.783Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -325,7 +292,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-18T16:48:41.470Z"
     },
     "de": {
       "canton": "JU",
@@ -397,20 +364,6 @@
           "updatedAt": "2026-10-18T10:29:03.820Z"
         },
         {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Delémont",
-              "value": "8 °C",
-              "detail": "heute 8 bis 9 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-18T04:48:36.783Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -472,7 +425,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-18T16:48:41.470Z"
     },
     "fr": {
       "canton": "JU",
@@ -544,20 +497,6 @@
           "updatedAt": "2026-10-18T10:29:03.820Z"
         },
         {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Delémont",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 8 à 9 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-18T04:48:36.783Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -615,7 +554,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-18T16:48:41.470Z"
     }
   }
 }
