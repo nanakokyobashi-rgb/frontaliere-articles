@@ -416,6 +416,16 @@ function resolveJournalistAuthor(doc) {
   return (doc?.authorUid ? getAuthorByUid(doc.authorUid) : undefined) || null;
 }
 
+function classifyJournalistPublishError(error) {
+  // A deterministic negative vision verdict is final for this submission: the
+  // journalist must choose or provide another cover. The verifier's retryable
+  // outages and stale capabilities leave the Firestore document queued for a
+  // later scheduled drain; this process still attempts each snapshot row once.
+  if (error?.imageQualityFailure === true) return 'failed';
+  if (error?.retryable === true) return 'deferred';
+  return 'failed';
+}
+
 async function processDoc(db, FieldValue, docSnap) {
   const docId = docSnap.id;
   const doc = docSnap.data();
@@ -595,6 +605,12 @@ async function processDoc(db, FieldValue, docSnap) {
       console.error(`  🛑 ${docId}: registrazione interrotta / lock di registrazione — fatale, il ciclo si ferma qui (il documento resta queued)`);
       throw err;
     }
+    const disposition = classifyJournalistPublishError(err);
+    if (disposition === 'deferred') {
+      const message = err instanceof Error ? err.message : String(err);
+      console.warn(`  ⏳ ${docId}: verifier/copertina temporaneamente indisponibile — resta queued per un prossimo drain: ${message}`);
+      return { ok: false, deferred: true };
+    }
     const message = err instanceof Error ? err.message : String(err);
     console.error(`  ❌ ${docId} failed: ${message}`);
     try {
@@ -626,6 +642,7 @@ async function main() {
 
   let published = 0;
   let failed = 0;
+  let deferred = 0;
   const publishedIds = [];
   const publishedDocs = [];
   const requeuedIds = [];
@@ -650,6 +667,8 @@ async function main() {
         const id = result.id || docSnap.id;
         publishedIds.push(id);
         publishedDocs.push({ docRef: docSnap.ref, id });
+      } else if (result.deferred) {
+        deferred += 1;
       } else {
         failed += 1;
       }
@@ -709,7 +728,7 @@ async function main() {
     }
   }
 
-  console.log(`[publish-journalist-article] done — published=${published} failed=${failed}`);
+  console.log(`[publish-journalist-article] done — published=${published} failed=${failed} deferred=${deferred}`);
 }
 
 const invokedDirectly = (() => {
