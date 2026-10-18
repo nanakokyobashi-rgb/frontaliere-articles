@@ -1800,6 +1800,18 @@
       "firstSeenAt": "2026-10-18T17:26:43.852Z",
       "lastValidatedAt": "2026-10-18T17:26:43.852Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "imposte cantonali canton Zurigo aliquote e deduzioni",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T21:19:25.389Z",
+      "lastValidatedAt": "2026-10-18T21:19:25.389Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -10173,18 +10185,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/scuola-e-impresa-a-bodio-lomnago-casa-agricola-apre-agli-studenti-con-la-mostra-labstore/2710282": {
-      "section": "frontaliere",
-      "ts": 1792177820741
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/due-milioni-alla-liuc-per-nuovi-laboratori-di-ricerca-per-le-imprese-un-primo-passo-verso-mill/2710651": {
-      "section": "frontaliere",
-      "ts": 1792178177980
-    },
-    "frontaliere::https://unia.ch/it/professioni-rami/parrucchiere/sondaggio-rivendicazioni-ccl": {
-      "section": "frontaliere",
-      "ts": 1792182208504
-    },
     "frontaliere::https://www.tio.ch/svizzera/attualita/1957141/pensionato-la-spunta-contro-le-ffs-dopo-mesi-di-battaglia": {
       "section": "frontaliere",
       "ts": 1792192585595
@@ -10448,6 +10448,30 @@
     "svizzera::https://www.tio.ch/ticino/cronaca/1957584/esce-di-strada-e-si-ribalta-nel-bosco-due-persone-in-ospedale": {
       "section": "svizzera",
       "ts": 1792349830385
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1957586/mancato-accesso-agli-aiuti-sociali-il-tema-torna-in-parlamento": {
+      "section": "frontaliere",
+      "ts": 1792356677058
+    },
+    "frontaliere::https://comozero.it/attualita/il-futuro-nasce-a-como-ecco-il-primo-computer-quantistico-di-nuova-generazione-butti-nuova-frontiera": {
+      "section": "frontaliere",
+      "ts": 1792356939946
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/imprese-storiche-oltre-663mila-euro-per-41-attivita-della-provincia-di-varese/2711815": {
+      "section": "frontaliere",
+      "ts": 1792356952518
+    },
+    "frontaliere::https://comozero.it/sport/pagelle-como-liberali-capolavoro-da-7-5-nico-paz-versione-marziano-merita-8": {
+      "section": "frontaliere",
+      "ts": 1792357319513
+    },
+    "svizzera::https://www.tio.ch/ticino/politica/1957606/manifestazioni-non-autorizzate-a-lugano-l-udc-la-legge-vale-per-tutti": {
+      "section": "svizzera",
+      "ts": 1792358107747
+    },
+    "svizzera::https://www.tio.ch/sport/calcio/1957599/la-lazio-sbanca-torino-e-resta-incollata-all-inter": {
+      "section": "svizzera",
+      "ts": 1792358122896
     }
   }
 }
