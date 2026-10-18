@@ -61,4 +61,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'muehlehorn-strada-chiusa-ottobre',
+ category: 'pratico',
+ date: '2026-10-18T03:25:08.301Z',
+ image: '/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GL'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

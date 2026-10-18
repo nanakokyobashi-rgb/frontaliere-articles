@@ -110,6 +110,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T03:06:56.481Z",
       "lastFailureAt": "2026-10-18T03:06:56.481Z"
+    },
+    {
+      "articleId": "muehlehorn-strada-chiusa-ottobre",
+      "title": "Mühlehorn: Alte Kerenzerstrasse chiusa dal 19 ottobre",
+      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T03:25:08.346Z",
+      "lastFailureAt": "2026-10-18T03:25:08.346Z"
     }
   ]
 }

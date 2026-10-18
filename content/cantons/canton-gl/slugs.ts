@@ -8,6 +8,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'imposta-seconde-case-glarona': { it: 'imposta-seconde-case-glarona', en: 'secondary-homes-tax-glarus', de: 'zweitwohnungssteuer-glarus', fr: 'taxe-residences-secondaires-glaris' },
  'klontalstrasse-staldengarten-butzi': { it: 'klontalstrasse-staldengarten-butzi', en: 'klontalstrasse-traffic-restriction', de: 'verkehrseinschraenkung-kloentalerstrasse', fr: 'restriction-trafic-kloentalerstrasse' },
  'eventi-weekend-glarona': { it: 'eventi-weekend-glarona', en: 'weekend-events-glarus', de: 'wochenend-veranstaltungen-glarus', fr: 'evenements-week-end-glaris' },
+ 'muehlehorn-strada-chiusa-ottobre': { it: 'muehlehorn-strada-chiusa-ottobre', en: 'muehlehorn-road-closure-october', de: 'muehlehorn-strassensperrung-oktober', fr: 'muehlehorn-route-fermee-octobre' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

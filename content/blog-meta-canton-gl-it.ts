@@ -18,6 +18,9 @@ const blogMetaCantonGlIt: Record<string, string> = {
     'blog.article.eventi-weekend-glarona.title': 'Eventi del weekend nel Canton Glarona: cosa fare sabato e domenica',
     'blog.article.eventi-weekend-glarona.excerpt': 'Eventi nel Canton Glarona ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
     'blog.article.eventi-weekend-glarona.imageAlt': 'Eventi del weekend nel Canton Glarona',
+    'blog.article.muehlehorn-strada-chiusa-ottobre.title': 'Mühlehorn: Alte Kerenzerstrasse chiusa dal 19 ottobre',
+    'blog.article.muehlehorn-strada-chiusa-ottobre.excerpt': 'Mühlehorn: chiusura totale di Alte Kerenzerstrasse tra Hanenchilchli e Rüteggli fino al 23 ottobre 2026, ore 17.00.',
+    'blog.article.muehlehorn-strada-chiusa-ottobre.imageAlt': 'Alte Kerenzerstrasse a Mühlehorn durante i lavori stradali',
 };
 
 export default blogMetaCantonGlIt;

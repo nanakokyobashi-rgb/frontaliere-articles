@@ -197,6 +197,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-muehlehorn-strada-chiusa-ottobre': {
+    title: 'Mühlehorn: Alte Kerenzerstrasse chiusa dal 19 ottobre',
+    description: 'Dal 19 al 23 ottobre 2026 è prevista la chiusura di Alte Kerenzerstrasse a Mühlehorn, tra Hanenchilchli e Rüteggli. Deviazione sulla Kerenzerbergstrasse.',
+    keywords: 'frontalieri, ticino, svizzera, italia, mühlehorn, alte, kerenzerstrasse, chiusa',
+    ogTitle: 'Alte Kerenzerstrasse chiusa a Mühlehorn',
+    ogDescription: 'La Alte Kerenzerstrasse sarà completamente chiusa tra Hanenchilchli e Rüteggli dal 19 al 23 ottobre 2026, fino alle 17.00. Il traffico sarà deviato sulla Kerenzerbergstrasse; il completamento dei lavori è previsto nella primavera 2027.',
+    canonicalPath: '/articoli-glarona/muehlehorn-strada-chiusa-ottobre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mühlehorn: Alte Kerenzerstrasse chiusa dal 19 ottobre",
+      "description": "Dal 19 al 23 ottobre 2026 è prevista la chiusura di Alte Kerenzerstrasse a Mühlehorn, tra Hanenchilchli e Rüteggli. Deviazione sulla Kerenzerbergstrasse.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Alte Kerenzerstrasse a Mühlehorn durante i lavori stradali"
+      },
+      "datePublished": "2026-10-18T03:25:08+00:00",
+      "dateModified": "2026-10-18T03:25:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-glarona/muehlehorn-strada-chiusa-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
