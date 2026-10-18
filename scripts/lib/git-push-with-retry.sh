@@ -164,6 +164,10 @@ while [ $# -gt 0 ]; do
   esac
 done
 
+# Callers may pass a fully qualified ref. Keep the helper's existing branch
+# handling consistent while treating refs/heads/main as the protected main.
+BRANCH="${BRANCH#refs/heads/}"
+
 # Direct pushes to this repo's `main` must authenticate as GITHUB_PAT or
 # APP_TOKEN (ruleset bypass identities). Falling back to the ambient
 # GITHUB_TOKEN is how GH013 still landed after the opt-in rewrite: a mint
@@ -345,6 +349,9 @@ apply_stashed_wip_for_resolver() {
 # --no-verify: skip the .githooks/pre-push sibling-patterns gate. Every caller
 # of this helper is a data-refresh workflow pushing generated content to main —
 # not a pre-PR dev push, which is what the gate exists for (issue #3809).
+# The main-tree shrink check below runs before every push and remains active
+# even with `--no-verify`; it protects automated writers from replacing the
+# full repository tree with an incomplete checkout or staged snapshot.
 # npm ci's `prepare` script activates core.hooksPath=.githooks in CI too, and
 # since 2026-07-08 the strict gate deterministically rejected every article
 # push (run 29090019854: 13 generated files → 10871 sibling candidates →
@@ -362,7 +369,29 @@ attempt=1
 # same stream as before.
 PUSH_STDERR_FILE="$(mktemp)"
 trap 'rm -f -- "$PUSH_STDERR_FILE"' EXIT
+TREE_GUARD_FAILED=0
+TREE_SHRINK_GUARD_SCRIPT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../ci" && pwd)/guard-main-tree-shrink.mjs"
+guard_main_tree_shrink() {
+  [ "${BRANCH#refs/heads/}" = "main" ] || return 0
+
+  local before after
+  if ! before="$(git rev-parse --verify 'refs/remotes/origin/main^{commit}' 2>/dev/null)"; then
+    echo "::error::Cannot inspect origin/main; refusing push without the main-tree integrity check."
+    return 1
+  fi
+  if ! after="$(git rev-parse --verify 'HEAD^{commit}' 2>/dev/null)"; then
+    echo "::error::Cannot inspect HEAD; refusing push without the main-tree integrity check."
+    return 1
+  fi
+  node "$TREE_SHRINK_GUARD_SCRIPT" --before "$before" --after "$after"
+}
+
 push_head() {
+  if ! guard_main_tree_shrink; then
+    TREE_GUARD_FAILED=1
+    return 1
+  fi
+
   local status=0
   run_bounded "$GIT_PUSH_WITH_RETRY_PUSH_TIMEOUT_SECONDS" "git push --no-thin origin HEAD:${BRANCH}" \
     git -c pack.window=0 -c pack.threads=1 push --no-thin --no-verify origin "HEAD:${BRANCH}" \
@@ -371,6 +400,11 @@ push_head() {
   return "$status"
 }
 until push_head; do
+  if [ "$TREE_GUARD_FAILED" = "1" ]; then
+    echo "::error::Push refused by the main-tree integrity check; this is not a retryable ref race."
+    exit 1
+  fi
+
   # A ruleset / protected-branch decline is not a ref race: the rebase below
   # cannot change the verdict, and --soft-fail-exhausted does not apply (it
   # covers a lost race whose delta the next run recaptures, while a declined

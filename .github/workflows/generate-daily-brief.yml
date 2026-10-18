@@ -323,6 +323,9 @@ jobs:
           PERMANENT_OUTCOME_LOG="$(mktemp)"
           ATTEMPT_LOG="$(mktemp)"
           for attempt in 1 2 3; do
+            if [ "$TARGET" = 'main' ]; then
+              node scripts/ci/guard-main-tree-shrink.mjs --before origin/main --after HEAD || exit 1
+            fi
             : > "$ATTEMPT_LOG"
             set +e
             git push "$REMOTE" "HEAD:$TARGET" 2>&1 | tee "$ATTEMPT_LOG"

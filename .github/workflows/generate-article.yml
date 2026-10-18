@@ -1935,6 +1935,9 @@ jobs:
           TARGET="${{ github.ref_name }}"
           REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
           for attempt in 1 2 3 4 5; do
+            if [ "$TARGET" = 'main' ]; then
+              node scripts/ci/guard-main-tree-shrink.mjs --before origin/main --after HEAD || exit 1
+            fi
             if git push "$REMOTE" "HEAD:$TARGET"; then
               echo "pushed to $TARGET"
               exit 0

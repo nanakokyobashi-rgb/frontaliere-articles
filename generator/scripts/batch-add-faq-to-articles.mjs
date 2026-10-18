@@ -378,6 +378,20 @@ export function gitPushChainTimeoutMs(chainStartedAt, commandTimeoutMs, now = Da
   return Math.min(commandTimeoutMs, remainingMs);
 }
 
+function guardMainTreeBeforePush(chainStartedAt) {
+  execFileSync(process.execPath, [
+    resolve(ROOT, 'scripts/ci/guard-main-tree-shrink.mjs'),
+    '--before',
+    'origin/main',
+    '--after',
+    'HEAD',
+  ], {
+    cwd: ROOT,
+    stdio: 'inherit',
+    timeout: gitPushChainTimeoutMs(chainStartedAt, 30_000),
+  });
+}
+
 /**
  * Il comando di stage+commit di un checkpoint. Oltre al corpus e al progress
  * file mette in stage il registro dei rifiuti FAQ, come fa lo step di commit
@@ -403,6 +417,7 @@ function gitCommitAndPush(label, { sectionBodyDir, progressFile }) {
     // Checkpoint pushes use the Remote Config PAT; the workflow grants only
     // contents: read and disables checkout's ambient credential persistence.
     try {
+      guardMainTreeBeforePush(chainStartedAt);
       authenticatedGit(['push', 'origin', 'main'], {
         cwd: ROOT,
         stdio: 'pipe',
@@ -418,6 +433,7 @@ function gitCommitAndPush(label, { sectionBodyDir, progressFile }) {
           stdio: 'pipe',
           timeout: gitPushChainTimeoutMs(chainStartedAt, 30000, Date.now(), GIT_REBASE_ABORT_RESERVE_MS),
         });
+        guardMainTreeBeforePush(chainStartedAt);
         authenticatedGit(['push', 'origin', 'main'], {
           cwd: ROOT,
           stdio: 'pipe',

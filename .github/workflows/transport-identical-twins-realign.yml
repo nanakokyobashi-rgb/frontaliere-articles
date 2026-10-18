@@ -144,6 +144,7 @@ jobs:
             fi
             git add -- scripts/ci/loop-sync-manifest.json
             git commit -m "chore(loop): riallinea baseline dopo trasporto"
+            node scripts/ci/guard-main-tree-shrink.mjs --before origin/main --after HEAD || exit 1
             if git push origin HEAD:main; then
               exit 0
             fi
@@ -258,6 +259,7 @@ jobs:
               git add -- scripts/ci/adapted-drift-ratchet.json
             fi
             git commit -m "chore(loop): riallinea baseline adapted dichiarate"
+            node scripts/ci/guard-main-tree-shrink.mjs --before origin/main --after HEAD || exit 1
             if git push origin HEAD:main; then
               # Le voci certificate sono su main; un esito parziale (rc=3)
               # resta comunque un rosso da guardare.
