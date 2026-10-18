@@ -1233,9 +1233,9 @@
       "path": "scripts/ci/triage-sweep.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "80e52c7e8a3c29ad",
-        "corpus": "80e52c7e8a3c29ad",
-        "alignedAt": "2026-09-15"
+        "site": "347929c4fefa321a",
+        "corpus": "347929c4fefa321a",
+        "alignedAt": "2026-10-18"
       }
     },
     {
@@ -1464,9 +1464,9 @@
       "path": "scripts/ci/orphan-pr-custodian.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e2a4715a3e983c0e",
-        "corpus": "e2a4715a3e983c0e",
-        "alignedAt": "2026-09-20"
+        "site": "5e06bae213153fb0",
+        "corpus": "5e06bae213153fb0",
+        "alignedAt": "2026-10-18"
       }
     },
     {
@@ -1577,9 +1577,9 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "cb98d57267b1062b",
-        "corpus": "cb98d57267b1062b",
-        "alignedAt": "2026-10-14"
+        "site": "c7d28bad6f7bcc94",
+        "corpus": "c7d28bad6f7bcc94",
+        "alignedAt": "2026-10-18"
       }
     },
     {
