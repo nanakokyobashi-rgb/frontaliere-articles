@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "fisco",
-  "updatedAt": "2026-10-17T01:04:37.805Z",
-  "contentHash": "15b49b3f5b5fbe88f08fcc1990f6b2021db4a625625b5cffd0ca82a5af2c7378",
+  "updatedAt": "2026-10-18T11:23:32.247Z",
+  "contentHash": "e511ef98332c7622e1d0655279bb6975ecb79a5409ae94fe06b68512cdc5d538",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -108,6 +108,12 @@
           "date": "2026-10-17T00:59:33.660Z"
         },
         {
+          "title": "Stabilità del tasso di disoccupazione nel Canton Neuchâtel a luglio 2026",
+          "url": "/articoli-neuchatel/disoccupazione-neuchatel-luglio-2026/",
+          "excerpt": "Il numero di disoccupati nel Canton Neuchâtel è aumentato di 54 unità nel luglio 2026, raggiungendo le 3.905 persone.",
+          "date": "2026-10-18T11:17:54.444Z"
+        },
+        {
           "title": "Imposta successione Neuchâtel: aliquote e esenzioni",
           "url": "/articoli-svizzera/imposta-successione-donazione-neuchatel-aliquote/",
           "excerpt": "Scopri le aliquote dell'imposta di successione e donazione nel Cantone di Neuchâtel, le esenzioni per coniuge e discendenti e i termini per la dichiarazione.",
@@ -141,7 +147,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-17T01:04:37.805Z"
+      "updatedAt": "2026-10-18T11:23:32.247Z"
     },
     "en": {
       "canton": "NE",
@@ -232,6 +238,12 @@
           "date": "2026-10-17T00:59:33.660Z"
         },
         {
+          "title": "Stability of the unemployment rate in the Canton of Neuchâtel in July 2026",
+          "url": "/en/neuchatel-articles/neuchatel-unemployment-july-2026/",
+          "excerpt": "The number of unemployed people in the Canton of Neuchâtel increased by 54 in July 2026, reaching 3.905 people.",
+          "date": "2026-10-18T11:17:54.444Z"
+        },
+        {
           "title": "Neuchâtel inheritance tax: rates and exemptions",
           "url": "/en/swiss-articles/inheritance-and-donation-tax-neuchatel-rates/",
           "excerpt": "Learn about inheritance and gift tax rates in the Canton of Neuchâtel, spouse and descendant exemptions, and filing deadlines.",
@@ -265,7 +277,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-17T01:04:37.805Z"
+      "updatedAt": "2026-10-18T11:23:32.247Z"
     },
     "de": {
       "canton": "NE",
@@ -356,6 +368,12 @@
           "date": "2026-10-17T00:59:33.660Z"
         },
         {
+          "title": "Stabilität der Arbeitslosenquote im Kanton Neuenburg im Juli 2026",
+          "url": "/de/neuenburg-artikel/neuenburg-arbeitslosigkeit-juli-2026/",
+          "excerpt": "Die Zahl der Arbeitslosen im Kanton Neuenburg ist im Juli 2026 um 54 Personen gestiegen und erreichte 3.905 Personen.",
+          "date": "2026-10-18T11:17:54.444Z"
+        },
+        {
           "title": "Erbschaftssteuer Neuenburg: Steuersätze und Befreiungen",
           "url": "/de/schweiz-artikel/erbschaft-und-spendensteuer-neuenburg-satz/",
           "excerpt": "Informieren Sie sich über die Erbschafts- und Schenkungssteuersätze im Kanton Neuenburg, die Befreiungen für Ehegatten und Nachkommen und die Fristen für die Deklaration.",
@@ -389,7 +407,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-17T01:04:37.805Z"
+      "updatedAt": "2026-10-18T11:23:32.247Z"
     },
     "fr": {
       "canton": "NE",
@@ -480,6 +498,12 @@
           "date": "2026-10-17T00:59:33.660Z"
         },
         {
+          "title": "Stabilité du taux de chômage dans le canton de Neuchâtel en juillet 2026",
+          "url": "/fr/articles-neuchatel/chomage-neuchatel-juillet-2026/",
+          "excerpt": "Le nombre de chômeurs dans le canton de Neuchâtel a augmenté de 54 unités en juillet 2026, atteignant 3'905 personnes.",
+          "date": "2026-10-18T11:17:54.444Z"
+        },
+        {
           "title": "Impôt succession Neuchâtel : taux et exonérations",
           "url": "/fr/articles-suisse/impot-succession-donation-neuchatel-taux/",
           "excerpt": "Découvrez les taux de l'impôt sur les successions et donations dans le canton de Neuchâtel, les exonérations pour conjoint et descendants et les délais de déclaration.",
@@ -513,7 +537,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-17T01:04:37.805Z"
+      "updatedAt": "2026-10-18T11:23:32.247Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T19:17:26.345Z",
-  "contentHash": "44597080f5d7aab8c7058310a6804601d0011c9eb115704ae9d5975e0f29cdf8",
+  "updatedAt": "2026-10-18T11:23:32.247Z",
+  "contentHash": "eaf831af973d3f5ba335afb6c9a7c77397f16d276de4cc73bb859da33ecd48c4",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Stabilità del tasso di disoccupazione nel Canton Neuchâtel a luglio 2026",
+          "url": "/articoli-neuchatel/disoccupazione-neuchatel-luglio-2026/",
+          "excerpt": "Il numero di disoccupati nel Canton Neuchâtel è aumentato di 54 unità nel luglio 2026, raggiungendo le 3.905 persone.",
+          "date": "2026-10-18T11:17:54.444Z"
+        },
+        {
           "title": "Eventi del weekend nel Canton Neuchâtel: cosa fare sabato e domenica",
           "url": "/articoli-neuchatel/eventi-weekend-neuchatel/",
           "excerpt": "Eventi nel Canton Neuchâtel ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
@@ -94,12 +100,6 @@
           "url": "/articoli-neuchatel/nuovo-centro-asilo-couvet/",
           "excerpt": "Nuova struttura prevista in rue du 1er Mars 11, a Couvet Sostituirà il sito attuale di Chemin des Prises 8 Progetto elaborato con il Comune di Val-de-Travers",
           "date": "2026-10-10T19:55:31.284Z"
-        },
-        {
-          "title": "Aldi chiuderà il negozio in centro a Neuchâtel",
-          "url": "/articoli-neuchatel/aldi-chiude-centro-neuchatel/",
-          "excerpt": "Aldi chiuderà a fine novembre 2026.",
-          "date": "2026-10-08T11:37:06.437Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T11:23:32.247Z"
     },
     "en": {
       "canton": "NE",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Stability of the unemployment rate in the Canton of Neuchâtel in July 2026",
+          "url": "/en/neuchatel-articles/neuchatel-unemployment-july-2026/",
+          "excerpt": "The number of unemployed people in the Canton of Neuchâtel increased by 54 in July 2026, reaching 3.905 people.",
+          "date": "2026-10-18T11:17:54.444Z"
+        },
+        {
           "title": "Weekend events in the canton of Neuchâtel: what to do Saturday & Sunday",
           "url": "/en/neuchatel-articles/weekend-events-neuchatel/",
           "excerpt": "Events in the canton of Neuchâtel every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
@@ -193,11 +199,6 @@
           "url": "/en/neuchatel-articles/new-asylum-center-couvet/",
           "excerpt": "New structure planned in rue du 1er Mars 11, in Couvet It will replace the current site of Chemin des Prises 8 Project developed with the Municipality",
           "date": "2026-10-10T19:55:31.284Z"
-        },
-        {
-          "title": "Aldi will close the downtown store in Neuchâtel",
-          "url": "/en/neuchatel-articles/aldi-closes-neuchatel-city-store/",
-          "date": "2026-10-08T11:37:06.437Z"
         }
       ],
       "links": [
@@ -210,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T11:23:32.247Z"
     },
     "de": {
       "canton": "NE",
@@ -269,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Stabilität der Arbeitslosenquote im Kanton Neuenburg im Juli 2026",
+          "url": "/de/neuenburg-artikel/neuenburg-arbeitslosigkeit-juli-2026/",
+          "excerpt": "Die Zahl der Arbeitslosen im Kanton Neuenburg ist im Juli 2026 um 54 Personen gestiegen und erreichte 3.905 Personen.",
+          "date": "2026-10-18T11:17:54.444Z"
+        },
+        {
           "title": "Veranstaltungen am Wochenende im Kanton Neuenburg: was tun Sa & So",
           "url": "/de/neuenburg-artikel/wochenend-veranstaltungen-neuenburg/",
           "excerpt": "Veranstaltungen im Kanton Neuenburg an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
@@ -291,11 +298,6 @@
           "url": "/de/neuenburg-artikel/neues-asylzentrum-couvet/",
           "excerpt": "Neue Struktur in der Rue du 1er Mars 11 in Couvet geplant Ersetzt den aktuellen Standort von Chemin des Prises 8 Mit der Gemeinde Val-de-Travers ausgearbeitetes",
           "date": "2026-10-10T19:55:31.284Z"
-        },
-        {
-          "title": "Aldi wird die Filiale im Zentrum von Neuenburg schließen",
-          "url": "/de/neuenburg-artikel/aldi-schliesst-filiale-neuenburg/",
-          "date": "2026-10-08T11:37:06.437Z"
         }
       ],
       "links": [
@@ -308,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T11:23:32.247Z"
     },
     "fr": {
       "canton": "NE",
@@ -367,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Stabilité du taux de chômage dans le canton de Neuchâtel en juillet 2026",
+          "url": "/fr/articles-neuchatel/chomage-neuchatel-juillet-2026/",
+          "excerpt": "Le nombre de chômeurs dans le canton de Neuchâtel a augmenté de 54 unités en juillet 2026, atteignant 3'905 personnes.",
+          "date": "2026-10-18T11:17:54.444Z"
+        },
+        {
           "title": "Événements du week-end dans le canton de Neuchâtel : que faire samedi & dimanche",
           "url": "/fr/articles-neuchatel/evenements-week-end-neuchatel/",
           "excerpt": "Événements dans le canton de Neuchâtel chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
@@ -389,12 +397,6 @@
           "url": "/fr/articles-neuchatel/nouveau-centre-asile-couvet/",
           "excerpt": "Nouvelle structure prévue rue du 1er Mars 11, à Couvet Remplacera le site actuel du Chemin des Prises 8 Projet élaboré avec la commune de Val-de-Travers Séance",
           "date": "2026-10-10T19:55:31.284Z"
-        },
-        {
-          "title": "Aldi fermera le magasin du centre-ville de Neuchâtel",
-          "url": "/fr/articles-neuchatel/aldi-ferme-magasin-centre-neuchatel/",
-          "excerpt": "Aldi fermera fin novembre 2026.",
-          "date": "2026-10-08T11:37:06.437Z"
         }
       ],
       "links": [
@@ -407,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T11:23:32.247Z"
     }
   }
 }
