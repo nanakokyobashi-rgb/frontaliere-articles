@@ -19,7 +19,7 @@ test('a retryable cover-verifier failure stays queued; deterministic visual reje
   const classify = loadDispositionClassifier();
 
   assert.equal(classify({ code: 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE', retryable: true }), 'deferred');
-  assert.equal(classify({ code: 'ARTICLE_COVER_STALE_VERIFICATION', retryable: true }), 'deferred');
+  assert.equal(classify({ code: 'ARTICLE_COVER_VERIFICATION_STALE', retryable: true }), 'deferred');
   assert.equal(classify({
     code: 'ARTICLE_COVER_NO_RELEVANT_FALLBACK',
     retryable: true,
