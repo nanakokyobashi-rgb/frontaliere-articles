@@ -775,6 +775,33 @@ test('lo scan non conta `fiscale` come residuo nei titoli francesi', () => {
   }
 });
 
+test('lo scan usa un margine di lingua, ignora fonti e URL francesi ma conserva la CTA italiana', () => {
+  const french = {
+    body1: [
+      'Le salaire en dollars dépend du taux de change.',
+      'Le cours du dollar et le taux de change.',
+      'Droits et devoirs du frontalier salarié',
+      'Source : laregione.ch',
+      'https://www.laregione.ch/economia/123',
+    ].join('\n'),
+  };
+  assert.deepEqual(scanItalianResidue(french, 'fr'), []);
+
+  const cta = {
+    body1: Array.from(
+      { length: ITALIAN_RESIDUE_MIN_LINES },
+      () => 'Usa il calcolatore stipendio netto e la guida dichiarazione redditi.',
+    ).join('\n'),
+  };
+  const hits = scanItalianResidue(cta, 'fr');
+  assert.equal(hits.length, ITALIAN_RESIDUE_MIN_LINES);
+  assert.ok(hits.every((hit) => hit.reason === 'language'));
+  assert.equal(
+    translationSanityIssue({ oldSections: {}, newSections: cta, italianSections: {}, locale: 'fr' }),
+    'italian-residue: 3 righe residue',
+  );
+});
+
 test('lo scan ignora heading localizzati in blockquote, lista e forma Setext', () => {
   const body1 = [
     '> ## What to do',
@@ -2735,18 +2762,28 @@ test('it scaffolding: fatti vuoti, nessuna sezione e riga in testa vengono scrit
   }
 });
 
-test('keyFactsGuardMode: sola verifica e niente sezione richiesta SOLO nel ramo della rimozione', () => {
+test('keyFactsGuardMode richiede i fatti chiave solo se esistono nella fonte', () => {
   const removal = keyFactsGuardMode({ titleMarkerRemoval: true, sourceBody1: IT_BODY1 });
   assert.equal(removal.verifyOnly, true);
   assert.equal(removal.options.requireRecognizedSection, false);
   assert.equal(removal.options.maxSourceBackedResiduals, 0);
 
-  // Fuori dal ramo: la guardia di sempre, con riscrittura e sezione richiesta.
+  // Una riscrittura con la sezione nella fonte deve ancora conservarla.
   const rewrite = keyFactsGuardMode({ titleMarkerRemoval: false, sourceBody1: IT_BODY1 });
   assert.equal(rewrite.verifyOnly, false);
   assert.equal(rewrite.options.requireRecognizedSection, true);
+  assert.match(
+    guardTranslatedKeyFacts({ body1: IT_LONG }, rewrite.options).issue,
+    /sezione Fatti chiave riconosciuta/,
+  );
+
+  // Senza la sezione nella fonte, una traduzione normale non deve inventare
+  // un requisito che l'italiano non aveva.
+  const rewriteWithoutSourceFacts = keyFactsGuardMode({ titleMarkerRemoval: false, sourceBody1: IT_LONG });
+  assert.equal(rewriteWithoutSourceFacts.options.requireRecognizedSection, false);
+  assert.equal(guardTranslatedKeyFacts({ body1: IT_LONG }, rewriteWithoutSourceFacts.options).issue, null);
   const structuralNoSource = keyFactsGuardMode({ structural: true, sourceBody1: IT_LONG });
-  assert.equal(structuralNoSource.options.requireRecognizedSection, false, 'come prima: strutturale senza sezione nella fonte');
+  assert.equal(structuralNoSource.options.requireRecognizedSection, false, 'senza sezione nella fonte');
 
   // Una riscrittura NON di rimozione con fatti vuoti: rifiutata come prima.
   const belowThreshold = ['## Fatti chiave', '- **Cosa**: assegno.', '- **Quando**: non specificato.', '- **Dove**: Zugo.'].join('\n');

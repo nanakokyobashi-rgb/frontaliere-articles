@@ -184,6 +184,7 @@ import {
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYMS,
   normalizeLocalizedToponymText,
+  replaceLocalizedToponymMismatches,
 } from './lib/localized-toponyms.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
@@ -242,10 +243,13 @@ export function bodyFieldsForSource(src, id) {
  * non e' abbastanza probante per autorizzare una riscrittura automatica.
  */
 export const ITALIAN_RESIDUE_MIN_LINES = 3;
-const ITALIAN_RESIDUE_MIN_CONFIDENCE = 0.15;
+const ITALIAN_RESIDUE_MIN_CONFIDENCE = 0.25;
+const ITALIAN_RESIDUE_STRONG_CONFIDENCE = 0.35;
+const ITALIAN_RESIDUE_MIN_SCORE = 100;
 const ITALIAN_RESIDUE_HEADING_RE = /^(?:#{1,6}\s*)?(?:in breve|fatti chiave|domande frequenti|punti chiave|conclusione|conclusioni|fonti|consiglio pratico|cosa cambia|attenzione|da sapere|in sintesi)\s*:?[ \t]*$/iu;
 const ITALIAN_RESIDUE_WORD_RE = /[\p{L}]+(?:['’][\p{L}]+)*/gu;
 const ITALIAN_HEADING_HINT_RE = /\b(?:aggiornament(?:i|o)|canton(?:e|i)|contribut(?:i|o)|cos(?:a|e)|fiscal(?:e|i)|frontalier(?:a|e|i|o)|impatt(?:i|o)|impost(?:a|e)|italian(?:a|e|i|o)|lavorator(?:e|i)|misur(?:a|e)|nuov(?:a|e|i|o)|pension(?:e|i)|reddit(?:i|o)|regol(?:a|e)|salar(?:i|io)|tass(?:a|e)|ticin(?:o|esi)|titol(?:i|o))\b/iu;
+const ITALIAN_SHARED_HEADING_HINT_RE = /\bfrontalier(?:a|e|i|o)\b/iu;
 // `fiscale` is valid Italian and French. It must go through the detector
 // independently of the expected locale instead of the unconditional
 // short-heading fast-path: the same French heading can be audited with a
@@ -276,6 +280,20 @@ function normalizeItalianResidueLine(line) {
     .replace(/[\*_`>#|]/gu, ' ')
     .replace(/\s+/gu, ' ')
     .trim();
+}
+
+function isItalianResidueMetadataLine(clean) {
+  const withoutBullet = String(clean ?? '').replace(/^[-+*]\s+/u, '').trim();
+  if (/^(?:source|sources|fonte|fonti|quelle)\s*(?:[:：]|$)/iu.test(withoutBullet)) return true;
+  return /^(?:(?:https?|ftp):\/\/|www\.)\S+$/iu.test(withoutBullet)
+    || /^(?:[\p{L}\p{N}-]+\.)+[a-z]{2,}(?:[/:?#]\S*)?$/iu.test(withoutBullet);
+}
+
+function isConfidentItalian(detected) {
+  if (detected?.lang !== 'it') return false;
+  if (detected.confidence >= ITALIAN_RESIDUE_STRONG_CONFIDENCE) return true;
+  return detected.confidence >= ITALIAN_RESIDUE_MIN_CONFIDENCE
+    && (detected.scores?.it || 0) >= ITALIAN_RESIDUE_MIN_SCORE;
 }
 
 /** Rimuove i contenitori Markdown che possono precedere un heading. */
@@ -468,7 +486,15 @@ function italianMarkdownHeadingReason(text, locale) {
   const detected = detectLanguageWithConfidence(text, locale);
 
   if (ambiguousHint) {
-    return detected.lang === 'it' && detected.confidence >= ITALIAN_RESIDUE_MIN_CONFIDENCE
+    return isConfidentItalian(detected)
+      ? 'language'
+      : null;
+  }
+
+  // `frontalier` è condiviso con il francese: da solo non è prova di residuo
+  // italiano. Il margine del detector deve confermare l'intera lingua.
+  if (ITALIAN_SHARED_HEADING_HINT_RE.test(text)) {
+    return isConfidentItalian(detected)
       ? 'language'
       : null;
   }
@@ -479,7 +505,7 @@ function italianMarkdownHeadingReason(text, locale) {
   // il titolo e' troppo corto per il profilo trigramma.
   if (localizedHint?.test(text) && !hasItalianHint) return null;
   if (hasItalianHint) return 'language';
-  return detected.lang === 'it' && detected.confidence >= ITALIAN_RESIDUE_MIN_CONFIDENCE
+  return isConfidentItalian(detected)
     ? 'language'
     : null;
 }
@@ -489,6 +515,7 @@ function italianResidueLineReason(line, locale, nextLine, heading = undefined) {
   if (locale === 'it') return null;
   const clean = normalizeItalianResidueLine(line);
   if (!clean) return null;
+  if (isItalianResidueMetadataLine(clean)) return null;
   const headingText = heading === undefined
     ? markdownHeadingText(line, nextLine)
     : heading;
@@ -501,8 +528,8 @@ function italianResidueLineReason(line, locale, nextLine, heading = undefined) {
 
   const words = clean.match(ITALIAN_RESIDUE_WORD_RE) || [];
   if (words.length < 3) return null;
-  const { lang, confidence } = detectLanguageWithConfidence(clean, locale);
-  return lang === 'it' && confidence >= ITALIAN_RESIDUE_MIN_CONFIDENCE ? 'language' : null;
+  const detected = detectLanguageWithConfidence(clean, locale);
+  return isConfidentItalian(detected) ? 'language' : null;
 }
 
 /**
@@ -774,10 +801,9 @@ export function templateHeadingIssue({ italianSections, newSections, locale }) {
 /**
  * Come `processPair` usa la guardia dei fatti chiave.
  *
- * Ovunque, tranne un ramo, e' la guardia di sempre: riscrive `body1` togliendo
- * i fatti vacui (se restano abbastanza superstiti) e pretende una sezione Fatti
- * chiave riconosciuta con almeno un fatto usabile (salvo la riparazione
- * strutturale di una fonte che non ce l'ha).
+ * Ovunque, tranne un ramo, riscrive `body1` togliendo i fatti vacui (se restano
+ * abbastanza superstiti) e pretende una sezione Fatti chiave riconosciuta con
+ * almeno un fatto usabile quando la fonte italiana ne ha una.
  *
  * L'eccezione e' il SOLO ramo che toglie la riga `TITOLO ARTICOLO: <titolo>`
  * da un body italiano (`titleMarkerRemoval`). Decisioni del proprietario del
@@ -802,7 +828,7 @@ export function keyFactsGuardMode({ titleMarkerRemoval = false, structural = fal
   const sourceHasKeyFacts = parseAiSearchSections(sourceBody1).length > 0;
   return {
     verifyOnly: false,
-    options: { requireRecognizedSection: !structural || sourceHasKeyFacts, maxSourceBackedResiduals },
+    options: { requireRecognizedSection: sourceHasKeyFacts, maxSourceBackedResiduals },
   };
 }
 
@@ -2245,6 +2271,7 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
   }
   const itSrc = readFileSync(itPath, 'utf8');
   let trSrc = readFileSync(trPath, 'utf8');
+  const sourceProjection = articleSourceProjection(itPath, itSrc, pair.id);
 
   const availableBodyFields = bodyFieldsForSource(itSrc, pair.id);
   const repairFields = pair.structural && Array.isArray(pair.fields) && pair.fields.length > 0
@@ -2335,7 +2362,15 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
       // cascata e' la stessa, e da qui in poi lo e' anche cio' che le succede.
       const sanitized = sanitizeTranslatedField(out);
       if (sanitized === null) { missingField = f; break; }
-      newSections[f] = sanitized;
+      // La stessa riparazione condivisa dal gate corregge gli esonimi
+      // cantonali rimasti nella lingua sorgente, prima di tutte le guardie.
+      // I nomi ufficiali identici, gli URL e i codici restano protetti dalla
+      // funzione; la guardia viene comunque rieseguita sull'uscita riparata.
+      newSections[f] = replaceLocalizedToponymMismatches({
+        sourceText: sourceProjection,
+        targetText: sanitized,
+        locale: pair.locale,
+      }).text;
     }
   }
 
@@ -2404,7 +2439,7 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
         .filter(Boolean)
         .join('\n');
       assertLocalizedToponymPair({
-        sourceText: articleSourceProjection(itPath, itSrc, pair.id),
+        sourceText: sourceProjection,
         targetText: [
           targetBodyProjection,
           extractArticleProjectionText(trSrc, pair.id, { fields: ['faq'] }),

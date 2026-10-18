@@ -333,6 +333,70 @@ test('non riscrive brand o nomi ufficiali che contengono un toponimo', () => {
   );
 });
 
+test('protegge i nomi ufficiali identici senza assolvere il cantone in prosa', () => {
+  const caisseSource = 'Il servizio è gestito da Caisse Santé Genève.';
+  const caisseTarget = 'Der Dienst wird von Caisse Santé Genève betrieben.';
+  assert.deepEqual(
+    findLocalizedToponymMismatches({
+      sourceText: caisseSource,
+      targetText: caisseTarget,
+      locale: 'de',
+    }),
+    [],
+  );
+  assert.equal(
+    replaceLocalizedToponymMismatches({
+      sourceText: caisseSource,
+      targetText: caisseTarget,
+      locale: 'de',
+    }).text,
+    caisseTarget,
+  );
+
+  const cantonSource = 'Il cantone di Ticino ospita molte aziende.';
+  assert.deepEqual(
+    findLocalizedToponymMismatches({
+      sourceText: cantonSource,
+      targetText: 'Der Kanton Ticino beherbergt viele Unternehmen.',
+      locale: 'de',
+    }),
+    [{ code: 'TI', type: 'canton', locale: 'de', form: 'Ticino', expected: 'Tessin' }],
+  );
+});
+
+test('ripara il cantone Ticino solo fuori dai nomi ufficiali e solo dove serve', () => {
+  const source = 'L’ente ha il nome ufficiale «Fondazione Canton Ticino». Il cantone di Ticino è vicino.';
+  const official = 'Die Organisation heißt «Fondazione Canton Ticino». Der Kanton Ticino liegt in der Nähe.';
+  const repairedDe = replaceLocalizedToponymMismatches({ sourceText: source, targetText: official, locale: 'de' });
+  assert.equal(repairedDe.text, 'Die Organisation heißt «Fondazione Canton Ticino». Der Kanton Tessin liegt in der Nähe.');
+  assert.equal(repairedDe.replacements, 1);
+
+  const repairedFr = replaceLocalizedToponymMismatches({
+    sourceText: source,
+    targetText: 'L’organisation s’appelle «Fondazione Canton Ticino». Le canton de Ticino est proche.',
+    locale: 'fr',
+  });
+  assert.equal(repairedFr.text, 'L’organisation s’appelle «Fondazione Canton Ticino». Le canton de Tessin est proche.');
+  assert.equal(repairedFr.replacements, 1);
+
+  assert.equal(
+    replaceLocalizedToponymMismatches({ sourceText: 'Il cantone di Ticino.', targetText: 'Ticino.', locale: 'it' }).text,
+    'Ticino.',
+  );
+  assert.equal(
+    replaceLocalizedToponymMismatches({ sourceText: 'Il cantone di Ticino.', targetText: 'Ticino.', locale: 'en' }).text,
+    'Ticino.',
+  );
+  assert.equal(
+    replaceLocalizedToponymMismatches({
+      sourceText: 'Il cantone di Ticino.',
+      targetText: '`Ticino` resta codice; Ticino resta prosa.',
+      locale: 'de',
+    }).text,
+    '`Ticino` resta codice; Tessin resta prosa.',
+  );
+});
+
 const ENTRY_RE = /['"]blog\.article\.([^'"]+)\.([^'"]+)['"]\s*:\s*(['"])((?:\\.|(?!\3)[^\r\n])*?)\3\s*(?=[,}])/gu;
 
 function unescapeTsValue(value) {

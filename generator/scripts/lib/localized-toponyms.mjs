@@ -147,13 +147,6 @@ function withoutUrls(value) {
   return String(value || '').replace(URL_PATTERN, ' ');
 }
 
-function containsTerm(value, term) {
-  const text = withoutUrls(normalizeToponymMatchText(value));
-  const pattern = termPattern(term);
-  if (!pattern) return false;
-  return new RegExp(`(?<![\\p{L}\\p{N}])${pattern}(?![\\p{L}\\p{N}])`, 'iu').test(text);
-}
-
 function entityForms(entity) {
   return ENTITY_TYPES.flatMap((type) =>
     LOCALIZED_TOPONYM_LOCALES.flatMap((locale) =>
@@ -278,14 +271,90 @@ const PROTECTED_NAME_PATTERNS = Object.freeze([
   /\bsva\s+(?:aargau|argovie|argovia|tessin|ticino)\b/giu,
 ]);
 
-function protectedRanges(value) {
+const NAME_SPAN_PATTERN = new RegExp(
+  '(?<![\\p{L}\\p{N}])'
+    + '(?:\\p{Lu}[\\p{L}\\p{M}\'’.-]*|[\\p{Lu}\\p{N}]{2,})'
+    + '(?:[ \\t]+(?:\\p{Lu}[\\p{L}\\p{M}\'’.-]*|[\\p{Lu}\\p{N}]{2,}'
+    + '|e|et|&|de|di|del|della|dello|du|des|la|le|von|of|the|for|per)){1,}'
+    + '(?![\\p{L}\\p{N}])',
+  'gu',
+);
+const QUOTED_NAME_PATTERN = /["«“]([^"»”\r\n]+)["»”]/gu;
+const NAME_TOKEN_PATTERN = /[\p{L}\p{N}]+(?:['’.-][\p{L}\p{N}]+)*/gu;
+const NAME_LEADING_STOP_WORDS = new Set(['il', 'lo', 'la', 'i', 'gli', 'le', 'un', 'una', 'uno', 'der', 'die', 'das', 'ein', 'eine', 'einer', 'einem', 'einen', 'the', 'a', 'an', 'le', 'la', 'les', 'un', 'une', 'des']);
+const ADMINISTRATIVE_NAME_PREFIXES = new Set(['canton', 'cantone', 'kanton']);
+const CODE_SPAN_PATTERN = /`+[\s\S]*?`+/gu;
+const MAX_PROTECTED_NAME_SPAN_CHARS = 160;
+const MAX_PROTECTED_NAME_SPAN_TOKENS = 12;
+
+function isLikelyProperNameSpan(value, { quoted = false } = {}) {
+  if (String(value).length > MAX_PROTECTED_NAME_SPAN_CHARS) return false;
+  const tokens = String(value).match(NAME_TOKEN_PATTERN) || [];
+  while (tokens.length > 0 && NAME_LEADING_STOP_WORDS.has(tokens[0].toLocaleLowerCase('en'))) tokens.shift();
+  if (tokens.length < 2) return false;
+  if (tokens.length > MAX_PROTECTED_NAME_SPAN_TOKENS) return false;
+  if (quoted) return true;
+  if (tokens.length >= 3) return true;
+  return !ADMINISTRATIVE_NAME_PREFIXES.has(tokens[0].toLocaleLowerCase('en'));
+}
+
+function normalizeNameSearchText(value) {
+  return withoutUrls(normalizeToponymMatchText(value))
+    .normalize('NFKC')
+    .replace(DASH_VARIANT_PATTERN, '-')
+    .replace(/\s+/gu, ' ')
+    .toLocaleLowerCase('en');
+}
+
+/**
+ * Source-identical proper/official names are opaque to the generic canton
+ * normalizer. A bare `Canton Ticino` in prose remains a canton phrase; a
+ * multiword title such as `Caisse Santé Genève` or `Fondazione Canton Ticino`
+ * is protected only when the same span exists in the Italian source.
+ */
+function sourceIdenticalNameRanges(value, sourceText) {
+  if (!sourceText) return [];
+  const text = normalizeToponymMatchText(value);
+  const sourceSearchText = ` ${normalizeNameSearchText(sourceText)} `;
+  const knownToponymRanges = [];
+  TOPONYM_PATTERN.lastIndex = 0;
+  for (const match of withoutUrls(text).matchAll(TOPONYM_PATTERN)) {
+    const start = match.index ?? 0;
+    knownToponymRanges.push([start, start + match[0].length]);
+  }
+  if (knownToponymRanges.length === 0) return [];
   const ranges = [];
-  for (const pattern of PROTECTED_NAME_PATTERNS) {
+  const add = (start, end, candidate, quoted = false) => {
+    if (!knownToponymRanges.some(([toponymStart, toponymEnd]) => toponymStart >= start && toponymEnd <= end)) return;
+    if (!isLikelyProperNameSpan(candidate, { quoted })) return;
+    const candidateSearchText = normalizeNameSearchText(candidate);
+    if (!candidateSearchText || !sourceSearchText.includes(candidateSearchText)) return;
+    ranges.push([start, end]);
+  };
+
+  NAME_SPAN_PATTERN.lastIndex = 0;
+  for (const match of text.matchAll(NAME_SPAN_PATTERN)) {
+    const start = match.index ?? 0;
+    add(start, start + match[0].length, match[0]);
+  }
+  QUOTED_NAME_PATTERN.lastIndex = 0;
+  for (const match of text.matchAll(QUOTED_NAME_PATTERN)) {
+    const start = (match.index ?? 0) + match[0].indexOf(match[1]);
+    add(start, start + match[1].length, match[1], true);
+  }
+  return ranges;
+}
+
+function protectedRanges(value, sourceText = '') {
+  const ranges = [];
+  const text = String(value);
+  for (const pattern of [...PROTECTED_NAME_PATTERNS, CODE_SPAN_PATTERN]) {
     pattern.lastIndex = 0;
-    for (const match of String(value).matchAll(pattern)) {
+    for (const match of text.matchAll(pattern)) {
       ranges.push([match.index ?? 0, (match.index ?? 0) + match[0].length]);
     }
   }
+  ranges.push(...sourceIdenticalNameRanges(text, sourceText));
   return ranges;
 }
 
@@ -303,9 +372,9 @@ function replaceOutsideUrls(value, pattern, replacer) {
   return result + text.slice(cursor).replace(pattern, replacer);
 }
 
-function localizedToponymHits(value, { protectNames = false, slug = false } = {}) {
+function localizedToponymHits(value, { protectNames = false, sourceText = '', slug = false } = {}) {
   const text = withoutUrls(normalizeToponymMatchText(value));
-  const protectedNameRanges = protectNames ? protectedRanges(text) : [];
+  const protectedNameRanges = protectNames ? protectedRanges(text, sourceText) : [];
   const hits = [];
   const pattern = slug ? TOPONYM_SLUG_PATTERN : TOPONYM_PATTERN;
   for (const match of text.matchAll(pattern)) {
@@ -329,7 +398,7 @@ export function findLocalizedToponymMismatches({ sourceText = '', targetText = '
   if (!LOCALE_SET.has(locale)) return [];
   const sourceEntities = new Set(localizedToponymHits(sourceText).map((hit) => hit.entity.code));
   if (sourceEntities.size === 0) return [];
-  const targetHits = localizedToponymHits(targetText, { protectNames: true, slug });
+  const targetHits = localizedToponymHits(targetText, { protectNames: true, sourceText, slug });
   const issues = [];
   for (const entity of LOCALIZED_TOPONYMS) {
     if (!sourceEntities.has(entity.code)) continue;
@@ -402,7 +471,7 @@ export function replaceLocalizedToponymMismatches({ sourceText = '', targetText 
     text = replaceOutsideUrls(text, pattern, (match, offset, segment) => {
       const start = Number(offset);
       const end = start + match.length;
-      if (protectedRanges(segment).some(([rangeStart, rangeEnd]) => start >= rangeStart && end <= rangeEnd)) {
+      if (protectedRanges(segment, sourceText).some(([rangeStart, rangeEnd]) => start >= rangeStart && end <= rangeEnd)) {
         return match;
       }
       replacements += 1;
