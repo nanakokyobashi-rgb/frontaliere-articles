@@ -250,6 +250,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T17:13:03.704Z",
       "lastFailureAt": "2026-10-18T17:13:03.704Z"
+    },
+    {
+      "articleId": "apprendistato-zurigo-guida-pratica",
+      "title": "Apprendistato a Zurigo: posto, contratto, retribuzione e maturità",
+      "fallbackImage": "/images/blog/apprendistato-formazione-professionale-canton-berna.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T19:10:17.168Z",
+      "lastFailureAt": "2026-10-18T19:10:17.168Z"
     }
   ]
 }

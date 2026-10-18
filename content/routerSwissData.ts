@@ -2858,6 +2858,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'ffs-binari-deformazioni-canicola-2024': { it: 'ffs-binari-deformazioni-canicola-2024', en: 'ffs-rail-deformations-heatwave-2024', de: 'ffs-schienen-verformungen-hitze-2024', fr: 'cff-rails-deformations-canicule-2024' },
  'indennita-covid-abusi-aziende': { it: 'indennita-covid-abusi-aziende', en: 'covid-allowance-abuses-hit-hundreds-of-firms', de: 'covid-entschadigungen-lastminute-zahlt-28-9-mio-zuruck', fr: 'indemnites-covid-abus-dans-des-centaines-d-entreprises' },
  'ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso': { it: 'ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso', en: 'ps-supports-three-initiatives-and-a-document-on-decent-work', de: 'sp-unterstutzt-drei-initiativen-und-ein-dokument-zu-menschenwurdiger-arbeit', fr: 'le-ps-soutient-trois-initiatives-et-un-document-sur-le-travail-decent' },
+ 'apprendistato-zurigo-guida-pratica': { it: 'apprendistato-zurigo-guida-pratica', en: 'apprenticeship-zurich-practical-guide', de: 'lehrstelle-zuerich-praxisleitfaden', fr: 'apprentissage-zurich-guide-pratique' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

@@ -8507,6 +8507,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso.title': 'SP unterstützt drei Initiativen und ein Dokument zu menschenwürdiger Arbeit',
     'blog.article.ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso.excerpt': 'In Thun hat die SP drei Volksinitiativen unterstützt Baume-Schneider hat über die Finanzierung der 13.',
     'blog.article.ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso.imageAlt': 'Redaktionelles Bild zu: PS sostiene tre iniziative e documento lavoro dignitoso',
+    'blog.article.apprendistato-zurigo-guida-pratica.title': 'Lehre in Zürich: Lehrstelle, Vertrag, Vergütung und Berufsmaturität',
+    'blog.article.apprendistato-zurigo-guida-pratica.excerpt': 'Praktischer Leitfaden für die Lehre im Kanton Zürich: Suche nach einer Lehrstelle, Prüfung des Vertrags, Verständnis der Vergütung und Berufsmaturität.',
+    'blog.article.apprendistato-zurigo-guida-pratica.imageAlt': 'Junger Lehrling in einer Schweizer Werkstatt in Zürich prüft einen Vertrag',
 };
 
 export default blogMetaChDe;

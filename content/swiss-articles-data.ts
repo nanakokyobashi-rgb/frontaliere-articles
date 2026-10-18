@@ -28423,6 +28423,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'apprendistato-zurigo-guida-pratica',
+    category: 'pratico',
+    date: '2026-10-18T19:10:16.494Z',
+    image: '/images/blog/apprendistato-formazione-professionale-canton-berna.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['ZH'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

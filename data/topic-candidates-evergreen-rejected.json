@@ -1870,10 +1870,10 @@
       "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-10-18T14:25:22.474Z",
-      "lastStrikeAt": "2026-10-18T14:25:22.474Z",
-      "expiresAt": "2026-11-17T14:25:22.474Z"
+      "lastStrikeAt": "2026-10-18T19:00:17.961Z",
+      "expiresAt": "2026-11-17T19:00:17.961Z"
     }
   ],
   "legacy": [
@@ -10173,18 +10173,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/svizzera/economia/1957324/denner-sconto-salari-aumenti-dipendenti-rinuncia": {
-      "section": "frontaliere",
-      "ts": 1792171021345
-    },
-    "frontaliere::https://comozero.it/attualita/il-futuro-nasce-a-como-ecco-il-primo-computer-quantistico-di-nuova-generazione-butti-nuova-frontiera": {
-      "section": "frontaliere",
-      "ts": 1792171660671
-    },
-    "frontaliere::https://comozero.it/magazine/mille-euro-a-chi-diventa-genitore-lazienda-lombarda-che-premia-i-dipendenti-che-fanno-figli": {
-      "section": "frontaliere",
-      "ts": 1792173895527
-    },
     "frontaliere::https://www.varesenews.it/2026/10/scuola-e-impresa-a-bodio-lomnago-casa-agricola-apre-agli-studenti-con-la-mostra-labstore/2710282": {
       "section": "frontaliere",
       "ts": 1792177820741
@@ -10456,6 +10444,10 @@
     "frontaliere::https://www.swissinfo.ch/ita/ps%3a-s%c3%ac-a-tre-iniziative-e-a-documento-per-lavoro-pi%c3%b9-dignitoso/92235291": {
       "section": "frontaliere",
       "ts": 1792343085897
+    },
+    "svizzera::https://www.tio.ch/ticino/cronaca/1957584/esce-di-strada-e-si-ribalta-nel-bosco-due-persone-in-ospedale": {
+      "section": "svizzera",
+      "ts": 1792349830385
     }
   }
 }

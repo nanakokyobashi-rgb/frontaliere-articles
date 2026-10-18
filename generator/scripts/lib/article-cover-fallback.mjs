@@ -1,10 +1,14 @@
 import '../../../host/cantonSectionsBootstrap.mjs';
-import { appendImageRegenerationQueue } from './image-regeneration-queue.mjs';
+import {
+  appendImageRegenerationQueue,
+  classifyImageRegenerationFailure,
+} from './image-regeneration-queue.mjs';
 import { imageRecordForPath, STATIC_FALLBACK_IMAGE } from './blog-image-registry.mjs';
 import { DETERMINISTIC_CARD_KIND } from './deterministic-card-provenance.mjs';
 import { imageCreditRecordFromGeneratedImageRecord } from '../../../engine/shared/imageCredits.mjs';
 
 export const CATALOG_FALLBACK_MIN_SHARED_WORDS = 2;
+export { classifyImageRegenerationFailure } from './image-regeneration-queue.mjs';
 
 function searchTokens(value) {
   return String(value || '')
@@ -87,6 +91,8 @@ export function resolveArticleCoverFallback(data, {
   reason = 'engine-failed',
 } = {}) {
   const engineReason = compactReason(reason);
+  const failureDisposition = data?._imageGenerationFailureDisposition
+    || classifyImageRegenerationFailure(reason);
   let selected = null;
   let provenance = null;
   const catalogImage = typeof findCatalogImage === 'function' ? findCatalogImage(data) : null;
@@ -123,6 +129,9 @@ export function resolveArticleCoverFallback(data, {
       title: data.content?.it?.title || data.content?.title || data.title,
       fallbackImage: selected.path,
       reason: engineReason,
+      retryDisposition: failureDisposition.retryable === false ? 'terminal' : 'retryable',
+      ...(failureDisposition.retryable === false ? { terminalReason: failureDisposition.reason } : {}),
+      ...(failureDisposition.retryHint === 'no-text' ? { retryHint: 'no-text' } : {}),
     },
     configurable: true,
     writable: true,
