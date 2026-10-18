@@ -1575,12 +1575,14 @@
     },
     {
       "path": "scripts/ci/harvest-agent-lessons.mjs",
-      "mode": "identical",
+      "mode": "adapted",
       "baseline": {
         "site": "cb98d57267b1062b",
         "corpus": "cb98d57267b1062b",
         "alignedAt": "2026-10-14"
-      }
+      },
+      "reason": "adapted: the corpus harvester imports repository-specific close, follow-up, and CI constant contracts; pull-side copying the site file would mix incompatible graphs.",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/2880"
     },
     {
       "path": "scripts/ci/lessons-harvester-registry.json",
@@ -3193,12 +3195,14 @@
     {
       "path": "generator/scripts/lib/evergreen-topic-generator.mjs",
       "sitePath": "scripts/lib/evergreen-topic-generator.mjs",
-      "mode": "identical",
+      "mode": "adapted",
       "baseline": {
         "site": "28df42a0369a5308",
         "corpus": "28df42a0369a5308",
         "alignedAt": "2026-08-18"
-      }
+      },
+      "reason": "adapted: the nanako generator consumes vendored site data and the generator-side border-data REWIRE; structural transport owns the copy, not loop-sync.",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/2880"
     },
     {
       "path": "generator/scripts/lib/evidence/constants.mjs",
@@ -6230,6 +6234,26 @@
         "site": null,
         "corpus": "afd7b9f26accf2c4",
         "alignedAt": "2026-10-17"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/first-name-recognition.mjs",
+      "sitePath": "scripts/lib/first-name-recognition.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "744e2ff9bf566ae3",
+        "corpus": "744e2ff9bf566ae3",
+        "alignedAt": "2026-10-18"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/first-names.json",
+      "sitePath": "scripts/lib/first-names.json",
+      "mode": "identical",
+      "baseline": {
+        "site": "a35decce7435839c",
+        "corpus": "a35decce7435839c",
+        "alignedAt": "2026-10-18"
       }
     }
   ]
