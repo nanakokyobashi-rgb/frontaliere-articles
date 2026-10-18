@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "carburanti",
-  "updatedAt": "2026-10-18T07:18:16.558Z",
-  "contentHash": "41f343be4de1da8acf9b30ee37d80e0b9d6ccaa7d3e8c578c2011cb3d45ce5df",
+  "updatedAt": "2026-10-18T07:29:55.438Z",
+  "contentHash": "bee43fdf514d046a0bfdde539bc14a574d6ee9bbd7131c02f0092dda7dc1d646",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Sette milioni truffati nel Vaud da falsi agenti",
+          "url": "/articoli-vaud/truffa-falsi-poliziotti-vaud/",
+          "excerpt": "Quasi 2.300 casi dall'inizio dell'anno Danno complessivo: CHF 7 milioni Oltre 100 interpellati, 19 in detenzione 16 interpellazioni a inizio ottobre, 5",
+          "date": "2026-10-18T07:26:28.156Z"
+        },
+        {
           "title": "Falsi poliziotti: oltre 100 interpellati nel Vaud",
           "url": "/articoli-vaud/truffe-falsi-banchieri-lausanna/",
           "excerpt": "Oltre cento persone interpellate nel Vaud dall'inizio del 2026 Sedici persone interpellate dall'inizio di ottobre Coinvolte polizia cantonale, Lausanne",
@@ -94,12 +100,6 @@
           "url": "/articoli-vaud/tuffe-falsi-poliziotti-vaud/",
           "excerpt": "Oltre cento persone interpellate nel Vaud nel 2026 Sedici interpellazioni dall'inizio di ottobre Quasi 2.300 casi e 900 truffe riuscite Danno cumulato: circa",
           "date": "2026-10-17T02:07:47.946Z"
-        },
-        {
-          "title": "Otto scuole vaudesi colpite da furti notturni",
-          "url": "/articoli-vaud/scuole-vaud-furti-inchieste/",
-          "excerpt": "Otto scuole vaudesi colpite in dieci giorni Tutti gli episodi sono avvenuti di notte Orbe stima danni per migliaia di franchi La polizia cantonale ha aperto più",
-          "date": "2026-10-17T01:27:48.756Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-18T07:18:16.558Z"
+      "updatedAt": "2026-10-18T07:29:55.438Z"
     },
     "en": {
       "canton": "VD",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Seven million defrauded in Vaud by fake agents",
+          "url": "/en/vaud-articles/seven-million-defrauded-in-vaud-by-fake-agents/",
+          "excerpt": "Nearly 2,300 cases since the beginning of the year Total damage: CHF 7 million More than 100 people apprehended, 19 in detention 16 apprehensions in early",
+          "date": "2026-10-18T07:26:28.156Z"
+        },
+        {
           "title": "Fake police officers: more than 100 questioned in Vaud",
           "url": "/en/vaud-articles/fake-police-bankers-vaud/",
           "excerpt": "More than one hundred people questioned in Vaud since the beginning of 2026 Sixteen people questioned since the beginning of October Cantonal police, Lausanne",
@@ -193,12 +199,6 @@
           "url": "/en/vaud-articles/fake-police-bankers-scams-vaud/",
           "excerpt": "More than one hundred people contacted in Vaud in 2026 Sixteen contacts since the beginning of October Almost 2.300 cases and 900 successful scams Cumulative",
           "date": "2026-10-17T02:07:47.946Z"
-        },
-        {
-          "title": "Eight schools in Vaud hit by overnight burglaries",
-          "url": "/en/vaud-articles/vaud-schools-break-ins-investigations/",
-          "excerpt": "Eight Vaud schools hit in ten days All incidents occurred at night Orbe estimates damage amounting to thousands of francs The cantonal police have opened",
-          "date": "2026-10-17T01:27:48.756Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-18T07:18:16.558Z"
+      "updatedAt": "2026-10-18T07:29:55.438Z"
     },
     "de": {
       "canton": "VD",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Sieben Millionen im Kanton Waadt von falschen Agenten ergaunert",
+          "url": "/de/waadt-artikel/sieben-millionen-im-kanton-waadt-von-falschen-agenten-ergaunert/",
+          "excerpt": "Fast 2.300 Fälle seit Jahresbeginn Gesamtschaden: CHF 7 Millionen Über 100 Personen befragt, 19 in Haft 16 Befragungen Anfang Oktober, 5 in Lausanne Fälle →",
+          "date": "2026-10-18T07:26:28.156Z"
+        },
+        {
           "title": "Falsche Polizisten: über 100 Befragte im Kanton Waadt",
           "url": "/de/waadt-artikel/falsche-polizisten-banker-waadt/",
           "excerpt": "Über hundert Personen im Kanton Waadt seit Anfang 2026 befragt Sechzehn Personen seit Anfang Oktober befragt Beteiligt sind die Kantonspolizei, Lausanne",
@@ -292,12 +298,6 @@
           "url": "/de/waadt-artikel/betrug-falsche-polizisten-waadt/",
           "excerpt": "Im Kanton Waadt 2026 über hundert Personen kontaktiert Sechzehn Kontaktaufnahmen seit Anfang Oktober Fast 2.300 Fälle und 900 erfolgreiche Betrugsfälle",
           "date": "2026-10-17T02:07:47.946Z"
-        },
-        {
-          "title": "Acht Waadtländer Schulen von nächtlichen Einbrüchen betroffen",
-          "url": "/de/waadt-artikel/waadt-schulen-einbrueche-ermittlungen/",
-          "excerpt": "Acht Waadtländer Schulen in zehn Tagen betroffen Alle Vorfälle ereigneten sich nachts Orbe schätzt die Schäden auf mehrere Tausend Franken Die Kantonspolizei",
-          "date": "2026-10-17T01:27:48.756Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-18T07:18:16.558Z"
+      "updatedAt": "2026-10-18T07:29:55.438Z"
     },
     "fr": {
       "canton": "VD",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Sept millions escroqués dans le canton de Vaud par de faux agents",
+          "url": "/fr/articles-vaud/sept-millions-escroques-dans-le-canton-de-vaud-par-de-faux-agents/",
+          "excerpt": "Près de 2.300 cas depuis le début de l'année Préjudice total : CHF 7 millions Plus de 100 personnes interpellées, 19 en détention 16 interpellations début",
+          "date": "2026-10-18T07:26:28.156Z"
+        },
+        {
           "title": "Faux policiers : plus de 100 personnes interpellées dans le canton de Vaud",
           "url": "/fr/articles-vaud/faux-policiers-banquiers-vaud/",
           "excerpt": "Plus de cent personnes interpellées dans le canton de Vaud depuis le début de 2026 Seize personnes interpellées depuis le début du mois d’octobre Police",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-vaud/arnaques-faux-policiers-vaud/",
           "excerpt": "Plus de cent personnes interpellées dans le Vaud en 2026 Seize interpellations depuis le début d'octobre Près de 2.300 cas et 900 arnaques réussies Préjudice",
           "date": "2026-10-17T02:07:47.946Z"
-        },
-        {
-          "title": "Huit écoles vaudoises touchées par des vols nocturnes",
-          "url": "/fr/articles-vaud/ecoles-vaud-cambriolages-enquetes/",
-          "excerpt": "Huit écoles vaudoises touchées en dix jours Tous les incidents ont eu lieu la nuit Orbe estime les dommages à plusieurs milliers de francs La police cantonale",
-          "date": "2026-10-17T01:27:48.756Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-18T07:18:16.558Z"
+      "updatedAt": "2026-10-18T07:29:55.438Z"
     }
   }
 }
