@@ -197,6 +197,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-silenen-muri-secco': {
+    title: 'Silenen: Landrat approva CHF 207.000 per muri a secco',
+    description: 'Il Landrat approva CHF 207.000 senza voti contrari 3,6 km di muri storici nell\'area di Silenen Circa il 60% presenta un rischio per la sicurezza I lavori',
+    keywords: 'frontalieri, ticino, svizzera, italia, silenen, landrat, approva, muri',
+    ogTitle: 'Silenen: CHF 207.000 per i muri a secco storici',
+    ogDescription: 'Il Landrat approva CHF 207.000 senza voti contrari 3,6 km di muri storici nell\'area di Silenen Circa il 60% presenta un rischio per la sicurezza I lavori',
+    canonicalPath: '/articoli-uri/silenen-muri-secco/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Silenen: Landrat approva CHF 207.000 per muri a secco",
+      "description": "Il Landrat approva CHF 207.000 senza voti contrari 3,6 km di muri storici nell'area di Silenen Circa il 60% presenta un rischio per la sicurezza I lavori",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-silenen-muri-secco.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Muri a secco storici nell'area di Hinter- e Vorderried a Silenen, nel Canton Uri"
+      },
+      "datePublished": "2026-10-18T06:56:11+00:00",
+      "dateModified": "2026-10-18T06:56:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-uri/silenen-muri-secco/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

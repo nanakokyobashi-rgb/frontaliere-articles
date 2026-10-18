@@ -18,6 +18,9 @@ const blogMetaCantonUrEn: Record<string, string> = {
     'blog.article.eventi-weekend-uri.title': 'Weekend events in the canton of Uri: what to do Saturday & Sunday',
     'blog.article.eventi-weekend-uri.excerpt': 'Events in the canton of Uri every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
     'blog.article.eventi-weekend-uri.imageAlt': 'Weekend events in the canton of Uri',
+    'blog.article.silenen-muri-secco.title': 'Silenen: Cantonal Parliament approves CHF 207.000 for dry stone walls',
+    'blog.article.silenen-muri-secco.excerpt': 'The Landrat approves CHF 207.000 with no votes against 3,6 km of historic walls in the Silenen area Around 60% pose a safety risk Work starts in October',
+    'blog.article.silenen-muri-secco.imageAlt': 'Historic dry-stone walls in the Hinter- and Vorderried area of Silenen, Canton Uri',
 };
 
 export default blogMetaCantonUrEn;

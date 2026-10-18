@@ -18,6 +18,9 @@ const blogMetaCantonUrIt: Record<string, string> = {
     'blog.article.eventi-weekend-uri.title': 'Eventi del weekend nel Canton Uri: cosa fare sabato e domenica',
     'blog.article.eventi-weekend-uri.excerpt': 'Eventi nel Canton Uri ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
     'blog.article.eventi-weekend-uri.imageAlt': 'Eventi del weekend nel Canton Uri',
+    'blog.article.silenen-muri-secco.title': 'Silenen: Landrat approva CHF 207.000 per muri a secco',
+    'blog.article.silenen-muri-secco.excerpt': 'Il Landrat approva CHF 207.000 senza voti contrari 3,6 km di muri storici nell\'area di Silenen Circa il 60% presenta un rischio per la sicurezza I lavori',
+    'blog.article.silenen-muri-secco.imageAlt': 'Muri a secco storici nell\'area di Hinter- e Vorderried a Silenen, nel Canton Uri',
 };
 
 export default blogMetaCantonUrIt;

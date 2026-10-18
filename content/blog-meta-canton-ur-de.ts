@@ -18,6 +18,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.eventi-weekend-uri.title': 'Veranstaltungen am Wochenende im Kanton Uri: was tun Sa & So',
     'blog.article.eventi-weekend-uri.excerpt': 'Veranstaltungen im Kanton Uri an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
     'blog.article.eventi-weekend-uri.imageAlt': 'Veranstaltungen am Wochenende im Kanton Uri',
+    'blog.article.silenen-muri-secco.title': 'Silenen: Landrat genehmigt CHF 207.000 für Trockenmauern',
+    'blog.article.silenen-muri-secco.excerpt': 'Der Landrat genehmigt CHF 207.000 ohne Gegenstimmen 3,6 km historische Mauern im Gebiet von Silenen Rund 60% stellen ein Sicherheitsrisiko dar Die Arbeiten',
+    'blog.article.silenen-muri-secco.imageAlt': 'Historische Trockenmauern im Gebiet Hinter- und Vorderried in Silenen, Kanton Uri',
 };
 
 export default blogMetaCantonUrDe;

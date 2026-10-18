@@ -18,6 +18,9 @@ const blogMetaCantonUrFr: Record<string, string> = {
     'blog.article.eventi-weekend-uri.title': 'Événements du week-end dans le canton d\'Uri : que faire samedi & dimanche',
     'blog.article.eventi-weekend-uri.excerpt': 'Événements dans le canton d\'Uri chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
     'blog.article.eventi-weekend-uri.imageAlt': 'Événements du week-end dans le canton d\'Uri',
+    'blog.article.silenen-muri-secco.title': 'Silenen : le Landrat approuve CHF 207.000 pour des murs en pierre sèche',
+    'blog.article.silenen-muri-secco.excerpt': 'Le Landrat approuve CHF 207.000 sans voix contre 3,6 km de murs historiques dans la région de Silenen Environ 60% présentent un risque pour la sécurité',
+    'blog.article.silenen-muri-secco.imageAlt': 'Murs en pierres sèches historiques dans la zone Hinter- et Vorderried à Silenen, canton d\'Uri',
 };
 
 export default blogMetaCantonUrFr;
