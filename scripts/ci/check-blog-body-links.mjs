@@ -5,20 +5,26 @@
  *
  * A TypeScript body can parse perfectly while `[label](bare-action)` still
  * becomes `/article-slug/bare-action/` in the browser. This gate checks the
- * source contract before the API is published; it deliberately scans the
- * whole standard body tree rather than trusting a changed-file list.
+ * source contract before the API is published; it scans the whole standard
+ * body tree by default. Explicit fast-publisher dispatches may provide their
+ * article ids so this same gate can inspect only the bodies that the
+ * dispatch will render; a missing or malformed scope still fails.
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { findNonCanonicalArticleLinks } from '../lib/article-link-contract.mjs';
-import { activeSourceSections, configureCorpusActiveSections } from '../lib/corpus-sections.mjs';
+import {
+  SECTION_LOCALES,
+  activeSourceSections,
+  configureCorpusActiveSections,
+} from '../lib/corpus-sections.mjs';
 import { decodeTypeScriptString } from '../../generator/scripts/lib/article-meta-block.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 configureCorpusActiveSections();
 export const BLOG_BODY_ROOTS = Object.freeze(activeSourceSections().map(({ bodyDir }) => bodyDir));
-const LOCALES = new Set(['it', 'en', 'de', 'fr']);
+const LOCALES = new Set(SECTION_LOCALES);
 
 function collectTypeScriptFiles(dir) {
   let entries;
@@ -35,6 +41,33 @@ function collectTypeScriptFiles(dir) {
     else if (entry.isFile() && fullPath.endsWith('.ts')) files.push(fullPath);
   }
   return files.sort();
+}
+
+/**
+ * Return the four body paths owned by an explicit publisher target.
+ *
+ * A workflow-dispatch publisher renders only the requested article ids, but
+ * the default link gate scans the historical corpus. Keeping this mapping in
+ * the gate lets the two fast publishers scope their preflight without making
+ * shell copies of the section layout. An empty id list intentionally returns
+ * no scope: callers that publish a whole section must keep the full scan.
+ */
+export function bodyFilesForArticleIds(section, articleIds) {
+  if (!Array.isArray(articleIds) || articleIds.length === 0) return [];
+  const sectionId = String(section || '').trim();
+  const source = activeSourceSections().find((candidate) => candidate.section === sectionId);
+  if (!source) throw new Error(`sezione publisher non attiva: ${sectionId || '(vuota)'}`);
+  const ids = [...new Set(articleIds.map((articleId, index) => {
+    if (typeof articleId !== 'string' || !articleId.trim()
+      || articleId.includes('/') || articleId.includes('\\')
+      || articleId === '.' || articleId === '..') {
+      throw new Error(`article id publisher non valido in posizione ${index}`);
+    }
+    return articleId;
+  }))];
+  return ids.flatMap((articleId) => SECTION_LOCALES.map(
+    (locale) => `${source.bodyDir}/${locale}/${articleId}.ts`,
+  ));
 }
 
 function localeForFile(bodyRoot, file) {
@@ -350,6 +383,19 @@ export function formatOffender(offender) {
 
 export function run({ root = ROOT, log = console.log, error = console.error } = {}) {
   let changedFiles = null;
+  let explicitTargetFiles = null;
+  const explicitTargetIds = String(process.env.PREFLIGHT_ARTICLE_IDS || '').trim();
+  if (explicitTargetIds) {
+    let articleIds;
+    try {
+      articleIds = JSON.parse(explicitTargetIds);
+      if (!Array.isArray(articleIds)) throw new Error('deve essere un array JSON');
+      explicitTargetFiles = bodyFilesForArticleIds(process.env.PREFLIGHT_SECTION, articleIds);
+    } catch (parseError) {
+      error(`PREFLIGHT_ARTICLE_IDS non valido: ${parseError?.message || parseError}`);
+      return 1;
+    }
+  }
   if (process.env.PREFLIGHT_SCAN_MODE === 'changed') {
     const changedFilesPath = process.env.PREFLIGHT_CHANGED_FILES_FILE;
     if (changedFilesPath) {
@@ -365,6 +411,8 @@ export function run({ root = ROOT, log = console.log, error = console.error } = 
       error('PREFLIGHT_SCAN_MODE=changed richiede PREFLIGHT_CHANGED_FILES_FILE o PREFLIGHT_CHANGED_FILES');
       return 1;
     }
+  } else if (explicitTargetFiles !== null && explicitTargetFiles.length > 0) {
+    changedFiles = explicitTargetFiles;
   }
   const { files, offenders, errors } = scanBlogBodyLinks(root, changedFiles);
   if (errors.length > 0) {

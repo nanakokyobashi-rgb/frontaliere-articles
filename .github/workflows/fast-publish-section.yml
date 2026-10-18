@@ -271,6 +271,8 @@ jobs:
         env:
           BEFORE: ${{ steps.push_range.outputs.before }}
           AFTER: ${{ steps.push_range.outputs.after }}
+          ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
+          SECTION_INPUT: ${{ inputs.section }}
         run: |
           set -euo pipefail
           changed_files="$RUNNER_TEMP/fast-publish-section-changed-bodies.txt"
@@ -308,6 +310,8 @@ jobs:
             fi
           fi
           PREFLIGHT_SCAN_MODE="$scan_mode" \
+            PREFLIGHT_ARTICLE_IDS="${ARTICLE_IDS_INPUT:-}" \
+            PREFLIGHT_SECTION="${SECTION_INPUT:-}" \
             PREFLIGHT_CHANGED_FILES_FILE="$changed_files" \
             node scripts/ci/check-blog-body-links.mjs
 
