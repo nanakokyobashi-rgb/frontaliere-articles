@@ -13467,6 +13467,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.checklist-neonato-confine-2026.title': 'Geburt eines Kindes: Melderegister und Familienzulagen für Grenzgänger 2026',
     'blog.article.checklist-neonato-confine-2026.excerpt': 'Geburt: Melderegister, Familienzulagen und konsularische Formalitäten Grenzgängerabkommen: in Kraft seit dem 1.',
     'blog.article.checklist-neonato-confine-2026.imageAlt': 'Grenzgängerfamilie mit Kinderwagen auf einer Straße im Tessin',
+    'blog.article.indennita-giornaliere-stop-cosa-fare.title': 'Krankentaggeldleistungen eingestellt: 5 Schritte zum Schutz',
+    'blog.article.indennita-giornaliere-stop-cosa-fare.excerpt': 'Ein Burnout führt bei Patrick zu einer vollständigen Abwesenheit von der Arbeit Die Police sieht eine Begrenzung auf 720 oder 730 Tage vor Die Versicherung stellt die Zahlungen nach wenigen',
+    'blog.article.indennita-giornaliere-stop-cosa-fare.imageAlt': 'Grenzgänger prüft Krankenversicherungsunterlagen in Bellinzona Büro',
 };
 
 export default blogMetaDe;

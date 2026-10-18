@@ -13468,6 +13468,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.checklist-neonato-confine-2026.title': 'Birth of a child: civil registry and allowances for cross-border workers 2026',
     'blog.article.checklist-neonato-confine-2026.excerpt': 'Birth: civil registry, family allowances and consular procedures Cross-border agreement: in force from January 1, 2024 Old: exemption €7\'500; new: deductible €10\'000',
     'blog.article.checklist-neonato-confine-2026.imageAlt': 'Cross-border family with a stroller on a Ticino street',
+    'blog.article.indennita-giornaliere-stop-cosa-fare.title': 'Interrupted sickness benefits: 5 steps to protect yourself',
+    'blog.article.indennita-giornaliere-stop-cosa-fare.excerpt': 'A burnout leads Patrick to a complete absence from work The policy sets a limit of 720 or 730 days The insurance company stops payments after a few',
+    'blog.article.indennita-giornaliere-stop-cosa-fare.imageAlt': 'Cross-border worker reviews health insurance documents in Bellinzona office',
 };
 
 export default blogMetaEn;

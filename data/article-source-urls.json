@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4074187": {
-    "articleId": "traffico-merci-alpi-ferrovia-camion",
-    "ts": "2026-09-12T02:10:13.481Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/cantone/ticino/1949361/cari-deputati-votate-il-pecc-e-anche-una-scelta-economica": {
     "articleId": "voto-pecc-gran-consiglio-ticino",
     "ts": "2026-09-12T02:18:53.034Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/nuova-occupazione-abusiva-a-lissago-e-nuove-denunce-dei-residenti/2711479": {
     "articleId": "lissago-corte-case-popolari",
     "ts": "2026-10-18T10:15:13.765Z",
+    "keyForm": 2
+  },
+  "https://www.ocst.ch/il-lavoro/549-il-caso/2622-il-caso-cosa-e-importante-fare-quando-lassicurazione-malattia-interrompe-le-prestazioni": {
+    "articleId": "indennita-giornaliere-stop-cosa-fare",
+    "ts": "2026-10-18T11:49:39.063Z",
     "keyForm": 2
   }
 }

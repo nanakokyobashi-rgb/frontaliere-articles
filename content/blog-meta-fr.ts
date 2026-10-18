@@ -13470,6 +13470,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.checklist-neonato-confine-2026.title': 'Naissance de l\'enfant : registres d\'état civil et chèques pour frontaliers 2026',
     'blog.article.checklist-neonato-confine-2026.excerpt': 'Naissance : registres d\'état civil, allocations familiales et dossiers consulaires Accord frontalier : en vigueur depuis le 1er janvier 2024 Anciens : exonération € 7\'500 ; nouveaux : franchise € 10\'000',
     'blog.article.checklist-neonato-confine-2026.imageAlt': 'Famille frontalière avec poussette dans une rue du Tessin',
+    'blog.article.indennita-giornaliere-stop-cosa-fare.title': 'Indemnités maladie interrompues : 5 étapes pour se protéger',
+    'blog.article.indennita-giornaliere-stop-cosa-fare.excerpt': 'Un burnout entraîne pour Patrick une absence complète du travail La police d\'assurance prévoit une limite de 720 ou 730 jours L\'assurance interrompt les paiements après quelques',
+    'blog.article.indennita-giornaliere-stop-cosa-fare.imageAlt': 'Travailleur frontalier examine documents assurance maladie dans bureau à Bellinzone',
 };
 
 export default blogMetaFr;

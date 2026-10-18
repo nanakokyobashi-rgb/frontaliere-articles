@@ -13469,6 +13469,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.checklist-neonato-confine-2026.title': 'Nascita figlio: anagrafe e assegni per frontalieri 2026',
     'blog.article.checklist-neonato-confine-2026.excerpt': 'Nascita: anagrafe, assegni familiari e pratiche consolari Accordo frontalieri: in vigore dal 1° gennaio 2024 Vecchi: esenzione €7\'500; nuovi: franchigia €10\'000',
     'blog.article.checklist-neonato-confine-2026.imageAlt': 'Famiglia frontaliera con passeggino in una strada del Ticino',
+    'blog.article.indennita-giornaliere-stop-cosa-fare.title': 'Indennità malattia interrotte: 5 passi per tutelarsi',
+    'blog.article.indennita-giornaliere-stop-cosa-fare.excerpt': 'Un burnout porta Patrick a un\'assenza completa dal lavoro La polizza prevede un limite di 720 o 730 giorni L\'assicurazione interrompe i pagamenti dopo poche',
+    'blog.article.indennita-giornaliere-stop-cosa-fare.imageAlt': 'Lavoratore frontaliere consulta documenti assicurazione malattia in ufficio a Bellinzona',
 };
 
 export default blogMetaIt;

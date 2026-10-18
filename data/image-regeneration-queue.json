@@ -200,6 +200,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T11:33:44.059Z",
       "lastFailureAt": "2026-10-18T11:33:44.059Z"
+    },
+    {
+      "articleId": "indennita-giornaliere-stop-cosa-fare",
+      "title": "Indennità malattia interrotte: 5 passi per tutelarsi",
+      "fallbackImage": "/images/blog/article-indennita-lavoro-ridotto.webp",
+      "reason": "All image providers failed for article-indennita-giornaliere-stop-cosa-fare: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to the topic, with",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T11:49:39.061Z",
+      "lastFailureAt": "2026-10-18T11:49:39.061Z"
     }
   ]
 }

@@ -111626,6 +111626,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-indennita-giornaliere-stop-cosa-fare': {
+    title: 'Indennità malattia interrotte: 5 passi per tutelarsi',
+    description: 'Un burnout porta Patrick a un\'assenza completa dal lavoro La polizza prevede un limite di 720 o 730 giorni L\'assicurazione interrompe i pagamenti dopo poche',
+    keywords: 'frontalieri, ticino, svizzera, italia, indennità, malattia, interrotte, passi',
+    ogTitle: 'Indennità malattia interrotte: cosa fare subito',
+    ogDescription: 'Un burnout porta Patrick a un\'assenza completa dal lavoro La polizza prevede un limite di 720 o 730 giorni L\'assicurazione interrompe i pagamenti dopo poche',
+    canonicalPath: '/articoli-frontaliere/indennita-giornaliere-stop-cosa-fare/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Indennità malattia interrotte: 5 passi per tutelarsi",
+      "description": "Un burnout porta Patrick a un'assenza completa dal lavoro La polizza prevede un limite di 720 o 730 giorni L'assicurazione interrompe i pagamenti dopo poche",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-indennita-lavoro-ridotto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavoratore frontaliere consulta documenti assicurazione malattia in ufficio a Bellinzona"
+      },
+      "datePublished": "2026-10-18T11:49:38+00:00",
+      "dateModified": "2026-10-18T11:49:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/indennita-giornaliere-stop-cosa-fare/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
