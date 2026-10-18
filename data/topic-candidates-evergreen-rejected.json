@@ -1644,6 +1644,102 @@
       "firstSeenAt": "2026-10-18T14:08:52.656Z",
       "lastValidatedAt": "2026-10-18T14:08:52.656Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "sistema sanitario svizzero lamal guida 2026 canton Argovia",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T14:22:23.502Z",
+      "lastValidatedAt": "2026-10-18T14:22:23.502Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "premi cassa malati canton Zurigo e riduzione premi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T14:28:05.968Z",
+      "lastValidatedAt": "2026-10-18T14:28:05.968Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "permesso di dimora B canton Zurigo requisiti e rinnovo",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T14:34:26.058Z",
+      "lastValidatedAt": "2026-10-18T14:34:26.058Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "salario minimo canton Zurigo requisiti e applicazione",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T14:34:26.071Z",
+      "lastValidatedAt": "2026-10-18T14:34:26.071Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "assistenza sociale canton Zurigo requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T14:34:26.082Z",
+      "lastValidatedAt": "2026-10-18T14:34:26.082Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "indennità di disoccupazione canton Zurigo iscrizione URC",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T14:34:26.189Z",
+      "lastValidatedAt": "2026-10-18T14:34:26.189Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "assegni familiari canton Zurigo importi e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T14:34:26.293Z",
+      "lastValidatedAt": "2026-10-18T14:34:26.293Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposta sugli autoveicoli canton Zurigo calcolo e pagamento",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T14:47:11.805Z",
+      "lastValidatedAt": "2026-10-18T14:47:11.805Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -1706,6 +1802,18 @@
       "firstStrikeAt": "2026-10-18T05:15:05.386Z",
       "lastStrikeAt": "2026-10-18T06:07:23.734Z",
       "expiresAt": "2026-11-17T06:07:23.734Z"
+    },
+    {
+      "keyword": "imposte cantonali canton Zurigo aliquote e deduzioni",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-10-18T14:25:22.474Z",
+      "lastStrikeAt": "2026-10-18T14:25:22.474Z",
+      "expiresAt": "2026-11-17T14:25:22.474Z"
     }
   ],
   "legacy": [
@@ -10005,22 +10113,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.laregione.ch/cantone/luganese/1956506/la-citta-chiarisca-quanto-costa-un-affitto-sostenibile": {
-      "section": "frontaliere",
-      "ts": 1792151339737
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/16/leggi-notizia/argomenti/economia-13/articolo/la-decima-edizione-degli-stati-generali-della-scuola-digitale-arriva-a-varese-con-un-nuovo-format-a.html": {
-      "section": "frontaliere",
-      "ts": 1792151367112
-    },
-    "frontaliere::https://www.rsi.ch/info/scienza-e-tecnologia/cosa-c%e2%80%99%c3%a8-dietro-le-pubblicit%c3%a0-con-scene-di-sesso-che-infestano-instagram-e-tiktok--4163095.html": {
-      "section": "frontaliere",
-      "ts": 1792155725871
-    },
-    "frontaliere::https://www.vconews.it/2026/10/16/leggi-notizia/argomenti/scuola-e-formazione-9/articolo/verbania-il-cobianchi-festeggia-140-anni-di-storia-con-una-giornata-dedicata-agli-ex-studenti.html": {
-      "section": "frontaliere",
-      "ts": 1792157163443
-    },
     "frontaliere::https://www.tio.ch/ticino/politica/1957258/val-colla-disagi-fino-al-2028-lugano-esclude-finanziamenti-straordinari": {
       "section": "frontaliere",
       "ts": 1792162172179
@@ -10288,6 +10380,26 @@
     "frontaliere::https://www.varesenews.it/2026/10/mattia-bellucci-festa-in-cina-conquista-il-titolo-nel-torneo-di-jinan/2711557": {
       "section": "frontaliere",
       "ts": 1792322682832
+    },
+    "svizzera::https://www.tio.ch/svizzera/economia/1957516/atomics-reattori-zugo-copenhagen-svizzera": {
+      "section": "svizzera",
+      "ts": 1792333276263
+    },
+    "svizzera::https://www.tio.ch/svizzera/cronaca/1957552/polizia-oggetti-manifestazione-notte-berna": {
+      "section": "svizzera",
+      "ts": 1792333286452
+    },
+    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1957553/bilancio-francia-ministro-rimasti-fermi": {
+      "section": "svizzera",
+      "ts": 1792333299016
+    },
+    "svizzera::https://www.tio.ch/sport/calcio/1957523/martinez-testa-league-barella-campo-ospedale-scontro-tornero": {
+      "section": "svizzera",
+      "ts": 1792333333509
+    },
+    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1957546/recinzione-aeroporto-sfondata-lipsia-polizia": {
+      "section": "svizzera",
+      "ts": 1792333343276
     }
   }
 }
