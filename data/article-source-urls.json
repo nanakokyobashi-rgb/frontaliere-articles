@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4067713": {
-    "articleId": "cassa-malati-rincari-2027",
-    "ts": "2026-09-08T10:31:08.034Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1948807/svizzera-frontalieri-lavoro-europa-residenti-rubano": {
     "articleId": "frontalieri-libro-analisi-miti",
     "ts": "2026-09-08T14:53:30.071Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/due-note-da-paura-a-varese-il-concerto-di-halloween-dellensemble-de-saxophones/2711260": {
     "articleId": "halloween-sassofoni-varese",
     "ts": "2026-10-18T00:35:29.770Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/ticino-grigioni-e-insubria/l%e2%80%99hcap-cerca-fondi-obiettivo-35-milioni-di-franchi--4171423.html": {
+    "articleId": "hcap-raccolta-fondi-3-milioni",
+    "ts": "2026-10-18T00:52:04.199Z",
     "keyForm": 2
   }
 }

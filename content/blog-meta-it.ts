@@ -13407,6 +13407,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.halloween-sassofoni-varese.title': 'Varese, il concerto di Halloween dei sassofoni il 31 ottobre',
     'blog.article.halloween-sassofoni-varese.excerpt': 'Sabato 31 ottobre l’Auditorium Paolo Conti ospita il concerto L’appuntamento è alle 20.30 Dirige Giuseppina Levato In programma Orff, de Falla e Musorgskij',
     'blog.article.halloween-sassofoni-varese.imageAlt': 'Ensemble di sassofoni in concerto in un auditorium, con atmosfera serale.',
+    'blog.article.hcap-raccolta-fondi-3-milioni.title': 'HCAP: obiettivo 3,5 milioni di franchi e scadenza il 22 ottobre',
+    'blog.article.hcap-raccolta-fondi-3-milioni.excerpt': 'L\'HCAP punta a raccogliere 3-3,5 milioni di franchi Il secondo giro si chiude il 22 ottobre La raccolta è rivolta alla base dei tifosi Davide Mottis indica',
+    'blog.article.hcap-raccolta-fondi-3-milioni.imageAlt': 'Tifosi dell\'Hockey Club Ambrì-Piotta mobilitati per la raccolta fondi',
 };
 
 export default blogMetaIt;

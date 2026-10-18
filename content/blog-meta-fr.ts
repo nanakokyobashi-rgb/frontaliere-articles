@@ -13408,6 +13408,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.halloween-sassofoni-varese.title': 'Varese, le concert d’Halloween des saxophones le 31 octobre',
     'blog.article.halloween-sassofoni-varese.excerpt': 'Samedi 31 octobre, l’Auditorium Paolo Conti accueille le concert.',
     'blog.article.halloween-sassofoni-varese.imageAlt': 'Ensemble de saxophones en concert dans un auditorium à l’ambiance chaleureuse.',
+    'blog.article.hcap-raccolta-fondi-3-milioni.title': 'HCAP : objectif de 3,5 millions de francs et échéance le 22 octobre',
+    'blog.article.hcap-raccolta-fondi-3-milioni.excerpt': 'L\'HCAP vise à récolter 3-3,5 millions de francs Le deuxième tour se clôt le 22 octobre La collecte s\'adresse à la base des supporters Davide Mottis indique',
+    'blog.article.hcap-raccolta-fondi-3-milioni.imageAlt': 'Supporteurs du HC Ambri-Piotta mobilisés pour la collecte de fonds',
 };
 
 export default blogMetaFr;

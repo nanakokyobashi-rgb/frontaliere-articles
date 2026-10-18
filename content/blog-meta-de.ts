@@ -13405,6 +13405,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.halloween-sassofoni-varese.title': 'Varese, das Halloween-Konzert der Saxophone am 31. Oktober',
     'blog.article.halloween-sassofoni-varese.excerpt': 'Am Samstag, dem 31.',
     'blog.article.halloween-sassofoni-varese.imageAlt': 'Saxofonensemble bei einem Konzert in einem Auditorium mit warmer Abendstimmung.',
+    'blog.article.hcap-raccolta-fondi-3-milioni.title': 'HCAP: Ziel von 3,5 Millionen Franken und Frist am 22. Oktober',
+    'blog.article.hcap-raccolta-fondi-3-milioni.excerpt': 'Der HCAP will 3-3,5 Millionen Franken aufbringen Die zweite Runde endet am 22.',
+    'blog.article.hcap-raccolta-fondi-3-milioni.imageAlt': 'Ambri-Piotta Eishockeyfans unterstützen die Spendenaktion',
 };
 
 export default blogMetaDe;

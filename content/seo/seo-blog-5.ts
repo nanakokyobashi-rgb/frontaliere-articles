@@ -110866,6 +110866,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-hcap-raccolta-fondi-3-milioni': {
+    title: 'HCAP: obiettivo 3,5 milioni di franchi e scadenza il 22 ottobre',
+    description: 'L\'HCAP punta a raccogliere 3-3,5 milioni di franchi Il secondo giro si chiude il 22 ottobre La raccolta è rivolta alla base dei tifosi Davide Mottis indica',
+    keywords: 'frontalieri, ticino, svizzera, italia, hcap, obiettivo, milioni, franchi',
+    ogTitle: 'L\'HCAP cerca fondi: obiettivo 3,5 milioni di franchi',
+    ogDescription: 'L\'HCAP punta a raccogliere 3-3,5 milioni di franchi Il secondo giro si chiude il 22 ottobre La raccolta è rivolta alla base dei tifosi Davide Mottis indica',
+    canonicalPath: '/articoli-frontaliere/hcap-raccolta-fondi-3-milioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "HCAP: obiettivo 3,5 milioni di franchi e scadenza il 22 ottobre",
+      "description": "L'HCAP punta a raccogliere 3-3,5 milioni di franchi Il secondo giro si chiude il 22 ottobre La raccolta è rivolta alla base dei tifosi Davide Mottis indica",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Tifosi dell'Hockey Club Ambrì-Piotta mobilitati per la raccolta fondi"
+      },
+      "datePublished": "2026-10-18T00:52:03+00:00",
+      "dateModified": "2026-10-18T00:52:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/hcap-raccolta-fondi-3-milioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

@@ -13406,6 +13406,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.halloween-sassofoni-varese.title': 'Varese, the saxophone Halloween concert on October 31',
     'blog.article.halloween-sassofoni-varese.excerpt': 'On Saturday, October 31, the Auditorium Paolo Conti hosts the concert The appointment is at 20.30 Conducted by Giuseppina Levato On the program: Orff, de Falla and Musorgskij',
     'blog.article.halloween-sassofoni-varese.imageAlt': 'Saxophone ensemble performing in an auditorium with a warm evening atmosphere.',
+    'blog.article.hcap-raccolta-fondi-3-milioni.title': 'HCAP: target of 3,5 million francs and deadline on October 22',
+    'blog.article.hcap-raccolta-fondi-3-milioni.excerpt': 'HCAP aims to raise 3-3,5 million francs The second round closes on October 22 The fundraising is aimed at the fan base Davide Mottis indicates',
+    'blog.article.hcap-raccolta-fondi-3-milioni.imageAlt': 'Ambri-Piotta ice hockey fans supporting the club fundraising',
 };
 
 export default blogMetaEn;

@@ -60,6 +60,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T00:35:29.769Z",
       "lastFailureAt": "2026-10-18T00:35:29.769Z"
+    },
+    {
+      "articleId": "hcap-raccolta-fondi-3-milioni",
+      "title": "HCAP: obiettivo 3,5 milioni di franchi e scadenza il 22 ottobre",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-hcap-raccolta-fondi-3-milioni: openai-codex (vision gate rejected image: Generic synthetic hockey-arena illustration with no visible text or",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T00:52:04.196Z",
+      "lastFailureAt": "2026-10-18T00:52:04.196Z"
     }
   ]
 }
