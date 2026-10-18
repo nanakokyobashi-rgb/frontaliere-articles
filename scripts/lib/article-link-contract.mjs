@@ -349,8 +349,9 @@ function articleLinks(
 }
 
 /**
- * Sanitize every Markdown string field in generated FAQ pairs before the
- * object is serialized into a TypeScript body literal.
+ * Sanitize the Markdown-bearing `q`/`a` fields in generated FAQ pairs before
+ * the object is serialized into a TypeScript body literal. Preserve extra
+ * fields verbatim because they are not necessarily Markdown.
  */
 export function sanitizeArticleFaqMarkdown(faqArray, locale = 'it') {
   if (!Array.isArray(faqArray)) return faqArray;
