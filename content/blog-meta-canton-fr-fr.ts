@@ -39,6 +39,9 @@ const blogMetaCantonFrFr: Record<string, string> = {
     'blog.article.bulle-riassetto-centro-2027.title': 'Bulle a mis à l\'enquête la première phase du réaménagement',
     'blog.article.bulle-riassetto-centro-2027.excerpt': 'La première phase du réaménagement du centre de Bulle a été mise à l\'enquête.',
     'blog.article.bulle-riassetto-centro-2027.imageAlt': 'Centre-ville de Bulle et projet de réaménagement urbain',
+    'blog.article.vuadens-centro-lavorazione.title': 'Depuis Vuadens, un nouveau centre d\'usinage compact',
+    'blog.article.vuadens-centro-lavorazione.excerpt': 'Starrag présente depuis Vuadens un centre d\'usinage plus compact, dont le lancement mondial a eu lieu à Stuttgart.',
+    'blog.article.vuadens-centro-lavorazione.imageAlt': 'Centre d\'usinage compact de Starrag à Vuadens, dans le canton de Fribourg.',
 };
 
 export default blogMetaCantonFrFr;
