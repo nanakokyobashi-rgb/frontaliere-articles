@@ -156,7 +156,9 @@ const HARVESTER_DECISION = Object.freeze({
   'pr-already-open': 'carved-out',
   // Ha già escalato e la sua escalation (#228) è stata chiusa.
   'blocked-workflows-scope': 'escalatable',
-  'blocked-secrets': 'escalatable',
+  // Blocco ambientale diagnosticato correttamente: non è una regola agentica
+  // che una modifica alla documentazione possa prevenire.
+  'blocked-secrets': 'carved-out',
   'blocked-admin-settings': 'escalatable',
   // Il nuovo harvester lo tratta come contesto, non come driver di escalation.
   'revenue-tracker-manual': 'carved-out',

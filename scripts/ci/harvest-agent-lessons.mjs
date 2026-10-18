@@ -1246,6 +1246,10 @@ export function isAvoidableOverlapSkip(title, labels, hasDeliveredPr = false) {
 // e context nel summary del harvest restano visibili); smette solo di poter
 // aprire una PR di regole. Il segnale di capacità ha già la sua sede giusta: il
 // failure-rate di `issue-fix.yml` nel tracker #1951 (loop-health-report).
+// `blocked-secrets` (site #13396, instradata dal corpus #2765): il marker copre
+// blocchi esterni diagnosticati correttamente — credenziali/provider o scrittura
+// Remote Config. Non descrive una violazione prevenibile con una regola agentica;
+// resta nel volume del report, ma non puo' aprire una falsa escalation.
 // `skip-duplicate-diagnosis` (2026-08-08, #5288): emesso SOLO dal Mode 2 di
 // check-workflows-scope.mjs, cioè quando una issue con titolo identico a una
 // precedente già diagnosticata viene short-circuitata PRIMA di spendere un turno
@@ -1274,6 +1278,7 @@ export function isEscalationDriver(source, key) {
   const bareKey = key.startsWith(`${source}:`) ? key.slice(source.length + 1) : key;
   if (source === 'fix-outcome' && bareKey === 'no-root-cause') return false;
   if (source === 'fix-outcome' && bareKey === 'rate-limited') return false;
+  if (source === 'fix-outcome' && bareKey === 'blocked-secrets') return false;
   if (source === 'fix-outcome' && bareKey === 'skip-duplicate-diagnosis') return false;
   if (source === 'fix-outcome' && bareKey === 'overlap-skip') return false;
   if (source === 'fix-outcome' && bareKey === 'pr-already-open') return false;
@@ -1556,7 +1561,7 @@ export function measureBucket({ source, count, examples = [], escalationCutoff =
 // (`scripts/lib/classify-issue.mjs`) e del veto `KEEP_OPEN_LABELS` di
 // `reconcile-followups.mjs`: tenuta qui e non importata perche' questo file
 // scende `identical` nel corpus, e la parita' la verifica un test.
-export const SELF_HEAL_PIN_LABELS = Object.freeze(['keep-open', 'agent:no-age-out', 'pinned', 'tracker',
+export const SELF_HEAL_PIN_LABELS = Object.freeze(['keep-open', 'agent:no-age-out', 'operations-audit-review', 'pinned', 'tracker',
   'do-not-close', 'revenue']);
 // Claim del fixer: una issue in lavorazione non si chiude sotto i suoi piedi.
 export const SELF_HEAL_CLAIM_LABEL = 'agent:in-progress';
