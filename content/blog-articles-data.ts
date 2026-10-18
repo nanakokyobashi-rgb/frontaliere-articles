@@ -45382,6 +45382,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'checklist-neonato-confine-2026',
+ category: 'pratico',
+ date: '2026-10-18T11:33:43.066Z',
+ image: '/images/blog/nuovo-accordo-frontalieri-2024.webp',
+ hasCalculator: true,
+ articleType: 'evergreen',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

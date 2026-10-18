@@ -190,6 +190,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T11:17:54.485Z",
       "lastFailureAt": "2026-10-18T11:17:54.485Z"
+    },
+    {
+      "articleId": "checklist-neonato-confine-2026",
+      "title": "Nascita figlio: anagrafe e assegni per frontalieri 2026",
+      "fallbackImage": "/images/blog/nuovo-accordo-frontalieri-2024.webp",
+      "reason": "All image providers failed for article-checklist-neonato-confine-2026: openai-codex (vision gate rejected image: Synthetic photorealistic editorial scene relevant to the topic, wit",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T11:33:44.059Z",
+      "lastFailureAt": "2026-10-18T11:33:44.059Z"
     }
   ]
 }

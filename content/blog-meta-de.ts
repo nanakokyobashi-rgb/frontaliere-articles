@@ -13464,6 +13464,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.checklist-neonato-ticino.title': 'Geburt Kind und Einwohnermeldeamt: Verfahren 2026 für Grenzgänger',
     'blog.article.checklist-neonato-ticino.excerpt': 'Checkliste 2026 im Tessin für Grenzgänger mit Kind: Melde-, Scheck- und Konsularverfahren, Quellensteuer in der Schweiz, EG-Rahmen von 730 und KVG.',
     'blog.article.checklist-neonato-ticino.imageAlt': 'Grenzgängerfamilie mit Neugeborenem und Dokumenten auf dem Tisch',
+    'blog.article.checklist-neonato-confine-2026.title': 'Geburt eines Kindes: Melderegister und Familienzulagen für Grenzgänger 2026',
+    'blog.article.checklist-neonato-confine-2026.excerpt': 'Geburt: Melderegister, Familienzulagen und konsularische Formalitäten Grenzgängerabkommen: in Kraft seit dem 1.',
+    'blog.article.checklist-neonato-confine-2026.imageAlt': 'Grenzgängerfamilie mit Kinderwagen auf einer Straße im Tessin',
 };
 
 export default blogMetaDe;

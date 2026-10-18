@@ -111592,6 +111592,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-checklist-neonato-confine-2026': {
+    title: 'Nascita figlio: anagrafe e assegni per frontalieri 2026',
+    description: 'Nascita: anagrafe, assegni familiari e pratiche consolari Accordo frontalieri: in vigore dal 1° gennaio 2024 Vecchi: esenzione €7\'500; nuovi: franchigia €10\'000',
+    keywords: 'frontalieri, ticino, svizzera, italia, nascita, figlio, anagrafe, assegni',
+    ogTitle: 'Nascita figlio: checklist 2026 per frontalieri',
+    ogDescription: 'Nascita: anagrafe, assegni familiari e pratiche consolari Accordo frontalieri: in vigore dal 1° gennaio 2024 Vecchi: esenzione €7\'500; nuovi: franchigia €10\'000',
+    canonicalPath: '/articoli-frontaliere/checklist-neonato-confine-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nascita figlio: anagrafe e assegni per frontalieri 2026",
+      "description": "Nascita: anagrafe, assegni familiari e pratiche consolari Accordo frontalieri: in vigore dal 1° gennaio 2024 Vecchi: esenzione €7'500; nuovi: franchigia €10'000",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/nuovo-accordo-frontalieri-2024.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Famiglia frontaliera con passeggino in una strada del Ticino"
+      },
+      "datePublished": "2026-10-18T11:33:43+00:00",
+      "dateModified": "2026-10-18T11:33:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/checklist-neonato-confine-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

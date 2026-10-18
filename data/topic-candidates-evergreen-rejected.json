@@ -1560,6 +1560,66 @@
       "firstSeenAt": "2026-10-18T06:35:12.937Z",
       "lastValidatedAt": "2026-10-18T06:35:12.937Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere nascita figlio anagrafe pratiche 2026",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T11:26:44.264Z",
+      "lastValidatedAt": "2026-10-18T11:26:44.264Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere nascita figlio anagrafe pratiche 2026 entro 20 km",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T11:26:44.382Z",
+      "lastValidatedAt": "2026-10-18T11:26:44.382Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere nascita figlio anagrafe pratiche 2026 oltre 20 km",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T11:26:44.537Z",
+      "lastValidatedAt": "2026-10-18T11:26:44.537Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere nascita figlio anagrafe pratiche 2026 famiglia con figli",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T11:26:44.698Z",
+      "lastValidatedAt": "2026-10-18T11:26:44.698Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere nascita figlio anagrafe pratiche 2026 single",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T11:26:44.851Z",
+      "lastValidatedAt": "2026-10-18T11:26:44.851Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -9921,42 +9981,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/barco-oltre-meta-della-produzione-va-in-cina-sciopero-a-saronno/2710012": {
-      "section": "frontaliere",
-      "ts": 1792147137884
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/15/leggi-notizia/argomenti/economia-13/articolo/benessere-e-star-bene-nuova-frontiera-del-turismo-in-provincia-di-varese-perche-qui-si-puo-cam.html": {
-      "section": "frontaliere",
-      "ts": 1792147156790
-    },
-    "frontaliere::https://comozero.it/attualita/como-dopo-la-chiusura-il-gloria-e-un-patrimonio-della-citta-ora-il-comune-sostenga-la-riapertura": {
-      "section": "frontaliere",
-      "ts": 1792147268539
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/vinti-al-gioco-11-milioni-di-euro-ma-incassavano-i-sussidi-22-indagati-dalla-finanza-nel-vco/2709877": {
-      "section": "frontaliere",
-      "ts": 1792147286300
-    },
-    "frontaliere::https://www.tio.ch/dal-mondo/cronaca/1957189/traffico-di-droga-e-migranti-un-indagato-rintracciato-in-svizzera": {
-      "section": "frontaliere",
-      "ts": 1792147290914
-    },
-    "frontaliere::https://www.tio.ch/sport/altri-sport/1957167/bencic-ka-ex-marchio-lara-gut-behrami-belinda-segue-orme-diventa": {
-      "section": "frontaliere",
-      "ts": 1792147294977
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/caos-nei-cieli-italiani-tra-guasto-enav-e-sciopero-easyjet-a-malpensa-voli-cancellati-e-terminal-1-pieno/2710153": {
-      "section": "frontaliere",
-      "ts": 1792149602661
-    },
-    "frontaliere::https://comozero.it/politica/dalla-candidatura-al-consiglio-comunale-il-pd-di-como-lancia-il-corso-di-formazione-con-vista-elezioni": {
-      "section": "frontaliere",
-      "ts": 1792149612452
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/sapori-di-stagione-e-filiera-corta-a-busto-arsizio-nuovo-appuntamento-con-il-mercato-contadino/2710129": {
-      "section": "frontaliere",
-      "ts": 1792149687543
-    },
     "frontaliere::https://www.laregione.ch/cantone/luganese/1956506/la-citta-chiarisca-quanto-costa-un-affitto-sostenibile": {
       "section": "frontaliere",
       "ts": 1792151339737
@@ -10224,6 +10248,22 @@
     "frontaliere::https://www.varesenoi.it/2026/10/16/leggi-notizia/argomenti/salute-3/articolo/gallarate-ablazione-cardiaca-senza-raggi-x-per-una-paziente-di-18-anni-la-nuova-frontiera-delle-1.html": {
       "section": "frontaliere",
       "ts": 1792319498999
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/alcune-domande-sul-nuovo-dosso-alla-dogana-di-gaggiolo/2711563": {
+      "section": "frontaliere",
+      "ts": 1792322108974
+    },
+    "frontaliere::https://www.tio.ch/svizzera/attualita/1957532/ffs-estate-binari-casi-dilatazione": {
+      "section": "frontaliere",
+      "ts": 1792322136695
+    },
+    "frontaliere::https://www.vconews.it/2026/10/18/leggi-notizia/argomenti/economia-e-lavoro-9/articolo/affitti-nel-vco-a-cannobio-per-una-casa-se-ne-va-quasi-meta-del-reddito-medio.html": {
+      "section": "frontaliere",
+      "ts": 1792322344671
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/mattia-bellucci-festa-in-cina-conquista-il-titolo-nel-torneo-di-jinan/2711557": {
+      "section": "frontaliere",
+      "ts": 1792322682832
     }
   }
 }

@@ -13465,6 +13465,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.checklist-neonato-ticino.title': 'Child birth and registry records: 2026 procedures for border workers',
     'blog.article.checklist-neonato-ticino.excerpt': 'Checklist 2026 in Ticino for the border worker with a child: registries, checks and consular procedures, tax at source in Switzerland, CE framework of 730 and LAMal.',
     'blog.article.checklist-neonato-ticino.imageAlt': 'Cross-border family with a newborn and documents on a table',
+    'blog.article.checklist-neonato-confine-2026.title': 'Birth of a child: civil registry and allowances for cross-border workers 2026',
+    'blog.article.checklist-neonato-confine-2026.excerpt': 'Birth: civil registry, family allowances and consular procedures Cross-border agreement: in force from January 1, 2024 Old: exemption €7\'500; new: deductible €10\'000',
+    'blog.article.checklist-neonato-confine-2026.imageAlt': 'Cross-border family with a stroller on a Ticino street',
 };
 
 export default blogMetaEn;

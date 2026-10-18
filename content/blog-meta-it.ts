@@ -13466,6 +13466,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.checklist-neonato-ticino.title': 'Nascita figlio e anagrafe: pratiche 2026 per frontalieri',
     'blog.article.checklist-neonato-ticino.excerpt': 'Checklist 2026 in Ticino per il frontaliere con un figlio: anagrafe, assegni e pratiche consolari, imposta alla fonte in Svizzera, quadro CE del 730 e LAMal.',
     'blog.article.checklist-neonato-ticino.imageAlt': 'Famiglia frontaliere con neonato e documenti sul tavolo',
+    'blog.article.checklist-neonato-confine-2026.title': 'Nascita figlio: anagrafe e assegni per frontalieri 2026',
+    'blog.article.checklist-neonato-confine-2026.excerpt': 'Nascita: anagrafe, assegni familiari e pratiche consolari Accordo frontalieri: in vigore dal 1° gennaio 2024 Vecchi: esenzione €7\'500; nuovi: franchigia €10\'000',
+    'blog.article.checklist-neonato-confine-2026.imageAlt': 'Famiglia frontaliera con passeggino in una strada del Ticino',
 };
 
 export default blogMetaIt;
