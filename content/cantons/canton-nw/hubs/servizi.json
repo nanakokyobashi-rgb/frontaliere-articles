@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T23:29:53.062Z",
-  "contentHash": "885135b916f1611585806238c8bede0e59ebc477351208ea723b0b67a0d50171",
+  "updatedAt": "2026-10-18T03:12:27.140Z",
+  "contentHash": "de37251869fd07ec1f328f83d3bf2bc57ee9ded43eef5f5341e355e802b3d6e5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-17T15:46:35.117Z",
+      "updatedAt": "2026-10-17T18:37:55.922Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T14:28:40.900Z",
+      "updatedAt": "2026-10-17T19:45:28.268Z",
       "keyFacts": 0
     }
   ],
@@ -60,12 +60,12 @@
           "items": [
             {
               "label": "Stans",
-              "value": "12 °C",
+              "value": "11 °C",
               "detail": "oggi da 10 a 14 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-17T15:46:35.117Z"
+          "updatedAt": "2026-10-17T18:37:55.922Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -93,7 +93,7 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -173,7 +173,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "en": {
       "canton": "NW",
@@ -211,12 +211,12 @@
           "items": [
             {
               "label": "Stans",
-              "value": "12 °C",
+              "value": "11 °C",
               "detail": "today from 10 to 14 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-17T15:46:35.117Z"
+          "updatedAt": "2026-10-17T18:37:55.922Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -244,7 +244,7 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -320,7 +320,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "de": {
       "canton": "NW",
@@ -358,12 +358,12 @@
           "items": [
             {
               "label": "Stans",
-              "value": "12 °C",
+              "value": "11 °C",
               "detail": "heute 10 bis 14 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-17T15:46:35.117Z"
+          "updatedAt": "2026-10-17T18:37:55.922Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -467,7 +467,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "fr": {
       "canton": "NW",
@@ -505,12 +505,12 @@
           "items": [
             {
               "label": "Stans",
-              "value": "12 °C",
+              "value": "11 °C",
               "detail": "aujourd’hui de 10 à 14 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-17T15:46:35.117Z"
+          "updatedAt": "2026-10-17T18:37:55.922Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -538,7 +538,7 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -610,7 +610,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     }
   }
 }

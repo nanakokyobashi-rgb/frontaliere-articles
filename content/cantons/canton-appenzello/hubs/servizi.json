@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T23:29:53.062Z",
-  "contentHash": "f5046c77c8a79d36a85a9f0efdd3b5ada5eb91aac1510bc16ad0258afaa0b3eb",
+  "updatedAt": "2026-10-18T03:12:27.140Z",
+  "contentHash": "42c25203747c9be95315030678ee6088f64a5cde5d50432b959fc4731dc0975b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-17T15:34:17.871Z",
+      "updatedAt": "2026-10-17T20:37:10.348Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-17T15:46:35.117Z",
+      "updatedAt": "2026-10-17T18:37:55.922Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T14:28:40.900Z",
+      "updatedAt": "2026-10-17T19:45:28.268Z",
       "keyFacts": 0
     }
   ],
@@ -97,7 +97,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-17T15:34:17.871Z"
+          "updatedAt": "2026-10-17T20:37:10.348Z"
         },
         {
           "id": "meteo",
@@ -106,17 +106,17 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "11 °C",
-              "detail": "oggi da 8 a 14 °C"
+              "value": "9 °C",
+              "detail": "oggi da 8 a 13 °C"
             },
             {
               "label": "Herisau",
-              "value": "10 °C",
-              "detail": "oggi da 8 a 12 °C"
+              "value": "8 °C",
+              "detail": "oggi da 8 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-17T15:46:35.117Z"
+          "updatedAt": "2026-10-17T18:37:55.922Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -154,7 +154,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -242,7 +242,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -312,7 +312,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-17T15:34:17.871Z"
+          "updatedAt": "2026-10-17T20:37:10.348Z"
         },
         {
           "id": "meteo",
@@ -321,17 +321,17 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "11 °C",
-              "detail": "today from 8 to 14 °C"
+              "value": "9 °C",
+              "detail": "today from 8 to 13 °C"
             },
             {
               "label": "Herisau",
-              "value": "10 °C",
-              "detail": "today from 8 to 12 °C"
+              "value": "8 °C",
+              "detail": "today from 8 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-17T15:46:35.117Z"
+          "updatedAt": "2026-10-17T18:37:55.922Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -369,7 +369,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -449,7 +449,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -519,7 +519,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-17T15:34:17.871Z"
+          "updatedAt": "2026-10-17T20:37:10.348Z"
         },
         {
           "id": "meteo",
@@ -528,17 +528,17 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "11 °C",
-              "detail": "heute 8 bis 14 °C"
+              "value": "9 °C",
+              "detail": "heute 8 bis 13 °C"
             },
             {
               "label": "Herisau",
-              "value": "10 °C",
-              "detail": "heute 8 bis 12 °C"
+              "value": "8 °C",
+              "detail": "heute 8 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-17T15:46:35.117Z"
+          "updatedAt": "2026-10-17T18:37:55.922Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -576,7 +576,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -656,7 +656,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -726,7 +726,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-17T15:34:17.871Z"
+          "updatedAt": "2026-10-17T20:37:10.348Z"
         },
         {
           "id": "meteo",
@@ -735,17 +735,17 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "11 °C",
-              "detail": "aujourd’hui de 8 à 14 °C"
+              "value": "9 °C",
+              "detail": "aujourd’hui de 8 à 13 °C"
             },
             {
               "label": "Herisau",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 8 à 12 °C"
+              "value": "8 °C",
+              "detail": "aujourd’hui de 8 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-17T15:46:35.117Z"
+          "updatedAt": "2026-10-17T18:37:55.922Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -783,7 +783,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -855,7 +855,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     }
   }
 }

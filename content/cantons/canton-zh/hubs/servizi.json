@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T23:29:53.062Z",
-  "contentHash": "f0fd0e0b23d434fe3eaf293352b5facef5964cff0971cd58f4c15a422458f2f0",
+  "updatedAt": "2026-10-18T03:12:27.140Z",
+  "contentHash": "5d0f7ea74f1dc50fb4557cde9b6dcb14fc09d07f1bbe2f6e95de4aaa1e6ab233",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,22 +14,22 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-17T16:28:15.412Z",
+      "updatedAt": "2026-10-17T21:03:44.657Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-17T15:34:17.871Z",
+      "updatedAt": "2026-10-17T20:37:10.348Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-17T15:46:35.117Z",
+      "updatedAt": "2026-10-17T18:37:55.922Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T14:28:40.900Z",
+      "updatedAt": "2026-10-17T19:45:28.268Z",
       "keyFacts": 0
     }
   ],
@@ -116,7 +116,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-17T16:28:15.412Z"
+          "updatedAt": "2026-10-17T21:03:44.657Z"
         },
         {
           "id": "aste-targhe",
@@ -125,7 +125,7 @@
           "items": [
             {
               "label": "ZH772",
-              "value": "16.400 CHF",
+              "value": "18.400 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43624"
@@ -147,7 +147,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-17T15:34:17.871Z"
+          "updatedAt": "2026-10-17T20:37:10.348Z"
         },
         {
           "id": "meteo",
@@ -156,12 +156,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "12 °C",
-              "detail": "oggi da 10 a 13 °C"
+              "value": "11 °C",
+              "detail": "oggi da 10 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-17T15:46:35.117Z"
+          "updatedAt": "2026-10-17T18:37:55.922Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -199,7 +199,7 @@
               "url": "https://www.usz.ch/mit-beruehrung-naehe-schaffen-neuer-babymassage-kurs-am-usz/"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -279,7 +279,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "en": {
       "canton": "ZH",
@@ -363,7 +363,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-17T16:28:15.412Z"
+          "updatedAt": "2026-10-17T21:03:44.657Z"
         },
         {
           "id": "aste-targhe",
@@ -372,7 +372,7 @@
           "items": [
             {
               "label": "ZH772",
-              "value": "16,400 CHF",
+              "value": "18,400 CHF",
               "detail": "current bid",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43624"
@@ -394,7 +394,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-17T15:34:17.871Z"
+          "updatedAt": "2026-10-17T20:37:10.348Z"
         },
         {
           "id": "meteo",
@@ -403,12 +403,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "12 °C",
-              "detail": "today from 10 to 13 °C"
+              "value": "11 °C",
+              "detail": "today from 10 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-17T15:46:35.117Z"
+          "updatedAt": "2026-10-17T18:37:55.922Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -446,7 +446,7 @@
               "url": "https://www.usz.ch/mit-beruehrung-naehe-schaffen-neuer-babymassage-kurs-am-usz/"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -522,7 +522,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "de": {
       "canton": "ZH",
@@ -606,7 +606,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-17T16:28:15.412Z"
+          "updatedAt": "2026-10-17T21:03:44.657Z"
         },
         {
           "id": "aste-targhe",
@@ -615,7 +615,7 @@
           "items": [
             {
               "label": "ZH772",
-              "value": "16’400 CHF",
+              "value": "18’400 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43624"
@@ -637,7 +637,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-17T15:34:17.871Z"
+          "updatedAt": "2026-10-17T20:37:10.348Z"
         },
         {
           "id": "meteo",
@@ -646,12 +646,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "12 °C",
-              "detail": "heute 10 bis 13 °C"
+              "value": "11 °C",
+              "detail": "heute 10 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-17T15:46:35.117Z"
+          "updatedAt": "2026-10-17T18:37:55.922Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -689,7 +689,7 @@
               "url": "https://www.usz.ch/mit-beruehrung-naehe-schaffen-neuer-babymassage-kurs-am-usz/"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -765,7 +765,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "fr": {
       "canton": "ZH",
@@ -849,7 +849,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-17T16:28:15.412Z"
+          "updatedAt": "2026-10-17T21:03:44.657Z"
         },
         {
           "id": "aste-targhe",
@@ -858,7 +858,7 @@
           "items": [
             {
               "label": "ZH772",
-              "value": "16 400 CHF",
+              "value": "18 400 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43624"
@@ -880,7 +880,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-17T15:34:17.871Z"
+          "updatedAt": "2026-10-17T20:37:10.348Z"
         },
         {
           "id": "meteo",
@@ -889,12 +889,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "12 °C",
-              "detail": "aujourd’hui de 10 à 13 °C"
+              "value": "11 °C",
+              "detail": "aujourd’hui de 10 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-17T15:46:35.117Z"
+          "updatedAt": "2026-10-17T18:37:55.922Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -932,7 +932,7 @@
               "url": "https://www.usz.ch/mit-beruehrung-naehe-schaffen-neuer-babymassage-kurs-am-usz/"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -1004,7 +1004,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     }
   }
 }

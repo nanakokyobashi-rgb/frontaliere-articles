@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "f4b976d5592cf86b376538c97cc3328a38a5451a2d47ee4b4f40534f9e8ab6d0",
+  "updatedAt": "2026-10-18T03:12:27.140Z",
+  "contentHash": "1487ba0c8ddbebdc9574e04df2df8c56f91e28ce3a59eb0db247b578108a9e61",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-17T20:56:06.181Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T14:28:40.900Z",
+      "updatedAt": "2026-10-17T19:45:28.268Z",
       "keyFacts": 0
     }
   ],
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-17T20:56:06.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -108,12 +108,17 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Vortrag zur Sonderausstellung Rosgartenmuseum \"August Mosbrugger – Architekt, Professor und Sohn einer bedeutenden Künstlerfamilie\"",
+              "date": "2026-10-17T15:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vom+bodensee+an+den+main+august+mosbrugger+_+architekt_+professor+und+sohn+einer+bedeutenden+kuenstlerfamilie"
+            },
+            {
               "label": "Neue Ausstellung von Christoph Kneip in der vhs-Galerie in Konstanz",
               "date": "2026-10-05T08:10:00.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +140,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "en": {
       "canton": "SH",
@@ -218,7 +223,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-17T20:56:06.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -226,12 +231,17 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Vortrag zur Sonderausstellung Rosgartenmuseum \"August Mosbrugger – Architekt, Professor und Sohn einer bedeutenden Künstlerfamilie\"",
+              "date": "2026-10-17T15:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vom+bodensee+an+den+main+august+mosbrugger+_+architekt_+professor+und+sohn+einer+bedeutenden+kuenstlerfamilie"
+            },
+            {
               "label": "Neue Ausstellung von Christoph Kneip in der vhs-Galerie in Konstanz",
               "date": "2026-10-05T08:10:00.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +263,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "de": {
       "canton": "SH",
@@ -336,7 +346,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-17T20:56:06.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -344,12 +354,17 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Vortrag zur Sonderausstellung Rosgartenmuseum \"August Mosbrugger – Architekt, Professor und Sohn einer bedeutenden Künstlerfamilie\"",
+              "date": "2026-10-17T15:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vom+bodensee+an+den+main+august+mosbrugger+_+architekt_+professor+und+sohn+einer+bedeutenden+kuenstlerfamilie"
+            },
+            {
               "label": "Neue Ausstellung von Christoph Kneip in der vhs-Galerie in Konstanz",
               "date": "2026-10-05T08:10:00.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +386,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "fr": {
       "canton": "SH",
@@ -454,7 +469,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-17T20:56:06.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -462,12 +477,17 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Vortrag zur Sonderausstellung Rosgartenmuseum \"August Mosbrugger – Architekt, Professor und Sohn einer bedeutenden Künstlerfamilie\"",
+              "date": "2026-10-17T15:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vom+bodensee+an+den+main+august+mosbrugger+_+architekt_+professor+und+sohn+einer+bedeutenden+kuenstlerfamilie"
+            },
+            {
               "label": "Neue Ausstellung von Christoph Kneip in der vhs-Galerie in Konstanz",
               "date": "2026-10-05T08:10:00.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +509,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     }
   }
 }

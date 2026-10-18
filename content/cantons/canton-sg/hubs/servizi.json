@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-17T23:29:53.062Z",
-  "contentHash": "82254131a45e5a7369befc96a84fe9e45aa683c331d7a6fe02d561d9acdb480b",
+  "updatedAt": "2026-10-18T03:12:27.140Z",
+  "contentHash": "2c215d4215631d37800712d8d4192b78071f2f49fa8e3fbf47eb748fc78fb900",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-17T15:34:17.871Z",
+      "updatedAt": "2026-10-17T20:37:10.348Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-17T15:46:35.117Z",
+      "updatedAt": "2026-10-17T18:37:55.922Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T14:28:40.900Z",
+      "updatedAt": "2026-10-17T19:45:28.268Z",
       "keyFacts": 0
     }
   ],
@@ -102,7 +102,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-17T15:34:17.871Z"
+          "updatedAt": "2026-10-17T20:37:10.348Z"
         },
         {
           "id": "meteo",
@@ -111,18 +111,23 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "10 °C",
-              "detail": "oggi da 8 a 13 °C"
+              "value": "9 °C",
+              "detail": "oggi da 8 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-17T15:46:35.117Z"
+          "updatedAt": "2026-10-17T18:37:55.922Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Samstag, 17.10.2026 Gesundheitsberatung 1450: neuer Standort und mehr Angebot",
+              "date": "2026-10-17",
+              "url": "https://presse.vorarlberg.at/land/public/Gesundheitsberatung-1450-neuer-Standort-und-mehr-Angebot"
+            },
             {
               "label": "Innovation für Menschen mit ALS und seltenen neuromuskulären Erkrankungen",
               "date": "2026-10-16",
@@ -147,14 +152,9 @@
               "label": "Ausweisstelle Sargans: Terminbuchungen ab jetzt",
               "date": "2026-10-12",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/ausweisstelle-sargans--terminbuchungen-ab-jetzt.html"
-            },
-            {
-              "label": "Orthoplastik am Kantonsspital St.Gallen: Wo Orthopädie und Traumatologie, Plastische Chirurgie und Infektiologie zusammenwirken",
-              "date": "2026-10-12",
-              "url": "https://www.h-och.ch/ueber-uns/news/orthoplastik-am-kantonsspital-st-gallen-wo-orthopaedie-und-traumatologie-plastische-chirurgie-und-infektiologie-zusammenwirken-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "en": {
       "canton": "SG",
@@ -309,7 +309,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-17T15:34:17.871Z"
+          "updatedAt": "2026-10-17T20:37:10.348Z"
         },
         {
           "id": "meteo",
@@ -318,18 +318,23 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "10 °C",
-              "detail": "today from 8 to 13 °C"
+              "value": "9 °C",
+              "detail": "today from 8 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-17T15:46:35.117Z"
+          "updatedAt": "2026-10-17T18:37:55.922Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Samstag, 17.10.2026 Gesundheitsberatung 1450: neuer Standort und mehr Angebot",
+              "date": "2026-10-17",
+              "url": "https://presse.vorarlberg.at/land/public/Gesundheitsberatung-1450-neuer-Standort-und-mehr-Angebot"
+            },
             {
               "label": "Innovation für Menschen mit ALS und seltenen neuromuskulären Erkrankungen",
               "date": "2026-10-16",
@@ -354,14 +359,9 @@
               "label": "Ausweisstelle Sargans: Terminbuchungen ab jetzt",
               "date": "2026-10-12",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/ausweisstelle-sargans--terminbuchungen-ab-jetzt.html"
-            },
-            {
-              "label": "Orthoplastik am Kantonsspital St.Gallen: Wo Orthopädie und Traumatologie, Plastische Chirurgie und Infektiologie zusammenwirken",
-              "date": "2026-10-12",
-              "url": "https://www.h-och.ch/ueber-uns/news/orthoplastik-am-kantonsspital-st-gallen-wo-orthopaedie-und-traumatologie-plastische-chirurgie-und-infektiologie-zusammenwirken-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -437,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "de": {
       "canton": "SG",
@@ -512,7 +512,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-17T15:34:17.871Z"
+          "updatedAt": "2026-10-17T20:37:10.348Z"
         },
         {
           "id": "meteo",
@@ -521,18 +521,23 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "10 °C",
-              "detail": "heute 8 bis 13 °C"
+              "value": "9 °C",
+              "detail": "heute 8 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-17T15:46:35.117Z"
+          "updatedAt": "2026-10-17T18:37:55.922Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Samstag, 17.10.2026 Gesundheitsberatung 1450: neuer Standort und mehr Angebot",
+              "date": "2026-10-17",
+              "url": "https://presse.vorarlberg.at/land/public/Gesundheitsberatung-1450-neuer-Standort-und-mehr-Angebot"
+            },
             {
               "label": "Innovation für Menschen mit ALS und seltenen neuromuskulären Erkrankungen",
               "date": "2026-10-16",
@@ -557,14 +562,9 @@
               "label": "Ausweisstelle Sargans: Terminbuchungen ab jetzt",
               "date": "2026-10-12",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/ausweisstelle-sargans--terminbuchungen-ab-jetzt.html"
-            },
-            {
-              "label": "Orthoplastik am Kantonsspital St.Gallen: Wo Orthopädie und Traumatologie, Plastische Chirurgie und Infektiologie zusammenwirken",
-              "date": "2026-10-12",
-              "url": "https://www.h-och.ch/ueber-uns/news/orthoplastik-am-kantonsspital-st-gallen-wo-orthopaedie-und-traumatologie-plastische-chirurgie-und-infektiologie-zusammenwirken-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -640,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "fr": {
       "canton": "SG",
@@ -715,7 +715,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-17T15:34:17.871Z"
+          "updatedAt": "2026-10-17T20:37:10.348Z"
         },
         {
           "id": "meteo",
@@ -724,18 +724,23 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 8 à 13 °C"
+              "value": "9 °C",
+              "detail": "aujourd’hui de 8 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-17T15:46:35.117Z"
+          "updatedAt": "2026-10-17T18:37:55.922Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Samstag, 17.10.2026 Gesundheitsberatung 1450: neuer Standort und mehr Angebot",
+              "date": "2026-10-17",
+              "url": "https://presse.vorarlberg.at/land/public/Gesundheitsberatung-1450-neuer-Standort-und-mehr-Angebot"
+            },
             {
               "label": "Innovation für Menschen mit ALS und seltenen neuromuskulären Erkrankungen",
               "date": "2026-10-16",
@@ -760,14 +765,9 @@
               "label": "Ausweisstelle Sargans: Terminbuchungen ab jetzt",
               "date": "2026-10-12",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/ausweisstelle-sargans--terminbuchungen-ab-jetzt.html"
-            },
-            {
-              "label": "Orthoplastik am Kantonsspital St.Gallen: Wo Orthopädie und Traumatologie, Plastische Chirurgie und Infektiologie zusammenwirken",
-              "date": "2026-10-12",
-              "url": "https://www.h-och.ch/ueber-uns/news/orthoplastik-am-kantonsspital-st-gallen-wo-orthopaedie-und-traumatologie-plastische-chirurgie-und-infektiologie-zusammenwirken-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -839,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     }
   }
 }

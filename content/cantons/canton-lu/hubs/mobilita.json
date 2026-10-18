@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T23:29:53.062Z",
-  "contentHash": "c45ab3186330604f8e2314407b07a60b8cf135897cf79c0fabe87f645cab3b6a",
+  "updatedAt": "2026-10-18T03:12:27.140Z",
+  "contentHash": "530193d86c0ad71ca8889cc41b3aa568e8f7e1f895dc07438d284828c6063cdf",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-17T16:00:38.819Z",
+      "updatedAt": "2026-10-17T21:02:52.166Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T14:28:40.900Z",
+      "updatedAt": "2026-10-17T19:45:28.268Z",
       "keyFacts": 0
     }
   ],
@@ -55,16 +55,6 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "Autobahnzubringer Luzern-Zentrum Luzern Zentrum -> Luzern-Kasernenplatz tra Svincolo autostradale Luzern Zentrum E Incrocio Luzern-Kasernenplatz Situazione: colonna in uscita Causa: incidente…",
-              "value": "Traffico",
-              "date": "2026-10-17T15:46:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> S. Gottardo Galleria Galleria Schlund, al chilometro 97.4 Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia d'emergenza bloccata",
-              "value": "Traffico",
-              "date": "2026-10-17T15:51:00.000Z"
-            },
-            {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
               "value": "Cantiere",
               "detail": "fine prevista: 17 dicembre 2027",
@@ -87,10 +77,22 @@
               "value": "Cantiere",
               "detail": "fine prevista: 11 dicembre 2026",
               "date": "2025-12-04T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna -> Basilea Parcheggio Eggberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.4",
+              "value": "Cantiere",
+              "detail": "fine prevista: 12 novembre 2026",
+              "date": "2026-02-02T07:02:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna -> Basilea Parcheggio Sonnenberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.2",
+              "value": "Cantiere",
+              "detail": "fine prevista: 13 novembre 2026",
+              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-17T16:00:38.819Z"
+          "updatedAt": "2026-10-17T21:02:52.166Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -108,7 +110,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -154,7 +156,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "en": {
       "canton": "LU",
@@ -192,16 +194,6 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "Autobahnzubringer Luzern-Zentrum Luzern Zentrum -> Luzern-Kasernenplatz tra Svincolo autostradale Luzern Zentrum E Incrocio Luzern-Kasernenplatz Situazione: colonna in uscita Causa: incidente…",
-              "value": "Traffic",
-              "date": "2026-10-17T15:46:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> S. Gottardo Galleria Galleria Schlund, al chilometro 97.4 Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia d'emergenza bloccata",
-              "value": "Traffic",
-              "date": "2026-10-17T15:51:00.000Z"
-            },
-            {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
               "value": "Roadworks",
               "detail": "until 17 December 2027",
@@ -224,10 +216,22 @@
               "value": "Roadworks",
               "detail": "until 11 December 2026",
               "date": "2025-12-04T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna -> Basilea Parcheggio Eggberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.4",
+              "value": "Roadworks",
+              "detail": "until 12 November 2026",
+              "date": "2026-02-02T07:02:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna -> Basilea Parcheggio Sonnenberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.2",
+              "value": "Roadworks",
+              "detail": "until 13 November 2026",
+              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-17T16:00:38.819Z"
+          "updatedAt": "2026-10-17T21:02:52.166Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -245,7 +249,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -289,7 +293,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "de": {
       "canton": "LU",
@@ -327,16 +331,6 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "Autobahnzubringer Luzern-Zentrum Luzern-Zentrum -> Luzern-Kasernenplatz zwischen Anschluss Luzern-Zentrum und Kreuzung Luzern-Kasernenplatz Sachlage: Stau in der Ausfahrt Ursache: vorausgegangener…",
-              "value": "Verkehr",
-              "date": "2026-10-17T15:46:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> Gotthard Tunnel Schlund-Tunnel, bei Kilometer 97.4 Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug Verkehrsführung: Pannenstreifen blockiert",
-              "value": "Verkehr",
-              "date": "2026-10-17T15:51:00.000Z"
-            },
-            {
               "label": "H10 Bern <-> Luzern zwischen Ortschaft Wiggen und Ortschaft Kröschenbrunnen Sachlage: Verkehrsbehinderung Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
               "value": "Baustelle",
               "detail": "bis 17. Dezember 2027",
@@ -359,10 +353,22 @@
               "value": "Baustelle",
               "detail": "bis 11. Dezember 2026",
               "date": "2025-12-04T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Basel Parkplatz Eggberg Sachlage: Parkplatz geschlossen Baustelle, Länge [km] 0.4",
+              "value": "Baustelle",
+              "detail": "bis 12. November 2026",
+              "date": "2026-02-02T07:02:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Basel Parkplatz Sonnenberg Sachlage: Parkplatz geschlossen Baustelle, Länge [km] 0.2",
+              "value": "Baustelle",
+              "detail": "bis 13. November 2026",
+              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-17T16:00:38.819Z"
+          "updatedAt": "2026-10-17T21:02:52.166Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -380,7 +386,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -424,7 +430,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     },
     "fr": {
       "canton": "LU",
@@ -462,16 +468,6 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "Autobahnzubringer Luzern-Zentrum Lucerne-Centre -> Luzern-Kasernenplatz entre Jonction autoroutière Lucerne-Centre et Carrefour Luzern-Kasernenplatz Situation: bouchon dans la sortie Raison…",
-              "value": "Trafic",
-              "date": "2026-10-17T15:46:00.000Z"
-            },
-            {
-              "label": "A2 Lucerne -> St-Gothard Tunnel Tunnel Schlund, au kilomètre 97.4 Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: bande d'arrêt d'urgence bloquée",
-              "value": "Trafic",
-              "date": "2026-10-17T15:51:00.000Z"
-            },
-            {
               "label": "H10 Berne <-> Lucerne entre Localité Wiggen et Localité Kröschenbrunnen Situation: trafic perturbé Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
               "value": "Chantier",
               "detail": "jusqu’au 17 décembre 2027",
@@ -494,10 +490,22 @@
               "value": "Chantier",
               "detail": "jusqu’au 11 décembre 2026",
               "date": "2025-12-04T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne -> Bâle Parking Eggberg Situation: parking fermé travaux, longueur [km] 0.4",
+              "value": "Chantier",
+              "detail": "jusqu’au 12 novembre 2026",
+              "date": "2026-02-02T07:02:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne -> Bâle Parking Sonnenberg Situation: parking fermé travaux, longueur [km] 0.2",
+              "value": "Chantier",
+              "detail": "jusqu’au 13 novembre 2026",
+              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-17T16:00:38.819Z"
+          "updatedAt": "2026-10-17T21:02:52.166Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -515,7 +523,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -561,7 +569,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-18T03:12:27.140Z"
     }
   }
 }
