@@ -13457,6 +13457,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-18.imageAlt': 'I numeri del giorno per i frontalieri – 18 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
     'blog.article.bollettino-frontaliere-2026-10-18.seoDescription': 'Bollettino frontalieri del 18 ottobre 2026: ultime code ai valichi, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     'blog.article.bollettino-frontaliere-2026-10-18.ogDescription': 'I numeri del 18 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico, in quali comuni conviene fare il pieno, quanto vale il franco al cambio rilevato e quanti nuovi annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.rogo-cortivallo-persona-morta.title': 'Incendio in appartamento a Lugano: morta una persona',
+    'blog.article.rogo-cortivallo-persona-morta.excerpt': 'Incendio poco dopo le 03:00 in via Cortivallo a Lugano Le fiamme sono partite da un appartamento al secondo piano Nell\'appartamento è stato trovato un corpo',
+    'blog.article.rogo-cortivallo-persona-morta.imageAlt': 'Via Cortivallo a Lugano, dove un incendio in appartamento ha causato una vittima',
 };
 
 export default blogMetaIt;

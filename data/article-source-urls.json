@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/info/ticino-grigioni-e-insubria/il-mondo-si-fa-pi%c3%b9-instabile-e-il-ticino-misura-il-rischio--4074538.html": {
-    "articleId": "indice-rischio-geopolitico-ticino",
-    "ts": "2026-09-12T01:19:13.505Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/guasto-alla-linea-ferroviaria-a-melegnano-sulla-saronno-lodi-ritardi-fino-a-30-minuti/2675884": {
     "articleId": "guasto-ferrovia-melegnano-settembre",
     "ts": "2026-09-12T01:27:53.949Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenoi.it/2026/10/18/leggi-notizia/argomenti/canton-ticino/articolo/incendio-nella-notte-in-una-palazzina-di-lugano-ce-una-vittima-1.html": {
     "articleId": "incendio-palazzina-lugano",
     "ts": "2026-10-18T09:03:31.135Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/incendio-in-un-appartamento-a-lugano-morta-una-persona-444850": {
+    "articleId": "rogo-cortivallo-persona-morta",
+    "ts": "2026-10-18T09:43:01.892Z",
     "keyForm": 2
   }
 }

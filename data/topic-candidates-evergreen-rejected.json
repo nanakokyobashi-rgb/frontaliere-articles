@@ -9921,38 +9921,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/in-italia-54-milioni-di-poveri-listat-un-milione-sono-bambini-lavorare-non-basta-piu-per-uscire-dalla-poverta/2709526": {
-      "section": "frontaliere",
-      "ts": 1792136803755
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1957171/afc-percorso-metalcostruttori-media-formazione": {
-      "section": "frontaliere",
-      "ts": 1792138429841
-    },
-    "frontaliere::https://www.rsi.ch/s/4162453": {
-      "section": "frontaliere",
-      "ts": 1792138519968
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/voli-giornata-difficile-per-chi-viaggia-sciopero-easyjet-e-problemi-ai-sistemi-di-controllo-aereo/2709691": {
-      "section": "frontaliere",
-      "ts": 1792138575415
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/data-center-hanno-deciso-in-sei-cesate-insieme-mobilita-il-paese-per-il-consiglio-comunale-di-venerdi/2709085": {
-      "section": "frontaliere",
-      "ts": 1792138627565
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/16/leggi-notizia/argomenti/cronaca-20/articolo/scontro-tra-unauto-e-una-moto-sulla-statale-a-luvinate-sedicenne-ferito-e-traffico-in-tilt.html": {
-      "section": "frontaliere",
-      "ts": 1792140379057
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1957180/scanner-dacuda-mouse-inventato-azienda": {
-      "section": "frontaliere",
-      "ts": 1792140429624
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1957155/ubs-svizzera-londra-regno-strategia": {
-      "section": "frontaliere",
-      "ts": 1792140441914
-    },
     "frontaliere::https://www.varesenoi.it/2026/10/16/leggi-notizia/argomenti/salute-3/articolo/gallarate-ablazione-cardiaca-senza-raggi-x-per-una-paziente-di-18-anni-la-nuova-frontiera-delle-1.html": {
       "section": "frontaliere",
       "ts": 1792145114101
@@ -10252,6 +10220,10 @@
     "frontaliere::https://www.ocst.ch/il-sindacato/organi-statutari": {
       "section": "frontaliere",
       "ts": 1792308084325
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1957516/atomics-reattori-zugo-copenhagen-svizzera": {
+      "section": "frontaliere",
+      "ts": 1792316221024
     }
   }
 }

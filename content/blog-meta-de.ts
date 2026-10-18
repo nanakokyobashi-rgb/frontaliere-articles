@@ -13455,6 +13455,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-18.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 18. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
     'blog.article.bollettino-frontaliere-2026-10-18.seoDescription': 'Grenzgänger-Bulletin vom 18. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
     'blog.article.bollettino-frontaliere-2026-10-18.ogDescription': 'Die Zahlen vom 18. Oktober 2026 für Grenzgänger: wie lange man an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, wie der Franken zuletzt zum Euro stand und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.rogo-cortivallo-persona-morta.title': 'Wohnungsbrand in Lugano: Eine Person gestorben',
+    'blog.article.rogo-cortivallo-persona-morta.excerpt': 'Brand kurz nach 03:00 Uhr in der Via Cortivallo in Lugano Die Flammen gingen von einer Wohnung im zweiten Stock aus In der Wohnung wurde eine Leiche gefunden',
+    'blog.article.rogo-cortivallo-persona-morta.imageAlt': 'Via Cortivallo in Lugano nach einem Wohnungsbrand mit einem Todesopfer',
 };
 
 export default blogMetaDe;

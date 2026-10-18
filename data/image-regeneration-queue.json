@@ -180,6 +180,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T08:25:09.017Z",
       "lastFailureAt": "2026-10-18T08:25:09.017Z"
+    },
+    {
+      "articleId": "rogo-cortivallo-persona-morta",
+      "title": "Incendio in appartamento a Lugano: morta una persona",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-rogo-cortivallo-persona-morta: openai-codex (vision gate rejected image: Photorealistic fire-response scene with recognizable foreground fire",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T09:43:01.890Z",
+      "lastFailureAt": "2026-10-18T09:43:01.890Z"
     }
   ]
 }

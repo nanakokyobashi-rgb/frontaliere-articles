@@ -13458,6 +13458,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-18.imageAlt': 'Les chiffres du jour pour les frontaliers – 18 octobre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
     'blog.article.bollettino-frontaliere-2026-10-18.seoDescription': 'Bulletin du frontalier du 18 octobre 2026 : les files relevées aux douanes, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
     'blog.article.bollettino-frontaliere-2026-10-18.ogDescription': 'Les chiffres du 18 octobre 2026 pour les frontaliers : combien de temps on attend à chaque douane, où l\'essence coûte le moins cher, quel est le dernier taux franc-euro relevé et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.rogo-cortivallo-persona-morta.title': 'Incendie dans un appartement à Lugano : une personne décédée',
+    'blog.article.rogo-cortivallo-persona-morta.excerpt': 'Incendie peu après 03:00 à la via Cortivallo à Lugano Les flammes sont parties d\'un appartement au deuxième étage Un corps a été retrouvé dans l\'appartement',
+    'blog.article.rogo-cortivallo-persona-morta.imageAlt': 'Via Cortivallo à Lugano, après un incendie d\'appartement ayant fait une victime',
 };
 
 export default blogMetaFr;

@@ -13456,6 +13456,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-18.imageAlt': 'The day\'s numbers for cross-border commuters – October 18, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
     'blog.article.bollettino-frontaliere-2026-10-18.seoDescription': 'Cross-border brief, October 18, 2026: latest measured border waiting times, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
     'blog.article.bollettino-frontaliere-2026-10-18.ogDescription': 'The numbers for October 18, 2026, for cross-border commuters: how long the queue is at each crossing, which towns have the cheapest fuel, what the latest recorded franc-euro rate is and how many Swiss job listings were posted.',
+    'blog.article.rogo-cortivallo-persona-morta.title': 'Apartment fire in Lugano: one person dead',
+    'blog.article.rogo-cortivallo-persona-morta.excerpt': 'Fire shortly after 03:00 on Via Cortivallo in Lugano The flames started in an apartment on the second floor A body was found in the apartment',
+    'blog.article.rogo-cortivallo-persona-morta.imageAlt': 'Via Cortivallo in Lugano, where an apartment fire caused one death',
 };
 
 export default blogMetaEn;
