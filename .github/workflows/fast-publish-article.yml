@@ -172,11 +172,22 @@ jobs:
           BEFORE: ${{ github.event.before }}
           AFTER: ${{ github.sha }}
           EVENT_NAME: ${{ github.event_name }}
+          ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
+          ARTICLE_ID_INPUT: ${{ inputs.article_id }}
+          SECTION_INPUT: ${{ inputs.section }}
         run: |
           set -euo pipefail
           changed_files="$RUNNER_TEMP/fast-publish-article-changed-bodies.txt"
           : > "$changed_files"
           scan_mode=full
+          preflight_article_ids=''
+          if [ "$EVENT_NAME" = 'workflow_dispatch' ]; then
+            if [ -n "${ARTICLE_IDS_INPUT:-}" ]; then
+              preflight_article_ids="$ARTICLE_IDS_INPUT"
+            elif [ -n "${ARTICLE_ID_INPUT:-}" ]; then
+              preflight_article_ids="$(jq -cn --arg id "$ARTICLE_ID_INPUT" '[$id]')"
+            fi
+          fi
           # Keep this dependency closure identical to publish-api.yml. A mixed
           # push that changes a body and its gate must scan the full corpus.
           gate_input_paths=(
@@ -210,6 +221,8 @@ jobs:
             fi
           fi
           PREFLIGHT_SCAN_MODE="$scan_mode" \
+            PREFLIGHT_ARTICLE_IDS="$preflight_article_ids" \
+            PREFLIGHT_SECTION="${SECTION_INPUT:-frontaliere}" \
             PREFLIGHT_CHANGED_FILES_FILE="$changed_files" \
             node scripts/ci/check-blog-body-links.mjs
 

@@ -9,7 +9,12 @@ import {
   sanitizeArticleFaqMarkdown,
   sanitizeArticleMarkdownLinks,
 } from '../../scripts/lib/article-link-contract.mjs';
-import { BLOG_BODY_ROOTS, ROOT, scanBlogBodyLinks } from '../../scripts/ci/check-blog-body-links.mjs';
+import {
+  BLOG_BODY_ROOTS,
+  ROOT,
+  bodyFilesForArticleIds,
+  scanBlogBodyLinks,
+} from '../../scripts/ci/check-blog-body-links.mjs';
 import { escapeForSingleQuoteTS } from '../scripts/lib/article-meta-block.mjs';
 
 test('il contratto ripara solo le destinazioni legacy con una mappatura pubblica', () => {
@@ -402,6 +407,48 @@ test('il gate decodifica i body TypeScript e allinea i confini al renderer stati
   }
 });
 
+test('il preflight di un publisher esplicito limita il gate agli id e alle quattro locali', () => {
+  assert.deepEqual(
+    bodyFilesForArticleIds('frontaliere', ['target-article']),
+    [
+      'content/blog-body/it/target-article.ts',
+      'content/blog-body/en/target-article.ts',
+      'content/blog-body/de/target-article.ts',
+      'content/blog-body/fr/target-article.ts',
+    ],
+  );
+  assert.deepEqual(bodyFilesForArticleIds('frontaliere', []), []);
+  assert.throws(
+    () => bodyFilesForArticleIds('frontaliere', ['../outside']),
+    /article id publisher non valido/,
+  );
+  assert.throws(
+    () => bodyFilesForArticleIds('not-active', ['target-article']),
+    /sezione publisher non attiva/,
+  );
+
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'article-body-link-target-scope-'));
+  const targetFiles = bodyFilesForArticleIds('frontaliere', ['target-article']);
+  try {
+    for (const relative of [
+      ...targetFiles,
+      'content/blog-body/it/unrelated-legacy-body.ts',
+    ]) {
+      const file = path.join(fixtureRoot, relative);
+      mkdirSync(path.dirname(file), { recursive: true });
+      const markdown = relative.endsWith('unrelated-legacy-body.ts')
+        ? '[legacy](bare-target)'
+        : '[ok](https://example.com/target)';
+      writeFileSync(file, `const body = {\n  'blog.article.fixture.body1': '${escapeForSingleQuoteTS(markdown)}',\n};\n`, 'utf8');
+    }
+    const scoped = scanBlogBodyLinks(fixtureRoot, targetFiles);
+    assert.equal(scoped.files.length, targetFiles.length);
+    assert.deepEqual(scoped.offenders, []);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('il gate rifiuta espressioni concatenate dopo un literal invece di saltarle', () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'article-body-link-expression-'));
   const relative = `${BLOG_BODY_ROOTS[0]}/it/concatenated.ts`;
@@ -511,6 +558,8 @@ test('i publisher rapidi eseguono il link gate prima di ogni pubblicazione', () 
     ]) {
       assert.ok(pushPaths.includes(`'${dependency}'`), `${file} deve ripartire quando cambia ${dependency}`);
     }
+    assert.match(workflow, /PREFLIGHT_ARTICLE_IDS/);
+    assert.match(workflow, /PREFLIGHT_SECTION/);
   }
 });
 
