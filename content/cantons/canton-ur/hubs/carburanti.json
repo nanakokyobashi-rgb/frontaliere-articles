@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T11:38:04.345Z",
-  "contentHash": "b3e882a478e9d1176ae49cdb94ef03e63f71cdbe6be989b16123a0f9bff76e80",
+  "updatedAt": "2026-10-18T07:04:15.428Z",
+  "contentHash": "04662a9d912b1d3862f869b21ad8570c5dcd1fc6a80bac146009485d611c2827",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-16T11:53:35.759Z",
+      "updatedAt": "2026-10-17T11:10:59.318Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-16T11:53:35.759Z"
+          "updatedAt": "2026-10-17T11:10:59.318Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Silenen: Landrat approva CHF 207.000 per muri a secco",
+          "url": "/articoli-uri/silenen-muri-secco/",
+          "excerpt": "Il Landrat approva CHF 207.000 senza voti contrari 3,6 km di muri storici nell'area di Silenen Circa il 60% presenta un rischio per la sicurezza I lavori",
+          "date": "2026-10-18T06:56:11.601Z"
+        },
         {
           "title": "Eventi del weekend nel Canton Uri: cosa fare sabato e domenica",
           "url": "/articoli-uri/eventi-weekend-uri/",
@@ -82,12 +88,6 @@
           "url": "/articoli-uri/uri-chiusura-passhoehe/",
           "excerpt": "Strada cantonale chiusa di notte tra Passhöhe e Urnerboden dal 14 al 15 ottobre per lavori di pavimentazione; con maltempo, i lavori slittano.",
           "date": "2026-10-08T23:39:16.200Z"
-        },
-        {
-          "title": "Canton Uri punta sulle misure energetiche per il clima",
-          "url": "/articoli-uri/uri-misure-energia-clima/",
-          "excerpt": "Il Canton Uri punta sulle misure energetiche per la protezione del clima: il titolo della notizia indica l'orientamento, senza dettagli operativi.",
-          "date": "2026-10-07T09:07:12.834Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T07:04:15.428Z"
     },
     "en": {
       "canton": "UR",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-16T11:53:35.759Z"
+          "updatedAt": "2026-10-17T11:10:59.318Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Silenen: Cantonal Parliament approves CHF 207.000 for dry stone walls",
+          "url": "/en/uri-articles/silenen-dry-stone-walls/",
+          "excerpt": "The Landrat approves CHF 207.000 with no votes against 3,6 km of historic walls in the Silenen area Around 60% pose a safety risk Work starts in October",
+          "date": "2026-10-18T06:56:11.601Z"
+        },
         {
           "title": "Weekend events in the canton of Uri: what to do Saturday & Sunday",
           "url": "/en/uri-articles/weekend-events-uri/",
@@ -169,12 +175,6 @@
           "url": "/en/uri-articles/uri-night-road-closure/",
           "excerpt": "Cantonal road closed at night between Passhöhe and Urnerboden from October 14 to 15 for paving work; in bad weather, the work will be postponed.",
           "date": "2026-10-08T23:39:16.200Z"
-        },
-        {
-          "title": "Canton Uri focuses on energy measures for the climate",
-          "url": "/en/uri-articles/uri-energy-measures-climate/",
-          "excerpt": "The Canton of Uri is focusing on energy measures for climate protection: the news headline indicates the direction, without operational details.",
-          "date": "2026-10-07T09:07:12.834Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T07:04:15.428Z"
     },
     "de": {
       "canton": "UR",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-16T11:53:35.759Z"
+          "updatedAt": "2026-10-17T11:10:59.318Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Silenen: Landrat genehmigt CHF 207.000 für Trockenmauern",
+          "url": "/de/uri-artikel/silenen-trockenmauern-sanierung/",
+          "excerpt": "Der Landrat genehmigt CHF 207.000 ohne Gegenstimmen 3,6 km historische Mauern im Gebiet von Silenen Rund 60% stellen ein Sicherheitsrisiko dar Die Arbeiten",
+          "date": "2026-10-18T06:56:11.601Z"
+        },
         {
           "title": "Veranstaltungen am Wochenende im Kanton Uri: was tun Sa & So",
           "url": "/de/uri-artikel/wochenend-veranstaltungen-uri/",
@@ -256,12 +262,6 @@
           "url": "/de/uri-artikel/uri-nachtsperrung-passhoehe/",
           "excerpt": "Kantonsstraße zwischen Passhöhe und Urnerboden in der Nacht vom 14.",
           "date": "2026-10-08T23:39:16.200Z"
-        },
-        {
-          "title": "Der Kanton Uri setzt auf energetische Maßnahmen für den Klimaschutz",
-          "url": "/de/uri-artikel/uri-energiemassnahmen-klimaschutz/",
-          "excerpt": "Der Kanton Uri setzt auf energetische Maßnahmen zum Schutz des Klimas: Der Nachrichtentitel gibt die Ausrichtung an, ohne operative Details.",
-          "date": "2026-10-07T09:07:12.834Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T07:04:15.428Z"
     },
     "fr": {
       "canton": "UR",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-16T11:53:35.759Z"
+          "updatedAt": "2026-10-17T11:10:59.318Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Silenen : le Landrat approuve CHF 207.000 pour des murs en pierre sèche",
+          "url": "/fr/articles-uri/silenen-murs-pierre-seche/",
+          "excerpt": "Le Landrat approuve CHF 207.000 sans voix contre 3,6 km de murs historiques dans la région de Silenen Environ 60% présentent un risque pour la sécurité",
+          "date": "2026-10-18T06:56:11.601Z"
+        },
         {
           "title": "Événements du week-end dans le canton d'Uri : que faire samedi & dimanche",
           "url": "/fr/articles-uri/evenements-week-end-uri/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-uri/uri-fermeture-nocturne-route/",
           "excerpt": "Route cantonale fermée de nuit entre Passhöhe et Urnerboden du 14 au 15 octobre pour des travaux de revêtement ; en cas de mauvais temps, les travaux sont reportés.",
           "date": "2026-10-08T23:39:16.200Z"
-        },
-        {
-          "title": "Le canton d'Uri mise sur les mesures énergétiques pour le climat",
-          "url": "/fr/articles-uri/uri-mesures-energetiques-climat/",
-          "excerpt": "Le canton d'Uri mise sur les mesures énergétiques pour la protection du climat : le titre de la nouvelle indique l'orientation, sans détails opérationnels.",
-          "date": "2026-10-07T09:07:12.834Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-18T07:04:15.428Z"
     }
   }
 }

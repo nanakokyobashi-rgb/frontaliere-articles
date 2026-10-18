@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T19:17:26.345Z",
-  "contentHash": "291b3536547f21229721fbe3da63a4be2a7887f40208b28bb7599f7218a31482",
+  "updatedAt": "2026-10-18T07:04:15.428Z",
+  "contentHash": "15bf8dd5762b5f7eada270b22d107c44da84fbd6044c660b4d2c27d91ba105f7",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Losanna: Hôpital des Nounours al CHUV il 14 e 15 novembre",
+          "url": "/articoli-vaud/hopital-nounours-chuv-lausanne/",
+          "excerpt": "Nuova edizione al CHUV il 14 e 15 novembre Iscrizioni dal 24 ottobre alle 8 Partecipazione gratuita su iscrizione Attività per bambini nella zona degli auditori",
+          "date": "2026-10-18T06:56:42.455Z"
+        },
+        {
           "title": "Eventi del weekend nel Canton Vaud: cosa fare sabato e domenica",
           "url": "/articoli-vaud/eventi-weekend-vaud/",
           "excerpt": "Eventi nel Canton Vaud ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
@@ -94,12 +100,6 @@
           "url": "/articoli-vaud/cff-eclepens-treni-ripresa/",
           "excerpt": "Traffico ripreso alle 05:40 di domenica Linea Yverdon-les-Bains–Losanna tornata normale Incendio doloso a Eclépens: disagi da venerdì CFF mobilitati: circa 100",
           "date": "2026-10-12T03:05:29.472Z"
-        },
-        {
-          "title": "Pensioni multiple Francia/Svizzera: leggere il netto riga per riga",
-          "url": "/articoli-vaud/pensione-multipla-francia-svizzera-2026/",
-          "excerpt": "Il netto del relevé non riflette sempre la pensione.",
-          "date": "2026-10-12T02:50:47.675Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T07:04:15.428Z"
     },
     "en": {
       "canton": "VD",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lausanne: Hôpital des Nounours at CHUV on 14 and 15 November",
+          "url": "/en/vaud-articles/lausanne-teddy-bear-hospital-chuv/",
+          "excerpt": "New edition at CHUV on 14 and 15 November Registration opens on 24 October at 8 Free participation upon registration Activities for children in the auditorium",
+          "date": "2026-10-18T06:56:42.455Z"
+        },
+        {
           "title": "Weekend events in the canton of Vaud: what to do Saturday & Sunday",
           "url": "/en/vaud-articles/weekend-events-vaud/",
           "excerpt": "Events in the canton of Vaud every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
@@ -193,12 +199,6 @@
           "url": "/en/vaud-articles/sbb-eclepens-train-service-resumed/",
           "excerpt": "Traffic resumed at 05:40 on Sunday Yverdon-les-Bains–Lausanne line back to normal Arson in Eclépens: disruptions since Friday CFF mobilized: approximately 100",
           "date": "2026-10-12T03:05:29.472Z"
-        },
-        {
-          "title": "Multiple French/Swiss pensions: read the net amount line by line",
-          "url": "/en/vaud-articles/multi-country-pension-france-switzerland-2026/",
-          "excerpt": "The net amount on the statement does not always reflect the pension.",
-          "date": "2026-10-12T02:50:47.675Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T07:04:15.428Z"
     },
     "de": {
       "canton": "VD",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lausanne: Hôpital des Nounours am CHUV am 14. und 15. November",
+          "url": "/de/waadt-artikel/lausanne-kuscheltier-spital-chuv/",
+          "excerpt": "Neue Ausgabe am CHUV am 14.",
+          "date": "2026-10-18T06:56:42.455Z"
+        },
+        {
           "title": "Veranstaltungen am Wochenende in der Waadt: was tun Sa & So",
           "url": "/de/waadt-artikel/wochenend-veranstaltungen-waadt/",
           "excerpt": "Veranstaltungen in der Waadt an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
@@ -292,12 +298,6 @@
           "url": "/de/waadt-artikel/sbb-eclepens-zugverkehr-wieder-normal/",
           "excerpt": "Verkehr am Sonntag um 05:40 Uhr wieder aufgenommen Bahnlinie Yverdon-les-Bains–Lausanne wieder im Normalbetrieb Brandstiftung in Eclépens: Beeinträchtigungen",
           "date": "2026-10-12T03:05:29.472Z"
-        },
-        {
-          "title": "Mehrere Renten aus Frankreich/der Schweiz: den Nettobetrag Zeile für Zeile lesen",
-          "url": "/de/waadt-artikel/mehrsprachige-rente-frankreich-schweiz-2026/",
-          "excerpt": "Der Nettobetrag der Abrechnung entspricht nicht immer der Rente.",
-          "date": "2026-10-12T02:50:47.675Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T07:04:15.428Z"
     },
     "fr": {
       "canton": "VD",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lausanne : Hôpital des Nounours au CHUV les 14 et 15 novembre",
+          "url": "/fr/articles-vaud/lausanne-hopital-des-nounours-au-chuv-les-14-et-15-novembre/",
+          "excerpt": "Nouvelle édition au CHUV les 14 et 15 novembre Inscriptions à partir du 24 octobre à 8 h Participation gratuite sur inscription Activités pour enfants",
+          "date": "2026-10-18T06:56:42.455Z"
+        },
+        {
           "title": "Événements du week-end dans le canton de Vaud : que faire samedi & dimanche",
           "url": "/fr/articles-vaud/evenements-week-end-vaud/",
           "excerpt": "Événements dans le canton de Vaud chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-vaud/cff-eclepens-trafic-repris/",
           "excerpt": "Trafic rétabli à 05:40 dimanche Ligne Yverdon-les-Bains–Lausanne revenue à la normale Incendie criminel à Eclépens : perturbations depuis vendredi CFF mobilisés",
           "date": "2026-10-12T03:05:29.472Z"
-        },
-        {
-          "title": "Pensions multiples France/Suisse : lire le net ligne par ligne",
-          "url": "/fr/articles-vaud/retraite-multi-pays-france-suisse-2026/",
-          "excerpt": "Le net du relevé ne reflète pas toujours la pension.",
-          "date": "2026-10-12T02:50:47.675Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-18T07:04:15.428Z"
     }
   }
 }
