@@ -1271,6 +1271,30 @@ async function snapshotCantonPages(pages, { probeImpl = probe } = {}) {
   return snapshots;
 }
 
+/** Indica se una pagina gia' live contiene una chiave immagine candidata all'upload. */
+function cantonPageReferencesAsset(body, key) {
+  const escapedKey = escapeRegex(key);
+  const boundary = '(?![\\w./%-])';
+  return new RegExp(
+    `(?:${escapeRegex(CDN_BASE)}|${escapeRegex(APEX)})/${escapedKey}${boundary}|(?<![\\w.@])/${escapedKey}${boundary}`,
+    'u',
+  ).test(String(body ?? ''));
+}
+
+async function uploadCantonAssets({ cdnUploads, heldAssetKeys, runImpl, assertMainFreshImpl }) {
+  let failures = 0;
+  await assertMainFreshImpl();
+  for (const { local, key } of cdnUploads) {
+    if (heldAssetKeys.has(key)) continue;
+    const { stdout } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', local, key]);
+    if (!stdout.includes('✅ uploaded')) {
+      failures++;
+      console.log(`::warning::[${LOG}] immagine non caricata: ${key}`);
+    }
+  }
+  return failures;
+}
+
 /** Ripristina HTML, purge e verifica prima che la transazione RSS torni indietro. */
 async function rollbackCantonPages({ pages, snapshots, distDir, runImpl, probeImpl, live }) {
   const rollbackFiles = [];
@@ -1767,32 +1791,13 @@ export async function publish({
   const immutableMismatches = [];
   let status = beforeStatus;
   console.log(`[${LOG}] preflight: sezione ${section} nel registro pubblicato = ${beforeStatus}`);
-  // This is the first remote mutation after render/preflight. Recheck here,
-  // not only in the workflow before rendering: main may advance while pages
-  // and feeds are being built.
-  await assertMainFreshImpl();
-  for (const { local, key } of cdnUploads) {
-    const { stdout } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', local, key]);
-    if (!stdout.includes('✅ uploaded')) {
-      failures++;
-      console.log(`::warning::[${LOG}] immagine non caricata: ${key}`);
-    }
-  }
-  // Un HTML che punta a un hero non ancora confermato e' una pubblicazione
-  // parziale: il reconcile controlla la pagina, non ogni asset CDN. Lasciare
-  // partire gli upload delle pagine qui renderebbe quindi servibile un nuovo
-  // canonical con immagine 404. Gli articoli gia' presenti restano intatti e
-  // il run rosso verra' ripreso dal fast-publish/reconcile successivo.
-  if (failures) {
-    console.error(`::error::[${LOG}] upload hero incompleto: nessuna pagina HTML viene caricata`);
-    return { failures, uploaded: 0, deleted: 0, status: beforeStatus };
-  }
-  try {
+  let heldAssetKeys = new Set();
   if (snapshotPagesBeforeUpload && !pageSnapshots) {
     await assertMainFreshImpl();
     try {
       const snapshots = await snapshotCantonPages([...pages, ...immutablePages], { probeImpl });
-      for (const page of uniqueCantonPages(immutablePages)) {
+      const immutableSnapshotPages = uniqueCantonPages(immutablePages);
+      for (const page of immutableSnapshotPages) {
         const previous = snapshots.get(page.edgeKey);
         const local = path.join(distDir, page.rel);
         const next = fs.existsSync(local) ? fs.readFileSync(local, 'utf8') : null;
@@ -1811,12 +1816,30 @@ export async function publish({
           );
         }
       }
+      const immutableBodies = immutableSnapshotPages.map((page) => snapshots.get(page.edgeKey)?.body ?? '');
+      heldAssetKeys = new Set(
+        cdnUploads
+          .filter(({ key }) => immutableBodies.some((body) => cantonPageReferencesAsset(body, key)))
+          .map(({ key }) => key),
+      );
       pageSnapshots = new Map(uniqueCantonPages(pages).map((page) => [page.edgeKey, snapshots.get(page.edgeKey)]));
     } catch (error) {
       console.error(`::error::[${LOG}] snapshot della release HTML precedente fallito: ${error?.message ?? String(error)}`);
       return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
     }
   }
+
+  failures += await uploadCantonAssets({ cdnUploads, heldAssetKeys, runImpl, assertMainFreshImpl });
+  // Un HTML che punta a un hero non ancora confermato e' una pubblicazione
+  // parziale: il reconcile controlla la pagina, non ogni asset CDN. Lasciare
+  // partire gli upload delle pagine qui renderebbe quindi servibile un nuovo
+  // canonical con immagine 404. Gli articoli gia' presenti restano intatti e
+  // il run rosso verra' ripreso dal fast-publish/reconcile successivo.
+  if (failures) {
+    console.error(`::error::[${LOG}] upload hero incompleto: nessuna pagina HTML viene caricata`);
+    return { failures, uploaded: 0, deleted: 0, status: beforeStatus };
+  }
+  try {
   if (cantonRssFeeds.length > 0 || removeStaleCantonRssFeeds) {
     const rssStatus = await publishedStatusImpl(section);
     if (rssStatus !== 'live' && !removeStaleCantonRssFeeds) {

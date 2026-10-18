@@ -8,14 +8,17 @@ import './lib/stdout-off-runner-pipe.mjs';
 import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
 import { ARTICLE_SECTION_CORE_ALL, ARTICLE_SECTION_CORE_LIST } from '../../engine/shared/articleSectionCore.mjs';
+import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwner.mjs';
 import {
   cantonRssPublishPlan,
   main,
+  pageEntry,
+  publish,
 } from '../../scripts/publish-section-pages.mjs';
 import { pageManifestFromPages } from '../../scripts/lib/section-page-manifest.mjs';
 import { parseArgs } from '../../scripts/publish-section-pages.mjs';
@@ -95,6 +98,76 @@ test('publisher: una release live con manifest precedente deferisce RSS al repla
   } finally {
     console.log = realConsoleLog;
     console.error = realConsoleError;
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('publisher: lo staging snapshotta prima degli asset e trattiene quelli delle pagine immutabili', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-assets-'));
+  const immutable = pageEntry('canton-ti', 'articoli-ticino/existing/index.html', 'article');
+  const staged = pageEntry('canton-ti', 'articoli-ticino/new/index.html', 'article');
+  const previousHtml = `<!doctype html><html><head></head><body><img src="https://cdn.frontaliereticino.ch/images/shared.webp"></body></html>`;
+  const stagedHtml = `<!doctype html><html><head></head><body>nuova</body></html>`;
+  const events = [];
+  let stagedUploaded = false;
+  const immutableLocal = path.join(fixtureRoot, immutable.rel);
+  mkdirSync(path.dirname(immutableLocal), { recursive: true });
+  writeFileSync(immutableLocal, previousHtml, 'utf8');
+  try {
+    const result = await publish({
+      section: 'canton-ti',
+      pages: [staged],
+      immutablePages: [immutable],
+      snapshotPagesBeforeUpload: true,
+      cdnUploads: [
+        { local: 'public/images/shared.webp', key: 'images/shared.webp' },
+        { local: 'public/images/new.webp', key: 'images/new.webp' },
+      ],
+      obsoletePages: [],
+      distDir: fixtureRoot,
+      publishedStatusImpl: async () => 'live',
+      runImpl: (_command, args) => {
+        if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+          if (args[2].startsWith('edge/')) {
+            stagedUploaded = true;
+            events.push('page-upload');
+          } else {
+            events.push(`asset-upload:${args[2]}`);
+          }
+          return { code: 0, stdout: '✅ uploaded' };
+        }
+        if (args.includes('scripts/cf-purge-cache.mjs')) {
+          events.push('purge');
+          return { code: 0, stdout: '' };
+        }
+        throw new Error(`comando inatteso: ${args.join(' ')}`);
+      },
+      probeImpl: async (url) => {
+        if (url === immutable.cdnUrl) {
+          events.push('snapshot:immutable');
+          return { ok: true, status: 200, body: previousHtml };
+        }
+        if (url === staged.cdnUrl || url === staged.apexUrl) {
+          if (!stagedUploaded) {
+            events.push('snapshot:staged');
+            return { ok: false, status: 'HTTP 404' };
+          }
+          events.push('probe:staged');
+          return { ok: true, status: 200, body: `${stagedHtml}${CORPUS_ROUTE_OWNER_META_TAG}` };
+        }
+        throw new Error(`URL inatteso: ${url}`);
+      },
+    });
+    assert.equal(result.failures, 0);
+    assert.deepEqual(events.slice(0, 4), [
+      'snapshot:staged',
+      'snapshot:immutable',
+      'asset-upload:images/new.webp',
+      'page-upload',
+    ]);
+    assert.ok(!events.includes('asset-upload:images/shared.webp'), 'l’asset ancora referenziato non viene sovrascritto');
+    assert.ok(events.indexOf('snapshot:immutable') < events.indexOf('asset-upload:images/new.webp'));
+  } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }
 });
