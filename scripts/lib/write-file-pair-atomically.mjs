@@ -382,8 +382,22 @@ function closeWriterLockKeepingPath(fsImpl, lock, errors) {
 function writeStagedFiles(fsImpl, staged, transactionId) {
   try {
     for (const item of staged) {
-      fsImpl.writeFileSync(item.tmp, item.after, { encoding: 'utf8', flag: 'wx' });
-      item.ownsTmp = true;
+      try {
+        fsImpl.writeFileSync(item.tmp, item.after, { encoding: 'utf8', flag: 'wx' });
+        item.ownsTmp = true;
+      } catch (error) {
+        // An exclusive write can fail after creating a partial file. Preserve
+        // an EEXIST artifact owned by another transaction, but reclaim a file
+        // that this transaction created before the I/O failure.
+        if (error?.code !== 'EEXIST') {
+          try {
+            item.ownsTmp = pathExists(fsImpl, item.tmp);
+          } catch {
+            item.ownsTmp = false;
+          }
+        }
+        throw error;
+      }
     }
   } catch (error) {
     const cleanupErrors = [];

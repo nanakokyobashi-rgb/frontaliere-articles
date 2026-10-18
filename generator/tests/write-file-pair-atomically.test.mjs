@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { spawnSync } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 
 import {
   writeFilePairAtomically,
@@ -38,6 +38,60 @@ function interruptAfterTargetRenames(first, second, exitAfter) {
     ], { fsImpl });
   `;
   return spawnSync(process.execPath, ['--input-type=module', '-e', program], { encoding: 'utf8' });
+}
+
+function spawnPairWriter(first, second, firstAfter, secondAfter, { holdMarker = null, releaseMarker = null } = {}) {
+  const helper = new URL('../../scripts/lib/write-file-pair-atomically.mjs', import.meta.url).href;
+  const canonicalFirst = fs.realpathSync(first);
+  const canonicalSecond = fs.realpathSync(second);
+  const program = `
+    import fs from 'node:fs';
+    import { writeFilePairAtomically } from ${JSON.stringify(helper)};
+    const first = ${JSON.stringify(canonicalFirst)};
+    const second = ${JSON.stringify(canonicalSecond)};
+    const holdMarker = ${JSON.stringify(holdMarker)};
+    const releaseMarker = ${JSON.stringify(releaseMarker)};
+    const renameSync = fs.renameSync.bind(fs);
+    const waitBuffer = new Int32Array(new SharedArrayBuffer(4));
+    const fsImpl = { ...fs, renameSync(from, to) {
+      renameSync(from, to);
+      if (holdMarker && to === first) {
+        fs.writeFileSync(holdMarker, 'held', { flag: 'wx' });
+        while (!fs.existsSync(releaseMarker)) Atomics.wait(waitBuffer, 0, 0, 10);
+      }
+    } };
+    try {
+      writeFilePairAtomically([
+        { file: first, before: 'before', after: ${JSON.stringify(firstAfter)} },
+        { file: second, before: 'before', after: ${JSON.stringify(secondAfter)} },
+      ], { fsImpl });
+    } catch (error) {
+      console.error(error.stack);
+      process.exitCode = 1;
+    }
+  `;
+  return spawn(process.execPath, ['--input-type=module', '-e', program], {
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+  });
+}
+
+function waitForChild(child) {
+  let stderr = '';
+  child.stderr.setEncoding('utf8');
+  child.stderr.on('data', (chunk) => { stderr += chunk; });
+  return new Promise((resolve, reject) => {
+    child.once('error', reject);
+    child.once('close', (code, signal) => resolve({ code, signal, stderr }));
+  });
+}
+
+async function waitForFile(file) {
+  const deadline = Date.now() + 5_000;
+  while (!fs.existsSync(file) && Date.now() < deadline) {
+    await new Promise((resolve) => setTimeout(resolve, 10));
+  }
+  assert.equal(fs.existsSync(file), true, `file sentinella non creato: ${file}`);
 }
 
 function hasErrorCode(error, code) {
@@ -104,6 +158,83 @@ test('una collisione dello staging conserva il file dell’altra operazione', ()
     assert.ok(foreignTemporary);
     assert.equal(fs.readFileSync(foreignTemporary, 'utf8'), 'foreign staging temporary');
     assert.equal(fs.readFileSync(first, 'utf8'), 'before');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('writer concorrenti non pubblicano una coppia mista mentre il primo commit è in corso', async () => {
+  const root = fixture();
+  let firstWriterResult;
+  let contenderResult;
+  try {
+    const first = path.join(root, 'first.txt');
+    const second = path.join(root, 'second.txt');
+    const holdMarker = path.join(root, 'writer-a-held');
+    const releaseMarker = path.join(root, 'writer-a-release');
+    fs.writeFileSync(first, 'before');
+    fs.writeFileSync(second, 'before');
+
+    const firstWriter = spawnPairWriter(first, second, 'writer-a-first', 'writer-a-second', {
+      holdMarker,
+      releaseMarker,
+    });
+    firstWriterResult = waitForChild(firstWriter);
+    await waitForFile(holdMarker);
+
+    const contender = spawnPairWriter(first, second, 'writer-b-first', 'writer-b-second');
+    contenderResult = waitForChild(contender);
+    const contenderOutcome = await contenderResult;
+    assert.notEqual(contenderOutcome.code, 0, contenderOutcome.stderr);
+    assert.match(contenderOutcome.stderr, /journal della coppia presente|lock presente/u);
+
+    fs.writeFileSync(releaseMarker, 'release');
+    const firstWriterOutcome = await firstWriterResult;
+    assert.equal(firstWriterOutcome.code, 0, firstWriterOutcome.stderr);
+    assert.equal(fs.readFileSync(first, 'utf8'), 'writer-a-first');
+    assert.equal(fs.readFileSync(second, 'utf8'), 'writer-a-second');
+    assert.deepEqual(fs.readdirSync(root).filter((name) => name.endsWith('.pair.tmp')), []);
+  } finally {
+    if (!fs.existsSync(path.join(root, 'writer-a-release'))) {
+      fs.writeFileSync(path.join(root, 'writer-a-release'), 'release');
+    }
+    if (firstWriterResult) await firstWriterResult;
+    if (contenderResult) await contenderResult;
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un errore dopo la creazione dello staging rimuove solo il temporaneo della transazione', () => {
+  const root = fixture();
+  try {
+    const first = path.join(root, 'first.txt');
+    fs.writeFileSync(first, 'before');
+    let injected = false;
+    const fsImpl = {
+      ...fs,
+      writeFileSync(file, ...args) {
+        if (!injected && typeof file === 'string' && file.endsWith('.pair.tmp')) {
+          injected = true;
+          fs.writeFileSync(file, 'partial', { encoding: 'utf8', flag: 'wx' });
+          const error = new Error('injected ENOSPC after partial staging write');
+          error.code = 'ENOSPC';
+          throw error;
+        }
+        return fs.writeFileSync(file, ...args);
+      },
+    };
+
+    assert.throws(() => writeFilePairAtomically([
+      { file: first, before: 'before', after: 'after' },
+    ], { fsImpl }), (error) => {
+      assert.equal(injected, true);
+      assert.equal(hasErrorCode(error, 'ENOSPC'), true);
+      return true;
+    });
+    assert.equal(fs.readFileSync(first, 'utf8'), 'before');
+    assert.deepEqual(fs.readdirSync(root).filter((name) => name.endsWith('.pair.tmp')), []);
+    assert.equal(fs.existsSync(path.join(root, '.registry-pair-write.lock')), false);
+    assert.equal(fs.existsSync(path.join(root, '.registry-pair-write.journal.json')), false);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
