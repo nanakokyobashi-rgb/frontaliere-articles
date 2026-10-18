@@ -12,9 +12,9 @@
  * `slugs.json`, nella sitemap della sezione e assente su R2; lo stesso
  * manifest permette di vedere una pagina ritirata rimasta sull'edge.
  *
- * Cosa confronta, da UNA osservazione della superficie pubblicata (stesso
- * `commit` in manifest, sections, slugs e registro edge, altrimenti il deploy
- * e' a meta' e si rimanda al giro dopo):
+ * Cosa confronta, da UNA osservazione della superficie pubblicata (`manifest`,
+ * `sections`, `slugs` e il registro edge CANDIDATO su Pages devono avere lo
+ * stesso `commit`):
  *
  *   atteso    ogni URL annunciato dalla sitemap pubblicata della sezione
  *             (loc e tutti gli xhtml:link href), quindi landing, hub,
@@ -22,6 +22,12 @@
  *   presente  HEAD sulla chiave che il Worker legge, per le pagine annunciate
  *             e per le pagine articolo candidate come orfane dal manifest,
  *             `https://cdn.frontaliereticino.ch/edge/sections/<path>/index.html`
+ *
+ * Il registro R2 puo' essere ancora sul commit precedente: e' precisamente il
+ * caso di recovery in cui publish-api ha gia' pubblicato Pages ma ha rifiutato
+ * il flip perche' mancano pagine. Lo stato candidato resta verificabile dal
+ * registro generato su Pages; il registro R2 deve comunque essere valido,
+ * perche' publish-section-pages lo usa per proteggere la release servita.
  *
  * Solo un 404 conta come «mancante». Ogni altra risposta (5xx, timeout) e'
  * «non verificabile»: non si ripubblica su un dubbio, lo si riporta.
@@ -267,28 +273,48 @@ async function mapLimit(items, limit, fn) {
 }
 
 /**
- * @returns {Promise<{ skipped: string | null, apiCommit: string | null, sections: ReturnType<typeof planSectionBackfill>[] }>}
+ * @returns {Promise<{ skipped: string | null, apiCommit: string | null, edgeCommit?: string | null, pendingEdgeFlip?: boolean, sections: ReturnType<typeof planSectionBackfill>[] }>}
  */
 export async function reconcile({ apiBase = API_BASE_DEFAULT, cap = 3, fetchImpl = fetch } = {}) {
-  const [manifest, catalog, slugs, edgeRegistry] = await Promise.all(
-    ['manifest.json', 'sections.json', 'slugs.json'].map((name) => getJson(`${apiBase}/${name}`, fetchImpl)).concat(
+  const [manifest, catalog, slugs, candidateRegistry, edgeRegistry] = await Promise.all(
+    ['manifest.json', 'sections.json', 'slugs.json', 'edge/sections/registry.json'].map((name) => getJson(`${apiBase}/${name}`, fetchImpl)).concat(
       getJson(`${CDN_BASE}/edge/sections/registry.json`, fetchImpl),
     ),
   );
-  if (!manifest?.commit || catalog?.commit !== manifest.commit || slugs?.commit !== manifest.commit || edgeRegistry?.commit !== manifest.commit) {
-    return { skipped: 'superficie a meta\' deploy: manifest, sections, slugs e registro edge non portano lo stesso commit', apiCommit: manifest?.commit ?? null, sections: [] };
+  if (!manifest?.commit || catalog?.commit !== manifest.commit || slugs?.commit !== manifest.commit || candidateRegistry?.commit !== manifest.commit) {
+    return {
+      skipped: 'superficie API a meta\' deploy: manifest, sections, slugs e registro edge candidato non portano lo stesso commit',
+      apiCommit: manifest?.commit ?? null,
+      edgeCommit: edgeRegistry?.commit ?? null,
+      sections: [],
+    };
+  }
+  if (!validateEdgeSectionRegistry(candidateRegistry)) {
+    return {
+      skipped: 'registro edge candidato non valido o non leggibile: release API non dimostrata',
+      apiCommit: manifest.commit,
+      edgeCommit: edgeRegistry?.commit ?? null,
+      sections: [],
+    };
   }
   if (!validateEdgeSectionRegistry(edgeRegistry)) {
-    return { skipped: 'registro edge non valido o non leggibile: stato live non dimostrato', apiCommit: manifest.commit, sections: [] };
+    return { skipped: 'registro edge non valido o non leggibile: stato servito non dimostrato', apiCommit: manifest.commit, edgeCommit: edgeRegistry?.commit ?? null, sections: [] };
   }
+  const pendingEdgeFlip = edgeRegistry.commit !== manifest.commit;
   const catalogById = new Map((catalog.sections ?? []).map((entry) => [entry.id, entry]));
-  const live = Object.entries(edgeRegistry.sections ?? {})
+  const live = Object.entries(candidateRegistry.sections ?? {})
     .filter(([, state]) => state.status === 'live')
     .map(([id]) => catalogById.get(id));
   if (live.some((entry) => !entry || typeof entry.sitemap !== 'string' || !entry.sitemap)) {
-    return { skipped: 'superficie a meta\' deploy: una sezione live nel registro edge non ha catalogo o sitemap', apiCommit: manifest.commit, sections: [] };
+    return {
+      skipped: 'superficie API a meta\' deploy: una sezione live nel registro edge candidato non ha catalogo o sitemap',
+      apiCommit: manifest.commit,
+      edgeCommit: edgeRegistry.commit,
+      pendingEdgeFlip,
+      sections: [],
+    };
   }
-  if (live.length === 0) return { skipped: null, apiCommit: manifest.commit, sections: [] };
+  if (live.length === 0) return { skipped: null, apiCommit: manifest.commit, edgeCommit: edgeRegistry.commit, pendingEdgeFlip, sections: [] };
   const rows = await getJson(`${apiBase}/canton-articles.json`, fetchImpl);
   const dateById = new Map(rows.map((row) => [row.id, row.updatedAt || row.date || '']));
   const sections = [];
@@ -330,7 +356,7 @@ export async function reconcile({ apiBase = API_BASE_DEFAULT, cap = 3, fetchImpl
     if (pageManifest.reason) plan.pageManifestReason = pageManifest.reason;
     sections.push(plan);
   }
-  return { skipped: null, apiCommit: manifest.commit, sections };
+  return { skipped: null, apiCommit: manifest.commit, edgeCommit: edgeRegistry.commit, pendingEdgeFlip, sections };
 }
 
 export async function main(argv = process.argv.slice(2)) {
