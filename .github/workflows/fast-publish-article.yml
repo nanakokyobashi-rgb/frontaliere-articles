@@ -424,6 +424,20 @@ jobs:
           # workflow anyway.
           persist-credentials: false
 
+      - name: Verify shard assignment against publish checkout
+        if: needs.resolve.outputs.skip != 'true'
+        env:
+          SECTION: ${{ matrix.target.section }}
+          EXPECTED_SHARD: ${{ matrix.target.shard }}
+        run: |
+          set -euo pipefail
+          actual_shard="$(node scripts/ci/fast-publish-section.mjs shard-of "$SECTION")"
+          if [ "$actual_shard" != "$EXPECTED_SHARD" ]; then
+            echo "::error::section-to-shard mapping changed after matrix resolution; refusing to publish to stale shard (expected $EXPECTED_SHARD, checkout maps to $actual_shard)"
+            exit 1
+          fi
+          echo "FAST_PUBLISH_SHARD=$actual_shard" >> "$GITHUB_ENV"
+
       - name: Set up Node
         if: needs.resolve.outputs.skip != 'true'
         uses: actions/setup-node@v7
@@ -712,7 +726,7 @@ jobs:
           set -euo pipefail
           summary="$RUNNER_TEMP/fast-summary.json"
           dist="$RUNNER_TEMP/fast-dist"
-          shard="${{ matrix.target.shard }}"
+          shard="$FAST_PUBLISH_SHARD"
 
           # UN SOLO push per locale, articolo + hub insieme.
           #

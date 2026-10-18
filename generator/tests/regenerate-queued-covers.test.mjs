@@ -1353,6 +1353,10 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
 
   const articlePublisher = fs.readFileSync(new URL('../../.github/workflows/fast-publish-article.yml', import.meta.url), 'utf8');
   assert.match(articlePublisher, /publisher omitted requested article IDs/u);
+  assert.match(articlePublisher, /name: Verify shard assignment against publish checkout/u);
+  assert.match(articlePublisher, /actual_shard="\$\(node scripts\/ci\/fast-publish-section\.mjs shard-of "\$SECTION"\)"/u);
+  assert.match(articlePublisher, /actual_shard" != "\$EXPECTED_SHARD"/u);
+  assert.match(articlePublisher, /shard="\$FAST_PUBLISH_SHARD"/u);
   assert.equal(
     articlePublisher.match(/ref: \$\{\{ github\.event_name == 'workflow_dispatch' && github\.ref \|\| github\.sha \}\}/gu)?.length,
     2,
