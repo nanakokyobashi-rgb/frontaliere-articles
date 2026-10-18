@@ -13476,6 +13476,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.ps-tre-iniziative-thun.title': 'PS, oui à trois initiatives : abeilles, mobilité et Internet',
     'blog.article.ps-tre-iniziative-thun.excerpt': 'Trois initiatives ont obtenu le oui du PS à Thoune Le bon de mobilité concerne les transports publics et les chemins de fer Le texte demande une taxe sur les billets d’avion',
     'blog.article.ps-tre-iniziative-thun.imageAlt': 'Congrès socialiste à Thun: initiatives sur les abeilles, la mobilité et la sécurité numérique.',
+    'blog.article.cassano-indagine-schianto.title': 'Varese, morte dans un accident : son ex accusé de féminicide',
+    'blog.article.cassano-indagine-schianto.excerpt': 'Pierina Buffon est morte dans la collision sur le périphérique Fulvio Ielmini fait également l’objet d’une enquête pour féminicide Les carabiniers envisagent un accident provoqué',
+    'blog.article.cassano-indagine-schianto.imageAlt': 'Route au Tessin dans la lumière du matin, image symbolique pour une actualité locale',
 };
 
 export default blogMetaFr;
