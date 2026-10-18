@@ -54,6 +54,8 @@ const LOCALE_CANONICAL_TARGETS = {
   ]),
 };
 
+const FAQ_MARKDOWN_KEYS = new Set(['q', 'a']);
+
 function fencedBlankLineStarts(source) {
   // The static renderer joins every line in a fenced block before applying
   // its inline-link regex, so a blank source line there does not break a label.
@@ -356,7 +358,9 @@ export function sanitizeArticleFaqMarkdown(faqArray, locale = 'it') {
     if (!pair || typeof pair !== 'object' || Array.isArray(pair)) return pair;
     return Object.fromEntries(Object.entries(pair).map(([key, value]) => [
       key,
-      typeof value === 'string' ? sanitizeArticleMarkdownLinks(value, locale) : value,
+      FAQ_MARKDOWN_KEYS.has(key) && typeof value === 'string'
+        ? sanitizeArticleMarkdownLinks(value, locale)
+        : value,
     ]));
   });
 }

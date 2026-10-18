@@ -6,6 +6,7 @@ import path from 'node:path';
 import {
   canonicalArticleLinkTarget,
   findNonCanonicalArticleLinks,
+  sanitizeArticleFaqMarkdown,
   sanitizeArticleMarkdownLinks,
 } from '../../scripts/lib/article-link-contract.mjs';
 import { BLOG_BODY_ROOTS, ROOT, scanBlogBodyLinks } from '../../scripts/ci/check-blog-body-links.mjs';
@@ -63,6 +64,24 @@ test('la sanitizzazione conserva il testo e non indovina URL sconosciute', () =>
     findNonCanonicalArticleLinks('[Link\nmultilinea](relative/path)').map(({ label, target, replacement }) => ({ label, target, replacement })),
     [{ label: 'Link\nmultilinea', target: 'relative/path', replacement: null }],
   );
+});
+
+test('la FAQ normalizza solo q/a e conserva le chiavi extra', () => {
+  const extra = '[Nota](calculator)';
+  const faq = [{
+    q: '[Domanda](calculator)',
+    a: '[Risposta](statistics/)',
+    note: extra,
+    rank: 1,
+  }];
+
+  assert.deepEqual(sanitizeArticleFaqMarkdown(faq, 'en'), [{
+    q: '[Domanda](nav:calculator)',
+    a: '[Risposta](/en/statistics/)',
+    note: extra,
+    rank: 1,
+  }]);
+  assert.equal(faq[0].note, extra, 'la sanitizzazione non deve mutare la coppia sorgente');
 });
 
 test('writer e gate sanificano ogni link elaborato dal renderer, anche immagini, code span e fence', () => {
