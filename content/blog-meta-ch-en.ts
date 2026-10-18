@@ -8495,6 +8495,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.aiuti-sociali-rifugiati-ucraini.title': 'Social assistance for Ukrainian refugees: mixed opinions',
     'blog.article.aiuti-sociali-rifugiati-ucraini.excerpt': 'The cantons will be able to set the amount of social assistance S Next year, 46\'000 refugees will be able to receive it Consultation on Ordinance 2 on asylum until',
     'blog.article.aiuti-sociali-rifugiati-ucraini.imageAlt': 'Cantonal officer delivering social aid to Ukrainian refugees in Switzerland',
+    'blog.article.prodex-40-anni-esericerca-spaziale.title': 'Prodex turns 40: 130 space projects funded in Switzerland',
+    'blog.article.prodex-40-anni-esericerca-spaziale.excerpt': 'ESA celebrates Prodex’s first 40 years Swiss and Belgian delegations launched Prodex in 1986 Zurich hosted the conference and ceremony In Switzerland',
+    'blog.article.prodex-40-anni-esericerca-spaziale.imageAlt': 'Swiss research laboratory with space mission instruments',
 };
 
 export default blogMetaChEn;

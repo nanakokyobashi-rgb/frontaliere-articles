@@ -8495,6 +8495,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.aiuti-sociali-rifugiati-ucraini.title': 'Sozialhilfe für ukrainische Flüchtlinge: geteilte Meinungen',
     'blog.article.aiuti-sociali-rifugiati-ucraini.excerpt': 'Die Kantone können die Höhe der Sozialhilfe festlegen S Nächstes Jahr können 46\'000 Flüchtlinge sie erhalten Vernehmlassung zur Asylverordnung 2 bis',
     'blog.article.aiuti-sociali-rifugiati-ucraini.imageAlt': 'Kantonalbeamter, der Sozialhilfe an ukrainische Flüchtlinge in der Schweiz aushändigt',
+    'blog.article.prodex-40-anni-esericerca-spaziale.title': 'Prodex wird 40: 130 in der Schweiz finanzierte Raumfahrtprojekte',
+    'blog.article.prodex-40-anni-esericerca-spaziale.excerpt': 'Die ESA feiert die ersten 40 Jahre von Prodex Schweizerische und belgische Delegationen haben Prodex 1986 ins Leben gerufen Zürich war Gastgeber der Konferenz und der Zeremonie In der Schweiz',
+    'blog.article.prodex-40-anni-esericerca-spaziale.imageAlt': 'Schweizer Forschungslabor mit Weltrauminstrumenten',
 };
 
 export default blogMetaChDe;

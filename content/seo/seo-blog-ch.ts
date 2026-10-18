@@ -107320,6 +107320,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-prodex-40-anni-esericerca-spaziale': {
+    title: 'Prodex compie 40 anni: 130 progetti spaziali finanziati in Svizzera',
+    description: 'ESA celebra i primi 40 anni di Prodex Delegazioni svizzera e belga hanno avviato Prodex nel 1986 Zurigo ha ospitato conferenza e cerimonia In Svizzera',
+    keywords: 'frontalieri, ticino, svizzera, italia, prodex, compie, anni, progetti',
+    ogTitle: 'Prodex compie 40 anni: l\'impatto svizzero nella ricerca spaziale',
+    ogDescription: 'ESA celebra i primi 40 anni di Prodex Delegazioni svizzera e belga hanno avviato Prodex nel 1986 Zurigo ha ospitato conferenza e cerimonia In Svizzera',
+    canonicalPath: '/articoli-svizzera/prodex-40-anni-esericerca-spaziale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Prodex compie 40 anni: 130 progetti spaziali finanziati in Svizzera",
+      "description": "ESA celebra i primi 40 anni di Prodex Delegazioni svizzera e belga hanno avviato Prodex nel 1986 Zurigo ha ospitato conferenza e cerimonia In Svizzera",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-zurigo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Laboratorio di ricerca svizzero con strumenti per missioni spaziali"
+      },
+      "datePublished": "2026-10-18T11:05:16+00:00",
+      "dateModified": "2026-10-18T11:05:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/prodex-40-anni-esericerca-spaziale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -8495,6 +8495,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.aiuti-sociali-rifugiati-ucraini.title': 'Aides sociales aux réfugiés ukrainiens : avis partagés',
     'blog.article.aiuti-sociali-rifugiati-ucraini.excerpt': 'Les cantons pourront fixer le montant de l\'aide sociale S L\'année prochaine, 46\'000 réfugiés pourront en bénéficier Consultation sur l\'ordonnance 2 sur l\'asile jusqu\'au',
     'blog.article.aiuti-sociali-rifugiati-ucraini.imageAlt': 'Fonctionnaire cantonal distribuant l\'aide sociale aux réfugiés ukrainiens en Suisse',
+    'blog.article.prodex-40-anni-esericerca-spaziale.title': 'Prodex fête ses 40 ans : 130 projets spatiaux financés en Suisse',
+    'blog.article.prodex-40-anni-esericerca-spaziale.excerpt': 'L’ESA célèbre les 40 premières années de Prodex Les délégations suisse et belge ont lancé Prodex en 1986 Zurich a accueilli la conférence et la cérémonie En Suisse',
+    'blog.article.prodex-40-anni-esericerca-spaziale.imageAlt': 'Laboratoire de recherche suisse avec instruments spatiaux',
 };
 
 export default blogMetaChFr;

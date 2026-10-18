@@ -28383,6 +28383,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'prodex-40-anni-esericerca-spaziale',
+    category: 'novita',
+    date: '2026-10-18T11:05:15.951Z',
+    image: '/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-zurigo.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

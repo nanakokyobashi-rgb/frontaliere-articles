@@ -160,6 +160,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T10:50:48.628Z",
       "lastFailureAt": "2026-10-18T10:50:48.628Z"
+    },
+    {
+      "articleId": "prodex-40-anni-esericerca-spaziale",
+      "title": "Prodex compie 40 anni: 130 progetti spaziali finanziati in Svizzera",
+      "fallbackImage": "/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-zurigo.webp",
+      "reason": "All image providers failed for article-prodex-40-anni-esericerca-spaziale: openai-codex (vision gate rejected image: Generic synthetic Swiss research-lab illustration; no readable",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T11:05:16.549Z",
+      "lastFailureAt": "2026-10-18T11:05:16.549Z"
     }
   ]
 }
