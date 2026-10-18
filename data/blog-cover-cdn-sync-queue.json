@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-radar-velocita-ticino-ottobre.webp",
-      "sha256": "09ca42d4458562a67157d5300c3d0dfda8af04f4c1dbe7c3827b186559734ca7"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-radar-velocita-ticino-ottobre-480w.webp",
-      "sha256": "4d3b9243b7f8e0efa325e0a58ad68c9a3f6fb0a24582ab5cc254fba79438e1e6"
-    }
-  ]
+  "items": []
 }
