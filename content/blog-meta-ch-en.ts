@@ -8498,6 +8498,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.prodex-40-anni-esericerca-spaziale.title': 'Prodex turns 40: 130 space projects funded in Switzerland',
     'blog.article.prodex-40-anni-esericerca-spaziale.excerpt': 'ESA celebrates Prodex’s first 40 years Swiss and Belgian delegations launched Prodex in 1986 Zurich hosted the conference and ceremony In Switzerland',
     'blog.article.prodex-40-anni-esericerca-spaziale.imageAlt': 'Swiss research laboratory with space mission instruments',
+    'blog.article.ffs-binari-deformazioni-canicola-2024.title': 'FFS: 97 heat-related track deformations, task force for summer 2026',
+    'blog.article.ffs-binari-deformazioni-canicola-2024.excerpt': 'The FFS recorded 97 deformations and crushings.',
+    'blog.article.ffs-binari-deformazioni-canicola-2024.imageAlt': 'FFS railway tracks under summer sun with visible heat haze',
 };
 
 export default blogMetaChEn;

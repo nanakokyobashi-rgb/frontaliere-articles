@@ -111743,6 +111743,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frontaliere-tasse-dopo-licenziamento': {
+    title: 'Licenziamento frontaliere 2026: diritti fiscali e contributi',
+    description: 'Il Nuovo Accordo Frontalieri vale dal 1° gennaio 2024. Vecchi frontalieri: esenzione di €7\'500 nel regime 2024–2033. Nuovi frontalieri: franchigia di €10\'000',
+    keywords: 'frontalieri, ticino, svizzera, italia, licenziamento, diritti, fiscali, contributi',
+    ogTitle: 'Licenziamento frontaliere 2026: diritti fiscali e contributi',
+    ogDescription: 'Il Nuovo Accordo Frontalieri vale dal 1° gennaio 2024.',
+    canonicalPath: '/articoli-frontaliere/frontaliere-tasse-dopo-licenziamento/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Licenziamento frontaliere 2026: diritti fiscali e contributi",
+      "description": "Il Nuovo Accordo Frontalieri vale dal 1° gennaio 2024. Vecchi frontalieri: esenzione di €7'500 nel regime 2024–2033. Nuovi frontalieri: franchigia di €10'000",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Frontaliere esamina documenti di lavoro vicino al confine del Ticino"
+      },
+      "datePublished": "2026-10-18T14:15:04+00:00",
+      "dateModified": "2026-10-18T14:15:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontaliere-tasse-dopo-licenziamento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
