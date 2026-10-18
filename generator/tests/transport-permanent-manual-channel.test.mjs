@@ -194,9 +194,9 @@ test('il job post-merge usa hash site freschi e committa solo il manifest su mai
   assert.match(parser, /const missing = expected\.filter/);
   assert.match(parser, /non cit[aà] tutti i file trasportati/);
   assert.match(yml, /--realign="\$RUNNER_TEMP\/transport-realign\.tsv" --json/);
-  assert.match(yml, /git push origin HEAD:main/);
+  assert.match(yml, /guard-main-tree-shrink\.mjs --push-main --remote origin --target main --after HEAD/);
   assert.match(yml, /for attempt in 1 2 3/);
-  assert.match(yml, /if git push origin HEAD:main; then/);
+  assert.match(yml, /if node scripts\/ci\/guard-main-tree-shrink\.mjs --push-main --remote origin --target main --after HEAD 2>&1 \| tee "\$push_log"; then/);
   assert.match(yml, /baseline\.corpus/);
 });
 

@@ -351,12 +351,25 @@ jobs:
 
           TARGET="${{ github.ref_name }}"
           REMOTE="https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${{ github.repository }}.git"
+          push_target() {
+            if [ "$TARGET" = 'main' ]; then
+              node scripts/ci/guard-main-tree-shrink.mjs --push-main --remote "$REMOTE" --target main --after HEAD
+            else
+              git push "$REMOTE" "HEAD:$TARGET"
+            fi
+          }
+
           for attempt in 1 2 3; do
-            if git push "$REMOTE" "HEAD:$TARGET"; then
+            ATTEMPT_LOG="$RUNNER_TEMP/main-push-$attempt.log"
+            if push_target 2>&1 | tee "$ATTEMPT_LOG"; then
               echo "pushed to $TARGET"
               echo "attempts=$attempt" >> "$GITHUB_OUTPUT"
               echo "remote_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
               exit 0
+            fi
+            if grep -q 'MAIN_TREE_GUARD_FATAL:' "$ATTEMPT_LOG"; then
+              echo "::error::main-tree guard reported a fatal failure; refusing to retry this push"
+              exit 1
             fi
             echo "push attempt $attempt failed"
             if [ "$attempt" -eq 3 ]; then

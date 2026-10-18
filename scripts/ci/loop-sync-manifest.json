@@ -6212,6 +6212,17 @@
       }
     },
     {
+      "path": "scripts/ci/guard-main-tree-shrink.mjs",
+      "mode": "corpus-only-pending",
+      "trackingIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/13874",
+      "reason": "La sorgente viene introdotta qui per proteggere i writer corpus; il follow-up tracciato nell'issue #13874 porta la copia agli altri writer diretti di main. Dopo entrambi i merge, verificare i blob e promuovere a identical.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-18"
+      }
+    },
+    {
       "path": "scripts/lib/article-link-contract.mjs",
       "mode": "corpus-only",
       "reason": "Contratto del writer e del gate di pubblicazione per canonicalizzare i link Markdown prima che i body del corpus siano serviti al sito. Il sito consuma JSON via HTTP e non genera né conserva i sorgenti content/blog-body.",

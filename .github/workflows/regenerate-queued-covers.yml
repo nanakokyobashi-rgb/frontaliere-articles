@@ -339,13 +339,18 @@ jobs:
           git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic $auth"
           git remote set-url origin "$remote"
           for attempt in 1 2 3 4 5; do
-            if git -c pack.window=0 -c pack.threads=1 push --no-thin --no-verify origin HEAD:main; then
+            push_log="$RUNNER_TEMP/pre-generation-ack-push-$attempt.log"
+            if node scripts/ci/guard-main-tree-shrink.mjs --push-main --remote origin --target main --after HEAD --no-thin --no-verify --git-config pack.window=0 --git-config pack.threads=1 2>&1 | tee "$push_log"; then
               echo "pre-generation publisher outbox acknowledgement pushed"
               if [ "$publisher_complete" != 'true' ]; then
                 echo "::error::pre-generation publisher ack was committed, but some publishers are incomplete"
                 exit 1
               fi
               exit 0
+            fi
+            if grep -q 'MAIN_TREE_GUARD_FATAL:' "$push_log"; then
+              echo "::error::pre-generation acknowledgement push failed a fatal main-tree guard check"
+              exit 1
             fi
             if [ "$attempt" -eq 5 ]; then break; fi
             echo "pre-generation acknowledgement push attempt $attempt failed; rebasing"
@@ -550,7 +555,8 @@ jobs:
           git remote set-url origin "$remote"
 
           for attempt in 1 2 3 4 5; do
-            if git -c pack.window=0 -c pack.threads=1 push --no-thin --no-verify origin HEAD:main; then
+            push_log="$RUNNER_TEMP/queued-cover-push-$attempt.log"
+            if node scripts/ci/guard-main-tree-shrink.mjs --push-main --remote origin --target main --after HEAD --no-thin --no-verify --git-config pack.window=0 --git-config pack.threads=1 2>&1 | tee "$push_log"; then
               echo "pushed to main"
               verify_pushed_queue
               if [ "${PREPUBLISH_OUTBOX_PENDING:-false}" = 'true' ]; then
@@ -559,6 +565,10 @@ jobs:
                 echo "publish_ready=true" >> "$GITHUB_OUTPUT"
               fi
               exit 0
+            fi
+            if grep -q 'MAIN_TREE_GUARD_FATAL:' "$push_log"; then
+              echo "::error::queued cover push failed a fatal main-tree guard check"
+              exit 1
             fi
             if [ "$attempt" -eq 5 ]; then break; fi
             echo "push attempt $attempt failed; rebasing onto origin/main"
@@ -665,13 +675,18 @@ jobs:
           git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic $auth"
           git remote set-url origin "$remote"
           for attempt in 1 2 3 4 5; do
-            if git -c pack.window=0 -c pack.threads=1 push --no-thin --no-verify origin HEAD:main; then
+            push_log="$RUNNER_TEMP/publisher-ack-push-$attempt.log"
+            if node scripts/ci/guard-main-tree-shrink.mjs --push-main --remote origin --target main --after HEAD --no-thin --no-verify --git-config pack.window=0 --git-config pack.threads=1 2>&1 | tee "$push_log"; then
               echo "publisher outbox acknowledged"
               if [ "$publisher_complete" != 'true' ]; then
                 echo "::error::publisher ack was committed, but some publishers are incomplete"
                 exit 1
               fi
               exit 0
+            fi
+            if grep -q 'MAIN_TREE_GUARD_FATAL:' "$push_log"; then
+              echo "::error::publisher acknowledgement push failed a fatal main-tree guard check"
+              exit 1
             fi
             if [ "$attempt" -eq 5 ]; then break; fi
             echo "outbox acknowledgement push attempt $attempt failed; rebasing"

@@ -111,7 +111,7 @@ const producers = workflows.filter(isProducer);
  */
 function pushRetryLoop(w) {
   const loops = [...w.active.matchAll(/for attempt in ([0-9 ]+); do[\s\S]*?\n\s+done/g)];
-  return loops.find((m) => /git push[^\n]*\$REMOTE[^\n]*HEAD:\$TARGET/.test(m[0])) ?? null;
+  return loops.find((m) => /git push[^\n]*\$REMOTE[^\n]*HEAD:\$TARGET/.test(m[0]) || /\bpush_target\b/.test(m[0])) ?? null;
 }
 
 const pushRetryCandidates = workflows.filter(
