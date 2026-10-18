@@ -12,7 +12,11 @@ import {
   GENERATED_IMAGE_KIND,
   LICENSED_PHOTO_KIND,
 } from '../../../engine/shared/generatedImageRegistry.mjs';
-import { imageVisionRejected } from '../../../engine/shared/generatedImageEngine.mjs';
+import {
+  imageVisionRejected,
+  imageVisionRejectionError,
+  isCompleteArticleHeroVisionVerdict,
+} from '../../../engine/shared/generatedImageEngine.mjs';
 import {
   articleImageKeywords,
   articleImagePlace,
@@ -111,13 +115,6 @@ function verificationKey(sha256, context, kind) {
     .digest('hex');
 }
 
-function createVisionRejection(verdict, message = 'verifier did not provide a positive topic verdict') {
-  const error = new Error(`vision gate rejected image: ${String(verdict?.notes || message)}`);
-  error.code = 'IMAGE_VISION_REJECTED';
-  error.vision = verdict && typeof verdict === 'object' ? verdict : {};
-  return error;
-}
-
 function createIncompleteVisionVerdict(verdict) {
   const error = new Error('vision verifier returned an incomplete article-hero verdict');
   error.code = 'IMAGE_VISION_VERDICT_INCOMPLETE';
@@ -127,11 +124,9 @@ function createIncompleteVisionVerdict(verdict) {
 }
 
 function assertArticleHeroVisionVerdict(verdict, kind) {
-  const available = verdict && typeof verdict === 'object' && !Array.isArray(verdict)
-    && typeof verdict.ok === 'boolean'
-    && typeof verdict.is_topic_relevant === 'boolean'
-    && typeof verdict.notes === 'string';
-  if (!available) throw createIncompleteVisionVerdict(verdict);
+  if (!isCompleteArticleHeroVisionVerdict(verdict)) {
+    throw createIncompleteVisionVerdict(verdict);
+  }
 
   // Keep safety and kind-specific media policy in the shared engine. This
   // boundary adds only the explicit positive/context verdict needed before a
@@ -139,7 +134,7 @@ function assertArticleHeroVisionVerdict(verdict, kind) {
   if (verdict.ok !== true
     || verdict.is_topic_relevant !== true
     || imageVisionRejected(verdict, { kind, scope: 'article-hero' })) {
-    throw createVisionRejection(verdict);
+    throw imageVisionRejectionError(verdict);
   }
 }
 

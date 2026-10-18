@@ -30,7 +30,10 @@ import {
   GENERATED_IMAGE_RESTRICTIONS,
   LICENSED_PHOTO_RESTRICTIONS,
 } from '../../engine/shared/generatedImageRegistry.mjs';
-const { isCompleteArticleHeroVisionVerdict } = await import('../../engine/shared/generatedImageEngine.mjs');
+import {
+  imageVisionRejectionError,
+  isCompleteArticleHeroVisionVerdict,
+} from '../../engine/shared/generatedImageEngine.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -548,11 +551,7 @@ test('a licensed article hero writes the shared attribution ledger and resolves 
   }
 });
 
-test('an incomplete licensed-photo safety verdict is unavailable, not a quality rejection', {
-  skip: typeof isCompleteArticleHeroVisionVerdict !== 'function'
-    ? 'waiting for the site-owned article-hero schema mirror'
-    : false,
-}, async () => {
+test('an incomplete licensed-photo safety verdict is unavailable, not a quality rejection', async () => {
   const root = tempRoot();
   try {
     const record = licensedCatalogRecord();
@@ -580,6 +579,29 @@ test('an incomplete licensed-photo safety verdict is unavailable, not a quality 
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
+});
+
+test('the shared article-hero checker accepts a complete documentary photo and supplies typed rejection flags', () => {
+  const documentaryPhoto = {
+    ...safeGeneratedVision,
+    is_photograph: true,
+    looks_like_specific_real_event: true,
+    notes: '',
+  };
+  assert.equal(isCompleteArticleHeroVisionVerdict(documentaryPhoto), true);
+
+  const rejectedPhoto = { ...documentaryPhoto, contains_logo: true };
+  const error = imageVisionRejectionError(rejectedPhoto);
+  assert.equal(error.code, 'IMAGE_VISION_REJECTED');
+  assert.deepEqual(error.vision, {
+    contains_text: false,
+    contains_logo: true,
+    contains_recognizable_face: false,
+    contains_recognizable_foreground_person: false,
+    looks_like_specific_real_event: true,
+    is_photograph: true,
+    is_topic_relevant: true,
+  });
 });
 
 test('sostituire una foto licenziata con una cover generata rimuove il ledger obsoleto', () => {
