@@ -441,24 +441,53 @@ test('files: ogni voce non `not-ported` punta a un file che esiste qui', () => {
  */
 async function readGitTree(repo, treeish, { recursive, fetchImpl, headers }) {
   const suffix = recursive ? '?recursive=1' : '';
+  const context = `GET tree ${repo}@${treeish}${suffix}`;
   const res = await fetchImpl(
     `https://api.github.com/repos/${repo}/git/trees/${encodeURIComponent(treeish)}${suffix}`,
     { headers },
   );
-  assert.ok(res.ok, `GET tree ${repo}@${treeish}${suffix} → HTTP ${res.status}`);
+  assert.ok(res.ok, `${context} → HTTP ${res.status}`);
   const body = await res.json();
-  assert.ok(Array.isArray(body.tree), `GET tree ${repo}@${treeish}${suffix} → risposta senza tree`);
+  assert.ok(
+    body !== null && typeof body === 'object' && !Array.isArray(body),
+    `${context} → risposta non oggetto`,
+  );
+  assert.ok(
+    body.truncated === false || body.truncated === true,
+    `${context} → \`truncated\` deve essere booleano`,
+  );
+  assert.ok(Array.isArray(body.tree), `${context} → risposta senza tree`);
+  body.tree.forEach((entry, index) => {
+    const entryContext = `${context} → entry #${index}`;
+    assert.ok(
+      entry !== null && typeof entry === 'object' && !Array.isArray(entry),
+      `${entryContext} non e' un oggetto`,
+    );
+    assert.ok(
+      entry.type === 'blob' || entry.type === 'tree',
+      `${entryContext} → type non supportato: ${String(entry.type)}`,
+    );
+    assert.equal(typeof entry.path, 'string', `${entryContext} → path non valido`);
+    assert.ok(entry.path.length > 0, `${entryContext} → path vuoto`);
+    assert.equal(typeof entry.sha, 'string', `${entryContext} → sha non valido`);
+    assert.ok(entry.sha.length > 0, `${entryContext} → sha vuoto`);
+  });
   return body;
 }
 
 async function completeTreeBlobs(repo, { fetchImpl = globalThis.fetch, headers = {} } = {}) {
   const collect = async (treeish, prefix) => {
     const recursive = await readGitTree(repo, treeish, { recursive: true, fetchImpl, headers });
-    if (!recursive.truncated) {
+    if (recursive.truncated === false) {
       return recursive.tree
         .filter((entry) => entry.type === 'blob')
         .map((entry) => ({ ...entry, path: `${prefix}${entry.path}` }));
     }
+    assert.equal(
+      recursive.truncated,
+      true,
+      `l'albero ricorsivo di ${repo}@${treeish} ha un valore \`truncated\` non gestito`,
+    );
 
     // Una risposta ricorsiva troncata si puo' partizionare solo partendo
     // dall'elenco completo dei figli diretti. Se anche quello fosse troncato,
@@ -568,6 +597,59 @@ test('censimento: resta fail-closed se non si puo partizionare un tree troncato'
     }),
     /albero non ricorsivo .* e' troncato/,
   );
+});
+
+test('censimento: truncated assente o non booleano fallisce', async () => {
+  const invalidResponses = [
+    { label: 'assente', body: { tree: [] } },
+    { label: 'null', body: { truncated: null, tree: [] } },
+    { label: 'numero', body: { truncated: 0, tree: [] } },
+    { label: 'stringa', body: { truncated: 'false', tree: [] } },
+  ];
+
+  for (const { label, body } of invalidResponses) {
+    await assert.rejects(
+      completeTreeBlobs('owner/repo', { fetchImpl: async () => treeResponse(body) }),
+      /truncated.*booleano/,
+      `risposta ${label} accettata come completa`,
+    );
+  }
+
+  let call = 0;
+  await assert.rejects(
+    completeTreeBlobs('owner/repo', {
+      fetchImpl: async () => {
+        call += 1;
+        return treeResponse(
+          call === 1
+            ? { truncated: true, tree: [] }
+            : { tree: [{ path: 'src', type: 'tree', sha: 'tree-src' }] },
+        );
+      },
+    }),
+    /truncated.*booleano/,
+    'risposta shallow senza truncated accettata come completa',
+  );
+});
+
+test('censimento: entry malformate non vengono ignorate', async () => {
+  const malformedEntries = [
+    { path: 'src/a.mjs', sha: 'a' },
+    { path: 'src/a.mjs', type: 'blob' },
+    { type: 'blob', sha: 'a' },
+    { path: 'src/a.mjs', type: 'commit', sha: 'a' },
+    null,
+  ];
+
+  for (const entry of malformedEntries) {
+    await assert.rejects(
+      completeTreeBlobs('owner/repo', {
+        fetchImpl: async () => treeResponse({ truncated: false, tree: [entry] }),
+      }),
+      /entry #0/,
+      `entry malformata ignorata: ${JSON.stringify(entry)}`,
+    );
+  }
 });
 
 test('censimento: nessun gemello byte-identico fuori da roots, files e outOfScope', { skip: process.env.LOOP_TWIN_CENSUS !== '1' && 'LOOP_TWIN_CENSUS!=1 (richiede rete: vedi intestazione)' }, async () => {
