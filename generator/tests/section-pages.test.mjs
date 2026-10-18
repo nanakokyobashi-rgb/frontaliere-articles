@@ -2730,7 +2730,7 @@ test('fast-publish verso gli shard ignora i corpi cantonali, quello R2 ignora le
   assert.equal(bodyRegex(HISTORICAL_CORE_LIST, { served: 'r2' }), '^$', 'nessuna sezione R2 attiva: non combacia con niente');
   assert.ok(!new RegExp(bodyRegex(HISTORICAL_CORE_LIST, { served: 'r2' })).test('content/blog-body/it/x.ts'));
   assert.throws(() => bodyRegex(WITH_TI, { served: 'pages' }), /sconosciuto/);
-  assert.match(read('.github/workflows/fast-publish-article.yml'), /fast-publish-section\.mjs body-regex shard\)/);
+  assert.match(read('.github/workflows/fast-publish-article.yml'), /fast-publish-section\.mjs body-plan shard\)/);
 });
 
 test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenziali obbligatorie', () => {
