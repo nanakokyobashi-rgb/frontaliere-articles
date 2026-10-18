@@ -1,9 +1,4 @@
 {
-  "https://comozero.it/attualita/unione-sindacale-svizzera-richiesta-aumento-stipendi-2027-salario-minimo": {
-    "articleId": "uss-stipendi-minimo-2027",
-    "ts": "2026-09-10T12:11:42.273Z",
-    "keyForm": 2
-  },
   "https://comozero.it/attualita/trenord-potenzia-la-linea-como-milano-ecco-quattro-corse-aggiuntive-la-mattina": {
     "articleId": "trenord-como-milano-corse-aggiuntive-2025",
     "ts": "2026-09-11T00:39:11.833Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/il-varese-fa-visita-allarconatese-alla-ricerca-di-conferme-e-di-continuita/2711119": {
     "articleId": "varese-arconatese-18-ottobre",
     "ts": "2026-10-18T04:49:52.458Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/arianna-di-claudio-sul-red-carpet-della-festa-del-cinema-di-roma/2711176": {
+    "articleId": "arianna-di-claudio-roma",
+    "ts": "2026-10-18T07:27:16.644Z",
     "keyForm": 2
   }
 }

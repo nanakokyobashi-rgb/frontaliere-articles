@@ -13436,6 +13436,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.g-verifica-datore-20km.title': 'Change of employer for border workers within 20 km: G permit',
     'blog.article.g-verifica-datore-20km.excerpt': 'The New Agreement is in force from 1 January 2024 The tax at source is withheld only in Switzerland Old frontier workers: €7,500 in the transitional regime 2024–2033',
     'blog.article.g-verifica-datore-20km.imageAlt': 'Cross-border worker at the Ticino border with employer-change documents',
+    'blog.article.arianna-di-claudio-roma.title': 'Arianna di claudio at the Rome Film Festival',
+    'blog.article.arianna-di-claudio-roma.excerpt': 'Arianna Di Claudio at the Rome Film Festival The Varese actress paraded on the red carpet The film is signed by Giacomo Ciarrapico and Luca Vendruscolo Foto',
+    'blog.article.arianna-di-claudio-roma.imageAlt': 'Arianna Di Claudio on the red carpet at the Rome Film Festival',
 };
 
 export default blogMetaEn;

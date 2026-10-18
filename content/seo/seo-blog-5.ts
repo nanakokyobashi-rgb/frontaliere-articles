@@ -111246,6 +111246,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-arianna-di-claudio-roma': {
+    title: 'Arianna di claudio alla festa del cinema di roma',
+    description: 'Arianna Di Claudio alla Festa del Cinema di Roma L\'attrice varesina ha sfilato sul red carpet Il film è firmato da Giacomo Ciarrapico e Luca Vendruscolo Foto',
+    keywords: 'frontalieri, ticino, svizzera, italia, arianna, claudio, alla, festa',
+    ogTitle: 'Arianna Di Claudio sul red carpet a Roma',
+    ogDescription: 'Arianna Di Claudio alla Festa del Cinema di Roma L\'attrice varesina ha sfilato sul red carpet Il film è firmato da Giacomo Ciarrapico e Luca Vendruscolo Foto',
+    canonicalPath: '/articoli-frontaliere/arianna-di-claudio-roma/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Arianna di claudio alla festa del cinema di roma",
+      "description": "Arianna Di Claudio alla Festa del Cinema di Roma L'attrice varesina ha sfilato sul red carpet Il film è firmato da Giacomo Ciarrapico e Luca Vendruscolo Foto",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Arianna Di Claudio sul red carpet della Festa del Cinema di Roma"
+      },
+      "datePublished": "2026-10-18T07:27:16+00:00",
+      "dateModified": "2026-10-18T07:27:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/arianna-di-claudio-roma/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

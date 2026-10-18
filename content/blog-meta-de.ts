@@ -13435,6 +13435,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.g-verifica-datore-20km.title': 'Arbeitgeberwechsel für Grenzgänger im Umkreis von 20 km: Ausweis G',
     'blog.article.g-verifica-datore-20km.excerpt': 'Das neue Abkommen ist seit dem 1.',
     'blog.article.g-verifica-datore-20km.imageAlt': 'Grenzgänger an der Tessiner Grenze mit Unterlagen zum Arbeitgeberwechsel',
+    'blog.article.arianna-di-claudio-roma.title': 'Ariadne von Claudio beim Filmfest in Rom',
+    'blog.article.arianna-di-claudio-roma.excerpt': 'Arianna Di Claudio beim Filmfestival in Rom Die Schauspielerin aus Varese zog auf dem roten Teppich Der Film wurde von Giacomo Ciarrapico und Luca Vendruscolo signiert Foto',
+    'blog.article.arianna-di-claudio-roma.imageAlt': 'Arianna Di Claudio auf dem roten Teppich des Filmfestivals in Rom',
 };
 
 export default blogMetaDe;

@@ -13437,6 +13437,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.g-verifica-datore-20km.title': 'Cambio datore per frontalieri entro 20 km: permesso G',
     'blog.article.g-verifica-datore-20km.excerpt': 'Il Nuovo Accordo è in vigore dal 1° gennaio 2024 L\'imposta alla fonte è trattenuta solo in Svizzera Vecchi frontalieri: €7\'500 nel regime transitorio 2024–2033',
     'blog.article.g-verifica-datore-20km.imageAlt': 'Frontaliere al confine ticinese con documenti per il cambio datore',
+    'blog.article.arianna-di-claudio-roma.title': 'Arianna di claudio alla festa del cinema di roma',
+    'blog.article.arianna-di-claudio-roma.excerpt': 'Arianna Di Claudio alla Festa del Cinema di Roma L\'attrice varesina ha sfilato sul red carpet Il film è firmato da Giacomo Ciarrapico e Luca Vendruscolo Foto',
+    'blog.article.arianna-di-claudio-roma.imageAlt': 'Arianna Di Claudio sul red carpet della Festa del Cinema di Roma',
 };
 
 export default blogMetaIt;

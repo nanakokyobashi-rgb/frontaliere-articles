@@ -140,6 +140,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T07:26:28.181Z",
       "lastFailureAt": "2026-10-18T07:26:28.181Z"
+    },
+    {
+      "articleId": "arianna-di-claudio-roma",
+      "title": "Arianna di claudio alla festa del cinema di roma",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Photorealistic synthetic red-carpet scene with a clearly recognizable fore",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-18T07:27:16.643Z",
+      "lastFailureAt": "2026-10-18T07:27:16.643Z"
     }
   ]
 }
