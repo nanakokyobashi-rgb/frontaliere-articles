@@ -8510,6 +8510,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.apprendistato-zurigo-guida-pratica.title': 'Apprentissage à Zurich : place, contrat, rémunération et maturité',
     'blog.article.apprendistato-zurigo-guida-pratica.excerpt': 'Guide pratique pour l’apprentissage dans le canton de Zurich : recherche d’une place d’apprentissage, vérification du contrat, lecture de la rémunération et maturité professionnelle.',
     'blog.article.apprendistato-zurigo-guida-pratica.imageAlt': 'Jeune apprenti dans un atelier suisse à Zurich examinant un contrat',
+    'blog.article.agenda-federale-voto-2026.title': 'Le Conseil fédéral a transmis le paquet Suisse-UE',
+    'blog.article.agenda-federale-voto-2026.excerpt': 'Le paquet Suisse-UE a été transmis le 13 mars 2026 Le 29 novembre 2026 on votera sur le financement supplémentaire de l\'AVS Guy Parmelin a annoncé',
+    'blog.article.agenda-federale-voto-2026.imageAlt': 'Scène institutionnelle suisse liée aux décisions fédérales et aux votations populaires',
 };
 
 export default blogMetaChFr;

@@ -39,7 +39,6 @@ import {
 } from '../scripts/lib/codex-exec-call.mjs';
 import {
   translateWithCodexEngine,
-  freeTranslateWithRetry,
   balanceMarkdownMarkers,
   codexPromptEchoMarker,
 } from '../scripts/lib/free-translate.mjs';
@@ -263,12 +262,13 @@ test('le guardie di translateFieldFreeMt valgono anche per il motore codex', asy
   assert.equal(await bonificaField(() => { throw new Error('codex exec: timeout'); }), '');
 });
 
-test('--engine: default cascade, nomi noti soltanto', () => {
+test('--engine: default cascade, nomi noti soltanto', async () => {
   assert.deepEqual([...TRANSLATION_ENGINES], ['cascade', 'codex']);
   assert.equal(parseEngine(null), 'cascade');
   assert.equal(parseEngine(' Codex '), 'codex');
   assert.equal(parseEngine('deepl'), null);
-  assert.equal(engineTranslator('cascade'), freeTranslateWithRetry);
+  const cascade = engineTranslator('cascade', { cascadeTranslate: async () => 'cascade-ok' });
+  assert.equal(await cascade({ text: 'testo' }), 'cascade-ok');
   assert.throws(() => engineTranslator('codex'), /trasporto/);
 });
 

@@ -13487,6 +13487,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.tutele-frontaliero-uscita-ticino.title': 'Frontaliere licenziato nel 2026: diritti oltre 20 km',
     'blog.article.tutele-frontaliero-uscita-ticino.excerpt': 'Guida pratica per il frontaliere oltre 20 km: accordo CH-IT, imposta alla fonte, franchigie, AVS, LPP, LAMal e controlli dopo il licenziamento.',
     'blog.article.tutele-frontaliero-uscita-ticino.imageAlt': 'Frontaliere con documenti di lavoro davanti a un ufficio in Ticino',
+    'blog.article.como-razionalista-fondi-associazioni.title': 'Como Razionalista: 78mila euro a due associazioni',
+    'blog.article.como-razionalista-fondi-associazioni.excerpt': 'Due associazioni sosterranno Como Razionalista Finanziamento previsto dal 2026 al 2028 Oltre 78mila euro dall\'imposta di soggiorno Erogazione dopo i rendiconti',
+    'blog.article.como-razionalista-fondi-associazioni.imageAlt': 'Architettura razionalista in un contesto urbano',
 };
 
 export default blogMetaIt;

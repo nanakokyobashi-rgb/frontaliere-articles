@@ -4,12 +4,12 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "e9fa6212f505d889d63505b3cbcf2c8eeee71fe41dd56e01672f889406438693",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "5b16ab7d298a41c956126f5d4ffea455ce661267ae8932c2cae7c43e68dd959a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-18T20:21:24.396Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "40",
+          "value": "38",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Hammer' s Wildbuffet à discrétion - Restaurant fein & sein",
-              "detail": "Restaurant und Pension fein & sein, Plaffeien",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hammer-s-wildbuffet-a-discretion-restaurant-fein-sein/"
-            },
-            {
               "label": "La Catillon ou le destin d’une femme au XVIIIe siècle",
               "detail": "Fribourg — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-catillon-ou-le-destin-dune-femme-au-xviiie-siecle/"
-            },
-            {
-              "label": "La Magie de Poudlard",
-              "detail": "Fribourg — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-magie-de-poudlard/"
             },
             {
               "label": "Bénichon Menu at Café des Bains in Châtel-St-Denis",
               "detail": "Restaurant Le Café des Bains, Châtel-Saint-Denis — in corso, ultimo giorno: 19 ottobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/benichon-menu-at-cafe-des-bains-in-chatel-st-denis/"
             },
             {
               "label": "Bénichon Menu at Le Châtel in Châtel-St-Denis",
               "detail": "Le Châtel Restaurant, Châtel-Saint-Denis — in corso, ultimo giorno: 19 ottobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/menu-de-benichon-au-chatel-a-chatel-st-denis/"
             },
             {
               "label": "Des vides à remplir",
               "detail": "Bibliothèque cantonale et universitaire (BCU), Fribourg — in corso, ultimo giorno: 21 ottobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/des-vides-a-remplir/"
             },
             {
               "label": "Bénichon Menu at Café Tivoli in Châtel-St-Denis",
               "detail": "Café Tivoli, Châtel-Saint-Denis — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
-            },
-            {
-              "label": "The Autumn Trail",
-              "detail": "Parcours D'Hubert Audriaz, Fribourg — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-herbst-rundgang/"
             },
             {
               "label": "Regards affinés",
               "detail": "L'Atelier, Fribourg — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
             },
             {
               "label": "Halloween à Moléson",
               "detail": "Office du Tourisme de Moléson, Gruyères — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Automne à Charmey",
+              "detail": "Case postale, Val-de-Charmey — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
+            },
+            {
+              "label": "Des vides à remplir : atelier créatif avec Michal Steinemann et Denis Roueche",
+              "detail": "Fribourg",
+              "date": "2026-10-21",
+              "url": "https://www.fr.ch/bcu/evenements/des-vides-a-remplir-atelier-creatif-avec-michal-steinemann-et-denis-roueche"
+            },
+            {
+              "label": "Krimi & Pop",
+              "detail": "Begegnungszentrum, Düdingen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/krimi-und-pop_ASJ9RiG"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "FR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "40",
+          "value": "38",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Hammer' s Wildbuffet à discrétion - Restaurant fein & sein",
-              "detail": "Restaurant und Pension fein & sein, Plaffeien",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hammer-s-wildbuffet-a-discretion-restaurant-fein-sein/"
-            },
-            {
               "label": "La Catillon ou le destin d’une femme au XVIIIe siècle",
               "detail": "Fribourg — ongoing, last day: 24 October 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-catillon-ou-le-destin-dune-femme-au-xviiie-siecle/"
-            },
-            {
-              "label": "La Magie de Poudlard",
-              "detail": "Fribourg — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-magie-de-poudlard/"
             },
             {
               "label": "Bénichon Menu at Café des Bains in Châtel-St-Denis",
               "detail": "Restaurant Le Café des Bains, Châtel-Saint-Denis — ongoing, last day: 19 October 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/benichon-menu-at-cafe-des-bains-in-chatel-st-denis/"
             },
             {
               "label": "Bénichon Menu at Le Châtel in Châtel-St-Denis",
               "detail": "Le Châtel Restaurant, Châtel-Saint-Denis — ongoing, last day: 19 October 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/menu-de-benichon-au-chatel-a-chatel-st-denis/"
             },
             {
               "label": "Des vides à remplir",
               "detail": "Bibliothèque cantonale et universitaire (BCU), Fribourg — ongoing, last day: 21 October 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/des-vides-a-remplir/"
             },
             {
               "label": "Bénichon Menu at Café Tivoli in Châtel-St-Denis",
               "detail": "Café Tivoli, Châtel-Saint-Denis — ongoing, last day: 25 October 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
-            },
-            {
-              "label": "The Autumn Trail",
-              "detail": "Parcours D'Hubert Audriaz, Fribourg — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-herbst-rundgang/"
             },
             {
               "label": "Regards affinés",
               "detail": "L'Atelier, Fribourg — ongoing, last day: 31 October 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
             },
             {
               "label": "Halloween à Moléson",
               "detail": "Office du Tourisme de Moléson, Gruyères — ongoing, last day: 1 November 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Automne à Charmey",
+              "detail": "Case postale, Val-de-Charmey — ongoing, last day: 25 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
+            },
+            {
+              "label": "Des vides à remplir : atelier créatif avec Michal Steinemann et Denis Roueche",
+              "detail": "Fribourg",
+              "date": "2026-10-21",
+              "url": "https://www.fr.ch/bcu/evenements/des-vides-a-remplir-atelier-creatif-avec-michal-steinemann-et-denis-roueche"
+            },
+            {
+              "label": "Krimi & Pop",
+              "detail": "Begegnungszentrum, Düdingen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/krimi-und-pop_ASJ9RiG"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "FR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "40",
+          "value": "38",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Hammer' s Wildbuffet à discrétion - Restaurant fein & sein",
-              "detail": "Restaurant und Pension fein & sein, Plaffeien",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hammer-s-wildbuffet-a-discretion-restaurant-fein-sein/"
-            },
-            {
               "label": "La Catillon ou le destin d’une femme au XVIIIe siècle",
               "detail": "Fribourg — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-catillon-ou-le-destin-dune-femme-au-xviiie-siecle/"
-            },
-            {
-              "label": "La Magie de Poudlard",
-              "detail": "Fribourg — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-magie-de-poudlard/"
             },
             {
               "label": "Kilbi-Menu in Café des Bains in Châtel-St-Denis",
               "detail": "Restaurant Le Café des Bains, Châtel-Saint-Denis — läuft, letzter Tag: 19. Oktober 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/benichon-menu-at-cafe-des-bains-in-chatel-st-denis/"
             },
             {
               "label": "Kilbi-Menu in Le Châtel in Châtel-St-Denis",
               "detail": "Le Châtel Restaurant, Châtel-Saint-Denis — läuft, letzter Tag: 19. Oktober 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/menu-de-benichon-au-chatel-a-chatel-st-denis/"
             },
             {
               "label": "Des vides à remplir",
               "detail": "Bibliothèque cantonale et universitaire (BCU), Fribourg — läuft, letzter Tag: 21. Oktober 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/des-vides-a-remplir/"
             },
             {
               "label": "Kilbi-Menu in Café Tivoli in Châtel-St-Denis",
               "detail": "Café Tivoli, Châtel-Saint-Denis — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
-            },
-            {
-              "label": "Der Herbst-Rundgang",
-              "detail": "Parcours D'Hubert Audriaz, Fribourg — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-herbst-rundgang/"
             },
             {
               "label": "Regards affinés",
               "detail": "L'Atelier, Fribourg — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
             },
             {
               "label": "Halloween à Moléson",
               "detail": "Office du Tourisme de Moléson, Gruyères — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Automne à Charmey",
+              "detail": "Case postale, Val-de-Charmey — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
+            },
+            {
+              "label": "Des vides à remplir : atelier créatif avec Michal Steinemann et Denis Roueche",
+              "detail": "Fribourg",
+              "date": "2026-10-21",
+              "url": "https://www.fr.ch/bcu/evenements/des-vides-a-remplir-atelier-creatif-avec-michal-steinemann-et-denis-roueche"
+            },
+            {
+              "label": "Krimi & Pop",
+              "detail": "Begegnungszentrum, Düdingen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/krimi-und-pop_ASJ9RiG"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "FR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "40",
+          "value": "38",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Hammer's Wildbuffet nach Belieben – Restaurant fein & sein",
-              "detail": "Restaurant und Pension fein & sein, Plaffeien",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hammer-s-wildbuffet-a-discretion-restaurant-fein-sein/"
-            },
-            {
               "label": "La Catillon ou le destin d’une femme au XVIIIe siècle",
               "detail": "Fribourg — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-catillon-ou-le-destin-dune-femme-au-xviiie-siecle/"
-            },
-            {
-              "label": "La Magie de Poudlard",
-              "detail": "Fribourg — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-magie-de-poudlard/"
             },
             {
               "label": "Menu de Bénichon au Café des Bains à Châtel-St-Denis",
               "detail": "Restaurant Le Café des Bains, Châtel-Saint-Denis — en cours, dernier jour : 19 octobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/benichon-menu-at-cafe-des-bains-in-chatel-st-denis/"
             },
             {
               "label": "Menu de Bénichon au Châtel à Châtel-St-Denis",
               "detail": "Le Châtel Restaurant, Châtel-Saint-Denis — en cours, dernier jour : 19 octobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/menu-de-benichon-au-chatel-a-chatel-st-denis/"
             },
             {
               "label": "Des vides à remplir",
               "detail": "Bibliothèque cantonale et universitaire (BCU), Fribourg — en cours, dernier jour : 21 octobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/des-vides-a-remplir/"
             },
             {
               "label": "Menu de Bénichon au Café Tivoli à Châtel-St-Denis",
               "detail": "Café Tivoli, Châtel-Saint-Denis — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
-            },
-            {
-              "label": "Le Parcours d’automne",
-              "detail": "Parcours D'Hubert Audriaz, Fribourg — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-herbst-rundgang/"
             },
             {
               "label": "Regards affinés",
               "detail": "L'Atelier, Fribourg — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
             },
             {
               "label": "Halloween à Moléson",
               "detail": "Office du Tourisme de Moléson, Gruyères — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Automne à Charmey",
+              "detail": "Case postale, Val-de-Charmey — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
+            },
+            {
+              "label": "Des vides à remplir : atelier créatif avec Michal Steinemann et Denis Roueche",
+              "detail": "Fribourg",
+              "date": "2026-10-21",
+              "url": "https://www.fr.ch/bcu/evenements/des-vides-a-remplir-atelier-creatif-avec-michal-steinemann-et-denis-roueche"
+            },
+            {
+              "label": "Krimi & Pop",
+              "detail": "Begegnungszentrum, Düdingen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/krimi-und-pop_ASJ9RiG"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }
