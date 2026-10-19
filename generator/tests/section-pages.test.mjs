@@ -2995,8 +2995,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
   assert.match(wf, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(wf, /replay workflow_run redispatchato prima degli upload/);
-  assert.match(wf, /id: push_range[\s\S]*gh api --paginate --slurp "repos\/\$REPO\/commits\/\$WORKFLOW_RUN_HEAD_SHA\/events"/);
-  assert.match(wf, /payload\.ref == "refs\/heads\/main"[\s\S]*payload\.head == \$head[\s\S]*payload\.before/);
+  assert.match(wf, /id: push_range[\s\S]*resolve-workflow-run-push-range\.mjs/);
+  assert.doesNotMatch(wf, /commits\/\$WORKFLOW_RUN_HEAD_SHA\/events/);
+  const pushRangeResolver = read('scripts/ci/resolve-workflow-run-push-range.mjs');
+  assert.match(pushRangeResolver, /actions\/workflows\/publish-api\.yml\/runs/);
+  assert.match(pushRangeResolver, /candidate\?\.type === 'PushEvent'[\s\S]*payload\?\.ref === ref[\s\S]*eventHead === headSha/);
   assert.match(wf, /push_before: \$\{\{ steps\.push_range\.outputs\.before \}\}/);
   assert.doesNotMatch(wf, /diff_args=\(\)[\s\S]*sections\/registry\.json/);
   assert.match(wf, /PUSH_BEFORE="\$before" node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
