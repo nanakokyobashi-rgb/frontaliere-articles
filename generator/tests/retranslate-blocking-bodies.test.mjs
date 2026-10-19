@@ -44,10 +44,12 @@ import { fileURLToPath } from 'node:url';
 import {
   shouldWrite,
   translationSanityIssue,
+  boundedMarkdownDestination,
   findAddressToponymMismatches,
   addressPostalLocalityWords,
   visibleAddressOffsetMap,
   LENGTH_FLOOR,
+  markdownDestinationTitleState,
   replaceBodyField,
   insertBodyField,
   readBodyField,
@@ -70,6 +72,7 @@ import {
   bodyFieldsForSource,
   blockingPairsFromContent,
   scanContentForBlockingPairs,
+  sameAddressCandidateIndex,
   planTitleMarkerRemoval,
   keyFactsGuardMode,
   templateHeadingIssue,
@@ -1646,6 +1649,17 @@ test('FU-011 una parentesi nel titolo quotato Markdown resta metadata', () => {
   assert.deepEqual(mismatches[0]?.missing, ['Como']);
 });
 
+test('FU-2026-10-19-003 mantiene lo stato del titolo quotato e delle parentesi', () => {
+  const destination = 'https://example.test "nota) CAP 22100 Como")';
+  const openingQuote = destination.indexOf('"');
+  const closingQuote = destination.lastIndexOf('"');
+  const opened = markdownDestinationTitleState(destination, openingQuote, 0);
+  assert.equal(opened.titleQuote, '"');
+  const closed = markdownDestinationTitleState(destination, closingQuote, 0, opened);
+  assert.equal(closed.titleQuote, '');
+  assert.equal(boundedMarkdownDestination(destination, 0), destination.length);
+});
+
 test('FU-011 non espone destinazioni in link Markdown annidati oltre il limite storico', () => {
   let value = '[Como](/en/22100-como)';
   for (let index = 0; index < 13; index += 1) {
@@ -1814,6 +1828,23 @@ test('la guardia non abbina per ordinale CAP ambigui distribuiti su righe divers
 
   assert.equal(mismatches.length, 2);
   assert.deepEqual(mismatches.map(({ missing }) => missing), [['Como'], ['Como']]);
+});
+
+test('FU-2026-10-19-005 consente il fallback solo con una riga completa', () => {
+  const complete = [
+    { index: 4, postalMatchIndex: 0 },
+    { index: 4, postalMatchIndex: 1 },
+  ];
+  assert.equal(sameAddressCandidateIndex(complete, 2), true);
+  assert.equal(sameAddressCandidateIndex([
+    complete[0],
+    { index: 5, postalMatchIndex: 1 },
+  ], 2), false);
+  assert.equal(sameAddressCandidateIndex([
+    complete[0],
+    { index: 4, postalMatchIndex: 0 },
+  ], 2), false);
+  assert.equal(sameAddressCandidateIndex(complete, 3), false);
 });
 
 test('stratify copre piu codici invece di prendere i primi N dello stesso', () => {
