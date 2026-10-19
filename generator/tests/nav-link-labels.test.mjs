@@ -78,7 +78,7 @@ const CONTENT_BASELINE = Object.freeze({
 });
 
 test('sostituisce una label italiana e lascia invariato il target completo', () => {
-  const source = '[calcolatore stipendio](nav:calculator "target invariato")';
+  const source = '[calcolatore stipendio netto](nav:calculator "target invariato")';
   assert.equal(
     localizeNavLinkLabels(source, 'de'),
     '[Nettolohnrechner](nav:calculator "target invariato")',
@@ -90,14 +90,76 @@ test('sostituisce anche la forma ibrida usando il body italiano come evidenza', 
   const hybrid = '[costo della vita Tessin vs Italia](nav:cost-of-living)';
   assert.equal(
     localizeNavLinkLabels(hybrid, 'fr', { itBody }),
-    '[coût de la vie](nav:cost-of-living)',
+    '[coût de la vie au Tessin vs. Italie](nav:cost-of-living)',
   );
 });
 
 test('il passaggio comune del writer applica la localizzazione prima della scrittura', () => {
   assert.equal(
     sanitizeArticleMarkdownLinks('[annunci di lavoro](nav:jobs)', 'en'),
-    '[Ticino job offers](nav:jobs)',
+    '[job listings](nav:jobs)',
+  );
+});
+
+test('storico traffico e code conserva storico e code nella traduzione', () => {
+  const source = '[storico traffico e code ai valichi](nav:traffic-history)';
+  assert.equal(
+    localizeNavLinkLabels(source, 'en'),
+    '[traffic history and queues at border crossings](nav:traffic-history)',
+  );
+  assert.equal(
+    localizeNavLinkLabels(source, 'fr'),
+    '[historique du trafic et des files aux postes-frontières](nav:traffic-history)',
+  );
+});
+
+test('mappa dei valichi resta una mappa, non un comparatore di percorsi', () => {
+  const source = '[mappa dei valichi](nav:border-map)';
+  assert.equal(
+    localizeNavLinkLabels(source, 'en'),
+    '[map of border crossings](nav:border-map)',
+  );
+  assert.equal(
+    localizeNavLinkLabels(source, 'fr'),
+    '[carte des postes-frontières](nav:border-map)',
+  );
+});
+
+test('costo auto pendolare non diventa costo del carburante', () => {
+  assert.equal(
+    localizeNavLinkLabels('[costo auto pendolare](nav:car-cost)', 'fr'),
+    '[coût de la voiture pour les navetteurs](nav:car-cost)',
+  );
+});
+
+test('calcolatore fiscale non dipende dal target nav', () => {
+  assert.equal(
+    localizeNavLinkLabels('[calcolatore fiscale](nav:calculator)', 'de'),
+    '[Steuerrechner](nav:calculator)',
+  );
+  assert.equal(
+    localizeNavLinkLabels('[calcolatore fiscale](nav:tax-return)', 'de'),
+    '[Steuerrechner](nav:tax-return)',
+  );
+});
+
+test('il confronto Tessin vs Italia non perde luogo e confronto', () => {
+  assert.equal(
+    localizeNavLinkLabels('[costo della vita Tessin vs Italia](nav:cost-of-living)', 'de'),
+    '[Lebenshaltungskosten im Tessin vs. Italien](nav:cost-of-living)',
+  );
+});
+
+test('una label italiana sconosciuta resta e viene segnalata', () => {
+  const source = '[calcolatore sconosciuto](nav:calculator "target invariato")';
+  assert.equal(localizeNavLinkLabels(source, 'fr'), source);
+  assert.deepEqual(
+    findItalianNavLinkLabels(source, 'fr').map(({ label, target, canonicalLabel }) => ({
+      label,
+      target,
+      canonicalLabel,
+    })),
+    [{ label: 'calcolatore sconosciuto', target: 'calculator', canonicalLabel: null }],
   );
 });
 

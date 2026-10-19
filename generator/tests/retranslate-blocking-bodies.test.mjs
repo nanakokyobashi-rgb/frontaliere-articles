@@ -839,10 +839,10 @@ test('il gate conta la heading Fonti italiana ma ignora una fonte con contenuto'
 test('translationSanityIssue rifiuta una label nav italiana anche sotto le tre righe', () => {
   assert.equal(
     sanitizeTranslatedField('[calcolatore](nav:calculator)', 'fr'),
-    '[calculateur de salaire](nav:calculator)',
+    '[calculateur](nav:calculator)',
   );
-  const residual = sanitizeTranslatedField('[calcolatore](nav:ral)', 'fr');
-  assert.equal(residual, '[calcolatore](nav:ral)');
+  const residual = sanitizeTranslatedField('[calcolatore sconosciuto](nav:ral)', 'fr');
+  assert.equal(residual, '[calcolatore sconosciuto](nav:ral)');
   const issue = translationSanityIssue({
     oldSections: {},
     newSections: { body1: residual },
@@ -850,7 +850,7 @@ test('translationSanityIssue rifiuta una label nav italiana anche sotto le tre r
     locale: 'fr',
   });
 
-  assert.equal(issue, 'italian-nav-label: body1 [calcolatore](nav:ral)');
+  assert.equal(issue, 'italian-nav-label: body1 [calcolatore sconosciuto](nav:ral)');
 });
 
 test('lo scan ignora heading localizzati in blockquote, lista e forma Setext', () => {
