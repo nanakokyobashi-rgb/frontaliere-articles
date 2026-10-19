@@ -163,6 +163,35 @@ test('automation-deferred esclude la coda senza chiedere una decisione umana', (
   const r = classifyIssue('Workflow Failure: crawler transport', ['automation-deferred']);
   assert.equal(r.route, 'none');
   assert.equal(r.autofix, false);
+  assert.equal(r.automationDeferred, true);
+  assert.equal(r.riskBlocked, false);
+});
+
+test('i domini di rischio restano evidenza e non bloccano il routing come sul sito', () => {
+  const r = classifyIssue(
+    'Aggiornare il workflow di deploy del service account con permessi',
+    ['follow-up'],
+  );
+  assert.equal(r.route, 'queue');
+  assert.equal(r.autofix, true);
+  assert.equal(r.automationDeferred, false);
+  assert.equal(r.riskBlocked, false);
+  assert.deepEqual(r.riskDomains, [
+    'deploy-workflow-functions',
+    'secrets-roles-permissions',
+  ]);
+});
+
+test('il prepass puo\' rivalutare una issue con automation-deferred', () => {
+  const r = classifyIssue(
+    'Workflow Failure: crawler transport',
+    ['automation-deferred'],
+    '',
+    { ignoreAutomationDeferred: true },
+  );
+  assert.equal(r.route, 'queue');
+  assert.equal(r.autofix, true);
+  assert.equal(r.automationDeferred, false);
 });
 
 test('i pin locali del classificatore tengono l\'issue fuori dal fixer', () => {
@@ -178,7 +207,24 @@ test('la CLI emette JSON con la forma attesa dallo YAML del triage', async () =>
   // Lo YAML fa `node -e "JSON.parse(...).category"`: se la forma cambia, il
   // triage legge undefined e non instrada nulla, in silenzio.
   const r = classifyIssue('Workflow Failure: Publish article data API', []);
-  assert.deepEqual(Object.keys(r).sort(), ['autofix', 'category', 'fuPrio', 'route']);
+  assert.deepEqual(Object.keys(r).sort(), [
+    'autofix',
+    'automationBlocked',
+    'automationDeferred',
+    'category',
+    'controlPlane',
+    'fuPrio',
+    'humanApprovalRequired',
+    'needsHumanVeto',
+    'policyVersion',
+    'riskBlocked',
+    'riskDecision',
+    'riskDenyCode',
+    'riskDomains',
+    'riskReason',
+    'route',
+    'unknownPaths',
+  ]);
 });
 
 test('la CLI non si attiva per un wrapper chiamato classify-issue.mjs', () => {

@@ -2730,7 +2730,7 @@ test('fast-publish verso gli shard ignora i corpi cantonali, quello R2 ignora le
   assert.equal(bodyRegex(HISTORICAL_CORE_LIST, { served: 'r2' }), '^$', 'nessuna sezione R2 attiva: non combacia con niente');
   assert.ok(!new RegExp(bodyRegex(HISTORICAL_CORE_LIST, { served: 'r2' })).test('content/blog-body/it/x.ts'));
   assert.throws(() => bodyRegex(WITH_TI, { served: 'pages' }), /sconosciuto/);
-  assert.match(read('.github/workflows/fast-publish-article.yml'), /fast-publish-section\.mjs body-regex shard\)/);
+  assert.match(read('.github/workflows/fast-publish-article.yml'), /fast-publish-section\.mjs body-plan shard\)/);
 });
 
 test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenziali obbligatorie', () => {
@@ -3065,13 +3065,14 @@ test('reconcile: il manifest individua una pagina articolo ritirata o con slug v
   );
 });
 
-function fakeFetch({ commit = 'abc1234', sectionsCommit = commit, edgeCommit = commit, live = true, missing = new Set(), broken = new Set(), pageManifest = null }) {
+function fakeFetch({ commit = 'abc1234', sectionsCommit = commit, candidateCommit = commit, edgeCommit = commit, live = true, missing = new Set(), broken = new Set(), pageManifest = null }) {
   const docs = {
     'manifest.json': { commit },
     'sections.json': { commit: sectionsCommit, sections: [CATALOG_TI, { id: 'canton-gr', paths: {} }] },
     'slugs.json': { commit, cantons: { 'canton-ti': SLUGS_TI } },
     'canton-articles.json': [{ id: 'a', date: '2026-10-01', section: 'canton-ti' }, { id: 'b', date: '2026-10-02', section: 'canton-ti' }],
   };
+  const candidateRegistry = { schema: 1, commit: candidateCommit, sections: { 'canton-ti': { status: live ? 'live' : 'draft' } } };
   const edgeRegistry = { schema: 1, commit: edgeCommit, sections: { 'canton-ti': { status: live ? 'live' : 'draft' } } };
   const calls = [];
   const impl = async (url, init = {}) => {
@@ -3081,6 +3082,9 @@ function fakeFetch({ commit = 'abc1234', sectionsCommit = commit, edgeCommit = c
       const p = clean.replace('https://cdn.frontaliereticino.ch/edge/sections', '').replace(/index\.html$/, '');
       if (broken.has(p)) return { status: 503, ok: false };
       return { status: missing.has(p) ? 404 : 200, ok: !missing.has(p) };
+    }
+    if (clean === 'https://api.test/edge/sections/registry.json') {
+      return { ok: true, status: 200, json: async () => candidateRegistry };
     }
     if (clean.endsWith('/edge/sections/registry.json')) return { ok: true, status: 200, json: async () => edgeRegistry };
     if (clean.endsWith('/edge/sections/_page-manifests/canton-ti.json')) {
@@ -3105,6 +3109,10 @@ test('reconcile: solo le sezioni live, solo i 404, e mai su una superficie a met
   assert.match(torn.skipped, /meta' deploy/);
   assert.deepEqual(torn.sections, []);
 
+  const tornCandidate = await reconcile({ apiBase: 'https://api.test', fetchImpl: fakeFetch({ candidateCommit: 'def5678' }).impl });
+  assert.match(tornCandidate.skipped, /registro edge candidato non portano lo stesso commit/);
+  assert.deepEqual(tornCandidate.sections, []);
+
   const gap = fakeFetch({ missing: new Set(['/en/ticino-articles/a-en/', '/articoli-ticino/b-it/']), broken: new Set(['/de/tessin-artikel/a-de/']) });
   const report = await reconcile({ apiBase: 'https://api.test', cap: 1, fetchImpl: gap.impl });
   assert.equal(report.sections.length, 1);
@@ -3113,6 +3121,24 @@ test('reconcile: solo le sezioni live, solo i 404, e mai su una superficie a met
   assert.deepEqual([ti.selected, ti.leftover], [['b'], ['a']]);
   assert.deepEqual(ti.unknown, ['/de/tessin-artikel/a-de/']);
   assert.deepEqual(ti.sectionMissing, []);
+});
+
+test('reconcile: API avanti al registro edge recupera le pagine che bloccano il flip', async () => {
+  const gap = fakeFetch({
+    edgeCommit: 'def5678',
+    missing: new Set(['/en/ticino-articles/a-en/', '/articoli-ticino/b-it/']),
+  });
+  const report = await reconcile({ apiBase: 'https://api.test', cap: 1, fetchImpl: gap.impl });
+
+  assert.equal(report.skipped, null);
+  assert.equal(report.apiCommit, 'abc1234');
+  assert.equal(report.edgeCommit, 'def5678');
+  assert.equal(report.pendingEdgeFlip, true);
+  assert.equal(report.sections.length, 1);
+  assert.deepEqual(report.sections[0].missingIds, ['b', 'a']);
+  assert.deepEqual([report.sections[0].selected, report.sections[0].leftover], [['b'], ['a']]);
+  assert.ok(gap.calls.some((call) => call === 'GET https://api.test/edge/sections/registry.json'));
+  assert.ok(gap.calls.some((call) => call.startsWith('HEAD https://cdn.frontaliereticino.ch/edge/sections')));
 });
 
 test('reconcile: una pagina articolo presente nel manifest ma ritirata entra nel cleanup', async () => {

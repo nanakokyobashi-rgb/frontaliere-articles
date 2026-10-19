@@ -3,10 +3,11 @@
  *
  * ADATTAMENTO DICHIARATO (manifest: `classify-issue`). La superficie del modulo
  * e la CLI sono identiche a quelle del sito — `classifyIssue(title, labels)` →
- * `{category, autofix, route, fuPrio}` — così `triage-sweep.mjs` e lo YAML del
- * triage restano copiabili senza modifiche. Cambiano SOLO le categorie, perché
- * i due repo si rompono in modi diversi: il sito ha crawler e RPM, qui c'è una
- * superficie dati pubblicata e un corpus generato.
+ * `{category, autofix, route, fuPrio, ...riskEvidence}` — così
+ * `triage-sweep.mjs` e lo YAML del triage restano copiabili senza modifiche.
+ * Cambiano SOLO le categorie e i pin locali, perché i due repo si rompono in
+ * modi diversi: il sito ha crawler e RPM, qui c'è una superficie dati
+ * pubblicata e un corpus generato.
  *
  * ## Le categorie, e perché una sola salta la coda
  *
@@ -63,6 +64,10 @@
 
 import { realpathSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
+import {
+  classifyAutomationRisk,
+  extractIssueReferences,
+} from '../ci/lib/automation-risk-policy.mjs';
 
 const FIXER_EXEMPT_LABELS = new Set([
   'backlog',
@@ -90,8 +95,11 @@ export function isFixerExempt(labels = []) {
   return names.some((name) => FIXER_EXEMPT_LABELS.has(name));
 }
 
-export function classifyIssue(title = '', labels = [], _body = '', _options = {}) {
-  const set = new Set((labels || []).map((s) => String(s).toLowerCase()));
+export function classifyIssue(title = '', labels = [], body = '', options = {}) {
+  const labelNames = (Array.isArray(labels) ? labels : []).map((label) =>
+    String(typeof label === 'string' ? label : label?.name ?? '').toLowerCase(),
+  );
+  const set = new Set(labelNames);
   const has = (name) => set.has(String(name).toLowerCase());
   const t = (re) => re.test(title || '');
 
@@ -141,9 +149,34 @@ export function classifyIssue(title = '', labels = [], _body = '', _options = {}
   // Come sul sito: nessuna categoria è human-only. Le safety-valve del fixer
   // (root-cause non determinabile, capability-guard su workflows/secret) sono
   // generiche e restano — non sono guardrail di categoria.
-  const automationDeferred = has(AUTOMATION_DEFERRED_LABEL);
+  const automationDeferred = has(AUTOMATION_DEFERRED_LABEL)
+    && options?.ignoreAutomationDeferred !== true;
+  const repository = String(
+    options?.repository
+      ?? process.env.REPO
+      ?? process.env.GH_REPO
+      ?? process.env.GITHUB_REPOSITORY
+      ?? '',
+  ).trim();
+  const issueText = [title, body, ...labelNames].filter(Boolean).join('\n');
+  const references = extractIssueReferences(issueText, { repository });
+  const risk = classifyAutomationRisk({
+    title,
+    body,
+    labels,
+    category,
+    ...(references.hasReferences
+      ? { paths: references.paths, pathsComplete: references.pathsComplete }
+      : {}),
+  });
+  // La policy del sito conserva F1/F7, control-plane e path come evidenza
+  // sulla superficie issue; blocca solo metadata non verificabili. Il pin
+  // locale `needs-human` resta invece assorbente per il ciclo del corpus,
+  // come stabilito in d04c9d54a.
+  const riskBlocked = risk.blocked || risk.needsHumanVeto === true || !risk.verifiable;
+  const automationBlocked = riskBlocked || automationDeferred;
   const fixerExempt = isFixerExempt(labels);
-  const autofix = !needsHuman && !automationDeferred;
+  const autofix = !needsHuman && !automationBlocked;
   // `crawler-transient` è l'esito, non un bug da instradare: la issue è già la
   // ledger (o un commento su di essa) che assorbe i blip sotto-soglia — vedi
   // `findOrCreateTransientLedger` in `github-issue-creator.mjs`. Instradarla al
@@ -154,7 +187,7 @@ export function classifyIssue(title = '', labels = [], _body = '', _options = {}
   // fin dalla nascita) è finita in coda ed è stata promossa al fixer. Il guard
   // vive qui, sorgente unica per entrambi i percorsi.
   const route =
-    fixerExempt || has('crawler-transient') || automationDeferred
+    fixerExempt || has('crawler-transient') || automationBlocked
       ? 'none'
       : category === 'publish'
         ? 'fix'
@@ -169,7 +202,24 @@ export function classifyIssue(title = '', labels = [], _body = '', _options = {}
         : 'low'
       : null;
 
-  return { category, autofix, route, fuPrio };
+  return {
+    category,
+    autofix,
+    route,
+    fuPrio,
+    policyVersion: risk.policyVersion,
+    automationBlocked,
+    riskBlocked,
+    automationDeferred,
+    humanApprovalRequired: risk.humanApprovalRequired || risk.needsHumanVeto,
+    riskDomains: risk.domains,
+    riskReason: risk.reason,
+    riskDecision: risk.decision,
+    riskDenyCode: risk.denyCode,
+    controlPlane: risk.controlPlane,
+    needsHumanVeto: risk.needsHumanVeto,
+    unknownPaths: risk.unknownPaths,
+  };
 }
 
 const isDirectRun = (() => {

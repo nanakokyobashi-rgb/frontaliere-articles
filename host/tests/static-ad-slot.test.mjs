@@ -40,6 +40,32 @@ test('runtime ad slot values outside the TypeScript union fail closed', () => {
   assert.equal(staticAdSlotHtml(null), '');
 });
 
+test('malformed runtime ad slot values are rejected before registry access', () => {
+  const hostileSlot = {
+    [Symbol.toPrimitive]() {
+      throw new Error('runtime slot must not be coerced');
+    },
+  };
+  const malformedSlots = [
+    undefined,
+    null,
+    false,
+    0,
+    Symbol('runtime-slot'),
+    Object.create(null),
+    '',
+    '__proto__',
+    hostileSlot,
+  ];
+
+  for (const slot of malformedSlots) {
+    assert.equal(isStaticAdSlotKey(slot), false);
+    assert.doesNotThrow(() => {
+      assert.equal(staticAdSlotHtml(slot), '');
+    });
+  }
+});
+
 test('runtime ad slot validation works when the target lacks Object.hasOwn', () => {
   const descriptor = Object.getOwnPropertyDescriptor(Object, 'hasOwn');
   assert.ok(descriptor, 'the test runtime must expose Object.hasOwn to simulate its absence');

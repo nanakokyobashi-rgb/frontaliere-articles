@@ -35,6 +35,7 @@ import { isExplicitNonFunnelDisposition, isMalformedReviewBody } from './lib/rev
 import { intFromEnv } from '../lib/int-from-env.mjs';
 import { ACCEPTANCE_CONDITION, hasEnumeratedItems } from './followup-resolution-match.mjs';
 import { isAggregate, isAggregateForAnalytics } from './check-issue-already-resolved.mjs';
+import { pinnedBy } from './manifest-pinned-issues.mjs';
 
 export { hasEnumeratedItems };
 
@@ -65,6 +66,7 @@ export const SEARCH_RESULT_CAP = 1000;
 // `gh pr view` / `gh issue view`, che paginano.
 export const NESTED_PAGE_CAP = 100;
 const OUT = process.env.HARVEST_OUT || 'harvest-clusters.json';
+const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
 const NO_AUTOCLOSE = process.env.FOLLOWUP_NO_AUTOCLOSE === '1' || process.env.NO_AUTOCLOSE === '1';
 // EFFICACY_FACTOR: a documented pattern that STILL recurs at ≥ THRESHOLD×factor
 // is evidence the prose rule isn't preventing the mistake → escalate to a
@@ -449,7 +451,7 @@ function fingerprintFinding(text) {
 //       diligence, not a confirmed defect. tallyFindings already skips ❓ via
 //       COUNTABLE_SEVERITIES; the classifier repeats the rule so a direct call
 //       cannot reintroduce them.
-// Crucially the deterministic gate `pr-body-contract.yml` ALREADY enforces section
+// Crucially the deterministic gate `tests.yml` ALREADY enforces section
 // PRESENCE (`hasImpl`/`hasNon`, multi-issue `Closes`) and the next-step check
 // already accepts `per scelta` / `by construction` as motivated decisions — the
 // structural fix for missing-section / no-plan violations already shipped. The
@@ -864,7 +866,7 @@ export function bucketFinding(text) {
     }
     // pr-body-contract: drop affirmations / location-label false positives so the
     // bucket counts only genuine contract violations (the deterministic gate
-    // pr-body-contract.yml already blocks missing sections). Falls through to the
+    // tests.yml body-contract step already blocks missing sections). Falls through to the
     // next matching taxonomy entry / fingerprint net so a co-mentioned real defect
     // (sibling-class-fix, stale-comment) still clusters in its own bucket.
     if (t.key === 'pr-body-contract' && !isGenuinePrBodyContractViolation(text)) continue;
@@ -2266,6 +2268,11 @@ async function main() {
     for (const iss of openEsc) {
       const key = parseEscalationKey(iss.title);
       if (liveKeys.has(key)) continue; // ancora attivo → lascia aperta
+      const pinnedEntry = pinnedBy(iss.number, REPO);
+      if (pinnedEntry) {
+        console.log(`SELF-HEAL close skipped #${iss.number} — manifest pin ${pinnedEntry}`);
+        continue;
+      }
       if (NO_AUTOCLOSE) {
         console.log(`SELF-HEAL close skipped #${iss.number} — no-autoclose`);
         continue;
