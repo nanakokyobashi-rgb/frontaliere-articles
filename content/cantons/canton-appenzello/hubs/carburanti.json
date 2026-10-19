@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-18T15:52:30.685Z",
-  "contentHash": "893d2ec4c628e1bba7c6fddb477d11d9ac4570678737212fbc1d05d403afff6b",
+  "updatedAt": "2026-10-19T14:46:40.544Z",
+  "contentHash": "5c3bbcaa0d5d36d2e944e26e1e9409916e6c00a4febcccbbee22ded6930fb9c1",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Rotenwies di Gais alza le rette di pensione e assistenza",
+          "url": "/articoli-appenzello/gais-alterszentrum-rotewies-rette-aumento/",
+          "excerpt": "Il centro per anziani Rotenwies di Gais aumenterà le rette di pensione e assistenza a causa di un deficit finanziario protratto da anni e dei costi in crescita.",
+          "date": "2026-10-19T14:39:09.729Z"
+        },
+        {
           "title": "Nuova area nell'Appenzeller Hinterland: due responsabili",
           "url": "/articoli-appenzello/raiba-nuova-area-previdenza/",
           "excerpt": "La Raiffeisenbank Appenzeller Hinterland riunisce previdenza, successioni, analisi di copertura e assicurazioni.",
@@ -94,12 +100,6 @@
           "url": "/articoli-appenzello/deficit-comune-preventivo-2027/",
           "excerpt": "Il preventivo 2027 prevede un disavanzo di CHF 169'500.",
           "date": "2026-10-12T06:43:23.669Z"
-        },
-        {
-          "title": "Herisau: i due Appenzello chiedono più rapidità",
-          "url": "/articoli-appenzello/herisau-verkehr-appenzello/",
-          "excerpt": "Durante la consultazione su «Verkehr '45», Appenzello Esterno chiede di rivedere la proposta e contesta l'orientamento della parte ferroviaria.",
-          "date": "2026-10-10T06:33:48.256Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T14:46:40.544Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Rotenwies in Gais raises its residential and care fees",
+          "url": "/en/appenzell-articles/gais-alterszentrum-rotewies-fee-increase/",
+          "excerpt": "The Rotenwies senior center in Gais will increase its accommodation and care fees due to a financial deficit that has persisted for years and rising costs.",
+          "date": "2026-10-19T14:39:09.729Z"
+        },
+        {
           "title": "New area in the Appenzeller Hinterland: two managers",
           "url": "/en/appenzell-articles/raiba-new-pension-area/",
           "excerpt": "Raiffeisenbank Appenzeller Hinterland brings together retirement planning, succession planning, coverage analysis and insurance.",
@@ -193,12 +199,6 @@
           "url": "/en/appenzell-articles/municipal-deficit-budget-2027/",
           "excerpt": "The 2027 budget estimates a deficit of CHF 169'500.",
           "date": "2026-10-12T06:43:23.669Z"
-        },
-        {
-          "title": "Herisau: the two Appenzells call for greater speed",
-          "url": "/en/appenzell-articles/herisau-transport-appenzell/",
-          "excerpt": "During the consultation on «Verkehr '45», Appenzell Ausserrhoden calls for the proposal to be reviewed and challenges the direction of the railway component.",
-          "date": "2026-10-10T06:33:48.256Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T14:46:40.544Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Rotenwies in Gais erhöht die Pensions- und Betreuungstaxen",
+          "url": "/de/appenzell-artikel/gais-alterszentrum-rotewies-gebuhren-erhoehung/",
+          "excerpt": "Das Alterszentrum Rotenwies in Gais wird die Pensions- und Betreuungstaxen aufgrund eines seit Jahren anhaltenden Finanzdefizits und der steigenden Kosten erhöhen.",
+          "date": "2026-10-19T14:39:09.729Z"
+        },
+        {
           "title": "Neuer Bereich im Appenzeller Hinterland: zwei Verantwortliche",
           "url": "/de/appenzell-artikel/raiba-neuer-vorsorgebereich/",
           "excerpt": "Die Raiffeisenbank Appenzeller Hinterland vereint Vorsorge, Nachfolge, Deckungsanalyse und Versicherungen.",
@@ -292,12 +298,6 @@
           "url": "/de/appenzell-artikel/gemeinde-defizit-voranschlag-2027/",
           "excerpt": "Der Voranschlag 2027 sieht ein Defizit von CHF 169'500 vor.",
           "date": "2026-10-12T06:43:23.669Z"
-        },
-        {
-          "title": "Herisau: Die beiden Appenzell fordern mehr Tempo",
-          "url": "/de/appenzell-artikel/herisau-verkehr-appenzell/",
-          "excerpt": "Während der Vernehmlassung zu «Verkehr '45» fordert Appenzell Ausserrhoden, den Vorschlag zu überarbeiten, und stellt die Ausrichtung des Bahnteils infrage.",
-          "date": "2026-10-10T06:33:48.256Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T14:46:40.544Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Rotenwies di Gais augmente les tarifs de pension et d'assistance",
+          "url": "/fr/articles-appenzell/gais-centre-rotewies-augmentation-frais/",
+          "excerpt": "Le centre pour personnes âgées Rotenwies di Gais augmentera les tarifs de pension et d'assistance en raison d'un déficit financier qui se prolonge depuis des années et de la hausse des coûts.",
+          "date": "2026-10-19T14:39:09.729Z"
+        },
+        {
           "title": "Nouvelle unité dans l’Appenzeller Hinterland : deux responsables",
           "url": "/fr/articles-appenzell/raiba-nouveau-domaine-prevoyance/",
           "excerpt": "La Raiffeisenbank Appenzeller Hinterland réunit la prévoyance, les successions, l’analyse de couverture et les assurances.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-appenzell/deficit-commune-budget-2027/",
           "excerpt": "Le budget 2027 prévoit un déficit de CHF 169'500.",
           "date": "2026-10-12T06:43:23.669Z"
-        },
-        {
-          "title": "Herisau : les deux Appenzell demandent plus de rapidité",
-          "url": "/fr/articles-appenzell/herisau-transports-appenzell/",
-          "excerpt": "Lors de la consultation sur «Verkehr '45», Appenzell Rhodes-Extérieures demande de revoir la proposition et conteste l'orientation de la partie ferroviaire.",
-          "date": "2026-10-10T06:33:48.256Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T14:46:40.544Z"
     }
   }
 }
