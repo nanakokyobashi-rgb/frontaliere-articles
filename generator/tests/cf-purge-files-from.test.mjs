@@ -333,25 +333,41 @@ test('nessun workflow e nessuno script di shell passa a --files= un elenco costr
   assert.deepEqual(shellBuiltLists(), []);
 });
 
-function workflowPurgeCommands(workflow) {
-  const lines = workflow.split('\n');
-  const logicalLines = [];
-  for (let index = 0; index < lines.length; index++) {
-    let line = lines[index];
-    if (line.trimStart().startsWith('#')) continue;
-    while (/\\\s*$/u.test(line)) {
-      line = line.replace(/\\\s*$/u, '');
-      assert.ok(index + 1 < lines.length, 'continuazione senza una riga successiva');
-      line += ` ${lines[++index].trim()}`;
+function workflowStep(workflow, name) {
+  const start = workflow.indexOf(`      - name: ${name}`);
+  assert.ok(start >= 0, `passo non trovato: ${name}`);
+  const next = workflow.indexOf('\n      - name:', start + 1);
+  return workflow.slice(start, next === -1 ? workflow.length : next);
+}
+
+function workflowPurgeCommands(...sources) {
+  return sources.flatMap((source) => {
+    const lines = source.split('\n');
+    const logicalLines = [];
+    for (let index = 0; index < lines.length; index++) {
+      let line = lines[index];
+      if (line.trimStart().startsWith('#')) continue;
+      while (/\\\s*$/u.test(line)) {
+        line = line.replace(/\\\s*$/u, '');
+        assert.ok(index + 1 < lines.length, 'continuazione senza una riga successiva');
+        line += ` ${lines[++index].trim()}`;
+      }
+      logicalLines.push(line);
     }
-    logicalLines.push(line);
-  }
-  return logicalLines.filter((line) => line.includes('node scripts/cf-purge-cache.mjs'));
+    return logicalLines.filter((line) => line.includes('node scripts/cf-purge-cache.mjs'));
+  });
 }
 
 test('tutti i passi di purge di fast-publish-article passano il file che il primo scrive', () => {
   const wf = readFileSync(join(ROOT, '.github/workflows/fast-publish-article.yml'), 'utf8');
-  const calls = workflowPurgeCommands(wf).map((line) => line.trim());
+  const apexHelper = readFileSync(join(ROOT, 'scripts/ci/fast-publish-apex-verification.sh'), 'utf8');
+  const verification = workflowStep(wf, 'Verify the article is actually readable');
+  assert.match(verification, /source scripts\/ci\/fast-publish-apex-verification\.sh/u);
+  const calls = [
+    ...workflowPurgeCommands(workflowStep(wf, 'Purge the edge cache for what was published')),
+    ...workflowPurgeCommands(apexHelper),
+    ...workflowPurgeCommands(workflowStep(wf, 'Re-purge the edge cache after the verification')),
+  ].map((line) => line.trim());
   assert.equal(calls.length, 3, 'il workflow deve avere i tre passi purge attuali');
   const filesFrom = calls.map((call, index) => {
     assert.match(call, /--files-from=/u, `purge #${index + 1} senza --files-from`);
