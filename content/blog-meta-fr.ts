@@ -13511,7 +13511,10 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.oss-ticino-stipendio.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.riqualifica-aliquote-frontalieri-2026.title': 'Frontaliers 2026 : erreurs à éviter',
     'blog.article.riqualifica-aliquote-frontalieri-2026.excerpt': 'Accord sur les travailleurs frontaliers, franchises, impôt à la source et cotisations : les données à vérifier pour évaluer les formations et la requalification professionnelle en tant que travailleur frontalier en 2026.',
-    'blog.article.riqualifica-aliquote-frontalieri-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.riqualifica-aliquote-frontalieri-2026.imageAlt': 'Un frontalier consulte des documents de formation professionnelle au Tessin.',
+    'blog.article.progettista-elettrico-ticino.title': 'Concepteur électrique frontalier : impôts et permis G',
+    'blog.article.progettista-elettrico-ticino.excerpt': 'Pour le concepteur électrique frontalier au Tessin : accord en vigueur depuis le 1er janvier 2024, impôt à la source uniquement en Suisse et franchises différentes.',
+    'blog.article.progettista-elettrico-ticino.imageAlt': 'Projeteur électrique au travail dans un bureau donnant sur le Tessin',
 };
 
 export default blogMetaFr;

@@ -2256,6 +2256,18 @@
       "firstSeenAt": "2026-10-19T12:03:52.296Z",
       "lastValidatedAt": "2026-10-19T12:03:52.296Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere informatico ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T12:47:26.741Z",
+      "lastValidatedAt": "2026-10-19T12:47:26.741Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
