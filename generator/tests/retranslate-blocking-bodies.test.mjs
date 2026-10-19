@@ -44,10 +44,12 @@ import { fileURLToPath } from 'node:url';
 import {
   shouldWrite,
   translationSanityIssue,
+  boundedMarkdownDestination,
   findAddressToponymMismatches,
   addressPostalLocalityWords,
   visibleAddressOffsetMap,
   LENGTH_FLOOR,
+  markdownDestinationTitleState,
   replaceBodyField,
   insertBodyField,
   readBodyField,
@@ -70,6 +72,7 @@ import {
   bodyFieldsForSource,
   blockingPairsFromContent,
   scanContentForBlockingPairs,
+  sameAddressCandidateIndex,
   planTitleMarkerRemoval,
   keyFactsGuardMode,
   templateHeadingIssue,
@@ -80,9 +83,14 @@ import {
   emptyCascadeMetric,
   engineTranslator,
   parseEmptyCascadeThreshold,
+  parseCodexRetryBackoff,
   processPair,
   summarizeEmptyCascadeProviders,
 } from '../scripts/retranslate-blocking-bodies.mjs';
+import {
+  findItalianNavLinkLabels,
+  localizeNavLinkLabels,
+} from '../../scripts/lib/nav-link-labels.mjs';
 import { diffIsExactlyRemovedLines } from '../scripts/lib/strip-leaked-title-marker.mjs';
 // Dal modulo corpus-only, NON da `lib/article-sanitizers.mjs`: quello e'
 // `identical` nel manifest del ciclo e un export aggiunto dal corpus lo
@@ -95,7 +103,11 @@ import { filterWrongLocalePairs, wrongLocalePair } from '../scripts/fix-faq-loca
 import { detectLanguage, detectLanguageWithConfidence } from '../scripts/lib/detect-language.mjs';
 import { translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 import { getKeyFactsHeading, getTldrHeading } from '../scripts/lib/ai-search-template.mjs';
-import { recordTranslationProviderAttempt } from '../scripts/lib/free-translate.mjs';
+import {
+  recordTranslationProviderAttempt,
+  summarizeTranslationOutcome,
+} from '../scripts/lib/free-translate.mjs';
+import { CodexExecError } from '../scripts/lib/codex-exec-call.mjs';
 
 const fileFor = (id, fields) => `const b: Record<string, string> = {\n`
   + Object.entries(fields).map(([k, v]) => `  'blog.article.${id}.${k}': '${escapeForSingleQuoteTS(v)}',`).join('\n')
@@ -834,6 +846,89 @@ test('il gate conta la heading Fonti italiana ma ignora una fonte con contenuto'
     'italian-residue: 3 righe residue',
   );
   assert.deepEqual(scanItalianResidue({ body1: 'Source : laregione.ch' }, 'fr'), []);
+});
+
+test('translationSanityIssue rifiuta una label nav italiana anche sotto le tre righe', () => {
+  assert.equal(
+    sanitizeTranslatedField('[calcolatore](nav:calculator)', 'fr'),
+    '[calculateur](nav:calculator)',
+  );
+  const residual = sanitizeTranslatedField('[calcolatore sconosciuto](nav:ral)', 'fr');
+  assert.equal(residual, '[calcolatore sconosciuto](nav:ral)');
+  const issue = translationSanityIssue({
+    oldSections: {},
+    newSections: { body1: residual },
+    italianSections: {},
+    locale: 'fr',
+  });
+
+  assert.equal(issue, 'italian-nav-label: body1 [calcolatore sconosciuto](nav:ral)');
+});
+
+test('le sigle pure non attivano italian-nav-label, ma la sostituzione resta attiva', () => {
+  const cases = [
+    ['fr', 'LAMal', 'LAMal'],
+    ['fr', 'AVS', 'AVS'],
+    ['fr', 'LPP', 'LPP'],
+    ['de', 'AVS', 'AHV'],
+    ['de', 'LAMal', 'KVG'],
+    ['en', 'LAMal', 'LAMal'],
+  ];
+  for (const [locale, label, localized] of cases) {
+    const source = `[${label}](nav:pension)`;
+    assert.equal(sanitizeTranslatedField(source, locale), `[${localized}](nav:pension)`, `${label} (${locale})`);
+    assert.deepEqual(findItalianNavLinkLabels(source, locale), [], `${label} (${locale}) guardia`);
+    assert.equal(
+      translationSanityIssue({ oldSections: {}, newSections: { body1: source }, italianSections: {}, locale }),
+      null,
+      `${label} (${locale}) italian-nav-label`,
+    );
+  }
+
+  const conjunction = '[AVS e LPP](nav:pension)';
+  assert.equal(sanitizeTranslatedField(conjunction, 'fr'), '[AVS et LPP](nav:pension)');
+  assert.equal(
+    translationSanityIssue({ oldSections: {}, newSections: { body1: conjunction }, italianSections: {}, locale: 'fr' }),
+    `italian-nav-label: body1 ${conjunction}`,
+  );
+});
+
+test('localizzazione, scan e guardia condividono il verdetto sulle voci della mappa', () => {
+  const cases = [
+    ['assistenza legale', 'Assistance juridique'],
+    ['cantone ticino', 'canton du Tessin'],
+    ['imposta alla fonte', 'impôt à la source'],
+  ];
+  for (const [label, translation] of cases) {
+    const source = `[${label}](nav:calculator)`;
+    const localized = localizeNavLinkLabels(source, 'fr');
+    assert.equal(localized, `[${translation}](nav:calculator)`, label);
+    assert.equal(findItalianNavLinkLabels(source, 'fr').length, 1, label);
+    assert.equal(
+      translationSanityIssue({
+        oldSections: {},
+        newSections: { body1: source },
+        italianSections: {},
+        locale: 'fr',
+      }),
+      `italian-nav-label: body1 ${source}`,
+      label,
+    );
+    assert.equal(findItalianNavLinkLabels(localized, 'fr').length, 0, label);
+  }
+
+  const acronym = '[AVS](nav:pension)';
+  assert.equal(localizeNavLinkLabels(acronym, 'fr'), acronym);
+  assert.deepEqual(findItalianNavLinkLabels(acronym, 'fr'), []);
+  assert.equal(
+    translationSanityIssue({
+      oldSections: {},
+      newSections: { body1: acronym },
+      italianSections: {},
+      locale: 'fr',
+    }),
+    null,
+  );
 });
 
 test('lo scan ignora heading localizzati in blockquote, lista e forma Setext', () => {
@@ -1646,6 +1741,17 @@ test('FU-011 una parentesi nel titolo quotato Markdown resta metadata', () => {
   assert.deepEqual(mismatches[0]?.missing, ['Como']);
 });
 
+test('FU-2026-10-19-003 mantiene lo stato del titolo quotato e delle parentesi', () => {
+  const destination = 'https://example.test "nota) CAP 22100 Como")';
+  const openingQuote = destination.indexOf('"');
+  const closingQuote = destination.lastIndexOf('"');
+  const opened = markdownDestinationTitleState(destination, openingQuote, 0);
+  assert.equal(opened.titleQuote, '"');
+  const closed = markdownDestinationTitleState(destination, closingQuote, 0, opened);
+  assert.equal(closed.titleQuote, '');
+  assert.equal(boundedMarkdownDestination(destination, 0), destination.length);
+});
+
 test('FU-011 non espone destinazioni in link Markdown annidati oltre il limite storico', () => {
   let value = '[Como](/en/22100-como)';
   for (let index = 0; index < 13; index += 1) {
@@ -1816,6 +1922,23 @@ test('la guardia non abbina per ordinale CAP ambigui distribuiti su righe divers
   assert.deepEqual(mismatches.map(({ missing }) => missing), [['Como'], ['Como']]);
 });
 
+test('FU-2026-10-19-005 consente il fallback solo con una riga completa', () => {
+  const complete = [
+    { index: 4, postalMatchIndex: 0 },
+    { index: 4, postalMatchIndex: 1 },
+  ];
+  assert.equal(sameAddressCandidateIndex(complete, 2), true);
+  assert.equal(sameAddressCandidateIndex([
+    complete[0],
+    { index: 5, postalMatchIndex: 1 },
+  ], 2), false);
+  assert.equal(sameAddressCandidateIndex([
+    complete[0],
+    { index: 4, postalMatchIndex: 0 },
+  ], 2), false);
+  assert.equal(sameAddressCandidateIndex(complete, 3), false);
+});
+
 test('stratify copre piu codici invece di prendere i primi N dello stesso', () => {
   const pairs = [
     ...Array.from({ length: 10 }, (_, i) => ({ id: `p${i}`, codes: ['unbalanced-parentheses'] })),
@@ -1924,6 +2047,28 @@ test('il report per campo elenca ogni provider con classe e messaggio bounded', 
   }
 });
 
+test('il riepilogo aggregato conserva diagnosi deduplicate e limitate per provider', () => {
+  const [provider] = summarizeEmptyCascadeProviders([{
+    translationFailures: [
+      {
+        providers: [{
+          provider: 'codex-local', attempts: 1, successes: 0, failures: 1,
+          reasons: { 'rate-limit': 1 }, diagnostics: ['at capacity', 'campo 1'],
+        }],
+      },
+      {
+        providers: [{
+          provider: 'codex-local', attempts: 1, successes: 0, failures: 1,
+          reasons: { timeout: 1 }, diagnostics: ['campo 1', 'campo 2', 'campo 3'],
+        }],
+      },
+    ],
+  }]);
+
+  assert.deepEqual(provider.diagnostics, ['at capacity', 'campo 1', 'campo 2']);
+  assert.match(provider.message, /at capacity/);
+});
+
 test('la riserva Codex scrive in apply quando la traduzione passa le guardie', async () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-codex-apply-'));
   try {
@@ -1989,6 +2134,78 @@ test('router Codex non configurato resta un rifiuto nominato nel report', async 
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
+});
+
+test('il report Codex conserva reason, diagnosi e conteggio dei retry transitori', async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-codex-diagnostic-'));
+  try {
+    writeTranslationPairFixture(root, 'codex-capacity');
+    const translate = engineTranslator('codex', {
+      codexCall: async () => {
+        throw new CodexExecError({
+          reason: 'rate-limit',
+          diagnostic: 'at capacity',
+          retryable: true,
+        });
+      },
+      codexRetryBackoffMs: [0, 0],
+    });
+    const row = await processPair(translationPair('codex-capacity'), {
+      CONTENT_ROOT: root,
+      APPLY: false,
+      translate,
+    });
+    const provider = row.translationFailure.providers.find(({ provider }) => provider === 'codex-local');
+    assert.equal(provider.attempts, 3);
+    assert.equal(provider.failures, 3);
+    assert.deepEqual(provider.reasons, { 'rate-limit': 3 });
+    assert.equal(provider.failureClass, 'rate-limit');
+    assert.equal(provider.message, 'at capacity');
+    assert.ok(provider.message.length <= 160);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un campo diviso in segmenti continua il conteggio dei tentativi senza buchi', async () => {
+  const outcome = { tierAttempts: [] };
+  let calls = 0;
+  const translate = engineTranslator('codex', {
+    codexCall: async () => {
+      calls += 1;
+      return calls === 1 ? 'Zusammenfassung.' : '- **Was**: ein Wert.';
+    },
+    codexRetryBackoffMs: [0, 0],
+  });
+  const source = [
+    getTldrHeading('it'),
+    'Sintesi italiana.',
+    getKeyFactsHeading('it'),
+    '- **Cosa**: un valore.',
+  ].join('\n');
+  const out = await translateFieldFreeMt({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+    fieldName: 'body1',
+    translate,
+    balanceMarkdown: (value) => value,
+    translationOutcome: outcome,
+  });
+  assert.ok(out);
+  assert.equal(calls, 2);
+  assert.deepEqual(outcome.tierAttempts.map(({ provider, attempt }) => ({ provider, attempt })), [
+    { provider: 'codex-local', attempt: 1 },
+    { provider: 'codex-local', attempt: 2 },
+  ]);
+  assert.equal(summarizeTranslationOutcome(outcome).attempts, 2);
+});
+
+test('il backoff Codex e configurabile ma resta limitato a due ritardi', () => {
+  assert.deepEqual(parseCodexRetryBackoff('0, 1250'), [0, 1250]);
+  assert.deepEqual(parseCodexRetryBackoff('1,2,3'), [20_000, 60_000]);
+  assert.deepEqual(parseCodexRetryBackoff('-1,2'), [20_000, 60_000]);
 });
 
 test('l osservatore ha soglia configurabile e codice d uscita distinto', () => {

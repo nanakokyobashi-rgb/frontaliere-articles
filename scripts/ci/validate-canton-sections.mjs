@@ -51,11 +51,9 @@ export const SLUGS_REL = 'generator/data/canton-url-slugs.json';
 export const CREATE_ARTICLE_REL = 'generator/scripts/create-article.mjs';
 export const GENERATE_WORKFLOW_REL = '.github/workflows/generate-article.yml';
 
-/** D19 — budget giornaliero massimo per cantone (piano ratificato 2026-10-05). */
+/** D19 — budget giornaliero per sezione, uniformato a 4 dal rollout del 2026-10-19. */
 export const DAILY_BUDGET_TIERS = Object.freeze({
-  4: ['ZH', 'GE', 'VD', 'BE', 'BASILEA', 'TI', 'AG'],
-  2: ['LU', 'SG', 'FR', 'VS', 'GR', 'NE', 'JU', 'SO', 'TG', 'ZG'],
-  1: ['SH', 'SZ', 'GL', 'NW', 'OW', 'UR', 'APPENZELLO'],
+  4: ['AG', 'APPENZELLO', 'BE', 'BASILEA', 'FR', 'GE', 'GL', 'GR', 'JU', 'LU', 'NE', 'NW', 'OW', 'SG', 'SH', 'SO', 'SZ', 'TG', 'TI', 'UR', 'VD', 'VS', 'ZG', 'ZH'],
 });
 
 export const CATEGORIES = Object.freeze(['carburanti', 'eventi', 'mobilita', 'fisco', 'pensioni', 'servizi']);

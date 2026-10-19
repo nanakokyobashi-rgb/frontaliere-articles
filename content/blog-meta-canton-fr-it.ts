@@ -42,6 +42,9 @@ const blogMetaCantonFrIt: Record<string, string> = {
     'blog.article.vuadens-centro-lavorazione.title': 'Da Vuadens un nuovo centro di lavorazione compatto',
     'blog.article.vuadens-centro-lavorazione.excerpt': 'Starrag presenta da Vuadens un centro di lavorazione più compatto, lanciato a livello mondiale a Stoccarda.',
     'blog.article.vuadens-centro-lavorazione.imageAlt': 'Centro di lavorazione compatto di Starrag a Vuadens, nel Canton Friburgo.',
+    'blog.article.julmy-corsa-consiglio-stato.title': 'Markus Julmy candidato del Centro al Consiglio di Stato',
+    'blog.article.julmy-corsa-consiglio-stato.excerpt': 'Markus Julmy è uno dei due candidati del Centro nella lista dell\'Intesa di destra: il deputato singinese mette in evidenza il suo profilo imprenditoriale.',
+    'blog.article.julmy-corsa-consiglio-stato.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonFrIt;

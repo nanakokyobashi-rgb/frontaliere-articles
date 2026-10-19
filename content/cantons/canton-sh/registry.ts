@@ -94,4 +94,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'pulizie-tunnel-sciaffusa',
+ category: 'pratico',
+ date: '2026-10-19T12:03:42.288Z',
+ image: '/images/blog/article-pulizie-tunnel-sciaffusa.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

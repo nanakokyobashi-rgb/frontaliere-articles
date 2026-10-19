@@ -205,7 +205,7 @@ test('il ramo di primo livello viene PRIMA degli altri due, ed esce con la costa
     /(?:process\.exit|await exitAfterFlush)\(EXIT_ROSTER_CANNOT_SERVE_PROMPT\)/,
     'l\'uscita deve usare la costante condivisa, non un letterale',
   );
-  // NON e' un `success` muto e NON e' una delle sei ragioni legittime: e' la
+  // NON e' un `success` muto e NON e' un differimento dichiarato: e' la
   // meta' della fix che protegge dal verde silenzioso di #313.
   assert.doesNotMatch(ramo, /EXIT_NO_ARTICLE_DECLARED/, 'questa condizione non e\' una ragione «legittima»');
   assert.doesNotMatch(ramo, /exitAfterFlush\(0\)|process\.exit\(0\)/, 'un\'uscita 0 qui e\' il verde silenzioso di #313');

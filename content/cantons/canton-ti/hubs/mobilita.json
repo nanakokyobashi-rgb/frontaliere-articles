@@ -4,22 +4,22 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-19T05:23:08.856Z",
-  "contentHash": "d02f717616ac26a3abd82fd1eb84b4a1700b5b5970c72def9d109155a403013a",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "e23f176a2018e6c3c97f19f41b3faafd93b17c68418e03b34570c558acfce12c",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-17T23:59:59.000Z",
+      "updatedAt": "2026-10-18T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-18T23:45:01.015Z",
+      "updatedAt": "2026-10-19T14:01:37.256Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T19:43:29.238Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -33,30 +33,48 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Drezzo-Pedrinate, settimana conclusa: 17 ottobre 2026"
+          "note": "Camedo (Re-Centovalli), settimana conclusa: 18 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "6",
-          "note": "segnalazioni aggiornate: 18 ottobre 2026"
+          "value": "8",
+          "note": "segnalazioni aggiornate: 19 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "39",
-          "note": "segnalazioni aggiornate: 18 ottobre 2026"
+          "note": "segnalazioni aggiornate: 19 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 11 ottobre 2026 – 17 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 12 ottobre 2026 – 18 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
+            {
+              "label": "Camedo (Re-Centovalli)",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/camedo/oggi/"
+            },
             {
               "label": "Drezzo-Pedrinate",
               "value": "0 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/drezzo-pedrinate/oggi/"
+            },
+            {
+              "label": "Lanzo d'Intelvi-Arogno",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/lanzo-d-intelvi-arogno/oggi/"
+            },
+            {
+              "label": "Maslianico-Pizzamiglio",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/maslianico-pizzamiglio/oggi/"
             },
             {
               "label": "Oria-Gandria",
@@ -77,33 +95,15 @@
               "url": "/traffico-dogane/zenna-dirinella/oggi/"
             },
             {
-              "label": "Crociale dei Mulini",
+              "label": "Cremenaga-Ponte Cremenaga",
               "value": "0 min",
               "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/crociale-dei-mulini/oggi/"
-            },
-            {
-              "label": "Dumenza-Cassinone",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/dumenza-cassinone/oggi/"
-            },
-            {
-              "label": "Ronago-Novazzano",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/ronago-novazzano/oggi/"
-            },
-            {
-              "label": "Lanzo d'Intelvi-Arogno",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/lanzo-d-intelvi-arogno/oggi/"
+              "url": "/traffico-dogane/cremenaga-ponte-cremenaga/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-17T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -135,6 +135,16 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
+              "label": "A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata",
+              "value": "Chiusura",
+              "date": "2026-10-19T10:16:00.000Z"
+            },
+            {
+              "label": "Revocato: Castagnola -> Davesco-Soragno tra Luogo Castagnola E Luogo Pregassona Situazione: chiusa Causa: rottura rete idrica",
+              "value": "Chiusura",
+              "date": "2026-10-19T11:25:00.000Z"
+            },
+            {
               "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
               "value": "Chiusura",
               "detail": "fine prevista: 22 ottobre 2026",
@@ -145,28 +155,26 @@
               "value": "Chiusura",
               "detail": "fine prevista: 29 ottobre 2026",
               "date": "2026-10-28T20:30:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
-              "value": "Cantiere",
-              "detail": "fine prevista: 29 dicembre 2028",
-              "date": "2021-06-25T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso -> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 29 dicembre 2028",
-              "date": "2022-04-20T03:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-18T23:45:01.015Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Importanti modifiche alla circolazione tra Cadenazzo e Locarno dal 30 ottobre al 3 novembre 2026.",
+              "date": "2026-10-19",
+              "url": "https://www.tilo.ch/avvisi/261019_Cadenazzo-Locarno-totale-77h.html"
+            },
+            {
+              "label": "Importanti modifiche alla circolazione tra Lugano e Chiasso dal 30 ottobre all’8 novembre 2026.",
+              "date": "2026-10-19",
+              "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
+            },
             {
               "label": "Indagine sulla soddisfazione della clientela TILO. Prova a vincere un iPhone 17!",
               "date": "2026-10-05",
@@ -186,19 +194,9 @@
               "label": "Modifiche alla circolazione tra Cadenazzo, Bellinzona, Biasca e Giubiasco nelle notti dal 4 al 24 ottobre 2026.",
               "date": "2026-09-30",
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
-            },
-            {
-              "label": "Importanti modifiche alla circolazione dei collegamenti RE80, S10 e S40 tra Chiasso, Como e Milano Centrale in alcuni giorni tra il 9 ottobre e il 23 novembre 2026.",
-              "date": "2026-09-28",
-              "url": "https://www.tilo.ch/avvisi/260928_Interruzione-totale-Monte-Olimpino-1.html"
-            },
-            {
-              "label": "Primi collegamenti mattutini TILO RE80 soppressi tra Milano Greco Pirelli e Milano Centrale dal martedì al sabato dal 22 settembre fino al 12 dicembre 2026.",
-              "date": "2026-09-22",
-              "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -219,6 +217,12 @@
           "url": "/articoli-ticino/autobus-elettrici-mendrisiotto-amsa/",
           "excerpt": "Quattro autobus elettrici AMSA entrano in servizio Coinvolte le linee 2, 3 e 4 nel Mendrisiotto Il progetto di elettrificazione è partito nel 2022",
           "date": "2026-10-10T10:49:09.228Z"
+        },
+        {
+          "title": "Avvisi Ustat: manutenzione e chiusura amministrazione",
+          "url": "/articoli-ticino/ustat-manutenzione-chiusura/",
+          "excerpt": "Manutenzione: martedì 2 dicembre, 20.00-22.00 circa Possibili brevi interruzioni sul sito Ustat Chiusura dei servizi: pomeriggio del 31 dicembre 2025 Ustat",
+          "date": "2026-10-19T10:54:19.378Z"
         },
         {
           "title": "A2 Mendrisio-Melano: il progetto MeMe di risanamento",
@@ -243,12 +247,6 @@
           "url": "/articoli-frontaliere/mendrisio-melano-progetto-meme-risanamento-fonico/",
           "excerpt": "L'Ufficio federale delle strade (USTRA) ha pubblicato il disegno per il progetto MeMe, un piano di risanamento globale per il tratto dell'autostrada A2 tra Mendrisio e Melano.",
           "date": "2026-09-15T02:42:05.181Z"
-        },
-        {
-          "title": "Inizia la costruzione del tram-treno del Luganese",
-          "url": "/articoli-frontaliere/tram-treno-lugano-lavori-inizio/",
-          "excerpt": "I lavori preliminari per il tram-treno del Luganese inizieranno a fine ottobre 2026 sulla tratta Bioggio-Manno.",
-          "date": "2026-09-07T10:00:13.893Z"
         }
       ],
       "latestCantonArticles": [],
@@ -294,7 +292,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "TI",
@@ -305,30 +303,48 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Drezzo-Pedrinate, week ending 17 October 2026"
+          "note": "Camedo (Re-Centovalli), week ending 18 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "6",
-          "note": "reports as of 18 October 2026"
+          "value": "8",
+          "note": "reports as of 19 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "39",
-          "note": "reports as of 18 October 2026"
+          "note": "reports as of 19 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 11 October 2026 to 17 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 12 October 2026 to 18 October 2026, fastest first.",
           "items": [
+            {
+              "label": "Camedo (Re-Centovalli)",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/camedo/today/"
+            },
             {
               "label": "Drezzo-Pedrinate",
               "value": "0 min",
               "detail": "47 readings",
               "url": "/en/border-wait/drezzo-pedrinate/today/"
+            },
+            {
+              "label": "Lanzo d'Intelvi-Arogno",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/lanzo-d-intelvi-arogno/today/"
+            },
+            {
+              "label": "Maslianico-Pizzamiglio",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/maslianico-pizzamiglio/today/"
             },
             {
               "label": "Oria-Gandria",
@@ -349,33 +365,15 @@
               "url": "/en/border-wait/zenna-dirinella/today/"
             },
             {
-              "label": "Crociale dei Mulini",
+              "label": "Cremenaga-Ponte Cremenaga",
               "value": "0 min",
               "detail": "47 readings",
-              "url": "/en/border-wait/crociale-dei-mulini/today/"
-            },
-            {
-              "label": "Dumenza-Cassinone",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/dumenza-cassinone/today/"
-            },
-            {
-              "label": "Ronago-Novazzano",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/ronago-novazzano/today/"
-            },
-            {
-              "label": "Lanzo d'Intelvi-Arogno",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/lanzo-d-intelvi-arogno/today/"
+              "url": "/en/border-wait/cremenaga-ponte-cremenaga/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-17T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -407,6 +405,16 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
+              "label": "A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata",
+              "value": "Closure",
+              "date": "2026-10-19T10:16:00.000Z"
+            },
+            {
+              "label": "Revocato: Castagnola -> Davesco-Soragno tra Luogo Castagnola E Luogo Pregassona Situazione: chiusa Causa: rottura rete idrica",
+              "value": "Closure",
+              "date": "2026-10-19T11:25:00.000Z"
+            },
+            {
               "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
               "value": "Closure",
               "detail": "until 22 October 2026",
@@ -417,28 +425,26 @@
               "value": "Closure",
               "detail": "until 29 October 2026",
               "date": "2026-10-28T20:30:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
-              "value": "Roadworks",
-              "detail": "until 29 December 2028",
-              "date": "2021-06-25T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso -> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
-              "value": "Roadworks",
-              "detail": "until 29 December 2028",
-              "date": "2022-04-20T03:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-18T23:45:01.015Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Importanti modifiche alla circolazione tra Cadenazzo e Locarno dal 30 ottobre al 3 novembre 2026.",
+              "date": "2026-10-19",
+              "url": "https://www.tilo.ch/avvisi/261019_Cadenazzo-Locarno-totale-77h.html"
+            },
+            {
+              "label": "Importanti modifiche alla circolazione tra Lugano e Chiasso dal 30 ottobre all’8 novembre 2026.",
+              "date": "2026-10-19",
+              "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
+            },
             {
               "label": "Indagine sulla soddisfazione della clientela TILO. Prova a vincere un iPhone 17!",
               "date": "2026-10-05",
@@ -458,19 +464,9 @@
               "label": "Modifiche alla circolazione tra Cadenazzo, Bellinzona, Biasca e Giubiasco nelle notti dal 4 al 24 ottobre 2026.",
               "date": "2026-09-30",
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
-            },
-            {
-              "label": "Importanti modifiche alla circolazione dei collegamenti RE80, S10 e S40 tra Chiasso, Como e Milano Centrale in alcuni giorni tra il 9 ottobre e il 23 novembre 2026.",
-              "date": "2026-09-28",
-              "url": "https://www.tilo.ch/avvisi/260928_Interruzione-totale-Monte-Olimpino-1.html"
-            },
-            {
-              "label": "Primi collegamenti mattutini TILO RE80 soppressi tra Milano Greco Pirelli e Milano Centrale dal martedì al sabato dal 22 settembre fino al 12 dicembre 2026.",
-              "date": "2026-09-22",
-              "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -491,6 +487,12 @@
           "url": "/en/ticino-articles/electric-buses-mendrisiotto-amsa/",
           "excerpt": "Four AMSA electric buses enter service Lines 2, 3 and 4 in Mendrisiotto involved The electrification project began in 2022",
           "date": "2026-10-10T10:49:09.228Z"
+        },
+        {
+          "title": "Ustat notices: maintenance and administrative closure",
+          "url": "/en/ticino-articles/ustat-maintenance-closure/",
+          "excerpt": "Maintenance: Tuesday, December 2, approximately 20.00-22.00 Possible brief interruptions on the Ustat website Service closure: afternoon of December 31, 2025 Ustat",
+          "date": "2026-10-19T10:54:19.378Z"
         },
         {
           "title": "A2 Mendrisio-Melano: the MeMe rehabilitation project",
@@ -514,12 +516,6 @@
           "url": "/en/cross-border-articles/mendrisio-melano-meme-project-noise-reduction/",
           "excerpt": "The Federal Office of Roads (USTRA) has published the design for the MeMe project, a comprehensive rehabilitation plan for the stretch of the A2 motorway between Mendrisio and Melano.",
           "date": "2026-09-15T02:42:05.181Z"
-        },
-        {
-          "title": "Construction of the Lugano tram-train begins",
-          "url": "/en/cross-border-articles/tram-train-lugano-works-start/",
-          "excerpt": "Preliminary work for the Luganese tram-train will begin at the end of October 2026 on the Bioggio-Manno section.",
-          "date": "2026-09-07T10:00:13.893Z"
         }
       ],
       "latestCantonArticles": [],
@@ -565,7 +561,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "TI",
@@ -576,30 +572,48 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Drezzo-Pedrinate, Woche bis 17. Oktober 2026"
+          "note": "Camedo (Re-Centovalli), Woche bis 18. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "6",
-          "note": "Meldungen vom 18. Oktober 2026"
+          "value": "8",
+          "note": "Meldungen vom 19. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "39",
-          "note": "Meldungen vom 18. Oktober 2026"
+          "note": "Meldungen vom 19. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 11. Oktober 2026 bis 17. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 12. Oktober 2026 bis 18. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
+            {
+              "label": "Camedo (Re-Centovalli)",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/camedo/heute/"
+            },
             {
               "label": "Drezzo-Pedrinate",
               "value": "0 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/drezzo-pedrinate/heute/"
+            },
+            {
+              "label": "Lanzo d'Intelvi-Arogno",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/lanzo-d-intelvi-arogno/heute/"
+            },
+            {
+              "label": "Maslianico-Pizzamiglio",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/maslianico-pizzamiglio/heute/"
             },
             {
               "label": "Oria-Gandria",
@@ -620,33 +634,15 @@
               "url": "/de/wartezeit-grenze/zenna-dirinella/heute/"
             },
             {
-              "label": "Crociale dei Mulini",
+              "label": "Cremenaga-Ponte Cremenaga",
               "value": "0 Min.",
               "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/crociale-dei-mulini/heute/"
-            },
-            {
-              "label": "Dumenza-Cassinone",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/dumenza-cassinone/heute/"
-            },
-            {
-              "label": "Ronago-Novazzano",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/ronago-novazzano/heute/"
-            },
-            {
-              "label": "Lanzo d'Intelvi-Arogno",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/lanzo-d-intelvi-arogno/heute/"
+              "url": "/de/wartezeit-grenze/cremenaga-ponte-cremenaga/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-17T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -678,6 +674,16 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
+              "label": "A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
+              "value": "Sperrung",
+              "date": "2026-10-19T10:16:00.000Z"
+            },
+            {
+              "label": "Aufgehoben: Castagnola -> Davesco-Soragno zwischen Ortschaft Castagnola und Ortschaft Pregassona Sachlage: Strecke gesperrt Ursache: Wasserrohrbruch",
+              "value": "Sperrung",
+              "date": "2026-10-19T11:25:00.000Z"
+            },
+            {
               "label": "A13 Bellinzona <-> Chur zwischen Anschluss San Bernardino und Anschluss San Bernardino-Pass Sachlage: Strecke gesperrt Baustelle, Länge [km] 7.5",
               "value": "Sperrung",
               "detail": "bis 22. Oktober 2026",
@@ -688,28 +694,26 @@
               "value": "Sperrung",
               "detail": "bis 29. Oktober 2026",
               "date": "2026-10-28T20:30:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
-              "value": "Baustelle",
-              "detail": "bis 29. Dezember 2028",
-              "date": "2021-06-25T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso -> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
-              "value": "Baustelle",
-              "detail": "bis 29. Dezember 2028",
-              "date": "2022-04-20T03:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-18T23:45:01.015Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Importanti modifiche alla circolazione tra Cadenazzo e Locarno dal 30 ottobre al 3 novembre 2026.",
+              "date": "2026-10-19",
+              "url": "https://www.tilo.ch/avvisi/261019_Cadenazzo-Locarno-totale-77h.html"
+            },
+            {
+              "label": "Importanti modifiche alla circolazione tra Lugano e Chiasso dal 30 ottobre all’8 novembre 2026.",
+              "date": "2026-10-19",
+              "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
+            },
             {
               "label": "Indagine sulla soddisfazione della clientela TILO. Prova a vincere un iPhone 17!",
               "date": "2026-10-05",
@@ -729,19 +733,9 @@
               "label": "Modifiche alla circolazione tra Cadenazzo, Bellinzona, Biasca e Giubiasco nelle notti dal 4 al 24 ottobre 2026.",
               "date": "2026-09-30",
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
-            },
-            {
-              "label": "Importanti modifiche alla circolazione dei collegamenti RE80, S10 e S40 tra Chiasso, Como e Milano Centrale in alcuni giorni tra il 9 ottobre e il 23 novembre 2026.",
-              "date": "2026-09-28",
-              "url": "https://www.tilo.ch/avvisi/260928_Interruzione-totale-Monte-Olimpino-1.html"
-            },
-            {
-              "label": "Primi collegamenti mattutini TILO RE80 soppressi tra Milano Greco Pirelli e Milano Centrale dal martedì al sabato dal 22 settembre fino al 12 dicembre 2026.",
-              "date": "2026-09-22",
-              "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -762,6 +756,12 @@
           "url": "/de/tessin-artikel/elektrobusse-mendrisiotto-amsa/",
           "excerpt": "Vier Elektrobusse von AMSA nehmen den Betrieb auf Betroffen sind die Linien 2, 3 und 4 im Mendrisiotto Das Elektrifizierungsprojekt begann im Jahr 2022",
           "date": "2026-10-10T10:49:09.228Z"
+        },
+        {
+          "title": "Ustat-Mitteilungen: Wartung und Schließung der Verwaltung",
+          "url": "/de/tessin-artikel/ustat-wartung-schliessung/",
+          "excerpt": "Wartung: Dienstag, 2.",
+          "date": "2026-10-19T10:54:19.378Z"
         },
         {
           "title": "A2 Mendrisio-Melano: das Sanierungsprojekt MeMe",
@@ -785,12 +785,6 @@
           "url": "/de/grenzgaenger-artikel/mendrisio-melano-meme-projekt-larmreduzierung/",
           "excerpt": "Das Bundesamt für Strassen (Astra) hat den Entwurf für das Projekt MeMe, einen umfassenden Sanierungsplan für den Autobahnabschnitt A2 zwischen Mendrisio und Melano, veröffentlicht.",
           "date": "2026-09-15T02:42:05.181Z"
-        },
-        {
-          "title": "Baubeginn des Luganer Tram-Zuges",
-          "url": "/de/grenzgaenger-artikel/strassenbahn-bahn-lugano-bauarbeiten-beginnen/",
-          "excerpt": "Die Vorarbeiten für den Luganer Tram-Zug werden Ende Oktober 2026 auf der Strecke Bioggio-Manno beginnen.",
-          "date": "2026-09-07T10:00:13.893Z"
         }
       ],
       "latestCantonArticles": [],
@@ -836,7 +830,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "TI",
@@ -847,30 +841,48 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Drezzo-Pedrinate, semaine jusqu’au 17 octobre 2026"
+          "note": "Camedo (Re-Centovalli), semaine jusqu’au 18 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "6",
-          "note": "signalements au 18 octobre 2026"
+          "value": "8",
+          "note": "signalements au 19 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "39",
-          "note": "signalements au 18 octobre 2026"
+          "note": "signalements au 19 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 11 octobre 2026 au 17 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 12 octobre 2026 au 18 octobre 2026, du plus fluide au plus lent.",
           "items": [
+            {
+              "label": "Camedo (Re-Centovalli)",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/camedo/aujourd-hui/"
+            },
             {
               "label": "Drezzo-Pedrinate",
               "value": "0 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/drezzo-pedrinate/aujourd-hui/"
+            },
+            {
+              "label": "Lanzo d'Intelvi-Arogno",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/lanzo-d-intelvi-arogno/aujourd-hui/"
+            },
+            {
+              "label": "Maslianico-Pizzamiglio",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/maslianico-pizzamiglio/aujourd-hui/"
             },
             {
               "label": "Oria-Gandria",
@@ -891,33 +903,15 @@
               "url": "/fr/temps-attente-douane/zenna-dirinella/aujourd-hui/"
             },
             {
-              "label": "Crociale dei Mulini",
+              "label": "Cremenaga-Ponte Cremenaga",
               "value": "0 min",
               "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/crociale-dei-mulini/aujourd-hui/"
-            },
-            {
-              "label": "Dumenza-Cassinone",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/dumenza-cassinone/aujourd-hui/"
-            },
-            {
-              "label": "Ronago-Novazzano",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/ronago-novazzano/aujourd-hui/"
-            },
-            {
-              "label": "Lanzo d'Intelvi-Arogno",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/lanzo-d-intelvi-arogno/aujourd-hui/"
+              "url": "/fr/temps-attente-douane/cremenaga-ponte-cremenaga/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-17T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -949,6 +943,16 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
+              "label": "A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
+              "value": "Fermeture",
+              "date": "2026-10-19T10:16:00.000Z"
+            },
+            {
+              "label": "Révoqué: Castagnola -> Davesco-Soragno entre Localité Castagnola et Localité Pregassona Situation: fermé Raison: rupture de conduite d'eau",
+              "value": "Fermeture",
+              "date": "2026-10-19T11:25:00.000Z"
+            },
+            {
               "label": "A13 Bellinzone <-> Coire entre Jonction autoroutière San Bernardino et Jonction autoroutière San Bernardino-Pass Situation: fermé travaux, longueur [km] 7.5",
               "value": "Fermeture",
               "detail": "jusqu’au 22 octobre 2026",
@@ -959,28 +963,26 @@
               "value": "Fermeture",
               "detail": "jusqu’au 29 octobre 2026",
               "date": "2026-10-28T20:30:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
-              "value": "Chantier",
-              "detail": "jusqu’au 29 décembre 2028",
-              "date": "2021-06-25T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso -> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de…",
-              "value": "Chantier",
-              "detail": "jusqu’au 29 décembre 2028",
-              "date": "2022-04-20T03:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-18T23:45:01.015Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Importanti modifiche alla circolazione tra Cadenazzo e Locarno dal 30 ottobre al 3 novembre 2026.",
+              "date": "2026-10-19",
+              "url": "https://www.tilo.ch/avvisi/261019_Cadenazzo-Locarno-totale-77h.html"
+            },
+            {
+              "label": "Importanti modifiche alla circolazione tra Lugano e Chiasso dal 30 ottobre all’8 novembre 2026.",
+              "date": "2026-10-19",
+              "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
+            },
             {
               "label": "Indagine sulla soddisfazione della clientela TILO. Prova a vincere un iPhone 17!",
               "date": "2026-10-05",
@@ -1000,19 +1002,9 @@
               "label": "Modifiche alla circolazione tra Cadenazzo, Bellinzona, Biasca e Giubiasco nelle notti dal 4 al 24 ottobre 2026.",
               "date": "2026-09-30",
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
-            },
-            {
-              "label": "Importanti modifiche alla circolazione dei collegamenti RE80, S10 e S40 tra Chiasso, Como e Milano Centrale in alcuni giorni tra il 9 ottobre e il 23 novembre 2026.",
-              "date": "2026-09-28",
-              "url": "https://www.tilo.ch/avvisi/260928_Interruzione-totale-Monte-Olimpino-1.html"
-            },
-            {
-              "label": "Primi collegamenti mattutini TILO RE80 soppressi tra Milano Greco Pirelli e Milano Centrale dal martedì al sabato dal 22 settembre fino al 12 dicembre 2026.",
-              "date": "2026-09-22",
-              "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -1033,6 +1025,12 @@
           "url": "/fr/articles-tessin/bus-electriques-mendrisiotto-amsa/",
           "excerpt": "Quatre autobus électriques AMSA entrent en service Les lignes 2, 3 et 4 du Mendrisiotto sont concernées Le projet d’électrification a débuté en 2022",
           "date": "2026-10-10T10:49:09.228Z"
+        },
+        {
+          "title": "Avis Ustat : maintenance et fermeture administrative",
+          "url": "/fr/articles-tessin/ustat-maintenance-fermeture/",
+          "excerpt": "Maintenance : mardi 2 décembre, 20.00-22.00 environ De brèves interruptions sont possibles sur le site Ustat Fermeture des services : l’après-midi du 31 décembre 2025 Ustat",
+          "date": "2026-10-19T10:54:19.378Z"
         },
         {
           "title": "A2 Mendrisio-Melano : le projet MeMe d’assainissement",
@@ -1057,12 +1055,6 @@
           "url": "/fr/articles-frontalier/mendrisio-melano-projet-meme-reduction-bruit/",
           "excerpt": "L'Office fédéral des routes (OFROU) a publié le dessin pour le projet MeMe, un plan d'assainissement global pour le tronçon de l'autoroute A2 entre Mendrisio et Melano.",
           "date": "2026-09-15T02:42:05.181Z"
-        },
-        {
-          "title": "Début de la construction du tram-train du Luganese",
-          "url": "/fr/articles-frontalier/tram-train-lugano-travaux-debut/",
-          "excerpt": "Les travaux préliminaires pour le tram-train du Luganese débuteront fin octobre 2026 sur le tronçon Bioggio-Manno.",
-          "date": "2026-09-07T10:00:13.893Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1108,7 +1100,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

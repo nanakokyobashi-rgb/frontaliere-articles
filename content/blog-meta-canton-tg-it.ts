@@ -45,6 +45,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.supporto-imprese-turgovia.title': 'Turgovia: supporto alle imprese che valutano l\'insediamento',
     'blog.article.supporto-imprese-turgovia.excerpt': 'Il Canton Turgovia offre alle imprese informazioni, consulenza e sostegno per condizioni quadro, immobili, autorizzazioni e contatti con uffici e autorità.',
     'blog.article.supporto-imprese-turgovia.imageAlt': 'Imprese e insediamento aziendale nel Canton Turgovia',
+    'blog.article.turgovia-servizi-datori-lavoro.title': 'Turgovia: servizi di ricerca personale e tutela lari',
+    'blog.article.turgovia-servizi-datori-lavoro.excerpt': 'Il Canton Turgovia mette a disposizione dei datori di lavoro le sedi RAV di Amriswil, Frauenfeld e Kreuzlingen e il portale arbeit.swiss per vacancy vacancy',
+    'blog.article.turgovia-servizi-datori-lavoro.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTgIt;

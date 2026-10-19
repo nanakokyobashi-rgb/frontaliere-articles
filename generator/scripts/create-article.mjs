@@ -317,8 +317,10 @@ import {
 import { imageCreditRecordFromGeneratedImageRecord } from '../../engine/shared/imageCredits.mjs';
 import { DETERMINISTIC_CARD_KIND, DETERMINISTIC_CARD_LICENSE_URL } from './lib/deterministic-card-provenance.mjs';
 import {
+  ARTICLE_COVER_FALLBACK_ERROR_CODES,
   catalogFallbackSharedWordCount,
   classifyImageRegenerationFailure,
+  applyGeneratedHeroAlt,
   queueArticleCoverRegeneration,
   resolveArticleCoverFallback,
   verifyCatalogFallbackCandidates,
@@ -379,6 +381,7 @@ import { findContentDuplicate } from './lib/article-content-duplicate.mjs';
 import {
   EXIT_ROSTER_CANNOT_SERVE_PROMPT,
   EXIT_NO_ARTICLE_DECLARED,
+  EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
   isInputCapDeferralVeto,
   inputCapVetoSummary,
   providerCooldownEchoOnlySummary,
@@ -398,7 +401,10 @@ import {
 // parte perche' i test non possono importare QUESTO file (761 KB, e la prima
 // cosa che fa e' rete), che e' la stessa ragione per cui ci vive
 // `exhaustion-disposition.mjs`.
-import { writeRunCard } from './lib/run-card.mjs';
+import {
+  RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
+  writeRunCard,
+} from './lib/run-card.mjs';
 // Il guard sui segnaposto del prompt. Copre OGNI campo di testo pubblicato —
 // corpo, FAQ, excerpt, imageAlt, title, seo — con un criterio solo, derivato
 // dai letterali dello schema JSON che il prompt piu' sotto mostra al modello.
@@ -2017,11 +2023,16 @@ const RUN_REPORT = {
   // DISTINCT runs (one degraded run must not be able to confirm its own
   // hallucination six times over). 'local' outside CI.
   runId: process.env.GITHUB_RUN_ID || 'local',
+  // GitHub reuses a run id across re-runs. The attempt is part of the
+  // producer identity so an earlier card cannot attest a later exit decision.
+  runAttempt: process.env.GITHUB_RUN_ATTEMPT || '1',
   // Which pipeline produced the run (frontaliere | svizzera). Recorded because
   // the two have different gates and different budgets, so a rejection-rate
   // trend pooled across both hides which one moved. Set once SECTION resolves.
   section: null,
   status: 'running',
+  exitCode: null,
+  exitDisposition: null,
   selectedArticleType: null, // news | evergreen_static | evergreen_dynamic
   selectedSource: null,
   selectedUrl: null,
@@ -6560,6 +6571,11 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // ALL models have exhausted their per-model retries.
   const FACTCHECK_429_BACKOFF_CAP_MS = 30_000;
   let fcLastRejectMsgs = [];
+  const fcProviderErrors = [];
+  // A usable vote, an empty fulfilled response, or a duplicate vote means at
+  // least one verifier answered; none proves a shared pool outage, even if a
+  // sibling lane exhausted transiently. Keep this across all attempts.
+  let fcHadNonOutageResult = false;
   // True when an attempt's two verifiers collapsed into one model and no
   // independent second opinion came back: that attempt holds one opinion where
   // the consensus needs two, so it is retried like a verifier outage (review of
@@ -6614,14 +6630,19 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     let droppedDuplicate = false;
     for (let i = 0; i < settled.length; i++) {
       const s = settled[i];
+      if (s.status === 'fulfilled') fcHadNonOutageResult = true;
       if (s.status === 'fulfilled' && s.value) {
         const earlier = addIndependentVote(modelResults, modelsToQuery[i], s.value);
         if (earlier) {
+          fcHadNonOutageResult = true;
           droppedDuplicate = true;
           console.error(`  ⚠️  LLM fact-check (${modelsToQuery[i]}): servito da ${earlier.servedBy}, che ha già votato per ${earlier.requested} — voto scartato, non è un secondo parere`);
         }
       } else {
-        const reason = s.status === 'rejected' ? s.reason?.message : 'no result';
+        const error = s.status === 'rejected' ? s.reason : null;
+        if (error) fcProviderErrors.push(error);
+        else fcHadNonOutageResult = true;
+        const reason = error?.message || 'no result';
         fcLastRejectMsgs.push(reason || '');
         console.error(`  ⚠️  LLM fact-check (${modelsToQuery[i]}): fallito — ${reason}`);
       }
@@ -6639,8 +6660,10 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
       try {
         const extra = await _runSingleFactCheck(next, prompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted });
         const earlier = extra ? addIndependentVote(modelResults, next, extra) : null;
+        fcHadNonOutageResult = true;
         if (earlier) console.error(`  ⚠️  LLM fact-check (${next}): servito di nuovo da ${earlier.servedBy} — resta un solo voto`);
       } catch (err) {
+        fcProviderErrors.push(err);
         fcLastRejectMsgs.push(err.message || '');
         console.error(`  ⚠️  LLM fact-check secondo parere (${next}): ${err.message}`);
       }
@@ -6655,7 +6678,9 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
       try {
         const fallback = await _runSingleFactCheck(verificationModels[2], prompt, { isEvergreen: isEvergreenArticle, editorialContext });
         if (fallback) addIndependentVote(modelResults, verificationModels[2], fallback);
+        fcHadNonOutageResult = true;
       } catch (err) {
+        fcProviderErrors.push(err);
         fcLastRejectMsgs.push(err.message || '');
         console.error(`  ⚠️  LLM fact-check fallback (${verificationModels[2]}): ${err.message}`);
       }
@@ -6695,7 +6720,9 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     try {
       const vote = await _runSingleFactCheck(codex, prompt, { isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true });
       if (vote) addIndependentVote(modelResults, codex, vote);
+      fcHadNonOutageResult = true;
     } catch (err) {
+      fcProviderErrors.push(err);
       fcLastRejectMsgs.push(err.message || '');
       console.error(`  ⚠️  LLM fact-check (${codex}): ${err.message}`);
     }
@@ -6742,6 +6769,11 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
         category: 'infra',
       }],
       unverified: true,
+      ...(isSharedTransientFactCheckRosterOutage(fcProviderErrors, {
+        hadNonOutageResult: fcHadNonOutageResult,
+      })
+        ? { sharedProviderUnavailable: true }
+        : {}),
     };
   }
 
@@ -16040,6 +16072,14 @@ async function generateArticleImage(data, { deadlineAt = Date.now() + IMAGE_PHAS
     const stagingDir = result?.stagingDir || (result?.filePath ? path.dirname(result.filePath) : null);
     if (stagingDir && existsSync(stagingDir)) rmSync(stagingDir, { recursive: true, force: true });
     console.error(`  ⚠️  Motore immagini governato fallito: ${error.message}`);
+    if (error?.sharedProviderUnavailable === true) {
+      const unavailable = new Error(`Article cover verification is blocked by a shared provider outage: ${error.message}`);
+      unavailable.code = ARTICLE_COVER_FALLBACK_ERROR_CODES.VERIFICATION_UNAVAILABLE;
+      unavailable.retryable = true;
+      unavailable.sharedProviderUnavailable = true;
+      unavailable.cause = error;
+      throw unavailable;
+    }
     data._imageGenerationFailureDisposition = classifyImageRegenerationFailure(error);
     data._imageGenerationFailureReason = String(error.message || 'engine-failed')
       .replace(/\s+/g, ' ').trim().slice(0, 180) || 'engine-failed';
@@ -16070,6 +16110,8 @@ async function generateArticleImage(data, { deadlineAt = Date.now() + IMAGE_PHAS
   }
   data._generatedImageRecord = result.record;
   data._generatedImagePath = result.record.imageUrl;
+  const finalProvenance = imageRecordForPath(PROJECT_ROOT, data._generatedImagePath, { strict: true });
+  applyGeneratedHeroAlt(data, finalProvenance);
   console.error(`  ✅ Copertina governata: ${result.record.imageUrl} (${result.record.provider}/${result.record.model})`);
   return result.record.imageUrl;
 }
@@ -17227,11 +17269,9 @@ const LOCAL_MIN_VIABLE_MS = 11 * 60_000;
 const MIN_VIABLE_ATTEMPT_MS = 2 * 60_000;
 
 /**
- * Turn a fail-closed verifier outage into a typed run-level error. The
- * `unverified` result is deliberately kept at the llmFactCheck boundary so
- * its existing fail-closed contract remains testable; callers must not feed
- * it into the content-remediation loop, which would regenerate the article
- * indefinitely while the verifier roster is unavailable.
+ * Turn a fail-closed missing consensus into a typed run-level error. Only a
+ * structured transient exhaustion of the full roster carries the shared
+ * outage marker; incomplete or unusable verdicts remain section-local.
  */
 function createFactCheckUnavailableError(result, stage) {
   const rawReason = Array.isArray(result?.issues) ? result.issues[0]?.reason : '';
@@ -17241,11 +17281,46 @@ function createFactCheckUnavailableError(result, stage) {
   const error = new Error(`Fact-check unavailable (${stage}): ${reason}`);
   error.factCheckUnavailable = true;
   error.unverified = true;
+  if (result?.sharedProviderUnavailable === true) error.sharedProviderUnavailable = true;
   return error;
 }
 
 function isFactCheckUnavailableError(e) {
   return e?.factCheckUnavailable === true;
+}
+
+function isSharedFactCheckUnavailableError(e) {
+  return isFactCheckUnavailableError(e) && e?.sharedProviderUnavailable === true;
+}
+
+function isSharedTransientFactCheckRosterOutage(errors, { hadNonOutageResult = false } = {}) {
+  return !hadNonOutageResult
+    && Array.isArray(errors)
+    && errors.length > 0
+    && errors.every((error) => (
+      error?.code === 'ALL_MODELS_EXHAUSTED'
+      && error?.transientExhaustion === true
+    ));
+}
+
+function isSharedArticleCoverVerifierUnavailableError(e) {
+  return e?.retryable === true
+    && e?.code === ARTICLE_COVER_FALLBACK_ERROR_CODES.VERIFICATION_UNAVAILABLE
+    && e?.sharedProviderUnavailable === true;
+}
+
+/**
+ * A governed cover failure is already fail-closed: no article was written
+ * without a verified hero. Keep retryable cover-boundary failures at the run
+ * level so a provider/verifier outage is declared as a clean deferral instead
+ * of becoming an undeclared generation error. A deterministic rejection of
+ * every catalog candidate remains candidate quality and is handled by
+ * isQualityRejectError().
+ */
+function isRetryableArticleCoverError(e) {
+  return e?.retryable === true
+    && Object.values(ARTICLE_COVER_FALLBACK_ERROR_CODES).includes(e?.code)
+    && e?.imageQualityFailure !== true;
 }
 
 /**
@@ -18233,7 +18308,7 @@ async function main() {
       // `status=running` e trasforma una condizione prevista in
       // `no-article-undeclared-exit`.
       finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, note] });
-      // Ragione legittima #8 di nove (corpus): il budget della run e' finito
+      // Ragione legittima #8 di dieci (corpus): il budget della run e' finito
       // prima del fallback evergreen; il giro successivo puo' scegliere fonti
       // e tempi diversi. Non si abbassa nessun gate e non si pubblica slop.
       await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
@@ -18244,10 +18319,10 @@ async function main() {
       // articolo in questo run, dichiarato come le altre ragioni legittime.
       console.error(`CANTON_EVERGREEN_POOL_DISABLED section=${SECTION_NAME} — nessuna news utilizzabile e nessun pool evergreen per le sezioni cantonali: nessun articolo in questo run.`);
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, `No usable news for canton section ${SECTION_NAME} (no evergreen pool by construction)`] });
-      // Ragione legittima #7 di nove — vedi EXIT_NO_ARTICLE_DECLARED. Esiste
+      // Ragione legittima #7 di dieci — vedi EXIT_NO_ARTICLE_DECLARED. Esiste
       // solo nel corpus: lib/exhaustion-disposition.mjs e' un gemello identico
-      // del sito, dove create-article non ha sezioni cantonali, e il suo elenco
-      // resta quello delle sei ragioni comuni ai due repo.
+      // del sito, dove create-article non ha sezioni cantonali. Il codice 4
+      // resta riservato agli esiti locali alla sezione in entrambi i repo.
       await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     } else if (!newsSuccess && !candidateSuccess) {
       console.error('📚 Fase 2: Fallback evergreen — generazione articolo SEO long-tail...\n');
@@ -18359,7 +18434,7 @@ async function main() {
         reportEvergreenPoolSaturation('preflight');
         console.error('\n⚠️  Tutte le keyword evergreen risultano già coperte dal pre-flight. Push prosegue senza nuovo articolo.');
         finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'All evergreen keywords rejected by pre-generation duplicate checks'] });
-        // Ragione legittima #1 di nove: niente da pubblicare. Exit 4 e non 0 —
+        // Ragione legittima #1 di dieci: niente da pubblicare. Exit 4 e non 0 —
         // vedi EXIT_NO_ARTICLE_DECLARED: da qui in poi un exit 0 SENZA articolo
         // e' un percorso che non ha dichiarato niente, ed e' rosso.
         await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
@@ -18519,7 +18594,7 @@ async function main() {
             reportEvergreenPoolSaturation('retry');
             console.error('\n⚠️  Nessuna keyword evergreen disponibile. Push prosegue senza nuovo articolo.');
             finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'No evergreen keyword available after duplicate checks'] });
-            // Ragione legittima #2 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
+            // Ragione legittima #2 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
             await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
           }
         }
@@ -18528,7 +18603,7 @@ async function main() {
       // All retry attempts exhausted
       console.error('\n⚠️  Tentativi evergreen esauriti. Push prosegue senza nuovo articolo.');
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'Evergreen retries exhausted'] });
-      // Ragione legittima #3 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
+      // Ragione legittima #3 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
       await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     }
     return;
@@ -18903,7 +18978,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       // MISURATO su 926 run (2026-08-13 → 18): 2510s mediani per una run
       // `failure` contro 254s per una `success`.
       //
-      // NON e' un `success` muto e non e' una delle nove ragioni legittime: si
+      // NON e' un `success` muto e non e' una delle dieci ragioni legittime: si
       // marca l'errore e lo si rilancia, cosi' che il catch di primo livello
       // esca `EXIT_ROSTER_CANNOT_SERVE_PROMPT`. Vedi isPromptFloorIrreducible()
       // per il perche' dichiararla «legittima» ricreerebbe il verde di #313.
@@ -21220,8 +21295,8 @@ if (invokedDirectly) {
     if (RUN_REPORT?.status === 'generated') return;
     console.error(
       `\n❌ Uscita non dichiarata: main() e' ritornato con status='${RUN_REPORT?.status ?? '(mai finalizzato)'}'`
-      + ' senza aver prodotto un articolo e senza dichiarare una delle nove ragioni legittime'
-      + ' (vedi EXIT_NO_ARTICLE_DECLARED in lib/exhaustion-disposition.mjs).'
+      + ' senza aver prodotto un articolo e senza dichiarare un esito legittimo'
+      + ' (codice 4 locale alla sezione o codice 5 del pool condiviso).'
       + ' Un exit 0 in questo stato e\' esattamente il verde silenzioso di #313.',
     );
     console.error(`::error::no-article-undeclared-exit: status=${RUN_REPORT?.status ?? 'unfinalized'}`);
@@ -21270,37 +21345,66 @@ if (invokedDirectly) {
   } catch (probeErr) {
     console.error(`  ⚠️  Campione di deferral non registrato: ${probeErr.message}`);
   }
-  // A verifier outage is already fail-closed at the article boundary. Stop
-  // before quota/quality classification so the run declares one clean
-  // deferral instead of rotating through every headline or mislabelling the
-  // outage as bad content.
-  if (isFactCheckUnavailableError(e)) {
+  // Only a structured transient exhaustion of the whole checker roster proves
+  // a shared outage. Stop before quota/quality classification so the sibling
+  // section does not repeat the same unavailable provider cascade.
+  if (isSharedFactCheckUnavailableError(e)) {
     finalizeRunReport('deferred', {
+      exitCode: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
+      exitDisposition: RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
       notes: [...RUN_REPORT.notes, `Deferred (fact-check unavailable; article not published): ${e.message}`],
     });
     console.error(`\n⚠️  Differito: fact-check indisponibile, articolo non pubblicato. Riprovo al prossimo run. ${e.message}`);
-    // Ragione legittima #9 di nove — il verifier non ha prodotto un verdetto:
-    // il run si differisce fail-closed e non pubblica contenuto non verificato.
+    // Il verifier condivide il pool fra le sezioni: non ripetere subito la
+    // stessa cascata e lasciare al prossimo cron la rivalutazione.
+    await exitAfterFlush(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE);
+  }
+  if (isFactCheckUnavailableError(e)) {
+    finalizeRunReport('deferred', {
+      notes: [...RUN_REPORT.notes, `Deferred (fact-check returned no usable consensus; article not published): ${e.message}`],
+    });
+    console.error(`\n⚠️  Differito: il fact-check non ha prodotto un consenso utilizzabile; articolo non pubblicato. ${e.message}`);
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
-  // Transient free-model pool exhaustion (every model in the fallback chain hit
-  // its daily quota / rate limit) is NOT a code bug — free-tier daily limits
-  // reset at 00:00 UTC, so the next scheduled run normally succeeds. Treat it as
-  // a clean deferral (exit 0, no file changes) so the workflow's self-trigger
-  // back-off retries later instead of marking the run failed and raising a
-  // false-positive "Workflow Failure: Generate Blog Article" Bug issue (#1652).
-  // Mirrors the graceful quota-exhausted handling in dedicated-crawler-common.mjs.
+  if (isSharedArticleCoverVerifierUnavailableError(e)) {
+    finalizeRunReport('deferred', {
+      exitCode: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
+      exitDisposition: RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
+      notes: [...RUN_REPORT.notes, `Deferred (article cover verifier unavailable; article not published): ${e.message}`],
+    });
+    console.error(`\n⚠️  Differito: verifier della copertina indisponibile, articolo non pubblicato. Riprovo al prossimo run. ${e.message}`);
+    // Il verifier serve tutte le sezioni: non ripetere la stessa chiamata
+    // sulla sezione gemella mentre il servizio condiviso non risponde.
+    await exitAfterFlush(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE);
+  }
+  // The article-hero verifier is a publication boundary just like the
+  // fact-check: a missing verdict must not publish an unverified image, but it
+  // is also not a candidate-quality rejection. Candidate-specific gaps defer
+  // through the section-local path; provider outages were handled above.
+  if (isRetryableArticleCoverError(e)) {
+    finalizeRunReport('deferred', {
+      notes: [...RUN_REPORT.notes, 'Deferred (article cover unavailable; article not published): ' + e.message],
+    });
+    console.error('\n⚠️  Differito: copertina articolo non verificabile, articolo non pubblicato. Riprovo al prossimo run. ' + e.message);
+    // Ragione legittima #10 di dieci — il verifier della copertina non ha prodotto
+    // un verdetto utilizzabile: il run si differisce senza pubblicare l'articolo.
+    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
+  }
+  // Transient free-model pool exhaustion is not a code bug: free-tier limits
+  // reset and a later cron can retry. Use a distinct declared outcome so the
+  // workflow does not rerun this shared pool for the sibling section or start
+  // another chain link immediately.
   // ISSUE #452 — l'uscita anticipata, e viene per PRIMA di tutte.
   //
   // Non e' prudenza d'ordine: e' che questo ramo descrive una DECISIONE gia'
   // presa a monte — il ciclo di retry ha smesso di macinare e ha marcato
   // l'errore — e i rami sotto la descriverebbero al posto suo con un'altra
   // ragione. Su un errore con quota dominante `isInputCapDeferralVeto` risponde
-  // `false` e `isLegitimateQuotaDeferral` risponde `true`: la run uscirebbe 4,
-  // «ragione legittima dichiarata», e il workflow CHAINEREBBE il successore
-  // contro un muro che il prossimo tentativo trova identico. Il differimento
-  // sarebbe per giunta falso: nessuna finestra di quota alza il cap di un
-  // modello sopra il peso dell'impalcatura del prompt.
+  // `false` e `isLegitimateQuotaDeferral` risponde `true`: prima la run usciva
+  // 4 e il workflow concatenava un successore contro un pool condiviso che il
+  // prossimo tentativo trovava identico. Ora l'esito usa il codice 5. Il
+  // differimento sarebbe per giunta falso: nessuna finestra di quota alza il
+  // cap di un modello sopra il peso dell'impalcatura del prompt.
   //
   // Esce 3 e non un codice nuovo perche' 3 e' gia' esattamente questo esito —
   // «il roster non puo' servire questo prompt» — e il blocco bash dello step
@@ -21397,10 +21501,15 @@ if (invokedDirectly) {
     // sopra il veto — vedi il commento li': dentro questo ramo sarebbe cieco
     // proprio sui pareggi (#924).
     if (isLegitimateQuotaDeferral(e)) {
-      finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`] });
+      finalizeRunReport('deferred', {
+        exitCode: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
+        exitDisposition: RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
+        notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`],
+      });
       console.error(`\n⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera, ${share.transient}/${share.total} = ${pct}%). Riprovo al prossimo run. ${e.message}`);
-      // Ragione legittima #6 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
-      await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
+      // La quota riguarda il pool condiviso: cedere al prossimo cron senza
+      // ritentare subito sulla sezione gemella.
+      await exitAfterFlush(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE);
     }
     finalizeRunReport('error', {
       notes: [...RUN_REPORT.notes, `Roster down, not deferrable (transient ${share.transient}/${share.total}): ${e.message}`],
@@ -21427,7 +21536,7 @@ if (invokedDirectly) {
   if (isQualityRejectError(e)) {
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (content quality rejected, slop not published): ${e.message}`] });
     console.error(`\n⚠️  Differito: nessun articolo conforme prodotto in questa run (rigetto qualità — slop non pubblicato). Riprovo al prossimo run. ${e.message}`);
-    // Ragione legittima #5 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
+    // Ragione legittima #5 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   // Duplicate rejection that bubbled all the way up from the direct-URL
@@ -21437,7 +21546,7 @@ if (invokedDirectly) {
     captureDuplicateReasons(e.message);
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (duplicate detected, not published): ${e.message}`] });
     console.error(`\n⚠️  Differito: duplicato rilevato, articolo non pubblicato in questa run. Riprovo al prossimo run. ${e.message}`);
-    // Ragione legittima #4 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
+    // Ragione legittima #4 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   finalizeRunReport('error', { notes: [...RUN_REPORT.notes, `Error: ${e.message}`] });

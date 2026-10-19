@@ -10,6 +10,7 @@ import { findSeoEntryMatches, removeSeoEntriesFromSource } from '../../engine/sh
 import {
   appendSeoEntrySource,
   buildSeoEntry,
+  GENERATED_COVER_ALT_BY_LOCALE,
   insertSeoEntriesAtHead,
   removeSeoEntriesWithSeparator,
   toIsoWithTz,
@@ -202,6 +203,8 @@ test('il builder mantiene una sola forma JSON-LD e distingue Commons da fallback
   });
   assert.match(generatedEntry, /"license": "https:\/\/openai\.com\/policies\/terms-of-use\/"/);
   assert.match(generatedEntry, /"url": `\$\{BASE_URL\}\/images\/places\/lugano-view\.webp`/);
+  assert.match(generatedEntry, new RegExp(`"caption": "${GENERATED_COVER_ALT_BY_LOCALE.it}"`));
+  assert.doesNotMatch(generatedEntry, /Panorama del Ticino/);
 
   const deterministic = article();
   deriveSeoMetadata(deterministic);

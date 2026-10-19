@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-19T02:30:40.156Z",
-  "contentHash": "5dcb94b456b7781d10dc3735244c05065c1606c77d3e6e96c413112e45b4e38b",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "381d701e64cf9f169f4f5b440d474ab59fa2da12d17a9f87e63cfaf55007c474",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-18T20:21:24.396Z",
+      "updatedAt": "2026-10-19T13:52:30.888Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "203",
+          "value": "210",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -39,10 +39,40 @@
               "url": "https://www.tio.ch/agenda/day/20261019/58243"
             },
             {
+              "label": "Fra Roberto tra le mura",
+              "detail": "Sasso Corbaro, Bellinzona",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/61525"
+            },
+            {
+              "label": "Impressioni - Mostra di pittura di Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/64414"
+            },
+            {
+              "label": "Ivo Soldini - Progetto Castel Grande",
+              "detail": "Castel Grande, Bellinzona",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/62822"
+            },
+            {
               "label": "PoPoetic",
               "detail": "Centro ricreativo Il Pettirosso, Savosa",
               "date": "2026-10-19",
               "url": "https://www.tio.ch/agenda/day/20261019/63593"
+            },
+            {
+              "label": "Videokunst.ch × PalaCinema",
+              "detail": "PalaCinema, Locarno",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/63679"
+            },
+            {
+              "label": "Was America",
+              "detail": "Fondazione Rolla | Kindergarten, Mendrisio",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/63776"
             },
             {
               "label": "Giovanni Anselmo",
@@ -51,51 +81,21 @@
               "url": "https://www.tio.ch/agenda/day/20261019/63802"
             },
             {
-              "label": "Il tempo di una vita",
-              "detail": "Cinema GranRex, Locarno",
+              "label": "Dove la luce si posa di Elisabeth Hübscher",
+              "detail": "Caslano",
               "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64390"
+              "url": "https://www.tio.ch/agenda/day/20261019/64356"
             },
             {
-              "label": "Ugo Mulas, Pietro Consagra, Arnaldo Pomodoro",
-              "detail": "Cortesi Gallery, Lugano",
+              "label": "Isa Hesse-Rabinovitch!",
+              "detail": "Museo Hermann Hesse, Lugano",
               "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63724"
-            },
-            {
-              "label": "Maschio 2.0",
-              "detail": "Studio Foce, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64439"
-            },
-            {
-              "label": "Un marito ideale di Oscar Wilde",
-              "detail": "Lac, Sala Teatro, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64576"
-            },
-            {
-              "label": "Lunedì Jazz - Interplay trio",
-              "detail": "Bar Incontro, Muralto",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64435"
-            },
-            {
-              "label": "Dreams - Cinema norvegese contemporaneo",
-              "detail": "GranRex, Locarno",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63939"
-            },
-            {
-              "label": "Kennedy Administration",
-              "detail": "Teatro del Gatto, Ascona",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63870"
+              "url": "https://www.tio.ch/agenda/day/20261019/61534"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T13:52:30.888Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "203",
+          "value": "210",
           "note": "from the site’s events calendar"
         }
       ],
@@ -190,10 +190,40 @@
               "url": "https://www.tio.ch/agenda/day/20261019/58243"
             },
             {
+              "label": "Fra Roberto fra le mura",
+              "detail": "Sasso Corbaro, Bellinzona",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/61525"
+            },
+            {
+              "label": "Impressions - Painting exhibition by Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/64414"
+            },
+            {
+              "label": "Ivo Soldini - Castel Grande Project",
+              "detail": "Castel Grande, Bellinzona",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/62822"
+            },
+            {
               "label": "PoPoetic",
               "detail": "Centro ricreativo Il Pettirosso, Savosa",
               "date": "2026-10-19",
               "url": "https://www.tio.ch/agenda/day/20261019/63593"
+            },
+            {
+              "label": "Videokunst.ch PalaCinema",
+              "detail": "PalaCinema, Locarno",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/63679"
+            },
+            {
+              "label": "America W",
+              "detail": "Fondazione Rolla | Kindergarten, Mendrisio",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/63776"
             },
             {
               "label": "John Anselm",
@@ -202,51 +232,21 @@
               "url": "https://www.tio.ch/agenda/day/20261019/63802"
             },
             {
-              "label": "The time of a lifetime",
-              "detail": "Cinema GranRex, Locarno",
+              "label": "Where the Light Sets by Elisabeth Hübscher",
+              "detail": "Caslano",
               "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64390"
+              "url": "https://www.tio.ch/agenda/day/20261019/64356"
             },
             {
-              "label": "Ugo Mulas, Pietro Consagra, Arnaldo Pomodoro",
-              "detail": "Cortesi Gallery, Lugano",
+              "label": "Isa Hesse-Rabinovitch!",
+              "detail": "Museo Hermann Hesse, Lugano",
               "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63724"
-            },
-            {
-              "label": "Male 2.0",
-              "detail": "Studio Foce, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64439"
-            },
-            {
-              "label": "An ideal husband for Oscar Wilde",
-              "detail": "Lac, Sala Teatro, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64576"
-            },
-            {
-              "label": "Monday Jazz - Interplay Trio",
-              "detail": "Bar Incontro, Muralto",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64435"
-            },
-            {
-              "label": "Dreams - Contemporary Norwegian Cinema",
-              "detail": "GranRex, Locarno",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63939"
-            },
-            {
-              "label": "Kenned Administration",
-              "detail": "Teatro del Gatto, Ascona",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63870"
+              "url": "https://www.tio.ch/agenda/day/20261019/61534"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T13:52:30.888Z"
         }
       ],
       "curatedArticles": [
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "203",
+          "value": "210",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -341,10 +341,40 @@
               "url": "https://www.tio.ch/agenda/day/20261019/58243"
             },
             {
+              "label": "Fra Roberto zwischen den Mauern",
+              "detail": "Sasso Corbaro, Bellinzona",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/61525"
+            },
+            {
+              "label": "Impressionen - Gemäldeausstellung von Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/64414"
+            },
+            {
+              "label": "Ivo Soldini - Projekt Castel Grande",
+              "detail": "Castel Grande, Bellinzona",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/62822"
+            },
+            {
               "label": "PoPoetisch",
               "detail": "Centro ricreativo Il Pettirosso, Savosa",
               "date": "2026-10-19",
               "url": "https://www.tio.ch/agenda/day/20261019/63593"
+            },
+            {
+              "label": "Videokunst.ch ⑤ PalaCinema",
+              "detail": "PalaCinema, Locarno",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/63679"
+            },
+            {
+              "label": "War Amerika",
+              "detail": "Fondazione Rolla | Kindergarten, Mendrisio",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/63776"
             },
             {
               "label": "Johannes Anselm",
@@ -353,51 +383,21 @@
               "url": "https://www.tio.ch/agenda/day/20261019/63802"
             },
             {
-              "label": "Die Zeit eines Lebens",
-              "detail": "Cinema GranRex, Locarno",
+              "label": "Wo das Licht ruht von Elisabeth Hübscher",
+              "detail": "Caslano",
               "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64390"
+              "url": "https://www.tio.ch/agenda/day/20261019/64356"
             },
             {
-              "label": "Ugo Mulas, Pietro Consagra, Arnaldo Pomodoro",
-              "detail": "Cortesi Gallery, Lugano",
+              "label": "Isa Hesse-Rabinowitsch!",
+              "detail": "Museo Hermann Hesse, Lugano",
               "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63724"
-            },
-            {
-              "label": "Männlich 2.0",
-              "detail": "Studio Foce, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64439"
-            },
-            {
-              "label": "Ein idealer Ehemann von Oscar Wilde",
-              "detail": "Lac, Sala Teatro, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64576"
-            },
-            {
-              "label": "Montag Jazz - Interplay Trio",
-              "detail": "Bar Incontro, Muralto",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64435"
-            },
-            {
-              "label": "Dreams - Zeitgenössisches norwegisches Kino",
-              "detail": "GranRex, Locarno",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63939"
-            },
-            {
-              "label": "Kennedy-Regierung",
-              "detail": "Teatro del Gatto, Ascona",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63870"
+              "url": "https://www.tio.ch/agenda/day/20261019/61534"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T13:52:30.888Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "203",
+          "value": "210",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -492,10 +492,40 @@
               "url": "https://www.tio.ch/agenda/day/20261019/58243"
             },
             {
+              "label": "Frère Roberto entre les murs",
+              "detail": "Sasso Corbaro, Bellinzona",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/61525"
+            },
+            {
+              "label": "Impressions - Exposition de peinture de Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/64414"
+            },
+            {
+              "label": "Ivo Soldini - Projet Castel Grande",
+              "detail": "Castel Grande, Bellinzona",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/62822"
+            },
+            {
               "label": "PoPoétique",
               "detail": "Centro ricreativo Il Pettirosso, Savosa",
               "date": "2026-10-19",
               "url": "https://www.tio.ch/agenda/day/20261019/63593"
+            },
+            {
+              "label": "Videokunst.ch Palais Cinema",
+              "detail": "PalaCinema, Locarno",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/63679"
+            },
+            {
+              "label": "Était l'Amérique",
+              "detail": "Fondazione Rolla | Kindergarten, Mendrisio",
+              "date": "2026-10-19",
+              "url": "https://www.tio.ch/agenda/day/20261019/63776"
             },
             {
               "label": "Giovanni Anselme",
@@ -504,51 +534,21 @@
               "url": "https://www.tio.ch/agenda/day/20261019/63802"
             },
             {
-              "label": "Ça a juste rallongé un peu ma vie.",
-              "detail": "Cinema GranRex, Locarno",
+              "label": "Où la lumière se pose par Elisabeth Hübscher",
+              "detail": "Caslano",
               "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64390"
+              "url": "https://www.tio.ch/agenda/day/20261019/64356"
             },
             {
-              "label": "Ugo Mulas, avec Pietro Consagra et Arnaldo Pomodoro",
-              "detail": "Cortesi Gallery, Lugano",
+              "label": "Isa Hesse-Rabinovitch !",
+              "detail": "Museo Hermann Hesse, Lugano",
               "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63724"
-            },
-            {
-              "label": "Mâle 2.0",
-              "detail": "Studio Foce, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64439"
-            },
-            {
-              "label": "Un mari idéal d'Oscar Wilde",
-              "detail": "Lac, Sala Teatro, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64576"
-            },
-            {
-              "label": "Lundi Jazz - Interplay trio",
-              "detail": "Bar Incontro, Muralto",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64435"
-            },
-            {
-              "label": "Dreams - Cinéma norvégien contemporain",
-              "detail": "GranRex, Locarno",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63939"
-            },
-            {
-              "label": "Administration Kennedy",
-              "detail": "Teatro del Gatto, Ascona",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63870"
+              "url": "https://www.tio.ch/agenda/day/20261019/61534"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T13:52:30.888Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

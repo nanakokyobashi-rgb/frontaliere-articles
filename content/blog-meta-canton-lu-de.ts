@@ -21,6 +21,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.juso-lucerna-humbel-governo.title': 'Juso Luzern: Valentin Humbel kandidiert für den Regierungsrat',
     'blog.article.juso-lucerna-humbel-governo.excerpt': 'Valentin Humbel ist der Juso-Kandidat für den Luzerner Regierungsrat.',
     'blog.article.juso-lucerna-humbel-governo.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.prioswiss-ricorso-luks.title': 'Prio Swiss klagt gegen LUKS-Mandat für Speiseröhren-OPs',
+    'blog.article.prioswiss-ricorso-luks.excerpt': 'Der Verband ficht den Leistungsauftrag für Speiseröhrenoperationen am Luzerner Kantonsspital an und macht geltend, dass die Mindestfallzahl nicht erreicht wurde und zehn weitere Zentren den Bedarf bereits abdecken.',
+    'blog.article.prioswiss-ricorso-luks.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;

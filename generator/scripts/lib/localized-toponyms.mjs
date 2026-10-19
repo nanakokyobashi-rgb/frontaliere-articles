@@ -141,9 +141,9 @@ function rawTermPattern(term) {
 // that route is not a translated sentence and must neither trigger the gate nor
 // be rewritten by the deterministic repair. Plain article slugs, passed as a
 // separate projection field, do not start with `/` and remain visible.
-const URL_PATTERN = /(?:https?|evergreen|stats-(?:bfs|astra)):\/\/[^\s)]+|(?<![\p{L}\p{N}@])(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:ch|com|org|net|it|fr|de|io|info)(?:\/[^\s)]*)?|(?<![\p{L}\p{N}@])\/[a-z0-9][^\s)\]>"]*/giu;
+const URL_PATTERN = /(?:https?|evergreen|stats-(?:bfs|astra)):\/\/[^\s)]+|(?<![\p{L}\p{N}@])(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[\p{L}]{2,63}(?:\/[^\s)]*)?|(?<![\p{L}\p{N}@])\/[a-z0-9][^\s)\]>"]*/giu;
 
-function withoutUrls(value) {
+export function withoutUrls(value) {
   // Preserve raw offsets so a code span that contains a URL stays one range.
   return String(value || '').replace(URL_PATTERN, (match) => ' '.repeat(match.length));
 }
@@ -295,15 +295,28 @@ const NAME_LEADING_STOP_WORDS = new Set([
   'au', 'aux', 'du', 'dans', 'en', 'à', 'sur', 'sous', 'chez', 'avec', 'par', 'sans', 'entre', 'vers',
   'im', 'am', 'auf', 'mit', 'über', 'unter', 'für', 'vor', 'zu',
 ]);
-const OFFICIAL_NAME_MARKERS = new Set([
+export const OFFICIAL_NAME_MARKERS = new Set([
   'associazione', 'association', 'azienda', 'banca', 'bancastato', 'bank',
   'bureau', 'caisse', 'cassa', 'centro', 'centre', 'comune',
-  'ente', 'fondazione', 'fondation', 'foundation', 'istituto', 'istituzione',
+  'dipartimento delle finanze ed economia', 'ente',
+  'fondazione', 'fondation', 'foundation', 'istituto', 'istituzione',
+  'modello redditi',
   'ospedale', 'spital', 'ufficio', 'università', 'universita',
   'université', 'universite', 'universität', 'universitaet',
   'società', 'societa', 'société', 'societe',
   'canton', 'cantone', 'kanton',
 ]);
+const OFFICIAL_NAME_PHRASE_MARKERS = Object.freeze(
+  [...OFFICIAL_NAME_MARKERS].filter((marker) => marker.includes(' ')),
+);
+const OFFICIAL_NAME_PHRASE_PATTERN = new RegExp(
+  "(?<![\\p{L}\\p{N}])(?:"
+  + OFFICIAL_NAME_PHRASE_MARKERS
+    .map((marker) => marker.split(/\s+/u).map(escapeRegExp).join("\\s+"))
+    .join("|")
+  + ")(?:\\s+(?:del|della|delle|dello|di)\\s+\\p{Lu}[\\p{L}\\p{M}'’.-]*)*(?![\\p{L}\\p{N}])",
+  'giu',
+);
 const ADMINISTRATIVE_NAME_PREFIXES = new Set(['canton', 'cantone', 'kanton']);
 const CODE_SPAN_PATTERN = /`+[\s\S]*?`+/gu;
 const MAX_PROTECTED_NAME_SPAN_CHARS = 160;
@@ -316,8 +329,54 @@ function isLikelyProperNameSpan(value) {
   if (tokens.length < 2) return false;
   if (tokens.length > MAX_PROTECTED_NAME_SPAN_TOKENS) return false;
   const normalizedTokens = tokens.map((token) => token.toLocaleLowerCase('en'));
-  if (!normalizedTokens.some((token) => OFFICIAL_NAME_MARKERS.has(token))) return false;
+  const normalizedName = normalizedTokens.join(' ');
+  const hasMarker = normalizedTokens.some((token) => OFFICIAL_NAME_MARKERS.has(token))
+    || OFFICIAL_NAME_PHRASE_MARKERS.some((marker) => normalizedName.includes(marker));
+  if (!hasMarker) return false;
   return !(normalizedTokens.length === 2 && ADMINISTRATIVE_NAME_PREFIXES.has(normalizedTokens[0]));
+}
+
+function recognizedOfficialNameRanges(value) {
+  const text = normalizeToponymMatchText(value);
+  const ranges = [];
+  const add = (start, end) => {
+    if (isLikelyProperNameSpan(text.slice(start, end))) ranges.push([start, end]);
+  };
+
+  NAME_SPAN_PATTERN.lastIndex = 0;
+  for (const match of text.matchAll(NAME_SPAN_PATTERN)) {
+    const start = match.index ?? 0;
+    add(start, start + match[0].length);
+  }
+  OFFICIAL_NAME_PHRASE_PATTERN.lastIndex = 0;
+  for (const match of text.matchAll(OFFICIAL_NAME_PHRASE_PATTERN)) {
+    const start = match.index ?? 0;
+    add(start, start + match[0].length);
+  }
+  QUOTED_NAME_PATTERN.lastIndex = 0;
+  for (const match of text.matchAll(QUOTED_NAME_PATTERN)) {
+    const start = (match.index ?? 0) + match[0].indexOf(match[1]);
+    add(start, start + match[1].length);
+  }
+  return ranges;
+}
+
+function maskRanges(value, ranges) {
+  const text = String(value);
+  let result = '';
+  let cursor = 0;
+  for (const [start, end] of [...ranges].sort((left, right) => left[0] - right[0])) {
+    if (start < cursor) continue;
+    result += text.slice(cursor, start) + ' '.repeat(end - start);
+    cursor = end;
+  }
+  return result + text.slice(cursor);
+}
+
+/** Keep recognized official names opaque when another detector counts words. */
+export function withoutOfficialNameWords(value) {
+  const text = normalizeLocalizedToponymText(value);
+  return maskRanges(text, recognizedOfficialNameRanges(text));
 }
 
 function normalizeNameSearchText(value) {
@@ -377,6 +436,11 @@ function sourceIdenticalNameRanges(value, sourceText) {
     const start = match.index ?? 0;
     add(start, start + match[0].length, match[0]);
     addMarkerAnchoredSubspans(start, start + match[0].length);
+  }
+  OFFICIAL_NAME_PHRASE_PATTERN.lastIndex = 0;
+  for (const match of text.matchAll(OFFICIAL_NAME_PHRASE_PATTERN)) {
+    const start = match.index ?? 0;
+    add(start, start + match[0].length, match[0]);
   }
   QUOTED_NAME_PATTERN.lastIndex = 0;
   for (const match of text.matchAll(QUOTED_NAME_PATTERN)) {

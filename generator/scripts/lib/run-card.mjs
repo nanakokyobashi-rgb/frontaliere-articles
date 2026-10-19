@@ -133,6 +133,7 @@ function isInside(root, target) {
 
 /** Versione dello schema. Un lettore che non la riconosce deve dirlo, non indovinare. */
 export const RUN_CARD_SCHEMA = 'run-card/1';
+export const RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION = 'shared-provider-unavailable';
 
 /**
  * ── QUANDO LA STRUMENTAZIONE E' ATTERRATA (#924 item 4) ────────────────────
@@ -160,7 +161,7 @@ export const RUN_CARD_INSTRUMENTED_SINCE = '2026-09-05T11:35:14Z';
  * esito perso.
  *
  * @param {any} report il `RUN_REPORT` di `create-article.mjs`
- * @returns {{schema:string,runId:string,section:string|null,status:string,endedAt:string|null,rebracket:{calls:number,viaFallbackUnsat:number},quotaDeferral:object|null,promptFloor:object|null}}
+ * @returns {{schema:string,runId:string,runAttempt:string,section:string|null,status:string,endedAt:string|null,exitCode:number|null,exitDisposition:string|null,rebracket:{calls:number,viaFallbackUnsat:number},quotaDeferral:object|null,promptFloor:object|null}}
  */
 export function buildRunCard(report) {
   const r = (report && typeof report === 'object') ? report : {};
@@ -169,9 +170,12 @@ export function buildRunCard(report) {
   return {
     schema: RUN_CARD_SCHEMA,
     runId: String(r.runId || 'local'),
+    runAttempt: String(r.runAttempt || '1'),
     section: typeof r.section === 'string' ? r.section : null,
     status: String(r.status || 'unknown'),
     endedAt: typeof r.endedAt === 'string' ? r.endedAt : null,
+    exitCode: Number.isInteger(r.exitCode) ? r.exitCode : null,
+    exitDisposition: typeof r.exitDisposition === 'string' ? r.exitDisposition : null,
     rebracket: {
       calls: Number(rb.calls) || 0,
       viaFallbackUnsat: Number(rb.viaFallbackUnsat) || 0,

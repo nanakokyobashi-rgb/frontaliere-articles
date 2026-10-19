@@ -27,6 +27,9 @@ const blogMetaCantonGeEn: Record<string, string> = {
     'blog.article.indagini-imprese-ginevrine.title': 'Business surveys among Geneva companies',
     'blog.article.indagini-imprese-ginevrine.excerpt': 'The Republic and Canton of Geneva reports September business surveys among Geneva companies.',
     'blog.article.indagini-imprese-ginevrine.imageAlt': 'Illustration generated for this article',
+    'blog.article.taf-regolamento-aeroporto-ginevra.title': 'Geneva Airport: the TAF approves the regulation',
+    'blog.article.taf-regolamento-aeroporto-ginevra.excerpt': 'The TAF approves Geneva Airport\'s operating regulations The contested measures comply with environmental regulations Appeals against DETEC\'s decision',
+    'blog.article.taf-regolamento-aeroporto-ginevra.imageAlt': 'Geneva Airport and nearby communes',
 };
 
 export default blogMetaCantonGeEn;

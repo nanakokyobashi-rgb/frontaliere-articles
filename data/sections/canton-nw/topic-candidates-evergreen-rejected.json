@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
+  "topicGateUrls": {
+    "canton-nw::https://www.hergiswil.ch/_rte/information/3014485": {
+      "section": "canton-nw",
+      "ts": 1792426575596
+    }
+  }
+}

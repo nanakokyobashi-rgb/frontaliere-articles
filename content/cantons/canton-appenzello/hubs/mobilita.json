@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-19T05:23:08.856Z",
-  "contentHash": "70f7f03eef6a8b39e38aeb26d18268b609f2a6d352acf5662dbcdd558126b208",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "1fc4fa1f88dd6e30b6b21632a036a9b5c1cd068a38c375884bba2e64588e4319",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-18T23:45:01.015Z",
+      "updatedAt": "2026-10-19T14:01:37.256Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T19:43:29.238Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -28,7 +28,7 @@
         {
           "label": "Cantieri attivi o imminenti",
           "value": "2",
-          "note": "segnalazioni aggiornate: 18 ottobre 2026"
+          "note": "segnalazioni aggiornate: 19 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -40,13 +40,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffico",
-              "date": "2026-10-18T23:45:01.015Z",
+              "date": "2026-10-19T14:01:37.256Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffico",
-              "date": "2026-10-18T23:45:01.015Z",
+              "date": "2026-10-19T14:01:37.256Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -63,7 +63,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-18T23:45:01.015Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -91,17 +91,17 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             },
             {
-              "label": "Ostschweizer Kantone fordern Anpassungen bei «Verkehr '45»",
-              "date": "2026-09-16T09:23:00.000Z",
-              "url": "https://www.ai.ch/politik/standeskommission/mitteilungen/aktuelles/ostschweizer-kantone-fordern-anpassungen-bei-verkehr-45"
+              "label": "Instandsetzung der Oberen Bruderbachbrücke",
+              "date": "2026-09-14",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             },
             {
-              "label": "Strassensperrung Gaiserstrasse Abschnitt Äbisegg",
-              "date": "2026-09-16T08:40:00.000Z",
-              "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
+              "label": "Sperrungen wegen Steinschlaggefahr auf der Schwägalp",
+              "date": "2026-09-03",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/sperrungen-wegen-steinschlaggefahr-auf-der-schwaegalp/"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -129,7 +129,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -140,7 +140,7 @@
         {
           "label": "Roadworks active or imminent",
           "value": "2",
-          "note": "reports as of 18 October 2026"
+          "note": "reports as of 19 October 2026"
         }
       ],
       "dataBlocks": [
@@ -152,13 +152,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffic",
-              "date": "2026-10-18T23:45:01.015Z",
+              "date": "2026-10-19T14:01:37.256Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffic",
-              "date": "2026-10-18T23:45:01.015Z",
+              "date": "2026-10-19T14:01:37.256Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -175,7 +175,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-18T23:45:01.015Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -203,17 +203,17 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             },
             {
-              "label": "Ostschweizer Kantone fordern Anpassungen bei «Verkehr '45»",
-              "date": "2026-09-16T09:23:00.000Z",
-              "url": "https://www.ai.ch/politik/standeskommission/mitteilungen/aktuelles/ostschweizer-kantone-fordern-anpassungen-bei-verkehr-45"
+              "label": "Instandsetzung der Oberen Bruderbachbrücke",
+              "date": "2026-09-14",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             },
             {
-              "label": "Strassensperrung Gaiserstrasse Abschnitt Äbisegg",
-              "date": "2026-09-16T08:40:00.000Z",
-              "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
+              "label": "Sperrungen wegen Steinschlaggefahr auf der Schwägalp",
+              "date": "2026-09-03",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/sperrungen-wegen-steinschlaggefahr-auf-der-schwaegalp/"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -241,7 +241,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -252,7 +252,7 @@
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "2",
-          "note": "Meldungen vom 18. Oktober 2026"
+          "note": "Meldungen vom 19. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -264,13 +264,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Verkehr",
-              "date": "2026-10-18T23:45:01.015Z",
+              "date": "2026-10-19T14:01:37.256Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Verkehr",
-              "date": "2026-10-18T23:45:01.015Z",
+              "date": "2026-10-19T14:01:37.256Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -287,7 +287,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-18T23:45:01.015Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -315,17 +315,17 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             },
             {
-              "label": "Ostschweizer Kantone fordern Anpassungen bei «Verkehr '45»",
-              "date": "2026-09-16T09:23:00.000Z",
-              "url": "https://www.ai.ch/politik/standeskommission/mitteilungen/aktuelles/ostschweizer-kantone-fordern-anpassungen-bei-verkehr-45"
+              "label": "Instandsetzung der Oberen Bruderbachbrücke",
+              "date": "2026-09-14",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             },
             {
-              "label": "Strassensperrung Gaiserstrasse Abschnitt Äbisegg",
-              "date": "2026-09-16T08:40:00.000Z",
-              "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
+              "label": "Sperrungen wegen Steinschlaggefahr auf der Schwägalp",
+              "date": "2026-09-03",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/sperrungen-wegen-steinschlaggefahr-auf-der-schwaegalp/"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -353,7 +353,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -364,7 +364,7 @@
         {
           "label": "Chantiers actifs ou imminents",
           "value": "2",
-          "note": "signalements au 18 octobre 2026"
+          "note": "signalements au 19 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -376,13 +376,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Trafic",
-              "date": "2026-10-18T23:45:01.015Z",
+              "date": "2026-10-19T14:01:37.256Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Trafic",
-              "date": "2026-10-18T23:45:01.015Z",
+              "date": "2026-10-19T14:01:37.256Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -399,7 +399,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-18T23:45:01.015Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -427,17 +427,17 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
             },
             {
-              "label": "Ostschweizer Kantone fordern Anpassungen bei «Verkehr '45»",
-              "date": "2026-09-16T09:23:00.000Z",
-              "url": "https://www.ai.ch/politik/standeskommission/mitteilungen/aktuelles/ostschweizer-kantone-fordern-anpassungen-bei-verkehr-45"
+              "label": "Instandsetzung der Oberen Bruderbachbrücke",
+              "date": "2026-09-14",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             },
             {
-              "label": "Strassensperrung Gaiserstrasse Abschnitt Äbisegg",
-              "date": "2026-09-16T08:40:00.000Z",
-              "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
+              "label": "Sperrungen wegen Steinschlaggefahr auf der Schwägalp",
+              "date": "2026-09-03",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/sperrungen-wegen-steinschlaggefahr-auf-der-schwaegalp/"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

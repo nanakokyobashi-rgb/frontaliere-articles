@@ -4,22 +4,22 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-19T03:12:38.869Z",
-  "contentHash": "0d4f2919476f1bce9e27b5031ab1fea52f308d315cfbc584069c546d1e6e53a3",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "ed136168682f7e9223035ebcc9f23663d341867c7b61669d172711a073ea7a13",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-17T23:59:59.000Z",
+      "updatedAt": "2026-10-18T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-18T16:12:12.011Z",
+      "updatedAt": "2026-10-19T14:01:37.256Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T19:43:29.238Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -33,25 +33,31 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Dettighofen – Wil ZH, settimana conclusa: 17 ottobre 2026"
+          "note": "Dettighofen – Rafz, settimana conclusa: 18 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "9",
-          "note": "segnalazioni aggiornate: 18 ottobre 2026"
+          "note": "segnalazioni aggiornate: 19 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "20",
-          "note": "segnalazioni aggiornate: 18 ottobre 2026"
+          "value": "22",
+          "note": "segnalazioni aggiornate: 19 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 11 ottobre 2026 – 17 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 12 ottobre 2026 – 18 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
+            {
+              "label": "Dettighofen – Rafz",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/dettighofen-rafz/oggi/"
+            },
             {
               "label": "Dettighofen – Wil ZH",
               "value": "0 min",
@@ -77,6 +83,12 @@
               "url": "/traffico-dogane/jestetten-laufen-uhwiesen-grenzstrasse/oggi/"
             },
             {
+              "label": "Jestetten – Rheinau",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/jestetten-rheinau/oggi/"
+            },
+            {
               "label": "Lottstetten – Nack",
               "value": "0 min",
               "detail": "47 rilevazioni",
@@ -87,23 +99,11 @@
               "value": "0 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/lottstetten-rafz-landstrasse/oggi/"
-            },
-            {
-              "label": "Dettighofen – Rafz",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/dettighofen-rafz/oggi/"
-            },
-            {
-              "label": "Jestetten – Rheinau",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/jestetten-rheinau/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-17T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -160,7 +160,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-18T16:12:12.011Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -183,7 +183,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -261,7 +261,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-19T03:12:38.869Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "ZH",
@@ -272,25 +272,31 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Dettighofen – Wil ZH, week ending 17 October 2026"
+          "note": "Dettighofen – Rafz, week ending 18 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "9",
-          "note": "reports as of 18 October 2026"
+          "note": "reports as of 19 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "20",
-          "note": "reports as of 18 October 2026"
+          "value": "22",
+          "note": "reports as of 19 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 11 October 2026 to 17 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 12 October 2026 to 18 October 2026, fastest first.",
           "items": [
+            {
+              "label": "Dettighofen – Rafz",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/dettighofen-rafz/today/"
+            },
             {
               "label": "Dettighofen – Wil ZH",
               "value": "0 min",
@@ -316,6 +322,12 @@
               "url": "/en/border-wait/jestetten-laufen-uhwiesen-grenzstrasse/today/"
             },
             {
+              "label": "Jestetten – Rheinau",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/jestetten-rheinau/today/"
+            },
+            {
               "label": "Lottstetten – Nack",
               "value": "0 min",
               "detail": "47 readings",
@@ -326,23 +338,11 @@
               "value": "0 min",
               "detail": "47 readings",
               "url": "/en/border-wait/lottstetten-rafz-landstrasse/today/"
-            },
-            {
-              "label": "Dettighofen – Rafz",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/dettighofen-rafz/today/"
-            },
-            {
-              "label": "Jestetten – Rheinau",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/jestetten-rheinau/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-17T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -399,7 +399,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-18T16:12:12.011Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -422,7 +422,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -500,7 +500,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-19T03:12:38.869Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "ZH",
@@ -511,25 +511,31 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Dettighofen – Wil ZH, Woche bis 17. Oktober 2026"
+          "note": "Dettighofen – Rafz, Woche bis 18. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "9",
-          "note": "Meldungen vom 18. Oktober 2026"
+          "note": "Meldungen vom 19. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "20",
-          "note": "Meldungen vom 18. Oktober 2026"
+          "value": "22",
+          "note": "Meldungen vom 19. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 11. Oktober 2026 bis 17. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 12. Oktober 2026 bis 18. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
+            {
+              "label": "Dettighofen – Rafz",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/dettighofen-rafz/heute/"
+            },
             {
               "label": "Dettighofen – Wil ZH",
               "value": "0 Min.",
@@ -555,6 +561,12 @@
               "url": "/de/wartezeit-grenze/jestetten-laufen-uhwiesen-grenzstrasse/heute/"
             },
             {
+              "label": "Jestetten – Rheinau",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/jestetten-rheinau/heute/"
+            },
+            {
               "label": "Lottstetten – Nack",
               "value": "0 Min.",
               "detail": "47 Messungen",
@@ -565,23 +577,11 @@
               "value": "0 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/lottstetten-rafz-landstrasse/heute/"
-            },
-            {
-              "label": "Dettighofen – Rafz",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/dettighofen-rafz/heute/"
-            },
-            {
-              "label": "Jestetten – Rheinau",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/jestetten-rheinau/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-17T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -638,7 +638,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-18T16:12:12.011Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -661,7 +661,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -739,7 +739,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-19T03:12:38.869Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "ZH",
@@ -750,25 +750,31 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Dettighofen – Wil ZH, semaine jusqu’au 17 octobre 2026"
+          "note": "Dettighofen – Rafz, semaine jusqu’au 18 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "9",
-          "note": "signalements au 18 octobre 2026"
+          "note": "signalements au 19 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "20",
-          "note": "signalements au 18 octobre 2026"
+          "value": "22",
+          "note": "signalements au 19 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 11 octobre 2026 au 17 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 12 octobre 2026 au 18 octobre 2026, du plus fluide au plus lent.",
           "items": [
+            {
+              "label": "Dettighofen – Rafz",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/dettighofen-rafz/aujourd-hui/"
+            },
             {
               "label": "Dettighofen – Wil ZH",
               "value": "0 min",
@@ -794,6 +800,12 @@
               "url": "/fr/temps-attente-douane/jestetten-laufen-uhwiesen-grenzstrasse/aujourd-hui/"
             },
             {
+              "label": "Jestetten – Rheinau",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/jestetten-rheinau/aujourd-hui/"
+            },
+            {
               "label": "Lottstetten – Nack",
               "value": "0 min",
               "detail": "47 relevés",
@@ -804,23 +816,11 @@
               "value": "0 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/lottstetten-rafz-landstrasse/aujourd-hui/"
-            },
-            {
-              "label": "Dettighofen – Rafz",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/dettighofen-rafz/aujourd-hui/"
-            },
-            {
-              "label": "Jestetten – Rheinau",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/jestetten-rheinau/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-17T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -877,7 +877,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-18T16:12:12.011Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -900,7 +900,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -978,7 +978,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-19T03:12:38.869Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

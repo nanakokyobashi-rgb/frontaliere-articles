@@ -63,6 +63,7 @@ on:
       - 'scripts/ci/section-bootstrap-lock.mjs'
       - 'scripts/lib/conditional-cdn-put.sh'
       - 'scripts/ci/fast-publish-section.mjs'
+      - 'scripts/ci/resolve-workflow-run-push-range.mjs'
       - 'scripts/ci/retry-cmd.sh'
       - 'scripts/cf-purge-cache.mjs'
       - 'scripts/offload-generated-images-cdn.mjs'
@@ -174,6 +175,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   resolve:
@@ -214,6 +216,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           PUSH_BEFORE: ${{ github.event.before }}
           PUSH_AFTER: ${{ github.event.after }}
+          WORKFLOW_RUN_ID: ${{ github.event.workflow_run.id }}
           DISPATCH_PUSH_BEFORE: ${{ inputs.push_before }}
           DISPATCH_PUSH_AFTER: ${{ inputs.push_after }}
           SOURCE_COMMIT_INPUT: ${{ inputs.source_commit }}
@@ -230,20 +233,27 @@ jobs:
               exit 1
             fi
             if [ "$WORKFLOW_RUN_EVENT" = 'push' ]; then
-              push_events="$(gh api --paginate --slurp "repos/$REPO/commits/$WORKFLOW_RUN_HEAD_SHA/events")"
-              before="$(jq -r --arg head "$WORKFLOW_RUN_HEAD_SHA" '
-                [ .[]? | .[]?
-                  | select(.type == "PushEvent"
-                    and .payload.ref == "refs/heads/main"
-                    and .payload.head == $head)
-                  | .payload.before
-                ] | last // empty
-              ' <<< "$push_events")"
-              if [ -z "$before" ] || ! [[ "$before" =~ ^[a-f0-9]{40}$ ]] && ! [[ "$before" =~ ^0+$ ]]; then
-                echo "::error::before della push originaria non trovato per workflow_run head $WORKFLOW_RUN_HEAD_SHA"
+              range_output="$(
+                REPO="$REPO" \
+                WORKFLOW_RUN_HEAD_SHA="$WORKFLOW_RUN_HEAD_SHA" \
+                WORKFLOW_RUN_ID="$WORKFLOW_RUN_ID" \
+                  node scripts/ci/resolve-workflow-run-push-range.mjs
+              )"
+              before=''
+              after=''
+              range_source=''
+              while IFS='=' read -r key value; do
+                case "$key" in
+                  before) before="$value" ;;
+                  after) after="$value" ;;
+                  source) range_source="$value" ;;
+                esac
+              done <<< "$range_output"
+              if [ "$after" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
+                echo "::error::resolver della push ha restituito una HEAD inattesa: $after"
                 exit 1
               fi
-              after="$WORKFLOW_RUN_HEAD_SHA"
+              echo "::notice::range push originaria risolta via $range_source: $before -> $after"
             elif [ "$WORKFLOW_RUN_EVENT" != 'schedule' ] && [ "$WORKFLOW_RUN_EVENT" != 'workflow_dispatch' ]; then
               echo "::error::workflow_run event non supportato: $WORKFLOW_RUN_EVENT"
               exit 1
@@ -849,9 +859,11 @@ jobs:
           # A normal cover-drain dispatch from main has no immutable source
           # commit. It must rebase onto the live main between attempts when
           # the freshness guard reports that main advanced during the render.
-          # workflow_run and bounded replays keep their existing fail-closed
-          # behavior: a stale pinned source is redispatched by the replay
-          # logic above, never silently moved here.
+          # The same dispatch can safely retry a staged live release while the
+          # API/edge pointer is still catching up: publish-section-pages writes
+          # a summary proving that only the deferred, non-destructive phase
+          # remains. Every other error stays fail-closed. workflow_run and
+          # bounded replays keep their existing pinned-source behavior.
           normal_dispatch='false'
           if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ "$REF" = 'refs/heads/main' ] && [ -z "${SOURCE_COMMIT:-}" ] && [ "$BOOTSTRAP" != 'true' ]; then
             normal_dispatch='true'
@@ -865,56 +877,81 @@ jobs:
             exit 0
           fi
 
-          for publish_attempt in 1 2 3; do
-            git fetch --no-tags origin main
-            git checkout --detach origin/main
-            export EXPECTED_MAIN_HEAD="$(git rev-parse HEAD)"
-            echo "::notice::normal cover dispatch on main $EXPECTED_MAIN_HEAD (freshness attempt $publish_attempt/3)"
+          deferred_replay_deadline_ms=$(( $(date +%s%3N) + 30 * 60 * 1000 ))
+          while :; do
+            deferred_retry='false'
+            for publish_attempt in 1 2 3; do
+              git fetch --no-tags origin main
+              # `git fetch origin main` aggiorna sempre FETCH_HEAD, ma non
+              # necessariamente il ref remoto locale in un checkout Actions.
+              # Il retry deve quindi usare esattamente il commit appena letto,
+              # altrimenti tre tentativi ripetono la stessa vecchia revisione.
+              git checkout --detach FETCH_HEAD
+              export EXPECTED_MAIN_HEAD="$(git rev-parse HEAD)"
+              echo "::notice::normal cover dispatch on main $EXPECTED_MAIN_HEAD (freshness attempt $publish_attempt/3)"
 
-            # main puo' essere avanzata dopo resolve. Rileggi il kill switch
-            # dalla revisione appena checkoutata: il dry calcolato da resolve
-            # non puo' riarmare una revisione che ora e' disabilitata.
-            attempt_dry="$DRY"
-            if [ -f .github/FAST_PUBLISH_DISABLED ]; then
-              echo "::warning::.github/FAST_PUBLISH_DISABLED present on live checkout — running dry"
-              attempt_dry=true
-            elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "false" ]; then
-              echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
-              attempt_dry=true
-            fi
-            build_publish_args "$attempt_dry"
+              # main puo' essere avanzata dopo resolve. Rileggi il kill switch
+              # dalla revisione appena checkoutata: il dry calcolato da resolve
+              # non puo' riarmare una revisione che ora e' disabilitata.
+              attempt_dry="$DRY"
+              if [ -f .github/FAST_PUBLISH_DISABLED ]; then
+                echo "::warning::.github/FAST_PUBLISH_DISABLED present on live checkout — running dry"
+                attempt_dry=true
+              elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "false" ]; then
+                echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
+                attempt_dry=true
+              fi
+              build_publish_args "$attempt_dry"
 
-            live_dependency_lock_hash="$(sha256sum package.json package-lock.json | sha256sum | cut -d' ' -f1)"
-            if [ "${INSTALLED_DEPENDENCY_LOCK_HASH:-}" != "$live_dependency_lock_hash" ]; then
-              echo "::notice::package metadata changed with the live checkout; reinstalling dependencies"
-              bash scripts/lib/npm-ci-retry.sh
-              export INSTALLED_DEPENDENCY_LOCK_HASH="$live_dependency_lock_hash"
-              echo "INSTALLED_DEPENDENCY_LOCK_HASH=$live_dependency_lock_hash" >> "$GITHUB_ENV"
-            fi
+              live_dependency_lock_hash="$(sha256sum package.json package-lock.json | sha256sum | cut -d' ' -f1)"
+              if [ "${INSTALLED_DEPENDENCY_LOCK_HASH:-}" != "$live_dependency_lock_hash" ]; then
+                echo "::notice::package metadata changed with the live checkout; reinstalling dependencies"
+                bash scripts/lib/npm-ci-retry.sh
+                export INSTALLED_DEPENDENCY_LOCK_HASH="$live_dependency_lock_hash"
+                echo "INSTALLED_DEPENDENCY_LOCK_HASH=$live_dependency_lock_hash" >> "$GITHUB_ENV"
+              fi
 
-            if [ "$attempt_dry" != "true" ]; then
-              # Il checkout puo' aver cambiato host/constants.ts e quindi il
-              # nome dell'asset gtag: riallinea la CDN prima di ogni render.
-              bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/ci/ensure-host-shell-assets.mjs
+              if [ "$attempt_dry" != "true" ]; then
+                # Il checkout puo' aver cambiato host/constants.ts e quindi il
+                # nome dell'asset gtag: riallinea la CDN prima di ogni render.
+                bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/ci/ensure-host-shell-assets.mjs
+              fi
+              # Il wrapper ritenta i blip npm/R2. Se il publish fallisce dopo
+              # quei tentativi, il summary distingue una staging riuscita che
+              # attende il flip API/edge da un errore reale.
+              rm -f "$RUNNER_TEMP/section-summary.json"
+              if RETRY_CMD_ATTEMPTS=2 bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"; then
+                exit 0
+              fi
+              if [ "$normal_dispatch" = 'true' ] \
+                && [ -s "$RUNNER_TEMP/section-summary.json" ] \
+                && jq -e '.deferredLiveRelease == true and .published.deferredReason != null' "$RUNNER_TEMP/section-summary.json" >/dev/null; then
+                now_ms="$(date +%s%3N)"
+                if [ "$now_ms" -ge "$deferred_replay_deadline_ms" ]; then
+                  echo "::error::release API/edge non pronta dopo il budget bounded di replay del cover publisher"
+                  exit 1
+                fi
+                echo "::notice::staging live completata ma API/edge non ancora pronta; attendo il replay prima del prossimo render"
+                sleep 30
+                deferred_retry='true'
+                break
+              fi
+              if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
+                echo "::error::impossibile rileggere la revisione corrente di main dopo un render fallito"
+                exit 1
+              fi
+              if [ "$current_main" = "$EXPECTED_MAIN_HEAD" ]; then
+                echo "::error::render fallito senza un avanzamento concorrente di main"
+                exit 1
+              fi
+              echo "::notice::main avanzata durante il render ($EXPECTED_MAIN_HEAD → $current_main); riallineo il checkout"
+            done
+            if [ "$deferred_retry" = 'true' ]; then
+              continue
             fi
-            # Il wrapper ritenta i blip npm/R2. Se il publish fallisce anche
-            # dopo i tentativi, il controllo sotto distingue un avanzamento di
-            # main e fa ripartire il loop dal checkout aggiornato.
-            if RETRY_CMD_ATTEMPTS=2 bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"; then
-              exit 0
-            fi
-            if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
-              echo "::error::impossibile rileggere la revisione corrente di main dopo un render fallito"
-              exit 1
-            fi
-            if [ "$current_main" = "$EXPECTED_MAIN_HEAD" ]; then
-              echo "::error::render fallito senza un avanzamento concorrente di main"
-              exit 1
-            fi
-            echo "::notice::main avanzata durante il render ($EXPECTED_MAIN_HEAD → $current_main); riallineo il checkout"
+            echo "::error::main e' avanzata durante tre tentativi di render del publisher"
+            exit 1
           done
-          echo "::error::main e' avanzata durante tre tentativi di render del publisher"
-          exit 1
 
       - name: Release bootstrap R2 gate
         # GITHUB_ENV aggiorna l'ambiente dei passi successivi, ma non è una

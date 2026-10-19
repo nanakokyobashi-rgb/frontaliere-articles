@@ -24,6 +24,21 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.rheineck-mels-aquaplaning.title': 'Rheineck e Mels: due incidenti per aquaplaning',
     'blog.article.rheineck-mels-aquaplaning.excerpt': 'Due auto hanno urtato i guardrail il 10 ottobre 2026 Incidenti distinti su A1 e N13 I due conducenti non hanno riportato ferite Danni: circa CHF 35\'000 e CHF',
     'blog.article.rheineck-mels-aquaplaning.imageAlt': 'Autostrada bagnata nel Canton San Gallo con guardrail e cielo coperto',
+    'blog.article.hsg-optime-orario-lavoro.title': 'HSG guida studio UE sulla riduzione dell\'orario di lavoro',
+    'blog.article.hsg-optime-orario-lavoro.excerpt': 'L\'Università di San Gallo coordina OPTIME, progetto UE finanziato da Horizon Europe con circa 3,37 milioni di euro.',
+    'blog.article.hsg-optime-orario-lavoro.imageAlt': 'Campus dell\'Università di San Gallo in una scena editoriale sulla ricerca sul lavoro',
+    'blog.article.sondaggio-imprese-st-gallen-2026.title': 'St.Gallen avvia il sondaggio per le imprese',
+    'blog.article.sondaggio-imprese-st-gallen-2026.excerpt': 'La città di St.Gallen lancia un sondaggio rivolto alle imprese per valutare la piazza economica.',
+    'blog.article.sondaggio-imprese-st-gallen-2026.imageAlt': 'Città di St.Gallen, consultazione e sondaggio per le imprese',
+    'blog.article.voto-bahnhofplatz-wil-2026.title': 'Voto sul Bahnhofplatz Wil: credito di 63,66 milioni',
+    'blog.article.voto-bahnhofplatz-wil-2026.excerpt': 'Il 29 novembre 2026 i cittadini di Wil voteranno sul progetto per il nuovo terminale bus, la velostazione e la riqualificazione della stazione.',
+    'blog.article.voto-bahnhofplatz-wil-2026.imageAlt': 'Bahnhofplatz di Wil nel Canton San Gallo',
+    'blog.article.status-s-san-gallo-assistenza.title': 'San Gallo: assistenza ridotta per titolari di Status S',
+    'blog.article.status-s-san-gallo-assistenza.excerpt': 'La commissione propone assistenza ridotta anche dopo il permesso.',
+    'blog.article.status-s-san-gallo-assistenza.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.voto-rete-gas-wil-2026.title': 'Wil: voto il 29 novembre 2026 sulla rete del gas',
+    'blog.article.voto-rete-gas-wil-2026.excerpt': 'Voto sul fondo: 29 novembre 2026.',
+    'blog.article.voto-rete-gas-wil-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

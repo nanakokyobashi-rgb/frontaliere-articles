@@ -21,6 +21,9 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.juso-lucerna-humbel-governo.title': 'Juso Lucerna: Valentin Humbel candidato al governo',
     'blog.article.juso-lucerna-humbel-governo.excerpt': 'Valentin Humbel è il candidato Juso al governo lucernese.',
     'blog.article.juso-lucerna-humbel-governo.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.prioswiss-ricorso-luks.title': 'Prio Swiss ricorre al Tribunale per mandato esofago Luks',
+    'blog.article.prioswiss-ricorso-luks.excerpt': 'L’associazione contesta il mandato per le operazioni all’esofago al Luzerner Kantonsspital, sostenendo che non ha raggiunto i casi minimi e che dieci altri centri coprono già il fabbisogno.',
+    'blog.article.prioswiss-ricorso-luks.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonLuIt;

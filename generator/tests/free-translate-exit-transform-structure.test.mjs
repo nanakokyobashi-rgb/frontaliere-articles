@@ -336,6 +336,185 @@ test('translateWithCodexEngine rifiuta la prosa al posto del filetto della sorge
   assert.equal(directPathRejections(), before + 1);
 });
 
+test('translateWithCodexEngine rifiuta JSON strutturato quando la sorgente e testo', async () => {
+  for (const answer of [
+    '{"translation":"x"}',
+    '["x"]',
+    '```json\n{"translation":"x"}\n```',
+  ]) {
+    const outcome = {};
+    const out = await translateWithCodexEngine({
+      text: CODEX_SOURCE,
+      sourceLang: 'it',
+      targetLang: 'de',
+      call: async () => answer,
+      _outcome: outcome,
+    });
+    assert.equal(out, '', answer);
+    assert.deepEqual(outcome._tierReasons, [{ provider: 'codex', reason: 'invalid-output' }], answer);
+  }
+
+  const source = '## Offerta\n\nIl ruolo {aperto\nè disponibile}.';
+  const answer = '## Angebot\n\nDie Stelle {offen\nist verfügbar}.';
+  const outcome = {};
+  const out = await translateWithCodexEngine({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    call: async () => answer,
+    _outcome: outcome,
+  });
+  assert.equal(out, answer);
+  assert.equal(outcome._tierReasons, undefined);
+
+  const proseOutcome = {};
+  const prose = await translateWithCodexEngine({
+    text: 'Una frase di partenza.',
+    sourceLang: 'it',
+    targetLang: 'de',
+    call: async () => '{Eine normale Antwort',
+    _outcome: proseOutcome,
+  });
+  assert.equal(prose, '{Eine normale Antwort');
+  assert.equal(proseOutcome._tierReasons, undefined);
+});
+
+test('translateWithCodexEngine confronta ricorsivamente la forma JSON', async () => {
+  const run = async (text, answer) => {
+    const outcome = {};
+    const out = await translateWithCodexEngine({
+      text,
+      sourceLang: 'it',
+      targetLang: 'de',
+      call: async () => answer,
+      _outcome: outcome,
+    });
+    return { out, outcome };
+  };
+  const assertInvalidOutput = (result, label) => {
+    assert.equal(result.out, '', label);
+    assert.equal(result.outcome.incomplete, true, label);
+    assert.deepEqual(result.outcome._tierReasons, [{ provider: 'codex', reason: 'invalid-output' }], label);
+  };
+
+  const arrayText = await run('["ciao"]', 'Hallo');
+  assertInvalidOutput(arrayText, 'top-level array verso testo');
+
+  const arrayObject = await run('["ciao"]', '{"a":"b"}');
+  assertInvalidOutput(arrayObject, 'top-level array verso oggetto');
+
+  const arrayArray = await run('["ciao"]', '["hallo"]');
+  assert.equal(arrayArray.out, '["hallo"]');
+  assert.equal(arrayArray.outcome._tierReasons, undefined);
+
+  const objectText = await run('{"a":"ciao"}', 'Hallo');
+  assertInvalidOutput(objectText, 'top-level oggetto verso testo');
+
+  const objectArray = await run('{"a":"ciao"}', '["x"]');
+  assertInvalidOutput(objectArray, 'top-level oggetto verso array');
+
+  const objectDifferentKey = await run('{"a":"ciao"}', '{"b":"hallo"}');
+  assertInvalidOutput(objectDifferentKey, 'chiave rinominata');
+
+  const arrayShorter = await run('["ciao", "mondo"]', '["hallo"]');
+  assertInvalidOutput(arrayShorter, 'array piu corto');
+
+  const arrayLonger = await run('["ciao"]', '["hallo", "welt"]');
+  assertInvalidOutput(arrayLonger, 'array piu lungo');
+
+  for (const [source, answer, label] of [
+    [
+      '{"payload":{"title":"ciao"}}',
+      '{"payload":{"title":{"text":"hallo"}}}',
+      'stringa annidata trasformata in oggetto',
+    ],
+    [
+      '{"count":1}',
+      '{"count":"eins"}',
+      'numero annidato trasformato in stringa',
+    ],
+  ]) {
+    assertInvalidOutput(await run(source, answer), label);
+  }
+
+  const sameShape = await run(
+    '{"a":"ciao","count":1,"enabled":true,"empty":null,"nested":{"label":"salve"}}',
+    '{"nested":{"label":"hallo"},"empty":null,"enabled":false,"count":2,"a":"ciao in tedesco"}',
+  );
+  assert.equal(
+    sameShape.out,
+    '{"nested":{"label":"hallo"},"empty":null,"enabled":false,"count":2,"a":"ciao in tedesco"}',
+  );
+  assert.equal(sameShape.outcome._tierReasons, undefined);
+});
+
+test('translateWithCodexEngine accetta JSON raw equivalente a una sorgente in fence', async () => {
+  const outcome = {};
+  const out = await translateWithCodexEngine({
+    text: '```json\n{"a":"ciao"}\n```',
+    sourceLang: 'it',
+    targetLang: 'de',
+    call: async () => '{"a":"hallo"}',
+    _outcome: outcome,
+  });
+  assert.equal(out, '{"a":"hallo"}');
+  assert.equal(outcome.incomplete, undefined);
+  assert.equal(outcome._tierReasons, undefined);
+});
+
+test('translateWithCodexEngine confronta la forma JSON nei fence e limita la profondita', async () => {
+  const run = async (text, answer) => {
+    const outcome = {};
+    const out = await translateWithCodexEngine({
+      text,
+      sourceLang: 'it',
+      targetLang: 'de',
+      call: async () => answer,
+      _outcome: outcome,
+    });
+    return { out, outcome };
+  };
+
+  const fencedSource = '```json\n{"items":["ciao"],"title":"salve"}\n```';
+  const fencedSameShape = await run(
+    fencedSource,
+    '```json\n{"title":"hallo","items":["grüße"]}\n```',
+  );
+  assert.equal(fencedSameShape.out, '```json\n{"title":"hallo","items":["grüße"]}\n```');
+  assert.equal(fencedSameShape.outcome._tierReasons, undefined);
+
+  const fencedDifferentShape = await run(
+    fencedSource,
+    '```json\n{"title":"hallo","items":[] }\n```',
+  );
+  assert.equal(fencedDifferentShape.out, '');
+  assert.equal(fencedDifferentShape.outcome.incomplete, true);
+  assert.deepEqual(fencedDifferentShape.outcome._tierReasons, [{ provider: 'codex', reason: 'invalid-output' }]);
+
+  const nestedJson = (depth, leaf) => {
+    let value = leaf;
+    for (let i = 0; i < depth; i += 1) value = { value };
+    return JSON.stringify(value);
+  };
+  const deepResult = await run(nestedJson(33, 'ciao'), nestedJson(33, 'hallo'));
+  assert.equal(deepResult.out, '');
+  assert.equal(deepResult.outcome.incomplete, true);
+  assert.deepEqual(deepResult.outcome._tierReasons, [{ provider: 'codex', reason: 'invalid-output' }]);
+});
+
+test('translateWithCodexEngine registra l eco del prompt come meta-response', async () => {
+  const outcome = {};
+  const out = await translateWithCodexEngine({
+    text: 'Una frase di partenza.',
+    sourceLang: 'it',
+    targetLang: 'de',
+    call: async () => 'System instructions:\nYou are a professional translator.',
+    _outcome: outcome,
+  });
+  assert.equal(out, '');
+  assert.deepEqual(outcome._tierReasons, [{ provider: 'codex', reason: 'meta-response' }]);
+});
+
 // ── il campo articolo ────────────────────────────────────────────────────────
 
 test('translateFieldFreeMt conserva le righe con il bilanciatore di produzione', async () => {

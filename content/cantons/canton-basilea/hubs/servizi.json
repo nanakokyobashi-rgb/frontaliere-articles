@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "servizi",
-  "updatedAt": "2026-10-19T05:23:08.856Z",
-  "contentHash": "da3128f4a39c58de56d9b28dacb2b473b2f2598a30e5e49e4f2d19b31c25f956",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "53ef716c1d514e0fa9bd1017c6b6d2771108fbc938e390361ed18a3dc30dfb7d",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,13 +14,13 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-18T21:57:02.008Z",
+      "updatedAt": "2026-10-19T10:02:57.372Z",
       "keyFacts": 0
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-18T22:31:34.166Z",
-      "keyFacts": 0
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-19T13:13:42.861Z",
+      "keyFacts": 1
     }
   ],
   "locales": {
@@ -35,6 +35,11 @@
           "value": "680,20 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "4",
+          "note": "offerta mediana 580 CHF"
         }
       ],
       "dataBlocks": [
@@ -101,26 +106,38 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-18T21:57:02.008Z"
+          "updatedAt": "2026-10-19T10:02:57.372Z"
         },
         {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "Basel",
-              "value": "9 °C",
-              "detail": "oggi da 8 a 8 °C"
+              "label": "BL564",
+              "value": "8000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=893"
             },
             {
-              "label": "Liestal",
-              "value": "9 °C",
-              "detail": "oggi da 9 a 9 °C"
+              "label": "BL2787",
+              "value": "1000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1157"
+            },
+            {
+              "label": "BL13999",
+              "value": "160 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1158"
             }
           ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-18T22:31:34.166Z"
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         }
       ],
       "curatedArticles": [
@@ -208,7 +225,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -221,6 +238,11 @@
           "value": "680.20 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "4",
+          "note": "typical bid 580 CHF"
         }
       ],
       "dataBlocks": [
@@ -287,26 +309,38 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-18T21:57:02.008Z"
+          "updatedAt": "2026-10-19T10:02:57.372Z"
         },
         {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "Basel",
-              "value": "9 °C",
-              "detail": "today from 8 to 8 °C"
+              "label": "BL564",
+              "value": "8,000 CHF",
+              "detail": "current bid",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=893"
             },
             {
-              "label": "Liestal",
-              "value": "9 °C",
-              "detail": "today from 9 to 9 °C"
+              "label": "BL2787",
+              "value": "1,000 CHF",
+              "detail": "current bid",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1157"
+            },
+            {
+              "label": "BL13999",
+              "value": "160 CHF",
+              "detail": "current bid",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1158"
             }
           ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-18T22:31:34.166Z"
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +420,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -399,6 +433,11 @@
           "value": "680.20 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "4",
+          "note": "mittleres Gebot 580 CHF"
         }
       ],
       "dataBlocks": [
@@ -465,26 +504,38 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-18T21:57:02.008Z"
+          "updatedAt": "2026-10-19T10:02:57.372Z"
         },
         {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "Basel",
-              "value": "9 °C",
-              "detail": "heute 8 bis 8 °C"
+              "label": "BL564",
+              "value": "8’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=893"
             },
             {
-              "label": "Liestal",
-              "value": "9 °C",
-              "detail": "heute 9 bis 9 °C"
+              "label": "BL2787",
+              "value": "1’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1157"
+            },
+            {
+              "label": "BL13999",
+              "value": "160 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1158"
             }
           ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-18T22:31:34.166Z"
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         }
       ],
       "curatedArticles": [
@@ -564,7 +615,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -577,6 +628,11 @@
           "value": "680,20 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "4",
+          "note": "offre centrale 580 CHF"
         }
       ],
       "dataBlocks": [
@@ -643,26 +699,38 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-18T21:57:02.008Z"
+          "updatedAt": "2026-10-19T10:02:57.372Z"
         },
         {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "Basel",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 8 à 8 °C"
+              "label": "BL564",
+              "value": "8 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=893"
             },
             {
-              "label": "Liestal",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 9 à 9 °C"
+              "label": "BL2787",
+              "value": "1 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1157"
+            },
+            {
+              "label": "BL13999",
+              "value": "160 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1158"
             }
           ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-18T22:31:34.166Z"
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         }
       ],
       "curatedArticles": [
@@ -734,7 +802,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

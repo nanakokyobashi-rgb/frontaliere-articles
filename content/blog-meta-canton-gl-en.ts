@@ -21,6 +21,9 @@ const blogMetaCantonGlEn: Record<string, string> = {
     'blog.article.muehlehorn-strada-chiusa-ottobre.title': 'Mühlehorn: Alte Kerenzerstrasse closed from October 19',
     'blog.article.muehlehorn-strada-chiusa-ottobre.excerpt': 'Mühlehorn: full closure of Alte Kerenzerstrasse between Hanenchilchli and Rüteggli until October 23, 2026, at 5:00 p.m.',
     'blog.article.muehlehorn-strada-chiusa-ottobre.imageAlt': 'Illustration generated for this article',
+    'blog.article.kloentalerstrasse-cantiere-2026.title': 'Klöntalerstrasse: temporary closure of Staldengarten–Bützi',
+    'blog.article.kloentalerstrasse-cantiere-2026.excerpt': 'Construction work is planned on Klöntalerstrasse from October 21 to December 4, 2026: brief waits, closure for asphalting, and a detour via Sackberg.',
+    'blog.article.kloentalerstrasse-cantiere-2026.imageAlt': 'Roadworks on Klöntalerstrasse between Staldengarten and Bützi in Glarus',
 };
 
 export default blogMetaCantonGlEn;

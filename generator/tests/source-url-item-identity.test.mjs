@@ -47,10 +47,12 @@ import {
   checkItemOnPage,
   pageCarriesItem,
   pageTitleEvidence,
+  normalizeTitleEvidenceShare,
   shortHeadlineEvidence,
   shortHeadlineTokenPolicy,
   selectConsistentTitleEvidence,
   stripItemIdentity,
+  validateTitleEvidenceShape,
   withItemIdentity,
 } from '../scripts/lib/source-url-ledger.mjs';
 import { findCrossSectionSourceDuplicate } from '../scripts/lib/cross-section-dedup.mjs';
@@ -300,6 +302,40 @@ test('selectConsistentTitleEvidence rejects conflicting declarations before matc
   assert.equal(shortHeadlineEvidence(conflicting, matching), false);
   assert.equal(shortHeadlineEvidence(conflictingHtml, matching), false);
   assert.equal(shortHeadlineEvidence(`${matching}\r—`, matching), false);
+});
+
+test('title evidence rejects unsupported shapes before coercion', () => {
+  const matching = 'A 13: Stau';
+  const throwingObject = { toString() { throw new Error('must not stringify'); } };
+  const iteratorMaskedNestedArray = [[matching]];
+  iteratorMaskedNestedArray[Symbol.iterator] = function* () { yield matching; };
+
+  assert.equal(validateTitleEvidenceShape(matching), true);
+  assert.equal(validateTitleEvidenceShape([matching, 'A 13: STAU']), true);
+  assert.equal(validateTitleEvidenceShape([[matching]]), false);
+  assert.equal(validateTitleEvidenceShape(iteratorMaskedNestedArray), false);
+  assert.equal(validateTitleEvidenceShape([matching, {}]), false);
+  assert.equal(validateTitleEvidenceShape(throwingObject), false);
+  assert.equal(validateTitleEvidenceShape(Object.assign([], { 1: matching, length: 2 })), false);
+
+  assert.equal(selectConsistentTitleEvidence([[matching]]), '');
+  assert.equal(selectConsistentTitleEvidence(throwingObject), '');
+  assert.equal(pageCarriesItem('', matching, { titleEvidence: [[matching]] }), false);
+  assert.equal(pageCarriesItem('', matching, { titleEvidence: throwingObject }), false);
+});
+
+test('pageCarriesItem rejects non-finite or out-of-range evidence thresholds', () => {
+  assert.equal(normalizeTitleEvidenceShare(undefined), 0.6);
+  assert.equal(normalizeTitleEvidenceShare(0), 0);
+  assert.equal(normalizeTitleEvidenceShare(1), 1);
+  for (const invalid of [NaN, Infinity, -Infinity, -0.01, 1.01, null, '0.6']) {
+    assert.equal(normalizeTitleEvidenceShare(invalid), null, String(invalid));
+    assert.equal(
+      pageCarriesItem('unrelated text', 'alpha beta', { minShare: invalid }),
+      false,
+      `invalid minShare ${String(invalid)} must fail closed`,
+    );
+  }
 });
 
 test('pageCarriesItem excludes conflicting metadata from multi-word headline evidence', () => {

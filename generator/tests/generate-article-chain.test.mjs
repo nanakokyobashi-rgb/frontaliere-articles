@@ -1110,6 +1110,7 @@ function runChainStep({
   article = 'false',
   declared = 'true',
   rosterBlocked = 'false',
+  providerBlocked = 'false',
   sectionProduced = 'frontaliere',
   sectionRequested = 'frontaliere',
   depth = '0',
@@ -1163,6 +1164,7 @@ exit 0
         ARTICLE: article,
         DECLARED: declared,
         ROSTER_BLOCKED: rosterBlocked,
+        PROVIDER_BLOCKED: providerBlocked,
         SECTION_PRODUCED: sectionProduced,
         SECTION_REQUESTED: sectionRequested,
         CHAIN_DEPTH: depth,
@@ -1238,6 +1240,12 @@ test('LA GUARDIA STRUTTURALE: senza dichiarazione non parte MAI un anello', () =
     const r = runChainStep(outcome);
     assert.equal(r.dispatches.length, 0, `ha dispatchato su ${JSON.stringify(outcome)}`);
     assert.match(r.stdout, /roster esaurito/);
+    assert.equal(r.status, 0);
+  }
+  for (const outcome of [{ declared: 'true', providerBlocked: 'true' }, { declared: 'false', providerBlocked: 'true' }]) {
+    const r = runChainStep(outcome);
+    assert.equal(r.dispatches.length, 0, `ha dispatchato su ${JSON.stringify(outcome)}`);
+    assert.match(r.stdout, /pool AI condiviso temporaneamente indisponibile; si cede al cron/);
     assert.equal(r.status, 0);
   }
 });
@@ -1334,12 +1342,14 @@ test('lo step Chain non interpola nulla: e\' la regola che lo rende eseguibile q
   assert.ok(!/\$\{\{/.test(CHAIN_RUN));
 });
 
-test('lo step di generazione espone declared E roster_blocked, che vanno letti insieme', () => {
+test('lo step di generazione espone i blocchi noti separatamente dalla dichiarazione', () => {
   const gen = extractRun('Generate the article');
   assert.match(gen, /echo "declared=\$all_declared"/);
   assert.match(gen, /echo "roster_blocked=\$roster_blocked"/);
+  assert.match(gen, /echo "provider_blocked=\$provider_blocked"/);
   // `all_declared` resta true quando il roster non serve il prompt (exit 3
   // imposta solo `roster_blocked`): un successore deciso sul solo `declared`
   // ripartirebbe contro lo stesso muro.
   assert.match(CHAIN_RUN, /ROSTER_BLOCKED/);
+  assert.match(CHAIN_RUN, /PROVIDER_BLOCKED/);
 });

@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "fisco",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "fbc72cc274330763794e17d0b7e391016fef22ce7d788fc158997d4321706b6b",
+  "updatedAt": "2026-10-19T19:02:48.012Z",
+  "contentHash": "4020efef8b867da82f61838ea1639801f4353bc79407426506492da9685b2e98",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,10 +102,22 @@
       ],
       "curatedArticles": [
         {
+          "title": "Amministrazione fiscale Berna: chiusura dal 23 ottobre al 1 novembre 2026",
+          "url": "/articoli-berna/amministrazione-fiscale-berna-chiusura-2026/",
+          "excerpt": "L'Amministrazione fiscale del Canton Berna sospende i servizi dal 23 ottobre alle 16 fino al 1 novembre 2026 per rinnovo tecnologico.",
+          "date": "2026-10-19T06:59:44.908Z"
+        },
+        {
           "title": "Imposta trasferimenti Berna: franchigia 800k",
           "url": "/articoli-berna/simplificazione-imposta-trasferimento-berna/",
           "excerpt": "Il Governo propone l'uso non esclusivo e il rimborso entro 4 anni. Consultazione aperta fino al 7 gennaio 2027.",
           "date": "2026-10-07T06:54:25.689Z"
+        },
+        {
+          "title": "Berna mantiene la tassa ecclesiastica per le imprese",
+          "url": "/articoli-berna/berna-tassa-ecclesiastica/",
+          "excerpt": "Il Governo bernese ha preso atto della petizione per rendere volontaria la tassa ecclesiastica delle persone giuridiche.",
+          "date": "2026-10-19T06:36:37.308Z"
         },
         {
           "title": "Dichiarazione imposte svizzera: guida pratica 2026 a Berna",
@@ -136,18 +148,6 @@
           "url": "/articoli-svizzera/tasse-universitarie-berna-guida/",
           "excerpt": "Come verificare requisiti, scadenze e importi per le tasse universitarie nel Cantone di Berna: guida pratica per categorie e istituzioni.",
           "date": "2026-10-15T00:26:22.514Z"
-        },
-        {
-          "title": "Imposta successione e donazione Cantone Berna: aliquote",
-          "url": "/articoli-svizzera/imposta-successione-donazione-berna/",
-          "excerpt": "Guida alle aliquote per grado di parentela, esenzioni per coniugi e discendenti e termini di dichiarazione nel Cantone di Berna.",
-          "date": "2026-08-14T00:58:50.097Z"
-        },
-        {
-          "title": "Imposte cantonali nel Cantone di Berna: aliquote e deduzioni",
-          "url": "/articoli-svizzera/imposte-cantonal-berna-aliquote-deduzioni/",
-          "excerpt": "Le imposte cantonali nel Cantone di Berna sono gestite dall'amministrazione cantonale e hanno aliquote diverse in base allo scaglione di reddito.",
-          "date": "2026-08-12T06:10:54.824Z"
         }
       ],
       "latestCantonArticles": [],
@@ -173,7 +173,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T19:02:48.012Z"
     },
     "en": {
       "canton": "BE",
@@ -258,10 +258,22 @@
       ],
       "curatedArticles": [
         {
+          "title": "Bern tax administration: closure from October 23 to November 1, 2026",
+          "url": "/en/bern-articles/bern-tax-administration-closure-2026/",
+          "excerpt": "The tax administration of the Canton of Bern will suspend services from 4 p.m.",
+          "date": "2026-10-19T06:59:44.908Z"
+        },
+        {
           "title": "Bern transfer tax: 800k exemption",
           "url": "/en/bern-articles/berns-transfer-tax-simplification/",
           "excerpt": "The Government proposes non-exclusive use and repayment within 4 years. Consultation open until January 7, 2027.",
           "date": "2026-10-07T06:54:25.689Z"
+        },
+        {
+          "title": "Bern maintains the church tax for businesses",
+          "url": "/en/bern-articles/bern-church-tax-legal-entities/",
+          "excerpt": "The Bernese government has taken note of the petition to make the church tax for legal entities voluntary.",
+          "date": "2026-10-19T06:36:37.308Z"
         },
         {
           "title": "Swiss tax return: practical guide for 2026 in Bern",
@@ -292,18 +304,6 @@
           "url": "/en/swiss-articles/university-fees-bern-guide/",
           "excerpt": "How to check requirements, deadlines and amounts for tuition fees in the Canton of Bern: practical guide by categories and institutions.",
           "date": "2026-10-15T00:26:22.514Z"
-        },
-        {
-          "title": "Inheritance and donation tax Canton Bern: rates",
-          "url": "/en/swiss-articles/inheritance-gift-tax-bern-rates/",
-          "excerpt": "Guide to rates for degree of kinship, exemptions for spouses and descendants and terms of declaration in the Canton of Bern.",
-          "date": "2026-08-14T00:58:50.097Z"
-        },
-        {
-          "title": "Cantonal taxes in the Canton of Bern: rates and deductions",
-          "url": "/en/swiss-articles/imposte-cantonal-bern-aliquote-deduzioni/",
-          "excerpt": "Cantonal taxes in the Canton of Bern are managed by the cantonal administration and have different rates based on the income bracket.",
-          "date": "2026-08-12T06:10:54.824Z"
         }
       ],
       "latestCantonArticles": [],
@@ -329,7 +329,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T19:02:48.012Z"
     },
     "de": {
       "canton": "BE",
@@ -414,10 +414,22 @@
       ],
       "curatedArticles": [
         {
+          "title": "Steuerverwaltung Bern: Schließung vom 23. Oktober bis zum 1. November 2026",
+          "url": "/de/bern-artikel/steuerverwaltung-bern-schliessung-2026/",
+          "excerpt": "Die Steuerverwaltung des Kantons Bern setzt die Dienstleistungen vom 23.",
+          "date": "2026-10-19T06:59:44.908Z"
+        },
+        {
           "title": "Handänderungssteuer Bern: Freibetrag 800k",
           "url": "/de/bern-artikel/berner-handaenderungssteuer-vereinfachung/",
           "excerpt": "Die Regierung schlägt eine nicht ausschließliche Nutzung und eine Rückerstattung innerhalb von 4 Jahren vor. Die Vernehmlassung ist bis zum 7. Januar 2027 offen.",
           "date": "2026-10-07T06:54:25.689Z"
+        },
+        {
+          "title": "Bern behält die Kirchensteuer für Unternehmen bei",
+          "url": "/de/bern-artikel/bern-kirchensteuer-juristische-personen/",
+          "excerpt": "Die Berner Regierung hat die Petition zur Freiwilligkeit der Kirchensteuer für juristische Personen zur Kenntnis genommen.",
+          "date": "2026-10-19T06:36:37.308Z"
         },
         {
           "title": "Schweizer Steuererklärung: praktischer Leitfaden 2026 in Bern",
@@ -448,18 +460,6 @@
           "url": "/de/schweiz-artikel/studiengebuehren-bern-guide/",
           "excerpt": "Wie man Anforderungen, Fristen und Beträge für Studiengebühren im Kanton Bern überprüft: praktischer Leitfaden nach Kategorien und Institutionen.",
           "date": "2026-10-15T00:26:22.514Z"
-        },
-        {
-          "title": "Erbschafts- und Schenkungssteuer Kanton Bern: Steuersätze",
-          "url": "/de/schweiz-artikel/erbschafts-schenkungssteuer-bern-steuersatz/",
-          "excerpt": "Leitfaden zu den Sätzen nach Verwandtschaftsgrad, Befreiungen für Ehegatten und Nachkommen und Erklärungsfristen im Kanton Bern.",
-          "date": "2026-08-14T00:58:50.097Z"
-        },
-        {
-          "title": "Kantonale Steuern im Kanton Bern: Steuersätze und Abzüge",
-          "url": "/de/schweiz-artikel/imposten-cantonal-berner-ertragssteuern-satz-berechnung/",
-          "excerpt": "Die kantonalen Steuern im Kanton Bern werden von der kantonalen Verwaltung verwaltet und haben je nach Einkommensstufe unterschiedliche Sätze.",
-          "date": "2026-08-12T06:10:54.824Z"
         }
       ],
       "latestCantonArticles": [],
@@ -485,7 +485,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T19:02:48.012Z"
     },
     "fr": {
       "canton": "BE",
@@ -570,10 +570,22 @@
       ],
       "curatedArticles": [
         {
+          "title": "Administration fiscale de Berne : fermeture du 23 octobre au 1er novembre 2026",
+          "url": "/fr/articles-berne/administration-fiscale-berne-fermeture-2026/",
+          "excerpt": "L'Administration fiscale du canton de Berne suspend ses services du 23 octobre à 16 h au 1er novembre 2026 pour une mise à niveau technologique.",
+          "date": "2026-10-19T06:59:44.908Z"
+        },
+        {
           "title": "Impôt sur les transferts à Berne : franchise de 800k",
           "url": "/fr/articles-berne/simplification-impot-transfer-berne/",
           "excerpt": "Le Gouvernement propose l’usage non exclusif et le remboursement dans un délai de 4 ans. Consultation ouverte jusqu’au 7 janvier 2027.",
           "date": "2026-10-07T06:54:25.689Z"
+        },
+        {
+          "title": "Berne maintient l'impôt ecclésiastique pour les entreprises",
+          "url": "/fr/articles-berne/berne-taxe-eglise-personnes-morales/",
+          "excerpt": "Le Gouvernement bernois a pris acte de la pétition visant à rendre volontaire l'impôt ecclésiastique des personnes morales.",
+          "date": "2026-10-19T06:36:37.308Z"
         },
         {
           "title": "Déclaration fiscale suisse : guide pratique 2026 à Berne",
@@ -604,18 +616,6 @@
           "url": "/fr/articles-suisse/frais-scolarite-berne-guide/",
           "excerpt": "Comment vérifier les exigences, les délais et les montants des frais de scolarité dans le canton de Berne : guide pratique par catégories et institutions.",
           "date": "2026-10-15T00:26:22.514Z"
-        },
-        {
-          "title": "Impôt succession et donation Canton de Berne : taux",
-          "url": "/fr/articles-suisse/impot-succession-donation-berne-taux/",
-          "excerpt": "Guide des taux par degré de parenté, exemptions pour conjoints et descendants et délais de déclaration dans le canton de Berne.",
-          "date": "2026-08-14T00:58:50.097Z"
-        },
-        {
-          "title": "Impôts cantonaux dans le canton de Berne : taux et déductions",
-          "url": "/fr/articles-suisse/impots-cantonaux-bernais-impots-surtaxes-berechnung/",
-          "excerpt": "Les impôts cantonaux dans le canton de Berne sont gérés par l'administration cantonale et ont des taux différents en fonction de la tranche de revenu.",
-          "date": "2026-08-12T06:10:54.824Z"
         }
       ],
       "latestCantonArticles": [],
@@ -641,7 +641,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T19:02:48.012Z"
     }
   }
 }

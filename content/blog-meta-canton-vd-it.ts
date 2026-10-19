@@ -53,7 +53,7 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.truffe-falsi-banchieri-lausanna.imageAlt': 'Lausanne nel Canton Vaud, teatro delle truffe dei falsi poliziotti e banchieri',
     'blog.article.truffa-falsi-poliziotti-vaud.title': 'Sette milioni truffati nel Vaud da falsi agenti',
     'blog.article.truffa-falsi-poliziotti-vaud.excerpt': 'Quasi 2.300 casi dall\'inizio dell\'anno Danno complessivo: CHF 7 milioni Oltre 100 interpellati, 19 in detenzione 16 interpellazioni a inizio ottobre, 5',
-    'blog.article.truffa-falsi-poliziotti-vaud.imageAlt': 'Anziano che riceve una chiamata sospetta da finto polizioso sul divano, con sfondo di una casa tipica del canton Vaud',
+    'blog.article.truffa-falsi-poliziotti-vaud.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonVdIt;

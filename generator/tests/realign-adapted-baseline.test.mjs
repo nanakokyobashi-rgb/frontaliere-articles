@@ -577,6 +577,15 @@ test('workflow: il push e\' condizionato al diff del SOLO manifest (e del ratche
   assert.doesNotMatch(run, /\$\{\{/);
 });
 
+test('workflow: ogni retry del riallineamento usa il commit appena restituito dal fetch', () => {
+  assert.equal((yml.match(/git checkout --detach FETCH_HEAD/g) ?? []).length, 2);
+  assert.doesNotMatch(
+    yml,
+    /git checkout --detach origin\/main/,
+    'ogni retry deve eseguire il checkout sul commit restituito dal fetch, non sul ref remoto locale stale',
+  );
+});
+
 test('workflow: si pusha solo con rc 0 o 3; un\'eccezione (rc 1) non porta il manifest fuori dal runner', () => {
   const job = jobBlock('realign-adapted');
   const gate = job.indexOf('if [ "$rc" != "0" ] && [ "$rc" != "3" ]; then');

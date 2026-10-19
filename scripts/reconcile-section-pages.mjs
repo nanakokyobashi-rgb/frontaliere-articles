@@ -161,7 +161,9 @@ export function planSectionBackfill(section, pages, dateById, cap, orphanPages =
   const sectionMissing = missing.filter((page) => page.kind === 'section').map((page) => page.path);
   const selected = missingIds.slice(0, n);
   const selectedIds = new Set(selected);
-  const knownMissingPagePaths = [...new Set(missing.map((page) => page.path))];
+  const missingOrphanPagePaths = orphanPages.filter((page) => page.state === 'missing').map((page) => page.path);
+  const expectedMissingPagePaths = [...new Set(missing.map((page) => page.path))];
+  const knownMissingPagePaths = [...new Set([...missing.map((page) => page.path), ...missingOrphanPagePaths])];
   const missingPagePaths = missing
     .filter((page) => page.kind === 'section' || selectedIds.has(page.id))
     .map((page) => page.path);
@@ -178,12 +180,13 @@ export function planSectionBackfill(section, pages, dateById, cap, orphanPages =
     missingIds,
     selected,
     missingPagePaths,
+    expectedMissingPagePaths,
     knownMissingPagePaths,
     leftover: missingIds.slice(n),
     // Un giro di sola sezione (ids vuoti) serve quando manca una pagina di
     // sezione e nessun articolo: con articoli selezionati la sezione viene
     // comunque resa per intero dallo stesso publish.
-    dispatch: missingIds.length > 0 || sectionMissing.length > 0 || orphaned.length > 0,
+    dispatch: missingIds.length > 0 || sectionMissing.length > 0 || orphaned.length > 0 || missingOrphanPagePaths.length > 0,
   };
 }
 
@@ -449,7 +452,7 @@ export async function main(argv = process.argv.slice(2)) {
     sections: report.sections.length,
     dispatch: report.sections.filter((s) => s.dispatch).length,
     missing: report.sections.reduce((n, s) => n + s.missingIds.length, 0),
-    missingPages: report.sections.reduce((n, s) => n + (s.knownMissingPagePaths?.length ?? 0), 0),
+    missingPages: report.sections.reduce((n, s) => n + (s.expectedMissingPagePaths?.length ?? 0), 0),
     leftover: report.sections.reduce((n, s) => n + s.leftover.length, 0),
     orphaned: report.sections.reduce((n, s) => n + s.orphaned.length, 0),
     manifestUnknown: report.sections.filter((s) => s.pageManifest !== 'ok').length,

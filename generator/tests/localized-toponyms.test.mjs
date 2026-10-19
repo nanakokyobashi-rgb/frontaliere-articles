@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import {
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYMS,
+  OFFICIAL_NAME_MARKERS,
   extractArticleProjectionText,
   findArticleLocalizedToponymMismatches,
   findLocalizedToponymMismatches,
@@ -58,6 +59,12 @@ test('la tabella canonica conserva gli esonimi richiesti', () => {
   assert.deepEqual(byCode.get('SG').canton, {
     it: ['San Gallo'], en: ['St. Gallen'], de: ['St. Gallen'], fr: ['Saint-Gall'],
   });
+});
+
+test('i marcatori coprono i nomi ufficiali usati dalle label nav', () => {
+  for (const marker of ['dipartimento delle finanze ed economia', 'modello redditi']) {
+    assert.equal(OFFICIAL_NAME_MARKERS.has(marker), true, marker);
+  }
 });
 
 test('rileva un esonimo copiato e accetta la forma giusta', () => {

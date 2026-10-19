@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-10-19T05:23:08.856Z",
-  "contentHash": "37d3ffefad096f2d7c9174fc69d98d742cacd41091b9d1c9d067aa97c52b13ba",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "d104fb4cf2bae90e44ee1455c7faef5822936e381cd779b956b58f27711b23ca",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-18T20:41:22.356Z",
+      "updatedAt": "2026-10-19T13:13:42.861Z",
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-18T22:31:34.166Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T19:43:29.238Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -97,37 +92,13 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-18T20:41:22.356Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Appenzell",
-              "value": "9 °C",
-              "detail": "oggi da 9 a 9 °C"
-            },
-            {
-              "label": "Herisau",
-              "value": "8 °C",
-              "detail": "oggi da 8 a 8 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-18T22:31:34.166Z"
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
-            {
-              "label": "Arbeitslosigkeit Ende September 2026",
-              "date": "2026-10-06T05:45:00.000Z",
-              "url": "https://www.ai.ch/themen/wirtschaft-und-arbeit/arbeit/aktuelles/arbeitslosigkeit-ende-september-2026"
-            },
             {
               "label": "Breite Mehrheit begrüsst Stossrichtung des Spitalverbundsgesetzes",
               "date": "2026-09-29",
@@ -140,11 +111,6 @@
             },
             {
               "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
-              "date": "2026-09-24T15:53:00.000Z",
-              "url": "https://www.ai.ch/politik/standeskommission/mitteilungen/aktuelles/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen"
-            },
-            {
-              "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
               "date": "2026-09-24",
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             },
@@ -152,9 +118,14 @@
               "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
               "date": "2026-09-24",
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
+            },
+            {
+              "label": "Bruno Streule wird neuer Leiter des Amts für Gesundheit",
+              "date": "2026-08-26",
+              "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -242,7 +213,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -312,37 +283,13 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-18T20:41:22.356Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Appenzell",
-              "value": "9 °C",
-              "detail": "today from 9 to 9 °C"
-            },
-            {
-              "label": "Herisau",
-              "value": "8 °C",
-              "detail": "today from 8 to 8 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-18T22:31:34.166Z"
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
-            {
-              "label": "Arbeitslosigkeit Ende September 2026",
-              "date": "2026-10-06T05:45:00.000Z",
-              "url": "https://www.ai.ch/themen/wirtschaft-und-arbeit/arbeit/aktuelles/arbeitslosigkeit-ende-september-2026"
-            },
             {
               "label": "Breite Mehrheit begrüsst Stossrichtung des Spitalverbundsgesetzes",
               "date": "2026-09-29",
@@ -355,11 +302,6 @@
             },
             {
               "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
-              "date": "2026-09-24T15:53:00.000Z",
-              "url": "https://www.ai.ch/politik/standeskommission/mitteilungen/aktuelles/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen"
-            },
-            {
-              "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
               "date": "2026-09-24",
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             },
@@ -367,9 +309,14 @@
               "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
               "date": "2026-09-24",
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
+            },
+            {
+              "label": "Bruno Streule wird neuer Leiter des Amts für Gesundheit",
+              "date": "2026-08-26",
+              "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -449,7 +396,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -519,37 +466,13 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-18T20:41:22.356Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Appenzell",
-              "value": "9 °C",
-              "detail": "heute 9 bis 9 °C"
-            },
-            {
-              "label": "Herisau",
-              "value": "8 °C",
-              "detail": "heute 8 bis 8 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-18T22:31:34.166Z"
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
-            {
-              "label": "Arbeitslosigkeit Ende September 2026",
-              "date": "2026-10-06T05:45:00.000Z",
-              "url": "https://www.ai.ch/themen/wirtschaft-und-arbeit/arbeit/aktuelles/arbeitslosigkeit-ende-september-2026"
-            },
             {
               "label": "Breite Mehrheit begrüsst Stossrichtung des Spitalverbundsgesetzes",
               "date": "2026-09-29",
@@ -562,11 +485,6 @@
             },
             {
               "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
-              "date": "2026-09-24T15:53:00.000Z",
-              "url": "https://www.ai.ch/politik/standeskommission/mitteilungen/aktuelles/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen"
-            },
-            {
-              "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
               "date": "2026-09-24",
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             },
@@ -574,9 +492,14 @@
               "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
               "date": "2026-09-24",
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
+            },
+            {
+              "label": "Bruno Streule wird neuer Leiter des Amts für Gesundheit",
+              "date": "2026-08-26",
+              "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -656,7 +579,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -726,37 +649,13 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-18T20:41:22.356Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Appenzell",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 9 à 9 °C"
-            },
-            {
-              "label": "Herisau",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 8 à 8 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-18T22:31:34.166Z"
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
-            {
-              "label": "Arbeitslosigkeit Ende September 2026",
-              "date": "2026-10-06T05:45:00.000Z",
-              "url": "https://www.ai.ch/themen/wirtschaft-und-arbeit/arbeit/aktuelles/arbeitslosigkeit-ende-september-2026"
-            },
             {
               "label": "Breite Mehrheit begrüsst Stossrichtung des Spitalverbundsgesetzes",
               "date": "2026-09-29",
@@ -769,11 +668,6 @@
             },
             {
               "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
-              "date": "2026-09-24T15:53:00.000Z",
-              "url": "https://www.ai.ch/politik/standeskommission/mitteilungen/aktuelles/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen"
-            },
-            {
-              "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
               "date": "2026-09-24",
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             },
@@ -781,9 +675,14 @@
               "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
               "date": "2026-09-24",
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
+            },
+            {
+              "label": "Bruno Streule wird neuer Leiter des Amts für Gesundheit",
+              "date": "2026-08-26",
+              "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -855,7 +754,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }
