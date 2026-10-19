@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-19T14:06:02.326Z",
-  "contentHash": "8cb9258701086c58b57f98845cf27a3aff90f7c83868042976af161ef379eb5a",
+  "updatedAt": "2026-10-19T17:59:19.762Z",
+  "contentHash": "a50bde1a971397564cf9d95ddfc903b7959f88ac615b21111bb7e864cc13ec11",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -21,11 +21,6 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-19T04:39:38.933Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-19T04:57:02.436Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -150,20 +145,6 @@
           "updatedAt": "2026-10-19T04:39:38.933Z"
         },
         {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "9 °C",
-              "detail": "oggi da 9 a 15 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-19T04:57:02.436Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -279,7 +260,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "en": {
       "canton": "ZH",
@@ -397,20 +378,6 @@
           "updatedAt": "2026-10-19T04:39:38.933Z"
         },
         {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "9 °C",
-              "detail": "today from 9 to 15 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-19T04:57:02.436Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -522,7 +489,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "de": {
       "canton": "ZH",
@@ -640,20 +607,6 @@
           "updatedAt": "2026-10-19T04:39:38.933Z"
         },
         {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "9 °C",
-              "detail": "heute 9 bis 15 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-19T04:57:02.436Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -765,7 +718,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "fr": {
       "canton": "ZH",
@@ -883,20 +836,6 @@
           "updatedAt": "2026-10-19T04:39:38.933Z"
         },
         {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 9 à 15 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-19T04:57:02.436Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -1004,7 +943,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     }
   }
 }
