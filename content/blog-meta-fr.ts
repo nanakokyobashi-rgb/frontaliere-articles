@@ -13503,6 +13503,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.sagra-zucca-castagna-cunardo.title': 'À Cunardo, la cinquième fête de la courge et de la châtaigne',
     'blog.article.sagra-zucca-castagna-cunardo.excerpt': 'Cinquième édition à la Baita del Fondista de Cunardo Du vendredi 23 au dimanche 25 octobre Dîner du vendredi : nouveauté du programme Samedi, musique à partir de 21 h Quoi : fête',
     'blog.article.sagra-zucca-castagna-cunardo.imageAlt': 'Fête de la citrouille et de la châtaigne à la Baita del Fondista à Cunardo',
+    'blog.article.corsi-ticino-famiglia-rendimento.title': 'Formation des frontaliers 2026 : cours, reconversion et famille',
+    'blog.article.corsi-ticino-famiglia-rendimento.excerpt': 'Le nouvel Accord sur les frontaliers est en vigueur depuis le 1er janvier 2024 : comparaison entre anciens et nouveaux frontaliers, impôt à la source et reconversion pour les familles avec enfants.',
+    'blog.article.corsi-ticino-famiglia-rendimento.imageAlt': 'Salle de formation professionnelle avec vue sur le paysage du Mendrisiotto',
 };
 
 export default blogMetaFr;

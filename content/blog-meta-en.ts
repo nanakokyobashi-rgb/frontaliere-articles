@@ -13501,6 +13501,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.sagra-zucca-castagna-cunardo.title': 'The fifth pumpkin and chestnut festival in Cunardo',
     'blog.article.sagra-zucca-castagna-cunardo.excerpt': 'Fifth edition at the Baita del Fondista di Cunardo From Friday, October 23 to Sunday, October 25 Friday dinner: new addition to the program Saturday music from 21 What: Festival',
     'blog.article.sagra-zucca-castagna-cunardo.imageAlt': 'Pumpkin and chestnut festival at Baita del Fondista in Cunardo',
+    'blog.article.corsi-ticino-famiglia-rendimento.title': 'Cross-Border Worker Training 2026: Courses, Reskilling and Family',
+    'blog.article.corsi-ticino-famiglia-rendimento.excerpt': 'The New Cross-Border Commuters Agreement has been in force since January 1, 2024: comparison between old and new cross-border commuters, withholding tax, and reclassification for families with children.',
+    'blog.article.corsi-ticino-famiglia-rendimento.imageAlt': 'Vocational training classroom overlooking the Mendrisiotto landscape',
 };
 
 export default blogMetaEn;

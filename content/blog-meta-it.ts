@@ -13502,6 +13502,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.sagra-zucca-castagna-cunardo.title': 'A Cunardo la quinta Sagra della zucca e della castagna',
     'blog.article.sagra-zucca-castagna-cunardo.excerpt': 'Quinta edizione alla Baita del Fondista di Cunardo Da venerdì 23 a domenica 25 ottobre Cena del venerdì: novità del programma Sabato musica dalle 21 Cosa: Sagra',
     'blog.article.sagra-zucca-castagna-cunardo.imageAlt': 'Sagra della zucca e della castagna alla Baita del Fondista di Cunardo',
+    'blog.article.corsi-ticino-famiglia-rendimento.title': 'Formazione frontalieri 2026: corsi, riqualifica e famiglia',
+    'blog.article.corsi-ticino-famiglia-rendimento.excerpt': 'Il Nuovo Accordo Frontalieri è in vigore dal 1° gennaio 2024: confronto tra vecchi e nuovi frontalieri, imposta alla fonte e riqualifica per famiglie con figli.',
+    'blog.article.corsi-ticino-famiglia-rendimento.imageAlt': 'Aula di formazione professionale con vista sul paesaggio del Mendrisiotto',
 };
 
 export default blogMetaIt;

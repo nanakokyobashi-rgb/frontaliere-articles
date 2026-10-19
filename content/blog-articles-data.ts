@@ -45502,6 +45502,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'corsi-ticino-famiglia-rendimento',
+ category: 'pratico',
+ date: '2026-10-19T08:07:09.140Z',
+ image: '/images/blog/article-corsi-ticino-famiglia-rendimento.webp',
+ hasCalculator: true,
+ articleType: 'evergreen',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

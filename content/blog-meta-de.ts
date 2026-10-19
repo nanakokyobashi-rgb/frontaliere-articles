@@ -13500,6 +13500,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.sagra-zucca-castagna-cunardo.title': 'In Cunardo: das fünfte Kürbis- und Kastanienfest',
     'blog.article.sagra-zucca-castagna-cunardo.excerpt': 'Fünfte Ausgabe in der Baita del Fondista in Cunardo Von Freitag, dem 23.',
     'blog.article.sagra-zucca-castagna-cunardo.imageAlt': 'Kürbis- und Kastanienfest in der Baita del Fondista in Cunardo',
+    'blog.article.corsi-ticino-famiglia-rendimento.title': 'Weiterbildung für Grenzgänger 2026: Kurse & Familie',
+    'blog.article.corsi-ticino-famiglia-rendimento.excerpt': 'Das Neue Grenzgängerabkommen ist seit dem 1.',
+    'blog.article.corsi-ticino-famiglia-rendimento.imageAlt': 'Klassenzimmer für Berufsausbildung mit Blick auf die Landschaft des Mendrisiotto',
 };
 
 export default blogMetaDe;
