@@ -9,8 +9,8 @@
  * costruzione ogni difetto che non e' ancora X.
  *
  * Qui si prova la regola invertita: **se non c'e' un articolo, e' rosso, tranne
- * quando OGNI tentativo ha dichiarato una ragione legittima** uscendo
- * con `EXIT_NO_ARTICLE_DECLARED`.
+ * quando ogni tentativo dichiara un esito legittimo** — locale alla sezione
+ * (`EXIT_NO_ARTICLE_DECLARED`, 4) o condiviso fra sezioni (codice 5).
  *
  * TRE ORACOLI, TUTTI SUL CODICE DI USCITA:
  *
@@ -48,6 +48,7 @@ import { fileURLToPath } from 'node:url';
 import {
   EXIT_ROSTER_CANNOT_SERVE_PROMPT,
   EXIT_NO_ARTICLE_DECLARED,
+  EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
   isLegitimateQuotaDeferral,
   isTransientMajority,
   quotaDeferralShare,
@@ -57,6 +58,7 @@ import {
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, '..', '..');
 const WORKFLOW = path.join(REPO, '.github', 'workflows', 'generate-article.yml');
+const CORE_WORKFLOW = path.join(REPO, '.github', 'workflows', 'generate-article-core.yml');
 const CREATE_ARTICLE = path.join(REPO, 'generator', 'scripts', 'create-article.mjs');
 
 // ── 1. LA DECISIONE: un differimento per quota va DIMOSTRATO ────────────────
@@ -291,22 +293,23 @@ test('senza il campo nuovo il verdetto e\' quello di oggi, byte per byte (#805)'
 
 // ── 2. IL CABLAGGIO in create-article.mjs ──────────────────────────────────
 
-test('le dieci ragioni legittime del corpus escono TUTTE con la costante, e nessun\'altra', () => {
+test('le ragioni locali alla sezione e quelle del pool condiviso usano codici distinti', () => {
   const src = fs.readFileSync(CREATE_ARTICLE, 'utf8');
   // L'invariante e' la COSTANTE, non il nome della funzione che esce: dal
   // 2026-08-18 le uscite passano da `exitAfterFlush()`, che scrive il ledger
   // dei punteggi prima di terminare (`process.exit()` non fa scattare
   // `beforeExit`, quindi i successi dell'ultima finestra si perdevano). Il
-  // corpus ha sei ragioni comuni, una ragione cantonale senza pool evergreen,
-  // una scadenza del budget dopo il pool news e, dal ramo fail-closed del
-  // verifier, una ragione esplicita per l'indisponibilita' del fact-check. Il
-  // conteggio resta esatto: ogni nuova uscita deve aggiungere anche la propria
-  // prova semantica qui sotto, non solo aumentare il numero.
+  // Le ragioni locali alla sezione conservano il codice 4; verifier, cover
+  // verifier e quota usano il codice 5 quando il servizio condiviso non regge.
   const declared = src.match(/(?:process\.exit|await exitAfterFlush)\(EXIT_NO_ARTICLE_DECLARED\)/g) || [];
   assert.equal(
-    declared.length, 10,
-    'le dieci ragioni legittime (3 evergreen + cantonale senza pool evergreen + budget + duplicato + qualita\' + quota + fact-check indisponibile + copertina non verificabile) devono uscire con la costante condivisa',
+    declared.length, 9,
+    'le nove ragioni locali alla sezione devono mantenere il codice 4',
   );
+  const providerUnavailable = src.match(/await exitAfterFlush\(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE\)/g) || [];
+  assert.equal(providerUnavailable.length, 3, 'fact-check, cover verifier e quota devono dichiarare il blocco condiviso col codice 5');
+  const markedProviderUnavailable = src.match(/exitCode:\s*EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,\s*exitDisposition:\s*RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION/g) || [];
+  assert.equal(markedProviderUnavailable.length, 3, 'ogni exit 5 deve lasciare il marker producer-owned nella run card');
   assert.ok(
     /CANTON_EVERGREEN_POOL_DISABLED[\s\S]{0,1500}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/.test(src),
     'la ragione cantonale e\' dichiarata subito dopo il suo marcatore',
@@ -315,9 +318,20 @@ test('le dieci ragioni legittime del corpus escono TUTTE con la costante, e ness
     /else if \(!newsSuccess && !candidateSuccess && wallBudgetExceeded\(\)\)[\s\S]{0,1800}finalizeRunReport\('deferred'[\s\S]{0,500}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/.test(src),
     'la scadenza del budget dopo il pool news deve dichiarare il differimento prima di uscire',
   );
+  const sharedFactCheck = src.indexOf('if (isSharedFactCheckUnavailableError(e))');
+  const localFactCheck = src.indexOf('if (isFactCheckUnavailableError(e))', sharedFactCheck);
+  const coverVerifier = src.indexOf('if (isSharedArticleCoverVerifierUnavailableError(e))', localFactCheck);
+  assert.ok(sharedFactCheck >= 0 && localFactCheck > sharedFactCheck && coverVerifier > localFactCheck,
+    'il fact-check deve distinguere l outage condiviso dal verdetto incompleto locale');
+  assert.match(src.slice(sharedFactCheck, localFactCheck), /await exitAfterFlush\(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE\)/,
+    'l esaurimento transitorio del roster deve dichiarare il blocco condiviso');
+  assert.match(src.slice(localFactCheck, coverVerifier), /await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/,
+    'un fact-check senza verdetto utilizzabile deve lasciare provare la sezione gemella');
+  assert.doesNotMatch(src.slice(localFactCheck, coverVerifier), /EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE/,
+    'un risultato incompleto non deve fermare la catena come outage condiviso');
   assert.ok(
-    /if \(isFactCheckUnavailableError\(e\)\)[\s\S]{0,1200}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/.test(src),
-    'l indisponibilita\' del fact-check deve dichiarare il differimento fail-closed prima degli altri rami',
+    /if \(isSharedArticleCoverVerifierUnavailableError\(e\)\)[\s\S]{0,1200}await exitAfterFlush\(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE\)/.test(src),
+    'l\'indisponibilita\' del cover verifier deve dichiarare il blocco condiviso prima dei retry locali',
   );
   assert.ok(
     /if \(isRetryableArticleCoverError\(e\)\)[\s\S]{0,1200}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/.test(src),
@@ -325,6 +339,23 @@ test('le dieci ragioni legittime del corpus escono TUTTE con la costante, e ness
   );
   // Il letterale scritto a mano e' la via con cui le due meta' divergono.
   assert.ok(!/(?:process\.exit|exitAfterFlush)\(4\)/.test(src), 'nessun `process.exit(4)` letterale: solo la costante');
+});
+
+test('entrambi i workflow richiedono la run card producer-owned prima di assorbire exit 5', () => {
+  for (const file of [WORKFLOW, CORE_WORKFLOW]) {
+    const workflow = fs.readFileSync(file, 'utf8');
+    const guardStart = workflow.indexOf('if [ "$rc" = "5" ]; then');
+    const guardEnd = workflow.indexOf('\n            fi', guardStart);
+    assert.ok(guardStart >= 0 && guardEnd > guardStart, `${path.basename(file)}: guard exit 5 non trovato`);
+    const guard = workflow.slice(guardStart, guardEnd);
+    assert.match(guard, /validate-shared-provider-exit\.mjs/);
+    assert.match(guard, /"\$run_id" "\$run_attempt"/);
+    assert.match(guard, /all_declared=false/);
+    assert.match(guard, /provider_blocked=true/);
+    assert.match(workflow, /if ! rm -f "\$RUN_CARD_FILE"; then/, `${path.basename(file)} deve rimuovere card stale in modo fail-closed`);
+    assert.match(workflow, /run_id="\$\{GITHUB_RUN_ID:-local\}"/);
+    assert.match(workflow, /run_attempt="\$\{GITHUB_RUN_ATTEMPT:-1\}"/);
+  }
 });
 
 test('il differimento per quota e\' subordinato alla prova, e il ramo rosso esiste', () => {
@@ -336,6 +367,11 @@ test('il differimento per quota e\' subordinato alla prova, e il ramo rosso esis
   assert.ok(
     /if\s*\(isLegitimateQuotaDeferral\(e\)\)/.test(src),
     'e deve essere subordinato alla prova che la quota sia davvero la causa dominante',
+  );
+  assert.match(
+    src,
+    /if\s*\(isLegitimateQuotaDeferral\(e\)\)[\s\S]{0,800}await exitAfterFlush\(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE\)/,
+    'la quota vera deve fermare i retry immediati sulla sezione gemella',
   );
   // Il marker machine-readable e' cio' che un watchdog leggera': deve esserci.
   assert.ok(src.includes('::error::roster-down-not-deferrable:'), 'il rifiuto del differimento deve essere osservabile');
@@ -392,6 +428,7 @@ function extractGenerateRunBlock() {
  */
 function runGenerateBlock({
   nodeExit, exitPerAttempt = null, writesArticle = false, writesOnAttempt = 1, budgetS = '64',
+  writeSharedProviderMarker = false,
 }) {
   const block = extractGenerateRunBlock();
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'no-article-'));
@@ -404,14 +441,26 @@ function runGenerateBlock({
     // Un contatore su file: lo stub e' un processo nuovo a ogni tentativo.
     const counter = path.join(dir, 'attempt-count');
     const codes = exitPerAttempt || [nodeExit, nodeExit];
+    const markerWrite = writeSharedProviderMarker ? [
+      'if [ "$n" = "1" ]; then',
+      '  mkdir -p "$(dirname "$RUN_CARD_FILE")"',
+      '  marker_section=${RUN_CARD_FILE##*/run-card-}',
+      '  marker_section=${marker_section%.json}',
+      `  printf '{"schema":"run-card/1","runId":"%s","runAttempt":"%s","section":"%s","status":"deferred","exitCode":5,"exitDisposition":"shared-provider-unavailable"}\\n' "\${GITHUB_RUN_ID:-local}" "\${GITHUB_RUN_ATTEMPT:-1}" "$marker_section" > "$RUN_CARD_FILE"`,
+      'fi',
+    ] : [];
     const stub = [
       '#!/bin/sh',
+      'if [ "$1" = "$GITHUB_WORKSPACE/scripts/ci/validate-shared-provider-exit.mjs" ]; then',
+      '  exec "$REAL_NODE" "$@"',
+      'fi',
       `n=$(cat "${counter}" 2>/dev/null || echo 0)`,
       'n=$((n + 1))',
       `printf '%s' "$n" > "${counter}"`,
       writesArticle
         ? `if [ "$n" = "${writesOnAttempt}" ]; then mkdir -p content/blog-body/it && printf 'export default {}\\n' > content/blog-body/it/stub-article.ts; fi`
         : ':',
+      ...markerWrite,
       `case "$n" in`,
       ...codes.map((c, i) => `  ${i + 1}) exit ${c} ;;`),
       `  *) exit ${codes[codes.length - 1]} ;;`,
@@ -441,6 +490,8 @@ function runGenerateBlock({
       env: {
         ...process.env,
         PATH: `${bin}:${process.env.PATH}`,
+        REAL_NODE: process.execPath,
+        GITHUB_WORKSPACE: REPO,
         TARGET_SECTION: 'svizzera',
         SOURCE_URL: '',
         EVENT_NAME: 'schedule',
@@ -484,17 +535,52 @@ test('IL DIFETTO: exit 0 senza articolo NON e\' piu\' verde', () => {
   assert.match(r.outputs, /article=false/, 'il verdetto resta leggibile per gli step `if: always()`');
 });
 
-test('exit 4 senza articolo resta verde: e\' l\'unica eccezione', () => {
+test('exit 4 senza articolo resta verde e lascia provare la sezione gemella', () => {
   const r = runGenerateBlock({ nodeExit: EXIT_NO_ARTICLE_DECLARED });
   assert.equal(r.status, 0, 'una ragione legittima DICHIARATA deve restare assorbita');
   assert.match(r.outputs, /article=false/);
   assert.equal(r.attempts, 2, 'la sezione gemella va comunque tentata');
 });
 
+test('exit 5 senza run card producer-owned e\' rosso', () => {
+  const r = runGenerateBlock({ nodeExit: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE });
+  assert.equal(r.status, 1, 'il codice 5 senza prova del producer deve restare rosso');
+  assert.equal(r.attempts, 1, 'un exit 5 non attestato non deve essere ritentato sulla sezione gemella');
+  assert.match(r.outputs, /declared=false/);
+  assert.match(r.stdout, /senza marker producer-owned valido/);
+});
+
+test('exit 5 producer-owned resta verde e ferma i retry immediati', () => {
+  const r = runGenerateBlock({
+    nodeExit: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
+    writeSharedProviderMarker: true,
+  });
+  assert.equal(r.status, 0, 'un blocco temporaneo del pool condiviso deve cedere al cron');
+  assert.equal(r.attempts, 1, 'non deve rilanciare lo stesso pool sulla sezione gemella');
+  assert.match(r.outputs, /provider_blocked=true/);
+  assert.match(r.stdout, /si attende il prossimo cron/);
+});
+
+test('exit 5 successivo non nasconde un errore precedente non dichiarato', () => {
+  const r = runGenerateBlock({ exitPerAttempt: [1, EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE] });
+  assert.equal(r.status, 1, 'il blocco condiviso non puo\' rendere verde un run con un errore precedente');
+  assert.equal(r.attempts, 2, 'il caso riproduce un primo errore e il successivo exit 5');
+  assert.match(r.outputs, /declared=false/);
+  assert.match(r.stdout, /codice non dichiarato/);
+});
+
+test('exit 5 successivo non nasconde un roster gia\' bloccato', () => {
+  const r = runGenerateBlock({ exitPerAttempt: [3, EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE] });
+  assert.equal(r.status, 1, 'un blocco del roster resta rosso anche se la sezione gemella esce 5');
+  assert.equal(r.attempts, 2);
+  assert.match(r.outputs, /roster_blocked=true/);
+  assert.match(r.stdout, /roster esaurito/);
+});
+
 test('i codici prima assorbiti come «no-article-this-run» ora sono rossi', () => {
   // Erano tutti verdi: e' la superficie su cui qualunque miscela di errori
   // poteva tornare, ed e' la ragione per cui la #357 non ha chiuso il difetto.
-  for (const code of [1, 2, 5, 124, 137]) {
+  for (const code of [1, 2, 6, 124, 137]) {
     const r = runGenerateBlock({ nodeExit: code });
     assert.equal(r.status, 1, `exit ${code} senza articolo deve essere rosso`);
   }
@@ -512,7 +598,7 @@ test('LA CONGIUNZIONE: un errore dopo una scrittura parziale resta vincolante', 
   assert.equal(ok.status, 0, 'un generatore riuscito con un corpo deve restare verde');
   assert.match(ok.outputs, /article=true/);
 
-  for (const code of [EXIT_ROSTER_CANNOT_SERVE_PROMPT, 1]) {
+  for (const code of [EXIT_ROSTER_CANNOT_SERVE_PROMPT, EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE, 1]) {
     const r = runGenerateBlock({ nodeExit: code, writesArticle: true });
     assert.equal(r.status, 1, `exit ${code} dopo una scrittura parziale deve restare rosso`);
     assert.match(r.outputs, /article=false/);
