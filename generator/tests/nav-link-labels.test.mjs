@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import {
   findItalianNavLinkLabels,
   localizeNavLinkLabels,
+  NAV_LINK_LABELS,
 } from '../../scripts/lib/nav-link-labels.mjs';
 import { sanitizeArticleMarkdownLinks } from '../../scripts/lib/article-link-contract.mjs';
 import { codexTranslatePromptsForTests } from '../scripts/lib/free-translate.mjs';
@@ -72,9 +73,9 @@ function countItalianNavLabels(locale, relativeRoot) {
 }
 
 const CONTENT_BASELINE = Object.freeze({
-  de: Object.freeze({ blogBody: 1384, blogBodyCh: 3504 }),
-  fr: Object.freeze({ blogBody: 1264, blogBodyCh: 2425 }),
-  en: Object.freeze({ blogBody: 1322, blogBodyCh: 2452 }),
+  de: Object.freeze({ blogBody: 1322, blogBodyCh: 3497 }),
+  fr: Object.freeze({ blogBody: 1248, blogBodyCh: 2414 }),
+  en: Object.freeze({ blogBody: 1259, blogBodyCh: 2436 }),
 });
 
 test('sostituisce una label italiana e lascia invariato il target completo', () => {
@@ -173,6 +174,62 @@ test('la guardia individua anche una label italiana di una sola parola', () => {
   assert.deepEqual(hits.map(({ label, target }) => ({ label, target })), [
     { label: 'calcolatore', target: 'calculator' },
   ]);
+});
+
+test('il marchio non rende italiana una label inglese, ma non nasconde l’italiano fuori dal marchio', () => {
+  assert.deepEqual(
+    findItalianNavLinkLabels('[Frontaliere Ticino calculator](nav:calculator)', 'en'),
+    [],
+  );
+  for (const brand of ['FRONTALIERETICINO', 'frontaliereticino.ch']) {
+    assert.deepEqual(
+      findItalianNavLinkLabels(`[${brand} calculator](nav:calculator)`, 'en'),
+      [],
+    );
+  }
+  assert.deepEqual(
+    findItalianNavLinkLabels('[calcolatore di Frontaliere Ticino](nav:calculator)', 'en')
+      .map(({ label, target }) => ({ label, target })),
+    [{ label: 'calcolatore di Frontaliere Ticino', target: 'calculator' }],
+  );
+  assert.deepEqual(
+    findItalianNavLinkLabels('[frontaliere calculator](nav:calculator)', 'en')
+      .map(({ label, target }) => ({ label, target })),
+    [{ label: 'frontaliere calculator', target: 'calculator' }],
+  );
+  assert.deepEqual(
+    findItalianNavLinkLabels('[kontrolli-frontalieri](nav:traffic-history)', 'de')
+      .map(({ label, target }) => ({ label, target })),
+    [{ label: 'kontrolli-frontalieri', target: 'traffic-history' }],
+  );
+});
+
+test('le etichette comparative restano confronti o comparatori in ogni lingua', () => {
+  const comparisonEntries = Object.entries(NAV_LINK_LABELS)
+    .filter(([label]) => /\b(?:comparatore|confronto)\b/u.test(label));
+  assert.ok(comparisonEntries.length > 0);
+  for (const [label, translations] of comparisonEntries) {
+    for (const locale of ['de', 'fr', 'en']) {
+      assert.doesNotMatch(
+        translations[locale],
+        locale === 'de'
+          ? /(?:rechner|umrechner)/iu
+          : /(?:calculateur|convertisseur|calculator|converter)/iu,
+        `${label} (${locale}) non deve diventare un calcolatore o un convertitore`,
+      );
+    }
+  }
+});
+
+test('corregge la guida LAMal e il comparatore di cambio valuta', () => {
+  assert.equal(
+    localizeNavLinkLabels('[guida alla lamal per frontalieri](nav:health)', 'fr'),
+    '[Guide de la LAMal pour les frontaliers](nav:health)',
+  );
+  assert.equal(
+    localizeNavLinkLabels('[comparatore di cambio valuta](nav:exchange)', 'de'),
+    '[Wechselkursvergleich](nav:exchange)',
+  );
 });
 
 test('i prompt Codex singolo e batch dichiarano label visibili e registro', () => {

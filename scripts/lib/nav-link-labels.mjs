@@ -754,29 +754,29 @@ const NAV_LINK_LABELS_RAW = {
     "en": "compliance calculator"
   },
   "calcolatore di confronto": {
-    "de": "Vergleichsrechner",
-    "fr": "calculateur de comparaison",
-    "en": "comparison calculator"
+    "de": "Vergleichstool",
+    "fr": "outil de comparaison",
+    "en": "comparison tool"
   },
   "calcolatore di confronto banche": {
-    "de": "Bankvergleichsrechner",
-    "fr": "calculateur de comparaison des banques",
-    "en": "bank comparison calculator"
+    "de": "Bankvergleich",
+    "fr": "outil de comparaison des banques",
+    "en": "bank comparison tool"
   },
   "calcolatore di confronto costi": {
-    "de": "Kostenvergleichsrechner",
-    "fr": "calculateur de comparaison de coûts",
-    "en": "cost comparison calculator"
+    "de": "Kostenvergleich",
+    "fr": "outil de comparaison des coûts",
+    "en": "cost comparison tool"
   },
   "calcolatore di confronto normative": {
-    "de": "Vergleichsrechner für Vorschriften",
-    "fr": "calculateur de comparaison des réglementations",
-    "en": "regulatory comparison calculator"
+    "de": "Vergleich von Vorschriften",
+    "fr": "outil de comparaison des réglementations",
+    "en": "regulatory comparison tool"
   },
   "calcolatore di confronto prodotti": {
-    "de": "Produktvergleichsrechner",
-    "fr": "calculateur de comparaison de produits",
-    "en": "product comparison calculator"
+    "de": "Produktvergleich",
+    "fr": "outil de comparaison de produits",
+    "en": "product comparison tool"
   },
   "calcolatore di consumo idrico": {
     "de": "Wasserverbrauchsrechner",
@@ -1784,7 +1784,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "health insurance comparator"
   },
   "comparatore busta paga": {
-    "de": "Lohnzettel-Vergleichsrechner",
+    "de": "Lohnzettel-Vergleich",
     "fr": "comparateur de fiche de paie",
     "en": "payslip comparator"
   },
@@ -1795,7 +1795,7 @@ const NAV_LINK_LABELS_RAW = {
   },
   "comparatore cambio chf-eur": {
     "de": "CHF-EUR-Wechselvergleich",
-    "fr": "change CHF-EUR",
+    "fr": "comparateur de change CHF-EUR",
     "en": "CHF-EUR exchange comparator"
   },
   "comparatore cambio chf/eur": {
@@ -1909,7 +1909,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "EUR/CHF exchange rate comparator"
   },
   "comparatore di cambio valuta": {
-    "de": "Währungsumrechner",
+    "de": "Wechselkursvergleich",
     "fr": "comparateur de change",
     "en": "currency exchange comparator"
   },
@@ -2089,7 +2089,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "flight comparator"
   },
   "comparatore fiscale": {
-    "de": "Steuervergleichsrechner",
+    "de": "Steuervergleich",
     "fr": "comparateur fiscal",
     "en": "tax comparator"
   },
@@ -2690,7 +2690,7 @@ const NAV_LINK_LABELS_RAW = {
   },
   "guida alla lamal per frontalieri": {
     "de": "Leitfaden zum KVG für Grenzgänger",
-    "fr": "Guide à la LAMal pour les frontaliers",
+    "fr": "Guide de la LAMal pour les frontaliers",
     "en": "Guide to LAMal for cross-border workers"
   },
   "guida alla pensione": {
@@ -4661,9 +4661,12 @@ const ITALIAN_WORDS_BY_LOCALE = Object.freeze({
 
 const NAV_LINK_RE = /\[([^\]\n]+)\]\((nav:([a-z0-9-]+)[^)]*)\)/giu;
 
+const BRAND_RE = /\b(?:frontaliere\s+ticino|frontaliereticino(?:\.ch)?)\b/giu;
+
 function normalizedWords(value) {
   return String(value ?? "")
     .normalize("NFKC")
+    .replace(BRAND_RE, " ")
     .toLocaleLowerCase("it")
     .split(/[^\p{L}\p{N}]+/u)
     .filter(Boolean);
