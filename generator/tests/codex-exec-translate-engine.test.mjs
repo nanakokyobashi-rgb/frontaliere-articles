@@ -176,7 +176,9 @@ function scriptedSpawn(steps, seen = {}) {
         if (step.stdout) child.stdout.emit('data', step.stdout);
         if (step.timeout) return;
         const code = Object.prototype.hasOwnProperty.call(step, 'code') ? step.code : 0;
-        setImmediate(() => child.emit('close', code, step.signal ?? null));
+        const signal = step.signal ?? null;
+        if (step.exitBeforeClose) child.emit('exit', code, signal);
+        setImmediate(() => child.emit('close', code, signal));
       },
     };
     return child;
@@ -246,7 +248,9 @@ test('Codex locale classifica timeout, uscita, segnale, quota, auth e output', a
   assert.doesNotMatch(auth.diagnostic, /supersegreto|token=/u);
   assert.ok(!auth.message.includes('BEGIN_TEXT_SECRET'));
 
-  const empty = await run({ answer: '   ' });
+  // Il figlio emette `exit` subito, ma `close` arriva dopo la chiusura degli
+  // stream: con una deadline stretta deve restare empty-output, non timeout.
+  const empty = await run({ answer: '   ', exitBeforeClose: true }, { timeoutMs: 1 });
   assert.equal(empty.reason, 'empty-output');
   assert.equal(empty.retryable, false);
 });

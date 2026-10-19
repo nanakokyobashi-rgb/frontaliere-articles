@@ -361,12 +361,14 @@ export function createCodexExecCall({
           detached: process.platform !== 'win32',
         });
         let settled = false;
+        let watchdogKilled = false;
         const timer = setTimeout(() => {
           if (settled) return;
+          watchdogKilled = true;
           settled = true;
           killProcessGroup(child);
           failure = makeCodexExecError({
-            timedOut: true,
+            timedOut: watchdogKilled,
             durationMs: Date.now() - started,
             timeoutMs,
             stdout: stdoutTail,
@@ -394,6 +396,13 @@ export function createCodexExecCall({
             stderr: stderrTail,
           });
           reject(failure);
+        });
+        child.on('exit', () => {
+          if (settled) return;
+          // `close` follows `exit` after the stdio streams have closed. The
+          // deadline must stop at `exit`, or a process already gone can be
+          // reported as timeout while the empty output is being classified.
+          clearTimeout(timer);
         });
         child.on('close', (code, signal) => {
           if (settled) return;
