@@ -317,6 +317,7 @@ import {
 import { imageCreditRecordFromGeneratedImageRecord } from '../../engine/shared/imageCredits.mjs';
 import { DETERMINISTIC_CARD_KIND, DETERMINISTIC_CARD_LICENSE_URL } from './lib/deterministic-card-provenance.mjs';
 import {
+  ARTICLE_COVER_FALLBACK_ERROR_CODES,
   catalogFallbackSharedWordCount,
   classifyImageRegenerationFailure,
   queueArticleCoverRegeneration,
@@ -17249,6 +17250,20 @@ function isFactCheckUnavailableError(e) {
 }
 
 /**
+ * A governed cover failure is already fail-closed: no article was written
+ * without a verified hero. Keep retryable cover-boundary failures at the run
+ * level so a provider/verifier outage is declared as a clean deferral instead
+ * of becoming an undeclared generation error. A deterministic rejection of
+ * every catalog candidate remains candidate quality and is handled by
+ * isQualityRejectError().
+ */
+function isRetryableArticleCoverError(e) {
+  return e?.retryable === true
+    && Object.values(ARTICLE_COVER_FALLBACK_ERROR_CODES).includes(e?.code)
+    && e?.imageQualityFailure !== true;
+}
+
+/**
  * True when the error is a CONTENT/QUALITY rejection (fact-check block,
  * topic-gate REGOLA #0 abort, fabrication, or a non-conformant headline that
  * survived its retry budget) rather than an infrastructure bug.
@@ -21281,6 +21296,18 @@ if (invokedDirectly) {
     console.error(`\n⚠️  Differito: fact-check indisponibile, articolo non pubblicato. Riprovo al prossimo run. ${e.message}`);
     // Ragione legittima #9 di nove — il verifier non ha prodotto un verdetto:
     // il run si differisce fail-closed e non pubblica contenuto non verificato.
+    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
+  }
+  // The article-hero verifier is a publication boundary just like the
+  // fact-check: a missing verdict must not publish an unverified image, but it
+  // is also not a candidate-quality rejection. Defer with the shared
+  // no-article code so the workflow records a declared outcome and retries
+  // when the image provider/verifier is available again.
+  if (isRetryableArticleCoverError(e)) {
+    finalizeRunReport('deferred', {
+      notes: [...RUN_REPORT.notes, 'Deferred (article cover unavailable; article not published): ' + e.message],
+    });
+    console.error('\n⚠️  Differito: copertina articolo non verificabile, articolo non pubblicato. Riprovo al prossimo run. ' + e.message);
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   // Transient free-model pool exhaustion (every model in the fallback chain hit
