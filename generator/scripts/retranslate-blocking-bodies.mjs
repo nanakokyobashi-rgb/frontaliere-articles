@@ -942,6 +942,85 @@ const ADDRESS_DESCRIPTION_COLON_RE = /:/gu;
 const ADDRESS_DESCRIPTION_LABEL_PREFIX_RE = /^\s*(?:(?:a|an|the|un|une|una|uno|ein|eine|der|die|das|le|la|les)\s+)?(?:description|descrizione|beschreibung|note(?:s)?|nota|remarque(?:s)?|comment(?:s|aire|i)?|kommentar|information(?:en)?|informazioni?|details?|dettagli?|overview|panoramica|aperçu|übersicht|überblick|summary|résumé|zusammenfassung|report|rapport|bericht)\b/iu;
 const ADDRESS_LEADING_LABEL_RE = /^\s*(?:indirizzo|address|adresse|cap|codice\s+postale|postal\s+code|postcode|plz|npa)\s*[:,-]?\s*/iu;
 const ADDRESS_LOCALITY_PREAMBLE_PREFIX_RE = /^\s*(?:around|about|near|nearby|next\s+to|close\s+to|adjacent\s+to|at|by|from|across|behind|between|outside|inside|within|above|below|in\s+the\s+area\s+of|in\s+the\s+vicinity\s+of|vicino(?:\s+a)?|presso|nei\s+pressi\s+di|nelle\s+vicinanze\s+di|circa|près\s+de|à\s+proximité\s+de|à\s+côté\s+de|proche\s+de|aux\s+alentours\s+de|bei|nahe(?:\s+bei)?|in\s+der\s+Nähe\s+von|rund\s+um)\b/iu;
+const MAX_MARKDOWN_DESTINATION_LOOKAHEAD = 2048;
+const OPAQUE_REMAINDER = -2;
+
+/**
+ * Advance the quote state of a Markdown link destination without treating
+ * parentheses inside an optional title as delimiters. Escaped characters are
+ * consumed by the caller first, so an escaped quote cannot close the title.
+ *
+ * @param {string} source
+ * @param {number} index
+ * @param {number} start
+ * @param {{ angleDestination?: boolean, titleQuote?: string }} [state]
+ * @returns {{ angleDestination: boolean, titleQuote: string }}
+ */
+export function markdownDestinationTitleState(source, index, start, {
+  angleDestination = false,
+  titleQuote = '',
+} = {}) {
+  const text = String(source ?? '');
+  const character = text[index];
+  if (titleQuote) {
+    return {
+      angleDestination,
+      titleQuote: character === titleQuote ? '' : titleQuote,
+    };
+  }
+  if (!angleDestination && index > start && /\s/u.test(text[index - 1])
+    && (character === '"' || character === "'")) {
+    return { angleDestination, titleQuote: character };
+  }
+  return { angleDestination, titleQuote };
+}
+
+/**
+ * Find a balanced Markdown destination inside a bounded look-ahead window.
+ * Unclosed, overlong, or otherwise malformed metadata returns the same
+ * opaque sentinel used by the visible-address projection.
+ *
+ * @param {string} source
+ * @param {number} start
+ * @param {number} [limit]
+ * @returns {number}
+ */
+export function boundedMarkdownDestination(source, start, limit = String(source ?? '').length) {
+  const text = String(source ?? '');
+  if (!Number.isInteger(start) || start < 0 || start >= text.length) return OPAQUE_REMAINDER;
+  const requestedLimit = Number.isInteger(limit)
+    ? Math.min(Math.max(limit, start), text.length)
+    : text.length;
+  const destinationLimit = Math.min(
+    requestedLimit,
+    start + MAX_MARKDOWN_DESTINATION_LOOKAHEAD,
+  );
+  let parenthesisDepth = 0;
+  let state = { angleDestination: false, titleQuote: '' };
+  for (let index = start; index < destinationLimit; index += 1) {
+    if (text[index] === '\\') {
+      index += 1;
+      continue;
+    }
+    const character = text[index];
+    const stateBefore = state;
+    state = markdownDestinationTitleState(text, index, start, state);
+    if (stateBefore.titleQuote || state.titleQuote) continue;
+    if (state.angleDestination) {
+      if (character === '>') state = { ...state, angleDestination: false };
+      continue;
+    }
+    if (index === start && character === '<') {
+      state = { ...state, angleDestination: true };
+    } else if (character === '(') {
+      parenthesisDepth += 1;
+    } else if (character === ')') {
+      if (parenthesisDepth === 0) return index + 1;
+      parenthesisDepth -= 1;
+    }
+  }
+  return OPAQUE_REMAINDER;
+}
 
 /**
  * Project an address to the text a reader sees while retaining the source
@@ -953,8 +1032,6 @@ export function visibleAddressOffsetMap(value) {
   const source = String(value ?? '');
   const visible = [];
   const sourceOffsets = [];
-  const MAX_MARKDOWN_DESTINATION_LOOKAHEAD = 2048;
-  const OPAQUE_REMAINDER = -2;
   let opaque = false;
 
   const appendCharacter = (character, sourceIndex) => {
@@ -992,44 +1069,6 @@ export function visibleAddressOffsetMap(value) {
     return OPAQUE_REMAINDER;
   };
 
-  const markdownDestinationEndAt = (start, limit) => {
-    let parenthesisDepth = 0;
-    let angleDestination = false;
-    let titleQuote = '';
-    const destinationLimit = Math.min(
-      limit,
-      start + MAX_MARKDOWN_DESTINATION_LOOKAHEAD,
-    );
-    for (let index = start; index < destinationLimit; index += 1) {
-      if (source[index] === '\\') {
-        index += 1;
-        continue;
-      }
-      const character = source[index];
-      if (titleQuote) {
-        if (character === titleQuote) titleQuote = '';
-        continue;
-      }
-      if (!angleDestination && index > start && /\s/u.test(source[index - 1])
-        && (character === '"' || character === "'")) {
-        titleQuote = character;
-        continue;
-      }
-      if (index === start && source[index] === '<') angleDestination = true;
-      else if (angleDestination && source[index] === '>') angleDestination = false;
-      else if (!angleDestination && source[index] === '(') parenthesisDepth += 1;
-      else if (!angleDestination && source[index] === ')') {
-        if (parenthesisDepth === 0) return index + 1;
-        parenthesisDepth -= 1;
-      }
-    }
-    // An unclosed or overlong destination makes the remainder opaque. This
-    // is fail-closed: metadata is never reclassified as visible address text,
-    // and the bounded look-ahead prevents a repeated `](` suffix from making
-    // the projection quadratic.
-    return OPAQUE_REMAINDER;
-  };
-
   // Build link ranges once. Calling a balanced-bracket look-ahead for every
   // `[` makes malformed prose with many brackets quadratic; this stack keeps
   // the same nested-label behavior while making the projection linear in the
@@ -1048,7 +1087,7 @@ export function visibleAddressOffsetMap(value) {
     if (source[index] !== ']' || openLabels.length === 0) continue;
     const labelStart = openLabels.pop();
     if (source[index + 1] !== '(') continue;
-    const end = markdownDestinationEndAt(index + 2, source.length);
+    const end = boundedMarkdownDestination(source, index + 2, source.length);
     if (end === OPAQUE_REMAINDER) {
       const markerStart = labelStart > 0 && source[labelStart - 1] === '!'
         ? labelStart - 1
@@ -1498,6 +1537,29 @@ function addressPostalCodesForLines(lines) {
   return codes;
 }
 
+/**
+ * Check that every postal candidate needed for an ordinal fallback comes from
+ * one visible target line and exposes each source ordinal exactly once.
+ * Candidates from different lines are never a complete set: borrowing their
+ * order would associate a CAP with the wrong source address.
+ *
+ * @param {Array<{ index?: number, postalMatchIndex?: number }>} candidates
+ * @param {number} expectedCount
+ * @returns {boolean}
+ */
+export function sameAddressCandidateIndex(candidates, expectedCount) {
+  if (!Array.isArray(candidates) || !Number.isInteger(expectedCount) || expectedCount <= 1) {
+    return false;
+  }
+  if (candidates.length !== expectedCount) return false;
+  const targetIndex = candidates[0]?.index;
+  if (!Number.isInteger(targetIndex)) return false;
+  if (candidates.some((candidate) => candidate?.index !== targetIndex)) return false;
+  const ordinals = new Set(candidates.map((candidate) => candidate?.postalMatchIndex));
+  if (ordinals.size !== expectedCount) return false;
+  return Array.from({ length: expectedCount }, (_, ordinal) => ordinals.has(ordinal)).every(Boolean);
+}
+
 function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
   const allAddressCandidates = [];
   const candidates = [];
@@ -1570,14 +1632,10 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
     })));
   const ordinalMatches = candidates.filter((candidate) =>
     candidate.postalMatchIndex === sourceLine.postalMatchIndex);
-  const targetHasCompleteOrdinalSet = sourceLine.postalMatchCount > 1
-    && allAddressCandidates.length === sourceLine.postalMatchCount
-    && new Set(allAddressCandidates.map((candidate) => candidate.index)).size === 1
-    && new Set(allAddressCandidates.map((candidate) => candidate.postalMatchIndex)).size
-      === sourceLine.postalMatchCount
-    && Array.from({ length: sourceLine.postalMatchCount }, (_, ordinal) => ordinal)
-      .every((ordinal) => allAddressCandidates.some((candidate) =>
-        candidate.postalMatchIndex === ordinal));
+  const targetHasCompleteOrdinalSet = sameAddressCandidateIndex(
+    allAddressCandidates,
+    sourceLine.postalMatchCount,
+  );
   let selected = null;
   if (contextMatches.length === 1) {
     selected = contextMatches[0];
