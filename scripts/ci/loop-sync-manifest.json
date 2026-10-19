@@ -2519,6 +2519,42 @@
       }
     },
     {
+      "path": "scripts/lib/r2-image-lease-process.sh",
+      "mode": "identical",
+      "baseline": {
+        "site": "641f8e3abeabc10d",
+        "corpus": "641f8e3abeabc10d",
+        "alignedAt": "2026-10-20"
+      }
+    },
+    {
+      "path": "scripts/lib/r2-image-namespace-lock.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "b4cbd5750ac6d5f5",
+        "corpus": "b4cbd5750ac6d5f5",
+        "alignedAt": "2026-10-20"
+      }
+    },
+    {
+      "path": "scripts/lib/r2-section-lock.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "6cb8e90d07c896c2",
+        "corpus": "6cb8e90d07c896c2",
+        "alignedAt": "2026-10-20"
+      }
+    },
+    {
+      "path": "scripts/lib/is-invoked-directly.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "1f1dfecc6504df9e",
+        "corpus": "1f1dfecc6504df9e",
+        "alignedAt": "2026-10-20"
+      }
+    },
+    {
       "path": "scripts/lib/seo-entry-guard.mjs",
       "mode": "corpus-only",
       "reason": "Guardia dello scrittore degli articoli (issue 2431): prima del lock di registrazione cerca l'id in tutti i file SEO della sezione con lo stesso risolutore bilanciato del motore (`engine/shared/seo-entry.mjs`) e rifiuta di aggiungere una voce gia' presente. Sul sito non esiste e non deve: lo scrittore dei contenuti vive solo qui, e il sito riceve i file SEO dal sync.",
