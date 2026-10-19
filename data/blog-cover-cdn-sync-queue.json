@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-corsi-ticino-famiglia-rendimento.webp",
+      "sha256": "e158df4d618764b5b01fd9ff133877f4abf196b7ed4fc9902bfb6ae482f11b75"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-corsi-ticino-famiglia-rendimento-480w.webp",
+      "sha256": "0b7774412d07286133bd88844c0581fe17ee9e3b1a46c90220be9de3025c1533"
+    }
+  ]
 }
