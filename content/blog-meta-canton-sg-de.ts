@@ -24,6 +24,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.rheineck-mels-aquaplaning.title': 'Rheineck und Mels: zwei Unfälle wegen Aquaplaning',
     'blog.article.rheineck-mels-aquaplaning.excerpt': 'Zwei Autos prallten am 10.',
     'blog.article.rheineck-mels-aquaplaning.imageAlt': 'Verregnete Autobahn im Kanton St. Gallen mit Leitplanken',
+    'blog.article.hsg-optime-orario-lavoro.title': 'HSG leitet EU-Studie zur Arbeitszeitverkürzung',
+    'blog.article.hsg-optime-orario-lavoro.excerpt': 'Die Universität St.',
+    'blog.article.hsg-optime-orario-lavoro.imageAlt': 'Campus der Universität St. Gallen in einer redaktionellen Szene zur Arbeitsforschung',
 };
 
 export default blogMetaCantonSgDe;

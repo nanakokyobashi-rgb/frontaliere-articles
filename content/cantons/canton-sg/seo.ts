@@ -270,6 +270,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-hsg-optime-orario-lavoro': {
+    title: 'HSG guida studio UE sulla riduzione dell\'orario di lavoro',
+    description: 'L\'Università di San Gallo guida OPTIME, progetto UE finanziato da Horizon Europe con circa 3,37 milioni di euro per confrontare modelli di orario ridotto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, studio, sulla, riduzione, dell',
+    ogTitle: 'HSG guida studio UE sulla riduzione dell\'orario di lavoro',
+    ogDescription: 'La professoressa Julia Backmann dell\'HSG coordina OPTIME, progetto europeo sui modelli di riduzione dell\'orario. Horizon Europe lo finanzia con circa 3,37 milioni di euro; la ricerca ne valuterà realizzabilità, inclusività e sostenibilità.',
+    canonicalPath: '/articoli-san-gallo/hsg-optime-orario-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "HSG guida studio UE sulla riduzione dell'orario di lavoro",
+      "description": "L'Università di San Gallo guida OPTIME, progetto UE finanziato da Horizon Europe con circa 3,37 milioni di euro per confrontare modelli di orario ridotto.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-hsg-optime-orario-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Campus dell'Università di San Gallo in una scena editoriale sulla ricerca sul lavoro"
+      },
+      "datePublished": "2026-10-19T09:46:12+00:00",
+      "dateModified": "2026-10-19T09:46:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/hsg-optime-orario-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

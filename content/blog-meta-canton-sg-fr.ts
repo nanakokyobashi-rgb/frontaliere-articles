@@ -24,6 +24,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.rheineck-mels-aquaplaning.title': 'Rheineck et Mels : deux accidents dus à l’aquaplanage',
     'blog.article.rheineck-mels-aquaplaning.excerpt': 'Deux voitures ont heurté les glissières de sécurité le 10 octobre 2026 Accidents distincts sur l’A1 et la N13 Les deux conducteurs n’ont pas été blessés',
     'blog.article.rheineck-mels-aquaplaning.imageAlt': 'Autoroute mouillée par la pluie dans le canton de Saint-Gall',
+    'blog.article.hsg-optime-orario-lavoro.title': 'HSG dirige une étude de l’UE sur la réduction du temps de travail',
+    'blog.article.hsg-optime-orario-lavoro.excerpt': 'L’Université de Saint-Gall coordonne OPTIME, un projet de l’UE financé par Horizon Europe à hauteur d’environ 3,37 millions d’euros.',
+    'blog.article.hsg-optime-orario-lavoro.imageAlt': 'Campus de l\'Université de Saint-Gall dans une scène éditoriale sur la recherche',
 };
 
 export default blogMetaCantonSgFr;

@@ -24,6 +24,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.rheineck-mels-aquaplaning.title': 'Rheineck and Mels: two hydroplaning accidents',
     'blog.article.rheineck-mels-aquaplaning.excerpt': 'Two cars hit the guardrails on October 10, 2026 Separate accidents on A1 and N13 The two drivers were not injured Damage: approximately CHF 35\'000 and CHF 4\'000',
     'blog.article.rheineck-mels-aquaplaning.imageAlt': 'Rain-soaked motorway in the Canton of St. Gallen with guardrails',
+    'blog.article.hsg-optime-orario-lavoro.title': 'HSG leads EU study on reducing working hours',
+    'blog.article.hsg-optime-orario-lavoro.excerpt': 'The University of St.',
+    'blog.article.hsg-optime-orario-lavoro.imageAlt': 'University of St. Gallen campus in an editorial scene about work research',
 };
 
 export default blogMetaCantonSgEn;
