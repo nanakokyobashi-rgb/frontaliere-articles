@@ -16,14 +16,35 @@ function foldedEventPart(value) {
   return foldForMatch(typeof value === 'string' ? value : '').replace(/[^a-z0-9]+/g, ' ').trim();
 }
 
+/** URL HTTPS evento senza userinfo, adatta all'identità o alla pubblicazione. */
+function safeEventUrl(value) {
+  const safeUrl = httpsUrlOrNull(value);
+  if (!safeUrl) return '';
+  try {
+    const parsed = new URL(safeUrl);
+    return parsed.username || parsed.password ? '' : safeUrl;
+  } catch {
+    return '';
+  }
+}
+
 /** Canonicalizza le URL evento solo per l'identità e la deduplica. */
 function canonicalEventUrl(value) {
-  const safeUrl = httpsUrlOrNull(value);
-  return safeUrl ? sourceUrlCanonicalKey(safeUrl) : '';
+  const safeUrl = safeEventUrl(value);
+  if (!safeUrl) return '';
+  const canonical = sourceUrlCanonicalKey(safeUrl);
+  if (canonical) return canonical;
+  try {
+    const fallback = new URL(safeUrl);
+    fallback.hash = '';
+    return fallback.toString();
+  } catch {
+    return '';
+  }
 }
 
 function eventUrlFragment(value) {
-  const safeUrl = httpsUrlOrNull(value);
+  const safeUrl = safeEventUrl(value);
   if (!safeUrl) return '';
   try {
     return new URL(safeUrl).hash;
@@ -45,6 +66,15 @@ function eventSourceIndex(value) {
 
 function compareEventSourceIndex(a, b) {
   return eventSourceIndex(a) - eventSourceIndex(b);
+}
+
+function compareUpcomingEvents(a, b) {
+  return a.firstUsefulDay.localeCompare(b.firstUsefulDay)
+    || b.startDate.localeCompare(a.startDate)
+    || String(a.startTime ?? '').localeCompare(String(b.startTime ?? ''))
+    || a.title.localeCompare(b.title)
+    || String(a.id ?? '').localeCompare(String(b.id ?? ''))
+    || compareEventSourceIndex(a, b);
 }
 
 function eventSemanticKey(event) {
@@ -148,13 +178,12 @@ function deduplicateEvents(events) {
     const preferredPreference = preference(preferred);
     if (eventPreference !== preferredPreference) return eventPreference < preferredPreference;
 
-    const eventUrl = canonicalEventUrl(event.url);
-    const preferredUrl = canonicalEventUrl(preferred.url);
-    if (eventUrl && eventUrl === preferredUrl) {
-      const eventHasFragment = Boolean(eventUrlFragment(event.url));
-      const preferredHasFragment = Boolean(eventUrlFragment(preferred.url));
-      if (eventHasFragment !== preferredHasFragment) return eventHasFragment;
-    }
+    // ID aliases can connect different canonical URLs for one event. Keep a
+    // deep link from any URL in that identity group, with source order as the
+    // deterministic tie-break when both have (or both lack) a fragment.
+    const eventHasFragment = Boolean(eventUrlFragment(event.url));
+    const preferredHasFragment = Boolean(eventUrlFragment(preferred.url));
+    if (eventHasFragment !== preferredHasFragment) return eventHasFragment;
     return eventSourceIndex(event) < eventSourceIndex(preferred);
   };
   events.forEach((event, index) => {
@@ -172,7 +201,7 @@ function deduplicateEvents(events) {
   return events.flatMap((_, index) => {
     const root = find(index);
     return firstIndexByRoot.get(root) === index ? [events[preferredIndexByRoot.get(root)]] : [];
-  });
+  }).sort(compareUpcomingEvents);
 }
 
 const TXT = {
@@ -237,12 +266,7 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
     .filter((e) => e.startDate >= today || (Date.parse(e.lastDay) - Date.parse(e.startDate)) / DAY_MS <= th.maxSpanDays)
     // Ordinati per il primo giorno utile (oggi, per quelli gia' in corso).
     .map((e) => ({ ...e, firstUsefulDay: e.startDate < today ? today : e.startDate }))
-    .sort((a, b) => a.firstUsefulDay.localeCompare(b.firstUsefulDay)
-      || b.startDate.localeCompare(a.startDate)
-      || String(a.startTime ?? '').localeCompare(String(b.startTime ?? ''))
-      || a.title.localeCompare(b.title)
-      || String(a.id ?? '').localeCompare(String(b.id ?? ''))
-      || compareEventSourceIndex(a, b));
+    .sort(compareUpcomingEvents);
   // URL and ID are independent aliases. Place is only a fallback, and may
   // attach an unidentified copy to a single compatible identity group.
   const upcoming = deduplicateEvents(upcomingCandidates);
@@ -264,7 +288,7 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
         description: t.description,
         items: rows.map((e) => {
           const place = [e.venue, e.comune].map((v) => (typeof v === 'string' ? v.trim() : '')).filter(Boolean);
-          const url = httpsUrlOrNull(e.url);
+          const url = safeEventUrl(e.url);
           const where = place.length ? clip([...new Set(place)].join(', '), 100) : '';
           const ongoing = e.startDate < today ? t.ongoing(fmtDay(e.lastDay, locale)) : '';
           const detail = [where, ongoing].filter(Boolean).join(' — ');

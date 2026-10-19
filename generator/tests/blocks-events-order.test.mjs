@@ -175,3 +175,145 @@ test('eventi: tra URL equivalenti pubblica il deep link con fragment', () => {
   assert.equal(block.render('it').keyFacts[0].value, '4');
   assert.equal(block.render('it').items.find((item) => item.url)?.url, detailUrl);
 });
+
+test('eventi: un URL con percent-encoding malformato resta un anchor distinto', () => {
+  const tomorrow = new Date(NOW + DAY_MS).toISOString().slice(0, 10);
+  const event = (label, url, extra = {}) => ({
+    title: 'Evento omonimo',
+    titleByLocale: { it: label },
+    startDate: tomorrow,
+    startTime: '10:00',
+    canton: 'TI',
+    comune: 'Lugano',
+    url,
+    ...extra,
+  });
+  const malformedDeepLink = 'https://events.example.org/event/%E0%A4%A#dettaglio';
+  const otherUrl = 'https://events.example.org/event/other';
+  const dataset = {
+    generatedAt: new Date(NOW - 60 * 60 * 1000).toISOString(),
+    events: [
+      event('malformed-url', 'https://events.example.org/event/%E0%A4%A'),
+      event('malformed-deep-link', malformedDeepLink),
+      event('other-url', otherUrl),
+      event('control-a', 'https://events.example.org/event/control-a', { title: 'Evento A' }),
+      event('control-b', 'https://events.example.org/event/control-b', { title: 'Evento B' }),
+    ],
+  };
+
+  const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
+
+  const items = block.render('it').items;
+  assert.equal(block.render('it').keyFacts[0].value, '4');
+  assert.equal(items.find((item) => item.label === 'malformed-deep-link')?.url, malformedDeepLink);
+  assert.equal(items.find((item) => item.label === 'other-url')?.url, otherUrl);
+});
+
+test('eventi: riordina i gruppi secondo il record rappresentativo scelto', () => {
+  const yesterday = new Date(NOW - DAY_MS).toISOString().slice(0, 10);
+  const twoDaysAgo = new Date(NOW - 2 * DAY_MS).toISOString().slice(0, 10);
+  const tomorrow = new Date(NOW + DAY_MS).toISOString().slice(0, 10);
+  const event = (label, title, startDate, extra = {}) => ({
+    title,
+    titleByLocale: { it: label },
+    startDate,
+    endDate: tomorrow,
+    startTime: '10:00',
+    canton: 'TI',
+    comune: title === 'Evento condiviso' ? 'Lugano' : 'Bellinzona',
+    ...extra,
+  });
+  const dataset = {
+    generatedAt: new Date(NOW - 60 * 60 * 1000).toISOString(),
+    events: [
+      event('alias-ordinario', 'Evento condiviso', yesterday, { id: 'shared-event' }),
+      event('indipendente', 'Evento indipendente', yesterday, { id: 'other-event', startTime: '11:00' }),
+      event('alias-deep-link', 'Evento condiviso', twoDaysAgo, {
+        id: 'shared-event',
+        url: 'https://events.example.org/event/shared#dettaglio',
+        startTime: '08:00',
+      }),
+    ],
+  };
+
+  const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
+
+  assert.deepEqual(
+    block.render('it').items.slice(0, 2).map((item) => item.label),
+    ['indipendente', 'alias-deep-link'],
+  );
+});
+
+test('eventi: il deep link prevale anche tra alias ID con URL canoniche diverse', () => {
+  const tomorrow = new Date(NOW + DAY_MS).toISOString().slice(0, 10);
+  const event = (label, extra = {}) => ({
+    title: 'Evento condiviso',
+    titleByLocale: { it: label },
+    startDate: tomorrow,
+    startTime: '10:00',
+    canton: 'TI',
+    id: 'event-shared',
+    ...extra,
+  });
+  const deepLink = 'https://agenda.example.net/evento#spettacolo';
+  const dataset = {
+    generatedAt: new Date(NOW - 60 * 60 * 1000).toISOString(),
+    events: [
+      event('plain-alias', { url: 'https://events.example.org/programme' }),
+      event('deep-link-alias', { url: deepLink }),
+      event('control-a', { id: 'event-a', title: 'Evento A' }),
+      event('control-b', { id: 'event-b', title: 'Evento B' }),
+    ],
+  };
+
+  const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
+
+  assert.equal(block.render('it').items.find((item) => item.url)?.url, deepLink);
+});
+
+test('eventi: non pubblica URL con credenziali né le preferisce per il fragment', () => {
+  const tomorrow = new Date(NOW + DAY_MS).toISOString().slice(0, 10);
+  const event = (label, extra = {}) => ({
+    title: 'Evento condiviso',
+    titleByLocale: { it: label },
+    startDate: tomorrow,
+    startTime: '10:00',
+    canton: 'TI',
+    ...extra,
+  });
+  const cleanUrl = 'https://events.example.org/event/shared';
+  const dataset = {
+    generatedAt: new Date(NOW - 60 * 60 * 1000).toISOString(),
+    events: [
+      event('unlinked-alias', { id: 'event-fragment' }),
+      event('credential-fragment-alias', {
+        id: 'event-fragment',
+        url: 'https://user:pass@events.example.org/event/private#fragment',
+      }),
+      event('clean-alias', { id: 'event-clean', url: cleanUrl }),
+      event('credential-alias', {
+        id: 'event-clean',
+        url: 'https://user:pass@events.example.org/event/shared#private',
+      }),
+      event('credential-only', {
+        title: 'Evento con URL privata',
+        id: 'event-private',
+        url: 'https://user:pass@events.example.org/event/private#private',
+      }),
+      event('control', { id: 'event-control', title: 'Evento di controllo' }),
+    ],
+  };
+
+  const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
+  const items = block.render('it').items;
+
+  const cleanAlias = items.find((item) => item.label === 'clean-alias');
+  const unlinkedAlias = items.find((item) => item.label === 'unlinked-alias');
+  const credentialOnly = items.find((item) => item.label === 'credential-only');
+  assert.ok(cleanAlias);
+  assert.equal(cleanAlias.url, cleanUrl);
+  assert.ok(unlinkedAlias);
+  assert.equal(unlinkedAlias.url, undefined);
+  assert.ok(credentialOnly);
+  assert.equal(credentialOnly.url, undefined);
+});
