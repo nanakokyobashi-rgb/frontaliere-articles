@@ -3643,13 +3643,12 @@ export async function translateWithCodexEngine({ text, sourceLang, targetLang, f
     noteTranslationOutcome(_outcome, 'incomplete');
     return '';
   }
-  // The local transport is normally plain text. JSON objects/arrays (including
-  // fenced JSON) are provider-output failures when the source is plain text,
-  // not structural refusals; keep that distinction for the report and never
-  // retry them. A source that is itself structured JSON keeps that format.
+  // The local transport is normally plain text. Keep the source/output JSON
+  // classification identical: structured source must stay structured, while
+  // plain-text source must not receive JSON-shaped output.
   const jsonKind = codexJsonOutputKind(out);
   const sourceJsonKind = codexJsonOutputKind(prepared.sourceClean);
-  if (jsonKind && sourceJsonKind !== 'structured') {
+  if (jsonKind !== sourceJsonKind) {
     noteTranslationProviderReason(_outcome, 'codex', 'invalid-output');
     noteTranslationOutcome(_outcome, 'incomplete');
     return '';
