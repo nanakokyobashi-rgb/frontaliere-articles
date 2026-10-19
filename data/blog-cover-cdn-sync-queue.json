@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-kloentalerstrasse-cantiere-2026.webp",
+      "sha256": "a6cbac4e73124c74a2986d6cb9d8b023409dbb697a2080f4b15d4dcf58569c10"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-kloentalerstrasse-cantiere-2026-480w.webp",
+      "sha256": "f330ee88c60e7a7a8919d25327afbf3126ec2bdf14fe4add7530f2a5af8f1c3b"
+    }
+  ]
 }
