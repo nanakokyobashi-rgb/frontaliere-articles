@@ -4,8 +4,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const TSV_HEADER = ['url', 'path', 'sha', 'origin', 'locale', 'shard'].join('\t');
+const PUSH_STATE_HEADER = ['shard', 'locale', 'status'].join('\t');
 const DEFAULT_TIMEOUT_SECONDS = 12 * 60;
 const DEFAULT_POLL_SECONDS = 15;
+const DEFAULT_PROBE_TIMEOUT_MS = 30 * 1000;
 
 /**
  * Normalizza i byte HTML che il publisher ha scritto e che Pages deve servire.
@@ -192,6 +194,29 @@ export function readFingerprintFile(file) {
   });
 }
 
+export function readPushStateFile(file) {
+  const lines = fs.readFileSync(file, 'utf8').split(/\r?\n/u).filter(Boolean);
+  if (lines.length === 0 || lines[0] !== PUSH_STATE_HEADER) {
+    throw new TypeError(`${file} has no push-state TSV header`);
+  }
+  const states = new Map();
+  for (const [index, line] of lines.slice(1).entries()) {
+    const fields = line.split('\t');
+    if (fields.length !== 3) throw new TypeError(`${file}:${index + 2}: invalid push-state row`);
+    const [shard, locale, status] = fields;
+    if (!shard || !['it', 'en', 'de', 'fr'].includes(locale)) {
+      throw new TypeError(`${file}:${index + 2}: invalid push-state shard or locale`);
+    }
+    if (!['pushed', 'clean-no-op'].includes(status)) {
+      throw new TypeError(`${file}:${index + 2}: invalid push-state status ${status}`);
+    }
+    const key = `${shard}\t${locale}`;
+    if (states.has(key)) throw new TypeError(`${file}:${index + 2}: duplicate push-state ${key}`);
+    states.set(key, status);
+  }
+  return states;
+}
+
 function sampleKey(record) {
   return `${record.shard || 'unknown-shard'}\t${record.locale || 'unknown-locale'}`;
 }
@@ -212,16 +237,38 @@ function probeUrl(url, runKey, sequence) {
   return parsed.toString();
 }
 
+function unavailableObservation(error) {
+  return {
+    status: 0,
+    sha: null,
+    cfCacheStatus: 'unknown',
+    age: 'unknown',
+    lastModified: 'unknown',
+    error,
+  };
+}
+
+function probeTimeoutError(url, timeoutMs) {
+  const error = new Error(`probe timed out after ${timeoutMs}ms for ${url}`);
+  error.code = 'PROBE_TIMEOUT';
+  return error;
+}
+
 async function fetchFingerprint(record, {
   fetchImpl,
   url,
   cacheBust,
   runKey,
   sequence,
+  timeoutMs = DEFAULT_PROBE_TIMEOUT_MS,
 }) {
   const requestUrl = cacheBust ? probeUrl(url, runKey, sequence) : url;
-  try {
+  const boundedTimeoutMs = Math.max(1, Math.ceil(Number(timeoutMs)));
+  const controller = new AbortController();
+  let timer;
+  const request = (async () => {
     const response = await fetchImpl(requestUrl, {
+      signal: controller.signal,
       redirect: 'follow',
       headers: cacheBust
         ? { Accept: 'text/html', 'Cache-Control': 'no-cache' }
@@ -235,15 +282,20 @@ async function fetchFingerprint(record, {
       age: header(response, 'age'),
       lastModified: header(response, 'last-modified'),
     };
+  })();
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => {
+      controller.abort();
+      reject(probeTimeoutError(url, boundedTimeoutMs));
+    }, boundedTimeoutMs);
+  });
+  try {
+    return await Promise.race([request, timeout]);
   } catch (error) {
-    return {
-      status: 0,
-      sha: null,
-      cfCacheStatus: 'unknown',
-      age: 'unknown',
-      lastModified: 'unknown',
-      error: error?.message || String(error),
-    };
+    return unavailableObservation(error?.message || String(error));
+  } finally {
+    clearTimeout(timer);
+    if (!controller.signal.aborted) controller.abort();
   }
 }
 
@@ -253,6 +305,10 @@ function matches(record, observation) {
 
 function defaultSleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function elapsedSince(startedAt, wallStartedAt, now) {
+  return Math.max(0, now() - startedAt, Date.now() - wallStartedAt);
 }
 
 function mismatch(stage, pending) {
@@ -268,41 +324,59 @@ export async function waitForOrigin({
   sleep = defaultSleep,
   runKey = process.env.GITHUB_RUN_ID || 'local',
   replayNoop = false,
+  pushState = null,
+  probeTimeoutMs = DEFAULT_PROBE_TIMEOUT_MS,
   onObservation = null,
 } = {}) {
   if (typeof fetchImpl !== 'function') throw new TypeError('fetch implementation is required');
   const samples = selectOriginSamples(records || []);
   if (samples.length === 0) return { checked: 0, attempts: 0, waitedMs: 0, immediate: true };
+  if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) throw new TypeError('timeoutMs must be positive');
+  if (!Number.isFinite(probeTimeoutMs) || probeTimeoutMs <= 0) throw new TypeError('probeTimeoutMs must be positive');
 
   const startedAt = now();
+  const wallStartedAt = Date.now();
   const pending = new Map(samples.map((record) => [record, null]));
   let attempts = 0;
   let sequence = 0;
   while (pending.size > 0) {
     attempts += 1;
+    const replayFailures = new Map();
     for (const record of [...pending.keys()]) {
       sequence += 1;
-      const observation = await fetchFingerprint(record, {
-        fetchImpl,
-        url: record.origin || record.url,
-        cacheBust: true,
-        runKey,
-        sequence,
-      });
+      const url = record.origin || record.url;
+      const remainingBeforeProbe = timeoutMs - elapsedSince(startedAt, wallStartedAt, now);
+      const observation = remainingBeforeProbe > 0
+        ? await fetchFingerprint(record, {
+          fetchImpl,
+          url,
+          cacheBust: true,
+          runKey,
+          sequence,
+          timeoutMs: Math.min(probeTimeoutMs, Math.max(1, remainingBeforeProbe)),
+        })
+        : unavailableObservation(`probe budget exhausted for ${url}`);
       pending.set(record, observation);
       if (onObservation) onObservation({ record, observation, attempts });
-      if (matches(record, observation)) pending.delete(record);
+      if (matches(record, observation)) {
+        pending.delete(record);
+      } else if (replayNoop === true || pushState?.get?.(sampleKey(record)) === 'clean-no-op') {
+        replayFailures.set(record, observation);
+      }
+    }
+    if (replayFailures.size > 0) {
+      throw mismatch('Origin replay no-op did not already match', replayFailures);
     }
     if (pending.size === 0) {
       return {
         checked: samples.length,
         attempts,
-        waitedMs: Math.max(0, now() - startedAt),
+        waitedMs: elapsedSince(startedAt, wallStartedAt, now),
         immediate: attempts === 1,
       };
     }
     if (replayNoop) throw mismatch('Origin replay no-op did not already match', pending);
-    const remaining = timeoutMs - (now() - startedAt);
+    const remaining = timeoutMs - elapsedSince(startedAt, wallStartedAt, now);
     if (remaining <= 0) throw mismatch('Timed out waiting for GitHub Pages origin', pending);
     await sleep(Math.min(Math.max(1, pollIntervalMs), remaining));
   }
@@ -312,20 +386,31 @@ export async function waitForOrigin({
 export async function verifyApex({
   records,
   fetchImpl = globalThis.fetch,
+  timeoutMs = DEFAULT_TIMEOUT_SECONDS * 1000,
+  probeTimeoutMs = DEFAULT_PROBE_TIMEOUT_MS,
+  now = Date.now,
   onObservation = null,
 } = {}) {
   if (typeof fetchImpl !== 'function') throw new TypeError('fetch implementation is required');
+  if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) throw new TypeError('timeoutMs must be positive');
+  if (!Number.isFinite(probeTimeoutMs) || probeTimeoutMs <= 0) throw new TypeError('probeTimeoutMs must be positive');
   const failures = [];
   let checked = 0;
+  const startedAt = now();
+  const wallStartedAt = Date.now();
   for (const record of records || []) {
     checked += 1;
-    const observation = await fetchFingerprint(record, {
-      fetchImpl,
-      url: record.url,
-      cacheBust: false,
-      runKey: 'cdn',
-      sequence: checked,
-    });
+    const remainingBeforeProbe = timeoutMs - elapsedSince(startedAt, wallStartedAt, now);
+    const observation = remainingBeforeProbe > 0
+      ? await fetchFingerprint(record, {
+        fetchImpl,
+        url: record.url,
+        cacheBust: false,
+        runKey: 'cdn',
+        sequence: checked,
+        timeoutMs: Math.min(probeTimeoutMs, Math.max(1, remainingBeforeProbe)),
+      })
+      : unavailableObservation(`probe budget exhausted for ${record.url}`);
     if (onObservation) onObservation({ record, observation, checked });
     if (!matches(record, observation)) failures.push({ record, observation });
   }
@@ -338,12 +423,22 @@ export async function verifyAfterPurge({
   fetchImpl = globalThis.fetch,
   purge,
   maxRepurges = 1,
+  timeoutMs = DEFAULT_TIMEOUT_SECONDS * 1000,
+  probeTimeoutMs = DEFAULT_PROBE_TIMEOUT_MS,
+  now = Date.now,
   onObservation = null,
 } = {}) {
   let repurges = 0;
   while (true) {
     try {
-      const result = await verifyApex({ records, fetchImpl, onObservation });
+      const result = await verifyApex({
+        records,
+        fetchImpl,
+        timeoutMs,
+        probeTimeoutMs,
+        now,
+        onObservation,
+      });
       return { ...result, repurges };
     } catch (error) {
       if (!(error instanceof FingerprintMismatchError) || repurges >= maxRepurges || typeof purge !== 'function') {
@@ -396,11 +491,15 @@ async function main(argv) {
   }
 
   const records = readFingerprintFile(requiredFlag(args, '--fingerprints'));
+  const timeoutSeconds = positiveSeconds(
+    flag(args, '--timeout-seconds', String(DEFAULT_TIMEOUT_SECONDS)),
+    '--timeout-seconds',
+  );
+  const probeTimeoutSeconds = positiveSeconds(
+    flag(args, '--probe-timeout-seconds', String(DEFAULT_PROBE_TIMEOUT_MS / 1000)),
+    '--probe-timeout-seconds',
+  );
   if (command === 'wait-origin') {
-    const timeoutSeconds = positiveSeconds(
-      flag(args, '--timeout-seconds', String(DEFAULT_TIMEOUT_SECONDS)),
-      '--timeout-seconds',
-    );
     const pollSeconds = positiveSeconds(
       flag(args, '--poll-seconds', String(DEFAULT_POLL_SECONDS)),
       '--poll-seconds',
@@ -409,8 +508,13 @@ async function main(argv) {
       records,
       timeoutMs: timeoutSeconds * 1000,
       pollIntervalMs: pollSeconds * 1000,
+      probeTimeoutMs: probeTimeoutSeconds * 1000,
       runKey: flag(args, '--run-key', process.env.GITHUB_RUN_ID || 'local'),
       replayNoop: args.includes('--replay-noop'),
+      pushState: (() => {
+        const file = flag(args, '--push-state');
+        return file ? readPushStateFile(file) : null;
+      })(),
       onObservation: ({ record, observation }) => {
         console.log(`[origin] ${record.locale || 'unknown'} ${record.path}: ${observation.status || 'network-error'} ${observation.sha || 'unavailable'}`);
       },
@@ -421,6 +525,8 @@ async function main(argv) {
 
   const result = await verifyApex({
     records,
+    timeoutMs: timeoutSeconds * 1000,
+    probeTimeoutMs: probeTimeoutSeconds * 1000,
     onObservation: ({ record, observation }) => {
       console.log(`[cdn] ${record.url}: ${observation.status || 'network-error'} ${observation.sha || 'unavailable'} cf-cache-status=${observation.cfCacheStatus} age=${observation.age}`);
     },

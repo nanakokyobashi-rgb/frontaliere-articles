@@ -732,9 +732,13 @@ jobs:
           dist="$RUNNER_TEMP/fast-dist"
           shard="$FAST_PUBLISH_SHARD"
           push_log="$RUNNER_TEMP/article-shard-push.log"
+          push_state="$RUNNER_TEMP/published-push-state.tsv"
+          pushed_hub_paths="$RUNNER_TEMP/pushed-hub-paths.tsv"
+          pushed_hub_summary="$RUNNER_TEMP/pushed-hub-landing.json"
           : > "$push_log"
+          printf 'shard\tlocale\tstatus\n' > "$push_state"
+          : > "$pushed_hub_paths"
           exec > >(tee -a "$push_log") 2>&1
-          replay_noop=true
 
           # UN SOLO push per locale, articolo + hub insieme.
           #
@@ -770,14 +774,41 @@ jobs:
             # esprimevano: l'articolo è duro, l'hub è morbido («the hub stays stale, the
             # article is unaffected»). Se il push combinato fallisce si riprova col solo
             # articolo, così una pagina hub malformata non può impedire la pubblicazione.
-            if ! bash scripts/lib/push-article-shard-incremental.sh \
+            locale_status="$RUNNER_TEMP/article-shard-push-$loc.status"
+            rm -f "$locale_status"
+            combined_pushed=true
+            if ! ARTICLE_PUSH_STATUS_FILE="$locale_status" bash scripts/lib/push-article-shard-incremental.sh \
                  "$shard" "$loc" "$dist" "${paths[@]}" ${hpaths[@]+"${hpaths[@]}"}; then
               echo "::warning::combined push failed for $shard/$loc — retrying with the article alone (the hub stays stale)"
-              replay_noop=false
-              bash scripts/lib/push-article-shard-incremental.sh \
+              combined_pushed=false
+              rm -f "$locale_status"
+              ARTICLE_PUSH_STATUS_FILE="$locale_status" bash scripts/lib/push-article-shard-incremental.sh \
                 "$shard" "$loc" "$dist" "${paths[@]}"
             fi
+            push_status="$(tr -d '\r\n' < "$locale_status")"
+            case "$push_status" in
+              pushed|clean-no-op) ;;
+              *)
+                echo "::error::unexpected push status for $shard/$loc: $push_status"
+                exit 1
+                ;;
+            esac
+            printf '%s\t%s\t%s\n' "$shard" "$loc" "$push_status" >> "$push_state"
+            if [ "$combined_pushed" = true ]; then
+              for hpath in "${hpaths[@]}"; do
+                printf '%s\t%s\n' "$loc" "$hpath" >> "$pushed_hub_paths"
+              done
+            fi
           done
+
+          # A combined push may fall back to the article alone. Build the hub
+          # summary from the paths that went through a successful combined push,
+          # so a stale landing can never enter the served-content TSV or purge.
+          jq -R -s '
+            split("\n")
+            | map(select(length > 0) | split("\t") | {locale: .[0], path: .[1]})
+            | {pages: .}
+          ' "$pushed_hub_paths" > "$pushed_hub_summary"
 
           while IFS=$'\t' read -r local key; do
             [ -n "$local" ] || continue
@@ -806,22 +837,12 @@ jobs:
             fi
           fi
 
-          # The push helper explicitly reports a clean replay when its tree is
-          # already the remote tree. The origin check below still performs one
-          # probe: a matching first probe makes the purge immediate, while a
-          # mismatch fails fast instead of treating a replay as a new build.
-          if [ "$replay_noop" = true ] && grep -Fq 'no content changes vs remote' "$push_log"; then
-            echo "FAST_PUBLISH_REPLAY_NOOP=true" >> "$GITHUB_ENV"
-          else
-            echo "FAST_PUBLISH_REPLAY_NOOP=false" >> "$GITHUB_ENV"
-          fi
-
           # Read the bytes after the publisher's CDN offload and after the hub
           # refresh. These are the bytes that the shard push received, not a
           # second render and not an HTML marker.
           node scripts/ci/verify-served-fingerprint.mjs write \
             --summary "$summary" \
-            --hub-summary "$RUNNER_TEMP/hub-landing.json" \
+            --hub-summary "$pushed_hub_summary" \
             --dist "$dist" \
             --shard "$shard" \
             --output "$RUNNER_TEMP/published-fingerprints.tsv"
@@ -835,13 +856,11 @@ jobs:
           args=(
             wait-origin
             --fingerprints "$RUNNER_TEMP/published-fingerprints.tsv"
+            --push-state "$RUNNER_TEMP/published-push-state.tsv"
             --timeout-seconds "$PAGES_WAIT_SECONDS"
             --poll-seconds 15
             --run-key "${GITHUB_RUN_ID}.${GITHUB_RUN_ATTEMPT}.${FAST_PUBLISH_SHARD}"
           )
-          if [ "${FAST_PUBLISH_REPLAY_NOOP:-false}" = true ]; then
-            args+=(--replay-noop)
-          fi
           node scripts/ci/verify-served-fingerprint.mjs "${args[@]}"
 
       - name: Purge the edge cache for what was published
@@ -901,7 +920,7 @@ jobs:
           # The landing pages too, or the grid we just refreshed sits behind a
           # 4h edge cache and the article stays invisible on the page readers
           # land on — the exact symptom this refresh exists to fix.
-          hub="$RUNNER_TEMP/hub-landing.json"
+          hub="$RUNNER_TEMP/pushed-hub-landing.json"
           if [ -s "$hub" ]; then
             while IFS=$'\t' read -r loc rel; do
               [ -n "$rel" ] || continue

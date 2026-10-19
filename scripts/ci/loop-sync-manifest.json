@@ -5171,7 +5171,7 @@
     {
       "path": "scripts/ci/verify-served-fingerprint.mjs",
       "mode": "corpus-only",
-      "reason": "Registra l'impronta dei byte HTML gia' resi e pushati dal fast-publish, attende che l'origine GitHub Pages serva lo stesso contenuto prima della purge e verifica l'apex dopo la purge con una sola ripetizione diagnostica. Il sito consuma la superficie risultante e non possiede il publisher o il suo workflow; il confronto e' specifico del corpus che scrive gli shard Pages.",
+      "reason": "Registra l'impronta dei byte HTML del set effettivamente pushato dal fast-publish, distingue pushed e clean-no-op per shard e lingua, attende che l'origine GitHub Pages serva il contenuto dove c'e' stato un push reale e verifica l'apex dopo la purge con una sola ripetizione diagnostica. Le sonde hanno un timeout per richiesta legato al budget residuo, cosi' una risposta appesa non blocca la purge. Il sito consuma la superficie risultante e non possiede il publisher o il suo workflow; il confronto e' specifico del corpus che scrive gli shard Pages.",
       "baseline": {
         "site": null,
         "corpus": null,

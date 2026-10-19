@@ -13,7 +13,9 @@ import { dirname, join, resolve } from 'node:path';
 import {
   fingerprintHtml,
   readFingerprintFile,
+  readPushStateFile,
   recordsFromSummary,
+  verifyApex,
   verifyAfterPurge,
   waitForOrigin,
   writeFingerprintFile,
@@ -30,6 +32,14 @@ const RECORD = {
   origin: 'https://origin-articolifrontaliere-it.frontaliereticino.ch/articoli-ticino/demo/',
   path: 'articoli-ticino/demo/index.html',
   locale: 'it',
+  shard: 'articolifrontaliere',
+  sha: fingerprintHtml(NEW_HTML),
+};
+const EN_RECORD = {
+  url: 'https://frontaliereticino.ch/en/demo/',
+  origin: 'https://origin-articolifrontaliere-en.frontaliereticino.ch/en/demo/',
+  path: 'en/demo/index.html',
+  locale: 'en',
   shard: 'articolifrontaliere',
   sha: fingerprintHtml(NEW_HTML),
 };
@@ -136,6 +146,121 @@ test('un replay no-op controlla subito l’origine e non consuma il budget di at
   assert.equal(sleeps, 0);
 });
 
+test('lo stato pushed/no-op è isolato per lingua: una lingua aspetta e l’altra passa subito', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'served-fingerprint-state-'));
+  try {
+    const stateFile = join(root, 'published-push-state.tsv');
+    writeFileSync(
+      stateFile,
+      'shard\tlocale\tstatus\narticolifrontaliere\tit\tpushed\narticolifrontaliere\ten\tclean-no-op\n',
+    );
+    let now = 0;
+    let itFetches = 0;
+    let enFetches = 0;
+    const sleeps = [];
+    const result = await waitForOrigin({
+      records: [RECORD, EN_RECORD],
+      pushState: readPushStateFile(stateFile),
+      fetchImpl: async (url) => {
+        if (url.includes('origin-articolifrontaliere-en.')) {
+          enFetches += 1;
+          return response(NEW_HTML);
+        }
+        itFetches += 1;
+        return itFetches === 1 ? response(OLD_HTML) : response(NEW_HTML);
+      },
+      timeoutMs: 120,
+      pollIntervalMs: 15,
+      now: () => now,
+      sleep: async (ms) => {
+        sleeps.push(ms);
+        now += ms;
+      },
+      runKey: 'test.mixed',
+    });
+
+    assert.equal(result.checked, 2);
+    assert.equal(result.attempts, 2);
+    assert.equal(itFetches, 2);
+    assert.equal(enFetches, 1);
+    assert.deepEqual(sleeps, [15]);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il fallback solo-articoli costruisce il TSV senza le landing non pushate', () => {
+  assert.match(workflow, /pushed_hub_summary/);
+  assert.match(workflow, /if \[ "\$combined_pushed" = true \]/);
+  assert.match(workflow, /--hub-summary "\$pushed_hub_summary"/);
+  assert.match(workflow, /published-push-state\.tsv/);
+  assert.doesNotMatch(workflow, /FAST_PUBLISH_REPLAY_NOOP/);
+
+  const root = mkdtempSync(join(tmpdir(), 'served-fingerprint-fallback-'));
+  try {
+    const articlePath = 'articoli-ticino/demo/index.html';
+    const hubPath = 'it/frontaliere/index.html';
+    mkdirSync(join(root, 'articoli-ticino/demo'), { recursive: true });
+    mkdirSync(join(root, 'it/frontaliere'), { recursive: true });
+    writeFileSync(join(root, articlePath), NEW_HTML);
+    writeFileSync(join(root, hubPath), '<main>Landing stale</main>\n');
+
+    const records = recordsFromSummary({
+      distDir: root,
+      shard: 'articolifrontaliere',
+      summary: {
+        shards: [{
+          locale: 'it',
+          paths: [articlePath],
+          articlePaths: [articlePath],
+          urls: [RECORD.url],
+        }],
+      },
+      // This is the exact shape emitted after the combined push fails.
+      hubSummary: { pages: [] },
+    });
+    const output = join(root, 'published-fingerprints.tsv');
+    writeFingerprintFile(output, records);
+
+    assert.deepEqual(readFingerprintFile(output).map(({ path: recordPath }) => recordPath), [articlePath]);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('una probe che non risponde termina entro il budget e nomina la URL', async () => {
+  const startedAt = Date.now();
+  await assert.rejects(
+    () => waitForOrigin({
+      records: [RECORD],
+      fetchImpl: () => new Promise(() => {}),
+      timeoutMs: 40,
+      probeTimeoutMs: 5,
+      pollIntervalMs: 1,
+    }),
+    (error) => {
+      assert.match(error.message, /URL https:\/\/frontaliereticino\.ch\/articoli-ticino\/demo\//);
+      assert.match(error.message, /timed out|budget exhausted/);
+      return true;
+    },
+  );
+  assert.ok(Date.now() - startedAt < 500, 'la probe appesa non deve trattenere il job');
+
+  await assert.rejects(
+    () => verifyApex({
+      records: [RECORD],
+      fetchImpl: () => new Promise(() => {}),
+      timeoutMs: 40,
+      probeTimeoutMs: 5,
+    }),
+    (error) => {
+      assert.match(error.message, /URL https:\/\/frontaliereticino\.ch\/articoli-ticino\/demo\//);
+      assert.match(error.message, /timed out|budget exhausted/);
+      return true;
+    },
+  );
+});
+
 test('il TSV usa i byte finali di fast-dist e aggiunge le landing dell’hub', () => {
   const root = mkdtempSync(join(tmpdir(), 'served-fingerprint-'));
   try {
@@ -185,5 +310,10 @@ test('il workflow registra prima l’impronta, attende Pages prima della purge e
   assert.ok(verifyAt > purgeAt);
   assert.match(workflow, /cf-cache-status/);
   assert.match(helper, /last-modified/);
+  assert.match(helper, /AbortController/);
+  assert.match(helper, /response\.text\(\)/);
+  assert.match(workflow, /ARTICLE_PUSH_STATUS_FILE/);
+  assert.match(workflow, /clean-no-op/);
+  assert.match(workflow, /--push-state "\$RUNNER_TEMP\/published-push-state\.tsv"/);
   assert.doesNotMatch(workflow, /<main>[^\n]*2943/);
 });
