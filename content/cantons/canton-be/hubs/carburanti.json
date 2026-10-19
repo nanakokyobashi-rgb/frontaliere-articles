@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "562234cc78fb08bb53edfcd8cf7b1c2250c7650624724a1589e49e969b31d7d6",
+  "updatedAt": "2026-10-19T06:44:46.352Z",
+  "contentHash": "7c32d160a9acfbb27e69629a88c51b8ae1cc13fd3b0ebf88bb611be441eb43ee",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-15T12:02:33.404Z",
+      "updatedAt": "2026-10-18T11:41:56.271Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-18T11:41:56.271Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Berna mantiene la tassa ecclesiastica per le imprese",
+          "url": "/articoli-berna/berna-tassa-ecclesiastica/",
+          "excerpt": "Il Governo bernese ha preso atto della petizione per rendere volontaria la tassa ecclesiastica delle persone giuridiche.",
+          "date": "2026-10-19T06:36:37.308Z"
+        },
         {
           "title": "Berna: possibili disagi per manifestazione non autorizzata",
           "url": "/articoli-berna/traffico-berna-manifestazione/",
@@ -82,12 +88,6 @@
           "url": "/articoli-berna/ipsach-gru-linea-strada/",
           "excerpt": "Una gru da lavoro è caduta su edificio, ferrovia e strada.",
           "date": "2026-10-08T19:26:56.613Z"
-        },
-        {
-          "title": "Disoccupazione stabile a Berna settembre 2026: +78 persone",
-          "url": "/articoli-berna/disoccupazione-berna-settembre-2026-stabile/",
-          "excerpt": "A settembre 2026 il Canton Berna conta 12.208 disoccupati (+78), tasso 2,2%, giovani 1.435 (-11), settore alberghiero +64, sanitario +35, MEM -50.",
-          "date": "2026-10-07T19:58:52.255Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T06:44:46.352Z"
     },
     "en": {
       "canton": "BE",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-18T11:41:56.271Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Bern maintains the church tax for businesses",
+          "url": "/en/bern-articles/bern-church-tax-legal-entities/",
+          "excerpt": "The Bernese government has taken note of the petition to make the church tax for legal entities voluntary.",
+          "date": "2026-10-19T06:36:37.308Z"
+        },
         {
           "title": "Bern: possible disruptions due to unauthorized demonstration",
           "url": "/en/bern-articles/bern-traffic-demonstration/",
@@ -169,12 +175,6 @@
           "url": "/en/bern-articles/ipsach-crane-railway-road/",
           "excerpt": "A work crane fell onto a building, railway, and road.",
           "date": "2026-10-08T19:26:56.613Z"
-        },
-        {
-          "title": "Unemployment steady in Bern in September 2026: +78 people",
-          "url": "/en/bern-articles/unemployment-steady-in-bern-in-september-2026-78-people/",
-          "excerpt": "In September 2026, the Canton of Bern counts 12.208 unemployed people (+78), rate 2,2%, young people 1.435 (-11), hospitality sector +64, healthcare +35, MEM -50.",
-          "date": "2026-10-07T19:58:52.255Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T06:44:46.352Z"
     },
     "de": {
       "canton": "BE",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-18T11:41:56.271Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Bern behält die Kirchensteuer für Unternehmen bei",
+          "url": "/de/bern-artikel/bern-kirchensteuer-juristische-personen/",
+          "excerpt": "Die Berner Regierung hat die Petition zur Freiwilligkeit der Kirchensteuer für juristische Personen zur Kenntnis genommen.",
+          "date": "2026-10-19T06:36:37.308Z"
+        },
         {
           "title": "Bern: Nicht genehmigte Demonstrationen können zu Störungen führen.",
           "url": "/de/bern-artikel/bern-verkehr-kundgebung/",
@@ -256,12 +262,6 @@
           "url": "/de/bern-artikel/ipsach-arbeitskran-bahnstrasse/",
           "excerpt": "Ein Arbeitskran ist auf ein Gebäude, die Bahnstrecke und die Strasse gestürzt.",
           "date": "2026-10-08T19:26:56.613Z"
-        },
-        {
-          "title": "Arbeitslosigkeit in Bern im September 2026 stabil: +78 Personen",
-          "url": "/de/bern-artikel/arbeitslosigkeit-in-bern-im-september-2026-stabil-78-personen/",
-          "excerpt": "Im September 2026 zählt der Kanton Bern 12.208 Arbeitslose (+78), Arbeitslosenquote 2,2%, junge Arbeitslose 1.435 (-11), Hotellerie +64, Gesundheitswesen +35, MEM -50.",
-          "date": "2026-10-07T19:58:52.255Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T06:44:46.352Z"
     },
     "fr": {
       "canton": "BE",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-18T11:41:56.271Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Berne maintient l'impôt ecclésiastique pour les entreprises",
+          "url": "/fr/articles-berne/berne-taxe-eglise-personnes-morales/",
+          "excerpt": "Le Gouvernement bernois a pris acte de la pétition visant à rendre volontaire l'impôt ecclésiastique des personnes morales.",
+          "date": "2026-10-19T06:36:37.308Z"
+        },
         {
           "title": "Berne : perturbations possibles en raison d'une manifestation non autorisée",
           "url": "/fr/articles-berne/berne-trafic-manifestation/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-berne/ipsach-grue-voie-route/",
           "excerpt": "Une grue de chantier est tombée sur un bâtiment, la voie ferrée et la route.",
           "date": "2026-10-08T19:26:56.613Z"
-        },
-        {
-          "title": "Chômage stable à Berne en septembre 2026 : +78 personnes",
-          "url": "/fr/articles-berne/chomage-stable-a-berne-en-septembre-2026-78-personnes/",
-          "excerpt": "En septembre 2026, le canton de Berne compte 12.208 chômeurs (+78), taux de 2,2%, jeunes 1.435 (-11), secteur hôtelier +64, secteur sanitaire +35, MEM -50.",
-          "date": "2026-10-07T19:58:52.255Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T06:44:46.352Z"
     }
   }
 }

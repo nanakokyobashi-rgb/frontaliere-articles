@@ -8,6 +8,7 @@ import './lib/stdout-off-runner-pipe.mjs';
 import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -27,6 +28,10 @@ const HISTORICAL_CORE = Object.fromEntries(
   ARTICLE_SECTION_CORE_LIST.filter((core) => core.kind !== 'canton').map((core) => [core.section, core]),
 );
 const ACTIVE_WITH_TI = { ...HISTORICAL_CORE, 'canton-ti': ARTICLE_SECTION_CORE_ALL['canton-ti'] };
+
+function sha256(bytes) {
+  return createHash('sha256').update(bytes).digest('hex');
+}
 
 test('publisher: una release live con manifest precedente resta rossa finché il replay non verifica la release', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-release-'));
@@ -263,6 +268,7 @@ test('publisher: lo staging snapshotta prima degli asset e trattiene quelli dell
         }
         throw new Error(`URL inatteso: ${url}`);
       },
+      assetProbeImpl: async () => ({ ok: false, status: 'HTTP 404' }),
     });
     assert.equal(result.failures, 0);
     assert.deepEqual(events.slice(0, 4), [
@@ -275,6 +281,281 @@ test('publisher: lo staging snapshotta prima degli asset e trattiene quelli dell
     assert.ok(events.indexOf('snapshot:immutable') < events.indexOf('asset-upload:images/new.webp'));
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+function webpFixture(byte) {
+  const bytes = Buffer.alloc(24, byte);
+  bytes.write('RIFF', 0, 'ascii');
+  bytes.writeUInt32LE(bytes.length - 8, 4);
+  bytes.write('WEBP', 8, 'ascii');
+  bytes.write('VP8 ', 12, 'ascii');
+  bytes.writeUInt32LE(4, 16);
+  return bytes;
+}
+
+async function publishFourLocaleSharedAsset({ localBytes, assetProbeImpl = null, assetKey = 'images/shared.webp' }) {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-shared-asset-'));
+  const sharedLocal = path.join(fixtureRoot, `shared${path.extname(assetKey)}`);
+  const unrelatedLocal = path.join(fixtureRoot, 'unrelated.webp');
+  writeFileSync(sharedLocal, localBytes);
+  writeFileSync(unrelatedLocal, webpFixture(0x33));
+  const locales = ['it', 'en', 'de', 'fr'];
+  const pages = locales.map((locale) => pageEntry(
+    'canton-ti',
+    `${locale === 'it' ? '' : `${locale}/`}${ARTICLE_SECTION_CORE_ALL['canton-ti'].indexSlug[locale]}/nuova-rotta-${locale}/index.html`,
+    'article',
+  ));
+  const immutablePages = locales.map((locale) => pageEntry(
+    'canton-ti',
+    `${locale === 'it' ? '' : `${locale}/`}${ARTICLE_SECTION_CORE_ALL['canton-ti'].indexSlug[locale]}/rotta-live-${locale}/index.html`,
+    'article',
+  ));
+  const oldHtml = `<!doctype html><html><body><img src="https://cdn.frontaliereticino.ch/${assetKey}"></body></html>`;
+  const stagedHtml = `${oldHtml}${CORPUS_ROUTE_OWNER_META_TAG}`;
+  const uploadedPageKeys = new Set();
+  const events = [];
+  const assetProbeCalls = [];
+  for (const page of pages) {
+    const localPage = path.join(fixtureRoot, page.rel);
+    mkdirSync(path.dirname(localPage), { recursive: true });
+    writeFileSync(localPage, oldHtml, 'utf8');
+  }
+  const cleanup = () => rmSync(fixtureRoot, { recursive: true, force: true });
+  try {
+    const result = await publish({
+      section: 'canton-ti',
+      pages,
+      immutablePages,
+      snapshotPagesBeforeUpload: true,
+      cdnUploads: [
+        { local: sharedLocal, key: assetKey },
+        { local: unrelatedLocal, key: 'images/unrelated.webp' },
+      ],
+      obsoletePages: [],
+      distDir: fixtureRoot,
+      publishedStatusImpl: async () => 'live',
+      runImpl: (_command, args) => {
+        if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+          const key = args[2];
+          if (key.startsWith('edge/')) {
+            uploadedPageKeys.add(key);
+            events.push(`page-upload:${key}`);
+          } else {
+            events.push(`asset-upload:${key}`);
+          }
+          return { code: 0, stdout: '✅ uploaded' };
+        }
+        if (args.includes('scripts/cf-purge-cache.mjs')) return { code: 0, stdout: '' };
+        throw new Error(`comando inatteso: ${args.join(' ')}`);
+      },
+      probeImpl: async (url) => {
+        const immutable = immutablePages.find((page) => page.cdnUrl === url);
+        if (immutable) return { ok: true, status: 200, body: oldHtml };
+        const staged = pages.find((page) => page.cdnUrl === url || page.apexUrl === url);
+        if (staged) {
+          return uploadedPageKeys.has(staged.edgeKey)
+            ? { ok: true, status: 200, body: stagedHtml }
+            : { ok: false, status: 'HTTP 404' };
+        }
+        throw new Error(`URL inatteso: ${url}`);
+      },
+      assetProbeImpl: assetProbeImpl
+        ? async (key) => {
+          assetProbeCalls.push(key);
+          return assetProbeImpl(key);
+        }
+        : undefined,
+    });
+    return { result, events, pages, immutablePages, assetProbeCalls, cleanup };
+  } catch (error) {
+    cleanup();
+    throw error;
+  }
+}
+
+test('publisher: quattro route nuove riusano un asset identico senza PUT e conservano il publish', async () => {
+  const localBytes = webpFixture(0x11);
+  const originalFetch = globalThis.fetch;
+  const fetchCalls = [];
+  globalThis.fetch = async (url, options) => {
+    fetchCalls.push({ url: String(url), options });
+    return new Response(localBytes, { status: 200, headers: { 'content-type': 'image/webp' } });
+  };
+  let fixture;
+  try {
+    fixture = await publishFourLocaleSharedAsset({ localBytes });
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+  try {
+    assert.equal(fetchCalls.length, 1, 'il GET binario è memoizzato per chiave nella publish');
+    assert.match(fetchCalls[0].url, /^https:\/\/cdn\.frontaliereticino\.ch\/images\/shared\.webp\?/u);
+    assert.equal(fetchCalls[0].options.redirect, 'manual');
+    assert.equal(fetchCalls[0].options.cache, 'no-store');
+    assert.equal(fixture.result.failures, 0);
+    assert.equal(fixture.result.uploaded, 4);
+    assert.equal(fixture.result.deferredAssetPages, 0);
+    assert.equal(fixture.events.filter((event) => event.startsWith('page-upload:')).length, 4);
+    assert.ok(!fixture.events.includes('asset-upload:images/shared.webp'), 'i byte già identici non vengono sovrascritti');
+    assert.ok(fixture.events.includes('asset-upload:images/unrelated.webp'), 'gli asset non trattenuti seguono il normale upload');
+  } finally {
+    fixture.cleanup();
+  }
+});
+
+test('publisher: un asset cambiato resta trattenuto e conserva le quattro route per il replay', async () => {
+  const remoteBytes = webpFixture(0x11);
+  const fixture = await publishFourLocaleSharedAsset({
+    localBytes: webpFixture(0x22),
+    assetProbeImpl: async () => ({
+      ok: true,
+      status: 200,
+      contentType: 'image/webp',
+      byteLength: remoteBytes.length,
+      sha256: sha256(remoteBytes),
+    }),
+  });
+  try {
+    assert.equal(fixture.result.failures, 0);
+    assert.equal(fixture.result.uploaded, 0);
+    assert.equal(fixture.result.deferredAssetPages, 4);
+    assert.equal(fixture.events.filter((event) => event.startsWith('page-upload:')).length, 0);
+    assert.ok(!fixture.events.includes('asset-upload:images/shared.webp'));
+    assert.ok(fixture.events.includes('asset-upload:images/unrelated.webp'));
+  } finally {
+    fixture.cleanup();
+  }
+});
+
+test('publisher: GET errore, 404 e body immagine sconosciuto tengono asset e route in deferred', async (t) => {
+  const cases = [
+    ['errore GET', async () => { throw new Error('timeout'); }],
+    ['asset 404', async () => ({ ok: false, status: 'HTTP 404' })],
+    ['body HTML con status 200', null],
+  ];
+  for (const [name, assetProbeImpl] of cases) {
+    await t.test(name, async () => {
+      const localBytes = webpFixture(0x44);
+      const originalFetch = globalThis.fetch;
+      if (!assetProbeImpl) {
+        globalThis.fetch = async () => new Response(
+          '<!doctype html><html>not an image</html>',
+          { status: 200, headers: { 'content-type': 'image/webp' } },
+        );
+      }
+      let fixture;
+      try {
+        fixture = await publishFourLocaleSharedAsset({ localBytes, assetProbeImpl });
+      } finally {
+        globalThis.fetch = originalFetch;
+      }
+      try {
+        assert.equal(fixture.result.failures, 0);
+        assert.equal(fixture.result.uploaded, 0);
+        assert.equal(fixture.result.deferredAssetPages, 4);
+        assert.equal(fixture.events.filter((event) => event.startsWith('page-upload:')).length, 0);
+        assert.ok(!fixture.events.includes('asset-upload:images/shared.webp'));
+        assert.ok(fixture.events.includes('asset-upload:images/unrelated.webp'));
+      } finally {
+        fixture.cleanup();
+      }
+    });
+  }
+});
+
+test('publisher: stream image chunked oltre 5 MB viene cancellato e resta trattenuto', async () => {
+  const localBytes = webpFixture(0x44);
+  const originalFetch = globalThis.fetch;
+  let cancelled = false;
+  let requests = 0;
+  let sentChunks = 0;
+  globalThis.fetch = async () => {
+    requests++;
+    let sent = 0;
+    return new Response(new ReadableStream({
+      pull(controller) {
+        if (sent >= 10) {
+          controller.close();
+          return;
+        }
+        const chunk = Buffer.alloc(1024 * 1024, 0x55);
+        if (sent === 0) {
+          chunk.write('RIFF', 0, 'ascii');
+          chunk.writeUInt32LE(6 * 1024 * 1024 - 8, 4);
+          chunk.write('WEBP', 8, 'ascii');
+          chunk.write('VP8 ', 12, 'ascii');
+        }
+        sent++;
+        sentChunks = sent;
+        controller.enqueue(chunk);
+      },
+      cancel() {
+        cancelled = true;
+      },
+    }), { status: 200, headers: { 'content-type': 'image/webp' } });
+  };
+  let fixture;
+  try {
+    fixture = await publishFourLocaleSharedAsset({ localBytes });
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+  try {
+    assert.equal(requests, 1);
+    assert.ok(sentChunks >= 6, 'la prova usa una risposta chunked senza Content-Length');
+    assert.ok(sentChunks < 10, 'il reader cancella prima di consumare il body completo');
+    assert.equal(cancelled, true, 'il reader cancella il body appena supera il limite');
+    assert.equal(fixture.result.failures, 0);
+    assert.equal(fixture.result.uploaded, 0);
+    assert.equal(fixture.result.deferredAssetPages, 4);
+    assert.ok(!fixture.events.includes('asset-upload:images/shared.webp'));
+    assert.equal(fixture.events.filter((event) => event.startsWith('page-upload:')).length, 0);
+  } finally {
+    fixture.cleanup();
+  }
+});
+
+test('publisher: SVG plain/XML identici consentono le route; il fallback HTML resta trattenuto', async (t) => {
+  const cases = [
+    ['SVG senza dichiarazione XML', '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"></svg>', true],
+    ['SVG con dichiarazione XML', '<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg"></svg>', true],
+    ['fallback HTML servito come SVG', '<!doctype html><html><body>not an image</body></html>', false],
+  ];
+  for (const [name, content, shouldReuse] of cases) {
+    await t.test(name, async () => {
+      const localBytes = Buffer.from(content, 'utf8');
+      const originalFetch = globalThis.fetch;
+      let requests = 0;
+      globalThis.fetch = async () => {
+        requests++;
+        return new Response(localBytes, { status: 200, headers: { 'content-type': 'image/svg+xml' } });
+      };
+      let fixture;
+      try {
+        fixture = await publishFourLocaleSharedAsset({ localBytes, assetKey: 'images/shared.svg' });
+      } finally {
+        globalThis.fetch = originalFetch;
+      }
+      try {
+        assert.equal(requests, shouldReuse ? 1 : 0, 'solo i candidati immagine validi arrivano al probe CDN');
+        assert.equal(fixture.result.failures, 0);
+        assert.ok(fixture.events.includes('asset-upload:images/unrelated.webp'));
+        if (shouldReuse) {
+          assert.equal(fixture.result.uploaded, 4);
+          assert.equal(fixture.result.deferredAssetPages, 0);
+          assert.equal(fixture.events.filter((event) => event.startsWith('page-upload:')).length, 4);
+          assert.ok(!fixture.events.includes('asset-upload:images/shared.svg'));
+        } else {
+          assert.equal(fixture.result.uploaded, 0);
+          assert.equal(fixture.result.deferredAssetPages, 4);
+          assert.equal(fixture.events.filter((event) => event.startsWith('page-upload:')).length, 0);
+          assert.ok(!fixture.events.includes('asset-upload:images/shared.svg'));
+        }
+      } finally {
+        fixture.cleanup();
+      }
+    });
   }
 });
 
@@ -336,6 +617,7 @@ test('publisher: un 404 richiesto viene caricato con l asset trattenuto senza mu
         }
         throw new Error(`URL inatteso: ${url}`);
       },
+      assetProbeImpl: async () => ({ ok: false, status: 'HTTP 404' }),
     });
     assert.equal(result.failures, 0);
     assert.equal(result.uploaded, 1, 'il target 404 viene pubblicato prima del replay');
