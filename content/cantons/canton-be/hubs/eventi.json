@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "d10619c4186d5ab027a8999085177428c6d2ba8ecdd031c44bcd74dfdeefdf35",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "b74c722f723331e4335f4abdc782313f6155d052c6991ee44ca32d6df7d9a75e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-19T13:52:30.888Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "232",
+          "value": "224",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Tag der offenen Tür im Hotel",
-              "detail": "Spiez",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tag-der-offenen-tuer-im-hotel/"
+              "label": "Reichenbach-Märit (Herbstmarkt)",
+              "detail": "3713 Reichenbach im Kandertal, Reichenbach im Kandertal",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/reichenbachmaerit-herbstmarkt/"
+            },
+            {
+              "label": "Technik-Führung",
+              "detail": "Niesenbahn",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muelenen/technik-fuehrung_AhS4ZgN"
+            },
+            {
+              "label": "Soirée d'Échecs / Schachabend",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soiree-dechecs-schachabend-1/"
+            },
+            {
+              "label": "Alphorn-Montage: Orgel und Alphorn",
+              "detail": "Evang.-ref. Kirche Burgdorf (Stadtkirche), Burgdorf",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/alphorn-montage-orgel-und-alphorn/"
+            },
+            {
+              "label": "WebClient training for owners of holiday flats and chalets via GST",
+              "detail": "Gstaad Saanenland Tourismus, Saanen",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/formation-webclient-pour-les-proprietaires-de-locations-de-vacances-via-gst/"
+            },
+            {
+              "label": "4. Schlosskonzert, Klavierabend mit Jean-Jacques Schmid",
+              "detail": "Bern",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/4-schlosskonzert-klavierabend-mit-jeanjacques-schmid/"
+            },
+            {
+              "label": "Robert Jon & The Wreck",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/robert-jon-und-the-wreck_AusMSXD"
             },
             {
               "label": "«Hack Apertus» Liebefeld",
-              "detail": "WORKSPACE & MORE",
-              "date": "2026-10-18",
+              "detail": "WORKSPACE & MORE — in corso, ultimo giorno: 19 ottobre 2026",
+              "date": "2026-10-19",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/liebefeld/hack-apertus-liebefeld_AbuNW9x"
             },
             {
-              "label": "Mountain run Feutersoey - Arnensee",
-              "detail": "Feutersoey, Gsteig",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mountain-run-feutersoey-arnensee/"
+              "label": "Zaubermärchen im Tipi",
+              "detail": "Bolligen — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
             },
             {
-              "label": "Erntedankgottesdienst mit Apéro",
-              "detail": "Beatenberg",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erntedankgottesdienst-mit-apero/"
-            },
-            {
-              "label": "Gottesdienst mit Erntedankfest",
-              "detail": "Oey-Diemtigen, Diemtigen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gottesdienst-mit-erntedankfest/"
-            },
-            {
-              "label": "Matinée mit Swing-Inn 611",
-              "detail": "Restaurant Rössli, Uetendorf",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/uetendorf/matinee-mit-swing-inn-611_AKDXWwf"
-            },
-            {
-              "label": "Matinée with Swing-Inn 611",
-              "detail": "Uetendorf",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/matinee-with-swing-inn-611/"
-            },
-            {
-              "label": "Indonesischer Food Bazar",
-              "detail": "Gümligen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/indonesischer-food-bazar/"
-            },
-            {
-              "label": "Indonesischer Food Bazar 2026",
-              "detail": "Mattenhofsaal Muri-Gümligen",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/guemligen/indonesischer-food-bazar-2026_AkHXGvW"
-            },
-            {
-              "label": "Mobilitätstag",
-              "detail": "Biel",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mobilitaetstag/"
+              "label": "Lake Thun Breakfast Special",
+              "detail": "Thunersee, Thun — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T13:52:30.888Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "232",
+          "value": "224",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Tag der offenen Tür im Hotel",
-              "detail": "Spiez",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tag-der-offenen-tuer-im-hotel/"
+              "label": "Reichenbach-Märit (Herbstmarkt)",
+              "detail": "3713 Reichenbach im Kandertal, Reichenbach im Kandertal",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/reichenbachmaerit-herbstmarkt/"
+            },
+            {
+              "label": "Technik-Fhr",
+              "detail": "Niesenbahn",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muelenen/technik-fuehrung_AhS4ZgN"
+            },
+            {
+              "label": "Soirée d'Échecs / Schachabend",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soiree-dechecs-schachabend-1/"
+            },
+            {
+              "label": "Alphorn-Montage: Orgel und Alphorn",
+              "detail": "Evang.-ref. Kirche Burgdorf (Stadtkirche), Burgdorf",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/alphorn-montage-orgel-und-alphorn/"
+            },
+            {
+              "label": "WebClient training for owners of holiday flats and chalets via GST",
+              "detail": "Gstaad Saanenland Tourismus, Saanen",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/formation-webclient-pour-les-proprietaires-de-locations-de-vacances-via-gst/"
+            },
+            {
+              "label": "4. Schlosskonzert, Klavierabend mit Jean-Jacques Schmid",
+              "detail": "Bern",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/4-schlosskonzert-klavierabend-mit-jeanjacques-schmid/"
+            },
+            {
+              "label": "Robert Jon & The Wreck",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/robert-jon-und-the-wreck_AusMSXD"
             },
             {
               "label": "«Hack Apertus» Liebefeld",
-              "detail": "WORKSPACE & MORE",
-              "date": "2026-10-18",
+              "detail": "WORKSPACE & MORE — ongoing, last day: 19 October 2026",
+              "date": "2026-10-19",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/liebefeld/hack-apertus-liebefeld_AbuNW9x"
             },
             {
-              "label": "Mountain run Feutersoey - Arnensee",
-              "detail": "Feutersoey, Gsteig",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mountain-run-feutersoey-arnensee/"
+              "label": "Zaubermärchen im Tipi",
+              "detail": "Bolligen — ongoing, last day: 15 November 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
             },
             {
-              "label": "Erntedankgottesdienst mit Apéro",
-              "detail": "Beatenberg",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erntedankgottesdienst-mit-apero/"
-            },
-            {
-              "label": "Gottesdienst mit Erntedankfest",
-              "detail": "Oey-Diemtigen, Diemtigen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gottesdienst-mit-erntedankfest/"
-            },
-            {
-              "label": "Matinée with Swing-Inn 611",
-              "detail": "Restaurant Rössli, Uetendorf",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/uetendorf/matinee-mit-swing-inn-611_AKDXWwf"
-            },
-            {
-              "label": "Matinée with Swing-Inn 611",
-              "detail": "Uetendorf",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/matinee-with-swing-inn-611/"
-            },
-            {
-              "label": "Indonesischer Food Bazar",
-              "detail": "Gümligen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/indonesischer-food-bazar/"
-            },
-            {
-              "label": "Indonesischer Food Bazar 2026",
-              "detail": "Mattenhofsaal Muri-Gümligen",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/guemligen/indonesischer-food-bazar-2026_AkHXGvW"
-            },
-            {
-              "label": "Mobilitätstag",
-              "detail": "Biel",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mobilitaetstag/"
+              "label": "Lake Thun Breakfast Special",
+              "detail": "Thunersee, Thun — ongoing, last day: 14 November 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T13:52:30.888Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "232",
+          "value": "224",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Tag der offenen Tür im Hotel",
-              "detail": "Spiez",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tag-der-offenen-tuer-im-hotel/"
+              "label": "Reichenbach-Märit (Herbstmarkt)",
+              "detail": "3713 Reichenbach im Kandertal, Reichenbach im Kandertal",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/reichenbachmaerit-herbstmarkt/"
+            },
+            {
+              "label": "Technik-F",
+              "detail": "Niesenbahn",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muelenen/technik-fuehrung_AhS4ZgN"
+            },
+            {
+              "label": "Soirée d'Échecs / Schachabend",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soiree-dechecs-schachabend-1/"
+            },
+            {
+              "label": "Alphorn-Montage: Orgel und Alphorn",
+              "detail": "Evang.-ref. Kirche Burgdorf (Stadtkirche), Burgdorf",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/alphorn-montage-orgel-und-alphorn/"
+            },
+            {
+              "label": "WebClient Schulung für Vermieter:innen von Ferienwohnungen/Chalets über GST",
+              "detail": "Gstaad Saanenland Tourismus, Saanen",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/formation-webclient-pour-les-proprietaires-de-locations-de-vacances-via-gst/"
+            },
+            {
+              "label": "4. Schlosskonzert, Klavierabend mit Jean-Jacques Schmid",
+              "detail": "Bern",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/4-schlosskonzert-klavierabend-mit-jeanjacques-schmid/"
+            },
+            {
+              "label": "Robert Jon & The Wreck",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/robert-jon-und-the-wreck_AusMSXD"
             },
             {
               "label": "«Hack Apertus» Liebefeld",
-              "detail": "WORKSPACE & MORE",
-              "date": "2026-10-18",
+              "detail": "WORKSPACE & MORE — läuft, letzter Tag: 19. Oktober 2026",
+              "date": "2026-10-19",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/liebefeld/hack-apertus-liebefeld_AbuNW9x"
             },
             {
-              "label": "Berglauf Feutersoey - Arnensee",
-              "detail": "Feutersoey, Gsteig",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mountain-run-feutersoey-arnensee/"
+              "label": "Zaubermärchen im Tipi",
+              "detail": "Bolligen — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
             },
             {
-              "label": "Erntedankgottesdienst mit Apéro",
-              "detail": "Beatenberg",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erntedankgottesdienst-mit-apero/"
-            },
-            {
-              "label": "Gottesdienst mit Erntedankfest",
-              "detail": "Oey-Diemtigen, Diemtigen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gottesdienst-mit-erntedankfest/"
-            },
-            {
-              "label": "Matinée mit Swing-Inn 611",
-              "detail": "Restaurant Rössli, Uetendorf",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/uetendorf/matinee-mit-swing-inn-611_AKDXWwf"
-            },
-            {
-              "label": "Matinée mit Swing-Inn 611",
-              "detail": "Uetendorf",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/matinee-with-swing-inn-611/"
-            },
-            {
-              "label": "Indonesischer Food Bazar",
-              "detail": "Gümligen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/indonesischer-food-bazar/"
-            },
-            {
-              "label": "Indonesischer Food Bazar 2026",
-              "detail": "Mattenhofsaal Muri-Gümligen",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/guemligen/indonesischer-food-bazar-2026_AkHXGvW"
-            },
-            {
-              "label": "Mobilitätstag",
-              "detail": "Biel",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mobilitaetstag/"
+              "label": "Frühstücksspezial Thunersee",
+              "detail": "Thunersee, Thun — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T13:52:30.888Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "232",
+          "value": "224",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Tag der offenen Tür im Hotel",
-              "detail": "Spiez",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tag-der-offenen-tuer-im-hotel/"
+              "label": "Reichenbach-Märit (Herbstmarkt)",
+              "detail": "3713 Reichenbach im Kandertal, Reichenbach im Kandertal",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/reichenbachmaerit-herbstmarkt/"
+            },
+            {
+              "label": "Technique-Führung",
+              "detail": "Niesenbahn",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muelenen/technik-fuehrung_AhS4ZgN"
+            },
+            {
+              "label": "Soirée d'Échecs / Schachabend",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soiree-dechecs-schachabend-1/"
+            },
+            {
+              "label": "Alphorn-Montage: Orgel und Alphorn",
+              "detail": "Evang.-ref. Kirche Burgdorf (Stadtkirche), Burgdorf",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/alphorn-montage-orgel-und-alphorn/"
+            },
+            {
+              "label": "Formation WebClient pour les propriétaires de locations de vacances via GST",
+              "detail": "Gstaad Saanenland Tourismus, Saanen",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/formation-webclient-pour-les-proprietaires-de-locations-de-vacances-via-gst/"
+            },
+            {
+              "label": "4. Schlosskonzert, Klavierabend mit Jean-Jacques Schmid",
+              "detail": "Bern",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/4-schlosskonzert-klavierabend-mit-jeanjacques-schmid/"
+            },
+            {
+              "label": "Robert Jon & The Wreck",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/robert-jon-und-the-wreck_AusMSXD"
             },
             {
               "label": "«Hack Apertus» Liebefeld",
-              "detail": "WORKSPACE & MORE",
-              "date": "2026-10-18",
+              "detail": "WORKSPACE & MORE — en cours, dernier jour : 19 octobre 2026",
+              "date": "2026-10-19",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/liebefeld/hack-apertus-liebefeld_AbuNW9x"
             },
             {
-              "label": "Course de montagne Feutersoey - Arnensee",
-              "detail": "Feutersoey, Gsteig",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mountain-run-feutersoey-arnensee/"
+              "label": "Zaubermärchen im Tipi",
+              "detail": "Bolligen — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
             },
             {
-              "label": "Erntedankgottesdienst mit Apéro",
-              "detail": "Beatenberg",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erntedankgottesdienst-mit-apero/"
-            },
-            {
-              "label": "Gottesdienst mit Erntedankfest",
-              "detail": "Oey-Diemtigen, Diemtigen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gottesdienst-mit-erntedankfest/"
-            },
-            {
-              "label": "Matinée avec Swing-Inn 611",
-              "detail": "Restaurant Rössli, Uetendorf",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/uetendorf/matinee-mit-swing-inn-611_AKDXWwf"
-            },
-            {
-              "label": "Matinée avec Swing-Inn 611",
-              "detail": "Uetendorf",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/matinee-with-swing-inn-611/"
-            },
-            {
-              "label": "Indonesischer Food Bazar",
-              "detail": "Gümligen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/indonesischer-food-bazar/"
-            },
-            {
-              "label": "Indonesischer Food Bazar 2026",
-              "detail": "Mattenhofsaal Muri-Gümligen",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/guemligen/indonesischer-food-bazar-2026_AkHXGvW"
-            },
-            {
-              "label": "Journée de la mobilité",
-              "detail": "Biel",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mobilitaetstag/"
+              "label": "Spécial petit-déjeuner du lac de Thoune",
+              "detail": "Thunersee, Thun — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T13:52:30.888Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

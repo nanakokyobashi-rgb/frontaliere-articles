@@ -137,6 +137,8 @@ test('fuel: shapes rankings and suppresses a global Swiss station without route 
   assert.equal(block.municipalityCount, 518);
   assert.equal(block.cheapestItaly[0].municipality, 'Livigno');
   assert.equal(block.bestSavings[0].saving50LEur, 25.25);
+  assert.equal(block.bestSavings[0].italyTimeZone, 'Europe/Rome');
+  assert.equal(block.bestSavings[0].swissTimeZone, 'Europe/Zurich');
   assert.equal(block.cheapestSwissStation, null);
 });
 
@@ -164,6 +166,16 @@ test('exchange: latest rate, 1-day and 7-day deltas', () => {
   assert.equal(block.delta1d, 0.0015);
   assert.equal(block.rate7dAgo, 1.064); // latest point at or before 2026-08-01
   assert.equal(block.delta7d, 0.0055);
+});
+
+test('exchange: deltas match the rounded rates shown to readers', () => {
+  const block = shapeExchange({ points: [
+    { date: '2026-10-10', rate: 0.870051 },
+    { date: '2026-10-17', rate: 0.875049 },
+  ] }, { todayIso: '2026-10-18' });
+  assert.equal(block.rate7dAgo, 0.8701);
+  assert.equal(block.rate, 0.875);
+  assert.equal(block.delta7d, 0.0049);
 });
 
 test('exchange: an old gap does not become a published 7-day delta', () => {
@@ -232,11 +244,11 @@ const JOBS_STATS = {
   ],
 };
 
-test('jobs: uses yesterday from the history series, keeps the live partial', () => {
+test('jobs: keeps active totals available but does not publish a partial date-bucket count', () => {
   const block = shapeJobs(JOBS_STATS, { nowMs: NOW, todayIso: TODAY });
   assert.equal(block.available, true);
   assert.equal(block.activeJobs, 22645);
-  assert.equal(block.yesterdayAdded, 591);
+  assert.equal(block.yesterdayAdded, null);
   assert.equal(block.todayAdded, 12);
   assert.equal(block.last7dAdded, 4869);
 });
@@ -262,10 +274,9 @@ test('jobs: degrades when the history series stops advancing, however fresh gene
   assert.match(block.reason, /not advancing/);
 });
 
-test(`jobs: the healthy lag is exactly ${JOBS_HISTORY_MAX_LAG_DAYS}d — yesterday closed, nothing older`, () => {
-  // The day in progress is scoped out, so on a corpus that advances the newest
-  // closed row is always D-1. A lag of 2 means the closed row for D-1 never
-  // landed, which is also the state with no `yesterdayAdded` to headline with.
+test(`jobs: the healthy prior-date row is at most ${JOBS_HISTORY_MAX_LAG_DAYS}d old`, () => {
+  // A lag of 2 means the D-1 row did not land; the existing source-health gate
+  // remains in place even though its `added` value is no longer published.
   const healthy = {
     ...JOBS_STATS,
     history: [
@@ -314,9 +325,9 @@ test('jobs: a non-canonical date in the series degrades instead of emptying the 
   assert.match(shapeJobs(timestamped, { nowMs: NOW, todayIso: TODAY }).reason, /not YYYY-MM-DD/);
 });
 
-test('jobs: degrades when yesterday\'s closed row has not been appended yet', () => {
-  // The aggregator can append D-1 after the 05:05 cron. Before this rule the
-  // block went out `available: true` with the figure its headline needs empty.
+test('jobs: a missing prior-date row still fails the source-advance check', () => {
+  // The D-1 row can be absent even with a fresh generatedAt; the job block
+  // keeps its existing corpus-history freshness requirement.
   const appendedLate = {
     ...JOBS_STATS,
     history: [
@@ -328,8 +339,8 @@ test('jobs: degrades when yesterday\'s closed row has not been appended yet', ()
   assert.equal(block.available, false);
   assert.match(block.reason, /stops at 2026-08-06, 2d before/);
 
-  // Same outcome one step further in: the D-1 row is there, so the lag rule is
-  // satisfied, but it carries no usable `added`.
+  // When the D-1 row exists and other counters show movement, active totals
+  // remain usable even if no daily `added` count is available to publish.
   const noFigure = {
     ...JOBS_STATS,
     history: [
@@ -337,9 +348,10 @@ test('jobs: degrades when yesterday\'s closed row has not been appended yet', ()
       { date: '2026-08-07', totalJobs: 22645, added: null, updated: 21500, removed: 210 },
     ],
   };
-  const missing = shapeJobs(noFigure, { nowMs: NOW, todayIso: TODAY });
-  assert.equal(missing.available, false);
-  assert.match(missing.reason, /no closed row for 2026-08-07/);
+  const partial = shapeJobs(noFigure, { nowMs: NOW, todayIso: TODAY });
+  assert.equal(partial.available, true);
+  assert.equal(partial.yesterdayAdded, null);
+  assert.equal(partial.activeJobs, 22645);
 });
 
 test('jobs: degrades on a day that replays the previous one field-for-field', () => {
@@ -358,7 +370,7 @@ test('jobs: degrades on a day that replays the previous one field-for-field', ()
   assert.match(block.reason, /replays 2026-08-06/);
 });
 
-test('jobs: the live partial row for today is not read as a closed day', () => {
+test('jobs: the live partial row for today is excluded from the prior-date health check', () => {
   // The aggregator seeds a row for the day in progress mirroring `totals`.
   // With that row in the tail, the lag rule would always measure 0 and the
   // replay rule would compare a partial day against a full one.
@@ -377,7 +389,7 @@ test('jobs: the live partial row for today is not read as a closed day', () => {
   assert.match(block.reason, /not advancing/);
 
   // Symmetrically, a partial today that happens to carry over the previous
-  // day's counters is not a replay finding: the freeze is judged on closed days.
+  // day's counters is not a replay finding: the health check is date-scoped.
   const carryOver = {
     ...JOBS_STATS,
     history: [
@@ -388,16 +400,14 @@ test('jobs: the live partial row for today is not read as a closed day', () => {
   };
   assert.equal(shapeJobs(carryOver, { nowMs: NOW, todayIso: TODAY }).available, true);
 
-  // A series whose only row is today carries no closed day at all: the freeze
-  // rules have nothing to judge, but the block still has no yesterday figure,
-  // so it degrades on that instead of publishing an empty headline.
+  // A series with no prior-date row fails the explicit history requirement.
   const todayOnly = { ...JOBS_STATS, history: [{ date: TODAY, totalJobs: 22645, added: 12, updated: 300, removed: 4 }] };
   const onlyToday = shapeJobs(todayOnly, { nowMs: NOW, todayIso: TODAY });
   assert.equal(onlyToday.available, false);
-  assert.match(onlyToday.reason, /no closed row for 2026-08-07/);
+  assert.match(onlyToday.reason, /no prior-date row for 2026-08-07/);
 });
 
-test('jobs: a replayed pair of closed days is still caught behind a partial today', () => {
+test('jobs: a replayed pair of prior-date rows is still caught behind a partial today', () => {
   const replayedBehindToday = {
     ...JOBS_STATS,
     history: [
@@ -411,7 +421,7 @@ test('jobs: a replayed pair of closed days is still caught behind a partial toda
   assert.match(block.reason, /replays 2026-08-06/);
 });
 
-test('jobs: a moving corpus stays available, a closed day at zero does not', () => {
+test('jobs: a moving corpus stays available, a prior-date row with no movement does not', () => {
   const moving = {
     ...JOBS_STATS,
     history: [
@@ -420,10 +430,8 @@ test('jobs: a moving corpus stays available, a closed day at zero does not', () 
     ],
   };
   assert.equal(shapeJobs(moving, { nowMs: NOW, todayIso: TODAY }).available, true);
-  // A closed day with every movement counter at zero is a crawler that did not
-  // run, not a quiet day — publishing it would print "0 new listings yesterday"
-  // as a fact. It is caught before the replay rule, which no longer needs its
-  // own `updated > 0` escape hatch.
+  // A prior-date row with every movement counter at zero cannot demonstrate
+  // that the corpus advanced. Keep the existing source-health gate closed.
   const idle = {
     ...JOBS_STATS,
     history: [
@@ -434,7 +442,7 @@ test('jobs: a moving corpus stays available, a closed day at zero does not', () 
   const zeroDay = shapeJobs(idle, { nowMs: NOW, todayIso: TODAY });
   assert.equal(zeroDay.available, false);
   assert.match(zeroDay.reason, /all at 0/);
-  // A single closed zero day, with no previous row to replay, is caught too.
+  // A single zero row, with no previous row to replay, is caught too.
   const loneZeroDay = {
     ...JOBS_STATS,
     history: [{ date: '2026-08-07', totalJobs: 22645, added: 0, updated: 0, removed: 0 }],
@@ -443,7 +451,7 @@ test('jobs: a moving corpus stays available, a closed day at zero does not', () 
   // The producer shape the healthy fixture itself uses — `totalJobs` and
   // `added`, no `updated`/`removed` — must reach the rule too. Gating it behind
   // a four-field completeness check made it inert exactly here, and the block
-  // went out `available: true` with `yesterdayAdded: 0` to headline with.
+  // went out `available: true` despite no observed movement.
   const partialShapeZeroDay = {
     ...JOBS_STATS,
     history: [
@@ -466,7 +474,7 @@ test('jobs: a moving corpus stays available, a closed day at zero does not', () 
   };
   assert.equal(shapeJobs(partialShapeMoving, { nowMs: NOW, todayIso: TODAY }).available, true);
 
-  // No readable movement counter at all on the closed D-1: the guard cannot
+  // No readable movement counter at all on the prior-date D-1 bucket: the guard cannot
   // tell whether the crawler ran, and degrades instead of failing open on
   // `NaN === 0`.
   const noMovementCounters = {
@@ -484,7 +492,7 @@ test('jobs: a moving corpus stays available, a closed day at zero does not', () 
 
 test('jobs: no todayIso is no verdict, and no verdict is not "corpus fine"', () => {
   // The last fail-open door in this guard. `shapeJobs` without a clock used to
-  // publish `activeJobs` and a "new listings yesterday" figure from a corpus
+  // publish `activeJobs` from a corpus
   // nobody had judged: the corpus-advance rules abstained, and abstention read
   // as approval. `buildDailyBrief` validates `todayIso` and is the only caller
   // today, which is why this was reachable only by the NEXT caller.
@@ -496,7 +504,7 @@ test('jobs: no todayIso is no verdict, and no verdict is not "corpus fine"', () 
   assert.match(jobsCorpusFrozenReason(JOBS_STATS, {}), /no day to judge against/);
 
   // Same input one level up used to throw a RangeError out of `new Date(NaN)`
-  // in the yesterday lookup; it degrades now, like every other unreadable clock.
+  // in the prior-date row lookup; it degrades now, like every other unreadable clock.
   assert.doesNotThrow(() => shapeJobs(JOBS_STATS, { nowMs: NOW, todayIso: 'oggi' }));
 });
 
@@ -504,7 +512,7 @@ test('jobs: an absent history series degrades, exactly like an empty one', () =>
   // `generatedAt` is the aggregator's clock, not the corpus's: it stays fresh
   // over a corpus that stopped moving. With no `history` there is no corpus
   // clock at all, so nobody has judged the payload — publishing `jobsActive`
-  // and a "new listings yesterday" figure from it is the fail-open shape.
+  // from it is the fail-open shape.
   const { history, ...noHistory } = JOBS_STATS;
   const absent = shapeJobs(noHistory, { nowMs: NOW, todayIso: TODAY });
   assert.equal(absent.available, false);
@@ -538,9 +546,9 @@ test('jobs: the format check stops at the window the guard reads', () => {
   };
   const block = shapeJobs(archiveJunk, { nowMs: NOW, todayIso: TODAY });
   assert.equal(block.available, true, block.reason);
-  assert.equal(block.yesterdayAdded, 591);
+  assert.equal(block.yesterdayAdded, null);
 
-  // The partial row for the day in progress is outside the closed-day window
+  // The partial row for the day in progress is outside the prior-date window
   // too: the guard scopes it out of every verdict, so its shape cannot matter.
   const partialTodayJunk = {
     ...JOBS_STATS,
@@ -553,7 +561,7 @@ test('jobs: the format check stops at the window the guard reads', () => {
   assert.equal(shapeJobs(partialTodayJunk, { nowMs: NOW, todayIso: TODAY }).available, true);
 
   // Inside the window it is still a finding: `2026-8-6` sorts after
-  // `2026-08-07`, so keeping it would skew the newest closed row and dropping
+  // `2026-08-07`, so keeping it would skew the newest prior-date row and dropping
   // it would hide a producer that changed shape on the days that are read.
   const inWindowJunk = {
     ...JOBS_STATS,

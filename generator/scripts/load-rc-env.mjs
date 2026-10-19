@@ -551,6 +551,7 @@ export function isTrivialSecret(value) {
 const QUOTA_RC_FETCH_REASONS = new Set([
   'rateLimitExceeded',
   'userRateLimitExceeded',
+  'dailyLimitExceeded',
   'dailyLimitExceededUnreg',
   'quotaExceeded',
   'RESOURCE_EXHAUSTED',

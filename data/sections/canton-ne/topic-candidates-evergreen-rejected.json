@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-fed-l-ia-est-le-changement-le-plus-determinant-pour-l-economie.html": {
-      "section": "canton-ne",
-      "ts": 1792197092204
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-loi-sur-la-poste-face-a-des-critiques-lors-de-la-consultation.html": {
-      "section": "canton-ne",
-      "ts": 1792197242008
-    },
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-progression-du-parc-automobile-en-suisse-a-fin-septembre.html": {
       "section": "canton-ne",
       "ts": 1792294783703
@@ -87,6 +79,34 @@
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-trump-limoge-sa-porte-parole-apres-seulement-une-semaine.html": {
       "section": "canton-ne",
       "ts": 1792349110392
+    },
+    "canton-ne::https://www.ne.ch/communiques-de-presse/les-benefices-de-la-loterie-romande-ont-permis-de-distribuer-plus-de-155-millions-de-francs-dans-le-canton-de-neuchatel": {
+      "section": "canton-ne",
+      "ts": 1792411802436
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261019-plr-et-gauche-montent-au-creneau-contre-l-initiative-du-centre.html": {
+      "section": "canton-ne",
+      "ts": 1792421393122
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261019-alstom-decroche-une-commande-de-800-millions-d-euros-au-vietnam.html": {
+      "section": "canton-ne",
+      "ts": 1792421408571
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261019-lindt-spruengli-remercie-son-patron-dieter-weisskopf-rempile.html": {
+      "section": "canton-ne",
+      "ts": 1792421420897
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261019-iran-un-petrolier-percute-une-mine-et-prend-feu-a-ormuz.html": {
+      "section": "canton-ne",
+      "ts": 1792421434213
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261019-elon-musk-veut-donner-une-action-spacex-a-chaque-enfant-en-amerique.html": {
+      "section": "canton-ne",
+      "ts": 1792421461969
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261019-convergence-entre-jeux-video-et-d-argent-deletere-pour-les-mineurs.html": {
+      "section": "canton-ne",
+      "ts": 1792426463488
     }
   }
 }

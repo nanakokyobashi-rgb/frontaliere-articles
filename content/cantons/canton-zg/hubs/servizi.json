@@ -4,7 +4,7 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T16:48:41.470Z",
+  "updatedAt": "2026-10-19T17:59:19.762Z",
   "contentHash": "07813956bcb53b7fb1cdc03e1fbd25616d3bf392a696959de32566c590a40e41",
   "blocks": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T09:56:00.107Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -84,7 +84,7 @@
               "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -164,7 +164,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "en": {
       "canton": "ZG",
@@ -231,7 +231,7 @@
               "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -307,7 +307,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "de": {
       "canton": "ZG",
@@ -374,7 +374,7 @@
               "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -450,7 +450,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "fr": {
       "canton": "ZG",
@@ -517,7 +517,7 @@
               "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -589,7 +589,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     }
   }
 }

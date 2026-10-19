@@ -4,14 +4,14 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-18T15:52:30.685Z",
-  "contentHash": "893d2ec4c628e1bba7c6fddb477d11d9ac4570678737212fbc1d05d403afff6b",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "4e5d4c9b91bbbc31eb82df149711f6747694c75d2faac9f8b48a7d2439020060",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-18T11:41:56.271Z",
+      "updatedAt": "2026-10-19T13:56:07.476Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-25T11:41:56.271Z"
+      "carryUntilAt": "2026-10-26T13:56:07.476Z"
     }
   ],
   "locales": {
@@ -54,52 +54,52 @@
             },
             {
               "label": "Benzina 95 — Austria",
-              "value": "1,777 EUR/l",
-              "detail": "media regionale: minimo 1,757 EUR/l, 13 stazioni rilevate",
-              "date": "2026-10-18T11:41:56.271Z"
+              "value": "1,813 EUR/l",
+              "detail": "media regionale: minimo 1,797 EUR/l, 12 stazioni rilevate",
+              "date": "2026-10-19T13:56:07.476Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2,098 EUR/l",
-              "detail": "media regionale: minimo 2,089 EUR/l, 10 stazioni rilevate",
-              "date": "2026-10-18T11:41:56.271Z"
+              "value": "2,142 EUR/l",
+              "detail": "media regionale: minimo 2,100 EUR/l, 14 stazioni rilevate",
+              "date": "2026-10-19T13:56:07.476Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzello Interno: il Proporz non passa al Gran Consiglio",
+          "url": "/articoli-appenzello/proporz-gran-consiglio-appenzello/",
+          "excerpt": "Il 19 ottobre il Gran Consiglio innerrhodese ha avuto un'agenda lunga; la revisione totale della legge sugli esercizi pubblici ha richiesto discussioni.",
+          "date": "2026-10-19T18:26:19.436Z"
+        },
+        {
+          "title": "Appenzell: Walzthöny non è più direttrice dell'Oberstufe",
+          "url": "/articoli-appenzello/cambio-dirigenza-scuola-appenzell/",
+          "excerpt": "Isabella Walzthöny iniziò il 1° febbraio 2023 alla Schulgemeinde Appenzell, dopo la designazione come successora di Thomas Mainberger.",
+          "date": "2026-10-19T16:21:04.781Z"
+        },
+        {
+          "title": "Teufen: preventivo 2027 per ridurre il deficit operativo",
+          "url": "/articoli-appenzello/teufen-budget-deficit-2027/",
+          "excerpt": "Il Comune di Teufen prevede per il 2027 entrate fiscali di 38,9 milioni di franchi, in aumento del 2,2% rispetto al preventivo precedente.",
+          "date": "2026-10-19T15:18:22.893Z"
+        },
+        {
+          "title": "Rotenwies di Gais alza le rette di pensione e assistenza",
+          "url": "/articoli-appenzello/gais-alterszentrum-rotewies-rette-aumento/",
+          "excerpt": "Il centro per anziani Rotenwies di Gais aumenterà le rette di pensione e assistenza a causa di un deficit finanziario protratto da anni e dei costi in crescita.",
+          "date": "2026-10-19T14:39:09.729Z"
+        },
+        {
           "title": "Nuova area nell'Appenzeller Hinterland: due responsabili",
           "url": "/articoli-appenzello/raiba-nuova-area-previdenza/",
           "excerpt": "La Raiffeisenbank Appenzeller Hinterland riunisce previdenza, successioni, analisi di copertura e assicurazioni.",
           "date": "2026-10-18T05:22:07.781Z"
-        },
-        {
-          "title": "Eventi del weekend in Appenzello: cosa fare sabato e domenica",
-          "url": "/articoli-appenzello/eventi-weekend-appenzello/",
-          "excerpt": "Eventi in Appenzello ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
-          "date": "2026-10-17T11:26:40.822Z"
-        },
-        {
-          "title": "Appenzello: tasso fiscale previsto a 3,90 unità",
-          "url": "/articoli-appenzello/appenzello-tasso-fiscale-390/",
-          "excerpt": "Il preventivo 2027 prevede un disavanzo di CHF 323'670: il tasso fiscale dovrebbe salire a 3,90 unità.",
-          "date": "2026-10-17T00:31:56.459Z"
-        },
-        {
-          "title": "Deficit comunale di CHF 169'500 nel preventivo 2027",
-          "url": "/articoli-appenzello/deficit-comune-preventivo-2027/",
-          "excerpt": "Il preventivo 2027 prevede un disavanzo di CHF 169'500.",
-          "date": "2026-10-12T06:43:23.669Z"
-        },
-        {
-          "title": "Herisau: i due Appenzello chiedono più rapidità",
-          "url": "/articoli-appenzello/herisau-verkehr-appenzello/",
-          "excerpt": "Durante la consultazione su «Verkehr '45», Appenzello Esterno chiede di rivedere la proposta e contesta l'orientamento della parte ferroviaria.",
-          "date": "2026-10-10T06:33:48.256Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -153,52 +153,52 @@
             },
             {
               "label": "Petrol 95 — Austria",
-              "value": "1.777 EUR/l",
-              "detail": "regional average: lowest 1.757 EUR/l, 13 stations surveyed",
-              "date": "2026-10-18T11:41:56.271Z"
+              "value": "1.813 EUR/l",
+              "detail": "regional average: lowest 1.797 EUR/l, 12 stations surveyed",
+              "date": "2026-10-19T13:56:07.476Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2.098 EUR/l",
-              "detail": "regional average: lowest 2.089 EUR/l, 10 stations surveyed",
-              "date": "2026-10-18T11:41:56.271Z"
+              "value": "2.142 EUR/l",
+              "detail": "regional average: lowest 2.100 EUR/l, 14 stations surveyed",
+              "date": "2026-10-19T13:56:07.476Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell Innerrhoden: proportional representation rejected by the Grand Council",
+          "url": "/en/appenzell-articles/proporz-appenzell-grand-council/",
+          "excerpt": "On October 19, the Innerrhoden Grand Council had a lengthy agenda; the complete revision of the law on public establishments required discussion.",
+          "date": "2026-10-19T18:26:19.436Z"
+        },
+        {
+          "title": "Appenzell: Walzthöny is no longer head of the Oberstufe",
+          "url": "/en/appenzell-articles/appenzell-school-leadership-change/",
+          "excerpt": "Isabella Walzthöny began at Schulgemeinde Appenzell on February 1, 2023, after being appointed as Thomas Mainberger’s successor.",
+          "date": "2026-10-19T16:21:04.781Z"
+        },
+        {
+          "title": "Teufen: 2027 budget proposal to reduce the operating deficit",
+          "url": "/en/appenzell-articles/teufen-2027-budget-deficit/",
+          "excerpt": "The Municipality of Teufen expects tax revenues of 38,9 million francs in 2027, an increase of 2,2% compared with the previous budget.",
+          "date": "2026-10-19T15:18:22.893Z"
+        },
+        {
+          "title": "Rotenwies in Gais raises its residential and care fees",
+          "url": "/en/appenzell-articles/gais-alterszentrum-rotewies-fee-increase/",
+          "excerpt": "The Rotenwies senior center in Gais will increase its accommodation and care fees due to a financial deficit that has persisted for years and rising costs.",
+          "date": "2026-10-19T14:39:09.729Z"
+        },
+        {
           "title": "New area in the Appenzeller Hinterland: two managers",
           "url": "/en/appenzell-articles/raiba-new-pension-area/",
           "excerpt": "Raiffeisenbank Appenzeller Hinterland brings together retirement planning, succession planning, coverage analysis and insurance.",
           "date": "2026-10-18T05:22:07.781Z"
-        },
-        {
-          "title": "Weekend events in Appenzell: what to do Saturday & Sunday",
-          "url": "/en/appenzell-articles/weekend-events-appenzell/",
-          "excerpt": "Events in Appenzell every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
-          "date": "2026-10-17T11:26:40.822Z"
-        },
-        {
-          "title": "Appenzell: projected tax rate at 3,90 units",
-          "url": "/en/appenzell-articles/appenzell-tax-rate-390/",
-          "excerpt": "The 2027 budget forecasts a deficit of CHF 323'670: the tax rate should rise to 3,90 units.",
-          "date": "2026-10-17T00:31:56.459Z"
-        },
-        {
-          "title": "Municipal deficit of CHF 169'500 in the 2027 budget",
-          "url": "/en/appenzell-articles/municipal-deficit-budget-2027/",
-          "excerpt": "The 2027 budget estimates a deficit of CHF 169'500.",
-          "date": "2026-10-12T06:43:23.669Z"
-        },
-        {
-          "title": "Herisau: the two Appenzells call for greater speed",
-          "url": "/en/appenzell-articles/herisau-transport-appenzell/",
-          "excerpt": "During the consultation on «Verkehr '45», Appenzell Ausserrhoden calls for the proposal to be reviewed and challenges the direction of the railway component.",
-          "date": "2026-10-10T06:33:48.256Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -252,52 +252,52 @@
             },
             {
               "label": "Benzin 95 — Österreich",
-              "value": "1.777 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.757 EUR/l, 13 erfasste Tankstellen",
-              "date": "2026-10-18T11:41:56.271Z"
+              "value": "1.813 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.797 EUR/l, 12 erfasste Tankstellen",
+              "date": "2026-10-19T13:56:07.476Z"
             },
             {
               "label": "Diesel — Österreich",
-              "value": "2.098 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.089 EUR/l, 10 erfasste Tankstellen",
-              "date": "2026-10-18T11:41:56.271Z"
+              "value": "2.142 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.100 EUR/l, 14 erfasste Tankstellen",
+              "date": "2026-10-19T13:56:07.476Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell Innerrhoden: Der Proporz kommt im Grossen Rat nicht durch",
+          "url": "/de/appenzell-artikel/proporz-im-grossen-rat/",
+          "excerpt": "Am 19. Oktober hatte der Innerrhoder Grosse Rat eine lange Traktandenliste; die Totalrevision des Gastgewerbegesetzes erforderte Diskussionen.",
+          "date": "2026-10-19T18:26:19.436Z"
+        },
+        {
+          "title": "Appenzell: Walzthöny ist nicht mehr Leiterin der Oberstufe",
+          "url": "/de/appenzell-artikel/appenzell-schulleitung-wechsel/",
+          "excerpt": "Isabella Walzthöny begann am 1.",
+          "date": "2026-10-19T16:21:04.781Z"
+        },
+        {
+          "title": "Teufen: Budget 2027 zur Verringerung des operativen Defizits",
+          "url": "/de/appenzell-artikel/teufen-voranschlag-defizit-2027/",
+          "excerpt": "Die Gemeinde Teufen erwartet für 2027 Steuereinnahmen von 38,9 Millionen Franken, was einem Anstieg von 2,2% gegenüber dem vorherigen Budget entspricht.",
+          "date": "2026-10-19T15:18:22.893Z"
+        },
+        {
+          "title": "Rotenwies in Gais erhöht die Pensions- und Betreuungstaxen",
+          "url": "/de/appenzell-artikel/gais-alterszentrum-rotewies-gebuhren-erhoehung/",
+          "excerpt": "Das Alterszentrum Rotenwies in Gais wird die Pensions- und Betreuungstaxen aufgrund eines seit Jahren anhaltenden Finanzdefizits und der steigenden Kosten erhöhen.",
+          "date": "2026-10-19T14:39:09.729Z"
+        },
+        {
           "title": "Neuer Bereich im Appenzeller Hinterland: zwei Verantwortliche",
           "url": "/de/appenzell-artikel/raiba-neuer-vorsorgebereich/",
           "excerpt": "Die Raiffeisenbank Appenzeller Hinterland vereint Vorsorge, Nachfolge, Deckungsanalyse und Versicherungen.",
           "date": "2026-10-18T05:22:07.781Z"
-        },
-        {
-          "title": "Veranstaltungen am Wochenende im Appenzellerland: was tun Sa & So",
-          "url": "/de/appenzell-artikel/wochenend-veranstaltungen-appenzell/",
-          "excerpt": "Veranstaltungen im Appenzellerland an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
-          "date": "2026-10-17T11:26:40.822Z"
-        },
-        {
-          "title": "Appenzell: Voraussichtlicher Steuerfuss bei 3,90 Einheiten",
-          "url": "/de/appenzell-artikel/appenzell-steuerfuss-390/",
-          "excerpt": "Der Voranschlag 2027 sieht ein Defizit von CHF 323'670 vor: Der Steuerfuss soll auf 3,90 Einheiten steigen.",
-          "date": "2026-10-17T00:31:56.459Z"
-        },
-        {
-          "title": "Gemeindedefizit von CHF 169'500 im Voranschlag 2027",
-          "url": "/de/appenzell-artikel/gemeinde-defizit-voranschlag-2027/",
-          "excerpt": "Der Voranschlag 2027 sieht ein Defizit von CHF 169'500 vor.",
-          "date": "2026-10-12T06:43:23.669Z"
-        },
-        {
-          "title": "Herisau: Die beiden Appenzell fordern mehr Tempo",
-          "url": "/de/appenzell-artikel/herisau-verkehr-appenzell/",
-          "excerpt": "Während der Vernehmlassung zu «Verkehr '45» fordert Appenzell Ausserrhoden, den Vorschlag zu überarbeiten, und stellt die Ausrichtung des Bahnteils infrage.",
-          "date": "2026-10-10T06:33:48.256Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -351,52 +351,52 @@
             },
             {
               "label": "Essence 95 — Autriche",
-              "value": "1,777 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,757 EUR/l, 13 stations relevées",
-              "date": "2026-10-18T11:41:56.271Z"
+              "value": "1,813 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,797 EUR/l, 12 stations relevées",
+              "date": "2026-10-19T13:56:07.476Z"
             },
             {
               "label": "Diesel — Autriche",
-              "value": "2,098 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,089 EUR/l, 10 stations relevées",
-              "date": "2026-10-18T11:41:56.271Z"
+              "value": "2,142 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,100 EUR/l, 14 stations relevées",
+              "date": "2026-10-19T13:56:07.476Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell Rhodes-Intérieures : le Proporz ne passe pas au Grand Conseil",
+          "url": "/fr/articles-appenzell/proporz-grand-conseil-appenzell/",
+          "excerpt": "Le 19 octobre, le Grand Conseil d'Appenzell Rhodes-Intérieures a eu un ordre du jour chargé ; la révision totale de la loi sur les établissements publics a nécessité des discussions.",
+          "date": "2026-10-19T18:26:19.436Z"
+        },
+        {
+          "title": "Appenzell : Walzthöny n'est plus directrice de l'Oberstufe",
+          "url": "/fr/articles-appenzell/appenzell-changement-direction-ecole/",
+          "excerpt": "Isabella Walzthöny a pris ses fonctions le 1er février 2023 à la Schulgemeinde Appenzell, après avoir été désignée comme successeure de Thomas Mainberger.",
+          "date": "2026-10-19T16:21:04.781Z"
+        },
+        {
+          "title": "Teufen : budget 2027 pour réduire le déficit opérationnel",
+          "url": "/fr/articles-appenzell/teufen-budget-2027-pour-reduire-le-deficit-operationnel/",
+          "excerpt": "La commune de Teufen prévoit pour 2027 des recettes fiscales de 38,9 millions de francs, en hausse de 2,2% par rapport au budget précédent.",
+          "date": "2026-10-19T15:18:22.893Z"
+        },
+        {
+          "title": "Rotenwies di Gais augmente les tarifs de pension et d'assistance",
+          "url": "/fr/articles-appenzell/gais-centre-rotewies-augmentation-frais/",
+          "excerpt": "Le centre pour personnes âgées Rotenwies di Gais augmentera les tarifs de pension et d'assistance en raison d'un déficit financier qui se prolonge depuis des années et de la hausse des coûts.",
+          "date": "2026-10-19T14:39:09.729Z"
+        },
+        {
           "title": "Nouvelle unité dans l’Appenzeller Hinterland : deux responsables",
           "url": "/fr/articles-appenzell/raiba-nouveau-domaine-prevoyance/",
           "excerpt": "La Raiffeisenbank Appenzeller Hinterland réunit la prévoyance, les successions, l’analyse de couverture et les assurances.",
           "date": "2026-10-18T05:22:07.781Z"
-        },
-        {
-          "title": "Événements du week-end en Appenzell : que faire samedi & dimanche",
-          "url": "/fr/articles-appenzell/evenements-week-end-appenzell/",
-          "excerpt": "Événements en Appenzell chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
-          "date": "2026-10-17T11:26:40.822Z"
-        },
-        {
-          "title": "Appenzell : taux d'imposition prévu à 3,90 unités",
-          "url": "/fr/articles-appenzell/appenzell-taux-fiscal-390/",
-          "excerpt": "Le budget 2027 prévoit un déficit de CHF 323'670 : le taux d'imposition devrait passer à 3,90 unités.",
-          "date": "2026-10-17T00:31:56.459Z"
-        },
-        {
-          "title": "Déficit communal de CHF 169'500 dans le budget 2027",
-          "url": "/fr/articles-appenzell/deficit-commune-budget-2027/",
-          "excerpt": "Le budget 2027 prévoit un déficit de CHF 169'500.",
-          "date": "2026-10-12T06:43:23.669Z"
-        },
-        {
-          "title": "Herisau : les deux Appenzell demandent plus de rapidité",
-          "url": "/fr/articles-appenzell/herisau-transports-appenzell/",
-          "excerpt": "Lors de la consultation sur «Verkehr '45», Appenzell Rhodes-Extérieures demande de revoir la proposition et conteste l'orientation de la partie ferroviaire.",
-          "date": "2026-10-10T06:33:48.256Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

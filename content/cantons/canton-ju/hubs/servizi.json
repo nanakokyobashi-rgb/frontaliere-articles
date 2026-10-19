@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T17:18:28.692Z",
-  "contentHash": "12c132e155317bcdae3960166f243a39b81d67f5c23e66d1113ec48e07d8346f",
+  "updatedAt": "2026-10-19T17:59:19.762Z",
+  "contentHash": "3ed10b1bc6e825f011ee250c781c957a70851f4dcb9ff9f85ee18dc686c40724",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-18T10:29:03.820Z",
+      "updatedAt": "2026-10-19T09:16:30.906Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T09:56:00.107Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -71,11 +71,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-18T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-19T16:30:00.000Z"
             },
             {
@@ -87,11 +82,16 @@
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
               "date": "2026-10-21T16:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-22T16:30:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-18T10:29:03.820Z"
+          "updatedAt": "2026-10-19T09:16:30.906Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -109,7 +109,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -159,7 +159,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T17:18:28.692Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "en": {
       "canton": "JU",
@@ -208,11 +208,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-18T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-19T16:30:00.000Z"
             },
             {
@@ -224,11 +219,16 @@
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
               "date": "2026-10-21T16:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-22T16:30:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-18T10:29:03.820Z"
+          "updatedAt": "2026-10-19T09:16:30.906Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -246,7 +246,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -292,7 +292,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T17:18:28.692Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "de": {
       "canton": "JU",
@@ -341,11 +341,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-18T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-19T16:30:00.000Z"
             },
             {
@@ -357,11 +352,16 @@
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
               "date": "2026-10-21T16:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-22T16:30:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-18T10:29:03.820Z"
+          "updatedAt": "2026-10-19T09:16:30.906Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -379,7 +379,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -425,7 +425,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T17:18:28.692Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "fr": {
       "canton": "JU",
@@ -474,11 +474,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-18T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-19T16:30:00.000Z"
             },
             {
@@ -490,11 +485,16 @@
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
               "date": "2026-10-21T16:30:00.000Z"
+            },
+            {
+              "label": "Centre Migros",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-22T16:30:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-18T10:29:03.820Z"
+          "updatedAt": "2026-10-19T09:16:30.906Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -512,7 +512,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -554,7 +554,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T17:18:28.692Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     }
   }
 }

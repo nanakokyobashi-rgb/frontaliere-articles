@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "0cc4dd7cbba9c04b765d973f78081f2b31ccfdd6d2bfa59a87d4bad9f040b084",
+  "updatedAt": "2026-10-19T15:05:27.345Z",
+  "contentHash": "256fc05ab913023854239e578f987981bb2dd144e6d6aa3a56ff340820e7be78",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-15T12:02:33.404Z",
+      "updatedAt": "2026-10-18T11:41:56.271Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-18T11:41:56.271Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Prio Swiss ricorre al Tribunale per mandato esofago Luks",
+          "url": "/articoli-lucerna/prioswiss-ricorso-luks/",
+          "excerpt": "L’associazione contesta il mandato per le operazioni all’esofago al Luzerner Kantonsspital, sostenendo che non ha raggiunto i casi minimi e che dieci altri centri coprono già il fabbisogno.",
+          "date": "2026-10-19T14:58:13.207Z"
+        },
         {
           "title": "Juso Lucerna: Valentin Humbel candidato al governo",
           "url": "/articoli-lucerna/juso-lucerna-humbel-governo/",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/kriens-torna-in-deficit/",
           "excerpt": "Dopo surplus milionari, Kriens torna in deficit: il titolo segnala un nuovo passivo, ma non indica ancora importo, data o causa.",
           "date": "2026-10-09T00:40:17.368Z"
-        },
-        {
-          "title": "Lucerna, qualità e sviluppo scolastico più vicini",
-          "url": "/articoli-lucerna/lucerna-qualita-sviluppo-scuole/",
-          "excerpt": "I ginnasi di Lucerna rivedono il quadro QM: l'anno scolastico 2026/27 servirà a concretizzare il legame con sviluppo scolastico e didattico.",
-          "date": "2026-10-07T18:10:58.696Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T15:05:27.345Z"
     },
     "en": {
       "canton": "LU",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-18T11:41:56.271Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Prio Swiss appeals to the Court over the Luks esophagus mandate",
+          "url": "/en/lucerne-articles/prioswiss-appeal-luks/",
+          "excerpt": "The association challenges the mandate for esophageal surgeries at the Luzerner Kantonsspital, arguing that it has not reached the minimum number of cases and that ten other centers already cover the need.",
+          "date": "2026-10-19T14:58:13.207Z"
+        },
         {
           "title": "Juso Lucerne: Valentin Humbel candidate for government",
           "url": "/en/lucerne-articles/juso-lucerne-humbel-government/",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/kriens-returns-to-deficit/",
           "excerpt": "After multimillion surpluses, Kriens returns to a deficit: the headline indicates a new liability, but does not yet specify the amount, date, or cause.",
           "date": "2026-10-09T00:40:17.368Z"
-        },
-        {
-          "title": "Lucerne, quality and school development closer together",
-          "url": "/en/lucerne-articles/lucerne-school-quality-development/",
-          "excerpt": "Lucerne’s grammar schools review the QM framework: the 2026/27 school year will serve to put the link with school and teaching development into practice.",
-          "date": "2026-10-07T18:10:58.696Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T15:05:27.345Z"
     },
     "de": {
       "canton": "LU",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-18T11:41:56.271Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Prio Swiss klagt gegen LUKS-Mandat für Speiseröhren-OPs",
+          "url": "/de/luzern-artikel/prioswiss-berufung-luks/",
+          "excerpt": "Der Verband ficht den Leistungsauftrag für Speiseröhrenoperationen am Luzerner Kantonsspital an und macht geltend, dass die Mindestfallzahl nicht erreicht wurde und zehn weitere Zentren den Bedarf bereits abdecken.",
+          "date": "2026-10-19T14:58:13.207Z"
+        },
         {
           "title": "Juso Luzern: Valentin Humbel kandidiert für den Regierungsrat",
           "url": "/de/luzern-artikel/juso-luzern-humbel-regierungsrat/",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/kriens-rutscht-wieder-ins-minus/",
           "excerpt": "Nach Überschüssen in Millionenhöhe ist Kriens wieder im Defizit: Die Überschrift weist auf einen neuen Fehlbetrag hin, nennt aber noch keinen Betrag, kein Datum und keine Ursache.",
           "date": "2026-10-09T00:40:17.368Z"
-        },
-        {
-          "title": "Luzern, Qualität und Schulentwicklung rücken näher zusammen",
-          "url": "/de/luzern-artikel/luzern-schulqualitaet-entwicklung/",
-          "excerpt": "Die Luzerner Gymnasien überarbeiten das QM-Rahmenkonzept: Das Schuljahr 2026/27 wird dazu dienen, die Verbindung zur Schul- und Unterrichtsentwicklung zu konkretisieren.",
-          "date": "2026-10-07T18:10:58.696Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T15:05:27.345Z"
     },
     "fr": {
       "canton": "LU",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-15T12:02:33.404Z"
+          "updatedAt": "2026-10-18T11:41:56.271Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Prio Swiss recourt au Tribunal pour le mandat Luks",
+          "url": "/fr/articles-lucerne/prioswiss-recours-luks/",
+          "excerpt": "L’association conteste le mandat pour les opérations à l’œsophage au Luzerner Kantonsspital, soutenant qu’il n’a pas atteint le nombre minimal de cas et que dix autres centres couvrent déjà les besoins.",
+          "date": "2026-10-19T14:58:13.207Z"
+        },
         {
           "title": "Juso Lucerne : Valentin Humbel candidat au gouvernement",
           "url": "/fr/articles-lucerne/juso-lucerne-humbel-gouvernement/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/kriens-repasse-dans-le-rouge/",
           "excerpt": "Après des excédents de plusieurs millions, Kriens repasse en déficit : le titre signale un nouveau passif, mais n’indique encore ni montant, ni date ni cause.",
           "date": "2026-10-09T00:40:17.368Z"
-        },
-        {
-          "title": "Lucerne, qualité et développement scolaire plus proches",
-          "url": "/fr/articles-lucerne/lucerne-qualite-developpement-scolaire/",
-          "excerpt": "Les gymnases de Lucerne réexaminent le cadre QM : l’année scolaire 2026/27 servira à concrétiser le lien avec le développement scolaire et pédagogique.",
-          "date": "2026-10-07T18:10:58.696Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T15:05:27.345Z"
     }
   }
 }

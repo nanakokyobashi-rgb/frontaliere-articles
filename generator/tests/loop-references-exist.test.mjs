@@ -1652,15 +1652,6 @@ const DECLARED_ABSENT = {
       'e non dipende da quel workflow. Il file e\' `identical` nel manifest, quindi il commento resta ' +
       'byte-identico al sito.',
   },
-  'scripts/ci/harvest-agent-lessons.mjs :: pr-body-contract.yml': {
-    kind: 'retired',
-    reason:
-      'Il referente e\' sparito da ENTRAMBI i repo il 2026-09-03: la Claude review vive ora ' +
-      'dentro `tests.yml` e i quattro workflow che facevano review, contratto del body e ' +
-      'merge non esistono piu\'. La frase qui e\' storica e descrittiva — nomina il vecchio workflow del contratto del body, ora uno step di tests.yml. ' +
-      'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
-      'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
-  },
   'scripts/ci/lib/fetchPrFiles.mjs :: pr-review-loop.yml': {
     kind: 'retired',
     reason:
@@ -1703,6 +1694,20 @@ const DECLARED_ABSENT = {
       'Riferimento descrittivo al workflow di retry del percorso auto-merge posseduto dal sito; ' +
       'il custode del corpus non lo invoca e nessun percorso runtime locale dipende dalla sua ' +
       'presenza.',
+  },
+  'scripts/ci/lib/automation-risk-policy.mjs :: .github/workflows/retry-native-automerge.yml': {
+    kind: 'site-only',
+    reason:
+      'Voce dell\'elenco esplicito `CONTROL_PLANE_PATHS`, usata dalla policy come evidenza del ' +
+      'dominio control-plane quando un issue nomina il workflow del sito: il corpus non lo ' +
+      'importa, non lo esegue e nessun percorso runtime locale dipende dalla sua esistenza.',
+  },
+  'scripts/ci/lib/automation-risk-policy.mjs :: .github/actions/run-agent/action.yml': {
+    kind: 'site-only',
+    reason:
+      'Voce dell\'elenco esplicito `CONTROL_PLANE_PATHS`, usata dalla policy come evidenza del ' +
+      'dominio control-plane quando un issue nomina l\'azione del sito: il corpus non la importa, ' +
+      'non la esegue e nessun percorso runtime locale dipende dalla sua esistenza.',
   },
 };
 

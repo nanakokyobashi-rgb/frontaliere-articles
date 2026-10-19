@@ -91,7 +91,7 @@ function checkoutsOf(job) {
 /** Un `git … push` eseguito davvero: non un commento, non prosa dentro una stringa. */
 function isRealPush(line) {
   if (/^\s*#/.test(line)) return false;
-  const match = /(?:^|[\s;&|(!])git\b[^\n|;&]*\bpush\b/.exec(line);
+  const match = /(?:^|[\s;&|(!])(?:git\b[^\n|;&]*\bpush\b|node\b[^\n|;&]*guard-main-tree-shrink\.mjs[^\n|;&]*--push-main\b)/.exec(line);
   if (!match) return false;
   const before = line.slice(0, match.index + 1);
   const openQuotes = (before.match(/(?<!\\)"/g) || []).length;

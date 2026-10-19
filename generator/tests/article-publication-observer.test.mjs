@@ -7,6 +7,7 @@ import {
   OBSERVER_USER_AGENT,
   buildObserverTargets,
   parseCoverageLedger,
+  renderCoverageLedger,
   formatObserverReport,
   pageHasCaughtUp,
   classifyPublicationLag,
@@ -82,6 +83,31 @@ test('deriva un target per corpo cambiato e conserva il commit più recente', ()
   assert.equal(prepared.targets[0].url, 'https://frontaliereticino.ch/articoli-svizzera/costo-vita-svizzera-2026/');
   assert.equal(prepared.targets[0].sourceCommit, sha);
   assert.equal(prepared.targets[0].registryImage, '/images/blog/costo.webp');
+});
+
+test('risolve lo slug italiano del body all id canonico del registry', () => {
+  const prepared = buildObserverTargets({
+    changedBodies: [{
+      section: 'frontaliere',
+      articleId: 'carnevale-2026-lugano-laboratori-creativi-figli-frontalieri',
+      changedAt,
+      commit: sha,
+    }],
+    registrySources: {
+      frontaliere: "{ id: 'carnevale-bambini-lugano-2026', updatedAt: '2026-10-19', date: '2026-02-18', image: '/images/blog/carnevale-bambini-lugano-2026.webp' },",
+    },
+    slugSources: {
+      frontaliere: "'carnevale-bambini-lugano-2026': { it: 'carnevale-2026-lugano-laboratori-creativi-figli-frontalieri' },",
+    },
+  });
+
+  assert.deepEqual(prepared.skipped, []);
+  assert.equal(prepared.targets[0].articleId, 'carnevale-bambini-lugano-2026');
+  assert.equal(
+    prepared.targets[0].url,
+    'https://frontaliereticino.ch/articoli-frontaliere/carnevale-2026-lugano-laboratori-creativi-figli-frontalieri/',
+  );
+  assert.equal(prepared.targets[0].registryImage, '/images/blog/carnevale-bambini-lugano-2026.webp');
 });
 
 test('ignora i cambi dei body non italiani quando osserva le pagine italiane', () => {
@@ -719,6 +745,53 @@ test('il blocker di preparazione persiste oltre la finestra Git finché il targe
       fetchImpl: async () => ({ ok: true, status: 200, text: async () => ownPage('/images/blog/senza-registry.webp').replace('2026-09-02', '2026-10-21') }),
     });
     assert.deepEqual(third.coverageBlockers, []);
+    assert.ok(github.calls.some((call) => call.type === 'resolve'));
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
+test('un coverage blocker storico con slug viene rimosso dopo la risoluzione canonica', async () => {
+  const rootDir = observerRoot();
+  const slug = 'carnevale-2026-lugano-laboratori-creativi-figli-frontalieri';
+  const articleId = 'carnevale-bambini-lugano-2026';
+  fs.appendFileSync(
+    path.join(rootDir, 'content/blog-articles-data.ts'),
+    `\n{ id: '${articleId}', updatedAt: '2026-10-05', date: '2026-02-18', image: '/images/blog/${articleId}.webp' },\n`,
+  );
+  fs.appendFileSync(
+    path.join(rootDir, 'content/routerBlogData.ts'),
+    `\n'${articleId}': { it: '${slug}' },\n`,
+  );
+  const github = issueClient({
+    issue: {
+      number: 2556,
+      body: renderCoverageLedger([{
+        section: 'frontaliere',
+        articleId: slug,
+        sourceCommit: sha,
+        firstSeenAt: '2026-10-05T00:00:00.000Z',
+        lastSeenAt: '2026-10-05T00:00:00.000Z',
+        reason: 'registro non trovato',
+      }]),
+    },
+  });
+  try {
+    const result = await runObserver({
+      rootDir,
+      days: 1,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      githubClient: github.client,
+      gitLogImpl: () => '',
+      minIntervalMs: 0,
+      fetchImpl: async () => ({
+        ok: true,
+        status: 200,
+        text: async () => page('2026-10-06T00:00:00Z', `/images/blog/${articleId}.webp`),
+      }),
+    });
+    assert.deepEqual(result.coverageBlockers, []);
+    assert.equal(result.coverageIncomplete, false);
     assert.ok(github.calls.some((call) => call.type === 'resolve'));
   } finally {
     fs.rmSync(rootDir, { recursive: true, force: true });

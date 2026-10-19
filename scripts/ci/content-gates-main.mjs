@@ -139,6 +139,9 @@ export const CONTENT_GATES = [
   // I link Markdown sono HTML crawlable dopo il render: il gate deve vedere
   // anche un articolo scritto da un produttore direttamente su main.
   'generator/tests/blog-body-link-contract.test.mjs',
+  // Il ratchet verifica che i body tradotti non accumulino nuove label nav:
+  // legge entrambe le superfici pubblicate, blog-body e blog-body-ch.
+  'generator/tests/nav-link-labels.test.mjs',
   // Il caso canonical override apre una superficie reale sotto content/ oltre
   // al corpus sintetico: una nuova coppia shadowed/winner deve restare valida.
   'generator/tests/canton-hubs.test.mjs',

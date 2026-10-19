@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import { ARTICLE_SECTION_CORE_LIST } from '../../engine/shared/articleSectionCore.mjs';
-import { bodyRegex } from '../../scripts/ci/fast-publish-section.mjs';
+import { bodyPublishPlan, bodyRegex } from '../../scripts/ci/fast-publish-section.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const workflow = readFileSync(resolve(here, '../../.github/workflows/fast-publish-article.yml'), 'utf8');
@@ -25,26 +25,53 @@ function stepText(name) {
 
 test('il trigger push conserva tutti gli ID dei body cambiati', () => {
   const resolveStep = stepText('Resolve mode, article ids and section');
-  // Le cartelle dei corpi, la sezione di ogni corpo e lo shard vengono dal
-  // core (scripts/ci/fast-publish-section.mjs), non da una regex e un `case`
-  // scritti nel workflow; il comportamento dell'helper e' provato in
-  // core-driven-consumers.test.mjs.
+  // Le cartelle dei corpi, la sezione, l'ammissione nel registry e lo shard
+  // vengono dal core (scripts/ci/fast-publish-section.mjs), non da regex,
+  // `case` o basename scritti nel workflow.
   // Solo le sezioni servite da uno shard: un corpo cantonale (R2) lo pubblica
   // fast-publish-section.yml, e qui farebbe fallire `shard-of`.
-  assert.match(resolveStep, /body_re="\$\(node scripts\/ci\/fast-publish-section\.mjs body-regex shard\)"/);
-  assert.match(resolveStep, /grep -E "\$body_re"/);
-  assert.match(resolveStep, /body_section="\$\(node scripts\/ci\/fast-publish-section\.mjs section-of "\$body"\)"/);
+  assert.match(resolveStep, /fast-publish-section\.mjs body-plan shard/);
+  assert.match(resolveStep, /body_section=.*\.section/);
+  assert.match(resolveStep, /body_ids_json=.*\.ids/);
+  assert.match(resolveStep, /skipped_ids_json=.*\.skippedIds/);
+  assert.match(resolveStep, /no publishable registry entry/);
   assert.match(resolveStep, /target_shard="\$\(node scripts\/ci\/fast-publish-section\.mjs shard-of "\$target_section"\)"/);
   assert.match(resolveStep, /echo "matrix=\$matrix_with_shards"/);
   assert.doesNotMatch(resolveStep, /body_section=svizzera/);
-  assert.match(resolveStep, /sort -u/);
-  assert.match(resolveStep, /body_ids_json=.*\[\$id\]/);
   assert.match(resolveStep, /groups=.*body_section.*body_ids_json/);
   assert.doesNotMatch(resolveStep, /one commit changes both article sections/);
   assert.match(resolveStep, /EVENT_NAME.*workflow_dispatch.*section.*body_section/);
   assert.match(resolveStep, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);
   assert.match(resolveStep, /if \[ "\$\{#ids\[@\]\}" -eq 0 \]; then[\s\S]*git diff --name-only "\$before" HEAD/);
   assert.doesNotMatch(resolveStep, /head\s+-1/);
+});
+
+test('i body orfani non bloccano gli articoli registrati dello stesso push', () => {
+  const registered = new Map([
+    ['frontaliere', new Set(['articolo-valido'])],
+    ['svizzera', new Set(['articolo-svizzero'])],
+  ]);
+  const plan = bodyPublishPlan([
+    'content/blog-body/it/articolo-valido.ts',
+    // Regressione della run 39145445206: questo body storico esiste, ma non
+    // ha una voce nel registry pubblicabile della sezione frontaliere.
+    'content/blog-body/it/carnevale-2026-lugano-laboratori-creativi-figli-frontalieri.ts',
+    'content/blog-body-ch/de/articolo-svizzero.ts',
+    'content/blog-body/it/articolo-valido.ts',
+  ], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    fileExists: () => true,
+    articleIdsForSection: (section) => registered.get(section.section) ?? new Set(),
+  });
+
+  assert.deepEqual(plan, [
+    {
+      section: 'frontaliere',
+      ids: ['articolo-valido'],
+      skippedIds: ['carnevale-2026-lugano-laboratori-creativi-figli-frontalieri'],
+    },
+    { section: 'svizzera', ids: ['articolo-svizzero'], skippedIds: [] },
+  ]);
 });
 
 test('body e immagini multi-sezione diventano target matrix separati', () => {

@@ -4,7 +4,7 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T16:48:41.470Z",
+  "updatedAt": "2026-10-19T17:59:19.762Z",
   "contentHash": "4aa012333340885ee1b36572425711c868e32be6f688987abe94f15311abd3c7",
   "blocks": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T09:56:00.107Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -74,7 +74,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -154,7 +154,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "en": {
       "canton": "GL",
@@ -211,7 +211,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -287,7 +287,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "de": {
       "canton": "GL",
@@ -344,7 +344,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -420,7 +420,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "fr": {
       "canton": "GL",
@@ -477,7 +477,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     }
   }
 }

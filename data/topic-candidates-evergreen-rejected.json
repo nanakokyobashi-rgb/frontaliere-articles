@@ -1800,6 +1800,474 @@
       "firstSeenAt": "2026-10-18T17:26:43.852Z",
       "lastValidatedAt": "2026-10-18T17:26:43.852Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "imposte cantonali canton Zurigo aliquote e deduzioni",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-18T21:19:25.389Z",
+      "lastValidatedAt": "2026-10-18T21:19:25.389Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere licenziamento diritti preavviso indennita 2026 simulazione pratica",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T03:58:55.196Z",
+      "lastValidatedAt": "2026-10-19T03:58:55.196Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere licenziamento diritti preavviso indennita 2026 errori comuni",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:02:32.110Z",
+      "lastValidatedAt": "2026-10-19T04:02:32.110Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "apprendistato e formazione professionale canton Zurigo",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:19:11.751Z",
+      "lastValidatedAt": "2026-10-19T04:19:11.751Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "incentivi energetici canton Zurigo requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:19:12.013Z",
+      "lastValidatedAt": "2026-10-19T04:19:12.013Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "autorizzazione edilizia canton Zurigo requisiti e procedura",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:19:12.034Z",
+      "lastValidatedAt": "2026-10-19T04:19:12.034Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "voto cantonale canton Zurigo guida a iniziative e referendum",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:19:12.055Z",
+      "lastValidatedAt": "2026-10-19T04:19:12.055Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "elezioni cantonali canton Zurigo guida a calendario e voto",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:19:12.069Z",
+      "lastValidatedAt": "2026-10-19T04:19:12.069Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "protezione civile canton Zurigo requisiti e indennità",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:19:12.083Z",
+      "lastValidatedAt": "2026-10-19T04:19:12.083Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "avs e prestazioni complementari canton Zurigo cassa di compensazione",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:29:20.810Z",
+      "lastValidatedAt": "2026-10-19T04:29:20.810Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "assicurazione immobili canton Zurigo guida a obbligo e premi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:29:21.065Z",
+      "lastValidatedAt": "2026-10-19T04:29:21.065Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "aprire un'attività canton Zurigo registro di commercio e costi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:29:21.244Z",
+      "lastValidatedAt": "2026-10-19T04:29:21.244Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "formazione continua canton Zurigo requisiti e contributi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:29:21.264Z",
+      "lastValidatedAt": "2026-10-19T04:29:21.264Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "patente di guida canton Zurigo conversione ed esami",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:29:31.286Z",
+      "lastValidatedAt": "2026-10-19T04:29:31.286Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere formazione professionale riqualifica corsi 2026",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:46:27.066Z",
+      "lastValidatedAt": "2026-10-19T04:46:27.066Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere formazione professionale riqualifica corsi 2026 entro 20 km",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T07:50:20.091Z",
+      "lastValidatedAt": "2026-10-19T07:50:20.091Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere formazione professionale riqualifica corsi 2026 oltre 20 km",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T07:57:34.843Z",
+      "lastValidatedAt": "2026-10-19T07:57:34.843Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere formazione professionale riqualifica corsi 2026 famiglia con figli",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T08:20:44.194Z",
+      "lastValidatedAt": "2026-10-19T08:20:44.194Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere formazione professionale riqualifica corsi 2026 single",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T08:23:31.379Z",
+      "lastValidatedAt": "2026-10-19T08:23:31.379Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere infermiere ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T08:43:43.277Z",
+      "lastValidatedAt": "2026-10-19T08:43:43.277Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere formazione professionale riqualifica corsi 2026 simulazione pratica",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:52:23.909Z",
+      "lastValidatedAt": "2026-10-19T10:52:23.909Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere formazione professionale riqualifica corsi 2026 errori comuni",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:52:34.632Z",
+      "lastValidatedAt": "2026-10-19T10:52:34.632Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere operatore socio sanitario ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:52:34.894Z",
+      "lastValidatedAt": "2026-10-19T10:52:34.894Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere psicologo ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:52:34.909Z",
+      "lastValidatedAt": "2026-10-19T10:52:34.909Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere fisioterapista ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:52:43.932Z",
+      "lastValidatedAt": "2026-10-19T10:52:43.932Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere logopedista ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:52:55.560Z",
+      "lastValidatedAt": "2026-10-19T10:52:55.560Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere farmacista ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:53:02.667Z",
+      "lastValidatedAt": "2026-10-19T10:53:02.667Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere assistente dentale ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:17.692Z",
+      "lastValidatedAt": "2026-10-19T10:55:17.692Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere tecnico di radiologia ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:17.807Z",
+      "lastValidatedAt": "2026-10-19T10:55:17.807Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere ergoterapista ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:17.980Z",
+      "lastValidatedAt": "2026-10-19T10:55:17.980Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere dietista ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:18.096Z",
+      "lastValidatedAt": "2026-10-19T10:55:18.096Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere ottico optometrista ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:18.213Z",
+      "lastValidatedAt": "2026-10-19T10:55:18.213Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere podologo ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:18.389Z",
+      "lastValidatedAt": "2026-10-19T10:55:18.389Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere assistente di studio medico ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:18.564Z",
+      "lastValidatedAt": "2026-10-19T10:55:18.564Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere tecnico di sala operatoria ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:18.701Z",
+      "lastValidatedAt": "2026-10-19T10:55:18.701Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere medico ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:18.717Z",
+      "lastValidatedAt": "2026-10-19T10:55:18.717Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere veterinario ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:18.887Z",
+      "lastValidatedAt": "2026-10-19T10:55:18.887Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere ostetrica ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T12:03:52.296Z",
+      "lastValidatedAt": "2026-10-19T12:03:52.296Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere informatico ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T12:47:26.741Z",
+      "lastValidatedAt": "2026-10-19T12:47:26.741Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -1870,10 +2338,22 @@
       "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-10-18T14:25:22.474Z",
-      "lastStrikeAt": "2026-10-18T14:25:22.474Z",
-      "expiresAt": "2026-11-17T14:25:22.474Z"
+      "lastStrikeAt": "2026-10-18T19:00:17.961Z",
+      "expiresAt": "2026-11-17T19:00:17.961Z"
+    },
+    {
+      "keyword": "frontaliere ostetrica ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-10-19T10:55:17.668Z",
+      "lastStrikeAt": "2026-10-19T10:55:17.668Z",
+      "expiresAt": "2026-11-18T10:55:17.668Z"
     }
   ],
   "legacy": [
@@ -10173,162 +10653,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/svizzera/economia/1957324/denner-sconto-salari-aumenti-dipendenti-rinuncia": {
-      "section": "frontaliere",
-      "ts": 1792171021345
-    },
-    "frontaliere::https://comozero.it/attualita/il-futuro-nasce-a-como-ecco-il-primo-computer-quantistico-di-nuova-generazione-butti-nuova-frontiera": {
-      "section": "frontaliere",
-      "ts": 1792171660671
-    },
-    "frontaliere::https://comozero.it/magazine/mille-euro-a-chi-diventa-genitore-lazienda-lombarda-che-premia-i-dipendenti-che-fanno-figli": {
-      "section": "frontaliere",
-      "ts": 1792173895527
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/scuola-e-impresa-a-bodio-lomnago-casa-agricola-apre-agli-studenti-con-la-mostra-labstore/2710282": {
-      "section": "frontaliere",
-      "ts": 1792177820741
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/due-milioni-alla-liuc-per-nuovi-laboratori-di-ricerca-per-le-imprese-un-primo-passo-verso-mill/2710651": {
-      "section": "frontaliere",
-      "ts": 1792178177980
-    },
-    "frontaliere::https://unia.ch/it/professioni-rami/parrucchiere/sondaggio-rivendicazioni-ccl": {
-      "section": "frontaliere",
-      "ts": 1792182208504
-    },
-    "frontaliere::https://www.tio.ch/svizzera/attualita/1957141/pensionato-la-spunta-contro-le-ffs-dopo-mesi-di-battaglia": {
-      "section": "frontaliere",
-      "ts": 1792192585595
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1956992/ritrovare-la-rotta-presentati-dieci-cantieri-per-il-ticino": {
-      "section": "frontaliere",
-      "ts": 1792196911720
-    },
-    "frontaliere::https://www.vconews.it/2026/10/16/leggi-notizia/argomenti/attualita-27/articolo/macugnaga-incontro-tra-il-prefetto-e-i-sindaci-della-valle-anzasca-al-centro-sicurezza-e-viabilit-1.html": {
-      "section": "frontaliere",
-      "ts": 1792197282916
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/trasporti-e-mobilita-il-pd-contesti-salvini-a-palazzo-pirelli-astuti-pensiamo-alle-opere-che-il-nostro-territorio-aspetta/2710600": {
-      "section": "frontaliere",
-      "ts": 1792197307264
-    },
-    "frontaliere::https://comozero.it/attualita/la-rivoluzione-quantum-computing-che-parte-da-como-esulta-limpresa-con-il-dono-della-chiave-usb-nuova-frontiera": {
-      "section": "frontaliere",
-      "ts": 1792199337712
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/varesina-serve-una-scossa-contro-la-pro-sesto-per-invertire-la-rotta/2710576": {
-      "section": "frontaliere",
-      "ts": 1792201586188
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/dolomiti-energia-trento-openjobmetis-varese-la-partita-in-diretta-3/2710519": {
-      "section": "frontaliere",
-      "ts": 1792203098051
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/a-sanremo-lo-spareggio-per-il-campionato-italiano-crugnola-nelle-vesti-del-terzo-incomodo/2710564": {
-      "section": "frontaliere",
-      "ts": 1792203172509
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/la-uyba-cerca-la-prima-vittoria-nel-classico-contro-bergamo/2710654": {
-      "section": "frontaliere",
-      "ts": 1792204780482
-    },
-    "svizzera::https://www.seco.admin.ch/it/la-seco-in-qualita-di-datore-di-lavoro": {
-      "section": "svizzera",
-      "ts": 1792206975646
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/da-varese-a-londra-fino-a-fellini-le-musiche-di-lorenzo-bassignani-per-ultimo-fellini-alla-festa-del-cinema-di-roma/2710159": {
-      "section": "frontaliere",
-      "ts": 1792210072557
-    },
-    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1957292/il-centro-d-asilo-di-chiasso-a-gennaio-non-riaprira-imbucate-le-lettere-di-licenziamento": {
-      "section": "frontaliere",
-      "ts": 1792220546515
-    },
-    "frontaliere::https://www.rsi.ch/cultura/film-e-serie/naza-in-cartellone-a-lugano--4147847.html": {
-      "section": "frontaliere",
-      "ts": 1792220847947
-    },
-    "frontaliere::https://www.laregione.ch/economia/economia/1957352/le-big-tech-vogliono-franchi-ma-occhio-alla-bolla-dell-ia": {
-      "section": "frontaliere",
-      "ts": 1792220862180
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/casalinghi-disperati-apre-la-stagione-del-teatro-dellolmo-a-taino/2710735": {
-      "section": "frontaliere",
-      "ts": 1792220984945
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/sara-un-autunno-caldo-alla-barco-di-saronno-mezzora-di-sciopero-ogni-giorno-e-mobilitazione-a-oltranza/2710798": {
-      "section": "frontaliere",
-      "ts": 1792221602207
-    },
-    "svizzera::https://lenews.ch/2026/10/16/swiss-flu-vaccines-delayed-but-no-shortage-expected": {
-      "section": "svizzera",
-      "ts": 1792222687723
-    },
-    "frontaliere::http://www.cd-ocst.ch": {
-      "section": "frontaliere",
-      "ts": 1792224210489
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1957148/stesso-reddito-imposte-diverse-cambiando-comune-risparmi-il-90": {
-      "section": "frontaliere",
-      "ts": 1792226459023
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/17/leggi-notizia/argomenti/eventi-20/articolo/msf-a-varese-per-la-terza-edizione-di-biscotti-senza-frontiere.html": {
-      "section": "frontaliere",
-      "ts": 1792229679797
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/a-ceriano-laghetto-il-campionato-a-squadre-trofeo-lombardia-di-scacchi/2710561": {
-      "section": "frontaliere",
-      "ts": 1792230028779
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/castellanzese-nel-momento-doro-trasferta-a-correggio-per-continuare-a-volare/2710636": {
-      "section": "frontaliere",
-      "ts": 1792232881935
-    },
-    "frontaliere::https://cassa-disoccupazione.unia.ch": {
-      "section": "frontaliere",
-      "ts": 1792240710869
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/inaugurato-il-nuovo-nodo-di-interscambio-a-biasca-444809": {
-      "section": "frontaliere",
-      "ts": 1792241714329
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/transizione-economica-ed-ecologica-possono-avanzare-insieme-imprese-scienza-e-politica-si-confrontano/2711059": {
-      "section": "frontaliere",
-      "ts": 1792242171852
-    },
-    "frontaliere::https://www.tio.ch/svizzera/cronaca/1957434/franchi-ffs-denaro-florida-casa-manager-lamborghini": {
-      "section": "frontaliere",
-      "ts": 1792245164312
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/manifestazione-antifascista-per-le-strade-di-lugano-444820": {
-      "section": "frontaliere",
-      "ts": 1792247582090
-    },
-    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1957426/biasca-toglie-il-velo-al-nuovo-di-interscambio": {
-      "section": "frontaliere",
-      "ts": 1792250619562
-    },
-    "frontaliere::https://www.vconews.it/2026/10/17/leggi-notizia/argomenti/economia-e-lavoro-9/articolo/plastipak-a-verbania-il-futuro-del-riciclo-il-nostro-obiettivo-e-ridurre-limpatto-ambientale.html": {
-      "section": "frontaliere",
-      "ts": 1792250634913
-    },
-    "frontaliere::https://www.rsi.ch/s/4171186": {
-      "section": "frontaliere",
-      "ts": 1792252614985
-    },
-    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/manifestazione-antifascista-nelle-strade-di-lugano--4171186.html": {
-      "section": "frontaliere",
-      "ts": 1792252621553
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/caro-carburanti-avanti-psi-varese-siamo-dalla-parte-di-chi-lavora-e-protesta/2711272": {
-      "section": "frontaliere",
-      "ts": 1792254337820
-    },
-    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/biasca-ha-un-nuovo-nodo-di-interscambio--4171162.html": {
-      "section": "frontaliere",
-      "ts": 1792260744593
-    },
     "svizzera::https://www.admin.ch/it/newnsb/l4hrr2l7oxxq": {
       "section": "svizzera",
       "ts": 1792276543653
@@ -10456,6 +10780,90 @@
     "frontaliere::https://www.swissinfo.ch/ita/ps%3a-s%c3%ac-a-tre-iniziative-e-a-documento-per-lavoro-pi%c3%b9-dignitoso/92235291": {
       "section": "frontaliere",
       "ts": 1792343085897
+    },
+    "svizzera::https://www.tio.ch/ticino/cronaca/1957584/esce-di-strada-e-si-ribalta-nel-bosco-due-persone-in-ospedale": {
+      "section": "svizzera",
+      "ts": 1792349830385
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1957586/mancato-accesso-agli-aiuti-sociali-il-tema-torna-in-parlamento": {
+      "section": "frontaliere",
+      "ts": 1792356677058
+    },
+    "frontaliere::https://comozero.it/attualita/il-futuro-nasce-a-como-ecco-il-primo-computer-quantistico-di-nuova-generazione-butti-nuova-frontiera": {
+      "section": "frontaliere",
+      "ts": 1792356939946
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/imprese-storiche-oltre-663mila-euro-per-41-attivita-della-provincia-di-varese/2711815": {
+      "section": "frontaliere",
+      "ts": 1792356952518
+    },
+    "frontaliere::https://comozero.it/sport/pagelle-como-liberali-capolavoro-da-7-5-nico-paz-versione-marziano-merita-8": {
+      "section": "frontaliere",
+      "ts": 1792357319513
+    },
+    "svizzera::https://www.tio.ch/ticino/politica/1957606/manifestazioni-non-autorizzate-a-lugano-l-udc-la-legge-vale-per-tutti": {
+      "section": "svizzera",
+      "ts": 1792358107747
+    },
+    "svizzera::https://www.tio.ch/sport/calcio/1957599/la-lazio-sbanca-torino-e-resta-incollata-all-inter": {
+      "section": "svizzera",
+      "ts": 1792358122896
+    },
+    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1957426/biasca-toglie-il-velo-al-nuovo-nodo-di-interscambio": {
+      "section": "frontaliere",
+      "ts": 1792378641571
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/la-castellanzese-vola-al-terzo-posto-2-0-alla-correggese-con-castelletto-e-chessa/2711791": {
+      "section": "frontaliere",
+      "ts": 1792382099597
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/openjobmetis-il-campo-di-trento-e-maledetto-a-hale-non-riesce-lultimo-miracolo/2711371": {
+      "section": "frontaliere",
+      "ts": 1792382132337
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/ioannis-kastritis-sconfitta-dura-figlia-di-troppi-errori/2711839": {
+      "section": "frontaliere",
+      "ts": 1792382134199
+    },
+    "frontaliere::https://www.tio.ch/svizzera/cronaca/1957641/dipendenti-lavoro-svizzera-legge-securitas": {
+      "section": "frontaliere",
+      "ts": 1792387996935
+    },
+    "frontaliere::https://unia.ch/it/professioni-rami/parrucchiere/sondaggio-rivendicazioni-ccl": {
+      "section": "frontaliere",
+      "ts": 1792392209850
+    },
+    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1957292/il-centro-d-asilo-di-chiasso-a-gennaio-non-riaprira-imbucate-le-lettere-di-licenziamento": {
+      "section": "frontaliere",
+      "ts": 1792411423643
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/securitas%3a-segnalate-migliaia-di-violazioni-del-diritto-del-lavoro/92237590": {
+      "section": "frontaliere",
+      "ts": 1792415321690
+    },
+    "frontaliere::https://www.tio.ch/ticino/economia/1957675/competenze-imprese-valore-crescita-processi": {
+      "section": "frontaliere",
+      "ts": 1792416972530
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/aumenti-dei-biglietti-e-abbonamenti-trenord-la-protesta-dei-giovani-democratici-scelta-che-pesa-su-studenti-e-lavoratori/2712682": {
+      "section": "frontaliere",
+      "ts": 1792420206080
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/mobilita-elettrica-la-lombardia-investe-150-milioni-tra-auto-green-e-colonnine/2712505": {
+      "section": "frontaliere",
+      "ts": 1792420234094
+    },
+    "frontaliere::https://www.tio.ch/ticino/politica/1957677/quali-mendrisio-aziende-municipio-imprese": {
+      "section": "frontaliere",
+      "ts": 1792420407423
+    },
+    "frontaliere::https://www.vconews.it/2026/10/19/leggi-notizia/argomenti/politica-28/articolo/sanita-avs-e-pd-allattacco-sul-nuovo-cup-progetto-bloccato-dai-ricorsi-lia-resta-sulla-ca-2.html": {
+      "section": "frontaliere",
+      "ts": 1792424935533
+    },
+    "frontaliere::http://www.cd-ocst.ch": {
+      "section": "frontaliere",
+      "ts": 1792435928184
     }
   }
 }

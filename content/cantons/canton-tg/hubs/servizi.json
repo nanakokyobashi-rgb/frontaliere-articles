@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T16:48:41.470Z",
-  "contentHash": "b498747aef74901241ae36a8d6f7046d20f165710307a5f935f276038b7c91cb",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "5ad75b73483b3af9403959d379f4628c1674b46b7e25fba177086fdfacd56493",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-18T11:03:15.929Z",
+      "updatedAt": "2026-10-19T13:13:42.861Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T09:56:00.107Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -38,7 +38,7 @@
         },
         {
           "label": "Aste di targhe in corso",
-          "value": "52",
+          "value": "53",
           "note": "offerta mediana 600 CHF"
         }
       ],
@@ -64,6 +64,13 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
+              "label": "TG670000",
+              "value": "1690 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-28T18:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109791"
+            },
+            {
               "label": "TG455555",
               "value": "1560 CHF",
               "detail": "offerta attuale",
@@ -71,23 +78,16 @@
               "url": "https://www.auktion.tg.ch/de/auction/109686"
             },
             {
-              "label": "TG800007",
-              "value": "1050 CHF",
+              "label": "TG24411",
+              "value": "1440 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-21T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109684"
-            },
-            {
-              "label": "TG997997",
-              "value": "940 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-21T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109683"
+              "url": "https://www.auktion.tg.ch/de/auction/109678"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -125,7 +125,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -205,7 +205,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "TG",
@@ -221,7 +221,7 @@
         },
         {
           "label": "Plate auctions running",
-          "value": "52",
+          "value": "53",
           "note": "typical bid 600 CHF"
         }
       ],
@@ -247,6 +247,13 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
+              "label": "TG670000",
+              "value": "1,690 CHF",
+              "detail": "current bid",
+              "date": "2026-10-28T18:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109791"
+            },
+            {
               "label": "TG455555",
               "value": "1,560 CHF",
               "detail": "current bid",
@@ -254,23 +261,16 @@
               "url": "https://www.auktion.tg.ch/de/auction/109686"
             },
             {
-              "label": "TG800007",
-              "value": "1,050 CHF",
+              "label": "TG24411",
+              "value": "1,440 CHF",
               "detail": "current bid",
               "date": "2026-10-21T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109684"
-            },
-            {
-              "label": "TG997997",
-              "value": "940 CHF",
-              "detail": "current bid",
-              "date": "2026-10-21T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109683"
+              "url": "https://www.auktion.tg.ch/de/auction/109678"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -308,7 +308,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -384,7 +384,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "TG",
@@ -400,7 +400,7 @@
         },
         {
           "label": "Laufende Kontrollschild-Auktionen",
-          "value": "52",
+          "value": "53",
           "note": "mittleres Gebot 600 CHF"
         }
       ],
@@ -426,6 +426,13 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
+              "label": "TG670000",
+              "value": "1’690 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-28T18:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109791"
+            },
+            {
               "label": "TG455555",
               "value": "1’560 CHF",
               "detail": "aktuelles Gebot",
@@ -433,23 +440,16 @@
               "url": "https://www.auktion.tg.ch/de/auction/109686"
             },
             {
-              "label": "TG800007",
-              "value": "1’050 CHF",
+              "label": "TG24411",
+              "value": "1’440 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-21T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109684"
-            },
-            {
-              "label": "TG997997",
-              "value": "940 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-21T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109683"
+              "url": "https://www.auktion.tg.ch/de/auction/109678"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -563,7 +563,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "TG",
@@ -579,7 +579,7 @@
         },
         {
           "label": "Enchères de plaques en cours",
-          "value": "52",
+          "value": "53",
           "note": "offre centrale 600 CHF"
         }
       ],
@@ -605,6 +605,13 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
+              "label": "TG670000",
+              "value": "1 690 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-28T18:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109791"
+            },
+            {
               "label": "TG455555",
               "value": "1 560 CHF",
               "detail": "offre actuelle",
@@ -612,23 +619,16 @@
               "url": "https://www.auktion.tg.ch/de/auction/109686"
             },
             {
-              "label": "TG800007",
-              "value": "1 050 CHF",
+              "label": "TG24411",
+              "value": "1 440 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-21T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109684"
-            },
-            {
-              "label": "TG997997",
-              "value": "940 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-21T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109683"
+              "url": "https://www.auktion.tg.ch/de/auction/109678"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -666,7 +666,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -738,7 +738,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

@@ -149,4 +149,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'julmy-corsa-consiglio-stato',
+ category: 'novita',
+ date: '2026-10-19T19:12:12.819Z',
+ image: '/images/blog/article-julmy-corsa-consiglio-stato.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['FR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

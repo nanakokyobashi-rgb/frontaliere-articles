@@ -4,14 +4,14 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-18T15:52:30.685Z",
-  "contentHash": "3648158cca686d8846e1cfdd65d6a8bb7ffded43db91406d6ce0eb8d07db7e47",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "c3f4d085924eb4f7696a8e9d40d495b2970ae5b9227ad3abfde01012d2d38764",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-18T11:41:56.271Z",
+      "updatedAt": "2026-10-19T13:56:07.476Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-25T06:00:00.000Z"
+      "carryUntilAt": "2026-10-26T12:26:43.000Z"
     }
   ],
   "locales": {
@@ -54,23 +54,29 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,237 EUR/l",
-              "detail": "media regionale: minimo 2,134 EUR/l, 64 stazioni rilevate",
-              "date": "2026-10-18T06:00:00.000Z"
+              "value": "2,225 EUR/l",
+              "detail": "media regionale: minimo 1,990 EUR/l, 65 stazioni rilevate",
+              "date": "2026-10-19T12:38:45.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,413 EUR/l",
-              "detail": "media regionale: minimo 2,342 EUR/l, 84 stazioni rilevate",
-              "date": "2026-10-18T08:01:14.000Z"
+              "value": "2,408 EUR/l",
+              "detail": "media regionale: minimo 2,250 EUR/l, 84 stazioni rilevate",
+              "date": "2026-10-19T12:26:43.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Neuchatel: il tasso di disoccupazione scende al 4,3% a maggio 2026",
+          "url": "/articoli-neuchatel/neuchatel-disoccupazione-maggio-2026/",
+          "excerpt": "A maggio 2026 i disoccupati nel Canton Neuchatel scendono a 3’924 e il tasso cantonale cala al 4,3%, sostenuto da fattori stagionali favorevoli.",
+          "date": "2026-10-19T03:29:08.971Z"
+        },
         {
           "title": "Stabilità del tasso di disoccupazione nel Canton Neuchâtel a luglio 2026",
           "url": "/articoli-neuchatel/disoccupazione-neuchatel-luglio-2026/",
@@ -94,12 +100,6 @@
           "url": "/articoli-neuchatel/cpcn-rendimento-2025-copertura/",
           "excerpt": "+5,6% per la performance CPCN nel 2025 3% di remunerazione sugli averi di vecchiaia 84,8% di copertura al 31.12.2025 RFV da CHF 979 milioni, al 92%",
           "date": "2026-10-17T00:07:41.161Z"
-        },
-        {
-          "title": "Nuovo centro accoglienza asilo a Couvet: parte il progetto",
-          "url": "/articoli-neuchatel/nuovo-centro-asilo-couvet/",
-          "excerpt": "Nuova struttura prevista in rue du 1er Mars 11, a Couvet Sostituirà il sito attuale di Chemin des Prises 8 Progetto elaborato con il Comune di Val-de-Travers",
-          "date": "2026-10-10T19:55:31.284Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "NE",
@@ -153,23 +153,29 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.237 EUR/l",
-              "detail": "regional average: lowest 2.134 EUR/l, 64 stations surveyed",
-              "date": "2026-10-18T06:00:00.000Z"
+              "value": "2.225 EUR/l",
+              "detail": "regional average: lowest 1.990 EUR/l, 65 stations surveyed",
+              "date": "2026-10-19T12:38:45.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.413 EUR/l",
-              "detail": "regional average: lowest 2.342 EUR/l, 84 stations surveyed",
-              "date": "2026-10-18T08:01:14.000Z"
+              "value": "2.408 EUR/l",
+              "detail": "regional average: lowest 2.250 EUR/l, 84 stations surveyed",
+              "date": "2026-10-19T12:26:43.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Neuchatel: unemployment rate falls to 4,3% in May 2026",
+          "url": "/en/neuchatel-articles/neuchatel-unemployment-may-2026/",
+          "excerpt": "In May 2026, the unemployed in Canton Neuchatel fell to 3’924 and the cantonal rate dropped to 4,3%, supported by favorable seasonal factors.",
+          "date": "2026-10-19T03:29:08.971Z"
+        },
         {
           "title": "Stability of the unemployment rate in the Canton of Neuchâtel in July 2026",
           "url": "/en/neuchatel-articles/neuchatel-unemployment-july-2026/",
@@ -193,12 +199,6 @@
           "url": "/en/neuchatel-articles/cpcn-2025-return-coverage/",
           "excerpt": "+5,6% for CPCN performance in 2025 3% remuneration on retirement savings 84,8% coverage as at December 31, 2025 RFV of CHF 979 million, at 92% of the target",
           "date": "2026-10-17T00:07:41.161Z"
-        },
-        {
-          "title": "New asylum reception centre in Couvet: the project starts",
-          "url": "/en/neuchatel-articles/new-asylum-center-couvet/",
-          "excerpt": "New structure planned in rue du 1er Mars 11, in Couvet It will replace the current site of Chemin des Prises 8 Project developed with the Municipality",
-          "date": "2026-10-10T19:55:31.284Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "NE",
@@ -252,23 +252,29 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.237 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.134 EUR/l, 64 erfasste Tankstellen",
-              "date": "2026-10-18T06:00:00.000Z"
+              "value": "2.225 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 65 erfasste Tankstellen",
+              "date": "2026-10-19T12:38:45.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.413 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.342 EUR/l, 84 erfasste Tankstellen",
-              "date": "2026-10-18T08:01:14.000Z"
+              "value": "2.408 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.250 EUR/l, 84 erfasste Tankstellen",
+              "date": "2026-10-19T12:26:43.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Neuenburg: Die Arbeitslosenquote sinkt im Mai 2026 auf 4,3%",
+          "url": "/de/neuenburg-artikel/neuenburg-arbeitslosigkeit-mai-2026/",
+          "excerpt": "Im Mai 2026 sinkt die Zahl der Arbeitslosen im Kanton Neuenburg auf 3’924, und die kantonale Quote fällt auf 4,3%, unterstützt durch günstige saisonale Faktoren.",
+          "date": "2026-10-19T03:29:08.971Z"
+        },
         {
           "title": "Stabilität der Arbeitslosenquote im Kanton Neuenburg im Juli 2026",
           "url": "/de/neuenburg-artikel/neuenburg-arbeitslosigkeit-juli-2026/",
@@ -292,12 +298,6 @@
           "url": "/de/neuenburg-artikel/cpcn-rendite-2025-deckung/",
           "excerpt": "+5,6% bei der Performance der CPCN im Jahr 2025 3% Verzinsung der Altersguthaben 84,8% Deckungsgrad am 31.12.2025 RFV in Höhe von CHF 979 Millionen, bei 92%",
           "date": "2026-10-17T00:07:41.161Z"
-        },
-        {
-          "title": "Neue Kindertagesstätte in Couvet: Das Projekt beginnt",
-          "url": "/de/neuenburg-artikel/neues-asylzentrum-couvet/",
-          "excerpt": "Neue Struktur in der Rue du 1er Mars 11 in Couvet geplant Ersetzt den aktuellen Standort von Chemin des Prises 8 Mit der Gemeinde Val-de-Travers ausgearbeitetes",
-          "date": "2026-10-10T19:55:31.284Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "NE",
@@ -351,23 +351,29 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,237 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,134 EUR/l, 64 stations relevées",
-              "date": "2026-10-18T06:00:00.000Z"
+              "value": "2,225 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 65 stations relevées",
+              "date": "2026-10-19T12:38:45.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,413 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,342 EUR/l, 84 stations relevées",
-              "date": "2026-10-18T08:01:14.000Z"
+              "value": "2,408 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,250 EUR/l, 84 stations relevées",
+              "date": "2026-10-19T12:26:43.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Neuchatel : le taux de chômage baisse à 4,3 % en mai 2026",
+          "url": "/fr/articles-neuchatel/neuchatel-chomage-mai-2026/",
+          "excerpt": "En mai 2026, le nombre de chômeurs dans le canton de Neuchatel baisse à 3’924 et le taux cantonal baisse à 4,3 %, soutenu par des facteurs saisonniers favorables.",
+          "date": "2026-10-19T03:29:08.971Z"
+        },
         {
           "title": "Stabilité du taux de chômage dans le canton de Neuchâtel en juillet 2026",
           "url": "/fr/articles-neuchatel/chomage-neuchatel-juillet-2026/",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-neuchatel/cpcn-performance-2025-couverture/",
           "excerpt": "+5,6% pour la performance de la CPCN en 2025 3% de rémunération sur les avoirs de vieillesse 84,8% de couverture au 31 décembre 2025 RFV de CHF 979 millions",
           "date": "2026-10-17T00:07:41.161Z"
-        },
-        {
-          "title": "Nouveau centre d'accueil asile à Couvet : le projet commence",
-          "url": "/fr/articles-neuchatel/nouveau-centre-asile-couvet/",
-          "excerpt": "Nouvelle structure prévue rue du 1er Mars 11, à Couvet Remplacera le site actuel du Chemin des Prises 8 Projet élaboré avec la commune de Val-de-Travers Séance",
-          "date": "2026-10-10T19:55:31.284Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

@@ -4,22 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/814642/walliser-mindestlohn-kommt-die-initiative-dieses-mal-durch": {
-      "section": "canton-vs",
-      "ts": 1792197166143
-    },
-    "canton-vs::https://www.pomona.ch/story/811840/gewerkschaften-und-linke-k%c3%a4mpfen-f%c3%bcr-22-franken-mindestlohn-im-wallis": {
-      "section": "canton-vs",
-      "ts": 1792197167054
-    },
-    "canton-vs::https://www.pomona.ch/story/814869/kantonsgericht-beanstandet-praxis-der-steuerverwaltung": {
-      "section": "canton-vs",
-      "ts": 1792198083370
-    },
-    "canton-vs::https://www.pomona.ch/story/815298/ausbau-des-%c3%b6vangebots-am-brigerberg": {
-      "section": "canton-vs",
-      "ts": 1792198084789
-    },
     "canton-vs::https://www.pomona.ch/story/814878/politik-stellt-fragen-gehen-beim-saaser-hallendebakel-steuergelder-fl%c3%b6ten": {
       "section": "canton-vs",
       "ts": 1792308212502
@@ -55,6 +39,30 @@
     "canton-vs::https://www.pomona.ch/story/815146/in-deutschland-gilt-sie-als-antisemitisch-israelfeindliche-organisation-mischt-sich-in-abstimmungskampf-ein": {
       "section": "canton-vs",
       "ts": 1792310233497
+    },
+    "canton-vs::https://www.pomona.ch/story/815298/ausbau-des-%c3%b6vangebots-am-brigerberg": {
+      "section": "canton-vs",
+      "ts": 1792412612439
+    },
+    "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
+      "section": "canton-vs",
+      "ts": 1792413362688
+    },
+    "canton-vs::https://www.pomona.ch/story/815912/verkehrsunfall-auf-der-strecke-gampelgoppenstein-fordert-drei-verletzte-personen": {
+      "section": "canton-vs",
+      "ts": 1792420407225
+    },
+    "canton-vs::https://www.pomona.ch/story/816121/zoll-wird-zum-m%c3%a4nnerclub-seit-der-reform-sinkt-der-frauenanteil-deutlich": {
+      "section": "canton-vs",
+      "ts": 1792420414868
+    },
+    "canton-vs::https://vework-public.vs.ch/app/publication/fr/27-09-2026/1": {
+      "section": "canton-vs",
+      "ts": 1792420419464
+    },
+    "canton-vs::https://www.pomona.ch/story/815611/ein-immobilienprojekt-von-christian-constantin-sorgt-im-tessin-f%c3%bcr-kontroversen": {
+      "section": "canton-vs",
+      "ts": 1792432081947
     }
   }
 }

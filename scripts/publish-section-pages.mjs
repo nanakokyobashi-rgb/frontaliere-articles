@@ -53,6 +53,7 @@
  * confermato o se il verify fallisce.
  */
 import '../host/cantonSectionsBootstrap.mjs';
+import { createHash } from 'node:crypto';
 import fs, { realpathSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -60,6 +61,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 
+import { IMAGE_FETCH_TIMEOUT_MS, MAX_DECLARED_IMAGE_BYTES } from './lib/declared-image-fetch.mjs';
 import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
 import { ARTICLES_PAGE_SIZE } from '../engine/shared/articleArchiveConfig.mjs';
 import { CANTON_ARCHIVE_ALL_SLUG } from '../engine/shared/cantonSectionCopy.mjs';
@@ -98,10 +100,28 @@ export const RELEASE_READY_MAX_WAIT_MS = 120_000;
 export const RELEASE_READY_RETRY_DELAY_MS = 10_000;
 /** Inventario delle pagine: si aggiorna solo dopo una pubblicazione verificata. */
 export const PAGE_MANIFEST_CACHE_CONTROL = 'public,max-age=60';
+/** Il confronto riusa i limiti del fetch immagini del render. */
+const MAX_HELD_ASSET_BYTES = MAX_DECLARED_IMAGE_BYTES;
+const HELD_ASSET_PROBE_TIMEOUT_MS = IMAGE_FETCH_TIMEOUT_MS;
+const HELD_ASSET_PROBE_CONCURRENCY = 4;
 /** Ordine di upload: la landing per ultima, perche' linka tutto il resto. */
 export const UPLOAD_ORDER = Object.freeze(['article', 'archive', 'hub', 'landing']);
 const PUBLISH_API_WORKFLOW = '.github/workflows/publish-api.yml';
 const FULL_GIT_SHA_RE = /^[a-f0-9]{40}$/;
+const CANONICAL_PAGE_PATH_RE = /^\/[a-z0-9/-]+\/$/u;
+
+function parseCanonicalPagePaths(raw, option) {
+  let pages;
+  try {
+    pages = JSON.parse(raw);
+  } catch (error) {
+    throw new Error(`${option} deve essere un array JSON di path: ${error.message}`);
+  }
+  if (!Array.isArray(pages) || pages.some((page) => typeof page !== 'string' || !CANONICAL_PAGE_PATH_RE.test(page) || page.includes('//'))) {
+    throw new Error(`${option} deve contenere solo path canonici assoluti`);
+  }
+  return pages;
+}
 
 function publishedMainHead() {
   const repository = process.env.GITHUB_REPOSITORY;
@@ -131,7 +151,15 @@ async function assertExpectedMainHead(expected, readMainHead = publishedMainHead
 }
 
 export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activeCorpusCoreMap() } = {}) {
-  const out = { ids: [], bootstrap: false, publish: false, dryRun: false, removeStaleCantonRssFeeds: false };
+  const out = {
+    ids: [],
+    missingPages: [],
+    knownMissingPages: [],
+    bootstrap: false,
+    publish: false,
+    dryRun: false,
+    removeStaleCantonRssFeeds: false,
+  };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const value = () => {
@@ -151,6 +179,10 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
       }
       if (!Array.isArray(ids) || ids.some((id) => typeof id !== 'string' || !id)) throw new Error('--ids deve essere un array JSON di id non vuoti');
       out.ids.push(...ids);
+    } else if (a === '--missing-pages' || a === '--known-missing-pages') {
+      const pages = parseCanonicalPagePaths(value(), a);
+      if (a === '--missing-pages') out.missingPages.push(...pages);
+      else out.knownMissingPages.push(...pages);
     } else if (a === '--bootstrap') out.bootstrap = true;
     else if (a === '--remove-stale-canton-rss-feeds') out.removeStaleCantonRssFeeds = true;
     else if (a === '--publish') out.publish = true;
@@ -160,11 +192,23 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
     else throw new Error(`argomento sconosciuto: ${a}`);
   }
   out.ids = [...new Set(out.ids)];
+  out.missingPages = [...new Set(out.missingPages)];
+  out.knownMissingPages = [...new Set(out.knownMissingPages)];
   for (const flag of ['section', 'out', 'summary']) if (!out[flag]) throw new Error(`manca --${flag}`);
   if (out.publish && out.dryRun) throw new Error('--publish e --dry-run sono alternativi');
   if (out.bootstrap && out.ids.length) throw new Error('--bootstrap rende tutti gli articoli della sezione: non si combina con --id/--ids');
   assertPublishableSection(out.section, { all, active });
   return out;
+}
+
+export function stagedReleasePageSets(pages, publishedLivePages, confirmedUploadPagePaths = [], confirmedKnownMissingPagePaths = confirmedUploadPagePaths) {
+  const confirmedUpload = new Set(confirmedUploadPagePaths);
+  const confirmedKnownMissing = new Set(confirmedKnownMissingPagePaths);
+  const publishedPageKeys = new Set(publishedLivePages.map((page) => page.edgeKey));
+  return {
+    pagesForPublish: pages.filter((page) => !publishedPageKeys.has(page.edgeKey) || confirmedUpload.has(page.canonicalPath)),
+    immutableLivePages: publishedLivePages.filter((page) => !confirmedKnownMissing.has(page.canonicalPath)),
+  };
 }
 
 export function missingRenderedArticleIds(requestedIds, entries) {
@@ -1239,6 +1283,25 @@ function isNotFoundStatus(status) {
   return status === 404 || status === 'HTTP 404';
 }
 
+export async function confirmCantonPageMissing(
+  url,
+  { probeImpl = probe, sleepImpl = sleep, attempts = 3, delayMs = 1000 } = {},
+) {
+  const statuses = [];
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    let observed;
+    try {
+      observed = await probeImpl(url, { attempts: 1, delayMs: 0 });
+    } catch (error) {
+      observed = { status: error?.message ?? String(error) };
+    }
+    statuses.push(observed?.status ?? 'nessuna risposta');
+    if (!isNotFoundStatus(observed?.status)) return { confirmed: false, statuses };
+    if (attempt + 1 < attempts) await sleepImpl(delayMs);
+  }
+  return { confirmed: statuses.length === attempts, statuses };
+}
+
 /** Snapshot del feed attualmente servito, usato per ripristinare un set parziale. */
 async function snapshotCantonRssFeed(url, { probeImpl = probe } = {}) {
   return probeImpl(url, { attempts: 3, delayMs: 1000, want: () => true });
@@ -1281,11 +1344,229 @@ function cantonPageReferencesAsset(body, key) {
   ).test(String(body ?? ''));
 }
 
-async function uploadCantonAssets({ cdnUploads, heldAssetKeys, runImpl, assertMainFreshImpl }) {
+const CANTON_IMAGE_MIME_BY_EXTENSION = Object.freeze({
+  '.avif': 'image/avif',
+  '.gif': 'image/gif',
+  '.jpeg': 'image/jpeg',
+  '.jpg': 'image/jpeg',
+  '.png': 'image/png',
+  '.svg': 'image/svg+xml',
+  '.webp': 'image/webp',
+});
+
+function imageHeaderMatchesAssetKey(header, byteLength, key, contentType) {
+  if (!Buffer.isBuffer(header) || byteLength <= 0 || byteLength > MAX_HELD_ASSET_BYTES) return false;
+  const extension = path.extname(key).toLowerCase();
+  const expectedMime = CANTON_IMAGE_MIME_BY_EXTENSION[extension];
+  if (!expectedMime || String(contentType ?? '').split(';', 1)[0].trim().toLowerCase() !== expectedMime) return false;
+  if (extension === '.webp') {
+    return byteLength >= 20
+      && header.length >= 16
+      && header.toString('ascii', 0, 4) === 'RIFF'
+      && header.readUInt32LE(4) === byteLength - 8
+      && header.toString('ascii', 8, 12) === 'WEBP'
+      && ['VP8 ', 'VP8L', 'VP8X'].includes(header.toString('ascii', 12, 16));
+  }
+  if (extension === '.jpg' || extension === '.jpeg') {
+    return byteLength >= 4 && header.length >= 3 && header[0] === 0xff && header[1] === 0xd8 && header[2] === 0xff;
+  }
+  if (extension === '.png') {
+    return byteLength >= 8 && header.length >= 8 && header.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+  }
+  if (extension === '.gif') {
+    return byteLength >= 6 && header.length >= 6 && ['GIF87a', 'GIF89a'].includes(header.toString('ascii', 0, 6));
+  }
+  if (extension === '.avif') {
+    return byteLength >= 12
+      && header.length >= 12
+      && header.toString('ascii', 4, 8) === 'ftyp'
+      && ['avif', 'avis'].includes(header.toString('ascii', 8, 12));
+  }
+  const svg = header.toString('utf8', 0, Math.min(header.length, 4096)).replace(/^\uFEFF?\s*/, '');
+  return /^(?:<\?xml\b[^>]*>\s*)?<svg\b/i.test(svg);
+}
+
+function imageBytesMatchAssetKey(bytes, key, contentType) {
+  return Buffer.isBuffer(bytes)
+    && bytes.length <= MAX_HELD_ASSET_BYTES
+    && imageHeaderMatchesAssetKey(bytes.subarray(0, 4096), bytes.length, key, contentType);
+}
+
+async function cancelAssetReader(reader, reason) {
+  let cancellation;
+  try {
+    cancellation = Promise.resolve(reader.cancel(reason));
+  } catch {
+    return;
+  }
+  let timer;
+  const boundedWait = new Promise((resolve) => {
+    timer = setTimeout(resolve, 100);
+  });
+  try {
+    await Promise.race([cancellation, boundedWait]).catch(() => {});
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function readCantonAssetDigest(response, key, contentType, deadlineAt) {
+  const reader = response.body?.getReader?.();
+  if (!reader) return { ok: false, status: 'body CDN non disponibile come stream' };
+  const header = Buffer.alloc(4096);
+  const digest = createHash('sha256');
+  let headerBytes = 0;
+  let byteLength = 0;
+  let timeout;
+  let rejectTimeout;
+  const timeoutPromise = new Promise((_, reject) => {
+    rejectTimeout = reject;
+  });
+  // fetchWithRefTimeout keeps the transport deadline alive too; this local
+  // deadline bounds streams whose reader ignores the request abort signal.
+  timeout = setTimeout(() => {
+    const error = new Error('timeout durante la lettura del body immagine');
+    void cancelAssetReader(reader, error);
+    rejectTimeout(error);
+  }, Math.max(1, deadlineAt - Date.now()));
+  try {
+    while (true) {
+      const { done, value } = await Promise.race([reader.read(), timeoutPromise]);
+      if (done) break;
+      const chunk = Buffer.isBuffer(value)
+        ? value
+        : Buffer.from(value.buffer, value.byteOffset, value.byteLength);
+      byteLength += chunk.length;
+      if (byteLength > MAX_HELD_ASSET_BYTES) {
+        await cancelAssetReader(reader);
+        return { ok: false, status: 'asset oltre 5 MB' };
+      }
+      digest.update(chunk);
+      if (headerBytes < header.length) {
+        const count = Math.min(header.length - headerBytes, chunk.length);
+        chunk.copy(header, headerBytes, 0, count);
+        headerBytes += count;
+      }
+    }
+    if (!imageHeaderMatchesAssetKey(header.subarray(0, headerBytes), byteLength, key, contentType)) {
+      return { ok: false, status: 'body CDN non e\' un asset immagine verificabile' };
+    }
+    return { ok: true, status: 200, contentType, byteLength, sha256: digest.digest('hex') };
+  } catch (error) {
+    await cancelAssetReader(reader, error);
+    return { ok: false, status: error?.message ?? String(error) };
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+/** GET binario con cache-buster: una risposta HTML di fallback non e' un asset R2. */
+async function probeCantonAsset(key) {
+  const url = new URL(key, `${CDN_BASE}/`);
+  if (url.origin !== new URL(CDN_BASE).origin || url.protocol !== 'https:') {
+    return { ok: false, status: 'origine asset non autorizzata' };
+  }
+  url.searchParams.set('_section_asset_sha256', String(Date.now()));
+  let response;
+  const deadlineAt = Date.now() + HELD_ASSET_PROBE_TIMEOUT_MS;
+  try {
+    response = await fetchWithRefTimeout(url, {
+      redirect: 'manual',
+      cache: 'no-store',
+      headers: {
+        'cache-control': 'no-cache',
+        'user-agent': 'frontaliere-corpus-publisher/1 (+https://frontaliereticino.ch)',
+      },
+    }, HELD_ASSET_PROBE_TIMEOUT_MS);
+    if (response.status !== 200) {
+      const status = `HTTP ${response.status}`;
+      return { ok: false, status };
+    }
+    const contentType = String(response.headers?.get?.('content-type') ?? '').split(';', 1)[0].trim().toLowerCase();
+    const extension = path.extname(url.pathname).toLowerCase();
+    if (contentType !== CANTON_IMAGE_MIME_BY_EXTENSION[extension]) {
+      return { ok: false, status: `content-type asset non valido: ${contentType || 'assente'}` };
+    }
+    const declaredLength = Number(response.headers?.get?.('content-length'));
+    if (Number.isFinite(declaredLength) && declaredLength > MAX_HELD_ASSET_BYTES) {
+      return { ok: false, status: 'asset oltre 5 MB' };
+    }
+    return await readCantonAssetDigest(response, key, contentType, deadlineAt);
+  } catch (error) {
+    return { ok: false, status: error?.message ?? String(error) };
+  } finally {
+    if (response) releaseFetchWithRefTimeout(response);
+  }
+}
+
+function localCantonAssetBytes(local) {
+  try {
+    const filePath = path.isAbsolute(local) ? local : path.resolve(ROOT_DIR, local);
+    const stat = fs.lstatSync(filePath);
+    if (!stat.isFile() || stat.size === 0 || stat.size > MAX_HELD_ASSET_BYTES) return null;
+    return fs.readFileSync(filePath);
+  } catch {
+    return null;
+  }
+}
+
+function sha256(bytes) {
+  return createHash('sha256').update(bytes).digest('hex');
+}
+
+async function unchangedHeldAssetKeys({ candidateKeys, uploadByKey, assetProbeImpl }) {
+  const unchanged = new Set();
+  let cursor = 0;
+  const workers = Array.from({ length: Math.min(HELD_ASSET_PROBE_CONCURRENCY, candidateKeys.length) }, async () => {
+    while (cursor < candidateKeys.length) {
+      const key = candidateKeys[cursor++];
+      const localBytes = localCantonAssetBytes(uploadByKey.get(key)?.local);
+      if (!localBytes || !imageBytesMatchAssetKey(
+        localBytes,
+        key,
+        CANTON_IMAGE_MIME_BY_EXTENSION[path.extname(key).toLowerCase()],
+      )) {
+        console.log(`::notice::[${LOG}] asset trattenuto ${key}: bytes locali assenti o non verificabili`);
+        continue;
+      }
+      const localSha256 = sha256(localBytes);
+      let remote;
+      try {
+        remote = await assetProbeImpl(key);
+      } catch (error) {
+        remote = {
+          ok: false,
+          status: error?.message ?? String(error),
+        };
+      }
+      const expectedMime = CANTON_IMAGE_MIME_BY_EXTENSION[path.extname(key).toLowerCase()];
+      if (!remote?.ok
+        || remote.status !== 200
+        || remote.contentType !== expectedMime
+        || !Number.isSafeInteger(remote.byteLength)
+        || remote.byteLength <= 0
+        || remote.byteLength > MAX_HELD_ASSET_BYTES
+        || !/^[a-f0-9]{64}$/u.test(remote.sha256 ?? '')) {
+        console.log(`::notice::[${LOG}] asset trattenuto ${key}: confronto CDN non verificabile (${remote?.status ?? 'nessuna risposta'})`);
+        continue;
+      }
+      if (remote.byteLength !== localBytes.length || remote.sha256 !== localSha256) {
+        console.log(`::notice::[${LOG}] asset trattenuto ${key}: bytes CDN diversi dal candidato locale`);
+        continue;
+      }
+      unchanged.add(key);
+      console.log(`::notice::[${LOG}] asset ${key} già presente con SHA-256 identico; PUT omesso in questa release`);
+    }
+  });
+  await Promise.all(workers);
+  return unchanged;
+}
+
+async function uploadCantonAssets({ cdnUploads, heldAssetKeys, unchangedAssetKeys, runImpl, assertMainFreshImpl }) {
   let failures = 0;
   await assertMainFreshImpl();
   for (const { local, key } of cdnUploads) {
-    if (heldAssetKeys.has(key)) continue;
+    if (heldAssetKeys.has(key) || unchangedAssetKeys.has(key)) continue;
     const { stdout } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', local, key]);
     if (!stdout.includes('✅ uploaded')) {
       failures++;
@@ -1700,6 +1981,7 @@ export async function publish({
   runImpl = run,
   publishedStatusImpl = publishedStatus,
   probeImpl = probe,
+  assetProbeImpl = probeCantonAsset,
   releaseReadyImpl = publishedReleaseReady,
   publishCantonRssFeedsImpl = publishCantonRssFeeds,
   releaseReadyMaxWaitMs = RELEASE_READY_MAX_WAIT_MS,
@@ -1707,6 +1989,7 @@ export async function publish({
   sleepImpl = sleep,
   snapshotPagesBeforeUpload = false,
   immutablePages = [],
+  requiredPagePaths = [],
   assertMainFreshImpl = async () => {},
 }) {
   let failures = 0;
@@ -1714,6 +1997,7 @@ export async function publish({
   let rollbackRssPublication = null;
   let pageSnapshots = null;
   let pagesForUpload = pages;
+  const requiredPagePathSet = new Set(requiredPagePaths);
   const rollbackRss = async ({ neutralize = false } = {}) => {
     if (!rollbackRssPublication) return 0;
     const rollback = rollbackRssPublication;
@@ -1793,6 +2077,7 @@ export async function publish({
   let status = beforeStatus;
   console.log(`[${LOG}] preflight: sezione ${section} nel registro pubblicato = ${beforeStatus}`);
   let heldAssetKeys = new Set();
+  let unchangedAssetKeys = new Set();
   if (snapshotPagesBeforeUpload && !pageSnapshots) {
     await assertMainFreshImpl();
     try {
@@ -1830,6 +2115,22 @@ export async function publish({
           .filter(({ key }) => immutableBodies.some((body) => cantonPageReferencesAsset(body, key)))
           .map(({ key }) => key),
       );
+      const uploadByKey = new Map(cdnUploads.map((upload) => [upload.key, upload]));
+      const candidateKeys = new Set();
+      for (const page of pages) {
+        const local = path.join(distDir, page.rel);
+        if (!fs.existsSync(local)) continue;
+        const body = fs.readFileSync(local, 'utf8');
+        for (const key of heldAssetKeys) {
+          if (cantonPageReferencesAsset(body, key)) candidateKeys.add(key);
+        }
+      }
+      unchangedAssetKeys = await unchangedHeldAssetKeys({
+        candidateKeys: [...candidateKeys],
+        uploadByKey,
+        assetProbeImpl,
+      });
+      for (const key of unchangedAssetKeys) heldAssetKeys.delete(key);
       const heldPageKeys = new Set();
       for (const page of pages) {
         const local = path.join(distDir, page.rel);
@@ -1837,10 +2138,10 @@ export async function publish({
         const body = fs.readFileSync(local, 'utf8');
         if ([...heldAssetKeys].some((key) => cantonPageReferencesAsset(body, key))) {
           heldPageKeys.add(page.edgeKey);
-          console.log(
-            `::notice::[${LOG}] release live differita: differisco anche ${page.edgeKey}; ` +
-            'il render nuovo riusa un asset trattenuto dalla superficie precedente',
-          );
+          const reason = requiredPagePathSet.has(page.canonicalPath)
+            ? 'il target mancante resta differito finché ogni asset condiviso non è verificato sul CDN'
+            : 'il render nuovo riusa un asset trattenuto dalla superficie precedente';
+          console.log(`::notice::[${LOG}] release live differita: differisco anche ${page.edgeKey}; ${reason}`);
         }
       }
       pagesForUpload = pages.filter((page) => !heldPageKeys.has(page.edgeKey));
@@ -1851,7 +2152,13 @@ export async function publish({
     }
   }
 
-  failures += await uploadCantonAssets({ cdnUploads, heldAssetKeys, runImpl, assertMainFreshImpl });
+  failures += await uploadCantonAssets({
+    cdnUploads,
+    heldAssetKeys,
+    unchangedAssetKeys,
+    runImpl,
+    assertMainFreshImpl,
+  });
   // Un HTML che punta a un hero non ancora confermato e' una pubblicazione
   // parziale: il reconcile controlla la pagina, non ogni asset CDN. Lasciare
   // partire gli upload delle pagine qui renderebbe quindi servibile un nuovo
@@ -2057,6 +2364,8 @@ export async function main(
     latestApiInputCommitImpl = latestApiInputCommit,
     sourceRegistryIdsImpl = sourceRegistryIds,
     currentMainHeadImpl = publishedMainHead,
+    probeImpl = probe,
+    sleepImpl = sleep,
     publisherCommitImpl = () => execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
     fetchImpl = fetch,
   } = {},
@@ -2068,6 +2377,7 @@ export async function main(
   fs.mkdirSync(distDir, { recursive: true });
   const ids = args.bootstrap ? sourceRegistryIdsImpl(ROOT_DIR, section) : args.ids;
   const publishing = args.publish && !args.dryRun;
+  const allowDeferredLiveRelease = process.env.ALLOW_DEFERRED_LIVE_RELEASE === 'true';
   const publisherCommit = publishing ? publisherCommitImpl() : null;
   const expectedMainHead = process.env.EXPECTED_MAIN_HEAD || publisherCommit;
   const assertMainFreshImpl = async () => {
@@ -2105,7 +2415,7 @@ export async function main(
   // checkout must not override an edge registry that is still live.
   const effectiveStatus = publishing ? await publishedStatusImpl(section) : null;
   const cleanupRssRequested = args.removeStaleCantonRssFeeds === true;
-  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested)) {
+  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested || allowDeferredLiveRelease)) {
     releaseCommit = await resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: publishedApiReleaseCommitImpl,
       apiReleaseCommitOverride: process.env.API_RELEASE_COMMIT,
@@ -2131,7 +2441,7 @@ export async function main(
   // completion replay finish the release after its edge pointer is served.
   let deferredLiveRelease = false;
   let liveBootstrapManifestMissing = false;
-  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested)) {
+  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested || allowDeferredLiveRelease)) {
     const readiness = await publishedReleaseReadyImpl(releaseCommit, { section, fetchImpl });
     // Quando la readiness è verificata, il set dichiarato dal manifest decide
     // anche se la landing può annunciare RSS: una sezione live senza articoli
@@ -2168,6 +2478,15 @@ export async function main(
         `::notice::[${LOG}] bootstrap ${section}: manifest precedente assente e release API/edge non pronta; ` +
         'blocco la pubblicazione finché la superficie precedente non è dimostrata',
       );
+    }
+    if (allowDeferredLiveRelease && !readinessVerified && publishedManifest.state === 'ok') {
+      deferredLiveRelease = true;
+      if (effectiveStatus !== 'live') {
+        console.log(
+          `::notice::[${LOG}] flip pendente per ${section}: il registro edge è ancora ${effectiveStatus}; ` +
+          'mantengo manifest, RSS e cancellazioni differiti fino al replay globale',
+        );
+      }
     }
     cantonRssFeeds = rssPlan.cantonRssFeeds;
     removeStaleCantonRssFeeds = rssPlan.removeStaleCantonRssFeeds;
@@ -2268,15 +2587,44 @@ export async function main(
   const publishedLivePages = publishedManifestPages
     ? Object.values(publishedManifestPages).flat()
     : [];
-  const publishedPageKeys = new Set(publishedLivePages.map((page) => page.edgeKey));
+  const requestedMissingPagePaths = new Set(args.missingPages);
+  const knownMissingPagePaths = new Set(deferredLiveRelease ? [...args.knownMissingPages, ...args.missingPages] : args.missingPages);
+  const renderedPagePaths = new Map(pages.map((page) => [page.canonicalPath, page]));
+  const publishedPagePaths = new Map(publishedLivePages.map((page) => [page.canonicalPath, page]));
+  const confirmedMissingPagePaths = new Set();
+  const confirmedKnownMissingPagePaths = new Set();
+  if (requestedMissingPagePaths.size > 0 && (!publishing || (deferredLiveRelease && !allowDeferredLiveRelease))) {
+    defects.push('missing-pages richiede un publish; se la release è staged deve avere il differimento esplicitamente armato');
+  } else {
+    for (const requestedPath of requestedMissingPagePaths) {
+      if (!renderedPagePaths.has(requestedPath)) {
+        defects.push(`pagina dichiarata mancante non resa dal backfill: ${requestedPath}`);
+      }
+    }
+    const pathsToConfirm = new Set([
+      ...requestedMissingPagePaths,
+      ...[...knownMissingPagePaths].filter((pagePath) => publishedPagePaths.has(pagePath)),
+    ]);
+    for (const pagePath of pathsToConfirm) {
+      const page = renderedPagePaths.get(pagePath) ?? publishedPagePaths.get(pagePath);
+      if (!page) continue;
+      const confirmation = await confirmCantonPageMissing(page.cdnUrl, { probeImpl, sleepImpl });
+      if (!confirmation.confirmed) {
+        defects.push(`pagina dichiarata mancante ora presente o non verificabile: ${pagePath} (${confirmation.statuses.join(' → ')})`);
+        continue;
+      }
+      if (requestedMissingPagePaths.has(pagePath)) confirmedMissingPagePaths.add(pagePath);
+      if (knownMissingPagePaths.has(pagePath)) confirmedKnownMissingPagePaths.add(pagePath);
+    }
+  }
   // During a deferred live release the old sitemap and edge registry are still
   // live. Only keys absent from the verified old page manifest are immutable
   // additions; replacing an already announced key here would mix two releases
-  // before the API/edge pointer flips.
-  const pagesForPublish = deferredLiveRelease
-    ? pages.filter((page) => !publishedPageKeys.has(page.edgeKey))
-    : pages;
-  const immutableLivePages = deferredLiveRelease ? publishedLivePages : [];
+  // before the API/edge pointer flips, except for an announced key confirmed
+  // 404 by the reconciler, which has no live bytes to preserve.
+  const stagedPageSets = stagedReleasePageSets(pages, publishedLivePages, confirmedMissingPagePaths, confirmedKnownMissingPagePaths);
+  const pagesForPublish = deferredLiveRelease ? stagedPageSets.pagesForPublish : pages;
+  const immutableLivePages = deferredLiveRelease ? stagedPageSets.immutableLivePages : [];
 
   if (publishing && effectiveStatus === null) {
     defects.push('registro edge illeggibile o non valido: stato effettivo della sezione non dimostrato');
@@ -2285,6 +2633,12 @@ export async function main(
     defects.push(
       `manifest edge ${section} non verificabile (${publishedManifest.reason ?? 'errore sconosciuto'}): ` +
       'pubblicazione bloccata per non calcolare cancellazioni dal parent del push',
+    );
+  }
+  if (publishing && allowDeferredLiveRelease && publishedManifest.state !== 'ok') {
+    defects.push(
+      `backfill staged ${section} senza manifest edge verificato: ` +
+      'inventario precedente non dimostrato, pubblicazione bloccata',
     );
   }
   if (liveBootstrapManifestMissing) {
@@ -2357,6 +2711,10 @@ export async function main(
     pages,
     pagesForPublish,
     immutableLivePages,
+    requestedMissingPagePaths: [...requestedMissingPagePaths],
+    confirmedMissingPagePaths: [...confirmedMissingPagePaths],
+    knownMissingPagePaths: [...knownMissingPagePaths],
+    confirmedKnownMissingPagePaths: [...confirmedKnownMissingPagePaths],
     // Legacy summary key retains its bootstrap-only meaning.
     immutableBootstrapPages: args.bootstrap ? immutableLivePages : [],
     cdnUploads,
@@ -2419,19 +2777,23 @@ export async function main(
     publishCantonRssFeedsImpl,
     snapshotPagesBeforeUpload: deferredLiveRelease,
     immutablePages: immutableLivePages,
+    requiredPagePaths: [...confirmedMissingPagePaths],
     assertMainFreshImpl,
   });
   if (summary.published.failures === 0 && deferredLiveRelease) {
     summary.published.manifestDeferred = true;
     if (!args.bootstrap) {
-      summary.published.failures = 1;
-      summary.published.deferredReason = 'release API/edge non verificata: il replay deve ritentare prima di chiudere verde';
+      summary.published.deferredForReplay = allowDeferredLiveRelease;
+      summary.published.deferredReason = 'release API/edge non verificata: il replay deve riallineare il registry prima di pubblicare il manifest';
+      if (!allowDeferredLiveRelease) summary.published.failures = 1;
       console.log(
         `::notice::[${LOG}] manifest edge ${section} differito: ` +
-        'il run resta rosso finché il replay non verifica la release API/edge',
+        (allowDeferredLiveRelease
+          ? 'backfill staged completato; il replay API deve verificare la release prima del manifest'
+          : 'il run resta rosso finché il replay non verifica la release API/edge'),
       );
       writeSummary();
-      return 1;
+      return summary.published.failures ? 1 : 0;
     }
     writeSummary();
     return 0;

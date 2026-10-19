@@ -310,6 +310,37 @@ describe('orphan-pr-custodian — adozione di un 🔴 fuori scope (sito #9221/#9
   });
 });
 
+describe('orphan-pr-custodian — conflitto verificato dalla rilettura fresca', () => {
+  const base = { checkRuns: [], reviews: [], comments: [], nowS: NOW_S };
+
+  it('ignora `has-conflicts` stale quando mergeable_state è clean o unknown', () => {
+    for (const mergeableState of ['clean', 'unknown', undefined]) {
+      const decision = classifyOrphan({
+        ...base,
+        pr: pr({ labels: ['has-conflicts'], mergeableState }),
+      });
+      assert.equal(decision.action, 'none', mergeableState || 'missing mergeable_state');
+      assert.match(decision.reason, /conflitto non confermato/);
+    }
+  });
+
+  it('su `dirty` adotta solo come `orphaned`, senza `agent:autofix`', () => {
+    const decision = classifyOrphan({
+      ...base,
+      pr: pr({ labels: ['has-conflicts'], mergeableState: 'dirty' }),
+    });
+    assert.equal(decision.action, 'adopt-conflict');
+
+    const source = readFileSync(new URL('../../scripts/ci/orphan-pr-custodian.mjs', import.meta.url), 'utf8');
+    const start = source.indexOf("decision.action === 'adopt-conflict'");
+    const end = source.indexOf('} else {', start);
+    assert.ok(start >= 0 && end > start, 'ramo adopt-conflict non trovato');
+    const branch = source.slice(start, end);
+    assert.match(branch, /'--add-label', ORPHANED_LABEL/);
+    assert.doesNotMatch(branch, /AUTOFIX_LABEL/);
+  });
+});
+
 describe('stale-pr-rescuer — cablaggio', () => {
   it('non crea nemmeno il run per i tests di main (filtro sul trigger)', () => {
     assert.match(WORKFLOW, /workflow_run:\n\s+workflows: \['tests'\]\n\s+types: \[completed\]\n(?:\s+#.*\n)*\s+branches-ignore: \[main\]\n/);

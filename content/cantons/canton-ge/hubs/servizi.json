@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T16:48:41.470Z",
-  "contentHash": "4fc4e7a1ef6c45c9b412ea1f57963f370a9c5f6ff1ab451c9dc5ed8492623b30",
+  "updatedAt": "2026-10-19T17:59:19.762Z",
+  "contentHash": "0dcaa3396f32640a6f78e99977ddf2ac5c0cb17ab275f9bbdc6085c9f2cffbfc",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-18T10:29:02.589Z",
+      "updatedAt": "2026-10-19T09:16:29.771Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T09:56:00.107Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -61,11 +61,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-17T22:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-18T22:00:00.000Z"
             },
             {
@@ -87,11 +82,16 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-10-22T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-23T22:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-18T10:29:02.589Z"
+          "updatedAt": "2026-10-19T09:16:29.771Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.ge.ch/node/261"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "en": {
       "canton": "GE",
@@ -248,11 +248,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-17T22:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-18T22:00:00.000Z"
             },
             {
@@ -274,11 +269,16 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-10-22T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-23T22:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-18T10:29:02.589Z"
+          "updatedAt": "2026-10-19T09:16:29.771Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -316,7 +316,7 @@
               "url": "https://www.ge.ch/node/261"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -391,7 +391,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "de": {
       "canton": "GE",
@@ -430,11 +430,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-17T22:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-18T22:00:00.000Z"
             },
             {
@@ -456,11 +451,16 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-10-22T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-23T22:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-18T10:29:02.589Z"
+          "updatedAt": "2026-10-19T09:16:29.771Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -498,7 +498,7 @@
               "url": "https://www.ge.ch/node/261"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -573,7 +573,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "fr": {
       "canton": "GE",
@@ -612,11 +612,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-17T22:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-18T22:00:00.000Z"
             },
             {
@@ -638,11 +633,16 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-10-22T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-23T22:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-18T10:29:02.589Z"
+          "updatedAt": "2026-10-19T09:16:29.771Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -680,7 +680,7 @@
               "url": "https://www.ge.ch/node/261"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -752,7 +752,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     }
   }
 }

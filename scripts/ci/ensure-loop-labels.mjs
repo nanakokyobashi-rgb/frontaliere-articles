@@ -34,6 +34,8 @@
  */
 
 import { execFileSync } from 'node:child_process';
+import { realpathSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
 
 const DRY = process.argv.includes('--dry-run');
 const REPO = process.env.GITHUB_REPOSITORY || process.env.GH_REPO || '';
@@ -212,7 +214,10 @@ function main() {
 
 // Solo in modalità CLI: senza questa guardia, importare il modulo da un test
 // lo ESEGUIREBBE — e questo script scrive sul repo.
-if (process.argv[1] && process.argv[1].endsWith('ensure-loop-labels.mjs')) {
+if ((() => {
+  try { return import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href; }
+  catch { return false; }
+})()) {
   try {
     process.exit(main());
   } catch (e) {

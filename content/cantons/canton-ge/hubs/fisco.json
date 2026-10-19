@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "fisco",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "25a5861fa9d1617a9738301b601a0f5786eb2c7b335f206db1baefc2b4a5c83e",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "39facb6d7b767eac90b7cb494537a64dd155646e747e8a7ea40368c96b4d42df",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -110,6 +110,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Tentative de phishing en cours",
+              "date": "2026-10-19",
+              "url": "https://www.ge.ch/node/45263"
+            },
+            {
               "label": "Guide d'utilisation de l'Impôt à la Source en Ligne (ISeL)",
               "date": "2026-10-12",
               "url": "https://www.ge.ch/node/34212"
@@ -133,14 +138,9 @@
               "label": "Campagne exceptionnelle d'envoi de bordereaux provisoires IFD",
               "date": "2026-10-06",
               "url": "https://www.ge.ch/node/45131"
-            },
-            {
-              "label": "Personnes morales 2023. Baisse des recettes fiscales",
-              "date": "2026-09-29T12:30:00.000Z",
-              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10872&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6043"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -184,7 +184,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "GE",
@@ -272,6 +272,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Tentative de phishing en cours",
+              "date": "2026-10-19",
+              "url": "https://www.ge.ch/node/45263"
+            },
+            {
               "label": "Guide d'utilisation de l'Impôt à la Source en Ligne (ISeL)",
               "date": "2026-10-12",
               "url": "https://www.ge.ch/node/34212"
@@ -295,14 +300,9 @@
               "label": "Campagne exceptionnelle d'envoi de bordereaux provisoires IFD",
               "date": "2026-10-06",
               "url": "https://www.ge.ch/node/45131"
-            },
-            {
-              "label": "Personnes morales 2023. Baisse des recettes fiscales",
-              "date": "2026-09-29T12:30:00.000Z",
-              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10872&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6043"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -346,7 +346,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "GE",
@@ -434,6 +434,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Tentative de phishing en cours",
+              "date": "2026-10-19",
+              "url": "https://www.ge.ch/node/45263"
+            },
+            {
               "label": "Guide d'utilisation de l'Impôt à la Source en Ligne (ISeL)",
               "date": "2026-10-12",
               "url": "https://www.ge.ch/node/34212"
@@ -457,14 +462,9 @@
               "label": "Campagne exceptionnelle d'envoi de bordereaux provisoires IFD",
               "date": "2026-10-06",
               "url": "https://www.ge.ch/node/45131"
-            },
-            {
-              "label": "Personnes morales 2023. Baisse des recettes fiscales",
-              "date": "2026-09-29T12:30:00.000Z",
-              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10872&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6043"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -508,7 +508,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "GE",
@@ -596,6 +596,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Tentative de phishing en cours",
+              "date": "2026-10-19",
+              "url": "https://www.ge.ch/node/45263"
+            },
+            {
               "label": "Guide d'utilisation de l'Impôt à la Source en Ligne (ISeL)",
               "date": "2026-10-12",
               "url": "https://www.ge.ch/node/34212"
@@ -619,14 +624,9 @@
               "label": "Campagne exceptionnelle d'envoi de bordereaux provisoires IFD",
               "date": "2026-10-06",
               "url": "https://www.ge.ch/node/45131"
-            },
-            {
-              "label": "Personnes morales 2023. Baisse des recettes fiscales",
-              "date": "2026-09-29T12:30:00.000Z",
-              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10872&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6043"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -670,7 +670,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

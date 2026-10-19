@@ -172,6 +172,7 @@ import { createGithubIssue, resolveGithubIssue } from '../lib/github-issue-creat
 import { MAX_PREFLIGHT_REQUEST_TOKENS } from '../../generator/scripts/lib/ai-models.mjs';
 import {
   failedImageRegenerationRetryIsEligible,
+  IMAGE_REGENERATION_TERMINAL_STATUS,
   imageRegenerationActionableAt,
   readImageRegenerationQueue,
 } from '../../generator/scripts/lib/image-regeneration-queue.mjs';
@@ -1462,8 +1463,13 @@ export const CONDITIONS = [
     evaluate(m) {
       const health = m.runs?.available === true ? m.runs.coverHealth : null;
       const queue = m.coverQueue;
+      const terminalCount = Number(
+        queue?.terminalCount ?? queue?.statuses?.[IMAGE_REGENERATION_TERMINAL_STATUS] ?? 0,
+      );
       const queueAvailable = queue?.available === true
         && Number.isFinite(queue.count)
+        && Number.isFinite(queue.actionableCount)
+        && Number.isFinite(terminalCount)
         && (queue.oldestAgeHours === null || Number.isFinite(queue.oldestAgeHours))
         && (queue.oldestActionableAgeHours === null || Number.isFinite(queue.oldestActionableAgeHours));
       const healthAvailable = health
@@ -1475,7 +1481,8 @@ export const CONDITIONS = [
       const fallbackEvidenceAvailable = Boolean(healthAvailable && health.observations >= 1);
       const fallbackSignal = fallbackEvidenceAvailable
         && health.latestConsecutiveFallbacks >= COVER_FALLBACK_CONSECUTIVE_THRESHOLD;
-      const queueSignal = queueAvailable && Number.isFinite(queue.oldestActionableAgeHours)
+      const queueSignal = queueAvailable
+        && Number.isFinite(queue.oldestActionableAgeHours)
         && queue.oldestActionableAgeHours >= COVER_QUEUE_MAX_AGE_HOURS;
       // The two signals are independent: an old queue item is actionable even
       // when recent run logs are unavailable, and a measured fallback streak
@@ -1508,6 +1515,7 @@ export const CONDITIONS = [
           `- Coda rigenerazione: **${queue.count}** item; stati: ${statuses}.`,
           `- Item più vecchio: **${queue.oldestRequestedAt || '—'}** (${Number.isFinite(queue.oldestAgeHours) ? `${queue.oldestAgeHours.toFixed(1)}h` : '—'} — soglia ${COVER_QUEUE_MAX_AGE_HOURS}h).`,
           `- Item azionabili: **${queue.actionableCount}**; richiesta più vecchia pronta al retry: **${queue.oldestActionableRequestedAt || '—'}** (${Number.isFinite(queue.oldestActionableAgeHours) ? `${queue.oldestActionableAgeHours.toFixed(1)}h di attesa azionabile; pronta dal ${queue.oldestActionableAt || '—'}` : 'nessuno — cooldown in corso'}).`,
+          `- Item terminali non ritentabili: **${terminalCount}**; restano nel ledger e sono sorvegliati dal segnale terminale dedicato.`,
         ]
         : [
           '- Coda rigenerazione: **non misurata** (JSON illeggibile o `requestedAt` non valido); questo segnale resta sconosciuto.',
@@ -1530,6 +1538,45 @@ export const CONDITIONS = [
           '',
           'Correlare gli eventi [cover] con le run del motore immagini e con la coda prima di chiudere il segnale.',
           'Verificare generator/scripts/lib/article-cover-fallback.mjs per la scelta della copertina e scripts/ci/scan-generation-health.mjs per la misura; non svuotare la coda senza una rigenerazione riuscita e una nuova misura sotto soglia.',
+        ].join('\n') + footer(REMEASURE.cover),
+      };
+    },
+  },
+
+  {
+    id: 'cover-terminal-rejections',
+    scope: 'global',
+    priority: 2,
+    title: () => 'Watchdog copertine: rifiuti safety o vision terminali',
+    evaluate(m) {
+      const queue = m.coverQueue;
+      if (queue?.available !== true) {
+        return { available: false, reason: 'image regeneration queue is not measurable' };
+      }
+      const terminalCount = Number(
+        queue.terminalCount ?? queue.statuses?.[IMAGE_REGENERATION_TERMINAL_STATUS] ?? 0,
+      );
+      if (!Number.isFinite(terminalCount)) {
+        return { available: false, reason: 'terminal cover count is not measurable' };
+      }
+      if (terminalCount === 0) return { firing: false };
+      const statuses = Object.entries(queue.statuses || {})
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([status, count]) => `${status}=${count}`)
+        .join(', ') || 'vuota';
+      return {
+        firing: true,
+        body: [
+          `La coda conserva **${terminalCount}** copertine rifiutate in modo terminale dal gate safety/vision.`,
+          '',
+          `- Item totali nel ledger: **${queue.count}**; stati: ${statuses}.`,
+          `- Item azionabili dal drainer: **${queue.actionableCount}**; i terminali non vengono ritentati con lo stesso input.`,
+          '- Il record resta nel ledger finché una nuova richiesta esplicita lo sostituisce o una copertina valida viene materializzata.',
+          '',
+          '## Suggested action',
+          '',
+          'Correggere input, prompt o policy del provider per gli articleId terminali, quindi accodarli come nuova richiesta e verificare che il contatore torni a zero.',
+          'Non cambiare lo stato in queued senza una variazione dimostrabile dell input di generazione.',
         ].join('\n') + footer(REMEASURE.cover),
       };
     },
@@ -1617,7 +1664,7 @@ export const CONDITIONS = [
           'le finestre. La soglia sta quindi 14 punti sopra l\'ultima quota "sana" osservata e 70 sopra il lato sano.',
           '',
           'Punto da cui guardare: `generator/scripts/lib/evergreen-topic-generator.mjs`, la costruzione del pool.',
-          'È `identical` nel `loop-sync-manifest.json`, **ma nessun mirror porta `generator/`**: `mirror-articles-engine.yml`',
+          'È `adapted` nel `loop-sync-manifest.json`, **ma nessun mirror porta `generator/`**: `mirror-articles-engine.yml`',
           'filtra su `packages/articles/engine/**` (più `index.ts` e `articleSections.ts`) e `mirror-articles-corpus.yml`',
           'su `content/`, dispatch-only. **La fix va quindi applicata a MANO su entrambi i repo, QUESTO PER PRIMO** — è',
           'qui che la generazione gira, e una fix solo sul sito lascia il difetto vivo con la CI verde di entrambi.',
@@ -2279,7 +2326,9 @@ export function formatCantonCommitSummary(perCanton) {
  * minima sarebbe altrimenti un numero inventato proprio mentre il resolver ha
  * bisogno di un allarme. Gli item `failed` restano visibili nella diagnostica,
  * ma non sono azionabili fino alla scadenza del cooldown condiviso col drain;
- * quando lo diventano, l'età SLO parte da quella scadenza.
+ * quando lo diventano, l'età SLO parte da quella scadenza. Gli item `terminal`
+ * non sono mai azionabili, ma hanno un contatore separato che tiene acceso il
+ * watchdog: restano evidenza di una copertina degradata, non lavoro da replay.
  */
 export function collectCoverQueue(repoRoot = REPO_ROOT, now = Date.now()) {
   try {
@@ -2299,6 +2348,7 @@ export function collectCoverQueue(repoRoot = REPO_ROOT, now = Date.now()) {
       const status = String(item?.status || 'unknown');
       statuses[status] = (statuses[status] || 0) + 1;
     }
+    const terminalCount = statuses[IMAGE_REGENERATION_TERMINAL_STATUS] || 0;
     const oldest = parsed.length ? Math.min(...parsed.map(({ requestedAt }) => requestedAt)) : null;
     const observedAt = Number(now);
     if (!Number.isFinite(observedAt)) {
@@ -2325,6 +2375,7 @@ export function collectCoverQueue(repoRoot = REPO_ROOT, now = Date.now()) {
       oldestRequestedAt: oldest === null ? null : new Date(oldest).toISOString(),
       oldestAgeHours: oldest === null ? null : Math.max(0, (observedAt - oldest) / 3_600_000),
       actionableCount: actionable.length,
+      terminalCount,
       oldestActionableRequestedAt: oldestActionable === null ? null : new Date(oldestActionable.requestedAt).toISOString(),
       oldestActionableAt: oldestActionable === null ? null : new Date(oldestActionable.actionableAt).toISOString(),
       oldestActionableAgeHours: oldestActionable === null
@@ -2583,6 +2634,7 @@ async function main() {
     console.log(
       `[generation-health] cover-queue count=${measurements.coverQueue.count}`
       + ` actionable=${measurements.coverQueue.actionableCount}`
+      + ` terminal=${measurements.coverQueue.terminalCount}`
       + ` oldest-age-hours=${measurements.coverQueue.oldestAgeHours ?? 'n/d'}`
       + ` oldest-actionable-age-hours=${measurements.coverQueue.oldestActionableAgeHours ?? 'n/d'}`,
     );

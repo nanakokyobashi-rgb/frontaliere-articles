@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T16:48:41.470Z",
-  "contentHash": "50c239de4d6850742f00e39afb054d452e5b8a8c2236ab8877fd1bca526bb6aa",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "c2c006aed87afa01bda481016c3eb32459e929fa339f10feffd955bab91bdef0",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-18T11:03:15.929Z",
+      "updatedAt": "2026-10-19T13:13:42.861Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T09:56:00.107Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -39,7 +39,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "14",
-          "note": "offerta mediana 212,50 CHF"
+          "note": "offerta mediana 250 CHF"
         }
       ],
       "dataBlocks": [
@@ -69,30 +69,30 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "FR10057",
-              "value": "1000 CHF",
+              "label": "FR12026",
+              "value": "800 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-19T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7267&locale=fr_ch"
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7287&locale=fr_ch"
             },
             {
-              "label": "FR15841",
-              "value": "600 CHF",
+              "label": "FR14632",
+              "value": "700 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-19T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7268&locale=fr_ch"
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7288&locale=fr_ch"
             },
             {
-              "label": "FR16051",
+              "label": "FR19739",
               "value": "500 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-19T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7269&locale=fr_ch"
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7289&locale=fr_ch"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +130,7 @@
               "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -210,7 +210,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "FR",
@@ -227,7 +227,7 @@
         {
           "label": "Plate auctions running",
           "value": "14",
-          "note": "typical bid 212.50 CHF"
+          "note": "typical bid 250 CHF"
         }
       ],
       "dataBlocks": [
@@ -257,30 +257,30 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "FR10057",
-              "value": "1,000 CHF",
+              "label": "FR12026",
+              "value": "800 CHF",
               "detail": "current bid",
-              "date": "2026-10-19T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7267&locale=fr_ch"
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7287&locale=fr_ch"
             },
             {
-              "label": "FR15841",
-              "value": "600 CHF",
+              "label": "FR14632",
+              "value": "700 CHF",
               "detail": "current bid",
-              "date": "2026-10-19T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7268&locale=fr_ch"
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7288&locale=fr_ch"
             },
             {
-              "label": "FR16051",
+              "label": "FR19739",
               "value": "500 CHF",
               "detail": "current bid",
-              "date": "2026-10-19T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7269&locale=fr_ch"
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7289&locale=fr_ch"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -318,7 +318,7 @@
               "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -394,7 +394,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "FR",
@@ -411,7 +411,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "14",
-          "note": "mittleres Gebot 212.50 CHF"
+          "note": "mittleres Gebot 250 CHF"
         }
       ],
       "dataBlocks": [
@@ -441,30 +441,30 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "FR10057",
-              "value": "1’000 CHF",
+              "label": "FR12026",
+              "value": "800 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-19T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7267&locale=fr_ch"
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7287&locale=fr_ch"
             },
             {
-              "label": "FR15841",
-              "value": "600 CHF",
+              "label": "FR14632",
+              "value": "700 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-19T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7268&locale=fr_ch"
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7288&locale=fr_ch"
             },
             {
-              "label": "FR16051",
+              "label": "FR19739",
               "value": "500 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-19T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7269&locale=fr_ch"
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7289&locale=fr_ch"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -502,7 +502,7 @@
               "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -578,7 +578,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "FR",
@@ -595,7 +595,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "14",
-          "note": "offre centrale 212,50 CHF"
+          "note": "offre centrale 250 CHF"
         }
       ],
       "dataBlocks": [
@@ -625,30 +625,30 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "FR10057",
-              "value": "1 000 CHF",
+              "label": "FR12026",
+              "value": "800 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-19T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7267&locale=fr_ch"
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7287&locale=fr_ch"
             },
             {
-              "label": "FR15841",
-              "value": "600 CHF",
+              "label": "FR14632",
+              "value": "700 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-19T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7268&locale=fr_ch"
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7288&locale=fr_ch"
             },
             {
-              "label": "FR16051",
+              "label": "FR19739",
               "value": "500 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-19T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7269&locale=fr_ch"
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7289&locale=fr_ch"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -686,7 +686,7 @@
               "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -758,7 +758,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

@@ -24,6 +24,15 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.traffico-berna-manifestazione.title': 'Berne : perturbations possibles en raison d\'une manifestation non autorisée',
     'blog.article.traffico-berna-manifestazione.excerpt': 'Berne signale de possibles fermetures de routes et des perturbations le dimanche 11 octobre 2026 en raison d\'une manifestation non autorisée : indications pour les personnes qui se déplacent en ville.',
     'blog.article.traffico-berna-manifestazione.imageAlt': 'Rues de Berne avec restrictions de circulation possibles le dimanche 11 octobre 2026',
+    'blog.article.berna-tassa-ecclesiastica.title': 'Berne maintient l\'impôt ecclésiastique pour les entreprises',
+    'blog.article.berna-tassa-ecclesiastica.excerpt': 'Le Gouvernement bernois a pris acte de la pétition visant à rendre volontaire l\'impôt ecclésiastique des personnes morales.',
+    'blog.article.berna-tassa-ecclesiastica.imageAlt': 'Bâtiment institutionnel du canton de Berne sur la taxe ecclésiastique',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.title': 'Administration fiscale de Berne : fermeture du 23 octobre au 1er novembre 2026',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.excerpt': 'L\'Administration fiscale du canton de Berne suspend ses services du 23 octobre à 16 h au 1er novembre 2026 pour une mise à niveau technologique.',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.imageAlt': 'Administration fiscale du Canton de Berne pendant la fermeture temporaire',
+    'blog.article.berna-governo-kita-gratuite.title': 'Berne, le Gouvernement rejette la gratuité des Kita',
+    'blog.article.berna-governo-kita-gratuite.excerpt': 'Le Gouvernement bernois recommande au Grand Conseil de rejeter la motion en faveur de Kita gratuites : pour les bénéficiaires actuels, plus de 160 millions de CHF par an.',
+    'blog.article.berna-governo-kita-gratuite.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBeFr;

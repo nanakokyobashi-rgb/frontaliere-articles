@@ -196,7 +196,10 @@ jobs:
             exit 1
           fi
           git fetch --no-tags origin main
-          git checkout -B "$branch" origin/main
+          # Do not rely on the runner's remote-tracking ref: this fetch's
+          # FETCH_HEAD is the exact main revision for this rollout attempt.
+          main_head="$(git rev-parse FETCH_HEAD)"
+          git checkout -B "$branch" "$main_head"
           node scripts/ci/auto-live-canton-sections.mjs apply \
             --mode "$MODE" --sections "$READY" --require-ready \
             --site-base "$SITE_BASE" --cdn-base "$CDN_BASE" --json

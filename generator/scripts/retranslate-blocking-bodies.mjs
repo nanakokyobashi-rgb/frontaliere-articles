@@ -37,6 +37,8 @@
  *      pagina che la guardia gia' accetta;
  *   3. una pagina con almeno tre righe italiane porta il codice bloccante
  *      `italian-residue`, anche se la guardia factuality non trova `critical`;
+ *      una label `nav:` italiana ha invece un codice dedicato anche quando è
+ *      una riga isolata;
  *   4. si scrive SOLO se il testo nuovo supera anche i controlli locali di
  *      `translationSanityIssue`: non e' drasticamente piu' corto del body
  *      pubblicato — il tier HuggingFace tronca la SORGENTE a 2000 caratteri e
@@ -76,15 +78,19 @@
  * Se un campo torna vuoto dalla cascata (motore giu', sentinella nav-link
  * mangled, marker `Null` di fallimento) l'articolo si SALTA per intero: in
  * produzione il chiamante ha una recovery per-campo (retry LLM, poi body
- * lasciato non tradotto — #1875), qui no, e mezza traduzione nuova cucita su
- * mezza vecchia sarebbe testo che nessuna pipeline ha mai prodotto.
+ * lasciato non tradotto — #1875). Qui la cascata esaurita usa una sola
+ * recovery Codex locale; se anche quella fallisce l'articolo si SALTA per
+ * intero, perche' mezza traduzione nuova cucita su mezza vecchia sarebbe testo
+ * che nessuna pipeline ha mai prodotto. Il report conserva provider e motivi
+ * bounded del campo fallito, mai payload o errori grezzi.
  *
  * ── COSTO ──────────────────────────────────────────────────────────────────
  *
- * Zero quota LLM: `freeTranslateWithRetry` e' la cascata di motori gratuiti.
- * Il costo e' wall-clock e rate limit degli endpoint pubblici, non il budget
- * condiviso che ferma il ciclo agentico. Il "cascade" da ~265 job/giorno e'
- * un'altra cosa (gli annunci di lavoro) e non viene toccato.
+ * `freeTranslateWithRetry` prova prima la cascata condivisa. Nella bonifica
+ * locale, solo dopo un vuoto completo, usa il trasporto `codex exec` gia'
+ * previsto dal motore esplicito: il costo LLM e' quindi limitato ai campi che
+ * tutti i provider hanno lasciato scoperti. In CI, dove il trasporto locale e'
+ * vietato, il report nominativo rende il rifiuto diagnosticabile.
  *
  * Eccezione dichiarata: `--engine codex` NON e' a quota zero. Ogni campo body
  * e' una chiamata `codex exec` (gpt-5.6-luna, effort max) sulla subscription
@@ -139,8 +145,11 @@
  *   --code <code>      filtra per codice bloccante (stratificazione del pilota)
  *   --stratify         una fetta per ogni codice, fino a --limit complessivo
  *   --concurrency N    articoli in parallelo (default 2, gentile coi motori)
+ *   CODEX_LOCAL_RETRY_BACKOFF_MS=20000,60000 configura i due ritardi dei
+ *                      retry transitori di --engine codex (millisecondi)
  *   --engine <nome>    motore di traduzione: `cascade` (default, la cascata
- *                      free-MT di `freeTranslateWithRetry`) oppure `codex`
+ *                      di `freeTranslateWithRetry`, poi Codex locale solo sul
+ *                      vuoto completo) oppure `codex`
  *                      (solo in locale: il tier Codex della cascata da solo,
  *                      eseguito con `codex exec`, gpt-5.6-luna a effort max;
  *                      decisione del proprietario 2026-10-04, #1084 item 2).
@@ -148,6 +157,10 @@
  *                      guardie (`translateFieldFreeMt`, `sanitizeBodyText`,
  *                      fatti chiave, `runFactualityGates`, residuo italiano,
  *                      `translationSanityIssue`, `shouldWrite`).
+ *   --empty-cascade-threshold <r>
+ *                      soglia osservatore in rapporto 0..1 (default 0.2),
+ *                      configurabile anche con
+ *                      RETRANSLATE_EMPTY_CASCADE_THRESHOLD
  *   --content-root <p> radice che contiene content/ (default: root del repo)
  *   --json             report macchina invece della tabella
  *   --out <file>       scrive il report `--json` in un file. Serve davvero: i
@@ -161,8 +174,18 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import { translateFieldFreeMt } from './lib/article-free-mt.mjs';
-import { freeTranslateWithRetry, balanceMarkdownMarkers, translateWithCodexEngine } from './lib/free-translate.mjs';
-import { createCodexExecCall } from './lib/codex-exec-call.mjs';
+import {
+  freeTranslateWithRetry,
+  balanceMarkdownMarkers,
+  recordTranslationProviderAttempt,
+  summarizeTranslationOutcome,
+  translateWithCodexEngine,
+} from './lib/free-translate.mjs';
+import {
+  classifyCodexError,
+  createCodexExecCall,
+  sanitizeCodexDiagnostic,
+} from './lib/codex-exec-call.mjs';
 import { runFactualityGates } from './lib/article-factuality-gates.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import {
@@ -184,10 +207,12 @@ import {
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYMS,
   normalizeLocalizedToponymText,
+  replaceLocalizedToponymMismatches,
 } from './lib/localized-toponyms.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { sanitizeArticleMarkdownLinks } from '../../scripts/lib/article-link-contract.mjs';
+import { findItalianNavLinkLabels } from '../../scripts/lib/nav-link-labels.mjs';
 import {
   BODY_FIELDS as WRITER_BODY_FIELDS,
   extractBodyFields,
@@ -242,10 +267,13 @@ export function bodyFieldsForSource(src, id) {
  * non e' abbastanza probante per autorizzare una riscrittura automatica.
  */
 export const ITALIAN_RESIDUE_MIN_LINES = 3;
-const ITALIAN_RESIDUE_MIN_CONFIDENCE = 0.15;
+const ITALIAN_RESIDUE_MIN_CONFIDENCE = 0.25;
+const ITALIAN_RESIDUE_STRONG_CONFIDENCE = 0.35;
+const ITALIAN_RESIDUE_MIN_SCORE = 100;
 const ITALIAN_RESIDUE_HEADING_RE = /^(?:#{1,6}\s*)?(?:in breve|fatti chiave|domande frequenti|punti chiave|conclusione|conclusioni|fonti|consiglio pratico|cosa cambia|attenzione|da sapere|in sintesi)\s*:?[ \t]*$/iu;
 const ITALIAN_RESIDUE_WORD_RE = /[\p{L}]+(?:['’][\p{L}]+)*/gu;
 const ITALIAN_HEADING_HINT_RE = /\b(?:aggiornament(?:i|o)|canton(?:e|i)|contribut(?:i|o)|cos(?:a|e)|fiscal(?:e|i)|frontalier(?:a|e|i|o)|impatt(?:i|o)|impost(?:a|e)|italian(?:a|e|i|o)|lavorator(?:e|i)|misur(?:a|e)|nuov(?:a|e|i|o)|pension(?:e|i)|reddit(?:i|o)|regol(?:a|e)|salar(?:i|io)|tass(?:a|e)|ticin(?:o|esi)|titol(?:i|o))\b/iu;
+const ITALIAN_SHARED_HEADING_HINT_RE = /\bfrontalier(?:a|e|i|o)\b/iu;
 // `fiscale` is valid Italian and French. It must go through the detector
 // independently of the expected locale instead of the unconditional
 // short-heading fast-path: the same French heading can be audited with a
@@ -276,6 +304,20 @@ function normalizeItalianResidueLine(line) {
     .replace(/[\*_`>#|]/gu, ' ')
     .replace(/\s+/gu, ' ')
     .trim();
+}
+
+function isItalianResidueMetadataLine(clean) {
+  const withoutBullet = String(clean ?? '').replace(/^[-+*]\s+/u, '').trim();
+  if (/^(?:source|sources|fonte|fonti|quelle)\s*(?:[:：])\s*\S/iu.test(withoutBullet)) return true;
+  return /^(?:(?:https?|ftp):\/\/|www\.)\S+$/iu.test(withoutBullet)
+    || /^(?:[\p{L}\p{N}-]+\.)+[a-z]{2,}(?:[/:?#]\S*)?$/iu.test(withoutBullet);
+}
+
+function isConfidentItalian(detected) {
+  if (detected?.lang !== 'it') return false;
+  if (detected.confidence >= ITALIAN_RESIDUE_STRONG_CONFIDENCE) return true;
+  return detected.confidence >= ITALIAN_RESIDUE_MIN_CONFIDENCE
+    && (detected.scores?.it || 0) >= ITALIAN_RESIDUE_MIN_SCORE;
 }
 
 /** Rimuove i contenitori Markdown che possono precedere un heading. */
@@ -468,7 +510,15 @@ function italianMarkdownHeadingReason(text, locale) {
   const detected = detectLanguageWithConfidence(text, locale);
 
   if (ambiguousHint) {
-    return detected.lang === 'it' && detected.confidence >= ITALIAN_RESIDUE_MIN_CONFIDENCE
+    return isConfidentItalian(detected)
+      ? 'language'
+      : null;
+  }
+
+  // `frontalier` è condiviso con il francese: da solo non è prova di residuo
+  // italiano. Il margine del detector deve confermare l'intera lingua.
+  if (ITALIAN_SHARED_HEADING_HINT_RE.test(text)) {
+    return isConfidentItalian(detected)
       ? 'language'
       : null;
   }
@@ -479,7 +529,7 @@ function italianMarkdownHeadingReason(text, locale) {
   // il titolo e' troppo corto per il profilo trigramma.
   if (localizedHint?.test(text) && !hasItalianHint) return null;
   if (hasItalianHint) return 'language';
-  return detected.lang === 'it' && detected.confidence >= ITALIAN_RESIDUE_MIN_CONFIDENCE
+  return isConfidentItalian(detected)
     ? 'language'
     : null;
 }
@@ -497,12 +547,13 @@ function italianResidueLineReason(line, locale, nextLine, heading = undefined) {
     if (ITALIAN_RESIDUE_HEADING_RE.test(headingText)) return 'heading';
     return italianMarkdownHeadingReason(headingText, locale);
   }
+  if (isItalianResidueMetadataLine(clean)) return null;
   if (ITALIAN_RESIDUE_HEADING_RE.test(clean)) return 'heading';
 
   const words = clean.match(ITALIAN_RESIDUE_WORD_RE) || [];
   if (words.length < 3) return null;
-  const { lang, confidence } = detectLanguageWithConfidence(clean, locale);
-  return lang === 'it' && confidence >= ITALIAN_RESIDUE_MIN_CONFIDENCE ? 'language' : null;
+  const detected = detectLanguageWithConfidence(clean, locale);
+  return isConfidentItalian(detected) ? 'language' : null;
 }
 
 /**
@@ -601,11 +652,13 @@ export { escapeForSingleQuoteTS };
 
 /**
  * Applica il post-processing della pipeline e rende esplicito il fallimento
- * quando la sanitizzazione svuota l'uscita MT.
+ * quando la sanitizzazione svuota l'uscita MT. Il contratto dei link viene
+ * applicato qui, prima delle guardie, così ogni provider vede la stessa label
+ * nav deterministica che verra' poi scritta dal writer comune.
  */
-export function sanitizeTranslatedField(value) {
+export function sanitizeTranslatedField(value, locale = 'it') {
   const sanitized = sanitizeBodyText(value);
-  return sanitized.trim() ? sanitized : null;
+  return sanitized.trim() ? sanitizeArticleMarkdownLinks(sanitized, locale) : null;
 }
 
 /**
@@ -774,10 +827,9 @@ export function templateHeadingIssue({ italianSections, newSections, locale }) {
 /**
  * Come `processPair` usa la guardia dei fatti chiave.
  *
- * Ovunque, tranne un ramo, e' la guardia di sempre: riscrive `body1` togliendo
- * i fatti vacui (se restano abbastanza superstiti) e pretende una sezione Fatti
- * chiave riconosciuta con almeno un fatto usabile (salvo la riparazione
- * strutturale di una fonte che non ce l'ha).
+ * Ovunque, tranne un ramo, riscrive `body1` togliendo i fatti vacui (se restano
+ * abbastanza superstiti) e pretende una sezione Fatti chiave riconosciuta con
+ * almeno un fatto usabile quando la fonte italiana ne ha una.
  *
  * L'eccezione e' il SOLO ramo che toglie la riga `TITOLO ARTICOLO: <titolo>`
  * da un body italiano (`titleMarkerRemoval`). Decisioni del proprietario del
@@ -802,7 +854,7 @@ export function keyFactsGuardMode({ titleMarkerRemoval = false, structural = fal
   const sourceHasKeyFacts = parseAiSearchSections(sourceBody1).length > 0;
   return {
     verifyOnly: false,
-    options: { requireRecognizedSection: !structural || sourceHasKeyFacts, maxSourceBackedResiduals },
+    options: { requireRecognizedSection: sourceHasKeyFacts, maxSourceBackedResiduals },
   };
 }
 
@@ -896,6 +948,246 @@ const ADDRESS_DESCRIPTION_COLON_RE = /:/gu;
 const ADDRESS_DESCRIPTION_LABEL_PREFIX_RE = /^\s*(?:(?:a|an|the|un|une|una|uno|ein|eine|der|die|das|le|la|les)\s+)?(?:description|descrizione|beschreibung|note(?:s)?|nota|remarque(?:s)?|comment(?:s|aire|i)?|kommentar|information(?:en)?|informazioni?|details?|dettagli?|overview|panoramica|aperçu|übersicht|überblick|summary|résumé|zusammenfassung|report|rapport|bericht)\b/iu;
 const ADDRESS_LEADING_LABEL_RE = /^\s*(?:indirizzo|address|adresse|cap|codice\s+postale|postal\s+code|postcode|plz|npa)\s*[:,-]?\s*/iu;
 const ADDRESS_LOCALITY_PREAMBLE_PREFIX_RE = /^\s*(?:around|about|near|nearby|next\s+to|close\s+to|adjacent\s+to|at|by|from|across|behind|between|outside|inside|within|above|below|in\s+the\s+area\s+of|in\s+the\s+vicinity\s+of|vicino(?:\s+a)?|presso|nei\s+pressi\s+di|nelle\s+vicinanze\s+di|circa|près\s+de|à\s+proximité\s+de|à\s+côté\s+de|proche\s+de|aux\s+alentours\s+de|bei|nahe(?:\s+bei)?|in\s+der\s+Nähe\s+von|rund\s+um)\b/iu;
+const MAX_MARKDOWN_DESTINATION_LOOKAHEAD = 2048;
+const OPAQUE_REMAINDER = -2;
+
+/**
+ * Advance the quote state of a Markdown link destination without treating
+ * parentheses inside an optional title as delimiters. Escaped characters are
+ * consumed by the caller first, so an escaped quote cannot close the title.
+ *
+ * @param {string} source
+ * @param {number} index
+ * @param {number} start
+ * @param {{ angleDestination?: boolean, titleQuote?: string }} [state]
+ * @returns {{ angleDestination: boolean, titleQuote: string }}
+ */
+export function markdownDestinationTitleState(source, index, start, {
+  angleDestination = false,
+  titleQuote = '',
+} = {}) {
+  const text = String(source ?? '');
+  const character = text[index];
+  if (titleQuote) {
+    return {
+      angleDestination,
+      titleQuote: character === titleQuote ? '' : titleQuote,
+    };
+  }
+  if (!angleDestination && index > start && /\s/u.test(text[index - 1])
+    && (character === '"' || character === "'")) {
+    return { angleDestination, titleQuote: character };
+  }
+  return { angleDestination, titleQuote };
+}
+
+/**
+ * Find a balanced Markdown destination inside a bounded look-ahead window.
+ * Unclosed, overlong, or otherwise malformed metadata returns the same
+ * opaque sentinel used by the visible-address projection.
+ *
+ * @param {string} source
+ * @param {number} start
+ * @param {number} [limit]
+ * @returns {number}
+ */
+export function boundedMarkdownDestination(source, start, limit = String(source ?? '').length) {
+  const text = String(source ?? '');
+  if (!Number.isInteger(start) || start < 0 || start >= text.length) return OPAQUE_REMAINDER;
+  const requestedLimit = Number.isInteger(limit)
+    ? Math.min(Math.max(limit, start), text.length)
+    : text.length;
+  const destinationLimit = Math.min(
+    requestedLimit,
+    start + MAX_MARKDOWN_DESTINATION_LOOKAHEAD,
+  );
+  let parenthesisDepth = 0;
+  let state = { angleDestination: false, titleQuote: '' };
+  for (let index = start; index < destinationLimit; index += 1) {
+    if (text[index] === '\\') {
+      index += 1;
+      continue;
+    }
+    const character = text[index];
+    const stateBefore = state;
+    state = markdownDestinationTitleState(text, index, start, state);
+    if (stateBefore.titleQuote || state.titleQuote) continue;
+    if (state.angleDestination) {
+      if (character === '>') state = { ...state, angleDestination: false };
+      continue;
+    }
+    if (index === start && character === '<') {
+      state = { ...state, angleDestination: true };
+    } else if (character === '(') {
+      parenthesisDepth += 1;
+    } else if (character === ')') {
+      if (parenthesisDepth === 0) return index + 1;
+      parenthesisDepth -= 1;
+    }
+  }
+  return OPAQUE_REMAINDER;
+}
+
+/**
+ * Project an address to the text a reader sees while retaining the source
+ * offset of every visible character. Address guards compare this projection;
+ * the offsets keep a CAP occurrence tied to the corresponding raw line when
+ * Markdown/HTML metadata has a different length or contains nested links.
+ */
+export function visibleAddressOffsetMap(value) {
+  const source = String(value ?? '');
+  const visible = [];
+  const sourceOffsets = [];
+  let opaque = false;
+
+  const appendCharacter = (character, sourceIndex) => {
+    visible.push(character);
+    sourceOffsets.push(sourceIndex);
+  };
+
+  const appendSeparatorIfNeeded = (start, end) => {
+    const previous = visible.at(-1);
+    const next = source[end];
+    if (previous && next && !/\s/u.test(previous) && !/\s/u.test(next)) {
+      appendCharacter(' ', start);
+    }
+  };
+
+  const htmlTagEndAt = (start, limit) => {
+    const opener = source[start + 1];
+    if (source[start] !== '<' || !/[A-Za-z!?/]/u.test(opener || '')) return -1;
+    let quote = '';
+    const tagLimit = Math.min(limit, start + 512);
+    for (let index = start + 1; index < tagLimit; index += 1) {
+      const character = source[index];
+      if (quote) {
+        if (character === quote) quote = '';
+        // A `>` or a nested `<` inside an open attribute quote makes the
+        // opening ambiguous. Mark the remainder opaque instead of exposing
+        // metadata or swallowing it up to a later delimiter.
+        else if (character === '>' || character === '<') return OPAQUE_REMAINDER;
+        continue;
+      }
+      if (character === '"' || character === "'") quote = character;
+      else if (character === '<') return OPAQUE_REMAINDER;
+      else if (character === '>') return index + 1;
+    }
+    return OPAQUE_REMAINDER;
+  };
+
+  // Build link ranges once. Calling a balanced-bracket look-ahead for every
+  // `[` makes malformed prose with many brackets quadratic; this stack keeps
+  // the same nested-label behavior while making the projection linear in the
+  // common case.
+  const markdownLinkRanges = new Map();
+  const openLabels = [];
+  for (let index = 0; index < source.length; index += 1) {
+    if (source[index] === '\\') {
+      index += 1;
+      continue;
+    }
+    if (source[index] === '[') {
+      openLabels.push(index);
+      continue;
+    }
+    if (source[index] !== ']' || openLabels.length === 0) continue;
+    const labelStart = openLabels.pop();
+    if (source[index + 1] !== '(') continue;
+    const end = boundedMarkdownDestination(source, index + 2, source.length);
+    if (end === OPAQUE_REMAINDER) {
+      const markerStart = labelStart > 0 && source[labelStart - 1] === '!'
+        ? labelStart - 1
+        : labelStart;
+      markdownLinkRanges.set(markerStart, {
+        labelStart: labelStart + 1,
+        labelEnd: index,
+        end: source.length,
+        opaqueRemainder: true,
+      });
+      break;
+    }
+    if (end < 0) continue;
+    const markerStart = labelStart > 0 && source[labelStart - 1] === '!'
+      ? labelStart - 1
+      : labelStart;
+    markdownLinkRanges.set(markerStart, {
+      labelStart: labelStart + 1,
+      labelEnd: index,
+      end,
+    });
+    // A destination is opaque. Avoid treating its brackets as label syntax
+    // and leave any outer label on the stack for the next visible `]`.
+    index = end - 1;
+  }
+
+  const markdownLinkAt = (start, limit) => {
+    const link = markdownLinkRanges.get(start);
+    return link && (link.opaqueRemainder || link.end <= limit) ? link : null;
+  };
+
+  const urlEndAt = (start, limit) => {
+    const urlPrefix = source.slice(start, start + 8).toLowerCase();
+    const hasUrlPrefix = urlPrefix.startsWith('https://')
+      || urlPrefix.startsWith('http://')
+      || urlPrefix.startsWith('www.');
+    const isRoute = source[start] === '/'
+      && /[a-z0-9]/iu.test(source[start + 1] || '')
+      && (start === 0 || !/[\p{L}\p{N}@]/u.test(source[start - 1]));
+    if (!hasUrlPrefix && !isRoute) return -1;
+    let end = start + 1;
+    while (end < limit && !/[\s)\]>"]/u.test(source[end])) end += 1;
+    return end;
+  };
+
+  const scan = (start, limit) => {
+    const frames = [{ index: start, limit }];
+    while (frames.length > 0) {
+      const frame = frames.at(-1);
+      if (frame.index >= frame.limit) {
+        frames.pop();
+        continue;
+      }
+      const index = frame.index;
+      const link = markdownLinkAt(index, frame.limit);
+      if (link) {
+        if (link.opaqueRemainder) opaque = true;
+        frame.index = Math.min(link.end, frame.limit);
+        frames.push({ index: link.labelStart, limit: link.labelEnd });
+        continue;
+      }
+      const tagEnd = htmlTagEndAt(index, frame.limit);
+      if (tagEnd === OPAQUE_REMAINDER) {
+        opaque = true;
+        frame.index = frame.limit;
+        continue;
+      }
+      if (tagEnd >= 0) {
+        appendSeparatorIfNeeded(index, tagEnd);
+        frame.index = tagEnd;
+        continue;
+      }
+      const urlEnd = urlEndAt(index, frame.limit);
+      if (urlEnd >= 0) {
+        appendSeparatorIfNeeded(index, urlEnd);
+        frame.index = urlEnd;
+        continue;
+      }
+      if (source[index] === '*' || source[index] === '_' || source[index] === '\`') {
+        frame.index += 1;
+        continue;
+      }
+      if (source[index] === '~' && source[index + 1] === '~') {
+        frame.index += 2;
+        continue;
+      }
+      appendCharacter(source[index], index);
+      frame.index += 1;
+    }
+  };
+
+  scan(0, source.length);
+  return { text: visible.join(''), sourceOffsets, opaque };
+}
 
 /**
  * The address guard is deliberately narrower than a generic capitalized-word
@@ -919,11 +1211,41 @@ function foldAddressText(value) {
 
 /** Keep Markdown labels and HTML text, but discard opaque metadata and formatting. */
 function visibleAddressText(value) {
+  return visibleAddressOffsetMap(value).text;
+}
+
+const ADDRESS_POSTAL_LOCALITY_PARTICLES = new Set([
+  'a', 'al', 'am', 'an', 'and', 'at', 'auf', 'aux', 'bei', 'da', 'das', 'de',
+  'dei', 'del', 'della', 'delle', 'degli', 'dello', 'di', 'do', 'dos', 'du',
+  'des',
+  'e', 'el', 'het', 'i', 'il', 'im', 'in', 'la', 'las', 'le', 'les', 'los',
+  'na', 'nel', 'nei', 'nella', 'nelle', 'no', 'of', 'on', 'para', 'per',
+  'por', 'sous', 'su', 'sul', 'sulla', 'sur', 'the', 'van', 'von', 'vor', 'y', 'zu',
+  'zum', 'zur', 'der', 'den', 'dem', 'am', 'an', 'aus', 'über', 'unter',
+].map((word) => foldAddressText(word)));
+const ADDRESS_POSTAL_CAPITALIZED_WORD_RE = /^\p{Lu}[\p{L}\p{M}]*(?:[’'\-][\p{L}\p{M}]+)*$/u;
+const ADDRESS_POSTAL_COMPOUND_PARTICLE_RE = /^\p{Ll}[\p{L}\p{M}]*[’'][\p{Lu}][\p{L}\p{M}]*(?:[’'\-][\p{L}\p{M}]+)*$/u;
+
+/** Tokenize a locality without treating its lower-case connector words as prose. */
+export function addressPostalLocalityWords(value) {
   return String(value ?? '')
-    .replace(ADDRESS_MARKDOWN_LINK_RE, '$1')
-    .replace(ADDRESS_URL_RE, ' ')
-    .replace(ADDRESS_HTML_TAG_RE, ' ')
-    .replace(ADDRESS_MARKDOWN_DECORATION_RE, '');
+    .normalize('NFKC')
+    .trim()
+    .split(/\s+/u)
+    .map((word) => word.replace(/^[,;:]+|[,;:]+$/gu, ''))
+    .filter(Boolean);
+}
+
+function isAddressPostalLocality(value) {
+  const words = addressPostalLocalityWords(value);
+  if (!words.length || !ADDRESS_POSTAL_CAPITALIZED_WORD_RE.test(words[0])) return false;
+  return words.every((word, index) => {
+    if (ADDRESS_POSTAL_CAPITALIZED_WORD_RE.test(word)) return true;
+    if (ADDRESS_POSTAL_COMPOUND_PARTICLE_RE.test(word)) return index > 0;
+    const folded = foldAddressText(word);
+    return index > 0 && index < words.length - 1
+      && ADDRESS_POSTAL_LOCALITY_PARTICLES.has(folded);
+  });
 }
 
 function addressTermPattern(term) {
@@ -1003,9 +1325,16 @@ function addressLocalityFormsForSourceLine(sourceLine, locale) {
   return [...forms];
 }
 
-function addressPostalMatches(line) {
+function addressPostalMatches(value) {
+  const projection = typeof value === 'string'
+    ? visibleAddressOffsetMap(value)
+    : value;
   ADDRESS_POSTAL_CODE_RE.lastIndex = 0;
-  const matches = [...String(line).matchAll(ADDRESS_POSTAL_CODE_RE)];
+  const matches = [...projection.text.matchAll(ADDRESS_POSTAL_CODE_RE)]
+    .map((match, postalMatchIndex) => Object.assign(match, {
+      postalMatchIndex,
+      sourceIndex: projection.sourceOffsets[match.index] ?? match.index,
+    }));
   ADDRESS_POSTAL_CODE_RE.lastIndex = 0;
   return matches;
 }
@@ -1078,7 +1407,9 @@ function postalSegmentHasLocality(addressSegment) {
   const afterPreposition = marker
     ? afterMarker.replace(ADDRESS_POSTAL_LOCALITY_PREPOSITION_PREFIX_RE, '')
     : afterMarker;
-  return ADDRESS_POSTAL_LOCALITY_RE.test(afterPreposition);
+  const localityCandidate = afterPreposition.split(/[,;:]/u, 1)[0].trim();
+  return isAddressPostalLocality(localityCandidate)
+    || ADDRESS_POSTAL_LOCALITY_RE.test(afterPreposition);
 }
 
 function postalSegmentContainsOnlyPlaceNames(addressSegment) {
@@ -1096,7 +1427,7 @@ function postalSegmentContainsOnlyPlaceNames(addressSegment) {
     const placeName = marker
       ? afterMarker.replace(ADDRESS_POSTAL_LOCALITY_PREPOSITION_PREFIX_RE, '')
       : afterMarker;
-    return ADDRESS_POSTAL_PLACE_NAME_RE.test(placeName);
+    return isAddressPostalLocality(placeName);
   });
 }
 
@@ -1172,44 +1503,106 @@ function addressTokenIsPreserved({ token, sourceSegment, targetSegment, locale }
   });
 }
 
+function addressPostalMatchFollowsAddressSegment(line, postalMatches, postalMatch) {
+  return postalMatches.some((previousMatch) => {
+    if (previousMatch.index >= postalMatch.index) return false;
+    const betweenMatches = line.slice(
+      previousMatch.index + previousMatch[0].length,
+      postalMatch.index,
+    );
+    const previousSegment = addressSegmentForPostalCode(line, previousMatch);
+    const currentSegment = addressSegmentForPostalCode(line, postalMatch);
+    return !ADDRESS_SENTENCE_BOUNDARY_RE.test(betweenMatches)
+      && !/:/u.test(betweenMatches)
+      && /[,;]\s*$/u.test(betweenMatches)
+      && isAddressLine(line, previousMatch)
+      && postalHasAddressSeparator(line, postalMatch)
+      && postalSegmentHasLocality(currentSegment)
+      && postalSegmentContainsOnlyPlaceNames(previousSegment)
+      && postalSegmentContainsOnlyPlaceNames(currentSegment);
+  });
+}
+
+function addressPostalCodesForLines(lines) {
+  const codes = [];
+  for (const rawLine of lines) {
+    const projection = visibleAddressOffsetMap(rawLine);
+    if (projection.opaque) continue;
+    const line = projection.text;
+    const postalMatches = addressPostalMatches(projection);
+    for (const postalMatch of postalMatches) {
+      const followsAddressSegment = addressPostalMatchFollowsAddressSegment(
+        line,
+        postalMatches,
+        postalMatch,
+      );
+      if (!isAddressLine(line, postalMatch) && !followsAddressSegment) continue;
+      codes.push(postalMatch[0]);
+    }
+  }
+  return codes;
+}
+
+/**
+ * Check that every postal candidate needed for an ordinal fallback comes from
+ * one visible target line and exposes each source ordinal exactly once.
+ * Candidates from different lines are never a complete set: borrowing their
+ * order would associate a CAP with the wrong source address.
+ *
+ * @param {Array<{ index?: number, postalMatchIndex?: number }>} candidates
+ * @param {number} expectedCount
+ * @returns {boolean}
+ */
+export function sameAddressCandidateIndex(candidates, expectedCount) {
+  if (!Array.isArray(candidates) || !Number.isInteger(expectedCount) || expectedCount <= 1) {
+    return false;
+  }
+  if (candidates.length !== expectedCount) return false;
+  const targetIndex = candidates[0]?.index;
+  if (!Number.isInteger(targetIndex)) return false;
+  if (candidates.some((candidate) => candidate?.index !== targetIndex)) return false;
+  const ordinals = new Set(candidates.map((candidate) => candidate?.postalMatchIndex));
+  if (ordinals.size !== expectedCount) return false;
+  return Array.from({ length: expectedCount }, (_, ordinal) => ordinals.has(ordinal)).every(Boolean);
+}
+
 function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
+  const allAddressCandidates = [];
   const candidates = [];
+  let opaque = false;
+  let unexpectedAddressCandidate = false;
   const expectedLocalityTerms = addressLocalityFormsForSourceLine(sourceLine, locale);
+  const expectedPostalCodes = new Set(
+    Array.isArray(sourceLine.postalCodes) && sourceLine.postalCodes.length > 0
+      ? sourceLine.postalCodes
+      : [sourceLine.postalCode],
+  );
   lines.forEach((rawLine, index) => {
     // A single visible line may contain more than one postal-code/address
     // segment. Each CAP match is assigned at most once, including when the
     // translation combines or reorders source rows on one line.
-    const line = visibleAddressText(rawLine);
-    const postalMatches = addressPostalMatches(line);
+    const projection = visibleAddressOffsetMap(rawLine);
+    if (projection.opaque) opaque = true;
+    if (projection.opaque) return;
+    const line = projection.text;
+    const postalMatches = addressPostalMatches(projection);
     for (const postalMatch of postalMatches) {
-      if (postalMatch[0] !== sourceLine.postalCode) continue;
-      const followsAddressSegment = postalMatches.some((previousMatch) => {
-        if (previousMatch.index >= postalMatch.index) return false;
-        const betweenMatches = line.slice(
-          previousMatch.index + previousMatch[0].length,
-          postalMatch.index,
-        );
-        const previousSegment = addressSegmentForPostalCode(line, previousMatch);
-        const currentSegment = addressSegmentForPostalCode(line, postalMatch);
-        return !ADDRESS_SENTENCE_BOUNDARY_RE.test(betweenMatches)
-          && !/:/u.test(betweenMatches)
-          && /[,;]\s*$/u.test(betweenMatches)
-          && isAddressLine(line, previousMatch)
-          && postalHasAddressSeparator(line, postalMatch)
-          && postalSegmentHasLocality(currentSegment)
-          && postalSegmentContainsOnlyPlaceNames(previousSegment)
-          && postalSegmentContainsOnlyPlaceNames(currentSegment);
-      });
+      const followsAddressSegment = addressPostalMatchFollowsAddressSegment(
+        line,
+        postalMatches,
+        postalMatch,
+      );
       if (!isAddressLine(line, postalMatch) && !followsAddressSegment) continue;
-      const matchKey = `${index}:${postalMatch.index}`;
-      if (usedTargetMatches.has(matchKey)) continue;
+      const matchKey = index + ':' + postalMatch.sourceIndex;
       const targetSegment = addressSegmentForPostalCode(line, postalMatch, {
         forceFirstColonBoundary: sourceLine.hasDescriptionColon,
         expectedLocalityTerms,
       });
-      candidates.push({
+      const candidate = {
         index,
         matchKey,
+        postalCode: postalMatch[0],
+        postalMatchIndex: postalMatch.postalMatchIndex,
         text: rawLine,
         segment: [
           addressLocalityMarkerSegmentBeforePostalCode(
@@ -1220,10 +1613,18 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
           targetSegment,
         ].filter(Boolean).join(' '),
         context: addressContextForPostalCode(line, postalMatch),
-      });
+      };
+      allAddressCandidates.push(candidate);
+      if (!expectedPostalCodes.has(candidate.postalCode)) unexpectedAddressCandidate = true;
+      if (candidate.postalCode !== sourceLine.postalCode) continue;
+      if (!usedTargetMatches.has(matchKey)) candidates.push(candidate);
     }
   });
-  if (candidates.length === 0) return { index: -1, text: '', segment: '' };
+  if (candidates.length === 0) return { index: -1, text: '', segment: '', opaque };
+  // A translated line may preserve the expected address and append another
+  // source-looking CAP. Do not let context/toponym matching select the valid
+  // candidate while silently accepting that extra address.
+  if (unexpectedAddressCandidate) return { index: -1, text: '', segment: '', opaque };
 
   const contextMatches = sourceLine.context
     ? candidates.filter((candidate) => candidate.context === sourceLine.context)
@@ -1235,6 +1636,12 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
       targetSegment: candidate.segment,
       locale,
     })));
+  const ordinalMatches = candidates.filter((candidate) =>
+    candidate.postalMatchIndex === sourceLine.postalMatchIndex);
+  const targetHasCompleteOrdinalSet = sameAddressCandidateIndex(
+    allAddressCandidates,
+    sourceLine.postalMatchCount,
+  );
   let selected = null;
   if (contextMatches.length === 1) {
     selected = contextMatches[0];
@@ -1242,13 +1649,19 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
     selected = toponymMatches[0];
   } else if (candidates.length === 1) {
     selected = candidates[0];
+  } else if (targetHasCompleteOrdinalSet && ordinalMatches.length === 1) {
+    // The ordinal is only a fallback after semantic association failed. It is
+    // safe here because the target exposes one candidate for every source
+    // ordinal on the same visible line; a split or incomplete target remains
+    // fail-closed instead of borrowing a neighboring address.
+    selected = ordinalMatches[0];
   }
   // A duplicated CAP without a unique address context is ambiguous. Refuse
   // the association instead of comparing the source with a different row;
   // the resulting mismatch keeps the old corpus in place.
-  if (!selected) return { index: -1, text: '', segment: '' };
+  if (!selected) return { index: -1, text: '', segment: '', opaque };
   usedTargetMatches.add(selected.matchKey);
-  return selected;
+  return { ...selected, opaque };
 }
 
 /**
@@ -1263,10 +1676,30 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
     const sourceLines = String(italianText ?? '').split('\n');
     const targetLines = String(newSections?.[field] ?? '').split('\n');
     const usedTargetMatches = new Set();
+    const sourceAddressPostalCodes = addressPostalCodesForLines(sourceLines);
     sourceLines.forEach((line, lineIndex) => {
-      const visibleLine = visibleAddressText(line);
-      for (const postalMatch of addressPostalMatches(visibleLine)) {
-        if (!isAddressLine(visibleLine, postalMatch)) continue;
+      const projection = visibleAddressOffsetMap(line);
+      if (projection.opaque && /\b\d{5}\b/u.test(line)) {
+        mismatches.push({
+          field,
+          line: lineIndex + 1,
+          postalCode: 'opaque',
+          source: line.trim(),
+          target: targetLines[lineIndex]?.trim() || '',
+          missing: ['indirizzo non verificabile'],
+        });
+        return;
+      }
+      const visibleLine = projection.text;
+      const sourcePostalMatches = addressPostalMatches(projection);
+      for (const postalMatch of sourcePostalMatches) {
+        const sourceIsAddressLine = isAddressLine(visibleLine, postalMatch)
+          || addressPostalMatchFollowsAddressSegment(
+            visibleLine,
+            sourcePostalMatches,
+            postalMatch,
+          );
+        if (!sourceIsAddressLine) continue;
         const sourceSegment = addressSegmentForPostalCode(visibleLine, postalMatch);
         const sourceLocalityMarkerSegment = addressLocalityMarkerSegmentBeforePostalCode(visibleLine, postalMatch);
         const sourceAddressSegment = [sourceLocalityMarkerSegment, sourceSegment].filter(Boolean).join(' ');
@@ -1279,6 +1712,8 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
         if (tokens.length === 0) continue;
         const sourceLine = {
           postalCode: postalMatch[0],
+          postalMatchIndex: postalMatch.postalMatchIndex,
+          postalMatchCount: sourcePostalMatches.length,
           line: line.trim(),
           segment: sourceAddressSegment,
           postalSegment: sourceSegment,
@@ -1286,6 +1721,7 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
           hasDescriptionColon: addressHasDescriptionColon(visibleLine, postalMatch),
           context: addressContextForPostalCode(visibleLine, postalMatch),
           tokens: [...new Set(tokens)],
+          postalCodes: sourceAddressPostalCodes,
         };
         const target = addressLineTarget(
           targetLines,
@@ -1293,6 +1729,17 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
           usedTargetMatches,
           locale,
         );
+        if (target.opaque) {
+          mismatches.push({
+            field,
+            line: lineIndex + 1,
+            postalCode: sourceLine.postalCode,
+            source: sourceLine.line,
+            target: target.text?.trim() || '',
+            missing: ['indirizzo non verificabile'],
+          });
+          return;
+        }
         const missing = sourceLine.tokens.filter((token) => !addressTokenIsPreserved({
           token,
           sourceSegment: sourceAddressSegment,
@@ -1345,6 +1792,13 @@ export const LANG_CHECK_MIN_CHARS = 50;
  * (che il report conta come tale, invece di lasciarla nel secchio "altro").
  */
 export function translationSanityIssue({ oldSections, newSections, italianSections, locale, structuralRepair = false }) {
+  const italianNavLabels = Object.entries(newSections || {}).flatMap(([field, value]) => (
+    findItalianNavLinkLabels(value, locale).map((hit) => ({ field, ...hit }))
+  ));
+  if (italianNavLabels.length > 0) {
+    const first = italianNavLabels[0];
+    return `italian-nav-label: ${first.field} [${first.label}](nav:${first.target})`;
+  }
   const italianResidue = scanItalianResidue(newSections, locale);
   // Structural FU-009 repairs operate on whole missing/copied fields. The
   // line detector is deliberately sensitive for the historical residue audit,
@@ -2005,17 +2459,149 @@ export function parseEngine(raw) {
   return TRANSLATION_ENGINES.includes(value) ? value : null;
 }
 
+export const CODEX_LOCAL_MAX_RETRIES = 2;
+export const CODEX_LOCAL_RETRY_BACKOFF_MS = Object.freeze([20_000, 60_000]);
+
+/** `CODEX_LOCAL_RETRY_BACKOFF_MS=20000,60000`, bounded to two delays. */
+export function parseCodexRetryBackoff(raw = process.env.CODEX_LOCAL_RETRY_BACKOFF_MS) {
+  if (raw === null || raw === undefined || String(raw).trim() === '') {
+    return [...CODEX_LOCAL_RETRY_BACKOFF_MS];
+  }
+  const values = String(raw).split(',').map((value) => Number(value.trim()));
+  if (values.length !== CODEX_LOCAL_MAX_RETRIES || values.some((value) => !Number.isFinite(value) || value < 0)) {
+    return [...CODEX_LOCAL_RETRY_BACKOFF_MS];
+  }
+  return values.map((value) => Math.round(value));
+}
+
+function codexFailureReason(error) {
+  return classifyCodexError(error).reason;
+}
+
+function codexFailureDiagnostic(error, reason) {
+  const fallbacks = {
+    'empty-output': 'uscita vuota',
+    'invalid-output': 'output non valido',
+    'source-passthrough': 'passthrough della sorgente',
+    'meta-response': 'rifiuto del modello',
+  };
+  if (String(reason || '').startsWith('structure:')) return 'rifiuto della struttura';
+  if (reason === 'incomplete-output') return 'uscita vuota';
+  if (!error) return sanitizeCodexDiagnostic(fallbacks[reason] || reason);
+  const classified = classifyCodexError(error);
+  if (classified.diagnostic) return sanitizeCodexDiagnostic(classified.diagnostic);
+  return sanitizeCodexDiagnostic(fallbacks[reason] || reason);
+}
+
+function codexFailureIsRetryable(error, reason) {
+  if (['auth', 'invalid-output', 'empty-output'].includes(reason)) return false;
+  if (String(reason).startsWith('structure:')) return false;
+  return classifyCodexError(error).retryable === true
+    || ['timeout', 'rate-limit'].includes(reason);
+}
+
+function sleepCodexRetry(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 /**
  * Il `translate` iniettato in `translateFieldFreeMt` per il motore scelto.
  * E' l'UNICO punto in cui i motori differiscono: tutto cio' che segue
  * l'uscita (`translateFieldFreeMt` e le guardie di `processPair`) e' lo stesso
  * codice per entrambi.
  */
-export function engineTranslator(engine, { codexCall = null } = {}) {
-  if (engine === 'cascade') return freeTranslateWithRetry;
+export function engineTranslator(engine, {
+  codexCall = null,
+  cascadeTranslate = freeTranslateWithRetry,
+  codexTranslate = translateWithCodexEngine,
+  codexRetryBackoffMs = parseCodexRetryBackoff(),
+  codexRetrySleep = sleepCodexRetry,
+} = {}) {
+  const nextLocalAttempt = (outcome) => Number.isInteger(outcome?.attempt) && outcome.attempt > 0
+    ? outcome.attempt + 1
+    : 1;
+  const runLocalCodex = async (args, provider) => {
+    args._outcome ??= { tierAttempts: [] };
+    const outcome = args._outcome;
+    // `outcome.attempt` is the last attempt already spent. Each local call
+    // starts at the next number and returns with the number it just spent, so
+    // the following template-heading segment advances exactly once.
+    const baseAttempt = nextLocalAttempt(outcome);
+    if (args?._outcome) args._outcome.attempt = baseAttempt;
+    for (;;) {
+      const attempt = Number.isInteger(args?._outcome?.attempt) && args._outcome.attempt > 0
+        ? args._outcome.attempt
+        : baseAttempt;
+      if (args?._outcome) args._outcome.attempt = attempt;
+      const reasonOffset = args?._outcome?._tierReasons?.length || 0;
+      try {
+        const out = await codexTranslate({ ...args, call: codexCall });
+        // `translateWithCodexEngine` records the reason at the guard that saw
+        // it. Preserve those bounded engine reasons when this local fallback
+        // wraps the result; otherwise every rejected answer is flattened to
+        // `incomplete-output` and the report loses the actionable distinction
+        // between an echo, a meta-response and a structure rejection.
+        const engineReasons = (args?._outcome?._tierReasons || [])
+          .slice(reasonOffset)
+          .map((event) => event?.reason)
+          .filter((reason) => reason === 'source-passthrough'
+            || reason === 'meta-response'
+            || reason === 'empty-output'
+            || reason === 'invalid-output'
+            || String(reason || '').startsWith('structure:'));
+        const reasons = out ? [] : [...new Set(engineReasons.length ? engineReasons : ['incomplete-output'])];
+        recordTranslationProviderAttempt(args?._outcome, {
+          provider,
+          attempt,
+          status: out ? 'success' : 'failed',
+          reasons,
+          message: out ? '' : codexFailureDiagnostic(null, reasons[0]),
+        });
+        if (args?._outcome) args._outcome.attempt = attempt;
+        return out;
+      } catch (error) {
+        const reason = codexFailureReason(error);
+        recordTranslationProviderAttempt(args?._outcome, {
+          provider,
+          attempt,
+          status: 'failed',
+          reasons: [reason],
+          message: codexFailureDiagnostic(error, reason),
+        });
+        const retriesUsed = Number(args?._outcome?._codexLocalRetries || 0);
+        if (!codexFailureIsRetryable(error, reason)
+          || retriesUsed >= CODEX_LOCAL_MAX_RETRIES) {
+          throw error;
+        }
+        const backoff = codexRetryBackoffMs[retriesUsed] ?? CODEX_LOCAL_RETRY_BACKOFF_MS[retriesUsed];
+        args._outcome._codexLocalRetries = retriesUsed + 1;
+        args._outcome.attempt = attempt + 1;
+        await codexRetrySleep(backoff);
+      }
+    }
+  };
+
+  if (engine === 'cascade') {
+    return async (args) => {
+      const out = await cascadeTranslate(args);
+      if (out) return out;
+      if (typeof codexCall !== 'function') {
+        const attempt = nextLocalAttempt(args?._outcome);
+        if (args?._outcome) args._outcome.attempt = attempt;
+        recordTranslationProviderAttempt(args?._outcome, {
+          provider: 'codex-local-fallback',
+          attempt,
+          status: 'failed',
+          reasons: ['router-unconfigured'],
+        });
+        return out;
+      }
+      return runLocalCodex(args, 'codex-local-fallback');
+    };
+  }
   if (engine === 'codex') {
     if (typeof codexCall !== 'function') throw new TypeError('motore codex senza trasporto');
-    return (args) => translateWithCodexEngine({ ...args, call: codexCall });
+    return (args) => runLocalCodex(args, 'codex-local');
   }
   throw new Error(`motore sconosciuto: ${engine}`);
 }
@@ -2099,10 +2685,22 @@ async function main() {
     console.error(`❌ --engine "${rawEngine}" non è un motore noto (${TRANSLATION_ENGINES.join(', ')}).`);
     process.exit(2);
   }
+  let emptyCascadeThreshold;
+  try {
+    emptyCascadeThreshold = parseEmptyCascadeThreshold(
+      flag('empty-cascade-threshold', process.env.RETRANSLATE_EMPTY_CASCADE_THRESHOLD),
+    );
+  } catch (error) {
+    console.error(`❌ ${error.message}`);
+    process.exit(2);
+  }
   let translate;
   try {
+    const ci = String(process.env.CI ?? '').trim().toLowerCase();
+    const localRuntime = !((ci && ci !== '0' && ci !== 'false')
+      || String(process.env.GITHUB_ACTIONS ?? '').trim());
     translate = engineTranslator(ENGINE, {
-      codexCall: ENGINE === 'codex' ? createCodexExecCall() : null,
+      codexCall: (ENGINE === 'codex' || localRuntime) ? createCodexExecCall() : null,
     });
   } catch (err) {
     console.error(`❌ --engine ${ENGINE}: ${err?.message || err}`);
@@ -2230,10 +2828,18 @@ async function main() {
   };
   await Promise.all(Array.from({ length: Math.min(CONCURRENCY, pairs.length) }, worker));
 
-  report(results, { APPLY, AS_JSON, ENGINE, total: pairs.length, OUT: flag('out') && resolve(flag('out')) });
+  const emptyCascade = report(results, {
+    APPLY,
+    AS_JSON,
+    ENGINE,
+    total: pairs.length,
+    OUT: flag('out') && resolve(flag('out')),
+    emptyCascadeThreshold,
+  });
+  process.exitCode = emptyCascadeExitCode(emptyCascade);
 }
 
-async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslateWithRetry }) {
+export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslateWithRetry }) {
   const base = { ...pair };
   const realDir = DIR_TO_REAL[pair.dir];
   if (!realDir) return { ...base, written: false, reason: `dir-sconosciuta: ${pair.dir}` };
@@ -2245,6 +2851,7 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
   }
   const itSrc = readFileSync(itPath, 'utf8');
   let trSrc = readFileSync(trPath, 'utf8');
+  const sourceProjection = articleSourceProjection(itPath, itSrc, pair.id);
 
   const availableBodyFields = bodyFieldsForSource(itSrc, pair.id);
   const repairFields = pair.structural && Array.isArray(pair.fields) && pair.fields.length > 0
@@ -2278,6 +2885,10 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
 
   const newSections = {};
   let missingField = null;
+  const missingFields = [];
+  let translationFailure = null;
+  const translationFailures = [];
+  const translationFieldResults = [];
   // Solo sull'italiano con scaffolding: la riga del prompt da togliere e le
   // intestazioni-etichetta del prompt da riportare a titoli normali, per campo.
   const titleMarkerRepair = isSourceLocale && oldCodes.includes(TITLE_MARKER_REPAIR_CODE)
@@ -2313,13 +2924,24 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
         titleMarkerRepair.removedByField[f] = stripped.removed;
         titleMarkerRepair.skipped.push(...stripped.skipped.map((s) => `${f} ${s}`));
       }
-      const sanitized = sanitizeTranslatedField(source);
-      if (sanitized === null) { missingField = f; break; }
+      const sanitized = sanitizeTranslatedField(source, pair.locale);
+      if (sanitized === null) {
+        missingField ??= f;
+        missingFields.push(f);
+        continue;
+      }
       newSections[f] = sanitized;
     }
   } else {
     // Ri-traduzione: OGNI carattere qui esce dalla cascata MT, mai da una regex.
     for (const f of Object.keys(italianSections)) {
+      const translationOutcome = {
+        passthroughs: 0,
+        errors: 0,
+        incomplete: false,
+        incompletes: 0,
+        tierAttempts: [],
+      };
       const out = await translateFieldFreeMt({
         text: italianSections[f],
         sourceLang: 'it',
@@ -2328,16 +2950,43 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
         fieldName: f,
         translate,
         balanceMarkdown: balanceMarkdownMarkers,
+        translationOutcome,
       });
-      if (!out) { missingField = f; break; }
+      if (!out) {
+        missingField ??= f;
+        missingFields.push(f);
+        translationFailures.push({ field: f, ...summarizeTranslationFailure(translationOutcome) });
+        translationFieldResults.push({ field: f, status: 'empty' });
+        continue;
+      }
       // Stesso post-processing del percorso di produzione (`create-article.mjs`
       // lo applica alla stessa identica uscita di `translateFieldFreeMt`): la
       // cascata e' la stessa, e da qui in poi lo e' anche cio' che le succede.
-      const sanitized = sanitizeTranslatedField(out);
-      if (sanitized === null) { missingField = f; break; }
-      newSections[f] = sanitized;
+      const sanitized = sanitizeTranslatedField(out, pair.locale);
+      if (sanitized === null) {
+        missingField ??= f;
+        missingFields.push(f);
+        translationFailures.push({
+          field: f,
+          stage: 'sanitize-output',
+          ...summarizeTranslationFailure(translationOutcome),
+        });
+        translationFieldResults.push({ field: f, status: 'rejected' });
+        continue;
+      }
+      // La stessa riparazione condivisa dal gate corregge gli esonimi
+      // cantonali rimasti nella lingua sorgente, prima di tutte le guardie.
+      // I nomi ufficiali identici, gli URL e i codici restano protetti dalla
+      // funzione; la guardia viene comunque rieseguita sull'uscita riparata.
+      newSections[f] = replaceLocalizedToponymMismatches({
+        sourceText: sourceProjection,
+        targetText: sanitized,
+        locale: pair.locale,
+      }).text;
+      translationFieldResults.push({ field: f, status: 'translated' });
     }
   }
+  translationFailure = translationFailures[0] || null;
 
   // La guardia dei fatti chiave deve precedere factuality e writeAtomic: il
   // primo puo' vedere zero `critical` anche quando il secondo non deve mai
@@ -2404,7 +3053,7 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
         .filter(Boolean)
         .join('\n');
       assertLocalizedToponymPair({
-        sourceText: articleSourceProjection(itPath, itSrc, pair.id),
+        sourceText: sourceProjection,
         targetText: [
           targetBodyProjection,
           extractArticleProjectionText(trSrc, pair.id, { fields: ['faq'] }),
@@ -2422,6 +3071,10 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
     oldCodes,
     newCodes,
     missingField,
+    ...(translationFailure ? { translationFailure } : {}),
+    ...(missingFields.length ? { missingFields } : {}),
+    ...(translationFailures.length ? { translationFailures } : {}),
+    ...(translationFieldResults.length ? { translationFieldResults } : {}),
     written: false,
     reason: localizedToponymError ? `esonimo-non-valido: ${localizedToponymError.message}` : verdict.reason,
     ...(localizedToponymError?.localizedToponymIssues
@@ -2457,15 +3110,185 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
   return { ...row, written: true };
 }
 
-function report(results, { APPLY, AS_JSON, ENGINE = 'cascade', total, OUT }) {
-  const payload = () => JSON.stringify({ mode: APPLY ? 'apply' : 'dry-run', engine: ENGINE, total, results }, null, 2);
+// Il lotto che ha aperto #2912 era al 58% DE e 62% FR. Il 20% segnala una
+// degradazione sistemica molto prima di quei livelli, senza trasformare un
+// singolo endpoint transiente in allarme su un lotto sostanzioso.
+export const EMPTY_CASCADE_RATE_THRESHOLD = 0.2;
+
+export const EMPTY_CASCADE_OBSERVER_EXIT_CODE = 3;
+
+/** Parse the configurable empty-cascade rate without accepting a silent no-op. */
+export function parseEmptyCascadeThreshold(raw, fallback = EMPTY_CASCADE_RATE_THRESHOLD) {
+  if (raw === null || raw === undefined) return fallback;
+  if (String(raw).trim() === '') {
+    throw new RangeError('soglia cascata vuota non valida: valore vuoto (atteso un numero fra 0 e 1)');
+  }
+  const value = Number(raw);
+  if (!Number.isFinite(value) || value < 0 || value > 1) {
+    throw new RangeError(`soglia cascata vuota non valida: ${raw} (atteso un numero fra 0 e 1)`);
+  }
+  return value;
+}
+
+export function emptyCascadeExitCode(metric) {
+  return metric?.firing ? EMPTY_CASCADE_OBSERVER_EXIT_CODE : 0;
+}
+
+const TRANSLATION_FAILURE_DESCRIPTORS = Object.freeze([
+  { test: (reason) => /router-unconfigured/u.test(reason), failureClass: 'config', message: 'router Codex non configurato' },
+  { test: (reason) => /rate-limit/u.test(reason), failureClass: 'rate-limit', message: 'rate limit' },
+  { test: (reason) => /quota|429|rate-limit|keys-exhausted|daily-cap/u.test(reason), failureClass: 'quota', message: 'quota o HTTP 429' },
+  { test: (reason) => /auth|401|403|credential/u.test(reason), failureClass: 'auth', message: 'autenticazione o HTTP 401/403' },
+  { test: (reason) => /timeout/u.test(reason), failureClass: 'timeout', message: 'timeout' },
+  { test: (reason) => /^exit-\d+$/u.test(reason), failureClass: 'exit', message: 'uscita non zero' },
+  { test: (reason) => /^signal-/u.test(reason), failureClass: 'signal', message: 'segnale del provider' },
+  { test: (reason) => /spawn-error/u.test(reason), failureClass: 'provider', message: 'avvio del provider fallito' },
+  { test: (reason) => /network|request-error|fetch|dns|tls|connection/u.test(reason), failureClass: 'network', message: 'errore di rete' },
+  { test: (reason) => /structure:/u.test(reason), failureClass: 'structure', message: 'rifiuto della struttura' },
+  { test: (reason) => /passthrough|source-echo/u.test(reason), failureClass: 'passthrough', message: 'passthrough della sorgente' },
+  { test: (reason) => /invalid-output/u.test(reason), failureClass: 'invalid', message: 'output non valido' },
+  { test: (reason) => /empty|incomplete|no-output/u.test(reason), failureClass: 'empty', message: 'uscita vuota' },
+  { test: (reason) => /meta-response/u.test(reason), failureClass: 'rejection', message: 'rifiuto del modello' },
+]);
+const MAX_TRANSLATION_DIAGNOSTICS = 3;
+
+function translationFailureDescriptor(reason) {
+  const normalized = String(reason || 'provider-error');
+  return TRANSLATION_FAILURE_DESCRIPTORS.find(({ test }) => test(normalized))
+    || { failureClass: 'provider', message: 'errore del provider' };
+}
+
+function enrichTranslationProviderDiagnostic(provider) {
+  if (!provider?.failures) return provider;
+  const reasons = Object.keys(provider.reasons || {});
+  const descriptors = (reasons.length ? reasons : ['empty-output']).map(translationFailureDescriptor);
+  const failureClasses = [...new Set(descriptors.map(({ failureClass }) => failureClass))];
+  const diagnostics = [...new Set(
+    (Array.isArray(provider.diagnostics) ? provider.diagnostics : [])
+      .filter((diagnostic) => typeof diagnostic === 'string')
+      .map((diagnostic) => diagnostic.replace(/\s+/gu, ' ').trim().slice(0, 160))
+      .filter(Boolean),
+  )].slice(0, MAX_TRANSLATION_DIAGNOSTICS);
+  const withoutDiagnostics = { ...provider };
+  delete withoutDiagnostics.diagnostics;
+  const messages = diagnostics.length ? diagnostics : [...new Set(descriptors.map(({ message }) => message))];
+  return {
+    ...withoutDiagnostics,
+    ...(diagnostics.length ? { diagnostics } : {}),
+    failureClass: failureClasses.length === 1 ? failureClasses[0] : 'multiple',
+    failureClasses,
+    message: messages.join('; ').slice(0, 160),
+  };
+}
+
+function summarizeTranslationFailure(outcome) {
+  const summary = summarizeTranslationOutcome(outcome);
+  return {
+    ...summary,
+    providers: summary.providers.map(enrichTranslationProviderDiagnostic),
+  };
+}
+
+/** Aggregate the failed fields so a lot can be triaged without opening each row. */
+export function summarizeEmptyCascadeProviders(results) {
+  const byProvider = new Map();
+  for (const row of Array.isArray(results) ? results : []) {
+    for (const failure of row?.translationFailures || []) {
+      for (const provider of failure?.providers || []) {
+        const current = byProvider.get(provider.provider) || {
+          provider: provider.provider,
+          attempts: 0,
+          successes: 0,
+          failures: 0,
+          reasons: {},
+          diagnostics: [],
+        };
+        current.attempts += provider.attempts || 0;
+        current.successes += provider.successes || 0;
+        current.failures += provider.failures || 0;
+        for (const [reason, count] of Object.entries(provider.reasons || {})) {
+          current.reasons[reason] = (current.reasons[reason] || 0) + count;
+        }
+        for (const diagnostic of provider.diagnostics || []) {
+          if (current.diagnostics.length >= MAX_TRANSLATION_DIAGNOSTICS) break;
+          if (!current.diagnostics.includes(diagnostic)) current.diagnostics.push(diagnostic);
+        }
+        byProvider.set(provider.provider, current);
+      }
+    }
+  }
+  return [...byProvider.values()]
+    .sort((a, b) => a.provider.localeCompare(b.provider))
+    .map(enrichTranslationProviderDiagnostic);
+}
+
+export function emptyCascadeMetric(results, threshold = EMPTY_CASCADE_RATE_THRESHOLD) {
+  let count = 0;
+  let total = 0;
+  for (const row of Array.isArray(results) ? results : []) {
+    // New reports measure every attempted translation field. A rejected field
+    // is still part of the denominator, even when another field in the same
+    // pair translated successfully. The legacy fallback keeps old report
+    // fixtures readable as one field per pair.
+    if (Array.isArray(row?.translationFieldResults)) {
+      total += row.translationFieldResults.length;
+      count += row.translationFieldResults.filter((field) => field?.status !== 'translated').length;
+      continue;
+    }
+    if (Array.isArray(row?.translationFailures) || Number.isInteger(row?.translationFieldsAttempted)) {
+      const attempted = Number.isInteger(row.translationFieldsAttempted)
+        ? Math.max(0, row.translationFieldsAttempted)
+        : row.translationFailures.length;
+      total += attempted;
+      count += Math.min(attempted, row.translationFailures?.length || 0);
+      continue;
+    }
+    total += 1;
+    if (row?.reason === 'campo-vuoto-dalla-cascata') count += 1;
+  }
+  const rate = total > 0 ? count / total : 0;
+  return { count, total, rate, threshold, firing: total > 0 && rate > threshold };
+}
+
+function report(results, {
+  APPLY,
+  AS_JSON,
+  ENGINE = 'cascade',
+  total,
+  OUT,
+  emptyCascadeThreshold = EMPTY_CASCADE_RATE_THRESHOLD,
+}) {
+  const emptyCascade = emptyCascadeMetric(results, emptyCascadeThreshold);
+  const providers = summarizeEmptyCascadeProviders(results);
+  const metrics = { emptyCascade: { ...emptyCascade, providers } };
+  const payload = () => JSON.stringify({
+    mode: APPLY ? 'apply' : 'dry-run', engine: ENGINE, total, metrics, results,
+  }, null, 2);
+  const printObserverSummary = () => {
+    if (!emptyCascade.firing) return;
+    const write = AS_JSON && !OUT ? console.error : console.log;
+    write(`\n⚠️ osservatore cascata vuota: ${emptyCascade.count}/${emptyCascade.total}`
+      + ` (${(emptyCascade.rate * 100).toFixed(1)}%, soglia ${(emptyCascade.threshold * 100).toFixed(1)}%)`);
+    if (!providers.length) {
+      write('  nessun dettaglio provider disponibile');
+      return;
+    }
+    write('  riepilogo provider:');
+    for (const provider of providers) {
+      write(`  ${provider.provider.padEnd(24)} ${provider.failures}/${provider.attempts}`
+        + ` — ${provider.failureClass}: ${provider.message}`);
+    }
+  };
   if (OUT) {
     // Su file, non su stdout: i tier loggano li' e romperebbero il parse.
     writeAtomic(OUT, payload());
     console.log(`report JSON → ${OUT}`);
+    printObserverSummary();
+    return emptyCascade;
   } else if (AS_JSON) {
     console.log(payload());
-    return;
+    printObserverSummary();
+    return emptyCascade;
   }
   const written = results.filter((r) => r.written).length;
   const clean = results.filter((r) => r.reason === 'pulita').length;
@@ -2485,6 +3308,7 @@ function report(results, { APPLY, AS_JSON, ENGINE = 'cascade', total, OUT }) {
   console.log(`  titolo non canonico  : ${templateHeading}`);
   console.log(`  italian-residue      : ${residue}`);
   console.log(`  altro                : ${results.length - clean - refailed - empty - truncated - wrongLang - templateHeading}`);
+  console.log(`  quota campi vuoti    : ${emptyCascade.count}/${emptyCascade.total} (${(emptyCascade.rate * 100).toFixed(1)}%, soglia ${(emptyCascade.threshold * 100).toFixed(0)}%)${emptyCascade.firing ? ' ⚠️' : ''}`);
 
   // Per-codice: e' la misura che decide se un codice va escluso dal lotto.
   const perCode = new Map();
@@ -2507,6 +3331,8 @@ function report(results, { APPLY, AS_JSON, ENGINE = 'cascade', total, OUT }) {
     console.log('\n  esempi di ri-fallite (codice vecchio → nuovo):');
     for (const r of bad) console.log(`    ${r.locale}/${r.id}  ${r.oldCodes.join(',')} → ${r.newCodes.join(',')}`);
   }
+  printObserverSummary();
+  return emptyCascade;
 }
 
 // `import` dal test non deve far partire una run di rete. Risolviamo entrambi

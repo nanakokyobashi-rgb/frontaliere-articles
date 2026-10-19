@@ -31,11 +31,12 @@
  *   2. C'E' ANCORA BUDGET? (D19) I commit `Generate blog article (<sezione>)`
  *      delle ultime 24 ore sul ramo di destinazione, contro `dailyBudget` del
  *      profilo (`generator/data/canton-sections.json`), eventualmente abbassato
- *      da `vars.CANTON_DAILY_BUDGET_CAP` (il pilota a <=2/giorno).
+ *      da `vars.CANTON_DAILY_BUDGET_CAP` (override di rollout che può solo ridurre il profilo).
  *   3. QUANTI CANTONI STANNO GIA' GENERANDO? Una sola lettura delle run
  *      `in_progress` del repo: quelle dei workflow `generate-article-<cantone>.yml`
  *      PIU' VECCHIE di questa non devono raggiungere
- *      `vars.CANTON_GENERATION_MAX_PARALLEL` (default 3). Il confronto e'
+ *      `vars.CANTON_GENERATION_MAX_PARALLEL` (default 8, cap allineato ai quattro caller/ora
+ *      piu' un gruppo orario che può essere ancora attivo). Il confronto e'
  *      asimmetrico come in `admit`: fra due arrivi simultanei esattamente uno si
  *      vede davanti, quindi non si fermano a vicenda.
  *   4. LA QUOTA CONDIVISA E' SOTTO PRESSIONE? I cantoni hanno precedenza
@@ -82,7 +83,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const RC_SENTINEL_ENV = RC_LOADED_MARKER;
 
 /** Tetto globale di cantoni che generano insieme, se `vars` non lo imposta. */
-export const DEFAULT_MAX_PARALLEL = 3;
+export const DEFAULT_MAX_PARALLEL = 8;
 
 /** Finestra del budget giornaliero. */
 export const BUDGET_WINDOW_HOURS = 24;

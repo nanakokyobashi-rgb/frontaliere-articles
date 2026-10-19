@@ -407,6 +407,7 @@ const lineCount = (value) => String(value ?? '').trim().split('\n').length;
  *        the MT call (freeTranslateWithRetry in prod, a stub in tests)
  * @param {(s: string) => string} [args.balanceMarkdown]  optional markdown repair
  * @param {boolean} [args.preserveMunicipalityNames=false] protect municipality names
+ * @param {object|null} [args.translationOutcome=null] per-field cascade diagnostics
  * @param {(msg: string) => void} [args.onWarn]
  * @param {(event: { targetLang: string, fieldType: string, fieldName?: string, reason: string }) => void} [args.onUnusableOutput]
  * @returns {Promise<string>}
@@ -420,6 +421,7 @@ export async function translateFieldFreeMt({
   translate,
   balanceMarkdown = (s) => s,
   preserveMunicipalityNames = false,
+  translationOutcome = null,
   onWarn = () => {},
   onUnusableOutput = () => {},
 }) {
@@ -454,7 +456,7 @@ export async function translateFieldFreeMt({
     const trail = segment.value.slice(coreStart + core.length);
     let out;
     try {
-      out = await translate({ text: core, sourceLang, targetLang, fieldType });
+      out = await translate({ text: core, sourceLang, targetLang, fieldType, _outcome: translationOutcome });
     } catch (err) {
       onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'error' });
       onWarn(`free-MT ${targetLang}:${fieldType} failed (${err?.message || err})`);

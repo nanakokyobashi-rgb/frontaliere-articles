@@ -634,7 +634,7 @@ test('a day that stages only the ledger cannot turn a lost push into a permanent
   // e si ripete identico ogni mattina: degradarlo terrebbe lo streak sotto
   // la soglia per sempre, come il PAT assente. Deve restare rosso PRIMA del
   // ramo degradato, e per farlo il push deve catturare il proprio output.
-  assert.match(commitStep, /git push "\$REMOTE" "HEAD:\$TARGET" 2>&1 \| tee "\$ATTEMPT_LOG"/,
+  assert.match(commitStep, /push_target 2>&1 \| tee "\$ATTEMPT_LOG"/,
     'the push must capture its output, or the cause of the failure cannot be classified');
   assert.match(commitStep, /: > "\$ATTEMPT_LOG"/, 'the attempt log must be truncated before each retry');
   assert.match(commitStep, /cat "\$ATTEMPT_LOG" >> "\$PUSH_OUTCOME_LOG"/, 'the machine-readable log must retain every push snapshot');

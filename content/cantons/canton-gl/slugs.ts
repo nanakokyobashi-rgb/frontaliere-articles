@@ -9,6 +9,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'klontalstrasse-staldengarten-butzi': { it: 'klontalstrasse-staldengarten-butzi', en: 'klontalstrasse-traffic-restriction', de: 'verkehrseinschraenkung-kloentalerstrasse', fr: 'restriction-trafic-kloentalerstrasse' },
  'eventi-weekend-glarona': { it: 'eventi-weekend-glarona', en: 'weekend-events-glarus', de: 'wochenend-veranstaltungen-glarus', fr: 'evenements-week-end-glaris' },
  'muehlehorn-strada-chiusa-ottobre': { it: 'muehlehorn-strada-chiusa-ottobre', en: 'muehlehorn-road-closure-october', de: 'muehlehorn-strassensperrung-oktober', fr: 'muehlehorn-route-fermee-octobre' },
+ 'kloentalerstrasse-cantiere-2026': { it: 'kloentalerstrasse-cantiere-2026', en: 'kloentalerstrasse-roadworks-2026', de: 'kloentalerstrasse-bauarbeiten-2026', fr: 'kloentalerstrasse-travaux-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

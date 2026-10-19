@@ -46814,18 +46814,18 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Ogni dogana ticinese classificata per tempo medio di attesa, con trend settimanale e quanti minuti si perdono (o guadagnano) scegliendo un valico piuttosto che un altro.",
       "image": {
         "@type": "ImageObject",
-        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
-        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
-        "creditText": "Frontaliere Ticino",
-        "url": `${BASE_URL}/images/places/mendrisio.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
         "width": 1200,
-        "height": 563,
+        "height": 675,
         "caption": "Traffico in coda a una dogana del Canton Ticino"
       },
       "datePublished": "2026-07-03T13:13:04+02:00",
-      "dateModified": "2026-10-12T00:00:00+02:00",
+      "dateModified": "2026-10-19T00:00:00+02:00",
       "inLanguage": "it",
       "author": {
         "@type": "Person",
@@ -110300,10 +110300,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Il Municipio risponde all’interrogazione di Michele Codella I lavori a Lugano proseguiranno anche nei prossimi anni Focus tra Pensilina Botta e Corso Pestalozzi",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/frontalieri-assunzioni-lugano-interrogazione.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cantieri-lugano-riduzione-disagi.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Vista del centro città di Lugano con infrastrutture stradali"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-17T00:14:09+00:00",
       "dateModified": "2026-10-17T00:14:09+00:00",
@@ -111346,7 +111351,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/places/lugano-view.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Intervento dei soccorritori dopo l'incendio in una palazzina di Via Cortivallo a Lugano"
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
       },
       "datePublished": "2026-10-18T08:02:43+00:00",
       "dateModified": "2026-10-18T08:02:43+00:00",
@@ -111385,7 +111390,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/blog/article-morto-andena-varese.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Stadio di calcio con colori biancorossi"
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
       },
       "datePublished": "2026-10-18T08:43:52+00:00",
       "dateModified": "2026-10-18T08:43:52+00:00",
@@ -111424,7 +111429,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/blog/article-incendio-palazzina-lugano.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Palazzina di via Cortivallo a Lugano dopo l'incendio notturno"
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
       },
       "datePublished": "2026-10-18T09:03:30+00:00",
       "dateModified": "2026-10-18T09:03:30+00:00",
@@ -111502,7 +111507,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/places/lugano-view.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Via Cortivallo a Lugano, dove un incendio in appartamento ha causato una vittima"
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
       },
       "datePublished": "2026-10-18T09:43:01+00:00",
       "dateModified": "2026-10-18T09:43:01+00:00",
@@ -111541,7 +111546,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/blog/article-lissago-corte-case-popolari.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Corte residenziale con appartamenti popolari nella luce autunnale"
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
       },
       "datePublished": "2026-10-18T10:15:13+00:00",
       "dateModified": "2026-10-18T10:15:13+00:00",
@@ -111648,7 +111653,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/blog/article-indennita-lavoro-ridotto.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Lavoratore frontaliere consulta documenti assicurazione malattia in ufficio a Bellinzona"
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
       },
       "datePublished": "2026-10-18T11:49:38+00:00",
       "dateModified": "2026-10-18T11:49:38+00:00",
@@ -111687,7 +111692,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/blog/article-ps-tre-iniziative-thun.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Congresso socialista a Thun: sì alle iniziative su api, mobilità e sicurezza digitale."
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
       },
       "datePublished": "2026-10-18T12:57:15+00:00",
       "dateModified": "2026-10-18T12:57:15+00:00",
@@ -111726,7 +111731,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/blog/article-cassano-indagine-schianto.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Strada del Ticino in luce mattutina, immagine simbolica per una notizia di cronaca locale"
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
       },
       "datePublished": "2026-10-18T13:16:47+00:00",
       "dateModified": "2026-10-18T13:16:47+00:00",
@@ -111765,7 +111770,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/blog/article-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Frontaliere esamina documenti di lavoro vicino al confine del Ticino"
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
       },
       "datePublished": "2026-10-18T14:15:04+00:00",
       "dateModified": "2026-10-18T14:15:04+00:00",
@@ -111804,7 +111809,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/blog/article-live-arconatese-varese-caronno.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "La sfida Arconatese-Varese a Caronno Pertusella"
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
       },
       "datePublished": "2026-10-18T15:47:28+00:00",
       "dateModified": "2026-10-18T15:47:28+00:00",
@@ -111843,7 +111848,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/blog/article-lamal-guida-2026-canton-argovia.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Frontaliere con documenti di lavoro davanti a un ufficio in Ticino"
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
       },
       "datePublished": "2026-10-18T16:43:35+00:00",
       "dateModified": "2026-10-18T16:43:35+00:00",
@@ -111856,6 +111861,435 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tutele-frontaliero-uscita-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-como-razionalista-fondi-associazioni': {
+    title: 'Como Razionalista: 78mila euro a due associazioni',
+    description: 'Due associazioni sosterranno Como Razionalista Finanziamento previsto dal 2026 al 2028 Oltre 78mila euro dall\'imposta di soggiorno Erogazione dopo i rendiconti',
+    keywords: 'frontalieri, ticino, svizzera, italia, como, razionalista, 78mila, euro',
+    ogTitle: 'Como Razionalista: 78mila euro a due associazioni',
+    ogDescription: 'Due associazioni sosterranno Como Razionalista Finanziamento previsto dal 2026 al 2028 Oltre 78mila euro dall\'imposta di soggiorno Erogazione dopo i rendiconti',
+    canonicalPath: '/articoli-frontaliere/como-razionalista-fondi-associazioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Como Razionalista: 78mila euro a due associazioni",
+      "description": "Due associazioni sosterranno Como Razionalista Finanziamento previsto dal 2026 al 2028 Oltre 78mila euro dall'imposta di soggiorno Erogazione dopo i rendiconti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-como-razionalista-fondi-associazioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T02:46:28+00:00",
+      "dateModified": "2026-10-19T02:46:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/como-razionalista-fondi-associazioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-como-manifestazioni-24-ottobre': {
+    title: 'Como, due manifestazioni: una pacifica, l’altra a rischio',
+    description: 'Sarebbero in corso due possibili manifestazioni per il 24 ottobre Una è studentesca, con permessi in regola e finalità pacifiche L’altra è associata a timori',
+    keywords: 'frontalieri, ticino, svizzera, italia, como, manifestazioni, pacifica, altra',
+    ogTitle: 'Como, due manifestazioni e la partita al Sinigaglia',
+    ogDescription: 'Sarebbero in corso due possibili manifestazioni per il 24 ottobre Una è studentesca, con permessi in regola e finalità pacifiche L’altra è associata a timori',
+    canonicalPath: '/articoli-frontaliere/como-manifestazioni-24-ottobre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Como, due manifestazioni: una pacifica, l’altra a rischio",
+      "description": "Sarebbero in corso due possibili manifestazioni per il 24 ottobre Una è studentesca, con permessi in regola e finalità pacifiche L’altra è associata a timori",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-como-manifestazioni-24-ottobre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T03:34:10+00:00",
+      "dateModified": "2026-10-19T03:34:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/como-manifestazioni-24-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-frontaliere-formazione-riqualifica-2026': {
+    title: 'Frontaliere formazione professionale riqualifica corsi 2026 entro 20 km',
+    description: 'Guida alla formazione professionale e corsi di riqualifica per frontalieri nel 2026 entro 20 km dal confine: analisi, scenari e ritorno pratico.',
+    keywords: 'frontalieri, ticino, svizzera, italia, formazione, professionale, riqualifica, corsi',
+    ogTitle: 'Formazione Professionale e Riqualifica per Frontalieri nel 2026',
+    ogDescription: 'Scopri come scegliere i corsi di formazione e riqualifica professionale nel 2026 per i frontalieri che lavorano in Ticino, con focus entro 20 km e valutazione del ritorno pratico.',
+    canonicalPath: '/articoli-frontaliere/frontaliere-formazione-riqualifica-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontaliere formazione professionale riqualifica corsi 2026 entro 20 km",
+      "description": "Guida alla formazione professionale e corsi di riqualifica per frontalieri nel 2026 entro 20 km dal confine: analisi, scenari e ritorno pratico.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-frontaliere-formazione-riqualifica-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T04:51:34+00:00",
+      "dateModified": "2026-10-19T04:51:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontaliere-formazione-riqualifica-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-indagini-morte-pierina-buffon': {
+    title: 'Morte pierina buffon: accertamenti a cassano e gallarate',
+    description: 'Venerdì mattina lo schianto a Cassano Magnago La Jaguar sarebbe stata lanciata a 140 chilometri orari La Procura valuta la pianificazione del delitto Accesso',
+    keywords: 'frontalieri, ticino, svizzera, italia, morte, pierina, buffon, accertamenti',
+    ogTitle: 'Morte Pierina Buffon: indagini e accertamenti a Cassano',
+    ogDescription: 'Venerdì mattina lo schianto a Cassano Magnago La Jaguar sarebbe stata lanciata a 140 chilometri orari La Procura valuta la pianificazione del delitto Accesso',
+    canonicalPath: '/articoli-frontaliere/indagini-morte-pierina-buffon/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Morte pierina buffon: accertamenti a cassano e gallarate",
+      "description": "Venerdì mattina lo schianto a Cassano Magnago La Jaguar sarebbe stata lanciata a 140 chilometri orari La Procura valuta la pianificazione del delitto Accesso",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-indagini-morte-pierina-buffon.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T05:57:44+00:00",
+      "dateModified": "2026-10-19T05:57:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/indagini-morte-pierina-buffon/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sagra-zucca-castagna-cunardo': {
+    title: 'A Cunardo la quinta Sagra della zucca e della castagna',
+    description: 'Quinta edizione alla Baita del Fondista di Cunardo Da venerdì 23 a domenica 25 ottobre Cena del venerdì: novità del programma Sabato musica dalle 21 Cosa: Sagra',
+    keywords: 'frontalieri, ticino, svizzera, italia, cunardo, quinta, sagra, zucca',
+    ogTitle: 'A Cunardo la quinta Sagra della zucca e della castagna',
+    ogDescription: 'Quinta edizione alla Baita del Fondista di Cunardo Da venerdì 23 a domenica 25 ottobre Cena del venerdì: novità del programma Sabato musica dalle 21 Cosa: Sagra',
+    canonicalPath: '/articoli-frontaliere/sagra-zucca-castagna-cunardo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "A Cunardo la quinta Sagra della zucca e della castagna",
+      "description": "Quinta edizione alla Baita del Fondista di Cunardo Da venerdì 23 a domenica 25 ottobre Cena del venerdì: novità del programma Sabato musica dalle 21 Cosa: Sagra",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sagra-zucca-castagna-cunardo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T07:18:02+00:00",
+      "dateModified": "2026-10-19T07:18:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sagra-zucca-castagna-cunardo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-corsi-ticino-famiglia-rendimento': {
+    title: 'Formazione frontalieri 2026: corsi, riqualifica e famiglia',
+    description: 'Guida 2026 a formazione e riqualifica per frontalieri: accordo in vigore dal 2024, soglie per vecchi e nuovi, imposta alla fonte e famiglia con figli.',
+    keywords: 'frontalieri, ticino, svizzera, italia, formazione, corsi, riqualifica, famiglia',
+    ogTitle: 'Frontalieri 2026: formazione e riqualifica familiare',
+    ogDescription: 'Il 2026 non sposta la data del Nuovo Accordo Frontalieri: l\'entrata in vigore è il 1° gennaio 2024. Vecchi e nuovi frontalieri hanno soglie diverse; AVS, LPP, LAMal e IRPEF completano il quadro per una famiglia con figli.',
+    canonicalPath: '/articoli-frontaliere/corsi-ticino-famiglia-rendimento/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Formazione frontalieri 2026: corsi, riqualifica e famiglia",
+      "description": "Guida 2026 a formazione e riqualifica per frontalieri: accordo in vigore dal 2024, soglie per vecchi e nuovi, imposta alla fonte e famiglia con figli.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-corsi-ticino-famiglia-rendimento.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T08:07:09+00:00",
+      "dateModified": "2026-10-19T08:07:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/corsi-ticino-famiglia-rendimento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-oss-ticino-stipendio': {
+    title: 'OSS frontaliere in Ticino: stipendio e requisiti',
+    description: 'Stipendio, requisiti, permesso G e fiscalità: il quadro per l\'operatore socio sanitario frontaliere in Ticino, con accordo 2024 e contributi svizzeri.',
+    keywords: 'frontalieri, ticino, svizzera, italia, stipendio, requisiti, permesso, accordo',
+    ogTitle: 'OSS frontaliere in Ticino: requisiti e fiscalità',
+    ogDescription: 'Dal 1° gennaio 2024 il Nuovo Accordo Frontalieri distingue vecchi e nuovi lavoratori: esenzione di €7\'500 nel regime transitorio, franchigia di €10\'000, più AVS, LPP, LAMal e imposta alla fonte per i lavoratori del Canton Ticino.',
+    canonicalPath: '/articoli-frontaliere/oss-ticino-stipendio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "OSS frontaliere in Ticino: stipendio e requisiti",
+      "description": "Stipendio, requisiti, permesso G e fiscalità: il quadro per l'operatore socio sanitario frontaliere in Ticino, con accordo 2024 e contributi svizzeri.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-oss-ticino-stipendio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T08:49:07+00:00",
+      "dateModified": "2026-10-19T08:49:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/oss-ticino-stipendio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-riqualifica-aliquote-frontalieri-2026': {
+    title: 'Riqualifica frontalieri: errori comuni da evitare nel 2026',
+    description: 'Accordo frontalieri, franchigie, imposta alla fonte e contributi: i dati da controllare per valutare corsi e riqualifica professionale da frontaliere nel 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, riqualifica, errori, comuni, evitare',
+    ogTitle: 'Riqualifica frontalieri: errori comuni nel 2026',
+    ogDescription: 'Nel 2026 la data dell\'accordo resta il 1° gennaio 2024: vecchi e nuovi frontalieri hanno franchigie diverse, mentre il reddito da lavoro è tassato solo in Svizzera. La guida separa anche credito d\'imposta, contributi AVS e LAMal, chiarendo quali',
+    canonicalPath: '/articoli-frontaliere/riqualifica-aliquote-frontalieri-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Riqualifica frontalieri: errori comuni da evitare nel 2026",
+      "description": "Accordo frontalieri, franchigie, imposta alla fonte e contributi: i dati da controllare per valutare corsi e riqualifica professionale da frontaliere nel 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-riqualifica-aliquote-frontalieri-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T09:23:32+00:00",
+      "dateModified": "2026-10-19T09:23:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/riqualifica-aliquote-frontalieri-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-progettista-elettrico-ticino': {
+    title: 'Progettista elettrico frontaliere: imposte e permesso G',
+    description: 'Per il frontaliere progettista elettrico in Ticino: accordo in vigore dal 1° gennaio 2024, imposta alla fonte solo in Svizzera, franchigie e contributi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, progettista, elettrico, imposte, permesso',
+    ogTitle: 'Progettista elettrico frontaliere: imposte e permesso G',
+    ogDescription: 'Il quadro per chi risiede in Italia e lavora come progettista elettrico nel Canton Ticino: accordo firmato nel 2020, ratificato nel 2023, in vigore dal 1° gennaio 2024, trattenuta solo in Svizzera e contributi indicati.',
+    canonicalPath: '/articoli-frontaliere/progettista-elettrico-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Progettista elettrico frontaliere: imposte e permesso G",
+      "description": "Per il frontaliere progettista elettrico in Ticino: accordo in vigore dal 1° gennaio 2024, imposta alla fonte solo in Svizzera, franchigie e contributi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-progettista-elettrico-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T12:59:22+00:00",
+      "dateModified": "2026-10-19T12:59:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/progettista-elettrico-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-evento-for-matching-varese-2026': {
+    title: 'Varese: il 22 ottobre 2026 l\'evento For Matching',
+    description: '22 ottobre 2026: for MATCHING a Varese Dalle 9.00 alle 12.30 alle Ville Ponti Nuovo report sul mercato del lavoro varesino Dati, crisi aziendali e tavola',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, ottobre, evento, matching',
+    ogTitle: 'Varese: il 22 ottobre 2026 l\'evento For Matching',
+    ogDescription: '22 ottobre 2026: for MATCHING a Varese Dalle 9.00 alle 12.30 alle Ville Ponti Nuovo report sul mercato del lavoro varesino Dati, crisi aziendali e tavola',
+    canonicalPath: '/articoli-frontaliere/evento-for-matching-varese-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese: il 22 ottobre 2026 l'evento For Matching",
+      "description": "22 ottobre 2026: for MATCHING a Varese Dalle 9.00 alle 12.30 alle Ville Ponti Nuovo report sul mercato del lavoro varesino Dati, crisi aziendali e tavola",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-evento-for-matching-varese-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T13:21:14+00:00",
+      "dateModified": "2026-10-19T13:21:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/evento-for-matching-varese-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-italia-rincari-crescita-2027': {
+    title: 'Italia: rincari energetici e crescita debole, 2027 più difficile',
+    description: 'A settembre 2026 i prezzi italiani salgono dello 0,7% mensile L\'inflazione italiana arriva al 4,2%, dal 3,3% di agosto Confindustria stima l\'1% nel 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, rincari, energetici, crescita, debole',
+    ogTitle: 'Italia: Inflazione 4,2% e crescita PIL debole, 2027 più difficile',
+    ogDescription: 'A settembre 2026 i prezzi italiani salgono dello 0,7% mensile L\'inflazione italiana arriva al 4,2%, dal 3,3% di agosto Confindustria stima l\'1% nel 2026',
+    canonicalPath: '/articoli-frontaliere/italia-rincari-crescita-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Italia: rincari energetici e crescita debole, 2027 più difficile",
+      "description": "A settembre 2026 i prezzi italiani salgono dello 0,7% mensile L'inflazione italiana arriva al 4,2%, dal 3,3% di agosto Confindustria stima l'1% nel 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-autotrasporto-rincari-confine-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T14:41:27+00:00",
+      "dateModified": "2026-10-19T14:41:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/italia-rincari-crescita-2027/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

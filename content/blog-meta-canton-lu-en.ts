@@ -21,6 +21,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.juso-lucerna-humbel-governo.title': 'Juso Lucerne: Valentin Humbel candidate for government',
     'blog.article.juso-lucerna-humbel-governo.excerpt': 'Valentin Humbel is the Juso candidate for the Lucerne cantonal government.',
     'blog.article.juso-lucerna-humbel-governo.imageAlt': 'Illustration generated for this article',
+    'blog.article.prioswiss-ricorso-luks.title': 'Prio Swiss appeals to the Court over the Luks esophagus mandate',
+    'blog.article.prioswiss-ricorso-luks.excerpt': 'The association challenges the mandate for esophageal surgeries at the Luzerner Kantonsspital, arguing that it has not reached the minimum number of cases and that ten other centers already cover the need.',
+    'blog.article.prioswiss-ricorso-luks.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;

@@ -15,6 +15,42 @@
     "canton-fr::https://www.freiburger-nachrichten.ch/story/297111/laupen-%c3%b6ffnet-die-baustelle-f%c3%bcr-die-bev%c3%b6lkerung": {
       "section": "canton-fr",
       "ts": 1792293586032
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/297505/betr%c3%bcger-erbeuten-im-kanton-freiburg-fast-800000-franken": {
+      "section": "canton-fr",
+      "ts": 1792388895505
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/297644/filmfestivals-als-wirtschaftsmotoren": {
+      "section": "canton-fr",
+      "ts": 1792406258921
+    },
+    "canton-fr::https://www.laliberte.ch/articles/regions/ville-de-fribourg/une-etudiante-de-la-haute-ecole-dingenierie-et-darchitecture-fribourg-heia-fr-primee-1466563": {
+      "section": "canton-fr",
+      "ts": 1792406266188
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/297812/sbbmanager-kaufte-sich-lamborghini-mit-steuergeldern-so-lief-der-millionenbetrug-ab": {
+      "section": "canton-fr",
+      "ts": 1792406299048
+    },
+    "canton-fr::https://www.laliberte.ch/articles/regions/broye/une-entreprise-broyarde-lance-une-horloge-connectee-pour-seniors-1466430": {
+      "section": "canton-fr",
+      "ts": 1792410948876
+    },
+    "canton-fr::https://www.laliberte.ch/articles/sante/des-collectes-de-dons-frauduleuses-signalees-dans-le-canton-1464317": {
+      "section": "canton-fr",
+      "ts": 1792421022364
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/298219/katholische-kirche-zahlt-genugtuung%c2%a0-missbrauchsopfer-muss-darauf-steuern-entrichten": {
+      "section": "canton-fr",
+      "ts": 1792421050571
+    },
+    "canton-fr::https://www.laliberte.ch/articles/regions/broye/la-lnm-tire-un-bilan-en-demi-teinte-de-la-saison-2026-1464905": {
+      "section": "canton-fr",
+      "ts": 1792424089829
+    },
+    "canton-fr::https://www.laliberte.ch/articles/sante/dans-le-canton-de-fribourg-des-femmes-apprennent-a-se-reconstruire-ensemble-1464313": {
+      "section": "canton-fr",
+      "ts": 1792424097277
     }
   }
 }

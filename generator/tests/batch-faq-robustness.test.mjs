@@ -111,9 +111,19 @@ test('#625 i checkpoint usano il PAT senza esporlo e falliscono chiusi senza cre
     const sezioneCheckpoint = source.slice(source.indexOf('function gitCommitAndPush'));
     assert.equal(
       (sezioneCheckpoint.match(/authenticatedGit\(\[/g) || []).length,
-      3,
-      'push iniziale, pull di rebase e retry push devono condividere il helper autenticato',
+      1,
+      'il pull di rebase deve usare il helper autenticato',
     );
+    assert.equal(
+      (sezioneCheckpoint.match(/pushMainWithTreeGuard\(chainStartedAt/g) || []).length,
+      2,
+      'push iniziale e retry devono usare la guardia con la stessa credenziale PAT',
+    );
+    const guardStart = source.indexOf('function pushMainWithTreeGuard');
+    const guardEnd = source.indexOf('\n/**', guardStart);
+    const guardedPush = source.slice(guardStart, guardEnd);
+    assert.match(guardedPush, /GITHUB_PAT missing/u);
+    assert.match(guardedPush, /credential\.helper=\$\{GIT_PAT_CREDENTIAL_HELPER\}/u);
   } finally {
     if (precedente === undefined) delete process.env.GITHUB_PAT;
     else process.env.GITHUB_PAT = precedente;

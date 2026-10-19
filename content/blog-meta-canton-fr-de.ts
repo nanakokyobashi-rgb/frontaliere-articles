@@ -42,6 +42,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.vuadens-centro-lavorazione.title': 'Ein neues kompaktes Bearbeitungszentrum aus Vuadens',
     'blog.article.vuadens-centro-lavorazione.excerpt': 'Starrag stellt aus Vuadens ein kompakteres Bearbeitungszentrum vor, das in Stuttgart weltweit lanciert wurde.',
     'blog.article.vuadens-centro-lavorazione.imageAlt': 'Kompaktes Bearbeitungszentrum von Starrag in Vuadens, Kanton Freiburg.',
+    'blog.article.julmy-corsa-consiglio-stato.title': 'Markus Julmy, Kandidat der Mitte für den Staatsrat',
+    'blog.article.julmy-corsa-consiglio-stato.excerpt': 'Markus Julmy ist einer von zwei Kandidaten der Mitte auf der Liste des rechtsgerichteten Bündnisses: Der Abgeordnete aus dem Sensebezirk hebt sein unternehmerisches Profil hervor.',
+    'blog.article.julmy-corsa-consiglio-stato.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonFrDe;

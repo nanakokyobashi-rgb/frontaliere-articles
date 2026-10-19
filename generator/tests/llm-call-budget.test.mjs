@@ -528,9 +528,18 @@ test('④ la fase immagini usa un solo percorso governato e controlla il budget'
   assert.doesNotMatch(COVER_ENGINE, /maxAttempts:\s*1/, 'il limite dei tentativi appartiene al motore governato, non all adapter dell articolo');
   assert.match(img.text, /appendGeneratedImageRecord\(PROJECT_ROOT, result\.record\)/);
   assert.doesNotMatch(img.text, /Strategy \d|imagePhaseExpired\(/, 'non devono tornare strategie raster legacy separate');
-  assert.match(img.text, /const imageDeadline = Date\.now\(\) \+ IMAGE_PHASE_BUDGET_MS;/);
+  assert.match(img.text, /deadlineAt = Date\.now\(\) \+ IMAGE_PHASE_BUDGET_MS/);
+  assert.match(img.text, /const imageDeadline = deadlineAt;/);
   assert.match(img.text, /if \(Date\.now\(\) >= imageDeadline\)/);
   assert.match(COVER_ENGINE, /deadlineAt/);
+  const imagePhaseStart = CODE.indexOf('const imageDeadlineAt = Date.now() + IMAGE_PHASE_BUDGET_MS;');
+  const imagePhaseEnd = CODE.indexOf('delete data._imageGenerationFailureReason;', imagePhaseStart);
+  assert.ok(imagePhaseStart >= 0 && imagePhaseEnd > imagePhaseStart, 'il confine della fase immagini non e\' piu\' leggibile');
+  const imagePhase = CODE.slice(imagePhaseStart, imagePhaseEnd);
+  assert.match(imagePhase, /generateArticleImage\(data, \{ area: imageArea, deadlineAt: imageDeadlineAt \}\)/);
+  assert.match(imagePhase, /verifyCatalogFallbackCandidates\(data, \{[\s\S]*?area: imageArea,[\s\S]*?deadlineAt: imageDeadlineAt,/);
+  assert.equal((imagePhase.match(/Date\.now\(\) \+ IMAGE_PHASE_BUDGET_MS/g) || []).length, 1,
+    'il fallback non deve riaprire un nuovo budget completo dopo il tentativo engine');
   assert.match(CODE, /const IMAGE_PHASE_BUDGET_MS = Math\.max\(/);
   assert.match(CODE, /Math\.min\(120_000/);
 });

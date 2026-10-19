@@ -4,17 +4,17 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-18T15:52:30.685Z",
-  "contentHash": "4e92ebd7e40b70ab29da5f80f3672084411c159675e1b306bbae3cb6ae689c9b",
+  "updatedAt": "2026-10-19T14:06:02.326Z",
+  "contentHash": "60ae495315a39d6e9465455a4aaa8c6a60b84af6f2390452e65f3e4f8b723d99",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-18T11:46:52.571Z",
+      "updatedAt": "2026-10-19T05:23:43.930Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T09:56:00.107Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 18 ottobre 2026"
+          "note": "segnalazioni aggiornate: 19 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "9",
-          "note": "segnalazioni aggiornate: 18 ottobre 2026"
+          "note": "segnalazioni aggiornate: 19 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -175,7 +175,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "en": {
       "canton": "UR",
@@ -186,12 +186,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "4",
-          "note": "reports as of 18 October 2026"
+          "note": "reports as of 19 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "9",
-          "note": "reports as of 18 October 2026"
+          "note": "reports as of 19 October 2026"
         }
       ],
       "dataBlocks": [
@@ -249,7 +249,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -287,7 +287,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -333,7 +333,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "de": {
       "canton": "UR",
@@ -344,12 +344,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "4",
-          "note": "Meldungen vom 18. Oktober 2026"
+          "note": "Meldungen vom 19. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "9",
-          "note": "Meldungen vom 18. Oktober 2026"
+          "note": "Meldungen vom 19. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -407,7 +407,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -445,7 +445,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -491,7 +491,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "fr": {
       "canton": "UR",
@@ -502,12 +502,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "4",
-          "note": "signalements au 18 octobre 2026"
+          "note": "signalements au 19 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "9",
-          "note": "signalements au 18 octobre 2026"
+          "note": "signalements au 19 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -565,7 +565,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -603,7 +603,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -649,7 +649,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     }
   }
 }

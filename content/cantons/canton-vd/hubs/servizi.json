@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T16:48:41.470Z",
-  "contentHash": "e122a146ace8a82a38194aaa7b34e245ef1cc1b1b5d50cda1a2479461fa8f458",
+  "updatedAt": "2026-10-19T17:59:19.762Z",
+  "contentHash": "a22d89454027b555185cbb53f83505af159d8f180b83718aa7e03e176433b4b5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-18T11:03:15.929Z",
+      "updatedAt": "2026-10-19T04:39:38.933Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T09:56:00.107Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -38,7 +38,7 @@
         },
         {
           "label": "Aste di targhe in corso",
-          "value": "37",
+          "value": "32",
           "note": "offerta mediana 2000 CHF"
         }
       ],
@@ -69,30 +69,30 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "VD5055",
-              "value": "2900 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120501"
-            },
-            {
-              "label": "VD1192",
+              "label": "VD1086",
               "value": "2000 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120471"
+              "date": "2026-10-25T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120554"
             },
             {
-              "label": "VD1464",
+              "label": "VD1172",
               "value": "2000 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120484"
+              "date": "2026-10-25T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120549"
+            },
+            {
+              "label": "VD1948",
+              "value": "2000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-25T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120556"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "updatedAt": "2026-10-19T04:39:38.933Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +130,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -210,7 +210,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "en": {
       "canton": "VD",
@@ -226,7 +226,7 @@
         },
         {
           "label": "Plate auctions running",
-          "value": "37",
+          "value": "32",
           "note": "typical bid 2,000 CHF"
         }
       ],
@@ -257,30 +257,30 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "VD5055",
-              "value": "2,900 CHF",
-              "detail": "current bid",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120501"
-            },
-            {
-              "label": "VD1192",
+              "label": "VD1086",
               "value": "2,000 CHF",
               "detail": "current bid",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120471"
+              "date": "2026-10-25T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120554"
             },
             {
-              "label": "VD1464",
+              "label": "VD1172",
               "value": "2,000 CHF",
               "detail": "current bid",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120484"
+              "date": "2026-10-25T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120549"
+            },
+            {
+              "label": "VD1948",
+              "value": "2,000 CHF",
+              "detail": "current bid",
+              "date": "2026-10-25T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120556"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "updatedAt": "2026-10-19T04:39:38.933Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -318,7 +318,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -394,7 +394,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "de": {
       "canton": "VD",
@@ -410,7 +410,7 @@
         },
         {
           "label": "Laufende Kontrollschild-Auktionen",
-          "value": "37",
+          "value": "32",
           "note": "mittleres Gebot 2’000 CHF"
         }
       ],
@@ -441,30 +441,30 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "VD5055",
-              "value": "2’900 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120501"
-            },
-            {
-              "label": "VD1192",
+              "label": "VD1086",
               "value": "2’000 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120471"
+              "date": "2026-10-25T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120554"
             },
             {
-              "label": "VD1464",
+              "label": "VD1172",
               "value": "2’000 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120484"
+              "date": "2026-10-25T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120549"
+            },
+            {
+              "label": "VD1948",
+              "value": "2’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-25T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120556"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "updatedAt": "2026-10-19T04:39:38.933Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -502,7 +502,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -578,7 +578,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     },
     "fr": {
       "canton": "VD",
@@ -594,7 +594,7 @@
         },
         {
           "label": "Enchères de plaques en cours",
-          "value": "37",
+          "value": "32",
           "note": "offre centrale 2 000 CHF"
         }
       ],
@@ -625,30 +625,30 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "VD5055",
-              "value": "2 900 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120501"
-            },
-            {
-              "label": "VD1192",
+              "label": "VD1086",
               "value": "2 000 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120471"
+              "date": "2026-10-25T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120554"
             },
             {
-              "label": "VD1464",
+              "label": "VD1172",
               "value": "2 000 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120484"
+              "date": "2026-10-25T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120549"
+            },
+            {
+              "label": "VD1948",
+              "value": "2 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-25T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120556"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "updatedAt": "2026-10-19T04:39:38.933Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -686,7 +686,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -758,7 +758,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T17:59:19.762Z"
     }
   }
 }

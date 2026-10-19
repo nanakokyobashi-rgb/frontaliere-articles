@@ -16,6 +16,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'dossier-friburgo-2027': { it: 'dossier-friburgo-2027', en: 'fribourg-dossier-2027', de: 'freiburg-dossier-2027', fr: 'dossier-fribourg-2027' },
  'bulle-riassetto-centro-2027': { it: 'bulle-riassetto-centro-2027', en: 'bulle-centre-redevelopment-2027', de: 'bulle-stadtzentrum-umbau-2027', fr: 'bulle-reamenagement-centre-2027' },
  'vuadens-centro-lavorazione': { it: 'vuadens-centro-lavorazione', en: 'vuadens-compact-machining-center', de: 'vuadens-kompaktes-bearbeitungszentrum', fr: 'vuadens-centre-usinage-compact' },
+ 'julmy-corsa-consiglio-stato': { it: 'julmy-corsa-consiglio-stato', en: 'julmy-centre-state-council', de: 'julmy-mitte-staatsrat', fr: 'julmy-candidat-conseil-etat' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -30,6 +30,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.disoccupazione-neuchatel-luglio-2026.title': 'Stability of the unemployment rate in the Canton of Neuchâtel in July 2026',
     'blog.article.disoccupazione-neuchatel-luglio-2026.excerpt': 'The number of unemployed people in the Canton of Neuchâtel increased by 54 in July 2026, reaching 3.905 people.',
     'blog.article.disoccupazione-neuchatel-luglio-2026.imageAlt': 'Woman job-hunting in Neuchâtel',
+    'blog.article.neuchatel-disoccupazione-maggio-2026.title': 'Neuchatel: unemployment rate falls to 4,3% in May 2026',
+    'blog.article.neuchatel-disoccupazione-maggio-2026.excerpt': 'In May 2026, the unemployed in Canton Neuchatel fell to 3’924 and the cantonal rate dropped to 4,3%, supported by favorable seasonal factors.',
+    'blog.article.neuchatel-disoccupazione-maggio-2026.imageAlt': 'Unemployment statistics in Canton Neuchatel',
 };
 
 export default blogMetaCantonNeEn;

@@ -107027,10 +107027,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-pensionato-vince-contro-ffs.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Pensionato vince la battaglia contro le FFS sui trasporti pubblici"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-18T01:47:23+00:00",
       "dateModified": "2026-10-18T01:47:23+00:00",
@@ -107467,6 +107467,391 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-apprendistato-zurigo-guida-pratica': {
+    title: 'Apprendistato a Zurigo: posto, contratto, retribuzione e maturità',
+    description: 'Guida pratica per l\'apprendistato nel Canton Zurigo: come trovare il posto, verificare il contratto, leggere la retribuzione e inquadrare la maturità',
+    keywords: 'frontalieri, ticino, svizzera, italia, apprendistato, zurigo, posto, contratto',
+    ogTitle: 'Apprendistato a Zurigo: posto, contratto, retribuzione e maturità',
+    ogDescription: 'Una mappa pratica per orientarsi nell\'apprendistato nel Canton Zurigo: dalla ricerca del posto di tirocinio alla verifica del contratto, dalla lettura della busta paga con i contributi sociali alla maturità professionale. Scopri i passaggi chiave',
+    canonicalPath: '/articoli-svizzera/apprendistato-zurigo-guida-pratica/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Apprendistato a Zurigo: posto, contratto, retribuzione e maturità",
+      "description": "Guida pratica per l'apprendistato nel Canton Zurigo: come trovare il posto, verificare il contratto, leggere la retribuzione e inquadrare la maturità",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/apprendistato-formazione-professionale-canton-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Giovane apprendista in un'officina svizzera a Zurigo che esamina un contratto"
+      },
+      "datePublished": "2026-10-18T19:10:16+00:00",
+      "dateModified": "2026-10-18T19:10:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/apprendistato-zurigo-guida-pratica/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-agenda-federale-voto-2026': {
+    title: 'Consiglio federale ha trasmesso il pacchetto Svizzera-UE',
+    description: 'Il pacchetto Svizzera-UE è stato trasmesso il 13 marzo 2026 Il 29 novembre 2026 si vota sul finanziamento supplementare dell\'AVS Guy Parmelin ha annunciato',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, trasmesso, pacchetto',
+    ogTitle: 'Consiglio federale ha trasmesso il pacchetto Svizzera-UE',
+    ogDescription: 'Il pacchetto Svizzera-UE è stato trasmesso il 13 marzo 2026 Il 29 novembre 2026 si vota sul finanziamento supplementare dell\'AVS Guy Parmelin ha annunciato',
+    canonicalPath: '/articoli-svizzera/agenda-federale-voto-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio federale ha trasmesso il pacchetto Svizzera-UE",
+      "description": "Il pacchetto Svizzera-UE è stato trasmesso il 13 marzo 2026 Il 29 novembre 2026 si vota sul finanziamento supplementare dell'AVS Guy Parmelin ha annunciato",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-agenda-federale-voto-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scena istituzionale svizzera legata a decisioni federali e votazioni popolari"
+      },
+      "datePublished": "2026-10-19T02:24:47+00:00",
+      "dateModified": "2026-10-19T02:24:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/agenda-federale-voto-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-giovani-donne-stipendi-svizzera': {
+    title: 'Le giovani svizzere guadagnano meno nonostante siano più istruite',
+    description: 'Nati nel 1995: divario di reddito del 14% Nati nel 1965: divario di reddito del 55% Nel 2025: istruzione terziaria al 54% contro il 48% Tra i genitori',
+    keywords: 'frontalieri, ticino, svizzera, italia, giovani, svizzere, guadagnano, meno',
+    ogTitle: 'Le giovani svizzere guadagnano meno nonostante siano piu istruite',
+    ogDescription: 'Nati nel 1995: divario di reddito del 14% Nati nel 1965: divario di reddito del 55% Nel 2025: istruzione terziaria al 54% contro il 48% Tra i genitori',
+    canonicalPath: '/articoli-svizzera/giovani-donne-stipendi-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Le giovani svizzere guadagnano meno nonostante siano più istruite",
+      "description": "Nati nel 1995: divario di reddito del 14% Nati nel 1965: divario di reddito del 55% Nel 2025: istruzione terziaria al 54% contro il 48% Tra i genitori",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-divario-reddito-giovani-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Giovane donna lavora in un ufficio moderno in Svizzera"
+      },
+      "datePublished": "2026-10-19T03:17:11+00:00",
+      "dateModified": "2026-10-19T03:17:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/giovani-donne-stipendi-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-imposta-successione-donazione-zurigo-regole': {
+    title: 'Imposta di successione e donazione nel Cantone di Zurigo',
+    description: 'Scopri le regole per l\'imposta di successione e donazione nel Cantone di Zurigo: gradi di parentela, esenzioni per coniuge e discendenti e dichiarazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, imposta, successione, donazione, cantone',
+    ogTitle: 'Imposta di successione e donazione nel Cantone di Zurigo',
+    ogDescription: 'Analisi completa dell\'imposta di successione e donazione nel Cantone di Zurigo. Scopri come funzionano le aliquote per grado di parentela, le esenzioni per coniuge e discendenti e gli adempimenti.',
+    canonicalPath: '/articoli-svizzera/imposta-successione-donazione-zurigo-regole/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Imposta di successione e donazione nel Cantone di Zurigo",
+      "description": "Scopri le regole per l'imposta di successione e donazione nel Cantone di Zurigo: gradi di parentela, esenzioni per coniuge e discendenti e dichiarazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-imposta-successione-donazione-zurigo-regole.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Imposta di successione e donazione nel Cantone di Zurigo"
+      },
+      "datePublished": "2026-10-19T05:15:43+00:00",
+      "dateModified": "2026-10-19T05:15:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/imposta-successione-donazione-zurigo-regole/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-securitas-violazioni-lavoro': {
+    title: 'Securitas avrebbe violato migliaia di volte la legge sul lavoro',
+    description: 'Circa 20\'000 presunte violazioni tra 2023 e 2025 Circa 900 dipendenti coinvolti nella Svizzera centrale Turni troppo lunghi e recuperi troppo brevi Securitas',
+    keywords: 'frontalieri, ticino, svizzera, italia, securitas, avrebbe, violato, migliaia',
+    ogTitle: 'Securitas avrebbe violato migliaia di volte la legge sul lavoro',
+    ogDescription: 'Circa 20\'000 presunte violazioni tra 2023 e 2025 Circa 900 dipendenti coinvolti nella Svizzera centrale Turni troppo lunghi e recuperi troppo brevi Securitas',
+    canonicalPath: '/articoli-svizzera/securitas-violazioni-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Securitas avrebbe violato migliaia di volte la legge sul lavoro",
+      "description": "Circa 20'000 presunte violazioni tra 2023 e 2025 Circa 900 dipendenti coinvolti nella Svizzera centrale Turni troppo lunghi e recuperi troppo brevi Securitas",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-securitas-violazioni-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T06:33:36+00:00",
+      "dateModified": "2026-10-19T06:33:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/securitas-violazioni-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-campagna-fisco-coppie-sposate': {
+    title: 'Fisco e coppie sposate: i contrari aprono la loro campagna',
+    description: 'Il comitato contrario ha presentato le sue tesi a Berna Il voto federale sull\'iniziativa è previsto il 29 novembre L\'imposizione individuale entrerà in vigore',
+    keywords: 'frontalieri, ticino, svizzera, italia, fisco, coppie, sposate, contrari',
+    ogTitle: 'Fisco e coppie sposate: i contrari aprono la loro campagna',
+    ogDescription: 'Il comitato contrario ha presentato le sue tesi a Berna Il voto federale sull\'iniziativa è previsto il 29 novembre L\'imposizione individuale entrerà in vigore',
+    canonicalPath: '/articoli-svizzera/campagna-fisco-coppie-sposate/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fisco e coppie sposate: i contrari aprono la loro campagna",
+      "description": "Il comitato contrario ha presentato le sue tesi a Berna Il voto federale sull'iniziativa è previsto il 29 novembre L'imposizione individuale entrerà in vigore",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-campagna-fisco-coppie-sposate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Conferenza stampa a Berna sulla votazione federale e fiscale delle coppie sposate"
+      },
+      "datePublished": "2026-10-19T09:57:56+00:00",
+      "dateModified": "2026-10-19T09:57:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/campagna-fisco-coppie-sposate/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-impatto-glp1-industria-alimentare': {
+    title: 'Farmaci antiobesità GLP-1: impatto sull\'industria alimentare',
+    description: 'In Svizzera, meno del 2% è in terapia GLP-1 Negli USA il budget alimentare cala fino al 5% Emmi, Danone e Nestlé adattano le gamme Givaudan stima una crescita',
+    keywords: 'frontalieri, ticino, svizzera, italia, farmaci, antiobesità, glp-1, impatto',
+    ogTitle: 'Farmaci GLP-1: l\'industria alimentare si adatta',
+    ogDescription: 'In Svizzera, meno del 2% è in terapia GLP-1 Negli USA il budget alimentare cala fino al 5% Emmi, Danone e Nestlé adattano le gamme Givaudan stima una crescita',
+    canonicalPath: '/articoli-svizzera/impatto-glp1-industria-alimentare/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Farmaci antiobesità GLP-1: impatto sull'industria alimentare",
+      "description": "In Svizzera, meno del 2% è in terapia GLP-1 Negli USA il budget alimentare cala fino al 5% Emmi, Danone e Nestlé adattano le gamme Givaudan stima una crescita",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-impatto-glp1-industria-alimentare.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Reparto di un supermercato svizzero con prodotti alimentari freschi"
+      },
+      "datePublished": "2026-10-19T11:07:20+00:00",
+      "dateModified": "2026-10-19T11:07:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/impatto-glp1-industria-alimentare/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lenu-referendum-firme-valide': {
+    title: 'Legge federale sull’energia nucleare: referendum riuscito',
+    description: '19 ottobre 2026: referendum formalmente riuscito 6 ottobre 2026: presentate 79 479 firme 78 922 firme sono state dichiarate valide Modifica LENu datata 19',
+    keywords: 'frontalieri, ticino, svizzera, italia, legge, federale, sull, energia',
+    ogTitle: 'Legge federale sull’energia nucleare: referendum riuscito',
+    ogDescription: '19 ottobre 2026: referendum formalmente riuscito 6 ottobre 2026: presentate 79 479 firme 78 922 firme sono state dichiarate valide Modifica LENu datata 19',
+    canonicalPath: '/articoli-svizzera/lenu-referendum-firme-valide/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Legge federale sull’energia nucleare: referendum riuscito",
+      "description": "19 ottobre 2026: referendum formalmente riuscito 6 ottobre 2026: presentate 79 479 firme 78 922 firme sono state dichiarate valide Modifica LENu datata 19",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lenu-referendum-firme-valide.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna in una scena editoriale sul referendum LENu"
+      },
+      "datePublished": "2026-10-19T12:13:26+00:00",
+      "dateModified": "2026-10-19T12:13:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/lenu-referendum-firme-valide/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-water-summit-zurich-2024': {
+    title: 'EurEau Water Summit a Zurigo: 60% acqua senza trattamento',
+    description: 'Siccità e inquinamento minacciano l\'acqua potabile Il summit riunisce esperti e gestori a Zurigo In Svizzera il 60% può avere zero o semplice trattamento L\'80%',
+    keywords: 'frontalieri, ticino, svizzera, italia, eureau, water, summit, zurigo',
+    ogTitle: 'EurEau Water Summit a Zurigo: 60% acqua senza trattamento',
+    ogDescription: 'Siccità e inquinamento minacciano l\'acqua potabile Il summit riunisce esperti e gestori a Zurigo In Svizzera il 60% può avere zero o semplice trattamento L\'80%',
+    canonicalPath: '/articoli-svizzera/water-summit-zurich-2024/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "EurEau Water Summit a Zurigo: 60% acqua senza trattamento",
+      "description": "Siccità e inquinamento minacciano l'acqua potabile Il summit riunisce esperti e gestori a Zurigo In Svizzera il 60% può avere zero o semplice trattamento L'80%",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-water-summit-zurich-2024.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T15:35:51+00:00",
+      "dateModified": "2026-10-19T15:35:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/water-summit-zurich-2024/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-accordo-commercio-elettronico-omc': {
+    title: 'Commercio elettronico: Svizzera avvia consultazione per l\'ACE',
+    description: 'Consultazione avviata il 14 ottobre 2026 ACE tra 67 membri dell\'OMC Termine fissato al 28 gennaio 2027 Vietati i dazi sulle trasmissioni elettroniche Cosa →',
+    keywords: 'frontalieri, ticino, svizzera, italia, commercio, elettronico, avvia, consultazione',
+    ogTitle: 'Commercio elettronico: Svizzera avvia consultazione per l\'ACE',
+    ogDescription: 'Consultazione avviata il 14 ottobre 2026 ACE tra 67 membri dell\'OMC Termine fissato al 28 gennaio 2027 Vietati i dazi sulle trasmissioni elettroniche Cosa →',
+    canonicalPath: '/articoli-svizzera/accordo-commercio-elettronico-omc/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Commercio elettronico: Svizzera avvia consultazione per l'ACE",
+      "description": "Consultazione avviata il 14 ottobre 2026 ACE tra 67 membri dell'OMC Termine fissato al 28 gennaio 2027 Vietati i dazi sulle trasmissioni elettroniche Cosa →",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-accordo-commercio-elettronico-omc.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T18:02:10+00:00",
+      "dateModified": "2026-10-19T18:02:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/accordo-commercio-elettronico-omc/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

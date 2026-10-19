@@ -31,8 +31,9 @@
  *     Config, e Codex non deve vederli.
  *   - `--sandbox read-only` e una cartella di lavoro temporanea vuota: il
  *     modello traduce un testo, non tocca il checkout.
- *   - Nessun retry qui dentro: un tentativo fallito e' un errore, e la
- *     bonifica salta l'articolo intero invece di cucirne mezzo.
+ *   - Nessun retry qui dentro: il trasporto classifica un tentativo fallito;
+ *     il retry bounded vive nell'adattatore per campo, che conosce il budget
+ *     della bonifica e può contarlo nel report.
  */
 
 import { spawn } from 'node:child_process';
@@ -60,7 +61,185 @@ export const CODEX_EXEC_DISABLED_FEATURES = Object.freeze([
 /** Tetto di una chiamata: un body lungo a effort max sta sotto i 10 minuti. */
 export const CODEX_EXEC_TIMEOUT_MS = 10 * 60 * 1000;
 
+/** Finestra breve per chiudere gli stream dopo l'uscita del processo diretto. */
+export const CODEX_EXEC_DRAIN_TIMEOUT_MS = 5_000;
+
 const MAX_STDERR_TAIL_CHARS = 4096;
+const MAX_STDOUT_TAIL_CHARS = 4096;
+export const CODEX_DIAGNOSTIC_MAX_CHARS = 160;
+
+const CODEX_AUTH_RE = /\b(?:401|403|auth(?:entication|orization)?|credential|login|logged[-_ ]?in|unauthori[sz]ed|forbidden|invalid[-_ ]+(?:api[-_ ])?key|token[-_ ]+(?:expired|invalid))\b/iu;
+const CODEX_QUOTA_RE = /\b(?:quota|usage[-_ ]+limit(?:[-_ ]+(?:reached|exceeded))?|daily[-_ ]+limit(?:[-_ ]+(?:reached|exceeded))?|monthly[-_ ]+limit(?:[-_ ]+(?:reached|exceeded))?|resource[-_]exhausted)\b/iu;
+const CODEX_RATE_LIMIT_RE = /\b(?:at[-_ ]+capacity|rate[-_ ]+limit(?:ed|[-_ ]+(?:reached|exceeded))?|too[-_ ]+many[-_ ]+requests|429|overloaded)\b/iu;
+const CODEX_TIMEOUT_RE = /\b(?:timeout|timed\s+out|time\s+out|deadline)\b/iu;
+const CODEX_TRANSIENT_RE = /\b(?:temporar(?:y|ily)|try[-_ ]+again|service[-_ ]+unavailable|connection[-_ ]+reset|econnreset|eai_again|etimedout|network[-_ ]+error|internal[-_ ]+server[-_ ]+error|5\d\d)\b/iu;
+const CODEX_PROMPT_RE = /(?:System instructions:|You are a professional translator|BEGIN_TEXT_[A-Z0-9]+|END_TEXT_[A-Z0-9]+)/u;
+
+/** A diagnostic may be shown in a report: keep it one line and secret-free. */
+export function sanitizeCodexDiagnostic(value, fallback = 'errore del provider') {
+  const raw = String(value ?? '')
+    .replace(/\u001b\[[0-?]*[ -/]*[@-~]/gu, '')
+    .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/gu, ' ')
+    .replace(/\s+/gu, ' ')
+    .trim();
+  if (!raw) return fallback;
+  if (CODEX_PROMPT_RE.test(raw)) return 'diagnostica Codex contenente il prompt (omessa)';
+  const masked = raw
+    .replace(/-----BEGIN [^-]+ PRIVATE KEY-----[\s\S]*?-----END [^-]+ PRIVATE KEY-----/giu, '[secret redacted]')
+    .replace(/\bBearer\s+\S+/giu, 'Bearer [secret redacted]')
+    .replace(/\b(?:token|api[-_ ]?key|secret|password|authorization)\s*[:=]\s*(?:\[[^\]]+\]|\S+)/giu, '[secret redacted]')
+    .replace(/\b(?:sk-[A-Za-z0-9][\w-]{6,}|AIza[0-9A-Za-z_-]{20,}|ghp_[0-9A-Za-z]{20,}|github_pat_[0-9A-Za-z_]{20,}|xox[baprs]-[0-9A-Za-z-]{10,}|AKIA[0-9A-Z]{16})\b/gu, '[secret redacted]');
+  return (masked || fallback).slice(0, CODEX_DIAGNOSTIC_MAX_CHARS).trimEnd();
+}
+
+function classifyCodexStreamText(text) {
+  const value = String(text ?? '');
+  if (CODEX_AUTH_RE.test(value)) return { reason: 'auth', retryable: false };
+  if (CODEX_QUOTA_RE.test(value)) return { reason: 'quota', retryable: false };
+  if (CODEX_RATE_LIMIT_RE.test(value)) return { reason: 'rate-limit', retryable: true };
+  if (CODEX_TIMEOUT_RE.test(value)) return { reason: 'timeout', retryable: true };
+  if (CODEX_TRANSIENT_RE.test(value)) return { reason: 'transient', retryable: true };
+  return null;
+}
+
+function streamDiagnostic(stderr, stdout, fallback) {
+  const lines = [String(stderr ?? ''), String(stdout ?? '')]
+    .join('\n')
+    .split(/\r?\n/u)
+    .map((line) => line.trim())
+    .filter(Boolean);
+  const preferred = lines.find((line) => classifyCodexStreamText(line)?.reason !== undefined)
+    || lines.at(-1)
+    || '';
+  return sanitizeCodexDiagnostic(preferred, fallback);
+}
+
+/** Classify one local `codex exec` termination without retaining its payload. */
+export function classifyCodexFailure({
+  code = null,
+  signal = null,
+  timedOut = false,
+  spawnError = null,
+  outputEmpty = false,
+  invalidOutput = false,
+  stdout = '',
+  stderr = '',
+  durationMs = null,
+  timeoutMs = null,
+} = {}) {
+  const streamText = `${stderr}\n${stdout}`;
+  const streamClass = classifyCodexStreamText(streamText);
+  if (timedOut) {
+    const duration = Number.isFinite(durationMs) ? Math.max(0, Math.round(durationMs)) : '?';
+    const limit = Number.isFinite(timeoutMs) ? Math.max(0, Math.round(timeoutMs)) : '?';
+    return {
+      reason: 'timeout',
+      retryable: true,
+      diagnostic: `timeout dopo ${duration} ms (limite ${limit} ms)`,
+    };
+  }
+  if (streamClass && streamClass.reason !== 'transient') {
+    return {
+      ...streamClass,
+      diagnostic: streamDiagnostic(stderr, stdout, `Codex: ${streamClass.reason}`),
+    };
+  }
+  if (invalidOutput) {
+    return { reason: 'invalid-output', retryable: false, diagnostic: 'output JSON non valido' };
+  }
+  if (outputEmpty) {
+    return { reason: 'empty-output', retryable: false, diagnostic: 'uscita vuota' };
+  }
+  if (spawnError) {
+    return {
+      reason: 'spawn-error',
+      retryable: false,
+      diagnostic: sanitizeCodexDiagnostic(spawnError.message, 'avvio di Codex fallito'),
+    };
+  }
+  if (signal) {
+    return {
+      reason: `signal-${signal}`,
+      retryable: Boolean(streamClass?.reason === 'transient'),
+      diagnostic: streamDiagnostic(stderr, stdout, `segnale ${signal}`),
+    };
+  }
+  if (Number.isInteger(code) && code !== 0) {
+    return {
+      reason: `exit-${code}`,
+      retryable: Boolean(streamClass?.reason === 'transient'),
+      diagnostic: streamDiagnostic(stderr, stdout, `uscita Codex: exit-${code}`),
+    };
+  }
+  if (streamClass?.reason === 'transient') {
+    return {
+      reason: 'provider-error',
+      retryable: true,
+      diagnostic: streamDiagnostic(stderr, stdout, 'errore transitorio del provider'),
+    };
+  }
+  return {
+    reason: 'provider-error',
+    retryable: false,
+    diagnostic: streamDiagnostic(stderr, stdout, 'errore del provider'),
+  };
+}
+
+/** Normalize an error from an injected/future Codex transport. */
+export function classifyCodexError(error) {
+  if (error?.reason) {
+    return {
+      reason: String(error.reason),
+      retryable: error.retryable === true,
+      diagnostic: sanitizeCodexDiagnostic(error.diagnostic, error.message || 'errore del provider'),
+    };
+  }
+  const message = String(error?.message ?? '');
+  return classifyCodexFailure({
+    timedOut: error?.timedOut === true || CODEX_TIMEOUT_RE.test(message),
+    code: Number.isInteger(error?.exitCode) ? error.exitCode : null,
+    signal: error?.signal || null,
+    stdout: error?.stdout || '',
+    stderr: error?.stderr || message,
+  });
+}
+
+export class CodexExecError extends Error {
+  constructor({
+    reason = 'provider-error',
+    diagnostic = 'errore del provider',
+    retryable = false,
+    durationMs = null,
+    timeoutMs = null,
+    exitCode = null,
+    signal = null,
+  } = {}) {
+    const safeDiagnostic = sanitizeCodexDiagnostic(diagnostic);
+    super(`${reason}: ${safeDiagnostic}`);
+    this.name = 'CodexExecError';
+    this.reason = reason;
+    this.retryable = retryable === true;
+    this.diagnostic = safeDiagnostic;
+    if (durationMs !== null) this.durationMs = durationMs;
+    if (timeoutMs !== null) this.timeoutMs = timeoutMs;
+    if (exitCode !== null) this.exitCode = exitCode;
+    if (signal !== null) this.signal = signal;
+  }
+}
+
+function makeCodexExecError(details) {
+  const classified = classifyCodexFailure(details);
+  return new CodexExecError({
+    ...classified,
+    diagnostic: details.streamsNotClosed
+      ? `stream non chiusi dopo exit: ${classified.diagnostic}`
+      : classified.diagnostic,
+    durationMs: details.durationMs,
+    timeoutMs: details.timeoutMs,
+    exitCode: details.code,
+    signal: details.signal,
+  });
+}
 
 /**
  * I messaggi `{role, content}` resi come il singolo prompt che `codex exec`
@@ -143,21 +322,23 @@ export function codexExecArgs({ workdir, outputPath, instructionsPath, model = C
  * @param {string} [options.model]
  * @param {string} [options.effort]
  * @param {number} [options.timeoutMs]
+ * @param {number} [options.drainTimeoutMs]  finestra interna di test per il drain
  * @param {typeof spawn} [options.spawnImpl]  seam dei test
  * @param {NodeJS.ProcessEnv} [options.env]
- * @param {(event: {ms: number, ok: boolean, promptChars: number}) => void} [options.onCall]
+ * @param {(event: {ms: number, ok: boolean, promptChars: number, reason?: string, diagnostic?: string}) => void} [options.onCall]
  */
 export function createCodexExecCall({
   codexBin = 'codex',
   model = CODEX_EXEC_MODEL,
   effort = CODEX_EXEC_EFFORT,
   timeoutMs = CODEX_EXEC_TIMEOUT_MS,
+  drainTimeoutMs = CODEX_EXEC_DRAIN_TIMEOUT_MS,
   spawnImpl = spawn,
   env = process.env,
   onCall = () => {},
 } = {}) {
   assertLocalCodexExec(env);
-  return async function codexExecCall(messages /* , opts */) {
+  return async function codexExecCall(messages, opts = {}) {
     const prompt = codexExecPrompt(messages);
     const root = mkdtempSync(join(tmpdir(), 'codex-exec-translate-'));
     const workdir = join(root, 'workspace');
@@ -165,6 +346,10 @@ export function createCodexExecCall({
     const instructionsPath = join(root, 'function-instructions.md');
     const started = Date.now();
     let ok = false;
+    let failure = null;
+    let stderrTail = '';
+    let stdoutTail = '';
+    let streamsNotClosed = false;
     try {
       // `--cd` vuole una cartella esistente; vuota, cosi' il modello non ha
       // niente del checkout sotto mano.
@@ -179,46 +364,143 @@ export function createCodexExecCall({
         // Gruppo di processi proprio (`detached`): al timeout si uccide il
         // gruppo intero, non solo il processo diretto, come fa il broker.
         const child = spawnImpl(bin, args, {
-          stdio: ['pipe', 'ignore', 'pipe'],
+          stdio: ['pipe', 'pipe', 'pipe'],
           env: codexExecChildEnv({ env, codexBin: bin, tmp: root }),
           cwd: workdir,
           detached: process.platform !== 'win32',
         });
-        let stderrTail = '';
         let settled = false;
+        let watchdogKilled = false;
+        let drainTimer = null;
+        let exitCode = null;
+        let exitSignal = null;
+        const clearDrainTimer = () => {
+          if (drainTimer === null) return;
+          clearTimeout(drainTimer);
+          drainTimer = null;
+        };
         const timer = setTimeout(() => {
           if (settled) return;
+          watchdogKilled = true;
           settled = true;
+          clearDrainTimer();
           killProcessGroup(child);
-          reject(new Error(`codex exec: timeout dopo ${timeoutMs} ms`));
+          failure = makeCodexExecError({
+            timedOut: watchdogKilled,
+            durationMs: Date.now() - started,
+            timeoutMs,
+            stdout: stdoutTail,
+            stderr: stderrTail,
+          });
+          reject(failure);
         }, timeoutMs);
-        timer.unref?.();
+        const settleFromTermination = (code, signal, drainExpired = false) => {
+          if (settled) return;
+          settled = true;
+          clearTimeout(timer);
+          clearDrainTimer();
+          if (code === 0) resolve();
+          else {
+            failure = makeCodexExecError({
+              code,
+              signal,
+              stdout: stdoutTail,
+              stderr: stderrTail,
+              streamsNotClosed: drainExpired,
+            });
+            reject(failure);
+          }
+        };
+        // Keep the deadline referenced: a transport/fake child without its
+        // own active handle must still settle this pending Promise.
         child.stderr?.setEncoding?.('utf8');
         child.stderr?.on('data', (chunk) => {
           stderrTail = (stderrTail + chunk).slice(-MAX_STDERR_TAIL_CHARS);
+        });
+        child.stdout?.setEncoding?.('utf8');
+        child.stdout?.on('data', (chunk) => {
+          stdoutTail = (stdoutTail + chunk).slice(-MAX_STDOUT_TAIL_CHARS);
         });
         child.on('error', (err) => {
           if (settled) return;
           settled = true;
           clearTimeout(timer);
-          reject(err);
+          clearDrainTimer();
+          failure = makeCodexExecError({
+            spawnError: err,
+            stdout: stdoutTail,
+            stderr: stderrTail,
+          });
+          reject(failure);
         });
-        child.on('close', (code) => {
+        child.on('exit', (code, signal) => {
           if (settled) return;
-          settled = true;
+          // `close` follows `exit` after the stdio streams have closed. The
+          // deadline must stop at `exit`, or a process already gone can be
+          // reported as timeout while the empty output is being classified.
+          exitCode = code;
+          exitSignal = signal;
           clearTimeout(timer);
-          if (code === 0) resolve();
-          // Solo l'ultima riga di stderr: puo' contenere il motivo, non il prompt.
-          else reject(new Error(`codex exec: uscito con codice ${code}: ${stderrTail.trim().split('\n').pop() || ''}`.slice(0, 400)));
+          drainTimer = setTimeout(() => {
+            if (settled) return;
+            streamsNotClosed = true;
+            child.stdout?.destroy?.();
+            child.stderr?.destroy?.();
+            child.stdin?.destroy?.();
+            settleFromTermination(exitCode, exitSignal, true);
+          }, drainTimeoutMs);
+        });
+        child.on('close', (code, signal) => {
+          settleFromTermination(code, signal, streamsNotClosed);
         });
         child.stdin?.end(prompt);
       });
-      const result = readFileSync(outputPath, 'utf8').trim();
-      if (!result) throw new Error('codex exec: ultimo messaggio vuoto');
+      let result;
+      try {
+        result = readFileSync(outputPath, 'utf8').trim();
+      } catch {
+        failure = makeCodexExecError({
+          invalidOutput: true,
+          stdout: stdoutTail,
+          stderr: stderrTail,
+          streamsNotClosed,
+        });
+        throw failure;
+      }
+      if (!result) {
+        failure = makeCodexExecError({
+          outputEmpty: true,
+          stdout: stdoutTail,
+          stderr: stderrTail,
+          streamsNotClosed,
+        });
+        throw failure;
+      }
+      if (opts?.jsonMode || opts?.jsonSchema) {
+        try {
+          JSON.parse(result);
+        } catch {
+          failure = makeCodexExecError({
+            invalidOutput: true,
+            stdout: stdoutTail,
+            stderr: stderrTail,
+            streamsNotClosed,
+          });
+          throw failure;
+        }
+      }
       ok = true;
       return result;
+    } catch (error) {
+      failure ??= error;
+      throw error;
     } finally {
-      onCall({ ms: Date.now() - started, ok, promptChars: prompt.length });
+      onCall({
+        ms: Date.now() - started,
+        ok,
+        promptChars: prompt.length,
+        ...(failure ? { reason: failure.reason || 'provider-error', diagnostic: failure.diagnostic } : {}),
+      });
       rmSync(root, { recursive: true, force: true });
     }
   };

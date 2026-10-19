@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "262d6c58a457fe8bad67a8562bd39981e6a6b5411db8e9beb977e7e0d0c2de75",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "c64d2bf093a69051a782b26bd9dbb151d4381bc9482d3a4aeeed442321273788",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-18T20:21:24.396Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "24",
+          "value": "23",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,24 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Chilbi im Urirotstock",
-              "detail": "Isenthal",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbi-im-urirotstock-2/"
-            },
-            {
-              "label": "Chilbiständchen MG Isenthal",
-              "detail": "Isenthal",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kilbistaendchen/"
-            },
-            {
-              "label": "TriffAltdorf Sonntagsgespräche 10. Staffel: Übernämä",
-              "detail": "Altdorf",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/triffaltdorf-sonntagsgespraeche-10-staffel/"
-            },
             {
               "label": "Chilbi im Urirotstock",
               "detail": "Hotel Urirotstock, Isenthal",
@@ -91,11 +73,29 @@
               "detail": "Andermatt",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-i-ufbruch-setting-out/"
+            },
+            {
+              "label": "Absenden Ausschiessen",
+              "detail": "Hotel Urirotstock, Isenthal",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/absenden-ausschiessen/"
+            },
+            {
+              "label": "Workshop \"Canzoni ticinesi e del nord Italia",
+              "detail": "Haus der Volksmusik",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-lieder-aus-dem-tessin-und-norditalien/"
+            },
+            {
+              "label": "Woldmanndli Umzug",
+              "detail": "6490 Andermatt, Andermatt",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woldmanndli-umzug/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "UR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "24",
+          "value": "23",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,24 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Chilbi im Urirotstock",
-              "detail": "Isenthal",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbi-im-urirotstock-2/"
-            },
-            {
-              "label": "Chilbiständchen MG Isenthal",
-              "detail": "Isenthal",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kilbistaendchen/"
-            },
-            {
-              "label": "TriffAltdorf Sonntagsgespräche 10. Staffel: Übernämä",
-              "detail": "Altdorf",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/triffaltdorf-sonntagsgespraeche-10-staffel/"
-            },
             {
               "label": "Chilbi im Urirotstock",
               "detail": "Hotel Urirotstock, Isenthal",
@@ -196,11 +178,29 @@
               "detail": "Andermatt",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-i-ufbruch-setting-out/"
+            },
+            {
+              "label": "Absenden Ausschiessen",
+              "detail": "Hotel Urirotstock, Isenthal",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/absenden-ausschiessen/"
+            },
+            {
+              "label": "Workshop \"Lieder aus dem Tessin und Norditalien\"",
+              "detail": "Haus der Volksmusik",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-lieder-aus-dem-tessin-und-norditalien/"
+            },
+            {
+              "label": "Woldmanndli Umzug",
+              "detail": "6490 Andermatt, Andermatt",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woldmanndli-umzug/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "UR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "24",
+          "value": "23",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,24 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Chilbi im Urirotstock",
-              "detail": "Isenthal",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbi-im-urirotstock-2/"
-            },
-            {
-              "label": "Chilbiständchen MG Isenthal",
-              "detail": "Isenthal",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kilbistaendchen/"
-            },
-            {
-              "label": "TriffAltdorf Sonntagsgespräche 10. Staffel: Übernämä",
-              "detail": "Altdorf",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/triffaltdorf-sonntagsgespraeche-10-staffel/"
-            },
             {
               "label": "Chilbi im Urirotstock",
               "detail": "Hotel Urirotstock, Isenthal",
@@ -301,11 +283,29 @@
               "detail": "Andermatt",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-i-ufbruch-setting-out/"
+            },
+            {
+              "label": "Absenden Ausschiessen",
+              "detail": "Hotel Urirotstock, Isenthal",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/absenden-ausschiessen/"
+            },
+            {
+              "label": "Workshop \"Lieder aus dem Tessin und Norditalien\"",
+              "detail": "Haus der Volksmusik",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-lieder-aus-dem-tessin-und-norditalien/"
+            },
+            {
+              "label": "Woldmanndli Umzug",
+              "detail": "6490 Andermatt, Andermatt",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woldmanndli-umzug/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "UR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "24",
+          "value": "23",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,24 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Chilbi im Urirotstock",
-              "detail": "Isenthal",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbi-im-urirotstock-2/"
-            },
-            {
-              "label": "Chilbiständchen MG Isenthal",
-              "detail": "Isenthal",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kilbistaendchen/"
-            },
-            {
-              "label": "TriffAltdorf Sonntagsgespräche 10. Staffel: Übernämä",
-              "detail": "Altdorf",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/triffaltdorf-sonntagsgespraeche-10-staffel/"
-            },
             {
               "label": "Chilbi im Urirotstock",
               "detail": "Hotel Urirotstock, Isenthal",
@@ -406,11 +388,29 @@
               "detail": "Andermatt",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-i-ufbruch-setting-out/"
+            },
+            {
+              "label": "Absenden Ausschiessen",
+              "detail": "Hotel Urirotstock, Isenthal",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/absenden-ausschiessen/"
+            },
+            {
+              "label": "Workshop \"Lieder aus dem Tessin und Norditalien\"",
+              "detail": "Haus der Volksmusik",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-lieder-aus-dem-tessin-und-norditalien/"
+            },
+            {
+              "label": "Woldmanndli Umzug",
+              "detail": "6490 Andermatt, Andermatt",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woldmanndli-umzug/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }
