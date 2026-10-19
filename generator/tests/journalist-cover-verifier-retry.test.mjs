@@ -33,14 +33,14 @@ test('journalist engine and catalog verifier share the configured image-phase de
   const importStart = SRC.indexOf('import {\n  registerArticleFiles,');
   const importEnd = SRC.indexOf("} from './create-article.mjs';", importStart);
   assert.ok(importStart >= 0 && importEnd > importStart, 'import del publisher da create-article mancante');
-  assert.match(SRC.slice(importStart, importEnd), /\bIMAGE_PHASE_BUDGET_MS\b/);
+  assert.match(SRC.slice(importStart, importEnd), /\bgetArticleImageDeadlineAt\b/);
   assert.match(CREATE_ARTICLE_SRC, /export const IMAGE_PHASE_BUDGET_MS = Math\.max\(/);
 
   const resolverStart = SRC.indexOf('async function resolveHeroImage(data, doc) {');
   const resolverEnd = SRC.indexOf('\n}\n', resolverStart);
   assert.ok(resolverStart >= 0 && resolverEnd > resolverStart, 'resolveHeroImage non trovata o non chiusa');
   const resolver = SRC.slice(resolverStart, resolverEnd + 2);
-  const deadlineLine = 'const imageDeadlineAt = Date.now() + IMAGE_PHASE_BUDGET_MS;';
+  const deadlineLine = 'const imageDeadlineAt = getArticleImageDeadlineAt();';
   const deadlineStart = resolver.indexOf(deadlineLine);
   const fallbackStart = resolver.indexOf('const fallback = resolveArticleCoverFallback', deadlineStart);
   assert.ok(deadlineStart >= 0 && fallbackStart > deadlineStart, 'confine della fase immagini non leggibile');
@@ -50,8 +50,8 @@ test('journalist engine and catalog verifier share the configured image-phase de
   assert.match(CREATE_ARTICLE_SRC, /applyGeneratedHeroAlt\(data, finalProvenance\)/,
     'l’engine condiviso riallinea l’alt alla provenance finale prima dei writer usati anche dal publisher giornalista');
   assert.match(imagePhase, /verifyCatalogFallbackCandidates\(data, \{[\s\S]*?deadlineAt: imageDeadlineAt,/);
-  assert.equal((imagePhase.match(/Date\.now\(\) \+ IMAGE_PHASE_BUDGET_MS/g) || []).length, 1,
-    'la verifica fallback non deve aprire un secondo budget dopo il motore');
+  assert.equal((imagePhase.match(/getArticleImageDeadlineAt\(\)/g) || []).length, 1,
+    'la verifica fallback deve riusare la deadline condivisa dopo il motore');
 });
 
 test('a journalist catalog-pick with generated provenance replaces title-derived alt before registration', () => {

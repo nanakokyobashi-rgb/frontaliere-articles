@@ -16014,6 +16014,19 @@ export const IMAGE_PHASE_BUDGET_MS = Math.max(
   Math.min(120_000, Math.floor(resolvePositiveIntEnv(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS, 120_000))),
 );
 
+// Importing producers do not declare a process wall-clock cap; keep their
+// existing per-image window. The CLI installs the run deadline below before
+// starting the generation pipeline, so a late cover attempt cannot open a
+// fresh 120s window after the run budget has already expired.
+let _articleRunDeadlineMs = null;
+
+export function getArticleImageDeadlineAt(now = Date.now()) {
+  const phaseDeadline = now + IMAGE_PHASE_BUDGET_MS;
+  return _articleRunDeadlineMs === null
+    ? phaseDeadline
+    : Math.min(phaseDeadline, _articleRunDeadlineMs);
+}
+
 function articleImageArea() {
   return IS_CANTON ? CANTON_LINES.title : IS_FRONTALIERE ? 'Ticino e pendolarismo transfrontaliero' : 'Svizzera';
 }
@@ -16042,7 +16055,7 @@ function materializeGovernedArticleImage(result) {
  * the article scope/subject and persists the record where the corpus publisher
  * can expose it.
  */
-async function generateArticleImage(data, { deadlineAt = Date.now() + IMAGE_PHASE_BUDGET_MS, area = articleImageArea() } = {}) {
+async function generateArticleImage(data, { deadlineAt = getArticleImageDeadlineAt(), area = articleImageArea() } = {}) {
   delete data._imageCredit;
   delete data._generatedImageRecord;
   delete data._editorialImageRecord;
@@ -16054,6 +16067,13 @@ async function generateArticleImage(data, { deadlineAt = Date.now() + IMAGE_PHAS
     console.error('  ⏱️  Budget fase immagini esaurito prima del motore governato.');
     data._imageGenerationFailureReason = 'image-budget-expired';
     console.error(`[cover] article=${data.id} source=engine reason=image-budget-expired`);
+    if (_articleRunDeadlineMs !== null && Date.now() >= _articleRunDeadlineMs) {
+      const unavailable = new Error('Article cover generation budget expired before the governed image engine');
+      unavailable.code = ARTICLE_COVER_FALLBACK_ERROR_CODES.VERIFICATION_UNAVAILABLE;
+      unavailable.retryable = true;
+      unavailable.deadlineExpired = true;
+      throw unavailable;
+    }
     return null;
   }
 
@@ -17106,9 +17126,11 @@ const RUN_START_MS = Date.now();
  * il processo a 657 s, con l'articolo IT gia' pronto. Con la scadenza
  * dichiarata il tier non avvia chiamate che non possono finire entro
  * `RUN_START_MS + RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS`: i testi
- * rimasti scendono ai tier successivi o restano a translate-pending. I 30 s,
- * sommati ai 60 s che il workflow lascia fra CREATE_ARTICLE_MAX_WALL_MS e il
- * SIGTERM, restano a immagine e scrittura dei file.
+ * rimasti scendono ai tier successivi o restano a translate-pending. La fase
+ * immagini riusa la scadenza del run e non può aprire un nuovo budget di 120 s
+ * quando il cap è già consumato; il margine residuo e i 60 s che il workflow
+ * lascia fra CREATE_ARTICLE_MAX_WALL_MS e il SIGTERM restano a cover, scrittura
+ * e uscita dichiarata.
  *
  * Installata SOLO nel percorso CLI (`if (invokedDirectly)` in fondo al file),
  * mai all'import: i producer secondari che importano questo modulo per
@@ -17119,6 +17141,7 @@ const RUN_START_MS = Date.now();
 const TRANSLATE_DEADLINE_MARGIN_MS = 30_000;
 
 function installCodexTranslateProcessDeadline() {
+  _articleRunDeadlineMs = RUN_START_MS + RUN_WALL_BUDGET_MS;
   setCodexTranslateProcessDeadline(RUN_START_MS + RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS);
   // Stessa scadenza per la seconda corsia dei body in attesa, che si arma
   // solo qui: vedi `translatePendingBodyWithCodex`.
@@ -20030,7 +20053,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // Step 3b: Generate article image through the governed engine.
   console.error('🎨 Generazione immagine articolo:');
   const imageArea = articleImageArea();
-  const imageDeadlineAt = Date.now() + IMAGE_PHASE_BUDGET_MS;
+  const imageDeadlineAt = getArticleImageDeadlineAt();
   const imagePath = await generateArticleImage(data, { area: imageArea, deadlineAt: imageDeadlineAt });
   if (imagePath) {
     data._generatedImagePath = imagePath;

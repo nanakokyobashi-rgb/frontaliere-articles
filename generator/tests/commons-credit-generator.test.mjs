@@ -163,8 +163,8 @@ test('journalist URLs are downloaded only after the four-field upload check', ()
 
 test('the journalist engine and catalog verifier share one image-phase deadline', () => {
   const resolver = slice(JOURNALIST, 'async function resolveHeroImage(data, doc) {', '\n/**\n * Resolves the byline');
-  assert.match(resolver, /const imageDeadlineAt = Date\.now\(\) \+ IMAGE_PHASE_BUDGET_MS;/);
-  assert.equal((resolver.match(/const imageDeadlineAt = Date\.now\(\) \+ IMAGE_PHASE_BUDGET_MS;/g) ?? []).length, 1);
+  assert.match(resolver, /const imageDeadlineAt = getArticleImageDeadlineAt\(\);/);
+  assert.equal((resolver.match(/const imageDeadlineAt = getArticleImageDeadlineAt\(\);/g) ?? []).length, 1);
   assert.match(resolver, /generateArticleImage\(data, \{ deadlineAt: imageDeadlineAt \}\)/);
   assert.match(resolver, /verifyCatalogFallbackCandidates\(data, \{[\s\S]*?deadlineAt: imageDeadlineAt,[\s\S]*?\}\)/);
   assert.ok(
