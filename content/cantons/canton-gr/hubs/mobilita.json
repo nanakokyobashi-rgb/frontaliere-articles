@@ -4,17 +4,17 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-19T02:30:40.156Z",
-  "contentHash": "fe8afcec355f318f3d8f57eaf7bd03dfd2c85b591eddcd38e0460d8a7b95444e",
+  "updatedAt": "2026-10-19T14:06:02.326Z",
+  "contentHash": "b89f003e12e97b4d41ea6f474d7390cb6faaaa2f5b66c8cd3efddb23ce4e8be6",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-17T23:59:59.000Z",
+      "updatedAt": "2026-10-18T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-18T16:12:12.011Z",
+      "updatedAt": "2026-10-19T05:23:43.930Z",
       "keyFacts": 2
     },
     {
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Campocologno-Tirano, settimana conclusa: 17 ottobre 2026"
+          "note": "Campocologno-Tirano, settimana conclusa: 18 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "14",
-          "note": "segnalazioni aggiornate: 18 ottobre 2026"
+          "note": "segnalazioni aggiornate: 19 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "15",
-          "note": "segnalazioni aggiornate: 18 ottobre 2026"
+          "note": "segnalazioni aggiornate: 19 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 11 ottobre 2026 – 17 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 12 ottobre 2026 – 18 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Campocologno-Tirano",
@@ -59,10 +59,28 @@
               "url": "/traffico-dogane/campocologno-tirano/oggi/"
             },
             {
+              "label": "Castasegna-Villa di Chiavenna",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/castasegna-villa-di-chiavenna/oggi/"
+            },
+            {
               "label": "Forcola di Livigno",
               "value": "0 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/forcola-di-livigno/oggi/"
+            },
+            {
+              "label": "Passo dello Spluga (Montespluga)",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/passo-dello-spluga/oggi/"
+            },
+            {
+              "label": "Samnaun-Spiss",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/samnaun-spiss/oggi/"
             },
             {
               "label": "St. Luzisteig (Fläsch-Balzers)",
@@ -77,33 +95,15 @@
               "url": "/traffico-dogane/martina-nauders/oggi/"
             },
             {
-              "label": "Samnaun-Spiss",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/samnaun-spiss/oggi/"
-            },
-            {
               "label": "Tunnel Munt La Schera (Passo del Gallo)",
               "value": "0 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/tunnel-munt-la-schera/oggi/"
-            },
-            {
-              "label": "Castasegna-Villa di Chiavenna",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/castasegna-villa-di-chiavenna/oggi/"
-            },
-            {
-              "label": "Passo dello Spluga (Montespluga)",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/passo-dello-spluga/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-17T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -160,7 +160,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-18T16:12:12.011Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "en": {
       "canton": "GR",
@@ -301,24 +301,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Campocologno-Tirano, week ending 17 October 2026"
+          "note": "Campocologno-Tirano, week ending 18 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "14",
-          "note": "reports as of 18 October 2026"
+          "note": "reports as of 19 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "15",
-          "note": "reports as of 18 October 2026"
+          "note": "reports as of 19 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 11 October 2026 to 17 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 12 October 2026 to 18 October 2026, fastest first.",
           "items": [
             {
               "label": "Campocologno-Tirano",
@@ -327,10 +327,28 @@
               "url": "/en/border-wait/campocologno-tirano/today/"
             },
             {
+              "label": "Castasegna-Villa di Chiavenna",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/castasegna-villa-di-chiavenna/today/"
+            },
+            {
               "label": "Forcola di Livigno",
               "value": "0 min",
               "detail": "47 readings",
               "url": "/en/border-wait/forcola-di-livigno/today/"
+            },
+            {
+              "label": "Passo dello Spluga (Montespluga)",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/passo-dello-spluga/today/"
+            },
+            {
+              "label": "Samnaun-Spiss",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/samnaun-spiss/today/"
             },
             {
               "label": "St. Luzisteig (Fläsch-Balzers)",
@@ -345,33 +363,15 @@
               "url": "/en/border-wait/martina-nauders/today/"
             },
             {
-              "label": "Samnaun-Spiss",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/samnaun-spiss/today/"
-            },
-            {
               "label": "Tunnel Munt La Schera (Passo del Gallo)",
               "value": "0 min",
               "detail": "47 readings",
               "url": "/en/border-wait/tunnel-munt-la-schera/today/"
-            },
-            {
-              "label": "Castasegna-Villa di Chiavenna",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/castasegna-villa-di-chiavenna/today/"
-            },
-            {
-              "label": "Passo dello Spluga (Montespluga)",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/passo-dello-spluga/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-17T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -428,7 +428,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-18T16:12:12.011Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "de": {
       "canton": "GR",
@@ -568,24 +568,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Campocologno-Tirano, Woche bis 17. Oktober 2026"
+          "note": "Campocologno-Tirano, Woche bis 18. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "14",
-          "note": "Meldungen vom 18. Oktober 2026"
+          "note": "Meldungen vom 19. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "15",
-          "note": "Meldungen vom 18. Oktober 2026"
+          "note": "Meldungen vom 19. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 11. Oktober 2026 bis 17. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 12. Oktober 2026 bis 18. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Campocologno-Tirano",
@@ -594,10 +594,28 @@
               "url": "/de/wartezeit-grenze/campocologno-tirano/heute/"
             },
             {
+              "label": "Castasegna-Villa di Chiavenna",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/castasegna-villa-di-chiavenna/heute/"
+            },
+            {
               "label": "Forcola di Livigno",
               "value": "0 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/forcola-di-livigno/heute/"
+            },
+            {
+              "label": "Passo dello Spluga (Montespluga)",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/passo-dello-spluga/heute/"
+            },
+            {
+              "label": "Samnaun-Spiss",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/samnaun-spiss/heute/"
             },
             {
               "label": "St. Luzisteig (Fläsch-Balzers)",
@@ -612,33 +630,15 @@
               "url": "/de/wartezeit-grenze/martina-nauders/heute/"
             },
             {
-              "label": "Samnaun-Spiss",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/samnaun-spiss/heute/"
-            },
-            {
               "label": "Tunnel Munt La Schera (Passo del Gallo)",
               "value": "0 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/tunnel-munt-la-schera/heute/"
-            },
-            {
-              "label": "Castasegna-Villa di Chiavenna",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/castasegna-villa-di-chiavenna/heute/"
-            },
-            {
-              "label": "Passo dello Spluga (Montespluga)",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/passo-dello-spluga/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-17T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -695,7 +695,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-18T16:12:12.011Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -825,7 +825,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "fr": {
       "canton": "GR",
@@ -836,24 +836,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Campocologno-Tirano, semaine jusqu’au 17 octobre 2026"
+          "note": "Campocologno-Tirano, semaine jusqu’au 18 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "14",
-          "note": "signalements au 18 octobre 2026"
+          "note": "signalements au 19 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "15",
-          "note": "signalements au 18 octobre 2026"
+          "note": "signalements au 19 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 11 octobre 2026 au 17 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 12 octobre 2026 au 18 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Campocologno-Tirano",
@@ -862,10 +862,28 @@
               "url": "/fr/temps-attente-douane/campocologno-tirano/aujourd-hui/"
             },
             {
+              "label": "Castasegna-Villa di Chiavenna",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/castasegna-villa-di-chiavenna/aujourd-hui/"
+            },
+            {
               "label": "Forcola di Livigno",
               "value": "0 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/forcola-di-livigno/aujourd-hui/"
+            },
+            {
+              "label": "Passo dello Spluga (Montespluga)",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/passo-dello-spluga/aujourd-hui/"
+            },
+            {
+              "label": "Samnaun-Spiss",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/samnaun-spiss/aujourd-hui/"
             },
             {
               "label": "St. Luzisteig (Fläsch-Balzers)",
@@ -880,33 +898,15 @@
               "url": "/fr/temps-attente-douane/martina-nauders/aujourd-hui/"
             },
             {
-              "label": "Samnaun-Spiss",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/samnaun-spiss/aujourd-hui/"
-            },
-            {
               "label": "Tunnel Munt La Schera (Passo del Gallo)",
               "value": "0 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/tunnel-munt-la-schera/aujourd-hui/"
-            },
-            {
-              "label": "Castasegna-Villa di Chiavenna",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/castasegna-villa-di-chiavenna/aujourd-hui/"
-            },
-            {
-              "label": "Passo dello Spluga (Montespluga)",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/passo-dello-spluga/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-17T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -963,7 +963,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-18T16:12:12.011Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1093,7 +1093,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     }
   }
 }

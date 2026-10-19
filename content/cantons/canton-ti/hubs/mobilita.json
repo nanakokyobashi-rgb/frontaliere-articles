@@ -4,17 +4,17 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-19T11:02:57.554Z",
-  "contentHash": "17bf0e7b4f3895b41bad06427ef13e25d48052ba1378b51322785955efc07956",
+  "updatedAt": "2026-10-19T14:06:02.326Z",
+  "contentHash": "5f800044a8f766b903e6c7a9bce8881579fc42075802aa8fd484b2c3997dd89d",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-17T23:59:59.000Z",
+      "updatedAt": "2026-10-18T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-18T23:45:01.015Z",
+      "updatedAt": "2026-10-19T05:23:43.930Z",
       "keyFacts": 2
     },
     {
@@ -33,30 +33,48 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Drezzo-Pedrinate, settimana conclusa: 17 ottobre 2026"
+          "note": "Camedo (Re-Centovalli), settimana conclusa: 18 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "6",
-          "note": "segnalazioni aggiornate: 18 ottobre 2026"
+          "note": "segnalazioni aggiornate: 19 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "39",
-          "note": "segnalazioni aggiornate: 18 ottobre 2026"
+          "note": "segnalazioni aggiornate: 19 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 11 ottobre 2026 – 17 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 12 ottobre 2026 – 18 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
+            {
+              "label": "Camedo (Re-Centovalli)",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/camedo/oggi/"
+            },
             {
               "label": "Drezzo-Pedrinate",
               "value": "0 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/drezzo-pedrinate/oggi/"
+            },
+            {
+              "label": "Lanzo d'Intelvi-Arogno",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/lanzo-d-intelvi-arogno/oggi/"
+            },
+            {
+              "label": "Maslianico-Pizzamiglio",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/maslianico-pizzamiglio/oggi/"
             },
             {
               "label": "Oria-Gandria",
@@ -77,33 +95,15 @@
               "url": "/traffico-dogane/zenna-dirinella/oggi/"
             },
             {
-              "label": "Crociale dei Mulini",
+              "label": "Cremenaga-Ponte Cremenaga",
               "value": "0 min",
               "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/crociale-dei-mulini/oggi/"
-            },
-            {
-              "label": "Dumenza-Cassinone",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/dumenza-cassinone/oggi/"
-            },
-            {
-              "label": "Ronago-Novazzano",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/ronago-novazzano/oggi/"
-            },
-            {
-              "label": "Lanzo d'Intelvi-Arogno",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/lanzo-d-intelvi-arogno/oggi/"
+              "url": "/traffico-dogane/cremenaga-ponte-cremenaga/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-17T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -147,20 +147,18 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
-              "value": "Cantiere",
-              "detail": "fine prevista: 29 dicembre 2028",
-              "date": "2021-06-25T03:00:00.000Z"
+              "label": "A2 Chiasso -> S. Gottardo tra Raccordo autostradale Diramazione Mendrisio E Svincolo autostradale Lugano Sud Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-19T04:03:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 29 dicembre 2028",
-              "date": "2022-04-20T03:00:00.000Z"
+              "label": "406 Riazzino -> Cadenazzo tra Luogo Quartino E Luogo Cadenazzo Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-19T04:46:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-18T23:45:01.015Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -294,7 +292,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-19T11:02:57.554Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "en": {
       "canton": "TI",
@@ -305,30 +303,48 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Drezzo-Pedrinate, week ending 17 October 2026"
+          "note": "Camedo (Re-Centovalli), week ending 18 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "6",
-          "note": "reports as of 18 October 2026"
+          "note": "reports as of 19 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "39",
-          "note": "reports as of 18 October 2026"
+          "note": "reports as of 19 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 11 October 2026 to 17 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 12 October 2026 to 18 October 2026, fastest first.",
           "items": [
+            {
+              "label": "Camedo (Re-Centovalli)",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/camedo/today/"
+            },
             {
               "label": "Drezzo-Pedrinate",
               "value": "0 min",
               "detail": "47 readings",
               "url": "/en/border-wait/drezzo-pedrinate/today/"
+            },
+            {
+              "label": "Lanzo d'Intelvi-Arogno",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/lanzo-d-intelvi-arogno/today/"
+            },
+            {
+              "label": "Maslianico-Pizzamiglio",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/maslianico-pizzamiglio/today/"
             },
             {
               "label": "Oria-Gandria",
@@ -349,33 +365,15 @@
               "url": "/en/border-wait/zenna-dirinella/today/"
             },
             {
-              "label": "Crociale dei Mulini",
+              "label": "Cremenaga-Ponte Cremenaga",
               "value": "0 min",
               "detail": "47 readings",
-              "url": "/en/border-wait/crociale-dei-mulini/today/"
-            },
-            {
-              "label": "Dumenza-Cassinone",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/dumenza-cassinone/today/"
-            },
-            {
-              "label": "Ronago-Novazzano",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/ronago-novazzano/today/"
-            },
-            {
-              "label": "Lanzo d'Intelvi-Arogno",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/lanzo-d-intelvi-arogno/today/"
+              "url": "/en/border-wait/cremenaga-ponte-cremenaga/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-17T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -419,20 +417,18 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
-              "value": "Roadworks",
-              "detail": "until 29 December 2028",
-              "date": "2021-06-25T03:00:00.000Z"
+              "label": "A2 Chiasso -> S. Gottardo tra Raccordo autostradale Diramazione Mendrisio E Svincolo autostradale Lugano Sud Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-19T04:03:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
-              "value": "Roadworks",
-              "detail": "until 29 December 2028",
-              "date": "2022-04-20T03:00:00.000Z"
+              "label": "406 Riazzino -> Cadenazzo tra Luogo Quartino E Luogo Cadenazzo Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-19T04:46:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-18T23:45:01.015Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -565,7 +561,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-19T11:02:57.554Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "de": {
       "canton": "TI",
@@ -576,30 +572,48 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Drezzo-Pedrinate, Woche bis 17. Oktober 2026"
+          "note": "Camedo (Re-Centovalli), Woche bis 18. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "6",
-          "note": "Meldungen vom 18. Oktober 2026"
+          "note": "Meldungen vom 19. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "39",
-          "note": "Meldungen vom 18. Oktober 2026"
+          "note": "Meldungen vom 19. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 11. Oktober 2026 bis 17. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 12. Oktober 2026 bis 18. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
+            {
+              "label": "Camedo (Re-Centovalli)",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/camedo/heute/"
+            },
             {
               "label": "Drezzo-Pedrinate",
               "value": "0 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/drezzo-pedrinate/heute/"
+            },
+            {
+              "label": "Lanzo d'Intelvi-Arogno",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/lanzo-d-intelvi-arogno/heute/"
+            },
+            {
+              "label": "Maslianico-Pizzamiglio",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/maslianico-pizzamiglio/heute/"
             },
             {
               "label": "Oria-Gandria",
@@ -620,33 +634,15 @@
               "url": "/de/wartezeit-grenze/zenna-dirinella/heute/"
             },
             {
-              "label": "Crociale dei Mulini",
+              "label": "Cremenaga-Ponte Cremenaga",
               "value": "0 Min.",
               "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/crociale-dei-mulini/heute/"
-            },
-            {
-              "label": "Dumenza-Cassinone",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/dumenza-cassinone/heute/"
-            },
-            {
-              "label": "Ronago-Novazzano",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/ronago-novazzano/heute/"
-            },
-            {
-              "label": "Lanzo d'Intelvi-Arogno",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/lanzo-d-intelvi-arogno/heute/"
+              "url": "/de/wartezeit-grenze/cremenaga-ponte-cremenaga/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-17T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -690,20 +686,18 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
-              "value": "Baustelle",
-              "detail": "bis 29. Dezember 2028",
-              "date": "2021-06-25T03:00:00.000Z"
+              "label": "A2 Chiasso -> Gotthard zwischen Autobahndreieck Verzweigung Mendrisio und Anschluss Lugano-Süd Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-19T04:03:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
-              "value": "Baustelle",
-              "detail": "bis 29. Dezember 2028",
-              "date": "2022-04-20T03:00:00.000Z"
+              "label": "406 Riazzino -> Cadenazzo zwischen Ortschaft Quartino und Ortschaft Cadenazzo Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-19T04:46:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-18T23:45:01.015Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -836,7 +830,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-19T11:02:57.554Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "fr": {
       "canton": "TI",
@@ -847,30 +841,48 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Drezzo-Pedrinate, semaine jusqu’au 17 octobre 2026"
+          "note": "Camedo (Re-Centovalli), semaine jusqu’au 18 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "6",
-          "note": "signalements au 18 octobre 2026"
+          "note": "signalements au 19 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "39",
-          "note": "signalements au 18 octobre 2026"
+          "note": "signalements au 19 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 11 octobre 2026 au 17 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 12 octobre 2026 au 18 octobre 2026, du plus fluide au plus lent.",
           "items": [
+            {
+              "label": "Camedo (Re-Centovalli)",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/camedo/aujourd-hui/"
+            },
             {
               "label": "Drezzo-Pedrinate",
               "value": "0 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/drezzo-pedrinate/aujourd-hui/"
+            },
+            {
+              "label": "Lanzo d'Intelvi-Arogno",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/lanzo-d-intelvi-arogno/aujourd-hui/"
+            },
+            {
+              "label": "Maslianico-Pizzamiglio",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/maslianico-pizzamiglio/aujourd-hui/"
             },
             {
               "label": "Oria-Gandria",
@@ -891,33 +903,15 @@
               "url": "/fr/temps-attente-douane/zenna-dirinella/aujourd-hui/"
             },
             {
-              "label": "Crociale dei Mulini",
+              "label": "Cremenaga-Ponte Cremenaga",
               "value": "0 min",
               "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/crociale-dei-mulini/aujourd-hui/"
-            },
-            {
-              "label": "Dumenza-Cassinone",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/dumenza-cassinone/aujourd-hui/"
-            },
-            {
-              "label": "Ronago-Novazzano",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/ronago-novazzano/aujourd-hui/"
-            },
-            {
-              "label": "Lanzo d'Intelvi-Arogno",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/lanzo-d-intelvi-arogno/aujourd-hui/"
+              "url": "/fr/temps-attente-douane/cremenaga-ponte-cremenaga/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-17T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -961,20 +955,18 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
-              "value": "Chantier",
-              "detail": "jusqu’au 29 décembre 2028",
-              "date": "2021-06-25T03:00:00.000Z"
+              "label": "A2 Chiasso -> St-Gothard entre Echangeur Echangeur de Mendrisio et Jonction autoroutière Lugano-Sud Situation: trafic en accordéon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-19T04:03:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de…",
-              "value": "Chantier",
-              "detail": "jusqu’au 29 décembre 2028",
-              "date": "2022-04-20T03:00:00.000Z"
+              "label": "406 Riazzino -> Cadenazzo entre Localité Quartino et Localité Cadenazzo Situation: trafic en accordéon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-19T04:46:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-18T23:45:01.015Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1108,7 +1100,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-19T11:02:57.554Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     }
   }
 }
