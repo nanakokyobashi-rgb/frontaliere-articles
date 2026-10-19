@@ -317,6 +317,7 @@ import {
 import { imageCreditRecordFromGeneratedImageRecord } from '../../engine/shared/imageCredits.mjs';
 import { DETERMINISTIC_CARD_KIND, DETERMINISTIC_CARD_LICENSE_URL } from './lib/deterministic-card-provenance.mjs';
 import {
+  ARTICLE_COVER_FALLBACK_ERROR_CODES,
   catalogFallbackSharedWordCount,
   classifyImageRegenerationFailure,
   queueArticleCoverRegeneration,
@@ -17249,6 +17250,20 @@ function isFactCheckUnavailableError(e) {
 }
 
 /**
+ * A governed cover failure is already fail-closed: no article was written
+ * without a verified hero. Keep retryable cover-boundary failures at the run
+ * level so a provider/verifier outage is declared as a clean deferral instead
+ * of becoming an undeclared generation error. A deterministic rejection of
+ * every catalog candidate remains candidate quality and is handled by
+ * isQualityRejectError().
+ */
+function isRetryableArticleCoverError(e) {
+  return e?.retryable === true
+    && Object.values(ARTICLE_COVER_FALLBACK_ERROR_CODES).includes(e?.code)
+    && e?.imageQualityFailure !== true;
+}
+
+/**
  * True when the error is a CONTENT/QUALITY rejection (fact-check block,
  * topic-gate REGOLA #0 abort, fabrication, or a non-conformant headline that
  * survived its retry budget) rather than an infrastructure bug.
@@ -18233,7 +18248,7 @@ async function main() {
       // `status=running` e trasforma una condizione prevista in
       // `no-article-undeclared-exit`.
       finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, note] });
-      // Ragione legittima #8 di nove (corpus): il budget della run e' finito
+      // Ragione legittima #8 di dieci (corpus): il budget della run e' finito
       // prima del fallback evergreen; il giro successivo puo' scegliere fonti
       // e tempi diversi. Non si abbassa nessun gate e non si pubblica slop.
       await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
@@ -18244,7 +18259,7 @@ async function main() {
       // articolo in questo run, dichiarato come le altre ragioni legittime.
       console.error(`CANTON_EVERGREEN_POOL_DISABLED section=${SECTION_NAME} — nessuna news utilizzabile e nessun pool evergreen per le sezioni cantonali: nessun articolo in questo run.`);
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, `No usable news for canton section ${SECTION_NAME} (no evergreen pool by construction)`] });
-      // Ragione legittima #7 di nove — vedi EXIT_NO_ARTICLE_DECLARED. Esiste
+      // Ragione legittima #7 di dieci — vedi EXIT_NO_ARTICLE_DECLARED. Esiste
       // solo nel corpus: lib/exhaustion-disposition.mjs e' un gemello identico
       // del sito, dove create-article non ha sezioni cantonali, e il suo elenco
       // resta quello delle sei ragioni comuni ai due repo.
@@ -18359,7 +18374,7 @@ async function main() {
         reportEvergreenPoolSaturation('preflight');
         console.error('\n⚠️  Tutte le keyword evergreen risultano già coperte dal pre-flight. Push prosegue senza nuovo articolo.');
         finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'All evergreen keywords rejected by pre-generation duplicate checks'] });
-        // Ragione legittima #1 di nove: niente da pubblicare. Exit 4 e non 0 —
+        // Ragione legittima #1 di dieci: niente da pubblicare. Exit 4 e non 0 —
         // vedi EXIT_NO_ARTICLE_DECLARED: da qui in poi un exit 0 SENZA articolo
         // e' un percorso che non ha dichiarato niente, ed e' rosso.
         await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
@@ -18519,7 +18534,7 @@ async function main() {
             reportEvergreenPoolSaturation('retry');
             console.error('\n⚠️  Nessuna keyword evergreen disponibile. Push prosegue senza nuovo articolo.');
             finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'No evergreen keyword available after duplicate checks'] });
-            // Ragione legittima #2 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
+            // Ragione legittima #2 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
             await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
           }
         }
@@ -18528,7 +18543,7 @@ async function main() {
       // All retry attempts exhausted
       console.error('\n⚠️  Tentativi evergreen esauriti. Push prosegue senza nuovo articolo.');
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'Evergreen retries exhausted'] });
-      // Ragione legittima #3 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
+      // Ragione legittima #3 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
       await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     }
     return;
@@ -18903,7 +18918,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       // MISURATO su 926 run (2026-08-13 → 18): 2510s mediani per una run
       // `failure` contro 254s per una `success`.
       //
-      // NON e' un `success` muto e non e' una delle nove ragioni legittime: si
+      // NON e' un `success` muto e non e' una delle dieci ragioni legittime: si
       // marca l'errore e lo si rilancia, cosi' che il catch di primo livello
       // esca `EXIT_ROSTER_CANNOT_SERVE_PROMPT`. Vedi isPromptFloorIrreducible()
       // per il perche' dichiararla «legittima» ricreerebbe il verde di #313.
@@ -21220,7 +21235,7 @@ if (invokedDirectly) {
     if (RUN_REPORT?.status === 'generated') return;
     console.error(
       `\n❌ Uscita non dichiarata: main() e' ritornato con status='${RUN_REPORT?.status ?? '(mai finalizzato)'}'`
-      + ' senza aver prodotto un articolo e senza dichiarare una delle nove ragioni legittime'
+      + ' senza aver prodotto un articolo e senza dichiarare una delle dieci ragioni legittime'
       + ' (vedi EXIT_NO_ARTICLE_DECLARED in lib/exhaustion-disposition.mjs).'
       + ' Un exit 0 in questo stato e\' esattamente il verde silenzioso di #313.',
     );
@@ -21279,8 +21294,22 @@ if (invokedDirectly) {
       notes: [...RUN_REPORT.notes, `Deferred (fact-check unavailable; article not published): ${e.message}`],
     });
     console.error(`\n⚠️  Differito: fact-check indisponibile, articolo non pubblicato. Riprovo al prossimo run. ${e.message}`);
-    // Ragione legittima #9 di nove — il verifier non ha prodotto un verdetto:
+    // Ragione legittima #9 di dieci — il verifier non ha prodotto un verdetto:
     // il run si differisce fail-closed e non pubblica contenuto non verificato.
+    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
+  }
+  // The article-hero verifier is a publication boundary just like the
+  // fact-check: a missing verdict must not publish an unverified image, but it
+  // is also not a candidate-quality rejection. Defer with the shared
+  // no-article code so the workflow records a declared outcome and retries
+  // when the image provider/verifier is available again.
+  if (isRetryableArticleCoverError(e)) {
+    finalizeRunReport('deferred', {
+      notes: [...RUN_REPORT.notes, 'Deferred (article cover unavailable; article not published): ' + e.message],
+    });
+    console.error('\n⚠️  Differito: copertina articolo non verificabile, articolo non pubblicato. Riprovo al prossimo run. ' + e.message);
+    // Ragione legittima #10 di dieci — il verifier della copertina non ha prodotto
+    // un verdetto utilizzabile: il run si differisce senza pubblicare l'articolo.
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   // Transient free-model pool exhaustion (every model in the fallback chain hit
@@ -21399,7 +21428,7 @@ if (invokedDirectly) {
     if (isLegitimateQuotaDeferral(e)) {
       finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`] });
       console.error(`\n⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera, ${share.transient}/${share.total} = ${pct}%). Riprovo al prossimo run. ${e.message}`);
-      // Ragione legittima #6 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
+      // Ragione legittima #6 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
       await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     }
     finalizeRunReport('error', {
@@ -21427,7 +21456,7 @@ if (invokedDirectly) {
   if (isQualityRejectError(e)) {
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (content quality rejected, slop not published): ${e.message}`] });
     console.error(`\n⚠️  Differito: nessun articolo conforme prodotto in questa run (rigetto qualità — slop non pubblicato). Riprovo al prossimo run. ${e.message}`);
-    // Ragione legittima #5 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
+    // Ragione legittima #5 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   // Duplicate rejection that bubbled all the way up from the direct-URL
@@ -21437,7 +21466,7 @@ if (invokedDirectly) {
     captureDuplicateReasons(e.message);
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (duplicate detected, not published): ${e.message}`] });
     console.error(`\n⚠️  Differito: duplicato rilevato, articolo non pubblicato in questa run. Riprovo al prossimo run. ${e.message}`);
-    // Ragione legittima #4 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
+    // Ragione legittima #4 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   finalizeRunReport('error', { notes: [...RUN_REPORT.notes, `Error: ${e.message}`] });

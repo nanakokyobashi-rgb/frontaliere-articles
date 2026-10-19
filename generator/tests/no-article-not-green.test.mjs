@@ -291,7 +291,7 @@ test('senza il campo nuovo il verdetto e\' quello di oggi, byte per byte (#805)'
 
 // ── 2. IL CABLAGGIO in create-article.mjs ──────────────────────────────────
 
-test('le nove ragioni legittime del corpus escono TUTTE con la costante, e nessun\'altra', () => {
+test('le dieci ragioni legittime del corpus escono TUTTE con la costante, e nessun\'altra', () => {
   const src = fs.readFileSync(CREATE_ARTICLE, 'utf8');
   // L'invariante e' la COSTANTE, non il nome della funzione che esce: dal
   // 2026-08-18 le uscite passano da `exitAfterFlush()`, che scrive il ledger
@@ -304,8 +304,8 @@ test('le nove ragioni legittime del corpus escono TUTTE con la costante, e nessu
   // prova semantica qui sotto, non solo aumentare il numero.
   const declared = src.match(/(?:process\.exit|await exitAfterFlush)\(EXIT_NO_ARTICLE_DECLARED\)/g) || [];
   assert.equal(
-    declared.length, 9,
-    'le nove ragioni legittime (3 evergreen + cantonale senza pool evergreen + budget + duplicato + qualita\' + quota + fact-check indisponibile) devono uscire con la costante condivisa',
+    declared.length, 10,
+    'le dieci ragioni legittime (3 evergreen + cantonale senza pool evergreen + budget + duplicato + qualita\' + quota + fact-check indisponibile + copertina non verificabile) devono uscire con la costante condivisa',
   );
   assert.ok(
     /CANTON_EVERGREEN_POOL_DISABLED[\s\S]{0,1500}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/.test(src),
@@ -318,6 +318,10 @@ test('le nove ragioni legittime del corpus escono TUTTE con la costante, e nessu
   assert.ok(
     /if \(isFactCheckUnavailableError\(e\)\)[\s\S]{0,1200}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/.test(src),
     'l indisponibilita\' del fact-check deve dichiarare il differimento fail-closed prima degli altri rami',
+  );
+  assert.ok(
+    /if \(isRetryableArticleCoverError\(e\)\)[\s\S]{0,1200}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/.test(src),
+    'l indisponibilita\' della copertina deve dichiarare il differimento fail-closed prima della classificazione di quota o qualita\'',
   );
   // Il letterale scritto a mano e' la via con cui le due meta' divergono.
   assert.ok(!/(?:process\.exit|exitAfterFlush)\(4\)/.test(src), 'nessun `process.exit(4)` letterale: solo la costante');
