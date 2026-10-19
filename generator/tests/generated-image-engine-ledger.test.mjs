@@ -65,6 +65,9 @@ test('classifica le cause annidate dei timeout vision e preserva il marker share
   const codexBrokerClosed = Object.assign(new Error('Codex broker closed without a response'), { code: 'ECONNRESET' });
   assert.equal(isVisionProviderUnavailable(codexBrokerTimeout), true);
   assert.equal(isVisionProviderUnavailable(codexBrokerClosed), true);
+  assert.equal(isVisionProviderUnavailable(new AggregateError([
+    'Codex broker closed without a response',
+  ], 'vision verification failed')), true);
 
   const sharedMarker = Object.assign(new Error('shared vision pool is unavailable'), {
     sharedProviderUnavailable: true,
@@ -76,5 +79,5 @@ test('classifica le cause annidate dei timeout vision e preserva il marker share
     cause: transportCause,
   });
   assert.equal(isVisionProviderUnavailable(localFileFailure), false);
-  assert.match(ENGINE, /errorCauseChain\(error\)\.some\(\(cause\) => cause\.sharedProviderUnavailable === true\)/);
+  assert.match(ENGINE, /causes\.some\(\(cause\) => cause\.sharedProviderUnavailable === true\)/);
 });

@@ -302,8 +302,8 @@ test('le ragioni locali alla sezione e quelle del pool condiviso usano codici di
   // verifier e quota usano il codice 5 quando il servizio condiviso non regge.
   const declared = src.match(/(?:process\.exit|await exitAfterFlush)\(EXIT_NO_ARTICLE_DECLARED\)/g) || [];
   assert.equal(
-    declared.length, 8,
-    'le otto ragioni locali alla sezione devono mantenere il codice 4',
+    declared.length, 9,
+    'le nove ragioni locali alla sezione devono mantenere il codice 4',
   );
   const providerUnavailable = src.match(/await exitAfterFlush\(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE\)/g) || [];
   assert.equal(providerUnavailable.length, 3, 'fact-check, cover verifier e quota devono dichiarare il blocco condiviso col codice 5');
@@ -315,10 +315,17 @@ test('le ragioni locali alla sezione e quelle del pool condiviso usano codici di
     /else if \(!newsSuccess && !candidateSuccess && wallBudgetExceeded\(\)\)[\s\S]{0,1800}finalizeRunReport\('deferred'[\s\S]{0,500}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/.test(src),
     'la scadenza del budget dopo il pool news deve dichiarare il differimento prima di uscire',
   );
-  assert.ok(
-    /if \(isFactCheckUnavailableError\(e\)\)[\s\S]{0,1200}await exitAfterFlush\(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE\)/.test(src),
-    'l indisponibilita\' del fact-check deve dichiarare il blocco condiviso prima degli altri rami',
-  );
+  const sharedFactCheck = src.indexOf('if (isSharedFactCheckUnavailableError(e))');
+  const localFactCheck = src.indexOf('if (isFactCheckUnavailableError(e))', sharedFactCheck);
+  const coverVerifier = src.indexOf('if (isSharedArticleCoverVerifierUnavailableError(e))', localFactCheck);
+  assert.ok(sharedFactCheck >= 0 && localFactCheck > sharedFactCheck && coverVerifier > localFactCheck,
+    'il fact-check deve distinguere l outage condiviso dal verdetto incompleto locale');
+  assert.match(src.slice(sharedFactCheck, localFactCheck), /await exitAfterFlush\(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE\)/,
+    'l esaurimento transitorio del roster deve dichiarare il blocco condiviso');
+  assert.match(src.slice(localFactCheck, coverVerifier), /await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/,
+    'un fact-check senza verdetto utilizzabile deve lasciare provare la sezione gemella');
+  assert.doesNotMatch(src.slice(localFactCheck, coverVerifier), /EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE/,
+    'un risultato incompleto non deve fermare la catena come outage condiviso');
   assert.ok(
     /if \(isSharedArticleCoverVerifierUnavailableError\(e\)\)[\s\S]{0,1200}await exitAfterFlush\(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE\)/.test(src),
     'l\'indisponibilita\' del cover verifier deve dichiarare il blocco condiviso prima dei retry locali',

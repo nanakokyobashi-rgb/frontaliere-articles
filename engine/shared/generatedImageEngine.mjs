@@ -384,10 +384,11 @@ function requestCodexBroker({ prompt, imagePath = '', imageOutputPath = '', gene
       else finish(null, { text: String(parsed.result || ''), started });
     });
     client.on('end', () => {
-      if (settled) return;
-      const error = new Error('Codex broker closed without a response');
-      error.code = 'ECONNRESET';
-      finish(error);
+      if (!settled) {
+        const error = new Error('Codex broker closed without a response');
+        error.code = 'ECONNRESET';
+        finish(error);
+      }
     });
     client.on('connect', () => client.end(`${JSON.stringify(request)}\n`));
   });
@@ -1185,6 +1186,10 @@ function errorCauseChain(error) {
   const chain = [];
   while (pending.length > 0) {
     const current = pending.pop();
+    if (typeof current === 'string' && current.trim()) {
+      chain.push({ message: current });
+      continue;
+    }
     if (!current || (typeof current !== 'object' && typeof current !== 'function') || seen.has(current)) continue;
     seen.add(current);
     chain.push(current);
@@ -1202,18 +1207,18 @@ export function isVisionProviderUnavailable(error) {
   if (causes.some((cause) => {
     const status = Number(cause.status ?? cause.statusCode);
     return [401, 403].includes(status)
-      || /(?:HTTP|status(?:\s+code)?)\s*(?:401|403)|\b(?:401|403)\b.*\b(?:unauthori[sz]ed|forbidden|access denied)\b|unauthori[sz]ed|forbidden|access denied|authentication failed/i
+      || /(?:HTTP|status)\s*(?:401|403)|\b(?:unauthori[sz]ed|authentication failed|invalid (?:api )?key|invalid credentials)\b/i
         .test(String(cause.message || ''));
   })) return false;
+  if (causes.some((cause) => cause.sharedProviderUnavailable === true)) return true;
   return causes.some((cause) => {
-    if (cause.sharedProviderUnavailable === true
-      || VISION_PROVIDER_TRANSPORT_CODES.has(String(cause.code || ''))
+    if (VISION_PROVIDER_TRANSPORT_CODES.has(String(cause.code || ''))
       || cause.name === 'AbortError'
       || cause.name === 'TimeoutError'
       || cause.code === 'ABORT_ERR') return true;
     const status = Number(cause.status ?? cause.statusCode);
     if ([408, 425, 429].includes(status) || (status >= 500 && status <= 599)) return true;
-    return /\b(?:provider|service|model).{0,32}\b(?:unavailable|overloaded|at capacity)\b|rate.?limit|quota.{0,24}(?:exceeded|unavailable)|too many requests|(?:HTTP|status)\s*(?:408|425|429|5\d\d)/i
+    return /\b(?:provider|service|model).{0,32}\b(?:unavailable|overloaded|at capacity)\b|rate.?limit|quota.{0,24}(?:exceeded|unavailable)|too many requests|(?:HTTP|status)\s*(?:408|425|429|5\d\d)|\bCodex broker (?:timed out after|closed without a response)\b/i
       .test(String(cause.message || ''));
   });
 }

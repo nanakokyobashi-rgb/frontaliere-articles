@@ -71,14 +71,15 @@ test('a fail-closed fact-check outage defers the run instead of retrying the art
   const catchStart = SRC.indexOf('main().then(async () =>');
   const sharedUnavailable = SRC.indexOf('if (isSharedFactCheckUnavailableError(e))', catchStart);
   const unavailable = SRC.indexOf('if (isFactCheckUnavailableError(e))', sharedUnavailable);
-  const cover = SRC.indexOf('// The article-hero verifier', unavailable);
+  const coverUnavailable = SRC.indexOf('if (isSharedArticleCoverVerifierUnavailableError(e))', unavailable);
+  const cover = SRC.indexOf('// The article-hero verifier', coverUnavailable);
   const quality = SRC.indexOf('if (isQualityRejectError(e))', catchStart);
   assert.ok(catchStart !== -1 && sharedUnavailable > catchStart && unavailable > sharedUnavailable
-    && cover > unavailable && quality > cover, 'ordine dei rami top-level non verificabile');
+    && coverUnavailable > unavailable && cover > coverUnavailable && quality > cover, 'ordine dei rami top-level non verificabile');
   const sharedRunDeferral = SRC.slice(sharedUnavailable, unavailable);
   assert.match(sharedRunDeferral, /finalizeRunReport\('deferred'/);
   assert.match(sharedRunDeferral, /EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE/);
-  const localRunDeferral = SRC.slice(unavailable, cover);
+  const localRunDeferral = SRC.slice(unavailable, coverUnavailable);
   assert.match(localRunDeferral, /EXIT_NO_ARTICLE_DECLARED/);
   assert.doesNotMatch(localRunDeferral, /EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE/);
   assert.match(localRunDeferral, /articolo non pubblicato/);
