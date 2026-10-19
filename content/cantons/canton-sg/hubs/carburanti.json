@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-19T11:07:35.897Z",
-  "contentHash": "262aa7e200ed51aba5db5883eb4120dd391f1c033e305ca7e5aa71547390563a",
+  "updatedAt": "2026-10-19T12:32:28.066Z",
+  "contentHash": "ff26535adcc2c227c21dda1055f09fc71b01074381361a8d8dca6dd0803490a1",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Voto sul Bahnhofplatz Wil: credito di 63,66 milioni",
+          "url": "/articoli-san-gallo/voto-bahnhofplatz-wil-2026/",
+          "excerpt": "Il 29 novembre 2026 i cittadini di Wil voteranno sul progetto per il nuovo terminale bus, la velostazione e la riqualificazione della stazione.",
+          "date": "2026-10-19T12:16:44.327Z"
+        },
+        {
           "title": "St.Gallen avvia il sondaggio per le imprese",
           "url": "/articoli-san-gallo/sondaggio-imprese-st-gallen-2026/",
           "excerpt": "La città di St.Gallen lancia un sondaggio rivolto alle imprese per valutare la piazza economica.",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/hsg-spin-off-ufficiali/",
           "excerpt": "La HSG sostiene gli studenti nella fondazione di imprese e presenta alcuni degli oltre 170 spin-off ufficiali HSG.",
           "date": "2026-10-09T20:43:41.814Z"
-        },
-        {
-          "title": "Lavori sulla Hauptstrasse a Wartau dal 19 ottobre 2026",
-          "url": "/articoli-san-gallo/lavori-strada-wartau-plattis/",
-          "excerpt": "A Wartau i lavori sulla Hauptstrasse iniziano il 19 ottobre 2026: nel tratto Plattis saranno rinnovate le condotte di drenaggio e il fondo stradale.",
-          "date": "2026-10-09T20:23:10.514Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-19T11:07:35.897Z"
+      "updatedAt": "2026-10-19T12:32:28.066Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Vote on Bahnhofplatz Wil: credit of 63,66 million",
+          "url": "/en/st-gallen-articles/wil-bahnhofplatz-vote-2026/",
+          "excerpt": "On November 29, 2026, the citizens of Wil will vote on the project for the new bus terminal, bicycle station, and redevelopment of the station.",
+          "date": "2026-10-19T12:16:44.327Z"
+        },
+        {
           "title": "St.Gallen launches the business survey",
           "url": "/en/st-gallen-articles/st-gallen-business-survey-2026/",
           "excerpt": "The city of St.Gallen is launching a survey aimed at businesses to assess the business location.",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/hsg-official-spin-offs/",
           "excerpt": "HSG supports students in founding companies and presents some of the more than 170 official HSG spin-offs.",
           "date": "2026-10-09T20:43:41.814Z"
-        },
-        {
-          "title": "Roadworks on Hauptstrasse in Wartau from October 19, 2026",
-          "url": "/en/st-gallen-articles/roadworks-wartau-plattis/",
-          "excerpt": "In Wartau, work on Hauptstrasse will begin on October 19, 2026: in the Plattis section, the drainage pipes and road surface will be renewed.",
-          "date": "2026-10-09T20:23:10.514Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-19T11:07:35.897Z"
+      "updatedAt": "2026-10-19T12:32:28.066Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Abstimmung über den Bahnhofplatz Wil: Kredit von 63,66 Millionen",
+          "url": "/de/st-gallen-artikel/abstimmung-bahnhofplatz-wil-2026/",
+          "excerpt": "Am 29. November 2026 stimmen die Bürgerinnen und Bürger von Wil über das Projekt für den neuen Busterminal, die Velostation und die Neugestaltung des Bahnhofs ab.",
+          "date": "2026-10-19T12:16:44.327Z"
+        },
+        {
           "title": "St.Gallen startet die Unternehmensumfrage",
           "url": "/de/st-gallen-artikel/st-gallen-unternehmensbefragung-2026/",
           "excerpt": "Die Stadt St.Gallen startet eine Umfrage unter Unternehmen, um den Wirtschaftsstandort zu bewerten.",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/hsg-offizielle-spin-offs/",
           "excerpt": "Die HSG unterstützt Studierende bei der Gründung von Unternehmen und stellt einige der über 170 offiziellen HSG-Spin-offs vor.",
           "date": "2026-10-09T20:43:41.814Z"
-        },
-        {
-          "title": "Arbeiten an der Hauptstrasse in Wartau ab dem 19. Oktober 2026",
-          "url": "/de/st-gallen-artikel/bauarbeiten-wartau-plattis/",
-          "excerpt": "In Wartau beginnen die Arbeiten an der Hauptstrasse am 19.",
-          "date": "2026-10-09T20:23:10.514Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-19T11:07:35.897Z"
+      "updatedAt": "2026-10-19T12:32:28.066Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Vote sur le Bahnhofplatz Wil : crédit de 63,66 millions",
+          "url": "/fr/articles-saint-gall/vote-bahnhofplatz-wil-2026/",
+          "excerpt": "Le 29 novembre 2026, les citoyens de Wil voteront sur le projet du nouveau terminal de bus, de la vélostation et de la requalification de la gare.",
+          "date": "2026-10-19T12:16:44.327Z"
+        },
+        {
           "title": "St.Gallen lance l’enquête auprès des entreprises",
           "url": "/fr/articles-saint-gall/enquete-entreprises-saint-gall-2026/",
           "excerpt": "La ville de St.Gallen lance une enquête auprès des entreprises afin d’évaluer la place économique.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/hsg-spin-off-officiels/",
           "excerpt": "La HSG soutient les étudiants dans la création d’entreprises et présente quelques-uns des plus de 170 spin-off officiels de la HSG.",
           "date": "2026-10-09T20:43:41.814Z"
-        },
-        {
-          "title": "Travaux sur la Hauptstrasse à Wartau à partir du 19 octobre 2026",
-          "url": "/fr/articles-saint-gall/travaux-routiers-wartau-plattis/",
-          "excerpt": "À Wartau, les travaux sur la Hauptstrasse commencent le 19 octobre 2026 : sur le tronçon de Plattis, les conduites de drainage et la chaussée seront rénovées.",
-          "date": "2026-10-09T20:23:10.514Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-19T11:07:35.897Z"
+      "updatedAt": "2026-10-19T12:32:28.066Z"
     }
   }
 }
