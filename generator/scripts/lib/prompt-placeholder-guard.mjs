@@ -139,23 +139,23 @@ export const SCHEMA_PLACEHOLDER_LITERALS = Object.freeze([
   '<<SLUG:fr>>',
   ...['it', 'en', 'de', 'fr'].map(editorialHeadlineGuidance),
   'Sottotitolo con dati concreti DALLA FONTE (max 160 chars)',
-  "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
-  'Analisi pratica: implicazioni, confronti, scenari. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.',
-  'Azione: procedura step-by-step, scadenze, strumenti + CTA finale. NON riassumere body1/body2. 300-400 parole.',
+  "'## In breve' (3-4 bullet ≤80 char) + '## Fatti chiave' (0-8 valori presenti, ometti assenti). Poi lead con fatti verificabili (chi, cosa, dove, quando; cause solo se documentate). Min 1 ### sotto-sezione.",
+  'Spiegazione o confronto utile, tracciabile nei fatti citati e nei periodi; niente cause o effetti non documentati. Min 1 ### sotto-sezione.',
+  'Ulteriori prove, sviluppi o limiti documentati; niente procedure, consigli o azioni arbitrarie.',
   // Ramo della cronaca locale senza angolo frontalieri (PR #1871): stesso
   // schema, body2/body3 senza analisi pratica, procedure né CTA, e nessuna
   // lunghezza fissa per campo (la dà MINIMUM LENGTH, proporzionata alla fonte).
   // Il body1 locale apre con «Cronaca locale —»: con la stessa testa di quello
   // frontaliere darebbe la stessa regola `schema-lead-*` due volte.
-  "Cronaca locale — inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. Lunghezza secondo MINIMUM LENGTH (escluse TL;DR/Fatti chiave).",
-  'Contesto: sviluppi, reazioni e dati della fonte. Contenuto DIVERSO da body1. Lunghezza secondo MINIMUM LENGTH.',
-  'Seguito: cosa succede ora secondo la fonte. NON riassumere body1/body2. Lunghezza secondo MINIMUM LENGTH.',
+  "Cronaca locale — '## In breve' (3-4 bullet ≤80 char) + '## Fatti chiave' (0-8 valori presenti, ometti assenti). Poi lead con fatti verificabili (chi, cosa, dove, quando; cause solo se documentate).",
+  'Contesto o confronto locale documentato dalla fonte o da un riferimento verificato; niente ricadute ipotetiche.',
+  'Altri fatti o limiti documentati; non inventare sviluppi o un seguito.',
   "Domanda frequente 1 basata sui fatti dell'articolo?",
   'Risposta con dati DALLA FONTE. 50-100 parole.',
   'Domanda frequente 2?',
   'Risposta pratica basata sulla fonte.',
   'Domanda frequente 3?',
-  'Risposta con procedura o scadenza dalla fonte.',
+  'Risposta con un dato o un limite documentato.',
   "SEO Title senza brand suffix (OBBLIGATORIO ≤ 60 caratteri TOTALI; il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo)",
   'Meta description 150-160 chars (HARD CAP: ≤ 160 caratteri)',
   '6-8 keywords IT',
@@ -169,16 +169,23 @@ export const SCHEMA_PLACEHOLDER_LITERALS = Object.freeze([
  * Letterali di schema ritirati che possono essere ancora vivi nel corpus.
  *
  * Questa lista NON fa parte del lock col template corrente: il prompt nuovo
- * deve restare libero dai contratti storici `3-8` e `5-8`/`Cosa…Importo`, ma il
- * guard deve continuare a trovare un body1 pubblicato prima della migrazione. Se il
- * matcher storico venisse derivato da `SCHEMA_PLACEHOLDER_LITERALS`, la
- * sostituzione del literal cancellerebbe proprio la rete di sicurezza che
+ * deve restare libero dai contratti ritirati, ma il guard deve continuare a
+ * trovare istruzioni di body/FAQ pubblicate da versioni precedenti. Se i
+ * matcher storici venissero derivati da `SCHEMA_PLACEHOLDER_LITERALS`, la
+ * sostituzione dei literal cancellerebbe proprio la rete di sicurezza che
  * serve alla bonifica dei residui già live.
  */
 export const HISTORICAL_SCHEMA_PLACEHOLDER_LITERALS = Object.freeze([
   "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (5-8 coppie **Cosa/Quando/Dove/Chi/Importo**: valore). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
   "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (3-8 coppie termine→valore presenti nella fonte; ometti campi assenti, niente placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
   "Titolo giornalistico con keyword (OBBLIGATORIO ≤ 60 caratteri totali, target 50-55. Il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo nel title)",
+  "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
+  'Analisi pratica: implicazioni, confronti, scenari. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.',
+  'Azione: procedura step-by-step, scadenze, strumenti + CTA finale. NON riassumere body1/body2. 300-400 parole.',
+  "Cronaca locale — inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. Lunghezza secondo MINIMUM LENGTH (escluse TL;DR/Fatti chiave).",
+  'Contesto: sviluppi, reazioni e dati della fonte. Contenuto DIVERSO da body1. Lunghezza secondo MINIMUM LENGTH.',
+  'Seguito: cosa succede ora secondo la fonte. NON riassumere body1/body2. Lunghezza secondo MINIMUM LENGTH.',
+  'Risposta con procedura o scadenza dalla fonte.',
 ]);
 
 /**
@@ -508,15 +515,35 @@ const escapeRx = (s) => escapeRegExpLiteral(s);
 
 // Non mescolare questi matcher con quelli derivati dal template corrente:
 // sono compatibilità di lettura per gli schemi storici già pubblicati.
+const HISTORICAL_SCHEMA_RULE_METADATA = [
+  { id: 'legacy-schema-body1-fixed-key-facts', why: 'Schema storico di body1 (`5-8` coppie) ancora presente in un output pubblicato.' },
+  { id: 'legacy-schema-body1-optional-key-facts', why: 'Schema storico di body1 (`3-8` coppie) ancora presente in un output pubblicato.' },
+  { id: 'legacy-schema-title', why: 'Istruzione storica del titolo ricopiata dallo schema JSON.' },
+  { id: 'legacy-schema-body1-source-backed-key-facts', why: 'Descrizione ritirata di body1 ricopiata in un output pubblicato.' },
+  { id: 'legacy-schema-body2-practical-analysis', why: 'Descrizione ritirata di body2 ricopiata in un output pubblicato.' },
+  { id: 'legacy-schema-body3-action', why: 'Descrizione ritirata di body3 ricopiata in un output pubblicato.' },
+  { id: 'legacy-schema-local-body1', why: 'Descrizione ritirata del body1 di cronaca locale ricopiata in un output pubblicato.' },
+  { id: 'legacy-schema-local-body2', why: 'Descrizione ritirata del body2 di cronaca locale ricopiata in un output pubblicato.' },
+  { id: 'legacy-schema-local-body3', why: 'Descrizione ritirata del body3 di cronaca locale ricopiata in un output pubblicato.' },
+  { id: 'legacy-schema-faq-answer', why: 'Istruzione ritirata della risposta FAQ ricopiata in un output pubblicato.' },
+];
 const HISTORICAL_SCHEMA_RULES = HISTORICAL_SCHEMA_PLACEHOLDER_LITERALS.map((literal, index) => ({
-  id: index === 0 ? 'legacy-schema-body1-fixed-key-facts' : index === 1 ? 'legacy-schema-body1-optional-key-facts' : 'legacy-schema-title',
+  ...HISTORICAL_SCHEMA_RULE_METADATA[index],
   kind: 'schema-echo',
   rx: new RegExp(escapeRx(literal), 'i'),
-  why: index < 2
-    ? 'Schema storico di body1 (`3-8` o `5-8` coppie) ancora presente in un output pubblicato.'
-    : 'Istruzione storica del titolo ricopiata dallo schema JSON.',
   literal,
 }));
+const HISTORICAL_SCHEMA_LEAD_RULES = HISTORICAL_SCHEMA_PLACEHOLDER_LITERALS.slice(3).map((literal, index) => {
+  const lead = leadOf(literal);
+  const metadata = HISTORICAL_SCHEMA_RULE_METADATA[index + 3];
+  return {
+    id: `${metadata.id}-lead`,
+    kind: 'schema-echo',
+    rx: new RegExp(escapeRx(lead), 'i'),
+    why: `Incipit dello schema ritirato ricopiato in un output pubblicato: ${JSON.stringify(lead)}.`,
+    literal,
+  };
+});
 
 // ── `budget-parenthetical`, versione STRUTTURALE ────────────────────────────
 //
@@ -643,6 +670,7 @@ const FAQ_NUMBERED_LABEL_RX = String.raw`(?:domanda\s+frequente\s+|${FAQ_LABEL_R
 export const PLACEHOLDER_RULES = Object.freeze([
   // ── Residui dello schema precedente: lettura, non contratto ─────────────
   ...HISTORICAL_SCHEMA_RULES,
+  ...HISTORICAL_SCHEMA_LEAD_RULES,
   // ── Forme che nessun letterale copre ────────────────────────────────────
   {
     id: 'budget-as-value',

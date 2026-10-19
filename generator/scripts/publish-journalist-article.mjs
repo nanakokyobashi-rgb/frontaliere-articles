@@ -61,7 +61,7 @@ import {
   isRegisterLockHeld,
   translateArticle,
   enforceStrongInternalLinks,
-  findBestFallbackImage,
+  findBestFallbackImages,
   pickAuthorForTopic,
   getAuthorByUid,
   sanitizeBoldFormatting,
@@ -80,7 +80,6 @@ import {
   generateArticleImage,
   repairGeneratedArticleSourceCopy,
   refreshSourceCopyDerivedMetadata,
-  resolveArticleCoverFallback,
 } from './create-article.mjs';
 import { isRegisterLockError } from './lib/register-lock.mjs';
 import { requeuePublishedDocuments } from './lib/journalist-publish-recovery.mjs';
@@ -90,7 +89,11 @@ import {
   SourceCopyError,
 } from './lib/source-copy-guard.mjs';
 import { classifyJournalistImage, editorialUploadMetadata } from './lib/journalist-image-policy.mjs';
-import { queueArticleCoverRegeneration } from './lib/article-cover-fallback.mjs';
+import {
+  queueArticleCoverRegeneration,
+  resolveArticleCoverFallback,
+  verifyCatalogFallbackCandidates,
+} from './lib/article-cover-fallback.mjs';
 import { generateFaqIT } from './batch-add-faq-to-articles.mjs';
 import {
   appendEditorialImageRecord,
@@ -272,8 +275,9 @@ function setHeroProvenance(data, imagePath, provenance) {
 
 /**
  * Resolve a hero image under the publication policy:
- * catalog record → governed engine → documented editorial upload → governed
- * catalog/static fallback. The URL branch is deliberately last and fail-closed.
+ * catalog record → governed engine → documented editorial upload → freshly
+ * verified relevant catalog fallback. Arbitrary URLs and static landscapes
+ * cannot satisfy the last step.
  */
 async function resolveHeroImage(data, doc) {
   const rawImage = String(doc?.image || '').trim();
@@ -373,9 +377,13 @@ async function resolveHeroImage(data, doc) {
     return { source: 'generated-engine', path: generatedPath, provenance: 'generated' };
   }
 
+  const verifiedCatalogImage = await verifyCatalogFallbackCandidates(data, {
+    root: PROJECT_ROOT,
+    findCatalogImages: findBestFallbackImages,
+  });
   const fallback = resolveArticleCoverFallback(data, {
     root: PROJECT_ROOT,
-    findCatalogImage: findBestFallbackImage,
+    verifiedCatalogImage,
     reason: data._imageGenerationFailureReason || 'engine-failed',
   });
   delete data._imageGenerationFailureReason;
@@ -406,6 +414,16 @@ async function resolveHeroImage(data, doc) {
  */
 function resolveJournalistAuthor(doc) {
   return (doc?.authorUid ? getAuthorByUid(doc.authorUid) : undefined) || null;
+}
+
+function classifyJournalistPublishError(error) {
+  // A deterministic negative vision verdict is final for this submission: the
+  // journalist must choose or provide another cover. The verifier's retryable
+  // outages and stale capabilities leave the Firestore document queued for a
+  // later scheduled drain; this process still attempts each snapshot row once.
+  if (error?.imageQualityFailure === true) return 'failed';
+  if (error?.retryable === true) return 'deferred';
+  return 'failed';
 }
 
 async function processDoc(db, FieldValue, docSnap) {
@@ -587,6 +605,12 @@ async function processDoc(db, FieldValue, docSnap) {
       console.error(`  🛑 ${docId}: registrazione interrotta / lock di registrazione — fatale, il ciclo si ferma qui (il documento resta queued)`);
       throw err;
     }
+    const disposition = classifyJournalistPublishError(err);
+    if (disposition === 'deferred') {
+      const message = err instanceof Error ? err.message : String(err);
+      console.warn(`  ⏳ ${docId}: verifier/copertina temporaneamente indisponibile — resta queued per un prossimo drain: ${message}`);
+      return { ok: false, deferred: true };
+    }
     const message = err instanceof Error ? err.message : String(err);
     console.error(`  ❌ ${docId} failed: ${message}`);
     try {
@@ -618,6 +642,7 @@ async function main() {
 
   let published = 0;
   let failed = 0;
+  let deferred = 0;
   const publishedIds = [];
   const publishedDocs = [];
   const requeuedIds = [];
@@ -642,6 +667,8 @@ async function main() {
         const id = result.id || docSnap.id;
         publishedIds.push(id);
         publishedDocs.push({ docRef: docSnap.ref, id });
+      } else if (result.deferred) {
+        deferred += 1;
       } else {
         failed += 1;
       }
@@ -701,7 +728,7 @@ async function main() {
     }
   }
 
-  console.log(`[publish-journalist-article] done — published=${published} failed=${failed}`);
+  console.log(`[publish-journalist-article] done — published=${published} failed=${failed} deferred=${deferred}`);
 }
 
 const invokedDirectly = (() => {

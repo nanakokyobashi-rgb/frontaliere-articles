@@ -45472,6 +45472,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'frontaliere-formazione-riqualifica-2026',
+ category: 'pratico',
+ date: '2026-10-19T04:51:34.351Z',
+ image: '/images/blog/article-frontaliere-formazione-riqualifica-2026.webp',
+ hasCalculator: true,
+ articleType: 'evergreen',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

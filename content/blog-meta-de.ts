@@ -13491,6 +13491,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.como-manifestazioni-24-ottobre.title': 'Como, zwei Demonstrationen: eine friedliche, die andere riskante',
     'blog.article.como-manifestazioni-24-ottobre.excerpt': 'Für den 24. Oktober soll es zwei mögliche Demonstrationen geben Eine davon ist studentischer Art, mit ordnungsgemäßen Genehmigungen und friedlichen Absichten Die andere ist mit Befürchtungen verbunden',
     'blog.article.como-manifestazioni-24-ottobre.imageAlt': 'Stadtansicht von Mendrisio an einem Herbsttag',
+    'blog.article.frontaliere-formazione-riqualifica-2026.title': 'Grenzgänger Berufsausbildung Umschulung Kurse 2026 innerhalb von 20 km',
+    'blog.article.frontaliere-formazione-riqualifica-2026.excerpt': 'Praktischer Leitfaden für die Berufsausbildung und Umschulungskurse für Grenzgänger im Jahr 2026, mit Fokus innerhalb von 20 km und Bewertung der Rückkehr.',
+    'blog.article.frontaliere-formazione-riqualifica-2026.imageAlt': 'Berufsbildungszentrum im Tessin für Kurse und Umschulung',
 };
 
 export default blogMetaDe;

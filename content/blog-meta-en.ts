@@ -13492,6 +13492,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.como-manifestazioni-24-ottobre.title': 'Como, two demonstrations: one peaceful, the other at risk',
     'blog.article.como-manifestazioni-24-ottobre.excerpt': 'Two possible demonstrations are reportedly being organized for October 24 One is a student demonstration, with permits in order and peaceful aims The other is associated with fears',
     'blog.article.como-manifestazioni-24-ottobre.imageAlt': 'Mendrisio urban scene on an autumn day',
+    'blog.article.frontaliere-formazione-riqualifica-2026.title': 'Frontier vocational training retraining courses 2026 within 20 km',
+    'blog.article.frontaliere-formazione-riqualifica-2026.excerpt': 'Practical guide to vocational training and retraining courses for border workers in 2026, with focus within 20 km and evaluation of return.',
+    'blog.article.frontaliere-formazione-riqualifica-2026.imageAlt': 'Professional training center in Ticino for courses and requalification',
 };
 
 export default blogMetaEn;

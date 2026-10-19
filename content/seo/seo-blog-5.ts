@@ -111938,6 +111938,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frontaliere-formazione-riqualifica-2026': {
+    title: 'Frontaliere formazione professionale riqualifica corsi 2026 entro 20 km',
+    description: 'Guida alla formazione professionale e corsi di riqualifica per frontalieri nel 2026 entro 20 km dal confine: analisi, scenari e ritorno pratico.',
+    keywords: 'frontalieri, ticino, svizzera, italia, formazione, professionale, riqualifica, corsi',
+    ogTitle: 'Formazione Professionale e Riqualifica per Frontalieri nel 2026',
+    ogDescription: 'Scopri come scegliere i corsi di formazione e riqualifica professionale nel 2026 per i frontalieri che lavorano in Ticino, con focus entro 20 km e valutazione del ritorno pratico.',
+    canonicalPath: '/articoli-frontaliere/frontaliere-formazione-riqualifica-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontaliere formazione professionale riqualifica corsi 2026 entro 20 km",
+      "description": "Guida alla formazione professionale e corsi di riqualifica per frontalieri nel 2026 entro 20 km dal confine: analisi, scenari e ritorno pratico.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-frontaliere-formazione-riqualifica-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centro di formazione professionale in Ticino per corsi e riqualifica"
+      },
+      "datePublished": "2026-10-19T04:51:34+00:00",
+      "dateModified": "2026-10-19T04:51:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontaliere-formazione-riqualifica-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

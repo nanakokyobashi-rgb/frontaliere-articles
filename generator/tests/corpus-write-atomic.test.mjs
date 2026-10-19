@@ -56,6 +56,7 @@ const CHOKE_POINTS = [
   ['generator/scripts/backfill-article-cantons.mjs', 'nessun workflow: backfill one-shot del campo canton lanciato a mano'],
   ['generator/scripts/backfill-article-type.mjs', 'nessun workflow: backfill one-shot del campo articleType lanciato a mano'],
   ['generator/scripts/lib/article-registry-image.mjs', 'regenerate-queued-covers.yml'],
+  ['generator/scripts/lib/daily-brief-image.mjs', 'generate-daily-brief.yml'],
   ['generator/scripts/regenerate-queued-covers.mjs', 'regenerate-queued-covers.yml'],
 ];
 
@@ -226,11 +227,20 @@ for (const [rel, workflow] of CHOKE_POINTS) {
       `${rel}: writeFileSync non deve risolvere inline il path finale: `
       + 'quel path va raggiunto solo via renameSync');
 
-    assert.match(src, /writeFileSync\(\s*tmp\s*,/,
-      `${rel}: writeFileSync deve scrivere sul temp`);
+    const descriptor = src.match(/\b([A-Za-z_$][\w$]*)\s*=\s*fs\.openSync\(tmp,\s*['"]wx['"]\)/u)?.[1];
+    const writesTemporaryFile = /writeFileSync\(\s*tmp\s*,/u.test(src)
+      || Boolean(descriptor && new RegExp(`writeFileSync\\(\\s*${descriptor}\\s*,`).test(src));
+    assert.ok(writesTemporaryFile,
+      `${rel}: writeFileSync deve scrivere sul temp o sul descriptor aperto con wx`);
+    if (descriptor) {
+      assert.match(src, /openSync\(tmp,\s*['"]wx['"]\)[\s\S]{0,100}created\s*=\s*true;[\s\S]{0,100}writeFileSync\(/u,
+        `${rel}: il temp va marcato creato prima che la scrittura possa fallire`);
+      assert.match(src, new RegExp(`closeSync\\(\\s*${descriptor}\\s*\\)[\\s\\S]{0,100}renameSync\\(\\s*tmp\\s*,`),
+        `${rel}: il descriptor va chiuso prima del rename atomico`);
+    }
     assert.match(src, new RegExp(`renameSync\\(\\s*tmp\\s*,\\s*${target}\\s*\\)`),
       `${rel}: il commit sul path finale deve passare da renameSync(tmp, ${target})`);
-    assert.match(src, /catch[\s\S]{0,120}unlinkSync\(\s*tmp\s*\)/,
+    assert.match(src, /catch[\s\S]{0,240}unlinkSync\(\s*tmp\s*\)/,
       `${rel}: il fallimento deve ripulire il temp prima di rilanciare`);
   });
 }

@@ -18,11 +18,16 @@ import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mj
 import { findSeoEntryMatches, removeSeoEntriesFromSource } from '../../engine/shared/seo-entry.mjs';
 import { unescapeTsString, tsStringEscapesWithNewlineAs } from './lib/unescape-ts-string.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
-import { imageRecordForPath, STATIC_FALLBACK_IMAGE } from './lib/blog-image-registry.mjs';
+import { imageRecordForPath } from './lib/blog-image-registry.mjs';
 import { buildSeoEntry, insertSeoEntriesAtHead, removeSeoEntriesWithSeparator, toIsoWithTz } from './lib/seo-entry-builder.mjs';
 import { mergeQueueWithSnapshot } from './lib/seo-recovery-queue.mjs';
 import { deriveSeoMetadata } from './lib/seo-metadata-derivation.mjs';
-import { queueArticleCoverRegeneration, resolveArticleCoverFallback } from './lib/article-cover-fallback.mjs';
+import {
+  ARTICLE_COVER_FALLBACK_ERROR_CODES,
+  queueArticleCoverRegeneration,
+  resolveArticleCoverFallback,
+  verifyCatalogFallbackCandidates,
+} from './lib/article-cover-fallback.mjs';
 import { updateArticleImageInRegistry } from './lib/article-registry-image.mjs';
 import { withImageRegenerationQueueLock } from './lib/image-regeneration-queue.mjs';
 import {
@@ -143,11 +148,10 @@ function imageProvenance(registryEntry) {
   return governed ? { ...governed, imagePath: registryEntry.image } : null;
 }
 
-function buildArticle(registryEntry, meta, slugs) {
+function buildRecoveryData(registryEntry, meta, slugs) {
   const localized = valuesForArticle(meta, registryEntry.id);
   const localizedSlugs = slugs[registryEntry.id];
   if (!localizedSlugs) throw new Error(`${registryEntry.id}: localized slugs missing from ${ROUTER_FILE}`);
-  const declaredProvenance = imageProvenance(registryEntry);
   const data = {
     id: registryEntry.id,
     category: registryEntry.category,
@@ -169,19 +173,35 @@ function buildArticle(registryEntry, meta, slugs) {
     },
     _generatedImagePath: registryEntry.image,
   };
-  let provenance = declaredProvenance;
+  // The body excerpt is persisted source material. Include it in the fresh
+  // visual verification context so the fallback cannot be inferred from an
+  // opaque filename or article id alone.
+  Object.defineProperty(data, 'imagePrompt', {
+    value: [data.content.it.title, data.content.it.excerpt].filter(Boolean).join('\n'),
+    configurable: true,
+  });
+  return data;
+}
+
+function buildArticle(registryEntry, meta, slugs, fallbackPlan) {
+  const data = buildRecoveryData(registryEntry, meta, slugs);
+  let provenance = imageProvenance(registryEntry);
   let fallback = false;
   if (!provenance) {
-    const resolution = resolveArticleCoverFallback(data, {
+    if (fallbackPlan?.error) throw fallbackPlan.error;
+    if (!fallbackPlan?.verifiedCatalogImage) {
+      const error = new Error(`${registryEntry.id}: no governed cover or verified relevant catalog candidate`);
+      error.code = ARTICLE_COVER_FALLBACK_ERROR_CODES.NO_RELEVANT_CANDIDATE;
+      error.retryable = true;
+      throw error;
+    }
+    resolveArticleCoverFallback(data, {
       root: ROOT,
-      findCatalogImage: () => null,
+      verifiedCatalogImage: fallbackPlan.verifiedCatalogImage,
       reason: 'declared cover has no governed provenance record',
     });
-    if (resolution.source !== 'static' || resolution.path !== STATIC_FALLBACK_IMAGE) {
-      throw new Error(`${registryEntry.id}: unexpected cover fallback ${resolution.path}`);
-    }
-    provenance = imageRecordForPath(ROOT, data._generatedImagePath, { strict: true });
-    if (!provenance) throw new Error(`${registryEntry.id}: governed static fallback has no licence record`);
+    provenance = imageProvenance({ image: data._generatedImagePath });
+    if (!provenance) throw new Error(`${registryEntry.id}: visually verified catalog cover lost its provenance`);
     fallback = true;
   }
   deriveSeoMetadata(data);
@@ -203,18 +223,72 @@ function buildArticle(registryEntry, meta, slugs) {
   };
 }
 
-function buildEntries(ids) {
+function buildEntries(ids, fallbackPlans = new Map()) {
   const registry = parseRegistry();
   const meta = parseMeta();
   const slugs = parseSlugs();
-  return ids.map((id) => {
+  const entries = [];
+  const blockedEntries = [];
+  for (const id of ids) {
     const registryEntry = registry.get(id);
-    if (!registryEntry) throw new Error(`${id}: registry entry missing`);
-    return buildArticle(registryEntry, meta, slugs);
-  });
+    if (!registryEntry) {
+      blockedEntries.push({ id, code: 'SEO_RECOVERY_REGISTRY_ENTRY_MISSING', retryable: false, reason: `${id}: registry entry missing` });
+      continue;
+    }
+    try {
+      entries.push(buildArticle(registryEntry, meta, slugs, fallbackPlans.get(id)));
+    } catch (error) {
+      blockedEntries.push({
+        id,
+        code: String(error?.code || 'SEO_RECOVERY_ENTRY_FAILED'),
+        retryable: error?.retryable !== false,
+        reason: String(error?.message || error).replace(/\s+/g, ' ').slice(0, 240),
+        nextAction: error?.code === ARTICLE_COVER_FALLBACK_ERROR_CODES.VERIFICATION_UNAVAILABLE
+          ? 'Retry this ID through recover-seo-orphans after the image verifier is available.'
+          : 'Provide a context-matched governed article hero, then rerun this ID through recover-seo-orphans.',
+      });
+    }
+  }
+  return { entries, blockedEntries };
 }
 
-function summarizeEntries(entries) {
+async function prepareFallbackPlans(ids) {
+  const registry = parseRegistry();
+  const meta = parseMeta();
+  const slugs = parseSlugs();
+  const plans = new Map();
+  const entriesNeedingFallback = ids.filter((id) => {
+    const registryEntry = registry.get(id);
+    return registryEntry && !imageProvenance(registryEntry);
+  });
+  if (entriesNeedingFallback.length === 0) return plans;
+
+  let findBestFallbackImages;
+  try {
+    ({ findBestFallbackImages } = await import('./create-article.mjs'));
+  } catch (error) {
+    for (const id of entriesNeedingFallback) plans.set(id, { error });
+    return plans;
+  }
+
+  for (const id of entriesNeedingFallback) {
+    try {
+      const registryEntry = registry.get(id);
+      const data = buildRecoveryData(registryEntry, meta, slugs);
+      const candidates = findBestFallbackImages(data);
+      const verifiedCatalogImage = await verifyCatalogFallbackCandidates(data, {
+        root: ROOT,
+        findCatalogImages: () => candidates,
+      });
+      plans.set(id, { verifiedCatalogImage });
+    } catch (error) {
+      plans.set(id, { error });
+    }
+  }
+  return plans;
+}
+
+function summarizeEntries(entries, blockedEntries = []) {
   const provenanceCounts = {};
   for (const { provenance } of entries) provenanceCounts[provenance.kind] = (provenanceCounts[provenance.kind] || 0) + 1;
   const fallbackEntries = entries.filter((entry) => entry.fallback);
@@ -225,14 +299,19 @@ function summarizeEntries(entries) {
     fallbackEntries,
     fallbackIds,
     declaredImageCount: entries.length - fallbackEntries.length,
+    blockedEntries,
   };
 }
 
-function run(idsFile, { dryRun = false } = {}) {
+async function run(idsFile, { dryRun = false } = {}) {
   const ids = parseIds(idsFile);
+  // Legacy article-image records are verified before any shared lock is held.
+  // The capability is checked again against the current bytes and article
+  // context after the locks are acquired, so a concurrent edit cannot reuse it.
+  const fallbackPlans = await prepareFallbackPlans(ids);
   if (dryRun) {
-    const entries = buildEntries(ids);
-    const summary = summarizeEntries(entries);
+    const { entries, blockedEntries } = buildEntries(ids, fallbackPlans);
+    const summary = summarizeEntries(entries, blockedEntries);
     console.log(JSON.stringify({
       dryRun: true,
       ids: ids.length,
@@ -241,8 +320,8 @@ function run(idsFile, { dryRun = false } = {}) {
       provenanceCounts: summary.provenanceCounts,
       declaredImageCount: summary.declaredImageCount,
       fallbackImageCount: summary.fallbackEntries.length,
-      fallbackImage: STATIC_FALLBACK_IMAGE,
       fallbackIds: summary.fallbackIds,
+      blockedEntries: summary.blockedEntries,
     }, null, 2));
     return;
   }
@@ -276,23 +355,32 @@ function run(idsFile, { dryRun = false } = {}) {
       });
       registrationLockHeld = true;
 
-      // All registry/meta/slug reads and provenance checks must happen after
-      // both shared locks. Otherwise a refresh or cover drain can publish a
-      // newer image/meta snapshot which this recovery would later overwrite.
-      const entries = buildEntries(ids);
-      summary = summarizeEntries(entries);
+      // Re-read registry/meta/slugs under both locks. The fallback capability
+      // was verified before locking, then the resolver rechecks its asset hash
+      // and exact article-visual context against these current values.
+      const { entries, blockedEntries } = buildEntries(ids, fallbackPlans);
+      summary = summarizeEntries(entries, blockedEntries);
       const { fallbackEntries, fallbackIds } = summary;
       const before = fs.readFileSync(seoPath, 'utf8');
       const registryBefore = fs.readFileSync(registryPath, 'utf8');
 
+      if (entries.length === 0) {
+        endSeoBackfillLock(ROOT);
+        seoLockHeld = false;
+        endRegisterLock(ROOT, 'frontaliere');
+        registrationLockHeld = false;
+        return queueSnapshot;
+      }
+
       for (const { data } of fallbackEntries) {
-        const update = updateArticleImageInRegistry(ROOT, data.id, STATIC_FALLBACK_IMAGE);
+        const update = updateArticleImageInRegistry(ROOT, data.id, data._generatedImagePath);
         if (update.nextText === undefined) throw new Error(`${data.id}: registry image update returned no text`);
         if (update.changed) written.record(registryPath, registryBefore, update.nextText);
       }
 
       let after = before;
-      for (const id of ids) {
+      const idsToWrite = entries.map(({ data }) => data.id);
+      for (const id of idsToWrite) {
         const removal = removeSeoEntriesWithSeparator(after, id, {
           findSeoEntryMatches,
           removeSeoEntriesFromSource,
@@ -306,7 +394,7 @@ function run(idsFile, { dryRun = false } = {}) {
         seoConstName: SEO_CONST_NAME,
         fileLabel: SEO_FILE,
       });
-      const invalidAfterWrite = ids.filter((id) => seoEntryCountAcrossChunks(ROOT, id, {
+      const invalidAfterWrite = idsToWrite.filter((id) => seoEntryCountAcrossChunks(ROOT, id, {
         replacementPath: seoPath,
         replacementSource: after,
       }) !== 1);
@@ -330,9 +418,11 @@ function run(idsFile, { dryRun = false } = {}) {
         write(merged);
         recordQueue();
       }
-      const missingQueueItems = fallbackIds.filter((id) => !merged.items.some(
-        (item) => item?.articleId === id && item.fallbackImage === STATIC_FALLBACK_IMAGE,
-      ));
+      const missingQueueItems = fallbackEntries
+        .filter(({ data }) => !merged.items.some(
+          (item) => item?.articleId === data.id && item.fallbackImage === data._generatedImagePath,
+        ))
+        .map(({ data }) => data.id);
       if (missingQueueItems.length > 0) {
         throw new Error(`cover regeneration queue missing: ${missingQueueItems.join(', ')}`);
       }
@@ -381,10 +471,10 @@ function run(idsFile, { dryRun = false } = {}) {
     provenanceCounts: summary.provenanceCounts,
     declaredImageCount: summary.declaredImageCount,
     fallbackImageCount: summary.fallbackEntries.length,
-    fallbackImage: STATIC_FALLBACK_IMAGE,
     fallbackIds: summary.fallbackIds,
     queuedCoverRegenerations: summary.fallbackIds.length,
     queueItemsAfterRecovery: queue.items.length,
+    blockedEntries: summary.blockedEntries,
   }, null, 2));
 }
 
@@ -405,6 +495,9 @@ if (invokedDirectly) {
     console.error('Uso: node generator/scripts/recover-seo-orphans.mjs --ids-file /path/to/ids.txt [--dry-run]');
     process.exitCode = 2;
   } else {
-    run(path.resolve(args[idsFlag + 1]), { dryRun });
+    run(path.resolve(args[idsFlag + 1]), { dryRun }).catch((error) => {
+      console.error(error.message || error);
+      process.exitCode = 1;
+    });
   }
 }
