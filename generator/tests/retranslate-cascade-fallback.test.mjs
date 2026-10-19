@@ -98,6 +98,52 @@ test('il primo fallback locale usa il tentativo successivo nel report', async ()
   ]);
 });
 
+test('il fallback locale mantiene tentativi contigui sui segmenti del campo', async () => {
+  const source = ['Prima sezione.', '## In breve', 'Seconda sezione.'].join('\n');
+  const run = async ({ retryFirstSegment = false } = {}) => {
+    const outcome = { tierAttempts: [], attempt: 3 };
+    let codexCalls = 0;
+    const translate = engineTranslator('cascade', {
+      codexCall: async () => 'unused transport stub',
+      cascadeTranslate: async () => '',
+      codexTranslate: async ({ text }) => {
+        codexCalls += 1;
+        if (retryFirstSegment && codexCalls === 1) throw new Error('timeout');
+        return `Tradotto: ${text}`;
+      },
+      codexRetryBackoffMs: [0, 0],
+      codexRetrySleep: async () => {},
+    });
+    const translated = await translateFieldFreeMt({
+      text: source,
+      sourceLang: 'it',
+      targetLang: 'fr',
+      fieldType: 'description',
+      translationOutcome: outcome,
+      translate,
+    });
+    return { outcome, translated };
+  };
+
+  const first = await run();
+  assert.ok(first.translated);
+  assert.deepEqual(first.outcome.tierAttempts.map(({ attempt, status }) => ({ attempt, status })), [
+    { attempt: 4, status: 'success' },
+    { attempt: 5, status: 'success' },
+  ]);
+  assert.equal(summarizeTranslationOutcome(first.outcome).attempts, 5);
+  assert.equal(first.outcome.attempt, 5);
+
+  const retried = await run({ retryFirstSegment: true });
+  assert.deepEqual(retried.outcome.tierAttempts.map(({ attempt, status }) => ({ attempt, status })), [
+    { attempt: 4, status: 'failed' },
+    { attempt: 5, status: 'success' },
+    { attempt: 6, status: 'success' },
+  ]);
+  assert.equal(summarizeTranslationOutcome(retried.outcome).attempts, 6);
+  assert.equal(retried.outcome.attempt, 6);
+});
+
 test('una cascata riuscita non spende il fallback Codex locale', async () => {
   let codexCalls = 0;
   const translate = engineTranslator('cascade', {

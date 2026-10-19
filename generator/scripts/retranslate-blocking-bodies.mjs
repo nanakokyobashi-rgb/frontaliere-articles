@@ -2517,15 +2517,16 @@ export function engineTranslator(engine, {
   codexRetryBackoffMs = parseCodexRetryBackoff(),
   codexRetrySleep = sleepCodexRetry,
 } = {}) {
+  const nextLocalAttempt = (outcome) => Number.isInteger(outcome?.attempt) && outcome.attempt > 0
+    ? outcome.attempt + 1
+    : 1;
   const runLocalCodex = async (args, provider) => {
     args._outcome ??= { tierAttempts: [] };
     const outcome = args._outcome;
-    // A field can call this once per template-heading segment. The previous
-    // return already advances `outcome.attempt` to the next number, so adding
-    // one here created gaps and overstated the field's report.
-    const baseAttempt = Number.isInteger(outcome?.attempt) && outcome.attempt > 0
-      ? outcome.attempt
-      : 1;
+    // `outcome.attempt` is the last attempt already spent. Each local call
+    // starts at the next number and returns with the number it just spent, so
+    // the following template-heading segment advances exactly once.
+    const baseAttempt = nextLocalAttempt(outcome);
     if (args?._outcome) args._outcome.attempt = baseAttempt;
     for (;;) {
       const attempt = Number.isInteger(args?._outcome?.attempt) && args._outcome.attempt > 0
@@ -2556,7 +2557,7 @@ export function engineTranslator(engine, {
           reasons,
           message: out ? '' : codexFailureDiagnostic(null, reasons[0]),
         });
-        if (args?._outcome) args._outcome.attempt = attempt + 1;
+        if (args?._outcome) args._outcome.attempt = attempt;
         return out;
       } catch (error) {
         const reason = codexFailureReason(error);
@@ -2585,9 +2586,11 @@ export function engineTranslator(engine, {
       const out = await cascadeTranslate(args);
       if (out) return out;
       if (typeof codexCall !== 'function') {
+        const attempt = nextLocalAttempt(args?._outcome);
+        if (args?._outcome) args._outcome.attempt = attempt;
         recordTranslationProviderAttempt(args?._outcome, {
           provider: 'codex-local-fallback',
-          attempt: Number.isInteger(args?._outcome?.attempt) ? args._outcome.attempt + 1 : 1,
+          attempt,
           status: 'failed',
           reasons: ['router-unconfigured'],
         });
