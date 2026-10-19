@@ -239,6 +239,16 @@
       }
     },
     {
+      "path": "scripts/ci/fast-publish-apex-verification.sh",
+      "mode": "corpus-only",
+      "reason": "Helper del workflow fast-publish-article che contiene la verifica apex e il retry della purge, estratto dal run scalar per restare sotto il limite di 21.000 byte di GitHub Actions. E' usato solo dal publisher del corpus e il sito non possiede questo percorso di pubblicazione, quindi resta corpus-only.",
+      "baseline": {
+        "site": null,
+        "corpus": "d3504a694b79c58e",
+        "alignedAt": "2026-10-19"
+      }
+    },
+    {
       "path": "scripts/ci/section-bootstrap-lock.mjs",
       "mode": "corpus-only",
       "reason": "Acquisisce e rilascia il lock R2 breve che coordina il bootstrap HTML di una sezione live con il flip del registry API/edge; il sito consuma soltanto la release risultante e non possiede il publisher o il suo workflow.",
