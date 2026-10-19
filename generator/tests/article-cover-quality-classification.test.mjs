@@ -95,7 +95,7 @@ test('the top-level catch has a declared exit for retryable cover failures', () 
   assert.match(
     SRC,
     /if \(isRetryableArticleCoverError\(e\)\) \{[\s\S]*?EXIT_NO_ARTICLE_DECLARED/,
-    'il guasto del verifier cover non deve ricadere sull\\'exit 1 generico',
+    'il guasto del verifier cover non deve ricadere sull\'exit 1 generico',
   );
 });
 
