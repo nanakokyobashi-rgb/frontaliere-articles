@@ -4713,9 +4713,14 @@ function sourceItalianWordsByTarget(itBody) {
 }
 
 function isItalianNavLabel(label, target, sourceWordsByTarget, locale) {
+  const normalized = normalizeNavLinkLabel(label);
+  const normalizedLabelWords = normalizedWords(label, locale);
+  const canonical = NAV_LINK_LABELS[normalized];
+  if (canonical && normalizeNavLinkLabel(canonical[locale]) === normalized) return false;
+  if (canonical && normalizedLabelWords.length > 0) return true;
   if (italianWords(label, locale).size) return true;
   const sourceWords = sourceWordsByTarget.get(target);
-  return Boolean(sourceWords?.size && normalizedWords(label, locale).some((word) => sourceWords.has(word)));
+  return Boolean(sourceWords?.size && normalizedLabelWords.some((word) => sourceWords.has(word)));
 }
 
 /**

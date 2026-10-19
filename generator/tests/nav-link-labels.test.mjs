@@ -73,9 +73,9 @@ function countItalianNavLabels(locale, relativeRoot) {
 }
 
 const CONTENT_BASELINE = Object.freeze({
-  de: Object.freeze({ blogBody: 1311, blogBodyCh: 3497 }),
-  fr: Object.freeze({ blogBody: 1237, blogBodyCh: 2414 }),
-  en: Object.freeze({ blogBody: 1245, blogBodyCh: 2436 }),
+  de: Object.freeze({ blogBody: 1398, blogBodyCh: 3599 }),
+  fr: Object.freeze({ blogBody: 1319, blogBodyCh: 2518 }),
+  en: Object.freeze({ blogBody: 1356, blogBodyCh: 2536 }),
 });
 
 test('sostituisce una label italiana e lascia invariato il target completo', () => {
@@ -165,7 +165,7 @@ test('una label italiana sconosciuta resta e viene segnalata', () => {
 });
 
 test('non traduce sigle o nomi propri senza parole italiane', () => {
-  const source = '[LAMal](nav:health) [Brogeda](nav:border)';
+  const source = '[XYZ](nav:health) [Brogeda](nav:border)';
   assert.equal(localizeNavLinkLabels(source, 'en'), source);
 });
 
@@ -176,8 +176,31 @@ test('la guardia individua anche una label italiana di una sola parola', () => {
   ]);
 });
 
+test('le voci della mappa senza parole dell allowlist vengono localizzate', () => {
+  const cases = [
+    ['assistenza legale', { de: 'Rechtliche Unterstützung', fr: 'Assistance juridique', en: 'Legal assistance' }],
+    ['cantone ticino', { de: 'Kanton Tessin', fr: 'canton du Tessin', en: 'Ticino canton' }],
+    ['imposta alla fonte', { de: 'Quellensteuer', fr: 'impôt à la source', en: 'withholding tax' }],
+  ];
+  for (const [label, translations] of cases) {
+    for (const [locale, translation] of Object.entries(translations)) {
+      assert.equal(
+        localizeNavLinkLabels(`[${label}](nav:calculator)`, locale),
+        `[${translation}](nav:calculator)`,
+        `${label} (${locale})`,
+      );
+    }
+  }
+});
+
+test('una sigla uguale nella lingua target non viene segnalata come italiana', () => {
+  const source = '[AVS](nav:pension)';
+  assert.equal(localizeNavLinkLabels(source, 'fr'), source);
+  assert.deepEqual(findItalianNavLinkLabels(source, 'fr'), []);
+});
+
 test('domini e URL non sono italiani, ma le parole italiane fuori dal dominio sì', () => {
-  const domains = ['trasporti.ch', 'www.frontaliere.ch', 'frontalieri-supsi.ch'];
+  const domains = ['trasporti.ch', 'www.frontaliere.ch', 'frontalieri-supsi.ch', 'www.caseificiaperti.ch'];
   for (const domain of domains) {
     assert.deepEqual(
       findItalianNavLinkLabels(`[${domain}](nav:transport)`, 'en'),
@@ -220,6 +243,10 @@ test('i nomi ufficiali riconosciuti non contano le loro parole italiane', () => 
 test('il marchio non rende italiana una label inglese, ma non nasconde l’italiano fuori dal marchio', () => {
   assert.deepEqual(
     findItalianNavLinkLabels('[Frontaliere Ticino calculator](nav:calculator)', 'en'),
+    [],
+  );
+  assert.deepEqual(
+    findItalianNavLinkLabels('[Frontaliere Ticino](nav:calculator)', 'en'),
     [],
   );
   for (const brand of ['FRONTALIERETICINO', 'frontaliereticino.ch']) {

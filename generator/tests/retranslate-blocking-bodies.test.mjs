@@ -83,6 +83,10 @@ import {
   processPair,
   summarizeEmptyCascadeProviders,
 } from '../scripts/retranslate-blocking-bodies.mjs';
+import {
+  findItalianNavLinkLabels,
+  localizeNavLinkLabels,
+} from '../../scripts/lib/nav-link-labels.mjs';
 import { diffIsExactlyRemovedLines } from '../scripts/lib/strip-leaked-title-marker.mjs';
 // Dal modulo corpus-only, NON da `lib/article-sanitizers.mjs`: quello e'
 // `identical` nel manifest del ciclo e un export aggiunto dal corpus lo
@@ -851,6 +855,44 @@ test('translationSanityIssue rifiuta una label nav italiana anche sotto le tre r
   });
 
   assert.equal(issue, 'italian-nav-label: body1 [calcolatore sconosciuto](nav:ral)');
+});
+
+test('localizzazione, scan e guardia condividono il verdetto sulle voci della mappa', () => {
+  const cases = [
+    ['assistenza legale', 'Assistance juridique'],
+    ['cantone ticino', 'canton du Tessin'],
+    ['imposta alla fonte', 'impôt à la source'],
+  ];
+  for (const [label, translation] of cases) {
+    const source = `[${label}](nav:calculator)`;
+    const localized = localizeNavLinkLabels(source, 'fr');
+    assert.equal(localized, `[${translation}](nav:calculator)`, label);
+    assert.equal(findItalianNavLinkLabels(source, 'fr').length, 1, label);
+    assert.equal(
+      translationSanityIssue({
+        oldSections: {},
+        newSections: { body1: source },
+        italianSections: {},
+        locale: 'fr',
+      }),
+      `italian-nav-label: body1 ${source}`,
+      label,
+    );
+    assert.equal(findItalianNavLinkLabels(localized, 'fr').length, 0, label);
+  }
+
+  const acronym = '[AVS](nav:pension)';
+  assert.equal(localizeNavLinkLabels(acronym, 'fr'), acronym);
+  assert.deepEqual(findItalianNavLinkLabels(acronym, 'fr'), []);
+  assert.equal(
+    translationSanityIssue({
+      oldSections: {},
+      newSections: { body1: acronym },
+      italianSections: {},
+      locale: 'fr',
+    }),
+    null,
+  );
 });
 
 test('lo scan ignora heading localizzati in blockquote, lista e forma Setext', () => {
