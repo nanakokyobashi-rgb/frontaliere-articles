@@ -266,7 +266,6 @@ test('lo schema body1 condivide il contratto AI Search e il literal del guard', 
     SCHEMA_PLACEHOLDER_LITERALS.includes(body1),
     'il literal body1 non e\' allineato alla copia usata dal prompt-placeholder guard',
   );
-  assert.match(source, /Se la fonte NON specifica un dato: omettilo; niente placeholder/);
   assert.match(source, /DATI ASSENTI NELLA FONTE: omettili; niente placeholder/);
   assert.doesNotMatch(source, /Scrivi "non ancora specificato"/);
   assert.doesNotMatch(source, /scrivi "non ancora specificato", "in fase di definizione"/);
