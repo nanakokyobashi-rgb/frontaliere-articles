@@ -86,6 +86,19 @@ export function flattenWorkflowRunPages(pages) {
   ));
 }
 
+/** Accept only a range whose Actions fallback is proven to be an ancestor. */
+export function compareProvesAncestor(range, comparison) {
+  const mergeBase = comparison?.merge_base_commit?.sha ?? comparison?.merge_base_commit;
+  return isFullSha(range?.before)
+    && isFullSha(range?.after)
+    && range.before !== range.after
+    && comparison?.status === 'ahead'
+    && Number.isInteger(comparison?.ahead_by)
+    && comparison.ahead_by > 0
+    && comparison?.behind_by === 0
+    && mergeBase === range.before;
+}
+
 function readApiJson(endpoint, query = null) {
   const args = ['api', endpoint];
   if (query !== null) args.push('--jq', query);
@@ -133,6 +146,14 @@ function main() {
       workflowRuns,
       workflowRunId,
     });
+    if (range) {
+      const comparison = readApiJson(
+        `repos/${repo}/compare/${range.before}...${range.after}`,
+        '{status, ahead_by, behind_by, total_commits, merge_base_commit: .merge_base_commit.sha}',
+      );
+      if (!compareProvesAncestor(range, comparison)) range = null;
+      else range = { ...range, source: 'workflow-history+compare' };
+    }
   }
   if (!range) {
     throw new Error(`before della push originaria non trovato per workflow_run head ${headSha}`);

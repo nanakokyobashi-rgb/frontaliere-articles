@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
 import {
+  compareProvesAncestor,
   flattenWorkflowRunPages,
   resolvePushRange,
 } from '../../scripts/ci/resolve-workflow-run-push-range.mjs';
@@ -71,9 +72,33 @@ test('workflow_run push range: conserva tutte le pagine della cronologia Actions
   });
 });
 
+test('workflow_run push range: accetta il fallback solo con una prova compare di ancestry', () => {
+  const range = { before: BEFORE, after: HEAD };
+  assert.equal(compareProvesAncestor(range, {
+    status: 'ahead',
+    ahead_by: 1,
+    behind_by: 0,
+    merge_base_commit: BEFORE,
+  }), true);
+  assert.equal(compareProvesAncestor(range, {
+    status: 'ahead',
+    ahead_by: 1,
+    behind_by: 1,
+    merge_base_commit: BEFORE,
+  }), false);
+  assert.equal(compareProvesAncestor(range, {
+    status: 'ahead',
+    ahead_by: 1,
+    behind_by: 0,
+    merge_base_commit: OTHER,
+  }), false);
+});
+
 test('fast-publish-section: non usa l endpoint inesistente per gli eventi del commit', () => {
   assert.match(workflow, /resolve-workflow-run-push-range\.mjs/);
   assert.match(resolver, /actions\/workflows\/publish-api\.yml\/runs/);
+  assert.match(resolver, /compare\/\$\{range\.before\}\.\.\.\$\{range\.after\}/);
+  assert.match(resolver, /merge_base_commit: \.merge_base_commit\.sha/);
   assert.match(resolver, /WORKFLOW_RUN_PAGE_SIZE = 100/);
   assert.match(resolver, /per_page=\$\{WORKFLOW_RUN_PAGE_SIZE\}&page=\$\{page\}/);
   assert.doesNotMatch(workflow, /commits\/\$WORKFLOW_RUN_HEAD_SHA\/events/);
