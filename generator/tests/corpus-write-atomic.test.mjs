@@ -150,6 +150,9 @@ const NOT_WORKFLOW_DRIVEN = [
   'generator/scripts/repair-mangled-chars.mjs',
   'generator/scripts/repair-prompt-placeholders.mjs',
   'generator/scripts/repair-source-echo.mjs',
+  // Backfill deterministico manuale delle label `nav:`: non e' invocato da
+  // workflow e il writer usa comunque lo snapshot atomico condiviso.
+  'generator/scripts/backfill-nav-link-labels.mjs',
 ];
 
 for (const [rel, workflow] of CHOKE_POINTS) {
