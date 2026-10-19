@@ -273,6 +273,60 @@ test('skipped, unavailable, or non-topic vision never grants a fallback token', 
   }
 });
 
+test('mixed local and shared verifier failures stay section-local', async () => {
+  const root = tempRoot();
+  try {
+    const data = article('fallback-mixed-verifier-outcomes', 'Cross-border jobs in Ticino');
+    const records = [0, 1].map((index) => {
+      const record = generatedCatalogRecord();
+      record.assetId = `catalog-fallback-mixed-${index}`;
+      record.imageUrl = `/images/blog/catalog-fallback-mixed-${index}.webp`;
+      const file = path.join(root, 'public', record.imageUrl.slice(1));
+      fs.mkdirSync(path.dirname(file), { recursive: true });
+      fs.writeFileSync(file, Buffer.alloc(record.bytes, 0x47 + index));
+      record.sha256 = sha256File(file);
+      appendGeneratedImageRecord(root, record);
+      return record;
+    });
+    const localFailure = Object.assign(new Error('vision verifier returned an incomplete verdict'), {
+      code: 'IMAGE_VISION_VERDICT_INCOMPLETE',
+      retryable: true,
+    });
+    const sharedFailure = Object.assign(new Error('shared vision provider unavailable'), {
+      sharedProviderUnavailable: true,
+    });
+    let attempts = 0;
+
+    await assert.rejects(verifyCatalogFallbackCandidates(data, {
+      root,
+      findCatalogImages: () => records.map((record) => record.imageUrl),
+      verifyImage: async () => {
+        throw attempts++ === 0 ? localFailure : sharedFailure;
+      },
+    }), (error) => error.code === 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE'
+      && error.retryable === true
+      && error.sharedProviderUnavailable !== true
+      && error.cause === localFailure);
+    assert.equal(attempts, 2);
+
+    attempts = 0;
+    await assert.rejects(verifyCatalogFallbackCandidates(data, {
+      root,
+      findCatalogImages: () => records.map((record) => record.imageUrl),
+      verifyImage: async () => {
+        if (attempts++ === 0) return { ...safeGeneratedVision, is_topic_relevant: false };
+        throw sharedFailure;
+      },
+    }), (error) => error.code === 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE'
+      && error.retryable === true
+      && error.sharedProviderUnavailable !== true
+      && error.cause === sharedFailure);
+    assert.equal(attempts, 2);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('injected verdicts do not poison the production cache, which is keyed by bytes and context', async () => {
   const root = fs.mkdtempSync(path.join(ROOT, '.cover-fallback-cache-test-'));
   const socketPath = path.join(os.tmpdir(), `cover-fallback-vision-${process.pid}-${Date.now()}.sock`);

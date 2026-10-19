@@ -188,7 +188,8 @@ function noVerifiedFallbackError({ data, candidateCount, rejectedCount, transien
   // A shared deferral is valid only when every verifier exception carries the
   // producer-owned shared-provider marker. A mixed local/unclassified failure
   // must stay section-local even if another candidate also hit an outage.
-  const sharedProviderUnavailable = transientErrors.length > 0
+  const sharedProviderUnavailable = rejectedCount === 0
+    && transientErrors.length > 0
     && transientErrors.every((error) => error?.sharedProviderUnavailable === true);
   const transientError = sharedProviderUnavailable
     ? transientErrors[0]
