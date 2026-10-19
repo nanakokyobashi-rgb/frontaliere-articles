@@ -260,6 +260,25 @@ export function shortHeadlineTokenPolicy(token) {
 }
 
 /**
+ * Normalize the optional share threshold without allowing JavaScript's
+ * comparison coercions to turn malformed configuration into a permissive
+ * match. `null` is the fail-closed result for every non-finite or out-of-range
+ * value; callers may still distinguish it from the valid boundary `0`.
+ *
+ * @param {unknown} minShare
+ * @returns {number | null}
+ */
+export function normalizeTitleEvidenceShare(minShare) {
+  if (minShare === undefined) return ITEM_ON_PAGE_MIN_SHARE;
+  return typeof minShare === 'number'
+    && Number.isFinite(minShare)
+    && minShare >= 0
+    && minShare <= 1
+    ? minShare
+    : null;
+}
+
+/**
  * Accept only the documented title-evidence shape before any string coercion.
  * Sparse arrays are invalid too: every declaration must be an actual string.
  *
@@ -339,13 +358,15 @@ export function pageCarriesItem(text, headline, {
   minShare = ITEM_ON_PAGE_MIN_SHARE,
   titleEvidence = '',
 } = {}) {
+  const normalizedMinShare = normalizeTitleEvidenceShare(minShare);
+  if (normalizedMinShare === null) return false;
   if (!validateTitleEvidenceShape(titleEvidence)) return false;
   const words = [...new Set(normalizeItemText(headline).split(' ').filter(shortHeadlineTokenPolicy))];
   if (words.length < 2) return shortHeadlineEvidence(titleEvidence, headline);
   const consistentTitle = selectConsistentTitleEvidence(titleEvidence);
   const page = new Set(normalizeItemText(`${consistentTitle}\n${text}`).split(' '));
   const found = words.filter((w) => page.has(w)).length;
-  return found / words.length >= minShare;
+  return found / words.length >= normalizedMinShare;
 }
 
 // A `<textarea>` or `<title>` is active document content when it appears in

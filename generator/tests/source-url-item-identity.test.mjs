@@ -47,6 +47,7 @@ import {
   checkItemOnPage,
   pageCarriesItem,
   pageTitleEvidence,
+  normalizeTitleEvidenceShare,
   shortHeadlineEvidence,
   shortHeadlineTokenPolicy,
   selectConsistentTitleEvidence,
@@ -321,6 +322,20 @@ test('title evidence rejects unsupported shapes before coercion', () => {
   assert.equal(selectConsistentTitleEvidence(throwingObject), '');
   assert.equal(pageCarriesItem('', matching, { titleEvidence: [[matching]] }), false);
   assert.equal(pageCarriesItem('', matching, { titleEvidence: throwingObject }), false);
+});
+
+test('pageCarriesItem rejects non-finite or out-of-range evidence thresholds', () => {
+  assert.equal(normalizeTitleEvidenceShare(undefined), 0.6);
+  assert.equal(normalizeTitleEvidenceShare(0), 0);
+  assert.equal(normalizeTitleEvidenceShare(1), 1);
+  for (const invalid of [NaN, Infinity, -Infinity, -0.01, 1.01, null, '0.6']) {
+    assert.equal(normalizeTitleEvidenceShare(invalid), null, String(invalid));
+    assert.equal(
+      pageCarriesItem('unrelated text', 'alpha beta', { minShare: invalid }),
+      false,
+      `invalid minShare ${String(invalid)} must fail closed`,
+    );
+  }
 });
 
 test('pageCarriesItem excludes conflicting metadata from multi-word headline evidence', () => {
