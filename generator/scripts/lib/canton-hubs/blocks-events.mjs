@@ -22,6 +22,16 @@ function canonicalEventUrl(value) {
   return safeUrl ? sourceUrlCanonicalKey(safeUrl) : '';
 }
 
+function eventUrlFragment(value) {
+  const safeUrl = httpsUrlOrNull(value);
+  if (!safeUrl) return '';
+  try {
+    return new URL(safeUrl).hash;
+  } catch {
+    return '';
+  }
+}
+
 function eventIdIdentity(value) {
   if (typeof value === 'string' && value.trim()) return value.trim();
   if (typeof value === 'number' && Number.isFinite(value)) return String(value);
@@ -104,28 +114,27 @@ function deduplicateEvents(events) {
       canonicalEventUrl(events[index].url) || eventIdIdentity(events[index].id)));
     const fallback = roots.filter((root) => !anchored.includes(root));
     if (fallback.length === 0) continue;
-    if (anchored.length === 0) {
-      for (const root of fallback.slice(1)) union(fallback[0], root);
-      continue;
-    }
 
-    const fallbackByTime = new Map();
+    const unmatchedByTime = new Map();
     for (const root of fallback) {
-      const time = eventStartTime(events[membersByRoot.get(root)[0]]);
-      if (!fallbackByTime.has(time)) fallbackByTime.set(time, []);
-      fallbackByTime.get(time).push(root);
-    }
-    for (const fallbackRoots of fallbackByTime.values()) {
-      const fallbackRoot = fallbackRoots[0];
-      for (const root of fallbackRoots.slice(1)) union(fallbackRoot, root);
-      const fallbackMembers = membersByRoot.get(fallbackRoot) || [];
+      const fallbackMembers = membersByRoot.get(root) || [];
       const fallbackTimes = new Set(fallbackMembers.map((index) => eventStartTime(events[index])).filter(Boolean));
       const compatibleAnchors = anchored.filter((root) => {
         const anchorMembers = membersByRoot.get(root) || [];
         const anchorTimes = new Set(anchorMembers.map((index) => eventStartTime(events[index])).filter(Boolean));
-        return !fallbackTimes.size || !anchorTimes.size || [...fallbackTimes].some((time) => anchorTimes.has(time));
+        return [...fallbackTimes].some((time) => anchorTimes.has(time));
       });
-      if (compatibleAnchors.length === 1) union(fallbackRoot, compatibleAnchors[0]);
+      if (compatibleAnchors.length === 1) {
+        union(root, compatibleAnchors[0]);
+        continue;
+      }
+      if (compatibleAnchors.length > 1 || fallbackTimes.size !== 1) continue;
+      const [time] = fallbackTimes;
+      if (!unmatchedByTime.has(time)) unmatchedByTime.set(time, []);
+      unmatchedByTime.get(time).push(root);
+    }
+    for (const unmatchedRoots of unmatchedByTime.values()) {
+      for (const root of unmatchedRoots.slice(1)) union(unmatchedRoots[0], root);
     }
   }
 
@@ -134,6 +143,20 @@ function deduplicateEvents(events) {
   const preference = (event) => canonicalEventUrl(event.url) ? 0
     : eventIdIdentity(event.id) ? 1
       : eventPlaceKey(event) ? 2 : 3;
+  const shouldPrefer = (event, preferred) => {
+    const eventPreference = preference(event);
+    const preferredPreference = preference(preferred);
+    if (eventPreference !== preferredPreference) return eventPreference < preferredPreference;
+
+    const eventUrl = canonicalEventUrl(event.url);
+    const preferredUrl = canonicalEventUrl(preferred.url);
+    if (eventUrl && eventUrl === preferredUrl) {
+      const eventHasFragment = Boolean(eventUrlFragment(event.url));
+      const preferredHasFragment = Boolean(eventUrlFragment(preferred.url));
+      if (eventHasFragment !== preferredHasFragment) return eventHasFragment;
+    }
+    return eventSourceIndex(event) < eventSourceIndex(preferred);
+  };
   events.forEach((event, index) => {
     const root = find(index);
     if (!firstIndexByRoot.has(root)) {
@@ -142,9 +165,7 @@ function deduplicateEvents(events) {
       return;
     }
     const preferred = preferredIndexByRoot.get(root);
-    if (preference(event) < preference(events[preferred])
-      || (preference(event) === preference(events[preferred])
-        && eventSourceIndex(event) < eventSourceIndex(events[preferred]))) {
+    if (shouldPrefer(event, events[preferred])) {
       preferredIndexByRoot.set(root, index);
     }
   });
