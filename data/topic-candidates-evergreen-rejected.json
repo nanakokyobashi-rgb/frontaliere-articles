@@ -2004,6 +2004,42 @@
       "firstSeenAt": "2026-10-19T07:57:34.843Z",
       "lastValidatedAt": "2026-10-19T07:57:34.843Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere formazione professionale riqualifica corsi 2026 famiglia con figli",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T08:20:44.194Z",
+      "lastValidatedAt": "2026-10-19T08:20:44.194Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere formazione professionale riqualifica corsi 2026 single",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T08:23:31.379Z",
+      "lastValidatedAt": "2026-10-19T08:23:31.379Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere infermiere ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T08:43:43.277Z",
+      "lastValidatedAt": "2026-10-19T08:43:43.277Z",
+      "expiresAt": null
     }
   ],
   "strikes": [

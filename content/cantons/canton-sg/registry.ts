@@ -83,4 +83,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'hsg-optime-orario-lavoro',
+ category: 'novita',
+ date: '2026-10-19T09:46:11.999Z',
+ image: '/images/blog/article-hsg-optime-orario-lavoro.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

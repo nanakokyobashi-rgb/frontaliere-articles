@@ -24,6 +24,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.rheineck-mels-aquaplaning.title': 'Rheineck e Mels: due incidenti per aquaplaning',
     'blog.article.rheineck-mels-aquaplaning.excerpt': 'Due auto hanno urtato i guardrail il 10 ottobre 2026 Incidenti distinti su A1 e N13 I due conducenti non hanno riportato ferite Danni: circa CHF 35\'000 e CHF',
     'blog.article.rheineck-mels-aquaplaning.imageAlt': 'Autostrada bagnata nel Canton San Gallo con guardrail e cielo coperto',
+    'blog.article.hsg-optime-orario-lavoro.title': 'HSG guida studio UE sulla riduzione dell\'orario di lavoro',
+    'blog.article.hsg-optime-orario-lavoro.excerpt': 'L\'Università di San Gallo coordina OPTIME, progetto UE finanziato da Horizon Europe con circa 3,37 milioni di euro.',
+    'blog.article.hsg-optime-orario-lavoro.imageAlt': 'Campus dell\'Università di San Gallo in una scena editoriale sulla ricerca sul lavoro',
 };
 
 export default blogMetaCantonSgIt;

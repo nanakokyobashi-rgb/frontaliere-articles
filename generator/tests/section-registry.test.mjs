@@ -1211,7 +1211,8 @@ test('edge: il bootstrap live tiene il lock fino al rilascio prima del flip', as
 
 test('edge: il lease R2 copre il timeout bootstrap massimo e il tombstone resta scaduto', () => {
   const fastPublish = readFileSync(path.join(ROOT, '.github/workflows/fast-publish-section.yml'), 'utf8');
-  const publishJob = fastPublish.match(/\n  publish:\n([\s\S]*?)(?=\n  replay-api-after-bootstrap:)/)?.[1];
+  const publishJob = fastPublish.match(/\n  publish:\n([\s\S]*?)(?=\n  [a-z0-9_-]+:)/)?.[1]
+    ?? fastPublish.slice(fastPublish.indexOf('\n  publish:\n'));
   const fastPublishTimeoutMinutes = Number(publishJob?.match(/^\s+timeout-minutes:\s+(\d+)\s*$/m)?.[1]);
   assert.ok(Number.isFinite(fastPublishTimeoutMinutes) && fastPublishTimeoutMinutes > 0, 'timeout job fast-publish assente');
   const publishApi = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');

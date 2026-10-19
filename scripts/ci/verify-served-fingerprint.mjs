@@ -8,6 +8,10 @@ const PUSH_STATE_HEADER = ['shard', 'locale', 'status'].join('\t');
 const DEFAULT_TIMEOUT_SECONDS = 12 * 60;
 const DEFAULT_POLL_SECONDS = 15;
 const DEFAULT_PROBE_TIMEOUT_MS = 30 * 1000;
+// Cloudflare rejects Node/undici's implicit user agent on the public apex,
+// while the legacy curl probe is accepted. Keep the probe identifiable and
+// stable so origin and CDN checks use the same request contract.
+const PUBLISH_PROBE_USER_AGENT = 'frontaliere-fast-publish/1.0 (+https://frontaliereticino.ch/)';
 
 /**
  * Normalizza i byte HTML che il publisher ha scritto e che Pages deve servire.
@@ -271,8 +275,15 @@ async function fetchFingerprint(record, {
       signal: controller.signal,
       redirect: 'follow',
       headers: cacheBust
-        ? { Accept: 'text/html', 'Cache-Control': 'no-cache' }
-        : { Accept: 'text/html' },
+        ? {
+          Accept: 'text/html',
+          'Cache-Control': 'no-cache',
+          'User-Agent': PUBLISH_PROBE_USER_AGENT,
+        }
+        : {
+          Accept: 'text/html',
+          'User-Agent': PUBLISH_PROBE_USER_AGENT,
+        },
     });
     const body = await response.text();
     return {

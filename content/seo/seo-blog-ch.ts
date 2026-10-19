@@ -107545,7 +107545,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
   },
 
   'blog-giovani-donne-stipendi-svizzera': {
-    title: 'Di più Le giovani svizzere guadagnano meno nonostante siano più istruite',
+    title: 'Le giovani svizzere guadagnano meno nonostante siano più istruite',
     description: 'Nati nel 1995: divario di reddito del 14% Nati nel 1965: divario di reddito del 55% Nel 2025: istruzione terziaria al 54% contro il 48% Tra i genitori',
     keywords: 'frontalieri, ticino, svizzera, italia, giovani, svizzere, guadagnano, meno',
     ogTitle: 'Le giovani svizzere guadagnano meno nonostante siano piu istruite',
@@ -107554,7 +107554,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
+      "headline": "Le giovani svizzere guadagnano meno nonostante siano più istruite",
       "description": "Nati nel 1995: divario di reddito del 14% Nati nel 1965: divario di reddito del 55% Nel 2025: istruzione terziaria al 54% contro il 48% Tra i genitori",
       "image": {
         "@type": "ImageObject",
@@ -107657,6 +107657,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/securitas-violazioni-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-campagna-fisco-coppie-sposate': {
+    title: 'Fisco e coppie sposate: i contrari aprono la loro campagna',
+    description: 'Il comitato contrario ha presentato le sue tesi a Berna Il voto federale sull\'iniziativa è previsto il 29 novembre L\'imposizione individuale entrerà in vigore',
+    keywords: 'frontalieri, ticino, svizzera, italia, fisco, coppie, sposate, contrari',
+    ogTitle: 'Fisco e coppie sposate: i contrari aprono la loro campagna',
+    ogDescription: 'Il comitato contrario ha presentato le sue tesi a Berna Il voto federale sull\'iniziativa è previsto il 29 novembre L\'imposizione individuale entrerà in vigore',
+    canonicalPath: '/articoli-svizzera/campagna-fisco-coppie-sposate/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fisco e coppie sposate: i contrari aprono la loro campagna",
+      "description": "Il comitato contrario ha presentato le sue tesi a Berna Il voto federale sull'iniziativa è previsto il 29 novembre L'imposizione individuale entrerà in vigore",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-campagna-fisco-coppie-sposate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Conferenza stampa a Berna sulla votazione federale e fiscale delle coppie sposate"
+      },
+      "datePublished": "2026-10-19T09:57:56+00:00",
+      "dateModified": "2026-10-19T09:57:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/campagna-fisco-coppie-sposate/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

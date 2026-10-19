@@ -13503,6 +13503,12 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.corsi-ticino-famiglia-rendimento.title': 'Weiterbildung für Grenzgänger 2026: Kurse & Familie',
     'blog.article.corsi-ticino-famiglia-rendimento.excerpt': 'Das Neue Grenzgängerabkommen ist seit dem 1.',
     'blog.article.corsi-ticino-famiglia-rendimento.imageAlt': 'Klassenzimmer für Berufsausbildung mit Blick auf die Landschaft des Mendrisiotto',
+    'blog.article.oss-ticino-stipendio.title': 'Grenzüberschreitendes OSS im Tessin: Gehalt und Anforderungen',
+    'blog.article.oss-ticino-stipendio.excerpt': 'Bewilligung G, Vereinbarung in Kraft seit 1.',
+    'blog.article.oss-ticino-stipendio.imageAlt': 'Gesundheitsassistent in einer Pflegeeinrichtung im Tessin',
+    'blog.article.riqualifica-aliquote-frontalieri-2026.title': 'Grenzgänger-Umschulung: Fehler 2026 vermeiden',
+    'blog.article.riqualifica-aliquote-frontalieri-2026.excerpt': 'Grenzgängerabkommen, Freibeträge, Quellensteuer und Beiträge: Die Daten, die Sie prüfen sollten, um Kurse und berufliche Neuqualifizierung als Grenzgänger im Jahr 2026 zu bewerten.',
+    'blog.article.riqualifica-aliquote-frontalieri-2026.imageAlt': 'Grenzgänger prüft Unterlagen zur beruflichen Weiterbildung im Tessin.',
 };
 
 export default blogMetaDe;

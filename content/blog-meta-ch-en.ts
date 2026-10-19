@@ -8522,6 +8522,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.securitas-violazioni-lavoro.title': 'Securitas allegedly violated labor law thousands of times',
     'blog.article.securitas-violazioni-lavoro.excerpt': 'About 20\'000 alleged violations between 2023 and 2025 About 900 employees involved in Central Switzerland Shifts that are too long and rest periods that are too short Securitas',
     'blog.article.securitas-violazioni-lavoro.imageAlt': 'Securitas security staff in central Switzerland',
+    'blog.article.campagna-fisco-coppie-sposate.title': 'Taxation and married couples: opponents launch their campaign',
+    'blog.article.campagna-fisco-coppie-sposate.excerpt': 'The opposing committee presented its arguments in Bern The federal vote on the initiative is scheduled for November 29 Individual taxation will enter into force',
+    'blog.article.campagna-fisco-coppie-sposate.imageAlt': 'Press conference in Bern regarding federal voting and taxation of married couples',
 };
 
 export default blogMetaChEn;

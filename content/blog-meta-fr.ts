@@ -13506,6 +13506,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.corsi-ticino-famiglia-rendimento.title': 'Formation des frontaliers 2026 : cours, reconversion et famille',
     'blog.article.corsi-ticino-famiglia-rendimento.excerpt': 'Le nouvel Accord sur les frontaliers est en vigueur depuis le 1er janvier 2024 : comparaison entre anciens et nouveaux frontaliers, impôt à la source et reconversion pour les familles avec enfants.',
     'blog.article.corsi-ticino-famiglia-rendimento.imageAlt': 'Salle de formation professionnelle avec vue sur le paysage du Mendrisiotto',
+    'blog.article.oss-ticino-stipendio.title': 'OSS frontalier au Tessin : salaire et exigences',
+    'blog.article.oss-ticino-stipendio.excerpt': 'Permis G, accord en vigueur depuis le 1er janvier 2024, franchises et cotisations : le cadre pour l\'OSS frontalier au Tessin.',
+    'blog.article.oss-ticino-stipendio.imageAlt': 'Assistant de santé dans un établissement de soins au Tessin',
+    'blog.article.riqualifica-aliquote-frontalieri-2026.title': 'Frontaliers 2026 : erreurs à éviter',
+    'blog.article.riqualifica-aliquote-frontalieri-2026.excerpt': 'Accord sur les travailleurs frontaliers, franchises, impôt à la source et cotisations : les données à vérifier pour évaluer les formations et la requalification professionnelle en tant que travailleur frontalier en 2026.',
+    'blog.article.riqualifica-aliquote-frontalieri-2026.imageAlt': 'Un frontalier consulte des documents de formation professionnelle au Tessin.',
 };
 
 export default blogMetaFr;

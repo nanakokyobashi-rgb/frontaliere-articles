@@ -10,6 +10,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'lavori-strada-wartau-plattis': { it: 'lavori-strada-wartau-plattis', en: 'roadworks-wartau-plattis', de: 'bauarbeiten-wartau-plattis', fr: 'travaux-routiers-wartau-plattis' },
  'hsg-spin-off-ufficiali': { it: 'hsg-spin-off-ufficiali', en: 'hsg-official-spin-offs', de: 'hsg-offizielle-spin-offs', fr: 'hsg-spin-off-officiels' },
  'rheineck-mels-aquaplaning': { it: 'rheineck-mels-aquaplaning', en: 'rheineck-mels-aquaplaning-crashes', de: 'rheineck-mels-aquaplaning-unfaelle', fr: 'rheineck-mels-aquaplanage-accidents' },
+ 'hsg-optime-orario-lavoro': { it: 'hsg-optime-orario-lavoro', en: 'hsg-optime-working-time', de: 'hsg-optime-arbeitszeit', fr: 'hsg-optime-temps-travail' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
