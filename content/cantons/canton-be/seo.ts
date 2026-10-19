@@ -309,6 +309,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-amministrazione-fiscale-berna-chiusura-2026': {
+    title: 'Amministrazione fiscale Berna: chiusura dal 23 ottobre al 1 novembre 2026',
+    description: 'Chiusura temporanea per l\'Amministrazione fiscale del Canton Berna dal 23 ottobre al 1 novembre 2026. Scadenza dichiarazione 2025 prorogata al 30 novembre.',
+    keywords: 'frontalieri, ticino, svizzera, italia, amministrazione, fiscale, berna, chiusura',
+    ogTitle: 'Amministrazione fiscale Berna: chiusura servizi e proroga dichiarazione 2025',
+    ogDescription: 'Scopri le date dell\'interruzione programmata dei servizi dell\'Amministrazione fiscale del Canton Berna dal 23 ottobre al 1 novembre 2026 e la proroga della dichiarazione al 30 novembre.',
+    canonicalPath: '/articoli-berna/amministrazione-fiscale-berna-chiusura-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Amministrazione fiscale Berna: chiusura dal 23 ottobre al 1 novembre 2026",
+      "description": "Chiusura temporanea per l'Amministrazione fiscale del Canton Berna dal 23 ottobre al 1 novembre 2026. Scadenza dichiarazione 2025 prorogata al 30 novembre.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-amministrazione-fiscale-berna-chiusura-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Amministrazione fiscale del Canton Berna durante la chiusura temporanea"
+      },
+      "datePublished": "2026-10-19T06:59:44+00:00",
+      "dateModified": "2026-10-19T06:59:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/amministrazione-fiscale-berna-chiusura-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

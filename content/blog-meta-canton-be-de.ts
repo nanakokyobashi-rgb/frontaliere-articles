@@ -27,6 +27,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.berna-tassa-ecclesiastica.title': 'Bern behält die Kirchensteuer für Unternehmen bei',
     'blog.article.berna-tassa-ecclesiastica.excerpt': 'Die Berner Regierung hat die Petition zur Freiwilligkeit der Kirchensteuer für juristische Personen zur Kenntnis genommen.',
     'blog.article.berna-tassa-ecclesiastica.imageAlt': 'Regierungsgebäude im Kanton Bern zum Thema Kirchensteuer',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.title': 'Steuerverwaltung Bern: Schließung vom 23. Oktober bis zum 1. November 2026',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.excerpt': 'Die Steuerverwaltung des Kantons Bern setzt die Dienstleistungen vom 23.',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.imageAlt': 'Steuerverwaltung des Kantons Bern während der vorübergehenden Schliessung',
 };
 
 export default blogMetaCantonBeDe;

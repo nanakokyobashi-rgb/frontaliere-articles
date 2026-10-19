@@ -27,6 +27,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.berna-tassa-ecclesiastica.title': 'Bern maintains the church tax for businesses',
     'blog.article.berna-tassa-ecclesiastica.excerpt': 'The Bernese government has taken note of the petition to make the church tax for legal entities voluntary.',
     'blog.article.berna-tassa-ecclesiastica.imageAlt': 'Government building in the Canton of Bern linked to the church tax debate',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.title': 'Bern tax administration: closure from October 23 to November 1, 2026',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.excerpt': 'The tax administration of the Canton of Bern will suspend services from 4 p.m.',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.imageAlt': 'Tax administration of the Canton of Bern during temporary closure',
 };
 
 export default blogMetaCantonBeEn;

@@ -94,4 +94,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'amministrazione-fiscale-berna-chiusura-2026',
+ category: 'fiscale',
+ date: '2026-10-19T06:59:44.908Z',
+ image: '/images/blog/article-amministrazione-fiscale-berna-chiusura-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BE'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

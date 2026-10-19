@@ -27,6 +27,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.berna-tassa-ecclesiastica.title': 'Berne maintient l\'impôt ecclésiastique pour les entreprises',
     'blog.article.berna-tassa-ecclesiastica.excerpt': 'Le Gouvernement bernois a pris acte de la pétition visant à rendre volontaire l\'impôt ecclésiastique des personnes morales.',
     'blog.article.berna-tassa-ecclesiastica.imageAlt': 'Bâtiment institutionnel du canton de Berne sur la taxe ecclésiastique',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.title': 'Administration fiscale de Berne : fermeture du 23 octobre au 1er novembre 2026',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.excerpt': 'L\'Administration fiscale du canton de Berne suspend ses services du 23 octobre à 16 h au 1er novembre 2026 pour une mise à niveau technologique.',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.imageAlt': 'Administration fiscale du Canton de Berne pendant la fermeture temporaire',
 };
 
 export default blogMetaCantonBeFr;
