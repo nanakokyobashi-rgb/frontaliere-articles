@@ -982,10 +982,13 @@ jobs:
 
           # The first purge ran before this step. Check the canonical apex URL
           # against the bytes recorded after the push; a 200 with old HTML is
-          # not a successful publish. One retry covers purge propagation or a
-          # transient Cloudflare miss. An edge-blocked probe (exit 2) is a
-          # transport result, so record it and skip both the retry here and the
-          # post-verification backstop purge below.
+          # not proof that the edge is fresh. One retry covers purge
+          # propagation or a transient Cloudflare miss. A mismatch that
+          # survives that retry is warning-only: the origin gate below is the
+          # publish proof, while the apex can lag across Cloudflare PoPs. An
+          # edge-blocked probe (exit 2) is a transport result, so record it and
+          # skip both the retry here and the post-verification backstop purge
+          # below.
           verify_apex() {
             node scripts/ci/verify-served-fingerprint.mjs verify-apex \
               --fingerprints "$RUNNER_TEMP/published-fingerprints.tsv"
@@ -1002,7 +1005,17 @@ jobs:
             echo "::warning::the apex served content different from the pushed fingerprints — repeating the targeted purge once"
             bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs \
               "--files-from=$RUNNER_TEMP/edge-purge-urls.txt"
-            verify_apex
+            if verify_apex; then
+              :
+            else
+              verify_rc=$?
+              if [ "$verify_rc" -eq 2 ]; then
+                echo "edge_probe_blocked=true" >> "$GITHUB_OUTPUT"
+                echo "::error::edge probe blocked (exit 2) after the retry — skipping the post-verification backstop purge"
+                exit "$verify_rc"
+              fi
+              echo "::warning::the apex still served content different from the pushed fingerprints after the retry — continuing with the origin hard gate"
+            fi
           fi
 
           # Two checks, deliberately different in strength, because they answer

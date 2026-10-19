@@ -582,3 +582,26 @@ test('una probe edge bloccata registra lo stato e salta il backstop di re-purge'
     /::error::edge probe blocked \(exit 2\) — skipping the post-verification backstop purge/,
   );
 });
+
+test('un mismatch apex persistente resta warning e lascia eseguire il gate origin', () => {
+  const verification = workflowStep('Verify the article is actually readable');
+  const retryAt = verification.indexOf(
+    'bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs \\\n              "--files-from=$RUNNER_TEMP/edge-purge-urls.txt"',
+  );
+
+  assert.ok(retryAt >= 0, 'manca il retry della purge dopo il mismatch apex');
+  const afterRetry = verification.slice(retryAt);
+  const originGateAt = afterRetry.indexOf('echo "── origin (hard gate)"');
+  assert.ok(originGateAt > 0, 'il gate origin hard è sparito o precede il retry apex');
+  const retryHandling = afterRetry.slice(0, originGateAt);
+
+  assert.match(retryHandling, /if verify_apex; then/);
+  assert.match(
+    retryHandling,
+    /if \[ "\$verify_rc" -eq 2 \]; then[\s\S]*?edge_probe_blocked=true[\s\S]*?exit "\$verify_rc"/,
+  );
+  assert.match(
+    retryHandling,
+    /the apex still served content different from the pushed fingerprints after the retry — continuing with the origin hard gate/,
+  );
+});
