@@ -13488,6 +13488,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.tutele-frontaliero-uscita-ticino.title': 'Un navetteur transfrontalier renvoyé en 2026 : droits sur plus de 20 km',
     'blog.article.tutele-frontaliero-uscita-ticino.excerpt': 'Guide pratique pour les navetteurs transfrontaliers sur plus de 20 km : accord CH-IT, retenue à la source, déductibles, AHV, BVG, KVG et chèques post-congédiement.',
     'blog.article.tutele-frontaliero-uscita-ticino.imageAlt': 'Frontalier avec des documents de travail devant un bureau au Tessin',
+    'blog.article.como-razionalista-fondi-associazioni.title': 'Como Razionalista : 78mila euro à deux associations',
+    'blog.article.como-razionalista-fondi-associazioni.excerpt': 'Deux associations soutiendront Como Razionalista Financement prévu de 2026 à 2028 Plus de 78mila euro provenant de la taxe de séjour Versement après les comptes rendus',
+    'blog.article.como-razionalista-fondi-associazioni.imageAlt': 'Architecture rationaliste dans un cadre urbain',
 };
 
 export default blogMetaFr;

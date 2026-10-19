@@ -111860,6 +111860,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-como-razionalista-fondi-associazioni': {
+    title: 'Como Razionalista: 78mila euro a due associazioni',
+    description: 'Due associazioni sosterranno Como Razionalista Finanziamento previsto dal 2026 al 2028 Oltre 78mila euro dall\'imposta di soggiorno Erogazione dopo i rendiconti',
+    keywords: 'frontalieri, ticino, svizzera, italia, como, razionalista, 78mila, euro',
+    ogTitle: 'Como Razionalista: 78mila euro a due associazioni',
+    ogDescription: 'Due associazioni sosterranno Como Razionalista Finanziamento previsto dal 2026 al 2028 Oltre 78mila euro dall\'imposta di soggiorno Erogazione dopo i rendiconti',
+    canonicalPath: '/articoli-frontaliere/como-razionalista-fondi-associazioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Como Razionalista: 78mila euro a due associazioni",
+      "description": "Due associazioni sosterranno Como Razionalista Finanziamento previsto dal 2026 al 2028 Oltre 78mila euro dall'imposta di soggiorno Erogazione dopo i rendiconti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-como-razionalista-fondi-associazioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Architettura razionalista in un contesto urbano"
+      },
+      "datePublished": "2026-10-19T02:46:28+00:00",
+      "dateModified": "2026-10-19T02:46:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/como-razionalista-fondi-associazioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

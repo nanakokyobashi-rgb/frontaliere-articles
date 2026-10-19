@@ -13485,6 +13485,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.tutele-frontaliero-uscita-ticino.title': 'Grenzüberschreitender Pendler 2026 entlassen: Rechte über 20 km',
     'blog.article.tutele-frontaliero-uscita-ticino.excerpt': 'Praktischer Leitfaden für grenzüberschreitende Pendler über 20 km: CH-IT-Vereinbarung, Quellensteuer, Selbstbehalte, AHV, BVG, KVG und Nachentlassungsprüfungen.',
     'blog.article.tutele-frontaliero-uscita-ticino.imageAlt': 'Grenzgänger mit Arbeitsunterlagen vor einem Büro im Tessin',
+    'blog.article.como-razionalista-fondi-associazioni.title': 'Como Razionalista: 78 Tausend Euro für zwei Vereine',
+    'blog.article.como-razionalista-fondi-associazioni.excerpt': 'Zwei Vereine werden Como Razionalista unterstützen Finanzierung von 2026 bis 2028 vorgesehen Über 78 Tausend Euro aus der Übernachtungssteuer Auszahlung nach den Abrechnungen',
+    'blog.article.como-razionalista-fondi-associazioni.imageAlt': 'Rationalistische Architektur in einer städtischen Umgebung',
 };
 
 export default blogMetaDe;
