@@ -54,6 +54,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.rapporto-consiglio-federale-schengen.title': 'Frontaliers, que se passerait-il sans Schengen ?',
     'blog.article.rapporto-consiglio-federale-schengen.excerpt': 'Rapport fédéral publié le 18 septembre 2026 Sans Schengen : contrôles systématiques aux frontières Le Tessin parmi les régions les plus exposées dans le scénario Jusqu\'à',
     'blog.article.rapporto-consiglio-federale-schengen.imageAlt': 'Poste frontière au Tessin et contrôles douaniers',
+    'blog.article.ustat-manutenzione-chiusura.title': 'Avis Ustat : maintenance et fermeture administrative',
+    'blog.article.ustat-manutenzione-chiusura.excerpt': 'Maintenance : mardi 2 décembre, 20.00-22.00 environ De brèves interruptions sont possibles sur le site Ustat Fermeture des services : l’après-midi du 31 décembre 2025 Ustat',
+    'blog.article.ustat-manutenzione-chiusura.imageAlt': 'Office de la statistique et communications administratives cantonales au Tessin',
 };
 
 export default blogMetaCantonTiFr;
