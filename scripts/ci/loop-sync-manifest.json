@@ -234,7 +234,7 @@
       "reason": "Helper dei resolver dei fast publisher del corpus: dopo un checkout shallow verifica se `github.event.before` e' gia' presente e scarica solo quel commit quando manca, cosi' i publisher possono calcolare il delta senza un fetch incondizionato. Esiste solo qui perche' i fast publisher e il loro checkout appartengono al corpus; il sito non possiede un publisher equivalente.",
       "baseline": {
         "site": null,
-        "corpus": "02b4b73ee5e98c2c",
+        "corpus": "46bababe9a6ac465",
         "alignedAt": "2026-10-19"
       }
     },
