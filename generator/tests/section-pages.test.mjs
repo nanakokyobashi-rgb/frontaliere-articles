@@ -3256,6 +3256,7 @@ test('reconcile: cap per sezione, i piu\' recenti prima; il dubbio non si ripubb
   assert.equal(orphan.selected.length, 0, 'una pagina ritirata non va rimessa in coda come articolo corrente');
   const missingOrphan = planSectionBackfill('canton-ti', [], dates, 3, [{ id: 'gone', path: '/articoli-ticino/gone/', state: 'missing' }]);
   assert.deepEqual(missingOrphan.knownMissingPagePaths, ['/articoli-ticino/gone/']);
+  assert.deepEqual(missingOrphan.expectedMissingPagePaths, []);
   assert.equal(missingOrphan.dispatch, true, 'il publisher deve rimuovere il 404 verificato dall’inventario immutabile');
 });
 
