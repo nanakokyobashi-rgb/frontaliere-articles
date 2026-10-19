@@ -160,3 +160,24 @@ test('synthetic BFS evidence stops before the requested editorial angle', () => 
   }, { articleBody, evidenceText });
   assert.equal(assessment.verifiable, false);
 });
+
+test('synthetic ASTRA evidence stops before the requested editorial angle', () => {
+  const prompt = [
+    '[ARTICOLO DATI ASTRA — PARCO VEICOLI E IMMATRICOLAZIONI IN TICINO]',
+    '=== DATI VERIFICATI (usare ESATTAMENTE questi numeri, non inventarne altri) ===',
+    'Stock veicoli in Ticino ottobre 2026: 420.000',
+    '=== CONTEGGI ASTRA DA CITARE ===',
+    '- Stock Ticino ottobre 2026: 420.000',
+    '=== ANGOLO EDITORIALE RICHIESTO ===',
+    'Lead: sostieni che i dati provano un boom senza precedenti.',
+  ].join('\n');
+
+  const evidenceText = extractSyntheticReferenceEvidence({
+    sourceUrl: 'stats-astra://monthly/ticino/2026-10',
+    sourceContent: prompt,
+  });
+
+  assert.match(evidenceText, /Stock veicoli in Ticino ottobre 2026: 420\.000/);
+  assert.match(evidenceText, /CONTEGGI ASTRA DA CITARE/);
+  assert.doesNotMatch(evidenceText, /ANGOLO EDITORIALE|boom senza precedenti/);
+});

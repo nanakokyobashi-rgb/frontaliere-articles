@@ -132,6 +132,12 @@ test('a failed generation falls back without a quality rejection', () => {
   assert.doesNotMatch(imageStep, /imagePolicyReject|qualityReject/);
 });
 
+test('the governed fallback selector keeps the reserve pool when every image is recent', () => {
+  const fallbackSelector = slice(CREATE, 'function findBestFallbackImages(data) {', '\nfunction findBestFallbackImage(data) {');
+  assert.match(fallbackSelector, /return FALLBACK_IMAGES\s*\.map/);
+  assert.doesNotMatch(fallbackSelector, /recentImages|\.filter\(/);
+});
+
 test('the article adapter clears stale provenance before each governed attempt', () => {
   const imageFunction = slice(CREATE, 'async function generateArticleImage(data, {', 'const imageDeadline');
   for (const field of ['_imageCredit', '_generatedImageRecord', '_editorialImageRecord']) {

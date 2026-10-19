@@ -41,6 +41,7 @@ on:
       - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
       - 'generator/scripts/generate-daily-brief-article.mjs'
       - 'generator/scripts/lib/daily-brief-data.mjs'
+      - 'generator/scripts/lib/daily-brief-insights.mjs'
       - 'generator/scripts/lib/daily-brief-content.mjs'
       - 'generator/scripts/lib/daily-brief-image.mjs'
   workflow_dispatch:

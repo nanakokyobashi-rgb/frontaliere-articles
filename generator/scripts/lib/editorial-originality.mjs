@@ -48,7 +48,7 @@ function exactQuoteIn(text, quote) {
  */
 export function extractSyntheticReferenceEvidence({ sourceUrl = '', sourceContent = '', evergreenBrief = '' } = {}) {
   if (typeof sourceUrl !== 'string') return '';
-  if (sourceUrl.startsWith('stats-bfs://')) {
+  if (sourceUrl.startsWith('stats-bfs://') || sourceUrl.startsWith('stats-astra://')) {
     if (typeof sourceContent !== 'string') return '';
     const editorialAngleMarker = '=== ANGOLO EDITORIALE RICHIESTO ===';
     const markerIndex = sourceContent.indexOf(editorialAngleMarker);

@@ -1660,9 +1660,7 @@ const AVAILABLE_IMAGES = PLACES_IMAGES;
  * chooses the static place cover instead of borrowing an unrelated story.
  */
 function findBestFallbackImages(data) {
-  const recentImages = new Set(_getRecentArticleImages());
   return FALLBACK_IMAGES
-    .filter(imagePath => !recentImages.has(imagePath))
     .map(imagePath => ({ imagePath, score: catalogFallbackSharedWordCount(data, imagePath) }))
     .sort((a, b) => b.score - a.score || a.imagePath.localeCompare(b.imagePath))
     .slice(0, 5)
@@ -6350,13 +6348,17 @@ async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '', verif
   ].join('\n\n');
 
   const isStatsBfs = sourceUrl.startsWith('stats-bfs://');
+  const isStatsAstra = sourceUrl.startsWith('stats-astra://');
+  const isSyntheticDataset = isStatsBfs || isStatsAstra;
   const isEvergreenArticle = sourceUrl.startsWith('evergreen://')
-    || (!isStatsBfs && (!sourceContent || sourceContent.length < 100));
-  const hasSyntheticReference = isStatsBfs || sourceUrl.startsWith('evergreen://');
+    || (!isSyntheticDataset && (!sourceContent || sourceContent.length < 100));
+  const hasSyntheticReference = isSyntheticDataset || sourceUrl.startsWith('evergreen://');
   const checkerArticleText = articleText.slice(0, MAX_FACTCHECK_ARTICLE_CHARS);
   const articleBodyStart = [contentIt?.title || '', contentIt?.excerpt || ''].join('\n\n').length + 2;
   const syntheticReferenceType = isStatsBfs
     ? 'DATASET PRIMARIO BFS: fonte strutturata dei dati e dei periodi verificati; non è una fonte di cronaca.'
+    : isStatsAstra
+    ? 'DATASET PRIMARIO ASTRA/OFROU: fonte strutturata dei conteggi e dei periodi verificati; non è una fonte di cronaca.'
     : sourceUrl.startsWith('evergreen://')
     ? 'BRIEF DI FATTI VERIFICATI PER EVERGREEN: materiale di riferimento stabile fornito al generatore; non è una notizia né una fonte giornalistica.'
     : '';
@@ -6370,7 +6372,7 @@ async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '', verif
   const syntheticReferenceBlock = syntheticReferenceText
     ? `\n${syntheticReferenceType}\n"""\n${syntheticReferenceText}\n"""\n`
     : '';
-  const sourceEvidenceContent = isStatsBfs ? syntheticReferenceText : sourceContent;
+  const sourceEvidenceContent = isSyntheticDataset ? syntheticReferenceText : sourceContent;
   const editorialContext = {
     articleBody: checkerArticleText.slice(articleBodyStart),
     evidenceText: [
@@ -6387,6 +6389,8 @@ async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '', verif
 
   const sourceFraming = isStatsBfs
     ? 'NOTA: Articolo basato sul dataset chiuso BFS riportato sotto, che è la fonte primaria dei totali e dei periodi. Verifica ogni numero e periodo contro quel dataset; i fatti di dominio verificati restano un riferimento separato. Il dataset non è una notizia di cronaca.'
+    : isStatsAstra
+    ? 'NOTA: Articolo basato sul dataset chiuso ASTRA/OFROU riportato sotto, che è la fonte primaria dei conteggi e dei periodi. Verifica ogni conteggio e periodo contro quel dataset; i fatti di dominio verificati restano un riferimento separato. Il dataset non è una notizia di cronaca.'
     : isEvergreenArticle
     ? 'NOTA: Articolo evergreen senza fonte specifica. Verifica basandoti sulle tue conoscenze del dominio e sui fatti di riferimento sotto. Per evergreen, NON segnalare come issue un fatto solo perché non compare in una fonte originale: segnala solo se è falso, contraddetto dai fatti verificati, troppo specifico senza attribuzione, o presentato come caso reale non verificato.'
     : `FONTE ORIGINALE (l'articolo doveva basarsi su questo testo):\n"""\n${sourceEvidenceContent.slice(0, 6000)}\n"""`;
