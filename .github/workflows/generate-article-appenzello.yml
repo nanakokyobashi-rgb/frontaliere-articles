@@ -7,7 +7,7 @@ name: Generate Blog Article (canton-appenzello)
 
 on:
   schedule:
-    - cron: '43 0 * * *'
+    - cron: '43 0,4,8,12,16,20 * * *'
   push:
     branches: [main]
     paths:

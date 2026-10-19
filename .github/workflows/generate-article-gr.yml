@@ -7,7 +7,7 @@ name: Generate Blog Article (canton-gr)
 
 on:
   schedule:
-    - cron: '42 1,13 * * *'
+    - cron: '42 1,5,9,13,17,21 * * *'
   push:
     branches: [main]
     paths:
