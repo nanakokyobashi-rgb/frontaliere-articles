@@ -3618,6 +3618,7 @@ export function codexPromptEchoMarker(out, source) {
 const CODEX_MALFORMED_JSON_PREFIX_RE = /^\s*(?:\{\s*[\x22}\]]|\[\s*[\x22{\]])/u;
 const CODEX_JSON_FENCE_RE = new RegExp('^```json[ \\t]*\\r?\\n([\\s\\S]*?)\\r?\\n```$', 'iu');
 const CODEX_JSON_TOP_LEVEL_KINDS = new Set(['object', 'array']);
+const CODEX_JSON_SHAPE_MAX_DEPTH = 32;
 /** Classify a Codex answer that is actually JSON-shaped output. */
 function codexJsonOutputKind(out) {
   let candidate = String(out ?? '').trim();
@@ -3633,17 +3634,75 @@ function codexJsonOutputKind(out) {
   }
 }
 
+function parseCodexJsonContainer(out) {
+  let candidate = String(out ?? '').trim();
+  const fenced = candidate.match(CODEX_JSON_FENCE_RE);
+  if (fenced) candidate = fenced[1].trim();
+  if (!/^[\[{]/u.test(candidate)) return null;
+  try {
+    const parsed = JSON.parse(candidate);
+    return parsed !== null && typeof parsed === 'object' ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
+function hasSameCodexJsonShape(source, output, depth = 0) {
+  if (depth > CODEX_JSON_SHAPE_MAX_DEPTH) return false;
+  try {
+    if (source === null || output === null) return source === null && output === null;
+    if (typeof source !== typeof output) return false;
+    if (typeof source !== 'object') return true;
+
+    const sourceIsArray = Array.isArray(source);
+    if (sourceIsArray !== Array.isArray(output)) return false;
+    if (sourceIsArray) {
+      if (source.length !== output.length) return false;
+      for (let index = 0; index < source.length; index += 1) {
+        if (!hasSameCodexJsonShape(source[index], output[index], depth + 1)) return false;
+      }
+      return true;
+    }
+
+    const sourceKeys = Object.keys(source);
+    const outputKeys = Object.keys(output);
+    if (sourceKeys.length !== outputKeys.length) return false;
+    for (const key of sourceKeys) {
+      if (!Object.prototype.hasOwnProperty.call(output, key)
+        || !hasSameCodexJsonShape(source[key], output[key], depth + 1)) {
+        return false;
+      }
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function hasSameCodexJsonContainerShape(source, output) {
+  try {
+    const sourceValue = parseCodexJsonContainer(source);
+    const outputValue = parseCodexJsonContainer(output);
+    if (sourceValue === null || outputValue === null) return false;
+    return hasSameCodexJsonShape(sourceValue, outputValue);
+  } catch {
+    return false;
+  }
+}
+
 /**
- * Keep the main line-structure guard meaningful for one-line JSON payloads.
+ * Keep the main line-structure guard meaningful for JSON payloads.
  * `hasSameLineStructure` quite correctly treats `{...}` as one opaque
- * placeholder in prose; for JSON that would compare translated values/keys,
- * which is deliberately outside this guard. Preserve the line count and use a
- * same-kind marker only for a complete one-line JSON value. A fenced source is
- * left as-is, so raw JSON still takes the same direct-path rejection as main.
+ * placeholder in prose; for JSON, the recursive shape guard above owns keys,
+ * lengths and scalar types, while this guard only distinguishes raw and fenced
+ * JSON. Formatting and translated values are deliberately opaque here.
  */
 function codexJsonStructureText(value, jsonKind) {
   const normalized = normalizeStructuredBlock(value);
-  if (!CODEX_JSON_TOP_LEVEL_KINDS.has(jsonKind) || normalized.includes('\n')) return normalized;
+  if (!CODEX_JSON_TOP_LEVEL_KINDS.has(jsonKind)) return normalized;
+  if (normalized.trim().match(CODEX_JSON_FENCE_RE)) {
+    return `\`\`\`json\n__codex_json_${jsonKind}_fenced__\n\`\`\``;
+  }
   return `__codex_json_${jsonKind}__`;
 }
 
@@ -3659,13 +3718,14 @@ export async function translateWithCodexEngine({ text, sourceLang, targetLang, f
     return '';
   }
   // The local transport is normally plain text. Keep the source/output JSON
-  // classification identical, including the first-level object/array kind.
-  // This deliberately fails open on object keys and array contents: JSON
-  // sources are not a real body shape, and key comparison is the fragile part
-  // of this guard. The contract here is only the top-level JSON type.
+  // classification identical, including the recursive shape of object/array
+  // payloads. Keys, array lengths/positions and scalar types are structure;
+  // scalar values remain free to translate.
   const jsonKind = codexJsonOutputKind(out);
   const sourceJsonKind = codexJsonOutputKind(prepared.sourceClean);
-  if (jsonKind !== sourceJsonKind) {
+  if (jsonKind !== sourceJsonKind
+    || (CODEX_JSON_TOP_LEVEL_KINDS.has(jsonKind)
+      && !hasSameCodexJsonContainerShape(prepared.sourceClean, out))) {
     noteTranslationProviderReason(_outcome, 'codex', 'invalid-output');
     noteTranslationOutcome(_outcome, 'incomplete');
     return '';

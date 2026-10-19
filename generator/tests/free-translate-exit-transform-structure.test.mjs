@@ -379,7 +379,7 @@ test('translateWithCodexEngine rifiuta JSON strutturato quando la sorgente e tes
   assert.equal(proseOutcome._tierReasons, undefined);
 });
 
-test('translateWithCodexEngine confronta il tipo JSON di primo livello', async () => {
+test('translateWithCodexEngine confronta ricorsivamente la forma JSON', async () => {
   const run = async (text, answer) => {
     const outcome = {};
     const out = await translateWithCodexEngine({
@@ -391,45 +391,61 @@ test('translateWithCodexEngine confronta il tipo JSON di primo livello', async (
     });
     return { out, outcome };
   };
+  const assertInvalidOutput = (result, label) => {
+    assert.equal(result.out, '', label);
+    assert.equal(result.outcome.incomplete, true, label);
+    assert.deepEqual(result.outcome._tierReasons, [{ provider: 'codex', reason: 'invalid-output' }], label);
+  };
 
   const arrayText = await run('["ciao"]', 'Hallo');
-  assert.equal(arrayText.out, '');
-  assert.deepEqual(arrayText.outcome._tierReasons, [{ provider: 'codex', reason: 'invalid-output' }]);
+  assertInvalidOutput(arrayText, 'top-level array verso testo');
 
   const arrayObject = await run('["ciao"]', '{"a":"b"}');
-  assert.equal(arrayObject.out, '');
-  assert.deepEqual(arrayObject.outcome._tierReasons, [{ provider: 'codex', reason: 'invalid-output' }]);
+  assertInvalidOutput(arrayObject, 'top-level array verso oggetto');
 
   const arrayArray = await run('["ciao"]', '["hallo"]');
   assert.equal(arrayArray.out, '["hallo"]');
   assert.equal(arrayArray.outcome._tierReasons, undefined);
 
-  const jsonSourceOutcome = {};
-  const jsonSource = await translateWithCodexEngine({
-    text: '{"a":"ciao"}',
-    sourceLang: 'it',
-    targetLang: 'de',
-    call: async () => '{"a":"hallo"}',
-    _outcome: jsonSourceOutcome,
-  });
-  assert.equal(jsonSource, '{"a":"hallo"}');
-  assert.equal(jsonSourceOutcome._tierReasons, undefined);
-
   const objectText = await run('{"a":"ciao"}', 'Hallo');
-  assert.equal(objectText.out, '');
-  assert.deepEqual(objectText.outcome._tierReasons, [{ provider: 'codex', reason: 'invalid-output' }]);
+  assertInvalidOutput(objectText, 'top-level oggetto verso testo');
 
   const objectArray = await run('{"a":"ciao"}', '["x"]');
-  assert.equal(objectArray.out, '');
-  assert.deepEqual(objectArray.outcome._tierReasons, [{ provider: 'codex', reason: 'invalid-output' }]);
+  assertInvalidOutput(objectArray, 'top-level oggetto verso array');
 
   const objectDifferentKey = await run('{"a":"ciao"}', '{"b":"hallo"}');
-  assert.equal(objectDifferentKey.out, '{"b":"hallo"}');
-  assert.equal(objectDifferentKey.outcome._tierReasons, undefined);
+  assertInvalidOutput(objectDifferentKey, 'chiave rinominata');
 
-  const arrayDifferentLength = await run('["ciao"]', '["hallo", "welt"]');
-  assert.equal(arrayDifferentLength.out, '["hallo", "welt"]');
-  assert.equal(arrayDifferentLength.outcome._tierReasons, undefined);
+  const arrayShorter = await run('["ciao", "mondo"]', '["hallo"]');
+  assertInvalidOutput(arrayShorter, 'array piu corto');
+
+  const arrayLonger = await run('["ciao"]', '["hallo", "welt"]');
+  assertInvalidOutput(arrayLonger, 'array piu lungo');
+
+  for (const [source, answer, label] of [
+    [
+      '{"payload":{"title":"ciao"}}',
+      '{"payload":{"title":{"text":"hallo"}}}',
+      'stringa annidata trasformata in oggetto',
+    ],
+    [
+      '{"count":1}',
+      '{"count":"eins"}',
+      'numero annidato trasformato in stringa',
+    ],
+  ]) {
+    assertInvalidOutput(await run(source, answer), label);
+  }
+
+  const sameShape = await run(
+    '{"a":"ciao","count":1,"enabled":true,"empty":null,"nested":{"label":"salve"}}',
+    '{"nested":{"label":"hallo"},"empty":null,"enabled":false,"count":2,"a":"ciao in tedesco"}',
+  );
+  assert.equal(
+    sameShape.out,
+    '{"nested":{"label":"hallo"},"empty":null,"enabled":false,"count":2,"a":"ciao in tedesco"}',
+  );
+  assert.equal(sameShape.outcome._tierReasons, undefined);
 });
 
 test('translateWithCodexEngine non salta la guardia per JSON dentro un fence', async () => {
@@ -444,6 +460,46 @@ test('translateWithCodexEngine non salta la guardia per JSON dentro un fence', a
   assert.equal(out, '');
   assert.equal(outcome.incomplete, true);
   assert.deepEqual(outcome._tierReasons, [{ provider: 'codex-engine', reason: 'structure:directPathRejected' }]);
+});
+
+test('translateWithCodexEngine confronta la forma JSON nei fence e limita la profondita', async () => {
+  const run = async (text, answer) => {
+    const outcome = {};
+    const out = await translateWithCodexEngine({
+      text,
+      sourceLang: 'it',
+      targetLang: 'de',
+      call: async () => answer,
+      _outcome: outcome,
+    });
+    return { out, outcome };
+  };
+
+  const fencedSource = '```json\n{"items":["ciao"],"title":"salve"}\n```';
+  const fencedSameShape = await run(
+    fencedSource,
+    '```json\n{"title":"hallo","items":["grüße"]}\n```',
+  );
+  assert.equal(fencedSameShape.out, '```json\n{"title":"hallo","items":["grüße"]}\n```');
+  assert.equal(fencedSameShape.outcome._tierReasons, undefined);
+
+  const fencedDifferentShape = await run(
+    fencedSource,
+    '```json\n{"title":"hallo","items":[] }\n```',
+  );
+  assert.equal(fencedDifferentShape.out, '');
+  assert.equal(fencedDifferentShape.outcome.incomplete, true);
+  assert.deepEqual(fencedDifferentShape.outcome._tierReasons, [{ provider: 'codex', reason: 'invalid-output' }]);
+
+  const nestedJson = (depth, leaf) => {
+    let value = leaf;
+    for (let i = 0; i < depth; i += 1) value = { value };
+    return JSON.stringify(value);
+  };
+  const deepResult = await run(nestedJson(33, 'ciao'), nestedJson(33, 'hallo'));
+  assert.equal(deepResult.out, '');
+  assert.equal(deepResult.outcome.incomplete, true);
+  assert.deepEqual(deepResult.outcome._tierReasons, [{ provider: 'codex', reason: 'invalid-output' }]);
 });
 
 test('translateWithCodexEngine registra l eco del prompt come meta-response', async () => {
