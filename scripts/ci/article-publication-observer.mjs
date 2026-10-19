@@ -157,7 +157,10 @@ function removeCoveredBlockers(items, checked) {
       // HTTP error or a status-0 network failure must remain durable even if
       // the publication grace window would otherwise suppress the lag.
       .filter((entry) => entry.target.coverageBlocker && entry.page.status === 200 && !entry.page.timedOut)
-      .map((entry) => ledgerKey(entry.target)),
+      .map((entry) => ledgerKey({
+        section: entry.target.section,
+        articleId: entry.target.coverageArticleId || entry.target.articleId,
+      })),
   );
   return sortedCoverageBlockers(items).filter((item) => !covered.has(ledgerKey(item)));
 }
@@ -211,6 +214,14 @@ export function parseItalianSlug(source, articleId) {
   const entries = /['"]([^'"]+)['"]\s*:\s*\{\s*it:\s*['"]([^'"]+)['"]/g;
   for (const match of String(source).matchAll(entries)) {
     if (match[1] === articleId) return match[2];
+  }
+  return null;
+}
+
+export function parseArticleIdByItalianSlug(source, italianSlug) {
+  const entries = /['"]([^'"]+)['"]\s*:\s*\{\s*it:\s*['"]([^'"]+)['"]/g;
+  for (const match of String(source).matchAll(entries)) {
+    if (match[2] === italianSlug) return match[1];
   }
   return null;
 }
@@ -271,8 +282,14 @@ export function buildObserverTargets({
     const key = ledgerKey(change);
     if (seen.has(key)) continue;
     seen.add(key);
-    const registry = parseRegistryRecord(registrySources[change.section] || '', change.articleId);
-    const slug = parseItalianSlug(slugSources[change.section] || '', change.articleId);
+    const registrySource = registrySources[change.section] || '';
+    const slugSource = slugSources[change.section] || '';
+    const directRegistry = parseRegistryRecord(registrySource, change.articleId);
+    const canonicalArticleId = directRegistry
+      ? change.articleId
+      : parseArticleIdByItalianSlug(slugSource, change.articleId) || change.articleId;
+    const registry = directRegistry || parseRegistryRecord(registrySource, canonicalArticleId);
+    const slug = parseItalianSlug(slugSource, canonicalArticleId);
     if (!registry || !slug) {
       skipped.push({ ...change, reason: !registry ? 'registro non trovato' : 'slug italiano non trovato' });
       if (change.durable && !change.coverageBlocker) missingLedgerKeys.push(key);
@@ -280,6 +297,10 @@ export function buildObserverTargets({
     }
     targets.push({
       ...change,
+      articleId: canonicalArticleId,
+      ...(change.coverageBlocker && canonicalArticleId !== change.articleId
+        ? { coverageArticleId: change.articleId }
+        : {}),
       url: `${String(baseUrl).replace(/\/+$/, '')}/${change.section === 'svizzera' ? 'articoli-svizzera' : 'articoli-frontaliere'}/${slug}/`,
       sourceCommit: change.commit,
       sourceUpdatedAt: registry.updatedAt,
