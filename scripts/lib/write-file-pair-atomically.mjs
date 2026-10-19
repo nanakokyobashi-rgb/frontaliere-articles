@@ -382,14 +382,33 @@ function closeWriterLockKeepingPath(fsImpl, lock, errors) {
 function writeStagedFiles(fsImpl, staged, transactionId) {
   try {
     for (const item of staged) {
-      fsImpl.writeFileSync(item.tmp, item.after, { encoding: 'utf8', flag: 'wx' });
-      item.ownsTmp = true;
+      try {
+        fsImpl.writeFileSync(item.tmp, item.after, { encoding: 'utf8', flag: 'wx' });
+        item.ownsTmp = true;
+      } catch (error) {
+        // An exclusive write can fail after creating a partial file. Preserve
+        // an EEXIST artifact owned by another transaction, but reclaim a file
+        // that this transaction created before the I/O failure.
+        if (error?.code !== 'EEXIST') {
+          try {
+            item.ownsTmp = pathExists(fsImpl, item.tmp);
+          } catch (ownershipError) {
+            item.ownsTmp = false;
+            item.ownershipUncertain = true;
+            item.ownershipProbeError = ownershipError;
+          }
+        }
+        throw error;
+      }
     }
   } catch (error) {
     const cleanupErrors = [];
     for (const item of staged) {
       if (item.tmp && item.ownsTmp) {
         if (removeTemporaryFile(fsImpl, item.tmp, cleanupErrors)) item.ownsTmp = false;
+      }
+      if (item.tmp && item.ownershipUncertain && item.ownershipProbeError) {
+        cleanupErrors.push(item.ownershipProbeError);
       }
     }
     throwWithRelatedErrors(error, cleanupErrors, 'staging della coppia incompleto');
@@ -598,7 +617,13 @@ export function writeFilePairAtomically(changes, { fsImpl = fs } = {}) {
 
   const staged = canonical
     .filter((change) => change.before !== change.after)
-    .map((change) => ({ ...change, tmp: null, ownsTmp: false }));
+    .map((change) => ({
+      ...change,
+      tmp: null,
+      ownsTmp: false,
+      ownershipUncertain: false,
+      ownershipProbeError: null,
+    }));
   if (staged.length === 0) return;
 
   const directory = directories.values().next().value;
@@ -627,6 +652,7 @@ export function writeFilePairAtomically(changes, { fsImpl = fs } = {}) {
   let journalPersisted = false;
   let journalWriteAttempted = false;
   let transactionError;
+  let uncertainStagingOwnership = false;
   try {
     assertNoPendingRecovery(fsImpl, directory);
     fsImpl.writeFileSync(lock.fd, `${JSON.stringify(writerLockRecord(process.pid, transactionId, writerHost))}\n`, 'utf8');
@@ -639,7 +665,12 @@ export function writeFilePairAtomically(changes, { fsImpl = fs } = {}) {
     journalWriteAttempted = true;
     writeJsonAtomically(fsImpl, journalFile, journal, transactionId);
     journalPersisted = true;
-    writeStagedFiles(fsImpl, staged, transactionId);
+    try {
+      writeStagedFiles(fsImpl, staged, transactionId);
+    } catch (error) {
+      uncertainStagingOwnership = staged.some((item) => item.tmp && item.ownershipUncertain);
+      throw error;
+    }
     if (!canonical.every((change) => fsImpl.readFileSync(change.file, 'utf8') === change.after)) {
       throw new Error('writeFilePairAtomically: verifica post-rename non coerente');
     }
@@ -665,20 +696,24 @@ export function writeFilePairAtomically(changes, { fsImpl = fs } = {}) {
       }
     }
 
-    let safeToRelease = !journalPersisted && !unreadablePersistedJournal;
+    let safeToRelease = !journalPersisted && !unreadablePersistedJournal && !uncertainStagingOwnership;
     if (journalPersisted) {
       try {
         const snapshot = currentSnapshot(fsImpl, journal);
         restoreBeforeSnapshot(fsImpl, journal, snapshot);
         assertAllBefore(fsImpl, journal);
-        journal.phase = 'recovered';
-        writeJsonAtomically(fsImpl, journalFile, journal, transactionId);
-        cleanupRecoveryArtifacts(fsImpl, directory, journal, {
-          ownedStagingFiles: new Set(staged
-            .filter((item) => item.tmp && item.ownsTmp)
-            .map((item) => item.tmp)),
-        });
-        safeToRelease = true;
+        if (uncertainStagingOwnership) {
+          relatedErrors.push(new Error(`ownership dello staging non verificabile in ${directory}; lock e journal mantenuti`));
+        } else {
+          journal.phase = 'recovered';
+          writeJsonAtomically(fsImpl, journalFile, journal, transactionId);
+          cleanupRecoveryArtifacts(fsImpl, directory, journal, {
+            ownedStagingFiles: new Set(staged
+              .filter((item) => item.tmp && item.ownsTmp)
+              .map((item) => item.tmp)),
+          });
+          safeToRelease = true;
+        }
       } catch (error) {
         relatedErrors.push(error);
       }
