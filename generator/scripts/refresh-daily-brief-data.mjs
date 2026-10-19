@@ -258,7 +258,7 @@ function printPlan(brief) {
     : `  💱 exchange: ${degradedLine(e)}`);
   const j = blocks.jobs;
   console.log(j.available
-    ? `  💼 jobs: ${j.activeJobs} active, +${j.yesterdayAdded ?? '?'} yesterday, +${j.last7dAdded ?? '?'} in 7d`
+    ? `  💼 jobs: ${j.activeJobs} active, ${j.activeCompanies ?? '?'} companies, source ${j.generatedAt}`
     : `  💼 jobs: ${degradedLine(j)}`);
   // The edition that will not exist is worth one explicit line. Without it the
   // only trace of a day with no bulletin is `3/4 blocks` above and a commit

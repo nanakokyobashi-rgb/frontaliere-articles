@@ -28,6 +28,10 @@ test('one existing fact-check request carries exact article and source evidence'
   assert.match(verification, /DATASET PRIMARIO ASTRA\/OFROU: fonte strutturata dei conteggi/);
   assert.match(verification, /Articolo basato sul dataset chiuso ASTRA\/OFROU riportato sotto/);
   assert.match(verification, /Confronta ogni totale, periodo e variazione con il dataset BFS primario/);
+  assert.match(verification, /Il dataset ASTRA è fonte primaria solo per conteggi e periodi, non per norme:[\s\S]*Non segnalare una norma come sospetta solo perché è assente dal dataset ASTRA/);
+  assert.match(verification, /Per ASTRA, periodo di misurazione e periodi del confronto devono corrispondere al dataset primario;[\s\S]*Non trattare una data normativa come sospetta perché manca dal dataset ASTRA/);
+  assert.match(verification, /Per ASTRA, accetta anche una percentuale o variazione calcolata direttamente dai conteggi espliciti del dataset solo se numeratore, denominatore, unità e periodo sono coerenti e il calcolo è corretto/);
+  assert.match(verification, /Confronta ogni conteggio, periodo e variazione aritmetica con il dataset ASTRA primario[\s\S]*L’angolo editoriale richiesto non è prova[\s\S]*un’affermazione causale non sostenuta dai fatti verificati è critical/);
   assert.match(verification, /const sourceEvidenceContent = isSyntheticDataset \? syntheticReferenceText : sourceContent/);
   assert.match(verification, /syntheticReferenceText = extractSyntheticReferenceEvidence\(/);
   assert.match(verification, /evergreenBrief: sourceUrl\.startsWith\('evergreen:\/\/'\)[\s\S]*evergreenFactsBriefFor\(SECTION_NAME, CANTON_FACTS_BRIEF\)/);
@@ -54,6 +58,11 @@ test('a checker response without verifiable evidence is not counted as a vote', 
   assert.match(verifier, /return \{ verdict, confidence, issues, editorialAssessment, servedBy \};/);
   assert.match(verification, /TUTTI i modelli di verifica hanno fallito \(rate-limit\/infra/);
   assert.match(verification, /unverified: true/);
+});
+
+test('an unsupported ASTRA cause stays critical despite the general uncertainty rubric', () => {
+  assert.match(verification, /Per ASTRA, anche una relazione causale presentata come fatto e non sostenuta dai fatti verificati è critical, pur se il solo dataset non permette di provarla falsa: registra conteggi e periodi, non cause\./);
+  assert.match(verification, /FAIL = almeno 1 critical O almeno 3 major/);
 });
 
 test('a substantiated restatement or inference failure bypasses weighted issue demotion', () => {

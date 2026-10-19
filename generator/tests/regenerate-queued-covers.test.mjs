@@ -1577,6 +1577,7 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(workflow, /queued-cover-job-start-ms/);
   assert.match(workflow, /deadline_ms=\$\(\(job_started_ms \+ 40 \* 60 \* 1000\)\)/);
   assert.match(workflow, /40m internal deadline/);
+  assert.match(workflow, /prepublish_deadline_ms=\$\(\(deadline_ms - 5 \* 60 \* 1000\)\)/);
   assert.match(workflow, /publisher_reserve_ms=\$\(\(15 \* 60 \* 1000\)\)/);
   assert.match(workflow, /generation_overhead_ms=\$\(\(5 \* 60 \* 1000\)\)/);
   assert.match(workflow, /skippedBeforeDrain:true/);
@@ -1635,7 +1636,12 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(sectionLiveLoop, /if \[ -f \.github\/FAST_PUBLISH_DISABLED \]/u);
   assert.match(sectionLiveLoop, /build_publish_args "\$attempt_dry"/u);
   assert.match(sectionLiveLoop, /bash scripts\/lib\/npm-ci-retry\.sh/u);
+  assert.match(sectionLiveLoop, /rm -f "\$RUNNER_TEMP\/section-summary\.json"/u);
   assert.match(sectionLiveLoop, /if RETRY_CMD_ATTEMPTS=2 bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/u);
+  assert.match(sectionLiveLoop, /deferredLiveRelease == true and \.published\.deferredReason != null/u);
+  assert.match(sectionPublisher, /deferred_replay_deadline_ms=\$\(\( \$\(date \+%s%3N\) \+ 30 \* 60 \* 1000 \)\)/u);
+  assert.match(sectionLiveLoop, /staging live completata ma API\/edge non ancora pronta/u);
+  assert.match(sectionLiveLoop, /if \[ "\$deferred_retry" = 'true' \]; then[\s\S]*continue/u);
   for (const publisher of [articlePublisher, sectionPublisher]) {
     assert.match(publisher, /COVER_DRAIN_COMMIT_MESSAGE: \$\{\{ github\.event\.head_commit\.message \}\}/u);
     assert.match(publisher, /cover_drain_marker="\$\(node scripts\/ci\/cover-drain-commit\.mjs is-cover-drain\)"/u);

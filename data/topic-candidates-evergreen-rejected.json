@@ -10353,10 +10353,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/da-varese-a-londra-fino-a-fellini-le-musiche-di-lorenzo-bassignani-per-ultimo-fellini-alla-festa-del-cinema-di-roma/2710159": {
-      "section": "frontaliere",
-      "ts": 1792210072557
-    },
     "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1957292/il-centro-d-asilo-di-chiasso-a-gennaio-non-riaprira-imbucate-le-lettere-di-licenziamento": {
       "section": "frontaliere",
       "ts": 1792220546515
@@ -10616,6 +10612,14 @@
     "frontaliere::https://www.varesenews.it/2026/10/ioannis-kastritis-sconfitta-dura-figlia-di-troppi-errori/2711839": {
       "section": "frontaliere",
       "ts": 1792382134199
+    },
+    "frontaliere::https://www.tio.ch/svizzera/cronaca/1957641/dipendenti-lavoro-svizzera-legge-securitas": {
+      "section": "frontaliere",
+      "ts": 1792387996935
+    },
+    "frontaliere::https://unia.ch/it/professioni-rami/parrucchiere/sondaggio-rivendicazioni-ccl": {
+      "section": "frontaliere",
+      "ts": 1792392209850
     }
   }
 }

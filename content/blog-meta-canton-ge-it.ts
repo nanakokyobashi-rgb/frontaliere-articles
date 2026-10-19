@@ -27,6 +27,9 @@ const blogMetaCantonGeIt: Record<string, string> = {
     'blog.article.indagini-imprese-ginevrine.title': 'Indagini congiunturali nelle imprese ginevrine',
     'blog.article.indagini-imprese-ginevrine.excerpt': 'La Repubblica e il Cantone di Ginevra segnala indagini congiunturali di settembre nelle imprese ginevrine.',
     'blog.article.indagini-imprese-ginevrine.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.taf-regolamento-aeroporto-ginevra.title': 'Aeroporto di Ginevra: il TAF approva il regolamento',
+    'blog.article.taf-regolamento-aeroporto-ginevra.excerpt': 'Il TAF approva il regolamento dell’aeroporto di Ginevra Le misure contestate rispettano le norme ambientali Respinti i ricorsi contro la decisione DETEC del 17',
+    'blog.article.taf-regolamento-aeroporto-ginevra.imageAlt': 'Aeroporto di Ginevra e comuni limitrofi sullo sfondo',
 };
 
 export default blogMetaCantonGeIt;
