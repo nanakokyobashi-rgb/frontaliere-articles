@@ -131,7 +131,7 @@ async function assertExpectedMainHead(expected, readMainHead = publishedMainHead
 }
 
 export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activeCorpusCoreMap() } = {}) {
-  const out = { ids: [], bootstrap: false, publish: false, dryRun: false, removeStaleCantonRssFeeds: false };
+  const out = { ids: [], missingPages: [], bootstrap: false, publish: false, dryRun: false, removeStaleCantonRssFeeds: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const value = () => {
@@ -151,6 +151,17 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
       }
       if (!Array.isArray(ids) || ids.some((id) => typeof id !== 'string' || !id)) throw new Error('--ids deve essere un array JSON di id non vuoti');
       out.ids.push(...ids);
+    } else if (a === '--missing-pages') {
+      let pages;
+      try {
+        pages = JSON.parse(value());
+      } catch (error) {
+        throw new Error(`--missing-pages deve essere un array JSON di path: ${error.message}`);
+      }
+      if (!Array.isArray(pages) || pages.some((page) => typeof page !== 'string' || !/^\/[a-z0-9/-]+\/$/u.test(page) || page.includes('//'))) {
+        throw new Error('--missing-pages deve contenere solo path canonici assoluti');
+      }
+      out.missingPages.push(...pages);
     } else if (a === '--bootstrap') out.bootstrap = true;
     else if (a === '--remove-stale-canton-rss-feeds') out.removeStaleCantonRssFeeds = true;
     else if (a === '--publish') out.publish = true;
@@ -160,11 +171,21 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
     else throw new Error(`argomento sconosciuto: ${a}`);
   }
   out.ids = [...new Set(out.ids)];
+  out.missingPages = [...new Set(out.missingPages)];
   for (const flag of ['section', 'out', 'summary']) if (!out[flag]) throw new Error(`manca --${flag}`);
   if (out.publish && out.dryRun) throw new Error('--publish e --dry-run sono alternativi');
   if (out.bootstrap && out.ids.length) throw new Error('--bootstrap rende tutti gli articoli della sezione: non si combina con --id/--ids');
   assertPublishableSection(out.section, { all, active });
   return out;
+}
+
+export function stagedReleasePageSets(pages, publishedLivePages, confirmedMissingPagePaths = []) {
+  const confirmedMissing = new Set(confirmedMissingPagePaths);
+  const publishedPageKeys = new Set(publishedLivePages.map((page) => page.edgeKey));
+  return {
+    pagesForPublish: pages.filter((page) => !publishedPageKeys.has(page.edgeKey) || confirmedMissing.has(page.canonicalPath)),
+    immutableLivePages: publishedLivePages.filter((page) => !confirmedMissing.has(page.canonicalPath)),
+  };
 }
 
 export function missingRenderedArticleIds(requestedIds, entries) {
@@ -2057,6 +2078,7 @@ export async function main(
     latestApiInputCommitImpl = latestApiInputCommit,
     sourceRegistryIdsImpl = sourceRegistryIds,
     currentMainHeadImpl = publishedMainHead,
+    probeImpl = probe,
     publisherCommitImpl = () => execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
     fetchImpl = fetch,
   } = {},
@@ -2269,15 +2291,33 @@ export async function main(
   const publishedLivePages = publishedManifestPages
     ? Object.values(publishedManifestPages).flat()
     : [];
-  const publishedPageKeys = new Set(publishedLivePages.map((page) => page.edgeKey));
+  const requestedMissingPagePaths = new Set(args.missingPages);
+  const renderedPagePaths = new Map(pages.map((page) => [page.canonicalPath, page]));
+  const confirmedMissingPagePaths = new Set();
+  if (requestedMissingPagePaths.size > 0 && (!publishing || (deferredLiveRelease && !allowDeferredLiveRelease))) {
+    defects.push('missing-pages richiede un publish; se la release è staged deve avere il replay API esplicitamente armato');
+  } else {
+    for (const requestedPath of requestedMissingPagePaths) {
+      const renderedPage = renderedPagePaths.get(requestedPath);
+      if (!renderedPage) {
+        defects.push(`pagina dichiarata mancante non resa dal backfill: ${requestedPath}`);
+        continue;
+      }
+      const observed = await probeImpl(renderedPage.cdnUrl, { attempts: 1, delayMs: 0, want: () => false });
+      if (observed.status !== 'HTTP 404') {
+        defects.push(`pagina dichiarata mancante ora presente o non verificabile: ${requestedPath} (${observed.status})`);
+        continue;
+      }
+      confirmedMissingPagePaths.add(requestedPath);
+    }
+  }
   // During a deferred live release the old sitemap and edge registry are still
   // live. Only keys absent from the verified old page manifest are immutable
   // additions; replacing an already announced key here would mix two releases
   // before the API/edge pointer flips.
-  const pagesForPublish = deferredLiveRelease
-    ? pages.filter((page) => !publishedPageKeys.has(page.edgeKey))
-    : pages;
-  const immutableLivePages = deferredLiveRelease ? publishedLivePages : [];
+  const stagedPageSets = stagedReleasePageSets(pages, publishedLivePages, confirmedMissingPagePaths);
+  const pagesForPublish = deferredLiveRelease ? stagedPageSets.pagesForPublish : pages;
+  const immutableLivePages = deferredLiveRelease ? stagedPageSets.immutableLivePages : [];
 
   if (publishing && effectiveStatus === null) {
     defects.push('registro edge illeggibile o non valido: stato effettivo della sezione non dimostrato');
@@ -2358,6 +2398,8 @@ export async function main(
     pages,
     pagesForPublish,
     immutableLivePages,
+    requestedMissingPagePaths: [...requestedMissingPagePaths],
+    confirmedMissingPagePaths: [...confirmedMissingPagePaths],
     // Legacy summary key retains its bootstrap-only meaning.
     immutableBootstrapPages: args.bootstrap ? immutableLivePages : [],
     cdnUploads,

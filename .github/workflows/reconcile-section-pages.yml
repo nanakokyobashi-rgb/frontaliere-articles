@@ -125,22 +125,53 @@ jobs:
           fi
           echo "allow=$allow" >> "$GITHUB_OUTPUT"
 
+      - name: Prepare Firebase credentials for producer dispatch
+        if: >-
+          steps.mode.outputs.allow == 'true' &&
+          steps.arm.outputs.allow == 'true' &&
+          steps.detect.outputs.head_guard == 'true' &&
+          (steps.detect.outputs.dispatch != '0' || steps.detect.outputs.pending_edge_flip == 'true')
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON assente: dispatch producer non autorizzabile"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/reconcile-dispatch-sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/reconcile-dispatch-sa.json" >> "$GITHUB_ENV"
+
+      - name: Load producer token from Remote Config
+        if: >-
+          steps.mode.outputs.allow == 'true' &&
+          steps.arm.outputs.allow == 'true' &&
+          steps.detect.outputs.head_guard == 'true' &&
+          (steps.detect.outputs.dispatch != '0' || steps.detect.outputs.pending_edge_flip == 'true')
+        run: node generator/scripts/load-rc-env.mjs
+
       - name: Backfill (dispatch fast-publish-section per sezione)
         if: steps.mode.outputs.allow == 'true' && steps.arm.outputs.allow == 'true' && steps.detect.outputs.dispatch != '0'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PENDING_EDGE_FLIP: ${{ steps.detect.outputs.pending_edge_flip }}
           API_RELEASE_COMMIT: ${{ steps.detect.outputs.api_release_commit }}
           SOURCE_COMMIT: ${{ steps.detect.outputs.source_commit }}
         run: |
           set -euo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::error::GITHUB_PAT_NANAKO non caricato: dispatch backfill non autorizzato"
+            exit 1
+          fi
+          export GH_TOKEN="$runtime_pat"
           fail=0
-          while IFS=$'\t' read -r section ids; do
+          while IFS=$'\t' read -r section ids missing_page_paths; do
             [ -n "$section" ] || continue
             echo "── backfill $section ids=$ids"
             args=(
               -f "section=$section"
               -f "article_ids=$ids"
+              -f "missing_page_paths=$missing_page_paths"
               -f 'bootstrap=false'
               -f 'dry_run=false'
             )
@@ -156,7 +187,7 @@ jobs:
               echo "::warning::dispatch fallito per $section — riprovera' il prossimo giro"
               fail=1
             fi
-          done < <(jq -r '.sections[] | select(.dispatch) | [.section, (.selected | tojson)] | @tsv' "$RUNNER_TEMP/reconcile-sections.json")
+          done < <(jq -r '.sections[] | select(.dispatch) | [.section, (.selected | tojson), (.missingPagePaths | tojson)] | @tsv' "$RUNNER_TEMP/reconcile-sections.json")
           [ "$fail" = "0" ] || exit 1
 
       - name: Replay API when the edge flip has no page backfill
@@ -170,11 +201,16 @@ jobs:
           steps.detect.outputs.manifest_unknown == '0' &&
           steps.detect.outputs.head_guard == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPOSITORY: ${{ github.repository }}
           SOURCE_COMMIT: ${{ steps.detect.outputs.source_commit }}
         run: |
           set -euo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::error::GITHUB_PAT_NANAKO non caricato: replay API non autorizzato"
+            exit 1
+          fi
+          export GH_TOKEN="$runtime_pat"
           if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
             echo "::error::HEAD corrente non valida per il replay API bounded"
             exit 1

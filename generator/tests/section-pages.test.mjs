@@ -63,6 +63,7 @@ import {
   publishedReleaseReady,
   publishedStatus,
   rendererPageEntry,
+  stagedReleasePageSets,
 } from '../../scripts/publish-section-pages.mjs';
 import { assertHubLocaleSlug } from '../../scripts/lib/assert-hub-locale-slug.mjs';
 import { assertHubTopicEntries } from '../../scripts/lib/assert-hub-locale-slug.mjs';
@@ -273,7 +274,9 @@ test('publisher: bootstrap live senza manifest non arma il percorso differito', 
 
 test('publisher: uno staged live bootstrap=false diventa verde solo col replay API armato', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-staged-live-'));
-  const publishedDoc = pageManifestFromPages({ section: 'canton-ti', commit: 'published', pages: [] });
+  const outDir = path.join(fixtureRoot, 'dist');
+  const missingPage = { ...pageEntry('canton-ti', 'articoli-ticino/missing/index.html', 'article'), id: 'missing' };
+  const publishedDoc = pageManifestFromPages({ section: 'canton-ti', commit: 'published', pages: [missingPage] });
   let publishOptions = null;
   let manifestCalls = 0;
   const realConsoleLog = console.log;
@@ -284,7 +287,7 @@ test('publisher: uno staged live bootstrap=false diventa verde solo col replay A
     console.log = () => {};
     console.error = () => {};
     const code = await main(
-      ['--section', 'canton-ti', '--ids', '[]', '--out', path.join(fixtureRoot, 'dist'), '--summary', path.join(fixtureRoot, 'summary.json'), '--publish'],
+      ['--section', 'canton-ti', '--ids', '["missing"]', '--missing-pages', '["/articoli-ticino/missing/"]', '--out', outDir, '--summary', path.join(fixtureRoot, 'summary.json'), '--publish'],
       {
         parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
         fetchPageManifestImpl: async () => ({ state: 'ok', doc: publishedDoc }),
@@ -293,18 +296,31 @@ test('publisher: uno staged live bootstrap=false diventa verde solo col replay A
         publishedReleaseReadyImpl: async () => ({ ok: false, reason: 'edge in transizione' }),
         currentMainHeadImpl: () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
         createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
-        renderSectionArticlePipelineImpl: async () => ({
-          entries: [],
-          hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
-          downloadedImageKeys: [],
-          imageFetchFailures: [],
-          imagePostcondition: {},
-          aggregatePagesAllowed: false,
-        }),
+        renderSectionArticlePipelineImpl: async () => {
+          const local = path.join(outDir, missingPage.rel);
+          mkdirSync(path.dirname(local), { recursive: true });
+          writeFileSync(
+            local,
+            `<!doctype html><html><head><link rel="canonical" href="${missingPage.apexUrl}">${CORPUS_ROUTE_OWNER_META_TAG}</head><body>${'backfill verificato '.repeat(30)}</body></html>`,
+            'utf8',
+          );
+          return {
+            entries: [{ articleId: 'missing', paths: { it: missingPage.rel } }],
+            hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
+            downloadedImageKeys: [],
+            imageFetchFailures: [],
+            imagePostcondition: {},
+            aggregatePagesAllowed: false,
+          };
+        },
         articleReleaseSnapshotImpl: () => [],
+        probeImpl: async (url) => {
+          assert.equal(url, missingPage.cdnUrl);
+          return { ok: false, status: 'HTTP 404' };
+        },
         publishImpl: async (options) => {
           publishOptions = options;
-          return { failures: 0, uploaded: 0, deleted: 0, status: 'live' };
+          return { failures: 0, uploaded: options.pages.length, deleted: 0, status: 'live' };
         },
         publishPageManifestImpl: () => {
           manifestCalls++;
@@ -314,11 +330,14 @@ test('publisher: uno staged live bootstrap=false diventa verde solo col replay A
     );
     assert.equal(code, 0);
     assert.ok(publishOptions, 'lo staged deve caricare il backfill prima del replay');
+    assert.deepEqual(publishOptions.pages.map((page) => page.canonicalPath), [missingPage.canonicalPath]);
+    assert.deepEqual(publishOptions.immutablePages, []);
     assert.equal(manifestCalls, 0, 'il manifest resta differito fino al replay API');
     const summary = JSON.parse(readFileSync(path.join(fixtureRoot, 'summary.json'), 'utf8'));
     assert.equal(summary.deferredLiveRelease, true);
     assert.equal(summary.published.manifestDeferred, true);
     assert.equal(summary.published.deferredForReplay, true);
+    assert.deepEqual(summary.confirmedMissingPagePaths, [missingPage.canonicalPath]);
   } finally {
     if (previousAllow === undefined) delete process.env.ALLOW_DEFERRED_LIVE_RELEASE;
     else process.env.ALLOW_DEFERRED_LIVE_RELEASE = previousAllow;
@@ -1022,6 +1041,14 @@ test('publisher: argomenti', () => {
   assert.throws(() => parseArgs(['--out', 'o', '--summary', 's']), /manca --section/);
   assert.throws(() => parseArgs(['--section']), /richiede un valore/);
   assert.throws(() => parseArgs(['--section', 'canton-ti', '--ids', 'x', '--out', 'o', '--summary', 's']), /array JSON/);
+  assert.deepEqual(
+    parseArgs(['--section', 'canton-ti', '--missing-pages', '["/articoli-ticino/a/"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).missingPages,
+    ['/articoli-ticino/a/'],
+  );
+  assert.throws(
+    () => parseArgs(['--section', 'canton-ti', '--missing-pages', '["../a"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }),
+    /path canonici/,
+  );
   assert.throws(() => parseArgs(['--section', 'canton-ti', '--boh']), /argomento sconosciuto/);
   assert.equal(parseArgs(['--section', 'canton-ti', '--previous-revision', 'abc1234', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).previousRevision, 'abc1234');
   assert.equal(parseArgs(['--section', 'canton-ti', '--remove-stale-canton-rss-feeds', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).removeStaleCantonRssFeeds, true);
@@ -1034,6 +1061,17 @@ test('publisher: argomenti', () => {
     () => parseArgs(['--section', 'canton-ti', '--dry-run', '--publish', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }),
     /alternativi/,
   );
+});
+
+test('publisher: solo le chiavi confermate 404 escono dall inventario immutabile staged', () => {
+  const missing = pageEntry('canton-ti', 'articoli-ticino/missing/index.html', 'article');
+  const present = pageEntry('canton-ti', 'articoli-ticino/present/index.html', 'article');
+  const rendered = [missing, present];
+  const published = [missing, present];
+  assert.deepEqual(stagedReleasePageSets(rendered, published).pagesForPublish, []);
+  const selected = stagedReleasePageSets(rendered, published, [missing.canonicalPath]);
+  assert.deepEqual(selected.pagesForPublish.map((page) => page.canonicalPath), [missing.canonicalPath]);
+  assert.deepEqual(selected.immutableLivePages.map((page) => page.canonicalPath), [present.canonicalPath]);
 });
 
 test('publisher: chiave R2 = quella che il Worker calcola dal path canonico', () => {
@@ -2829,6 +2867,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /inputs\.source_commit/);
   assert.match(wf, /source_main_commit:/);
   assert.match(wf, /replay_api_after_publish:/);
+  assert.match(wf, /missing_page_paths:/);
+  assert.match(wf, /MISSING_PAGE_PATHS_JSON: \$\{\{ toJSON\(matrix\.target\.missingPagePaths \|\| fromJSON\('\[\]'\)\) \}\}/);
+  assert.match(wf, /args\+=\(--missing-pages "\$\(printf '%s' "\$MISSING_PAGE_PATHS_JSON" \| jq -c \.\)"\)/);
   assert.match(wf, /ALLOW_DEFERRED_LIVE_RELEASE: \$\{\{ needs\.resolve\.outputs\.replay_api_after_publish \}\}/);
   assert.match(wf, /EXPECTED_MAIN_HEAD: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_main_commit \|\| github\.event\.after \|\| github\.sha \}\}/);
   assert.match(wf, /-f source_main_commit="\$CURRENT_MAIN"/);
@@ -2891,6 +2932,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(stagedReplay, /SOURCE_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(stagedReplay, /Redispatch staged backfill on current main after stale replay/);
   assert.match(stagedReplay, /TARGET_MATRIX: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/);
+  assert.match(stagedReplay, /-f missing_page_paths="\$missing_page_paths"/);
   const replayDispatchStep = stagedReplay.slice(
     stagedReplay.indexOf('- name: Replay publish-api after staged release'),
   );
@@ -3089,6 +3131,7 @@ test('reconcile: cap per sezione, i piu\' recenti prima; il dubbio non si ripubb
   const plan = planSectionBackfill('canton-ti', pages, dates, 2);
   assert.deepEqual(plan.missingIds, ['nuovo', 'medio', 'vecchio']);
   assert.deepEqual(plan.selected, ['nuovo', 'medio']);
+  assert.deepEqual(plan.missingPagePaths, ['/p2/', '/p3/', '/p4/']);
   assert.deepEqual(plan.leftover, ['vecchio']);
   assert.deepEqual(plan.unknown, ['/p5/']);
   assert.equal(plan.dispatch, true);
@@ -3096,6 +3139,7 @@ test('reconcile: cap per sezione, i piu\' recenti prima; il dubbio non si ripubb
   // Manca solo una pagina di sezione: un giro di rinfresco senza id.
   const refresh = planSectionBackfill('canton-ti', [{ kind: 'section', path: '/articoli-ticino/fisco/', state: 'missing' }], dates, 3);
   assert.deepEqual([refresh.dispatch, refresh.selected, refresh.sectionMissing], [true, [], ['/articoli-ticino/fisco/']]);
+  assert.deepEqual(refresh.missingPagePaths, ['/articoli-ticino/fisco/']);
   assert.equal(planSectionBackfill('canton-ti', [{ kind: 'section', path: '/x/', state: 'unknown' }], dates, 3).dispatch, false);
   const orphan = planSectionBackfill('canton-ti', [], dates, 3, [{ id: 'gone', path: '/articoli-ticino/gone/', state: 'present' }]);
   assert.deepEqual([orphan.dispatch, orphan.orphaned, orphan.orphanedIds], [true, ['/articoli-ticino/gone/'], ['gone']]);
@@ -3251,6 +3295,7 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /workflows: \[fast-publish-section\]/);
   assert.match(wf, /node scripts\/reconcile-section-pages\.mjs/);
   assert.match(wf, /args=\([\s\S]*-f "section=\$section"[\s\S]*-f "article_ids=\$ids"[\s\S]*'bootstrap=false'[\s\S]*'dry_run=false'/);
+  assert.match(wf, /-f "missing_page_paths=\$missing_page_paths"/);
   assert.match(wf, /-f 'replay_api_after_publish=true'/);
   assert.match(wf, /-f "api_release_commit=\$API_RELEASE_COMMIT"/);
   assert.match(wf, /-f "source_commit=\$SOURCE_COMMIT"/);
@@ -3261,6 +3306,8 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /pending_edge_flip=\$\(jq -r '\.pendingEdgeFlip \/\/ false'/);
   assert.match(wf, /skip=\$\(jq -r 'if \.skip then \\"true\\" else \\"false\\" end'/);
   assert.match(wf, /steps\.detect\.outputs\.pending_edge_flip == 'true'[\s\S]*steps\.detect\.outputs\.skip == 'false'[\s\S]*steps\.detect\.outputs\.dispatch == '0'/);
+  assert.match(wf, /Load producer token from Remote Config/);
+  assert.match(wf, /runtime_pat="\$\{GITHUB_PAT_NANAKO:-\}"[\s\S]*export GH_TOKEN="\$runtime_pat"/);
   assert.match(read('scripts/reconcile-section-pages.mjs'), /pages-registry-absent/);
   assert.match(wf, /github\.event\.workflow_run\.event \}\}" = "workflow_dispatch"/);
   assert.match(wf, /actions: write/);

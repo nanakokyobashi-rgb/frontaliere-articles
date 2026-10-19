@@ -157,6 +157,11 @@ export function planSectionBackfill(section, pages, dateById, cap, orphanPages =
     return byDate || a.localeCompare(b);
   });
   const sectionMissing = missing.filter((page) => page.kind === 'section').map((page) => page.path);
+  const selected = missingIds.slice(0, n);
+  const selectedIds = new Set(selected);
+  const missingPagePaths = missing
+    .filter((page) => page.kind === 'section' || selectedIds.has(page.id))
+    .map((page) => page.path);
   const orphaned = orphanPages.filter((page) => page.state === 'present');
   const orphanedUnknown = orphanPages.filter((page) => page.state === 'unknown').map((page) => page.path);
   return {
@@ -168,7 +173,8 @@ export function planSectionBackfill(section, pages, dateById, cap, orphanPages =
     orphanedIds: [...new Set(orphaned.map((page) => page.id))].sort(),
     orphanedUnknown,
     missingIds,
-    selected: missingIds.slice(0, n),
+    selected,
+    missingPagePaths,
     leftover: missingIds.slice(n),
     // Un giro di sola sezione (ids vuoti) serve quando manca una pagina di
     // sezione e nessun articolo: con articoli selezionati la sezione viene

@@ -106,6 +106,11 @@ on:
         description: 'Array JSON di id articolo (vuoto = solo landing, archivio e hub)'
         required: false
         type: string
+      missing_page_paths:
+        description: 'Array JSON di path canonici verificati 404 dal reconciler'
+        required: false
+        default: '[]'
+        type: string
       bootstrap:
         description: 'Rendi TUTTI gli articoli della sezione (accensione di un cantone)'
         required: false
@@ -331,6 +336,7 @@ jobs:
         env:
           SECTION_INPUT: ${{ inputs.section }}
           ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
+          MISSING_PAGE_PATHS_INPUT: ${{ inputs.missing_page_paths }}
           BOOTSTRAP_INPUT: ${{ inputs.bootstrap }}
           DRY_RUN_INPUT: ${{ inputs.dry_run }}
           REMOVE_STALE_INPUT: ${{ inputs.remove_stale_canton_rss_feeds }}
@@ -381,6 +387,12 @@ jobs:
                 end
               ')"
             fi
+            missing_pages_json="$(printf '%s' "${MISSING_PAGE_PATHS_INPUT:-[]}" | jq -ce '
+              if type == "array" and all(.[]; type == "string" and test("^/[a-z0-9/-]+/$") and (contains("//") | not))
+              then unique
+              else error("missing_page_paths must be a JSON array of canonical paths")
+              end
+            ')"
             bootstrap=false
             [ "$BOOTSTRAP_INPUT" = "true" ] && bootstrap=true
             remove_stale=false
@@ -390,8 +402,8 @@ jobs:
               echo "::error::bootstrap rende tutti gli articoli: non si combina con article_ids"
               exit 1
             fi
-            matrix="$(jq -cn --arg s "$SECTION_INPUT" --argjson ids "$ids_json" --argjson b "$bootstrap" --argjson r "$remove_stale" \
-              '[{section: $s, ids: $ids, bootstrap: $b, removeStaleCantonRssFeeds: $r}]')"
+            matrix="$(jq -cn --arg s "$SECTION_INPUT" --argjson ids "$ids_json" --argjson missing "$missing_pages_json" --argjson b "$bootstrap" --argjson r "$remove_stale" \
+              '[{section: $s, ids: $ids, missingPagePaths: $missing, bootstrap: $b, removeStaleCantonRssFeeds: $r}]')"
           else
             dry=false
             if [ "$EVENT_NAME" = 'workflow_run' ]; then
@@ -540,6 +552,7 @@ jobs:
           REPO: ${{ github.repository }}
           SECTION: ${{ matrix.target.section }}
           ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
+          MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.missingPagePaths || fromJSON('[]')) }}
           BOOTSTRAP: ${{ matrix.target.bootstrap }}
           REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
           DRY: ${{ needs.resolve.outputs.dry }}
@@ -575,6 +588,7 @@ jobs:
           gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
             -f section="$SECTION" \
             -f article_ids="$ARTICLE_IDS_JSON" \
+            -f missing_page_paths="$MISSING_PAGE_PATHS_JSON" \
             -f bootstrap="$BOOTSTRAP" \
             -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
             -f api_release_commit="$api_release_commit" \
@@ -689,6 +703,7 @@ jobs:
         env:
           SECTION: ${{ matrix.target.section }}
           ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
+          MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.missingPagePaths || fromJSON('[]')) }}
           BOOTSTRAP: ${{ matrix.target.bootstrap }}
           DRY: ${{ needs.resolve.outputs.dry }}
           EVENT_NAME: ${{ github.event_name }}
@@ -786,6 +801,7 @@ jobs:
             else
               args+=(--ids "$(printf '%s' "$ARTICLE_IDS_JSON" | jq -c .)")
             fi
+            args+=(--missing-pages "$(printf '%s' "$MISSING_PAGE_PATHS_JSON" | jq -c .)")
             if [ "$REMOVE_STALE_CANTON_RSS_FEEDS" = "true" ]; then
               args+=(--remove-stale-canton-rss-feeds)
             fi
@@ -988,12 +1004,13 @@ jobs:
           fi
           export GH_TOKEN="$runtime_pat"
           dispatched=0
-          while IFS=$'\t' read -r section article_ids bootstrap remove_stale; do
+          while IFS=$'\t' read -r section article_ids missing_page_paths bootstrap remove_stale; do
             [ -n "$section" ] || continue
             echo "::notice::recovery staged $section sulla HEAD corrente $CURRENT_MAIN"
             gh workflow run fast-publish-section.yml --repo "$REPOSITORY" --ref main \
               -f section="$section" \
               -f article_ids="$article_ids" \
+              -f missing_page_paths="$missing_page_paths" \
               -f bootstrap="$bootstrap" \
               -f remove_stale_canton_rss_feeds="$remove_stale" \
               -f source_commit="$CURRENT_MAIN" \
@@ -1002,7 +1019,7 @@ jobs:
               -f dry_run="$DRY" \
               -f dispatch_nonce="stale-staged-recovery-${GITHUB_RUN_ID}-${section}"
             dispatched=$((dispatched + 1))
-          done < <(jq -r '.[] | [.section, ((.ids // []) | tojson), (.bootstrap // false), (.removeStaleCantonRssFeeds // false)] | @tsv' <<<"$TARGET_MATRIX")
+          done < <(jq -r '.[] | [.section, ((.ids // []) | tojson), ((.missingPagePaths // []) | tojson), (.bootstrap // false), (.removeStaleCantonRssFeeds // false)] | @tsv' <<<"$TARGET_MATRIX")
           if [ "$dispatched" -eq 0 ]; then
             echo "::error::matrix staged vuoto nel recovery stale"
             exit 1
