@@ -100,10 +100,11 @@ test('all tracked daily brief heroes have byte-matching governed provenance', ()
 
 test('the daily producer makes a fresh governed hero before either first registration or same-day refresh', () => {
   const source = fs.readFileSync(path.join(ROOT, 'generator/scripts/generate-daily-brief-article.mjs'), 'utf8');
+  const imageSource = fs.readFileSync(path.join(ROOT, 'generator/scripts/lib/daily-brief-image.mjs'), 'utf8');
   assert.match(source, /generateGovernedArticleHero\(/);
   assert.match(source, /materializeDailyBriefHero\(/);
   assert.match(source, /buildDailyBriefCoverPrompt\(h\)/);
-  assert.match(source, /dailyBriefCoverAltForRecord\(data\._headline, record\)/);
+  assert.match(imageSource, /const imageAlt = dailyBriefCoverAltForRecord\(data\._headline, record\)/);
   assert.doesNotMatch(source, /buildDailyBriefSvg\(|renderDailyBriefImage\(/);
   assert.ok(
     source.indexOf('generateGovernedArticleHero(') < source.indexOf('if (!exists)'),
