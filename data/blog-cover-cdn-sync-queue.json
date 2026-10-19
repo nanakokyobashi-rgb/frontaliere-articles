@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-gais-alterszentrum-rotewies-rette-aumento.webp",
-      "sha256": "13918762c5f2aa380e05db2474046763cbbb664389ef79f9e0534f1a883637f1"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-gais-alterszentrum-rotewies-rette-aumento-480w.webp",
-      "sha256": "01011c1d1d11f1ce1ba3e7eacca1f07824a4f957f534494efb551b4663c33c30"
-    }
-  ]
+  "items": []
 }
