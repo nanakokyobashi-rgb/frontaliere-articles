@@ -1,26 +1,32 @@
 {
-  "keywords": [],
-  "strikes": {},
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
   "topicGateUrls": {
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-01/gf-verkauft-luft-und-raumfahrt-sowie-industriegasturbinen": {
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-02/bei-der-wefa-in-thayngen-kommt-es-zu-einem-wechsel": {
       "section": "canton-sh",
-      "ts": 1791665318110
+      "ts": 1792413956311
     },
     "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-07/georg-fischer-schlaegt-ton-buechner-als-neuen-praesidenten": {
       "section": "canton-sh",
-      "ts": 1791665339910
+      "ts": 1792413957164
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-01/gf-verkauft-luft-und-raumfahrt-sowie-industriegasturbinen": {
+      "section": "canton-sh",
+      "ts": 1792414090877
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-23/gvs-weine-ag-verlaesst-herblingen-und-zieht-nach-osterfingen": {
+      "section": "canton-sh",
+      "ts": 1792414091714
     },
     "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-30/ist-orange-das-neue-schwarz-wie-sich-weidmueller-im-ki": {
       "section": "canton-sh",
-      "ts": 1791665780414
+      "ts": 1792415498073
     },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-02/bei-der-wefa-in-thayngen-kommt-es-zu-einem-wechsel": {
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-12/gf-vizepraesidentin-gehoert-zu-den-top-100-women-in-business": {
       "section": "canton-sh",
-      "ts": 1791665785557
-    },
-    "canton-sh::https://www.radiomunot.ch/p/regionalnachrichten-vom-9-oktober-2026-1630-uhr-6t6jwn7to3u92tkozx3voy": {
-      "section": "canton-sh",
-      "ts": 1791666405996
+      "ts": 1792415539534
     }
   }
 }

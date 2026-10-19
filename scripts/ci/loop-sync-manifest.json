@@ -2628,9 +2628,9 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "3604c629453c9f0b",
-        "corpus": "3604c629453c9f0b",
-        "alignedAt": "2026-10-14"
+        "site": "eec81dd5f065c2c6",
+        "corpus": "eec81dd5f065c2c6",
+        "alignedAt": "2026-10-19"
       }
     },
     {
@@ -2878,6 +2878,16 @@
         "site": null,
         "corpus": null,
         "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/generated-cover-alt.mjs",
+      "mode": "corpus-only",
+      "reason": "Mappa canonica localizzata per l'alt neutro delle copertine generate, condivisa dai producer e dal refresh SEO del corpus. I prompt e i topic non verificano la scena visibile, quindi il helper evita descrizioni specifiche non provate; il sito consuma metadati e immagini pubblicati via API e non esegue questi writer.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-19"
       }
     },
     {
@@ -3263,8 +3273,8 @@
       "sitePath": "scripts/lib/extract-article-text.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "6d94d2b35134f627",
-        "corpus": "6d94d2b35134f627",
+        "site": "c896aecb77764b2a",
+        "corpus": "c896aecb77764b2a",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4873,9 +4883,9 @@
       "sitePath": "scripts/lib/github-actions-read-client.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "9b9bfdb0aca0843d",
-        "corpus": "9b9bfdb0aca0843d",
-        "alignedAt": "2026-10-11"
+        "site": "be53a863d879b85c",
+        "corpus": "be53a863d879b85c",
+        "alignedAt": "2026-10-19"
       }
     },
     {
@@ -5183,7 +5193,7 @@
     {
       "path": "scripts/ci/verify-served-fingerprint.mjs",
       "mode": "corpus-only",
-      "reason": "Registra l'impronta dei byte HTML del set effettivamente pushato dal fast-publish, distingue pushed e clean-no-op per shard e lingua, attende che l'origine GitHub Pages serva il contenuto dove c'e' stato un push reale e verifica l'apex dopo la purge con una sola ripetizione diagnostica. Le sonde hanno un timeout per richiesta legato al budget residuo, cosi' una risposta appesa non blocca la purge. Il sito consuma la superficie risultante e non possiede il publisher o il suo workflow; il confronto e' specifico del corpus che scrive gli shard Pages.",
+      "reason": "Registra l'impronta dei byte HTML del set effettivamente pushato dal fast-publish, distingue pushed e clean-no-op per shard e lingua, attende che l'origine GitHub Pages serva il contenuto dove c'e' stato un push reale e verifica l'apex dopo la purge. Il CLI usa curl come le sonde storiche, con fallback fetch solo se curl non e' disponibile; una risposta edge-blocked resta fail-closed, viene diagnosticata con body/header e non attiva la ripetizione cieca della purge. Le sonde hanno un timeout per richiesta legato al budget residuo, cosi' una risposta appesa non blocca la purge. Il sito consuma la superficie risultante e non possiede il publisher o il suo workflow; il confronto e' specifico del corpus che scrive gli shard Pages.",
       "baseline": {
         "site": null,
         "corpus": null,
@@ -6258,6 +6268,16 @@
         "corpus": "b2f64dcb75f9a088",
         "site": null,
         "alignedAt": "2026-10-17"
+      }
+    },
+    {
+      "path": "scripts/ci/resolve-workflow-run-push-range.mjs",
+      "mode": "corpus-only",
+      "reason": "Risolutore fail-closed della provenienza delle push per i replay workflow_run di fast-publish-section: usa gli eventi della repository o la cronologia di publish-api quando il push del bot non compare nel feed pubblico. Il sito non esegue questo coordinamento del publisher.",
+      "baseline": {
+        "site": null,
+        "corpus": "a2bfbe3bb37344b2",
+        "alignedAt": "2026-10-19"
       }
     },
     {

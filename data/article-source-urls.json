@@ -1,9 +1,4 @@
 {
-  "https://www.varesenoi.it/2026/09/11/leggi-notizia/argomenti/economia-13/articolo/teleriscaldamento-di-varese-prenotazioni-aperte-per-visitare-la-centrale.html": {
-    "articleId": "teleriscaldamento-varese-porte-aperte",
-    "ts": "2026-09-13T01:12:31.119Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/ministro-e-sindaci-in-fascia-con-smartt-valley-daverio-inaugura-il-campus-che-ricuce-scuola-e-fabbrica-non-si-innova-senza-competenze/2677099": {
     "articleId": "inaugurazione-campus-smartt-valley",
     "ts": "2026-09-13T01:23:00.266Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/a-cunardo-la-quinta-sagra-della-zucca-e-della-castagna-tre-giorni-alla-baita-del-fondista/2711941": {
     "articleId": "sagra-zucca-castagna-cunardo",
     "ts": "2026-10-19T07:18:03.424Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/mercato-del-lavoro-e-gestione-delle-crisi-a-varese-arriva-levento-for-matching/2712193": {
+    "articleId": "evento-for-matching-varese-2026",
+    "ts": "2026-10-19T13:21:14.897Z",
     "keyForm": 2
   }
 }

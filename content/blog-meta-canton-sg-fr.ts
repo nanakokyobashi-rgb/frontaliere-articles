@@ -27,6 +27,18 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.hsg-optime-orario-lavoro.title': 'HSG dirige une étude de l’UE sur la réduction du temps de travail',
     'blog.article.hsg-optime-orario-lavoro.excerpt': 'L’Université de Saint-Gall coordonne OPTIME, un projet de l’UE financé par Horizon Europe à hauteur d’environ 3,37 millions d’euros.',
     'blog.article.hsg-optime-orario-lavoro.imageAlt': 'Campus de l\'Université de Saint-Gall dans une scène éditoriale sur la recherche',
+    'blog.article.sondaggio-imprese-st-gallen-2026.title': 'St.Gallen lance l’enquête auprès des entreprises',
+    'blog.article.sondaggio-imprese-st-gallen-2026.excerpt': 'La ville de St.Gallen lance une enquête auprès des entreprises afin d’évaluer la place économique.',
+    'blog.article.sondaggio-imprese-st-gallen-2026.imageAlt': 'Ville de Saint-Gall, enquête auprès des entreprises',
+    'blog.article.voto-bahnhofplatz-wil-2026.title': 'Vote sur le Bahnhofplatz Wil : crédit de 63,66 millions',
+    'blog.article.voto-bahnhofplatz-wil-2026.excerpt': 'Le 29 novembre 2026, les citoyens de Wil voteront sur le projet du nouveau terminal de bus, de la vélostation et de la requalification de la gare.',
+    'blog.article.voto-bahnhofplatz-wil-2026.imageAlt': 'Bahnhofplatz à Wil dans le canton de Saint-Gall',
+    'blog.article.status-s-san-gallo-assistenza.title': 'Saint-Gall : aide réduite pour les titulaires du statut S',
+    'blog.article.status-s-san-gallo-assistenza.excerpt': 'La commission propose une aide réduite même après le permis.',
+    'blog.article.status-s-san-gallo-assistenza.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.voto-rete-gas-wil-2026.title': 'Wil : vote le 29 novembre 2026 sur le réseau de gaz',
+    'blog.article.voto-rete-gas-wil-2026.excerpt': 'Vote sur le fonds : 29 novembre 2026.',
+    'blog.article.voto-rete-gas-wil-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSgFr;

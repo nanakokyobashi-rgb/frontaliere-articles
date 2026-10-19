@@ -38,5 +38,25 @@
     "articleId": "hsg-optime-orario-lavoro",
     "ts": "2026-10-19T09:46:12.042Z",
     "keyForm": 2
+  },
+  "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/stadt-st-gallen-befragt-unternehmen-zum-wirtschaftsstandort.html": {
+    "articleId": "sondaggio-imprese-st-gallen-2026",
+    "ts": "2026-10-19T10:59:29.133Z",
+    "keyForm": 2
+  },
+  "https://www.stadtwil.ch/news/abstimmung-vom-29-november-2026-bahnhof-wil-und-allee-sicherer-umsteigen-besser-ankommen": {
+    "articleId": "voto-bahnhofplatz-wil-2026",
+    "ts": "2026-10-19T12:16:44.357Z",
+    "keyForm": 2
+  },
+  "https://www.sg.ch/news/sgch_allgemein/2026/10/status-s--kommission-fuer-reduzierte-sozialhilfe.html": {
+    "articleId": "status-s-san-gallo-assistenza",
+    "ts": "2026-10-19T12:49:37.877Z",
+    "keyForm": 2
+  },
+  "https://www.stadtwil.ch/news/abstimmung-vom-29-november-2026-reglement-fuer-den-fonds-zur-stilllegung-und-den-rueckbau-des-gasnetzes-der-technischen-betriebe-wil": {
+    "articleId": "voto-rete-gas-wil-2026",
+    "ts": "2026-10-19T13:03:39.397Z",
+    "keyForm": 2
   }
 }

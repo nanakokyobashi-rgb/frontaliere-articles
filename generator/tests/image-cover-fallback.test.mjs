@@ -9,6 +9,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   CATALOG_FALLBACK_MIN_SHARED_WORDS,
+  applyGeneratedHeroAlt,
   catalogFallbackSharedWordCount,
   classifyImageRegenerationFailure,
   queueArticleCoverRegeneration,
@@ -16,6 +17,7 @@ import {
   verifyCatalogFallbackCandidates,
 } from '../scripts/lib/article-cover-fallback.mjs';
 import { articleImageAssetId } from '../scripts/lib/article-cover-identity.mjs';
+import { GENERATED_COVER_ALT_BY_LOCALE } from '../scripts/lib/generated-cover-alt.mjs';
 import {
   appendGeneratedImageRecord,
   imageRecordForPath,
@@ -37,6 +39,29 @@ import {
 } from '../../engine/shared/generatedImageVision.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+
+test('final generated provenance replaces unsupported topical alt; licensed-photo alt stays intact', () => {
+  const generated = {
+    imageAlt: {
+      it: 'Personale Securitas in Svizzera centrale',
+      en: 'Securitas staff in central Switzerland',
+      de: 'Securitas-Personal in der Zentralschweiz',
+      fr: 'Personnel Securitas en Suisse centrale',
+    },
+  };
+  assert.equal(applyGeneratedHeroAlt(generated, { kind: 'generated', record: { scope: 'article-hero' } }), true);
+  assert.deepEqual(generated.imageAlt, GENERATED_COVER_ALT_BY_LOCALE);
+
+  const photoAlt = {
+    it: 'Fotografia del presidio aziendale',
+    en: 'Photograph of the company site',
+    de: 'Fotografie des Firmenstandorts',
+    fr: 'Photographie du site de l’entreprise',
+  };
+  const licensedPhoto = { imageAlt: { ...photoAlt } };
+  assert.equal(applyGeneratedHeroAlt(licensedPhoto, { kind: 'licensed-photo', record: { scope: 'article-hero' } }), false);
+  assert.deepEqual(licensedPhoto.imageAlt, photoAlt);
+});
 
 test('the fallback consumer loads its pure vision contract without native addons', () => {
   const fallbackUrl = new URL('../scripts/lib/article-cover-fallback.mjs', import.meta.url);
@@ -183,7 +208,7 @@ test('engine failure uses a freshly verified catalog hero and queues regeneratio
     assert.equal(result.source, 'catalog-fallback');
     assert.equal(data._generatedImagePath, record.imageUrl);
     assert.equal(data._generatedImageRecord.assetId, record.assetId);
-    assert.match(data.imageAlt.it, /illustrativ/i);
+    assert.deepEqual(data.imageAlt, GENERATED_COVER_ALT_BY_LOCALE);
     assert.equal(data.qualityReject, undefined);
     assert.equal(data.imagePolicyReject, undefined);
     assert.equal(fs.existsSync(path.join(root, 'data/image-regeneration-queue.json')), false);

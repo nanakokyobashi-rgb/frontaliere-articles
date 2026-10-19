@@ -107644,7 +107644,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/blog/article-securitas-violazioni-lavoro.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Personale di sicurezza Securitas in Svizzera centrale"
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
       },
       "datePublished": "2026-10-19T06:33:36+00:00",
       "dateModified": "2026-10-19T06:33:36+00:00",
@@ -107696,6 +107696,84 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/campagna-fisco-coppie-sposate/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-impatto-glp1-industria-alimentare': {
+    title: 'Farmaci antiobesità GLP-1: impatto sull\'industria alimentare',
+    description: 'In Svizzera, meno del 2% è in terapia GLP-1 Negli USA il budget alimentare cala fino al 5% Emmi, Danone e Nestlé adattano le gamme Givaudan stima una crescita',
+    keywords: 'frontalieri, ticino, svizzera, italia, farmaci, antiobesità, glp-1, impatto',
+    ogTitle: 'Farmaci GLP-1: l\'industria alimentare si adatta',
+    ogDescription: 'In Svizzera, meno del 2% è in terapia GLP-1 Negli USA il budget alimentare cala fino al 5% Emmi, Danone e Nestlé adattano le gamme Givaudan stima una crescita',
+    canonicalPath: '/articoli-svizzera/impatto-glp1-industria-alimentare/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Farmaci antiobesità GLP-1: impatto sull'industria alimentare",
+      "description": "In Svizzera, meno del 2% è in terapia GLP-1 Negli USA il budget alimentare cala fino al 5% Emmi, Danone e Nestlé adattano le gamme Givaudan stima una crescita",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-impatto-glp1-industria-alimentare.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Reparto di un supermercato svizzero con prodotti alimentari freschi"
+      },
+      "datePublished": "2026-10-19T11:07:20+00:00",
+      "dateModified": "2026-10-19T11:07:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/impatto-glp1-industria-alimentare/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lenu-referendum-firme-valide': {
+    title: 'Legge federale sull’energia nucleare: referendum riuscito',
+    description: '19 ottobre 2026: referendum formalmente riuscito 6 ottobre 2026: presentate 79 479 firme 78 922 firme sono state dichiarate valide Modifica LENu datata 19',
+    keywords: 'frontalieri, ticino, svizzera, italia, legge, federale, sull, energia',
+    ogTitle: 'Legge federale sull’energia nucleare: referendum riuscito',
+    ogDescription: '19 ottobre 2026: referendum formalmente riuscito 6 ottobre 2026: presentate 79 479 firme 78 922 firme sono state dichiarate valide Modifica LENu datata 19',
+    canonicalPath: '/articoli-svizzera/lenu-referendum-firme-valide/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Legge federale sull’energia nucleare: referendum riuscito",
+      "description": "19 ottobre 2026: referendum formalmente riuscito 6 ottobre 2026: presentate 79 479 firme 78 922 firme sono state dichiarate valide Modifica LENu datata 19",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lenu-referendum-firme-valide.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna in una scena editoriale sul referendum LENu"
+      },
+      "datePublished": "2026-10-19T12:13:26+00:00",
+      "dateModified": "2026-10-19T12:13:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/lenu-referendum-firme-valide/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

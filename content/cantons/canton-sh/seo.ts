@@ -319,6 +319,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-pulizie-tunnel-sciaffusa': {
+    title: 'Bundesamt für Strassen chiuderà tre tunnel di notte',
+    description: 'Dal 19 al 23 ottobre il Bundesamt für Strassen chiude ogni notte i tunnel Fäsenstaub, Cholfirst e Galgenbuck per lavori di pulizia, dalle 20 fino alle 5.',
+    keywords: 'frontalieri, ticino, svizzera, italia, bundesamt, strassen, chiuderà, tunnel',
+    ogTitle: 'Tre tunnel chiusi di notte per lavori di pulizia',
+    ogDescription: 'Il Bundesamt für Strassen fermerà ogni notte i tunnel Fäsenstaub, Cholfirst e Galgenbuck per lavori di pulizia. La finestra indicata va dal 19 al 23 ottobre, con chiusura dalle 20 fino alle 5 del giorno successivo.',
+    canonicalPath: '/articoli-sciaffusa/pulizie-tunnel-sciaffusa/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bundesamt für Strassen chiuderà tre tunnel di notte",
+      "description": "Dal 19 al 23 ottobre il Bundesamt für Strassen chiude ogni notte i tunnel Fäsenstaub, Cholfirst e Galgenbuck per lavori di pulizia, dalle 20 fino alle 5.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-pulizie-tunnel-sciaffusa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Tunnel Fäsenstaub, Cholfirst e Galgenbuck chiusi di notte per lavori di pulizia"
+      },
+      "datePublished": "2026-10-19T12:03:42+00:00",
+      "dateModified": "2026-10-19T12:03:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/pulizie-tunnel-sciaffusa/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -28485,6 +28485,26 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'impatto-glp1-industria-alimentare',
+    category: 'novita',
+    date: '2026-10-19T11:07:20.538Z',
+    image: '/images/blog/article-impatto-glp1-industria-alimentare.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'lenu-referendum-firme-valide',
+    category: 'novita',
+    date: '2026-10-19T12:13:25.984Z',
+    image: '/images/blog/article-lenu-referendum-firme-valide.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

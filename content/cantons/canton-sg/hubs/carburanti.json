@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-19T10:02:55.186Z",
-  "contentHash": "9233ed015b75fe22aeb1ca1638c2917dbb377e5393532046c21a732c994c0c10",
+  "updatedAt": "2026-10-19T13:11:13.608Z",
+  "contentHash": "b8364715da4fc6a58b8bf57a81937d5314847c00c6ce1456ec2fea16f1197bd5",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,34 +84,34 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil: voto il 29 novembre 2026 sulla rete del gas",
+          "url": "/articoli-san-gallo/voto-rete-gas-wil-2026/",
+          "excerpt": "Voto sul fondo: 29 novembre 2026.",
+          "date": "2026-10-19T13:03:39.354Z"
+        },
+        {
+          "title": "San Gallo: assistenza ridotta per titolari di Status S",
+          "url": "/articoli-san-gallo/status-s-san-gallo-assistenza/",
+          "excerpt": "La commissione propone assistenza ridotta anche dopo il permesso.",
+          "date": "2026-10-19T12:49:37.837Z"
+        },
+        {
+          "title": "Voto sul Bahnhofplatz Wil: credito di 63,66 milioni",
+          "url": "/articoli-san-gallo/voto-bahnhofplatz-wil-2026/",
+          "excerpt": "Il 29 novembre 2026 i cittadini di Wil voteranno sul progetto per il nuovo terminale bus, la velostazione e la riqualificazione della stazione.",
+          "date": "2026-10-19T12:16:44.327Z"
+        },
+        {
+          "title": "St.Gallen avvia il sondaggio per le imprese",
+          "url": "/articoli-san-gallo/sondaggio-imprese-st-gallen-2026/",
+          "excerpt": "La città di St.Gallen lancia un sondaggio rivolto alle imprese per valutare la piazza economica.",
+          "date": "2026-10-19T10:59:29.088Z"
+        },
+        {
           "title": "HSG guida studio UE sulla riduzione dell'orario di lavoro",
           "url": "/articoli-san-gallo/hsg-optime-orario-lavoro/",
           "excerpt": "L'Università di San Gallo coordina OPTIME, progetto UE finanziato da Horizon Europe con circa 3,37 milioni di euro.",
           "date": "2026-10-19T09:46:11.999Z"
-        },
-        {
-          "title": "Rheineck e Mels: due incidenti per aquaplaning",
-          "url": "/articoli-san-gallo/rheineck-mels-aquaplaning/",
-          "excerpt": "Due auto hanno urtato i guardrail il 10 ottobre 2026 Incidenti distinti su A1 e N13 I due conducenti non hanno riportato ferite Danni: circa CHF 35'000 e CHF",
-          "date": "2026-10-11T10:22:49.614Z"
-        },
-        {
-          "title": "HSG a San Gallo: oltre 170 spin-off ufficiali",
-          "url": "/articoli-san-gallo/hsg-spin-off-ufficiali/",
-          "excerpt": "La HSG sostiene gli studenti nella fondazione di imprese e presenta alcuni degli oltre 170 spin-off ufficiali HSG.",
-          "date": "2026-10-09T20:43:41.814Z"
-        },
-        {
-          "title": "Lavori sulla Hauptstrasse a Wartau dal 19 ottobre 2026",
-          "url": "/articoli-san-gallo/lavori-strada-wartau-plattis/",
-          "excerpt": "A Wartau i lavori sulla Hauptstrasse iniziano il 19 ottobre 2026: nel tratto Plattis saranno rinnovate le condotte di drenaggio e il fondo stradale.",
-          "date": "2026-10-09T20:23:10.514Z"
-        },
-        {
-          "title": "Spital Grabs: Haus O raggiunge il punto più alto",
-          "url": "/articoli-san-gallo/spital-grabs-haus-o-vertice/",
-          "excerpt": "A settembre 2026 Haus O dello Spital Grabs ha raggiunto il punto più alto. Haus S è stato ampliato: nuovi spazi per radiologia e oncologia, lavori fino al 2028.",
-          "date": "2026-10-08T11:13:38.471Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-19T10:02:55.186Z"
+      "updatedAt": "2026-10-19T13:11:13.608Z"
     },
     "en": {
       "canton": "SG",
@@ -195,34 +195,34 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil: vote on the gas network on November 29, 2026",
+          "url": "/en/st-gallen-articles/gas-network-vote-wil-2026/",
+          "excerpt": "Vote on the fund: November 29, 2026.",
+          "date": "2026-10-19T13:03:39.354Z"
+        },
+        {
+          "title": "St. Gallen: reduced assistance for Status S holders",
+          "url": "/en/st-gallen-articles/status-s-st-gallen-assistance/",
+          "excerpt": "The commission proposes reduced assistance even after the permit.",
+          "date": "2026-10-19T12:49:37.837Z"
+        },
+        {
+          "title": "Vote on Bahnhofplatz Wil: credit of 63,66 million",
+          "url": "/en/st-gallen-articles/wil-bahnhofplatz-vote-2026/",
+          "excerpt": "On November 29, 2026, the citizens of Wil will vote on the project for the new bus terminal, bicycle station, and redevelopment of the station.",
+          "date": "2026-10-19T12:16:44.327Z"
+        },
+        {
+          "title": "St.Gallen launches the business survey",
+          "url": "/en/st-gallen-articles/st-gallen-business-survey-2026/",
+          "excerpt": "The city of St.Gallen is launching a survey aimed at businesses to assess the business location.",
+          "date": "2026-10-19T10:59:29.088Z"
+        },
+        {
           "title": "HSG leads EU study on reducing working hours",
           "url": "/en/st-gallen-articles/hsg-optime-working-time/",
           "excerpt": "The University of St.",
           "date": "2026-10-19T09:46:11.999Z"
-        },
-        {
-          "title": "Rheineck and Mels: two hydroplaning accidents",
-          "url": "/en/st-gallen-articles/rheineck-mels-aquaplaning-crashes/",
-          "excerpt": "Two cars hit the guardrails on October 10, 2026 Separate accidents on A1 and N13 The two drivers were not injured Damage: approximately CHF 35'000 and CHF 4'000",
-          "date": "2026-10-11T10:22:49.614Z"
-        },
-        {
-          "title": "HSG in St. Gallen: over 170 official spin-offs",
-          "url": "/en/st-gallen-articles/hsg-official-spin-offs/",
-          "excerpt": "HSG supports students in founding companies and presents some of the more than 170 official HSG spin-offs.",
-          "date": "2026-10-09T20:43:41.814Z"
-        },
-        {
-          "title": "Roadworks on Hauptstrasse in Wartau from October 19, 2026",
-          "url": "/en/st-gallen-articles/roadworks-wartau-plattis/",
-          "excerpt": "In Wartau, work on Hauptstrasse will begin on October 19, 2026: in the Plattis section, the drainage pipes and road surface will be renewed.",
-          "date": "2026-10-09T20:23:10.514Z"
-        },
-        {
-          "title": "Spital Grabs: Haus O reaches the highest point",
-          "url": "/en/st-gallen-articles/spital-grabs-haus-o-highest-point/",
-          "excerpt": "In September 2026, Haus O of Spital Grabs reached its highest point. Haus S was expanded: new spaces for radiology and oncology, work continuing until 2028.",
-          "date": "2026-10-08T11:13:38.471Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-19T10:02:55.186Z"
+      "updatedAt": "2026-10-19T13:11:13.608Z"
     },
     "de": {
       "canton": "SG",
@@ -306,34 +306,34 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil: Abstimmung am 29. November 2026 über das Gasnetz",
+          "url": "/de/st-gallen-artikel/gasnetz-abstimmung-wil-2026/",
+          "excerpt": "Abstimmung über den Fonds: 29.",
+          "date": "2026-10-19T13:03:39.354Z"
+        },
+        {
+          "title": "St. Gallen: reduzierte Unterstützung für Personen mit Status S",
+          "url": "/de/st-gallen-artikel/status-s-st-gallen-unterstuetzung/",
+          "excerpt": "Die Kommission schlägt vor, auch nach der Erteilung der Aufenthaltsbewilligung reduzierte Unterstützung zu gewähren.",
+          "date": "2026-10-19T12:49:37.837Z"
+        },
+        {
+          "title": "Abstimmung über den Bahnhofplatz Wil: Kredit von 63,66 Millionen",
+          "url": "/de/st-gallen-artikel/abstimmung-bahnhofplatz-wil-2026/",
+          "excerpt": "Am 29. November 2026 stimmen die Bürgerinnen und Bürger von Wil über das Projekt für den neuen Busterminal, die Velostation und die Neugestaltung des Bahnhofs ab.",
+          "date": "2026-10-19T12:16:44.327Z"
+        },
+        {
+          "title": "St.Gallen startet die Unternehmensumfrage",
+          "url": "/de/st-gallen-artikel/st-gallen-unternehmensbefragung-2026/",
+          "excerpt": "Die Stadt St.Gallen startet eine Umfrage unter Unternehmen, um den Wirtschaftsstandort zu bewerten.",
+          "date": "2026-10-19T10:59:29.088Z"
+        },
+        {
           "title": "HSG leitet EU-Studie zur Arbeitszeitverkürzung",
           "url": "/de/st-gallen-artikel/hsg-optime-arbeitszeit/",
           "excerpt": "Die Universität St.",
           "date": "2026-10-19T09:46:11.999Z"
-        },
-        {
-          "title": "Rheineck und Mels: zwei Unfälle wegen Aquaplaning",
-          "url": "/de/st-gallen-artikel/rheineck-mels-aquaplaning-unfaelle/",
-          "excerpt": "Zwei Autos prallten am 10.",
-          "date": "2026-10-11T10:22:49.614Z"
-        },
-        {
-          "title": "HSG in St. Gallen: über 170 offizielle Spin-offs",
-          "url": "/de/st-gallen-artikel/hsg-offizielle-spin-offs/",
-          "excerpt": "Die HSG unterstützt Studierende bei der Gründung von Unternehmen und stellt einige der über 170 offiziellen HSG-Spin-offs vor.",
-          "date": "2026-10-09T20:43:41.814Z"
-        },
-        {
-          "title": "Arbeiten an der Hauptstrasse in Wartau ab dem 19. Oktober 2026",
-          "url": "/de/st-gallen-artikel/bauarbeiten-wartau-plattis/",
-          "excerpt": "In Wartau beginnen die Arbeiten an der Hauptstrasse am 19.",
-          "date": "2026-10-09T20:23:10.514Z"
-        },
-        {
-          "title": "Spital Grabs: Haus O erreicht den höchsten Punkt",
-          "url": "/de/st-gallen-artikel/spital-grabs-haus-o-hoechster-punkt/",
-          "excerpt": "Im September 2026 hat Haus O des Spital Grabs den höchsten Punkt erreicht. Haus S wurde erweitert: neue Räumlichkeiten für Radiologie und Onkologie, die Arbeiten dauern bis 2028.",
-          "date": "2026-10-08T11:13:38.471Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-19T10:02:55.186Z"
+      "updatedAt": "2026-10-19T13:11:13.608Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,34 +417,34 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil : vote le 29 novembre 2026 sur le réseau de gaz",
+          "url": "/fr/articles-saint-gall/vote-reseau-gaz-wil-2026/",
+          "excerpt": "Vote sur le fonds : 29 novembre 2026.",
+          "date": "2026-10-19T13:03:39.354Z"
+        },
+        {
+          "title": "Saint-Gall : aide réduite pour les titulaires du statut S",
+          "url": "/fr/articles-saint-gall/statut-s-saint-gall-assistance/",
+          "excerpt": "La commission propose une aide réduite même après le permis.",
+          "date": "2026-10-19T12:49:37.837Z"
+        },
+        {
+          "title": "Vote sur le Bahnhofplatz Wil : crédit de 63,66 millions",
+          "url": "/fr/articles-saint-gall/vote-bahnhofplatz-wil-2026/",
+          "excerpt": "Le 29 novembre 2026, les citoyens de Wil voteront sur le projet du nouveau terminal de bus, de la vélostation et de la requalification de la gare.",
+          "date": "2026-10-19T12:16:44.327Z"
+        },
+        {
+          "title": "St.Gallen lance l’enquête auprès des entreprises",
+          "url": "/fr/articles-saint-gall/enquete-entreprises-saint-gall-2026/",
+          "excerpt": "La ville de St.Gallen lance une enquête auprès des entreprises afin d’évaluer la place économique.",
+          "date": "2026-10-19T10:59:29.088Z"
+        },
+        {
           "title": "HSG dirige une étude de l’UE sur la réduction du temps de travail",
           "url": "/fr/articles-saint-gall/hsg-optime-temps-travail/",
           "excerpt": "L’Université de Saint-Gall coordonne OPTIME, un projet de l’UE financé par Horizon Europe à hauteur d’environ 3,37 millions d’euros.",
           "date": "2026-10-19T09:46:11.999Z"
-        },
-        {
-          "title": "Rheineck et Mels : deux accidents dus à l’aquaplanage",
-          "url": "/fr/articles-saint-gall/rheineck-mels-aquaplanage-accidents/",
-          "excerpt": "Deux voitures ont heurté les glissières de sécurité le 10 octobre 2026 Accidents distincts sur l’A1 et la N13 Les deux conducteurs n’ont pas été blessés",
-          "date": "2026-10-11T10:22:49.614Z"
-        },
-        {
-          "title": "HSG à Saint-Gall : plus de 170 spin-off officiels",
-          "url": "/fr/articles-saint-gall/hsg-spin-off-officiels/",
-          "excerpt": "La HSG soutient les étudiants dans la création d’entreprises et présente quelques-uns des plus de 170 spin-off officiels de la HSG.",
-          "date": "2026-10-09T20:43:41.814Z"
-        },
-        {
-          "title": "Travaux sur la Hauptstrasse à Wartau à partir du 19 octobre 2026",
-          "url": "/fr/articles-saint-gall/travaux-routiers-wartau-plattis/",
-          "excerpt": "À Wartau, les travaux sur la Hauptstrasse commencent le 19 octobre 2026 : sur le tronçon de Plattis, les conduites de drainage et la chaussée seront rénovées.",
-          "date": "2026-10-09T20:23:10.514Z"
-        },
-        {
-          "title": "Spital Grabs : Haus O atteint son point le plus haut",
-          "url": "/fr/articles-saint-gall/spital-grabs-haus-o-point-le-plus-haut/",
-          "excerpt": "En septembre 2026, Haus O de Spital Grabs a atteint son point le plus haut. Haus S a été agrandi : de nouveaux espaces pour la radiologie et l’oncologie, travaux jusqu’en 2028.",
-          "date": "2026-10-08T11:13:38.471Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-19T10:02:55.186Z"
+      "updatedAt": "2026-10-19T13:11:13.608Z"
     }
   }
 }
