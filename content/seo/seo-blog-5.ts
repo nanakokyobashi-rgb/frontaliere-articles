@@ -110300,10 +110300,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Il Municipio risponde all’interrogazione di Michele Codella I lavori a Lugano proseguiranno anche nei prossimi anni Focus tra Pensilina Botta e Corso Pestalozzi",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/frontalieri-assunzioni-lugano-interrogazione.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cantieri-lugano-riduzione-disagi.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Vista del centro città di Lugano con infrastrutture stradali"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-17T00:14:09+00:00",
       "dateModified": "2026-10-17T00:14:09+00:00",

@@ -45038,7 +45038,7 @@ const RAW_ARTICLES = [
  id: 'cantieri-lugano-riduzione-disagi',
  category: 'pratico',
  date: '2026-10-17T00:14:09.203Z',
- image: '/images/blog/frontalieri-assunzioni-lugano-interrogazione.webp',
+ image: '/images/blog/article-cantieri-lugano-riduzione-disagi.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['TI'],

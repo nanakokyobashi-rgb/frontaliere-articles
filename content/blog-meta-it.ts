@@ -13362,7 +13362,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.assemblea-ccti-rotta-economia.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.cantieri-lugano-riduzione-disagi.title': 'Cantieri a Lugano: il Municipio punta a ridurre i disagi',
     'blog.article.cantieri-lugano-riduzione-disagi.excerpt': 'Il Municipio risponde all’interrogazione di Michele Codella I lavori a Lugano proseguiranno anche nei prossimi anni Focus tra Pensilina Botta e Corso Pestalozzi',
-    'blog.article.cantieri-lugano-riduzione-disagi.imageAlt': 'Vista del centro città di Lugano con infrastrutture stradali',
+    'blog.article.cantieri-lugano-riduzione-disagi.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.tre-valli-varesine-7-posto-mondiale.title': 'Tre Valli Varesine 7ª al mondo: batte Vuelta e Paris-Roubaix',
     'blog.article.tre-valli-varesine-7-posto-mondiale.excerpt': 'Tre Valli Varesine settima nella classifica ProCyclingStats La corsa ha ottenuto 913 punti Liegi, Vuelta e Parigi-Roubaix sono alle spalle Il Tour de France',
     'blog.article.tre-valli-varesine-7-posto-mondiale.imageAlt': 'Illustrazione generata per questo articolo',
