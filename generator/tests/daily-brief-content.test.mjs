@@ -138,7 +138,7 @@ test('the published copy reflects available observations and verified-data recov
   assert.doesNotMatch(article.content.de.body2, /pro 50 Liter\*\* wert/);
 });
 
-test('the daily body does not mix a rolling jobs total with the complete-week comparison', () => {
+test('the daily body omits the rolling jobs window without publishing its cutoff', () => {
   const article = buildDailyBriefArticle(BRIEF);
   for (const locale of ['it', 'en', 'de', 'fr']) {
     const body = article.content[locale].body4.replace(/[\s.,\u202f]/g, '');
@@ -333,6 +333,28 @@ test('the three descriptive surfaces each fit their own budget, every locale, ev
   }
 });
 
+test('metadata describes active job listings without claiming unfinalized new arrivals', () => {
+  const activeListings = {
+    it: /annunci di lavoro attivi/,
+    en: /active (?:Swiss )?job listings/,
+    de: /aktive Stellenanzeigen|aktive Stellenangebote/,
+    fr: /offres d'emploi actives/,
+  };
+  const unverifiedArrivalClaims = {
+    it: /nuovi annunci|nuove offerte|sono usciti/,
+    en: /\bnew\b|\bposted\b|\badded\b/,
+    de: /neue Stellen|neu dazugekommen/,
+    fr: /nouvelles offres|ajoutées|sont parues/,
+  };
+  const article = buildDailyBriefArticle(BRIEF);
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    const copy = ['excerpt', 'seoDescription', 'ogDescription']
+      .map((field) => article.content[locale][field]).join('\n');
+    assert.match(copy, activeListings[locale], `${locale}: metadata must describe the active listings shown in the body`);
+    assert.doesNotMatch(copy, unverifiedArrivalClaims[locale], `${locale}: date buckets do not establish newly added listings`);
+  }
+});
+
 /**
  * The regression guard proper. Everything above could pass while the three
  * fields carried the same string — which is precisely the state that produced
@@ -404,7 +426,7 @@ test('pickHeadline is TOTAL over available blocks (PR #51 review finding)', () =
       { ...BRIEF.blocks.jobs, yesterdayAdded: null },
       { ...BRIEF.blocks.jobs, yesterdayAdded: 3 }],
   };
-  const KINDS = new Set(['dailyBrief', 'borderWait', 'borderWaitChange', 'jobsTrend', 'exchangeChange', 'fuelSaving']);
+  const KINDS = new Set(['dailyBrief', 'borderWait', 'borderWaitChange', 'exchangeChange', 'fuelSaving']);
   let combos = 0;
   for (const borderWait of variants.borderWait)
     for (const fuel of variants.fuel)
@@ -434,7 +456,7 @@ test('the review scenario builds an edition instead of throwing (exit-0 contract
   const a1 = buildDailyBriefArticle(brief); // used to throw here
   assert.equal(a1._headline.kind, 'dailyBrief');
   assert.match(a1.content.it.title, /dati verificati di oggi/);
-  brief.blocks.jobs.yesterdayAdded = null; // → jobsTotal fallback
+  brief.blocks.jobs.yesterdayAdded = null; // active totals stay available
   const a2 = buildDailyBriefArticle(brief);
   assert.equal(a2._headline.kind, 'dailyBrief');
   brief.blocks.jobs = { available: false, reason: 'x' };
@@ -455,17 +477,17 @@ test('a neutral lead does not hide valid jobs totals or claim an outage', () => 
   assert.equal(article._headline.kind, 'borderWait'); // only the measured 47-minute wait clears a signal floor
 });
 
-test('a raw jobs count and sub-threshold readings produce a neutral headline', () => {
+test('a raw job-board count and sub-threshold readings produce a neutral headline', () => {
   const calm = structuredClone(BRIEF.blocks);
   calm.borderWait.worst.waitMinutes = 3; // sub-threshold queue
-  calm.jobs.yesterdayAdded = 666; // no complete-week baseline: not a trend
+  calm.jobs.yesterdayAdded = 666; // an unfinalized date bucket cannot become a lead
   calm.exchange = { available: false };
   calm.fuel.bestSavings[0].italyObservedAt = '17/10/2026';
   calm.fuel.bestSavings[0].swissObservedAt = '16/10/2026 00:01'; // unknown interval could approach 48h
   assert.equal(pickHeadline(calm).kind, 'dailyBrief');
 });
 
-test('a complete 28.5% jobs-board drop leads the actual four-locale output with its periods', () => {
+test('seven date-only job rows cannot create a weekly lead or period claim', () => {
   const todayIso = '2026-10-18';
   const currentAdds = [1000, 1000, 1000, 1000, 1000, 1000, 942];
   const previousAdds = [1387, 1387, 1387, 1387, 1387, 1387, 1391];
@@ -476,68 +498,42 @@ test('a complete 28.5% jobs-board drop leads the actual four-locale output with 
   const brief = structuredClone(BRIEF);
   brief.dateIso = todayIso;
   brief.blocks.borderWait.worst.waitMinutes = 5;
-  brief.blocks.jobs.yesterdayAdded = 942;
-  brief.insights = buildDailyBriefInsights({ blocks: brief.blocks, jobsStats: { history }, todayIso });
+  brief.blocks.jobs = { ...brief.blocks.jobs, yesterdayAdded: null };
+  brief.insights = buildDailyBriefInsights({ blocks: brief.blocks, jobsStats: {
+    history,
+    leaders: { topCompaniesActive: [{ name: 'Employer', count: 8 }], topLocationsActive: [{ name: 'Chiasso', count: 5 }] },
+  }, todayIso });
   const article = buildDailyBriefArticle(brief);
-  assert.equal(article._headline.kind, 'jobsTrend');
-  assert.equal(article._headline.weeklyChange, -2771);
-  assert.equal(article._headline.weeklyChangePct, -28.5);
+  assert.equal(article._headline.kind, 'dailyBrief');
+  assert.equal(brief.insights.jobs.currentWeekAdded, undefined);
+  assert.equal(brief.insights.jobs.weeklyChange, undefined);
   for (const locale of ['it', 'en', 'de', 'fr']) {
-    const body = article.content[locale].body1;
-    const tag = { it: 'it-CH', en: 'en-CH', de: 'de-CH', fr: 'fr-CH' }[locale];
-    assert.ok(body.includes((6942).toLocaleString(tag)), `${locale}: missing current total`);
-    assert.ok(body.includes((9713).toLocaleString(tag)), `${locale}: missing baseline total`);
-    assert.ok(body.includes((2771).toLocaleString(tag)), `${locale}: missing absolute change`);
-    assert.match(body, /28[,.]5/);
-    assert.match(body, /2026|October|ottobre|Oktober|octobre/);
+    const copy = `${article.content[locale].body1}\n${article.content[locale].body4}`;
+    assert.doesNotMatch(copy, /6[.,’']?942|9[.,’']?713|2[.,’']?771|28[,.]5/);
+    assert.doesNotMatch(copy, /complete week|complete weeks|vollständige Woche|vollständigen Woche|semaine complète|settimana completa|settimane complete|gestern|yesterday|ieri|hier/i);
+    assert.ok(article.content[locale].body4.includes((22645).toLocaleString({ it: 'it-CH', en: 'en-CH', de: 'de-CH', fr: 'fr-CH' }[locale])), `${locale}: active total missing`);
+    assert.match(article.content[locale].body4, /Employer/);
+    assert.match(article.content[locale].body4, /Chiasso/);
   }
-  assert.match(article.content.it.title, /Nuovi annunci di lavoro in Svizzera: -28\.5% settimana su settimana/);
-  assert.match(article.content.en.title, /New Swiss job listings: -28.5% week on week/);
-  assert.match(article.content.de.title, /Neue Stellenanzeigen in der Schweiz: -28\.5% im Wochenvergleich/);
-  assert.match(article.content.fr.title, /Nouvelles offres d’emploi en Suisse : -28,5% sur la semaine/);
-  assert.doesNotMatch(article.content.it.title, /settimana precedente|11 ottobre|17 ottobre/);
-  assert.match(article.content.it.excerpt, /nuovi annunci di lavoro aggiunti al nostro job board in Svizzera/);
-  assert.match(article.content.en.excerpt, /new Swiss job listings added to our job board/);
-  assert.match(article.content.de.excerpt, /neue Stellenanzeigen in der Schweiz auf unserem Job-Board/);
-  assert.match(article.content.fr.excerpt, /nouvelles offres d'emploi en Suisse ajoutées à notre job board/);
-  assert.match(article.content.it.body1, /non misura le persone occupate/);
-  assert.match(article.content.it.body1, /non indica da solo le cause/);
 });
 
-test('legacy insights derive full weeks only from their explicit last closed source date', () => {
+test('legacy weekly fields without closure evidence are ignored in every locale', () => {
   const brief = structuredClone(BRIEF);
   brief.dateIso = '2026-10-18';
   brief.blocks.borderWait.worst.waitMinutes = 5;
+  brief.blocks.jobs.yesterdayAdded = null;
   brief.insights = { jobs: { lastClosedDay: '2026-10-17', currentWeekAdded: 6942,
-    previousWeekAdded: 9713, weeklyChange: -2771, weeklyChangePct: -28.5 } };
-  const article = buildDailyBriefArticle(brief);
-  assert.equal(article._headline.kind, 'jobsTrend');
-  assert.deepEqual(article._headline.currentPeriod, { from: '2026-10-11', to: '2026-10-17' });
-  assert.deepEqual(article._headline.previousPeriod, { from: '2026-10-04', to: '2026-10-10' });
-
-  brief.dateIso = '2026-10-19'; // lastClosedDay is no longer yesterday
-  assert.equal(buildDailyBriefArticle(brief)._headline.kind, 'dailyBrief');
-  brief.dateIso = '2026-10-18';
-  brief.insights.jobs.weeklyChange = -999;
-  assert.equal(buildDailyBriefArticle(brief)._headline.kind, 'dailyBrief');
-});
-
-test('a positive jobs-board change is described as more new listings in every locale', () => {
-  const brief = structuredClone(BRIEF);
-  brief.dateIso = '2026-10-18';
-  brief.blocks.borderWait.worst.waitMinutes = 5;
-  brief.insights = { jobs: {
-    lastClosedDay: '2026-10-17', currentWeekAdded: 9000, previousWeekAdded: 7000,
-    weeklyChange: 2000, weeklyChangePct: 28.6,
+    previousWeekAdded: 9713, weeklyChange: -2771, weeklyChangePct: -28.5,
     currentPeriod: { from: '2026-10-11', to: '2026-10-17' },
-    previousPeriod: { from: '2026-10-04', to: '2026-10-10' },
-  } };
+    previousPeriod: { from: '2026-10-04', to: '2026-10-10' } } };
   const article = buildDailyBriefArticle(brief);
-  assert.equal(article._headline.kind, 'jobsTrend');
-  assert.match(article.content.it.body1, /più annunci nuovi/);
-  assert.match(article.content.en.body1, /more new listings/);
-  assert.match(article.content.de.body1, /mehr neue Einträge/);
-  assert.match(article.content.fr.body1, /plus de nouvelles annonces/);
+  assert.equal(article._headline.kind, 'dailyBrief');
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    const copy = `${article.content[locale].title}\n${article.content[locale].body1}\n${article.content[locale].body4}`;
+    assert.doesNotMatch(copy, /6[.,’']?942|9[.,’']?713|2[.,’']?771|28[,.]5/);
+    assert.doesNotMatch(copy, /complete week|complete weeks|vollständige Woche|vollständigen Woche|semaine complète|settimana completa|settimane complete/i);
+    assert.match(article.content[locale].body4, /22645|22[.,’']?645/);
+  }
 });
 
 test('a supported border comparison can lead when no other signal is available', () => {
@@ -668,30 +664,28 @@ test('sitemap retention keeps the newest 90 dated editions, ignores everything e
   assert.ok(!retired.has('classifica-dogane-ticino')); // evergreen untouched
 });
 
-test('the generated cover stays number-free while the article carries its measured comparison', () => {
+test('the generated cover follows the neutral lead when job history has no closure attestation', () => {
+  const todayIso = '2026-10-18';
+  const history = Array.from({ length: 14 }, (_, index) => ({
+    date: new Date(Date.parse(`${todayIso}T00:00:00Z`) - (index + 1) * 86400000).toISOString().slice(0, 10),
+    added: index < 7 ? 942 : 1387,
+  }));
   const brief = structuredClone(BRIEF);
-  brief.dateIso = '2026-10-18';
+  brief.dateIso = todayIso;
   brief.blocks.borderWait.worst.waitMinutes = 5;
-  brief.insights = { jobs: {
-    lastClosedDay: '2026-10-17',
-    currentWeekAdded: 6942,
-    previousWeekAdded: 9713,
-    weeklyChange: -2771,
-    weeklyChangePct: -28.5,
-  } };
+  brief.blocks.jobs.yesterdayAdded = null;
+  brief.insights = buildDailyBriefInsights({ blocks: brief.blocks, jobsStats: { history }, todayIso });
   const article = buildDailyBriefArticle(brief);
-  assert.equal(article._headline.kind, 'jobsTrend');
-  assert.equal(article._headline.weeklyChange, -2771);
-  assert.equal(article._headline.weeklyChangePct, -28.5);
+  assert.equal(article._headline.kind, 'dailyBrief');
   for (const locale of ['it', 'en', 'de', 'fr']) {
-    const body = article.content[locale].body1;
-    assert.match(body, /6[.,’']?942/);
-    assert.match(body, /9[.,’']?713/);
-    assert.match(body, /28[,.]5/);
+    assert.match(article.content[locale].body4, /22'645|22\.645|22,645|22645/);
+    assert.doesNotMatch(`${article.content[locale].body1}\n${article.content[locale].body4}`, /6[.,’']?942|9[.,’']?709|28[,.]5/);
   }
   const prompt = buildDailyBriefCoverPrompt(article._headline);
-  assert.match(prompt, /cross-border employment/i);
+  assert.match(prompt, /cross-border commuter/i);
   assert.doesNotMatch(prompt, /6942|9713|2771|28\.5/);
+  const alt = buildDailyBriefCoverAlt(article._headline);
+  for (const locale of ['it', 'en', 'de', 'fr']) assert.doesNotMatch(alt[locale], /6942|9713|2771|28\.5/);
 });
 
 test('loadSnapshot refuses stale, thin and missing snapshots (exit-0 path)', () => {
