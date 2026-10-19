@@ -108,6 +108,20 @@ const HELD_ASSET_PROBE_CONCURRENCY = 4;
 export const UPLOAD_ORDER = Object.freeze(['article', 'archive', 'hub', 'landing']);
 const PUBLISH_API_WORKFLOW = '.github/workflows/publish-api.yml';
 const FULL_GIT_SHA_RE = /^[a-f0-9]{40}$/;
+const CANONICAL_PAGE_PATH_RE = /^\/[a-z0-9/-]+\/$/u;
+
+function parseCanonicalPagePaths(raw, option) {
+  let pages;
+  try {
+    pages = JSON.parse(raw);
+  } catch (error) {
+    throw new Error(`${option} deve essere un array JSON di path: ${error.message}`);
+  }
+  if (!Array.isArray(pages) || pages.some((page) => typeof page !== 'string' || !CANONICAL_PAGE_PATH_RE.test(page) || page.includes('//'))) {
+    throw new Error(`${option} deve contenere solo path canonici assoluti`);
+  }
+  return pages;
+}
 
 function publishedMainHead() {
   const repository = process.env.GITHUB_REPOSITORY;
@@ -137,7 +151,15 @@ async function assertExpectedMainHead(expected, readMainHead = publishedMainHead
 }
 
 export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activeCorpusCoreMap() } = {}) {
-  const out = { ids: [], bootstrap: false, publish: false, dryRun: false, removeStaleCantonRssFeeds: false };
+  const out = {
+    ids: [],
+    missingPages: [],
+    knownMissingPages: [],
+    bootstrap: false,
+    publish: false,
+    dryRun: false,
+    removeStaleCantonRssFeeds: false,
+  };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const value = () => {
@@ -157,6 +179,10 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
       }
       if (!Array.isArray(ids) || ids.some((id) => typeof id !== 'string' || !id)) throw new Error('--ids deve essere un array JSON di id non vuoti');
       out.ids.push(...ids);
+    } else if (a === '--missing-pages' || a === '--known-missing-pages') {
+      const pages = parseCanonicalPagePaths(value(), a);
+      if (a === '--missing-pages') out.missingPages.push(...pages);
+      else out.knownMissingPages.push(...pages);
     } else if (a === '--bootstrap') out.bootstrap = true;
     else if (a === '--remove-stale-canton-rss-feeds') out.removeStaleCantonRssFeeds = true;
     else if (a === '--publish') out.publish = true;
@@ -166,11 +192,23 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
     else throw new Error(`argomento sconosciuto: ${a}`);
   }
   out.ids = [...new Set(out.ids)];
+  out.missingPages = [...new Set(out.missingPages)];
+  out.knownMissingPages = [...new Set(out.knownMissingPages)];
   for (const flag of ['section', 'out', 'summary']) if (!out[flag]) throw new Error(`manca --${flag}`);
   if (out.publish && out.dryRun) throw new Error('--publish e --dry-run sono alternativi');
   if (out.bootstrap && out.ids.length) throw new Error('--bootstrap rende tutti gli articoli della sezione: non si combina con --id/--ids');
   assertPublishableSection(out.section, { all, active });
   return out;
+}
+
+export function stagedReleasePageSets(pages, publishedLivePages, confirmedUploadPagePaths = [], confirmedKnownMissingPagePaths = confirmedUploadPagePaths) {
+  const confirmedUpload = new Set(confirmedUploadPagePaths);
+  const confirmedKnownMissing = new Set(confirmedKnownMissingPagePaths);
+  const publishedPageKeys = new Set(publishedLivePages.map((page) => page.edgeKey));
+  return {
+    pagesForPublish: pages.filter((page) => !publishedPageKeys.has(page.edgeKey) || confirmedUpload.has(page.canonicalPath)),
+    immutableLivePages: publishedLivePages.filter((page) => !confirmedKnownMissing.has(page.canonicalPath)),
+  };
 }
 
 export function missingRenderedArticleIds(requestedIds, entries) {
@@ -1245,6 +1283,25 @@ function isNotFoundStatus(status) {
   return status === 404 || status === 'HTTP 404';
 }
 
+export async function confirmCantonPageMissing(
+  url,
+  { probeImpl = probe, sleepImpl = sleep, attempts = 3, delayMs = 1000 } = {},
+) {
+  const statuses = [];
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    let observed;
+    try {
+      observed = await probeImpl(url, { attempts: 1, delayMs: 0 });
+    } catch (error) {
+      observed = { status: error?.message ?? String(error) };
+    }
+    statuses.push(observed?.status ?? 'nessuna risposta');
+    if (!isNotFoundStatus(observed?.status)) return { confirmed: false, statuses };
+    if (attempt + 1 < attempts) await sleepImpl(delayMs);
+  }
+  return { confirmed: statuses.length === attempts, statuses };
+}
+
 /** Snapshot del feed attualmente servito, usato per ripristinare un set parziale. */
 async function snapshotCantonRssFeed(url, { probeImpl = probe } = {}) {
   return probeImpl(url, { attempts: 3, delayMs: 1000, want: () => true });
@@ -1932,6 +1989,7 @@ export async function publish({
   sleepImpl = sleep,
   snapshotPagesBeforeUpload = false,
   immutablePages = [],
+  requiredPagePaths = [],
   assertMainFreshImpl = async () => {},
 }) {
   let failures = 0;
@@ -1939,6 +1997,7 @@ export async function publish({
   let rollbackRssPublication = null;
   let pageSnapshots = null;
   let pagesForUpload = pages;
+  const requiredPagePathSet = new Set(requiredPagePaths);
   const rollbackRss = async ({ neutralize = false } = {}) => {
     if (!rollbackRssPublication) return 0;
     const rollback = rollbackRssPublication;
@@ -2079,10 +2138,10 @@ export async function publish({
         const body = fs.readFileSync(local, 'utf8');
         if ([...heldAssetKeys].some((key) => cantonPageReferencesAsset(body, key))) {
           heldPageKeys.add(page.edgeKey);
-          console.log(
-            `::notice::[${LOG}] release live differita: differisco anche ${page.edgeKey}; ` +
-            'il render nuovo riusa un asset trattenuto dalla superficie precedente',
-          );
+          const reason = requiredPagePathSet.has(page.canonicalPath)
+            ? 'il target mancante resta differito finché ogni asset condiviso non è verificato sul CDN'
+            : 'il render nuovo riusa un asset trattenuto dalla superficie precedente';
+          console.log(`::notice::[${LOG}] release live differita: differisco anche ${page.edgeKey}; ${reason}`);
         }
       }
       pagesForUpload = pages.filter((page) => !heldPageKeys.has(page.edgeKey));
@@ -2305,6 +2364,8 @@ export async function main(
     latestApiInputCommitImpl = latestApiInputCommit,
     sourceRegistryIdsImpl = sourceRegistryIds,
     currentMainHeadImpl = publishedMainHead,
+    probeImpl = probe,
+    sleepImpl = sleep,
     publisherCommitImpl = () => execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
     fetchImpl = fetch,
   } = {},
@@ -2316,6 +2377,7 @@ export async function main(
   fs.mkdirSync(distDir, { recursive: true });
   const ids = args.bootstrap ? sourceRegistryIdsImpl(ROOT_DIR, section) : args.ids;
   const publishing = args.publish && !args.dryRun;
+  const allowDeferredLiveRelease = process.env.ALLOW_DEFERRED_LIVE_RELEASE === 'true';
   const publisherCommit = publishing ? publisherCommitImpl() : null;
   const expectedMainHead = process.env.EXPECTED_MAIN_HEAD || publisherCommit;
   const assertMainFreshImpl = async () => {
@@ -2353,7 +2415,7 @@ export async function main(
   // checkout must not override an edge registry that is still live.
   const effectiveStatus = publishing ? await publishedStatusImpl(section) : null;
   const cleanupRssRequested = args.removeStaleCantonRssFeeds === true;
-  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested)) {
+  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested || allowDeferredLiveRelease)) {
     releaseCommit = await resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: publishedApiReleaseCommitImpl,
       apiReleaseCommitOverride: process.env.API_RELEASE_COMMIT,
@@ -2379,7 +2441,7 @@ export async function main(
   // completion replay finish the release after its edge pointer is served.
   let deferredLiveRelease = false;
   let liveBootstrapManifestMissing = false;
-  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested)) {
+  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested || allowDeferredLiveRelease)) {
     const readiness = await publishedReleaseReadyImpl(releaseCommit, { section, fetchImpl });
     // Quando la readiness è verificata, il set dichiarato dal manifest decide
     // anche se la landing può annunciare RSS: una sezione live senza articoli
@@ -2416,6 +2478,15 @@ export async function main(
         `::notice::[${LOG}] bootstrap ${section}: manifest precedente assente e release API/edge non pronta; ` +
         'blocco la pubblicazione finché la superficie precedente non è dimostrata',
       );
+    }
+    if (allowDeferredLiveRelease && !readinessVerified && publishedManifest.state === 'ok') {
+      deferredLiveRelease = true;
+      if (effectiveStatus !== 'live') {
+        console.log(
+          `::notice::[${LOG}] flip pendente per ${section}: il registro edge è ancora ${effectiveStatus}; ` +
+          'mantengo manifest, RSS e cancellazioni differiti fino al replay globale',
+        );
+      }
     }
     cantonRssFeeds = rssPlan.cantonRssFeeds;
     removeStaleCantonRssFeeds = rssPlan.removeStaleCantonRssFeeds;
@@ -2516,15 +2587,44 @@ export async function main(
   const publishedLivePages = publishedManifestPages
     ? Object.values(publishedManifestPages).flat()
     : [];
-  const publishedPageKeys = new Set(publishedLivePages.map((page) => page.edgeKey));
+  const requestedMissingPagePaths = new Set(args.missingPages);
+  const knownMissingPagePaths = new Set(deferredLiveRelease ? [...args.knownMissingPages, ...args.missingPages] : args.missingPages);
+  const renderedPagePaths = new Map(pages.map((page) => [page.canonicalPath, page]));
+  const publishedPagePaths = new Map(publishedLivePages.map((page) => [page.canonicalPath, page]));
+  const confirmedMissingPagePaths = new Set();
+  const confirmedKnownMissingPagePaths = new Set();
+  if (requestedMissingPagePaths.size > 0 && (!publishing || (deferredLiveRelease && !allowDeferredLiveRelease))) {
+    defects.push('missing-pages richiede un publish; se la release è staged deve avere il differimento esplicitamente armato');
+  } else {
+    for (const requestedPath of requestedMissingPagePaths) {
+      if (!renderedPagePaths.has(requestedPath)) {
+        defects.push(`pagina dichiarata mancante non resa dal backfill: ${requestedPath}`);
+      }
+    }
+    const pathsToConfirm = new Set([
+      ...requestedMissingPagePaths,
+      ...[...knownMissingPagePaths].filter((pagePath) => publishedPagePaths.has(pagePath)),
+    ]);
+    for (const pagePath of pathsToConfirm) {
+      const page = renderedPagePaths.get(pagePath) ?? publishedPagePaths.get(pagePath);
+      if (!page) continue;
+      const confirmation = await confirmCantonPageMissing(page.cdnUrl, { probeImpl, sleepImpl });
+      if (!confirmation.confirmed) {
+        defects.push(`pagina dichiarata mancante ora presente o non verificabile: ${pagePath} (${confirmation.statuses.join(' → ')})`);
+        continue;
+      }
+      if (requestedMissingPagePaths.has(pagePath)) confirmedMissingPagePaths.add(pagePath);
+      if (knownMissingPagePaths.has(pagePath)) confirmedKnownMissingPagePaths.add(pagePath);
+    }
+  }
   // During a deferred live release the old sitemap and edge registry are still
   // live. Only keys absent from the verified old page manifest are immutable
   // additions; replacing an already announced key here would mix two releases
-  // before the API/edge pointer flips.
-  const pagesForPublish = deferredLiveRelease
-    ? pages.filter((page) => !publishedPageKeys.has(page.edgeKey))
-    : pages;
-  const immutableLivePages = deferredLiveRelease ? publishedLivePages : [];
+  // before the API/edge pointer flips, except for an announced key confirmed
+  // 404 by the reconciler, which has no live bytes to preserve.
+  const stagedPageSets = stagedReleasePageSets(pages, publishedLivePages, confirmedMissingPagePaths, confirmedKnownMissingPagePaths);
+  const pagesForPublish = deferredLiveRelease ? stagedPageSets.pagesForPublish : pages;
+  const immutableLivePages = deferredLiveRelease ? stagedPageSets.immutableLivePages : [];
 
   if (publishing && effectiveStatus === null) {
     defects.push('registro edge illeggibile o non valido: stato effettivo della sezione non dimostrato');
@@ -2533,6 +2633,12 @@ export async function main(
     defects.push(
       `manifest edge ${section} non verificabile (${publishedManifest.reason ?? 'errore sconosciuto'}): ` +
       'pubblicazione bloccata per non calcolare cancellazioni dal parent del push',
+    );
+  }
+  if (publishing && allowDeferredLiveRelease && publishedManifest.state !== 'ok') {
+    defects.push(
+      `backfill staged ${section} senza manifest edge verificato: ` +
+      'inventario precedente non dimostrato, pubblicazione bloccata',
     );
   }
   if (liveBootstrapManifestMissing) {
@@ -2605,6 +2711,10 @@ export async function main(
     pages,
     pagesForPublish,
     immutableLivePages,
+    requestedMissingPagePaths: [...requestedMissingPagePaths],
+    confirmedMissingPagePaths: [...confirmedMissingPagePaths],
+    knownMissingPagePaths: [...knownMissingPagePaths],
+    confirmedKnownMissingPagePaths: [...confirmedKnownMissingPagePaths],
     // Legacy summary key retains its bootstrap-only meaning.
     immutableBootstrapPages: args.bootstrap ? immutableLivePages : [],
     cdnUploads,
@@ -2667,19 +2777,23 @@ export async function main(
     publishCantonRssFeedsImpl,
     snapshotPagesBeforeUpload: deferredLiveRelease,
     immutablePages: immutableLivePages,
+    requiredPagePaths: [...confirmedMissingPagePaths],
     assertMainFreshImpl,
   });
   if (summary.published.failures === 0 && deferredLiveRelease) {
     summary.published.manifestDeferred = true;
     if (!args.bootstrap) {
-      summary.published.failures = 1;
-      summary.published.deferredReason = 'release API/edge non verificata: il replay deve ritentare prima di chiudere verde';
+      summary.published.deferredForReplay = allowDeferredLiveRelease;
+      summary.published.deferredReason = 'release API/edge non verificata: il replay deve riallineare il registry prima di pubblicare il manifest';
+      if (!allowDeferredLiveRelease) summary.published.failures = 1;
       console.log(
         `::notice::[${LOG}] manifest edge ${section} differito: ` +
-        'il run resta rosso finché il replay non verifica la release API/edge',
+        (allowDeferredLiveRelease
+          ? 'backfill staged completato; il replay API deve verificare la release prima del manifest'
+          : 'il run resta rosso finché il replay non verifica la release API/edge'),
       );
       writeSummary();
-      return 1;
+      return summary.published.failures ? 1 : 0;
     }
     writeSummary();
     return 0;

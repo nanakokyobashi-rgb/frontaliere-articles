@@ -7,6 +7,10 @@
     "canton-tg::https://awa.tg.ch/public/upload/assets/34935/infoblatt_was_tun_bei_ausstehendem_lohn.pdf?fp=1": {
       "section": "canton-tg",
       "ts": 1792388979430
+    },
+    "canton-tg::https://schalter.tg.ch": {
+      "section": "canton-tg",
+      "ts": 1792406204638
     }
   }
 }

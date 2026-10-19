@@ -26,6 +26,11 @@ import {
 } from '../scripts/regenerate-queued-covers.mjs';
 import { GENERATED_COVER_ALT_BY_LOCALE } from '../scripts/lib/seo-entry-builder.mjs';
 import {
+  GENERATED_COVER_ALT_BY_LOCALE as CANONICAL_GENERATED_COVER_ALT_BY_LOCALE,
+  LEGACY_GENERATED_COVER_ALT_BY_LOCALE,
+  LICENSED_PHOTO_ALT_BY_LOCALE,
+} from '../scripts/lib/generated-cover-alt.mjs';
+import {
   locateArticleRegistry,
   locateArticleSeoImage,
   updateArticleImageInRegistry,
@@ -42,6 +47,10 @@ import { registerLockPath } from '../scripts/lib/register-lock.mjs';
 function tempRoot() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'cover-queue-drain-'));
 }
+
+test('seo-entry-builder re-exports the canonical generated-cover alt map', () => {
+  assert.equal(GENERATED_COVER_ALT_BY_LOCALE, CANONICAL_GENERATED_COVER_ALT_BY_LOCALE);
+});
 
 function write(root, relativePath, content) {
   const filePath = path.join(root, relativePath);
@@ -455,6 +464,62 @@ test('ricostruisce ImageObject, diritti e imageAlt quando cambia la copertina', 
     }
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il drain mantiene l’alt associato alla provenienza della foto riusata', async () => {
+  const photoAlt = {
+    it: 'Fotografia documentaria dell’ufficio del lavoro a Zurigo',
+    en: 'Documentary photograph of the employment office in Zurich',
+    de: 'Dokumentarisches Foto des Arbeitsamts in Zürich',
+    fr: 'Photographie documentaire de l’office du travail à Zurich',
+  };
+  const scenarios = [
+    { previousAlt: photoAlt, expectedAlt: photoAlt },
+    {
+      previousAlt: GENERATED_COVER_ALT_BY_LOCALE,
+      expectedAlt: LICENSED_PHOTO_ALT_BY_LOCALE,
+    },
+    {
+      previousAlt: LEGACY_GENERATED_COVER_ALT_BY_LOCALE,
+      expectedAlt: LICENSED_PHOTO_ALT_BY_LOCALE,
+    },
+  ];
+
+  for (const { previousAlt, expectedAlt } of scenarios) {
+    const root = tempRoot();
+    try {
+      const articleId = 'licensed-photo-cover-reuse';
+      const imageUrl = `/images/blog/${articleImageAssetId(articleId)}.webp`;
+      const record = licensedRecord(articleId, imageUrl);
+      const bytes = Buffer.alloc(record.bytes, 97);
+      record.sha256 = crypto.createHash('sha256').update(bytes).digest('hex');
+      write(root, 'content/blog-articles-data.ts', registryEntry(articleId, imageUrl));
+      fixture(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+      write(root, `public${imageUrl}`, bytes);
+      write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
+      for (const [locale, value] of Object.entries(previousAlt)) {
+        write(root, `content/blog-meta-${locale}.ts`, `const META = {\n  'blog.article.${articleId}.imageAlt': '${value}',\n};\n`);
+      }
+
+      const summary = await drain({
+        root,
+        limit: 1,
+        generateThumbnail: fakeThumbnail,
+      });
+
+      assert.equal(summary.drained, 1);
+      assert.equal(summary.reused, 1);
+      const seo = fs.readFileSync(path.join(root, 'content/seo/seo-blog-5.ts'), 'utf8');
+      assert.match(seo, new RegExp(`"caption": "${expectedAlt.it}"`));
+      for (const [locale, value] of Object.entries(expectedAlt)) {
+        const meta = fs.readFileSync(path.join(root, `content/blog-meta-${locale}.ts`), 'utf8');
+        assert.match(meta, new RegExp(`imageAlt': '${value}'`));
+        assert.doesNotMatch(meta, new RegExp(GENERATED_COVER_ALT_BY_LOCALE[locale]));
+      }
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
   }
 });
 

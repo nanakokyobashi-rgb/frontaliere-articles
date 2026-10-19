@@ -27,6 +27,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.treni-zurigo-stoccarda.title': 'SBB und DB planen Reserven zwischen Zürich und Stuttgart',
     'blog.article.treni-zurigo-stoccarda.excerpt': 'SBB und DB planen zusätzliche Fahrzeitreserven zwischen Zürich und Stuttgart.',
     'blog.article.treni-zurigo-stoccarda.imageAlt': 'Personenzug auf der Bahnverbindung zwischen Zürich und Stuttgart',
+    'blog.article.pulizie-tunnel-sciaffusa.title': 'Bundesamt für Strassen wird nachts drei Tunnel schließen',
+    'blog.article.pulizie-tunnel-sciaffusa.excerpt': 'Fäsenstaub, Cholfirst und Galgenbuck jede Nacht vom 19.',
+    'blog.article.pulizie-tunnel-sciaffusa.imageAlt': 'Fäsenstaub-, Cholfirst- und Galgenbucktunnel nachts wegen Reinigung gesperrt',
 };
 
 export default blogMetaCantonShDe;

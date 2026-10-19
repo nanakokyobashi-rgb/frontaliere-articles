@@ -2004,6 +2004,270 @@
       "firstSeenAt": "2026-10-19T07:57:34.843Z",
       "lastValidatedAt": "2026-10-19T07:57:34.843Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere formazione professionale riqualifica corsi 2026 famiglia con figli",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T08:20:44.194Z",
+      "lastValidatedAt": "2026-10-19T08:20:44.194Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere formazione professionale riqualifica corsi 2026 single",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T08:23:31.379Z",
+      "lastValidatedAt": "2026-10-19T08:23:31.379Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere infermiere ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T08:43:43.277Z",
+      "lastValidatedAt": "2026-10-19T08:43:43.277Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere formazione professionale riqualifica corsi 2026 simulazione pratica",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:52:23.909Z",
+      "lastValidatedAt": "2026-10-19T10:52:23.909Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere formazione professionale riqualifica corsi 2026 errori comuni",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:52:34.632Z",
+      "lastValidatedAt": "2026-10-19T10:52:34.632Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere operatore socio sanitario ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:52:34.894Z",
+      "lastValidatedAt": "2026-10-19T10:52:34.894Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere psicologo ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:52:34.909Z",
+      "lastValidatedAt": "2026-10-19T10:52:34.909Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere fisioterapista ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:52:43.932Z",
+      "lastValidatedAt": "2026-10-19T10:52:43.932Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere logopedista ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:52:55.560Z",
+      "lastValidatedAt": "2026-10-19T10:52:55.560Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere farmacista ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:53:02.667Z",
+      "lastValidatedAt": "2026-10-19T10:53:02.667Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere assistente dentale ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:17.692Z",
+      "lastValidatedAt": "2026-10-19T10:55:17.692Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere tecnico di radiologia ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:17.807Z",
+      "lastValidatedAt": "2026-10-19T10:55:17.807Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere ergoterapista ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:17.980Z",
+      "lastValidatedAt": "2026-10-19T10:55:17.980Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere dietista ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:18.096Z",
+      "lastValidatedAt": "2026-10-19T10:55:18.096Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere ottico optometrista ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:18.213Z",
+      "lastValidatedAt": "2026-10-19T10:55:18.213Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere podologo ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:18.389Z",
+      "lastValidatedAt": "2026-10-19T10:55:18.389Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere assistente di studio medico ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:18.564Z",
+      "lastValidatedAt": "2026-10-19T10:55:18.564Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere tecnico di sala operatoria ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:18.701Z",
+      "lastValidatedAt": "2026-10-19T10:55:18.701Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere medico ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:18.717Z",
+      "lastValidatedAt": "2026-10-19T10:55:18.717Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere veterinario ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T10:55:18.887Z",
+      "lastValidatedAt": "2026-10-19T10:55:18.887Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere ostetrica ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T12:03:52.296Z",
+      "lastValidatedAt": "2026-10-19T12:03:52.296Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere informatico ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T12:47:26.741Z",
+      "lastValidatedAt": "2026-10-19T12:47:26.741Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -2078,6 +2342,18 @@
       "firstStrikeAt": "2026-10-18T14:25:22.474Z",
       "lastStrikeAt": "2026-10-18T19:00:17.961Z",
       "expiresAt": "2026-11-17T19:00:17.961Z"
+    },
+    {
+      "keyword": "frontaliere ostetrica ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-10-19T10:55:17.668Z",
+      "lastStrikeAt": "2026-10-19T10:55:17.668Z",
+      "expiresAt": "2026-11-18T10:55:17.668Z"
     }
   ],
   "legacy": [
@@ -10377,62 +10653,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1957292/il-centro-d-asilo-di-chiasso-a-gennaio-non-riaprira-imbucate-le-lettere-di-licenziamento": {
-      "section": "frontaliere",
-      "ts": 1792220546515
-    },
-    "frontaliere::https://www.rsi.ch/cultura/film-e-serie/naza-in-cartellone-a-lugano--4147847.html": {
-      "section": "frontaliere",
-      "ts": 1792220847947
-    },
-    "frontaliere::https://www.laregione.ch/economia/economia/1957352/le-big-tech-vogliono-franchi-ma-occhio-alla-bolla-dell-ia": {
-      "section": "frontaliere",
-      "ts": 1792220862180
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/casalinghi-disperati-apre-la-stagione-del-teatro-dellolmo-a-taino/2710735": {
-      "section": "frontaliere",
-      "ts": 1792220984945
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/sara-un-autunno-caldo-alla-barco-di-saronno-mezzora-di-sciopero-ogni-giorno-e-mobilitazione-a-oltranza/2710798": {
-      "section": "frontaliere",
-      "ts": 1792221602207
-    },
-    "svizzera::https://lenews.ch/2026/10/16/swiss-flu-vaccines-delayed-but-no-shortage-expected": {
-      "section": "svizzera",
-      "ts": 1792222687723
-    },
-    "frontaliere::http://www.cd-ocst.ch": {
-      "section": "frontaliere",
-      "ts": 1792224210489
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1957148/stesso-reddito-imposte-diverse-cambiando-comune-risparmi-il-90": {
-      "section": "frontaliere",
-      "ts": 1792226459023
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/17/leggi-notizia/argomenti/eventi-20/articolo/msf-a-varese-per-la-terza-edizione-di-biscotti-senza-frontiere.html": {
-      "section": "frontaliere",
-      "ts": 1792229679797
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/a-ceriano-laghetto-il-campionato-a-squadre-trofeo-lombardia-di-scacchi/2710561": {
-      "section": "frontaliere",
-      "ts": 1792230028779
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/castellanzese-nel-momento-doro-trasferta-a-correggio-per-continuare-a-volare/2710636": {
-      "section": "frontaliere",
-      "ts": 1792232881935
-    },
-    "frontaliere::https://cassa-disoccupazione.unia.ch": {
-      "section": "frontaliere",
-      "ts": 1792240710869
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/inaugurato-il-nuovo-nodo-di-interscambio-a-biasca-444809": {
-      "section": "frontaliere",
-      "ts": 1792241714329
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/transizione-economica-ed-ecologica-possono-avanzare-insieme-imprese-scienza-e-politica-si-confrontano/2711059": {
-      "section": "frontaliere",
-      "ts": 1792242171852
-    },
     "frontaliere::https://www.tio.ch/svizzera/cronaca/1957434/franchi-ffs-denaro-florida-casa-manager-lamborghini": {
       "section": "frontaliere",
       "ts": 1792245164312
@@ -10644,6 +10864,14 @@
     "frontaliere::https://unia.ch/it/professioni-rami/parrucchiere/sondaggio-rivendicazioni-ccl": {
       "section": "frontaliere",
       "ts": 1792392209850
+    },
+    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1957292/il-centro-d-asilo-di-chiasso-a-gennaio-non-riaprira-imbucate-le-lettere-di-licenziamento": {
+      "section": "frontaliere",
+      "ts": 1792411423643
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/securitas%3a-segnalate-migliaia-di-violazioni-del-diritto-del-lavoro/92237590": {
+      "section": "frontaliere",
+      "ts": 1792415321690
     }
   }
 }

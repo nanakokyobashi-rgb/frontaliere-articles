@@ -14,6 +14,7 @@ import {
 } from '../scripts/lib/blog-image-registry.mjs';
 import {
   buildDailyBriefCoverAlt,
+  dailyBriefCoverAltForRecord,
   buildDailyBriefCoverPrompt,
   buildDailyBriefImageContext,
   buildDailyBriefImageRecord,
@@ -22,6 +23,7 @@ import {
 import { buildDailyBriefArticle } from '../scripts/lib/daily-brief-content.mjs';
 import { buildDailyBriefInsights } from '../scripts/lib/daily-brief-insights.mjs';
 import { articleImageAssetId } from '../scripts/lib/article-cover-identity.mjs';
+import { GENERATED_COVER_ALT_BY_LOCALE } from '../scripts/lib/generated-cover-alt.mjs';
 import { refreshGovernedArticleCover } from '../scripts/lib/governed-article-cover-refresh.mjs';
 import { DETERMINISTIC_CARD_KIND } from '../scripts/lib/deterministic-card-provenance.mjs';
 import {
@@ -98,10 +100,11 @@ test('all tracked daily brief heroes have byte-matching governed provenance', ()
 
 test('the daily producer makes a fresh governed hero before either first registration or same-day refresh', () => {
   const source = fs.readFileSync(path.join(ROOT, 'generator/scripts/generate-daily-brief-article.mjs'), 'utf8');
+  const imageSource = fs.readFileSync(path.join(ROOT, 'generator/scripts/lib/daily-brief-image.mjs'), 'utf8');
   assert.match(source, /generateGovernedArticleHero\(/);
   assert.match(source, /materializeDailyBriefHero\(/);
   assert.match(source, /buildDailyBriefCoverPrompt\(h\)/);
-  assert.match(source, /buildDailyBriefCoverAlt\(h\)/);
+  assert.match(imageSource, /const imageAlt = dailyBriefCoverAltForRecord\(data\._headline, record\)/);
   assert.doesNotMatch(source, /buildDailyBriefSvg\(|renderDailyBriefImage\(/);
   assert.ok(
     source.indexOf('generateGovernedArticleHero(') < source.indexOf('if (!exists)'),
@@ -166,6 +169,8 @@ test('the daily cover scene follows the headline kind without embedding its numb
   assert.match(photoAlt.en, /^Photograph of /);
   assert.match(photoAlt.de, /^Foto von /);
   assert.match(photoAlt.fr, /^Photographie de /);
+  assert.deepEqual(dailyBriefCoverAltForRecord(actualPreviewHeadline, { kind: 'generated' }), GENERATED_COVER_ALT_BY_LOCALE);
+  assert.deepEqual(dailyBriefCoverAltForRecord(actualPreviewHeadline, { kind: LICENSED_PHOTO_KIND }), photoAlt);
 });
 
 test('daily trend scenes reject missing, malformed and non-finite evidence', () => {

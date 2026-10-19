@@ -20,6 +20,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'radar-ticino-ottobre-2026': { it: 'radar-ticino-ottobre-2026', en: 'radar-ticino-october-2026', de: 'radar-tessin-oktober-2026', fr: 'radar-tessin-octobre-2026' },
  'mozione-gran-consiglio-tassa-salute': { it: 'mozione-gran-consiglio-tassa-salute', en: 'grand-council-motion-health-tax', de: 'grossrat-moeglicherweise-gesundheitssteuer', fr: 'motion-grand-conseil-taxe-sante' },
  'rapporto-consiglio-federale-schengen': { it: 'rapporto-consiglio-federale-schengen', en: 'federal-council-schengen-report', de: 'bundesrat-schengen-bericht', fr: 'rapport-conseil-federal-schengen' },
+ 'ustat-manutenzione-chiusura': { it: 'ustat-manutenzione-chiusura', en: 'ustat-maintenance-closure', de: 'ustat-wartung-schliessung', fr: 'ustat-maintenance-fermeture' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

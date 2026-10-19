@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-18T15:52:30.685Z",
-  "contentHash": "2dd7ba5e355aa8167fafa1f353e3355ff8d6c46ad134bb0104c5002779a1755d",
+  "updatedAt": "2026-10-19T12:11:44.861Z",
+  "contentHash": "b8cda302f322baa1a116ab0978182f154a1f44dba7409ac7b681798cee3b4228",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bundesamt für Strassen chiuderà tre tunnel di notte",
+          "url": "/articoli-sciaffusa/pulizie-tunnel-sciaffusa/",
+          "excerpt": "Fäsenstaub, Cholfirst e Galgenbuck chiusi ogni notte dal 19 al 23 ottobre, dalle 20 alle 5, per lavori di pulizia.",
+          "date": "2026-10-19T12:03:42.288Z"
+        },
+        {
           "title": "SBB e DB pianificano riserve tra Zurigo e Stoccarda",
           "url": "/articoli-sciaffusa/treni-zurigo-stoccarda/",
           "excerpt": "SBB e DB pianificano riserve di percorrenza aggiuntive tra Zurigo e Stoccarda.",
@@ -94,12 +100,6 @@
           "url": "/articoli-sciaffusa/finanze-cantone-sciaffusa-2027/",
           "excerpt": "Il governo cantonale attende risultati negativi per il quadriennio 2027-2030 a causa del calo delle entrate dalle imposte sulle imprese.",
           "date": "2026-10-10T21:14:11.679Z"
-        },
-        {
-          "title": "Disoccupazione nel Canton Sciaffusa: dati settembre 2026",
-          "url": "/articoli-sciaffusa/sciaffusa-dati-lavoro-2026/",
-          "excerpt": "Il Centro regionale di collocamento comunica i dati sulla disoccupazione nel Canton Sciaffusa per settembre 2026; il lead pubblico non riporta le cifre.",
-          "date": "2026-10-09T12:18:54.869Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T12:11:44.861Z"
     },
     "en": {
       "canton": "SH",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bundesamt für Strassen will close three tunnels at night",
+          "url": "/en/schaffhausen-articles/schaffhausen-tunnel-cleaning/",
+          "excerpt": "Fäsenstaub, Cholfirst and Galgenbuck closed every night from October 19 to 23, from 8 p.m.",
+          "date": "2026-10-19T12:03:42.288Z"
+        },
+        {
           "title": "SBB and DB plan reserve services between Zurich and Stuttgart",
           "url": "/en/schaffhausen-articles/zurich-stuttgart-trains/",
           "excerpt": "SBB and DB plan additional running-time reserves between Zurich and Stuttgart.",
@@ -193,12 +199,6 @@
           "url": "/en/schaffhausen-articles/schaffhausen-canton-finances-2027/",
           "excerpt": "The cantonal government expects negative results for the four-year period 2027–2030 due to declining revenue from corporate taxes.",
           "date": "2026-10-10T21:14:11.679Z"
-        },
-        {
-          "title": "Unemployment in the Canton of Schaffhausen: September 2026 data",
-          "url": "/en/schaffhausen-articles/schaffhausen-unemployment-september-2026/",
-          "excerpt": "The regional employment center reports unemployment data for the Canton of Schaffhausen for September 2026; the public lead does not include the figures.",
-          "date": "2026-10-09T12:18:54.869Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T12:11:44.861Z"
     },
     "de": {
       "canton": "SH",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bundesamt für Strassen wird nachts drei Tunnel schließen",
+          "url": "/de/schaffhausen-artikel/naechtliche-tunnelreinigung-schaffhausen/",
+          "excerpt": "Fäsenstaub, Cholfirst und Galgenbuck jede Nacht vom 19.",
+          "date": "2026-10-19T12:03:42.288Z"
+        },
+        {
           "title": "SBB und DB planen Reserven zwischen Zürich und Stuttgart",
           "url": "/de/schaffhausen-artikel/zuerich-stuttgart-zuege/",
           "excerpt": "SBB und DB planen zusätzliche Fahrzeitreserven zwischen Zürich und Stuttgart.",
@@ -292,12 +298,6 @@
           "url": "/de/schaffhausen-artikel/finanzen-kanton-schaffhausen-2027/",
           "excerpt": "Die Kantonsregierung rechnet für den Vierjahreszeitraum 2027–2030 aufgrund des Rückgangs der Einnahmen aus den Unternehmenssteuern mit negativen Ergebnissen.",
           "date": "2026-10-10T21:14:11.679Z"
-        },
-        {
-          "title": "Arbeitslosigkeit im Kanton Schaffhausen: Daten für September 2026",
-          "url": "/de/schaffhausen-artikel/schaffhausen-arbeitslosigkeit-september-2026/",
-          "excerpt": "Das Regionale Arbeitsvermittlungszentrum teilt die Arbeitslosigkeitsdaten im Kanton Schaffhausen für September 2026 mit; der öffentlich zugängliche Lead enthält keine Zahlen.",
-          "date": "2026-10-09T12:18:54.869Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T12:11:44.861Z"
     },
     "fr": {
       "canton": "SH",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bundesamt für Strassen fermera trois tunnels la nuit",
+          "url": "/fr/articles-schaffhouse/nettoyage-tunnels-schaffhouse/",
+          "excerpt": "Fäsenstaub, Cholfirst et Galgenbuck fermés chaque nuit du 19 au 23 octobre, de 20 heures à 5 heures, pour des travaux de nettoyage.",
+          "date": "2026-10-19T12:03:42.288Z"
+        },
+        {
           "title": "SBB et DB planifient des réserves entre Zurich et Stuttgart",
           "url": "/fr/articles-schaffhouse/trains-zurich-stuttgart/",
           "excerpt": "SBB et DB planifient des réserves de temps de parcours supplémentaires entre Zurich et Stuttgart.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-schaffhouse/finances-canton-schaffhouse-2027/",
           "excerpt": "Le gouvernement cantonal s’attend à des résultats négatifs pour la période quadriennale 2027-2030 en raison de la baisse des recettes provenant des impôts sur les entreprises.",
           "date": "2026-10-10T21:14:11.679Z"
-        },
-        {
-          "title": "Chômage dans le canton de Schaffhouse : données de septembre 2026",
-          "url": "/fr/articles-schaffhouse/schaffhouse-chomage-septembre-2026/",
-          "excerpt": "Le Centre régional de placement communique les données sur le chômage dans le canton de Schaffhouse pour septembre 2026 ; le lead public ne rapporte pas les chiffres.",
-          "date": "2026-10-09T12:18:54.869Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T12:11:44.861Z"
     }
   }
 }

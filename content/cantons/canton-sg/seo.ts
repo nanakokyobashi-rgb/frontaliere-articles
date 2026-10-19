@@ -270,6 +270,201 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-hsg-optime-orario-lavoro': {
+    title: 'HSG guida studio UE sulla riduzione dell\'orario di lavoro',
+    description: 'L\'Università di San Gallo guida OPTIME, progetto UE finanziato da Horizon Europe con circa 3,37 milioni di euro per confrontare modelli di orario ridotto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, studio, sulla, riduzione, dell',
+    ogTitle: 'HSG guida studio UE sulla riduzione dell\'orario di lavoro',
+    ogDescription: 'La professoressa Julia Backmann dell\'HSG coordina OPTIME, progetto europeo sui modelli di riduzione dell\'orario. Horizon Europe lo finanzia con circa 3,37 milioni di euro; la ricerca ne valuterà realizzabilità, inclusività e sostenibilità.',
+    canonicalPath: '/articoli-san-gallo/hsg-optime-orario-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "HSG guida studio UE sulla riduzione dell'orario di lavoro",
+      "description": "L'Università di San Gallo guida OPTIME, progetto UE finanziato da Horizon Europe con circa 3,37 milioni di euro per confrontare modelli di orario ridotto.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-hsg-optime-orario-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Campus dell'Università di San Gallo in una scena editoriale sulla ricerca sul lavoro"
+      },
+      "datePublished": "2026-10-19T09:46:12+00:00",
+      "dateModified": "2026-10-19T09:46:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/hsg-optime-orario-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sondaggio-imprese-st-gallen-2026': {
+    title: 'St.Gallen avvia il sondaggio per le imprese | Frontaliere Ticino',
+    description: 'La città di St.Gallen avvia una consultazione tra le imprese sulla piazza economica. Questionario online fino a fine novembre 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, gallen, avvia, sondaggio, imprese',
+    ogTitle: 'Sondaggio imprese St.Gallen: via alla rilevazione economica',
+    ogDescription: 'La città di St.Gallen lancia un\'importante consultazione online rivolta a un campione rappresentativo di imprese locali per valutare la piazza economica e raccogliere indicazioni strategiche.',
+    canonicalPath: '/articoli-san-gallo/sondaggio-imprese-st-gallen-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "St.Gallen avvia il sondaggio per le imprese",
+      "description": "La città di St.Gallen avvia una consultazione tra le imprese sulla piazza economica. Questionario online fino a fine novembre 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sondaggio-imprese-st-gallen-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Città di St.Gallen, consultazione e sondaggio per le imprese"
+      },
+      "datePublished": "2026-10-19T10:59:29+00:00",
+      "dateModified": "2026-10-19T10:59:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/sondaggio-imprese-st-gallen-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-voto-bahnhofplatz-wil-2026': {
+    title: 'Voto sul Bahnhofplatz Wil: credito di 63,66 milioni',
+    description: 'Il 29 novembre 2026 i cittadini di Wil voteranno sul progetto da 63,66 milioni per il nuovo terminale bus, la velostazione e la riqualificazione della stazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, voto, bahnhofplatz, credito, milioni',
+    ogTitle: 'Voto Bahnhofplatz Wil del 29 novembre 2026',
+    ogDescription: 'Scopri i dettagli del progetto per il Bahnhofplatz di Wil nel Canton San Gallo: nuovo terminale bus con 20 fermate, velostazione e crediti approvati per la votazione del 29 novembre 2026.',
+    canonicalPath: '/articoli-san-gallo/voto-bahnhofplatz-wil-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Voto sul Bahnhofplatz Wil: credito di 63,66 milioni",
+      "description": "Il 29 novembre 2026 i cittadini di Wil voteranno sul progetto da 63,66 milioni per il nuovo terminale bus, la velostazione e la riqualificazione della stazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-voto-bahnhofplatz-wil-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Bahnhofplatz di Wil nel Canton San Gallo"
+      },
+      "datePublished": "2026-10-19T12:16:44+00:00",
+      "dateModified": "2026-10-19T12:16:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/voto-bahnhofplatz-wil-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-status-s-san-gallo-assistenza': {
+    title: 'San Gallo: assistenza ridotta per titolari di Status S',
+    description: 'La commissione propone assistenza ridotta anche dopo il permesso. La scelta del domicilio resterebbe limitata per lo Status S. Per le persone ucraine',
+    keywords: 'frontalieri, ticino, svizzera, italia, gallo, assistenza, ridotta, titolari',
+    ogTitle: 'San Gallo: assistenza ridotta per titolari di Status S',
+    ogDescription: 'La commissione propone assistenza ridotta anche dopo il permesso.',
+    canonicalPath: '/articoli-san-gallo/status-s-san-gallo-assistenza/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "San Gallo: assistenza ridotta per titolari di Status S",
+      "description": "La commissione propone assistenza ridotta anche dopo il permesso. La scelta del domicilio resterebbe limitata per lo Status S. Per le persone ucraine",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-status-s-san-gallo-assistenza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T12:49:37+00:00",
+      "dateModified": "2026-10-19T12:49:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/status-s-san-gallo-assistenza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-voto-rete-gas-wil-2026': {
+    title: 'Wil: voto il 29 novembre 2026 sulla rete del gas',
+    description: 'Voto sul fondo: 29 novembre 2026. Regolamento approvato il 2 luglio 2026: 25 sì, 11 no. Rete TBW: 570 km, di cui 442 nei comuni vicini. Costo previsto: circa',
+    keywords: 'frontalieri, ticino, svizzera, italia, voto, novembre, sulla, rete',
+    ogTitle: 'Wil: voto il 29 novembre 2026 sulla rete del gas',
+    ogDescription: 'Voto sul fondo: 29 novembre 2026.',
+    canonicalPath: '/articoli-san-gallo/voto-rete-gas-wil-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Wil: voto il 29 novembre 2026 sulla rete del gas",
+      "description": "Voto sul fondo: 29 novembre 2026. Regolamento approvato il 2 luglio 2026: 25 sì, 11 no. Rete TBW: 570 km, di cui 442 nei comuni vicini. Costo previsto: circa",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-voto-rete-gas-wil-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T13:03:39+00:00",
+      "dateModified": "2026-10-19T13:03:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/voto-rete-gas-wil-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

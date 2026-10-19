@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-10-18T03:31:06.413Z",
-  "contentHash": "a4e16a93e42e1f474c950b549c3ccdd52746e3c40544f7393aade8822a54eca2",
+  "updatedAt": "2026-10-19T12:26:29.054Z",
+  "contentHash": "f7e4881b17e00b18811510f6872728eed0bb3e091faee325b3d7397e7064392a",
   "blocks": [
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T19:45:28.268Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -57,7 +57,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -66,6 +66,12 @@
           "url": "/articoli-glarona/klontalstrasse-staldengarten-butzi/",
           "excerpt": "Una limitazione al traffico riguarda la Klöntalerstrasse nel tratto Staldengarten–Bützi, nel Canton Glarona.",
           "date": "2026-10-17T00:33:53.716Z"
+        },
+        {
+          "title": "Klöntalerstrasse: chiusura temporanea Staldengarten–Bützi",
+          "url": "/articoli-glarona/kloentalerstrasse-cantiere-2026/",
+          "excerpt": "Sono previsti lavori sulla Klöntalerstrasse dal 21 ottobre al 4 dicembre 2026: attese brevi, chiusura per l'asfalto e deviazione via Sackberg.",
+          "date": "2026-10-19T12:11:05.452Z"
         },
         {
           "title": "Mühlehorn: Alte Kerenzerstrasse chiusa dal 19 ottobre",
@@ -103,7 +109,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-18T03:31:06.413Z"
+      "updatedAt": "2026-10-19T12:26:29.054Z"
     },
     "en": {
       "canton": "GL",
@@ -148,7 +154,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -157,6 +163,12 @@
           "url": "/en/glarus-articles/klontalstrasse-traffic-restriction/",
           "excerpt": "A traffic restriction affects Klöntalerstrasse on the Staldengarten–Bützi section, in the Canton of Glarus.",
           "date": "2026-10-17T00:33:53.716Z"
+        },
+        {
+          "title": "Klöntalerstrasse: temporary closure of Staldengarten–Bützi",
+          "url": "/en/glarus-articles/kloentalerstrasse-roadworks-2026/",
+          "excerpt": "Construction work is planned on Klöntalerstrasse from October 21 to December 4, 2026: brief waits, closure for asphalting, and a detour via Sackberg.",
+          "date": "2026-10-19T12:11:05.452Z"
         },
         {
           "title": "Mühlehorn: Alte Kerenzerstrasse closed from October 19",
@@ -194,7 +206,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-18T03:31:06.413Z"
+      "updatedAt": "2026-10-19T12:26:29.054Z"
     },
     "de": {
       "canton": "GL",
@@ -239,7 +251,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -248,6 +260,12 @@
           "url": "/de/glarus-artikel/verkehrseinschraenkung-kloentalerstrasse/",
           "excerpt": "Eine Verkehrsbeschränkung betrifft die Klöntalerstrasse im Abschnitt Staldengarten–Bützi im Kanton Glarus.",
           "date": "2026-10-17T00:33:53.716Z"
+        },
+        {
+          "title": "Klöntalerstrasse: vorübergehende Sperrung Staldengarten–Bützi",
+          "url": "/de/glarus-artikel/kloentalerstrasse-bauarbeiten-2026/",
+          "excerpt": "An der Klöntalerstrasse sind vom 21.",
+          "date": "2026-10-19T12:11:05.452Z"
         },
         {
           "title": "Mühlehorn: Alte Kerenzerstrasse ab dem 19. Oktober gesperrt",
@@ -285,7 +303,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-18T03:31:06.413Z"
+      "updatedAt": "2026-10-19T12:26:29.054Z"
     },
     "fr": {
       "canton": "GL",
@@ -330,7 +348,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -339,6 +357,12 @@
           "url": "/fr/articles-glaris/restriction-trafic-kloentalerstrasse/",
           "excerpt": "Une restriction de circulation concerne la Klöntalerstrasse sur le tronçon Staldengarten–Bützi, dans le canton de Glaris.",
           "date": "2026-10-17T00:33:53.716Z"
+        },
+        {
+          "title": "Klöntalerstrasse : fermeture temporaire Staldengarten–Bützi",
+          "url": "/fr/articles-glaris/kloentalerstrasse-travaux-2026/",
+          "excerpt": "Des travaux sont prévus sur la Klöntalerstrasse du 21 octobre au 4 décembre 2026 : courtes attentes, fermeture pour l’asphaltage et déviation via Sackberg.",
+          "date": "2026-10-19T12:11:05.452Z"
         },
         {
           "title": "Mühlehorn : Alte Kerenzerstrasse fermée à partir du 19 octobre",
@@ -376,7 +400,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-18T03:31:06.413Z"
+      "updatedAt": "2026-10-19T12:26:29.054Z"
     }
   }
 }

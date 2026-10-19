@@ -72,4 +72,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'kloentalerstrasse-cantiere-2026',
+ category: 'pratico',
+ date: '2026-10-19T12:11:05.452Z',
+ image: '/images/blog/article-kloentalerstrasse-cantiere-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GL'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
