@@ -3210,6 +3210,13 @@ function _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome }
   const hasEquivalentJsonShape = CODEX_JSON_TOP_LEVEL_KINDS.has(sourceJsonKind)
     && sourceJsonKind === finalizedJsonKind
     && hasSameCodexJsonContainerShape(prepared.structureSource, finalized);
+  // A one-line JSON container can otherwise fall back to the generic `text`
+  // skeleton and let an invalid or reshaped container through.
+  if (CODEX_JSON_TOP_LEVEL_KINDS.has(sourceJsonKind) && !hasEquivalentJsonShape) {
+    noteTierStructureFailure('exit', 'exitTransformBroke', outcome);
+    noteTranslationOutcome(outcome, 'incomplete');
+    return '';
+  }
   // A Codex answer may remove a Markdown fence around an otherwise equivalent
   // JSON container. Compare JSON payloads through the same sentinel used by
   // the direct-engine guard, so the final transform does not undo that
