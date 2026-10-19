@@ -127,4 +127,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'voto-rete-gas-wil-2026',
+ category: 'novita',
+ date: '2026-10-19T13:03:39.354Z',
+ image: '/images/blog/article-voto-rete-gas-wil-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

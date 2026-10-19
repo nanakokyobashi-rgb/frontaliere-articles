@@ -14,6 +14,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'sondaggio-imprese-st-gallen-2026': { it: 'sondaggio-imprese-st-gallen-2026', en: 'st-gallen-business-survey-2026', de: 'st-gallen-unternehmensbefragung-2026', fr: 'enquete-entreprises-saint-gall-2026' },
  'voto-bahnhofplatz-wil-2026': { it: 'voto-bahnhofplatz-wil-2026', en: 'wil-bahnhofplatz-vote-2026', de: 'abstimmung-bahnhofplatz-wil-2026', fr: 'vote-bahnhofplatz-wil-2026' },
  'status-s-san-gallo-assistenza': { it: 'status-s-san-gallo-assistenza', en: 'status-s-st-gallen-assistance', de: 'status-s-st-gallen-unterstuetzung', fr: 'statut-s-saint-gall-assistance' },
+ 'voto-rete-gas-wil-2026': { it: 'voto-rete-gas-wil-2026', en: 'gas-network-vote-wil-2026', de: 'gasnetz-abstimmung-wil-2026', fr: 'vote-reseau-gaz-wil-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -36,6 +36,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.status-s-san-gallo-assistenza.title': 'Saint-Gall : aide réduite pour les titulaires du statut S',
     'blog.article.status-s-san-gallo-assistenza.excerpt': 'La commission propose une aide réduite même après le permis.',
     'blog.article.status-s-san-gallo-assistenza.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.voto-rete-gas-wil-2026.title': 'Wil : vote le 29 novembre 2026 sur le réseau de gaz',
+    'blog.article.voto-rete-gas-wil-2026.excerpt': 'Vote sur le fonds : 29 novembre 2026.',
+    'blog.article.voto-rete-gas-wil-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSgFr;

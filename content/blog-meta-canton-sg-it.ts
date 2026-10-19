@@ -36,6 +36,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.status-s-san-gallo-assistenza.title': 'San Gallo: assistenza ridotta per titolari di Status S',
     'blog.article.status-s-san-gallo-assistenza.excerpt': 'La commissione propone assistenza ridotta anche dopo il permesso.',
     'blog.article.status-s-san-gallo-assistenza.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.voto-rete-gas-wil-2026.title': 'Wil: voto il 29 novembre 2026 sulla rete del gas',
+    'blog.article.voto-rete-gas-wil-2026.excerpt': 'Voto sul fondo: 29 novembre 2026.',
+    'blog.article.voto-rete-gas-wil-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

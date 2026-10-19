@@ -36,6 +36,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.status-s-san-gallo-assistenza.title': 'St. Gallen: reduced assistance for Status S holders',
     'blog.article.status-s-san-gallo-assistenza.excerpt': 'The commission proposes reduced assistance even after the permit.',
     'blog.article.status-s-san-gallo-assistenza.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.voto-rete-gas-wil-2026.title': 'Wil: vote on the gas network on November 29, 2026',
+    'blog.article.voto-rete-gas-wil-2026.excerpt': 'Vote on the fund: November 29, 2026.',
+    'blog.article.voto-rete-gas-wil-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;
