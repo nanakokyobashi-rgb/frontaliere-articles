@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/info/ticino-grigioni-e-insubria/pi%c3%b9-acqua-per-il-mendrisiotto--4078136.html": {
-    "articleId": "serbatoio-bella-cima-stabio",
-    "ts": "2026-09-13T00:04:13.857Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/cantone/ticino/1949373/formazione-e-lavoro-un-equazione-complessa": {
     "articleId": "formazione-lavoro-ticino",
     "ts": "2026-09-13T00:17:00.850Z",
@@ -2497,6 +2492,11 @@
   "https://comozero.it/attualita/como-razionalista-il-comune-finanzia-due-associazioni-si-dividono-78mila-euro-in-3-anni": {
     "articleId": "como-razionalista-fondi-associazioni",
     "ts": "2026-10-19T02:46:29.420Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/como-giallo-su-due-manifestazioni-una-sara-pacifica-nellaltra-vogliono-spaccare-tutto": {
+    "articleId": "como-manifestazioni-24-ottobre",
+    "ts": "2026-10-19T03:34:10.881Z",
     "keyForm": 2
   }
 }

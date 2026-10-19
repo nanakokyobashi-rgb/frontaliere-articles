@@ -13489,6 +13489,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.como-razionalista-fondi-associazioni.title': 'Como Rationalist: 78mila euro to two associations',
     'blog.article.como-razionalista-fondi-associazioni.excerpt': 'Two associations will support Como Rationalist Funding planned from 2026 to 2028 Over 78 thousand euros from the tourist tax Disbursement after the financial reports',
     'blog.article.como-razionalista-fondi-associazioni.imageAlt': 'Rationalist architecture in an urban setting',
+    'blog.article.como-manifestazioni-24-ottobre.title': 'Como, two demonstrations: one peaceful, the other at risk',
+    'blog.article.como-manifestazioni-24-ottobre.excerpt': 'Two possible demonstrations are reportedly being organized for October 24 One is a student demonstration, with permits in order and peaceful aims The other is associated with fears',
+    'blog.article.como-manifestazioni-24-ottobre.imageAlt': 'Mendrisio urban scene on an autumn day',
 };
 
 export default blogMetaEn;

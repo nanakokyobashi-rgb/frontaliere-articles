@@ -13491,6 +13491,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.como-razionalista-fondi-associazioni.title': 'Como Razionalista : 78mila euro à deux associations',
     'blog.article.como-razionalista-fondi-associazioni.excerpt': 'Deux associations soutiendront Como Razionalista Financement prévu de 2026 à 2028 Plus de 78mila euro provenant de la taxe de séjour Versement après les comptes rendus',
     'blog.article.como-razionalista-fondi-associazioni.imageAlt': 'Architecture rationaliste dans un cadre urbain',
+    'blog.article.como-manifestazioni-24-ottobre.title': 'Como, deux manifestations : l’une pacifique, l’autre à risque',
+    'blog.article.como-manifestazioni-24-ottobre.excerpt': 'Deux manifestations potentielles seraient en cours pour le 24 octobre Une est étudiante, avec des autorisations en règle et des objectifs pacifiques L’autre est associée à des craintes',
+    'blog.article.como-manifestazioni-24-ottobre.imageAlt': 'Vue urbaine de Mendrisio lors d’une journée d’automne',
 };
 
 export default blogMetaFr;
