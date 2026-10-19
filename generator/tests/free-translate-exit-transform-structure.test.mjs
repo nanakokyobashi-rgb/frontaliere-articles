@@ -448,7 +448,7 @@ test('translateWithCodexEngine confronta ricorsivamente la forma JSON', async ()
   assert.equal(sameShape.outcome._tierReasons, undefined);
 });
 
-test('translateWithCodexEngine non salta la guardia per JSON dentro un fence', async () => {
+test('translateWithCodexEngine accetta JSON raw equivalente a una sorgente in fence', async () => {
   const outcome = {};
   const out = await translateWithCodexEngine({
     text: '```json\n{"a":"ciao"}\n```',
@@ -457,9 +457,9 @@ test('translateWithCodexEngine non salta la guardia per JSON dentro un fence', a
     call: async () => '{"a":"hallo"}',
     _outcome: outcome,
   });
-  assert.equal(out, '');
-  assert.equal(outcome.incomplete, true);
-  assert.deepEqual(outcome._tierReasons, [{ provider: 'codex-engine', reason: 'structure:directPathRejected' }]);
+  assert.equal(out, '{"a":"hallo"}');
+  assert.equal(outcome.incomplete, undefined);
+  assert.equal(outcome._tierReasons, undefined);
 });
 
 test('translateWithCodexEngine confronta la forma JSON nei fence e limita la profondita', async () => {

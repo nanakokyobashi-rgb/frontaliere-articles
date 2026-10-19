@@ -3205,13 +3205,28 @@ function _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome }
   //  - a changed opaque span (a URL the placeholder strip rewrote) is counted
   //    and let through, because rejecting it would stop a translation that
   //    was being published until now — the counter says when it reaches zero.
-  if (!hasSameLineSkeleton(prepared.structureSource, finalized)) {
+  const sourceJsonKind = codexJsonOutputKind(prepared.structureSource);
+  const finalizedJsonKind = codexJsonOutputKind(finalized);
+  const hasEquivalentJsonShape = CODEX_JSON_TOP_LEVEL_KINDS.has(sourceJsonKind)
+    && sourceJsonKind === finalizedJsonKind
+    && hasSameCodexJsonContainerShape(prepared.structureSource, finalized);
+  // A Codex answer may remove a Markdown fence around an otherwise equivalent
+  // JSON container. Compare JSON payloads through the same sentinel used by
+  // the direct-engine guard, so the final transform does not undo that
+  // validation and reject a valid raw response solely for its presentation.
+  const structureSource = hasEquivalentJsonShape
+    ? codexJsonStructureText(prepared.structureSource, sourceJsonKind)
+    : prepared.structureSource;
+  const structureFinalized = hasEquivalentJsonShape
+    ? codexJsonStructureText(finalized, finalizedJsonKind)
+    : finalized;
+  if (!hasSameLineSkeleton(structureSource, structureFinalized)) {
     noteTierStructureFailure('exit', 'exitTransformBroke', outcome);
     noteTranslationOutcome(outcome, 'incomplete');
     return '';
   }
   if (hasSameLineStructure(prepared.clean, out)
-    && !hasSameLineStructure(prepared.structureSource, finalized)) {
+    && !hasSameLineStructure(structureSource, structureFinalized)) {
     _cascadeStats.exitTransformOpaqueDrift += 1;
   }
   return finalized;
@@ -3694,15 +3709,12 @@ function hasSameCodexJsonContainerShape(source, output) {
  * Keep the main line-structure guard meaningful for JSON payloads.
  * `hasSameLineStructure` quite correctly treats `{...}` as one opaque
  * placeholder in prose; for JSON, the recursive shape guard above owns keys,
- * lengths and scalar types, while this guard only distinguishes raw and fenced
- * JSON. Formatting and translated values are deliberately opaque here.
+ * lengths and scalar types, while this guard treats raw and fenced JSON with
+ * the same sentinel. Formatting and translated values are deliberately opaque here.
  */
 function codexJsonStructureText(value, jsonKind) {
   const normalized = normalizeStructuredBlock(value);
   if (!CODEX_JSON_TOP_LEVEL_KINDS.has(jsonKind)) return normalized;
-  if (normalized.trim().match(CODEX_JSON_FENCE_RE)) {
-    return `\`\`\`json\n__codex_json_${jsonKind}_fenced__\n\`\`\``;
-  }
   return `__codex_json_${jsonKind}__`;
 }
 
