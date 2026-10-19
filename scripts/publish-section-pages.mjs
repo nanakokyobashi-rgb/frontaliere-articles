@@ -2218,7 +2218,7 @@ export async function main(
         'blocco la pubblicazione finché la superficie precedente non è dimostrata',
       );
     }
-    if (allowDeferredLiveRelease && publishedManifest.state === 'ok') {
+    if (allowDeferredLiveRelease && !readinessVerified && publishedManifest.state === 'ok') {
       deferredLiveRelease = true;
       if (effectiveStatus !== 'live') {
         console.log(

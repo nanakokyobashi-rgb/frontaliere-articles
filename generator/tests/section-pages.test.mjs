@@ -347,6 +347,76 @@ test('publisher: un flip pendente resta staged anche mentre il registro edge è 
   }
 });
 
+test('publisher: una release già pronta percorre il publish completo anche con il differimento armato', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-ready-release-'));
+  const head = 'a'.repeat(40);
+  const publishedDoc = pageManifestFromPages({ section: 'canton-ti', commit: 'published', pages: [] });
+  let publishOptions = null;
+  let manifestCalls = 0;
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  const previousAllow = process.env.ALLOW_DEFERRED_LIVE_RELEASE;
+  try {
+    process.env.ALLOW_DEFERRED_LIVE_RELEASE = 'true';
+    console.log = () => {};
+    console.error = () => {};
+    const code = await main(
+      [
+        '--section', 'canton-ti',
+        '--ids', '[]',
+        '--out', path.join(fixtureRoot, 'dist'),
+        '--summary', path.join(fixtureRoot, 'summary.json'),
+        '--publish',
+      ],
+      {
+        parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
+        fetchPageManifestImpl: async () => ({ state: 'ok', doc: publishedDoc }),
+        publishedStatusImpl: async () => 'live',
+        publishedApiReleaseCommitImpl: async () => head,
+        latestApiInputCommitImpl: async () => head,
+        publishedReleaseReadyImpl: async () => ({
+          ok: true,
+          files: {},
+          counts: { bySection: { 'canton-ti': { articles: 0 } } },
+        }),
+        publisherCommitImpl: () => head,
+        currentMainHeadImpl: () => head,
+        createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
+        renderSectionArticlePipelineImpl: async () => ({
+          entries: [],
+          hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
+          downloadedImageKeys: [],
+          imageFetchFailures: [],
+          imagePostcondition: {},
+          aggregatePagesAllowed: false,
+        }),
+        articleReleaseSnapshotImpl: () => [],
+        publishImpl: async (options) => {
+          publishOptions = options;
+          return { failures: 0, uploaded: 0, deleted: 0, status: 'live' };
+        },
+        publishPageManifestImpl: () => {
+          manifestCalls++;
+          return true;
+        },
+      },
+    );
+    assert.equal(code, 0, 'una release già pronta deve seguire il publish completo');
+    assert.equal(publishOptions?.snapshotPagesBeforeUpload, false);
+    assert.equal(manifestCalls, 1, 'il manifest deve essere pubblicato quando la readiness è verificata');
+    const summary = JSON.parse(readFileSync(path.join(fixtureRoot, 'summary.json'), 'utf8'));
+    assert.equal(summary.deferredLiveRelease, false);
+    assert.equal(summary.published.manifestDeferred, undefined);
+    assert.equal(summary.published.manifestPublished, true);
+  } finally {
+    if (previousAllow === undefined) delete process.env.ALLOW_DEFERRED_LIVE_RELEASE;
+    else process.env.ALLOW_DEFERRED_LIVE_RELEASE = previousAllow;
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('publisher: lo staging bootstrap live carica solo chiavi HTML nuove e snapshotta prima dell upload', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-bootstrap-stage-'));
   const outDir = path.join(fixtureRoot, 'dist');
