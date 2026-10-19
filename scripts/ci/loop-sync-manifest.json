@@ -6336,16 +6336,6 @@
         "corpus": "4cb6ab1ae26b751c",
         "alignedAt": "2026-10-19"
       }
-    },
-    {
-      "path": "scripts/ci/validate-shared-provider-exit.mjs",
-      "mode": "corpus-only",
-      "reason": "Validatore della run card producer-owned che prova che exit 5 corrisponde a un differimento condiviso dichiarato. Lo chiamano i workflow di pubblicazione del corpus; il sito non genera questi articoli e non usa il marker.",
-      "baseline": {
-        "site": null,
-        "corpus": "7b7be1d1549373dc",
-        "alignedAt": "2026-10-19"
-      }
     }
   ]
 }
