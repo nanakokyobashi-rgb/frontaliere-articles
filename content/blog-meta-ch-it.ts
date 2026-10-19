@@ -8522,6 +8522,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.securitas-violazioni-lavoro.title': 'Securitas avrebbe violato migliaia di volte la legge sul lavoro',
     'blog.article.securitas-violazioni-lavoro.excerpt': 'Circa 20\'000 presunte violazioni tra 2023 e 2025 Circa 900 dipendenti coinvolti nella Svizzera centrale Turni troppo lunghi e recuperi troppo brevi Securitas',
     'blog.article.securitas-violazioni-lavoro.imageAlt': 'Personale di sicurezza Securitas in Svizzera centrale',
+    'blog.article.campagna-fisco-coppie-sposate.title': 'Fisco e coppie sposate: i contrari aprono la loro campagna',
+    'blog.article.campagna-fisco-coppie-sposate.excerpt': 'Il comitato contrario ha presentato le sue tesi a Berna Il voto federale sull\'iniziativa è previsto il 29 novembre L\'imposizione individuale entrerà in vigore',
+    'blog.article.campagna-fisco-coppie-sposate.imageAlt': 'Conferenza stampa a Berna sulla votazione federale e fiscale delle coppie sposate',
 };
 
 export default blogMetaChIt;
