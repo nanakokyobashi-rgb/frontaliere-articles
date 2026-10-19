@@ -302,6 +302,18 @@ test('selectConsistentTitleEvidence rejects conflicting declarations before matc
   assert.equal(shortHeadlineEvidence(`${matching}\r—`, matching), false);
 });
 
+test('pageCarriesItem excludes conflicting metadata from multi-word headline evidence', () => {
+  const headline = 'Grossbrand fordert mehrere Verletzte';
+  const conflicting = `Fahrplanänderung betrifft Pendler\r${headline}`;
+
+  assert.equal(pageCarriesItem('', headline, { titleEvidence: headline }), true);
+  assert.equal(pageCarriesItem('', headline, { titleEvidence: conflicting }), false);
+  assert.deepEqual(
+    checkItemOnPage({ title: conflicting, text: '' }, { headline }),
+    { ok: false, reason: 'title-not-on-page' },
+  );
+});
+
 test('checkItemOnPage: titoli della pagina, testo e giornata — sulla pagina reale del ticker', () => {
   const html = readFileSync(path.join(HERE, 'fixtures', 'canton-sources', 'suedostschweiz-verkehrsticker-page.html'), 'utf8');
   const title = pageTitleEvidence(html);

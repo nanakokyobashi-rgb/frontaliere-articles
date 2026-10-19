@@ -307,10 +307,11 @@ export function shortHeadlineEvidence(titleEvidence, headline) {
 }
 
 /**
- * Il testo porta almeno il 60% delle parole distintive (almeno 4 caratteri visibili)?
- * Sulle parole e non sulla frase: una pagina non sempre ripete il titolo alla
- * lettera. Con meno di due parole distintive il corpo e' evidenza debole e
- * serve la corrispondenza esatta con un titolo dichiarato dalla pagina.
+ * Il corpo e i titoli coerenti della pagina portano almeno il 60% delle parole
+ * distintive (almeno 4 caratteri visibili)? Sulle parole e non sulla frase: una
+ * pagina non sempre ripete il titolo alla lettera. Con meno di due parole
+ * distintive il corpo e' evidenza debole e serve la corrispondenza esatta con
+ * un titolo dichiarato dalla pagina.
  *
  * @param {string} text
  * @param {string} headline
@@ -323,7 +324,8 @@ export function pageCarriesItem(text, headline, {
 } = {}) {
   const words = [...new Set(normalizeItemText(headline).split(' ').filter(shortHeadlineTokenPolicy))];
   if (words.length < 2) return shortHeadlineEvidence(titleEvidence, headline);
-  const page = new Set(normalizeItemText(text).split(' '));
+  const consistentTitle = selectConsistentTitleEvidence(titleEvidence);
+  const page = new Set(normalizeItemText(`${consistentTitle}\n${text}`).split(' '));
   const found = words.filter((w) => page.has(w)).length;
   return found / words.length >= minShare;
 }
@@ -900,9 +902,9 @@ export function pageTitleEvidence(html, opts = {}) {
  */
 export function checkItemOnPage(page, item) {
   const titleEvidence = String(page?.title || '');
-  const evidence = `${titleEvidence}\n${page?.text || ''}`;
-  if (!evidence.trim()) return { ok: false, reason: 'no-page' };
-  if (!pageCarriesItem(evidence, item?.headline || '', { titleEvidence })) {
+  const body = String(page?.text || '');
+  if (!titleEvidence.trim() && !body.trim()) return { ok: false, reason: 'no-page' };
+  if (!pageCarriesItem(body, item?.headline || '', { titleEvidence })) {
     return { ok: false, reason: 'title-not-on-page' };
   }
   const dayOf = (raw) => {
