@@ -159,6 +159,20 @@ test('guard di una PR alla volta sul prefisso bonifica/blocking-bodies, e tutti 
   assert.ok(g < stepIndex((s) => RETRANSLATE.test(s.run)), 'il guard sta dopo la ri-traduzione');
 });
 
+test('il guard bonifica preferisce il PAT del repo prima del bucket API dell\'installation token', () => {
+  const g = stepIndex((s) => /^Guard/.test(s.name));
+  const guard = STEPS[g];
+  const prep = stepIndex((s) => s.name === 'Prepare Firebase credentials for open-proposal guard');
+  const load = stepIndex((s) => s.name === 'Load current-repository API credentials for open-proposal guard');
+  assert.ok(prep > -1 && load > prep && g > load, 'il PAT non viene preparato prima del guard');
+  assert.match(guard.run, /api_pat_loaded=false/);
+  assert.match(guard.run, /if \[ -n "\$\{GITHUB_PAT_NANAKO:-\}" \]/);
+  assert.match(guard.run, /export GH_TOKEN="\$GITHUB_PAT_NANAKO"/);
+  const prepare = STEPS.find((s) => s.name === 'Prepare Firebase credentials');
+  assert.ok(prepare, 'manca la preparazione delle credenziali per le scritture');
+  assert.match(prepare.if, /steps\.guard\.outputs\.api_pat_loaded != 'true'/);
+});
+
 test('il branch della PR ha il prefisso del guard e il push usa GITHUB_PAT_NANAKO', () => {
   const pr = STEPS.find((s) => /gh pr create/.test(s.run));
   assert.ok(pr, 'nessun passo apre la PR');

@@ -86,6 +86,27 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
+      # Prefer the current-repository PAT for the read-only duplicate guard:
+      # the Actions installation token shares a small API bucket with other
+      # workflows. Missing RC credentials keep the existing fail-closed
+      # GITHUB_TOKEN fallback.
+      - name: Prepare Firebase credentials for open-proposal guard
+        continue-on-error: true
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::warning::FIREBASE_SERVICE_ACCOUNT_JSON assente: il guard userà il GITHUB_TOKEN e resterà fail-closed"
+            exit 0
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Load current-repository API credentials for open-proposal guard
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
       # Una PR di bonifica alla volta (modello `transport-identical-twins.yml`):
       # prefisso del branch con `gh api --paginate`, solo branch di questo repo.
       - name: Guard — bonifica gia' in volo
@@ -95,6 +116,14 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
+          echo "api_pat_loaded=false" >> "$GITHUB_OUTPUT"
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+            echo "api_pat_loaded=true" >> "$GITHUB_OUTPUT"
+            echo "Bonifica guard uses the current-repository PAT for its read-only API call."
+          else
+            echo "::warning::GITHUB_PAT_NANAKO non disponibile: il guard usa GITHUB_TOKEN e resta fail-closed"
+          fi
           gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" --jq '.[] | [.head.repo.full_name, .head.ref] | @tsv' |
             awk -F '\t' -v repo="$REPO" '$1 == repo { print $2 }' > /tmp/open-prs.txt
           OPEN=$(grep -c '^bonifica/blocking-bodies' /tmp/open-prs.txt || true)
@@ -243,7 +272,7 @@ jobs:
           echo "Scaffolding: prerequisiti dimostrati nel checkout e su main (locali: $LOCALE)."
 
       - name: Prepare Firebase credentials
-        if: steps.guard.outputs.open_bonifiche == '0'
+        if: steps.guard.outputs.open_bonifiche == '0' && steps.guard.outputs.api_pat_loaded != 'true'
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -257,7 +286,7 @@ jobs:
 
       # Chiavi della cascata MT e `GITHUB_PAT_NANAKO` per il push.
       - name: Load secrets from Remote Config
-        if: steps.guard.outputs.open_bonifiche == '0'
+        if: steps.guard.outputs.open_bonifiche == '0' && steps.guard.outputs.api_pat_loaded != 'true'
         run: node generator/scripts/load-rc-env.mjs
 
       # `--apply` solo nel ramo `APPLY=true`. Una run tutta
