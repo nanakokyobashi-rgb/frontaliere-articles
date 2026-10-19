@@ -377,6 +377,15 @@ test('non protegge una frase ordinaria con un toponimo identico alla fonte', () 
   );
 });
 
+test('richiede confini di token per riconoscere un nome ufficiale nel sorgente', () => {
+  const source = 'Il testo contiene xCaisse Santé Genève come riferimento.';
+  const target = 'Die Stelle heißt Caisse Santé Genève.';
+  assert.deepEqual(
+    findLocalizedToponymMismatches({ sourceText: source, targetText: target, locale: 'de' }),
+    [{ code: 'GE', type: 'canton', locale: 'de', form: 'Genève', expected: 'Genf' }],
+  );
+});
+
 test('protegge il nome ufficiale e ripara un toponimo autonomo nella stessa frase', () => {
   const source = 'Il servizio è gestito da Caisse Santé Genève, Genève.';
   const target = 'Der Dienst wird von Caisse Santé Genève, Genève betrieben.';

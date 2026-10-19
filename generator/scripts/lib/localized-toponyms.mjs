@@ -322,6 +322,14 @@ function normalizeNameSearchText(value) {
     .toLocaleLowerCase('en');
 }
 
+function containsTokenBoundedText(text, candidate) {
+  const pattern = new RegExp(
+    `(?<![\\p{L}\\p{N}\\p{M}])${escapeRegExp(candidate)}(?![\\p{L}\\p{N}\\p{M}])`,
+    'u',
+  );
+  return pattern.test(text);
+}
+
 /**
  * Source-identical proper/official names are opaque to the generic canton
  * normalizer. A bare `Canton Ticino` in prose remains a canton phrase; a
@@ -331,7 +339,7 @@ function normalizeNameSearchText(value) {
 function sourceIdenticalNameRanges(value, sourceText) {
   if (!sourceText) return [];
   const text = normalizeToponymMatchText(value);
-  const sourceSearchText = ` ${normalizeNameSearchText(sourceText)} `;
+  const sourceSearchText = normalizeNameSearchText(sourceText);
   const knownToponymRanges = [];
   TOPONYM_PATTERN.lastIndex = 0;
   for (const match of withoutUrls(text).matchAll(TOPONYM_PATTERN)) {
@@ -344,7 +352,7 @@ function sourceIdenticalNameRanges(value, sourceText) {
     if (!knownToponymRanges.some(([toponymStart, toponymEnd]) => toponymStart >= start && toponymEnd <= end)) return;
     if (!isLikelyProperNameSpan(candidate)) return;
     const candidateSearchText = normalizeNameSearchText(candidate);
-    if (!candidateSearchText || !sourceSearchText.includes(candidateSearchText)) return;
+    if (!candidateSearchText || !containsTokenBoundedText(sourceSearchText, candidateSearchText)) return;
     ranges.push([start, end]);
   };
 
