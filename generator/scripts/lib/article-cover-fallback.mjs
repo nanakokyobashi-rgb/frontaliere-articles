@@ -23,6 +23,10 @@ import {
   articleImageSubject,
   articleImageTopic,
 } from './article-cover-identity.mjs';
+import {
+  GENERATED_COVER_ALT_BY_LOCALE,
+  LICENSED_PHOTO_ALT_BY_LOCALE,
+} from './generated-cover-alt.mjs';
 import { imageCreditRecordFromGeneratedImageRecord } from '../../../engine/shared/imageCredits.mjs';
 
 export const CATALOG_FALLBACK_MIN_SHARED_WORDS = 2;
@@ -40,18 +44,8 @@ const VERIFIED_CATALOG_IMAGE = Symbol('verified catalog image');
 const verificationCache = new Map();
 
 const VERIFIED_FALLBACK_ALT = Object.freeze({
-  generated: Object.freeze({
-    it: 'Immagine illustrativa pertinente al tema dell’articolo',
-    en: 'Illustrative image relevant to the article topic',
-    de: 'Illustratives Bild zum Thema des Artikels',
-    fr: 'Image illustrative en lien avec le sujet de l’article',
-  }),
-  'licensed-photo': Object.freeze({
-    it: 'Fotografia pertinente al tema dell’articolo',
-    en: 'Photograph relevant to the article topic',
-    de: 'Fotografie zum Thema des Artikels',
-    fr: 'Photographie en lien avec le sujet de l’article',
-  }),
+  generated: GENERATED_COVER_ALT_BY_LOCALE,
+  'licensed-photo': LICENSED_PHOTO_ALT_BY_LOCALE,
 });
 
 function searchTokens(value) {
@@ -305,6 +299,18 @@ export function applyHeroProvenance(data, imagePath, provenance) {
 
 function applyVerifiedFallbackAlt(data, kind) {
   data.imageAlt = { ...VERIFIED_FALLBACK_ALT[kind] };
+}
+
+/**
+ * The model writes article metadata before the governed image exists, so its
+ * topical alt text is not evidence about the final pixels. Keep generated
+ * covers on a neutral localized description; non-generated assets retain
+ * their separately authored or verified alt text.
+ */
+export function applyGeneratedHeroAlt(data, provenance) {
+  if (!data || provenance?.kind !== 'generated') return false;
+  applyVerifiedFallbackAlt(data, 'generated');
+  return true;
 }
 
 /**

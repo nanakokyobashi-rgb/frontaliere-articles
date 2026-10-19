@@ -91,6 +91,7 @@ import {
 } from './lib/source-copy-guard.mjs';
 import { classifyJournalistImage, editorialUploadMetadata } from './lib/journalist-image-policy.mjs';
 import {
+  applyGeneratedHeroAlt,
   queueArticleCoverRegeneration,
   resolveArticleCoverFallback,
   verifyCatalogFallbackCandidates,
@@ -272,6 +273,7 @@ function setHeroProvenance(data, imagePath, provenance) {
     : null;
   data._editorialImageRecord = provenance?.kind === 'editorial-upload' ? provenance.record : null;
   data.image = imagePath.split('/').pop() || data.image;
+  applyGeneratedHeroAlt(data, provenance);
 }
 
 /**

@@ -47,9 +47,21 @@ test('journalist engine and catalog verifier share the configured image-phase de
   const imagePhase = resolver.slice(deadlineStart, fallbackStart);
 
   assert.match(imagePhase, /generateArticleImage\(data, \{ deadlineAt: imageDeadlineAt \}\)/);
+  assert.match(CREATE_ARTICLE_SRC, /applyGeneratedHeroAlt\(data, finalProvenance\)/,
+    'l’engine condiviso riallinea l’alt alla provenance finale prima dei writer usati anche dal publisher giornalista');
   assert.match(imagePhase, /verifyCatalogFallbackCandidates\(data, \{[\s\S]*?deadlineAt: imageDeadlineAt,/);
   assert.equal((imagePhase.match(/Date\.now\(\) \+ IMAGE_PHASE_BUDGET_MS/g) || []).length, 1,
     'la verifica fallback non deve aprire un secondo budget dopo il motore');
+});
+
+test('a journalist catalog-pick with generated provenance replaces title-derived alt before registration', () => {
+  const provenanceStart = SRC.indexOf('function setHeroProvenance(data, imagePath, provenance) {');
+  const resolverStart = SRC.indexOf('\n}\n', provenanceStart);
+  assert.ok(provenanceStart >= 0 && resolverStart > provenanceStart, 'setHeroProvenance non trovata o non chiusa');
+  const provenanceWriter = SRC.slice(provenanceStart, resolverStart + 2);
+  assert.match(provenanceWriter, /applyGeneratedHeroAlt\(data, provenance\)/,
+    'un record catalogato generated deve neutralizzare l’alt derivato dal titolo prima di registerArticleFiles');
+  assert.match(SRC, /registerArticleFiles\(data\)/);
 });
 
 test('deferred submissions remain in the queued snapshot and are processed only once per drain', () => {

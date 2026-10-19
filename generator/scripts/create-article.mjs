@@ -320,6 +320,7 @@ import {
   ARTICLE_COVER_FALLBACK_ERROR_CODES,
   catalogFallbackSharedWordCount,
   classifyImageRegenerationFailure,
+  applyGeneratedHeroAlt,
   queueArticleCoverRegeneration,
   resolveArticleCoverFallback,
   verifyCatalogFallbackCandidates,
@@ -16071,6 +16072,8 @@ async function generateArticleImage(data, { deadlineAt = Date.now() + IMAGE_PHAS
   }
   data._generatedImageRecord = result.record;
   data._generatedImagePath = result.record.imageUrl;
+  const finalProvenance = imageRecordForPath(PROJECT_ROOT, data._generatedImagePath, { strict: true });
+  applyGeneratedHeroAlt(data, finalProvenance);
   console.error(`  ✅ Copertina governata: ${result.record.imageUrl} (${result.record.provider}/${result.record.model})`);
   return result.record.imageUrl;
 }

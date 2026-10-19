@@ -107644,7 +107644,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/blog/article-securitas-violazioni-lavoro.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Personale di sicurezza Securitas in Svizzera centrale"
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
       },
       "datePublished": "2026-10-19T06:33:36+00:00",
       "dateModified": "2026-10-19T06:33:36+00:00",
