@@ -33,6 +33,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.cambio-dirigenza-scuola-appenzell.title': 'Appenzell: Walzthöny ist nicht mehr Leiterin der Oberstufe',
     'blog.article.cambio-dirigenza-scuola-appenzell.excerpt': 'Isabella Walzthöny begann am 1.',
     'blog.article.cambio-dirigenza-scuola-appenzell.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.proporz-gran-consiglio-appenzello.title': 'Appenzell Innerrhoden: Der Proporz kommt im Grossen Rat nicht durch',
+    'blog.article.proporz-gran-consiglio-appenzello.excerpt': 'Am 19. Oktober hatte der Innerrhoder Grosse Rat eine lange Traktandenliste; die Totalrevision des Gastgewerbegesetzes erforderte Diskussionen.',
+    'blog.article.proporz-gran-consiglio-appenzello.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

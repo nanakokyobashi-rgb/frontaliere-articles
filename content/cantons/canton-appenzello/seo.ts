@@ -392,6 +392,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-proporz-gran-consiglio-appenzello': {
+    title: 'Appenzello Interno: il Proporz non passa al Gran Consiglio',
+    description: 'Seduta del Gran Consiglio di Appenzello Interno il 19 ottobre: agenda lunga, discussioni e revisione della legge sugli esercizi pubblici, approvata nel 1994.',
+    keywords: 'frontalieri, ticino, svizzera, italia, appenzello, interno, proporz, passa',
+    ogTitle: 'Appenzello Interno: Proporz e legge sugli esercizi pubblici',
+    ogDescription: 'Il titolo di appenzell24.ch segnala che il Proporz non ha chance nel Gran Consiglio innerrhodese. Il lead descrive la sessione del 19 ottobre come un Lupf per governo e parlamento: agenda lunga e lavoro di dettaglio sulla legge sugli esercizi',
+    canonicalPath: '/articoli-appenzello/proporz-gran-consiglio-appenzello/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Appenzello Interno: il Proporz non passa al Gran Consiglio",
+      "description": "Seduta del Gran Consiglio di Appenzello Interno il 19 ottobre: agenda lunga, discussioni e revisione della legge sugli esercizi pubblici, approvata nel 1994.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-proporz-gran-consiglio-appenzello.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T18:26:19+00:00",
+      "dateModified": "2026-10-19T18:26:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/proporz-gran-consiglio-appenzello/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

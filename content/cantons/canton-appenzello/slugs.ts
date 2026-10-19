@@ -13,6 +13,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'gais-alterszentrum-rotewies-rette-aumento': { it: 'gais-alterszentrum-rotewies-rette-aumento', en: 'gais-alterszentrum-rotewies-fee-increase', de: 'gais-alterszentrum-rotewies-gebuhren-erhoehung', fr: 'gais-centre-rotewies-augmentation-frais' },
  'teufen-budget-deficit-2027': { it: 'teufen-budget-deficit-2027', en: 'teufen-2027-budget-deficit', de: 'teufen-voranschlag-defizit-2027', fr: 'teufen-budget-2027-pour-reduire-le-deficit-operationnel' },
  'cambio-dirigenza-scuola-appenzell': { it: 'cambio-dirigenza-scuola-appenzell', en: 'appenzell-school-leadership-change', de: 'appenzell-schulleitung-wechsel', fr: 'appenzell-changement-direction-ecole' },
+ 'proporz-gran-consiglio-appenzello': { it: 'proporz-gran-consiglio-appenzello', en: 'proporz-appenzell-grand-council', de: 'proporz-im-grossen-rat', fr: 'proporz-grand-conseil-appenzell' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

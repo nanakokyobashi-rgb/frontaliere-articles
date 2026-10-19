@@ -116,4 +116,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'proporz-gran-consiglio-appenzello',
+ category: 'novita',
+ date: '2026-10-19T18:26:19.436Z',
+ image: '/images/blog/article-proporz-gran-consiglio-appenzello.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
