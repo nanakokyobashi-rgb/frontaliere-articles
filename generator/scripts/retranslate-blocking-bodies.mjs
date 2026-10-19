@@ -76,15 +76,19 @@
  * Se un campo torna vuoto dalla cascata (motore giu', sentinella nav-link
  * mangled, marker `Null` di fallimento) l'articolo si SALTA per intero: in
  * produzione il chiamante ha una recovery per-campo (retry LLM, poi body
- * lasciato non tradotto — #1875), qui no, e mezza traduzione nuova cucita su
- * mezza vecchia sarebbe testo che nessuna pipeline ha mai prodotto.
+ * lasciato non tradotto — #1875). Qui la cascata esaurita usa una sola
+ * recovery Codex locale; se anche quella fallisce l'articolo si SALTA per
+ * intero, perche' mezza traduzione nuova cucita su mezza vecchia sarebbe testo
+ * che nessuna pipeline ha mai prodotto. Il report conserva provider e motivi
+ * bounded del campo fallito, mai payload o errori grezzi.
  *
  * ── COSTO ──────────────────────────────────────────────────────────────────
  *
- * Zero quota LLM: `freeTranslateWithRetry` e' la cascata di motori gratuiti.
- * Il costo e' wall-clock e rate limit degli endpoint pubblici, non il budget
- * condiviso che ferma il ciclo agentico. Il "cascade" da ~265 job/giorno e'
- * un'altra cosa (gli annunci di lavoro) e non viene toccato.
+ * `freeTranslateWithRetry` prova prima la cascata condivisa. Nella bonifica
+ * locale, solo dopo un vuoto completo, usa il trasporto `codex exec` gia'
+ * previsto dal motore esplicito: il costo LLM e' quindi limitato ai campi che
+ * tutti i provider hanno lasciato scoperti. In CI, dove il trasporto locale e'
+ * vietato, il report nominativo rende il rifiuto diagnosticabile.
  *
  * Eccezione dichiarata: `--engine codex` NON e' a quota zero. Ogni campo body
  * e' una chiamata `codex exec` (gpt-5.6-luna, effort max) sulla subscription
@@ -140,7 +144,8 @@
  *   --stratify         una fetta per ogni codice, fino a --limit complessivo
  *   --concurrency N    articoli in parallelo (default 2, gentile coi motori)
  *   --engine <nome>    motore di traduzione: `cascade` (default, la cascata
- *                      free-MT di `freeTranslateWithRetry`) oppure `codex`
+ *                      di `freeTranslateWithRetry`, poi Codex locale solo sul
+ *                      vuoto completo) oppure `codex`
  *                      (solo in locale: il tier Codex della cascata da solo,
  *                      eseguito con `codex exec`, gpt-5.6-luna a effort max;
  *                      decisione del proprietario 2026-10-04, #1084 item 2).
@@ -161,7 +166,13 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import { translateFieldFreeMt } from './lib/article-free-mt.mjs';
-import { freeTranslateWithRetry, balanceMarkdownMarkers, translateWithCodexEngine } from './lib/free-translate.mjs';
+import {
+  freeTranslateWithRetry,
+  balanceMarkdownMarkers,
+  recordTranslationProviderAttempt,
+  summarizeTranslationOutcome,
+  translateWithCodexEngine,
+} from './lib/free-translate.mjs';
 import { createCodexExecCall } from './lib/codex-exec-call.mjs';
 import { runFactualityGates } from './lib/article-factuality-gates.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
@@ -2011,11 +2022,55 @@ export function parseEngine(raw) {
  * l'uscita (`translateFieldFreeMt` e le guardie di `processPair`) e' lo stesso
  * codice per entrambi.
  */
-export function engineTranslator(engine, { codexCall = null } = {}) {
-  if (engine === 'cascade') return freeTranslateWithRetry;
+export function engineTranslator(engine, {
+  codexCall = null,
+  cascadeTranslate = freeTranslateWithRetry,
+  codexTranslate = translateWithCodexEngine,
+} = {}) {
+  const runLocalCodex = async (args, provider) => {
+    const attempt = Number.isInteger(args?._outcome?.attempt) ? args._outcome.attempt + 1 : 1;
+    const reasonOffset = args?._outcome?._tierReasons?.length || 0;
+    try {
+      const out = await codexTranslate({ ...args, call: codexCall });
+      // `translateWithCodexEngine` records the reason at the guard that saw
+      // it. Preserve those bounded engine reasons when this local fallback
+      // wraps the result; otherwise every rejected answer is flattened to
+      // `incomplete-output` and the report loses the actionable distinction
+      // between an echo, a meta-response and a structure rejection.
+      const engineReasons = (args?._outcome?._tierReasons || [])
+        .slice(reasonOffset)
+        .map((event) => event?.reason)
+        .filter((reason) => reason === 'source-passthrough'
+          || reason === 'meta-response'
+          || String(reason || '').startsWith('structure:'));
+      recordTranslationProviderAttempt(args?._outcome, {
+        provider,
+        attempt,
+        status: out ? 'success' : 'failed',
+        reasons: out ? [] : [...new Set(engineReasons.length ? engineReasons : ['incomplete-output'])],
+      });
+      return out;
+    } catch (error) {
+      recordTranslationProviderAttempt(args?._outcome, {
+        provider,
+        attempt,
+        status: 'failed',
+        reasons: ['provider-error'],
+      });
+      throw error;
+    }
+  };
+
+  if (engine === 'cascade') {
+    return async (args) => {
+      const out = await cascadeTranslate(args);
+      if (out || typeof codexCall !== 'function') return out;
+      return runLocalCodex(args, 'codex-local-fallback');
+    };
+  }
   if (engine === 'codex') {
     if (typeof codexCall !== 'function') throw new TypeError('motore codex senza trasporto');
-    return (args) => translateWithCodexEngine({ ...args, call: codexCall });
+    return (args) => runLocalCodex(args, 'codex-local');
   }
   throw new Error(`motore sconosciuto: ${engine}`);
 }
@@ -2101,8 +2156,11 @@ async function main() {
   }
   let translate;
   try {
+    const ci = String(process.env.CI ?? '').trim().toLowerCase();
+    const localRuntime = !((ci && ci !== '0' && ci !== 'false')
+      || String(process.env.GITHUB_ACTIONS ?? '').trim());
     translate = engineTranslator(ENGINE, {
-      codexCall: ENGINE === 'codex' ? createCodexExecCall() : null,
+      codexCall: (ENGINE === 'codex' || localRuntime) ? createCodexExecCall() : null,
     });
   } catch (err) {
     console.error(`❌ --engine ${ENGINE}: ${err?.message || err}`);
@@ -2233,7 +2291,7 @@ async function main() {
   report(results, { APPLY, AS_JSON, ENGINE, total: pairs.length, OUT: flag('out') && resolve(flag('out')) });
 }
 
-async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslateWithRetry }) {
+export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslateWithRetry }) {
   const base = { ...pair };
   const realDir = DIR_TO_REAL[pair.dir];
   if (!realDir) return { ...base, written: false, reason: `dir-sconosciuta: ${pair.dir}` };
@@ -2278,6 +2336,10 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
 
   const newSections = {};
   let missingField = null;
+  const missingFields = [];
+  let translationFailure = null;
+  const translationFailures = [];
+  const translationFieldResults = [];
   // Solo sull'italiano con scaffolding: la riga del prompt da togliere e le
   // intestazioni-etichetta del prompt da riportare a titoli normali, per campo.
   const titleMarkerRepair = isSourceLocale && oldCodes.includes(TITLE_MARKER_REPAIR_CODE)
@@ -2314,12 +2376,23 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
         titleMarkerRepair.skipped.push(...stripped.skipped.map((s) => `${f} ${s}`));
       }
       const sanitized = sanitizeTranslatedField(source);
-      if (sanitized === null) { missingField = f; break; }
+      if (sanitized === null) {
+        missingField ??= f;
+        missingFields.push(f);
+        continue;
+      }
       newSections[f] = sanitized;
     }
   } else {
     // Ri-traduzione: OGNI carattere qui esce dalla cascata MT, mai da una regex.
     for (const f of Object.keys(italianSections)) {
+      const translationOutcome = {
+        passthroughs: 0,
+        errors: 0,
+        incomplete: false,
+        incompletes: 0,
+        tierAttempts: [],
+      };
       const out = await translateFieldFreeMt({
         text: italianSections[f],
         sourceLang: 'it',
@@ -2328,16 +2401,35 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
         fieldName: f,
         translate,
         balanceMarkdown: balanceMarkdownMarkers,
+        translationOutcome,
       });
-      if (!out) { missingField = f; break; }
+      if (!out) {
+        missingField ??= f;
+        missingFields.push(f);
+        translationFailures.push({ field: f, ...summarizeTranslationOutcome(translationOutcome) });
+        translationFieldResults.push({ field: f, status: 'empty' });
+        continue;
+      }
       // Stesso post-processing del percorso di produzione (`create-article.mjs`
       // lo applica alla stessa identica uscita di `translateFieldFreeMt`): la
       // cascata e' la stessa, e da qui in poi lo e' anche cio' che le succede.
       const sanitized = sanitizeTranslatedField(out);
-      if (sanitized === null) { missingField = f; break; }
+      if (sanitized === null) {
+        missingField ??= f;
+        missingFields.push(f);
+        translationFailures.push({
+          field: f,
+          stage: 'sanitize-output',
+          ...summarizeTranslationOutcome(translationOutcome),
+        });
+        translationFieldResults.push({ field: f, status: 'rejected' });
+        continue;
+      }
       newSections[f] = sanitized;
+      translationFieldResults.push({ field: f, status: 'translated' });
     }
   }
+  translationFailure = translationFailures[0] || null;
 
   // La guardia dei fatti chiave deve precedere factuality e writeAtomic: il
   // primo puo' vedere zero `critical` anche quando il secondo non deve mai
@@ -2422,6 +2514,10 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
     oldCodes,
     newCodes,
     missingField,
+    ...(translationFailure ? { translationFailure } : {}),
+    ...(missingFields.length ? { missingFields } : {}),
+    ...(translationFailures.length ? { translationFailures } : {}),
+    ...(translationFieldResults.length ? { translationFieldResults } : {}),
     written: false,
     reason: localizedToponymError ? `esonimo-non-valido: ${localizedToponymError.message}` : verdict.reason,
     ...(localizedToponymError?.localizedToponymIssues
@@ -2457,8 +2553,45 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
   return { ...row, written: true };
 }
 
+// Il lotto che ha aperto #2912 era al 58% DE e 62% FR. Il 20% segnala una
+// degradazione sistemica molto prima di quei livelli, senza trasformare un
+// singolo endpoint transiente in allarme su un lotto sostanzioso.
+export const EMPTY_CASCADE_RATE_THRESHOLD = 0.2;
+
+export function emptyCascadeMetric(results, threshold = EMPTY_CASCADE_RATE_THRESHOLD) {
+  let count = 0;
+  let total = 0;
+  for (const row of Array.isArray(results) ? results : []) {
+    // New reports measure every attempted translation field. A rejected field
+    // is still part of the denominator, even when another field in the same
+    // pair translated successfully. The legacy fallback keeps old report
+    // fixtures readable as one field per pair.
+    if (Array.isArray(row?.translationFieldResults)) {
+      total += row.translationFieldResults.length;
+      count += row.translationFieldResults.filter((field) => field?.status !== 'translated').length;
+      continue;
+    }
+    if (Array.isArray(row?.translationFailures) || Number.isInteger(row?.translationFieldsAttempted)) {
+      const attempted = Number.isInteger(row.translationFieldsAttempted)
+        ? Math.max(0, row.translationFieldsAttempted)
+        : row.translationFailures.length;
+      total += attempted;
+      count += Math.min(attempted, row.translationFailures?.length || 0);
+      continue;
+    }
+    total += 1;
+    if (row?.reason === 'campo-vuoto-dalla-cascata') count += 1;
+  }
+  const rate = total > 0 ? count / total : 0;
+  return { count, total, rate, threshold, firing: total > 0 && rate > threshold };
+}
+
 function report(results, { APPLY, AS_JSON, ENGINE = 'cascade', total, OUT }) {
-  const payload = () => JSON.stringify({ mode: APPLY ? 'apply' : 'dry-run', engine: ENGINE, total, results }, null, 2);
+  const emptyCascade = emptyCascadeMetric(results);
+  const metrics = { emptyCascade };
+  const payload = () => JSON.stringify({
+    mode: APPLY ? 'apply' : 'dry-run', engine: ENGINE, total, metrics, results,
+  }, null, 2);
   if (OUT) {
     // Su file, non su stdout: i tier loggano li' e romperebbero il parse.
     writeAtomic(OUT, payload());
@@ -2485,6 +2618,7 @@ function report(results, { APPLY, AS_JSON, ENGINE = 'cascade', total, OUT }) {
   console.log(`  titolo non canonico  : ${templateHeading}`);
   console.log(`  italian-residue      : ${residue}`);
   console.log(`  altro                : ${results.length - clean - refailed - empty - truncated - wrongLang - templateHeading}`);
+  console.log(`  quota campi vuoti    : ${emptyCascade.count}/${emptyCascade.total} (${(emptyCascade.rate * 100).toFixed(1)}%, soglia ${(emptyCascade.threshold * 100).toFixed(0)}%)${emptyCascade.firing ? ' ⚠️' : ''}`);
 
   // Per-codice: e' la misura che decide se un codice va escluso dal lotto.
   const perCode = new Map();
