@@ -7,6 +7,11 @@
  * Runtime localization never reads content.
  */
 
+import {
+  withoutOfficialNameWords,
+  withoutUrls,
+} from '../../generator/scripts/lib/localized-toponyms.mjs';
+
 const NAV_LINK_LABELS_RAW = {
   "📊 confronto stipendi netti tra ticino e lombardia": {
     "de": "📊 Vergleich der Nettolöhne zwischen Tessin und Lombardei",
@@ -4662,11 +4667,28 @@ const ITALIAN_WORDS_BY_LOCALE = Object.freeze({
 const NAV_LINK_RE = /\[([^\]\n]+)\]\((nav:([a-z0-9-]+)[^)]*)\)/giu;
 
 const BRAND_RE = /\b(?:frontaliere\s+ticino|frontaliereticino(?:\.ch)?)\b/giu;
+const CAPITALIZED_BRAND_RE = /\bFrontaliere\b/gu;
 
-function normalizedWords(value) {
-  return String(value ?? "")
+function withoutCapitalizedBrand(value, locale) {
+  const vocabulary = ITALIAN_WORDS_BY_LOCALE[locale] ?? ITALIAN_WORDS;
+  return String(value).replace(CAPITALIZED_BRAND_RE, (match, offset, source) => {
+    const suffix = source.slice(Number(offset) + match.length);
+    if (/^[-/]/u.test(suffix)) return ' ';
+    const nextWord = /^\s+([\p{L}\p{N}]+(?:['’.-][\p{L}\p{N}]+)*)/u.exec(suffix)?.[1];
+    if (!nextWord || vocabulary.has(nextWord.toLocaleLowerCase('it'))) {
+      return nextWord ? match : ' ';
+    }
+    return ' ';
+  });
+}
+
+function normalizedWords(value, locale = "it") {
+  return withoutCapitalizedBrand(
+    withoutOfficialNameWords(withoutUrls(String(value ?? "").normalize("NFKC")))
+      .replace(BRAND_RE, " "),
+    locale,
+  )
     .normalize("NFKC")
-    .replace(BRAND_RE, " ")
     .toLocaleLowerCase("it")
     .split(/[^\p{L}\p{N}]+/u)
     .filter(Boolean);
@@ -4674,7 +4696,7 @@ function normalizedWords(value) {
 
 function italianWords(value, locale = "it") {
   const vocabulary = ITALIAN_WORDS_BY_LOCALE[locale] ?? ITALIAN_WORDS;
-  return new Set(normalizedWords(value).filter((word) => vocabulary.has(word)));
+  return new Set(normalizedWords(value, locale).filter((word) => vocabulary.has(word)));
 }
 
 function sourceItalianWordsByTarget(itBody) {
@@ -4693,7 +4715,7 @@ function sourceItalianWordsByTarget(itBody) {
 function isItalianNavLabel(label, target, sourceWordsByTarget, locale) {
   if (italianWords(label, locale).size) return true;
   const sourceWords = sourceWordsByTarget.get(target);
-  return Boolean(sourceWords?.size && normalizedWords(label).some((word) => sourceWords.has(word)));
+  return Boolean(sourceWords?.size && normalizedWords(label, locale).some((word) => sourceWords.has(word)));
 }
 
 /**

@@ -73,9 +73,9 @@ function countItalianNavLabels(locale, relativeRoot) {
 }
 
 const CONTENT_BASELINE = Object.freeze({
-  de: Object.freeze({ blogBody: 1322, blogBodyCh: 3497 }),
-  fr: Object.freeze({ blogBody: 1248, blogBodyCh: 2414 }),
-  en: Object.freeze({ blogBody: 1259, blogBodyCh: 2436 }),
+  de: Object.freeze({ blogBody: 1311, blogBodyCh: 3497 }),
+  fr: Object.freeze({ blogBody: 1237, blogBodyCh: 2414 }),
+  en: Object.freeze({ blogBody: 1245, blogBodyCh: 2436 }),
 });
 
 test('sostituisce una label italiana e lascia invariato il target completo', () => {
@@ -176,6 +176,47 @@ test('la guardia individua anche una label italiana di una sola parola', () => {
   ]);
 });
 
+test('domini e URL non sono italiani, ma le parole italiane fuori dal dominio sì', () => {
+  const domains = ['trasporti.ch', 'www.frontaliere.ch', 'frontalieri-supsi.ch'];
+  for (const domain of domains) {
+    assert.deepEqual(
+      findItalianNavLinkLabels(`[${domain}](nav:transport)`, 'en'),
+      [],
+      domain,
+    );
+    assert.deepEqual(
+      findItalianNavLinkLabels(`[${domain} guida](nav:transport)`, 'en')
+        .map(({ label, target }) => ({ label, target })),
+      [{ label: `${domain} guida`, target: 'transport' }],
+      domain,
+    );
+  }
+  assert.deepEqual(
+    findItalianNavLinkLabels('[https://www.frontaliere.ch/trasporti](nav:transport)', 'en'),
+    [],
+  );
+});
+
+test('i nomi ufficiali riconosciuti non contano le loro parole italiane', () => {
+  const officialNames = [
+    'Dipartimento delle Finanze ed Economia del Ticino (DFE)',
+    '730 or the Modello Redditi',
+  ];
+  for (const name of officialNames) {
+    assert.deepEqual(
+      findItalianNavLinkLabels(`[${name}](nav:tax-return)`, 'en'),
+      [],
+      name,
+    );
+    assert.deepEqual(
+      findItalianNavLinkLabels(`[guida ${name}](nav:tax-return)`, 'en')
+        .map(({ label, target }) => ({ label, target })),
+      [{ label: `guida ${name}`, target: 'tax-return' }],
+      name,
+    );
+  }
+});
+
 test('il marchio non rende italiana una label inglese, ma non nasconde l’italiano fuori dal marchio', () => {
   assert.deepEqual(
     findItalianNavLinkLabels('[Frontaliere Ticino calculator](nav:calculator)', 'en'),
@@ -201,6 +242,27 @@ test('il marchio non rende italiana una label inglese, ma non nasconde l’itali
     findItalianNavLinkLabels('[kontrolli-frontalieri](nav:traffic-history)', 'de')
       .map(({ label, target }) => ({ label, target })),
     [{ label: 'kontrolli-frontalieri', target: 'traffic-history' }],
+  );
+  assert.deepEqual(
+    findItalianNavLinkLabels('[Frontaliere-Tool](nav:calculator)', 'en'),
+    [],
+  );
+  assert.deepEqual(
+    findItalianNavLinkLabels('[Frontaliere-Stipendio-Tool](nav:calculator)', 'en')
+      .map(({ label, target }) => ({ label, target })),
+    [{ label: 'Frontaliere-Stipendio-Tool', target: 'calculator' }],
+  );
+  assert.deepEqual(
+    findItalianNavLinkLabels('[Steuererklärung Frontaliere/B-Inhaber](nav:tax-return)', 'de'),
+    [],
+  );
+  assert.deepEqual(
+    findItalianNavLinkLabels('[Frontaliere calculator](nav:calculator)', 'en'),
+    [],
+  );
+  assert.deepEqual(
+    findItalianNavLinkLabels('[strumento Frontaliere](nav:calculator)', 'en'),
+    [],
   );
 });
 
