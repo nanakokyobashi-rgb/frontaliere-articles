@@ -260,6 +260,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-18T19:10:17.168Z",
       "lastFailureAt": "2026-10-18T19:10:17.168Z"
+    },
+    {
+      "articleId": "giovani-donne-stipendi-svizzera",
+      "title": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
+      "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
+      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Generic synthetic office scene relevant to the topic, but it conta",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-19T03:17:12.439Z",
+      "lastFailureAt": "2026-10-19T03:17:12.439Z"
     }
   ]
 }

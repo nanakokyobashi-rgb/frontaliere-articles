@@ -8513,6 +8513,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.agenda-federale-voto-2026.title': 'Der Bundesrat hat das Schweiz-EU-Paket übermittelt',
     'blog.article.agenda-federale-voto-2026.excerpt': 'Das Schweiz-EU-Paket wurde am 13.',
     'blog.article.agenda-federale-voto-2026.imageAlt': 'Schweizerische Institutionenszene zu Bundesentscheiden und Volksabstimmungen',
+    'blog.article.giovani-donne-stipendi-svizzera.title': 'Mehr junge Schweizerinnen verdienen weniger, obwohl sie besser ausgebildet sind',
+    'blog.article.giovani-donne-stipendi-svizzera.excerpt': '1995 Geborene: Einkommensgefälle von 14% 1965 Geborene: Einkommensgefälle von 55% 2025: Tertiärbildung bei 54% gegenüber 48% Bei den Eltern',
+    'blog.article.giovani-donne-stipendi-svizzera.imageAlt': 'Junge Frau arbeitet in einem modernen Büro in der Schweiz',
 };
 
 export default blogMetaChDe;

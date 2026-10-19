@@ -10185,42 +10185,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/svizzera/attualita/1957141/pensionato-la-spunta-contro-le-ffs-dopo-mesi-di-battaglia": {
-      "section": "frontaliere",
-      "ts": 1792192585595
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1956992/ritrovare-la-rotta-presentati-dieci-cantieri-per-il-ticino": {
-      "section": "frontaliere",
-      "ts": 1792196911720
-    },
-    "frontaliere::https://www.vconews.it/2026/10/16/leggi-notizia/argomenti/attualita-27/articolo/macugnaga-incontro-tra-il-prefetto-e-i-sindaci-della-valle-anzasca-al-centro-sicurezza-e-viabilit-1.html": {
-      "section": "frontaliere",
-      "ts": 1792197282916
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/trasporti-e-mobilita-il-pd-contesti-salvini-a-palazzo-pirelli-astuti-pensiamo-alle-opere-che-il-nostro-territorio-aspetta/2710600": {
-      "section": "frontaliere",
-      "ts": 1792197307264
-    },
-    "frontaliere::https://comozero.it/attualita/la-rivoluzione-quantum-computing-che-parte-da-como-esulta-limpresa-con-il-dono-della-chiave-usb-nuova-frontiera": {
-      "section": "frontaliere",
-      "ts": 1792199337712
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/varesina-serve-una-scossa-contro-la-pro-sesto-per-invertire-la-rotta/2710576": {
-      "section": "frontaliere",
-      "ts": 1792201586188
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/dolomiti-energia-trento-openjobmetis-varese-la-partita-in-diretta-3/2710519": {
-      "section": "frontaliere",
-      "ts": 1792203098051
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/a-sanremo-lo-spareggio-per-il-campionato-italiano-crugnola-nelle-vesti-del-terzo-incomodo/2710564": {
-      "section": "frontaliere",
-      "ts": 1792203172509
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/la-uyba-cerca-la-prima-vittoria-nel-classico-contro-bergamo/2710654": {
-      "section": "frontaliere",
-      "ts": 1792204780482
-    },
     "svizzera::https://www.seco.admin.ch/it/la-seco-in-qualita-di-datore-di-lavoro": {
       "section": "svizzera",
       "ts": 1792206975646
@@ -10472,6 +10436,10 @@
     "svizzera::https://www.tio.ch/sport/calcio/1957599/la-lazio-sbanca-torino-e-resta-incollata-all-inter": {
       "section": "svizzera",
       "ts": 1792358122896
+    },
+    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1957426/biasca-toglie-il-velo-al-nuovo-nodo-di-interscambio": {
+      "section": "frontaliere",
+      "ts": 1792378641571
     }
   }
 }
