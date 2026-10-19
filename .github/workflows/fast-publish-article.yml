@@ -990,12 +990,15 @@ jobs:
           # Edge-blocked probes also skip the post-verification backstop purge
           # below because the transport result is not evidence of stale cache.
           apex_verify_log="$RUNNER_TEMP/fast-publish-apex-verification.log"
+          apex_verify_attempt=0
           verify_apex() {
             local verify_rc
+            apex_verify_attempt=$((apex_verify_attempt + 1))
             : > "$apex_verify_log"
             set +e
             node scripts/ci/verify-served-fingerprint.mjs verify-apex \
               --fingerprints "$RUNNER_TEMP/published-fingerprints.tsv" \
+              --run-key "${GITHUB_RUN_ID:-local}.${GITHUB_RUN_ATTEMPT:-1}.${shard}.${apex_verify_attempt}" \
               > "$apex_verify_log" 2>&1
             verify_rc=$?
             set -e

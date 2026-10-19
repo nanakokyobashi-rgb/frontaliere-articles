@@ -316,6 +316,12 @@ function probeUrl(url, runKey, sequence) {
   return parsed.toString();
 }
 
+function defaultApexRunKey() {
+  const runId = process.env.GITHUB_RUN_ID || 'local';
+  const runAttempt = process.env.GITHUB_RUN_ATTEMPT || '1';
+  return `${runId}.${runAttempt}.${crypto.randomUUID()}`;
+}
+
 function parseCurlHeaders(rawHeaders) {
   const blocks = String(rawHeaders)
     .split(/\r?\n\r?\n/u)
@@ -577,6 +583,7 @@ export async function verifyApex({
   timeoutMs = DEFAULT_TIMEOUT_SECONDS * 1000,
   probeTimeoutMs = DEFAULT_PROBE_TIMEOUT_MS,
   now = Date.now,
+  runKey = defaultApexRunKey(),
   onObservation = null,
 } = {}) {
   if (typeof fetchImpl !== 'function') throw new TypeError('fetch implementation is required');
@@ -595,7 +602,7 @@ export async function verifyApex({
         fetchImpl,
         url: record.url,
         cacheBust: false,
-        runKey: 'cdn',
+        runKey,
         sequence: checked,
         timeoutMs: Math.min(probeTimeoutMs, Math.max(1, remainingBeforeProbe)),
       })
@@ -611,7 +618,7 @@ export async function verifyApex({
             fetchImpl,
             url: record.url,
             cacheBust: true,
-            runKey: 'cdn-confirm',
+            runKey,
             sequence: checked,
             timeoutMs: Math.min(probeTimeoutMs, Math.max(1, remainingBeforeConfirmation)),
           })
@@ -751,6 +758,7 @@ async function main(argv) {
     fetchImpl,
     timeoutMs: timeoutSeconds * 1000,
     probeTimeoutMs: probeTimeoutSeconds * 1000,
+    runKey: flag(args, '--run-key') || defaultApexRunKey(),
     onObservation: ({ record, observation }) => {
       console.log(`[cdn] ${record.url}: ${observation.status || 'network-error'} ${observation.sha || 'unavailable'} cf-cache-status=${observation.cfCacheStatus} age=${observation.age}`);
     },

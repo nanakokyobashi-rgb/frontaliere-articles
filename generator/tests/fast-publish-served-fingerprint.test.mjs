@@ -249,6 +249,7 @@ test('un mismatch HIT è cache lag solo se la probe anti-cache serve l’hash at
   await assert.rejects(
     () => verifyApex({
       records: [RECORD],
+      runKey: 'test-run.2.articolifrontaliere.1',
       fetchImpl: async (url, options) => {
         fetches += 1;
         if (fetches === 1) {
@@ -256,6 +257,7 @@ test('un mismatch HIT è cache lag solo se la probe anti-cache serve l’hash at
           return response(OLD_HTML, { 'cf-cache-status': 'HIT', age: '776' });
         }
         assert.match(url, /_fpcb=/);
+        assert.equal(new URL(url).searchParams.get('_fpcb'), 'test-run.2.articolifrontaliere.1.1');
         assert.equal(options.headers['Cache-Control'], 'no-cache');
         return response(NEW_HTML, { 'cf-cache-status': 'MISS', age: '0' });
       },
@@ -396,14 +398,18 @@ test('CDN vecchia dopo la purge: una sola ripetizione della purge poi passa', as
 
 test('CDN vecchia per sempre: fallisce con fingerprint e diagnostica Cloudflare', async () => {
   let purges = 0;
+  const freshProbeUrls = [];
   await assert.rejects(
     () => verifyAfterPurge({
       records: [RECORD],
-      fetchImpl: async () => response(OLD_HTML, {
-        'cf-cache-status': 'HIT',
-        age: '776',
-        'last-modified': 'Mon, 19 Oct 2026 05:00:00 GMT',
-      }),
+      fetchImpl: async (url) => {
+        if (url !== RECORD.url) freshProbeUrls.push(url);
+        return response(OLD_HTML, {
+          'cf-cache-status': 'HIT',
+          age: '776',
+          'last-modified': 'Mon, 19 Oct 2026 05:00:00 GMT',
+        });
+      },
       purge: async () => {
         purges += 1;
       },
@@ -420,6 +426,8 @@ test('CDN vecchia per sempre: fallisce con fingerprint e diagnostica Cloudflare'
     },
   );
   assert.equal(purges, 1);
+  assert.equal(freshProbeUrls.length, 2);
+  assert.notEqual(freshProbeUrls[0], freshProbeUrls[1]);
 });
 
 test('un replay no-op controlla subito l’origine e non consuma il budget di attesa', async () => {
@@ -613,6 +621,7 @@ test('il workflow registra prima l’impronta, attende Pages prima della purge e
   assert.match(workflow, /ARTICLE_PUSH_STATUS_FILE/);
   assert.match(workflow, /clean-no-op/);
   assert.match(workflow, /--push-state "\$RUNNER_TEMP\/published-push-state\.tsv"/);
+  assert.match(workflow, /--run-key "\$\{GITHUB_RUN_ID:-local\}\.\$\{GITHUB_RUN_ATTEMPT:-1\}\.\$\{shard\}\.\$\{apex_verify_attempt\}"/);
   assert.match(workflow, /edge_probe_blocked=true[\s\S]*edge probe blocked/);
   assert.doesNotMatch(workflow, /<main>[^\n]*2943/);
 });
