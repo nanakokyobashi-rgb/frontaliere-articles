@@ -270,12 +270,18 @@ export function shortHeadlineTokenPolicy(token) {
 export function selectConsistentTitleEvidence(titleEvidence) {
   const declarations = Array.isArray(titleEvidence) ? titleEvidence : [titleEvidence];
   const lines = declarations
-    .flatMap((declaration) => String(declaration ?? '').split(/\r\n|[\r\n]/u))
+    .flatMap((declaration) => String(declaration ?? '').split(/\r\n|[\r\n]/))
     .map((line) => String(line ?? '').trim())
     .filter(Boolean);
   if (lines.length === 0) return '';
 
-  const normalized = new Set(lines.map(normalizeItemText).filter(Boolean));
+  // A raw, non-empty declaration that normalizes to nothing (for example an
+  // entity or punctuation-only title) is still a declaration. Dropping it
+  // would let a matching sibling become positive evidence by accident.
+  const normalizedLines = lines.map(normalizeItemText);
+  if (normalizedLines.some((line) => !line)) return '';
+
+  const normalized = new Set(normalizedLines);
   return normalized.size === 1 ? lines[0] : '';
 }
 
@@ -284,7 +290,7 @@ export function selectConsistentTitleEvidence(titleEvidence) {
  * titolo risultante coincide con l'intero item. Il corpo non basta: parole come
  * «Stau» possono comparire in una pagina diversa o nella sua navigazione.
  *
- * @param {string} titleEvidence titoli da `pageTitleEvidence()`
+ * @param {string | string[]} titleEvidence titoli da `pageTitleEvidence()`
  * @param {string} headline
  * @returns {boolean}
  */
@@ -301,14 +307,15 @@ export function shortHeadlineEvidence(titleEvidence, headline) {
 }
 
 /**
- * Il testo porta almeno il 60% delle parole distintive (almeno 4 caratteri visibili)?
- * Sulle parole e non sulla frase: una pagina non sempre ripete il titolo alla
- * lettera. Con meno di due parole distintive il corpo e' evidenza debole e
- * serve la corrispondenza esatta con un titolo dichiarato dalla pagina.
+ * Il corpo e i titoli coerenti della pagina portano almeno il 60% delle parole
+ * distintive (almeno 4 caratteri visibili)? Sulle parole e non sulla frase: una
+ * pagina non sempre ripete il titolo alla lettera. Con meno di due parole
+ * distintive il corpo e' evidenza debole e serve la corrispondenza esatta con
+ * un titolo dichiarato dalla pagina.
  *
  * @param {string} text
  * @param {string} headline
- * @param {{ minShare?: number, titleEvidence?: string }} [options]
+ * @param {{ minShare?: number, titleEvidence?: string | string[] }} [options]
  * @returns {boolean}
  */
 export function pageCarriesItem(text, headline, {
@@ -317,7 +324,8 @@ export function pageCarriesItem(text, headline, {
 } = {}) {
   const words = [...new Set(normalizeItemText(headline).split(' ').filter(shortHeadlineTokenPolicy))];
   if (words.length < 2) return shortHeadlineEvidence(titleEvidence, headline);
-  const page = new Set(normalizeItemText(text).split(' '));
+  const consistentTitle = selectConsistentTitleEvidence(titleEvidence);
+  const page = new Set(normalizeItemText(`${consistentTitle}\n${text}`).split(' '));
   const found = words.filter((w) => page.has(w)).length;
   return found / words.length >= minShare;
 }
@@ -894,9 +902,9 @@ export function pageTitleEvidence(html, opts = {}) {
  */
 export function checkItemOnPage(page, item) {
   const titleEvidence = String(page?.title || '');
-  const evidence = `${titleEvidence}\n${page?.text || ''}`;
-  if (!evidence.trim()) return { ok: false, reason: 'no-page' };
-  if (!pageCarriesItem(evidence, item?.headline || '', { titleEvidence })) {
+  const body = String(page?.text || '');
+  if (!titleEvidence.trim() && !body.trim()) return { ok: false, reason: 'no-page' };
+  if (!pageCarriesItem(body, item?.headline || '', { titleEvidence })) {
     return { ok: false, reason: 'title-not-on-page' };
   }
   const dayOf = (raw) => {
