@@ -8525,6 +8525,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.campagna-fisco-coppie-sposate.title': 'Steuern und Ehepaare: Die Gegner starten ihre Kampagne',
     'blog.article.campagna-fisco-coppie-sposate.excerpt': 'Das Gegenkomitee hat seine Argumente in Bern vorgestellt Die eidgenössische Abstimmung über die Initiative ist für den 29.',
     'blog.article.campagna-fisco-coppie-sposate.imageAlt': 'Medienkonferenz in Bern zur eidgenössischen Abstimmung über die Besteuerung von Ehepaaren',
+    'blog.article.impatto-glp1-industria-alimentare.title': 'GLP-1-Medikamente gegen Adipositas: Auswirkungen auf die Lebensmittelindustrie',
+    'blog.article.impatto-glp1-industria-alimentare.excerpt': 'In der Schweiz befinden sich weniger als 2% in einer GLP-1-Therapie In den USA sinkt das Lebensmittelbudget um bis zu 5% Emmi, Danone und Nestlé passen ihre Sortimente an Givaudan prognostiziert Wachstum',
+    'blog.article.impatto-glp1-industria-alimentare.imageAlt': 'Ein Supermarktregal in der Schweiz mit frischen Lebensmitteln',
 };
 
 export default blogMetaChDe;

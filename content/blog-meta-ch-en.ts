@@ -8525,6 +8525,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.campagna-fisco-coppie-sposate.title': 'Taxation and married couples: opponents launch their campaign',
     'blog.article.campagna-fisco-coppie-sposate.excerpt': 'The opposing committee presented its arguments in Bern The federal vote on the initiative is scheduled for November 29 Individual taxation will enter into force',
     'blog.article.campagna-fisco-coppie-sposate.imageAlt': 'Press conference in Bern regarding federal voting and taxation of married couples',
+    'blog.article.impatto-glp1-industria-alimentare.title': 'GLP-1 anti-obesity drugs: impact on the food industry',
+    'blog.article.impatto-glp1-industria-alimentare.excerpt': 'In Switzerland, less than 2% are on GLP-1 therapy In the USA, the food budget falls by up to 5% Emmi, Danone and Nestlé adapt their product ranges Givaudan estimates growth',
+    'blog.article.impatto-glp1-industria-alimentare.imageAlt': 'A Swiss supermarket aisle featuring fresh food products',
 };
 
 export default blogMetaChEn;
