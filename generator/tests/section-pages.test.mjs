@@ -1046,15 +1046,15 @@ test('publisher: argomenti', () => {
     ['/articoli-ticino/a/'],
   );
   assert.deepEqual(
-    parseArgs(['--section', 'canton-ti', '--known-missing-pages', '["/articoli-ticino/old/"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).knownMissingPages,
-    ['/articoli-ticino/old/'],
+    parseArgs(['--section', 'canton-ti', '--known-missing-pages', '["/articoli-ticino/a/","/articoli-ticino/a/"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).knownMissingPages,
+    ['/articoli-ticino/a/'],
   );
   assert.throws(
     () => parseArgs(['--section', 'canton-ti', '--missing-pages', '["../a"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }),
     /path canonici/,
   );
   assert.throws(
-    () => parseArgs(['--section', 'canton-ti', '--known-missing-pages', '["../a"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }),
+    () => parseArgs(['--section', 'canton-ti', '--known-missing-pages', '["//a/"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }),
     /path canonici/,
   );
   assert.throws(() => parseArgs(['--section', 'canton-ti', '--boh']), /argomento sconosciuto/);
@@ -1075,8 +1075,8 @@ test('publisher: tutti i 404 noti escono dall inventario immutabile staged, ma s
   const missing = pageEntry('canton-ti', 'articoli-ticino/missing/index.html', 'article');
   const leftover = pageEntry('canton-ti', 'articoli-ticino/leftover/index.html', 'article');
   const present = pageEntry('canton-ti', 'articoli-ticino/present/index.html', 'article');
-  const rendered = [missing, leftover, present];
-  const published = [missing, leftover, present];
+  const rendered = [missing, present];
+  const published = [missing, present, leftover];
   assert.deepEqual(stagedReleasePageSets(rendered, published).pagesForPublish, []);
   const selected = stagedReleasePageSets(
     rendered,
@@ -2951,15 +2951,18 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(stagedReplay, /Redispatch staged backfill on current main after stale replay/);
   assert.match(stagedReplay, /TARGET_MATRIX: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/);
   assert.match(stagedReplay, /-f missing_page_paths="\$missing_page_paths"/);
+  assert.match(stagedReplay, /-f known_missing_page_paths="\$known_missing_page_paths"/);
   const replayDispatchStep = stagedReplay.slice(
     stagedReplay.indexOf('- name: Replay publish-api after staged release'),
   );
   assert.match(replayDispatchStep, /git fetch --no-tags --depth=1 origin main/);
   const mainRevisionGuard = replayDispatchStep.indexOf('if [ "$current_main" != "$SOURCE_COMMIT" ]');
+  const globalReadiness = replayDispatchStep.indexOf('node scripts/reconcile-section-pages.mjs --out "$readiness" --cap 1');
+  const missingPagesGuard = replayDispatchStep.indexOf(".counts.missingPages");
   const apiDispatch = replayDispatchStep.indexOf('gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main');
   assert.ok(
-    mainRevisionGuard >= 0 && apiDispatch > mainRevisionGuard,
-    'il replay API deve saltare il dispatch se main e\' avanzata dal backfill',
+    mainRevisionGuard >= 0 && globalReadiness > mainRevisionGuard && missingPagesGuard > globalReadiness && apiDispatch > missingPagesGuard,
+    'il replay API deve richiedere main stabile e zero pagine 404 globali prima del dispatch',
   );
   assert.match(replayDispatchStep, /-f source_commit="\$SOURCE_COMMIT"/);
   const staleRecoveryStep = stagedReplay.slice(

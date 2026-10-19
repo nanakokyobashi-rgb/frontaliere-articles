@@ -195,18 +195,13 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
   return out;
 }
 
-export function stagedReleasePageSets(
-  pages,
-  publishedLivePages,
-  confirmedMissingPagePaths = [],
-  knownMissingPagePaths = confirmedMissingPagePaths,
-) {
-  const confirmedMissing = new Set(confirmedMissingPagePaths);
-  const knownMissing = new Set([...knownMissingPagePaths, ...confirmedMissingPagePaths]);
+export function stagedReleasePageSets(pages, publishedLivePages, confirmedUploadPagePaths = [], confirmedKnownMissingPagePaths = confirmedUploadPagePaths) {
+  const confirmedUpload = new Set(confirmedUploadPagePaths);
+  const confirmedKnownMissing = new Set(confirmedKnownMissingPagePaths);
   const publishedPageKeys = new Set(publishedLivePages.map((page) => page.edgeKey));
   return {
-    pagesForPublish: pages.filter((page) => !publishedPageKeys.has(page.edgeKey) || confirmedMissing.has(page.canonicalPath)),
-    immutableLivePages: publishedLivePages.filter((page) => !knownMissing.has(page.canonicalPath)),
+    pagesForPublish: pages.filter((page) => !publishedPageKeys.has(page.edgeKey) || confirmedUpload.has(page.canonicalPath)),
+    immutableLivePages: publishedLivePages.filter((page) => !confirmedKnownMissing.has(page.canonicalPath)),
   };
 }
 
@@ -2314,36 +2309,41 @@ export async function main(
     ? Object.values(publishedManifestPages).flat()
     : [];
   const requestedMissingPagePaths = new Set(args.missingPages);
+  const knownMissingPagePaths = new Set(deferredLiveRelease ? [...args.knownMissingPages, ...args.missingPages] : args.missingPages);
   const renderedPagePaths = new Map(pages.map((page) => [page.canonicalPath, page]));
+  const publishedPagePaths = new Map(publishedLivePages.map((page) => [page.canonicalPath, page]));
   const confirmedMissingPagePaths = new Set();
+  const confirmedKnownMissingPagePaths = new Set();
   if (requestedMissingPagePaths.size > 0 && (!publishing || (deferredLiveRelease && !allowDeferredLiveRelease))) {
     defects.push('missing-pages richiede un publish; se la release è staged deve avere il differimento esplicitamente armato');
   } else {
     for (const requestedPath of requestedMissingPagePaths) {
-      const renderedPage = renderedPagePaths.get(requestedPath);
-      if (!renderedPage) {
+      if (!renderedPagePaths.has(requestedPath)) {
         defects.push(`pagina dichiarata mancante non resa dal backfill: ${requestedPath}`);
-        continue;
       }
-      const observed = await probeImpl(renderedPage.cdnUrl, { attempts: 1, delayMs: 0, want: () => false });
+    }
+    const pathsToConfirm = new Set([
+      ...requestedMissingPagePaths,
+      ...[...knownMissingPagePaths].filter((pagePath) => publishedPagePaths.has(pagePath)),
+    ]);
+    for (const pagePath of pathsToConfirm) {
+      const page = renderedPagePaths.get(pagePath) ?? publishedPagePaths.get(pagePath);
+      if (!page) continue;
+      const observed = await probeImpl(page.cdnUrl, { attempts: 1, delayMs: 0, want: () => false });
       if (observed.status !== 'HTTP 404') {
-        defects.push(`pagina dichiarata mancante ora presente o non verificabile: ${requestedPath} (${observed.status})`);
+        defects.push(`pagina dichiarata mancante ora presente o non verificabile: ${pagePath} (${observed.status})`);
         continue;
       }
-      confirmedMissingPagePaths.add(requestedPath);
+      if (requestedMissingPagePaths.has(pagePath)) confirmedMissingPagePaths.add(pagePath);
+      if (knownMissingPagePaths.has(pagePath)) confirmedKnownMissingPagePaths.add(pagePath);
     }
   }
   // During a deferred live release the old sitemap and edge registry are still
   // live. Only keys absent from the verified old page manifest are immutable
-  // additions; a key observed as 404 by the reconciler is the explicit
-  // exception, because keeping it in the immutable inventory would block the
-  // staged repair before the API/edge pointer flips.
-  const stagedPageSets = stagedReleasePageSets(
-    pages,
-    publishedLivePages,
-    confirmedMissingPagePaths,
-    args.knownMissingPages,
-  );
+  // additions; replacing an already announced key here would mix two releases
+  // before the API/edge pointer flips, except for an announced key confirmed
+  // 404 by the reconciler, which has no live bytes to preserve.
+  const stagedPageSets = stagedReleasePageSets(pages, publishedLivePages, confirmedMissingPagePaths, confirmedKnownMissingPagePaths);
   const pagesForPublish = deferredLiveRelease ? stagedPageSets.pagesForPublish : pages;
   const immutableLivePages = deferredLiveRelease ? stagedPageSets.immutableLivePages : [];
 
@@ -2427,8 +2427,9 @@ export async function main(
     pagesForPublish,
     immutableLivePages,
     requestedMissingPagePaths: [...requestedMissingPagePaths],
-    knownMissingPagePaths: [...args.knownMissingPages],
     confirmedMissingPagePaths: [...confirmedMissingPagePaths],
+    knownMissingPagePaths: [...knownMissingPagePaths],
+    confirmedKnownMissingPagePaths: [...confirmedKnownMissingPagePaths],
     // Legacy summary key retains its bootstrap-only meaning.
     immutableBootstrapPages: args.bootstrap ? immutableLivePages : [],
     cdnUploads,

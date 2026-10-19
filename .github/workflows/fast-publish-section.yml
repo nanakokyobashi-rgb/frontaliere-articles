@@ -1080,6 +1080,15 @@ jobs:
             echo "::notice::main e' avanzata durante il backfill ($SOURCE_COMMIT -> $current_main); nessun replay stantio"
             exit 0
           fi
+          readiness="$RUNNER_TEMP/staged-replay-readiness.json"
+          node scripts/reconcile-section-pages.mjs --out "$readiness" --cap 1
+          if [ "$(jq -r 'if .skipped then "true" else "false" end' "$readiness")" = 'true' ] \
+            || [ "$(jq -r '.counts.missingPages' "$readiness")" != '0' ] \
+            || [ "$(jq -r '.counts.unknown' "$readiness")" != '0' ] \
+            || [ "$(jq -r '.counts.manifestUnknown' "$readiness")" != '0' ]; then
+            echo "::notice::replay API rimandato: la verifica globale rileva pagine mancanti o non verificabili"
+            exit 0
+          fi
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           if [ -z "$runtime_pat" ]; then
             echo "::error::GITHUB_PAT_NANAKO non caricato da Remote Config"

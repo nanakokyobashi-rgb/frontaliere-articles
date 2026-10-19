@@ -449,6 +449,7 @@ export async function main(argv = process.argv.slice(2)) {
     sections: report.sections.length,
     dispatch: report.sections.filter((s) => s.dispatch).length,
     missing: report.sections.reduce((n, s) => n + s.missingIds.length, 0),
+    missingPages: report.sections.reduce((n, s) => n + (s.knownMissingPagePaths?.length ?? 0), 0),
     leftover: report.sections.reduce((n, s) => n + s.leftover.length, 0),
     orphaned: report.sections.reduce((n, s) => n + s.orphaned.length, 0),
     manifestUnknown: report.sections.filter((s) => s.pageManifest !== 'ok').length,
@@ -459,7 +460,7 @@ export async function main(argv = process.argv.slice(2)) {
   if (report.skipped) console.log(`[reconcile-sections] rimandato: ${report.skipped}`);
   console.log(
     `[reconcile-sections] corpus @${String(report.apiCommit).slice(0, 8)} — sezioni live ${report.counts.sections}, ` +
-      `da ripubblicare ${report.counts.dispatch}, articoli mancanti ${report.counts.missing} (oltre il cap ${report.counts.leftover}), ` +
+      `da ripubblicare ${report.counts.dispatch}, pagine mancanti ${report.counts.missingPages}, articoli mancanti ${report.counts.missing} (oltre il cap ${report.counts.leftover}), ` +
       `orfane ${report.counts.orphaned}, manifest non verificabili ${report.counts.manifestUnknown}, ` +
       `non verificabili ${report.counts.unknown}`,
   );
