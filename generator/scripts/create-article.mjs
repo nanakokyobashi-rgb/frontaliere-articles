@@ -17252,7 +17252,8 @@ function isFactCheckUnavailableError(e) {
 
 function isSharedArticleCoverVerifierUnavailableError(e) {
   return e?.retryable === true
-    && e?.code === ARTICLE_COVER_FALLBACK_ERROR_CODES.VERIFICATION_UNAVAILABLE;
+    && e?.code === ARTICLE_COVER_FALLBACK_ERROR_CODES.VERIFICATION_UNAVAILABLE
+    && e?.sharedProviderUnavailable === true;
 }
 
 /**

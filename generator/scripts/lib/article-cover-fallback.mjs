@@ -191,7 +191,8 @@ function normalizeCandidatePaths(options, data) {
 }
 
 function noVerifiedFallbackError({ data, candidateCount, rejectedCount, transientErrors }) {
-  const transientError = transientErrors[0];
+  const transientError = transientErrors.find((error) => error?.sharedProviderUnavailable === true)
+    || transientErrors[0];
   const error = new Error(transientError
     ? `Unable to verify a relevant catalog cover for ${data?.id || '<unknown>'}: ${compactReason(transientError.message)}`
     : `No visually verified, topic-relevant catalog cover for ${data?.id || '<unknown>'}`);
@@ -200,6 +201,7 @@ function noVerifiedFallbackError({ data, candidateCount, rejectedCount, transien
     : ARTICLE_COVER_FALLBACK_ERROR_CODES.NO_RELEVANT_CANDIDATE;
   error.retryable = true;
   if (transientError) error.cause = transientError;
+  if (transientError?.sharedProviderUnavailable === true) error.sharedProviderUnavailable = true;
   if (!transientError && rejectedCount > 0) error.imageQualityFailure = true;
   error.candidateCount = candidateCount;
   error.rejectedCount = rejectedCount;
@@ -277,7 +279,7 @@ export async function verifyCatalogFallbackCandidates(data, {
         continue;
       }
       transientErrors.push(error);
-      if (Date.now() >= deadlineAt || error?.code === 'ETIMEDOUT') break;
+      if (error?.sharedProviderUnavailable === true || Date.now() >= deadlineAt || error?.code === 'ETIMEDOUT') break;
     }
   }
 

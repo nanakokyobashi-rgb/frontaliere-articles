@@ -105,7 +105,12 @@ test('a retryable cover-boundary failure defers the run without weakening the im
 
 test('only a cover-verifier outage uses the shared provider deferral', () => {
   const isSharedUnavailable = loadSharedCoverVerifierUnavailableClassifier();
-  assert.equal(isSharedUnavailable({ code: 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE', retryable: true }), true);
+  assert.equal(isSharedUnavailable({ code: 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE', retryable: true }), false);
+  assert.equal(isSharedUnavailable({
+    code: 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE',
+    retryable: true,
+    sharedProviderUnavailable: true,
+  }), true);
   assert.equal(isSharedUnavailable({ code: 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE', retryable: false }), false);
   assert.equal(isSharedUnavailable({ code: 'ARTICLE_COVER_VERIFICATION_STALE', retryable: true }), false);
   assert.equal(isSharedUnavailable({ code: 'ARTICLE_COVER_NO_RELEVANT_FALLBACK', retryable: true }), false);

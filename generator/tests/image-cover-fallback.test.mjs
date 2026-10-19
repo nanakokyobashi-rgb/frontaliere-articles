@@ -208,6 +208,16 @@ test('skipped, unavailable, or non-topic vision never grants a fallback token', 
       { name: 'skipped', verifyImage: async () => undefined, code: 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE' },
       { name: 'unavailable', verifyImage: async () => { throw new Error('vision service unavailable'); }, code: 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE' },
       {
+        name: 'shared provider outage',
+        verifyImage: async () => {
+          const error = new Error('vision provider unavailable');
+          error.sharedProviderUnavailable = true;
+          throw error;
+        },
+        code: 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE',
+        sharedProviderUnavailable: true,
+      },
+      {
         name: 'missing topic signal',
         verifyImage: async () => {
           const { is_topic_relevant: _topic, ...partial } = safeGeneratedVision;
@@ -230,6 +240,7 @@ test('skipped, unavailable, or non-topic vision never grants a fallback token', 
         verifyImage: scenario.verifyImage,
       }), (error) => error.code === scenario.code
         && error.retryable === true
+        && Boolean(error.sharedProviderUnavailable) === (scenario.sharedProviderUnavailable === true)
         && Boolean(error.imageQualityFailure) === (scenario.imageQualityFailure === true), scenario.name);
     }
   } finally {
