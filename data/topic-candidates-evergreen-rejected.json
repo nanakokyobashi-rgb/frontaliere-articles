@@ -10653,10 +10653,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.admin.ch/it/newnsb/l4hrr2l7oxxq": {
-      "section": "svizzera",
-      "ts": 1792276543653
-    },
     "frontaliere::https://www.rsi.ch/s/4171162": {
       "section": "frontaliere",
       "ts": 1792283151640
@@ -10864,6 +10860,10 @@
     "frontaliere::http://www.cd-ocst.ch": {
       "section": "frontaliere",
       "ts": 1792435928184
+    },
+    "svizzera::https://www.admin.ch/it/newnsb/e9jr6pxxz25m": {
+      "section": "svizzera",
+      "ts": 1792450313611
     }
   }
 }
