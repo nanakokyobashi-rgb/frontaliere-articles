@@ -1610,6 +1610,22 @@ test('FU-011 URL grezzi con schema maiuscolo restano esclusi dalla proiezione de
   })[0]?.missing, ['Como']);
 });
 
+test('FU-011 una parentesi nel titolo quotato Markdown resta metadata', () => {
+  const rawLink = '[dettagli](https://example.test "nota) CAP 22100 Como")';
+  const projection = visibleAddressOffsetMap(rawLink);
+  assert.equal(projection.text, 'dettagli');
+  assert.equal(projection.opaque, false);
+
+  const mismatches = findAddressToponymMismatches({
+    italianSections: { body1: 'Via Roma 1, 22100 Como' },
+    newSections: {
+      body1: 'Rue Roma 1, 22100 Wie [dettagli](https://example.test "nota) CAP 22100 Como")',
+    },
+    locale: 'en',
+  });
+  assert.deepEqual(mismatches[0]?.missing, ['Como']);
+});
+
 test('FU-011 non espone destinazioni in link Markdown annidati oltre il limite storico', () => {
   let value = '[Como](/en/22100-como)';
   for (let index = 0; index < 13; index += 1) {
@@ -1744,6 +1760,22 @@ test('la guardia non usa il fallback ordinale se la riga target aggiunge un indi
     { postalCode: '22100', missing: ['Como'] },
     { postalCode: '22100', missing: ['Lecco'] },
   ]);
+});
+
+test('la guardia non abbina per ordinale CAP ambigui distribuiti su righe diverse', () => {
+  const mismatches = findAddressToponymMismatches({
+    italianSections: { body1: '22100 Como, 22100 Como' },
+    newSections: {
+      body1: [
+        '22100 Como',
+        'nota 99999, Via Roma 2, 22100 Como',
+      ].join('\n'),
+    },
+    locale: 'en',
+  });
+
+  assert.equal(mismatches.length, 2);
+  assert.deepEqual(mismatches.map(({ missing }) => missing), [['Como'], ['Como']]);
 });
 
 test('stratify copre piu codici invece di prendere i primi N dello stesso', () => {

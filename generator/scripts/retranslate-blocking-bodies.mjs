@@ -986,6 +986,7 @@ export function visibleAddressOffsetMap(value) {
   const markdownDestinationEndAt = (start, limit) => {
     let parenthesisDepth = 0;
     let angleDestination = false;
+    let titleQuote = '';
     const destinationLimit = Math.min(
       limit,
       start + MAX_MARKDOWN_DESTINATION_LOOKAHEAD,
@@ -993,6 +994,16 @@ export function visibleAddressOffsetMap(value) {
     for (let index = start; index < destinationLimit; index += 1) {
       if (source[index] === '\\') {
         index += 1;
+        continue;
+      }
+      const character = source[index];
+      if (titleQuote) {
+        if (character === titleQuote) titleQuote = '';
+        continue;
+      }
+      if (!angleDestination && index > start && /\s/u.test(source[index - 1])
+        && (character === '"' || character === "'")) {
+        titleQuote = character;
         continue;
       }
       if (index === start && source[index] === '<') angleDestination = true;
@@ -1520,6 +1531,7 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
     candidate.postalMatchIndex === sourceLine.postalMatchIndex);
   const targetHasCompleteOrdinalSet = sourceLine.postalMatchCount > 1
     && allAddressCandidates.length === sourceLine.postalMatchCount
+    && new Set(allAddressCandidates.map((candidate) => candidate.index)).size === 1
     && new Set(allAddressCandidates.map((candidate) => candidate.postalMatchIndex)).size
       === sourceLine.postalMatchCount
     && Array.from({ length: sourceLine.postalMatchCount }, (_, ordinal) => ordinal)
