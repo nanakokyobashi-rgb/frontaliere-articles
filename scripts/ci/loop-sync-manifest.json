@@ -2522,8 +2522,8 @@
       "path": "scripts/lib/r2-image-lease-process.sh",
       "mode": "identical",
       "baseline": {
-        "site": "641f8e3abeabc10d",
-        "corpus": "641f8e3abeabc10d",
+        "site": "c7b5d53bdf10af12",
+        "corpus": "c7b5d53bdf10af12",
         "alignedAt": "2026-10-20"
       }
     },
