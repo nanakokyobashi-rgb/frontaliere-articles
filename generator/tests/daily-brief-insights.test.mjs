@@ -10,18 +10,18 @@ const now = Date.parse('2026-10-14T12:00:00.000Z');
 const day = n => new Date(now - n * 86400000).toISOString().slice(0, 10);
 const history = Array.from({ length: 14 }, (_, i) => ({ date: day(i + 1), added: i < 7 ? 10 : 5 }));
 
-test('compares complete closed weeks, never a partial day or an incomplete baseline', () => {
-  const input = { blocks: { jobs: { available: true } }, todayIso: day(0), jobsStats: { history: [...history, { date: day(0), added: 999 }], leaders: { topCompaniesActive: [{ name: 'Employer', count: 8 }] } } };
+test('date buckets without finalization evidence do not produce weekly job comparisons', () => {
+  const input = { blocks: { jobs: { available: true } }, todayIso: day(0), jobsStats: { history: [...history, { date: day(0), added: 999 }], leaders: { topCompaniesActive: [{ name: 'Employer', count: 8 }], topLocationsActive: [{ name: 'Chiasso', count: 5 }] } } };
   const result = buildDailyBriefInsights(input).jobs;
-  assert.equal(result.currentWeekAdded, 70);
-  assert.equal(result.previousWeekAdded, 35);
-  assert.deepEqual(result.currentPeriod, { from: day(7), to: day(1) });
-  assert.deepEqual(result.previousPeriod, { from: day(14), to: day(8) });
-  assert.equal(result.weeklyChange, 35);
-  assert.equal(result.weeklyChangePct, 100);
+  assert.equal(result.currentWeekAdded, undefined);
+  assert.equal(result.previousWeekAdded, undefined);
+  assert.equal(result.currentPeriod, undefined);
+  assert.equal(result.weeklyChange, undefined);
+  assert.deepEqual(result.topCompanies, [{ name: 'Employer', count: 8 }]);
+  assert.deepEqual(result.topLocations, [{ name: 'Chiasso', count: 5 }]);
   input.jobsStats.history = history.slice(0, 13);
-  assert.equal(buildDailyBriefInsights(input).jobs.previousWeekAdded, null);
-  assert.equal(buildDailyBriefInsights(input).jobs.weeklyChange, null);
+  assert.equal(buildDailyBriefInsights(input).jobs.currentWeekAdded, undefined);
+  assert.equal(buildDailyBriefInsights(input).jobs.weeklyChange, undefined);
 });
 
 test('FX illustration uses the observed rate and refuses an absent weekly change', () => {
