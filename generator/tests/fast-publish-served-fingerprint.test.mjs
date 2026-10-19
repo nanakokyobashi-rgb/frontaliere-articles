@@ -58,9 +58,12 @@ test('l’origine vecchia poi nuova aspetta e passa con una sonda anti-cache', a
       fetches += 1;
       assert.match(url, /_fpcb=/);
       assert.equal(options.headers['Cache-Control'], 'no-cache');
+      assert.equal(options.headers['User-Agent'], 'frontaliere-fast-publish/1.0 (+https://frontaliereticino.ch/)');
       return fetches === 1 ? response(OLD_HTML) : response(NEW_HTML);
     },
-    timeoutMs: 120,
+    // La suite fast-publish gira in parallelo: 120 ms rende il test sensibile
+    // al carico del runner, pur avendo una fetch mockata e deterministica.
+    timeoutMs: 1000,
     pollIntervalMs: 15,
     now: () => now,
     sleep: async (ms) => {
@@ -73,6 +76,23 @@ test('l’origine vecchia poi nuova aspetta e passa con una sonda anti-cache', a
   assert.equal(result.checked, 1);
   assert.equal(fetches, 2);
   assert.deepEqual(sleeps, [15]);
+});
+
+test('la verifica CDN invia un User-Agent esplicito accettato dal bordo', async () => {
+  let optionsSeen;
+  await verifyApex({
+    records: [RECORD],
+    fetchImpl: async (url, options) => {
+      assert.equal(url, RECORD.url);
+      optionsSeen = options;
+      return response(NEW_HTML, { 'cf-cache-status': 'HIT' });
+    },
+  });
+
+  assert.deepEqual(optionsSeen.headers, {
+    Accept: 'text/html',
+    'User-Agent': 'frontaliere-fast-publish/1.0 (+https://frontaliereticino.ch/)',
+  });
 });
 
 test('CDN vecchia dopo la purge: una sola ripetizione della purge poi passa', async () => {
