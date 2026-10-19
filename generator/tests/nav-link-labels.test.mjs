@@ -73,9 +73,9 @@ function countItalianNavLabels(locale, relativeRoot) {
 }
 
 const CONTENT_BASELINE = Object.freeze({
-  de: Object.freeze({ blogBody: 1398, blogBodyCh: 3599 }),
-  fr: Object.freeze({ blogBody: 1319, blogBodyCh: 2518 }),
-  en: Object.freeze({ blogBody: 1356, blogBodyCh: 2536 }),
+  de: Object.freeze({ blogBody: 1365, blogBodyCh: 3572 }),
+  fr: Object.freeze({ blogBody: 1286, blogBodyCh: 2492 }),
+  en: Object.freeze({ blogBody: 1287, blogBodyCh: 2503 }),
 });
 
 test('sostituisce una label italiana e lascia invariato il target completo', () => {
@@ -193,10 +193,35 @@ test('le voci della mappa senza parole dell allowlist vengono localizzate', () =
   }
 });
 
-test('una sigla uguale nella lingua target non viene segnalata come italiana', () => {
-  const source = '[AVS](nav:pension)';
-  assert.equal(localizeNavLinkLabels(source, 'fr'), source);
-  assert.deepEqual(findItalianNavLinkLabels(source, 'fr'), []);
+test('le sigle federali usano la forma ufficiale per lingua senza passare dalla guardia italiana', () => {
+  const cases = [
+    ['LAMal', { de: 'KVG', fr: 'LAMal', en: 'LAMal' }],
+    ['AVS', { de: 'AHV', fr: 'AVS', en: 'AVS' }],
+    ['LPP', { de: 'BVG', fr: 'LPP', en: 'LPP' }],
+    ['AVS/LPP', { de: 'AHV/BVG', fr: 'AVS/LPP', en: 'AVS/LPP' }],
+    ['LPP/BVG', { de: 'BVG', fr: 'LPP', en: 'LPP' }],
+    ['LAMal/KVG', { de: 'KVG', fr: 'LAMal', en: 'LAMal' }],
+    ['AVS/AHV', { de: 'AHV', fr: 'AVS', en: 'AVS' }],
+    ['AVS/AI/IPG', { de: 'AHV/IV/EO', fr: 'AVS/AI/APG', en: 'AVS/AI/IPG' }],
+    ['LAMal/CMI', { de: 'LAMal/CMI', fr: 'LAMal/CMI', en: 'LAMal/CMI' }],
+    ['DFE', { de: 'DFE', fr: 'DFE', en: 'DFE' }],
+    ['SECO', { de: 'SECO', fr: 'SECO', en: 'SECO' }],
+  ];
+  for (const [label, translations] of cases) {
+    for (const [locale, translation] of Object.entries(translations)) {
+      const source = `[${label}](nav:pension)`;
+      assert.equal(localizeNavLinkLabels(source, locale), `[${translation}](nav:pension)`, `${label} (${locale})`);
+      assert.deepEqual(findItalianNavLinkLabels(source, locale), [], `${label} (${locale}) non è italiano`);
+    }
+  }
+});
+
+test('una congiunzione italiana rende italiana una sequenza di sigle', () => {
+  const source = '[AVS e LPP](nav:pension)';
+  assert.equal(localizeNavLinkLabels(source, 'fr'), '[AVS et LPP](nav:pension)');
+  assert.equal(findItalianNavLinkLabels(source, 'fr').length, 1);
+  assert.equal(localizeNavLinkLabels('[XYZ e ABC](nav:pension)', 'fr'), '[XYZ e ABC](nav:pension)');
+  assert.equal(findItalianNavLinkLabels('[XYZ e ABC](nav:pension)', 'fr').length, 1);
 });
 
 test('domini e URL non sono italiani, ma le parole italiane fuori dal dominio sì', () => {

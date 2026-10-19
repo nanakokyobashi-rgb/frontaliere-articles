@@ -857,6 +857,34 @@ test('translationSanityIssue rifiuta una label nav italiana anche sotto le tre r
   assert.equal(issue, 'italian-nav-label: body1 [calcolatore sconosciuto](nav:ral)');
 });
 
+test('le sigle pure non attivano italian-nav-label, ma la sostituzione resta attiva', () => {
+  const cases = [
+    ['fr', 'LAMal', 'LAMal'],
+    ['fr', 'AVS', 'AVS'],
+    ['fr', 'LPP', 'LPP'],
+    ['de', 'AVS', 'AHV'],
+    ['de', 'LAMal', 'KVG'],
+    ['en', 'LAMal', 'LAMal'],
+  ];
+  for (const [locale, label, localized] of cases) {
+    const source = `[${label}](nav:pension)`;
+    assert.equal(sanitizeTranslatedField(source, locale), `[${localized}](nav:pension)`, `${label} (${locale})`);
+    assert.deepEqual(findItalianNavLinkLabels(source, locale), [], `${label} (${locale}) guardia`);
+    assert.equal(
+      translationSanityIssue({ oldSections: {}, newSections: { body1: source }, italianSections: {}, locale }),
+      null,
+      `${label} (${locale}) italian-nav-label`,
+    );
+  }
+
+  const conjunction = '[AVS e LPP](nav:pension)';
+  assert.equal(sanitizeTranslatedField(conjunction, 'fr'), '[AVS et LPP](nav:pension)');
+  assert.equal(
+    translationSanityIssue({ oldSections: {}, newSections: { body1: conjunction }, italianSections: {}, locale: 'fr' }),
+    `italian-nav-label: body1 ${conjunction}`,
+  );
+});
+
 test('localizzazione, scan e guardia condividono il verdetto sulle voci della mappa', () => {
   const cases = [
     ['assistenza legale', 'Assistance juridique'],

@@ -130,13 +130,13 @@ const NAV_LINK_LABELS_RAW = {
   },
   "avs": {
     "de": "AHV",
-    "fr": "avs",
-    "en": "AHV"
+    "fr": "AVS",
+    "en": "AVS"
   },
   "avs e lpp": {
     "de": "AHV und BVG",
     "fr": "AVS et LPP",
-    "en": "AHV and BVG"
+    "en": "AVS and LPP"
   },
   "avs e rendita": {
     "de": "avs e rendita",
@@ -144,19 +144,19 @@ const NAV_LINK_LABELS_RAW = {
     "en": "avs e rendita"
   },
   "avs/ahv": {
-    "de": "AHV/AVS",
-    "fr": "avs/ahv",
-    "en": "avs/ahv"
+    "de": "AHV",
+    "fr": "AVS",
+    "en": "AVS"
   },
   "avs/ai/ipg": {
-    "de": "Rentenplaner",
+    "de": "AHV/IV/EO",
     "fr": "AVS/AI/APG",
-    "en": "avs/ai/ipg"
+    "en": "AVS/AI/IPG"
   },
   "avs/lpp": {
     "de": "AHV/BVG",
-    "fr": "avs/lpp",
-    "en": "AHV/BVG"
+    "fr": "AVS/LPP",
+    "en": "AVS/LPP"
   },
   "avs/lpp e rendita": {
     "de": "AHV/BVG und Rente",
@@ -2394,9 +2394,9 @@ const NAV_LINK_LABELS_RAW = {
     "en": "data on the cost of living in Switzerland"
   },
   "dfe": {
-    "de": "dfe",
-    "fr": "dfe",
-    "en": "dfe"
+    "de": "DFE",
+    "fr": "DFE",
+    "en": "DFE"
   },
   "dfe ticino": {
     "de": "DAE Tessin",
@@ -2970,8 +2970,8 @@ const NAV_LINK_LABELS_RAW = {
   },
   "lamal": {
     "de": "KVG",
-    "fr": "assurance maladie",
-    "en": "KVG"
+    "fr": "LAMal",
+    "en": "LAMal"
   },
   "lamal (assicurazione malattia obbligatoria)": {
     "de": "KBVG (obligatorische Krankenpflegeversicherung)",
@@ -3009,9 +3009,9 @@ const NAV_LINK_LABELS_RAW = {
     "en": "LAMal/health insurance"
   },
   "lamal/cmi": {
-    "de": "lamal/cmi",
-    "fr": "lamal/cmi",
-    "en": "lamal/cmi"
+    "de": "LAMal/CMI",
+    "fr": "LAMal/CMI",
+    "en": "LAMal/CMI"
   },
   "lamal/cmi assicurazione malattia": {
     "de": "KVG/KVK Krankenversicherung",
@@ -3020,8 +3020,8 @@ const NAV_LINK_LABELS_RAW = {
   },
   "lamal/kvg": {
     "de": "KVG",
-    "fr": "lamal/kvg",
-    "en": "lamal/kvg"
+    "fr": "LAMal",
+    "en": "LAMal"
   },
   "lavorare in svizzera": {
     "de": "Arbeiten in der Schweiz",
@@ -3054,14 +3054,14 @@ const NAV_LINK_LABELS_RAW = {
     "en": "link"
   },
   "lpp": {
-    "de": "lpp",
-    "fr": "lpp",
-    "en": "BVG"
+    "de": "BVG",
+    "fr": "LPP",
+    "en": "LPP"
   },
   "lpp/bvg": {
-    "de": "BVG/LPP",
-    "fr": "lpp/bvg",
-    "en": "lpp/bvg"
+    "de": "BVG",
+    "fr": "LPP",
+    "en": "LPP"
   },
   "mappa dei campus ef": {
     "de": "EF-Campus-Karte",
@@ -3579,9 +3579,9 @@ const NAV_LINK_LABELS_RAW = {
     "en": "scoprire quali sono i mezzi pubblici più convenienti"
   },
   "seco": {
-    "de": "seco",
-    "fr": "seco",
-    "en": "admin.ch"
+    "de": "SECO",
+    "fr": "SECO",
+    "en": "SECO"
   },
   "secondo pilastro": {
     "de": "zweiten Säule",
@@ -4398,12 +4398,12 @@ Object.assign(NAV_LINK_LABELS_RAW, {
   "avs": {
     "de": "AHV",
     "fr": "AVS",
-    "en": "OASI"
+    "en": "AVS"
   },
   "avs/ai/ipg": {
     "de": "AHV/IV/EO",
     "fr": "AVS/AI/APG",
-    "en": "OASI/DI/IC"
+    "en": "AVS/AI/IPG"
   },
   "costi di vita in ticino": {
     "de": "Lebenshaltungskosten im Tessin",
@@ -4664,6 +4664,21 @@ const ITALIAN_WORDS_BY_LOCALE = Object.freeze({
   it: ITALIAN_WORDS,
 });
 
+const ACRONYM_TOKEN_RE = /^(?=.{2,6}$)[A-Z]{2,6}[a-z]*$/u;
+
+function acronymNavLabelKind(value) {
+  const tokens = String(value ?? "").trim().split(/[\s/-]+/u).filter(Boolean);
+  if (!tokens.length) return null;
+  const hasItalianConjunction = tokens.some((token) => token.toLocaleLowerCase("it") === "e");
+  const acronymTokens = tokens.filter((token) => token.toLocaleLowerCase("it") !== "e");
+  if (!acronymTokens.length || acronymTokens.some((token) => !ACRONYM_TOKEN_RE.test(token))) return null;
+  return hasItalianConjunction ? "with-italian-conjunction" : "only";
+}
+
+function isAcronymTranslationEntry(entry) {
+  return ["de", "fr", "en"].every((locale) => acronymNavLabelKind(entry?.[locale]) === "only");
+}
+
 const NAV_LINK_RE = /\[([^\]\n]+)\]\((nav:([a-z0-9-]+)[^)]*)\)/giu;
 
 const BRAND_RE = /\b(?:frontaliere\s+ticino|frontaliereticino(?:\.ch)?)\b/giu;
@@ -4715,6 +4730,9 @@ function sourceItalianWordsByTarget(itBody) {
 function isItalianNavLabel(label, target, sourceWordsByTarget, locale) {
   const normalized = normalizeNavLinkLabel(label);
   const normalizedLabelWords = normalizedWords(label, locale);
+  const acronymKind = acronymNavLabelKind(label);
+  if (acronymKind === "only") return false;
+  if (acronymKind === "with-italian-conjunction") return true;
   const canonical = NAV_LINK_LABELS[normalized];
   if (canonical && normalizeNavLinkLabel(canonical[locale]) === normalized) return false;
   if (canonical && normalizedLabelWords.length > 0) return true;
@@ -4755,10 +4773,13 @@ export function localizeNavLinkLabels(markdown, locale, { itBody = "" } = {}) {
   if (locale === "it") return source;
   const sourceWordsByTarget = sourceItalianWordsByTarget(itBody);
   return source.replace(NAV_LINK_RE, (whole, label, targetSyntax, target) => {
-    const canonical = NAV_LINK_LABELS[normalizeNavLinkLabel(label)]?.[locale];
+    const acronymKind = acronymNavLabelKind(label);
+    const canonicalEntry = NAV_LINK_LABELS[normalizeNavLinkLabel(label)];
+    const canonical = canonicalEntry?.[locale];
+    const canLocalizeAcronym = acronymKind === "only" && isAcronymTranslationEntry(canonicalEntry);
     if (
       !canonical
-      || !isItalianNavLabel(label, target.toLowerCase(), sourceWordsByTarget, locale)
+      || (!isItalianNavLabel(label, target.toLowerCase(), sourceWordsByTarget, locale) && !canLocalizeAcronym)
       || (
         normalizeNavLinkLabel(canonical) === normalizeNavLinkLabel(label)
         && !/\b(?:tessin|schweiz|suisse|italien|italie)\b/iu.test(`${label} ${canonical}`)
