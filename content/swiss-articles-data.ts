@@ -28434,6 +28434,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'agenda-federale-voto-2026',
+    category: 'novita',
+    date: '2026-10-19T02:24:46.900Z',
+    image: '/images/blog/article-agenda-federale-voto-2026.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
