@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-teufen-budget-deficit-2027.webp",
-      "sha256": "28fd4191211efb015ed3a7e128c9c857d7c06dc3097938c8184d363e7d67885f"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-teufen-budget-deficit-2027-480w.webp",
-      "sha256": "1c7e6f2b15aa35cc3e007015c79c60457dbf4c9cb5e269db1d97e53b534d501b"
-    }
-  ]
+  "items": []
 }
