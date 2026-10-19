@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-18T15:52:30.685Z",
-  "contentHash": "e47ad78585fdd0c7a7b525145be19d54c11fe0d3b9375af252a6d221a5dafcb4",
+  "updatedAt": "2026-10-19T05:23:08.856Z",
+  "contentHash": "47db392e0b554319ea56390ac060d75b2116d70c32c54eb170078cfa1f0c9ac8",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-18T11:46:52.571Z",
+      "updatedAt": "2026-10-18T23:45:01.015Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T09:56:00.107Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "36",
+          "value": "37",
           "note": "segnalazioni aggiornate: 18 ottobre 2026"
         }
       ],
@@ -154,7 +154,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T23:45:01.015Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -192,7 +192,7 @@
               "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -240,7 +240,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T05:23:08.856Z"
     },
     "en": {
       "canton": "AG",
@@ -260,7 +260,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "36",
+          "value": "37",
           "note": "reports as of 18 October 2026"
         }
       ],
@@ -372,7 +372,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T23:45:01.015Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -410,7 +410,7 @@
               "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -458,7 +458,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T05:23:08.856Z"
     },
     "de": {
       "canton": "AG",
@@ -478,7 +478,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "36",
+          "value": "37",
           "note": "Meldungen vom 18. Oktober 2026"
         }
       ],
@@ -590,7 +590,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T23:45:01.015Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -628,7 +628,7 @@
               "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -676,7 +676,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T05:23:08.856Z"
     },
     "fr": {
       "canton": "AG",
@@ -696,7 +696,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "36",
+          "value": "37",
           "note": "signalements au 18 octobre 2026"
         }
       ],
@@ -808,7 +808,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T23:45:01.015Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -846,7 +846,7 @@
               "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -894,7 +894,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T05:23:08.856Z"
     }
   }
 }
