@@ -306,10 +306,13 @@ test('selectConsistentTitleEvidence rejects conflicting declarations before matc
 test('title evidence rejects unsupported shapes before coercion', () => {
   const matching = 'A 13: Stau';
   const throwingObject = { toString() { throw new Error('must not stringify'); } };
+  const iteratorMaskedNestedArray = [[matching]];
+  iteratorMaskedNestedArray[Symbol.iterator] = function* () { yield matching; };
 
   assert.equal(validateTitleEvidenceShape(matching), true);
   assert.equal(validateTitleEvidenceShape([matching, 'A 13: STAU']), true);
   assert.equal(validateTitleEvidenceShape([[matching]]), false);
+  assert.equal(validateTitleEvidenceShape(iteratorMaskedNestedArray), false);
   assert.equal(validateTitleEvidenceShape([matching, {}]), false);
   assert.equal(validateTitleEvidenceShape(throwingObject), false);
   assert.equal(validateTitleEvidenceShape(Object.assign([], { 1: matching, length: 2 })), false);

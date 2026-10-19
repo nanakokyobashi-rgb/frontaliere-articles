@@ -268,8 +268,11 @@ export function shortHeadlineTokenPolicy(token) {
  */
 export function validateTitleEvidenceShape(titleEvidence) {
   if (typeof titleEvidence === 'string') return true;
-  return Array.isArray(titleEvidence)
-    && Array.from(titleEvidence).every((declaration) => typeof declaration === 'string');
+  if (!Array.isArray(titleEvidence)) return false;
+  for (let index = 0; index < titleEvidence.length; index++) {
+    if (!Object.hasOwn(titleEvidence, index) || typeof titleEvidence[index] !== 'string') return false;
+  }
+  return true;
 }
 
 /**
