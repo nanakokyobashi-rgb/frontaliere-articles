@@ -30,6 +30,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.teufen-budget-deficit-2027.title': 'Teufen : budget 2027 pour réduire le déficit opérationnel',
     'blog.article.teufen-budget-deficit-2027.excerpt': 'La commune de Teufen prévoit pour 2027 des recettes fiscales de 38,9 millions de francs, en hausse de 2,2% par rapport au budget précédent.',
     'blog.article.teufen-budget-deficit-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.cambio-dirigenza-scuola-appenzell.title': 'Appenzell : Walzthöny n\'est plus directrice de l\'Oberstufe',
+    'blog.article.cambio-dirigenza-scuola-appenzell.excerpt': 'Isabella Walzthöny a pris ses fonctions le 1er février 2023 à la Schulgemeinde Appenzell, après avoir été désignée comme successeure de Thomas Mainberger.',
+    'blog.article.cambio-dirigenza-scuola-appenzell.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAppenzelloFr;

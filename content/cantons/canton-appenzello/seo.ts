@@ -353,6 +353,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cambio-dirigenza-scuola-appenzell': {
+    title: 'Appenzell: Walzthöny non è più direttrice dell\'Oberstufe',
+    description: 'Isabella Walzthöny iniziò il 1° febbraio 2023 ad Appenzell. Il titolo annuncia l\'uscita immediata; era stata scelta per succedere a Thomas Mainberger.',
+    keywords: 'frontalieri, ticino, svizzera, italia, appenzell, walzthöny, direttrice, dell',
+    ogTitle: 'Appenzell: Walzthöny non è più direttrice dell\'Oberstufe',
+    ogDescription: 'Uscita immediata della direttrice dell\'Oberstufe: Isabella Walzthöny iniziò ad Appenzell il 1° febbraio 2023, dopo la designazione come successora di Thomas Mainberger nell\'estate precedente. Il lead non spiega la ragione.',
+    canonicalPath: '/articoli-appenzello/cambio-dirigenza-scuola-appenzell/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Appenzell: Walzthöny non è più direttrice dell'Oberstufe",
+      "description": "Isabella Walzthöny iniziò il 1° febbraio 2023 ad Appenzell. Il titolo annuncia l'uscita immediata; era stata scelta per succedere a Thomas Mainberger.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cambio-dirigenza-scuola-appenzell.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T16:21:04+00:00",
+      "dateModified": "2026-10-19T16:21:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/cambio-dirigenza-scuola-appenzell/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

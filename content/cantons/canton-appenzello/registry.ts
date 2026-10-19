@@ -105,4 +105,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'cambio-dirigenza-scuola-appenzell',
+ category: 'novita',
+ date: '2026-10-19T16:21:04.781Z',
+ image: '/images/blog/article-cambio-dirigenza-scuola-appenzell.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
