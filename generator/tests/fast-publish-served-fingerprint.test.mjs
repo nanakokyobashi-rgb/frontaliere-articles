@@ -37,6 +37,18 @@ function workflowStep(name) {
   return workflow.slice(start, next === -1 ? workflow.length : next);
 }
 
+function workflowRun(name) {
+  const step = workflowStep(name);
+  const marker = '\n        run: |\n';
+  const start = step.indexOf(marker);
+  assert.ok(start >= 0, `run scalar not found: ${name}`);
+  return step
+    .slice(start + marker.length)
+    .split('\n')
+    .map((line) => (line.trim() === '' ? '' : line.slice(10)))
+    .join('\n');
+}
+
 const NEW_HTML = '<main>\n  <h1>Nuovo articolo</h1>\n</main>\n';
 const OLD_HTML = '<main>\n  <h1>Articolo vecchio</h1>\n</main>\n';
 const RECORD = {
@@ -624,6 +636,11 @@ test('il workflow registra prima l’impronta, attende Pages prima della purge e
   assert.match(workflow, /--run-key "\$\{GITHUB_RUN_ID:-local\}\.\$\{GITHUB_RUN_ATTEMPT:-1\}\.\$\{shard\}\.\$\{apex_verify_attempt\}"/);
   assert.match(workflow, /edge_probe_blocked=true[\s\S]*edge probe blocked/);
   assert.doesNotMatch(workflow, /<main>[^\n]*2943/);
+});
+
+test('il comando della verifica resta sotto il limite GitHub di 21.000 caratteri', () => {
+  const run = workflowRun('Verify the article is actually readable');
+  assert.ok(run.length < 21_000, `comando di verifica di ${run.length} caratteri: oltre il limite GitHub`);
 });
 
 test('una probe edge bloccata registra lo stato e salta il backstop di re-purge', () => {
