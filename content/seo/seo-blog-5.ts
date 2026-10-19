@@ -112216,6 +112216,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-evento-for-matching-varese-2026': {
+    title: 'Varese: il 22 ottobre 2026 l\'evento For Matching',
+    description: '22 ottobre 2026: for MATCHING a Varese Dalle 9.00 alle 12.30 alle Ville Ponti Nuovo report sul mercato del lavoro varesino Dati, crisi aziendali e tavola',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, ottobre, evento, matching',
+    ogTitle: 'Varese: il 22 ottobre 2026 l\'evento For Matching',
+    ogDescription: '22 ottobre 2026: for MATCHING a Varese Dalle 9.00 alle 12.30 alle Ville Ponti Nuovo report sul mercato del lavoro varesino Dati, crisi aziendali e tavola',
+    canonicalPath: '/articoli-frontaliere/evento-for-matching-varese-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese: il 22 ottobre 2026 l'evento For Matching",
+      "description": "22 ottobre 2026: for MATCHING a Varese Dalle 9.00 alle 12.30 alle Ville Ponti Nuovo report sul mercato del lavoro varesino Dati, crisi aziendali e tavola",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-evento-for-matching-varese-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T13:21:14+00:00",
+      "dateModified": "2026-10-19T13:21:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/evento-for-matching-varese-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

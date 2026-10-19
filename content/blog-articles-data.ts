@@ -45543,6 +45543,16 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'evento-for-matching-varese-2026',
+ category: 'pratico',
+ date: '2026-10-19T13:21:14.114Z',
+ image: '/images/blog/article-evento-for-matching-varese-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

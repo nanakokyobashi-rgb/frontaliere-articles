@@ -10653,18 +10653,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://cassa-disoccupazione.unia.ch": {
-      "section": "frontaliere",
-      "ts": 1792240710869
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/inaugurato-il-nuovo-nodo-di-interscambio-a-biasca-444809": {
-      "section": "frontaliere",
-      "ts": 1792241714329
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/transizione-economica-ed-ecologica-possono-avanzare-insieme-imprese-scienza-e-politica-si-confrontano/2711059": {
-      "section": "frontaliere",
-      "ts": 1792242171852
-    },
     "frontaliere::https://www.tio.ch/svizzera/cronaca/1957434/franchi-ffs-denaro-florida-casa-manager-lamborghini": {
       "section": "frontaliere",
       "ts": 1792245164312
@@ -10880,6 +10868,10 @@
     "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1957292/il-centro-d-asilo-di-chiasso-a-gennaio-non-riaprira-imbucate-le-lettere-di-licenziamento": {
       "section": "frontaliere",
       "ts": 1792411423643
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/securitas%3a-segnalate-migliaia-di-violazioni-del-diritto-del-lavoro/92237590": {
+      "section": "frontaliere",
+      "ts": 1792415321690
     }
   }
 }

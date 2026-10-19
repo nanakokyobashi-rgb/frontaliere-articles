@@ -13514,6 +13514,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.progettista-elettrico-ticino.title': 'Progettista elettrico frontaliere: imposte e permesso G',
     'blog.article.progettista-elettrico-ticino.excerpt': 'Per il frontaliere progettista elettrico in Ticino: accordo in vigore dal 1° gennaio 2024, imposta alla fonte solo in Svizzera e franchigie diverse.',
     'blog.article.progettista-elettrico-ticino.imageAlt': 'Progettista elettrico al lavoro in un ufficio con vista sul Ticino',
+    'blog.article.evento-for-matching-varese-2026.title': 'Varese: il 22 ottobre 2026 l\'evento For Matching',
+    'blog.article.evento-for-matching-varese-2026.excerpt': '22 ottobre 2026: for MATCHING a Varese Dalle 9.00 alle 12.30 alle Ville Ponti Nuovo report sul mercato del lavoro varesino Dati, crisi aziendali e tavola',
+    'blog.article.evento-for-matching-varese-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;
