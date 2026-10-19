@@ -62,3 +62,36 @@ test('eventi: ID separa gli omonimi nello stesso luogo e il fallback conserva lâ
     'i record senza URL, luogo o ID rispettano lâ€™ordine sorgente e gli ID danno un ordine stabile agli omonimi',
   );
 });
+
+test('eventi: il fallback per luogo si associa a un solo ID compatibile', () => {
+  const tomorrow = new Date(NOW + DAY_MS).toISOString().slice(0, 10);
+  const event = (label, extra = {}) => ({
+    title: 'Evento condiviso',
+    titleByLocale: { it: label },
+    startDate: tomorrow,
+    startTime: '10:00',
+    canton: 'TI',
+    ...extra,
+  });
+  const dataset = (events) => ({
+    generatedAt: new Date(NOW - 60 * 60 * 1000).toISOString(),
+    events,
+  });
+  const shape = (events) => shapeEventsBlock(dataset(events), { canton: 'TI', members: ['TI'], nowMs: NOW });
+
+  const uniqueCandidate = shape([
+    event('without-id', { comune: 'Lugano' }),
+    event('with-id', { id: 'event-a', comune: 'Lugano' }),
+    event('other-a', { id: 'event-b', comune: 'Bellinzona' }),
+    event('other-b', { id: 'event-c', comune: 'Locarno' }),
+  ]);
+  assert.equal(uniqueCandidate.render('it').keyFacts[0].value, '3');
+
+  const ambiguousCandidates = shape([
+    event('without-id', { comune: 'Lugano' }),
+    event('id-a', { id: 'event-a', comune: 'Lugano' }),
+    event('id-b', { id: 'event-b', comune: 'Lugano' }),
+    event('other', { id: 'event-c', comune: 'Bellinzona' }),
+  ]);
+  assert.equal(ambiguousCandidates.render('it').keyFacts[0].value, '4');
+});

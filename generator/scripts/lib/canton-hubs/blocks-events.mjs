@@ -37,13 +37,121 @@ function compareEventSourceIndex(a, b) {
   return eventSourceIndex(a) - eventSourceIndex(b);
 }
 
-/** URL o ID identificano l'evento; il luogo e l'indice separano i fallback. */
-function eventIdentityKey(e) {
-  const url = canonicalEventUrl(e.url);
-  const place = foldedEventPart(e.comune) || foldedEventPart(e.venue);
-  const id = eventIdIdentity(e.id);
-  const identity = url ? `url:${url}` : id ? `id:${id}` : place ? `place:${place}` : `record:${eventSourceIndex(e)}`;
-  return JSON.stringify([e.firstUsefulDay, foldedEventPart(e.title), identity]);
+function eventSemanticKey(event) {
+  return JSON.stringify([event.firstUsefulDay, foldedEventPart(event.title)]);
+}
+
+function eventPlaceKey(event) {
+  return foldedEventPart(event.comune) || foldedEventPart(event.venue);
+}
+
+function eventStartTime(event) {
+  return String(event.startTime ?? '').trim();
+}
+
+function deduplicateEvents(events) {
+  const parent = events.map((_, index) => index);
+  const find = (index) => {
+    let root = index;
+    while (parent[root] !== root) root = parent[root];
+    while (parent[index] !== index) {
+      const next = parent[index];
+      parent[index] = root;
+      index = next;
+    }
+    return root;
+  };
+  const union = (left, right) => {
+    const leftRoot = find(left);
+    const rightRoot = find(right);
+    if (leftRoot === rightRoot) return leftRoot;
+    const root = Math.min(leftRoot, rightRoot);
+    parent[Math.max(leftRoot, rightRoot)] = root;
+    return root;
+  };
+  const directOwners = new Map();
+
+  events.forEach((event, index) => {
+    const semantic = eventSemanticKey(event);
+    const url = canonicalEventUrl(event.url);
+    const id = eventIdIdentity(event.id);
+    const aliases = [url && ['url', url], id && ['id', id]].filter(Boolean);
+    for (const [kind, value] of aliases) {
+      const key = JSON.stringify([semantic, kind, value]);
+      if (directOwners.has(key)) union(index, directOwners.get(key));
+      else directOwners.set(key, index);
+    }
+  });
+
+  const groups = new Map();
+  events.forEach((event, index) => {
+    const place = eventPlaceKey(event);
+    if (!place) return;
+    const key = JSON.stringify([eventSemanticKey(event), place]);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(index);
+  });
+
+  for (const indexes of groups.values()) {
+    const roots = [...new Set(indexes.map(find))];
+    const membersByRoot = new Map();
+    for (const index of indexes) {
+      const root = find(index);
+      if (!membersByRoot.has(root)) membersByRoot.set(root, []);
+      membersByRoot.get(root).push(index);
+    }
+    const anchored = roots.filter((root) => membersByRoot.get(root).some((index) =>
+      canonicalEventUrl(events[index].url) || eventIdIdentity(events[index].id)));
+    const fallback = roots.filter((root) => !anchored.includes(root));
+    if (fallback.length === 0) continue;
+    if (anchored.length === 0) {
+      for (const root of fallback.slice(1)) union(fallback[0], root);
+      continue;
+    }
+
+    const fallbackByTime = new Map();
+    for (const root of fallback) {
+      const time = eventStartTime(events[membersByRoot.get(root)[0]]);
+      if (!fallbackByTime.has(time)) fallbackByTime.set(time, []);
+      fallbackByTime.get(time).push(root);
+    }
+    for (const fallbackRoots of fallbackByTime.values()) {
+      const fallbackRoot = fallbackRoots[0];
+      for (const root of fallbackRoots.slice(1)) union(fallbackRoot, root);
+      const fallbackMembers = membersByRoot.get(fallbackRoot) || [];
+      const fallbackTimes = new Set(fallbackMembers.map((index) => eventStartTime(events[index])).filter(Boolean));
+      const compatibleAnchors = anchored.filter((root) => {
+        const anchorMembers = membersByRoot.get(root) || [];
+        const anchorTimes = new Set(anchorMembers.map((index) => eventStartTime(events[index])).filter(Boolean));
+        return !fallbackTimes.size || !anchorTimes.size || [...fallbackTimes].some((time) => anchorTimes.has(time));
+      });
+      if (compatibleAnchors.length === 1) union(fallbackRoot, compatibleAnchors[0]);
+    }
+  }
+
+  const firstIndexByRoot = new Map();
+  const preferredIndexByRoot = new Map();
+  const preference = (event) => canonicalEventUrl(event.url) ? 0
+    : eventIdIdentity(event.id) ? 1
+      : eventPlaceKey(event) ? 2 : 3;
+  events.forEach((event, index) => {
+    const root = find(index);
+    if (!firstIndexByRoot.has(root)) {
+      firstIndexByRoot.set(root, index);
+      preferredIndexByRoot.set(root, index);
+      return;
+    }
+    const preferred = preferredIndexByRoot.get(root);
+    if (preference(event) < preference(events[preferred])
+      || (preference(event) === preference(events[preferred])
+        && eventSourceIndex(event) < eventSourceIndex(events[preferred]))) {
+      preferredIndexByRoot.set(root, index);
+    }
+  });
+  return events.flatMap((_, index) => {
+    const root = find(index);
+    return firstIndexByRoot.get(root) === index ? [events[preferredIndexByRoot.get(root)]] : [];
+  });
 }
 
 const TXT = {
@@ -96,8 +204,7 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
   const today = isoDayOf(nowMs);
   // Estremo ESCLUSO: `windowDays` giorni di calendario, oggi compreso.
   const until = isoDayOf(nowMs + th.windowDays * DAY_MS);
-  const seen = new Set();
-  const upcoming = dataset.events
+  const upcomingCandidates = dataset.events
     .map((e, sourceIndex) => isObj(e) ? { ...e, [EVENT_SOURCE_INDEX]: sourceIndex } : e)
     .filter((e) => isObj(e) && inGroup(members, e.canton))
     .filter((e) => typeof e.title === 'string' && e.title.trim() && isRealDay(e.startDate))
@@ -114,16 +221,10 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
       || String(a.startTime ?? '').localeCompare(String(b.startTime ?? ''))
       || a.title.localeCompare(b.title)
       || String(a.id ?? '').localeCompare(String(b.id ?? ''))
-      || compareEventSourceIndex(a, b))
-    // Lo stesso evento arriva da piu' agende: un URL esplicito prevale,
-    // poi l'ID separa gli omonimi anche quando condividono il luogo; il luogo
-    // e' il fallback quando l'ID manca. Record senza identificatori restano distinti.
-    .filter((e) => {
-      const key = eventIdentityKey(e);
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    });
+      || compareEventSourceIndex(a, b));
+  // URL and ID are independent aliases. Place is only a fallback, and may
+  // attach an unidentified copy to a single compatible identity group.
+  const upcoming = deduplicateEvents(upcomingCandidates);
   if (upcoming.length < th.minRows) {
     return omitted(id, 'empty', `${upcoming.length} eventi nei prossimi ${th.windowDays} giorni per ${canton} (min ${th.minRows})`);
   }
