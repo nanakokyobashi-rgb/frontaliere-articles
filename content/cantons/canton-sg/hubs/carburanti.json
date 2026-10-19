@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-19T12:56:46.330Z",
-  "contentHash": "7408852eb42387dbdbc293036d4eda299f905c10955ad847e6ccda841325d124",
+  "updatedAt": "2026-10-19T13:11:13.608Z",
+  "contentHash": "b8364715da4fc6a58b8bf57a81937d5314847c00c6ce1456ec2fea16f1197bd5",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil: voto il 29 novembre 2026 sulla rete del gas",
+          "url": "/articoli-san-gallo/voto-rete-gas-wil-2026/",
+          "excerpt": "Voto sul fondo: 29 novembre 2026.",
+          "date": "2026-10-19T13:03:39.354Z"
+        },
+        {
           "title": "San Gallo: assistenza ridotta per titolari di Status S",
           "url": "/articoli-san-gallo/status-s-san-gallo-assistenza/",
           "excerpt": "La commissione propone assistenza ridotta anche dopo il permesso.",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/hsg-optime-orario-lavoro/",
           "excerpt": "L'Università di San Gallo coordina OPTIME, progetto UE finanziato da Horizon Europe con circa 3,37 milioni di euro.",
           "date": "2026-10-19T09:46:11.999Z"
-        },
-        {
-          "title": "Rheineck e Mels: due incidenti per aquaplaning",
-          "url": "/articoli-san-gallo/rheineck-mels-aquaplaning/",
-          "excerpt": "Due auto hanno urtato i guardrail il 10 ottobre 2026 Incidenti distinti su A1 e N13 I due conducenti non hanno riportato ferite Danni: circa CHF 35'000 e CHF",
-          "date": "2026-10-11T10:22:49.614Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-19T12:56:46.330Z"
+      "updatedAt": "2026-10-19T13:11:13.608Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil: vote on the gas network on November 29, 2026",
+          "url": "/en/st-gallen-articles/gas-network-vote-wil-2026/",
+          "excerpt": "Vote on the fund: November 29, 2026.",
+          "date": "2026-10-19T13:03:39.354Z"
+        },
+        {
           "title": "St. Gallen: reduced assistance for Status S holders",
           "url": "/en/st-gallen-articles/status-s-st-gallen-assistance/",
           "excerpt": "The commission proposes reduced assistance even after the permit.",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/hsg-optime-working-time/",
           "excerpt": "The University of St.",
           "date": "2026-10-19T09:46:11.999Z"
-        },
-        {
-          "title": "Rheineck and Mels: two hydroplaning accidents",
-          "url": "/en/st-gallen-articles/rheineck-mels-aquaplaning-crashes/",
-          "excerpt": "Two cars hit the guardrails on October 10, 2026 Separate accidents on A1 and N13 The two drivers were not injured Damage: approximately CHF 35'000 and CHF 4'000",
-          "date": "2026-10-11T10:22:49.614Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-19T12:56:46.330Z"
+      "updatedAt": "2026-10-19T13:11:13.608Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil: Abstimmung am 29. November 2026 über das Gasnetz",
+          "url": "/de/st-gallen-artikel/gasnetz-abstimmung-wil-2026/",
+          "excerpt": "Abstimmung über den Fonds: 29.",
+          "date": "2026-10-19T13:03:39.354Z"
+        },
+        {
           "title": "St. Gallen: reduzierte Unterstützung für Personen mit Status S",
           "url": "/de/st-gallen-artikel/status-s-st-gallen-unterstuetzung/",
           "excerpt": "Die Kommission schlägt vor, auch nach der Erteilung der Aufenthaltsbewilligung reduzierte Unterstützung zu gewähren.",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/hsg-optime-arbeitszeit/",
           "excerpt": "Die Universität St.",
           "date": "2026-10-19T09:46:11.999Z"
-        },
-        {
-          "title": "Rheineck und Mels: zwei Unfälle wegen Aquaplaning",
-          "url": "/de/st-gallen-artikel/rheineck-mels-aquaplaning-unfaelle/",
-          "excerpt": "Zwei Autos prallten am 10.",
-          "date": "2026-10-11T10:22:49.614Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-19T12:56:46.330Z"
+      "updatedAt": "2026-10-19T13:11:13.608Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil : vote le 29 novembre 2026 sur le réseau de gaz",
+          "url": "/fr/articles-saint-gall/vote-reseau-gaz-wil-2026/",
+          "excerpt": "Vote sur le fonds : 29 novembre 2026.",
+          "date": "2026-10-19T13:03:39.354Z"
+        },
+        {
           "title": "Saint-Gall : aide réduite pour les titulaires du statut S",
           "url": "/fr/articles-saint-gall/statut-s-saint-gall-assistance/",
           "excerpt": "La commission propose une aide réduite même après le permis.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/hsg-optime-temps-travail/",
           "excerpt": "L’Université de Saint-Gall coordonne OPTIME, un projet de l’UE financé par Horizon Europe à hauteur d’environ 3,37 millions d’euros.",
           "date": "2026-10-19T09:46:11.999Z"
-        },
-        {
-          "title": "Rheineck et Mels : deux accidents dus à l’aquaplanage",
-          "url": "/fr/articles-saint-gall/rheineck-mels-aquaplanage-accidents/",
-          "excerpt": "Deux voitures ont heurté les glissières de sécurité le 10 octobre 2026 Accidents distincts sur l’A1 et la N13 Les deux conducteurs n’ont pas été blessés",
-          "date": "2026-10-11T10:22:49.614Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-19T12:56:46.330Z"
+      "updatedAt": "2026-10-19T13:11:13.608Z"
     }
   }
 }
