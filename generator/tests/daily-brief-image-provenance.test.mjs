@@ -233,6 +233,12 @@ test('a same-day deterministic card is replaced by a fresh governed hero', async
   const filePath = path.join(stagingDir, 'candidate.webp');
   const bytes = Buffer.from('fresh governed daily hero');
   const imageUrl = `/images/blog/${articleImageAssetId(data)}.webp`;
+  const heroPath = path.join(root, 'public', imageUrl.slice(1));
+  const thumbnailPath = path.join(
+    path.dirname(heroPath),
+    'thumbnails',
+    `${path.basename(heroPath, path.extname(heroPath))}-480w.webp`,
+  );
   const record = {
     schema: 1,
     assetId: articleImageAssetId(data),
@@ -275,6 +281,37 @@ test('a same-day deterministic card is replaced by a fresh governed hero', async
     fs.writeFileSync(oldPath, Buffer.alloc(64, 0x61));
     oldRecord.sha256 = sha256File(oldPath);
     appendGeneratedImageRecord(root, oldRecord);
+    fs.mkdirSync(path.dirname(heroPath), { recursive: true });
+    fs.mkdirSync(path.dirname(thumbnailPath), { recursive: true });
+    fs.writeFileSync(heroPath, Buffer.from('previous hero'));
+    fs.writeFileSync(thumbnailPath, Buffer.from('previous thumbnail'));
+    fs.mkdirSync(stagingDir, { recursive: true });
+    fs.writeFileSync(filePath, bytes);
+    record.sha256 = sha256File(filePath);
+
+    const originalRenameSync = fs.renameSync;
+    let renameCount = 0;
+    fs.renameSync = ((...args) => {
+      renameCount += 1;
+      if (renameCount === 2) throw new Error('injected thumbnail publish failure');
+      return originalRenameSync(...args);
+    });
+    try {
+      await assert.rejects(materializeDailyBriefHero({
+        root,
+        data,
+        result: { filePath, stagingDir, record },
+        generateThumbnail: async () => Buffer.from('fresh thumbnail'),
+      }), /injected thumbnail publish failure/);
+    } finally {
+      fs.renameSync = originalRenameSync;
+    }
+    assert.equal(fs.readFileSync(heroPath, 'utf8'), 'previous hero');
+    assert.equal(fs.readFileSync(thumbnailPath, 'utf8'), 'previous thumbnail');
+    for (const dir of [path.dirname(heroPath), path.dirname(thumbnailPath)]) {
+      assert.deepEqual(fs.readdirSync(dir).filter((name) => name.endsWith('.tmp')), []);
+    }
+
     fs.mkdirSync(stagingDir, { recursive: true });
     fs.writeFileSync(filePath, bytes);
     record.sha256 = sha256File(filePath);

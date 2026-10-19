@@ -2838,6 +2838,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/editorial-originality.mjs",
+      "mode": "corpus-only",
+      "reason": "Analisi deterministica dell'originalita' editoriale per il generatore del corpus. La selezione e la scrittura degli articoli vivono qui; il sito consuma gli articoli pubblicati e non ha un consumer equivalente.",
+      "baseline": {
+        "site": null,
+        "corpus": "16dbbcff4edae9c5",
+        "alignedAt": "2026-10-19"
+      }
+    },
+    {
       "path": "generator/scripts/lib/blog-image-registry.mjs",
       "mode": "corpus-only",
       "reason": "Registry reader-facing delle copertine generate e degli upload editoriali, più ledger aggregato per la superficie API. La pipeline di generazione e il relativo filesystem vivono nel corpus; il sito consuma JSON pubblicato e non ha un gemello di questo writer.",

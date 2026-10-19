@@ -257,7 +257,7 @@ test('#7 il brief cantonale è un riferimento verificato separato dalla fonte, a
   const pipeline = src.slice(start, end);
   const finalGate = pipeline.indexOf('assertArticlePassesFactualityGates(data);');
   const cantonCheck = pipeline.indexOf("llmFactCheck(data.content.it, '', url, CANTON_FACTS_BRIEF)");
-  const image = pipeline.indexOf('await generateArticleImage(data);');
+  const image = pipeline.search(/await generateArticleImage\(data(?:,|\))/);
   assert.ok(finalGate >= 0 && cantonCheck > finalGate && image > cantonCheck,
     'il controllo annuale cantonale deve essere l’ultimo gate fattuale prima della generazione immagine/scrittura');
   assert.match(pipeline, /IS_CANTON && CANTON_FACTS_BRIEF && url\.startsWith\('evergreen:\/\/'\)/);

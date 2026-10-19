@@ -528,7 +528,8 @@ test('④ la fase immagini usa un solo percorso governato e controlla il budget'
   assert.doesNotMatch(COVER_ENGINE, /maxAttempts:\s*1/, 'il limite dei tentativi appartiene al motore governato, non all adapter dell articolo');
   assert.match(img.text, /appendGeneratedImageRecord\(PROJECT_ROOT, result\.record\)/);
   assert.doesNotMatch(img.text, /Strategy \d|imagePhaseExpired\(/, 'non devono tornare strategie raster legacy separate');
-  assert.match(img.text, /const imageDeadline = Date\.now\(\) \+ IMAGE_PHASE_BUDGET_MS;/);
+  assert.match(img.text, /deadlineAt = Date\.now\(\) \+ IMAGE_PHASE_BUDGET_MS/);
+  assert.match(img.text, /const imageDeadline = deadlineAt;/);
   assert.match(img.text, /if \(Date\.now\(\) >= imageDeadline\)/);
   assert.match(COVER_ENGINE, /deadlineAt/);
   assert.match(CODE, /const IMAGE_PHASE_BUDGET_MS = Math\.max\(/);

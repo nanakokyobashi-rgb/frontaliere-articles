@@ -868,6 +868,7 @@ test('wiring: refreshMetaAndSeo mappa data.content/data.seo su refreshDescriptiv
 
   const data = {
     id: 'demo-id',
+    imageAlt: { it: 'Alt it', en: 'Alt en', de: 'Alt de', fr: 'Alt fr' },
     content: {
       it: { excerpt: 'E it', seoDescription: 'S it', ogDescription: 'O it' },
       en: { title: 'New title', excerpt: 'E en', seoDescription: 'S en', ogDescription: 'O en' },
@@ -882,7 +883,7 @@ test('wiring: refreshMetaAndSeo mappa data.content/data.seo su refreshDescriptiv
   assert.equal(calls[0].id, 'demo-id');
   assert.deepEqual(
     calls[0].localeTexts.en,
-    { title: 'New title', excerpt: 'E en', seoDescription: 'S en', ogDescription: 'O en' },
+    { title: 'New title', excerpt: 'E en', seoDescription: 'S en', ogDescription: 'O en', imageAlt: 'Alt en' },
     'i testi EN passati non sono quelli di data.content.en',
   );
   assert.deepEqual(

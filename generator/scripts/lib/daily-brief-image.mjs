@@ -5,6 +5,7 @@
  * reproduced; the daily article producer no longer calls them.
  */
 
+import '../../../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import {
@@ -22,6 +23,113 @@ import { imageCreditRecordFromGeneratedImageRecord } from '../../../engine/share
 
 const WIDTH = BLOG_IMAGE_WIDTH;
 const HEIGHT = BLOG_IMAGE_HEIGHT;
+let writeTmpSeq = 0;
+
+function writeImageFileAtomically(file, contents) {
+  const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
+  let created = false;
+  let descriptor;
+  try {
+    descriptor = fs.openSync(tmp, 'wx');
+    created = true;
+    fs.writeFileSync(descriptor, contents);
+    fs.closeSync(descriptor);
+    descriptor = undefined;
+    fs.renameSync(tmp, file);
+    created = false;
+  } catch (error) {
+    if (descriptor !== undefined) {
+      try { fs.closeSync(descriptor); } catch { /* best-effort cleanup */ }
+    }
+    if (created) {
+      try { fs.unlinkSync(tmp); } catch { /* best-effort cleanup */ }
+    }
+    throw error;
+  }
+}
+
+function removeStagedImages(staged, errors) {
+  for (const item of staged) {
+    if (!item.ownsTmp) continue;
+    try {
+      fs.unlinkSync(item.tmp);
+      item.ownsTmp = false;
+    } catch (error) {
+      if (error?.code === 'ENOENT') item.ownsTmp = false;
+      else errors.push(error);
+    }
+  }
+}
+
+function writeImageFilesAtomically(images) {
+  const staged = [];
+  try {
+    for (const { file, contents } of images) {
+      let before = null;
+      try {
+        before = fs.readFileSync(file);
+      } catch (error) {
+        if (error?.code !== 'ENOENT') throw error;
+      }
+      const item = {
+        file,
+        tmp: `${file}.${process.pid}.${writeTmpSeq++}.tmp`,
+        before,
+        ownsTmp: false,
+      };
+      staged.push(item);
+      let descriptor;
+      try {
+        descriptor = fs.openSync(item.tmp, 'wx');
+        item.ownsTmp = true;
+        fs.writeFileSync(descriptor, contents);
+        fs.closeSync(descriptor);
+        descriptor = undefined;
+      } catch (error) {
+        if (descriptor !== undefined) {
+          try { fs.closeSync(descriptor); } catch { /* cleanup below reports the primary failure */ }
+        }
+        throw error;
+      }
+    }
+  } catch (error) {
+    const cleanupErrors = [];
+    removeStagedImages(staged, cleanupErrors);
+    if (cleanupErrors.length > 0) {
+      throw new AggregateError([error, ...cleanupErrors], 'staging della coppia di immagini incompleto');
+    }
+    throw error;
+  }
+
+  const committed = [];
+  try {
+    for (const item of staged) {
+      fs.renameSync(item.tmp, item.file);
+      item.ownsTmp = false;
+      committed.push(item);
+    }
+  } catch (error) {
+    const rollbackErrors = [];
+    removeStagedImages(staged, rollbackErrors);
+    for (const item of committed.reverse()) {
+      try {
+        if (item.before === null) {
+          try { fs.unlinkSync(item.file); } catch (unlinkError) {
+            if (unlinkError?.code !== 'ENOENT') throw unlinkError;
+          }
+        } else {
+          writeImageFileAtomically(item.file, item.before);
+        }
+      } catch (rollbackError) {
+        rollbackErrors.push(rollbackError);
+      }
+    }
+    if (rollbackErrors.length > 0) {
+      throw new AggregateError([error, ...rollbackErrors], 'commit della coppia di immagini e rollback incompleti');
+    }
+    throw error;
+  }
+}
 
 export function buildDailyBriefImageRecord({ id, sha256, bytes }) {
   return buildDeterministicCardRecord({
@@ -201,8 +309,6 @@ export async function materializeDailyBriefHero({
   assetId = data,
   generateThumbnail,
 } = {}) {
-  let heroTmp = null;
-  let thumbTmp = null;
   try {
     const record = result?.record;
     if (!record) throw new Error(`daily brief engine returned no image record for ${data?.id || '<unknown>'}`);
@@ -225,11 +331,8 @@ export async function materializeDailyBriefHero({
     const heroPath = path.join(root, 'public', imageUrl.slice(1));
     const stem = path.basename(heroPath, path.extname(heroPath));
     const thumbPath = path.join(path.dirname(heroPath), 'thumbnails', `${stem}-480w.webp`);
-    heroTmp = `${heroPath}.${process.pid}.tmp`;
-    thumbTmp = `${thumbPath}.${process.pid}.tmp`;
     fs.mkdirSync(path.dirname(heroPath), { recursive: true });
     fs.mkdirSync(path.dirname(thumbPath), { recursive: true });
-    fs.copyFileSync(result.filePath, heroTmp);
     let thumb;
     if (typeof generateThumbnail === 'function') {
       thumb = await generateThumbnail(result.filePath);
@@ -244,9 +347,10 @@ export async function materializeDailyBriefHero({
     if (!Buffer.isBuffer(thumb) || thumb.length === 0) {
       throw new Error(`daily brief thumbnail renderer returned no bytes for ${data?.id || '<unknown>'}`);
     }
-    fs.writeFileSync(thumbTmp, thumb);
-    fs.renameSync(heroTmp, heroPath);
-    fs.renameSync(thumbTmp, thumbPath);
+    writeImageFilesAtomically([
+      { file: heroPath, contents: fs.readFileSync(result.filePath) },
+      { file: thumbPath, contents: thumb },
+    ]);
     appendGeneratedImageRecord(root, record);
     data._generatedImagePath = imageUrl;
     data._generatedImageRecord = record.kind === LICENSED_PHOTO_KIND ? null : record;
@@ -268,8 +372,6 @@ export async function materializeDailyBriefHero({
       thumbBytes: thumb.length,
     };
   } finally {
-    if (heroTmp) fs.rmSync(heroTmp, { force: true });
-    if (thumbTmp) fs.rmSync(thumbTmp, { force: true });
     if (result?.stagingDir) fs.rmSync(result.stagingDir, { recursive: true, force: true });
   }
 }
@@ -436,11 +538,11 @@ export async function renderDailyBriefImage(svg, heroPath, thumbPath) {
     throw new Error(`daily brief hero remains above hard cap (${hero?.byteLength ?? 0} bytes)`);
   }
   const thumb = await sharp(hero).resize({ width: 480 }).webp({ quality: 68, effort: 6 }).toBuffer();
-  const { writeFileSync, mkdirSync } = await import('node:fs');
-  const { dirname } = await import('node:path');
-  mkdirSync(dirname(heroPath), { recursive: true });
-  mkdirSync(dirname(thumbPath), { recursive: true });
-  writeFileSync(heroPath, hero);
-  writeFileSync(thumbPath, thumb);
+  fs.mkdirSync(path.dirname(heroPath), { recursive: true });
+  fs.mkdirSync(path.dirname(thumbPath), { recursive: true });
+  writeImageFilesAtomically([
+    { file: heroPath, contents: hero },
+    { file: thumbPath, contents: thumb },
+  ]);
   return { heroBytes: hero.length, thumbBytes: thumb.length, quality };
 }
