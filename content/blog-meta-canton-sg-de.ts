@@ -27,6 +27,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.hsg-optime-orario-lavoro.title': 'HSG leitet EU-Studie zur Arbeitszeitverkürzung',
     'blog.article.hsg-optime-orario-lavoro.excerpt': 'Die Universität St.',
     'blog.article.hsg-optime-orario-lavoro.imageAlt': 'Campus der Universität St. Gallen in einer redaktionellen Szene zur Arbeitsforschung',
+    'blog.article.sondaggio-imprese-st-gallen-2026.title': 'St.Gallen startet die Unternehmensumfrage',
+    'blog.article.sondaggio-imprese-st-gallen-2026.excerpt': 'Die Stadt St.Gallen startet eine Umfrage unter Unternehmen, um den Wirtschaftsstandort zu bewerten.',
+    'blog.article.sondaggio-imprese-st-gallen-2026.imageAlt': 'Stadt St. Gallen, Wirtschaftsbefragung für Unternehmen',
 };
 
 export default blogMetaCantonSgDe;

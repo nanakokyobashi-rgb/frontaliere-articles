@@ -27,6 +27,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.hsg-optime-orario-lavoro.title': 'HSG leads EU study on reducing working hours',
     'blog.article.hsg-optime-orario-lavoro.excerpt': 'The University of St.',
     'blog.article.hsg-optime-orario-lavoro.imageAlt': 'University of St. Gallen campus in an editorial scene about work research',
+    'blog.article.sondaggio-imprese-st-gallen-2026.title': 'St.Gallen launches the business survey',
+    'blog.article.sondaggio-imprese-st-gallen-2026.excerpt': 'The city of St.Gallen is launching a survey aimed at businesses to assess the business location.',
+    'blog.article.sondaggio-imprese-st-gallen-2026.imageAlt': 'City of St. Gallen, business survey and consultation',
 };
 
 export default blogMetaCantonSgEn;
