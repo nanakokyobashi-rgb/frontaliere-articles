@@ -83,6 +83,7 @@ import {
   emptyCascadeMetric,
   engineTranslator,
   parseEmptyCascadeThreshold,
+  parseCodexRetryBackoff,
   processPair,
   summarizeEmptyCascadeProviders,
 } from '../scripts/retranslate-blocking-bodies.mjs';
@@ -103,6 +104,7 @@ import { detectLanguage, detectLanguageWithConfidence } from '../scripts/lib/det
 import { translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 import { getKeyFactsHeading, getTldrHeading } from '../scripts/lib/ai-search-template.mjs';
 import { recordTranslationProviderAttempt } from '../scripts/lib/free-translate.mjs';
+import { CodexExecError } from '../scripts/lib/codex-exec-call.mjs';
 
 const fileFor = (id, fields) => `const b: Record<string, string> = {\n`
   + Object.entries(fields).map(([k, v]) => `  'blog.article.${id}.${k}': '${escapeForSingleQuoteTS(v)}',`).join('\n')
@@ -2107,6 +2109,43 @@ test('router Codex non configurato resta un rifiuto nominato nel report', async 
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
+});
+
+test('il report Codex conserva reason, diagnosi e conteggio dei retry transitori', async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-codex-diagnostic-'));
+  try {
+    writeTranslationPairFixture(root, 'codex-capacity');
+    const translate = engineTranslator('codex', {
+      codexCall: async () => {
+        throw new CodexExecError({
+          reason: 'rate-limit',
+          diagnostic: 'at capacity',
+          retryable: true,
+        });
+      },
+      codexRetryBackoffMs: [0, 0],
+    });
+    const row = await processPair(translationPair('codex-capacity'), {
+      CONTENT_ROOT: root,
+      APPLY: false,
+      translate,
+    });
+    const provider = row.translationFailure.providers.find(({ provider }) => provider === 'codex-local');
+    assert.equal(provider.attempts, 3);
+    assert.equal(provider.failures, 3);
+    assert.deepEqual(provider.reasons, { 'rate-limit': 3 });
+    assert.equal(provider.failureClass, 'rate-limit');
+    assert.equal(provider.message, 'at capacity');
+    assert.ok(provider.message.length <= 160);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il backoff Codex e configurabile ma resta limitato a due ritardi', () => {
+  assert.deepEqual(parseCodexRetryBackoff('0, 1250'), [0, 1250]);
+  assert.deepEqual(parseCodexRetryBackoff('1,2,3'), [20_000, 60_000]);
+  assert.deepEqual(parseCodexRetryBackoff('-1,2'), [20_000, 60_000]);
 });
 
 test('l osservatore ha soglia configurabile e codice d uscita distinto', () => {

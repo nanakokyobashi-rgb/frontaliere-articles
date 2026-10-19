@@ -156,6 +156,33 @@ function fakeSpawn({ answer = 'ok', code = 0, seen = {} } = {}) {
   };
 }
 
+function scriptedSpawn(steps, seen = {}) {
+  let index = 0;
+  return (bin, args, opts) => {
+    const step = steps[Math.min(index++, steps.length - 1)];
+    const child = new EventEmitter();
+    child.stderr = new EventEmitter();
+    child.stdout = new EventEmitter();
+    child.stderr.setEncoding = () => {};
+    child.stdout.setEncoding = () => {};
+    child.kill = () => {};
+    child.stdin = {
+      end(prompt) {
+        Object.assign(seen, { bin, args, opts, prompt, calls: index });
+        if (step.answer !== undefined) {
+          writeFileSync(args[args.indexOf('--output-last-message') + 1], step.answer);
+        }
+        if (step.stderr) child.stderr.emit('data', step.stderr);
+        if (step.stdout) child.stdout.emit('data', step.stdout);
+        if (step.timeout) return;
+        const code = Object.prototype.hasOwnProperty.call(step, 'code') ? step.code : 0;
+        setImmediate(() => child.emit('close', code, step.signal ?? null));
+      },
+    };
+    return child;
+  };
+}
+
 test('createCodexExecCall manda il prompt della lane (codexPromptFromMessages) e rende l\'ultimo messaggio', async () => {
   const seen = {};
   const calls = [];
@@ -170,9 +197,131 @@ test('createCodexExecCall manda il prompt della lane (codexPromptFromMessages) e
 
 test('createCodexExecCall: un\'uscita non zero e\' un errore, non un testo vuoto', async () => {
   const call = createCodexExecCall({ env: LOCAL_ENV, spawnImpl: fakeSpawn({ code: 1 }) });
-  await assert.rejects(call([{ role: 'user', content: 'x' }]), /codice 1: errore finale/);
+  await assert.rejects(call([{ role: 'user', content: 'x' }]), /exit-1: errore finale/);
   const empty = createCodexExecCall({ env: LOCAL_ENV, spawnImpl: fakeSpawn({ answer: '   ' }) });
-  await assert.rejects(empty([{ role: 'user', content: 'x' }]), /vuoto/);
+  await assert.rejects(empty([{ role: 'user', content: 'x' }]), (error) => error.reason === 'empty-output');
+});
+
+test('Codex locale classifica timeout, uscita, segnale, quota, auth e output', async () => {
+  const run = async (step, options = {}) => {
+    const call = createCodexExecCall({
+      env: LOCAL_ENV,
+      timeoutMs: options.timeoutMs ?? 20,
+      spawnImpl: scriptedSpawn([step]),
+    });
+    try {
+      await call([{ role: 'user', content: 'testo riservato BEGIN_TEXT_SECRET END_TEXT_SECRET' }], options.callOptions);
+      return null;
+    } catch (error) {
+      return error;
+    }
+  };
+
+  const timeout = await run({ timeout: true }, { timeoutMs: 1 });
+  assert.equal(timeout.reason, 'timeout');
+  assert.equal(timeout.retryable, true);
+  assert.match(timeout.diagnostic, /limite 1 ms/);
+  assert.ok(timeout.diagnostic.length <= 160);
+
+  const exit = await run({ code: 1, stderr: 'fatale: nessun dettaglio' });
+  assert.equal(exit.reason, 'exit-1');
+  assert.equal(exit.retryable, false);
+
+  const signal = await run({ code: null, signal: 'SIGTERM', stderr: 'processo terminato' });
+  assert.equal(signal.reason, 'signal-SIGTERM');
+  assert.equal(signal.retryable, false);
+
+  const capacity = await run({ code: 1, stdout: 'server at capacity, riprova' });
+  assert.equal(capacity.reason, 'rate-limit');
+  assert.equal(capacity.retryable, true);
+  assert.equal(capacity.diagnostic, 'server at capacity, riprova');
+
+  const quota = await run({ code: 1, stderr: 'usage limit reached' });
+  assert.equal(quota.reason, 'quota');
+  assert.equal(quota.retryable, false);
+
+  const auth = await run({ code: 1, stderr: '401 unauthorized: token=supersegreto' });
+  assert.equal(auth.reason, 'auth');
+  assert.equal(auth.retryable, false);
+  assert.doesNotMatch(auth.diagnostic, /supersegreto|token=/u);
+  assert.ok(!auth.message.includes('BEGIN_TEXT_SECRET'));
+
+  const empty = await run({ answer: '   ' });
+  assert.equal(empty.reason, 'empty-output');
+  assert.equal(empty.retryable, false);
+});
+
+test('Codex locale rifiuta JSON non valido come invalid-output', async () => {
+  const call = createCodexExecCall({
+    env: LOCAL_ENV,
+    spawnImpl: scriptedSpawn([{ answer: '{"items":' }]),
+  });
+  await assert.rejects(
+    call([{ role: 'user', content: 'x' }], { jsonMode: true }),
+    (error) => error.reason === 'invalid-output'
+      && error.retryable === false
+      && /JSON/u.test(error.diagnostic),
+  );
+});
+
+test('la riserva Codex ritenta at capacity e poi riesce, contando i tentativi', async () => {
+  const seen = {};
+  const call = createCodexExecCall({
+    env: LOCAL_ENV,
+    spawnImpl: scriptedSpawn([
+      { code: 1, stderr: 'at capacity' },
+      { answer: DE_BODY_MASKED },
+    ], seen),
+  });
+  const outcome = { tierAttempts: [] };
+  const translate = engineTranslator('codex', {
+    codexCall: call,
+    codexRetryBackoffMs: [0, 0],
+  });
+  const out = await translateFieldFreeMt({
+    text: IT_BODY,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+    fieldName: 'body1',
+    translate,
+    balanceMarkdown: balanceMarkdownMarkers,
+    translationOutcome: outcome,
+  });
+  assert.equal(out, DE_BODY);
+  assert.equal(seen.calls, 2);
+  assert.deepEqual(outcome.tierAttempts.map(({ status, reasons, attempt }) => ({ status, reasons, attempt })), [
+    { status: 'failed', reasons: ['rate-limit'], attempt: 1 },
+    { status: 'success', reasons: [], attempt: 2 },
+  ]);
+});
+
+test('la riserva Codex non ritenta un errore auth', async () => {
+  const seen = {};
+  const call = createCodexExecCall({
+    env: LOCAL_ENV,
+    spawnImpl: scriptedSpawn([{ code: 1, stderr: '401 unauthorized: token=supersegreto' }], seen),
+  });
+  const outcome = { tierAttempts: [] };
+  const translate = engineTranslator('codex', {
+    codexCall: call,
+    codexRetryBackoffMs: [0, 0],
+  });
+  const out = await translateFieldFreeMt({
+    text: IT_BODY,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+    fieldName: 'body1',
+    translate,
+    balanceMarkdown: balanceMarkdownMarkers,
+    translationOutcome: outcome,
+  });
+  assert.equal(out, '');
+  assert.equal(seen.calls, 1);
+  assert.deepEqual(outcome.tierAttempts.map(({ status, reasons }) => ({ status, reasons })), [
+    { status: 'failed', reasons: ['auth'] },
+  ]);
 });
 
 const IT_BODY = [
@@ -182,6 +331,14 @@ const IT_BODY = [
   '',
   'Nel 2026 la soglia resta di 1\'250 CHF al mese per chi lavora a Lugano, Mendrisio e Chiasso.',
 ].join('\n');
+const DE_BODY = [
+  '## Die G-Bewilligung',
+  '',
+  'Der **Grenzgänger** mit G-Bewilligung zahlt die Quellensteuer. Zur Berechnung siehe [il simulatore](nav:calcolatore) und die offizielle Seite https://www.ti.ch/fonte.',
+  '',
+  "Im Jahr 2026 bleibt die Schwelle bei 1'250 CHF pro Monat für Beschäftigte in Lugano, Mendrisio und Chiasso.",
+].join('\n');
+const DE_BODY_MASKED = DE_BODY.replace('[il simulatore](nav:calcolatore)', '0NAV00');
 
 test('translateWithCodexEngine usa il prompt e le regole del tier Codex della cascata', async () => {
   let messages = null;
@@ -227,7 +384,10 @@ test('translateWithCodexEngine: un\'eco del prompt e\' scartata, fail-closed', a
 
 /** Il percorso della bonifica: `translateFieldFreeMt` col `translate` del motore. */
 function bonificaField(answer, { fieldName = 'body2' } = {}) {
-  const translate = engineTranslator('codex', { codexCall: async (messages) => answer(messages) });
+  const translate = engineTranslator('codex', {
+    codexCall: async (messages) => answer(messages),
+    codexRetryBackoffMs: [0, 0],
+  });
   return translateFieldFreeMt({
     text: IT_BODY,
     sourceLang: 'it',

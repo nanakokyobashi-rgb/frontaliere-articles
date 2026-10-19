@@ -3026,17 +3026,20 @@ export function recordTranslationProviderAttempt(state, {
   attempt = null,
   status,
   reasons = [],
+  message = '',
 } = {}) {
   if (!state || !provider || !['success', 'failed'].includes(status)) return;
   state.tierAttempts ??= [];
-  state.tierAttempts.push({
+  const event = {
     provider: String(provider),
     attempt: Number.isInteger(attempt) && attempt > 0
       ? attempt
       : (Number.isInteger(state.attempt) && state.attempt > 0 ? state.attempt : 1),
     status,
     reasons: [...new Set(reasons.filter(Boolean).map(String))],
-  });
+  };
+  if (message) event.message = String(message).replace(/\s+/gu, ' ').trim().slice(0, 160);
+  state.tierAttempts.push(event);
 }
 
 function noteTranslationProviderReason(state, provider, reason) {
@@ -3067,6 +3070,10 @@ export function summarizeTranslationOutcome(state) {
     else row.failures += 1;
     for (const reason of event.reasons || []) {
       row.reasons[reason] = (row.reasons[reason] || 0) + 1;
+    }
+    if (event.message) {
+      row.diagnostics ??= [];
+      if (!row.diagnostics.includes(event.message)) row.diagnostics.push(event.message);
     }
   }
   return { attempts: maxAttempt, providers: [...byProvider.values()] };
@@ -3565,8 +3572,9 @@ export async function freeTranslateWithRetry({ text, sourceLang, targetLang, fie
  * Nessun budget di chiamate o di tempo, nessuna condizione «DeepL e Azure fuori
  * gioco»: quelle regole proteggono un processo di CI con un tetto di durata e
  * una cascata da preservare; qui il chiamante ha scelto esplicitamente il
- * motore. Un errore del trasporto si propaga: `translateFieldFreeMt` lo
- * converte in campo vuoto, e la bonifica salta l'articolo intero.
+ * motore. Un errore del trasporto si propaga al chiamante; la bonifica locale
+ * lo intercetta nell'adattatore per campo, dove puo' ritentare solo le classi
+ * transitorie e poi lasciare che `translateFieldFreeMt` produca un campo vuoto.
  *
  * @param {object} args
  * @param {string} args.text
@@ -3617,8 +3625,21 @@ export async function translateWithCodexEngine({ text, sourceLang, targetLang, f
     return '';
   }
   if (!out) {
+    noteTranslationProviderReason(_outcome, 'codex', 'empty-output');
     noteTranslationOutcome(_outcome, 'incomplete');
     return '';
+  }
+  // The local transport is normally plain text. A malformed JSON-looking
+  // answer is a provider-output failure, not a structural translation refusal;
+  // keep that distinction for the report and never retry it.
+  if (/^\s*(?:\{\s*["}\]]|\[\s*["{\]])/u.test(out)) {
+    try {
+      JSON.parse(out);
+    } catch {
+      noteTranslationProviderReason(_outcome, 'codex', 'invalid-output');
+      noteTranslationOutcome(_outcome, 'incomplete');
+      return '';
+    }
   }
   // Fail-closed sull'eco del prompt: si scarta il campo intero, e la bonifica
   // salta l'articolo invece di pubblicare le istruzioni del traduttore.

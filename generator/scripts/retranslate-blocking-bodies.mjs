@@ -145,6 +145,8 @@
  *   --code <code>      filtra per codice bloccante (stratificazione del pilota)
  *   --stratify         una fetta per ogni codice, fino a --limit complessivo
  *   --concurrency N    articoli in parallelo (default 2, gentile coi motori)
+ *   CODEX_LOCAL_RETRY_BACKOFF_MS=20000,60000 configura i due ritardi dei
+ *                      retry transitori di --engine codex (millisecondi)
  *   --engine <nome>    motore di traduzione: `cascade` (default, la cascata
  *                      di `freeTranslateWithRetry`, poi Codex locale solo sul
  *                      vuoto completo) oppure `codex`
@@ -179,7 +181,11 @@ import {
   summarizeTranslationOutcome,
   translateWithCodexEngine,
 } from './lib/free-translate.mjs';
-import { createCodexExecCall } from './lib/codex-exec-call.mjs';
+import {
+  classifyCodexError,
+  createCodexExecCall,
+  sanitizeCodexDiagnostic,
+} from './lib/codex-exec-call.mjs';
 import { runFactualityGates } from './lib/article-factuality-gates.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import {
@@ -2453,15 +2459,49 @@ export function parseEngine(raw) {
   return TRANSLATION_ENGINES.includes(value) ? value : null;
 }
 
-function codexFailureReason(error) {
-  const text = `${error?.name || ''} ${error?.message || ''}`.toLowerCase();
-  if (/timeout|timed out|scadenza/u.test(text)) return 'timeout';
-  if (/429|quota|rate limit|rate-limit/u.test(text)) return 'quota-429';
-  if (/401|403|auth|credential|login|token|api key|unauthoriz/u.test(text)) {
-    return 'router-unconfigured';
+export const CODEX_LOCAL_MAX_RETRIES = 2;
+export const CODEX_LOCAL_RETRY_BACKOFF_MS = Object.freeze([20_000, 60_000]);
+
+/** `CODEX_LOCAL_RETRY_BACKOFF_MS=20000,60000`, bounded to two delays. */
+export function parseCodexRetryBackoff(raw = process.env.CODEX_LOCAL_RETRY_BACKOFF_MS) {
+  if (raw === null || raw === undefined || String(raw).trim() === '') {
+    return [...CODEX_LOCAL_RETRY_BACKOFF_MS];
   }
-  if (/fetch failed|network|dns|tls|connection reset|econn/u.test(text)) return 'network-error';
-  return 'provider-error';
+  const values = String(raw).split(',').map((value) => Number(value.trim()));
+  if (values.length !== CODEX_LOCAL_MAX_RETRIES || values.some((value) => !Number.isFinite(value) || value < 0)) {
+    return [...CODEX_LOCAL_RETRY_BACKOFF_MS];
+  }
+  return values.map((value) => Math.round(value));
+}
+
+function codexFailureReason(error) {
+  return classifyCodexError(error).reason;
+}
+
+function codexFailureDiagnostic(error, reason) {
+  const fallbacks = {
+    'empty-output': 'uscita vuota',
+    'invalid-output': 'output non valido',
+    'source-passthrough': 'passthrough della sorgente',
+    'meta-response': 'rifiuto del modello',
+  };
+  if (String(reason || '').startsWith('structure:')) return 'rifiuto della struttura';
+  if (reason === 'incomplete-output') return 'uscita vuota';
+  if (!error) return sanitizeCodexDiagnostic(fallbacks[reason] || reason);
+  const classified = classifyCodexError(error);
+  if (classified.diagnostic) return sanitizeCodexDiagnostic(classified.diagnostic);
+  return sanitizeCodexDiagnostic(fallbacks[reason] || reason);
+}
+
+function codexFailureIsRetryable(error, reason) {
+  if (['auth', 'invalid-output', 'empty-output'].includes(reason)) return false;
+  if (String(reason).startsWith('structure:')) return false;
+  return classifyCodexError(error).retryable === true
+    || ['timeout', 'rate-limit'].includes(reason);
+}
+
+function sleepCodexRetry(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 /**
@@ -2474,38 +2514,65 @@ export function engineTranslator(engine, {
   codexCall = null,
   cascadeTranslate = freeTranslateWithRetry,
   codexTranslate = translateWithCodexEngine,
+  codexRetryBackoffMs = parseCodexRetryBackoff(),
+  codexRetrySleep = sleepCodexRetry,
 } = {}) {
   const runLocalCodex = async (args, provider) => {
-    const attempt = Number.isInteger(args?._outcome?.attempt) ? args._outcome.attempt + 1 : 1;
-    const reasonOffset = args?._outcome?._tierReasons?.length || 0;
-    try {
-      const out = await codexTranslate({ ...args, call: codexCall });
-      // `translateWithCodexEngine` records the reason at the guard that saw
-      // it. Preserve those bounded engine reasons when this local fallback
-      // wraps the result; otherwise every rejected answer is flattened to
-      // `incomplete-output` and the report loses the actionable distinction
-      // between an echo, a meta-response and a structure rejection.
-      const engineReasons = (args?._outcome?._tierReasons || [])
-        .slice(reasonOffset)
-        .map((event) => event?.reason)
-        .filter((reason) => reason === 'source-passthrough'
-          || reason === 'meta-response'
-          || String(reason || '').startsWith('structure:'));
-      recordTranslationProviderAttempt(args?._outcome, {
-        provider,
-        attempt,
-        status: out ? 'success' : 'failed',
-        reasons: out ? [] : [...new Set(engineReasons.length ? engineReasons : ['incomplete-output'])],
-      });
-      return out;
-    } catch (error) {
-      recordTranslationProviderAttempt(args?._outcome, {
-        provider,
-        attempt,
-        status: 'failed',
-        reasons: [codexFailureReason(error)],
-      });
-      throw error;
+    args._outcome ??= { tierAttempts: [] };
+    const outcome = args._outcome;
+    const baseAttempt = Number.isInteger(outcome?.attempt) && outcome.attempt > 0
+      ? outcome.attempt + 1
+      : 1;
+    for (;;) {
+      const attempt = Number.isInteger(args?._outcome?.attempt) && args._outcome.attempt > 0
+        ? args._outcome.attempt
+        : baseAttempt;
+      if (args?._outcome) args._outcome.attempt = attempt;
+      const reasonOffset = args?._outcome?._tierReasons?.length || 0;
+      try {
+        const out = await codexTranslate({ ...args, call: codexCall });
+        // `translateWithCodexEngine` records the reason at the guard that saw
+        // it. Preserve those bounded engine reasons when this local fallback
+        // wraps the result; otherwise every rejected answer is flattened to
+        // `incomplete-output` and the report loses the actionable distinction
+        // between an echo, a meta-response and a structure rejection.
+        const engineReasons = (args?._outcome?._tierReasons || [])
+          .slice(reasonOffset)
+          .map((event) => event?.reason)
+          .filter((reason) => reason === 'source-passthrough'
+            || reason === 'meta-response'
+            || reason === 'empty-output'
+            || reason === 'invalid-output'
+            || String(reason || '').startsWith('structure:'));
+        const reasons = out ? [] : [...new Set(engineReasons.length ? engineReasons : ['incomplete-output'])];
+        recordTranslationProviderAttempt(args?._outcome, {
+          provider,
+          attempt,
+          status: out ? 'success' : 'failed',
+          reasons,
+          message: out ? '' : codexFailureDiagnostic(null, reasons[0]),
+        });
+        if (args?._outcome) args._outcome.attempt = attempt + 1;
+        return out;
+      } catch (error) {
+        const reason = codexFailureReason(error);
+        recordTranslationProviderAttempt(args?._outcome, {
+          provider,
+          attempt,
+          status: 'failed',
+          reasons: [reason],
+          message: codexFailureDiagnostic(error, reason),
+        });
+        const retriesUsed = Number(args?._outcome?._codexLocalRetries || 0);
+        if (!codexFailureIsRetryable(error, reason)
+          || retriesUsed >= CODEX_LOCAL_MAX_RETRIES) {
+          throw error;
+        }
+        const backoff = codexRetryBackoffMs[retriesUsed] ?? CODEX_LOCAL_RETRY_BACKOFF_MS[retriesUsed];
+        args._outcome._codexLocalRetries = retriesUsed + 1;
+        args._outcome.attempt = attempt + 1;
+        await codexRetrySleep(backoff);
+      }
     }
   };
 
@@ -3062,12 +3129,17 @@ export function emptyCascadeExitCode(metric) {
 
 const TRANSLATION_FAILURE_DESCRIPTORS = Object.freeze([
   { test: (reason) => /router-unconfigured/u.test(reason), failureClass: 'config', message: 'router Codex non configurato' },
+  { test: (reason) => /rate-limit/u.test(reason), failureClass: 'rate-limit', message: 'rate limit' },
   { test: (reason) => /quota|429|rate-limit|keys-exhausted|daily-cap/u.test(reason), failureClass: 'quota', message: 'quota o HTTP 429' },
   { test: (reason) => /auth|401|403|credential/u.test(reason), failureClass: 'auth', message: 'autenticazione o HTTP 401/403' },
   { test: (reason) => /timeout/u.test(reason), failureClass: 'timeout', message: 'timeout' },
+  { test: (reason) => /^exit-\d+$/u.test(reason), failureClass: 'exit', message: 'uscita non zero' },
+  { test: (reason) => /^signal-/u.test(reason), failureClass: 'signal', message: 'segnale del provider' },
+  { test: (reason) => /spawn-error/u.test(reason), failureClass: 'provider', message: 'avvio del provider fallito' },
   { test: (reason) => /network|request-error|fetch|dns|tls|connection/u.test(reason), failureClass: 'network', message: 'errore di rete' },
   { test: (reason) => /structure:/u.test(reason), failureClass: 'structure', message: 'rifiuto della struttura' },
   { test: (reason) => /passthrough|source-echo/u.test(reason), failureClass: 'passthrough', message: 'passthrough della sorgente' },
+  { test: (reason) => /invalid-output/u.test(reason), failureClass: 'invalid', message: 'output non valido' },
   { test: (reason) => /empty|incomplete|no-output/u.test(reason), failureClass: 'empty', message: 'uscita vuota' },
   { test: (reason) => /meta-response/u.test(reason), failureClass: 'rejection', message: 'rifiuto del modello' },
 ]);
@@ -3083,12 +3155,13 @@ function enrichTranslationProviderDiagnostic(provider) {
   const reasons = Object.keys(provider.reasons || {});
   const descriptors = (reasons.length ? reasons : ['empty-output']).map(translationFailureDescriptor);
   const failureClasses = [...new Set(descriptors.map(({ failureClass }) => failureClass))];
-  const messages = [...new Set(descriptors.map(({ message }) => message))];
+  const { diagnostics = [], ...withoutDiagnostics } = provider;
+  const messages = diagnostics.length ? diagnostics : [...new Set(descriptors.map(({ message }) => message))];
   return {
-    ...provider,
+    ...withoutDiagnostics,
     failureClass: failureClasses.length === 1 ? failureClasses[0] : 'multiple',
     failureClasses,
-    message: messages.join('; '),
+    message: messages.join('; ').slice(0, 160),
   };
 }
 
