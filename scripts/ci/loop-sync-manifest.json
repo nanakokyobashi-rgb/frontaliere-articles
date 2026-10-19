@@ -789,6 +789,16 @@
       }
     },
     {
+      "path": "scripts/ci/validate-shared-provider-exit.mjs",
+      "mode": "corpus-only",
+      "reason": "Valida la prova producer-owned che i workflow generatori richiedono prima di dichiarare un differimento del pool AI condiviso. Il generatore e le sue run card vivono solo nel corpus; il sito consuma gli articoli pubblicati via HTTP e non produce queste card.",
+      "baseline": {
+        "site": null,
+        "corpus": "103c32de11a05657",
+        "alignedAt": "2026-10-19"
+      }
+    },
+    {
       "path": "scripts/ci/scan-job-timeouts.mjs",
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 (issue #1110, trasporto concatenato da Site #10266 e follow-up #10273/#10277): lo scanner torna byte-identico al sito. Il watermark usa soltanto run `schedule` riuscite e distingue il primo avvio leggibile da una history illeggibile, che fallisce chiusa. Il lookback derivato ha un ceiling effettivo di 12 ore; l'orizzonte `created` realtime di 3 giorni e' fail-closed senza opt-in esplicito, mentre l'override retention-complete a 35 giorni conserva le run create oltre 3 giorni ma aggiornate nel cutoff. Split e paginazione evitano il limite di 1.000 risultati per search.",
@@ -6324,6 +6334,16 @@
       "baseline": {
         "site": "4cb6ab1ae26b751c",
         "corpus": "4cb6ab1ae26b751c",
+        "alignedAt": "2026-10-19"
+      }
+    },
+    {
+      "path": "scripts/ci/validate-shared-provider-exit.mjs",
+      "mode": "corpus-only",
+      "reason": "Validatore della run card producer-owned che prova che exit 5 corrisponde a un differimento condiviso dichiarato. Lo chiamano i workflow di pubblicazione del corpus; il sito non genera questi articoli e non usa il marker.",
+      "baseline": {
+        "site": null,
+        "corpus": "7b7be1d1549373dc",
         "alignedAt": "2026-10-19"
       }
     }
