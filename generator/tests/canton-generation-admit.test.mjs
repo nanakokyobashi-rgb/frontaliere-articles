@@ -246,26 +246,29 @@ test('tetto globale: due arrivi simultanei non si fermano a vicenda', () => {
   assert.equal(olderCantonRuns([a, b], 101).older, 1);
 });
 
-test('tetto globale: default 3, configurabile, fail-closed se illeggibile', () => {
-  assert.equal(DEFAULT_MAX_PARALLEL, 3);
+test('tetto globale: default 8, configurabile, fail-closed se illeggibile', () => {
+  assert.equal(DEFAULT_MAX_PARALLEL, 8);
   assert.equal(positiveInt('', 3), 3);
   assert.equal(positiveInt('0', 3), 3);
   assert.equal(positiveInt('5', 3), 5);
   assert.equal(positiveInt('-1', 3), 3);
 
   const self = run(100, 'generate-article-ti.yml', '2026-10-05T10:00:10Z');
-  const older = (n) => Array.from({ length: n }, (_, i) => run(10 + i, `generate-article-${['gr', 'be', 'zh', 'vd'][i]}.yml`, '2026-10-05T09:00:00Z'));
+  const older = (n) => Array.from({ length: n }, (_, i) => {
+    const section = PROFILES.cantons[i].section.replace(/^canton-/, '');
+    return run(10 + i, `generate-article-${section}.yml`, '2026-10-05T09:00:00Z');
+  });
 
-  assert.equal(decide({}, readers({ runs: [self, ...older(2)] })).proceed, true);
-  const capped = decide({}, readers({ runs: [self, ...older(3)] }));
+  assert.equal(decide({}, readers({ runs: [self, ...older(7)] })).proceed, true);
+  const capped = decide({}, readers({ runs: [self, ...older(8)] }));
   assert.equal(capped.proceed, false);
   assert.equal(capped.reason, 'parallel-cap');
-  assert.equal(decide({ env: { ...ENV_ON, CANTON_GENERATION_MAX_PARALLEL: '4' } }, readers({ runs: [self, ...older(3)] })).proceed, true);
+  assert.equal(decide({ env: { ...ENV_ON, CANTON_GENERATION_MAX_PARALLEL: '9' } }, readers({ runs: [self, ...older(8)] })).proceed, true);
   assert.equal(decide({ env: { ...ENV_ON, CANTON_GENERATION_MAX_PARALLEL: '1' } }, readers({ runs: [self, ...older(1)] })).reason, 'parallel-cap');
 
   assert.equal(decide({}, readers({ runs: null })).reason, 'parallel-unreadable');
   // Questa run fuori dall'elenco: non c'e' un istante con cui confrontare, contano tutte.
-  assert.deepEqual(olderCantonRuns(older(3), 100), { older: 3, total: 3, selfSeen: false });
+  assert.deepEqual(olderCantonRuns(older(8), 100), { older: 8, total: 8, selfSeen: false });
 });
 
 // ── 4. Il beacon di quota ────────────────────────────────────────────────────
