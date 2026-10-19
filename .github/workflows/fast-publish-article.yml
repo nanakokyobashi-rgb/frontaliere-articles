@@ -74,6 +74,7 @@ on:
       - '.github/workflows/fast-publish-article.yml'
       - 'scripts/publish-article-fast.mjs'
       - 'scripts/ci/fast-publish-section.mjs'
+      - 'scripts/ci/verify-served-fingerprint.mjs'
       - 'scripts/ci/article-image-fallbacks.mjs'
       - 'generator/scripts/lib/corpus-paths.mjs'
       # The body-link preflight is a publisher dependency too: changing its
@@ -730,6 +731,10 @@ jobs:
           summary="$RUNNER_TEMP/fast-summary.json"
           dist="$RUNNER_TEMP/fast-dist"
           shard="$FAST_PUBLISH_SHARD"
+          push_log="$RUNNER_TEMP/article-shard-push.log"
+          : > "$push_log"
+          exec > >(tee -a "$push_log") 2>&1
+          replay_noop=true
 
           # UN SOLO push per locale, articolo + hub insieme.
           #
@@ -768,6 +773,7 @@ jobs:
             if ! bash scripts/lib/push-article-shard-incremental.sh \
                  "$shard" "$loc" "$dist" "${paths[@]}" ${hpaths[@]+"${hpaths[@]}"}; then
               echo "::warning::combined push failed for $shard/$loc — retrying with the article alone (the hub stays stale)"
+              replay_noop=false
               bash scripts/lib/push-article-shard-incremental.sh \
                 "$shard" "$loc" "$dist" "${paths[@]}"
             fi
@@ -799,6 +805,44 @@ jobs:
               echo "::warning::no hub-landing.json — the landing grid was not refreshed for this article"
             fi
           fi
+
+          # The push helper explicitly reports a clean replay when its tree is
+          # already the remote tree. The origin check below still performs one
+          # probe: a matching first probe makes the purge immediate, while a
+          # mismatch fails fast instead of treating a replay as a new build.
+          if [ "$replay_noop" = true ] && grep -Fq 'no content changes vs remote' "$push_log"; then
+            echo "FAST_PUBLISH_REPLAY_NOOP=true" >> "$GITHUB_ENV"
+          else
+            echo "FAST_PUBLISH_REPLAY_NOOP=false" >> "$GITHUB_ENV"
+          fi
+
+          # Read the bytes after the publisher's CDN offload and after the hub
+          # refresh. These are the bytes that the shard push received, not a
+          # second render and not an HTML marker.
+          node scripts/ci/verify-served-fingerprint.mjs write \
+            --summary "$summary" \
+            --hub-summary "$RUNNER_TEMP/hub-landing.json" \
+            --dist "$dist" \
+            --shard "$shard" \
+            --output "$RUNNER_TEMP/published-fingerprints.tsv"
+
+      - name: Wait for GitHub Pages origin to serve published content
+        if: needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
+        env:
+          PAGES_WAIT_SECONDS: ${{ vars.FAST_PUBLISH_PAGES_WAIT_SECONDS || '720' }}
+        run: |
+          set -euo pipefail
+          args=(
+            wait-origin
+            --fingerprints "$RUNNER_TEMP/published-fingerprints.tsv"
+            --timeout-seconds "$PAGES_WAIT_SECONDS"
+            --poll-seconds 15
+            --run-key "${GITHUB_RUN_ID}.${GITHUB_RUN_ATTEMPT}.${FAST_PUBLISH_SHARD}"
+          )
+          if [ "${FAST_PUBLISH_REPLAY_NOOP:-false}" = true ]; then
+            args+=(--replay-noop)
+          fi
+          node scripts/ci/verify-served-fingerprint.mjs "${args[@]}"
 
       - name: Purge the edge cache for what was published
         if: needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
@@ -915,6 +959,22 @@ jobs:
           summary="$RUNNER_TEMP/fast-summary.json"
           shard="${{ matrix.target.shard }}"
           owner="$(jq -r --arg s "$shard" '.[$s] // "valerielinc-ops"' scripts/lib/section-shard-owners.json)"
+
+          # The first purge ran before this step. Check the canonical apex URL
+          # against the bytes recorded after the push; a 200 with old HTML is
+          # not a successful publish. One retry covers purge propagation or a
+          # transient Cloudflare miss; the second mismatch is terminal and the
+          # helper reports the URL, both fingerprints and cache headers.
+          verify_apex() {
+            node scripts/ci/verify-served-fingerprint.mjs verify-apex \
+              --fingerprints "$RUNNER_TEMP/published-fingerprints.tsv"
+          }
+          if ! verify_apex; then
+            echo "::warning::the apex served content different from the pushed fingerprints — repeating the targeted purge once"
+            bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs \
+              "--files-from=$RUNNER_TEMP/edge-purge-urls.txt"
+            verify_apex
+          fi
 
           # Two checks, deliberately different in strength, because they answer
           # different questions.
