@@ -907,6 +907,9 @@ export function visibleAddressOffsetMap(value) {
   const source = String(value ?? '');
   const visible = [];
   const sourceOffsets = [];
+  const MAX_MARKDOWN_DESTINATION_LOOKAHEAD = 2048;
+  const OPAQUE_REMAINDER = -2;
+  let opaque = false;
 
   const appendCharacter = (character, sourceIndex) => {
     visible.push(character);
@@ -922,70 +925,102 @@ export function visibleAddressOffsetMap(value) {
   };
 
   const htmlTagEndAt = (start, limit) => {
-    if (source[start] !== '<') return -1;
+    const opener = source[start + 1];
+    if (source[start] !== '<' || !/[A-Za-z!?/]/u.test(opener || '')) return -1;
     let quote = '';
-    for (let index = start + 1; index < limit; index += 1) {
+    const tagLimit = Math.min(limit, start + 512);
+    for (let index = start + 1; index < tagLimit; index += 1) {
       const character = source[index];
       if (quote) {
         if (character === quote) quote = '';
+        // A `>` or a nested `<` inside an open attribute quote makes the
+        // opening ambiguous. Mark the remainder opaque instead of exposing
+        // metadata or swallowing it up to a later delimiter.
+        else if (character === '>' || character === '<') return OPAQUE_REMAINDER;
         continue;
       }
       if (character === '"' || character === "'") quote = character;
+      else if (character === '<') return OPAQUE_REMAINDER;
       else if (character === '>') return index + 1;
     }
-    return -1;
+    return OPAQUE_REMAINDER;
   };
 
-  const markdownLinkAt = (start, limit) => {
-    const marker = source[start] === '['
-      ? start
-      : source[start] === '!' && source[start + 1] === '['
-        ? start + 1
-        : -1;
-    if (marker < 0) return null;
-    let depth = 0;
-    let closeLabel = -1;
-    for (let index = marker + 1; index < limit; index += 1) {
-      if (source[index] === '\\') {
-        index += 1;
-        continue;
-      }
-      if (source[index] === '[') depth += 1;
-      else if (source[index] === ']') {
-        if (depth === 0) {
-          closeLabel = index;
-          break;
-        }
-        depth -= 1;
-      }
-    }
-    if (closeLabel < 0 || source[closeLabel + 1] !== '(') return null;
-
+  const markdownDestinationEndAt = (start, limit) => {
     let parenthesisDepth = 0;
     let angleDestination = false;
-    let closeDestination = -1;
-    for (let index = closeLabel + 2; index < limit; index += 1) {
+    const destinationLimit = Math.min(
+      limit,
+      start + MAX_MARKDOWN_DESTINATION_LOOKAHEAD,
+    );
+    for (let index = start; index < destinationLimit; index += 1) {
       if (source[index] === '\\') {
         index += 1;
         continue;
       }
-      if (index === closeLabel + 2 && source[index] === '<') angleDestination = true;
+      if (index === start && source[index] === '<') angleDestination = true;
       else if (angleDestination && source[index] === '>') angleDestination = false;
       else if (!angleDestination && source[index] === '(') parenthesisDepth += 1;
       else if (!angleDestination && source[index] === ')') {
-        if (parenthesisDepth === 0) {
-          closeDestination = index;
-          break;
-        }
+        if (parenthesisDepth === 0) return index + 1;
         parenthesisDepth -= 1;
       }
     }
-    if (closeDestination < 0) return null;
-    return {
-      labelStart: marker + 1,
-      labelEnd: closeLabel,
-      end: closeDestination + 1,
-    };
+    // An unclosed or overlong destination makes the remainder opaque. This
+    // is fail-closed: metadata is never reclassified as visible address text,
+    // and the bounded look-ahead prevents a repeated `](` suffix from making
+    // the projection quadratic.
+    return OPAQUE_REMAINDER;
+  };
+
+  // Build link ranges once. Calling a balanced-bracket look-ahead for every
+  // `[` makes malformed prose with many brackets quadratic; this stack keeps
+  // the same nested-label behavior while making the projection linear in the
+  // common case.
+  const markdownLinkRanges = new Map();
+  const openLabels = [];
+  for (let index = 0; index < source.length; index += 1) {
+    if (source[index] === '\\') {
+      index += 1;
+      continue;
+    }
+    if (source[index] === '[') {
+      openLabels.push(index);
+      continue;
+    }
+    if (source[index] !== ']' || openLabels.length === 0) continue;
+    const labelStart = openLabels.pop();
+    if (source[index + 1] !== '(') continue;
+    const end = markdownDestinationEndAt(index + 2, source.length);
+    if (end === OPAQUE_REMAINDER) {
+      const markerStart = labelStart > 0 && source[labelStart - 1] === '!'
+        ? labelStart - 1
+        : labelStart;
+      markdownLinkRanges.set(markerStart, {
+        labelStart: labelStart + 1,
+        labelEnd: index,
+        end: source.length,
+        opaqueRemainder: true,
+      });
+      break;
+    }
+    if (end < 0) continue;
+    const markerStart = labelStart > 0 && source[labelStart - 1] === '!'
+      ? labelStart - 1
+      : labelStart;
+    markdownLinkRanges.set(markerStart, {
+      labelStart: labelStart + 1,
+      labelEnd: index,
+      end,
+    });
+    // A destination is opaque. Avoid treating its brackets as label syntax
+    // and leave any outer label on the stack for the next visible `]`.
+    index = end - 1;
+  }
+
+  const markdownLinkAt = (start, limit) => {
+    const link = markdownLinkRanges.get(start);
+    return link && (link.opaqueRemainder || link.end <= limit) ? link : null;
   };
 
   const urlEndAt = (start, limit) => {
@@ -1001,45 +1036,54 @@ export function visibleAddressOffsetMap(value) {
     return end;
   };
 
-  const scan = (start, limit, depth = 0) => {
-    if (depth > 12) {
-      for (let index = start; index < limit; index += 1) appendCharacter(source[index], index);
-      return;
-    }
-    for (let index = start; index < limit;) {
-      const link = markdownLinkAt(index, limit);
-      if (link) {
-        scan(link.labelStart, link.labelEnd, depth + 1);
-        index = link.end;
+  const scan = (start, limit) => {
+    const frames = [{ index: start, limit }];
+    while (frames.length > 0) {
+      const frame = frames.at(-1);
+      if (frame.index >= frame.limit) {
+        frames.pop();
         continue;
       }
-      const tagEnd = htmlTagEndAt(index, limit);
+      const index = frame.index;
+      const link = markdownLinkAt(index, frame.limit);
+      if (link) {
+        if (link.opaqueRemainder) opaque = true;
+        frame.index = Math.min(link.end, frame.limit);
+        frames.push({ index: link.labelStart, limit: link.labelEnd });
+        continue;
+      }
+      const tagEnd = htmlTagEndAt(index, frame.limit);
+      if (tagEnd === OPAQUE_REMAINDER) {
+        opaque = true;
+        frame.index = frame.limit;
+        continue;
+      }
       if (tagEnd >= 0) {
         appendSeparatorIfNeeded(index, tagEnd);
-        index = tagEnd;
+        frame.index = tagEnd;
         continue;
       }
-      const urlEnd = urlEndAt(index, limit);
+      const urlEnd = urlEndAt(index, frame.limit);
       if (urlEnd >= 0) {
         appendSeparatorIfNeeded(index, urlEnd);
-        index = urlEnd;
+        frame.index = urlEnd;
         continue;
       }
       if (source[index] === '*' || source[index] === '_' || source[index] === '\`') {
-        index += 1;
+        frame.index += 1;
         continue;
       }
       if (source[index] === '~' && source[index + 1] === '~') {
-        index += 2;
+        frame.index += 2;
         continue;
       }
       appendCharacter(source[index], index);
-      index += 1;
+      frame.index += 1;
     }
   };
 
   scan(0, source.length);
-  return { text: visible.join(''), sourceOffsets };
+  return { text: visible.join(''), sourceOffsets, opaque };
 }
 
 /**
@@ -1073,8 +1117,8 @@ const ADDRESS_POSTAL_LOCALITY_PARTICLES = new Set([
   'des',
   'e', 'el', 'het', 'i', 'il', 'im', 'in', 'la', 'las', 'le', 'les', 'los',
   'na', 'nel', 'nei', 'nella', 'nelle', 'no', 'of', 'on', 'para', 'per',
-  'por', 'sous', 'su', 'sul', 'sulla', 'sur', 'the', 'van', 'von', 'y', 'zu',
-  'zum', 'zur', 'der', 'den', 'dem', 'am', 'an',
+  'por', 'sous', 'su', 'sul', 'sulla', 'sur', 'the', 'van', 'von', 'vor', 'y', 'zu',
+  'zum', 'zur', 'der', 'den', 'dem', 'am', 'an', 'aus', 'über', 'unter',
 ].map((word) => foldAddressText(word)));
 const ADDRESS_POSTAL_CAPITALIZED_WORD_RE = /^\p{Lu}[\p{L}\p{M}]*(?:[’'\-][\p{L}\p{M}]+)*$/u;
 const ADDRESS_POSTAL_COMPOUND_PARTICLE_RE = /^\p{Ll}[\p{L}\p{M}]*[’'][\p{Lu}][\p{L}\p{M}]*(?:[’'\-][\p{L}\p{M}]+)*$/u;
@@ -1377,20 +1421,21 @@ function addressPostalMatchFollowsAddressSegment(line, postalMatches, postalMatc
 }
 
 function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
+  const allCandidates = [];
   const candidates = [];
+  let opaque = false;
   const expectedLocalityTerms = addressLocalityFormsForSourceLine(sourceLine, locale);
   lines.forEach((rawLine, index) => {
     // A single visible line may contain more than one postal-code/address
     // segment. Each CAP match is assigned at most once, including when the
     // translation combines or reorders source rows on one line.
     const projection = visibleAddressOffsetMap(rawLine);
+    if (projection.opaque) opaque = true;
+    if (projection.opaque) return;
     const line = projection.text;
     const postalMatches = addressPostalMatches(projection);
     for (const postalMatch of postalMatches) {
       if (postalMatch[0] !== sourceLine.postalCode) continue;
-      if (sourceLine.postalMatchCount > 1
-        && postalMatches.length > 1
-        && postalMatch.postalMatchIndex !== sourceLine.postalMatchIndex) continue;
       const followsAddressSegment = addressPostalMatchFollowsAddressSegment(
         line,
         postalMatches,
@@ -1398,12 +1443,11 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
       );
       if (!isAddressLine(line, postalMatch) && !followsAddressSegment) continue;
       const matchKey = index + ':' + postalMatch.sourceIndex;
-      if (usedTargetMatches.has(matchKey)) continue;
       const targetSegment = addressSegmentForPostalCode(line, postalMatch, {
         forceFirstColonBoundary: sourceLine.hasDescriptionColon,
         expectedLocalityTerms,
       });
-      candidates.push({
+      const candidate = {
         index,
         matchKey,
         postalMatchIndex: postalMatch.postalMatchIndex,
@@ -1417,10 +1461,12 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
           targetSegment,
         ].filter(Boolean).join(' '),
         context: addressContextForPostalCode(line, postalMatch),
-      });
+      };
+      allCandidates.push(candidate);
+      if (!usedTargetMatches.has(matchKey)) candidates.push(candidate);
     }
   });
-  if (candidates.length === 0) return { index: -1, text: '', segment: '' };
+  if (candidates.length === 0) return { index: -1, text: '', segment: '', opaque };
 
   const contextMatches = sourceLine.context
     ? candidates.filter((candidate) => candidate.context === sourceLine.context)
@@ -1432,6 +1478,15 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
       targetSegment: candidate.segment,
       locale,
     })));
+  const ordinalMatches = candidates.filter((candidate) =>
+    candidate.postalMatchIndex === sourceLine.postalMatchIndex);
+  const targetHasCompleteOrdinalSet = sourceLine.postalMatchCount > 1
+    && allCandidates.length === sourceLine.postalMatchCount
+    && new Set(allCandidates.map((candidate) => candidate.postalMatchIndex)).size
+      === sourceLine.postalMatchCount
+    && Array.from({ length: sourceLine.postalMatchCount }, (_, ordinal) => ordinal)
+      .every((ordinal) => allCandidates.some((candidate) =>
+        candidate.postalMatchIndex === ordinal));
   let selected = null;
   if (contextMatches.length === 1) {
     selected = contextMatches[0];
@@ -1439,13 +1494,19 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
     selected = toponymMatches[0];
   } else if (candidates.length === 1) {
     selected = candidates[0];
+  } else if (targetHasCompleteOrdinalSet && ordinalMatches.length === 1) {
+    // The ordinal is only a fallback after semantic association failed. It is
+    // safe here because the target exposes one candidate for every source
+    // ordinal on the same visible line; a split or incomplete target remains
+    // fail-closed instead of borrowing a neighboring address.
+    selected = ordinalMatches[0];
   }
   // A duplicated CAP without a unique address context is ambiguous. Refuse
   // the association instead of comparing the source with a different row;
   // the resulting mismatch keeps the old corpus in place.
-  if (!selected) return { index: -1, text: '', segment: '' };
+  if (!selected) return { index: -1, text: '', segment: '', opaque };
   usedTargetMatches.add(selected.matchKey);
-  return selected;
+  return { ...selected, opaque };
 }
 
 /**
@@ -1462,6 +1523,17 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
     const usedTargetMatches = new Set();
     sourceLines.forEach((line, lineIndex) => {
       const projection = visibleAddressOffsetMap(line);
+      if (projection.opaque && /\b\d{5}\b/u.test(line)) {
+        mismatches.push({
+          field,
+          line: lineIndex + 1,
+          postalCode: 'opaque',
+          source: line.trim(),
+          target: targetLines[lineIndex]?.trim() || '',
+          missing: ['indirizzo non verificabile'],
+        });
+        return;
+      }
       const visibleLine = projection.text;
       const sourcePostalMatches = addressPostalMatches(projection);
       for (const postalMatch of sourcePostalMatches) {
@@ -1500,6 +1572,17 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
           usedTargetMatches,
           locale,
         );
+        if (target.opaque) {
+          mismatches.push({
+            field,
+            line: lineIndex + 1,
+            postalCode: sourceLine.postalCode,
+            source: sourceLine.line,
+            target: target.text?.trim() || '',
+            missing: ['indirizzo non verificabile'],
+          });
+          return;
+        }
         const missing = sourceLine.tokens.filter((token) => !addressTokenIsPreserved({
           token,
           sourceSegment: sourceAddressSegment,

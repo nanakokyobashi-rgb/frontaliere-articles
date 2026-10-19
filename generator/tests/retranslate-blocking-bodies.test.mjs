@@ -1216,6 +1216,14 @@ test('la guardia associa località accorpate in righe anche se sono riordinate',
   }
 });
 
+test('la guardia associa per toponimo i CAP multipli riordinati sulla stessa riga', () => {
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: '22100 Como, 20100 Varese' },
+    newSections: { body1: '20100 Varese, 22100 Como' },
+    locale: 'en',
+  }), []);
+});
+
 test('la guardia riconosce gli indirizzi con trattino o due punti prima del CAP', () => {
   for (const italianAddress of [
     'Via Roma 10 - 22100 Como',
@@ -1510,6 +1518,14 @@ test('FU-008 conserva le particelle tedesche della grammatica precedente', () =>
   })[0]?.missing, ['Weinstraße']);
 });
 
+test('FU-008 riconosce il connettore tedesco vor nelle località composte', () => {
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: '22100 Varese, 22100 Bad Homburg vor der Höhe' },
+    newSections: { body1: '22100 Varese, 22100 Bad Homburg vor der Wie' },
+    locale: 'en',
+  })[0]?.missing, ['Höhe']);
+});
+
 test('FU-008 conserva le particelle francesi della grammatica precedente', () => {
   assert.deepEqual(findAddressToponymMismatches({
     italianSections: { body1: '22100 Varese, 22100 Saint Pierre des Champs' },
@@ -1531,6 +1547,54 @@ test('FU-011 mantiene gli offset nella proiezione visibile di markup annidato', 
     newSections: { body1: 'Rue Roma 1, 22100 [Wie [centre]](/en/como)' },
     locale: 'en',
   })[0]?.missing, ['Como']);
+});
+
+test('FU-011 non espone destinazioni in link Markdown annidati oltre il limite storico', () => {
+  let value = '[Como](/en/22100-como)';
+  for (let index = 0; index < 13; index += 1) {
+    value = `[${value}](/en/opaque-${index}-22100)`;
+  }
+  const projection = visibleAddressOffsetMap(value);
+  assert.equal(projection.text, 'Como');
+  assert.doesNotMatch(projection.text, /22100/u);
+});
+
+test('FU-011 limita i look-ahead delle destinazioni Markdown non chiuse', () => {
+  const raw = '[x]('.repeat(4096);
+  const projection = visibleAddressOffsetMap(raw);
+  assert.equal(projection.text, 'x');
+  assert.equal(projection.opaque, true);
+});
+
+test('FU-011 fallisce chiuso su un apertura HTML malformata con quota aperta', () => {
+  const projection = visibleAddressOffsetMap('<span title="broken > 22100 Como <em>Wie</em>');
+  assert.equal(projection.text, '');
+});
+
+test('FU-011 non espone metadata validi oltre i limiti di proiezione', () => {
+  const longDestination = `/${'a'.repeat(2048)}-Como`;
+  const longTag = `<span data-label="${'a'.repeat(600)}Como">Wie</span>`;
+  for (const target of [
+    `Rue Roma 1, 22100 Wie [label](${longDestination})`,
+    `Rue Roma 1, 22100 Wie ${longTag}`,
+  ]) {
+    const mismatches = findAddressToponymMismatches({
+      italianSections: { body1: 'Via Roma 1, 22100 Como' },
+      newSections: { body1: target },
+      locale: 'en',
+    });
+    assert.deepEqual(mismatches[0]?.missing, ['indirizzo non verificabile'], target.slice(0, 80));
+  }
+});
+
+test('FU-011 rifiuta una sorgente con CAP dopo metadata opachi', () => {
+  const source = `[label](${'a'.repeat(2048)}-x) Via Roma 1, 22100 Como`;
+  const mismatches = findAddressToponymMismatches({
+    italianSections: { body1: source },
+    newSections: { body1: 'Rue Roma 1, 22100 Wie' },
+    locale: 'en',
+  });
+  assert.deepEqual(mismatches[0]?.missing, ['indirizzo non verificabile']);
 });
 
 test('la guardia non conta i toponimi nelle destinazioni dei link', () => {
