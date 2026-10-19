@@ -30,6 +30,13 @@ const script = resolve(here, '../../scripts/ci/verify-served-fingerprint.mjs');
 const workflow = readFileSync(resolve(here, '../../.github/workflows/fast-publish-article.yml'), 'utf8');
 const helper = readFileSync(resolve(here, '../../scripts/ci/verify-served-fingerprint.mjs'), 'utf8');
 
+function workflowStep(name) {
+  const start = workflow.indexOf(`      - name: ${name}`);
+  assert.ok(start >= 0, `workflow step not found: ${name}`);
+  const next = workflow.indexOf('\n      - name:', start + 1);
+  return workflow.slice(start, next === -1 ? workflow.length : next);
+}
+
 const NEW_HTML = '<main>\n  <h1>Nuovo articolo</h1>\n</main>\n';
 const OLD_HTML = '<main>\n  <h1>Articolo vecchio</h1>\n</main>\n';
 const RECORD = {
@@ -551,4 +558,24 @@ test('il workflow registra prima l’impronta, attende Pages prima della purge e
   assert.match(workflow, /--push-state "\$RUNNER_TEMP\/published-push-state\.tsv"/);
   assert.match(workflow, /edge probe blocked[\s\S]*exit "\$verify_rc"/);
   assert.doesNotMatch(workflow, /<main>[^\n]*2943/);
+});
+
+test('una probe edge bloccata lascia attivo il backstop di re-purge', () => {
+  const verification = workflowStep('Verify the article is actually readable');
+  const backstop = workflowStep('Re-purge the edge cache after the verification');
+  const blockedBranch = verification.match(/if \[ "\$verify_rc" -eq 2 \];([\s\S]*?)\n            fi/);
+
+  assert.ok(blockedBranch, 'missing the EDGE_PROBE_BLOCKED branch');
+  assert.match(blockedBranch[1], /exit "\$verify_rc"/);
+  assert.doesNotMatch(blockedBranch[1], /cf-purge-cache/);
+
+  const condition = backstop.match(/^\s+if: (.+)$/m);
+  assert.ok(condition, 'backstop condition is missing');
+  assert.match(condition[1], /^always\(\)/);
+  assert.match(backstop, /edge-purge-urls\.txt/);
+  assert.doesNotMatch(backstop, /verify_rc/);
+  assert.match(
+    verification,
+    /::error::edge probe blocked \(exit 2\) — not repeating the targeted purge inside this step; the post-verification backstop re-purge \(#114\) still runs by design/,
+  );
 });

@@ -982,8 +982,9 @@ jobs:
           # The first purge ran before this step. Check the canonical apex URL
           # against the bytes recorded after the push; a 200 with old HTML is
           # not a successful publish. One retry covers purge propagation or a
-          # transient Cloudflare miss; an edge-blocked probe is a transport
-          # failure and is terminal without a blind second purge.
+          # transient Cloudflare miss. Edge probe blocked (exit 2) — not
+          # repeating the targeted purge inside this step; the post-verification
+          # backstop re-purge (#114) still runs by design.
           verify_apex() {
             node scripts/ci/verify-served-fingerprint.mjs verify-apex \
               --fingerprints "$RUNNER_TEMP/published-fingerprints.tsv"
@@ -993,7 +994,7 @@ jobs:
           else
             verify_rc=$?
             if [ "$verify_rc" -eq 2 ]; then
-              echo "::error::edge probe blocked — not repeating the targeted purge"
+              echo "::error::edge probe blocked (exit 2) — not repeating the targeted purge inside this step; the post-verification backstop re-purge (#114) still runs by design"
               exit "$verify_rc"
             fi
             echo "::warning::the apex served content different from the pushed fingerprints — repeating the targeted purge once"
@@ -1391,6 +1392,9 @@ jobs:
         # when a negative entry is most likely to be sitting in the cache.
         # Skipping the cleanup on failure would leave that 404 behind on exactly
         # the runs that needed the cleanup most.
+        # This step also runs after EDGE_PROBE_BLOCKED (verification exit 2) by
+        # design: the purge is idempotent and independent of probe outcome, and
+        # a blocked probe provides no evidence that the edge is clean.
         if: always() && needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
         run: |
           set -euo pipefail
