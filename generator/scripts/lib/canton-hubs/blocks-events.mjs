@@ -16,7 +16,7 @@ function foldedEventPart(value) {
   return foldForMatch(typeof value === 'string' ? value : '').replace(/[^a-z0-9]+/g, ' ').trim();
 }
 
-/** Applica alle URL evento la stessa canonicalizzazione verificata per le fonti. */
+/** Canonicalizza le URL evento solo per l'identità e la deduplica. */
 function canonicalEventUrl(value) {
   const safeUrl = httpsUrlOrNull(value);
   return safeUrl ? sourceUrlCanonicalKey(safeUrl) : '';
@@ -142,7 +142,7 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
         description: t.description,
         items: rows.map((e) => {
           const place = [e.venue, e.comune].map((v) => (typeof v === 'string' ? v.trim() : '')).filter(Boolean);
-          const url = canonicalEventUrl(e.url);
+          const url = httpsUrlOrNull(e.url);
           const where = place.length ? clip([...new Set(place)].join(', '), 100) : '';
           const ongoing = e.startDate < today ? t.ongoing(fmtDay(e.lastDay, locale)) : '';
           const detail = [where, ongoing].filter(Boolean).join(' — ');
