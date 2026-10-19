@@ -24,6 +24,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.raiba-nuova-area-previdenza.title': 'Neuer Bereich im Appenzeller Hinterland: zwei Verantwortliche',
     'blog.article.raiba-nuova-area-previdenza.excerpt': 'Die Raiffeisenbank Appenzeller Hinterland vereint Vorsorge, Nachfolge, Deckungsanalyse und Versicherungen.',
     'blog.article.raiba-nuova-area-previdenza.imageAlt': 'Bankbüro in der Appenzeller Landschaft für Vorsorgeangebote',
+    'blog.article.gais-alterszentrum-rotewies-rette-aumento.title': 'Rotenwies in Gais erhöht die Pensions- und Betreuungstaxen',
+    'blog.article.gais-alterszentrum-rotewies-rette-aumento.excerpt': 'Das Alterszentrum Rotenwies in Gais wird die Pensions- und Betreuungstaxen aufgrund eines seit Jahren anhaltenden Finanzdefizits und der steigenden Kosten erhöhen.',
+    'blog.article.gais-alterszentrum-rotewies-rette-aumento.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

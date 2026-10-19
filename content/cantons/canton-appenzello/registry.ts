@@ -83,4 +83,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'gais-alterszentrum-rotewies-rette-aumento',
+ category: 'pensione',
+ date: '2026-10-19T14:39:09.729Z',
+ image: '/images/blog/article-gais-alterszentrum-rotewies-rette-aumento.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ];

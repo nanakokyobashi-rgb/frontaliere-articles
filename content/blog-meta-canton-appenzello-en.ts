@@ -24,6 +24,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.raiba-nuova-area-previdenza.title': 'New area in the Appenzeller Hinterland: two managers',
     'blog.article.raiba-nuova-area-previdenza.excerpt': 'Raiffeisenbank Appenzeller Hinterland brings together retirement planning, succession planning, coverage analysis and insurance.',
     'blog.article.raiba-nuova-area-previdenza.imageAlt': 'Bank office in the Appenzell landscape for pension services',
+    'blog.article.gais-alterszentrum-rotewies-rette-aumento.title': 'Rotenwies in Gais raises its residential and care fees',
+    'blog.article.gais-alterszentrum-rotewies-rette-aumento.excerpt': 'The Rotenwies senior center in Gais will increase its accommodation and care fees due to a financial deficit that has persisted for years and rising costs.',
+    'blog.article.gais-alterszentrum-rotewies-rette-aumento.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;
