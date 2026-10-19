@@ -556,20 +556,20 @@ test('il workflow registra prima l’impronta, attende Pages prima della purge e
   assert.match(workflow, /ARTICLE_PUSH_STATUS_FILE/);
   assert.match(workflow, /clean-no-op/);
   assert.match(workflow, /--push-state "\$RUNNER_TEMP\/published-push-state\.tsv"/);
-  assert.match(workflow, /edge probe blocked[\s\S]*exit "\$verify_rc"/);
+  assert.match(workflow, /edge_probe_blocked=true[\s\S]*edge probe blocked/);
   assert.doesNotMatch(workflow, /<main>[^\n]*2943/);
 });
 
 test('una probe edge bloccata registra lo stato e salta il backstop di re-purge', () => {
   const verification = workflowStep('Verify the article is actually readable');
   const backstop = workflowStep('Re-purge the edge cache after the verification');
-  const blockedBranch = verification.match(/if \[ "\$verify_rc" -eq 2 \];([\s\S]*?)\n            fi/);
+  const blockedBranch = verification.match(/handle_apex_failure[\s\S]*?edge-blocked\)[\s\S]*?return 2/);
 
   assert.ok(blockedBranch, 'missing the EDGE_PROBE_BLOCKED branch');
   assert.match(verification, /^        id: verify_served_fingerprint$/m);
-  assert.match(blockedBranch[1], /edge_probe_blocked=true.*GITHUB_OUTPUT/s);
-  assert.match(blockedBranch[1], /exit "\$verify_rc"/);
-  assert.doesNotMatch(blockedBranch[1], /cf-purge-cache/);
+  assert.match(blockedBranch[0], /edge_probe_blocked=true.*GITHUB_OUTPUT/s);
+  assert.match(blockedBranch[0], /return 2/);
+  assert.doesNotMatch(blockedBranch[0], /cf-purge-cache/);
 
   const condition = backstop.match(/^\s+if: (.+)$/m);
   assert.ok(condition, 'backstop condition is missing');
@@ -579,8 +579,50 @@ test('una probe edge bloccata registra lo stato e salta il backstop di re-purge'
   assert.doesNotMatch(backstop, /verify_rc/);
   assert.match(
     verification,
-    /::error::edge probe blocked \(exit 2\) — skipping the post-verification backstop purge/,
+    /::error::edge probe blocked \(\$phase; verifier exit \$verify_rc\) — skipping the post-verification backstop purge/,
   );
+});
+
+test('il downgrade apex distingue lag 200, status/route, errore operativo e blocco misto', () => {
+  const verification = workflowStep('Verify the article is actually readable');
+  const classifier = verification.match(/^          apex_failure_kind\(\) \{[\s\S]*?^          \}/m);
+  assert.ok(classifier, 'missing the apex failure classifier');
+
+  const root = mkdtempSync(join(tmpdir(), 'served-fingerprint-classifier-'));
+  try {
+    const run = (log) => {
+      const file = join(root, 'verification.log');
+      writeFileSync(file, log);
+      const result = spawnSync(
+        'bash',
+        ['-c', `${classifier[0]}\napex_verify_log="$1"\napex_failure_kind`, 'classifier', file],
+        { encoding: 'utf8' },
+      );
+      assert.equal(result.status, 0, result.stderr);
+      return result.stdout.trim();
+    };
+
+    const mismatch = '::error::CDN served-content verification failed: 1 URL did not serve the expected fingerprint\n';
+    assert.equal(
+      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; cf-cache-status=HIT; age=776\n`),
+      'lag',
+    );
+    assert.equal(
+      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=404; cf-cache-status=MISS; age=0\n`),
+      'hard',
+    );
+    assert.equal(
+      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=unavailable; status=network-error; cf-cache-status=unknown; age=unknown\n`),
+      'operational',
+    );
+    assert.equal(run('::error::fingerprint TSV has no header\n'), 'operational');
+    assert.equal(
+      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; classification=probe bloccata dall'edge\n`),
+      'edge-blocked',
+    );
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('un mismatch apex persistente resta warning e lascia eseguire il gate origin', () => {
@@ -598,10 +640,12 @@ test('un mismatch apex persistente resta warning e lascia eseguire il gate origi
   assert.match(retryHandling, /if verify_apex; then/);
   assert.match(
     retryHandling,
-    /if \[ "\$verify_rc" -eq 2 \]; then[\s\S]*?edge_probe_blocked=true[\s\S]*?exit "\$verify_rc"/,
+    /if handle_apex_failure "after retry" "\$verify_rc"; then[\s\S]*?apex_failure_rc=\$\?[\s\S]*?exit "\$apex_failure_rc"/,
   );
   assert.match(
     retryHandling,
     /the apex still served content different from the pushed fingerprints after the retry — continuing with the origin hard gate/,
   );
+  assert.match(verification, /handle_apex_failure "before retry" "\$verify_rc"/);
+  assert.match(verification, /refusing to downgrade it to a warning/);
 });
