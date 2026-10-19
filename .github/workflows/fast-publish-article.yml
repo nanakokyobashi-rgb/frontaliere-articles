@@ -1013,40 +1013,10 @@ jobs:
           # The `classification` line is emitted per failure, which preserves
           # an edge-blocked observation even when other URLs are mismatches and
           # the verifier cannot return its all-observations exit code 2.
-          apex_failure_kind() {
-            node scripts/ci/verify-served-fingerprint.mjs classify-apex-failure \
-              --log "$apex_verify_log"
-          }
-
           handle_apex_failure() {
-            local phase="$1" verify_rc="$2" kind
-            kind="$(apex_failure_kind)"
-            case "$kind" in
-              lag)
-                return 0
-                ;;
-              edge-blocked)
-                echo "edge_probe_blocked=true" >> "$GITHUB_OUTPUT"
-                echo "::error::edge probe blocked ($phase; verifier exit $verify_rc) — skipping the post-verification backstop purge"
-                return 2
-                ;;
-              operational)
-                echo "::error::apex fingerprint verifier failed operationally ($phase); refusing to downgrade it to a warning"
-                return "$verify_rc"
-                ;;
-              hard)
-                if [ "$phase" = "before retry" ]; then
-                  echo "::warning::apex returned a non-lag fingerprint result; repeating once but it remains fail-closed if it persists"
-                  return 0
-                fi
-                echo "::error::apex returned a non-lag fingerprint result ($phase); refusing to downgrade it to a warning"
-                return "$verify_rc"
-                ;;
-              *)
-                echo "::error::apex fingerprint verifier returned an unknown classification ($phase); refusing to downgrade it to a warning"
-                return "$verify_rc"
-                ;;
-            esac
+            node scripts/ci/verify-served-fingerprint.mjs handle-apex-failure \
+              --log "$apex_verify_log" --phase "$1" --verify-exit-code "$2" \
+              --github-output "$GITHUB_OUTPUT"
           }
           if verify_apex; then
             :

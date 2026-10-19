@@ -541,6 +541,44 @@ export function classifyApexFailureLog(rawLog) {
   return invalid ? 'hard' : 'lag';
 }
 
+export function apexFailureDecision(rawLog, { phase, verifyExitCode } = {}) {
+  const kind = classifyApexFailureLog(rawLog);
+  const exitCode = Number.isInteger(verifyExitCode) && verifyExitCode > 0 ? verifyExitCode : 1;
+  if (kind === 'lag') return { kind, exitCode: 0, message: null, githubOutput: null };
+  if (kind === 'edge-blocked') {
+    return {
+      kind,
+      exitCode: 2,
+      message: `::error::edge probe blocked (${phase}; verifier exit ${exitCode}) — skipping the post-verification backstop purge`,
+      githubOutput: 'edge_probe_blocked=true',
+    };
+  }
+  if (kind === 'operational') {
+    return {
+      kind,
+      exitCode,
+      message: `::error::apex fingerprint verifier failed operationally (${phase}); refusing to downgrade it to a warning`,
+      githubOutput: null,
+    };
+  }
+  if (kind === 'hard' && phase === 'before retry') {
+    return {
+      kind,
+      exitCode: 0,
+      message: '::warning::apex returned a non-lag fingerprint result; repeating once but it remains fail-closed if it persists',
+      githubOutput: null,
+    };
+  }
+  return {
+    kind,
+    exitCode,
+    message: kind === 'hard'
+      ? `::error::apex returned a non-lag fingerprint result (${phase}); refusing to downgrade it to a warning`
+      : `::error::apex fingerprint verifier returned an unknown classification (${phase}); refusing to downgrade it to a warning`,
+    githubOutput: null,
+  };
+}
+
 function allEdgeBlocked(stage, observations) {
   if (observations.length === 0 || !observations.every(isEdgeBlocked)) {
     return null;
@@ -743,12 +781,25 @@ function positiveSeconds(value, name) {
 
 async function main(argv) {
   const [command, ...args] = argv;
-  if (!command || !['write', 'wait-origin', 'verify-apex', 'classify-apex-failure'].includes(command)) {
-    throw new Error('usage: verify-served-fingerprint.mjs <write|wait-origin|verify-apex|classify-apex-failure> ...');
+  if (!command || !['write', 'wait-origin', 'verify-apex', 'classify-apex-failure', 'handle-apex-failure'].includes(command)) {
+    throw new Error('usage: verify-served-fingerprint.mjs <write|wait-origin|verify-apex|classify-apex-failure|handle-apex-failure> ...');
   }
 
   if (command === 'classify-apex-failure') {
     console.log(classifyApexFailureLog(fs.readFileSync(requiredFlag(args, '--log'), 'utf8')));
+    return;
+  }
+
+  if (command === 'handle-apex-failure') {
+    const decision = apexFailureDecision(fs.readFileSync(requiredFlag(args, '--log'), 'utf8'), {
+      phase: requiredFlag(args, '--phase'),
+      verifyExitCode: Number(requiredFlag(args, '--verify-exit-code')),
+    });
+    if (decision.githubOutput) {
+      fs.appendFileSync(requiredFlag(args, '--github-output'), `${decision.githubOutput}\n`);
+    }
+    if (decision.message) console.log(decision.message);
+    process.exitCode = decision.exitCode;
     return;
   }
 
