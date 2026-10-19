@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
 import {
-  compareProvesAncestor,
+  compareProvesDirectParent,
   flattenWorkflowRunPages,
   resolvePushRange,
 } from '../../scripts/ci/resolve-workflow-run-push-range.mjs';
@@ -72,21 +72,27 @@ test('workflow_run push range: conserva tutte le pagine della cronologia Actions
   });
 });
 
-test('workflow_run push range: accetta il fallback solo con una prova compare di ancestry', () => {
+test('workflow_run push range: accetta il fallback solo se il commit precedente è il parent diretto', () => {
   const range = { before: BEFORE, after: HEAD };
-  assert.equal(compareProvesAncestor(range, {
+  assert.equal(compareProvesDirectParent(range, {
     status: 'ahead',
     ahead_by: 1,
     behind_by: 0,
     merge_base_commit: BEFORE,
   }), true);
-  assert.equal(compareProvesAncestor(range, {
+  assert.equal(compareProvesDirectParent(range, {
+    status: 'ahead',
+    ahead_by: 2,
+    behind_by: 0,
+    merge_base_commit: BEFORE,
+  }), false);
+  assert.equal(compareProvesDirectParent(range, {
     status: 'ahead',
     ahead_by: 1,
     behind_by: 1,
     merge_base_commit: BEFORE,
   }), false);
-  assert.equal(compareProvesAncestor(range, {
+  assert.equal(compareProvesDirectParent(range, {
     status: 'ahead',
     ahead_by: 1,
     behind_by: 0,

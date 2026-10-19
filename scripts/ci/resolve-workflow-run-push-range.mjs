@@ -86,15 +86,14 @@ export function flattenWorkflowRunPages(pages) {
   ));
 }
 
-/** Accept only a range whose Actions fallback is proven to be an ancestor. */
-export function compareProvesAncestor(range, comparison) {
+/** Accept only an Actions fallback proven to be the immediate parent of this push. */
+export function compareProvesDirectParent(range, comparison) {
   const mergeBase = comparison?.merge_base_commit?.sha ?? comparison?.merge_base_commit;
   return isFullSha(range?.before)
     && isFullSha(range?.after)
     && range.before !== range.after
     && comparison?.status === 'ahead'
-    && Number.isInteger(comparison?.ahead_by)
-    && comparison.ahead_by > 0
+    && comparison?.ahead_by === 1
     && comparison?.behind_by === 0
     && mergeBase === range.before;
 }
