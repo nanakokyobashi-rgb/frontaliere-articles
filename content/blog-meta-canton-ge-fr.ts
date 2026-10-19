@@ -27,6 +27,9 @@ const blogMetaCantonGeFr: Record<string, string> = {
     'blog.article.indagini-imprese-ginevrine.title': 'Enquêtes conjoncturelles dans les entreprises genevoises',
     'blog.article.indagini-imprese-ginevrine.excerpt': 'La République et le canton de Genève signale des enquêtes conjoncturelles de septembre dans les entreprises genevoises.',
     'blog.article.indagini-imprese-ginevrine.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.taf-regolamento-aeroporto-ginevra.title': 'Aéroport de Genève : le TAF approuve le règlement',
+    'blog.article.taf-regolamento-aeroporto-ginevra.excerpt': 'Le TAF approuve le règlement de l’aéroport de Genève Les mesures contestées respectent les normes environnementales Les recours contre la décision du DETEC',
+    'blog.article.taf-regolamento-aeroporto-ginevra.imageAlt': 'Aéroport de Genève et communes riveraines',
 };
 
 export default blogMetaCantonGeFr;
