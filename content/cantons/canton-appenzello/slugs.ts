@@ -10,6 +10,9 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'appenzello-tasso-fiscale-390': { it: 'appenzello-tasso-fiscale-390', en: 'appenzell-tax-rate-390', de: 'appenzell-steuerfuss-390', fr: 'appenzell-taux-fiscal-390' },
  'eventi-weekend-appenzello': { it: 'eventi-weekend-appenzello', en: 'weekend-events-appenzell', de: 'wochenend-veranstaltungen-appenzell', fr: 'evenements-week-end-appenzell' },
  'raiba-nuova-area-previdenza': { it: 'raiba-nuova-area-previdenza', en: 'raiba-new-pension-area', de: 'raiba-neuer-vorsorgebereich', fr: 'raiba-nouveau-domaine-prevoyance' },
+ 'gais-alterszentrum-rotewies-rette-aumento': { it: 'gais-alterszentrum-rotewies-rette-aumento', en: 'gais-alterszentrum-rotewies-fee-increase', de: 'gais-alterszentrum-rotewies-gebuhren-erhoehung', fr: 'gais-centre-rotewies-augmentation-frais' },
+ 'teufen-budget-deficit-2027': { it: 'teufen-budget-deficit-2027', en: 'teufen-2027-budget-deficit', de: 'teufen-voranschlag-defizit-2027', fr: 'teufen-budget-2027-pour-reduire-le-deficit-operationnel' },
+ 'cambio-dirigenza-scuola-appenzell': { it: 'cambio-dirigenza-scuola-appenzell', en: 'appenzell-school-leadership-change', de: 'appenzell-schulleitung-wechsel', fr: 'appenzell-changement-direction-ecole' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

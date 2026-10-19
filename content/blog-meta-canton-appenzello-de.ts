@@ -24,6 +24,15 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.raiba-nuova-area-previdenza.title': 'Neuer Bereich im Appenzeller Hinterland: zwei Verantwortliche',
     'blog.article.raiba-nuova-area-previdenza.excerpt': 'Die Raiffeisenbank Appenzeller Hinterland vereint Vorsorge, Nachfolge, Deckungsanalyse und Versicherungen.',
     'blog.article.raiba-nuova-area-previdenza.imageAlt': 'Bankbüro in der Appenzeller Landschaft für Vorsorgeangebote',
+    'blog.article.gais-alterszentrum-rotewies-rette-aumento.title': 'Rotenwies in Gais erhöht die Pensions- und Betreuungstaxen',
+    'blog.article.gais-alterszentrum-rotewies-rette-aumento.excerpt': 'Das Alterszentrum Rotenwies in Gais wird die Pensions- und Betreuungstaxen aufgrund eines seit Jahren anhaltenden Finanzdefizits und der steigenden Kosten erhöhen.',
+    'blog.article.gais-alterszentrum-rotewies-rette-aumento.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.teufen-budget-deficit-2027.title': 'Teufen: Budget 2027 zur Verringerung des operativen Defizits',
+    'blog.article.teufen-budget-deficit-2027.excerpt': 'Die Gemeinde Teufen erwartet für 2027 Steuereinnahmen von 38,9 Millionen Franken, was einem Anstieg von 2,2% gegenüber dem vorherigen Budget entspricht.',
+    'blog.article.teufen-budget-deficit-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cambio-dirigenza-scuola-appenzell.title': 'Appenzell: Walzthöny ist nicht mehr Leiterin der Oberstufe',
+    'blog.article.cambio-dirigenza-scuola-appenzell.excerpt': 'Isabella Walzthöny begann am 1.',
+    'blog.article.cambio-dirigenza-scuola-appenzell.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

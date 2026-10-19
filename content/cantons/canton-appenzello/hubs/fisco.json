@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "fisco",
-  "updatedAt": "2026-10-17T00:36:37.812Z",
-  "contentHash": "2ec6cf528e5a04b07f83443ebe5e673d01f580dc8384dde5bf3153171551a665",
+  "updatedAt": "2026-10-19T15:24:57.777Z",
+  "contentHash": "ae3495e329f454946d49b975a8f5108af5f9477a2df9e3cec9958c4376243bbe",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T15:35:32.859Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -160,10 +160,16 @@
               "url": "https://www.ai.ch/themen/steuern/aktuelles/warnung-vor-betruegerischen-e-mails-im-namen-von-etax"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Teufen: preventivo 2027 per ridurre il deficit operativo",
+          "url": "/articoli-appenzello/teufen-budget-deficit-2027/",
+          "excerpt": "Il Comune di Teufen prevede per il 2027 entrate fiscali di 38,9 milioni di franchi, in aumento del 2,2% rispetto al preventivo precedente.",
+          "date": "2026-10-19T15:18:22.893Z"
+        },
         {
           "title": "Appenzello: tasso fiscale previsto a 3,90 unità",
           "url": "/articoli-appenzello/appenzello-tasso-fiscale-390/",
@@ -205,12 +211,6 @@
           "url": "/articoli-svizzera/imposte-appenzello-esterno-aliquote/",
           "excerpt": "Guida completa alle imposte cantonali e comunali in Appenzello Esterno: struttura a 3 livelli, aliquote, deduzioni ammesse, scadenze dichiarative e procedura online.",
           "date": "2026-08-25T03:40:05.091Z"
-        },
-        {
-          "title": "Imposte cantonali Appenzello Interno: aliquote e deduzioni",
-          "url": "/articoli-svizzera/imposte-cantonali-appenzello-interno/",
-          "excerpt": "Come funzionano le imposte cantonali nel Canton Appenzello Interno: i 3 livelli fiscali, deduzioni ammesse, scadenze di dichiarazione e portale dell'amministrazione cantonale.",
-          "date": "2026-08-21T03:56:52.687Z"
         }
       ],
       "latestCantonArticles": [],
@@ -236,7 +236,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-17T00:36:37.812Z"
+      "updatedAt": "2026-10-19T15:24:57.777Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -374,10 +374,16 @@
               "url": "https://www.ai.ch/themen/steuern/aktuelles/warnung-vor-betruegerischen-e-mails-im-namen-von-etax"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Teufen: 2027 budget proposal to reduce the operating deficit",
+          "url": "/en/appenzell-articles/teufen-2027-budget-deficit/",
+          "excerpt": "The Municipality of Teufen expects tax revenues of 38,9 million francs in 2027, an increase of 2,2% compared with the previous budget.",
+          "date": "2026-10-19T15:18:22.893Z"
+        },
         {
           "title": "Appenzell: projected tax rate at 3,90 units",
           "url": "/en/appenzell-articles/appenzell-tax-rate-390/",
@@ -419,12 +425,6 @@
           "url": "/en/swiss-articles/canton-appenzell-ausserrhoden-cantonal-taxes-rates/",
           "excerpt": "Complete guide to cantonal and municipal taxes in Appenzell Ausserrhoden: 3-level structure, rates, allowable deductions, declaratory deadlines and online procedure.",
           "date": "2026-08-25T03:40:05.091Z"
-        },
-        {
-          "title": "Appenzell Innerrhoden cantonal taxes: rates and deductions",
-          "url": "/en/swiss-articles/cantonal-taxes-appenzell-innerrhoden/",
-          "excerpt": "How cantonal taxes work in the Inner Appenzell Canton: the 3 tax levels, allowable deductions, reporting deadlines and portal of the cantonal administration.",
-          "date": "2026-08-21T03:56:52.687Z"
         }
       ],
       "latestCantonArticles": [],
@@ -450,7 +450,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-17T00:36:37.812Z"
+      "updatedAt": "2026-10-19T15:24:57.777Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -588,10 +588,16 @@
               "url": "https://www.ai.ch/themen/steuern/aktuelles/warnung-vor-betruegerischen-e-mails-im-namen-von-etax"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Teufen: Budget 2027 zur Verringerung des operativen Defizits",
+          "url": "/de/appenzell-artikel/teufen-voranschlag-defizit-2027/",
+          "excerpt": "Die Gemeinde Teufen erwartet für 2027 Steuereinnahmen von 38,9 Millionen Franken, was einem Anstieg von 2,2% gegenüber dem vorherigen Budget entspricht.",
+          "date": "2026-10-19T15:18:22.893Z"
+        },
         {
           "title": "Appenzell: Voraussichtlicher Steuerfuss bei 3,90 Einheiten",
           "url": "/de/appenzell-artikel/appenzell-steuerfuss-390/",
@@ -633,12 +639,6 @@
           "url": "/de/schweiz-artikel/kanton-appenzell-ausserrhoden-kantonale-steuern-saetze/",
           "excerpt": "Vollständiger Leitfaden zu den Kantons- und Gemeindesteuern in Appenzell Ausserrhoden: 3-stufige Struktur, Steuersätze, zulässige Abzüge, Deklarationsfristen und Online-Verfahren.",
           "date": "2026-08-25T03:40:05.091Z"
-        },
-        {
-          "title": "Kantonale Steuern Appenzell Innerrhoden: Steuersätze und Abzüge",
-          "url": "/de/schweiz-artikel/kantonale-steuern-appenzell-innerrhoden/",
-          "excerpt": "So funktionieren die kantonalen Steuern im Kanton Appenzell Innerrhoden: die 3 Steuerstufen, zulässige Abzüge, Deklarationsfristen und das Portal der kantonalen Verwaltung.",
-          "date": "2026-08-21T03:56:52.687Z"
         }
       ],
       "latestCantonArticles": [],
@@ -664,7 +664,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-17T00:36:37.812Z"
+      "updatedAt": "2026-10-19T15:24:57.777Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -802,10 +802,16 @@
               "url": "https://www.ai.ch/themen/steuern/aktuelles/warnung-vor-betruegerischen-e-mails-im-namen-von-etax"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Teufen : budget 2027 pour réduire le déficit opérationnel",
+          "url": "/fr/articles-appenzell/teufen-budget-2027-pour-reduire-le-deficit-operationnel/",
+          "excerpt": "La commune de Teufen prévoit pour 2027 des recettes fiscales de 38,9 millions de francs, en hausse de 2,2% par rapport au budget précédent.",
+          "date": "2026-10-19T15:18:22.893Z"
+        },
         {
           "title": "Appenzell : taux d'imposition prévu à 3,90 unités",
           "url": "/fr/articles-appenzell/appenzell-taux-fiscal-390/",
@@ -847,12 +853,6 @@
           "url": "/fr/articles-suisse/canton-appenzell-rhodes-exterieures-impots-cantonaux-taux/",
           "excerpt": "Guide complet des impôts cantonaux et communaux à Appenzell Extérieur : structure à 3 niveaux, taux, déductions admises, délais déclaratifs et procédure en ligne.",
           "date": "2026-08-25T03:40:05.091Z"
-        },
-        {
-          "title": "Impôts cantonaux Appenzell Interne : taux et déductions",
-          "url": "/fr/articles-suisse/impots-cantonaux-appenzell-rhodes-internes/",
-          "excerpt": "Comment fonctionnent les impôts cantonaux dans le canton d'Appenzell Intérieur : les 3 niveaux fiscaux, les déductions admises, les délais de déclaration et le portail de l'administration cantonale.",
-          "date": "2026-08-21T03:56:52.687Z"
         }
       ],
       "latestCantonArticles": [],
@@ -878,7 +878,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-17T00:36:37.812Z"
+      "updatedAt": "2026-10-19T15:24:57.777Z"
     }
   }
 }

@@ -24,6 +24,15 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.raiba-nuova-area-previdenza.title': 'Nuova area nell\'Appenzeller Hinterland: due responsabili',
     'blog.article.raiba-nuova-area-previdenza.excerpt': 'La Raiffeisenbank Appenzeller Hinterland riunisce previdenza, successioni, analisi di copertura e assicurazioni.',
     'blog.article.raiba-nuova-area-previdenza.imageAlt': 'Ufficio bancario nel paesaggio dell\'Appenzello per servizi previdenziali',
+    'blog.article.gais-alterszentrum-rotewies-rette-aumento.title': 'Rotenwies di Gais alza le rette di pensione e assistenza',
+    'blog.article.gais-alterszentrum-rotewies-rette-aumento.excerpt': 'Il centro per anziani Rotenwies di Gais aumenterà le rette di pensione e assistenza a causa di un deficit finanziario protratto da anni e dei costi in crescita.',
+    'blog.article.gais-alterszentrum-rotewies-rette-aumento.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.teufen-budget-deficit-2027.title': 'Teufen: preventivo 2027 per ridurre il deficit operativo',
+    'blog.article.teufen-budget-deficit-2027.excerpt': 'Il Comune di Teufen prevede per il 2027 entrate fiscali di 38,9 milioni di franchi, in aumento del 2,2% rispetto al preventivo precedente.',
+    'blog.article.teufen-budget-deficit-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.cambio-dirigenza-scuola-appenzell.title': 'Appenzell: Walzthöny non è più direttrice dell\'Oberstufe',
+    'blog.article.cambio-dirigenza-scuola-appenzell.excerpt': 'Isabella Walzthöny iniziò il 1° febbraio 2023 alla Schulgemeinde Appenzell, dopo la designazione come successora di Thomas Mainberger.',
+    'blog.article.cambio-dirigenza-scuola-appenzell.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

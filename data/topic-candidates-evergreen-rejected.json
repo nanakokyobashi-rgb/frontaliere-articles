@@ -10653,22 +10653,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/svizzera/cronaca/1957434/franchi-ffs-denaro-florida-casa-manager-lamborghini": {
-      "section": "frontaliere",
-      "ts": 1792245164312
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/manifestazione-antifascista-per-le-strade-di-lugano-444820": {
-      "section": "frontaliere",
-      "ts": 1792247582090
-    },
-    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1957426/biasca-toglie-il-velo-al-nuovo-di-interscambio": {
-      "section": "frontaliere",
-      "ts": 1792250619562
-    },
-    "frontaliere::https://www.vconews.it/2026/10/17/leggi-notizia/argomenti/economia-e-lavoro-9/articolo/plastipak-a-verbania-il-futuro-del-riciclo-il-nostro-obiettivo-e-ridurre-limpatto-ambientale.html": {
-      "section": "frontaliere",
-      "ts": 1792250634913
-    },
     "frontaliere::https://www.rsi.ch/s/4171186": {
       "section": "frontaliere",
       "ts": 1792252614985
@@ -10872,6 +10856,26 @@
     "frontaliere::https://www.swissinfo.ch/ita/securitas%3a-segnalate-migliaia-di-violazioni-del-diritto-del-lavoro/92237590": {
       "section": "frontaliere",
       "ts": 1792415321690
+    },
+    "frontaliere::https://www.tio.ch/ticino/economia/1957675/competenze-imprese-valore-crescita-processi": {
+      "section": "frontaliere",
+      "ts": 1792416972530
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/aumenti-dei-biglietti-e-abbonamenti-trenord-la-protesta-dei-giovani-democratici-scelta-che-pesa-su-studenti-e-lavoratori/2712682": {
+      "section": "frontaliere",
+      "ts": 1792420206080
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/mobilita-elettrica-la-lombardia-investe-150-milioni-tra-auto-green-e-colonnine/2712505": {
+      "section": "frontaliere",
+      "ts": 1792420234094
+    },
+    "frontaliere::https://www.tio.ch/ticino/politica/1957677/quali-mendrisio-aziende-municipio-imprese": {
+      "section": "frontaliere",
+      "ts": 1792420407423
+    },
+    "frontaliere::https://www.vconews.it/2026/10/19/leggi-notizia/argomenti/politica-28/articolo/sanita-avs-e-pd-allattacco-sul-nuovo-cup-progetto-bloccato-dai-ricorsi-lia-resta-sulla-ca-2.html": {
+      "section": "frontaliere",
+      "ts": 1792424935533
     }
   }
 }

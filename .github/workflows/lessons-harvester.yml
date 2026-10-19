@@ -51,6 +51,27 @@ jobs:
         with:
           node-version: '22'
 
+      # The installation token shares a small API bucket with the rest of the
+      # repository's workflows. Load the current-repository PAT early so the
+      # read-only duplicate guard does not spend that bucket when the PAT is
+      # available; the guard still falls back to GITHUB_TOKEN fail-closed.
+      - name: Prepare Firebase credentials for open-proposal guard
+        continue-on-error: true
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::warning::FIREBASE_SERVICE_ACCOUNT_JSON assente: il guard userà il GITHUB_TOKEN e resterà fail-closed"
+            exit 0
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/lessons-codex-sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/lessons-codex-sa.json" >> "$GITHUB_ENV"
+
+      - name: Load current-repository API credentials for open-proposal guard
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
       # One pending proposal at a time: if a harvest PR is already open and
       # awaiting human review, don't pile up a duplicate every day.
       #
@@ -79,6 +100,14 @@ jobs:
           # and opening one more duplicate. A guard that could not look is not
           # a green guard.
           set -euo pipefail
+          echo "api_pat_loaded=false" >> "$GITHUB_OUTPUT"
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+            echo "api_pat_loaded=true" >> "$GITHUB_OUTPUT"
+            echo "Open-proposal guard uses the current-repository PAT for its read-only API call."
+          else
+            echo "::warning::GITHUB_PAT_NANAKO non disponibile: il guard usa GITHUB_TOKEN e resta fail-closed"
+          fi
           # `head.repo.full_name == env.REPO`: su una PR da un FORK `head.ref` non
           # e' qualificato, quindi chiunque puo' aprire un branch chiamato come
           # il nostro e far contare 1 a questo guard — che poi si spegnerebbe
@@ -156,7 +185,7 @@ jobs:
       # GITHUB_TOKEN would suppress the PR event and leave the proposal without
       # tests/review, so the current-repository PAT is loaded before the action.
       - name: Prepare Firebase credentials for Lessons Codex bridge
-        if: steps.guard.outputs.open_proposals == '0' && steps.harvest.outputs.has_novel == 'true'
+        if: steps.guard.outputs.open_proposals == '0' && steps.harvest.outputs.has_novel == 'true' && steps.guard.outputs.api_pat_loaded != 'true'
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -169,7 +198,7 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/lessons-codex-sa.json" >> "$GITHUB_ENV"
 
       - name: Load current-repository Codex credentials
-        if: steps.guard.outputs.open_proposals == '0' && steps.harvest.outputs.has_novel == 'true'
+        if: steps.guard.outputs.open_proposals == '0' && steps.harvest.outputs.has_novel == 'true' && steps.guard.outputs.api_pat_loaded != 'true'
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 

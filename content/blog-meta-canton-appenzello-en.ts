@@ -24,6 +24,15 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.raiba-nuova-area-previdenza.title': 'New area in the Appenzeller Hinterland: two managers',
     'blog.article.raiba-nuova-area-previdenza.excerpt': 'Raiffeisenbank Appenzeller Hinterland brings together retirement planning, succession planning, coverage analysis and insurance.',
     'blog.article.raiba-nuova-area-previdenza.imageAlt': 'Bank office in the Appenzell landscape for pension services',
+    'blog.article.gais-alterszentrum-rotewies-rette-aumento.title': 'Rotenwies in Gais raises its residential and care fees',
+    'blog.article.gais-alterszentrum-rotewies-rette-aumento.excerpt': 'The Rotenwies senior center in Gais will increase its accommodation and care fees due to a financial deficit that has persisted for years and rising costs.',
+    'blog.article.gais-alterszentrum-rotewies-rette-aumento.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.teufen-budget-deficit-2027.title': 'Teufen: 2027 budget proposal to reduce the operating deficit',
+    'blog.article.teufen-budget-deficit-2027.excerpt': 'The Municipality of Teufen expects tax revenues of 38,9 million francs in 2027, an increase of 2,2% compared with the previous budget.',
+    'blog.article.teufen-budget-deficit-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.cambio-dirigenza-scuola-appenzell.title': 'Appenzell: Walzthöny is no longer head of the Oberstufe',
+    'blog.article.cambio-dirigenza-scuola-appenzell.excerpt': 'Isabella Walzthöny began at Schulgemeinde Appenzell on February 1, 2023, after being appointed as Thomas Mainberger’s successor.',
+    'blog.article.cambio-dirigenza-scuola-appenzell.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;

@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4087039": {
-    "articleId": "revolut-banca-svizzera-finma",
-    "ts": "2026-09-17T00:55:00.855Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/economia/economia/1950387/dietro-il-paradiso-del-trading-la-maledizione-delle-risorse": {
     "articleId": "paradiso-trading-risorse-naturali",
     "ts": "2026-09-17T01:04:23.219Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/bskoqvviyqjx": {
     "articleId": "lenu-referendum-firme-valide",
     "ts": "2026-10-19T12:13:26.628Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/siccit%c3%a0-e-inquinamento-minacciano-l%27acqua-potabile/92238972": {
+    "articleId": "water-summit-zurich-2024",
+    "ts": "2026-10-19T15:35:52.589Z",
     "keyForm": 2
   }
 }
