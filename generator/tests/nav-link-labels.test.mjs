@@ -78,6 +78,80 @@ const CONTENT_BASELINE = Object.freeze({
   en: Object.freeze({ blogBody: 1287, blogBodyCh: 2503 }),
 });
 
+const SIGLA_KEYS = new Set([
+  'avs', 'avs/ai/ipg', 'avs/lpp', 'dfe', 'lamal', 'lamal/cmi', 'lpp', 'seco',
+]);
+
+// Queste label non sono traduzioni mancanti: sono domini, nomi propri o slug
+// tecnici già nella lingua di arrivo. L'eccezione è per voce+lingua, con la
+// ragione esplicita, così una nuova identità non passa in silenzio.
+const PASSTHROUGH_IDENTITY_ALLOWLIST = Object.freeze({
+  'border': { locales: ['en'], reason: 'termine inglese canonico' },
+  'border map': { locales: ['en'], reason: 'label inglese canonica' },
+  'border-map': { locales: ['fr'], reason: 'slug tecnico' },
+  'brogeda': { locales: ['de', 'fr', 'en'], reason: 'nome proprio' },
+  'calculator': { locales: ['en'], reason: 'slug tecnico inglese' },
+  'car-cost': { locales: ['de', 'fr', 'en'], reason: 'slug tecnico' },
+  'cost-of-living': { locales: ['en'], reason: 'slug tecnico inglese' },
+  'dfe ticino': { locales: ['fr', 'en'], reason: 'sigla/nome ufficiale' },
+  'dss ticino': { locales: ['en'], reason: 'sigla/nome ufficiale' },
+  'frontaliereticino.ch': { locales: ['de', 'fr', 'en'], reason: 'dominio' },
+  'google maps': { locales: ['de', 'fr', 'en'], reason: 'nome del servizio' },
+  'health': { locales: ['de', 'fr', 'en'], reason: 'slug tecnico' },
+  'job board': { locales: ['fr', 'en'], reason: 'label inglese canonica' },
+  'jobs': { locales: ['de', 'en'], reason: 'slug tecnico inglese' },
+  'link': { locales: ['de', 'en'], reason: 'termine tecnico' },
+  'nav:calculator': { locales: ['de'], reason: 'slug tecnico completo' },
+  'nav:jobs': { locales: ['de', 'fr', 'en'], reason: 'slug tecnico completo' },
+  'payslip': { locales: ['fr', 'en'], reason: 'label inglese canonica' },
+  'pension': { locales: ['en'], reason: 'label inglese canonica' },
+  'permit-compare': { locales: ['de', 'en'], reason: 'slug tecnico inglese' },
+  'permits': { locales: ['en'], reason: 'slug tecnico inglese' },
+  'salary-compare': { locales: ['de', 'fr', 'en'], reason: 'slug tecnico inglese' },
+  'tax-return': { locales: ['fr', 'en'], reason: 'slug tecnico inglese' },
+  'ticino': { locales: ['en'], reason: 'nome proprio' },
+  'ticino traffic live': { locales: ['de', 'en'], reason: 'nome del servizio' },
+  'traffic history': { locales: ['en'], reason: 'label inglese canonica' },
+  'traffic-history': { locales: ['de', 'fr'], reason: 'slug tecnico' },
+  'transport': { locales: ['fr', 'en'], reason: 'termine francese/inglese canonico' },
+  'trenitalia.com': { locales: ['de', 'fr', 'en'], reason: 'dominio/nome proprio' },
+  'www.caseificiaperti.ch': { locales: ['de', 'en'], reason: 'dominio' },
+  'www.ch.ch': { locales: ['de', 'fr', 'en'], reason: 'dominio' },
+  'www.corrida.ch': { locales: ['de', 'fr', 'en'], reason: 'dominio' },
+  'www.giubiasco-carena.ch': { locales: ['de', 'fr', 'en'], reason: 'dominio' },
+  'www.giuliettaallago.it': { locales: ['de', 'fr', 'en'], reason: 'dominio' },
+  'www.lipupaludebrabbia.it': { locales: ['de', 'fr', 'en'], reason: 'dominio' },
+  'www.museivarese.it': { locales: ['de', 'fr', 'en'], reason: 'dominio' },
+  'www.schermalocarno.ch': { locales: ['de', 'fr', 'en'], reason: 'dominio' },
+  'www.seco.admin.ch': { locales: ['de', 'fr'], reason: 'dominio' },
+  'www.springgiubiasco.ch': { locales: ['de', 'fr', 'en'], reason: 'dominio' },
+  'www.suva.ch': { locales: ['de', 'fr'], reason: 'dominio' },
+  'www.ti.ch/lavoro': { locales: ['de', 'fr', 'en'], reason: 'URL ufficiale' },
+});
+
+test('la mappa mantiene sigle per lingua e non lascia identità non giustificate', () => {
+  const normalize = (value) => String(value).normalize('NFC').toLocaleLowerCase('it');
+  for (const [key, translations] of Object.entries(NAV_LINK_LABELS)) {
+    for (const [locale, value] of Object.entries(translations)) {
+      if (locale === 'en' || locale === 'fr') {
+        assert.doesNotMatch(value, /\b(?:KVG|AHV|BVG)\b/u, `${key} (${locale})`);
+      }
+      if (locale === 'de') {
+        assert.doesNotMatch(value, /\b(?:AVS|LPP|LAMal)\b/u, `${key} (${locale})`);
+      }
+
+      if (normalize(value) !== normalize(key)) continue;
+      if (SIGLA_KEYS.has(key)) continue;
+      const exception = PASSTHROUGH_IDENTITY_ALLOWLIST[key];
+      assert.ok(
+        exception?.locales.includes(locale),
+        `${key} (${locale}) è identica alla chiave senza eccezione esplicita`,
+      );
+      assert.ok(exception.reason, `${key} (${locale}) ha un'eccezione senza ragione`);
+    }
+  }
+});
+
 test('sostituisce una label italiana e lascia invariato il target completo', () => {
   const source = '[calcolatore stipendio netto](nav:calculator "target invariato")';
   assert.equal(
@@ -203,7 +277,7 @@ test('le sigle federali usano la forma ufficiale per lingua senza passare dalla 
     ['LAMal/KVG', { de: 'KVG', fr: 'LAMal', en: 'LAMal' }],
     ['AVS/AHV', { de: 'AHV', fr: 'AVS', en: 'AVS' }],
     ['AVS/AI/IPG', { de: 'AHV/IV/EO', fr: 'AVS/AI/APG', en: 'AVS/AI/IPG' }],
-    ['LAMal/CMI', { de: 'LAMal/CMI', fr: 'LAMal/CMI', en: 'LAMal/CMI' }],
+    ['LAMal/CMI', { de: 'KVG/CMI', fr: 'LAMal/CMI', en: 'LAMal/CMI' }],
     ['DFE', { de: 'DFE', fr: 'DFE', en: 'DFE' }],
     ['SECO', { de: 'SECO', fr: 'SECO', en: 'SECO' }],
   ];
