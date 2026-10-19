@@ -3615,8 +3615,8 @@ export function codexPromptEchoMarker(out, source) {
   return CODEX_PROMPT_ECHO_MARKERS.find((marker) => text.includes(marker) && !src.includes(marker)) ?? null;
 }
 
-const CODEX_MALFORMED_JSON_PREFIX_RE = /^\s*(?:\{\s*["}\]]|\[\s*["{\]])/u;
-const CODEX_JSON_FENCE_RE = /^```json[ \t]*\r?\n([\s\S]*?)\r?\n```$/iu;
+const CODEX_MALFORMED_JSON_PREFIX_RE = /^\s*(?:\{\s*[\x22}\]]|\[\s*[\x22{\]])/u;
+const CODEX_JSON_FENCE_RE = new RegExp('^```json[ \\t]*\\r?\\n([\\s\\S]*?)\\r?\\n```$', 'iu');
 
 /** Classify a plain-text Codex answer that is actually JSON-shaped output. */
 function codexJsonOutputKind(out) {
@@ -3644,10 +3644,12 @@ export async function translateWithCodexEngine({ text, sourceLang, targetLang, f
     return '';
   }
   // The local transport is normally plain text. JSON objects/arrays (including
-  // fenced JSON) are provider-output failures, not structural refusals; keep
-  // that distinction for the report and never retry them.
+  // fenced JSON) are provider-output failures when the source is plain text,
+  // not structural refusals; keep that distinction for the report and never
+  // retry them. A source that is itself structured JSON keeps that format.
   const jsonKind = codexJsonOutputKind(out);
-  if (jsonKind) {
+  const sourceJsonKind = codexJsonOutputKind(prepared.sourceClean);
+  if (jsonKind && sourceJsonKind !== 'structured') {
     noteTranslationProviderReason(_outcome, 'codex', 'invalid-output');
     noteTranslationOutcome(_outcome, 'incomplete');
     return '';
@@ -3669,7 +3671,11 @@ export async function translateWithCodexEngine({ text, sourceLang, targetLang, f
   // processo `codex exec`, e una riga per processo non e' un costo che questo
   // percorso puo' pagare. Il campo e' un MISS contato; la bonifica salta
   // l'articolo e la seconda corsia lo lascia al giro successivo.
-  if (!hasSameLineStructure(prepared.clean, out)) {
+  // Per una sorgente JSON strutturata il confronto Markdown vedrebbe l'oggetto
+  // come un placeholder opaco: la validazione JSON sopra e' il contratto
+  // corretto per quel formato, non la guardia delle righe di prosa.
+  const structuredJsonSource = sourceJsonKind === 'structured' && jsonKind === 'structured';
+  if (!structuredJsonSource && !hasSameLineStructure(prepared.clean, out)) {
     noteTierStructureFailure('codex-engine', 'directPathRejected', _outcome);
     noteTranslationOutcome(_outcome, 'incomplete');
     return '';

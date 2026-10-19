@@ -366,6 +366,28 @@ test('translateWithCodexEngine rifiuta JSON strutturato ma conserva le graffe de
   });
   assert.equal(out, answer);
   assert.equal(outcome._tierReasons, undefined);
+
+  const proseOutcome = {};
+  const prose = await translateWithCodexEngine({
+    text: 'Una frase di partenza.',
+    sourceLang: 'it',
+    targetLang: 'de',
+    call: async () => '{Eine normale Antwort',
+    _outcome: proseOutcome,
+  });
+  assert.equal(prose, '{Eine normale Antwort');
+  assert.equal(proseOutcome._tierReasons, undefined);
+
+  const jsonSourceOutcome = {};
+  const jsonSource = await translateWithCodexEngine({
+    text: '{"translation":"Ciao"}',
+    sourceLang: 'it',
+    targetLang: 'de',
+    call: async () => '{"translation":"Hallo"}',
+    _outcome: jsonSourceOutcome,
+  });
+  assert.equal(jsonSource, '{"translation":"Hallo"}');
+  assert.equal(jsonSourceOutcome._tierReasons, undefined);
 });
 
 // ── il campo articolo ────────────────────────────────────────────────────────
