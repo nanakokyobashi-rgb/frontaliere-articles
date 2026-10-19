@@ -1599,6 +1599,17 @@ test('FU-011 mantiene gli offset nella proiezione visibile di markup annidato', 
   })[0]?.missing, ['Como']);
 });
 
+test('FU-011 URL grezzi con schema maiuscolo restano esclusi dalla proiezione degli indirizzi', () => {
+  const url = 'HTTPS://example.org/?cap=22100,Como';
+  const projection = visibleAddressOffsetMap(`Viale Stazione, ${url}`);
+  assert.equal(projection.text, 'Viale Stazione, ');
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: '22100 Como' },
+    newSections: { body1: `Viale Stazione, ${url}` },
+    locale: 'en',
+  })[0]?.missing, ['Como']);
+});
+
 test('FU-011 non espone destinazioni in link Markdown annidati oltre il limite storico', () => {
   let value = '[Como](/en/22100-como)';
   for (let index = 0; index < 13; index += 1) {
@@ -1720,6 +1731,18 @@ test('la guardia rifiuta località scambiate fra righe con lo stesso CAP', () =>
   assert.deepEqual(mismatches.map(({ line, missing }) => ({ line, missing })), [
     { line: 1, missing: ['Como'] },
     { line: 2, missing: ['Lecco'] },
+  ]);
+});
+
+test('la guardia non usa il fallback ordinale se la riga target aggiunge un indirizzo con un altro CAP', () => {
+  const mismatches = findAddressToponymMismatches({
+    italianSections: { body1: '22100 Como, 22100 Lecco' },
+    newSections: { body1: '22100 Varese, 22100 Bellinzona, 6500 Lugano' },
+    locale: 'en',
+  });
+  assert.deepEqual(mismatches.map(({ postalCode, missing }) => ({ postalCode, missing })), [
+    { postalCode: '22100', missing: ['Como'] },
+    { postalCode: '22100', missing: ['Lecco'] },
   ]);
 });
 

@@ -1061,9 +1061,10 @@ export function visibleAddressOffsetMap(value) {
   };
 
   const urlEndAt = (start, limit) => {
-    const hasUrlPrefix = source.startsWith('https://', start)
-      || source.startsWith('http://', start)
-      || source.startsWith('www.', start);
+    const urlPrefix = source.slice(start, start + 8).toLowerCase();
+    const hasUrlPrefix = urlPrefix.startsWith('https://')
+      || urlPrefix.startsWith('http://')
+      || urlPrefix.startsWith('www.');
     const isRoute = source[start] === '/'
       && /[a-z0-9]/iu.test(source[start + 1] || '')
       && (start === 0 || !/[\p{L}\p{N}@]/u.test(source[start - 1]));
@@ -1458,7 +1459,7 @@ function addressPostalMatchFollowsAddressSegment(line, postalMatches, postalMatc
 }
 
 function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
-  const allCandidates = [];
+  const allAddressCandidates = [];
   const candidates = [];
   let opaque = false;
   const expectedLocalityTerms = addressLocalityFormsForSourceLine(sourceLine, locale);
@@ -1472,7 +1473,6 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
     const line = projection.text;
     const postalMatches = addressPostalMatches(projection);
     for (const postalMatch of postalMatches) {
-      if (postalMatch[0] !== sourceLine.postalCode) continue;
       const followsAddressSegment = addressPostalMatchFollowsAddressSegment(
         line,
         postalMatches,
@@ -1499,7 +1499,8 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
         ].filter(Boolean).join(' '),
         context: addressContextForPostalCode(line, postalMatch),
       };
-      allCandidates.push(candidate);
+      allAddressCandidates.push(candidate);
+      if (postalMatch[0] !== sourceLine.postalCode) continue;
       if (!usedTargetMatches.has(matchKey)) candidates.push(candidate);
     }
   });
@@ -1518,11 +1519,11 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
   const ordinalMatches = candidates.filter((candidate) =>
     candidate.postalMatchIndex === sourceLine.postalMatchIndex);
   const targetHasCompleteOrdinalSet = sourceLine.postalMatchCount > 1
-    && allCandidates.length === sourceLine.postalMatchCount
-    && new Set(allCandidates.map((candidate) => candidate.postalMatchIndex)).size
+    && allAddressCandidates.length === sourceLine.postalMatchCount
+    && new Set(allAddressCandidates.map((candidate) => candidate.postalMatchIndex)).size
       === sourceLine.postalMatchCount
     && Array.from({ length: sourceLine.postalMatchCount }, (_, ordinal) => ordinal)
-      .every((ordinal) => allCandidates.some((candidate) =>
+      .every((ordinal) => allAddressCandidates.some((candidate) =>
         candidate.postalMatchIndex === ordinal));
   let selected = null;
   if (contextMatches.length === 1) {
