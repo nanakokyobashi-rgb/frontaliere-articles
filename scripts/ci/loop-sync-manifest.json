@@ -6249,6 +6249,16 @@
       }
     },
     {
+      "path": "scripts/ci/resolve-workflow-run-push-range.mjs",
+      "mode": "corpus-only",
+      "reason": "Risolutore fail-closed della provenienza delle push per i replay workflow_run di fast-publish-section: usa gli eventi della repository o la cronologia di publish-api quando il push del bot non compare nel feed pubblico. Il sito non esegue questo coordinamento del publisher.",
+      "baseline": {
+        "site": null,
+        "corpus": "7a107b4278b5873f",
+        "alignedAt": "2026-10-19"
+      }
+    },
+    {
       "path": "scripts/ci/guard-main-tree-shrink.mjs",
       "mode": "identical",
       "baseline": {
