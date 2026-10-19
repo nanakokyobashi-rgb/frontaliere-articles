@@ -45,6 +45,8 @@ import {
   shouldWrite,
   translationSanityIssue,
   findAddressToponymMismatches,
+  addressPostalLocalityWords,
+  visibleAddressOffsetMap,
   LENGTH_FLOOR,
   replaceBodyField,
   insertBodyField,
@@ -1264,6 +1266,14 @@ test('la guardia associa località accorpate in righe anche se sono riordinate',
   }
 });
 
+test('la guardia associa per toponimo i CAP multipli riordinati sulla stessa riga', () => {
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: '22100 Como, 20100 Varese' },
+    newSections: { body1: '20100 Varese, 22100 Como' },
+    locale: 'en',
+  }), []);
+});
+
 test('la guardia riconosce gli indirizzi con trattino o due punti prima del CAP', () => {
   for (const italianAddress of [
     'Via Roma 10 - 22100 Como',
@@ -1515,6 +1525,166 @@ test('la guardia classifica il testo visibile nei link e nei tag HTML prima di v
   }
 });
 
+test('FU-004 conserva l occorrenza CAP nella riga con delimitatori misti', () => {
+  const source = '22100 Varese, 22100 San Giorgio a Liri; 22100 Como';
+  const target = '22100 Varese, 22100 San Giorgio a Wie; 22100 Como';
+  const mismatches = findAddressToponymMismatches({
+    italianSections: { body1: source },
+    newSections: { body1: target },
+    locale: 'en',
+  });
+  assert.deepEqual(mismatches.map(({ postalCode, missing }) => ({ postalCode, missing })), [
+    { postalCode: '22100', missing: ['Liri'] },
+  ]);
+});
+
+test('FU-004 lascia associare una riga sorgente spezzata in target distinti', () => {
+  const mismatches = findAddressToponymMismatches({
+    italianSections: { body1: '22100 Como, 22100 Varese' },
+    newSections: { body1: '22100 Wie\n22100 Varese' },
+    locale: 'en',
+  });
+  assert.deepEqual(mismatches.map(({ postalCode, missing }) => ({ postalCode, missing })), [
+    { postalCode: '22100', missing: ['Como'] },
+  ]);
+});
+
+test('FU-004 rifiuta un CAP-address aggiuntivo sulla riga target anche con toponimo valido', () => {
+  const mismatches = findAddressToponymMismatches({
+    italianSections: { body1: 'Via Roma 1, 22100 Como' },
+    newSections: { body1: 'Rue Roma 1, 22100 Como, 69000 Lyon' },
+    locale: 'en',
+  });
+  assert.deepEqual(mismatches.map(({ postalCode, missing }) => ({ postalCode, missing })), [
+    { postalCode: '22100', missing: ['Como'] },
+  ]);
+});
+
+test('FU-008 riconosce le particelle minuscole nelle località composte', () => {
+  assert.deepEqual(addressPostalLocalityWords('San Giorgio a Liri'), [
+    'San', 'Giorgio', 'a', 'Liri',
+  ]);
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: '22100 Varese, 22100 San Giorgio a Liri' },
+    newSections: { body1: '22100 Varese, 22100 San Giorgio a Wie' },
+    locale: 'en',
+  })[0]?.missing, ['Liri']);
+});
+
+test('FU-008 conserva le particelle tedesche della grammatica precedente', () => {
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: '22100 Varese, 22100 Neustadt an der Weinstraße' },
+    newSections: { body1: '22100 Varese, 22100 Neustadt an der Wie' },
+    locale: 'en',
+  })[0]?.missing, ['Weinstraße']);
+});
+
+test('FU-008 riconosce il connettore tedesco vor nelle località composte', () => {
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: '22100 Varese, 22100 Bad Homburg vor der Höhe' },
+    newSections: { body1: '22100 Varese, 22100 Bad Homburg vor der Wie' },
+    locale: 'en',
+  })[0]?.missing, ['Höhe']);
+});
+
+test('FU-008 conserva le particelle francesi della grammatica precedente', () => {
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: '22100 Varese, 22100 Saint Pierre des Champs' },
+    newSections: { body1: '22100 Varese, 22100 Saint Pierre des Wie' },
+    locale: 'en',
+  })[0]?.missing, ['Champs']);
+});
+
+test('FU-011 mantiene gli offset nella proiezione visibile di markup annidato', () => {
+  const raw = 'Via Roma 1, 22100 [Como [centro]](/en/como) <a href="/como">Cap</a>';
+  const projection = visibleAddressOffsetMap(raw);
+  assert.equal(projection.text, 'Via Roma 1, 22100 Como [centro] Cap');
+  const postalOffset = projection.text.indexOf('22100');
+  assert.equal(raw.slice(projection.sourceOffsets[postalOffset], projection.sourceOffsets[postalOffset] + 5), '22100');
+  const comoOffset = projection.text.indexOf('Como');
+  assert.equal(raw[projection.sourceOffsets[comoOffset]], 'C');
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: 'Via Roma 1, 22100 [Como [centro]](/en/como)' },
+    newSections: { body1: 'Rue Roma 1, 22100 [Wie [centre]](/en/como)' },
+    locale: 'en',
+  })[0]?.missing, ['Como']);
+});
+
+test('FU-011 URL grezzi con schema maiuscolo restano esclusi dalla proiezione degli indirizzi', () => {
+  const url = 'HTTPS://example.org/?cap=22100,Como';
+  const projection = visibleAddressOffsetMap(`Viale Stazione, ${url}`);
+  assert.equal(projection.text, 'Viale Stazione, ');
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: { body1: '22100 Como' },
+    newSections: { body1: `Viale Stazione, ${url}` },
+    locale: 'en',
+  })[0]?.missing, ['Como']);
+});
+
+test('FU-011 una parentesi nel titolo quotato Markdown resta metadata', () => {
+  const rawLink = '[dettagli](https://example.test "nota) CAP 22100 Como")';
+  const projection = visibleAddressOffsetMap(rawLink);
+  assert.equal(projection.text, 'dettagli');
+  assert.equal(projection.opaque, false);
+
+  const mismatches = findAddressToponymMismatches({
+    italianSections: { body1: 'Via Roma 1, 22100 Como' },
+    newSections: {
+      body1: 'Rue Roma 1, 22100 Wie [dettagli](https://example.test "nota) CAP 22100 Como")',
+    },
+    locale: 'en',
+  });
+  assert.deepEqual(mismatches[0]?.missing, ['Como']);
+});
+
+test('FU-011 non espone destinazioni in link Markdown annidati oltre il limite storico', () => {
+  let value = '[Como](/en/22100-como)';
+  for (let index = 0; index < 13; index += 1) {
+    value = `[${value}](/en/opaque-${index}-22100)`;
+  }
+  const projection = visibleAddressOffsetMap(value);
+  assert.equal(projection.text, 'Como');
+  assert.doesNotMatch(projection.text, /22100/u);
+});
+
+test('FU-011 limita i look-ahead delle destinazioni Markdown non chiuse', () => {
+  const raw = '[x]('.repeat(4096);
+  const projection = visibleAddressOffsetMap(raw);
+  assert.equal(projection.text, 'x');
+  assert.equal(projection.opaque, true);
+});
+
+test('FU-011 fallisce chiuso su un apertura HTML malformata con quota aperta', () => {
+  const projection = visibleAddressOffsetMap('<span title="broken > 22100 Como <em>Wie</em>');
+  assert.equal(projection.text, '');
+});
+
+test('FU-011 non espone metadata validi oltre i limiti di proiezione', () => {
+  const longDestination = `/${'a'.repeat(2048)}-Como`;
+  const longTag = `<span data-label="${'a'.repeat(600)}Como">Wie</span>`;
+  for (const target of [
+    `Rue Roma 1, 22100 Wie [label](${longDestination})`,
+    `Rue Roma 1, 22100 Wie ${longTag}`,
+  ]) {
+    const mismatches = findAddressToponymMismatches({
+      italianSections: { body1: 'Via Roma 1, 22100 Como' },
+      newSections: { body1: target },
+      locale: 'en',
+    });
+    assert.deepEqual(mismatches[0]?.missing, ['indirizzo non verificabile'], target.slice(0, 80));
+  }
+});
+
+test('FU-011 rifiuta una sorgente con CAP dopo metadata opachi', () => {
+  const source = `[label](${'a'.repeat(2048)}-x) Via Roma 1, 22100 Como`;
+  const mismatches = findAddressToponymMismatches({
+    italianSections: { body1: source },
+    newSections: { body1: 'Rue Roma 1, 22100 Wie' },
+    locale: 'en',
+  });
+  assert.deepEqual(mismatches[0]?.missing, ['indirizzo non verificabile']);
+});
+
 test('la guardia non conta i toponimi nelle destinazioni dei link', () => {
   const mismatches = findAddressToponymMismatches({
     italianSections: {
@@ -1569,6 +1739,24 @@ test('la guardia disambigua due righe con lo stesso CAP dopo il riordino', () =>
   }), []);
 });
 
+test('la guardia non tratta il CAP della riga sorgente vicina come CAP surplus', () => {
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: {
+      body1: [
+        'Via Roma 1, 22100 Como',
+        'Via Milano 2, 20100 Varese',
+      ].join('\n'),
+    },
+    newSections: {
+      body1: [
+        'Rue Roma 1, 22100 Como',
+        'Rue Milano 2, 20100 Varese',
+      ].join('\n'),
+    },
+    locale: 'en',
+  }), []);
+});
+
 test('la guardia rifiuta località scambiate fra righe con lo stesso CAP', () => {
   const mismatches = findAddressToponymMismatches({
     italianSections: {
@@ -1589,6 +1777,34 @@ test('la guardia rifiuta località scambiate fra righe con lo stesso CAP', () =>
     { line: 1, missing: ['Como'] },
     { line: 2, missing: ['Lecco'] },
   ]);
+});
+
+test('la guardia non usa il fallback ordinale se la riga target aggiunge un indirizzo con un altro CAP', () => {
+  const mismatches = findAddressToponymMismatches({
+    italianSections: { body1: '22100 Como, 22100 Lecco' },
+    newSections: { body1: '22100 Varese, 22100 Bellinzona, 6500 Lugano' },
+    locale: 'en',
+  });
+  assert.deepEqual(mismatches.map(({ postalCode, missing }) => ({ postalCode, missing })), [
+    { postalCode: '22100', missing: ['Como'] },
+    { postalCode: '22100', missing: ['Lecco'] },
+  ]);
+});
+
+test('la guardia non abbina per ordinale CAP ambigui distribuiti su righe diverse', () => {
+  const mismatches = findAddressToponymMismatches({
+    italianSections: { body1: '22100 Como, 22100 Como' },
+    newSections: {
+      body1: [
+        '22100 Como',
+        'nota 99999, Via Roma 2, 22100 Como',
+      ].join('\n'),
+    },
+    locale: 'en',
+  });
+
+  assert.equal(mismatches.length, 2);
+  assert.deepEqual(mismatches.map(({ missing }) => missing), [['Como'], ['Como']]);
 });
 
 test('stratify copre piu codici invece di prendere i primi N dello stesso', () => {
