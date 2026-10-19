@@ -6268,6 +6268,16 @@
       }
     },
     {
+      "path": "scripts/lib/nav-link-labels.mjs",
+      "mode": "corpus-only",
+      "reason": "Mappa statica delle label nav canoniche, derivata dai body del corpus e usata dal writer e dalla guardia delle traduzioni. Il sito consuma i body via JSON HTTP e non esegue questo osservatore né legge il corpus a runtime.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-19"
+      }
+    },
+    {
       "path": "generator/scripts/lib/first-name-recognition.mjs",
       "sitePath": "scripts/lib/first-name-recognition.mjs",
       "mode": "identical",
