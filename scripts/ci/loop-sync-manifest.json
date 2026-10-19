@@ -794,7 +794,7 @@
       "reason": "Valida la prova producer-owned che i workflow generatori richiedono prima di dichiarare un differimento del pool AI condiviso. Il generatore e le sue run card vivono solo nel corpus; il sito consuma gli articoli pubblicati via HTTP e non produce queste card.",
       "baseline": {
         "site": null,
-        "corpus": "103c32de11a05657",
+        "corpus": "7b7be1d1549373dc",
         "alignedAt": "2026-10-19"
       }
     },
