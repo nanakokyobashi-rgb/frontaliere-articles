@@ -843,6 +843,7 @@ jobs:
               # Il wrapper ritenta i blip npm/R2. Se il publish fallisce dopo
               # quei tentativi, il summary distingue una staging riuscita che
               # attende il flip API/edge da un errore reale.
+              rm -f "$RUNNER_TEMP/section-summary.json"
               if RETRY_CMD_ATTEMPTS=2 bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"; then
                 exit 0
               fi

@@ -1636,6 +1636,7 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(sectionLiveLoop, /if \[ -f \.github\/FAST_PUBLISH_DISABLED \]/u);
   assert.match(sectionLiveLoop, /build_publish_args "\$attempt_dry"/u);
   assert.match(sectionLiveLoop, /bash scripts\/lib\/npm-ci-retry\.sh/u);
+  assert.match(sectionLiveLoop, /rm -f "\$RUNNER_TEMP\/section-summary\.json"/u);
   assert.match(sectionLiveLoop, /if RETRY_CMD_ATTEMPTS=2 bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/u);
   assert.match(sectionLiveLoop, /deferredLiveRelease == true and \.published\.deferredReason != null/u);
   assert.match(sectionPublisher, /deferred_replay_deadline_ms=\$\(\( \$\(date \+%s%3N\) \+ 30 \* 60 \* 1000 \)\)/u);
