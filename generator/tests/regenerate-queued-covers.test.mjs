@@ -463,6 +463,48 @@ test('ricostruisce ImageObject, diritti e imageAlt quando cambia la copertina', 
   }
 });
 
+test('il drain conserva l’alt editoriale quando riusa una foto licenziata', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'licensed-photo-cover-reuse';
+    const imageUrl = `/images/blog/${articleImageAssetId(articleId)}.webp`;
+    const record = licensedRecord(articleId, imageUrl);
+    const bytes = Buffer.alloc(record.bytes, 97);
+    record.sha256 = crypto.createHash('sha256').update(bytes).digest('hex');
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, imageUrl));
+    fixture(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+    write(root, `public${imageUrl}`, bytes);
+    write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
+    const photoAlt = {
+      it: 'Fotografia documentaria dell’ufficio del lavoro a Zurigo',
+      en: 'Documentary photograph of the employment office in Zurich',
+      de: 'Dokumentarisches Foto des Arbeitsamts in Zürich',
+      fr: 'Photographie documentaire de l’office du travail à Zurich',
+    };
+    for (const [locale, value] of Object.entries(photoAlt)) {
+      write(root, `content/blog-meta-${locale}.ts`, `const META = {\n  'blog.article.${articleId}.imageAlt': '${value}',\n};\n`);
+    }
+
+    const summary = await drain({
+      root,
+      limit: 1,
+      generateThumbnail: fakeThumbnail,
+    });
+
+    assert.equal(summary.drained, 1);
+    assert.equal(summary.reused, 1);
+    const seo = fs.readFileSync(path.join(root, 'content/seo/seo-blog-5.ts'), 'utf8');
+    assert.match(seo, new RegExp(`"caption": "${photoAlt.it}"`));
+    for (const [locale, value] of Object.entries(photoAlt)) {
+      const meta = fs.readFileSync(path.join(root, `content/blog-meta-${locale}.ts`), 'utf8');
+      assert.match(meta, new RegExp(`imageAlt': '${value}'`));
+      assert.doesNotMatch(meta, new RegExp(GENERATED_COVER_ALT_BY_LOCALE[locale]));
+    }
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('ancora il blocco ImageObject alla proprietà reale anche se il testo contiene "image"', async () => {
   const root = tempRoot();
   try {

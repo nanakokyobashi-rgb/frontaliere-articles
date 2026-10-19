@@ -20,6 +20,7 @@ import { appendGeneratedImageRecord, sha256File } from './blog-image-registry.mj
 import { articleHeroImagePath, articleImageAssetId } from './article-cover-identity.mjs';
 import { LICENSED_PHOTO_KIND } from '../../../engine/shared/generatedImageRegistry.mjs';
 import { imageCreditRecordFromGeneratedImageRecord } from '../../../engine/shared/imageCredits.mjs';
+import { GENERATED_COVER_ALT_BY_LOCALE } from './generated-cover-alt.mjs';
 
 const WIDTH = BLOG_IMAGE_WIDTH;
 const HEIGHT = BLOG_IMAGE_HEIGHT;
@@ -297,6 +298,13 @@ export function buildDailyBriefCoverAlt(headline, { photograph = false } = {}) {
   };
 }
 
+/** Select the daily cover alt from its final governed image provenance. */
+export function dailyBriefCoverAltForRecord(headline, record) {
+  if (record?.kind === 'generated') return { ...GENERATED_COVER_ALT_BY_LOCALE };
+  if (!headline?.kind) return null;
+  return buildDailyBriefCoverAlt(headline, { photograph: record?.kind === LICENSED_PHOTO_KIND });
+}
+
 /**
  * Materialize a fresh governed daily hero and its 480px thumbnail, then append
  * the provider/license record. No existing article-id record is a
@@ -357,11 +365,8 @@ export async function materializeDailyBriefHero({
     data._imageCredit = record.kind === LICENSED_PHOTO_KIND
       ? imageCreditRecordFromGeneratedImageRecord(record)
       : null;
-    if (data._headline?.kind) {
-      data.imageAlt = buildDailyBriefCoverAlt(data._headline, {
-        photograph: record.kind === LICENSED_PHOTO_KIND,
-      });
-    }
+    const imageAlt = dailyBriefCoverAltForRecord(data._headline, record);
+    if (imageAlt) data.imageAlt = imageAlt;
     data.image = path.basename(imageUrl);
     return {
       record,

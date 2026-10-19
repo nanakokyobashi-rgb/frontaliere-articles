@@ -201,7 +201,9 @@ export function buildSeoEntry(data, {
   const imagePath = data._generatedImagePath.replace(/^\//, '');
   const canonicalPath = `/${hubSlug}/${data.slugs.it}/`;
   const headline = data.seo.headline || data.seo.title;
-  const caption = data.imageAlt?.it || headline;
+  const caption = provenance?.kind === 'generated'
+    ? GENERATED_COVER_ALT_BY_LOCALE.it
+    : data.imageAlt?.it || headline;
   const imageBlock = buildSeoImageBlock({
     imagePath,
     provenance,
