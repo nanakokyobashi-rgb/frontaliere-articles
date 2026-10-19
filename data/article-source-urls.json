@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/mercato-dei-pacchi%2c-l%27offensiva-cinese%3a-speedaf-sbarca-in-svizzera/92044340": {
-    "articleId": "speedaf-in-svizzera-50-000-pacchi-al-giorno",
-    "ts": "2026-09-13T01:04:04.794Z",
-    "keyForm": 2
-  },
   "https://www.varesenoi.it/2026/09/11/leggi-notizia/argomenti/economia-13/articolo/teleriscaldamento-di-varese-prenotazioni-aperte-per-visitare-la-centrale.html": {
     "articleId": "teleriscaldamento-varese-porte-aperte",
     "ts": "2026-09-13T01:12:31.119Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/la-diffida-i-gps-e-lo-schianto-a-cassano-magnago-a-140-allora-gli-accertamenti-sulla-morte-di-pierina-buffon/2711917": {
     "articleId": "indagini-morte-pierina-buffon",
     "ts": "2026-10-19T05:57:45.423Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/a-cunardo-la-quinta-sagra-della-zucca-e-della-castagna-tre-giorni-alla-baita-del-fondista/2711941": {
+    "articleId": "sagra-zucca-castagna-cunardo",
+    "ts": "2026-10-19T07:18:03.424Z",
     "keyForm": 2
   }
 }
