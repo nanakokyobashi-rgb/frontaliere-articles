@@ -16,10 +16,41 @@ function foldedEventPart(value) {
   return foldForMatch(typeof value === 'string' ? value : '').replace(/[^a-z0-9]+/g, ' ').trim();
 }
 
-/** Applica alle URL evento la stessa canonicalizzazione verificata per le fonti. */
-function canonicalEventUrl(value) {
+/** URL HTTPS evento senza userinfo, adatta all'identità o alla pubblicazione. */
+function safeEventUrl(value) {
   const safeUrl = httpsUrlOrNull(value);
-  return safeUrl ? sourceUrlCanonicalKey(safeUrl) : '';
+  if (!safeUrl) return '';
+  try {
+    const parsed = new URL(safeUrl);
+    return parsed.username || parsed.password ? '' : safeUrl;
+  } catch {
+    return '';
+  }
+}
+
+/** Canonicalizza le URL evento solo per l'identità e la deduplica. */
+function canonicalEventUrl(value) {
+  const safeUrl = safeEventUrl(value);
+  if (!safeUrl) return '';
+  const canonical = sourceUrlCanonicalKey(safeUrl);
+  if (canonical) return canonical;
+  try {
+    const fallback = new URL(safeUrl);
+    fallback.hash = '';
+    return fallback.toString();
+  } catch {
+    return '';
+  }
+}
+
+function eventUrlFragment(value) {
+  const safeUrl = safeEventUrl(value);
+  if (!safeUrl) return '';
+  try {
+    return new URL(safeUrl).hash;
+  } catch {
+    return '';
+  }
 }
 
 function eventIdIdentity(value) {
@@ -28,17 +59,158 @@ function eventIdIdentity(value) {
   return '';
 }
 
-function compareEventSourceIndex(a, b) {
-  return a[EVENT_SOURCE_INDEX] - b[EVENT_SOURCE_INDEX];
+function eventSourceIndex(value) {
+  const index = value?.[EVENT_SOURCE_INDEX];
+  return Number.isInteger(index) && index >= 0 ? index : Number.MAX_SAFE_INTEGER;
 }
 
-/** URL o luogo identificano la copia; ID e indice separano gli omonimi senza luogo. */
-function eventIdentityKey(e) {
-  const url = canonicalEventUrl(e.url);
-  const place = foldedEventPart(e.comune) || foldedEventPart(e.venue);
-  const id = eventIdIdentity(e.id);
-  const identity = url ? `url:${url}` : place ? `place:${place}` : id ? `id:${id}` : `record:${e[EVENT_SOURCE_INDEX]}`;
-  return JSON.stringify([e.firstUsefulDay, foldedEventPart(e.title), identity]);
+function compareEventSourceIndex(a, b) {
+  return eventSourceIndex(a) - eventSourceIndex(b);
+}
+
+function compareUpcomingEvents(a, b) {
+  return a.firstUsefulDay.localeCompare(b.firstUsefulDay)
+    || b.startDate.localeCompare(a.startDate)
+    || String(a.startTime ?? '').localeCompare(String(b.startTime ?? ''))
+    || a.title.localeCompare(b.title)
+    || String(a.id ?? '').localeCompare(String(b.id ?? ''))
+    || compareEventSourceIndex(a, b);
+}
+
+function eventSemanticKey(event) {
+  return JSON.stringify([event.firstUsefulDay, foldedEventPart(event.title)]);
+}
+
+function eventPlaceKey(event) {
+  return foldedEventPart(event.comune) || foldedEventPart(event.venue);
+}
+
+function eventStartTime(event) {
+  if (typeof event.startTime !== 'string') return '';
+  const value = event.startTime.trim();
+  return /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(value) ? value : '';
+}
+
+function coherentRootStartTime(members, events) {
+  if (!members?.length) return '';
+  const times = members.map((index) => eventStartTime(events[index]));
+  if (times.some((time) => !time)) return '';
+  const [time] = times;
+  return times.every((candidate) => candidate === time) ? time : '';
+}
+
+function deduplicateEvents(events) {
+  const parent = events.map((_, index) => index);
+  const find = (index) => {
+    let root = index;
+    while (parent[root] !== root) root = parent[root];
+    while (parent[index] !== index) {
+      const next = parent[index];
+      parent[index] = root;
+      index = next;
+    }
+    return root;
+  };
+  const union = (left, right) => {
+    const leftRoot = find(left);
+    const rightRoot = find(right);
+    if (leftRoot === rightRoot) return leftRoot;
+    const root = Math.min(leftRoot, rightRoot);
+    parent[Math.max(leftRoot, rightRoot)] = root;
+    return root;
+  };
+  const directOwners = new Map();
+
+  events.forEach((event, index) => {
+    const semantic = eventSemanticKey(event);
+    const url = canonicalEventUrl(event.url);
+    const id = eventIdIdentity(event.id);
+    const aliases = [url && ['url', url], id && ['id', id]].filter(Boolean);
+    for (const [kind, value] of aliases) {
+      const key = JSON.stringify([semantic, kind, value]);
+      if (directOwners.has(key)) union(index, directOwners.get(key));
+      else directOwners.set(key, index);
+    }
+  });
+
+  const identityMembersByRoot = new Map();
+  events.forEach((_, index) => {
+    const root = find(index);
+    if (!identityMembersByRoot.has(root)) identityMembersByRoot.set(root, []);
+    identityMembersByRoot.get(root).push(index);
+  });
+  const identityRootTimes = new Map([...identityMembersByRoot].map(([root, members]) => [
+    root,
+    coherentRootStartTime(members, events),
+  ]));
+
+  const groups = new Map();
+  events.forEach((event, index) => {
+    const place = eventPlaceKey(event);
+    if (!place) return;
+    const key = JSON.stringify([eventSemanticKey(event), place]);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(index);
+  });
+
+  for (const indexes of groups.values()) {
+    const roots = [...new Set(indexes.map(find))];
+    const membersByRoot = new Map();
+    for (const index of indexes) {
+      const root = find(index);
+      if (!membersByRoot.has(root)) membersByRoot.set(root, []);
+      membersByRoot.get(root).push(index);
+    }
+    const anchored = roots.filter((root) => membersByRoot.get(root).some((index) =>
+      canonicalEventUrl(events[index].url) || eventIdIdentity(events[index].id)));
+    const fallback = roots.filter((root) => !anchored.includes(root));
+    if (fallback.length === 0) continue;
+
+    for (const root of fallback) {
+      const fallbackTime = identityRootTimes.get(root) || '';
+      if (!fallbackTime) continue;
+      const compatibleAnchors = anchored.filter((anchorRoot) =>
+        identityRootTimes.get(anchorRoot) === fallbackTime);
+      if (compatibleAnchors.length === 1) {
+        union(root, compatibleAnchors[0]);
+      }
+    }
+  }
+
+  const firstIndexByRoot = new Map();
+  const preferredIndexByRoot = new Map();
+  const preference = (event) => canonicalEventUrl(event.url) ? 0
+    : eventIdIdentity(event.id) ? 1
+      : eventPlaceKey(event) ? 2 : 3;
+  const shouldPrefer = (event, preferred) => {
+    const eventPreference = preference(event);
+    const preferredPreference = preference(preferred);
+    if (eventPreference !== preferredPreference) return eventPreference < preferredPreference;
+
+    // ID aliases can connect different canonical URLs for one event. Keep a
+    // deep link from any URL in that identity group, with source order as the
+    // deterministic tie-break when both have (or both lack) a fragment.
+    const eventHasFragment = Boolean(eventUrlFragment(event.url));
+    const preferredHasFragment = Boolean(eventUrlFragment(preferred.url));
+    if (eventHasFragment !== preferredHasFragment) return eventHasFragment;
+    return eventSourceIndex(event) < eventSourceIndex(preferred);
+  };
+  events.forEach((event, index) => {
+    const root = find(index);
+    if (!firstIndexByRoot.has(root)) {
+      firstIndexByRoot.set(root, index);
+      preferredIndexByRoot.set(root, index);
+      return;
+    }
+    const preferred = preferredIndexByRoot.get(root);
+    if (shouldPrefer(event, events[preferred])) {
+      preferredIndexByRoot.set(root, index);
+    }
+  });
+  return events.flatMap((_, index) => {
+    const root = find(index);
+    return firstIndexByRoot.get(root) === index ? [events[preferredIndexByRoot.get(root)]] : [];
+  }).sort(compareUpcomingEvents);
 }
 
 const TXT = {
@@ -91,8 +263,7 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
   const today = isoDayOf(nowMs);
   // Estremo ESCLUSO: `windowDays` giorni di calendario, oggi compreso.
   const until = isoDayOf(nowMs + th.windowDays * DAY_MS);
-  const seen = new Set();
-  const upcoming = dataset.events
+  const upcomingCandidates = dataset.events
     .map((e, sourceIndex) => isObj(e) ? { ...e, [EVENT_SOURCE_INDEX]: sourceIndex } : e)
     .filter((e) => isObj(e) && inGroup(members, e.canton))
     .filter((e) => typeof e.title === 'string' && e.title.trim() && isRealDay(e.startDate))
@@ -104,21 +275,10 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
     .filter((e) => e.startDate >= today || (Date.parse(e.lastDay) - Date.parse(e.startDate)) / DAY_MS <= th.maxSpanDays)
     // Ordinati per il primo giorno utile (oggi, per quelli gia' in corso).
     .map((e) => ({ ...e, firstUsefulDay: e.startDate < today ? today : e.startDate }))
-    .sort((a, b) => a.firstUsefulDay.localeCompare(b.firstUsefulDay)
-      || b.startDate.localeCompare(a.startDate)
-      || String(a.startTime ?? '').localeCompare(String(b.startTime ?? ''))
-      || a.title.localeCompare(b.title)
-      || String(a.id ?? '').localeCompare(String(b.id ?? ''))
-      || compareEventSourceIndex(a, b))
-    // Lo stesso evento arriva da piu' agende: un URL esplicito prevale,
-    // altrimenti il luogo conserva la deduplica esistente; senza luogo l'ID
-    // separa gli omonimi. Record senza identificatori restano distinti.
-    .filter((e) => {
-      const key = eventIdentityKey(e);
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    });
+    .sort(compareUpcomingEvents);
+  // URL and ID are independent aliases. Place is only a fallback, and may
+  // attach an unidentified copy to a single compatible identity group.
+  const upcoming = deduplicateEvents(upcomingCandidates);
   if (upcoming.length < th.minRows) {
     return omitted(id, 'empty', `${upcoming.length} eventi nei prossimi ${th.windowDays} giorni per ${canton} (min ${th.minRows})`);
   }
@@ -137,7 +297,7 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
         description: t.description,
         items: rows.map((e) => {
           const place = [e.venue, e.comune].map((v) => (typeof v === 'string' ? v.trim() : '')).filter(Boolean);
-          const url = httpsUrlOrNull(e.url);
+          const url = safeEventUrl(e.url);
           const where = place.length ? clip([...new Set(place)].join(', '), 100) : '';
           const ongoing = e.startDate < today ? t.ongoing(fmtDay(e.lastDay, locale)) : '';
           const detail = [where, ongoing].filter(Boolean).join(' — ');

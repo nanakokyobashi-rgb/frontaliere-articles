@@ -45482,6 +45482,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'indagini-morte-pierina-buffon',
+ category: 'pratico',
+ date: '2026-10-19T05:57:44.404Z',
+ image: '/images/blog/article-indagini-morte-pierina-buffon.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

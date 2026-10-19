@@ -830,9 +830,9 @@ test('eventi: la stessa voce da due agende e\' una riga, due eventi omonimi in d
   const dataset = {
     generatedAt: new Date(NOW - HOUR_MS).toISOString(),
     events: [
-      ev('tio:1', 'Lugano'), ev('guidle:9', 'Lugano', { title: 'MERCATO  settimanale' }),
+      ev('tio:1', 'Lugano'), ev('tio:1', 'Lugano', { title: 'MERCATO  settimanale' }),
       ev('tio:2', 'Bellinzona'), ev('tio:3', 'Locarno'),
-      ev('tio:4', undefined, { venue: 'Piazza Grande' }), ev('guidle:5', undefined, { venue: 'Piazza Grande' }),
+      ev('tio:4', undefined, { venue: 'Piazza Grande' }), ev('tio:4', undefined, { venue: 'Piazza Grande' }),
     ],
   };
   const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
@@ -870,7 +870,12 @@ test('eventi: URL e ID distinguono gli omonimi con luogo mancante o equivalente,
   const items = block.render('it').items;
   assert.equal(items.length, 10, 'le otto identità omonime e i due controlli restano distinti');
   assert.equal(block.render('it').keyFacts[0].value, '10', 'record senza URL, luogo o ID restano distinti');
-  assert.deepEqual(items.map((item) => item.url).filter(Boolean), [secondUrl, samePlaceFirstUrl, samePlaceSecondUrl, firstUrl]);
+  assert.deepEqual(items.map((item) => item.url).filter(Boolean), [
+    secondUrl,
+    samePlaceFirstUrl,
+    samePlaceSecondUrl,
+    `${firstUrl}#programma`,
+  ]);
 });
 
 test('eventi: canonicalEventUrl deduplica equivalenti e conserva query, porta e path distinti', () => {
@@ -898,10 +903,13 @@ test('eventi: canonicalEventUrl deduplica equivalenti e conserva query, porta e 
   const urls = block.render('it').items.map((item) => item.url);
   assert.equal(urls.length, 8, 'due coppie canoniche collassano; query, porte e path significativi restano distinti');
   assert.equal(urls.filter((url) => url.includes('/event/query?')).length, 1, 'l’ordine delle coppie query e il fragment non cambiano identità');
+  assert.ok(urls.includes('https://events.example.ch/event/query?z=2&tag=second&tag=first#programma'), 'il deep link mantiene la URL sorgente completa');
   assert.equal(urls.filter((url) => /\/event\/(?:Gra|Gr%C3)/.test(url)).length, 1, 'www, slash finale e Unicode NFC del path si canonicalizzano');
+  assert.ok(urls.includes('https://www.events.example.ch/event/Gra%CC%88del/#dettaglio'), 'il deep link mantiene host, path e fragment originali');
   assert.ok(urls.some((url) => url.endsWith('/event/semantic?id=one')));
   assert.ok(urls.some((url) => url.endsWith('/event/semantic?id=two')));
   assert.equal(urls.filter((url) => url.includes('/event/port')).length, 2, 'la porta HTTPS predefinita si normalizza e la porta non standard resta distinta');
+  assert.ok(urls.includes('https://events.example.ch:443/event/port'), 'la forma URL sorgente resta pubblicata dopo la deduplica canonica');
   assert.ok(urls.some((url) => url.includes(':8443/event/port')));
   assert.ok(urls.some((url) => url.endsWith('/event/path-one')));
   assert.ok(urls.some((url) => url.endsWith('/event/path-two')));
