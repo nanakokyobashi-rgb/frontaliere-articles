@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.einsiedeln.ch/verwaltung/mitteilungen/aktuelle-mitteilungen?m=4563": {
-      "section": "canton-sz",
-      "ts": 1792197470578
-    },
     "canton-sz::https://www.bote.ch/nachrichten/schwyz/kanton-schwyz-beteiligt-sich-an-taskforce-gegen-bestellte-diebstaehle-aus-frankreich-art-1727206": {
       "section": "canton-sz",
       "ts": 1792294501565
@@ -23,6 +19,10 @@
     "canton-sz::https://www.bote.ch/nachrichten/schwyz/agro-baut-neue-leitungen-beim-energiezentrum-art-1727183": {
       "section": "canton-sz",
       "ts": 1792294808638
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/stans-605-unterschriften-gegen-baustellenverkehr-durch-den-dorfkern-art-1727632": {
+      "section": "canton-sz",
+      "ts": 1792421396425
     }
   }
 }
