@@ -15,6 +15,7 @@ import { fileURLToPath } from 'node:url';
 import { delimiter, dirname, join, resolve } from 'node:path';
 import {
   createCurlFetch,
+  classifyApexFailureLog,
   fingerprintHtml,
   readFingerprintFile,
   readPushStateFile,
@@ -651,52 +652,33 @@ test('una probe edge bloccata registra lo stato e salta il backstop di re-purge'
 
 test('il downgrade apex richiede cache-lag esplicito e distingue status/route, errore operativo e blocco edge', () => {
   const verification = workflowStep('Verify the article is actually readable');
-  const classifier = verification.match(/^          apex_failure_kind\(\) \{[\s\S]*?^          \}/m);
-  assert.ok(classifier, 'missing the apex failure classifier');
-
-  const root = mkdtempSync(join(tmpdir(), 'served-fingerprint-classifier-'));
-  try {
-    const run = (log) => {
-      const file = join(root, 'verification.log');
-      writeFileSync(file, log);
-      const result = spawnSync(
-        'bash',
-        ['-c', `${classifier[0]}\napex_verify_log="$1"\napex_failure_kind`, 'classifier', file],
-        { encoding: 'utf8' },
-      );
-      assert.equal(result.status, 0, result.stderr);
-      return result.stdout.trim();
-    };
-
-    const mismatch = '::error::CDN served-content verification failed: 1 URL did not serve the expected fingerprint\n';
-    assert.equal(
-      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; cf-cache-status=HIT; age=776; classification=cache-lag; fresh-probe-status=200; fresh-probe-served=new-hash\n`),
-      'lag',
-    );
-    assert.equal(
-      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; cf-cache-status=HIT; age=776; fresh-probe-status=200; fresh-probe-served=route-hash\n`),
-      'hard',
-    );
-    assert.equal(
-      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; classification=cache-lag\nURL https://frontaliereticino.ch/en/demo/; expected=other-new; served=other-old; status=200\n`),
-      'hard',
-    );
-    assert.equal(
-      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=404; cf-cache-status=MISS; age=0\n`),
-      'hard',
-    );
-    assert.equal(
-      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=unavailable; status=network-error; cf-cache-status=unknown; age=unknown\n`),
-      'operational',
-    );
-    assert.equal(run('::error::fingerprint TSV has no header\n'), 'operational');
-    assert.equal(
-      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; classification=probe bloccata dall'edge\n`),
-      'edge-blocked',
-    );
-  } finally {
-    rmSync(root, { recursive: true, force: true });
-  }
+  assert.match(verification, /verify-served-fingerprint\.mjs classify-apex-failure/);
+  const mismatch = '::error::CDN served-content verification failed: 1 URL did not serve the expected fingerprint\n';
+  assert.equal(
+    classifyApexFailureLog(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; cf-cache-status=HIT; age=776; classification=cache-lag; fresh-probe-status=200; fresh-probe-served=new-hash\n`),
+    'lag',
+  );
+  assert.equal(
+    classifyApexFailureLog(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; cf-cache-status=HIT; age=776; fresh-probe-status=200; fresh-probe-served=route-hash\n`),
+    'hard',
+  );
+  assert.equal(
+    classifyApexFailureLog(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; classification=cache-lag\nURL https://frontaliereticino.ch/en/demo/; expected=other-new; served=other-old; status=200\n`),
+    'hard',
+  );
+  assert.equal(
+    classifyApexFailureLog(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=404; cf-cache-status=MISS; age=0\n`),
+    'hard',
+  );
+  assert.equal(
+    classifyApexFailureLog(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=unavailable; status=network-error; cf-cache-status=unknown; age=unknown\n`),
+    'operational',
+  );
+  assert.equal(classifyApexFailureLog('::error::fingerprint TSV has no header\n'), 'operational');
+  assert.equal(
+    classifyApexFailureLog(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; classification=probe bloccata dall'edge\n`),
+    'edge-blocked',
+  );
 });
 
 test('un mismatch apex persistente resta warning e lascia eseguire il gate origin', () => {

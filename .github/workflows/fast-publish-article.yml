@@ -1014,43 +1014,8 @@ jobs:
           # an edge-blocked observation even when other URLs are mismatches and
           # the verifier cannot return its all-observations exit code 2.
           apex_failure_kind() {
-            local kind
-            if grep -Fq "probe bloccata dall'edge" "$apex_verify_log"; then
-              echo edge-blocked
-              return 0
-            fi
-            if ! grep -Fq "did not serve the expected fingerprint" "$apex_verify_log" \
-              || ! grep -Eq '^URL ' "$apex_verify_log"; then
-              echo operational
-              return 0
-            fi
-            kind="$(awk '
-              /^URL / {
-                saw_url = 1
-                expected = ""
-                served = ""
-                status = ""
-                classification = ""
-                fields = split($0, parts, /; /)
-                for (i = 1; i <= fields; i += 1) {
-                  if (parts[i] ~ /^expected=/) expected = substr(parts[i], 10)
-                  if (parts[i] ~ /^served=/) served = substr(parts[i], 8)
-                  if (parts[i] ~ /^status=/) status = substr(parts[i], 8)
-                  if (parts[i] ~ /^classification=/) classification = substr(parts[i], 16)
-                }
-                if (status == "network-error" || status == "") {
-                  operational = 1
-                } else if (status != "200" || expected == "" || served == "" || expected == served || classification != "cache-lag") {
-                  invalid = 1
-                }
-              }
-              END {
-                if (!saw_url || operational) print "operational"
-                else if (!invalid) print "lag"
-                else print "hard"
-              }
-            ' "$apex_verify_log")"
-            echo "$kind"
+            node scripts/ci/verify-served-fingerprint.mjs classify-apex-failure \
+              --log "$apex_verify_log"
           }
 
           handle_apex_failure() {

@@ -498,6 +498,49 @@ function mismatch(stage, pending) {
   return new FingerprintMismatchError(stage, [...pending].map(([record, observation]) => ({ record, observation })));
 }
 
+/**
+ * Classifica il log del controllo apex per il consumer shell del workflow.
+ * Solo un mismatch HTTP 200 esplicitamente marcato `cache-lag` può essere
+ * degradato a warning; una risposta di route, un errore operativo o un blocco
+ * dell'edge resta fail-closed.
+ */
+export function classifyApexFailureLog(rawLog) {
+  const log = String(rawLog ?? '');
+  if (log.includes("probe bloccata dall'edge")) return 'edge-blocked';
+
+  const urlLines = log.split(/\r?\n/u).filter((line) => line.startsWith('URL '));
+  if (!log.includes('did not serve the expected fingerprint') || urlLines.length === 0) {
+    return 'operational';
+  }
+
+  let operational = false;
+  let invalid = false;
+  for (const line of urlLines) {
+    const fields = new Map();
+    for (const part of line.split('; ')) {
+      const separator = part.indexOf('=');
+      if (separator > 0) fields.set(part.slice(0, separator), part.slice(separator + 1));
+    }
+    const status = fields.get('status') || '';
+    const expected = fields.get('expected') || '';
+    const served = fields.get('served') || '';
+    const classification = fields.get('classification') || '';
+    if (status === 'network-error' || status === '') {
+      operational = true;
+    } else if (
+      status !== '200'
+      || expected === ''
+      || served === ''
+      || expected === served
+      || classification !== 'cache-lag'
+    ) {
+      invalid = true;
+    }
+  }
+  if (operational) return 'operational';
+  return invalid ? 'hard' : 'lag';
+}
+
 function allEdgeBlocked(stage, observations) {
   if (observations.length === 0 || !observations.every(isEdgeBlocked)) {
     return null;
@@ -700,8 +743,13 @@ function positiveSeconds(value, name) {
 
 async function main(argv) {
   const [command, ...args] = argv;
-  if (!command || !['write', 'wait-origin', 'verify-apex'].includes(command)) {
-    throw new Error('usage: verify-served-fingerprint.mjs <write|wait-origin|verify-apex> ...');
+  if (!command || !['write', 'wait-origin', 'verify-apex', 'classify-apex-failure'].includes(command)) {
+    throw new Error('usage: verify-served-fingerprint.mjs <write|wait-origin|verify-apex|classify-apex-failure> ...');
+  }
+
+  if (command === 'classify-apex-failure') {
+    console.log(classifyApexFailureLog(fs.readFileSync(requiredFlag(args, '--log'), 'utf8')));
+    return;
   }
 
   if (command === 'write') {
