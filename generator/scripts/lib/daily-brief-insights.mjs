@@ -11,7 +11,6 @@ export const DEMAND_THEMES = Object.freeze({
 
 const DAY = 86400000;
 const number = value => typeof value === 'number' && Number.isFinite(value) ? value : null;
-const shiftDay = (dateIso, days) => new Date(Date.parse(`${dateIso}T00:00:00Z`) + days * DAY).toISOString().slice(0, 10);
 
 function leaders(rows) {
   return (Array.isArray(rows) ? rows : [])
@@ -21,38 +20,15 @@ function leaders(rows) {
     .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name)).slice(0, 5);
 }
 
-function closedWeek(history, endDate) {
-  const end = Date.parse(`${endDate}T00:00:00Z`);
-  let total = 0;
-  for (let i = 0; i < 7; i++) {
-    const day = new Date(end - i * DAY).toISOString().slice(0, 10);
-    const rows = history.filter(row => row?.date === day);
-    if (rows.length !== 1 || number(rows[0].added) === null || rows[0].added < 0) return null;
-    total += rows[0].added;
-  }
-  return total;
-}
-
 export function buildDailyBriefInsights({ blocks, jobsStats, todayIso, previousSnapshot, searchDemand = null }) {
   const insights = {};
   const today = Date.parse(`${todayIso}T00:00:00Z`);
   const yesterday = new Date(today - DAY).toISOString().slice(0, 10);
   if (blocks.jobs?.available) {
-    const history = Array.isArray(jobsStats?.history) ? jobsStats.history : [];
-    const currentWeekAdded = closedWeek(history, yesterday);
-    const previousWeekEnd = shiftDay(yesterday, -7);
-    const previousWeekAdded = closedWeek(history, previousWeekEnd);
+    // The producer stores one bucket per Zurich calendar date, but exposes no
+    // finalization timestamp. A D-1 bucket may still be updated during D, so
+    // seven consecutive date labels cannot support a complete-week claim.
     insights.jobs = {
-      lastClosedDay: yesterday,
-      currentWeekAdded, previousWeekAdded,
-      currentPeriod: currentWeekAdded !== null
-        ? { from: shiftDay(yesterday, -6), to: yesterday }
-        : null,
-      previousPeriod: previousWeekAdded !== null
-        ? { from: shiftDay(previousWeekEnd, -6), to: previousWeekEnd }
-        : null,
-      weeklyChange: currentWeekAdded !== null && previousWeekAdded !== null ? currentWeekAdded - previousWeekAdded : null,
-      weeklyChangePct: currentWeekAdded !== null && previousWeekAdded > 0 ? Math.round((currentWeekAdded / previousWeekAdded - 1) * 1000) / 10 : null,
       topCompanies: leaders(jobsStats?.leaders?.topCompaniesActive),
       topLocations: leaders(jobsStats?.leaders?.topLocationsActive),
     };
