@@ -292,11 +292,18 @@ jobs:
       - name: Classify outcome (work-done, not CLI exit)
         if: always()
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACTION_OUTCOME: ${{ steps.codex_sweep.outcome }}
           DIGEST_TITLE_VALIDATION: ${{ steps.digest_title.outcome }}
         run: |
           set -uo pipefail
+          # The sweep loads GITHUB_PAT_NANAKO through GITHUB_ENV above.  Do not
+          # let this high-volume, paginated read fall back to the installation
+          # GITHUB_TOKEN: that is the bucket that exhausted in run 39242871594.
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::needs-human-sweep: GITHUB_PAT_NANAKO non disponibile dopo load-rc-env; non uso GITHUB_TOKEN per il classificatore." 
+            exit 1
+          fi
+          export GH_TOKEN="$GITHUB_PAT_NANAKO"
           if [ "$DIGEST_TITLE_VALIDATION" != "success" ]; then
             echo "::error::needs-human-sweep: validazione DIGEST_TITLE non riuscita (outcome=$DIGEST_TITLE_VALIDATION); il run non è consegnato."
             exit 1

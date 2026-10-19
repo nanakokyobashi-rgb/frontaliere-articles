@@ -125,6 +125,27 @@ test('il valore del titolo digest è validato prima del prompt Codex e passato c
   );
 });
 
+test('il classificatore usa il PAT runtime e non il bucket installation del runner', () => {
+  const outcome = stepBlock('Classify outcome (work-done, not CLI exit)');
+  const guardAt = outcome.indexOf('if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then');
+  const exportAt = outcome.indexOf('export GH_TOKEN="$GITHUB_PAT_NANAKO"');
+  const queryAt = outcome.indexOf('if DIGEST_MATCHES=');
+
+  assert.ok(guardAt !== -1, 'il classificatore deve verificare il PAT caricato dal runtime');
+  assert.ok(exportAt > guardAt, 'il classificatore deve esportare il PAT dopo la guardia');
+  assert.ok(queryAt > exportAt, 'la prima query GitHub deve usare il PAT runtime');
+  assert.match(
+    outcome.slice(guardAt, exportAt),
+    /exit 1/,
+    'un loader senza PAT deve fallire in modo esplicito, non ricadere sul token installation',
+  );
+  assert.doesNotMatch(
+    outcome,
+    /GH_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}/,
+    'il classificatore non deve dichiarare il token installation come credenziale operativa',
+  );
+});
+
 test('la label tecnica viene garantita prima del pre-pass deterministico', () => {
   const bootstrap = stepBlock('Ensure automation-deferred label (zero-Claude)');
   assert.match(bootstrap, /gh label create automation-deferred/);
