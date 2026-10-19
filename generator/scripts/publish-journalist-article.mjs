@@ -77,7 +77,7 @@ import {
   assertNoFabricatedReferences,
   assertNoFabricatedLaborOfficeCrossLocale,
   assertArticlePassesFactualityGates,
-  IMAGE_PHASE_BUDGET_MS,
+  getArticleImageDeadlineAt,
   generateArticleImage,
   repairGeneratedArticleSourceCopy,
   refreshSourceCopyDerivedMetadata,
@@ -372,7 +372,7 @@ async function resolveHeroImage(data, doc) {
     }
   }
 
-  const imageDeadlineAt = Date.now() + IMAGE_PHASE_BUDGET_MS;
+  const imageDeadlineAt = getArticleImageDeadlineAt();
   const generatedPath = await generateArticleImage(data, { deadlineAt: imageDeadlineAt });
   if (generatedPath) {
     console.error(`[cover] article=${data.id} source=engine reason=generated`);
