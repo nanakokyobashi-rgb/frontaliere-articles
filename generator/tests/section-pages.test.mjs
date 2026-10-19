@@ -130,7 +130,9 @@ test('publisher --publish costruisce il manifest solo dopo una publish riuscita'
   const manifests = [];
   const realConsoleLog = console.log;
   const realConsoleError = console.error;
+  const previousAllow = process.env.ALLOW_DEFERRED_LIVE_RELEASE;
   try {
+    process.env.ALLOW_DEFERRED_LIVE_RELEASE = 'true';
     console.log = () => {};
     console.error = () => {};
     const code = await main(
@@ -139,6 +141,8 @@ test('publisher --publish costruisce il manifest solo dopo una publish riuscita'
         parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
         fetchPageManifestImpl: async () => ({ state: 'ok', doc: publishedDoc }),
         publishedStatusImpl: async () => 'draft',
+        publishedApiReleaseCommitImpl: async () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        publishedReleaseReadyImpl: async () => ({ ok: true, files: {}, counts: { bySection: { 'canton-ti': { articles: 0 } } } }),
         currentMainHeadImpl: () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
         createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
         renderSectionArticlePipelineImpl: async () => ({
@@ -164,7 +168,11 @@ test('publisher --publish costruisce il manifest solo dopo una publish riuscita'
     assert.equal(code, 0);
     assert.deepEqual(events, ['publish', 'manifest']);
     assert.equal(manifests.length, 1);
+    const summary = JSON.parse(readFileSync(path.join(fixtureRoot, 'summary.json'), 'utf8'));
+    assert.equal(summary.deferredLiveRelease, false, 'una readiness già verde prevale sulla richiesta staged stantia');
   } finally {
+    if (previousAllow === undefined) delete process.env.ALLOW_DEFERRED_LIVE_RELEASE;
+    else process.env.ALLOW_DEFERRED_LIVE_RELEASE = previousAllow;
     console.log = realConsoleLog;
     console.error = realConsoleError;
     rmSync(fixtureRoot, { recursive: true, force: true });
