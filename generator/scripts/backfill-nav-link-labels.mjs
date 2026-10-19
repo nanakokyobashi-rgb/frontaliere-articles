@@ -33,9 +33,10 @@ const HELP = `Uso: node generator/scripts/backfill-nav-link-labels.mjs [opzioni]
 
   --apply                 scrive i body; senza, la run e' dry-run
   --lang de|fr|en         locale da trattare; ripetibile (default: tutti)
-  --limit N               massimo di articoli nel lotto per locale
-  --offset N              salta N articoli nell'ordine alfabetico stabile
-  --start-after <id>      riprende dopo l'articolo con questo id
+  --limit N               massimo di articoli modificati nel lotto per locale;
+                           quelli esaminati senza sostituzioni non lo consumano
+  --offset N              salta N articoli nell'ordine alfabetico completo
+  --start-after <id>      riprende dopo l'id nell'ordine completo, anche senza hit
   --order id|hits         ordine alfabetico stabile (default) o priorita' per hit
                            hits vieta --start-after e --offset
   --help                  mostra questo messaggio
@@ -397,6 +398,22 @@ function annotateHits(articles, selected) {
   return { afterHits, beforeHits };
 }
 
+function summarizeExamined(examined) {
+  const unmappedArticles = examined.filter((article) => (
+    article.afterHits.some((hit) => hit.canonicalLabel === null)
+  )).length;
+  const unmappedLabels = examined.reduce(
+    (sum, article) => sum + article.afterHits.filter((hit) => hit.canonicalLabel === null).length,
+    0,
+  );
+  return {
+    examined: examined.length,
+    modified: examined.filter((article) => article.substitutions.length > 0).length,
+    unmapped: unmappedArticles,
+    unmappedLabels,
+  };
+}
+
 function selectArticles(articles, { limit, offset, offsetProvided = false, order, startAfter }) {
   if (!ORDERS.includes(order)) fail(`ordine non supportato: ${order}; usare id o hits`);
   if (order === 'hits' && startAfter !== null) {
@@ -408,32 +425,29 @@ function selectArticles(articles, { limit, offset, offsetProvided = false, order
 
   const compare = order === 'hits' ? compareArticlesByHits : compareArticlesById;
   const ordered = [...articles].sort(compare);
-  const labeled = ordered.filter((article) => article.beforeHits.length > 0);
   let startIndex = 0;
   if (startAfter !== null) {
-    const index = labeled.findIndex((article) => article.id === startAfter);
+    const index = ordered.findIndex((article) => article.id === startAfter);
     if (index < 0) {
-      fail(`id non trovato nell'elenco completo degli articoli con almeno un'etichetta italiana: ${startAfter}`);
+      fail(`id non trovato nel corpus delle lingue scansionate: ${startAfter}`);
     }
     startIndex = index + 1;
   }
 
-  if (order === 'hits') {
-    const candidates = ordered.filter((article) => article.substitutions.length > 0);
-    return {
-      candidates,
-      selected: candidates.slice(0, Number.isFinite(limit) ? limit : undefined),
-    };
+  const afterCursor = ordered.slice(startIndex + offset);
+  const examined = [];
+  const selected = [];
+  for (const article of afterCursor) {
+    if (selected.length >= limit) break;
+    examined.push(article);
+    if (article.substitutions.length > 0) selected.push(article);
   }
-
-  const afterCursor = labeled.slice(startIndex);
   const candidates = afterCursor.filter((article) => article.substitutions.length > 0);
-  const windowStart = offset;
-  const windowEnd = Number.isFinite(limit) ? windowStart + limit : undefined;
   return {
     candidates,
-    selected: afterCursor.slice(windowStart, windowEnd)
-      .filter((article) => article.substitutions.length > 0),
+    examined,
+    lastExaminedId: examined.at(-1)?.id ?? null,
+    selected,
   };
 }
 
@@ -448,7 +462,11 @@ function printReport(report, logger) {
   logger(`  prima: articoli coinvolti ${report.before.articles}; etichette italiane ${report.before.italianLabels}`);
   logger(`  dopo:  articoli coinvolti ${report.after.articles}; etichette italiane ${report.after.italianLabels}; `
     + `sostituite ${report.after.substituted}; lasciate ${report.after.left}`);
-  logger(`  lotto: ${report.selected}/${report.candidates} articoli${report.apply ? ` scritti ${report.written}` : ' da scrivere in apply'}`);
+  logger(`  lotto: esaminati ${report.examined}; modificati ${report.modified}; `
+    + `senza voce in mappa ${report.unmapped} articoli (${report.unmappedLabels} etichette)`
+    + `${report.apply ? `; scritti ${report.written}` : '; da scrivere in apply'}`);
+  logger(`  ultimo ID esaminato: ${report.lastExaminedId ?? 'nessuno'}`
+    + (report.lastExaminedId === null ? '' : `; ripresa: --start-after ${report.lastExaminedId}`));
   logger(`  non mappate (top 10): ${formatResiduals(report.after.topUnmapped)}`);
 }
 
@@ -484,7 +502,7 @@ export function runBackfill({
   const plans = [];
   for (const locale of locales) {
     const articles = scanLocale(root, locale);
-    const { candidates, selected } = selectArticles(articles, {
+    const { candidates, examined, lastExaminedId, selected } = selectArticles(articles, {
       limit,
       offset,
       offsetProvided,
@@ -492,6 +510,7 @@ export function runBackfill({
       startAfter,
     });
     const { beforeHits, afterHits } = annotateHits(articles, selected);
+    const examinedSummary = summarizeExamined(examined);
     const substituted = selected.reduce((sum, article) => sum + article.substitutions.length, 0);
     const before = summarizeHits(beforeHits);
     const after = summarizeHits(afterHits);
@@ -503,9 +522,14 @@ export function runBackfill({
       },
       before,
       candidates: candidates.length,
+      examined: examinedSummary.examined,
       locale,
+      lastExaminedId,
+      modified: examinedSummary.modified,
       selected: selected.length,
       selectedArticles: selected,
+      unmapped: examinedSummary.unmapped,
+      unmappedLabels: examinedSummary.unmappedLabels,
     });
   }
 
@@ -523,8 +547,13 @@ export function runBackfill({
       apply,
       before: plan.before,
       candidates: plan.candidates,
+      examined: plan.examined,
       locale: plan.locale,
+      lastExaminedId: plan.lastExaminedId,
+      modified: plan.modified,
       selected: plan.selected,
+      unmapped: plan.unmapped,
+      unmappedLabels: plan.unmappedLabels,
       written,
     };
     reports.push(report);

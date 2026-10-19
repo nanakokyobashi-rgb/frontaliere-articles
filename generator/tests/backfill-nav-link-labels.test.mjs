@@ -75,6 +75,26 @@ const CURSOR_BODIES = Object.freeze({
   ].join('\n'),
 });
 
+const RESUMABLE_BODIES = Object.freeze({
+  'a-first': '[calcolatore stipendio netto](nav:calculator)',
+  'b-second': '[annunci di lavoro](nav:jobs)',
+  'c-third': '[etichetta sconosciuta](nav:future)',
+  'd-fourth': '[costo della vita](nav:cost-of-living)',
+});
+
+const OFFSET_BODIES = Object.freeze({
+  'a-no-label': 'Testo senza link di navigazione.',
+  'b-first': '[calcolatore stipendio netto](nav:calculator)',
+  'c-second': '[annunci di lavoro](nav:jobs)',
+});
+
+const REPORT_BODIES = Object.freeze({
+  'a-known': '[calcolatore stipendio netto](nav:calculator)',
+  'b-unmapped': '[etichetta sconosciuta](nav:future)',
+  'c-plain': 'Testo senza link di navigazione.',
+  'd-known': '[annunci di lavoro](nav:jobs)',
+});
+
 test('localizza solo le label nav note e preserva ogni altro byte', () => {
   const source = INVENTED_SOURCE('invented-nav');
   for (const [locale, expectedLabel, expectedAcronyms] of [
@@ -137,7 +157,7 @@ test('dry-run non scrive, apply e seconda esecuzione sono idempotenti', () => {
 test('il cursore alfabetico completa i lotti senza saltare articoli dopo il primo apply', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'backfill-nav-cursor-'));
   try {
-    for (const [id, body] of Object.entries(CURSOR_BODIES)) writeArticle(root, 'de', id, body);
+    for (const [id, body] of Object.entries(RESUMABLE_BODIES)) writeArticle(root, 'de', id, body);
 
     const first = runBackfill({
       root,
@@ -147,6 +167,7 @@ test('il cursore alfabetico completa i lotti senza saltare articoli dopo il prim
       logger: () => {},
     });
     assert.deepEqual(fileIds(first.modifiedFiles), ['a-first', 'b-second']);
+    assert.equal(first.reports[0].lastExaminedId, 'b-second');
     assert.ok(first.reports[0].before.italianLabels > first.reports[0].after.italianLabels);
 
     const second = runBackfill({
@@ -157,11 +178,16 @@ test('il cursore alfabetico completa i lotti senza saltare articoli dopo il prim
       startAfter: 'b-second',
       logger: () => {},
     });
-    assert.deepEqual(fileIds(second.modifiedFiles), ['c-third', 'd-fourth']);
+    assert.deepEqual(fileIds(second.modifiedFiles), ['d-fourth']);
+    assert.equal(second.reports[0].examined, 2);
+    assert.equal(second.reports[0].modified, 1);
+    assert.equal(second.reports[0].unmapped, 1);
+    assert.equal(second.reports[0].lastExaminedId, 'd-fourth');
     assert.deepEqual(
       [...first.modifiedFiles, ...second.modifiedFiles].map((file) => path.basename(file, '.ts')).sort(),
-      Object.keys(CURSOR_BODIES).sort(),
+      Object.keys(RESUMABLE_BODIES).filter((id) => id !== 'c-third').sort(),
     );
+    assert.match(fs.readFileSync(path.join(root, 'content/blog-body/de/c-third.ts'), 'utf8'), /\[etichetta sconosciuta\]\(nav:future\)/u);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
@@ -180,7 +206,7 @@ test('start-after inesistente fallisce prima di qualsiasi scrittura', () => {
         startAfter: 'missing-article',
         logger: () => {},
       }),
-      /id non trovato.*etichetta italiana/u,
+      /id non trovato nel corpus/u,
     );
     assert.equal(fs.readFileSync(file, 'utf8'), before);
   } finally {
@@ -202,17 +228,8 @@ test('l’ordine per hit vieta i cursori start-after e offset', () => {
 test('offset riprende nello stesso ordine alfabetico anche dopo che i conteggi cambiano', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'backfill-nav-offset-'));
   try {
-    for (const [id, body] of Object.entries(CURSOR_BODIES)) writeArticle(root, 'de', id, body);
-    const first = runBackfill({
-      root,
-      locales: ['de'],
-      apply: true,
-      limit: 1,
-      logger: () => {},
-    });
-    assert.deepEqual(fileIds(first.modifiedFiles), ['a-first']);
-
-    const second = runBackfill({
+    for (const [id, body] of Object.entries(OFFSET_BODIES)) writeArticle(root, 'de', id, body);
+    const result = runBackfill({
       root,
       locales: ['de'],
       apply: true,
@@ -220,7 +237,34 @@ test('offset riprende nello stesso ordine alfabetico anche dopo che i conteggi c
       limit: 1,
       logger: () => {},
     });
-    assert.deepEqual(fileIds(second.modifiedFiles), ['b-second']);
+    assert.deepEqual(fileIds(result.modifiedFiles), ['b-first']);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il report conta esaminati, modificati, articoli senza mappa e cursore di ripresa', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'backfill-nav-report-'));
+  const logs = [];
+  try {
+    for (const [id, body] of Object.entries(REPORT_BODIES)) writeArticle(root, 'de', id, body);
+    const result = runBackfill({
+      root,
+      locales: ['de'],
+      apply: true,
+      limit: 5,
+      logger: (line) => logs.push(line),
+    });
+    const [report] = result.reports;
+    assert.equal(report.examined, 4);
+    assert.equal(report.modified, 2);
+    assert.equal(report.unmapped, 1);
+    assert.equal(report.unmappedLabels, 1);
+    assert.equal(report.lastExaminedId, 'd-known');
+    assert.deepEqual(fileIds(result.modifiedFiles), ['a-known', 'd-known']);
+    assert.match(logs.join('\n'), /esaminati 4; modificati 2; senza voce in mappa 1/u);
+    assert.match(logs.join('\n'), /ultimo ID esaminato: d-known/u);
+    assert.match(logs.join('\n'), /--start-after d-known/u);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
