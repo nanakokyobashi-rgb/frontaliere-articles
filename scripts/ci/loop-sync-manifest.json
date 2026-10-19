@@ -4475,8 +4475,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-01.yml",
       "mode": "identical",
       "baseline": {
-        "site": "873874274fa66c56",
-        "corpus": "873874274fa66c56",
+        "site": "04c0ba189d127af0",
+        "corpus": "04c0ba189d127af0",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4485,8 +4485,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-02.yml",
       "mode": "identical",
       "baseline": {
-        "site": "78d69ea661c9dfbf",
-        "corpus": "78d69ea661c9dfbf",
+        "site": "53ee90fb30772bca",
+        "corpus": "53ee90fb30772bca",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4495,8 +4495,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-03.yml",
       "mode": "identical",
       "baseline": {
-        "site": "db347e591f6122c2",
-        "corpus": "db347e591f6122c2",
+        "site": "c6609c60704db16e",
+        "corpus": "c6609c60704db16e",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4505,8 +4505,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-04.yml",
       "mode": "identical",
       "baseline": {
-        "site": "7a0f964638eb5756",
-        "corpus": "7a0f964638eb5756",
+        "site": "216f521ed60e5c1e",
+        "corpus": "216f521ed60e5c1e",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4515,8 +4515,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-05.yml",
       "mode": "identical",
       "baseline": {
-        "site": "5af4b08fcd36b789",
-        "corpus": "5af4b08fcd36b789",
+        "site": "e06a44cc3d4bc739",
+        "corpus": "e06a44cc3d4bc739",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4525,8 +4525,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-06.yml",
       "mode": "identical",
       "baseline": {
-        "site": "4326f39e0ffb4668",
-        "corpus": "4326f39e0ffb4668",
+        "site": "5066077baad83293",
+        "corpus": "5066077baad83293",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4535,8 +4535,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-07.yml",
       "mode": "identical",
       "baseline": {
-        "site": "07217ff8750126f7",
-        "corpus": "07217ff8750126f7",
+        "site": "6414a3021868e857",
+        "corpus": "6414a3021868e857",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4545,8 +4545,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-08.yml",
       "mode": "identical",
       "baseline": {
-        "site": "230a5ae8fcf891dc",
-        "corpus": "230a5ae8fcf891dc",
+        "site": "b2c99a529096e3a4",
+        "corpus": "b2c99a529096e3a4",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4555,8 +4555,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-09.yml",
       "mode": "identical",
       "baseline": {
-        "site": "4c6adcfa59c59937",
-        "corpus": "4c6adcfa59c59937",
+        "site": "d8ef98ed1339919f",
+        "corpus": "d8ef98ed1339919f",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4565,8 +4565,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-10.yml",
       "mode": "identical",
       "baseline": {
-        "site": "9902be1f3e5c973c",
-        "corpus": "9902be1f3e5c973c",
+        "site": "2f8162a56a62fb70",
+        "corpus": "2f8162a56a62fb70",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4575,8 +4575,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-11.yml",
       "mode": "identical",
       "baseline": {
-        "site": "b2f25b1ceeba21de",
-        "corpus": "b2f25b1ceeba21de",
+        "site": "026bb3bd7b2e587e",
+        "corpus": "026bb3bd7b2e587e",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4585,8 +4585,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-12.yml",
       "mode": "identical",
       "baseline": {
-        "site": "5801bf57de46f475",
-        "corpus": "5801bf57de46f475",
+        "site": "d60b3fe59b6d66ab",
+        "corpus": "d60b3fe59b6d66ab",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4595,8 +4595,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-13.yml",
       "mode": "identical",
       "baseline": {
-        "site": "05b0ae677dfa5349",
-        "corpus": "05b0ae677dfa5349",
+        "site": "c17c61806c5960f1",
+        "corpus": "c17c61806c5960f1",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4605,8 +4605,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-14.yml",
       "mode": "identical",
       "baseline": {
-        "site": "78db823b79365eb3",
-        "corpus": "78db823b79365eb3",
+        "site": "f0af849a8a39e09e",
+        "corpus": "f0af849a8a39e09e",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4615,8 +4615,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-15.yml",
       "mode": "identical",
       "baseline": {
-        "site": "9f8238360f620362",
-        "corpus": "9f8238360f620362",
+        "site": "e19d30d43f0748b7",
+        "corpus": "e19d30d43f0748b7",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4625,8 +4625,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-16.yml",
       "mode": "identical",
       "baseline": {
-        "site": "40a6e14cd92ca352",
-        "corpus": "40a6e14cd92ca352",
+        "site": "89dc7c6236bd566d",
+        "corpus": "89dc7c6236bd566d",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4635,8 +4635,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-17.yml",
       "mode": "identical",
       "baseline": {
-        "site": "635c8cc42deb5fdd",
-        "corpus": "635c8cc42deb5fdd",
+        "site": "bb9c5f8d3b7f7ad0",
+        "corpus": "bb9c5f8d3b7f7ad0",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4645,8 +4645,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-18.yml",
       "mode": "identical",
       "baseline": {
-        "site": "ef35d8588e3bc426",
-        "corpus": "ef35d8588e3bc426",
+        "site": "74081ffed022dda1",
+        "corpus": "74081ffed022dda1",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4655,8 +4655,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-19.yml",
       "mode": "identical",
       "baseline": {
-        "site": "d2f3abc170fbb1ba",
-        "corpus": "d2f3abc170fbb1ba",
+        "site": "35a3b78b8ba504f0",
+        "corpus": "35a3b78b8ba504f0",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4665,8 +4665,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-20.yml",
       "mode": "identical",
       "baseline": {
-        "site": "89e736dfd8d01f4f",
-        "corpus": "89e736dfd8d01f4f",
+        "site": "48577d5d1cd47d93",
+        "corpus": "48577d5d1cd47d93",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4675,8 +4675,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-21.yml",
       "mode": "identical",
       "baseline": {
-        "site": "1ec677ae410fa6d0",
-        "corpus": "1ec677ae410fa6d0",
+        "site": "a69525d5afed2325",
+        "corpus": "a69525d5afed2325",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4685,8 +4685,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-22.yml",
       "mode": "identical",
       "baseline": {
-        "site": "466144fca28a732b",
-        "corpus": "466144fca28a732b",
+        "site": "445b7a22b9360cda",
+        "corpus": "445b7a22b9360cda",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4695,8 +4695,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
       "mode": "identical",
       "baseline": {
-        "site": "2d80126abcde0cd7",
-        "corpus": "2d80126abcde0cd7",
+        "site": "0c26636eb45dcd0d",
+        "corpus": "0c26636eb45dcd0d",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4716,8 +4716,8 @@
       "mode": "identical",
       "reason": "La baseline del 2026-10-18 registra lo stesso digest SHA-256 raw sui due lati (a21da3deb14d9d86); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "a08a48ba61582250",
-        "corpus": "a08a48ba61582250",
+        "site": "1a3a97ad3a202a35",
+        "corpus": "1a3a97ad3a202a35",
         "alignedAt": "2026-10-19"
       }
     },
