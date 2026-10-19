@@ -41,6 +41,18 @@ function loadCoverDeferralClassifier() {
   });
 }
 
+function loadSharedCoverVerifierUnavailableClassifier() {
+  const start = SRC.indexOf('function isSharedArticleCoverVerifierUnavailableError(e) {');
+  assert.notEqual(start, -1, 'classifier indisponibilita\' verifier cover mancante');
+  const end = SRC.indexOf('\n}\n', start);
+  assert.ok(end > start, 'classifier indisponibilita\' verifier cover non chiuso');
+  const source = SRC.slice(start, end + 2);
+  return new Function(
+    'ARTICLE_COVER_FALLBACK_ERROR_CODES',
+    source + '\nreturn isSharedArticleCoverVerifierUnavailableError;',
+  )({ VERIFICATION_UNAVAILABLE: 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE' });
+}
+
 test('a deterministic no-relevant-cover result skips its article; verifier outages stay retryable', () => {
   const isQualityRejectError = loadQualityClassifier();
 
@@ -91,11 +103,24 @@ test('a retryable cover-boundary failure defers the run without weakening the im
   }), false);
 });
 
-test('the top-level catch has a declared exit for retryable cover failures', () => {
+test('only a cover-verifier outage uses the shared provider deferral', () => {
+  const isSharedUnavailable = loadSharedCoverVerifierUnavailableClassifier();
+  assert.equal(isSharedUnavailable({ code: 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE', retryable: true }), true);
+  assert.equal(isSharedUnavailable({ code: 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE', retryable: false }), false);
+  assert.equal(isSharedUnavailable({ code: 'ARTICLE_COVER_VERIFICATION_STALE', retryable: true }), false);
+  assert.equal(isSharedUnavailable({ code: 'ARTICLE_COVER_NO_RELEVANT_FALLBACK', retryable: true }), false);
+
+  const start = SRC.indexOf('if (isSharedArticleCoverVerifierUnavailableError(e))');
+  const sectionLocal = SRC.indexOf('if (isRetryableArticleCoverError(e))', start);
+  assert.ok(start !== -1 && sectionLocal > start, 'il blocco condiviso deve precedere i retry locali');
+  assert.match(SRC.slice(start, sectionLocal), /EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE/);
+});
+
+test('candidate-specific retryable cover failures retain their section-local exit', () => {
   assert.match(
     SRC,
     /if \(isRetryableArticleCoverError\(e\)\) \{[\s\S]*?EXIT_NO_ARTICLE_DECLARED/,
-    'il guasto del verifier cover non deve ricadere sull\'exit 1 generico',
+    'la mancanza di una cover candidata resta locale e puo\' provare la sezione gemella',
   );
 });
 

@@ -508,8 +508,8 @@ test('IL DIFETTO: roster esaurito e nessun articolo → lo step esce ROSSO', () 
 // non era la condizione nominata dall'exit 3, e una regola della forma «assorbi
 // tutto tranne X» lascia passare per costruzione ogni difetto che non e' X.
 //
-// La regola e' invertita: senza articolo e' rosso, tranne quando OGNI tentativo
-// dichiara una delle sei ragioni legittime uscendo EXIT_NO_ARTICLE_DECLARED (4).
+// La regola e' invertita: senza articolo e' rosso, tranne quando ogni tentativo
+// dichiara un esito locale (4) o un'indisponibilita' condivisa (5).
 // Le asserzioni corrispondenti vivono ora in `no-article-not-green.test.mjs`,
 // che copre la matrice intera; qui resta la sola meta' che riguarda l'exit 3.
 //
@@ -517,9 +517,8 @@ test('IL DIFETTO: roster esaurito e nessun articolo → lo step esce ROSSO', () 
 // generale troverebbe due test verdi a dargli ragione, ed e' successo una volta.
 
 test('exit 4 (ragione legittima DICHIARATA) resta assorbito', () => {
-  // L'unico assorbimento rimasto. Le sei ragioni: pool evergreen saturo,
-  // nessuna keyword disponibile, tentativi esauriti, duplicato, rigetto
-  // qualita', quota davvero esaurita.
+  // Il codice 4 assorbe un esito della sezione; la prova del pool condiviso
+  // con codice 5 vive in no-article-not-green.test.mjs.
   assert.equal(runGenerateBlock({ nodeExit: EXIT_NO_ARTICLE_DECLARED }).status, 0);
 });
 

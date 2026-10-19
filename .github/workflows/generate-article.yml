@@ -44,8 +44,8 @@ name: Generate Blog Article
 #     su 47 arrivi `schedule` — cioe' il push link passa il gate di ammissione
 #     quasi sempre, mentre il cron e' quasi sempre il riavvio ridondante che
 #     `admit` esiste per assorbire.
-#   - un run che NON produce ma DICHIARA perche' (pool secco, duplicato,
-#     rigetto qualita', quota vera: tutti exit 4) chaina con un dispatch, che
+#   - un run che NON produce ma DICHIARA una ragione specifica alla sezione
+#     (duplicato o rigetto qualita': exit 4) chaina con un dispatch, che
 #     e' la meta' nuova. Era il buco: un anello del genere non pusha niente
 #     sotto `content/**`, quindi non aveva nessun successore e la catena si
 #     fermava li' fino al prossimo slot cron.
@@ -95,9 +95,10 @@ name: Generate Blog Article
 # ── L'ANELLO NON E' PIU' SOLO L'ARTICOLO (2026-08-18) ─────────────────────────
 #
 # Il paragrafo sopra non vale piu' parola per parola, ed e' deliberato. L'anello
-# ora e' l'ESITO DICHIARATO: un run che non produce ma esce con una delle sei
-# ragioni legittime (EXIT_NO_ARTICLE_DECLARED, cioe' exit 4 su ogni tentativo)
-# dispatcha il successore dopo 90s. Il buco che chiude e' misurato: 6,8h di
+# ora e' l'ESITO DICHIARATO: un run che non produce ma esce con una ragione
+# specifica alla sezione (EXIT_NO_ARTICLE_DECLARED, exit 4) dispatcha il
+# successore dopo 90s. Le indisponibilita' condivise del pool AI usano exit 5
+# e cedono al cron. Il buco che chiude e' misurato: 6,8h di
 # tempo davvero morto su 50,2h di finestra (14%), cioe' nessuna run vera attiva,
 # quasi tutto in attesa di uno slot cron dopo un anello secco.
 #
@@ -1356,14 +1357,13 @@ jobs:
           # lascia passare per costruzione ogni difetto non ancora nominato, ed
           # e' precisamente cosi' che la run 31823202761 e' uscita verde: la sua
           # miscela di errori non era il caso nominato. Ora: «se non c'e' un
-          # articolo, FALLISCI, tranne quando ogni tentativo ha DICHIARATO una
-          # ragione legittima» — cioe' e' uscito EXIT_NO_ARTICLE_DECLARED (4).
+          # articolo, FALLISCI, salvo esiti dichiarati» — cioe' exit 4 per una
+          # ragione locale alla sezione o exit 5 per il pool condiviso.
           #
-          # Le sei ragioni legittime sono enumerate in
-          # `generator/scripts/lib/exhaustion-disposition.mjs` e sono le UNICHE
-          # cose che questo step assorbe ancora quando article=false: pool
-          # evergreen saturo, nessuna keyword disponibile, tentativi evergreen
-          # esauriti, duplicato, rigetto qualita', quota davvero esaurita.
+          # Le ragioni dichiarate sono enumerate in
+          # `generator/scripts/lib/exhaustion-disposition.mjs`. Exit 4 e' una
+          # ragione specifica alla sezione e permette di provare la gemella;
+          # exit 5 segnala un guasto del pool condiviso e ferma i retry.
           #
           # Tutto il resto e' rosso, exit 0 compreso: un create-article.mjs che
           # esce 0 senza scrivere un corpo non ha dichiarato niente, ed e'
@@ -1387,7 +1387,9 @@ jobs:
           # Duplicarlo qui dentro sarebbe una seconda copia peggiore di un
           # osservatore che gia' regge.
           roster_blocked=false
-          # `false` appena UN tentativo finisce senza articolo e senza uscire 4.
+          provider_blocked=false
+          # Resta false se un tentativo termina con un codice non dichiarato;
+          # i blocchi noti hanno i propri flag sotto.
           all_declared=true
           # La prima ragione non dichiarata incontrata, per il messaggio finale.
           undeclared_why=""
@@ -1506,9 +1508,9 @@ jobs:
             # `scan-failed-runs.mjs` — che raccoglie solo le run `failure` —
             # avesse nulla da raccogliere.
             #
-            # Non si esce subito: la sezione gemella va comunque tentata (un
-            # prompt e' per-fonte, e l'altra fonte puo' stare sotto il cap). Il
-            # flag decide DOPO il ciclo, e solo se non e' uscito niente.
+            # Non si esce subito: la sezione gemella va comunque tentata per un
+            # rifiuto di taglia specifico al prompt. Un'indisponibilita' del
+            # pool condiviso usa invece exit 5 e ferma il ciclo.
             if [ "$rc" = "3" ]; then
               echo "::warning::create-article.mjs: il roster non puo' servire il prompt della sezione $sec (exit 3)"
               roster_blocked=true
@@ -1548,15 +1550,21 @@ jobs:
               break
             fi
 
+            if [ "$rc" = "5" ]; then
+              echo "::warning::pool AI condiviso indisponibile sulla sezione $sec; si cede al prossimo cron"
+              provider_blocked=true
+              effective="$sec"
+              break
+            fi
+
             # ── LA DICHIARAZIONE, valutata DOPO aver constatato che non c'e' un
             # corpo. L'ordine conta: exit 4 con un articolo scritto non esiste,
             # ma exit 0 CON articolo e' il caso normale e non deve mai passare
             # di qui. Sopra c'e' gia' il `break`, quindi qui `$rc` descrive
             # sempre un tentativo finito a mani vuote.
             if [ "$rc" = "4" ]; then
-              # Ragione legittima dichiarata: pool secco, duplicato, rigetto
-              # qualita', o quota davvero esaurita. E' l'unico assorbimento
-              # rimasto.
+              # Esito legittimo circoscritto alla sezione: l'altra fonte puo'
+              # ancora essere valida.
               echo "::warning::create-article.mjs: nessun articolo sulla sezione $sec, ragione legittima DICHIARATA (exit 4)"
             elif [ "$rc" = "0" ]; then
               # Il caso piu' insidioso, e quello che nessuno stava guardando:
@@ -1567,7 +1575,7 @@ jobs:
               [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito 0 sulla sezione $sec senza scrivere un corpo e senza dichiarare una ragione (attesa: exit 4)"
             else
               all_declared=false
-              [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito $rc sulla sezione $sec (non e' una delle sei ragioni legittime, che escono 4)"
+              [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito $rc sulla sezione $sec (codice non dichiarato)"
             fi
           done
 
@@ -1601,6 +1609,10 @@ jobs:
             outcome_kind="error"
             outcome_reason="no-attempt"
             outcome_section="$effective"
+          elif [ "$provider_blocked" = "true" ]; then
+            outcome_kind="no-article"
+            outcome_reason="provider-unavailable"
+            outcome_section="$effective"
           elif [ "$roster_blocked" = "true" ]; then
             outcome_kind="error"
             outcome_reason="roster-blocked"
@@ -1619,20 +1631,17 @@ jobs:
           # `article` is the signal; `section` is the section that actually
           # wrote, which is what the next chain link alternates off.
           #
-          # `declared` e `roster_blocked` esistono per lo step «Chain», e vanno
-          # letti INSIEME: `all_declared` resta `true` anche quando il roster
-          # non ha potuto servire il prompt (exit 3 non azzera il flag, imposta
-          # `roster_blocked`), quindi un successore deciso sul solo `declared`
-          # ripartirebbe contro un muro che il prossimo tentativo trova
-          # identico. Sono due condizioni, non una.
+          # Gli esiti di blocco sono separati da `declared`: il prompt troppo
+          # grande e il pool AI condiviso fermano la catena per ragioni diverse.
           {
             echo "article=$produced"
             echo "section=$effective"
             echo "declared=$all_declared"
             echo "roster_blocked=$roster_blocked"
+            echo "provider_blocked=$provider_blocked"
             echo "partial_failure=$partial_failure"
           } >> "$GITHUB_OUTPUT"
-          echo "article=$produced section=$effective declared=$all_declared roster_blocked=$roster_blocked partial_failure=$partial_failure attempts=$tried/${#sections[@]}"
+          echo "article=$produced section=$effective declared=$all_declared roster_blocked=$roster_blocked provider_blocked=$provider_blocked partial_failure=$partial_failure attempts=$tried/${#sections[@]}"
 
           # ── LA RUN DIVENTA ROSSA (issue #313 / #348) ──────────────────────
           # Gli output sono gia' scritti sopra: gli step con `if: always()` (il
@@ -1648,6 +1657,10 @@ jobs:
           if [ "$produced" = "true" ]; then
             exit 0
           fi
+          if [ "$provider_blocked" = "true" ]; then
+            echo "::notice::pool AI condiviso temporaneamente indisponibile: nessun retry immediato, si attende il prossimo cron"
+            exit 0
+          fi
 
           # Da qui in giu' NON c'e' un articolo. La domanda non e' piu' «quale
           # errore e' successo» — e' «qualcuno ha dichiarato perche'?».
@@ -1660,15 +1673,16 @@ jobs:
             exit 1
           fi
           if [ "$all_declared" != "true" ]; then
-            echo "::error::nessun articolo in $tried tentativi, e la ragione NON e' dichiarata: ${undeclared_why}. Le sei ragioni legittime escono tutte con EXIT_NO_ARTICLE_DECLARED (4) — vedi generator/scripts/lib/exhaustion-disposition.mjs. Un'uscita senza articolo e senza dichiarazione e' il verde silenzioso della #313 (60+ run 'success' consecutive, 06:06Z→16:30Z del 2026-08-14), e da qui in poi e' rossa."
+            echo "::error::nessun articolo in $tried tentativi, e la ragione NON e' dichiarata: ${undeclared_why}. Vedi generator/scripts/lib/exhaustion-disposition.mjs per i codici dichiarati. Un'uscita senza articolo e senza dichiarazione e' il verde silenzioso della #313 (60+ run 'success' consecutive, 06:06Z→16:30Z del 2026-08-14), e da qui in poi e' rossa."
             exit 1
           fi
           # Nessun articolo, ma ogni tentativo ha dichiarato una ragione
-          # legittima: e' l'unico verde senza articolo che resta. Se questo
+          # legittima: e' il verde senza articolo per ragioni locali alla
+          # sezione. Se questo
           # stato PERSISTE, a vederlo e' `scan-generation-health.mjs`
           # (`generation-idle`, 6h) — non questo step, che non ha il
           # denominatore per distinguere una notte secca da un guasto.
-          echo "nessun articolo, ma ogni tentativo ha dichiarato una ragione legittima (exit 4) — verde"
+          echo "nessun articolo, ma ogni tentativo ha dichiarato una ragione locale alla sezione (exit 4) — verde"
           exit 0
 
       # ── LO STACK CHE IL SILENZIO NON HA MAI STAMPATO ────────────────────────
@@ -2287,13 +2301,11 @@ jobs:
       # cui `admit` ne scarta uno: si raddoppiano gli arrivi al gate che esiste
       # per ridurli, e si tira a sorte quale sopravvive.
       #
-      # PERCHE' NON PUO' GIRARE A VUOTO. La catena richiede una DICHIARAZIONE:
-      # ogni tentativo deve essere uscito 4 (le sei ragioni legittime). Un kill
-      # duro, un kill per stallo, un exit 3, un'uscita muta, un guasto prima
-      # ancora del generatore — tutti lasciano `declared` diverso da `true`, e
-      # tutti fermano la catena. E' l'inverso esatto della forma che il dispatch
-      # incondizionato del sito aveva: li' un generatore che falliva presto
-      # girava alla velocita' con cui usciva, qui e' l'unico caso che non chaina.
+      # PERCHE' NON PUO' GIRARE A VUOTO. La catena parte solo dopo un esito
+      # locale alla sezione (exit 4). Un blocco condiviso del pool AI (exit 5),
+      # un kill duro, un kill per stallo, un exit 3, un'uscita muta o un guasto
+      # prima del generatore fermano la catena. L'esito condiviso ha un flag
+      # dedicato perche' `declared` da solo non basta a distinguerlo.
       #
       # IL KILL SWITCH E' A DUE STRATI, e il primo e' un FILE nel repo — non e'
       # gusto, e' il precedente gia' pagato in questo repo: fast-publish-article.yml
@@ -2329,6 +2341,7 @@ jobs:
           ARTICLE: ${{ steps.generate.outputs.article }}
           DECLARED: ${{ steps.generate.outputs.declared }}
           ROSTER_BLOCKED: ${{ steps.generate.outputs.roster_blocked }}
+          PROVIDER_BLOCKED: ${{ steps.generate.outputs.provider_blocked }}
           SECTION_PRODUCED: ${{ steps.generate.outputs.section }}
           SECTION_REQUESTED: ${{ steps.mode.outputs.section }}
           CHAIN_DEPTH: ${{ inputs.chain_depth }}
@@ -2370,18 +2383,15 @@ jobs:
           [ -f .github/CHAIN_DISABLED ] && stop ".github/CHAIN_DISABLED presente (kill switch in-repo)"
           [ "${CHAIN_ARMED:-}" = "false" ] && stop "vars.CHAIN_ARMED=false (kill switch)"
 
-          # L'ordine dei test sotto e' l'ordine dell'argomento, e non e'
-          # intercambiabile: prima «c'e' un articolo?» (allora il successore
-          # esiste gia'), poi «il roster ha servito?» (se no, nessun successore
-          # di nessun tipo: il muro e' noto), poi «c'e' una dichiarazione?».
+          # L'ordine dei test sotto e' l'ordine dell'argomento: prima l'articolo,
+          # poi i due blocchi noti (prompt non servibile e pool AI condiviso),
+          # infine la dichiarazione.
           #
-          # `roster_blocked` E' SALITO SOPRA `declared` il 2026-08-19, e prima
-          # era sotto. Finche' entrambi erano `stop` lo scambio non cambiava
-          # niente se non il messaggio; ora cambia, ed e' il verso giusto: il
-          # roster esaurito deve poter vietare anche il SOCCORSO, che sta nel
-          # ramo non-dichiarato. Un esito non dichiarato CON il roster bloccato
-          # non e' un muro di durata ignota — e' quello noto.
+          # I due blocchi noti precedono `declared`: anche un esito non
+          # dichiarato con uno di questi flag non deve spendere il soccorso,
+          # perche' il muro e' noto.
           [ "${ARTICLE:-}" = "true" ] && stop "articolo prodotto — il successore lo fa gia' il push su content/**"
+          [ "${PROVIDER_BLOCKED:-}" = "true" ] && stop "pool AI condiviso temporaneamente indisponibile; si cede al cron"
           [ "${ROSTER_BLOCKED:-}" = "true" ] && stop "roster esaurito: il prossimo tentativo troverebbe lo stesso muro, non una finestra nuova"
 
           # `kind` tiene distinte due cose che finiscono entrambe in un dispatch.

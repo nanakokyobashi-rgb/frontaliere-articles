@@ -380,6 +380,7 @@ import { findContentDuplicate } from './lib/article-content-duplicate.mjs';
 import {
   EXIT_ROSTER_CANNOT_SERVE_PROMPT,
   EXIT_NO_ARTICLE_DECLARED,
+  EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
   isInputCapDeferralVeto,
   inputCapVetoSummary,
   providerCooldownEchoOnlySummary,
@@ -17249,6 +17250,11 @@ function isFactCheckUnavailableError(e) {
   return e?.factCheckUnavailable === true;
 }
 
+function isSharedArticleCoverVerifierUnavailableError(e) {
+  return e?.retryable === true
+    && e?.code === ARTICLE_COVER_FALLBACK_ERROR_CODES.VERIFICATION_UNAVAILABLE;
+}
+
 /**
  * A governed cover failure is already fail-closed: no article was written
  * without a verified hero. Keep retryable cover-boundary failures at the run
@@ -18261,8 +18267,8 @@ async function main() {
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, `No usable news for canton section ${SECTION_NAME} (no evergreen pool by construction)`] });
       // Ragione legittima #7 di dieci — vedi EXIT_NO_ARTICLE_DECLARED. Esiste
       // solo nel corpus: lib/exhaustion-disposition.mjs e' un gemello identico
-      // del sito, dove create-article non ha sezioni cantonali, e il suo elenco
-      // resta quello delle sei ragioni comuni ai due repo.
+      // del sito, dove create-article non ha sezioni cantonali. Il codice 4
+      // resta riservato agli esiti locali alla sezione in entrambi i repo.
       await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     } else if (!newsSuccess && !candidateSuccess) {
       console.error('📚 Fase 2: Fallback evergreen — generazione articolo SEO long-tail...\n');
@@ -21235,8 +21241,8 @@ if (invokedDirectly) {
     if (RUN_REPORT?.status === 'generated') return;
     console.error(
       `\n❌ Uscita non dichiarata: main() e' ritornato con status='${RUN_REPORT?.status ?? '(mai finalizzato)'}'`
-      + ' senza aver prodotto un articolo e senza dichiarare una delle dieci ragioni legittime'
-      + ' (vedi EXIT_NO_ARTICLE_DECLARED in lib/exhaustion-disposition.mjs).'
+      + ' senza aver prodotto un articolo e senza dichiarare un esito legittimo'
+      + ' (codice 4 locale alla sezione o codice 5 del pool condiviso).'
       + ' Un exit 0 in questo stato e\' esattamente il verde silenzioso di #313.',
     );
     console.error(`::error::no-article-undeclared-exit: status=${RUN_REPORT?.status ?? 'unfinalized'}`);
@@ -21294,15 +21300,23 @@ if (invokedDirectly) {
       notes: [...RUN_REPORT.notes, `Deferred (fact-check unavailable; article not published): ${e.message}`],
     });
     console.error(`\n⚠️  Differito: fact-check indisponibile, articolo non pubblicato. Riprovo al prossimo run. ${e.message}`);
-    // Ragione legittima #9 di dieci — il verifier non ha prodotto un verdetto:
-    // il run si differisce fail-closed e non pubblica contenuto non verificato.
-    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
+    // Il verifier condivide il pool fra le sezioni: non ripetere subito la
+    // stessa cascata e lasciare al prossimo cron la rivalutazione.
+    await exitAfterFlush(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE);
+  }
+  if (isSharedArticleCoverVerifierUnavailableError(e)) {
+    finalizeRunReport('deferred', {
+      notes: [...RUN_REPORT.notes, `Deferred (article cover verifier unavailable; article not published): ${e.message}`],
+    });
+    console.error(`\n⚠️  Differito: verifier della copertina indisponibile, articolo non pubblicato. Riprovo al prossimo run. ${e.message}`);
+    // Il verifier serve tutte le sezioni: non ripetere la stessa chiamata
+    // sulla sezione gemella mentre il servizio condiviso non risponde.
+    await exitAfterFlush(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE);
   }
   // The article-hero verifier is a publication boundary just like the
   // fact-check: a missing verdict must not publish an unverified image, but it
-  // is also not a candidate-quality rejection. Defer with the shared
-  // no-article code so the workflow records a declared outcome and retries
-  // when the image provider/verifier is available again.
+  // is also not a candidate-quality rejection. Candidate-specific gaps defer
+  // through the section-local path; provider outages were handled above.
   if (isRetryableArticleCoverError(e)) {
     finalizeRunReport('deferred', {
       notes: [...RUN_REPORT.notes, 'Deferred (article cover unavailable; article not published): ' + e.message],
@@ -21312,24 +21326,21 @@ if (invokedDirectly) {
     // un verdetto utilizzabile: il run si differisce senza pubblicare l'articolo.
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
-  // Transient free-model pool exhaustion (every model in the fallback chain hit
-  // its daily quota / rate limit) is NOT a code bug — free-tier daily limits
-  // reset at 00:00 UTC, so the next scheduled run normally succeeds. Treat it as
-  // a clean deferral (exit 0, no file changes) so the workflow's self-trigger
-  // back-off retries later instead of marking the run failed and raising a
-  // false-positive "Workflow Failure: Generate Blog Article" Bug issue (#1652).
-  // Mirrors the graceful quota-exhausted handling in dedicated-crawler-common.mjs.
+  // Transient free-model pool exhaustion is not a code bug: free-tier limits
+  // reset and a later cron can retry. Use a distinct declared outcome so the
+  // workflow does not rerun this shared pool for the sibling section or start
+  // another chain link immediately.
   // ISSUE #452 — l'uscita anticipata, e viene per PRIMA di tutte.
   //
   // Non e' prudenza d'ordine: e' che questo ramo descrive una DECISIONE gia'
   // presa a monte — il ciclo di retry ha smesso di macinare e ha marcato
   // l'errore — e i rami sotto la descriverebbero al posto suo con un'altra
   // ragione. Su un errore con quota dominante `isInputCapDeferralVeto` risponde
-  // `false` e `isLegitimateQuotaDeferral` risponde `true`: la run uscirebbe 4,
-  // «ragione legittima dichiarata», e il workflow CHAINEREBBE il successore
-  // contro un muro che il prossimo tentativo trova identico. Il differimento
-  // sarebbe per giunta falso: nessuna finestra di quota alza il cap di un
-  // modello sopra il peso dell'impalcatura del prompt.
+  // `false` e `isLegitimateQuotaDeferral` risponde `true`: prima la run usciva
+  // 4 e il workflow concatenava un successore contro un pool condiviso che il
+  // prossimo tentativo trovava identico. Ora l'esito usa il codice 5. Il
+  // differimento sarebbe per giunta falso: nessuna finestra di quota alza il
+  // cap di un modello sopra il peso dell'impalcatura del prompt.
   //
   // Esce 3 e non un codice nuovo perche' 3 e' gia' esattamente questo esito —
   // «il roster non puo' servire questo prompt» — e il blocco bash dello step
@@ -21428,8 +21439,9 @@ if (invokedDirectly) {
     if (isLegitimateQuotaDeferral(e)) {
       finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`] });
       console.error(`\n⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera, ${share.transient}/${share.total} = ${pct}%). Riprovo al prossimo run. ${e.message}`);
-      // Ragione legittima #6 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
-      await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
+      // La quota riguarda il pool condiviso: cedere al prossimo cron senza
+      // ritentare subito sulla sezione gemella.
+      await exitAfterFlush(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE);
     }
     finalizeRunReport('error', {
       notes: [...RUN_REPORT.notes, `Roster down, not deferrable (transient ${share.transient}/${share.total}): ${e.message}`],

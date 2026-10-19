@@ -705,6 +705,7 @@ jobs:
           effective="$TARGET_SECTION"
           tried=0
           roster_blocked=false
+          provider_blocked=false
           all_declared=true
           undeclared_why=""
           outcome_kind="error"
@@ -797,6 +798,13 @@ jobs:
               break
             fi
 
+            if [ "$rc" = "5" ]; then
+              echo "::warning::pool AI condiviso indisponibile sulla sezione $sec; si cede al prossimo cron"
+              provider_blocked=true
+              effective="$sec"
+              break
+            fi
+
             if [ "$rc" = "4" ]; then
               echo "::warning::create-article.mjs: nessun articolo sulla sezione $sec, ragione legittima DICHIARATA (exit 4)"
             elif [ "$rc" = "0" ]; then
@@ -804,7 +812,7 @@ jobs:
               [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito 0 sulla sezione $sec senza scrivere un corpo e senza dichiarare una ragione (attesa: exit 4)"
             else
               all_declared=false
-              [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito $rc sulla sezione $sec (non e' una delle sei ragioni legittime, che escono 4)"
+              [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito $rc sulla sezione $sec (codice non dichiarato)"
             fi
           done
 
@@ -826,6 +834,10 @@ jobs:
             outcome_kind="error"
             outcome_reason="no-attempt"
             outcome_section="$effective"
+          elif [ "$provider_blocked" = "true" ]; then
+            outcome_kind="no-article"
+            outcome_reason="provider-unavailable"
+            outcome_section="$effective"
           elif [ "$roster_blocked" = "true" ]; then
             outcome_kind="error"
             outcome_reason="roster-blocked"
@@ -846,14 +858,19 @@ jobs:
             echo "section=$effective"
             echo "declared=$all_declared"
             echo "roster_blocked=$roster_blocked"
+            echo "provider_blocked=$provider_blocked"
             echo "partial_failure=$partial_failure"
           } >> "$GITHUB_OUTPUT"
-          echo "article=$produced section=$effective declared=$all_declared roster_blocked=$roster_blocked partial_failure=$partial_failure attempts=$tried/${#sections[@]}"
+          echo "article=$produced section=$effective declared=$all_declared roster_blocked=$roster_blocked provider_blocked=$provider_blocked partial_failure=$partial_failure attempts=$tried/${#sections[@]}"
 
           if [ "$partial_failure" = "true" ]; then
             exit 1
           fi
           if [ "$produced" = "true" ]; then
+            exit 0
+          fi
+          if [ "$provider_blocked" = "true" ]; then
+            echo "::notice::pool AI condiviso temporaneamente indisponibile: nessun retry immediato, si attende il prossimo cron"
             exit 0
           fi
 
@@ -866,10 +883,10 @@ jobs:
             exit 1
           fi
           if [ "$all_declared" != "true" ]; then
-            echo "::error::nessun articolo in $tried tentativi, e la ragione NON e' dichiarata: ${undeclared_why}. Le sei ragioni legittime escono tutte con EXIT_NO_ARTICLE_DECLARED (4) — vedi generator/scripts/lib/exhaustion-disposition.mjs. Un'uscita senza articolo e senza dichiarazione e' il verde silenzioso della #313 (60+ run 'success' consecutive, 06:06Z→16:30Z del 2026-08-14), e da qui in poi e' rossa."
+            echo "::error::nessun articolo in $tried tentativi, e la ragione NON e' dichiarata: ${undeclared_why}. Vedi generator/scripts/lib/exhaustion-disposition.mjs per i codici dichiarati. Un'uscita senza articolo e senza dichiarazione e' il verde silenzioso della #313 (60+ run 'success' consecutive, 06:06Z→16:30Z del 2026-08-14), e da qui in poi e' rossa."
             exit 1
           fi
-          echo "nessun articolo, ma ogni tentativo ha dichiarato una ragione legittima (exit 4) — verde"
+          echo "nessun articolo, ma ogni tentativo ha dichiarato una ragione locale alla sezione (exit 4) — verde"
           exit 0
 
       - name: Upload wedge diagnostics (stack, report, log del tentativo)
@@ -1128,6 +1145,7 @@ jobs:
           ARTICLE: ${{ steps.generate.outputs.article }}
           DECLARED: ${{ steps.generate.outputs.declared }}
           ROSTER_BLOCKED: ${{ steps.generate.outputs.roster_blocked }}
+          PROVIDER_BLOCKED: ${{ steps.generate.outputs.provider_blocked }}
           SECTION_PRODUCED: ${{ steps.generate.outputs.section }}
           SECTION_REQUESTED: ${{ steps.mode.outputs.section }}
           CHAIN_DEPTH: ${{ inputs.chain_depth }}
@@ -1169,6 +1187,7 @@ jobs:
           [ "${CHAIN_DISPATCH:-}" = "true" ] || stop "catena via dispatch spenta per questo chiamante (chain_dispatch != true)"
 
           [ "${ARTICLE:-}" = "true" ] && stop "articolo prodotto — il successore lo fa gia' il push su content/**"
+          [ "${PROVIDER_BLOCKED:-}" = "true" ] && stop "pool AI condiviso temporaneamente indisponibile; si cede al cron"
           [ "${ROSTER_BLOCKED:-}" = "true" ] && stop "roster esaurito: il prossimo tentativo troverebbe lo stesso muro, non una finestra nuova"
 
           kind='link'

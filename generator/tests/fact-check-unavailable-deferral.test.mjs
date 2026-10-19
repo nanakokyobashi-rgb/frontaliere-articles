@@ -39,10 +39,12 @@ test('a fail-closed fact-check outage defers the run instead of retrying the art
 
   const catchStart = SRC.indexOf('main().then(async () =>');
   const unavailable = SRC.indexOf('if (isFactCheckUnavailableError(e))', catchStart);
+  const cover = SRC.indexOf('// The article-hero verifier', unavailable);
   const quality = SRC.indexOf('if (isQualityRejectError(e))', catchStart);
-  assert.ok(catchStart !== -1 && unavailable > catchStart && quality > unavailable, 'ordine dei rami top-level non verificabile');
-  const runDeferral = SRC.slice(unavailable, quality);
+  assert.ok(catchStart !== -1 && unavailable > catchStart && cover > unavailable && quality > cover, 'ordine dei rami top-level non verificabile');
+  const runDeferral = SRC.slice(unavailable, cover);
   assert.match(runDeferral, /finalizeRunReport\('deferred'/);
-  assert.match(runDeferral, /EXIT_NO_ARTICLE_DECLARED/);
+  assert.match(runDeferral, /EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE/);
+  assert.doesNotMatch(runDeferral, /EXIT_NO_ARTICLE_DECLARED/);
   assert.match(runDeferral, /articolo non pubblicato/);
 });
