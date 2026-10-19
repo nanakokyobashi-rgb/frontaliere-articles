@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-19T12:32:28.066Z",
-  "contentHash": "ff26535adcc2c227c21dda1055f09fc71b01074381361a8d8dca6dd0803490a1",
+  "updatedAt": "2026-10-19T12:56:46.330Z",
+  "contentHash": "7408852eb42387dbdbc293036d4eda299f905c10955ad847e6ccda841325d124",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "San Gallo: assistenza ridotta per titolari di Status S",
+          "url": "/articoli-san-gallo/status-s-san-gallo-assistenza/",
+          "excerpt": "La commissione propone assistenza ridotta anche dopo il permesso.",
+          "date": "2026-10-19T12:49:37.837Z"
+        },
+        {
           "title": "Voto sul Bahnhofplatz Wil: credito di 63,66 milioni",
           "url": "/articoli-san-gallo/voto-bahnhofplatz-wil-2026/",
           "excerpt": "Il 29 novembre 2026 i cittadini di Wil voteranno sul progetto per il nuovo terminale bus, la velostazione e la riqualificazione della stazione.",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/rheineck-mels-aquaplaning/",
           "excerpt": "Due auto hanno urtato i guardrail il 10 ottobre 2026 Incidenti distinti su A1 e N13 I due conducenti non hanno riportato ferite Danni: circa CHF 35'000 e CHF",
           "date": "2026-10-11T10:22:49.614Z"
-        },
-        {
-          "title": "HSG a San Gallo: oltre 170 spin-off ufficiali",
-          "url": "/articoli-san-gallo/hsg-spin-off-ufficiali/",
-          "excerpt": "La HSG sostiene gli studenti nella fondazione di imprese e presenta alcuni degli oltre 170 spin-off ufficiali HSG.",
-          "date": "2026-10-09T20:43:41.814Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-19T12:32:28.066Z"
+      "updatedAt": "2026-10-19T12:56:46.330Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "St. Gallen: reduced assistance for Status S holders",
+          "url": "/en/st-gallen-articles/status-s-st-gallen-assistance/",
+          "excerpt": "The commission proposes reduced assistance even after the permit.",
+          "date": "2026-10-19T12:49:37.837Z"
+        },
+        {
           "title": "Vote on Bahnhofplatz Wil: credit of 63,66 million",
           "url": "/en/st-gallen-articles/wil-bahnhofplatz-vote-2026/",
           "excerpt": "On November 29, 2026, the citizens of Wil will vote on the project for the new bus terminal, bicycle station, and redevelopment of the station.",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/rheineck-mels-aquaplaning-crashes/",
           "excerpt": "Two cars hit the guardrails on October 10, 2026 Separate accidents on A1 and N13 The two drivers were not injured Damage: approximately CHF 35'000 and CHF 4'000",
           "date": "2026-10-11T10:22:49.614Z"
-        },
-        {
-          "title": "HSG in St. Gallen: over 170 official spin-offs",
-          "url": "/en/st-gallen-articles/hsg-official-spin-offs/",
-          "excerpt": "HSG supports students in founding companies and presents some of the more than 170 official HSG spin-offs.",
-          "date": "2026-10-09T20:43:41.814Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-19T12:32:28.066Z"
+      "updatedAt": "2026-10-19T12:56:46.330Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "St. Gallen: reduzierte Unterstützung für Personen mit Status S",
+          "url": "/de/st-gallen-artikel/status-s-st-gallen-unterstuetzung/",
+          "excerpt": "Die Kommission schlägt vor, auch nach der Erteilung der Aufenthaltsbewilligung reduzierte Unterstützung zu gewähren.",
+          "date": "2026-10-19T12:49:37.837Z"
+        },
+        {
           "title": "Abstimmung über den Bahnhofplatz Wil: Kredit von 63,66 Millionen",
           "url": "/de/st-gallen-artikel/abstimmung-bahnhofplatz-wil-2026/",
           "excerpt": "Am 29. November 2026 stimmen die Bürgerinnen und Bürger von Wil über das Projekt für den neuen Busterminal, die Velostation und die Neugestaltung des Bahnhofs ab.",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/rheineck-mels-aquaplaning-unfaelle/",
           "excerpt": "Zwei Autos prallten am 10.",
           "date": "2026-10-11T10:22:49.614Z"
-        },
-        {
-          "title": "HSG in St. Gallen: über 170 offizielle Spin-offs",
-          "url": "/de/st-gallen-artikel/hsg-offizielle-spin-offs/",
-          "excerpt": "Die HSG unterstützt Studierende bei der Gründung von Unternehmen und stellt einige der über 170 offiziellen HSG-Spin-offs vor.",
-          "date": "2026-10-09T20:43:41.814Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-19T12:32:28.066Z"
+      "updatedAt": "2026-10-19T12:56:46.330Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Saint-Gall : aide réduite pour les titulaires du statut S",
+          "url": "/fr/articles-saint-gall/statut-s-saint-gall-assistance/",
+          "excerpt": "La commission propose une aide réduite même après le permis.",
+          "date": "2026-10-19T12:49:37.837Z"
+        },
+        {
           "title": "Vote sur le Bahnhofplatz Wil : crédit de 63,66 millions",
           "url": "/fr/articles-saint-gall/vote-bahnhofplatz-wil-2026/",
           "excerpt": "Le 29 novembre 2026, les citoyens de Wil voteront sur le projet du nouveau terminal de bus, de la vélostation et de la requalification de la gare.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/rheineck-mels-aquaplanage-accidents/",
           "excerpt": "Deux voitures ont heurté les glissières de sécurité le 10 octobre 2026 Accidents distincts sur l’A1 et la N13 Les deux conducteurs n’ont pas été blessés",
           "date": "2026-10-11T10:22:49.614Z"
-        },
-        {
-          "title": "HSG à Saint-Gall : plus de 170 spin-off officiels",
-          "url": "/fr/articles-saint-gall/hsg-spin-off-officiels/",
-          "excerpt": "La HSG soutient les étudiants dans la création d’entreprises et présente quelques-uns des plus de 170 spin-off officiels de la HSG.",
-          "date": "2026-10-09T20:43:41.814Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-19T12:32:28.066Z"
+      "updatedAt": "2026-10-19T12:56:46.330Z"
     }
   }
 }
