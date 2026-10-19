@@ -731,7 +731,7 @@ test('il downgrade apex richiede cache-lag esplicito e distingue status/route, e
 test('un mismatch apex persistente resta warning e lascia eseguire il gate origin', () => {
   const verification = workflowStep('Verify the article is actually readable');
   const retryAt = apexHelper.indexOf(
-    'bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs \\\n              "--files-from=$RUNNER_TEMP/edge-purge-urls.txt"',
+    'bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs \\\n    "--files-from=$RUNNER_TEMP/edge-purge-urls.txt"',
   );
 
   assert.ok(retryAt >= 0, 'manca il retry della purge dopo il mismatch apex');
