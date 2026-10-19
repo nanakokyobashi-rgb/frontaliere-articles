@@ -6294,6 +6294,36 @@
         "corpus": "4cb6ab1ae26b751c",
         "alignedAt": "2026-10-19"
       }
+    },
+    {
+      "path": "scripts/lib/is-invoked-directly.mjs",
+      "mode": "identical",
+      "reason": "Helper condiviso per distinguere un entrypoint CLI da un modulo importato. I due moduli R2 lo usano per non eseguire il comando durante import e test; SITE resta la sorgente canonica.",
+      "baseline": {
+        "site": "1f1dfecc6504df9e",
+        "corpus": "1f1dfecc6504df9e",
+        "alignedAt": "2026-10-19"
+      }
+    },
+    {
+      "path": "scripts/lib/r2-image-namespace-lock.mjs",
+      "mode": "identical",
+      "reason": "Contratto condiviso per acquire, verify e release CAS delle namespace R2 images/blog e images/places, con acquisizione multi-namespace in ordine stabile e deadline cumulativa. SITE resta la sorgente canonica del writer.",
+      "baseline": {
+        "site": "75ce8cd62e272967",
+        "corpus": "75ce8cd62e272967",
+        "alignedAt": "2026-10-19"
+      }
+    },
+    {
+      "path": "scripts/lib/r2-section-lock.mjs",
+      "mode": "identical",
+      "reason": "Trasporto R2 SigV4 e primitive di lease per sezioni; r2-image-namespace-lock.mjs riusa createR2Request per firmare le operazioni condizionali. Il modulo resta byte-identico alla sorgente SITE.",
+      "baseline": {
+        "site": "6cb8e90d07c896c2",
+        "corpus": "6cb8e90d07c896c2",
+        "alignedAt": "2026-10-19"
+      }
     }
   ]
 }
