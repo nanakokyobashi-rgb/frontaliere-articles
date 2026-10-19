@@ -34,7 +34,9 @@
  *
  * CAP PER SEZIONE (D8): al massimo N articoli per sezione per giro (default
  * 3, `--cap` o RECONCILE_SECTION_CAP), i piu' recenti prima. Il workflow
- * dispatcha fast-publish-section.yml una volta per sezione con quegli id; se
+ * dispatcha fast-publish-section.yml una volta per sezione con quegli id e
+ * trasporta separatamente tutti i 404 osservati, cosi' i leftover restano
+ * fuori dall'inventario immutabile mentre attendono il giro successivo; se
  * manca solo una pagina di sezione, con `ids: []` (rinfresco di landing,
  * archivio e hub).
  *
@@ -159,6 +161,7 @@ export function planSectionBackfill(section, pages, dateById, cap, orphanPages =
   const sectionMissing = missing.filter((page) => page.kind === 'section').map((page) => page.path);
   const selected = missingIds.slice(0, n);
   const selectedIds = new Set(selected);
+  const knownMissingPagePaths = [...new Set(missing.map((page) => page.path))];
   const missingPagePaths = missing
     .filter((page) => page.kind === 'section' || selectedIds.has(page.id))
     .map((page) => page.path);
@@ -175,6 +178,7 @@ export function planSectionBackfill(section, pages, dateById, cap, orphanPages =
     missingIds,
     selected,
     missingPagePaths,
+    knownMissingPagePaths,
     leftover: missingIds.slice(n),
     // Un giro di sola sezione (ids vuoti) serve quando manca una pagina di
     // sezione e nessun articolo: con articoli selezionati la sezione viene

@@ -102,6 +102,20 @@ export const PAGE_MANIFEST_CACHE_CONTROL = 'public,max-age=60';
 export const UPLOAD_ORDER = Object.freeze(['article', 'archive', 'hub', 'landing']);
 const PUBLISH_API_WORKFLOW = '.github/workflows/publish-api.yml';
 const FULL_GIT_SHA_RE = /^[a-f0-9]{40}$/;
+const CANONICAL_PAGE_PATH_RE = /^\/[a-z0-9/-]+\/$/u;
+
+function parseCanonicalPagePaths(raw, option) {
+  let pages;
+  try {
+    pages = JSON.parse(raw);
+  } catch (error) {
+    throw new Error(`${option} deve essere un array JSON di path: ${error.message}`);
+  }
+  if (!Array.isArray(pages) || pages.some((page) => typeof page !== 'string' || !CANONICAL_PAGE_PATH_RE.test(page) || page.includes('//'))) {
+    throw new Error(`${option} deve contenere solo path canonici assoluti`);
+  }
+  return pages;
+}
 
 function publishedMainHead() {
   const repository = process.env.GITHUB_REPOSITORY;
@@ -131,7 +145,15 @@ async function assertExpectedMainHead(expected, readMainHead = publishedMainHead
 }
 
 export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activeCorpusCoreMap() } = {}) {
-  const out = { ids: [], missingPages: [], bootstrap: false, publish: false, dryRun: false, removeStaleCantonRssFeeds: false };
+  const out = {
+    ids: [],
+    missingPages: [],
+    knownMissingPages: [],
+    bootstrap: false,
+    publish: false,
+    dryRun: false,
+    removeStaleCantonRssFeeds: false,
+  };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const value = () => {
@@ -151,17 +173,10 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
       }
       if (!Array.isArray(ids) || ids.some((id) => typeof id !== 'string' || !id)) throw new Error('--ids deve essere un array JSON di id non vuoti');
       out.ids.push(...ids);
-    } else if (a === '--missing-pages') {
-      let pages;
-      try {
-        pages = JSON.parse(value());
-      } catch (error) {
-        throw new Error(`--missing-pages deve essere un array JSON di path: ${error.message}`);
-      }
-      if (!Array.isArray(pages) || pages.some((page) => typeof page !== 'string' || !/^\/[a-z0-9/-]+\/$/u.test(page) || page.includes('//'))) {
-        throw new Error('--missing-pages deve contenere solo path canonici assoluti');
-      }
-      out.missingPages.push(...pages);
+    } else if (a === '--missing-pages' || a === '--known-missing-pages') {
+      const pages = parseCanonicalPagePaths(value(), a);
+      if (a === '--missing-pages') out.missingPages.push(...pages);
+      else out.knownMissingPages.push(...pages);
     } else if (a === '--bootstrap') out.bootstrap = true;
     else if (a === '--remove-stale-canton-rss-feeds') out.removeStaleCantonRssFeeds = true;
     else if (a === '--publish') out.publish = true;
@@ -172,6 +187,7 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
   }
   out.ids = [...new Set(out.ids)];
   out.missingPages = [...new Set(out.missingPages)];
+  out.knownMissingPages = [...new Set(out.knownMissingPages)];
   for (const flag of ['section', 'out', 'summary']) if (!out[flag]) throw new Error(`manca --${flag}`);
   if (out.publish && out.dryRun) throw new Error('--publish e --dry-run sono alternativi');
   if (out.bootstrap && out.ids.length) throw new Error('--bootstrap rende tutti gli articoli della sezione: non si combina con --id/--ids');
@@ -179,12 +195,18 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
   return out;
 }
 
-export function stagedReleasePageSets(pages, publishedLivePages, confirmedMissingPagePaths = []) {
+export function stagedReleasePageSets(
+  pages,
+  publishedLivePages,
+  confirmedMissingPagePaths = [],
+  knownMissingPagePaths = confirmedMissingPagePaths,
+) {
   const confirmedMissing = new Set(confirmedMissingPagePaths);
+  const knownMissing = new Set([...knownMissingPagePaths, ...confirmedMissingPagePaths]);
   const publishedPageKeys = new Set(publishedLivePages.map((page) => page.edgeKey));
   return {
     pagesForPublish: pages.filter((page) => !publishedPageKeys.has(page.edgeKey) || confirmedMissing.has(page.canonicalPath)),
-    immutableLivePages: publishedLivePages.filter((page) => !confirmedMissing.has(page.canonicalPath)),
+    immutableLivePages: publishedLivePages.filter((page) => !knownMissing.has(page.canonicalPath)),
   };
 }
 
@@ -2295,7 +2317,7 @@ export async function main(
   const renderedPagePaths = new Map(pages.map((page) => [page.canonicalPath, page]));
   const confirmedMissingPagePaths = new Set();
   if (requestedMissingPagePaths.size > 0 && (!publishing || (deferredLiveRelease && !allowDeferredLiveRelease))) {
-    defects.push('missing-pages richiede un publish; se la release è staged deve avere il replay API esplicitamente armato');
+    defects.push('missing-pages richiede un publish; se la release è staged deve avere il differimento esplicitamente armato');
   } else {
     for (const requestedPath of requestedMissingPagePaths) {
       const renderedPage = renderedPagePaths.get(requestedPath);
@@ -2313,9 +2335,15 @@ export async function main(
   }
   // During a deferred live release the old sitemap and edge registry are still
   // live. Only keys absent from the verified old page manifest are immutable
-  // additions; replacing an already announced key here would mix two releases
-  // before the API/edge pointer flips.
-  const stagedPageSets = stagedReleasePageSets(pages, publishedLivePages, confirmedMissingPagePaths);
+  // additions; a key observed as 404 by the reconciler is the explicit
+  // exception, because keeping it in the immutable inventory would block the
+  // staged repair before the API/edge pointer flips.
+  const stagedPageSets = stagedReleasePageSets(
+    pages,
+    publishedLivePages,
+    confirmedMissingPagePaths,
+    args.knownMissingPages,
+  );
   const pagesForPublish = deferredLiveRelease ? stagedPageSets.pagesForPublish : pages;
   const immutableLivePages = deferredLiveRelease ? stagedPageSets.immutableLivePages : [];
 
@@ -2399,6 +2427,7 @@ export async function main(
     pagesForPublish,
     immutableLivePages,
     requestedMissingPagePaths: [...requestedMissingPagePaths],
+    knownMissingPagePaths: [...args.knownMissingPages],
     confirmedMissingPagePaths: [...confirmedMissingPagePaths],
     // Legacy summary key retains its bootstrap-only meaning.
     immutableBootstrapPages: args.bootstrap ? immutableLivePages : [],

@@ -13,7 +13,10 @@ name: reconcile-section-pages
 # una pagina ritirata sull'edge: il manifest scritto dal publisher dopo una
 # release verificata rende quella chiave osservabile nel giro seguente. Qui si
 # chiudono entrambi i buchi, con un CAP PER SEZIONE (D8) cosi' che un cantone
-# con molti buchi non consumi il giro degli altri.
+# con molti buchi non consumi il giro degli altri. Quando l'edge flip e'
+# pendente, le run di backfill sono staged senza replay individuale: il replay
+# API globale parte solo dopo la barriera di tutte le run e quando non restano
+# leftover oltre il cap.
 #
 # Finche' nessuna sezione e' live il rilevamento e' un no-op (zero sezioni).
 
@@ -46,7 +49,7 @@ permissions:
 jobs:
   reconcile:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 360
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -84,13 +87,14 @@ jobs:
             } >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          echo "dispatch=$(jq -r '.counts.dispatch' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
+          echo "dispatch=$(jq -r '.counts.dispatch // 0' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
           echo "pending_edge_flip=$(jq -r '.pendingEdgeFlip // false' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
           echo "api_release_commit=$(jq -r '.apiCommit // empty' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
           echo "source_commit=$source_commit" >> "$GITHUB_OUTPUT"
           echo "skip=$(jq -r 'if .skip then \"true\" else \"false\" end' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
-          echo "unknown=$(jq -r '.counts.unknown' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
-          echo "manifest_unknown=$(jq -r '.counts.manifestUnknown' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
+          echo "leftover=$(jq -r '.counts.leftover // 0' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
+          echo "unknown=$(jq -r '.counts.unknown // 0' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
+          echo "manifest_unknown=$(jq -r '.counts.manifestUnknown // 0' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
           echo 'head_guard=true' >> "$GITHUB_OUTPUT"
 
       # Niente catena stretta: se l'innesco era a sua volta un dispatch (un
@@ -164,20 +168,25 @@ jobs:
             exit 1
           fi
           export GH_TOKEN="$runtime_pat"
+          nonce_file="$RUNNER_TEMP/reconcile-backfill-nonces.tsv"
+          : > "$nonce_file"
           fail=0
-          while IFS=$'\t' read -r section ids missing_page_paths; do
+          while IFS=$'\t' read -r section ids missing_page_paths known_missing_page_paths; do
             [ -n "$section" ] || continue
             echo "── backfill $section ids=$ids"
+            dispatch_nonce="reconcile-${GITHUB_RUN_ID}-${section}"
             args=(
               -f "section=$section"
               -f "article_ids=$ids"
               -f "missing_page_paths=$missing_page_paths"
+              -f "known_missing_page_paths=$known_missing_page_paths"
               -f 'bootstrap=false'
               -f 'dry_run=false'
+              -f "dispatch_nonce=$dispatch_nonce"
             )
             if [ "$PENDING_EDGE_FLIP" = 'true' ]; then
               args+=(
-                -f 'replay_api_after_publish=true'
+                -f 'allow_deferred_live_release=true'
                 -f "api_release_commit=$API_RELEASE_COMMIT"
                 -f "source_commit=$SOURCE_COMMIT"
                 -f "source_main_commit=$SOURCE_COMMIT"
@@ -186,20 +195,93 @@ jobs:
             if ! gh workflow run fast-publish-section.yml --repo "$GITHUB_REPOSITORY" --ref main "${args[@]}"; then
               echo "::warning::dispatch fallito per $section — riprovera' il prossimo giro"
               fail=1
+            else
+              printf '%s\t%s\n' "$section" "$dispatch_nonce" >> "$nonce_file"
             fi
-          done < <(jq -r '.sections[] | select(.dispatch) | [.section, (.selected | tojson), (.missingPagePaths | tojson)] | @tsv' "$RUNNER_TEMP/reconcile-sections.json")
+          done < <(jq -r '.sections[] | select(.dispatch) | [.section, (.selected | tojson), (.missingPagePaths | tojson), (.knownMissingPagePaths | tojson)] | @tsv' "$RUNNER_TEMP/reconcile-sections.json")
           [ "$fail" = "0" ] || exit 1
 
-      - name: Replay API when the edge flip has no page backfill
+      - name: Wait for all staged backfills before the API replay
+        id: wait_backfills
+        if: >-
+          steps.mode.outputs.allow == 'true' &&
+          steps.arm.outputs.allow == 'true' &&
+          steps.detect.outputs.head_guard == 'true' &&
+          steps.detect.outputs.skip == 'false' &&
+          steps.detect.outputs.pending_edge_flip == 'true' &&
+          steps.detect.outputs.leftover == '0' &&
+          steps.detect.outputs.unknown == '0' &&
+          steps.detect.outputs.manifest_unknown == '0'
+        env:
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::error::GITHUB_PAT_NANAKO non caricato: impossibile attendere il completamento dei backfill"
+            exit 1
+          fi
+          export GH_TOKEN="$runtime_pat"
+          nonce_file="$RUNNER_TEMP/reconcile-backfill-nonces.tsv"
+          deadline=$(( $(date +%s) + 21000 ))
+          while true; do
+            if ! runs="$(gh run list --repo "$REPOSITORY" --workflow fast-publish-section.yml --event workflow_dispatch --branch main --limit 1000 --json databaseId,status,conclusion,displayTitle)"; then
+              echo "::error::impossibile leggere lo stato delle run fast-publish-section"
+              exit 1
+            fi
+            pending=0
+            if [ -s "$nonce_file" ]; then
+              while IFS=$'\t' read -r section dispatch_nonce; do
+                [ -n "$dispatch_nonce" ] || continue
+                run="$(jq -c --arg nonce "$dispatch_nonce" '[.[] | select((.displayTitle // "") | contains("nonce=" + $nonce))] | sort_by(.databaseId) | last // empty' <<<"$runs")"
+                if [ -z "$run" ]; then
+                  pending=1
+                  echo "::notice::backfill $section non ancora comparso nelle run GitHub"
+                  continue
+                fi
+                status="$(jq -r '.status // empty' <<<"$run")"
+                conclusion="$(jq -r '.conclusion // empty' <<<"$run")"
+                case "$status:$conclusion" in
+                  completed:success)
+                    echo "::notice::backfill $section completato ($(jq -r '.databaseId' <<<"$run"))"
+                    ;;
+                  completed:*)
+                    echo "::error::backfill $section terminato con esito ${conclusion:-sconosciuto}"
+                    exit 1
+                    ;;
+                  *)
+                    pending=1
+                    echo "::notice::backfill $section ancora $status"
+                    ;;
+                esac
+              done < "$nonce_file"
+            fi
+            active_reconcile="$(jq '[.[] | select((.displayTitle // "") | contains("nonce=reconcile-")) | select(.status != "completed")] | length' <<<"$runs")"
+            if [ "$active_reconcile" -gt 0 ]; then
+              pending=1
+              echo "::notice::$active_reconcile backfill reconcile ancora attivo"
+            fi
+            if [ "$pending" = "0" ]; then
+              break
+            fi
+            if [ "$(date +%s)" -ge "$deadline" ]; then
+              echo "::error::timeout della barriera globale dei backfill"
+              exit 1
+            fi
+            sleep 20
+          done
+
+      - name: Replay API after all staged backfills
         if: >-
           steps.mode.outputs.allow == 'true' &&
           steps.arm.outputs.allow == 'true' &&
           steps.detect.outputs.pending_edge_flip == 'true' &&
           steps.detect.outputs.skip == 'false' &&
-          steps.detect.outputs.dispatch == '0' &&
+          steps.detect.outputs.leftover == '0' &&
           steps.detect.outputs.unknown == '0' &&
           steps.detect.outputs.manifest_unknown == '0' &&
-          steps.detect.outputs.head_guard == 'true'
+          steps.detect.outputs.head_guard == 'true' &&
+          steps.wait_backfills.outcome == 'success'
         env:
           REPOSITORY: ${{ github.repository }}
           SOURCE_COMMIT: ${{ steps.detect.outputs.source_commit }}

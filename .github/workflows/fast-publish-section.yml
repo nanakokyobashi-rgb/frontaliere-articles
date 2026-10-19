@@ -111,6 +111,11 @@ on:
         required: false
         default: '[]'
         type: string
+      known_missing_page_paths:
+        description: 'Array JSON di tutti i path 404 noti, anche oltre il cap del reconciler'
+        required: false
+        default: '[]'
+        type: string
       bootstrap:
         description: 'Rendi TUTTI gli articoli della sezione (accensione di un cantone)'
         required: false
@@ -161,6 +166,11 @@ on:
         required: false
         default: false
         type: boolean
+      allow_deferred_live_release:
+        description: 'Dopo uno staged backfill, mantieni il manifest differito senza dispatchare il replay API'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -182,6 +192,7 @@ jobs:
       dry: ${{ steps.plan.outputs.dry }}
       bootstrap: ${{ steps.plan.outputs.bootstrap }}
       replay_api_after_publish: ${{ steps.plan.outputs.replay_api_after_publish }}
+      allow_deferred_live_release: ${{ steps.plan.outputs.allow_deferred_live_release }}
       push_before: ${{ steps.push_range.outputs.before }}
       push_after: ${{ steps.push_range.outputs.after }}
     steps:
@@ -337,10 +348,12 @@ jobs:
           SECTION_INPUT: ${{ inputs.section }}
           ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
           MISSING_PAGE_PATHS_INPUT: ${{ inputs.missing_page_paths }}
+          KNOWN_MISSING_PAGE_PATHS_INPUT: ${{ inputs.known_missing_page_paths }}
           BOOTSTRAP_INPUT: ${{ inputs.bootstrap }}
           DRY_RUN_INPUT: ${{ inputs.dry_run }}
           REMOVE_STALE_INPUT: ${{ inputs.remove_stale_canton_rss_feeds }}
           REPLAY_API_INPUT: ${{ inputs.replay_api_after_publish }}
+          ALLOW_DEFERRED_LIVE_RELEASE_INPUT: ${{ inputs.allow_deferred_live_release }}
           EVENT_NAME: ${{ github.event_name }}
           COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           WORKFLOW_RUN_COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.workflow_run.head_commit.message }}
@@ -363,6 +376,7 @@ jobs:
                 echo 'any=false'
                 echo 'dry=false'
                 echo 'replay_api_after_publish=false'
+                echo 'allow_deferred_live_release=false'
               } >> "$GITHUB_OUTPUT"
               exit 0
             fi
@@ -387,25 +401,35 @@ jobs:
                 end
               ')"
             fi
-            missing_pages_json="$(printf '%s' "${MISSING_PAGE_PATHS_INPUT:-[]}" | jq -ce '
-              if type == "array" and all(.[]; type == "string" and test("^/[a-z0-9/-]+/$") and (contains("//") | not))
-              then unique
-              else error("missing_page_paths must be a JSON array of canonical paths")
-              end
-            ')"
+            validate_page_paths() {
+              local option="$1"
+              jq -ce --arg option "$option" '
+                if type == "array" and all(.[]; type == "string" and test("^/[a-z0-9/-]+/$") and (contains("//") | not))
+                then unique
+                else error($option + " must be a JSON array of canonical paths")
+                end
+              '
+            }
+            missing_pages_json="$(printf '%s' "${MISSING_PAGE_PATHS_INPUT:-[]}" | validate_page_paths missing_page_paths)"
+            known_missing_pages_json="$(printf '%s' "${KNOWN_MISSING_PAGE_PATHS_INPUT:-[]}" | validate_page_paths known_missing_page_paths)"
             bootstrap=false
             [ "$BOOTSTRAP_INPUT" = "true" ] && bootstrap=true
             remove_stale=false
             [ "$REMOVE_STALE_INPUT" = "true" ] && remove_stale=true
             [ "$REPLAY_API_INPUT" = "true" ] && replay_api_after_publish=true
+            allow_deferred_live_release=false
+            if [ "$REPLAY_API_INPUT" = "true" ] || [ "$ALLOW_DEFERRED_LIVE_RELEASE_INPUT" = "true" ]; then
+              allow_deferred_live_release=true
+            fi
             if [ "$bootstrap" = "true" ] && [ "$ids_json" != "[]" ]; then
               echo "::error::bootstrap rende tutti gli articoli: non si combina con article_ids"
               exit 1
             fi
-            matrix="$(jq -cn --arg s "$SECTION_INPUT" --argjson ids "$ids_json" --argjson missing "$missing_pages_json" --argjson b "$bootstrap" --argjson r "$remove_stale" \
-              '[{section: $s, ids: $ids, missingPagePaths: $missing, bootstrap: $b, removeStaleCantonRssFeeds: $r}]')"
+            matrix="$(jq -cn --arg s "$SECTION_INPUT" --argjson ids "$ids_json" --argjson missing "$missing_pages_json" --argjson knownMissing "$known_missing_pages_json" --argjson b "$bootstrap" --argjson r "$remove_stale" \
+              '[{section: $s, ids: $ids, missingPagePaths: $missing, knownMissingPagePaths: $knownMissing, bootstrap: $b, removeStaleCantonRssFeeds: $r}]')"
           else
             dry=false
+            allow_deferred_live_release=false
             if [ "$EVENT_NAME" = 'workflow_run' ]; then
               # Ogni completion API deve leggere il registro edge della
               # release appena completata: anche una kill-switch o un hub
@@ -459,6 +483,7 @@ jobs:
             echo "dry=$dry"
             echo "bootstrap=$bootstrap"
             echo "replay_api_after_publish=$replay_api_after_publish"
+            echo "allow_deferred_live_release=$allow_deferred_live_release"
           } >> "$GITHUB_OUTPUT"
           echo "resolved matrix=$matrix dry=$dry"
 
@@ -553,8 +578,10 @@ jobs:
           SECTION: ${{ matrix.target.section }}
           ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
           MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.missingPagePaths || fromJSON('[]')) }}
+          KNOWN_MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.knownMissingPagePaths || fromJSON('[]')) }}
           BOOTSTRAP: ${{ matrix.target.bootstrap }}
           REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
+          ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
           DRY: ${{ needs.resolve.outputs.dry }}
           STALE_HEAD: ${{ github.event.workflow_run.head_sha }}
           CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
@@ -589,8 +616,10 @@ jobs:
             -f section="$SECTION" \
             -f article_ids="$ARTICLE_IDS_JSON" \
             -f missing_page_paths="$MISSING_PAGE_PATHS_JSON" \
+            -f known_missing_page_paths="$KNOWN_MISSING_PAGE_PATHS_JSON" \
             -f bootstrap="$BOOTSTRAP" \
             -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
+            -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
             -f api_release_commit="$api_release_commit" \
             -f source_commit="$CURRENT_MAIN" \
             -f source_main_commit="$CURRENT_MAIN" \
@@ -704,6 +733,7 @@ jobs:
           SECTION: ${{ matrix.target.section }}
           ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
           MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.missingPagePaths || fromJSON('[]')) }}
+          KNOWN_MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.knownMissingPagePaths || fromJSON('[]')) }}
           BOOTSTRAP: ${{ matrix.target.bootstrap }}
           DRY: ${{ needs.resolve.outputs.dry }}
           EVENT_NAME: ${{ github.event_name }}
@@ -711,7 +741,7 @@ jobs:
           PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
           REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
           API_RELEASE_COMMIT: ${{ inputs.api_release_commit }}
-          ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.replay_api_after_publish }}
+          ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
           SOURCE_COMMIT: ${{ inputs.source_commit }}
           SOURCE_MAIN_COMMIT: ${{ inputs.source_main_commit }}
           REF: ${{ github.ref }}
@@ -772,8 +802,11 @@ jobs:
               gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
                 -f section="$SECTION" \
                 -f article_ids="$ARTICLE_IDS_JSON" \
+                -f missing_page_paths="$MISSING_PAGE_PATHS_JSON" \
+                -f known_missing_page_paths="$KNOWN_MISSING_PAGE_PATHS_JSON" \
                 -f bootstrap="$BOOTSTRAP" \
                 -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
+                -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
                 -f api_release_commit="$api_release_commit" \
                 -f source_commit="$current_main" \
                 -f source_main_commit="$current_main" \
@@ -802,6 +835,7 @@ jobs:
               args+=(--ids "$(printf '%s' "$ARTICLE_IDS_JSON" | jq -c .)")
             fi
             args+=(--missing-pages "$(printf '%s' "$MISSING_PAGE_PATHS_JSON" | jq -c .)")
+            args+=(--known-missing-pages "$(printf '%s' "$KNOWN_MISSING_PAGE_PATHS_JSON" | jq -c .)")
             if [ "$REMOVE_STALE_CANTON_RSS_FEEDS" = "true" ]; then
               args+=(--remove-stale-canton-rss-feeds)
             fi
@@ -991,6 +1025,7 @@ jobs:
           CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
           DRY: ${{ needs.resolve.outputs.dry }}
           REPLAY_API_AFTER_PUBLISH: ${{ needs.resolve.outputs.replay_api_after_publish }}
+          ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
         run: |
           set -euo pipefail
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
@@ -1004,22 +1039,24 @@ jobs:
           fi
           export GH_TOKEN="$runtime_pat"
           dispatched=0
-          while IFS=$'\t' read -r section article_ids missing_page_paths bootstrap remove_stale; do
+          while IFS=$'\t' read -r section article_ids missing_page_paths known_missing_page_paths bootstrap remove_stale; do
             [ -n "$section" ] || continue
             echo "::notice::recovery staged $section sulla HEAD corrente $CURRENT_MAIN"
             gh workflow run fast-publish-section.yml --repo "$REPOSITORY" --ref main \
               -f section="$section" \
               -f article_ids="$article_ids" \
               -f missing_page_paths="$missing_page_paths" \
+              -f known_missing_page_paths="$known_missing_page_paths" \
               -f bootstrap="$bootstrap" \
               -f remove_stale_canton_rss_feeds="$remove_stale" \
               -f source_commit="$CURRENT_MAIN" \
               -f source_main_commit="$CURRENT_MAIN" \
               -f replay_api_after_publish="$REPLAY_API_AFTER_PUBLISH" \
+              -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
               -f dry_run="$DRY" \
               -f dispatch_nonce="stale-staged-recovery-${GITHUB_RUN_ID}-${section}"
             dispatched=$((dispatched + 1))
-          done < <(jq -r '.[] | [.section, ((.ids // []) | tojson), ((.missingPagePaths // []) | tojson), (.bootstrap // false), (.removeStaleCantonRssFeeds // false)] | @tsv' <<<"$TARGET_MATRIX")
+          done < <(jq -r '.[] | [.section, ((.ids // []) | tojson), ((.missingPagePaths // []) | tojson), ((.knownMissingPagePaths // []) | tojson), (.bootstrap // false), (.removeStaleCantonRssFeeds // false)] | @tsv' <<<"$TARGET_MATRIX")
           if [ "$dispatched" -eq 0 ]; then
             echo "::error::matrix staged vuoto nel recovery stale"
             exit 1

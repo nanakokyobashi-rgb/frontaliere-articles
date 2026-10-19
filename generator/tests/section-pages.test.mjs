@@ -1045,8 +1045,16 @@ test('publisher: argomenti', () => {
     parseArgs(['--section', 'canton-ti', '--missing-pages', '["/articoli-ticino/a/"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).missingPages,
     ['/articoli-ticino/a/'],
   );
+  assert.deepEqual(
+    parseArgs(['--section', 'canton-ti', '--known-missing-pages', '["/articoli-ticino/old/"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).knownMissingPages,
+    ['/articoli-ticino/old/'],
+  );
   assert.throws(
     () => parseArgs(['--section', 'canton-ti', '--missing-pages', '["../a"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }),
+    /path canonici/,
+  );
+  assert.throws(
+    () => parseArgs(['--section', 'canton-ti', '--known-missing-pages', '["../a"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }),
     /path canonici/,
   );
   assert.throws(() => parseArgs(['--section', 'canton-ti', '--boh']), /argomento sconosciuto/);
@@ -1063,13 +1071,19 @@ test('publisher: argomenti', () => {
   );
 });
 
-test('publisher: solo le chiavi confermate 404 escono dall inventario immutabile staged', () => {
+test('publisher: tutti i 404 noti escono dall inventario immutabile staged, ma solo i selezionati si caricano', () => {
   const missing = pageEntry('canton-ti', 'articoli-ticino/missing/index.html', 'article');
+  const leftover = pageEntry('canton-ti', 'articoli-ticino/leftover/index.html', 'article');
   const present = pageEntry('canton-ti', 'articoli-ticino/present/index.html', 'article');
-  const rendered = [missing, present];
-  const published = [missing, present];
+  const rendered = [missing, leftover, present];
+  const published = [missing, leftover, present];
   assert.deepEqual(stagedReleasePageSets(rendered, published).pagesForPublish, []);
-  const selected = stagedReleasePageSets(rendered, published, [missing.canonicalPath]);
+  const selected = stagedReleasePageSets(
+    rendered,
+    published,
+    [missing.canonicalPath],
+    [missing.canonicalPath, leftover.canonicalPath],
+  );
   assert.deepEqual(selected.pagesForPublish.map((page) => page.canonicalPath), [missing.canonicalPath]);
   assert.deepEqual(selected.immutableLivePages.map((page) => page.canonicalPath), [present.canonicalPath]);
 });
@@ -2867,10 +2881,14 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /inputs\.source_commit/);
   assert.match(wf, /source_main_commit:/);
   assert.match(wf, /replay_api_after_publish:/);
+  assert.match(wf, /allow_deferred_live_release:/);
   assert.match(wf, /missing_page_paths:/);
+  assert.match(wf, /known_missing_page_paths:/);
   assert.match(wf, /MISSING_PAGE_PATHS_JSON: \$\{\{ toJSON\(matrix\.target\.missingPagePaths \|\| fromJSON\('\[\]'\)\) \}\}/);
+  assert.match(wf, /KNOWN_MISSING_PAGE_PATHS_JSON: \$\{\{ toJSON\(matrix\.target\.knownMissingPagePaths \|\| fromJSON\('\[\]'\)\) \}\}/);
   assert.match(wf, /args\+=\(--missing-pages "\$\(printf '%s' "\$MISSING_PAGE_PATHS_JSON" \| jq -c \.\)"\)/);
-  assert.match(wf, /ALLOW_DEFERRED_LIVE_RELEASE: \$\{\{ needs\.resolve\.outputs\.replay_api_after_publish \}\}/);
+  assert.match(wf, /args\+=\(--known-missing-pages "\$\(printf '%s' "\$KNOWN_MISSING_PAGE_PATHS_JSON" \| jq -c \.\)"\)/);
+  assert.match(wf, /ALLOW_DEFERRED_LIVE_RELEASE: \$\{\{ needs\.resolve\.outputs\.allow_deferred_live_release \}\}/);
   assert.match(wf, /EXPECTED_MAIN_HEAD: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_main_commit \|\| github\.event\.after \|\| github\.sha \}\}/);
   assert.match(wf, /-f source_main_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /-f source_main_commit="\$current_main"/);
@@ -3132,6 +3150,7 @@ test('reconcile: cap per sezione, i piu\' recenti prima; il dubbio non si ripubb
   assert.deepEqual(plan.missingIds, ['nuovo', 'medio', 'vecchio']);
   assert.deepEqual(plan.selected, ['nuovo', 'medio']);
   assert.deepEqual(plan.missingPagePaths, ['/p2/', '/p3/', '/p4/']);
+  assert.deepEqual(plan.knownMissingPagePaths, ['/p1/', '/p2/', '/p3/', '/p4/']);
   assert.deepEqual(plan.leftover, ['vecchio']);
   assert.deepEqual(plan.unknown, ['/p5/']);
   assert.equal(plan.dispatch, true);
@@ -3140,6 +3159,7 @@ test('reconcile: cap per sezione, i piu\' recenti prima; il dubbio non si ripubb
   const refresh = planSectionBackfill('canton-ti', [{ kind: 'section', path: '/articoli-ticino/fisco/', state: 'missing' }], dates, 3);
   assert.deepEqual([refresh.dispatch, refresh.selected, refresh.sectionMissing], [true, [], ['/articoli-ticino/fisco/']]);
   assert.deepEqual(refresh.missingPagePaths, ['/articoli-ticino/fisco/']);
+  assert.deepEqual(refresh.knownMissingPagePaths, ['/articoli-ticino/fisco/']);
   assert.equal(planSectionBackfill('canton-ti', [{ kind: 'section', path: '/x/', state: 'unknown' }], dates, 3).dispatch, false);
   const orphan = planSectionBackfill('canton-ti', [], dates, 3, [{ id: 'gone', path: '/articoli-ticino/gone/', state: 'present' }]);
   assert.deepEqual([orphan.dispatch, orphan.orphaned, orphan.orphanedIds], [true, ['/articoli-ticino/gone/'], ['gone']]);
@@ -3271,6 +3291,10 @@ test('reconcile: API avanti al registro edge recupera le pagine che bloccano il 
   assert.equal(report.sections.length, 1);
   assert.deepEqual(report.sections[0].missingIds, ['b', 'a']);
   assert.deepEqual([report.sections[0].selected, report.sections[0].leftover], [['b'], ['a']]);
+  assert.deepEqual(
+    new Set(report.sections[0].knownMissingPagePaths),
+    new Set(['/articoli-ticino/b-it/', '/en/ticino-articles/a-en/']),
+  );
   assert.ok(gap.calls.some((call) => call === 'GET https://api.test/edge/sections/registry.json'));
   assert.ok(gap.calls.some((call) => call.startsWith('HEAD https://cdn.frontaliereticino.ch/edge/sections')));
 });
@@ -3296,16 +3320,23 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /node scripts\/reconcile-section-pages\.mjs/);
   assert.match(wf, /args=\([\s\S]*-f "section=\$section"[\s\S]*-f "article_ids=\$ids"[\s\S]*'bootstrap=false'[\s\S]*'dry_run=false'/);
   assert.match(wf, /-f "missing_page_paths=\$missing_page_paths"/);
-  assert.match(wf, /-f 'replay_api_after_publish=true'/);
+  assert.match(wf, /-f "known_missing_page_paths=\$known_missing_page_paths"/);
+  assert.match(wf, /-f 'allow_deferred_live_release=true'/);
+  assert.doesNotMatch(wf, /-f 'replay_api_after_publish=true'/);
   assert.match(wf, /-f "api_release_commit=\$API_RELEASE_COMMIT"/);
   assert.match(wf, /-f "source_commit=\$SOURCE_COMMIT"/);
-  assert.match(wf, /Replay API when the edge flip has no page backfill/);
+  assert.match(wf, /Wait for all staged backfills before the API replay/);
+  assert.match(wf, /Replay API after all staged backfills/);
+  assert.match(wf, /dispatch_nonce="reconcile-\$\{GITHUB_RUN_ID\}-\$\{section\}"/);
+  assert.match(wf, /gh run list --repo "\$REPOSITORY" --workflow fast-publish-section\.yml/);
+  assert.match(wf, /steps\.detect\.outputs\.leftover == '0'/);
   assert.match(wf, /current_main="\$\(gh api "repos\/\$REPOSITORY\/git\/ref\/heads\/main" --jq '\.object\.sha'\)"/);
   assert.match(wf, /main e' avanzata dopo la detection \(\$SOURCE_COMMIT -> \$current_main\)/);
   assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
   assert.match(wf, /pending_edge_flip=\$\(jq -r '\.pendingEdgeFlip \/\/ false'/);
   assert.match(wf, /skip=\$\(jq -r 'if \.skip then \\"true\\" else \\"false\\" end'/);
-  assert.match(wf, /steps\.detect\.outputs\.pending_edge_flip == 'true'[\s\S]*steps\.detect\.outputs\.skip == 'false'[\s\S]*steps\.detect\.outputs\.dispatch == '0'/);
+  assert.match(wf, /steps\.detect\.outputs\.pending_edge_flip == 'true'[\s\S]*steps\.detect\.outputs\.skip == 'false'[\s\S]*steps\.detect\.outputs\.leftover == '0'[\s\S]*steps\.wait_backfills\.outcome == 'success'/);
+  assert.match(wf, /contains\("nonce=reconcile-"\)/);
   assert.match(wf, /Load producer token from Remote Config/);
   assert.match(wf, /runtime_pat="\$\{GITHUB_PAT_NANAKO:-\}"[\s\S]*export GH_TOKEN="\$runtime_pat"/);
   assert.match(read('scripts/reconcile-section-pages.mjs'), /pages-registry-absent/);
