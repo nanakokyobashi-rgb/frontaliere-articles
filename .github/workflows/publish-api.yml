@@ -884,7 +884,7 @@ jobs:
               echo '::error::GITHUB_PAT_NANAKO is required to persist the cover sync queue'
               return 1
             fi
-            local attempt auth_header push_log
+            local attempt auth_header push_log main_head
             local_queue_backup="$RUNNER_TEMP/publish-api-blog-cover-queue-before-rebase.json"
             push_log="$RUNNER_TEMP/publish-api-blog-cover-queue-push.log"
             auth_header="$(printf 'x-access-token:%s' "$GITHUB_PAT_NANAKO" | base64 | tr -d '\n')"
@@ -908,7 +908,10 @@ jobs:
               fi
               echo "::warning::main advanced while updating the cover queue; rebasing attempt $attempt/3"
               git -c "http.extraheader=AUTHORIZATION: basic $auth_header" fetch --no-tags origin main
-              if git rebase origin/main; then
+              # Capture before any other fetch can replace FETCH_HEAD. Rebase
+              # and conflict recovery must use the same freshly fetched main.
+              main_head="$(git rev-parse FETCH_HEAD)"
+              if git rebase "$main_head"; then
                 rebuild_manifest_from_queue
                 if ! git diff --quiet -- "$queue_file"; then
                   git add "$queue_file"
@@ -918,7 +921,7 @@ jobs:
               fi
               cp "$queue_file" "$local_queue_backup"
               git rebase --abort || true
-              git reset --hard origin/main
+              git reset --hard "$main_head"
               node --input-type=module - "$queue_file" "$local_queue_backup" <<'NODE'
           import fs from 'node:fs';
 
