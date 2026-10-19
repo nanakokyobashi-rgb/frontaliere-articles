@@ -25,6 +25,7 @@ import {
   NO_TEXT_IMAGE_RETRY_HINT,
 } from '../scripts/regenerate-queued-covers.mjs';
 import { GENERATED_COVER_ALT_BY_LOCALE } from '../scripts/lib/seo-entry-builder.mjs';
+import { GENERATED_COVER_ALT_BY_LOCALE as CANONICAL_GENERATED_COVER_ALT_BY_LOCALE } from '../scripts/lib/generated-cover-alt.mjs';
 import {
   locateArticleRegistry,
   locateArticleSeoImage,
@@ -42,6 +43,10 @@ import { registerLockPath } from '../scripts/lib/register-lock.mjs';
 function tempRoot() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'cover-queue-drain-'));
 }
+
+test('seo-entry-builder re-exports the canonical generated-cover alt map', () => {
+  assert.equal(GENERATED_COVER_ALT_BY_LOCALE, CANONICAL_GENERATED_COVER_ALT_BY_LOCALE);
+});
 
 function write(root, relativePath, content) {
   const filePath = path.join(root, relativePath);

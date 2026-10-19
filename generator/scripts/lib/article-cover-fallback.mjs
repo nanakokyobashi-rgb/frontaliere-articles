@@ -23,6 +23,7 @@ import {
   articleImageSubject,
   articleImageTopic,
 } from './article-cover-identity.mjs';
+import { GENERATED_COVER_ALT_BY_LOCALE } from './generated-cover-alt.mjs';
 import { imageCreditRecordFromGeneratedImageRecord } from '../../../engine/shared/imageCredits.mjs';
 
 export const CATALOG_FALLBACK_MIN_SHARED_WORDS = 2;
@@ -40,12 +41,7 @@ const VERIFIED_CATALOG_IMAGE = Symbol('verified catalog image');
 const verificationCache = new Map();
 
 const VERIFIED_FALLBACK_ALT = Object.freeze({
-  generated: Object.freeze({
-    it: 'Immagine illustrativa pertinente al tema dell’articolo',
-    en: 'Illustrative image relevant to the article topic',
-    de: 'Illustratives Bild zum Thema des Artikels',
-    fr: 'Image illustrative en lien avec le sujet de l’article',
-  }),
+  generated: GENERATED_COVER_ALT_BY_LOCALE,
   'licensed-photo': Object.freeze({
     it: 'Fotografia pertinente al tema dell’articolo',
     en: 'Photograph relevant to the article topic',

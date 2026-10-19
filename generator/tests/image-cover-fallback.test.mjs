@@ -17,6 +17,7 @@ import {
   verifyCatalogFallbackCandidates,
 } from '../scripts/lib/article-cover-fallback.mjs';
 import { articleImageAssetId } from '../scripts/lib/article-cover-identity.mjs';
+import { GENERATED_COVER_ALT_BY_LOCALE } from '../scripts/lib/generated-cover-alt.mjs';
 import {
   appendGeneratedImageRecord,
   imageRecordForPath,
@@ -49,12 +50,7 @@ test('final generated provenance replaces unsupported topical alt; licensed-phot
     },
   };
   assert.equal(applyGeneratedHeroAlt(generated, { kind: 'generated', record: { scope: 'article-hero' } }), true);
-  assert.deepEqual(generated.imageAlt, {
-    it: 'Immagine illustrativa pertinente al tema dell’articolo',
-    en: 'Illustrative image relevant to the article topic',
-    de: 'Illustratives Bild zum Thema des Artikels',
-    fr: 'Image illustrative en lien avec le sujet de l’article',
-  });
+  assert.deepEqual(generated.imageAlt, GENERATED_COVER_ALT_BY_LOCALE);
 
   const photoAlt = {
     it: 'Fotografia del presidio aziendale',
@@ -212,7 +208,7 @@ test('engine failure uses a freshly verified catalog hero and queues regeneratio
     assert.equal(result.source, 'catalog-fallback');
     assert.equal(data._generatedImagePath, record.imageUrl);
     assert.equal(data._generatedImageRecord.assetId, record.assetId);
-    assert.match(data.imageAlt.it, /illustrativ/i);
+    assert.deepEqual(data.imageAlt, GENERATED_COVER_ALT_BY_LOCALE);
     assert.equal(data.qualityReject, undefined);
     assert.equal(data.imagePolicyReject, undefined);
     assert.equal(fs.existsSync(path.join(root, 'data/image-regeneration-queue.json')), false);
