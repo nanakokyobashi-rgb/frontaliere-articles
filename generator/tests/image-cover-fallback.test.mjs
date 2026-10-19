@@ -1,6 +1,7 @@
 import '../../host/cantonSectionsBootstrap.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import net from 'node:net';
 import os from 'node:os';
@@ -33,9 +34,26 @@ import {
 import {
   imageVisionRejectionError,
   isCompleteArticleHeroVisionVerdict,
-} from '../../engine/shared/generatedImageEngine.mjs';
+} from '../../engine/shared/generatedImageVision.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+
+test('the fallback consumer loads its pure vision contract without native addons', () => {
+  const fallbackUrl = new URL('../scripts/lib/article-cover-fallback.mjs', import.meta.url);
+  const result = spawnSync(process.execPath, [
+    '--no-addons',
+    '--input-type=module',
+    '--eval',
+    `await import(${JSON.stringify(fallbackUrl.href)})`,
+  ], { encoding: 'utf8', timeout: 10_000 });
+  assert.ifError(result.error);
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+
+  const source = fs.readFileSync(fileURLToPath(fallbackUrl), 'utf8');
+  assert.match(source, /from ['"]\.\.\/\.\.\/\.\.\/engine\/shared\/generatedImageVision\.mjs['"]/);
+  assert.match(source, /await import\(['"]\.\.\/\.\.\/\.\.\/engine\/shared\/generatedImageEngine\.mjs['"]\)/);
+  assert.doesNotMatch(source, /from ['"][^'"]*generatedImageEngine\.mjs['"]/);
+});
 
 function tempRoot() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'cover-fallback-'));

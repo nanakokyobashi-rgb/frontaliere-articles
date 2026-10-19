@@ -16,7 +16,7 @@ import {
   imageVisionRejected,
   imageVisionRejectionError,
   isCompleteArticleHeroVisionVerdict,
-} from '../../../engine/shared/generatedImageEngine.mjs';
+} from '../../../engine/shared/generatedImageVision.mjs';
 import {
   articleImageKeywords,
   articleImagePlace,
