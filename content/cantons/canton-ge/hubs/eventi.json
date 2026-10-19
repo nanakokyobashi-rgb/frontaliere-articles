@@ -4,12 +4,12 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "31dbe0efc70d6a6f2f468d200ecbd44b878c979d15724fa5a8e0f231691ddc32",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "19b81b7ce5aa381b114dd3f972cbd5c01bdeecc3ac08bf636f0ea20f713eb16d",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-18T20:21:24.396Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "292",
+          "value": "293",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "À voix basse",
+              "label": "Avant-première LE MYSTÈRE LUCY LOST",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/voix-basse"
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/premiere-mystere-lucy-lost"
             },
             {
-              "label": "Brass Band Arquebuse Genève",
+              "label": "Centres aérés 2026 – architecture, patrimoine et aventure !",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/brass-band-arquebuse-geneve"
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/centres-aeres-2026-architecture-patrimoine-aventure"
             },
             {
-              "label": "Graines en fête!",
+              "label": "Les Grandes Voix du Fado: Camané",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/graines-fete"
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/grandes-voix-fado-camane"
             },
             {
-              "label": "Improvisation - Ardoise en scène - Place Publique",
+              "label": "Stage d’automne : construction de jeux en bois pour les jeunes de 7 à 13 ans",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/improvisation-ardoise-scene-place-publique"
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/stage-automne-construction-jeux-bois-jeunes-7-13"
             },
             {
-              "label": "Le Cabinet d’Émerveille s’invite au MEG",
-              "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/cabinet-emerveille-invite-meg-1"
-            },
-            {
-              "label": "LES 7 PÉCHÉS CAPITAUX",
-              "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/7-peches-capitaux"
-            },
-            {
-              "label": "Promenade botanique à Carouge",
-              "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/promenade-botanique-carouge"
-            },
-            {
-              "label": "Ravens de Genève contre Fribourg - SBL Women league",
-              "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/ravens-geneve-contre-fribourg-women-league"
+              "label": "Les Grandes Voix du Fado: Camané",
+              "detail": "Victoria Hall",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/evenements/musique/geneve/les-grandes-voix-du-fado-camane_AgBwTSa"
             },
             {
               "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
               "detail": "Genève — in corso, ultimo giorno: 21 ottobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
             },
             {
               "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
               "detail": "Genève — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
+              "label": "Exposition « Transparences, saison III, Dreams » avec le duo d'artistes Ana D & Noora K",
+              "detail": "Genève — in corso, ultimo giorno: 29 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/exposition-transparences-saison-dreams-artistes-noora"
+            },
+            {
+              "label": "Exposition du concours d'architecture pluridisciplinaire | Transformation du Centre sportif du Bout-du-Monde",
+              "detail": "Genève — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/exposition-concours-architecture-pluridisciplinaire-transformation-centre-sportif-bout-monde"
+            },
+            {
+              "label": "FRANÇOISE DELADOËY \"Allégorie sur le monde\"",
+              "detail": "Genève — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/francoise-deladoey-allegorie-monde"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "GE",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "292",
+          "value": "293",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "À voix basse",
+              "label": "Avant-première LE MYSTÈRE LUCY LOST",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/voix-basse"
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/premiere-mystere-lucy-lost"
             },
             {
-              "label": "Brass Band Arquebuse Genève",
+              "label": "Centres aérés 2026 – architecture, patrimoine et aventure !",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/brass-band-arquebuse-geneve"
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/centres-aeres-2026-architecture-patrimoine-aventure"
             },
             {
-              "label": "Graines en fête!",
+              "label": "Les Grandes Voix du Fado: Camané",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/graines-fete"
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/grandes-voix-fado-camane"
             },
             {
-              "label": "Improvisation - Ardoise en scène - Place Publique",
+              "label": "Stage d’automne : construction de jeux en bois pour les jeunes de 7 à 13 ans",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/improvisation-ardoise-scene-place-publique"
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/stage-automne-construction-jeux-bois-jeunes-7-13"
             },
             {
-              "label": "Le Cabinet d’Émerveille s’invite au MEG",
-              "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/cabinet-emerveille-invite-meg-1"
-            },
-            {
-              "label": "LES 7 PÉCHÉS CAPITAUX",
-              "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/7-peches-capitaux"
-            },
-            {
-              "label": "Promenade botanique à Carouge",
-              "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/promenade-botanique-carouge"
-            },
-            {
-              "label": "Ravens de Genève contre Fribourg - SBL Women league",
-              "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/ravens-geneve-contre-fribourg-women-league"
+              "label": "Les Grandes Voix du Fado: Camané",
+              "detail": "Victoria Hall",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/evenements/musique/geneve/les-grandes-voix-du-fado-camane_AgBwTSa"
             },
             {
               "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
               "detail": "Genève — ongoing, last day: 21 October 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
             },
             {
               "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
               "detail": "Genève — ongoing, last day: 31 October 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
+              "label": "Exposition « Transparences, saison III, Dreams » avec le duo d'artistes Ana D & Noora K",
+              "detail": "Genève — ongoing, last day: 29 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/exposition-transparences-saison-dreams-artistes-noora"
+            },
+            {
+              "label": "Exposition du concours d'architecture pluridisciplinaire | Transformation du Centre sportif du Bout-du-Monde",
+              "detail": "Genève — ongoing, last day: 31 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/exposition-concours-architecture-pluridisciplinaire-transformation-centre-sportif-bout-monde"
+            },
+            {
+              "label": "FRANÇOISE DELADOËY \"Allégorie sur le monde\"",
+              "detail": "Genève — ongoing, last day: 25 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/francoise-deladoey-allegorie-monde"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "GE",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "292",
+          "value": "293",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "À voix basse",
+              "label": "Avant-première LE MYSTÈRE LUCY LOST",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/voix-basse"
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/premiere-mystere-lucy-lost"
             },
             {
-              "label": "Brass Band Arquebuse Genève",
+              "label": "Centres aérés 2026 – architecture, patrimoine et aventure !",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/brass-band-arquebuse-geneve"
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/centres-aeres-2026-architecture-patrimoine-aventure"
             },
             {
-              "label": "Graines en fête!",
+              "label": "Les Grandes Voix du Fado: Camané",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/graines-fete"
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/grandes-voix-fado-camane"
             },
             {
-              "label": "Improvisation - Ardoise en scène - Place Publique",
+              "label": "Stage d’automne : construction de jeux en bois pour les jeunes de 7 à 13 ans",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/improvisation-ardoise-scene-place-publique"
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/stage-automne-construction-jeux-bois-jeunes-7-13"
             },
             {
-              "label": "Le Cabinet d’Émerveille s’invite au MEG",
-              "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/cabinet-emerveille-invite-meg-1"
-            },
-            {
-              "label": "LES 7 PÉCHÉS CAPITAUX",
-              "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/7-peches-capitaux"
-            },
-            {
-              "label": "Promenade botanique à Carouge",
-              "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/promenade-botanique-carouge"
-            },
-            {
-              "label": "Ravens de Genève contre Fribourg - SBL Women league",
-              "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/ravens-geneve-contre-fribourg-women-league"
+              "label": "Les Grandes Voix du Fado: Camané",
+              "detail": "Victoria Hall",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/evenements/musique/geneve/les-grandes-voix-du-fado-camane_AgBwTSa"
             },
             {
               "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
               "detail": "Genève — läuft, letzter Tag: 21. Oktober 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
             },
             {
               "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
               "detail": "Genève — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
+              "label": "Exposition « Transparences, saison III, Dreams » avec le duo d'artistes Ana D & Noora K",
+              "detail": "Genève — läuft, letzter Tag: 29. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/exposition-transparences-saison-dreams-artistes-noora"
+            },
+            {
+              "label": "Exposition du concours d'architecture pluridisciplinaire | Transformation du Centre sportif du Bout-du-Monde",
+              "detail": "Genève — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/exposition-concours-architecture-pluridisciplinaire-transformation-centre-sportif-bout-monde"
+            },
+            {
+              "label": "FRANÇOISE DELADOËY \"Allégorie sur le monde\"",
+              "detail": "Genève — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/francoise-deladoey-allegorie-monde"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "GE",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "292",
+          "value": "293",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "À voix basse",
+              "label": "Avant-première LE MYSTÈRE LUCY LOST",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/voix-basse"
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/premiere-mystere-lucy-lost"
             },
             {
-              "label": "Brass Band Arquebuse Genève",
+              "label": "Centres aérés 2026 – architecture, patrimoine et aventure !",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/brass-band-arquebuse-geneve"
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/centres-aeres-2026-architecture-patrimoine-aventure"
             },
             {
-              "label": "Graines en fête!",
+              "label": "Les Grandes Voix du Fado: Camané",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/graines-fete"
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/grandes-voix-fado-camane"
             },
             {
-              "label": "Improvisation - Ardoise en scène - Place Publique",
+              "label": "Stage d’automne : construction de jeux en bois pour les jeunes de 7 à 13 ans",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/improvisation-ardoise-scene-place-publique"
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/stage-automne-construction-jeux-bois-jeunes-7-13"
             },
             {
-              "label": "Le Cabinet d’Émerveille s’invite au MEG",
-              "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/cabinet-emerveille-invite-meg-1"
-            },
-            {
-              "label": "LES 7 PÉCHÉS CAPITAUX",
-              "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/7-peches-capitaux"
-            },
-            {
-              "label": "Promenade botanique à Carouge",
-              "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/promenade-botanique-carouge"
-            },
-            {
-              "label": "Ravens de Genève contre Fribourg - SBL Women league",
-              "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/ravens-geneve-contre-fribourg-women-league"
+              "label": "Les Grandes Voix du Fado: Camané",
+              "detail": "Victoria Hall",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/evenements/musique/geneve/les-grandes-voix-du-fado-camane_AgBwTSa"
             },
             {
               "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
               "detail": "Genève — en cours, dernier jour : 21 octobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
             },
             {
               "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
               "detail": "Genève — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
+              "label": "Exposition « Transparences, saison III, Dreams » avec le duo d'artistes Ana D & Noora K",
+              "detail": "Genève — en cours, dernier jour : 29 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/exposition-transparences-saison-dreams-artistes-noora"
+            },
+            {
+              "label": "Exposition du concours d'architecture pluridisciplinaire | Transformation du Centre sportif du Bout-du-Monde",
+              "detail": "Genève — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/exposition-concours-architecture-pluridisciplinaire-transformation-centre-sportif-bout-monde"
+            },
+            {
+              "label": "FRANÇOISE DELADOËY \"Allégorie sur le monde\"",
+              "detail": "Genève — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.geneve.ch/agenda/francoise-deladoey-allegorie-monde"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }

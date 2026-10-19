@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-18T15:52:30.685Z",
-  "contentHash": "c2e3b1a4ff4b0d9100521fc0b757e17f89e0b38d8507f57d1415cdd3eabb4d77",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "43adf049adcd310aa12fbb0c7ce697a99b7f4bfc9f8f3ef9fdc0bb3d0c7328a9",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-18T11:46:52.571Z",
+      "updatedAt": "2026-10-18T16:12:12.011Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T09:56:00.107Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -142,13 +142,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T16:12:12.011Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Autostrada A26, i cantieri attivi questa settimana",
+              "date": "2026-10-18T13:07:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/18/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-e1dd0bd89d.html"
+            },
             {
               "label": "Strada chiusa senza preavviso, automobilisti bloccati per quasi due ore: la protesta di un lettore VIDEO",
               "date": "2026-10-17T19:07:12.000Z",
@@ -173,14 +178,9 @@
               "label": "Regione Nosere, la nuova rotatoria sarà completata entro fine ottobre",
               "date": "2026-10-14T15:40:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/regione-nosere-la-nuova-rotatoria-sara-completata-entro-fine-ottobre.html"
-            },
-            {
-              "label": "Domodossola, in funzione il nuovo impianto semaforico di via Trabucchi",
-              "date": "2026-10-14T12:40:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-in-funzione-il-nuovo-impianto-semaforico-di-via-trabucchi.html"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -250,7 +250,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "VS",
@@ -370,13 +370,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T16:12:12.011Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Autostrada A26, i cantieri attivi questa settimana",
+              "date": "2026-10-18T13:07:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/18/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-e1dd0bd89d.html"
+            },
             {
               "label": "Strada chiusa senza preavviso, automobilisti bloccati per quasi due ore: la protesta di un lettore VIDEO",
               "date": "2026-10-17T19:07:12.000Z",
@@ -401,14 +406,9 @@
               "label": "Regione Nosere, la nuova rotatoria sarà completata entro fine ottobre",
               "date": "2026-10-14T15:40:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/regione-nosere-la-nuova-rotatoria-sara-completata-entro-fine-ottobre.html"
-            },
-            {
-              "label": "Domodossola, in funzione il nuovo impianto semaforico di via Trabucchi",
-              "date": "2026-10-14T12:40:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-in-funzione-il-nuovo-impianto-semaforico-di-via-trabucchi.html"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -478,7 +478,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "VS",
@@ -598,13 +598,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T16:12:12.011Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Autostrada A26, i cantieri attivi questa settimana",
+              "date": "2026-10-18T13:07:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/18/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-e1dd0bd89d.html"
+            },
             {
               "label": "Strada chiusa senza preavviso, automobilisti bloccati per quasi due ore: la protesta di un lettore VIDEO",
               "date": "2026-10-17T19:07:12.000Z",
@@ -629,14 +634,9 @@
               "label": "Regione Nosere, la nuova rotatoria sarà completata entro fine ottobre",
               "date": "2026-10-14T15:40:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/regione-nosere-la-nuova-rotatoria-sara-completata-entro-fine-ottobre.html"
-            },
-            {
-              "label": "Domodossola, in funzione il nuovo impianto semaforico di via Trabucchi",
-              "date": "2026-10-14T12:40:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-in-funzione-il-nuovo-impianto-semaforico-di-via-trabucchi.html"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -706,7 +706,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "VS",
@@ -826,13 +826,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T16:12:12.011Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Autostrada A26, i cantieri attivi questa settimana",
+              "date": "2026-10-18T13:07:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/18/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-e1dd0bd89d.html"
+            },
             {
               "label": "Strada chiusa senza preavviso, automobilisti bloccati per quasi due ore: la protesta di un lettore VIDEO",
               "date": "2026-10-17T19:07:12.000Z",
@@ -857,14 +862,9 @@
               "label": "Regione Nosere, la nuova rotatoria sarà completata entro fine ottobre",
               "date": "2026-10-14T15:40:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/regione-nosere-la-nuova-rotatoria-sara-completata-entro-fine-ottobre.html"
-            },
-            {
-              "label": "Domodossola, in funzione il nuovo impianto semaforico di via Trabucchi",
-              "date": "2026-10-14T12:40:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/14/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-in-funzione-il-nuovo-impianto-semaforico-di-via-trabucchi.html"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -934,7 +934,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }

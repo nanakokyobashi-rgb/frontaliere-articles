@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T16:48:41.470Z",
-  "contentHash": "90d05c9a82af9be091e82801be21d9490a467d5f432585bc5f25a4a1b3017d05",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "d8b31f1113f3658e9748c3b823f4b5782010d5b9e2d4ca5a55148e20d1428fcb",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-18T11:03:15.929Z",
+      "updatedAt": "2026-10-18T20:41:22.356Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-18T18:47:11.287Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T09:56:00.107Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -39,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "18",
-          "note": "offerta mediana 1500 CHF"
+          "note": "offerta mediana 1510 CHF"
         }
       ],
       "dataBlocks": [
@@ -65,7 +70,7 @@
           "items": [
             {
               "label": "AG8809",
-              "value": "5200 CHF",
+              "value": "6000 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58792"
@@ -87,7 +92,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "updatedAt": "2026-10-18T20:41:22.356Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "9 °C",
+              "detail": "oggi da 9 a 10 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-18T18:47:11.287Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -125,7 +144,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -199,7 +218,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "AG",
@@ -216,7 +235,7 @@
         {
           "label": "Plate auctions running",
           "value": "18",
-          "note": "typical bid 1,500 CHF"
+          "note": "typical bid 1,510 CHF"
         }
       ],
       "dataBlocks": [
@@ -242,7 +261,7 @@
           "items": [
             {
               "label": "AG8809",
-              "value": "5,200 CHF",
+              "value": "6,000 CHF",
               "detail": "current bid",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58792"
@@ -264,7 +283,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "updatedAt": "2026-10-18T20:41:22.356Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "9 °C",
+              "detail": "today from 9 to 10 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-18T18:47:11.287Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -302,7 +335,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -372,7 +405,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "AG",
@@ -389,7 +422,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "18",
-          "note": "mittleres Gebot 1’500 CHF"
+          "note": "mittleres Gebot 1’510 CHF"
         }
       ],
       "dataBlocks": [
@@ -415,7 +448,7 @@
           "items": [
             {
               "label": "AG8809",
-              "value": "5’200 CHF",
+              "value": "6’000 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58792"
@@ -437,7 +470,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "updatedAt": "2026-10-18T20:41:22.356Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "9 °C",
+              "detail": "heute 9 bis 10 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-18T18:47:11.287Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -475,7 +522,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -545,7 +592,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "AG",
@@ -562,7 +609,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "18",
-          "note": "offre centrale 1 500 CHF"
+          "note": "offre centrale 1 510 CHF"
         }
       ],
       "dataBlocks": [
@@ -588,7 +635,7 @@
           "items": [
             {
               "label": "AG8809",
-              "value": "5 200 CHF",
+              "value": "6 000 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58792"
@@ -610,7 +657,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "updatedAt": "2026-10-18T20:41:22.356Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "9 °C",
+              "detail": "aujourd’hui de 9 à 10 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-18T18:47:11.287Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -648,7 +709,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -714,7 +775,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }

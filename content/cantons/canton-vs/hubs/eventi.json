@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "af73bb022d74d9abc47a483ddcd5e85ea88f5f8b364cd3cbed54dc07d2c4ac87",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "e98c20aa33aa931a14649cdd12c827a9e72c12816d8bdce4fd3467c3f0d43844",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-18T20:21:24.396Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "68",
+          "value": "65",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -34,68 +34,68 @@
           "items": [
             {
               "label": "Es ist dies beinahe Unsichtbare",
-              "detail": "Visp",
-              "date": "2026-10-18",
+              "detail": "Visp — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
             },
             {
-              "label": "Season End Brunch",
-              "detail": "Grächen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/season-end-brunch-2/"
-            },
-            {
-              "label": "Klavierrezital",
-              "detail": "Tellenhaus, Ernen",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/ernen/piano-recital-1_AGhp4fs"
-            },
-            {
-              "label": "Piano recital",
-              "detail": "Tellenhaus, Ernen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/klavierrezital-1/"
-            },
-            {
-              "label": "Delizie per il palato “Autunno”",
-              "detail": "Ferden",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/delizie-per-il-palato-autunno-1/"
-            },
-            {
-              "label": "Concert",
-              "detail": "Martigny",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-3/"
-            },
-            {
               "label": "Stéphane Lambiel, floor dance, and Lionel Monnet, piano",
-              "detail": "Saxon",
-              "date": "2026-10-18",
+              "detail": "Saxon — in corso, ultimo giorno: 19 ottobre 2026",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stephane-lambiel-danse-au-sol-et-lionel-monnet-piano/"
-            },
-            {
-              "label": "Anzère Fantastique",
-              "detail": "Anzère Tourisme — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/anzere-fantastique/"
             },
             {
               "label": "Escursioni e yoga, Val d'Hérens",
               "detail": "Grand Hotel & Kurhaus — in corso, ultimo giorno: 19 ottobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/hiking-and-yoga-val-dherens/"
             },
             {
               "label": "Theater: Aufführungen in Bellwald",
               "detail": "Mehrzweckhalle Bellwald, Bellwald — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Adelia Clavien & Stéphanie Pothier, “Sens”",
+              "detail": "Riddes — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
+            },
+            {
+              "label": "Come and make your own 'tomme' cheese !",
+              "detail": "Ferme la Vernettaz, Veysonnaz — in corso, ultimo giorno: 21 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/come-and-make-your-own-tomme-cheese/"
+            },
+            {
+              "label": "Archery",
+              "detail": "Nendaz — in corso, ultimo giorno: 22 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/archery/"
+            },
+            {
+              "label": "Alpaca Walk",
+              "detail": "auf Anfrage, Bellwald — in corso, ultimo giorno: 21 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpaka-spaziergang/"
+            },
+            {
+              "label": "East-West Encounters",
+              "detail": "Maison de la Bourgeoisie, Sierre — in corso, ultimo giorno: 23 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rencontres-orient-occident/"
+            },
+            {
+              "label": "Geek – Mostra sulle console di gioco",
+              "detail": "Galerie St. Laurent, Leukerbad — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "VS",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "68",
+          "value": "65",
           "note": "from the site’s events calendar"
         }
       ],
@@ -139,68 +139,68 @@
           "items": [
             {
               "label": "It is these days that are unavailable",
-              "detail": "Visp",
-              "date": "2026-10-18",
+              "detail": "Visp — ongoing, last day: 1 November 2026",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
             },
             {
-              "label": "Season End Brunch",
-              "detail": "Grächen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/season-end-brunch-2/"
-            },
-            {
-              "label": "Piano recital",
-              "detail": "Tellenhaus, Ernen",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/ernen/piano-recital-1_AGhp4fs"
-            },
-            {
-              "label": "Piano recital",
-              "detail": "Tellenhaus, Ernen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/klavierrezital-1/"
-            },
-            {
-              "label": "\"Fall\" Culinary Delights",
-              "detail": "Ferden",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/delizie-per-il-palato-autunno-1/"
-            },
-            {
-              "label": "Concert",
-              "detail": "Martigny",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-3/"
-            },
-            {
               "label": "Stéphane Lambiel, floor dance, and Lionel Monnet, piano",
-              "detail": "Saxon",
-              "date": "2026-10-18",
+              "detail": "Saxon — ongoing, last day: 19 October 2026",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stephane-lambiel-danse-au-sol-et-lionel-monnet-piano/"
-            },
-            {
-              "label": "Anzère Fantastique",
-              "detail": "Anzère Tourisme — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/anzere-fantastique/"
             },
             {
               "label": "Hiking and Yoga, Val d'Hérens",
               "detail": "Grand Hotel & Kurhaus — ongoing, last day: 19 October 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/hiking-and-yoga-val-dherens/"
             },
             {
               "label": "Theater: Aufführungen in Bellwald",
               "detail": "Mehrzweckhalle Bellwald, Bellwald — ongoing, last day: 8 November 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Adelia Clavien & Stéphanie Pothier, “Sens”",
+              "detail": "Riddes — ongoing, last day: 31 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
+            },
+            {
+              "label": "Come and make your own 'tomme' cheese !",
+              "detail": "Ferme la Vernettaz, Veysonnaz — ongoing, last day: 21 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/come-and-make-your-own-tomme-cheese/"
+            },
+            {
+              "label": "Archery",
+              "detail": "Nendaz — ongoing, last day: 22 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/archery/"
+            },
+            {
+              "label": "Alpaca Walk",
+              "detail": "auf Anfrage, Bellwald — ongoing, last day: 21 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpaka-spaziergang/"
+            },
+            {
+              "label": "East-West Encounters",
+              "detail": "Maison de la Bourgeoisie, Sierre — ongoing, last day: 23 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rencontres-orient-occident/"
+            },
+            {
+              "label": "Geek—Video Game Consoles Exhibition",
+              "detail": "Galerie St. Laurent, Leukerbad — ongoing, last day: 31 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "VS",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "68",
+          "value": "65",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -244,68 +244,68 @@
           "items": [
             {
               "label": "Es ist die beinahe Unsichtbare",
-              "detail": "Visp",
-              "date": "2026-10-18",
+              "detail": "Visp — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
             },
             {
-              "label": "Season End Brunch",
-              "detail": "Grächen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/season-end-brunch-2/"
-            },
-            {
-              "label": "Klavierrezital",
-              "detail": "Tellenhaus, Ernen",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/ernen/piano-recital-1_AGhp4fs"
-            },
-            {
-              "label": "Klavierrezital",
-              "detail": "Tellenhaus, Ernen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/klavierrezital-1/"
-            },
-            {
-              "label": "Gaumenkitzeln „Herbst“",
-              "detail": "Ferden",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/delizie-per-il-palato-autunno-1/"
-            },
-            {
-              "label": "Konzert",
-              "detail": "Martigny",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-3/"
-            },
-            {
               "label": "Stéphane Lambiel, Bodentanz, und Lionel Monnet, Klavier",
-              "detail": "Saxon",
-              "date": "2026-10-18",
+              "detail": "Saxon — läuft, letzter Tag: 19. Oktober 2026",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stephane-lambiel-danse-au-sol-et-lionel-monnet-piano/"
-            },
-            {
-              "label": "Anzère Fantastisch",
-              "detail": "Anzère Tourisme — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/anzere-fantastique/"
             },
             {
               "label": "Wandern und Yoga, Val d'Hérens",
               "detail": "Grand Hotel & Kurhaus — läuft, letzter Tag: 19. Oktober 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/hiking-and-yoga-val-dherens/"
             },
             {
               "label": "Theater: Aufführungen in Bellwald",
               "detail": "Mehrzweckhalle Bellwald, Bellwald — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Adelia Clavien & Stéphanie Pothier „Sens“",
+              "detail": "Riddes — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
+            },
+            {
+              "label": "Käse selber machen – so geht’s!",
+              "detail": "Ferme la Vernettaz, Veysonnaz — läuft, letzter Tag: 21. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/come-and-make-your-own-tomme-cheese/"
+            },
+            {
+              "label": "Bogenschiessen",
+              "detail": "Nendaz — läuft, letzter Tag: 22. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/archery/"
+            },
+            {
+              "label": "Alpaka Spaziergang",
+              "detail": "auf Anfrage, Bellwald — läuft, letzter Tag: 21. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpaka-spaziergang/"
+            },
+            {
+              "label": "Begegnungen zwischen Orient und Okzident",
+              "detail": "Maison de la Bourgeoisie, Sierre — läuft, letzter Tag: 23. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rencontres-orient-occident/"
+            },
+            {
+              "label": "Geek – Spielkonsolen Ausstellung",
+              "detail": "Galerie St. Laurent, Leukerbad — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "VS",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "68",
+          "value": "65",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -349,68 +349,68 @@
           "items": [
             {
               "label": "Es is dies beinahe Unsichtbare",
-              "detail": "Visp",
-              "date": "2026-10-18",
+              "detail": "Visp — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
             },
             {
-              "label": "Brunch de fin de saison",
-              "detail": "Grächen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/season-end-brunch-2/"
-            },
-            {
-              "label": "Récital de piano",
-              "detail": "Tellenhaus, Ernen",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/ernen/piano-recital-1_AGhp4fs"
-            },
-            {
-              "label": "Récital de piano",
-              "detail": "Tellenhaus, Ernen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/klavierrezital-1/"
-            },
-            {
-              "label": "Délices « d'automne »",
-              "detail": "Ferden",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/delizie-per-il-palato-autunno-1/"
-            },
-            {
-              "label": "Concert",
-              "detail": "Martigny",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-3/"
-            },
-            {
               "label": "Stéphane Lambiel, danse au sol et Lionel Monnet, piano",
-              "detail": "Saxon",
-              "date": "2026-10-18",
+              "detail": "Saxon — en cours, dernier jour : 19 octobre 2026",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stephane-lambiel-danse-au-sol-et-lionel-monnet-piano/"
-            },
-            {
-              "label": "Anzère Fantastique",
-              "detail": "Anzère Tourisme — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/anzere-fantastique/"
             },
             {
               "label": "Randonnée et Yoga, Val d'Hérens",
               "detail": "Grand Hotel & Kurhaus — en cours, dernier jour : 19 octobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/hiking-and-yoga-val-dherens/"
             },
             {
               "label": "Théâtre : représentations à Bellwald",
               "detail": "Mehrzweckhalle Bellwald, Bellwald — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Adelia Clavien & Stéphanie Pothier « Sens »",
+              "detail": "Riddes — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
+            },
+            {
+              "label": "Fais ta tomme !",
+              "detail": "Ferme la Vernettaz, Veysonnaz — en cours, dernier jour : 21 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/come-and-make-your-own-tomme-cheese/"
+            },
+            {
+              "label": "Tir à l'arc",
+              "detail": "Nendaz — en cours, dernier jour : 22 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/archery/"
+            },
+            {
+              "label": "Promenade avec des alpagas",
+              "detail": "auf Anfrage, Bellwald — en cours, dernier jour : 21 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpaka-spaziergang/"
+            },
+            {
+              "label": "Rencontres Orient Occident",
+              "detail": "Maison de la Bourgeoisie, Sierre — en cours, dernier jour : 23 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rencontres-orient-occident/"
+            },
+            {
+              "label": "Exposition « Geek – Consoles de jeux »",
+              "detail": "Galerie St. Laurent, Leukerbad — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }

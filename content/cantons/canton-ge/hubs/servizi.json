@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T16:48:41.470Z",
-  "contentHash": "4fc4e7a1ef6c45c9b412ea1f57963f370a9c5f6ff1ab451c9dc5ed8492623b30",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "93b3996f88108eaee3c6f2f88bda24067e4a25f2171969d0515f9f5484390d74",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-18T10:29:02.589Z",
+      "updatedAt": "2026-10-18T19:36:41.203Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-18T18:47:11.287Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T09:56:00.107Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -61,11 +66,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-17T22:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-18T22:00:00.000Z"
             },
             {
@@ -87,11 +87,30 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-10-22T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-23T22:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-18T10:29:02.589Z"
+          "updatedAt": "2026-10-18T19:36:41.203Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "10 °C",
+              "detail": "oggi da 10 a 11 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-18T18:47:11.287Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +148,7 @@
               "url": "https://www.ge.ch/node/261"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "GE",
@@ -248,11 +267,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-17T22:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-18T22:00:00.000Z"
             },
             {
@@ -274,11 +288,30 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-10-22T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-23T22:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-18T10:29:02.589Z"
+          "updatedAt": "2026-10-18T19:36:41.203Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "10 °C",
+              "detail": "today from 10 to 11 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-18T18:47:11.287Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -316,7 +349,7 @@
               "url": "https://www.ge.ch/node/261"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -391,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "GE",
@@ -430,11 +463,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-17T22:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-18T22:00:00.000Z"
             },
             {
@@ -456,11 +484,30 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-10-22T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-23T22:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-18T10:29:02.589Z"
+          "updatedAt": "2026-10-18T19:36:41.203Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "10 °C",
+              "detail": "heute 10 bis 11 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-18T18:47:11.287Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -498,7 +545,7 @@
               "url": "https://www.ge.ch/node/261"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -573,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "GE",
@@ -612,11 +659,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-17T22:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-18T22:00:00.000Z"
             },
             {
@@ -638,11 +680,30 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-10-22T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-23T22:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-18T10:29:02.589Z"
+          "updatedAt": "2026-10-18T19:36:41.203Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "10 °C",
+              "detail": "aujourd’hui de 10 à 11 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-18T18:47:11.287Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -680,7 +741,7 @@
               "url": "https://www.ge.ch/node/261"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -752,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }

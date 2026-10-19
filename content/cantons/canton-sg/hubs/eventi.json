@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "b5a5bf4571668edcfa1c62a0da120814c6ddd6320151e4c29d477fa57fd69f9f",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "3aa8440db0d0fa2ec06b79df82b29befc2827f9c4ab9fc9b1a9a9f5088e42203",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-18T20:21:24.396Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "95",
+          "value": "90",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Schlosslauf",
-              "detail": "Altstadt Rapperswil, Rapperswil-Jona",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/schlosslauf/"
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — in corso, ultimo giorno: 2 novembre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             },
             {
-              "label": "Alpchäsmarkt Flumserberg und Kuhrennen",
-              "detail": "Alp Tannenboden",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpchaesmarkt-flumserberg-und-kuhrennen-3/"
+              "label": "Büchertipp live!",
+              "detail": "St. Gallen",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/buechertipp-live/"
             },
             {
-              "label": "Restaurieren – aber wieso?",
-              "detail": "Kulturmuseum, St. Gallen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/restaurieren-aber-wieso/"
+              "label": "Siegfried & George – Berliner Schlager aus den 20er und 30er Jahren",
+              "detail": "DenkBar",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/siegfried-und-george-berliner-schlager-aus-den-20er-und-30er-jahren_Ab1sKDh"
             },
             {
-              "label": "Wild-Schiff",
-              "detail": "Schiffsbetrieb Walensee AG, Quarten",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-schiff/"
+              "label": "BluesClubBodensee Konzert mit Blues and more Band",
+              "detail": "Hopp",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/au-sg/bluesclubbodensee-konzert-mit-blues-and-more-band_AijvWMa"
             },
             {
-              "label": "Exklusiver Waldtag - Pilze & Wald erleben",
-              "detail": "Wildhaus",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/exklusiver-waldtag-pilze-wald-erleben/"
+              "label": "ISABEL MEILI - ZEITGEFÜHL",
+              "detail": "Grabenhalle",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/st-gallen/isabel-meili-zeitgefuehl_AvDVKY7"
             },
             {
-              "label": "Kunst zum Klingen bringen",
-              "detail": "Rapperswil-Jona",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kunst-zum-klingen-bringen/"
+              "label": "Claudia Valer, Werkschau",
+              "detail": "Pflegeheim Heiligkreuz, St. Gallen",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
             },
             {
-              "label": "Musik mit Hemberggruess",
-              "detail": "Berggasthaus Nestel, Ebnat-Kappel",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/musik-mit-hemberggruess_AvT32Sm"
+              "label": "Kurs: Homöopathische Notfallapotheke",
+              "detail": "St. Gallen",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-homoeopathische-notfallapotheke/"
             },
             {
-              "label": "Naturjodel-Wochenendkurs",
-              "detail": "Raum im Zentrum, St. Gallen — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-wochenendkurs/"
+              "label": "Eliane, Konzert und Dinner",
+              "detail": "Restaurant Rössli",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/eliane-konzert-und-dinner/"
             },
             {
-              "label": "Jintan-LAN 2026",
-              "detail": "Sportanlage Progy, Rebstein — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
+              "label": "Der Besuch der alten Dame",
+              "detail": "Theater St. Gallen, St. Gallen",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/der-besuch-der-alten-dame_AWMSP9s"
             },
             {
-              "label": "83a OLMA - Fiera svizzera dell'agricoltura e dell'alimentazione",
-              "detail": "Olma Areal — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
+              "label": "Fokusmodul – Meisner-Workout",
+              "detail": "Switzerland Innovation Park Ost",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "95",
+          "value": "90",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Schlosslauf",
-              "detail": "Altstadt Rapperswil, Rapperswil-Jona",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/schlosslauf/"
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — ongoing, last day: 2 November 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             },
             {
-              "label": "Alpchäsmarkt Flumserberg und Kuhrennen",
-              "detail": "Alp Tannenboden",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpchaesmarkt-flumserberg-und-kuhrennen-3/"
+              "label": "Büchertipp live!",
+              "detail": "St. Gallen",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/buechertipp-live/"
             },
             {
-              "label": "Restaurieren – aber wieso?",
-              "detail": "Kulturmuseum, St. Gallen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/restaurieren-aber-wieso/"
+              "label": "Siegfried & George – Berlin Hits from the 1920s and 1930s",
+              "detail": "DenkBar",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/siegfried-und-george-berliner-schlager-aus-den-20er-und-30er-jahren_Ab1sKDh"
             },
             {
-              "label": "ild",
-              "detail": "Schiffsbetrieb Walensee AG, Quarten",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-schiff/"
+              "label": "BluesClubBodensee Konzert mit Blues and more Band",
+              "detail": "Hopp",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/au-sg/bluesclubbodensee-konzert-mit-blues-and-more-band_AijvWMa"
             },
             {
-              "label": "Exklusiver Waldtag - Pilze & Wald erleben",
-              "detail": "Wildhaus",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/exklusiver-waldtag-pilze-wald-erleben/"
+              "label": "ISABEL MEILI - ZEITGEFÜHL",
+              "detail": "Grabenhalle",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/st-gallen/isabel-meili-zeitgefuehl_AvDVKY7"
             },
             {
-              "label": "Kunst zum Klingen bringen",
-              "detail": "Rapperswil-Jona",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kunst-zum-klingen-bringen/"
+              "label": "Claudia Valer, Werkschau",
+              "detail": "Pflegeheim Heiligkreuz, St. Gallen",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
             },
             {
-              "label": "Musik mit Hemberggruess",
-              "detail": "Berggasthaus Nestel, Ebnat-Kappel",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/musik-mit-hemberggruess_AvT32Sm"
+              "label": "Kurs: Homöopathische Notfallapotheke",
+              "detail": "St. Gallen",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-homoeopathische-notfallapotheke/"
             },
             {
-              "label": "Naturjodel-Wochenendkurs",
-              "detail": "Raum im Zentrum, St. Gallen — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-wochenendkurs/"
+              "label": "Eliane, Konzert und Dinner",
+              "detail": "Restaurant Rössli",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/eliane-konzert-und-dinner/"
             },
             {
-              "label": "Jintan-LAN 2026",
-              "detail": "Sportanlage Progy, Rebstein — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
+              "label": "Der Besuch der alten Dame",
+              "detail": "Theater St. Gallen, St. Gallen",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/der-besuch-der-alten-dame_AWMSP9s"
             },
             {
-              "label": "83rd OLMA - Swiss Agriculture and Food Fair",
-              "detail": "Olma Areal — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
+              "label": "Fokusmodul-Meisner -ork",
+              "detail": "Switzerland Innovation Park Ost",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "95",
+          "value": "90",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Schlosslauf",
-              "detail": "Altstadt Rapperswil, Rapperswil-Jona",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/schlosslauf/"
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — läuft, letzter Tag: 2. November 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             },
             {
-              "label": "Alpchäsmarkt Flumserberg und Kuhrennen",
-              "detail": "Alp Tannenboden",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpchaesmarkt-flumserberg-und-kuhrennen-3/"
+              "label": "Büchertipp live!",
+              "detail": "St. Gallen",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/buechertipp-live/"
             },
             {
-              "label": "Restaurieren – aber wieso?",
-              "detail": "Kulturmuseum, St. Gallen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/restaurieren-aber-wieso/"
+              "label": "Siegfried & George – Berliner Schlager aus den 20er und 30er ⑤ahren",
+              "detail": "DenkBar",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/siegfried-und-george-berliner-schlager-aus-den-20er-und-30er-jahren_Ab1sKDh"
             },
             {
-              "label": "⑤ild-Schiff",
-              "detail": "Schiffsbetrieb Walensee AG, Quarten",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-schiff/"
+              "label": "BluesClubBodensee Konzert mit Blues and more Band",
+              "detail": "Hopp",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/au-sg/bluesclubbodensee-konzert-mit-blues-and-more-band_AijvWMa"
             },
             {
-              "label": "Exklusiver Waldtag - Pilze & Wald erleben",
-              "detail": "Wildhaus",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/exklusiver-waldtag-pilze-wald-erleben/"
+              "label": "ISABEL MEILI - ZEITGEFÜHL",
+              "detail": "Grabenhalle",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/st-gallen/isabel-meili-zeitgefuehl_AvDVKY7"
             },
             {
-              "label": "Kunst zum Klingen bringen",
-              "detail": "Rapperswil-Jona",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kunst-zum-klingen-bringen/"
+              "label": "Claudia Valer, Werkschau",
+              "detail": "Pflegeheim Heiligkreuz, St. Gallen",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
             },
             {
-              "label": "Musik mit Hemberggruess",
-              "detail": "Berggasthaus Nestel, Ebnat-Kappel",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/musik-mit-hemberggruess_AvT32Sm"
+              "label": "Kurs: Homöopathische Notfallapotheke",
+              "detail": "St. Gallen",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-homoeopathische-notfallapotheke/"
             },
             {
-              "label": "Naturjodel-Wochenendkurs",
-              "detail": "Raum im Zentrum, St. Gallen — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-wochenendkurs/"
+              "label": "Eliane, Konzert und Dinner",
+              "detail": "Restaurant Rössli",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/eliane-konzert-und-dinner/"
             },
             {
-              "label": "Jintan-LAN 2026",
-              "detail": "Sportanlage Progy, Rebstein — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
+              "label": "Der Besuch der alten Dame",
+              "detail": "Theater St. Gallen, St. Gallen",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/der-besuch-der-alten-dame_AWMSP9s"
             },
             {
-              "label": "83. OLMA – Schweizer Messe für Landwirtschaft und Ernährung",
-              "detail": "Olma Areal — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
+              "label": "Fokusmodul-Meisner-Grafforkout",
+              "detail": "Switzerland Innovation Park Ost",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "95",
+          "value": "90",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Schlosslauf",
-              "detail": "Altstadt Rapperswil, Rapperswil-Jona",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/schlosslauf/"
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — en cours, dernier jour : 2 novembre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             },
             {
-              "label": "Alpchäsmarkt Flumserberg und Kuhrennen",
-              "detail": "Alp Tannenboden",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpchaesmarkt-flumserberg-und-kuhrennen-3/"
+              "label": "Büchertipp live!",
+              "detail": "St. Gallen",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/buechertipp-live/"
             },
             {
-              "label": "Restaurieren – aber wieso?",
-              "detail": "Kulturmuseum, St. Gallen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/restaurieren-aber-wieso/"
+              "label": "Siegfried & George – Chansons populaires berlinoises des années 20 et 30",
+              "detail": "DenkBar",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/siegfried-und-george-berliner-schlager-aus-den-20er-und-30er-jahren_Ab1sKDh"
             },
             {
-              "label": "Schiff sauvage",
-              "detail": "Schiffsbetrieb Walensee AG, Quarten",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-schiff/"
+              "label": "BluesClubBodensee Konzert mit Blues and more Band",
+              "detail": "Hopp",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/au-sg/bluesclubbodensee-konzert-mit-blues-and-more-band_AijvWMa"
             },
             {
-              "label": "Exklusiver Waldtag - Pilze & Wald erleben",
-              "detail": "Wildhaus",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/exklusiver-waldtag-pilze-wald-erleben/"
+              "label": "ISABEL MEILI - ZEITGEFÜHL",
+              "detail": "Grabenhalle",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/st-gallen/isabel-meili-zeitgefuehl_AvDVKY7"
             },
             {
-              "label": "Kunst zum Klingen bringen",
-              "detail": "Rapperswil-Jona",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kunst-zum-klingen-bringen/"
+              "label": "Claudia Valer, Werkschau",
+              "detail": "Pflegeheim Heiligkreuz, St. Gallen",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
             },
             {
-              "label": "Musik mit Hemberggruess",
-              "detail": "Berggasthaus Nestel, Ebnat-Kappel",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/musik-mit-hemberggruess_AvT32Sm"
+              "label": "Kurs: Homöopathische Notfallapotheke",
+              "detail": "St. Gallen",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-homoeopathische-notfallapotheke/"
             },
             {
-              "label": "Naturjodel-Wochenendkurs",
-              "detail": "Raum im Zentrum, St. Gallen — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-wochenendkurs/"
+              "label": "Eliane, Konzert und Dinner",
+              "detail": "Restaurant Rössli",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/eliane-konzert-und-dinner/"
             },
             {
-              "label": "Jintan-LAN 2026",
-              "detail": "Sportanlage Progy, Rebstein — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
+              "label": "Der Besuch der alten Dame",
+              "detail": "Theater St. Gallen, St. Gallen",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/der-besuch-der-alten-dame_AWMSP9s"
             },
             {
-              "label": "83e OLMA - Foire suisse de l'agriculture et de l'alimentation",
-              "detail": "Olma Areal — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
+              "label": "Module d'alimentation-Meisner-ork",
+              "detail": "Switzerland Innovation Park Ost",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }
