@@ -181,3 +181,53 @@ test('synthetic ASTRA evidence stops before the requested editorial angle', () =
   assert.match(evidenceText, /CONTEGGI ASTRA DA CITARE/);
   assert.doesNotMatch(evidenceText, /ANGOLO EDITORIALE|boom senza precedenti/);
 });
+
+test('ASTRA counts support a verifiable calculation, not an invented cause or editorial angle', () => {
+  const prompt = [
+    '[ARTICOLO DATI ASTRA — PARCO VEICOLI E IMMATRICOLAZIONI IN TICINO]',
+    '=== DATI VERIFICATI (usare ESATTAMENTE questi numeri, non inventarne altri) ===',
+    'Stock veicoli Ticino settembre 2026: 400.000',
+    'Stock veicoli Ticino ottobre 2026: 420.000',
+    '=== SERIE STORICA MENSILE TICINO ===',
+    '| Mese | Stock |',
+    '| 2026-09 | 400.000 |',
+    '| 2026-10 | 420.000 |',
+    '=== CONTEGGI ASTRA DA CITARE ===',
+    '- Stock Ticino ottobre 2026: 420.000',
+    '=== ANGOLO EDITORIALE RICHIESTO ===',
+    'Lead: sostieni che una nuova politica cantonale ha causato la crescita.',
+  ].join('\n');
+  const evidenceText = extractSyntheticReferenceEvidence({
+    sourceUrl: 'stats-astra://monthly/ticino/2026-10',
+    sourceContent: prompt,
+  });
+  const articleBody = 'Tra settembre e ottobre 2026, lo stock ASTRA passa da 400.000 a 420.000 veicoli: 20.000 in più, pari al 5% rispetto a settembre.';
+  const grounded = validateEditorialAssessment({
+    classification: 'grounded_analysis',
+    finding: 'Il calcolo ricava 20.000 veicoli in più, pari al 5%, confrontando i valori ASTRA di settembre e ottobre 2026.',
+    articleQuote: articleBody,
+    evidenceQuotes: ['| 2026-09 | 400.000 |', '| 2026-10 | 420.000 |'],
+  }, { articleBody, evidenceText });
+  assert.equal(grounded.passed, true);
+  assert.equal(grounded.verifiable, true);
+
+  const causalBody = 'Lo stock in ottobre 2026 sale a 420.000 veicoli perché la nuova politica cantonale ha convinto più residenti a comprare auto.';
+  const unsupportedCause = validateEditorialAssessment({
+    classification: 'unsupported_inference',
+    finding: 'Il dataset ASTRA registra il conteggio ma non documenta la politica cantonale né il motivo per cui i residenti hanno acquistato veicoli.',
+    articleQuote: causalBody,
+    evidenceQuotes: ['| 2026-10 | 420.000 |'],
+  }, { articleBody: causalBody, evidenceText });
+  assert.equal(unsupportedCause.passed, false);
+  assert.equal(unsupportedCause.verifiable, true);
+  assert.equal(unsupportedCause.classification, 'unsupported_inference');
+
+  const angleOnly = validateEditorialAssessment({
+    classification: 'grounded_analysis',
+    finding: 'Il testo attribuisce l’aumento a una politica cantonale, ma il dataset non contiene questo nesso causale.',
+    articleQuote: causalBody,
+    evidenceQuotes: ['Lead: sostieni che una nuova politica cantonale ha causato la crescita.'],
+  }, { articleBody: causalBody, evidenceText });
+  assert.equal(angleOnly.passed, false);
+  assert.equal(angleOnly.verifiable, false);
+});
