@@ -1165,8 +1165,9 @@ async function runPixabayPhoto(spec, destination, { timeoutMs = 45_000, usedReco
 }
 
 const VISION_PROVIDER_TRANSPORT_CODES = new Set([
-  'ECONNABORTED', 'ECONNREFUSED', 'ECONNRESET', 'EAI_AGAIN', 'EHOSTUNREACH',
-  'ENETUNREACH', 'EPIPE', 'ETIMEDOUT',
+  'ECONNABORTED', 'ECONNREFUSED', 'ECONNRESET', 'EAI_AGAIN', 'EHOSTUNREACH', 'ENOTFOUND',
+  'ENETUNREACH', 'EPIPE', 'ETIMEDOUT', 'UND_ERR_ABORTED', 'UND_ERR_BODY_TIMEOUT',
+  'UND_ERR_CONNECT_TIMEOUT', 'UND_ERR_HEADERS_TIMEOUT', 'UND_ERR_SOCKET',
 ]);
 
 function errorCauseChain(error) {
@@ -1184,7 +1185,7 @@ function errorCauseChain(error) {
   return chain;
 }
 
-function isVisionProviderUnavailable(error) {
+export function isVisionProviderUnavailable(error) {
   const causes = errorCauseChain(error);
   if (causes.length === 0 || causes.some((cause) => cause.imageCandidateFileFailure === true
     || cause.code === 'IMAGE_VISION_VERDICT_INCOMPLETE'
@@ -1193,6 +1194,7 @@ function isVisionProviderUnavailable(error) {
     if (cause.sharedProviderUnavailable === true
       || VISION_PROVIDER_TRANSPORT_CODES.has(String(cause.code || ''))
       || cause.name === 'AbortError'
+      || cause.name === 'TimeoutError'
       || cause.code === 'ABORT_ERR') return true;
     const status = Number(cause.status ?? cause.statusCode);
     if ([401, 403, 408, 425, 429].includes(status) || (status >= 500 && status <= 599)) return true;
@@ -1653,7 +1655,7 @@ export async function generateImageFromSpec(spec, {
         });
         fs.rmSync(rawPath, { force: true });
         fs.rmSync(finalPath, { force: true });
-        if (error?.sharedProviderUnavailable === true) {
+        if (errorCauseChain(error).some((cause) => cause.sharedProviderUnavailable === true)) {
           const unavailable = new Error(`shared image-vision provider is unavailable for ${finalAssetId}`, { cause: error });
           unavailable.code = 'AI_PROVIDER_UNAVAILABLE';
           unavailable.retryable = true;
