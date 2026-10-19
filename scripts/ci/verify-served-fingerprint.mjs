@@ -1,16 +1,21 @@
 import crypto from 'node:crypto';
+import { execFile } from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
+import { promisify } from 'node:util';
 import { fileURLToPath } from 'node:url';
 
+const execFileAsync = promisify(execFile);
 const TSV_HEADER = ['url', 'path', 'sha', 'origin', 'locale', 'shard'].join('\t');
 const PUSH_STATE_HEADER = ['shard', 'locale', 'status'].join('\t');
 const DEFAULT_TIMEOUT_SECONDS = 12 * 60;
 const DEFAULT_POLL_SECONDS = 15;
 const DEFAULT_PROBE_TIMEOUT_MS = 30 * 1000;
-// Cloudflare rejects Node/undici's implicit user agent on the public apex,
-// while the legacy curl probe is accepted. Keep the probe identifiable and
-// stable so origin and CDN checks use the same request contract.
+const MAX_BODY_PREVIEW_CHARS = 300;
+const EDGE_BLOCKED_STATUSES = new Set([403, 429, 503]);
+// The curl transport deliberately uses curl's built-in user agent. Keep this
+// value for the fetch fallback and the injectable fetch contract used by tests.
 const PUBLISH_PROBE_USER_AGENT = 'frontaliere-fast-publish/1.0 (+https://frontaliereticino.ch/)';
 
 /**
@@ -41,11 +46,40 @@ export class FingerprintMismatchError extends Error {
   }
 }
 
-function header(response, name) {
+export class EdgeBlockedError extends Error {
+  constructor(stage, failures) {
+    const status = failures[0]?.observation?.status || 'unknown';
+    const details = failures.map(formatBlockedFailure).join('\n');
+    super(
+      `${stage}: probe bloccata dall'edge; blocked=${failures.length} URL; `
+      + `status=${status}; cf-cache-status=absent\n${details}`,
+    );
+    this.name = 'EdgeBlockedError';
+    this.code = 'EDGE_PROBE_BLOCKED';
+    this.exitCode = 2;
+    this.stage = stage;
+    this.failures = failures;
+    this.blockedCount = failures.length;
+  }
+}
+
+function optionalHeader(response, name) {
   const value = response?.headers?.get?.(name);
-  if (value !== undefined && value !== null && value !== '') return value;
+  if (value !== undefined && value !== null && value !== '') return String(value);
   const plain = response?.headers?.[name] ?? response?.headers?.[name.toLowerCase()];
-  return plain === undefined || plain === '' ? 'unknown' : String(plain);
+  return plain === undefined || plain === '' ? null : String(plain);
+}
+
+function header(response, name) {
+  return optionalHeader(response, name) || 'unknown';
+}
+
+function isEdgeBlocked(observation) {
+  return EDGE_BLOCKED_STATUSES.has(observation.status) && observation.hasCfCacheStatus === false;
+}
+
+function formatHeader(name, value) {
+  return value ? `${name}=${value}` : null;
 }
 
 function formatFailure({ record, observation }) {
@@ -57,7 +91,24 @@ function formatFailure({ record, observation }) {
     `cf-cache-status=${observation.cfCacheStatus}`,
     `age=${observation.age}`,
     `last-modified=${observation.lastModified}`,
+    isEdgeBlocked(observation) ? "classification=probe bloccata dall'edge" : null,
+    isEdgeBlocked(observation) ? `body-preview=${JSON.stringify(observation.bodyPreview || '')}` : null,
+    isEdgeBlocked(observation) ? formatHeader('server', observation.server) : null,
+    isEdgeBlocked(observation) ? formatHeader('cf-ray', observation.cfRay) : null,
+    isEdgeBlocked(observation) ? formatHeader('cf-mitigated', observation.cfMitigated) : null,
     observation.error ? `error=${observation.error}` : null,
+  ].filter(Boolean).join('; ');
+}
+
+function formatBlockedFailure({ record, observation }) {
+  return [
+    `URL ${record.url}`,
+    `status=${observation.status}`,
+    "classification=probe bloccata dall'edge",
+    `body-preview=${JSON.stringify(observation.bodyPreview || '')}`,
+    formatHeader('server', observation.server),
+    formatHeader('cf-ray', observation.cfRay),
+    formatHeader('cf-mitigated', observation.cfMitigated),
   ].filter(Boolean).join('; ');
 }
 
@@ -241,13 +292,93 @@ function probeUrl(url, runKey, sequence) {
   return parsed.toString();
 }
 
+function parseCurlHeaders(rawHeaders) {
+  const blocks = String(rawHeaders)
+    .split(/\r?\n\r?\n/u)
+    .filter((block) => /^HTTP\/\S+\s+\d{3}\b/iu.test(block.trim()));
+  const finalBlock = blocks.at(-1) || '';
+  const headers = {};
+  for (const line of finalBlock.split(/\r?\n/u).slice(1)) {
+    const separator = line.indexOf(':');
+    if (separator <= 0) continue;
+    headers[line.slice(0, separator).trim().toLowerCase()] = line.slice(separator + 1).trim();
+  }
+  return headers;
+}
+
+function curlTimeoutSeconds(timeoutMs) {
+  return String(timeoutMs / 1000);
+}
+
+export function createCurlFetch({ fallbackFetch = globalThis.fetch, execFileImpl = execFileAsync } = {}) {
+  if (typeof fallbackFetch !== 'function') throw new TypeError('fallback fetch implementation is required');
+  if (typeof execFileImpl !== 'function') throw new TypeError('curl executor is required');
+  let curlAvailable = true;
+  return async function curlFetch(url, options = {}) {
+    if (!curlAvailable) return fallbackFetch(url, options);
+    const requestedTimeoutMs = Number(options.timeoutMs);
+    const boundedTimeoutMs = Number.isFinite(requestedTimeoutMs) && requestedTimeoutMs > 0
+      ? Math.max(1, Math.ceil(requestedTimeoutMs))
+      : DEFAULT_PROBE_TIMEOUT_MS;
+    let temporaryDir = null;
+    try {
+      temporaryDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'served-fingerprint-curl-'));
+      const headersFile = path.join(temporaryDir, 'headers.txt');
+      const bodyFile = path.join(temporaryDir, 'body.html');
+      const { stdout } = await execFileImpl('curl', [
+        '-s',
+        '-L',
+        '--max-time',
+        curlTimeoutSeconds(boundedTimeoutMs),
+        '-H',
+        'Cache-Control: no-cache',
+        '-D',
+        headersFile,
+        '-o',
+        bodyFile,
+        '-w',
+        '%{http_code}',
+        String(url),
+      ], {
+        shell: false,
+        signal: options.signal,
+        maxBuffer: 1024 * 1024,
+      });
+      const [rawHeaders, body] = await Promise.all([
+        fs.promises.readFile(headersFile, 'utf8'),
+        fs.promises.readFile(bodyFile, 'utf8'),
+      ]);
+      return {
+        status: Number(String(stdout).trim()) || 0,
+        headers: parseCurlHeaders(rawHeaders),
+        text: async () => body,
+      };
+    } catch (error) {
+      if (error?.code === 'ENOENT') {
+        curlAvailable = false;
+        return fallbackFetch(url, options);
+      }
+      throw error;
+    } finally {
+      if (temporaryDir) {
+        await fs.promises.rm(temporaryDir, { recursive: true, force: true }).catch(() => {});
+      }
+    }
+  };
+}
+
 function unavailableObservation(error) {
   return {
     status: 0,
     sha: null,
     cfCacheStatus: 'unknown',
+    hasCfCacheStatus: false,
     age: 'unknown',
     lastModified: 'unknown',
+    bodyPreview: null,
+    server: null,
+    cfRay: null,
+    cfMitigated: null,
     error,
   };
 }
@@ -284,14 +415,21 @@ async function fetchFingerprint(record, {
           Accept: 'text/html',
           'User-Agent': PUBLISH_PROBE_USER_AGENT,
         },
+      timeoutMs: boundedTimeoutMs,
     });
     const body = await response.text();
+    const cfCacheStatus = optionalHeader(response, 'cf-cache-status');
     return {
       status: Number(response.status) || 0,
       sha: fingerprintHtml(body),
-      cfCacheStatus: header(response, 'cf-cache-status'),
+      cfCacheStatus: cfCacheStatus || 'unknown',
+      hasCfCacheStatus: cfCacheStatus !== null,
       age: header(response, 'age'),
       lastModified: header(response, 'last-modified'),
+      bodyPreview: body.slice(0, MAX_BODY_PREVIEW_CHARS),
+      server: optionalHeader(response, 'server'),
+      cfRay: optionalHeader(response, 'cf-ray'),
+      cfMitigated: optionalHeader(response, 'cf-mitigated'),
     };
   })();
   const timeout = new Promise((_, reject) => {
@@ -326,6 +464,14 @@ function mismatch(stage, pending) {
   return new FingerprintMismatchError(stage, [...pending].map(([record, observation]) => ({ record, observation })));
 }
 
+function allEdgeBlocked(stage, observations) {
+  if (observations.length === 0 || !observations.every(({ observation }) => isEdgeBlocked(observation))) {
+    return null;
+  }
+  const statuses = new Set(observations.map(({ observation }) => observation.status));
+  return statuses.size === 1 ? new EdgeBlockedError(stage, observations) : null;
+}
+
 export async function waitForOrigin({
   records,
   fetchImpl = globalThis.fetch,
@@ -353,6 +499,7 @@ export async function waitForOrigin({
   while (pending.size > 0) {
     attempts += 1;
     const replayFailures = new Map();
+    const roundObservations = [];
     for (const record of [...pending.keys()]) {
       sequence += 1;
       const url = record.origin || record.url;
@@ -368,6 +515,7 @@ export async function waitForOrigin({
         })
         : unavailableObservation(`probe budget exhausted for ${url}`);
       pending.set(record, observation);
+      roundObservations.push({ record, observation });
       if (onObservation) onObservation({ record, observation, attempts });
       if (matches(record, observation)) {
         pending.delete(record);
@@ -375,6 +523,8 @@ export async function waitForOrigin({
         replayFailures.set(record, observation);
       }
     }
+    const blocked = allEdgeBlocked('Origin served-content verification failed', roundObservations);
+    if (blocked) throw blocked;
     if (replayFailures.size > 0) {
       throw mismatch('Origin replay no-op did not already match', replayFailures);
     }
@@ -406,6 +556,7 @@ export async function verifyApex({
   if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) throw new TypeError('timeoutMs must be positive');
   if (!Number.isFinite(probeTimeoutMs) || probeTimeoutMs <= 0) throw new TypeError('probeTimeoutMs must be positive');
   const failures = [];
+  const observations = [];
   let checked = 0;
   const startedAt = now();
   const wallStartedAt = Date.now();
@@ -422,9 +573,12 @@ export async function verifyApex({
         timeoutMs: Math.min(probeTimeoutMs, Math.max(1, remainingBeforeProbe)),
       })
       : unavailableObservation(`probe budget exhausted for ${record.url}`);
+    observations.push({ record, observation });
     if (onObservation) onObservation({ record, observation, checked });
     if (!matches(record, observation)) failures.push({ record, observation });
   }
+  const blocked = allEdgeBlocked('CDN served-content verification failed', observations);
+  if (blocked) throw blocked;
   if (failures.length > 0) throw new FingerprintMismatchError('CDN served-content verification failed', failures);
   return { checked, repurges: 0 };
 }
@@ -510,6 +664,7 @@ async function main(argv) {
     flag(args, '--probe-timeout-seconds', String(DEFAULT_PROBE_TIMEOUT_MS / 1000)),
     '--probe-timeout-seconds',
   );
+  const fetchImpl = createCurlFetch();
   if (command === 'wait-origin') {
     const pollSeconds = positiveSeconds(
       flag(args, '--poll-seconds', String(DEFAULT_POLL_SECONDS)),
@@ -517,6 +672,7 @@ async function main(argv) {
     );
     const result = await waitForOrigin({
       records,
+      fetchImpl,
       timeoutMs: timeoutSeconds * 1000,
       pollIntervalMs: pollSeconds * 1000,
       probeTimeoutMs: probeTimeoutSeconds * 1000,
@@ -536,6 +692,7 @@ async function main(argv) {
 
   const result = await verifyApex({
     records,
+    fetchImpl,
     timeoutMs: timeoutSeconds * 1000,
     probeTimeoutMs: probeTimeoutSeconds * 1000,
     onObservation: ({ record, observation }) => {
@@ -550,6 +707,6 @@ const isMain = process.argv[1]
 if (isMain) {
   main(process.argv.slice(2)).catch((error) => {
     console.error(`::error::${error.message}`);
-    process.exitCode = 1;
+    process.exitCode = error instanceof EdgeBlockedError ? error.exitCode : 1;
   });
 }

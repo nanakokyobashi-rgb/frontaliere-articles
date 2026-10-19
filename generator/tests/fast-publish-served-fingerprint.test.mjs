@@ -1,6 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import {
+  chmodSync,
+  existsSync,
   mkdtempSync,
   mkdirSync,
   readFileSync,
@@ -9,8 +12,9 @@ import {
 } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
-import { dirname, join, resolve } from 'node:path';
+import { delimiter, dirname, join, resolve } from 'node:path';
 import {
+  createCurlFetch,
   fingerprintHtml,
   readFingerprintFile,
   readPushStateFile,
@@ -22,6 +26,7 @@ import {
 } from '../../scripts/ci/verify-served-fingerprint.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
+const script = resolve(here, '../../scripts/ci/verify-served-fingerprint.mjs');
 const workflow = readFileSync(resolve(here, '../../.github/workflows/fast-publish-article.yml'), 'utf8');
 const helper = readFileSync(resolve(here, '../../scripts/ci/verify-served-fingerprint.mjs'), 'utf8');
 
@@ -46,6 +51,74 @@ const EN_RECORD = {
 
 function response(body, headers = {}) {
   return new Response(body, { status: 200, headers });
+}
+
+const CURL_STUB_SOURCE = [
+  '#!/usr/bin/env node',
+  "import { writeFileSync } from 'node:fs';",
+  'const args = process.argv.slice(2);',
+  "writeFileSync(process.env.CURL_ARGS_FILE, JSON.stringify(args));",
+  "writeFileSync(args[args.indexOf('-D') + 1], process.env.CURL_HEADERS);",
+  "writeFileSync(args[args.indexOf('-o') + 1], process.env.CURL_BODY);",
+  "process.stdout.write(process.env.CURL_STATUS);",
+].join('\n');
+
+function runCurlCli(record, {
+  status = '200',
+  headers = 'HTTP/2 200 OK\r\nserver: cloudflare\r\ncf-cache-status: HIT\r\nage: 0\r\n\r\n',
+  body = NEW_HTML,
+} = {}) {
+  const root = mkdtempSync(join(tmpdir(), 'served-fingerprint-curl-'));
+  try {
+    const bin = join(root, 'bin');
+    const curl = join(bin, 'curl');
+    const argsFile = join(root, 'curl-args.json');
+    const marker = join(root, 'shell-marker');
+    mkdirSync(bin);
+    writeFileSync(curl, CURL_STUB_SOURCE);
+    chmodSync(curl, 0o755);
+
+    const effectiveRecord = {
+      ...record,
+      url: record.url.replaceAll('__CURL_MARKER__', marker),
+    };
+    const fingerprintFile = join(root, 'fingerprints.tsv');
+    writeFingerprintFile(fingerprintFile, [effectiveRecord]);
+    const result = spawnSync(
+      process.execPath,
+      [
+        script,
+        'verify-apex',
+        '--fingerprints',
+        fingerprintFile,
+        '--timeout-seconds',
+        '5',
+        '--probe-timeout-seconds',
+        '0.5',
+      ],
+      {
+        cwd: resolve(here, '../..'),
+        encoding: 'utf8',
+        env: {
+          ...process.env,
+          PATH: bin + delimiter + (process.env.PATH || ''),
+          CURL_ARGS_FILE: argsFile,
+          CURL_STATUS: status,
+          CURL_HEADERS: headers,
+          CURL_BODY: body,
+        },
+      },
+    );
+    const curlArgs = existsSync(argsFile) ? JSON.parse(readFileSync(argsFile, 'utf8')) : [];
+    return {
+      ...result,
+      curlArgs,
+      effectiveUrl: effectiveRecord.url,
+      markerExists: existsSync(marker),
+    };
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
 }
 
 test('l’origine vecchia poi nuova aspetta e passa con una sonda anti-cache', async () => {
@@ -78,6 +151,34 @@ test('l’origine vecchia poi nuova aspetta e passa con una sonda anti-cache', a
   assert.deepEqual(sleeps, [15]);
 });
 
+test('una risposta 403 senza cf-cache-status è una probe bloccata dall’edge', async () => {
+  const blockedBody = 'pagina WAF: ' + 'x'.repeat(340);
+  await assert.rejects(
+    () => verifyApex({
+      records: [RECORD],
+      fetchImpl: async () => new Response(blockedBody, {
+        status: 403,
+        headers: {
+          server: 'cloudflare',
+          'cf-ray': 'ray-test',
+          'cf-mitigated': 'challenge',
+        },
+      }),
+    }),
+    (error) => {
+      assert.match(error.message, /probe bloccata dall'edge/);
+      assert.doesNotMatch(error.message, /did not serve the expected fingerprint/);
+      assert.match(error.message, /blocked=1/);
+      assert.match(error.message, /server=cloudflare/);
+      assert.match(error.message, /cf-ray=ray-test/);
+      assert.match(error.message, /cf-mitigated=challenge/);
+      assert.ok(error.message.includes(blockedBody.slice(0, 300)));
+      assert.equal(error.message.includes(blockedBody.slice(0, 301)), false);
+      return true;
+    },
+  );
+});
+
 test('la verifica CDN invia un User-Agent esplicito accettato dal bordo', async () => {
   let optionsSeen;
   await verifyApex({
@@ -93,6 +194,78 @@ test('la verifica CDN invia un User-Agent esplicito accettato dal bordo', async 
     Accept: 'text/html',
     'User-Agent': 'frontaliere-fast-publish/1.0 (+https://frontaliereticino.ch/)',
   });
+});
+
+test('un giro interamente bloccato non ripete la purge', async () => {
+  let purges = 0;
+  await assert.rejects(
+    () => verifyAfterPurge({
+      records: [RECORD],
+      fetchImpl: async () => new Response('edge blocked', { status: 403 }),
+      purge: async () => {
+        purges += 1;
+      },
+    }),
+    /probe bloccata dall'edge/,
+  );
+  assert.equal(purges, 0);
+});
+
+test('il CLI usa curl senza User-Agent esplicito, legge header/body e non interpreta la URL', () => {
+  const record = {
+    ...RECORD,
+    url: 'https://frontaliereticino.ch/$(touch __CURL_MARKER__)?q=semi;colon',
+  };
+  const result = runCurlCli(record);
+
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /fingerprints match/);
+  assert.equal(result.curlArgs.includes('-A'), false);
+  assert.equal(result.curlArgs.includes('--user-agent'), false);
+  assert.ok(result.curlArgs.includes('-s'));
+  assert.ok(result.curlArgs.includes('-L'));
+  assert.equal(result.curlArgs[result.curlArgs.indexOf('-H') + 1], 'Cache-Control: no-cache');
+  assert.equal(result.curlArgs[result.curlArgs.indexOf('--max-time') + 1], '0.5');
+  assert.equal(result.curlArgs.at(-1), result.effectiveUrl);
+  assert.equal(result.markerExists, false);
+});
+
+test('il CLI esce non zero per un apex bloccato e non lo tratta come CDN vecchia', () => {
+  const result = runCurlCli(RECORD, {
+    status: '403',
+    headers: 'HTTP/2 403 Forbidden\r\nserver: cloudflare\r\ncf-ray: ray-cli\r\ncf-mitigated: challenge\r\n\r\n',
+    body: 'pagina bloccata: ' + 'y'.repeat(340),
+  });
+
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /probe bloccata dall'edge/);
+  assert.doesNotMatch(result.stderr, /did not serve the expected fingerprint/);
+  assert.match(result.stderr, /blocked=1/);
+  assert.match(result.stderr, /cf-ray=ray-cli/);
+});
+
+test('curl assente ripiega sul fetch iniettato', async () => {
+  let fallbackCalls = 0;
+  const fetchImpl = createCurlFetch({
+    fallbackFetch: async (url, options) => {
+      fallbackCalls += 1;
+      assert.equal(url, RECORD.url);
+      assert.equal(options.headers['Cache-Control'], undefined);
+      return response(NEW_HTML, { 'cf-cache-status': 'MISS' });
+    },
+    execFileImpl: async () => {
+      const error = new Error('curl not found');
+      error.code = 'ENOENT';
+      throw error;
+    },
+  });
+  const result = await verifyApex({
+    records: [RECORD],
+    fetchImpl,
+    probeTimeoutMs: 100,
+  });
+  assert.equal(result.checked, 1);
+  assert.equal(fallbackCalls, 1);
 });
 
 test('CDN vecchia dopo la purge: una sola ripetizione della purge poi passa', async () => {
@@ -335,5 +508,6 @@ test('il workflow registra prima l’impronta, attende Pages prima della purge e
   assert.match(workflow, /ARTICLE_PUSH_STATUS_FILE/);
   assert.match(workflow, /clean-no-op/);
   assert.match(workflow, /--push-state "\$RUNNER_TEMP\/published-push-state\.tsv"/);
+  assert.match(workflow, /edge probe blocked[\s\S]*exit "\$verify_rc"/);
   assert.doesNotMatch(workflow, /<main>[^\n]*2943/);
 });
