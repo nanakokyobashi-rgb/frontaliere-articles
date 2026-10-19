@@ -31,6 +31,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 const script = resolve(here, '../../scripts/ci/verify-served-fingerprint.mjs');
 const workflow = readFileSync(resolve(here, '../../.github/workflows/fast-publish-article.yml'), 'utf8');
 const helper = readFileSync(resolve(here, '../../scripts/ci/verify-served-fingerprint.mjs'), 'utf8');
+const apexHelper = readFileSync(resolve(here, '../../scripts/ci/fast-publish-apex-verification.sh'), 'utf8');
 
 function workflowStep(name) {
   const start = workflow.indexOf(`      - name: ${name}`);
@@ -622,7 +623,7 @@ test('il workflow registra prima l’impronta, attende Pages prima della purge e
   const fingerprintAt = workflow.indexOf('--output "$RUNNER_TEMP/published-fingerprints.tsv"');
   const waitAt = workflow.indexOf('            wait-origin');
   const purgeAt = workflow.indexOf('      - name: Purge the edge cache for what was published');
-  const verifyAt = workflow.indexOf('verify-served-fingerprint.mjs verify-apex');
+  const verifyAt = workflow.indexOf('source scripts/ci/fast-publish-apex-verification.sh');
 
   assert.ok(fingerprintAt >= 0);
   assert.ok(waitAt > fingerprintAt);
@@ -632,14 +633,20 @@ test('il workflow registra prima l’impronta, attende Pages prima della purge e
   assert.match(helper, /last-modified/);
   assert.match(helper, /AbortController/);
   assert.match(helper, /response\.text\(\)/);
+  assert.match(apexHelper, /verify-served-fingerprint\.mjs verify-apex/);
   assert.match(workflow, /ARTICLE_PUSH_STATUS_FILE/);
   assert.match(workflow, /clean-no-op/);
   assert.match(workflow, /--push-state "\$RUNNER_TEMP\/published-push-state\.tsv"/);
-  assert.match(workflow, /--run-key "\$\{GITHUB_RUN_ID:-local\}\.\$\{GITHUB_RUN_ATTEMPT:-1\}\.\$\{shard\}\.\$\{apex_verify_attempt\}"/);
+  assert.match(apexHelper, /--run-key "\$\{GITHUB_RUN_ID:-local\}\.\$\{GITHUB_RUN_ATTEMPT:-1\}\.\$\{shard\}\.\$\{apex_verify_attempt\}"/);
   assert.match(workflow, /verify-served-fingerprint\.mjs handle-apex-failure/);
   assert.match(helper, /edge_probe_blocked=true/);
   assert.match(helper, /edge probe blocked/);
   assert.doesNotMatch(workflow, /<main>[^\n]*2943/);
+
+  assert.ok(
+    Buffer.byteLength(workflowRun('Verify the article is actually readable'), 'utf8') <= 21_000,
+    'the inline verification command exceeds GitHub Actions\' 21,000-character limit',
+  );
 });
 
 test('il comando della verifica resta sotto il limite GitHub di 21.000 caratteri', () => {
@@ -718,19 +725,20 @@ test('il downgrade apex richiede cache-lag esplicito e distingue status/route, e
     }).exitCode,
     0,
   );
+  assert.match(apexHelper, /verify-served-fingerprint\.mjs handle-apex-failure/);
 });
 
 test('un mismatch apex persistente resta warning e lascia eseguire il gate origin', () => {
   const verification = workflowStep('Verify the article is actually readable');
-  const retryAt = verification.indexOf(
+  const retryAt = apexHelper.indexOf(
     'bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs \\\n              "--files-from=$RUNNER_TEMP/edge-purge-urls.txt"',
   );
 
   assert.ok(retryAt >= 0, 'manca il retry della purge dopo il mismatch apex');
-  const afterRetry = verification.slice(retryAt);
-  const originGateAt = afterRetry.indexOf('echo "── origin (hard gate)"');
-  assert.ok(originGateAt > 0, 'il gate origin hard è sparito o precede il retry apex');
-  const retryHandling = afterRetry.slice(0, originGateAt);
+  const retryHandling = apexHelper.slice(retryAt);
+  const sourceAt = workflow.indexOf('source scripts/ci/fast-publish-apex-verification.sh');
+  const originGateAt = workflow.indexOf('echo "── origin (hard gate)"');
+  assert.ok(originGateAt > sourceAt, 'il gate origin hard è sparito o precede il retry apex');
 
   assert.match(retryHandling, /if verify_apex; then/);
   assert.match(
@@ -741,6 +749,6 @@ test('un mismatch apex persistente resta warning e lascia eseguire il gate origi
     retryHandling,
     /the apex still served content different from the pushed fingerprints after the retry — continuing with the origin hard gate/,
   );
-  assert.match(verification, /handle_apex_failure "before retry" "\$verify_rc"/);
+  assert.match(apexHelper, /handle_apex_failure "before retry" "\$verify_rc"/);
   assert.match(helper, /refusing to downgrade it to a warning/);
 });
