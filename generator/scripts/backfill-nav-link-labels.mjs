@@ -9,7 +9,7 @@
  * Uso:
  *   node generator/scripts/backfill-nav-link-labels.mjs
  *   node generator/scripts/backfill-nav-link-labels.mjs --apply --limit 60 \
- *     --lang de --lang fr --lang en
+ *     --order hits --lang de --lang fr --lang en
  *   node generator/scripts/backfill-nav-link-labels.mjs --apply --start-after <id>
  */
 
@@ -23,6 +23,7 @@ import { writeFileSnapshotAtomically } from '../../scripts/lib/write-file-pair-a
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 export const LOCALES = Object.freeze(['de', 'fr', 'en']);
 export const BODY_ROOTS = Object.freeze(['content/blog-body', 'content/blog-body-ch']);
+export const ORDERS = Object.freeze(['id', 'hits']);
 
 const STRING_QUOTES = new Set(["'", '"', '`']);
 const BODY_KEY_RE = /^blog\.article\.([^'"\r\n]+)\.(body(?:[1-9]|1[0-9]|20))$/u;
@@ -32,10 +33,15 @@ const HELP = `Uso: node generator/scripts/backfill-nav-link-labels.mjs [opzioni]
 
   --apply                 scrive i body; senza, la run e' dry-run
   --lang de|fr|en         locale da trattare; ripetibile (default: tutti)
-  --limit N               massimo di articoli modificati per locale
-  --offset N              salta N articoli nell'ordine stabile
+  --limit N               massimo di articoli nel lotto per locale
+  --offset N              salta N articoli nell'ordine alfabetico stabile
   --start-after <id>      riprende dopo l'articolo con questo id
+  --order id|hits         ordine alfabetico stabile (default) o priorita' per hit
+                           hits vieta --start-after e --offset
   --help                  mostra questo messaggio
+
+Un'interruzione durante --apply non perde le label: rilanciare gli stessi
+argomenti completa il lotto senza riscrivere i file gia' localizzati.
 `;
 
 function fail(message) {
@@ -64,7 +70,9 @@ export function parseArgs(argv = process.argv.slice(2)) {
   let apply = false;
   let limit = Number.POSITIVE_INFINITY;
   let offset = 0;
+  let offsetProvided = false;
   let startAfter = null;
+  let order = 'id';
   let help = false;
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -78,7 +86,7 @@ export function parseArgs(argv = process.argv.slice(2)) {
       continue;
     }
 
-    const match = /^(--lang|--limit|--offset|--start-after)(?:=(.*))?$/u.exec(arg);
+    const match = /^(--lang|--limit|--offset|--start-after|--order)(?:=(.*))?$/u.exec(arg);
     if (!match) fail(`opzione sconosciuta: ${arg}`);
     const { value, next } = readFlagValue(argv, index, match[1], match[2]);
     index = next;
@@ -89,9 +97,20 @@ export function parseArgs(argv = process.argv.slice(2)) {
       limit = parseNonNegativeInteger(value, '--limit');
     } else if (match[1] === '--offset') {
       offset = parseNonNegativeInteger(value, '--offset');
+      offsetProvided = true;
+    } else if (match[1] === '--order') {
+      if (!ORDERS.includes(value)) fail(`ordine non supportato: ${value}; usare id o hits`);
+      order = value;
     } else {
       startAfter = value;
     }
+  }
+
+  if (!help && order === 'hits' && startAfter !== null) {
+    fail('--order hits non puo\' usare --start-after: l\'ordine per hit non e\' stabile tra una run e l\'altra');
+  }
+  if (!help && order === 'hits' && offsetProvided) {
+    fail('--order hits non puo\' usare --offset: l\'ordine per hit non e\' stabile tra una run e l\'altra');
   }
 
   return {
@@ -100,6 +119,8 @@ export function parseArgs(argv = process.argv.slice(2)) {
     locales: locales.length ? locales : [...LOCALES],
     limit,
     offset,
+    offsetProvided,
+    order,
     startAfter,
   };
 }
@@ -303,9 +324,15 @@ function compareStrings(left, right) {
   return left < right ? -1 : left > right ? 1 : 0;
 }
 
-function compareArticles(left, right) {
+function compareArticlesByHits(left, right) {
   const byLabels = right.beforeHits.length - left.beforeHits.length;
   if (byLabels) return byLabels;
+  const byId = compareStrings(left.id, right.id);
+  if (byId) return byId;
+  return compareStrings(left.relativePath, right.relativePath);
+}
+
+function compareArticlesById(left, right) {
   const byId = compareStrings(left.id, right.id);
   if (byId) return byId;
   return compareStrings(left.relativePath, right.relativePath);
@@ -370,18 +397,43 @@ function annotateHits(articles, selected) {
   return { afterHits, beforeHits };
 }
 
-function selectArticles(articles, { limit, offset, startAfter }) {
-  const ordered = [...articles].sort(compareArticles);
+function selectArticles(articles, { limit, offset, offsetProvided = false, order, startAfter }) {
+  if (!ORDERS.includes(order)) fail(`ordine non supportato: ${order}; usare id o hits`);
+  if (order === 'hits' && startAfter !== null) {
+    fail('--order hits non puo\' usare --start-after: l\'ordine per hit non e\' stabile tra una run e l\'altra');
+  }
+  if (order === 'hits' && (offsetProvided || offset !== 0)) {
+    fail('--order hits non puo\' usare --offset: l\'ordine per hit non e\' stabile tra una run e l\'altra');
+  }
+
+  const compare = order === 'hits' ? compareArticlesByHits : compareArticlesById;
+  const ordered = [...articles].sort(compare);
+  const labeled = ordered.filter((article) => article.beforeHits.length > 0);
   let startIndex = 0;
   if (startAfter !== null) {
-    const index = ordered.findIndex((article) => article.id === startAfter);
-    if (index < 0) fail(`id non trovato: ${startAfter}`);
+    const index = labeled.findIndex((article) => article.id === startAfter);
+    if (index < 0) {
+      fail(`id non trovato nell'elenco completo degli articoli con almeno un'etichetta italiana: ${startAfter}`);
+    }
     startIndex = index + 1;
   }
-  const candidates = ordered.slice(startIndex).filter((article) => article.substitutions.length > 0);
+
+  if (order === 'hits') {
+    const candidates = ordered.filter((article) => article.substitutions.length > 0);
+    return {
+      candidates,
+      selected: candidates.slice(0, Number.isFinite(limit) ? limit : undefined),
+    };
+  }
+
+  const afterCursor = labeled.slice(startIndex);
+  const candidates = afterCursor.filter((article) => article.substitutions.length > 0);
+  const windowStart = offset;
+  const windowEnd = Number.isFinite(limit) ? windowStart + limit : undefined;
   return {
     candidates,
-    selected: candidates.slice(offset, Number.isFinite(limit) ? offset + limit : undefined),
+    selected: afterCursor.slice(windowStart, windowEnd)
+      .filter((article) => article.substitutions.length > 0),
   };
 }
 
@@ -406,7 +458,10 @@ export function runBackfill({
   apply = false,
   limit = Number.POSITIVE_INFINITY,
   offset = 0,
+  offsetProvided = false,
+  order = 'id',
   startAfter = null,
+  writeFile = writeFileSnapshotAtomically,
   logger = console.log,
 } = {}) {
   if (!Array.isArray(locales) || locales.length === 0) fail('serve almeno un locale');
@@ -415,35 +470,61 @@ export function runBackfill({
   if (!(limit === Number.POSITIVE_INFINITY || (Number.isSafeInteger(limit) && limit >= 0))) {
     fail(`limit non valido: ${limit}`);
   }
+  if (!ORDERS.includes(order)) fail(`ordine non supportato: ${order}; usare id o hits`);
+  if (order === 'hits' && startAfter !== null) {
+    fail('--order hits non puo\' usare --start-after: l\'ordine per hit non e\' stabile tra una run e l\'altra');
+  }
+  if (order === 'hits' && (offsetProvided || offset !== 0)) {
+    fail('--order hits non puo\' usare --offset: l\'ordine per hit non e\' stabile tra una run e l\'altra');
+  }
+  if (typeof writeFile !== 'function') fail('writeFile non valido');
 
   const modifiedFiles = [];
   const reports = [];
+  const plans = [];
   for (const locale of locales) {
     const articles = scanLocale(root, locale);
-    const { candidates, selected } = selectArticles(articles, { limit, offset, startAfter });
+    const { candidates, selected } = selectArticles(articles, {
+      limit,
+      offset,
+      offsetProvided,
+      order,
+      startAfter,
+    });
     const { beforeHits, afterHits } = annotateHits(articles, selected);
-    let written = 0;
-    if (apply) {
-      for (const article of selected) {
-        writeFileSnapshotAtomically(article.filePath, article.source, article.afterSource);
-        written += 1;
-        modifiedFiles.push(article.relativePath);
-      }
-    }
     const substituted = selected.reduce((sum, article) => sum + article.substitutions.length, 0);
     const before = summarizeHits(beforeHits);
     const after = summarizeHits(afterHits);
-    const report = {
+    plans.push({
       after: {
         ...after,
         left: after.italianLabels,
         substituted,
       },
-      apply,
       before,
       candidates: candidates.length,
       locale,
       selected: selected.length,
+      selectedArticles: selected,
+    });
+  }
+
+  for (const plan of plans) {
+    let written = 0;
+    if (apply) {
+      for (const article of plan.selectedArticles) {
+        writeFile(article.filePath, article.source, article.afterSource);
+        written += 1;
+        modifiedFiles.push(article.relativePath);
+      }
+    }
+    const report = {
+      after: plan.after,
+      apply,
+      before: plan.before,
+      candidates: plan.candidates,
+      locale: plan.locale,
+      selected: plan.selected,
       written,
     };
     reports.push(report);

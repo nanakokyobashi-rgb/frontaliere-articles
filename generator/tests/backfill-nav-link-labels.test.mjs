@@ -6,6 +6,7 @@ import path from 'node:path';
 
 import {
   localizeBodySource,
+  parseArgs,
   runBackfill,
 } from '../scripts/backfill-nav-link-labels.mjs';
 import { escapeForSingleQuoteTS } from '../scripts/lib/article-meta-block.mjs';
@@ -22,8 +23,8 @@ const INVENTED_BODY = [
   '',
 ].join('\n');
 
-const INVENTED_SOURCE = (id) => `const body: Record<string, string> = {\n`
-  + `  'blog.article.${id}.body1': '${escapeForSingleQuoteTS(INVENTED_BODY)}',\n`
+const INVENTED_SOURCE = (id, body = INVENTED_BODY) => `const body: Record<string, string> = {\n`
+  + `  'blog.article.${id}.body1': '${escapeForSingleQuoteTS(body)}',\n`
   + `};\n\nexport default body;\n`;
 
 function maskNavLabels(source) {
@@ -38,6 +39,41 @@ function writeFixture(root, locale) {
   fs.writeFileSync(file, INVENTED_SOURCE('invented-nav'), 'utf8');
   return file;
 }
+
+function writeArticle(root, locale, id, body) {
+  const directory = path.join(root, 'content/blog-body', locale);
+  fs.mkdirSync(path.join(root, 'content/blog-body-ch', locale), { recursive: true });
+  fs.mkdirSync(directory, { recursive: true });
+  const file = path.join(directory, `${id}.ts`);
+  fs.writeFileSync(file, INVENTED_SOURCE(id, body), 'utf8');
+  return file;
+}
+
+function fileIds(files) {
+  return files.map((file) => path.basename(file, '.ts'));
+}
+
+const CURSOR_BODIES = Object.freeze({
+  'a-first': [
+    '[calcolatore stipendio netto](nav:calculator)',
+    '[annunci di lavoro](nav:jobs)',
+    '[etichetta sconosciuta](nav:future)',
+  ].join('\n'),
+  'b-second': [
+    '[calcolatore stipendio netto](nav:calculator)',
+    '[annunci di lavoro](nav:jobs)',
+    '[costo della vita](nav:cost-of-living)',
+    '[etichetta sconosciuta](nav:future)',
+  ].join('\n'),
+  'c-third': [
+    '[calcolatore stipendio netto](nav:calculator)',
+    '[etichetta sconosciuta](nav:future)',
+  ].join('\n'),
+  'd-fourth': [
+    '[annunci di lavoro](nav:jobs)',
+    '[etichetta sconosciuta](nav:future)',
+  ].join('\n'),
+});
 
 test('localizza solo le label nav note e preserva ogni altro byte', () => {
   const source = INVENTED_SOURCE('invented-nav');
@@ -93,6 +129,161 @@ test('dry-run non scrive, apply e seconda esecuzione sono idempotenti', () => {
     assert.equal(fs.readFileSync(files.de, 'utf8').includes('[AHV](nav:pension)'), true);
     assert.equal(fs.readFileSync(files.fr, 'utf8').includes('[AVS](nav:pension)'), true);
     assert.equal(fs.readFileSync(files.en, 'utf8').includes('[AVS](nav:pension)'), true);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il cursore alfabetico completa i lotti senza saltare articoli dopo il primo apply', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'backfill-nav-cursor-'));
+  try {
+    for (const [id, body] of Object.entries(CURSOR_BODIES)) writeArticle(root, 'de', id, body);
+
+    const first = runBackfill({
+      root,
+      locales: ['de'],
+      apply: true,
+      limit: 2,
+      logger: () => {},
+    });
+    assert.deepEqual(fileIds(first.modifiedFiles), ['a-first', 'b-second']);
+    assert.ok(first.reports[0].before.italianLabels > first.reports[0].after.italianLabels);
+
+    const second = runBackfill({
+      root,
+      locales: ['de'],
+      apply: true,
+      limit: 2,
+      startAfter: 'b-second',
+      logger: () => {},
+    });
+    assert.deepEqual(fileIds(second.modifiedFiles), ['c-third', 'd-fourth']);
+    assert.deepEqual(
+      [...first.modifiedFiles, ...second.modifiedFiles].map((file) => path.basename(file, '.ts')).sort(),
+      Object.keys(CURSOR_BODIES).sort(),
+    );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('start-after inesistente fallisce prima di qualsiasi scrittura', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'backfill-nav-cursor-invalid-'));
+  try {
+    const file = writeArticle(root, 'de', 'present-article', CURSOR_BODIES['a-first']);
+    const before = fs.readFileSync(file, 'utf8');
+    assert.throws(
+      () => runBackfill({
+        root,
+        locales: ['de'],
+        apply: true,
+        startAfter: 'missing-article',
+        logger: () => {},
+      }),
+      /id non trovato.*etichetta italiana/u,
+    );
+    assert.equal(fs.readFileSync(file, 'utf8'), before);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('l’ordine per hit vieta i cursori start-after e offset', () => {
+  assert.throws(
+    () => parseArgs(['--order', 'hits', '--start-after', 'present-article']),
+    /--order hits.*--start-after.*stabile/u,
+  );
+  assert.throws(
+    () => parseArgs(['--order', 'hits', '--offset', '1']),
+    /--order hits.*--offset.*stabile/u,
+  );
+});
+
+test('offset riprende nello stesso ordine alfabetico anche dopo che i conteggi cambiano', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'backfill-nav-offset-'));
+  try {
+    for (const [id, body] of Object.entries(CURSOR_BODIES)) writeArticle(root, 'de', id, body);
+    const first = runBackfill({
+      root,
+      locales: ['de'],
+      apply: true,
+      limit: 1,
+      logger: () => {},
+    });
+    assert.deepEqual(fileIds(first.modifiedFiles), ['a-first']);
+
+    const second = runBackfill({
+      root,
+      locales: ['de'],
+      apply: true,
+      offset: 1,
+      limit: 1,
+      logger: () => {},
+    });
+    assert.deepEqual(fileIds(second.modifiedFiles), ['b-second']);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un’interruzione a metà lotto è riprendibile senza doppie scritture né perdita di label', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'backfill-nav-interrupted-'));
+  try {
+    writeArticle(root, 'de', 'a-first', CURSOR_BODIES['a-first']);
+    writeArticle(root, 'de', 'b-second', CURSOR_BODIES['b-second']);
+    const firstSuccessfulWrites = [];
+    let writeCalls = 0;
+    assert.throws(
+      () => runBackfill({
+        root,
+        locales: ['de'],
+        apply: true,
+        limit: 2,
+        writeFile: (filePath, before, after) => {
+          writeCalls += 1;
+          if (writeCalls === 2) throw new Error('interruzione inventata');
+          assert.notEqual(before, after);
+          fs.writeFileSync(filePath, after, 'utf8');
+          firstSuccessfulWrites.push(filePath);
+        },
+        logger: () => {},
+      }),
+      /interruzione inventata/u,
+    );
+    assert.deepEqual(fileIds(firstSuccessfulWrites), ['a-first']);
+
+    const resumedWrites = [];
+    const resumed = runBackfill({
+      root,
+      locales: ['de'],
+      apply: true,
+      limit: 2,
+      writeFile: (filePath, before, after) => {
+        assert.notEqual(before, after);
+        fs.writeFileSync(filePath, after, 'utf8');
+        resumedWrites.push(filePath);
+      },
+      logger: () => {},
+    });
+    assert.deepEqual(fileIds(resumed.modifiedFiles), ['b-second']);
+    assert.deepEqual(fileIds(resumedWrites), ['b-second']);
+    assert.equal(new Set([...firstSuccessfulWrites, ...resumedWrites]).size, 2);
+    assert.match(fs.readFileSync(firstSuccessfulWrites[0], 'utf8'), /\[Nettolohnrechner\]\(nav:calculator\)/u);
+    assert.match(fs.readFileSync(resumedWrites[0], 'utf8'), /\[Nettolohnrechner\]\(nav:calculator\)/u);
+    assert.match(fs.readFileSync(firstSuccessfulWrites[0], 'utf8'), /\[etichetta sconosciuta\]\(nav:future\)/u);
+    assert.match(fs.readFileSync(resumedWrites[0], 'utf8'), /\[etichetta sconosciuta\]\(nav:future\)/u);
+
+    const replayWrites = [];
+    const replay = runBackfill({
+      root,
+      locales: ['de'],
+      apply: true,
+      limit: 2,
+      writeFile: (filePath) => replayWrites.push(filePath),
+      logger: () => {},
+    });
+    assert.equal(replay.modifiedFiles.length, 0);
+    assert.equal(replayWrites.length, 0);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
