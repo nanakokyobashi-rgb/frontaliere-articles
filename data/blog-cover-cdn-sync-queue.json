@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-hsg-optime-orario-lavoro.webp",
+      "sha256": "b4127b57656e387379c1730342db3181b371d84421d19c146f6f9a3a3dfdfaa0"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-hsg-optime-orario-lavoro-480w.webp",
+      "sha256": "6e85473c746df35512dcbda2f0d4cdd7aa0cc1179c45e51d27662195d69ca34f"
+    }
+  ]
 }
