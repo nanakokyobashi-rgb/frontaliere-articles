@@ -137,6 +137,8 @@ test('fuel: shapes rankings and suppresses a global Swiss station without route 
   assert.equal(block.municipalityCount, 518);
   assert.equal(block.cheapestItaly[0].municipality, 'Livigno');
   assert.equal(block.bestSavings[0].saving50LEur, 25.25);
+  assert.equal(block.bestSavings[0].italyTimeZone, 'Europe/Rome');
+  assert.equal(block.bestSavings[0].swissTimeZone, 'Europe/Zurich');
   assert.equal(block.cheapestSwissStation, null);
 });
 
@@ -164,6 +166,16 @@ test('exchange: latest rate, 1-day and 7-day deltas', () => {
   assert.equal(block.delta1d, 0.0015);
   assert.equal(block.rate7dAgo, 1.064); // latest point at or before 2026-08-01
   assert.equal(block.delta7d, 0.0055);
+});
+
+test('exchange: deltas match the rounded rates shown to readers', () => {
+  const block = shapeExchange({ points: [
+    { date: '2026-10-10', rate: 0.870051 },
+    { date: '2026-10-17', rate: 0.875049 },
+  ] }, { todayIso: '2026-10-18' });
+  assert.equal(block.rate7dAgo, 0.8701);
+  assert.equal(block.rate, 0.875);
+  assert.equal(block.delta7d, 0.0049);
 });
 
 test('exchange: an old gap does not become a published 7-day delta', () => {

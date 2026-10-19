@@ -249,6 +249,7 @@ import {
 // vincolo di mirror, ed e' condiviso dai due scrittori di body del corpus.
 import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
 import { addIndependentVote, extractFactCheckJson, factCheckRawSnippet } from './lib/fact-check-response.mjs';
+import { editorialOriginalityIssue, extractSyntheticReferenceEvidence, validateEditorialAssessment } from './lib/editorial-originality.mjs';
 import { decodeHtmlEntities } from './lib/decode-html-entities.mjs';
 import {
   PERFORMANCE_PATH as ARTICLE_PERF_PATH,
@@ -316,11 +317,11 @@ import {
 import { imageCreditRecordFromGeneratedImageRecord } from '../../engine/shared/imageCredits.mjs';
 import { DETERMINISTIC_CARD_KIND, DETERMINISTIC_CARD_LICENSE_URL } from './lib/deterministic-card-provenance.mjs';
 import {
-  CATALOG_FALLBACK_MIN_SHARED_WORDS,
   catalogFallbackSharedWordCount,
   classifyImageRegenerationFailure,
   queueArticleCoverRegeneration,
   resolveArticleCoverFallback,
+  verifyCatalogFallbackCandidates,
 } from './lib/article-cover-fallback.mjs';
 import { generateGovernedArticleHero } from './lib/article-cover-engine.mjs';
 import {
@@ -1658,23 +1659,16 @@ const AVAILABLE_IMAGES = PLACES_IMAGES;
  * a weak match is deliberate: the caller's governed fallback resolver then
  * chooses the static place cover instead of borrowing an unrelated story.
  */
+function findBestFallbackImages(data) {
+  return FALLBACK_IMAGES
+    .map(imagePath => ({ imagePath, score: catalogFallbackSharedWordCount(data, imagePath) }))
+    .sort((a, b) => b.score - a.score || a.imagePath.localeCompare(b.imagePath))
+    .slice(0, 5)
+    .map(({ imagePath }) => imagePath);
+}
+
 function findBestFallbackImage(data) {
-  const recentImages = new Set(_getRecentArticleImages());
-
-  let bestBlogMatch = null;
-  let bestBlogScore = 0;
-  for (const imagePath of FALLBACK_IMAGES) {
-    if (recentImages.has(imagePath)) continue;
-    const score = catalogFallbackSharedWordCount(data, imagePath);
-    if (score > bestBlogScore) {
-      bestBlogScore = score;
-      bestBlogMatch = imagePath;
-    }
-  }
-  if (bestBlogMatch && bestBlogScore >= CATALOG_FALLBACK_MIN_SHARED_WORDS) return bestBlogMatch;
-
-  // No arbitrary catalog cover: the governed resolver owns the static fallback.
-  return null;
+  return findBestFallbackImages(data)[0] || null;
 }
 
 const CATEGORIES = ['fiscale', 'pratico', 'novita', 'pensione'];
@@ -6353,12 +6347,53 @@ async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '', verif
     contentIt?.body1 || '', contentIt?.body2 || '', contentIt?.body3 || '',
   ].join('\n\n');
 
-  const isEvergreen = !sourceContent || sourceContent.length < 100 || sourceUrl.startsWith('evergreen://') || sourceUrl.startsWith('stats-bfs://');
+  const isStatsBfs = sourceUrl.startsWith('stats-bfs://');
+  const isStatsAstra = sourceUrl.startsWith('stats-astra://');
+  const isSyntheticDataset = isStatsBfs || isStatsAstra;
+  const isEvergreenArticle = sourceUrl.startsWith('evergreen://')
+    || (!isSyntheticDataset && (!sourceContent || sourceContent.length < 100));
+  const hasSyntheticReference = isSyntheticDataset || sourceUrl.startsWith('evergreen://');
+  const checkerArticleText = articleText.slice(0, MAX_FACTCHECK_ARTICLE_CHARS);
+  const articleBodyStart = [contentIt?.title || '', contentIt?.excerpt || ''].join('\n\n').length + 2;
+  const syntheticReferenceType = isStatsBfs
+    ? 'DATASET PRIMARIO BFS: fonte strutturata dei dati e dei periodi verificati; non è una fonte di cronaca.'
+    : isStatsAstra
+    ? 'DATASET PRIMARIO ASTRA/OFROU: fonte strutturata dei conteggi e dei periodi verificati; non è una fonte di cronaca.'
+    : sourceUrl.startsWith('evergreen://')
+    ? 'BRIEF DI FATTI VERIFICATI PER EVERGREEN: materiale di riferimento stabile fornito al generatore; non è una notizia né una fonte giornalistica.'
+    : '';
+  const syntheticReferenceText = extractSyntheticReferenceEvidence({
+    sourceUrl,
+    sourceContent: typeof sourceContent === 'string' ? sourceContent.slice(0, 6000) : '',
+    evergreenBrief: sourceUrl.startsWith('evergreen://')
+      ? evergreenFactsBriefFor(SECTION_NAME, CANTON_FACTS_BRIEF)
+      : '',
+  });
+  const syntheticReferenceBlock = syntheticReferenceText
+    ? `\n${syntheticReferenceType}\n"""\n${syntheticReferenceText}\n"""\n`
+    : '';
+  const sourceEvidenceContent = isSyntheticDataset ? syntheticReferenceText : sourceContent;
+  const editorialContext = {
+    articleBody: checkerArticleText.slice(articleBodyStart),
+    evidenceText: [
+      hasSyntheticReference ? syntheticReferenceText : sourceContent.slice(0, 6000),
+      VERIFIED_DOMAIN_FACTS,
+      verifiedCantonFactsBlock(verifiedReferenceText),
+    ].join('\n\n'),
+  };
 
   if (articleText.length > MAX_FACTCHECK_ARTICLE_CHARS) {
     console.error(`  ⚠️  Fact-check: articolo di ${articleText.length} chars > cap ${MAX_FACTCHECK_ARTICLE_CHARS} `
       + `— la coda oltre il cap è verificata solo dai gate deterministici`);
   }
+
+  const sourceFraming = isStatsBfs
+    ? 'NOTA: Articolo basato sul dataset chiuso BFS riportato sotto, che è la fonte primaria dei totali e dei periodi. Verifica ogni numero e periodo contro quel dataset; i fatti di dominio verificati restano un riferimento separato. Il dataset non è una notizia di cronaca.'
+    : isStatsAstra
+    ? 'NOTA: Articolo basato sul dataset chiuso ASTRA/OFROU riportato sotto, che è la fonte primaria dei conteggi e dei periodi. Verifica ogni conteggio e periodo contro quel dataset; i fatti di dominio verificati restano un riferimento separato. Il dataset non è una notizia di cronaca.'
+    : isEvergreenArticle
+    ? 'NOTA: Articolo evergreen senza fonte specifica. Verifica basandoti sulle tue conoscenze del dominio e sui fatti di riferimento sotto. Per evergreen, NON segnalare come issue un fatto solo perché non compare in una fonte originale: segnala solo se è falso, contraddetto dai fatti verificati, troppo specifico senza attribuzione, o presentato come caso reale non verificato.'
+    : `FONTE ORIGINALE (l'articolo doveva basarsi su questo testo):\n"""\n${sourceEvidenceContent.slice(0, 6000)}\n"""`;
 
   const prompt = `${IS_CANTON
     ? CANTON_LINES.factCheckPersona
@@ -6368,17 +6403,18 @@ async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '', verif
 
 ARTICOLO DA VERIFICARE:
 """
-${articleText.slice(0, MAX_FACTCHECK_ARTICLE_CHARS)}
+${checkerArticleText}
 """
 
-${isEvergreen ? 'NOTA: Articolo evergreen senza fonte specifica. Verifica basandoti sulle tue conoscenze del dominio e sui fatti di riferimento sotto. Per evergreen, NON segnalare come issue un fatto solo perché non compare in una fonte originale: segnala solo se è falso, contraddetto dai fatti verificati, troppo specifico senza attribuzione, o presentato come caso reale non verificato.' : `FONTE ORIGINALE (l'articolo doveva basarsi su questo testo):\n"""\n${sourceContent.slice(0, 6000)}\n"""`}
+${sourceFraming}
+${syntheticReferenceBlock}
 
 ${VERIFIED_DOMAIN_FACTS}
 ${verifiedCantonFactsBlock(verifiedReferenceText)}
 
 VERIFICA SISTEMATICA — controlla OGNI categoria:
 
-1. **LEGGI E DECRETI**: Ogni riferimento normativo (D.Lgs, DL, DPR, L.) deve esistere realmente con numero e anno corretti. Verifica che il contenuto attribuito alla legge sia corretto. Confronta con i fatti verificati sopra. ${isEvergreen ? '' : 'Se il riferimento NON è presente nella fonte originale, segnalalo come sospetto.'}
+1. **LEGGI E DECRETI**: Ogni riferimento normativo (D.Lgs, DL, DPR, L.) deve esistere realmente con numero e anno corretti. Verifica che il contenuto attribuito alla legge sia corretto. Confronta con i fatti verificati sopra. ${isEvergreenArticle ? '' : isStatsBfs ? 'Il dataset BFS è fonte primaria solo per totali e periodi, non per norme: verifica le norme con i fatti di dominio riportati sopra.' : 'Se il riferimento NON è presente nella fonte originale, segnalalo come sospetto.'}
 
 2. **ISTITUZIONI E ENTI**: Ogni istituzione menzionata deve esistere realmente. Confronta con la lista di istituzioni reali nei fatti verificati. Segnala qualsiasi acronimo NON presente in quella lista come sospetto. NON esiste: "Codice federale del lavoro", "CFL", "UFOL", "UWL", "Commissione federale per i frontalieri", "Ufficio federale dell'integrazione sanitaria (UFIS)".
 
@@ -6386,9 +6422,9 @@ VERIFICA SISTEMATICA — controlla OGNI categoria:
 
 4. **STATISTICHE E PERCENTUALI**: Percentuali precise con decimali (es. "il 73,2% dei frontalieri") DEVONO provenire da studi reali citati per nome E ISTITUTO. Senza attribuzione precisa = probabile invenzione. ECCEZIONE: arrotondamenti a numeri interi da fonti note (es. "circa il 30% della forza lavoro" da USTAT) sono accettabili. Non segnalare aliquote esplicitamente elencate nei fatti verificati (AVS=5.3%, AC=1.1%, IRPEF ${irpefAliquoteBreve(IRPEF_ANNO_CORRENTE)} o 2024-${IRPEF_ANNO_PRECEDENTE} ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}, franchigia 10.000 euro) come issue se sono riportate correttamente.
 
-5. **DATE E EVENTI**: Confronta con le date verificate: Convenzione 9/3/1976, Nuovo Accordo 23/12/2020, vigenza dal 1/1/2024, Legge 83/2023. ${isEvergreen ? '' : 'Date presenti nell\'articolo ma ASSENTI dalla fonte = altamente sospette.'}
+5. **DATE E EVENTI**: Confronta con le date verificate: Convenzione 9/3/1976, Nuovo Accordo 23/12/2020, vigenza dal 1/1/2024, Legge 83/2023. ${isEvergreenArticle ? '' : isStatsBfs ? 'Per il dato BFS, periodo e confronto devono corrispondere esattamente al dataset primario qui sopra.' : 'Date presenti nell\'articolo ma ASSENTI dalla fonte = altamente sospette.'}
 
-6. **COERENZA CON LA FONTE**: ${isEvergreen ? 'N/A per evergreen.' : "Confronta ogni affermazione dell'articolo con la fonte originale. DISTINGUI tra: (a) arricchimento contestuale con fatti di dominio CORRETTI e verificabili (contesto frontaliere, aliquote note, geografia ticinese) = 'minor', (b) fatti specifici inventati (leggi/decreti inesistenti, statistiche precise senza fonte, istituzioni inventate, eventi mai avvenuti) NON presenti nella fonte = 'critical', (c) informazione che CONTRADDICE la fonte o i fatti verificati = 'critical'."}
+6. **COERENZA CON LA FONTE**: ${isStatsBfs ? 'Confronta ogni totale, periodo e variazione con il dataset BFS primario riportato sopra. Una lettura o un calcolo ricavato dai suoi valori è valido se la base è coerente; l’angolo editoriale richiesto non è prova e non deve essere trattato come fatto.' : isEvergreenArticle ? 'N/A per evergreen senza fonte specifica.' : "Confronta ogni affermazione dell'articolo con la fonte originale. DISTINGUI tra: (a) arricchimento contestuale con fatti di dominio CORRETTI e verificabili (contesto frontaliere, aliquote note, geografia ticinese) = 'minor', (b) fatti specifici inventati (leggi/decreti inesistenti, statistiche precise senza fonte, istituzioni inventate, eventi mai avvenuti) NON presenti nella fonte = 'critical', (c) informazione che CONTRADDICE la fonte o i fatti verificati = 'critical'."}
 
 7. **FATTI INVENTATI**: Cerca eventi, conferenze, referendum, proteste, dichiarazioni che sembrano plausibili ma potrebbero non essere mai avvenuti. SEGNALE D'ALLARME: eventi descritti con molti dettagli specifici (data precisa, luogo, partecipanti) che non appaiono in nessuna fonte nota.
 
@@ -6417,19 +6453,25 @@ VERIFICA SISTEMATICA — controlla OGNI categoria:
    - Ministri o funzionari con nomi plausibili ma non verificabili
    - Accordi/protocolli bilaterali mai firmati (controllare attentamente)
 
-${IS_CANTON ? CANTON_LINES.factCheckRelevance(isEvergreen) : IS_FRONTALIERE ? `11. **RILEVANZA TOPICA AL FRONTALIERE TICINO-ITALIA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita del frontaliere Ticino-Italia. Sono nessi reali: norme/sentenze su Permesso G o B, fiscalità CH-IT (imposta alla fonte, nuovo accordo, ristorni, doppia imposizione), AVS/LPP/LAMal/CMI, busta paga svizzera, dogane/valichi (Chiasso, Brogeda, Gaggiolo, Ponte Tresa), pendolarismo CH-IT e viabilità del tragitto casa-lavoro (chiusure, cantieri, deviazioni su A2/A9, strade ticinesi e delle province di Varese, Como e VCO, treni TILO/FFS), mercato del lavoro ticinese anche quando la fonte non nomina i frontalieri (licenziamenti, riorganizzazioni, appalti, salari, dumping), politica e finanze del Canton Ticino (preventivo, imposte cantonali, servizi), cronaca locale in Ticino e nelle province di Varese, Como e VCO anche senza nesso con i frontalieri (cronaca nera, incidenti stradali, sport, cultura ed eventi), telelavoro frontaliere, accordi bilaterali CH-IT/UE, banche e cambio CHF-EUR per frontalieri.
+${IS_CANTON ? CANTON_LINES.factCheckRelevance(isEvergreenArticle) : IS_FRONTALIERE ? `11. **RILEVANZA TOPICA AL FRONTALIERE TICINO-ITALIA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita del frontaliere Ticino-Italia. Sono nessi reali: norme/sentenze su Permesso G o B, fiscalità CH-IT (imposta alla fonte, nuovo accordo, ristorni, doppia imposizione), AVS/LPP/LAMal/CMI, busta paga svizzera, dogane/valichi (Chiasso, Brogeda, Gaggiolo, Ponte Tresa), pendolarismo CH-IT e viabilità del tragitto casa-lavoro (chiusure, cantieri, deviazioni su A2/A9, strade ticinesi e delle province di Varese, Como e VCO, treni TILO/FFS), mercato del lavoro ticinese anche quando la fonte non nomina i frontalieri (licenziamenti, riorganizzazioni, appalti, salari, dumping), politica e finanze del Canton Ticino (preventivo, imposte cantonali, servizi), cronaca locale in Ticino e nelle province di Varese, Como e VCO anche senza nesso con i frontalieri (cronaca nera, incidenti stradali, sport, cultura ed eventi), telelavoro frontaliere, accordi bilaterali CH-IT/UE, banche e cambio CHF-EUR per frontalieri.
 
-   ${isEvergreen ? '' : 'NON sono nessi reali (segnala "critical" come "rilevanza_topica"): cronaca, sport e cultura fuori dal Ticino e dalle province di Varese, Como e VCO (es. arresti a Milano, eventi USA, criminalità urbana a Roma/Napoli/Palermo), gossip, infrastruttura italiana lontana dal confine, eventi a Malpensa SENZA impatto sui voli o trasporti frontalieri.'}
+   ${isEvergreenArticle ? '' : 'NON sono nessi reali (segnala "critical" come "rilevanza_topica"): cronaca, sport e cultura fuori dal Ticino e dalle province di Varese, Como e VCO (es. arresti a Milano, eventi USA, criminalità urbana a Roma/Napoli/Palermo), gossip, infrastruttura italiana lontana dal confine, eventi a Malpensa SENZA impatto sui voli o trasporti frontalieri.'}
 
    SEGNALE D'ALLARME (= "critical: rilevanza_topica"): paragrafi con titoli del tipo "Implicazioni per i frontalieri", "I frontalieri devono essere consapevoli di…", "Cosa significa per i frontalieri", su un evento SENZA implicazione concreta. Sezioni di consigli generici ("consulta un avvocato", "verifica la copertura assicurativa", "informati sui tuoi diritti") inserite per riempire spazio su un argomento non-frontaliere sono indicatori di forzatura.
 
-   ${isEvergreen ? '' : "Se l'articolo sostituisce i fatti di una notizia di cronaca con un commento generico (procedure di estradizione generiche, consigli legali universali, considerazioni assicurative generiche) o con un angolo frontalieri che la fonte non ha, il verdetto è FAIL."}` : `11. **RILEVANZA TOPICA NAZIONALE SVIZZERA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita, l'economia o la politica in Svizzera a livello nazionale o cantonale. Sono nessi reali: policy federale/cantonale, fiscalità (imposta federale diretta, IVA, imposte cantonali), AVS/LPP/LAMal, mercato del lavoro e salari svizzeri, costo della vita, affitti e casa, previdenza, economia e BNS, decisioni del Consiglio federale o dei Cantoni, accordi internazionali della Svizzera. NON è richiesto alcun nesso frontaliere/Ticino: un articolo nazionale (es. salario minimo cantonale, IVA, affitti) è PIENAMENTE rilevante.
+   ${isEvergreenArticle ? '' : "Se l'articolo sostituisce i fatti di una notizia di cronaca con un commento generico (procedure di estradizione generiche, consigli legali universali, considerazioni assicurative generiche) o con un angolo frontalieri che la fonte non ha, il verdetto è FAIL."}` : `11. **RILEVANZA TOPICA NAZIONALE SVIZZERA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita, l'economia o la politica in Svizzera a livello nazionale o cantonale. Sono nessi reali: policy federale/cantonale, fiscalità (imposta federale diretta, IVA, imposte cantonali), AVS/LPP/LAMal, mercato del lavoro e salari svizzeri, costo della vita, affitti e casa, previdenza, economia e BNS, decisioni del Consiglio federale o dei Cantoni, accordi internazionali della Svizzera. NON è richiesto alcun nesso frontaliere/Ticino: un articolo nazionale (es. salario minimo cantonale, IVA, affitti) è PIENAMENTE rilevante.
 
-   ${isEvergreen ? '' : 'NON sono nessi reali (segnala "critical" come "rilevanza_topica"): cronaca nera senza implicazione di policy/economia, eventi sportivi, gossip, intrattenimento, eventi esteri senza impatto sulla Svizzera.'}
+   ${isEvergreenArticle ? '' : 'NON sono nessi reali (segnala "critical" come "rilevanza_topica"): cronaca nera senza implicazione di policy/economia, eventi sportivi, gossip, intrattenimento, eventi esteri senza impatto sulla Svizzera.'}
 
    SEGNALE D'ALLARME (= "critical: rilevanza_topica"): forzare "implicazioni nazionali" su un evento che non ne ha, o riempire con consigli generici ("consulta un avvocato", "verifica la copertura assicurativa", "informati sui tuoi diritti") un argomento senza reale rilevanza nazionale, sono indicatori di forzatura.
 
-   ${isEvergreen ? '' : "Se l'articolo è un commento generico attaccato a una notizia di cronaca SENZA alcun nesso di policy/economia/vita in Svizzera, il verdetto è FAIL — l'articolo non doveva essere generato."}`}
+   ${isEvergreenArticle ? '' : "Se l'articolo è un commento generico attaccato a una notizia di cronaca SENZA alcun nesso di policy/economia/vita in Svizzera, il verdetto è FAIL — l'articolo non doveva essere generato."}`}
+
+═══ VALUTAZIONE EDITORIALE E PROVE (OBBLIGATORIA) ═══
+Valuta body1–body3 nel loro insieme. Un articolo non supera questo controllo se si limita a riassumere o parafrasare la fonte: deve offrire almeno una relazione, spiegazione o confronto concreto e utile, dimostrabile con fatti e periodi esatti. Un calcolo ricavato da valori espliciti può essere un contributo valido; non serve inventare un cambiamento o una conseguenza che la fonte non documenta. Un confronto deve usare periodi, unità e basi coerenti. Non aggiungere un angolo sul lavoro o sui frontalieri a una notizia non pertinente.
+Attribuisci le notizie alla fonte. Non ritenere supportati reportage sul posto, interviste, fonti proprie o verifiche umane non documentati; ometti cause, effetti, previsioni e consigli fiscali o finanziari senza prove.
+Cita esattamente almeno 40 caratteri e 7 parole dal corpo dell'articolo e almeno 16 dalla fonte o da un riferimento verificato; non ricostruire citazioni a memoria né usare titolo, excerpt o schema. Scrivi in italiano un finding specifico (almeno 35 caratteri e 6 parole) sul dato o sulla relazione dimostrata.
+Usa grounded_analysis solo per un contributo concreto, tracciabile e non già contenuto nella fonte. Usa source_restatement per un riassunto/parafrasi senza contributo aggiunto; unsupported_inference per affermazioni non provate o reportage/interviste/verifiche inventate; insufficient_evidence quando le prove non permettono una valutazione positiva. Una valutazione vaga o dichiarativa non basta.
 
 CRITERI DI GIUDIZIO:
 - "critical" = fatto verificabilmente FALSO, o CONTRADDICE i fatti verificati di riferimento (legge inesistente, istituzione inventata, aliquota sbagliata, evento mai avvenuto, dato che contraddice la fonte)
@@ -6453,6 +6495,12 @@ Rispondi SOLO in JSON valido:
 {
   "verdict": "PASS" | "FAIL",
   "confidence": 0.0-1.0,
+  "editorialAssessment": {
+    "classification": "grounded_analysis" | "source_restatement" | "unsupported_inference" | "insufficient_evidence",
+    "finding": "relazione concreta che il testo aggiunge, con dati o periodo specifici",
+    "articleQuote": "citazione esatta di almeno 40 caratteri da body1, body2 o body3",
+    "evidenceQuotes": ["citazione esatta di almeno 16 caratteri dalla fonte o da un riferimento verificato"]
+  },
   "issues": [
     { "claim": "testo dell'affermazione", "reason": "perché è problematica", "severity": "critical|major|minor", "category": "categoria", "sourceQuote": "porzione esatta di fonte a supporto, o \"\" se la fonte non tratta l'argomento" }
   ]
@@ -6548,7 +6596,8 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     // Query up to 2 models in parallel for consensus
     const modelsToQuery = verificationModels.slice(0, 2);
     const promises = modelsToQuery.map((model, index) => _runSingleFactCheck(model, prompt, {
-      isEvergreen,
+      isEvergreen: isEvergreenArticle,
+      editorialContext,
       // The first verifier owns the Codex primary slot. Keep the parallel
       // second opinion independent without changing its existing fallback
       // family/order.
@@ -6588,7 +6637,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
         || verificationModels.find((m) => !voted.includes(m))
         || modelsToQuery[1];
       try {
-        const extra = await _runSingleFactCheck(next, prompt, { isEvergreen, excludeModels: voted });
+        const extra = await _runSingleFactCheck(next, prompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted });
         const earlier = extra ? addIndependentVote(modelResults, next, extra) : null;
         if (earlier) console.error(`  ⚠️  LLM fact-check (${next}): servito di nuovo da ${earlier.servedBy} — resta un solo voto`);
       } catch (err) {
@@ -6604,7 +6653,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     // If both primary models failed, try fallback
     if (modelResults.length === 0 && verificationModels.length > 2) {
       try {
-        const fallback = await _runSingleFactCheck(verificationModels[2], prompt, { isEvergreen });
+        const fallback = await _runSingleFactCheck(verificationModels[2], prompt, { isEvergreen: isEvergreenArticle, editorialContext });
         if (fallback) addIndependentVote(modelResults, verificationModels[2], fallback);
       } catch (err) {
         fcLastRejectMsgs.push(err.message || '');
@@ -6644,7 +6693,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     const selfCheck = _codexWroteThisHeadline ? ' — ha scritto anche questo articolo: si verifica da solo (decisione del proprietario)' : '';
     console.error(`  🛟 LLM fact-check: ${why}, verifico con ${codex}${selfCheck}`);
     try {
-      const vote = await _runSingleFactCheck(codex, prompt, { isEvergreen, codexOnly: true });
+      const vote = await _runSingleFactCheck(codex, prompt, { isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true });
       if (vote) addIndependentVote(modelResults, codex, vote);
     } catch (err) {
       fcLastRejectMsgs.push(err.message || '');
@@ -6696,6 +6745,30 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     };
   }
 
+  // An original editorial contribution is a separate blocking quality gate:
+  // unlike a verifier outage, a valid assessment that finds only a restatement
+  // or unsupported inference belongs in the existing bounded rewrite loop.
+  // Require every independent reviewer to support the contribution, and keep
+  // the exact evidence-based correction alongside any factual issues found.
+  const originalityFailures = modelResults
+    .filter(result => !result.editorialAssessment?.passed)
+    .map(result => ({ result, assessment: result.editorialAssessment }));
+  if (originalityFailures.length > 0) {
+    const uniqueFailures = new Map();
+    for (const { result, assessment } of originalityFailures) {
+      const key = `${assessment.classification}\u0000${assessment.reason}`;
+      if (!uniqueFailures.has(key)) uniqueFailures.set(key, { result, assessment });
+    }
+    const originalityIssues = [...uniqueFailures.values()].map(({ result, assessment }) => {
+      console.error(`  🚫 Originalità editoriale (${result.model}): ${assessment.classification} — ${assessment.reason}`);
+      return editorialOriginalityIssue(assessment);
+    });
+    const factualIssues = modelResults.flatMap(result => result.issues)
+      .filter(issue => issue.severity === 'critical' || issue.severity === 'major')
+      .slice(0, 6);
+    return { passed: false, issues: [...originalityIssues, ...factualIssues] };
+  }
+
   // ── Drop verdicts the source itself refutes ──
   //
   // Runs BEFORE consensus so a false "not in the source" cannot be promoted to
@@ -6703,10 +6776,10 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // 2026-07-28: both models flagged the source's own opening sentence, the
   // article was blocked, and the rewrite loop then walked the draft away from
   // the source until it passed by inventing). See dropSourceContradictedIssues.
-  if (!isEvergreen && sourceContent) {
+  if (!isEvergreenArticle && sourceEvidenceContent) {
     let droppedTotal = 0;
     for (const r of modelResults) {
-      const { kept, dropped } = dropSourceContradictedIssues(r.issues, sourceContent);
+      const { kept, dropped } = dropSourceContradictedIssues(r.issues, sourceEvidenceContent);
       if (dropped.length) {
         droppedTotal += dropped.length;
         for (const d of dropped) {
@@ -6964,8 +7037,14 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
   const verdict = result.verdict.trim().toUpperCase();
   const confidence = Number(result.confidence) || 0;
   const issues = normalizeFactCheckIssues(result.issues, opts);
+  const editorialAssessment = validateEditorialAssessment(result.editorialAssessment, opts.editorialContext);
+  if (!editorialAssessment.verifiable) {
+    console.error(`  ⚠️  LLM fact-check (${model}${servedBy && servedBy !== model ? ` via ${servedBy}` : ''}): `
+      + `valutazione editoriale senza prove leggibili (${editorialAssessment.reason}) — voto scartato`);
+    return null;
+  }
 
-  return { verdict, confidence, issues, servedBy };
+  return { verdict, confidence, issues, editorialAssessment, servedBy };
 }
 
 // assertNoFabricatedStatistics() REMOVED — replaced by LLM-based fact-checking.
@@ -11322,11 +11401,11 @@ Almeno 6 dei seguenti termini, SE PERTINENTI al tema, DEVONO comparire naturalme
 AVS/AHV, LPP/BVG, LAMal/KVG, imposta federale diretta, IVA, SECO, UST/BFS, BNS/SNB, Consiglio federale, Cantoni, salario minimo, costo della vita.\n`;
 
   // ── Section-aware prompt fragments ──────────────────────────────
-  // Frontaliere branch = byte-identical to the historical prompt (drives ~95%
-  // revenue). Svizzera branch reframes section-specific blocks around NATIONAL
-  // Swiss relevance for a general Swiss-resident audience. Every section-AGNOSTIC
-  // rule (fedeltà alla fonte, anti-allucinazione, anti-AI, formatting, internal
-  // links, CTA divieti, grassetto, H3, anti-ripetitività) stays verbatim below.
+  // Section-specific rules set topical relevance, while the shared editorial
+  // contract requires a traceable contribution without inventing impacts.
+  // Svizzera frames relevance nationally; Frontaliere and canton sections keep
+  // their own audiences. Evidence, attribution and no-fabrication rules apply
+  // to every generated article.
   // Il RUOLO e' gia' fissato dal messaggio `system` («Sei un giornalista
   // finanziario esperto di …», con `systemRoleQualifier` per la sezione): qui
   // resta solo cio' che quel messaggio non dice — testata, sezione, e il
@@ -11339,26 +11418,24 @@ AVS/AHV, LPP/BVG, LAMal/KVG, imposta federale diretta, IVA, SECO, UST/BFS, BNS/S
     : `You write for "Frontaliere Ticino" (frontaliereticino.ch), national Switzerland section — economy, fiscal policy, labour market, cost of living, housing, federal & cantonal politics, for a general Swiss-resident audience. Based on the following source, write a blog article.`;
 
   const reachMinimumImplicationsLine = localNewsSource
-    ? `- Racconta i fatti della fonte e cosa cambia per chi vive o si sposta nella zona; i frontalieri solo se la fonte ne parla`
+    ? `- Spiega il rilievo locale solo quando i fatti della fonte lo documentano; cita eventuali cambiamenti, confronti o limiti esattamente come risultano dalle prove`
     : IS_CANTON
     ? CANTON_LINES.reachLine
     : IS_FRONTALIERE
-    ? `- Analizza le IMPLICAZIONI PRATICHE per i frontalieri (cosa cambia nella vita quotidiana)`
-    : `- Analizza le IMPLICAZIONI PRATICHE a livello nazionale/cantonale (cosa cambia nella vita di chi vive o lavora in Svizzera)`;
-  // Local news has no procedure, scenario or site tool to offer: its words
-  // come from the facts, statements and local context of the source. Every
-  // frontaliere-only demand below has a local branch for the same reason
-  // (review of PR #1871): one left behind is the off-topic copy the density
-  // bypass would otherwise publish.
+    ? `- Spiega un confronto, una relazione o un effetto documentato rilevante per i frontalieri; se la fonte non documenta un cambiamento, non inventarlo`
+    : `- Spiega un confronto, una relazione o un effetto documentato rilevante per chi vive o lavora in Svizzera; se la fonte non documenta un cambiamento, non inventarlo`;
+  // The original contribution must be grounded. Procedures, scenarios and
+  // advice are optional and only belong when the source/reference documents
+  // their factual basis; a sparse source is not a reason to invent them.
   const reachMinimumMethodLines = localNewsSource
-    ? `- Riporta dichiarazioni, reazioni e sviluppi presenti nella fonte
-- Dai il contesto locale che la fonte fornisce (luogo, precedenti, organizzatori, risultati)`
-    : `- Descrivi PROCEDURE concrete (cosa fare, dove andare, quali documenti servono)
-- Aggiungi SCENARI "cosa succede se" basati sui fatti della fonte
-- Confronta con la situazione precedente (prima vs dopo il cambiamento descritto nella fonte)`;
+    ? `- Aggiungi contesto, dichiarazioni, confronti o sviluppi solo se compaiono nella fonte o in un riferimento verificato
+- Se non c'è un seguito documentato, chiarisci i fatti e i limiti senza simulare un'indagine o un aggiornamento`
+    : `- Spiega termini e numeri utili al caso usando fatti citati, date e periodi verificabili
+- Calcola un confronto solo da valori e basi esplicite; rendi visibili i dati e il periodo usato
+- Distingui ciò che la fonte riferisce da ciò che i dati permettono di dedurre; niente cause, previsioni o consigli senza prova`;
   const reachMinimumToolsLine = localNewsSource
     ? `- NON aggiungere procedure, checklist, scadenze o strumenti del sito che la notizia non richiede`
-    : `- Collega agli strumenti del sito (calcolatore, comparatore, guide) per approfondire`;
+    : `- Collega agli strumenti del sito solo se direttamente pertinenti al fatto e senza presentarli come consiglio fiscale o finanziario`;
 
   const topicalRelevanceGate = IS_CANTON
     ? CANTON_LINES.topicalRelevanceGate
@@ -11421,43 +11498,29 @@ NON inventare un angolo "implicazioni pratiche" su un evento irrilevante per rie
   const editorialFundamentalBlock = localNewsSource
     ? `REGOLA EDITORIALE FONDAMENTALE — CRONACA LOCALE:
 La fonte è cronaca locale (cronaca nera, incidente, sport, cultura o evento) in Ticino o nelle province di Varese, Como e VCO: il nesso richiesto da REGOLA #0 è il luogo, non i frontalieri. NON rifiutare per mancanza di un angolo frontalieri.
-- body1 deve riportare i fatti verificabili della fonte, senza costruire un angolo frontaliere.
-- body2 deve aggiungere soltanto contesto, sviluppi, dati o reazioni locali documentati dalla fonte.
-- body3 deve descrivere le ricadute locali soltanto quando la fonte le documenta.
+- Attribuisci le notizie alla fonte e riporta in body1 i fatti verificabili, senza costruire un angolo frontaliere.
+- body2 può spiegare un contesto, un confronto o uno sviluppo locale soltanto se documentato dalla fonte o da un riferimento verificato.
+- body3 può aggiungere altre prove o ricadute locali documentate; se non esistono, non inventare un seguito, cause o conseguenze.
 - NON aggiungere permessi, fiscalità, procedure, scadenze, strumenti del sito o consigli per frontalieri che la fonte non sostiene.
-- Se la fonte non documenta un'azione concreta, chiudi senza procedura, tool, CTA o link nav obbligatorio: la completezza non giustifica l'invenzione.`
+- Non simulare reportage, interviste, testimonianze o verifiche sul posto. Se la fonte non documenta un'azione concreta, chiudi senza procedura, tool, CTA o link nav obbligatorio: la completezza non giustifica l'invenzione.`
     : IS_FRONTALIERE
-    ? `REGOLA EDITORIALE FONDAMENTALE — FRONTALIERI AL CENTRO (CONDIZIONALE):
-Se la fonte ha implicazioni CONCRETE e SPECIFICHE per il frontaliere (importi CHF/EUR cambiati, scadenze fiscali, procedure modificate, permessi, valichi, accordi CH-IT, AVS/LPP/LAMal, busta paga, autostrade A2/A9, sciopero che blocca pendolari):
-- Il frontaliere deve essere il PROTAGONISTA dell'articolo dall'inizio alla fine.
-- NON è accettabile aggiungere una sezione "Impatto sui frontalieri" solo in fondo.
-- ALMENO il 50% del testo dei campi body1, body2, body3 deve essere indirizzato al lettore frontaliere con dati pratici (importi, scadenze, procedure), guide operative (checklist, step-by-step, confronto scenari) e informazioni azionabili (cosa fare, dove andare, documenti).
-
-Se le implicazioni sono DEBOLI o GENERICHE (la fonte non parla direttamente di frontalieri, ma il contesto può essere tangenzialmente utile):
-- Limita la copertura a 1-2 paragrafi brevi di contesto. NON gonfiare l'articolo con platitudini ("consulta un avvocato", "verifica la copertura", "conosci i tuoi diritti", "informati sulle leggi locali").
-- Onestamente dichiara nel body1 cosa la fonte dice E NULLA DI PIÙ, e segnala in body2/body3 i 1-2 ganci pratici reali (se esistono). Meglio un articolo da 400 parole onesto che 1200 parole di forzatura.
-- Se anche 1-2 paragrafi di nesso reale non esistono → torna al GATE DI RILEVANZA TOPICA (REGOLA #0) e rifiuta con "abort_topical_relevance": true.`
-    : `REGOLA EDITORIALE FONDAMENTALE — INTERESSE NAZIONALE AL CENTRO (CONDIZIONALE):
-Se la fonte ha implicazioni CONCRETE e SPECIFICHE per chi vive o lavora in Svizzera (importi CHF cambiati, scadenze fiscali, nuove leggi federali/cantonali, premi cassa malati, affitti, salari, AVS/LPP, IVA, decisioni del Consiglio federale o dei cantoni):
-- Le implicazioni pratiche a livello nazionale/cantonale devono essere al CENTRO dell'articolo dall'inizio alla fine.
-- NON è accettabile aggiungere una sezione "implicazioni pratiche" solo in fondo.
-- ALMENO il 50% del testo dei campi body1, body2, body3 deve dare al lettore dati pratici (importi, scadenze, procedure), guide operative (checklist, step-by-step, confronto scenari) e informazioni azionabili (cosa fare, dove andare, documenti) a livello nazionale o cantonale.
-
-Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico diretto, ma il contesto può essere tangenzialmente utile):
-- Limita la copertura a 1-2 paragrafi brevi di contesto. NON gonfiare l'articolo con platitudini ("consulta un avvocato", "verifica la copertura", "conosci i tuoi diritti", "informati sulle leggi locali").
-- Onestamente dichiara nel body1 cosa la fonte dice E NULLA DI PIÙ, e segnala in body2/body3 i 1-2 ganci pratici reali (se esistono). Meglio un articolo da 400 parole onesto che 1200 parole di forzatura.
-- Se anche 1-2 paragrafi di nesso reale non esistono → torna al GATE DI RILEVANZA TOPICA (REGOLA #0) e rifiuta con "abort_topical_relevance": true.`;
+    ? `REGOLA EDITORIALE FONDAMENTALE — TEMI FRONTALIERE:
+- Attribuisci la notizia alla fonte. Spiega in body2 soltanto il confronto o l'effetto sui frontalieri che i fatti citati dimostrano; la fonte può riguardare il confine senza parlare direttamente di frontalieri.
+- In body3 aggiungi dati, sviluppi o limiti documentati e pertinenti; non imporre checklist, scenari, procedure o consigli quando non servono o non sono sostenuti.
+- Non collegare a permessi, fiscalità, lavoro, valichi o strumenti del sito se non sono pertinenti al fatto. Non ampliare una notizia con metriche sul lavoro o sui frontalieri per riempire spazio.
+- Se non esiste un nesso concreto, rispetta il GATE DI RILEVANZA TOPICA; non inventare consigli o reportage per crearne uno.`
+    : `REGOLA EDITORIALE FONDAMENTALE — TEMI NAZIONALI SVIZZERI:
+- Attribuisci la notizia alla fonte. Spiega in body2 soltanto il confronto o l'effetto per chi vive o lavora in Svizzera che i fatti citati dimostrano.
+- In body3 aggiungi dati, sviluppi o limiti documentati e pertinenti; non imporre procedure, scenari o consigli quando non servono o non sono sostenuti.
+- Non collegare a fiscalità, lavoro, previdenza, costo della vita o strumenti del sito se non sono pertinenti al fatto. Non ampliare una notizia con metriche sul lavoro o sui frontalieri per riempire spazio.
+- Se non esiste un nesso concreto, rispetta il GATE DI RILEVANZA TOPICA; non inventare consigli o reportage per crearne uno.`;
 
   const body2AntiRepLine = localNewsSource
-    ? `- body2 = CONTESTO: sviluppi, dati, reazioni e ricadute locali riportati dalla fonte. Informazione che NON era nel body1.`
-    : IS_FRONTALIERE
-    ? `- body2 = ANALISI PRATICA: implicazioni per i frontalieri, confronti prima/dopo, scenari concreti. Informazione che NON era nel body1.`
-    : `- body2 = ANALISI PRATICA: implicazioni concrete a livello nazionale/cantonale, confronti prima/dopo, scenari concreti. Informazione che NON era nel body1.`;
+    ? `- body2 = CONTESTO O CONFRONTO: spiega un elemento locale documentato dalla fonte o da un riferimento verificato; niente ricadute ipotetiche.`
+    : `- body2 = SPIEGAZIONE O CONFRONTO: aggiungi una relazione utile e verificabile a partire da fatti citati, senza dedurre cause o effetti non documentati.`;
   const body3AntiRepLine = localNewsSource
-    ? `- body3 = SEGUITO: cosa succede ora secondo la fonte (indagini, prossime tappe, date e luoghi dell'evento, viabilità). NON riassumere body1 o body2.`
-    : IS_FRONTALIERE
-    ? `- body3 = AZIONE: cosa fare concretamente, scadenze, procedura step-by-step, strumenti del sito. NON riassumere body1 o body2.`
-    : `- body3 = AZIONE: cosa fare concretamente in Svizzera, scadenze, procedura step-by-step, strumenti del sito. NON riassumere body1 o body2.`;
+    ? `- body3 = ALTRI FATTI O LIMITI: aggiungi soltanto sviluppi e ricadute documentati; se la fonte non indica un seguito, non inventarlo.`
+    : `- body3 = ULTERIORI PROVE O LIMITI: aggiungi fatti pertinenti della fonte/riferimenti verificati e chiarisci cosa non è documentato; niente azioni o consigli arbitrari.`;
 
   const ctaDefaultLine = localNewsSource
     ? `CTA: nessuna CTA obbligatoria. Chiudi body3 con un link nav: solo se un tool è davvero pertinente alla notizia (es. strade e valichi → border, traffic-history).`
@@ -11537,7 +11600,7 @@ Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico d
   const truncatedDomainFactsBrief = domainFactsBrief.length > MAX_DOMAIN_FACTS_CHARS
     ? domainFactsBrief.slice(0, MAX_DOMAIN_FACTS_CHARS).replace(/\n-[^\n]*$/, '') + '\n[...altri fatti di dominio omessi per brevità]'
     : domainFactsBrief;
-  const domainFactsBlock = isSyntheticSource ? '' : `\nFATTI DI DOMINIO VERIFICATI (materiale di riferimento per contesto/implicazioni pratiche, SEPARATO dalla notizia sopra — non attribuirli alla fonte, usali solo se pertinenti al tema):\n${truncatedDomainFactsBrief}\n`;
+  const domainFactsBlock = isSyntheticSource ? '' : `\nFATTI DI DOMINIO VERIFICATI (riferimento facoltativo, separato dalla notizia sopra — attribuiscili al riferimento, non alla fonte, e usali solo se direttamente pertinenti al fatto; non inserirli per creare un nesso o allungare il testo):\n${truncatedDomainFactsBrief}\n`;
 
   // Il template e' una FUNZIONE dei due blocchi elastici invece di una
   // costante, perche' il pre-flight del budget piu' sotto deve poterlo
@@ -11576,11 +11639,11 @@ ${_isMeta ? '' : topicalRelevanceGate}
 ${!_isMeta && sourceContract ? `\n${sourceContract}\n` : ''}
 ═══ REGOLA #1 — FEDELTÀ ALLA FONTE (PRIORITÀ MASSIMA) ═══
 
-Il tuo articolo è una RISCRITTURA EDITORIALE della fonte, NON un articolo originale. Questo significa:
-- OGNI fatto, cifra, data, legge, aliquota, istituzione e statistica DEVE essere presente nel SOURCE CONTENT sopra.
-- Se la fonte NON specifica un dato: omettilo; niente placeholder (es. "non specificato").
-- Le citazioni dirette devono essere VERBATIM dalla fonte. Se parafrasate, usa il discorso indiretto.
-- NON aggiungere "contesto di background" non verificabile (es. date di trattati, numeri di legge, statistiche) a meno che non sia nella fonte.
+Offri una spiegazione, un confronto o una relazione concreta e verificabile oltre la parafrasi; non forzare cambiamenti o impatti che le prove non mostrano.
+- Usa solo SOURCE CONTENT e riferimenti verificati; attribuisci le notizie alle fonti e separa fatti, calcoli e deduzioni.
+- Per ogni confronto mostra dati, unità e periodi comparabili; non trasformarlo in previsione.
+- Ometti cause, conseguenze, sviluppi o azioni non documentati. Non inventare reportage, interviste, fonti proprie, testimonianze, verifiche umane o citazioni.
+- Ometti i dati assenti o non verificati, senza placeholder. Le citazioni dirette sono verbatim; niente background non provato.
 
 ${_isMeta ? '' : `COME RAGGIUNGERE IL MINIMO DI PAROLE SENZA INVENTARE:
 ${reachMinimumImplicationsLine}
@@ -11593,7 +11656,7 @@ ${_isMeta ? '' : `═══ REGOLE EDITORIALI ═══
 
 STILE: Scrivi come giornalista finanziario italiano reale, NON come AI. Varia lunghezza frasi (da 5 a 30 parole). Alterna paragrafi brevi (1-2 frasi) a paragrafi più lunghi. Usa numeri, date, luoghi reali, istituzioni — MA SOLO se presenti nella fonte. ${styleColorLine}
 MAI usare: "In conclusione", "È importante notare", "In questo contesto", "Vale la pena", "È fondamentale", "Alla luce di", "Ecco cosa sapere", "Vediamo nel dettaglio", "Andiamo con ordine", "Non è un caso che", "Un aspetto cruciale", "Sempre più", "In un contesto di".
-Linguaggio diretto: "conviene" non "potrebbe essere utile".
+Linguaggio diretto e preciso; formula consigli pratici o fiscali soltanto quando sono pertinenti e sostenuti da una fonte o da un riferimento verificato.
 ANTI-AI (CRITICO — il testo DEVE superare l'AI detection):
 - MAI aprire body1 con una frase generica tipo "Il tema dei frontalieri...". Inizia con un FATTO concreto DALLA FONTE (data, numero, nome, luogo).
 - MAI elenchi puntati di >5 elementi (spezzali in paragrafi narrativi)
@@ -11703,15 +11766,15 @@ Genera JSON (no markdown, no code fences):
     "it": {${_isBody ? '' : `
       "title": "${editorialHeadlineGuidance(primaryLocale)}",
       "excerpt": "Sottotitolo con dati concreti DALLA FONTE (max 160 chars)",`}${_isMeta ? '' : `
-${localNewsSource ? `      "body1": "Cronaca locale — inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. Lunghezza secondo MINIMUM LENGTH (escluse TL;DR/Fatti chiave).",
-      "body2": "Contesto: sviluppi, reazioni e dati della fonte. Contenuto DIVERSO da body1. Lunghezza secondo MINIMUM LENGTH.",
-      "body3": "Seguito: cosa succede ora secondo la fonte. NON riassumere body1/body2. Lunghezza secondo MINIMUM LENGTH."` : `      "body1": "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
-      "body2": "Analisi pratica: implicazioni, confronti, scenari. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.",
-      "body3": "Azione: procedura step-by-step, scadenze, strumenti + CTA finale. NON riassumere body1/body2. 300-400 parole."`}${_isBody ? '' : ','}`}${_isBody ? '' : `
+${localNewsSource ? `      "body1": "Cronaca locale — '## In breve' (3-4 bullet ≤80 char) + '## Fatti chiave' (0-8 valori presenti, ometti assenti). Poi lead con fatti verificabili (chi, cosa, dove, quando; cause solo se documentate).",
+      "body2": "Contesto o confronto locale documentato dalla fonte o da un riferimento verificato; niente ricadute ipotetiche.",
+      "body3": "Altri fatti o limiti documentati; non inventare sviluppi o un seguito."` : `      "body1": "'## In breve' (3-4 bullet ≤80 char) + '## Fatti chiave' (0-8 valori presenti, ometti assenti). Poi lead con fatti verificabili (chi, cosa, dove, quando; cause solo se documentate). Min 1 ### sotto-sezione.",
+      "body2": "Spiegazione o confronto utile, tracciabile nei fatti citati e nei periodi; niente cause o effetti non documentati. Min 1 ### sotto-sezione.",
+      "body3": "Ulteriori prove, sviluppi o limiti documentati; niente procedure, consigli o azioni arbitrarie."`}${_isBody ? '' : ','}`}${_isBody ? '' : `
       "faq": [
         {"q": "Domanda frequente 1 basata sui fatti dell'articolo?", "a": "Risposta con dati DALLA FONTE. 50-100 parole."},
         {"q": "Domanda frequente 2?", "a": "Risposta pratica basata sulla fonte."},
-        {"q": "Domanda frequente 3?", "a": "Risposta con procedura o scadenza dalla fonte."}
+        {"q": "Domanda frequente 3?", "a": "Risposta con un dato o un limite documentato."}
       ]`}
     }
   }${_isBody ? '' : `,
@@ -11731,7 +11794,7 @@ REGOLE FINALI:
 ${_isBody ? '' : `- Slug: lowercase, trattini, no accenti, max 50 chars
 ${localNewsSource ? '- hasCalculator: false per cronaca locale, salvo un bisogno concreto documentato dalla fonte.' : '- hasCalculator: true sempre'}
 `}- Apostrofi diritti ('), normative 2026
-${_isBody ? '' : `- FAQ: genera 3-5 coppie domanda/risposta basate sui FATTI ${_isMeta ? "dell'ARTICOLO qui sopra" : 'della fonte'}. Risposte: 50-100 parole, con dati concreti ${_isMeta ? "dall'articolo" : 'dalla fonte'}.`}`;
+${_isBody ? '' : `- FAQ: genera 3-5 coppie domanda/risposta basate sui FATTI ${_isMeta ? "dell'ARTICOLO qui sopra" : 'della fonte'}. Risposte: 50-100 parole con dati e limiti documentati; niente procedure o consigli inventati.`}`;
   };
 
   // The per-field minimum is a third of the total the validator enforces, not
@@ -14956,16 +15019,11 @@ function validate(data, opts = {}) {
     }
   }
   if (!AVAILABLE_IMAGES.includes(data.image)) {
-    // A catalog fallback is allowed only when its provenance record is valid.
-    const matched = findBestFallbackImage(data);
-    if (matched) {
-      console.error(`⚠️  Immagine "${data.image}" non trovata, uso match per keyword: "${matched}"`);
-      data._generatedImagePath = matched;
-      const imageRecord = imageRecordForPath(PROJECT_ROOT, matched);
-      if (imageRecord?.kind === 'wikimedia-commons') data._imageCredit = imageRecord.record;
-      if (imageRecord?.kind === 'licensed-photo') {
-        data._imageCredit = imageCreditRecordFromGeneratedImageRecord(imageRecord.record);
-      }
+    // The model's legacy image field is a compatibility placeholder only.
+    // Catalog paths are ranked here only after a governed image failure, then
+    // accepted only after the current article context passes fresh vision.
+    if (data.image) {
+      console.error(`⚠️  Immagine "${data.image}" non accettata dal contratto legacy; genero una cover governata più avanti.`);
     }
     data.image = PLACES_IMAGES[0]; // compatibility placeholder; path takes priority
   }
@@ -15924,6 +15982,10 @@ const IMAGE_PHASE_BUDGET_MS = Math.max(
   Math.min(120_000, Math.floor(resolvePositiveIntEnv(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS, 120_000))),
 );
 
+function articleImageArea() {
+  return IS_CANTON ? CANTON_LINES.title : IS_FRONTALIERE ? 'Ticino e pendolarismo transfrontaliero' : 'Svizzera';
+}
+
 function materializeGovernedArticleImage(result) {
   const record = result?.record;
   const imageUrl = String(record?.imageUrl || '');
@@ -15948,14 +16010,14 @@ function materializeGovernedArticleImage(result) {
  * the article scope/subject and persists the record where the corpus publisher
  * can expose it.
  */
-async function generateArticleImage(data) {
+async function generateArticleImage(data, { deadlineAt = Date.now() + IMAGE_PHASE_BUDGET_MS, area = articleImageArea() } = {}) {
   delete data._imageCredit;
   delete data._generatedImageRecord;
   delete data._editorialImageRecord;
   delete data._imageGenerationFailureReason;
   delete data._imageGenerationFailureDisposition;
 
-  const imageDeadline = Date.now() + IMAGE_PHASE_BUDGET_MS;
+  const imageDeadline = deadlineAt;
   if (Date.now() >= imageDeadline) {
     console.error('  ⏱️  Budget fase immagini esaurito prima del motore governato.');
     data._imageGenerationFailureReason = 'image-budget-expired';
@@ -15968,7 +16030,7 @@ async function generateArticleImage(data) {
     result = await generateGovernedArticleHero({
       root: PROJECT_ROOT,
       data,
-      area: IS_CANTON ? CANTON_LINES.title : IS_FRONTALIERE ? 'Ticino e pendolarismo transfrontaliero' : 'Svizzera',
+      area,
       deadlineAt: imageDeadline,
       onProviderAttempt: ({ provider, attempt }) => {
         console.error(`  🎨 Motore immagini: ${provider}, tentativo ${attempt}`);
@@ -17225,6 +17287,11 @@ function isQualityRejectError(e) {
   // registrazione e' stata interrotta a meta' e nessun errore di questo run
   // e' piu' un differimento pulito.
   if (isRegisterLockError(e) || isRegisterLockHeld()) return false;
+  // An available verifier that rejects every catalog image is a permanent
+  // candidate-quality result: skip this headline and try the next candidate.
+  // Provider/verifier outages remain retryable infrastructure errors and do
+  // not set this explicit marker.
+  if (e.imageQualityFailure === true) return true;
   if (e.qualityReject === true || e.topicGateAbort === true) return true;
   // `troppo corto` covers the whole thin-content class (too-short IT body
   // after the retry+expand ladder, too-short char count, too-short locale
@@ -18383,7 +18450,7 @@ async function main() {
               selectedTopic.keyword,
               isTopicGateAbort ? 'topic-gate' : 'duplicate',
             );
-          } else if (isQualityReject && selectedTopic) {
+          } else if (isQualityReject && e.imageQualityFailure !== true && selectedTopic) {
             // A STRIKE, not a ban — the reasoning above is right that one bad
             // draft is variance, but "never record it" was the wrong conclusion:
             // it left no way to tell variance from a keyword that fails every
@@ -19887,17 +19954,26 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
 
   // Step 3b: Generate article image through the governed engine.
   console.error('🎨 Generazione immagine articolo:');
-  const imagePath = await generateArticleImage(data);
+  const imageArea = articleImageArea();
+  const imageDeadlineAt = Date.now() + IMAGE_PHASE_BUDGET_MS;
+  const imagePath = await generateArticleImage(data, { area: imageArea, deadlineAt: imageDeadlineAt });
   if (imagePath) {
     data._generatedImagePath = imagePath;
     console.error(`  ✅ Immagine generata: ${imagePath}`);
     console.error(`[cover] article=${data.id} source=engine reason=generated`);
   } else {
-    // A cover-provider failure is recoverable: keep the article and queue the
-    // cover for later regeneration after selecting a governed fallback.
+    // Filename relevance only ranks candidates. The shared verifier checks
+    // each current binary against this article's actual hero context before
+    // the private capability can cross the resolver boundary.
+    const verifiedCatalogImage = await verifyCatalogFallbackCandidates(data, {
+      root: PROJECT_ROOT,
+      findCatalogImages: findBestFallbackImages,
+      area: imageArea,
+      deadlineAt: Date.now() + IMAGE_PHASE_BUDGET_MS,
+    });
     resolveArticleCoverFallback(data, {
       root: PROJECT_ROOT,
-      findCatalogImage: findBestFallbackImage,
+      verifiedCatalogImage,
       reason: data._imageGenerationFailureReason || 'engine-failed',
     });
   }
@@ -21067,7 +21143,7 @@ export { buildBodyFile };
 // own en/de/fr slugs (deriveLocaleSlugs()) but, before this fix, never
 // validated them against the registry — the same gap that historically only
 // existed for the IT slug in the AI path.
-export { translateArticle, enforceStrongInternalLinks, findBestFallbackImage, generateArticleImage, resolveArticleCoverFallback, pickAuthorForTopic, getAuthorByUid, sanitizeBoldFormatting, validateAndEnforceCTA, optimizeSeoMetadata, checkTranslatedSlugCollisions, assertNoFabricatedReferences, assertNoFabricatedLaborOfficeCrossLocale, assertGeneratedArticleQuality };
+export { translateArticle, enforceStrongInternalLinks, findBestFallbackImage, findBestFallbackImages, generateArticleImage, resolveArticleCoverFallback, pickAuthorForTopic, getAuthorByUid, sanitizeBoldFormatting, validateAndEnforceCTA, optimizeSeoMetadata, checkTranslatedSlugCollisions, assertNoFabricatedReferences, assertNoFabricatedLaborOfficeCrossLocale, assertGeneratedArticleQuality };
 
 // Redazione redesign (issue #3174 follow-up): the journalist now authors only
 // {title, body}; these derive the title-casing/excerpt/body1-3/cover-image

@@ -26,6 +26,8 @@
 import { buildDailyBriefInsights } from './daily-brief-insights.mjs';
 
 const HOUR_MS = 60 * 60 * 1000;
+export const ITALY_FUEL_TIME_ZONE = 'Europe/Rome';
+export const SWISS_FUEL_TIME_ZONE = 'Europe/Zurich';
 
 /** A block whose source is fresh no longer than this is publishable. */
 export const BORDER_WAIT_MAX_AGE_MS = 6 * HOUR_MS;
@@ -379,6 +381,12 @@ export function shapeFuel(meta, { nowMs = Date.now() } = {}) {
       swissPriceEur: round(m?.swissPriceEur, 3),
       swissPriceChf: round(m?.swissPriceChf, 3),
       saving50LEur: round(m?.saving50LEur, 2),
+      // The timestamp fields retain the source's wall-clock basis. Publish
+      // their zones explicitly instead of deriving an instant from generatedAt.
+      italyTimeZone: ITALY_FUEL_TIME_ZONE,
+      swissTimeZone: SWISS_FUEL_TIME_ZONE,
+      italyObservedAt: verifiedItaly.find(row => row.municipality === m.municipality && row.province === m.province)?.cheapestStation?.updatedAt ?? null,
+      swissObservedAt: m?.swissStation?.updatedAt ?? null,
     }))
     .filter((m) => m.municipality && m.saving50LEur != null)
     .slice(0, 3);
@@ -470,15 +478,19 @@ export function shapeExchange(doc, { todayIso } = {}) {
   // `EXCHANGE_MAX_AGE_DAYS` is the established tolerance for missing FX days.
   // Do not turn a point from a much older gap into a fresh-looking weekly delta.
   const weekAgo = [...points].reverse().find((p) => p.date <= weekAgoIso && p.date >= lookbackFloorIso) || null;
+  const rate = round(last.rate, 4);
+  const prevRate = round(prev.rate, 4);
+  const rate7dAgo = weekAgo ? round(weekAgo.rate, 4) : null;
   return {
     available: true,
-    rate: round(last.rate, 4),
+    rate,
     lastDate: last.date,
-    prevRate: round(prev.rate, 4),
+    prevRate,
     prevDate: prev.date,
-    delta1d: round(last.rate - prev.rate, 4),
-    rate7dAgo: weekAgo ? round(weekAgo.rate, 4) : null,
-    delta7d: weekAgo ? round(last.rate - weekAgo.rate, 4) : null,
+    delta1d: round(rate - prevRate, 4),
+    rate7dAgo,
+    rate7dAgoDate: weekAgo?.date ?? null,
+    delta7d: weekAgo ? round(rate - rate7dAgo, 4) : null,
     source: doc.source ?? null,
     pointCount: points.length,
   };

@@ -211,7 +211,7 @@ test('the consensus counts one vote per model that answered, and seeks a second 
   const loop = SRC.slice(start, end);
   assert.doesNotMatch(loop, /modelResults\.push\(/, 'un voto aggiunto senza passare da addIndependentVote');
   assert.match(loop, /addIndependentVote\(modelResults, modelsToQuery\[i\], s\.value\)/);
-  assert.match(loop, /_runSingleFactCheck\(next, prompt, \{ isEvergreen, excludeModels: voted \}\)/);
+  assert.match(loop, /_runSingleFactCheck\(next,\s*prompt,\s*\{\s*isEvergreen:\s*isEvergreenArticle,\s*editorialContext,\s*excludeModels:\s*voted\s*\}\)/);
   assert.match(loop, /addIndependentVote\(modelResults, verificationModels\[2\], fallback\)/);
   const line = SRC.split('\n').find((l) => l.includes('buildFactCheckCallOptions({ model,'));
   assert.match(line, /excludeModels: opts\.excludeModels/);
@@ -241,7 +241,7 @@ test('the served model survives a cache hit, and the local guard checks it', () 
   assert.match(fn, /if \(servedBy === 'cache'\) servedBy = _factCheckServedBy\.get\(servedMemoKey\) \|\| null;/);
   assert.match(fn, /if \(servedBy === AI_MODELS\.LOCAL_FALLBACK\) \{/);
   assert.doesNotMatch(fn, /if \(modelUsedRef\.model === AI_MODELS\.LOCAL_FALLBACK\)/, 'una risposta locale in cache sfuggirebbe alla guardia');
-  assert.match(fn, /return \{ verdict, confidence, issues, servedBy \};/);
+  assert.match(fn, /return \{ verdict, confidence, issues, editorialAssessment, servedBy \};/);
 });
 
 test('the fact-check asks for JSON and reads it with the balanced-object parser', () => {
