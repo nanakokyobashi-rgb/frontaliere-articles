@@ -2871,6 +2871,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/generated-cover-alt.mjs",
+      "mode": "corpus-only",
+      "reason": "Mappa canonica localizzata per l'alt neutro delle copertine generate, condivisa dai producer e dal refresh SEO del corpus. I prompt e i topic non verificano la scena visibile, quindi il helper evita descrizioni specifiche non provate; il sito consuma metadati e immagini pubblicati via API e non esegue questi writer.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-19"
+      }
+    },
+    {
       "path": "generator/scripts/lib/image-regeneration-queue.mjs",
       "mode": "corpus-only",
       "reason": "Writer atomico della coda versionata delle copertine da rigenerare dopo un outage del motore. Non esiste sul sito perche' il consumer e il producer appartengono al workflow del corpus.",
