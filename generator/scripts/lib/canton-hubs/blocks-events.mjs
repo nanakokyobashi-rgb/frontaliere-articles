@@ -86,7 +86,17 @@ function eventPlaceKey(event) {
 }
 
 function eventStartTime(event) {
-  return String(event.startTime ?? '').trim();
+  if (typeof event.startTime !== 'string') return '';
+  const value = event.startTime.trim();
+  return /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(value) ? value : '';
+}
+
+function coherentRootStartTime(members, events) {
+  if (!members?.length) return '';
+  const times = members.map((index) => eventStartTime(events[index]));
+  if (times.some((time) => !time)) return '';
+  const [time] = times;
+  return times.every((candidate) => candidate === time) ? time : '';
 }
 
 function deduplicateEvents(events) {
@@ -123,6 +133,17 @@ function deduplicateEvents(events) {
     }
   });
 
+  const identityMembersByRoot = new Map();
+  events.forEach((_, index) => {
+    const root = find(index);
+    if (!identityMembersByRoot.has(root)) identityMembersByRoot.set(root, []);
+    identityMembersByRoot.get(root).push(index);
+  });
+  const identityRootTimes = new Map([...identityMembersByRoot].map(([root, members]) => [
+    root,
+    coherentRootStartTime(members, events),
+  ]));
+
   const groups = new Map();
   events.forEach((event, index) => {
     const place = eventPlaceKey(event);
@@ -145,26 +166,14 @@ function deduplicateEvents(events) {
     const fallback = roots.filter((root) => !anchored.includes(root));
     if (fallback.length === 0) continue;
 
-    const unmatchedByTime = new Map();
     for (const root of fallback) {
-      const fallbackMembers = membersByRoot.get(root) || [];
-      const fallbackTimes = new Set(fallbackMembers.map((index) => eventStartTime(events[index])).filter(Boolean));
-      const compatibleAnchors = anchored.filter((root) => {
-        const anchorMembers = membersByRoot.get(root) || [];
-        const anchorTimes = new Set(anchorMembers.map((index) => eventStartTime(events[index])).filter(Boolean));
-        return [...fallbackTimes].some((time) => anchorTimes.has(time));
-      });
+      const fallbackTime = identityRootTimes.get(root) || '';
+      if (!fallbackTime) continue;
+      const compatibleAnchors = anchored.filter((anchorRoot) =>
+        identityRootTimes.get(anchorRoot) === fallbackTime);
       if (compatibleAnchors.length === 1) {
         union(root, compatibleAnchors[0]);
-        continue;
       }
-      if (compatibleAnchors.length > 1 || fallbackTimes.size !== 1) continue;
-      const [time] = fallbackTimes;
-      if (!unmatchedByTime.has(time)) unmatchedByTime.set(time, []);
-      unmatchedByTime.get(time).push(root);
-    }
-    for (const unmatchedRoots of unmatchedByTime.values()) {
-      for (const root of unmatchedRoots.slice(1)) union(unmatchedRoots[0], root);
     }
   }
 

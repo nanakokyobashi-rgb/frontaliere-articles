@@ -110,7 +110,7 @@ test('eventi: il fallback per luogo si associa a un solo ID compatibile', () => 
   );
 });
 
-test('eventi: un orario mancante non associa un fallback a un ID', () => {
+test('eventi: orari mancanti e fallback privi di identità non fondono record distinti', () => {
   const tomorrow = new Date(NOW + DAY_MS).toISOString().slice(0, 10);
   const event = (title, label, extra = {}) => ({
     title,
@@ -144,7 +144,61 @@ test('eventi: un orario mancante non associa un fallback a un ID', () => {
       event('Altro', 'unrelated', { comune: 'Bellinzona', startTime: '16:00' }),
     ],
   }, { canton: 'TI', members: ['TI'], nowMs: NOW });
-  assert.equal(fallbackOnly.render('it').keyFacts[0].value, '3');
+  assert.equal(fallbackOnly.render('it').keyFacts[0].value, '4');
+});
+
+test('eventi: un fallback non si associa a un ID con orari discordanti fra luoghi', () => {
+  const tomorrow = new Date(NOW + DAY_MS).toISOString().slice(0, 10);
+  const event = (label, title, extra = {}) => ({
+    title,
+    titleByLocale: { it: label },
+    startDate: tomorrow,
+    startTime: '10:00',
+    canton: 'TI',
+    ...extra,
+  });
+  const dataset = {
+    generatedAt: new Date(NOW - 60 * 60 * 1000).toISOString(),
+    events: [
+      event('anchor-10', 'Evento condiviso', { id: 'shared-event', comune: 'Lugano', startTime: '10:00' }),
+      event('anchor-11', 'Evento condiviso', { id: 'shared-event', comune: 'Bellinzona', startTime: '11:00' }),
+      event('fallback-10', 'Evento condiviso', { comune: 'Lugano', startTime: '10:00' }),
+      event('control-a', 'Evento di controllo A', { id: 'control-a', comune: 'Bellinzona' }),
+      event('control-b', 'Evento di controllo B', { id: 'control-b', comune: 'Locarno' }),
+    ],
+  };
+
+  const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
+
+  assert.equal(block.render('it').keyFacts[0].value, '4');
+  assert.ok(block.render('it').items.some((item) => item.label === 'fallback-10'));
+});
+
+test('eventi: valori startTime non-stringa o malformati non provano una corrispondenza', () => {
+  const tomorrow = new Date(NOW + DAY_MS).toISOString().slice(0, 10);
+  const event = (label, title, extra = {}) => ({
+    title,
+    titleByLocale: { it: label },
+    startDate: tomorrow,
+    startTime: '10:00',
+    canton: 'TI',
+    comune: 'Lugano',
+    ...extra,
+  });
+  const invalidTimes = [false, 0, {}, '25:00'];
+  const events = invalidTimes.flatMap((startTime, index) => [
+    event(`anchor-${index}`, `Evento malformato ${index}`, { id: `event-${index}`, startTime }),
+    event(`fallback-${index}`, `Evento malformato ${index}`, { startTime }),
+  ]);
+  events.push(event('control', 'Evento di controllo', { id: 'control-event' }));
+  const dataset = {
+    generatedAt: new Date(NOW - 60 * 60 * 1000).toISOString(),
+    events,
+  };
+
+  const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
+
+  assert.equal(block.render('it').keyFacts[0].value, '9');
 });
 
 test('eventi: tra URL equivalenti pubblica il deep link con fragment', () => {
