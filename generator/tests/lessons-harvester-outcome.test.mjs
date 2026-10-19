@@ -76,6 +76,18 @@ test('lo step di verifica sta dopo lo step Codex e gira anche se quello fallisce
   assert.match(WORKFLOW, /echo "started_at=\$\(date -u \+%Y-%m-%dT%H:%M:%SZ\)" >> "\$GITHUB_OUTPUT"/);
 });
 
+test('il guard delle proposte usa il PAT del repo prima del bucket API dell\'installation token', () => {
+  const guard = stepBlock('Guard — existing open proposal').join('\n');
+  const prep = WORKFLOW.indexOf('Prepare Firebase credentials for open-proposal guard');
+  const load = WORKFLOW.indexOf('Load current-repository API credentials for open-proposal guard');
+  const guardAt = WORKFLOW.indexOf('      - name: Guard — existing open proposal');
+  assert.ok(prep > -1 && load > prep && guardAt > load, 'il PAT non viene preparato prima del guard');
+  assert.match(guard, /api_pat_loaded=false/);
+  assert.match(guard, /if \[ -n "\$\{GITHUB_PAT_NANAKO:-\}" \]/);
+  assert.match(guard, /export GH_TOKEN="\$GITHUB_PAT_NANAKO"/);
+  assert.match(guard, /gh api --paginate/);
+});
+
 test('file d\'esito assente → rosso', () => {
   const r = verify(null);
   assert.equal(r.code, 1);
