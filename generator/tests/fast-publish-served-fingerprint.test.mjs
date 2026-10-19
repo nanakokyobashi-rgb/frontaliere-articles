@@ -244,6 +244,56 @@ test('la verifica CDN invia un User-Agent esplicito accettato dal bordo', async 
   });
 });
 
+test('un mismatch HIT è cache lag solo se la probe anti-cache serve l’hash atteso', async () => {
+  let fetches = 0;
+  await assert.rejects(
+    () => verifyApex({
+      records: [RECORD],
+      runKey: 'test-run.2.articolifrontaliere.1',
+      fetchImpl: async (url, options) => {
+        fetches += 1;
+        if (fetches === 1) {
+          assert.equal(url, RECORD.url);
+          return response(OLD_HTML, { 'cf-cache-status': 'HIT', age: '776' });
+        }
+        assert.match(url, /_fpcb=/);
+        assert.equal(new URL(url).searchParams.get('_fpcb'), 'test-run.2.articolifrontaliere.1.1');
+        assert.equal(options.headers['Cache-Control'], 'no-cache');
+        return response(NEW_HTML, { 'cf-cache-status': 'MISS', age: '0' });
+      },
+    }),
+    (error) => {
+      assert.match(error.message, /classification=cache-lag/);
+      assert.match(error.message, /fresh-probe-status=200/);
+      assert.match(error.message, new RegExp(`fresh-probe-served=${RECORD.sha}`));
+      assert.equal(error.failures[0].freshProbe.cacheLagConfirmed, true);
+      return true;
+    },
+  );
+  assert.equal(fetches, 2);
+});
+
+test('un fallback HTTP 200 resta hard se la probe anti-cache non serve l’hash atteso', async () => {
+  let fetches = 0;
+  await assert.rejects(
+    () => verifyApex({
+      records: [RECORD],
+      fetchImpl: async () => {
+        fetches += 1;
+        return fetches === 1
+          ? response(OLD_HTML, { 'cf-cache-status': 'HIT', age: '776' })
+          : response('<main>fallback sbagliato</main>\n', { 'cf-cache-status': 'MISS' });
+      },
+    }),
+    (error) => {
+      assert.doesNotMatch(error.message, /classification=cache-lag/);
+      assert.match(error.message, /fresh-probe-served=/);
+      return true;
+    },
+  );
+  assert.equal(fetches, 2);
+});
+
 test('un giro interamente bloccato non ripete la purge', async () => {
   let purges = 0;
   await assert.rejects(
@@ -321,12 +371,19 @@ test('CDN vecchia dopo la purge: una sola ripetizione della purge poi passa', as
   let purges = 0;
   const result = await verifyAfterPurge({
     records: [RECORD],
-    fetchImpl: async (url) => {
-      assert.equal(url, RECORD.url, 'la verifica CDN deve leggere l’URL apex senza query');
+    fetchImpl: async (url, options) => {
       fetches += 1;
-      return fetches === 1
-        ? response(OLD_HTML, { 'cf-cache-status': 'HIT', age: '776' })
-        : response(NEW_HTML, { 'cf-cache-status': 'MISS', age: '0' });
+      if (fetches === 1) {
+        assert.equal(url, RECORD.url, 'la verifica CDN deve leggere prima l’URL apex senza query');
+        return response(OLD_HTML, { 'cf-cache-status': 'HIT', age: '776' });
+      }
+      if (fetches === 2) {
+        assert.match(url, /_fpcb=/);
+        assert.equal(options.headers['Cache-Control'], 'no-cache');
+        return response(NEW_HTML, { 'cf-cache-status': 'MISS', age: '0' });
+      }
+      assert.equal(url, RECORD.url, 'dopo la purge deve ricontrollare l’URL apex canonico');
+      return response(NEW_HTML, { 'cf-cache-status': 'MISS', age: '0' });
     },
     purge: async () => {
       purges += 1;
@@ -336,18 +393,23 @@ test('CDN vecchia dopo la purge: una sola ripetizione della purge poi passa', as
   assert.equal(result.checked, 1);
   assert.equal(result.repurges, 1);
   assert.equal(purges, 1);
+  assert.equal(fetches, 3);
 });
 
 test('CDN vecchia per sempre: fallisce con fingerprint e diagnostica Cloudflare', async () => {
   let purges = 0;
+  const freshProbeUrls = [];
   await assert.rejects(
     () => verifyAfterPurge({
       records: [RECORD],
-      fetchImpl: async () => response(OLD_HTML, {
-        'cf-cache-status': 'HIT',
-        age: '776',
-        'last-modified': 'Mon, 19 Oct 2026 05:00:00 GMT',
-      }),
+      fetchImpl: async (url) => {
+        if (url !== RECORD.url) freshProbeUrls.push(url);
+        return response(OLD_HTML, {
+          'cf-cache-status': 'HIT',
+          age: '776',
+          'last-modified': 'Mon, 19 Oct 2026 05:00:00 GMT',
+        });
+      },
       purge: async () => {
         purges += 1;
       },
@@ -359,10 +421,13 @@ test('CDN vecchia per sempre: fallisce con fingerprint e diagnostica Cloudflare'
       assert.match(error.message, /cf-cache-status=HIT/);
       assert.match(error.message, /age=776/);
       assert.match(error.message, /last-modified=Mon, 19 Oct 2026 05:00:00 GMT/);
+      assert.doesNotMatch(error.message, /classification=cache-lag/);
       return true;
     },
   );
   assert.equal(purges, 1);
+  assert.equal(freshProbeUrls.length, 2);
+  assert.notEqual(freshProbeUrls[0], freshProbeUrls[1]);
 });
 
 test('un replay no-op controlla subito l’origine e non consuma il budget di attesa', async () => {
@@ -556,20 +621,21 @@ test('il workflow registra prima l’impronta, attende Pages prima della purge e
   assert.match(workflow, /ARTICLE_PUSH_STATUS_FILE/);
   assert.match(workflow, /clean-no-op/);
   assert.match(workflow, /--push-state "\$RUNNER_TEMP\/published-push-state\.tsv"/);
-  assert.match(workflow, /edge probe blocked[\s\S]*exit "\$verify_rc"/);
+  assert.match(workflow, /--run-key "\$\{GITHUB_RUN_ID:-local\}\.\$\{GITHUB_RUN_ATTEMPT:-1\}\.\$\{shard\}\.\$\{apex_verify_attempt\}"/);
+  assert.match(workflow, /edge_probe_blocked=true[\s\S]*edge probe blocked/);
   assert.doesNotMatch(workflow, /<main>[^\n]*2943/);
 });
 
 test('una probe edge bloccata registra lo stato e salta il backstop di re-purge', () => {
   const verification = workflowStep('Verify the article is actually readable');
   const backstop = workflowStep('Re-purge the edge cache after the verification');
-  const blockedBranch = verification.match(/if \[ "\$verify_rc" -eq 2 \];([\s\S]*?)\n            fi/);
+  const blockedBranch = verification.match(/handle_apex_failure[\s\S]*?edge-blocked\)[\s\S]*?return 2/);
 
   assert.ok(blockedBranch, 'missing the EDGE_PROBE_BLOCKED branch');
   assert.match(verification, /^        id: verify_served_fingerprint$/m);
-  assert.match(blockedBranch[1], /edge_probe_blocked=true.*GITHUB_OUTPUT/s);
-  assert.match(blockedBranch[1], /exit "\$verify_rc"/);
-  assert.doesNotMatch(blockedBranch[1], /cf-purge-cache/);
+  assert.match(blockedBranch[0], /edge_probe_blocked=true.*GITHUB_OUTPUT/s);
+  assert.match(blockedBranch[0], /return 2/);
+  assert.doesNotMatch(blockedBranch[0], /cf-purge-cache/);
 
   const condition = backstop.match(/^\s+if: (.+)$/m);
   assert.ok(condition, 'backstop condition is missing');
@@ -579,6 +645,81 @@ test('una probe edge bloccata registra lo stato e salta il backstop di re-purge'
   assert.doesNotMatch(backstop, /verify_rc/);
   assert.match(
     verification,
-    /::error::edge probe blocked \(exit 2\) — skipping the post-verification backstop purge/,
+    /::error::edge probe blocked \(\$phase; verifier exit \$verify_rc\) — skipping the post-verification backstop purge/,
   );
+});
+
+test('il downgrade apex richiede cache-lag esplicito e distingue status/route, errore operativo e blocco edge', () => {
+  const verification = workflowStep('Verify the article is actually readable');
+  const classifier = verification.match(/^          apex_failure_kind\(\) \{[\s\S]*?^          \}/m);
+  assert.ok(classifier, 'missing the apex failure classifier');
+
+  const root = mkdtempSync(join(tmpdir(), 'served-fingerprint-classifier-'));
+  try {
+    const run = (log) => {
+      const file = join(root, 'verification.log');
+      writeFileSync(file, log);
+      const result = spawnSync(
+        'bash',
+        ['-c', `${classifier[0]}\napex_verify_log="$1"\napex_failure_kind`, 'classifier', file],
+        { encoding: 'utf8' },
+      );
+      assert.equal(result.status, 0, result.stderr);
+      return result.stdout.trim();
+    };
+
+    const mismatch = '::error::CDN served-content verification failed: 1 URL did not serve the expected fingerprint\n';
+    assert.equal(
+      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; cf-cache-status=HIT; age=776; classification=cache-lag; fresh-probe-status=200; fresh-probe-served=new-hash\n`),
+      'lag',
+    );
+    assert.equal(
+      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; cf-cache-status=HIT; age=776; fresh-probe-status=200; fresh-probe-served=route-hash\n`),
+      'hard',
+    );
+    assert.equal(
+      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; classification=cache-lag\nURL https://frontaliereticino.ch/en/demo/; expected=other-new; served=other-old; status=200\n`),
+      'hard',
+    );
+    assert.equal(
+      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=404; cf-cache-status=MISS; age=0\n`),
+      'hard',
+    );
+    assert.equal(
+      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=unavailable; status=network-error; cf-cache-status=unknown; age=unknown\n`),
+      'operational',
+    );
+    assert.equal(run('::error::fingerprint TSV has no header\n'), 'operational');
+    assert.equal(
+      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; classification=probe bloccata dall'edge\n`),
+      'edge-blocked',
+    );
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un mismatch apex persistente resta warning e lascia eseguire il gate origin', () => {
+  const verification = workflowStep('Verify the article is actually readable');
+  const retryAt = verification.indexOf(
+    'bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs \\\n              "--files-from=$RUNNER_TEMP/edge-purge-urls.txt"',
+  );
+
+  assert.ok(retryAt >= 0, 'manca il retry della purge dopo il mismatch apex');
+  const afterRetry = verification.slice(retryAt);
+  const originGateAt = afterRetry.indexOf('echo "── origin (hard gate)"');
+  assert.ok(originGateAt > 0, 'il gate origin hard è sparito o precede il retry apex');
+  const retryHandling = afterRetry.slice(0, originGateAt);
+
+  assert.match(retryHandling, /if verify_apex; then/);
+  assert.match(
+    retryHandling,
+    /if handle_apex_failure "after retry" "\$verify_rc"; then[\s\S]*?apex_failure_rc=\$\?[\s\S]*?exit "\$apex_failure_rc"/,
+  );
+  assert.match(
+    retryHandling,
+    /the apex still served content different from the pushed fingerprints after the retry — continuing with the origin hard gate/,
+  );
+  assert.match(verification, /handle_apex_failure "before retry" "\$verify_rc"/);
+  assert.match(verification, /refusing to downgrade it to a warning/);
 });

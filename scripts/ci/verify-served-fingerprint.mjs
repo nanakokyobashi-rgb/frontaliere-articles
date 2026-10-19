@@ -94,7 +94,13 @@ function formatHeader(name, value) {
   return value ? `${name}=${value}` : null;
 }
 
-function formatFailure({ record, probeUrl, observation }) {
+function formatFailure({ record, probeUrl, observation, freshProbe }) {
+  const edgeBlocked = isEdgeBlocked({ record, probeUrl, observation })
+    || (freshProbe && isEdgeBlocked({
+      record,
+      probeUrl: freshProbe.probeUrl,
+      observation: freshProbe.observation,
+    }));
   return [
     `URL ${record.url}`,
     `expected=${record.sha}`,
@@ -103,12 +109,18 @@ function formatFailure({ record, probeUrl, observation }) {
     `cf-cache-status=${observation.cfCacheStatus}`,
     `age=${observation.age}`,
     `last-modified=${observation.lastModified}`,
-    isEdgeBlocked({ record, probeUrl, observation }) ? "classification=probe bloccata dall'edge" : null,
-    isEdgeBlocked({ record, probeUrl, observation }) ? `body-preview=${JSON.stringify(observation.bodyPreview || '')}` : null,
-    isEdgeBlocked({ record, probeUrl, observation }) ? formatHeader('server', observation.server) : null,
-    isEdgeBlocked({ record, probeUrl, observation }) ? formatHeader('cf-ray', observation.cfRay) : null,
-    isEdgeBlocked({ record, probeUrl, observation }) ? formatHeader('cf-mitigated', observation.cfMitigated) : null,
+    edgeBlocked ? "classification=probe bloccata dall'edge" : null,
+    freshProbe?.cacheLagConfirmed ? 'classification=cache-lag' : null,
+    freshProbe ? `fresh-probe-status=${freshProbe.observation.status || 'network-error'}` : null,
+    freshProbe ? `fresh-probe-served=${freshProbe.observation.sha || 'unavailable'}` : null,
+    freshProbe ? `fresh-probe-cf-cache-status=${freshProbe.observation.cfCacheStatus}` : null,
+    freshProbe ? `fresh-probe-age=${freshProbe.observation.age}` : null,
+    edgeBlocked ? `body-preview=${JSON.stringify(freshProbe?.observation.bodyPreview || observation.bodyPreview || '')}` : null,
+    edgeBlocked ? formatHeader('server', freshProbe?.observation.server || observation.server) : null,
+    edgeBlocked ? formatHeader('cf-ray', freshProbe?.observation.cfRay || observation.cfRay) : null,
+    edgeBlocked ? formatHeader('cf-mitigated', freshProbe?.observation.cfMitigated || observation.cfMitigated) : null,
     observation.error ? `error=${observation.error}` : null,
+    freshProbe?.observation.error ? `fresh-probe-error=${freshProbe.observation.error}` : null,
   ].filter(Boolean).join('; ');
 }
 
@@ -304,6 +316,12 @@ function probeUrl(url, runKey, sequence) {
   return parsed.toString();
 }
 
+function defaultApexRunKey() {
+  const runId = process.env.GITHUB_RUN_ID || 'local';
+  const runAttempt = process.env.GITHUB_RUN_ATTEMPT || '1';
+  return `${runId}.${runAttempt}.${crypto.randomUUID()}`;
+}
+
 function parseCurlHeaders(rawHeaders) {
   const blocks = String(rawHeaders)
     .split(/\r?\n\r?\n/u)
@@ -464,6 +482,10 @@ function matches(record, observation) {
   return observation.status === 200 && observation.sha === record.sha;
 }
 
+function isCacheHitMismatch(observation) {
+  return observation.status === 200 && observation.cfCacheStatus.toUpperCase() === 'HIT';
+}
+
 function defaultSleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -561,6 +583,7 @@ export async function verifyApex({
   timeoutMs = DEFAULT_TIMEOUT_SECONDS * 1000,
   probeTimeoutMs = DEFAULT_PROBE_TIMEOUT_MS,
   now = Date.now,
+  runKey = defaultApexRunKey(),
   onObservation = null,
 } = {}) {
   if (typeof fetchImpl !== 'function') throw new TypeError('fetch implementation is required');
@@ -579,14 +602,43 @@ export async function verifyApex({
         fetchImpl,
         url: record.url,
         cacheBust: false,
-        runKey: 'cdn',
+        runKey,
         sequence: checked,
         timeoutMs: Math.min(probeTimeoutMs, Math.max(1, remainingBeforeProbe)),
       })
       : unavailableObservation(`probe budget exhausted for ${record.url}`);
     observations.push({ record, probeUrl: record.url, observation });
     if (onObservation) onObservation({ record, observation, checked });
-    if (!matches(record, observation)) failures.push({ record, probeUrl: record.url, observation });
+    if (!matches(record, observation)) {
+      let freshProbe;
+      if (isCacheHitMismatch(observation)) {
+        const remainingBeforeConfirmation = timeoutMs - elapsedSince(startedAt, wallStartedAt, now);
+        const freshObservation = remainingBeforeConfirmation > 0
+          ? await fetchFingerprint(record, {
+            fetchImpl,
+            url: record.url,
+            cacheBust: true,
+            runKey,
+            sequence: checked,
+            timeoutMs: Math.min(probeTimeoutMs, Math.max(1, remainingBeforeConfirmation)),
+          })
+          : unavailableObservation(`probe budget exhausted for cache confirmation ${record.url}`);
+        freshProbe = {
+          probeUrl: record.url,
+          observation: freshObservation,
+          cacheLagConfirmed: matches(record, freshObservation),
+        };
+        if (onObservation) {
+          onObservation({
+            record,
+            observation: freshObservation,
+            checked,
+            confirmation: true,
+          });
+        }
+      }
+      failures.push({ record, probeUrl: record.url, observation, freshProbe });
+    }
   }
   const blocked = allEdgeBlocked('CDN served-content verification failed', observations);
   if (blocked) throw blocked;
@@ -706,6 +758,7 @@ async function main(argv) {
     fetchImpl,
     timeoutMs: timeoutSeconds * 1000,
     probeTimeoutMs: probeTimeoutSeconds * 1000,
+    runKey: flag(args, '--run-key') || defaultApexRunKey(),
     onObservation: ({ record, observation }) => {
       console.log(`[cdn] ${record.url}: ${observation.status || 'network-error'} ${observation.sha || 'unavailable'} cf-cache-status=${observation.cfCacheStatus} age=${observation.age}`);
     },
