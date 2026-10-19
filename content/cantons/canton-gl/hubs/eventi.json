@@ -4,17 +4,17 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "4e8fc77fcdf85fc625322e67a4ccc5f66dfdfa797e42e08cf7eb8f1e0b276c72",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "5f2f37da6feca3f25b8b2d47d6f1b11306b1755c2c49dabd490e35ef632e31a0",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-18T20:21:24.396Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T14:28:40.900Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "29",
+          "value": "26",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,30 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Elmer Wandertag",
-              "detail": "Sportbahnen Elm",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/elm/elmer-wandertag_AQY5Jh9"
-            },
-            {
-              "label": "Saisonschluss mit Live-Musik in der Chämistube, 18. Oktober 2026",
-              "detail": "Chämistube Grotzenbüel",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/braunwald/saisonschluss-mit-live-musik-in-der-chaemistube-18-oktober-2026_APBQvBG"
-            },
-            {
-              "label": "Saisonschluss mit Live-Musik in der Chämistube, 18. Oktober 2026",
-              "detail": "Braunwald, Glarus Süd",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/saisonschluss-mit-livemusik-in-der-chaemistube-18-oktober-2026/"
-            },
-            {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
             {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
               "detail": "Luchsingen-Hätzingen",
@@ -72,6 +48,12 @@
               "detail": "Bibliothek Grosstal Hätzingen",
               "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "Trachtenausstellung im Dorfkern Elm",
+              "detail": "Elm, Glarus Süd — in corso, ultimo giorno: 24 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
               "label": "«Industriespionage» bei der GESKA AG & Glarona Käsegenossenschaft",
@@ -96,11 +78,29 @@
               "detail": "Glarus",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-im-wortreich-caroline-roger-mit-unter-gaesten/"
+            },
+            {
+              "label": "Yves Keller: \"Falsch Verbunden!\"",
+              "detail": "Schwanden",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yves-keller-falsch-verbunden/"
+            },
+            {
+              "label": "Faszination Orgel",
+              "detail": "Glarus",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/faszination-orgel-5/"
+            },
+            {
+              "label": "Kulturbühne Lihn und Duo Schneeberger & Sieber",
+              "detail": "Seminarhotel Linh",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/filzbach/kulturbuehne-lihn-und-duo-schneeberger-und-sieber_AYv1WSF"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "GL",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "29",
+          "value": "26",
           "note": "from the site’s events calendar"
         }
       ],
@@ -155,30 +155,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Elmer Wandertag",
-              "detail": "Sportbahnen Elm",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/elm/elmer-wandertag_AQY5Jh9"
-            },
-            {
-              "label": "Saisonschluss mit Live-Musik in der Chämistube, 18. Oktober 2026",
-              "detail": "Chämistube Grotzenbüel",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/braunwald/saisonschluss-mit-live-musik-in-der-chaemistube-18-oktober-2026_APBQvBG"
-            },
-            {
-              "label": "Saisonschluss mit Live-Musik in der Chämistube, 18. Oktober 2026",
-              "detail": "Braunwald, Glarus Süd",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/saisonschluss-mit-livemusik-in-der-chaemistube-18-oktober-2026/"
-            },
-            {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — ongoing, last day: 24 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
             {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
               "detail": "Luchsingen-Hätzingen",
@@ -190,6 +166,12 @@
               "detail": "Bibliothek Grosstal Hätzingen",
               "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "Trachtenausstellung im Dorfkern Elm",
+              "detail": "Elm, Glarus Süd — ongoing, last day: 24 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
               "label": "«Industriespionage» bei der GESKA AG & Glarona Käsegenossenschaft",
@@ -214,11 +196,29 @@
               "detail": "Glarus",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-im-wortreich-caroline-roger-mit-unter-gaesten/"
+            },
+            {
+              "label": "Yves Keller: \"Falsch Verbunden!\"",
+              "detail": "Schwanden",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yves-keller-falsch-verbunden/"
+            },
+            {
+              "label": "Faszination Orgel",
+              "detail": "Glarus",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/faszination-orgel-5/"
+            },
+            {
+              "label": "Kulturbühne Lihn und Duo Schneeberger & Sieber",
+              "detail": "Seminarhotel Linh",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/filzbach/kulturbuehne-lihn-und-duo-schneeberger-und-sieber_AYv1WSF"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -231,7 +231,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +253,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "GL",
@@ -263,7 +263,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "29",
+          "value": "26",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -273,30 +273,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Elmer Wandertag",
-              "detail": "Sportbahnen Elm",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/elm/elmer-wandertag_AQY5Jh9"
-            },
-            {
-              "label": "Saisonschluss mit Live-Musik in der Chämistube, 18. Oktober 2026",
-              "detail": "Chämistube Grotzenbüel",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/braunwald/saisonschluss-mit-live-musik-in-der-chaemistube-18-oktober-2026_APBQvBG"
-            },
-            {
-              "label": "Saisonschluss mit Live-Musik in der Chämistube, 18. Oktober 2026",
-              "detail": "Braunwald, Glarus Süd",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/saisonschluss-mit-livemusik-in-der-chaemistube-18-oktober-2026/"
-            },
-            {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
             {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
               "detail": "Luchsingen-Hätzingen",
@@ -308,6 +284,12 @@
               "detail": "Bibliothek Grosstal Hätzingen",
               "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "Trachtenausstellung im Dorfkern Elm",
+              "detail": "Elm, Glarus Süd — läuft, letzter Tag: 24. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
               "label": "«Industriespionage» bei der GESKA AG & Glarona Käsegenossenschaft",
@@ -332,11 +314,29 @@
               "detail": "Glarus",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-im-wortreich-caroline-roger-mit-unter-gaesten/"
+            },
+            {
+              "label": "Yves Keller: \"Falsch Verbunden!\"",
+              "detail": "Schwanden",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yves-keller-falsch-verbunden/"
+            },
+            {
+              "label": "Faszination Orgel",
+              "detail": "Glarus",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/faszination-orgel-5/"
+            },
+            {
+              "label": "Kulturbühne Lihn und Duo Schneeberger & Sieber",
+              "detail": "Seminarhotel Linh",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/filzbach/kulturbuehne-lihn-und-duo-schneeberger-und-sieber_AYv1WSF"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -349,7 +349,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "GL",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "29",
+          "value": "26",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -391,30 +391,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Elmer Wandertag",
-              "detail": "Sportbahnen Elm",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/elm/elmer-wandertag_AQY5Jh9"
-            },
-            {
-              "label": "Saisonschluss mit Live-Musik in der Chämistube, 18. Oktober 2026",
-              "detail": "Chämistube Grotzenbüel",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/braunwald/saisonschluss-mit-live-musik-in-der-chaemistube-18-oktober-2026_APBQvBG"
-            },
-            {
-              "label": "Saisonschluss mit Live-Musik in der Chämistube, 18. Oktober 2026",
-              "detail": "Braunwald, Glarus Süd",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/saisonschluss-mit-livemusik-in-der-chaemistube-18-oktober-2026/"
-            },
-            {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
             {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
               "detail": "Luchsingen-Hätzingen",
@@ -426,6 +402,12 @@
               "detail": "Bibliothek Grosstal Hätzingen",
               "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "Trachtenausstellung im Dorfkern Elm",
+              "detail": "Elm, Glarus Süd — en cours, dernier jour : 24 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
               "label": "«Industriespionage» bei der GESKA AG & Glarona Käsegenossenschaft",
@@ -450,11 +432,29 @@
               "detail": "Glarus",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-im-wortreich-caroline-roger-mit-unter-gaesten/"
+            },
+            {
+              "label": "Yves Keller: \"Falsch Verbunden!\"",
+              "detail": "Schwanden",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yves-keller-falsch-verbunden/"
+            },
+            {
+              "label": "Faszination Orgel",
+              "detail": "Glarus",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/faszination-orgel-5/"
+            },
+            {
+              "label": "Kulturbühne Lihn und Duo Schneeberger & Sieber",
+              "detail": "Seminarhotel Linh",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/filzbach/kulturbuehne-lihn-und-duo-schneeberger-und-sieber_AYv1WSF"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -467,7 +467,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }

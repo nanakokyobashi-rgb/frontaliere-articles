@@ -8510,6 +8510,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.apprendistato-zurigo-guida-pratica.title': 'Apprendistato a Zurigo: posto, contratto, retribuzione e maturità',
     'blog.article.apprendistato-zurigo-guida-pratica.excerpt': 'Guida pratica per l\'apprendistato nel Canton Zurigo: ricerca del posto, verifica del contratto, lettura della retribuzione e maturità professionale.',
     'blog.article.apprendistato-zurigo-guida-pratica.imageAlt': 'Giovane apprendista in un\'officina svizzera a Zurigo che esamina un contratto',
+    'blog.article.agenda-federale-voto-2026.title': 'Consiglio federale ha trasmesso il pacchetto Svizzera-UE',
+    'blog.article.agenda-federale-voto-2026.excerpt': 'Il pacchetto Svizzera-UE è stato trasmesso il 13 marzo 2026 Il 29 novembre 2026 si vota sul finanziamento supplementare dell\'AVS Guy Parmelin ha annunciato',
+    'blog.article.agenda-federale-voto-2026.imageAlt': 'Scena istituzionale svizzera legata a decisioni federali e votazioni popolari',
 };
 
 export default blogMetaChIt;

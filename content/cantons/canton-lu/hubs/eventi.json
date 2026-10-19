@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "196cd03eba0af15e31df12ff7dc1ceae4de9efcc2b73e9c5c5738d224ae8e439",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "d5e70b5b0ab55451ca694f6299149e8e3b0aa634ff81c1156f8ee98637630b14",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-18T20:21:24.396Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T14:28:40.900Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "83",
+          "value": "76",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,75 +38,79 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Open House",
-              "detail": "Richard Wagner Museum, Luzern",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/open-house/"
+              "label": "Kilbi-Markt in Willisau 19.10.",
+              "detail": "Willisau",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kilbimarkt-in-willisau-1910/"
             },
             {
-              "label": "Spoken Word Festival woerdz 2026: Die Predigt",
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-10-19",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648405"
+            },
+            {
+              "label": "IMPROVTHEATER vs PAARTHERAPIE: Von Liebe, Beziehungen und anderen Turbulenzen",
+              "detail": "Kino Bourbaki, Luzern",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/improvtheater-vs-paartherapie-von-liebe-beziehungen-und-anderen-turbulenzen/"
+            },
+            {
+              "label": "Interaktives Improvisationstheater „IMPROTHEATER vs PAARTHERAPIE“",
               "detail": "Lucerne, Luzern",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spoken-word-festival-woerdz-2026-die-predigt/"
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/interaktives-improvisationstheater-improtheater-vs-paartherapie/"
             },
             {
-              "label": "Tag der offenen Tür und Gespräch",
-              "detail": "Luzern",
-              "date": "2026-10-18",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7686649"
-            },
-            {
-              "label": "Kammermusik Luzern: Amelio Trio",
-              "detail": "Lucerne, Luzern",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kammermusik-luzern-amelio-trio/"
+              "label": "Avishai Cohen Quintet - Jazz Classics",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/avishai-cohen-quintet-jazz-classics_AVvcfVi"
             },
             {
               "label": "Ausstellung NachtLeben",
               "detail": "Luzern — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
-            },
-            {
-              "label": "Tanzweekend",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/fluehli-lu/dance-weekend_AJPRiSW"
-            },
-            {
-              "label": "Dance Weekend",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tanzweekend/"
-            },
-            {
-              "label": "Top Gun: Maverick – in Concert",
-              "detail": "Lucerne — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/top-gun-maverick-in-concert/"
-            },
-            {
-              "label": "Pilz Tage Hasle - ein 4-Tages-Pilzkurs",
-              "detail": "Heiligkreuz — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pilz-tage-hasle-ein-4-tages-pilzkurs/"
             },
             {
               "label": "360° Mitsingen",
               "detail": "Bourbaki Panorama — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+            },
+            {
+              "label": "Pilzkontrolle",
+              "detail": "Museum Luzern, Luzern — in corso, ultimo giorno: 26 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
+            },
+            {
+              "label": "Sunset cruises Brienzer Rothorn with 3-course menu",
+              "detail": "Gipfel-Restaurant Rothorn — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
+            },
+            {
+              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
+              "detail": "Museum Luzern, Luzern — in corso, ultimo giorno: 23 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-10-18T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648405"
+            },
             {
               "label": "Tag der offenen Tür und Gespräch",
               "date": "2026-10-17T22:00:00.000Z",
@@ -131,14 +135,9 @@
               "label": "Salonkonzert",
               "date": "2026-10-15T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
-            },
-            {
-              "label": "Im Gespräch über Sicherheit und Sauberkeit",
-              "date": "2026-10-14T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -172,7 +171,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "LU",
@@ -182,7 +181,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "83",
+          "value": "76",
           "note": "from the site’s events calendar"
         }
       ],
@@ -193,75 +192,79 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Open House",
-              "detail": "Richard Wagner Museum, Luzern",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/open-house/"
+              "label": "Kilbi-Markt in Willisau 19.10.",
+              "detail": "Willisau",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kilbimarkt-in-willisau-1910/"
             },
             {
-              "label": "Spoken Word Festival woerdz 2026: Die Predigt",
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-10-19",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648405"
+            },
+            {
+              "label": "IMPROVTHEATER vs PAARTHERAPIE: Von Liebe, Beziehungen und anderen Turbulenzen",
+              "detail": "Kino Bourbaki, Luzern",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/improvtheater-vs-paartherapie-von-liebe-beziehungen-und-anderen-turbulenzen/"
+            },
+            {
+              "label": "Interaktives Improvisationstheater „IMPROTHEATER vs PAARTHERAPIE“",
               "detail": "Lucerne, Luzern",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spoken-word-festival-woerdz-2026-die-predigt/"
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/interaktives-improvisationstheater-improtheater-vs-paartherapie/"
             },
             {
-              "label": "Tag der offenen Tür und Gespräch",
-              "detail": "Luzern",
-              "date": "2026-10-18",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7686649"
-            },
-            {
-              "label": "Kammermusik Luzern: Amelio Trio",
-              "detail": "Lucerne, Luzern",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kammermusik-luzern-amelio-trio/"
+              "label": "Avishai Cohen Quintet - Jazz Classics",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/avishai-cohen-quintet-jazz-classics_AVvcfVi"
             },
             {
               "label": "Ausstellung NachtLeben",
               "detail": "Luzern — ongoing, last day: 25 October 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
-            },
-            {
-              "label": "Dance Weekend",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/fluehli-lu/dance-weekend_AJPRiSW"
-            },
-            {
-              "label": "Dance Weekend",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tanzweekend/"
-            },
-            {
-              "label": "Top Gun: Maverick – in Concert",
-              "detail": "Lucerne — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/top-gun-maverick-in-concert/"
-            },
-            {
-              "label": "Pilz Tage Hasle - ein 4-Tages-Pilzkurs",
-              "detail": "Heiligkreuz — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pilz-tage-hasle-ein-4-tages-pilzkurs/"
             },
             {
               "label": "360° Mitsingen",
               "detail": "Bourbaki Panorama — ongoing, last day: 12 November 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+            },
+            {
+              "label": "Pilzkontrolle",
+              "detail": "Museum Luzern, Luzern — ongoing, last day: 26 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
+            },
+            {
+              "label": "Sunset cruises Brienzer Rothorn with 3-course menu",
+              "detail": "Gipfel-Restaurant Rothorn — ongoing, last day: 25 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
+            },
+            {
+              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
+              "detail": "Museum Luzern, Luzern — ongoing, last day: 23 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-10-18T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648405"
+            },
             {
               "label": "Tag der offenen Tür und Gespräch",
               "date": "2026-10-17T22:00:00.000Z",
@@ -286,14 +289,9 @@
               "label": "Salonkonzert",
               "date": "2026-10-15T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
-            },
-            {
-              "label": "Im Gespräch über Sicherheit und Sauberkeit",
-              "date": "2026-10-14T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +325,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "LU",
@@ -337,7 +335,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "83",
+          "value": "76",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -348,75 +346,79 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Tag der offenen Tür",
-              "detail": "Richard Wagner Museum, Luzern",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/open-house/"
+              "label": "Kilbi-Markt in Willisau 19.10.",
+              "detail": "Willisau",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kilbimarkt-in-willisau-1910/"
             },
             {
-              "label": "Spoken Word Festival woerdz 2026: Die Predigt",
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-10-19",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648405"
+            },
+            {
+              "label": "IMPROVTHEATER vs PAARTHERAPIE: Von Liebe, Beziehungen und anderen Turbulenzen",
+              "detail": "Kino Bourbaki, Luzern",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/improvtheater-vs-paartherapie-von-liebe-beziehungen-und-anderen-turbulenzen/"
+            },
+            {
+              "label": "Interaktives Improvisationstheater „IMPROTHEATER vs PAARTHERAPIE“",
               "detail": "Lucerne, Luzern",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spoken-word-festival-woerdz-2026-die-predigt/"
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/interaktives-improvisationstheater-improtheater-vs-paartherapie/"
             },
             {
-              "label": "Tag der offenen Tür und Gespräch",
-              "detail": "Luzern",
-              "date": "2026-10-18",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7686649"
-            },
-            {
-              "label": "Kammermusik Luzern: Amelio Trio",
-              "detail": "Lucerne, Luzern",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kammermusik-luzern-amelio-trio/"
+              "label": "Avishai Cohen Quintet - Jazz Classics",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/avishai-cohen-quintet-jazz-classics_AVvcfVi"
             },
             {
               "label": "Ausstellung NachtLeben",
               "detail": "Luzern — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
-            },
-            {
-              "label": "Tanzweekend",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/fluehli-lu/dance-weekend_AJPRiSW"
-            },
-            {
-              "label": "Tanzweekend",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tanzweekend/"
-            },
-            {
-              "label": "Top Gun: Maverick – in Concert",
-              "detail": "Lucerne — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/top-gun-maverick-in-concert/"
-            },
-            {
-              "label": "Pilz Tage Hasle - ein 4-Tages-Pilzkurs",
-              "detail": "Heiligkreuz — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pilz-tage-hasle-ein-4-tages-pilzkurs/"
             },
             {
               "label": "360° Mitsingen",
               "detail": "Bourbaki Panorama — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+            },
+            {
+              "label": "Pilzkontrolle",
+              "detail": "Museum Luzern, Luzern — läuft, letzter Tag: 26. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
+            },
+            {
+              "label": "Sonnenuntergangsfahrten Brienzer Rothorn mit 3-Gänge-Menü",
+              "detail": "Gipfel-Restaurant Rothorn — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
+            },
+            {
+              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
+              "detail": "Museum Luzern, Luzern — läuft, letzter Tag: 23. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-10-18T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648405"
+            },
             {
               "label": "Tag der offenen Tür und Gespräch",
               "date": "2026-10-17T22:00:00.000Z",
@@ -441,14 +443,9 @@
               "label": "Salonkonzert",
               "date": "2026-10-15T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
-            },
-            {
-              "label": "Im Gespräch über Sicherheit und Sauberkeit",
-              "date": "2026-10-14T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -482,7 +479,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "LU",
@@ -492,7 +489,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "83",
+          "value": "76",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -503,75 +500,79 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Journée portes ouvertes",
-              "detail": "Richard Wagner Museum, Luzern",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/open-house/"
+              "label": "Kilbi-Markt in Willisau 19.10.",
+              "detail": "Willisau",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kilbimarkt-in-willisau-1910/"
             },
             {
-              "label": "Spoken Word Festival woerdz 2026: Die Predigt",
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-10-19",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648405"
+            },
+            {
+              "label": "IMPROVTHEATER vs PAARTHERAPIE: Von Liebe, Beziehungen und anderen Turbulenzen",
+              "detail": "Kino Bourbaki, Luzern",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/improvtheater-vs-paartherapie-von-liebe-beziehungen-und-anderen-turbulenzen/"
+            },
+            {
+              "label": "Interaktives Improvisationstheater „IMPROTHEATER vs PAARTHERAPIE“",
               "detail": "Lucerne, Luzern",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spoken-word-festival-woerdz-2026-die-predigt/"
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/interaktives-improvisationstheater-improtheater-vs-paartherapie/"
             },
             {
-              "label": "Tag der offenen Tür und Gespräch",
-              "detail": "Luzern",
-              "date": "2026-10-18",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7686649"
-            },
-            {
-              "label": "Kammermusik Luzern: Amelio Trio",
-              "detail": "Lucerne, Luzern",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kammermusik-luzern-amelio-trio/"
+              "label": "Avishai Cohen Quintet - Jazz Classics",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/avishai-cohen-quintet-jazz-classics_AVvcfVi"
             },
             {
               "label": "Ausstellung NachtLeben",
               "detail": "Luzern — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
-            },
-            {
-              "label": "Week-end de danse",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/fluehli-lu/dance-weekend_AJPRiSW"
-            },
-            {
-              "label": "Week-end de danse",
-              "detail": "FLÜHLI Hotel Kurhaus, Flühli — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tanzweekend/"
-            },
-            {
-              "label": "Top Gun: Maverick – in Concert",
-              "detail": "Lucerne — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/top-gun-maverick-in-concert/"
-            },
-            {
-              "label": "Pilz Tage Hasle - ein 4-Tages-Pilzkurs",
-              "detail": "Heiligkreuz — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pilz-tage-hasle-ein-4-tages-pilzkurs/"
             },
             {
               "label": "360° Mitsingen",
               "detail": "Bourbaki Panorama — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+            },
+            {
+              "label": "Pilzkontrolle",
+              "detail": "Museum Luzern, Luzern — en cours, dernier jour : 26 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
+            },
+            {
+              "label": "Croisières au coucher du soleil au Rothorn de Brienz avec menu à 3 plats",
+              "detail": "Gipfel-Restaurant Rothorn — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
+            },
+            {
+              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
+              "detail": "Museum Luzern, Luzern — en cours, dernier jour : 23 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-10-18T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648405"
+            },
             {
               "label": "Tag der offenen Tür und Gespräch",
               "date": "2026-10-17T22:00:00.000Z",
@@ -596,14 +597,9 @@
               "label": "Salonkonzert",
               "date": "2026-10-15T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
-            },
-            {
-              "label": "Im Gespräch über Sicherheit und Sauberkeit",
-              "date": "2026-10-14T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -637,7 +633,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }

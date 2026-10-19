@@ -53,7 +53,6 @@
     "scripts/ci/followup-drainer.mjs",
     "scripts/ci/gate-minted-followups.mjs",
     "scripts/ci/lib/vitestCheck.mjs",
-    "scripts/ci/native-automerge-gate.mjs",
     "scripts/ci/needs-human-prepass.mjs",
     "scripts/ci/pr-autorebase.mjs",
     "scripts/ci/reconcile-followups.mjs",

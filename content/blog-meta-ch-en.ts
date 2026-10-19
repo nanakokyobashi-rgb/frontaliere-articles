@@ -8510,6 +8510,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.apprendistato-zurigo-guida-pratica.title': 'Apprenticeship in Zurich: Job, Contract, Pay and Matura',
     'blog.article.apprendistato-zurigo-guida-pratica.excerpt': 'Practical guide to apprenticeships in the Canton of Zurich: finding a position, checking the contract, understanding pay and the vocational baccalaureate.',
     'blog.article.apprendistato-zurigo-guida-pratica.imageAlt': 'Young apprentice in a Swiss workshop in Zurich reviewing a contract',
+    'blog.article.agenda-federale-voto-2026.title': 'Federal Council has transmitted the Switzerland-EU package',
+    'blog.article.agenda-federale-voto-2026.excerpt': 'The Switzerland-EU package was submitted on March 13, 2026 On November 29, 2026, a vote will be held on the additional financing of the AVS Guy Parmelin announced',
+    'blog.article.agenda-federale-voto-2026.imageAlt': 'Swiss institutional scene linked to federal decisions and popular votes',
 };
 
 export default blogMetaChEn;

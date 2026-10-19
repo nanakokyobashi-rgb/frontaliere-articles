@@ -1608,6 +1608,12 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.match(wf, /Verify bounded replay source is still main/);
   assert.match(wf, /gh api "repos\/\$REPOSITORY\/git\/ref\/heads\/main"/);
   assert.match(wf, /SOURCE_COMMIT: \$\{\{ inputs\.source_commit \}\}/);
+  assert.match(wf, /git fetch --no-tags origin main/);
+  assert.match(wf, /git merge-base --is-ancestor "\$SOURCE_COMMIT" "\$current_main"/);
+  assert.match(wf, /apiInputChangedInRange/);
+  assert.match(wf, /git checkout --detach "\$current_main"/);
+  assert.match(wf, /PUBLISH_API_SOURCE_COMMIT=\$current_main/);
+  assert.match(wf, /nessun input publish-api nel delta/);
   const filters = [...wf.slice(0, wf.indexOf('\n  schedule:')).matchAll(/^      - '([^']+)'$/gm)].map((m) => m[1]);
   const covered = (file) => filters.some((p) => p === file || (p.endsWith('/**') && file.startsWith(p.slice(0, -2))));
   for (const p of ['sections/**', 'scripts/lib/section-registry.mjs', 'scripts/publish-section-edge.mjs', 'scripts/lib/delete-cdn-file.sh', 'generator/scripts/load-rc-env.mjs']) {
