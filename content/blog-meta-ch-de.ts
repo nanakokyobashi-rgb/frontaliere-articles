@@ -8510,6 +8510,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.apprendistato-zurigo-guida-pratica.title': 'Lehre in Zürich: Lehrstelle, Vertrag, Vergütung und Berufsmaturität',
     'blog.article.apprendistato-zurigo-guida-pratica.excerpt': 'Praktischer Leitfaden für die Lehre im Kanton Zürich: Suche nach einer Lehrstelle, Prüfung des Vertrags, Verständnis der Vergütung und Berufsmaturität.',
     'blog.article.apprendistato-zurigo-guida-pratica.imageAlt': 'Junger Lehrling in einer Schweizer Werkstatt in Zürich prüft einen Vertrag',
+    'blog.article.agenda-federale-voto-2026.title': 'Der Bundesrat hat das Schweiz-EU-Paket übermittelt',
+    'blog.article.agenda-federale-voto-2026.excerpt': 'Das Schweiz-EU-Paket wurde am 13.',
+    'blog.article.agenda-federale-voto-2026.imageAlt': 'Schweizerische Institutionenszene zu Bundesentscheiden und Volksabstimmungen',
 };
 
 export default blogMetaChDe;

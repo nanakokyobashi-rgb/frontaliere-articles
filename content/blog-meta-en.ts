@@ -13486,6 +13486,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.tutele-frontaliero-uscita-ticino.title': 'Cross-border commuter dismissed in 2026: rights over 20 km',
     'blog.article.tutele-frontaliero-uscita-ticino.excerpt': 'Practical guide for cross-border commuters over 20 km: CH-IT agreement, withholding tax, deductibles, AHV, BVG, KVG and post-dismissal checks.',
     'blog.article.tutele-frontaliero-uscita-ticino.imageAlt': 'Cross-border worker with work documents outside an office in Ticino',
+    'blog.article.como-razionalista-fondi-associazioni.title': 'Como Rationalist: 78mila euro to two associations',
+    'blog.article.como-razionalista-fondi-associazioni.excerpt': 'Two associations will support Como Rationalist Funding planned from 2026 to 2028 Over 78 thousand euros from the tourist tax Disbursement after the financial reports',
+    'blog.article.como-razionalista-fondi-associazioni.imageAlt': 'Rationalist architecture in an urban setting',
 };
 
 export default blogMetaEn;

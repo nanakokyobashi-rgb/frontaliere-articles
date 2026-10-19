@@ -4,12 +4,12 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "e2590570a5aca4459320ec4d8684e7c17f3806926808015a431284fb5775a170",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "10016c90e393bf9186973886744cf2a2ac5646574aa61b8e0e83d48cd270a5dc",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-18T20:21:24.396Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "4",
+          "value": "5",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -35,7 +35,7 @@
             {
               "label": "Foire du Jura",
               "detail": "Halle des Exposition, Delémont — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
             },
             {
@@ -55,11 +55,17 @@
               "detail": "Vicques",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/arnaud-tsamere/"
+            },
+            {
+              "label": "Le Messie - Handel",
+              "detail": "Espace La Velle (ancienne église du Noirmont), Le Noirmont",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/le-noirmont/le-messie-handel_AnedvkV"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/giura/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -87,7 +93,7 @@
           "url": "/eventi/giura/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "JU",
@@ -97,7 +103,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "4",
+          "value": "5",
           "note": "from the site’s events calendar"
         }
       ],
@@ -110,7 +116,7 @@
             {
               "label": "Foire du Jura",
               "detail": "Halle des Exposition, Delémont — ongoing, last day: 25 October 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
             },
             {
@@ -130,11 +136,17 @@
               "detail": "Vicques",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/arnaud-tsamere/"
+            },
+            {
+              "label": "Le Messie - Handel",
+              "detail": "Espace La Velle (ancienne église du Noirmont), Le Noirmont",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/le-noirmont/le-messie-handel_AnedvkV"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/jura/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -162,7 +174,7 @@
           "url": "/en/events/jura/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "JU",
@@ -172,7 +184,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "4",
+          "value": "5",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -185,7 +197,7 @@
             {
               "label": "Foire du Jura",
               "detail": "Halle des Exposition, Delémont — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
             },
             {
@@ -205,11 +217,17 @@
               "detail": "Vicques",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/arnaud-tsamere/"
+            },
+            {
+              "label": "Le Messie - Handel",
+              "detail": "Espace La Velle (ancienne église du Noirmont), Le Noirmont",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/le-noirmont/le-messie-handel_AnedvkV"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/jura/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -237,7 +255,7 @@
           "url": "/de/veranstaltungen/jura/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "JU",
@@ -247,7 +265,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "4",
+          "value": "5",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -260,7 +278,7 @@
             {
               "label": "Foire du Jura",
               "detail": "Halle des Exposition, Delémont — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
             },
             {
@@ -280,11 +298,17 @@
               "detail": "Vicques",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/arnaud-tsamere/"
+            },
+            {
+              "label": "Le Messie - Handel",
+              "detail": "Espace La Velle (ancienne église du Noirmont), Le Noirmont",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/le-noirmont/le-messie-handel_AnedvkV"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/jura/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -312,7 +336,7 @@
           "url": "/fr/evenements/jura/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }

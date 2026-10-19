@@ -76,15 +76,19 @@
  * Se un campo torna vuoto dalla cascata (motore giu', sentinella nav-link
  * mangled, marker `Null` di fallimento) l'articolo si SALTA per intero: in
  * produzione il chiamante ha una recovery per-campo (retry LLM, poi body
- * lasciato non tradotto — #1875), qui no, e mezza traduzione nuova cucita su
- * mezza vecchia sarebbe testo che nessuna pipeline ha mai prodotto.
+ * lasciato non tradotto — #1875). Qui la cascata esaurita usa una sola
+ * recovery Codex locale; se anche quella fallisce l'articolo si SALTA per
+ * intero, perche' mezza traduzione nuova cucita su mezza vecchia sarebbe testo
+ * che nessuna pipeline ha mai prodotto. Il report conserva provider e motivi
+ * bounded del campo fallito, mai payload o errori grezzi.
  *
  * ── COSTO ──────────────────────────────────────────────────────────────────
  *
- * Zero quota LLM: `freeTranslateWithRetry` e' la cascata di motori gratuiti.
- * Il costo e' wall-clock e rate limit degli endpoint pubblici, non il budget
- * condiviso che ferma il ciclo agentico. Il "cascade" da ~265 job/giorno e'
- * un'altra cosa (gli annunci di lavoro) e non viene toccato.
+ * `freeTranslateWithRetry` prova prima la cascata condivisa. Nella bonifica
+ * locale, solo dopo un vuoto completo, usa il trasporto `codex exec` gia'
+ * previsto dal motore esplicito: il costo LLM e' quindi limitato ai campi che
+ * tutti i provider hanno lasciato scoperti. In CI, dove il trasporto locale e'
+ * vietato, il report nominativo rende il rifiuto diagnosticabile.
  *
  * Eccezione dichiarata: `--engine codex` NON e' a quota zero. Ogni campo body
  * e' una chiamata `codex exec` (gpt-5.6-luna, effort max) sulla subscription
@@ -140,7 +144,8 @@
  *   --stratify         una fetta per ogni codice, fino a --limit complessivo
  *   --concurrency N    articoli in parallelo (default 2, gentile coi motori)
  *   --engine <nome>    motore di traduzione: `cascade` (default, la cascata
- *                      free-MT di `freeTranslateWithRetry`) oppure `codex`
+ *                      di `freeTranslateWithRetry`, poi Codex locale solo sul
+ *                      vuoto completo) oppure `codex`
  *                      (solo in locale: il tier Codex della cascata da solo,
  *                      eseguito con `codex exec`, gpt-5.6-luna a effort max;
  *                      decisione del proprietario 2026-10-04, #1084 item 2).
@@ -161,7 +166,13 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import { translateFieldFreeMt } from './lib/article-free-mt.mjs';
-import { freeTranslateWithRetry, balanceMarkdownMarkers, translateWithCodexEngine } from './lib/free-translate.mjs';
+import {
+  freeTranslateWithRetry,
+  balanceMarkdownMarkers,
+  recordTranslationProviderAttempt,
+  summarizeTranslationOutcome,
+  translateWithCodexEngine,
+} from './lib/free-translate.mjs';
 import { createCodexExecCall } from './lib/codex-exec-call.mjs';
 import { runFactualityGates } from './lib/article-factuality-gates.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
@@ -184,6 +195,7 @@ import {
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYMS,
   normalizeLocalizedToponymText,
+  replaceLocalizedToponymMismatches,
 } from './lib/localized-toponyms.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
@@ -242,10 +254,13 @@ export function bodyFieldsForSource(src, id) {
  * non e' abbastanza probante per autorizzare una riscrittura automatica.
  */
 export const ITALIAN_RESIDUE_MIN_LINES = 3;
-const ITALIAN_RESIDUE_MIN_CONFIDENCE = 0.15;
+const ITALIAN_RESIDUE_MIN_CONFIDENCE = 0.25;
+const ITALIAN_RESIDUE_STRONG_CONFIDENCE = 0.35;
+const ITALIAN_RESIDUE_MIN_SCORE = 100;
 const ITALIAN_RESIDUE_HEADING_RE = /^(?:#{1,6}\s*)?(?:in breve|fatti chiave|domande frequenti|punti chiave|conclusione|conclusioni|fonti|consiglio pratico|cosa cambia|attenzione|da sapere|in sintesi)\s*:?[ \t]*$/iu;
 const ITALIAN_RESIDUE_WORD_RE = /[\p{L}]+(?:['’][\p{L}]+)*/gu;
 const ITALIAN_HEADING_HINT_RE = /\b(?:aggiornament(?:i|o)|canton(?:e|i)|contribut(?:i|o)|cos(?:a|e)|fiscal(?:e|i)|frontalier(?:a|e|i|o)|impatt(?:i|o)|impost(?:a|e)|italian(?:a|e|i|o)|lavorator(?:e|i)|misur(?:a|e)|nuov(?:a|e|i|o)|pension(?:e|i)|reddit(?:i|o)|regol(?:a|e)|salar(?:i|io)|tass(?:a|e)|ticin(?:o|esi)|titol(?:i|o))\b/iu;
+const ITALIAN_SHARED_HEADING_HINT_RE = /\bfrontalier(?:a|e|i|o)\b/iu;
 // `fiscale` is valid Italian and French. It must go through the detector
 // independently of the expected locale instead of the unconditional
 // short-heading fast-path: the same French heading can be audited with a
@@ -276,6 +291,20 @@ function normalizeItalianResidueLine(line) {
     .replace(/[\*_`>#|]/gu, ' ')
     .replace(/\s+/gu, ' ')
     .trim();
+}
+
+function isItalianResidueMetadataLine(clean) {
+  const withoutBullet = String(clean ?? '').replace(/^[-+*]\s+/u, '').trim();
+  if (/^(?:source|sources|fonte|fonti|quelle)\s*(?:[:：])\s*\S/iu.test(withoutBullet)) return true;
+  return /^(?:(?:https?|ftp):\/\/|www\.)\S+$/iu.test(withoutBullet)
+    || /^(?:[\p{L}\p{N}-]+\.)+[a-z]{2,}(?:[/:?#]\S*)?$/iu.test(withoutBullet);
+}
+
+function isConfidentItalian(detected) {
+  if (detected?.lang !== 'it') return false;
+  if (detected.confidence >= ITALIAN_RESIDUE_STRONG_CONFIDENCE) return true;
+  return detected.confidence >= ITALIAN_RESIDUE_MIN_CONFIDENCE
+    && (detected.scores?.it || 0) >= ITALIAN_RESIDUE_MIN_SCORE;
 }
 
 /** Rimuove i contenitori Markdown che possono precedere un heading. */
@@ -468,7 +497,15 @@ function italianMarkdownHeadingReason(text, locale) {
   const detected = detectLanguageWithConfidence(text, locale);
 
   if (ambiguousHint) {
-    return detected.lang === 'it' && detected.confidence >= ITALIAN_RESIDUE_MIN_CONFIDENCE
+    return isConfidentItalian(detected)
+      ? 'language'
+      : null;
+  }
+
+  // `frontalier` è condiviso con il francese: da solo non è prova di residuo
+  // italiano. Il margine del detector deve confermare l'intera lingua.
+  if (ITALIAN_SHARED_HEADING_HINT_RE.test(text)) {
+    return isConfidentItalian(detected)
       ? 'language'
       : null;
   }
@@ -479,7 +516,7 @@ function italianMarkdownHeadingReason(text, locale) {
   // il titolo e' troppo corto per il profilo trigramma.
   if (localizedHint?.test(text) && !hasItalianHint) return null;
   if (hasItalianHint) return 'language';
-  return detected.lang === 'it' && detected.confidence >= ITALIAN_RESIDUE_MIN_CONFIDENCE
+  return isConfidentItalian(detected)
     ? 'language'
     : null;
 }
@@ -497,12 +534,13 @@ function italianResidueLineReason(line, locale, nextLine, heading = undefined) {
     if (ITALIAN_RESIDUE_HEADING_RE.test(headingText)) return 'heading';
     return italianMarkdownHeadingReason(headingText, locale);
   }
+  if (isItalianResidueMetadataLine(clean)) return null;
   if (ITALIAN_RESIDUE_HEADING_RE.test(clean)) return 'heading';
 
   const words = clean.match(ITALIAN_RESIDUE_WORD_RE) || [];
   if (words.length < 3) return null;
-  const { lang, confidence } = detectLanguageWithConfidence(clean, locale);
-  return lang === 'it' && confidence >= ITALIAN_RESIDUE_MIN_CONFIDENCE ? 'language' : null;
+  const detected = detectLanguageWithConfidence(clean, locale);
+  return isConfidentItalian(detected) ? 'language' : null;
 }
 
 /**
@@ -774,10 +812,9 @@ export function templateHeadingIssue({ italianSections, newSections, locale }) {
 /**
  * Come `processPair` usa la guardia dei fatti chiave.
  *
- * Ovunque, tranne un ramo, e' la guardia di sempre: riscrive `body1` togliendo
- * i fatti vacui (se restano abbastanza superstiti) e pretende una sezione Fatti
- * chiave riconosciuta con almeno un fatto usabile (salvo la riparazione
- * strutturale di una fonte che non ce l'ha).
+ * Ovunque, tranne un ramo, riscrive `body1` togliendo i fatti vacui (se restano
+ * abbastanza superstiti) e pretende una sezione Fatti chiave riconosciuta con
+ * almeno un fatto usabile quando la fonte italiana ne ha una.
  *
  * L'eccezione e' il SOLO ramo che toglie la riga `TITOLO ARTICOLO: <titolo>`
  * da un body italiano (`titleMarkerRemoval`). Decisioni del proprietario del
@@ -802,7 +839,7 @@ export function keyFactsGuardMode({ titleMarkerRemoval = false, structural = fal
   const sourceHasKeyFacts = parseAiSearchSections(sourceBody1).length > 0;
   return {
     verifyOnly: false,
-    options: { requireRecognizedSection: !structural || sourceHasKeyFacts, maxSourceBackedResiduals },
+    options: { requireRecognizedSection: sourceHasKeyFacts, maxSourceBackedResiduals },
   };
 }
 
@@ -2301,11 +2338,55 @@ export function parseEngine(raw) {
  * l'uscita (`translateFieldFreeMt` e le guardie di `processPair`) e' lo stesso
  * codice per entrambi.
  */
-export function engineTranslator(engine, { codexCall = null } = {}) {
-  if (engine === 'cascade') return freeTranslateWithRetry;
+export function engineTranslator(engine, {
+  codexCall = null,
+  cascadeTranslate = freeTranslateWithRetry,
+  codexTranslate = translateWithCodexEngine,
+} = {}) {
+  const runLocalCodex = async (args, provider) => {
+    const attempt = Number.isInteger(args?._outcome?.attempt) ? args._outcome.attempt + 1 : 1;
+    const reasonOffset = args?._outcome?._tierReasons?.length || 0;
+    try {
+      const out = await codexTranslate({ ...args, call: codexCall });
+      // `translateWithCodexEngine` records the reason at the guard that saw
+      // it. Preserve those bounded engine reasons when this local fallback
+      // wraps the result; otherwise every rejected answer is flattened to
+      // `incomplete-output` and the report loses the actionable distinction
+      // between an echo, a meta-response and a structure rejection.
+      const engineReasons = (args?._outcome?._tierReasons || [])
+        .slice(reasonOffset)
+        .map((event) => event?.reason)
+        .filter((reason) => reason === 'source-passthrough'
+          || reason === 'meta-response'
+          || String(reason || '').startsWith('structure:'));
+      recordTranslationProviderAttempt(args?._outcome, {
+        provider,
+        attempt,
+        status: out ? 'success' : 'failed',
+        reasons: out ? [] : [...new Set(engineReasons.length ? engineReasons : ['incomplete-output'])],
+      });
+      return out;
+    } catch (error) {
+      recordTranslationProviderAttempt(args?._outcome, {
+        provider,
+        attempt,
+        status: 'failed',
+        reasons: ['provider-error'],
+      });
+      throw error;
+    }
+  };
+
+  if (engine === 'cascade') {
+    return async (args) => {
+      const out = await cascadeTranslate(args);
+      if (out || typeof codexCall !== 'function') return out;
+      return runLocalCodex(args, 'codex-local-fallback');
+    };
+  }
   if (engine === 'codex') {
     if (typeof codexCall !== 'function') throw new TypeError('motore codex senza trasporto');
-    return (args) => translateWithCodexEngine({ ...args, call: codexCall });
+    return (args) => runLocalCodex(args, 'codex-local');
   }
   throw new Error(`motore sconosciuto: ${engine}`);
 }
@@ -2391,8 +2472,11 @@ async function main() {
   }
   let translate;
   try {
+    const ci = String(process.env.CI ?? '').trim().toLowerCase();
+    const localRuntime = !((ci && ci !== '0' && ci !== 'false')
+      || String(process.env.GITHUB_ACTIONS ?? '').trim());
     translate = engineTranslator(ENGINE, {
-      codexCall: ENGINE === 'codex' ? createCodexExecCall() : null,
+      codexCall: (ENGINE === 'codex' || localRuntime) ? createCodexExecCall() : null,
     });
   } catch (err) {
     console.error(`❌ --engine ${ENGINE}: ${err?.message || err}`);
@@ -2523,7 +2607,7 @@ async function main() {
   report(results, { APPLY, AS_JSON, ENGINE, total: pairs.length, OUT: flag('out') && resolve(flag('out')) });
 }
 
-async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslateWithRetry }) {
+export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslateWithRetry }) {
   const base = { ...pair };
   const realDir = DIR_TO_REAL[pair.dir];
   if (!realDir) return { ...base, written: false, reason: `dir-sconosciuta: ${pair.dir}` };
@@ -2535,6 +2619,7 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
   }
   const itSrc = readFileSync(itPath, 'utf8');
   let trSrc = readFileSync(trPath, 'utf8');
+  const sourceProjection = articleSourceProjection(itPath, itSrc, pair.id);
 
   const availableBodyFields = bodyFieldsForSource(itSrc, pair.id);
   const repairFields = pair.structural && Array.isArray(pair.fields) && pair.fields.length > 0
@@ -2568,6 +2653,10 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
 
   const newSections = {};
   let missingField = null;
+  const missingFields = [];
+  let translationFailure = null;
+  const translationFailures = [];
+  const translationFieldResults = [];
   // Solo sull'italiano con scaffolding: la riga del prompt da togliere e le
   // intestazioni-etichetta del prompt da riportare a titoli normali, per campo.
   const titleMarkerRepair = isSourceLocale && oldCodes.includes(TITLE_MARKER_REPAIR_CODE)
@@ -2604,12 +2693,23 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
         titleMarkerRepair.skipped.push(...stripped.skipped.map((s) => `${f} ${s}`));
       }
       const sanitized = sanitizeTranslatedField(source);
-      if (sanitized === null) { missingField = f; break; }
+      if (sanitized === null) {
+        missingField ??= f;
+        missingFields.push(f);
+        continue;
+      }
       newSections[f] = sanitized;
     }
   } else {
     // Ri-traduzione: OGNI carattere qui esce dalla cascata MT, mai da una regex.
     for (const f of Object.keys(italianSections)) {
+      const translationOutcome = {
+        passthroughs: 0,
+        errors: 0,
+        incomplete: false,
+        incompletes: 0,
+        tierAttempts: [],
+      };
       const out = await translateFieldFreeMt({
         text: italianSections[f],
         sourceLang: 'it',
@@ -2618,16 +2718,43 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
         fieldName: f,
         translate,
         balanceMarkdown: balanceMarkdownMarkers,
+        translationOutcome,
       });
-      if (!out) { missingField = f; break; }
+      if (!out) {
+        missingField ??= f;
+        missingFields.push(f);
+        translationFailures.push({ field: f, ...summarizeTranslationOutcome(translationOutcome) });
+        translationFieldResults.push({ field: f, status: 'empty' });
+        continue;
+      }
       // Stesso post-processing del percorso di produzione (`create-article.mjs`
       // lo applica alla stessa identica uscita di `translateFieldFreeMt`): la
       // cascata e' la stessa, e da qui in poi lo e' anche cio' che le succede.
       const sanitized = sanitizeTranslatedField(out);
-      if (sanitized === null) { missingField = f; break; }
-      newSections[f] = sanitized;
+      if (sanitized === null) {
+        missingField ??= f;
+        missingFields.push(f);
+        translationFailures.push({
+          field: f,
+          stage: 'sanitize-output',
+          ...summarizeTranslationOutcome(translationOutcome),
+        });
+        translationFieldResults.push({ field: f, status: 'rejected' });
+        continue;
+      }
+      // La stessa riparazione condivisa dal gate corregge gli esonimi
+      // cantonali rimasti nella lingua sorgente, prima di tutte le guardie.
+      // I nomi ufficiali identici, gli URL e i codici restano protetti dalla
+      // funzione; la guardia viene comunque rieseguita sull'uscita riparata.
+      newSections[f] = replaceLocalizedToponymMismatches({
+        sourceText: sourceProjection,
+        targetText: sanitized,
+        locale: pair.locale,
+      }).text;
+      translationFieldResults.push({ field: f, status: 'translated' });
     }
   }
+  translationFailure = translationFailures[0] || null;
 
   // La guardia dei fatti chiave deve precedere factuality e writeAtomic: il
   // primo puo' vedere zero `critical` anche quando il secondo non deve mai
@@ -2694,7 +2821,7 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
         .filter(Boolean)
         .join('\n');
       assertLocalizedToponymPair({
-        sourceText: articleSourceProjection(itPath, itSrc, pair.id),
+        sourceText: sourceProjection,
         targetText: [
           targetBodyProjection,
           extractArticleProjectionText(trSrc, pair.id, { fields: ['faq'] }),
@@ -2712,6 +2839,10 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
     oldCodes,
     newCodes,
     missingField,
+    ...(translationFailure ? { translationFailure } : {}),
+    ...(missingFields.length ? { missingFields } : {}),
+    ...(translationFailures.length ? { translationFailures } : {}),
+    ...(translationFieldResults.length ? { translationFieldResults } : {}),
     written: false,
     reason: localizedToponymError ? `esonimo-non-valido: ${localizedToponymError.message}` : verdict.reason,
     ...(localizedToponymError?.localizedToponymIssues
@@ -2747,8 +2878,45 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
   return { ...row, written: true };
 }
 
+// Il lotto che ha aperto #2912 era al 58% DE e 62% FR. Il 20% segnala una
+// degradazione sistemica molto prima di quei livelli, senza trasformare un
+// singolo endpoint transiente in allarme su un lotto sostanzioso.
+export const EMPTY_CASCADE_RATE_THRESHOLD = 0.2;
+
+export function emptyCascadeMetric(results, threshold = EMPTY_CASCADE_RATE_THRESHOLD) {
+  let count = 0;
+  let total = 0;
+  for (const row of Array.isArray(results) ? results : []) {
+    // New reports measure every attempted translation field. A rejected field
+    // is still part of the denominator, even when another field in the same
+    // pair translated successfully. The legacy fallback keeps old report
+    // fixtures readable as one field per pair.
+    if (Array.isArray(row?.translationFieldResults)) {
+      total += row.translationFieldResults.length;
+      count += row.translationFieldResults.filter((field) => field?.status !== 'translated').length;
+      continue;
+    }
+    if (Array.isArray(row?.translationFailures) || Number.isInteger(row?.translationFieldsAttempted)) {
+      const attempted = Number.isInteger(row.translationFieldsAttempted)
+        ? Math.max(0, row.translationFieldsAttempted)
+        : row.translationFailures.length;
+      total += attempted;
+      count += Math.min(attempted, row.translationFailures?.length || 0);
+      continue;
+    }
+    total += 1;
+    if (row?.reason === 'campo-vuoto-dalla-cascata') count += 1;
+  }
+  const rate = total > 0 ? count / total : 0;
+  return { count, total, rate, threshold, firing: total > 0 && rate > threshold };
+}
+
 function report(results, { APPLY, AS_JSON, ENGINE = 'cascade', total, OUT }) {
-  const payload = () => JSON.stringify({ mode: APPLY ? 'apply' : 'dry-run', engine: ENGINE, total, results }, null, 2);
+  const emptyCascade = emptyCascadeMetric(results);
+  const metrics = { emptyCascade };
+  const payload = () => JSON.stringify({
+    mode: APPLY ? 'apply' : 'dry-run', engine: ENGINE, total, metrics, results,
+  }, null, 2);
   if (OUT) {
     // Su file, non su stdout: i tier loggano li' e romperebbero il parse.
     writeAtomic(OUT, payload());
@@ -2775,6 +2943,7 @@ function report(results, { APPLY, AS_JSON, ENGINE = 'cascade', total, OUT }) {
   console.log(`  titolo non canonico  : ${templateHeading}`);
   console.log(`  italian-residue      : ${residue}`);
   console.log(`  altro                : ${results.length - clean - refailed - empty - truncated - wrongLang - templateHeading}`);
+  console.log(`  quota campi vuoti    : ${emptyCascade.count}/${emptyCascade.total} (${(emptyCascade.rate * 100).toFixed(1)}%, soglia ${(emptyCascade.threshold * 100).toFixed(0)}%)${emptyCascade.firing ? ' ⚠️' : ''}`);
 
   // Per-codice: e' la misura che decide se un codice va escluso dal lotto.
   const perCode = new Map();

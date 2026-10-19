@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "ffbfcd59cbbb8fda25cbdccd2b29be1a0980633d3fa157e8c0943779be8442fb",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "1d9150f951a6c0a72441fd185349164d74a84ea77ed2c623b9cd10e21179f2ef",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-18T20:21:24.396Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "24",
+          "value": "16",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Trail Run Einsiedeln",
-              "detail": "8840 Einsiedeln, Einsiedeln",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/trail-run-einsiedeln/"
-            },
-            {
-              "label": "Zwischen Sehnsucht und Selbsttäuschung: Die Reise als Spiegel",
-              "detail": "Schwyz",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-sehnsucht-und-selbsttaeuschung-die-reise-als-spiegel/"
-            },
-            {
-              "label": "10 Jahre The Rolling Barrels (CH), Simi & The Shy Guys (CH) & Cross Country (CH)",
-              "detail": "Siebnen — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/10-jahre-the-rolling-barrels-ch-simi-the-shy-guys-ch-cross-country-ch/"
-            },
-            {
-              "label": "Herbschtmärt Freyebach",
-              "detail": "Kirchstrasse, Freienbach — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbschtmaert-freyebach/"
-            },
-            {
-              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
-              "detail": "Einsiedeln — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
-            },
-            {
-              "label": "SCHWIIZERGOOFE FERIENSPASS",
-              "detail": "Stoos Lodge, Morschach — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schwiizergoofe-ferienspass/"
-            },
-            {
-              "label": "Guided Hike to the Hochstuckli | Light & Landscape",
-              "detail": "Sattel-Hochstuckli AG, Sattel — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/guided-hike-to-the-hochstuckli-light-landscape/"
-            },
-            {
-              "label": "Light & Landscape",
-              "detail": "Sattel-Hochstuckli, Sattel — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/light-landscape/"
-            },
-            {
-              "label": "Brunch all'Heirihütte",
-              "detail": "Alpwirtschaft Heiri-Hütte, Arth — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brunch-allheirihuette/"
-            },
-            {
               "label": "Greifler-Musig \"Arther Chilbi\"",
               "detail": "Restaurant Engel, Arth",
               "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/greifler-musig-arther-chilbi/"
+            },
+            {
+              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
+              "detail": "Einsiedeln — in corso, ultimo giorno: 24 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
+            },
+            {
+              "label": "Visione sistemica della relazione padre-figlia - con Annemieke van der Mooren",
+              "detail": "Hotel Rigi Klösterli - Zum Goldenen Hirschen",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/systemic-view-of-the-father-daughter-relationship-with-annemieke-van-der-mooren/"
+            },
+            {
+              "label": "Frölein Da Capo - Halbzeit Show",
+              "detail": "Küssnacht am Rigi",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/froelein-da-capo-halbzeit-show-1/"
+            },
+            {
+              "label": "Bex Marshall - DER HERBST 26",
+              "detail": "Hirschen Schwyz GmbH, Schwyz",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bex-marshall-gb-der-herbst-26/"
+            },
+            {
+              "label": "30. Muotitaler Alpchäsmärcht",
+              "detail": "Alpchäsmärcht Muotathal, Muotathal",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/30th-muotitaler-alpine-cheese-market/"
+            },
+            {
+              "label": "«Tote Liebe! Oder doch nicht?»",
+              "detail": "Schulhaus Seefeld, Lachen",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tote-liebe-oder-doch-nicht/"
+            },
+            {
+              "label": "MKLA MusicFestival",
+              "detail": "Lachen SZ, Lachen",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mkla-musicfestival/"
+            },
+            {
+              "label": "Sauna della luna piena Einsiedeln",
+              "detail": "Cantone di Einsiedeln, Einsiedeln",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-einsiedeln/"
+            },
+            {
+              "label": "Serata Italiana - Tavolata & Livemusik",
+              "detail": "Marina Lachen, Lachen",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/museums/children/events/lachen-sz/serata-italiana-italian-evening-with-live-music_ArMVGkk"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "SZ",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "24",
+          "value": "16",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Trail Run Einsiedeln",
-              "detail": "8840 Einsiedeln, Einsiedeln",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/trail-run-einsiedeln/"
-            },
-            {
-              "label": "Zwischen Sehnsucht und Selbsttäuschung: Die Reise als Spiegel",
-              "detail": "Schwyz",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-sehnsucht-und-selbsttaeuschung-die-reise-als-spiegel/"
-            },
-            {
-              "label": "10 Jahre The Rolling Barrels (CH), Simi & The Shy Guys (CH) & Cross Country (CH)",
-              "detail": "Siebnen — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/10-jahre-the-rolling-barrels-ch-simi-the-shy-guys-ch-cross-country-ch/"
-            },
-            {
-              "label": "Herbschtmärt Freyebach",
-              "detail": "Kirchstrasse, Freienbach — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbschtmaert-freyebach/"
-            },
-            {
-              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
-              "detail": "Einsiedeln — ongoing, last day: 24 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
-            },
-            {
-              "label": "SCHWIIZERGOOFE FERIENSPASS",
-              "detail": "Stoos Lodge, Morschach — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schwiizergoofe-ferienspass/"
-            },
-            {
-              "label": "Guided Hike to the Hochstuckli | Light & Landscape",
-              "detail": "Sattel-Hochstuckli AG, Sattel — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/guided-hike-to-the-hochstuckli-light-landscape/"
-            },
-            {
-              "label": "Light & Landscape",
-              "detail": "Sattel-Hochstuckli, Sattel — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/light-landscape/"
-            },
-            {
-              "label": "Heirihütte brunch",
-              "detail": "Alpwirtschaft Heiri-Hütte, Arth — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brunch-allheirihuette/"
-            },
-            {
               "label": "Greifler-Musig \"Arther Chilbi\"",
               "detail": "Restaurant Engel, Arth",
               "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/greifler-musig-arther-chilbi/"
+            },
+            {
+              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
+              "detail": "Einsiedeln — ongoing, last day: 24 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
+            },
+            {
+              "label": "Systemic view of the father-daughter relationship - with Annemieke van der Mooren",
+              "detail": "Hotel Rigi Klösterli - Zum Goldenen Hirschen",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/systemic-view-of-the-father-daughter-relationship-with-annemieke-van-der-mooren/"
+            },
+            {
+              "label": "Frölein Da Capo - Halbzeit Show",
+              "detail": "Küssnacht am Rigi",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/froelein-da-capo-halbzeit-show-1/"
+            },
+            {
+              "label": "Bex Marshall - DER HERBST 26",
+              "detail": "Hirschen Schwyz GmbH, Schwyz",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bex-marshall-gb-der-herbst-26/"
+            },
+            {
+              "label": "30th Muotitaler Alpine Cheese Market",
+              "detail": "Alpchäsmärcht Muotathal, Muotathal",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/30th-muotitaler-alpine-cheese-market/"
+            },
+            {
+              "label": "«Tote Liebe! Oder doch nicht?»",
+              "detail": "Schulhaus Seefeld, Lachen",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tote-liebe-oder-doch-nicht/"
+            },
+            {
+              "label": "MKLA MusicFestival",
+              "detail": "Lachen SZ, Lachen",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mkla-musicfestival/"
+            },
+            {
+              "label": "Full moon sauna Einsiedeln",
+              "detail": "Cantone di Einsiedeln, Einsiedeln",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-einsiedeln/"
+            },
+            {
+              "label": "Serata Italiana -Tavolata & Live Music",
+              "detail": "Marina Lachen, Lachen",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/museums/children/events/lachen-sz/serata-italiana-italian-evening-with-live-music_ArMVGkk"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "SZ",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "24",
+          "value": "16",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Trail Run Einsiedeln",
-              "detail": "8840 Einsiedeln, Einsiedeln",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/trail-run-einsiedeln/"
-            },
-            {
-              "label": "Zwischen Sehnsucht und Selbsttäuschung: Die Reise als Spiegel",
-              "detail": "Schwyz",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-sehnsucht-und-selbsttaeuschung-die-reise-als-spiegel/"
-            },
-            {
-              "label": "10 Jahre The Rolling Barrels (CH), Simi & The Shy Guys (CH) & Cross Country (CH)",
-              "detail": "Siebnen — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/10-jahre-the-rolling-barrels-ch-simi-the-shy-guys-ch-cross-country-ch/"
-            },
-            {
-              "label": "Herbschtmärt Freyebach",
-              "detail": "Kirchstrasse, Freienbach — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbschtmaert-freyebach/"
-            },
-            {
-              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
-              "detail": "Einsiedeln — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
-            },
-            {
-              "label": "SCHWIIZERGOOFE FERIENSPASS",
-              "detail": "Stoos Lodge, Morschach — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schwiizergoofe-ferienspass/"
-            },
-            {
-              "label": "Geführte Wanderung aufs Hochstuckli | Light & Landscape",
-              "detail": "Sattel-Hochstuckli AG, Sattel — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/guided-hike-to-the-hochstuckli-light-landscape/"
-            },
-            {
-              "label": "Light & Landscape",
-              "detail": "Sattel-Hochstuckli, Sattel — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/light-landscape/"
-            },
-            {
-              "label": "Heirihütte Brunch",
-              "detail": "Alpwirtschaft Heiri-Hütte, Arth — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brunch-allheirihuette/"
-            },
-            {
               "label": "Greifler-Musig \"Arther Chilbi\"",
               "detail": "Restaurant Engel, Arth",
               "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/greifler-musig-arther-chilbi/"
+            },
+            {
+              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
+              "detail": "Einsiedeln — läuft, letzter Tag: 24. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
+            },
+            {
+              "label": "Systemische Sicht auf die Vater-Tochter-Beziehung – mit Annemieke van der Mooren",
+              "detail": "Hotel Rigi Klösterli - Zum Goldenen Hirschen",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/systemic-view-of-the-father-daughter-relationship-with-annemieke-van-der-mooren/"
+            },
+            {
+              "label": "Frölein Da Capo - Halbzeit Show",
+              "detail": "Küssnacht am Rigi",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/froelein-da-capo-halbzeit-show-1/"
+            },
+            {
+              "label": "Bex Marshall - DER HERBST 26",
+              "detail": "Hirschen Schwyz GmbH, Schwyz",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bex-marshall-gb-der-herbst-26/"
+            },
+            {
+              "label": "30. Muotitaler Alpchäsmärcht",
+              "detail": "Alpchäsmärcht Muotathal, Muotathal",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/30th-muotitaler-alpine-cheese-market/"
+            },
+            {
+              "label": "«Tote Liebe! Oder doch nicht?»",
+              "detail": "Schulhaus Seefeld, Lachen",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tote-liebe-oder-doch-nicht/"
+            },
+            {
+              "label": "MKLA MusicFestival",
+              "detail": "Lachen SZ, Lachen",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mkla-musicfestival/"
+            },
+            {
+              "label": "Vollmond-Sauna Einsiedeln",
+              "detail": "Cantone di Einsiedeln, Einsiedeln",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-einsiedeln/"
+            },
+            {
+              "label": "Serata Italiana - Tavolata & Livemusik",
+              "detail": "Marina Lachen, Lachen",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/museums/children/events/lachen-sz/serata-italiana-italian-evening-with-live-music_ArMVGkk"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "SZ",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "24",
+          "value": "16",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Trail Run Einsiedeln",
-              "detail": "8840 Einsiedeln, Einsiedeln",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/trail-run-einsiedeln/"
-            },
-            {
-              "label": "Zwischen Sehnsucht und Selbsttäuschung: Die Reise als Spiegel",
-              "detail": "Schwyz",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-sehnsucht-und-selbsttaeuschung-die-reise-als-spiegel/"
-            },
-            {
-              "label": "10 Jahre The Rolling Barrels (CH), Simi & The Shy Guys (CH) & Cross Country (CH)",
-              "detail": "Siebnen — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/10-jahre-the-rolling-barrels-ch-simi-the-shy-guys-ch-cross-country-ch/"
-            },
-            {
-              "label": "Herbschtmärt Freyebach",
-              "detail": "Kirchstrasse, Freienbach — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbschtmaert-freyebach/"
-            },
-            {
-              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
-              "detail": "Einsiedeln — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
-            },
-            {
-              "label": "SCHWIIZERGOOFE FERIENSPASS",
-              "detail": "Stoos Lodge, Morschach — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schwiizergoofe-ferienspass/"
-            },
-            {
-              "label": "Guided Hike to the Hochstuckli | Light & Landscape",
-              "detail": "Sattel-Hochstuckli AG, Sattel — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/guided-hike-to-the-hochstuckli-light-landscape/"
-            },
-            {
-              "label": "Light & Landscape",
-              "detail": "Sattel-Hochstuckli, Sattel — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/light-landscape/"
-            },
-            {
-              "label": "Heirihütte Brunch",
-              "detail": "Alpwirtschaft Heiri-Hütte, Arth — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/brunch-allheirihuette/"
-            },
-            {
               "label": "Greifler-Musig \"Arther Chilbi\"",
               "detail": "Restaurant Engel, Arth",
               "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/greifler-musig-arther-chilbi/"
+            },
+            {
+              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
+              "detail": "Einsiedeln — en cours, dernier jour : 24 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
+            },
+            {
+              "label": "Point de vue systémique sur la relation père-fille - avec Annemieke van der Mooren",
+              "detail": "Hotel Rigi Klösterli - Zum Goldenen Hirschen",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/systemic-view-of-the-father-daughter-relationship-with-annemieke-van-der-mooren/"
+            },
+            {
+              "label": "Frölein Da Capo - Halbzeit Show",
+              "detail": "Küssnacht am Rigi",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/froelein-da-capo-halbzeit-show-1/"
+            },
+            {
+              "label": "Bex Marshall - DER HERBST 26",
+              "detail": "Hirschen Schwyz GmbH, Schwyz",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bex-marshall-gb-der-herbst-26/"
+            },
+            {
+              "label": "30. Muotitaler Alpchäsmärcht",
+              "detail": "Alpchäsmärcht Muotathal, Muotathal",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/30th-muotitaler-alpine-cheese-market/"
+            },
+            {
+              "label": "«Tote Liebe! Oder doch nicht?»",
+              "detail": "Schulhaus Seefeld, Lachen",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tote-liebe-oder-doch-nicht/"
+            },
+            {
+              "label": "MKLA MusicFestival",
+              "detail": "Lachen SZ, Lachen",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mkla-musicfestival/"
+            },
+            {
+              "label": "Sauna de la pleine lune à Einsiedeln",
+              "detail": "Cantone di Einsiedeln, Einsiedeln",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-einsiedeln/"
+            },
+            {
+              "label": "Serata Italiana - Tavolata & Musique",
+              "detail": "Marina Lachen, Lachen",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/museums/children/events/lachen-sz/serata-italiana-italian-evening-with-live-music_ArMVGkk"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }

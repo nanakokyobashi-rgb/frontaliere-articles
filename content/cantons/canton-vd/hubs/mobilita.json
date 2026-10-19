@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-10-18T15:52:30.685Z",
-  "contentHash": "b651e79127464e558487e63d98b2b7d343e055cb6c3b81ffb6d7852da5fb81a8",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "a784c4a4231709bb76299c8fb488e8603e3f80ab5d94572f971496a65ae44ffd",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-18T11:46:52.571Z",
+      "updatedAt": "2026-10-18T16:12:12.011Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T09:56:00.107Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "17",
+          "value": "18",
           "note": "segnalazioni aggiornate: 18 ottobre 2026"
         },
         {
@@ -148,7 +148,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T16:12:12.011Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -181,7 +181,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -265,7 +265,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "VD",
@@ -280,7 +280,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "17",
+          "value": "18",
           "note": "reports as of 18 October 2026"
         },
         {
@@ -391,7 +391,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T16:12:12.011Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -424,7 +424,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -507,7 +507,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "VD",
@@ -522,7 +522,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "17",
+          "value": "18",
           "note": "Meldungen vom 18. Oktober 2026"
         },
         {
@@ -633,7 +633,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T16:12:12.011Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -666,7 +666,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -749,7 +749,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "VD",
@@ -764,7 +764,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "17",
+          "value": "18",
           "note": "signalements au 18 octobre 2026"
         },
         {
@@ -875,7 +875,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T16:12:12.011Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -908,7 +908,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -992,7 +992,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-18T15:52:30.685Z",
-  "contentHash": "5b1563fd0b0548a39282f2fdda57e1730bc58de4e1415f423bf58cd0b12801a3",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "fe8afcec355f318f3d8f57eaf7bd03dfd2c85b591eddcd38e0460d8a7b95444e",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-18T11:46:52.571Z",
+      "updatedAt": "2026-10-18T16:12:12.011Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T09:56:00.107Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -160,13 +160,23 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T16:12:12.011Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Umbau Bahnhof Versam-Safien",
+              "date": "2026-10-19",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/umbau-bahnhof-versam-safien/"
+            },
+            {
+              "label": "Bahnersatzbusse auf der Arosalinie",
+              "date": "2026-10-19",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/bahnersatzbusse-arosalinie/"
+            },
             {
               "label": "Rechtsrheinische Oberländerstrasse: Nächtliche Sperrungen wegen Instandsetzungs- und Sanierungsarbeiten",
               "date": "2026-09-24",
@@ -186,14 +196,9 @@
               "label": "Spatenstich für den Neubau Bahnhofgebäude in Schiers",
               "date": "2026-08-20",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/spatenstich-bahnhofgebaeude-schiers/"
-            },
-            {
-              "label": "Fideris – Küblis: Neue Linienführung für Bahn und Strasse",
-              "date": "2026-06-23",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "GR",
@@ -423,13 +428,23 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T16:12:12.011Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Umbau Bahnhof Versam-Safien",
+              "date": "2026-10-19",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/umbau-bahnhof-versam-safien/"
+            },
+            {
+              "label": "Bahnersatzbusse auf der Arosalinie",
+              "date": "2026-10-19",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/bahnersatzbusse-arosalinie/"
+            },
             {
               "label": "Rechtsrheinische Oberländerstrasse: Nächtliche Sperrungen wegen Instandsetzungs- und Sanierungsarbeiten",
               "date": "2026-09-24",
@@ -449,14 +464,9 @@
               "label": "Spatenstich für den Neubau Bahnhofgebäude in Schiers",
               "date": "2026-08-20",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/spatenstich-bahnhofgebaeude-schiers/"
-            },
-            {
-              "label": "Fideris – Küblis: Neue Linienführung für Bahn und Strasse",
-              "date": "2026-06-23",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -547,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "GR",
@@ -685,13 +695,23 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T16:12:12.011Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Umbau Bahnhof Versam-Safien",
+              "date": "2026-10-19",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/umbau-bahnhof-versam-safien/"
+            },
+            {
+              "label": "Bahnersatzbusse auf der Arosalinie",
+              "date": "2026-10-19",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/bahnersatzbusse-arosalinie/"
+            },
             {
               "label": "Rechtsrheinische Oberländerstrasse: Nächtliche Sperrungen wegen Instandsetzungs- und Sanierungsarbeiten",
               "date": "2026-09-24",
@@ -711,14 +731,9 @@
               "label": "Spatenstich für den Neubau Bahnhofgebäude in Schiers",
               "date": "2026-08-20",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/spatenstich-bahnhofgebaeude-schiers/"
-            },
-            {
-              "label": "Fideris – Küblis: Neue Linienführung für Bahn und Strasse",
-              "date": "2026-06-23",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -810,7 +825,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "GR",
@@ -948,13 +963,23 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T16:12:12.011Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Umbau Bahnhof Versam-Safien",
+              "date": "2026-10-19",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/umbau-bahnhof-versam-safien/"
+            },
+            {
+              "label": "Bahnersatzbusse auf der Arosalinie",
+              "date": "2026-10-19",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/bahnersatzbusse-arosalinie/"
+            },
             {
               "label": "Rechtsrheinische Oberländerstrasse: Nächtliche Sperrungen wegen Instandsetzungs- und Sanierungsarbeiten",
               "date": "2026-09-24",
@@ -974,14 +999,9 @@
               "label": "Spatenstich für den Neubau Bahnhofgebäude in Schiers",
               "date": "2026-08-20",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/spatenstich-bahnhofgebaeude-schiers/"
-            },
-            {
-              "label": "Fideris – Küblis: Neue Linienführung für Bahn und Strasse",
-              "date": "2026-06-23",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -1073,7 +1093,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }

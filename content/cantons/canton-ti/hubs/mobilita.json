@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-18T15:52:30.685Z",
-  "contentHash": "4b07ccd4fa48166da1c4dfa3efbba5cafb8f70a6a6a0781e674ecdb852f88ae3",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "36249badc3b6feabbd53e6d6424bb03448b47da46a70277e7f6d2152d77a6745",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-18T11:46:52.571Z",
+      "updatedAt": "2026-10-18T16:12:12.011Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T09:56:00.107Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -152,13 +152,13 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40",
+              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 3.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 30",
               "value": "Traffico",
               "date": "2026-10-18T08:01:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T16:12:12.011Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -196,7 +196,7 @@
               "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -292,7 +292,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "TI",
@@ -422,13 +422,13 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40",
+              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 3.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 30",
               "value": "Traffic",
               "date": "2026-10-18T08:01:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T16:12:12.011Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -466,7 +466,7 @@
               "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -561,7 +561,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "TI",
@@ -691,13 +691,13 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 4.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 40",
+              "label": "A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 3.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 30",
               "value": "Verkehr",
               "date": "2026-10-18T08:01:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T16:12:12.011Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -735,7 +735,7 @@
               "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -830,7 +830,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "TI",
@@ -960,13 +960,13 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 4.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 40",
+              "label": "A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 3.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 30",
               "value": "Trafic",
               "date": "2026-10-18T08:01:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-18T11:46:52.571Z"
+          "updatedAt": "2026-10-18T16:12:12.011Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1004,7 +1004,7 @@
               "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -1100,7 +1100,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }

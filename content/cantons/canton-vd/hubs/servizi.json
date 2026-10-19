@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T16:48:41.470Z",
-  "contentHash": "e122a146ace8a82a38194aaa7b34e245ef1cc1b1b5d50cda1a2479461fa8f458",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "ce151b1051221d3f6f57752dc1ecdc1d24c622cca74cdd6cfbb57f0beca6dfb1",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,13 +13,13 @@
       "keyFacts": 1
     },
     {
-      "id": "aste-targhe",
-      "updatedAt": "2026-10-18T11:03:15.929Z",
-      "keyFacts": 1
+      "id": "meteo",
+      "updatedAt": "2026-10-18T18:47:11.287Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T09:56:00.107Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -35,11 +35,6 @@
           "value": "698 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        },
-        {
-          "label": "Aste di targhe in corso",
-          "value": "37",
-          "note": "offerta mediana 2000 CHF"
         }
       ],
       "dataBlocks": [
@@ -64,35 +59,18 @@
           "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Aste delle targhe",
-          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
           "items": [
             {
-              "label": "VD5055",
-              "value": "2900 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120501"
-            },
-            {
-              "label": "VD1192",
-              "value": "2000 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120471"
-            },
-            {
-              "label": "VD1464",
-              "value": "2000 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120484"
+              "label": "Lausanne",
+              "value": "11 °C",
+              "detail": "oggi da 10 a 11 °C"
             }
           ],
-          "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-18T18:47:11.287Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +108,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -210,7 +188,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "VD",
@@ -223,11 +201,6 @@
           "value": "698 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
-        },
-        {
-          "label": "Plate auctions running",
-          "value": "37",
-          "note": "typical bid 2,000 CHF"
         }
       ],
       "dataBlocks": [
@@ -252,35 +225,18 @@
           "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Number plate auctions",
-          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
           "items": [
             {
-              "label": "VD5055",
-              "value": "2,900 CHF",
-              "detail": "current bid",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120501"
-            },
-            {
-              "label": "VD1192",
-              "value": "2,000 CHF",
-              "detail": "current bid",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120471"
-            },
-            {
-              "label": "VD1464",
-              "value": "2,000 CHF",
-              "detail": "current bid",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120484"
+              "label": "Lausanne",
+              "value": "11 °C",
+              "detail": "today from 10 to 11 °C"
             }
           ],
-          "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-18T18:47:11.287Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -318,7 +274,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -394,7 +350,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "VD",
@@ -407,11 +363,6 @@
           "value": "698 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
-        },
-        {
-          "label": "Laufende Kontrollschild-Auktionen",
-          "value": "37",
-          "note": "mittleres Gebot 2’000 CHF"
         }
       ],
       "dataBlocks": [
@@ -436,35 +387,18 @@
           "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Kontrollschild-Auktionen",
-          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
           "items": [
             {
-              "label": "VD5055",
-              "value": "2’900 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120501"
-            },
-            {
-              "label": "VD1192",
-              "value": "2’000 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120471"
-            },
-            {
-              "label": "VD1464",
-              "value": "2’000 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120484"
+              "label": "Lausanne",
+              "value": "11 °C",
+              "detail": "heute 10 bis 11 °C"
             }
           ],
-          "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-18T18:47:11.287Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -502,7 +436,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -578,7 +512,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "VD",
@@ -591,11 +525,6 @@
           "value": "698 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
-        },
-        {
-          "label": "Enchères de plaques en cours",
-          "value": "37",
-          "note": "offre centrale 2 000 CHF"
         }
       ],
       "dataBlocks": [
@@ -620,35 +549,18 @@
           "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Enchères de plaques",
-          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
           "items": [
             {
-              "label": "VD5055",
-              "value": "2 900 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120501"
-            },
-            {
-              "label": "VD1192",
-              "value": "2 000 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120471"
-            },
-            {
-              "label": "VD1464",
-              "value": "2 000 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-18T20:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/de/auction/120484"
+              "label": "Lausanne",
+              "value": "11 °C",
+              "detail": "aujourd’hui de 10 à 11 °C"
             }
           ],
-          "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://www.encheres-vd.ch/de/",
-          "updatedAt": "2026-10-18T11:03:15.929Z"
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-18T18:47:11.287Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -686,7 +598,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-18T09:56:00.107Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -758,7 +670,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-18T16:48:41.470Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }
