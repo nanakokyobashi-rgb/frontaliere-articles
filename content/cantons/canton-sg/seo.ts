@@ -309,6 +309,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sondaggio-imprese-st-gallen-2026': {
+    title: 'St.Gallen avvia il sondaggio per le imprese | Frontaliere Ticino',
+    description: 'La città di St.Gallen avvia una consultazione tra le imprese sulla piazza economica. Questionario online fino a fine novembre 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, gallen, avvia, sondaggio, imprese',
+    ogTitle: 'Sondaggio imprese St.Gallen: via alla rilevazione economica',
+    ogDescription: 'La città di St.Gallen lancia un\'importante consultazione online rivolta a un campione rappresentativo di imprese locali per valutare la piazza economica e raccogliere indicazioni strategiche.',
+    canonicalPath: '/articoli-san-gallo/sondaggio-imprese-st-gallen-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "St.Gallen avvia il sondaggio per le imprese",
+      "description": "La città di St.Gallen avvia una consultazione tra le imprese sulla piazza economica. Questionario online fino a fine novembre 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sondaggio-imprese-st-gallen-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Città di St.Gallen, consultazione e sondaggio per le imprese"
+      },
+      "datePublished": "2026-10-19T10:59:29+00:00",
+      "dateModified": "2026-10-19T10:59:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/sondaggio-imprese-st-gallen-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

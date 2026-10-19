@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-19T05:23:08.856Z",
-  "contentHash": "d02f717616ac26a3abd82fd1eb84b4a1700b5b5970c72def9d109155a403013a",
+  "updatedAt": "2026-10-19T11:02:57.554Z",
+  "contentHash": "17bf0e7b4f3895b41bad06427ef13e25d48052ba1378b51322785955efc07956",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -221,6 +221,12 @@
           "date": "2026-10-10T10:49:09.228Z"
         },
         {
+          "title": "Avvisi Ustat: manutenzione e chiusura amministrazione",
+          "url": "/articoli-ticino/ustat-manutenzione-chiusura/",
+          "excerpt": "Manutenzione: martedì 2 dicembre, 20.00-22.00 circa Possibili brevi interruzioni sul sito Ustat Chiusura dei servizi: pomeriggio del 31 dicembre 2025 Ustat",
+          "date": "2026-10-19T10:54:19.378Z"
+        },
+        {
           "title": "A2 Mendrisio-Melano: il progetto MeMe di risanamento",
           "url": "/articoli-ticino/a2-mendrisio-melano-risanamento/",
           "excerpt": "L’USTRA ha pubblicato il progetto A2 tra Mendrisio e Melano.",
@@ -243,12 +249,6 @@
           "url": "/articoli-frontaliere/mendrisio-melano-progetto-meme-risanamento-fonico/",
           "excerpt": "L'Ufficio federale delle strade (USTRA) ha pubblicato il disegno per il progetto MeMe, un piano di risanamento globale per il tratto dell'autostrada A2 tra Mendrisio e Melano.",
           "date": "2026-09-15T02:42:05.181Z"
-        },
-        {
-          "title": "Inizia la costruzione del tram-treno del Luganese",
-          "url": "/articoli-frontaliere/tram-treno-lugano-lavori-inizio/",
-          "excerpt": "I lavori preliminari per il tram-treno del Luganese inizieranno a fine ottobre 2026 sulla tratta Bioggio-Manno.",
-          "date": "2026-09-07T10:00:13.893Z"
         }
       ],
       "latestCantonArticles": [],
@@ -294,7 +294,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T11:02:57.554Z"
     },
     "en": {
       "canton": "TI",
@@ -493,6 +493,12 @@
           "date": "2026-10-10T10:49:09.228Z"
         },
         {
+          "title": "Ustat notices: maintenance and administrative closure",
+          "url": "/en/ticino-articles/ustat-maintenance-closure/",
+          "excerpt": "Maintenance: Tuesday, December 2, approximately 20.00-22.00 Possible brief interruptions on the Ustat website Service closure: afternoon of December 31, 2025 Ustat",
+          "date": "2026-10-19T10:54:19.378Z"
+        },
+        {
           "title": "A2 Mendrisio-Melano: the MeMe rehabilitation project",
           "url": "/en/ticino-articles/a2-mendrisio-melano-renovation/",
           "date": "2026-10-07T06:12:18.855Z"
@@ -514,12 +520,6 @@
           "url": "/en/cross-border-articles/mendrisio-melano-meme-project-noise-reduction/",
           "excerpt": "The Federal Office of Roads (USTRA) has published the design for the MeMe project, a comprehensive rehabilitation plan for the stretch of the A2 motorway between Mendrisio and Melano.",
           "date": "2026-09-15T02:42:05.181Z"
-        },
-        {
-          "title": "Construction of the Lugano tram-train begins",
-          "url": "/en/cross-border-articles/tram-train-lugano-works-start/",
-          "excerpt": "Preliminary work for the Luganese tram-train will begin at the end of October 2026 on the Bioggio-Manno section.",
-          "date": "2026-09-07T10:00:13.893Z"
         }
       ],
       "latestCantonArticles": [],
@@ -565,7 +565,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T11:02:57.554Z"
     },
     "de": {
       "canton": "TI",
@@ -764,6 +764,12 @@
           "date": "2026-10-10T10:49:09.228Z"
         },
         {
+          "title": "Ustat-Mitteilungen: Wartung und Schließung der Verwaltung",
+          "url": "/de/tessin-artikel/ustat-wartung-schliessung/",
+          "excerpt": "Wartung: Dienstag, 2.",
+          "date": "2026-10-19T10:54:19.378Z"
+        },
+        {
           "title": "A2 Mendrisio-Melano: das Sanierungsprojekt MeMe",
           "url": "/de/tessin-artikel/a2-mendrisio-melano-sanierung/",
           "date": "2026-10-07T06:12:18.855Z"
@@ -785,12 +791,6 @@
           "url": "/de/grenzgaenger-artikel/mendrisio-melano-meme-projekt-larmreduzierung/",
           "excerpt": "Das Bundesamt für Strassen (Astra) hat den Entwurf für das Projekt MeMe, einen umfassenden Sanierungsplan für den Autobahnabschnitt A2 zwischen Mendrisio und Melano, veröffentlicht.",
           "date": "2026-09-15T02:42:05.181Z"
-        },
-        {
-          "title": "Baubeginn des Luganer Tram-Zuges",
-          "url": "/de/grenzgaenger-artikel/strassenbahn-bahn-lugano-bauarbeiten-beginnen/",
-          "excerpt": "Die Vorarbeiten für den Luganer Tram-Zug werden Ende Oktober 2026 auf der Strecke Bioggio-Manno beginnen.",
-          "date": "2026-09-07T10:00:13.893Z"
         }
       ],
       "latestCantonArticles": [],
@@ -836,7 +836,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T11:02:57.554Z"
     },
     "fr": {
       "canton": "TI",
@@ -1035,6 +1035,12 @@
           "date": "2026-10-10T10:49:09.228Z"
         },
         {
+          "title": "Avis Ustat : maintenance et fermeture administrative",
+          "url": "/fr/articles-tessin/ustat-maintenance-fermeture/",
+          "excerpt": "Maintenance : mardi 2 décembre, 20.00-22.00 environ De brèves interruptions sont possibles sur le site Ustat Fermeture des services : l’après-midi du 31 décembre 2025 Ustat",
+          "date": "2026-10-19T10:54:19.378Z"
+        },
+        {
           "title": "A2 Mendrisio-Melano : le projet MeMe d’assainissement",
           "url": "/fr/articles-tessin/a2-mendrisio-melano-renovation/",
           "excerpt": "L’USTRA a publié le projet A2 entre Mendrisio et Melano.",
@@ -1057,12 +1063,6 @@
           "url": "/fr/articles-frontalier/mendrisio-melano-projet-meme-reduction-bruit/",
           "excerpt": "L'Office fédéral des routes (OFROU) a publié le dessin pour le projet MeMe, un plan d'assainissement global pour le tronçon de l'autoroute A2 entre Mendrisio et Melano.",
           "date": "2026-09-15T02:42:05.181Z"
-        },
-        {
-          "title": "Début de la construction du tram-train du Luganese",
-          "url": "/fr/articles-frontalier/tram-train-lugano-travaux-debut/",
-          "excerpt": "Les travaux préliminaires pour le tram-train du Luganese débuteront fin octobre 2026 sur le tronçon Bioggio-Manno.",
-          "date": "2026-09-07T10:00:13.893Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1108,7 +1108,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T11:02:57.554Z"
     }
   }
 }

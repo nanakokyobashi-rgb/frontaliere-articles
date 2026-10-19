@@ -8525,6 +8525,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.campagna-fisco-coppie-sposate.title': 'Fiscalité et couples mariés : les opposants lancent leur campagne',
     'blog.article.campagna-fisco-coppie-sposate.excerpt': 'Le comité opposé a présenté ses arguments à Berne Le vote fédéral sur l\'initiative est prévu le 29 novembre L\'imposition individuelle entrera en vigueur',
     'blog.article.campagna-fisco-coppie-sposate.imageAlt': 'Conférence de presse à Berne concernant la votation fédérale et l\'imposition des couples mariés',
+    'blog.article.impatto-glp1-industria-alimentare.title': 'Médicaments anti-obésité GLP-1 : impact sur l’industrie alimentaire',
+    'blog.article.impatto-glp1-industria-alimentare.excerpt': 'En Suisse, moins de 2% suivent un traitement par GLP-1 Aux États-Unis, le budget alimentaire baisse jusqu’à 5% Emmi, Danone et Nestlé adaptent leurs gammes Givaudan estime une croissance',
+    'blog.article.impatto-glp1-industria-alimentare.imageAlt': 'Rayon d\'un supermarché suisse avec des produits alimentaires frais',
 };
 
 export default blogMetaChFr;

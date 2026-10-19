@@ -54,6 +54,9 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.rapporto-consiglio-federale-schengen.title': 'Frontalieri, cosa succederebbe senza Schengen?',
     'blog.article.rapporto-consiglio-federale-schengen.excerpt': 'Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Ticino tra le regioni più esposte nello scenario Fino',
     'blog.article.rapporto-consiglio-federale-schengen.imageAlt': 'Valico di frontiera in Ticino e controlli doganali',
+    'blog.article.ustat-manutenzione-chiusura.title': 'Avvisi Ustat: manutenzione e chiusura amministrazione',
+    'blog.article.ustat-manutenzione-chiusura.excerpt': 'Manutenzione: martedì 2 dicembre, 20.00-22.00 circa Possibili brevi interruzioni sul sito Ustat Chiusura dei servizi: pomeriggio del 31 dicembre 2025 Ustat',
+    'blog.article.ustat-manutenzione-chiusura.imageAlt': 'Ufficio di statistica e comunicazioni amministrative cantonali in Ticino',
 };
 
 export default blogMetaCantonTiIt;

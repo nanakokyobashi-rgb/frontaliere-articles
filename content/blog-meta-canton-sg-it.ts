@@ -27,6 +27,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.hsg-optime-orario-lavoro.title': 'HSG guida studio UE sulla riduzione dell\'orario di lavoro',
     'blog.article.hsg-optime-orario-lavoro.excerpt': 'L\'Università di San Gallo coordina OPTIME, progetto UE finanziato da Horizon Europe con circa 3,37 milioni di euro.',
     'blog.article.hsg-optime-orario-lavoro.imageAlt': 'Campus dell\'Università di San Gallo in una scena editoriale sulla ricerca sul lavoro',
+    'blog.article.sondaggio-imprese-st-gallen-2026.title': 'St.Gallen avvia il sondaggio per le imprese',
+    'blog.article.sondaggio-imprese-st-gallen-2026.excerpt': 'La città di St.Gallen lancia un sondaggio rivolto alle imprese per valutare la piazza economica.',
+    'blog.article.sondaggio-imprese-st-gallen-2026.imageAlt': 'Città di St.Gallen, consultazione e sondaggio per le imprese',
 };
 
 export default blogMetaCantonSgIt;

@@ -54,6 +54,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.rapporto-consiglio-federale-schengen.title': 'Grenzgänger, was würde ohne Schengen geschehen?',
     'blog.article.rapporto-consiglio-federale-schengen.excerpt': 'Am 18. September 2026 veröffentlichter Bundesbericht Ohne Schengen: systematische Kontrollen an den Grenzen Tessin unter den am stärksten betroffenen Regionen im Szenario Bis zu',
     'blog.article.rapporto-consiglio-federale-schengen.imageAlt': 'Grenzübergang im Tessin und Zollkontrollen',
+    'blog.article.ustat-manutenzione-chiusura.title': 'Ustat-Mitteilungen: Wartung und Schließung der Verwaltung',
+    'blog.article.ustat-manutenzione-chiusura.excerpt': 'Wartung: Dienstag, 2.',
+    'blog.article.ustat-manutenzione-chiusura.imageAlt': 'Statistisches Amt und kantonale Verwaltungskommunikation im Tessin',
 };
 
 export default blogMetaCantonTiDe;
