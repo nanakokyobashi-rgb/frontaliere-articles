@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-amministrazione-fiscale-berna-chiusura-2026.webp",
-      "sha256": "dfe687a57ca9b4cba9169bf730daaf1fe89f07e8e137901bc3d0d56dcecb3ae8"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-amministrazione-fiscale-berna-chiusura-2026-480w.webp",
-      "sha256": "f1cd946726c2b4daf51955d2fe74302c7b4632e6f9d10975cfcc720e259970a9"
-    }
-  ]
+  "items": []
 }
