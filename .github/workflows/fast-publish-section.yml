@@ -297,7 +297,7 @@ jobs:
           echo "before=$before" >> "$GITHUB_OUTPUT"
           echo "after=$after" >> "$GITHUB_OUTPUT"
 
-      - name: Fetch originating push base (resolve)
+      - name: Fetch push base (resolve)
         env:
           PUSH_BEFORE: ${{ steps.push_range.outputs.before }}
         run: |
