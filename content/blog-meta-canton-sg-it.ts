@@ -33,6 +33,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.voto-bahnhofplatz-wil-2026.title': 'Voto sul Bahnhofplatz Wil: credito di 63,66 milioni',
     'blog.article.voto-bahnhofplatz-wil-2026.excerpt': 'Il 29 novembre 2026 i cittadini di Wil voteranno sul progetto per il nuovo terminale bus, la velostazione e la riqualificazione della stazione.',
     'blog.article.voto-bahnhofplatz-wil-2026.imageAlt': 'Bahnhofplatz di Wil nel Canton San Gallo',
+    'blog.article.status-s-san-gallo-assistenza.title': 'San Gallo: assistenza ridotta per titolari di Status S',
+    'blog.article.status-s-san-gallo-assistenza.excerpt': 'La commissione propone assistenza ridotta anche dopo il permesso.',
+    'blog.article.status-s-san-gallo-assistenza.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

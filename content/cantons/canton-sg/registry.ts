@@ -116,4 +116,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'status-s-san-gallo-assistenza',
+ category: 'novita',
+ date: '2026-10-19T12:49:37.837Z',
+ image: '/images/blog/article-status-s-san-gallo-assistenza.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

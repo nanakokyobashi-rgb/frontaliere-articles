@@ -33,6 +33,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.voto-bahnhofplatz-wil-2026.title': 'Abstimmung über den Bahnhofplatz Wil: Kredit von 63,66 Millionen',
     'blog.article.voto-bahnhofplatz-wil-2026.excerpt': 'Am 29. November 2026 stimmen die Bürgerinnen und Bürger von Wil über das Projekt für den neuen Busterminal, die Velostation und die Neugestaltung des Bahnhofs ab.',
     'blog.article.voto-bahnhofplatz-wil-2026.imageAlt': 'Bahnhofplatz in Wil im Kanton St. Gallen',
+    'blog.article.status-s-san-gallo-assistenza.title': 'St. Gallen: reduzierte Unterstützung für Personen mit Status S',
+    'blog.article.status-s-san-gallo-assistenza.excerpt': 'Die Kommission schlägt vor, auch nach der Erteilung der Aufenthaltsbewilligung reduzierte Unterstützung zu gewähren.',
+    'blog.article.status-s-san-gallo-assistenza.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;
