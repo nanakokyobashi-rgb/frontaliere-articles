@@ -58,7 +58,7 @@ test('il titolo digest ambiguo non viene risolto scegliendo il primo risultato',
   assert.match(guard[1], /exit 1/, 'più digest omonimi devono far fallire la classificazione');
 
   const guardAt = step.indexOf('if [ "$DIGEST_MATCH_COUNT" -gt 1 ]; then');
-  const numberAt = step.indexOf('N=');
+  const numberAt = step.indexOf('N=$(');
   assert.ok(guardAt !== -1 && numberAt !== -1 && guardAt < numberAt, 'il guard deve precedere la scelta del numero');
 
   const markerAt = step.indexOf('if HAS_LINES=');

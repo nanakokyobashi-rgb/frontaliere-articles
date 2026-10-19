@@ -300,7 +300,7 @@ jobs:
           # let this high-volume, paginated read fall back to the installation
           # GITHUB_TOKEN: that is the bucket that exhausted in run 39242871594.
           if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
-            echo "::error::needs-human-sweep: GITHUB_PAT_NANAKO non disponibile dopo load-rc-env; non uso GITHUB_TOKEN per il classificatore." 
+            echo "::error::needs-human-sweep: GITHUB_PAT_NANAKO non disponibile dopo load-rc-env; non uso GITHUB_TOKEN per il classificatore."
             exit 1
           fi
           export GH_TOKEN="$GITHUB_PAT_NANAKO"
