@@ -45523,6 +45523,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'riqualifica-aliquote-frontalieri-2026',
+ category: 'pratico',
+ date: '2026-10-19T09:23:32.610Z',
+ image: '/images/blog/article-riqualifica-aliquote-frontalieri-2026.webp',
+ hasCalculator: true,
+ articleType: 'evergreen',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
