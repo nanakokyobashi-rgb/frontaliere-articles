@@ -39,6 +39,7 @@ import {
   cantonRssFeedsForPublish,
   cantonRssPublishPlan,
   cantonRssFeedUrlForLocale,
+  confirmCantonPageMissing,
   createRenderRoot,
   ensureRouteOwnerMeta,
   hubMissingIsFatal,
@@ -63,6 +64,7 @@ import {
   publishedReleaseReady,
   publishedStatus,
   rendererPageEntry,
+  stagedReleasePageSets,
 } from '../../scripts/publish-section-pages.mjs';
 import { assertHubLocaleSlug } from '../../scripts/lib/assert-hub-locale-slug.mjs';
 import { assertHubTopicEntries } from '../../scripts/lib/assert-hub-locale-slug.mjs';
@@ -265,6 +267,155 @@ test('publisher: bootstrap live senza manifest non arma il percorso differito', 
     assert.equal(summary.liveBootstrapManifestMissing, true);
     assert.match(summary.defects.join('\n'), /senza manifest precedente e senza release API\/edge verificata/);
   } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('publisher: un flip pendente resta staged anche mentre il registro edge è draft', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-staged-live-'));
+  const outDir = path.join(fixtureRoot, 'dist');
+  const missingPage = { ...pageEntry('canton-ti', 'articoli-ticino/missing/index.html', 'article'), id: 'missing' };
+  const publishedDoc = pageManifestFromPages({ section: 'canton-ti', commit: 'published', pages: [missingPage] });
+  let publishOptions = null;
+  let manifestCalls = 0;
+  let missingProbeCalls = 0;
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  const previousAllow = process.env.ALLOW_DEFERRED_LIVE_RELEASE;
+  try {
+    process.env.ALLOW_DEFERRED_LIVE_RELEASE = 'true';
+    console.log = () => {};
+    console.error = () => {};
+    const code = await main(
+      ['--section', 'canton-ti', '--ids', '["missing"]', '--missing-pages', '["/articoli-ticino/missing/"]', '--out', outDir, '--summary', path.join(fixtureRoot, 'summary.json'), '--publish'],
+      {
+        parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
+        fetchPageManifestImpl: async () => ({ state: 'ok', doc: publishedDoc }),
+        publishedStatusImpl: async () => 'draft',
+        publishedApiReleaseCommitImpl: async () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        publishedReleaseReadyImpl: async () => ({ ok: false, reason: 'edge in transizione' }),
+        currentMainHeadImpl: () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
+        renderSectionArticlePipelineImpl: async () => {
+          const local = path.join(outDir, missingPage.rel);
+          mkdirSync(path.dirname(local), { recursive: true });
+          writeFileSync(
+            local,
+            `<!doctype html><html><head><link rel="canonical" href="${missingPage.apexUrl}">${CORPUS_ROUTE_OWNER_META_TAG}</head><body>${'backfill verificato '.repeat(30)}</body></html>`,
+            'utf8',
+          );
+          return {
+            entries: [{ articleId: 'missing', paths: { it: missingPage.rel } }],
+            hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
+            downloadedImageKeys: [],
+            imageFetchFailures: [],
+            imagePostcondition: {},
+            aggregatePagesAllowed: false,
+          };
+        },
+        articleReleaseSnapshotImpl: () => [],
+        probeImpl: async (url) => {
+          assert.equal(url, missingPage.cdnUrl);
+          missingProbeCalls++;
+          return { ok: false, status: 'HTTP 404' };
+        },
+        sleepImpl: async () => {},
+        publishImpl: async (options) => {
+          publishOptions = options;
+          return { failures: 0, uploaded: options.pages.length, deleted: 0, status: 'draft' };
+        },
+        publishPageManifestImpl: () => {
+          manifestCalls++;
+          return true;
+        },
+      },
+    );
+    assert.equal(code, 0);
+    assert.ok(publishOptions, 'lo staged deve caricare il backfill prima del replay');
+    assert.deepEqual(publishOptions.pages.map((page) => page.canonicalPath), [missingPage.canonicalPath]);
+    assert.deepEqual(publishOptions.immutablePages, []);
+    assert.equal(missingProbeCalls, 3, 'il target viene rimosso dall’inventario solo dopo tre 404 consecutivi');
+    assert.equal(manifestCalls, 0, 'il manifest resta differito fino al replay API');
+    const summary = JSON.parse(readFileSync(path.join(fixtureRoot, 'summary.json'), 'utf8'));
+    assert.equal(summary.deferredLiveRelease, true);
+    assert.equal(summary.published.manifestDeferred, true);
+    assert.equal(summary.published.deferredForReplay, true);
+    assert.deepEqual(summary.confirmedMissingPagePaths, [missingPage.canonicalPath]);
+  } finally {
+    if (previousAllow === undefined) delete process.env.ALLOW_DEFERRED_LIVE_RELEASE;
+    else process.env.ALLOW_DEFERRED_LIVE_RELEASE = previousAllow;
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('publisher: una release già pronta percorre il publish completo anche con il differimento armato', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-ready-release-'));
+  const head = 'a'.repeat(40);
+  const publishedDoc = pageManifestFromPages({ section: 'canton-ti', commit: 'published', pages: [] });
+  let publishOptions = null;
+  let manifestCalls = 0;
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  const previousAllow = process.env.ALLOW_DEFERRED_LIVE_RELEASE;
+  try {
+    process.env.ALLOW_DEFERRED_LIVE_RELEASE = 'true';
+    console.log = () => {};
+    console.error = () => {};
+    const code = await main(
+      [
+        '--section', 'canton-ti',
+        '--ids', '[]',
+        '--out', path.join(fixtureRoot, 'dist'),
+        '--summary', path.join(fixtureRoot, 'summary.json'),
+        '--publish',
+      ],
+      {
+        parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
+        fetchPageManifestImpl: async () => ({ state: 'ok', doc: publishedDoc }),
+        publishedStatusImpl: async () => 'live',
+        publishedApiReleaseCommitImpl: async () => head,
+        latestApiInputCommitImpl: async () => head,
+        publishedReleaseReadyImpl: async () => ({
+          ok: true,
+          files: {},
+          counts: { bySection: { 'canton-ti': { articles: 0 } } },
+        }),
+        publisherCommitImpl: () => head,
+        currentMainHeadImpl: () => head,
+        createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
+        renderSectionArticlePipelineImpl: async () => ({
+          entries: [],
+          hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
+          downloadedImageKeys: [],
+          imageFetchFailures: [],
+          imagePostcondition: {},
+          aggregatePagesAllowed: false,
+        }),
+        articleReleaseSnapshotImpl: () => [],
+        publishImpl: async (options) => {
+          publishOptions = options;
+          return { failures: 0, uploaded: 0, deleted: 0, status: 'live' };
+        },
+        publishPageManifestImpl: () => {
+          manifestCalls++;
+          return true;
+        },
+      },
+    );
+    assert.equal(code, 0, 'una release già pronta deve seguire il publish completo');
+    assert.equal(publishOptions?.snapshotPagesBeforeUpload, false);
+    assert.equal(manifestCalls, 1, 'il manifest deve essere pubblicato quando la readiness è verificata');
+    const summary = JSON.parse(readFileSync(path.join(fixtureRoot, 'summary.json'), 'utf8'));
+    assert.equal(summary.deferredLiveRelease, false);
+    assert.equal(summary.published.manifestDeferred, undefined);
+    assert.equal(summary.published.manifestPublished, true);
+  } finally {
+    if (previousAllow === undefined) delete process.env.ALLOW_DEFERRED_LIVE_RELEASE;
+    else process.env.ALLOW_DEFERRED_LIVE_RELEASE = previousAllow;
     console.log = realConsoleLog;
     console.error = realConsoleError;
     rmSync(fixtureRoot, { recursive: true, force: true });
@@ -965,6 +1116,22 @@ test('publisher: argomenti', () => {
   assert.throws(() => parseArgs(['--out', 'o', '--summary', 's']), /manca --section/);
   assert.throws(() => parseArgs(['--section']), /richiede un valore/);
   assert.throws(() => parseArgs(['--section', 'canton-ti', '--ids', 'x', '--out', 'o', '--summary', 's']), /array JSON/);
+  assert.deepEqual(
+    parseArgs(['--section', 'canton-ti', '--missing-pages', '["/articoli-ticino/a/"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).missingPages,
+    ['/articoli-ticino/a/'],
+  );
+  assert.deepEqual(
+    parseArgs(['--section', 'canton-ti', '--known-missing-pages', '["/articoli-ticino/a/","/articoli-ticino/a/"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).knownMissingPages,
+    ['/articoli-ticino/a/'],
+  );
+  assert.throws(
+    () => parseArgs(['--section', 'canton-ti', '--missing-pages', '["../a"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }),
+    /path canonici/,
+  );
+  assert.throws(
+    () => parseArgs(['--section', 'canton-ti', '--known-missing-pages', '["//a/"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }),
+    /path canonici/,
+  );
   assert.throws(() => parseArgs(['--section', 'canton-ti', '--boh']), /argomento sconosciuto/);
   assert.equal(parseArgs(['--section', 'canton-ti', '--previous-revision', 'abc1234', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).previousRevision, 'abc1234');
   assert.equal(parseArgs(['--section', 'canton-ti', '--remove-stale-canton-rss-feeds', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).removeStaleCantonRssFeeds, true);
@@ -977,6 +1144,35 @@ test('publisher: argomenti', () => {
     () => parseArgs(['--section', 'canton-ti', '--dry-run', '--publish', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }),
     /alternativi/,
   );
+});
+
+test('publisher: tutti i 404 noti escono dall inventario immutabile staged, ma solo i selezionati si caricano', () => {
+  const missing = pageEntry('canton-ti', 'articoli-ticino/missing/index.html', 'article');
+  const leftover = pageEntry('canton-ti', 'articoli-ticino/leftover/index.html', 'article');
+  const present = pageEntry('canton-ti', 'articoli-ticino/present/index.html', 'article');
+  const rendered = [missing, present];
+  const published = [missing, present, leftover];
+  assert.deepEqual(stagedReleasePageSets(rendered, published).pagesForPublish, []);
+  const selected = stagedReleasePageSets(
+    rendered,
+    published,
+    [missing.canonicalPath],
+    [missing.canonicalPath, leftover.canonicalPath],
+  );
+  assert.deepEqual(selected.pagesForPublish.map((page) => page.canonicalPath), [missing.canonicalPath]);
+  assert.deepEqual(selected.immutableLivePages.map((page) => page.canonicalPath), [present.canonicalPath]);
+});
+
+test('publisher: un 404 transitorio non conferma una pagina come assente', async () => {
+  let calls = 0;
+  const result = await confirmCantonPageMissing('https://cdn.test/edge/page', {
+    probeImpl: async () => (++calls === 1
+      ? { ok: false, status: 'HTTP 404' }
+      : { ok: true, status: 200, body: '<html>still live</html>' }),
+    sleepImpl: async () => {},
+  });
+  assert.deepEqual(result, { confirmed: false, statuses: ['HTTP 404', 200] });
+  assert.equal(calls, 2, 'la conferma si ferma appena la pagina torna presente');
 });
 
 test('publisher: chiave R2 = quella che il Worker calcola dal path canonico', () => {
@@ -2771,6 +2967,15 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /checkout non coincide con source_commit/);
   assert.match(wf, /inputs\.source_commit/);
   assert.match(wf, /source_main_commit:/);
+  assert.match(wf, /replay_api_after_publish:/);
+  assert.match(wf, /allow_deferred_live_release:/);
+  assert.match(wf, /missing_page_paths:/);
+  assert.match(wf, /known_missing_page_paths:/);
+  assert.match(wf, /MISSING_PAGE_PATHS_JSON: \$\{\{ toJSON\(matrix\.target\.missingPagePaths \|\| fromJSON\('\[\]'\)\) \}\}/);
+  assert.match(wf, /KNOWN_MISSING_PAGE_PATHS_JSON: \$\{\{ toJSON\(matrix\.target\.knownMissingPagePaths \|\| fromJSON\('\[\]'\)\) \}\}/);
+  assert.match(wf, /args\+=\(--missing-pages "\$\(printf '%s' "\$MISSING_PAGE_PATHS_JSON" \| jq -c \.\)"\)/);
+  assert.match(wf, /args\+=\(--known-missing-pages "\$\(printf '%s' "\$KNOWN_MISSING_PAGE_PATHS_JSON" \| jq -c \.\)"\)/);
+  assert.match(wf, /ALLOW_DEFERRED_LIVE_RELEASE: \$\{\{ needs\.resolve\.outputs\.allow_deferred_live_release \}\}/);
   assert.match(wf, /EXPECTED_MAIN_HEAD: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_main_commit \|\| github\.event\.after \|\| github\.sha \}\}/);
   assert.match(wf, /-f source_main_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /-f source_main_commit="\$current_main"/);
@@ -2784,10 +2989,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /remove_stale_canton_rss_feeds/);
   assert.match(wf, /API_RELEASE_COMMIT: \$\{\{ inputs\.api_release_commit \}\}/);
   assert.match(wf, /GITHUB_PAT_NANAKO assente/);
-  assert.match(wf, /Verify bootstrap revision is still main/);
-  assert.match(wf, /BOOTSTRAP_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
-  assert.match(wf, /main e' avanzata da \$BOOTSTRAP_COMMIT a \$current_main/);
-  assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$BOOTSTRAP_COMMIT"/);
+  assert.match(wf, /Verify staged release revision is still main/);
+  assert.match(wf, /SOURCE_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(wf, /main e' avanzata da \$SOURCE_COMMIT a \$current_main/);
+  assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
   assert.match(wf, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(wf, /replay workflow_run redispatchato prima degli upload/);
   assert.match(wf, /id: push_range[\s\S]*gh api --paginate --slurp "repos\/\$REPO\/commits\/\$WORKFLOW_RUN_HEAD_SHA\/events"/);
@@ -2827,25 +3032,29 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(liveRetryLoop, /if RETRY_CMD_ATTEMPTS=2 bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/);
   assert.match(wf, /PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
   assert.match(wf, /PUSH_AFTER: \$\{\{ needs\.resolve\.outputs\.push_after \}\}/);
-  const bootstrapReplay = wf.slice(wf.indexOf('  replay-api-after-bootstrap:'));
-  assert.match(bootstrapReplay, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
-  assert.match(bootstrapReplay, /BOOTSTRAP_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
-  assert.match(bootstrapReplay, /Redispatch bootstrap on current main after stale replay/);
-  assert.match(bootstrapReplay, /TARGET_MATRIX: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/);
-  const replayDispatchStep = bootstrapReplay.slice(
-    bootstrapReplay.indexOf('- name: Replay publish-api after bootstrap lock release'),
+  const stagedReplay = wf.slice(wf.indexOf('  replay-api-after-staged-release:'));
+  assert.match(stagedReplay, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(stagedReplay, /SOURCE_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(stagedReplay, /Redispatch staged backfill on current main after stale replay/);
+  assert.match(stagedReplay, /TARGET_MATRIX: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/);
+  assert.match(stagedReplay, /-f missing_page_paths="\$missing_page_paths"/);
+  assert.match(stagedReplay, /-f known_missing_page_paths="\$known_missing_page_paths"/);
+  const replayDispatchStep = stagedReplay.slice(
+    stagedReplay.indexOf('- name: Replay publish-api after staged release'),
   );
   assert.match(replayDispatchStep, /git fetch --no-tags --depth=1 origin main/);
-  const mainRevisionGuard = replayDispatchStep.indexOf('if [ "$current_main" != "$BOOTSTRAP_COMMIT" ]');
+  const mainRevisionGuard = replayDispatchStep.indexOf('if [ "$current_main" != "$SOURCE_COMMIT" ]');
+  const globalReadiness = replayDispatchStep.indexOf('node scripts/reconcile-section-pages.mjs --out "$readiness" --cap 1');
+  const missingPagesGuard = replayDispatchStep.indexOf(".counts.missingPages");
   const apiDispatch = replayDispatchStep.indexOf('gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main');
   assert.ok(
-    mainRevisionGuard >= 0 && apiDispatch > mainRevisionGuard,
-    'il replay API deve saltare il dispatch se main e\' avanzata dal bootstrap',
+    mainRevisionGuard >= 0 && globalReadiness > mainRevisionGuard && missingPagesGuard > globalReadiness && apiDispatch > missingPagesGuard,
+    'il replay API deve richiedere main stabile e zero pagine 404 globali prima del dispatch',
   );
-  assert.match(replayDispatchStep, /-f source_commit="\$BOOTSTRAP_COMMIT"/);
-  const staleRecoveryStep = bootstrapReplay.slice(
-    bootstrapReplay.indexOf('- name: Redispatch bootstrap on current main after stale replay'),
-    bootstrapReplay.indexOf('- name: Replay publish-api after bootstrap lock release'),
+  assert.match(replayDispatchStep, /-f source_commit="\$SOURCE_COMMIT"/);
+  const staleRecoveryStep = stagedReplay.slice(
+    stagedReplay.indexOf('- name: Redispatch staged backfill on current main after stale replay'),
+    stagedReplay.indexOf('- name: Replay publish-api after staged release'),
   );
   assert.match(staleRecoveryStep, /if: steps\.replay_freshness\.outputs\.fresh == 'false'/);
   assert.match(staleRecoveryStep, /gh workflow run fast-publish-section\.yml --repo "\$REPOSITORY" --ref main/);
@@ -3030,6 +3239,8 @@ test('reconcile: cap per sezione, i piu\' recenti prima; il dubbio non si ripubb
   const plan = planSectionBackfill('canton-ti', pages, dates, 2);
   assert.deepEqual(plan.missingIds, ['nuovo', 'medio', 'vecchio']);
   assert.deepEqual(plan.selected, ['nuovo', 'medio']);
+  assert.deepEqual(plan.missingPagePaths, ['/p2/', '/p3/', '/p4/']);
+  assert.deepEqual(plan.knownMissingPagePaths, ['/p1/', '/p2/', '/p3/', '/p4/']);
   assert.deepEqual(plan.leftover, ['vecchio']);
   assert.deepEqual(plan.unknown, ['/p5/']);
   assert.equal(plan.dispatch, true);
@@ -3037,10 +3248,16 @@ test('reconcile: cap per sezione, i piu\' recenti prima; il dubbio non si ripubb
   // Manca solo una pagina di sezione: un giro di rinfresco senza id.
   const refresh = planSectionBackfill('canton-ti', [{ kind: 'section', path: '/articoli-ticino/fisco/', state: 'missing' }], dates, 3);
   assert.deepEqual([refresh.dispatch, refresh.selected, refresh.sectionMissing], [true, [], ['/articoli-ticino/fisco/']]);
+  assert.deepEqual(refresh.missingPagePaths, ['/articoli-ticino/fisco/']);
+  assert.deepEqual(refresh.knownMissingPagePaths, ['/articoli-ticino/fisco/']);
   assert.equal(planSectionBackfill('canton-ti', [{ kind: 'section', path: '/x/', state: 'unknown' }], dates, 3).dispatch, false);
   const orphan = planSectionBackfill('canton-ti', [], dates, 3, [{ id: 'gone', path: '/articoli-ticino/gone/', state: 'present' }]);
   assert.deepEqual([orphan.dispatch, orphan.orphaned, orphan.orphanedIds], [true, ['/articoli-ticino/gone/'], ['gone']]);
   assert.equal(orphan.selected.length, 0, 'una pagina ritirata non va rimessa in coda come articolo corrente');
+  const missingOrphan = planSectionBackfill('canton-ti', [], dates, 3, [{ id: 'gone', path: '/articoli-ticino/gone/', state: 'missing' }]);
+  assert.deepEqual(missingOrphan.knownMissingPagePaths, ['/articoli-ticino/gone/']);
+  assert.deepEqual(missingOrphan.expectedMissingPagePaths, []);
+  assert.equal(missingOrphan.dispatch, true, 'il publisher deve rimuovere il 404 verificato dall’inventario immutabile');
 });
 
 test('reconcile: il manifest individua una pagina articolo ritirata o con slug vecchio', () => {
@@ -3065,14 +3282,14 @@ test('reconcile: il manifest individua una pagina articolo ritirata o con slug v
   );
 });
 
-function fakeFetch({ commit = 'abc1234', sectionsCommit = commit, candidateCommit = commit, edgeCommit = commit, live = true, missing = new Set(), broken = new Set(), pageManifest = null }) {
+function fakeFetch({ commit = 'abc1234', sectionsCommit = commit, candidateCommit = commit, candidateStatus = 200, candidateDocument = null, edgeCommit = commit, live = true, missing = new Set(), broken = new Set(), pageManifest = null }) {
   const docs = {
     'manifest.json': { commit },
     'sections.json': { commit: sectionsCommit, sections: [CATALOG_TI, { id: 'canton-gr', paths: {} }] },
     'slugs.json': { commit, cantons: { 'canton-ti': SLUGS_TI } },
     'canton-articles.json': [{ id: 'a', date: '2026-10-01', section: 'canton-ti' }, { id: 'b', date: '2026-10-02', section: 'canton-ti' }],
   };
-  const candidateRegistry = { schema: 1, commit: candidateCommit, sections: { 'canton-ti': { status: live ? 'live' : 'draft' } } };
+  const candidateRegistry = candidateDocument ?? { schema: 1, commit: candidateCommit, sections: { 'canton-ti': { status: live ? 'live' : 'draft' } } };
   const edgeRegistry = { schema: 1, commit: edgeCommit, sections: { 'canton-ti': { status: live ? 'live' : 'draft' } } };
   const calls = [];
   const impl = async (url, init = {}) => {
@@ -3084,7 +3301,7 @@ function fakeFetch({ commit = 'abc1234', sectionsCommit = commit, candidateCommi
       return { status: missing.has(p) ? 404 : 200, ok: !missing.has(p) };
     }
     if (clean === 'https://api.test/edge/sections/registry.json') {
-      return { ok: true, status: 200, json: async () => candidateRegistry };
+      return { ok: candidateStatus >= 200 && candidateStatus < 300, status: candidateStatus, json: async () => candidateRegistry };
     }
     if (clean.endsWith('/edge/sections/registry.json')) return { ok: true, status: 200, json: async () => edgeRegistry };
     if (clean.endsWith('/edge/sections/_page-manifests/canton-ti.json')) {
@@ -3111,7 +3328,38 @@ test('reconcile: solo le sezioni live, solo i 404, e mai su una superficie a met
 
   const tornCandidate = await reconcile({ apiBase: 'https://api.test', fetchImpl: fakeFetch({ candidateCommit: 'def5678' }).impl });
   assert.match(tornCandidate.skipped, /registro edge candidato non portano lo stesso commit/);
+  assert.equal(tornCandidate.skip.code, 'pages-surface-mismatch');
   assert.deepEqual(tornCandidate.sections, []);
+
+  const absentCandidate = await reconcile({ apiBase: 'https://api.test', fetchImpl: fakeFetch({ candidateStatus: 404 }).impl });
+  assert.equal(absentCandidate.skip.code, 'pages-registry-absent');
+  assert.equal(absentCandidate.skip.status, 404);
+  assert.match(absentCandidate.skipped, /Remote Config/);
+  assert.deepEqual(absentCandidate.sections, []);
+
+  const invalidCandidate = await reconcile({
+    apiBase: 'https://api.test',
+    fetchImpl: fakeFetch({ candidateDocument: { schema: 1, commit: 'abc1234', sections: { 'canton-ti': { status: 'unknown' } } } }).impl,
+  });
+  assert.equal(invalidCandidate.skip.code, 'pages-registry-invalid');
+  assert.match(invalidCandidate.skipped, /non valido/);
+  assert.deepEqual(invalidCandidate.sections, []);
+
+  const incompleteLiveCandidate = await reconcile({
+    apiBase: 'https://api.test',
+    fetchImpl: fakeFetch({
+      edgeCommit: 'def5678',
+      candidateDocument: {
+        schema: 1,
+        commit: 'abc1234',
+        sections: { 'canton-ti': { status: 'draft' }, 'canton-gr': { status: 'live' } },
+      },
+    }).impl,
+  });
+  assert.equal(incompleteLiveCandidate.skip.code, 'candidate-live-section-incomplete');
+  assert.equal(incompleteLiveCandidate.pendingEdgeFlip, true);
+  assert.match(incompleteLiveCandidate.skipped, /non ha catalogo o sitemap/);
+  assert.deepEqual(incompleteLiveCandidate.sections, []);
 
   const gap = fakeFetch({ missing: new Set(['/en/ticino-articles/a-en/', '/articoli-ticino/b-it/']), broken: new Set(['/de/tessin-artikel/a-de/']) });
   const report = await reconcile({ apiBase: 'https://api.test', cap: 1, fetchImpl: gap.impl });
@@ -3137,21 +3385,32 @@ test('reconcile: API avanti al registro edge recupera le pagine che bloccano il 
   assert.equal(report.sections.length, 1);
   assert.deepEqual(report.sections[0].missingIds, ['b', 'a']);
   assert.deepEqual([report.sections[0].selected, report.sections[0].leftover], [['b'], ['a']]);
+  assert.deepEqual(
+    new Set(report.sections[0].knownMissingPagePaths),
+    new Set(['/articoli-ticino/b-it/', '/en/ticino-articles/a-en/']),
+  );
   assert.ok(gap.calls.some((call) => call === 'GET https://api.test/edge/sections/registry.json'));
   assert.ok(gap.calls.some((call) => call.startsWith('HEAD https://cdn.frontaliereticino.ch/edge/sections')));
 });
 
-test('reconcile: una pagina articolo presente nel manifest ma ritirata entra nel cleanup', async () => {
+test('reconcile: le pagine articolo ritirate presenti entrano nel cleanup e quelle mancanti liberano il replay', async () => {
   const pageManifest = pageManifestFromPages({
     section: 'canton-ti',
     commit: 'old-commit',
-    pages: [{ ...pageEntry('canton-ti', 'articoli-ticino/ritirato/index.html', 'article'), id: 'ritirato' }],
+    pages: [
+      { ...pageEntry('canton-ti', 'articoli-ticino/ritirato/index.html', 'article'), id: 'ritirato' },
+      { ...pageEntry('canton-ti', 'articoli-ticino/gia-assente/index.html', 'article'), id: 'gia-assente' },
+    ],
   });
-  const report = await reconcile({ apiBase: 'https://api.test', fetchImpl: fakeFetch({ pageManifest }).impl });
+  const report = await reconcile({
+    apiBase: 'https://api.test',
+    fetchImpl: fakeFetch({ pageManifest, missing: new Set(['/articoli-ticino/gia-assente/']) }).impl,
+  });
   const [ti] = report.sections;
   assert.equal(ti.pageManifest, 'ok');
   assert.deepEqual(ti.orphaned, ['/articoli-ticino/ritirato/']);
   assert.deepEqual(ti.orphanedIds, ['ritirato']);
+  assert.deepEqual(ti.knownMissingPagePaths, ['/articoli-ticino/gia-assente/']);
   assert.equal(ti.dispatch, true);
 });
 
@@ -3160,7 +3419,38 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   const articleWf = read('.github/workflows/reconcile-article-shards.yml');
   assert.match(wf, /workflows: \[fast-publish-section\]/);
   assert.match(wf, /node scripts\/reconcile-section-pages\.mjs/);
-  assert.match(wf, /gh workflow run fast-publish-section\.yml[^\n]*\\\n\s+-f section="\$section" -f article_ids="\$ids" -f bootstrap=false -f dry_run=false/);
+  assert.match(wf, /args=\([\s\S]*-f "section=\$section"[\s\S]*-f "article_ids=\$ids"[\s\S]*'bootstrap=false'[\s\S]*'dry_run=false'/);
+  assert.match(wf, /-f "missing_page_paths=\$missing_page_paths"/);
+  assert.match(wf, /-f "known_missing_page_paths=\$known_missing_page_paths"/);
+  assert.match(wf, /-f 'allow_deferred_live_release=true'/);
+  assert.doesNotMatch(wf, /-f 'replay_api_after_publish=true'/);
+  assert.match(wf, /-f "api_release_commit=\$API_RELEASE_COMMIT"/);
+  assert.match(wf, /-f "source_commit=\$SOURCE_COMMIT"/);
+  assert.match(wf, /Wait for all staged backfills before the API replay/);
+  assert.match(wf, /Replay API after all staged backfills/);
+  assert.match(wf, /dispatch_nonce="reconcile-\$\{GITHUB_RUN_ID\}-\$\{section\}"/);
+  assert.match(wf, /gh run list --repo "\$REPOSITORY" --workflow fast-publish-section\.yml/);
+  assert.match(wf, /steps\.detect\.outputs\.leftover == '0'/);
+  const globalReplay = wf.slice(wf.indexOf('- name: Replay API after all staged backfills'));
+  const postBackfillProbe = globalReplay.indexOf('reconcile-sections-after-backfill.json');
+  const postBackfillMissingGuard = globalReplay.indexOf('.counts.missingPages // 0');
+  const globalApiDispatch = globalReplay.indexOf('gh workflow run publish-api.yml');
+  assert.ok(
+    postBackfillProbe >= 0 && postBackfillMissingGuard > postBackfillProbe && globalApiDispatch > postBackfillMissingGuard,
+    'il replay globale deve risondare la superficie dopo tutte le run e prima del dispatch API',
+  );
+  assert.match(globalReplay, /if \.skip then "true" else "false" end/);
+  assert.match(globalReplay, /\.pendingEdgeFlip \/\/ false/);
+  assert.match(wf, /current_main="\$\(gh api "repos\/\$REPOSITORY\/git\/ref\/heads\/main" --jq '\.object\.sha'\)"/);
+  assert.match(wf, /main e' avanzata dopo la detection \(\$SOURCE_COMMIT -> \$current_main\)/);
+  assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
+  assert.match(wf, /pending_edge_flip=\$\(jq -r '\.pendingEdgeFlip \/\/ false'/);
+  assert.match(wf, /skip=\$\(jq -r 'if \.skip then \\"true\\" else \\"false\\" end'/);
+  assert.match(wf, /steps\.detect\.outputs\.pending_edge_flip == 'true'[\s\S]*steps\.detect\.outputs\.skip == 'false'[\s\S]*steps\.detect\.outputs\.leftover == '0'[\s\S]*steps\.wait_backfills\.outcome == 'success'/);
+  assert.match(wf, /contains\("nonce=reconcile-"\)/);
+  assert.match(wf, /Load producer token from Remote Config/);
+  assert.match(wf, /runtime_pat="\$\{GITHUB_PAT_NANAKO:-\}"[\s\S]*export GH_TOKEN="\$runtime_pat"/);
+  assert.match(read('scripts/reconcile-section-pages.mjs'), /pages-registry-absent/);
   assert.match(wf, /github\.event\.workflow_run\.event \}\}" = "workflow_dispatch"/);
   assert.match(wf, /actions: write/);
   for (const reconcileWorkflow of [wf, articleWf]) {

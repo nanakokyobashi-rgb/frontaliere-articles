@@ -106,6 +106,16 @@ on:
         description: 'Array JSON di id articolo (vuoto = solo landing, archivio e hub)'
         required: false
         type: string
+      missing_page_paths:
+        description: 'Array JSON di path canonici verificati 404 dal reconciler'
+        required: false
+        default: '[]'
+        type: string
+      known_missing_page_paths:
+        description: 'Array JSON di tutti i path 404 noti, anche oltre il cap del reconciler'
+        required: false
+        default: '[]'
+        type: string
       bootstrap:
         description: 'Rendi TUTTI gli articoli della sezione (accensione di un cantone)'
         required: false
@@ -151,6 +161,16 @@ on:
         required: false
         default: ''
         type: string
+      replay_api_after_publish:
+        description: 'Dopo uno staged backfill, ripubblica API sulla stessa HEAD verificata'
+        required: false
+        default: false
+        type: boolean
+      allow_deferred_live_release:
+        description: 'Dopo uno staged backfill, mantieni il manifest differito senza dispatchare il replay API'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -171,6 +191,8 @@ jobs:
       any: ${{ steps.plan.outputs.any }}
       dry: ${{ steps.plan.outputs.dry }}
       bootstrap: ${{ steps.plan.outputs.bootstrap }}
+      replay_api_after_publish: ${{ steps.plan.outputs.replay_api_after_publish }}
+      allow_deferred_live_release: ${{ steps.plan.outputs.allow_deferred_live_release }}
       push_before: ${{ steps.push_range.outputs.before }}
       push_after: ${{ steps.push_range.outputs.after }}
     steps:
@@ -325,9 +347,13 @@ jobs:
         env:
           SECTION_INPUT: ${{ inputs.section }}
           ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
+          MISSING_PAGE_PATHS_INPUT: ${{ inputs.missing_page_paths }}
+          KNOWN_MISSING_PAGE_PATHS_INPUT: ${{ inputs.known_missing_page_paths }}
           BOOTSTRAP_INPUT: ${{ inputs.bootstrap }}
           DRY_RUN_INPUT: ${{ inputs.dry_run }}
           REMOVE_STALE_INPUT: ${{ inputs.remove_stale_canton_rss_feeds }}
+          REPLAY_API_INPUT: ${{ inputs.replay_api_after_publish }}
+          ALLOW_DEFERRED_LIVE_RELEASE_INPUT: ${{ inputs.allow_deferred_live_release }}
           EVENT_NAME: ${{ github.event_name }}
           COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           WORKFLOW_RUN_COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.workflow_run.head_commit.message }}
@@ -349,11 +375,14 @@ jobs:
                 echo 'matrix=[]'
                 echo 'any=false'
                 echo 'dry=false'
+                echo 'replay_api_after_publish=false'
+                echo 'allow_deferred_live_release=false'
               } >> "$GITHUB_OUTPUT"
               exit 0
             fi
           fi
           before="${PUSH_BEFORE:-}"
+          replay_api_after_publish=false
           if [ "$EVENT_NAME" = 'workflow_run' ]; then
             if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || [ "$(git rev-parse HEAD)" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
               echo "::error::workflow_run head non coincide con il checkout"
@@ -372,18 +401,35 @@ jobs:
                 end
               ')"
             fi
+            validate_page_paths() {
+              local option="$1"
+              jq -ce --arg option "$option" '
+                if type == "array" and all(.[]; type == "string" and test("^/[a-z0-9/-]+/$") and (contains("//") | not))
+                then unique
+                else error($option + " must be a JSON array of canonical paths")
+                end
+              '
+            }
+            missing_pages_json="$(printf '%s' "${MISSING_PAGE_PATHS_INPUT:-[]}" | validate_page_paths missing_page_paths)"
+            known_missing_pages_json="$(printf '%s' "${KNOWN_MISSING_PAGE_PATHS_INPUT:-[]}" | validate_page_paths known_missing_page_paths)"
             bootstrap=false
             [ "$BOOTSTRAP_INPUT" = "true" ] && bootstrap=true
             remove_stale=false
             [ "$REMOVE_STALE_INPUT" = "true" ] && remove_stale=true
+            [ "$REPLAY_API_INPUT" = "true" ] && replay_api_after_publish=true
+            allow_deferred_live_release=false
+            if [ "$REPLAY_API_INPUT" = "true" ] || [ "$ALLOW_DEFERRED_LIVE_RELEASE_INPUT" = "true" ]; then
+              allow_deferred_live_release=true
+            fi
             if [ "$bootstrap" = "true" ] && [ "$ids_json" != "[]" ]; then
               echo "::error::bootstrap rende tutti gli articoli: non si combina con article_ids"
               exit 1
             fi
-            matrix="$(jq -cn --arg s "$SECTION_INPUT" --argjson ids "$ids_json" --argjson b "$bootstrap" --argjson r "$remove_stale" \
-              '[{section: $s, ids: $ids, bootstrap: $b, removeStaleCantonRssFeeds: $r}]')"
+            matrix="$(jq -cn --arg s "$SECTION_INPUT" --argjson ids "$ids_json" --argjson missing "$missing_pages_json" --argjson knownMissing "$known_missing_pages_json" --argjson b "$bootstrap" --argjson r "$remove_stale" \
+              '[{section: $s, ids: $ids, missingPagePaths: $missing, knownMissingPagePaths: $knownMissing, bootstrap: $b, removeStaleCantonRssFeeds: $r}]')"
           else
             dry=false
+            allow_deferred_live_release=false
             if [ "$EVENT_NAME" = 'workflow_run' ]; then
               # Ogni completion API deve leggere il registro edge della
               # release appena completata: anche una kill-switch o un hub
@@ -436,6 +482,8 @@ jobs:
             echo "any=$any"
             echo "dry=$dry"
             echo "bootstrap=$bootstrap"
+            echo "replay_api_after_publish=$replay_api_after_publish"
+            echo "allow_deferred_live_release=$allow_deferred_live_release"
           } >> "$GITHUB_OUTPUT"
           echo "resolved matrix=$matrix dry=$dry"
 
@@ -529,8 +577,11 @@ jobs:
           REPO: ${{ github.repository }}
           SECTION: ${{ matrix.target.section }}
           ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
+          MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.missingPagePaths || fromJSON('[]')) }}
+          KNOWN_MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.knownMissingPagePaths || fromJSON('[]')) }}
           BOOTSTRAP: ${{ matrix.target.bootstrap }}
           REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
+          ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
           DRY: ${{ needs.resolve.outputs.dry }}
           STALE_HEAD: ${{ github.event.workflow_run.head_sha }}
           CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
@@ -564,8 +615,11 @@ jobs:
           gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
             -f section="$SECTION" \
             -f article_ids="$ARTICLE_IDS_JSON" \
+            -f missing_page_paths="$MISSING_PAGE_PATHS_JSON" \
+            -f known_missing_page_paths="$KNOWN_MISSING_PAGE_PATHS_JSON" \
             -f bootstrap="$BOOTSTRAP" \
             -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
+            -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
             -f api_release_commit="$api_release_commit" \
             -f source_commit="$CURRENT_MAIN" \
             -f source_main_commit="$CURRENT_MAIN" \
@@ -678,6 +732,8 @@ jobs:
         env:
           SECTION: ${{ matrix.target.section }}
           ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
+          MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.missingPagePaths || fromJSON('[]')) }}
+          KNOWN_MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.knownMissingPagePaths || fromJSON('[]')) }}
           BOOTSTRAP: ${{ matrix.target.bootstrap }}
           DRY: ${{ needs.resolve.outputs.dry }}
           EVENT_NAME: ${{ github.event_name }}
@@ -685,6 +741,7 @@ jobs:
           PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
           REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
           API_RELEASE_COMMIT: ${{ inputs.api_release_commit }}
+          ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
           SOURCE_COMMIT: ${{ inputs.source_commit }}
           SOURCE_MAIN_COMMIT: ${{ inputs.source_main_commit }}
           REF: ${{ github.ref }}
@@ -745,8 +802,11 @@ jobs:
               gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
                 -f section="$SECTION" \
                 -f article_ids="$ARTICLE_IDS_JSON" \
+                -f missing_page_paths="$MISSING_PAGE_PATHS_JSON" \
+                -f known_missing_page_paths="$KNOWN_MISSING_PAGE_PATHS_JSON" \
                 -f bootstrap="$BOOTSTRAP" \
                 -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
+                -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
                 -f api_release_commit="$api_release_commit" \
                 -f source_commit="$current_main" \
                 -f source_main_commit="$current_main" \
@@ -774,6 +834,8 @@ jobs:
             else
               args+=(--ids "$(printf '%s' "$ARTICLE_IDS_JSON" | jq -c .)")
             fi
+            args+=(--missing-pages "$(printf '%s' "$MISSING_PAGE_PATHS_JSON" | jq -c .)")
+            args+=(--known-missing-pages "$(printf '%s' "$KNOWN_MISSING_PAGE_PATHS_JSON" | jq -c .)")
             if [ "$REMOVE_STALE_CANTON_RSS_FEEDS" = "true" ]; then
               args+=(--remove-stale-canton-rss-feeds)
             fi
@@ -895,18 +957,18 @@ jobs:
           [ -s "$s" ] || { echo "nessun summary: il render non e' arrivato in fondo"; exit 0; }
           jq -r '"sezione \(.section) (\(.declaredStatus // "?")): pagine \(.counts | tostring), hub mancanti \(.hubsMissing | tostring), difetti \(.defects | length), pubblicato \(.published | tostring)"' "$s"
 
-  # A push can start the API publisher before the bootstrap runner acquires
-  # its R2 lease. After a successful bootstrap releases every matrix lock,
-  # replay the API once so an earlier fail-closed timeout cannot strand the
-  # registry on the previous release. API-triggered replays are excluded to
-  # prevent a workflow_run loop.
-  replay-api-after-bootstrap:
+  # A push can start the API publisher before the section runner has uploaded
+  # its HTML. After a successful bootstrap or explicitly armed staged
+  # backfill, replay the API so an earlier fail-closed readiness check cannot
+  # strand the registry on the previous release. API-triggered replays are
+  # excluded to prevent a workflow_run loop.
+  replay-api-after-staged-release:
     needs: [resolve, publish]
     if: >-
       always() &&
       needs.resolve.result == 'success' &&
       needs.publish.result == 'success' &&
-      needs.resolve.outputs.bootstrap == 'true' &&
+      (needs.resolve.outputs.bootstrap == 'true' || needs.resolve.outputs.replay_api_after_publish == 'true') &&
       needs.resolve.outputs.dry != 'true' &&
       github.event_name != 'workflow_run'
     runs-on: ubuntu-latest
@@ -915,23 +977,23 @@ jobs:
       - uses: actions/checkout@v7
         with:
           # Il replay deve usare esattamente la revisione dalla quale il
-          # bootstrap ha renderizzato e caricato le pagine. `main` puo' essere
+          # publisher ha renderizzato e caricato le pagine. `main` puo' essere
           # avanzata durante il render; il guard sotto in quel caso lascia il
           # lavoro al run generato dal nuovo push.
           ref: ${{ inputs.source_commit || github.sha }}
           fetch-depth: 1
           persist-credentials: false
 
-      - name: Verify bootstrap revision is still main
+      - name: Verify staged release revision is still main
         id: replay_freshness
         env:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
-          BOOTSTRAP_COMMIT: ${{ inputs.source_commit || github.sha }}
+          SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
         run: |
           set -euo pipefail
-          if ! [[ "$BOOTSTRAP_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
-            echo "::error::github.sha non e' una SHA completa per il replay bootstrap"
+          if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::source commit non e' una SHA completa per il replay staged"
             exit 1
           fi
           if ! current_main="$(gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
@@ -943,11 +1005,11 @@ jobs:
             exit 1
           fi
           echo "current_main=$current_main" >> "$GITHUB_OUTPUT"
-          if [ "$current_main" != "$BOOTSTRAP_COMMIT" ]; then
-            echo "::notice::main e' avanzata da $BOOTSTRAP_COMMIT a $current_main durante il bootstrap; il passo recovery redispatchera' il bootstrap sulla HEAD corrente"
+          if [ "$current_main" != "$SOURCE_COMMIT" ]; then
+            echo "::notice::main e' avanzata da $SOURCE_COMMIT a $current_main durante il backfill; il passo recovery redispatchera' il publisher sulla HEAD corrente"
             echo 'fresh=false' >> "$GITHUB_OUTPUT"
           else
-            echo "main ancora sulla revisione bootstrap $BOOTSTRAP_COMMIT"
+            echo "main ancora sulla revisione staged $SOURCE_COMMIT"
             echo 'fresh=true' >> "$GITHUB_OUTPUT"
           fi
 
@@ -978,18 +1040,20 @@ jobs:
         if: steps.replay_freshness.outcome == 'success'
         run: node generator/scripts/load-rc-env.mjs
 
-      - name: Redispatch bootstrap on current main after stale replay
+      - name: Redispatch staged backfill on current main after stale replay
         if: steps.replay_freshness.outputs.fresh == 'false'
         env:
           REPOSITORY: ${{ github.repository }}
           TARGET_MATRIX: ${{ needs.resolve.outputs.matrix }}
           CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
           DRY: ${{ needs.resolve.outputs.dry }}
+          REPLAY_API_AFTER_PUBLISH: ${{ needs.resolve.outputs.replay_api_after_publish }}
+          ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
         run: |
           set -euo pipefail
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           if [ -z "$runtime_pat" ]; then
-            echo "::error::GITHUB_PAT_NANAKO non caricato: recovery bootstrap impossibile"
+            echo "::error::GITHUB_PAT_NANAKO non caricato: recovery staged impossibile"
             exit 1
           fi
           if ! [[ "$CURRENT_MAIN" =~ ^[a-f0-9]{40}$ ]]; then
@@ -998,50 +1062,63 @@ jobs:
           fi
           export GH_TOKEN="$runtime_pat"
           dispatched=0
-          while IFS=$'\t' read -r section article_ids bootstrap remove_stale; do
+          while IFS=$'\t' read -r section article_ids missing_page_paths known_missing_page_paths bootstrap remove_stale; do
             [ -n "$section" ] || continue
-            echo "::notice::recovery bootstrap $section sulla HEAD corrente $CURRENT_MAIN"
+            echo "::notice::recovery staged $section sulla HEAD corrente $CURRENT_MAIN"
             gh workflow run fast-publish-section.yml --repo "$REPOSITORY" --ref main \
               -f section="$section" \
               -f article_ids="$article_ids" \
+              -f missing_page_paths="$missing_page_paths" \
+              -f known_missing_page_paths="$known_missing_page_paths" \
               -f bootstrap="$bootstrap" \
               -f remove_stale_canton_rss_feeds="$remove_stale" \
               -f source_commit="$CURRENT_MAIN" \
               -f source_main_commit="$CURRENT_MAIN" \
+              -f replay_api_after_publish="$REPLAY_API_AFTER_PUBLISH" \
+              -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
               -f dry_run="$DRY" \
-              -f dispatch_nonce="stale-bootstrap-recovery-${GITHUB_RUN_ID}-${section}"
+              -f dispatch_nonce="stale-staged-recovery-${GITHUB_RUN_ID}-${section}"
             dispatched=$((dispatched + 1))
-          done < <(jq -r '.[] | [.section, ((.ids // []) | tojson), (.bootstrap // false), (.removeStaleCantonRssFeeds // false)] | @tsv' <<<"$TARGET_MATRIX")
+          done < <(jq -r '.[] | [.section, ((.ids // []) | tojson), ((.missingPagePaths // []) | tojson), ((.knownMissingPagePaths // []) | tojson), (.bootstrap // false), (.removeStaleCantonRssFeeds // false)] | @tsv' <<<"$TARGET_MATRIX")
           if [ "$dispatched" -eq 0 ]; then
-            echo "::error::matrix bootstrap vuoto nel recovery stale"
+            echo "::error::matrix staged vuoto nel recovery stale"
             exit 1
           fi
 
-      - name: Replay publish-api after bootstrap lock release
+      - name: Replay publish-api after staged release
         if: steps.replay_freshness.outputs.fresh == 'true'
         env:
           REPOSITORY: ${{ github.repository }}
-          BOOTSTRAP_COMMIT: ${{ inputs.source_commit || github.sha }}
+          SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
         run: |
           set -euo pipefail
-          if ! [[ "$BOOTSTRAP_COMMIT" =~ ^[a-f0-9]{40}$ ]] \
-            || [ "$(git rev-parse HEAD)" != "$BOOTSTRAP_COMMIT" ]; then
-            echo "::error::checkout del replay non coincide con la revisione del bootstrap"
+          if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]] \
+            || [ "$(git rev-parse HEAD)" != "$SOURCE_COMMIT" ]; then
+            echo "::error::checkout del replay non coincide con la revisione staged"
             exit 1
           fi
           git fetch --no-tags --depth=1 origin main
           current_main="$(git rev-parse FETCH_HEAD)"
-          if [ "$current_main" != "$BOOTSTRAP_COMMIT" ]; then
-            echo "::notice::main e' avanzata durante il bootstrap ($BOOTSTRAP_COMMIT -> $current_main); nessun replay stantio, il run del nuovo push riconciliera' la superficie"
+          if [ "$current_main" != "$SOURCE_COMMIT" ]; then
+            echo "::notice::main e' avanzata durante il backfill ($SOURCE_COMMIT -> $current_main); nessun replay stantio"
+            exit 0
+          fi
+          readiness="$RUNNER_TEMP/staged-replay-readiness.json"
+          node scripts/reconcile-section-pages.mjs --out "$readiness" --cap 1
+          if [ "$(jq -r 'if .skipped then "true" else "false" end' "$readiness")" = 'true' ] \
+            || [ "$(jq -r '.counts.missingPages' "$readiness")" != '0' ] \
+            || [ "$(jq -r '.counts.unknown' "$readiness")" != '0' ] \
+            || [ "$(jq -r '.counts.manifestUnknown' "$readiness")" != '0' ]; then
+            echo "::notice::replay API rimandato: la verifica globale rileva pagine mancanti o non verificabili"
             exit 0
           fi
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           if [ -z "$runtime_pat" ]; then
-            echo "::error::GITHUB_PAT_NANAKO was not loaded from Remote Config"
+            echo "::error::GITHUB_PAT_NANAKO non caricato da Remote Config"
             exit 1
           fi
           export GH_TOKEN="$runtime_pat"
-          gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main -f source_commit="$BOOTSTRAP_COMMIT"
+          gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main -f source_commit="$SOURCE_COMMIT"
 
       - name: Cleanup Firebase credentials
         if: always()

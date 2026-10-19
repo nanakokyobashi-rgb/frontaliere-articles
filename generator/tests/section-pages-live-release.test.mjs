@@ -559,7 +559,7 @@ test('publisher: SVG plain/XML identici consentono le route; il fallback HTML re
   }
 });
 
-test('publisher: una pagina nuova che riusa un asset trattenuto viene differita al replay', async () => {
+test('publisher: un 404 richiesto resta differito se un asset condiviso non è verificabile', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-held-page-'));
   const immutable = pageEntry('canton-ti', 'articoli-ticino/existing/index.html', 'article');
   const staged = pageEntry('canton-ti', 'articoli-ticino/new/index.html', 'article');
@@ -578,6 +578,7 @@ test('publisher: una pagina nuova che riusa un asset trattenuto viene differita 
       section: 'canton-ti',
       pages: [staged],
       immutablePages: [immutable],
+      requiredPagePaths: [staged.canonicalPath],
       snapshotPagesBeforeUpload: true,
       cdnUploads: [
         { local: 'public/images/shared.webp', key: 'images/shared.webp' },
@@ -606,16 +607,22 @@ test('publisher: una pagina nuova che riusa un asset trattenuto viene differita 
         if (url === staged.cdnUrl) {
           stagedProbeCalls++;
           events.push('snapshot:staged');
-          return { ok: false, status: 'HTTP 404' };
+          return stagedProbeCalls === 1
+            ? { ok: false, status: 'HTTP 404' }
+            : { ok: true, status: 200, body: `${stagedHtml}${CORPUS_ROUTE_OWNER_META_TAG}` };
+        }
+        if (url === staged.apexUrl) {
+          events.push('verify:staged-apex');
+          return { ok: true, status: 200, body: `${stagedHtml}${CORPUS_ROUTE_OWNER_META_TAG}` };
         }
         throw new Error(`URL inatteso: ${url}`);
       },
       assetProbeImpl: async () => ({ ok: false, status: 'HTTP 404' }),
     });
     assert.equal(result.failures, 0);
-    assert.equal(result.uploaded, 0, 'la pagina che riusa l’asset trattenuto non viene pubblicata');
+    assert.equal(result.uploaded, 0, 'il target resta assente finché l’asset condiviso non è verificato');
     assert.equal(result.deferredAssetPages, 1);
-    assert.equal(stagedProbeCalls, 1, 'la pagina nuova viene comunque inclusa nella fotografia pre-upload');
+    assert.equal(stagedProbeCalls, 1, 'il target differito viene fotografato ma non caricato');
     assert.ok(events.includes('asset-upload:images/new.webp'));
     assert.ok(!events.includes('asset-upload:images/shared.webp'));
     assert.ok(!events.includes('page-upload'));
