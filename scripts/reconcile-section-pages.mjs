@@ -186,6 +186,30 @@ async function getJson(url, fetchImpl) {
   return res.json();
 }
 
+/**
+ * Legge il registry candidato su Pages conservando la differenza fra 404
+ * (build-api non lo ha pubblicato, tipicamente per un gate Remote Config non
+ * verificato) e una risposta corrotta/non verificabile. Entrambi fermano il
+ * backfill, ma il report deve dire quale superficie manca.
+ */
+async function getJsonState(url, fetchImpl) {
+  try {
+    const res = await fetchWithRefTimeout(`${url}?_rcb=${Date.now()}`, { headers: { 'user-agent': UA } }, 30000, fetchImpl);
+    if (res.status === 404) {
+      releaseFetchWithRefTimeout(res);
+      return { state: 'absent', url, status: 404 };
+    }
+    if (!res.ok) {
+      const status = res.status;
+      releaseFetchWithRefTimeout(res);
+      return { state: 'unknown', url, status, reason: `HTTP ${status}` };
+    }
+    return { state: 'ok', url, status: res.status, value: await res.json() };
+  } catch (error) {
+    return { state: 'unknown', url, reason: error?.message ?? String(error) };
+  }
+}
+
 async function getText(url, fetchImpl) {
   const res = await fetchWithRefTimeout(`${url}?_rcb=${Date.now()}`, { headers: { 'user-agent': UA } }, 30000, fetchImpl);
   if (!res.ok) {
@@ -220,6 +244,16 @@ function unknownSitemapPlan(section, detail) {
 function sitemapFailureDetail(url, error) {
   const reason = String(error?.message ?? error);
   return reason.startsWith(`${url}:`) ? reason : `${url}: ${reason}`;
+}
+
+function skippedSurface({ code, reason, apiCommit = null, edgeCommit = null, url = null, status = null }) {
+  return {
+    skipped: reason,
+    skip: { code, reason, ...(url ? { url } : {}), ...(status === null ? {} : { status }) },
+    apiCommit,
+    edgeCommit,
+    sections: [],
+  };
 }
 
 /** HEAD con due tentativi; 405/501 ricadono su GET, 200 presente, 404 mancante. */
@@ -276,29 +310,56 @@ async function mapLimit(items, limit, fn) {
  * @returns {Promise<{ skipped: string | null, apiCommit: string | null, edgeCommit?: string | null, pendingEdgeFlip?: boolean, sections: ReturnType<typeof planSectionBackfill>[] }>}
  */
 export async function reconcile({ apiBase = API_BASE_DEFAULT, cap = 3, fetchImpl = fetch } = {}) {
-  const [manifest, catalog, slugs, candidateRegistry, edgeRegistry] = await Promise.all(
-    ['manifest.json', 'sections.json', 'slugs.json', 'edge/sections/registry.json'].map((name) => getJson(`${apiBase}/${name}`, fetchImpl)).concat(
+  const [manifest, catalog, slugs, candidateRegistryResult, edgeRegistry] = await Promise.all(
+    ['manifest.json', 'sections.json', 'slugs.json'].map((name) => getJson(`${apiBase}/${name}`, fetchImpl)).concat(
+      getJsonState(`${apiBase}/edge/sections/registry.json`, fetchImpl),
       getJson(`${CDN_BASE}/edge/sections/registry.json`, fetchImpl),
     ),
   );
-  if (!manifest?.commit || catalog?.commit !== manifest.commit || slugs?.commit !== manifest.commit || candidateRegistry?.commit !== manifest.commit) {
-    return {
-      skipped: 'superficie API a meta\' deploy: manifest, sections, slugs e registro edge candidato non portano lo stesso commit',
+  if (candidateRegistryResult.state === 'absent') {
+    return skippedSurface({
+      code: 'pages-registry-absent',
+      reason: 'registry edge Pages assente (build-api non ha dimostrato la configurazione Remote Config; backfill rimandato)',
       apiCommit: manifest?.commit ?? null,
       edgeCommit: edgeRegistry?.commit ?? null,
-      sections: [],
-    };
+      url: candidateRegistryResult.url,
+      status: candidateRegistryResult.status,
+    });
+  }
+  if (candidateRegistryResult.state !== 'ok') {
+    return skippedSurface({
+      code: 'pages-registry-unknown',
+      reason: `registry edge Pages non verificabile (${candidateRegistryResult.reason ?? 'risposta sconosciuta'}; backfill rimandato)`,
+      apiCommit: manifest?.commit ?? null,
+      edgeCommit: edgeRegistry?.commit ?? null,
+      url: candidateRegistryResult.url,
+      status: candidateRegistryResult.status ?? null,
+    });
+  }
+  const candidateRegistry = candidateRegistryResult.value;
+  if (!manifest?.commit || catalog?.commit !== manifest.commit || slugs?.commit !== manifest.commit || candidateRegistry?.commit !== manifest.commit) {
+    return skippedSurface({
+      code: 'pages-surface-mismatch',
+      reason: 'superficie API a meta\' deploy: manifest, sections, slugs e registro edge candidato non portano lo stesso commit',
+      apiCommit: manifest?.commit ?? null,
+      edgeCommit: edgeRegistry?.commit ?? null,
+    });
   }
   if (!validateEdgeSectionRegistry(candidateRegistry)) {
-    return {
-      skipped: 'registro edge candidato non valido o non leggibile: release API non dimostrata',
+    return skippedSurface({
+      code: 'pages-registry-invalid',
+      reason: 'registry edge Pages non valido: release API non dimostrata; backfill rimandato',
       apiCommit: manifest.commit,
       edgeCommit: edgeRegistry?.commit ?? null,
-      sections: [],
-    };
+    });
   }
   if (!validateEdgeSectionRegistry(edgeRegistry)) {
-    return { skipped: 'registro edge non valido o non leggibile: stato servito non dimostrato', apiCommit: manifest.commit, edgeCommit: edgeRegistry?.commit ?? null, sections: [] };
+    return skippedSurface({
+      code: 'edge-registry-invalid',
+      reason: 'registro edge non valido o non leggibile: stato servito non dimostrato',
+      apiCommit: manifest.commit,
+      edgeCommit: edgeRegistry?.commit ?? null,
+    });
   }
   const pendingEdgeFlip = edgeRegistry.commit !== manifest.commit;
   const catalogById = new Map((catalog.sections ?? []).map((entry) => [entry.id, entry]));

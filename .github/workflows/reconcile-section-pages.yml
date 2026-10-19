@@ -63,11 +63,34 @@ jobs:
         id: detect
         env:
           CAP_INPUT: ${{ inputs.cap }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
         run: |
           set -euo pipefail
           node scripts/reconcile-section-pages.mjs \
             --out "$RUNNER_TEMP/reconcile-sections.json" --cap "${CAP_INPUT:-3}"
+          source_commit="$(git rev-parse HEAD)"
+          current_main="$(gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"
+          if ! [[ "$source_commit" =~ ^[a-f0-9]{40}$ ]] || ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::HEAD del reconcile o HEAD corrente di main non valida"
+            exit 1
+          fi
+          if [ "$source_commit" != "$current_main" ]; then
+            echo "::notice::reconcile stantio: checkout $source_commit, main $current_main; nessun backfill o replay armato"
+            {
+              echo 'dispatch=0'
+              echo 'pending_edge_flip=false'
+              echo 'head_guard=false'
+            } >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           echo "dispatch=$(jq -r '.counts.dispatch' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
+          echo "pending_edge_flip=$(jq -r '.pendingEdgeFlip // false' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
+          echo "api_release_commit=$(jq -r '.apiCommit // empty' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
+          echo "source_commit=$source_commit" >> "$GITHUB_OUTPUT"
+          echo "unknown=$(jq -r '.counts.unknown' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
+          echo "manifest_unknown=$(jq -r '.counts.manifestUnknown' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
+          echo 'head_guard=true' >> "$GITHUB_OUTPUT"
 
       # Niente catena stretta: se l'innesco era a sua volta un dispatch (un
       # backfill di questo workflow, o un bootstrap manuale) si rileva e basta,
@@ -105,19 +128,66 @@ jobs:
         if: steps.mode.outputs.allow == 'true' && steps.arm.outputs.allow == 'true' && steps.detect.outputs.dispatch != '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PENDING_EDGE_FLIP: ${{ steps.detect.outputs.pending_edge_flip }}
+          API_RELEASE_COMMIT: ${{ steps.detect.outputs.api_release_commit }}
+          SOURCE_COMMIT: ${{ steps.detect.outputs.source_commit }}
         run: |
           set -euo pipefail
           fail=0
           while IFS=$'\t' read -r section ids; do
             [ -n "$section" ] || continue
             echo "── backfill $section ids=$ids"
-            if ! gh workflow run fast-publish-section.yml --repo "$GITHUB_REPOSITORY" --ref main \
-                 -f section="$section" -f article_ids="$ids" -f bootstrap=false -f dry_run=false; then
+            args=(
+              -f "section=$section"
+              -f "article_ids=$ids"
+              -f 'bootstrap=false'
+              -f 'dry_run=false'
+            )
+            if [ "$PENDING_EDGE_FLIP" = 'true' ]; then
+              args+=(
+                -f 'replay_api_after_publish=true'
+                -f "api_release_commit=$API_RELEASE_COMMIT"
+                -f "source_commit=$SOURCE_COMMIT"
+                -f "source_main_commit=$SOURCE_COMMIT"
+              )
+            fi
+            if ! gh workflow run fast-publish-section.yml --repo "$GITHUB_REPOSITORY" --ref main "${args[@]}"; then
               echo "::warning::dispatch fallito per $section — riprovera' il prossimo giro"
               fail=1
             fi
           done < <(jq -r '.sections[] | select(.dispatch) | [.section, (.selected | tojson)] | @tsv' "$RUNNER_TEMP/reconcile-sections.json")
           [ "$fail" = "0" ] || exit 1
+
+      - name: Replay API when the edge flip has no page backfill
+        if: >-
+          steps.mode.outputs.allow == 'true' &&
+          steps.arm.outputs.allow == 'true' &&
+          steps.detect.outputs.pending_edge_flip == 'true' &&
+          steps.detect.outputs.dispatch == '0' &&
+          steps.detect.outputs.unknown == '0' &&
+          steps.detect.outputs.manifest_unknown == '0' &&
+          steps.detect.outputs.head_guard == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_COMMIT: ${{ steps.detect.outputs.source_commit }}
+        run: |
+          set -euo pipefail
+          if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::HEAD corrente non valida per il replay API bounded"
+            exit 1
+          fi
+          current_main="$(gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"
+          if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::HEAD corrente di main non valida per il replay API bounded"
+            exit 1
+          fi
+          if [ "$current_main" != "$SOURCE_COMMIT" ]; then
+            echo "::notice::main e' avanzata dopo la detection ($SOURCE_COMMIT -> $current_main); nessun replay API stantio"
+            exit 0
+          fi
+          echo "::notice::nessun backfill pagina necessario: replay API bounded sulla HEAD $SOURCE_COMMIT"
+          gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main -f source_commit="$SOURCE_COMMIT"
 
       - name: Report
         if: always()
@@ -125,4 +195,4 @@ jobs:
           set -euo pipefail
           r="$RUNNER_TEMP/reconcile-sections.json"
           [ -s "$r" ] || exit 0
-          jq -r '"sezioni live \(.counts.sections), da ripubblicare \(.counts.dispatch), articoli mancanti \(.counts.missing), oltre il cap \(.counts.leftover), orfane \(.counts.orphaned), manifest non verificabili \(.counts.manifestUnknown), non verificabili \(.counts.unknown)"' "$r"
+          jq -r 'if .skip then "skip \(.skip.code): \(.skip.reason)" else "sezioni live \(.counts.sections), da ripubblicare \(.counts.dispatch), articoli mancanti \(.counts.missing), oltre il cap \(.counts.leftover), orfane \(.counts.orphaned), manifest non verificabili \(.counts.manifestUnknown), non verificabili \(.counts.unknown)" end' "$r"

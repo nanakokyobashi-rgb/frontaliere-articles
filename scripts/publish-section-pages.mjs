@@ -2068,6 +2068,7 @@ export async function main(
   fs.mkdirSync(distDir, { recursive: true });
   const ids = args.bootstrap ? sourceRegistryIdsImpl(ROOT_DIR, section) : args.ids;
   const publishing = args.publish && !args.dryRun;
+  const allowDeferredLiveRelease = process.env.ALLOW_DEFERRED_LIVE_RELEASE === 'true';
   const publisherCommit = publishing ? publisherCommitImpl() : null;
   const expectedMainHead = process.env.EXPECTED_MAIN_HEAD || publisherCommit;
   const assertMainFreshImpl = async () => {
@@ -2424,14 +2425,17 @@ export async function main(
   if (summary.published.failures === 0 && deferredLiveRelease) {
     summary.published.manifestDeferred = true;
     if (!args.bootstrap) {
-      summary.published.failures = 1;
-      summary.published.deferredReason = 'release API/edge non verificata: il replay deve ritentare prima di chiudere verde';
+      summary.published.deferredForReplay = allowDeferredLiveRelease;
+      summary.published.deferredReason = 'release API/edge non verificata: il replay deve riallineare il registry prima di pubblicare il manifest';
+      if (!allowDeferredLiveRelease) summary.published.failures = 1;
       console.log(
         `::notice::[${LOG}] manifest edge ${section} differito: ` +
-        'il run resta rosso finché il replay non verifica la release API/edge',
+        (allowDeferredLiveRelease
+          ? 'backfill staged completato; il replay API deve verificare la release prima del manifest'
+          : 'il run resta rosso finché il replay non verifica la release API/edge'),
       );
       writeSummary();
-      return 1;
+      return summary.published.failures ? 1 : 0;
     }
     writeSummary();
     return 0;

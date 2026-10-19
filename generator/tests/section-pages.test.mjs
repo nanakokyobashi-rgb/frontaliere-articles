@@ -271,6 +271,63 @@ test('publisher: bootstrap live senza manifest non arma il percorso differito', 
   }
 });
 
+test('publisher: uno staged live bootstrap=false diventa verde solo col replay API armato', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-staged-live-'));
+  const publishedDoc = pageManifestFromPages({ section: 'canton-ti', commit: 'published', pages: [] });
+  let publishOptions = null;
+  let manifestCalls = 0;
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  const previousAllow = process.env.ALLOW_DEFERRED_LIVE_RELEASE;
+  try {
+    process.env.ALLOW_DEFERRED_LIVE_RELEASE = 'true';
+    console.log = () => {};
+    console.error = () => {};
+    const code = await main(
+      ['--section', 'canton-ti', '--ids', '[]', '--out', path.join(fixtureRoot, 'dist'), '--summary', path.join(fixtureRoot, 'summary.json'), '--publish'],
+      {
+        parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
+        fetchPageManifestImpl: async () => ({ state: 'ok', doc: publishedDoc }),
+        publishedStatusImpl: async () => 'live',
+        publishedApiReleaseCommitImpl: async () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        publishedReleaseReadyImpl: async () => ({ ok: false, reason: 'edge in transizione' }),
+        currentMainHeadImpl: () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
+        renderSectionArticlePipelineImpl: async () => ({
+          entries: [],
+          hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
+          downloadedImageKeys: [],
+          imageFetchFailures: [],
+          imagePostcondition: {},
+          aggregatePagesAllowed: false,
+        }),
+        articleReleaseSnapshotImpl: () => [],
+        publishImpl: async (options) => {
+          publishOptions = options;
+          return { failures: 0, uploaded: 0, deleted: 0, status: 'live' };
+        },
+        publishPageManifestImpl: () => {
+          manifestCalls++;
+          return true;
+        },
+      },
+    );
+    assert.equal(code, 0);
+    assert.ok(publishOptions, 'lo staged deve caricare il backfill prima del replay');
+    assert.equal(manifestCalls, 0, 'il manifest resta differito fino al replay API');
+    const summary = JSON.parse(readFileSync(path.join(fixtureRoot, 'summary.json'), 'utf8'));
+    assert.equal(summary.deferredLiveRelease, true);
+    assert.equal(summary.published.manifestDeferred, true);
+    assert.equal(summary.published.deferredForReplay, true);
+  } finally {
+    if (previousAllow === undefined) delete process.env.ALLOW_DEFERRED_LIVE_RELEASE;
+    else process.env.ALLOW_DEFERRED_LIVE_RELEASE = previousAllow;
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('publisher: lo staging bootstrap live carica solo chiavi HTML nuove e snapshotta prima dell upload', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-bootstrap-stage-'));
   const outDir = path.join(fixtureRoot, 'dist');
@@ -2771,6 +2828,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /checkout non coincide con source_commit/);
   assert.match(wf, /inputs\.source_commit/);
   assert.match(wf, /source_main_commit:/);
+  assert.match(wf, /replay_api_after_publish:/);
+  assert.match(wf, /ALLOW_DEFERRED_LIVE_RELEASE: \$\{\{ needs\.resolve\.outputs\.replay_api_after_publish \}\}/);
   assert.match(wf, /EXPECTED_MAIN_HEAD: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_main_commit \|\| github\.event\.after \|\| github\.sha \}\}/);
   assert.match(wf, /-f source_main_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /-f source_main_commit="\$current_main"/);
@@ -2784,10 +2843,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /remove_stale_canton_rss_feeds/);
   assert.match(wf, /API_RELEASE_COMMIT: \$\{\{ inputs\.api_release_commit \}\}/);
   assert.match(wf, /GITHUB_PAT_NANAKO assente/);
-  assert.match(wf, /Verify bootstrap revision is still main/);
-  assert.match(wf, /BOOTSTRAP_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
-  assert.match(wf, /main e' avanzata da \$BOOTSTRAP_COMMIT a \$current_main/);
-  assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$BOOTSTRAP_COMMIT"/);
+  assert.match(wf, /Verify staged release revision is still main/);
+  assert.match(wf, /SOURCE_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(wf, /main e' avanzata da \$SOURCE_COMMIT a \$current_main/);
+  assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
   assert.match(wf, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(wf, /replay workflow_run redispatchato prima degli upload/);
   assert.match(wf, /id: push_range[\s\S]*gh api --paginate --slurp "repos\/\$REPO\/commits\/\$WORKFLOW_RUN_HEAD_SHA\/events"/);
@@ -2827,25 +2886,25 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(liveRetryLoop, /if RETRY_CMD_ATTEMPTS=2 bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/);
   assert.match(wf, /PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
   assert.match(wf, /PUSH_AFTER: \$\{\{ needs\.resolve\.outputs\.push_after \}\}/);
-  const bootstrapReplay = wf.slice(wf.indexOf('  replay-api-after-bootstrap:'));
-  assert.match(bootstrapReplay, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
-  assert.match(bootstrapReplay, /BOOTSTRAP_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
-  assert.match(bootstrapReplay, /Redispatch bootstrap on current main after stale replay/);
-  assert.match(bootstrapReplay, /TARGET_MATRIX: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/);
-  const replayDispatchStep = bootstrapReplay.slice(
-    bootstrapReplay.indexOf('- name: Replay publish-api after bootstrap lock release'),
+  const stagedReplay = wf.slice(wf.indexOf('  replay-api-after-staged-release:'));
+  assert.match(stagedReplay, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(stagedReplay, /SOURCE_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(stagedReplay, /Redispatch staged backfill on current main after stale replay/);
+  assert.match(stagedReplay, /TARGET_MATRIX: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/);
+  const replayDispatchStep = stagedReplay.slice(
+    stagedReplay.indexOf('- name: Replay publish-api after staged release'),
   );
   assert.match(replayDispatchStep, /git fetch --no-tags --depth=1 origin main/);
-  const mainRevisionGuard = replayDispatchStep.indexOf('if [ "$current_main" != "$BOOTSTRAP_COMMIT" ]');
+  const mainRevisionGuard = replayDispatchStep.indexOf('if [ "$current_main" != "$SOURCE_COMMIT" ]');
   const apiDispatch = replayDispatchStep.indexOf('gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main');
   assert.ok(
     mainRevisionGuard >= 0 && apiDispatch > mainRevisionGuard,
-    'il replay API deve saltare il dispatch se main e\' avanzata dal bootstrap',
+    'il replay API deve saltare il dispatch se main e\' avanzata dal backfill',
   );
-  assert.match(replayDispatchStep, /-f source_commit="\$BOOTSTRAP_COMMIT"/);
-  const staleRecoveryStep = bootstrapReplay.slice(
-    bootstrapReplay.indexOf('- name: Redispatch bootstrap on current main after stale replay'),
-    bootstrapReplay.indexOf('- name: Replay publish-api after bootstrap lock release'),
+  assert.match(replayDispatchStep, /-f source_commit="\$SOURCE_COMMIT"/);
+  const staleRecoveryStep = stagedReplay.slice(
+    stagedReplay.indexOf('- name: Redispatch staged backfill on current main after stale replay'),
+    stagedReplay.indexOf('- name: Replay publish-api after staged release'),
   );
   assert.match(staleRecoveryStep, /if: steps\.replay_freshness\.outputs\.fresh == 'false'/);
   assert.match(staleRecoveryStep, /gh workflow run fast-publish-section\.yml --repo "\$REPOSITORY" --ref main/);
@@ -3065,14 +3124,14 @@ test('reconcile: il manifest individua una pagina articolo ritirata o con slug v
   );
 });
 
-function fakeFetch({ commit = 'abc1234', sectionsCommit = commit, candidateCommit = commit, edgeCommit = commit, live = true, missing = new Set(), broken = new Set(), pageManifest = null }) {
+function fakeFetch({ commit = 'abc1234', sectionsCommit = commit, candidateCommit = commit, candidateStatus = 200, candidateDocument = null, edgeCommit = commit, live = true, missing = new Set(), broken = new Set(), pageManifest = null }) {
   const docs = {
     'manifest.json': { commit },
     'sections.json': { commit: sectionsCommit, sections: [CATALOG_TI, { id: 'canton-gr', paths: {} }] },
     'slugs.json': { commit, cantons: { 'canton-ti': SLUGS_TI } },
     'canton-articles.json': [{ id: 'a', date: '2026-10-01', section: 'canton-ti' }, { id: 'b', date: '2026-10-02', section: 'canton-ti' }],
   };
-  const candidateRegistry = { schema: 1, commit: candidateCommit, sections: { 'canton-ti': { status: live ? 'live' : 'draft' } } };
+  const candidateRegistry = candidateDocument ?? { schema: 1, commit: candidateCommit, sections: { 'canton-ti': { status: live ? 'live' : 'draft' } } };
   const edgeRegistry = { schema: 1, commit: edgeCommit, sections: { 'canton-ti': { status: live ? 'live' : 'draft' } } };
   const calls = [];
   const impl = async (url, init = {}) => {
@@ -3084,7 +3143,7 @@ function fakeFetch({ commit = 'abc1234', sectionsCommit = commit, candidateCommi
       return { status: missing.has(p) ? 404 : 200, ok: !missing.has(p) };
     }
     if (clean === 'https://api.test/edge/sections/registry.json') {
-      return { ok: true, status: 200, json: async () => candidateRegistry };
+      return { ok: candidateStatus >= 200 && candidateStatus < 300, status: candidateStatus, json: async () => candidateRegistry };
     }
     if (clean.endsWith('/edge/sections/registry.json')) return { ok: true, status: 200, json: async () => edgeRegistry };
     if (clean.endsWith('/edge/sections/_page-manifests/canton-ti.json')) {
@@ -3111,7 +3170,22 @@ test('reconcile: solo le sezioni live, solo i 404, e mai su una superficie a met
 
   const tornCandidate = await reconcile({ apiBase: 'https://api.test', fetchImpl: fakeFetch({ candidateCommit: 'def5678' }).impl });
   assert.match(tornCandidate.skipped, /registro edge candidato non portano lo stesso commit/);
+  assert.equal(tornCandidate.skip.code, 'pages-surface-mismatch');
   assert.deepEqual(tornCandidate.sections, []);
+
+  const absentCandidate = await reconcile({ apiBase: 'https://api.test', fetchImpl: fakeFetch({ candidateStatus: 404 }).impl });
+  assert.equal(absentCandidate.skip.code, 'pages-registry-absent');
+  assert.equal(absentCandidate.skip.status, 404);
+  assert.match(absentCandidate.skipped, /Remote Config/);
+  assert.deepEqual(absentCandidate.sections, []);
+
+  const invalidCandidate = await reconcile({
+    apiBase: 'https://api.test',
+    fetchImpl: fakeFetch({ candidateDocument: { schema: 1, commit: 'abc1234', sections: { 'canton-ti': { status: 'unknown' } } } }).impl,
+  });
+  assert.equal(invalidCandidate.skip.code, 'pages-registry-invalid');
+  assert.match(invalidCandidate.skipped, /non valido/);
+  assert.deepEqual(invalidCandidate.sections, []);
 
   const gap = fakeFetch({ missing: new Set(['/en/ticino-articles/a-en/', '/articoli-ticino/b-it/']), broken: new Set(['/de/tessin-artikel/a-de/']) });
   const report = await reconcile({ apiBase: 'https://api.test', cap: 1, fetchImpl: gap.impl });
@@ -3160,7 +3234,16 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   const articleWf = read('.github/workflows/reconcile-article-shards.yml');
   assert.match(wf, /workflows: \[fast-publish-section\]/);
   assert.match(wf, /node scripts\/reconcile-section-pages\.mjs/);
-  assert.match(wf, /gh workflow run fast-publish-section\.yml[^\n]*\\\n\s+-f section="\$section" -f article_ids="\$ids" -f bootstrap=false -f dry_run=false/);
+  assert.match(wf, /args=\([\s\S]*-f "section=\$section"[\s\S]*-f "article_ids=\$ids"[\s\S]*'bootstrap=false'[\s\S]*'dry_run=false'/);
+  assert.match(wf, /-f 'replay_api_after_publish=true'/);
+  assert.match(wf, /-f "api_release_commit=\$API_RELEASE_COMMIT"/);
+  assert.match(wf, /-f "source_commit=\$SOURCE_COMMIT"/);
+  assert.match(wf, /Replay API when the edge flip has no page backfill/);
+  assert.match(wf, /current_main="\$\(gh api "repos\/\$REPOSITORY\/git\/ref\/heads\/main" --jq '\.object\.sha'\)"/);
+  assert.match(wf, /main e' avanzata dopo la detection \(\$SOURCE_COMMIT -> \$current_main\)/);
+  assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
+  assert.match(wf, /pending_edge_flip=\$\(jq -r '\.pendingEdgeFlip \/\/ false'/);
+  assert.match(read('scripts/reconcile-section-pages.mjs'), /pages-registry-absent/);
   assert.match(wf, /github\.event\.workflow_run\.event \}\}" = "workflow_dispatch"/);
   assert.match(wf, /actions: write/);
   for (const reconcileWorkflow of [wf, articleWf]) {
