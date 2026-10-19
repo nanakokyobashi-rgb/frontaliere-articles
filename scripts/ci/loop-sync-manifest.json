@@ -6280,6 +6280,16 @@
       }
     },
     {
+      "path": "generator/scripts/backfill-nav-link-labels.mjs",
+      "mode": "corpus-only",
+      "reason": "Script manuale e deterministico per bonificare le label `nav:` nei body tradotti gia' pubblicati. Usa la mappa canonica del corpus e scrive solo i sorgenti dei body; il sito consuma il risultato via JSON HTTP e non esegue questo backfill.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-19"
+      }
+    },
+    {
       "path": "generator/scripts/lib/first-name-recognition.mjs",
       "sitePath": "scripts/lib/first-name-recognition.mjs",
       "mode": "identical",

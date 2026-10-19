@@ -74,7 +74,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "insurance"
   },
   "assicurazione lamal": {
-    "de": "Krankenversicherung KVG",
+    "de": "KVG-Versicherung",
     "fr": "assicurazione lamal",
     "en": "LAMal health insurance"
   },
@@ -89,7 +89,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "compulsory health insurance (LAMal)"
   },
   "assicurazione malattia lamal": {
-    "de": "Krankenversicherung LAMal",
+    "de": "Krankenversicherung (KVG)",
     "fr": "assurance maladie LAMal",
     "en": "LAMal health insurance"
   },
@@ -179,7 +179,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "hiring companies"
   },
   "aziende che assumono frontalieri": {
-    "de": "Unternehmen überprüfen, die Grenzgänger einstellen",
+    "de": "Unternehmen, die Grenzgänger einstellen",
     "fr": "entreprises qui recrutent des frontaliers",
     "en": "companies hiring cross-border workers"
   },
@@ -334,7 +334,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "health insurance calculator"
   },
   "calcolatore avs": {
-    "de": "AVS-Rechner",
+    "de": "AHV-Rechner",
     "fr": "calculateur AVS",
     "en": "AVS calculator"
   },
@@ -344,7 +344,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "AVS and LPP calculator"
   },
   "calcolatore avs/lpp": {
-    "de": "AVS/LPP-Rechner",
+    "de": "AHV/BVG-Rechner",
     "fr": "calculateur AVS/LPP",
     "en": "AVS/LPP calculator"
   },
@@ -616,7 +616,7 @@ const NAV_LINK_LABELS_RAW = {
   "calcolatore delle imposte per frontalieri": {
     "de": "Steuerrechner für Grenzgänger",
     "fr": "calculateur des impôts pour frontaliers",
-    "en": "calculator for frontier workers' taxes"
+    "en": "tax calculator for cross-border workers"
   },
   "calcolatore delle opportunità di volontariato": {
     "de": "Berechner für Freiwilligenmöglichkeiten",
@@ -1269,9 +1269,9 @@ const NAV_LINK_LABELS_RAW = {
     "en": "net salary calculator"
   },
   "calcolatore di stipendio netto frontaliere": {
-    "de": "Nettolohnrechner für Frontalier",
+    "de": "Nettolohnrechner für Grenzgänger",
     "fr": "calculateur de salaire net frontalier",
-    "en": "border worker net salary calculator"
+    "en": "net salary calculator for cross-border workers"
   },
   "calcolatore di sussidi": {
     "de": "Zuschussrechner",
@@ -1419,7 +1419,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "Irpef calculator"
   },
   "calcolatore lamal": {
-    "de": "LAMal-Rechner",
+    "de": "KVG-Rechner",
     "fr": "calculateur LAMal",
     "en": "LAMal calculator"
   },
@@ -1454,7 +1454,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "pension calculator"
   },
   "calcolatore pensione avs/lpp": {
-    "de": "AVS/BVG-Rentenrechner",
+    "de": "AHV/BVG-Rentenrechner",
     "fr": "calculateur de retraite AVS/LPP",
     "en": "AVS/LPP pension calculator"
   },
@@ -1469,7 +1469,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "pension calculator"
   },
   "calcolatore per frontalieri": {
-    "de": "Grenzarbeiter-Rechner",
+    "de": "Grenzgänger-Rechner",
     "fr": "calculateur pour frontaliers",
     "en": "cross-border calculator"
   },
@@ -1484,7 +1484,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "insurance premium calculator"
   },
   "calcolatore premi lamal": {
-    "de": "LAMal-Prämienrechner",
+    "de": "KVG-Prämienrechner",
     "fr": "calculateur de primes LAMal",
     "en": "LAMal premium calculator"
   },
@@ -1509,7 +1509,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "salary and tax calculator"
   },
   "calcolatore stipendi frontalieri": {
-    "de": "Frontalier-Stipendengerechner",
+    "de": "Gehaltsrechner für Grenzgänger",
     "fr": "calculateur de salaires frontaliers",
     "en": "cross-border salary calculator"
   },
@@ -1704,9 +1704,9 @@ const NAV_LINK_LABELS_RAW = {
     "en": "CHF-EUR exchange comparator"
   },
   "cambio chf-eur": {
-    "de": "CHF-EUR-Wechseloptionen",
-    "fr": "change CHF-EUR",
-    "en": "CHF-EUR exchange options"
+    "de": "CHF-EUR-Wechselkurs",
+    "fr": "taux de change CHF-EUR",
+    "en": "CHF-EUR exchange rate"
   },
   "cambio valuta": {
     "de": "Währungsrechner",
@@ -1729,7 +1729,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "health insurance"
   },
   "cassa malati (lamal)": {
-    "de": "obligatorischen Krankenkasse (KVG)",
+    "de": "obligatorische Krankenkasse (KVG)",
     "fr": "assurance maladie (LAMal)",
     "en": "health insurance (LAMal)"
   },
@@ -1779,7 +1779,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "insurance comparator"
   },
   "comparatore assicurazioni lamal": {
-    "de": "LAMal-Versicherungsvergleich",
+    "de": "KVG-Versicherungsvergleich",
     "fr": "comparateur d'assurances LAMal",
     "en": "LAMal Insurance Comparator"
   },
@@ -1909,7 +1909,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "exchange rate comparator"
   },
   "comparatore di cambio eur/chf": {
-    "de": "Wechselkursvergleicher EUR/CHF",
+    "de": "Wechselkursvergleich EUR/CHF",
     "fr": "comparateur de change EUR/CHF",
     "en": "EUR/CHF exchange rate comparator"
   },
@@ -2099,7 +2099,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "tax comparator"
   },
   "comparatore lamal": {
-    "de": "LAMal-Vergleich",
+    "de": "KVG-Vergleich",
     "fr": "comparateur LAMal",
     "en": "LAMal comparator"
   },
@@ -2119,17 +2119,17 @@ const NAV_LINK_LABELS_RAW = {
     "en": "permit comparator"
   },
   "comparatore permessi g vs b": {
-    "de": "Vergleicher G- vs. B-Bewilligung",
+    "de": "Vergleich der G- und B-Bewilligungen",
     "fr": "comparateur permis G vs B",
     "en": "comparator G vs B permits"
   },
   "comparatore permesso g vs b": {
-    "de": "G-Bewilligung-Vergleich",
+    "de": "Vergleich der G- und B-Bewilligungen",
     "fr": "comparateur Permis G vs B",
     "en": "G Permit vs B Permit comparator"
   },
   "comparatore ristorni": {
-    "de": "Rückerstattungsvergleicher",
+    "de": "Vergleich der Rückerstattungen",
     "fr": "comparateur de remboursements",
     "en": "refund comparator"
   },
@@ -2214,12 +2214,12 @@ const NAV_LINK_LABELS_RAW = {
     "en": "comparison of taxes between Ticino and Italy"
   },
   "confronto lamal e cassa malati": {
-    "de": "confronto lamal e cassa malati",
-    "fr": "confronto lamal e cassa malati",
-    "en": "confronto lamal e cassa malati"
+    "de": "KVG- und Krankenkassenvergleich",
+    "fr": "comparaison LAMal et caisse-maladie",
+    "en": "LAMal and health insurance comparison"
   },
   "confronto lamal vs cmi": {
-    "de": "LAMal vs. CMI Vergleich",
+    "de": "KVG vs. CMI im Vergleich",
     "fr": "comparateur LAMal vs CMI",
     "en": "LAMal vs CMI comparison"
   },
@@ -2491,7 +2491,7 @@ const NAV_LINK_LABELS_RAW = {
   "frontaliere": {
     "de": "Grenzgänger",
     "fr": "frontalier",
-    "en": "cross-border workers"
+    "en": "cross-border worker"
   },
   "frontaliere con permesso g": {
     "de": "Grenzgänger mit G-Berechtigung",
@@ -2554,7 +2554,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "permits guide"
   },
   "guida ai permessi di lavoro": {
-    "de": "Arbeitsbewilligungsführer",
+    "de": "Leitfaden zu Arbeitsbewilligungen",
     "fr": "guide des permis de travail",
     "en": "work permit guide"
   },
@@ -2564,22 +2564,22 @@ const NAV_LINK_LABELS_RAW = {
     "en": "guide to work permits in Ticino"
   },
   "guida ai permessi di soggiorno": {
-    "de": "Anleitung zu Aufenthaltsbewilligungen",
+    "de": "Leitfaden zu Aufenthaltsbewilligungen",
     "fr": "guide des permis de séjour",
     "en": "guide to residence permits"
   },
   "guida ai permessi frontalieri": {
-    "de": "Anleitung für Frontaliergenehmigungen",
+    "de": "Leitfaden zu Grenzgängerbewilligungen",
     "fr": "guide aux permis frontaliers",
-    "en": "cross-border permits guide"
+    "en": "guide to cross-border worker permits"
   },
   "guida ai ristorni": {
-    "de": "Rückerstattungsanleitung",
-    "fr": "guide aux retours",
+    "de": "Leitfaden zu den Rückerstattungen",
+    "fr": "guide des ristournes",
     "en": "guide to refunds"
   },
   "guida ai ristorni frontalieri": {
-    "de": "Anleitung zu den Grenzübergangsgrenzen",
+    "de": "Leitfaden zu den Rückerstattungen für Grenzgänger",
     "fr": "guide aux remboursements frontaliers",
     "en": "guide to cross-border refunds"
   },
@@ -2819,7 +2819,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "guida lamal e cassa malati"
   },
   "guida lamal per frontalieri": {
-    "de": "LAMal-Leitfaden für Grenzgänger",
+    "de": "KVG-Leitfaden für Grenzgänger",
     "fr": "guide LAMal pour frontaliers",
     "en": "LAMal guide for cross-border workers"
   },
@@ -2974,7 +2974,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "LAMal"
   },
   "lamal (assicurazione malattia obbligatoria)": {
-    "de": "KBVG (obligatorische Krankenpflegeversicherung)",
+    "de": "KVG (obligatorische Krankenpflegeversicherung)",
     "fr": "LAMal (assurance maladie obligatoire)",
     "en": "LAMal (mandatory health insurance)"
   },
@@ -2984,22 +2984,22 @@ const NAV_LINK_LABELS_RAW = {
     "en": "LAMal (Swiss health insurance)"
   },
   "lamal assicurazione malattia": {
-    "de": "KVG Krankenversicherung",
+    "de": "KVG-Krankenversicherung",
     "fr": "LAMal assurance-maladie",
     "en": "LAMal health insurance"
   },
   "lamal e assicurazione malattia": {
-    "de": "LAMal- und Krankenversicherungsoptionen",
+    "de": "KVG und Krankenversicherung",
     "fr": "LAMal et assurance maladie",
     "en": "LAMal and health insurance"
   },
   "lamal e cassa malati": {
     "de": "KVG und Krankenkasse",
     "fr": "LAMal et caisse-maladie",
-    "en": "KVG/LAMal and health insurance"
+    "en": "LAMal and health insurance"
   },
   "lamal svizzera": {
-    "de": "LAMal Schweiz",
+    "de": "KVG Schweiz",
     "fr": "LAMal Suisse",
     "en": "Swiss LAMal"
   },
@@ -3009,12 +3009,12 @@ const NAV_LINK_LABELS_RAW = {
     "en": "LAMal/health insurance"
   },
   "lamal/cmi": {
-    "de": "LAMal/CMI",
+    "de": "KVG/CMI",
     "fr": "LAMal/CMI",
     "en": "LAMal/CMI"
   },
   "lamal/cmi assicurazione malattia": {
-    "de": "KVG/KVK Krankenversicherung",
+    "de": "KVG/CMI-Krankenversicherung",
     "fr": "LAMal/CMI assurance maladie",
     "en": "lamal/cmi assicurazione malattia"
   },
@@ -3301,15 +3301,15 @@ const NAV_LINK_LABELS_RAW = {
   "permessi frontalieri": {
     "de": "Grenzgängergenehmigungen",
     "fr": "permis frontaliers",
-    "en": "frontier permits"
+    "en": "cross-border worker permits"
   },
   "permesso": {
-    "de": "Arbeitsgenehmigungs",
+    "de": "Bewilligung",
     "fr": "permis",
     "en": "permit"
   },
   "permesso compare": {
-    "de": "Permit Compare",
+    "de": "Bewilligungsvergleich",
     "fr": "comparateur de permis",
     "en": "permit compare"
   },
@@ -3329,7 +3329,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "G and B permits"
   },
   "permesso g vs b": {
-    "de": "Anleitung",
+    "de": "Vergleich der G- und B-Bewilligungen",
     "fr": "permis G vs B",
     "en": "G permit vs B permit"
   },
@@ -3389,7 +3389,7 @@ const NAV_LINK_LABELS_RAW = {
     "en": "work in Switzerland"
   },
   "premi lamal delle casse malati": {
-    "de": "LAMal-Prämien der Krankenkassen",
+    "de": "KVG-Prämien der Krankenkassen",
     "fr": "primes LAMal",
     "en": "LAMal health insurance premiums"
   },
@@ -3419,9 +3419,9 @@ const NAV_LINK_LABELS_RAW = {
     "en": "Professional pension"
   },
   "previdenza professionale lpp": {
-    "de": "Rentenplaner",
-    "fr": "planificateur retraite",
-    "en": "pension planner"
+    "de": "berufliche Vorsorge (BVG)",
+    "fr": "prévoyance professionnelle (LPP)",
+    "en": "occupational pension (LPP)"
   },
   "previdenza sociale": {
     "de": "Altersvorsorge‐",
@@ -3465,8 +3465,8 @@ const NAV_LINK_LABELS_RAW = {
   },
   "ristorni per frontalieri": {
     "de": "Grenzgänger-Rückerstattungen",
-    "fr": "compensations pour frontaliers",
-    "en": "commuter refunds"
+    "fr": "ristournes pour les frontaliers",
+    "en": "tax refunds for cross-border workers"
   },
   "ristorni ticino-italia": {
     "de": "Rückerstattungen Tessin-Italien",
@@ -3520,7 +3520,7 @@ const NAV_LINK_LABELS_RAW = {
   },
   "scopri come verificare le offerte di lavoro in ticino che assumono frontalieri": {
     "de": "Erfahre, wie du Stellenangebote im Tessin für Grenzgänger prüfst",
-    "fr": "découvrez comment vérifier les offres d’emploi au Tessin pour frontaliers",
+    "fr": "découvrez comment vérifier les offres d’emploi au Tessin qui recrutent des frontaliers",
     "en": "discover how to check job offers in Ticino that hire cross-border workers"
   },
   "scopri di più": {
@@ -3530,7 +3530,7 @@ const NAV_LINK_LABELS_RAW = {
   },
   "scopri di più sui vantaggi fiscali per i frontalieri in ticino": {
     "de": "Erfahren Sie mehr über die steuerlichen Vorteile für Grenzgänger im Tessin",
-    "fr": "Découvrez-en plus sur les avantages fiscaux pour les frontaliers en Suisse",
+    "fr": "Découvrez-en plus sur les avantages fiscaux pour les frontaliers au Tessin",
     "en": "Learn more about the tax benefits for cross-border workers in Ticino"
   },
   "scopri di più sul calcolatore di stipendio": {
@@ -3760,7 +3760,7 @@ const NAV_LINK_LABELS_RAW = {
   },
   "tasso di cambio chf/eur": {
     "de": "CHF/EUR-Wechselkurs",
-    "fr": "taux CHF/EUR",
+    "fr": "taux de change CHF/EUR",
     "en": "CHF/EUR exchange rate"
   },
   "tax-return": {
@@ -4115,7 +4115,7 @@ Object.assign(NAV_LINK_LABELS_RAW, {
     "en": "health insurance comparison"
   },
   "confronto lamal e cassa malati": {
-    "de": "LAMal- und Krankenkassenvergleich",
+    "de": "KVG- und Krankenkassenvergleich",
     "fr": "comparaison LAMal et caisse-maladie",
     "en": "LAMal and health insurance comparison"
   },
@@ -4253,7 +4253,7 @@ Object.assign(NAV_LINK_LABELS_RAW, {
     "en": "SUPSI guidelines"
   },
   "assicurazione lamal": {
-    "de": "LAMal-Versicherung",
+    "de": "KVG-Versicherung",
     "fr": "assurance LAMal",
     "en": "LAMal insurance"
   },
@@ -4293,7 +4293,7 @@ Object.assign(NAV_LINK_LABELS_RAW, {
     "en": "guide to cross-border unemployment"
   },
   "guida lamal e cassa malati": {
-    "de": "Leitfaden zu LAMal und Krankenversicherung",
+    "de": "Leitfaden zu KVG und Krankenversicherung",
     "fr": "guide LAMal et caisse-maladie",
     "en": "LAMal and health insurance guide"
   },
@@ -4318,7 +4318,7 @@ Object.assign(NAV_LINK_LABELS_RAW, {
     "en": "learn more about the cost of living in Switzerland"
   },
   "secondo pilastro lpp": {
-    "de": "zweite Säule LPP",
+    "de": "zweite Säule BVG",
     "fr": "deuxième pilier LPP",
     "en": "second pillar LPP"
   },
@@ -4431,7 +4431,7 @@ Object.assign(NAV_LINK_LABELS_RAW, {
     "en": "tax refunds"
   },
   "lamal/cmi assicurazione malattia": {
-    "de": "LAMal/CMI-Krankenversicherung",
+    "de": "KVG/CMI-Krankenversicherung",
     "fr": "assurance maladie LAMal/CMI",
     "en": "LAMal/CMI health insurance"
   },
@@ -4586,7 +4586,7 @@ Object.assign(NAV_LINK_LABELS_RAW, {
     "en": "Simulate your pension"
   },
   "premi lamal delle casse malati": {
-    "de": "LAMal-Prämien der Krankenkassen",
+    "de": "KVG-Prämien der Krankenkassen",
     "fr": "primes LAMal des caisses-maladie",
     "en": "LAMal health insurance premiums"
   },
