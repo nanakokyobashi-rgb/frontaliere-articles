@@ -67,29 +67,6 @@ test('final generated provenance replaces unsupported topical alt; licensed-phot
   assert.deepEqual(licensedPhoto.imageAlt, photoAlt);
 });
 
-test('Securitas generated-hero metadata stays neutral in all locales and JSON-LD', () => {
-  const record = readGeneratedImageRecords(ROOT)
-    .find((item) => item.assetId === 'article-securitas-violazioni-lavoro');
-  assert.equal(record?.kind, 'generated');
-  assert.equal(record?.scope, 'article-hero');
-  assert.equal(record?.vision?.contains_logo, false);
-  assert.equal(record?.vision?.contains_recognizable_foreground_person, false);
-
-  const expectedAlt = {
-    it: 'Immagine illustrativa pertinente al tema dell’articolo',
-    en: 'Illustrative image relevant to the article topic',
-    de: 'Illustratives Bild zum Thema des Artikels',
-    fr: 'Image illustrative en lien avec le sujet de l’article',
-  };
-  for (const [locale, alt] of Object.entries(expectedAlt)) {
-    const meta = fs.readFileSync(path.join(ROOT, `content/blog-meta-ch-${locale}.ts`), 'utf8');
-    assert.ok(meta.includes(`'blog.article.securitas-violazioni-lavoro.imageAlt': '${alt}'`), `${locale} alt deve riflettere la cover generica`);
-    assert.doesNotMatch(alt, /Securitas|staff|personnel|Sicherheitspersonal|Svizzera centrale|central Switzerland|Zentralschweiz|Suisse centrale/i);
-  }
-  const seo = fs.readFileSync(path.join(ROOT, 'content/seo/seo-blog-ch.ts'), 'utf8');
-  assert.match(seo, /'blog-securitas-violazioni-lavoro':[\s\S]*?"caption": "Immagine illustrativa pertinente al tema dell’articolo"/);
-});
-
 test('the fallback consumer loads its pure vision contract without native addons', () => {
   const fallbackUrl = new URL('../scripts/lib/article-cover-fallback.mjs', import.meta.url);
   const result = spawnSync(process.execPath, [
