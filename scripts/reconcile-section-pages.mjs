@@ -161,7 +161,8 @@ export function planSectionBackfill(section, pages, dateById, cap, orphanPages =
   const sectionMissing = missing.filter((page) => page.kind === 'section').map((page) => page.path);
   const selected = missingIds.slice(0, n);
   const selectedIds = new Set(selected);
-  const knownMissingPagePaths = [...new Set(missing.map((page) => page.path))];
+  const missingOrphanPagePaths = orphanPages.filter((page) => page.state === 'missing').map((page) => page.path);
+  const knownMissingPagePaths = [...new Set([...missing.map((page) => page.path), ...missingOrphanPagePaths])];
   const missingPagePaths = missing
     .filter((page) => page.kind === 'section' || selectedIds.has(page.id))
     .map((page) => page.path);
@@ -183,7 +184,7 @@ export function planSectionBackfill(section, pages, dateById, cap, orphanPages =
     // Un giro di sola sezione (ids vuoti) serve quando manca una pagina di
     // sezione e nessun articolo: con articoli selezionati la sezione viene
     // comunque resa per intero dallo stesso publish.
-    dispatch: missingIds.length > 0 || sectionMissing.length > 0 || orphaned.length > 0,
+    dispatch: missingIds.length > 0 || sectionMissing.length > 0 || orphaned.length > 0 || missingOrphanPagePaths.length > 0,
   };
 }
 

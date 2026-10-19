@@ -559,7 +559,7 @@ test('publisher: SVG plain/XML identici consentono le route; il fallback HTML re
   }
 });
 
-test('publisher: un 404 richiesto viene caricato con l asset trattenuto senza mutare la pagina immutabile', async () => {
+test('publisher: un 404 richiesto resta differito se un asset condiviso non è verificabile', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-held-page-'));
   const immutable = pageEntry('canton-ti', 'articoli-ticino/existing/index.html', 'article');
   const staged = pageEntry('canton-ti', 'articoli-ticino/new/index.html', 'article');
@@ -620,12 +620,12 @@ test('publisher: un 404 richiesto viene caricato con l asset trattenuto senza mu
       assetProbeImpl: async () => ({ ok: false, status: 'HTTP 404' }),
     });
     assert.equal(result.failures, 0);
-    assert.equal(result.uploaded, 1, 'il target 404 viene pubblicato prima del replay');
-    assert.equal(result.deferredAssetPages, 0);
-    assert.equal(stagedProbeCalls, 2, 'il target 404 viene fotografato e poi verificato dopo l upload');
+    assert.equal(result.uploaded, 0, 'il target resta assente finché l’asset condiviso non è verificato');
+    assert.equal(result.deferredAssetPages, 1);
+    assert.equal(stagedProbeCalls, 1, 'il target differito viene fotografato ma non caricato');
     assert.ok(events.includes('asset-upload:images/new.webp'));
     assert.ok(!events.includes('asset-upload:images/shared.webp'));
-    assert.ok(events.includes('page-upload'));
+    assert.ok(!events.includes('page-upload'));
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }

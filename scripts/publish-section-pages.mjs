@@ -1283,6 +1283,25 @@ function isNotFoundStatus(status) {
   return status === 404 || status === 'HTTP 404';
 }
 
+export async function confirmCantonPageMissing(
+  url,
+  { probeImpl = probe, sleepImpl = sleep, attempts = 3, delayMs = 1000 } = {},
+) {
+  const statuses = [];
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    let observed;
+    try {
+      observed = await probeImpl(url, { attempts: 1, delayMs: 0 });
+    } catch (error) {
+      observed = { status: error?.message ?? String(error) };
+    }
+    statuses.push(observed?.status ?? 'nessuna risposta');
+    if (!isNotFoundStatus(observed?.status)) return { confirmed: false, statuses };
+    if (attempt + 1 < attempts) await sleepImpl(delayMs);
+  }
+  return { confirmed: statuses.length === attempts, statuses };
+}
+
 /** Snapshot del feed attualmente servito, usato per ripristinare un set parziale. */
 async function snapshotCantonRssFeed(url, { probeImpl = probe } = {}) {
   return probeImpl(url, { attempts: 3, delayMs: 1000, want: () => true });
@@ -2118,18 +2137,11 @@ export async function publish({
         if (!fs.existsSync(local) || heldAssetKeys.size === 0) continue;
         const body = fs.readFileSync(local, 'utf8');
         if ([...heldAssetKeys].some((key) => cantonPageReferencesAsset(body, key))) {
-          if (requiredPagePathSet.has(page.canonicalPath)) {
-            console.log(
-              `::notice::[${LOG}] release live differita: carico il 404 richiesto ${page.edgeKey} ` +
-              'riusando i byte dell asset trattenuto fino al replay',
-            );
-          } else {
-            heldPageKeys.add(page.edgeKey);
-            console.log(
-              `::notice::[${LOG}] release live differita: differisco anche ${page.edgeKey}; ` +
-              'il render nuovo riusa un asset trattenuto dalla superficie precedente',
-            );
-          }
+          heldPageKeys.add(page.edgeKey);
+          const reason = requiredPagePathSet.has(page.canonicalPath)
+            ? 'il target mancante resta differito finché ogni asset condiviso non è verificato sul CDN'
+            : 'il render nuovo riusa un asset trattenuto dalla superficie precedente';
+          console.log(`::notice::[${LOG}] release live differita: differisco anche ${page.edgeKey}; ${reason}`);
         }
       }
       pagesForUpload = pages.filter((page) => !heldPageKeys.has(page.edgeKey));
@@ -2353,6 +2365,7 @@ export async function main(
     sourceRegistryIdsImpl = sourceRegistryIds,
     currentMainHeadImpl = publishedMainHead,
     probeImpl = probe,
+    sleepImpl = sleep,
     publisherCommitImpl = () => execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
     fetchImpl = fetch,
   } = {},
@@ -2595,9 +2608,9 @@ export async function main(
     for (const pagePath of pathsToConfirm) {
       const page = renderedPagePaths.get(pagePath) ?? publishedPagePaths.get(pagePath);
       if (!page) continue;
-      const observed = await probeImpl(page.cdnUrl, { attempts: 1, delayMs: 0, want: () => false });
-      if (observed.status !== 'HTTP 404') {
-        defects.push(`pagina dichiarata mancante ora presente o non verificabile: ${pagePath} (${observed.status})`);
+      const confirmation = await confirmCantonPageMissing(page.cdnUrl, { probeImpl, sleepImpl });
+      if (!confirmation.confirmed) {
+        defects.push(`pagina dichiarata mancante ora presente o non verificabile: ${pagePath} (${confirmation.statuses.join(' → ')})`);
         continue;
       }
       if (requestedMissingPagePaths.has(pagePath)) confirmedMissingPagePaths.add(pagePath);
