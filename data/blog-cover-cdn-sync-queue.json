@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-indagini-morte-pierina-buffon.webp",
-      "sha256": "a5b49a2fb7b4e64e3066ed6d9847b57d86d0a16e3b47ec3d970fe4a02123334c"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-indagini-morte-pierina-buffon-480w.webp",
-      "sha256": "fc93f200e432ef45a3113b135453b42f63a8ed518c2858bd7ef9f34380ac9569"
-    }
-  ]
+  "items": []
 }
