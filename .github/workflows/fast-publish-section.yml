@@ -63,6 +63,7 @@ on:
       - 'scripts/ci/section-bootstrap-lock.mjs'
       - 'scripts/lib/conditional-cdn-put.sh'
       - 'scripts/ci/fast-publish-section.mjs'
+      - 'scripts/ci/resolve-workflow-run-push-range.mjs'
       - 'scripts/ci/retry-cmd.sh'
       - 'scripts/cf-purge-cache.mjs'
       - 'scripts/offload-generated-images-cdn.mjs'
@@ -192,6 +193,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           PUSH_BEFORE: ${{ github.event.before }}
           PUSH_AFTER: ${{ github.event.after }}
+          WORKFLOW_RUN_ID: ${{ github.event.workflow_run.id }}
           DISPATCH_PUSH_BEFORE: ${{ inputs.push_before }}
           DISPATCH_PUSH_AFTER: ${{ inputs.push_after }}
           SOURCE_COMMIT_INPUT: ${{ inputs.source_commit }}
@@ -208,20 +210,27 @@ jobs:
               exit 1
             fi
             if [ "$WORKFLOW_RUN_EVENT" = 'push' ]; then
-              push_events="$(gh api --paginate --slurp "repos/$REPO/commits/$WORKFLOW_RUN_HEAD_SHA/events")"
-              before="$(jq -r --arg head "$WORKFLOW_RUN_HEAD_SHA" '
-                [ .[]? | .[]?
-                  | select(.type == "PushEvent"
-                    and .payload.ref == "refs/heads/main"
-                    and .payload.head == $head)
-                  | .payload.before
-                ] | last // empty
-              ' <<< "$push_events")"
-              if [ -z "$before" ] || ! [[ "$before" =~ ^[a-f0-9]{40}$ ]] && ! [[ "$before" =~ ^0+$ ]]; then
-                echo "::error::before della push originaria non trovato per workflow_run head $WORKFLOW_RUN_HEAD_SHA"
+              range_output="$(
+                REPO="$REPO" \
+                WORKFLOW_RUN_HEAD_SHA="$WORKFLOW_RUN_HEAD_SHA" \
+                WORKFLOW_RUN_ID="$WORKFLOW_RUN_ID" \
+                  node scripts/ci/resolve-workflow-run-push-range.mjs
+              )"
+              before=''
+              after=''
+              range_source=''
+              while IFS='=' read -r key value; do
+                case "$key" in
+                  before) before="$value" ;;
+                  after) after="$value" ;;
+                  source) range_source="$value" ;;
+                esac
+              done <<< "$range_output"
+              if [ "$after" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
+                echo "::error::resolver della push ha restituito una HEAD inattesa: $after"
                 exit 1
               fi
-              after="$WORKFLOW_RUN_HEAD_SHA"
+              echo "::notice::range push originaria risolta via $range_source: $before -> $after"
             elif [ "$WORKFLOW_RUN_EVENT" != 'schedule' ] && [ "$WORKFLOW_RUN_EVENT" != 'workflow_dispatch' ]; then
               echo "::error::workflow_run event non supportato: $WORKFLOW_RUN_EVENT"
               exit 1
