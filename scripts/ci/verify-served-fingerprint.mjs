@@ -48,11 +48,13 @@ export class FingerprintMismatchError extends Error {
 
 export class EdgeBlockedError extends Error {
   constructor(stage, failures) {
-    const status = failures[0]?.observation?.status || 'unknown';
+    const statuses = [...new Set(failures.map(({ observation }) => observation.status))]
+      .filter((status) => status > 0)
+      .sort((left, right) => left - right);
     const details = failures.map(formatBlockedFailure).join('\n');
     super(
       `${stage}: probe bloccata dall'edge; blocked=${failures.length} URL; `
-      + `status=${status}; cf-cache-status=absent\n${details}`,
+      + `status=${statuses.join(', ') || 'unknown'}; cf-cache-status=absent\n${details}`,
     );
     this.name = 'EdgeBlockedError';
     this.code = 'EDGE_PROBE_BLOCKED';
@@ -60,6 +62,7 @@ export class EdgeBlockedError extends Error {
     this.stage = stage;
     this.failures = failures;
     this.blockedCount = failures.length;
+    this.statuses = statuses;
   }
 }
 
@@ -74,15 +77,24 @@ function header(response, name) {
   return optionalHeader(response, name) || 'unknown';
 }
 
-function isEdgeBlocked(observation) {
-  return EDGE_BLOCKED_STATUSES.has(observation.status) && observation.hasCfCacheStatus === false;
+function isEdgeBlocked({ record, probeUrl, observation }) {
+  if (!probeUrl || typeof record?.url !== 'string') return false;
+  let isApexProbe = false;
+  try {
+    isApexProbe = new URL(probeUrl).hostname === new URL(record.url).hostname;
+  } catch {
+    return false;
+  }
+  return isApexProbe
+    && EDGE_BLOCKED_STATUSES.has(observation.status)
+    && observation.hasCfCacheStatus === false;
 }
 
 function formatHeader(name, value) {
   return value ? `${name}=${value}` : null;
 }
 
-function formatFailure({ record, observation }) {
+function formatFailure({ record, probeUrl, observation }) {
   return [
     `URL ${record.url}`,
     `expected=${record.sha}`,
@@ -91,11 +103,11 @@ function formatFailure({ record, observation }) {
     `cf-cache-status=${observation.cfCacheStatus}`,
     `age=${observation.age}`,
     `last-modified=${observation.lastModified}`,
-    isEdgeBlocked(observation) ? "classification=probe bloccata dall'edge" : null,
-    isEdgeBlocked(observation) ? `body-preview=${JSON.stringify(observation.bodyPreview || '')}` : null,
-    isEdgeBlocked(observation) ? formatHeader('server', observation.server) : null,
-    isEdgeBlocked(observation) ? formatHeader('cf-ray', observation.cfRay) : null,
-    isEdgeBlocked(observation) ? formatHeader('cf-mitigated', observation.cfMitigated) : null,
+    isEdgeBlocked({ record, probeUrl, observation }) ? "classification=probe bloccata dall'edge" : null,
+    isEdgeBlocked({ record, probeUrl, observation }) ? `body-preview=${JSON.stringify(observation.bodyPreview || '')}` : null,
+    isEdgeBlocked({ record, probeUrl, observation }) ? formatHeader('server', observation.server) : null,
+    isEdgeBlocked({ record, probeUrl, observation }) ? formatHeader('cf-ray', observation.cfRay) : null,
+    isEdgeBlocked({ record, probeUrl, observation }) ? formatHeader('cf-mitigated', observation.cfMitigated) : null,
     observation.error ? `error=${observation.error}` : null,
   ].filter(Boolean).join('; ');
 }
@@ -465,11 +477,10 @@ function mismatch(stage, pending) {
 }
 
 function allEdgeBlocked(stage, observations) {
-  if (observations.length === 0 || !observations.every(({ observation }) => isEdgeBlocked(observation))) {
+  if (observations.length === 0 || !observations.every(isEdgeBlocked)) {
     return null;
   }
-  const statuses = new Set(observations.map(({ observation }) => observation.status));
-  return statuses.size === 1 ? new EdgeBlockedError(stage, observations) : null;
+  return new EdgeBlockedError(stage, observations);
 }
 
 export async function waitForOrigin({
@@ -515,7 +526,7 @@ export async function waitForOrigin({
         })
         : unavailableObservation(`probe budget exhausted for ${url}`);
       pending.set(record, observation);
-      roundObservations.push({ record, observation });
+      roundObservations.push({ record, probeUrl: url, observation });
       if (onObservation) onObservation({ record, observation, attempts });
       if (matches(record, observation)) {
         pending.delete(record);
@@ -573,9 +584,9 @@ export async function verifyApex({
         timeoutMs: Math.min(probeTimeoutMs, Math.max(1, remainingBeforeProbe)),
       })
       : unavailableObservation(`probe budget exhausted for ${record.url}`);
-    observations.push({ record, observation });
+    observations.push({ record, probeUrl: record.url, observation });
     if (onObservation) onObservation({ record, observation, checked });
-    if (!matches(record, observation)) failures.push({ record, observation });
+    if (!matches(record, observation)) failures.push({ record, probeUrl: record.url, observation });
   }
   const blocked = allEdgeBlocked('CDN served-content verification failed', observations);
   if (blocked) throw blocked;

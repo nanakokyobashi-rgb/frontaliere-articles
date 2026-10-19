@@ -151,6 +151,29 @@ test('l’origine vecchia poi nuova aspetta e passa con una sonda anti-cache', a
   assert.deepEqual(sleeps, [15]);
 });
 
+test('429 e 503 dell’host origin vengono ritentati invece di bloccare la recovery', async () => {
+  let now = 0;
+  let fetches = 0;
+  const result = await waitForOrigin({
+    records: [RECORD],
+    fetchImpl: async (url) => {
+      assert.equal(new URL(url).hostname, new URL(RECORD.origin).hostname);
+      fetches += 1;
+      if (fetches === 1) return new Response('origin rate limited', { status: 429 });
+      if (fetches === 2) return new Response('origin unavailable', { status: 503 });
+      return response(NEW_HTML);
+    },
+    timeoutMs: 1000,
+    pollIntervalMs: 1,
+    now: () => now,
+    sleep: async (ms) => { now += ms; },
+    runKey: 'origin-recovery-test',
+  });
+
+  assert.equal(result.attempts, 3);
+  assert.equal(fetches, 3);
+});
+
 test('una risposta 403 senza cf-cache-status è una probe bloccata dall’edge', async () => {
   const blockedBody = 'pagina WAF: ' + 'x'.repeat(340);
   await assert.rejects(
@@ -174,6 +197,24 @@ test('una risposta 403 senza cf-cache-status è una probe bloccata dall’edge',
       assert.match(error.message, /cf-mitigated=challenge/);
       assert.ok(error.message.includes(blockedBody.slice(0, 300)));
       assert.equal(error.message.includes(blockedBody.slice(0, 301)), false);
+      return true;
+    },
+  );
+});
+
+test('status edge misti 403 e 429 restano un blocco edge e sono entrambi diagnostici', async () => {
+  let fetches = 0;
+  await assert.rejects(
+    () => verifyApex({
+      records: [RECORD, EN_RECORD],
+      fetchImpl: async () => new Response('edge blocked', {
+        status: fetches++ === 0 ? 403 : 429,
+      }),
+    }),
+    (error) => {
+      assert.equal(error.code, 'EDGE_PROBE_BLOCKED');
+      assert.deepEqual(error.statuses, [403, 429]);
+      assert.match(error.message, /status=403, 429/);
       return true;
     },
   );
