@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-oss-ticino-stipendio.webp",
+      "sha256": "6cf1336820f49f0db8ab5c4774cf96c0ca8addc78300c35b7586bbe28bb5d9f5"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-oss-ticino-stipendio-480w.webp",
+      "sha256": "8f5f1d018c705b83354388c0310f2ba95fe26a7f387b38eb9a376d7fecc7859c"
+    }
+  ]
 }
