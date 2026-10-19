@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-18T15:52:30.685Z",
-  "contentHash": "827924ce6808d078bf6c1448f116afddb75004b33d9823360838327d0b6e6a04",
+  "updatedAt": "2026-10-19T15:35:09.847Z",
+  "contentHash": "090fc139fb4717d235315847fd3f61dc59e7c6b4e24e1df13a5ca760d7349be8",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Turgovia: servizi di ricerca personale e tutela lari",
+          "url": "/articoli-turgovia/turgovia-servizi-datori-lavoro/",
+          "excerpt": "Il Canton Turgovia mette a disposizione dei datori di lavoro le sedi RAV di Amriswil, Frauenfeld e Kreuzlingen e il portale arbeit.swiss per vacancy vacancy",
+          "date": "2026-10-19T15:27:38.407Z"
+        },
+        {
           "title": "Turgovia: supporto alle imprese che valutano l'insediamento",
           "url": "/articoli-turgovia/supporto-imprese-turgovia/",
           "excerpt": "Il Canton Turgovia offre alle imprese informazioni, consulenza e sostegno per condizioni quadro, immobili, autorizzazioni e contatti con uffici e autorità.",
@@ -94,12 +100,6 @@
           "url": "/articoli-turgovia/tredicesima-rendita-avs-2026/",
           "excerpt": "La 13ª rendita AVS arriva con la rendita di dicembre 2026 Non serve presentare domande o svolgere pratiche Spetta a chi riceve una rendita AVS di vecchiaia",
           "date": "2026-10-17T09:16:03.959Z"
-        },
-        {
-          "title": "Turgovia: sicurezza sul lavoro, orari e tutela della salute",
-          "url": "/articoli-turgovia/turgovia-sicurezza-lavoro-orari/",
-          "excerpt": "Guida alla sicurezza sul lavoro, tutela della salute, orari e periodi di riposo nel Canton Turgovia secondo le normative e l'Ispettorato del lavoro.",
-          "date": "2026-10-17T01:07:58.510Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T15:35:09.847Z"
     },
     "en": {
       "canton": "TG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau: personnel search and lari protection services",
+          "url": "/en/thurgau-articles/thurgau-services-employers/",
+          "excerpt": "The Canton of Thurgau makes the RAV offices in Amriswil, Frauenfeld and Kreuzlingen and the arbeit.swiss portal available to employers for vacancy vacancy",
+          "date": "2026-10-19T15:27:38.407Z"
+        },
+        {
           "title": "Thurgau: support for companies considering establishing themselves",
           "url": "/en/thurgau-articles/thurgau-business-support/",
           "excerpt": "The Canton of Thurgau offers businesses information, advice and support regarding framework conditions, real estate, permits, and contacts with offices and authorities.",
@@ -193,12 +199,6 @@
           "url": "/en/thurgau-articles/thirteenth-ahv-pension-2026/",
           "excerpt": "The 13th AHV pension is paid with the December 2026 pension No applications or formalities are required It is due to anyone receiving an AHV old-age pension",
           "date": "2026-10-17T09:16:03.959Z"
-        },
-        {
-          "title": "Thurgau: workplace safety, working hours and health protection",
-          "url": "/en/thurgau-articles/thurgovia-workplace-safety-hours/",
-          "excerpt": "Guide to occupational safety, health protection, working hours and rest periods in the Canton of Thurgau in accordance with regulations and the Labour Inspectorate.",
-          "date": "2026-10-17T01:07:58.510Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T15:35:09.847Z"
     },
     "de": {
       "canton": "TG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau: Dienstleistungen für die Personalsuche und Schutz lari",
+          "url": "/de/thurgau-artikel/thurgau-dienstleistungen-arbeitgeber/",
+          "excerpt": "Der Kanton Thurgau stellt Arbeitgebern die RAV-Standorte in Amriswil, Frauenfeld und Kreuzlingen sowie das Portal arbeit.swiss für offene Stellen offene Stellen zur Verfügung",
+          "date": "2026-10-19T15:27:38.407Z"
+        },
+        {
           "title": "Thurgau: Unterstützung für Unternehmen, die eine Ansiedlung prüfen",
           "url": "/de/thurgau-artikel/thurgau-unterstuetzung-firmen/",
           "excerpt": "Der Kanton Thurgau bietet Unternehmen Informationen, Beratung und Unterstützung zu Rahmenbedingungen, Immobilien, Bewilligungen und Kontakten zu Ämtern und Behörden.",
@@ -292,12 +298,6 @@
           "url": "/de/thurgau-artikel/dreizehnte-ahv-rente-2026/",
           "excerpt": "Die 13. AHV-Rente wird zusammen mit der Dezemberrente 2026 ausbezahlt Es ist nicht nötig, einen Antrag zu stellen oder Formalitäten zu erledigen Begünstigt sind",
           "date": "2026-10-17T09:16:03.959Z"
-        },
-        {
-          "title": "Thurgau: Arbeitssicherheit, Arbeitszeiten und Gesundheitsschutz",
-          "url": "/de/thurgau-artikel/turgau-arbeitssicherheit-arbeitszeiten/",
-          "excerpt": "Leitfaden zu Arbeitssicherheit, Gesundheitsschutz, Arbeitszeiten und Ruhezeiten im Kanton Thurgau gemäss den Vorschriften und den Vorgaben des Arbeitsinspektorats.",
-          "date": "2026-10-17T01:07:58.510Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T15:35:09.847Z"
     },
     "fr": {
       "canton": "TG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgovie : services de recherche de personnel et protection lari",
+          "url": "/fr/articles-thurgovie/thurgovie-services-employeurs/",
+          "excerpt": "Le canton de Thurgovie met à la disposition des employeurs les sites RAV d’Amriswil, Frauenfeld et Kreuzlingen ainsi que le portail arbeit.swiss pour les postes vacants postes vacants",
+          "date": "2026-10-19T15:27:38.407Z"
+        },
+        {
           "title": "Thurgovie : soutien aux entreprises qui envisagent de s'implanter",
           "url": "/fr/articles-thurgovie/soutien-entreprises-thurgovie/",
           "excerpt": "Le canton de Thurgovie offre aux entreprises des informations, des conseils et un soutien concernant les conditions-cadres, les biens immobiliers, les autorisations et les contacts avec les services et les autorités.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-thurgovie/treizieme-rente-avs-2026/",
           "excerpt": "La 13e rente AVS est versée avec la rente de décembre 2026 Il n’est pas nécessaire de présenter une demande ou d’effectuer des démarches Elle est due",
           "date": "2026-10-17T09:16:03.959Z"
-        },
-        {
-          "title": "Thurgovie : sécurité au travail, horaires et protection de la santé",
-          "url": "/fr/articles-thurgovie/thurgovie-securite-travail-horaires/",
-          "excerpt": "Guide de la sécurité au travail, de la protection de la santé, des horaires et des périodes de repos dans le canton de Thurgovie selon la réglementation et l'Inspection du travail.",
-          "date": "2026-10-17T01:07:58.510Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-18T15:52:30.685Z"
+      "updatedAt": "2026-10-19T15:35:09.847Z"
     }
   }
 }
