@@ -4675,8 +4675,8 @@
       "mode": "identical",
       "reason": "La baseline del 2026-10-18 registra lo stesso digest SHA-256 raw sui due lati (a21da3deb14d9d86); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "f516111de9cc7107",
-        "corpus": "f516111de9cc7107",
+        "site": "a08a48ba61582250",
+        "corpus": "a08a48ba61582250",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4761,9 +4761,9 @@
       "sitePath": ".github/corpus-workflows/observers/scripts/lib/github-actions-read-client.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "9b9bfdb0aca0843d",
-        "corpus": "9b9bfdb0aca0843d",
-        "alignedAt": "2026-10-11"
+        "site": "be53a863d879b85c",
+        "corpus": "be53a863d879b85c",
+        "alignedAt": "2026-10-19"
       }
     },
     {
