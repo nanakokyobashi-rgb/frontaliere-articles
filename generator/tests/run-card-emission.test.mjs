@@ -36,6 +36,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import {
   buildRunCard, summariseRunCards, writeRunCard, RUN_CARD_SCHEMA, RUN_CARD_INSTRUMENTED_SINCE,
+  RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
 } from '../scripts/lib/run-card.mjs';
 import {
   readCards, ARTIFACT_GLOB, classifyDownloadFailure, classifyCardlessRun, dirBytes, humanBytes, formatSummary,
@@ -68,6 +69,18 @@ test('buildRunCard porta `calls` accanto a `viaFallbackUnsat` (#621)', () => {
   assert.ok(Object.hasOwn(card.rebracket, 'calls'));
 });
 
+test('buildRunCard conserva il marker producer-owned del deferimento condiviso', () => {
+  const card = buildRunCard({
+    runId: '42',
+    section: 'svizzera',
+    status: 'deferred',
+    exitCode: 5,
+    exitDisposition: RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
+  });
+  assert.equal(card.exitCode, 5);
+  assert.equal(card.exitDisposition, 'shared-provider-unavailable');
+});
+
 test('buildRunCard non esplode su un report degenere', () => {
   // Gira nel percorso di finalizzazione, cioe' anche mentre la run muore: un
   // TypeError qui trasformerebbe una sonda diagnostica nella causa di un
@@ -76,6 +89,8 @@ test('buildRunCard non esplode su un report degenere', () => {
     const card = buildRunCard(bad);
     assert.equal(card.rebracket.calls, 0);
     assert.equal(card.quotaDeferral, null);
+    assert.equal(card.exitCode, null);
+    assert.equal(card.exitDisposition, null);
   }
 });
 

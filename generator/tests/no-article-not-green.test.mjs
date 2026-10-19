@@ -58,6 +58,7 @@ import {
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, '..', '..');
 const WORKFLOW = path.join(REPO, '.github', 'workflows', 'generate-article.yml');
+const CORE_WORKFLOW = path.join(REPO, '.github', 'workflows', 'generate-article-core.yml');
 const CREATE_ARTICLE = path.join(REPO, 'generator', 'scripts', 'create-article.mjs');
 
 // ── 1. LA DECISIONE: un differimento per quota va DIMOSTRATO ────────────────
@@ -307,6 +308,8 @@ test('le ragioni locali alla sezione e quelle del pool condiviso usano codici di
   );
   const providerUnavailable = src.match(/await exitAfterFlush\(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE\)/g) || [];
   assert.equal(providerUnavailable.length, 3, 'fact-check, cover verifier e quota devono dichiarare il blocco condiviso col codice 5');
+  const markedProviderUnavailable = src.match(/exitCode:\s*EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,\s*exitDisposition:\s*RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION/g) || [];
+  assert.equal(markedProviderUnavailable.length, 3, 'ogni exit 5 deve lasciare il marker producer-owned nella run card');
   assert.ok(
     /CANTON_EVERGREEN_POOL_DISABLED[\s\S]{0,1500}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/.test(src),
     'la ragione cantonale e\' dichiarata subito dopo il suo marcatore',
@@ -336,6 +339,20 @@ test('le ragioni locali alla sezione e quelle del pool condiviso usano codici di
   );
   // Il letterale scritto a mano e' la via con cui le due meta' divergono.
   assert.ok(!/(?:process\.exit|exitAfterFlush)\(4\)/.test(src), 'nessun `process.exit(4)` letterale: solo la costante');
+});
+
+test('entrambi i workflow richiedono la run card producer-owned prima di assorbire exit 5', () => {
+  for (const file of [WORKFLOW, CORE_WORKFLOW]) {
+    const workflow = fs.readFileSync(file, 'utf8');
+    const guardStart = workflow.indexOf('if [ "$rc" = "5" ]; then');
+    const guardEnd = workflow.indexOf('\n            fi', guardStart);
+    assert.ok(guardStart >= 0 && guardEnd > guardStart, `${path.basename(file)}: guard exit 5 non trovato`);
+    const guard = workflow.slice(guardStart, guardEnd);
+    assert.match(guard, /validate-shared-provider-exit\.mjs/);
+    assert.match(guard, /all_declared=false/);
+    assert.match(guard, /provider_blocked=true/);
+    assert.ok(workflow.includes('rm -f "$RUN_CARD_FILE"'), `${path.basename(file)} deve rimuovere card stale prima del tentativo`);
+  }
 });
 
 test('il differimento per quota e\' subordinato alla prova, e il ramo rosso esiste', () => {
@@ -408,6 +425,7 @@ function extractGenerateRunBlock() {
  */
 function runGenerateBlock({
   nodeExit, exitPerAttempt = null, writesArticle = false, writesOnAttempt = 1, budgetS = '64',
+  writeSharedProviderMarker = false,
 }) {
   const block = extractGenerateRunBlock();
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'no-article-'));
@@ -420,14 +438,26 @@ function runGenerateBlock({
     // Un contatore su file: lo stub e' un processo nuovo a ogni tentativo.
     const counter = path.join(dir, 'attempt-count');
     const codes = exitPerAttempt || [nodeExit, nodeExit];
+    const markerWrite = writeSharedProviderMarker ? [
+      'if [ "$n" = "1" ]; then',
+      '  mkdir -p "$(dirname "$RUN_CARD_FILE")"',
+      '  marker_section=${RUN_CARD_FILE##*/run-card-}',
+      '  marker_section=${marker_section%.json}',
+      `  printf '{"schema":"run-card/1","section":"%s","status":"deferred","exitCode":5,"exitDisposition":"shared-provider-unavailable"}\\n' "$marker_section" > "$RUN_CARD_FILE"`,
+      'fi',
+    ] : [];
     const stub = [
       '#!/bin/sh',
+      'if [ "$1" = "$GITHUB_WORKSPACE/scripts/ci/validate-shared-provider-exit.mjs" ]; then',
+      '  exec "$REAL_NODE" "$@"',
+      'fi',
       `n=$(cat "${counter}" 2>/dev/null || echo 0)`,
       'n=$((n + 1))',
       `printf '%s' "$n" > "${counter}"`,
       writesArticle
         ? `if [ "$n" = "${writesOnAttempt}" ]; then mkdir -p content/blog-body/it && printf 'export default {}\\n' > content/blog-body/it/stub-article.ts; fi`
         : ':',
+      ...markerWrite,
       `case "$n" in`,
       ...codes.map((c, i) => `  ${i + 1}) exit ${c} ;;`),
       `  *) exit ${codes[codes.length - 1]} ;;`,
@@ -457,6 +487,8 @@ function runGenerateBlock({
       env: {
         ...process.env,
         PATH: `${bin}:${process.env.PATH}`,
+        REAL_NODE: process.execPath,
+        GITHUB_WORKSPACE: REPO,
         TARGET_SECTION: 'svizzera',
         SOURCE_URL: '',
         EVENT_NAME: 'schedule',
@@ -507,8 +539,19 @@ test('exit 4 senza articolo resta verde e lascia provare la sezione gemella', ()
   assert.equal(r.attempts, 2, 'la sezione gemella va comunque tentata');
 });
 
-test('exit 5 per indisponibilita\' AI resta verde e ferma i retry immediati', () => {
+test('exit 5 senza run card producer-owned e\' rosso', () => {
   const r = runGenerateBlock({ nodeExit: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE });
+  assert.equal(r.status, 1, 'il codice 5 senza prova del producer deve restare rosso');
+  assert.equal(r.attempts, 1, 'un exit 5 non attestato non deve essere ritentato sulla sezione gemella');
+  assert.match(r.outputs, /declared=false/);
+  assert.match(r.stdout, /senza marker producer-owned valido/);
+});
+
+test('exit 5 producer-owned resta verde e ferma i retry immediati', () => {
+  const r = runGenerateBlock({
+    nodeExit: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
+    writeSharedProviderMarker: true,
+  });
   assert.equal(r.status, 0, 'un blocco temporaneo del pool condiviso deve cedere al cron');
   assert.equal(r.attempts, 1, 'non deve rilanciare lo stesso pool sulla sezione gemella');
   assert.match(r.outputs, /provider_blocked=true/);

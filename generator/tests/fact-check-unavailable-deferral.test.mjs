@@ -16,12 +16,16 @@ function loadSharedTransientRosterClassifier() {
   return new Function(`${source}\nreturn isSharedTransientFactCheckRosterOutage;`)();
 }
 
-test('solo l esaurimento transitorio strutturato del roster prova un outage condiviso', () => {
+test('solo l esaurimento transitorio senza risposte non-outage prova un outage condiviso', () => {
   const isSharedTransientRoster = loadSharedTransientRosterClassifier();
   assert.equal(isSharedTransientRoster([
     { code: 'ALL_MODELS_EXHAUSTED', transientExhaustion: true },
     { code: 'ALL_MODELS_EXHAUSTED', transientExhaustion: true },
   ]), true);
+  assert.equal(isSharedTransientRoster([
+    { code: 'ALL_MODELS_EXHAUSTED', transientExhaustion: true },
+  ], { hadNonOutageResult: true }), false,
+  'un voto valido accanto a una lane transitoria non prova un outage del pool intero');
   assert.equal(isSharedTransientRoster([{ code: 'ALL_MODELS_EXHAUSTED', transientExhaustion: false }]), false);
   assert.equal(isSharedTransientRoster([{ message: 'HTTP 401: invalid API key' }]), false);
   assert.equal(isSharedTransientRoster([]), false);
@@ -31,8 +35,13 @@ test('solo l esaurimento transitorio strutturato del roster prova un outage cond
   const unverifiedResult = SRC.slice(unverifiedResultStart, unverifiedResultEnd);
   assert.match(
     unverifiedResult,
-    /!fcHadUnclassifiedResult[\s\S]*?isSharedTransientFactCheckRosterOutage\(fcProviderErrors\)/,
-    'solo errori di roster transitori e strutturati possono fermare la catena condivisa',
+    /isSharedTransientFactCheckRosterOutage\(fcProviderErrors,\s*\{\s*hadNonOutageResult:\s*fcHadNonOutageResult,?\s*\}\)\s*\?/,
+    'solo errori di roster transitori e strutturati senza risposte possono fermare la catena condivisa',
+  );
+  assert.match(
+    SRC,
+    /if \(s\.status === 'fulfilled'\) fcHadNonOutageResult = true;/,
+    'un voto valido insieme a una lane fallita prova che il pool non e\' interamente indisponibile',
   );
   assert.doesNotMatch(unverifiedResult, /modelResults\.length/);
 });

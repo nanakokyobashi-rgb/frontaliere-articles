@@ -1433,6 +1433,9 @@ jobs:
             # tentativo — cioe' perderebbe silenziosamente meta' del campione,
             # che e' il difetto che la card esiste per chiudere.
             export RUN_CARD_FILE="$diag_dir/run-card-$sec.json"
+            # The card is also the producer-owned proof for a declared exit 5;
+            # do not let a card from an earlier attempt attest this one.
+            rm -f "$RUN_CARD_FILE"
 
             # Il tentativo gira in background con l'output duplicato su
             # `$stall_log`: e' quel file a crescere (o a non crescere) che il
@@ -1551,6 +1554,15 @@ jobs:
             fi
 
             if [ "$rc" = "5" ]; then
+              if ! node "$GITHUB_WORKSPACE/scripts/ci/validate-shared-provider-exit.mjs" "$RUN_CARD_FILE" "$sec"; then
+                all_declared=false
+                outcome_kind="error"
+                outcome_reason="undeclared"
+                outcome_section="$sec"
+                [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito 5 sulla sezione $sec senza run card che attesti un differimento condiviso dichiarato"
+                echo "::error::create-article.mjs ha restituito exit 5 senza marker producer-owned valido per la sezione $sec"
+                break
+              fi
               echo "::warning::pool AI condiviso indisponibile sulla sezione $sec; si cede al prossimo cron"
               provider_blocked=true
               effective="$sec"

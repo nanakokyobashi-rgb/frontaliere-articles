@@ -400,7 +400,10 @@ import {
 // parte perche' i test non possono importare QUESTO file (761 KB, e la prima
 // cosa che fa e' rete), che e' la stessa ragione per cui ci vive
 // `exhaustion-disposition.mjs`.
-import { writeRunCard } from './lib/run-card.mjs';
+import {
+  RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
+  writeRunCard,
+} from './lib/run-card.mjs';
 // Il guard sui segnaposto del prompt. Copre OGNI campo di testo pubblicato —
 // corpo, FAQ, excerpt, imageAlt, title, seo — con un criterio solo, derivato
 // dai letterali dello schema JSON che il prompt piu' sotto mostra al modello.
@@ -2024,6 +2027,8 @@ const RUN_REPORT = {
   // trend pooled across both hides which one moved. Set once SECTION resolves.
   section: null,
   status: 'running',
+  exitCode: null,
+  exitDisposition: null,
   selectedArticleType: null, // news | evergreen_static | evergreen_dynamic
   selectedSource: null,
   selectedUrl: null,
@@ -6563,7 +6568,10 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   const FACTCHECK_429_BACKOFF_CAP_MS = 30_000;
   let fcLastRejectMsgs = [];
   const fcProviderErrors = [];
-  let fcHadUnclassifiedResult = false;
+  // A usable vote, an empty fulfilled response, or a duplicate vote means at
+  // least one verifier answered; none proves a shared pool outage, even if a
+  // sibling lane exhausted transiently. Keep this across all attempts.
+  let fcHadNonOutageResult = false;
   // True when an attempt's two verifiers collapsed into one model and no
   // independent second opinion came back: that attempt holds one opinion where
   // the consensus needs two, so it is retried like a verifier outage (review of
@@ -6618,17 +6626,18 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     let droppedDuplicate = false;
     for (let i = 0; i < settled.length; i++) {
       const s = settled[i];
+      if (s.status === 'fulfilled') fcHadNonOutageResult = true;
       if (s.status === 'fulfilled' && s.value) {
         const earlier = addIndependentVote(modelResults, modelsToQuery[i], s.value);
         if (earlier) {
-          fcHadUnclassifiedResult = true;
+          fcHadNonOutageResult = true;
           droppedDuplicate = true;
           console.error(`  ⚠️  LLM fact-check (${modelsToQuery[i]}): servito da ${earlier.servedBy}, che ha già votato per ${earlier.requested} — voto scartato, non è un secondo parere`);
         }
       } else {
         const error = s.status === 'rejected' ? s.reason : null;
         if (error) fcProviderErrors.push(error);
-        else fcHadUnclassifiedResult = true;
+        else fcHadNonOutageResult = true;
         const reason = error?.message || 'no result';
         fcLastRejectMsgs.push(reason || '');
         console.error(`  ⚠️  LLM fact-check (${modelsToQuery[i]}): fallito — ${reason}`);
@@ -6647,7 +6656,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
       try {
         const extra = await _runSingleFactCheck(next, prompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted });
         const earlier = extra ? addIndependentVote(modelResults, next, extra) : null;
-        if (!extra || earlier) fcHadUnclassifiedResult = true;
+        fcHadNonOutageResult = true;
         if (earlier) console.error(`  ⚠️  LLM fact-check (${next}): servito di nuovo da ${earlier.servedBy} — resta un solo voto`);
       } catch (err) {
         fcProviderErrors.push(err);
@@ -6665,7 +6674,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
       try {
         const fallback = await _runSingleFactCheck(verificationModels[2], prompt, { isEvergreen: isEvergreenArticle, editorialContext });
         if (fallback) addIndependentVote(modelResults, verificationModels[2], fallback);
-        else fcHadUnclassifiedResult = true;
+        fcHadNonOutageResult = true;
       } catch (err) {
         fcProviderErrors.push(err);
         fcLastRejectMsgs.push(err.message || '');
@@ -6707,7 +6716,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     try {
       const vote = await _runSingleFactCheck(codex, prompt, { isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true });
       if (vote) addIndependentVote(modelResults, codex, vote);
-      else fcHadUnclassifiedResult = true;
+      fcHadNonOutageResult = true;
     } catch (err) {
       fcProviderErrors.push(err);
       fcLastRejectMsgs.push(err.message || '');
@@ -6756,8 +6765,9 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
         category: 'infra',
       }],
       unverified: true,
-      ...(!fcHadUnclassifiedResult
-        && isSharedTransientFactCheckRosterOutage(fcProviderErrors)
+      ...(isSharedTransientFactCheckRosterOutage(fcProviderErrors, {
+        hadNonOutageResult: fcHadNonOutageResult,
+      })
         ? { sharedProviderUnavailable: true }
         : {}),
     };
@@ -17277,8 +17287,9 @@ function isSharedFactCheckUnavailableError(e) {
   return isFactCheckUnavailableError(e) && e?.sharedProviderUnavailable === true;
 }
 
-function isSharedTransientFactCheckRosterOutage(errors) {
-  return Array.isArray(errors)
+function isSharedTransientFactCheckRosterOutage(errors, { hadNonOutageResult = false } = {}) {
+  return !hadNonOutageResult
+    && Array.isArray(errors)
     && errors.length > 0
     && errors.every((error) => (
       error?.code === 'ALL_MODELS_EXHAUSTED'
@@ -21333,6 +21344,8 @@ if (invokedDirectly) {
   // section does not repeat the same unavailable provider cascade.
   if (isSharedFactCheckUnavailableError(e)) {
     finalizeRunReport('deferred', {
+      exitCode: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
+      exitDisposition: RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
       notes: [...RUN_REPORT.notes, `Deferred (fact-check unavailable; article not published): ${e.message}`],
     });
     console.error(`\n⚠️  Differito: fact-check indisponibile, articolo non pubblicato. Riprovo al prossimo run. ${e.message}`);
@@ -21349,6 +21362,8 @@ if (invokedDirectly) {
   }
   if (isSharedArticleCoverVerifierUnavailableError(e)) {
     finalizeRunReport('deferred', {
+      exitCode: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
+      exitDisposition: RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
       notes: [...RUN_REPORT.notes, `Deferred (article cover verifier unavailable; article not published): ${e.message}`],
     });
     console.error(`\n⚠️  Differito: verifier della copertina indisponibile, articolo non pubblicato. Riprovo al prossimo run. ${e.message}`);
@@ -21480,7 +21495,11 @@ if (invokedDirectly) {
     // sopra il veto — vedi il commento li': dentro questo ramo sarebbe cieco
     // proprio sui pareggi (#924).
     if (isLegitimateQuotaDeferral(e)) {
-      finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`] });
+      finalizeRunReport('deferred', {
+        exitCode: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
+        exitDisposition: RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
+        notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`],
+      });
       console.error(`\n⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera, ${share.transient}/${share.total} = ${pct}%). Riprovo al prossimo run. ${e.message}`);
       // La quota riguarda il pool condiviso: cedere al prossimo cron senza
       // ritentare subito sulla sezione gemella.

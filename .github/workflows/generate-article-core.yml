@@ -726,6 +726,7 @@ jobs:
             export CREATE_ARTICLE_MAX_WALL_MS=$(( (cap - 60) * 1000 ))
 
             export RUN_CARD_FILE="$diag_dir/run-card-$sec.json"
+            rm -f "$RUN_CARD_FILE"
 
             rm -f "$stall_flag"
             : > "$stall_log"
@@ -799,6 +800,15 @@ jobs:
             fi
 
             if [ "$rc" = "5" ]; then
+              if ! node "$GITHUB_WORKSPACE/scripts/ci/validate-shared-provider-exit.mjs" "$RUN_CARD_FILE" "$sec"; then
+                all_declared=false
+                outcome_kind="error"
+                outcome_reason="undeclared"
+                outcome_section="$sec"
+                [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito 5 sulla sezione $sec senza run card che attesti un differimento condiviso dichiarato"
+                echo "::error::create-article.mjs ha restituito exit 5 senza marker producer-owned valido per la sezione $sec"
+                break
+              fi
               echo "::warning::pool AI condiviso indisponibile sulla sezione $sec; si cede al prossimo cron"
               provider_blocked=true
               effective="$sec"
