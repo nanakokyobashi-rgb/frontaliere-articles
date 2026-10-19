@@ -19969,7 +19969,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       root: PROJECT_ROOT,
       findCatalogImages: findBestFallbackImages,
       area: imageArea,
-      deadlineAt: Date.now() + IMAGE_PHASE_BUDGET_MS,
+      deadlineAt: imageDeadlineAt,
     });
     resolveArticleCoverFallback(data, {
       root: PROJECT_ROOT,
