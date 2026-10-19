@@ -836,6 +836,23 @@ test('il gate conta la heading Fonti italiana ma ignora una fonte con contenuto'
   assert.deepEqual(scanItalianResidue({ body1: 'Source : laregione.ch' }, 'fr'), []);
 });
 
+test('translationSanityIssue rifiuta una label nav italiana anche sotto le tre righe', () => {
+  assert.equal(
+    sanitizeTranslatedField('[calcolatore](nav:calculator)', 'fr'),
+    '[calculateur de salaire](nav:calculator)',
+  );
+  const residual = sanitizeTranslatedField('[calcolatore](nav:ral)', 'fr');
+  assert.equal(residual, '[calcolatore](nav:ral)');
+  const issue = translationSanityIssue({
+    oldSections: {},
+    newSections: { body1: residual },
+    italianSections: {},
+    locale: 'fr',
+  });
+
+  assert.equal(issue, 'italian-nav-label: body1 [calcolatore](nav:ral)');
+});
+
 test('lo scan ignora heading localizzati in blockquote, lista e forma Setext', () => {
   const body1 = [
     '> ## What to do',

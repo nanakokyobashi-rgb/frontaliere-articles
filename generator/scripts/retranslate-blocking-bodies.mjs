@@ -37,6 +37,8 @@
  *      pagina che la guardia gia' accetta;
  *   3. una pagina con almeno tre righe italiane porta il codice bloccante
  *      `italian-residue`, anche se la guardia factuality non trova `critical`;
+ *      una label `nav:` italiana ha invece un codice dedicato anche quando è
+ *      una riga isolata;
  *   4. si scrive SOLO se il testo nuovo supera anche i controlli locali di
  *      `translationSanityIssue`: non e' drasticamente piu' corto del body
  *      pubblicato — il tier HuggingFace tronca la SORGENTE a 2000 caratteri e
@@ -204,6 +206,7 @@ import {
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { sanitizeArticleMarkdownLinks } from '../../scripts/lib/article-link-contract.mjs';
+import { findItalianNavLinkLabels } from '../../scripts/lib/nav-link-labels.mjs';
 import {
   BODY_FIELDS as WRITER_BODY_FIELDS,
   extractBodyFields,
@@ -643,11 +646,13 @@ export { escapeForSingleQuoteTS };
 
 /**
  * Applica il post-processing della pipeline e rende esplicito il fallimento
- * quando la sanitizzazione svuota l'uscita MT.
+ * quando la sanitizzazione svuota l'uscita MT. Il contratto dei link viene
+ * applicato qui, prima delle guardie, così ogni provider vede la stessa label
+ * nav deterministica che verra' poi scritta dal writer comune.
  */
-export function sanitizeTranslatedField(value) {
+export function sanitizeTranslatedField(value, locale = 'it') {
   const sanitized = sanitizeBodyText(value);
-  return sanitized.trim() ? sanitized : null;
+  return sanitized.trim() ? sanitizeArticleMarkdownLinks(sanitized, locale) : null;
 }
 
 /**
@@ -1723,6 +1728,13 @@ export const LANG_CHECK_MIN_CHARS = 50;
  * (che il report conta come tale, invece di lasciarla nel secchio "altro").
  */
 export function translationSanityIssue({ oldSections, newSections, italianSections, locale, structuralRepair = false }) {
+  const italianNavLabels = Object.entries(newSections || {}).flatMap(([field, value]) => (
+    findItalianNavLinkLabels(value, locale).map((hit) => ({ field, ...hit }))
+  ));
+  if (italianNavLabels.length > 0) {
+    const first = italianNavLabels[0];
+    return `italian-nav-label: ${first.field} [${first.label}](nav:${first.target})`;
+  }
   const italianResidue = scanItalianResidue(newSections, locale);
   // Structural FU-009 repairs operate on whole missing/copied fields. The
   // line detector is deliberately sensitive for the historical residue audit,
@@ -2780,7 +2792,7 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
         titleMarkerRepair.removedByField[f] = stripped.removed;
         titleMarkerRepair.skipped.push(...stripped.skipped.map((s) => `${f} ${s}`));
       }
-      const sanitized = sanitizeTranslatedField(source);
+      const sanitized = sanitizeTranslatedField(source, pair.locale);
       if (sanitized === null) {
         missingField ??= f;
         missingFields.push(f);
@@ -2818,7 +2830,7 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
       // Stesso post-processing del percorso di produzione (`create-article.mjs`
       // lo applica alla stessa identica uscita di `translateFieldFreeMt`): la
       // cascata e' la stessa, e da qui in poi lo e' anche cio' che le succede.
-      const sanitized = sanitizeTranslatedField(out);
+      const sanitized = sanitizeTranslatedField(out, pair.locale);
       if (sanitized === null) {
         missingField ??= f;
         missingFields.push(f);
