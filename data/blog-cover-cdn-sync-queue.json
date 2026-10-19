@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-riqualifica-aliquote-frontalieri-2026.webp",
-      "sha256": "aecc3ea39ec1111b75a9aa6212b9b3c53a79cb968a95ec8e7959ef2c4a3b108b"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-riqualifica-aliquote-frontalieri-2026-480w.webp",
-      "sha256": "6b7c361969f272e5d43a5c5f2c5472f2275d5be091421429b6e440854ad1f53c"
-    }
-  ]
+  "items": []
 }
